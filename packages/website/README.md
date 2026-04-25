@@ -54,7 +54,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] extras ui items
     - [?] extras target dummy
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
-    - [?] shapeshifting champions
+    - [x] shapeshifting champions
     - [?] aphelios q rotating
   - [x] mirror layout
   - [ ] expand scoreboard item on click anywhere when collapsed, maybe if more ppl want it

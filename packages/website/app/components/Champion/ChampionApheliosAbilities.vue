@@ -21,6 +21,14 @@ const passiveAbilityId = GameAbilityId.build('champion', 'Aphelios', 'passive', 
 const rAbilityId = GameAbilityId.build('champion', 'Aphelios', 'r', 0);
 
 const abilitySize = abilityImageSize('Aphelios');
+
+const weaponNames = computed(() => {
+	return {
+		main: 'Calibrum',
+		offhand: 'Severum',
+		next: 'Gravitum',
+	};
+});
 </script>
 
 <template>
@@ -44,7 +52,7 @@ const abilitySize = abilityImageSize('Aphelios');
 	</div>
 	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
 	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
-		<h5>main weapon</h5>
+		<h5>main weapon: {{ weaponNames.main }}</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
@@ -63,22 +71,32 @@ const abilitySize = abilityImageSize('Aphelios');
 	</div>
 	<div data-aphelios-w="" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
-		<h5>offhand weapon</h5>
-		<img
-			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.w]!.imageAlt, 'Aphelios') : undefined"
-			:width="abilitySize"
-			:height="abilitySize"
-			aria-hidden="true"
+		<h5>offhand weapon: {{ weaponNames.offhand }}</h5>
+		<button
+			title="switch with main"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.w))"
 		>
-		<h5>next weapon</h5>
-		<img
-			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.e]!.imageAlt, 'Aphelios') : undefined"
-			:width="abilitySize"
-			:height="abilitySize"
-			aria-hidden="true"
+			<span>switch with main</span>
+			<img
+				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.w]!.imageAlt, 'Aphelios') : undefined"
+				:width="abilitySize"
+				:height="abilitySize"
+				aria-hidden="true"
+			>
+		</button>
+		<h5>next weapon: {{ weaponNames.next }}</h5>
+		<button
+			title="replace offhand"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))"
 		>
+			<span>replace offhand</span>
+			<img
+				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.e]!.imageAlt, 'Aphelios') : undefined"
+				:width="abilitySize"
+				:height="abilitySize"
+				aria-hidden="true"
+			>
+		</button>
 	</div>
 	<div data-aphelios-r="" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
 		<h5>R</h5>
@@ -107,7 +125,7 @@ const abilitySize = abilityImageSize('Aphelios');
 		/* radius of the funny border */
 		--funny-rounded: 20% / 50%;
 		/* radius of the image inside of the funny border, its overflow is not clipped in any way so it needs to be the smallest it can be to still not go outside of the border around it */
-		--image-funny-rounded: 15% / 15%;
+		--image-funny-rounded: 17.5% / 50%;
 		--funny-ability-w: calc(var(--ability-size) * 10 / 9);
 
 		> [data-passive] {
@@ -123,6 +141,7 @@ const abilitySize = abilityImageSize('Aphelios');
 		}
 
 		> [data-aphelios-q] > h5:first-of-type,
+		> [data-aphelios-w] > button > span,
 		> [data-aphelios-w] > h5:nth-of-type(n + 2) {
 			--at-apply: 'sr-only';
 		}
@@ -194,10 +213,6 @@ const abilitySize = abilityImageSize('Aphelios');
 		> [data-aphelios-w] {
 			--at-apply: 'grid grid-cols-[auto_1fr_auto] place-items-center grid-rows-1';
 
-			&::after {
-				--at-apply: 'z-0 content-empty bg-black col-start-2 row-start-1 b b-[--aphelios-ui-clr] size-[calc(var(--ability-size)*0.7)] rounded-1/2';
-			}
-
 			> h5:first-of-type {
 				--at-apply: 'text-center static -mx-1 h-5.5 w-6 bg-black b-y b-[--aphelios-ui-clr] text-sm translate-0 z-0 leading-5 relative';
 
@@ -217,13 +232,21 @@ const abilitySize = abilityImageSize('Aphelios');
 				}
 			}
 
-			> img {
+			> button {
 				&:nth-of-type(1) {
-					--at-apply: 'size-[calc(var(--ability-size)*0.55)] col-start-2 row-start-1 z-1';
+					--at-apply: 'z-1 size-[calc(var(--ability-size)*0.7)] rounded-1/2 grid-center bg-black b b-[--aphelios-ui-clr]';
+
+					> img {
+						--at-apply: 'size-[calc(var(--ability-size)*0.55)]';
+					}
 				}
 
 				&:nth-of-type(2) {
-					--at-apply: 'size-[calc(var(--ability-size)*0.45)] b b-[--aphelios-ui-clr] rounded-1/2 self-start -mt-1/3 -ms-1/3';
+					--at-apply: 'b b-[--aphelios-ui-clr] rounded-1/2 self-start -mt-1/3 -ms-1/3';
+
+					> img {
+						--at-apply: 'size-[calc(var(--ability-size)*0.45)] rounded-inherit';
+					}
 				}
 			}
 		}
