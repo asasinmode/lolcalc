@@ -1255,6 +1255,15 @@ defineExpose({ el });
 						</VButtonRadiogroup>
 					</div>
 				</template>
+				<button
+					v-if="value.champion.value && SHAPESHIFTING_CHAMPION_IDS.includes(value.champion.value.id)"
+					class="other-ui-btn"
+					title="shapeshift"
+					@click="value.shapeshift"
+				>
+					<span>shapeshift</span>
+					<icon class="i-ph:arrows-clockwise-bold" />
+				</button>
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
 					:group
@@ -2123,6 +2132,18 @@ defineExpose({ el });
 
 					> a {
 						--at-apply: 'inline-flex mx-auto';
+					}
+				}
+
+				> button {
+					--at-apply: 'absolute -end-[--abilities-gap] top-[calc(0.5*var(--ability-size))] -translate-y-1/2 translate-x-full z-1 size-7 grid-center rounded-full';
+
+					> span:first-child {
+						--at-apply: 'sr-only';
+					}
+
+					> .icon {
+						--at-apply: 'size-4';
 					}
 				}
 

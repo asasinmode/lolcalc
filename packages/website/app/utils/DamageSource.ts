@@ -745,6 +745,19 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
+	shapeshift() {
+		if (this.champion.value?.id && !SHAPESHIFTING_CHAMPION_IDS.includes(this.champion.value.id)) {
+			console.warn('shapeshift called on not a shapeshifter', this.champion.value.id);
+			return;
+		}
+
+		for (const abilityKey in this.abilityVariantsIndexes.value) {
+			if (this.computed.abilities.value[abilityKey as IChampionAbilityKey].length > 1) {
+				this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey] ^= 1;
+			}
+		}
+	}
+
 	computed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
 		stats: computed<Record<keyof IChampionStats, IComputedDamageSourceChampionStat>>(() => {
