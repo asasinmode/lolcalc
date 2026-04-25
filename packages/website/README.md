@@ -55,7 +55,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [?] extras target dummy
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [x] shapeshifting champions
-    - [?] aphelios q rotating
+    - [x] aphelios q rotating
   - [x] mirror layout
   - [ ] expand scoreboard item on click anywhere when collapsed, maybe if more ppl want it
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on

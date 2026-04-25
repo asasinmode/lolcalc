@@ -46,6 +46,19 @@ function switchMainOffhand() {
 	props.value.abilityVariantsIndexes.value.w = props.value.abilityVariantsIndexes.value.q - props.value.abilityVariantsIndexes.value.w;
 	props.value.abilityVariantsIndexes.value.q -= props.value.abilityVariantsIndexes.value.w;
 }
+
+function replaceMainWithNext() {
+	const abilityVariantsIndexes = props.value.abilityVariantsIndexes.value;
+
+	abilityVariantsIndexes.q = abilityVariantsIndexes.e;
+
+	let next = (abilityVariantsIndexes.q + 1) % WEAPON_VARIANT_INDEX_TO_NAME.length;
+	while (next === abilityVariantsIndexes.q || next === abilityVariantsIndexes.w) {
+		next = (next + 1) % WEAPON_VARIANT_INDEX_TO_NAME.length;
+	}
+
+	abilityVariantsIndexes.e = next;
+}
 </script>
 
 <template>
@@ -106,6 +119,7 @@ function switchMainOffhand() {
 		<button
 			title="replace offhand"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))"
+			@click="replaceMainWithNext"
 		>
 			<span>replace offhand</span>
 			<img
