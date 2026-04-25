@@ -17,7 +17,7 @@ import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../app/utils/effect.ts';
 import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '../app/utils/meta.ts';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS, SHAPESHIFTING_CHAMPION_IDS } from '../app/utils/meta.ts';
 import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
 
 let latestVersion = process.argv[2];
@@ -80,6 +80,8 @@ try {
 	await fs.access(championFilePath);
 	championData = JSON.parse(await fs.readFile(championFilePath, 'utf8'));
 } catch {}
+
+const potentialShapeshifters = new Set<string>();
 
 if (!championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
@@ -231,6 +233,10 @@ if (!championData || championData?.version !== latestVersion) {
 								additionalData,
 								characterRootKey,
 							);
+
+							if (variants.length > 1) {
+								potentialShapeshifters.add(championId);
+							}
 
 							return [abilityName, {
 								maxLevel,
@@ -1048,6 +1054,10 @@ for (const category in debug) {
 	if (tags[0].length) {
 		console.warn(`[${category}] unknown tags`, tags[1], '\nfound in', tags[0]);
 	}
+}
+
+if (potentialShapeshifters.size !== SHAPESHIFTING_CHAMPION_IDS.length) {
+	console.warn('unknown potential shapeshifter', potentialShapeshifters);
 }
 
 function itemDescriptionText(text: string, extrasStart: string): string[][] | undefined {
