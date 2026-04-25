@@ -226,9 +226,9 @@ if (!championData || championData?.version !== latestVersion) {
 						name,
 						partype,
 						stats,
-						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
+						abilities: Object.fromEntries((['q', 'w', 'e', 'r', 'passive'] satisfies IChampionAbilityKey[]).map((abilityKey, index) => {
 							const { maxLevel, variants } = championAbilityData(
-								[abilityName, index],
+								[abilityKey, index],
 								championId as IChampionId,
 								additionalData,
 								characterRootKey,
@@ -238,7 +238,7 @@ if (!championData || championData?.version !== latestVersion) {
 								potentialShapeshifters.add(championId);
 							}
 
-							return [abilityName, {
+							return [abilityKey, {
 								maxLevel,
 								variants,
 							} satisfies IChampionAbility];
@@ -1056,8 +1056,9 @@ for (const category in debug) {
 	}
 }
 
-if (potentialShapeshifters.size !== SHAPESHIFTING_CHAMPION_IDS.length) {
-	console.warn('unknown potential shapeshifter', potentialShapeshifters);
+const unknownShapeshifters = potentialShapeshifters.values().filter(championId => !SHAPESHIFTING_CHAMPION_IDS.includes(championId as IChampionId)).toArray();
+if (potentialShapeshifters.size !== SHAPESHIFTING_CHAMPION_IDS.length || unknownShapeshifters.length) {
+	console.warn('known shapeshifter champions mismatch', { potentialShapeshifters, unknownShapeshifters });
 }
 
 function itemDescriptionText(text: string, extrasStart: string): string[][] | undefined {
@@ -1399,8 +1400,8 @@ function possibleChampionDynamicVariableValues(specific?: IChampionSpecific, abi
 }
 
 function championAbilityData(
-	/** abilityName - q-w-e-r-passive, abilityIndex 0-1-2-3-4 corresponding to abilityName */
-	abilityInfo: [string, number],
+	/** abilityKey - q-w-e-r-passive, abilityIndex 0-1-2-3-4 corresponding to abilityKey */
+	abilityInfo: [IChampionAbilityKey, number],
 	championId: IChampionId,
 	championData: any,
 	characterRootKey: string,
@@ -1544,107 +1545,135 @@ function adjustApheliosAbilityData(
 function championAbilityVariants(
 	championId: IChampionId,
 	championData: any,
-	[abilityName]: [string, number],
+	[abilityKey]: [IChampionAbilityKey, number],
 	variantKeys: string[],
-): [number | undefined, IChampionAbility['variants']] {
+): [maxLevel: number | undefined, IChampionAbility['variants']] {
 	let maxLevel: number | undefined;
 	const variants: IChampionAbility['variants'] = [];
+	const otherAbilityTooltipVariantObjectNames: string[] = [];
 
 	for (let i = 0; i < variantKeys.length; i++) {
-		const debugPrefix = `${championId} ${abilityName}[${i}]`;
-		const variantDataKey = variantKeys[i];
-		const variantData = championData[variantDataKey!];
-		const variantMSpell = variantData?.mSpell;
-
-		if (variants.some(v => v.objectName === variantData.ObjectName)) {
-			continue;
-		}
-
-		if (!variantData || !variantMSpell) {
-			throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
-		}
-
-		const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
-
-		if (i === 0) {
-			if (!mClientData) {
-				throw new Error(`${debugPrefix} expected mClientData in variant "${variantDataKey}"`);
-			}
-			if (!mImgIconName) {
-				throw new Error(`${debugPrefix} expected mImgIconName in variant "${variantDataKey}"`);
-			}
-			if (!mClientData.mTooltipData) {
-				throw new Error(`${debugPrefix} expected mTooltipData in variant "${variantDataKey}"`);
-			}
-
-			maxLevel = abilityName === 'passive' ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
-		}
-
-		let mLocKeys;
-		if (mClientData.mUseTooltipFromAnotherSpell) {
-			const tooltipSourceSpell = championData[mClientData.mUseTooltipFromAnotherSpell];
-			if (tooltipSourceSpell?.mSpell?.mClientData) {
-				({ mLocKeys } = tooltipSourceSpell.mSpell.mClientData.mTooltipData);
-			}
-		} else {
-			({ mLocKeys } = mClientData.mTooltipData);
-		}
-
-		if (!(mLocKeys?.keyName || mLocKeys?.keyTooltip)) {
-			throw new Error(`${debugPrefix} expected mLocKeys in variant "${variantDataKey}"`);
-		}
-
-		const extendedVariableNameOverrides = new Set<string>();
-		for (const nameOverride of extendedVariableNameOverrides.values()) {
-			(textData.data.stringtable as any)[nameOverride] = getStringtableValue(nameOverride, 'extended variables name overrides');
-		}
-
-		const variant = {
-			name: undefined!,
-			objectName: variantData.ObjectName,
-			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
-			tooltip: undefined,
-			tooltipExtended: undefined,
-			tooltipExtendedBelowLine: undefined,
-			extendedVariables: mClientData.mTooltipData?.mLists?.LevelUp?.Elements
-				?.filter((variable: any) => variable.type !== 'Cooldown')
-				.map((variable: any) => {
-					const { type, typeIndex } = variable;
-					if (!type) {
-						console.warn(`${debugPrefix} extended variable no type`, variable);
-					}
-
-					// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
-					return {
-						type: type.replace('%d', typeIndex),
-						nameOverride: variable.nameOverride?.toLowerCase(),
-					};
-				}),
-			mana,
-			cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
-			dataValues: DataValues?.length
-				? Object.fromEntries(DataValues.map(({ mName, mValues }: Record<string, number[]>) =>
-						[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
-					))
-				: undefined,
-			spellCalculations: cleanupObject(mSpellCalculations),
-			effectAmount: cleanupObject(mEffectAmount),
-			dataKey: variantDataKey,
-		} as IChampionAbilityVariant;
-
-		/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
-		variant.name = mLocKeys.keyName;
-		variant.tooltip = mLocKeys.keyTooltip;
-		variant.tooltipExtended = mLocKeys.keyTooltipExtended;
-		// TODO should be done for all abilities
-		if (abilityName === 'passive') {
-			variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
-		}
-
-		variants.push(variant);
+		const [variant, variantMaxLevel] = championAbilityVariant(
+			championId,
+			abilityKey,
+			championData,
+			i,
+			variantKeys[i]!,
+			variants,
+			otherAbilityTooltipVariantObjectNames,
+		);
+		variant && variants.push(variant);
+		maxLevel ??= variantMaxLevel;
 	}
 
+	const unresolvedUsedVariantObjectNames = otherAbilityTooltipVariantObjectNames.filter(objectName => !variants.some(v => v.objectName === objectName || v.objectName.toLowerCase() === objectName.toLowerCase()));
+
+	// console.log({ championId, abilityName: abilityKey, unresolvedUsedVariantObjectNames });
+
 	return [maxLevel, variants];
+}
+
+function championAbilityVariant(
+	championId: IChampionId,
+	abilityKey: IChampionAbilityKey,
+	championData: any,
+	variantIndex: number,
+	variantDataKey: string,
+	variants: IChampionAbilityVariant[],
+	otherAbilityTooltipVariantObjectNames: string[],
+): [IChampionAbilityVariant | undefined, maxLevel: number | undefined] {
+	let maxLevel: number | undefined;
+	const debugPrefix = `${championId} ${abilityKey}[${variantIndex}]`;
+	const variantData = championData[variantDataKey!];
+	const variantMSpell = variantData?.mSpell;
+
+	if (variants.some(v => v.objectName === variantData.ObjectName)) {
+		return [undefined, undefined];
+	}
+
+	if (!variantData || !variantMSpell) {
+		throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
+	}
+
+	const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
+
+	if (variantIndex === 0) {
+		if (!mClientData) {
+			throw new Error(`${debugPrefix} expected mClientData in variant "${variantDataKey}"`);
+		}
+		if (!mImgIconName) {
+			throw new Error(`${debugPrefix} expected mImgIconName in variant "${variantDataKey}"`);
+		}
+		if (!mClientData.mTooltipData) {
+			throw new Error(`${debugPrefix} expected mTooltipData in variant "${variantDataKey}"`);
+		}
+
+		maxLevel = abilityKey === 'passive' ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
+	}
+
+	let mLocKeys;
+	if (mClientData.mUseTooltipFromAnotherSpell) {
+		const tooltipSourceSpell = championData[mClientData.mUseTooltipFromAnotherSpell];
+		if (tooltipSourceSpell?.mSpell?.mClientData) {
+			otherAbilityTooltipVariantObjectNames.push(mClientData.mUseTooltipFromAnotherSpell);
+			({ mLocKeys } = tooltipSourceSpell.mSpell.mClientData.mTooltipData);
+		}
+	} else {
+		({ mLocKeys } = mClientData.mTooltipData);
+	}
+
+	if (!(mLocKeys?.keyName || mLocKeys?.keyTooltip)) {
+		throw new Error(`${debugPrefix} expected mLocKeys in variant "${variantDataKey}"`);
+	}
+
+	const extendedVariableNameOverrides = new Set<string>();
+	for (const nameOverride of extendedVariableNameOverrides.values()) {
+		(textData.data.stringtable as any)[nameOverride] = getStringtableValue(nameOverride, 'extended variables name overrides');
+	}
+
+	const variant = {
+		name: undefined!,
+		objectName: variantData.ObjectName,
+		image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
+		tooltip: undefined,
+		tooltipExtended: undefined,
+		tooltipExtendedBelowLine: undefined,
+		extendedVariables: mClientData.mTooltipData?.mLists?.LevelUp?.Elements
+			?.filter((variable: any) => variable.type !== 'Cooldown')
+			.map((variable: any) => {
+				const { type, typeIndex } = variable;
+				if (!type) {
+					console.warn(`${debugPrefix} extended variable no type`, variable);
+				}
+
+				// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
+				return {
+					type: type.replace('%d', typeIndex),
+					nameOverride: variable.nameOverride?.toLowerCase(),
+				};
+			}),
+		mana,
+		cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
+		dataValues: DataValues?.length
+			? Object.fromEntries(DataValues.map(({ mName, mValues }: Record<string, number[]>) =>
+					[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
+				))
+			: undefined,
+		spellCalculations: cleanupObject(mSpellCalculations),
+		effectAmount: cleanupObject(mEffectAmount),
+		dataKey: variantDataKey,
+	} as IChampionAbilityVariant;
+
+	/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
+	variant.name = mLocKeys.keyName;
+	variant.tooltip = mLocKeys.keyTooltip;
+	variant.tooltipExtended = mLocKeys.keyTooltipExtended;
+	// TODO should be done for all abilities
+	if (abilityKey === 'passive') {
+		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
+	}
+
+	return [variant, maxLevel];
 }
 
 /**
