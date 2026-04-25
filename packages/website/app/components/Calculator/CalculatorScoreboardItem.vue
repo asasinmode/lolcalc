@@ -2159,7 +2159,7 @@ defineExpose({ el });
 			}
 
 			> [data-health-ability-resource] {
-				--at-apply: 'pt-1.5 pb-2 grid grid-rows-subgrid grid-cols-subgrid';
+				--at-apply: 'pt-1.5 pb-2 grid grid-rows-subgrid grid-cols-subgrid ms-[--gap-x]';
 				grid-area: resources;
 
 				[data-current-health],
@@ -2368,11 +2368,6 @@ defineExpose({ el });
 				> h4 {
 					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3 whitespace-nowrap';
 				}
-			}
-
-			> [data-abilities],
-			> [data-health-ability-resource] {
-				--at-apply: 'ms-[--gap-x]';
 			}
 
 			> [data-extras] {

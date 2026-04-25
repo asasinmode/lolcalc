@@ -17,7 +17,7 @@ const UpgradedAlliesComponent = await numberExtra(GameAbilityId.build(ABILITY_TY
 			needs level {{ CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL }}+
 		</p>
 	</SlotIndexComponent>
-	<UpgradedAlliesComponent v-bind="$props" :disabled="damageSource.level.value < (CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL - 1)">
+	<UpgradedAlliesComponent v-bind="$props" :disabled="damageSource.level.value < (CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL + 1)">
 		<p>
 			needs level {{ CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL + 1 }}+
 		</p>
@@ -27,7 +27,7 @@ const UpgradedAlliesComponent = await numberExtra(GameAbilityId.build(ABILITY_TY
 <style>
 @layer overrides {
 	#scoreboard > div > ul > [data-scoreboard-item='Ornn'] > details > [data-extras] > .v-extras-number {
-		&:nth-of-type(n - 2) {
+		&:nth-of-type(-n + 2) {
 			> p {
 				--at-apply: 'col-start-2 row-start-2 col-span-3 z-1 relative text-center h-9 grid-center -mt-1 whitespace-nowrap bg-black/20 backdrop-blur-2 -mx-1 font-500';
 				paint-order: stroke fill;
