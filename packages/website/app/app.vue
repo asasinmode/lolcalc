@@ -4,23 +4,30 @@ import type { ShallowRef } from 'vue';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 
+const { version, minorVersion } = usePatchVersion();
+const { _component: ChampSelect } = useChampSelect();
+const { _component: ItemShop } = useItemShop();
+const { _component: RuneSelect } = useRuneSelect();
+const { _component: EffectsDialog } = useEffectsDialog();
+
 useHead({
 	htmlAttrs: { lang: 'en' },
 	link: [
 		{ rel: 'icon', href: 'favicon.png' },
 		{ rel: 'icon', href: 'favicon_dark.png', media: 'prefers-color-scheme: dark' },
 	],
+	style: [
+		{
+			textContent: `:root {
+	--masterwork-border-url: url(https://raw.communitydragon.org/${minorVersion}/game/assets/items/itemmodifiers/bordertreatmentornn.png)
+}`,
+		},
+	],
 });
 useSeoMeta({
 	title: 'lolcalc - Damage Calculator for League of Legends',
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
-
-const { version, minorVersion } = usePatchVersion();
-const { _component: ChampSelect } = useChampSelect();
-const { _component: ItemShop } = useItemShop();
-const { _component: RuneSelect } = useRuneSelect();
-const { _component: EffectsDialog } = useEffectsDialog();
 
 const iconButtonsShowText = useIconButtonsShowText();
 if (import.meta.client) {

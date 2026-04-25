@@ -423,7 +423,7 @@ defineExpose({
 	<VDialog
 		id="dialog-item-shop"
 		ref="vDialog"
-		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg); --masterwork-border-url: url(https://raw.communitydragon.org/${minorVersion}/game/assets/items/itemmodifiers/bordertreatmentornn.png)`"
+		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg)`"
 		@close="closeSearch"
 	>
 		<header>

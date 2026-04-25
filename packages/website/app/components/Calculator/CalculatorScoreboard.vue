@@ -70,6 +70,12 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 		const img = li.firstElementChild as HTMLImageElement;
 		const item = damageSource.items.value[i];
 
+		if (isMasterworkSlot(damageSource, i)) {
+			li.setAttribute('data-masterwork', '');
+		} else {
+			li.removeAttribute('data-masterwork');
+		}
+
 		if (item) {
 			img.src = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`;
 			img.style.display = '';
@@ -312,7 +318,6 @@ function setLocalMirrorLayout() {
 	<section
 		id="scoreboard"
 		:data-mirrored="mirrorLayout || undefined"
-		:style="`--masterwork-border-url: url(https://raw.communitydragon.org/${minorVersion}/game/assets/items/itemmodifiers/bordertreatmentornn.png)`"
 	>
 		<h2>
 			configuration scoreboard
