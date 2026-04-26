@@ -1,16 +1,21 @@
 import { ITEM_TO_CHAMPION_STATS } from './meta';
 
 interface IStatsCalculationResult {
-	stats: {
-		base: IChampionStats;
-		level: Partial<IChampionStats>;
-		baseOnLevel: IChampionStats;
-		item: IChampionStats;
-		bonus: IChampionStats;
-		total: IChampionStats;
+	/** raw stats from champion file */
+	initial: IChampionStats;
+	/** stats that could've been already modified from raw, like custom target dummy ones */
+	base: IChampionStats;
+	/** ONLY increases from level, i.e if champion gains 2 ad per level, on lvl 3 it will be `4` */
+	level: Partial<IChampionStats>;
+	/** base + level combined */
+	baseOnLevel: IChampionStats;
+	item: IChampionStats;
+	bonus: IChampionStats;
+	total: IChampionStats;
+	meta: {
+		hasMana: boolean;
+		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
 	};
-	hasMana: boolean;
-	adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
 }
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
@@ -19,7 +24,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const items = toValue(source.items);
 	const runes = toValue(source.runes);
 
-	const baseStats: IChampionStats = {
+	const initialStats: IChampionStats = {
 		hp: champion?.stats.hp ?? 0,
 		hpRegen: champion?.stats.hpregen ?? 0,
 		mana: champion?.stats.mp ?? 0,
@@ -47,20 +52,22 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		slowResist: 0,
 	};
 
-	const bonusStats = Object.fromEntries(Object.entries(baseStats).map(([key]) => [key, 0])) as IChampionStats;
+	const baseStats = structuredClone(initialStats);
+	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
 	if (!champion) {
 		return {
-			stats: {
-				base: baseStats,
-				level: baseStats,
-				baseOnLevel: baseStats,
-				item: baseStats,
-				bonus: bonusStats,
-				total: baseStats,
+			initial: initialStats,
+			base: baseStats,
+			level: baseStats,
+			baseOnLevel: baseStats,
+			item: baseStats,
+			bonus: bonusStats,
+			total: baseStats,
+			meta: {
+				hasMana: false,
+				adaptiveForceStatVariable: 0,
 			},
-			hasMana: false,
-			adaptiveForceStatVariable: 0,
 		};
 	}
 
@@ -156,16 +163,17 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}
 
 	return {
-		stats: {
-			base: baseStats,
-			level: levelStats,
-			baseOnLevel: baseOnLevelStats,
-			item: itemStats,
-			bonus: bonusStats,
-			total: totalStats,
+		initial: initialStats,
+		base: baseStats,
+		level: levelStats,
+		baseOnLevel: baseOnLevelStats,
+		item: itemStats,
+		bonus: bonusStats,
+		total: totalStats,
+		meta: {
+			hasMana: champion.partype === 'mana',
+			adaptiveForceStatVariable,
 		},
-		hasMana: champion.partype === 'mana',
-		adaptiveForceStatVariable,
 	};
 }
 

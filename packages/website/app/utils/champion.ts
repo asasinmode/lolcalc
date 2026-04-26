@@ -16,7 +16,7 @@ export const CHAMPION_SPECIFICS = {
 			return Object.fromEntries(Object.entries(self.computed.stats.value).map(([statName, stat]) => {
 				return [
 					statName,
-					Math.max(0, (self.internalData.value as IChampionStats)[statName as IChampionStatName] ?? self.computed.stats.value[statName as IChampionStatName].base ?? stat.base ?? 0),
+					Math.max(0, (self.internalData.value as IChampionStats)[statName as IChampionStatName] ?? stat.base ?? 0),
 				];
 			},
 			)) as IChampionStats;

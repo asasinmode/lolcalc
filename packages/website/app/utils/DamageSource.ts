@@ -69,7 +69,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	stats = computed(() => calculateChampionStats(this));
 	itemDamageCalculationTarget = computed<IItemVariableCalculationTarget>(() => ({
 		isRanged: this.isRanged.value,
-		stats: this.stats.value?.stats.total,
+		stats: this.stats.value?.total,
 	}));
 
 	runes: Ref<IChampionRunes>;
@@ -77,10 +77,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	runesInvalid = computed(() => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	currentHealth: Ref<number>;
-	maxHealth = computed<number>(() => Math.round(this.stats.value?.stats.total.hp || 1));
+	maxHealth = computed<number>(() => Math.round(this.stats.value?.total.hp || 1));
 	currentAbilityResource: Ref<number>;
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
-	maxAbilityResource = computed<number>(() => Math.round(this.stats.value?.stats.total.mana ?? 0));
+	maxAbilityResource = computed<number>(() => Math.round(this.stats.value?.total.mana ?? 0));
 
 	items: Ref<(IItem | undefined)[]>;
 	itemsUndoSnapshots: Ref<(IItem | undefined)[][]>;
@@ -175,8 +175,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				defensive: 'health',
 			},
 		});
-		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.stats.total.hp ?? 0));
-		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.stats.total.mana ?? 0));
+		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.total.hp ?? 0));
+		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.total.mana ?? 0));
 		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...overrides.abilityLevels });
 		this.abilityVariantsIndexes = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...overrides.abilityVariants });
 		this.dragonStacks = ref(overrides.dragonStacks ?? Array.from({ length: 4 }));
@@ -230,8 +230,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					return;
 				}
 
-				this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
-				this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
+				this.currentHealth.value = this.stats.value?.total.hp || 0;
+				this.currentAbilityResource.value = this.stats.value?.total.mana || 0;
 
 				const level = c?.id === 'TargetDummy' ? 1 : 0;
 				this.abilityLevels.value = { q: level, w: level, e: level, r: level };
@@ -240,17 +240,17 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this)) || {};
 			}),
 
-			watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
+			watch(() => [this.stats.value?.total.hp, this.stats.value?.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
 				if (!this.champion.value) {
 					return;
 				}
 				if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
-					this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
+					this.currentHealth.value = this.stats.value?.total.hp || 0;
 				} else {
-					this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.stats.total.hp || 0);
+					this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.total.hp || 0);
 				}
 				if (previousTotalAbilityResource && this.currentAbilityResource.value === previousTotalAbilityResource) {
-					this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
+					this.currentAbilityResource.value = this.stats.value?.total.mana || 0;
 				} else {
 					this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.maxAbilityResource.value);
 				}
@@ -353,8 +353,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.runes.value.shards.offensive = 'adaptive';
 		this.runes.value.shards.flex = 'adaptive';
 		this.runes.value.shards.defensive = 'health';
-		this.currentHealth.value = this.stats.value?.stats.total.hp ?? 0;
-		this.currentAbilityResource.value = this.stats.value?.stats.total.mana ?? 0;
+		this.currentHealth.value = this.stats.value?.total.hp ?? 0;
+		this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
 		this.abilityLevels.value.q = 0;
 		this.abilityLevels.value.w = 0;
 		this.abilityLevels.value.e = 0;
@@ -764,130 +764,130 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	computed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
 		stats: computed<Record<IChampionStatName, IComputedDamageSourceChampionStat>>(() => {
-			const { stats } = this.stats.value;
+			const { base, baseOnLevel, bonus, total } = this.stats.value;
 
 			const rv: Record<IChampionStatName, Omit<IComputedDamageSourceChampionStat, 'formattedTotal'> & { formattedTotal?: number }> = {
 				hp: {
-					base: stats.baseOnLevel.hp,
-					bonus: stats.bonus.hp,
-					total: stats.total.hp,
+					base: baseOnLevel.hp,
+					bonus: bonus.hp,
+					total: total.hp,
 				},
 				mana: {
-					base: stats.baseOnLevel.mana,
-					bonus: stats.bonus.mana,
-					total: stats.total.mana,
+					base: baseOnLevel.mana,
+					bonus: bonus.mana,
+					total: total.mana,
 				},
 				attackDamage: {
-					base: stats.baseOnLevel.attackDamage,
-					bonus: stats.bonus.attackDamage,
-					total: stats.total.attackDamage,
+					base: baseOnLevel.attackDamage,
+					bonus: bonus.attackDamage,
+					total: total.attackDamage,
 				},
 				abilityPower: {
-					bonus: stats.bonus.abilityPower,
-					total: stats.total.abilityPower,
+					bonus: bonus.abilityPower,
+					total: total.abilityPower,
 				},
 				armor: {
-					base: stats.baseOnLevel.armor,
-					bonus: stats.bonus.armor,
-					total: stats.total.armor,
+					base: baseOnLevel.armor,
+					bonus: bonus.armor,
+					total: total.armor,
 				},
 				magicResist: {
-					base: stats.baseOnLevel.magicResist,
-					bonus: stats.bonus.magicResist,
-					total: stats.total.magicResist,
+					base: baseOnLevel.magicResist,
+					bonus: bonus.magicResist,
+					total: total.magicResist,
 				},
 				abilityHaste: {
-					bonus: stats.bonus.abilityHaste,
-					total: stats.total.abilityHaste,
+					bonus: bonus.abilityHaste,
+					total: total.abilityHaste,
 				},
 				attackSpeed: {
-					total: stats.total.attackSpeed,
+					total: total.attackSpeed,
 					decimal: 3,
 				},
 				bonusAttackSpeedPercent: {
-					bonus: stats.bonus.bonusAttackSpeedPercent,
-					total: stats.total.bonusAttackSpeedPercent,
+					bonus: bonus.bonusAttackSpeedPercent,
+					total: total.bonusAttackSpeedPercent,
 					isPercentage: true,
 					decimal: 5,
 				},
 				attackSpeedRatio: {
-					total: stats.total.attackSpeedRatio,
+					total: total.attackSpeedRatio,
 					decimal: 3,
 				},
 				critChance: {
-					bonus: stats.bonus.critChance,
-					total: stats.total.critChance,
+					bonus: bonus.critChance,
+					total: total.critChance,
 					isPercentage: true,
 				},
 				critDamageMultiplier: {
-					base: stats.base.critDamageMultiplier,
-					bonus: stats.bonus.critDamageMultiplier,
-					total: stats.total.critDamageMultiplier,
+					base: base.critDamageMultiplier,
+					bonus: bonus.critDamageMultiplier,
+					total: total.critDamageMultiplier,
 					isPercentage: true,
 				},
 				lethality: {
-					bonus: stats.bonus.lethality,
-					total: stats.total.lethality,
+					bonus: bonus.lethality,
+					total: total.lethality,
 				},
 				percentArmorPen: {
 					decimal: 2,
-					bonus: stats.bonus.percentArmorPen,
-					total: stats.total.percentArmorPen,
+					bonus: bonus.percentArmorPen,
+					total: total.percentArmorPen,
 					isPercentage: true,
 				},
 				flatMagicPen: {
-					bonus: stats.bonus.flatMagicPen,
-					total: stats.total.flatMagicPen,
+					bonus: bonus.flatMagicPen,
+					total: total.flatMagicPen,
 				},
 				percentMagicPen: {
 					decimal: 2,
-					bonus: stats.bonus.percentMagicPen,
-					total: stats.total.percentMagicPen,
+					bonus: bonus.percentMagicPen,
+					total: total.percentMagicPen,
 					isPercentage: true,
 				},
 				lifeSteal: {
-					bonus: stats.bonus.lifeSteal,
-					total: stats.total.lifeSteal,
+					bonus: bonus.lifeSteal,
+					total: total.lifeSteal,
 					isPercentage: true,
 				},
 				omnivamp: {
-					bonus: stats.bonus.omnivamp,
-					total: stats.total.omnivamp,
+					bonus: bonus.omnivamp,
+					total: total.omnivamp,
 					isPercentage: true,
 				},
 				moveSpeed: {
-					base: stats.baseOnLevel.moveSpeed,
-					bonus: stats.bonus.moveSpeed,
-					total: stats.total.moveSpeed,
+					base: baseOnLevel.moveSpeed,
+					bonus: bonus.moveSpeed,
+					total: total.moveSpeed,
 				},
 				tenacity: {
-					bonus: stats.bonus.tenacity,
-					total: stats.total.tenacity,
+					bonus: bonus.tenacity,
+					total: total.tenacity,
 					isPercentage: true,
 				},
 				healShieldPower: {
-					total: stats.total.healShieldPower,
-					bonus: stats.total.healShieldPower,
+					total: total.healShieldPower,
+					bonus: total.healShieldPower,
 					isPercentage: true,
 				},
 				attackRange: {
-					base: stats.baseOnLevel.attackRange,
-					bonus: stats.bonus.attackRange,
-					total: stats.total.attackRange,
+					base: baseOnLevel.attackRange,
+					bonus: bonus.attackRange,
+					total: total.attackRange,
 				},
 				hpRegen: {
-					base: stats.baseOnLevel.hpRegen,
-					bonus: stats.bonus.hpRegen,
-					total: stats.total.hpRegen,
+					base: baseOnLevel.hpRegen,
+					bonus: bonus.hpRegen,
+					total: total.hpRegen,
 				},
 				manaRegen: {
-					base: stats.baseOnLevel.manaRegen,
-					bonus: stats.bonus.manaRegen,
-					total: stats.total.manaRegen,
+					base: baseOnLevel.manaRegen,
+					bonus: bonus.manaRegen,
+					total: total.manaRegen,
 				},
 				slowResist: {
-					bonus: stats.bonus.slowResist,
-					total: stats.total.slowResist,
+					bonus: bonus.slowResist,
+					total: total.slowResist,
 					isPercentage: true,
 				},
 			};
