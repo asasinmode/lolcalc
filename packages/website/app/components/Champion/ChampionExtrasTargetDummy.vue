@@ -50,7 +50,7 @@ const statInputs = Object.fromEntries(
 onMounted(() => {
 	for (const statName in props.damageSource.computed.stats.value) {
 		updateStat(
-			statName as IChampionStatName,
+			undefined,
 			props.damageSource.internalData.value[statName as IChampionStatName],
 			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
 		);
@@ -126,8 +126,10 @@ function copyFrom(event: SubmitEvent) {
 	}
 }
 
-function updateStat(statName: IChampionStatName, value: number, inputEl?: HTMLInputElement) {
-	props.damageSource.internalData.value[statName] = value;
+function updateStat(statName: IChampionStatName | undefined, value: number, inputEl?: HTMLInputElement) {
+	if (statName) {
+		props.damageSource.internalData.value[statName] = value;
+	}
 	if (inputEl) {
 		inputEl.value = value.toString();
 		inputEl.setAttribute('value', value.toString());
