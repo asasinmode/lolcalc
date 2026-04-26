@@ -525,6 +525,11 @@ function removeResultsSection(index: number) {
 		customTotalRows.value.length = 0;
 	} else {
 		const [section] = resultSections.value.splice(index, 1);
+		for (let i = customTotalRows.value.length - 1; i >= 0; i--) {
+			if (customTotalRows.value[i]!.startsWith(section!.id)) {
+				customTotalRows.value.splice(i, 1);
+			}
+		}
 		computedResults.value.delete(section!.id);
 	}
 	emit('configurationChanged');
@@ -709,7 +714,6 @@ function cleanupUnused() {
 
 		for (let i = customTotalRows.value.length - 1; i >= 0; i--) {
 			const [sectionId] = customTotalRows.value[i]!.split('_');
-
 			if (sectionId === section.id) {
 				customTotalRows.value.splice(i, 1);
 			}
