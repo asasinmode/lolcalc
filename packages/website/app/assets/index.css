@@ -105,6 +105,12 @@
 		--ui-btn-border-clr: hsl(40 59% 61%);
 		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
 		--unknown-alert-mt: calc(3 * var(--spacing));
+
+		--venmbr-input-w: 6ch;
+		--venmbr-input-py: calc(0.5 * var(--spacing));
+		--venmbr-input-px: calc(1 * var(--spacing));
+		--venmbr-gap-x: calc(2 * var(--spacing));
+		--venmbr-btn-w: calc(10 * var(--spacing));
 	}
 
 	.pretend-ui-btn {

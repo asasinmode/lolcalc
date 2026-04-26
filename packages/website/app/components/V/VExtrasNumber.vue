@@ -74,7 +74,7 @@ const value = defineModel<number>({ required: true });
 		}
 
 		> input {
-			--at-apply: 'box-content h-min w-[6ch] px-1 py-0.5 row-span-2 bg-white text-black me-2';
+			--at-apply: 'box-content h-min w-[--venmbr-input-w] px-[--venmbr-input-px] py-[--venmbr-input-py] bg-white text-black me-[--venmbr-gap-x]';
 
 			&:disabled {
 				--at-apply: 'bg-neutral-200 text-neutral-600';
@@ -82,10 +82,14 @@ const value = defineModel<number>({ required: true });
 		}
 
 		> button {
-			--at-apply: 'w-10 h-7';
+			--at-apply: 'w-[--venmbr-btn-w] h-7';
+
+			&:not(:disabled) {
+				--at-apply: 'z-1';
+			}
 
 			&:nth-last-of-type(2) {
-				--at-apply: 'justify-self-end';
+				--at-apply: 'justify-self-end -me-px';
 			}
 		}
 	}

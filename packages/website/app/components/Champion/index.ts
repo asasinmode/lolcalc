@@ -1,7 +1,10 @@
 import type { ISpecificComponents } from '~/utils/types';
-import { ChampionExtrasAphelios, ChampionExtrasOrnn, ChampionExtrasViktor } from '#components';
+import { ChampionExtrasAphelios, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
+	TargetDummy: {
+		extras: ChampionExtrasTargetDummy,
+	},
 	Ambessa: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},

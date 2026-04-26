@@ -35,11 +35,11 @@ function toggle(abilityIndex: number) {
 <template>
 	<article class="extras-viktor-passive-ability-upgrades">
 		<img
-			:src="abilityImage(props.damageSource.champion.value!.abilities.passive.variants[props.damageSource.abilityVariantsIndexes.value.passive]!.image, 'Aphelios')"
+			:src="abilityImage(props.damageSource.champion.value!.abilities.passive.variants[props.damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')"
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(ABILITY_TYPE.champion, 'Aphelios', 'passive', 0))"
+			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(ABILITY_TYPE.champion, 'Viktor', 'passive', 0))"
 		>
 		<h5>abilities evolved</h5>
 		<label
