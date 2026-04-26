@@ -140,6 +140,8 @@ function removeAndFocusNext() {
 	if (isFirstAndOnly.value) {
 		emit('clear');
 		undoRemoveButton.value!.style.display = 'none';
+		el.value!.removeEventListener('mouseleave', removeAndFocusNext);
+		undoRemoveButton.value!.removeEventListener('focusout', removeAndFocusNext);
 	} else {
 		emit('remove');
 	}
