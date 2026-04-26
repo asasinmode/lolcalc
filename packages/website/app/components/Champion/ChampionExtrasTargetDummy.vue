@@ -30,12 +30,13 @@ function statImage(statName: keyof IChampionStats) {
 			v-for="(stat, statName) in props.damageSource.computed.stats.value"
 			:key="statName"
 		>
-			<label :for="`${idPrefix}-${statName}`" :title="`${CHAMPION_STAT_NAMES[statName]}${stat.isPercentage ? ' %' : ''}`">
+			<label :for="`${idPrefix}-${statName}`" :title="`${CHAMPION_STAT_NAMES[statName]}${stat.isPercentage && !CHAMPION_STAT_NAMES[statName].startsWith('Percent') ? ' %' : ''}`">
 				<img
 					v-bind="statImage(statName)"
 					loading="lazy"
 				>
-				{{ CHAMPION_STAT_NAMES[statName] }}{{ stat.isPercentage ? ' %' : '' }}
+				<span>{{ CHAMPION_STAT_NAMES[statName] }}</span>
+				{{ stat.isPercentage && !CHAMPION_STAT_NAMES[statName].startsWith('Percent') ? '%' : '' }}
 			</label>
 			<input :id="`${idPrefix}-${statName}`" type="number" min="0">
 			<button class="pretend-ui-btn">
@@ -54,10 +55,14 @@ function statImage(statName: keyof IChampionStats) {
 			--at-apply: 'grid grid-rows-[max-content_1fr] grid-cols-[1fr_auto] gap-x-[--venmbr-gap-x] gap-y-1 relative';
 
 			> label {
-				--at-apply: 'truncate w-full text-sm col-span-full';
+				--at-apply: 'flex items-center text-sm col-span-full gap-x-[0.5ch]';
 
 				> img {
-					--at-apply: 'inline-block size-4 align-[calc(-1*var(--spacing))]';
+					--at-apply: 'size-4';
+				}
+
+				> span {
+					--at-apply: 'truncate';
 				}
 			}
 
