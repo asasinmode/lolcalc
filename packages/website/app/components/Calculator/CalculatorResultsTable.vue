@@ -1703,11 +1703,11 @@ defineExpose({
 						}
 
 						> select {
-							--at-apply: 'w-64 px-2 bg-white text-black';
+							--at-apply: 'w-64 px-1.5 bg-white text-black';
 							color-scheme: light;
 
 							&:disabled {
-								--at-apply: 'text-neutral-600';
+								--at-apply: 'text-neutral-700 bg-neutral-200';
 							}
 						}
 

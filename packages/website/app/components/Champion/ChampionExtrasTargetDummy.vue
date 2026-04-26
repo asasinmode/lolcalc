@@ -58,7 +58,6 @@ onMounted(() => {
 	}
 });
 
-// stop rounding variables when saving
 function reset(event: MouseEvent, statName: IChampionStatName) {
 	const { isPercentage } = props.damageSource.computed.stats.value[statName as IChampionStatName];
 	updateStat(
@@ -88,9 +87,15 @@ function transformToOptions(from: DamageSource[]): ICopyFromOption[] {
 		.map(([source, index]) => [source.id, index, source.champion.value?.name] as ICopyFromOption);
 }
 
-const copyStatsFrom = ref<string>();
+const copyStatsFrom = ref('');
 const sourceOptions = computed(() => transformToOptions(damageSources.value));
 const targetOptions = computed(() => transformToOptions(damageTargets.value));
+
+watch(() => sourceOptions.value.length || targetOptions.value.length, (value) => {
+	if (!value) {
+		copyStatsFrom.value = '';
+	}
+}, { immediate: true });
 
 function copyFrom(event: SubmitEvent) {
 	const copyFromId = new FormData(event.target as HTMLFormElement).get('fromId')! as string;
@@ -138,7 +143,15 @@ function updateStat(statName: IChampionStatName, value: number, inputEl?: HTMLIn
 				<label :for="`${idPrefix}-copy-from`">
 					copy from
 				</label>
-				<select :id="`${idPrefix}-copy-from`" v-model="copyStatsFrom" name="fromId">
+				<select
+					:id="`${idPrefix}-copy-from`"
+					v-model="copyStatsFrom"
+					name="fromId"
+					:disabled="!(sourceOptions.length || targetOptions.length)"
+				>
+					<option v-if="!(sourceOptions.length || targetOptions.length)" value="">
+						no valid targets
+					</option>
 					<optgroup v-if="sourceOptions.length" label="sources">
 						<option
 							v-for="[sourceId, sourceIndex, championName] in sourceOptions"
@@ -228,6 +241,10 @@ function updateStat(statName: IChampionStatName, value: number, inputEl?: HTMLIn
 				> select {
 					--at-apply: 'bg-white text-black w-40 py-[--venmbr-input-py] px-[--venmbr-input-px] me-[--venmbr-gap-x]';
 					color-scheme: light;
+
+					&:disabled {
+						--at-apply: 'text-neutral-700 bg-neutral-200';
+					}
 				}
 
 				> button {
