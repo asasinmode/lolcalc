@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
@@ -7,7 +8,7 @@ defineEmits<IExtraComponentEmits>();
 
 const { minorVersion } = usePatchVersion();
 
-function statImage(statName: keyof IChampionStats) {
+function statImage(statName: IChampionStatName) {
 	const icon = STAT_ICON[statName];
 	return typeof icon === 'string'
 		? {
@@ -21,25 +22,60 @@ function statImage(statName: keyof IChampionStats) {
 				height: icon[2] ?? icon[1],
 			};
 }
+
+const statInputs = Object.fromEntries(
+	Object.entries(props.damageSource.computed.stats.value).map(([statName, stat]) =>
+		[
+			statName,
+			{
+				name: CHAMPION_STAT_NAMES[statName as IChampionStatName],
+				label: stat.isPercentage && !CHAMPION_STAT_NAMES[statName as IChampionStatName].startsWith('Percent') ? ' %' : '',
+				value: props.damageSource.internalData.value[statName],
+				onInput: useNumberInput(
+					[props.damageSource.internalData as Ref<IChampionStats>, statName as IChampionStatName],
+					Boolean(!stat.decimal || stat.isPercentage),
+				),
+			},
+		]),
+) as Record<IChampionStatName, {
+	name: string;
+	value: string;
+	label: string;
+	onInput: (event: Event) => void;
+}>;
+
+// TODO reset to initial value (1000 for target dummy)
+// reset all button
+// replicate another damage source's base/total
+function reset(event: MouseEvent, statName: IChampionStatName) {
+	props.damageSource.internalData.value[statName] = 0;
+	((event.currentTarget as HTMLElement).previousElementSibling as HTMLInputElement).value = props.damageSource.internalData.value[statName].toString();
+}
 </script>
 
-<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<article class="extras-target-dummy-stats">
 		<div
 			v-for="(stat, statName) in props.damageSource.computed.stats.value"
 			:key="statName"
 		>
-			<label :for="`${idPrefix}-${statName}`" :title="`${CHAMPION_STAT_NAMES[statName]}${stat.isPercentage && !CHAMPION_STAT_NAMES[statName].startsWith('Percent') ? ' %' : ''}`">
+			<label :for="`${idPrefix}-${statName}`" :title="`${statInputs[statName].name}${statInputs[statName].label}`">
 				<img
 					v-bind="statImage(statName)"
 					loading="lazy"
 				>
-				<span>{{ CHAMPION_STAT_NAMES[statName] }}</span>
-				{{ stat.isPercentage && !CHAMPION_STAT_NAMES[statName].startsWith('Percent') ? '%' : '' }}
+				<span>{{ statInputs[statName].name }}</span>
+				{{ statInputs[statName].label }}
 			</label>
-			<input :id="`${idPrefix}-${statName}`" type="number" min="0">
-			<button class="pretend-ui-btn">
+			<input
+				:id="`${idPrefix}-${statName}`"
+				:value="statInputs[statName].value"
+				type="number"
+				min="0"
+				:step="stat.decimal && !stat.isPercentage ? 0.01 : 1"
+				@input="statInputs[statName].onInput"
+			>
+			<button class="pretend-ui-btn" @click="reset($event, statName)">
 				<span>reset</span>
 			</button>
 		</div>

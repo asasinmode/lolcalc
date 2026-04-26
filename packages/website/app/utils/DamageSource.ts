@@ -763,10 +763,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	computed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
-		stats: computed<Record<keyof IChampionStats, IComputedDamageSourceChampionStat>>(() => {
+		stats: computed<Record<IChampionStatName, IComputedDamageSourceChampionStat>>(() => {
 			const { stats } = this.stats.value;
 
-			const rv: Record<keyof IChampionStats, Omit<IComputedDamageSourceChampionStat, 'formattedTotal'> & { formattedTotal?: number }> = {
+			const rv: Record<IChampionStatName, Omit<IComputedDamageSourceChampionStat, 'formattedTotal'> & { formattedTotal?: number }> = {
 				hp: {
 					base: stats.baseOnLevel.hp,
 					bonus: stats.bonus.hp,
@@ -897,7 +897,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				stat.formattedTotal = formatChampionStatValue(stat.isPercentage ? 100 : 1, stat, 'total');
 			}
 
-			return rv as Record<keyof IChampionStats, IComputedDamageSourceChampionStat>;
+			return rv as Record<IChampionStatName, IComputedDamageSourceChampionStat>;
 		}),
 		items: computed<(IComputedItemDescription | undefined)[]>(() => {
 			const text = useText();

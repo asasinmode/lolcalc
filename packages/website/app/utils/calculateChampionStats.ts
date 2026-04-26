@@ -236,4 +236,4 @@ function getAdaptiveForceStat(championId: string, attackDamage: number, abilityP
 // 	return stats;
 // }
 
-export type IChampionStats = Record<IChampionStatName | 'slowResist', number>;
+export type IChampionStats = Record<IChampionStatName, number>;

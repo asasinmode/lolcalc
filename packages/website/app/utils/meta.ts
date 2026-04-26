@@ -10,11 +10,11 @@ export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
 
 export const ALL_CHAMPION_ABILITY_KEYS: IChampionAbilityKey[] = ['passive', 'q', 'w', 'e', 'r'];
 
-export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent'] as const;
+export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent', 'slowResist'] as const;
 
 export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 
-export const CHAMPION_STAT_NAMES: Record<keyof IChampionStats, string> = {
+export const CHAMPION_STAT_NAMES: Record<IChampionStatName, string> = {
 	hp: 'Health',
 	mana: 'Mana',
 	attackDamage: 'Attack Damage',
@@ -116,7 +116,7 @@ export const RANGED_ONLY_ITEM_IDS = [ITEM_NAME_TO_ID.runaan];
  * or full external ones if starting with `http`
  */
 export const STAT_ICON: Record<
-	IItemStat | keyof IChampionStats | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
+	IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
 	string | [url: string, size: number] | [url: string, width: number, height: number]
 > = {
 	OnHit: 'onhit',

@@ -11,6 +11,17 @@ export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' |
  * for `POSSIBLE_DYNAMIC_VALUES` see `./types.d.ts`
  */
 export const CHAMPION_SPECIFICS = {
+	TargetDummy: {
+		setupData(self): IChampionStats {
+			return Object.fromEntries(Object.entries(self.computed.stats.value).map(([statName, stat]) => {
+				return [
+					statName,
+					Math.max(0, (self.internalData.value as IChampionStats)[statName as IChampionStatName] ?? self.computed.stats.value[statName as IChampionStatName].base ?? stat.base ?? 0),
+				];
+			},
+			)) as IChampionStats;
+		},
+	},
 	Ambessa: {
 		setupData(self): { hasPassiveStack: number } {
 			return {

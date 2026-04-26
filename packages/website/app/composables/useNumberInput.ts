@@ -7,20 +7,34 @@ type NumberKey<T> = {
 export function useNumberInput<T extends Ref>(
 	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: any[], targetIndex: number],
 	isInt = true,
-	max?: MaybeRefOrGetter<number>,
+	max?: number,
 ): (event: Event) => void {
-	return function onChange(event: Event) {
-		let value = Number((event.target as HTMLInputElement).value || '');
-		if (Number.isNaN(value)) {
-			value = 1;
+	return function onInput(event: Event) {
+		const rawValue = (event.target as HTMLInputElement).value;
+		if (!isInt && !rawValue) {
+			(event.target as HTMLInputElement).value = '0';
+			return;
 		}
+
+		let value = Number(rawValue.replace(',', '.'));
+		if (Number.isNaN(value) && !isInt) {
+			return;
+		}
+
 		if (isInt) {
 			value = Math.round(value);
+			(event.target as HTMLInputElement).value = value.toString();
 		}
-		if (max) {
-			value = Math.min(value, toValue(max));
+
+		if (toValue(max) !== undefined) {
+			value = Math.min(value, toValue(max)!);
+			(event.target as HTMLInputElement).value = value.toString();
 		}
-		(event.target as HTMLInputElement).value = value.toString();
+
+		if (rawValue.startsWith('0') && (value >= 1 || value <= -1 || rawValue.startsWith('00'))) {
+			(event.target as HTMLInputElement).value = value.toString();
+		}
+
 		if (Array.isArray(targetRef)) {
 			if (isRef(targetRef[0])) {
 				(targetRef[0].value[targetRef[1]] as number) = value;
