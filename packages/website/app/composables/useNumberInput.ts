@@ -7,7 +7,7 @@ type NumberKey<T> = {
 export function useNumberInput<T extends Ref>(
 	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: any[], targetIndex: number],
 	isInt = true,
-	max?: number,
+	max?: MaybeRef<number>,
 ): (event: Event) => void {
 	return function onInput(event: Event) {
 		const rawValue = (event.target as HTMLInputElement).value;

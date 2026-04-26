@@ -46,6 +46,9 @@ _setupGlobalKeyModifiers();
 const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 
+provide('damageSources', damageSources);
+provide('damageTargets', damageTargets);
+
 const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
 const resultSections = ref<IDamageResultTableSection[]>([
 	{
