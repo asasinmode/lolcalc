@@ -49,10 +49,9 @@ const statInputs = Object.fromEntries(
 
 onMounted(() => {
 	for (const statName in props.damageSource.computed.stats.value) {
-		const { isPercentage } = props.damageSource.computed.stats.value[statName as IChampionStatName];
 		updateStat(
 			statName as IChampionStatName,
-			props.damageSource.internalData.value[statName as IChampionStatName] * (isPercentage ? 100 : 1),
+			props.damageSource.internalData.value[statName as IChampionStatName],
 			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
 		);
 	}
