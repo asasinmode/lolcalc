@@ -13,10 +13,10 @@ export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' |
 export const CHAMPION_SPECIFICS = {
 	TargetDummy: {
 		setupData(self): IChampionStats {
-			return Object.fromEntries(Object.entries(self.computed.stats.value).map(([statName, stat]) => {
+			return Object.fromEntries(Object.keys(self.computed.stats.value).map((statName) => {
 				return [
 					statName,
-					Math.max(0, (self.internalData.value as IChampionStats)[statName as IChampionStatName] ?? stat.base ?? 0),
+					Math.max(0, (self.internalData.value as IChampionStats)[statName as IChampionStatName] ?? self.stats.value.initial[statName as IChampionStatName]),
 				];
 			},
 			)) as IChampionStats;

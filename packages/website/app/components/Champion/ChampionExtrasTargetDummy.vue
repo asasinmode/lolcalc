@@ -30,7 +30,7 @@ const statInputs = Object.fromEntries(
 			{
 				name: CHAMPION_STAT_NAMES[statName as IChampionStatName],
 				label: stat.isPercentage && !CHAMPION_STAT_NAMES[statName as IChampionStatName].startsWith('Percent') ? ' %' : '',
-				value: props.damageSource.internalData.value[statName],
+				value: markRaw(props.damageSource.internalData.value[statName]),
 				onInput: useNumberInput(
 					[props.damageSource.internalData as Ref<IChampionStats>, statName as IChampionStatName],
 					Boolean(!stat.decimal || stat.isPercentage),
@@ -44,11 +44,11 @@ const statInputs = Object.fromEntries(
 	onInput: (event: Event) => void;
 }>;
 
-// TODO reset to initial value (1000 for target dummy)
+// stop rounding variables when saving
 // reset all button
 // replicate another damage source's base/total
 function reset(event: MouseEvent, statName: IChampionStatName) {
-	props.damageSource.internalData.value[statName] = 0;
+	props.damageSource.internalData.value[statName] = props.damageSource.stats.value.initial[statName];
 	((event.currentTarget as HTMLElement).previousElementSibling as HTMLInputElement).value = props.damageSource.internalData.value[statName].toString();
 }
 </script>
