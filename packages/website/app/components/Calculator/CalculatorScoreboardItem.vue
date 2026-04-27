@@ -180,18 +180,8 @@ onMounted(() => {
 	emit('mounted');
 });
 
-let lastLeftClickedAt: number | undefined;
-
 function doubleClickToggle(event: MouseEvent) {
-	if (event.target === event.currentTarget) {
-		const now = Date.now();
-		if (lastLeftClickedAt && ((now - lastLeftClickedAt) < 500)) {
-			lastLeftClickedAt = undefined;
-			toggleExpanded();
-		} else {
-			lastLeftClickedAt = now;
-		}
-	}
+	event.target === event.currentTarget && toggleExpanded()
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
@@ -877,7 +867,7 @@ defineExpose({ el });
 		:data-scoreboard-item="value.listedChampion.value?.id || ''"
 		:style="`--damage-source-clr: ${value.color};`"
 		:class="{ highlighted: highlightedDamageSources.has(value.id) }"
-		@click="doubleClickToggle"
+		@dblclick="doubleClickToggle"
 		@mouseenter="highlightedDamageSources.add(value.id)"
 		@focusin="highlightedDamageSources.add(value.id)"
 		@mouseleave="highlightedDamageSources.remove(value.id)"

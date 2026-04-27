@@ -48,22 +48,8 @@ function closeCleanup() {
 
 const longestName = Object.values(champions).reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
 
-let lastLeftClicked: [time: number, champion: IListedChampion] | undefined;
-
-function selectChampion(champion: IListedChampion) {
-	const now = Date.now();
-	selectedChampion.value = champion;
-	if (lastLeftClicked && champion === lastLeftClicked[1] && ((now - lastLeftClicked[0]) < 500)) {
-		lastLeftClicked = undefined;
-		vDialog.value?.el?.close();
-	} else {
-		lastLeftClicked = [now, champion];
-	}
-}
-
 defineExpose({
 	open: () => {
-		lastLeftClicked = undefined;
 		vDialog.value?.open();
 		nextTick(() => {
 			const ul = vDialog.value?.el?.querySelector('ul');
@@ -140,7 +126,8 @@ defineExpose({
 			>
 				<button
 					class="leading-tight text-center min-w-0 block hyphens-auto"
-					@click="selectChampion(champion)"
+					@click="selectedChampion = champion"
+					@dblclick="vDialog?.el?.close()"
 				>
 					<img
 						:title="champion.name"

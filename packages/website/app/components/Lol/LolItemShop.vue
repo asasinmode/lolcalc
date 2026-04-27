@@ -182,11 +182,6 @@ function sellAll() {
 	}
 }
 
-function rightClickItem(event: MouseEvent, item: IItem, buyability: IShopItem['buyability']) {
-	event.preventDefault();
-	!event.shiftKey && buyItem(item, buyability);
-}
-
 const displayedItemBuildsFrom = computed<IShopItem[] | undefined>(() =>
 	displayedItem.value?.item.from?.map((secondLevelItemId) => {
 		const secondLevelItem = shopItemsMap.value.get(secondLevelItemId)!;
@@ -231,25 +226,22 @@ function clearSearch() {
 	searchSelectedIndex.value = undefined;
 }
 
-function selectSearchResult(event: MouseEvent, index: number, isRightClick: boolean) {
-	event.preventDefault();
+function selectSearchResult(index: number, buy: boolean) {
 	const shopItem = searchResults.value[index]!;
-	if (isRightClick) {
+	if (buy) {
 		selectedItemId.value = shopItem.item.id;
 		searchCursoredOverIndex.value = undefined;
 		selectItem(shopItem, true);
-		buyItem(shopItem.item, shopItem.buyability);
-		closeSearch();
-		leaveTooltipableElement();
-		searchInput.value?.blur();
-	} else {
-		searchCursoredOverIndex.value = index;
-		searchSelectedIndex.value = index;
-		if (selectOrBuyIfDouble(shopItem, true)) {
+		if (shopItem.buyability === 1) {
+			buyItem(shopItem.item, shopItem.buyability);
 			closeSearch();
 			leaveTooltipableElement();
 			searchInput.value?.blur();
 		}
+	} else {
+		searchCursoredOverIndex.value = index;
+		searchSelectedIndex.value = index;
+		selectItem(shopItem, true);
 	}
 }
 
@@ -313,30 +305,6 @@ function onSearchKeydown(event: KeyboardEvent) {
 		}
 	}
 	event.preventDefault();
-}
-
-function onSearchHeaderClick(event: MouseEvent, isRightClick: boolean) {
-	event.preventDefault();
-	if (isRightClick) {
-		buyItem(searchCursoredOverItem.value!.item, searchCursoredOverItem.value!.buyability);
-	} else {
-		selectOrBuyIfDouble(searchCursoredOverItem.value!, true);
-	}
-}
-
-let lastLeftClicked: [time: number, itemId: string] | undefined;
-
-function selectOrBuyIfDouble(item: IShopItem, overwriteDisplayed: boolean): boolean {
-	const now = Date.now();
-	if (lastLeftClicked && item.item.id === lastLeftClicked[1] && ((now - lastLeftClicked[0]) < 500)) {
-		buyItem(item.item, item.buyability);
-		lastLeftClicked = undefined;
-		return true;
-	}
-
-	lastLeftClicked = [now, item.item.id];
-	selectItem(item, overwriteDisplayed);
-	return false;
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Shop');
@@ -489,8 +457,9 @@ defineExpose({
 								selected: searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
 							}"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
-							@click="selectSearchResult($event, index, false)"
-							@click.right="selectSearchResult($event, index, true)"
+							@click="selectSearchResult(index, false)"
+							@click.right.prevent="selectSearchResult(index, true)"
+							@dblclick="selectSearchResult(index, true)"
 						>
 							<img
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
@@ -513,7 +482,9 @@ defineExpose({
 							:damage-source="damageSource"
 							header-tag="button"
 							source="Shop"
-							@header-click="onSearchHeaderClick"
+							@header-click.prevent="selectItem(searchCursoredOverItem!, true)"
+							@header-r-click.prevent="buyItem(searchCursoredOverItem!.item, searchCursoredOverItem!.buyability)"
+							@header-dbl-click.prevent="buyItem(searchCursoredOverItem!.item, searchCursoredOverItem!.buyability)"
 						/>
 					</section>
 				</div>
@@ -606,8 +577,9 @@ defineExpose({
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
-							@click="selectOrBuyIfDouble(shopItem, true)"
-							@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
+							@click="selectItem(shopItem, true)"
+							@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
+							@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 						>
 							<span>{{ shopItem.item.name }}</span>
 							<img
@@ -645,10 +617,11 @@ defineExpose({
 							:data-bought="shopItem.isBought ? '' : undefined"
 							:data-legendary="shopItem.isLegendary ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
-							@click="selectOrBuyIfDouble(shopItem, true)"
-							@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
-							@keydown.space="selectItem(shopItem, true)"
-							@keydown.enter="buyItem(shopItem.item, shopItem.buyability)"
+							@click="selectItem(shopItem, true)"
+							@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
+							@dblclick="buyItem(shopItem.item, shopItem.buyability)"
+							@keydown.space.prevent="selectItem(shopItem, true)"
+							@keydown.enter.prevent="buyItem(shopItem.item, shopItem.buyability)"
 						>
 							<span>{{ shopItem.item.name }}</span>
 							<img
@@ -692,8 +665,9 @@ defineExpose({
 						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[i - 1]?.isLegendary ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
-						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
-						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
+						@click="selectItem(buildsIntoItems[i - 1]!, true)"
+						@click.right.prevent="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
+						@dblClick="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
 					>
 						<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.item.name }}</span>
 						<img
@@ -716,9 +690,10 @@ defineExpose({
 						:data-buyability="buildsIntoItems[6]?.buyability"
 						:data-bought="buildsIntoItems[6]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[6]?.isLegendary ? '' : undefined"
-						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
-						@click.right="rightClickItem($event, buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
+						@click="selectItem(buildsIntoItems[6]!, true)"
+						@click.right.prevent="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
+						@dblClick="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 					>
 						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6].item.name }}</span>
 						<img
@@ -749,7 +724,8 @@ defineExpose({
 								:data-legendary="shopItem.isLegendary ? '' : undefined"
 								@mouseenter="enterTooltipableElement($event, shopItem)"
 								@click="selectBuildsIntoMoreItem(shopItem)"
-								@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
+								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
+								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 							>
 								<img
 									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
@@ -776,9 +752,10 @@ defineExpose({
 					:shop-item="displayedItem"
 					:data-legendary="displayedItem.isLegendary ? '' : undefined"
 					:class="{ selected: selectedItem?.item.id === displayedItem.item.id }"
-					@click="selectOrBuyIfDouble(displayedItem, false)"
-					@click.right="rightClickItem($event, displayedItem.item, displayedItem.buyability)"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
+					@click="selectItem(displayedItem, false)"
+					@click.right.prevent="buyItem(displayedItem.item, displayedItem.buyability)"
+					@dblclick="buyItem(displayedItem.item, displayedItem.buyability)"
 				/>
 				<ul
 					v-if="displayedItemBuildsFrom?.length"
@@ -793,9 +770,10 @@ defineExpose({
 							component
 							:shop-item="secondLevelBuildsFromItem"
 							:class="{ selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id }"
-							@click="selectOrBuyIfDouble(secondLevelBuildsFromItem, false)"
-							@click.right="rightClickItem($event, secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
+							@click="selectItem(secondLevelBuildsFromItem, false)"
+							@click.right.prevent="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
+							@dblclick="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 						/>
 						<ul v-if="secondLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
 							<li
@@ -806,9 +784,10 @@ defineExpose({
 									component
 									:shop-item="thirdLevelBuildsFromItem"
 									:class="{ selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id }"
-									@click="selectOrBuyIfDouble(thirdLevelBuildsFromItem, false)"
-									@click.right="rightClickItem($event, thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
+									@click="selectItem(thirdLevelBuildsFromItem, false)"
+									@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
+									@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 								/>
 							</li>
 						</ul>

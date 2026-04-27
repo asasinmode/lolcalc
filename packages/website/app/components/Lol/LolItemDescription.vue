@@ -4,7 +4,9 @@ import type { IItemDescriptionProps } from '~/utils/types';
 const props = defineProps<IItemDescriptionProps>();
 
 defineEmits<{
-	headerClick: [event: MouseEvent, isRightClick: boolean];
+	headerClick: [event: MouseEvent];
+	headerRClick: [event: MouseEvent];
+	headerDblClick: [event: MouseEvent];
 }>();
 
 const text = useText();
@@ -52,8 +54,9 @@ defineExpose({ header });
 		:class="headerClass"
 		:data-show-subtitles="showHeaderSubtitles || undefined"
 		:data-inventory-view="isInventoryView || undefined"
-		@click="$emit('headerClick', $event, false)"
-		@click.right="$emit('headerClick', $event, true)"
+		@click="$emit('headerClick', $event)"
+		@click.right="$emit('headerRClick', $event)"
+		@dblclick="$emit('headerDblClick', $event)"
 	>
 		<img
 			v-show="computedDescription?.item"
