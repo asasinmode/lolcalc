@@ -65,7 +65,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	level: Ref<number>;
 	maxLevel = computed(() => this.roleQuest.value === 'top' ? 20 : 18);
 
-	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
+	isRanged = computed(() => this.champion.value && (this.stats.value.base.attackRange > 325));
 	stats = computed(() => calculateChampionStats(this));
 	itemDamageCalculationTarget = computed<IItemVariableCalculationTarget>(() => ({
 		isRanged: this.isRanged.value,
