@@ -650,8 +650,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (typeof data === 'object' && data && !Array.isArray(data)) {
 					for (const [key, value] of Object.entries(data)) {
 						if (typeof value === 'number') {
-							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constrain it to their min/max)
-							rv.internalData.value[key] = Math.round(value);
+							rv.internalData.value[key] = value;
 						}
 					}
 				}

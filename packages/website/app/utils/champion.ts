@@ -33,21 +33,21 @@ export const CHAMPION_SPECIFICS = {
 	Ambessa: {
 		setupData(self): { hasPassiveStack: number } {
 			return {
-				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
 			};
 		},
 	},
 	Amumu: {
 		setupData(self): { applyPassive: number } {
 			return {
-				applyPassive: clamp(0, self.internalData.value.applyPassive ?? 0, 1),
+				applyPassive: clamp(0, Math.round(self.internalData.value.applyPassive ?? 0), 1),
 			};
 		},
 	},
 	Anivia: {
 		setupData(self): { isEgg: number } {
 			return {
-				isEgg: clamp(0, self.internalData.value.isEgg ?? 0, 1),
+				isEgg: clamp(0, Math.round(self.internalData.value.isEgg ?? 0), 1),
 			};
 		},
 	},
@@ -100,50 +100,50 @@ export const CHAMPION_SPECIFICS = {
 	AurelionSol: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
 	Bard: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
 	Belveth: {
 		setupData(self): { passiveStacks: number; hasPassiveStack: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
-				hasPassiveStack: clamp(0, self.internalData.value.passiveStacks ?? 0, 1),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
+				hasPassiveStack: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), 1),
 			};
 		},
 	},
 	Darius: {
 		setupData(self): { isChampionAtMaxBleed: number } {
 			return {
-				isChampionAtMaxBleed: clamp(0, self.internalData.value.isChampionAtMaxBleed ?? 0, 1),
+				isChampionAtMaxBleed: clamp(0, Math.round(self.internalData.value.isChampionAtMaxBleed ?? 0), 1),
 			};
 		},
 	},
 	Diana: {
 		setupData(self): { isPassiveEmpowered: number } {
 			return {
-				isPassiveEmpowered: clamp(0, self.internalData.value.isPassiveEmpowered ?? 0, 1),
+				isPassiveEmpowered: clamp(0, Math.round(self.internalData.value.isPassiveEmpowered ?? 0), 1),
 			};
 		},
 	},
 	Draven: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
 	Ekko: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
@@ -151,21 +151,21 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
 	Garen: {
 		setupData(self): { isPassiveActive: number } {
 			return {
-				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+				isPassiveActive: clamp(0, Math.round(self.internalData.value.isPassiveActive ?? 0), 1),
 			};
 		},
 	},
 	Heimerdinger: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
@@ -173,7 +173,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 4,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -181,14 +181,14 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 8,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
 	Jhin: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
@@ -196,7 +196,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -204,7 +204,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 4,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
-				passiveStacksOnTarget: clamp(0, self.internalData.value.passiveStacksOnTarget ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -219,35 +219,35 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { form: number } {
 			return {
-				form: clamp(0, self.internalData.value.form ?? 0, this.FORM_OPTIONS.rhaast),
+				form: clamp(0, Math.round(self.internalData.value.form ?? 0), this.FORM_OPTIONS.rhaast),
 			};
 		},
 	},
 	Kindred: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
 	Kled: {
 		setupData(self): { isDismounted: number } {
 			return {
-				isDismounted: clamp(0, self.internalData.value.isDismounted ?? 0, 1),
+				isDismounted: clamp(0, Math.round(self.internalData.value.isDismounted ?? 0), 1),
 			};
 		},
 	},
 	LeeSin: {
 		setupData(self): { hasPassiveStack: number } {
 			return {
-				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
 			};
 		},
 	},
 	Mordekaiser: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
@@ -255,7 +255,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 7,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -267,14 +267,14 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { passiveVariantActive: number } {
 			return {
-				passiveVariantActive: clamp(0, self.internalData.value.passiveVariantActive ?? 0, this.PASSIVE_OPTIONS.towardsChampion),
+				passiveVariantActive: clamp(0, Math.round(self.internalData.value.passiveVariantActive ?? 0), this.PASSIVE_OPTIONS.towardsChampion),
 			};
 		},
 	},
 	Nunu: {
 		setupData(self): { isPassiveActive: number } {
 			return {
-				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+				isPassiveActive: clamp(0, Math.round(self.internalData.value.isPassiveActive ?? 0), 1),
 			};
 		},
 	},
@@ -282,7 +282,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 2,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
-				passiveStacksOnTarget: clamp(0, self.internalData.value.passiveStacksOnTarget ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -295,9 +295,9 @@ export const CHAMPION_SPECIFICS = {
 		setupData(self): IDamageSourceInternalDataBase & { masterworkItemSlot: number; passiveUpgradedAllies: number } {
 			return {
 				masterworkItemSlot: self.level.value >= this.MASTERWORK_LEVEL
-					? clamp(1, self.internalData.value.masterworkItemSlot ?? 0, 6)
+					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 0), 6)
 					: 0,
-				passiveUpgradedAllies: clamp(0, self.internalData.value.passiveUpgradedAllies ?? 0, this.calcMaxUpgradedAllies(self)),
+				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), this.calcMaxUpgradedAllies(self)),
 				_watchHandles: markRaw([watch(self.level, () => {
 					if (self.level.value < this.MASTERWORK_LEVEL) {
 						self.internalData.value.masterworkItemSlot = 0;
@@ -311,7 +311,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
-				passiveStacksOnTarget: clamp(0, self.internalData.value.passiveStacksOnTarget ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -319,15 +319,15 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number; isPassiveMSActive: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
 	Rumble: {
 		setupData(self): { isOverheated: number } {
 			return {
-				isOverheated: clamp(0, self.internalData.value.isOverheated ?? 0, 1),
+				isOverheated: clamp(0, Math.round(self.internalData.value.isOverheated ?? 0), 1),
 			};
 		},
 	},
@@ -343,21 +343,21 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.PASSIVE_OPTIONS.s),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.PASSIVE_OPTIONS.s),
 			};
 		},
 	},
 	Sejuani: {
 		setupData(self): { isPassiveActive: number } {
 			return {
-				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+				isPassiveActive: clamp(0, Math.round(self.internalData.value.isPassiveActive ?? 0), 1),
 			};
 		},
 	},
 	Senna: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
@@ -365,14 +365,14 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 20,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
 	Shyvana: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
@@ -380,14 +380,14 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 9,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
 	Smolder: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
@@ -395,28 +395,28 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 120,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
 	Soraka: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
 	Swain: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
 	Sylas: {
 		setupData(self): { hasPassiveStack: number } {
 			return {
-				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
 			};
 		},
 	},
@@ -424,42 +424,42 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 120,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
 	Taliyah: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
 	Taric: {
 		setupData(self): { hasPassiveStack: number } {
 			return {
-				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
 			};
 		},
 	},
 	Teemo: {
 		setupData(self): { isPassiveASActive: number } {
 			return {
-				isPassiveASActive: clamp(0, self.internalData.value.isPassiveASActive ?? 0, 1),
+				isPassiveASActive: clamp(0, Math.round(self.internalData.value.isPassiveASActive ?? 0), 1),
 			};
 		},
 	},
 	Thresh: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
 	Udyr: {
 		setupData(self): { hasPassiveStack: number } {
 			return {
-				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
 			};
 		},
 	},
@@ -471,28 +471,28 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { passiveVariantActive: number } {
 			return {
-				passiveVariantActive: clamp(0, self.internalData.value.passiveVariantActive ?? 0, this.PASSIVE_OPTIONS.champion),
+				passiveVariantActive: clamp(0, Math.round(self.internalData.value.passiveVariantActive ?? 0), this.PASSIVE_OPTIONS.champion),
 			};
 		},
 	},
 	Vayne: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
 	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
 	},
 	Viktor: {
 		MAX_PASSIVE_UPGRADES_MASK: 2 ** 4,
 		setupData(self): { passiveAbilityUpgradesMask: number } {
-			let passiveAbilityUpgradesMask = clamp(0, self.internalData.value.passiveAbilityUpgradesMask ?? 0, this.MAX_PASSIVE_UPGRADES_MASK);
+			let passiveAbilityUpgradesMask = clamp(0, Math.round(self.internalData.value.passiveAbilityUpgradesMask ?? 0), this.MAX_PASSIVE_UPGRADES_MASK);
 
 			/* unevolve R if not all basic are evolved */
 			const rBit = 1 << 3;
@@ -510,7 +510,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -518,7 +518,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -526,7 +526,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 12,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
