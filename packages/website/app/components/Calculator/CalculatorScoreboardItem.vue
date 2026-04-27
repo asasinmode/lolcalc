@@ -1623,6 +1623,10 @@ defineExpose({ el });
 				> label > span:last-child {
 					--at-apply: 'size-5 bg-black text-white b b-[--ui-btn-border-clr] text-center text-sm/4 rounded-full grid-center';
 				}
+
+				> :is(select:hover, select:focus-visible) + label > span:last-child {
+					--at-apply: 'bg-neutral-800';
+				}
 			}
 		}
 
