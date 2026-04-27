@@ -98,12 +98,12 @@ watch(() => sourceOptions.value.length || targetOptions.value.length, (value) =>
 
 function copyFrom(event: SubmitEvent) {
 	const copyFromId = new FormData(event.target as HTMLFormElement).get('fromId')! as string;
-	let stats = event.submitter?.dataset.value as 'base' | 'total';
+	let stats = event.submitter?.dataset.value as 'baseOnLevel' | 'total';
 	if (!stats || !copyFromId) {
 		return;
 	}
-	if (stats !== 'base' && stats !== 'total') {
-		stats = 'base';
+	if (stats !== 'baseOnLevel' && stats !== 'total') {
+		stats = 'baseOnLevel';
 	}
 
 	const source = damageSources.value.find(source => source.id === copyFromId) ?? damageTargets.value.find(source => source.id === copyFromId);
@@ -176,7 +176,7 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 					:disabled="!copyStatsFrom"
 					class="pretend-ui-btn"
 					type="submit"
-					data-value="base"
+					data-value="baseOnLevel"
 					title="set to base stats"
 				>
 					base
