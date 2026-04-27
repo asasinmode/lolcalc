@@ -267,14 +267,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					if (~bootsIndex) {
 						this.items.value[bootsIndex] = undefined;
 						this.items.value[6] = boots;
-						cleanupItems(this.items.value);
 					}
 				} else if (this.items.value[6]?.isBoots) {
 					const firstEmptyIndex = this.items.value.indexOf(undefined);
 					if (~firstEmptyIndex) {
 						this.items.value[firstEmptyIndex] = this.items.value[6];
 						this.items.value[6] = undefined;
-						cleanupItems(this.items.value);
 					}
 				}
 
@@ -515,7 +513,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					rv.items.value[i] = item;
 				}
 			}
-			cleanupItems(rv.items.value);
 			handleMidQuestBoots(rv.items.value, rv.roleQuest.value);
 		}
 
@@ -682,7 +679,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return rv;
 	}
 
-	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {
+	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true, slotIndex?: number): undefined {
 		this.itemsUndoSnapshots.value.push([...this.items.value]);
 		if (consumeComponents) {
 			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
@@ -693,6 +690,17 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (this.roleQuest.value === 'bot' && item.isBoots) {
 			this.items.value[6] = item;
+		} else if (slotIndex !== undefined) {
+			const itemAtSlot = this.items.value[slotIndex];
+			this.items.value[slotIndex] = item;
+			if (itemAtSlot) {
+				for (let i = 0; i < 6; i++) {
+					if (!this.items.value[i]) {
+						this.items.value[i] = itemAtSlot;
+						break;
+					}
+				}
+			}
 		} else {
 			for (let i = 0; i < 6; i++) {
 				if (!this.items.value[i]) {
@@ -702,7 +710,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 		}
 
-		cleanupItems(this.items.value);
 		handleMidQuestBoots(this.items.value, this.roleQuest.value);
 	}
 
@@ -711,9 +718,39 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		if (item) {
 			this.itemsUndoSnapshots.value.push([...this.items.value]);
 			this.items.value[index] = undefined;
-			cleanupItems(this.items.value);
 			return item;
 		}
+	}
+
+	moveItem(item: IItem, targetSlotIndex: number, source: DamageSource, fromSlotIndex: number, allItems: Record<string, IItem>) {
+		let itemAtSlot = this.items.value[targetSlotIndex];
+		const isBotQuest = this.roleQuest.value === 'bot';
+
+		if (isBotQuest && item.isBoots) {
+			itemAtSlot = this.items.value[6];
+			targetSlotIndex = 6;
+			this.items.value[6] = item;
+		} else if (isBotQuest && targetSlotIndex === 6) {
+			this.addItem(item, allItems, false);
+			return;
+		} else {
+			this.items.value[targetSlotIndex] = item;
+		}
+
+		if (item.isBoots) {
+			const otherBootsIndex = this.items.value.findIndex((item, index) => item?.isBoots && index !== targetSlotIndex);
+			if (~otherBootsIndex) {
+				itemAtSlot = this.removeItem(otherBootsIndex)!;
+			}
+		}
+
+		itemAtSlot && source.addItem(
+			itemAtSlot,
+			allItems,
+			false,
+			!itemAtSlot.isBoots && fromSlotIndex === 6 ? undefined : fromSlotIndex,
+		);
+		handleMidQuestBoots(this.items.value, this.roleQuest.value);
 	}
 
 	getEffect(abilityId: IGameAbilityId): [IDamageSourceEffect, index: number] | undefined {
@@ -961,13 +998,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			isActive: computedSpecific.specific?.imgActive?.(this.internalItemData.value),
 		}))),
 	};
-}
-
-function cleanupItems(items: (IItem | undefined)[]): void {
-	const filledSlots = items.slice(0, 6).filter(Boolean);
-	for (let i = 0; i < 6; i++) {
-		items[i] = filledSlots[i];
-	}
 }
 
 function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampionRole): void {

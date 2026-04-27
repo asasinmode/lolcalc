@@ -254,27 +254,27 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 
 let itemDragData: {
 	source: DamageSource;
-	itemIndex: number;
+	slotIndex: number;
 	item: IItem;
 } | undefined;
 
-function onItemDragstart(event: DragEvent, source: DamageSource, itemIndex: number) {
+function onItemDragstart(event: DragEvent, source: DamageSource, slotIndex: number) {
 	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
 	itemDragData = {
 		source,
-		itemIndex,
-		item: source.items.value[itemIndex]!,
+		slotIndex,
+		item: source.items.value[slotIndex]!,
 	};
 }
 
 function onItemDragEnter(event: DragEvent, target: DamageSource) {
-	if (itemDragData && target !== itemDragData.source) {
-		(event.currentTarget as HTMLElement).dataset.dropBuyability = itemBuyability(itemDragData.item, target, items, false).toString();
+	if (itemDragData && itemDragData.source !== target) {
+		(event.currentTarget as HTMLElement).dataset.dropBuyability = itemBuyability(itemDragData.item, target, items, false, true, !globalKeyModifiers.value.alt).toString();
 	}
 }
 
 function onItemDragover(event: DragEvent, target: DamageSource) {
-	if (itemDragData && itemDragData.source !== target && itemBuyability(itemDragData.item, target, items, false) === 1) {
+	if (itemDragData && (itemDragData.source === target || itemBuyability(itemDragData.item, target, items, false, true, !globalKeyModifiers.value.alt) === 1)) {
 		event.preventDefault();
 	}
 }
@@ -284,19 +284,32 @@ function onItemDragLeave(event: DragEvent) {
 		!event.currentTarget || !event.relatedTarget
 		|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
 	) {
-		delete (event.currentTarget as HTMLElement).dataset.dropBuyability;
+		(event.currentTarget as HTMLElement).removeAttribute('data-drop-buyability');
 	}
 }
 
-function onItemDrop(event: DragEvent, target: DamageSource) {
+function onItemDrop(event: DragEvent, target: DamageSource, slotIndex?: number) {
 	if (event.target) {
-		delete (event.target as HTMLElement).dataset.dropBuyability;
+		let el = event.currentTarget as HTMLElement;
+		if (slotIndex !== undefined) {
+			el = el.parentElement!;
+		}
+		el.removeAttribute('data-drop-buyability');
 	}
 
-	if (itemDragData && itemBuyability(itemDragData.item, target, items, false) === 1) {
-		const { source, itemIndex } = itemDragData;
+	if (
+		itemDragData
+		&& ((target === itemDragData.source && !globalKeyModifiers.value.alt)
+			|| itemBuyability(itemDragData.item, target, items, false, true, !globalKeyModifiers.value.alt) === 1)
+	) {
+		const { source, slotIndex: itemIndex } = itemDragData;
 		const item = globalKeyModifiers.value.alt ? source.items.value[itemIndex]! : source.removeItem(itemIndex)!;
-		target.addItem(item, items, false);
+		/* if no target slot or copying and there's already an item at the index */
+		if (slotIndex === undefined || (globalKeyModifiers.value.alt && target.items.value[slotIndex])) {
+			target.addItem(item, items, false);
+		} else {
+			target.moveItem(item, slotIndex, itemDragData.source, itemDragData.slotIndex, items);
+		}
 	}
 	itemDragData = undefined;
 }
@@ -361,11 +374,11 @@ function setLocalMirrorLayout() {
 					@dragover.stop="onDragover($event, index, damageSources)"
 					@dragleave.stop="onDragleave"
 					@drop.stop="onDrop($event, index, damageSources)"
-					@item-dragstart="(event, itemIndex) => onItemDragstart(event, value, itemIndex)"
+					@item-dragstart="(event, slotIndex) => onItemDragstart(event, value, slotIndex)"
 					@item-list-dragenter="onItemDragEnter($event, value)"
 					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
-					@item-list-drop="onItemDrop($event, value)"
+					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
 				/>
 				<li>
 					<button
@@ -408,11 +421,11 @@ function setLocalMirrorLayout() {
 					@dragover.stop="onDragover($event, index, damageTargets)"
 					@dragleave.stop="onDragleave"
 					@drop.stop="onDrop($event, index, damageTargets)"
-					@item-dragstart="(event, itemIndex) => onItemDragstart(event, value, itemIndex)"
+					@item-dragstart="(event, slotIndex) => onItemDragstart(event, value, slotIndex)"
 					@item-list-dragenter="onItemDragEnter($event, value)"
 					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
-					@item-list-drop="onItemDrop($event, value)"
+					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
 				/>
 				<li>
 					<button

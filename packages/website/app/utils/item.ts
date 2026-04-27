@@ -532,6 +532,8 @@ export function itemBuyability(
 	target: DamageSource | undefined,
 	allItems: Record<string, IItem>,
 	consumeComponents = true,
+	transformBoots = false,
+	isMove = false,
 ): IShopItem['buyability'] {
 	let buyability: IShopItem['buyability'] = 1;
 
@@ -548,11 +550,11 @@ export function itemBuyability(
 
 	if (
 		(!target.isRanged.value && (RANGED_ONLY_ITEM_IDS as string[]).includes(item.id))
-		|| inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group)))
-		|| (target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
+		|| (!(transformBoots && isMove && item.isBoots) && inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
+		|| (!transformBoots && target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
 	) {
 		buyability = -1;
-	} else if (inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5 && (target.roleQuest.value !== 'bot' || inventoryAfterBuying[6])) {
+	} else if (!isMove && inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5 && (target.roleQuest.value !== 'bot' || inventoryAfterBuying[6])) {
 		buyability = 0;
 	}
 

@@ -26,8 +26,8 @@ const emit = defineEmits<{
 	itemListDragenter: [event: DragEvent];
 	itemListDragover: [event: DragEvent];
 	itemListDragleave: [event: DragEvent];
-	itemListDrop: [event: DragEvent];
-	itemDragstart: [event: DragEvent, itemIndex: number];
+	itemListDrop: [event: DragEvent, slotIndex: number | undefined];
+	itemDragstart: [event: DragEvent, slotIndex: number];
 	mounted: [];
 }>();
 
@@ -1019,9 +1019,13 @@ defineExpose({ el });
 			@dragenter="$emit('itemListDragenter', $event)"
 			@dragover="$emit('itemListDragover', $event)"
 			@dragleave="$emit('itemListDragleave', $event)"
-			@drop="$emit('itemListDrop', $event)"
+			@drop="$emit('itemListDrop', $event, undefined)"
 		>
-			<li v-for="i in 7" :key="i">
+			<li
+				v-for="i in 7"
+				:key="i"
+				@drop.stop="$emit('itemListDrop', $event, i - 1)"
+			>
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
@@ -1665,7 +1669,7 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'flex gap-0.5 h-[--item-size] self-center relative me-[--me] ms-[--ms] w-min';
+			--at-apply: 'flex h-[--item-size] self-center relative me-[--me] ms-[--ms] w-min';
 			grid-area: items;
 			anchor-name: --scoreboard-item-items;
 			--item-size: calc(8 * var(--spacing));
@@ -1673,6 +1677,16 @@ defineExpose({ el });
 			--ms: calc(5 * var(--spacing));
 
 			> li {
+				--at-apply: 'pe-0.5';
+
+				&:nth-child(6) {
+					--at-apply: 'pe-0';
+				}
+
+				&:last-child {
+					--at-apply: 'pe-0 ps-0.5';
+				}
+
 				> * {
 					--at-apply: 'bg-black size-[--item-size] inline-block cursor-default relative';
 
@@ -1751,40 +1765,24 @@ defineExpose({ el });
 				}
 			}
 
-			&[data-drop-buyability] {
-				> li {
-					--at-apply: 'op-50';
-				}
-
+			&[data-drop-buyability]:not([data-drop-buyability='1']) {
 				&::before {
-					--at-apply: 'inset-0 content-empty absolute z-10 bg-white/10';
+					--at-apply: 'pointer-events-none inset-0 content-empty absolute z-10 bg-white/10 bg-red/25';
 				}
 
 				&::after {
-					--at-apply: 'content-empty start-1/2 top-1/2 absolute translate-center size-4.5 bg-white';
-					mask: icon('i-ph:plus-bold') center / 100% 100% no-repeat;
+					--at-apply: 'pointer-events-none start-1/2 top-1/2 absolute translate-center tracking-wide bg-transparent size-auto text-white font-600 z-11';
+					-webkit-text-stroke: black 0.15em;
+					paint-order: stroke fill;
 				}
+			}
 
-				&:not([data-drop-buyability='1']) {
-					&::before {
-						--at-apply: 'bg-red/25';
-					}
+			&[data-drop-buyability='-1']::after {
+				content: 'INVALID';
+			}
 
-					&::after {
-						--at-apply: 'tracking-wide bg-transparent size-auto text-white font-600';
-						mask: unset;
-						-webkit-text-stroke: black 0.15em;
-						paint-order: stroke fill;
-					}
-				}
-
-				&[data-drop-buyability='-1']::after {
-					content: 'INVALID';
-				}
-
-				&[data-drop-buyability='0']::after {
-					content: 'FULL';
-				}
+			&[data-drop-buyability='0']::after {
+				content: 'FULL';
 			}
 		}
 
