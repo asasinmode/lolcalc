@@ -871,7 +871,7 @@ defineExpose({
 				sell all
 			</button>
 		</footer>
-		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
+		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="manual" class="hover-tooltip">
 			<LolItemDescription
 				:item="hoveredItem?.item"
 				:damage-source="damageSource"

@@ -1423,7 +1423,7 @@ defineExpose({
 								>
 								<span v-html="section.image ? section.name : 'loading...'" />
 								<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
-									<div v-if="section.abilityId.type === 'item'" popover="hint" class="hover-tooltip champion-item">
+									<div v-if="section.abilityId.type === 'item'" popover="manual" class="hover-tooltip champion-item">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 									</div>
 									<LolChampionAbilityHoverTooltip

@@ -67,7 +67,7 @@ defineExpose({ el });
 </script>
 
 <template>
-	<div ref="el" popover="hint" class="effect-hover-tooltip-container">
+	<div ref="el" popover="manual" class="effect-hover-tooltip-container">
 		<div class="hover-tooltip effect">
 			<img
 				v-show="!isLoading"

@@ -403,7 +403,12 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" class="hover-tooltip game-description">
+		<div
+			id="rune-select-dialog-hover-tooltip"
+			ref="runeDescriptionTooltip"
+			popover="manual"
+			class="hover-tooltip game-description"
+		>
 			<h4>{{ hoveredRune?.title }}</h4>
 			<div v-html="globalKeyModifiers.shift && hoveredRuneTooltip?.longReplaced || hoveredRuneTooltip?.shortReplaced" />
 			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />

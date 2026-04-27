@@ -50,7 +50,7 @@ defineExpose({ el });
 </script>
 
 <template>
-	<div ref="el" popover="hint" class="hover-tooltip champion-ability">
+	<div ref="el" popover="manual" class="hover-tooltip champion-ability">
 		<img
 			v-show="!isLoading"
 			:src="!isLoading && computedDescription ? abilityImage(computedDescription.variant.image, computedDescription.gameAbilityId.id, group) : undefined"

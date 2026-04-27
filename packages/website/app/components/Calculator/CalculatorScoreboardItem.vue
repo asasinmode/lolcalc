@@ -181,7 +181,7 @@ onMounted(() => {
 });
 
 function doubleClickToggle(event: MouseEvent) {
-	event.target === event.currentTarget && toggleExpanded()
+	event.target === event.currentTarget && toggleExpanded();
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
@@ -1050,7 +1050,7 @@ defineExpose({ el });
 				</component>
 			</li>
 		</ul>
-		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item">
+		<div ref="itemHoverTooltip" popover="manual" class="hover-tooltip champion-item">
 			<LolItemDescription
 				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
 				source="Inventory"
@@ -1120,7 +1120,7 @@ defineExpose({ el });
 					</template>
 					<ComingSoonCover feature="major runes" class="text-xs px-1 end-1/2 start-0 inset-y-0 absolute" />
 				</dl>
-				<div ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="hint">
+				<div ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="manual">
 					<h5>{{ hoveredRune?.name }}</h5>
 					<p class="game-description" v-html="hoveredRune?.description" />
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
@@ -1146,7 +1146,7 @@ defineExpose({ el });
 						</dd>
 					</template>
 				</dl>
-				<div ref="championStatTooltip" class="hover-tooltip champion-stat" popover="hint">
+				<div ref="championStatTooltip" class="hover-tooltip champion-stat" popover="manual">
 					<h5>{{ hoveredStat?.name }}</h5>
 					<p class="game-description" v-html="hoveredStat?.description" />
 					<dl>
