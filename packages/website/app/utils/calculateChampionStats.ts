@@ -75,16 +75,16 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	championSpecific?.hooks?.postInit?.(source, initialStats, baseStats, bonusStats);
 
 	const levelStats: Partial<IChampionStats> = {
-		hp: champion.stats.hpperlevel,
-		hpRegen: champion.stats.hpregenperlevel,
-		mana: champion.stats.mpperlevel,
-		manaRegen: champion.stats.mpregenperlevel,
-		attackDamage: champion.stats.attackdamageperlevel,
-		armor: champion.stats.armorperlevel,
-		magicResist: champion.stats.spellblockperlevel,
-		attackSpeed: champion.stats.attackspeedperlevel * 0.01 * champion.stats.attackspeedratio,
-		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel / 100,
-		critChance: champion.stats.critperlevel,
+		hp: initialStats.hp,
+		hpRegen: initialStats.hpRegen,
+		mana: initialStats.mana,
+		manaRegen: initialStats.manaRegen,
+		attackDamage: initialStats.attackDamage,
+		armor: initialStats.armor,
+		magicResist: initialStats.magicResist,
+		attackSpeed: champion.stats.attackspeedperlevel * 0.01 * initialStats.attackSpeedRatio,
+		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel / 100 + baseStats.bonusAttackSpeedPercent,
+		critChance: initialStats.critChance,
 	};
 
 	// TODO health/resource can calculate decimal because of this, make sure it works
@@ -98,6 +98,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		([statName, statValue]) => [statName, statValue
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
 	)) as IChampionStats;
+
+	baseOnLevelStats.attackSpeed += baseOnLevelStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
 
 	const itemStats = Object.keys(baseStats).reduce((acc, statName) => ({
 		...acc,
@@ -125,9 +127,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const baseWithFlatFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemStats.moveSpeed);
 
 	itemStats.moveSpeed += baseWithFlatFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
-	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio;
+	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 
-	// TODO make sure it works, calculate rune shards
+	// TODO make sure it works, calculate rune shards (use initialStats instead champion.stats)
 	const [_adaptiveForceTargetStat, adaptiveForceStatVariable, _adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
 
 	// const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);
@@ -162,7 +164,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	// TODO figure out if its ok to do it
 	if (champion.partype !== 'Mana') {
 		// TODO should be done by CHAMPION_SPECIFICS like `.postTotal()`
-		totalStats.mana = champion.id === 'Viego' ? 0 : champion.stats.mp ?? 0;
+		totalStats.mana = champion.id === 'Viego' ? 0 : baseStats.mana ?? 0;
 	}
 
 	return {
