@@ -19,7 +19,7 @@ export const RUNE_SPECIFICS = {
 		adaptive: {
 			POSSIBLE_DYNAMIC_VALUES: { f1: [0, 1] } satisfies IPossibleDynamicValues,
 			calculateDynamicVariables(self) {
-				const { adaptiveForceStatVariable } = self.stats.value;
+				const { adaptiveForceStatVariable } = self.stats.value.meta;
 
 				return {
 					f1: adaptiveForceStatVariable,

@@ -178,6 +178,10 @@ export function useCalculatorState(
 		if (version !== STATE_VERSION) {
 			damageSources.value.push(new DamageSource());
 			damageTargets.value.push(new DamageSource());
+			if (resultsTable.value) {
+				resultsTable.value.resultColumns[0]!.source = damageSources.value[0];
+				resultsTable.value.resultColumns[0]!.target = damageTargets.value[0];
+			}
 			return;
 		}
 
@@ -283,6 +287,11 @@ export function useCalculatorState(
 					}
 				}
 			}
+		}
+
+		if (damageSources.value.length === 1 && damageTargets.value.length === 1) {
+			resultsTable.value.resultColumns[0]!.source = damageSources.value[0];
+			resultsTable.value.resultColumns[0]!.target = damageTargets.value[0];
 		}
 	}
 

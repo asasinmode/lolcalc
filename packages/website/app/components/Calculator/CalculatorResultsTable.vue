@@ -552,22 +552,30 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 	emit('configurationChanged');
 	const addedIds = currIds.filter(id => !prevIds.includes(id));
 	const removedIds = prevIds.filter(id => !currIds.includes(id));
+	const columnProperty = target === props.damageSources ? 'source' : 'target';
 
+	let isFirstAffected = false;
 	for (const id of removedIds) {
 		damageSourceWatchers.get(id)?.();
 		damageSourceWatchers.delete(id);
 
-		for (const column of resultColumns.value) {
-			const columnProperty = target === props.damageSources ? 'source' : 'target';
+		for (let i = 0; i < resultColumns.value.length; i++) {
+			const column = resultColumns.value[i]!;
 			if (column[columnProperty]?.id === id) {
 				column[columnProperty] = undefined;
 				recalculateColumn(column);
+				if (i === 0) {
+					isFirstAffected = true;
+				}
 			}
 		}
 	}
 
 	for (const id of addedIds) {
 		const source = (target.find(damageSource => damageSource.id === id))!;
+		if (target[0] === source) {
+			isFirstAffected = true;
+		}
 		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
 			emit('configurationChanged');
 			const columns = resultColumns.value.filter(column => column.source?.id === source.id || column.target?.id === source.id);
@@ -575,6 +583,10 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 				recalculateColumn(column);
 			}
 		}));
+	}
+
+	if (isFirstAffected && resultColumns.value.length === 1 && target.length === 1) {
+		resultColumns.value[0]![columnProperty] ??= target[0];
 	}
 }
 
@@ -2124,13 +2136,15 @@ defineExpose({
 			}
 		}
 
-		> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
-		> tbody[aria-labelledby] > tr > td.highlighted {
-			background-image: linear-gradient(
-				to right,
-				oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.12),
-				oklch(from var(--target-clr, var(--col-damage-target-clr, white)) l c h / 0.12)
-			);
+		&:not([inert]) {
+			> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
+			> tbody[aria-labelledby] > tr > td.highlighted {
+				background-image: linear-gradient(
+					to right,
+					oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.12),
+					oklch(from var(--target-clr, var(--col-damage-target-clr, white)) l c h / 0.12)
+				);
+			}
 		}
 
 		> thead > tr:nth-child(2) > td,
