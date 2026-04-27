@@ -19,10 +19,10 @@ interface IStatsCalculationResult {
 }
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
-	const level = toValue(source.level);
-	const champion = toValue(source.champion);
-	const items = toValue(source.items);
-	const runes = toValue(source.runes);
+	const level = source.level.value;
+	const champion = source.champion.value;
+	const items = source.items.value;
+	const runes = source.runes.value;
 
 	const initialStats: IChampionStats = {
 		hp: champion?.stats.hp ?? 0,
@@ -70,6 +70,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			},
 		};
 	}
+
+	const championSpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id];
+	championSpecific?.hooks?.postInit?.(source, initialStats, baseStats, bonusStats);
 
 	const levelStats: Partial<IChampionStats> = {
 		hp: champion.stats.hpperlevel,

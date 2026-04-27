@@ -22,6 +22,13 @@ export const CHAMPION_SPECIFICS = {
 			},
 			)) as IChampionStats;
 		},
+		hooks: {
+			postInit(self, _initialStats, baseStats) {
+				for (const key in baseStats) {
+					baseStats[key as IChampionStatName] = self.internalData.value[key as IChampionStatName];
+				}
+			},
+		},
 	},
 	Ambessa: {
 		setupData(self): { hasPassiveStack: number } {
@@ -533,6 +540,11 @@ export type IChampionSpecific = IProviderGroupDataSetup & {
 } & {
 	/** champion's possible dynamic values, can be overriden per ability and ability variant */
 	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+	/** any hooks that will be called at various points in calculations, if provided */
+	hooks?: {
+		/** runs after resolving the champion in `calculateChampionStats`. Receives any `IStatsCalculationResult` present at this point */
+		postInit?: (self: DamageSource, initialStats: IChampionStats, baseStats: IChampionStats, bonusStats: IChampionStats) => void;
+	};
 	[key: string]: any;
 };
 

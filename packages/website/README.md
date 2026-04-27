@@ -167,6 +167,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] in/decrement effects in scoreboard item
   - [ ] "tutorial library" to review info
   - [ ] item/passive extra popped up, look here it is, use it
+  - [ ] double click to select & close champ select
 - [ ] keyboard navigation
   - [ ] somehow right clicks, like clearing selects/removing items
   - [ ] show hover tooltips when navigated to with keyboard
