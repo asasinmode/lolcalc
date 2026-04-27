@@ -366,6 +366,10 @@ function toggleResultsSection(sectionId: string) {
 	emit('configurationChanged');
 }
 
+function preventDoubleClickSelect(event: MouseEvent) {
+	event.detail > 1 && event.preventDefault();
+}
+
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
 	const computedItem = section.abilityId.type === 'item'
 		? source?.computed.items.value.find(item =>
@@ -1346,6 +1350,8 @@ defineExpose({
 						? 'before'
 						: (!expandedSections.includes(section.id) && sectionDragDropIndex === index + 1) ? 'after' : undefined"
 					:aria-busy="!section.image"
+					@mousedown="preventDoubleClickSelect"
+					@dblclick="toggleResultsSection(section.id)"
 					@dragenter="onResultSectionDragenter($event, index, true)"
 					@dragover="onResultSectionDragover($event, index, true)"
 					@dragleave="onResultSectionDragleave"
@@ -1358,7 +1364,8 @@ defineExpose({
 								class="pretend-ui-btn"
 								:disabled="index === 0"
 								draggable="true"
-								@click="moveResultSection(index, index - 1)"
+								@dblclick.stop=""
+								@click.stop="moveResultSection(index, index - 1)"
 								@dragstart="startResultSectionDrag($event, index)"
 								@dragend="endResultSectionDrag"
 							>
@@ -1370,7 +1377,8 @@ defineExpose({
 								class="pretend-ui-btn"
 								draggable="true"
 								:disabled="index === (resultSections.length - 1)"
-								@click="moveResultSection(index, index + 1)"
+								@dblclick.stop=""
+								@click.stop="moveResultSection(index, index + 1)"
 								@dragstart="startResultSectionDrag($event, index)"
 								@dragend="endResultSectionDrag"
 							>
@@ -1381,7 +1389,8 @@ defineExpose({
 								class="pretend-ui-btn remove"
 								:title="section.isCustomTotal ? 'clear' : 'remove'"
 								:disabled="section.isCustomTotal ? !customTotalRows.length : section.isPermanent"
-								@click="removeResultsSection(index)"
+								@dblclick.stop=""
+								@click.stop="removeResultsSection(index)"
 							>
 								<span>{{ section.isCustomTotal ? 'clear' : 'remove' }}</span>
 								<Icon :class="section.isCustomTotal ? 'i-ph:eraser' : 'i-ph:trash'" />
@@ -1391,7 +1400,8 @@ defineExpose({
 								class="pretend-ui-btn"
 								:aria-expanded="expandedSections.includes(section.id)"
 								:aria-controls="`results-table-section-body-${section.id}`"
-								@click="toggleResultsSection(section.id)"
+								@dblclick.stop=""
+								@click.stop="toggleResultsSection(section.id)"
 							>
 								<span>
 									{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
