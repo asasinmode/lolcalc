@@ -914,6 +914,19 @@ defineExpose({
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns: auto 1fr 32rem;
 
+		:where(
+			#item-shop-search-listbox > li,
+			#builds-into-more-list > li > button,
+			#item-shop-builds-into-list > li > button,
+			.item-shop-item-btn
+		) {
+			--at-apply: 'relative';
+
+			> .sr-status {
+				--at-apply: 'block text-transparent tracking-[-1em] absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
+			}
+		}
+
 		> header {
 			--at-apply: 'grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center';
 			grid-area: header;
@@ -980,6 +993,13 @@ defineExpose({
 
 							> span:last-of-type {
 								--at-apply: 'text-neutral-300 font-500';
+							}
+
+							> .sr-status {
+								--at-apply: '-translate-full';
+								--offset: calc(0.5 * var(--item-img-size));
+								--check-icon-start: var(--offset);
+								--check-icon-top: var(--offset);
 							}
 						}
 					}
@@ -1411,17 +1431,6 @@ defineExpose({
 			--width: 36rem;
 			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
-		}
-
-		#item-shop-search-listbox > li,
-		#builds-into-more-list > li > button,
-		#item-shop-builds-into-list > li > button,
-		.item-shop-item-btn {
-			--at-apply: 'relative';
-
-			> .sr-status {
-				--at-apply: 'block text-transparent tracking-[-1em] absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
-			}
 		}
 
 		:is(
