@@ -549,7 +549,7 @@ export function itemBuyability(
 	}
 
 	if (
-		(!target.isRanged.value && (RANGED_ONLY_ITEM_IDS as string[]).includes(item.id))
+		(target.champion.value && !target.isRanged.value && (RANGED_ONLY_ITEM_IDS as string[]).includes(item.id))
 		|| (!(transformBoots && isMove && item.isBoots) && inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
 		|| (!transformBoots && target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
 	) {

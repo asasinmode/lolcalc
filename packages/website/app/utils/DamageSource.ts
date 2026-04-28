@@ -505,7 +505,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			} catch {}
 		}
 
-		const itemIds = rawItemIds?.split('-');
+		const itemIds = rawItemIds?.split('-').filter(Boolean);
 		if (itemIds?.length) {
 			for (let i = 0; i < rv.items.value.length; i++) {
 				const item = items[itemIds[i]!];
