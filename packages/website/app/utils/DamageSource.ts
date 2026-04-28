@@ -428,8 +428,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			shards.join(''),
 			roundVariable(this.currentHealth.value, 3),
 			roundVariable(this.currentAbilityResource.value, 3),
-			Object.values(this.abilityLevels.value).join('-'),
-			Object.values(this.abilityVariantsIndexes.value).join('-'),
+			Object.values(this.abilityLevels.value).map(level => level ?? 0).join(''),
+			Object.values(this.abilityVariantsIndexes.value).join(''),
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
@@ -585,11 +585,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawAbilityLevels?.length) {
-			const abilityLevels = rawAbilityLevels.split('-');
 			const abilityKeys = Object.keys(rv.abilityLevels.value);
 			for (let i = 0; i < abilityKeys.length; i++) {
-				if (abilityLevels[i]) {
-					const parsedLevel = Number.parseInt(abilityLevels[i]!);
+				if (rawAbilityLevels[i]) {
+					const parsedLevel = Number.parseInt(rawAbilityLevels[i]!);
 					if (!Number.isNaN(parsedLevel)) {
 						const abilityKey = abilityKeys[i] as INonPassiveAbilityKey;
 						rv.abilityLevels.value[abilityKey]
@@ -600,11 +599,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawAbilityVariants?.length) {
-			const abilityVariants = rawAbilityVariants.split('-');
 			const abilityKeys = Object.keys(rv.abilityVariantsIndexes.value);
 			for (let i = 0; i < abilityKeys.length; i++) {
-				if (abilityVariants[i]) {
-					const parsedVariant = Number.parseInt(abilityVariants[i]!);
+				if (rawAbilityVariants[i]) {
+					const parsedVariant = Number.parseInt(rawAbilityVariants[i]!);
 					if (!Number.isNaN(parsedVariant)) {
 						const abilityKey = abilityKeys[i] as IChampionAbilityKey;
 						rv.abilityVariantsIndexes.value[abilityKey]
