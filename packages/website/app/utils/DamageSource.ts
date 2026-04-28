@@ -423,11 +423,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.listedChampion.value?.key,
 			this.level.value,
 			this.items.value.map(item => item?.id).filter(Boolean).join('-'),
-			runePathKeys.indexOf(this.runes.value.paths.primary),
-			primarySlots.join('-'),
-			this.runes.value.paths.secondary && runePathKeys.indexOf(this.runes.value.paths.secondary),
-			secondarySlots.join('-'),
-			shards.join('-'),
+			`${runePathKeys.indexOf(this.runes.value.paths.primary)}${primarySlots.join('')}`,
+			`${this.runes.value.paths.secondary ? runePathKeys.indexOf(this.runes.value.paths.secondary) : ''}${secondarySlots.join('')}`,
+			shards.join(''),
 			roundVariable(this.currentHealth.value, 3),
 			roundVariable(this.currentAbilityResource.value, 3),
 			Object.values(this.abilityLevels.value).join('-'),
@@ -458,10 +456,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			championKey,
 			rawLevel,
 			rawItemIds,
-			primaryRunePathIndex,
-			rawPrimarySlots,
-			secondaryRunePathIndex,
-			rawSecondarySlots,
+			rawPrimaryRunes,
+			rawSecondaryRunes,
 			rawShards,
 			rawCurrentHealth,
 			rawCurrentAbilityResource,
@@ -517,52 +513,49 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		const runePaths = Object.keys(runes.paths);
-		if (primaryRunePathIndex) {
+		if (rawPrimaryRunes?.length) {
+			const primaryRunePathIndex = rawPrimaryRunes[0]!;
 			const parsedIndex = Number.parseInt(primaryRunePathIndex);
 			if (runePaths[parsedIndex]) {
 				rv.runes.value.paths.primary = runePaths[parsedIndex] as IRunePathName;
-			}
-		}
 
-		if (rawPrimarySlots?.length) {
-			for (const slot of parseStringifiedRunePathSlots(rawPrimarySlots)) {
-				if (slot) {
-					const [slotIndex, optionIndex] = slot;
-					if (slotIndex >= 0 && slotIndex <= 3) {
-						const slotOptions = runes.paths[rv.runes.value.paths.primary].slots[slotIndex]!;
-						const slotOptionKeys = Object.keys(slotOptions);
-						rv.runes.value.paths.primarySlots[slotIndex] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
+				for (const slot of parseStringifiedRunePathSlots(rawPrimaryRunes.slice(1))) {
+					if (slot) {
+						const [slotIndex, optionIndex] = slot;
+						if (slotIndex >= 0 && slotIndex <= 3) {
+							const slotOptions = runes.paths[rv.runes.value.paths.primary].slots[slotIndex]!;
+							const slotOptionKeys = Object.keys(slotOptions);
+							rv.runes.value.paths.primarySlots[slotIndex] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
+						}
 					}
 				}
 			}
 		}
 
-		if (secondaryRunePathIndex) {
-			const parsedIndex = Number.parseInt(secondaryRunePathIndex);
+		if (rawSecondaryRunes?.length) {
+			const rawSecondaryRunePathIndex = rawSecondaryRunes[0]!;
+			const parsedIndex = Number.parseInt(rawSecondaryRunePathIndex);
 			if (runePaths[parsedIndex]) {
 				rv.runes.value.paths.secondary = runePaths[parsedIndex] as IRunePathName;
-			}
-		}
 
-		if (rv.runes.value.paths.secondary && rawSecondarySlots?.length) {
-			const slots = parseStringifiedRunePathSlots(rawSecondarySlots);
-			for (let i = 0; i < 2; i++) {
-				if (slots[i]) {
-					const [slotIndex, optionIndex] = slots[i]!;
-					const slotOptions = runes.paths[rv.runes.value.paths.secondary].slots[slotIndex];
-					if (slotOptions) {
-						const slotOptionKeys = Object.keys(slotOptions);
-						rv.runes.value.paths.secondarySlots[i] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
+				const slots = parseStringifiedRunePathSlots(rawSecondaryRunes.slice(1));
+				for (let i = 0; i < 2; i++) {
+					if (slots[i]) {
+						const [slotIndex, optionIndex] = slots[i]!;
+						const slotOptions = runes.paths[rv.runes.value.paths.secondary].slots[slotIndex];
+						if (slotOptions) {
+							const slotOptionKeys = Object.keys(slotOptions);
+							rv.runes.value.paths.secondarySlots[i] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
+						}
 					}
 				}
 			}
 		}
 
 		if (rawShards?.length) {
-			const shardIndexes = rawShards.split('-');
 			let i = 0;
 			for (const [shardSlotKey, shardSlot] of Object.entries(runes.shards)) {
-				const shardOptionIndex = shardIndexes[i];
+				const shardOptionIndex = rawShards[i];
 				if (shardOptionIndex !== undefined) {
 					const parsedIndex = Number.parseInt(shardOptionIndex);
 					if (!Number.isNaN(parsedIndex)) {
@@ -1333,22 +1326,29 @@ function objectKeyIndex<T extends object>(key: keyof T | undefined, object: T): 
 }
 
 function parseStringifiedRunePathSlots(data: string): ([slotIndex: number, slotOptionIndex: number] | undefined)[] {
-	return data.split('-').map((value): [slotIndex: number, slotOptionIndex: number] | undefined => {
-		const rawSlotIndex = value[0];
-		const rawOptionIndex = value[1];
+	const rv: ([number, number] | undefined)[] = [];
+
+	let rawSlotIndex, rawOptionIndex;
+	do {
+		rawSlotIndex = data[0];
+		rawOptionIndex = data[1];
+		data = data.slice(2);
+
 		if (!rawSlotIndex || !rawOptionIndex) {
-			return undefined;
+			break;
 		}
 
 		const parsedSlotIndex = Number.parseInt(rawSlotIndex);
 		const parsedOptionIndex = Number.parseInt(rawOptionIndex);
 
 		if (Number.isNaN(parsedSlotIndex) || Number.isNaN(parsedOptionIndex)) {
-			return undefined;
+			continue;
 		}
 
-		return [parsedSlotIndex, parsedOptionIndex];
-	});
+		rv.push([parsedSlotIndex, parsedOptionIndex]);
+	} while (rawSlotIndex && rawOptionIndex);
+
+	return rv;
 }
 
 function formatItemDescriptionText(
