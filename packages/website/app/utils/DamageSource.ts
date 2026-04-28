@@ -230,14 +230,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					return;
 				}
 
-				this.currentHealth.value = this.stats.value?.total.hp || 0;
-				this.currentAbilityResource.value = this.stats.value?.total.mana || 0;
+				this.currentHealth.value = this.stats.value?.total.hp ?? 0;
+				this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
 
 				const level = c?.id === 'TargetDummy' ? 1 : 0;
 				this.abilityLevels.value = { q: level, w: level, e: level, r: level };
 				this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 
-				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this)) || {};
+				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this)) ?? {};
 			}),
 
 			watch(() => [this.stats.value?.total.hp, this.stats.value?.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
@@ -245,12 +245,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					return;
 				}
 				if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
-					this.currentHealth.value = this.stats.value?.total.hp || 0;
+					this.currentHealth.value = this.stats.value?.total.hp ?? 0;
 				} else {
-					this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.total.hp || 0);
+					this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.total.hp ?? 0);
 				}
 				if (previousTotalAbilityResource && this.currentAbilityResource.value === previousTotalAbilityResource) {
-					this.currentAbilityResource.value = this.stats.value?.total.mana || 0;
+					this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
 				} else {
 					this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.maxAbilityResource.value);
 				}

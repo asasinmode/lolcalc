@@ -25,7 +25,9 @@ export const CHAMPION_SPECIFICS = {
 		hooks: {
 			postInit(self, _initialStats, baseStats) {
 				for (const key in baseStats) {
-					baseStats[key as IChampionStatName] = self.internalData.value[key as IChampionStatName] * (self.computed.stats.value[key as IChampionStatName].isPercentage ? 0.01 : 1);
+					if (self.internalData.value[key as IChampionStatName] !== undefined) {
+						baseStats[key as IChampionStatName] = self.internalData.value[key as IChampionStatName] * (self.computed.stats.value[key as IChampionStatName].isPercentage ? 0.01 : 1);
+					}
 				}
 			},
 		},
