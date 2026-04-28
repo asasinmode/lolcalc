@@ -382,6 +382,38 @@ const bootItems = computed<IShopItem[]>(() => BOOT_ITEM_IDS.map((id) => {
 const bootsPanelPinned = ref(false);
 const inventoryPanelPinned = ref(true);
 
+let itemDragData: {
+	item: IItem;
+	slotIndex: number;
+} | undefined;
+
+function onItemDragstart(event: DragEvent, slotIndex: number) {
+	if (damageSource.value) {
+		event.dataTransfer!.effectAllowed = 'move';
+		itemDragData = {
+			slotIndex,
+			item: damageSource.value.items.value[slotIndex]!,
+		};
+	}
+}
+
+function onItemDragover(event: DragEvent) {
+	itemDragData && event.preventDefault();
+}
+
+function onItemDrop(slotIndex: number) {
+	if (damageSource.value) {
+		damageSource.value.moveItem(
+			damageSource.value.removeItem(itemDragData.slotIndex)!,
+			slotIndex,
+			damageSource.value,
+			itemDragData.slotIndex,
+			items,
+		);
+	}
+	itemDragData = undefined;
+}
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -824,14 +856,21 @@ defineExpose({
 				<Icon class="i-ph:caret-left-bold caret" />
 				<div>
 					<ul>
-						<li v-for="i in damageSource?.roleQuest.value === 'bot' ? 7 : 6" :key="i">
+						<li
+							v-for="i in damageSource?.roleQuest.value === 'bot' ? 7 : 6"
+							:key="i"
+							@drop="onItemDrop(i - 1)"
+							@dragover="onItemDragover"
+						>
 							<component
 								:is="targetShopItems[i - 1] ? 'button' : 'div'"
 								:class="targetShopItems[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
 								:data-masterwork="damageSource && isMasterworkSlot(damageSource, i - 1) ? '' : undefined"
+								:draggable="targetShopItems[i - 1] ? 'true' : undefined"
 								@mouseenter="targetShopItems[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
 								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true, i - 1)"
 								@click.right="targetShopItems[i - 1] && sellItem($event, i - 1)"
+								@dragstart="onItemDragstart($event, i - 1)"
 							>
 								<span>{{ targetShopItems[i - 1]?.item.name }}</span>
 								<img

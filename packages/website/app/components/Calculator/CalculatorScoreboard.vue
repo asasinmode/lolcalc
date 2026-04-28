@@ -302,8 +302,7 @@ function onItemDrop(event: DragEvent, target: DamageSource, slotIndex?: number) 
 		&& ((target === itemDragData.source && !globalKeyModifiers.value.alt)
 			|| itemBuyability(itemDragData.item, target, items, false, true, !globalKeyModifiers.value.alt) === 1)
 	) {
-		const { source, slotIndex: itemIndex } = itemDragData;
-		const item = globalKeyModifiers.value.alt ? source.items.value[itemIndex]! : source.removeItem(itemIndex)!;
+		const item = globalKeyModifiers.value.alt ? itemDragData.source.items.value[itemDragData.slotIndex]! : itemDragData.source.removeItem(itemDragData.slotIndex)!;
 		/* if no target slot or copying and there's already an item at the index */
 		if (slotIndex === undefined || (globalKeyModifiers.value.alt && target.items.value[slotIndex])) {
 			target.addItem(item, items, false);
