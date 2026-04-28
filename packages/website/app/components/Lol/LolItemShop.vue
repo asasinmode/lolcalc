@@ -394,6 +394,7 @@ function onItemDragstart(event: DragEvent, slotIndex: number) {
 			slotIndex,
 			item: damageSource.value.items.value[slotIndex]!,
 		};
+		leaveTooltipableElement();
 	}
 }
 
@@ -402,7 +403,7 @@ function onItemDragover(event: DragEvent) {
 }
 
 function onItemDrop(slotIndex: number) {
-	if (damageSource.value) {
+	if (itemDragData && damageSource.value) {
 		damageSource.value.moveItem(
 			damageSource.value.removeItem(itemDragData.slotIndex)!,
 			slotIndex,
