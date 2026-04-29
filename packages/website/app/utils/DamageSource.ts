@@ -462,7 +462,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
-			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
+			Object.entries(this.internalItemData.value).filter(([key]) => !key.startsWith('_')).map(([key, value]) => `${key}~${value}`).join('|'),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
 				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}-${effect.data.join('-')}`)
@@ -517,17 +517,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawInternalItemData?.length) {
-			try {
-				const data = JSON.parse(rawInternalItemData);
-				if (typeof data === 'object' && data && !Array.isArray(data)) {
-					for (const [key, value] of Object.entries(data)) {
-						if (typeof value === 'number') {
-							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constrain it to their min/max)
-							rv.internalItemData.value[key] = Math.round(value);
-						}
+			for (const keyValue of rawInternalItemData.split('|')) {
+				const [key, rawValue] = keyValue.split('~');
+				if (key && rawValue) {
+					const value = Number.parseInt(rawValue);
+					if (!Number.isNaN(value)) {
+						rv.internalItemData.value[key] = value;
 					}
 				}
-			} catch {}
+			}
 		}
 
 		const itemIds = rawItemIds?.split('-').filter(Boolean);

@@ -52,12 +52,12 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] choose role quest
     - [x] extras ui champions
     - [x] extras ui items
-    - [?] extras target dummy
+    - [x] extras target dummy
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [x] shapeshifting champions
     - [x] aphelios q rotating
   - [x] mirror layout
-  - [ ] expand scoreboard item on click anywhere when collapsed, maybe if more ppl want it
+  - [x] expand scoreboard item double click to expand/collapse
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
   - [x] source vs target column headers
@@ -80,13 +80,14 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] moving columns left/right
   - [x] moving sections up/down
   - [x] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
-  - [?] add option to remove stats/basic attack sections
   - [x] wider columns initially, shrink slightly as more are added
   - [x] move add section to the top
+  - [ ] add option to remove stats/basic attack sections if more feedback
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
   - [x] stats inventory value row
   - [ ] damage type row, use the actual calculated value in the cells
+  - [ ] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [ ] basic attack section normal/crit/average
   - [ ] friendlier variable names? Try to filter out simple variables like 5 more dmg to minions?
 - [ ] rune dialog
@@ -124,9 +125,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
-  - [ ] `internalData` only values, same as effects
-  - [ ] `internalItemData` like `${key}~${value1}~${value2}|${otherKey}-${value1}-...`
-  - [ ] remove dividing `-` where possible like abilityLevels that are 1 digit only
 - [x] confirm removing/clearing row/scoreboard item, ideally undo
 - [x] header, footer, contact info
 - [x] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
@@ -225,6 +223,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] per patch versions = see stats/features from older patches
 - [ ] kr/cn translations
 - [ ] color blind mode
+- [ ] item shop champion specific consumables like gp ult
+- [ ] consumables panel
 - [ ] alternative mode of configuration, step by step choose champion -> runes -> items -> level...
 
 #### very future
