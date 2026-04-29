@@ -23,15 +23,14 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
 
 export interface IDamageSourceInternalDataBase {
-	_watchHandles: WatchHandle[];
+	_watchHandles?: WatchHandle[];
 }
 
 export interface IDamageSourceInternalDataProvider {
 	/**
 	 * returns the `internalData.value` for specific `DamageSource`'s champion
 	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
-	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed
-	 * the property names should be fairly short for storing in state string
+	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
 	 */
 	setupData: (self: DamageSource) => any;
 }
@@ -135,10 +134,21 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value || this.computed.effects.value.some(effect => effect.isActive));
 	});
 
-	/** keys prefixed with `_` will not be stringified */
+	/**
+	 * any data the champion needs for their abilities, keys prefixed with `_` will not be stringified
+	 *
+	 * when stringifying, only the values are saved, something like
+	 * `{ "masterworkItemSlot": 0, "passiveUpgradedAllies": 0 }`
+	 * turns into `0|0` which when restoring is parsed into array `[0, 0]`
+	 * then when creating, the `this.champion` watch checks if `this.fromStringifiedData` is `true` and if so, it will run the `setupData` function with no values, then extract the keys of the returned object, set the properties one by one taking them from the array and setting their values then run the setup function again to validate/clamp the values restored from original array
+	 *   1. champion is selected, `this.internalData.value = championSpecific?.setupData(this)`
+	 *   2. data is stringified, `Object.values(this.internalData.value).join('|')`
+	 *   3. data is restored, `const rawValues = rawInternalData.split('|')`, then every value is converted into a number or set undefined if invalid
+	 *   4. champion watch handles parsing back to object
+	 */
 	internalData: Ref<Id extends IInternalDataSetupChampions
 		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupData']>
-		: undefined>;
+		: IDamageSourceInternalDataBase>;
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
 	/* object containing the internal data of applied effects, like item passives or champion abilities */
@@ -146,7 +156,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	watchHandles: WatchHandle[];
 
-	dataFromStringifiedData: boolean;
+	/**
+	 * set to the values of the `this.internalData.value` being restored when parsing back from stringified
+	 * if not `undefined`, the champion watch will assume the `DamageSource` is being restored and handle it specially
+	 */
+	fromStringifiedInternalData: any[] | undefined;
 
 	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
@@ -186,7 +200,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
 		this.appliedEffects = ref([]);
-		this.dataFromStringifiedData = false;
+		this.fromStringifiedInternalData = undefined;
 
 		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
 			const effect = overrides.appliedEffects![i]!;
@@ -208,9 +222,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					unwatch();
 				}
 
-				if (this.dataFromStringifiedData) {
-					this.dataFromStringifiedData = false;
-
+				if (this.fromStringifiedInternalData) {
 					for (const abilityKey in this.abilityLevels.value) {
 						this.abilityLevels.value[abilityKey as INonPassiveAbilityKey] = Math.max(0, Math.min(
 							this.abilityLevels.value[abilityKey as INonPassiveAbilityKey],
@@ -227,6 +239,18 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 					this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this)) || {};
 
+					const internalDataKeys = Object.keys(this.internalData.value).filter(key => !key.startsWith('_'));
+					if (internalDataKeys.length && this.fromStringifiedInternalData.length) {
+						for (let i = 0; i < internalDataKeys.length; i++) {
+							const key = internalDataKeys[i]!;
+							if (this.fromStringifiedInternalData[i] !== undefined) {
+								this.internalData.value[key as keyof typeof this.internalData['value']] = this.fromStringifiedInternalData[i];
+							}
+						}
+						this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this)) || {};
+					}
+
+					this.fromStringifiedInternalData = undefined;
 					return;
 				}
 
@@ -327,7 +351,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			dragonSoul: this.dragonSoul.value,
 			roleQuest: this.roleQuest.value,
 			/* not cloned because the `IChampionSpecific.setupData` should handle safely using previous values to create new ones */
-			internalData: this.internalData.value,
+			internalData: this.internalData.value as any,
 			/* has to be cloned because multiple items use the same object and only set its properties */
 			internalItemData: structuredClone(toRaw(this.internalItemData.value)),
 			/* not cloned, same as `internalData` */
@@ -415,6 +439,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			: [];
 		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, runes.shards[key as IRuneShardSlotName]));
 
+		const internalData = this.internalData.value && Object.entries(this.internalData.value)
+			.filter(([key]) => !key.startsWith('_'))
+			.map(([, value]) => value)
+			.join('|');
+
 		const runePathKeys = Object.keys(runes.paths);
 		const roleQuestKeys = Object.keys(text.roleQuests);
 		const dragonKeys = Object.keys(text.dragons);
@@ -430,9 +459,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			roundVariable(this.currentAbilityResource.value, 3),
 			Object.values(this.abilityLevels.value).map(level => level ?? 0).join(''),
 			Object.values(this.abilityVariantsIndexes.value).join(''),
-			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
+			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
-			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
+			internalData?.length ? internalData : undefined,
 			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
@@ -613,11 +642,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		const dragonKeys = Object.keys(text.dragons) as IDragonName[];
-
 		if (rawDragonStacks?.length) {
-			const dragonStacks = rawDragonStacks.split('-');
 			for (let i = 0; i < rv.dragonStacks.value.length; i++) {
-				const parsedIndex = dragonStacks[i] ? Number.parseInt(dragonStacks[i]!) : undefined;
+				const parsedIndex = rawDragonStacks[i] ? Number.parseInt(rawDragonStacks[i]!) : undefined;
 				if (parsedIndex !== undefined && !Number.isNaN(parsedIndex) && ~parsedIndex) {
 					rv.dragonStacks.value[i] = dragonKeys[parsedIndex];
 				}
@@ -632,17 +659,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 		}
 
+		const fromStringifiedInternalData = [];
 		if (rawInternalData?.length) {
-			try {
-				const data = JSON.parse(rawInternalData);
-				if (typeof data === 'object' && data && !Array.isArray(data)) {
-					for (const [key, value] of Object.entries(data)) {
-						if (typeof value === 'number') {
-							rv.internalData.value[key] = value;
-						}
-					}
-				}
-			} catch {}
+			for (const rawValue of rawInternalData.split('|')) {
+				const value = Number.parseFloat(rawValue);
+				fromStringifiedInternalData.push(Number.isNaN(value) ? undefined : value);
+			}
 		}
 
 		if (rawEffectsData?.length) {
@@ -663,7 +685,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
-			rv.dataFromStringifiedData = true;
+			rv.fromStringifiedInternalData = fromStringifiedInternalData;
 			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
 		}
 
