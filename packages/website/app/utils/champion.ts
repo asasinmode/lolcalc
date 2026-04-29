@@ -13,20 +13,20 @@ export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' |
 export const CHAMPION_SPECIFICS = {
 	TargetDummy: {
 		setupData(self): IChampionStats {
-			return Object.fromEntries(Object.entries(self.computed.stats.value).map(([statName, stat]) => {
+			return Object.fromEntries(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
 				return [
 					statName,
-					Math.max(0, (self.internalData.value as IChampionStats)[statName as IChampionStatName]
-					?? (self.stats.value.initial[statName as IChampionStatName]) * (stat.isPercentage ? 100 : 1)),
+					Math.max(0, (self.internalData.value as IChampionStats)[statName]
+					?? (self.stats.value.initial[statName]) * (statMeta.isPercentage ? 100 : 1)),
 				];
 			},
 			)) as IChampionStats;
 		},
 		hooks: {
 			postInit(self, _initialStats, baseStats) {
-				for (const key in baseStats) {
-					if (self.internalData.value[key as IChampionStatName] !== undefined) {
-						baseStats[key as IChampionStatName] = self.internalData.value[key as IChampionStatName] * (self.computed.stats.value[key as IChampionStatName].isPercentage ? 0.01 : 1);
+				for (const [statName, statMeta] of ALL_CHAMPION_STATS_ENTRIES) {
+					if (self.internalData.value[statName] !== undefined) {
+						baseStats[statName] = self.internalData.value[statName] * (statMeta.isPercentage ? 0.01 : 1);
 					}
 				}
 			},

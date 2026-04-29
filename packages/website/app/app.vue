@@ -58,8 +58,8 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		isPermanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/itemdamage.png`,
 		imageSize: 32,
-		rows: markRaw(Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
-			const icon = STAT_ICON[championStat as IChampionStatName];
+		rows: markRaw(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
+			const icon = STAT_ICON[statName as IChampionStatName];
 			const image = typeof icon === 'string'
 				? {
 						src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
@@ -73,8 +73,8 @@ const resultSections = ref<IDamageResultTableSection[]>([
 					};
 
 			return {
-				id: championStat,
-				name: statName,
+				id: statName as string,
+				name: statMeta.name,
 				image,
 			};
 		}).concat([
@@ -98,10 +98,9 @@ const resultSections = ref<IDamageResultTableSection[]>([
 				return { numberValue, value: numberValue };
 			}
 
-			const stat = source.computed.stats.value[rowId as IChampionStatName];
 			return {
-				numberValue: stat.total,
-				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
+				numberValue: source.stats.value.total[rowId as IChampionStatName],
+				value: `${source.computed.formattedStatTotals.value[rowId as IChampionStatName]}${CHAMPION_STAT_META[rowId as IChampionStatName].isPercentage ? '%' : ''}`,
 			};
 		},
 	},

@@ -55,36 +55,20 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
-	if (!champion) {
-		return {
-			initial: initialStats,
-			base: baseStats,
-			level: baseStats,
-			baseOnLevel: baseStats,
-			item: baseStats,
-			bonus: bonusStats,
-			total: baseStats,
-			meta: {
-				hasMana: false,
-				adaptiveForceStatVariable: 0,
-			},
-		};
-	}
-
-	const championSpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id];
+	const championSpecific = champion ? (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id] : undefined;
 	championSpecific?.hooks?.postInit?.(source, initialStats, baseStats, bonusStats);
 
 	const levelStats: Partial<IChampionStats> = {
-		hp: champion.stats.hpperlevel,
-		hpRegen: champion.stats.hpregenperlevel,
-		mana: champion.stats.mpperlevel,
-		manaRegen: champion.stats.mpregenperlevel,
-		attackDamage: champion.stats.attackdamageperlevel,
-		armor: champion.stats.armorperlevel,
-		magicResist: champion.stats.mpregenperlevel,
-		attackSpeed: champion.stats.attackspeedperlevel * 0.01 * initialStats.attackSpeedRatio,
-		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel / 100 + baseStats.bonusAttackSpeedPercent,
-		critChance: champion.stats.critperlevel,
+		hp: champion?.stats.hpperlevel ?? 0,
+		hpRegen: champion?.stats.hpregenperlevel ?? 0,
+		mana: champion?.stats.mpperlevel ?? 0,
+		manaRegen: champion?.stats.mpregenperlevel ?? 0,
+		attackDamage: champion?.stats.attackdamageperlevel ?? 0,
+		armor: champion?.stats.armorperlevel ?? 0,
+		magicResist: champion?.stats.spellblockperlevel ?? 0,
+		attackSpeed: (champion?.stats.attackspeedperlevel ?? 0) * 0.01 * initialStats.attackSpeedRatio,
+		bonusAttackSpeedPercent: (champion?.stats.attackspeedperlevel ?? 0) / 100 + baseStats.bonusAttackSpeedPercent,
+		critChance: champion?.stats.critperlevel ?? 0,
 	};
 
 	// TODO health/resource can calculate decimal because of this, make sure it works
@@ -127,7 +111,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 
 	// TODO make sure it works, calculate rune shards (use initialStats instead champion.stats)
-	const [_adaptiveForceTargetStat, adaptiveForceStatVariable, _adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
+	const [_adaptiveForceTargetStat, adaptiveForceStatVariable, _adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion?.id, itemStats.attackDamage, itemStats.abilityPower);
 
 	// const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);
 	// const runeShardStats: Partial<IChampionStats> = {
@@ -159,7 +143,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	)) as IChampionStats;
 
 	// TODO figure out if its ok to do it
-	if (champion.partype !== 'Mana') {
+	if (champion && champion.partype !== 'Mana') {
 		// TODO should be done by CHAMPION_SPECIFICS like `.postTotal()`
 		totalStats.mana = champion.id === 'Viego' ? 0 : baseStats.mana ?? 0;
 	}
@@ -173,7 +157,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonus: bonusStats,
 		total: totalStats,
 		meta: {
-			hasMana: champion.partype === 'mana',
+			hasMana: !champion || champion.partype === 'mana',
 			adaptiveForceStatVariable,
 		},
 	};
@@ -198,7 +182,7 @@ const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Am
 type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
 type IAdaptiveForceStatRv = [IAdaptiveForceStat, adaptiveForceVariable: 0 | 1, multiplier: number];
 
-function getAdaptiveForceStat(championId: string, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
+function getAdaptiveForceStat(championId: string | undefined, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
 	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0, 0.6];
 	return attackDamage > abilityPower
 		? adRv

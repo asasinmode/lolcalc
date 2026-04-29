@@ -810,142 +810,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	computed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
-		stats: computed<Record<IChampionStatName, IComputedDamageSourceChampionStat>>(() => {
-			const { base, baseOnLevel, bonus, total } = this.stats.value;
-
-			const rv: Record<IChampionStatName, Omit<IComputedDamageSourceChampionStat, 'formattedTotal'> & { formattedTotal?: number }> = {
-				hp: {
-					base: baseOnLevel.hp,
-					bonus: bonus.hp,
-					total: total.hp,
-				},
-				mana: {
-					base: baseOnLevel.mana,
-					bonus: bonus.mana,
-					total: total.mana,
-				},
-				attackDamage: {
-					base: baseOnLevel.attackDamage,
-					bonus: bonus.attackDamage,
-					total: total.attackDamage,
-				},
-				abilityPower: {
-					bonus: bonus.abilityPower,
-					total: total.abilityPower,
-				},
-				armor: {
-					base: baseOnLevel.armor,
-					bonus: bonus.armor,
-					total: total.armor,
-				},
-				magicResist: {
-					base: baseOnLevel.magicResist,
-					bonus: bonus.magicResist,
-					total: total.magicResist,
-				},
-				abilityHaste: {
-					bonus: bonus.abilityHaste,
-					total: total.abilityHaste,
-				},
-				attackSpeed: {
-					total: total.attackSpeed,
-					decimal: 3,
-				},
-				bonusAttackSpeedPercent: {
-					bonus: bonus.bonusAttackSpeedPercent,
-					total: total.bonusAttackSpeedPercent,
-					isPercentage: true,
-					decimal: 5,
-				},
-				attackSpeedRatio: {
-					total: total.attackSpeedRatio,
-					decimal: 3,
-				},
-				critChance: {
-					bonus: bonus.critChance,
-					total: total.critChance,
-					isPercentage: true,
-				},
-				critDamageMultiplier: {
-					base: base.critDamageMultiplier,
-					bonus: bonus.critDamageMultiplier,
-					total: total.critDamageMultiplier,
-					isPercentage: true,
-				},
-				lethality: {
-					bonus: bonus.lethality,
-					total: total.lethality,
-				},
-				percentArmorPen: {
-					decimal: 2,
-					bonus: bonus.percentArmorPen,
-					total: total.percentArmorPen,
-					isPercentage: true,
-				},
-				flatMagicPen: {
-					bonus: bonus.flatMagicPen,
-					total: total.flatMagicPen,
-				},
-				percentMagicPen: {
-					decimal: 2,
-					bonus: bonus.percentMagicPen,
-					total: total.percentMagicPen,
-					isPercentage: true,
-				},
-				lifeSteal: {
-					bonus: bonus.lifeSteal,
-					total: total.lifeSteal,
-					isPercentage: true,
-				},
-				omnivamp: {
-					bonus: bonus.omnivamp,
-					total: total.omnivamp,
-					isPercentage: true,
-				},
-				moveSpeed: {
-					base: baseOnLevel.moveSpeed,
-					bonus: bonus.moveSpeed,
-					total: total.moveSpeed,
-				},
-				tenacity: {
-					bonus: bonus.tenacity,
-					total: total.tenacity,
-					isPercentage: true,
-				},
-				healShieldPower: {
-					total: total.healShieldPower,
-					bonus: total.healShieldPower,
-					isPercentage: true,
-				},
-				attackRange: {
-					base: baseOnLevel.attackRange,
-					bonus: bonus.attackRange,
-					total: total.attackRange,
-				},
-				hpRegen: {
-					base: baseOnLevel.hpRegen,
-					bonus: bonus.hpRegen,
-					total: total.hpRegen,
-				},
-				manaRegen: {
-					base: baseOnLevel.manaRegen,
-					bonus: bonus.manaRegen,
-					total: total.manaRegen,
-				},
-				slowResist: {
-					bonus: bonus.slowResist,
-					total: total.slowResist,
-					isPercentage: true,
-				},
-			};
-
-			for (const championStat in rv) {
-				const stat = rv[championStat as keyof typeof rv];
-				stat.formattedTotal = formatChampionStatValue(stat.isPercentage ? 100 : 1, stat, 'total');
-			}
-
-			return rv as Record<IChampionStatName, IComputedDamageSourceChampionStat>;
-		}),
+		formattedStatTotals: computed<Record<IChampionStatName, string>>(() => Object.fromEntries(
+			ALL_CHAMPION_STATS.map(statName => [
+				statName,
+				formatChampionStatValue(statName, this.stats.value.total[statName as IChampionStatName]),
+			]),
+		) as unknown as Record<IChampionStatName, string>),
 		items: computed<(IComputedItemDescription | undefined)[]>(() => {
 			const text = useText();
 			const { minorVersion } = usePatchVersion();
@@ -1031,23 +901,12 @@ type IInternalDataSetupChampions = {
 		: never;
 }[keyof typeof CHAMPION_SPECIFICS];
 
-export interface IComputedDamageSourceChampionStat {
-	decimal?: number;
-	isPercentage?: boolean;
-	base?: number;
-	bonus?: number;
-	total: number;
-	formattedTotal: string | number;
-}
-
-export function formatChampionStatValue(
-	multiplier: number,
-	value: Pick<IComputedDamageSourceChampionStat, 'base' | 'bonus' | 'total' | 'decimal'>,
-	key: 'total' | 'base' | 'bonus',
-) {
-	return value.decimal
-		? roundVariable(value[key] as number * multiplier, value.decimal)
-		: Math.round(value[key] as number * multiplier);
+export function formatChampionStatValue(statName: IChampionStatName, value: number) {
+	const meta = CHAMPION_STAT_META[statName];
+	const multiplier = meta.isPercentage ? 100 : 1;
+	return meta.decimal
+		? roundVariable(value * multiplier, meta.decimal)
+		: Math.round(value * multiplier);
 }
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {

@@ -14,33 +14,108 @@ export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShield
 
 export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 
-export const CHAMPION_STAT_NAMES: Record<IChampionStatName, string> = {
-	hp: 'Health',
-	mana: 'Mana',
-	attackDamage: 'Attack Damage',
-	abilityPower: 'Ability Power',
-	armor: 'Armor',
-	magicResist: 'Magic Resist',
-	abilityHaste: 'Ability Haste',
-	attackSpeed: 'Attack Speed',
-	attackSpeedRatio: 'Attack Speed Ratio',
-	bonusAttackSpeedPercent: 'Bonus Attack Speed',
-	critChance: 'Critical Strike Chance',
-	critDamageMultiplier: 'Critical Strike Damage',
-	lethality: 'Lethality',
-	percentArmorPen: 'Percentage Armor Penetration',
-	flatMagicPen: 'Magic penetration',
-	percentMagicPen: 'Percentage Magic Penetration',
-	lifeSteal: 'Life Steal',
-	omnivamp: 'Omnivamp',
-	moveSpeed: 'Move Speed',
-	tenacity: 'Tenacity',
-	healShieldPower: 'Heal and Shield power',
-	attackRange: 'Attack Range',
-	hpRegen: 'Health every 5 seconds',
-	manaRegen: 'Mana/Resource every 5 seconds',
-	slowResist: 'Slow Resist',
+export interface IChampionStatMeta {
+	name: string;
+	decimal?: number;
+	isPercentage?: boolean;
 };
+
+export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = {
+	hp: {
+		name: 'Health',
+	},
+	mana: {
+		name: 'Mana',
+	},
+	attackDamage: {
+		name: 'Attack Damage',
+	},
+	abilityPower: {
+		name: 'Ability Power',
+	},
+	armor: {
+		name: 'Armor',
+	},
+	magicResist: {
+		name: 'Magic Resist',
+	},
+	abilityHaste: {
+		name: 'Ability Haste',
+	},
+	attackSpeed: {
+		name: 'Attack Speed',
+		decimal: 3,
+	},
+	attackSpeedRatio: {
+		name: 'Attack Speed Ratio',
+		decimal: 3,
+	},
+	bonusAttackSpeedPercent: {
+		name: 'Bonus Attack Speed',
+		decimal: 5,
+		isPercentage: true,
+	},
+	critChance: {
+		name: 'Critical Strike Chance',
+		isPercentage: true,
+	},
+	critDamageMultiplier: {
+		name: 'Critical Strike Damage',
+		isPercentage: true,
+	},
+	lethality: {
+		name: 'Lethality',
+	},
+	percentArmorPen: {
+		name: 'Percentage Armor Penetration',
+		decimal: 2,
+		isPercentage: true,
+	},
+	flatMagicPen: {
+		name: 'Magic penetration',
+	},
+	percentMagicPen: {
+		name: 'Percentage Magic Penetration',
+		decimal: 2,
+		isPercentage: true,
+	},
+	lifeSteal: {
+		name: 'Life Steal',
+		isPercentage: true,
+	},
+	omnivamp: {
+		name: 'Omnivamp',
+		isPercentage: true,
+	},
+	moveSpeed: {
+		name: 'Move Speed',
+	},
+	tenacity: {
+		name: 'Tenacity',
+		isPercentage: true,
+	},
+	healShieldPower: {
+		name: 'Heal and Shield power',
+		isPercentage: true,
+	},
+	attackRange: {
+		name: 'Attack Range',
+	},
+	hpRegen: {
+		name: 'Health every 5 seconds',
+	},
+	manaRegen: {
+		name: 'Mana/Resource every 5 seconds',
+	},
+	slowResist: {
+		name: 'Slow Resist',
+		isPercentage: true,
+	},
+};
+
+export const ALL_CHAMPION_STATS = Object.keys(CHAMPION_STAT_META) as IChampionStatName[];
+
+export const ALL_CHAMPION_STATS_ENTRIES = Object.entries(CHAMPION_STAT_META) as [IChampionStatName, IChampionStatMeta][];
 
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {

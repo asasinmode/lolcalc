@@ -28,50 +28,44 @@ function statImage(statName: IChampionStatName) {
 			};
 }
 
-const statInputs = Object.fromEntries(
-	Object.entries(props.damageSource.computed.stats.value).map(([statName, stat]) =>
-		[
-			statName,
-			{
-				name: CHAMPION_STAT_NAMES[statName as IChampionStatName],
-				label: stat.isPercentage && !CHAMPION_STAT_NAMES[statName as IChampionStatName].startsWith('Percent') ? ' %' : '',
-				onInput: useNumberInput(
-					[props.damageSource.internalData as Ref<IChampionStats>, statName as IChampionStatName],
-					Boolean(!stat.decimal || stat.isPercentage),
-				),
-			},
-		]),
-) as Record<IChampionStatName, {
+const statInputs = ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]): {
 	name: string;
 	label: string;
 	onInput: (event: Event) => void;
-}>;
+} => {
+	return {
+		name: statMeta.name,
+		label: statMeta.isPercentage && !statMeta.name.startsWith('Percent') ? ' %' : '',
+		onInput: useNumberInput(
+			[props.damageSource.internalData as Ref<IChampionStats>, statName as IChampionStatName],
+			Boolean(!statMeta.decimal || statMeta.isPercentage),
+		),
+	};
+});
 
 onMounted(() => {
-	for (const statName in props.damageSource.computed.stats.value) {
+	for (const statName of ALL_CHAMPION_STATS) {
 		updateStat(
 			undefined,
-			props.damageSource.internalData.value[statName as IChampionStatName],
+			props.damageSource.internalData.value[statName],
 			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
 		);
 	}
 });
 
 function reset(event: MouseEvent, statName: IChampionStatName) {
-	const { isPercentage } = props.damageSource.computed.stats.value[statName as IChampionStatName];
 	updateStat(
 		statName,
-		props.damageSource.stats.value.initial[statName] * (isPercentage ? 100 : 1),
+		props.damageSource.stats.value.initial[statName] * (CHAMPION_STAT_META[statName] ? 100 : 1),
 		(event.currentTarget as HTMLElement).previousElementSibling as HTMLInputElement,
 	);
 }
 
 function resetAll() {
-	for (const statName in props.damageSource.computed.stats.value) {
-		const { isPercentage } = props.damageSource.computed.stats.value[statName as IChampionStatName];
+	for (const [statName, statMeta] of ALL_CHAMPION_STATS_ENTRIES) {
 		updateStat(
 			statName as IChampionStatName,
-			props.damageSource.stats.value.initial[statName as IChampionStatName] * (isPercentage ? 100 : 1),
+			props.damageSource.stats.value.initial[statName as IChampionStatName] * (statMeta.isPercentage ? 100 : 1),
 			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
 		);
 	}
@@ -112,15 +106,10 @@ function copyFrom(event: SubmitEvent) {
 		return;
 	}
 
-	for (const statName in props.damageSource.computed.stats.value) {
-		const { isPercentage, decimal } = source.computed.stats.value[statName as IChampionStatName];
-
+	for (const statName of ALL_CHAMPION_STATS) {
 		updateStat(
 			statName as IChampionStatName,
-			formatChampionStatValue(isPercentage ? 100 : 1, {
-				decimal,
-				total: source.stats.value[stats][statName as IChampionStatName],
-			}, 'total'),
+			formatChampionStatValue(statName, source.stats.value[stats][statName]),
 			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
 		);
 	}
@@ -199,23 +188,23 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 			</button>
 		</header>
 		<div
-			v-for="(stat, statName) in props.damageSource.computed.stats.value"
+			v-for="([statName, statMeta], statIndex) in ALL_CHAMPION_STATS_ENTRIES"
 			:key="statName"
 		>
-			<label :for="`${idPrefix}-${statName}`" :title="`${statInputs[statName].name}${statInputs[statName].label}`">
+			<label :for="`${idPrefix}-${statName}`" :title="`${statInputs[statIndex]!.name}${statInputs[statIndex]!.label}`">
 				<img
 					v-bind="statImage(statName)"
 					loading="lazy"
 				>
-				<span>{{ statInputs[statName].name }}</span>
-				{{ statInputs[statName].label }}
+				<span>{{ statInputs[statIndex]!.name }}</span>
+				{{ statInputs[statIndex]!.label }}
 			</label>
 			<input
 				:id="`${idPrefix}-${statName}`"
 				type="number"
 				min="0"
-				:step="stat.decimal && !stat.isPercentage ? 0.01 : 1"
-				@input="statInputs[statName].onInput"
+				:step="statMeta.decimal && !statMeta.isPercentage ? 0.01 : 1"
+				@input="statInputs[statIndex]!.onInput"
 			>
 			<button class="pretend-ui-btn" @click="reset($event, statName)">
 				<span>reset</span>
