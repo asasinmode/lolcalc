@@ -75,16 +75,16 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	championSpecific?.hooks?.postInit?.(source, initialStats, baseStats, bonusStats);
 
 	const levelStats: Partial<IChampionStats> = {
-		hp: initialStats.hp,
-		hpRegen: initialStats.hpRegen,
-		mana: initialStats.mana,
-		manaRegen: initialStats.manaRegen,
-		attackDamage: initialStats.attackDamage,
-		armor: initialStats.armor,
-		magicResist: initialStats.magicResist,
+		hp: champion.stats.hpperlevel,
+		hpRegen: champion.stats.hpregenperlevel,
+		mana: champion.stats.mpperlevel,
+		manaRegen: champion.stats.mpregenperlevel,
+		attackDamage: champion.stats.attackdamageperlevel,
+		armor: champion.stats.armorperlevel,
+		magicResist: champion.stats.mpregenperlevel,
 		attackSpeed: champion.stats.attackspeedperlevel * 0.01 * initialStats.attackSpeedRatio,
 		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel / 100 + baseStats.bonusAttackSpeedPercent,
-		critChance: initialStats.critChance,
+		critChance: champion.stats.critperlevel,
 	};
 
 	// TODO health/resource can calculate decimal because of this, make sure it works
@@ -101,10 +101,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	baseOnLevelStats.attackSpeed += baseOnLevelStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
 
-	const itemStats = Object.keys(baseStats).reduce((acc, statName) => ({
-		...acc,
-		[statName]: 0,
-	}), {} as IChampionStats);
+	const itemStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
 	let itemsTotalPercentMovementSpeed = 0;
 	for (const item of items.filter(Boolean)) {
