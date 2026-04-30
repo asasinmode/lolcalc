@@ -1,4 +1,8 @@
 import type IEzreal from '../../public/data/champion/Ezreal.json';
+import type IIrelia from '../../public/data/champion/Irelia.json';
+import type IJax from '../../public/data/champion/Jax.json';
+import type IKaisa from '../../public/data/champion/Kaisa.json';
+import type INaafiri from '../../public/data/champion/Naafiri.json';
 import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
@@ -69,7 +73,7 @@ export const CHAMPION_SPECIFICS = {
 			/* array of 12, 13, ..., 21, 23, ..., 53, 53 - no 2 repeated numbers like 11, 22 */
 			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
 		},
-		setupData(self): IDamageSourceInternalDataBase & {} {
+		setupData(self): {} & IDamageSourceInternalDataBase {
 			const abilityVariantsIndexes = self.abilityVariantsIndexes.value;
 			const { WEAPON_NAME_TO_VARIANT_INDEX, WEAPON_VARIANT_INDEX_TO_NAME } = CHAMPION_SPECIFICS.Aphelios;
 
@@ -89,9 +93,9 @@ export const CHAMPION_SPECIFICS = {
 			}
 
 			return {
-				_watchHandles: markRaw([watch(() => `${self.champion.value?.id}${self.level.value}`, () => {
+				_watchHandles: [watch(self.level, () => {
 					self.abilityLevels.value.r = Math.floor((self.level.value - 1) / 5);
-				}, { immediate: true })]),
+				}, { immediate: true })],
 			};
 		},
 		e: {
@@ -151,10 +155,10 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ezreal: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks,
+		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS(self)),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS(self)),
 			};
 		},
 	},
@@ -173,18 +177,18 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Irelia: {
-		MAX_PASSIVE_STACKS: 4,
+		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IIrelia).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Irelia.MAX_PASSIVE_STACKS(self)),
 			};
 		},
 	},
 	Jax: {
-		MAX_PASSIVE_STACKS: 8,
+		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IJax).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS(self)),
 			};
 		},
 	},
@@ -196,18 +200,18 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Jinx: {
-		MAX_PASSIVE_STACKS: 5,
+		MAX_PASSIVE_STACKS: 5, /* doesn't seem to be in passive's data */
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Jinx.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
 	Kaisa: {
-		MAX_PASSIVE_STACKS: 4,
+		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IKaisa).abilities.passive.variants[0]!.dataValues.PMaxStacks[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
-				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS(self)),
 			};
 		},
 	},
@@ -222,7 +226,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { form: number } {
 			return {
-				form: clamp(0, Math.round(self.internalData.value.form ?? 0), this.FORM_OPTIONS.rhaast),
+				form: clamp(0, Math.round(self.internalData.value.form ?? 0), CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.rhaast),
 			};
 		},
 	},
@@ -255,10 +259,18 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Naafiri: {
-		MAX_PASSIVE_STACKS: 7,
-		setupData(self): { passiveStacks: number } {
+		MAX_PASSIVE_STACKS: (self: DamageSource) => computed(() =>
+			(VARIABLE_CALCULATION_FNS.mFormulaParts(self, (self.champion.value! as typeof INaafiri).abilities.passive.variants[0]!.spellCalculations.PackmateCap) ?? 0)
+			+ (self.champion.value! as typeof INaafiri).abilities.w.variants[0]!.dataValues.PackmatesToAdd[self.abilityLevels.value.w]!,
+		),
+		setupData(self): { passiveStacks: number; _maxPassiveStacks: ComputedRef<number> } & IDamageSourceInternalDataBase {
+			const maxPassiveStacks = CHAMPION_SPECIFICS.Naafiri.MAX_PASSIVE_STACKS(self);
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), maxPassiveStacks.value),
+				_maxPassiveStacks: maxPassiveStacks,
+				_watchHandles: [watch(self.level, () => {
+					self.internalData.value.passiveStacks = Math.min(self.internalData.value.passiveStacks, self.internalData.value._maxPassiveStacks);
+				})],
 			};
 		},
 	},
@@ -270,7 +282,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { passiveVariantActive: number } {
 			return {
-				passiveVariantActive: clamp(0, Math.round(self.internalData.value.passiveVariantActive ?? 0), this.PASSIVE_OPTIONS.towardsChampion),
+				passiveVariantActive: clamp(0, Math.round(self.internalData.value.passiveVariantActive ?? 0), CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.towardsChampion),
 			};
 		},
 	},
@@ -285,7 +297,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 2,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
-				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -293,19 +305,19 @@ export const CHAMPION_SPECIFICS = {
 		MASTERWORK_LEVEL: 13,
 		MAX_UPGRADED_ALLIES: 4,
 		calcMaxUpgradedAllies(self: DamageSource) {
-			return Math.min(this.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - this.MASTERWORK_LEVEL));
+			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL));
 		},
-		setupData(self): IDamageSourceInternalDataBase & { masterworkItemSlot: number; passiveUpgradedAllies: number } {
+		setupData(self): { masterworkItemSlot: number; passiveUpgradedAllies: number } & IDamageSourceInternalDataBase {
 			return {
-				masterworkItemSlot: self.level.value >= this.MASTERWORK_LEVEL
+				masterworkItemSlot: self.level.value >= CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL
 					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 0), 6)
 					: 0,
-				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), this.calcMaxUpgradedAllies(self)),
+				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self)),
 				_watchHandles: markRaw([watch(self.level, () => {
-					if (self.level.value < this.MASTERWORK_LEVEL) {
+					if (self.level.value < CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL) {
 						self.internalData.value.masterworkItemSlot = 0;
 					}
-					self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, this.calcMaxUpgradedAllies(self));
+					self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self));
 				}, { immediate: true })]),
 			};
 		},
@@ -314,7 +326,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
-				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -322,7 +334,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number; isPassiveMSActive: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Rengar.MAX_PASSIVE_STACKS),
 				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
@@ -346,7 +358,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.PASSIVE_OPTIONS.s),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Samira.PASSIVE_OPTIONS.s),
 			};
 		},
 	},
@@ -368,7 +380,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 20,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Seraphine.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -383,7 +395,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 9,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Singed.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -398,7 +410,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 120,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Sona.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -427,7 +439,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 120,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Syndra.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -474,7 +486,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		setupData(self): { passiveVariantActive: number } {
 			return {
-				passiveVariantActive: clamp(0, Math.round(self.internalData.value.passiveVariantActive ?? 0), this.PASSIVE_OPTIONS.champion),
+				passiveVariantActive: clamp(0, Math.round(self.internalData.value.passiveVariantActive ?? 0), CHAMPION_SPECIFICS.Varus.PASSIVE_OPTIONS.champion),
 			};
 		},
 	},
@@ -495,7 +507,7 @@ export const CHAMPION_SPECIFICS = {
 	Viktor: {
 		MAX_PASSIVE_UPGRADES_MASK: 2 ** 4,
 		setupData(self): { passiveAbilityUpgradesMask: number } {
-			let passiveAbilityUpgradesMask = clamp(0, Math.round(self.internalData.value.passiveAbilityUpgradesMask ?? 0), this.MAX_PASSIVE_UPGRADES_MASK);
+			let passiveAbilityUpgradesMask = clamp(0, Math.round(self.internalData.value.passiveAbilityUpgradesMask ?? 0), CHAMPION_SPECIFICS.Viktor.MAX_PASSIVE_UPGRADES_MASK);
 
 			/* unevolve R if not all basic are evolved */
 			const rBit = 1 << 3;
@@ -513,7 +525,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Volibear.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -521,7 +533,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 5,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.MonkeyKing.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
@@ -529,7 +541,7 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: 12,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Zaahen.MAX_PASSIVE_STACKS),
 			};
 		},
 	},

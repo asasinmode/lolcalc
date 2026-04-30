@@ -313,3 +313,46 @@ export function replaceGameDescriptionIcons(minorVersion: string, text: string, 
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
 }
+
+/** functions for resolving game variables named by their `__type` or other identifier */
+export const VARIABLE_CALCULATION_FNS = {
+	mFormulaParts(self, variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[] }) {
+		const values = variable.mFormulaParts.map(part => variableResolveFn(part)?.(self, part));
+		if (values.includes(undefined)) {
+			return undefined;
+		}
+		return values.reduce((acc, curr) => curr! + acc!, 0);
+	},
+	ByCharLevelBreakpointsCalculationPart(self, variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart']) {
+		let rv = variable.mLevel1Value;
+		for (const { mAdditionalBonusAtThisLevel, mLevel } of variable.mBreakpoints) {
+			if (self.level.value >= mLevel) {
+				rv += mAdditionalBonusAtThisLevel;
+			} else {
+				break;
+			}
+		}
+		return rv;
+	},
+} satisfies IHypotheticalVariableCalculationFns;
+
+export type IHypotheticalVariableCalculationFns = Record<string, (self: DamageSource, variable: any) => number | undefined>;
+
+interface IGameVariablesByType {
+	ByCharLevelBreakpointsCalculationPart: {
+		mLevel1Value: number;
+		mBreakpoints: {
+			mLevel: number;
+			mAdditionalBonusAtThisLevel: number;
+		}[];
+		__type: string;
+	};
+}
+
+function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
+	if ('__type' in variable && variable.__type in VARIABLE_CALCULATION_FNS) {
+		return VARIABLE_CALCULATION_FNS[variable.__type as keyof typeof VARIABLE_CALCULATION_FNS];
+	}
+	console.warn('[variableResolveFn] unknown variable', variable);
+	return undefined;
+}

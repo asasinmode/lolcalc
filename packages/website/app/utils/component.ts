@@ -41,7 +41,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	min?: number,
-	max?: MaybeRef<number> | ((self: DamageSource) => number),
+	max?: MaybeRef<number> | ((self: DamageSource) => MaybeRef<number>),
 	step?: number,
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
@@ -59,14 +59,14 @@ export async function numberExtra<T extends IGameAbilityId>(
 			imgSize,
 			label,
 			min,
-			'max': toValue(max as Exclude<typeof max, (self: DamageSource) => number>),
+			'max': toValue(max as Exclude<typeof max, (self: DamageSource) => MaybeRef<number>>),
 			step,
 			'usedNumberInput': useNumberInput(
 				abilityId.type === ABILITY_TYPE.effect
 					? [appliedEffect!.data, property as number]
 					: [props.damageSource[abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData'], property as string],
 				true,
-				max as Exclude<typeof max, (self: DamageSource) => number>,
+				max as Exclude<typeof max, (self: DamageSource) => MaybeRef<number>>,
 			),
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);

@@ -248,6 +248,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 							}
 						}
 						this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this)) || {};
+						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 					}
 
 					this.fromStringifiedInternalData = undefined;
@@ -262,6 +263,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this)) ?? {};
+				this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 			}),
 
 			watch(() => [this.stats.value?.total.hp, this.stats.value?.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
