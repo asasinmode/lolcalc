@@ -217,10 +217,11 @@
 					"spellCalculations": {
 						"OnHitDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
 									"mStartValue": 6,
-									"mEndValue": 46,
+									"mEndValue": 55,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{

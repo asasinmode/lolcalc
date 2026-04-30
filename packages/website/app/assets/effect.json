@@ -1,5 +1,5 @@
 {
-	"version": "16.4.1",
+	"version": "16.9.1",
 	"data": {
 		"lolcalcGrievousWounds": {
 			"dataKey": "lolcalcGrievousWounds",
@@ -26,7 +26,7 @@
 			"dataKey": "Items/3504/Spells/3504Buff"
 		},
 		"6616Buff": {
-			"description": "This unit has been granted increased Ability Power and Move Speed.",
+			"description": "This unit has been granted increased Ability Power.",
 			"dataKey": "Items/6616/Spells/6616Buff"
 		},
 		"2524_SecondaryBuff": {

@@ -43,11 +43,11 @@
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "GoldProc",
 							"nameOverride": "spell_listtype_gangplankqplundergold"
 						},
 						{
-							"name": "Effect5Amount",
+							"name": "SSProc",
 							"nameOverride": "spell_listtype_gangplankqplundersilverserpents"
 						},
 						{
@@ -61,7 +61,10 @@
 						"ADRatio": [1, 1, 1, 1, 1, 1, 1],
 						"CherryRatio": [0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07],
 						"GameModeInteger": [1, 1, 1, 1, 1, 1, 1],
-						"CritDamageMod": [1, 1, 1, 1, 1, 1, 1]
+						"CritDamageMod": [1, 1, 1, 1, 1, 1, 1],
+						"GoldProc": [2, 3, 4, 5, 6, 7, 8],
+						"SSProc": [3, 4, 5, 6, 7, 8, 9],
+						"PlunderThreshold": [500, 500, 500, 500, 500, 500, 500]
 					},
 					"spellCalculations": {
 						"ShotDamage": {
@@ -121,10 +124,10 @@
 					"name": "Remove Scurvy",
 					"objectName": "GangplankW",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_w.png",
-					"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @Effect2Amount@% missing Health</healing>.",
+					"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @PercentHeal@% missing Health</healing>.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseHeal",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
@@ -133,13 +136,20 @@
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
+					"dataValues": {
+						"BaseHeal": [20, 45, 70, 95, 120, 145, 170],
+						"PercentHeal": [13, 13, 13, 13, 13, 13, 13],
+						"BuffDuration_unused": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"HasteAmount": [200, 200, 200, 200, 200, 200, 200],
+						"SteroidAmount_unused": [20, 30, 40, 50, 60, 70, 80]
+					},
 					"spellCalculations": {
 						"BaseHealth": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseHeal",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.9,
@@ -166,14 +176,14 @@
 					"name": "Powder Keg",
 					"objectName": "GangplankE",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png",
-					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @Effect5Amount@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @Effect2Amount@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @Effect10Amount@% Armor. Champions take an additional <physicalDamage>@Effect3Amount@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
+					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @BarrelDuration@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @DebuffDuration@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @BarrelArmorPenetration@% Armor. Champions take an additional <physicalDamage>@BonusDamageToChampions@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
 					"extendedVariables": [
 						{
-							"name": "Effect3Amount",
+							"name": "BonusDamageToChampions",
 							"nameOverride": "spell_listtype_bonusdamageagainstchampions"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "MaxBarrels",
 							"nameOverride": "spell_listtype_taricmaxcharges"
 						},
 						{
@@ -186,7 +196,16 @@
 					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"BarrelSlow": [30, 40, 50, 60, 70, 80, 90]
+						"BarrelSlow": [30, 40, 50, 60, 70, 80, 90],
+						"MaxBarrels": [3, 3, 3, 4, 4, 5, 5],
+						"DebuffDuration": [2, 2, 2, 2, 2, 2, 2],
+						"BonusDamageToChampions": [55, 75, 95, 115, 135, 155, 175],
+						"BarrelDuration": [25, 25, 25, 25, 25, 25, 25],
+						"BarrelBaseDecay": [2, 2, 2, 2, 2, 2, 2],
+						"BarrelEnemyGoldBounty": [10, 10, 10, 10, 10, 10, 10],
+						"MinionDamagePercentage": [100, 100, 100, 100, 100, 100, 100],
+						"CooldownBetweenBarrels": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BarrelArmorPenetration": [40, 40, 40, 40, 40, 40, 40]
 					},
 					"spellCalculations": {
 						"FinalSlowAmount": {

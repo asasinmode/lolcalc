@@ -164,7 +164,7 @@
 						"Calc_MinimumDamage": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "{2540cffc}",
+									"mDataValue": "MinimumMinionDamage",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
@@ -183,7 +183,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{df972d75}",
+									"mDataValue": "HealthAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							],
@@ -278,7 +278,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mDataValue": "{5cb81bea}",
+									"mDataValue": "MaidenHealthRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -292,7 +292,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mDataValue": "{5913ba7b}",
+									"mDataValue": "MaidenADRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -354,7 +354,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mDataValue": "{76270a4f}",
+									"mDataValue": "GhoulHealthRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]

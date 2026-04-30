@@ -35,14 +35,14 @@
 					"name": "Dragon Strike",
 					"objectName": "JarvanIVDragonStrike",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivq.png",
-					"tooltip": "Jarvan extends his lance, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and removing <scaleArmor>@Effect2Amount@% Armor</scaleArmor> for @Effect3Amount@ seconds.<br><br>If the lance connects with <spellName>{{Spell_JarvanIVDemacianStandard_Name}}</spellName>, Jarvan will pull himself to it, <status>Knocking Up</status> those in his path for 0.75 seconds.",
+					"tooltip": "Jarvan extends his lance, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and removing <scaleArmor>@BaseARShred*100@% Armor</scaleArmor> for @Effect3Amount@ seconds.<br><br>If the lance connects with <spellName>{{Spell_JarvanIVDemacianStandard_Name}}</spellName>, Jarvan will pull himself to it, <status>Knocking Up</status> those in his path for 0.75 seconds.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "BaseARShred",
 							"nameOverride": "spell_listtype_armorreduction"
 						},
 						{
@@ -52,11 +52,11 @@
 					"mana": [45, 50, 55, 60, 65, 70],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"BaseDamage": [50, 90, 130, 170, 210, 250, 290]
+						"BaseDamage": [50, 90, 130, 170, 210, 250, 290],
+						"BaseARShred": [0.06, 0.1, 0.14, 0.18, 0.22, 0.26, 0.3]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mDataValue": "BaseDamage",
@@ -73,7 +73,6 @@
 					},
 					"effectAmount": {
 						"0": [70, 80, 120, 160, 200, 240, 250],
-						"1": [6, 10, 14, 18, 22, 26, 30],
 						"2": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"dataKey": "Characters/JarvanIV/Spells/JarvanIVDragonStrikeAbility/JarvanIVDragonStrike"
@@ -87,21 +86,24 @@
 					"name": "Golden Aegis",
 					"objectName": "JarvanIVGoldenAegis",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivw.png",
-					"tooltip": "Jarvan summons an aegis, <status>Slowing</status> nearby enemies by @Effect2Amount@% for @Effect5Amount@ seconds and granting him a <shield>@BaseShield@ Shield</shield>, increased by <shield>@BonusShield@</shield> for each enemy champion hit.",
+					"tooltip": "Jarvan summons an aegis, <status>Slowing</status> nearby enemies by @BaseSlowAmount*100@% for @Effect5Amount@ seconds and granting him a <shield>@TotalShield@ Shield</shield>, increased by <shield>@BonusShield@</shield> for each enemy champion hit.",
 					"extendedVariables": [
 						{
 							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "BaseSlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
+					"dataValues": {
+						"BaseSlowAmount": [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4]
+					},
 					"spellCalculations": {
-						"BaseShield": {
+						"TotalShield": {
 							"mFormulaParts": [
 								{
 									"mEffectIndex": 1,
@@ -127,7 +129,6 @@
 					},
 					"effectAmount": {
 						"0": [60, 60, 80, 100, 120, 140, 160],
-						"1": [10, 15, 20, 25, 30, 35, 40],
 						"2": [0, 10, 20, 30, 40, 50, 60],
 						"3": [4, 4, 4, 4, 4, 4, 4],
 						"4": [2, 2, 2, 2, 2, 2, 2],
@@ -144,7 +145,7 @@
 					"name": "Demacian Standard",
 					"objectName": "JarvanIVDemacianStandard",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanive.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Jarvan gains <attackSpeed>@PermanentAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Jarvan throws a standard into the ground, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting allies near the standard <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Jarvan gains <attackSpeed>@PermanentAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Jarvan throws a standard into the ground, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting allies near the standard <attackSpeed>@BaseAuraAS*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "Effect2Amount",
@@ -155,7 +156,7 @@
 							"nameOverride": "spell_listtype_passiveattackspeed"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "BaseAuraAS",
 							"nameOverride": "spell_listtype_activeattackspeed"
 						}
 					],
@@ -166,7 +167,8 @@
 						"EBehindJarvanCheck": [400, 400, 400, 400, 400, 400, 400],
 						"EKnockUpAoE": [0, 180, 180, 180, 180, 180, 180],
 						"PermanentAttackSpeed": [0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325],
-						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8]
+						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"BaseAuraAS": [0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -185,7 +187,6 @@
 					"effectAmount": {
 						"0": [7, 10, 13, 16, 19, 22, 25],
 						"1": [80, 80, 120, 160, 200, 240, 280],
-						"2": [0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325],
 						"3": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"dataKey": "Characters/JarvanIV/Spells/JarvanIVDemacianStandardAbility/JarvanIVDemacianStandard"

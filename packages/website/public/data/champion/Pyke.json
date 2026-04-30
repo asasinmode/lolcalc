@@ -10,7 +10,7 @@
 		"mp": 415,
 		"mpperlevel": 50,
 		"movespeed": 330,
-		"armor": 43,
+		"armor": 37,
 		"armorperlevel": 4.7,
 		"spellblock": 32,
 		"spellblockperlevel": 2.05,
@@ -170,7 +170,7 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mDataValue": "{d5189f50}",
+									"mDataValue": "BaseStunDuration",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{

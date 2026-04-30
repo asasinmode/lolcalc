@@ -48,6 +48,10 @@
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_onhitdamage"
+						},
+						{
+							"name": "OnHitBonusHPRatio",
+							"nameOverride": "spell_udyrq_onhit_bonushpratio"
 						}
 					],
 					"mana": [20, 20, 20, 20, 20, 20],
@@ -61,14 +65,15 @@
 						"LightningAPRatio": [0, 0, 0, 0, 0, 0, 0],
 						"Bounces": [6, 6, 6, 6, 6, 6, 6],
 						"BounceRange": [450, 450, 450, 450, 450, 450, 450],
-						"BaseDamage": [-3, 5, 13, 21, 29, 37, 45],
+						"BaseDamage": [0, 6, 12, 18, 24, 30, 36],
 						"MaxHPADRatio": [0, 0, 0, 0, 0, 0, 0],
 						"Q2MaxHPADRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001],
 						"AttackRange": [50, 50, 50, 50, 50, 50, 50],
 						"LightningDamageLevel1": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
 						"LightningDamageLevel18": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
 						"EmpoweredBonusASLevel1": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
-						"EmpoweredBonusASLevel18": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+						"EmpoweredBonusASLevel18": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"OnHitBonusHPRatio": [0.008, 0.01, 0.012, 0.014, 0.016, 0.018, 0.02]
 					},
 					"spellCalculations": {
 						"EmpoweredTotalAS": {
@@ -78,8 +83,8 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"{0589a59c}": "{330ee33d}",
-									"{0b65bc23}": "{656f60df}",
+									"{0589a59c}": "EmpoweredBonusASLevel1",
+									"{0b65bc23}": "EmpoweredBonusASLevel18",
 									"__type": "{ee18a47b}"
 								}
 							],
@@ -131,12 +136,11 @@
 						"EmpoweredLightningBonus": {
 							"mFormulaParts": [
 								{
-									"{0589a59c}": "{372a5bd5}",
-									"{0b65bc23}": "{c4aeb617}",
+									"{0589a59c}": "LightningDamageLevel1",
+									"{0b65bc23}": "LightningDamageLevel18",
 									"__type": "{ee18a47b}"
 								},
 								{
-									"mStatFormula": 2,
 									"mDataValue": "LightningAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
@@ -177,8 +181,8 @@
 												"mDataValue": "LightningAPRatio"
 											},
 											{
-												"mStartValue": 0.015,
-												"mEndValue": 0.03
+												"{0589a59c}": "LightningDamageLevel1",
+												"{0b65bc23}": "LightningDamageLevel18"
 											}
 										]
 									},
@@ -225,8 +229,14 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.25,
+									"mCoefficient": 0.2,
 									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "{877e2117}",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
@@ -246,6 +256,12 @@
 									"mStatFormula": 2,
 									"mDataValue": "Q2MaxHPADRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
 							"mDisplayAsPercent": true
@@ -315,6 +331,12 @@
 								{
 									"mDataValue": "ShieldAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
 						},
@@ -383,12 +405,18 @@
 									"mStat": 12,
 									"mCoefficient": 0.08,
 									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
 						},
 						"RecastHeal": {
 							"mMultiplier": {
-								"mDataValue": "{5a61cdc8}"
+								"mDataValue": "PercentOfShieldHealAmount"
 							},
 							"mModifiedGameCalculation": "RecastShield"
 						},
@@ -423,10 +451,10 @@
 					"name": "Blazing Stampede",
 					"objectName": "UdyrE",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_e.png",
-					"tooltip": "<spellActive>Stampede Stance:</spellActive> Udyr gains <speed>@MoveSpeed*100@% Move Speed</speed>, decaying over @MoveSpeedDuration@ seconds. Additionally, Udyr's Attacks dash him to the target and <status>Stun</status> for @StunDuration@ seconds (@ICD@ second Cooldown per target).<br><br><keywordMajor>Awaken:</keywordMajor> Grants immunity to <status>Immobilizing</status> and <status>Disabling</status> effects and an additional <speed>@MoveSpeedBonus@ Move Speed</speed> for @UnstoppableDuration@ seconds.",
+					"tooltip": "<spellActive>Stampede Stance:</spellActive> Udyr gains <speed>@MoveSpeed@ Move Speed</speed>, decaying over @MoveSpeedDuration@ seconds. Additionally, Udyr's Attacks dash him to the target and <status>Stun</status> for @StunDuration@ seconds (@ICD@ second Cooldown per target).<br><br><keywordMajor>Awaken:</keywordMajor> Grants immunity to <status>Immobilizing</status> and <status>Disabling</status> effects and an additional <speed>@MoveSpeedBonus@ Move Speed</speed> for @UnstoppableDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "MoveSpeed",
+							"name": "BaseMoveSpeed",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
@@ -438,7 +466,7 @@
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"ICD": [6.4, 6, 5.6, 5.2, 4.8, 4.4, 4],
-						"MoveSpeed": [0.19, 0.25, 0.31, 0.37, 0.43, 0.49, 0.55],
+						"BaseMoveSpeed": [0.19, 0.25, 0.31, 0.37, 0.43, 0.49, 0.55],
 						"MoveSpeedDuration": [4, 4, 4, 4, 4, 4, 4],
 						"StunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"EmpoweredBonusRange": [75, 75, 75, 75, 75, 75, 75],
@@ -451,6 +479,12 @@
 									"mStartValue": 0.3,
 									"mEndValue": 0.4,
 									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.001,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
 							"mDisplayAsPercent": true
@@ -481,6 +515,21 @@
 									"__type": "ClampSubPartsCalculationPart"
 								}
 							]
+						},
+						"MoveSpeed": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMoveSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.001,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						}
 					},
 					"dataKey": "Characters/Udyr/Spells/UdyrEAbility/UdyrE"

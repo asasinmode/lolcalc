@@ -166,7 +166,7 @@
 						"GreyHealthHealingRatio": {
 							"mFormulaParts": [
 								{
-									"mStartValue": 0.45,
+									"mStartValue": 0.6,
 									"mEndValue": 1,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								}
@@ -224,7 +224,7 @@
 						"SpitOutRangeEnemy": [300, 300, 300, 300, 300, 300, 300],
 						"CastTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"MinimumAllyDuration": [1, 1, 1, 1, 1, 1, 1],
-						"AllySpeedAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"AllySpeedAmount": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"ShieldDecayPerSecond": [200, 200, 200, 200, 200, 200, 200]
 					},
 					"spellCalculations": {
@@ -283,19 +283,20 @@
 						"Duration": [5, 5, 5, 5, 5, 5, 5],
 						"MaxStacks": [3, 3, 3, 3, 3, 3, 3],
 						"PerStackDecayTimer": [1, 1, 1, 1, 1, 1, 1],
-						"APRatioPer100BonusHP": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015]
+						"APRatioPer100BonusHP": [0.013, 0.013, 0.013, 0.013, 0.013, 0.013, 0.013]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 6,
-									"mInitialBonusPerLevel": 4,
+									"mLevel1Value": 5,
+									"mInitialBonusPerLevel": 5,
 									"mBreakpoints": [
 										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 6
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 5
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -303,7 +304,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mCoefficient": 0.045,
+									"mCoefficient": 0.04,
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{
@@ -318,42 +319,6 @@
 										}
 									},
 									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"{6c966659}": {
-							"mMultiplier": {
-								"mCoefficient": 0.01
-							},
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mDataValue": "APRatioPer100BonusHP",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"{301fe730}": {
-							"mSimpleTooltipCalculationDisplay": 1,
-							"mExpandedTooltipCalculationDisplay": 1,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 8,
-									"mInitialBonusPerLevel": 4,
-									"mBreakpoints": [
-										{
-											"mLevel": 11,
-											"mBonusPerLevelAtAndAfter": 2
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mCoefficient": 0.03,
-									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
 						}

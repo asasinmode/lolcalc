@@ -7,7 +7,7 @@
 	"stats": {
 		"hp": 630,
 		"hpperlevel": 104,
-		"mp": 450,
+		"mp": 480,
 		"mpperlevel": 40,
 		"movespeed": 335,
 		"armor": 18,
@@ -35,7 +35,7 @@
 					"name": "Noxious Blast",
 					"objectName": "CassiopeiaQ",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_q.png",
-					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @Effect2Amount@ seconds. Hitting a champion grants Cassiopeia <speed>@Effect3Amount@% Move Speed</speed> decaying over @Effect4Amount@ seconds.",
+					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds. Hitting a champion grants Cassiopeia <speed>@ChampHitMSBonus@% Move Speed</speed> decaying over @ChampHitMSDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "Effect1Amount",
@@ -51,13 +51,20 @@
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+					"dataValues": {
+						"BaseDamage": [30, 75, 110, 145, 180, 215, 250],
+						"PoisonDuration": [3, 3, 3, 3, 3, 3, 3],
+						"ChampHitMSBonus": [25, 30, 35, 40, 45, 50, 50],
+						"ChampHitMSDuration": [3, 3, 3, 3, 3, 3, 3],
+						"NumDamageTicks": [7, 7, 7, 7, 7, 7, 7]
+					},
 					"spellCalculations": {
 						"TooltipTotalDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.65,
@@ -84,7 +91,7 @@
 					"name": "Miasma",
 					"objectName": "CassiopeiaW",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_w.png",
-					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @Effect4Amount@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @Effect2Amount@%.",
+					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @CloudDuration@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @SlowPercent@%.",
 					"extendedVariables": [
 						{
 							"name": "Effect1Amount",
@@ -100,13 +107,19 @@
 					],
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [24, 24, 22, 20, 18, 16, 14],
+					"dataValues": {
+						"BaseDamage": [20, 20, 25, 30, 35, 40, 45],
+						"SlowPercent": [30, 40, 50, 60, 70, 80, 90],
+						"PoisonDuration": [1, 1, 1, 1, 1, 1, 1],
+						"CloudDuration": [5, 5, 5, 5, 5, 5, 5]
+					},
 					"spellCalculations": {
 						"DamagePerSecond": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.1,
@@ -147,7 +160,7 @@
 					"cooldownTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 					"dataValues": {
 						"BasicAPRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
-						"BonusDamage": [0, 20, 43, 66, 89, 112, 138],
+						"BonusDamage": [-5, 20, 45, 70, 95, 120, 145],
 						"BonusAPRatio": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
 						"HealRatio": [0.085, 0.1, 0.115, 0.13, 0.145, 0.16, 0.175],
 						"MinionReductionModifier": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]

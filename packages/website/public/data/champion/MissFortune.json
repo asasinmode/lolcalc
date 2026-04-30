@@ -77,7 +77,7 @@
 									},
 									{
 										"mPart1": {
-											"mDataValue": "{f2018e54}"
+											"mDataValue": "BounceCriticalMod"
 										},
 										"mPart2": {
 											"mSubparts": [
@@ -279,7 +279,7 @@
 									},
 									{
 										"mPart1": {
-											"mDataValue": "{8afc08bf}"
+											"mDataValue": "CritDamageMultiplier"
 										},
 										"mPart2": {
 											"mSubparts": [

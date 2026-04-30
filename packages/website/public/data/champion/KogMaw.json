@@ -89,7 +89,7 @@
 					"name": "Bio-Arcane Barrage",
 					"objectName": "KogMawBioArcaneBarrage",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png",
-					"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> for @Duration@ seconds.",
+					"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> %i:OnHit% <OnHit>On-Hit</OnHit> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "Range",

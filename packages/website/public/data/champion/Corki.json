@@ -284,6 +284,7 @@
 					},
 					"spellCalculations": {
 						"BasicAttackTOOLTIP": {
+							"{72c5c2a8}": 2,
 							"mFormulaParts": [
 								{
 									"mStat": 2,

@@ -125,10 +125,10 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy Q',
 						objectName: 'TargetDummyQ',
+						dataKey: 'TargetDummy/Q',
 						image: 'assets/characters/ha_%s1minionmelee/hud/%s2melee_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
-						dataKey: 'TargetDummy/Q',
 					},
 				],
 			},
@@ -138,10 +138,10 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy W',
 						objectName: 'TargetDummyW',
+						dataKey: 'TargetDummy/W',
 						image: 'assets/characters/ha_%s1minionranged/hud/%s2range_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
-						dataKey: 'TargetDummy/W',
 					},
 				],
 			},
@@ -151,10 +151,10 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy E',
 						objectName: 'TargetDummyE',
+						dataKey: 'TargetDummy/E',
 						image: 'assets/characters/ha_%s1minionsiege/hud/%s2mechcannon_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
-						dataKey: 'TargetDummy/E',
 					},
 				],
 			},
@@ -164,10 +164,10 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy R',
 						objectName: 'TargetDummyR',
+						dataKey: 'TargetDummy/R',
 						image: 'assets/characters/ha_%s1minionsuper/hud/%s2mechmelee_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
-						dataKey: 'TargetDummy/R',
 					},
 				],
 			},
@@ -177,9 +177,9 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy Passive',
 						objectName: 'TargetDummyPassive',
+						dataKey: 'TargetDummy/Passive',
 						image: 'assets/characters/nexus/hud/nexus_%s2_square.png',
 						tooltip: 'Does nothing',
-						dataKey: 'TargetDummy/Passive',
 					},
 				],
 			},
@@ -212,9 +212,13 @@ if (!championData || championData?.version !== latestVersion) {
 						throw new Error(`no root character data for ${name}`);
 					}
 
-					const { attackSpeedRatio } = rootData;
+					const { attackSpeedRatioModifiable, damagePerLevelModifiable } = rootData;
 
-					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
+					stats.attackspeedratio = formatNumber(attackSpeedRatioModifiable.baseValue, 3);
+					/* between patches `16.4` and `16.9` attackdamage in `champion.json` from ddragon was set to 0 on some champions, so take the one from additionalData until it hopefully comes back? */
+					if (damagePerLevelModifiable) {
+						stats.attackdamageperlevel = formatNumber(damagePerLevelModifiable.baseValue);
+					}
 
 					const dedicatedChampionFilePath = `${import.meta.dirname}/../public/data/champion/${id}.json`;
 					const championFileDataStringtable: IChampion['stringtable'] = {};
@@ -680,15 +684,15 @@ if (!miscData || miscData?.version !== latestVersion) {
 
 				const { ObjectName: stackObjectName, mSpell: { DataValues: stackDataValues, mSpellCalculations: stackSpellCalculations } } = stackData;
 				const parsedStackDataValues = stackDataValues?.length
-					? Object.fromEntries(stackDataValues.map(({ mName, mValues }: Record<string, number[]>) =>
-							[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
+					? Object.fromEntries(stackDataValues.map(({ name, values }: Record<string, number[]>) =>
+							[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
 						))
 					: undefined;
 
 				const { ObjectName: soulObjectName, mSpell: { DataValues: soulDataValues, mSpellCalculations: soulSpellCalculations } } = soulData;
 				const parsedSoulDataValues = soulDataValues?.length
-					? Object.fromEntries(soulDataValues.map(({ mName, mValues }: Record<string, number[]>) =>
-							[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
+					? Object.fromEntries(soulDataValues.map(({ name, values }: Record<string, number[]>) =>
+							[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
 						))
 					: undefined;
 
@@ -1406,7 +1410,7 @@ function championAbilityData(
 	championData: any,
 	characterRootKey: string,
 ): IChampionAbility {
-	const { mCharacterPassiveSpell, spells, spellLevelUpInfo, characterToolData } = championData[characterRootKey];
+	const { mCharacterPassiveSpell, spells, '{1abb82c0}': spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityInfo[1] === 4 ? mCharacterPassiveSpell : spells[abilityInfo[1]];
 
 	const variantKeys = [abilityDataKey];
@@ -1428,7 +1432,13 @@ function championAbilityData(
 
 	if ((championId === 'Jayce' && abilityInfo[1] === 3)
 		|| (championId === 'Aphelios' && abilityInfo[1] < 3)) {
-		maxLevel = spellLevelUpInfo[abilityInfo[1]].mRequirements.length;
+		/* level up info used to be under `spellLevelUpInfo.mRequirements`, it's moved under this hash now (and `spellLevelUpInfo` was also changed to a hash) */
+		const levelUpInfoProperty = '{0cfb5881}';
+		if (!spellLevelUpInfo?.[levelUpInfoProperty]) {
+			console.error(spellLevelUpInfo);
+			throw new Error(`[championAbilityData] can't resolve spellLevelUpInfo maxLevel for ${championId} in ${characterRootKey}`);
+		}
+		maxLevel = spellLevelUpInfo[levelUpInfoProperty][abilityInfo[1]].length;
 	}
 
 	if (maxLevel === undefined) {
@@ -1492,13 +1502,13 @@ function adjustApheliosAbilityData(
 					variants.push({
 						name: undefined!,
 						objectName: variantData.ObjectName,
+						dataKey: abilityData.mRootSpell,
 						image: '',
 						imageAlt: '',
 						[key]: image,
 						tooltip: undefined,
 						tooltipExtended: undefined,
 						tooltipExtendedBelowLine: undefined,
-						dataKey: abilityData.mRootSpell,
 					} as typeof variants[number]);
 				}
 			}
@@ -1659,6 +1669,7 @@ function championAbilityVariant(
 	const variant = {
 		name: undefined!,
 		objectName: variantData.ObjectName,
+		dataKey: variantDataKey,
 		image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
 		tooltip: undefined,
 		tooltipExtended: undefined,
@@ -1682,13 +1693,12 @@ function championAbilityVariant(
 		mana,
 		cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 		dataValues: DataValues?.length
-			? Object.fromEntries(DataValues.map(({ mName, mValues }: Record<string, number[]>) =>
-					[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
+			? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) =>
+					[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
 				))
 			: undefined,
 		spellCalculations: cleanupObject(mSpellCalculations),
 		effectAmount: cleanupObject(mEffectAmount),
-		dataKey: variantDataKey,
 	} as IChampionAbilityVariant;
 
 	/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
@@ -1889,7 +1899,7 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 				? JSON.parse(data.toString('utf8'))
 				: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
 	} catch {};
-	if (!data) {
+	if (!data || (typeof data === 'object' && !Object.keys(data).length)) {
 		data = await fetch(url).then(r => r[responseMethod]()).catch((err) => {
 			console.log(`[fetchCached] ${url} ${responseMethod}`);
 			throw err;

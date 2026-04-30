@@ -128,20 +128,29 @@
 					"name": "Trample",
 					"objectName": "AlistarE",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_passive.png",
-					"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @Effect5Amount@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @Effect6Amount@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>.",
+					"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @MaxStacks@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @StunDuration@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
 							"name": "Cost"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "TrampleDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [12.5, 12, 11.5, 11, 10.5, 10, 9.5],
 					"dataValues": {
-						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"TrampleDamage": [80, 80, 110, 140, 170, 200, 230],
+						"BonusAARange": [50, 50, 50, 50, 50, 50, 50],
+						"Duration": [5, 5, 5, 5, 5, 5, 5],
+						"Radius": [350, 350, 350, 350, 350, 350, 350],
+						"MaxStacks": [5, 5, 5, 5, 5, 5, 5],
+						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
+						"ProcDamageBase": [20, 20, 20, 20, 20, 20, 20],
+						"ProcDamageScale": [15, 15, 15, 15, 15, 15, 15],
+						"FullChargeDuration": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -149,8 +158,8 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "TrampleDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mDataValue": "APRatio",

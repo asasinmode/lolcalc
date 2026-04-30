@@ -141,7 +141,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mDataValue": "{0a76d866}",
+									"mDataValue": "InitialBonusADRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -155,7 +155,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mDataValue": "{9b8976c2}",
+									"mDataValue": "ReturnBonusADRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -181,7 +181,10 @@
 					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"WallCD": [185, 160, 135, 110, 85, 60, 35]
+						"WallCD": [185, 160, 135, 110, 85, 60, 35],
+						"WallJumpDistance": [625, 625, 625, 625, 625, 625, 625],
+						"WallLockoutWidth": [1250, 1250, 1250, 1250, 1250, 1250, 1250],
+						"DisplayCD": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"effectAmount": {
 						"2": [625, 625, 625, 625, 625, 625, 625],

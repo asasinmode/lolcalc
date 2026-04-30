@@ -119,7 +119,10 @@
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"dataValues": {
-						"BaseOnHitDamage": [3, 3, 3, 3, 3, 3, 3]
+						"BaseOnHitDamage": [3, 3, 3, 3, 3, 3, 3],
+						"BelowHealthThreshold": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"OnHitMinMinionDamage": [15, 15, 15, 15, 15, 15, 15],
+						"OnHitMaxMinionDamage": [150, 150, 150, 150, 150, 150, 150]
 					},
 					"spellCalculations": {
 						"MissingHealthPercent": {
@@ -151,6 +154,15 @@
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
+						},
+						"{79b6144b}": {
+							"mMultiplier": {
+								"{a8cb9c14}": true,
+								"mStat": 15,
+								"mCoefficient": 1
+							},
+							"{72c5c2a8}": 1,
+							"mModifiedGameCalculation": "MissingHealthPercent"
 						}
 					},
 					"effectAmount": {

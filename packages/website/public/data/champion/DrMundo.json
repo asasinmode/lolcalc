@@ -60,7 +60,7 @@
 						"SlowAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"CurrentHealthDamage": [0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325],
 						"MinimumDamage": [30, 80, 130, 180, 230, 280, 330],
-						"MaximumMonsterDamage": [225, 300, 375, 450, 525, 600, 675],
+						"MaximumMonsterDamage": [175, 250, 325, 400, 475, 550, 625],
 						"HealthCost": [40, 50, 60, 70, 80, 90, 100],
 						"HealthRefundOnHitChampionMonsterPercent": [1, 1, 1, 1, 1, 1, 1],
 						"HealthRefundOnHitMinionPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
@@ -194,7 +194,7 @@
 						"MaxDamageAmp": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
 						"MinionMod": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
 						"MissileDistance": [800, 800, 800, 800, 800, 800, 800],
-						"MonsterMod": [2, 2, 2, 2, 2, 2, 2],
+						"MonsterMod": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
 						"HealthToADRatio": [1.7, 2, 2.3, 2.6, 2.9, 3.2, 3.5]
 					},
 					"spellCalculations": {

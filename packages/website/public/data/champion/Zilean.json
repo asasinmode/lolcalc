@@ -35,7 +35,7 @@
 					"name": "Time Bomb",
 					"objectName": "ZileanQ",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
-					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds.",
+					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @FuseDuration@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -54,7 +54,8 @@
 					"dataValues": {
 						"BombBaseDamage": [30, 75, 115, 165, 230, 300, 380],
 						"APRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
-						"StunDuration": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
+						"StunDuration": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6],
+						"FuseDuration": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -88,13 +89,16 @@
 					"name": "Rewind",
 					"objectName": "ZileanW",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
-					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @Effect2Amount@ seconds.",
+					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @CooldownReduction@ seconds.",
 					"extendedVariables": [],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [16, 14, 12, 10, 8, 6, 6],
+					"dataValues": {
+						"CooldownReduction": [10, 10, 10, 10, 10, 10, 10],
+						"ManaCost": [35, 35, 35, 35, 35, 35, 35]
+					},
 					"effectAmount": {
 						"0": [10, 20, 30, 40, 50, 60, 70],
-						"1": [10, 10, 10, 10, 10, 10, 10],
 						"2": [35, 35, 35, 35, 35, 35, 35]
 					},
 					"dataKey": "Characters/Zilean/Spells/ZileanWAbility/ZileanW"
@@ -108,19 +112,23 @@
 					"name": "Time Warp",
 					"objectName": "TimeWarp",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
-					"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds.",
+					"tooltip": "Zilean <status>Slows</status> an enemy champion by @SpeedAmount@% or grants an allied champion <speed>@SpeedAmount@% Move Speed</speed> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "SpeedAmount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "SpeedAmount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
+					"dataValues": {
+						"Duration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"SpeedAmount": [25, 40, 55, 70, 85, 99, 114]
+					},
 					"effectAmount": {
 						"0": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"1": [25, 40, 55, 70, 85, 99, 114],

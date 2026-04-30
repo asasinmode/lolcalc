@@ -67,7 +67,8 @@
 						"RectangleRange": [1300, 1300, 1300, 1300, 1300, 1300, 1300],
 						"MaxTargetingRange": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
 						"BaseSlow": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-						"SlowDuration": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25]
+						"SlowDuration": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25],
+						"SlowAPRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -109,8 +110,8 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.001,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "SlowAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -199,7 +200,8 @@
 						"AllyMSMult": [1, 1, 1, 1, 1, 1, 1],
 						"SmokeLinger": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 						"SmokeArmTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
-						"SmokeRadius": [150, 150, 150, 150, 150, 150, 150]
+						"SmokeRadius": [150, 150, 150, 150, 150, 150, 150],
+						"MSAPRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
 					},
 					"spellCalculations": {
 						"TotalMS": {
@@ -209,8 +211,8 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.001,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "MSAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							],
 							"mDisplayAsPercent": true
@@ -244,7 +246,9 @@
 						"Damage": [100, 250, 400, 550, 700, 850, 1000],
 						"Shield": [80, 120, 160, 200, 240, 280, 320],
 						"ShieldDuration": [3, 3, 3, 3, 3, 3, 3],
-						"PostCastAnimLock": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+						"PostCastAnimLock": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DamageAPRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"ShieldAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -254,8 +258,8 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.7,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "DamageAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -272,8 +276,8 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.5,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
 									"mBuffName": "{e88568f8}",

@@ -138,7 +138,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{5d695993}",
+									"mDataValue": "DoTRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -150,7 +150,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{53d925aa}",
+									"mDataValue": "ActiveRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -267,20 +267,20 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{7beab464}",
+									"mDataValue": "SmallAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
 						"{262c3c02}": {
 							"mMultiplier": {
-								"mDataValue": "{9f77be75}"
+								"mDataValue": "MidDamageMulti"
 							},
 							"mModifiedGameCalculation": "SmallSharkDamage"
 						},
 						"BigSharkDamage": {
 							"mMultiplier": {
-								"mDataValue": "{29186812}"
+								"mDataValue": "LargeDamageMulti"
 							},
 							"mModifiedGameCalculation": "SmallSharkDamage"
 						}

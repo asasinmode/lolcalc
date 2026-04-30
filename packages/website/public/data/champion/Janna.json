@@ -363,18 +363,19 @@
 						"MSToOnHitConversionRate": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "{022aad62}",
+									"mDataValue": "MSBonusMagicDamage",
 									"__type": "NamedDataValueCalculationPart"
 								}
 							],
 							"mDisplayAsPercent": true
 						},
 						"BonusDamage": {
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
 									"mStat": 7,
 									"mStatFormula": 2,
-									"mDataValue": "{022aad62}",
+									"mDataValue": "MSBonusMagicDamage",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]

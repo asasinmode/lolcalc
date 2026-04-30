@@ -14,7 +14,7 @@
 		"armorperlevel": 4.2,
 		"spellblock": 30,
 		"spellblockperlevel": 1.3,
-		"attackrange": 500,
+		"attackrange": 550,
 		"hpregen": 3.25,
 		"hpregenperlevel": 0.7,
 		"mpregen": 6,
@@ -50,9 +50,9 @@
 					"dataValues": {
 						"MinCooldown": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"AttackSpeedCap": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"ExcessAttackSpeedToADMult": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
-						"BaseDamage": [13, 15, 17, 19, 21, 23, 25],
-						"ActiveADRatio": [1, 1.04, 1.08, 1.12, 1.16, 1.2, 1.24],
+						"ExcessAttackSpeedToADMult": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BaseDamage": [18, 21, 24, 27, 30, 33, 36],
+						"ActiveADRatio": [1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12],
 						"NumberOfMissiles": [7, 7, 7, 7, 7, 7, 7],
 						"EnergizedMissiles": [3, 3, 3, 3, 3, 3, 3],
 						"SlowDuration": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
@@ -123,14 +123,15 @@
 							"mDisplayAsPercent": true
 						},
 						"PassiveExecuteThreshold": {
+							"{72c5c2a8}": 2,
 							"mFormulaParts": [
 								{
-									"mStartValue": 60,
-									"mEndValue": 150,
+									"mStartValue": 70,
+									"mEndValue": 160,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{
-									"mCoefficient": 0.18,
+									"mCoefficient": 0.2,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -166,7 +167,7 @@
 					"dataValues": {
 						"Damage": [-10, 30, 70, 110, 150, 190, 230],
 						"ADRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
-						"CriticalEffectiveness": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"CriticalEffectiveness": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"SlowPercent": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
 						"WallBeamRange": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
@@ -189,7 +190,7 @@
 									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.25,
+									"mCoefficient": 0.5,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -232,7 +233,7 @@
 					"name": "Spark Surge",
 					"objectName": "ZeriE",
 					"image": "assets/characters/zeri/hud/icons2d/zerie.png",
-					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
+					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy with an Attack reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
 					"extendedVariables": [
 						{
 							"name": "PenDamagePercent",
@@ -247,7 +248,7 @@
 						}
 					],
 					"mana": [90, 85, 80, 75, 70, 70],
-					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
+					"cooldownTime": [24, 24, 22.5, 21, 19.5, 18, 18],
 					"dataValues": {
 						"MaxDistance": [300, 300, 300, 300, 300, 300, 300],
 						"MaxDistanceOverWalls": [3000, 3000, 3000, 3000, 3000, 3000, 3000],
@@ -258,12 +259,12 @@
 						"ShortHopAnimCutoff": [250, 250, 250, 250, 250, 250, 250],
 						"MediumHopAnimCutoff": [550, 550, 550, 550, 550, 550, 550],
 						"RevealRangeOverWalls": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
-						"BonusDamageBase": [15, 17, 19, 21, 23, 25, 27],
-						"BonusADRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"BonusDamageBase": [20, 22, 24, 26, 28, 30, 32],
 						"BonusAPRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"IndicatorRevealTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"CritScalingMod": [1, 1, 1, 1, 1, 1, 1],
-						"CritCDReductionPerHit": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
+						"CritCDReductionPerHit": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"CDReductionModNonChamp": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"DashSpeed": {
@@ -310,12 +311,6 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "BonusADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								},
-								{
 									"mDataValue": "BonusAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
@@ -351,6 +346,10 @@
 						{
 							"name": "ActiveDamage",
 							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "MSPercent",
+							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -360,14 +359,14 @@
 						"MaxStacks": [100000, 100000, 100000, 100000, 100000, 100000, 100000],
 						"DurationIncreasePerHit": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"BaseASPercent": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-						"MSPercent": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"MSPercent": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
 						"RDuration": [5, 5, 5, 5, 5, 5, 5],
 						"BonusMagicDamage": [0, 5, 10, 15, 20, 25, 30],
 						"ActiveDamage": [50, 150, 250, 350, 450, 550, 650],
 						"NovaRange": [825, 825, 825, 825, 825, 825, 825],
 						"MaxChainTargets": [5, 5, 5, 5, 5, 5, 5],
-						"BaseBonusMS": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
-						"MaxHyperchargeDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"BaseBonusMS": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"MaxHyperchargeDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"ChainADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
 					},
 					"spellCalculations": {
@@ -396,7 +395,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 1,
+									"mCoefficient": 0.6,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -405,7 +404,7 @@
 							"mFormulaParts": [
 								{
 									"mStat": 2,
-									"mDataValue": "{6ecd0e86}",
+									"mDataValue": "ChainADRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -462,6 +461,7 @@
 		"spell_listtype_slow": "Slow",
 		"spell_listtype_percentagedamage": "Percentage Damage",
 		"spell_listtype_basedamage": "Base Damage",
+		"spell_listtype_movementspeed": "Move Speed",
 		"spell_zeriq_name": "Burst Fire",
 		"spell_zeripassive_tooltip": "Zeri's Attacks are treated as Abilities instead of Attacks and can be charged up by moving and casting <spellName>{{Spell_ZeriQ_Name}}</spellName>. Uncharged Attacks consume a small amount of charge, deal <magicDamage>@Spell.ZeriQ:MinDamage@ magic damage</magicDamage> and <danger>execute</danger> enemies below <attention>@Spell.ZeriQ:PassiveExecuteThreshold@ Health</attention>. A fully charged Attack deals <magicDamage>@Spell.ZeriQ:PassiveMaxDamage@ + @Spell.ZeriQ:PassiveMaxChargePercentHealth@ max Health magic damage</magicDamage> and consumes all charge."
 	}

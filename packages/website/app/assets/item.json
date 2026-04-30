@@ -1,5 +1,5 @@
 {
-	"version": "16.4.1",
+	"version": "16.9.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -16,6 +16,7 @@
 			"mapMask": 3,
 			"into": [
 				"3047",
+				"3008",
 				"3006",
 				"3009",
 				"3020",
@@ -204,6 +205,7 @@
 			"into": [
 				"3742",
 				"1011",
+				"3068",
 				"2021",
 				"3147",
 				"3211",
@@ -284,7 +286,6 @@
 				"3068",
 				"3109",
 				"2502",
-				"3002",
 				"3075",
 				"6665",
 				"6662"
@@ -347,7 +348,6 @@
 			"into": [
 				"1053",
 				"4003",
-				"6701",
 				"2019",
 				"2021",
 				"3077",
@@ -392,14 +392,13 @@
 				"6333",
 				"3031",
 				"3153",
-				"6701",
 				"2020",
 				"2517",
+				"3087",
 				"6695",
 				"2523",
 				"3053",
 				"3072",
-				"3087",
 				"3124",
 				"3181",
 				"3139",
@@ -500,6 +499,17 @@
 			"dataValues": {
 				"OnHitDamage": 15
 			},
+			"itemCalculations": {
+				"{e4493c5b}": {
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "OnHitDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -593,6 +603,17 @@
 				"RangeRegenMult": 0.66,
 				"MaxRangeRegenAmount": 30
 			},
+			"itemCalculations": {
+				"{592c02e8}": {
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusDamageToMinions",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
 			"stringCalculations": {
 				"MeleeRangeSplitRegen": {
 					"MeleeResult": "@MaxRegenAmount@",
@@ -661,6 +682,17 @@
 				"HealthRestorePerSecond": 0.55,
 				"ManaRestorePerSecondUpgraded": 2,
 				"UpgradeDuration": 5
+			},
+			"itemCalculations": {
+				"{592c02e8}": {
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
 			},
 			"itemGroups": [
 				"Items/ItemGroups/DoransItems"
@@ -792,6 +824,60 @@
 				"fighter": true,
 				"marksman": true,
 				"assassin": true
+			}
+		},
+		"1086": {
+			"id": "1086",
+			"name": "Doran's Bow",
+			"searchString": "doransbow;damage;attackspeed;spellvamp;attackdamage",
+			"stats": {
+				"FlatPhysicalDamageMod": 6,
+				"PercentAttackSpeedMod": 0.15,
+				"PercentOmnivampMod": 0.015
+			},
+			"gold": {
+				"total": 400,
+				"sell": 160,
+				"sellBackModifier": 0.4
+			},
+			"image": "1086.png",
+			"mapMask": 3,
+			"epicness": 1,
+			"dataValues": {
+				"HealthOnHit": 3
+			},
+			"itemGroups": [
+				"Items/ItemGroups/DoransItems"
+			],
+			"categories": {
+				"marksman": true
+			}
+		},
+		"1120": {
+			"id": "1120",
+			"name": "Doran's Helm",
+			"searchString": "doranshelm;health;magicresist;armor",
+			"stats": {
+				"FlatSpellBlockMod": 10,
+				"FlatHPPoolMod": 110,
+				"FlatArmorMod": 10
+			},
+			"gold": {
+				"total": 450,
+				"sell": 180,
+				"sellBackModifier": 0.4
+			},
+			"image": "1120.png",
+			"mapMask": 3,
+			"epicness": 1,
+			"dataValues": {
+				"BonusDamageToMinions": 5
+			},
+			"itemGroups": [
+				"Items/ItemGroups/DoransItems"
+			],
+			"categories": {
+				"tank": true
 			}
 		},
 		"2019": {
@@ -1045,7 +1131,8 @@
 				"3020",
 				"3158",
 				"3111",
-				"3009"
+				"3009",
+				"3008"
 			],
 			"isBoots": true,
 			"itemGroups": [
@@ -1320,9 +1407,9 @@
 			"name": "Dusk and Dawn",
 			"searchString": "duskanddawn;spellblade;bonking;health;attackspeed;spelldamage;onhit;abilityhaste;abilitypower",
 			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatMagicDamageMod": 70,
-				"PercentAttackSpeedMod": 0.25,
+				"FlatHPPoolMod": 300,
+				"FlatMagicDamageMod": 60,
+				"PercentAttackSpeedMod": 0.2,
 				"AbilityHasteMod": 20
 			},
 			"gold": {
@@ -1341,11 +1428,7 @@
 			"epicness": 5,
 			"dataValues": {
 				"SpellbladeCooldown": 1.5,
-				"DebuffDuration": 4,
-				"SpeedAmount": 0.1,
-				"SpeedDuration": 1.5,
-				"Cooldown": 1.5,
-				"ExplosionAoE": 350
+				"Cooldown": 1.5
 			},
 			"itemCalculations": {
 				"SpellbladeDamage": {
@@ -1362,15 +1445,16 @@
 						}
 					]
 				},
-				"{eb4b84c6}": {
+				"SpellbladeHealing": {
 					"mFormulaParts": [
 						{
-							"mStartValue": 40,
-							"mEndValue": 80,
-							"__type": "ByCharLevelInterpolationCalculationPart"
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
 						},
 						{
-							"mCoefficient": 0.1,
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.03,
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
@@ -1447,7 +1531,21 @@
 				"TakedownWindow": 3
 			},
 			"itemCalculations": {
-				"HasteFromAD": {
+				"{e4d9f16b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.13,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{87892572}": {
 					"mFormulaParts": [
 						{
 							"mNumber": 5,
@@ -1460,6 +1558,13 @@
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
+				}
+			},
+			"stringCalculations": {
+				"HasteFromAD": {
+					"MeleeResult": "@HasteFromADMelee@",
+					"RangedResult": "@HasteFromADRanged@",
+					"DefaultResult": "@HasteFromADMelee@"
 				}
 			},
 			"itemGroups": [
@@ -1859,43 +1964,6 @@
 				"support": true
 			}
 		},
-		"3002": {
-			"id": "3002",
-			"name": "Trailblazer",
-			"searchString": "trailblazer;health;armor;movement;movespeed",
-			"stats": {
-				"FlatHPPoolMod": 250,
-				"FlatArmorMod": 40,
-				"PercentMovementSpeedMod": 0.04
-			},
-			"gold": {
-				"total": 2400,
-				"sell": 1680
-			},
-			"image": "3002.png",
-			"mapMask": 3,
-			"from": [
-				"3066",
-				"1031"
-			],
-			"epicness": 5,
-			"dataValues": {
-				"MaxMovementSpeed": 20,
-				"MaxStacks": 100,
-				"DurationToMaxStack": 4,
-				"MaxStackSlowAmount": 0.5,
-				"MaxStackSlowDuration": 1,
-				"MovespeedDonation": 0.15
-			},
-			"itemGroups": [
-				"{b1a64644}",
-				"{1b1c30d5}"
-			],
-			"categories": {
-				"tank": true,
-				"support": true
-			}
-		},
 		"3003": {
 			"id": "3003",
 			"name": "Archangel's Staff",
@@ -2018,6 +2086,38 @@
 				"fighter": true,
 				"marksman": true
 			}
+		},
+		"3008": {
+			"id": "3008",
+			"name": "Gluttonous Greaves",
+			"searchString": "gluttonousgreaves;lifesteal;spellvamp;boots;movespeed",
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentOmnivampMod": 0.04
+			},
+			"gold": {
+				"total": 950,
+				"sell": 665
+			},
+			"image": "3008.png",
+			"mapMask": 3,
+			"into": [
+				"3168"
+			],
+			"from": [
+				"1001"
+			],
+			"isBoots": true,
+			"epicness": 4,
+			"dataValues": {
+				"OmnivampOnTakedown": 0.01,
+				"MaxStacks": 6
+			},
+			"itemGroups": [
+				"Items/ItemGroups/BootsWithoutActives",
+				"Items/ItemGroups/Boots",
+				"{aba63cd2}"
+			]
 		},
 		"3009": {
 			"id": "3009",
@@ -2896,7 +2996,6 @@
 			"mapMask": 3,
 			"into": [
 				"3742",
-				"3002",
 				"3181",
 				"4401"
 			],
@@ -2971,7 +3070,8 @@
 			"mapMask": 3,
 			"from": [
 				"6660",
-				"1031"
+				"1031",
+				"1028"
 			],
 			"epicness": 5,
 			"dataValues": {
@@ -3014,7 +3114,8 @@
 				}
 			},
 			"itemGroups": [
-				"Items/ItemGroups/ImmolateItems"
+				"Items/ItemGroups/ImmolateItems",
+				"{27ab7d34}"
 			],
 			"categories": {
 				"tank": true
@@ -3047,6 +3148,17 @@
 				"MaxMana": 360,
 				"ManaChargeMaxAmmo": 4,
 				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"{592c02e8}": {
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusMinionDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
 			},
 			"itemGroups": [
 				"Items/ItemGroups/TearItems"
@@ -3688,7 +3800,8 @@
 			},
 			"effectAmount": [0, 40, 2, 0, 40, 1],
 			"itemGroups": [
-				"{a092a3c9}"
+				"{a092a3c9}",
+				"{78ac5965}"
 			],
 			"categories": {
 				"marksman": true
@@ -3728,68 +3841,53 @@
 		"3087": {
 			"id": "3087",
 			"name": "Statikk Shiv",
-			"searchString": "statikkshiv;damage;attackspeed;onhit;movement;attackdamage;movespeed",
+			"searchString": "statikkshiv;damage;attackspeed;spelldamage;onhit;movement;abilitypower;attackdamage;movespeed",
 			"stats": {
-				"FlatPhysicalDamageMod": 45,
+				"FlatMagicDamageMod": 45,
+				"FlatPhysicalDamageMod": 40,
 				"PercentAttackSpeedMod": 0.3,
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"total": 2700,
-				"sell": 1890
+				"total": 3000,
+				"sell": 2100
 			},
 			"image": "3087.png",
 			"mapMask": 3,
 			"from": [
 				"3144",
-				"6690",
+				"3113",
 				"1037"
 			],
 			"isOnHit": true,
 			"epicness": 5,
 			"dataValues": {
-				"BounceRangeMinion": 500,
-				"BounceRangeChampion": 650,
-				"BounceDelay": 0.05,
-				"CooldownMaxTT": 25,
-				"MinionChainBounces": 6,
-				"ChampionChainBounces": 186,
-				"ChainDamageMinion": 120,
-				"ChainDamageChampion": 270,
-				"CooldownMinTT": 10,
-				"ChainCount": 3,
-				"ChainDamage": 60,
 				"BounceRange": 500,
-				"BounceCount": 5,
-				"TakedownWindow": 3,
-				"NonChampChainDamage": 85,
-				"Duration": 8
+				"BonusEnergizedStacks": 9,
+				"ChainDamage": 60,
+				"NonChampChainDamage": 90
 			},
 			"itemCalculations": {
-				"Cooldown": {
+				"BounceCount": {
 					"mFormulaParts": [
 						{
-							"mLevel1Value": 25,
+							"mLevel1Value": 4,
 							"mBreakpoints": [
 								{
-									"mLevel": 8,
-									"mAdditionalBonusAtThisLevel": -3
-								},
-								{
-									"mLevel": 9,
-									"mAdditionalBonusAtThisLevel": -3
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 1
 								},
 								{
 									"mLevel": 10,
-									"mAdditionalBonusAtThisLevel": -3
+									"mAdditionalBonusAtThisLevel": 1
 								},
 								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": -3
+									"mLevel": 14,
+									"mAdditionalBonusAtThisLevel": 1
 								},
 								{
-									"mLevel": 12,
-									"mAdditionalBonusAtThisLevel": -3
+									"mLevel": 20,
+									"mAdditionalBonusAtThisLevel": 1
 								}
 							],
 							"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -3857,6 +3955,7 @@
 			"epicness": 5,
 			"itemCalculations": {
 				"OnHitDamage": {
+					"{72c5c2a8}": 1,
 					"mFormulaParts": [
 						{
 							"mNumber": 45,
@@ -4297,6 +4396,7 @@
 			"into": [
 				"3100",
 				"2065",
+				"3087",
 				"3504",
 				"4629",
 				"4646"
@@ -4368,6 +4468,7 @@
 			},
 			"itemCalculations": {
 				"TotalOnHitDamage": {
+					"{72c5c2a8}": 1,
 					"mFormulaParts": [
 						{
 							"mDataValue": "NashorsBaseValue",
@@ -4689,6 +4790,15 @@
 						}
 					],
 					"mDisplayAsPercent": true
+				},
+				"{592c02e8}": {
+					"{72c5c2a8}": 1,
+					"mFormulaParts": [
+						{
+							"mDataValue": "OnHitDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
 				}
 			},
 			"effectAmount": [0.08, 2.5, 2.5, 3, 4, 0.1, 0.1, 15, 1, 3, 0, 0, 3],
@@ -4715,9 +4825,9 @@
 			"mapMask": 3,
 			"into": [
 				"6333",
+				"6697",
 				"3156",
 				"2517",
-				"6697",
 				"3004",
 				"3508",
 				"3074",
@@ -4756,9 +4866,8 @@
 			"mapMask": 3,
 			"into": [
 				"3142",
-				"6701",
-				"2520",
 				"6697",
+				"2520",
 				"4004",
 				"6695",
 				"3814",
@@ -5032,9 +5141,9 @@
 			"into": [
 				"2512",
 				"3094",
+				"3087",
 				"3032",
 				"3085",
-				"3087",
 				"3097"
 			],
 			"from": [
@@ -5338,6 +5447,40 @@
 						}
 					],
 					"mDisplayAsPercent": true
+				},
+				"{d96e60e3}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{42565e68}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{79b6144b}": {
+					"mDefaultGameCalculation": "{d96e60e3}",
+					"mConditionalGameCalculation": "{42565e68}"
+				},
+				"{405deeb1}": {
+					"mMultiplier": {
+						"mSpellCalculationKey": "{79b6144b}"
+					},
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"{a8cb9c14}": true,
+							"mStat": 13,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
 				}
 			},
 			"itemGroups": [
@@ -5624,6 +5767,37 @@
 				"mage": true,
 				"support": true
 			}
+		},
+		"3168": {
+			"id": "3168",
+			"name": "Immortal Path",
+			"searchString": "immortalpath;lifesteal;spellvamp;boots;movespeed",
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentOmnivampMod": 0.04
+			},
+			"gold": {
+				"total": 950,
+				"sell": 665
+			},
+			"image": "3168.png",
+			"mapMask": 1,
+			"from": [
+				"3008"
+			],
+			"isBoots": true,
+			"epicness": 7,
+			"dataValues": {
+				"OmnivampOnTakedown": 0.01,
+				"MaxStacks": 6,
+				"DamageMod": 0.05,
+				"HealingMod": 0.15
+			},
+			"itemGroups": [
+				"Items/ItemGroups/BootsWithoutActives",
+				"Items/ItemGroups/Boots",
+				"{0e38f9bb}"
+			]
 		},
 		"3170": {
 			"id": "3170",
@@ -6209,33 +6383,21 @@
 				"DiminishedTimer": 20,
 				"Cooldown": 90,
 				"ShieldRange": 850,
-				"ShieldMinTOOLTIP": 200,
+				"ShieldMinTOOLTIP": 290,
 				"ShieldMaxTOOLTIP": 360
 			},
 			"itemCalculations": {
-				"MythicPassiveBonus": {
-					"mFormulaParts": [
-						{
-							"mPart1": {
-								"epicness": 5
-							},
-							"mPart2": {
-								"mDataValue": "AllyAuraMythicPassive"
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
-						}
-					]
-				},
 				"ShieldAmount": {
 					"mFormulaParts": [
 						{
-							"mSubparts": [
+							"mLevel1Value": 290,
+							"mBreakpoints": [
 								{
-									"mStartValue": 200,
-									"mEndValue": 360
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 7
 								}
 							],
-							"__type": "SumOfSubPartsCalculationPart"
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				}
@@ -6310,7 +6472,7 @@
 				"Cooldown": 120
 			},
 			"itemCalculations": {
-				"{85d56c32}": {
+				"AmountToHeal": {
 					"mFormulaParts": [
 						{
 							"mSubparts": [
@@ -6405,6 +6567,15 @@
 						"mNumber": 3
 					},
 					"mModifiedGameCalculation": "ARMRPerHitScaling"
+				},
+				"{592c02e8}": {
+					"{72c5c2a8}": 1,
+					"mFormulaParts": [
+						{
+							"mDataValue": "OnHitDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
 				}
 			},
 			"itemGroups": [
@@ -6874,6 +7045,84 @@
 							"__type": "NamedDataValueCalculationPart"
 						}
 					]
+				},
+				"{bdd8f3f7}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{d4217cda}",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{1755c90e}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{9f631779}",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ExecutePercent": {
+					"mDefaultGameCalculation": "{bdd8f3f7}",
+					"mConditionalGameCalculation": "{1755c90e}"
+				},
+				"ExecuteDamage": {
+					"mFormulaParts": [
+						{
+							"{a8cb9c14}": true,
+							"mStat": 12,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{79b6144b}": {
+					"{72c5c2a8}": 2,
+					"mConditionalGameCalculation": "ExecuteDamage",
+					"mConditionalCalculationRequirements": {
+						"mSubRequirements": [
+							{
+								"mInvertResult": true,
+								"{6166b756}": "ExecuteHealthThreshold"
+							},
+							{
+								"mUnitsRequirements": [
+									{},
+									{
+										"mUnitTags": {
+											"mObjectTagList": [
+												"{ea595ca6}"
+											]
+										}
+									}
+								],
+								"mRange": 1300
+							}
+						]
+					},
+					"{353099b0}": true
+				},
+				"ExecuteHealthThreshold": {
+					"mFormulaParts": [
+						{
+							"{a8cb9c14}": true,
+							"mStat": 12,
+							"mSubpart": {
+								"mSpellCalculationKey": "ExecutePercent"
+							},
+							"__type": "StatBySubPartCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
 				}
 			},
 			"effectAmount": [3],
@@ -7207,7 +7456,8 @@
 			"searchString": "lifeline;damage;movement;armorpenetration;attackdamage;movespeed",
 			"stats": {
 				"FlatPhysicalDamageMod": 25,
-				"PercentMovementSpeedMod": 0.04
+				"PercentMovementSpeedMod": 0.04,
+				"PhysicalLethality": 5
 			},
 			"gold": {
 				"total": 1600,
@@ -7761,8 +8011,8 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"total": 3100,
-				"sell": 2170
+				"total": 3000,
+				"sell": 2100
 			},
 			"image": "6609.png",
 			"mapMask": 3,
@@ -7854,7 +8104,7 @@
 			"searchString": "staffofflowingwater;nami;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 35,
-				"AbilityHasteMod": 15,
+				"AbilityHasteMod": 10,
 				"PercentBaseMPRegenMod": 1.25,
 				"PercentHealingAmountMod": 0.1
 			},
@@ -7871,10 +8121,8 @@
 			"epicness": 5,
 			"dataValues": {
 				"BuffDuration": 6,
-				"MSDecayThreshold": 2,
-				"MSDecayPercentage": 0.75,
-				"MSDecayPercentageThresholdUnused": 0.015,
-				"AbilityPowerMin": 45
+				"APMod": 40,
+				"AHMod": 15
 			},
 			"itemGroups": [
 				"{ad562792}"
@@ -8710,8 +8958,7 @@
 			"into": [
 				"4003",
 				"6672",
-				"3142",
-				"3087"
+				"3142"
 			],
 			"from": [
 				"1036"
@@ -8923,7 +9170,7 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"UltimateRefundBase": 15,
+				"UltimateRefundBase": 10,
 				"LethalityAmount": 18,
 				"ResetWindow": 3
 			},
@@ -8936,7 +9183,7 @@
 						},
 						{
 							"mStat": 29,
-							"mCoefficient": 0.15,
+							"mCoefficient": 0.25,
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
@@ -8954,13 +9201,13 @@
 			"name": "Hubris",
 			"searchString": "hubris;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
-				"FlatPhysicalDamageMod": 60,
+				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 10,
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"total": 3000,
-				"sell": 2100
+				"total": 2800,
+				"sell": 1960
 			},
 			"image": "6697.png",
 			"mapMask": 1,
@@ -8976,9 +9223,9 @@
 				"TakedownWindow": 3,
 				"SpeedAmount": 0.3,
 				"BonusLethality": 15,
-				"ADPerStatue": 2,
+				"ADPerStatue": 3,
 				"BuffDuration": 90,
-				"BaseADBonus": 15
+				"BaseADBonus": 12
 			},
 			"itemCalculations": {
 				"{5974e68a}": {
@@ -9090,11 +9337,11 @@
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 10,
-				"PhysicalLethality": 18
+				"PhysicalLethality": 10
 			},
 			"gold": {
-				"total": 3000,
-				"sell": 2100
+				"total": 2900,
+				"sell": 2030
 			},
 			"image": "6699.png",
 			"mapMask": 3,
@@ -9105,96 +9352,28 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"LethalityAmount": 18,
-				"DashBonus": 0.75,
-				"SlowAmount": 0.99,
-				"SlowDuration": 0.75,
-				"SlowAmountRangeMod": 0.2
+				"PercentCurrentHPMelee": 9,
+				"PercentCurrentHPRanged": 7,
+				"LethalityBonusModMelee": 15,
+				"LethalityBonusModRanged": 12,
+				"LethalityBonusDuration": 4,
+				"LethalityAmount": 10,
+				"NonChampCap": 200
 			},
-			"itemCalculations": {
-				"DamageCalc": {
-					"mFormulaParts": [
-						{
-							"mNumber": 100,
-							"__type": "NumberCalculationPart"
-						}
-					]
+			"stringCalculations": {
+				"PercentHPMeleeRangedSplit": {
+					"MeleeResult": "@PercentCurrentHPMelee@",
+					"RangedResult": "@PercentCurrentHPRanged@",
+					"DefaultResult": "@PercentCurrentHPMelee@"
 				},
-				"MeleeItemCalcValue": {
-					"mMultiplier": {
-						"mNumber": 100
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "SlowAmount",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"RangedItemCalcValue": {
-					"mMultiplier": {
-						"mNumber": 100
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "SlowAmountRangeMod",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
+				"LethalityBonusModMeleeRangedSplit": {
+					"MeleeResult": "@LethalityBonusModMelee@",
+					"RangedResult": "@LethalityBonusModRanged@",
+					"DefaultResult": "@LethalityBonusModMelee@"
 				}
 			},
 			"itemGroups": [
 				"{b069b403}"
-			],
-			"categories": {
-				"assassin": true
-			}
-		},
-		"6701": {
-			"id": "6701",
-			"name": "Opportunity",
-			"searchString": "opportunity;lethality;damage;active;movement;armorpenetration;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"PhysicalLethality": 18
-			},
-			"gold": {
-				"total": 2700,
-				"sell": 1890
-			},
-			"image": "6701.png",
-			"mapMask": 3,
-			"from": [
-				"1037",
-				"3134",
-				"1036"
-			],
-			"epicness": 5,
-			"dataValues": {
-				"LethalityAmount": 18,
-				"SpeedBaseline": 50,
-				"SpeedKill": 200,
-				"MSDuration": 1.5,
-				"CombatTimer": 8,
-				"DamageWindowDuration": 3,
-				"RangedLethalityMultiplier": 0.455
-			},
-			"itemCalculations": {
-				"BonusLethalityCalc": {
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 11,
-							"__type": "NumberCalculationPart"
-						}
-					],
-					"mRangedMultiplier": {
-						"mDataValue": "RangedLethalityMultiplier"
-					}
-				}
-			},
-			"itemGroups": [
-				"{ced2e7d1}"
 			],
 			"categories": {
 				"assassin": true

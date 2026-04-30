@@ -416,6 +416,7 @@
 							"mMultiplier": {
 								"mDataValue": "PTotalDamageMultiplier_ForModesBalance"
 							},
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
 									"mStartValue": 4,

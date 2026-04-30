@@ -135,6 +135,7 @@
 							]
 						},
 						"OnHitDamage": {
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
 									"mDataValue": "PassiveBaseDamage",

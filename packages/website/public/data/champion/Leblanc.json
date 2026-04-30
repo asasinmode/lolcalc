@@ -34,7 +34,7 @@
 				{
 					"name": "Sigil of Malice",
 					"objectName": "LeblancQ",
-					"image": "assets/characters/leblanc/hud/icons2d/leblancq.leblanc_rework.png",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancq.png",
 					"tooltip": "LeBlanc projects a sigil to an enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage> and marking them for @MarkDuration@ seconds.<br><br>Damaging the marked enemy with an Ability detonates the sigil, dealing <magicDamage>@MarkDamage@ magic damage</magicDamage>.<br><br>If either part kills the target, Leblanc refunds @ManaRefund*100@% of the Mana cost and @CooldownRefund*100@% of this spell's remaining Cooldown.<br><br><rules>The initial sigil deals an additional @BonusMinionDamage@ damage to minions. </rules>",
 					"extendedVariables": [
 						{
@@ -106,8 +106,8 @@
 				{
 					"name": "Distortion",
 					"objectName": "LeblancW",
-					"image": "assets/characters/leblanc/hud/icons2d/leblancw.leblanc_rework.png",
-					"tooltip": "LeBlanc dashes then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. For @Effect3Amount@ seconds after dashing, LeBlanc can <recast>Recast</recast>.<br><br><recast>Recast:</recast> LeBlanc returns to her starting location.",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancw.png",
+					"tooltip": "LeBlanc dashes then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. For @SnapbackTimeAllowed@ seconds after dashing, LeBlanc can <recast>Recast</recast>.<br><br><recast>Recast:</recast> LeBlanc returns to her starting location.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -121,7 +121,11 @@
 					"cooldownTime": [15, 15, 13.75, 12.5, 11.25, 10, 10],
 					"dataValues": {
 						"WAPRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
-						"BaseDamage": [35, 75, 115, 155, 195, 235, 275]
+						"BaseDamage": [35, 75, 115, 155, 195, 235, 275],
+						"SnapbackTimeAllowed": [4, 4, 4, 4, 4, 4, 4],
+						"SnapbackDelay": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"SnapbackQueueWindow": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"SpellMaxRange": [600, 600, 600, 600, 600, 600, 600]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -154,8 +158,8 @@
 				{
 					"name": "Ethereal Chains",
 					"objectName": "LeblancE",
-					"image": "assets/characters/leblanc/hud/icons2d/leblance.leblanc_rework.png",
-					"tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br><br>If they remain shackled for @Effect3Amount@ seconds, LeBlanc <status>Roots</status> them for @Effect4Amount@ seconds and deals an additional <magicDamage>@DelayedDamage@ magic damage</magicDamage>.",
+					"image": "assets/characters/leblanc/hud/icons2d/leblance.png",
+					"tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br><br>If they remain shackled for @TetherDuration@ seconds, LeBlanc <status>Roots</status> them for @RootDuration@ seconds and deals an additional <magicDamage>@DelayedDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
 							"name": "BaseInitialDamage",
@@ -172,7 +176,10 @@
 						"BaseInitialDamage": [30, 50, 70, 90, 110, 130, 150],
 						"BaseDelayedDamage": [40, 80, 120, 160, 200, 240, 280],
 						"InitialAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
-						"DelayedAPRatio": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]
+						"DelayedAPRatio": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85],
+						"TetherDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"RootDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"TetherDistance": [865, 865, 865, 865, 865, 865, 865]
 					},
 					"spellCalculations": {
 						"InitialDamage": {
@@ -182,7 +189,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{4db10781}",
+									"mDataValue": "InitialAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -194,7 +201,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{16e82c6b}",
+									"mDataValue": "DelayedAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -216,7 +223,7 @@
 				{
 					"name": "Mimic",
 					"objectName": "LeblancR",
-					"image": "assets/characters/leblanc/hud/icons2d/leblancr.leblanc_rework.png",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancr.png",
 					"tooltip": "LeBlanc mimics her most recent Ability, using it again. The mimicked Ability deals increased damage.<br><br><spellName>Mimicked Sigil of Malice</spellName> deals <magicDamage>@RQ1Damage@ magic damage</magicDamage> when applied, and <magicDamage>@RQ2Damage@ magic damage</magicDamage> when consumed.<br><spellName>Mimicked Distortion</spellName> deals <magicDamage>@RWDamage@ magic damage</magicDamage>.<br><spellName>Mimicked Ethereal Chains</spellName> deals <magicDamage>@RE1Damage@ magic damage</magicDamage> when shackled and <magicDamage>@RE2Damage@ magic damage</magicDamage> when <status>Rooting</status>.",
 					"extendedVariables": [
 						{
@@ -314,7 +321,7 @@
 				{
 					"name": "Mirror Image",
 					"objectName": "LeblancP",
-					"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancp.png",
 					"tooltip": "{{game_character_passiveTooltip_LeBlanc}}",
 					"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
 					"cooldownTime": [60, 60, 60, 60, 60, 60, 60],

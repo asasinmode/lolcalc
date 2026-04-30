@@ -62,7 +62,7 @@
 						"PranceMaxStacks": [4, 4, 4, 4, 4, 4, 4],
 						"PranceFalloffTime": [1, 1, 1, 1, 1, 1, 1],
 						"PranceBonusPerStack": [0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08],
-						"APRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
+						"APRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -237,12 +237,12 @@
 						}
 					],
 					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
+					"cooldownTime": [150, 150, 130, 110, 110, 110, 110],
 					"dataValues": {
 						"DrowsyDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"SleepDuration": [2, 2, 2, 2, 2, 2, 2],
 						"ImpactDamage": [25, 25, 25, 25, 25, 25, 25],
-						"BreakDamageBase": [100, 150, 200, 250, 300, 350, 400],
+						"BreakDamageBase": [50, 100, 150, 200, 250, 300, 350],
 						"InitialSlow": [-0.1, -0.1, -0.1, -0.1, -0.1, -0.1, -0.1]
 					},
 					"spellCalculations": {
@@ -254,7 +254,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.45,
+									"mCoefficient": 0.4,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -303,8 +303,9 @@
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
 								{
-									"mNumber": 65,
-									"__type": "NumberCalculationPart"
+									"mStartValue": 70,
+									"mEndValue": 180,
+									"__type": "ByCharLevelInterpolationCalculationPart"
 								}
 							]
 						},
@@ -315,7 +316,7 @@
 									"__type": "NumberCalculationPart"
 								},
 								{
-									"mCoefficient": 0.015,
+									"mCoefficient": 0.025,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

@@ -82,7 +82,7 @@
 						},
 						"TotalYankDamage": {
 							"mMultiplier": {
-								"mDataValue": "{3e052726}"
+								"mDataValue": "TetherPopDamageMultiplier"
 							},
 							"mModifiedGameCalculation": "TotalDamage"
 						},
@@ -402,7 +402,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mDataValue": "{8a3e65f6}",
+									"mDataValue": "DismountedResistRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -410,7 +410,7 @@
 						"MountCooldown": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "{73cfda6d}",
+									"mDataValue": "MountCD",
 									"__type": "NamedDataValueCalculationPart"
 								}
 							]

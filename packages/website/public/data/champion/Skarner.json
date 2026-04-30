@@ -50,13 +50,13 @@
 							"nameOverride": "spell_skarner_q_monstercap"
 						}
 					],
-					"mana": [45, 45, 45, 45, 45, 45],
+					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [8, 8, 6.75, 5.5, 4.25, 3, 3],
 					"dataValues": {
 						"RockHoldDuration": [5, 5, 5, 5, 5, 5, 5],
 						"AttackRadius": [300, 300, 300, 300, 300, 300, 300],
 						"BaseDamage": [0, 10, 20, 30, 40, 50, 60],
-						"MaxHPPercent": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
+						"MaxHPPercent": [0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11],
 						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
 						"SlowPercent": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"MonsterDamageCap": [100, 150, 200, 250, 300, 350, 400],
@@ -164,7 +164,7 @@
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [23, 22, 21, 20, 19, 18, 17],
+					"cooldownTime": [23, 22, 21, 20, 19, 18, 18],
 					"dataValues": {
 						"ChargeDuration": [2.75, 2.75, 2.75, 2.75, 2.75, 2.75, 2.75],
 						"InitialSpeed": [150, 150, 150, 150, 150, 150, 150],

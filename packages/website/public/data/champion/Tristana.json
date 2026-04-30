@@ -139,7 +139,8 @@
 						"ActiveMaxStacks": [4, 4, 4, 4, 4, 4, 4],
 						"ActiveDuration": [4, 4, 4, 4, 4, 4, 4],
 						"ActivePerStackAmp": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
-						"CritChanceModifier": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"CritChanceModifier": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"PassiveDamage": {
@@ -193,8 +194,8 @@
 									"__type": "StatBySubPartCalculationPart"
 								},
 								{
-									"mCoefficient": 0.5,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
@@ -249,7 +250,8 @@
 						"BaseDamage": [175, 225, 275, 325, 375, 425, 475],
 						"KnockbackDistance": [400, 600, 800, 1000, 1200, 1400, 1600],
 						"KnockbackArea": [200, 200, 200, 200, 200, 200, 200],
-						"StunDuration": [0.25, 0.4, 0.55, 0.7, 0.85, 1, 1.15]
+						"StunDuration": [0.25, 0.4, 0.55, 0.7, 0.85, 1, 1.15],
+						"APRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"DamageCalc": {
@@ -265,8 +267,8 @@
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						}

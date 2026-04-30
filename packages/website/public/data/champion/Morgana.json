@@ -110,7 +110,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{b109acb8}",
+									"mDataValue": "BaseApRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]

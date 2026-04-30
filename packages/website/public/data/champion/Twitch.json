@@ -235,7 +235,7 @@
 					"name": "Deadly Venom",
 					"objectName": "TwitchDeadlyVenomMarker",
 					"image": "assets/characters/twitch/hud/icons2d/twitch_passive.png",
-					"tooltip": "Twitch's Attacks infect his target, dealing <trueDamage>@DamagePerSecond@ true damage</trueDamage> per second for @Duration@ seconds, stacking up to @MaxStacks@ times. <br><br>Max Damage Per Second: @DamagePerSecondMax@",
+					"tooltip": "Twitch's Attacks infect his target %i:OnHit% <OnHit>On-Hit</OnHit>, dealing <trueDamage>@DamagePerSecond@ true damage</trueDamage> per second for @Duration@ seconds, stacking up to @MaxStacks@ times. <br><br>Max Damage Per Second: @DamagePerSecondMax@",
 					"dataValues": {
 						"Duration": [6, 6, 6, 6, 6, 6, 6],
 						"MaxStacks": [6, 6, 6, 6, 6, 6, 6],

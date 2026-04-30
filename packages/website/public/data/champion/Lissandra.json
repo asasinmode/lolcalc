@@ -11,7 +11,7 @@
 		"mpperlevel": 30,
 		"movespeed": 325,
 		"armor": 22,
-		"armorperlevel": 4.9,
+		"armorperlevel": 4.2,
 		"spellblock": 30,
 		"spellblockperlevel": 1.3,
 		"attackrange": 550,
@@ -50,7 +50,7 @@
 						}
 					],
 					"mana": [55, 60, 65, 70, 75, 80],
-					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
+					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
 						"damage": [45, 80, 115, 150, 185, 220, 255],
 						"slowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],

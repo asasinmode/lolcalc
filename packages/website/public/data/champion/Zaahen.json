@@ -34,7 +34,7 @@
 				{
 					"name": "The Darkin Glaive",
 					"objectName": "ZaahenQ",
-					"image": "assets/characters/zaahen/hud/icons2d/zaahenq.zaahen.png",
+					"image": "assets/characters/zaahen/hud/icons2d/zaahenq.png",
 					"tooltip": "Zaahen slashes twice on his next Attack, dealing <physicalDamage>@InitialDamage@ bonus physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of his max Health</healing>.<br><br><recast>Recast:</recast> Zaahen's next Attack deals <physicalDamage>@SecondHitDamage@ bonus physical damage</physicalDamage> and <status>Knocks</status> the target Up for @KnockUpDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -108,11 +108,15 @@
 				{
 					"name": "Dreaded Return",
 					"objectName": "ZaahenW",
-					"image": "assets/characters/zaahen/hud/icons2d/zaahenw.zaahen.png",
+					"image": "assets/characters/zaahen/hud/icons2d/zaahenw.png",
 					"tooltip": "Zaahen stabs in a direction, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to enemies hit, then <status>Pulls</status> them toward him, dealing <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
 							"name": "InitialBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "SecondaryBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -120,7 +124,7 @@
 					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
 						"InitialBaseDamage": [20, 40, 60, 80, 100, 120, 140],
-						"SecondaryBaseDamage": [20, 40, 60, 80, 100, 120, 140],
+						"SecondaryBaseDamage": [10, 30, 50, 70, 90, 110, 130],
 						"MaximumPullDistance": [225, 225, 225, 225, 225, 225, 225],
 						"PullSpeed": [900, 900, 900, 900, 900, 900, 900]
 					},
@@ -142,13 +146,13 @@
 						"SecondaryDamage": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "{96bfc63d}",
+									"mDataValue": "SecondaryBaseDamage",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.5,
+									"mCoefficient": 0.3,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -164,7 +168,7 @@
 				{
 					"name": "Aureate Rush",
 					"objectName": "ZaahenE",
-					"image": "assets/characters/zaahen/hud/icons2d/zaahene.zaahen.png",
+					"image": "assets/characters/zaahen/hud/icons2d/zaahene.png",
 					"tooltip": "Zaahen dashes then slices around himself, dealing <physicalDamage>@BaseDamageCalc@ physical damage</physicalDamage> to nearby enemies.<br><br>Enemies at the edge of the slice take <physicalDamage>@BonusDamageCalc@ physical damage</physicalDamage> <magicDamage>+@PercentHPDamage*100@% of their maximum Health as magic damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
@@ -190,7 +194,7 @@
 						"MinimumRadius": [200, 200, 200, 200, 200, 200, 200],
 						"PercentHPDamage": [0.035, 0.04, 0.045, 0.05, 0.055, 0.06, 0.065],
 						"MonsterDamageCap": [400, 400, 400, 400, 400, 400, 400],
-						"MonsterDamageBonus": [75, 75, 75, 75, 75, 75, 75],
+						"MonsterDamageBonus": [50, 50, 50, 50, 50, 50, 50],
 						"SweetSpotDamageMod": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"DamageBonusBase": [30, 60, 90, 120, 150, 180, 210]
 					},
@@ -211,7 +215,7 @@
 						},
 						"BonusDamageCalc": {
 							"mMultiplier": {
-								"mDataValue": "{3ea8f78a}"
+								"mDataValue": "SweetSpotDamageMod"
 							},
 							"mModifiedGameCalculation": "BaseDamageCalc"
 						}
@@ -226,7 +230,7 @@
 				{
 					"name": "Grim Deliverance",
 					"objectName": "ZaahenR",
-					"image": "assets/characters/zaahen/hud/icons2d/zaahenr.zaahen.png",
+					"image": "assets/characters/zaahen/hud/icons2d/zaahenr.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: Zaahen gains <armorPen>@ArmorPen*100@% %i:scaleAPen% Armor Penetration</armorPen>.<br><br><spellActive>Active</spellActive>: Zaahen rises, gaining @DamageReduction*100@% Damage Reduction while casting.<br><br>Zaahen then stabs downward, dealing <physicalDamage>@DamageEndCalc@ physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of the damage dealt to enemy champions as Health</healing>.",
 					"extendedVariables": [
 						{
@@ -261,7 +265,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mDataValue": "{5d9ec667}",
+									"mDataValue": "BonusADDamageRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -277,7 +281,7 @@
 				{
 					"name": "Cultivation of War",
 					"objectName": "ZaahenPassive",
-					"image": "assets/characters/zaahen/hud/icons2d/zaahenp.zaahen.png",
+					"image": "assets/characters/zaahen/hud/icons2d/zaahenp.png",
 					"tooltip": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.",
 					"tooltipExtended": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.<br><br><rules>{{Reminder_Stasis}}</rules>",
 					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
@@ -320,23 +324,23 @@
 						"RevivePercentCalc": {
 							"mFormulaParts": [
 								{
-									"{91d404a5}": "{97d06e0a}",
-									"{bbd778a2}": "{7f4480d4}",
+									"{91d404a5}": "ReviveLevel1Value",
+									"{bbd778a2}": "ReviveBonusPerLevel",
 									"{9823b29a}": [
 										{
 											"level": 6,
-											"{ae9b464d}": "{a51b34b5}",
-											"{b0d8b2ac}": "{c41636b0}"
+											"{ae9b464d}": "ReviveAdditionalBonusAtThisLevel",
+											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter"
 										},
 										{
 											"level": 11,
-											"{ae9b464d}": "{a51b34b5}",
-											"{b0d8b2ac}": "{c41636b0}"
+											"{ae9b464d}": "ReviveAdditionalBonusAtThisLevel",
+											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter"
 										},
 										{
 											"level": 16,
-											"{ae9b464d}": "{a51b34b5}",
-											"{b0d8b2ac}": "{c41636b0}"
+											"{ae9b464d}": "ReviveAdditionalBonusAtThisLevel",
+											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter"
 										}
 									],
 									"__type": "{4ce08984}"
@@ -347,8 +351,8 @@
 						"PercentBonusADCalc": {
 							"mFormulaParts": [
 								{
-									"{0589a59c}": "{ab7680c1}",
-									"{0b65bc23}": "{9d89f26f}",
+									"{0589a59c}": "PBonusADMin",
+									"{0b65bc23}": "PBonusADMax",
 									"__type": "{ee18a47b}"
 								}
 							],

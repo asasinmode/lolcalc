@@ -100,21 +100,23 @@
 					"name": "Twisted Advance",
 					"objectName": "MaokaiW",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_w.png",
-					"tooltip": "Maokai transforms into a moving mass of roots, becoming Untargetable and dashing to an enemy. Upon arrival, he <status>Roots</status> the enemy for @Effect2Amount@ second(s) and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
+					"tooltip": "Maokai transforms into a moving mass of roots, becoming Untargetable and dashing to an enemy. Upon arrival, he <status>Roots</status> the enemy for @RootDuration@ second(s) and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "RootDuration",
 							"nameOverride": "spell_listtype_rootduration"
 						}
 					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
-						"BaseDamage": [35, 60, 85, 110, 135, 160, 185]
+						"BaseDamage": [35, 60, 85, 110, 135, 160, 185],
+						"RootDuration": [0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5],
+						"DashSpeed": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -199,7 +201,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{b109acb8}",
+									"mDataValue": "BaseApRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
@@ -298,7 +300,8 @@
 						"MaxRootDuration": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],
 						"BaseDamage": [75, 150, 225, 300, 375, 450, 525],
 						"MoveHaste": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-						"HasteDuration": [2, 2, 2, 2, 2, 2, 2]
+						"HasteDuration": [2, 2, 2, 2, 2, 2, 2],
+						"RootDuration": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

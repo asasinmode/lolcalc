@@ -142,17 +142,17 @@
 						"ReturnDamageCalc": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "{91239045}",
+									"mDataValue": "FlatDamageReturn",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 1,
-									"mDataValue": "{1649dfb2}",
+									"mDataValue": "DamageArmorRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 6,
-									"mDataValue": "{8eaf095a}",
+									"mDataValue": "DamageMRRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -211,17 +211,17 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mDataValue": "{91239045}",
+									"mDataValue": "FlatDamageReturn",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 1,
-									"mDataValue": "{1649dfb2}",
+									"mDataValue": "DamageArmorRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 6,
-									"mDataValue": "{8eaf095a}",
+									"mDataValue": "DamageMRRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -405,7 +405,7 @@
 								},
 								{
 									"mStat": 6,
-									"mDataValue": "{95ef2c35}",
+									"mDataValue": "MagicResistRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]

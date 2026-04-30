@@ -185,7 +185,7 @@
 						},
 						"FinalMagicDR": {
 							"mMultiplier": {
-								"mDataValue": "{297f7f37}"
+								"mDataValue": "MRReductionAmount"
 							},
 							"mModifiedGameCalculation": "FinalPhysicalDR"
 						}
@@ -336,7 +336,7 @@
 							"mFormulaParts": [
 								{
 									"{91d404a5}": "OnHitBaseDamage",
-									"{b2cd0eb0}": "{73f1945a}",
+									"{b2cd0eb0}": "OnHitPerLevel",
 									"__type": "{b22609db}"
 								},
 								{

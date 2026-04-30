@@ -35,7 +35,7 @@
 					"name": "Light Binding",
 					"objectName": "LuxLightBinding",
 					"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
-					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @Effect3Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
+					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @RootDuration@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -45,7 +45,8 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"dataValues": {
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
-						"APRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
+						"APRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"RootDuration": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"TotalDamageTT": {
@@ -76,7 +77,7 @@
 					"name": "Prismatic Barrier",
 					"objectName": "LuxPrismaticWave",
 					"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
-					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @Effect3Amount@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
+					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @ShieldDuration@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
 					"extendedVariables": [
 						{
 							"name": "BaseShieldAmount",
@@ -124,10 +125,10 @@
 					"name": "Lucent Singularity",
 					"objectName": "LuxLightStrikeKugel",
 					"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png",
-					"tooltip": "Lux creates a light zone that <status>Slows</status> by @Effect1Amount@% and reveals the area. After @Effect3Amount@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
+					"tooltip": "Lux creates a light zone that <status>Slows</status> by @SlowPercent@% and reveals the area. After @SlowZoneDuration@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -144,15 +145,16 @@
 						"VisionRadius": [650, 650, 650, 650, 650, 650, 650],
 						"SlowLingerDuration": [1, 1, 1, 1, 1, 1, 1],
 						"SlowPercent": [20, 25, 30, 35, 40, 45, 50],
-						"SlowZoneDuration": [5, 5, 5, 5, 5, 5, 5]
+						"SlowZoneDuration": [5, 5, 5, 5, 5, 5, 5],
+						"BaseDamage": [20, 65, 115, 165, 215, 265, 315]
 					},
 					"spellCalculations": {
 						"TotalDamageTT": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 2,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.8,
@@ -240,7 +242,7 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mValues": [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320],
+									"values": [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320],
 									"__type": "ByCharLevelFormulaCalculationPart"
 								},
 								{

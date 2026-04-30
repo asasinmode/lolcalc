@@ -1,5 +1,5 @@
 {
-	"version": "16.4.1",
+	"version": "16.9.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -403,7 +403,6 @@
 			"name": "Gwen",
 			"image": "Gwen.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -496,7 +495,6 @@
 			"name": "Jayce",
 			"image": "Jayce.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -723,7 +721,6 @@
 			"name": "Malphite",
 			"image": "Malphite.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -942,7 +939,6 @@
 			"name": "Qiyana",
 			"image": "Qiyana.png",
 			"roles": {
-				"jungle": true,
 				"mid": true
 			}
 		},
@@ -1069,6 +1065,7 @@
 			"name": "Senna",
 			"image": "Senna.png",
 			"roles": {
+				"bot": true,
 				"support": true
 			}
 		},
@@ -1186,8 +1183,7 @@
 			"name": "Swain",
 			"image": "Swain.png",
 			"roles": {
-				"support": true,
-				"bot": true
+				"support": true
 			}
 		},
 		"Sylas": {
@@ -1215,8 +1211,8 @@
 			"name": "Tahm Kench",
 			"image": "TahmKench.png",
 			"roles": {
-				"top": true,
-				"support": true
+				"support": true,
+				"top": true
 			}
 		},
 		"Taliyah": {
@@ -1234,7 +1230,8 @@
 			"name": "Talon",
 			"image": "Talon.png",
 			"roles": {
-				"jungle": true
+				"jungle": true,
+				"mid": true
 			}
 		},
 		"Taric": {
@@ -1279,7 +1276,6 @@
 			"name": "Trundle",
 			"image": "Trundle.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -1334,7 +1330,6 @@
 			"name": "Varus",
 			"image": "Varus.png",
 			"roles": {
-				"top": true,
 				"bot": true
 			}
 		},
@@ -1344,8 +1339,8 @@
 			"name": "Vayne",
 			"image": "Vayne.png",
 			"roles": {
-				"top": true,
-				"bot": true
+				"bot": true,
+				"top": true
 			}
 		},
 		"Veigar": {
@@ -1520,7 +1515,6 @@
 			"name": "Zaahen",
 			"image": "Zaahen.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},

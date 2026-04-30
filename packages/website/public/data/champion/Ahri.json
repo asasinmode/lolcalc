@@ -48,7 +48,7 @@
 					"mana": [55, 65, 75, 85, 95, 95],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
-						"BaseDamage": [15, 40, 65, 90, 115, 140, 165]
+						"BaseDamage": [10, 35, 60, 85, 110, 135, 160]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

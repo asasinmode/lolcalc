@@ -116,6 +116,34 @@
 						"MovementSpeedDuration": [2, 2, 2, 2, 2, 2, 2],
 						"CherryBonusHaste": [30, 30, 30, 30, 30, 30, 30]
 					},
+					"spellCalculations": {
+						"{955fbaa3}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -0.1
+										},
+										{
+											"mLevel": 10,
+											"mAdditionalBonusAtThisLevel": -0.075
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -0.1
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -0.1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
 					"effectAmount": {
 						"0": [140, 140, 140, 140, 140, 140, 140],
 						"1": [4, 4, 4, 4, 4, 4, 4],

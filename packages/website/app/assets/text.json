@@ -11,7 +11,7 @@
 				]
 			},
 			"1054": {
-				"subtitleLeft": "Defense",
+				"subtitleLeft": "Healing",
 				"subtitleRight": "Unique: Starter",
 				"tooltipShop": [
 					[
@@ -58,12 +58,26 @@
 				"keywordDefinitions": "{{Item_KeywordDefinition_Takedown}}"
 			},
 			"1083": {
-				"subtitleLeft": "Gold",
+				"subtitleLeft": "Scaling Power",
 				"tooltipShop": [
 					[
 						"<passive>Reap</passive>",
 						"Restore <healing>@OnHitHeal@ Health</healing> {{ Item_Keyword_OnHit }}.",
 						"Killing minions grants <gold>@MinionKillGold@ gold</gold>, up to <gold>@MinionKillThreshold@</gold>. Reaching the limit grants another <gold>@CompleteGold@ gold</gold>."
+					]
+				]
+			},
+			"1086": {
+				"subtitleLeft": "Fast Auto Attack Item",
+				"subtitleRight": "Unique: Starter"
+			},
+			"1120": {
+				"subtitleLeft": "Resistances",
+				"subtitleRight": "Unique: Starter",
+				"tooltipShop": [
+					[
+						"<passive>Helping Hand</passive>",
+						"Attacks deal <physicalDamage>@BonusDamageToMinions@ bonus physical damage</physicalDamage> to minions."
 					]
 				]
 			},
@@ -175,15 +189,15 @@
 				"footerLeft": "Damage dealt to champions: <attention>@f2@</attention>"
 			},
 			"2510": {
-				"subtitleLeft": "On-Hit Dueling",
+				"subtitleLeft": "On-Hit Brawling",
 				"subtitleRight": "Unique: Spellblade",
 				"tooltipShop": [
 					[
 						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
-						"After using an Ability, your next Attack deals <magicDamage>@SpellbladeDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and applies {{ Item_Keyword_OnHit }} effects an additional time."
+						"After using an Ability, your next Attack deals <magicDamage>@SpellbladeDamage@ bonus magic damage</magicDamage> and <healing>heals you for @SpellbladeHealing@</healing> {{ Item_Keyword_OnHit }} and then applies {{ Item_Keyword_OnHit }} effects an additional time."
 					]
 				],
-				"footerLeft": "Damage to Champions: <attention>@f1@</attention>"
+				"footerLeft": "Damage Dealt to Champions: <attention>@f1@</attention><br>Healing Done: <attention>@f2@</attention>"
 			},
 			"2512": {
 				"subtitleLeft": "Ultimate All-In",
@@ -298,17 +312,6 @@
 				],
 				"footerLeft": "Healing Done: <attention>@f1@</attention>"
 			},
-			"3002": {
-				"subtitleLeft": "Team Mobility",
-				"subtitleRight": "Unique: Momentum",
-				"tooltipShop": [
-					[
-						"<passive>Lead the Way</passive>",
-						"While moving, build up to <speed>@MaxMovementSpeed@ bonus Move Speed</speed>.",
-						"At max speed:<li>Create a trail that grants allied champions <speed>Move Speed equal to @MovespeedDonation*100@%</speed> of yours. <li>If you are %i:meleeActive%Melee, your next Attack <keyword>Slows</keyword> the target by @MaxStackSlowAmount*100@% for @MaxStackSlowDuration@ second."
-					]
-				]
-			},
 			"3003": {
 				"subtitleLeft": "Mana Scaling",
 				"subtitleRight": "Semi-Unique: Manaflow",
@@ -352,6 +355,15 @@
 			},
 			"3006": {
 				"subtitleLeft": "Attack Speed"
+			},
+			"3008": {
+				"subtitleLeft": "Stacking Omnivamp",
+				"tooltipShop": [
+					[
+						"<passive>Slay</passive>",
+						"Gain @OmnivampOnTakedown*100@% Omnivamp on Champion takedown, stacking up to @MaxStacks@ times."
+					]
+				]
 			},
 			"3009": {
 				"subtitleLeft": "Combat Mobility",
@@ -743,18 +755,18 @@
 				"extended": "<rules><passive>Wind's Fury</passive> can <attention>Critically Strike</attention>.</rules>"
 			},
 			"3087": {
-				"subtitleLeft": "Waveclear",
+				"subtitleLeft": "Chain On Hits",
 				"tooltipShop": [
 					[
-						"<passive>Electrospark</passive> {{ Item_Cooldown }}",
-						"Your first @ChainCount@ attacks within @Duration@ seconds fire chain lightning %i:OnHit% <OnHit>On-Hit</OnHit>, dealing <magicDamage>@ChainDamage@ magic damage</magicDamage> to up to <attention>@BounceCount@</attention> targets, increased to <magicDamage>@NonChampChainDamage@ magic damage</magicDamage> against Minions and Monsters. Cooldown begins with the first attack."
+						"<passive>Electrospark</passive>",
+						"Your <keyword>Energized Attacks</keyword> fire chain lightning, dealing <magicDamage>@ChainDamage@ magic damage</magicDamage> to up to <attention>@BounceCount@</attention> targets, increased to <magicDamage>@NonChampChainDamage@ magic damage</magicDamage> against Minions and Monsters. Applies %i:OnHit% <OnHit>On-Hit</OnHit> effects to secondary bounce targets."
 					],
 					[
 						"<passive>Electroshock</passive>",
-						"Champion takedowns within @TakedownWindow@ seconds of damaging the target reset Electrospark's cooldown."
+						"Basic Attacks grant @BonusEnergizedStacks@ extra <keyword>Energized</keyword> stacks."
 					]
 				],
-				"footerLeft": "Bonus Damage to Champions: <attention>@f1@</attention>"
+				"footerLeft": "Extra Champions Zapped: <attention>@f2@</attention><br>Bonus Damage to Champions: <attention>@f1@</attention>"
 			},
 			"3089": {
 				"subtitleLeft": "Magic Amp",
@@ -1158,6 +1170,22 @@
 				"footerLeft": "Healing reduced: <attention>@f2@</attention><br>Regen reduced: <attention>@f3@</attention>",
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Wounds }}"
 			},
+			"3168": {
+				"subtitleLeft": "Drain Tank",
+				"tooltipShop": [
+					[
+						"<passive>Slay</passive>",
+						"Gain @OmnivampOnTakedown*100@% Omnivamp on Champion takedown, stacking up to @MaxStacks@ times."
+					],
+					[
+						"<passive>Now and Forever</passive>",
+						"While above half Health, deal @DamageMod*100@% increased damage."
+					],
+					[
+						"While below half Health, gain @HealingMod*100@% increased healing, shielding, and regeneration."
+					]
+				]
+			},
 			"3170": {
 				"tooltipShop": [
 					[
@@ -1301,7 +1329,7 @@
 						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> and grants <scaleMana>@TotalManaRefund@ Mana</scaleMana> {{ Item_Keyword_OnHit }}."
 					]
 				],
-				"footerLeft": "Mana Restored: <attention>@f2@</attention>"
+				"footerLeft": "Damage dealt to champions: <attention>@f1@</attention><br>Mana Restored: <attention>@f2@</attention>"
 			},
 			"3742": {
 				"subtitleLeft": "Mobility",
@@ -1375,7 +1403,7 @@
 						"While near an ally champion, damage enemy champions or kill minions to gain <gold>gold</gold>."
 					]
 				],
-				"extended": "<li>Damaging Abilities and Attacks against champions or structures grant <gold>@lolcalcChampRange@ gold</gold>;<li>Killing a minion grants you <gold>@ExecuteMinionGold@ gold</gold> and the nearest allied champion the kill gold.<br><br><rules>{{ Item_Support_Minion_Warning }}</rules>",
+				"extended": "<li>Damaging Abilities and Attacks against champions or structures grant <gold>@lolcalcChampRange@ gold</gold>;<li>Killing a minion grants you <gold>@ExecuteMinionGold@ gold</gold> and the nearest allied champion the kill gold.",
 				"footerLeft": "Quest gold: <attention>@f4@</attention>/@QuestGoldRequirement@"
 			},
 			"3869": {
@@ -1391,7 +1419,7 @@
 						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
-				"extended": "<rules>{{ Item_Support_Minion_Warning }}<br>Item cooldown is restarted when damage is taken from champions.</rules>",
+				"extended": "<rules>Item cooldown is restarted when damage is taken from champions.</rules>",
 				"footerLeft": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Damage Blocked: <attention>@f3@</attention>"
 			},
 			"3870": {
@@ -1407,7 +1435,6 @@
 						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
-				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"footerLeft": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Damage blocked: <attention>@f3@</attention><br>Damage dealt: <attention>@f2@</attention>"
 			},
 			"3871": {
@@ -1423,7 +1450,7 @@
 						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
-				"extended": "<rules>{{ Item_Support_Minion_Warning }}<br>Damage is capped at @MonsterDamageCap@ against monsters.</rules>",
+				"extended": "<rules>Damage is capped at @MonsterDamageCap@ against monsters.</rules>",
 				"footerLeft": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Total Damage to champions: <attention>@f4@</attention>"
 			},
 			"3876": {
@@ -1439,7 +1466,6 @@
 						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
-				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"footerLeft": "Sleigh rides: <attention>@f3@</attention><br>Current Stealth Wards placed: <attention>@f5@/@f6@</attention>",
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Slow }}<br>{{ Item_KeywordDefinition_Immobilize }}"
 			},
@@ -1456,7 +1482,6 @@
 						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
-				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"footerLeft": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Spellblade Damage to champions: <attention>@f4@</attention><br>Bonus Damage from Damage Amp: <attention>@f3@</attention>"
 			},
 			"3916": {
@@ -1640,7 +1665,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Rapids</passive>",
-						"Healing or Shielding an ally grants you both <magicDamage>@AbilityPowerMin@ Ability Power</magicDamage> for @BuffDuration@ seconds."
+						"Healing or Shielding an ally grants you both %i:scaleAP% <magicDamage>@APMod@ Ability Power</magicDamage> and %i:scaleAH% <attention>@AHMod@ Ability Haste</attention> for @BuffDuration@ seconds."
 					]
 				]
 			},
@@ -1902,31 +1927,19 @@
 				"extended": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
 			},
 			"6699": {
-				"subtitleLeft": "Burst Slow",
-				"tooltipShop": [
-					[
-						"<passive>Galvanize</passive>",
-						"Dashes and Stealth stack <keyword>Energized</keyword> @DashBonus*100@% faster."
-					],
-					[
-						"<passive>Firmament</passive>",
-						"Your <keyword>Energized Attack</keyword> deals <physicalDamage>@DamageCalc@ bonus physical damage</physicalDamage> and <keyword>Slows</keyword> by <slow>@lolcalcChampRange@%</slow> for @SlowDuration@ seconds."
-					]
-				],
-				"keywordDefinitions": "{{ Item_KeywordDefinition_Energized }}"
-			},
-			"6701": {
 				"subtitleLeft": "Burst Damage",
 				"tooltipShop": [
 					[
-						"<passive>Preparation</passive>",
-						"After being out of combat with Champions for @CombatTimer@ seconds gain <scaleLethality>@BonusLethalityCalc@ Lethality</scaleLethality>. This Lethality lasts for @DamageWindowDuration@ seconds after dealing damage to champions."
+						"<passive>Galvanize</passive>",
+						"Damaging an Enemy Champions with an ability triggers <keyword>Energized</keyword> if it is ready."
 					],
 					[
-						"<passive>Extraction</passive>",
-						"When a champion that you damaged within @DamageWindowDuration@ seconds dies, gain <speed>@SpeedKill@ decaying Move Speed</speed> for @MSDuration@ seconds."
+						"<passive>Firmament</passive>",
+						"Your <keyword>Energized Attack</keyword> deals <physicalDamage>@PercentHPMeleeRangedSplit@%</physicalDamage> target's Current Health as <physicalDamage>bonus physical damage</physicalDamage> and grants you %i:scaleAPen% <scaleLethality>@LethalityBonusModMeleeRangedSplit@ Lethality</scaleLethality> for @LethalityBonusDuration@ seconds."
 					]
-				]
+				],
+				"footerLeft": "Damage to Champions: <attention>@f1@</attention>",
+				"keywordDefinitions": "{{ Item_KeywordDefinition_Energized }}"
 			},
 			"8010": {
 				"subtitleLeft": "Magic Penetration",
@@ -1984,7 +1997,7 @@
 					"name": "Lethal Tempo",
 					"tooltipShort": "Attacking an enemy champion grants you Attack Speed, up to @MaxStacks@ stacks. At max stacks, deal <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>bonus adaptive damage</font></lol-uikit-tooltipped-keyword> On-Attack.",
 					"tooltipLong": "Attacking an enemy champion grants you [@TTASPerStackMelee*100@% Melee || @TTASPerStackRanged*100@% Ranged] Attack Speed for @Duration@ seconds, up to @MaxStacks@. At max stacks, deal [@TTMinNoteDamageMelee@ - @TTMaxNoteDamageMelee@ Melee || @TTMinNoteDamageRanged@ - @TTMaxNoteDamageRanged@ Ranged] <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>bonus adaptive damage On-Attack, increased by 1% per 1% Bonus Attack Speed</lol-uikit-tooltipped-keyword>.",
-					"tooltipStats": "Attacking an enemy champion grants you %i:scaleAS%@ASPerStack@ Attack Speed for @Duration@ seconds, up to @MaxStacks@. At max stacks, deal @NoteDamage@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>bonus adaptive damage</font></lol-uikit-tooltipped-keyword> %i:OnHit% <OnHit>On-Attack</OnHit>.<br><br>Max Stack Uptime: @f1@s<br>Damage Dealt: @f2@<br><br>This rune also tracks the percent of your basic attacks against champions that are launched within @PerfectlyTimedForgivance.2@ seconds of when your attack is ready after previously attacking a champion: @f3@% (@f4@ of @f5@)"
+					"tooltipStats": "Attacking an enemy champion grants you %i:scaleAS%@ASPerStack@ Attack Speed for @Duration@ seconds, up to @MaxStacks@. At max stacks, deal @NoteDamage@ (%i:scaleAS%) <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>bonus adaptive damage</font></lol-uikit-tooltipped-keyword> %i:OnHit% <OnHit>On-Attack</OnHit>.<br><br>Max Stack Uptime: @f1@s<br>Damage Dealt: @f2@<br><br>This rune also tracks the percent of your basic attacks against champions that are launched within @PerfectlyTimedForgivance.2@ seconds of when your attack is ready after previously attacking a champion: @f3@% (@f4@ of @f5@)"
 				},
 				"FleetFootwork": {
 					"name": "Fleet Footwork",
@@ -2066,9 +2079,9 @@
 				},
 				"HailOfBlades": {
 					"name": "Hail of Blades",
-					"tooltipShort": "Gain a large amount of Attack Speed for the first @NumHits@ attacks made against enemy champions.",
-					"tooltipLong": "Gain @ASBoostMin*100@% (@ASBoostRanged*100@% for ranged champions) Attack Speed when you attack an enemy champion for up to @NumHits@ attacks.<br><br>No more than @Duration@s can elapse between attacks or this effect will end.<br><br>Cooldown: @Cooldown@s.<br><br><rules>Attack resets increase the attack limit by 1.<br>Allows you to temporarily exceed the Attack Speed limit.</rules>",
-					"tooltipStats": "Gain {{ Item_Melee_Ranged_Split }}% Attack Speed when you attack an enemy champion for up to @NumHits@ attacks. <br><br>Cooldown: @Cooldown@s.<br><hr><br>Hail of Blades attacks: @f1@<br>Percentage of Hail attacks landed: @f2@%<br><br><rules>Basic Attack resets increase the attack limit by 1.<br>Allows you to temporarily exceed the Attack Speed limit.</rules>"
+					"tooltipShort": "Gain a large amount of Attack Speed and <trueDamage>bonus true damage</trueDamage> for the first @NumHits@ attacks made against enemy champions.",
+					"tooltipLong": "Gain @ASBoost*100@% (@ASBoostRanged*100@% for ranged champions) Attack Speed and <trueDamage>bonus true damage</trueDamage> when you attack an enemy champion for up to @NumHits@ attacks.<br><br>No more than @Duration@s can elapse between attacks or this effect will end.<br><br>Cooldown: @Cooldown@s.<br>On-Hit Damage: @BonusDamageMin@ - @BonusDamageMax@ (+@BonusADRatio.-1@ bonus AD, +@APRatio.-1@ AP) damage.<br><br><rules>Attack resets increase the attack limit by 1.<br>Allows you to temporarily exceed the Attack Speed limit.</rules>",
+					"tooltipStats": "When you attack an enemy champion, for up to @NumHits@ attacks, gain {{ Item_Melee_Ranged_Split }}% Attack Speed and deal <font color='#48C4B7'>@BonusDamage@</font> <trueDamage>bonus true damage</trueDamage>. <br><br>Cooldown: @Cooldown@s.<br><hr><br>Hail of Blades attacks: @f1@<br>Damage Dealt: @f2@<br>Percentage of Hail attacks landed: @f3@%<br><br><rules>Basic Attack resets increase the attack limit by +1, up to +@MaxBonusHits@.<br>Allows you to temporarily exceed the Attack Speed limit.</rules>"
 				},
 				"CheapShot": {
 					"name": "Cheap Shot",
@@ -2133,14 +2146,20 @@
 				"ArcaneComet": {
 					"name": "Arcane Comet",
 					"tooltipShort": "Damaging a champion with an ability hurls a damaging comet at their location.",
-					"tooltipLong": "Damaging a champion with an ability hurls a comet at their location, or, if Arcane Comet is on cooldown, reduces its remaining cooldown.<br><br><lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>Adaptive Damage</font></lol-uikit-tooltipped-keyword>: @DamageBase@ - @DamageMax@ based on level (<scaleAP>+@APRatio.-1@ AP</scaleAP> and <scaleAD>+@ADRatio.-1@ bonus AD</scaleAD>)<br>Cooldown: @RechargeTime@ - @RechargeTimeMin@s<br><rules><br>Cooldown Reduction:<br>Single Target: @PercentRefund*100@%.<br>Area of Effect: @AoEPercentRefund*100@%.<br>Damage over Time: @DotPercentRefund*100@%.<br></rules>",
-					"tooltipStats": "Damaging a champion with an ability hurls a comet at their location, or, if Arcane Comet is on cooldown, reduces its remaining cooldown.<br><br>Damage: @DamageCalc@<br>Cooldown: @CooldownCalc@s<br><rules><br>Cooldown Reduction:<br>Single Target: @PercentRefund*100@%.<br>Area of Effect: @AoEPercentRefund*100@%.<br>Damage over Time: @DotPercentRefund*100@%.<br></rules><br>You have hit with @f3@% of comets fired, for a total of @f1@ damage to champions."
+					"tooltipLong": "Damaging a champion with an ability hurls a comet at their location, dealing increased damage based on distance.<br><br><lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>Adaptive Damage</font></lol-uikit-tooltipped-keyword>: @DamageBase@ - @DamageMax@ based on level (<scaleAP>+@APRatio.-1@ AP</scaleAP> and <scaleAD>+@ADRatio.-1@ bonus AD</scaleAD>)<br>Cooldown: @RechargeTime@ - @RechargeTimeMin@s<br><rules><br>Damage amplification scales up to @MaxDamageAmp*100@% at @MaxRange@ range.<br></rules>",
+					"tooltipStats": "Damaging a champion with an ability hurls a comet at their location, dealing increased damage based on how far away they are.<br><br>Damage: @DamageCalc@<br>Cooldown: @CooldownCalc@s<br><rules><br>Damage amplification scales up to @MaxDamageAmp*100@% at @MaxRange@ range.<br></rules><br>You have hit with @f3@% of comets fired, for a total of @f1@ damage to champions."
 				},
 				"PhaseRush": {
-					"name": "Phase Rush",
-					"tooltipShort": "Hitting an enemy champion with @NumberToProc@ <b>separate</b> attacks or abilities grants a burst of <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>MS</lol-uikit-tooltipped-keyword> and Slow Resist. ",
-					"tooltipLong": "Hitting an enemy champion with @NumberToProc@ attacks or <b>separate</b> abilities within @Window@s grants <speed>@HasteBase*100@ - @HasteMax*100@% Move Speed</speed> based on level and <status>@SlowResist*100@% Slow Resistance</status> for @Duration@s. Move Speed is @RangedEffectiveness*100@% effective for ranged champions.<br>Cooldown: @MaxCooldown@s - @MinCooldown@s",
-					"tooltipStats": "Hitting an enemy champion with @NumberToProc@ attacks or <b>separate</b> abilities within @Window@s grants <speed>@MoveSpeedCalc@ Move Speed</speed> and <status>@SlowResist*100@% Slow Resistance</status> for @Duration@s.<br><br>Cooldown: <attention>@CooldownCalc@s</attention><br><br>Total Activations: <attention>@f1@</attention>"
+					"name": "Stormraider's Surge",
+					"tooltipShort": "Dealing @DamageThreshold*100@% of a champion's maximum health grants a burst of <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>MS</lol-uikit-tooltipped-keyword> and Slow Resist. ",
+					"tooltipLong": "Dealing @DamageThreshold*100@% of a champion's maximum health within @Window@s grants <speed>@HasteMax*100@% Move Speed</speed> and <status>@SlowResist*100@% Slow Resistance</status> for @Duration@s. Move Speed is @RangedEffectiveness*100@% effective for ranged champions.<br>Cooldown: @MaxCooldown@s - @MinCooldown@s",
+					"tooltipStats": "Dealing @DamageThreshold*100@% of a champion's maximum health within @Window@s grants <speed>@MoveSpeedCalc@ Move Speed</speed> and <status>@SlowResist*100@% Slow Resistance</status> for @Duration@s.<br><br>Cooldown: <attention>@CooldownCalc@s</attention><br><br>Total Activations: <attention>@f1@</attention>"
+				},
+				"DeathfireTouch": {
+					"name": "Deathfire Touch",
+					"tooltipShort": "Damaging a champion with an ability burns them over time.",
+					"tooltipLong": "Damaging a champion with an ability burns them for @Level1DamageTOOLTIP@ - @Level18DamageTOOLTIP@ based on level (+<scaleAP>@APRatio.-1@ AP</scaleAP>) (+<scaleAD>@ADRatio.-1@ bonus AD</scaleAD>)  adaptive damage per second. After burning for @TimeToAmp@ seconds, the damage of the burn increases by @DamageMultiplier*100@% while they remain on fire.<br><rules><br>Duration:<br>Single Target: @Duration@s.<br>Area of Effect: @AoEDuration@s<br>Damage over Time: @DotDuration@s<br></rules>",
+					"tooltipStats": "Damaging a champion with an ability burns them for @DamageCalc@ adaptive damage per second. After burning for @TimeToAmp@ seconds, the damage of the burn increases by @DamageMultiplier*100@% while they remain on fire.<br><rules><br>Duration:<br>Single Target: @Duration@s.<br>Area of Effect: @AoEDuration@s<br>Damage over Time: @DotDuration@s<br></rules><br>You have dealt @f1@ damage to champions with Deathfire Touch burn."
 				},
 				"NullifyingOrb": {
 					"name": "Axiom Arcanist",
@@ -2463,7 +2482,7 @@
 			],
 			"mid": [
 				"Tier 3 boots",
-				"Enhanced recall"
+				"Increased Attack Damage and Ability Power"
 			],
 			"bot": [
 				"An immediate lump sum of gold",

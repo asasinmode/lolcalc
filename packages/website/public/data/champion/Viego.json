@@ -64,7 +64,8 @@
 						"HealModVsMonsters": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
 						"HealModVsChamps": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
-						"HealthCritMod": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+						"HealthCritMod": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"SecondAttackAPRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -112,8 +113,8 @@
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{
-									"mCoefficient": 0.15,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "SecondAttackAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
@@ -147,7 +148,7 @@
 								},
 								{
 									"mPart1": {
-										"mDataValue": "{26697b2d}"
+										"mDataValue": "HealthCritMod"
 									},
 									"mPart2": {
 										"mSubparts": [
@@ -197,7 +198,8 @@
 						"MaxBonusMissileRange": [400, 400, 400, 400, 400, 400, 400],
 						"SelfSlowPercent": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"MaxChargeTime": [3, 3, 3, 3, 3, 3, 3],
-						"CDWheninterrupted": [3, 3, 3, 3, 3, 3, 3]
+						"CDWheninterrupted": [3, 3, 3, 3, 3, 3, 3],
+						"APRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -207,8 +209,8 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						}
@@ -242,7 +244,8 @@
 						"AttackSpeed": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
 						"CamoRadius": [450, 450, 450, 450, 450, 450, 450],
 						"RestealthTime": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
-						"RestealthTimeAfterHittingLargeMonster": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
+						"RestealthTimeAfterHittingLargeMonster": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"MSAPRatio": [0, 0, 0, 0, 0, 0, 0]
 					},
 					"spellCalculations": {
 						"TotalMovespeed": {
@@ -252,8 +255,8 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "MSAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							],
 							"mDisplayAsPercent": true

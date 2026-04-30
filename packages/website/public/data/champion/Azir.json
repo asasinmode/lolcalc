@@ -6,7 +6,7 @@
 	"partype": "Mana",
 	"stats": {
 		"hp": 575,
-		"hpperlevel": 119,
+		"hpperlevel": 108,
 		"mp": 320,
 		"mpperlevel": 40,
 		"movespeed": 330,
@@ -35,11 +35,15 @@
 					"name": "Conquering Sands",
 					"objectName": "AzirQWrapper",
 					"image": "assets/characters/azir/hud/icons2d/azir_q.png",
-					"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @Effect2Amount*-100@% for 1 second.",
+					"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @SlowAmount*-100@% for 1 second.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "APRatio",
+							"nameOverride": "spell_listtype_apratio"
 						},
 						{
 							"name": "Cost"
@@ -50,16 +54,15 @@
 					"dataValues": {
 						"BaseDamage": [40, 60, 80, 100, 120, 140, 160],
 						"SlowAmount": [-0.25, -0.25, -0.25, -0.25, -0.25, -0.25, -0.25],
-						"SpearLength": [370, 370, 370, 370, 370, 370, 370],
-						"APRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
+						"SpearLength": [325, 325, 325, 325, 325, 325, 325],
+						"APRatio": [0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mDataValue": "APRatio",
@@ -69,12 +72,9 @@
 						}
 					},
 					"effectAmount": {
-						"0": [60, 60, 80, 100, 120, 140, 160],
-						"1": [-0.25, -0.25, -0.25, -0.25, -0.25, -0.25, -0.25],
 						"3": [70, 70, 70, 70, 70, 70, 70],
 						"4": [1600, 1600, 1600, 1600, 1600, 1600, 1600],
-						"5": [200, 200, 200, 200, 200, 200, 200],
-						"6": [325, 325, 325, 325, 325, 325, 325]
+						"5": [200, 200, 200, 200, 200, 200, 200]
 					},
 					"dataKey": "Characters/Azir/Spells/AzirQWrapperAbility/AzirQWrapper"
 				}
@@ -107,7 +107,7 @@
 					"mana": [40, 35, 30, 25, 20, 20],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"dataValues": {
-						"APRatio": [0.25, 0.325, 0.4, 0.475, 0.55, 0.625, 0.7],
+						"APRatio": [0.275, 0.35, 0.425, 0.5, 0.575, 0.65, 0.725],
 						"BaseDamage": [35, 50, 65, 80, 95, 110, 125],
 						"OnHitMultiplier": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
@@ -140,7 +140,7 @@
 									"mBreakpoints": [
 										{
 											"mLevel": 10,
-											"mBonusPerLevelAtAndAfter": 5
+											"mBonusPerLevelAtAndAfter": 8
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -332,8 +332,8 @@
 	},
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
-		"spell_azirw_solderdamage": "Solder Attack Damage",
 		"spell_listtype_apratio": "Total AP Ratio",
+		"spell_azirw_solderdamage": "Solder Attack Damage",
 		"spell_listtype_shieldamount": "Shield Amount",
 		"spell_listtype_azirrnumberofsoldiers": "Number of Soldiers",
 		"spell_azirpassive_tooltip": "Azir can summon the <keywordMajor>Sun Disc</keywordMajor> from the rubble of a turret. The <keywordMajor>Sun Disc</keywordMajor> deals <magicDamage>@TowerDamage@ magic damage</magicDamage> and has @BonusResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> but disintegrates over @TowerDisintegrationTime@ seconds."

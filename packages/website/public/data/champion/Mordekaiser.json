@@ -167,7 +167,7 @@
 					"name": "Death's Grasp",
 					"objectName": "MordekaiserE",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains @MagicPen*100@% Magic Penetration.<br><br><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
+					"tooltip": "<spellActive>Active:</spellActive> Pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
 					"extendedVariables": [
 						{
 							"name": "MagicPen",
@@ -281,6 +281,7 @@
 						},
 						"BonusAPAuto": {
 							"mSimpleTooltipCalculationDisplay": 6,
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
 									"mCoefficient": 0.4,

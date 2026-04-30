@@ -54,7 +54,7 @@
 						"MaxSpeed": [0.17, 0.24, 0.31, 0.38, 0.45, 0.52, 0.59],
 						"Duration": [4, 4, 4, 4, 4, 4, 4],
 						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
-						"BonusADRatio": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
+						"BonusADRatio": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6],
 						"BonusRange": [25, 25, 25, 25, 25, 25, 25]
 					},
 					"spellCalculations": {
@@ -151,7 +151,7 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [30, 35, 40, 45, 50, 50],
+					"mana": [20, 25, 30, 35, 40, 40],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
 						"BaseDamage": [-20, 5, 30, 55, 80, 105, 130],
@@ -234,7 +234,7 @@
 							"nameOverride": "spell_listtype_maxdamagetomonsters"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
+					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
 						"SlowAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],

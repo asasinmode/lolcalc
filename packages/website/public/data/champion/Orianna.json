@@ -43,7 +43,7 @@
 						}
 					],
 					"mana": [35, 35, 35, 35, 35, 35],
-					"cooldownTime": [6.75, 6, 5.25, 4.5, 3.75, 3, 3],
+					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mFormulaParts": [
@@ -257,6 +257,7 @@
 					"spellCalculations": {
 						"TotalDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
 									"mStartValue": 10,

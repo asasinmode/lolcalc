@@ -35,14 +35,14 @@
 					"name": "Call of the Void",
 					"objectName": "MalzaharQ",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_q.png",
-					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @Effect2Amount@ second(s).",
+					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @SilenceDuration@ second(s).",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "SilenceDuration",
 							"nameOverride": "spell_listtype_silenceduration"
 						},
 						{
@@ -51,13 +51,18 @@
 					],
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
+					"dataValues": {
+						"BaseDamage": [70, 70, 105, 140, 175, 210, 245],
+						"SilenceDuration": [1, 1, 1.25, 1.5, 1.75, 2, 2.25],
+						"DelayPostCast": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.55,
@@ -106,7 +111,9 @@
 						"StackCap": [2, 2, 2, 2, 2, 2, 2],
 						"ADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"SummonDelay": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"APRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+						"APRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"StackDuration": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
+						"MaxStacks": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"{c2505620}": {
@@ -230,7 +237,7 @@
 					"name": "Nether Grasp",
 					"objectName": "MalzaharR",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_r.png",
-					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @Effect4Amount@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @Effect3Amount@ seconds.",
+					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @CCDuration@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @PoolDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "BeamDamage",
@@ -252,7 +259,9 @@
 						"ZoneDuration": [5, 5, 5, 5, 5, 5, 5],
 						"MaxHealthDamage": [1, 2, 3, 4, 5, 6, 7],
 						"MaxHealthRatio": [0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005],
-						"BeamTetherRange": [1250, 1250, 1250, 1250, 1250, 1250, 1250]
+						"BeamTetherRange": [1250, 1250, 1250, 1250, 1250, 1250, 1250],
+						"PoolDuration": [5, 5, 5, 5, 5, 5, 5],
+						"CCDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
 					"spellCalculations": {
 						"ZoneDamageTooltip": {

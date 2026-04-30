@@ -34,7 +34,7 @@
 				{
 					"name": "Blinding Dart",
 					"objectName": "TeemoQ",
-					"image": "assets/characters/teemo/hud/icons2d/teemoq.asu_teemo.png",
+					"image": "assets/characters/teemo/hud/icons2d/teemoq.png",
 					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -93,7 +93,7 @@
 				{
 					"name": "Move Quick",
 					"objectName": "TeemoW",
-					"image": "assets/characters/teemo/hud/icons2d/teemow.asu_teemo.png",
+					"image": "assets/characters/teemo/hud/icons2d/teemow.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -123,8 +123,8 @@
 				{
 					"name": "Toxic Shot",
 					"objectName": "TeemoE",
-					"image": "assets/characters/teemo/hud/icons2d/teemoe.asu_teemo.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
+					"image": "assets/characters/teemo/hud/icons2d/teemoe.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison %i:OnHit% <OnHit>On-Hit</OnHit>, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "ImpactBaseDamage",
@@ -143,7 +143,9 @@
 						"ImpactAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"PoisonDuration": [4, 4, 4, 4, 4, 4, 4],
 						"TickFrequency": [1, 1, 1, 1, 1, 1, 1],
-						"MonsterMod": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6]
+						"MonsterMod": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6],
+						"TickBonusADRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"ImpactBonusADRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"spellCalculations": {
 						"TickCalculatedDamage": {
@@ -155,10 +157,17 @@
 								{
 									"mDataValue": "TickAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "TickBonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
 						"ImpactCalculatedDamage": {
+							"{72c5c2a8}": 1,
 							"mFormulaParts": [
 								{
 									"mDataValue": "ImpactBaseDamage",
@@ -166,6 +175,12 @@
 								},
 								{
 									"mDataValue": "ImpactAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ImpactBonusADRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -200,7 +215,7 @@
 				{
 					"name": "Noxious Trap",
 					"objectName": "TeemoR",
-					"image": "assets/characters/teemo/hud/icons2d/teemor.asu_teemo.png",
+					"image": "assets/characters/teemo/hud/icons2d/teemor.png",
 					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).",
 					"extendedVariables": [
 						{
@@ -269,7 +284,7 @@
 				{
 					"name": "Guerrilla Warfare",
 					"objectName": "TeemoPassive",
-					"image": "assets/characters/teemo/hud/icons2d/teemopassive.asu_teemo.png",
+					"image": "assets/characters/teemo/hud/icons2d/teemopassive.png",
 					"tooltip": "{{Buff_TeemoPassive_Tooltip}}",
 					"tooltipExtended": "{{Buff_TeemoPassive_Tooltip}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
 					"dataValues": {

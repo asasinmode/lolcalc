@@ -57,13 +57,13 @@
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"ExplosionDamage": [4, 5, 6, 7, 8, 9, 10],
+						"ExplosionDamage": [3, 5, 7, 9, 11, 13, 15],
 						"ExplosionCount": [5, 6, 7, 8, 9, 10, 11],
 						"Spread": [25, 25, 25, 25, 25, 25, 25],
 						"ExplosionRadius": [200, 200, 200, 200, 200, 200, 200],
 						"ChannelDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"MinionMod": [1, 1, 1, 1, 1, 1, 1],
-						"InitialDamage": [30, 60, 90, 120, 150, 180, 210]
+						"InitialDamage": [35, 60, 85, 110, 135, 160, 185]
 					},
 					"spellCalculations": {
 						"TotalExplosionDamage": {
@@ -82,7 +82,7 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mSpellCalculationKey": "{c6579b07}",
+									"mSpellCalculationKey": "InitialExplosionDamage",
 									"__type": "{f3cbe7b2}"
 								},
 								{
@@ -127,14 +127,14 @@
 							],
 							"mDisplayAsPercent": true
 						},
-						"{c6579b07}": {
+						"InitialExplosionDamage": {
 							"mFormulaParts": [
 								{
 									"mDataValue": "InitialDamage",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.6,
+									"mCoefficient": 0.55,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -167,7 +167,7 @@
 						}
 					],
 					"mana": [80, 60, 40, 20, 0, 0],
-					"cooldownTime": [35, 35, 32, 29, 26, 23, 23],
+					"cooldownTime": [38, 38, 35, 33, 29, 26, 26],
 					"dataValues": {
 						"Duration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"ShieldRadius": [175, 175, 175, 175, 175, 175, 175],
@@ -175,7 +175,7 @@
 						"MoveSpeed": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"PhysDamageMod": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"BaseShieldAmount": [50, 80, 110, 140, 170, 200, 230],
-						"MoveSpeedDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
+						"MoveSpeedDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"spellCalculations": {
 						"DamagePercent": {
@@ -265,7 +265,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "{0b76b34c}",
+									"mDataValue": "AreaAPRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -330,9 +330,9 @@
 					"dataValues": {
 						"BasePassiveStackDamage": [2, 3, 4, 5, 6, 7, 8],
 						"BasePassiveFlatDamage": [50, 60, 70, 80, 90, 100, 110],
-						"MinionMod": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"MinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BaseUltStackDamage": [1, 4, 7, 10, 13, 16, 19],
-						"BaseUltFlatDamage": [50, 100, 150, 200, 250, 300, 350],
+						"BaseUltFlatDamage": [50, 125, 200, 275, 350, 425, 500],
 						"DisintegrateDelay": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
 					},
 					"spellCalculations": {

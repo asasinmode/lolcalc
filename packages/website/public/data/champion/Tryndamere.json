@@ -25,7 +25,7 @@
 		"attackdamageperlevel": 4.5,
 		"attackspeedperlevel": 3.4,
 		"attackspeed": 0.67,
-		"attackspeedratio": 0.694
+		"attackspeedratio": 0.725
 	},
 	"abilities": {
 		"q": {
@@ -206,14 +206,14 @@
 					"name": "Undying Rage",
 					"objectName": "UndyingRage",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_r.png",
-					"tooltip": "Tryndamere becomes completely immune to death for @Effect3Amount@ seconds, refusing to be reduced below @Effect2Amount@ Health, and instantly gains <keywordMajor>@Effect1Amount@ Fury</keywordMajor>.",
+					"tooltip": "Tryndamere becomes completely immune to death for @TryndRDuration@ seconds, refusing to be reduced below @TryndRMinHealth@ Health, and instantly gains <keywordMajor>@TryndRFuryGain@ Fury</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "TryndRMinHealth",
 							"nameOverride": "spell_listtype_minimumhealth"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "TryndRFuryGain",
 							"nameOverride": "spell_listtype_tryndamerefurygained"
 						}
 					],

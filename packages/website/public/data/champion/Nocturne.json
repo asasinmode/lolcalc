@@ -35,7 +35,7 @@
 					"name": "Duskbringer",
 					"objectName": "NocturneDuskbringer",
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_duskbringer.png",
-					"tooltip": "Nocturne throws a shadow blade, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and leaving a dusk trail for @Effect3Amount@ seconds. Enemy champions hit also leave a trail. <br><br>While on the trail, Nocturne is Ghosted and gains <speed>@MoveSpeed@% Move Speed</speed> and <physicalDamage>@BonusTrailAD@ Attack Damage</physicalDamage>.",
+					"tooltip": "Nocturne throws a shadow blade, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and leaving a dusk trail for @TrailDuration@ seconds. Enemy champions hit also leave a trail. <br><br>While on the trail, Nocturne is Ghosted and gains <speed>@MoveSpeed@% Move Speed</speed> and <physicalDamage>@BonusTrailAD@ Attack Damage</physicalDamage>.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -57,8 +57,9 @@
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
 						"BaseDamage": [20, 65, 110, 155, 200, 245, 290],
-						"MoveSpeed": [10, 15, 20, 25, 30, 35, 40],
-						"BonusTrailAD": [5, 15, 25, 35, 45, 55, 65]
+						"MoveSpeed": [15, 20, 25, 30, 35, 40, 45],
+						"BonusTrailAD": [5, 15, 25, 35, 45, 55, 65],
+						"TrailDuration": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -93,15 +94,21 @@
 					"name": "Shroud of Darkness",
 					"objectName": "NocturneShroudofDarkness",
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_shroudofdarkness.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Nocturne creates a shadow barrier for 1.5 seconds that blocks the next enemy Ability. If an Ability is blocked, this Ability's passive effect is increased to <attackSpeed>@Effect1Amount*2@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <attackSpeed>@ActiveAS@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Nocturne creates a shadow barrier for 1.5 seconds that blocks the next enemy Ability. If an Ability is blocked, this Ability's passive effect is increased to <attackSpeed>@ActiveAS*2@% Attack Speed</attackSpeed> for @DoubleASDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "ActiveAS",
 							"nameOverride": "spell_listtype_statbonusattackspeed"
 						}
 					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
+					"dataValues": {
+						"ActiveAS": [30, 30, 35, 40, 45, 50, 55],
+						"PassiveAS": [0.3, 0.3, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"ShieldDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"DoubleASDuration": [5, 5, 5, 5, 5, 5, 5]
+					},
 					"effectAmount": {
 						"0": [30, 30, 35, 40, 45, 50, 55],
 						"1": [0.3, 0.3, 0.05, 0.05, 0.05, 0.05, 0.05],
@@ -119,14 +126,14 @@
 					"name": "Unspeakable Horror",
 					"objectName": "NocturneUnspeakableHorror",
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_unspeakablehorror.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <speed>@TooltipFearMS*100@% Move Speed</speed> toward <status>Feared</status> enemies.<br><br><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds. If the tether remains unbroken, the target is <status>Feared</status> for @Effect2Amount@ second(s).",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <speed>@TooltipFearMS*100@% Move Speed</speed> toward <status>Feared</status> enemies.<br><br><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @LeashDuration@ seconds. If the tether remains unbroken, the target is <status>Feared</status> for @CCDuration@ second(s).",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "DamageToDeal",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "CCDuration",
 							"nameOverride": "spell_listtype_fearduration"
 						},
 						{
@@ -136,14 +143,18 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
 					"dataValues": {
-						"TooltipFearMS": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+						"TooltipFearMS": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+						"DamageToDeal": [35, 80, 125, 170, 215, 260, 305],
+						"CCDuration": [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5],
+						"LeashDuration": [2, 2, 2, 2, 2, 2, 2],
+						"LeashBreakRange": [465, 465, 465, 465, 465, 465, 465]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "DamageToDeal",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 1,
@@ -217,11 +228,11 @@
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_umbrablades.png",
 					"tooltip": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.",
 					"tooltipExtended": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.<br><br><rules><spellName>Umbra Blades</spellName> deals @DamageMinionMod*100@% less damage to minions and heals @HealMinionMod*100@% less from lane minions.</rules>",
-					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"AACDR": [1, 1, 1, 1, 1, 1, 1],
 						"AAChampMonsterCDR": [3, 3, 3, 3, 3, 3, 3],
-						"Cooldown": [13, 13, 13, 13, 13, 13, 13],
+						"Cooldown": [12, 12, 12, 12, 12, 12, 12],
 						"Radius": [360, 360, 360, 360, 360, 360, 360],
 						"DamageMinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"HealMinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]

@@ -103,7 +103,9 @@
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"APRatio": [0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2],
-						"BaseDamage": [30, 85, 140, 195, 250, 305, 360]
+						"BaseDamage": [30, 85, 140, 195, 250, 305, 360],
+						"ImpactDelay": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+						"BaseCooldown": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -134,10 +136,10 @@
 					"name": "Event Horizon",
 					"objectName": "VeigarEventHorizon",
 					"image": "assets/characters/veigar/hud/icons2d/veigareventhorizon.png",
-					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @Effect1Amount@ seconds. The cage lasts for 3 seconds.",
+					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @StunDuration@ seconds. The cage lasts for 3 seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "StunDuration",
 							"nameOverride": "spell_listtype_stunduration"
 						},
 						{
@@ -146,6 +148,10 @@
 					],
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [20, 20, 18.5, 17, 15.5, 14, 14],
+					"dataValues": {
+						"StunDuration": [1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75],
+						"CageDelay": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
 					"effectAmount": {
 						"0": [1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75],
 						"1": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
@@ -173,7 +179,7 @@
 						}
 					],
 					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
+					"cooldownTime": [120, 120, 90, 60, 30, 30, 30],
 					"dataValues": {
 						"APRatio": [0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9],
 						"BaseDamage": [100, 175, 250, 325, 400, 475, 550],

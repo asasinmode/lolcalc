@@ -1,5 +1,5 @@
 {
-	"version": "16.4.1",
+	"version": "16.9.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -22,12 +22,12 @@
 								"APRatio": 0,
 								"LethalityRatio": 0,
 								"HitsRequired": 3,
-								"{a38bdcc6}": 4,
-								"{ae481e05}": 0.08,
+								"TimeBetweenHits": 4,
+								"AmpPotencyMaxSelf": 0.08,
 								"AmpDuration": 5,
-								"{f0adfe0c}": 0.08,
-								"{75ba08eb}": 0.08,
-								"{d9ac2d86}": 0.08,
+								"AmpPotencyMaxOthers": 0.08,
+								"AmpPotencyStartSelf": 0.08,
+								"AmpPotencyStartOthers": 0.08,
 								"BonusPercentDamage": 0.08,
 								"OutOfCombatTimer": 5,
 								"Cooldown": 6
@@ -235,7 +235,7 @@
 								"RegenAmount": {
 									"mFormulaParts": [
 										{
-											"mValues": [6, 6, 6.8, 7.6, 8.4, 9.2, 10, 12, 14, 16, 18, 20, 23.2, 26.4, 29.6, 32.8, 36, 40, 44, 52, 56, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+											"values": [6, 6, 6.8, 7.6, 8.4, 9.2, 10, 12, 14, 16, 18, 20, 23.2, 26.4, 29.6, 32.8, 36, 40, 44, 52, 56, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
 											"__type": "ByCharLevelFormulaCalculationPart"
 										}
 									],
@@ -435,7 +435,7 @@
 									},
 									"mFormulaParts": [
 										{
-											"mDataValue": "ASBoostMax",
+											"mDataValue": "ASBoost",
 											"__type": "NamedDataValueCalculationPart"
 										}
 									]
@@ -470,15 +470,38 @@
 											"__type": "NumberCalculationPart"
 										}
 									]
+								},
+								"BonusDamage": {
+									"mFormulaParts": [
+										{
+											"{0589a59c}": "BonusDamageMin",
+											"{0b65bc23}": "BonusDamageMax",
+											"__type": "{ee18a47b}"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "BonusADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
 								}
 							},
 							"effectAmount": {
 								"NumHits": 3,
 								"Duration": 3,
-								"ASBoostMin": 1.6,
-								"ASBoostMax": 1.6,
+								"ASBoost": 1.2,
 								"Cooldown": 10,
-								"ASBoostRanged": 0.8
+								"ASBoostRanged": 0.6,
+								"BonusDamageMin": 4,
+								"BonusDamageMax": 20,
+								"BonusADRatio": 0.08,
+								"APRatio": 0.06,
+								"MaxBonusHits": 2
 							}
 						}
 					},
@@ -764,8 +787,8 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 30,
-											"mEndValue": 130,
+											"mStartValue": 15,
+											"mEndValue": 100,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
@@ -798,27 +821,29 @@
 							},
 							"effectAmount": {
 								"RechargeTime": 20,
-								"DamageBase": 30,
-								"DamageMax": 130,
+								"DamageBase": 15,
+								"DamageMax": 100,
 								"APRatio": 0.05,
 								"ADRatio": 0.1,
 								"RechargeTimeMin": 8,
 								"PercentRefund": 0.2,
 								"DotPercentRefund": 0.05,
-								"AoEPercentRefund": 0.1
+								"AoEPercentRefund": 0.1,
+								"MaxDamageAmp": 1,
+								"MaxRange": 750
 							}
 						},
 						"PhaseRush": {
 							"id": 8230,
 							"name": "PhaseRush",
-							"icon": "assets/perks/styles/sorcery/phaserush/phaserush.png",
+							"icon": "assets/perks/styles/sorcery/phaserush/stormraiderssurgeruneicon2.png",
 							"dataKey": "Perks/Styles/Sorcery/PhaseRush",
 							"calculations": {
 								"CooldownCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 30,
+											"mStartValue": 20,
 											"mEndValue": 10,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
@@ -828,8 +853,8 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 0.25,
-											"mEndValue": 0.5,
+											"mStartValue": 0.4,
+											"mEndValue": 0.4,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									],
@@ -841,16 +866,61 @@
 							},
 							"effectAmount": {
 								"HasteBase": 0.25,
-								"HasteMax": 0.5,
+								"HasteMax": 0.4,
 								"SlowResist": 0.5,
 								"Duration": 3,
-								"Window": 4,
+								"Window": 3,
 								"MaxBonusSeconds": 4,
 								"{f9adb0b2}": 1,
 								"MinCooldown": 10,
-								"MaxCooldown": 30,
+								"MaxCooldown": 20,
 								"NumberToProc": 3,
-								"RangedEffectiveness": 0.5
+								"RangedEffectiveness": 0.75,
+								"DamageThreshold": 0.25
+							}
+						},
+						"DeathfireTouch": {
+							"id": 8992,
+							"name": "DeathfireTouch",
+							"icon": "assets/perks/styles/sorcery/deathfiretouch/deathfire_touch_keystone.png",
+							"dataKey": "{c9d12615}",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 4,
+											"mEndValue": 12,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ADRatio": 0.08,
+								"APRatio": 0.03,
+								"Duration": 4,
+								"DamageAmp": 0.1,
+								"TimeToAmp": 3,
+								"DamageMultiplier": 1,
+								"AoEDuration": 2,
+								"DotDuration": 1,
+								"Level1DamageTOOLTIP": 1,
+								"TicksPerSecond": 2,
+								"Level18DamageTOOLTIP": 10,
+								"__renamedVariables": {
+									"{2156e250}": "Level18DamageTOOLTIP"
+								}
 							}
 						}
 					},

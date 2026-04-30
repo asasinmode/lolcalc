@@ -316,7 +316,7 @@
 					"spellCalculations": {
 						"HarvestDuration": {
 							"mMultiplier": {
-								"mDataValue": "{04f9ad7d}"
+								"mDataValue": "ModeSpeedOverride"
 							},
 							"mFormulaParts": [
 								{

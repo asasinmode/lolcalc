@@ -56,7 +56,8 @@
 						"QAttackSpeedCastReductionPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"QBaseCastTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"QAttackSpeedCastReductionMax": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
-						"CritRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"CritRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -96,8 +97,8 @@
 									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.6,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
@@ -216,7 +217,7 @@
 					"name": "Spell Shield",
 					"objectName": "SivirE",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_e.png",
-					"tooltip": "Sivir creates a magical barrier for @Effect1Amount@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot.",
+					"tooltip": "Sivir creates a magical barrier for @SpellShieldDuration@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot.",
 					"extendedVariables": [
 						{
 							"name": "HealRatio",
@@ -225,7 +226,9 @@
 					],
 					"cooldownTime": [25, 24, 22.5, 21, 19.5, 18, 10],
 					"dataValues": {
-						"HealRatio": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85]
+						"HealRatio": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85],
+						"SpellShieldDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"HealAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalHeal": {
@@ -236,8 +239,8 @@
 									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.5,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "HealAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						}
@@ -258,7 +261,7 @@
 					"name": "On The Hunt",
 					"objectName": "SivirR",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_r.png",
-					"tooltip": "Sivir rallies her nearby allies, granting them <speed>@MaxMS*100@% Move Speed</speed> for @UltDuration@ seconds.<br><br>Sivir's attacks against champions while On The Hunt reduce the cooldown of her basic abilities by 0.5 seconds.<br><br>Takedowns on recently damaged enemies refreshes the duration of the hunt.",
+					"tooltip": "Sivir rallies her nearby allies, granting them <speed>@MaxMS*100@% Move Speed</speed> for @UltDuration@ seconds.<br><br>Sivir's attacks against champions while On The Hunt reduce the cooldown of her basic abilities by @AttackCooldownRefund@ seconds.<br><br>Takedowns on recently damaged enemies refreshes the duration of the hunt.",
 					"extendedVariables": [
 						{
 							"name": "MaxMS",
@@ -279,21 +282,8 @@
 						"UltDuration": [6, 8, 10, 12, 14, 16, 18],
 						"AuraRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
 						"BuffExtension": [6, 8, 10, 12, 14, 16, 18],
-						"DamagedMarkerDuration": [3, 3, 3, 3, 3, 3, 3]
-					},
-					"spellCalculations": {
-						"MaxDuration": {
-							"mFormulaParts": [
-								{
-									"mEffectIndex": 4,
-									"__type": "EffectValueCalculationPart"
-								},
-								{
-									"mEffectIndex": 6,
-									"__type": "EffectValueCalculationPart"
-								}
-							]
-						}
+						"DamagedMarkerDuration": [3, 3, 3, 3, 3, 3, 3],
+						"AttackCooldownRefund": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR"
 				}

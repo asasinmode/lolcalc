@@ -114,18 +114,18 @@
 					"name": "Fling",
 					"objectName": "Fling",
 					"image": "assets/characters/singed/hud/icons2d/singed_e.png",
-					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds.",
+					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @MaxHPDamage@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @RootDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamageValue",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "MaxHPDamage",
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "RootDuration",
 							"nameOverride": "spell_listtype_rootduration"
 						},
 						{
@@ -134,13 +134,20 @@
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
+					"dataValues": {
+						"BaseDamageValue": [50, 50, 60, 70, 80, 90, 100],
+						"RootDuration": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25],
+						"MaxHPDamage": [6, 6, 6.5, 7, 7.5, 8, 8.5],
+						"FlingDistance": [420, 420, 420, 420, 420, 420, 420],
+						"NonChampionDamageCap": [300, 300, 300, 300, 300, 300, 300]
+					},
 					"spellCalculations": {
 						"BaseDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamageValue",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.55,
@@ -177,7 +184,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
 					"dataValues": {
-						"StatAmount": [-10, 25, 60, 95, 130, 165, 200],
+						"StatAmount": [-5, 25, 55, 85, 115, 145, 175],
 						"Duration": [25, 25, 25, 25, 25, 25, 25],
 						"GrievousAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"GrievousDuration": [1, 1, 1, 1, 1, 1, 1]

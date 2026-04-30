@@ -215,7 +215,7 @@
 					"spellCalculations": {
 						"BaseDamage": {
 							"mMultiplier": {
-								"mDataValue": "{42702779}"
+								"mDataValue": "UnempoweredModifier"
 							},
 							"mModifiedGameCalculation": "EmpoweredDamage"
 						},

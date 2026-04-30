@@ -220,7 +220,7 @@
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "{a2a2a5ff}"
+											"mDataValue": "CriticalStrikeModifier"
 										},
 										"mPart2": {
 											"mSubparts": [
@@ -292,7 +292,7 @@
 											{
 												"mPart1": {
 													"mStat": 8,
-													"mDataValue": "{10e05b53}"
+													"mDataValue": "CriticalStrikeScaling"
 												},
 												"mPart2": {
 													"mSubparts": [
@@ -368,6 +368,22 @@
 									"mStat": 9,
 									"mCoefficient": 1,
 									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{42962485}": {
+							"{72c5c2a8}": 0,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mSpellCalculationKey": "HeadShotMinionBonusDamage"
+										},
+										{
+											"mSpellCalculationKey": "HeadShotBonusDamage"
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
 								}
 							]
 						}

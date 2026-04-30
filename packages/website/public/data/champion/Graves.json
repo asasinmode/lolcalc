@@ -21,7 +21,7 @@
 		"mpregenperlevel": 0.7,
 		"crit": 0,
 		"critperlevel": 0,
-		"attackdamage": 68,
+		"attackdamage": 66,
 		"attackdamageperlevel": 4,
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.475,
@@ -69,7 +69,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mDataValue": "{73c9f207}",
+									"mDataValue": "FirstADRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -170,7 +170,7 @@
 					"spellCalculations": {
 						"MRGrant": {
 							"mMultiplier": {
-								"mDataValue": "{ec9bea35}"
+								"mDataValue": "MRGrantPercent"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
@@ -277,7 +277,7 @@
 								{
 									"mStat": 2,
 									"mSubpart": {
-										"mValues": [0, 0.7, 0.711, 0.723, 0.736, 0.75, 0.764, 0.78, 0.796, 0.813, 0.83, 0.849, 0.868, 0.888, 0.909, 0.93, 0.953, 0.976, 1, 1.025, 1.05, 1.077, 1.104, 1.132, 1.161, 1.19, 1.221, 1.252, 1.284, 1.317, 1.35]
+										"values": [0, 0.7, 0.711, 0.723, 0.736, 0.75, 0.764, 0.78, 0.796, 0.813, 0.83, 0.849, 0.868, 0.888, 0.909, 0.93, 0.953, 0.976, 1, 1.025, 1.05, 1.077, 1.104, 1.132, 1.161, 1.19, 1.221, 1.252, 1.284, 1.317, 1.35]
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

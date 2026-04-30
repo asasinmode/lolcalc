@@ -35,7 +35,7 @@
 					"name": "Vault Breaker",
 					"objectName": "ViQ",
 					"image": "assets/characters/vi/hud/icons2d/viq.png",
-					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @Effect4Amount@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
+					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
 					"extendedVariables": [
 						{
 							"name": "MinDamage",
@@ -61,7 +61,10 @@
 						"DashWallCheating": [50, 50, 50, 50, 50, 50, 50],
 						"ADRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"CanceledRefundTime": [3, 3, 3, 3, 3, 3, 3],
-						"ManaRefundPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+						"ManaRefundPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SelfSlow": [15, 15, 15, 15, 15, 15, 15],
+						"ChargeDuration": [6, 6, 6, 6, 6, 6, 6],
+						"VFXChargeDuration": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -172,7 +175,10 @@
 					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"dataValues": {
 						"ADRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
-						"BaseDamage": [-10, 10, 30, 50, 70, 90, 110]
+						"BaseDamage": [-10, 10, 30, 50, 70, 90, 110],
+						"BonusRange": [50, 50, 50, 50, 50, 50, 50],
+						"AttackBuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"StaticCooldown": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {

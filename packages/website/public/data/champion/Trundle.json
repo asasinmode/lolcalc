@@ -94,19 +94,25 @@
 					"name": "Frozen Domain",
 					"objectName": "trundledesecrate",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_w.png",
-					"tooltip": "Trundle freezes an area for @Effect4Amount@ seconds. While inside he gains <speed>@Effect1Amount*100@% Move Speed</speed>, <attackSpeed>@Effect2Amount*100@% Attack Speed</attackSpeed>, and @Effect3Amount*100@% increased healing.",
+					"tooltip": "Trundle freezes an area for @Duration@ seconds. While inside he gains <speed>@MSBonus*100@% Move Speed</speed>, <attackSpeed>@ASBonus*100@% Attack Speed</attackSpeed>, and @HealingBonus*100@% increased healing.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "MSBonus",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "ASBonus",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [18, 18, 17, 16, 15, 14, 13],
+					"dataValues": {
+						"MSBonus": [0.2, 0.2, 0.28, 0.36, 0.44, 0.52, 0.6],
+						"ASBonus": [0.3, 0.3, 0.45, 0.6, 0.75, 0.9, 0.9],
+						"HealingBonus": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"Duration": [8, 8, 8, 8, 8, 8, 8]
+					},
 					"effectAmount": {
 						"0": [0.2, 0.2, 0.28, 0.36, 0.44, 0.52, 0.6],
 						"1": [0.3, 0.3, 0.45, 0.6, 0.75, 0.9, 0.9],
@@ -125,15 +131,25 @@
 					"name": "Pillar of Ice",
 					"objectName": "TrundleCircle",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_e.png",
-					"tooltip": "Trundle creates an icy pillar for @Effect1Amount@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @Effect2Amount@%.",
+					"tooltip": "Trundle creates an icy pillar for @PillarDuration@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @SlowAmount@%.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
 					"mana": [75, 75, 75, 75, 75, 75],
 					"cooldownTime": [21, 21, 19.5, 18, 16.5, 15, 15],
+					"dataValues": {
+						"PillarDuration": [6, 6, 6, 6, 6, 6, 6],
+						"SlowAmount": [30, 34, 38, 42, 46, 50, 54],
+						"SlowRadius": [360, 360, 360, 360, 360, 360, 360],
+						"KnockbackRadius": [225, 225, 225, 225, 225, 225, 225],
+						"AllyDisplacementRange": [150, 150, 150, 150, 150, 150, 150],
+						"EnemyDisplacementRange": [225, 225, 225, 225, 225, 225, 225],
+						"EnemyDisplacementSpeed": [400, 400, 400, 400, 400, 400, 400],
+						"EnemyDisplacementGravity": [60, 60, 60, 60, 60, 60, 60]
+					},
 					"effectAmount": {
 						"0": [6, 6, 6, 6, 6, 6, 6],
 						"1": [30, 34, 38, 42, 46, 50, 54],

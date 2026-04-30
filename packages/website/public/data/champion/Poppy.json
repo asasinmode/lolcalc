@@ -35,35 +35,40 @@
 					"name": "Hammer Shock",
 					"objectName": "PoppyQ",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_q.png",
-					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Effect3Amount@% and erupts after @Effect4Amount@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
+					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Slow_@% and erupts after @DelayBetweenTwoHits@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamageValue",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "Slow_",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
 							"name": "Cost"
 						},
 						{
-							"name": "Effect6Amount",
+							"name": "MaxHealthDamageToNonHeroes",
 							"nameOverride": "spell_poppyq_monstercap"
 						}
 					],
 					"mana": [35, 40, 45, 50, 55, 60],
 					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"dataValues": {
-						"HealthDamagePercent": [9, 9, 9, 9, 9, 9, 9]
+						"HealthDamagePercent": [9, 9, 9, 9, 9, 9, 9],
+						"BaseDamageValue": [30, 30, 55, 80, 105, 130, 130],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Slow_": [15, 20, 25, 30, 35, 40, 45],
+						"DelayBetweenTwoHits": [1, 1, 1, 1, 1, 1, 1],
+						"MaxHealthDamageToNonHeroes": [20, 50, 80, 110, 140, 170, 200]
 					},
 					"spellCalculations": {
 						"BaseDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamageValue",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -94,10 +99,10 @@
 					"name": "Steadfast Presence",
 					"objectName": "PoppyW",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_w.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Effect2Amount@% Move Speed</speed> and projects a field around her for @Effect1Amount@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Haste@% Move Speed</speed> and projects a field around her for @Duration@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect5Amount",
+							"name": "DamageValue",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -107,7 +112,11 @@
 						"GroundingDuration": [2, 2, 2, 2, 2, 2, 2],
 						"SlowAmount": [-0.25, -0.25, -0.25, -0.25, -0.25, -0.25, -0.25],
 						"PassiveResistPercent": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
-						"PassiveEmpoweredHealthPercent": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"PassiveEmpoweredHealthPercent": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"Duration": [2, 2, 2, 2, 2, 2, 2],
+						"Haste": [40, 40, 40, 40, 40, 40, 40],
+						"KnockupDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DamageValue": [30, 70, 110, 150, 190, 230, 270]
 					},
 					"spellCalculations": {
 						"BonusArmor": {
@@ -131,8 +140,8 @@
 						"InterruptDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 5,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "DamageValue",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.7,
@@ -159,30 +168,37 @@
 					"name": "Heroic Charge",
 					"objectName": "PoppyE",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_e.png",
-					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @Effect3Amount@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
+					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @StunDuration@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamageValue",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "WallDamage",
 							"nameOverride": "spell_listtype_poppyewalldamage"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "StunDuration",
 							"nameOverride": "spell_listtype_stunduration"
 						}
 					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
+					"dataValues": {
+						"BaseDamageValue": [0, 40, 60, 80, 100, 120, 140],
+						"WallDamage": [0, 40, 60, 80, 100, 120, 140],
+						"StunDuration": [1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1],
+						"DashSpeed": [1800, 1800, 1800, 1800, 1800, 1800, 1800],
+						"MaxEnemyPushbackDistance": [400, 400, 400, 400, 400, 400, 400]
+					},
 					"spellCalculations": {
 						"TackleDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamageValue",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
