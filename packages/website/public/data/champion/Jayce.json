@@ -1,5 +1,4 @@
 {
-	"version": "16.4.1",
 	"id": "Jayce",
 	"key": "126",
 	"name": "Jayce",
@@ -78,7 +77,7 @@
 					"objectName": "JayceShockBlast",
 					"image": "assets/characters/jayce/hud/icons2d/jayceq_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Cannon</keywordMajor>: Jayce fires an orb of electricity, dealing <physicalDamage>@spell.JayceShockBlast:Damage@ physical damage</physicalDamage> to the first enemy hit and all surrounding enemies. Firing this orb through <spellName>{{Spell_JayceAccelerationGate_Name}}</spellName> increases the range, speed and raises the damage to <physicalDamage>@spell.JayceShockBlast:EmpoweredDamage@</physicalDamage>.",
-					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
+					"tooltipExtended": "{{Spell_JayceShockBlast_Tooltip}}<br><br>{{Spell_JayceToTheSkies_Tooltip}}",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

@@ -37,7 +37,6 @@ export type IChampionRole = 'top' | 'jungle' | 'mid' | 'bot' | 'support';
 export type IChampionStat = keyof typeof ExampleChampion['stats'];
 
 export interface IChampion<T extends IChampionId = IChampionId> {
-	version: string;
 	id: T;
 	key: string;
 	name: string;

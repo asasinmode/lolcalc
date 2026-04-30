@@ -224,7 +224,6 @@ if (!championData || championData?.version !== latestVersion) {
 					const championFileDataStringtable: IChampion['stringtable'] = {};
 
 					const dedicatedChampionFileData: IChampion = {
-						version: latestVersion,
 						id,
 						key,
 						name,
