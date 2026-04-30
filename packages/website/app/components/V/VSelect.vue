@@ -1,8 +1,8 @@
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="T extends string">
 const props = defineProps<{
 	id: string;
 	label: string;
-	options: [value: T, text: string | number][];
+	options: [value: T | number, text: string | number][];
 	name?: string;
 	clearable?: boolean;
 	required?: boolean;
@@ -13,10 +13,6 @@ defineEmits<{
 }>();
 
 const value = defineModel<T>();
-
-function setValue(event: Event) {
-	value.value = (event.target as HTMLSelectElement).value as T || undefined;
-}
 
 function clear(event: MouseEvent) {
 	if (props.clearable) {
@@ -33,7 +29,7 @@ function clear(event: MouseEvent) {
 			:value
 			:required
 			:name
-			@change="setValue"
+			@change="value = ($event.target as HTMLSelectElement).value as T || undefined"
 			@click.right="clear"
 			@mouseenter="$emit('labelMouseenter', $event)"
 		>
