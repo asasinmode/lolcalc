@@ -33,6 +33,7 @@
 				{
 					"name": "Ntofo Strikes",
 					"objectName": "KSanteQ",
+					"dataKey": "Characters/KSante/Spells/KSanteQAbility/KSanteQ",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_q1.png",
 					"tooltip": "K'Sante slams his weapon, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage> and <status>Slowing</status> enemies by @SlowPercent*100@% for @SlowDuration@s. If he hits, he gains a stack of Ntofo Strikes for @RecastWindow@ seconds. At 2 stacks, he instead fires a shockwave that <status>Stuns</status> and <status>Pulls</status> enemies for @StunDuration@ second.<br><br><keywordMajor>All Out</keywordMajor>: Cooldown is reduced by @RCooldownReduction.0*100@%.",
 					"extendedVariables": [
@@ -107,8 +108,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/KSante/Spells/KSanteQAbility/KSanteQ"
+					}
 				}
 			]
 		},
@@ -118,6 +118,7 @@
 				{
 					"name": "Path Maker",
 					"objectName": "KSanteW",
+					"dataKey": "Characters/KSante/Spells/KSanteWAbility/KSanteW",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_w.png",
 					"tooltip": "K'Sante raises his weapons defensively for @MinDurationTOOLTIP@-@MaxDuration.1@s, becoming Unstoppable and reducing incoming damage by @DamageReduction*100@%. Then, he rams forward, dealing <physicalDamage>@BaseDamage@ + @TotalMaxHealthDamage@ max Health physical damage</physicalDamage>. Enemies hit are <status>Knocked Back</status> and <status>Stunned</status> for @MinKnockbackDuration@-@MaxKnockbackDuration@s (based on charge time).<br><br><keywordMajor>All Out:</keywordMajor> Cooldown is refreshed. Deals an additional @RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@% damage as <trueDamage>true damage</trueDamage> (based on charge time), damage reduction is increased to @RDamageReduction*100@% and dash speed is increased, but no longer <status>Knocks Back</status> or <status>Stuns</status>.",
 					"extendedVariables": [
@@ -181,8 +182,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": -1
 						}
-					},
-					"dataKey": "Characters/KSante/Spells/KSanteWAbility/KSanteW"
+					}
 				}
 			]
 		},
@@ -192,6 +192,7 @@
 				{
 					"name": "Footwork",
 					"objectName": "KSanteE",
+					"dataKey": "Characters/KSante/Spells/KSanteEAbility/KSanteE",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_e.png",
 					"tooltip": "K'Sante dashes, gaining <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. If dashing to an ally, the distance of the dash is significantly increased and the ally is also <shield>Shielded</shield>.<br><br><keywordMajor>All Out</keywordMajor>: Cooldown is decreased by @CooldownModAO*100@% and dash speed is increased.",
 					"extendedVariables": [
@@ -235,8 +236,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/KSante/Spells/KSanteEAbility/KSanteE"
+					}
 				}
 			]
 		},
@@ -246,6 +246,7 @@
 				{
 					"name": "All Out",
 					"objectName": "KSanteR",
+					"dataKey": "Characters/KSante/Spells/KSanteRAbility/KSanteR",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_r1.png",
 					"tooltip": "K'Sante shatters his ntofos to <status>Knock Back</status> an enemy champion, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage>, then dashes behind them and goes <keywordMajor>All Out</keywordMajor> for @AllOutDuration@s. If the enemy would hit a wall, they are <status>Knocked Back</status> through the wall and K'Sante strikes them again for <physicalDamage>@TotalDamageSlamDown@ physical damage</physicalDamage>.<br><br>While <keywordMajor>All Out</keywordMajor>, K'Sante's Abilities are upgraded and he gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>, @ArmorPenPercent*100@% Bonus Armor Penetration, and <omnivamp>@Omnivamp*100@% Omnivamp</omnivamp>, but loses <healing>@HealthLost*100@% max Health</healing>, <scaleArmor>@DefensesLost*100@% Bonus Armor</scaleArmor>, and <scaleMR>@DefensesLost*100@% Bonus Magic Resistance</scaleMR>.",
 					"extendedVariables": [
@@ -327,8 +328,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/KSante/Spells/KSanteRAbility/KSanteR"
+					}
 				}
 			]
 		},
@@ -338,6 +338,7 @@
 				{
 					"name": "Dauntless Instinct",
 					"objectName": "KSanteP",
+					"dataKey": "Characters/KSante/Spells/KSantePAbility/KSanteP",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_p.png",
 					"tooltip": "{{Spell_KSanteP_Tooltip}}",
 					"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules>",
@@ -410,8 +411,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 2
 						}
-					},
-					"dataKey": "Characters/KSante/Spells/KSantePAbility/KSanteP"
+					}
 				}
 			]
 		}

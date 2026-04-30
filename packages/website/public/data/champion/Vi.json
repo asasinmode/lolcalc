@@ -33,6 +33,7 @@
 				{
 					"name": "Vault Breaker",
 					"objectName": "ViQ",
+					"dataKey": "Characters/Vi/Spells/ViQAbility/ViQ",
 					"image": "assets/characters/vi/hud/icons2d/viq.png",
 					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
 					"extendedVariables": [
@@ -91,8 +92,7 @@
 						"3": [15, 15, 15, 15, 15, 15, 15],
 						"4": [6, 6, 6, 6, 6, 6, 6],
 						"5": [5, 5, 5, 5, 5, 5, 5]
-					},
-					"dataKey": "Characters/Vi/Spells/ViQAbility/ViQ"
+					}
 				}
 			]
 		},
@@ -102,6 +102,7 @@
 				{
 					"name": "Denting Blows",
 					"objectName": "ViW",
+					"dataKey": "Characters/Vi/Spells/ViWAbility/ViW",
 					"image": "assets/characters/vi/hud/icons2d/viw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every 3rd Attack on the same target deals an additional <physicalDamage>@TotalDamageTooltip@ max Health physical damage</physicalDamage>, removes <scaleArmor>@ShredAmount@% Armor</scaleArmor> and grants Vi <attackSpeed>@AttackSpeed@% Attack Speed</attackSpeed> for @SharedBuffsDuration@ seconds. It also reduces the remaining Cooldown of <spellName>Blast Shield</spellName> by @spell.ViPassive:CDReductionOn3Hit@ seconds.",
 					"extendedVariables": [
@@ -144,8 +145,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Vi/Spells/ViWAbility/ViW"
+					}
 				}
 			]
 		},
@@ -155,6 +155,7 @@
 				{
 					"name": "Relentless Force",
 					"objectName": "ViE",
+					"dataKey": "Characters/Vi/Spells/ViEAbility/ViE",
 					"image": "assets/characters/vi/hud/icons2d/vie.png",
 					"tooltip": "Vi's next Attack deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to the target and enemies behind them.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
 					"extendedVariables": [
@@ -216,8 +217,7 @@
 						"3": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"4": [6, 6, 6, 6, 6, 6, 6],
 						"5": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Vi/Spells/ViEAbility/ViE"
+					}
 				}
 			]
 		},
@@ -227,6 +227,7 @@
 				{
 					"name": "Cease and Desist",
 					"objectName": "ViR",
+					"dataKey": "Characters/Vi/Spells/ViRAbility/ViR",
 					"image": "assets/characters/vi/hud/icons2d/vir.png",
 					"tooltip": "Vi singles out an enemy champion, revealing them and dashing unstoppably towards them. Upon reaching them, Vi <status>Knocks</status> them <status>Up</status> for @RStunDuration@ seconds and deals <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Any other enemies Vi collides with are dealt damage, knocked aside, and <status>Stunned</status> for @SecondaryTargetStunDuration@ seconds.",
 					"extendedVariables": [
@@ -268,8 +269,7 @@
 							},
 							"mModifiedGameCalculation": "Damage"
 						}
-					},
-					"dataKey": "Characters/Vi/Spells/ViRAbility/ViR"
+					}
 				}
 			]
 		},
@@ -279,6 +279,7 @@
 				{
 					"name": "Blast Shield",
 					"objectName": "ViPassive",
+					"dataKey": "Characters/Vi/Spells/ViPassiveAbility/ViPassive",
 					"image": "assets/characters/vi/hud/icons2d/vipassive.png",
 					"tooltip": "{{Spell_ViPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViPassive_Tooltip}}<br><br><rules>This Ability has a @ShieldCooldown@ second Cooldown, reduced by @CDReductionOn3Hit@ seconds when Vi triggers <spellName>Denting Blows</spellName>.</rules>",
@@ -314,8 +315,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Vi/Spells/ViPassiveAbility/ViPassive"
+					}
 				}
 			]
 		}

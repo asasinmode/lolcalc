@@ -33,6 +33,7 @@
 				{
 					"name": "Spinning Axe",
 					"objectName": "DravenSpinning",
+					"dataKey": "Characters/Draven/Spells/DravenSpinningAbility/DravenSpinning",
 					"image": "assets/characters/draven/hud/icons2d/draven_spinningaxe.png",
 					"tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once.",
 					"extendedVariables": [
@@ -72,8 +73,7 @@
 					"effectAmount": {
 						"1": [75, 75, 75, 75, 75, 75, 75],
 						"3": [5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75]
-					},
-					"dataKey": "Characters/Draven/Spells/DravenSpinningAbility/DravenSpinning"
+					}
 				}
 			]
 		},
@@ -83,6 +83,7 @@
 				{
 					"name": "Blood Rush",
 					"objectName": "DravenFury",
+					"dataKey": "Characters/Draven/Spells/DravenFuryAbility/DravenFury",
 					"image": "assets/characters/draven/hud/icons2d/draven_bloodrage.png",
 					"tooltip": "Draven becomes Ghosted, gains <speed>@Effect2Amount@% Move Speed</speed> decaying over @Effect3Amount@ seconds and <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's Cooldown is refreshed.",
 					"extendedVariables": [
@@ -112,8 +113,7 @@
 						"3": [20, 20, 25, 30, 35, 40, 45],
 						"4": [3, 3, 3, 3, 3, 3, 3],
 						"5": [-0.056, -0.062, -0.069, -0.075, -0.081, -0.087, -0.094]
-					},
-					"dataKey": "Characters/Draven/Spells/DravenFuryAbility/DravenFury"
+					}
 				}
 			]
 		},
@@ -123,6 +123,7 @@
 				{
 					"name": "Stand Aside",
 					"objectName": "DravenDoubleShot",
+					"dataKey": "Characters/Draven/Spells/DravenDoubleShotAbility/DravenDoubleShot",
 					"image": "assets/characters/draven/hud/icons2d/draven_twinaxe.png",
 					"tooltip": "Draven chucks a sideways axe that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>, <status>Knocks Back</status>, and <status>Slows</status> by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"extendedVariables": [
@@ -162,8 +163,7 @@
 						"1": [15, 20, 25, 30, 35, 40, 45],
 						"2": [2, 2, 2, 2, 2, 2, 2],
 						"3": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-					},
-					"dataKey": "Characters/Draven/Spells/DravenDoubleShotAbility/DravenDoubleShot"
+					}
 				}
 			]
 		},
@@ -173,6 +173,7 @@
 				{
 					"name": "Whirling Death",
 					"objectName": "DravenRCast",
+					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast",
 					"image": "assets/characters/draven/hud/icons2d/draven_whirlingdeath.png",
 					"tooltip": "Draven hurls two massive axes that deal <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal @RDamageReductionPerHit*100@% less damage for each enemy hit, down to a minimum of @RMinDamagePercent@%.<br><br>If <keywordMajor>{{ Spell_DravenRCast_Name }}</keywordMajor> would leave an enemy champion with less health than @RPassiveStacksCoefficient*100@% of Draven's current <keywordMajor>{{Spell_DravenPassive_Name}}</keywordMajor> stacks (@RPassiveTrueDamage@), he will execute them.",
 					"extendedVariables": [
@@ -220,8 +221,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast"
+					}
 				}
 			]
 		},
@@ -231,6 +231,7 @@
 				{
 					"name": "League of Draven",
 					"objectName": "DravenPassive",
+					"dataKey": "Characters/Draven/Spells/DravenPassiveAbility/DravenPassive",
 					"image": "assets/characters/draven/hud/icons2d/draven_passive.png",
 					"tooltip": "Draven gains @StackGain@ stack whenever he kills a non-champion unit or turret, catches a <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven gains @PassiveGoldBase@ gold plus @PassiveGoldPerStack@ additional gold per stack upon killing a champion. Draven loses @PercentOfStacksLost@% of stacks upon death.<br><br>Total Gold Earned: <statTracking>@DravenPassiveGoldEarned@</statTracking><br>Highest Reward: <statTracking>@DravenPassiveHighestBounty@</statTracking>",
 					"dataValues": {
@@ -265,8 +266,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Draven/Spells/DravenPassiveAbility/DravenPassive"
+					}
 				}
 			]
 		}

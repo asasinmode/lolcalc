@@ -33,6 +33,7 @@
 				{
 					"name": "Gleaming Quill",
 					"objectName": "RakanQ",
+					"dataKey": "Characters/Rakan/Spells/RakanQAbility/RakanQ",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_q.png",
 					"tooltip": "Rakan flings a magical feather that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the feather hits a champion or epic jungle monster, Rakan restores <healing>@TotalHeal@ Health</healing> to himself and nearby allies after @HealDelay@ seconds or when he touches an allied champion.",
 					"extendedVariables": [
@@ -86,8 +87,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rakan/Spells/RakanQAbility/RakanQ"
+					}
 				}
 			]
 		},
@@ -97,6 +97,7 @@
 				{
 					"name": "Grand Entrance",
 					"objectName": "RakanW",
+					"dataKey": "Characters/Rakan/Spells/RakanWAbility/RakanW",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_w.png",
 					"tooltip": "Rakan dashes, then spirals into the air, <status>Knocking Up</status> for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -133,8 +134,7 @@
 					"effectAmount": {
 						"0": [70, 70, 120, 170, 220, 270, 320],
 						"2": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Rakan/Spells/RakanWAbility/RakanW"
+					}
 				}
 			]
 		},
@@ -144,6 +144,7 @@
 				{
 					"name": "Battle Dance",
 					"objectName": "RakanE",
+					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanE",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_e.png",
 					"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Effect3Amount@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @Effect2Amount@ seconds.",
 					"extendedVariables": [
@@ -188,8 +189,7 @@
 						"6": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
 						"7": [1150, 1150, 1150, 1150, 1150, 1150, 1150],
 						"8": [1250, 1250, 1250, 1250, 1250, 1250, 1250]
-					},
-					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanE"
+					}
 				}
 			]
 		},
@@ -199,6 +199,7 @@
 				{
 					"name": "The Quickness",
 					"objectName": "RakanR",
+					"dataKey": "Characters/Rakan/Spells/RakanRAbility/RakanR",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_r.png",
 					"tooltip": "Rakan gains <speed>@Effect5Amount@% Move Speed</speed> for @Effect2Amount@ seconds. Rakan deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Charms</status> enemies for @Effect3Amount@ second(s) the first time he touches them. The first champion touched grants Rakan <speed>@Effect6Amount@% decaying Move Speed</speed>.",
 					"extendedVariables": [
@@ -236,8 +237,7 @@
 						"5": [150, 150, 150, 150, 150, 150, 150],
 						"6": [150, 150, 150, 150, 150, 150, 150],
 						"7": [130, 130, 110, 90, 0, 0, 0]
-					},
-					"dataKey": "Characters/Rakan/Spells/RakanRAbility/RakanR"
+					}
 				}
 			]
 		},
@@ -247,6 +247,7 @@
 				{
 					"name": "Fey Feathers",
 					"objectName": "RakanPassive",
+					"dataKey": "Characters/Rakan/Spells/RakanPassiveAbility/RakanPassive",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_p.png",
 					"tooltip": "Every @ShieldCooldown@ seconds, Rakan gains <shield>@TotalShield@ Shield</shield>. Rakan's Attacks and Abilities against enemy champions reduce this Cooldown by @HitCooldown@ second.<br><br><keywordMajor>Lover's Leap</keywordMajor> - Xayah and Rakan can recall together.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -283,8 +284,7 @@
 							],
 							"mPrecision": 1
 						}
-					},
-					"dataKey": "Characters/Rakan/Spells/RakanPassiveAbility/RakanPassive"
+					}
 				}
 			]
 		}

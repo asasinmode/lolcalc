@@ -33,6 +33,7 @@
 				{
 					"name": "Ultra Mega Fire Kick",
 					"objectName": "MilioQ",
+					"dataKey": "Characters/Milio/Spells/MilioQAbility/MilioQ",
 					"image": "assets/characters/milio/hud/icons2d/milio_q.png",
 					"tooltip": "Milio kicks a fireball, <status>Knocking Back</status> the first enemy hit. If it hits, the ball bounces past them and explodes, dealing <magicDamage>@Damage@ magic damage</magicDamage> to surrounding enemies and <status>Slowing</status> them by @SlowAmountPercent@ for @SlowDuration@ seconds.<br><br>Hitting at least one enemy champion with <spellName>{{Spell_MilioKickballQ_Name}}</spellName> refunds @RefundRatio*100@% of it's Mana cost.",
 					"extendedVariables": [
@@ -90,8 +91,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Milio/Spells/MilioQAbility/MilioQ"
+					}
 				}
 			]
 		},
@@ -101,6 +101,7 @@
 				{
 					"name": "Cozy Campfire",
 					"objectName": "MilioW",
+					"dataKey": "Characters/Milio/Spells/MilioWAbility/MilioW",
 					"image": "assets/characters/milio/hud/icons2d/milio_w.png",
 					"tooltip": "Milio creates a hearth that follows ally champions for @ZoneDuration@ seconds. Ally champions nearby gain @RangePercent@ Attack Range and restore <healing>@HealingOverTime@ Health</healing> over the duration. The hearth also applies <spellName>{{Spell_MilioPassive_Name}}</spellName> every @HealFrequencySeconds@ seconds.<br><br><recast>Recast:</recast> Change the hearth's follow ally.",
 					"extendedVariables": [
@@ -152,8 +153,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Milio/Spells/MilioWAbility/MilioW"
+					}
 				}
 			]
 		},
@@ -163,6 +163,7 @@
 				{
 					"name": "Warm Hugs",
 					"objectName": "MilioE",
+					"dataKey": "Characters/Milio/Spells/MilioEAbility/MilioE",
 					"image": "assets/characters/milio/hud/icons2d/milio_e.png",
 					"tooltip": "Milio wraps an ally champion in protective flames, granting <shield>@ShieldCalc@ Shield</shield> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>This ability has 2 charges and the effects stack on repeat targets.",
 					"extendedVariables": [
@@ -203,8 +204,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Milio/Spells/MilioEAbility/MilioE"
+					}
 				}
 			]
 		},
@@ -214,6 +214,7 @@
 				{
 					"name": "Breath of Life",
 					"objectName": "MilioR",
+					"dataKey": "Characters/Milio/Spells/MilioRAbility/MilioR",
 					"image": "assets/characters/milio/hud/icons2d/milio_r.png",
 					"tooltip": "Milio unleashes a wave of soothing flames on nearby ally champions, cleansing <status>Disabling</status> and <status>Immobilizing</status> effects, restoring <healing>@HealCalc@ Health</healing>, and granting @TenacityAmount*100@% Tenacity for @TenacityDuration@ seconds.",
 					"extendedVariables": [
@@ -243,8 +244,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Milio/Spells/MilioRAbility/MilioR"
+					}
 				}
 			]
 		},
@@ -254,6 +254,7 @@
 				{
 					"name": "Fired Up!",
 					"objectName": "MilioPassive",
+					"dataKey": "{3e27cfac}",
 					"image": "assets/characters/milio/hud/icons2d/milio_p.png",
 					"tooltip": "{{Spell_MilioPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MilioPassive_Tooltip}}<br><br><rules>Burn damage does not stack from multiple hits.</rules>",
@@ -297,8 +298,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "{3e27cfac}"
+					}
 				}
 			]
 		}

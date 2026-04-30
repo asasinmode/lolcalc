@@ -33,6 +33,7 @@
 				{
 					"name": "Radiant Volley",
 					"objectName": "MelQ",
+					"dataKey": "Characters/Mel/Spells/MelQAbility/MelQ",
 					"image": "assets/characters/mel/hud/icons2d/mel_q.png",
 					"tooltip": "Mel unleashes a barrage of @ExplosionCount@ projectiles that explode in the area around a target location.<br><br>The first explosion hit deals <magicDamage>@InitialExplosionDamage@ magic damage</magicDamage> and each subsequent explosion deals <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>, adding up to <magicDamage>@AllDamageHit@ magic damage</magicDamage> total.",
 					"extendedVariables": [
@@ -138,8 +139,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Mel/Spells/MelQAbility/MelQ"
+					}
 				}
 			]
 		},
@@ -149,6 +149,7 @@
 				{
 					"name": "Rebuttal",
 					"objectName": "MelW",
+					"dataKey": "Characters/Mel/Spells/MelWAbility/MelW",
 					"image": "assets/characters/mel/hud/icons2d/mel_w.png",
 					"tooltip": "Mel forms a barrier around herself that reflects projectiles from enemy champions, gaining <shield>@ShieldAmount@ Shields</shield> for @Duration@ seconds and <speed>@MoveSpeed*100@% decaying Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Reflected projectiles deal <magicDamage>@DamagePercent@ original damage as magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -202,8 +203,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Mel/Spells/MelWAbility/MelW"
+					}
 				}
 			]
 		},
@@ -213,6 +213,7 @@
 				{
 					"name": "Solar Snare",
 					"objectName": "MelE",
+					"dataKey": "Characters/Mel/Spells/MelEAbility/MelE",
 					"image": "assets/characters/mel/hud/icons2d/mel_e.png",
 					"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDuration@ seconds and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>.",
 					"extendedVariables": [
@@ -293,8 +294,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Mel/Spells/MelEAbility/MelE"
+					}
 				}
 			]
 		},
@@ -304,6 +304,7 @@
 				{
 					"name": "Golden Eclipse",
 					"objectName": "MelR",
+					"dataKey": "Characters/Mel/Spells/MelRAbility/MelR",
 					"image": "assets/characters/mel/hud/icons2d/mel_r.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: <keywordMajor>Overwhelm</keywordMajor> damage is increased to <magicDamage>@PassiveFlatDamage@ magic damage plus @PassiveStackDamage@ magic damage per stack</magicDamage>.<br><br><spellActive>Active</spellActive>: Mel unleashes her power on all enemies affected by <keywordMajor>Overwhelm</keywordMajor>, dealing <magicDamage>@UltFlatDamage@ magic damage plus @UltStackDamage@ magic damage per <keywordMajor>Overwhelm</keywordMajor> stack</magicDamage>.<br><br><rules>Can only be cast when an enemy champion is affected by <keywordMajor>Overwhelm</keywordMajor>.</rules>",
 					"extendedVariables": [
@@ -407,8 +408,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Mel/Spells/MelRAbility/MelR"
+					}
 				}
 			]
 		},
@@ -418,6 +418,7 @@
 				{
 					"name": "Searing Brilliance",
 					"objectName": "MelPassive",
+					"dataKey": "{64e86cf4}",
 					"image": "assets/characters/mel/hud/icons2d/mel_passive.png",
 					"tooltip": "{{Spell_MelPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MelPassive_Tooltip}}<br><br><rules><keywordMajor>Overwhelm</keywordMajor> deals @spell.MelR:MinionModTooltip@ reduced damage with the first stack when used against minions.</rules>",
@@ -441,8 +442,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "{64e86cf4}"
+					}
 				}
 			]
 		}

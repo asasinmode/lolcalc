@@ -33,6 +33,7 @@
 				{
 					"name": "Rootcaller",
 					"objectName": "IvernQ",
+					"dataKey": "Characters/Ivern/Spells/IvernQAbility/IvernQ",
 					"image": "assets/characters/ivern/hud/icons2d/ivernq.png",
 					"tooltip": "Ivern conjures a vine dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Rooting</status> the first enemy hit for @RootDuration@ seconds. Allies that Attack a <status>Rooted</status> enemy dash into Attack Range. <br><br><recast>Recast:</recast> Ivern dashes directly onto the <status>Rooted</status> enemy.<br><br><rules>Hitting non-epic monsters reduces <spellName>{{ Spell_IvernQ_Name }}'s</spellName> cooldown by 50%.</rules>",
 					"extendedVariables": [
@@ -66,8 +67,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Ivern/Spells/IvernQAbility/IvernQ"
+					}
 				}
 			]
 		},
@@ -77,6 +77,7 @@
 				{
 					"name": "Brushmaker",
 					"objectName": "IvernW",
+					"dataKey": "Characters/Ivern/Spells/IvernWAbility/IvernW",
 					"image": "assets/characters/ivern/hud/icons2d/ivernw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds.",
 					"extendedVariables": [
@@ -126,8 +127,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Ivern/Spells/IvernWAbility/IvernW"
+					}
 				}
 			]
 		},
@@ -137,6 +137,7 @@
 				{
 					"name": "Triggerseed",
 					"objectName": "IvernE",
+					"dataKey": "Characters/Ivern/Spells/IvernEAbility/IvernE",
 					"image": "assets/characters/ivern/hud/icons2d/iverne.png",
 					"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds.",
 					"extendedVariables": [
@@ -189,8 +190,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Ivern/Spells/IvernEAbility/IvernE"
+					}
 				}
 			]
 		},
@@ -200,6 +200,7 @@
 				{
 					"name": "Daisy!",
 					"objectName": "IvernR",
+					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernR",
 					"image": "assets/characters/ivern/hud/icons2d/ivernr.png",
 					"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move.",
 					"extendedVariables": [
@@ -291,8 +292,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernR"
+					}
 				}
 			]
 		},
@@ -302,6 +302,7 @@
 				{
 					"name": "Friend of the Forest",
 					"objectName": "IvernP",
+					"dataKey": "Characters/Ivern/Spells/IvernPAbility/IvernP",
 					"image": "assets/characters/ivern/hud/icons2d/ivernp.png",
 					"tooltip": "{{Spell_IvernP_Tooltip}}",
 					"tooltipExtended": "{{Spell_IvernP_Tooltip}}",
@@ -378,8 +379,7 @@
 					},
 					"effectAmount": {
 						"0": [120, 120, 120, 120, 120, 120, 120]
-					},
-					"dataKey": "Characters/Ivern/Spells/IvernPAbility/IvernP"
+					}
 				}
 			]
 		}

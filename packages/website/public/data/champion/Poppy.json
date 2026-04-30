@@ -33,6 +33,7 @@
 				{
 					"name": "Hammer Shock",
 					"objectName": "PoppyQ",
+					"dataKey": "Characters/Poppy/Spells/PoppyQAbility/PoppyQ",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_q.png",
 					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Slow_@% and erupts after @DelayBetweenTwoHits@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
 					"extendedVariables": [
@@ -86,8 +87,7 @@
 						"4": [9, 9, 9, 9, 9, 9, 9],
 						"5": [50, 50, 80, 110, 140, 170, 170],
 						"6": [100, 100, 100, 100, 100, 100, 100]
-					},
-					"dataKey": "Characters/Poppy/Spells/PoppyQAbility/PoppyQ"
+					}
 				}
 			]
 		},
@@ -97,6 +97,7 @@
 				{
 					"name": "Steadfast Presence",
 					"objectName": "PoppyW",
+					"dataKey": "Characters/Poppy/Spells/PoppyWAbility/PoppyW",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Haste@% Move Speed</speed> and projects a field around her for @Duration@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -155,8 +156,7 @@
 						"2": [10, 10, 10, 10, 10, 10, 10],
 						"3": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"4": [30, 70, 110, 150, 190, 230, 270]
-					},
-					"dataKey": "Characters/Poppy/Spells/PoppyWAbility/PoppyW"
+					}
 				}
 			]
 		},
@@ -166,6 +166,7 @@
 				{
 					"name": "Heroic Charge",
 					"objectName": "PoppyE",
+					"dataKey": "Characters/Poppy/Spells/PoppyEAbility/PoppyE",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_e.png",
 					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @StunDuration@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
@@ -214,8 +215,7 @@
 						"2": [1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1],
 						"3": [1800, 1800, 1800, 1800, 1800, 1800, 1800],
 						"4": [400, 400, 400, 400, 400, 400, 400]
-					},
-					"dataKey": "Characters/Poppy/Spells/PoppyEAbility/PoppyE"
+					}
 				}
 			]
 		},
@@ -225,6 +225,7 @@
 				{
 					"name": "Keeper's Verdict",
 					"objectName": "PoppyR",
+					"dataKey": "Characters/Poppy/Spells/PoppyRAbility/PoppyR",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_r.png",
 					"tooltip": "<charge>Begin Casting:</charge> Poppy begins charging her hammer for up to @ChannelMaxDuration@ seconds, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Poppy smashes the ground, creating a shockwave that deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first champion hit and surrounding enemies, <status>Knocks</status> them <status>Back</status> towards their Nexus, and makes them Untargetable while they fly. The range and <status>Knock Back</status> distance increase with charge duration.<br><br>An uncharged swing deals <physicalDamage>@HalfDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> for @KnockupDurationSnap@ seconds.",
 					"extendedVariables": [
@@ -269,8 +270,7 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "Damage"
 						}
-					},
-					"dataKey": "Characters/Poppy/Spells/PoppyRAbility/PoppyR"
+					}
 				}
 			]
 		},
@@ -280,6 +280,7 @@
 				{
 					"name": "Iron Ambassador",
 					"objectName": "PoppyPassive",
+					"dataKey": "Characters/Poppy/Spells/PoppyPassiveAbility/PoppyPassive",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_passive.png",
 					"tooltip": "Every @ActualCooldown@ seconds, Poppy's next Attack throws her buckler, gaining @BonusRange@ range and dealing an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. The buckler ricochets off the target, landing nearby. Poppy can pick it up to gain <shield>@ShieldValue@ Shield</shield>, and enemies can step on it to destroy it.<br><br>The buckler automatically returns to Poppy if it kills the target.",
 					"dataValues": {
@@ -331,8 +332,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Poppy/Spells/PoppyPassiveAbility/PoppyPassive"
+					}
 				}
 			]
 		}

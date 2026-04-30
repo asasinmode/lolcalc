@@ -33,6 +33,7 @@
 				{
 					"name": "Boomerang Blade",
 					"objectName": "SivirQ",
+					"dataKey": "Characters/Sivir/Spells/SivirQAbility/SivirQ",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_q.png",
 					"tooltip": "Sivir hurls her crossblade like a boomerang, dealing <physicalDamage>@TotalDamage@</physicalDamage> to all enemies it cuts through. Hitting non-champions reduces the damage to subsequent targets, down to a minimum of @FallOffMinimum*100@%.",
 					"extendedVariables": [
@@ -130,8 +131,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Sivir/Spells/SivirQAbility/SivirQ"
+					}
 				}
 			]
 		},
@@ -141,6 +141,7 @@
 				{
 					"name": "Ricochet",
 					"objectName": "SivirW",
+					"dataKey": "Characters/Sivir/Spells/SivirWAbility/SivirW",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_w.png",
 					"tooltip": "For the next @BuffDuration@ seconds, Sivir gains <attackSpeed>@RicochetAttackSpeed*100@% Attack Speed</attackSpeed> and her auto attacks are empowered to bounce to additional surrounding enemies dealing <physicalDamage>@BounceDamage@ physical damage</physicalDamage> each bounce for up to @MaxBounces@ bounces.<br><br>These bounces critically strike if the attack generating them does.",
 					"extendedVariables": [
@@ -204,8 +205,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Sivir/Spells/SivirWAbility/SivirW"
+					}
 				}
 			]
 		},
@@ -215,6 +215,7 @@
 				{
 					"name": "Spell Shield",
 					"objectName": "SivirE",
+					"dataKey": "Characters/Sivir/Spells/SivirEAbility/SivirE",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_e.png",
 					"tooltip": "Sivir creates a magical barrier for @SpellShieldDuration@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot.",
 					"extendedVariables": [
@@ -248,8 +249,7 @@
 						"0": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"1": [55, 55, 55, 55, 55, 55, 55],
 						"2": [60, 60, 60, 60, 60, 60, 60]
-					},
-					"dataKey": "Characters/Sivir/Spells/SivirEAbility/SivirE"
+					}
 				}
 			]
 		},
@@ -259,6 +259,7 @@
 				{
 					"name": "On The Hunt",
 					"objectName": "SivirR",
+					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_r.png",
 					"tooltip": "Sivir rallies her nearby allies, granting them <speed>@MaxMS*100@% Move Speed</speed> for @UltDuration@ seconds.<br><br>Sivir's attacks against champions while On The Hunt reduce the cooldown of her basic abilities by @AttackCooldownRefund@ seconds.<br><br>Takedowns on recently damaged enemies refreshes the duration of the hunt.",
 					"extendedVariables": [
@@ -283,8 +284,7 @@
 						"BuffExtension": [6, 8, 10, 12, 14, 16, 18],
 						"DamagedMarkerDuration": [3, 3, 3, 3, 3, 3, 3],
 						"AttackCooldownRefund": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-					},
-					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR"
+					}
 				}
 			]
 		},
@@ -294,6 +294,7 @@
 				{
 					"name": "Fleet of Foot",
 					"objectName": "SivirPassive",
+					"dataKey": "Characters/Sivir/Spells/SivirPassiveAbility/SivirPassive",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_passive.png",
 					"tooltip": "Sivir's Attacks and Abilities grant her a burst of <speed>@FlatMS@ Decaying Move Speed</speed> for @HasteDuration@ seconds when they damage enemy champions.",
 					"dataValues": {
@@ -335,8 +336,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Sivir/Spells/SivirPassiveAbility/SivirPassive"
+					}
 				}
 			]
 		}

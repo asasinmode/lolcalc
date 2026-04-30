@@ -33,6 +33,7 @@
 				{
 					"name": "Handshake",
 					"objectName": "RenataQ",
+					"dataKey": "Characters/Renata/Spells/RenataQAbility/RenataQ",
 					"image": "assets/characters/renata/hud/icons2d/renata_q.png",
 					"tooltip": "Renata sends out a missile from her arm, <status>Rooting</status> the first enemy hit for @RootDuration@ second and dealing <magicDamage>@TotalDamage@</magicDamage> <magicDamage>magic damage</magicDamage>.<br><br><recast>Recast:</recast> Renata <status>Pulls</status> the enemy in a direction, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they are thrown into and <status>Stunning</status> for @StunDuration@ seconds if the thrown enemy is a champion.",
 					"extendedVariables": [
@@ -65,8 +66,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Renata/Spells/RenataQAbility/RenataQ"
+					}
 				}
 			]
 		},
@@ -76,6 +76,7 @@
 				{
 					"name": "Bailout",
 					"objectName": "RenataW",
+					"dataKey": "Characters/Renata/Spells/RenataWAbility/RenataW",
 					"image": "assets/characters/renata/hud/icons2d/renata_w.png",
 					"tooltip": "Renata infuses an ally champion, granting <attackSpeed>@ASCalc@ Attack Speed</attackSpeed> and <speed>@MSCalc@ Move Speed</speed> towards enemies, increasing to <attackSpeed>@FinalASCalc@ Attack Speed</attackSpeed> and <speed>@FinalMSCalc@ Move Speed</speed> over @Duration@ seconds. Takedowns refresh the duration of the buff.<br><br>If the ally would die, they instead return to full Health, which then decays over 3 seconds.<br><br>If they get a Takedown while decaying, they will be set to <healing>@TriumphPercent@% max Health</healing> and stop decaying.<br><br><rules>The Champion's death can be delayed by healing or similar effects while in the decaying state, but cannot be prevented unless the Champion gets a Takedown. Champions can only delay their death once.</rules>",
 					"extendedVariables": [
@@ -177,8 +178,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Renata/Spells/RenataWAbility/RenataW"
+					}
 				}
 			]
 		},
@@ -188,6 +188,7 @@
 				{
 					"name": "Loyalty Program",
 					"objectName": "RenataE",
+					"dataKey": "Characters/Renata/Spells/RenataEAbility/RenataE",
 					"image": "assets/characters/renata/hud/icons2d/renata_e.png",
 					"tooltip": "Renata sends out a pair of chemtech missiles, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> surrounding enemies and enemies hit by 30% for @SlowDuration@ seconds. Allies hit gain <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds.",
 					"extendedVariables": [
@@ -253,8 +254,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Renata/Spells/RenataEAbility/RenataE"
+					}
 				}
 			]
 		},
@@ -264,6 +264,7 @@
 				{
 					"name": "Hostile Takeover",
 					"objectName": "RenataR",
+					"dataKey": "Characters/Renata/Spells/RenataRAbility/RenataR",
 					"image": "assets/characters/renata/hud/icons2d/renata_r.png",
 					"tooltip": "Renata sends out a wave of chemicals, <status>Berserking</status> enemies for @BerserkDuration@ seconds, causing them to Attack the nearest unit, prioritizing their allies.<br><br>While <status>Berserk</status>, enemies gain <attackSpeed>@BonusAttackSpeed*100@% Attack Speed</attackSpeed>.",
 					"extendedVariables": [
@@ -277,8 +278,7 @@
 					"dataValues": {
 						"BerserkDuration": [0.75, 1.25, 1.75, 2.25, 2.75, 3.25, 3.75],
 						"BonusAttackSpeed": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Renata/Spells/RenataRAbility/RenataR"
+					}
 				}
 			]
 		},
@@ -288,6 +288,7 @@
 				{
 					"name": "Leverage",
 					"objectName": "RenataPassive",
+					"dataKey": "Characters/Renata/Spells/RenataPassiveAbility/RenataPassive",
 					"image": "assets/characters/renata/hud/icons2d/renata_p.png",
 					"tooltip": "Renata's Attacks mark enemies for @PassiveDuration@ seconds and deal an additional <magicDamage>@PercentAmpCalcSelf@ max Health magic damage</magicDamage> if they were unmarked.<br><br>Allied champions' Attacks or Abilities consume the mark, dealing <magicDamage>@PercentAmpCalc@ max Health magic damage</magicDamage>.<br><br><rules>Renata may only have one target marked at a time.</rules>",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -348,8 +349,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
 						}
-					},
-					"dataKey": "Characters/Renata/Spells/RenataPassiveAbility/RenataPassive"
+					}
 				}
 			]
 		}

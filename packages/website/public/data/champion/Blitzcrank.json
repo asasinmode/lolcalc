@@ -33,6 +33,7 @@
 				{
 					"name": "Rocket Grab",
 					"objectName": "RocketGrab",
+					"dataKey": "Characters/Blitzcrank/Spells/RocketGrabAbility/RocketGrab",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankq.png",
 					"tooltip": "Blitzcrank fires their right hand, <status>Pulling</status> the first enemy hit towards them and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -65,8 +66,7 @@
 					},
 					"effectAmount": {
 						"0": [40, 90, 140, 190, 240, 290, 340]
-					},
-					"dataKey": "Characters/Blitzcrank/Spells/RocketGrabAbility/RocketGrab"
+					}
 				}
 			]
 		},
@@ -76,6 +76,7 @@
 				{
 					"name": "Overdrive",
 					"objectName": "Overdrive",
+					"dataKey": "Characters/Blitzcrank/Spells/OverdriveAbility/Overdrive",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankw.png",
 					"tooltip": "Blitzcrank supercharges themself, gaining <speed>@MoveSpeedMod*100@% decaying Move Speed</speed> and <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @Duration@ seconds.<br><br>Afterwards, Blitzcrank is <status>Slowed</status> by @MoveSpeedModReduction*100@% for @SlowDuration@ seconds.",
 					"extendedVariables": [
@@ -116,8 +117,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Blitzcrank/Spells/OverdriveAbility/Overdrive"
+					}
 				}
 			]
 		},
@@ -127,6 +127,7 @@
 				{
 					"name": "Power Fist",
 					"objectName": "PowerFist",
+					"dataKey": "Characters/Blitzcrank/Spells/PowerFistAbility/PowerFist",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcranke.png",
 					"tooltip": "Blitzcrank charges up their fist, causing their next Attack to <status>Knock Up</status> for @CCDuration@ second(s) and deal <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [],
@@ -163,8 +164,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Blitzcrank/Spells/PowerFistAbility/PowerFist"
+					}
 				}
 			]
 		},
@@ -174,6 +174,7 @@
 				{
 					"name": "Static Field",
 					"objectName": "StaticField",
+					"dataKey": "Characters/Blitzcrank/Spells/StaticFieldAbility/StaticField",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankr.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>While this ability is available, lightning charges Blitzcrank's fists, marking those  Attacked. After 1 second, they are shocked for <magicDamage>@PassiveDamage@ magic damage</magicDamage>.<br><br><spellActive>Active: </spellActive>Blitzcrank overcharges, dealing <magicDamage>@ActiveDamage@ magic damage</magicDamage> and <status>Silencing</status> nearby enemies for @SilenceDuration@ seconds. Their shields are also destroyed.",
 					"extendedVariables": [
@@ -233,8 +234,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Blitzcrank/Spells/StaticFieldAbility/StaticField"
+					}
 				}
 			]
 		},
@@ -244,6 +244,7 @@
 				{
 					"name": "Mana Barrier",
 					"objectName": "ManaBarrierIcon",
+					"dataKey": "Characters/Blitzcrank/Spells/ManaBarrierIconAbility/ManaBarrierIcon",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankp.png",
 					"tooltip": "When Blitzcrank falls below @HealthThreshold*100@% Health, they gain <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds.",
 					"dataValues": {
@@ -267,8 +268,7 @@
 					"effectAmount": {
 						"0": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
 						"1": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
-					},
-					"dataKey": "Characters/Blitzcrank/Spells/ManaBarrierIconAbility/ManaBarrierIcon"
+					}
 				}
 			]
 		}

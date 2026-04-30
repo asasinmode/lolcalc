@@ -33,6 +33,7 @@
 				{
 					"name": "Bone Skewer",
 					"objectName": "PykeQ",
+					"dataKey": "Characters/Pyke/Spells/PykeQAbility/PykeQ",
 					"image": "assets/characters/pyke/hud/icons2d/pykeq.png",
 					"tooltip": "<tap>Tap:</tap> Pyke stabs, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, preferring champions. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit and <status>Pulling</status> them towards him. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>If Pyke successfully hits an enemy champion or the channel does not complete successfully, @ManaRefund*100@% of the Mana cost is refunded.",
 					"extendedVariables": [
@@ -75,8 +76,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Pyke/Spells/PykeQAbility/PykeQ"
+					}
 				}
 			]
 		},
@@ -86,6 +86,7 @@
 				{
 					"name": "Ghostwater Dive",
 					"objectName": "PykeW",
+					"dataKey": "Characters/Pyke/Spells/PykeWAbility/PykeW",
 					"image": "assets/characters/pyke/hud/icons2d/pykew.png",
 					"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @Effect10Amount@ seconds.",
 					"extendedVariables": [],
@@ -137,8 +138,7 @@
 						"7": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
 						"8": [1.15, 1.15, 1.15, 1.15, 1.15, 1.15, 1.15],
 						"9": [5, 5, 5, 5, 5, 5, 5]
-					},
-					"dataKey": "Characters/Pyke/Spells/PykeWAbility/PykeW"
+					}
 				}
 			]
 		},
@@ -148,6 +148,7 @@
 				{
 					"name": "Phantom Undertow",
 					"objectName": "PykeE",
+					"dataKey": "Characters/Pyke/Spells/PykeEAbility/PykeE",
 					"image": "assets/characters/pyke/hud/icons2d/pykee.png",
 					"tooltip": "Pyke dashes, leaving a drowned phantom behind him that returns to him shortly. The phantom <status>Stuns</status> for @StunDuration@ seconds and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to champions.",
 					"extendedVariables": [
@@ -201,8 +202,7 @@
 						"1": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
 						"2": [550, 550, 550, 550, 550, 550, 550],
 						"3": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Pyke/Spells/PykeEAbility/PykeE"
+					}
 				}
 			]
 		},
@@ -212,6 +212,7 @@
 				{
 					"name": "Death From Below",
 					"objectName": "PykeR",
+					"dataKey": "Characters/Pyke/Spells/PykeRAbility/PykeR",
 					"image": "assets/characters/pyke/hud/icons2d/pyker.png",
 					"tooltip": "Pyke strikes all enemy champions in an X, teleporting to and <danger>executing</danger> targets below <scaleAD>@RDamage@</scaleAD> Health. Champions above the threshold and non-champions instead take physical damage equal to @ReducedDamage*100@% of that amount (<physicalDamage>@ReducedDamageFinal@</physicalDamage>). <br><br>When an enemy champion dies inside the X, Pyke can <recast>Recast</recast> this Ability for free within @RRecastDuration@ seconds. If he executed that champion, the last assisting ally will also get kill gold. If he did not, he will still get kill gold as if he did.",
 					"extendedVariables": [],
@@ -315,8 +316,7 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "RDamage"
 						}
-					},
-					"dataKey": "Characters/Pyke/Spells/PykeRAbility/PykeR"
+					}
 				}
 			]
 		},
@@ -326,6 +326,7 @@
 				{
 					"name": "Gift of the Drowned Ones",
 					"objectName": "PykePassive",
+					"dataKey": "Characters/Pyke/Spells/PykePassiveAbility/PykePassive",
 					"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
 					"tooltip": "{{Spell_PykePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>",
@@ -384,8 +385,7 @@
 						"3": [1, 1, 1, 1, 1, 1, 1],
 						"5": [1, 1, 1, 1, 1, 1, 1],
 						"6": [30, 30, 30, 30, 30, 30, 30]
-					},
-					"dataKey": "Characters/Pyke/Spells/PykePassiveAbility/PykePassive"
+					}
 				}
 			]
 		}

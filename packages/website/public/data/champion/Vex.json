@@ -33,6 +33,7 @@
 				{
 					"name": "Mistral Bolt",
 					"objectName": "VexQ",
+					"dataKey": "Characters/Vex/Spells/VexQAbility/VexQ",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_q01.png",
 					"tooltip": "Vex launches a wave of mist that deals <magicDamage>@QDamageCalc@ magic damage</magicDamage>. After a delay, the wave becomes smaller and faster.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
 					"extendedVariables": [
@@ -78,8 +79,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Vex/Spells/VexQAbility/VexQ"
+					}
 				}
 			]
 		},
@@ -89,6 +89,7 @@
 				{
 					"name": "Personal Space",
 					"objectName": "VexW",
+					"dataKey": "Characters/Vex/Spells/VexWAbility/VexW",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_w01.png",
 					"tooltip": "Vex gains <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds and emits a shockwave that deals <magicDamage>@WDamageCalc@ magic damage</magicDamage>.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
 					"extendedVariables": [
@@ -136,8 +137,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Vex/Spells/VexWAbility/VexW"
+					}
 				}
 			]
 		},
@@ -147,6 +147,7 @@
 				{
 					"name": "Looming Darkness",
 					"objectName": "VexE",
+					"dataKey": "Characters/Vex/Spells/VexEAbility/VexE",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_e01.png",
 					"tooltip": "Vex commands Shadow to fly to a location, increasing in size as it travels. Upon arriving, it deals <magicDamage>@EDamageCalc@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Killing an enemy with this ability reduces <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown by @GloomCDNonChampTooltip*100@%.<br><br>Applies <keywordMajor>Gloom</keywordMajor> to enemies hit.",
 					"tooltipExtended": "{{Spell_VexE_Tooltip}}<br><br><rules>Killing a champion refunds @GloomCDChampTooltip*100@% of <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown instead.<br>Enemies <status>Feared</status> by this Ability move away from the center rather than from Vex.</rules>",
@@ -190,8 +191,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Vex/Spells/VexEAbility/VexE"
+					}
 				}
 			]
 		},
@@ -201,6 +201,7 @@
 				{
 					"name": "Shadow Surge",
 					"objectName": "VexR",
+					"dataKey": "Characters/Vex/Spells/VexRAbility/VexR",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_r01.png",
 					"tooltip": "Shadow excitedly surges forward, dealing <magicDamage>@spell.VexR:RDamageCalc@ magic damage</magicDamage> and marking the first enemy champion hit for 4 seconds.<br><br><recast>Recast</recast>: Dash to the marked champion, dealing <magicDamage>@spell.VexR:RecastDamageCalc@ magic damage</magicDamage> on arrival.<br><br>If the marked champion dies within @spell.VexR:TakedownWindow@ seconds of taking damage from this Ability, its Cooldown is temporarily reset.",
 					"extendedVariables": [
@@ -251,8 +252,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Vex/Spells/VexRAbility/VexR"
+					}
 				}
 			]
 		},
@@ -262,6 +262,7 @@
 				{
 					"name": "Doom 'n Gloom",
 					"objectName": "VexP",
+					"dataKey": "Characters/Vex/Spells/VexPAbility/VexP",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png",
 					"tooltip": "{{Spell_VexP_Tooltip}}",
 					"tooltipExtended": "{{Spell_VexP_Tooltip}}<br><br><rules>Non-champion targets take @GloomMinionMod@ damage and refund @GloomCDNonChamp*100@% of this Ability's Cooldown.<br>Enemies <status>Feared</status> by this Ability move more slowly the farther they are from Vex.</rules>",
@@ -375,8 +376,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Vex/Spells/VexPAbility/VexP"
+					}
 				}
 			]
 		}

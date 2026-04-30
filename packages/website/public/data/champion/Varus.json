@@ -33,6 +33,7 @@
 				{
 					"name": "Piercing Arrow",
 					"objectName": "VarusQ",
+					"dataKey": "Characters/Varus/Spells/VarusQAbility/VarusQ",
 					"image": "assets/characters/varus/hud/icons2d/varusq.png",
 					"tooltip": "<attention>Begin Charging:</attention> Varus draws back his next shot, <status>Slowing</status> himself by @MoveSpeedMod*-100@%. After @MaxChannelDuration@ seconds, if not fired, Varus will cancel the Ability and refund @ManaRefund*100@% of its Mana cost.<br><br><attention>Release:</attention> Varus releases the arrow, dealing <physicalDamage>@TotalDamageMinTooltip@ physical damage</physicalDamage>, reduced by @FalloffPercent*100@% per enemy hit (minimum @MinDamagePercent*100@%). Damage and <keywordMajor>Blight</keywordMajor> detonation effects are increased by up to @MaxChargeAmp*100@% based on charge time (maximum <physicalDamage>@TotalDamageMax@</physicalDamage>) .",
 					"extendedVariables": [
@@ -94,8 +95,7 @@
 						"5": [3, 3, 3, 3, 3, 3, 3],
 						"6": [-0.2, -0.2, -0.2, -0.2, -0.2, -0.2, -0.2],
 						"8": [0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33]
-					},
-					"dataKey": "Characters/Varus/Spells/VarusQAbility/VarusQ"
+					}
 				}
 			]
 		},
@@ -105,6 +105,7 @@
 				{
 					"name": "Blighted Quiver",
 					"objectName": "VarusW",
+					"dataKey": "Characters/Varus/Spells/VarusWAbility/VarusW",
 					"image": "assets/characters/varus/hud/icons2d/varusw.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Varus' Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> and apply a <keywordMajor>Blight</keywordMajor> stack for @DebuffDuration@ seconds (max @MaxStacks@ stacks).<br><br>Varus' other Abilities detonate <keywordMajor>Blight</keywordMajor> stacks dealing <magicDamage>@PercentHPPerStack@ max Health magic damage</magicDamage> per stack (max <magicDamage>@MaxPercentHPPerStack@ max Health damage</magicDamage>). Detonating <keywordMajor>Blight</keywordMajor> on champions and epic monsters also reduces his basic Abilities' Cooldowns by @CDRPerBlightStack*100@% of their Maximum per stack.<br><br><spellActive>Active:</spellActive> Varus' next <spellName>{{Spell_VarusQ_Name}}</spellName> deals an additional <magicDamage>@QEmpowerPercentHP@ missing Health magic damage</magicDamage>, increased up to <magicDamage>@MaxQEmpowerPercentHP@ missing Health damage</magicDamage> based on charge time.",
 					"extendedVariables": [
@@ -206,8 +207,7 @@
 						"2": [6, 6, 6, 6, 6, 6, 6],
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"4": [120, 120, 120, 120, 120, 120, 120]
-					},
-					"dataKey": "Characters/Varus/Spells/VarusWAbility/VarusW"
+					}
 				}
 			]
 		},
@@ -217,6 +217,7 @@
 				{
 					"name": "Hail of Arrows",
 					"objectName": "VarusE",
+					"dataKey": "Characters/Varus/Spells/VarusEAbility/VarusE",
 					"image": "assets/characters/varus/hud/icons2d/varuse.png",
 					"tooltip": "Varus fires a hail of arrows that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and desecrates the ground for @GroundDuration@ seconds, <status>Slowing</status> enemies by @SlowPercent*-100@% and applying @GrievousAmount*100@% Grievous Wounds.",
 					"extendedVariables": [
@@ -260,8 +261,7 @@
 					"effectAmount": {
 						"2": [4, 4, 4, 4, 4, 4, 4],
 						"4": [300, 300, 300, 300, 300, 300, 300]
-					},
-					"dataKey": "Characters/Varus/Spells/VarusEAbility/VarusE"
+					}
 				}
 			]
 		},
@@ -271,6 +271,7 @@
 				{
 					"name": "Chain of Corruption",
 					"objectName": "VarusR",
+					"dataKey": "Characters/Varus/Spells/VarusRAbility/VarusR",
 					"image": "assets/characters/varus/hud/icons2d/varusr.png",
 					"tooltip": "Varus flings out a tendril of corruption, <status>Rooting</status> the first champion hit for @RootDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. <status>Rooted</status> enemies gain @PassiveStacks@ <keywordMajor>Blight</keywordMajor> stacks over the duration.<br><br>The corruption spreads from its target to uninfected enemy champions. If it reaches them, they take the same damage and <status>Root</status>.",
 					"extendedVariables": [
@@ -315,8 +316,7 @@
 						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"5": [600, 600, 600, 600, 600, 600, 600],
 						"6": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75]
-					},
-					"dataKey": "Characters/Varus/Spells/VarusRAbility/VarusR"
+					}
 				}
 			]
 		},
@@ -326,6 +326,7 @@
 				{
 					"name": "Living Vengeance",
 					"objectName": "VarusPassive",
+					"dataKey": "Characters/Varus/Spells/VarusPassiveAbility/VarusPassive",
 					"image": "assets/characters/varus/hud/icons2d/varuspassive.png",
 					"tooltip": "When Varus kills an enemy, he gains <attackSpeed>@MinionAS@ Attack Speed</attackSpeed>, <scaleAD>@MinionAD@ Attack Damage</scaleAD>, and <scaleAP>@MinionAP@ Ability Power</scaleAP> for @ASDuration@ seconds.<br><br>Champion takedowns grant <attackSpeed>@ChampionAS@ Attack Speed</attackSpeed> that can bypass the Attack Speed cap, <scaleAD>@ChampionAD@ Attack Damage</scaleAD>, and <scaleAP>@ChampionAP@ Ability Power</scaleAP> instead.",
 					"dataValues": {
@@ -438,8 +439,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Varus/Spells/VarusPassiveAbility/VarusPassive"
+					}
 				}
 			]
 		}

@@ -33,6 +33,7 @@
 				{
 					"name": "Stretching Strikes",
 					"objectName": "ZacQ",
+					"dataKey": "Characters/Zac/Spells/ZacQAbility/ZacQ",
 					"image": "assets/characters/zac/hud/icons2d/zacq.png",
 					"tooltip": "Zac stretches his arm out, attaching it to the first enemy hit to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and briefly <status>Slow</status> them. Zac's next Attack gains increased range and applies the same damage and <status>Slow</status>. <br><br>If Zac hits a <i>different</i> enemy with this Attack, he <status>Knocks Up</status> both towards each other. If they collide, they and surrounding enemies take <magicDamage>@TotalDamage@ magic damage</magicDamage> and are briefly <status>Slowed</status>.",
 					"extendedVariables": [
@@ -113,8 +114,7 @@
 						"7": [700, 700, 700, 700, 700, 700, 700],
 						"8": [300, 300, 300, 300, 300, 300, 300],
 						"9": [300, 300, 300, 300, 300, 300, 300]
-					},
-					"dataKey": "Characters/Zac/Spells/ZacQAbility/ZacQ"
+					}
 				}
 			]
 		},
@@ -124,6 +124,7 @@
 				{
 					"name": "Unstable Matter",
 					"objectName": "ZacW",
+					"dataKey": "Characters/Zac/Spells/ZacWAbility/ZacW",
 					"image": "assets/characters/zac/hud/icons2d/zacw.png",
 					"tooltip": "Zac's body erupts, dealing <magicDamage>@BaseDamage@ + @DisplayPercentDamage@ max Health magic damage</magicDamage> to nearby enemies.<br><br>Absorbing <keywordMajor>Goo</keywordMajor> reduces this Ability's Cooldown by 1 second.",
 					"extendedVariables": [
@@ -191,8 +192,7 @@
 						"2": [0.04, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
 						"3": [1, 1, 1, 1, 1, 1, 1],
 						"4": [200, 200, 200, 200, 200, 200, 200]
-					},
-					"dataKey": "Characters/Zac/Spells/ZacWAbility/ZacW"
+					}
 				}
 			]
 		},
@@ -202,6 +202,7 @@
 				{
 					"name": "Elastic Slingshot",
 					"objectName": "ZacE",
+					"dataKey": "Characters/Zac/Spells/ZacEAbility/ZacE",
 					"image": "assets/characters/zac/hud/icons2d/zace.png",
 					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
 					"extendedVariables": [
@@ -276,8 +277,7 @@
 						"7": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"8": [265, 265, 265, 265, 265, 265, 265],
 						"9": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Zac/Spells/ZacEAbility/ZacE"
+					}
 				}
 			]
 		},
@@ -287,6 +287,7 @@
 				{
 					"name": "Let's Bounce!",
 					"objectName": "ZacR",
+					"dataKey": "Characters/Zac/Spells/ZacRAbility/ZacR",
 					"image": "assets/characters/zac/hud/icons2d/zacr.png",
 					"tooltip": "Zac bounces @Bounces@ times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>@DamagePerBounce@ magic damage</magicDamage>. Subsequent bounces deal <magicDamage>@DamagePerSubsequentBounce@ magic damage</magicDamage> and <status>Slow</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>Zac gains up to <speed>@EndingMS*100@% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing.",
 					"extendedVariables": [
@@ -404,8 +405,7 @@
 						"7": [1, 1, 1, 1, 1, 1, 1],
 						"8": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"9": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-					},
-					"dataKey": "Characters/Zac/Spells/ZacRAbility/ZacR"
+					}
 				}
 			]
 		},
@@ -415,6 +415,7 @@
 				{
 					"name": "Cell Division",
 					"objectName": "ZacPassiveChunkDrop",
+					"dataKey": "Characters/Zac/Spells/ZacPassiveChunkDropAbility/ZacPassiveChunkDrop",
 					"image": "assets/characters/zac/hud/icons2d/zacpassive.png",
 					"tooltip": "{{Spell_ZacPassiveChunkDrop_Tooltip}}",
 					"tooltipExtended": "{{Spell_ZacPassiveChunkDrop_Tooltip}}<br><br><rules>Each bloblet has 12% of Zac's max <healing>Health</healing>, and 50% of his <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.</rules>",
@@ -467,8 +468,7 @@
 							},
 							"mModifiedGameCalculation": "HealPercent"
 						}
-					},
-					"dataKey": "Characters/Zac/Spells/ZacPassiveChunkDropAbility/ZacPassiveChunkDrop"
+					}
 				}
 			]
 		}

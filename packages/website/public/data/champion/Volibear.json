@@ -33,6 +33,7 @@
 				{
 					"name": "Thundering Smash",
 					"objectName": "VolibearQ",
+					"dataKey": "Characters/Volibear/Spells/VolibearQAbility/VolibearQ",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_q.png",
 					"tooltip": "Volibear gains <speed>@MinSpeedCalc@ Move Speed</speed>, doubled to <speed>@MaxSpeedCalc@</speed> towards enemy champions for the next @Duration@ seconds. While active, Volibear's next Attack deals <physicalDamage>@CalculatedDamage@ physical damage</physicalDamage> and <status>Stuns</status> the target for @StunDuration@ second.<br><br>Volibear becomes enraged if an enemy <status>Immobilizes</status> him before he <status>Stuns</status> a target, ending the Ability early but refreshing its Cooldown.",
 					"extendedVariables": [
@@ -120,8 +121,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Volibear/Spells/VolibearQAbility/VolibearQ"
+					}
 				}
 			]
 		},
@@ -131,6 +131,7 @@
 				{
 					"name": "Frenzied Maul",
 					"objectName": "VolibearW",
+					"dataKey": "Characters/Volibear/Spells/VolibearWAbility/VolibearW",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_w.png",
 					"tooltip": "Volibear mauls an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them for @MarkDuration@ seconds.<br><br>If this Ability is used on a marked target, its damage is increased to <physicalDamage>@EmpoweredDamage@</physicalDamage> and Volibear restores <healing>@BaseHeal@ plus @PercentMissingHealthHealingRatio@ missing Health</healing>.",
 					"extendedVariables": [
@@ -206,8 +207,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Volibear/Spells/VolibearWAbility/VolibearW"
+					}
 				}
 			]
 		},
@@ -217,6 +217,7 @@
 				{
 					"name": "Sky Splitter",
 					"objectName": "VolibearE",
+					"dataKey": "Characters/Volibear/Spells/VolibearEAbility/VolibearE",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_e.png",
 					"tooltip": "Volibear summons a thundercloud that fires a lightning bolt, dealing <magicDamage>@TotalDamageTooltip@ plus @PercentDamage*100@% max Health magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If Volibear is inside the blast zone, he gains a <shield>@ShieldAPRatioTooltip@ plus @ShieldAmount*100@% max Health Shield</shield> for @ShieldDuration@ seconds.",
 					"extendedVariables": [
@@ -314,8 +315,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Volibear/Spells/VolibearEAbility/VolibearE"
+					}
 				}
 			]
 		},
@@ -325,6 +325,7 @@
 				{
 					"name": "Stormbringer",
 					"objectName": "VolibearR",
+					"dataKey": "Characters/Volibear/Spells/VolibearRAbility/VolibearR",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_r.png",
 					"tooltip": "Volibear transforms and leaps, gaining <healing>@HealthAmount@ Health</healing> and @BonusAttackRange@ Attack Range for the next @TransformDuration@ seconds.<br><br>Upon landing, Volibear cracks the earth, <status>Disabling</status> nearby towers for @TowerDisableDuration@ seconds and dealing <physicalDamage>@TowerDamageTooltip@ physical damage to them</physicalDamage>. Nearby enemies are <status>Slowed</status> by @SlowAmount*100@%, decaying over 1 second. Enemies directly underneath Volibear suffer <physicalDamage>@SweetSpotDamageTooltip@ physical damage</physicalDamage>.",
 					"extendedVariables": [
@@ -443,8 +444,7 @@
 						"2": [12, 12, 12, 12, 0, 0, 0],
 						"3": [8, 8, 8, 8, 8, 8, 8],
 						"4": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08]
-					},
-					"dataKey": "Characters/Volibear/Spells/VolibearRAbility/VolibearR"
+					}
 				}
 			]
 		},
@@ -454,6 +454,7 @@
 				{
 					"name": "The Relentless Storm",
 					"objectName": "VolibearP",
+					"dataKey": "Characters/Volibear/Spells/VolibearPAbility/VolibearP",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_p.png",
 					"tooltip": "Volibear gains <attackSpeed>@AttackSpeedCalc@ Attack Speed</attackSpeed> for @BuffDuration@ seconds whenever he deals damage with an Ability or Attack, stacking up to 5 times.<br><br>At 5 stacks, Volibear's claws ignite with lightning, causing his Attacks to deal an additional <magicDamage>@ChainLightningDamage@ magic damage</magicDamage> to the target and 4 closest enemies.",
 					"dataValues": {
@@ -519,8 +520,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Volibear/Spells/VolibearPAbility/VolibearP"
+					}
 				}
 			]
 		}

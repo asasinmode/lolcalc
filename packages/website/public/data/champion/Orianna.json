@@ -33,6 +33,7 @@
 				{
 					"name": "Command: Attack",
 					"objectName": "OrianaIzunaCommand",
+					"dataKey": "Characters/Orianna/Spells/OrianaIzunaCommandAbility/OrianaIzunaCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first.",
 					"extendedVariables": [
@@ -73,8 +74,7 @@
 						"0": [30, 60, 90, 120, 150, 180, 210],
 						"1": [30, 30, 30, 30, 30, 30, 30],
 						"2": [70, 70, 70, 70, 70, 70, 70]
-					},
-					"dataKey": "Characters/Orianna/Spells/OrianaIzunaCommandAbility/OrianaIzunaCommand"
+					}
 				}
 			]
 		},
@@ -84,6 +84,7 @@
 				{
 					"name": "Command: Dissonance",
 					"objectName": "OrianaDissonanceCommand",
+					"dataKey": "Characters/Orianna/Spells/OrianaDissonanceCommandAbility/OrianaDissonanceCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaw.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds.",
 					"extendedVariables": [
@@ -127,8 +128,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Orianna/Spells/OrianaDissonanceCommandAbility/OrianaDissonanceCommand"
+					}
 				}
 			]
 		},
@@ -138,6 +138,7 @@
 				{
 					"name": "Command: Protect",
 					"objectName": "OrianaRedactCommand",
+					"dataKey": "Characters/Orianna/Spells/OrianaRedactCommandAbility/OrianaRedactCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -194,8 +195,7 @@
 						"2": [30, 60, 90, 120, 150, 180, 210],
 						"3": [75, 75, 75, 75, 75, 75, 75],
 						"4": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
-					},
-					"dataKey": "Characters/Orianna/Spells/OrianaRedactCommandAbility/OrianaRedactCommand"
+					}
 				}
 			]
 		},
@@ -205,6 +205,7 @@
 				{
 					"name": "Command: Shockwave",
 					"objectName": "OrianaDetonateCommand",
+					"dataKey": "Characters/Orianna/Spells/OrianaDetonateCommandAbility/OrianaDetonateCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannar.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
 					"extendedVariables": [
@@ -234,8 +235,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Orianna/Spells/OrianaDetonateCommandAbility/OrianaDetonateCommand"
+					}
 				}
 			]
 		},
@@ -245,6 +245,7 @@
 				{
 					"name": "Clockwork Windup",
 					"objectName": "OriannaP",
+					"dataKey": "Characters/Orianna/Spells/OriannaPAbility/OriannaP",
 					"image": "assets/characters/orianna/hud/icons2d/oriannap.png",
 					"tooltip": "Orianna's Abilities originate from her <keywordMajor>Ball</keywordMajor>. Orianna's <keywordMajor>Ball</keywordMajor> automatically returns to her if she is too far away from it.<br><br>Orianna's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Subsequent Attacks against the same target within @StackDuration@ seconds deal an additional <magicDamage>@StackDamage@ magic damage</magicDamage> (max of <magicDamage>@StackDamageMax@ damage</magicDamage>).",
 					"dataValues": {
@@ -288,8 +289,7 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mModifiedGameCalculation": "TotalDamage"
 						}
-					},
-					"dataKey": "Characters/Orianna/Spells/OriannaPAbility/OriannaP"
+					}
 				}
 			]
 		}

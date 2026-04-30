@@ -33,6 +33,7 @@
 				{
 					"name": "Powerball",
 					"objectName": "PowerBall",
+					"dataKey": "Characters/Rammus/Spells/PowerBallAbility/PowerBall",
 					"image": "assets/characters/rammus/hud/icons2d/armordillo_powerball.png",
 					"tooltip": "Rammus curls into a ball, gaining <speed>@MinimumMoveSpeed@ Move Speed</speed>, accelerating up to <speed>@MaximumMoveSpeed@ Move Speed</speed> over @RollDuration@ seconds. Rammus stops after colliding with an enemy, dealing <magicDamage>@PowerBallDamage@ magic damage</magicDamage>, <status>Knocking Back</status>, and <status>Slowing</status> nearby enemies by @SlowPercent@% for @SlowDuration@ second.<br><br><recast>Recast</recast>: Rammus ends this Ability early.",
 					"extendedVariables": [
@@ -94,8 +95,7 @@
 					},
 					"effectAmount": {
 						"9": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
-					},
-					"dataKey": "Characters/Rammus/Spells/PowerBallAbility/PowerBall"
+					}
 				}
 			]
 		},
@@ -105,6 +105,7 @@
 				{
 					"name": "Defensive Ball Curl",
 					"objectName": "DefensiveBallCurl",
+					"dataKey": "Characters/Rammus/Spells/DefensiveBallCurlAbility/DefensiveBallCurl",
 					"image": "assets/characters/rammus/hud/icons2d/armordillo_shellbash.png",
 					"tooltip": "Rammus enters a defensive formation for @BuffDuration@ seconds, gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> and dealing <magicDamage>@ReturnDamageCalc@ magic damage</magicDamage> to enemies that Attack him.<br><br><recast>Recast</recast>: Rammus ends this Ability early.",
 					"extendedVariables": [
@@ -225,8 +226,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rammus/Spells/DefensiveBallCurlAbility/DefensiveBallCurl"
+					}
 				}
 			]
 		},
@@ -236,6 +236,7 @@
 				{
 					"name": "Frenzying Taunt",
 					"objectName": "PuncturingTaunt",
+					"dataKey": "Characters/Rammus/Spells/PuncturingTauntAbility/PuncturingTaunt",
 					"image": "assets/characters/rammus/hud/icons2d/armordillo_scaledplating.png",
 					"tooltip": "Rammus <status>Taunts</status> an enemy champion or monster for @Duration@ seconds. Monsters are dealt <magicDamage>@MonsterDamageCalc@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -268,8 +269,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rammus/Spells/PuncturingTauntAbility/PuncturingTaunt"
+					}
 				}
 			]
 		},
@@ -279,6 +279,7 @@
 				{
 					"name": "Soaring Slam",
 					"objectName": "Tremors2",
+					"dataKey": "Characters/Rammus/Spells/Tremors2Ability/Tremors2",
 					"image": "assets/characters/rammus/hud/icons2d/armordillo_recklesscharge.png",
 					"tooltip": "Rammus hops into the air and slams down in an area, dealing <magicDamage>@InitialDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds. If used during <spellName>Powerball</spellName>, enemies in the center take an additional <magicDamage>@spell.PowerBall:PowerBallDamage@ magic damage</magicDamage> and are <status>Knocked Up</status> for @KnockupDuration@ seconds.<br><br>Rammus then creates @NumberOfPulses@ aftershocks in the area over @BuffDuration@ seconds, repeating the <status>Slow</status>.<br><br>The range of this Ability is increased by Rammus's <speed>Move Speed</speed>.",
 					"extendedVariables": [
@@ -376,8 +377,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rammus/Spells/Tremors2Ability/Tremors2"
+					}
 				}
 			]
 		},
@@ -387,6 +387,7 @@
 				{
 					"name": "Spiked Shell",
 					"objectName": "RammusP",
+					"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP",
 					"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
 					"tooltip": "Rammus's gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
 					"dataValues": {
@@ -409,8 +410,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP"
+					}
 				}
 			]
 		}

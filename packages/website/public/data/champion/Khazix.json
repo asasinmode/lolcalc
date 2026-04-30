@@ -33,6 +33,7 @@
 				{
 					"name": "Taste Their Fear",
 					"objectName": "KhazixQ",
+					"dataKey": "Characters/Khazix/Spells/KhazixQAbility/KhazixQ",
 					"image": "assets/characters/khazix/hud/icons2d/khazix_q.png",
 					"tooltip": "{{Spell_KhazixQ_Tooltip_@IsEvolved@}}",
 					"tooltipExtended": "{{Spell_KhazixQ_Tooltip_0}}<br><br>{{Spell_KhazixQ_Tooltip_1}}",
@@ -96,8 +97,7 @@
 						"1": [110, 110, 110, 110, 110, 110, 110],
 						"2": [50, 50, 50, 50, 50, 50, 50],
 						"3": [45, 45, 45, 45, 45, 45, 45]
-					},
-					"dataKey": "Characters/Khazix/Spells/KhazixQAbility/KhazixQ"
+					}
 				}
 			]
 		},
@@ -107,6 +107,7 @@
 				{
 					"name": "Void Spike",
 					"objectName": "KhazixW",
+					"dataKey": "Characters/Khazix/Spells/KhazixWAbility/KhazixW",
 					"image": "assets/characters/khazix/hud/icons2d/khazix_w.png",
 					"tooltip": "{{Spell_KhazixW_Tooltip_@IsEvolved@}}",
 					"tooltipExtended": "{{Spell_KhazixW_Tooltip_0}}<br><br>{{Spell_KhazixW_Tooltip_1}}",
@@ -191,8 +192,7 @@
 						"3": [2, 2, 2, 2, 2, 2, 2],
 						"5": [2, 2, 2, 2, 2, 2, 2],
 						"6": [60, 60, 60, 60, 60, 60, 60]
-					},
-					"dataKey": "Characters/Khazix/Spells/KhazixWAbility/KhazixW"
+					}
 				}
 			]
 		},
@@ -202,6 +202,7 @@
 				{
 					"name": "Leap",
 					"objectName": "KhazixE",
+					"dataKey": "Characters/Khazix/Spells/KhazixEAbility/KhazixE",
 					"image": "assets/characters/khazix/hud/icons2d/khazix_e.png",
 					"tooltip": "{{Spell_KhazixE_Tooltip_@IsEvolved@}}",
 					"tooltipExtended": "{{Spell_KhazixE_Tooltip_0}}<br><br>{{Spell_KhazixE_Tooltip_1}}",
@@ -261,8 +262,7 @@
 						"1": [25, 30, 35, 40, 45, 50, 55],
 						"2": [10, 10, 10, 10, 10, 10, 10],
 						"3": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
-					},
-					"dataKey": "Characters/Khazix/Spells/KhazixEAbility/KhazixE"
+					}
 				}
 			]
 		},
@@ -272,6 +272,7 @@
 				{
 					"name": "Void Assault",
 					"objectName": "KhazixR",
+					"dataKey": "Characters/Khazix/Spells/KhazixRAbility/KhazixR",
 					"image": "assets/characters/khazix/hud/icons2d/khazix_r.png",
 					"tooltip": "{{Spell_KhazixR_Tooltip_@IsEvolved@}}<br><br>{{Spell_KhazixR_Tooltip_P}}",
 					"tooltipExtended": "{{Spell_KhazixR_Tooltip_P}}<br><br>{{Spell_KhazixR_Tooltip_0}}<br><br>{{Spell_KhazixR_Tooltip_1}}",
@@ -317,8 +318,7 @@
 								"mBuffName": "{7bcf22fa}"
 							}
 						}
-					},
-					"dataKey": "Characters/Khazix/Spells/KhazixRAbility/KhazixR"
+					}
 				}
 			]
 		},
@@ -328,6 +328,7 @@
 				{
 					"name": "Unseen Threat",
 					"objectName": "KhazixPassive",
+					"dataKey": "Characters/Khazix/Spells/KhazixPassiveAbility/KhazixPassive",
 					"image": "assets/characters/khazix/hud/icons2d/khazix_p.png",
 					"tooltip": "When Kha'Zix is not visible to the enemy team, his next Attack against a champion deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Enemies with no nearby allies become <keywordMajor>Isolated</keywordMajor>.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -352,8 +353,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Khazix/Spells/KhazixPassiveAbility/KhazixPassive"
+					}
 				}
 			]
 		}

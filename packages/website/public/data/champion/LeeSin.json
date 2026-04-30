@@ -33,6 +33,7 @@
 				{
 					"name": "Sonic Wave / Resonating Strike",
 					"objectName": "LeeSinQOne",
+					"dataKey": "Characters/LeeSin/Spells/LeeSinQOneAbility/LeeSinQOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinq1.png",
 					"tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to the first enemy hit, granting <keywordStealth>True Sight</keywordStealth> of them, and allows Lee Sin to <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>@RecastDamage@ to @EmpoweredDamage@ physical damage</physicalDamage> scaling with the target's missing Health. ",
 					"extendedVariables": [
@@ -99,8 +100,7 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "RecastDamage"
 						}
-					},
-					"dataKey": "Characters/LeeSin/Spells/LeeSinQOneAbility/LeeSinQOne"
+					}
 				}
 			]
 		},
@@ -110,6 +110,7 @@
 				{
 					"name": "Safeguard / Iron Will",
 					"objectName": "LeeSinWOne",
+					"dataKey": "Characters/LeeSin/Spells/LeeSinWOneAbility/LeeSinWOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
 					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
 					"extendedVariables": [
@@ -147,8 +148,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/LeeSin/Spells/LeeSinWOneAbility/LeeSinWOne"
+					}
 				}
 			]
 		},
@@ -158,6 +158,7 @@
 				{
 					"name": "Tempest / Cripple",
 					"objectName": "LeeSinEOne",
+					"dataKey": "Characters/LeeSin/Spells/LeeSinEOneAbility/LeeSinEOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesine1.png",
 					"tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>@InitialDamage@ magic damage</magicDamage> and reveals them for @SlowDuration@ seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by @SlowAmount@% decaying over @SlowDuration@ seconds.",
 					"extendedVariables": [
@@ -192,8 +193,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/LeeSin/Spells/LeeSinEOneAbility/LeeSinEOne"
+					}
 				}
 			]
 		},
@@ -203,6 +203,7 @@
 				{
 					"name": "Dragon's Rage",
 					"objectName": "LeeSinR",
+					"dataKey": "Characters/LeeSin/Spells/LeeSinRAbility/LeeSinR",
 					"image": "assets/characters/leesin/hud/icons2d/leesinr.png",
 					"tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>@Damage@ plus @PercentHPCarryThrough@% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
 					"extendedVariables": [
@@ -237,8 +238,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/LeeSin/Spells/LeeSinRAbility/LeeSinR"
+					}
 				}
 			]
 		},
@@ -248,6 +248,7 @@
 				{
 					"name": "Flurry",
 					"objectName": "LeeSinPassive",
+					"dataKey": "Characters/LeeSin/Spells/LeeSinPassiveAbility/LeeSinPassive",
 					"image": "assets/characters/leesin/hud/icons2d/leesinp.png",
 					"tooltip": "Lee Sin's Abilities grant him <attackSpeed>@PassiveAS@% Attack Speed</attackSpeed> for two Attacks. The first Attack restores <keywordMajor>@TTFirstHitEnergy@ Energy</keywordMajor> and the second restores <keywordMajor>@EnergyReturn@ Energy</keywordMajor>.",
 					"dataValues": {
@@ -281,8 +282,7 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mModifiedGameCalculation": "EnergyReturn"
 						}
-					},
-					"dataKey": "Characters/LeeSin/Spells/LeeSinPassiveAbility/LeeSinPassive"
+					}
 				}
 			]
 		}

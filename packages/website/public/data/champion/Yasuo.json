@@ -33,6 +33,7 @@
 				{
 					"name": "Steel Tempest",
 					"objectName": "YasuoQ1Wrapper",
+					"dataKey": "Characters/Yasuo/Spells/YasuoQ1WrapperAbility/YasuoQ1Wrapper",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png",
 					"tooltip": "Yasuo thrusts, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If he hits, he gains a stack for @GatheringStormDuration@ seconds. While he has 2 stacks, his next use of this Ability fires a whirlwind from range, dealing the same damage and <status>Knocking Up</status> for @KnockUpDurationTOOLTIPONLY@ second.<br><br>If used while dashing, this Ability strikes in a circle rather than a stab.",
 					"extendedVariables": [
@@ -84,8 +85,7 @@
 							],
 							"mPrecision": 1
 						}
-					},
-					"dataKey": "Characters/Yasuo/Spells/YasuoQ1WrapperAbility/YasuoQ1Wrapper"
+					}
 				}
 			]
 		},
@@ -95,6 +95,7 @@
 				{
 					"name": "Wind Wall",
 					"objectName": "YasuoW",
+					"dataKey": "Characters/Yasuo/Spells/YasuoWAbility/YasuoW",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png",
 					"tooltip": "Yasuo creates a drifting wall of wind that blocks all enemy projectiles for 4 seconds.",
 					"extendedVariables": [
@@ -117,8 +118,7 @@
 						"2": [0, 3, 6, 9, 12, 15, 18],
 						"3": [250, 300, 350, 400, 450, 500, 550],
 						"4": [250, 320, 390, 460, 530, 600, 670]
-					},
-					"dataKey": "Characters/Yasuo/Spells/YasuoWAbility/YasuoW"
+					}
 				}
 			]
 		},
@@ -128,6 +128,7 @@
 				{
 					"name": "Sweeping Blade",
 					"objectName": "YasuoE",
+					"dataKey": "Characters/Yasuo/Spells/YasuoEAbility/YasuoE",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png",
 					"tooltip": "Yasuo dashes through a target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Each use of this Ability grants <magicDamage>@BonusDamagePerStack@</magicDamage> bonus damage to subsequent uses for @StackDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>This Ability has a @Effect2Amount@ second per-target Cooldown.",
 					"extendedVariables": [
@@ -182,8 +183,7 @@
 						"1": [11, 10, 9, 8, 7, 6, 6],
 						"2": [0.5, 0.5, 0.4, 0.3, 0.2, 0.1, 0.1],
 						"5": [750, 750, 750, 750, 750, 750, 750]
-					},
-					"dataKey": "Characters/Yasuo/Spells/YasuoEAbility/YasuoE"
+					}
 				}
 			]
 		},
@@ -193,6 +193,7 @@
 				{
 					"name": "Last Breath",
 					"objectName": "YasuoR",
+					"dataKey": "Characters/Yasuo/Spells/YasuoRAbility/YasuoR",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png",
 					"tooltip": "Yasuo teleports to an <status>Airborne</status> enemy champion, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> and holding all nearby <status>Airborne</status> enemies up for an additional @RKnockupDuration@ second. Yasuo also gains maximum <keywordMajor>Flow</keywordMajor>, but loses all <spellName>{{Spell_YasuoQ1Wrapper_Name}}</spellName> stacks.<br><br>Afterwards, Yasuo's critical strikes ignore <scaleArmor>@RPercentArmorPen@% bonus Armor</scaleArmor> for @RBuffDuration@ seconds.",
 					"extendedVariables": [
@@ -225,8 +226,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Yasuo/Spells/YasuoRAbility/YasuoR"
+					}
 				}
 			]
 		},
@@ -236,6 +236,7 @@
 				{
 					"name": "Way of the Wanderer",
 					"objectName": "YasuoPassive",
+					"dataKey": "Characters/Yasuo/Spells/YasuoPassiveAbility/YasuoPassive",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png",
 					"tooltip": "{{Spell_YasuoPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_YasuoPassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
@@ -292,8 +293,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Yasuo/Spells/YasuoPassiveAbility/YasuoPassive"
+					}
 				}
 			]
 		}

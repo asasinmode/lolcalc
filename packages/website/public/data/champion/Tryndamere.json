@@ -33,6 +33,7 @@
 				{
 					"name": "Bloodlust",
 					"objectName": "TryndamereQ",
+					"dataKey": "Characters/Tryndamere/Spells/TryndamereQAbility/TryndamereQ",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_q.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining up to <scaleAD>@MaximumBonusAD@ Attack Damage</scaleAD> based on his missing Health.<br><br><spellActive>Active:</spellActive> Tryndamere consumes his <keywordMajor>Fury</keywordMajor>, restoring <healing>@BaseHeal@ plus @HealPerFury@ Health per Fury (max: @MaximumHeal@)</healing>. ",
 					"extendedVariables": [
@@ -115,8 +116,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Tryndamere/Spells/TryndamereQAbility/TryndamereQ"
+					}
 				}
 			]
 		},
@@ -126,6 +126,7 @@
 				{
 					"name": "Mocking Shout",
 					"objectName": "TryndamereW",
+					"dataKey": "Characters/Tryndamere/Spells/TryndamereWAbility/TryndamereW",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_w.png",
 					"tooltip": "Tryndamere hurls insults, reducing champions' Attack Damage by @ADReduction*-1@ for @ReductionDuration@ seconds and <status>Slowing</status> by @SlowPotency*-100@% while cowering from him for @SlowDuration@ seconds.",
 					"extendedVariables": [
@@ -144,8 +145,7 @@
 						"SlowPotency": [-0.25, -0.3, -0.35, -0.4, -0.45, -0.5, -0.55],
 						"ReductionDuration": [4, 4, 4, 4, 4, 4, 4],
 						"SlowDuration": [3.25, 3.25, 3.25, 3.25, 3.25, 3.25, 3.25]
-					},
-					"dataKey": "Characters/Tryndamere/Spells/TryndamereWAbility/TryndamereW"
+					}
 				}
 			]
 		},
@@ -155,6 +155,7 @@
 				{
 					"name": "Spinning Slash",
 					"objectName": "TryndamereE",
+					"dataKey": "Characters/Tryndamere/Spells/TryndamereEAbility/TryndamereE",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_e.png",
 					"tooltip": "Tryndamere spins through his enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and generating <keywordMajor>@NonChampFuryGain@ Fury</keywordMajor> per enemy hit, increased to <keywordMajor>@ChampFuryGain@ Fury</keywordMajor> against enemy champions.<br><br>This Ability's Cooldown is reduced by @NonChampCDRefund@ seconds when Tryndamere critically strikes, and reduced by @ChampCDRefund@ seconds when critically striking a champion.",
 					"extendedVariables": [
@@ -193,8 +194,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Tryndamere/Spells/TryndamereEAbility/TryndamereE"
+					}
 				}
 			]
 		},
@@ -204,6 +204,7 @@
 				{
 					"name": "Undying Rage",
 					"objectName": "UndyingRage",
+					"dataKey": "Characters/Tryndamere/Spells/UndyingRageAbility/UndyingRage",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_r.png",
 					"tooltip": "Tryndamere becomes completely immune to death for @TryndRDuration@ seconds, refusing to be reduced below @TryndRMinHealth@ Health, and instantly gains <keywordMajor>@TryndRFuryGain@ Fury</keywordMajor>.",
 					"extendedVariables": [
@@ -226,8 +227,7 @@
 						"0": [50, 50, 75, 100, 100, 100, 100],
 						"1": [30, 30, 50, 70, 70, 70, 70],
 						"2": [5, 5, 5, 5, 5, 5, 5]
-					},
-					"dataKey": "Characters/Tryndamere/Spells/UndyingRageAbility/UndyingRage"
+					}
 				}
 			]
 		},
@@ -237,6 +237,7 @@
 				{
 					"name": "Battle Fury",
 					"objectName": "TryndamerePassive",
+					"dataKey": "Characters/Tryndamere/Spells/TryndamerePassiveAbility/TryndamerePassive",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_passive.png",
 					"tooltip": "Tryndamere's Attacks grant him <keywordMajor>5 Fury</keywordMajor> or <keywordMajor>10 Fury</keywordMajor> for a critical strike, and <keywordMajor>10 Fury</keywordMajor> for killing a unit. After 8 seconds of being out of combat, Tryndamere loses <keywordMajor>5 Fury</keywordMajor> every second.<br><br>Each point of <keywordMajor>Fury</keywordMajor> grants @PassiveCritConversionTooltip@% Critical Strike Chance.",
 					"dataValues": {
@@ -264,8 +265,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Tryndamere/Spells/TryndamerePassiveAbility/TryndamerePassive"
+					}
 				}
 			]
 		}

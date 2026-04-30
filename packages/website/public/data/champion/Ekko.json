@@ -33,6 +33,7 @@
 				{
 					"name": "Timewinder",
 					"objectName": "EkkoQ",
+					"dataKey": "Characters/Ekko/Spells/EkkoQAbility/EkkoQ",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_q.png",
 					"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @Effect2Amount*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -93,8 +94,7 @@
 						"3": [100, 100, 100, 100, 100, 100, 100],
 						"5": [165, 165, 165, 165, 165, 165, 165],
 						"6": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75]
-					},
-					"dataKey": "Characters/Ekko/Spells/EkkoQAbility/EkkoQ"
+					}
 				}
 			]
 		},
@@ -104,6 +104,7 @@
 				{
 					"name": "Parallel Convergence",
 					"objectName": "EkkoW",
+					"dataKey": "Characters/Ekko/Spells/EkkoWAbility/EkkoW",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
 					"extendedVariables": [
@@ -175,8 +176,7 @@
 						"7": [3, 3, 3, 3, 3, 3, 3],
 						"8": [2, 2, 2, 2, 2, 2, 2],
 						"9": [40, 40, 40, 40, 40, 40, 40]
-					},
-					"dataKey": "Characters/Ekko/Spells/EkkoWAbility/EkkoW"
+					}
 				}
 			]
 		},
@@ -186,6 +186,7 @@
 				{
 					"name": "Phase Dive",
 					"objectName": "EkkoE",
+					"dataKey": "Characters/Ekko/Spells/EkkoEAbility/EkkoE",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_e.png",
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -219,8 +220,7 @@
 						"1": [350, 350, 350, 350, 350, 350, 350],
 						"2": [3, 3, 3, 3, 3, 3, 3],
 						"3": [300, 300, 300, 300, 300, 300, 300]
-					},
-					"dataKey": "Characters/Ekko/Spells/EkkoEAbility/EkkoE"
+					}
 				}
 			]
 		},
@@ -230,6 +230,7 @@
 				{
 					"name": "Chronobreak",
 					"objectName": "EkkoR",
+					"dataKey": "Characters/Ekko/Spells/EkkoRAbility/EkkoR",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_r.png",
 					"tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>@TotalBaseHeal@ Health</healing>, increased by @PercentHealAmpPerPercentMissingHealth@% for each 1% Health he lost in last 4 seconds.",
 					"extendedVariables": [
@@ -275,8 +276,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Ekko/Spells/EkkoRAbility/EkkoR"
+					}
 				}
 			]
 		},
@@ -286,6 +286,7 @@
 				{
 					"name": "Z-Drive Resonance",
 					"objectName": "EkkoPassive",
+					"dataKey": "Characters/Ekko/Spells/EkkoPassiveAbility/EkkoPassive",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_p.png",
 					"tooltip": "{{Spell_EkkoPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>",
@@ -362,8 +363,7 @@
 					},
 					"effectAmount": {
 						"1": [2.7, 2.7, 2.7, 2.7, 2.7, 2.7, 2.7]
-					},
-					"dataKey": "Characters/Ekko/Spells/EkkoPassiveAbility/EkkoPassive"
+					}
 				}
 			]
 		}

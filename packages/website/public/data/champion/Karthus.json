@@ -33,6 +33,7 @@
 				{
 					"name": "Lay Waste",
 					"objectName": "KarthusLayWasteA1",
+					"dataKey": "Characters/Karthus/Spells/KarthusLayWasteA1Ability/KarthusLayWasteA1",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_q.png",
 					"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -74,8 +75,7 @@
 					},
 					"effectAmount": {
 						"0": [45, 45, 65, 85, 105, 125, 145]
-					},
-					"dataKey": "Characters/Karthus/Spells/KarthusLayWasteA1Ability/KarthusLayWasteA1"
+					}
 				}
 			]
 		},
@@ -85,6 +85,7 @@
 				{
 					"name": "Wall of Pain",
 					"objectName": "KarthusWallOfPain",
+					"dataKey": "Characters/Karthus/Spells/KarthusWallOfPainAbility/KarthusWallOfPain",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_w.png",
 					"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration.",
 					"extendedVariables": [
@@ -105,8 +106,7 @@
 						"2": [30, 40, 50, 60, 70, 80, 90],
 						"3": [5, 5, 5, 5, 5, 5, 5],
 						"4": [5, 5, 5, 5, 5, 5, 5]
-					},
-					"dataKey": "Characters/Karthus/Spells/KarthusWallOfPainAbility/KarthusWallOfPain"
+					}
 				}
 			]
 		},
@@ -116,6 +116,7 @@
 				{
 					"name": "Defile",
 					"objectName": "KarthusDefile",
+					"dataKey": "Characters/Karthus/Spells/KarthusDefileAbility/KarthusDefile",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
 					"extendedVariables": [
@@ -162,8 +163,7 @@
 						"0": [10, 30, 50, 70, 90, 110, 130],
 						"1": [0, 10, 20, 30, 40, 50, 60],
 						"2": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-					},
-					"dataKey": "Characters/Karthus/Spells/KarthusDefileAbility/KarthusDefile"
+					}
 				}
 			]
 		},
@@ -173,6 +173,7 @@
 				{
 					"name": "Requiem",
 					"objectName": "KarthusFallenOne",
+					"dataKey": "Characters/Karthus/Spells/KarthusFallenOneAbility/KarthusFallenOne",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_r.png",
 					"tooltip": "Karthus channels for 3 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemy champions, regardless of distance.",
 					"extendedVariables": [
@@ -200,8 +201,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Karthus/Spells/KarthusFallenOneAbility/KarthusFallenOne"
+					}
 				}
 			]
 		},
@@ -211,12 +211,12 @@
 				{
 					"name": "Death Defied",
 					"objectName": "KarthusDeathDefied",
+					"dataKey": "Characters/Karthus/Spells/KarthusDeathDefiedAbility/KarthusDeathDefied",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_passive.png",
 					"tooltip": "When Karthus dies he can use his Abilities for free for @PassiveDuration@ seconds.",
 					"dataValues": {
 						"PassiveDuration": [7, 7, 7, 7, 7, 7, 7]
-					},
-					"dataKey": "Characters/Karthus/Spells/KarthusDeathDefiedAbility/KarthusDeathDefied"
+					}
 				}
 			]
 		}

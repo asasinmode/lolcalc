@@ -33,6 +33,7 @@
 				{
 					"name": "Light Binding",
 					"objectName": "LuxLightBinding",
+					"dataKey": "Characters/Lux/Spells/LuxLightBindingAbility/LuxLightBinding",
 					"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
 					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @RootDuration@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
 					"extendedVariables": [
@@ -64,8 +65,7 @@
 					},
 					"effectAmount": {
 						"2": [2, 2, 2, 2, 2, 2, 2]
-					},
-					"dataKey": "Characters/Lux/Spells/LuxLightBindingAbility/LuxLightBinding"
+					}
 				}
 			]
 		},
@@ -75,6 +75,7 @@
 				{
 					"name": "Prismatic Barrier",
 					"objectName": "LuxPrismaticWave",
+					"dataKey": "Characters/Lux/Spells/LuxPrismaticWaveAbility/LuxPrismaticWave",
 					"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
 					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @ShieldDuration@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
 					"extendedVariables": [
@@ -112,8 +113,7 @@
 						"0": [0, 2, 4, 6, 8, 10, 12],
 						"2": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"3": [100, 100, 100, 100, 100, 100, 100]
-					},
-					"dataKey": "Characters/Lux/Spells/LuxPrismaticWaveAbility/LuxPrismaticWave"
+					}
 				}
 			]
 		},
@@ -123,6 +123,7 @@
 				{
 					"name": "Lucent Singularity",
 					"objectName": "LuxLightStrikeKugel",
+					"dataKey": "Characters/Lux/Spells/LuxLightStrikeKugelAbility/LuxLightStrikeKugel",
 					"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png",
 					"tooltip": "Lux creates a light zone that <status>Slows</status> by @SlowPercent@% and reveals the area. After @SlowZoneDuration@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
 					"extendedVariables": [
@@ -178,8 +179,7 @@
 						"1": [20, 65, 115, 165, 215, 265, 315],
 						"2": [5, 5, 5, 5, 5, 5, 5],
 						"3": [310, 310, 310, 310, 310, 310, 310]
-					},
-					"dataKey": "Characters/Lux/Spells/LuxLightStrikeKugelAbility/LuxLightStrikeKugel"
+					}
 				}
 			]
 		},
@@ -189,6 +189,7 @@
 				{
 					"name": "Final Spark",
 					"objectName": "LuxR",
+					"dataKey": "Characters/Lux/Spells/LuxRAbility/LuxR",
 					"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png",
 					"tooltip": "Lux fires a dazzling ray of light, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in a line.",
 					"extendedVariables": [
@@ -218,8 +219,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Lux/Spells/LuxRAbility/LuxR"
+					}
 				}
 			]
 		},
@@ -229,6 +229,7 @@
 				{
 					"name": "Illumination",
 					"objectName": "LuxIlluminationPassive",
+					"dataKey": "Characters/Lux/Spells/LuxIlluminationPassiveAbility/LuxIlluminationPassive",
 					"image": "assets/characters/lux/hud/icons2d/luxilluminatingfraulein.png",
 					"tooltip": "Lux's damaging Abilities mark enemies for @DebuffDuration@ seconds. Lux's Attacks consume the mark, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><spellName>Final Spark</spellName> will consume marks on enemies it hits and refresh them.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -250,8 +251,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Lux/Spells/LuxIlluminationPassiveAbility/LuxIlluminationPassive"
+					}
 				}
 			]
 		}

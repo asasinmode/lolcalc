@@ -33,6 +33,7 @@
 				{
 					"name": "Starcall",
 					"objectName": "SorakaQ",
+					"dataKey": "Characters/Soraka/Spells/SorakaQAbility/SorakaQ",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_q.png",
 					"tooltip": "Soraka calls down a star, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @MoveSpeedSlow*100@% for @SlowDuration@ seconds. <br><br>Hitting an enemy champion grants Soraka <keywordMajor>Rejuvenation</keywordMajor>, which restores <healing>@TotalHoT@ Health</healing> over @HoTDuration@ seconds and grants <speed>@MoveSpeedHaste*100@% Move Speed</speed> decaying over the same duration.",
 					"extendedVariables": [
@@ -89,8 +90,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Soraka/Spells/SorakaQAbility/SorakaQ"
+					}
 				}
 			]
 		},
@@ -100,6 +100,7 @@
 				{
 					"name": "Astral Infusion",
 					"objectName": "SorakaW",
+					"dataKey": "Characters/Soraka/Spells/SorakaWAbility/SorakaW",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_w.png",
 					"tooltip": "Soraka restores <healing>@TotalHeal@ Health</healing> to another allied champion.<br><br>If Soraka is affected by <keywordMajor>Rejuvenation</keywordMajor>, the Health cost will be reduced by @PercentHealthCostRefund*100@%, and the target will gain <keywordMajor>Rejuvenation</keywordMajor> for @Spell.SorakaQ:HoTDuration@ seconds.",
 					"extendedVariables": [
@@ -145,8 +146,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Soraka/Spells/SorakaWAbility/SorakaW"
+					}
 				}
 			]
 		},
@@ -156,6 +156,7 @@
 				{
 					"name": "Equinox",
 					"objectName": "SorakaE",
+					"dataKey": "Characters/Soraka/Spells/SorakaEAbility/SorakaE",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_e.png",
 					"tooltip": "Soraka creates a starfield that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to champions. The field lingers for @RootDelay@ seconds, <status>Silencing</status> enemies inside. When the zone disappears, champions inside the zone are <status>Rooted</status> for @RootDuration@ second(s) and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -191,8 +192,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Soraka/Spells/SorakaEAbility/SorakaE"
+					}
 				}
 			]
 		},
@@ -202,6 +202,7 @@
 				{
 					"name": "Wish",
 					"objectName": "SorakaR",
+					"dataKey": "Characters/Soraka/Spells/SorakaRAbility/SorakaR",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_r.png",
 					"tooltip": "Soraka calls upon divine powers, restoring <healing>@HealingCalc@ Health</healing> to all allied champions, regardless of distance. Healing is increased to <healing>@AmpedHealing@</healing> on targets below 40% Health.",
 					"extendedVariables": [
@@ -242,8 +243,7 @@
 							},
 							"mModifiedGameCalculation": "HealingCalc"
 						}
-					},
-					"dataKey": "Characters/Soraka/Spells/SorakaRAbility/SorakaR"
+					}
 				}
 			]
 		},
@@ -253,14 +253,14 @@
 				{
 					"name": "Salvation",
 					"objectName": "Consecration_Self",
+					"dataKey": "Characters/Soraka/Spells/Consecration_SelfAbility/Consecration_Self",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_passive.png",
 					"tooltip": "{{Spell_Consecration_Self_Tooltip}}",
 					"tooltipExtended": "{{Spell_Consecration_Self_Tooltip}}<br><br><rules>Allies must be within @CastRange@ range of Soraka.</rules>",
 					"dataValues": {
 						"MovementSpeed": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
 						"HealthThreshold": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
-					},
-					"dataKey": "Characters/Soraka/Spells/Consecration_SelfAbility/Consecration_Self"
+					}
 				}
 			]
 		}

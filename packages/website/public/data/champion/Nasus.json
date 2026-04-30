@@ -33,6 +33,7 @@
 				{
 					"name": "Siphoning Strike",
 					"objectName": "NasusQ",
+					"dataKey": "Characters/Nasus/Spells/NasusQAbility/NasusQ",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_q.png",
 					"tooltip": "Nasus' next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Killing an enemy with this Attack permanently increases its damage by @BasicStacks@, increased to @BigStacks@ against champions, large minions and large jungle monsters.",
 					"extendedVariables": [
@@ -100,8 +101,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Nasus/Spells/NasusQAbility/NasusQ"
+					}
 				}
 			]
 		},
@@ -111,6 +111,7 @@
 				{
 					"name": "Wither",
 					"objectName": "NasusW",
+					"dataKey": "Characters/Nasus/Spells/NasusWAbility/NasusW",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_w.png",
 					"tooltip": "Nasus ages a champion, <status>Slowing</status> them by @SlowBase@%, increasing to @MaxSlowTooltipOnly@% over @Duration@ seconds. Their <attackSpeed>Attack Speed</attackSpeed> is also reduced by @AttackSpeedSlowMult*100@% of the <status>Slow</status>.",
 					"extendedVariables": [
@@ -127,8 +128,7 @@
 						"MaxSlowTooltipOnly": [35, 47, 59, 71, 83, 95, 107],
 						"AttackSpeedSlowMult": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"Duration": [5, 5, 5, 5, 5, 5, 5]
-					},
-					"dataKey": "Characters/Nasus/Spells/NasusWAbility/NasusW"
+					}
 				}
 			]
 		},
@@ -138,6 +138,7 @@
 				{
 					"name": "Spirit Fire",
 					"objectName": "NasusE",
+					"dataKey": "Characters/Nasus/Spells/NasusEAbility/NasusE",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_e.png",
 					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@Effect2Amount*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds.",
 					"extendedVariables": [
@@ -197,8 +198,7 @@
 						"1": [-0.3, -0.3, -0.35, -0.4, -0.45, -0.5, -0.5],
 						"2": [5, 5, 5, 5, 5, 5, 5],
 						"3": [50, 50, 80, 110, 140, 170, 170]
-					},
-					"dataKey": "Characters/Nasus/Spells/NasusEAbility/NasusE"
+					}
 				}
 			]
 		},
@@ -208,6 +208,7 @@
 				{
 					"name": "Fury of the Sands",
 					"objectName": "NasusR",
+					"dataKey": "Characters/Nasus/Spells/NasusRAbility/NasusR",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_r.png",
 					"tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <healing>maximum Health by @BonusHealth@</healing> and <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR> by @InitialResistGain@.<br><br>While the storm rages, nearby enemies take <magicDamage>@DamageCalc@ of their maximum Health as magic damage</magicDamage> each second and <spellName>Siphoning Strike</spellName> has a @QCDR*100@% reduced Cooldown.",
 					"extendedVariables": [
@@ -253,8 +254,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Nasus/Spells/NasusRAbility/NasusR"
+					}
 				}
 			]
 		},
@@ -264,6 +264,7 @@
 				{
 					"name": "Soul Eater",
 					"objectName": "NasusPassive",
+					"dataKey": "Characters/Nasus/Spells/NasusPassiveAbility/NasusPassive",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_passive.png",
 					"tooltip": "Nasus has an additional @Spell.NasusPassive:LifestealTooltip@% Life Steal.",
 					"spellCalculations": {
@@ -285,8 +286,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Nasus/Spells/NasusPassiveAbility/NasusPassive"
+					}
 				}
 			]
 		}

@@ -33,6 +33,7 @@
 				{
 					"name": "Chomp",
 					"objectName": "TrundleTrollSmash",
+					"dataKey": "Characters/Trundle/Spells/TrundleTrollSmashAbility/TrundleTrollSmash",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_q.png",
 					"tooltip": "Trundle's next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @SlowAmount*100@%, then Trundle gains <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> for @SapDebuffDuration@ seconds and the enemy loses <physicalDamage>@SappedAD*-1@ Attack Damage</physicalDamage> for the same duration.",
 					"extendedVariables": [
@@ -81,8 +82,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Trundle/Spells/TrundleTrollSmashAbility/TrundleTrollSmash"
+					}
 				}
 			]
 		},
@@ -92,6 +92,7 @@
 				{
 					"name": "Frozen Domain",
 					"objectName": "trundledesecrate",
+					"dataKey": "Characters/Trundle/Spells/trundledesecrateAbility/trundledesecrate",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_w.png",
 					"tooltip": "Trundle freezes an area for @Duration@ seconds. While inside he gains <speed>@MSBonus*100@% Move Speed</speed>, <attackSpeed>@ASBonus*100@% Attack Speed</attackSpeed>, and @HealingBonus*100@% increased healing.",
 					"extendedVariables": [
@@ -118,8 +119,7 @@
 						"2": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"3": [8, 8, 8, 8, 8, 8, 8],
 						"4": [775, 775, 775, 775, 775, 775, 775]
-					},
-					"dataKey": "Characters/Trundle/Spells/trundledesecrateAbility/trundledesecrate"
+					}
 				}
 			]
 		},
@@ -129,6 +129,7 @@
 				{
 					"name": "Pillar of Ice",
 					"objectName": "TrundleCircle",
+					"dataKey": "Characters/Trundle/Spells/TrundleCircleAbility/TrundleCircle",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_e.png",
 					"tooltip": "Trundle creates an icy pillar for @PillarDuration@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @SlowAmount@%.",
 					"extendedVariables": [
@@ -158,8 +159,7 @@
 						"5": [225, 225, 225, 225, 225, 225, 225],
 						"6": [400, 400, 400, 400, 400, 400, 400],
 						"7": [60, 60, 60, 60, 60, 60, 60]
-					},
-					"dataKey": "Characters/Trundle/Spells/TrundleCircleAbility/TrundleCircle"
+					}
 				}
 			]
 		},
@@ -169,6 +169,7 @@
 				{
 					"name": "Subjugate",
 					"objectName": "TrundlePain",
+					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_r.png",
 					"tooltip": "Trundle drains the lifeforce of an enemy champion, dealing <magicDamage>@TotalPercentHPDamage@ max Health magic damage</magicDamage> and stealing <scaleArmor>@ArmorMRShred*100@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> over @ActualDurationOfDrainBuff@ seconds.",
 					"extendedVariables": [
@@ -204,8 +205,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain"
+					}
 				}
 			]
 		},
@@ -215,6 +215,7 @@
 				{
 					"name": "King's Tribute",
 					"objectName": "TrundleDiseaseOverseer",
+					"dataKey": "Characters/Trundle/Spells/TrundleDiseaseOverseerAbility/TrundleDiseaseOverseer",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_passive.png",
 					"tooltip": "When an enemy dies near Trundle, he restores <healing>@RegenPercent@ of its max Health</healing>.",
 					"spellCalculations": {
@@ -229,8 +230,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
 						}
-					},
-					"dataKey": "Characters/Trundle/Spells/TrundleDiseaseOverseerAbility/TrundleDiseaseOverseer"
+					}
 				}
 			]
 		}

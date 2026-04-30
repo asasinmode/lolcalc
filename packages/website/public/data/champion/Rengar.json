@@ -33,6 +33,7 @@
 				{
 					"name": "Savagery",
 					"objectName": "RengarQ",
+					"dataKey": "Characters/Rengar/Spells/RengarQAbility/RengarQ",
 					"image": "assets/characters/rengar/hud/icons2d/rengarq.png",
 					"tooltip": "Rengar's next 2 Attacks gain <attackSpeed>@ASBonus@% Attack Speed</attackSpeed>. The first Attack deals <physicalDamage>@QTotalDamage@ physical damage</physicalDamage>.<br><br><keywordMajor>Max Ferocity:</keywordMajor> The first Attack deals <physicalDamage>@EmpoweredQTotalDamage@ physical damage</physicalDamage> and grants Rengar <attackSpeed>@EmpoweredQAS@ Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 					"tooltipExtended": "Rengar's next 2 Attacks gain <attackSpeed>@ASBonus@% Attack Speed</attackSpeed>. The first Attack deals <physicalDamage>@QTotalDamage@ physical damage</physicalDamage>.<br><br><keywordMajor>Max Ferocity:</keywordMajor> The first Attack deals  <physicalDamage>@EmpoweredQTotalDamage@ physical damage</physicalDamage> and grants Rengar <attackSpeed>@EmpoweredQAS@ Attack Speed</attackSpeed> for @ASDuration@ seconds.<br><br><rules>This Ability's bonus damage is reduced to @TowerMod*100@% against structures.</rules>",
@@ -190,8 +191,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rengar/Spells/RengarQAbility/RengarQ"
+					}
 				}
 			]
 		},
@@ -201,6 +201,7 @@
 				{
 					"name": "Battle Roar",
 					"objectName": "RengarW",
+					"dataKey": "Characters/Rengar/Spells/RengarWAbility/RengarW",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_w.png",
 					"tooltip": "Rengar roars, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and restoring <healing>@DamagePercentageHealed@%</healing> of the damage taken in the last @HealingWindow@ seconds as Health.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <magicDamage>@TotalDamageEmpowered@ magic damage</magicDamage> and additionally cleanses Rengar of crowd control.",
 					"extendedVariables": [
@@ -257,8 +258,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rengar/Spells/RengarWAbility/RengarW"
+					}
 				}
 			]
 		},
@@ -268,6 +268,7 @@
 				{
 					"name": "Bola Strike",
 					"objectName": "RengarE",
+					"dataKey": "Characters/Rengar/Spells/RengarEAbility/RengarE",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_e.png",
 					"tooltip": "Rengar throws a bola, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, revealing and <status>Slowing</status> them by @SlowAmount@% for @CCDuration@ seconds.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <physicalDamage>@TotalEmpoweredDamage@ physical damage</physicalDamage> and <status>Roots</status> for @CCDuration@ seconds.",
 					"extendedVariables": [
@@ -318,8 +319,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rengar/Spells/RengarEAbility/RengarE"
+					}
 				}
 			]
 		},
@@ -329,6 +329,7 @@
 				{
 					"name": "Thrill of the Hunt",
 					"objectName": "RengarR",
+					"dataKey": "Characters/Rengar/Spells/RengarRAbility/RengarR",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_r.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Rengar will also leap Attack when <keywordStealth>Camouflaged</keywordStealth>.<br><br><spellActive>Active:</spellActive> Rengar gains <speed>@StealthMS@% Move Speed</speed> and <keywordStealth>True Sight</keywordStealth> in a small area around the nearest enemy champion for @StealthDuration@ seconds.<br><br>After @FadeTime@ seconds, Rengar becomes <keywordStealth>Camouflaged</keywordStealth> and can leap without being in Brush. Leaping to the nearest champion deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage>, shreds <scaleArmor>@ArmorShred@ Armor</scaleArmor> for @ArmorShredDuration@ seconds, and ends this Ability.",
 					"extendedVariables": [
@@ -371,8 +372,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rengar/Spells/RengarRAbility/RengarR"
+					}
 				}
 			]
 		},
@@ -382,6 +382,7 @@
 				{
 					"name": "Unseen Predator",
 					"objectName": "RengarPassive",
+					"dataKey": "Characters/Rengar/Spells/RengarPassiveAbility/RengarPassive",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_p.png",
 					"tooltip": "{{Spell_RengarPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_RengarPassive_Tooltip}}<br><rules><br>Rengar loses all <keywordMajor>Ferocity</keywordMajor> after being out of combat for @InCombatTimer@ seconds.<br>Rengar gains extra <physicalDamage>Attack Damage</physicalDamage> for killing Kha'Zix.</rules>",
@@ -422,8 +423,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Rengar/Spells/RengarPassiveAbility/RengarPassive"
+					}
 				}
 			]
 		}

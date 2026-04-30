@@ -33,6 +33,7 @@
 				{
 					"name": "Winter's Bite",
 					"objectName": "BraumQ",
+					"dataKey": "Characters/Braum/Spells/BraumQAbility/BraumQ",
 					"image": "assets/characters/braum/hud/icons2d/braum_q.png",
 					"tooltip": "Braum propels freezing ice from his shield, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @InitialSlow@% decaying over @SlowDuration@ seconds.<br><br>Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
 					"extendedVariables": [
@@ -79,8 +80,7 @@
 						"4": [2, 2, 2, 2, 2, 2, 2],
 						"5": [1050, 1050, 1050, 1050, 1050, 1050, 1050],
 						"6": [4, 4, 4, 4, 4, 4, 4]
-					},
-					"dataKey": "Characters/Braum/Spells/BraumQAbility/BraumQ"
+					}
 				}
 			]
 		},
@@ -90,6 +90,7 @@
 				{
 					"name": "Stand Behind Me",
 					"objectName": "BraumW",
+					"dataKey": "Characters/Braum/Spells/BraumWAbility/BraumW",
 					"image": "assets/characters/braum/hud/icons2d/braum_w.png",
 					"tooltip": "Braum leaps to an allied champion or minion. On arrival, Braum grants the target <scaleArmor>@GrantedAllyArmor@ Armor</scaleArmor> and <scaleMR>@GrantedAllyMR@ Magic Resist</scaleMR> for @Duration@ seconds. Braum grants himself <scaleArmor>@GrantedBraumArmor@ Armor</scaleArmor> and <scaleMR>@GrantedBraumMR@ Magic Resist</scaleMR> for the same duration.",
 					"extendedVariables": [
@@ -170,8 +171,7 @@
 						"0": [3, 3, 3, 3, 3, 3, 3],
 						"1": [750, 750, 750, 750, 750, 750, 750],
 						"5": [40, 40, 40, 40, 40, 40, 40]
-					},
-					"dataKey": "Characters/Braum/Spells/BraumWAbility/BraumW"
+					}
 				}
 			]
 		},
@@ -181,6 +181,7 @@
 				{
 					"name": "Unbreakable",
 					"objectName": "BraumE",
+					"dataKey": "Characters/Braum/Spells/BraumEAbility/BraumE",
 					"image": "assets/characters/braum/hud/icons2d/braum_e.png",
 					"tooltip": "Braum raises his shield for @ShieldHoldDuration@ seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal @ShieldFacingDRAmount@% reduced damage.<br><br>Braum gains <speed>@MoveSpeedPercent@% Move Speed</speed> while his shield is raised.",
 					"extendedVariables": [
@@ -208,8 +209,7 @@
 						"1": [2.75, 3, 3.25, 3.5, 3.75, 4, 4.25],
 						"2": [30, 35, 40, 45, 50, 55, 60],
 						"3": [10, 10, 10, 10, 10, 10, 10]
-					},
-					"dataKey": "Characters/Braum/Spells/BraumEAbility/BraumE"
+					}
 				}
 			]
 		},
@@ -219,6 +219,7 @@
 				{
 					"name": "Glacial Fissure",
 					"objectName": "BraumRWrapper",
+					"dataKey": "Characters/Braum/Spells/BraumRWrapperAbility/BraumRWrapper",
 					"image": "assets/characters/braum/hud/icons2d/braum_r.png",
 					"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.",
 					"extendedVariables": [
@@ -261,8 +262,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Braum/Spells/BraumRWrapperAbility/BraumRWrapper"
+					}
 				}
 			]
 		},
@@ -272,6 +272,7 @@
 				{
 					"name": "Concussive Blows",
 					"objectName": "BraumPassive",
+					"dataKey": "Characters/Braum/Spells/BraumPassiveAbility/BraumPassive",
 					"image": "assets/characters/braum/hud/icons2d/braum_passive.png",
 					"tooltip": "Braum's Attacks apply <keywordMajor>Concussive Blows</keywordMajor> for @StackDuration@ seconds. Enemies with <keywordMajor>Concussive Blows</keywordMajor> gain additional stacks from any ally's Attacks.<br><br>At @StackCap@ stacks, the target is <status>Stunned</status> for @StunDuration@ seconds and takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. For the next @StunCD@ seconds they don't receive stacks, but take an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> from Braum's Attacks.",
 					"dataValues": {
@@ -333,8 +334,7 @@
 							],
 							"mPrecision": 2
 						}
-					},
-					"dataKey": "Characters/Braum/Spells/BraumPassiveAbility/BraumPassive"
+					}
 				}
 			]
 		}

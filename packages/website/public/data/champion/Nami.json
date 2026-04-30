@@ -33,6 +33,7 @@
 				{
 					"name": "Aqua Prison",
 					"objectName": "NamiQ",
+					"dataKey": "Characters/Nami/Spells/NamiQAbility/NamiQ",
 					"image": "assets/characters/nami/hud/icons2d/namiq.png",
 					"tooltip": "Nami hurls a bubble, <status>Stunning</status> for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -65,8 +66,7 @@
 					"effectAmount": {
 						"0": [20, 75, 130, 185, 240, 295, 350],
 						"1": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
-					},
-					"dataKey": "Characters/Nami/Spells/NamiQAbility/NamiQ"
+					}
 				}
 			]
 		},
@@ -76,6 +76,7 @@
 				{
 					"name": "Ebb and Flow",
 					"objectName": "NamiW",
+					"dataKey": "Characters/Nami/Spells/NamiWAbility/NamiW",
 					"image": "assets/characters/nami/hud/icons2d/namiw.png",
 					"tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to @MaxTargets@ targets.<li>Restores <healing>@TotalHeal@ Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.</li><br>The damage and healing value is modified by @BounceScaling@ each bounce. ",
 					"extendedVariables": [
@@ -144,8 +145,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Nami/Spells/NamiWAbility/NamiW"
+					}
 				}
 			]
 		},
@@ -155,6 +155,7 @@
 				{
 					"name": "Tidecaller's Blessing",
 					"objectName": "NamiE",
+					"dataKey": "Characters/Nami/Spells/NamiEAbility/NamiE",
 					"image": "assets/characters/nami/hud/icons2d/namie.png",
 					"tooltip": "Nami empowers an allied champion's next @HitCount@ Attacks and Abilities for @BuffDuration@ seconds, causing them to <status>Slow</status> their targets by @TotalSlow@ for @SlowDuration@s and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"extendedVariables": [
@@ -229,8 +230,7 @@
 						"2": [1, 1, 1, 1, 1, 1, 1],
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"4": [6, 6, 6, 6, 6, 6, 6]
-					},
-					"dataKey": "Characters/Nami/Spells/NamiEAbility/NamiE"
+					}
 				}
 			]
 		},
@@ -240,6 +240,7 @@
 				{
 					"name": "Tidal Wave",
 					"objectName": "NamiR",
+					"dataKey": "Characters/Nami/Spells/NamiRAbility/NamiR",
 					"image": "assets/characters/nami/hud/icons2d/namir.png",
 					"tooltip": "Nami summons a tidal wave, <status>Knocking Up</status> for 0.5 seconds, <status>Slowing</status> by @Effect4Amount@%, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The duration of the <status>Slow</status> increases based on distance the wave traveled, up to @Effect5Amount@ seconds.<br><br>Allies hit by the wave gain double the effect of <spellName>Surging Tides</spellName>.",
 					"extendedVariables": [
@@ -275,8 +276,7 @@
 						"3": [70, 70, 70, 70, 70, 70, 70],
 						"4": [4, 4, 4, 4, 4, 4, 4],
 						"5": [0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002]
-					},
-					"dataKey": "Characters/Nami/Spells/NamiRAbility/NamiR"
+					}
 				}
 			]
 		},
@@ -286,6 +286,7 @@
 				{
 					"name": "Surging Tides",
 					"objectName": "NamiPassive",
+					"dataKey": "Characters/Nami/Spells/NamiPassiveAbility/NamiPassive",
 					"image": "assets/characters/nami/hud/icons2d/namipassive.png",
 					"tooltip": "When Nami's Abilities hit allied champions, they gain <speed>@TotalMSBonus@ Move Speed</speed>, decaying over @BuffDuration@ seconds.",
 					"dataValues": {
@@ -307,8 +308,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Nami/Spells/NamiPassiveAbility/NamiPassive"
+					}
 				}
 			]
 		}

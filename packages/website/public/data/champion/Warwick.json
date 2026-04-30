@@ -33,6 +33,7 @@
 				{
 					"name": "Jaws of the Beast",
 					"objectName": "WarwickQ",
+					"dataKey": "Characters/Warwick/Spells/WarwickQAbility/WarwickQ",
 					"image": "assets/characters/warwick/hud/icons2d/warwickq.png",
 					"tooltip": "<tap>Tap:</tap> Warwick lunges forward and bites, dealing <magicDamage>@BaseBiteDamage@ plus @TargetPercentHPDamage@% max Health magic damage</magicDamage> and <healing>healing for @Effect3Amount@% of the damage dealt</healing>.<br><br><hold>Hold:</hold> Warwick lunges and clamps his jaws on the target, leaping behind them. While clamped, Warwick follows all movement of the target. After releasing his hold, he does the same damage and healing.",
 					"extendedVariables": [
@@ -78,8 +79,7 @@
 						"5": [200, 200, 200, 200, 200, 200, 200],
 						"6": [300, 300, 300, 300, 300, 300, 300],
 						"7": [425, 425, 425, 425, 425, 425, 425]
-					},
-					"dataKey": "Characters/Warwick/Spells/WarwickQAbility/WarwickQ"
+					}
 				}
 			]
 		},
@@ -89,6 +89,7 @@
 				{
 					"name": "Blood Hunt",
 					"objectName": "WarwickW",
+					"dataKey": "Characters/Warwick/Spells/WarwickWAbility/WarwickW",
 					"image": "assets/characters/warwick/hud/icons2d/warwickw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Warwick can sense champions below 50% Health, gaining <speed>@PassiveMSBonus@% Move Speed</speed> towards them. Spells and attacks against enemies below 50% Health grant <speed>@PassiveASBonus@% Attack Speed</speed>. These effects are increased by 200% against enemies below 25% Health. <br><br><spellActive>Active:</spellActive> Warwick can briefly sense all enemies, and gains this Ability's passive effect against the closest champion for 8 seconds, regardless of Health. If no champions are found, this Ability's cooldown is reduced by 30%.",
 					"extendedVariables": [
@@ -120,8 +121,7 @@
 						"3": [70, 80, 90, 100, 110, 120, 130],
 						"4": [30, 30, 30, 30, 30, 30, 30],
 						"5": [8, 8, 8, 8, 8, 8, 8]
-					},
-					"dataKey": "Characters/Warwick/Spells/WarwickWAbility/WarwickW"
+					}
 				}
 			]
 		},
@@ -131,6 +131,7 @@
 				{
 					"name": "Primal Howl",
 					"objectName": "WarwickE",
+					"dataKey": "Characters/Warwick/Spells/WarwickEAbility/WarwickE",
 					"image": "assets/characters/warwick/hud/icons2d/warwicke.png",
 					"tooltip": "Warwick gains @Effect1Amount@% damage reduction for 2.5 seconds. After it ends, Warwick howls, <status>Fearing</status> nearby enemies for @Effect3Amount@ second. Warwick can <recast>Recast</recast> to end the Ability early.",
 					"extendedVariables": [
@@ -151,8 +152,7 @@
 						"3": [1, 1, 1, 1, 1, 1, 1],
 						"4": [800, 800, 800, 800, 800, 800, 800],
 						"5": [400, 400, 400, 400, 400, 400, 400]
-					},
-					"dataKey": "Characters/Warwick/Spells/WarwickEAbility/WarwickE"
+					}
 				}
 			]
 		},
@@ -162,6 +162,7 @@
 				{
 					"name": "Infinite Duress",
 					"objectName": "WarwickR",
+					"dataKey": "Characters/Warwick/Spells/WarwickRAbility/WarwickR",
 					"image": "assets/characters/warwick/hud/icons2d/warwickr.png",
 					"tooltip": "Warwick leaps a huge distance that scales with his <speed>Move Speed</speed>, <status>Suppressing</status> the first champion he collides with while he channels for @RDuration@ seconds. He attacks that champion 3 times over the duration, dealing <magicDamage>@DamageCumulative@ magic damage</magicDamage>. Warwick <healing>heals for 100% of all damage dealt</healing> during the channel.",
 					"extendedVariables": [
@@ -191,8 +192,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Warwick/Spells/WarwickRAbility/WarwickR"
+					}
 				}
 			]
 		},
@@ -202,6 +202,7 @@
 				{
 					"name": "Eternal Hunger",
 					"objectName": "WarwickP",
+					"dataKey": "Characters/Warwick/Spells/WarwickPAbility/WarwickP",
 					"image": "assets/characters/warwick/hud/icons2d/warwickp.png",
 					"tooltip": "Warwick's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> On-Hit.<br><br>If Warwick is below @HealingThreshold*100@% Health, he also heals for <healing>@HealingRatio*100@% of the damage dealt by <keywordMajor>Eternal Hunger</keywordMajor></healing>. If Warwick is below @EmpoweredHealingThreshold*100@% health, the healing is increased to <healing>@EmpoweredHealingRatio*100@% of the damage dealt</healing>.",
 					"dataValues": {
@@ -235,8 +236,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Warwick/Spells/WarwickPAbility/WarwickP"
+					}
 				}
 			]
 		}

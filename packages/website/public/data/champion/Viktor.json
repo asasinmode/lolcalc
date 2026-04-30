@@ -33,6 +33,7 @@
 				{
 					"name": "Siphon Power",
 					"objectName": "ViktorQ",
+					"dataKey": "Characters/Viktor/Spells/ViktorQAbility/ViktorQ",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_q1.png",
 					"tooltip": "Viktor blasts an enemy, dealing <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and granting Viktor <shield>@ShieldLevelScaling@ Shield</shield> for @BuffDuration@ seconds.<br><br>Viktor's next Attack within 4 seconds deals <magicDamage>@AttackTotalDMG@ magic damage</magicDamage>.<br><br><keywordMajor>Upgraded:</keywordMajor> Grants <shield>@TotalAugmentedShieldValue@ Shield</shield> and Viktor additionally gains <speed>@AugmentMoveSpeedBonus@% Move Speed</speed> for @BuffDuration@ seconds.",
 					"extendedVariables": [
@@ -124,8 +125,7 @@
 					"effectAmount": {
 						"1": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"2": [30, 30, 30, 30, 30, 30, 30]
-					},
-					"dataKey": "Characters/Viktor/Spells/ViktorQAbility/ViktorQ"
+					}
 				}
 			]
 		},
@@ -135,6 +135,7 @@
 				{
 					"name": "Gravity Field",
 					"objectName": "ViktorW",
+					"dataKey": "Characters/Viktor/Spells/ViktorWAbility/ViktorW",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_w1.png",
 					"tooltip": "Viktor deploys a gravitational imprisonment device for @FieldDuration@ seconds, <status>Slowing</status> enemies inside it by @SlowPotency*-1@%. Enemies who remain within its radius for 1.25 seconds are <status>Stunned</status> for @StunDuration@ seconds.<br><br><keywordMajor>Upgraded Passive:</keywordMajor> Viktor's Abilities <status>Slow</status> by @AugmentSlow@% for 1 second.",
 					"extendedVariables": [
@@ -154,8 +155,7 @@
 						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
 						"AugmentSlow": [20, 20, 20, 20, 20, 20, 20],
 						"Size": [275, 275, 275, 275, 275, 275, 275]
-					},
-					"dataKey": "Characters/Viktor/Spells/ViktorWAbility/ViktorW"
+					}
 				}
 			]
 		},
@@ -165,6 +165,7 @@
 				{
 					"name": "Hextech Ray",
 					"objectName": "ViktorE",
+					"dataKey": "Characters/Viktor/Spells/ViktorEAbility/ViktorE",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_e1.png",
 					"tooltip": "Viktor fires a hextech ray in a chosen direction, dealing <magicDamage>@LaserDamage@ magic damage</magicDamage> to any enemies it hits.<br><br><keywordMajor>Upgraded:</keywordMajor> An aftershock follows Hextech Ray, dealing <magicDamage>@AftershockDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -236,8 +237,7 @@
 						"0": [30, 70, 110, 150, 190, 230, 270],
 						"1": [0, 20, 60, 100, 140, 180, 220],
 						"2": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Viktor/Spells/ViktorEAbility/ViktorE"
+					}
 				}
 			]
 		},
@@ -247,6 +247,7 @@
 				{
 					"name": "Arcane Storm",
 					"objectName": "ViktorR",
+					"dataKey": "Characters/Viktor/Spells/ViktorRAbility/ViktorR",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_r1.png",
 					"tooltip": "Viktor conjures an Arcane Storm in an area for @StormDuration@ seconds, which instantly deals <magicDamage>@InitialBurstDamage@ magic damage</magicDamage> followed by <magicDamage>@SubsequentBurstDamage@ magic damage</magicDamage> per second to surrounding enemies. The storm automatically follows champions it has recently damaged.<br><br><recast>Recast:</recast> Viktor can manually move the storm.<br><br><keywordMajor>Upgraded:</keywordMajor> The storm moves @AugmentBoost*100@% faster. If a champion that the storm has damaged dies, the storm increases its size and its duration by @Tooltip_DurationExtension@ seconds (up to @MaxGrowths@ times).",
 					"extendedVariables": [
@@ -314,8 +315,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Viktor/Spells/ViktorRAbility/ViktorR"
+					}
 				}
 			]
 		},
@@ -325,6 +325,7 @@
 				{
 					"name": "Glorious Evolution",
 					"objectName": "ViktorPassive",
+					"dataKey": "Characters/Viktor/Spells/ViktorPassiveAbility/ViktorPassive",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_passive.png",
 					"tooltip": "{{Spell_ViktorP_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViktorP_Tooltip}}<br><rules><br>Viktor can upgrade his ultimate only after upgrading all non-ultimate Abilities.</rules>",
@@ -333,8 +334,7 @@
 						"CannonStacks": [10, 10, 10, 10, 10, 10, 10],
 						"ChampionStacks": [20, 20, 20, 20, 20, 20, 20],
 						"EvolutionStackBreakpoint": [100, 100, 100, 100, 100, 100, 100]
-					},
-					"dataKey": "Characters/Viktor/Spells/ViktorPassiveAbility/ViktorPassive"
+					}
 				}
 			]
 		}

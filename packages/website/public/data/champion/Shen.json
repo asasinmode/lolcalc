@@ -33,6 +33,7 @@
 				{
 					"name": "Twilight Assault",
 					"objectName": "ShenQ",
+					"dataKey": "Characters/Shen/Spells/ShenQAbility/ShenQ",
 					"image": "assets/characters/shen/hud/icons2d/shen_q.png",
 					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @Effect4Amount@% while moving away from Shen for the next @Effect5Amount@ seconds.<br><br>Additionally, Shen's next @Effect3Amount@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@Effect9Amount@% Attack Speed</attackSpeed> for those Attacks.",
 					"extendedVariables": [
@@ -148,8 +149,7 @@
 						"7": [8, 8, 8, 8, 8, 8, 8],
 						"8": [50, 50, 50, 50, 50, 50, 50],
 						"9": [75, 75, 75, 75, 75, 75, 75]
-					},
-					"dataKey": "Characters/Shen/Spells/ShenQAbility/ShenQ"
+					}
 				}
 			]
 		},
@@ -159,6 +159,7 @@
 				{
 					"name": "Spirit's Refuge",
 					"objectName": "ShenW",
+					"dataKey": "Characters/Shen/Spells/ShenWAbility/ShenW",
 					"image": "assets/characters/shen/hud/icons2d/shen_w.png",
 					"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @Effect1Amount@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @Effect2Amount@ seconds.",
 					"extendedVariables": [],
@@ -167,8 +168,7 @@
 					"effectAmount": {
 						"0": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
 						"1": [2, 2, 2, 2, 2, 2, 2]
-					},
-					"dataKey": "Characters/Shen/Spells/ShenWAbility/ShenW"
+					}
 				}
 			]
 		},
@@ -178,6 +178,7 @@
 				{
 					"name": "Shadow Dash",
 					"objectName": "ShenE",
+					"dataKey": "Characters/Shen/Spells/ShenEAbility/ShenE",
 					"image": "assets/characters/shen/hud/icons2d/shen_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with <spellName>Twilight Assault</spellName> or this Ability recovers <keywordMajor>@EnergyRefund@ Energy</keywordMajor>.<br><br><spellActive>Active:</spellActive> Shen dashes, <status>Taunting</status> champions and jungle monsters for @CCDuration@ seconds and dealing <physicalDamage>@TauntDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
@@ -231,8 +232,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Shen/Spells/ShenEAbility/ShenE"
+					}
 				}
 			]
 		},
@@ -242,6 +242,7 @@
 				{
 					"name": "Stand United",
 					"objectName": "ShenR",
+					"dataKey": "Characters/Shen/Spells/ShenRAbility/ShenR",
 					"image": "assets/characters/shen/hud/icons2d/shen_r.png",
 					"tooltip": "Shen grants an allied champion anywhere on the map between <shield>@Shield@</shield> and <shield>@MaxShield@ Shield</shield> based on their missing Health for @ShieldDuration@ seconds (max Shield at 60% missing Health). After channeling for @ChannelDuration@ seconds, Shen teleports to his ally's location with his <keywordMajor>Spirit Blade</keywordMajor>.",
 					"extendedVariables": [
@@ -291,8 +292,7 @@
 							},
 							"mModifiedGameCalculation": "Shield"
 						}
-					},
-					"dataKey": "Characters/Shen/Spells/ShenRAbility/ShenR"
+					}
 				}
 			]
 		},
@@ -302,6 +302,7 @@
 				{
 					"name": "Ki Barrier",
 					"objectName": "ShenPassive",
+					"dataKey": "Characters/Shen/Spells/ShenPassiveAbility/ShenPassive",
 					"image": "assets/characters/shen/hud/icons2d/shen_passive.png",
 					"tooltip": "Shen gains <shield>@ShieldValue@ Shield</shield> for @ShieldDuration@ seconds after using an Ability. This effect has a @ShieldCooldown@ second Cooldown, reduced by @ShieldCooldownReduction@ seconds when one of Shen's Abilities successfully affects an ally or enemy.<br><br>Shen has a <keywordMajor>Spirit Blade</keywordMajor> that his other Abilities use.",
 					"cooldownTime": [11, 11, 11, 11, 11, 11, 11],
@@ -397,8 +398,7 @@
 								"mBuffName": "{7dfdcd99}"
 							}
 						}
-					},
-					"dataKey": "Characters/Shen/Spells/ShenPassiveAbility/ShenPassive"
+					}
 				}
 			]
 		}

@@ -33,6 +33,7 @@
 				{
 					"name": "Call of the Void",
 					"objectName": "MalzaharQ",
+					"dataKey": "Characters/Malzahar/Spells/MalzaharQAbility/MalzaharQ",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_q.png",
 					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @SilenceDuration@ second(s).",
 					"extendedVariables": [
@@ -74,8 +75,7 @@
 						"0": [70, 70, 105, 140, 175, 210, 245],
 						"1": [1, 1, 1.25, 1.5, 1.75, 2, 2.25],
 						"2": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
-					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharQAbility/MalzaharQ"
+					}
 				}
 			]
 		},
@@ -85,6 +85,7 @@
 				{
 					"name": "Void Swarm",
 					"objectName": "MalzaharW",
+					"dataKey": "Characters/Malzahar/Spells/MalzaharWAbility/MalzaharW",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit.",
 					"extendedVariables": [
@@ -154,8 +155,7 @@
 					"effectAmount": {
 						"4": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
 						"5": [2, 2, 2, 2, 2, 2, 2]
-					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharWAbility/MalzaharW"
+					}
 				}
 			]
 		},
@@ -165,6 +165,7 @@
 				{
 					"name": "Malefic Visions",
 					"objectName": "MalzaharE",
+					"dataKey": "Characters/Malzahar/Spells/MalzaharEAbility/MalzaharE",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_e.png",
 					"tooltip": "Malzahar inflicts terrible visions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds. Applying <spellName>Call of the Void</spellName> or <spellName>Nether Grasp</spellName> to the victim during this time refreshes the visions.<br><br>If the victim dies, Malzahar gains <scaleMana>@ManaRestore@ Mana</scaleMana> and the visions spread to the nearest enemy.<br><br><rules>Malefic Visions executes minions below @MinionExecuteThreshold@ Health.</rules>",
 					"extendedVariables": [
@@ -224,8 +225,7 @@
 					"effectAmount": {
 						"3": [8, 8, 8, 8, 8, 8, 8],
 						"4": [2, 2, 2, 2, 2, 2, 2]
-					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharEAbility/MalzaharE"
+					}
 				}
 			]
 		},
@@ -235,6 +235,7 @@
 				{
 					"name": "Nether Grasp",
 					"objectName": "MalzaharR",
+					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_r.png",
 					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @CCDuration@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @PoolDuration@ seconds.",
 					"extendedVariables": [
@@ -297,8 +298,7 @@
 					"effectAmount": {
 						"2": [5, 5, 5, 5, 5, 5, 5],
 						"3": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
-					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR"
+					}
 				}
 			]
 		},
@@ -308,6 +308,7 @@
 				{
 					"name": "Void Shift",
 					"objectName": "MalzaharPassive",
+					"dataKey": "Characters/Malzahar/Spells/MalzaharPassiveAbility/MalzaharPassive",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_passive.png",
 					"tooltip": "{{Spell_MalzaharPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MalzaharPassive_Tooltip}}<br><br><rules>Taking damage will restart the Cooldown. <br>Damage from minions is not reduced, but it does not trigger or restart the Cooldown.</rules>",
@@ -338,8 +339,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharPassiveAbility/MalzaharPassive"
+					}
 				}
 			]
 		}

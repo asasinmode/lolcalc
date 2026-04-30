@@ -33,6 +33,7 @@
 				{
 					"name": "Bandage Toss",
 					"objectName": "BandageToss",
+					"dataKey": "Characters/Amumu/Spells/BandageTossAbility/BandageToss",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_q.png",
 					"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @Effect2Amount@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges.",
 					"extendedVariables": [
@@ -67,8 +68,7 @@
 						"0": [45, 70, 95, 120, 145, 170, 195],
 						"1": [1, 1, 1, 1, 1, 1, 1],
 						"2": [1800, 1800, 1800, 1800, 1800, 1800, 1800]
-					},
-					"dataKey": "Characters/Amumu/Spells/BandageTossAbility/BandageToss"
+					}
 				}
 			]
 		},
@@ -78,6 +78,7 @@
 				{
 					"name": "Despair",
 					"objectName": "AuraofDespair",
+					"dataKey": "Characters/Amumu/Spells/AuraofDespairAbility/AuraofDespair",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_w.png",
 					"tooltip": "<toggle>Toggle:</toggle> Amumu begins crying, dealing <magicDamage>@BaseDamage@ plus @TotalHealthDamage@% max Health magic damage</magicDamage> to nearby enemies every second and refreshing <keywordMajor>Curse</keywordMajor>.",
 					"extendedVariables": [
@@ -124,8 +125,7 @@
 							},
 							"mModifiedGameCalculation": "TotalHealthDamage"
 						}
-					},
-					"dataKey": "Characters/Amumu/Spells/AuraofDespairAbility/AuraofDespair"
+					}
 				}
 			]
 		},
@@ -135,6 +135,7 @@
 				{
 					"name": "Tantrum",
 					"objectName": "Tantrum",
+					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @Effect3Amount@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies.",
 					"extendedVariables": [
@@ -192,8 +193,7 @@
 						"1": [65, 65, 95, 125, 155, 185, 185],
 						"2": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"6": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
-					},
-					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum"
+					}
 				}
 			]
 		},
@@ -203,6 +203,7 @@
 				{
 					"name": "Curse of the Sad Mummy",
 					"objectName": "CurseoftheSadMummy",
+					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_r.png",
 					"tooltip": "Amumu flares out his bandages, <status>Stunning</status> for @RDuration@ seconds, dealing <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> and applying <keywordMajor>Curse</keywordMajor>.",
 					"extendedVariables": [
@@ -234,8 +235,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy"
+					}
 				}
 			]
 		},
@@ -245,14 +245,14 @@
 				{
 					"name": "Cursed Touch",
 					"objectName": "AmumuP",
+					"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuP",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png",
 					"tooltip": "Amumu's Attacks <keywordMajor>Curse</keywordMajor> his enemies for @DebuffDuration@ seconds, causing them to take an additional <trueDamage>@DamageAmp*100@% true damage</trueDamage> from all magic damage they take.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"DebuffDuration": [3, 3, 3, 3, 3, 3, 3],
 						"DamageAmp": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-					},
-					"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuP"
+					}
 				}
 			]
 		}

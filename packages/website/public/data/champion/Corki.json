@@ -33,6 +33,7 @@
 				{
 					"name": "Phosphorus Bomb",
 					"objectName": "PhosphorusBomb",
+					"dataKey": "Characters/Corki/Spells/PhosphorusBombAbility/PhosphorusBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_phosphorusbomb.png",
 					"tooltip": "Corki lobs a bomb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The area and champions hit are revealed for @RevealDuration@ seconds.",
 					"extendedVariables": [
@@ -71,8 +72,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Corki/Spells/PhosphorusBombAbility/PhosphorusBomb"
+					}
 				}
 			]
 		},
@@ -82,6 +82,7 @@
 				{
 					"name": "Valkyrie",
 					"objectName": "CarpetBomb",
+					"dataKey": "Characters/Corki/Spells/CarpetBombAbility/CarpetBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_valkyrie.png",
 					"tooltip": "Corki flies over and scorches a path, burning it for @TrailDuration@ seconds. Enemies in the fire take up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> over the duration.",
 					"extendedVariables": [
@@ -140,8 +141,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Corki/Spells/CarpetBombAbility/CarpetBomb"
+					}
 				}
 			]
 		},
@@ -151,6 +151,7 @@
 				{
 					"name": "Gatling Gun",
 					"objectName": "GGun",
+					"dataKey": "Characters/Corki/Spells/GGunAbility/GGun",
 					"image": "assets/characters/corki/hud/icons2d/corki_gatlinggun.png",
 					"tooltip": "Corki fires a gatling gun in front of him, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> over @SprayDuration@ seconds and shredding up to <scaleArmor>@ShredMax*-1@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.",
 					"extendedVariables": [
@@ -192,8 +193,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Corki/Spells/GGunAbility/GGun"
+					}
 				}
 			]
 		},
@@ -203,6 +203,7 @@
 				{
 					"name": "Missile Barrage",
 					"objectName": "MissileBarrage",
+					"dataKey": "Characters/Corki/Spells/MissileBarrageAbility/MissileBarrage",
 					"image": "assets/characters/corki/hud/icons2d/corki_missilebarrage.png",
 					"tooltip": "Corki fires a missile that explodes on the first enemy hit, dealing <physicalDamage>@RSmallMissileDamage@ physical damage</physicalDamage> to surrounding enemies. Every third missile instead deals <physicalDamage>@RBigMissileDamage@ physical damage</physicalDamage>.<br><br>This Ability has up to @MaxAmmoTOOLTIP@ charges. Basic attacks against champions reduce the time between charges by <attention>@AttackRefund@</attention> seconds on hit.",
 					"extendedVariables": [
@@ -261,8 +262,7 @@
 							],
 							"mPrecision": 1
 						}
-					},
-					"dataKey": "Characters/Corki/Spells/MissileBarrageAbility/MissileBarrage"
+					}
 				}
 			]
 		},
@@ -272,6 +272,7 @@
 				{
 					"name": "Hextech Munitions",
 					"objectName": "RapidReload",
+					"dataKey": "Characters/Corki/Spells/RapidReloadAbility/RapidReload",
 					"image": "assets/characters/corki/hud/icons2d/corki_rapidreload.png",
 					"tooltip": "Corki's Attacks and <keywordMajor>Spellblades</keywordMajor> deal <trueDamage>@AttackConversion*100@% bonus true damage</trueDamage>.<br>Attacks: <trueDamage>@BasicAttackTOOLTIP@</trueDamage>.<br>Critical Strikes: <trueDamage>@CriticalStrikeTOOLTIP@</trueDamage>.",
 					"dataValues": {
@@ -299,8 +300,7 @@
 							},
 							"mModifiedGameCalculation": "BasicAttackTOOLTIP"
 						}
-					},
-					"dataKey": "Characters/Corki/Spells/RapidReloadAbility/RapidReload"
+					}
 				}
 			]
 		}

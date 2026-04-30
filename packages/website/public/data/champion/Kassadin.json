@@ -33,6 +33,7 @@
 				{
 					"name": "Null Sphere",
 					"objectName": "NullLance",
+					"dataKey": "Characters/Kassadin/Spells/NullLanceAbility/NullLance",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png",
 					"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds.",
 					"extendedVariables": [
@@ -85,8 +86,7 @@
 						"0": [35, 65, 95, 125, 155, 185, 215],
 						"2": [80, 80, 110, 140, 170, 200, 230],
 						"3": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
-					},
-					"dataKey": "Characters/Kassadin/Spells/NullLanceAbility/NullLance"
+					}
 				}
 			]
 		},
@@ -96,6 +96,7 @@
 				{
 					"name": "Nether Blade",
 					"objectName": "NetherBlade",
+					"dataKey": "Characters/Kassadin/Spells/NetherBladeAbility/NetherBlade",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions.",
 					"extendedVariables": [
@@ -152,8 +153,7 @@
 						"1": [20, 20, 20, 20, 20, 20, 20],
 						"2": [25, 50, 75, 100, 125, 150, 175],
 						"3": [20, 20, 22.5, 25, 27.5, 30, 30]
-					},
-					"dataKey": "Characters/Kassadin/Spells/NetherBladeAbility/NetherBlade"
+					}
 				}
 			]
 		},
@@ -163,6 +163,7 @@
 				{
 					"name": "Force Pulse",
 					"objectName": "ForcePulse",
+					"dataKey": "Characters/Kassadin/Spells/ForcePulseAbility/ForcePulse",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
 					"extendedVariables": [
@@ -202,8 +203,7 @@
 					"effectAmount": {
 						"1": [50, 50, 55, 60, 65, 70, 75],
 						"2": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Kassadin/Spells/ForcePulseAbility/ForcePulse"
+					}
 				}
 			]
 		},
@@ -213,6 +213,7 @@
 				{
 					"name": "Riftwalk",
 					"objectName": "RiftWalk",
+					"dataKey": "Characters/Kassadin/Spells/RiftWalkAbility/RiftWalk",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png",
 					"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times.",
 					"extendedVariables": [
@@ -274,8 +275,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Kassadin/Spells/RiftWalkAbility/RiftWalk"
+					}
 				}
 			]
 		},
@@ -285,13 +285,13 @@
 				{
 					"name": "Void Stone",
 					"objectName": "VoidStone",
+					"dataKey": "Characters/Kassadin/Spells/VoidStoneAbility/VoidStone",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png",
 					"tooltip": "{{Spell_VoidStone_Tooltip}}",
 					"tooltipExtended": "{{ Spell_VoidStone_Tooltip }}<br><rules>{{Reminder_Ghosted}}</rules>",
 					"dataValues": {
 						"DamageReductionPercent": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-					},
-					"dataKey": "Characters/Kassadin/Spells/VoidStoneAbility/VoidStone"
+					}
 				}
 			]
 		}

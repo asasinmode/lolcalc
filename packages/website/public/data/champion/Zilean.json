@@ -33,6 +33,7 @@
 				{
 					"name": "Time Bomb",
 					"objectName": "ZileanQ",
+					"dataKey": "Characters/Zilean/Spells/ZileanQAbility/ZileanQ",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
 					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @FuseDuration@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @StunDuration@ seconds.",
 					"extendedVariables": [
@@ -76,8 +77,7 @@
 						"1": [3, 3, 3, 3, 3, 3, 3],
 						"2": [7, 7, 7, 7, 7, 7, 7],
 						"3": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
-					},
-					"dataKey": "Characters/Zilean/Spells/ZileanQAbility/ZileanQ"
+					}
 				}
 			]
 		},
@@ -87,6 +87,7 @@
 				{
 					"name": "Rewind",
 					"objectName": "ZileanW",
+					"dataKey": "Characters/Zilean/Spells/ZileanWAbility/ZileanW",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
 					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @CooldownReduction@ seconds.",
 					"extendedVariables": [],
@@ -99,8 +100,7 @@
 					"effectAmount": {
 						"0": [10, 20, 30, 40, 50, 60, 70],
 						"2": [35, 35, 35, 35, 35, 35, 35]
-					},
-					"dataKey": "Characters/Zilean/Spells/ZileanWAbility/ZileanW"
+					}
 				}
 			]
 		},
@@ -110,6 +110,7 @@
 				{
 					"name": "Time Warp",
 					"objectName": "TimeWarp",
+					"dataKey": "Characters/Zilean/Spells/TimeWarpAbility/TimeWarp",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
 					"tooltip": "Zilean <status>Slows</status> an enemy champion by @SpeedAmount@% or grants an allied champion <speed>@SpeedAmount@% Move Speed</speed> for @Duration@ seconds.",
 					"extendedVariables": [
@@ -133,8 +134,7 @@
 						"1": [25, 40, 55, 70, 85, 99, 114],
 						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"3": [8, 8, 8, 8, 8, 8, 8]
-					},
-					"dataKey": "Characters/Zilean/Spells/TimeWarpAbility/TimeWarp"
+					}
 				}
 			]
 		},
@@ -144,6 +144,7 @@
 				{
 					"name": "Chronoshift",
 					"objectName": "ChronoShift",
+					"dataKey": "Characters/Zilean/Spells/ChronoShiftAbility/ChronoShift",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
 					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
 					"extendedVariables": [
@@ -177,8 +178,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Zilean/Spells/ChronoShiftAbility/ChronoShift"
+					}
 				}
 			]
 		},
@@ -188,6 +188,7 @@
 				{
 					"name": "Time In A Bottle",
 					"objectName": "HeightenedLearning",
+					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/HeightenedLearning",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png",
 					"tooltip": "{{Spell_HeightenedLearning_Tooltip}}",
 					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
@@ -247,8 +248,7 @@
 							},
 							"mModifiedGameCalculation": "{e359ec0d}"
 						}
-					},
-					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/HeightenedLearning"
+					}
 				}
 			]
 		}

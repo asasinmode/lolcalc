@@ -33,6 +33,7 @@
 				{
 					"name": "Barrel Roll",
 					"objectName": "GragasQ",
+					"dataKey": "Characters/Gragas/Spells/GragasQAbility/GragasQ",
 					"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
 					"tooltip": "Gragas rolls a cask that explodes after @Effect4Amount@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @Effect2Amount@ and @Effect2Amount*1.5@% for @Effect3Amount@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
 					"extendedVariables": [
@@ -79,8 +80,7 @@
 						"4": [2, 2, 2, 2, 2, 2, 2],
 						"5": [150, 150, 150, 150, 150, 150, 150],
 						"6": [70, 70, 70, 70, 70, 70, 70]
-					},
-					"dataKey": "Characters/Gragas/Spells/GragasQAbility/GragasQ"
+					}
 				}
 			]
 		},
@@ -90,6 +90,7 @@
 				{
 					"name": "Drunken Rage",
 					"objectName": "GragasW",
+					"dataKey": "Characters/Gragas/Spells/GragasWAbility/GragasW",
 					"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png",
 					"tooltip": "Gragas samples his brew, reducing incoming damage by @DamageReduction@ for @DefenseDuration@ seconds and empowering his next Attack to deal an additional <magicDamage>@TotalDamage@</magicDamage> plus <magicDamage>@MaxHPPercentDamage@% max Health magic damage</magicDamage> to the target and surrounding enemies.",
 					"extendedVariables": [
@@ -145,8 +146,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Gragas/Spells/GragasWAbility/GragasW"
+					}
 				}
 			]
 		},
@@ -156,6 +156,7 @@
 				{
 					"name": "Body Slam",
 					"objectName": "GragasE",
+					"dataKey": "Characters/Gragas/Spells/GragasEAbility/GragasE",
 					"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png",
 					"tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for @StunDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to them.<br><br>This Ability's Cooldown is reduced by @CooldownRefund*100@% if Gragas collides with an enemy.",
 					"extendedVariables": [
@@ -191,8 +192,7 @@
 					},
 					"effectAmount": {
 						"1": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Gragas/Spells/GragasEAbility/GragasE"
+					}
 				}
 			]
 		},
@@ -202,6 +202,7 @@
 				{
 					"name": "Explosive Cask",
 					"objectName": "GragasR",
+					"dataKey": "Characters/Gragas/Spells/GragasRAbility/GragasR",
 					"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png",
 					"tooltip": "Gragas hurls his cask, dealing <magicDamage>@DamageDone@ magic damage</magicDamage> and <status>Knocking Away</status> enemies from the impact zone.",
 					"extendedVariables": [
@@ -230,8 +231,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Gragas/Spells/GragasRAbility/GragasR"
+					}
 				}
 			]
 		},
@@ -241,6 +241,7 @@
 				{
 					"name": "Happy Hour",
 					"objectName": "GragasPassive",
+					"dataKey": "Characters/Gragas/Spells/GragasPassiveAbility/GragasPassive",
 					"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
 					"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. ",
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
@@ -280,8 +281,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Gragas/Spells/GragasPassiveAbility/GragasPassive"
+					}
 				}
 			]
 		}

@@ -33,6 +33,7 @@
 				{
 					"name": "Caustic Spittle",
 					"objectName": "KogMawQ",
+					"dataKey": "Characters/KogMaw/Spells/KogMawQAbility/KogMawQ",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_causticspittle.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>@ShredAmount@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.",
 					"extendedVariables": [
@@ -76,8 +77,7 @@
 						"4": [1, 1, 1, 1, 1, 1, 1],
 						"5": [1, 1, 1, 1, 1, 1, 1],
 						"6": [100, 100, 100, 100, 100, 100, 100]
-					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawQAbility/KogMawQ"
+					}
 				}
 			]
 		},
@@ -87,6 +87,7 @@
 				{
 					"name": "Bio-Arcane Barrage",
 					"objectName": "KogMawBioArcaneBarrage",
+					"dataKey": "Characters/KogMaw/Spells/KogMawBioArcaneBarrageAbility/KogMawBioArcaneBarrage",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png",
 					"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> %i:OnHit% <OnHit>On-Hit</OnHit> for @Duration@ seconds.",
 					"extendedVariables": [
@@ -126,8 +127,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 2
 						}
-					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawBioArcaneBarrageAbility/KogMawBioArcaneBarrage"
+					}
 				}
 			]
 		},
@@ -137,6 +137,7 @@
 				{
 					"name": "Void Ooze",
 					"objectName": "KogMawVoidOoze",
+					"dataKey": "Characters/KogMaw/Spells/KogMawVoidOozeAbility/KogMawVoidOoze",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_voidooze.png",
 					"tooltip": "Kog'Maw spits bile, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and leaving a trail of ooze for @TrailDuration@ seconds. Enemies in the ooze are <status>Slowed</status> by @SlowAmount@%.",
 					"extendedVariables": [
@@ -174,8 +175,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawVoidOozeAbility/KogMawVoidOoze"
+					}
 				}
 			]
 		},
@@ -185,6 +185,7 @@
 				{
 					"name": "Living Artillery",
 					"objectName": "KogMawLivingArtillery",
+					"dataKey": "Characters/KogMaw/Spells/KogMawLivingArtilleryAbility/KogMawLivingArtillery",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_livingartillery.png",
 					"tooltip": "Kog'Maw shoots acid at an area, dealing <magicDamage>@BaseDamageCalc@ plus @TooltipMissingHealthDamageAmp@% per 1% missing Health magic damage</magicDamage> and revealing enemies hit for 2 seconds. Enemies below <healing>40% Health</healing> instead take <magicDamage>@MaxDamageCalc@ magic damage</magicDamage>.<br><br>Subsequent shots within @ManaCostDuration@ seconds cost an additional <scaleMana>@BaseCost@ Mana</scaleMana> (max: <scaleMana>@ManaCostCap@ Mana</scaleMana>).",
 					"extendedVariables": [
@@ -248,8 +249,7 @@
 							},
 							"mModifiedGameCalculation": "BaseDamageCalc"
 						}
-					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawLivingArtilleryAbility/KogMawLivingArtillery"
+					}
 				}
 			]
 		},
@@ -259,6 +259,7 @@
 				{
 					"name": "Icathian Surprise",
 					"objectName": "KogMawIcathianSurpriseReady",
+					"dataKey": "Characters/KogMaw/Spells/KogMawIcathianSurpriseReadyAbility/KogMawIcathianSurpriseReady",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_icathiansurprise.png",
 					"tooltip": "For @TooltipPassiveDuration@ seconds after dying, Kog'Maw can continue to move, can move through units, and gains <speed>10% Move Speed</speed>, increasing to <speed>@TooltipPassiveMS*100@% Move Speed</speed> over the duration. At the end of the duration, he explodes and deals <trueDamage>@PassiveDamage@ true damage</trueDamage> to nearby enemies.",
 					"dataValues": {
@@ -275,8 +276,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawIcathianSurpriseReadyAbility/KogMawIcathianSurpriseReady"
+					}
 				}
 			]
 		}

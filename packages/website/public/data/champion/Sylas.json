@@ -33,6 +33,7 @@
 				{
 					"name": "Chain Lash",
 					"objectName": "SylasQ",
+					"dataKey": "Characters/Sylas/Spells/SylasQAbility/SylasQ",
 					"image": "assets/characters/sylas/hud/icons2d/sylasq.png",
 					"tooltip": "Sylas lashes his chains out, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmountCalc@ for @SlowDuration@ seconds. The place where the chains intersect explodes, dealing a further <magicDamage>@ExplosionDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -97,8 +98,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Sylas/Spells/SylasQAbility/SylasQ"
+					}
 				}
 			]
 		},
@@ -108,6 +108,7 @@
 				{
 					"name": "Kingslayer",
 					"objectName": "SylasW",
+					"dataKey": "Characters/Sylas/Spells/SylasWAbility/SylasW",
 					"image": "assets/characters/sylas/hud/icons2d/sylasw.png",
 					"tooltip": "Sylas lunges at an enemy with magical force dealing <magicDamage>@MinDamage@ magic damage</magicDamage>. Against champions, Sylas restores between <healing>@MinHealing@</healing> and <healing>@MaxHealing@ Health</healing> based on his missing Health (max healing at or below @MaxExecuteThreshold*100@% Health).",
 					"extendedVariables": [
@@ -171,8 +172,7 @@
 							},
 							"mModifiedGameCalculation": "MinHealing"
 						}
-					},
-					"dataKey": "Characters/Sylas/Spells/SylasWAbility/SylasW"
+					}
 				}
 			]
 		},
@@ -182,6 +182,7 @@
 				{
 					"name": "Abscond / Abduct",
 					"objectName": "SylasE",
+					"dataKey": "Characters/Sylas/Spells/SylasEAbility/SylasE",
 					"image": "assets/characters/sylas/hud/icons2d/sylase.png",
 					"tooltip": "Sylas quickly dashes, and prepares a <recast>Recast</recast> for 3.5 seconds.<br><br><recast>Recast:</recast> Sylas throws his chains, pulling himself to the first enemy hit, dealing <magicDamage>@Damage@ magic damage</magicDamage>, and <status>Knocking Up</status> for @KnockUpDuration@ seconds.",
 					"extendedVariables": [
@@ -210,8 +211,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Sylas/Spells/SylasEAbility/SylasE"
+					}
 				}
 			]
 		},
@@ -221,6 +221,7 @@
 				{
 					"name": "Hijack",
 					"objectName": "SylasR",
+					"dataKey": "Characters/Sylas/Spells/SylasRAbility/SylasR",
 					"image": "assets/characters/sylas/hud/icons2d/sylasr.png",
 					"tooltip": "Sylas hijacks an enemy champion, allowing him to cast a copy of their ultimate Ability, based on his Ultimate level and using his stats.<br><br>Hijacking an enemy places a Cooldown on them for @PerTargetCooldown@% (modified by Sylas' Ability Haste) of the enemy's ultimate's Cooldown, with a minimum of @MinimumEnemyCooldown@ seconds, during which time Sylas cannot hijack them again.",
 					"extendedVariables": [],
@@ -246,8 +247,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Sylas/Spells/SylasRAbility/SylasR"
+					}
 				}
 			]
 		},
@@ -257,6 +257,7 @@
 				{
 					"name": "Petricite Burst",
 					"objectName": "SylasPassive",
+					"dataKey": "Characters/Sylas/Spells/SylasPassiveAbility/SylasPassive",
 					"image": "assets/characters/sylas/hud/icons2d/sylasp.png",
 					"tooltip": "After using an Ability, Sylas gains a charge (max @PassiveCharges@ charges). Sylas' Attacks expend a charge to whirl his chains, dealing <magicDamage>@PassiveDamage@ magic damage</magicDamage> to the main target and <magicDamage>@PassiveAoEDamage@ magic damage</magicDamage> to other surrounding enemies.<br><br>While he has at least one charge, Sylas gains <attackSpeed>@PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.",
 					"tooltipExtended": "After using an Ability, Sylas gains a charge (max @PassiveCharges@ charges). Sylas' Attacks expend a charge to whirl his chains, dealing <magicDamage>@PassiveDamage@ magic damage</magicDamage> to the main target and <magicDamage>@PassiveAoEDamage@ magic damage</magicDamage> to other surrounding enemies.<br><br>While he has at least one charge, Sylas gains <attackSpeed>@PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><rules>When empowered, Sylas's attacks execute low Health minions.<br>Deals @MonsterDamageMulti*100@% damage to monsters.</rules>",
@@ -296,8 +297,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Sylas/Spells/SylasPassiveAbility/SylasPassive"
+					}
 				}
 			]
 		}

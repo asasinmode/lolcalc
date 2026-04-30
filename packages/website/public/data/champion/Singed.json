@@ -33,6 +33,7 @@
 				{
 					"name": "Poison Trail",
 					"objectName": "PoisonTrail",
+					"dataKey": "Characters/Singed/Spells/PoisonTrailAbility/PoisonTrail",
 					"image": "assets/characters/singed/hud/icons2d/singed_q.png",
 					"tooltip": "<toggle>Toggle:</toggle> Singed lays a poisonous trail that deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.",
 					"extendedVariables": [
@@ -72,8 +73,7 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "DamagePerSecond"
 						}
-					},
-					"dataKey": "Characters/Singed/Spells/PoisonTrailAbility/PoisonTrail"
+					}
 				}
 			]
 		},
@@ -83,6 +83,7 @@
 				{
 					"name": "Mega Adhesive",
 					"objectName": "MegaAdhesive",
+					"dataKey": "Characters/Singed/Spells/MegaAdhesiveAbility/MegaAdhesive",
 					"image": "assets/characters/singed/hud/icons2d/singed_w.png",
 					"tooltip": "Singed hurls a cask of sticky liquid, <status>Grounding</status> and <status>Slowing</status> enemies in the area by @SlowPercent@% for @WDuration@ seconds.",
 					"extendedVariables": [
@@ -101,8 +102,7 @@
 						"WDuration": [3, 3, 3, 3, 3, 3, 3],
 						"WRadius": [265, 265, 265, 265, 265, 265, 265],
 						"DelayExecute": [0.375, 0.375, 0.375, 0.375, 0.375, 0.375, 0.375]
-					},
-					"dataKey": "Characters/Singed/Spells/MegaAdhesiveAbility/MegaAdhesive"
+					}
 				}
 			]
 		},
@@ -112,6 +112,7 @@
 				{
 					"name": "Fling",
 					"objectName": "Fling",
+					"dataKey": "Characters/Singed/Spells/FlingAbility/Fling",
 					"image": "assets/characters/singed/hud/icons2d/singed_e.png",
 					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @MaxHPDamage@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @RootDuration@ seconds.",
 					"extendedVariables": [
@@ -161,8 +162,7 @@
 						"2": [6, 6, 6.5, 7, 7.5, 8, 8.5],
 						"3": [420, 420, 420, 420, 420, 420, 420],
 						"4": [300, 300, 300, 300, 300, 300, 300]
-					},
-					"dataKey": "Characters/Singed/Spells/FlingAbility/Fling"
+					}
 				}
 			]
 		},
@@ -172,6 +172,7 @@
 				{
 					"name": "Insanity Potion",
 					"objectName": "InsanityPotion",
+					"dataKey": "Characters/Singed/Spells/InsanityPotionAbility/InsanityPotion",
 					"image": "assets/characters/singed/hud/icons2d/singed_r.png",
 					"tooltip": "Singed drinks a potent brew of chemicals, granting him @StatAmount@ <scaleAP>Ability Power</scaleAP>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, <speed>Move Speed</speed>, <healing>Health Regen</healing>, and <scaleMana>Mana Regen</scaleMana> for @Duration@ seconds. During this effect, Singed's <spellName>Poison Trail</spellName> also applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ second.",
 					"extendedVariables": [
@@ -187,8 +188,7 @@
 						"Duration": [25, 25, 25, 25, 25, 25, 25],
 						"GrievousAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"GrievousDuration": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Singed/Spells/InsanityPotionAbility/InsanityPotion"
+					}
 				}
 			]
 		},
@@ -198,6 +198,7 @@
 				{
 					"name": "Noxious Slipstream",
 					"objectName": "SingedP",
+					"dataKey": "Characters/Singed/Spells/SingedPAbility/SingedP",
 					"image": "assets/characters/singed/hud/icons2d/singed_passive.png",
 					"tooltip": "Singed drafts off of nearby allied or enemy champions, gaining <speed>@MSPercent*100@% Move Speed</speed> for @MSDuration@ seconds. This effect has an @PerTargetCD@ second Cooldown per champion.",
 					"dataValues": {
@@ -205,8 +206,7 @@
 						"MSDuration": [2, 2, 2, 2, 2, 2, 2],
 						"PerTargetCD": [8, 8, 8, 8, 8, 8, 8],
 						"TriggerArea": [225, 225, 225, 225, 225, 225, 225]
-					},
-					"dataKey": "Characters/Singed/Spells/SingedPAbility/SingedP"
+					}
 				}
 			]
 		}

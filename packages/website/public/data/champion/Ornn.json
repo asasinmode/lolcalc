@@ -33,6 +33,7 @@
 				{
 					"name": "Volcanic Rupture",
 					"objectName": "OrnnQ",
+					"dataKey": "Characters/Ornn/Spells/OrnnQAbility/OrnnQ",
 					"image": "assets/characters/ornn/hud/icons2d/ornnq.png",
 					"tooltip": "Ornn slams the ground, creating a fissure dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount@% for @SlowDuration@ seconds. A pillar of rock forms at the fissure's end for @PillarDuration@ seconds. ",
 					"extendedVariables": [
@@ -70,8 +71,7 @@
 						"2": [4, 4, 4, 4, 4, 4, 4],
 						"4": [40, 40, 40, 40, 40, 40, 40],
 						"5": [2, 2, 2, 2, 2, 2, 2]
-					},
-					"dataKey": "Characters/Ornn/Spells/OrnnQAbility/OrnnQ"
+					}
 				}
 			]
 		},
@@ -81,6 +81,7 @@
 				{
 					"name": "Bellows Breath",
 					"objectName": "OrnnW",
+					"dataKey": "Characters/Ornn/Spells/OrnnWAbility/OrnnW",
 					"image": "assets/characters/ornn/hud/icons2d/ornnw.png",
 					"tooltip": "Ornn stomps forward Unstoppably while breathing fire, dealing <magicDamage>@MaxPercentHPPerTickTooltip@% max Health magic damage</magicDamage> over @BreathDuration@ seconds. Enemies hit by the final bout of flame become <keywordMajor>Brittle</keywordMajor> for @BrittleDuration@ seconds.<br><br><status>Immobilizing</status> effects on <keywordMajor>Brittle</keywordMajor> targets have their duration increased by 30% and deal an additional <magicDamage>@BrittlePercentMaxHPCalc@ max Health magic damage</magicDamage>. Ornn's Attacks against <keywordMajor>Brittle</keywordMajor> targets <status>Knock</status> them <status>Back</status>, dealing the additional damage.",
 					"extendedVariables": [
@@ -154,8 +155,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Ornn/Spells/OrnnWAbility/OrnnW"
+					}
 				}
 			]
 		},
@@ -165,6 +165,7 @@
 				{
 					"name": "Searing Charge",
 					"objectName": "OrnnE",
+					"dataKey": "Characters/Ornn/Spells/OrnnEAbility/OrnnE",
 					"image": "assets/characters/ornn/hud/icons2d/ornne.png",
 					"tooltip": "Ornn charges, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If Ornn rams into terrain, he creates a shockwave that <status>Knocks Up</status> enemies for @KnockupDuration@ seconds and applies the same damage to those not hit by the charge.<br><br>Ornn's charge destroys magma pillars and terrain created by enemies.",
 					"extendedVariables": [
@@ -210,8 +211,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Ornn/Spells/OrnnEAbility/OrnnE"
+					}
 				}
 			]
 		},
@@ -221,6 +221,7 @@
 				{
 					"name": "Call of the Forge God",
 					"objectName": "OrnnR",
+					"dataKey": "Characters/Ornn/Spells/OrnnRAbility/OrnnR",
 					"image": "assets/characters/ornn/hud/icons2d/ornnr1.png",
 					"tooltip": "Ornn summons a massive lava elemental, which stampedes towards him, dealing <magicDamage>@RDamageCalc@ magic damage</magicDamage>, applying <keywordMajor>Brittle</keywordMajor> to, and <status>Slowing</status> enemies hit by @RSlowPercentBasePreMath@% for @BrittleDurationTOOLTIPONLY@ seconds.<br><br>Ornn can <recast>Recast</recast> to dash with a headbutt. If he dashes into the elemental, he redirects and empowers it, causing it to <status>Knock Up</status> the first champion for @RStunDuration@ second and subsequent champions for @MinStun@ seconds. The elemental also deals <magicDamage>@RDamageCalc@ magic damage</magicDamage> and reapplies <keywordMajor>Brittle</keywordMajor>.",
 					"extendedVariables": [
@@ -276,8 +277,7 @@
 							],
 							"mPrecision": 1
 						}
-					},
-					"dataKey": "Characters/Ornn/Spells/OrnnRAbility/OrnnR"
+					}
 				}
 			]
 		},
@@ -287,6 +287,7 @@
 				{
 					"name": "Living Forge",
 					"objectName": "OrnnP",
+					"dataKey": "Characters/Ornn/Spells/OrnnPAbility/OrnnP",
 					"image": "assets/characters/ornn/hud/icons2d/ornnp.png",
 					"tooltip": "{{Spell_OrnnP_Tooltip_@GameModeInteger@}}",
 					"tooltipExtended": "{{Spell_OrnnP_TooltipExtended_@GameModeInteger@}}",
@@ -327,8 +328,7 @@
 						"7": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
 						"8": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"9": [15, 15, 17.5, 20, 22.5, 25, 27.5]
-					},
-					"dataKey": "Characters/Ornn/Spells/OrnnPAbility/OrnnP"
+					}
 				}
 			]
 		}

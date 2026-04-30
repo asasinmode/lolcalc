@@ -33,6 +33,7 @@
 				{
 					"name": "Baleful Strike",
 					"objectName": "VeigarBalefulStrike",
+					"dataKey": "Characters/Veigar/Spells/VeigarBalefulStrikeAbility/VeigarBalefulStrike",
 					"image": "assets/characters/veigar/hud/icons2d/veigarbalefulstrike.png",
 					"tooltip": "Veigar unleashes a bolt of dark energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit.<br><br>If Veigar kills an enemy with this Ability, he gains @Spell.VeigarPassive:dQKillStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor>. Large minions and large monsters grant @Spell.VeigarPassive:dQKillStacksLarge@ stacks instead.",
 					"extendedVariables": [
@@ -71,8 +72,7 @@
 					"effectAmount": {
 						"1": [1, 1, 1, 1, 1, 1, 1],
 						"2": [2, 2, 2, 2, 2, 2, 2]
-					},
-					"dataKey": "Characters/Veigar/Spells/VeigarBalefulStrikeAbility/VeigarBalefulStrike"
+					}
 				}
 			]
 		},
@@ -82,6 +82,7 @@
 				{
 					"name": "Dark Matter",
 					"objectName": "VeigarDarkMatter",
+					"dataKey": "Characters/Veigar/Spells/VeigarDarkMatterAbility/VeigarDarkMatter",
 					"image": "assets/characters/veigar/hud/icons2d/veigardarkmatter.png",
 					"tooltip": "Veigar summons dark matter from the sky, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Every @Spell.VeigarPassive:PStacksPerDarkMatterCDR@ stacks of <keywordMajor>Phenomenal Evil</keywordMajor> reduce this Ability's Cooldown by @Spell.VeigarPassive:DarkMatterCDRIncrement*100@%.",
 					"tooltipExtended": "{{Spell_VeigarDarkMatter_Tooltip}}<br><br>Cooldown currently reduced by <statTracking>@f2.0*100@%</statTracking>.",
@@ -123,8 +124,7 @@
 					"effectAmount": {
 						"1": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
 						"2": [8, 8, 8, 8, 8, 8, 8]
-					},
-					"dataKey": "Characters/Veigar/Spells/VeigarDarkMatterAbility/VeigarDarkMatter"
+					}
 				}
 			]
 		},
@@ -134,6 +134,7 @@
 				{
 					"name": "Event Horizon",
 					"objectName": "VeigarEventHorizon",
+					"dataKey": "Characters/Veigar/Spells/VeigarEventHorizonAbility/VeigarEventHorizon",
 					"image": "assets/characters/veigar/hud/icons2d/veigareventhorizon.png",
 					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @StunDuration@ seconds. The cage lasts for 3 seconds.",
 					"extendedVariables": [
@@ -154,8 +155,7 @@
 					"effectAmount": {
 						"0": [1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75],
 						"1": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-					},
-					"dataKey": "Characters/Veigar/Spells/VeigarEventHorizonAbility/VeigarEventHorizon"
+					}
 				}
 			]
 		},
@@ -165,6 +165,7 @@
 				{
 					"name": "Primordial Burst",
 					"objectName": "VeigarR",
+					"dataKey": "Characters/Veigar/Spells/VeigarRAbility/VeigarR",
 					"image": "assets/characters/veigar/hud/icons2d/veigarprimordialburst.png",
 					"tooltip": "Veigar blasts an enemy champion with primal magic to deal between <magicDamage>@MinDamage@ and @MaxDamage@ magic damage</magicDamage>, increasing with the target's missing Health. Damage is maximized against enemies below 33% Health.",
 					"extendedVariables": [
@@ -203,8 +204,7 @@
 							},
 							"mModifiedGameCalculation": "MinDamage"
 						}
-					},
-					"dataKey": "Characters/Veigar/Spells/VeigarRAbility/VeigarR"
+					}
 				}
 			]
 		},
@@ -214,6 +214,7 @@
 				{
 					"name": "Phenomenal Evil Power",
 					"objectName": "VeigarPassive",
+					"dataKey": "Characters/Veigar/Spells/VeigarPassiveAbility/VeigarPassive",
 					"image": "assets/characters/veigar/hud/icons2d/veigar_entropy.png",
 					"tooltip": "{{Spell_VeigarPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_VeigarPassive_Tooltip}}<br><br>Veigar's evil is currently granting him <statTracking>@f1@ Ability Power</statTracking>",
@@ -234,8 +235,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Veigar/Spells/VeigarPassiveAbility/VeigarPassive"
+					}
 				}
 			]
 		}

@@ -33,6 +33,7 @@
 				{
 					"name": "Pierce",
 					"objectName": "KalistaMysticShot",
+					"dataKey": "Characters/Kalista/Spells/KalistaMysticShotAbility/KalistaMysticShot",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_q.png",
 					"tooltip": "Kalista hurls a spear, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first target hit. If this kills the target, the spear continues onward, carrying any <spellName>{{Spell_KalistaExpungeWrapper_Name}}</spellName> stacks to the next target hit.<br><br>Kalista can dash after using this Ability using <spellName>{{Spell_KalistaPassiveBuff_Name}}</spellName>.",
 					"extendedVariables": [
@@ -64,8 +65,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Kalista/Spells/KalistaMysticShotAbility/KalistaMysticShot"
+					}
 				}
 			]
 		},
@@ -75,6 +75,7 @@
 				{
 					"name": "Sentinel",
 					"objectName": "KalistaW",
+					"dataKey": "Characters/Kalista/Spells/KalistaWAbility/KalistaW",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
 					"extendedVariables": [
@@ -105,8 +106,7 @@
 						"3": [100, 90, 80, 70, 60, 50, 40],
 						"5": [50, 75, 100, 125, 150, 175, 200],
 						"6": [10, 10, 10, 10, 10, 10, 10]
-					},
-					"dataKey": "Characters/Kalista/Spells/KalistaWAbility/KalistaW"
+					}
 				}
 			]
 		},
@@ -116,6 +116,7 @@
 				{
 					"name": "Rend",
 					"objectName": "KalistaExpungeWrapper",
+					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
 					"extendedVariables": [
@@ -212,8 +213,7 @@
 					},
 					"effectAmount": {
 						"6": [2, 2, 2, 2, 2, 2, 2]
-					},
-					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper"
+					}
 				}
 			]
 		},
@@ -223,6 +223,7 @@
 				{
 					"name": "Fate's Call",
 					"objectName": "KalistaRx",
+					"dataKey": "Characters/Kalista/Spells/KalistaRxAbility/KalistaRx",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_r.png",
 					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
 					"extendedVariables": [
@@ -236,8 +237,7 @@
 					"effectAmount": {
 						"1": [0, 1, 1.5, 2, 0, 0, 0],
 						"2": [0, 40, 60, 80, 0, 0, 0]
-					},
-					"dataKey": "Characters/Kalista/Spells/KalistaRxAbility/KalistaRx"
+					}
 				}
 			]
 		},
@@ -247,6 +247,7 @@
 				{
 					"name": "Martial Poise",
 					"objectName": "KalistaPassiveBuff",
+					"dataKey": "Characters/Kalista/Spells/KalistaPassiveBuffAbility/KalistaPassiveBuff",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png",
 					"tooltip": "{{Spell_KalistaPassiveBuff_Tooltip}}",
 					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules>",
@@ -325,8 +326,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 2
 						}
-					},
-					"dataKey": "Characters/Kalista/Spells/KalistaPassiveBuffAbility/KalistaPassiveBuff"
+					}
 				}
 			]
 		}

@@ -33,6 +33,7 @@
 				{
 					"name": "Piercing Light",
 					"objectName": "LucianQ",
+					"dataKey": "Characters/Lucian/Spells/LucianQAbility/LucianQ",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_q.png",
 					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
@@ -70,8 +71,7 @@
 					},
 					"effectAmount": {
 						"3": [0.41, 0.41, 0.41, 0.41, 0.41, 0.41, 0.41]
-					},
-					"dataKey": "Characters/Lucian/Spells/LucianQAbility/LucianQ"
+					}
 				}
 			]
 		},
@@ -81,6 +81,7 @@
 				{
 					"name": "Ardent Blaze",
 					"objectName": "LucianW",
+					"dataKey": "Characters/Lucian/Spells/LucianWAbility/LucianW",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_w.png",
 					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@Effect2Amount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
 					"extendedVariables": [
@@ -122,8 +123,7 @@
 						"7": [6, 6, 6, 6, 6, 6, 6],
 						"8": [1, 1, 1, 1, 1, 1, 1],
 						"9": [700, 700, 700, 700, 700, 700, 700]
-					},
-					"dataKey": "Characters/Lucian/Spells/LucianWAbility/LucianW"
+					}
 				}
 			]
 		},
@@ -133,6 +133,7 @@
 				{
 					"name": "Relentless Pursuit",
 					"objectName": "LucianE",
+					"dataKey": "Characters/Lucian/Spells/LucianEAbility/LucianE",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_e.png",
 					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @Effect1Amount@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@Effect2Amount@ seconds for champions). ",
 					"extendedVariables": [
@@ -148,8 +149,7 @@
 						"2": [425, 425, 425, 425, 425, 425, 425],
 						"3": [200, 200, 200, 200, 200, 200, 200],
 						"4": [1350, 1350, 1350, 1350, 1350, 1350, 1350]
-					},
-					"dataKey": "Characters/Lucian/Spells/LucianEAbility/LucianE"
+					}
 				}
 			]
 		},
@@ -159,6 +159,7 @@
 				{
 					"name": "The Culling",
 					"objectName": "LucianR",
+					"dataKey": "Characters/Lucian/Spells/LucianRAbility/LucianR",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_r.png",
 					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage>",
 					"extendedVariables": [
@@ -250,8 +251,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Lucian/Spells/LucianRAbility/LucianR"
+					}
 				}
 			]
 		},
@@ -261,6 +261,7 @@
 				{
 					"name": "Lightslinger",
 					"objectName": "LucianPassive",
+					"dataKey": "Characters/Lucian/Spells/LucianPassiveAbility/LucianPassive",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_passive.png",
 					"tooltip": "{{Spell_LucianPassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_LucianPassive_Tooltip }}<br><rules>Vigilance can store up to @MaxAutos@ empowered basic attacks.</rules>",
@@ -354,8 +355,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Lucian/Spells/LucianPassiveAbility/LucianPassive"
+					}
 				}
 			]
 		}

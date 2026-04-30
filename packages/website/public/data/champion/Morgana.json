@@ -33,6 +33,7 @@
 				{
 					"name": "Dark Binding",
 					"objectName": "MorganaQ",
+					"dataKey": "Characters/Morgana/Spells/MorganaQAbility/MorganaQ",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
 					"tooltip": "Morgana hurls a blast of starfire that <status>Roots</status> the first enemy hit for @RootDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -67,8 +68,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Morgana/Spells/MorganaQAbility/MorganaQ"
+					}
 				}
 			]
 		},
@@ -78,6 +78,7 @@
 				{
 					"name": "Tormented Shadow",
 					"objectName": "MorganaW",
+					"dataKey": "Characters/Morgana/Spells/MorganaWAbility/MorganaW",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png",
 					"tooltip": "Morgana ignites the ground for @WDuration@ seconds, dealing <magicDamage>@TotalMinDamage@ magic damage</magicDamage> per second, increased by up to <magicDamage>@TotalMaxDamage@</magicDamage> based on the targets' missing Health.<br><br>This Ability's Cooldown is reduced by @CDRefundPercent*100@% every time Morgana is healed by <spellName>{{Spell_MorganaPassive_Name}}</spellName>.",
 					"extendedVariables": [
@@ -127,8 +128,7 @@
 							},
 							"mModifiedGameCalculation": "TotalMinDamage"
 						}
-					},
-					"dataKey": "Characters/Morgana/Spells/MorganaWAbility/MorganaW"
+					}
 				}
 			]
 		},
@@ -138,6 +138,7 @@
 				{
 					"name": "Black Shield",
 					"objectName": "MorganaE",
+					"dataKey": "Characters/Morgana/Spells/MorganaEAbility/MorganaE",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png",
 					"tooltip": "Morgana grants an ally champion <shield>@TotalShieldStrength@ Magic Shield</shield> for @ShieldDuration@ seconds. The shield prevents <status>Disabling</status> and <status>Immobilizing</status> effects until it breaks.",
 					"extendedVariables": [
@@ -166,8 +167,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Morgana/Spells/MorganaEAbility/MorganaE"
+					}
 				}
 			]
 		},
@@ -177,6 +177,7 @@
 				{
 					"name": "Soul Shackles",
 					"objectName": "MorganaR",
+					"dataKey": "Characters/Morgana/Spells/MorganaRAbility/MorganaR",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png",
 					"tooltip": "Morgana chains herself to nearby enemy Champions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowPercent@%. After @ChainDuration@ seconds, enemies unable to break the chains take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and are <status>Stunned</status> for @StunDuration@ seconds.<br><br>While casting this Ability, Morgana gains <speed>@HastePercent@% Move Speed</speed>.",
 					"extendedVariables": [
@@ -216,8 +217,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Morgana/Spells/MorganaRAbility/MorganaR"
+					}
 				}
 			]
 		},
@@ -227,13 +227,13 @@
 				{
 					"name": "Soul Siphon",
 					"objectName": "MorganaPassive",
+					"dataKey": "Characters/Morgana/Spells/MorganaPassiveAbility/MorganaPassive",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_empathize.png",
 					"tooltip": "Morgana <healing>Heals for @HealPercent@%</healing> of the damage dealt by her Abilities to champions, large minions, and medium and larger jungle monsters.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"HealPercent": [18, 18, 18, 18, 18, 18, 18]
-					},
-					"dataKey": "Characters/Morgana/Spells/MorganaPassiveAbility/MorganaPassive"
+					}
 				}
 			]
 		}

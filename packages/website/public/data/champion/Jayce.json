@@ -33,6 +33,7 @@
 				{
 					"name": "To the Skies! / Shock Blast",
 					"objectName": "JayceToTheSkies",
+					"dataKey": "Characters/Jayce/Spells/JayceToTheSkiesAbility/JayceToTheSkies",
 					"image": "assets/characters/jayce/hud/icons2d/jayceq_melee.png",
 					"tooltip": "<keywordMajor>Mercury Hammer:</keywordMajor> Jayce leaps to an enemy, dealing <physicalDamage>@spell.JayceToTheSkies:Damage@ physical damage</physicalDamage> to surrounding enemies and <status>Slowing</status> them by @spell.JayceToTheSkies:Slow*-100@% for @spell.JayceToTheSkies:SlowDuration@ seconds.",
 					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
@@ -69,12 +70,12 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Jayce/Spells/JayceToTheSkiesAbility/JayceToTheSkies"
+					}
 				},
 				{
 					"name": "Shock Blast",
 					"objectName": "JayceShockBlast",
+					"dataKey": "Characters/Jayce/Spells/JayceShockBlastAbility/JayceShockBlast",
 					"image": "assets/characters/jayce/hud/icons2d/jayceq_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Cannon</keywordMajor>: Jayce fires an orb of electricity, dealing <physicalDamage>@spell.JayceShockBlast:Damage@ physical damage</physicalDamage> to the first enemy hit and all surrounding enemies. Firing this orb through <spellName>{{Spell_JayceAccelerationGate_Name}}</spellName> increases the range, speed and raises the damage to <physicalDamage>@spell.JayceShockBlast:EmpoweredDamage@</physicalDamage>.",
 					"tooltipExtended": "{{Spell_JayceShockBlast_Tooltip}}<br><br>{{Spell_JayceToTheSkies_Tooltip}}",
@@ -120,8 +121,7 @@
 					},
 					"effectAmount": {
 						"0": [10, 25, 40, 55, 70, 85, 100]
-					},
-					"dataKey": "Characters/Jayce/Spells/JayceShockBlastAbility/JayceShockBlast"
+					}
 				}
 			]
 		},
@@ -131,6 +131,7 @@
 				{
 					"name": "Lightning Field / Hyper Charge",
 					"objectName": "JayceStaticField",
+					"dataKey": "Characters/Jayce/Spells/JayceStaticFieldAbility/JayceStaticField",
 					"image": "assets/characters/jayce/hud/icons2d/jaycew_melee.png",
 					"tooltip": "<keywordMajor>Mercury Hammer - Passive:</keywordMajor> Jayce's <keywordMajor>Hammer</keywordMajor> Attacks grant <scaleMana>@spell.JayceStaticField:ManaGain@ Mana</scaleMana>.<br><br><keywordMajor>Mercury Hammer - Active:</keywordMajor> Jayce creates an electric aura dealing <magicDamage>@spell.JayceStaticField:Damage@ magic damage</magicDamage> over @spell.JayceStaticField:Duration@ seconds.",
 					"tooltipExtended": "{{Spell_JayceStaticField_Tooltip}}<br><br>{{Spell_JayceHyperCharge_Tooltip}}",
@@ -163,12 +164,12 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Jayce/Spells/JayceStaticFieldAbility/JayceStaticField"
+					}
 				},
 				{
 					"name": "Hyper Charge",
 					"objectName": "JayceHyperCharge",
+					"dataKey": "Characters/Jayce/Spells/JayceHyperChargeAbility/JayceHyperCharge",
 					"image": "assets/characters/jayce/hud/icons2d/jaycew_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Cannon:</keywordMajor> Jayce overcharges his cannon, gaining maximum <attackSpeed>Attack Speed</attackSpeed> for his next @spell.JayceHyperCharge:NumAttacks@ Attacks. These Attacks deal <physicalDamage>@spell.JayceHyperCharge:ActualDamage@ physical damage</physicalDamage>.",
 					"tooltipExtended": "{{Spell_JayceHyperCharge_Tooltip}}<br><br>{{Spell_JayceStaticField_Tooltip}}",
@@ -202,8 +203,7 @@
 						"1": [0, 0, 25, 50, 75, 100, 125],
 						"2": [15, 20, 25, 30, 35, 40, 45],
 						"3": [0.62, 0.7, 0.78, 0.86, 0.94, 1.02, 1.1]
-					},
-					"dataKey": "Characters/Jayce/Spells/JayceHyperChargeAbility/JayceHyperCharge"
+					}
 				}
 			]
 		},
@@ -213,6 +213,7 @@
 				{
 					"name": "Thundering Blow / Acceleration Gate",
 					"objectName": "JayceThunderingBlow",
+					"dataKey": "Characters/Jayce/Spells/JayceThunderingBlowAbility/JayceThunderingBlow",
 					"image": "assets/characters/jayce/hud/icons2d/jaycee_melee.png",
 					"tooltip": "<keywordMajor>Hammer Form</keywordMajor>: Jayce swings his hammer, <status>Knocking Back</status> his target and dealing <magicDamage>@spell.JayceThunderingBlow:FlatDamage@ plus @spell.JayceThunderingBlow:PercHPDamage*100@% max Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_JayceThunderingBlow_Tooltip}}<br><br>{{Spell_JayceAccelerationGate_Tooltip}}",
@@ -245,12 +246,12 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Jayce/Spells/JayceThunderingBlowAbility/JayceThunderingBlow"
+					}
 				},
 				{
 					"name": "Acceleration Gate",
 					"objectName": "JayceAccelerationGate",
+					"dataKey": "Characters/Jayce/Spells/JayceAccelerationGateAbility/JayceAccelerationGate",
 					"image": "assets/characters/jayce/hud/icons2d/jaycee_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Cannon</keywordMajor>: Jayce deploys an acceleration gate for @spell.JayceAccelerationGate:Duration@ seconds that grants <speed>@spell.JayceAccelerationGate:MovementSpeed*100@% Move Speed</speed> decaying over @spell.JayceAccelerationGate:HasteDuration@ seconds to allied champions that pass through it.",
 					"tooltipExtended": "{{Spell_JayceAccelerationGate_Tooltip}}<br><br>{{Spell_JayceThunderingBlow_Tooltip}}",
@@ -276,8 +277,7 @@
 						"2": [33, 33, 33, 33, 33, 33, 33],
 						"3": [40, 40, 40, 40, 40, 40, 40],
 						"4": [3, 3, 3, 3, 3, 3, 3]
-					},
-					"dataKey": "Characters/Jayce/Spells/JayceAccelerationGateAbility/JayceAccelerationGate"
+					}
 				}
 			]
 		},
@@ -287,6 +287,7 @@
 				{
 					"name": "Mercury Cannon / Mercury Hammer",
 					"objectName": "JayceStanceHtG",
+					"dataKey": "Characters/Jayce/Spells/JayceStanceHtGAbility/JayceStanceHtG",
 					"image": "assets/characters/jayce/hud/icons2d/jaycer_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Hammer</keywordMajor>: Jayce transforms his weapon into the <keywordMajor>Mercury Cannon</keywordMajor>, gaining Attack Range and new Abilities. Jayce's next Attack removes <scaleArmor>@spell.JayceStanceHtG:RangedFormShred@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @spell.JayceStanceHtG:ShredDuration@ seconds.",
 					"tooltipExtended": "{{Spell_JayceStanceHtG_Tooltip}}<br><br>{{Spell_JayceStanceGtH_Tooltip}}",
@@ -376,17 +377,16 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Jayce/Spells/JayceStanceHtGAbility/JayceStanceHtG"
+					}
 				},
 				{
 					"name": "Mercury Hammer / Mercury Cannon",
 					"objectName": "JayceStanceGtH",
+					"dataKey": "Characters/Jayce/Spells/JayceStanceHtGAbility/JayceStanceGtH",
 					"image": "assets/characters/jayce/hud/icons2d/jaycer_melee.png",
 					"tooltip": "<keywordMajor>Mercury Cannon:</keywordMajor> Jayce transforms his weapon into the <keywordMajor>Mercury Hammer</keywordMajor>, becoming melee ranged and gaining new Abilities and <scaleArmor>@spell.JayceStanceHtG:Resists@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. Jayce's next Attack deals an additional <magicDamage>@spell.JayceStanceHtG:Damage@ magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_JayceStanceGtH_Tooltip}}<br><br>{{Spell_JayceStanceHtG_Tooltip}}",
-					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
-					"dataKey": "Characters/Jayce/Spells/JayceStanceHtGAbility/JayceStanceGtH"
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6]
 				}
 			]
 		},
@@ -396,14 +396,14 @@
 				{
 					"name": "Hextech Capacitor",
 					"objectName": "JaycePassive",
+					"dataKey": "Characters/Jayce/Spells/JaycePassiveAbility/JaycePassive",
 					"image": "assets/characters/jayce/hud/icons2d/jaycep_melee.png",
 					"tooltip": "Jayce can swap between melee and ranged weapons using <spellName>Mercury Cannon / Mercury Hammer</spellName> starting from level 1. Swapping weapons also swaps all his Abilities and grants him <speed>@FlatMovementSpeed@ Move Speed</speed> for @MovementSpeedDuration@ seconds.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"FlatMovementSpeed": [40, 40, 40, 40, 40, 40, 40],
 						"MovementSpeedDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
-					},
-					"dataKey": "Characters/Jayce/Spells/JaycePassiveAbility/JaycePassive"
+					}
 				}
 			]
 		}

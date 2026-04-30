@@ -33,6 +33,7 @@
 				{
 					"name": "The Darkin Glaive",
 					"objectName": "ZaahenQ",
+					"dataKey": "Characters/Zaahen/Spells/ZaahenQAbility/ZaahenQ",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenq.png",
 					"tooltip": "Zaahen slashes twice on his next Attack, dealing <physicalDamage>@InitialDamage@ bonus physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of his max Health</healing>.<br><br><recast>Recast:</recast> Zaahen's next Attack deals <physicalDamage>@SecondHitDamage@ bonus physical damage</physicalDamage> and <status>Knocks</status> the target Up for @KnockUpDuration@ seconds.",
 					"extendedVariables": [
@@ -96,8 +97,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Zaahen/Spells/ZaahenQAbility/ZaahenQ"
+					}
 				}
 			]
 		},
@@ -107,6 +107,7 @@
 				{
 					"name": "Dreaded Return",
 					"objectName": "ZaahenW",
+					"dataKey": "Characters/Zaahen/Spells/ZaahenWAbility/ZaahenW",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenw.png",
 					"tooltip": "Zaahen stabs in a direction, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to enemies hit, then <status>Pulls</status> them toward him, dealing <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
@@ -156,8 +157,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Zaahen/Spells/ZaahenWAbility/ZaahenW"
+					}
 				}
 			]
 		},
@@ -167,6 +167,7 @@
 				{
 					"name": "Aureate Rush",
 					"objectName": "ZaahenE",
+					"dataKey": "Characters/Zaahen/Spells/ZaahenEAbility/ZaahenE",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahene.png",
 					"tooltip": "Zaahen dashes then slices around himself, dealing <physicalDamage>@BaseDamageCalc@ physical damage</physicalDamage> to nearby enemies.<br><br>Enemies at the edge of the slice take <physicalDamage>@BonusDamageCalc@ physical damage</physicalDamage> <magicDamage>+@PercentHPDamage*100@% of their maximum Health as magic damage</magicDamage> instead.",
 					"extendedVariables": [
@@ -218,8 +219,7 @@
 							},
 							"mModifiedGameCalculation": "BaseDamageCalc"
 						}
-					},
-					"dataKey": "Characters/Zaahen/Spells/ZaahenEAbility/ZaahenE"
+					}
 				}
 			]
 		},
@@ -229,6 +229,7 @@
 				{
 					"name": "Grim Deliverance",
 					"objectName": "ZaahenR",
+					"dataKey": "Characters/Zaahen/Spells/ZaahenRAbility/ZaahenR",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenr.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: Zaahen gains <armorPen>@ArmorPen*100@% %i:scaleAPen% Armor Penetration</armorPen>.<br><br><spellActive>Active</spellActive>: Zaahen rises, gaining @DamageReduction*100@% Damage Reduction while casting.<br><br>Zaahen then stabs downward, dealing <physicalDamage>@DamageEndCalc@ physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of the damage dealt to enemy champions as Health</healing>.",
 					"extendedVariables": [
@@ -269,8 +270,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Zaahen/Spells/ZaahenRAbility/ZaahenR"
+					}
 				}
 			]
 		},
@@ -280,6 +280,7 @@
 				{
 					"name": "Cultivation of War",
 					"objectName": "ZaahenPassive",
+					"dataKey": "{4c6e6c43}",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenp.png",
 					"tooltip": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.",
 					"tooltipExtended": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.<br><br><rules>{{Reminder_Stasis}}</rules>",
@@ -358,8 +359,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
 						}
-					},
-					"dataKey": "{4c6e6c43}"
+					}
 				}
 			]
 		}

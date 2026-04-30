@@ -33,6 +33,7 @@
 				{
 					"name": "Hate Spike",
 					"objectName": "EvelynnQ",
+					"dataKey": "Characters/Evelynn/Spells/EvelynnQAbility/EvelynnQ",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_q1.png",
 					"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit.",
 					"extendedVariables": [
@@ -95,8 +96,7 @@
 						"7": [50, 50, 50, 50, 50, 50, 50],
 						"8": [4, 4, 4, 4, 4, 4, 4],
 						"9": [-0.25, -0.25, -0.25, -0.25, -0.25, -0.25, -0.25]
-					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnQAbility/EvelynnQ"
+					}
 				}
 			]
 		},
@@ -106,6 +106,7 @@
 				{
 					"name": "Allure",
 					"objectName": "EvelynnW",
+					"dataKey": "Characters/Evelynn/Spells/EvelynnWAbility/EvelynnW",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_w.png",
 					"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -165,8 +166,7 @@
 						"7": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"8": [0.325, 0.35, 0.375, 0.4, 0.425, 0.45, 0.475],
 						"9": [4, 4, 4, 4, 4, 4, 4]
-					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnWAbility/EvelynnW"
+					}
 				}
 			]
 		},
@@ -176,6 +176,7 @@
 				{
 					"name": "Whiplash",
 					"objectName": "EvelynnE",
+					"dataKey": "Characters/Evelynn/Spells/EvelynnEAbility/EvelynnE",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_e1.png",
 					"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead.",
 					"extendedVariables": [
@@ -253,8 +254,7 @@
 						"7": [0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05],
 						"8": [2, 2, 2, 2, 2, 2, 2],
 						"9": [1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55]
-					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnEAbility/EvelynnE"
+					}
 				}
 			]
 		},
@@ -264,6 +264,7 @@
 				{
 					"name": "Last Caress",
 					"objectName": "EvelynnR",
+					"dataKey": "Characters/Evelynn/Spells/EvelynnRAbility/EvelynnR",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_r.png",
 					"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown.",
 					"extendedVariables": [
@@ -312,8 +313,7 @@
 						"6": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"7": [700, 700, 700, 700, 700, 700, 700],
 						"8": [30, 30, 45, 60, 60, 60, 60]
-					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnRAbility/EvelynnR"
+					}
 				}
 			]
 		},
@@ -323,6 +323,7 @@
 				{
 					"name": "Demon Shade",
 					"objectName": "EvelynnPassive",
+					"dataKey": "Characters/Evelynn/Spells/EvelynnPassiveAbility/EvelynnPassive",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_passive.png",
 					"tooltip": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not Attacking or using Abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or towers removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.",
 					"tooltipExtended": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not attacking or using abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or turrets removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.<br><br><rules><keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.</rules>",
@@ -355,8 +356,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnPassiveAbility/EvelynnPassive"
+					}
 				}
 			]
 		}

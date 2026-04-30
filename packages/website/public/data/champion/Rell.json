@@ -33,6 +33,7 @@
 				{
 					"name": "Shattering Strike",
 					"objectName": "RellQ",
+					"dataKey": "Characters/Rell/Spells/RellQAbility/RellQ",
 					"image": "assets/characters/rell/hud/icons2d/rellq.png",
 					"tooltip": "Rell thrusts her lance, <status>Stunning</status> targets for @StunDuration@ seconds, destroying all <shield>Shields</shield>, and dealing <magicDamage>@Damage@ magic damage.</magicDamage>",
 					"extendedVariables": [
@@ -60,8 +61,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rell/Spells/RellQAbility/RellQ"
+					}
 				}
 			]
 		},
@@ -71,6 +71,7 @@
 				{
 					"name": "Ferromancy: Crash Down",
 					"objectName": "RellW_Dismount",
+					"dataKey": "Characters/Rell/Spells/RellW_DismountAbility/RellW_Dismount",
 					"image": "assets/characters/rell/hud/icons2d/rellw.png",
 					"tooltip": "<spellPassive>Passive - Mounted Alacrity:</spellPassive> Rell gains <speed>@spell.RellW_Dismount:MountedMoveSpeed@ Move Speed</speed> while mounted.<br><br><spellActive>Active - {{Spell_RellW_Dismount_Name}}:</spellActive> Rell leaps off her mount, <status>Knocking Up</status> enemies and dealing <magicDamage>@spell.RellW_Dismount:DismountDamage@ magic damage</magicDamage>. Rell gains <shield>@spell.RellW_Dismount:Shield@ Shield</shield>, which lasts until she remounts.<br><br>Rell then enters her armored form, gaining <scaleArmor>@spell.RellW_Dismount:ResistanceIncrease*100@% increased Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, <attackSpeed>@spell.RellW_Dismount:DismountedASBoost*100@% Attack Speed</attackSpeed> and @spell.RellW_Dismount:DismountedRangeBoost@ Attack Range. In this armored form, she can use <spellName>{{Spell_RellW_MountUp_Name2}}</spellName>.",
 					"tooltipExtended": "{{Spell_RellW_Dismount_Tooltip}}<br><br><spellActive>Active - {{Spell_RellW_MountUp_Name2}}:</spellActive> Rell mounts up and briefly gains <speed>@spell.RellW_Dismount:MountUpSpeed*100@% Decaying Move Speed</speed>. Her next Attack within @spell.RellW_Dismount:MountUpSpeedDuration@ seconds <status>Knocks Up</status> and throws enemies behind her, dealing an additional <magicDamage>@spell.RellW_Dismount:FlipDamage@ magic damage</magicDamage>.",
@@ -164,8 +165,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rell/Spells/RellW_DismountAbility/RellW_Dismount"
+					}
 				}
 			]
 		},
@@ -175,6 +175,7 @@
 				{
 					"name": "Full Tilt",
 					"objectName": "RellE",
+					"dataKey": "Characters/Rell/Spells/RellEAbility/RellE",
 					"image": "assets/characters/rell/hud/icons2d/relle.png",
 					"tooltip": "Rell and an ally charge, gaining <speed>@MinMS*100@% Move Speed</speed>, increased to <speed>@MaxMS*100@%</speed> when facing enemy champions or each other for @Duration@ seconds. Rell's next Attack or <spellName>{{Spell_RellQ_Name}}</spellName> explodes in an area for <magicDamage>@MaxHealthDamageCalc@ max Health magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -220,8 +221,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rell/Spells/RellEAbility/RellE"
+					}
 				}
 			]
 		},
@@ -231,6 +231,7 @@
 				{
 					"name": "Magnet Storm",
 					"objectName": "RellR",
+					"dataKey": "Characters/Rell/Spells/RellRAbility/RellR",
 					"image": "assets/characters/rell/hud/icons2d/rellr.png",
 					"tooltip": "Rell explodes in a magnetic fury, violently <status>Pulling</status> nearby enemies towards herself. Then Rell constantly <status>Drags</status> nearby enemies towards herself and deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over the next @Duration@ seconds.",
 					"extendedVariables": [
@@ -269,8 +270,7 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "DamagePerSecond"
 						}
-					},
-					"dataKey": "Characters/Rell/Spells/RellRAbility/RellR"
+					}
 				}
 			]
 		},
@@ -280,6 +280,7 @@
 				{
 					"name": "Break the Mold",
 					"objectName": "RellP",
+					"dataKey": "Characters/Rell/Spells/RellPAbility/RellP",
 					"image": "assets/characters/rell/hud/icons2d/rellp.png",
 					"tooltip": "{{Spell_RellP_Tooltip}}",
 					"tooltipExtended": "{{Spell_RellP_Tooltip}}<br><br><rules>Always steals at least @StealFloor@. Does not steal from minions or Epic jungle monsters.</rules>",
@@ -316,8 +317,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Rell/Spells/RellPAbility/RellP"
+					}
 				}
 			]
 		}

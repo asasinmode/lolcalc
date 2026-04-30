@@ -33,6 +33,7 @@
 				{
 					"name": "Blinding Dart",
 					"objectName": "TeemoQ",
+					"dataKey": "Characters/Teemo/Spells/TeemoQAbility/TeemoQ",
 					"image": "assets/characters/teemo/hud/icons2d/teemoq.png",
 					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -81,8 +82,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Teemo/Spells/TeemoQAbility/TeemoQ"
+					}
 				}
 			]
 		},
@@ -92,6 +92,7 @@
 				{
 					"name": "Move Quick",
 					"objectName": "TeemoW",
+					"dataKey": "Characters/Teemo/Spells/TeemoWAbility/TeemoW",
 					"image": "assets/characters/teemo/hud/icons2d/teemow.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
 					"extendedVariables": [
@@ -111,8 +112,7 @@
 						"ActiveMoveSpeedBuffDuration": [3, 3, 3, 3, 3, 3, 3],
 						"ActiveMoveSpeedBonus": [0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64],
 						"PassiveCooldownOnDamageTaken": [5, 5, 5, 5, 5, 5, 5]
-					},
-					"dataKey": "Characters/Teemo/Spells/TeemoWAbility/TeemoW"
+					}
 				}
 			]
 		},
@@ -122,6 +122,7 @@
 				{
 					"name": "Toxic Shot",
 					"objectName": "TeemoE",
+					"dataKey": "Characters/Teemo/Spells/TeemoEAbility/TeemoE",
 					"image": "assets/characters/teemo/hud/icons2d/teemoe.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison %i:OnHit% <OnHit>On-Hit</OnHit>, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
 					"extendedVariables": [
@@ -203,8 +204,7 @@
 							},
 							"mModifiedGameCalculation": "TickCalculatedDamage"
 						}
-					},
-					"dataKey": "Characters/Teemo/Spells/TeemoEAbility/TeemoE"
+					}
 				}
 			]
 		},
@@ -214,6 +214,7 @@
 				{
 					"name": "Noxious Trap",
 					"objectName": "TeemoR",
+					"dataKey": "Characters/Teemo/Spells/TeemoRAbility/TeemoR",
 					"image": "assets/characters/teemo/hud/icons2d/teemor.png",
 					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).",
 					"extendedVariables": [
@@ -272,8 +273,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Teemo/Spells/TeemoRAbility/TeemoR"
+					}
 				}
 			]
 		},
@@ -283,6 +283,7 @@
 				{
 					"name": "Guerrilla Warfare",
 					"objectName": "TeemoPassive",
+					"dataKey": "{5a629d30}",
 					"image": "assets/characters/teemo/hud/icons2d/teemopassive.png",
 					"tooltip": "{{Buff_TeemoPassive_Tooltip}}",
 					"tooltipExtended": "{{Buff_TeemoPassive_Tooltip}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
@@ -314,8 +315,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "{5a629d30}"
+					}
 				}
 			]
 		}

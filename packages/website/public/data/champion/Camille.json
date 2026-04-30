@@ -33,6 +33,7 @@
 				{
 					"name": "Precision Protocol",
 					"objectName": "CamilleQ",
+					"dataKey": "Characters/Camille/Spells/CamilleQAbility/CamilleQ",
 					"image": "assets/characters/camille/hud/icons2d/camille_q1.png",
 					"tooltip": "Camille's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and grants her <speed>@MSBonus*100@% Move Speed</speed> for @MSDuration@ second. This ability can be <recast>Recast</recast> in the next @QTotalRecastTime@ seconds.<br><br>If the <recast>Recast</recast> Attack hits at least @QRampUpTime@ seconds after the first, the bonus damage is increased to <physicalDamage>@EmpoweredBonusDamage@</physicalDamage> and @DamageConversionPercentage@ of the Attack's damage is converted into <trueDamage>true damage</trueDamage>.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"extendedVariables": [
@@ -88,8 +89,7 @@
 							},
 							"mModifiedGameCalculation": "BonusDamage"
 						}
-					},
-					"dataKey": "Characters/Camille/Spells/CamilleQAbility/CamilleQ"
+					}
 				}
 			]
 		},
@@ -99,6 +99,7 @@
 				{
 					"name": "Tactical Sweep",
 					"objectName": "CamilleW",
+					"dataKey": "Characters/Camille/Spells/CamilleWAbility/CamilleW",
 					"image": "assets/characters/camille/hud/icons2d/camille_w.png",
 					"tooltip": "Camille winds up and slices, dealing <physicalDamage>@BaseDamageTotal@ physical damage</physicalDamage>.<br><br>Enemies hit by the outer half are <status>Slowed</status> by @SlowPercentage@% decaying over @SlowDuration@ seconds, and they take an additional <physicalDamage>@OuterEdgeTooltip@ max Health physical damage</physicalDamage>. Camille restores <healing>@OuterConeHealingRatio@% of the bonus damage dealt to champions as Health</healing>.",
 					"extendedVariables": [
@@ -169,8 +170,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Camille/Spells/CamilleWAbility/CamilleW"
+					}
 				}
 			]
 		},
@@ -180,6 +180,7 @@
 				{
 					"name": "Hookshot",
 					"objectName": "CamilleE",
+					"dataKey": "Characters/Camille/Spells/CamilleEAbility/CamilleE",
 					"image": "assets/characters/camille/hud/icons2d/camille_e.png",
 					"tooltip": "Camille fires a hookshot that attaches to terrain, pulling her to it for 1 second and allowing this Ability to be <recast>Recast</recast>.<br><br><recast>Recast:</recast> Camille dashes from the wall, colliding with the first enemy champion hit. Upon landing, she gains <attackSpeed>@ASBuff*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds, deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to nearby enemies, and <status>Stuns</status> enemy champions for @KnockupDuration@ seconds. Dashes towards enemy champions travel twice as far.",
 					"extendedVariables": [
@@ -222,8 +223,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Camille/Spells/CamilleEAbility/CamilleE"
+					}
 				}
 			]
 		},
@@ -233,6 +233,7 @@
 				{
 					"name": "The Hextech Ultimatum",
 					"objectName": "CamilleR",
+					"dataKey": "Characters/Camille/Spells/CamilleRAbility/CamilleR",
 					"image": "assets/characters/camille/hud/icons2d/camille_r.png",
 					"tooltip": "Camille briefly becomes Untargetable and leaps onto an enemy champion, interrupting channels and locking them into an area they cannot escape by any means for @RDuration@ seconds. Other nearby enemies are <status>Knocked Away</status>. Her Attacks against the trapped enemy deal an additional <magicDamage>@RPercentCurrentHPDamage@% current Health magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -251,8 +252,7 @@
 						"RPercentCurrentHPDamage": [2, 4, 6, 8, 10, 12, 14],
 						"RDuration": [1.75, 2.5, 3.25, 4, 4.75, 5.5, 6.25],
 						"RCircleRadius": [425, 425, 425, 425, 425, 425, 425]
-					},
-					"dataKey": "Characters/Camille/Spells/CamilleRAbility/CamilleR"
+					}
 				}
 			]
 		},
@@ -262,6 +262,7 @@
 				{
 					"name": "Adaptive Defenses",
 					"objectName": "CamillePassive",
+					"dataKey": "Characters/Camille/Spells/CamillePassiveAbility/CamillePassive",
 					"image": "assets/characters/camille/hud/icons2d/camille_passive.png",
 					"tooltip": "Camille's Attacks on champions grant <shield>@ShieldAmount@ Shield</shield> against their damage type (<physicalDamage>Physical</physicalDamage> or <magicDamage>Magic</magicDamage>) for @ShieldDuration@ seconds. This effect has a @PassiveCooldown@ second Cooldown.",
 					"dataValues": {
@@ -301,8 +302,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Camille/Spells/CamillePassiveAbility/CamillePassive"
+					}
 				}
 			]
 		}

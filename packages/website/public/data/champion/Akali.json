@@ -33,6 +33,7 @@
 				{
 					"name": "Five Point Strike",
 					"objectName": "AkaliQ",
+					"dataKey": "Characters/Akali/Spells/AkaliQAbility/AkaliQ",
 					"image": "assets/characters/akali/hud/icons2d/akali_q.png",
 					"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds.",
 					"extendedVariables": [
@@ -82,8 +83,7 @@
 							"mOverrideSpellLevel": 5,
 							"mModifiedGameCalculation": "Damage"
 						}
-					},
-					"dataKey": "Characters/Akali/Spells/AkaliQAbility/AkaliQ"
+					}
 				}
 			]
 		},
@@ -93,6 +93,7 @@
 				{
 					"name": "Twilight Shroud",
 					"objectName": "AkaliW",
+					"dataKey": "Characters/Akali/Spells/AkaliWAbility/AkaliW",
 					"image": "assets/characters/akali/hud/icons2d/akali_w.png",
 					"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
 					"extendedVariables": [
@@ -151,8 +152,7 @@
 						"5": [0.2, 0.3, 0.35, 0.4, 0.45, 0.5, 0.45],
 						"6": [1, 1, 1, 1, 1, 1, 1],
 						"8": [5, 5, 5.5, 6, 6.5, 7, 7.5]
-					},
-					"dataKey": "Characters/Akali/Spells/AkaliWAbility/AkaliW"
+					}
 				}
 			]
 		},
@@ -162,6 +162,7 @@
 				{
 					"name": "Shuriken Flip",
 					"objectName": "AkaliE",
+					"dataKey": "Characters/Akali/Spells/AkaliEAbility/AkaliE",
 					"image": "assets/characters/akali/hud/icons2d/akali_e.png",
 					"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -223,8 +224,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Akali/Spells/AkaliEAbility/AkaliE"
+					}
 				}
 			]
 		},
@@ -234,6 +234,7 @@
 				{
 					"name": "Perfect Execution",
 					"objectName": "AkaliR",
+					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliR",
 					"image": "assets/characters/akali/hud/icons2d/akali_r.png",
 					"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health.",
 					"extendedVariables": [
@@ -304,8 +305,7 @@
 					},
 					"effectAmount": {
 						"2": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliR"
+					}
 				}
 			]
 		},
@@ -315,6 +315,7 @@
 				{
 					"name": "Assassin's Mark",
 					"objectName": "AkaliP",
+					"dataKey": "Characters/Akali/Spells/AkaliPAbility/AkaliP",
 					"image": "assets/characters/akali/hud/icons2d/akali_p.png",
 					"tooltip": "{{Spell_AkaliP_Tooltip}}",
 					"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>",
@@ -401,8 +402,7 @@
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"5": [8, 8, 13, 8, 8, 8, 8],
 						"6": [10, 10, 10, 10, 10, 10, 10]
-					},
-					"dataKey": "Characters/Akali/Spells/AkaliPAbility/AkaliP"
+					}
 				}
 			]
 		}

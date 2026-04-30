@@ -33,6 +33,7 @@
 				{
 					"name": "Obliterate",
 					"objectName": "MordekaiserQ",
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserQAbility/MordekaiserQ",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserq.png",
 					"tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>@QDamage@ magic damage</magicDamage>, increased to <magicDamage>@EmpoweredDamageTooltip@</magicDamage> if it hits only a single enemy.",
 					"extendedVariables": [
@@ -92,8 +93,7 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mModifiedGameCalculation": "QDamage"
 						}
-					},
-					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserQAbility/MordekaiserQ"
+					}
 				}
 			]
 		},
@@ -103,6 +103,7 @@
 				{
 					"name": "Indestructible",
 					"objectName": "MordekaiserW",
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserWAbility/MordekaiserW",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png",
 					"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>",
 					"extendedVariables": [
@@ -154,8 +155,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserWAbility/MordekaiserW"
+					}
 				}
 			]
 		},
@@ -165,6 +165,7 @@
 				{
 					"name": "Death's Grasp",
 					"objectName": "MordekaiserE",
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserEAbility/MordekaiserE",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
 					"tooltip": "<spellActive>Active:</spellActive> Pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
 					"extendedVariables": [
@@ -200,8 +201,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserEAbility/MordekaiserE"
+					}
 				}
 			]
 		},
@@ -211,6 +211,7 @@
 				{
 					"name": "Realm of Death",
 					"objectName": "MordekaiserR",
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserRAbility/MordekaiserR",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png",
 					"tooltip": "Mordekaiser banishes a champion to the Death Realm with him for @SpiritRealmDuration@s, stealing @StatStealPercentScalar*100@% of their core stats for the duration.<br><br>If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns.",
 					"extendedVariables": [],
@@ -220,8 +221,7 @@
 						"StatStealPercentScalar": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"ZoneRadius": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
 						"GhostAPRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
-					},
-					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserRAbility/MordekaiserR"
+					}
 				}
 			]
 		},
@@ -231,6 +231,7 @@
 				{
 					"name": "Darkness Rise",
 					"objectName": "MordekaiserPassive",
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserPassiveAbility/MordekaiserPassive",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
 					"tooltip": "{{Spell_MordekaiserPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>",
@@ -319,8 +320,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserPassiveAbility/MordekaiserPassive"
+					}
 				}
 			]
 		}

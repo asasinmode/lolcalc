@@ -33,6 +33,7 @@
 				{
 					"name": "Twofold Hex",
 					"objectName": "AuroraQ",
+					"dataKey": "Characters/Aurora/Spells/AuroraQAbility/AuroraQ",
 					"image": "assets/characters/aurora/hud/icons2d/auroraq.png",
 					"tooltip": "Fire cursed energy in a direction, dealing <magicDamage>@damage@ magic damage</magicDamage> to enemies and cursing them for @MarkDuration@ seconds.<br><br><recast>Recast:</recast> End the curse, drawing back part of the enemy's spirit to Aurora, dealing up to <magicDamage>@Q2DamageMax@ magic damage</magicDamage> to enemies passed through based on their missing Health. Damage beyond the first hit is reduced to 20%.<br><br>If the duration runs out, Aurora will automatically <recast>Recast</recast> the Ability.",
 					"extendedVariables": [
@@ -93,8 +94,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Aurora/Spells/AuroraQAbility/AuroraQ"
+					}
 				}
 			]
 		},
@@ -104,6 +104,7 @@
 				{
 					"name": "Across the Veil",
 					"objectName": "AuroraW",
+					"dataKey": "Characters/Aurora/Spells/AuroraWAbility/AuroraW",
 					"image": "assets/characters/aurora/hud/icons2d/auroraw.png",
 					"tooltip": "Hop in a direction. Upon landing, enter the spirit realm, becoming <keywordStealth>Invisible</keywordStealth> for @InvisDuration@ seconds and entering <keywordMajor>Realm Hopper</keywordMajor>, gaining <speed>@MoveSpeedBonus@% Move Speed</speed>.<br><br>Scoring a takedown on an enemy champion resets this Ability's Cooldown.",
 					"extendedVariables": [
@@ -124,8 +125,7 @@
 						"JumpDistance": [300, 300, 300, 300, 300, 300, 300],
 						"WallCheatDistance": [450, 450, 450, 450, 450, 450, 450],
 						"MoveSpeedBonus": [15, 20, 25, 30, 35, 40, 45]
-					},
-					"dataKey": "Characters/Aurora/Spells/AuroraWAbility/AuroraW"
+					}
 				}
 			]
 		},
@@ -135,6 +135,7 @@
 				{
 					"name": "The Weirding",
 					"objectName": "AuroraE",
+					"dataKey": "Characters/Aurora/Spells/AuroraEAbility/AuroraE",
 					"image": "assets/characters/aurora/hud/icons2d/aurorae.png",
 					"tooltip": "Converge the realms, sending out a blast of spirit magic dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slowing</status> them by @SlowPercent*-100@% decaying over @SlowDuration@ second.<br><br>Aurora hops backwards a short distance after casting.",
 					"extendedVariables": [
@@ -167,8 +168,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Aurora/Spells/AuroraEAbility/AuroraE"
+					}
 				}
 			]
 		},
@@ -178,6 +178,7 @@
 				{
 					"name": "Between Worlds",
 					"objectName": "AuroraR",
+					"dataKey": "Characters/Aurora/Spells/AuroraRAbility/AuroraR",
 					"image": "assets/characters/aurora/hud/icons2d/aurorar.png",
 					"tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Slows</status> enemies hit by @SlowPercent*-100@% for 2 seconds.<br><br>The area of convergence stays active for @AreaDuration@ seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> for @RBuffDuration@ seconds, allowing her to jump from one edge of the area to another.<br><br>Enemies attempting to enter or leave the area are <status>Slowed</status> by @ExitSlowPercent*-100@% for @StunDuration@ seconds.<br><br>Aurora can <recast>Recast</recast> this Ability to end the effect early.",
 					"extendedVariables": [
@@ -218,8 +219,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Aurora/Spells/AuroraRAbility/AuroraR"
+					}
 				}
 			]
 		},
@@ -229,6 +229,7 @@
 				{
 					"name": "Spirit Abjuration",
 					"objectName": "AuroraPassive",
+					"dataKey": "{55fe4142}",
 					"image": "assets/characters/aurora/hud/icons2d/aurorapassive.png",
 					"tooltip": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.",
 					"tooltipExtended": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.<br><br><rules>Max health magic damage is capped at 100-270 against Monsters, based on Aurora's level.</rules>",
@@ -335,8 +336,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "{55fe4142}"
+					}
 				}
 			]
 		}

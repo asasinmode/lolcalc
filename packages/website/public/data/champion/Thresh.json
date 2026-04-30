@@ -33,6 +33,7 @@
 				{
 					"name": "Death Sentence",
 					"objectName": "ThreshQ",
+					"dataKey": "Characters/Thresh/Spells/ThreshQAbility/ThreshQ",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
 					"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds.",
 					"extendedVariables": [
@@ -70,8 +71,7 @@
 						"1": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"2": [75, 75, 75, 75, 75, 75, 75],
 						"3": [12, 12, 12, 12, 12, 12, 12]
-					},
-					"dataKey": "Characters/Thresh/Spells/ThreshQAbility/ThreshQ"
+					}
 				}
 			]
 		},
@@ -81,6 +81,7 @@
 				{
 					"name": "Dark Passage",
 					"objectName": "ThreshW",
+					"dataKey": "Characters/Thresh/Spells/ThreshWAbility/ThreshW",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
 					"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it.",
 					"extendedVariables": [
@@ -121,8 +122,7 @@
 						"1": [2, 2, 2, 2, 2, 2, 2],
 						"3": [6, 6, 6, 6, 6, 6, 6],
 						"4": [4, 4, 4, 4, 4, 4, 4]
-					},
-					"dataKey": "Characters/Thresh/Spells/ThreshWAbility/ThreshW"
+					}
 				}
 			]
 		},
@@ -132,6 +132,7 @@
 				{
 					"name": "Flay",
 					"objectName": "ThreshE",
+					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshE",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -206,8 +207,7 @@
 						"3": [1, 1, 1, 1, 1, 1, 1],
 						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"5": [1.7, 1.7, 1.7, 1.7, 1.7, 1.7, 1.7]
-					},
-					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshE"
+					}
 				}
 			]
 		},
@@ -217,6 +217,7 @@
 				{
 					"name": "The Box",
 					"objectName": "ThreshRPenta",
+					"dataKey": "Characters/Thresh/Spells/ThreshRPentaAbility/ThreshRPenta",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
 					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
 					"extendedVariables": [
@@ -253,8 +254,7 @@
 						"1": [2, 2, 2, 2, 2, 2, 2],
 						"2": [99, 99, 99, 99, 99, 99, 99],
 						"3": [4, 4, 4, 4, 4, 4, 4]
-					},
-					"dataKey": "Characters/Thresh/Spells/ThreshRPentaAbility/ThreshRPenta"
+					}
 				}
 			]
 		},
@@ -264,6 +264,7 @@
 				{
 					"name": "Damnation",
 					"objectName": "ThreshPassiveSouls",
+					"dataKey": "Characters/Thresh/Spells/ThreshPassiveSoulsAbility/ThreshPassiveSouls",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_passive.png",
 					"tooltip": "{{Spell_ThreshPassiveSouls_Tooltip}}",
 					"tooltipExtended": "{{Spell_ThreshPassiveSouls_Tooltip}}<br><br>Current <keywordMajor>Soul</keywordMajor> Bonuses: <statTracking>@CurrentSoulBonus@</statTracking> <scaleAP>Ability Power</scaleAP>, <statTracking>@CurrentSoulBonus@</statTracking> <scaleArmor>Armor</scaleArmor><br><br><rules>Champions and large minions always drop a <keywordMajor>Soul</keywordMajor>, while small minions and jungle monsters only sometimes drop one. Epic jungle monsters drop two <keywordMajor>Souls</keywordMajor>.</rules>",
@@ -283,8 +284,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Thresh/Spells/ThreshPassiveSoulsAbility/ThreshPassiveSouls"
+					}
 				}
 			]
 		}

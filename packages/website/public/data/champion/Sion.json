@@ -33,6 +33,7 @@
 				{
 					"name": "Decimating Smash",
 					"objectName": "SionQ",
+					"dataKey": "Characters/Sion/Spells/SionQAbility/SionQ",
 					"image": "assets/characters/sion/hud/icons2d/sion_q.png",
 					"tooltip": "<charge>Begin Charging</charge>: Sion charges a heavy blow for up to 2 seconds.<br><br><release>Release</release>: Sion slams his axe down, briefly <status>Slowing</status> and dealing between <physicalDamage>@MinDamageTotal@ and @MaxDamageTotal@ physical damage</physicalDamage> based on charge time. If Sion charged for at least 1 second, enemies are <status>Knocked Up</status> and <status>Stunned</status> for between @BaseStunTime@ and 2.25 seconds based on charge time.",
 					"extendedVariables": [
@@ -99,8 +100,7 @@
 						"7": [60, 60, 60, 60, 60, 60, 60],
 						"8": [150, 150, 150, 150, 150, 150, 150],
 						"9": [-0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8]
-					},
-					"dataKey": "Characters/Sion/Spells/SionQAbility/SionQ"
+					}
 				}
 			]
 		},
@@ -110,6 +110,7 @@
 				{
 					"name": "Soul Furnace",
 					"objectName": "SionW",
+					"dataKey": "Characters/Sion/Spells/SionWAbility/SionW",
 					"image": "assets/characters/sion/hud/icons2d/sion_w1.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: Sion gains <scaleHealth>@HPPerKill@ max Health</scaleHealth> when he kills a unit, or <scaleHealth>@HPPerChampKill@</scaleHealth> for champion takedowns, large minions and large monsters.<br><br><spellActive>Active</spellActive>: Sion gains <shield>@TotalShield@ Shield</shield> for 6 seconds. After @Effect7Amount@ seconds if the shield still holds, Sion can <recast>Recast</recast> to detonate the shield to deal <magicDamage>@TotalDamage@ plus @Effect4Amount@% max Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_SionW_Tooltip}}<br><br>Current Bonus Health: <statTracking>@f1@</statTracking>",
@@ -183,8 +184,7 @@
 						"6": [3, 3, 3, 3, 3, 3, 3],
 						"7": [15, 15, 15, 15, 15, 15, 15],
 						"8": [6, 6, 6, 6, 6, 6, 6]
-					},
-					"dataKey": "Characters/Sion/Spells/SionWAbility/SionW"
+					}
 				}
 			]
 		},
@@ -194,6 +194,7 @@
 				{
 					"name": "Roar of the Slayer",
 					"objectName": "SionE",
+					"dataKey": "Characters/Sion/Spells/SionEAbility/SionE",
 					"image": "assets/characters/sion/hud/icons2d/sion_e.png",
 					"tooltip": "Sion fires a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @SlowAmount@% for @SlowDuration@ seconds and removing <scaleArmor>@ArmorShred@% Armor</scaleArmor> for @ArmorShredDuration@ seconds. Non-champions hit are <status>Knocked Back</status>. Enemies hit by a <status>Knocked Back</status> unit take the same damage and effects.",
 					"extendedVariables": [
@@ -243,8 +244,7 @@
 						"5": [30, 30, 30, 30, 30, 30, 30],
 						"6": [4, 4, 4, 4, 4, 4, 4],
 						"7": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
-					},
-					"dataKey": "Characters/Sion/Spells/SionEAbility/SionE"
+					}
 				}
 			]
 		},
@@ -254,6 +254,7 @@
 				{
 					"name": "Unstoppable Onslaught",
 					"objectName": "SionR",
+					"dataKey": "Characters/Sion/Spells/SionRAbility/SionR",
 					"image": "assets/characters/sion/hud/icons2d/sion_r1.png",
 					"tooltip": "Sion charges Unstoppably in a direction for 8 seconds, turning towards the mouse cursor. Sion stops on colliding with an enemy champion or wall or on <recast>Recasting</recast> this Ability.  <br><br>At the end of the charge, Sion deals between <physicalDamage>@MinDamageTotal@ and @MaxDamageTotal@ physical damage</physicalDamage> based on distance travelled. Enemies close to Sion are <status>Stunned</status> for between @MinStunDuration@ and @MaxStunDuration@ seconds based on distance travelled. Enemies in a larger area are <status>Slowed</status> by @SlowAmount@% for 3 seconds.",
 					"extendedVariables": [
@@ -312,8 +313,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Sion/Spells/SionRAbility/SionR"
+					}
 				}
 			]
 		},
@@ -323,6 +323,7 @@
 				{
 					"name": "Glory in Death",
 					"objectName": "SionPassive",
+					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassive",
 					"image": "assets/characters/sion/hud/icons2d/sion_passive1.png",
 					"tooltip": "{{Spell_SionPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_SionPassive_Tooltip}}<br><br><rules>Max @NonChampCap@ bonus damage against non-champions.<br>Sion deals @StructureMod*100@% damage to structures while in this form.</rules>",
@@ -331,8 +332,7 @@
 						"PercentMaxHP": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"NonChampCap": [75, 75, 75, 75, 75, 75, 75],
 						"StructureMod": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
-					},
-					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassive"
+					}
 				}
 			]
 		}

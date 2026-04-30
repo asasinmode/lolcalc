@@ -33,6 +33,7 @@
 				{
 					"name": "Mortal Steel",
 					"objectName": "YoneQ",
+					"dataKey": "Characters/Yone/Spells/YoneQAbility/YoneQ",
 					"image": "assets/characters/yone/hud/icons2d/yoneq.png",
 					"tooltip": "Yone thrusts forward, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>.<br><br>On hit, grants a stack for @BuffDuration@ seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for @Q3KnockupDuration@ seconds and deals <physicalDamage>@QDamage@ physical damage</physicalDamage>. ",
 					"extendedVariables": [
@@ -89,8 +90,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Yone/Spells/YoneQAbility/YoneQ"
+					}
 				}
 			]
 		},
@@ -100,6 +100,7 @@
 				{
 					"name": "Spirit Cleave",
 					"objectName": "YoneW",
+					"dataKey": "Characters/Yone/Spells/YoneWAbility/YoneW",
 					"image": "assets/characters/yone/hud/icons2d/yonew.png",
 					"tooltip": "Yone cleaves forward, dealing <physicalDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health physical damage</physicalDamage> and <magicDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health magic damage</magicDamage>.<br><br>If Yone hits, he gains <shield>@WShield@ Shield</shield> for @ShieldDuration@ seconds. The amount of <shield>Shield</shield> increases for each champion struck. ",
 					"extendedVariables": [
@@ -204,8 +205,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Yone/Spells/YoneWAbility/YoneW"
+					}
 				}
 			]
 		},
@@ -215,6 +215,7 @@
 				{
 					"name": "Soul Unbound",
 					"objectName": "YoneE",
+					"dataKey": "Characters/Yone/Spells/YoneEAbility/YoneE",
 					"image": "assets/characters/yone/hud/icons2d/yonee.png",
 					"tooltip": "Yone enters a spirit form for @ReturnTimer@ seconds, leaving his body behind for the duration and gaining <speed>@StartingMS*100@%</speed> to <speed>@MovementSpeed*100@% ramping Move Speed</speed>. <br><br>When the spirit form ends, Yone snaps back to his body and repeats @DeathmarkPercent*100@% of all Attack and Ability damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br><br><recast>Recast: </recast>End spirit form early.",
 					"extendedVariables": [
@@ -250,8 +251,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Yone/Spells/YoneEAbility/YoneE"
+					}
 				}
 			]
 		},
@@ -261,6 +261,7 @@
 				{
 					"name": "Fate Sealed",
 					"objectName": "YoneR",
+					"dataKey": "Characters/Yone/Spells/YoneRAbility/YoneR",
 					"image": "assets/characters/yone/hud/icons2d/yoner.png",
 					"tooltip": "Yone strikes all enemies along a path for <physicalDamage>@TooltipDamage@ physical damage</physicalDamage> and <magicDamage>@TooltipDamage@ magic damage</magicDamage>, teleporting behind the last champion hit and <status>Knocking Up</status> victims towards Yone.",
 					"extendedVariables": [
@@ -301,8 +302,7 @@
 							},
 							"mModifiedGameCalculation": "Damage"
 						}
-					},
-					"dataKey": "Characters/Yone/Spells/YoneRAbility/YoneR"
+					}
 				}
 			]
 		},
@@ -312,6 +312,7 @@
 				{
 					"name": "Way of the Hunter",
 					"objectName": "YonePassive",
+					"dataKey": "Characters/Yone/Spells/YonePassiveAbility/YonePassive",
 					"image": "assets/characters/yone/hud/icons2d/yonepassive.png",
 					"tooltip": "{{Spell_YonePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_YonePassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
@@ -334,8 +335,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Yone/Spells/YonePassiveAbility/YonePassive"
+					}
 				}
 			]
 		}

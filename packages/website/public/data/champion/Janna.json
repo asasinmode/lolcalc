@@ -33,6 +33,7 @@
 				{
 					"name": "Howling Gale",
 					"objectName": "HowlingGale",
+					"dataKey": "Characters/Janna/Spells/HowlingGaleAbility/HowlingGale",
 					"image": "assets/characters/janna/hud/icons2d/jannaq.png",
 					"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early.",
 					"extendedVariables": [
@@ -138,8 +139,7 @@
 							],
 							"mPrecision": 2
 						}
-					},
-					"dataKey": "Characters/Janna/Spells/HowlingGaleAbility/HowlingGale"
+					}
 				}
 			]
 		},
@@ -149,6 +149,7 @@
 				{
 					"name": "Zephyr",
 					"objectName": "SowTheWind",
+					"dataKey": "Characters/Janna/Spells/SowTheWindAbility/SowTheWind",
 					"image": "assets/characters/janna/hud/icons2d/jannaw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -222,8 +223,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Janna/Spells/SowTheWindAbility/SowTheWind"
+					}
 				}
 			]
 		},
@@ -233,6 +233,7 @@
 				{
 					"name": "Eye Of The Storm",
 					"objectName": "EyeOfTheStorm",
+					"dataKey": "Characters/Janna/Spells/EyeOfTheStormAbility/EyeOfTheStorm",
 					"image": "assets/characters/janna/hud/icons2d/jannae.png",
 					"tooltip": "Janna grants an ally champion or turret <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. While shielded, they gain <scaleAD>@TotalAD@ Attack Damage</scaleAD>.<br><br>Janna refunds @ECDRefundforCC*100@% of the cooldown whenever she impairs an enemy champion's movement with an Ability.",
 					"extendedVariables": [
@@ -286,8 +287,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Janna/Spells/EyeOfTheStormAbility/EyeOfTheStorm"
+					}
 				}
 			]
 		},
@@ -297,6 +297,7 @@
 				{
 					"name": "Monsoon",
 					"objectName": "ReapTheWhirlwind",
+					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind",
 					"image": "assets/characters/janna/hud/icons2d/jannar.png",
 					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
 					"extendedVariables": [
@@ -341,8 +342,7 @@
 						"6": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
 						"7": [10, 10, 10, 10, 10, 10, 10],
 						"8": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-					},
-					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind"
+					}
 				}
 			]
 		},
@@ -352,6 +352,7 @@
 				{
 					"name": "Tailwind",
 					"objectName": "TailwindSelf",
+					"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/TailwindSelf",
 					"image": "assets/characters/janna/hud/icons2d/jannap.png",
 					"tooltip": "Ally champions gain <speed>@MSPercentAlly*100@% Move Speed</speed> moving towards Janna.<br><br>Janna deals <magicDamage>@BonusDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and with <keywordMajor>Zephyr</keywordMajor>.",
 					"dataValues": {
@@ -379,8 +380,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/TailwindSelf"
+					}
 				}
 			]
 		}

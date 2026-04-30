@@ -33,6 +33,7 @@
 				{
 					"name": "Urchin Strike",
 					"objectName": "FizzQ",
+					"dataKey": "Characters/Fizz/Spells/FizzQAbility/FizzQ",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_q.png",
 					"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -75,8 +76,7 @@
 						"5": [1, 1, 1, 1, 1, 1, 1],
 						"6": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
 						"7": [40, 40, 40, 40, 40, 40, 40]
-					},
-					"dataKey": "Characters/Fizz/Spells/FizzQAbility/FizzQ"
+					}
 				}
 			]
 		},
@@ -86,6 +86,7 @@
 				{
 					"name": "Seastone Trident",
 					"objectName": "FizzW",
+					"dataKey": "Characters/Fizz/Spells/FizzWAbility/FizzW",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_w.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: Fizz's Attacks cause his enemies to bleed, dealing <magicDamage>@DoTDamage@ magic damage</magicDamage> over @BleedDuration@ seconds. <br><br><spellActive>Active</spellActive>: Fizz's next Attack deals an additional <magicDamage>@ActiveDamage@ magic damage</magicDamage>. If this Attack kills its target, Fizz refunds <scaleMana>@OnKillManaRefund@ Mana</scaleMana> and reduces the cooldown of this Ability to @OnKillNewCooldown@ second. If it does not kill, Fizz's Attacks deal an additional <magicDamage>@OnHitBuffDamage@ magic damage</magicDamage> for @OnHitBuffDuration@ seconds.",
 					"extendedVariables": [
@@ -166,8 +167,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Fizz/Spells/FizzWAbility/FizzW"
+					}
 				}
 			]
 		},
@@ -177,6 +177,7 @@
 				{
 					"name": "Playful / Trickster",
 					"objectName": "FizzE",
+					"dataKey": "Characters/Fizz/Spells/FizzEAbility/FizzE",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_e1.png",
 					"tooltip": "Fizz hops onto his trident, becoming Untargetable for 0.75 seconds, after which he deals <magicDamage>@EDamage@ magic damage</magicDamage> to nearby enemies and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>Fizz can <recast>Recast</recast> this Ability while Untargetable to dash again, which ends the effect early, deals damage in a smaller area, and doesn't <status>Slow</status>.",
 					"extendedVariables": [
@@ -215,8 +216,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Fizz/Spells/FizzEAbility/FizzE"
+					}
 				}
 			]
 		},
@@ -226,6 +226,7 @@
 				{
 					"name": "Chum the Waters",
 					"objectName": "FizzR",
+					"dataKey": "Characters/Fizz/Spells/FizzRAbility/FizzR",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_r.png",
 					"tooltip": "Fizz launches a fish that attaches to the first champion hit. The victim is afflicted with <keywordStealth>True Sight</keywordStealth> and <status>Slowed</status> by between 40% to 80% based on how far the fish travelled before attaching. <br><br>After @DetonationTime@ seconds a shark erupts on the target, <status>Knocking Up</status> the target with the fish for 1 second, <status>Knocking Back</status> everything else, and dealing between <magicDamage>@SmallSharkDamage@ to @BigSharkDamage@ magic damage</magicDamage> based on how far the fish travelled before attaching.",
 					"extendedVariables": [
@@ -283,8 +284,7 @@
 							},
 							"mModifiedGameCalculation": "SmallSharkDamage"
 						}
-					},
-					"dataKey": "Characters/Fizz/Spells/FizzRAbility/FizzR"
+					}
 				}
 			]
 		},
@@ -294,6 +294,7 @@
 				{
 					"name": "Nimble Fighter",
 					"objectName": "FizzPassive",
+					"dataKey": "Characters/Fizz/Spells/FizzPassiveAbility/FizzPassive",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_p.png",
 					"tooltip": "{{Spell_FizzPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_FizzPassive_Tooltip}}<br><br><rules>Ghosted units ignore collision with other units.<br>Damage reduction modified to @MonsterDamageReductionCalc@ against jungle monsters.<br>Damage cannot be reduced by more than @DamageReductionMax*100@%.</rules>",
@@ -337,8 +338,7 @@
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"4": [0, 10, 20, 30, 40, 50, 60],
 						"5": [20, 35, 50, 65, 80, 95, 110]
-					},
-					"dataKey": "Characters/Fizz/Spells/FizzPassiveAbility/FizzPassive"
+					}
 				}
 			]
 		}

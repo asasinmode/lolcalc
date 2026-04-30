@@ -33,6 +33,7 @@
 				{
 					"name": "Noxious Blast",
 					"objectName": "CassiopeiaQ",
+					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaQAbility/CassiopeiaQ",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_q.png",
 					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds. Hitting a champion grants Cassiopeia <speed>@ChampHitMSBonus@% Move Speed</speed> decaying over @ChampHitMSDuration@ seconds.",
 					"extendedVariables": [
@@ -78,8 +79,7 @@
 						"2": [25, 30, 35, 40, 45, 50, 50],
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"4": [7, 7, 7, 7, 7, 7, 7]
-					},
-					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaQAbility/CassiopeiaQ"
+					}
 				}
 			]
 		},
@@ -89,6 +89,7 @@
 				{
 					"name": "Miasma",
 					"objectName": "CassiopeiaW",
+					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaWAbility/CassiopeiaW",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_w.png",
 					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @CloudDuration@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @SlowPercent@%.",
 					"extendedVariables": [
@@ -132,8 +133,7 @@
 						"1": [30, 40, 50, 60, 70, 80, 90],
 						"2": [1, 1, 1, 1, 1, 1, 1],
 						"3": [5, 5, 5, 5, 5, 5, 5]
-					},
-					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaWAbility/CassiopeiaW"
+					}
 				}
 			]
 		},
@@ -143,6 +143,7 @@
 				{
 					"name": "Twin Fang",
 					"objectName": "CassiopeiaE",
+					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaEAbility/CassiopeiaE",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_e.png",
 					"tooltip": "Cassiopeia launches deadly fangs, dealing <magicDamage>@BasicDamage@ magic damage</magicDamage>. If the enemy is <keywordMajor>Poisoned</keywordMajor>, they take an additional <magicDamage>@BonusPoisonedDamage@ magic damage</magicDamage> and Cassiopeia restores <healing>@HealCalc@ Health</healing>, reduced to <healing>@HealCalcMinion@ Health</healing> against lane minions and small monsters.<br><br>If this kills the target, Cassiopeia restores <scaleMana>@Cost@ Mana</scaleMana>.",
 					"extendedVariables": [
@@ -205,8 +206,7 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "HealCalc"
 						}
-					},
-					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaEAbility/CassiopeiaE"
+					}
 				}
 			]
 		},
@@ -216,6 +216,7 @@
 				{
 					"name": "Petrifying Gaze",
 					"objectName": "CassiopeiaR",
+					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaRAbility/CassiopeiaR",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_r.png",
 					"tooltip": "Cassiopeia unleashes a petrifying gaze, dealing <magicDamage>@RDamage@ magic damage</magicDamage> and <status>Stunning</status> enemies facing her for @RCCDuration@ seconds. Enemies facing away are <status>Slowed</status> by @RSlowPercent@% decaying over the same duration instead.",
 					"extendedVariables": [
@@ -245,8 +246,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaRAbility/CassiopeiaR"
+					}
 				}
 			]
 		},
@@ -256,6 +256,7 @@
 				{
 					"name": "Serpentine Grace",
 					"objectName": "CassiopeiaPassive",
+					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaPassiveAbility/CassiopeiaPassive",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_passive.png",
 					"tooltip": "Cassiopeia increases the effectiveness of all <speed>Move Speed</speed> bonuses by @PercentHasteMod@.",
 					"spellCalculations": {
@@ -269,8 +270,7 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					},
-					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaPassiveAbility/CassiopeiaPassive"
+					}
 				}
 			]
 		}

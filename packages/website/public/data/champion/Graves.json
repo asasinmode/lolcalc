@@ -33,6 +33,7 @@
 				{
 					"name": "End of the Line",
 					"objectName": "GravesQLineSpell",
+					"dataKey": "Characters/Graves/Spells/GravesQLineSpellAbility/GravesQLineSpell",
 					"image": "assets/characters/graves/hud/icons2d/gravesq.png",
 					"tooltip": "Graves fires a powder round dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. After 1 second or after colliding with terrain, it detonates, dealing <physicalDamage>@TotalDetonationDamage@ physical damage</physicalDamage> along the travel path again and to enemies near the blast.",
 					"extendedVariables": [
@@ -87,8 +88,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Graves/Spells/GravesQLineSpellAbility/GravesQLineSpell"
+					}
 				}
 			]
 		},
@@ -98,6 +98,7 @@
 				{
 					"name": "Smoke Screen",
 					"objectName": "GravesSmokeGrenade",
+					"dataKey": "Characters/Graves/Spells/GravesSmokeGrenadeAbility/GravesSmokeGrenade",
 					"image": "assets/characters/graves/hud/icons2d/gravesw.png",
 					"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @Effect2Amount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -134,8 +135,7 @@
 						"2": [200, 200, 200, 200, 200, 200, 200],
 						"3": [4, 4, 4, 4, 4, 4, 4],
 						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-					},
-					"dataKey": "Characters/Graves/Spells/GravesSmokeGrenadeAbility/GravesSmokeGrenade"
+					}
 				}
 			]
 		},
@@ -145,6 +145,7 @@
 				{
 					"name": "Quickdraw",
 					"objectName": "GravesMove",
+					"dataKey": "Characters/Graves/Spells/GravesMoveAbility/GravesMove",
 					"image": "assets/characters/graves/hud/icons2d/gravese.png",
 					"tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for @BuffDuration@ seconds (max @MaxStacks@ stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>@ArmorPerStack@ Armor</scaleArmor> and <scaleMR>@MRGrant@ Magic Resist</scaleMR>. Stacks are refreshed when damaging a non-minion.<br><br>Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by @CooldownPerHit@ seconds.",
 					"extendedVariables": [
@@ -191,8 +192,7 @@
 						"7": [275, 275, 275, 275, 275, 275, 275],
 						"8": [60, 60, 60, 60, 60, 60, 60],
 						"9": [8, 8, 8, 8, 8, 8, 8]
-					},
-					"dataKey": "Characters/Graves/Spells/GravesMoveAbility/GravesMove"
+					}
 				}
 			]
 		},
@@ -202,6 +202,7 @@
 				{
 					"name": "Collateral Damage",
 					"objectName": "GravesChargeShot",
+					"dataKey": "Characters/Graves/Spells/GravesChargeShotAbility/GravesChargeShot",
 					"image": "assets/characters/graves/hud/icons2d/gravesr.png",
 					"tooltip": "Graves fires an explosive cartridge, blasting himself backwards. The cartridge deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After hitting an enemy champion or reaching the end of its range, the cartridge explodes outward, dealing <physicalDamage>@FalloffDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
@@ -252,8 +253,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Graves/Spells/GravesChargeShotAbility/GravesChargeShot"
+					}
 				}
 			]
 		},
@@ -263,6 +263,7 @@
 				{
 					"name": "New Destiny",
 					"objectName": "GravesPassive",
+					"dataKey": "Characters/Graves/Spells/GravesPassiveAbility/GravesPassive",
 					"image": "assets/characters/graves/hud/icons2d/gravesp.png",
 					"tooltip": "Graves' Attacks have unique properties:<br><li>It can only fire two <keywordMajor>Shells</keywordMajor> before he must reload. <attackSpeed>Attack Speed</attackSpeed> reduces reload time slightly, but reduces time between shots dramatically.<li>Each Attack fires 4 bullets. The first bullet on a target deals <physicalDamage>@SingleBulletDamage@ physical damage</physicalDamage>, and subsequent bullets deal <physicalDamage>@MultiBulletDamage@</physicalDamage> each. Instead of normal Critical effects, Critical strikes fire 6 bullets and deal @CritDamageMult@ more damage. Structures take @StructureDamageReduction*100@% reduced damage.<li>Bullets stop on the first unit hit. Non-champions struck by multiple bullets are <status>Knocked Back</status>.",
 					"dataValues": {
@@ -320,8 +321,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Graves/Spells/GravesPassiveAbility/GravesPassive"
+					}
 				}
 			]
 		}

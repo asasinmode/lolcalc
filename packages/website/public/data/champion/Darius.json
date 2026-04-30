@@ -33,6 +33,7 @@
 				{
 					"name": "Decimate",
 					"objectName": "DariusCleave",
+					"dataKey": "Characters/Darius/Spells/DariusCleaveAbility/DariusCleave",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png",
 					"tooltip": "Darius hefts his axe then swings it around, dealing <physicalDamage>@BladeDamage@ physical damage</physicalDamage> with the edge and <physicalDamage>@HandleDamage@ damage</physicalDamage> with the handle. Enemies hit with the handle do not take a <keywordMajor>Hemorrhage</keywordMajor> stack.<br><br>Darius restores <healing>@Effect5Amount@% missing Health</healing> per enemy champion and large jungle monster hit with the edge, up to a max of <healing>@Effect7Amount@%</healing>.",
 					"extendedVariables": [
@@ -92,8 +93,7 @@
 						"4": [17, 17, 17, 17, 17, 17, 17],
 						"5": [35, 35, 35, 35, 35, 35, 35],
 						"6": [51, 51, 51, 51, 51, 51, 51]
-					},
-					"dataKey": "Characters/Darius/Spells/DariusCleaveAbility/DariusCleave"
+					}
 				}
 			]
 		},
@@ -103,6 +103,7 @@
 				{
 					"name": "Crippling Strike",
 					"objectName": "DariusNoxianTacticsONH",
+					"dataKey": "Characters/Darius/Spells/DariusNoxianTacticsONHAbility/DariusNoxianTacticsONH",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png",
 					"tooltip": "Darius' next Attack deals <physicalDamage>@EmpoweredAttackDamage@ physical damage</physicalDamage> and <status>Slows</status> by @Effect2Amount@% for @Effect5Amount@ second.<br><br>This Ability refunds its Mana cost and reduces its Cooldown by @Effect3Amount@% if it kills the target.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"extendedVariables": [
@@ -132,8 +133,7 @@
 						"2": [50, 50, 50, 50, 50, 50, 50],
 						"3": [1.5, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65],
 						"4": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Darius/Spells/DariusNoxianTacticsONHAbility/DariusNoxianTacticsONH"
+					}
 				}
 			]
 		},
@@ -143,6 +143,7 @@
 				{
 					"name": "Apprehend",
 					"objectName": "DariusAxeGrabCone",
+					"dataKey": "Characters/Darius/Spells/DariusAxeGrabConeAbility/DariusAxeGrabCone",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Darius gains @Effect1Amount@% Armor Penetration.<br><br><spellActive>Active:</spellActive> Darius hooks with his axe, <status>Pulling</status>, and <status>Knocking Up</status> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
 					"extendedVariables": [
@@ -160,8 +161,7 @@
 						"0": [20, 20, 25, 30, 35, 40, 45],
 						"1": [40, 40, 40, 40, 40, 40, 40],
 						"2": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Darius/Spells/DariusAxeGrabConeAbility/DariusAxeGrabCone"
+					}
 				}
 			]
 		},
@@ -171,6 +171,7 @@
 				{
 					"name": "Noxian Guillotine",
 					"objectName": "DariusExecute",
+					"dataKey": "Characters/Darius/Spells/DariusExecuteAbility/DariusExecute",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_sudden_death.png",
 					"tooltip": "Darius leaps to an enemy and strikes a lethal blow, dealing <trueDamage>@Damage@ true damage</trueDamage>. For each <keywordMajor>Hemorrhage</keywordMajor> on the target, this Ability deals an additional @RDamagePercentPerHemoStack*100@% damage, up to a max of <trueDamage>@MaximumDamage@ damage</trueDamage>.<br><br>If this kills the target, Darius may <recast>Recast</recast> this Ability once within @RRecastDuration@ seconds. At rank 3, this Ability has no Mana cost and kills refresh the Cooldown completely.",
 					"extendedVariables": [
@@ -208,8 +209,7 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "Damage"
 						}
-					},
-					"dataKey": "Characters/Darius/Spells/DariusExecuteAbility/DariusExecute"
+					}
 				}
 			]
 		},
@@ -219,6 +219,7 @@
 				{
 					"name": "Hemorrhage",
 					"objectName": "DariusHemoMarker",
+					"dataKey": "Characters/Darius/Spells/DariusHemoMarkerAbility/DariusHemoMarker",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_hemorrhage.png",
 					"tooltip": "{{Spell_DariusHemoMarker_Tooltip}}",
 					"tooltipExtended": "{{Spell_DariusHemoMarker_Tooltip}}<br><br><rules><keywordMajor>Hemorrhage</keywordMajor> deals @MonsterMod*100@% damage to jungle monsters.</rules>",
@@ -263,8 +264,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Darius/Spells/DariusHemoMarkerAbility/DariusHemoMarker"
+					}
 				}
 			]
 		}

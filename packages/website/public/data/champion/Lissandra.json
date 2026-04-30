@@ -33,6 +33,7 @@
 				{
 					"name": "Ice Shard",
 					"objectName": "LissandraQ",
+					"dataKey": "Characters/Lissandra/Spells/LissandraQAbility/LissandraQ",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
 					"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them.",
 					"extendedVariables": [
@@ -72,8 +73,7 @@
 					"effectAmount": {
 						"1": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"2": [-0.16, -0.2, -0.24, -0.28, -0.32, -0.36, -0.4]
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraQAbility/LissandraQ"
+					}
 				}
 			]
 		},
@@ -83,6 +83,7 @@
 				{
 					"name": "Ring of Frost",
 					"objectName": "LissandraW",
+					"dataKey": "Characters/Lissandra/Spells/LissandraWAbility/LissandraW",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
 					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
@@ -116,8 +117,7 @@
 						"1": [1.25, 1.25, 1.35, 1.45, 1.55, 1.65, 1.65],
 						"2": [3, 3, 3, 3, 3, 3, 3],
 						"3": [8, 8, 8, 8, 8, 8, 8]
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraWAbility/LissandraW"
+					}
 				}
 			]
 		},
@@ -127,6 +127,7 @@
 				{
 					"name": "Glacial Path",
 					"objectName": "LissandraE",
+					"dataKey": "Characters/Lissandra/Spells/LissandraEAbility/LissandraE",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png",
 					"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location.",
 					"extendedVariables": [
@@ -159,8 +160,7 @@
 						"1": [15, 14, 13, 12, 11, 10, 9],
 						"2": [20, 20, 20, 20, 20, 20, 20],
 						"3": [1, 1, 1, 1, 1, 1, 1]
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraEAbility/LissandraE"
+					}
 				}
 			]
 		},
@@ -170,6 +170,7 @@
 				{
 					"name": "Frozen Tomb",
 					"objectName": "LissandraR",
+					"dataKey": "Characters/Lissandra/Spells/LissandraRAbility/LissandraR",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png",
 					"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%.",
 					"extendedVariables": [
@@ -226,8 +227,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraRAbility/LissandraR"
+					}
 				}
 			]
 		},
@@ -237,6 +237,7 @@
 				{
 					"name": "Iceborn Subjugation",
 					"objectName": "LissandraPassive",
+					"dataKey": "Characters/Lissandra/Spells/LissandraPassiveAbility/LissandraPassive",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_passive.png",
 					"tooltip": "When an enemy champion dies near Lissandra they become a frozen zombie that seeks out living enemies. Enemies near these zombies are <status>Slowed</status> by @MoveSpeedMod*-100@%. After @ExplosionDelay@ seconds, frozen zombies shatter, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"dataValues": {
@@ -265,8 +266,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraPassiveAbility/LissandraPassive"
+					}
 				}
 			]
 		}

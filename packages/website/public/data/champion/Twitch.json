@@ -33,6 +33,7 @@
 				{
 					"name": "Ambush",
 					"objectName": "TwitchHideInShadows",
+					"dataKey": "Characters/Twitch/Spells/TwitchHideInShadowsAbility/TwitchHideInShadows",
 					"image": "assets/characters/twitch/hud/icons2d/twitch_q.png",
 					"tooltip": "Twitch <keywordStealth>Camouflages</keywordStealth> and gains <speed>@MoveSpeedMod@% Move Speed</speed> for @StealthDuration@ seconds. The Move Speed increases to @HiddenSpeed@% while near an enemy champion that can't see him. After exiting <keywordStealth>Camouflage</keywordStealth>, Twitch gains <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>When an enemy champion dies while afflicted with <keywordMajor>Venom</keywordMajor>, this Ability's Cooldown is refreshed.",
 					"extendedVariables": [
@@ -59,8 +60,7 @@
 					},
 					"effectAmount": {
 						"6": [3, 3, 3, 3, 3, 3, 3]
-					},
-					"dataKey": "Characters/Twitch/Spells/TwitchHideInShadowsAbility/TwitchHideInShadows"
+					}
 				}
 			]
 		},
@@ -70,6 +70,7 @@
 				{
 					"name": "Venom Cask",
 					"objectName": "TwitchVenomCask",
+					"dataKey": "Characters/Twitch/Spells/TwitchVenomCaskAbility/TwitchVenomCask",
 					"image": "assets/characters/twitch/hud/icons2d/twitch_w.png",
 					"tooltip": "Twitch hurls a cask that adds a stack of <spellName>Deadly Venom</spellName> to all enemies struck and leaves behind a toxic cloud that persists for @Duration@ seconds.<br><br>Enemies that remain within the cloud are <status>Slowed</status> by @TotalSlowAmount@% and receive an additional stack of <spellName>Deadly Venom</spellName> each second.",
 					"extendedVariables": [
@@ -99,8 +100,7 @@
 								}
 							]
 						}
-					},
-					"dataKey": "Characters/Twitch/Spells/TwitchVenomCaskAbility/TwitchVenomCask"
+					}
 				}
 			]
 		},
@@ -110,6 +110,7 @@
 				{
 					"name": "Contaminate",
 					"objectName": "TwitchExpunge",
+					"dataKey": "Characters/Twitch/Spells/TwitchExpungeAbility/TwitchExpunge",
 					"image": "assets/characters/twitch/hud/icons2d/twitch_e.png",
 					"tooltip": "Deals <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to all nearby enemies affected by <spellName>Deadly Venom</spellName>, plus an additional <physicalDamage>@PhysicalDamagePerStack@ physical damage</physicalDamage> and <magicDamage>@MagicDamagePerStack@ magical damage</magicDamage> per stack of <spellName>Deadly Venom</spellName>.<br><br>Max Damage: <physicalDamage>@MaxPhysicalDamage@ physical damage</physicalDamage> and <magicDamage>@MaxMagicDamage@ magical damage</magicDamage>.",
 					"extendedVariables": [
@@ -193,8 +194,7 @@
 							},
 							"mModifiedGameCalculation": "MagicDamagePerStack"
 						}
-					},
-					"dataKey": "Characters/Twitch/Spells/TwitchExpungeAbility/TwitchExpunge"
+					}
 				}
 			]
 		},
@@ -204,6 +204,7 @@
 				{
 					"name": "Spray and Pray",
 					"objectName": "TwitchFullAutomatic",
+					"dataKey": "Characters/Twitch/Spells/TwitchFullAutomaticAbility/TwitchFullAutomatic",
 					"image": "assets/characters/twitch/hud/icons2d/twitch_r.png",
 					"tooltip": "Twitch unleashes his crossbow, gaining @BonusRange@ Attack Range and <scaleAD>@BonusAD@ Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for @Duration@ seconds. These bolts hit all enemies they pass through, but deal @FallOffDamage*100@% less damage to subsequent targets, down to a minimum of @MinimumFallOffDamage*100@% damage.",
 					"extendedVariables": [
@@ -222,8 +223,7 @@
 						"Duration": [6, 6, 6, 6, 6, 6, 6],
 						"OvershootMult": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"OvershootMin": [250, 250, 250, 250, 250, 250, 250]
-					},
-					"dataKey": "Characters/Twitch/Spells/TwitchFullAutomaticAbility/TwitchFullAutomatic"
+					}
 				}
 			]
 		},
@@ -233,6 +233,7 @@
 				{
 					"name": "Deadly Venom",
 					"objectName": "TwitchDeadlyVenomMarker",
+					"dataKey": "Characters/Twitch/Spells/TwitchDeadlyVenomMarkerAbility/TwitchDeadlyVenomMarker",
 					"image": "assets/characters/twitch/hud/icons2d/twitch_passive.png",
 					"tooltip": "Twitch's Attacks infect his target %i:OnHit% <OnHit>On-Hit</OnHit>, dealing <trueDamage>@DamagePerSecond@ true damage</trueDamage> per second for @Duration@ seconds, stacking up to @MaxStacks@ times. <br><br>Max Damage Per Second: @DamagePerSecondMax@",
 					"dataValues": {
@@ -300,8 +301,7 @@
 							},
 							"mModifiedGameCalculation": "DamagePerSecond"
 						}
-					},
-					"dataKey": "Characters/Twitch/Spells/TwitchDeadlyVenomMarkerAbility/TwitchDeadlyVenomMarker"
+					}
 				}
 			]
 		}

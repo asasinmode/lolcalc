@@ -33,6 +33,7 @@
 				{
 					"name": "Reaping Slash",
 					"objectName": "KaynQ",
+					"dataKey": "Characters/Kayn/Spells/KaynQAbility/KaynQ",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_q_primary.png",
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
 					"extendedVariables": [
@@ -104,8 +105,7 @@
 						"4": [175, 200, 250, 300, 350, 400, 0],
 						"5": [40, 40, 40, 40, 40, 40, 40],
 						"6": [300, 300, 300, 300, 300, 300, 300]
-					},
-					"dataKey": "Characters/Kayn/Spells/KaynQAbility/KaynQ"
+					}
 				}
 			]
 		},
@@ -115,6 +115,7 @@
 				{
 					"name": "Blade's Reach",
 					"objectName": "KaynW",
+					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynW",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_w_primary.png",
 					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
 					"extendedVariables": [
@@ -152,8 +153,7 @@
 						"3": [160, 160, 160, 160, 160, 160, 160],
 						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"5": [900, 900, 900, 900, 900, 900, 900]
-					},
-					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynW"
+					}
 				}
 			]
 		},
@@ -163,6 +163,7 @@
 				{
 					"name": "Shadow Step",
 					"objectName": "KaynE",
+					"dataKey": "Characters/Kayn/Spells/KaynEAbility/KaynE",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_e_primary.png",
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
 					"extendedVariables": [
@@ -207,8 +208,7 @@
 						"5": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"6": [80, 90, 100, 110, 120, 130, 140],
 						"7": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45]
-					},
-					"dataKey": "Characters/Kayn/Spells/KaynEAbility/KaynE"
+					}
 				}
 			]
 		},
@@ -218,6 +218,7 @@
 				{
 					"name": "Umbral Trespass",
 					"objectName": "KaynR",
+					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
 					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
 					"extendedVariables": [
@@ -283,8 +284,7 @@
 						"4": [300, 300, 300, 300, 300, 300, 300],
 						"8": [750, 750, 750, 750, 750, 750, 750],
 						"9": [550, 550, 550, 550, 550, 550, 550]
-					},
-					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR"
+					}
 				}
 			]
 		},
@@ -294,6 +294,7 @@
 				{
 					"name": "The Darkin Scythe",
 					"objectName": "KaynPassive",
+					"dataKey": "Characters/Kayn/Spells/KaynPassiveAbility/KaynPassive",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_passive_primary.png",
 					"tooltip": "{{Spell_KaynPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KaynPassive_Tooltip}}<br><rules><br>@PassiveSecondFormDelayTooltip@ minutes after reaching full charge on either form, Kayn can transform into either, even if it is not at full charge. The timer is reduced by 5 seconds when gaining charge in the non-full form.<br>Kayn gains Homeguard after transforming.<br></rules>",
@@ -343,8 +344,7 @@
 						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"5": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"8": [20, 20, 20, 20, 20, 20, 20]
-					},
-					"dataKey": "Characters/Kayn/Spells/KaynPassiveAbility/KaynPassive"
+					}
 				}
 			]
 		}
