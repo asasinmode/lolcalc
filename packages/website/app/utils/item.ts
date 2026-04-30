@@ -226,17 +226,6 @@ export const ITEM_SPECIFICS = {
 			return internalData.fanfare;
 		},
 	},
-	[ITEM_NAME_TO_ID.trailblazer]: {
-		internalDataProperties: ['leadWay'],
-		setupData(self) {
-			self.internalItemData.value.leadWay = clamp(0, self.internalItemData.value.leadWay ?? 0, items[ITEM_NAME_TO_ID.trailblazer].dataValues.MaxMovementSpeed);
-			return { leadWay: 0 };
-		},
-		imgTextLabel: 'Lead the Way built up movement speed',
-		imgText(self) {
-			return (self.internalItemData.value as { leadWay: number }).leadWay;
-		},
-	},
 	[ITEM_NAME_TO_ID.protoplasmHarness]: {
 		internalDataProperties: ['pHLifeline'],
 		setupData(self) {
@@ -305,16 +294,6 @@ export const ITEM_SPECIFICS = {
 		},
 		imgActive(internalData: { hypershot: number }) {
 			return internalData.hypershot;
-		},
-	},
-	[ITEM_NAME_TO_ID.opportunity]: {
-		internalDataProperties: ['preparation'],
-		setupData(self) {
-			self.internalItemData.value.preparation = clamp(0, self.internalItemData.value.preparation ?? 0, 1);
-			return { preparation: 0 };
-		},
-		imgActive(internalData: { preparation: number }) {
-			return internalData.preparation;
 		},
 	},
 	[ITEM_NAME_TO_ID.actualizer]: {

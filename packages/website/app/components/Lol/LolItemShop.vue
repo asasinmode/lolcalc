@@ -37,6 +37,7 @@ const BOOT_ITEM_IDS = [
 	'3009',	/* boots of swiftness */
 	'3020', /* sorcerer's shoes */
 	'3158', /* ionian boots of lucidity */
+	'3008', /* gluttonous grieves */
 ];
 
 const TRANSFORMED_TEAR_ITEM_IDS = [

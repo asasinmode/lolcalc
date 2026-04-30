@@ -152,7 +152,6 @@ export const ITEM_NAME_TO_ID = {
 	staffOfFlowingWater: '6616',
 	bandlepipes: '2524',
 	knightsVow: '3109',
-	trailblazer: '3002',
 	protoplasmHarness: '2525',
 	frozenHeart: '3110',
 	serpentsFang: '6695',
@@ -160,7 +159,6 @@ export const ITEM_NAME_TO_ID = {
 	fiendhunterBolts: '2512',
 	abyssalMask: '8020',
 	horizonFocus: '4628',
-	opportunity: '6701',
 	actualizer: '2522',
 	hexoptics: '2523',
 	youmuu: '3142',
@@ -327,7 +325,7 @@ export const KNOWN_GAME_DESCRIPTION_TAGS = [
 	'scalemana',	// manamune, archangel
 	'scalearmor',	// hullbreaker, terminus
 	'scalemr',	// malignance, force of nature
-	'scalelethality',	// opportunity
+	'scalelethality',	// voltaic cyclosword, aphelios passive
 	'attackspeed',	// yuntal, experimental hexplate
 	'onhit',	// iceborn, statik
 	'physicaldamage',	// heartsteel, titanic
@@ -338,7 +336,7 @@ export const KNOWN_GAME_DESCRIPTION_TAGS = [
 	'shield',	// fimbulwinter, hexdrinker
 	'lifesteal', // maw of malmortius
 	'omnivamp',	// riftmaker
-	'speed',	// opportunity, slightly magical footwear
+	'speed',	// slightly magical footwear, youmuu
 	'gold',	// world atlas, collector
 	'status',	// botrk, iceborn
 	'attention',	// statikk, knight's vow
