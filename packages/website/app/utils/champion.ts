@@ -263,13 +263,12 @@ export const CHAMPION_SPECIFICS = {
 			(VARIABLE_CALCULATION_FNS.mFormulaParts(self, (self.champion.value! as typeof INaafiri).abilities.passive.variants[0]!.spellCalculations.PackmateCap) ?? 0)
 			+ (self.champion.value! as typeof INaafiri).abilities.w.variants[0]!.dataValues.PackmatesToAdd[self.abilityLevels.value.w]!,
 		),
-		setupData(self): { passiveStacks: number; _maxPassiveStacks: ComputedRef<number> } & IDamageSourceInternalDataBase {
+		setupData(self): { passiveStacks: number } & IDamageSourceInternalDataBase {
 			const maxPassiveStacks = CHAMPION_SPECIFICS.Naafiri.MAX_PASSIVE_STACKS(self);
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), maxPassiveStacks.value),
-				_maxPassiveStacks: maxPassiveStacks,
 				_watchHandles: [watch(self.level, () => {
-					self.internalData.value.passiveStacks = Math.min(self.internalData.value.passiveStacks, self.internalData.value._maxPassiveStacks);
+					self.internalData.value.passiveStacks = Math.min(self.internalData.value.passiveStacks, maxPassiveStacks.value);
 				})],
 			};
 		},

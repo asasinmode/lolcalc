@@ -48,8 +48,9 @@ export async function numberExtra<T extends IGameAbilityId>(
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, property, props.damageSource);
 
-		if (typeof max === 'function') {
-			max = max(props.damageSource);
+		let localMax = max;
+		if (typeof localMax === 'function') {
+			localMax = localMax(props.damageSource);
 		}
 
 		return () => h(VExtrasNumber, {
@@ -59,14 +60,14 @@ export async function numberExtra<T extends IGameAbilityId>(
 			imgSize,
 			label,
 			min,
-			'max': toValue(max as Exclude<typeof max, (self: DamageSource) => MaybeRef<number>>),
+			'max': toValue(localMax),
 			step,
 			'usedNumberInput': useNumberInput(
 				abilityId.type === ABILITY_TYPE.effect
 					? [appliedEffect!.data, property as number]
 					: [props.damageSource[abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData'], property as string],
 				true,
-				max as Exclude<typeof max, (self: DamageSource) => MaybeRef<number>>,
+				localMax,
 			),
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
