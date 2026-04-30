@@ -1,3 +1,4 @@
+import type IEzreal from '../../public/data/champion/Ezreal.json';
 import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
@@ -150,10 +151,10 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ezreal: {
-		MAX_PASSIVE_STACKS: 5,
+		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks,
 		setupData(self): { passiveStacks: number } {
 			return {
-				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS),
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), this.MAX_PASSIVE_STACKS(self)),
 			};
 		},
 	},
