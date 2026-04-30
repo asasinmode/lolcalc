@@ -247,6 +247,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								this.internalData.value[key as keyof typeof this.internalData['value']] = this.fromStringifiedInternalData[i];
 							}
 						}
+						for (const unwatch of this.internalData.value?._watchHandles || []) {
+							unwatch();
+						}
 						this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this)) || {};
 						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 					}
