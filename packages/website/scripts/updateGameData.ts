@@ -90,7 +90,6 @@ if (!championData || championData?.version !== latestVersion) {
 	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, 'ddragon/champion.json');
 
 	const TargetDummy: IChampion = {
-		version,
 		id: 'TargetDummy',
 		key: '-1',
 		name: 'Target Dummy',
@@ -1437,7 +1436,7 @@ function championAbilityData(
 			console.error(spellLevelUpInfo);
 			throw new Error(`[championAbilityData] can't resolve spellLevelUpInfo maxLevel for ${championId} in ${characterRootKey}`);
 		}
-		maxLevel = spellLevelUpInfo[levelUpInfoProperty][abilityInfo[1]].length;
+		maxLevel = spellLevelUpInfo[levelUpInfoProperty][abilityInfo[1]].mRequirements.length;
 	}
 
 	if (maxLevel === undefined) {
