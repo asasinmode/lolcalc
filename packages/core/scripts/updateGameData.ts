@@ -1,24 +1,23 @@
-import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IChampionId, IListedChampion } from '../app/composables/useChampions';
-import type { IItem } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IChampionSpecific } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { IEffectObjectName, IItemCategory, IItemShopStatFilter } from '../app/utils/meta';
 import type { IRuneSpecific } from '../app/utils/rune';
 import type { ITexture } from '../app/utils/types';
+import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IChampionId, IListedChampion } from '../shared/types/champion';
+import type { IItem } from '../shared/types/item';
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
-import { useMaps } from '../app/composables/useMaps.ts';
-import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../app/utils/effect.ts';
-import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
-import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS, SHAPESHIFTING_CHAMPION_IDS } from '../app/utils/meta.ts';
-import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
+import { CHAMPION_SPECIFICS } from '../shared/specifics/champion.ts';
+import { replaceGameDescriptionVariables } from '../shared/variables/game.ts';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../shared/specifics/effect.ts';
+import { replaceGameDescriptionStringtableVariables } from '../shared/variables/stringtable.ts';
+import { RUNE_SPECIFICS } from '../shared/specifics/rune.ts';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS, SHAPESHIFTING_CHAMPION_IDS } from '../shared/meta.ts';
 
 let latestVersion = process.argv[2];
 
@@ -323,8 +322,6 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		'3095', // stormrazor, there are 2 for some reason
 	];
 
-	const MAPS = useMaps();
-
 	const filteredItems = Object.entries(data)
 		.filter(([itemId, itemData]) => {
 			const { maps: { 11: sr, 12: ha }, requiredChampion, gold } = itemData as {
@@ -348,16 +345,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		version,
 		data: Object.fromEntries(
 			filteredItems.map(([itemId, itemData]) => {
-				const { name, stats, gold, image, into: rawInto, from: rawFrom, tags, maps: { 11: sr, 12: ha } } = itemData as any;
-
-				let mapMask = 0;
-				/* aram guardian items, seem to have been added to sr with swiftplay */
-				if (sr && !['2051', '3112', '3177', '3184'].includes(itemId)) {
-					mapMask |= MAPS.sr.mask;
-				}
-				if (ha) {
-					mapMask |= MAPS.ha.mask;
-				}
+				const { name, stats, gold, image, into: rawInto, from: rawFrom, tags } = itemData as any;
 
 				const searchTerms = Array.from(
 					new Set(`${name};${
@@ -386,7 +374,6 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 						sell: gold.sell,
 					},
 					image: image.full,
-					mapMask,
 					into,
 					from,
 					...(tags.includes('Boots') ? { isBoots: true } : undefined),

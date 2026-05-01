@@ -43,13 +43,8 @@ export default defineNuxtConfig({
 	},
 	typescript: {
 		tsConfig: {
-			include: [
-				'../test/**/*.ts',
-				'../scripts/**/*.ts',
-			],
 			compilerOptions: {
 				erasableSyntaxOnly: true,
-				allowImportingTsExtensions: true,
 			},
 		},
 	},

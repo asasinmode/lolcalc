@@ -3,7 +3,8 @@ import type { IGameAbilityId } from './types';
 import itemsData from '../assets/item.json' with { type: 'json' };
 import { CHAMPION_SPECIFICS } from './champion.ts';
 import { GameAbilityId } from './GameAbilityId.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
+import { ABILITY_TYPE } from './meta2.ts';
+import { EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
 
 const { data: items } = itemsData;
 

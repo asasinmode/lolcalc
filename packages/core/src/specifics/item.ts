@@ -1,5 +1,5 @@
-import type { IProviderGroupImageText, IProviderGroupInternalItemData, IShopItem } from './types';
-import itemsData from '../assets/item.json';
+import type { IProviderGroupImageText, IProviderGroupInternalItemData, IShopItem } from '../types';
+import itemsData from '../../app/assets/item.json';
 
 const { data: items } = itemsData;
 

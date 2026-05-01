@@ -11,7 +11,7 @@ import type ISeraphine from '../../public/data/champion/Seraphine.json';
 import type ISona from '../../public/data/champion/Sona.json';
 import type ISyndra from '../../public/data/champion/Syndra.json';
 import type IZaahen from '../../public/data/champion/Zaahen.json';
-import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from './types';
+import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from '../types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
@@ -310,7 +310,7 @@ export const CHAMPION_SPECIFICS = {
 	},
 	Ornn: {
 		MASTERWORK_LEVEL: (self: DamageSource) => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
-		MAX_UPGRADED_ALLIES: 4,
+		MAX_UPGRADED_ALLIES: 5,
 		calcMaxUpgradedAllies(self: DamageSource) {
 			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - self.internalData.value.masterworkLevel));
 		},

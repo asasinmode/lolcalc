@@ -1,3 +1,6 @@
+import type { IChampionAbilityKey, IChampionId } from './types/champion';
+import type { IItem, IItemStat } from './types/item';
+
 export const ABILITY_TYPE = {
 	champion: 'champion',
 	item: 'item',
@@ -9,6 +12,8 @@ export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
 export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
 
 export const ALL_CHAMPION_ABILITY_KEYS: IChampionAbilityKey[] = ['passive', 'q', 'w', 'e', 'r'];
+
+export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee'];
 
 export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent', 'slowResist'] as const;
 
@@ -184,94 +189,6 @@ export const KEPT_UNPURCHASABLE_ITEMS = [
 
 export const RANGED_ONLY_ITEM_IDS = [ITEM_NAME_TO_ID.runaan];
 
-/**
- * paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON}.png`
- * or full external ones if starting with `http`
- */
-export const STAT_ICON: Record<
-	IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
-	string | [url: string, size: number] | [url: string, width: number, height: number]
-> = {
-	OnHit: 'onhit',
-	attackDamage: 'scalead',
-	FlatPhysicalDamageMod: 'scalead',
-	adaptiveForce: 'adaptiveforce',
-	AbilityHasteMod: 'scaleah',
-	abilityHaste: 'scaleah',
-	cooldown: 'scalecooldown',
-	FlatMagicDamageMod: 'scaleap',
-	abilityPower: 'scaleap',
-	PhysicalLethality: 'scaleapen',
-	lethality: 'scaleapen',
-	PercentArmorPenetrationMod: 'scaleapen',
-	percentArmorPen: 'scaleapen',
-	FlatArmorMod: 'scalearmor',
-	armor: 'scalearmor',
-	PercentAttackSpeedMod: 'scaleas',
-	attackSpeed: 'scaleas',
-	bonusAttackSpeedPercent: 'scaleas',
-	attackSpeedRatio: 'scaleas',
-	FlatCritChanceMod: 'scalecrit',
-	critChance: 'scalecrit',
-	FlatCritDamageMod: 'scalecritmult',
-	critDamageMultiplier: 'scalecritmult',
-	PercentHealingAmountMod: 'scalehealshield',
-	healShieldPower: 'scalehealshield',
-	FlatHPPoolMod: 'scalehealth',
-	hp: 'scalehealth',
-	FlatHPRegenMod: 'scalehpregen',
-	PercentBaseHPRegenMod: 'scalehpregen',
-	hpRegen: 'scalehpregen',
-	level: 'scalelevel',
-	PercentLifeStealMod: 'scalels',
-	lifeSteal: 'scalels',
-	FlatMPPoolMod: 'scalemana',
-	mana: 'scalemana',
-	PercentBaseMPRegenMod: 'scalemanaregen',
-	manaRegen: 'scalemanaregen',
-	FlatMagicPenetrationMod: 'scalempen',
-	flatMagicPen: 'scalempen',
-	PercentMagicPenetrationMod: 'scalempen',
-	percentMagicPen: 'scalempen',
-	FlatSpellBlockMod: 'scalemr',
-	magicResist: 'scalemr',
-	FlatMovementSpeedMod: 'scalems',
-	PercentMovementSpeedMod: 'scalems',
-	moveSpeed: 'scalems',
-	attackRange: 'scalerange',
-	PercentOmnivampMod: 'scalesv',
-	omnivamp: 'scalesv',
-	PercentTenacityMod: 'scaletenacity',
-	tenacity: 'scaletenacity',
-	slowResist: ['https://wiki.leagueoflegends.com/en-us/images/Slow_immune_icon.png', 65],
-};
-
-export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
-	IItemStat,
-'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
->, IChampionStatName> = {
-	AbilityHasteMod: 'abilityHaste',
-	FlatArmorMod: 'armor',
-	FlatCritChanceMod: 'critChance',
-	FlatHPPoolMod: 'hp',
-	FlatHPRegenMod: 'hpRegen',
-	FlatMPPoolMod: 'mana',
-	FlatCritDamageMod: 'critDamageMultiplier',
-	FlatMagicDamageMod: 'abilityPower',
-	FlatMagicPenetrationMod: 'flatMagicPen',
-	FlatMovementSpeedMod: 'moveSpeed',
-	FlatPhysicalDamageMod: 'attackDamage',
-	FlatSpellBlockMod: 'magicResist',
-	PercentArmorPenetrationMod: 'percentArmorPen',
-	PercentAttackSpeedMod: 'bonusAttackSpeedPercent',
-	PercentHealingAmountMod: 'healShieldPower',
-	PercentLifeStealMod: 'lifeSteal',
-	PercentMagicPenetrationMod: 'percentMagicPen',
-	PercentTenacityMod: 'tenacity',
-	PhysicalLethality: 'lethality',
-	PercentOmnivampMod: 'omnivamp',
-};
-
 export const ITEM_STAT_META: Record<IItemStat, {
 	name: string;
 	/** value by which the stat is sorted in the item hover tooltip */
@@ -313,57 +230,35 @@ export const ITEM_STAT_META: Record<IItemStat, {
 	PercentOmnivampMod: { name: 'Omnivamp', order: 0, isPercentage: true },
 };
 
-/**
- * tags that appear in game descriptions, like item shop hover tooltip or champ select rune hover
- * they should have appropriate styles (like font color) set in `ItemDescription.vue`
- */
-export const KNOWN_GAME_DESCRIPTION_TAGS = [
-	'passive',	// heading
-	'scalead', // bloodmail, sterak
-	'scaleap',	// rabadon, riftmaker
-	'scalehealth', // roa, heartsteel
-	'scalemana',	// manamune, archangel
-	'scalearmor',	// hullbreaker, terminus
-	'scalemr',	// malignance, force of nature
-	'scalelethality',	// voltaic cyclosword, aphelios passive
-	'attackspeed',	// yuntal, experimental hexplate
-	'onhit',	// iceborn, statik
-	'physicaldamage',	// heartsteel, titanic
-	'magicdamage',	// bami, thornmail
-	'truedamage',	// cosmic drive, shadowflame
-	'health',	// protoplasm harness, no styles
-	'healing',	// guardian angel, warmog
-	'shield',	// fimbulwinter, hexdrinker
-	'lifesteal', // maw of malmortius
-	'omnivamp',	// riftmaker
-	'speed',	// slightly magical footwear, youmuu
-	'gold',	// world atlas, collector
-	'status',	// botrk, iceborn
-	'attention',	// statikk, knight's vow
-	'raritygeneric',	// world atlas
-	'raritylegendary',	// archangel, manamune
-	'rules',	// crimson lucidity
-	'keyword',	// phantom dancer, zeke's convergence
-	'keywordmajor',	// terminus
-	'keywordstealth',	// horizon focus
-	'slow',	// voltaic cyclosword, no styles
-	'active', // seeker's armguard, mercurial scimitar
-	'lol-uikit-tooltipped-keyword', // in many runes
-	'scalelevel', // long first strike, guardian, shield bash
-	'statgood', // long precision legends
-	'font',
-	'b',
-	'i',
-	'hr',
-	'li',
-	'titleleft', // dragon stack descriptions
-	'maintext', // dragon stack descriptions
-	'stattracking', // veigar passive, draven passive
-];
-
 export const ALL_ITEM_CATEGORIES = ['fighter', 'marksman', 'assassin', 'mage', 'tank', 'support'] as const;
 
 export type IItemCategory = typeof ALL_ITEM_CATEGORIES[number];
+
+export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
+	IItemStat,
+'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
+>, IChampionStatName> = {
+	AbilityHasteMod: 'abilityHaste',
+	FlatArmorMod: 'armor',
+	FlatCritChanceMod: 'critChance',
+	FlatHPPoolMod: 'hp',
+	FlatHPRegenMod: 'hpRegen',
+	FlatMPPoolMod: 'mana',
+	FlatCritDamageMod: 'critDamageMultiplier',
+	FlatMagicDamageMod: 'abilityPower',
+	FlatMagicPenetrationMod: 'flatMagicPen',
+	FlatMovementSpeedMod: 'moveSpeed',
+	FlatPhysicalDamageMod: 'attackDamage',
+	FlatSpellBlockMod: 'magicResist',
+	PercentArmorPenetrationMod: 'percentArmorPen',
+	PercentAttackSpeedMod: 'bonusAttackSpeedPercent',
+	PercentHealingAmountMod: 'healShieldPower',
+	PercentLifeStealMod: 'lifeSteal',
+	PercentMagicPenetrationMod: 'percentMagicPen',
+	PercentTenacityMod: 'tenacity',
+	PhysicalLethality: 'lethality',
+	PercentOmnivampMod: 'omnivamp',
+};
 
 export const ITEM_SHOP_STAT_FILTERS = {
 	attackDamage: {
@@ -472,4 +367,112 @@ export const EFFECT_OBJECT_NAME = {
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
 
-export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee'];
+/**
+ * tags that appear in game descriptions, like item shop hover tooltip or champ select rune hover
+ * they should have appropriate styles (like font color) set in `ItemDescription.vue`
+ */
+export const KNOWN_GAME_DESCRIPTION_TAGS = [
+	'passive',	// heading
+	'scalead', // bloodmail, sterak
+	'scaleap',	// rabadon, riftmaker
+	'scalehealth', // roa, heartsteel
+	'scalemana',	// manamune, archangel
+	'scalearmor',	// hullbreaker, terminus
+	'scalemr',	// malignance, force of nature
+	'scalelethality',	// voltaic cyclosword, aphelios passive
+	'attackspeed',	// yuntal, experimental hexplate
+	'onhit',	// iceborn, statik
+	'physicaldamage',	// heartsteel, titanic
+	'magicdamage',	// bami, thornmail
+	'truedamage',	// cosmic drive, shadowflame
+	'health',	// protoplasm harness, no styles
+	'healing',	// guardian angel, warmog
+	'shield',	// fimbulwinter, hexdrinker
+	'lifesteal', // maw of malmortius
+	'omnivamp',	// riftmaker
+	'speed',	// slightly magical footwear, youmuu
+	'gold',	// world atlas, collector
+	'status',	// botrk, iceborn
+	'attention',	// statikk, knight's vow
+	'raritygeneric',	// world atlas
+	'raritylegendary',	// archangel, manamune
+	'rules',	// crimson lucidity
+	'keyword',	// phantom dancer, zeke's convergence
+	'keywordmajor',	// terminus
+	'keywordstealth',	// horizon focus
+	'slow',	// voltaic cyclosword, no styles
+	'active', // seeker's armguard, mercurial scimitar
+	'lol-uikit-tooltipped-keyword', // in many runes
+	'scalelevel', // long first strike, guardian, shield bash
+	'statgood', // long precision legends
+	'font',
+	'b',
+	'i',
+	'hr',
+	'li',
+	'titleleft', // dragon stack descriptions
+	'maintext', // dragon stack descriptions
+	'stattracking', // veigar passive, draven passive
+];
+
+/**
+ * paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON}.png`
+ * or full external ones if starting with `http`
+ */
+export const STAT_ICON: Record<
+	IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
+	string | [url: string, size: number] | [url: string, width: number, height: number]
+> = {
+	OnHit: 'onhit',
+	attackDamage: 'scalead',
+	FlatPhysicalDamageMod: 'scalead',
+	adaptiveForce: 'adaptiveforce',
+	AbilityHasteMod: 'scaleah',
+	abilityHaste: 'scaleah',
+	cooldown: 'scalecooldown',
+	FlatMagicDamageMod: 'scaleap',
+	abilityPower: 'scaleap',
+	PhysicalLethality: 'scaleapen',
+	lethality: 'scaleapen',
+	PercentArmorPenetrationMod: 'scaleapen',
+	percentArmorPen: 'scaleapen',
+	FlatArmorMod: 'scalearmor',
+	armor: 'scalearmor',
+	PercentAttackSpeedMod: 'scaleas',
+	attackSpeed: 'scaleas',
+	bonusAttackSpeedPercent: 'scaleas',
+	attackSpeedRatio: 'scaleas',
+	FlatCritChanceMod: 'scalecrit',
+	critChance: 'scalecrit',
+	FlatCritDamageMod: 'scalecritmult',
+	critDamageMultiplier: 'scalecritmult',
+	PercentHealingAmountMod: 'scalehealshield',
+	healShieldPower: 'scalehealshield',
+	FlatHPPoolMod: 'scalehealth',
+	hp: 'scalehealth',
+	FlatHPRegenMod: 'scalehpregen',
+	PercentBaseHPRegenMod: 'scalehpregen',
+	hpRegen: 'scalehpregen',
+	level: 'scalelevel',
+	PercentLifeStealMod: 'scalels',
+	lifeSteal: 'scalels',
+	FlatMPPoolMod: 'scalemana',
+	mana: 'scalemana',
+	PercentBaseMPRegenMod: 'scalemanaregen',
+	manaRegen: 'scalemanaregen',
+	FlatMagicPenetrationMod: 'scalempen',
+	flatMagicPen: 'scalempen',
+	PercentMagicPenetrationMod: 'scalempen',
+	percentMagicPen: 'scalempen',
+	FlatSpellBlockMod: 'scalemr',
+	magicResist: 'scalemr',
+	FlatMovementSpeedMod: 'scalems',
+	PercentMovementSpeedMod: 'scalems',
+	moveSpeed: 'scalems',
+	attackRange: 'scalerange',
+	PercentOmnivampMod: 'scalesv',
+	omnivamp: 'scalesv',
+	PercentTenacityMod: 'scaletenacity',
+	tenacity: 'scaletenacity',
+	slowResist: ['https://wiki.leagueoflegends.com/en-us/images/Slow_immune_icon.png', 65],
+};

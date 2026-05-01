@@ -1,6 +1,32 @@
-import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './types';
+import type { IEffectObjectName, TAbilityType } from './meta.ts';
+import type { IChampionAbilityKey, IChampionId } from './types/champion';
 import { markRaw } from 'vue';
-import { ABILITY_TYPE } from './meta.ts';
+import { ABILITY_TYPE, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from './meta.ts';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
+
+export interface IChampionAbilityId<
+	Id extends IChampionId = IChampionId,
+	AbilityKey extends IChampionAbilityKey = IChampionAbilityKey,
+	AbilityVariantIndex extends number = number,
+> {
+	type: typeof ABILITY_TYPE['champion'];
+	id: Id;
+	abilityKey: AbilityKey;
+	abilityVariantIndex: AbilityVariantIndex;
+}
+
+export interface IItemAbilityId<Id extends string = string> {
+	type: typeof ABILITY_TYPE['item'];
+	/** item id */
+	id: Id;
+}
+
+export interface IEffectAbilityId<Id extends IEffectObjectName = IEffectObjectName> {
+	type: typeof ABILITY_TYPE['effect'];
+	id: Id;
+}
+
+export type IGameAbilityId = IChampionAbilityId | IItemAbilityId | IEffectAbilityId;
 
 export class GameAbilityId {
 	static build<
