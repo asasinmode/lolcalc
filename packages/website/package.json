@@ -12,33 +12,19 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
-		"type-check": "nuxt typecheck",
-		"lint": "eslint . --fix --cache"
-	},
-	"peerDependencies": {
-		"typescript": "^5"
+		"type-check": "nuxt typecheck"
 	},
 	"dependencies": {
-		"@antfu/eslint-config": "^8.1.1",
-		"@iconify-json/logos": "^1.2.11",
-		"@iconify-json/ph": "^1.2.2",
-		"@node-rs/xxhash": "^1.7.6",
-		"@nuxt/eslint": "1.15.2",
-		"@nuxt/kit": "^4.4.2",
-		"@sindresorhus/fnv1a": "^3.1.0",
-		"@unocss/eslint-config": "^66.6.8",
-		"@unocss/nuxt": "^66.6.8",
-		"eslint": "^10.2.0",
-		"eslint-plugin-format": "^2.0.1",
-		"image-size": "^2.0.2",
-		"lightningcss": "^1.32.0",
-		"npm-run-all2": "^8.0.4",
-		"nuxt": "^4.4.2",
-		"typescript": "^6.0.2",
-		"unocss": "^66.6.8",
-		"vue": "^3.5.32",
-		"vue-router": "^5.0.4",
-		"vue-tsc": "^3.2.6"
+		"@iconify-json/logos": "catalog:",
+		"@iconify-json/ph": "catalog:",
+		"@nuxt/kit": "catalog:",
+		"@unocss/nuxt": "catalog:",
+		"lightningcss": "catalog:",
+		"nuxt": "catalog:",
+		"typescript": "catalog:dev",
+		"unocss": "catalog:",
+		"vue": "catalog:dev",
+		"vue-router": "catalog:"
 	},
 	"overrides": {
 		"vite": "npm:rolldown-vite@latest"

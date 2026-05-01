@@ -1258,7 +1258,7 @@ defineExpose({ el });
 					@click="value.shapeshift"
 				>
 					<span>shapeshift</span>
-					<icon class="i-ph:arrows-clockwise-bold" />
+					<Icon class="i-ph:arrows-clockwise-bold" />
 				</button>
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"

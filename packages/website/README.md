@@ -1,6 +1,10 @@
-# lolcalc.app - League of Legends damage calculator website
+# @lolcalc/website
 
-## setup
+[lolcalc.app](https://lolcalc.app) website
+
+## dev
+
+For more specific instructions, see [contributing.md](contributing.md)
 
 ```bash
 # install dependencies

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { CalculatorResultsTable } from '#components';
 import type { ShallowRef } from 'vue';
+import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 

@@ -1,13 +1,12 @@
 {
-	"name": "@lolcalc/core",
+	"name": "@lolcalc/shared",
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"description": "core, game related functionality for lolcalc",
+	"description": "internal utils seared between @lolcalc",
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
 	"devDependencies": {
-		"typescript": "catalog:dev",
-		"vue": "catalog:dev"
+		"typescript": "catalog:dev"
 	}
 }

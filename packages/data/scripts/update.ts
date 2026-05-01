@@ -12,12 +12,12 @@ import path from 'node:path';
 import process from 'node:process';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
-import { CHAMPION_SPECIFICS } from '../shared/specifics/champion.ts';
-import { replaceGameDescriptionVariables } from '../shared/variables/game.ts';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../shared/specifics/effect.ts';
-import { replaceGameDescriptionStringtableVariables } from '../shared/variables/stringtable.ts';
-import { RUNE_SPECIFICS } from '../shared/specifics/rune.ts';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS, SHAPESHIFTING_CHAMPION_IDS } from '../shared/meta.ts';
+import { CHAMPION_SPECIFICS } from '../shared/specifics/champion.ts';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../shared/specifics/effect.ts';
+import { RUNE_SPECIFICS } from '../shared/specifics/rune.ts';
+import { replaceGameDescriptionVariables } from '../shared/variables/game.ts';
+import { replaceGameDescriptionStringtableVariables } from '../shared/variables/stringtable.ts';
 
 let latestVersion = process.argv[2];
 

@@ -8,11 +8,6 @@ export default defineNuxtConfig({
 	features: {
 		inlineStyles: false,
 	},
-	eslint: {
-		config: {
-			standalone: false,
-		},
-	},
 	vite: {
 		build: {
 			target: 'esnext',
@@ -48,6 +43,6 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	modules: ['@nuxt/eslint', '@unocss/nuxt'],
+	modules: ['@unocss/nuxt'],
 	css: ['~/assets/index.css'],
 });

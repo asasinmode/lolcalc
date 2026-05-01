@@ -1,5 +1,5 @@
-import type { CalculatorResultsTable } from '#components';
 import type { ShallowRef } from 'vue';
+import type { CalculatorResultsTable } from '#components';
 
 const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';

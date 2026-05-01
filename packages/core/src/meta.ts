@@ -1,16 +1,6 @@
 import type { IChampionAbilityKey, IChampionId } from './types/champion';
 import type { IItem, IItemStat } from './types/item';
 
-export const ABILITY_TYPE = {
-	champion: 'champion',
-	item: 'item',
-	effect: 'effect',
-} as const;
-
-export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
-
-export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
-
 export const ALL_CHAMPION_ABILITY_KEYS: IChampionAbilityKey[] = ['passive', 'q', 'w', 'e', 'r'];
 
 export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee'];

@@ -8,14 +8,35 @@
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
 	"scripts": {
+		"typecheck": "vue-tsc --noEmit",
 		"lint": "eslint --fix --cache ."
 	},
+	"devDependencies": {
+		"@antfu/eslint-config": "catalog:",
+		"@lolcalc/core": "workspace:*",
+		"@lolcalc/data": "workspace:*",
+		"@lolcalc/shared": "workspace:*",
+		"@lolcalc/website": "workspace:*",
+		"@nuxt/eslint": "catalog:",
+		"@unocss/eslint-config": "catalog:",
+		"eslint": "catalog:",
+		"eslint-plugin-format": "catalog:",
+		"vue-tsc": "catalog:"
+	},
+	"resolutions": {
+		"@lolcalc/core": "workspace:*",
+		"@lolcalc/data": "workspace:*",
+		"@lolcalc/shared": "workspace:*",
+		"@lolcalc/website": "workspace:*",
+		"typescript": "catalog:dev",
+		"vue": "catalog:dev"
+	},
 	"simple-git-hooks": {
-    "pre-push": "npx lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,ts,vue,md,json,css}": [
-      "eslint --cache --fix"
-    ]
-  }
+		"pre-push": "npx lint-staged"
+	},
+	"lint-staged": {
+		"*.{js,ts,vue,md,json,css}": [
+			"eslint --cache --fix"
+		]
+	}
 }

@@ -5,5 +5,11 @@
 	"private": true,
 	"description": "data used by lolcalc and scripts for updating it",
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
-	"license": "AGPL-3.0-only"
+	"license": "AGPL-3.0-only",
+	"devDependencies": {
+		"@node-rs/xxhash": "catalog:",
+		"@sindresorhus/fnv1a": "catalog:",
+		"image-size": "catalog:",
+		"typescript": "catalog:dev"
+	}
 }
