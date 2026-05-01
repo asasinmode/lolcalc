@@ -194,6 +194,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
+check circular dependencies
+
 ### future features
 
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
@@ -231,6 +233,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] combo damage / sequence of things, choose spells/aas in order, apply them to target, show damage
 - [ ] aram
   - item overrides - `DataValuesModeOverride`
+  - partial map code removed shortly after `986acda`;
 - [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
 
 #### misc pages

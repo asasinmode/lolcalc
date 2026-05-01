@@ -1,4 +1,4 @@
-import { ITEM_TO_CHAMPION_STATS } from './meta';
+import { ITEM_TO_CHAMPION_STATS } from '../meta.ts';
 
 interface IStatsCalculationResult {
 	/** raw stats from champion file */

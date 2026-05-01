@@ -1,6 +1,8 @@
-import type { IPossibleDynamicValues } from './types';
+import type { DamageSource } from '../DamageSource';
+import type { IPossibleDynamicValues } from '../types';
+import type { IChampionRunes, IRuneShardSlotValue } from '../types/rune';
 // TODO figure out type assertion if champion.ts also imports champion.json and there are errors
-import runeData from '../assets/rune.json' with { type: 'json' };
+import runeData from '../../app/assets/rune.json' with { type: 'json' };
 
 const { data } = runeData;
 

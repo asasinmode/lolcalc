@@ -1,5 +1,3 @@
-export type UnionKeys<T> = T extends T ? keyof T : never;
-
 export interface ITexture {
 	spriteSheet: string;
 	resWidth: number;
@@ -21,12 +19,6 @@ export interface IShopItem {
 	isLegendary: boolean;
 	srStatus: string;
 }
-
-/**
- * record containing possible dynamic values for a variable (all values the variable is expected to resolve to)
- * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
- */
-export type IPossibleDynamicValues = Record<string, (string | number)[]>;
 
 /**
  * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value
@@ -129,52 +121,3 @@ export interface ISpecificComponents {
 	extras?: Component | Component[];
 	effects?: Component | Component[];
 }
-
-export interface IChampionAbilityId<
-	Id extends IChampionId = IChampionId,
-	AbilityKey extends IChampionAbilityKey = IChampionAbilityKey,
-	AbilityVariantIndex extends number = number,
-> {
-	type: typeof ABILITY_TYPE['champion'];
-	id: Id;
-	abilityKey: AbilityKey;
-	abilityVariantIndex: AbilityVariantIndex;
-}
-
-export interface IItemAbilityId<Id extends string = string> {
-	type: typeof ABILITY_TYPE['item'];
-	/** item id */
-	id: Id;
-}
-
-export interface IEffectAbilityId<Id extends IEffectObjectName = IEffectObjectName> {
-	type: typeof ABILITY_TYPE['effect'];
-	id: Id;
-}
-
-export type IGameAbilityId = IChampionAbilityId | IItemAbilityId | IEffectAbilityId;
-
-export type IProviderGroupEffect = {
-	effectObjectName?: never;
-} | IDamageSourceEffectProvider;
-
-export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
-
-export type IProviderGroupInternalItemData = {
-	setupData?: never;
-	internalDataProperties?: never;
-} | IDamageSourceInternalItemDataProvider;
-
-export interface IAbilityImageTextProvider {
-	/**
-	 * text on the item's image, like current heartsteel/mejai stacks
-	 */
-	imgText: (damageSource: DamageSource, dataProperty?: any) => string | number;
-	/** sr only label for the shown image text */
-	imgTextLabel: string;
-}
-
-export type IProviderGroupImageText = {
-	imgText?: never;
-	imgTextLabel?: never;
-} | IAbilityImageTextProvider;

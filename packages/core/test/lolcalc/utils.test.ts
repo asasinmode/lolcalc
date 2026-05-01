@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import test from 'node:test';
-import { roundVariable } from '../../app/utils/misc.ts';
+import { roundVariable } from '../../lolcalc/utils.ts';
 
-test('app/utils/misc.ts', async (t) => {
+test('lolcalc/utils.ts', async (t) => {
 	await t.test('roundVariable formats numbers correctly', () => {
 		/* runes */
 		assert.strictEqual(roundVariable(1.8).toString(), '1.8', 'conqueror');

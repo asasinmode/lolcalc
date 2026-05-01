@@ -7,13 +7,11 @@ type IAllItemCategory = IItemCategory | 'all';
 
 const { version, minorVersion } = usePatchVersion();
 const items = useItems();
-const maps = useMaps();
 const ui = useUi();
 
 const inventoryValue = computed(() => damageSource.value?.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0) ?? 0);
 
 const vDialog = useTemplateRef('vDialog');
-const mapMask = ref<number>(maps.sr.mask);
 const selectedCategory = ref<IAllItemCategory>('all');
 const sortOrderSwapped = ref(false);
 const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(
@@ -47,12 +45,11 @@ const TRANSFORMED_TEAR_ITEM_IDS = [
 	ITEM_NAME_TO_ID.fimbulwinter,
 ] as string[];
 
-const sortedByPriceForMap = computed(() => Object
+const sortedByPrice = computed(() => Object
 	.values(items)
-	.sort((a, b) => a.gold.total - b.gold.total)
-	.filter(item => (item.mapMask & mapMask.value) !== 0));
+	.sort((a, b) => a.gold.total - b.gold.total));
 
-const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
+const shopItems = computed<IShopItem[]>(() => sortedByPrice.value.map((item) => {
 	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value, items) : 0;
 	const buyability = itemBuyability(item, damageSource.value, items);
 	const isBought = damageSource.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id);
