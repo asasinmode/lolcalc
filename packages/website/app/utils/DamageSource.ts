@@ -775,20 +775,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	addEffect(abilityId: IEffectAbilityId, data?: IDamageSourceEffect['data']) {
+	async addEffect(abilityId: IEffectAbilityId, data?: IDamageSourceEffect['data']) {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
 		if (~existingEffectIndex) {
 			console.warn(`[DamageSource addEffect] adding existing effect`, abilityId);
-			this.appliedEffects.value[existingEffectIndex]!.data = specific.setupData(data);
+			this.appliedEffects.value[existingEffectIndex]!.data = await specific.setupData(data);
 		} else {
 			this.appliedEffects.value.push({
 				id: GameAbilityId.stringify(abilityId),
 				abilityId,
-				data: specific.setupData(data),
+				data: await specific.setupData(data),
 			});
-			this.computed.effects.value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
+			this.computed.effects.value.push(await computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
 		}
 	}
 
@@ -1318,9 +1318,11 @@ export interface IComputedAppliedEffect {
 	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
 	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
 	specific: IEffectSpecific;
+	/** the `maxValue` computed from the effect specific */
+	maxValue?: number;
 }
 
-function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
+async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): Promise<IComputedAppliedEffect> {
 	const specific = EFFECT_SPECIFICS[effect.abilityId.id] as IEffectSpecific;
 	const rv: IComputedAppliedEffect = {
 		id: effect.id,
@@ -1330,6 +1332,7 @@ function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect):
 		imgText: computed(() => specific.imgText?.(effect.data)),
 		isActive: computed(() => specific.isActive(effect.data)),
 		specific,
+		maxValue: typeof specific.maxValue === 'function' ? await specific.maxValue() : specific.maxValue,
 	};
 
 	gameAbilityImage(specific.sourceAbility).then(([imgSrc, imgSize]) => {

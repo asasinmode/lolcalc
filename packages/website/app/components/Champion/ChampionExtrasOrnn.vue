@@ -9,17 +9,19 @@ const maxUpgradedAllies = computed(() => CHAMPION_SPECIFICS.Ornn.calcMaxUpgraded
 
 const SlotIndexComponent = await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', 1, 6);
 const UpgradedAlliesComponent = await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'passiveUpgradedAllies', 'Allies with masterwork item', 0, maxUpgradedAllies);
+
+const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalData.value.masterworkLevel;
 </script>
 
 <template>
-	<SlotIndexComponent v-bind="$props" :disabled="damageSource.level.value < CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL">
+	<SlotIndexComponent v-bind="$props" :disabled="damageSource.level.value < masterworkLevel">
 		<p>
-			needs level {{ CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL }}+
+			needs level {{ masterworkLevel }}+
 		</p>
 	</SlotIndexComponent>
-	<UpgradedAlliesComponent v-bind="$props" :disabled="damageSource.level.value < (CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL + 1)">
+	<UpgradedAlliesComponent v-bind="$props" :disabled="damageSource.level.value < (masterworkLevel + 1)">
 		<p>
-			needs level {{ CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL + 1 }}+
+			needs level {{ masterworkLevel + 1 }}+
 		</p>
 	</UpgradedAlliesComponent>
 </template>

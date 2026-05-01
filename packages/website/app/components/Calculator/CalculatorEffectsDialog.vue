@@ -6,7 +6,6 @@ import { ITEM_COMPONENTS } from '~/components/Item';
 
 const damageSource = defineModel<DamageSource>();
 
-const text = useText();
 const items = useItems();
 const { minorVersion } = usePatchVersion();
 

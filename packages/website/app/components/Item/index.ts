@@ -166,7 +166,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue = 0, maxValue = 1 } = effectSpecific;
 
 		ITEM_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue > 1
+		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue !== 1
 			? await numberExtra(abilityId, 0, label, minValue, maxValue!)
 			: await booleanExtra(abilityId, 0, label);
 	}

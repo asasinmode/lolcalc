@@ -198,7 +198,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with , it works only on first value
-		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue > 1
+		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue !== 1
 			? await numberExtra(abilityId, 0, label, minValue, maxValue)
 			: await booleanExtra(abilityId, 0, label);
 	}

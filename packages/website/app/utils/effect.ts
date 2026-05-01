@@ -165,7 +165,7 @@ export const EFFECT_SPECIFICS = {
 		},
 		setupData(data): [vDecay: number] {
 			return [
-				clamp(0, data?.[0] ?? 0, this.maxValue!),
+				clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.bloodletterVileDecay].maxValue),
 			];
 		},
 		isActive(data: [vDecay: number]) {
@@ -181,7 +181,7 @@ export const EFFECT_SPECIFICS = {
 		},
 		setupData(data): [carve: number] {
 			return [
-				clamp(0, data?.[0] ?? 0, this.maxValue!),
+				clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue!),
 			];
 		},
 		isActive(data: [carve: number]) {
@@ -225,7 +225,7 @@ export const EFFECT_SPECIFICS = {
 		minValue: 0,
 		maxValue: 6,
 		setupData(data): [masterworkSlotIndex: number] {
-			return [clamp(this.minValue!, data?.[0] ?? 0, this.maxValue!)];
+			return [clamp(this.minValue!, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.ornnPLivingForge].maxValue!)];
 		},
 		isActive(data: [masterworkSlotIndex: number]) {
 			return data[0];
@@ -237,9 +237,12 @@ export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.rellPBreakMold]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Rell', 'passive', 0),
 		label: 'Break the Mold stacks',
-		maxValue: CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS,
-		setupData(data): [breakMoldStacks: number] {
-			return [clamp(0, data?.[0] ?? 0, this.maxValue!)];
+		maxValue: async () => {
+			const rell = await useChampion('Rell');
+			return CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: rell } } as DamageSource);
+		},
+		async setupData(data): Promise<[breakMoldStacks: number]> {
+			return [clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.rellPBreakMold].maxValue())];
 		},
 		isActive(data: [breakMoldStacks: number]) {
 			return data[0];
@@ -260,14 +263,14 @@ export interface IEffectSpecific {
 	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.appliedEffects[number].data`
 	 * @param data the existing effect's data for cloning
 	 */
-	setupData: (data?: IDamageSourceEffect['data']) => IDamageSourceEffect['data'];
+	setupData: (data?: IDamageSourceEffect['data']) => Promise<IDamageSourceEffect['data']> | IDamageSourceEffect['data'];
 	/** checks if effect's data is not the default value */
 	isActive: (data: any) => number | boolean;
 	imgText?: (data: any) => number | string;
 	/** @default 0 */
 	minValue?: number;
 	/** @default 1 */
-	maxValue?: number;
+	maxValue?: number | (() => Promise<number> | number);
 }
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];

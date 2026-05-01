@@ -29,8 +29,10 @@ export type IGameAbilitySpecific<T extends IGameAbilityId> = T extends IChampion
 
 export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>
 	= Specific extends { setupData: (...args: any) => any }
-		? ReturnType<Specific['setupData']>
+		? UnwrapPromise<ReturnType<Specific['setupData']>>
 		: never;
+
+type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
 type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
 type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
@@ -41,7 +43,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	min?: number,
-	max?: MaybeRef<number> | ((self: DamageSource) => MaybeRef<number>),
+	max?: MaybeRef<number> | ((self: DamageSource) => Promise<MaybeRef<number>> | MaybeRef<number>),
 	step?: number,
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
@@ -50,7 +52,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 
 		let localMax = max;
 		if (typeof localMax === 'function') {
-			localMax = localMax(props.damageSource);
+			localMax = await localMax(props.damageSource);
 		}
 
 		return () => h(VExtrasNumber, {
