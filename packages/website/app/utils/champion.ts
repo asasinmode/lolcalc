@@ -3,6 +3,8 @@ import type IIrelia from '../../public/data/champion/Irelia.json';
 import type IJax from '../../public/data/champion/Jax.json';
 import type IKaisa from '../../public/data/champion/Kaisa.json';
 import type INaafiri from '../../public/data/champion/Naafiri.json';
+import type IOrianna from '../../public/data/champion/Orianna.json';
+import type IOrnn from '../../public/data/champion/Ornn.json';
 import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
@@ -293,27 +295,29 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Orianna: {
-		MAX_PASSIVE_STACKS: 2,
+		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IOrianna).abilities.passive.variants[0]!.dataValues.StackCount[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
-				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS),
+				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS(self)),
 			};
 		},
 	},
 	Ornn: {
-		MASTERWORK_LEVEL: 13,
+		MASTERWORK_LEVEL: (self: DamageSource) => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
 		MAX_UPGRADED_ALLIES: 4,
 		calcMaxUpgradedAllies(self: DamageSource) {
-			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL));
+			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - self.internalData.value.masterworkLevel));
 		},
-		setupData(self): { masterworkItemSlot: number; passiveUpgradedAllies: number } & IDamageSourceInternalDataBase {
+		setupData(self): { masterworkLevel: number; masterworkItemSlot: number; passiveUpgradedAllies: number } & IDamageSourceInternalDataBase {
+			const masterworkLevel = CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL(self);
 			return {
-				masterworkItemSlot: self.level.value >= CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL
+				masterworkLevel,
+				masterworkItemSlot: self.level.value >= masterworkLevel
 					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 0), 6)
 					: 0,
 				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self)),
 				_watchHandles: markRaw([watch(self.level, () => {
-					if (self.level.value < CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL) {
+					if (self.level.value < self.internalData.value.masterworkLevel) {
 						self.internalData.value.masterworkItemSlot = 0;
 					}
 					self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self));

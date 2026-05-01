@@ -847,7 +847,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			let index = -1;
 
 			if (this.champion.value?.id === 'Ornn') {
-				if (this.level.value >= CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL) {
+				if (this.level.value >= (this as DamageSource<'Ornn'>).internalData.value.masterworkLevel) {
 					index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
 				}
 			} else {
