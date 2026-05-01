@@ -1,0 +1,21 @@
+{
+	"name": "@lolcalc/monorepo",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"packageManager": "pnpm@10.33.2",
+	"description": "collection of tools and apps related to lolcalc",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"license": "AGPL-3.0-only",
+	"scripts": {
+		"lint": "eslint --fix --cache ."
+	},
+	"simple-git-hooks": {
+    "pre-push": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue,md,json,css}": [
+      "eslint --cache --fix"
+    ]
+  }
+}
