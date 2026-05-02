@@ -1,8 +1,9 @@
-import type { IEffectObjectName, TAbilityType } from './meta.ts';
-import type { IChampionAbilityKey, IChampionId } from './types/champion';
+import type { IChampionId } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, IEffectObjectName, TAbilityType } from '@lolcalc/shared';
+import championData from '@lolcalc/data/files/champion.json' with { type: 'json' };
+import itemData from '@lolcalc/data/files/item.json' with { type: 'json' };
+import { ABILITY_TYPE, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
 import { markRaw } from 'vue';
-import { ABILITY_TYPE, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from './meta.ts';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
 
 export interface IChampionAbilityId<
 	Id extends IChampionId = IChampionId,
@@ -76,12 +77,16 @@ export class GameAbilityId {
 	 * `abilityKeyIndex` is `ALL_CHAMPION_ABILITY_KEYS.indexOf(abilityKey)`
 	 * `effectObjectIndex` is `Object.keys(EFFECT_OBJECT_NAMES).indexOf(id)`
 	 */
-	static stringify(id: IGameAbilityId): string {
+	static stringify(
+		id: IGameAbilityId,
+		championIdToKey: Record<IChampionId, string>,
+		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
+	): string {
 		const typeIndex = ALL_ABILITY_TYPES.indexOf(id.type);
 		if (id.type === ABILITY_TYPE.champion) {
 			return [
 				typeIndex,
-				CHAMPION_ID_TO_KEY[id.id],
+				championIdToKey[id.id],
 				ALL_CHAMPION_ABILITY_KEYS.indexOf(id.abilityKey),
 				id.abilityVariantIndex,
 			].join('-');
@@ -90,14 +95,18 @@ export class GameAbilityId {
 		if (id.type === ABILITY_TYPE.effect) {
 			return [
 				typeIndex,
-				EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(entry => entry[0] === id.id),
+				effectSpecificsObjectEntries.findIndex(entry => entry[0] === id.id),
 			].join('-');
 		}
 
 		return [typeIndex, id.id].join('-');
 	}
 
-	static parse(value: string): IGameAbilityId | undefined {
+	static parse(
+		value: string,
+		championKeyToId: Record<string, IChampionId>,
+		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
+	): IGameAbilityId | undefined {
 		const [rawType, id, rawAbilityKeyIndex, rawAbilityVariantIndex] = value.split('-');
 		if (!id) {
 			return;
@@ -106,9 +115,8 @@ export class GameAbilityId {
 		const type = rawType ? ALL_ABILITY_TYPES[Number.parseInt(rawType)] : undefined;
 
 		if (type === ABILITY_TYPE.champion) {
-			const champions = useChampions();
-			const championId = CHAMPION_KEY_TO_ID[id];
-			if (!championId || !(championId in champions)) {
+			const championId = championKeyToId[id];
+			if (!championId || !(championId in championData.data)) {
 				return;
 			}
 
@@ -128,8 +136,7 @@ export class GameAbilityId {
 		}
 
 		if (type === ABILITY_TYPE.item) {
-			const items = useItems();
-			if (!items[id]) {
+			if (!(id in itemData.data)) {
 				return;
 			}
 
@@ -137,7 +144,7 @@ export class GameAbilityId {
 		}
 
 		if (type === ABILITY_TYPE.effect) {
-			const specificEntry = EFFECT_SPECIFICS_OBJECT_ENTRIES.find(entry => entry[0] === id);
+			const specificEntry = effectSpecificsObjectEntries.find(entry => entry[0] === id);
 			if (!specificEntry) {
 				return;
 			}

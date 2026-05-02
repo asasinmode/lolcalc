@@ -1,14 +1,14 @@
 import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import type { UnionKeys } from '@lolcalc/shared/types';
-import type IChampionsData from '../files/champion.json';
+import type IChampionData from '../files/champion.json';
 import type TExampleChampion from '../files/champion/Ahri.json';
-import type IItemsData from '../files/item.json';
-import type IDragonsData from '../files/misc.json';
-import type IRunesData from '../files/rune.json';
+import type IItemData from '../files/item.json';
+import type IMiscData from '../files/misc.json';
+import type IRuneData from '../files/rune.json';
 
-export type IDragonName = keyof typeof IDragonsData['data']['dragons'];
+export type IDragonName = keyof typeof IMiscData['data']['dragons'];
 
-export type IItemStat = UnionKeys<(typeof IItemsData)['data'][keyof typeof IItemsData['data']]['stats']> | 'PercentOmnivampMod';
+export type IItemStat = UnionKeys<(typeof IItemData)['data'][keyof typeof IItemData['data']]['stats']> | 'PercentOmnivampMod';
 
 export interface IItem {
 	id: string;
@@ -42,7 +42,7 @@ export interface IItem {
 	effectAmount?: number[];
 }
 
-export type IChampionId = keyof typeof IChampionsData['data'];
+export type IChampionId = keyof typeof IChampionData['data'];
 
 export type IChampionStat = keyof typeof TExampleChampion['stats'];
 
@@ -57,7 +57,7 @@ export interface IChampion<T extends IChampionId = IChampionId> {
 	stringtable: Record<string, string>;
 }
 
-export interface IListedChampion extends Pick<IChampion, 'id' | 'key' | 'name'> {
+export interface IListedChampion<T extends IChampionId = any> extends Pick<IChampion<T>, 'id' | 'key' | 'name'> {
 	image: string;
 	roles: Partial<Record<IChampionRole, boolean>>;
 }
@@ -103,8 +103,8 @@ export interface IChampionAbilityVariant {
 	objectName: string;
 }
 
-type IDataShards = typeof IRunesData['data']['shards'];
-type IDataPaths = typeof IRunesData['data']['paths'];
+type IDataShards = typeof IRuneData['data']['shards'];
+type IDataPaths = typeof IRuneData['data']['paths'];
 
 export type IRuneShardSlotName = keyof IDataShards;
 export type IRuneShardSlotValue = {

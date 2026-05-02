@@ -1,8 +1,32 @@
-import type { IChampionId, IDamageSource } from '@lolcalc/data/types';
-import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './types';
+import type { IChampion, IChampionId, IChampionRunes, IDragonName, IItem, IListedChampion, IRuneShardSlotName } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
+import type { IChampionRole } from '@lolcalc/shared/types';
+import type { MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
+import type { IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
+import type { IHypotheticalChampionSpecifics } from './specifics/champion';
+import type { IHypotheticalItemSpecifics, TItemSpecifics } from './specifics/item';
+import { RUNE_SLOT_NAME_TO_NUMBER } from '@lolcalc/data';
+import championData from '@lolcalc/data/files/champion.json';
+import itemData from '@lolcalc/data/files/item.json';
+import runeData from '@lolcalc/data/files/rune.json';
+import textData from '@lolcalc/data/files/text.json';
+import { RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import { roundVariable } from '@lolcalc/shared/utils';
+import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
+import { calculateChampionStats } from './calculate/championStats';
+import { CHAMPION_SPECIFICS } from './specifics/champion';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect';
+import { ITEM_SPECIFICS } from './specifics/item';
+import { runePathsEmpty, runesInvalid } from './specifics/rune';
 
-interface IOverrides<Id extends IChampionId = IChampionId> {
+const { data: champions } = championData;
+const { data: items } = itemData;
+const { data: runes } = runeData;
+const { data: text } = textData;
+
+export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
+
+interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	champion: UnwrapRef<IDamageSource['listedChampion']>;
 	level: UnwrapRef<IDamageSource['level']>;
 	items: UnwrapRef<IDamageSource['items']>;
@@ -19,9 +43,69 @@ interface IOverrides<Id extends IChampionId = IChampionId> {
 	appliedEffects: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
 }
 
-export class DamageSource<Id extends IChampionId = IChampionId> implements IDamageSource<Id> {
-	id: IDamageSource['id'];
-	color: IDamageSource['color'];
+type IInternalDataSetupChampions = {
+	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
+		? K
+		: never;
+}[keyof typeof CHAMPION_SPECIFICS];
+
+export interface IDamageSourceInternalDataBase {
+	_watchHandles?: WatchHandle[];
+}
+
+export interface IDamageSourceInternalDataProvider {
+	/**
+	 * returns the `internalData.value` for specific `DamageSource`'s champion
+	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
+	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
+	 */
+	setupData: (self: DamageSource) => any;
+}
+
+export interface IDamageSourceInternalItemDataProvider {
+	/**
+	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.internalItemData`
+	 * the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
+	 *
+	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
+	 */
+	setupData: (self: DamageSource) => any;
+	/** the properties `setupData` uses, needed for cleanup */
+	internalDataProperties: string[];
+}
+
+export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
+
+export type IProviderGroupInternalItemData = {
+	setupData?: never;
+	internalDataProperties?: never;
+} | IDamageSourceInternalItemDataProvider;
+
+export interface IAbilityImageTextProvider {
+	/**
+	 * text on the item's image, like current heartsteel/mejai stacks
+	 */
+	imgText: (damageSource: DamageSource, dataProperty?: any) => string | number;
+	/** sr only label for the shown image text */
+	imgTextLabel: string;
+}
+
+export type IProviderGroupImageText = {
+	imgText?: never;
+	imgTextLabel?: never;
+} | IAbilityImageTextProvider;
+
+export interface IDamageSourceEffect<T extends any[] = any[]> {
+	/** stringified `abilityId` */
+	id: string;
+	abilityId: IEffectAbilityId;
+	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
+	data: T;
+}
+
+export class DamageSource<Id extends IChampionId | undefined = any> implements IDamageSource<Id> {
+	id: string;
+	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
 
@@ -30,10 +114,6 @@ export class DamageSource<Id extends IChampionId = IChampionId> implements IDama
 
 	isRanged = computed(() => this.champion.value && (this.stats.value.base.attackRange > 325));
 	stats = computed(() => calculateChampionStats(this));
-	itemDamageCalculationTarget = computed<IItemVariableCalculationTarget>(() => ({
-		isRanged: this.isRanged.value,
-		stats: this.stats.value?.total,
-	}));
 
 	runes: Ref<IChampionRunes>;
 	runePathsEmpty = computed(() => runePathsEmpty(this.runes.value));
@@ -388,9 +468,6 @@ export class DamageSource<Id extends IChampionId = IChampionId> implements IDama
 	}
 
 	stringifiedData = computed<string>(() => {
-		const runes = useRunes();
-		const text = useText();
-
 		const primarySlots = Array.from({ length: 4 }, (_, i) => {
 			const slotOptions = runes.paths[this.runes.value.paths.primary].slots[i]!;
 			const slotValue = this.runes.value.paths.primarySlots[i];
@@ -444,11 +521,6 @@ export class DamageSource<Id extends IChampionId = IChampionId> implements IDama
 	});
 
 	static fromStringifiedData(data: string): DamageSource {
-		const champions = useChampions();
-		const items = useItems();
-		const runes = useRunes();
-		const text = useText();
-
 		const rv = new DamageSource();
 
 		const [
@@ -1135,8 +1207,8 @@ function abilityVariantText(
 	};
 }
 
-function objectKeyIndex<T extends object>(key: keyof T | undefined, object: T): string | number {
-	return key ? Object.keys(object).indexOf(key as string) : '';
+function objectKeyIndex(key: string | undefined, object: object): string | number {
+	return key ? Object.keys(object).indexOf(key) : '';
 }
 
 function parseStringifiedRunePathSlots(data: string): ([slotIndex: number, slotOptionIndex: number] | undefined)[] {

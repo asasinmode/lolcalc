@@ -1,10 +1,5 @@
+import type { ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
-import type { ITexture } from '~/utils/types';
-import { data } from '../assets/ui.json';
-
-export function useUi() {
-	return data satisfies IUiData;
-}
 
 export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: number): ImgHTMLAttributes & {
 	['data-sprite-image']: string;
@@ -33,33 +28,5 @@ export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [sta
 			'--txt-uv-start-x': `-${startX}px`,
 			'--txt-uv-start-y': `-${startY}px`,
 		},
-	};
-}
-
-interface IUiData {
-	shop: {
-		categories: Record<IItemCategory | 'all', ITexture>;
-		stats: Partial<Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>>;
-		clearFilters: {
-			default: ITexture;
-			hover: Pick<ITexture, 'uv'>;
-		};
-		swapItemOrder: {
-			default: ITexture;
-			hover: Pick<ITexture, 'uv'>;
-		};
-		pin: {
-			default: ITexture;
-			hover: Pick<ITexture, 'uv'>;
-			slcHover: Pick<ITexture, 'uv'>;
-		};
-	};
-	playerStats: Record<string, ITexture>;
-	dragons: Record<IDragonName, {
-		stack: ITexture;
-		soulActive: ITexture;
-	}>;
-	practiceTool: {
-		statusEffect: ITexture;
 	};
 }

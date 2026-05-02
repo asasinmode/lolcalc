@@ -17,6 +17,9 @@
 	"dependencies": {
 		"@iconify-json/logos": "catalog:website",
 		"@iconify-json/ph": "catalog:website",
+		"@lolcalc/core": "workspace:",
+		"@lolcalc/data": "workspace:",
+		"@lolcalc/shared": "workspace:",
 		"@nuxt/kit": "catalog:website",
 		"@unocss/nuxt": "catalog:website",
 		"lightningcss": "catalog:website",

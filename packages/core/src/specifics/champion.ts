@@ -1,17 +1,24 @@
-import type IEzreal from '../../public/data/champion/Ezreal.json';
-import type IIrelia from '../../public/data/champion/Irelia.json';
-import type IJax from '../../public/data/champion/Jax.json';
-import type IKaisa from '../../public/data/champion/Kaisa.json';
-import type IMonkeyKing from '../../public/data/champion/MonkeyKing.json';
-import type INaafiri from '../../public/data/champion/Naafiri.json';
-import type IOrianna from '../../public/data/champion/Orianna.json';
-import type IOrnn from '../../public/data/champion/Ornn.json';
-import type IRell from '../../public/data/champion/Rell.json';
-import type ISeraphine from '../../public/data/champion/Seraphine.json';
-import type ISona from '../../public/data/champion/Sona.json';
-import type ISyndra from '../../public/data/champion/Syndra.json';
-import type IZaahen from '../../public/data/champion/Zaahen.json';
-import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from '../types';
+import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
+import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
+import type IJax from '@lolcalc/data/files/champion/Jax.json';
+import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
+import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
+import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
+import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
+import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
+import type IRell from '@lolcalc/data/files/champion/Rell.json';
+import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
+import type ISona from '@lolcalc/data/files/champion/Sona.json';
+import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
+import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
+import type { IChampionId } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
+import type { DamageSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
+import type { IPossibleDynamicValues } from '../types';
+import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
+import { clamp } from '@lolcalc/shared/utils';
+import { computed, markRaw, watch } from 'vue';
+import { VARIABLE_CALCULATION_FNS } from '../variables/game';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
@@ -322,12 +329,12 @@ export const CHAMPION_SPECIFICS = {
 					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 0), 6)
 					: 0,
 				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self)),
-				_watchHandles: markRaw([watch(self.level, () => {
+				_watchHandles: [watch(self.level, () => {
 					if (self.level.value < self.internalData.value.masterworkLevel) {
 						self.internalData.value.masterworkItemSlot = 0;
 					}
 					self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self));
-				}, { immediate: true })]),
+				}, { immediate: true })],
 			};
 		},
 	},

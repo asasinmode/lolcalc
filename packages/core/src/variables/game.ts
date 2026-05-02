@@ -1,12 +1,7 @@
-import type { IChampionStats } from '@lolcalc/shared';
-import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from './types';
+import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
+import type { DamageSource } from '../DamageSource.ts';
+import { STAT_ICON } from '@lolcalc/data';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
-import { STAT_ICON } from './index.ts';
-
-export interface IItemVariableCalculationTarget {
-	isRanged?: boolean;
-	stats?: IChampionStats;
-}
 
 type IWithDynamic<T> = T & {
 	dynamicValues?: number | number[];
@@ -24,7 +19,7 @@ interface IVariableValueResult {
 }
 
 // TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
-export function itemVariableValue(variable: string, item: IItem, target?: IItemVariableCalculationTarget): IVariableValueResult {
+export function itemVariableValue(variable: string, item: IItem, isRanged?: boolean, damageSource?: DamageSource): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
 
@@ -34,22 +29,24 @@ export function itemVariableValue(variable: string, item: IItem, target?: IItemV
 		value = item.dataValues[variable];
 	} else if (item.stringCalculations?.[variable]) {
 		isMeleeRanged = true;
-		if (target?.isRanged === undefined) {
+		if (damageSource?.isRanged.value === undefined) {
 			value = [
 				itemVariableValue(
 					item.stringCalculations[variable].MeleeResult.slice(1, -1),
 					item,
-					Object.assign(target ? structuredClone(target) : {}, { isRanged: false }),
+					false,
+					damageSource,
 				).value as number | undefined,
 				itemVariableValue(
 					item.stringCalculations[variable].RangedResult.slice(1, -1),
 					item,
-					Object.assign(target ? structuredClone(target) : {}, { isRanged: true }),
+					true,
+					damageSource,
 				).value as number | undefined,
 			];
 		} else {
-			const key: keyof NonNullable<IItem['stringCalculations']>[string] = target.isRanged ? 'RangedResult' : 'MeleeResult';
-			value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, target).value;
+			const key: keyof NonNullable<IItem['stringCalculations']>[string] = damageSource.isRanged.value ? 'RangedResult' : 'MeleeResult';
+			value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, isRanged, damageSource).value;
 		}
 	} else if (item.itemCalculations?.[variable]) {
 		// TODO
@@ -293,7 +290,7 @@ export function replaceGameDescriptionVariables(
 		variable = roundVariable(variable * multiplier);
 		variables.set(variableName, variable);
 
-		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]?.isRanged
+		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]
 			? 'ranged'
 			: 'melee';
 
