@@ -1,18 +1,3 @@
-export interface IShopItem {
-	item: IItem;
-	/**
-	 * -1 = locked (already have item of this group)
-	 *	0 = inventory full
-	 *	1 = can buy
-	 */
-	buyability: -1 | 0 | 1;
-	calculatedPrice: number;
-	isBought?: boolean;
-	from?: IShopItem[];
-	isLegendary: boolean;
-	srStatus: string;
-}
-
 /**
  * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value
  * possible values for these can be specified in `champion.ts` and `rune.ts` under proper key, these are then used in calculations

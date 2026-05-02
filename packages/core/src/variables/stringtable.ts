@@ -1,3 +1,4 @@
+// TODO rename to replaceStringtableVariables
 export function replaceGameDescriptionStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},

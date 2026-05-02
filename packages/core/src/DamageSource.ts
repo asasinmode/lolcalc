@@ -1,28 +1,23 @@
-import type { IChampion, IChampionId, IChampionRunes, IDragonName, IItem, IListedChampion, IRuneShardSlotName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
+import type { ITextData } from '@lolcalc/data';
+import type { IChampion, IChampionId, IChampionRunes, IDragonName, IItem, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
-import type { MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
+import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
+import type { IEffectSpecific } from './specifics/effect';
 import type { IHypotheticalItemSpecifics, TItemSpecifics } from './specifics/item';
-import { RUNE_SLOT_NAME_TO_NUMBER } from '@lolcalc/data';
-import championData from '@lolcalc/data/files/champion.json';
-import itemData from '@lolcalc/data/files/item.json';
-import runeData from '@lolcalc/data/files/rune.json';
-import textData from '@lolcalc/data/files/text.json';
-import { RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, SHAPESHIFTING_CHAMPION_IDS, TEXT } from '@lolcalc/data';
+import { ABILITY_TYPE, ALL_CHAMPION_STATS, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats';
+import { GameAbilityId } from './GameAbilityId';
 import { CHAMPION_SPECIFICS } from './specifics/champion';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect';
-import { ITEM_SPECIFICS } from './specifics/item';
+import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect';
+import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item';
 import { runePathsEmpty, runesInvalid } from './specifics/rune';
-
-const { data: champions } = championData;
-const { data: items } = itemData;
-const { data: runes } = runeData;
-const { data: text } = textData;
+import { replaceGameDescriptionVariables } from './variables/game';
 
 export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -469,7 +464,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 
 	stringifiedData = computed<string>(() => {
 		const primarySlots = Array.from({ length: 4 }, (_, i) => {
-			const slotOptions = runes.paths[this.runes.value.paths.primary].slots[i]!;
+			const slotOptions = RUNES.paths[this.runes.value.paths.primary].slots[i]!;
 			const slotValue = this.runes.value.paths.primarySlots[i];
 			return slotValue ? `${i}${objectKeyIndex(slotValue, slotOptions)}` : '';
 		});
@@ -477,23 +472,23 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			? Array.from({ length: 2 }, (_, i) => {
 					if (this.runes.value.paths.secondarySlots[i]) {
 						const slotIndex = RUNE_SLOT_NAME_TO_NUMBER[this.runes.value.paths.secondarySlots[i]];
-						const slotOptions = runes.paths[this.runes.value.paths.secondary!].slots[slotIndex]!;
+						const slotOptions = RUNES.paths[this.runes.value.paths.secondary!].slots[slotIndex]!;
 						return `${slotIndex}${objectKeyIndex(this.runes.value.paths.secondarySlots[i], slotOptions)}`;
 					}
 
 					return '';
 				})
 			: [];
-		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, runes.shards[key as IRuneShardSlotName]));
+		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, RUNES.shards[key as IRuneShardSlotName]));
 
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
 			.map(([, value]) => value)
 			.join('|');
 
-		const runePathKeys = Object.keys(runes.paths);
-		const roleQuestKeys = Object.keys(text.roleQuests);
-		const dragonKeys = Object.keys(text.dragons);
+		const runePathKeys = Object.keys(RUNES.paths);
+		const roleQuestKeys = Object.keys(TEXT.roleQuests);
+		const dragonKeys = Object.keys(TEXT.dragons);
 
 		const data = [
 			this.listedChampion.value?.key,
@@ -544,7 +539,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 
 		if (rawRoleQuestIndex?.length) {
 			const parsedIndex = Number.parseInt(rawRoleQuestIndex);
-			const roleQuestKeys = Object.keys(text.roleQuests) as IChampionRole[];
+			const roleQuestKeys = Object.keys(TEXT.roleQuests) as IChampionRole[];
 
 			if (!Number.isNaN(parsedIndex)) {
 				rv.roleQuest.value = roleQuestKeys[parsedIndex];
@@ -573,15 +568,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		const itemIds = rawItemIds?.split('-').filter(Boolean);
 		if (itemIds?.length) {
 			for (let i = 0; i < rv.items.value.length; i++) {
-				const item = items[itemIds[i]!];
-				if (item && itemBuyability(item, rv, items, false) === 1) {
+				const item = ITEMS[itemIds[i]!];
+				if (item && itemBuyability(item, rv, false) === 1) {
 					rv.items.value[i] = item;
 				}
 			}
 			handleMidQuestBoots(rv.items.value, rv.roleQuest.value);
 		}
 
-		const runePaths = Object.keys(runes.paths);
+		const runePaths = Object.keys(RUNES.paths);
 		if (rawPrimaryRunes?.length) {
 			const primaryRunePathIndex = rawPrimaryRunes[0]!;
 			const parsedIndex = Number.parseInt(primaryRunePathIndex);
@@ -592,7 +587,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 					if (slot) {
 						const [slotIndex, optionIndex] = slot;
 						if (slotIndex >= 0 && slotIndex <= 3) {
-							const slotOptions = runes.paths[rv.runes.value.paths.primary].slots[slotIndex]!;
+							const slotOptions = RUNES.paths[rv.runes.value.paths.primary].slots[slotIndex]!;
 							const slotOptionKeys = Object.keys(slotOptions);
 							rv.runes.value.paths.primarySlots[slotIndex] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
 						}
@@ -611,7 +606,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 				for (let i = 0; i < 2; i++) {
 					if (slots[i]) {
 						const [slotIndex, optionIndex] = slots[i]!;
-						const slotOptions = runes.paths[rv.runes.value.paths.secondary].slots[slotIndex];
+						const slotOptions = RUNES.paths[rv.runes.value.paths.secondary].slots[slotIndex];
 						if (slotOptions) {
 							const slotOptionKeys = Object.keys(slotOptions);
 							rv.runes.value.paths.secondarySlots[i] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
@@ -623,7 +618,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 
 		if (rawShards?.length) {
 			let i = 0;
-			for (const [shardSlotKey, shardSlot] of Object.entries(runes.shards)) {
+			for (const [shardSlotKey, shardSlot] of Object.entries(RUNES.shards)) {
 				const shardOptionIndex = rawShards[i];
 				if (shardOptionIndex !== undefined) {
 					const parsedIndex = Number.parseInt(shardOptionIndex);
@@ -681,7 +676,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			}
 		}
 
-		const dragonKeys = Object.keys(text.dragons) as IDragonName[];
+		const dragonKeys = Object.keys(TEXT.dragons) as IDragonName[];
 		if (rawDragonStacks?.length) {
 			for (let i = 0; i < rv.dragonStacks.value.length; i++) {
 				const parsedIndex = rawDragonStacks[i] ? Number.parseInt(rawDragonStacks[i]!) : undefined;
@@ -726,7 +721,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
 			rv.fromStringifiedInternalData = fromStringifiedInternalData;
-			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
+			rv.listedChampion.value = CHAMPIONS[CHAMPION_KEY_TO_ID[championKey]];
 		}
 
 		return rv;
@@ -821,7 +816,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			this.appliedEffects.value[existingEffectIndex]!.data = await specific.setupData(data);
 		} else {
 			this.appliedEffects.value.push({
-				id: GameAbilityId.stringify(abilityId),
+				id: GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 				abilityId,
 				data: await specific.setupData(data),
 			});
@@ -1338,4 +1333,23 @@ async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEf
 export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean {
 	const item = self.computed.items.value[itemIndex];
 	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
+}
+
+export interface IComputedAppliedEffect {
+	id: string;
+	abilityId: IEffectAbilityId;
+	imgSrc: string;
+	imgSize: number;
+	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
+	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
+	specific: IEffectSpecific;
+	/** the `maxValue` computed from the effect specific */
+	maxValue?: number;
+}
+
+export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
+	item: IItem;
+	stats: [iconName: string, value: number, name: string][];
+	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
+	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 }

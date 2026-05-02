@@ -42,6 +42,21 @@ export interface IItem {
 	effectAmount?: number[];
 }
 
+export interface IShopItem {
+	item: IItem;
+	/**
+	 * -1 = locked (already have item of this group)
+	 *	0 = inventory full
+	 *	1 = can buy
+	 */
+	buyability: -1 | 0 | 1;
+	calculatedPrice: number;
+	isBought?: boolean;
+	from?: IShopItem[];
+	isLegendary: boolean;
+	srStatus: string;
+}
+
 export type IChampionId = keyof typeof IChampionData['data'];
 
 export type IChampionStat = keyof typeof TExampleChampion['stats'];

@@ -213,6 +213,7 @@ interface IOptions {
 	replaceWithName: boolean;
 }
 
+// TODO rename to replaceGameVariables
 export function replaceGameDescriptionVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
 export function replaceGameDescriptionVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
 export function replaceGameDescriptionVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;

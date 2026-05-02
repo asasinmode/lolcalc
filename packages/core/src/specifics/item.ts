@@ -1,12 +1,17 @@
-import type { IProviderGroupImageText, IProviderGroupInternalItemData, IShopItem } from '../types';
-import itemsData from '../../app/assets/item.json';
+import type { IItem, IShopItem } from '@lolcalc/data/types';
+import type { DamageSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
+import { ITEMS } from '@lolcalc/data';
+import itemData from '@lolcalc/data/files/item.json';
+import { EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import { clamp, roundVariable } from '@lolcalc/shared/utils';
+import { EFFECT_SPECIFICS } from './effect';
 
-const { data: items } = itemsData;
+const { data: CONST_ITEMS } = itemData;
 
 const tearItemSpecifics = {
 	internalDataProperties: ['manaflow'],
 	setupData(self: DamageSource) {
-		self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, items[ITEM_NAME_TO_ID.tear].dataValues.MaxMana);
+		self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.tear].dataValues.MaxMana);
 		return { manaflow: 0 };
 	},
 	imgTextLabel: 'Manaflow stacks',
@@ -25,13 +30,13 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Eminence stacks',
 		imgText(self) {
 			const { eminence } = self.internalItemData.value as { eminence: number };
-			return eminence && items[ITEM_NAME_TO_ID.hubris].dataValues.BonusLethality + eminence * items[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
+			return eminence && CONST_ITEMS[ITEM_NAME_TO_ID.hubris].dataValues.BonusLethality + eminence * CONST_ITEMS[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
 		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
 		internalDataProperties: ['glory'],
 		setupData(self) {
-			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, items[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks);
+			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks);
 			return { glory: 0 };
 		},
 		imgTextLabel: 'Glory stacks',
@@ -42,7 +47,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.mejai]: {
 		internalDataProperties: ['glory'],
 		setupData(self) {
-			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, items[ITEM_NAME_TO_ID.mejai].dataValues.MaxGloryStacks);
+			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.mejai].dataValues.MaxGloryStacks);
 			return { glory: 0 };
 		},
 		imgTextLabel: 'Glory stacks',
@@ -53,19 +58,19 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
 		internalDataProperties: ['madness'],
 		setupData(self) {
-			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, items[ITEM_NAME_TO_ID.hauntingGuise].dataValues.SecondsInCombat);
+			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.hauntingGuise].dataValues.SecondsInCombat);
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
 		imgText(self) {
 			const { madness } = self.internalItemData.value as { madness: number };
-			return madness && `${Math.round(madness * items[ITEM_NAME_TO_ID.hauntingGuise].dataValues.DamageIncreasePerSecond * 100)}%`;
+			return madness && `${Math.round(madness * CONST_ITEMS[ITEM_NAME_TO_ID.hauntingGuise].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
 		internalDataProperties: ['eternity'],
 		setupData(self) {
-			self.internalItemData.value.eternity = clamp(0, self.internalItemData.value.eternity ?? 0, items[ITEM_NAME_TO_ID.roa].dataValues.MaxStacks);
+			self.internalItemData.value.eternity = clamp(0, self.internalItemData.value.eternity ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.roa].dataValues.MaxStacks);
 			return { eternity: 0 };
 		},
 		imgTextLabel: 'Eternity stacks',
@@ -82,25 +87,25 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Baleful Blaze ap increase',
 		imgText(self) {
 			const { bBlaze } = self.internalItemData.value as { bBlaze: number };
-			return bBlaze && `${Math.round(bBlaze * items[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
+			return bBlaze && `${Math.round(bBlaze * CONST_ITEMS[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
 		internalDataProperties: ['madness'],
 		setupData(self) {
-			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, items[ITEM_NAME_TO_ID.liandry].dataValues.MaxStackNumber);
+			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.liandry].dataValues.MaxStackNumber);
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
 		imgText(self) {
 			const { madness } = self.internalItemData.value as { madness: number };
-			return madness && `${Math.round(madness * items[ITEM_NAME_TO_ID.liandry].dataValues.DamageIncreasePerSecond * 100)}%`;
+			return madness && `${Math.round(madness * CONST_ITEMS[ITEM_NAME_TO_ID.liandry].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		internalDataProperties: ['practice'],
 		setupData(self) {
-			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, items[ITEM_NAME_TO_ID.yunTal].dataValues.CritMax);
+			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.yunTal].dataValues.CritMax);
 			return { practice: 0 };
 		},
 		imgTextLabel: 'Practice Makes Lethal critical strike chance',
@@ -112,25 +117,25 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.shojin]: {
 		internalDataProperties: ['fWill'],
 		setupData(self) {
-			self.internalItemData.value.fWill = clamp(0, self.internalItemData.value.fWill ?? 0, items[ITEM_NAME_TO_ID.shojin].dataValues.StackCount);
+			self.internalItemData.value.fWill = clamp(0, self.internalItemData.value.fWill ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.shojin].dataValues.StackCount);
 			return { fWill: 0 };
 		},
 		imgTextLabel: 'Focused Will ability damage increase',
 		imgText(self) {
 			const { fWill } = self.internalItemData.value as { fWill: number };
-			return fWill && `${Math.round(fWill * items[ITEM_NAME_TO_ID.shojin].dataValues.SpellDamageIncrease * 100)}%`;
+			return fWill && `${Math.round(fWill * CONST_ITEMS[ITEM_NAME_TO_ID.shojin].dataValues.SpellDamageIncrease * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
 		internalDataProperties: ['corruption'],
 		setupData(self) {
-			self.internalItemData.value.corruption = clamp(0, self.internalItemData.value.corruption ?? 0, items[ITEM_NAME_TO_ID.riftmaker].dataValues.SecondsInCombat);
+			self.internalItemData.value.corruption = clamp(0, self.internalItemData.value.corruption ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.riftmaker].dataValues.SecondsInCombat);
 			return { corruption: 0 };
 		},
 		imgTextLabel: 'Corruption bonus damage',
 		imgText(self) {
 			const { corruption } = self.internalItemData.value as { corruption: number };
-			return corruption && `${Math.round(corruption * items[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
+			return corruption && `${Math.round(corruption * CONST_ITEMS[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
@@ -309,13 +314,13 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hexoptics]: {
 		internalDataProperties: ['magnification'],
 		setupData(self) {
-			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, items[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange);
+			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange);
 			return { magnification: 0 };
 		},
 		imgTextLabel: 'Magnification % damage increase',
 		imgText(self) {
 			const { magnification } = self.internalItemData.value as { magnification: number };
-			const { dataValues: { MaxRange, MaxDamageAmp } } = items[ITEM_NAME_TO_ID.hexoptics];
+			const { dataValues: { MaxRange, MaxDamageAmp } } = CONST_ITEMS[ITEM_NAME_TO_ID.hexoptics];
 			return magnification && `${roundVariable(Math.round((magnification / MaxRange * 100 * MaxDamageAmp) * 10) / 10)}%`;
 		},
 	},
@@ -343,7 +348,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.deadMansPlate]: {
 		internalDataProperties: ['shipwrecker'],
 		setupData(self) {
-			self.internalItemData.value.shipwrecker = clamp(0, self.internalItemData.value.shipwrecker ?? 0, items[ITEM_NAME_TO_ID.deadMansPlate].dataValues.MaxMovementSpeed);
+			self.internalItemData.value.shipwrecker = clamp(0, self.internalItemData.value.shipwrecker ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.deadMansPlate].dataValues.MaxMovementSpeed);
 			return { shipwrecker: 0 };
 		},
 		imgTextLabel: 'Shipwrecker built up movement speed',
@@ -389,7 +394,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		internalDataProperties: ['seething'],
 		setupData(self) {
-			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, items[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks);
+			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, CONST_ITEMS[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks);
 			return { seething: 0 };
 		},
 		imgTextLabel: 'Seething Strikes stacks',
@@ -400,7 +405,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.terminus]: {
 		internalDataProperties: ['jxtpL', 'jxtpD'],
 		setupData(self) {
-			const { PenPerHit, PenMax } = items[ITEM_NAME_TO_ID.terminus].dataValues;
+			const { PenPerHit, PenMax } = CONST_ITEMS[ITEM_NAME_TO_ID.terminus].dataValues;
 			const maxStacks = Math.round(PenPerHit / PenMax);
 			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, maxStacks);
 			self.internalItemData.value.jxtpD = clamp(0, self.internalItemData.value.jxtpD ?? 0, maxStacks);
@@ -468,7 +473,6 @@ export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItem
 export function calculateItemDiscount(
 	itemId: string,
 	inventory: (IItem | undefined)[],
-	allItems: Record<string, IItem>,
 	inComponent = false,
 	consumedInventoryIndexes: number[] = [],
 ): number {
@@ -476,12 +480,12 @@ export function calculateItemDiscount(
 		const inventoryIndex = inventory.findIndex((item, i) => item?.id === itemId && !consumedInventoryIndexes.includes(i));
 		if (~inventoryIndex) {
 			consumedInventoryIndexes.push(inventoryIndex);
-			return allItems[itemId]!.gold.total;
+			return ITEMS[itemId]!.gold.total;
 		}
 	}
 
-	return (allItems[itemId]!.from || []).reduce((discount, componentId) =>
-		discount + calculateItemDiscount(componentId, inventory, allItems, true, consumedInventoryIndexes), 0);
+	return (ITEMS[itemId]!.from || []).reduce((discount, componentId) =>
+		discount + calculateItemDiscount(componentId, inventory, true, consumedInventoryIndexes), 0);
 }
 
 export function consumeItemComponents(
@@ -499,7 +503,7 @@ export function consumeItemComponents(
 		}
 	}
 
-	for (const componentId of allItems[itemId]!.from || []) {
+	for (const componentId of ITEMS[itemId]!.from || []) {
 		consumeItemComponents(componentId, inventory, allItems, consumedInventoryIndexes, true);
 	}
 
@@ -509,7 +513,6 @@ export function consumeItemComponents(
 export function itemBuyability(
 	item: IItem,
 	target: DamageSource | undefined,
-	allItems: Record<string, IItem>,
 	consumeComponents = true,
 	transformBoots = false,
 	isMove = false,
@@ -523,7 +526,7 @@ export function itemBuyability(
 	let inventoryAfterBuying = target.items.value;
 
 	if (consumeComponents) {
-		const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value, allItems);
+		const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value, CONST_ITEMS);
 		inventoryAfterBuying = target.items.value.map((item, index) => inventoryIndexesConsumedOnBuy.includes(index) ? undefined : item);
 	}
 
