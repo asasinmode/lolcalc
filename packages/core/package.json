@@ -7,7 +7,7 @@
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
 	"devDependencies": {
-		"typescript": "catalog:dev",
-		"vue": "catalog:dev"
+		"typescript": "catalog:",
+		"vue": "catalog:"
 	}
 }

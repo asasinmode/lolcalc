@@ -1,4 +1,6 @@
-import { ITEM_TO_CHAMPION_STATS } from '../meta.ts';
+import type { IChampionId, IItem } from '@lolcalc/data/types';
+import type { IChampionStatName, IChampionStats } from '@lolcalc/shared';
+import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data';
 
 interface IStatsCalculationResult {
 	/** raw stats from champion file */
@@ -229,5 +231,3 @@ function getAdaptiveForceStat(championId: string | undefined, attackDamage: numb
 
 // 	return stats;
 // }
-
-export type IChampionStats = Record<IChampionStatName, number>;

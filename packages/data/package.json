@@ -10,6 +10,7 @@
 		"@node-rs/xxhash": "catalog:",
 		"@sindresorhus/fnv1a": "catalog:",
 		"image-size": "catalog:",
-		"typescript": "catalog:dev"
+		"typescript": "catalog",
+		"vue": "catalog"
 	}
 }

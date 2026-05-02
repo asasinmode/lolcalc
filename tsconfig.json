@@ -1,14 +1,33 @@
 {
 	"compilerOptions": {
 		"target": "esnext",
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"lib": [
+			"ESNext",
+			"DOM",
+			"DOM.Iterable"
+		],
 		"rootDir": ".",
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"paths": {
-			"@lolcalc/core/*": ["./packages/core/src/*"],
-			"@lolcalc/data/files/*": ["./packages/data/files/*"],
-			"@lolcalc/data/shared/*": ["./packages/shared/src/*"]
+			"@lolcalc/core/*": [
+				"./packages/core/src/*"
+			],
+			"@lolcalc/data": [
+				"./packages/data/src/index.ts"
+			],
+			"@lolcalc/data/*": [
+				"./packages/data/src/*"
+			],
+			"@lolcalc/data/files/*": [
+				"./packages/data/files/*"
+			],
+			"@lolcalc/shared": [
+				"./packages/shared/src/index.ts"
+			],
+			"@lolcalc/shared/*": [
+				"./packages/shared/src/*"
+			]
 		},
 		"resolveJsonModule": true,
 		"allowImportingTsExtensions": true,

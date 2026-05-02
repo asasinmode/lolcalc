@@ -7,3 +7,278 @@ export const ABILITY_TYPE = {
 export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
 
 export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
+
+export const ALL_ITEM_CATEGORIES = ['fighter', 'marksman', 'assassin', 'mage', 'tank', 'support'] as const;
+
+export type IItemCategory = typeof ALL_ITEM_CATEGORIES[number];
+
+export const ALL_CHAMPION_ABILITY_KEYS = ['passive', 'q', 'w', 'e', 'r'] as const;
+
+export type IChampionAbilityKey = typeof ALL_CHAMPION_ABILITY_KEYS[number];
+
+export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent', 'slowResist'] as const;
+
+export type IChampionStatName = (typeof CHAMPION_STATS)[number];
+
+export type IChampionStats = Record<IChampionStatName, number>;
+
+export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = {
+	hp: {
+		name: 'Health',
+	},
+	mana: {
+		name: 'Mana',
+	},
+	attackDamage: {
+		name: 'Attack Damage',
+	},
+	abilityPower: {
+		name: 'Ability Power',
+	},
+	armor: {
+		name: 'Armor',
+	},
+	magicResist: {
+		name: 'Magic Resist',
+	},
+	abilityHaste: {
+		name: 'Ability Haste',
+	},
+	attackSpeed: {
+		name: 'Attack Speed',
+		decimal: 3,
+	},
+	attackSpeedRatio: {
+		name: 'Attack Speed Ratio',
+		decimal: 3,
+	},
+	bonusAttackSpeedPercent: {
+		name: 'Bonus Attack Speed',
+		decimal: 5,
+		isPercentage: true,
+	},
+	critChance: {
+		name: 'Critical Strike Chance',
+		isPercentage: true,
+	},
+	critDamageMultiplier: {
+		name: 'Critical Strike Damage',
+		isPercentage: true,
+	},
+	lethality: {
+		name: 'Lethality',
+	},
+	percentArmorPen: {
+		name: 'Percentage Armor Penetration',
+		decimal: 2,
+		isPercentage: true,
+	},
+	flatMagicPen: {
+		name: 'Magic penetration',
+	},
+	percentMagicPen: {
+		name: 'Percentage Magic Penetration',
+		decimal: 2,
+		isPercentage: true,
+	},
+	lifeSteal: {
+		name: 'Life Steal',
+		isPercentage: true,
+	},
+	omnivamp: {
+		name: 'Omnivamp',
+		isPercentage: true,
+	},
+	moveSpeed: {
+		name: 'Move Speed',
+	},
+	tenacity: {
+		name: 'Tenacity',
+		isPercentage: true,
+	},
+	healShieldPower: {
+		name: 'Heal and Shield power',
+		isPercentage: true,
+	},
+	attackRange: {
+		name: 'Attack Range',
+	},
+	hpRegen: {
+		name: 'Health every 5 seconds',
+	},
+	manaRegen: {
+		name: 'Mana/Resource every 5 seconds',
+	},
+	slowResist: {
+		name: 'Slow Resist',
+		isPercentage: true,
+	},
+};
+
+export interface IChampionStatMeta {
+	name: string;
+	decimal?: number;
+	isPercentage?: boolean;
+};
+
+export const ALL_CHAMPION_STATS = Object.keys(CHAMPION_STAT_META) as IChampionStatName[];
+
+export const ALL_CHAMPION_STATS_ENTRIES = Object.entries(CHAMPION_STAT_META) as [IChampionStatName, IChampionStatMeta][];
+
+/** colloquial names to id */
+export const ITEM_NAME_TO_ID = {
+	slightlyMagicalFootwear: '2422',
+	tear: '3070',
+	whisperingCirclet: '2526',
+	diademOfSongs: '2530',
+	archangelsStaff: '3003',
+	seraphsEmbrace: '3040',
+	manamune: '3004',
+	muramana: '3042',
+	wintersApproach: '3119',
+	fimbulwinter: '3121',
+	hubris: '6697',
+	darkSeal: '1082',
+	mejai: '3041',
+	hauntingGuise: '3147',
+	roa: '6657',
+	blackfireTorch: '2503',
+	heartsteel: '3084',
+	guinsoo: '3124',
+	terminus: '3302',
+	liandry: '6653',
+	yunTal: '3032',
+	shojin: '3161',
+	riftmaker: '4633',
+	blackCleaver: '3071',
+	shurelya: '2065',
+	runaan: '3085',
+	trinity: '3078',
+	celestialOpposition: '3869',
+	phage: '3044',
+	ardentCensor: '3504',
+	staffOfFlowingWater: '6616',
+	bandlepipes: '2524',
+	knightsVow: '3109',
+	protoplasmHarness: '2525',
+	frozenHeart: '3110',
+	serpentsFang: '6695',
+	rylaisScepter: '3116',
+	fiendhunterBolts: '2512',
+	abyssalMask: '8020',
+	horizonFocus: '4628',
+	actualizer: '2522',
+	hexoptics: '2523',
+	youmuu: '3142',
+	forceOfNature: '4401',
+	deadMansPlate: '3742',
+	bloodlettersCurse: '8010',
+	experimentalHexplate: '3073',
+	cosmicDrive: '4629',
+	endlessHunger: '2517',
+	mawOfMalmortius: '3156',
+	jakSho: '6665',
+} as const;
+
+export const KEPT_UNPURCHASABLE_ITEMS = [
+	ITEM_NAME_TO_ID.diademOfSongs,
+	ITEM_NAME_TO_ID.slightlyMagicalFootwear,
+	ITEM_NAME_TO_ID.seraphsEmbrace,
+	ITEM_NAME_TO_ID.muramana,
+	ITEM_NAME_TO_ID.fimbulwinter,
+];
+
+export const RANGED_ONLY_ITEM_IDS = [ITEM_NAME_TO_ID.runaan];
+
+/**
+	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
+	* `lolcalc` prefixed ones are custom, handled in `updateGameData.ts`
+	*
+	* for finding either
+	*		1. in game, when the effect is applied check the its text
+	*		2. find that text in stringtable
+	*		3. in champion's bin file or `items.cdtb.bin.json` search for that stringtable key, then use the `ObjectName` of the object it's under
+	*
+	*	or try to do the mix of the above, usually item effects can be found next to the item key itself
+	*	i.e on patch `16.4`
+	*		1. the black cleaver shred would be somewhere close below the `Items/3071` key
+	*		2. there's `Items/3071/Spells/3071BlackCleaverShred` that has `mBuff.mDescription` with `game_buff_tooltip_Black_Cleaver`
+	*		3. that seems like the likely candidate, check the stringtable - it resolves to `This unit`s Armor is reduced...'
+	*		4. this is the description we are looking for, use the `Items/3071/Spells/3071BlackCleaverShred.ObjectName` of `3071BlackCleaverShred`
+	*/
+export const EFFECT_OBJECT_NAME = {
+	/* items */
+	blackCleaverCarve: '3071BlackCleaverShred',
+	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
+	ardentSanctify: '3504Buff',
+	flowingWaterRapids: '6616Buff',
+	bandlepipesFanfare: '2524_SecondaryBuff',
+	knightsVowSacrifice: 'lolcalc3109Sacrifice',
+	frozenHeartWintersCaress: 'Item3110Aura',
+	serpentsFangVenom: 'SerpentVenom',
+	rylaisRimefrost: '3116Slow',
+	abyssalMaskUnmake: '8020VisualDebuff',
+	horizonFocusHypershot: '4628Marker',
+	bloodletterVileDecay: '8010VisualDebuff',
+	/* champion passives */
+	amumuPCursedTouch: 'AmumuPDebuff',
+	jannaPTailwind: 'Tailwind',
+	nunuPCallOfFreljord: 'localcNunuPassive',
+	ornnPLivingForge: 'lolcalcOrnnPassive',
+	rellPBreakMold: 'RellP_Debuff',
+	/* other */
+	grievousWounds: 'lolcalcGrievousWounds',
+	stun: 'lolcalcStun',
+	slowFlat: 'lolcalcSlowFlat',
+	slowPercent: 'lolcalcSlowPercent',
+} as const;
+
+export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
+
+/**
+ * tags that appear in game descriptions, like item shop hover tooltip or champ select rune hover
+ * they should have appropriate styles (like font color) set in `ItemDescription.vue`
+ */
+export const KNOWN_GAME_DESCRIPTION_TAGS = [
+	'passive',	// heading
+	'scalead', // bloodmail, sterak
+	'scaleap',	// rabadon, riftmaker
+	'scalehealth', // roa, heartsteel
+	'scalemana',	// manamune, archangel
+	'scalearmor',	// hullbreaker, terminus
+	'scalemr',	// malignance, force of nature
+	'scalelethality',	// voltaic cyclosword, aphelios passive
+	'attackspeed',	// yuntal, experimental hexplate
+	'onhit',	// iceborn, statik
+	'physicaldamage',	// heartsteel, titanic
+	'magicdamage',	// bami, thornmail
+	'truedamage',	// cosmic drive, shadowflame
+	'health',	// protoplasm harness, no styles
+	'healing',	// guardian angel, warmog
+	'shield',	// fimbulwinter, hexdrinker
+	'lifesteal', // maw of malmortius
+	'omnivamp',	// riftmaker
+	'speed',	// slightly magical footwear, youmuu
+	'gold',	// world atlas, collector
+	'status',	// botrk, iceborn
+	'attention',	// statikk, knight's vow
+	'raritygeneric',	// world atlas
+	'raritylegendary',	// archangel, manamune
+	'rules',	// crimson lucidity
+	'keyword',	// phantom dancer, zeke's convergence
+	'keywordmajor',	// terminus
+	'keywordstealth',	// horizon focus
+	'slow',	// voltaic cyclosword, no styles
+	'active', // seeker's armguard, mercurial scimitar
+	'lol-uikit-tooltipped-keyword', // in many runes
+	'scalelevel', // long first strike, guardian, shield bash
+	'statgood', // long precision legends
+	'font',
+	'b',
+	'i',
+	'hr',
+	'li',
+	'titleleft', // dragon stack descriptions
+	'maintext', // dragon stack descriptions
+	'stattracking', // veigar passive, draven passive
+];

@@ -1,10 +1,3 @@
-export interface ITexture {
-	spriteSheet: string;
-	resWidth: number;
-	resHeight: number;
-	uv: number[];
-}
-
 export interface IShopItem {
 	item: IItem;
 	/**

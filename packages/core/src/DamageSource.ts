@@ -486,7 +486,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		const rv = new DamageSource();
 
-		const	[
+		const [
 			championKey,
 			rawLevel,
 			rawItemIds,

@@ -28,8 +28,8 @@
 		"@lolcalc/data": "workspace:*",
 		"@lolcalc/shared": "workspace:*",
 		"@lolcalc/website": "workspace:*",
-		"typescript": "catalog:dev",
-		"vue": "catalog:dev"
+		"typescript": "catalog:",
+		"vue": "catalog:"
 	},
 	"simple-git-hooks": {
 		"pre-push": "npx lint-staged"

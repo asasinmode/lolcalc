@@ -16,9 +16,7 @@ const nuxtConfig = createConfigForNuxt({
 		'vue/component-name-in-template-casing': ['warn', 'PascalCase', { registeredComponentsOnly: false }],
 	},
 	ignores: ['**/*.md'],
-}, unocss).prepend({
-	ignores: ['**/package.json'],
-});
+}, unocss);
 
 export default antfu({
 	stylistic: {

@@ -6,8 +6,6 @@ export function useMisc() {
 
 export const ALL_DRAGON_NAMES = Object.keys(data.dragons) as IDragonName[];
 
-export type IDragonName = 'Cloud' | 'Mountain' | 'Infernal' | 'Ocean' | 'Chemtech' | 'Hextech';
-
 export interface IMiscData {
 	dragons: Record<IDragonName, {
 		name: string;

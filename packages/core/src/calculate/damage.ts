@@ -1,3 +1,5 @@
+import type { IChampionStats } from '@lolcalc/shared';
+
 export function calculateDamage(
 	rawDamage: number,
 	type: IDamageType,

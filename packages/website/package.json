@@ -21,9 +21,9 @@
 		"@unocss/nuxt": "catalog:",
 		"lightningcss": "catalog:",
 		"nuxt": "catalog:",
-		"typescript": "catalog:dev",
+		"typescript": "catalog:",
 		"unocss": "catalog:",
-		"vue": "catalog:dev",
+		"vue": "catalog:",
 		"vue-router": "catalog:"
 	},
 	"overrides": {

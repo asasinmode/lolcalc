@@ -1,23 +1,25 @@
-import type { IDragonName } from '../app/composables/useMisc';
+import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
+import type { ITexture } from '@lolcalc/shared/types';
 import type { IChampionSpecific } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
-import type { IEffectObjectName, IItemCategory, IItemShopStatFilter } from '../app/utils/meta';
+import type { IEffectObjectName } from '../app/utils/meta';
 import type { IRuneSpecific } from '../app/utils/rune';
-import type { ITexture } from '../app/utils/types';
-import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IChampionId, IListedChampion } from '../shared/types/champion';
-import type { IItem } from '../shared/types/item';
+import type { IItemShopStatFilter } from '../src/index';
+import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion } from '../src/types';
+
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/shared';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS, SHAPESHIFTING_CHAMPION_IDS } from '../shared/meta.ts';
 import { CHAMPION_SPECIFICS } from '../shared/specifics/champion.ts';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../shared/specifics/effect.ts';
 import { RUNE_SPECIFICS } from '../shared/specifics/rune.ts';
 import { replaceGameDescriptionVariables } from '../shared/variables/game.ts';
 import { replaceGameDescriptionStringtableVariables } from '../shared/variables/stringtable.ts';
+import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '../src/index.ts';
 
 let latestVersion = process.argv[2];
 
@@ -70,7 +72,7 @@ try {
 	await fs.access(textFilePath);
 	textData = JSON.parse(await fs.readFile(textFilePath, 'utf8'));
 	textData.data.stringtable ||= {} as any;
-} catch {}
+} catch { }
 
 const championFilePath = `${import.meta.dirname}/../app/assets/champion.json`;
 let championData: typeof import('../app/assets/champion.json') | undefined;
@@ -78,7 +80,7 @@ let championData: typeof import('../app/assets/champion.json') | undefined;
 try {
 	await fs.access(championFilePath);
 	championData = JSON.parse(await fs.readFile(championFilePath, 'utf8'));
-} catch {}
+} catch { }
 
 const potentialShapeshifters = new Set<string>();
 
@@ -291,7 +293,7 @@ let itemData: typeof import('../app/assets/item.json') | undefined;
 try {
 	await fs.access(itemFilePath);
 	itemData = JSON.parse(await fs.readFile(itemFilePath, 'utf8'));
-} catch {}
+} catch { }
 
 if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	console.log('item data not present or outdated, fetching...');
@@ -348,12 +350,9 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				const { name, stats, gold, image, into: rawInto, from: rawFrom, tags } = itemData as any;
 
 				const searchTerms = Array.from(
-					new Set(`${name};${
-						(stringtable[`generatedtip_item_${itemId}_colloquialism`] || ';')
-					};${
-						tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')
-					};${
-						Object.keys(stats).map(stat => ITEM_STAT_META[stat as keyof typeof ITEM_STAT_META]!.name).join(';')
+					new Set(`${name};${(stringtable[`generatedtip_item_${itemId}_colloquialism`] || ';')
+					};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')
+					};${Object.keys(stats).map(stat => ITEM_STAT_META[stat as keyof typeof ITEM_STAT_META]!.name).join(';')
 					}`
 						.toLocaleLowerCase()
 						.replaceAll(/[^a-z;]/g, '')
@@ -527,7 +526,7 @@ let runeData: typeof import('../app/assets/rune.json') | undefined;
 try {
 	await fs.access(runeFilePath);
 	runeData = JSON.parse(await fs.readFile(runeFilePath, 'utf8'));
-} catch {}
+} catch { }
 
 if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 	console.log('rune data not present or outdated, fetching...');
@@ -646,7 +645,7 @@ let miscData: typeof import('../app/assets/misc.json') | undefined;
 try {
 	await fs.access(miscFilePath);
 	miscData = JSON.parse(await fs.readFile(miscFilePath, 'utf8'));
-} catch {}
+} catch { }
 
 if (!miscData || miscData?.version !== latestVersion) {
 	console.log('misc data not present or outdated, fetching...');
@@ -757,7 +756,7 @@ let uiData: typeof import('../app/assets/ui.json') | undefined;
 try {
 	await fs.access(uiFilePath);
 	uiData = JSON.parse(await fs.readFile(uiFilePath, 'utf8'));
-} catch {}
+} catch { }
 
 const uiAutoAtlasData: Record<string, any> = {};
 const autoAtlasImages: Record<string, {
@@ -921,7 +920,7 @@ let effectData: typeof import('../app/assets/effect.json') | undefined;
 try {
 	await fs.access(effectFilePath);
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
-} catch {}
+} catch { }
 
 const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData['data'][string], 'dataKey'> | string>> = {
 	/* items */
@@ -1403,7 +1402,7 @@ function championAbilityData(
 		const championDataEntries = Object.entries(championData);
 		for (const form of characterToolData.alternateForms) {
 			if (form.spells) {
-				const maybeKey = championDataEntries.find(([,value]: any[]) => value.ObjectName === form.spells[abilityInfo[1]])?.[0];
+				const maybeKey = championDataEntries.find(([, value]: any[]) => value.ObjectName === form.spells[abilityInfo[1]])?.[0];
 				if (maybeKey) {
 					variantKeys.push(maybeKey);
 				} else {
@@ -1883,7 +1882,7 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 			: responseMethod === 'json'
 				? JSON.parse(data.toString('utf8'))
 				: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
-	} catch {};
+	} catch { };
 	if (!data || (typeof data === 'object' && !Object.keys(data).length)) {
 		data = await fetch(url).then(r => r[responseMethod]()).catch((err) => {
 			console.log(`[fetchCached] ${url} ${responseMethod}`);

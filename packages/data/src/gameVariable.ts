@@ -1,5 +1,5 @@
-import { STAT_ICON } from './meta.ts';
-import { roundVariable } from './misc.ts';
+import { roundVariable } from '@lolcalc/shared/utils.ts';
+import { STAT_ICON } from './index.ts';
 
 export interface IItemVariableCalculationTarget {
 	isRanged?: boolean;
@@ -171,7 +171,7 @@ export function championAbilityVariableValue(
 			value = source.find(source => source[0] === variableName || source[0].toLowerCase() === variableName!.toLowerCase())?.[1];
 			if (value !== undefined) {
 				for (const path in dotPath) {
-				// TODO figure this out, some paths seem to have .0 or .-1
+					// TODO figure this out, some paths seem to have .0 or .-1
 					const number = Number(path);
 					if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
 						value = (value as any)[path];
