@@ -22,7 +22,6 @@
 		"eslint": "catalog:",
 		"eslint-plugin-format": "catalog:",
 		"typescript": "catalog:",
-		"vue": "catalog:",
 		"vue-tsc": "catalog:"
 	},
 	"simple-git-hooks": {

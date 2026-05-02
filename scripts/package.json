@@ -7,9 +7,9 @@
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
 	"devDependencies": {
-		"@node-rs/xxhash": "catalog:",
-		"@sindresorhus/fnv1a": "catalog:",
-		"image-size": "catalog:",
+		"@node-rs/xxhash": "catalog:scripts",
+		"@sindresorhus/fnv1a": "catalog:scripts",
+		"image-size": "catalog:scripts",
 		"typescript": "catalog:"
 	}
 }
