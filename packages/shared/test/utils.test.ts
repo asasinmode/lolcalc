@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import test from 'node:test';
-import { roundVariable } from '../../lolcalc/utils.ts';
+import { roundVariable } from '../src/utils.ts';
 
 test('lolcalc/utils.ts', async (t) => {
 	await t.test('roundVariable formats numbers correctly', () => {
