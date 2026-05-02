@@ -1,3 +1,5 @@
+import type { IChampionStats } from '@lolcalc/shared';
+import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from './types';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { STAT_ICON } from './index.ts';
 

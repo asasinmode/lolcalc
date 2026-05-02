@@ -16,11 +16,35 @@ export const ALL_CHAMPION_ABILITY_KEYS = ['passive', 'q', 'w', 'e', 'r'] as cons
 
 export type IChampionAbilityKey = typeof ALL_CHAMPION_ABILITY_KEYS[number];
 
+export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
+
 export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent', 'slowResist'] as const;
 
 export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 
 export type IChampionStats = Record<IChampionStatName, number>;
+
+export interface IStatsCalculationResult {
+	/** raw stats from champion file */
+	initial: IChampionStats;
+	/** stats that could've been already modified from raw, like custom target dummy ones */
+	base: IChampionStats;
+	/** ONLY increases from level, i.e if champion gains 2 ad per level, on lvl 3 it will be `4` */
+	level: Partial<IChampionStats>;
+	/** base + level combined */
+	baseOnLevel: IChampionStats;
+	item: IChampionStats;
+	bonus: IChampionStats;
+	total: IChampionStats;
+	meta: {
+		hasMana: boolean;
+		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
+	};
+}
+
+export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
+
+export type IAdaptiveForceStatRv = [IAdaptiveForceStat, adaptiveForceVariable: 0 | 1, multiplier: number];
 
 export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = {
 	hp: {

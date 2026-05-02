@@ -1,12 +1,15 @@
 {
-	"name": "@lolcalc/data",
+	"name": "@lolcalc/scripts",
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"description": "data used by lolcalc and the types based on it, dynamically updated by the `scripts/updateData.ts`",
+	"description": "scripts used by lolcalc",
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
 	"devDependencies": {
+		"@node-rs/xxhash": "catalog:",
+		"@sindresorhus/fnv1a": "catalog:",
+		"image-size": "catalog:",
 		"typescript": "catalog:"
 	}
 }

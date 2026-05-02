@@ -1,16 +1,17 @@
+import type { IItemShopStatFilter } from '@lolcalc/data';
+import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types';
 import type { IChampionSpecific } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { IEffectObjectName } from '../app/utils/meta';
 import type { IRuneSpecific } from '../app/utils/rune';
-import type { IItemShopStatFilter } from '../src/index';
-import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion } from '../src/types';
 
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/shared';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
@@ -19,7 +20,6 @@ import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../shared/specifics/effect.ts';
 import { RUNE_SPECIFICS } from '../shared/specifics/rune.ts';
 import { replaceGameDescriptionVariables } from '../shared/variables/game.ts';
 import { replaceGameDescriptionStringtableVariables } from '../shared/variables/stringtable.ts';
-import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '../src/index.ts';
 
 let latestVersion = process.argv[2];
 

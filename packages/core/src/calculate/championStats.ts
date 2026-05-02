@@ -1,24 +1,6 @@
 import type { IChampionId, IItem } from '@lolcalc/data/types';
-import type { IChampionStatName, IChampionStats } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationResult } from '@lolcalc/shared';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data';
-
-interface IStatsCalculationResult {
-	/** raw stats from champion file */
-	initial: IChampionStats;
-	/** stats that could've been already modified from raw, like custom target dummy ones */
-	base: IChampionStats;
-	/** ONLY increases from level, i.e if champion gains 2 ad per level, on lvl 3 it will be `4` */
-	level: Partial<IChampionStats>;
-	/** base + level combined */
-	baseOnLevel: IChampionStats;
-	item: IChampionStats;
-	bonus: IChampionStats;
-	total: IChampionStats;
-	meta: {
-		hasMana: boolean;
-		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
-	};
-}
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;
@@ -180,9 +162,6 @@ function itemToChampionStats(item?: IItem): [IChampionStatName, number][] {
 
 // TODO maybe a better way exists
 const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Ambessa', 'Aphelios', 'Ashe', 'Belveth', 'Blitzcrank', 'Braum', 'Briar', 'Caitlyn', 'Camille', 'Corki', 'Darius', 'Draven', 'DrMundo', 'Ezreal', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Graves', 'Hecarim', 'Illaoi', 'Irelia', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'Kayle', 'Kayn', 'Khazix', 'Kindred', 'Kled', 'KogMaw', 'KSante', 'LeeSin', 'Leona', 'Lucian', 'MasterYi', 'MissFortune', 'MonkeyKing', 'Naafiri', 'Nasus', 'Nilah', 'Nocturne', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rammus', 'RekSai', 'Rell', 'Renekton', 'Rengar', 'Riven', 'Samira', 'Senna', 'Sett', 'Shaco', 'Shen', 'Shyvana', 'Sion', 'Sivir', 'Skarner', 'Smolder', 'TahmKench', 'Talon', 'Taric', 'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'Twitch', 'Udyr', 'Urgot', 'Varus', 'Vayne', 'Vi', 'Viego', 'Volibear', 'Warwick', 'Xayah', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yunara', 'Zaahen', 'Zed', 'Zeri'];
-
-type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
-type IAdaptiveForceStatRv = [IAdaptiveForceStat, adaptiveForceVariable: 0 | 1, multiplier: number];
 
 function getAdaptiveForceStat(championId: string | undefined, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
 	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0, 0.6];

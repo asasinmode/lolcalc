@@ -8,6 +8,7 @@ trustPolicyExclude:
 
 packages:
   - packages/*
+  - scripts
 
 allowBuilds:
   '@parcel/watcher': true
@@ -26,6 +27,7 @@ catalog:
   '@unocss/nuxt': ^66.6.8
   eslint: ^10.2.0
   eslint-plugin-format: ^2.0.1
+  image-size: ^2.0.2
   lightningcss: ^1.32.0
   nuxt: ^4.4.4
   typescript: ^6.0.3

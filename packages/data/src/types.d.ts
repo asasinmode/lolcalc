@@ -1,10 +1,10 @@
-import type {ShallowRef} from 'vue';
 import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import type { UnionKeys } from '@lolcalc/shared/types';
 import type IChampionsData from '../files/champion.json';
 import type TExampleChampion from '../files/champion/Ahri.json';
 import type IItemsData from '../files/item.json';
 import type IDragonsData from '../files/misc.json';
+import type IRunesData from '../files/rune.json';
 
 export type IDragonName = keyof typeof IDragonsData['data']['dragons'];
 
@@ -103,110 +103,58 @@ export interface IChampionAbilityVariant {
 	objectName: string;
 }
 
-export interface IDamageSource {
-	id: string;
-	color: string;
-	listedChampion: ShallowRef<IListedChampion | undefined>;
-	champion: ShallowRef<IChampion | undefined>;
+type IDataShards = typeof IRunesData['data']['shards'];
+type IDataPaths = typeof IRunesData['data']['paths'];
 
-	level: Ref<number>;
-	maxLevel = computed(() => this.roleQuest.value === 'top' ? 20 : 18);
+export type IRuneShardSlotName = keyof IDataShards;
+export type IRuneShardSlotValue = {
+	[K in keyof IDataShards]: keyof IDataShards[K]
+}[keyof IDataShards];
+export type IRunePathName = keyof IDataPaths;
+export type IRuneSlotName = UnionKeys<IDataPaths[IRunePathName]['slots'][number]>;
 
-	isRanged = computed(() => this.champion.value && (this.stats.value.base.attackRange > 325));
-	stats = computed(() => calculateChampionStats(this));
-	itemDamageCalculationTarget = computed<IItemVariableCalculationTarget>(() => ({
-		isRanged: this.isRanged.value,
-		stats: this.stats.value?.total,
-	}));
+export interface IRunePath {
+	id: number;
+	name: IRunePathName;
+	icon: string;
+	iconColor: string;
+	slots: Partial<Record<IRuneSlotName, IRunePathSlot>>[];
+}
 
-	runes: Ref<IChampionRunes>;
-	runePathsEmpty = computed(() => runePathsEmpty(this.runes.value));
-	runesInvalid = computed(() => runesInvalid(this.runes.value, this.runePathsEmpty.value));
+export interface IRunePathSlot {
+	id: number;
+	name: IRuneSlotName;
+	icon: string;
+	effectAmount?: Record<string, number>;
+	/** mCalculations from rune data, maybe should be kept as just calculations */
+	calculations?: Record<string, any>;
+}
 
-	currentHealth: Ref<number>;
-	maxHealth = computed<number>(() => Math.round(this.stats.value?.total.hp || 1));
-	currentAbilityResource: Ref<number>;
-	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
-	maxAbilityResource = computed<number>(() => Math.round(this.stats.value?.total.mana ?? 0));
+export interface IRuneShard {
+	id: number;
+	icon: string;
+	effectAmount?: Record<string, number>;
+}
 
-	items: Ref<(IItem | undefined)[]>;
-	itemsUndoSnapshots: Ref<(IItem | undefined)[][]>;
+export type IRune = IRunePath | IRunePathSlot | IRuneShard;
 
-	abilityLevels: Ref<Record<INonPassiveAbilityKey, number>>;
-	maxAbilityLevels = computed(() => Object.fromEntries(Object.keys(this.abilityLevels.value).map(key => [
-		key as INonPassiveAbilityKey,
-		this.champion.value?.abilities[key as IChampionAbilityKey].maxLevel ?? 5,
-	])) as Record<INonPassiveAbilityKey, number>);
-
-	abilityVariantsIndexes: Ref<Record<IChampionAbilityKey, number>>;
-	maxAbilityVariantsIndexes = computed(() => Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map(key => [
-		key as IChampionAbilityKey,
-		/* Aphelios' `W` index is used for the offhand weapon tooltip which itself is based on his `E` ability */
-		this.champion.value?.id === 'Aphelios' && key as IChampionAbilityKey === 'w'
-			? (this.champion.value?.abilities.e.variants.length ?? 1) - 1
-			: (this.champion.value?.abilities[key as IChampionAbilityKey].variants.length ?? 1) - 1,
-	])) as Record<IChampionAbilityKey, number>);
-
-	dragonStacks: Ref<(IDragonName | undefined)[]>;
-	dragonSoul: Ref<IDragonName | undefined>;
-	/**
-	 * 0 - stacks valid
-	 * 1 - more than 1 type repeated, i.e infernal, infernal, cloud, cloud
-	 * 2 - 4 different stacks (only 3 are possible), i.e infernal, cloud, ocean, mountain
-	 */
-	dragonStacksInvalid = computed<0 | 1 | 2>(() => {
-		const counts: [IDragonName, number][] = [];
-		for (const dragon of this.dragonStacks.value) {
-			if (dragon) {
-				const count = counts.find(c => c[0] === dragon);
-				if (count) {
-					count[1] += 1;
-				} else {
-					counts.push([dragon, 1]);
-				}
-			}
+export interface IRunes {
+	paths: Record<IRunePathName, IRunePath>;
+	shards: {
+		[S in IRuneShardSlotName]: {
+			[V in keyof IDataShards[S]]: IRuneShard
 		}
-		return counts.length > 3
-			? 2
-			: counts.filter(c => c[1] >= 2).length > 1
-				? 1
-				: 0;
-	});
-	dragonSoulInvalid = computed(() => this.dragonSoul.value
-		? this.dragonStacks.value.filter(Boolean).length < 4 || (this.dragonStacks.value.filter(stack => stack === this.dragonSoul.value).length < 2)
-		: false);
+	};
+}
 
-	roleQuest: Ref<IChampionRole | undefined>;
-
-	anythingFilled = computed(() => {
-		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value || this.computed.effects.value.some(effect => effect.isActive));
-	});
-
-	/**
-	 * any data the champion needs for their abilities, keys prefixed with `_` will not be stringified
-	 *
-	 * when stringifying, only the values are saved, something like
-	 * `{ "masterworkItemSlot": 0, "passiveUpgradedAllies": 0 }`
-	 * turns into `0|0` which when restoring is parsed into array `[0, 0]`
-	 * then when creating, the `this.champion` watch checks if `this.fromStringifiedData` is `true` and if so, it will run the `setupData` function with no values, then extract the keys of the returned object, set the properties one by one taking them from the array and setting their values then run the setup function again to validate/clamp the values restored from original array
-	 *   1. champion is selected, `this.internalData.value = championSpecific?.setupData(this)`
-	 *   2. data is stringified, `Object.values(this.internalData.value).join('|')`
-	 *   3. data is restored, `const rawValues = rawInternalData.split('|')`, then every value is converted into a number or set undefined if invalid
-	 *   4. champion watch handles parsing back to object
-	 */
-	internalData: Ref<Id extends IInternalDataSetupChampions
-		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupData']>
-		: IDamageSourceInternalDataBase>;
-	/* object containing the internal data of champion items, similar to `internalData` but untyped */
-	internalItemData: Ref<any>;
-	/* object containing the internal data of applied effects, like item passives or champion abilities */
-	appliedEffects: Ref<IDamageSourceEffect[]>;
-
-	watchHandles: WatchHandle[];
-
-	/**
-	 * set to the values of the `this.internalData.value` being restored when parsing back from stringified
-	 * if not `undefined`, the champion watch will assume the `DamageSource` is being restored and handle it specially
-	 */
-	fromStringifiedInternalData: any[] | undefined;
+export interface IChampionRunes {
+	paths: {
+		primary: IRunePathName;
+		primarySlots: (IRuneSlotName | undefined)[];
+		secondary: IRunePathName | undefined;
+		secondarySlots: (IRuneSlotName | undefined)[];
+	};
+	shards: {
+		[K in IRuneShardSlotName]: keyof IDataShards[K];
+	};
 }

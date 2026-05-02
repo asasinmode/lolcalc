@@ -35,4 +35,4 @@ export default antfu({
 	},
 	formatters: true,
 	ignores: ['packages/data/files/**/*.json'],
-}, nuxtConfig);
+}, { files: ['**/*.d.ts'] }, nuxtConfig);

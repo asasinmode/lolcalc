@@ -1,9 +1,8 @@
+import type { IChampionId, IDamageSource } from '@lolcalc/data/types';
 import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './types';
 
-type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
-
-interface IOverrides<Id extends IChampionId | undefined = undefined> {
+interface IOverrides<Id extends IChampionId = IChampionId> {
 	champion: UnwrapRef<IDamageSource['listedChampion']>;
 	level: UnwrapRef<IDamageSource['level']>;
 	items: UnwrapRef<IDamageSource['items']>;
@@ -20,44 +19,9 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	appliedEffects: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
 }
 
-export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
-
-export interface IDamageSourceInternalDataBase {
-	_watchHandles?: WatchHandle[];
-}
-
-export interface IDamageSourceInternalDataProvider {
-	/**
-	 * returns the `internalData.value` for specific `DamageSource`'s champion
-	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
-	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
-	 */
-	setupData: (self: DamageSource) => any;
-}
-
-export interface IDamageSourceInternalItemDataProvider {
-	/**
-	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.internalItemData`
-	 * the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
-	 *
-	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
-	 */
-	setupData: (self: DamageSource) => any;
-	/** the properties `setupData` uses, needed for cleanup */
-	internalDataProperties: string[];
-}
-
-export interface IDamageSourceEffect<T extends any[] = any[]> {
-	/** stringified `abilityId` */
-	id: string;
-	abilityId: IEffectAbilityId;
-	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
-	data: T;
-}
-
-export class DamageSource<Id extends IChampionId | undefined = any> {
-	id: string;
-	color: string;
+export class DamageSource<Id extends IChampionId = IChampionId> implements IDamageSource<Id> {
+	id: IDamageSource['id'];
+	color: IDamageSource['color'];
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
 
@@ -78,6 +42,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	currentHealth: Ref<number>;
 	maxHealth = computed<number>(() => Math.round(this.stats.value?.total.hp || 1));
 	currentAbilityResource: Ref<number>;
+	// TODO make available under dynamic variables `@AbilityResourceName@`
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
 	maxAbilityResource = computed<number>(() => Math.round(this.stats.value?.total.mana ?? 0));
 
@@ -900,25 +865,12 @@ function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampion
 	}
 }
 
-type IInternalDataSetupChampions = {
-	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
-		? K
-		: never;
-}[keyof typeof CHAMPION_SPECIFICS];
-
 export function formatChampionStatValue(statName: IChampionStatName, value: number) {
 	const meta = CHAMPION_STAT_META[statName];
 	const multiplier = meta.isPercentage ? 100 : 1;
 	return meta.decimal
 		? roundVariable(value * multiplier, meta.decimal)
 		: Math.round(value * multiplier);
-}
-
-export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
-	item: IItem;
-	stats: [iconName: string, value: number, name: string][];
-	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
-	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 }
 
 export function computeItemDescription(
@@ -1018,26 +970,6 @@ function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
 
 export function allChampionAbilityVariants(champion?: IChampion) {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
-}
-
-export interface IComputedAbilityDescription {
-	gameAbilityId: IChampionAbilityId;
-	name: string;
-	tooltip: string;
-	tooltipExtended: string;
-	tooltipExtendedBelowLine: string;
-	anyUnknownVariables: number;
-	cooldown?: number;
-	cost?: number;
-	partype?: string;
-	extendedVariables?: {
-		name: string;
-		values?: (string | number)[];
-		isNameUnknown?: boolean;
-	}[];
-	variables: IReplaceGameDescriptionVariablesRV['variables'];
-	unknownVariables: IReplaceGameDescriptionVariablesRV['unknownVariables'];
-	variant: IChampionAbilityVariant;
 }
 
 export function computeAbilityDescription(
@@ -1308,18 +1240,6 @@ export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, w
 	}
 
 	return specific;
-}
-
-export interface IComputedAppliedEffect {
-	id: string;
-	abilityId: IEffectAbilityId;
-	imgSrc: string;
-	imgSize: number;
-	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
-	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
-	specific: IEffectSpecific;
-	/** the `maxValue` computed from the effect specific */
-	maxValue?: number;
 }
 
 async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): Promise<IComputedAppliedEffect> {

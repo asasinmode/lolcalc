@@ -1,3 +1,3 @@
 # @lolcalc/data
 
-data used by lolcalc and scripts for updating it
+data used by lolcalc and the types based on it, dynamically updated by the `scripts/updateData.ts`
