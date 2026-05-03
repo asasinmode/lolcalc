@@ -1,6 +1,6 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource.ts';
-import type { IReplaceGameDescriptionVariablesRV } from '../types';
+import type { IReplaceGameVariablesRV } from '../types';
 import { STAT_ICON } from '@lolcalc/data';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
@@ -206,15 +206,15 @@ interface IOptions {
 }
 
 // TODO rename to replaceGameVariables
-export function replaceGameDescriptionVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(
+export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
+export function replaceGameVariables(
 	text: string,
 	variableType: IGameVariableType,
 	variableValueFunctionArguments: any[],
 	options: Partial<IOptions> = {},
-): IReplaceGameDescriptionVariablesRV {
+): IReplaceGameVariablesRV {
 	const unknownVariables: [string, string | undefined][] = [];
 	const variables = new Map<string, number | [number, number]>();
 	const variablesAllValues = new Map<string, (string | number)[]>();
@@ -297,7 +297,7 @@ export function replaceGameDescriptionVariables(
 
 const statIconNameValues = Object.values(STAT_ICON);
 
-export function replaceGameDescriptionIcons(minorVersion: string, text: string, onHitIcon?: string) {
+export function replaceGameIcons(minorVersion: string, text: string, onHitIcon?: string) {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();

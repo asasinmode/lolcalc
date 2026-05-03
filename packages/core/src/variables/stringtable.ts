@@ -1,5 +1,4 @@
-// TODO rename to replaceStringtableVariables
-export function replaceGameDescriptionStringtableVariables(
+export function replaceStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},
 	/** either resolved dynamic variables or possible values of dynamic variables */
@@ -38,11 +37,11 @@ export function replaceGameDescriptionStringtableVariables(
 							continue;
 						}
 
-						const { replaced } = replaceGameDescriptionStringtableVariables(possibleValueText, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
+						const { replaced } = replaceStringtableVariables(possibleValueText, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 						stringtableVariables.set(possibleValueVariableName, replaced);
 
 						if (replaced.includes('{{')) {
-							replaceGameDescriptionStringtableVariables(replaced, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
+							replaceStringtableVariables(replaced, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 						}
 					}
 
@@ -61,7 +60,7 @@ export function replaceGameDescriptionStringtableVariables(
 		}
 
 		if (value.includes('{{')) {
-			const { replaced } = replaceGameDescriptionStringtableVariables(
+			const { replaced } = replaceStringtableVariables(
 				value,
 				stringtable,
 				dynamicValues,

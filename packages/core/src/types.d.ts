@@ -4,7 +4,7 @@
  */
 export type IPossibleDynamicValues = Record<string, (string | number)[]>;
 
-export interface IReplaceGameDescriptionVariablesRV {
+export interface IReplaceGameVariablesRV {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
 	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */

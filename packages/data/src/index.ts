@@ -10,6 +10,12 @@ import runeData from '../files/rune.json' with { type: 'json' };
 import textData from '../files/text.json' with { type: 'json' };
 import uiData from '../files/ui.json' with { type: 'json' };
 
+export const PATCH_VERSION = {
+	semver: championData.version,
+	/** semver up without patch */
+	minor: championData.version.slice(0, championData.version.lastIndexOf('.')),
+};
+
 export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee'];
 
 export const ITEM_STAT_META: Record<IItemStat, {
@@ -352,3 +358,25 @@ interface IUiData {
 		statusEffect: ITexture;
 	};
 }
+
+export const CHAMPION_IMAGES = {
+	championImage(image: string, championId: IChampionId) {
+		return championId === 'TargetDummy'
+			? `https://raw.communitydragon.org/${PATCH_VERSION.minor}/game/${image}`
+			: `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.semver}/img/champion/${image}`;
+	},
+	abilityImage(path: string, championId: IChampionId, group: 'sources' | 'targets' = 'sources') {
+		path = championId === 'TargetDummy'
+			? path
+					.replace('%s1', group === 'sources' ? 'order' : 'chaos')
+					.replace('%s2', group === 'sources' ? 'blue' : 'red')
+			: path;
+		return `https://raw.communitydragon.org/${PATCH_VERSION.minor}/game/${path}`;
+	},
+	championImageSize(championId: IChampionId) {
+		return championId === 'TargetDummy' ? 64 : 128;
+	},
+	abilityImageSize(championId: IChampionId) {
+		return championId === 'TargetDummy' ? 128 : 64;
+	},
+};

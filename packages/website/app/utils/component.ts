@@ -1,42 +1,4 @@
-import type { IChampionAbilityId, IEffectAbilityId, IExtraComponentEmits, IExtraComponentProps, IGameAbilityId } from '~/utils/types';
 import { VExtrasBoolean, VExtrasEnum, VExtrasNumber } from '#components';
-
-// eslint-disable-next-line ts/consistent-type-definitions
-type IDefineExtraComponentEmits = {
-	imgMouseenter: (...args: IExtraComponentEmits['imgMouseenter']) => void;
-};
-
-// for getting specific ability's specific, maybe will be useful
-// ? T['id'] extends keyof TChampionSpecifics
-// 	? T['abilityKey'] extends keyof TChampionSpecifics[T['id']]
-// 		? T['abilityVariantIndex'] extends keyof TChampionSpecifics[T['id']][T['abilityKey']]
-// 			? TChampionSpecifics[T['id']][T['abilityKey']][T['abilityVariantIndex']]
-// 			: never
-// 		: never
-// 	: never
-
-export type IGameAbilitySpecific<T extends IGameAbilityId> = T extends IChampionAbilityId
-	? T['id'] extends keyof TChampionSpecifics
-		? TChampionSpecifics[T['id']]
-		: never
-	: T extends IEffectAbilityId
-		? T['id'] extends keyof TEffectSpecifics
-			? TEffectSpecifics[T['id']]
-			: never
-		: T['id'] extends keyof TItemSpecifics
-			? TItemSpecifics[T['id']]
-			: never;
-
-export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>
-	= Specific extends { setupData: (...args: any) => any }
-		? UnwrapPromise<ReturnType<Specific['setupData']>>
-		: never;
-
-type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
-
-type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
-type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
-type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
 
 export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
@@ -138,42 +100,6 @@ export async function enumExtra<T extends IGameAbilityId>(
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
 
-export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src: string, size: number]> {
-	const { version, minorVersion } = usePatchVersion();
-
-	const imageAbilityId = abilityId.type === ABILITY_TYPE.effect
-		? EFFECT_SPECIFICS[abilityId.id].sourceAbility
-		: abilityId;
-
-	if (!imageAbilityId) {
-		console.warn('[gameAbilityId] failed to resolve imageAbilityId for', abilityId);
-		return ['', 0];
-	}
-
-	if (imageAbilityId.type === ABILITY_TYPE.item) {
-		return [
-			imgUrl(`img/item/${imageAbilityId.id}.png`, version, true),
-			64,
-		];
-	} else if (imageAbilityId.type === ABILITY_TYPE.effect) {
-		return CUSTOM_EFFECT_IMAGES[imageAbilityId.id]
-			? [
-					imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0], minorVersion),
-					CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
-				]
-			: ['', 0];
-	}
-
-	const { abilityImage, abilityImageSize } = useChampionImages();
-
-	const champion = await useChampion(imageAbilityId.id);
-
-	return [
-		abilityImage(champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.image, imageAbilityId.id),
-		abilityImageSize(imageAbilityId.id),
-	];
-}
-
 function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource): [
 	stringifiedAbilityId: string,
 	value: ComputedRef<any>,
@@ -208,10 +134,11 @@ function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, da
 	];
 }
 
-function imgUrl(url: string, version: string, isDDragon = false) {
-	return url.startsWith('http')
-		? url
-		: isDDragon
-			? `https://ddragon.leagueoflegends.com/cdn/${version}/${url}`
-			: `https://raw.communitydragon.org/${version}/${url}`;
-}
+type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
+type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
+type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
+
+// eslint-disable-next-line ts/consistent-type-definitions
+type IDefineExtraComponentEmits = {
+	imgMouseenter: (...args: IExtraComponentEmits['imgMouseenter']) => void;
+};

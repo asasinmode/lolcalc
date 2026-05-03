@@ -1,24 +1,28 @@
 import type { ITextData } from '@lolcalc/data';
-import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
+import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific } from './specifics/effect';
-import type { IHypotheticalItemSpecifics, TItemSpecifics } from './specifics/item';
-import type { IReplaceGameDescriptionVariablesRV } from './types';
-import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, SHAPESHIFTING_CHAMPION_IDS, TEXT } from '@lolcalc/data';
-import { ABILITY_TYPE, ALL_CHAMPION_STATS, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import type { IGameAbilityData } from './specifics/index';
+import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
+import type { IReplaceGameVariablesRV } from './types';
+import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ITEM_STAT_META, ITEMS, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
+import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats';
 import { GameAbilityId } from './GameAbilityId';
+import { gameAbilityImage } from './misc';
 import { CHAMPION_SPECIFICS } from './specifics/champion';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect';
+import { resolveAbilitySpecific } from './specifics/index';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item';
 import { runePathsEmpty, runesInvalid } from './specifics/rune';
-import { replaceGameDescriptionVariables } from './variables/game';
+import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game';
+import { replaceStringtableVariables } from './variables/stringtable';
 
 export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -38,6 +42,8 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	internalItemData: UnwrapRef<IDamageSource<Id>['internalItemData']>;
 	appliedEffects: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
 }
+
+let damageSourcesCount = 0;
 
 export class DamageSource<Id extends IChampionId | undefined = any> implements IDamageSource<Id> {
 	id: string;
@@ -147,11 +153,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		champion?: { id: Id } & IListedChampion;
 	}) = {}) {
 		/* + 1 because it's a nicer color */
-		const counter = useState<number>('damageSourceCounter', () => 1);
-		const hue = (counter.value++ * 137.508) % 360;
+		const hue = (damageSourcesCount++ * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
-		this.id = counter.value.toString();
+		this.id = damageSourcesCount.toString();
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
@@ -795,11 +800,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			]),
 		) as unknown as Record<IChampionStatName, string>),
 		items: computed<(IComputedItemDescription | undefined)[]>(() => {
-			const text = useText();
-			const { minorVersion } = usePatchVersion();
-
 			return this.items.value.map((item): IComputedItemDescription | undefined =>
-				item && computeItemDescription(text, minorVersion, item, this),
+				item && computeItemDescription(TEXT, PATCH_VERSION.minor, item, this),
 			);
 		}),
 		itemSpecifics: computed<({
@@ -835,12 +837,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			return index;
 		}),
 		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
-			const { minorVersion } = usePatchVersion();
-
 			return Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
 				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
-					minorVersion,
+					PATCH_VERSION.minor,
 					this.champion.value!,
 					GameAbilityId.build(ABILITY_TYPE.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
 					this,
@@ -864,11 +864,10 @@ function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampion
 	const boots = items[bootsIndex]!;
 
 	if (boots?.epicness) {
-		const allItems = useItems();
 		if (roleQuest === 'mid' && boots.into?.length) {
-			items[bootsIndex] = allItems[boots.into[0]!];
+			items[bootsIndex] = ITEMS[boots.into[0]!];
 		} else if (roleQuest !== 'mid' && boots.from?.length === 1) {
-			items[bootsIndex] = allItems[boots.from[0]!];
+			items[bootsIndex] = ITEMS[boots.from[0]!];
 		}
 	}
 }
@@ -886,7 +885,7 @@ export function computeItemDescription(
 	minorVersion: string,
 	item?: IItem,
 	damageSource?: DamageSource<any>,
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): IComputedItemDescription | undefined {
 	const variables: IComputedItemDescription['variables'] = new Map();
 	const unknownVariables: IComputedItemDescription['unknownVariables'] = [];
@@ -948,14 +947,14 @@ function additionalItemText(
 	stringtable: ITextData['stringtable'],
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): string | undefined {
 	const { replaced, variables: newVariables, unknownVariables: newUnknownVariables } = value
-		? replaceGameDescriptionVariables(
+		? replaceGameVariables(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
-				replaceGameDescriptionStringtableVariables(value, stringtable).replaced,
+				replaceStringtableVariables(value, stringtable).replaced,
 				'item',
-				[item, damageSource?.itemDamageCalculationTarget.value],
+				[item, damageSource?.isRanged.value, damageSource],
 				replaceOptions,
 			)
 		: {};
@@ -985,7 +984,7 @@ export function computeAbilityDescription(
 	champion: IChampion,
 	gameAbilityId: IChampionAbilityId,
 	damageSource?: DamageSource<any>,
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): IComputedAbilityDescription {
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
@@ -994,7 +993,7 @@ export function computeAbilityDescription(
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
 	const allVariants = allChampionAbilityVariants(champion);
 
-	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
+	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceStringtableVariables(
 		variant.name,
 		champion.stringtable,
 	);
@@ -1122,12 +1121,12 @@ function abilityVariantText(
 	stringtable?: Record<string, string>,
 	replaceVariablesWithNames?: boolean,
 ) {
-	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(
+	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(
 		value,
 		stringtable,
 	);
 
-	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameDescriptionVariables(
+	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
 		[variant, level, allAbilityVariants],
@@ -1135,7 +1134,7 @@ function abilityVariantText(
 	);
 
 	return {
-		replaced: replaceGameDescriptionIcons(minorVersion, replaced, onHitIcon),
+		replaced: replaceGameIcons(minorVersion, replaced, onHitIcon),
 		unknownSV: unknownStringtableVariables,
 		unknownV: unknownVariables,
 		variablesAllValues,
@@ -1183,22 +1182,22 @@ function formatItemDescriptionText(
 	cooldownIcon: string,
 	onHitIcon: string,
 	minorVersion: string,
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): [string, ...string[]][] | undefined {
 	return value?.map(([heading, ...paragraphs]) => {
 		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
-		const { replaced: headingStringtableReplaced } = replaceGameDescriptionStringtableVariables(heading!
+		const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
 			.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-				const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
+				const { value } = itemVariableValue('Cooldown', item, damageSource?.isRanged.value, damageSource);
 				return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
 			})
 			.replace('(', '<span>(')
 			.replace(')', ')</span>'), text.stringtable);
 
-		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
+		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameVariables(
 			headingStringtableReplaced,
 			'item',
-			[item, damageSource?.itemDamageCalculationTarget.value],
+			[item, damageSource?.isRanged.value, damageSource],
 			replaceOptions,
 		);
 
@@ -1210,13 +1209,13 @@ function formatItemDescriptionText(
 		mergeMaps(variables, headingVariables);
 
 		return [
-			replaceGameDescriptionIcons(minorVersion, replacedHeading),
+			replaceGameIcons(minorVersion, replacedHeading),
 			...paragraphs.map((paragraph) => {
-				const { replaced: paragraphStringtableReplaced } = replaceGameDescriptionStringtableVariables(paragraph, text.stringtable);
-				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
+				const { replaced: paragraphStringtableReplaced } = replaceStringtableVariables(paragraph, text.stringtable);
+				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameVariables(
 					paragraphStringtableReplaced,
 					'item',
-					[item, damageSource?.itemDamageCalculationTarget.value],
+					[item, damageSource?.isRanged.value, damageSource],
 					replaceOptions,
 				);
 
@@ -1227,27 +1226,11 @@ function formatItemDescriptionText(
 				}
 				mergeMaps(variables, paragraphVariables);
 
-				return replaceGameDescriptionIcons(minorVersion, replacedParagraph, onHitIcon);
+				return replaceGameIcons(minorVersion, replacedParagraph, onHitIcon);
 			},
 			),
 		];
 	});
-}
-
-export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
-	const specific = abilityId.type === ABILITY_TYPE.item
-		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
-		: abilityId.type === ABILITY_TYPE.champion
-			? (CHAMPION_SPECIFICS as Partial<Record<IChampionId, IChampionSpecific>>)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
-			: abilityId.type === ABILITY_TYPE.effect
-				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
-				: undefined;
-
-	if (!specific && warnPrefix) {
-		console.warn(`[${warnPrefix}] failed to resolve specific for`, abilityId);
-	}
-
-	return specific;
 }
 
 async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): Promise<IComputedAppliedEffect> {
@@ -1351,16 +1334,16 @@ export interface IComputedAbilityDescription {
 		values?: (string | number)[];
 		isNameUnknown?: boolean;
 	}[];
-	variables: IReplaceGameDescriptionVariablesRV['variables'];
-	unknownVariables: IReplaceGameDescriptionVariablesRV['unknownVariables'];
+	variables: IReplaceGameVariablesRV['variables'];
+	unknownVariables: IReplaceGameVariablesRV['unknownVariables'];
 	variant: IChampionAbilityVariant;
 }
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
 	item: IItem;
 	stats: [iconName: string, value: number, name: string][];
-	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
-	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
+	variables: ReturnType<typeof replaceGameVariables>['variables'];
+	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
 }
 
 export interface IComputedAppliedEffect {
