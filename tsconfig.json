@@ -39,7 +39,9 @@
 		"isolatedModules": true,
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
-		"noUnusedLocals": true
+		"noUnusedLocals": true,
+		"composite": true,
+		"isolatedDeclarations": true
 	},
 	"include": [
 		"*.ts",
