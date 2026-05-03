@@ -11,18 +11,18 @@ import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from '
 import type { IReplaceGameVariablesRV } from './types';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ITEM_STAT_META, ITEMS, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
-import { roundVariable } from '@lolcalc/shared/utils';
+import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
-import { calculateChampionStats } from './calculate/championStats';
-import { GameAbilityId } from './GameAbilityId';
-import { gameAbilityImage } from './misc';
-import { CHAMPION_SPECIFICS } from './specifics/champion';
-import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect';
-import { resolveAbilitySpecific } from './specifics/index';
-import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item';
-import { runePathsEmpty, runesInvalid } from './specifics/rune';
-import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game';
-import { replaceStringtableVariables } from './variables/stringtable';
+import { calculateChampionStats } from './calculate/championStats.ts';
+import { GameAbilityId } from './GameAbilityId.ts';
+import { gameAbilityImage } from './misc.ts';
+import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
+import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
+import { resolveAbilitySpecific } from './specifics/index.ts';
+import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
+import { runePathsEmpty, runesInvalid } from './specifics/rune.ts';
+import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
+import { replaceStringtableVariables } from './variables/stringtable.ts';
 
 export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 

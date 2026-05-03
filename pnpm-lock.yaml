@@ -109,6 +109,12 @@ importers:
 
   packages/core:
     devDependencies:
+      '@lolcalc/data':
+        specifier: 'workspace:'
+        version: link:../data
+      '@lolcalc/shared':
+        specifier: 'workspace:'
+        version: link:../shared
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -118,6 +124,9 @@ importers:
 
   packages/data:
     devDependencies:
+      '@lolcalc/shared':
+        specifier: 'workspace:'
+        version: link:../shared
       typescript:
         specifier: 'catalog:'
         version: 6.0.3

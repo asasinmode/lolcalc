@@ -1,9 +1,8 @@
+import type { TRunes } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
-import runeData from '@lolcalc/data/files/rune.json' with { type: 'json' };
-
-const { data } = runeData;
+import { RUNES } from '@lolcalc/data';
 
 export function runePathsEmpty(runes: IChampionRunes) {
 	const { primarySlots, secondary, secondarySlots } = runes.paths;
@@ -24,7 +23,7 @@ export const RUNE_SPECIFICS = {
 
 				return {
 					f1: adaptiveForceStatVariable,
-					f2: data.shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
+					f2: (RUNES as TRunes).shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
 				};
 			},
 		},

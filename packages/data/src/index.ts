@@ -245,10 +245,25 @@ for (const item of Object.values(itemData.data)) {
 
 export const ITEMS = itemData.data satisfies Record<string, IItem> as Record<string, IItem>;
 
-/** the const type of the `item.json` file for accessing specific things like `items[darkSealId].dataValues.maxStacks` without losing the types from `ITEMS` being Record<string> */
+/**
+ * the const type of the `item.json` file for accessing specific things without losing the types from `ITEMS` having its own, looser type
+ * @example
+ * ```ts
+ * const maxDarkSealStacks = (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks;
+ * ```
+ */
 export type TItems = typeof itemData['data'];
 
 export const RUNES = runeData.data as IRunes;
+
+/**
+ * the const type of the `rune.json` file for accessing specific things without losing the types from `RUNES` having its own, looser type
+ * @example
+ * ```ts
+ * const adaptiveForceAD = (RUNES as TRunes).shards.offensive.adaptive.effectAmount.StatGain1;
+ * ```
+ */
+export type TRunes = typeof runeData['data'];
 
 export const EFFECTS = { data: effectData.data, stringtable: effectData.stringtable } satisfies IEffectData;
 

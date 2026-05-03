@@ -7,6 +7,8 @@
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
 	"devDependencies": {
+		"@lolcalc/data": "workspace:",
+		"@lolcalc/shared": "workspace:",
 		"typescript": "catalog:",
 		"vue": "catalog:"
 	}

@@ -1,7 +1,7 @@
 import type { IGameAbilityId } from './GameAbilityId';
 import { CHAMPION_IMAGES, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
-import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect';
+import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
 
 export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src: string, size: number]> {
 	const imageAbilityId = abilityId.type === ABILITY_TYPE.effect
