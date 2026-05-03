@@ -1,4 +1,4 @@
-/* supposed to be used for stuff that requires TYPES based on the data but not the actual data (so it can be imported in `scripts/updateData.ts` without errors when there is no data saved yet) */
+/* supposed to be stuff that requires TYPES based on the data but not the actual data */
 
 import type { IChampionStatName } from '@lolcalc/shared';
 import type { IChampionId, IItem, IItemStat } from './types';

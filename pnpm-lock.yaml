@@ -184,6 +184,15 @@ importers:
 
   scripts:
     devDependencies:
+      '@lolcalc/core':
+        specifier: 'workspace:'
+        version: link:../packages/core
+      '@lolcalc/data':
+        specifier: 'workspace:'
+        version: link:../packages/data
+      '@lolcalc/shared':
+        specifier: 'workspace:'
+        version: link:../packages/shared
       '@node-rs/xxhash':
         specifier: catalog:scripts
         version: 1.7.6

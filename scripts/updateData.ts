@@ -1,25 +1,24 @@
-import type { IItemShopStatFilter } from '@lolcalc/data';
+import type { IChampionSpecific } from '@lolcalc/core/specifics/champion.ts';
+import type { IRuneSpecific } from '@lolcalc/core/specifics/rune';
+import type { IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import type { IEffectData } from '@lolcalc/data';
+import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types';
-import type { IChampionSpecific } from '../app/utils/champion';
-import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
-import type { IEffectObjectName } from '../app/utils/meta';
-import type { IRuneSpecific } from '../app/utils/rune';
-
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data';
+import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
+import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
+import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
+import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
+import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/shared';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
-import { CHAMPION_SPECIFICS } from '../shared/specifics/champion.ts';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../shared/specifics/effect.ts';
-import { RUNE_SPECIFICS } from '../shared/specifics/rune.ts';
-import { replaceGameDescriptionVariables } from '../shared/variables/game.ts';
-import { replaceGameDescriptionStringtableVariables } from '../shared/variables/stringtable.ts';
 
 let latestVersion = process.argv[2];
 
@@ -56,7 +55,7 @@ const debug = {
 	misc: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 };
 
-const textFilePath = `${import.meta.dirname}/../app/assets/text.json`;
+const textFilePath = `${import.meta.dirname}/../packages/data/files/text.json`;
 let textData = {
 	version: latestVersion,
 	data: {
@@ -66,7 +65,7 @@ let textData = {
 		},
 		stringtable: {},
 	},
-} as typeof import('../app/assets/text.json');
+} as typeof import('../packages/data/files/text.json');
 
 try {
 	await fs.access(textFilePath);
@@ -74,8 +73,8 @@ try {
 	textData.data.stringtable ||= {} as any;
 } catch { }
 
-const championFilePath = `${import.meta.dirname}/../app/assets/champion.json`;
-let championData: typeof import('../app/assets/champion.json') | undefined;
+const championFilePath = `${import.meta.dirname}/../packages/data/files/champion.json`;
+let championData: typeof import('../packages/data/files/champion.json') | undefined;
 
 try {
 	await fs.access(championFilePath);
@@ -220,7 +219,7 @@ if (!championData || championData?.version !== latestVersion) {
 						stats.attackdamageperlevel = formatNumber(damagePerLevelModifiable.baseValue);
 					}
 
-					const dedicatedChampionFilePath = `${import.meta.dirname}/../public/data/champion/${id}.json`;
+					const dedicatedChampionFilePath = `${import.meta.dirname}/../packages/data/files/champion/${id}.json`;
 					const championFileDataStringtable: IChampion['stringtable'] = {};
 
 					const dedicatedChampionFileData: IChampion = {
@@ -281,14 +280,14 @@ if (!championData || championData?.version !== latestVersion) {
 		}
 	}
 
-	await fs.writeFile(`${import.meta.dirname}/../public/data/champion/${TargetDummy.id}.json`, stringifyObject(TargetDummy));
+	await fs.writeFile(`${import.meta.dirname}/../packages/data/files/champion/${TargetDummy.id}.json`, stringifyObject(TargetDummy));
 
 	await fs.writeFile(championFilePath, stringifyObject(championData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const itemFilePath = `${import.meta.dirname}/../app/assets/item.json`;
-let itemData: typeof import('../app/assets/item.json') | undefined;
+const itemFilePath = `${import.meta.dirname}/../packages/data/files/item.json`;
+let itemData: typeof import('../packages/data/files/item.json') | undefined;
 
 try {
 	await fs.access(itemFilePath);
@@ -520,8 +519,8 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const runeFilePath = `${import.meta.dirname}/../app/assets/rune.json`;
-let runeData: typeof import('../app/assets/rune.json') | undefined;
+const runeFilePath = `${import.meta.dirname}/../packages/data/files/rune.json`;
+let runeData: typeof import('../packages/data/files/rune.json') | undefined;
 
 try {
 	await fs.access(runeFilePath);
@@ -639,8 +638,8 @@ const DRAGONS: ([name: IDragonName] | [name: IDragonName, spellDataKey: string])
 	['Chemtech', 'ChemTech'],
 	['Hextech'],
 ];
-const miscFilePath = `${import.meta.dirname}/../app/assets/misc.json`;
-let miscData: typeof import('../app/assets/misc.json') | undefined;
+const miscFilePath = `${import.meta.dirname}/../packages/data/files/misc.json`;
+let miscData: typeof import('../packages/data/files/misc.json') | undefined;
 
 try {
 	await fs.access(miscFilePath);
@@ -750,8 +749,8 @@ if (!miscData || miscData?.version !== latestVersion) {
 	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const uiFilePath = `${import.meta.dirname}/../app/assets/ui.json`;
-let uiData: typeof import('../app/assets/ui.json') | undefined;
+const uiFilePath = `${import.meta.dirname}/../packages/data/files/ui.json`;
+let uiData: typeof import('../packages/data/files/ui.json') | undefined;
 
 try {
 	await fs.access(uiFilePath);
@@ -914,8 +913,8 @@ if (!uiData || uiData?.version !== latestVersion) {
 	await fs.writeFile(uiFilePath, stringifyObject(uiData));
 }
 
-const effectFilePath = `${import.meta.dirname}/../app/assets/effect.json`;
-let effectData: typeof import('../app/assets/effect.json') | undefined;
+const effectFilePath = `${import.meta.dirname}/../packages/data/files/effect.json`;
+let effectData: typeof import('../packages/data/files/effect.json') | undefined;
 
 try {
 	await fs.access(effectFilePath);
@@ -1310,7 +1309,7 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 function debugStringVariables(value: string, variableDebug: IStringtableVariableDebug) {
 	const { category, key, stringtableVariableSaveUnder, variables } = variableDebug;
 
-	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, (variables?.variableValueParameters[0] as any)?.dynamicValues, false);
+	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceStringtableVariables(value, stringtable, (variables?.variableValueParameters[0] as any)?.dynamicValues, false);
 
 	if (stringtableVariables.size && stringtableVariableSaveUnder) {
 		stringtableVariableSaveUnder.stringtable ||= {};
@@ -1333,7 +1332,7 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 		const { variableType, variableValueParameters, variableSourceKeys } = variables;
 		const variableSource = variableValueParameters[0];
 
-		const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
+		const { unknownVariables } = replaceGameVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
 
 		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
