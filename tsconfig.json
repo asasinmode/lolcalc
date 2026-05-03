@@ -1,14 +1,15 @@
 {
 	"compilerOptions": {
 		"target": "esnext",
+		"rootDir": ".",
+		"module": "esnext",
+		"moduleResolution": "bundler",
 		"lib": [
 			"ESNext",
 			"DOM",
 			"DOM.Iterable"
 		],
-		"rootDir": ".",
-		"module": "esnext",
-		"moduleResolution": "bundler",
+		"types": ["node"],
 		"paths": {
 			"@lolcalc/core/*": [
 				"./packages/core/src/*"
@@ -29,18 +30,16 @@
 				"./packages/shared/src/*"
 			]
 		},
+		"skipDefaultLibCheck": true,
+		"skipLibCheck": true,
+		"noEmit": true,
 		"resolveJsonModule": true,
 		"allowImportingTsExtensions": true,
-		"strictFunctionTypes": true,
-		"strictNullChecks": true,
-		"noUnusedLocals": true,
-		"declaration": true,
-		"declarationDir": "./types",
-		"emitDeclarationOnly": true,
 		"esModuleInterop": true,
 		"isolatedModules": true,
-		"skipDefaultLibCheck": true,
-		"skipLibCheck": true
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"noUnusedLocals": true
 	},
 	"include": [
 		"*.ts",
@@ -48,6 +47,7 @@
 		"scripts"
 	],
 	"exclude": [
-		"node_modules"
+		"node_modules",
+		"packages/website"
 	]
 }

@@ -18,6 +18,7 @@
 		"@lolcalc/shared": "workspace:*",
 		"@lolcalc/website": "workspace:*",
 		"@nuxt/eslint": "catalog:",
+		"@types/node": "catalog:",
 		"@unocss/eslint-config": "catalog:",
 		"eslint": "catalog:",
 		"eslint-plugin-format": "catalog:",

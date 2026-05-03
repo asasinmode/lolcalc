@@ -12,6 +12,9 @@ catalogs:
     '@nuxt/eslint':
       specifier: ^1.15.2
       version: 1.15.2
+    '@types/node':
+      specifier: ^25.6.0
+      version: 25.6.0
     '@unocss/eslint-config':
       specifier: ^66.6.8
       version: 66.6.8
@@ -91,6 +94,9 @@ importers:
       '@nuxt/eslint':
         specifier: 'catalog:'
         version: 1.15.2(@typescript-eslint/utils@8.59.1(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3))(@vue/compiler-sfc@3.5.33)(eslint-plugin-format@2.0.1(eslint@10.3.0(jiti@2.6.1)))(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(terser@5.46.2)(yaml@2.8.3))
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.6.0
       '@unocss/eslint-config':
         specifier: 'catalog:'
         version: 66.6.8(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
