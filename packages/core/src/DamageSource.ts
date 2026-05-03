@@ -1,5 +1,5 @@
 import type { ITextData } from '@lolcalc/data';
-import type { IChampion, IChampionId, IChampionRunes, IDragonName, IItem, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
@@ -7,6 +7,7 @@ import type { IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbi
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific } from './specifics/effect';
 import type { IHypotheticalItemSpecifics, TItemSpecifics } from './specifics/item';
+import type { IReplaceGameDescriptionVariablesRV } from './types';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, SHAPESHIFTING_CHAMPION_IDS, TEXT } from '@lolcalc/data';
 import { ABILITY_TYPE, ALL_CHAMPION_STATS, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils';
@@ -36,66 +37,6 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
 	internalItemData: UnwrapRef<IDamageSource<Id>['internalItemData']>;
 	appliedEffects: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
-}
-
-type IInternalDataSetupChampions = {
-	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
-		? K
-		: never;
-}[keyof typeof CHAMPION_SPECIFICS];
-
-export interface IDamageSourceInternalDataBase {
-	_watchHandles?: WatchHandle[];
-}
-
-export interface IDamageSourceInternalDataProvider {
-	/**
-	 * returns the `internalData.value` for specific `DamageSource`'s champion
-	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
-	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
-	 */
-	setupData: (self: DamageSource) => any;
-}
-
-export interface IDamageSourceInternalItemDataProvider {
-	/**
-	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.internalItemData`
-	 * the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
-	 *
-	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
-	 */
-	setupData: (self: DamageSource) => any;
-	/** the properties `setupData` uses, needed for cleanup */
-	internalDataProperties: string[];
-}
-
-export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
-
-export type IProviderGroupInternalItemData = {
-	setupData?: never;
-	internalDataProperties?: never;
-} | IDamageSourceInternalItemDataProvider;
-
-export interface IAbilityImageTextProvider {
-	/**
-	 * text on the item's image, like current heartsteel/mejai stacks
-	 */
-	imgText: (damageSource: DamageSource, dataProperty?: any) => string | number;
-	/** sr only label for the shown image text */
-	imgTextLabel: string;
-}
-
-export type IProviderGroupImageText = {
-	imgText?: never;
-	imgTextLabel?: never;
-} | IAbilityImageTextProvider;
-
-export interface IDamageSourceEffect<T extends any[] = any[]> {
-	/** stringified `abilityId` */
-	id: string;
-	abilityId: IEffectAbilityId;
-	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
-	data: T;
 }
 
 export class DamageSource<Id extends IChampionId | undefined = any> implements IDamageSource<Id> {
@@ -1335,6 +1276,93 @@ export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean
 	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
 }
 
+type IInternalDataSetupChampions = {
+	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
+		? K
+		: never;
+}[keyof typeof CHAMPION_SPECIFICS];
+
+export interface IDamageSourceInternalDataBase {
+	_watchHandles?: WatchHandle[];
+}
+
+export interface IDamageSourceInternalDataProvider {
+	/**
+	 * returns the `internalData.value` for specific `DamageSource`'s champion
+	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
+	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
+	 */
+	setupData: (self: DamageSource) => any;
+}
+
+export interface IDamageSourceInternalItemDataProvider {
+	/**
+	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.internalItemData`
+	 * the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
+	 *
+	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
+	 */
+	setupData: (self: DamageSource) => any;
+	/** the properties `setupData` uses, needed for cleanup */
+	internalDataProperties: string[];
+}
+
+export type IProviderGroupInternalItemData = {
+	setupData?: never;
+	internalDataProperties?: never;
+} | IDamageSourceInternalItemDataProvider;
+
+export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
+
+export interface IAbilityImageTextProvider {
+	/**
+	 * text on the item's image, like current heartsteel/mejai stacks
+	 */
+	imgText: (damageSource: DamageSource, dataProperty?: any) => string | number;
+	/** sr only label for the shown image text */
+	imgTextLabel: string;
+}
+
+export type IProviderGroupImageText = {
+	imgText?: never;
+	imgTextLabel?: never;
+} | IAbilityImageTextProvider;
+
+export interface IDamageSourceEffect<T extends any[] = any[]> {
+	/** stringified `abilityId` */
+	id: string;
+	abilityId: IEffectAbilityId;
+	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
+	data: T;
+}
+
+export interface IComputedAbilityDescription {
+	gameAbilityId: IChampionAbilityId;
+	name: string;
+	tooltip: string;
+	tooltipExtended: string;
+	tooltipExtendedBelowLine: string;
+	anyUnknownVariables: number;
+	cooldown?: number;
+	cost?: number;
+	partype?: string;
+	extendedVariables?: {
+		name: string;
+		values?: (string | number)[];
+		isNameUnknown?: boolean;
+	}[];
+	variables: IReplaceGameDescriptionVariablesRV['variables'];
+	unknownVariables: IReplaceGameDescriptionVariablesRV['unknownVariables'];
+	variant: IChampionAbilityVariant;
+}
+
+export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
+	item: IItem;
+	stats: [iconName: string, value: number, name: string][];
+	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
+	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
+}
+
 export interface IComputedAppliedEffect {
 	id: string;
 	abilityId: IEffectAbilityId;
@@ -1345,11 +1373,4 @@ export interface IComputedAppliedEffect {
 	specific: IEffectSpecific;
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
-}
-
-export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
-	item: IItem;
-	stats: [iconName: string, value: number, name: string][];
-	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
-	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 }

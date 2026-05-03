@@ -1,7 +1,8 @@
+import type { TItems } from '@lolcalc/data';
 import type { IEffectObjectName } from '@lolcalc/shared';
 import type { DamageSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IGameAbilityId } from '../GameAbilityId.ts';
-import itemData from '@lolcalc/data/files/item.json' with { type: 'json' };
+import { ITEMS, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
@@ -158,7 +159,7 @@ export const EFFECT_SPECIFICS = {
 	},
 	[EFFECT_OBJECT_NAME.bloodletterVileDecay]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodlettersCurse),
-		maxValue: itemData.data[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
+		maxValue: (ITEMS as TItems)[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
 		label: 'Vile Decay stacks',
 		imgText(data: [vDecay: number]) {
 			return data[0];

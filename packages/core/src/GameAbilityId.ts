@@ -1,7 +1,6 @@
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IEffectObjectName, TAbilityType } from '@lolcalc/shared';
-import championData from '@lolcalc/data/files/champion.json' with { type: 'json' };
-import itemData from '@lolcalc/data/files/item.json' with { type: 'json' };
+import { CHAMPIONS, ITEMS } from '@lolcalc/data';
 import { ABILITY_TYPE, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
 import { markRaw } from 'vue';
 
@@ -116,7 +115,7 @@ export class GameAbilityId {
 
 		if (type === ABILITY_TYPE.champion) {
 			const championId = championKeyToId[id];
-			if (!championId || !(championId in championData.data)) {
+			if (!championId || !(championId in CHAMPIONS)) {
 				return;
 			}
 
@@ -136,7 +135,7 @@ export class GameAbilityId {
 		}
 
 		if (type === ABILITY_TYPE.item) {
-			if (!(id in itemData.data)) {
+			if (!(id in ITEMS)) {
 				return;
 			}
 

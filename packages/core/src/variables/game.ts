@@ -1,5 +1,6 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource.ts';
+import type { IReplaceGameDescriptionVariablesRV } from '../types';
 import { STAT_ICON } from '@lolcalc/data';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
@@ -18,7 +19,6 @@ interface IVariableValueResult {
 	allValues?: number[];
 }
 
-// TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
 export function itemVariableValue(variable: string, item: IItem, isRanged?: boolean, damageSource?: DamageSource): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
@@ -200,14 +200,6 @@ export interface IGameVariableValueParameters {
 	rune: ParametersExceptFirst<typeof runeVariableValue>;
 	championAbility: ParametersExceptFirst<typeof championAbilityVariableValue>;
 };
-
-export interface IReplaceGameDescriptionVariablesRV {
-	replaced: string;
-	variables: Map<string, number | [number, number]>;
-	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
-	variablesAllValues: Map<string, (string | number)[]>;
-	unknownVariables: [rawName: string, actualName: string | undefined][];
-}
 
 interface IOptions {
 	replaceWithName: boolean;

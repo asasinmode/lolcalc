@@ -223,15 +223,12 @@ export const CHAMPION_ID_TO_KEY: Record<IChampionId, string> = Object.fromEntrie
 
 const championCache = new Map<IChampionId, Promise<IChampion>>();
 
-export async function useChampion(id: string): Promise<IChampion> {
+export function useChampion(id: IChampionId | (string & {})): Promise<IChampion> {
 	const cacheHit = championCache.get(id as IChampionId);
 	if (cacheHit) {
 		return cacheHit;
 	}
-	/*
-	 * if this runs on server, for example a DamageSource with champion id is present during `nuxt generate`, the build will fail with out of memory error because it rerequests itself over and over or something
-	 */
-	const promise = await import(`../files/champion/${id}.json?raw`);
+	const promise = import(`../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then(module => module.default);
 	championCache.set(id as IChampionId, promise);
 	return promise;
 }
@@ -241,6 +238,9 @@ for (const item of Object.values(itemData.data)) {
 }
 
 export const ITEMS = itemData.data satisfies Record<string, IItem> as Record<string, IItem>;
+
+/** the const type of the `item.json` file for accessing specific things like `items[darkSealId].dataValues.maxStacks` without losing the types from `ITEMS` being Record<string> */
+export type TItems = typeof itemData['data'];
 
 export const RUNES = runeData.data as IRunes;
 

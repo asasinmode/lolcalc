@@ -1,6 +1,6 @@
 import type { IChampionRunes, IRuneShardSlotValue } from '@lolcalc/data/types';
-import type { IPossibleDynamicValues } from '@lolcalc/shared/types';
 import type { DamageSource } from '../DamageSource';
+import type { IPossibleDynamicValues } from '../types';
 import runeData from '@lolcalc/data/files/rune.json' with { type: 'json' };
 
 const { data } = runeData;
