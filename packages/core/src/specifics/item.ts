@@ -3,8 +3,8 @@ import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { DamageSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS } from '@lolcalc/data';
 import { EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
-import { clamp, roundVariable } from '@lolcalc/shared/utils';
-import { EFFECT_SPECIFICS } from './effect';
+import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
+import { EFFECT_SPECIFICS } from './effect.ts';
 
 const tearItemSpecifics = {
 	internalDataProperties: ['manaflow'],

@@ -3,12 +3,10 @@ import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../Ga
 import type { IChampionSpecific, TChampionSpecifics } from './champion';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
-
 import { ABILITY_TYPE } from '@lolcalc/shared';
-import { CHAMPION_SPECIFICS } from './champion';
-
-import { EFFECT_SPECIFICS } from './effect';
-import { ITEM_SPECIFICS } from './item';
+import { CHAMPION_SPECIFICS } from './champion.ts';
+import { EFFECT_SPECIFICS } from './effect.ts';
+import { ITEM_SPECIFICS } from './item.ts';
 
 export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
 	const specific = abilityId.type === ABILITY_TYPE.item

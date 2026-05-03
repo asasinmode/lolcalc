@@ -3,7 +3,7 @@ import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCal
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalChampionSpecifics } from '../specifics/champion';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data';
-import { CHAMPION_SPECIFICS } from '../specifics/champion';
+import { CHAMPION_SPECIFICS } from '../specifics/champion.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;

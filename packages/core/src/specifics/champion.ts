@@ -16,9 +16,9 @@ import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { DamageSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
-import { clamp } from '@lolcalc/shared/utils';
+import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
-import { VARIABLE_CALCULATION_FNS } from '../variables/game';
+import { VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
