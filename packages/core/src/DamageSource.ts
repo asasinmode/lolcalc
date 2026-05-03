@@ -673,6 +673,29 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		return rv;
 	}
 
+	/**
+	 * supposed to be used when `new DamageSource({ champion: CHAMPIONS.TargetDummy })` is expected to have `this.champion.value` resolved to the one passed in the constructor
+	 * @example
+	 * ```ts
+	 * const source1 = new DamageSource({ champion: CHAMPIONS.XinZhao });
+	 * const source2 = await new DamageSource({ champion: CHAMPIONS.Zaahen }).await();
+	 * console.log(source1.champion.value?.name, source2.champion.value?.name); // undefined, Zaahen
+	 * ```
+	 */
+	await<T extends IChampionId | undefined = Id>(championId: T = this.listedChampion.value?.id) {
+		if (championId === this.champion.value?.id) {
+			return this;
+		}
+		return new Promise<DamageSource<T>>((resolve) => {
+			watch(this.champion, (champion) => {
+				if (champion?.id !== championId) {
+					console.warn('[damageSource] different champion than awaited arrived', { expected: championId, actual: champion?.id });
+				}
+				resolve(this as unknown as DamageSource<T>);
+			}, { once: true });
+		});
+	}
+
 	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true, slotIndex?: number): undefined {
 		this.itemsUndoSnapshots.value.push([...this.items.value]);
 		if (consumeComponents) {
