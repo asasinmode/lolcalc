@@ -1,7 +1,7 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource.ts';
 import type { IReplaceGameVariablesRV } from '../types';
-import { STAT_ICON } from '@lolcalc/data';
+import { STAT_ICON } from '@lolcalc/data/meta.ts';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
 type IWithDynamic<T> = T & {

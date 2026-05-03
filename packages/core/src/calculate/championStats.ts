@@ -2,7 +2,7 @@ import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationResult } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalChampionSpecifics } from '../specifics/champion';
-import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data';
+import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
 import { CHAMPION_SPECIFICS } from '../specifics/champion.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {

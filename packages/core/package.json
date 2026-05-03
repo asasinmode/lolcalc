@@ -6,6 +6,10 @@
 	"description": "core, game related functionality for lolcalc",
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*"
+	},
 	"devDependencies": {
 		"@lolcalc/data": "workspace:",
 		"@lolcalc/shared": "workspace:",
