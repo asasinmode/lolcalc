@@ -298,7 +298,7 @@ export function replaceGameVariables(
 
 const statIconNameValues = Object.values(STAT_ICON);
 
-export function replaceGameIcons(text: string) {
+export function replaceGameIcons(text: string): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
@@ -308,7 +308,7 @@ export function replaceGameIcons(text: string) {
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */
-export const VARIABLE_CALCULATION_FNS = {
+export const VARIABLE_CALCULATION_FNS: IHypotheticalVariableCalculationFns = {
 	mFormulaParts(self, variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[] }) {
 		const values = variable.mFormulaParts.map(part => variableResolveFn(part)?.(self, part));
 		if (values.includes(undefined)) {
@@ -327,7 +327,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 		return rv;
 	},
-} satisfies IHypotheticalVariableCalculationFns;
+};
 
 export type IHypotheticalVariableCalculationFns = Record<string, (self: DamageSource, variable: any) => number | undefined>;
 

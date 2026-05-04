@@ -4,12 +4,12 @@ import type { DamageSource } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
 import { RUNES } from '@lolcalc/data';
 
-export function runePathsEmpty(runes: IChampionRunes) {
+export function runePathsEmpty(runes: IChampionRunes): boolean {
 	const { primarySlots, secondary, secondarySlots } = runes.paths;
 	return !(primarySlots.length || secondary || secondarySlots.length);
 };
 
-export function runesInvalid(runes: IChampionRunes, areEmpty = runePathsEmpty(runes)) {
+export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runePathsEmpty(runes)): boolean {
 	const { primarySlots, secondary, secondarySlots } = runes.paths;
 	return !areEmpty && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
 };

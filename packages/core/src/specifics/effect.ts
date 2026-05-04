@@ -238,7 +238,7 @@ export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.rellPBreakMold]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Rell', 'passive', 0),
 		label: 'Break the Mold stacks',
-		maxValue: async () => {
+		maxValue: async (): Promise<number> => {
 			const rell = await useChampion('Rell');
 			return CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: rell } } as DamageSource);
 		},

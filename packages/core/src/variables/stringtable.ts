@@ -4,8 +4,8 @@ export function replaceStringtableVariables(
 	/** either resolved dynamic variables or possible values of dynamic variables */
 	dynamicValues: Record<string, unknown> = {},
 	wrapUnknown = true,
-	unknownStringtableVariables = new Map<string, Set<string>>(),
-	stringtableVariables = new Map<string, string>(),
+	unknownStringtableVariables: Map<string, Set<string>> = new Map(),
+	stringtableVariables: Map<string, string> = new Map(),
 ): {
 	replaced: string;
 	stringtableVariables: Map<string, string>;

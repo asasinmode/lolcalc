@@ -13,9 +13,9 @@ import uiData from '../files/ui.json' with { type: 'json' };
 import { STAT_ICON } from './meta';
 
 export const PATCH_VERSION = {
-	vSemver: championData.version,
+	vSemver: championData.version as string,
 	/** semver up without patch */
-	vMinor: championData.version.slice(0, championData.version.lastIndexOf('.')),
+	vMinor: championData.version.slice(0, championData.version.lastIndexOf('.')) as string,
 };
 
 export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListedChampion> as IChampionData;
@@ -74,7 +74,9 @@ export const RUNE_SLOT_NAME_TO_NUMBER = Object.fromEntries(Object.entries(runeDa
 	),
 ) as Record<IRuneSlotName, number>;
 
-export const EFFECTS = effectData.data satisfies IEffectData;
+export const EFFECTS: IEffectData = effectData.data;
+
+export type TEffects = typeof effectData['data'];
 
 export const EFFECTS_STRINGTABLE = effectData.stringtable as Record<string, string>;
 
@@ -134,7 +136,7 @@ export interface ITextData {
 	stringtable: Record<string, string>;
 }
 
-export const MISC = miscData.data satisfies IMiscData;
+export const MISC: IMiscData = miscData.data;
 
 export const ALL_DRAGON_NAMES = Object.keys(MISC.dragons) as IDragonName[];
 
@@ -152,7 +154,7 @@ interface IMiscData {
 	}>;
 }
 
-export const UI = uiData.data satisfies IUiData;
+export const UI: IUiData = uiData.data;
 
 interface IUiData {
 	shop: {
@@ -183,12 +185,12 @@ interface IUiData {
 }
 
 export const CHAMPION_IMAGES = {
-	championImage(image: string, championId: IChampionId) {
+	championImage(image: string, championId: IChampionId): string {
 		return championId === 'TargetDummy'
 			? `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/game/${image}`
 			: `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/img/champion/${image}`;
 	},
-	abilityImage(path: string, championId: IChampionId, group: 'sources' | 'targets' = 'sources') {
+	abilityImage(path: string, championId: IChampionId, group: 'sources' | 'targets' = 'sources'): string {
 		path = championId === 'TargetDummy'
 			? path
 					.replace('%s1', group === 'sources' ? 'order' : 'chaos')
@@ -196,16 +198,16 @@ export const CHAMPION_IMAGES = {
 			: path;
 		return `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/game/${path}`;
 	},
-	championImageSize(championId: IChampionId) {
+	championImageSize(championId: IChampionId): number {
 		return championId === 'TargetDummy' ? 64 : 128;
 	},
-	abilityImageSize(championId: IChampionId) {
+	abilityImageSize(championId: IChampionId): number {
 		return championId === 'TargetDummy' ? 128 : 64;
 	},
 };
 
-export const ICON_COOLDOWN_IMG = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
+export const ICON_COOLDOWN_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
 
-export const ICON_ON_HIT_IMG = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+export const ICON_ON_HIT_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-export const ICON_RUNE_SRC = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
+export const ICON_RUNE_SRC: string = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;

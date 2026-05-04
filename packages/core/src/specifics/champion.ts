@@ -13,6 +13,7 @@ import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
+import type { ComputedRef } from 'vue';
 import type { DamageSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
@@ -20,7 +21,7 @@ import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 
-export function cooldownReductionPercentageFromHaste(haste: number) {
+export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
 }
 
@@ -170,7 +171,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ezreal: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS(self)),
@@ -192,7 +193,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Irelia: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IIrelia).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IIrelia).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Irelia.MAX_PASSIVE_STACKS(self)),
@@ -200,7 +201,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Jax: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IJax).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IJax).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS(self)),
@@ -223,7 +224,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Kaisa: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IKaisa).abilities.passive.variants[0]!.dataValues.PMaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IKaisa).abilities.passive.variants[0]!.dataValues.PMaxStacks[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS(self)),
@@ -274,7 +275,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Naafiri: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => computed(() =>
+		MAX_PASSIVE_STACKS: (self: DamageSource): ComputedRef<number> => computed((): number =>
 			(VARIABLE_CALCULATION_FNS.mFormulaParts(self, (self.champion.value! as typeof INaafiri).abilities.passive.variants[0]!.spellCalculations.PackmateCap) ?? 0)
 			+ (self.champion.value! as typeof INaafiri).abilities.w.variants[0]!.dataValues.PackmatesToAdd[self.abilityLevels.value.w]!,
 		),
@@ -308,7 +309,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Orianna: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IOrianna).abilities.passive.variants[0]!.dataValues.StackCount[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IOrianna).abilities.passive.variants[0]!.dataValues.StackCount[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS(self)),
@@ -316,7 +317,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ornn: {
-		MASTERWORK_LEVEL: (self: DamageSource) => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
+		MASTERWORK_LEVEL: (self: DamageSource): number => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
 		MAX_UPGRADED_ALLIES: 5,
 		calcMaxUpgradedAllies(self: DamageSource) {
 			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - self.internalData.value.masterworkLevel));
@@ -339,7 +340,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Rell: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS(self)),
@@ -356,7 +357,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Rumble: {
-		setupData(self): { isOverheated: number } {
+		setupData(self: DamageSource): { isOverheated: number } {
 			return {
 				isOverheated: clamp(0, Math.round(self.internalData.value.isOverheated ?? 0), 1),
 			};
@@ -393,7 +394,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Seraphine: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof ISeraphine).abilities.passive.variants[0]!.dataValues.MaxNotes[1]! * 5,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof ISeraphine).abilities.passive.variants[0]!.dataValues.MaxNotes[1]! * 5,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Seraphine.MAX_PASSIVE_STACKS(self)),
@@ -423,7 +424,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Sona: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof ISona).abilities.passive.variants[0]!.dataValues.AccelerandoCap[1]! * 2,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof ISona).abilities.passive.variants[0]!.dataValues.AccelerandoCap[1]! * 2,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Sona.MAX_PASSIVE_STACKS(self)),
@@ -452,7 +453,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Syndra: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof ISyndra).abilities.passive.variants[0]!.dataValues.MaxStackAmount[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof ISyndra).abilities.passive.variants[0]!.dataValues.MaxStackAmount[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Syndra.MAX_PASSIVE_STACKS(self)),
@@ -546,7 +547,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	MonkeyKing: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IMonkeyKing).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IMonkeyKing).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.MonkeyKing.MAX_PASSIVE_STACKS(self)),
@@ -554,7 +555,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Zaahen: {
-		MAX_PASSIVE_STACKS: (self: DamageSource) => (self.champion.value! as typeof IZaahen).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IZaahen).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Zaahen.MAX_PASSIVE_STACKS(self)),
