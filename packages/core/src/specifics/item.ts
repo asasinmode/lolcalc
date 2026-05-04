@@ -489,7 +489,6 @@ export function calculateItemDiscount(
 export function consumeItemComponents(
 	itemId: string,
 	inventory: (IItem | undefined)[],
-	allItems: Record<string, IItem>,
 	consumedInventoryIndexes: number[] = [],
 	inComponent = false,
 ): number[] {
@@ -502,7 +501,7 @@ export function consumeItemComponents(
 	}
 
 	for (const componentId of ITEMS[itemId]!.from || []) {
-		consumeItemComponents(componentId, inventory, allItems, consumedInventoryIndexes, true);
+		consumeItemComponents(componentId, inventory, consumedInventoryIndexes, true);
 	}
 
 	return consumedInventoryIndexes;
@@ -524,7 +523,7 @@ export function itemBuyability(
 	let inventoryAfterBuying = target.items.value;
 
 	if (consumeComponents) {
-		const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value, (ITEMS as TItems));
+		const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value);
 		inventoryAfterBuying = target.items.value.map((item, index) => inventoryIndexesConsumedOnBuy.includes(index) ? undefined : item);
 	}
 

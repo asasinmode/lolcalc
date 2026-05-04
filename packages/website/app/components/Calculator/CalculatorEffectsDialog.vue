@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '~/utils/types';
+import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
+import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { TAbilityType } from '@lolcalc/shared';
+import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { CHAMPION_ID_TO_KEY, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
 const damageSource = defineModel<DamageSource>();
 
-const items = useItems();
-const { minorVersion } = usePatchVersion();
+const { vMinor } = PATCH_VERSION;
 
 const vDialog = useTemplateRef('vDialog');
 
@@ -25,7 +31,7 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 	.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.item)
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
-		const item = items[sourceAbilityId.id]!;
+		const item = ITEMS[sourceAbilityId.id]!;
 
 		return {
 			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
@@ -92,7 +98,7 @@ async function loadChampionEffects() {
 		.map(async ([effectObjectName, effectSpecific]): Promise<IEffectOptionGroup['options'][number]> => {
 			const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
 			const champion = await useChampion(sourceAbilityId.id);
-			const precomputedSourceAbilityDesc = computeAbilityDescription(minorVersion, champion, sourceAbilityId);
+			const precomputedSourceAbilityDesc = computeAbilityDescription(vMinor, champion, sourceAbilityId);
 
 			return {
 				abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
@@ -213,7 +219,7 @@ defineExpose({
 				<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label">
 					<option
 						v-for="(option, optionIndex) in group.options"
-						:key="GameAbilityId.stringify(option.abilityId)"
+						:key="GameAbilityId.stringify(option.abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES)"
 						:value="`${groupIndex}-${optionIndex}`"
 					>
 						{{ option.name }}

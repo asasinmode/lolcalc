@@ -15,13 +15,13 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src:
 
 	if (imageAbilityId.type === ABILITY_TYPE.item) {
 		return [
-			imgUrl(`img/item/${imageAbilityId.id}.png`, PATCH_VERSION.semver, true),
+			imgUrl(`img/item/${imageAbilityId.id}.png`, PATCH_VERSION.vSemver, true),
 			64,
 		];
 	} else if (imageAbilityId.type === ABILITY_TYPE.effect) {
 		return CUSTOM_EFFECT_IMAGES[imageAbilityId.id]
 			? [
-					imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0], PATCH_VERSION.minor),
+					imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0], PATCH_VERSION.vMinor),
 					CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
 				]
 			: ['', 0];

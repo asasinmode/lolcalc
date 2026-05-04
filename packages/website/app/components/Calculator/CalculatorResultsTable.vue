@@ -1,6 +1,17 @@
 <script setup lang="ts">
+import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
+import type { IChampion } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, TAbilityType } from '@lolcalc/shared';
 import type { WatchHandle } from 'vue';
-import type { IChampionAbilityHoverTooltipProps, IChampionAbilityId, IDamageResultTableColumn, IDamageResultTableSection, IGameAbilityId, IItemAbilityId } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
+import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, useChampion } from '@lolcalc/data';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 
 const props = defineProps<{
 	damageSources: DamageSource[];
@@ -15,9 +26,7 @@ const emit = defineEmits<{
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
 
-const text = useText();
-const items = useItems();
-const { championImage, abilityImage, championImageSize, abilityImageSize } = useChampionImages();
+const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const iconButtonsShowText = useIconButtonsShowText();
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -99,7 +108,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 						 */
 						.slice(0, championId === 'Aphelios' ? undefined : 2)
 						.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
-							const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+							const { replaced: nameReplaced } = replaceStringtableVariables(
 								variant.name,
 								champion.stringtable,
 							);
@@ -124,7 +133,7 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 
 	return itemIds.values()
 		.map((itemId): IDamageSectionOption['abilities'][number] => ({
-			name: items[itemId!]!.name,
+			name: ITEMS[itemId!]!.name,
 			id: GameAbilityId.build(ABILITY_TYPE.item, itemId!),
 		}))
 		.toArray()
@@ -446,7 +455,7 @@ async function addResultsSection(
 	name = '',
 	expand = true,
 ) {
-	const id = GameAbilityId.stringify(abilityId);
+	const id = GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES);
 	if (resultSections.value.some(section => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) {
 		return;
 	}
@@ -476,7 +485,7 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computeAbilityDescription(minorVersion, champion, abilityId, undefined, { replaceWithName: true });
+		const precomputedDescription = computeAbilityDescription(champion, abilityId, undefined, { replaceWithName: true });
 
 		section.name ||= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
@@ -487,7 +496,7 @@ async function addResultsSection(
 		};
 		section.getCellValue = abilityVariableCellValue;
 	} else {
-		const item = items[abilityId.id];
+		const item = ITEMS[abilityId.id];
 		if (!item) {
 			const index = resultSections.value.indexOf(section);
 			~index && resultSections.value.splice(index, 1);
@@ -498,7 +507,7 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computeItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
+		const precomputedDescription = computeItemDescription(item, undefined, { replaceWithName: true })!;
 
 		section.name ||= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);
@@ -511,7 +520,7 @@ async function addResultsSection(
 	triggerRef(resultSections);
 }
 
-function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameDescriptionVariablesRV, 'variables' | 'unknownVariables'>): IDamageResultTableSection['rows'] {
+function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): IDamageResultTableSection['rows'] {
 	return markRaw(variables
 		.keys()
 		.toArray()
@@ -1176,7 +1185,7 @@ defineExpose({
 									<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
 										<option
 											v-for="(ability, abilityIndex) in option.abilities"
-											:key="GameAbilityId.stringify(ability.id)"
+											:key="GameAbilityId.stringify(ability.id, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES)"
 											:value="`${optionIndex}-${abilityIndex}`"
 											:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== ABILITY_TYPE.champion || ability.id.abilityKey === 'passive')"
 										>

@@ -9,7 +9,7 @@ import type { IEffectSpecific } from './specifics/effect';
 import type { IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IReplaceGameVariablesRV } from './types';
-import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ITEMS, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
+import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
@@ -697,10 +697,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		});
 	}
 
-	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true, slotIndex?: number): undefined {
+	addItem(item: IItem, consumeComponents = true, slotIndex?: number): undefined {
 		this.itemsUndoSnapshots.value.push([...this.items.value]);
 		if (consumeComponents) {
-			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
+			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value);
 			for (const index of consumedInventoryIndexes) {
 				this.items.value[index] = undefined;
 			}
@@ -740,7 +740,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		}
 	}
 
-	moveItem(item: IItem, targetSlotIndex: number, source: DamageSource, fromSlotIndex: number, allItems: Record<string, IItem>) {
+	moveItem(item: IItem, targetSlotIndex: number, source: DamageSource, fromSlotIndex: number) {
 		let itemAtSlot = this.items.value[targetSlotIndex];
 		const isBotQuest = this.roleQuest.value === 'bot';
 
@@ -749,7 +749,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			targetSlotIndex = 6;
 			this.items.value[6] = item;
 		} else if (isBotQuest && targetSlotIndex === 6) {
-			this.addItem(item, allItems, false);
+			this.addItem(item, false);
 			return;
 		} else {
 			this.items.value[targetSlotIndex] = item;
@@ -764,7 +764,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 
 		itemAtSlot && source.addItem(
 			itemAtSlot,
-			allItems,
 			false,
 			!itemAtSlot.isBoots && fromSlotIndex === 6 ? undefined : fromSlotIndex,
 		);
@@ -825,7 +824,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		) as unknown as Record<IChampionStatName, string>),
 		items: computed<(IComputedItemDescription | undefined)[]>(() => {
 			return this.items.value.map((item): IComputedItemDescription | undefined =>
-				item && computeItemDescription(TEXT, PATCH_VERSION.minor, item, this),
+				item && computeItemDescription(item, this),
 			);
 		}),
 		itemSpecifics: computed<({
@@ -864,7 +863,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			return Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
 				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
-					PATCH_VERSION.minor,
 					this.champion.value!,
 					GameAbilityId.build(ABILITY_TYPE.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
 					this,
@@ -905,8 +903,6 @@ export function formatChampionStatValue(statName: IChampionStatName, value: numb
 }
 
 export function computeItemDescription(
-	text: ITextData,
-	minorVersion: string,
 	item?: IItem,
 	damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
@@ -918,9 +914,6 @@ export function computeItemDescription(
 		return;
 	}
 
-	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
-	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
-
 	const {
 		subtitleLeft,
 		subtitleRight,
@@ -929,7 +922,7 @@ export function computeItemDescription(
 		extended,
 		footerLeft,
 		keywordDefinitions,
-	} = text.items[item.id] || {};
+	} = TEXT.items[item.id] || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -942,12 +935,12 @@ export function computeItemDescription(
 			] as [string, number, string];
 		});
 
-	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, minorVersion, replaceOptions);
-	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, minorVersion, replaceOptions);
+	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, replaceOptions);
+	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, replaceOptions);
 
-	const replacedExtended = additionalItemText(extended, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
-	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
-	const replacedKeywordDefinitions = additionalItemText(keywordDefinitions, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
+	const replacedExtended = additionalItemText(extended, item, damageSource, variables, unknownVariables, replaceOptions);
+	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, replaceOptions);
+	const replacedKeywordDefinitions = additionalItemText(keywordDefinitions, item, damageSource, variables, unknownVariables, replaceOptions);
 
 	return {
 		item,
@@ -968,7 +961,6 @@ function additionalItemText(
 	value: string | undefined,
 	item: IItem,
 	damageSource: DamageSource | undefined,
-	stringtable: ITextData['stringtable'],
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
 	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
@@ -976,7 +968,7 @@ function additionalItemText(
 	const { replaced, variables: newVariables, unknownVariables: newUnknownVariables } = value
 		? replaceGameVariables(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
-				replaceStringtableVariables(value, stringtable).replaced,
+				replaceStringtableVariables(value, TEXT.stringtable).replaced,
 				'item',
 				[item, damageSource?.isRanged.value, damageSource],
 				replaceOptions,
@@ -1004,14 +996,11 @@ export function allChampionAbilityVariants(champion?: IChampion) {
 }
 
 export function computeAbilityDescription(
-	minorVersion: string,
 	champion: IChampion,
 	gameAbilityId: IChampionAbilityId,
 	damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): IComputedAbilityDescription {
-	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
-
 	const abilityLevel = gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
@@ -1032,8 +1021,6 @@ export function computeAbilityDescription(
 		variablesAllValues: tooltipVariablesAV,
 		variables: tooltipVariables,
 	} = abilityVariantText(
-		minorVersion,
-		onHitIcon,
 		allVariants,
 		variant.tooltip || '<unknown>UNKNOWN</unknown>',
 		variant,
@@ -1048,8 +1035,6 @@ export function computeAbilityDescription(
 		variablesAllValues: tooltipExtendedVariablesAV,
 		variables: tooltipExtendedVariables,
 	} = abilityVariantText(
-		minorVersion,
-		onHitIcon,
 		allVariants,
 		variant.tooltipExtended || '',
 		variant,
@@ -1063,8 +1048,6 @@ export function computeAbilityDescription(
 		unknownV: tooltipExtendedBelowLineUnknownV,
 		variables: tooltipExtendedBelowLineVariables,
 	} = abilityVariantText(
-		minorVersion,
-		onHitIcon,
 		allVariants,
 		variant.tooltipExtendedBelowLine || '',
 		variant,
@@ -1136,12 +1119,11 @@ export function computeAbilityDescription(
 }
 
 function abilityVariantText(
-	minorVersion: string,
-	onHitIcon: string,
 	allAbilityVariants: IChampionAbilityVariant[],
 	value: string,
 	variant: IChampionAbilityVariant,
 	level?: number,
+	/** champion's stringtable */
 	stringtable?: Record<string, string>,
 	replaceVariablesWithNames?: boolean,
 ) {
@@ -1158,7 +1140,7 @@ function abilityVariantText(
 	);
 
 	return {
-		replaced: replaceGameIcons(minorVersion, replaced, onHitIcon),
+		replaced: replaceGameIcons(replaced),
 		unknownSV: unknownStringtableVariables,
 		unknownV: unknownVariables,
 		variablesAllValues,
@@ -1202,10 +1184,6 @@ function formatItemDescriptionText(
 	damageSource: DamageSource | undefined,
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
-	text: ITextData,
-	cooldownIcon: string,
-	onHitIcon: string,
-	minorVersion: string,
 	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): [string, ...string[]][] | undefined {
 	return value?.map(([heading, ...paragraphs]) => {
@@ -1213,10 +1191,10 @@ function formatItemDescriptionText(
 		const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
 			.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
 				const { value } = itemVariableValue('Cooldown', item, damageSource?.isRanged.value, damageSource);
-				return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+				return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
 			})
 			.replace('(', '<span>(')
-			.replace(')', ')</span>'), text.stringtable);
+			.replace(')', ')</span>'), TEXT.stringtable);
 
 		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameVariables(
 			headingStringtableReplaced,
@@ -1233,9 +1211,9 @@ function formatItemDescriptionText(
 		mergeMaps(variables, headingVariables);
 
 		return [
-			replaceGameIcons(minorVersion, replacedHeading),
+			replaceGameIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
-				const { replaced: paragraphStringtableReplaced } = replaceStringtableVariables(paragraph, text.stringtable);
+				const { replaced: paragraphStringtableReplaced } = replaceStringtableVariables(paragraph, TEXT.stringtable);
 				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameVariables(
 					paragraphStringtableReplaced,
 					'item',
@@ -1250,7 +1228,7 @@ function formatItemDescriptionText(
 				}
 				mergeMaps(variables, paragraphVariables);
 
-				return replaceGameIcons(minorVersion, replacedParagraph, onHitIcon);
+				return replaceGameIcons(replacedParagraph);
 			},
 			),
 		];

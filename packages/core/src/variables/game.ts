@@ -1,6 +1,7 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource.ts';
 import type { IReplaceGameVariablesRV } from '../types';
+import { ICON_ON_HIT_IMG, PATCH_VERSION } from '@lolcalc/data';
 import { STAT_ICON } from '@lolcalc/data/meta.ts';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
@@ -297,13 +298,13 @@ export function replaceGameVariables(
 
 const statIconNameValues = Object.values(STAT_ICON);
 
-export function replaceGameIcons(minorVersion: string, text: string, onHitIcon?: string) {
+export function replaceGameIcons(text: string) {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
-			return `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
+			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
 		})
-		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
+		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */

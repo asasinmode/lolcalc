@@ -922,7 +922,7 @@ try {
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch { }
 
-const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData['data'][string], 'dataKey'> | string>> = {
+const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | string>> = {
 	/* items */
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
