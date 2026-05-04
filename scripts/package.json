@@ -10,6 +10,7 @@
 		"@lolcalc/core": "workspace:",
 		"@lolcalc/data": "workspace:",
 		"@lolcalc/shared": "workspace:",
+		"@lolcalc/website": "workspace:",
 		"@node-rs/xxhash": "catalog:scripts",
 		"@sindresorhus/fnv1a": "catalog:scripts",
 		"image-size": "catalog:scripts",

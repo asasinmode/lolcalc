@@ -4,7 +4,7 @@ export const ABILITY_TYPE = {
 	effect: 'effect',
 } as const;
 
-export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
+export const ALL_ABILITY_TYPES: string[] = Object.values(ABILITY_TYPE);
 
 export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
 
@@ -204,7 +204,7 @@ export const ITEM_NAME_TO_ID = {
 	jakSho: '6665',
 } as const;
 
-export const KEPT_UNPURCHASABLE_ITEMS = [
+export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.diademOfSongs,
 	ITEM_NAME_TO_ID.slightlyMagicalFootwear,
 	ITEM_NAME_TO_ID.seraphsEmbrace,
@@ -212,7 +212,7 @@ export const KEPT_UNPURCHASABLE_ITEMS = [
 	ITEM_NAME_TO_ID.fimbulwinter,
 ];
 
-export const RANGED_ONLY_ITEM_IDS = [ITEM_NAME_TO_ID.runaan];
+export const RANGED_ONLY_ITEM_IDS: string[] = [ITEM_NAME_TO_ID.runaan];
 
 /**
 	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
@@ -258,51 +258,3 @@ export const EFFECT_OBJECT_NAME = {
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
-
-/**
- * tags that appear in game descriptions, like item shop hover tooltip or champ select rune hover
- * they should have appropriate styles (like font color) set in `ItemDescription.vue`
- */
-export const KNOWN_GAME_DESCRIPTION_TAGS = [
-	'passive',	// heading
-	'scalead', // bloodmail, sterak
-	'scaleap',	// rabadon, riftmaker
-	'scalehealth', // roa, heartsteel
-	'scalemana',	// manamune, archangel
-	'scalearmor',	// hullbreaker, terminus
-	'scalemr',	// malignance, force of nature
-	'scalelethality',	// voltaic cyclosword, aphelios passive
-	'attackspeed',	// yuntal, experimental hexplate
-	'onhit',	// iceborn, statik
-	'physicaldamage',	// heartsteel, titanic
-	'magicdamage',	// bami, thornmail
-	'truedamage',	// cosmic drive, shadowflame
-	'health',	// protoplasm harness, no styles
-	'healing',	// guardian angel, warmog
-	'shield',	// fimbulwinter, hexdrinker
-	'lifesteal', // maw of malmortius
-	'omnivamp',	// riftmaker
-	'speed',	// slightly magical footwear, youmuu
-	'gold',	// world atlas, collector
-	'status',	// botrk, iceborn
-	'attention',	// statikk, knight's vow
-	'raritygeneric',	// world atlas
-	'raritylegendary',	// archangel, manamune
-	'rules',	// crimson lucidity
-	'keyword',	// phantom dancer, zeke's convergence
-	'keywordmajor',	// terminus
-	'keywordstealth',	// horizon focus
-	'slow',	// voltaic cyclosword, no styles
-	'active', // seeker's armguard, mercurial scimitar
-	'lol-uikit-tooltipped-keyword', // in many runes
-	'scalelevel', // long first strike, guardian, shield bash
-	'statgood', // long precision legends
-	'font',
-	'b',
-	'i',
-	'hr',
-	'li',
-	'titleleft', // dragon stack descriptions
-	'maintext', // dragon stack descriptions
-	'stattracking', // veigar passive, draven passive
-];

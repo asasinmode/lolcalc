@@ -6,6 +6,9 @@
 	"description": "lolcalc.app website",
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
+	"exports": {
+		".": "./external.ts"
+	},
 	"scripts": {
 		"build": "nuxt build",
 		"dev": "nuxt dev",

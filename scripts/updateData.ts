@@ -16,7 +16,8 @@ import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/shared';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, KEPT_UNPURCHASABLE_ITEMS } from '@lolcalc/shared';
+import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 

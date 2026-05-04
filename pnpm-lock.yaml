@@ -205,6 +205,9 @@ importers:
       '@lolcalc/shared':
         specifier: 'workspace:'
         version: link:../packages/shared
+      '@lolcalc/website':
+        specifier: 'workspace:'
+        version: link:../packages/website
       '@node-rs/xxhash':
         specifier: catalog:scripts
         version: 1.7.6
