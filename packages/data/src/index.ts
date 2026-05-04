@@ -73,7 +73,7 @@ export const RUNE_SLOT_NAME_TO_NUMBER = Object.fromEntries(Object.entries(runeDa
 	),
 ) as Record<IRuneSlotName, number>;
 
-export const EFFECTS = { data: effectData.data, stringtable: effectData.stringtable } satisfies IEffectData;
+export const EFFECTS = effectData satisfies IEffectData;
 
 export interface IEffectData {
 	data: Record<string, {
