@@ -10,7 +10,7 @@ import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, useChampion } from '@lolcalc/data';
+import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 
 const props = defineProps<{
@@ -31,7 +31,7 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 const iconButtonsShowText = useIconButtonsShowText();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
-const { version, minorVersion } = usePatchVersion();
+const { vSemver, vMinor } = PATCH_VERSION;
 
 const STATS_SECTION_ID = 'a-stats';
 const CUSTOM_TOTAL_SECTION_ID = 'a-cTtl';
@@ -511,7 +511,7 @@ async function addResultsSection(
 
 		section.name ||= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);
-		section.image = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`;
+		section.image = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
 	}
@@ -1241,7 +1241,7 @@ defineExpose({
 								>
 								<img
 									v-else
-									:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+									:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
 									width="256"
 									height="256"
 									style="--focus-brightness: 1.5"
@@ -1268,7 +1268,7 @@ defineExpose({
 								>
 								<img
 									v-else
-									:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+									:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
 									width="256"
 									height="256"
 									style="--focus-brightness: 1.5"
@@ -1594,7 +1594,7 @@ defineExpose({
 									clearable
 								>
 									<img
-										:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+										:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
 										width="256"
 										height="256"
 										aria-hidden="true"
@@ -1608,7 +1608,7 @@ defineExpose({
 									clearable
 								>
 									<img
-										:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+										:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
 										width="256"
 										height="256"
 										aria-hidden="true"

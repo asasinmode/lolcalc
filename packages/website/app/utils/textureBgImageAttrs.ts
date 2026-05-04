@@ -1,13 +1,15 @@
 import type { ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
+import { PATCH_VERSION } from '@lolcalc/data';
+
+const { vMinor } = PATCH_VERSION;
 
 export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: number): ImgHTMLAttributes & {
 	['data-sprite-image']: string;
 } {
-	const { minorVersion } = usePatchVersion();
 	const width = endX! - startX!;
 	const height = endY! - startY!;
-	const src = `https://raw.communitydragon.org/${minorVersion}/game/${spriteSheet}`;
+	const src = `https://raw.communitydragon.org/${vMinor}/game/${spriteSheet}`;
 
 	const largerDim = Math.max(width, height);
 	const targetDim = targetSize || largerDim;

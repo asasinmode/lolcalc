@@ -159,7 +159,7 @@ export const UI: IUiData = uiData.data;
 interface IUiData {
 	shop: {
 		categories: Record<IItemCategory | 'all', ITexture>;
-		stats: Partial<Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>>;
+		stats: Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>;
 		clearFilters: {
 			default: ITexture;
 			hover: Pick<ITexture, 'uv'>;

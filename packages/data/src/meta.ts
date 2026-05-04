@@ -72,7 +72,7 @@ export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
 	PercentOmnivampMod: 'omnivamp',
 };
 
-export const ITEM_SHOP_STAT_FILTERS: Record<string, { name: string; filter: (item: IItem) => boolean }> = {
+export const ITEM_SHOP_STAT_FILTERS = {
 	attackDamage: {
 		name: 'Attack damage',
 		filter: item => !!item.stats.FlatPhysicalDamageMod,
@@ -130,7 +130,7 @@ export const ITEM_SHOP_STAT_FILTERS: Record<string, { name: string; filter: (ite
 		name: 'Life Steal & omnivamp',
 		filter: item => !!(item.stats.PercentLifeStealMod || item.stats.PercentOmnivampMod),
 	},
-};
+} as const satisfies Record<string, { name: string; filter: (item: IItem) => boolean }>;
 
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 

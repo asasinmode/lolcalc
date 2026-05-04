@@ -9,7 +9,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const level = source.level.value;
 	const champion = source.champion.value;
 	const items = source.items.value;
-	const runes = source.runes.value;
+	// const runes = source.runes.value;
 
 	const initialStats: IChampionStats = {
 		hp: champion?.stats.hp ?? 0,

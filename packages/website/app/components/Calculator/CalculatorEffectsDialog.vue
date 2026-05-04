@@ -5,15 +5,13 @@ import type { TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { CHAMPION_ID_TO_KEY, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
+import { CHAMPION_ID_TO_KEY, ITEMS, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
 const damageSource = defineModel<DamageSource>();
-
-const { vMinor } = PATCH_VERSION;
 
 const vDialog = useTemplateRef('vDialog');
 
@@ -98,7 +96,7 @@ async function loadChampionEffects() {
 		.map(async ([effectObjectName, effectSpecific]): Promise<IEffectOptionGroup['options'][number]> => {
 			const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
 			const champion = await useChampion(sourceAbilityId.id);
-			const precomputedSourceAbilityDesc = computeAbilityDescription(vMinor, champion, sourceAbilityId);
+			const precomputedSourceAbilityDesc = computeAbilityDescription(champion, sourceAbilityId);
 
 			return {
 				abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),

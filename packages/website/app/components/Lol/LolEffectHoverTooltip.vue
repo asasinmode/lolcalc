@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
+import type { TEffects } from '@lolcalc/data';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
@@ -62,7 +63,7 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 	return computeItemDescription(item, props.damageSource);
 });
 
-const computedDescription = computed(() => props.abilityId && EFFECTS[props.abilityId.id].description);
+const computedDescription = computed(() => props.abilityId && (EFFECTS as TEffects)[props.abilityId.id].description);
 
 const el = useTemplateRef('el');
 

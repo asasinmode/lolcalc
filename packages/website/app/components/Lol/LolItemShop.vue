@@ -113,7 +113,7 @@ const availableStatFilters = computed(() => Object.fromEntries(
 ) as Record<IItemShopStatFilter, boolean>);
 const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
 	const texture = UI.shop.stats[filter as IItemShopStatFilter].default;
-	const [selectedUvStartX, selectedUvStartY] = UI.shop.stats[filter as IItemShopStatFilter].selected.uv;
+	const [selectedUvStartX, selectedUvStartY] = UI.shop.stats[filter as IItemShopStatFilter]!.selected.uv;
 
 	return [filter, {
 		name,

@@ -833,23 +833,23 @@ if (!uiData || uiData?.version !== latestVersion) {
 						];
 					},
 				))),
-				stats: Object.fromEntries(await Promise.all(([
-					['attackDamage', 'PhysicalDmg', 'PhysicalDamage'],
-					['crit', 'CritStrike', 'CriticalStrike'],
-					['attackSpeed', 'AttackSpeed'],
-					['onHit', 'OnHit'],
-					['armorPen', 'ArmorPenetration', 'ArmorPen'],
-					['abilityPower', 'AbilityPower'],
-					['mana', 'Mana'],
-					['magicPen', 'MagicPenetration', 'MagicPen'],
-					['health', 'Health'],
-					['magicResist', 'MagicResist'],
-					['armor', 'Armor'],
-					['abilityHaste', 'AbilityHaste'],
-					['movement', 'Movespeed'],
-					['vamp', 'Vamp'],
-				] satisfies ([IItemShopStatFilter, string] | [IItemShopStatFilter, string, string])[]).map(
-					async ([itemCategory, dataPath1, dataPath2]) => {
+				stats: Object.fromEntries(await Promise.all(Object.entries({
+					attackDamage: ['PhysicalDmg', 'PhysicalDamage'],
+					crit: ['CritStrike', 'CriticalStrike'],
+					attackSpeed: ['AttackSpeed'],
+					onHit: ['OnHit'],
+					armorPen: ['ArmorPenetration', 'ArmorPen'],
+					abilityPower: ['AbilityPower'],
+					mana: ['Mana'],
+					magicPen: ['MagicPenetration', 'MagicPen'],
+					health: ['Health'],
+					magicResist: ['MagicResist'],
+					armor: ['Armor'],
+					abilityHaste: ['AbilityHaste'],
+					movement: ['Movespeed'],
+					vamp: ['Vamp'],
+				} satisfies Record<IItemShopStatFilter, string[]>).map(
+					async ([itemCategory, [dataPath1, dataPath2]]) => {
 						const { uv: selectedUv } = await getTexture(itemshopUiBase[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Selected`], `stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1} selected`);
 
 						return [

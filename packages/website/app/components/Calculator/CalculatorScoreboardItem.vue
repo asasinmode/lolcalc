@@ -1133,7 +1133,7 @@ defineExpose({ el });
 					<template v-for="stat in stats" :key="stat.name">
 						<dt @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
 							<span>{{ stat.name }}</span>
-							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey], 20)">
+							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)">
 						</dt>
 						<dd
 							:data-has-bonus="stat.values.some(statValue => statValue.bonus) || undefined"
