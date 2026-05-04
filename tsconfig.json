@@ -40,7 +40,8 @@
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
 		"noUnusedLocals": true,
-		"composite": true
+		"composite": true,
+		"erasableSyntaxOnly": true
 	},
 	"include": [
 		"*.ts",
