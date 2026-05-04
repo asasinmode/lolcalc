@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import type { IShopItem } from '~/utils/types';
+import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { IItemShopStatFilter } from '@lolcalc/data/meta';
+import type { IItem, IShopItem } from '@lolcalc/data/types';
+import type { IItemCategory } from '@lolcalc/shared';
+import { isMasterworkSlot } from '@lolcalc/core/DamageSource';
+import { calculateItemDiscount, itemBuyability } from '@lolcalc/core/specifics/item';
+import { ITEMS, PATCH_VERSION, UI } from '@lolcalc/data';
+import { ITEM_SHOP_STAT_FILTERS } from '@lolcalc/data/meta';
+import { ALL_ITEM_CATEGORIES, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 const damageSource = defineModel<DamageSource>();
 
 type IAllItemCategory = IItemCategory | 'all';
 
-const { version, minorVersion } = usePatchVersion();
-const items = useItems();
-const ui = useUi();
+const { vSemver, vMinor } = PATCH_VERSION;
 
 const inventoryValue = computed(() => damageSource.value?.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0) ?? 0);
 
@@ -27,7 +33,7 @@ const ITEM_EPICNESSES: [number, string][] = [
 	[ITEM_EPICNESS_LEGENDARY, 'legendary'],
 ];
 
-const BOOT_ITEM_IDS = [
+const BOOT_ITEM_IDS: string[] = [
 	'1001', /* boots */
 	'3047', /* plated steelcaps */
 	'3111', /* mercury's treads */
@@ -38,20 +44,20 @@ const BOOT_ITEM_IDS = [
 	'3008', /* gluttonous grieves */
 ];
 
-const TRANSFORMED_TEAR_ITEM_IDS = [
+const TRANSFORMED_TEAR_ITEM_IDS: string[] = [
 	ITEM_NAME_TO_ID.diademOfSongs,
 	ITEM_NAME_TO_ID.seraphsEmbrace,
 	ITEM_NAME_TO_ID.muramana,
 	ITEM_NAME_TO_ID.fimbulwinter,
-] as string[];
+];
 
 const sortedByPrice = computed(() => Object
-	.values(items)
+	.values(ITEMS)
 	.sort((a, b) => a.gold.total - b.gold.total));
 
 const shopItems = computed<IShopItem[]>(() => sortedByPrice.value.map((item) => {
-	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value, items) : 0;
-	const buyability = itemBuyability(item, damageSource.value, items);
+	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value) : 0;
+	const buyability = itemBuyability(item, damageSource.value);
 	const isBought = damageSource.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id);
 
 	const statuses: string[] = [];
@@ -106,8 +112,8 @@ const availableStatFilters = computed(() => Object.fromEntries(
 	]),
 ) as Record<IItemShopStatFilter, boolean>);
 const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
-	const texture = ui.shop.stats[filter as IItemShopStatFilter].default;
-	const [selectedUvStartX, selectedUvStartY] = ui.shop.stats[filter as IItemShopStatFilter].selected.uv;
+	const texture = UI.shop.stats[filter as IItemShopStatFilter].default;
+	const [selectedUvStartX, selectedUvStartY] = UI.shop.stats[filter as IItemShopStatFilter].selected.uv;
 
 	return [filter, {
 		name,
@@ -155,7 +161,7 @@ function selectItem(item: IShopItem, overwriteDisplayed: boolean, inventoryIndex
 
 function buyItem(item: IItem, buyability: IShopItem['buyability']) {
 	if (damageSource.value && buyability === 1) {
-		damageSource.value.addItem(item, items);
+		damageSource.value.addItem(item);
 	}
 }
 
@@ -338,7 +344,7 @@ function updateTooltipPosition(event: MouseEvent) {
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
 
 const buildsIntoItems = computed(() => selectedItem.value?.item.into
-	?.filter(id => (items[id]!.mapMask & mapMask.value) !== 0 && !TRANSFORMED_TEAR_ITEM_IDS.includes(id))
+	?.filter(id => !TRANSFORMED_TEAR_ITEM_IDS.includes(id))
 	.map(id => shopItemsMap.value.get(id)!)
 	.sort((a, b) => a.item.gold.total - b.item.gold.total) || []);
 
@@ -359,7 +365,7 @@ const displayedItemBuildPath2ndLevelItemCount = computed(() => displayedItem.val
 const displayedItemBuildPath3rdLevelHasTwo3Items = computed(() => {
 	let has3Components = false;
 	for (const itemId of displayedItem.value?.item.from || []) {
-		const currentHas3Components = (items[itemId]?.from?.length || 0) >= 3;
+		const currentHas3Components = (ITEMS[itemId]?.from?.length || 0) >= 3;
 		if (has3Components && currentHas3Components) {
 			return true;
 		}
@@ -407,7 +413,6 @@ function onItemDrop(slotIndex: number) {
 			slotIndex,
 			damageSource.value,
 			itemDragData.slotIndex,
-			items,
 		);
 	}
 	itemDragData = undefined;
@@ -422,7 +427,7 @@ defineExpose({
 	<VDialog
 		id="dialog-item-shop"
 		ref="vDialog"
-		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg)`"
+		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg)`"
 		@close="closeSearch"
 	>
 		<header>
@@ -493,7 +498,7 @@ defineExpose({
 							@dblclick="selectSearchResult(index, true)"
 						>
 							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
 								width="64"
 								height="64"
 								class="item-shop-item-img"
@@ -524,7 +529,7 @@ defineExpose({
 				id="item-shop-category-filter"
 				v-model="selectedCategory"
 				label="Category"
-				:options="['all', ...ALL_ITEM_CATEGORIES].map((category) => ({ category: category as IAllItemCategory, texture: ui.shop.categories[category as IAllItemCategory] }))"
+				:options="['all', ...ALL_ITEM_CATEGORIES].map((category) => ({ category: category as IAllItemCategory, texture: UI.shop.categories[category as IAllItemCategory] }))"
 				value-key="category"
 				required
 			>
@@ -556,8 +561,8 @@ defineExpose({
 			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
 				<span>Swap item order</span>
 				<img
-					v-bind="textureBgImageAttrs(ui.shop.swapItemOrder.default, 32)"
-					:style="`--txt-hover-uv-start-x: -${ui.shop.swapItemOrder.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.swapItemOrder.hover.uv[1]}px`"
+					v-bind="textureBgImageAttrs(UI.shop.swapItemOrder.default, 32)"
+					:style="`--txt-hover-uv-start-x: -${UI.shop.swapItemOrder.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.swapItemOrder.hover.uv[1]}px`"
 				>
 			</button>
 		</header>
@@ -565,8 +570,8 @@ defineExpose({
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
 				<span>Clear stat filters</span>
 				<img
-					v-bind="textureBgImageAttrs(ui.shop.clearFilters.default, 28)"
-					:style="`--txt-hover-uv-start-x: -${ui.shop.clearFilters.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.clearFilters.hover.uv[1]}px`"
+					v-bind="textureBgImageAttrs(UI.shop.clearFilters.default, 28)"
+					:style="`--txt-hover-uv-start-x: -${UI.shop.clearFilters.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.clearFilters.hover.uv[1]}px`"
 				>
 			</button>
 			<fieldset id="item-shop-stat-filters">
@@ -594,8 +599,8 @@ defineExpose({
 			>
 				<span>Pin boots panel</span>
 				<img
-					v-bind="textureBgImageAttrs(ui.shop.pin.default, 28)"
-					:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
+					v-bind="textureBgImageAttrs(UI.shop.pin.default, 28)"
+					:style="`--txt-hover-uv-start-x: -${UI.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${UI.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${UI.shop.pin.slcHover.uv[1]}px`"
 				>
 			</button>
 			<Icon class="i-ph:caret-left-bold caret" />
@@ -614,7 +619,7 @@ defineExpose({
 						>
 							<span>{{ shopItem.item.name }}</span>
 							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
 								:alt="shopItem.item.name"
 								width="64"
 								height="64"
@@ -656,7 +661,7 @@ defineExpose({
 						>
 							<span>{{ shopItem.item.name }}</span>
 							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
 								width="64"
 								height="64"
 								aria-hidden="true"
@@ -703,7 +708,7 @@ defineExpose({
 						<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.item.name }}</span>
 						<img
 							v-if="buildsIntoItems[i - 1]"
-							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]!.item.image}`"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${buildsIntoItems[i - 1]!.item.image}`"
 							:alt="buildsIntoItems[i - 1]!.item.name"
 							class="item-shop-item-img"
 							width="64"
@@ -729,7 +734,7 @@ defineExpose({
 						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6].item.name }}</span>
 						<img
 							v-if="buildsIntoItems[6]"
-							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[6].item.image}`"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${buildsIntoItems[6].item.image}`"
 							:alt="buildsIntoItems[6].item.name"
 							class="item-shop-item-img"
 							width="64"
@@ -759,7 +764,7 @@ defineExpose({
 								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 							>
 								<img
-									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
+									:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
 									:alt="shopItem.item.name"
 									class="item-shop-item-img"
 									width="64"
@@ -842,14 +847,14 @@ defineExpose({
 			<section
 				id="item-shop-panel-eq"
 				:data-pinned="inventoryPanelPinned || undefined"
-				:style="`--inventory-ward-icon: url('https://raw.communitydragon.org/${minorVersion}/game/assets/ux/minimap/pings/need_ward_gray.png')`"
+				:style="`--inventory-ward-icon: url('https://raw.communitydragon.org/${vMinor}/game/assets/ux/minimap/pings/need_ward_gray.png')`"
 			>
 				<h2>inventory</h2>
 				<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
 					<span>Pin inventory panel</span>
 					<img
-						v-bind="textureBgImageAttrs(ui.shop.pin.default, 28)"
-						:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
+						v-bind="textureBgImageAttrs(UI.shop.pin.default, 28)"
+						:style="`--txt-hover-uv-start-x: -${UI.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${UI.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${UI.shop.pin.slcHover.uv[1]}px`"
 					>
 				</button>
 				<Icon class="i-ph:caret-left-bold caret" />
@@ -874,7 +879,7 @@ defineExpose({
 								<span>{{ targetShopItems[i - 1]?.item.name }}</span>
 								<img
 									v-if="targetShopItems[i - 1]"
-									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${targetShopItems[i - 1]!.item.image}`"
+									:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${targetShopItems[i - 1]!.item.image}`"
 									width="64"
 									height="64"
 									aria-hidden="true"
@@ -887,7 +892,7 @@ defineExpose({
 						<span>ward slot (n/a)</span>
 					</div>
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
+						:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
 						width="26"
 						height="24"
 						loading="lazy"
@@ -896,7 +901,7 @@ defineExpose({
 			</section>
 			<p>
 				<img
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
+					:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
 					width="32"
 					height="28"
 					alt="gold coins"

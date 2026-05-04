@@ -1,21 +1,24 @@
 <script setup lang="ts">
+import type { IChampionRunes, IRune, IRuneShard, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { StyleValue, UnwrapRef } from 'vue';
+import { runesInvalid } from '@lolcalc/core/specifics/rune';
+import { replaceGameVariables } from '@lolcalc/core/variables/game';
+import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
+import { PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
 
-const text = useText();
-const runes = useRunes();
 const enableUnimplementedUi = useEnableUnimplementedUi();
-const { minorVersion } = usePatchVersion();
+const { vMinor } = PATCH_VERSION;
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const value = defineModel<IChampionRunes>();
 const vDialog = useTemplateRef('vDialog');
 
-const pathOptions = Object.values(runes.paths).map((path) => {
-	const { name, tooltip } = text.runes.paths[path.name]!;
+const pathOptions = Object.values(RUNES.paths).map((path) => {
+	const { name, tooltip } = TEXT.runes.paths[path.name]!;
 	return {
 		name: path.name,
 		title: name,
-		icon: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`,
+		icon: `https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`,
 		iconColor: path.iconColor,
 		tooltip,
 		rune: path,
@@ -37,8 +40,8 @@ const primaryRunePathStyle = computed((): StyleValue => {
 
 const primaryRunePathSlots = computed(() => {
 	if (value.value?.paths.primary) {
-		return runes.paths[value.value.paths.primary].slots.map(slots => Object.values(slots).map((slot) => {
-			const texts = text.runes.slots[slot.name]!;
+		return RUNES.paths[value.value.paths.primary].slots.map(slots => Object.values(slots).map((slot) => {
+			const texts = TEXT.runes.slots[slot.name]!;
 			if (!texts) {
 				console.warn(`text for ${slot.name} not found`);
 			}
@@ -77,8 +80,8 @@ const secondaryRunePathStyle = computed((): StyleValue => {
 
 const secondaryRunePathSlots = computed(() => {
 	if (value.value?.paths.secondary) {
-		return runes.paths[value.value.paths.secondary].slots.slice(1).map(slots => Object.values(slots).map((slot) => {
-			const texts = text.runes.slots[slot.name]!;
+		return RUNES.paths[value.value.paths.secondary].slots.slice(1).map(slots => Object.values(slots).map((slot) => {
+			const texts = TEXT.runes.slots[slot.name]!;
 			if (!texts) {
 				console.warn(`text for ${slot.name} not found`);
 			}
@@ -105,9 +108,9 @@ function secondarySlotValue(options: NonNullable<UnwrapRef<typeof secondaryRuneP
 };
 
 const shardSlots = computed(() =>
-	Object.fromEntries(Object.entries(runes.shards).map(([shardName, shardSlots]) =>
+	Object.fromEntries(Object.entries(RUNES.shards).map(([shardName, shardSlots]) =>
 		[shardName, Object.entries(shardSlots).map(([name, shardValue]) => {
-			const { name: title, tooltip } = text.runes.shards.slotValues[name]!;
+			const { name: title, tooltip } = TEXT.runes.shards.slotValues[name]!;
 			return {
 				name,
 				title,
@@ -177,23 +180,23 @@ const hoveredRuneTooltip = computed(() => {
 		return undefined;
 	}
 
-	const { replaced: shortStringtableVariableReplaced, unknownStringtableVariables: shortUnknownSV } = replaceGameDescriptionStringtableVariables(
+	const { replaced: shortStringtableVariableReplaced, unknownStringtableVariables: shortUnknownSV } = replaceStringtableVariables(
 		hoveredRune.value.description,
-		text.stringtable,
+		TEXT.stringtable,
 	);
 
-	const { replaced: shortReplaced, unknownVariables: shortUnknownV } = replaceGameDescriptionVariables(
+	const { replaced: shortReplaced, unknownVariables: shortUnknownV } = replaceGameVariables(
 		shortStringtableVariableReplaced,
 		'rune',
 		[hoveredRune.value.rune],
 	);
 
-	const { replaced: longStringtableVariableReplaced, unknownStringtableVariables: longUnknownSV } = replaceGameDescriptionStringtableVariables(
+	const { replaced: longStringtableVariableReplaced, unknownStringtableVariables: longUnknownSV } = replaceStringtableVariables(
 		hoveredRune.value.expandedDescription || '',
-		text.stringtable,
+		TEXT.stringtable,
 	);
 
-	const { replaced: longReplaced, unknownVariables: longUnknownV } = replaceGameDescriptionVariables(
+	const { replaced: longReplaced, unknownVariables: longUnknownV } = replaceGameVariables(
 		longStringtableVariableReplaced,
 		'rune',
 		[hoveredRune.value.rune],
@@ -308,7 +311,7 @@ defineExpose({
 			>
 				<template #default="{ option: { title, icon } }">
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${icon}`"
+						:src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`"
 						aria-hidden="true"
 						:width="slotIndex === 0 ? 256 : 64"
 						:height="slotIndex === 0 ? 256 : 64"
@@ -366,7 +369,7 @@ defineExpose({
 			>
 				<template #default="{ option: { title, icon } }">
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${icon}`"
+						:src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`"
 						aria-hidden="true"
 						width="64"
 						height="64"
@@ -375,7 +378,7 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<section id="rune-select-shards" :style="`--path-icon-clr: hsl(from ${runes.paths.Precision.iconColor} h calc(s * 1.3) l); --path-options-length: ${secondaryPathOptions.length}`">
+		<section id="rune-select-shards" :style="`--path-icon-clr: hsl(from ${RUNES.paths.Precision.iconColor} h calc(s * 1.3) l); --path-options-length: ${secondaryPathOptions.length}`">
 			<h2 class="sr-only">
 				Shards
 			</h2>
@@ -394,7 +397,7 @@ defineExpose({
 			>
 				<template #default="{ option: { title, icon } }">
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${icon}`"
+						:src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`"
 						aria-hidden="true"
 						width="64"
 						height="64"

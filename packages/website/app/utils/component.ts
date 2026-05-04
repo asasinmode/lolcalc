@@ -1,3 +1,12 @@
+import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
+import type { IGameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IGameAbilityData } from '@lolcalc/core/specifics';
+import type { IExtraComponentEmits, IExtraComponentProps } from './types';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { gameAbilityImage } from '@lolcalc/core/misc';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 import { VExtrasBoolean, VExtrasEnum, VExtrasNumber } from '#components';
 
 export async function numberExtra<T extends IGameAbilityId>(
@@ -118,7 +127,7 @@ function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, da
 	const dataProperty = abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData';
 
 	return [
-		GameAbilityId.stringify(abilityId),
+		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 		computed(() =>
 			isEffect
 				? appliedEffect?.data[property as number]

@@ -1,3 +1,4 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource';
 import CalculatorEffectsDialog from '~/components/Calculator/CalculatorEffectsDialog.vue';
 
 let resolve: (() => void) | undefined;

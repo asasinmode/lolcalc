@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IItemDescriptionProps } from '~/utils/types';
+import { computeItemDescription } from '@lolcalc/core/DamageSource';
+import { PATCH_VERSION } from '@lolcalc/data';
 
 const props = defineProps<IItemDescriptionProps>();
 
@@ -9,14 +12,11 @@ defineEmits<{
 	headerDblClick: [event: MouseEvent];
 }>();
 
-const text = useText();
-const { version, minorVersion } = usePatchVersion();
+const { vSemver, vMinor } = PATCH_VERSION;
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const computedDescription = computed<IComputedItemDescription | undefined>(() => props.precomputedDescription
 	|| computeItemDescription(
-		text,
-		minorVersion,
 		props.item,
 		props.damageSource,
 		{ replaceWithName: props.replaceVariablesWithNames },
@@ -60,7 +60,7 @@ defineExpose({ header });
 	>
 		<img
 			v-show="computedDescription?.item"
-			:src="computedDescription?.item.image ? `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${computedDescription.item.image}` : ''"
+			:src="computedDescription?.item.image ? `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${computedDescription.item.image}` : ''"
 			width="64"
 			height="64"
 			aria-hidden="true"
@@ -71,7 +71,7 @@ defineExpose({ header });
 			<span>Sells for:</span>
 			<img
 				v-show="computedDescription?.item"
-				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
+				:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
 				width="32"
 				height="28"
 				alt="gold coins"
@@ -100,7 +100,7 @@ defineExpose({ header });
 		<ul>
 			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
 				<img
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
+					:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
 					width="20"
 					height="20"
 					aria-hidden="true"

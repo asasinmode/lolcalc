@@ -2,7 +2,7 @@
 import type { IItem } from '@lolcalc/data/types';
 import { DamageSource, isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { itemBuyability } from '@lolcalc/core/specifics/item';
-import { CHAMPION_IMAGES, PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data/index';
+import { CHAMPION_IMAGES, PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
 
 const { vMinor, vSemver } = PATCH_VERSION;
 

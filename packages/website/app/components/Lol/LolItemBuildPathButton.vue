@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IShopItem } from '~/utils/types';
+import type { IShopItem } from '@lolcalc/data/types';
 
 defineProps<{
 	component?: boolean;

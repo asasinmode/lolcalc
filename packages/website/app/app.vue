@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { IChampionStatName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
+import { PATCH_VERSION } from '@lolcalc/data';
+import { STAT_ICON } from '@lolcalc/data/meta';
+import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 
-const { version, minorVersion } = usePatchVersion();
+const { vSemver, vMinor } = PATCH_VERSION;
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
@@ -19,7 +24,7 @@ useHead({
 	style: [
 		{
 			textContent: `:root {
-	--masterwork-border-url: url(https://raw.communitydragon.org/${minorVersion}/game/assets/items/itemmodifiers/bordertreatmentornn.png)
+	--masterwork-border-url: url(https://raw.communitydragon.org/${vMinor}/game/assets/items/itemmodifiers/bordertreatmentornn.png)
 }`,
 		},
 	],
@@ -56,13 +61,13 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		abilityId: { type: 'all', id: 'stats' },
 		name: 'stats',
 		isPermanent: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/itemdamage.png`,
+		image: `https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`,
 		imageSize: 32,
 		rows: markRaw(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
 			const icon = STAT_ICON[statName as IChampionStatName];
 			const image = typeof icon === 'string'
 				? {
-						src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
+						src: `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
 						width: 20,
 						height: 20,
 					}
@@ -82,7 +87,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 				id: 'eqValue',
 				name: 'Inventory Value',
 				image: {
-					src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
+					src: `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
 					width: 32,
 					height: 28,
 				},
@@ -109,7 +114,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		abilityId: { type: 'all', id: 'basicAttack' },
 		name: 'basic attack',
 		isPermanent: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
+		image: `https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/autoattack.png`,
 		imageSize: 32,
 		rows: markRaw([
 			{
@@ -150,7 +155,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		name: 'custom total',
 		isPermanent: true,
 		isCustomTotal: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
+		image: `https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/unknowndamage.png`,
 		imageSize: 32,
 		rows: markRaw([
 			{
@@ -241,7 +246,7 @@ onBeforeUnmount(() => {
 				<span>alpha</span>
 			</h1>
 			<span>
-				{{ version }}
+				{{ vSemver }}
 			</span>
 			<button
 				id="share-configuration"

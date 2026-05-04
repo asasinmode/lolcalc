@@ -1,5 +1,10 @@
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
+import { DamageSource } from '@lolcalc/core/DamageSource';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { CHAMPION_KEY_TO_ID } from '@lolcalc/data';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 
 const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';
@@ -266,7 +271,7 @@ export function useCalculatorState(
 				continue;
 			}
 
-			const abilityId = GameAbilityId.parse(id);
+			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES);
 			if (abilityId) {
 				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded);
 				currentSectionIndex += 1;

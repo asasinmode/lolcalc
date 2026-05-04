@@ -1,3 +1,4 @@
+import type { IListedChampion } from '@lolcalc/data/types';
 import LolChampSelect from '~/components/Lol/LolChampSelect.vue';
 
 let resolve: (() => void) | undefined;

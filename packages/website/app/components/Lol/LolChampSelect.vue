@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { IListedChampion } from '@lolcalc/data/types';
+import type { IChampionRole } from '@lolcalc/shared/types';
+import { CHAMPION_IMAGES, CHAMPIONS, PATCH_VERSION } from '@lolcalc/data';
+
 const value = defineModel<IListedChampion>();
 const selectedChampion = shallowRef<IListedChampion | undefined>();
 
@@ -6,18 +10,17 @@ watch(value, (c) => {
 	selectedChampion.value = c;
 }, { immediate: true });
 
-const champions = useChampions();
-const { minorVersion } = usePatchVersion();
-const { championImage } = useChampionImages();
+const { vMinor } = PATCH_VERSION;
+const { championImage } = CHAMPION_IMAGES;
 
-const ALL_ROLES: [ IChampionRole, string ][] = [
+const ALL_ROLES: [IChampionRole, string ][] = [
 	['top', 'top'],
 	['jungle', 'jungle'],
 	['mid', 'middle'],
 	['bot', 'bottom'],
 	['support', 'utility'],
 ];
-const ALL_CHAMPION = Object.values(champions);
+const ALL_CHAMPIONS = Object.values(CHAMPIONS);
 
 const vDialog = useTemplateRef('vDialog');
 const search = ref('');
@@ -31,12 +34,12 @@ const computedChampions = computed(() => {
 		.filter(v => v);
 
 	const searchFiltered = search.value
-		? ALL_CHAMPION.filter(champion =>
+		? ALL_CHAMPIONS.filter(champion =>
 				splitSearch.every(word =>
 					champion.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word),
 				),
 			)
-		: ALL_CHAMPION;
+		: ALL_CHAMPIONS;
 
 	return selectedRole.value ? searchFiltered.filter(champion => champion.roles[selectedRole.value!]) : searchFiltered;
 });
@@ -46,7 +49,7 @@ function closeCleanup() {
 	value.value = selectedChampion.value;
 }
 
-const longestName = Object.values(champions).reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
+const longestName = ALL_CHAMPIONS.reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
 
 defineExpose({
 	open: () => {
@@ -81,7 +84,7 @@ defineExpose({
 			>
 				<template #default="{ option: { role, icon } }">
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${icon}-light.svg`"
+						:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${icon}-light.svg`"
 						aria-hidden="true"
 						width="34"
 						height="34"

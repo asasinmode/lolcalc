@@ -2,7 +2,7 @@
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IChampionId, IDragonName, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared/index';
+import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { IExtraComponentEmits, IWithCalculateDynamicValues } from '~/utils/types';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
@@ -12,9 +12,9 @@ import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/ch
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune';
 import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, UI } from '@lolcalc/data/index';
+import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
-import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared/index';
+import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
