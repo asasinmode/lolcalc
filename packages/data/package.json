@@ -8,6 +8,7 @@
 	"license": "AGPL-3.0-only",
 	"exports": {
 		".": "./src/index.ts",
+		"./files/*": "./files/*",
 		"./*": "./src/*"
 	},
 	"devDependencies": {

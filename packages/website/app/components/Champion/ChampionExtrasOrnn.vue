@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 
 const props = defineProps<IExtraComponentProps<'champion'>>();
 

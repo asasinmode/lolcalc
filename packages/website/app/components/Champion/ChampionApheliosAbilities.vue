@@ -1,7 +1,11 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
-import type Aphelios from '../../../public/data/champion/Aphelios.json';
+import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type { IExtraComponentEmits } from '~/utils/types';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
+import { CHAMPION_IMAGES } from '@lolcalc/data/index';
 
 type IAphelios = typeof Aphelios;
 
@@ -16,7 +20,7 @@ const emit = defineEmits<{
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
-const { abilityImage, abilityImageSize } = useChampionImages();
+const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 
 const passiveAbilityId = GameAbilityId.build('champion', 'Aphelios', 'passive', 0);
 const rAbilityId = GameAbilityId.build('champion', 'Aphelios', 'r', 0);

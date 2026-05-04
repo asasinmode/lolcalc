@@ -1,6 +1,11 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
+import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { IChampionStatName, IChampionStats } from '@lolcalc/shared';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
+import { STAT_ICON } from '@lolcalc/data/meta';
+import { ALL_CHAMPION_STATS, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 
 const props = defineProps<IExtraComponentProps<'champion'>>();
 

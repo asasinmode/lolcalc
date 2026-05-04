@@ -17,11 +17,11 @@
 			"@lolcalc/data": [
 				"./packages/data/src/index.ts"
 			],
-			"@lolcalc/data/*": [
-				"./packages/data/src/*"
-			],
 			"@lolcalc/data/files/*": [
 				"./packages/data/files/*"
+			],
+			"@lolcalc/data/*": [
+				"./packages/data/src/*"
 			],
 			"@lolcalc/shared": [
 				"./packages/shared/src/index.ts"

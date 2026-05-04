@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import type { IExtraComponentEmits, IExtraComponentProps, IItemAbilityId } from '~/utils/types';
+import type { IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IGameAbilityData } from '@lolcalc/core/specifics';
+import type { IItemSpecific } from '@lolcalc/core/specifics/item';
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import { resolveAbilitySpecific } from '@lolcalc/core/specifics';
+import { ITEMS, PATCH_VERSION } from '@lolcalc/data';
+import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { VExtrasNumber } from '#components';
 
 const props = defineProps<IExtraComponentProps<'item'>>();
 
 defineEmits<IExtraComponentEmits>();
 
-const items = useItems();
-const { version } = usePatchVersion();
+const { vSemver } = PATCH_VERSION;
 
 type IData = IGameAbilityData<IItemAbilityId<typeof ITEM_NAME_TO_ID.tear>>;
 
@@ -37,7 +42,7 @@ const UNTRANSFORMED_IDS: string[] = [
 ];
 
 const itemIndex = computed(() => props.damageSource.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === ALTERNATE_ITEM_FORMS[props.abilityId.id]));
-const transformedItem = computed(() => items[ALTERNATE_ITEM_FORMS[props.abilityId.id]!]!);
+const transformedItem = computed(() => ITEMS[ALTERNATE_ITEM_FORMS[props.abilityId.id]!]!);
 
 const isTransformed = ref((TRANSFORMED_IDS as string[]).includes(props.abilityId.id));
 
@@ -51,7 +56,7 @@ function transform() {
 			const item = props.damageSource.items.value[i];
 			if (item && i !== itemIndex.value && (UNTRANSFORMED_IDS as string[]).includes(item.id)) {
 				// eslint-disable-next-line vue/no-mutating-props
-				props.damageSource.items.value[i] = items[(ALTERNATE_ITEM_FORMS as Record<string, string>)[item.id]!];
+				props.damageSource.items.value[i] = ITEMS[(ALTERNATE_ITEM_FORMS as Record<string, string>)[item.id]!];
 			} else if (item?.id === ITEM_NAME_TO_ID.tear) {
 				// eslint-disable-next-line vue/no-mutating-props
 				props.damageSource.items.value[i] = undefined;
@@ -71,7 +76,7 @@ function updateValue(value: number) {
 <template>
 	<VExtrasNumber
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
-		:img-src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`"
+		:img-src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${abilityId.id}.png`"
 		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.imgText?.(damageSource, abilityId)"
 		img-size="64"
 		label="Manaflow stacks"
