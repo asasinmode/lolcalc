@@ -13,13 +13,7 @@ const damageSource = defineModel<DamageSource>();
 
 type IAllItemCategory = IItemCategory | 'all';
 
-<<<<<<< HEAD
-const { version, minorVersion } = usePatchVersion();
-const items = useItems();
-const ui = useUi();
-=======
 const { vSemver, vMinor } = PATCH_VERSION;
->>>>>>> feat/separate-logic-package
 
 const inventoryValue = computed(() => damageSource.value?.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0) ?? 0);
 
@@ -58,21 +52,12 @@ const TRANSFORMED_TEAR_ITEM_IDS: string[] = [
 ];
 
 const sortedByPrice = computed(() => Object
-<<<<<<< HEAD
-	.values(items)
-	.sort((a, b) => a.gold.total - b.gold.total));
-
-const shopItems = computed<IShopItem[]>(() => sortedByPrice.value.map((item) => {
-	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value, items) : 0;
-	const buyability = itemBuyability(item, damageSource.value, items);
-=======
 	.values(ITEMS)
 	.sort((a, b) => a.gold.total - b.gold.total));
 
 const shopItems = computed<IShopItem[]>(() => sortedByPrice.value.map((item) => {
 	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value) : 0;
 	const buyability = itemBuyability(item, damageSource.value);
->>>>>>> feat/separate-logic-package
 	const isBought = damageSource.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id);
 
 	const statuses: string[] = [];

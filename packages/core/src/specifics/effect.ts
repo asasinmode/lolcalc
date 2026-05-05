@@ -7,14 +7,6 @@ import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shar
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
-<<<<<<< HEAD
-import { GameAbilityId } from './GameAbilityId.ts';
-import { ABILITY_TYPE } from './meta2.ts';
-import { EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
-
-const { data: items } = itemsData;
-=======
->>>>>>> feat/separate-logic-package
 
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: {

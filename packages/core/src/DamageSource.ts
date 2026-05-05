@@ -572,7 +572,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 					if (!Number.isNaN(parsedIndex)) {
 						const shardSlotOptionKeys = Object.keys(shardSlot);
 						if (shardSlotOptionKeys[parsedIndex]) {
-							// @ts-expect-error both key and value should match now
+							// @ts-expect-error both key and value should match
 							rv.runes.value.shards[shardSlotKey] = shardSlotOptionKeys[parsedIndex] as any;
 						}
 					}
@@ -641,7 +641,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			}
 		}
 
-		const fromStringifiedInternalData = [];
+		const fromStringifiedInternalData: (number | undefined)[] = [];
 		if (rawInternalData?.length) {
 			for (const rawValue of rawInternalData.split('|')) {
 				const value = Number.parseFloat(rawValue);

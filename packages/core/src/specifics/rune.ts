@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import type { DamageSource } from '../DamageSource';
-import type { IPossibleDynamicValues } from '../types';
-import type { IChampionRunes, IRuneShardSlotValue } from '../types/rune';
-// TODO figure out type assertion if champion.ts also imports champion.json and there are errors
-import runeData from '../../app/assets/rune.json' with { type: 'json' };
-=======
 import type { TRunes } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
 import { RUNES } from '@lolcalc/data';
->>>>>>> feat/separate-logic-package
 
 export function runePathsEmpty(runes: IChampionRunes): boolean {
 	const { primarySlots, secondary, secondarySlots } = runes.paths;

@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import type IEzreal from '../../public/data/champion/Ezreal.json';
-import type IIrelia from '../../public/data/champion/Irelia.json';
-import type IJax from '../../public/data/champion/Jax.json';
-import type IKaisa from '../../public/data/champion/Kaisa.json';
-import type IMonkeyKing from '../../public/data/champion/MonkeyKing.json';
-import type INaafiri from '../../public/data/champion/Naafiri.json';
-import type IOrianna from '../../public/data/champion/Orianna.json';
-import type IOrnn from '../../public/data/champion/Ornn.json';
-import type IRell from '../../public/data/champion/Rell.json';
-import type ISeraphine from '../../public/data/champion/Seraphine.json';
-import type ISona from '../../public/data/champion/Sona.json';
-import type ISyndra from '../../public/data/champion/Syndra.json';
-import type IZaahen from '../../public/data/champion/Zaahen.json';
-import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from '../types';
-=======
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
@@ -36,7 +20,6 @@ import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
->>>>>>> feat/separate-logic-package
 
 export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
@@ -334,11 +317,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ornn: {
-<<<<<<< HEAD
-		MASTERWORK_LEVEL: (self: DamageSource) => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
-=======
 		MASTERWORK_LEVEL: (self: DamageSource): number => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
->>>>>>> feat/separate-logic-package
 		MAX_UPGRADED_ALLIES: 5,
 		calcMaxUpgradedAllies(self: DamageSource) {
 			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - self.internalData.value.masterworkLevel));

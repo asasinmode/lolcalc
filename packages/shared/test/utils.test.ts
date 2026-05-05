@@ -1,10 +1,6 @@
 import assert from 'node:assert';
 import test from 'node:test';
-<<<<<<<< HEAD:packages/core/test/lolcalc/utils.test.ts
-import { roundVariable } from '../../lolcalc/utils.ts';
-========
 import { roundVariable } from '../src/utils.ts';
->>>>>>>> feat/separate-logic-package:packages/shared/test/utils.test.ts
 
 test('lolcalc/utils.ts', async (t) => {
 	await t.test('roundVariable formats numbers correctly', () => {

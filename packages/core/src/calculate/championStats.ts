@@ -1,31 +1,9 @@
-<<<<<<< HEAD
-import { ITEM_TO_CHAMPION_STATS } from '../meta.ts';
-
-interface IStatsCalculationResult {
-	/** raw stats from champion file */
-	initial: IChampionStats;
-	/** stats that could've been already modified from raw, like custom target dummy ones */
-	base: IChampionStats;
-	/** ONLY increases from level, i.e if champion gains 2 ad per level, on lvl 3 it will be `4` */
-	level: Partial<IChampionStats>;
-	/** base + level combined */
-	baseOnLevel: IChampionStats;
-	item: IChampionStats;
-	bonus: IChampionStats;
-	total: IChampionStats;
-	meta: {
-		hasMana: boolean;
-		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
-	};
-}
-=======
 import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationResult } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalChampionSpecifics } from '../specifics/champion';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
 import { CHAMPION_SPECIFICS } from '../specifics/champion.ts';
->>>>>>> feat/separate-logic-package
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;

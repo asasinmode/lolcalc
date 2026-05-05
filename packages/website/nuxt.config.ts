@@ -40,8 +40,6 @@ export default defineNuxtConfig({
 		tsConfig: {
 			compilerOptions: {
 				erasableSyntaxOnly: true,
-<<<<<<< HEAD
-=======
 				allowImportingTsExtensions: true,
 				/* these should probably be handled as a workspace dependency from `package.json` but for, from my understanding, they'd have to have valid `package.json` "types" field and others bells and whistles so this will do for now */
 				paths: {
@@ -49,7 +47,6 @@ export default defineNuxtConfig({
 					'@lolcalc/data/*': ['../../data/src/*'],
 					'@lolcalc/shared/*': ['../../shared/src/*'],
 				},
->>>>>>> feat/separate-logic-package
 			},
 		},
 	},

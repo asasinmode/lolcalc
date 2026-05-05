@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import type { IEffectObjectName, TAbilityType } from './meta.ts';
-import type { IChampionAbilityKey, IChampionId } from './types/champion';
-import { markRaw } from 'vue';
-import { ABILITY_TYPE, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from './meta.ts';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
-=======
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IEffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { CHAMPIONS, ITEMS } from '@lolcalc/data';
 import { ABILITY_TYPE, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
 import { markRaw } from 'vue';
->>>>>>> feat/separate-logic-package
 
 export interface IChampionAbilityId<
 	Id extends IChampionId = IChampionId,

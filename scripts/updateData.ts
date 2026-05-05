@@ -1,13 +1,3 @@
-<<<<<<<< HEAD:packages/core/scripts/updateGameData.ts
-import type { IDragonName } from '../app/composables/useMisc';
-import type { IChampionSpecific } from '../app/utils/champion';
-import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
-import type { IEffectObjectName, IItemCategory, IItemShopStatFilter } from '../app/utils/meta';
-import type { IRuneSpecific } from '../app/utils/rune';
-import type { ITexture } from '../app/utils/types';
-import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IChampionId, IListedChampion } from '../shared/types/champion';
-import type { IItem } from '../shared/types/item';
-========
 import type { IChampionSpecific } from '@lolcalc/core/specifics/champion.ts';
 import type { IRuneSpecific } from '@lolcalc/core/specifics/rune';
 import type { IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
@@ -16,7 +6,6 @@ import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types';
->>>>>>>> feat/separate-logic-package:scripts/updateData.ts
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -31,15 +20,6 @@ import { ABILITY_TYPE, EFFECT_OBJECT_NAME, KEPT_UNPURCHASABLE_ITEMS } from '@lol
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
-<<<<<<<< HEAD:packages/core/scripts/updateGameData.ts
-import { CHAMPION_SPECIFICS } from '../shared/specifics/champion.ts';
-import { replaceGameDescriptionVariables } from '../shared/variables/game.ts';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../shared/specifics/effect.ts';
-import { replaceGameDescriptionStringtableVariables } from '../shared/variables/stringtable.ts';
-import { RUNE_SPECIFICS } from '../shared/specifics/rune.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS, SHAPESHIFTING_CHAMPION_IDS } from '../shared/meta.ts';
-========
->>>>>>>> feat/separate-logic-package:scripts/updateData.ts
 
 let latestVersion = process.argv[2];
 
