@@ -10,7 +10,7 @@ import miscData from '../files/misc.json' with { type: 'json' };
 import runeData from '../files/rune.json' with { type: 'json' };
 import textData from '../files/text.json' with { type: 'json' };
 import uiData from '../files/ui.json' with { type: 'json' };
-import { STAT_ICON } from './meta';
+import { STAT_ICON } from './meta.ts';
 
 export const PATCH_VERSION = {
 	vSemver: championData.version as string,
@@ -37,7 +37,8 @@ export function useChampion(id: IChampionId | (string & {})): Promise<IChampion>
 	if (cacheHit) {
 		return cacheHit;
 	}
-	const promise = import(`../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then(module => module.default);
+	/** conditional parse because raw node imports it properly as json and nuxt imports a string */
+	const promise = import(`../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then(module => typeof module.default === 'string' ? JSON.parse(module.default) : module.default);
 	championCache.set(id as IChampionId, promise);
 	return promise;
 }
