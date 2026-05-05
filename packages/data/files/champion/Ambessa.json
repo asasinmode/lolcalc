@@ -1,0 +1,492 @@
+{
+	"id": "Ambessa",
+	"key": "799",
+	"name": "Ambessa",
+	"partype": "Energy",
+	"stats": {
+		"hp": 630,
+		"hpperlevel": 110,
+		"mp": 200,
+		"mpperlevel": 0,
+		"movespeed": 335,
+		"armor": 35,
+		"armorperlevel": 4.9,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 125,
+		"hpregen": 8.5,
+		"hpregenperlevel": 0.75,
+		"mpregen": 50,
+		"mpregenperlevel": 0,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 63,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 2.5,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Cunning Sweep / Sundering Slam",
+					"objectName": "AmbessaQ",
+					"dataKey": "Characters/Ambessa/Spells/AmbessaQAbility/AmbessaQ",
+					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_q1.png",
+					"tooltip": "<spellActive>Cunning Sweep</spellActive>: Ambessa sweeps her blades forward, dealing <physicalDamage>@Calc_Damage_1_Max@ + @Calc_Damage_1_Percent_Max@ max Health physical damage</physicalDamage> to enemies at the edge of the strike. All other enemies take @Calc_Damage_1_Min_Ratio@ damage. Striking an enemy readies a <spellActive>Sundering Slam</spellActive>.<br><br><spellActive>Sundering Slam</spellActive>: Ambessa slams her blades down, dealing <physicalDamage>@Calc_Damage_2_Max@ + @Calc_Damage_2_Percent_Max@ max Health physical damage</physicalDamage> against the first enemy hit. All other enemies take @Calc_Damage_2_Min_Ratio@ damage.",
+					"extendedVariables": [
+						{
+							"name": "Damage_1_Base",
+							"nameOverride": "spell_ambessaq_rankup_cunningsweep_damage"
+						},
+						{
+							"name": "Damage_1_Percent",
+							"nameOverride": "spell_ambessaq_rankup_cunningsweep_maxhealthdamage"
+						},
+						{
+							"name": "Damage_2_Base",
+							"nameOverride": "spell_ambessaq_rankup_sunderingslam_damage"
+						},
+						{
+							"name": "Damage_1_Percent",
+							"nameOverride": "spell_ambessaq_rankup_sunderingslam_maxhealthdamage"
+						}
+					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
+					"dataValues": {
+						"Swap_Duration": [4, 4, 4, 4, 4, 4, 4],
+						"Swap_Static_Cooldown": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Damage_1_Base": [20, 40, 60, 80, 100, 120, 140],
+						"Damage_1_Percent": [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+						"Damage_2_Base": [25, 50, 75, 100, 125, 150, 175],
+						"Damage_2_Percent": [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+						"Damage_1_Min_Ratio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Damage_2_Min_Ratio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"{a7907b77}": {
+							"mMultiplier": {
+								"mSpellCalculationKey": "Calc_Damage_1_Min_Ratio"
+							},
+							"mModifiedGameCalculation": "Calc_Damage_1_Max"
+						},
+						"Calc_Damage_1_Max": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_1_Base",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{17768f39}": {
+							"mMultiplier": {
+								"mSpellCalculationKey": "Calc_Damage_1_Min_Ratio"
+							},
+							"mModifiedGameCalculation": "Calc_Damage_1_Percent_Max"
+						},
+						"Calc_Damage_1_Percent_Max": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_1_Percent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"{3ce89b9e}": {
+							"mMultiplier": {
+								"mSpellCalculationKey": "Calc_Damage_2_Min_Ratio"
+							},
+							"mModifiedGameCalculation": "Calc_Damage_2_Max"
+						},
+						"Calc_Damage_2_Max": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_2_Base",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.9,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{1442dbe0}": {
+							"mMultiplier": {
+								"mSpellCalculationKey": "Calc_Damage_2_Min_Ratio"
+							},
+							"mModifiedGameCalculation": "Calc_Damage_2_Percent_Max"
+						},
+						"Calc_Damage_2_Percent_Max": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_2_Percent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"Calc_Damage_1_Min_Ratio": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_1_Min_Ratio",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"Calc_Damage_2_Min_Ratio": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_2_Min_Ratio",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"Calc_Damage_Monster_Flat_Bonus": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 125,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"Calc_Damage_Monster_Percent_Cap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 100,
+									"mEndValue": 300,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Repudiation",
+					"objectName": "AmbessaW",
+					"dataKey": "Characters/Ambessa/Spells/AmbessaWAbility/AmbessaW",
+					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_w.png",
+					"tooltip": "Ambessa gains <shield>@Calc_Shield@ Shield</shield> for @Shield_Duration@ seconds and braces herself for @Buff_Duration@ seconds. She then slams the ground, dealing <physicalDamage>@Calc_Damage_Low@ physical damage</physicalDamage> to nearby enemies, which increases to <physicalDamage>@Calc_Damage_High@ physical damage</physicalDamage> if she braced herself from damage from an enemy champion, large monster, or structure.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
+					"dataValues": {
+						"Dash_Delay": [0.225, 0.225, 0.225, 0.225, 0.225, 0.225, 0.225],
+						"Buff_Duration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Shield_Duration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"BaseDamage": [25, 50, 75, 100, 125, 150, 175],
+						"HighDamageMultiplier": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"DamageADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"Calc_Shield": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 50,
+									"mEndValue": 320,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_Damage_Low": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "DamageADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"Calc_Damage_High": {
+							"mMultiplier": {
+								"mDataValue": "HighDamageMultiplier"
+							},
+							"mModifiedGameCalculation": "Calc_Damage_Low"
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Lacerate",
+					"objectName": "AmbessaE",
+					"dataKey": "Characters/Ambessa/Spells/AmbessaEAbility/AmbessaE",
+					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_e.png",
+					"tooltip": "Ambessa whips her chains around, dealing <physicalDamage>@Calc_Damage_Flat@ physical damage</physicalDamage> and <status>Slowing</status> enemies by <status>@Slow_Amount*100@%</status>, which decays over @Slow_Duration@ second. Initiating <spellName>{{Spell_AmbessaP_Name}}</spellName> from this Ability will trigger an additional strike.",
+					"extendedVariables": [
+						{
+							"name": "Damage_Flat_Base",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
+					"dataValues": {
+						"Slow_Duration": [1, 1, 1, 1, 1, 1, 1],
+						"Slow_Amount": [0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99],
+						"Damage_Flat_Base": [20, 40, 60, 80, 100, 120, 140],
+						"ADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"Calc_Damage_Flat": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_Flat_Base",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Public Execution",
+					"objectName": "AmbessaR",
+					"dataKey": "Characters/Ambessa/Spells/AmbessaRAbility/AmbessaR",
+					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_r.png",
+					"tooltip": "<spellPassive>Passive</spellPassive>: Ambessa gains <armorPen>@Armor_Penetration*100@% %i:scaleAPen% Armor Penetration</armorPen> and her Abilities <healing>heal her for @Calc_Omnivamp@ of the damage she dealt</healing>.<br><br><spellActive>Active</spellActive>: Ambessa becomes <attention>Unstoppable</attention> and blinks to the farthest enemy champion in a line, <status>Suppressing</status> the target for @Suppress_Duration@ seconds and then slamming them into the ground, dealing <physicalDamage>@Calc_Damage@ physical damage</physicalDamage> and <status>Stunning</status> them for @Stun_Duration@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "Armor_Penetration",
+							"nameOverride": "spell_listtype_armorpenetration"
+						},
+						{
+							"name": "Omnivamp",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"name": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"cooldownTime": [130, 130, 115, 100, 100, 100, 100],
+					"dataValues": {
+						"Damage": [50, 150, 250, 350, 450, 550, 650],
+						"ADRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"Suppress_Duration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"Stun_Duration": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"Armor_Penetration": [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+						"Omnivamp": [0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225],
+						"Omnivamp_LifeStealScaling": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Omnivamp_MinionMod": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"Omnivamp_MonsterMod": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+					},
+					"spellCalculations": {
+						"Calc_Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"Calc_Omnivamp": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Omnivamp",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 18,
+									"mDataValue": "Omnivamp_LifeStealScaling",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Drakehound's Step",
+					"objectName": "AmbessaPassive",
+					"dataKey": "{3f70c67a}",
+					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.png",
+					"tooltip": "{{Spell_AmbessaP_Tooltip}}",
+					"tooltipExtended": "{{Spell_AmbessaP_Tooltip}}<br><br><rules>Commands issued during the cast time or duration of Abilities or Attacks are stored. Once the Ability or Attack finishes, the most recently stored command is executed. The windup of charged Attacks cannot be canceled. Issuing a Stop command after an Attack command has been issued during a Ability cast will cancel Ambessa's dash but maintain her Attack command if the target is in range.</rules>",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"Buffer_Dash_Time": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"Buffer_Dash_Distance": [350, 350, 350, 350, 350, 350, 350],
+						"Buffer_Dash_Min_Distance": [175, 175, 175, 175, 175, 175, 175],
+						"Buffer_Dash_Forgiveness_Window": [0.275, 0.275, 0.275, 0.275, 0.275, 0.275, 0.275],
+						"Buffer_Dash_W_Forgiveness_Window": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"Buffer_Dash_Wall_Forgiveness": [500, 500, 500, 500, 500, 500, 500],
+						"Attack_Range_Amount": [75, 75, 75, 75, 75, 75, 75],
+						"Attack_Range_Total": [200, 200, 200, 200, 200, 200, 200],
+						"Attack_Buff_Max_Stacks": [3, 3, 3, 3, 3, 3, 3],
+						"Attack_Buff_Duration": [4, 4, 4, 4, 4, 4, 4],
+						"Attack_Speed": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"{57d26a55}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 770,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 60
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 60
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 60
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_OnHit_Damage_Flat": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 30,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_OnHit_Energy_Refund": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 40,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"Calc_Attack_Speed": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Attack_Speed",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{d87d470b}": {},
+						"{01a5d393}": {
+							"mMultiplier": {
+								"mStat": 9,
+								"mCoefficient": 1
+							},
+							"mModifiedGameCalculation": "Calc_OnHit_Damage_Flat"
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_ambessaq_rankup_cunningsweep_damage": "Cunning Sweep | Damage",
+		"spell_ambessaq_rankup_cunningsweep_maxhealthdamage": "Cunning Sweep | Max Health Damage",
+		"spell_ambessaq_rankup_sunderingslam_damage": "Sundering Slam | Damage",
+		"spell_ambessaq_rankup_sunderingslam_maxhealthdamage": "Sundering Slam | Max Health Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_armorpenetration": "Armor Penetration",
+		"spell_listtype_healing": "Healing",
+		"spell_ambessap_tooltip": "When Ambessa is casting an Ability, issuing a Move or Attack order will cause her to dash in that direction after the Ability finishes.<br><br>Each cast initiation grants her a charge for @Attack_Buff_Duration@ seconds (max: @Attack_Buff_Max_Stacks@). While Ambessa has a charge, she gains <attention>@Attack_Range_Amount@ %i:scaleRange% Attack Range</attention> and <attackSpeed>@Calc_Attack_Speed@ %i:scaleAS% Attack Speed</attackSpeed>. Attacks consume a charge to deal <physicalDamage>@Calc_OnHit_Damage_Flat@ physical damage</physicalDamage> and restore <keywordMajor>@Calc_OnHit_Energy_Refund@ Energy</keywordMajor>."
+	}
+}

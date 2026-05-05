@@ -1,11 +1,11 @@
-export function replaceGameDescriptionStringtableVariables(
+export function replaceStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},
 	/** either resolved dynamic variables or possible values of dynamic variables */
 	dynamicValues: Record<string, unknown> = {},
 	wrapUnknown = true,
-	unknownStringtableVariables = new Map<string, Set<string>>(),
-	stringtableVariables = new Map<string, string>(),
+	unknownStringtableVariables: Map<string, Set<string>> = new Map(),
+	stringtableVariables: Map<string, string> = new Map(),
 ): {
 	replaced: string;
 	stringtableVariables: Map<string, string>;
@@ -37,11 +37,11 @@ export function replaceGameDescriptionStringtableVariables(
 							continue;
 						}
 
-						const { replaced } = replaceGameDescriptionStringtableVariables(possibleValueText, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
+						const { replaced } = replaceStringtableVariables(possibleValueText, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 						stringtableVariables.set(possibleValueVariableName, replaced);
 
 						if (replaced.includes('{{')) {
-							replaceGameDescriptionStringtableVariables(replaced, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
+							replaceStringtableVariables(replaced, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 						}
 					}
 
@@ -60,7 +60,7 @@ export function replaceGameDescriptionStringtableVariables(
 		}
 
 		if (value.includes('{{')) {
-			const { replaced } = replaceGameDescriptionStringtableVariables(
+			const { replaced } = replaceStringtableVariables(
 				value,
 				stringtable,
 				dynamicValues,

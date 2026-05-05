@@ -1,11 +1,14 @@
 <script setup lang="ts">
-const items = useItems();
-const text = useText();
-const runes = useRunes();
-const { version, minorVersion } = usePatchVersion();
+import type { IItem } from '@lolcalc/data/types';
+import { DamageSource, isMasterworkSlot } from '@lolcalc/core/DamageSource';
+import { itemBuyability } from '@lolcalc/core/specifics/item';
+import { CHAMPION_IMAGES, PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
+
+const { vMinor, vSemver } = PATCH_VERSION;
+
 const globalKeyModifiers = useGlobalKeyModifiers();
 const enableUnimplementedUi = useEnableUnimplementedUi();
-const { championImage, championImageSize } = useChampionImages();
+const { championImage, championImageSize } = CHAMPION_IMAGES;
 
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
@@ -36,7 +39,7 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 		champImg.width = size;
 		champImg.height = size;
 	} else {
-		champImg.src = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`;
+		champImg.src = `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`;
 		champImg.width = 256;
 		champImg.height = 256;
 	}
@@ -45,22 +48,22 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 
 	const { primary, primarySlots, secondary } = damageSource.runes.value.paths;
 	if (primary && primarySlots[0]) {
-		const { icon } = runes.paths[primary].slots[0]![primarySlots[0]]!;
-		runePrimary.src = `https://raw.communitydragon.org/${minorVersion}/game/${icon}`;
+		const { icon } = RUNES.paths[primary].slots[0]![primarySlots[0]]!;
+		runePrimary.src = `https://raw.communitydragon.org/${vMinor}/game/${icon}`;
 		runePrimary.width = 256;
 		runePrimary.height = 256;
 	} else {
-		runePrimary.src = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
+		runePrimary.src = `https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
 		runePrimary.width = 80;
 		runePrimary.height = 80;
 	}
 
 	if (secondary) {
-		const { iconColor } = runes.paths[secondary]!;
-		const { name } = text.runes.paths[secondary]!;
+		const { iconColor } = RUNES.paths[secondary]!;
+		const { name } = TEXT.runes.paths[secondary]!;
 		runeSecondary.style.display = '';
 		runeSecondary.style.backgroundColor = iconColor;
-		runeSecondary.style.mask = `url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg) no-repeat center`;
+		runeSecondary.style.mask = `url(https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg) no-repeat center`;
 	} else {
 		runeSecondary.style.display = 'none';
 	}
@@ -77,7 +80,7 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 		}
 
 		if (item) {
-			img.src = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`;
+			img.src = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
 			img.style.display = '';
 		} else {
 			img.style.display = 'none';
@@ -269,12 +272,12 @@ function onItemDragstart(event: DragEvent, source: DamageSource, slotIndex: numb
 
 function onItemDragEnter(event: DragEvent, target: DamageSource) {
 	if (itemDragData && itemDragData.source !== target) {
-		(event.currentTarget as HTMLElement).dataset.dropBuyability = itemBuyability(itemDragData.item, target, items, false, true, !globalKeyModifiers.value.alt).toString();
+		(event.currentTarget as HTMLElement).dataset.dropBuyability = itemBuyability(itemDragData.item, target, false, true, !globalKeyModifiers.value.alt).toString();
 	}
 }
 
 function onItemDragover(event: DragEvent, target: DamageSource) {
-	if (itemDragData && (itemDragData.source === target || itemBuyability(itemDragData.item, target, items, false, true, !globalKeyModifiers.value.alt) === 1)) {
+	if (itemDragData && (itemDragData.source === target || itemBuyability(itemDragData.item, target, false, true, !globalKeyModifiers.value.alt) === 1)) {
 		event.preventDefault();
 	}
 }
@@ -300,14 +303,14 @@ function onItemDrop(event: DragEvent, target: DamageSource, slotIndex?: number) 
 	if (
 		itemDragData
 		&& ((target === itemDragData.source && !globalKeyModifiers.value.alt)
-			|| itemBuyability(itemDragData.item, target, items, false, true, !globalKeyModifiers.value.alt) === 1)
+			|| itemBuyability(itemDragData.item, target, false, true, !globalKeyModifiers.value.alt) === 1)
 	) {
 		const item = globalKeyModifiers.value.alt ? itemDragData.source.items.value[itemDragData.slotIndex]! : itemDragData.source.removeItem(itemDragData.slotIndex)!;
 		/* if no target slot or copying and there's already an item at the index */
 		if (slotIndex === undefined || (globalKeyModifiers.value.alt && target.items.value[slotIndex])) {
-			target.addItem(item, items, false);
+			target.addItem(item, false);
 		} else {
-			target.moveItem(item, slotIndex, itemDragData.source, itemDragData.slotIndex, items);
+			target.moveItem(item, slotIndex, itemDragData.source, itemDragData.slotIndex);
 		}
 	}
 	itemDragData = undefined;

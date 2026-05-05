@@ -1,0 +1,297 @@
+{
+	"id": "Taric",
+	"key": "44",
+	"name": "Taric",
+	"partype": "Mana",
+	"stats": {
+		"hp": 645,
+		"hpperlevel": 99,
+		"mp": 300,
+		"mpperlevel": 60,
+		"movespeed": 340,
+		"armor": 40,
+		"armorperlevel": 4.3,
+		"spellblock": 28,
+		"spellblockperlevel": 2.05,
+		"attackrange": 150,
+		"hpregen": 6,
+		"hpregenperlevel": 0.5,
+		"mpregen": 8.5,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 55,
+		"attackdamageperlevel": 3.5,
+		"attackspeedperlevel": 2,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Starlight's Touch",
+					"objectName": "TaricQ",
+					"dataKey": "Characters/Taric/Spells/TaricQAbility/TaricQ",
+					"image": "assets/characters/taric/hud/icons2d/taric_q.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @Effect6Amount@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @Effect6Amount@ stacks).",
+					"extendedVariables": [
+						{
+							"name": "Effect6Amount",
+							"nameOverride": "spell_listtype_taricmaxcharges"
+						},
+						{
+							"name": "Effect5Amount",
+							"nameOverride": "spell_listtype_taricmaxhealing"
+						}
+					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
+					"dataValues": {
+						"Recharge": [15, 15, 15, 15, 15, 15, 15],
+						"HealingPerStackBase": [25, 25, 25, 25, 25, 25, 25],
+						"HealingAPRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"HealingHPRatio": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+					},
+					"spellCalculations": {
+						"StackCooldown": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Recharge",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"HealingPerStack": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "HealingPerStackBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "HealingAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mDataValue": "HealingHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxStackHealing": {
+							"mMultiplier": {
+								"mEffectIndex": 6
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "HealingPerStackBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "HealingAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mDataValue": "HealingHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [25, 25, 25, 25, 25, 25, 25],
+						"1": [1, 1, 1, 1, 1, 1, 1],
+						"2": [0.15, 0.15, 0.3, 0.45, 0.6, 0.75, 1],
+						"3": [0.75, 0.75, 1.5, 2.25, 3, 3.75, 6],
+						"4": [25, 25, 50, 75, 100, 125, 125],
+						"5": [1, 1, 2, 3, 4, 5, 6]
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Bastion",
+					"objectName": "TaricW",
+					"dataKey": "Characters/Taric/Spells/TaricWAbility/TaricW",
+					"image": "assets/characters/taric/hud/icons2d/taric_w.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>Taric gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and forms a tether between him and the ally bound by this Ability. As long as they are near each other, the ally gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and Taric casts all his Abilities from both himself and his linked ally.<br><br><spellPassive>Active: </spellPassive>Taric binds to an ally champion, granting a <shield>@Effect2Amount@% max Health Shield</shield> for @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "ArmorBonusPercentage",
+							"nameOverride": "spell_listtype_taricpassivearmor"
+						},
+						{
+							"name": "Effect2Amount",
+							"nameOverride": "spell_listtype_taricshieldratio"
+						}
+					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
+					"dataValues": {
+						"ArmorBonusPercentage": [0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11]
+					},
+					"spellCalculations": {
+						"BonusArmor": {
+							"mFormulaParts": [
+								{
+									"mStat": 1,
+									"mDataValue": "ArmorBonusPercentage",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"1": [6, 7, 8, 9, 10, 11, 12],
+						"2": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"3": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"4": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Dazzle",
+					"objectName": "TaricE",
+					"dataKey": "Characters/Taric/Spells/TaricEAbility/TaricE",
+					"image": "assets/characters/taric/hud/icons2d/taric_e.png",
+					"tooltip": "Taric projects a beam of starlight, bursting after @Effect3Amount@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @Effect2Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
+					"spellCalculations": {
+						"TotalDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [50, 90, 130, 170, 210, 250, 290],
+						"1": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"2": [1, 1, 1, 1, 1, 1, 1]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Cosmic Radiance",
+					"objectName": "TaricR",
+					"dataKey": "Characters/Taric/Spells/TaricRAbility/TaricR",
+					"image": "assets/characters/taric/hud/icons2d/taric_r.png",
+					"tooltip": "Taric calls down protection from the heavens. After @InitialDelay@ seconds, nearby ally champions become invulnerable for @InvulnDuration@ seconds.",
+					"extendedVariables": [],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [210, 180, 150, 120, 90, 60, 30],
+					"dataValues": {
+						"InitialDelay": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"InvulnDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Bravado",
+					"objectName": "TaricPassive",
+					"dataKey": "Characters/Taric/Spells/TaricPassiveAbility/TaricPassive",
+					"image": "assets/characters/taric/hud/icons2d/taric_passive.png",
+					"tooltip": "After using an Ability, Taric's next 2 Attacks within @Duration@ seconds gain <attackSpeed>100% Attack Speed</attackSpeed>, deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>, and reduce his basic Ability Cooldowns by @CDR@ second.",
+					"dataValues": {
+						"Duration": [5, 5, 5, 5, 5, 5, 5],
+						"BaseDamageMultiplierForModesBalance": [1, 1, 1, 1, 1, 1, 1],
+						"ArmorDamageValue": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mStartValue": 25,
+										"mEndValue": 93
+									},
+									"mPart2": {
+										"mDataValue": "BaseDamageMultiplierForModesBalance"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mDataValue": "ArmorDamageValue",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"CDR": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mSubparts": [
+												{
+													"mNumber": 1
+												},
+												{
+													"mPart2": {
+														"mNumber": -1
+													}
+												}
+											]
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_taricmaxcharges": "Max Charges",
+		"spell_listtype_taricmaxhealing": "Max Healing",
+		"spell_listtype_taricpassivearmor": "Passive Armor",
+		"spell_listtype_taricshieldratio": "Shield Ratio",
+		"spell_listtype_damage": "Damage"
+	}
+}

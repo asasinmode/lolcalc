@@ -1,0 +1,342 @@
+{
+	"id": "TahmKench",
+	"key": "223",
+	"name": "Tahm Kench",
+	"partype": "Mana",
+	"stats": {
+		"hp": 640,
+		"hpperlevel": 103,
+		"mp": 325,
+		"mpperlevel": 50,
+		"movespeed": 335,
+		"armor": 39,
+		"armorperlevel": 4.7,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 6.5,
+		"hpregenperlevel": 0.55,
+		"mpregen": 8,
+		"mpregenperlevel": 1,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 56,
+		"attackdamageperlevel": 3.2,
+		"attackspeedperlevel": 2.5,
+		"attackspeed": 0.658,
+		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Tongue Lash",
+					"objectName": "TahmKenchQ",
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchQAbility/TahmKenchQ",
+					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchq.png",
+					"tooltip": "Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>On champion hit, heals Tahm for <healing>@BaseHeal@ +@PercentHealthHealing*100@% of his missing Health</healing> and applies a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> dealing <magicDamage>@Spell.TahmKenchPassive:TotalDamage@ extra magic damage</magicDamage>. If that champion already had 3 stacks of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName>, they will also be <status>Stunned</status> for @StunDuration@ seconds, consuming the stacks.<br><br>Activate <font color='#0bf7de'>Devour</font> while your tongue is in midair to devour enemy champions who already have 3 stacks of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> from a distance when you hit them.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						},
+						{
+							"name": "BaseHeal",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"name": "PercentHealthHealing",
+							"nameOverride": "spell_tahmkenchq_missinghealthhealing"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [50, 46, 42, 38, 34, 30],
+					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 4.5],
+					"dataValues": {
+						"BaseDamage": [30, 75, 120, 165, 210, 255, 300],
+						"SlowAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"StunDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"PercentHealthHealing": [0.045, 0.05, 0.055, 0.06, 0.065, 0.07, 0.075],
+						"BaseHeal": [5, 10, 15, 20, 25, 30, 35]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Abyssal Dive",
+					"objectName": "TahmKenchW",
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchWAbility/TahmKenchW",
+					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchw.png",
+					"tooltip": "Dive down and then re-appear at target location, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Knock Up</status> all enemies in an area for @KnockupDuration@ second. Hitting at least one enemy champion refunds @ChampRefund*100@% of the Cooldown and <scaleMana>Mana</scaleMana> cost. <br><br><font color='#0bf7de'>Devoured</font> allies can be taken along for the ride (but can always hop out early).",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "CastRange"
+						},
+						{
+							"name": "Cost"
+						},
+						{
+							"name": "ChampRefund",
+							"nameOverride": "spell_tahmkenchw_levelupcooldownrefund"
+						}
+					],
+					"mana": [60, 75, 90, 105, 120, 135],
+					"cooldownTime": [22, 21, 20, 19, 18, 17, 16],
+					"dataValues": {
+						"BaseDamage": [65, 100, 135, 170, 205, 240, 275],
+						"KnockUpDuration": [1, 1, 1, 1, 1, 1, 1],
+						"AoEDelayFromChannelStart": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"TotalTime": [2, 2, 2, 2, 2, 2, 2],
+						"ChannelTime": [1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35],
+						"EnemyWarningDelayFromChannelStart": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"ChampRefund": [0.375, 0.4, 0.425, 0.45, 0.475, 0.5, 0.525]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Thick Skin",
+					"objectName": "TahmKenchE",
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchEAbility/TahmKenchE",
+					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenche.png",
+					"tooltip": "<passive>Passive:</passive> @GreyHealthRatio*100@% of damage Tahm Kench takes is stored by his <spellName>Thick Skin</spellName>, increased to @GreyHealthRatioEnhanced*100@% if there are at least @EnhancedThreshold@ nearby enemy champions. If Kench has not taken damage within @OOCTimer@ seconds, <spellName>Thick Skin</spellName> will rapidly be consumed to heal Tahm for @GreyHealthHealingRatio@ of its value.<br><br><active>Active:</active> Convert all your stored <spellName>Thick Skin</spellName> into a <shield>Shield</shield>, lasting @ShieldDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "GreyHealthRatio",
+							"nameOverride": "spell_tahmkenche_levelupthickskinratio"
+						},
+						{
+							"name": "GreyHealthRatioEnhanced",
+							"nameOverride": "spell_tahmkenche_levelupthickskinratioenhanced"
+						}
+					],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
+					"dataValues": {
+						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"OOCTimer": [4, 4, 4, 4, 4, 4, 4],
+						"GreyHealthRatio": [0.07, 0.15, 0.23, 0.31, 0.39, 0.47, 0.55],
+						"MaxHPHealRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"GreyHealthRatioEnhanced": [0.4, 0.42, 0.44, 0.46, 0.48, 0.5, 0.52],
+						"EnhancedThreshold": [2, 2, 2, 2, 2, 2, 2],
+						"ThresholdRadius": [2400, 2400, 2400, 2400, 2400, 2400, 2400]
+					},
+					"spellCalculations": {
+						"GreyHealthHealingRatio": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.6,
+									"mEndValue": 1,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"GreyHealthMaximum": {
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mCoefficient": 3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Devour",
+					"objectName": "TahmKenchRWrapper",
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchRWrapperAbility/TahmKenchRWrapper",
+					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchrwrapper.png",
+					"tooltip": "Tahm Kench devours a champion for a few seconds. He can <recast>Recast</recast> to spit them out.<br><br><specialRules>Enemy Champions:</specialRules> Require 3 stacks of <spellName>An Acquired Taste</spellName>. Are devoured for up to @EnemyDuration@ seconds and take <magicDamage>@BaseDamage@ (+@PercentHPDamage@ of their Max Health) magic damage</magicDamage>. Tahm Kench is <status>Slowed</status> by @SlowAmount*100@% and <keywordName>Grounded</keywordName> during this effect.<br><br><specialRules>Ally Champions:</specialRules> Are devoured for up to @AllyDuration@ seconds and are granted <shield>@TotalShield@ Shield</shield> which decays gradually after being spit out. Allies can also choose to exit early. Tahm Kench is <status>Grounded</status> during this effect, but can cast <keywordName>{{Spell_TahmKenchW_Name}}</keywordName> and gains <speed>@AllySpeedAmount*100@% Move Speed</speed> for @AllyDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "BaseShield",
+							"nameOverride": "spell_listtype_shield"
+						},
+						{
+							"name": "DataCooldown",
+							"nameOverride": "spell_listtype_cooldown"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"EnemyDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BaseDamage": [-50, 100, 250, 400, 550, 700, 850],
+						"AllyDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BaseShield": [500, 650, 800, 950, 1100, 1250, 1400],
+						"SlowAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"BasePercentHPDamage": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"DataCooldown": [140, 120, 100, 80, 60, 40, 20],
+						"DataManaCost": [100, 100, 100, 100, 100, 100, 100],
+						"SpitOutRangeAlly": [300, 300, 300, 300, 300, 300, 300],
+						"SpitOutRangeEnemy": [300, 300, 300, 300, 300, 300, 300],
+						"CastTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MinimumAllyDuration": [1, 1, 1, 1, 1, 1, 1],
+						"AllySpeedAmount": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"ShieldDecayPerSecond": [200, 200, 200, 200, 200, 200, 200]
+					},
+					"spellCalculations": {
+						"PercentHPDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BasePercentHPDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.001,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShield",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CDCalc": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "DataCooldown"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "An Acquired Taste",
+					"objectName": "TahmKenchPassive",
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchPassiveAbility/TahmKenchPassive",
+					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchp.png",
+					"tooltip": "Attacks deal <magicDamage>@TotalDamage@ bonus magic damage</magicDamage>. Against champions, they add a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> for @Duration@ seconds, up to @MaxStacks@ times.<br><br>At @MaxStacks@ stacks, <spellName>Tongue Lash</spellName> and <font color='#0bf7de'>Devour</font> become empowered against that champion.",
+					"tooltipExtended": "Attacks deal <magicDamage>@TotalDamage@ bonus magic damage</magicDamage>. Against champions, they add a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> for @Duration@ seconds, up to @MaxStacks@ times.<br><br>At @MaxStacks@ stacks, Tongue Lash and <font color='#0bf7de'>Devour</font> become empowered against that champion.<br><br><rules>%i:scaleAP% Ratio is equal to @APRatioPer100BonusHP*100@% per 100 bonus %i:scaleHealth%</rules>",
+					"dataValues": {
+						"Duration": [5, 5, 5, 5, 5, 5, 5],
+						"MaxStacks": [3, 3, 3, 3, 3, 3, 3],
+						"PerStackDecayTimer": [1, 1, 1, 1, 1, 1, 1],
+						"APRatioPer100BonusHP": [0.013, 0.013, 0.013, 0.013, 0.013, 0.013, 0.013]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"{72c5c2a8}": 1,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 5,
+									"mInitialBonusPerLevel": 5,
+									"mBreakpoints": [
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.04,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mSubpart": {
+										"mPart1": {
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mDataValue": "APRatioPer100BonusHP"
+										},
+										"mPart2": {
+											"mNumber": 0.01
+										}
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_listtype_healing": "Healing",
+		"spell_tahmkenchq_missinghealthhealing": "Percent Missing Health Healing",
+		"spell_listtype_damage": "Damage",
+		"spell_tahmkenchw_levelupcooldownrefund": "Cooldown Refund",
+		"spell_tahmkenche_levelupthickskinratio": "% Damage to Thick Skin",
+		"spell_tahmkenche_levelupthickskinratioenhanced": "% Damage to Thick Skin Enhanced",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_cooldown": "Cooldown",
+		"spell_tahmkenchpassive_name": "An Acquired Taste"
+	}
+}

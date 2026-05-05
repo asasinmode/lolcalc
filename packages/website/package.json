@@ -1,44 +1,35 @@
 {
-	"name": "website",
+	"name": "@lolcalc/website",
 	"type": "module",
+	"version": "0.0.1",
 	"private": true,
-	"packageManager": "pnpm@10.30.3+sha512.c961d1e0a2d8e354ecaa5166b822516668b7f44cb5bd95122d590dd81922f606f5473b6d23ec4a5be05e7fcd18e8488d47d978bbe981872f1145d06e9a740017",
+	"description": "lolcalc.app website",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
+	"exports": {
+		".": "./external.ts"
+	},
 	"scripts": {
-		"build": "nuxt build",
+		"build": "nuxt generate",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
-		"preview": "nuxt preview",
+		"preview": "echo \"run: 'pnpx serve .output/public'\"",
 		"postinstall": "nuxt prepare",
-		"type-check": "nuxt typecheck",
-		"lint": "eslint . --fix --cache"
-	},
-	"peerDependencies": {
-		"typescript": "^5"
+		"typecheck": "nuxt typecheck"
 	},
 	"dependencies": {
-		"@antfu/eslint-config": "^8.1.1",
-		"@iconify-json/logos": "^1.2.11",
-		"@iconify-json/ph": "^1.2.2",
-		"@node-rs/xxhash": "^1.7.6",
-		"@nuxt/eslint": "1.15.2",
-		"@nuxt/kit": "^4.4.2",
-		"@sindresorhus/fnv1a": "^3.1.0",
-		"@unocss/eslint-config": "^66.6.8",
-		"@unocss/nuxt": "^66.6.8",
-		"eslint": "^10.2.0",
-		"eslint-plugin-format": "^2.0.1",
-		"image-size": "^2.0.2",
-		"lightningcss": "^1.32.0",
-		"npm-run-all2": "^8.0.4",
-		"nuxt": "^4.4.2",
-		"typescript": "^6.0.2",
-		"unocss": "^66.6.8",
-		"vue": "^3.5.32",
-		"vue-router": "^5.0.4",
-		"vue-tsc": "^3.2.6"
-	},
-	"overrides": {
-		"vite": "npm:rolldown-vite@latest"
+		"@iconify-json/logos": "catalog:website",
+		"@iconify-json/ph": "catalog:website",
+		"@lolcalc/core": "workspace:",
+		"@lolcalc/data": "workspace:",
+		"@lolcalc/shared": "workspace:",
+		"@nuxt/kit": "catalog:website",
+		"@unocss/nuxt": "catalog:website",
+		"lightningcss": "catalog:website",
+		"nuxt": "catalog:website",
+		"typescript": "catalog:",
+		"unocss": "catalog:website",
+		"vue": "catalog:",
+		"vue-router": "catalog:website"
 	}
 }

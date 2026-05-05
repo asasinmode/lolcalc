@@ -1,0 +1,325 @@
+{
+	"id": "Anivia",
+	"key": "34",
+	"name": "Anivia",
+	"partype": "Mana",
+	"stats": {
+		"hp": 550,
+		"hpperlevel": 92,
+		"mp": 495,
+		"mpperlevel": 45,
+		"movespeed": 325,
+		"armor": 21,
+		"armorperlevel": 4.5,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 600,
+		"hpregen": 5.5,
+		"hpregenperlevel": 0.55,
+		"mpregen": 8,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 51,
+		"attackdamageperlevel": 3.2,
+		"attackspeedperlevel": 1.68,
+		"attackspeed": 0.658,
+		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Flash Frost",
+					"objectName": "FlashFrost",
+					"dataKey": "Characters/Anivia/Spells/FlashFrostAbility/FlashFrost",
+					"image": "assets/characters/anivia/hud/icons2d/anivia_q.png",
+					"tooltip": "Anivia fires a massive chunk of ice, dealing <magicDamage>@TotalPassthroughDamage@ magic damage</magicDamage> and <keywordMajor>Chilling</keywordMajor> enemies for @SlowDuration@ seconds, <status>Slowing</status> them by @Spell.GlacialStorm:SlowAmount@%. At the end of its range, the ice detonates, <status>Stunning</status> enemies for @StunDuration@ seconds and dealing <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>.<br><br>Anivia can <recast>Recast</recast> this ability while the ice flies to detonate it early.",
+					"extendedVariables": [
+						{
+							"name": "PassthroughBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "ExplosionBaseDamage",
+							"nameOverride": "spell_listtype_aniviaflashfrostdetonationdamage"
+						},
+						{
+							"name": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [80, 85, 90, 95, 100, 100],
+					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
+					"dataValues": {
+						"PassthroughBaseDamage": [30, 50, 70, 90, 110, 130, 150],
+						"ExplosionBaseDamage": [25, 60, 95, 130, 165, 200, 235],
+						"StunDuration": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6],
+						"SlowDuration": [3, 3, 3, 3, 3, 3, 3]
+					},
+					"spellCalculations": {
+						"TotalPassthroughDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassthroughBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalExplosionDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ExplosionBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.45,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Crystallize",
+					"objectName": "Crystallize",
+					"dataKey": "Characters/Anivia/Spells/CrystallizeAbility/Crystallize",
+					"image": "assets/characters/anivia/hud/icons2d/anivia_w.png",
+					"tooltip": "Anivia summons a wall of ice @Effect2Amount@ units wide. The wall lasts for @Effect1Amount@ seconds before it melts.",
+					"extendedVariables": [
+						{
+							"name": "Effect2Amount",
+							"nameOverride": "spell_listtype_width"
+						}
+					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
+					"dataValues": {
+						"WallDuration": [5, 5, 5, 5, 5, 5, 5],
+						"WallWidth": [300, 400, 500, 600, 700, 800, 900],
+						"WallChunks": [3, 4, 5, 6, 7, 8, 9],
+						"ChampPushDistance": [120, 120, 120, 120, 120, 120, 120],
+						"NonChampPushDistance": [250, 250, 250, 250, 250, 250, 250]
+					},
+					"effectAmount": {
+						"0": [5, 5, 5, 5, 5, 5, 5],
+						"1": [400, 400, 500, 600, 700, 800, 900]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Frostbite",
+					"objectName": "Frostbite",
+					"dataKey": "Characters/Anivia/Spells/FrostbiteAbility/Frostbite",
+					"image": "assets/characters/anivia/hud/icons2d/anivia_e.png",
+					"tooltip": "Anivia blasts an enemy with a freezing wind, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Against <keywordMajor>Chilled</keywordMajor> enemies, Anivia deals <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
+					"dataValues": {
+						"BaseDamage": [30, 55, 80, 105, 130, 155, 180]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.55,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"EmpoweredDamage": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Glacial Storm",
+					"objectName": "GlacialStorm",
+					"dataKey": "Characters/Anivia/Spells/GlacialStormAbility/GlacialStorm",
+					"image": "assets/characters/anivia/hud/icons2d/anivia_r.png",
+					"tooltip": "<toggle>Toggle:</toggle> Anivia calls forth a driving rain of ice and hail that <status>Slows</status> enemies by @SlowAmount@% and deals <magicDamage>@TotalDamagePerSecond@ magic damage per second</magicDamage>. The storm increases in size over @GrowthTime@ seconds.<br><br>When the storm is fully formed, it <keywordMajor>Chills</keywordMajor>, <status>Slows</status> by @SlowPercentEmpoweredTT@%, and does <magicDamage>@EmpoweredDamagePerSecondTooltipOnly@ magic damage per second</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"name": "DamagePerSecond",
+							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"name": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"name": "SlowPercentEmpoweredTT",
+							"nameOverride": "spell_listtype_aniviachilledslowamount"
+						},
+						{
+							"name": "ManaCostPerSecond",
+							"nameOverride": "spell_listtype_manacostpersecond"
+						}
+					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [4, 4, 3, 2, 2, 2, 2],
+					"dataValues": {
+						"DamagePerSecond": [15, 30, 45, 60, 75, 90, 105],
+						"BonusMultiplier": [300, 300, 300, 300, 300, 300, 300],
+						"ManaCostPerSecond": [25, 35, 45, 55, 65, 75, 85],
+						"TickRate": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SlowAmount": [20, 20, 30, 40, 50, 60, 70],
+						"ChillDuration": [1, 1, 1, 1, 1, 1, 1],
+						"GrowthTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"AdditionalSlowPercentAtMax": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SlowDurationAtMaxMultiplier": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"LeashWarning": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"LeashBreak": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"SlowPercentEmpoweredTT": [15, 30, 45, 60, 75, 90, 105],
+						"MinCooldown": [0, 1, 1, 1, 1, 1, 1]
+					},
+					"spellCalculations": {
+						"TotalDamagePerSecond": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "DamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.125,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"EnhancedSlow": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mSubparts": [
+											{
+												"mDataValue": "AdditionalSlowPercentAtMax"
+											},
+											{
+												"mNumber": 1
+											}
+										]
+									}
+								]
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlowAmount",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"EmpoweredDamagePerSecondTooltipOnly": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "TotalDamagePerSecond"
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Rebirth",
+					"objectName": "RebirthMarker",
+					"dataKey": "Characters/Anivia/Spells/RebirthMarkerAbility/RebirthMarker",
+					"image": "assets/characters/anivia/hud/icons2d/anivia_p.png",
+					"tooltip": "Upon taking fatal damage, Anivia reverts to an egg, healing to full Health and receiving <Level>@BonusResists@</Level> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. If she survives for 6 seconds, she is reborn.",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"Cooldown": [240, 240, 240, 240, 240, 240, 240]
+					},
+					"spellCalculations": {
+						"BonusResists": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": -40,
+									"mBreakpoints": [
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 8,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 15,
+											"mAdditionalBonusAtThisLevel": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"BonusResistsTooltip": {
+							"mMultiplier": {
+								"mNumber": -1
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 1,
+							"mModifiedGameCalculation": "BonusResists"
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_aniviaflashfrostdetonationdamage": "Detonation Damage",
+		"spell_listtype_stunduration": "Stun Duration:",
+		"spell_listtype_width": "Width",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_aniviachilledslowamount": "Chilled Slow Amount",
+		"spell_listtype_manacostpersecond": "Mana Cost Per Second"
+	}
+}

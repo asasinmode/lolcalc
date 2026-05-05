@@ -1,0 +1,308 @@
+{
+	"id": "Yasuo",
+	"key": "157",
+	"name": "Yasuo",
+	"partype": "Flow",
+	"stats": {
+		"hp": 590,
+		"hpperlevel": 110,
+		"mp": 100,
+		"mpperlevel": 0,
+		"movespeed": 345,
+		"armor": 32,
+		"armorperlevel": 4.6,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 6.5,
+		"hpregenperlevel": 0.9,
+		"mpregen": 0,
+		"mpregenperlevel": 0,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 60,
+		"attackdamageperlevel": 2.5,
+		"attackspeedperlevel": 3.5,
+		"attackspeed": 0.697,
+		"attackspeedratio": 0.67
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Steel Tempest",
+					"objectName": "YasuoQ1Wrapper",
+					"dataKey": "Characters/Yasuo/Spells/YasuoQ1WrapperAbility/YasuoQ1Wrapper",
+					"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png",
+					"tooltip": "Yasuo thrusts, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If he hits, he gains a stack for @GatheringStormDuration@ seconds. While he has 2 stacks, his next use of this Ability fires a whirlwind from range, dealing the same damage and <status>Knocking Up</status> for @KnockUpDurationTOOLTIPONLY@ second.<br><br>If used while dashing, this Ability strikes in a circle rather than a stab.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
+					"dataValues": {
+						"BaseDamage": [-5, 20, 45, 70, 95, 120, 145],
+						"StabRange": [450, 450, 450, 450, 450, 450, 450],
+						"TornadoRange": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
+						"Cooldown": [4, 4, 4, 4, 4, 4, 4],
+						"StabWidth": [80, 80, 80, 80, 80, 80, 80],
+						"SpinWidth": [260, 260, 260, 260, 260, 260, 260],
+						"GatheringStormDuration": [6, 6, 6, 6, 6, 6, 6],
+						"KnockUpDurationTOOLTIPONLY": [1, 1, 1, 1, 1, 1, 1],
+						"ADRatio": [1.05, 1.05, 1.05, 1.05, 1.05, 1.05, 1.05]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalDamageCrit": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mStat": 9,
+										"mDataValue": "ADRatio"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Wind Wall",
+					"objectName": "YasuoW",
+					"dataKey": "Characters/Yasuo/Spells/YasuoWAbility/YasuoW",
+					"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png",
+					"tooltip": "Yasuo creates a drifting wall of wind that blocks all enemy projectiles for 4 seconds.",
+					"extendedVariables": [
+						{
+							"name": "Effect5Amount",
+							"nameOverride": "spell_listtype_width"
+						}
+					],
+					"cooldownTime": [27, 25, 23, 21, 19, 17, 15],
+					"dataValues": {
+						"WallLife": [4, 4, 4, 4, 4, 4, 4],
+						"Width": [250, 320, 390, 460, 530, 600, 670],
+						"TravelRange": [450, 450, 450, 450, 450, 450, 450],
+						"BubbleRadius": [300, 300, 300, 300, 300, 300, 300],
+						"Thickness": [100, 100, 100, 100, 100, 100, 100]
+					},
+					"effectAmount": {
+						"0": [10, 15, 20, 25, 30, 35, 40],
+						"1": [30, 60, 90, 120, 150, 180, 210],
+						"2": [0, 3, 6, 9, 12, 15, 18],
+						"3": [250, 300, 350, 400, 450, 500, 550],
+						"4": [250, 320, 390, 460, 530, 600, 670]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Sweeping Blade",
+					"objectName": "YasuoE",
+					"dataKey": "Characters/Yasuo/Spells/YasuoEAbility/YasuoE",
+					"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png",
+					"tooltip": "Yasuo dashes through a target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Each use of this Ability grants <magicDamage>@BonusDamagePerStack@</magicDamage> bonus damage to subsequent uses for @StackDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>This Ability has a @Effect2Amount@ second per-target Cooldown.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Effect2Amount",
+							"nameOverride": "spell_listtype_perunitcooldown"
+						},
+						{
+							"name": "Effect3Amount",
+							"nameOverride": "spell_listtype_cooldown"
+						}
+					],
+					"cooldownTime": [0.5, 0.5, 0.4, 0.3, 0.2, 0.1, 0.1],
+					"dataValues": {
+						"MaxStacks": [4, 4, 4, 4, 4, 4, 4],
+						"StackDuration": [5, 5, 5, 5, 5, 5, 5],
+						"BaseDamage": [55, 70, 85, 100, 115, 130, 145],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"ADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BonusDamagePerStack": {
+							"mMultiplier": {
+								"mNumber": 0.25
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"effectAmount": {
+						"1": [11, 10, 9, 8, 7, 6, 6],
+						"2": [0.5, 0.5, 0.4, 0.3, 0.2, 0.1, 0.1],
+						"5": [750, 750, 750, 750, 750, 750, 750]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Last Breath",
+					"objectName": "YasuoR",
+					"dataKey": "Characters/Yasuo/Spells/YasuoRAbility/YasuoR",
+					"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png",
+					"tooltip": "Yasuo teleports to an <status>Airborne</status> enemy champion, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> and holding all nearby <status>Airborne</status> enemies up for an additional @RKnockupDuration@ second. Yasuo also gains maximum <keywordMajor>Flow</keywordMajor>, but loses all <spellName>{{Spell_YasuoQ1Wrapper_Name}}</spellName> stacks.<br><br>Afterwards, Yasuo's critical strikes ignore <scaleArmor>@RPercentArmorPen@% bonus Armor</scaleArmor> for @RBuffDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "RBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"cooldownTime": [105, 70, 50, 30, 30, 30, 30],
+					"dataValues": {
+						"RBaseDamage": [50, 200, 350, 500, 650, 800, 950],
+						"RPercentArmorPen": [60, 60, 60, 60, 60, 60, 60],
+						"RBuffDuration": [15, 15, 15, 15, 15, 15, 15],
+						"RKnockupDuration": [1, 1, 1, 1, 1, 1, 1],
+						"RRadius": [400, 400, 400, 400, 400, 400, 400],
+						"RCastSearchRadius": [1100, 1100, 1100, 1100, 1100, 1100, 1100]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Way of the Wanderer",
+					"objectName": "YasuoPassive",
+					"dataKey": "Characters/Yasuo/Spells/YasuoPassiveAbility/YasuoPassive",
+					"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png",
+					"tooltip": "{{Spell_YasuoPassive_Tooltip}}",
+					"tooltipExtended": "{{Spell_YasuoPassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
+					"dataValues": {
+						"YasuoCritToAD": [50, 50, 50, 50, 50, 50, 50],
+						"CritChanceMultiplier": [1, 1, 1, 1, 1, 1, 1],
+						"CritDamageMod": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+					},
+					"spellCalculations": {
+						"ShieldValue": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 125,
+									"mEndValue": 600,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"{74ce5438}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 55,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 25,
+											"mAdditionalBonusAtThisLevel": -5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"CurrentCritDamage": {
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_width": "Width",
+		"spell_listtype_perunitcooldown": "Per Unit Cooldown",
+		"spell_listtype_cooldown": "Cooldown",
+		"spell_yasuopassive_tooltip": "<spellPassive>Resolve:</spellPassive> Moving grants <keywordMajor>Flow</keywordMajor>, which is tracked on Yasuo's resource bar. Moving faster grants more <keywordMajor>Flow</keywordMajor>. At maximum <keywordMajor>Flow</keywordMajor>, damage from a champion or monster briefly grants <shield>@ShieldValue@ Shield</shield>.<br><br><spellPassive>Intent:</spellPassive> Yasuo's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YasuoCritToAD*.01@ Bonus Attack Damage</physicalDamage> for every 1% Critical Strike Chance above 100%."
+	}
+}

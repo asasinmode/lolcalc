@@ -1,0 +1,90 @@
+{
+	"version": "16.9.1",
+	"data": {
+		"lolcalcGrievousWounds": {
+			"dataKey": "lolcalcGrievousWounds",
+			"description": "This unit receives reduced healing."
+		},
+		"lolcalcStun": {
+			"dataKey": "lolcalcStun",
+			"description": "This unit is <keyword>stunned</keyword>."
+		},
+		"lolcalcSlowFlat": {
+			"dataKey": "lolcalcSlowFlat",
+			"description": "This unit is <keyword>slowed</keyword> by a flat amount."
+		},
+		"lolcalcSlowPercent": {
+			"dataKey": "lolcalcSlowPercent",
+			"description": "This unit is <keyword>slowed</keyword> by a percentage amount."
+		},
+		"2065ActiveMoveSpeed": {
+			"description": "This unit is moving faster.",
+			"dataKey": "Items/2065/Spells/2065ActiveMoveSpeed"
+		},
+		"3504Buff": {
+			"description": "This unit has increased Attack Speed and magic damage.",
+			"dataKey": "Items/3504/Spells/3504Buff"
+		},
+		"6616Buff": {
+			"description": "This unit has been granted increased Ability Power.",
+			"dataKey": "Items/6616/Spells/6616Buff"
+		},
+		"2524_SecondaryBuff": {
+			"description": "This unit is being granted <attackSpeed>Attack Speed</attackSpeed> by a nearby ally's song.",
+			"dataKey": "Items/2524/Spells/2524_SecondaryBuff"
+		},
+		"lolcalc3109Sacrifice": {
+			"dataKey": "lolcalc3109Sacrifice",
+			"description": "This unit takes reduced damage thanks to a nearby ally's sacrifice."
+		},
+		"Item3110Aura": {
+			"description": "This unit's Attack Speed is reduced.",
+			"dataKey": "{5d05c583}"
+		},
+		"SerpentVenom": {
+			"description": "This unit has reduced shielding.",
+			"dataKey": "{67c6adc5}"
+		},
+		"3116Slow": {
+			"description": "This unit is slowed.",
+			"dataKey": "Items/3116/Spells/3116Slow"
+		},
+		"8020VisualDebuff": {
+			"description": "This unit takes increased magic damage.",
+			"dataKey": "Items/8020/Spells/8020VisualDebuff"
+		},
+		"4628Marker": {
+			"description": "This unit is revealed.",
+			"dataKey": "Items/4628/Spells/4628Marker"
+		},
+		"8010VisualDebuff": {
+			"description": "This unit's Magic Resistance is decreased by a percentage.",
+			"dataKey": "Items/8010/Spells/8010VisualDebuff"
+		},
+		"3071BlackCleaverShred": {
+			"description": "This unit's Armor is reduced by a percentage.",
+			"dataKey": "Items/3071/Spells/3071BlackCleaverShred"
+		},
+		"AmumuPDebuff": {
+			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
+			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"
+		},
+		"Tailwind": {
+			"description": "Moving faster toward Janna.",
+			"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/Tailwind"
+		},
+		"localcNunuPassive": {
+			"dataKey": "localcNunuPassive",
+			"description": "This unit has increased Attack Speed and Move Speed."
+		},
+		"lolcalcOrnnPassive": {
+			"dataKey": "lolcalcOrnnPassive",
+			"description": "This unit's item is upgraded thanks to ally Ornn."
+		},
+		"RellP_Debuff": {
+			"description": "Rell has stolen Armor and Magic Resist from this unit.",
+			"dataKey": "Characters/Rell/Spells/RellPAbility/RellP_Debuff"
+		}
+	},
+	"stringtable": {}
+}

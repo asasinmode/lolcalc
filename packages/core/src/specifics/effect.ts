@@ -1,12 +1,20 @@
-import type { IEffectObjectName } from './meta.ts';
-import type { IGameAbilityId } from './types';
-import itemsData from '../assets/item.json' with { type: 'json' };
+import type { TItems } from '@lolcalc/data';
+import type { IEffectObjectName } from '@lolcalc/shared';
+import type { DamageSource, IDamageSourceEffect } from '../DamageSource.ts';
+import type { IGameAbilityId } from '../GameAbilityId.ts';
+import { ITEMS, useChampion } from '@lolcalc/data';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { clamp } from '@lolcalc/shared/utils.ts';
+import { GameAbilityId } from '../GameAbilityId.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
+<<<<<<< HEAD
 import { GameAbilityId } from './GameAbilityId.ts';
 import { ABILITY_TYPE } from './meta2.ts';
 import { EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
 
 const { data: items } = itemsData;
+=======
+>>>>>>> feat/separate-logic-package
 
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: {
@@ -159,7 +167,7 @@ export const EFFECT_SPECIFICS = {
 	},
 	[EFFECT_OBJECT_NAME.bloodletterVileDecay]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodlettersCurse),
-		maxValue: items[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
+		maxValue: (ITEMS as TItems)[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
 		label: 'Vile Decay stacks',
 		imgText(data: [vDecay: number]) {
 			return data[0];
@@ -238,7 +246,7 @@ export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.rellPBreakMold]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Rell', 'passive', 0),
 		label: 'Break the Mold stacks',
-		maxValue: async () => {
+		maxValue: async (): Promise<number> => {
 			const rell = await useChampion('Rell');
 			return CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: rell } } as DamageSource);
 		},

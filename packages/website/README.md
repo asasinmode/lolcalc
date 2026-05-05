@@ -1,6 +1,10 @@
-# lolcalc.app - League of Legends damage calculator website
+# @lolcalc/website
 
-## setup
+[lolcalc.app](https://lolcalc.app) website
+
+## dev
+
+For more specific instructions, see [contributing.md](contributing.md)
 
 ```bash
 # install dependencies
@@ -189,7 +193,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold
 - [ ] kind of a code documentation where yap about
   - [ ] how to use game texture `textureBgImageAttrs`
-- [ ] CONTRIBUTING.md
 - [ ] configuration "profiles" in local storage (multiple saved configurations), when loading new shared config, put it in new profile? maybe future feature
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`

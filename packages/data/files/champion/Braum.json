@@ -1,0 +1,350 @@
+{
+	"id": "Braum",
+	"key": "201",
+	"name": "Braum",
+	"partype": "Mana",
+	"stats": {
+		"hp": 610,
+		"hpperlevel": 112,
+		"mp": 311,
+		"mpperlevel": 45,
+		"movespeed": 335,
+		"armor": 35,
+		"armorperlevel": 5,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 125,
+		"hpregen": 8.5,
+		"hpregenperlevel": 1,
+		"mpregen": 7,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 55,
+		"attackdamageperlevel": 3.2,
+		"attackspeedperlevel": 3.5,
+		"attackspeed": 0.644,
+		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Winter's Bite",
+					"objectName": "BraumQ",
+					"dataKey": "Characters/Braum/Spells/BraumQAbility/BraumQ",
+					"image": "assets/characters/braum/hud/icons2d/braum_q.png",
+					"tooltip": "Braum propels freezing ice from his shield, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @InitialSlow@% decaying over @SlowDuration@ seconds.<br><br>Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [45, 50, 55, 60, 65, 70],
+					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 5.5],
+					"dataValues": {
+						"BaseDamage": [30, 75, 120, 165, 210, 255, 300],
+						"MaxHPDamageValue": [0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025],
+						"InitialSlow": [70, 70, 70, 70, 70, 70, 70],
+						"MinSlow": [30, 30, 30, 30, 30, 30, 30],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"MissileRange": [1050, 1050, 1050, 1050, 1050, 1050, 1050],
+						"DebuffDuration": [4, 4, 4, 4, 4, 4, 4]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mDataValue": "MaxHPDamageValue",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [30, 75, 120, 165, 210, 255, 300],
+						"1": [70, 70, 70, 70, 70, 70, 70],
+						"2": [30, 30, 30, 30, 30, 30, 30],
+						"3": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02],
+						"4": [2, 2, 2, 2, 2, 2, 2],
+						"5": [1050, 1050, 1050, 1050, 1050, 1050, 1050],
+						"6": [4, 4, 4, 4, 4, 4, 4]
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Stand Behind Me",
+					"objectName": "BraumW",
+					"dataKey": "Characters/Braum/Spells/BraumWAbility/BraumW",
+					"image": "assets/characters/braum/hud/icons2d/braum_w.png",
+					"tooltip": "Braum leaps to an allied champion or minion. On arrival, Braum grants the target <scaleArmor>@GrantedAllyArmor@ Armor</scaleArmor> and <scaleMR>@GrantedAllyMR@ Magic Resist</scaleMR> for @Duration@ seconds. Braum grants himself <scaleArmor>@GrantedBraumArmor@ Armor</scaleArmor> and <scaleMR>@GrantedBraumMR@ Magic Resist</scaleMR> for the same duration.",
+					"extendedVariables": [
+						{
+							"name": "BaseResists",
+							"nameOverride": "spell_braumw_baseresists_levelup"
+						}
+					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [13, 12, 11, 10, 9, 8, 7],
+					"dataValues": {
+						"RangedDamageThreshold": [400, 400, 400, 400, 400, 400, 400],
+						"AllyArmorPercent": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
+						"BraumArmorPercent": [0.36, 0.36, 0.36, 0.36, 0.36, 0.36, 0.36],
+						"BaseResists": [15, 20, 25, 30, 35, 40, 45],
+						"Duration": [3, 3, 3, 3, 3, 3, 3],
+						"BonusDashSpeed": [750, 750, 750, 750, 750, 750, 750]
+					},
+					"spellCalculations": {
+						"GrantedAllyArmor": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseResists",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mDataValue": "AllyArmorPercent",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"GrantedAllyMR": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseResists",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mDataValue": "AllyArmorPercent",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"GrantedBraumArmor": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseResists",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mDataValue": "BraumArmorPercent",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"GrantedBraumMR": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseResists",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mDataValue": "BraumArmorPercent",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [3, 3, 3, 3, 3, 3, 3],
+						"1": [750, 750, 750, 750, 750, 750, 750],
+						"5": [40, 40, 40, 40, 40, 40, 40]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Unbreakable",
+					"objectName": "BraumE",
+					"dataKey": "Characters/Braum/Spells/BraumEAbility/BraumE",
+					"image": "assets/characters/braum/hud/icons2d/braum_e.png",
+					"tooltip": "Braum raises his shield for @ShieldHoldDuration@ seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal @ShieldFacingDRAmount@% reduced damage.<br><br>Braum gains <speed>@MoveSpeedPercent@% Move Speed</speed> while his shield is raised.",
+					"extendedVariables": [
+						{
+							"name": "ShieldHoldDuration",
+							"nameOverride": "spell_listtype_duration"
+						},
+						{
+							"name": "ShieldFacingDRAmount",
+							"nameOverride": "spell_listtype_damagereduction"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [30, 35, 40, 45, 50, 55],
+					"cooldownTime": [18, 16, 14, 12, 10, 8, 8],
+					"dataValues": {
+						"RangedReflect": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"ShieldHoldDuration": [2.75, 3, 3.25, 3.5, 3.75, 4, 4.25],
+						"ShieldFacingDRAmount": [30, 35, 40, 45, 50, 55, 60],
+						"MoveSpeedPercent": [10, 10, 10, 10, 10, 10, 10]
+					},
+					"effectAmount": {
+						"1": [2.75, 3, 3.25, 3.5, 3.75, 4, 4.25],
+						"2": [30, 35, 40, 45, 50, 55, 60],
+						"3": [10, 10, 10, 10, 10, 10, 10]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Glacial Fissure",
+					"objectName": "BraumRWrapper",
+					"dataKey": "Characters/Braum/Spells/BraumRWrapperAbility/BraumRWrapper",
+					"image": "assets/characters/braum/hud/icons2d/braum_r.png",
+					"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "FirstKnockupDuration",
+							"nameOverride": "spell_listtype_knockupduration"
+						},
+						{
+							"name": "MoveSpeedMod",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [130, 130, 115, 100, 85, 85, 85],
+					"dataValues": {
+						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
+						"KnockupDuration": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"FirstKnockupDuration": [0.5, 1, 1.5, 2, 2.5, 3, 3.5],
+						"MoveSpeedMod": [30, 40, 50, 60, 70, 80, 90],
+						"SlowZoneDuration": [4, 4, 4, 4, 4, 4, 4],
+						"SlowDebuffDuration": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MinKnockup": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"MaxKnockup": [0.5, 1, 1.5, 2, 2.5, 3, 3.5],
+						"MaxKnockupRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Concussive Blows",
+					"objectName": "BraumPassive",
+					"dataKey": "Characters/Braum/Spells/BraumPassiveAbility/BraumPassive",
+					"image": "assets/characters/braum/hud/icons2d/braum_passive.png",
+					"tooltip": "Braum's Attacks apply <keywordMajor>Concussive Blows</keywordMajor> for @StackDuration@ seconds. Enemies with <keywordMajor>Concussive Blows</keywordMajor> gain additional stacks from any ally's Attacks.<br><br>At @StackCap@ stacks, the target is <status>Stunned</status> for @StunDuration@ seconds and takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. For the next @StunCD@ seconds they don't receive stacks, but take an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> from Braum's Attacks.",
+					"dataValues": {
+						"StackDuration": [4, 4, 4, 4, 4, 4, 4],
+						"StackCap": [4, 4, 4, 4, 4, 4, 4],
+						"AlreadyStunnedDamageAmp": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"values": [16, 26, 36, 46, 56, 66, 76, 86, 96, 106, 116, 126, 136, 146, 156, 166, 176, 186, 196, 206, 216, 226, 236, 246, 256, 266, 276, 286, 296, 306, 316],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								}
+							]
+						},
+						"OnHitDamage": {
+							"mMultiplier": {
+								"mDataValue": "AlreadyStunnedDamageAmp"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "TotalDamage"
+						},
+						"StunCD": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 8,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -2
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"StunDuration": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1.25,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_braumw_baseresists_levelup": "Base Resists",
+		"spell_listtype_duration": "Duration",
+		"spell_listtype_damagereduction": "Damage Reduction",
+		"spell_listtype_knockupduration": "Knockup Duration",
+		"spell_listtype_slow": "Slow"
+	}
+}

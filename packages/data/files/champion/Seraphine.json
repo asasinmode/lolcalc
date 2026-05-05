@@ -1,0 +1,314 @@
+{
+	"id": "Seraphine",
+	"key": "147",
+	"name": "Seraphine",
+	"partype": "Mana",
+	"stats": {
+		"hp": 570,
+		"hpperlevel": 95,
+		"mp": 360,
+		"mpperlevel": 40,
+		"movespeed": 330,
+		"armor": 26,
+		"armorperlevel": 4.2,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 525,
+		"hpregen": 6.5,
+		"hpregenperlevel": 0.6,
+		"mpregen": 11.5,
+		"mpregenperlevel": 0.95,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 50,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 2,
+		"attackspeed": 0.669,
+		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "High Note",
+					"objectName": "SeraphineQ",
+					"dataKey": "Characters/Seraphine/Spells/SeraphineQAbility/SeraphineQ",
+					"image": "assets/characters/seraphine/hud/icons2d/seraphine_q1.png",
+					"tooltip": "Seraphine projects a pure note, dealing <magicDamage>@ExplosionDamage@ magic damage</magicDamage>, increased against champions and monsters by the target's missing Health percentage up to <magicDamage>@TotalEmpoweredDamage@ damage</magicDamage> below @ExecuteThreshold*100@% Health.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [60, 70, 80, 90, 100, 100],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
+					"dataValues": {
+						"BaseDamage": [35, 60, 85, 110, 135, 160, 185],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"ExecuteThreshold": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"DamageAmp": [75, 75, 75, 75, 75, 75, 75]
+					},
+					"spellCalculations": {
+						"ExplosionDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalEmpoweredDamage": {
+							"mMultiplier": {
+								"mNumber": 1.75
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "ExplosionDamage"
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Surround Sound",
+					"objectName": "SeraphineW",
+					"dataKey": "Characters/Seraphine/Spells/SeraphineWAbility/SeraphineW",
+					"image": "assets/characters/seraphine/hud/icons2d/seraphine_w1.png",
+					"tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>@HasteValueAllies@ Move Speed</speed>, herself <speed>@WMSBonusTotal@ decaying Move Speed</speed> and both <shield>@ShieldValueSeraphine@ Shield</shield> for @ShieldDuration@ seconds.<br><br>If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>@WMissingHPHeal@% missing Health</healing> to them after a @WHealSplitDelay@ second delay.",
+					"extendedVariables": [
+						{
+							"name": "ShieldStrength",
+							"nameOverride": "spell_listtype_shield"
+						},
+						{
+							"name": "WMissingHPBase",
+							"nameOverride": "spell_listtype_healpercentofdamagedealt"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [70, 75, 80, 85, 90, 90],
+					"cooldownTime": [22, 22, 22, 22, 22, 22, 22],
+					"dataValues": {
+						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"ShieldStrength": [40, 60, 80, 100, 120, 140, 160],
+						"ShieldAPRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"WMSBonus": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"WMSBonusAPRatio": [0, 0, 0, 0, 0, 0, 0],
+						"HasteValueForAllies": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"WMissingHPBase": [6, 8, 10, 12, 14, 16, 18],
+						"WHealSplitDelay": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"ShieldAmpForSeraphine": [1, 1, 1, 1, 1, 1, 1]
+					},
+					"spellCalculations": {
+						"TotalShieldStrength": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShieldStrength",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"WMSBonusTotal": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "WMSBonus",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "WMSBonusAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"WMissingHPHeal": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "WMissingHPBase",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						},
+						"HasteValueAllies": {
+							"mMultiplier": {
+								"mDataValue": "HasteValueForAllies"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "WMSBonusTotal"
+						},
+						"ShieldValueSeraphine": {
+							"mMultiplier": {
+								"mDataValue": "ShieldAmpForSeraphine"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "TotalShieldStrength"
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Beat Drop",
+					"objectName": "SeraphineE",
+					"dataKey": "Characters/Seraphine/Spells/SeraphineEAbility/SeraphineE",
+					"image": "assets/characters/seraphine/hud/icons2d/seraphine_e1.png",
+					"tooltip": "Seraphine unleashes a heavy soundwave, dealing <magicDamage>@FinalDamage@ magic damage</magicDamage> to enemies in a line and <status>Slowing</status> them by @SlowValue@% for @SlowDuration@ seconds.<br><br>Enemies that are already <status>Slowed</status> are <status>Rooted</status> instead, and <status>Immobilized</status> enemies are <status>Stunned</status>.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "SlowDuration",
+							"nameOverride": "spell_listtype_slowduration"
+						}
+					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
+					"dataValues": {
+						"BaseDamage": [40, 70, 100, 130, 160, 190, 220],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SlowValue": [99, 99, 99, 99, 99, 99, 99],
+						"SlowDuration": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6],
+						"MinionDamageMod": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+					},
+					"spellCalculations": {
+						"FinalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Encore",
+					"objectName": "SeraphineR",
+					"dataKey": "Characters/Seraphine/Spells/SeraphineRAbility/SeraphineR",
+					"image": "assets/characters/seraphine/hud/icons2d/seraphine_r.png",
+					"tooltip": "Seraphine takes the stage, projecting a captivating force that <status>Charms</status> for @RChannelDuration@ seconds and deals <magicDamage>@R1TotalDamage@ magic damage</magicDamage>.<br><br>Any champions struck (including allies) become part of the performance, extending the range of this Ability. Allied champions gain maximum <keywordMajor>Notes</keywordMajor>.",
+					"extendedVariables": [
+						{
+							"name": "R1BaseDamage",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"name": "RChannelDuration",
+							"nameOverride": "spell_listtype_charmduration"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
+					"dataValues": {
+						"RChannelDuration": [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5],
+						"R1BaseDamage": [100, 150, 200, 250, 300, 350, 400],
+						"R1APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"RRange": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+						"RMinSlow": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, -0.4],
+						"RMaxSlow": [-0.99, -0.99, -0.99, -0.99, -0.99, -0.99, -0.99]
+					},
+					"spellCalculations": {
+						"R1TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "R1BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "R1APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Stage Presence",
+					"objectName": "SeraphinePassive",
+					"dataKey": "Characters/Seraphine/Spells/SeraphinePassiveAbility/SeraphinePassive",
+					"image": "assets/characters/seraphine/hud/icons2d/seraphine_passive.png",
+					"tooltip": "Every third basic Ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> for each nearby ally whenever she casts an Ability. For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.",
+					"tooltipExtended": "Every third basic ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> on each nearby ally whenever she casts an ability (<keywordMajor>Notes</keywordMajor> last @NoteDuration@ seconds and stack up to @MaxNotes@ per ally). For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.<br><br><rules>Notes from allies deal @AllyNoteDamagePercent*100@% damage.</rules>",
+					"dataValues": {
+						"EchoCastDelay": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"AutoAPRatio": [0.075, 0.075, 0.075, 0.075, 0.075, 0.075, 0.075],
+						"MaxNotes": [4, 4, 4, 4, 4, 4, 4],
+						"AllyNoteDamagePercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"NoteDuration": [6, 6, 6, 6, 6, 6, 6],
+						"BonusAARange": [25, 25, 25, 25, 25, 25, 25],
+						"DelayBetweenNoteCasts": [0.075, 0.075, 0.075, 0.075, 0.075, 0.075, 0.075],
+						"NoteRadius": [100, 100, 100, 100, 100, 100, 100],
+						"DelayBetweenNoteCastsDecayRate": [0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95],
+						"MinionDamageMultiplier": [1, 1, 1, 1, 1, 1, 1],
+						"NoteAPRatio": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
+					},
+					"spellCalculations": {
+						"AutoDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 4,
+									"mEndValue": 25,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mDataValue": "NoteAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_initialdamage": "Initial Damage",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_healpercentofdamagedealt": "Percent Healed",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slowduration": "Slow Duration",
+		"spell_listtype_charmduration": "Charm Duration"
+	}
+}

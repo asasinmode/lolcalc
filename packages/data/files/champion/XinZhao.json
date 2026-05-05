@@ -1,0 +1,410 @@
+{
+	"id": "XinZhao",
+	"key": "5",
+	"name": "Xin Zhao",
+	"partype": "Mana",
+	"stats": {
+		"hp": 620,
+		"hpperlevel": 106,
+		"mp": 274,
+		"mpperlevel": 55,
+		"movespeed": 345,
+		"armor": 35,
+		"armorperlevel": 4.4,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 8,
+		"hpregenperlevel": 0.7,
+		"mpregen": 7.25,
+		"mpregenperlevel": 0.45,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 63,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 3.5,
+		"attackspeed": 0.645,
+		"attackspeedratio": 0.645
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Three Talon Strike",
+					"objectName": "XinZhaoQ",
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoQAbility/XinZhaoQ",
+					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkq.png",
+					"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @Effect2Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_bonusdamage"
+						}
+					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
+					"spellCalculations": {
+						"BonusDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [15, 15, 30, 45, 60, 75, 75],
+						"1": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Wind Becomes Lightning",
+					"objectName": "XinZhaoW",
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoWAbility/XinZhaoW",
+					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkw.png",
+					"tooltip": "Xin Zhao slashes, dealing <physicalDamage>@SlashDamage@ physical damage</physicalDamage>, then thrusts, dealing <physicalDamage>@ThrustDamage@</physicalDamage>. Enemies hit by the thrust are <status>Slowed</status> by @Effect6Amount*-100@% for @TotalSlowDuration@ seconds. <br><br>Champions and Large Monsters hit by the thrust are marked as <keywordMajor>Challenged</keywordMajor> for @MarkDuration@ seconds and revealed unless <keywordStealth>Stealthed</keywordStealth>.",
+					"extendedVariables": [
+						{
+							"name": "SlashBaseDamage",
+							"nameOverride": "spell_listtype_xinzhaowslashdamage"
+						},
+						{
+							"name": "ThrustBaseDamage",
+							"nameOverride": "spell_listtype_xinzhaowthrustdamage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [60, 55, 50, 45, 40, 40],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
+					"dataValues": {
+						"SlashBaseDamage": [20, 30, 40, 50, 60, 70, 80],
+						"ThrustBaseDamage": [15, 50, 85, 120, 155, 190, 225],
+						"CritChanceAmp": [0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333],
+						"MarkDuration": [3, 3, 3, 3, 3, 3, 3],
+						"HitNum": [4, 4, 4, 4, 4, 4, 4],
+						"DelayTime": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"BaseSlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
+					},
+					"spellCalculations": {
+						"SlashDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlashBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ThrustDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mStat": 8,
+										"mDataValue": "CritChanceAmp"
+									}
+								]
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "ThrustBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.9,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MinionMod": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 50,
+									"mInitialBonusPerLevel": 3.333,
+									"mBreakpoints": [
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 3.34
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TotalSlowDuration": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseSlowDuration",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.005,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"effectAmount": {
+						"2": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"3": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"5": [-0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5],
+						"7": [140, 140, 140, 140, 140, 140, 140],
+						"8": [200, 200, 200, 200, 200, 200, 200]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Audacious Charge",
+					"objectName": "XinZhaoE",
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoEAbility/XinZhaoE",
+					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworke.png",
+					"tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>@ChargeDamage@ magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by @SlowAmount@% for @SlowDuration@ seconds.<br><br>Xin Zhao grants himself <attackSpeed>@f1@% (%i:scaleAS%%i:scaleAP%) Attack Speed</attackSpeed> for @ASDuration@ seconds.<br><br>This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>.",
+					"tooltipExtended": "Xin Zhao charges an enemy, dealing <magicDamage>@ChargeDamage@ magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by @SlowAmount@% for @SlowDuration@ seconds.<br><br>Xin Zhao grants himself <attackSpeed>@f1@% = (<scaleLevel>@ASMod*100@%</scaleLevel> +1% per @PermanentASToASRatio@% Permanent %i:scaleAS% <scaleAP>+@APToASRatio*10000@% per 100%i:scaleAP%</scaleAP>) Attack Speed</attackSpeed> for @ASDuration@ seconds.<br><br>This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "ASMod",
+							"nameOverride": "spell_listtype_attackspeed"
+						}
+					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [11, 11, 11, 11, 11, 11, 11],
+					"dataValues": {
+						"APRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+						"ASMod": [0.38, 0.38, 0.46, 0.54, 0.62, 0.7, 0.78],
+						"BaseDamage": [25, 50, 75, 100, 125, 150, 175],
+						"ASDuration": [5, 5, 5, 5, 5, 5, 5],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SlowAmount": [30, 30, 30, 30, 30, 30, 30],
+						"APToASRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001],
+						"PermanentASToASRatio": [5, 5, 5, 5, 5, 5, 5],
+						"AoERadius": [250, 250, 250, 250, 250, 250, 250]
+					},
+					"spellCalculations": {
+						"ChargeDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"4": [250, 250, 250, 250, 250, 250, 250]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Crescent Guard",
+					"objectName": "XinZhaoR",
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoRAbility/XinZhaoR",
+					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkr.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> The last champion Xin Zhao damaged with an Attack or <spellName>Audacious Charge</spellName> is <keywordMajor>Challenged</keywordMajor> for @MarkDuration@ seconds.<br><br><spellActive>Active:</spellActive> Xin Zhao unleashes a sweep around him that deals <physicalDamage>@TotalDamage@ plus @PercentCurrentHealthDamage*100@% current Health physical damage</physicalDamage> and <status>Knocks Back</status> all <keywordMajor>non-Challenged</keywordMajor> enemies. <br>  <br>Afterwards, Xin Zhao becomes immune to damage from enemies outside the sweep range for @MissileDefenseBaseDuration@ seconds. ",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
+					"dataValues": {
+						"BaseDamage": [-25, 75, 175, 275, 375, 475, 575],
+						"PercentCurrentHealthDamage": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"MissileDefenseBaseDuration": [4, 4, 4, 4, 4, 4, 4],
+						"MissileDefenseRadius": [450, 450, 450, 450, 450, 450, 450],
+						"MarkDuration": [3, 3, 3, 3, 3, 3, 3]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 1.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Determination",
+					"objectName": "XinZhaoP",
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoPAbility/XinZhaoP",
+					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkp.png",
+					"tooltip": "Every third Attack or strike with <spellName>Wind Becomes Lightning</spellName> deals an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing>.",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.15,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 16,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 21,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 26,
+												"mAdditionalBonusAtThisLevel": 0.15
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"TotalHealing": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mSubpart": {
+										"mLevel1Value": 0.03,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.01
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.01
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								},
+								{
+									"mSubpart": {
+										"mSpellCalculationKey": "HealAPRatio"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"HealHPRatio": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.03,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.01
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.01
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"HealAPRatio": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.5,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.15
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_xinzhaowslashdamage": "Slash Damage",
+		"spell_listtype_xinzhaowthrustdamage": "Thrust Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_attackspeed": "Attack Speed"
+	}
+}

@@ -1,7 +1,31 @@
-import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './types';
+import type { ITextData } from '@lolcalc/data';
+import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey, IStatsCalculationResult } from '@lolcalc/shared';
+import type { IChampionRole } from '@lolcalc/shared/types';
+import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
+import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
+import type { IHypotheticalChampionSpecifics } from './specifics/champion';
+import type { IEffectSpecific } from './specifics/effect';
+import type { IGameAbilityData } from './specifics/index';
+import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
+import type { IReplaceGameVariablesRV } from './types';
+import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
+import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
+import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import { roundVariable } from '@lolcalc/shared/utils.ts';
+import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
+import { calculateChampionStats } from './calculate/championStats.ts';
+import { GameAbilityId } from './GameAbilityId.ts';
+import { gameAbilityImage } from './misc.ts';
+import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
+import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
+import { resolveAbilitySpecific } from './specifics/index.ts';
+import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
+import { runePathsEmpty, runesInvalid } from './specifics/rune.ts';
+import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
+import { replaceStringtableVariables } from './variables/stringtable.ts';
 
-type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
+export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
 interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	champion: UnwrapRef<IDamageSource['listedChampion']>;
@@ -20,78 +44,42 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	appliedEffects: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
 }
 
-export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
+let damageSourcesCount = 0;
 
-export interface IDamageSourceInternalDataBase {
-	_watchHandles?: WatchHandle[];
-}
-
-export interface IDamageSourceInternalDataProvider {
-	/**
-	 * returns the `internalData.value` for specific `DamageSource`'s champion
-	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
-	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
-	 */
-	setupData: (self: DamageSource) => any;
-}
-
-export interface IDamageSourceInternalItemDataProvider {
-	/**
-	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.internalItemData`
-	 * the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
-	 *
-	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
-	 */
-	setupData: (self: DamageSource) => any;
-	/** the properties `setupData` uses, needed for cleanup */
-	internalDataProperties: string[];
-}
-
-export interface IDamageSourceEffect<T extends any[] = any[]> {
-	/** stringified `abilityId` */
-	id: string;
-	abilityId: IEffectAbilityId;
-	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
-	data: T;
-}
-
-export class DamageSource<Id extends IChampionId | undefined = any> {
+export class DamageSource<Id extends IChampionId | undefined = any> implements IDamageSource<Id> {
 	id: string;
 	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
 
 	level: Ref<number>;
-	maxLevel = computed(() => this.roleQuest.value === 'top' ? 20 : 18);
+	maxLevel = computed((): number => this.roleQuest.value === 'top' ? 20 : 18);
 
-	isRanged = computed(() => this.champion.value && (this.stats.value.base.attackRange > 325));
-	stats = computed(() => calculateChampionStats(this));
-	itemDamageCalculationTarget = computed<IItemVariableCalculationTarget>(() => ({
-		isRanged: this.isRanged.value,
-		stats: this.stats.value?.total,
-	}));
+	isRanged = computed((): boolean => Boolean(this.champion.value && (this.stats.value.base.attackRange > 325)));
+	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 
 	runes: Ref<IChampionRunes>;
-	runePathsEmpty = computed(() => runePathsEmpty(this.runes.value));
-	runesInvalid = computed(() => runesInvalid(this.runes.value, this.runePathsEmpty.value));
+	runePathsEmpty = computed((): boolean => runePathsEmpty(this.runes.value));
+	runesInvalid = computed((): boolean => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	currentHealth: Ref<number>;
-	maxHealth = computed<number>(() => Math.round(this.stats.value?.total.hp || 1));
+	maxHealth = computed((): number => Math.round(this.stats.value?.total.hp || 1));
 	currentAbilityResource: Ref<number>;
-	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
-	maxAbilityResource = computed<number>(() => Math.round(this.stats.value?.total.mana ?? 0));
+	// TODO make available under dynamic variables `@AbilityResourceName@`
+	abilityResourceName = computed((): string => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
+	maxAbilityResource = computed((): number => Math.round(this.stats.value?.total.mana ?? 0));
 
 	items: Ref<(IItem | undefined)[]>;
 	itemsUndoSnapshots: Ref<(IItem | undefined)[][]>;
 
 	abilityLevels: Ref<Record<INonPassiveAbilityKey, number>>;
-	maxAbilityLevels = computed(() => Object.fromEntries(Object.keys(this.abilityLevels.value).map(key => [
+	maxAbilityLevels = computed((): Record<INonPassiveAbilityKey, number> => Object.fromEntries(Object.keys(this.abilityLevels.value).map(key => [
 		key as INonPassiveAbilityKey,
 		this.champion.value?.abilities[key as IChampionAbilityKey].maxLevel ?? 5,
 	])) as Record<INonPassiveAbilityKey, number>);
 
 	abilityVariantsIndexes: Ref<Record<IChampionAbilityKey, number>>;
-	maxAbilityVariantsIndexes = computed(() => Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map(key => [
+	maxAbilityVariantsIndexes = computed((): Record<IChampionAbilityKey, number> => Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map(key => [
 		key as IChampionAbilityKey,
 		/* Aphelios' `W` index is used for the offhand weapon tooltip which itself is based on his `E` ability */
 		this.champion.value?.id === 'Aphelios' && key as IChampionAbilityKey === 'w'
@@ -106,7 +94,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 * 1 - more than 1 type repeated, i.e infernal, infernal, cloud, cloud
 	 * 2 - 4 different stacks (only 3 are possible), i.e infernal, cloud, ocean, mountain
 	 */
-	dragonStacksInvalid = computed<0 | 1 | 2>(() => {
+	dragonStacksInvalid = computed((): 0 | 1 | 2 => {
 		const counts: [IDragonName, number][] = [];
 		for (const dragon of this.dragonStacks.value) {
 			if (dragon) {
@@ -124,13 +112,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				? 1
 				: 0;
 	});
-	dragonSoulInvalid = computed(() => this.dragonSoul.value
+	dragonSoulInvalid = computed((): boolean => this.dragonSoul.value
 		? this.dragonStacks.value.filter(Boolean).length < 4 || (this.dragonStacks.value.filter(stack => stack === this.dragonSoul.value).length < 2)
 		: false);
 
 	roleQuest: Ref<IChampionRole | undefined>;
 
-	anythingFilled = computed(() => {
+	anythingFilled = computed((): boolean => {
 		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value || this.computed.effects.value.some(effect => effect.isActive));
 	});
 
@@ -166,11 +154,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		champion?: { id: Id } & IListedChampion;
 	}) = {}) {
 		/* + 1 because it's a nicer color */
-		const counter = useState<number>('damageSourceCounter', () => 1);
-		const hue = (counter.value++ * 137.508) % 360;
+		const hue = (damageSourcesCount++ * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
-		this.id = counter.value.toString();
+		this.id = damageSourcesCount.toString();
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
@@ -365,7 +352,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		});
 	}
 
-	clear() {
+	clear(): void {
 		this.listedChampion.value = undefined;
 		this.champion.value = undefined;
 		this.level.value = 1;
@@ -422,12 +409,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		];
 	}
 
-	stringifiedData = computed<string>(() => {
-		const runes = useRunes();
-		const text = useText();
-
+	stringifiedData = computed((): string => {
 		const primarySlots = Array.from({ length: 4 }, (_, i) => {
-			const slotOptions = runes.paths[this.runes.value.paths.primary].slots[i]!;
+			const slotOptions = RUNES.paths[this.runes.value.paths.primary].slots[i]!;
 			const slotValue = this.runes.value.paths.primarySlots[i];
 			return slotValue ? `${i}${objectKeyIndex(slotValue, slotOptions)}` : '';
 		});
@@ -435,23 +419,23 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			? Array.from({ length: 2 }, (_, i) => {
 					if (this.runes.value.paths.secondarySlots[i]) {
 						const slotIndex = RUNE_SLOT_NAME_TO_NUMBER[this.runes.value.paths.secondarySlots[i]];
-						const slotOptions = runes.paths[this.runes.value.paths.secondary!].slots[slotIndex]!;
+						const slotOptions = RUNES.paths[this.runes.value.paths.secondary!].slots[slotIndex]!;
 						return `${slotIndex}${objectKeyIndex(this.runes.value.paths.secondarySlots[i], slotOptions)}`;
 					}
 
 					return '';
 				})
 			: [];
-		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, runes.shards[key as IRuneShardSlotName]));
+		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, RUNES.shards[key as IRuneShardSlotName]));
 
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
 			.map(([, value]) => value)
 			.join('|');
 
-		const runePathKeys = Object.keys(runes.paths);
-		const roleQuestKeys = Object.keys(text.roleQuests);
-		const dragonKeys = Object.keys(text.dragons);
+		const runePathKeys = Object.keys(RUNES.paths);
+		const roleQuestKeys = Object.keys(TEXT.roleQuests);
+		const dragonKeys = Object.keys(TEXT.dragons);
 
 		const data = [
 			this.listedChampion.value?.key,
@@ -479,14 +463,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	});
 
 	static fromStringifiedData(data: string): DamageSource {
-		const champions = useChampions();
-		const items = useItems();
-		const runes = useRunes();
-		const text = useText();
-
 		const rv = new DamageSource();
 
-		const	[
+		const [
 			championKey,
 			rawLevel,
 			rawItemIds,
@@ -507,7 +486,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (rawRoleQuestIndex?.length) {
 			const parsedIndex = Number.parseInt(rawRoleQuestIndex);
-			const roleQuestKeys = Object.keys(text.roleQuests) as IChampionRole[];
+			const roleQuestKeys = Object.keys(TEXT.roleQuests) as IChampionRole[];
 
 			if (!Number.isNaN(parsedIndex)) {
 				rv.roleQuest.value = roleQuestKeys[parsedIndex];
@@ -536,15 +515,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		const itemIds = rawItemIds?.split('-').filter(Boolean);
 		if (itemIds?.length) {
 			for (let i = 0; i < rv.items.value.length; i++) {
-				const item = items[itemIds[i]!];
-				if (item && itemBuyability(item, rv, items, false) === 1) {
+				const item = ITEMS[itemIds[i]!];
+				if (item && itemBuyability(item, rv, false) === 1) {
 					rv.items.value[i] = item;
 				}
 			}
 			handleMidQuestBoots(rv.items.value, rv.roleQuest.value);
 		}
 
-		const runePaths = Object.keys(runes.paths);
+		const runePaths = Object.keys(RUNES.paths);
 		if (rawPrimaryRunes?.length) {
 			const primaryRunePathIndex = rawPrimaryRunes[0]!;
 			const parsedIndex = Number.parseInt(primaryRunePathIndex);
@@ -555,7 +534,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					if (slot) {
 						const [slotIndex, optionIndex] = slot;
 						if (slotIndex >= 0 && slotIndex <= 3) {
-							const slotOptions = runes.paths[rv.runes.value.paths.primary].slots[slotIndex]!;
+							const slotOptions = RUNES.paths[rv.runes.value.paths.primary].slots[slotIndex]!;
 							const slotOptionKeys = Object.keys(slotOptions);
 							rv.runes.value.paths.primarySlots[slotIndex] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
 						}
@@ -574,7 +553,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				for (let i = 0; i < 2; i++) {
 					if (slots[i]) {
 						const [slotIndex, optionIndex] = slots[i]!;
-						const slotOptions = runes.paths[rv.runes.value.paths.secondary].slots[slotIndex];
+						const slotOptions = RUNES.paths[rv.runes.value.paths.secondary].slots[slotIndex];
 						if (slotOptions) {
 							const slotOptionKeys = Object.keys(slotOptions);
 							rv.runes.value.paths.secondarySlots[i] = slotOptionKeys[optionIndex] as IRuneSlotName | undefined;
@@ -586,7 +565,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (rawShards?.length) {
 			let i = 0;
-			for (const [shardSlotKey, shardSlot] of Object.entries(runes.shards)) {
+			for (const [shardSlotKey, shardSlot] of Object.entries(RUNES.shards)) {
 				const shardOptionIndex = rawShards[i];
 				if (shardOptionIndex !== undefined) {
 					const parsedIndex = Number.parseInt(shardOptionIndex);
@@ -644,7 +623,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 		}
 
-		const dragonKeys = Object.keys(text.dragons) as IDragonName[];
+		const dragonKeys = Object.keys(TEXT.dragons) as IDragonName[];
 		if (rawDragonStacks?.length) {
 			for (let i = 0; i < rv.dragonStacks.value.length; i++) {
 				const parsedIndex = rawDragonStacks[i] ? Number.parseInt(rawDragonStacks[i]!) : undefined;
@@ -689,16 +668,39 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
 			rv.fromStringifiedInternalData = fromStringifiedInternalData;
-			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
+			rv.listedChampion.value = CHAMPIONS[CHAMPION_KEY_TO_ID[championKey]];
 		}
 
 		return rv;
 	}
 
-	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true, slotIndex?: number): undefined {
+	/**
+	 * supposed to be used when `new DamageSource({ champion: CHAMPIONS.TargetDummy })` is expected to have `this.champion.value` resolved to the one passed in the constructor
+	 * @example
+	 * ```ts
+	 * const source1 = new DamageSource({ champion: CHAMPIONS.XinZhao });
+	 * const source2 = await new DamageSource({ champion: CHAMPIONS.Zaahen }).await();
+	 * console.log(source1.champion.value?.name, source2.champion.value?.name); // undefined, Zaahen
+	 * ```
+	 */
+	await<T extends IChampionId | undefined = Id>(championId: T = this.listedChampion.value?.id): Promise<DamageSource<T>> {
+		return new Promise<DamageSource<T>>((resolve) => {
+			if (championId === this.champion.value?.id) {
+				return this;
+			}
+			watch(this.champion, (champion) => {
+				if (champion?.id !== championId) {
+					console.warn('[damageSource] different champion than awaited arrived', { expected: championId, actual: champion?.id });
+				}
+				resolve(this as unknown as DamageSource<T>);
+			}, { once: true });
+		});
+	}
+
+	addItem(item: IItem, consumeComponents = true, slotIndex?: number): undefined {
 		this.itemsUndoSnapshots.value.push([...this.items.value]);
 		if (consumeComponents) {
-			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
+			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value);
 			for (const index of consumedInventoryIndexes) {
 				this.items.value[index] = undefined;
 			}
@@ -738,7 +740,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	moveItem(item: IItem, targetSlotIndex: number, source: DamageSource, fromSlotIndex: number, allItems: Record<string, IItem>) {
+	moveItem(item: IItem, targetSlotIndex: number, source: DamageSource, fromSlotIndex: number): void {
 		let itemAtSlot = this.items.value[targetSlotIndex];
 		const isBotQuest = this.roleQuest.value === 'bot';
 
@@ -747,7 +749,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			targetSlotIndex = 6;
 			this.items.value[6] = item;
 		} else if (isBotQuest && targetSlotIndex === 6) {
-			this.addItem(item, allItems, false);
+			this.addItem(item, false);
 			return;
 		} else {
 			this.items.value[targetSlotIndex] = item;
@@ -762,7 +764,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		itemAtSlot && source.addItem(
 			itemAtSlot,
-			allItems,
 			false,
 			!itemAtSlot.isBoots && fromSlotIndex === 6 ? undefined : fromSlotIndex,
 		);
@@ -775,7 +776,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	async addEffect(abilityId: IEffectAbilityId, data?: IDamageSourceEffect['data']) {
+	async addEffect(abilityId: IEffectAbilityId, data?: IDamageSourceEffect['data']): Promise<void> {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
@@ -784,7 +785,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.appliedEffects.value[existingEffectIndex]!.data = await specific.setupData(data);
 		} else {
 			this.appliedEffects.value.push({
-				id: GameAbilityId.stringify(abilityId),
+				id: GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 				abilityId,
 				data: await specific.setupData(data),
 			});
@@ -792,7 +793,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	removeEffect(abilityId: IEffectAbilityId) {
+	removeEffect(abilityId: IEffectAbilityId): void {
 		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === abilityId.id);
 		if (~index) {
 			this.appliedEffects.value.splice(index, 1);
@@ -800,7 +801,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	shapeshift() {
+	shapeshift(): void {
 		if (this.champion.value?.id && !SHAPESHIFTING_CHAMPION_IDS.includes(this.champion.value.id)) {
 			console.warn('shapeshift called on not a shapeshifter', this.champion.value.id);
 			return;
@@ -813,26 +814,33 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	computed = {
+	computed: {
+		formattedStatTotals: ComputedRef<Record<IChampionStatName, string>>;
+		items: ComputedRef<(IComputedItemDescription | undefined)[]>;
+		itemSpecifics: ComputedRef<({
+			specific: IItemSpecific;
+			abilityId: IItemAbilityId;
+		} | undefined)[]>;
+		masterworkItemSlotIndex: ComputedRef<number>;
+		abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
+		effects: ShallowRef<IComputedAppliedEffect[]>;
+	} = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
-		formattedStatTotals: computed<Record<IChampionStatName, string>>(() => Object.fromEntries(
+		formattedStatTotals: computed((): Record<IChampionStatName, string> => Object.fromEntries(
 			ALL_CHAMPION_STATS.map(statName => [
 				statName,
 				formatChampionStatValue(statName, this.stats.value.total[statName as IChampionStatName]),
 			]),
 		) as unknown as Record<IChampionStatName, string>),
-		items: computed<(IComputedItemDescription | undefined)[]>(() => {
-			const text = useText();
-			const { minorVersion } = usePatchVersion();
-
+		items: computed((): (IComputedItemDescription | undefined)[] => {
 			return this.items.value.map((item): IComputedItemDescription | undefined =>
-				item && computeItemDescription(text, minorVersion, item, this),
+				item && computeItemDescription(item, this),
 			);
 		}),
-		itemSpecifics: computed<({
+		itemSpecifics: computed((): ({
 			specific: IItemSpecific;
 			abilityId: IItemAbilityId;
-		} | undefined)[]>(() => this.items.value.map((item) => {
+		} | undefined)[] => this.items.value.map((item) => {
 			if (item) {
 				const abilityId = GameAbilityId.build(ABILITY_TYPE.item, item.id);
 				const specific = resolveAbilitySpecific<any>(abilityId) as IItemSpecific;
@@ -843,7 +851,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 			return undefined;
 		})),
-		masterworkItemSlotIndex: computed<number>(() => {
+		masterworkItemSlotIndex: computed((): number => {
 			let index = -1;
 
 			if (this.champion.value?.id === 'Ornn') {
@@ -861,13 +869,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 			return index;
 		}),
-		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
-			const { minorVersion } = usePatchVersion();
-
+		abilities: computed((): Record<IChampionAbilityKey, IComputedAbilityDescription[]> => {
 			return Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
 				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
-					minorVersion,
 					this.champion.value!,
 					GameAbilityId.build(ABILITY_TYPE.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
 					this,
@@ -878,8 +883,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	};
 
 	/** like computed but can depend on the computed */
-	coComputed = {
-		itemImage: computed<({ text?: string | number; isActive?: ReturnType<NonNullable<IItemSpecific['imgActive']>> } | undefined)[]>(() => this.computed.itemSpecifics.value.map(computedSpecific => computedSpecific && ({
+	coComputed: {
+		itemImage: ComputedRef<({ text?: string | number; isActive?: ReturnType<NonNullable<IItemSpecific['imgActive']>> } | undefined)[]>;
+	} = {
+		itemImage: computed((): ({ text?: string | number; isActive?: ReturnType<NonNullable<IItemSpecific['imgActive']>> } | undefined)[] => this.computed.itemSpecifics.value.map(computedSpecific => computedSpecific && ({
 			text: computedSpecific.specific?.imgText?.(this),
 			isActive: computedSpecific.specific?.imgActive?.(this.internalItemData.value),
 		}))),
@@ -891,22 +898,15 @@ function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampion
 	const boots = items[bootsIndex]!;
 
 	if (boots?.epicness) {
-		const allItems = useItems();
 		if (roleQuest === 'mid' && boots.into?.length) {
-			items[bootsIndex] = allItems[boots.into[0]!];
+			items[bootsIndex] = ITEMS[boots.into[0]!];
 		} else if (roleQuest !== 'mid' && boots.from?.length === 1) {
-			items[bootsIndex] = allItems[boots.from[0]!];
+			items[bootsIndex] = ITEMS[boots.from[0]!];
 		}
 	}
 }
 
-type IInternalDataSetupChampions = {
-	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
-		? K
-		: never;
-}[keyof typeof CHAMPION_SPECIFICS];
-
-export function formatChampionStatValue(statName: IChampionStatName, value: number) {
+export function formatChampionStatValue(statName: IChampionStatName, value: number): number {
 	const meta = CHAMPION_STAT_META[statName];
 	const multiplier = meta.isPercentage ? 100 : 1;
 	return meta.decimal
@@ -914,19 +914,10 @@ export function formatChampionStatValue(statName: IChampionStatName, value: numb
 		: Math.round(value * multiplier);
 }
 
-export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
-	item: IItem;
-	stats: [iconName: string, value: number, name: string][];
-	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
-	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
-}
-
 export function computeItemDescription(
-	text: ITextData,
-	minorVersion: string,
 	item?: IItem,
 	damageSource?: DamageSource<any>,
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): IComputedItemDescription | undefined {
 	const variables: IComputedItemDescription['variables'] = new Map();
 	const unknownVariables: IComputedItemDescription['unknownVariables'] = [];
@@ -934,9 +925,6 @@ export function computeItemDescription(
 	if (!item) {
 		return;
 	}
-
-	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
-	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 	const {
 		subtitleLeft,
@@ -946,7 +934,7 @@ export function computeItemDescription(
 		extended,
 		footerLeft,
 		keywordDefinitions,
-	} = text.items[item.id] || {};
+	} = TEXT.items[item.id] || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -959,12 +947,12 @@ export function computeItemDescription(
 			] as [string, number, string];
 		});
 
-	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, minorVersion, replaceOptions);
-	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, minorVersion, replaceOptions);
+	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, replaceOptions);
+	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, replaceOptions);
 
-	const replacedExtended = additionalItemText(extended, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
-	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
-	const replacedKeywordDefinitions = additionalItemText(keywordDefinitions, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
+	const replacedExtended = additionalItemText(extended, item, damageSource, variables, unknownVariables, replaceOptions);
+	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, replaceOptions);
+	const replacedKeywordDefinitions = additionalItemText(keywordDefinitions, item, damageSource, variables, unknownVariables, replaceOptions);
 
 	return {
 		item,
@@ -985,17 +973,16 @@ function additionalItemText(
 	value: string | undefined,
 	item: IItem,
 	damageSource: DamageSource | undefined,
-	stringtable: ITextData['stringtable'],
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): string | undefined {
 	const { replaced, variables: newVariables, unknownVariables: newUnknownVariables } = value
-		? replaceGameDescriptionVariables(
+		? replaceGameVariables(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
-				replaceGameDescriptionStringtableVariables(value, stringtable).replaced,
+				replaceStringtableVariables(value, TEXT.stringtable).replaced,
 				'item',
-				[item, damageSource?.itemDamageCalculationTarget.value],
+				[item, damageSource?.isRanged.value, damageSource],
 				replaceOptions,
 			)
 		: {};
@@ -1016,45 +1003,22 @@ function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
 	}
 }
 
-export function allChampionAbilityVariants(champion?: IChampion) {
+export function allChampionAbilityVariants(champion?: IChampion): IChampionAbilityVariant[] {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
 
-export interface IComputedAbilityDescription {
-	gameAbilityId: IChampionAbilityId;
-	name: string;
-	tooltip: string;
-	tooltipExtended: string;
-	tooltipExtendedBelowLine: string;
-	anyUnknownVariables: number;
-	cooldown?: number;
-	cost?: number;
-	partype?: string;
-	extendedVariables?: {
-		name: string;
-		values?: (string | number)[];
-		isNameUnknown?: boolean;
-	}[];
-	variables: IReplaceGameDescriptionVariablesRV['variables'];
-	unknownVariables: IReplaceGameDescriptionVariablesRV['unknownVariables'];
-	variant: IChampionAbilityVariant;
-}
-
 export function computeAbilityDescription(
-	minorVersion: string,
 	champion: IChampion,
 	gameAbilityId: IChampionAbilityId,
 	damageSource?: DamageSource<any>,
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): IComputedAbilityDescription {
-	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
-
 	const abilityLevel = gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
 	const allVariants = allChampionAbilityVariants(champion);
 
-	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
+	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceStringtableVariables(
 		variant.name,
 		champion.stringtable,
 	);
@@ -1069,8 +1033,6 @@ export function computeAbilityDescription(
 		variablesAllValues: tooltipVariablesAV,
 		variables: tooltipVariables,
 	} = abilityVariantText(
-		minorVersion,
-		onHitIcon,
 		allVariants,
 		variant.tooltip || '<unknown>UNKNOWN</unknown>',
 		variant,
@@ -1085,8 +1047,6 @@ export function computeAbilityDescription(
 		variablesAllValues: tooltipExtendedVariablesAV,
 		variables: tooltipExtendedVariables,
 	} = abilityVariantText(
-		minorVersion,
-		onHitIcon,
 		allVariants,
 		variant.tooltipExtended || '',
 		variant,
@@ -1100,8 +1060,6 @@ export function computeAbilityDescription(
 		unknownV: tooltipExtendedBelowLineUnknownV,
 		variables: tooltipExtendedBelowLineVariables,
 	} = abilityVariantText(
-		minorVersion,
-		onHitIcon,
 		allVariants,
 		variant.tooltipExtendedBelowLine || '',
 		variant,
@@ -1173,21 +1131,20 @@ export function computeAbilityDescription(
 }
 
 function abilityVariantText(
-	minorVersion: string,
-	onHitIcon: string,
 	allAbilityVariants: IChampionAbilityVariant[],
 	value: string,
 	variant: IChampionAbilityVariant,
 	level?: number,
+	/** champion's stringtable */
 	stringtable?: Record<string, string>,
 	replaceVariablesWithNames?: boolean,
 ) {
-	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(
+	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(
 		value,
 		stringtable,
 	);
 
-	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameDescriptionVariables(
+	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
 		[variant, level, allAbilityVariants],
@@ -1195,7 +1152,7 @@ function abilityVariantText(
 	);
 
 	return {
-		replaced: replaceGameDescriptionIcons(minorVersion, replaced, onHitIcon),
+		replaced: replaceGameIcons(replaced),
 		unknownSV: unknownStringtableVariables,
 		unknownV: unknownVariables,
 		variablesAllValues,
@@ -1203,8 +1160,8 @@ function abilityVariantText(
 	};
 }
 
-function objectKeyIndex<T extends object>(key: keyof T | undefined, object: T): string | number {
-	return key ? Object.keys(object).indexOf(key as string) : '';
+function objectKeyIndex(key: string | undefined, object: object): string | number {
+	return key ? Object.keys(object).indexOf(key) : '';
 }
 
 function parseStringifiedRunePathSlots(data: string): ([slotIndex: number, slotOptionIndex: number] | undefined)[] {
@@ -1239,26 +1196,22 @@ function formatItemDescriptionText(
 	damageSource: DamageSource | undefined,
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
-	text: ITextData,
-	cooldownIcon: string,
-	onHitIcon: string,
-	minorVersion: string,
-	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
 ): [string, ...string[]][] | undefined {
 	return value?.map(([heading, ...paragraphs]) => {
 		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
-		const { replaced: headingStringtableReplaced } = replaceGameDescriptionStringtableVariables(heading!
+		const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
 			.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-				const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
-				return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+				const { value } = itemVariableValue('Cooldown', item, damageSource?.isRanged.value, damageSource);
+				return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
 			})
 			.replace('(', '<span>(')
-			.replace(')', ')</span>'), text.stringtable);
+			.replace(')', ')</span>'), TEXT.stringtable);
 
-		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
+		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameVariables(
 			headingStringtableReplaced,
 			'item',
-			[item, damageSource?.itemDamageCalculationTarget.value],
+			[item, damageSource?.isRanged.value, damageSource],
 			replaceOptions,
 		);
 
@@ -1270,13 +1223,13 @@ function formatItemDescriptionText(
 		mergeMaps(variables, headingVariables);
 
 		return [
-			replaceGameDescriptionIcons(minorVersion, replacedHeading),
+			replaceGameIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
-				const { replaced: paragraphStringtableReplaced } = replaceGameDescriptionStringtableVariables(paragraph, text.stringtable);
-				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
+				const { replaced: paragraphStringtableReplaced } = replaceStringtableVariables(paragraph, TEXT.stringtable);
+				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameVariables(
 					paragraphStringtableReplaced,
 					'item',
-					[item, damageSource?.itemDamageCalculationTarget.value],
+					[item, damageSource?.isRanged.value, damageSource],
 					replaceOptions,
 				);
 
@@ -1287,39 +1240,11 @@ function formatItemDescriptionText(
 				}
 				mergeMaps(variables, paragraphVariables);
 
-				return replaceGameDescriptionIcons(minorVersion, replacedParagraph, onHitIcon);
+				return replaceGameIcons(replacedParagraph);
 			},
 			),
 		];
 	});
-}
-
-export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
-	const specific = abilityId.type === ABILITY_TYPE.item
-		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
-		: abilityId.type === ABILITY_TYPE.champion
-			? (CHAMPION_SPECIFICS as Partial<Record<IChampionId, IChampionSpecific>>)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
-			: abilityId.type === ABILITY_TYPE.effect
-				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
-				: undefined;
-
-	if (!specific && warnPrefix) {
-		console.warn(`[${warnPrefix}] failed to resolve specific for`, abilityId);
-	}
-
-	return specific;
-}
-
-export interface IComputedAppliedEffect {
-	id: string;
-	abilityId: IEffectAbilityId;
-	imgSrc: string;
-	imgSize: number;
-	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
-	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
-	specific: IEffectSpecific;
-	/** the `maxValue` computed from the effect specific */
-	maxValue?: number;
 }
 
 async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): Promise<IComputedAppliedEffect> {
@@ -1329,8 +1254,8 @@ async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEf
 		abilityId: effect.abilityId,
 		imgSrc: '',
 		imgSize: 0,
-		imgText: computed(() => specific.imgText?.(effect.data)),
-		isActive: computed(() => specific.isActive(effect.data)),
+		imgText: computed((): string | number | undefined => specific.imgText?.(effect.data)),
+		isActive: computed((): number | boolean => specific.isActive(effect.data)),
 		specific,
 		maxValue: typeof specific.maxValue === 'function' ? await specific.maxValue() : specific.maxValue,
 	};
@@ -1346,4 +1271,103 @@ async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEf
 export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean {
 	const item = self.computed.items.value[itemIndex];
 	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
+}
+
+type IInternalDataSetupChampions = {
+	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
+		? K
+		: never;
+}[keyof typeof CHAMPION_SPECIFICS];
+
+export interface IDamageSourceInternalDataBase {
+	_watchHandles?: WatchHandle[];
+}
+
+export interface IDamageSourceInternalDataProvider {
+	/**
+	 * returns the `internalData.value` for specific `DamageSource`'s champion
+	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
+	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
+	 */
+	setupData: (self: DamageSource) => any;
+}
+
+export interface IDamageSourceInternalItemDataProvider {
+	/**
+	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.internalItemData`
+	 * the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
+	 *
+	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
+	 */
+	setupData: (self: DamageSource) => any;
+	/** the properties `setupData` uses, needed for cleanup */
+	internalDataProperties: string[];
+}
+
+export type IProviderGroupInternalItemData = {
+	setupData?: never;
+	internalDataProperties?: never;
+} | IDamageSourceInternalItemDataProvider;
+
+export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
+
+export interface IAbilityImageTextProvider {
+	/**
+	 * text on the item's image, like current heartsteel/mejai stacks
+	 */
+	imgText: (damageSource: DamageSource, dataProperty?: any) => string | number;
+	/** sr only label for the shown image text */
+	imgTextLabel: string;
+}
+
+export type IProviderGroupImageText = {
+	imgText?: never;
+	imgTextLabel?: never;
+} | IAbilityImageTextProvider;
+
+export interface IDamageSourceEffect<T extends any[] = any[]> {
+	/** stringified `abilityId` */
+	id: string;
+	abilityId: IEffectAbilityId;
+	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
+	data: T;
+}
+
+export interface IComputedAbilityDescription {
+	gameAbilityId: IChampionAbilityId;
+	name: string;
+	tooltip: string;
+	tooltipExtended: string;
+	tooltipExtendedBelowLine: string;
+	anyUnknownVariables: number;
+	cooldown?: number;
+	cost?: number;
+	partype?: string;
+	extendedVariables?: {
+		name: string;
+		values?: (string | number)[];
+		isNameUnknown?: boolean;
+	}[];
+	variables: IReplaceGameVariablesRV['variables'];
+	unknownVariables: IReplaceGameVariablesRV['unknownVariables'];
+	variant: IChampionAbilityVariant;
+}
+
+export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
+	item: IItem;
+	stats: [iconName: string, value: number, name: string][];
+	variables: ReturnType<typeof replaceGameVariables>['variables'];
+	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
+}
+
+export interface IComputedAppliedEffect {
+	id: string;
+	abilityId: IEffectAbilityId;
+	imgSrc: string;
+	imgSize: number;
+	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
+	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
+	specific: IEffectSpecific;
+	/** the `maxValue` computed from the effect specific */
+	maxValue?: number;
 }

@@ -1,3 +1,4 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource';
 import LolItemShop from '~/components/Lol/LolItemShop.vue';
 
 let resolve: (() => void) | undefined;

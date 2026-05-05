@@ -1,10 +1,9 @@
-import { STAT_ICON } from './meta.ts';
-import { roundVariable } from './misc.ts';
-
-export interface IItemVariableCalculationTarget {
-	isRanged?: boolean;
-	stats?: IChampionStats;
-}
+import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
+import type { DamageSource } from '../DamageSource.ts';
+import type { IReplaceGameVariablesRV } from '../types';
+import { ICON_ON_HIT_IMG, PATCH_VERSION } from '@lolcalc/data';
+import { STAT_ICON } from '@lolcalc/data/meta.ts';
+import { roundVariable } from '@lolcalc/shared/utils.ts';
 
 type IWithDynamic<T> = T & {
 	dynamicValues?: number | number[];
@@ -21,8 +20,7 @@ interface IVariableValueResult {
 	allValues?: number[];
 }
 
-// TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
-export function itemVariableValue(variable: string, item: IItem, target?: IItemVariableCalculationTarget): IVariableValueResult {
+export function itemVariableValue(variable: string, item: IItem, isRanged?: boolean, damageSource?: DamageSource): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
 
@@ -32,22 +30,24 @@ export function itemVariableValue(variable: string, item: IItem, target?: IItemV
 		value = item.dataValues[variable];
 	} else if (item.stringCalculations?.[variable]) {
 		isMeleeRanged = true;
-		if (target?.isRanged === undefined) {
+		if (damageSource?.isRanged.value === undefined) {
 			value = [
 				itemVariableValue(
 					item.stringCalculations[variable].MeleeResult.slice(1, -1),
 					item,
-					Object.assign(target ? structuredClone(target) : {}, { isRanged: false }),
+					false,
+					damageSource,
 				).value as number | undefined,
 				itemVariableValue(
 					item.stringCalculations[variable].RangedResult.slice(1, -1),
 					item,
-					Object.assign(target ? structuredClone(target) : {}, { isRanged: true }),
+					true,
+					damageSource,
 				).value as number | undefined,
 			];
 		} else {
-			const key: keyof NonNullable<IItem['stringCalculations']>[string] = target.isRanged ? 'RangedResult' : 'MeleeResult';
-			value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, target).value;
+			const key: keyof NonNullable<IItem['stringCalculations']>[string] = damageSource.isRanged.value ? 'RangedResult' : 'MeleeResult';
+			value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, isRanged, damageSource).value;
 		}
 	} else if (item.itemCalculations?.[variable]) {
 		// TODO
@@ -171,7 +171,7 @@ export function championAbilityVariableValue(
 			value = source.find(source => source[0] === variableName || source[0].toLowerCase() === variableName!.toLowerCase())?.[1];
 			if (value !== undefined) {
 				for (const path in dotPath) {
-				// TODO figure this out, some paths seem to have .0 or .-1
+					// TODO figure this out, some paths seem to have .0 or .-1
 					const number = Number(path);
 					if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
 						value = (value as any)[path];
@@ -202,27 +202,20 @@ export interface IGameVariableValueParameters {
 	championAbility: ParametersExceptFirst<typeof championAbilityVariableValue>;
 };
 
-export interface IReplaceGameDescriptionVariablesRV {
-	replaced: string;
-	variables: Map<string, number | [number, number]>;
-	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
-	variablesAllValues: Map<string, (string | number)[]>;
-	unknownVariables: [rawName: string, actualName: string | undefined][];
-}
-
 interface IOptions {
 	replaceWithName: boolean;
 }
 
-export function replaceGameDescriptionVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(
+// TODO rename to replaceGameVariables
+export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
+export function replaceGameVariables(
 	text: string,
 	variableType: IGameVariableType,
 	variableValueFunctionArguments: any[],
 	options: Partial<IOptions> = {},
-): IReplaceGameDescriptionVariablesRV {
+): IReplaceGameVariablesRV {
 	const unknownVariables: [string, string | undefined][] = [];
 	const variables = new Map<string, number | [number, number]>();
 	const variablesAllValues = new Map<string, (string | number)[]>();
@@ -291,7 +284,7 @@ export function replaceGameDescriptionVariables(
 		variable = roundVariable(variable * multiplier);
 		variables.set(variableName, variable);
 
-		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]?.isRanged
+		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]
 			? 'ranged'
 			: 'melee';
 
@@ -305,13 +298,13 @@ export function replaceGameDescriptionVariables(
 
 const statIconNameValues = Object.values(STAT_ICON);
 
-export function replaceGameDescriptionIcons(minorVersion: string, text: string, onHitIcon?: string) {
+export function replaceGameIcons(text: string): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
-			return `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
+			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
 		})
-		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
+		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */

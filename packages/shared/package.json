@@ -1,0 +1,16 @@
+{
+	"name": "@lolcalc/shared",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"description": "internal utils shared between @lolcalc",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"license": "AGPL-3.0-only",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*"
+	},
+	"devDependencies": {
+		"typescript": "catalog:"
+	}
+}

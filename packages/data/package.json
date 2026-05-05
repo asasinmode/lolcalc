@@ -1,0 +1,19 @@
+{
+	"name": "@lolcalc/data",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"description": "data used by lolcalc and the types based on it, dynamically updated by the `scripts/updateData.ts`",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"license": "AGPL-3.0-only",
+	"exports": {
+		".": "./src/index.ts",
+		"./files/*": "./files/*",
+		"./*": "./src/*"
+	},
+	"devDependencies": {
+		"@lolcalc/shared": "workspace:",
+		"typescript": "catalog:",
+		"vue": "catalog:"
+	}
+}

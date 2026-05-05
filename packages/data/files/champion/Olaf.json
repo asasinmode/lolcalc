@@ -1,0 +1,338 @@
+{
+	"id": "Olaf",
+	"key": "2",
+	"name": "Olaf",
+	"partype": "Mana",
+	"stats": {
+		"hp": 645,
+		"hpperlevel": 119,
+		"mp": 316,
+		"mpperlevel": 50,
+		"movespeed": 350,
+		"armor": 35,
+		"armorperlevel": 4.2,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 125,
+		"hpregen": 6.5,
+		"hpregenperlevel": 0.6,
+		"mpregen": 7.5,
+		"mpregenperlevel": 0.6,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 68,
+		"attackdamageperlevel": 4.7,
+		"attackspeedperlevel": 2.7,
+		"attackspeed": 0.72,
+		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Undertow",
+					"objectName": "OlafAxeThrowCast",
+					"dataKey": "Characters/Olaf/Spells/OlafAxeThrowCastAbility/OlafAxeThrowCast",
+					"image": "assets/characters/olaf/hud/icons2d/olafq.png",
+					"tooltip": "Olaf throws an axe, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for up to @MaxSlowDuration@ seconds (based on distance travelled). Champions hit lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @DebuffDuration@ seconds.<br><br>If Olaf picks up the axe, this Ability's Cooldown is reduced to @TooltipCDRefund@ seconds, or fully refunded if @TooltipCDRefund@ seconds has elapsed.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"name": "MonsterDamage",
+							"nameOverride": "spell_listtype_monsterdamage"
+						},
+						{
+							"name": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
+					"dataValues": {
+						"MinimumRange": [425, 425, 425, 425, 425, 425, 425],
+						"SlowAmount": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
+						"ShredAmount": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"DebuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"MinimumCooldown": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"BaseDamage": [20, 70, 120, 170, 220, 270, 320],
+						"MonsterDamage": [5, 20, 35, 50, 65, 80, 95],
+						"MaxSlowDuration": [3, 3, 3, 3, 3, 3, 3],
+						"MinSlowDuration": [1, 1, 1, 1, 1, 1, 1],
+						"MaxSlowDistance": [800, 800, 800, 800, 800, 800, 800],
+						"MinSlowDistance": [400, 400, 400, 400, 400, 400, 400]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TooltipCDRefund": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "MinimumCooldown",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Tough It Out",
+					"objectName": "OlafFrenziedStrikes",
+					"dataKey": "Characters/Olaf/Spells/OlafFrenziedStrikesAbility/OlafFrenziedStrikes",
+					"image": "assets/characters/olaf/hud/icons2d/olafw.png",
+					"tooltip": "Olaf gains <attackSpeed>@Attackspeed*100@% Attack Speed</attackSpeed> for @Duration@ seconds, and <shield>@BaseShield@ plus @ShieldPercMissingHP*100@% missing Health Shield (up to a maximum of @MaxShieldCalc@ Shield below @ThresholdForMax*100@% Health)</shield> for @ShieldDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "Attackspeed",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"name": "BaseShield",
+							"nameOverride": "spell_olaffrenziedstrikes_baseshield"
+						}
+					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
+					"dataValues": {
+						"Attackspeed": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+						"Duration": [5, 5, 5, 5, 5, 5, 5],
+						"ShieldPercMissingHP": [0.175, 0.175, 0.175, 0.175, 0.175, 0.175, 0.175],
+						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"BaseShield": [-20, 10, 40, 70, 100, 130, 160],
+						"ThresholdForMax": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
+					},
+					"spellCalculations": {
+						"ShieldCalc": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShield",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 16,
+									"mSubpart": {
+										"mStat": 12,
+										"mDataValue": "ShieldPercMissingHP"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"MaxShieldCalc": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShield",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mSubpart": {
+										"mPart1": {
+											"mDataValue": "ShieldPercMissingHP"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mNumber": 1
+												},
+												{
+													"mPart1": {
+														"mNumber": -1
+													},
+													"mPart2": {
+														"mDataValue": "ThresholdForMax"
+													}
+												}
+											]
+										}
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Reckless Swing",
+					"objectName": "OlafRecklessStrike",
+					"dataKey": "Characters/Olaf/Spells/OlafRecklessStrikeAbility/OlafRecklessStrike",
+					"image": "assets/characters/olaf/hud/icons2d/olafe.png",
+					"tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>@TotalDamage@ true damage</trueDamage>. If the enemy dies, the cost is refunded.<br><br>Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.",
+					"extendedVariables": [
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
+					"dataValues": {
+						"Cast_Time_Base": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"Cast_Time_Min": [0.175, 0.175, 0.175, 0.175, 0.175, 0.175, 0.175],
+						"Cast_Time_Attack_Speed_Cap": [125, 125, 125, 125, 125, 125, 125]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [25, 70, 115, 160, 205, 250, 250],
+						"1": [40, 40, 40, 40, 40, 40, 40]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Ragnarok",
+					"objectName": "OlafRagnarok",
+					"dataKey": "Characters/Olaf/Spells/OlafRagnarokAbility/OlafRagnarok",
+					"image": "assets/characters/olaf/hud/icons2d/olafr.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Olaf gains <scaleArmor>@Resists@ Armor</scaleArmor> and <scaleMR>@Resists@ Magic Resist</scaleMR>.<br><br><spellActive>Active: </spellActive>Olaf cleanses all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and becomes immune to them for @Duration@ seconds. While active, Olaf gains <scaleAD>@AD@ Attack Damage</scaleAD>. Hitting a champion with an Attack or <spellName>Reckless Swing</spellName> extends the duration by @DurationExtension@ seconds.<br><br>Additionally, Olaf gains <speed>@Haste*100@% Move Speed</speed> towards enemy champions for @HasteDuration@ second.",
+					"extendedVariables": [
+						{
+							"name": "Resists",
+							"nameOverride": "spell_listtype_armorandmagicresist"
+						},
+						{
+							"name": "FlatAD",
+							"nameOverride": "spell_listtype_attackdamagebonus"
+						},
+						{
+							"name": "Haste",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 90, 80, 160, 160, 100],
+					"dataValues": {
+						"Resists": [5, 10, 15, 20, 25, 30, 35],
+						"Duration": [3, 3, 3, 3, 3, 3, 3],
+						"FlatAD": [0, 10, 20, 30, 40, 50, 60],
+						"PercentTotalADAmp": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"HasteDuration": [1, 1, 1, 1, 1, 1, 1],
+						"Haste": [-0.05, 0.2, 0.45, 0.7, 0.95, 1.2, 1.45],
+						"DurationExtension": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
+					},
+					"spellCalculations": {
+						"AD": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "FlatAD",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "PercentTotalADAmp",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Berserker Rage",
+					"objectName": "OlafBerzerkerRage",
+					"dataKey": "Characters/Olaf/Spells/OlafBerzerkerRageAbility/OlafBerzerkerRage",
+					"image": "assets/characters/olaf/hud/icons2d/olafp.png",
+					"tooltip": "{{game_character_passiveDescription_Olaf}}",
+					"tooltipExtended": "{{game_character_passiveDescription_Olaf}}<br><br><rules>Reaches max at 30% Health</rules>",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"AttackSpeedPerMissingHPPerc": [0.009, 0.009, 0.009, 0.009, 0.009, 0.009, 0.009],
+						"MaxStatsThreshold": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
+					},
+					"spellCalculations": {
+						"MaxAttackSpeed": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.5,
+									"mEndValue": 1,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"MaxLifeSteal": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.08,
+									"mEndValue": 0.25,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_monsterdamage": "Monster Damage",
+		"spell_listtype_manacost": "Mana Cost",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_olaffrenziedstrikes_baseshield": "Base Shield",
+		"spell_listtype_armorandmagicresist": "Armor and Magic Resist",
+		"spell_listtype_attackdamagebonus": "Attack Damage",
+		"spell_listtype_movementspeed": "Move Speed",
+		"game_character_passivedescription_olaf": "Olaf gains up to <attackSpeed>@MaxAttackSpeed@ Attack Speed</attackSpeed> and @MaxLifeSteal@ Life Steal, based on his missing Health."
+	}
+}

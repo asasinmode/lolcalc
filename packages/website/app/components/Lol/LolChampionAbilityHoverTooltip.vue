@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import type { IComputedAbilityDescription } from '@lolcalc/core/DamageSource';
+import type { IChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityHoverTooltipProps } from '~/utils/types';
+import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
+import { CHAMPION_IMAGES, PATCH_VERSION, useChampion } from '@lolcalc/data';
 
 const props = withDefaults(
 	defineProps<IChampionAbilityHoverTooltipProps>(),
@@ -8,8 +12,8 @@ const props = withDefaults(
 	},
 );
 
-const { minorVersion } = usePatchVersion();
-const { abilityImage, abilityImageSize } = useChampionImages();
+const { vMinor } = PATCH_VERSION;
+const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const champion = shallowRef<IChampion>();
@@ -32,7 +36,6 @@ watch(() => props.gameAbilityId, async (abilityId) => {
 const computedDescription = computed<IComputedAbilityDescription | undefined>(() =>
 	props.precomputedDescription || (champion.value && props.gameAbilityId
 		? computeAbilityDescription(
-				minorVersion,
 				champion.value!,
 				props.gameAbilityId,
 				undefined,
@@ -70,7 +73,7 @@ defineExpose({ el });
 			<template v-if="abilityKey !== 'passive'">
 				{{ computedDescription?.cooldown ? `${computedDescription.cooldown}s` : 'unknown' }}
 				<img
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`"
+					:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`"
 					width="20"
 					height="20"
 					aria-hidden="true"

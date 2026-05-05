@@ -1,0 +1,384 @@
+{
+	"id": "Jhin",
+	"key": "202",
+	"name": "Jhin",
+	"partype": "Mana",
+	"stats": {
+		"hp": 655,
+		"hpperlevel": 107,
+		"mp": 300,
+		"mpperlevel": 50,
+		"movespeed": 330,
+		"armor": 24,
+		"armorperlevel": 4.7,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 550,
+		"hpregen": 3.75,
+		"hpregenperlevel": 0.55,
+		"mpregen": 6,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 61,
+		"attackdamageperlevel": 4.4,
+		"attackspeedperlevel": 0,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Dancing Grenade",
+					"objectName": "JhinQ",
+					"dataKey": "Characters/Jhin/Spells/JhinQAbility/JhinQ",
+					"image": "assets/characters/jhin/hud/icons2d/jhin_q.png",
+					"tooltip": "Jhin launches a cartridge that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> before bouncing to a nearby enemy that has not been hit yet.<br><br>The cartridge can hit a maximum of @TooltipMaxTargetsHit@ times. Enemies that die shortly after being hit increase the damage of subsequent hits by @PercentAmpOnKill*100@%.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "ADRatio",
+							"nameOverride": "spell_listtype_totaladratio"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 5],
+					"dataValues": {
+						"BaseDamage": [19, 44, 69, 94, 119, 144, 169],
+						"ADRatio": [0.365, 0.44, 0.515, 0.59, 0.665, 0.74, 0.815],
+						"PercentAmpOnKill": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"NumberOfBounces": [3, 3, 3, 3, 3, 3, 3],
+						"BounceRange": [450, 450, 450, 450, 450, 450, 450]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TooltipMaxTargetsHit": {
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mNumber": 3
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Deadly Flourish",
+					"objectName": "JhinW",
+					"dataKey": "Characters/Jhin/Spells/JhinWAbility/JhinW",
+					"image": "assets/characters/jhin/hud/icons2d/jhin_w.png",
+					"tooltip": "Jhin fires a long range shot dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first champion hit and other enemies along the way.<br><br>If this skill strikes a champion that has been damaged by an allied champion within the last @SpottingDuration@ seconds, it will <status>Root</status> them for @RootDuration@ seconds and grant Jhin <spellName>Whisper</spellName>'s Move Speed.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "RootDuration",
+							"nameOverride": "spell_listtype_rootduration"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"dataValues": {
+						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"RootDuration": [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5],
+						"MinionMod": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"SpottingDuration": [4, 4, 4, 4, 4, 4, 4]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Captive Audience",
+					"objectName": "JhinE",
+					"dataKey": "Characters/Jhin/Spells/JhinEAbility/JhinE",
+					"image": "assets/characters/jhin/hud/icons2d/jhin_e.png",
+					"tooltip": "<passive>Passive:</passive> Champions Jhin kills will create and detonate a Lotus Trap at their location.<br><br><active>Active:</active> Jhin places an invisible Lotus Trap for @TrapDuration@ minutes that creates a zone that <status>Slows</status> by @TrapSlowAmount*100@% when stepped on by an enemy. After @TrapDetonationTime@ seconds, the trap detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This ability has 2 charges (@AmmoRechargeRateTooltip@ second refresh).",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "AmmoRechargeTime"
+						}
+					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
+					"dataValues": {
+						"AmmoRechargeRateBaseTooltip": [26.5, 24, 21.5, 19, 16.5, 14, 11.5],
+						"TrapSlowAmount": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"ReducedDamagePercent": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"BaseDamage": [-40, 20, 80, 140, 200, 260, 320],
+						"TrapDuration": [3, 3, 3, 3, 3, 3, 3],
+						"TrapAoERadius": [260, 260, 260, 260, 260, 260, 260],
+						"TrapTriggerRadius": [160, 160, 160, 160, 160, 160, 160],
+						"TrapDetonationTime": [2, 2, 2, 2, 2, 2, 2],
+						"TrapRevealDuration": [4, 4, 4, 4, 4, 4, 4],
+						"TrapArmTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 1.2,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"AmmoRechargeRateTooltip": {
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mDataValue": "AmmoRechargeRateBaseTooltip"
+										},
+										{
+											"mPart1": {
+												"mStat": 10,
+												"mCoefficient": 1
+											},
+											"mPart2": {
+												"mDataValue": "AmmoRechargeRateBaseTooltip"
+											}
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Curtain Call",
+					"objectName": "JhinR",
+					"dataKey": "Characters/Jhin/Spells/JhinRAbility/JhinR",
+					"image": "assets/characters/jhin/hud/icons2d/jhin_r.png",
+					"tooltip": "Jhin sets up and channels, enabling him to fire 4 super shots, each dealing between <physicalDamage>@DamageCalc@</physicalDamage> and <physicalDamage>@MaxIncreaseCalc@ physical damage</physicalDamage> to the first champion hit based on their percentage missing health and <status>Slowing</status> them by @SlowPercent*100@% for @SlowDuration@ seconds. The fourth shot critically strikes for @FourthShotMultiplier*100@% damage.",
+					"extendedVariables": [
+						{
+							"name": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 105, 90, 0, 0, 0],
+					"dataValues": {
+						"Damage": [0, 64, 128, 192, 256, 320, 384],
+						"FourthShotMultiplier": [2, 2, 2, 2, 2, 2, 2],
+						"SlowPercent": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"PercentMissingAmp": [3, 3, 3, 3, 3, 3, 3],
+						"MInimumDelayBetweenShots": [1, 1, 1, 1, 1, 1, 1],
+						"ADRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
+					},
+					"spellCalculations": {
+						"DamageCalc": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxIncreaseCalc": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mDataValue": "PercentMissingAmp"
+									}
+								]
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "DamageCalc"
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Whisper",
+					"objectName": "JhinPassive",
+					"dataKey": "Characters/Jhin/Spells/JhinPassiveAbility/JhinPassive",
+					"image": "assets/characters/jhin/hud/icons2d/jhin_p.png",
+					"tooltip": "{{Spell_JhinPassive_Tooltip}}",
+					"tooltipExtended": "{{Spell_JhinPassive_Tooltip}}<br><rules>Attack Damage scales with Critical Strike Chance and bonus Attack Speed.<br>Move Speed scales with bonus Attack Speed.<br>Missing health damage is capped at 800 against monsters.</rules>",
+					"dataValues": {
+						"MaxAmmo": [4, 4, 4, 4, 4, 4, 4],
+						"ReloadTime": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"HasteDuration": [2, 2, 2, 2, 2, 2, 2],
+						"OutOfCombatTimeBeforeReload": [8, 8, 8, 8, 8, 8, 8],
+						"FourthShotDamageMult": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"CritReductionPercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"BaseAttackSpeed": [0.625, 0.625, 0.625, 0.625, 0.625, 0.625, 0.625],
+						"PercentAttackSpeedPerLevel": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
+						"CritMoveSpeedPercentASRatio": [0.44, 0.44, 0.44, 0.44, 0.44, 0.44, 0.44]
+					},
+					"spellCalculations": {
+						"FourthShotExecutePercent": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.15,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"TotalADPercent": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.04,
+									"mInitialBonusPerLevel": 0.01,
+									"mBreakpoints": [
+										{
+											"mLevel": 10,
+											"mBonusPerLevelAtAndAfter": 0.02
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 0.04
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 8,
+									"mCoefficient": 0.35,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"CritMoveSpeedPercent": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mNumber": 0.14,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mDataValue": "CritMoveSpeedPercentASRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_totaladratio": "Total AD Ratio",
+		"spell_listtype_rootduration": "Root Duration",
+		"spell_jhinpassive_tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.</li>"
+	}
+}

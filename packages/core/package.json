@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "lolcalc",
   "version": "1.0.0",
   "description": "",
@@ -10,4 +11,23 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs"
+=======
+	"name": "@lolcalc/core",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"description": "core, game related functionality for lolcalc",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"license": "AGPL-3.0-only",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*"
+	},
+	"devDependencies": {
+		"@lolcalc/data": "workspace:",
+		"@lolcalc/shared": "workspace:",
+		"typescript": "catalog:",
+		"vue": "catalog:"
+	}
+>>>>>>> feat/separate-logic-package
 }

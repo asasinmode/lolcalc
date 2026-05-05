@@ -1,8 +1,12 @@
+import type { TItems } from '@lolcalc/data';
 import type { ISpecificComponents } from '~/utils/types';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { ITEMS } from '@lolcalc/data';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { ItemExtraTearItem } from '#components';
-import itemsData from '~/assets/item.json';
 
-const { data: items } = itemsData;
+const items = ITEMS as TItems;
 
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.hubris]: {

@@ -1,0 +1,390 @@
+{
+	"id": "Lillia",
+	"key": "876",
+	"name": "Lillia",
+	"partype": "Mana",
+	"stats": {
+		"hp": 605,
+		"hpperlevel": 105,
+		"mp": 410,
+		"mpperlevel": 50,
+		"movespeed": 330,
+		"armor": 22,
+		"armorperlevel": 4.5,
+		"spellblock": 32,
+		"spellblockperlevel": 1.55,
+		"attackrange": 325,
+		"hpregen": 2.5,
+		"hpregenperlevel": 0.55,
+		"mpregen": 11.5,
+		"mpregenperlevel": 0.95,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 61,
+		"attackdamageperlevel": 3.1,
+		"attackspeedperlevel": 2.7,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Blooming Blows",
+					"objectName": "LilliaQ",
+					"dataKey": "Characters/Lillia/Spells/LilliaQAbility/LilliaQ",
+					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_q.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge.",
+					"extendedVariables": [
+						{
+							"name": "PranceBonusPerStack",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"name": "FlatDamageBase",
+							"nameOverride": "spell_lilliaq_basemagicdamage"
+						},
+						{
+							"name": "FlatDamageTrue",
+							"nameOverride": "spell_lilliaq_basetruedamage"
+						}
+					],
+					"mana": [65, 65, 65, 65, 65, 65],
+					"cooldownTime": [4, 6, 5.5, 5, 4.5, 4, 4],
+					"dataValues": {
+						"MinimumRadius": [225, 225, 225, 225, 225, 225, 225],
+						"MaximumRadius": [485, 485, 485, 485, 485, 485, 485],
+						"FlatDamageBase": [25, 35, 45, 55, 65, 75, 85],
+						"FlatDamageTrue": [25, 35, 45, 55, 65, 75, 85],
+						"MinionDamageMod": [1, 1, 1, 1, 1, 1, 1],
+						"PranceDuration": [6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5],
+						"PranceMaxStacks": [4, 4, 4, 4, 4, 4, 4],
+						"PranceFalloffTime": [1, 1, 1, 1, 1, 1, 1],
+						"PranceBonusPerStack": [0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08],
+						"APRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "FlatDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PranceSpeed": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "PranceBonusPerStack",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"BonusTrueDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "FlatDamageTrue",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Watch Out! Eep!",
+					"objectName": "LilliaW",
+					"dataKey": "Characters/Lillia/Spells/LilliaWAbility/LilliaW",
+					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_w.png",
+					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"name": "FlatDamageBase",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [18, 14, 13, 12, 11, 10, 9],
+					"dataValues": {
+						"FlatDamageBase": [60, 80, 100, 120, 140, 160, 180],
+						"MaximumDistance": [700, 700, 700, 700, 700, 700, 700],
+						"MaxSpeed": [500, 500, 500, 500, 500, 500, 500],
+						"MinimumDistance": [500, 500, 500, 500, 500, 500, 500],
+						"LandingOffset": [150, 150, 150, 150, 150, 150, 150],
+						"MaximumCastTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"MinimumCastTime": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"MinimumRadius": [250, 250, 250, 250, 250, 250, 250],
+						"SweetSpotRadius": [65, 65, 65, 65, 65, 65, 65],
+						"SweetSpotBonus": [3, 3, 3, 3, 3, 3, 3],
+						"AnimRangeCutoff": [300, 300, 300, 300, 300, 300, 300],
+						"MinionDamageMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"FlatDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "FlatDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.35,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"FlatDamageSweetSpot": {
+							"mMultiplier": {
+								"mDataValue": "SweetSpotBonus"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "FlatDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.35,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Swirlseed",
+					"objectName": "LilliaE",
+					"dataKey": "Characters/Lillia/Spells/LilliaEAbility/LilliaE",
+					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_e.png",
+					"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain.",
+					"extendedVariables": [
+						{
+							"name": "ImpactDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"dataValues": {
+						"SlowAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"SlowDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BounceRange": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
+						"ImpactDamage": [35, 60, 85, 110, 135, 160, 185],
+						"ImpactRangeCheck": [115, 115, 115, 115, 115, 115, 115],
+						"HitboxWidth": [350, 350, 350, 350, 350, 350, 350],
+						"HitboxLength": [200, 200, 200, 200, 200, 200, 200],
+						"AnimCutoffRange": [350, 350, 350, 350, 350, 350, 350],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"ImpactDamageTotal": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "ImpactDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Lilting Lullaby",
+					"objectName": "LilliaR",
+					"dataKey": "Characters/Lillia/Spells/LilliaRAbility/LilliaR",
+					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_r.png",
+					"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"name": "BreakDamageBase",
+							"nameOverride": "spell_lilliar_breakdamage_level"
+						}
+					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [150, 150, 130, 110, 110, 110, 110],
+					"dataValues": {
+						"DrowsyDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"SleepDuration": [2, 2, 2, 2, 2, 2, 2],
+						"ImpactDamage": [25, 25, 25, 25, 25, 25, 25],
+						"BreakDamageBase": [50, 100, 150, 200, 250, 300, 350],
+						"InitialSlow": [-0.1, -0.1, -0.1, -0.1, -0.1, -0.1, -0.1]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BreakDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Dream-Laden Bough",
+					"objectName": "LilliaP",
+					"dataKey": "Characters/Lillia/Spells/LilliaPAbility/LilliaP",
+					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_passive.png",
+					"tooltip": "{{Spell_LilliaP_Tooltip}}",
+					"tooltipExtended": "{{Spell_LilliaP_Tooltip}}<br><br><rules>Dream Dust deals a max of @MonsterDamageCap@ damage over the duration to jungle monsters.</rules><br><rules>Dream Dust heal is @MultiHealMod*100@% effective for each source beyond the first.</rules><br><rules>Dream Dust can only heal from one jungle monster at a time.</rules>",
+					"dataValues": {
+						"Duration": [3, 3, 3, 3, 3, 3, 3],
+						"DotDamagePercent": [5, 5, 5, 5, 5, 5, 5],
+						"DotTicks": [6, 6, 6, 6, 6, 6, 6],
+						"MonsterHealingPercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"ChampionHealingPercent": [1, 1, 1, 1, 1, 1, 1],
+						"LargeMonsterHealMod": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"SmallMonsterHealMod": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MultiHealMod": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
+					},
+					"spellCalculations": {
+						"DotPercentTotal": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "DotDamagePercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.013,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": -1
+						},
+						"MonsterDamageCap": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mStartValue": 70,
+									"mEndValue": 180,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"{b5d0316f}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 6.5,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.025,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{395ffd44}": {
+							"mMultiplier": {
+								"mDataValue": "SmallMonsterHealMod"
+							},
+							"mModifiedGameCalculation": "{b5d0316f}"
+						},
+						"ChampionHeal": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 1,
+									"mEndValue": 15,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ChampionHealTT": {
+							"mMultiplier": {
+								"mDataValue": "DotTicks"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "ChampionHeal"
+						},
+						"MonsterHealTT": {
+							"mMultiplier": {
+								"mDataValue": "DotTicks"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{b5d0316f}"
+						},
+						"{7969ffc2}": {
+							"mMultiplier": {
+								"mPart1": {
+									"mDataValue": "DotTicks"
+								},
+								"mPart2": {
+									"mDataValue": "SmallMonsterHealMod"
+								}
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{b5d0316f}"
+						},
+						"DotPercentTooltip": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "DotPercentTotal"
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_lilliaq_basemagicdamage": "Magic Damage",
+		"spell_lilliaq_basetruedamage": "True Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_lilliar_breakdamage_level": "Break Damage",
+		"spell_lilliap_tooltip": "Lillia's Abilities apply <keywordMajor>Dream Dust</keywordMajor>, dealing <magicDamage>@DotPercentTooltip@ max Health magic damage</magicDamage> over @Duration@ seconds. Lillia restores <healing>@MonsterHealTT@ Health</healing> over the duration against large jungle monsters, and restores <healing>@ChampionHealTT@ Health</healing> against champions."
+	}
+}

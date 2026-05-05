@@ -1,4 +1,9 @@
+import type { IChampionId } from '@lolcalc/data/types';
 import type { ISpecificComponents } from '~/utils/types';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 import { ChampionExtrasAphelios, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {

@@ -1,0 +1,291 @@
+{
+	"id": "Leona",
+	"key": "89",
+	"name": "Leona",
+	"partype": "Mana",
+	"stats": {
+		"hp": 646,
+		"hpperlevel": 101,
+		"mp": 302,
+		"mpperlevel": 40,
+		"movespeed": 335,
+		"armor": 43,
+		"armorperlevel": 4.8,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 125,
+		"hpregen": 8.5,
+		"hpregenperlevel": 0.85,
+		"mpregen": 6,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 60,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 2.9,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Shield of Daybreak",
+					"objectName": "LeonaShieldOfDaybreak",
+					"dataKey": "Characters/Leona/Spells/LeonaShieldOfDaybreakAbility/LeonaShieldOfDaybreak",
+					"image": "assets/characters/leona/hud/icons2d/leonaq.png",
+					"tooltip": "Leona's next Attack <status>Stuns</status> for @Effect1Amount@ seconds and deals an additional <magicDamage>@TotalDamageTooltip@</magicDamage> magic damage.",
+					"extendedVariables": [
+						{
+							"name": "Effect2Amount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [30, 35, 40, 45, 50, 55],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
+					"spellCalculations": {
+						"TotalDamageTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 2,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [1, 1, 1, 1, 1, 1, 1],
+						"1": [10, 10, 35, 60, 85, 110, 135]
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Eclipse",
+					"objectName": "LeonaSolarBarrier",
+					"dataKey": "Characters/Leona/Spells/LeonaSolarBarrierAbility/LeonaSolarBarrier",
+					"image": "assets/characters/leona/hud/icons2d/leonaw.png",
+					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @Effect3Amount@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Effect4Amount",
+							"nameOverride": "spell_listtype_armorandmagicresist"
+						},
+						{
+							"name": "FlatDamageReduction",
+							"nameOverride": "spell_listtype_damagereduction"
+						}
+					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 9],
+					"dataValues": {
+						"FlatDamageReduction": [4, 8, 12, 16, 20, 24, 28],
+						"FlatDamageReductionMax": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+					},
+					"spellCalculations": {
+						"BonusArmorTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 4,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"BonusMRTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 4,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalDamageTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [45, 55, 85, 115, 145, 175, 175],
+						"1": [20, 20, 27.5, 35, 42.5, 50, 50],
+						"2": [3, 3, 3, 3, 3, 3, 3],
+						"3": [20, 20, 27.5, 35, 42.5, 50, 50]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Zenith Blade",
+					"objectName": "LeonaZenithBlade",
+					"dataKey": "Characters/Leona/Spells/LeonaZenithBladeAbility/LeonaZenithBlade",
+					"image": "assets/characters/leona/hud/icons2d/leonae.png",
+					"tooltip": "Leona thrusts with a sword of light, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>. The last champion struck will be <status>Rooted</status> for @Effect2Amount@ seconds and Leona will dash to them.",
+					"extendedVariables": [
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [13, 12, 10.5, 9, 7.5, 6, 6],
+					"spellCalculations": {
+						"TotalDamageTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [10, 50, 90, 130, 170, 210, 250],
+						"1": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Solar Flare",
+					"objectName": "LeonaSolarFlare",
+					"dataKey": "Characters/Leona/Spells/LeonaSolarFlareAbility/LeonaSolarFlare",
+					"image": "assets/characters/leona/hud/icons2d/leonar.png",
+					"tooltip": "Leona calls down a radiant beam of solar energy dealing <magicDamage>@ExplosionCalculatedDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowPercent@% for @CCDuration@ seconds. Enemies in the center of the flare are <status>Stunned</status> instead of <status>Slowed</status>.",
+					"extendedVariables": [
+						{
+							"name": "ExplosionBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [90, 90, 75, 60, 90, 90, 150],
+					"dataValues": {
+						"OnHitBaseDamage": [20, 30, 40, 50, 60, 70, 80],
+						"OnHitStacks": [2, 3, 4, 5, 6, 7, 8],
+						"OnHitDuration": [5, 5, 5, 5, 5, 5, 5],
+						"AttackRangeIncrease": [100, 100, 100, 100, 100, 100, 100],
+						"OnHitAPRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"ExplosionBaseDamage": [75, 150, 225, 300, 375, 450, 525],
+						"ExplosionAPRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"SlowPercent": [80, 80, 80, 80, 80, 80, 80],
+						"CCDuration": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75]
+					},
+					"spellCalculations": {
+						"{f4c90e5c}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "OnHitBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "OnHitAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ExplosionCalculatedDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "ExplosionBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ExplosionAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"3": [0, 100, 100, 100, 100, 100, 100],
+						"4": [0, 3, 3, 3, 3, 3, 3]
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Sunlight",
+					"objectName": "LeonaSunlightPassive",
+					"dataKey": "Characters/Leona/Spells/LeonaSunlightPassiveAbility/LeonaSunlightPassive",
+					"image": "assets/characters/leona/hud/icons2d/leonap.png",
+					"tooltip": "Leona's abilities mark enemies for @MarkDuration@ seconds. Other allied champions consume the mark when they damage the marked enemy, dealing an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
+					"dataValues": {
+						"MarkDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"values": [25, 32, 39, 46, 53, 60, 67, 74, 81, 88, 95, 102, 109, 116, 123, 130, 137, 144, 151, 158, 165, 172, 179, 186, 193, 200, 207, 214, 221, 228, 235],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_armorandmagicresist": "Armor and Magic Resist",
+		"spell_listtype_damagereduction": "Damage Reduction"
+	}
+}

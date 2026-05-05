@@ -1,0 +1,412 @@
+{
+	"id": "Jax",
+	"key": "24",
+	"name": "Jax",
+	"partype": "Mana",
+	"stats": {
+		"hp": 650,
+		"hpperlevel": 103,
+		"mp": 339,
+		"mpperlevel": 52,
+		"movespeed": 350,
+		"armor": 36,
+		"armorperlevel": 4.2,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 125,
+		"hpregen": 8.5,
+		"hpregenperlevel": 0.55,
+		"mpregen": 8.2,
+		"mpregenperlevel": 0.7,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 68,
+		"attackdamageperlevel": 4.25,
+		"attackspeedperlevel": 3.4,
+		"attackspeed": 0.638,
+		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Leap Strike",
+					"objectName": "JaxQ",
+					"dataKey": "Characters/Jax/Spells/JaxQAbility/JaxQ",
+					"image": "assets/characters/jax/hud/icons2d/jaxq.png",
+					"tooltip": "Jax leaps to a friendly or enemy unit or ward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> if it is an enemy.",
+					"extendedVariables": [
+						{
+							"name": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [65, 65, 65, 65, 65, 65],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 5.5],
+					"dataValues": {
+						"Damage": [25, 65, 105, 145, 185, 225, 265]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Empower",
+					"objectName": "JaxW",
+					"dataKey": "Characters/Jax/Spells/JaxWAbility/JaxW",
+					"image": "assets/characters/jax/hud/icons2d/jaxw.png",
+					"tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"name": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
+					"dataValues": {
+						"Damage": [15, 50, 85, 120, 155, 190, 225],
+						"StructureMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"FinalDamage": {
+							"mConditionalGameCalculation": "TotalDamage",
+							"mConditionalCalculationRequirements": {
+								"mBuffName": "{12395d09}"
+							}
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Counter Strike",
+					"objectName": "JaxE",
+					"dataKey": "Characters/Jax/Spells/JaxEAbility/JaxE",
+					"image": "assets/characters/jax/hud/icons2d/jaxe.png",
+					"tooltip": "Jax enters a defensive stance for up to @DodgeDuration@ seconds, dodging incoming Attacks and taking @AoEDamageReduction@% less damage from area of effect Abilities. After @DodgeDuration@ seconds or <recast>Recasting</recast>, Jax deals <magicDamage>@TotalDamage@ + @PercentHealthDamage@% max Health magic damage</magicDamage> and <status>Stuns</status> nearby enemies for @StunDuration@ second. <br><br>The damage is increased by @PercentIncreasedPerDodge*100@% per Attack dodged, up to a maximum of <magicDamage>@MaxDamage@ + @MaxPercentHealthDamage@% max Health</magicDamage>.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [17, 17, 15, 13, 11, 9, 9],
+					"dataValues": {
+						"BaseDamage": [10, 40, 70, 100, 130, 160, 190],
+						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
+						"PercentIncreasedPerDodge": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"MaxDodgesForDamageIncrease": [5, 5, 5, 5, 5, 5, 5],
+						"PercentHealthDamage": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+						"DodgeDuration": [2, 2, 2, 2, 2, 2, 2],
+						"AoEDamageReduction": [25, 25, 25, 25, 25, 25, 25],
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStatFormula": 2,
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxDamage": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "TotalDamage"
+						},
+						"MaxPercentHealthDamage": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"mExpandedTooltipCalculationDisplay": 5,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "PercentHealthDamage",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MonsterDamageCap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 9000,
+									"mEndValue": 9000,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Grandmaster-at-Arms",
+					"objectName": "JaxR",
+					"dataKey": "Characters/Jax/Spells/JaxRAbility/JaxR",
+					"image": "assets/characters/jax/hud/icons2d/jaxr.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack within @PassiveFallOffTime@ seconds deals an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Jax slams his lantern down, dealing <magicDamage>@SwingDamageTotal@ magic damage</magicDamage> to nearby enemies. If he hits a champion he gains <scaleArmor>@BaseArmor@ Armor</scaleArmor> and <scaleMR>@BaseMR@ Magic Resist</scaleMR> plus <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR> per additional champion hit for @Duration@ seconds. During this time every second Attack deals additional <magicDamage>magic damage</magicDamage> instead of every third.",
+					"extendedVariables": [
+						{
+							"name": "PassiveBaseDamage",
+							"nameOverride": "spell_listtype_passivedamage"
+						},
+						{
+							"name": "SwingDamageBase",
+							"nameOverride": "spell_listtype_activedamage"
+						},
+						{
+							"name": "BaseResists",
+							"nameOverride": "spell_jaxrapexform_basearmor"
+						},
+						{
+							"name": "BaseResists",
+							"nameOverride": "spell_jaxrapexform_basemr"
+						},
+						{
+							"name": "ResistsPerExtraTarget",
+							"nameOverride": "spell_jaxrapexform_bonusarmor"
+						},
+						{
+							"name": "ResistsPerExtraTarget",
+							"nameOverride": "spell_jaxrapexform_bonusmr"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 100, 90, 8, 7, 7],
+					"dataValues": {
+						"Duration": [8, 8, 8, 8, 8, 8, 8],
+						"PassiveBaseDamage": [20, 75, 130, 185, 240, 295, 350],
+						"PassiveFallOffTime": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"BaseResists": [30, 45, 60, 75, 90, 105, 120],
+						"ResistsPerExtraTarget": [15, 20, 25, 30, 35, 40, 45],
+						"MRMult": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"SwingDamageBase": [25, 100, 175, 250, 325, 400, 475],
+						"AoESize": [375, 375, 375, 375, 375, 375, 375],
+						"StructureMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"OnHitDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"BaseArmor": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseResists",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"BonusArmor": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ResistsPerExtraTarget",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"SwingDamageTotal": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "SwingDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"BaseMR": {
+							"mMultiplier": {
+								"mDataValue": "MRMult"
+							},
+							"mModifiedGameCalculation": "BaseArmor"
+						},
+						"BonusMR": {
+							"mMultiplier": {
+								"mDataValue": "MRMult"
+							},
+							"mModifiedGameCalculation": "BonusArmor"
+						},
+						"FinalDamage": {
+							"mConditionalGameCalculation": "OnHitDamage",
+							"mConditionalCalculationRequirements": {
+								"mBuffName": "{1e75ffdf}"
+							}
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Relentless Assault",
+					"objectName": "JaxPassive",
+					"dataKey": "Characters/Jax/Spells/JaxPassiveAbility/JaxPassive",
+					"image": "assets/characters/jax/hud/icons2d/jaxp.png",
+					"tooltip": "Jax's Attacks grant a stack for 2.5 seconds that gives him <attackSpeed>@AttackSpeedPerStack@ Attack Speed</attackSpeed> (max <attackSpeed>@MaxBonusAttackSpeed@ Attack Speed</attackSpeed>).",
+					"dataValues": {
+						"BuffDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"MaxStacks": [8, 8, 8, 8, 8, 8, 8],
+						"FallOffRate": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"BelvethVsJaxQuestRewardStacks": [5, 5, 5, 5, 5, 5, 5]
+					},
+					"spellCalculations": {
+						"AttackSpeedPerStack": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.05,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 10,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": 0.015
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"MaxBonusAttackSpeed": {
+							"mMultiplier": {
+								"mDataValue": "MaxStacks"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "AttackSpeedPerStack"
+						},
+						"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.003,
+									"mInitialBonusPerLevel": 0.001,
+									"mBreakpoints": [
+										{
+											"mLevel": 14
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						},
+						"BelvethVsJaxQuestRewardAttackSpeed": {
+							"mMultiplier": {
+								"mBuffName": "{a8a3dd7a}",
+								"mCoefficient": 1
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack"
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_passivedamage": "Passive Damage",
+		"spell_listtype_activedamage": "Active Damage",
+		"spell_jaxrapexform_basearmor": "Base Armor",
+		"spell_jaxrapexform_basemr": "Base Magic Resist",
+		"spell_jaxrapexform_bonusarmor": "Armor per Additional Champion",
+		"spell_jaxrapexform_bonusmr": "Magic Resist per Additional Champion"
+	}
+}

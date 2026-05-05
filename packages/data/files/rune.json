@@ -1,0 +1,1866 @@
+{
+	"version": "16.9.1",
+	"data": {
+		"paths": {
+			"Precision": {
+				"id": 8000,
+				"name": "Precision",
+				"icon": "assets/perks/styles/7201_precision.png",
+				"dataKey": "Perks/Styles/Precision",
+				"iconColor": "#c8aa6e",
+				"slots": [
+					{
+						"PressTheAttack": {
+							"id": 8005,
+							"name": "PressTheAttack",
+							"icon": "assets/perks/styles/precision/presstheattack/presstheattack.png",
+							"dataKey": "Perks/Styles/Precision/PressTheAttack",
+							"effectAmount": {
+								"MinDamage": 40,
+								"MaxDamage": 160,
+								"BonusADRatio": 0,
+								"APRatio": 0,
+								"LethalityRatio": 0,
+								"HitsRequired": 3,
+								"TimeBetweenHits": 4,
+								"AmpPotencyMaxSelf": 0.08,
+								"AmpDuration": 5,
+								"AmpPotencyMaxOthers": 0.08,
+								"AmpPotencyStartSelf": 0.08,
+								"AmpPotencyStartOthers": 0.08,
+								"BonusPercentDamage": 0.08,
+								"OutOfCombatTimer": 5,
+								"Cooldown": 6
+							}
+						},
+						"LethalTempo": {
+							"id": 8008,
+							"name": "LethalTempo",
+							"icon": "assets/perks/styles/precision/lethaltempo/lethaltempotemp.png",
+							"dataKey": "Perks/Styles/Precision/LethalTempo",
+							"calculations": {
+								"NoteDamage": {
+									"mMultiplier": {
+										"mSubparts": [
+											{
+												"mNumber": 1
+											},
+											{
+												"mStat": 4,
+												"mStatFormula": 2,
+												"mCoefficient": 1
+											}
+										]
+									},
+									"mFormulaParts": [
+										{
+											"mStartValue": 9,
+											"mEndValue": 30,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									],
+									"mPrecision": 1,
+									"mRangedMultiplier": {
+										"mNumber": 0.667
+									}
+								},
+								"ASPerStack": {
+									"mFormulaParts": [
+										{
+											"mNumber": 0.06,
+											"__type": "NumberCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 1,
+									"mRangedMultiplier": {
+										"mNumber": 0.8
+									}
+								}
+							},
+							"effectAmount": {
+								"Duration": 6,
+								"MaxStacks": 6,
+								"TTASPerStackMelee": 0.06,
+								"PerfectlyTimedForgivance": 0.25,
+								"TTASPerStackRanged": 0.04,
+								"TTMinNoteDamageMelee": 9,
+								"TTMaxNoteDamageMelee": 30,
+								"TTMinNoteDamageRanged": 6,
+								"TTMaxNoteDamageRanged": 24
+							}
+						},
+						"FleetFootwork": {
+							"id": 8021,
+							"name": "FleetFootwork",
+							"icon": "assets/perks/styles/precision/fleetfootwork/fleetfootwork.png",
+							"dataKey": "Perks/Styles/Precision/FleetFootwork",
+							"calculations": {
+								"HealAmount": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 130,
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "HealBonusADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mDataValue": "HealAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedHealMod"
+									}
+								},
+								"{ad820ad4}": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 5,
+											"mEndValue": 100,
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"MoveSpeedCalc": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "MSBuff",
+											"__type": "NamedDataValueCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mRangedMultiplier": {
+										"mDataValue": "RangedMSMod"
+									}
+								}
+							},
+							"effectAmount": {
+								"HealBonusADRatio": 0.1,
+								"HealAPRatio": 0.05,
+								"HealBase": 10,
+								"HealMax": 130,
+								"MSBuff": 0.2,
+								"MSDuration": 1,
+								"RangedMSMod": 0.75,
+								"RangedHealMod": 0.6,
+								"MinionHealMod": 0.15
+							}
+						},
+						"Conqueror": {
+							"id": 8010,
+							"name": "Conqueror",
+							"icon": "assets/perks/styles/precision/conqueror/conqueror.png",
+							"dataKey": "Perks/Styles/Precision/Conqueror",
+							"effectAmount": {
+								"MinAdaptivePerStack": 1.8,
+								"MaxAdaptivePerStack": 4,
+								"MaxStacks": 12,
+								"BuffDuration": 5,
+								"TimeUntilNextStackFromSameSpell": 4,
+								"HealingPercent": 0.08,
+								"RangedHealingPercent": 0.05
+							}
+						}
+					},
+					{
+						"AbsorbLife": {
+							"id": 9101,
+							"name": "AbsorbLife",
+							"icon": "assets/perks/styles/precision/absorblife/absorblife.png",
+							"dataKey": "Perks/Styles/Precision/AbsorbLife",
+							"calculations": {
+								"HealAmount": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 1,
+											"mInitialBonusPerLevel": 0.25,
+											"mBreakpoints": [
+												{
+													"mLevel": 6,
+													"mBonusPerLevelAtAndAfter": 1
+												},
+												{
+													"mLevel": 11,
+													"mBonusPerLevelAtAndAfter": 2
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"TooltipMinHeal": 1,
+								"TooltipMaxHeal": 23
+							}
+						},
+						"Triumph": {
+							"id": 9111,
+							"name": "Triumph",
+							"icon": "assets/perks/styles/precision/triumph.png",
+							"dataKey": "Perks/Styles/Precision/Triumph",
+							"calculations": {
+								"MaxHealthCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStat": 12,
+											"mDataValue": "TriumphMaxHealthRestored",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"MissingHealthRestored": 0.05,
+								"BonusGold": 20,
+								"TriumphMaxHealthRestored": 0.025
+							}
+						},
+						"PresenceOfMind": {
+							"id": 8009,
+							"name": "PresenceOfMind",
+							"icon": "assets/perks/styles/precision/presenceofmind/presenceofmind.png",
+							"dataKey": "Perks/Styles/Precision/PresenceOfMind",
+							"calculations": {
+								"RegenAmount": {
+									"mFormulaParts": [
+										{
+											"values": [6, 6, 6.8, 7.6, 8.4, 9.2, 10, 12, 14, 16, 18, 20, 23.2, 26.4, 29.6, 32.8, 36, 40, 44, 52, 56, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+											"__type": "ByCharLevelFormulaCalculationPart"
+										}
+									],
+									"mPrecision": 1
+								}
+							},
+							"effectAmount": {
+								"PercentManaRestore": 0.15,
+								"CooldownDuration": 8,
+								"MinFlatRestore": 6,
+								"MaxFlatRestore": 50,
+								"EnergyRestore": 6
+							}
+						}
+					},
+					{
+						"LegendAlacrity": {
+							"id": 9104,
+							"name": "LegendAlacrity",
+							"icon": "assets/perks/styles/precision/legendalacrity/legendalacrity.png",
+							"dataKey": "Perks/Styles/Precision/LegendAlacrity",
+							"effectAmount": {
+								"AttackSpeedPerStack": 0.015,
+								"AttackSpeedBase": 0.03,
+								"MaxLegendStacks": 10,
+								"{3e1fdd4a}": 100,
+								"{8fb410e2}": 100,
+								"{f6570baa}": 100,
+								"LargeMonsterKillValue": 25,
+								"MinionKillValue": 4
+							}
+						},
+						"LegendHaste": {
+							"id": 9105,
+							"name": "LegendHaste",
+							"icon": "assets/perks/styles/precision/legendhaste/legendhaste.png",
+							"dataKey": "{3ecd47e5}",
+							"effectAmount": {
+								"HastePerStack": 1.5,
+								"HasteBase": 0,
+								"MaxLegendStacks": 10,
+								"{3e1fdd4a}": 100,
+								"{8fb410e2}": 100,
+								"{f6570baa}": 100,
+								"LargeMonsterKillValue": 25,
+								"MinionKillValue": 4
+							}
+						},
+						"LegendBloodline": {
+							"id": 9103,
+							"name": "LegendBloodline",
+							"icon": "assets/perks/styles/precision/legendbloodline/legendbloodline.png",
+							"dataKey": "Perks/Styles/Precision/LegendBloodline",
+							"effectAmount": {
+								"LifeStealPerStack": 0.45,
+								"LifeStealBase": 0,
+								"MaxLegendStacks": 15,
+								"{3e1fdd4a}": 100,
+								"{8fb410e2}": 100,
+								"{f6570baa}": 100,
+								"LargeMonsterKillValue": 25,
+								"MinionKillValue": 4,
+								"BonusHealth": 85
+							}
+						}
+					},
+					{
+						"CoupDeGrace": {
+							"id": 8014,
+							"name": "CoupDeGrace",
+							"icon": "assets/perks/styles/precision/coupdegrace/coupdegrace.png",
+							"dataKey": "Perks/Styles/Precision/CoupDeGrace",
+							"effectAmount": {
+								"EnemyHealthPercentageThreshold": 0.4,
+								"BonusPercentDamage": 0.08
+							}
+						},
+						"CutDown": {
+							"id": 8017,
+							"name": "CutDown",
+							"icon": "assets/perks/styles/precision/cutdown/cutdown.png",
+							"dataKey": "Perks/Styles/Precision/CutDown",
+							"effectAmount": {
+								"MinBonusDamagePercent": 0.05,
+								"MaxBonusDamagePercent": 0.15,
+								"MinHealthDifference": 0.1,
+								"MaxHealthDifference": 1,
+								"EnemyHealthPercentageThreshold": 0.6,
+								"BonusPercentDamage": 0.08
+							}
+						},
+						"LastStand": {
+							"id": 8299,
+							"name": "LastStand",
+							"icon": "assets/perks/styles/sorcery/laststand/laststand.png",
+							"dataKey": "Perks/Styles/Precision/LastStand",
+							"effectAmount": {
+								"MinBonusDamagePercent": 0.05,
+								"MaxBonusDamagePercent": 0.11,
+								"HealthThresholdStart": 0.6,
+								"HealthThresholdEnd": 0.3
+							}
+						}
+					}
+				]
+			},
+			"Domination": {
+				"id": 8100,
+				"name": "Domination",
+				"icon": "assets/perks/styles/7200_domination.png",
+				"dataKey": "Perks/Styles/Domination",
+				"iconColor": "#dc4747",
+				"slots": [
+					{
+						"Electrocute": {
+							"id": 8112,
+							"name": "Electrocute",
+							"icon": "assets/perks/styles/domination/electrocute/electrocute.png",
+							"dataKey": "Perks/Styles/Domination/Electrocute",
+							"calculations": {
+								"TotalDamage": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 70,
+											"mEndValue": 240,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "BonusADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"Cooldown": 20,
+								"DamageBase": 70,
+								"DamageMax": 240,
+								"BonusADRatio": 0.1,
+								"WindowDuration": 3,
+								"APRatio": 0.05,
+								"CooldownMin": 20
+							}
+						},
+						"DarkHarvest": {
+							"id": 8128,
+							"name": "DarkHarvest",
+							"icon": "assets/perks/styles/domination/darkharvest/darkharvest.png",
+							"dataKey": "Perks/Styles/Domination/DarkHarvest",
+							"calculations": {
+								"TotalDamage": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamage",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"HarvestThreshold": 0.5,
+								"Cooldown": 35,
+								"BaseDamage": 30,
+								"ADRatio": 0.1,
+								"APRatio": 0.05,
+								"DamagePerSoulEssence": 11,
+								"CooldownResetValue": 1
+							}
+						},
+						"HailOfBlades": {
+							"id": 9923,
+							"name": "HailOfBlades",
+							"icon": "assets/perks/styles/domination/hailofblades/hailofblades.png",
+							"dataKey": "Perks/Styles/Domination/HailOfBlades",
+							"calculations": {
+								"MeleeItemCalcValue": {
+									"mMultiplier": {
+										"mNumber": 100
+									},
+									"mFormulaParts": [
+										{
+											"mDataValue": "ASBoost",
+											"__type": "NamedDataValueCalculationPart"
+										}
+									]
+								},
+								"RangedItemCalcValue": {
+									"mMultiplier": {
+										"mNumber": 100
+									},
+									"mFormulaParts": [
+										{
+											"mDataValue": "ASBoostRanged",
+											"__type": "NamedDataValueCalculationPart"
+										}
+									]
+								},
+								"ChampRange": {
+									"mDefaultGameCalculation": "{792cf56b}",
+									"mConditionalGameCalculation": "{06387172}"
+								},
+								"{792cf56b}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
+										}
+									]
+								},
+								"{06387172}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 2,
+											"__type": "NumberCalculationPart"
+										}
+									]
+								},
+								"BonusDamage": {
+									"mFormulaParts": [
+										{
+											"{0589a59c}": "BonusDamageMin",
+											"{0b65bc23}": "BonusDamageMax",
+											"__type": "{ee18a47b}"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "BonusADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"NumHits": 3,
+								"Duration": 3,
+								"ASBoost": 1.2,
+								"Cooldown": 10,
+								"ASBoostRanged": 0.6,
+								"BonusDamageMin": 4,
+								"BonusDamageMax": 20,
+								"BonusADRatio": 0.08,
+								"APRatio": 0.06,
+								"MaxBonusHits": 2
+							}
+						}
+					},
+					{
+						"CheapShot": {
+							"id": 8126,
+							"name": "CheapShot",
+							"icon": "assets/perks/styles/domination/cheapshot/cheapshot.png",
+							"dataKey": "Perks/Styles/Domination/CheapShot",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 45,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"DamageIncMin": 10,
+								"DamageIncMax": 45,
+								"Cooldown": 4
+							}
+						},
+						"TasteOfBlood": {
+							"id": 8139,
+							"name": "TasteOfBlood",
+							"icon": "assets/perks/styles/domination/tasteofblood/greenterror_tasteofblood.png",
+							"dataKey": "Perks/Styles/Domination/TasteOfBlood",
+							"calculations": {
+								"HealCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 16,
+											"mEndValue": 40,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"HealAmount": 16,
+								"Cooldown": 20,
+								"HealAmountMax": 40,
+								"RegenDuration": 4,
+								"ADRatio": 0.1,
+								"APRatio": 0.05
+							}
+						},
+						"SuddenImpact": {
+							"id": 8143,
+							"name": "SuddenImpact",
+							"icon": "assets/perks/styles/domination/suddenimpact/suddenimpact.png",
+							"dataKey": "Perks/Styles/Domination/SuddenImpact",
+							"calculations": {
+								"BaseDamage": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 20,
+											"mEndValue": 80,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ArmedDuration": 4,
+								"Cooldown": 10,
+								"MinDamageTooltip": 20,
+								"MaxDamageTooltip": 80
+							}
+						}
+					},
+					{
+						"SixthSense": {
+							"id": 8137,
+							"name": "SixthSense",
+							"icon": "assets/perks/styles/domination/sixthsense/sixthsense.png",
+							"dataKey": "{4cd8582d}",
+							"calculations": {
+								"ChampRange": {
+									"mSimpleTooltipCalculationDisplay": 5,
+									"mExpandedTooltipCalculationDisplay": 5,
+									"mDefaultGameCalculation": "{792cf56b}",
+									"mConditionalGameCalculation": "{06387172}"
+								},
+								"{792cf56b}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
+										}
+									]
+								},
+								"{06387172}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 2,
+											"__type": "NumberCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"{d3bd04a2}": 900,
+								"MeleeItemCalcValue": 250,
+								"RangedItemCalcValue": 250,
+								"LevelThreshold": 11,
+								"RevealDuration": 10
+							}
+						},
+						"GrislyMementos": {
+							"id": 8140,
+							"name": "GrislyMementos",
+							"icon": "assets/perks/styles/domination/grislymementos/grislymementos.png",
+							"dataKey": "{d17f2259}",
+							"effectAmount": {
+								"TrinketAH": 6,
+								"StacksPerTakedown": 1,
+								"SummonerAH": 3,
+								"MaxStacks": 18
+							}
+						},
+						"DeepWard": {
+							"id": 8141,
+							"name": "DeepWard",
+							"icon": "assets/perks/styles/domination/deepward/deepward.png",
+							"dataKey": "Perks/Styles/Domination/DeepWard",
+							"calculations": {
+								"DurationIncrease": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 45,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"TrinketDurationIncrease": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 45,
+											"mEndValue": 150,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ExtraHealth": 1,
+								"LevelThreshold": 9,
+								"TTDurationIncreaseMin": 30,
+								"TTDurationIncreaseMax": 45,
+								"TTTrinketDurationIncreaseMin": 45,
+								"TTTrinketDurationIncreaseMax": 150
+							}
+						}
+					},
+					{
+						"TreasureHunter": {
+							"id": 8135,
+							"name": "TreasureHunter",
+							"icon": "assets/perks/styles/domination/treasurehunter/treasurehunter.png",
+							"dataKey": "Perks/Styles/Domination/TreasureHunter",
+							"effectAmount": {
+								"BaseGoldAmount": 50,
+								"GoldGrowth": 20,
+								"TOOLTIPMaxGoldAmount": 130
+							}
+						},
+						"RelentlessHunter": {
+							"id": 8105,
+							"name": "RelentlessHunter",
+							"icon": "assets/perks/styles/domination/relentlesshunter/relentlesshunter.png",
+							"dataKey": "Perks/Styles/Domination/RelentlessHunter",
+							"effectAmount": {
+								"OOCMS": 8,
+								"StartingOOCMS": 0
+							}
+						},
+						"UltimateHunter": {
+							"id": 8106,
+							"name": "UltimateHunter",
+							"icon": "assets/perks/styles/domination/ultimatehunter/ultimatehunter.png",
+							"dataKey": "Perks/Styles/Domination/UltimateHunter",
+							"effectAmount": {
+								"AdditionalUltAH": 5,
+								"StartingUltAH": 6
+							}
+						}
+					}
+				]
+			},
+			"Sorcery": {
+				"id": 8200,
+				"name": "Sorcery",
+				"icon": "assets/perks/styles/7202_sorcery.png",
+				"dataKey": "Perks/Styles/Sorcery",
+				"iconColor": "#6c75f5",
+				"slots": [
+					{
+						"SummonAery": {
+							"id": 8214,
+							"name": "SummonAery",
+							"icon": "assets/perks/styles/sorcery/summonaery/summonaery.png",
+							"dataKey": "Perks/Styles/Sorcery/SummonAery",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 50,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mDataValue": "DamageAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "DamageADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"ShieldCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 100,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mDataValue": "ShieldRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ShieldRatioAD",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ShieldBase": 30,
+								"ShieldMax": 100,
+								"ShieldRatio": 0.05,
+								"DamageMax": 50,
+								"DamageBase": 10,
+								"DamageAPRatio": 0.05,
+								"DamageADRatio": 0.1,
+								"ShieldRatioAD": 0.1,
+								"ShieldDuration": 2.5
+							}
+						},
+						"ArcaneComet": {
+							"id": 8229,
+							"name": "ArcaneComet",
+							"icon": "assets/perks/styles/sorcery/arcanecomet/arcanecomet.png",
+							"dataKey": "Perks/Styles/Sorcery/ArcaneComet",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 15,
+											"mEndValue": 100,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"CooldownCalc": {
+									"mFormulaParts": [
+										{
+											"mCeiling": 20,
+											"mFloor": 0.3,
+											"mSubparts": [
+												{
+													"mStartValue": 20,
+													"mEndValue": 8
+												}
+											],
+											"__type": "ClampSubPartsCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"RechargeTime": 20,
+								"DamageBase": 15,
+								"DamageMax": 100,
+								"APRatio": 0.05,
+								"ADRatio": 0.1,
+								"RechargeTimeMin": 8,
+								"PercentRefund": 0.2,
+								"DotPercentRefund": 0.05,
+								"AoEPercentRefund": 0.1,
+								"MaxDamageAmp": 1,
+								"MaxRange": 750
+							}
+						},
+						"PhaseRush": {
+							"id": 8230,
+							"name": "PhaseRush",
+							"icon": "assets/perks/styles/sorcery/phaserush/stormraiderssurgeruneicon2.png",
+							"dataKey": "Perks/Styles/Sorcery/PhaseRush",
+							"calculations": {
+								"CooldownCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 20,
+											"mEndValue": 10,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"MoveSpeedCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 0.4,
+											"mEndValue": 0.4,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mRangedMultiplier": {
+										"mDataValue": "RangedEffectiveness"
+									}
+								}
+							},
+							"effectAmount": {
+								"HasteBase": 0.25,
+								"HasteMax": 0.4,
+								"SlowResist": 0.5,
+								"Duration": 3,
+								"Window": 3,
+								"MaxBonusSeconds": 4,
+								"{f9adb0b2}": 1,
+								"MinCooldown": 10,
+								"MaxCooldown": 20,
+								"NumberToProc": 3,
+								"RangedEffectiveness": 0.75,
+								"DamageThreshold": 0.25
+							}
+						},
+						"DeathfireTouch": {
+							"id": 8992,
+							"name": "DeathfireTouch",
+							"icon": "assets/perks/styles/sorcery/deathfiretouch/deathfire_touch_keystone.png",
+							"dataKey": "{c9d12615}",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 4,
+											"mEndValue": 12,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ADRatio": 0.08,
+								"APRatio": 0.03,
+								"Duration": 4,
+								"DamageAmp": 0.1,
+								"TimeToAmp": 3,
+								"DamageMultiplier": 1,
+								"AoEDuration": 2,
+								"DotDuration": 1,
+								"Level1DamageTOOLTIP": 1,
+								"TicksPerSecond": 2,
+								"Level18DamageTOOLTIP": 10,
+								"__renamedVariables": {
+									"{2156e250}": "Level18DamageTOOLTIP"
+								}
+							}
+						}
+					},
+					{
+						"NullifyingOrb": {
+							"id": 8224,
+							"name": "NullifyingOrb",
+							"icon": "assets/perks/styles/sorcery/nullifyingorb/axiom_arcanist.png",
+							"dataKey": "Perks/Styles/Sorcery/NullifyingOrb",
+							"effectAmount": {
+								"UltimateRefundBase": 7,
+								"DamageAmp": 0.12,
+								"AOEAmp": 0.08
+							}
+						},
+						"ManaflowBand": {
+							"id": 8226,
+							"name": "ManaflowBand",
+							"icon": "assets/perks/styles/sorcery/manaflowband/manaflowband.png",
+							"dataKey": "Perks/Styles/Sorcery/ManaflowBand",
+							"effectAmount": {
+								"{2f748280}": 0.1,
+								"Cooldown": 15,
+								"{2cde474e}": 0.4,
+								"ManaIncrease": 25,
+								"MaxManaIncrease": 250,
+								"PercentManaRestore": 0.01,
+								"PercentManaRestoreCooldown": 5
+							}
+						},
+						"NimbusCloak": {
+							"id": 8275,
+							"name": "NimbusCloak",
+							"icon": "assets/perks/styles/sorcery/nimbuscloak/6361.png",
+							"dataKey": "Perks/Styles/Sorcery/NimbusCloak",
+							"effectAmount": {
+								"Duration": 2,
+								"LowCDMSBoost": 0.15,
+								"{1c32110c}": 0.35,
+								"HighCDMSBoost": 0.45,
+								"{2fd68801}": 100,
+								"{b0d06764}": 250
+							}
+						}
+					},
+					{
+						"Transcendence": {
+							"id": 8210,
+							"name": "Transcendence",
+							"icon": "assets/perks/styles/sorcery/transcendence/transcendence.png",
+							"dataKey": "Perks/Styles/Sorcery/Transcendence",
+							"effectAmount": {
+								"HasteBonus1": 0.05,
+								"LevelToTurnOn": 5,
+								"LevelToTurnOn2": 8,
+								"HasteBonus2": 0.05,
+								"KillCooldownRefund": 0.2,
+								"LevelToTurnOn3": 11
+							}
+						},
+						"Celerity": {
+							"id": 8234,
+							"name": "Celerity",
+							"icon": "assets/perks/styles/sorcery/celerity/celeritytemp.png",
+							"dataKey": "Perks/Styles/Sorcery/Celerity",
+							"effectAmount": {
+								"PercentHasteMod": 0.07,
+								"PercentMS": 0.01
+							}
+						},
+						"AbsoluteFocus": {
+							"id": 8233,
+							"name": "AbsoluteFocus",
+							"icon": "assets/perks/styles/sorcery/absolutefocus/absolutefocus.png",
+							"dataKey": "Perks/Styles/Sorcery/AbsoluteFocus",
+							"calculations": {
+								"AdaptiveForceCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 3,
+											"mEndValue": 30,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"HealthPercent": 0.7,
+								"MinAdaptive": 3,
+								"MaxAdaptive": 30
+							}
+						}
+					},
+					{
+						"Scorch": {
+							"id": 8237,
+							"name": "Scorch",
+							"icon": "assets/perks/styles/sorcery/scorch/scorch.png",
+							"dataKey": "Perks/Styles/Sorcery/Scorch",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 20,
+											"mEndValue": 40,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"BurnlockoutDuration": 10,
+								"OOCTimer": 0,
+								"{89367404}": 0.1,
+								"dotduration": 1,
+								"__renamedVariables": {
+									"DotDuration": "dotduration",
+									"DamageMax": "damagemax",
+									"Damage": "damage"
+								},
+								"damagemax": 40,
+								"damage": 20
+							}
+						},
+						"Waterwalking": {
+							"id": 8232,
+							"name": "Waterwalking",
+							"icon": "assets/perks/styles/sorcery/waterwalking/waterwalking.png",
+							"dataKey": "Perks/Styles/Sorcery/Waterwalking",
+							"calculations": {
+								"AdaptiveForceCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 13,
+											"mEndValue": 30,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"MovementSpeed": 10,
+								"{6f2f0d30}": 1,
+								"MinAdaptive": 13,
+								"MaxAdaptive": 30
+							}
+						},
+						"GatheringStorm": {
+							"id": 8236,
+							"name": "GatheringStorm",
+							"icon": "assets/perks/styles/sorcery/gatheringstorm/gatheringstorm.png",
+							"dataKey": "Perks/Styles/Sorcery/GatheringStorm",
+							"effectAmount": {
+								"UpdateAfterMinutes": 10,
+								"AdaptiveAP": 8,
+								"AdaptiveAD": 6,
+								"{c5d14564}": 8
+							}
+						}
+					}
+				]
+			},
+			"Resolve": {
+				"id": 8400,
+				"name": "Resolve",
+				"icon": "assets/perks/styles/7204_resolve.png",
+				"dataKey": "Perks/Styles/Resolve",
+				"iconColor": "#a4d08d",
+				"slots": [
+					{
+						"GraspOfTheUndying": {
+							"id": 8437,
+							"name": "GraspOfTheUndying",
+							"icon": "assets/perks/styles/resolve/graspoftheundying/graspoftheundying.png",
+							"dataKey": "Perks/Styles/Resolve/GraspOfTheUndying",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStat": 12,
+											"mDataValue": "PercentHealthDamage",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedPenaltyMod"
+									}
+								},
+								"HealCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStat": 12,
+											"mDataValue": "PercentHealthHeal",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedPenaltyMod"
+									}
+								}
+							},
+							"effectAmount": {
+								"PercentHealthDamage": 0.035,
+								"Window": 5,
+								"TriggerTime": 4,
+								"PercentHealthHeal": 0.013,
+								"MaxHealthPerProc": 5,
+								"RangedPenaltyMod": 0.4,
+								"RangedHealthPerProc": 2,
+								"MeleeFlatHeal": 0
+							}
+						},
+						"Aftershock": {
+							"id": 8439,
+							"name": "Aftershock",
+							"icon": "assets/perks/styles/resolve/veteranaftershock/veteranaftershock.png",
+							"dataKey": "Perks/Styles/Resolve/Aftershock",
+							"calculations": {
+								"MaxResistCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 80,
+											"mEndValue": 150,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"ArmorBuff": {
+									"mSimpleTooltipCalculationDisplay": 2,
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatResists",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mStatFormula": 2,
+											"mDataValue": "PercentBonusResist",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"MagicResistBuff": {
+									"mSimpleTooltipCalculationDisplay": 2,
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatResists",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mStatFormula": 2,
+											"mDataValue": "PercentBonusResist",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 25,
+											"mEndValue": 120,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mDataValue": "HealthRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"DamageRadius": 350,
+								"Cooldown": 20,
+								"StartingBaseDamage": 25,
+								"MaxBaseDamage": 120,
+								"DelayBeforeBurst": 2.5,
+								"HealthRatio": 0.08,
+								"FlatResists": 35,
+								"BonusResistMin": 80,
+								"BonusResistMax": 150,
+								"PercentBonusResist": 0.8
+							}
+						},
+						"Guardian": {
+							"id": 8465,
+							"name": "Guardian",
+							"icon": "assets/perks/styles/resolve/guardian/guardian.png",
+							"dataKey": "Perks/Styles/Resolve/Guardian",
+							"calculations": {
+								"ThresholdCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 50,
+											"mEndValue": 165,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"ShieldCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 45,
+											"mEndValue": 180,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										},
+										{
+											"mStatFormula": 2,
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mDataValue": "HPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"CooldownCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 90,
+											"mEndValue": 40,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"SnuggleRange": 350,
+								"ShieldBase": 45,
+								"ShieldMax": 180,
+								"APRatio": 0.25,
+								"HPRatio": 0.05,
+								"ShieldDuration": 1.5,
+								"Cooldown": 90,
+								"GuardDuration": 2.5,
+								"CooldownMaxLevel": 40,
+								"ThresholdMin": 50,
+								"ThresholdMax": 165
+							}
+						}
+					},
+					{
+						"Demolish": {
+							"id": 8446,
+							"name": "Demolish",
+							"icon": "assets/perks/styles/resolve/demolish/demolish.png",
+							"dataKey": "Perks/Styles/Resolve/Demolish",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mDefaultGameCalculation": "{4e3f20aa}",
+									"mConditionalGameCalculation": "{5fecac03}"
+								},
+								"{4e3f20aa}": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"{72c5c2a8}": 0,
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamageRanged",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 12,
+											"mDataValue": "HPRatioRanged",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"{5fecac03}": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"{72c5c2a8}": 0,
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamageMelee",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 12,
+											"mDataValue": "HPRatioMelee",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"CooldownSeconds": 30,
+								"{8d810998}": 8,
+								"{97664ba4}": 3,
+								"BaseDamageMelee": 85,
+								"BaseDamageRanged": 50,
+								"HPRatioMelee": 0.28,
+								"HPRatioRanged": 0.2
+							}
+						},
+						"FontOfLife": {
+							"id": 8463,
+							"name": "FontOfLife",
+							"icon": "assets/perks/styles/resolve/fontoflife/fontoflife.png",
+							"dataKey": "Perks/Styles/Resolve/FontOfLife",
+							"calculations": {
+								"BaseHeal": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 50,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedMod"
+									}
+								}
+							},
+							"effectAmount": {
+								"Cooldown": 20,
+								"RangedMod": 0.7
+							}
+						},
+						"ShieldBash": {
+							"id": 8401,
+							"name": "ShieldBash",
+							"icon": "assets/perks/styles/resolve/mirrorshell/mirrorshell.png",
+							"dataKey": "Perks/Styles/Resolve/ShieldBash",
+							"effectAmount": {
+								"ProcDuration": 2,
+								"ShieldRatio": 15,
+								"BonusHealthRatio": 2.5,
+								"BonusShieldMult": 0.1,
+								"ProcBaseMin": 5,
+								"ProcBaseMax": 30
+							}
+						}
+					},
+					{
+						"Conditioning": {
+							"id": 8429,
+							"name": "Conditioning",
+							"icon": "assets/perks/styles/resolve/conditioning/conditioning.png",
+							"dataKey": "Perks/Styles/Resolve/Conditioning",
+							"calculations": {
+								"ArmorCalcTooltip": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "ArmorBase",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "ExtraResist",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"MagicResistCalcTooltip": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "MRBase",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "ExtraResist",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ArmorBase": 8,
+								"MRBase": 8,
+								"ExtraResist": 0.03,
+								"Range": 800,
+								"MinutesRequired": 12
+							}
+						},
+						"SecondWind": {
+							"id": 8444,
+							"name": "SecondWind",
+							"icon": "assets/perks/styles/resolve/secondwind/secondwind.png",
+							"dataKey": "Perks/Styles/Resolve/SecondWind",
+							"effectAmount": {
+								"RegenSeconds": 10,
+								"RegenPercentMax": 0.04,
+								"RegenFlat": 0
+							}
+						},
+						"BonePlating": {
+							"id": 8473,
+							"name": "BonePlating",
+							"icon": "assets/perks/styles/resolve/boneplating/boneplating.png",
+							"dataKey": "Perks/Styles/Resolve/BonePlating",
+							"calculations": {
+								"BlockCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 60,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"BlockBase": 30,
+								"BlockMax": 60,
+								"BlockCount": 3,
+								"BlockDuration": 1.5,
+								"Cooldown": 55
+							}
+						}
+					},
+					{
+						"Overgrowth": {
+							"id": 8451,
+							"name": "Overgrowth",
+							"icon": "assets/perks/styles/resolve/overgrowth/overgrowth.png",
+							"dataKey": "Perks/Styles/Resolve/Overgrowth",
+							"effectAmount": {
+								"{1663f8e7}": 0.75,
+								"Range": 1400,
+								"UnitsPerTier": 8,
+								"{ca029a2b}": 2,
+								"FlatHealthPerTier": 3,
+								"ThresholdUnits": 120,
+								"ThresholdMaxHealthRatio": 0.035
+							}
+						},
+						"Revitalize": {
+							"id": 8453,
+							"name": "Revitalize",
+							"icon": "assets/perks/styles/resolve/revitalize/revitalize.png",
+							"dataKey": "Perks/Styles/Resolve/Revitalize",
+							"effectAmount": {
+								"HealShieldPower": 0.05,
+								"ExtraAmp": 10,
+								"HealthCutoff": 40,
+								"__renamedVariables": {
+									"HealthCutOff": "HealthCutoff"
+								}
+							}
+						},
+						"Unflinching": {
+							"id": 8242,
+							"name": "Unflinching",
+							"icon": "assets/perks/styles/sorcery/unflinching/unflinching.png",
+							"dataKey": "Perks/Styles/Resolve/Unflinching",
+							"effectAmount": {
+								"ResistMin": 10,
+								"ResistMax": 10,
+								"Duration": 2
+							}
+						}
+					}
+				]
+			},
+			"Inspiration": {
+				"id": 8300,
+				"name": "Inspiration",
+				"icon": "assets/perks/styles/7203_whimsy.png",
+				"dataKey": "Perks/Styles/Inspiration",
+				"iconColor": "#48b4be",
+				"slots": [
+					{
+						"GlacialAugment": {
+							"id": 8351,
+							"name": "GlacialAugment",
+							"icon": "assets/perks/styles/inspiration/glacialaugment/glacialaugment.png",
+							"dataKey": "Perks/Styles/Inspiration/GlacialAugment",
+							"calculations": {
+								"SlowZoneCalc": {
+									"mMultiplier": {
+										"mNumber": 0.01
+									},
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "SlowZoneSlowBase",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mDataValue": "SlowZoneSlowAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "SlowZoneSlowbADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 34,
+											"mDataValue": "SlowZoneSlowHealShieldRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 1
+								}
+							},
+							"effectAmount": {
+								"SlowZoneDuration": 3,
+								"SlowZoneSlowBase": 20,
+								"SlowZoneLength": 700,
+								"SlowZoneWidth": 80,
+								"RayCount": 3,
+								"Cooldown": 25,
+								"BeamPosIndent": 100,
+								"CCCarryOverRatio": 100,
+								"DmgReduction": 0.15,
+								"SlowZoneSlowAPRatio": 0.06,
+								"SlowZoneSlowbADRatio": 0.07,
+								"SlowZoneSlowHealShieldRatio": 90
+							}
+						},
+						"UnsealedSpellbook": {
+							"id": 8360,
+							"name": "UnsealedSpellbook",
+							"icon": "assets/perks/styles/inspiration/unsealedspellbook/unsealedspellbook.png",
+							"dataKey": "Perks/Styles/Inspiration/UnsealedSpellbook",
+							"effectAmount": {
+								"{ea768132}": 1,
+								"{9a847429}": 0,
+								"{0f920874}": 1,
+								"ShardRechargeMinutes": 4.5,
+								"ShardFirstMinutes": 6,
+								"{9d01feeb}": 5,
+								"{b7e0131f}": 5,
+								"NumSummonersBeforeRepeat": 3,
+								"ShardRechargeReductionSeconds": 25,
+								"{a8402a49}": 10,
+								"{0bb7b933}": 6
+							}
+						},
+						"FirstStrike": {
+							"id": 8369,
+							"name": "FirstStrike",
+							"icon": "assets/perks/styles/inspiration/firststrike/firststrike.png",
+							"dataKey": "Perks/Styles/Inspiration/FirstStrike",
+							"calculations": {
+								"Cooldown": {
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mStartValue": 25,
+												"mEndValue": 15,
+												"mScalePastDefaultMaxLevel": false
+											},
+											"mPart2": {
+												"mDataValue": "ModesCooldownReduction"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
+										}
+									]
+								},
+								"ChampRange": {
+									"mSimpleTooltipCalculationDisplay": 5,
+									"mExpandedTooltipCalculationDisplay": 5,
+									"mDefaultGameCalculation": "{792cf56b}",
+									"mConditionalGameCalculation": "{06387172}"
+								},
+								"MeleeItemCalcValue": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mExpandedTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mDataValue": "{b50bc5ec}",
+											"__type": "NamedDataValueCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"RangedItemCalcValue": {
+									"mMultiplier": {
+										"mDataValue": "{7563bf99}"
+									},
+									"mModifiedGameCalculation": "MeleeItemCalcValue"
+								},
+								"{792cf56b}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
+										}
+									]
+								},
+								"{06387172}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 2,
+											"__type": "NumberCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"Duration": 3,
+								"DamageAmp": 0.07,
+								"OOCTimer": 10,
+								"GoldProcBonus": 10,
+								"GoldPercentBonus": 0.5,
+								"GoldPercentBonusRanged": 0.35,
+								"GraceWindow": 0.25,
+								"TooltipOnlyCooldownStartAmount": 25,
+								"TooltipOnlyCooldownEndAmount": 15,
+								"MissileNoiseNumberLimiter": 3,
+								"MissileNoiseRangeLimiter": 1500,
+								"ModesCooldownReduction": 1,
+								"{b50bc5ec}": 0.5,
+								"{7563bf99}": 0.7
+							}
+						}
+					},
+					{
+						"HextechFlashtraption": {
+							"id": 8306,
+							"name": "HextechFlashtraption",
+							"icon": "assets/perks/styles/inspiration/hextechflashtraption/hextechflashtraption.png",
+							"dataKey": "Perks/Styles/Inspiration/HextechFlashtraption",
+							"effectAmount": {
+								"ChannelDuration": 2,
+								"{c85ef93c}": 10,
+								"CooldownTime": 20,
+								"ChampionCombatCooldown": 10,
+								"MinimumChannelDuration": 1,
+								"{d6487c09}": 0.5
+							}
+						},
+						"MagicalFootwear": {
+							"id": 8304,
+							"name": "MagicalFootwear",
+							"icon": "assets/perks/styles/inspiration/magicalfootwear/magicalfootwear.png",
+							"dataKey": "Perks/Styles/Inspiration/MagicalFootwear",
+							"effectAmount": {
+								"GiveBootsAtMinute": 12,
+								"{c07791e4}": 300,
+								"SecondsSoonerPerTakedown": 45,
+								"AdditionalMovementSpeed": 10
+							}
+						},
+						"CashBack": {
+							"id": 8321,
+							"name": "CashBack",
+							"icon": "assets/perks/styles/inspiration/cashback/cashback2.png",
+							"dataKey": "{fcf87363}",
+							"effectAmount": {
+								"{d856a8af}": 0,
+								"GoldLowerBoundPerMinute": 8,
+								"{c0de5a7f}": 8,
+								"DebtAccumulationStartsAtMinute": 2,
+								"{7957e8a3}": 20,
+								"{8d08b1b5}": 0,
+								"ExcessCostPenaltyFlat": 50,
+								"GoldLowerBoundInitial": 100,
+								"{fa03b4f1}": 150,
+								"{ebbc116e}": -150,
+								"PercentRefund": 0.075
+							}
+						}
+					},
+					{
+						"PerfectTiming": {
+							"id": 8313,
+							"name": "PerfectTiming",
+							"icon": "assets/perks/styles/inspiration/perfecttiming/alchemistcabinet.png",
+							"dataKey": "Perks/Styles/Inspiration/PerfectTiming",
+							"effectAmount": {
+								"FirstElixirLevel": 3,
+								"SecondElixirLevel": 6,
+								"ThirdElixirLevel": 9
+							}
+						},
+						"TimeWarpTonic": {
+							"id": 8352,
+							"name": "TimeWarpTonic",
+							"icon": "assets/perks/styles/inspiration/timewarptonic/timewarptonic.png",
+							"dataKey": "Perks/Styles/Inspiration/TimeWarpTonic",
+							"effectAmount": {
+								"BonusMS": 0,
+								"RestorationPercentage": 0.4,
+								"Cooldown": 20
+							}
+						},
+						"BiscuitDelivery": {
+							"id": 8345,
+							"name": "BiscuitDelivery",
+							"icon": "assets/perks/styles/inspiration/biscuitdelivery/biscuitdelivery.png",
+							"dataKey": "Perks/Styles/Inspiration/BiscuitDelivery",
+							"effectAmount": {
+								"BiscuitMinuteInterval": 2,
+								"SwapOverMinute": 6,
+								"PermanentHP": 30,
+								"HealthHealPercent": 0.015,
+								"DurationOfEffect": 5,
+								"FlatHeal": 20,
+								"{936e8fc2}": 0.3,
+								"MaximumHealIncrease": 1
+							}
+						}
+					},
+					{
+						"CosmicInsight": {
+							"id": 8347,
+							"name": "CosmicInsight",
+							"icon": "assets/perks/styles/inspiration/cosmicinsight/cosmicinsight.png",
+							"dataKey": "Perks/Styles/Inspiration/CosmicInsight",
+							"effectAmount": {
+								"ItemHaste": 10,
+								"SummonerHaste": 18
+							}
+						},
+						"ApproachVelocity": {
+							"id": 8410,
+							"name": "ApproachVelocity",
+							"icon": "assets/perks/styles/resolve/approachvelocity/approachvelocity.png",
+							"dataKey": "Perks/Styles/Inspiration/ApproachVelocity",
+							"effectAmount": {
+								"MovementSpeedPercentBonus": 0.15,
+								"ActivationDistance": 1000
+							}
+						},
+						"JackOfAllTrades": {
+							"id": 8316,
+							"name": "JackOfAllTrades",
+							"icon": "assets/perks/styles/inspiration/jackofalltrades/jackofalltrades2.png",
+							"dataKey": "{f781f833}",
+							"effectAmount": {
+								"{1b48f5ea}": 10,
+								"{55d14eea}": 25,
+								"HasteperStack": 1,
+								"__renamedVariables": {
+									"HastePerStack": "HasteperStack"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"shards": {
+			"offensive": {
+				"adaptive": {
+					"id": 5008,
+					"icon": "assets/perks/statmods/statmodsadaptiveforceicon.png",
+					"dataKey": "Perks/StatMods/Adaptive",
+					"effectAmount": {
+						"StatGain2": 9,
+						"StatGain1": 5.4
+					}
+				},
+				"attackspeed": {
+					"id": 5005,
+					"icon": "assets/perks/statmods/statmodsattackspeedicon.png",
+					"dataKey": "Perks/StatMods/AttackSpeed",
+					"effectAmount": {
+						"StatGain": 10
+					}
+				},
+				"cdrscaling": {
+					"id": 5007,
+					"icon": "assets/perks/statmods/statmodscdrscalingicon.png",
+					"dataKey": "Perks/StatMods/CDRScaling",
+					"effectAmount": {
+						"HasteGain": 8
+					}
+				}
+			},
+			"flex": {
+				"adaptive": {
+					"id": 5008,
+					"icon": "assets/perks/statmods/statmodsadaptiveforceicon.png",
+					"dataKey": "Perks/StatMods/Adaptive",
+					"effectAmount": {
+						"StatGain2": 9,
+						"StatGain1": 5.4
+					}
+				},
+				"movementspeed": {
+					"id": 5010,
+					"icon": "assets/perks/statmods/statmodsmovementspeedicon.png",
+					"dataKey": "Perks/StatMods/MovementSpeed",
+					"effectAmount": {
+						"StatGain1": 2.5
+					}
+				},
+				"healthscaling": {
+					"id": 5001,
+					"icon": "assets/perks/statmods/statmodshealthplusicon.png",
+					"dataKey": "Perks/StatMods/HealthScaling",
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
+			},
+			"defensive": {
+				"health": {
+					"id": 5011,
+					"icon": "assets/perks/statmods/statmodshealthscalingicon.png",
+					"dataKey": "{787ccb97}",
+					"effectAmount": {
+						"StatGain": 65
+					}
+				},
+				"tenacity": {
+					"id": 5013,
+					"icon": "assets/perks/statmods/statmodstenacityicon.png",
+					"dataKey": "{7a3bed68}",
+					"effectAmount": {
+						"StatGain": 15
+					}
+				},
+				"healthscaling": {
+					"id": 5001,
+					"icon": "assets/perks/statmods/statmodshealthplusicon.png",
+					"dataKey": "Perks/StatMods/HealthScaling",
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
+			}
+		}
+	}
+}

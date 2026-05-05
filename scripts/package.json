@@ -1,0 +1,19 @@
+{
+	"name": "@lolcalc/scripts",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"description": "scripts used by lolcalc",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"license": "AGPL-3.0-only",
+	"devDependencies": {
+		"@lolcalc/core": "workspace:",
+		"@lolcalc/data": "workspace:",
+		"@lolcalc/shared": "workspace:",
+		"@lolcalc/website": "workspace:",
+		"@node-rs/xxhash": "catalog:scripts",
+		"@sindresorhus/fnv1a": "catalog:scripts",
+		"image-size": "catalog:scripts",
+		"typescript": "catalog:"
+	}
+}

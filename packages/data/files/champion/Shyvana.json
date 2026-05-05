@@ -1,0 +1,600 @@
+{
+	"id": "Shyvana",
+	"key": "102",
+	"name": "Shyvana",
+	"partype": "Fury",
+	"stats": {
+		"hp": 625,
+		"hpperlevel": 100,
+		"mp": 100,
+		"mpperlevel": 0,
+		"movespeed": 350,
+		"armor": 35,
+		"armorperlevel": 4,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 150,
+		"hpregen": 7,
+		"hpregenperlevel": 0.65,
+		"mpregen": 0,
+		"mpregenperlevel": 0,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 62,
+		"attackdamageperlevel": 4,
+		"attackspeedperlevel": 2,
+		"attackspeed": 0.638,
+		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Emberstrike",
+					"objectName": "ShyvanaQ",
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaQAbility/ShyvanaQ",
+					"image": "assets/characters/shyvana/hud/icons2d/shyvana_q1.shyvana_rework.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Shyvana's Attacks deal <magicDamage>@Calc_Max_Health_Damage@ max Health magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit> and reduce this Ability's Cooldown by @Cooldown_Reduction@ seconds.<br><br><spellActive>Active:</spellActive> Shyvana's next Attack strikes the target and the surrounding area dealing <physicalDamage>@Calc_Damage@ physical damage</physicalDamage>. This Ability may be <recast>Recast</recast> after an Attack or short delay within the next @RecastDuration@ seconds.<br><br><keywordMajor>Dragon Form:</keywordMajor> Shyvana gains an additional <recast>Recast</recast>, causing her to bite the target of her next Attack dealing <trueDamage>@Calc_Dragon_Form_Damage@ true damage</trueDamage>.",
+					"tooltipExtended": "<spellPassive>Passive:</spellPassive> Shyvana's Attacks deal <magicDamage>@Calc_Max_Health_Damage@ max Health magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit> and reduce this Ability's cooldown by @Cooldown_Reduction@ seconds.<br><br><spellActive>Active:</spellActive> Shyvana's next Attack strikes in a cone around the target, dealing <physicalDamage>@Calc_Damage@ physical damage</physicalDamage>. This Ability may be <recast>Recast</recast> after an Attack or a short delay within @RecastDuration@ seconds; the <recast>Recast</recast> strikes in a circle around the target.<br><br><keywordMajor>Dragon Form</keywordMajor>: Shyvana gains an additional <recast>Recast</recast>, causing her to bite the target of her next Attack dealing <trueDamage>@Calc_Dragon_Form_Damage@ true damage</trueDamage>.",
+					"extendedVariables": [
+						{
+							"name": "Base_Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
+					"dataValues": {
+						"EnhanceDuration": [6, 6, 6, 6, 6, 6, 6],
+						"RecastDuration": [4, 4, 4, 4, 4, 4, 4],
+						"LockoutDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"Q1Length": [450, 450, 450, 450, 450, 450, 450],
+						"Q2Radius": [275, 275, 275, 275, 275, 275, 275],
+						"Cooldown_Reduction": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Max_Health_Damage": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"Max_Health_AD_Ratio": [0, 0, 0, 0, 0, 0, 0],
+						"Base_Damage": [5, 10, 15, 20, 25, 30, 35],
+						"Damage_AD_Ratio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"Bonus_Attack_Range": [50, 50, 50, 50, 50, 50, 50],
+						"Damage_Monster_Bonus": [10, 10, 10, 10, 10, 10, 10]
+					},
+					"spellCalculations": {
+						"Calc_Max_Health_Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Max_Health_Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "Max_Health_AD_Ratio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"Calc_Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BASE_DAMAGE",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "Damage_AD_Ratio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_Dragon_Form_Damage": {
+							"mMultiplier": {
+								"mNumber": 1.5
+							},
+							"mModifiedGameCalculation": "Calc_Damage"
+						},
+						"Calc_Max_Health_Monster_Minimum": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mNumber": 10,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"Calc_Max_Health_Monster_Maximum": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 200,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"Calc_Monster_Bonus": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage_Monster_Bonus",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{aee2a1e8}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Inferno Aegis",
+					"objectName": "ShyvanaW",
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaWAbility/ShyvanaW",
+					"image": "assets/characters/shyvana/hud/icons2d/shyvana_w1.shyvana_rework.png",
+					"tooltip": "Shyvana wraps herself in flames for @Duration@ seconds, gaining <shield>@Calc_Shield@ Shield</shield>, increased by <shield>@Calc_Shield_Per_Nearby_Champion@</shield> per nearby enemy champion and <speed>@MoveSpeed@ Move Speed</speed>, increased to <speed>@MoveSpeedTowardsEnemies@</speed> when moving towards enemy champions.<br><br>When the effect ends, the <shield>Shield</shield> is broken, or upon <recast>Recast</recast> the area around her detonates, dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br><keywordMajor>Dragon Form:</keywordMajor> If the detonation hits an enemy champion Shyvana <healing> @Calc_Base_Heal@ + @Calc_Missing_Health_Heal@ Missing Health</healing>.",
+					"extendedVariables": [
+						{
+							"name": "Shield",
+							"nameOverride": "spell_listtype_shield"
+						},
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
+					"dataValues": {
+						"Duration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"Radius": [350, 350, 350, 350, 350, 350, 350],
+						"Shield": [55, 75, 95, 115, 135, 155, 175],
+						"Shield_Radius": [600, 600, 600, 600, 600, 600, 600],
+						"BaseMoveSpeed": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"BaseDamage": [60, 80, 100, 120, 140, 160, 180],
+						"MissingHealthHealMultiplier": [2, 2, 2, 2, 2, 2, 2],
+						"MoveSpeedAmpTowardsEnemies": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
+						"ShieldMaxHealth": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MoveSpeed": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMoveSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"Calc_Shield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Shield",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "{1cf2fe1c}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"Calc_Shield_Per_Nearby_Champion": {
+							"mMultiplier": {
+								"mNumber": 0.3
+							},
+							"mModifiedGameCalculation": "Calc_Shield"
+						},
+						"Calc_Heal_Min": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 75,
+									"mEndValue": 200,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_Heal_Max": {
+							"mMultiplier": {
+								"mDataValue": "MissingHealthHealMultiplier"
+							},
+							"mModifiedGameCalculation": "Calc_Heal_Min"
+						},
+						"MoveSpeedTowardsEnemies": {
+							"mMultiplier": {
+								"mDataValue": "MoveSpeedAmpTowardsEnemies"
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mModifiedGameCalculation": "MoveSpeed"
+						},
+						"{f468ef05}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.04,
+									"mEndValue": 0.08,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{b35447ff}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 60,
+									"mEndValue": 100,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Molten Burst",
+					"objectName": "ShyvanaE",
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaEAbility/ShyvanaE",
+					"image": "assets/characters/shyvana/hud/icons2d/shyvana_e.shyvana_rework.png",
+					"tooltip": "Shyvana launches a fireball at the target location dealing <magicDamage>@Damage@ + @Calc_Max_Health_Damage@ Max health magic damage</magicDamage> and <status>Slowing by @Calc_Slow@ for @SlowDuration@ seconds</status>. It explodes upon striking an enemy or reaching its terminus.<br><br><keywordMajor>Dragon Form:</keywordMajor> Shyvana's fireball is larger and pierces through enemies. Upon striking a champion, large monster, or reaching its terminus it triggers a pulse of fire that deals <magicDamage>@Calc_Dragon_Damage@  + @Calc_Max_Health_Dragon_Damage@ Max Health magic damage</magicDamage> and <status>Slows by @Calc_Slow_Dragon@ for @SlowDuration@ seconds</status>. The fireball leaves behind a trail for @GroundLingerDuration@ seconds that deals <magicDamage>@DamagePerSecond@ magic damage per second</magicDamage>. ",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "DamageAPRatio",
+							"nameOverride": "spell_listtype_apratio"
+						}
+					],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
+					"dataValues": {
+						"BaseDamage": [35, 50, 65, 80, 95, 110, 125],
+						"BaseDamagePerSecond": [0, 10, 20, 30, 40, 50, 60],
+						"GroundLingerDuration": [2, 2, 2, 2, 2, 2, 2],
+						"GroundRadius": [150, 150, 150, 150, 150, 150, 150],
+						"TrailRadius": [75, 75, 75, 75, 75, 75, 75],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SlowAmount": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"DragonGroundRadius": [300, 300, 300, 300, 300, 300, 300],
+						"DragonTrailRadius": [100, 100, 100, 100, 100, 100, 100],
+						"DragonCastRangeScale": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"RepeatExplosionDelay": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"DamageAPRatio": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85],
+						"MaxHealthDamage": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"DamageDragonMod": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "DamageAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"DamagePerSecond": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 15,
+									"mBreakpoints": [
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 5
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_Multihit_Efficacy": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 0.4,
+									"__type": "NumberCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"Calc_Dragon_Damage": {
+							"mMultiplier": {
+								"mNumber": 1.25
+							},
+							"mModifiedGameCalculation": "Damage"
+						},
+						"Calc_Slow": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlowAmount",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"Calc_Slow_Dragon": {
+							"mMultiplier": {
+								"mNumber": 1
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mModifiedGameCalculation": "Calc_Slow"
+						},
+						"Calc_Max_Health_Damage": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "MaxHealthDamage",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"{bb85c3b6}": {
+							"mMultiplier": {
+								"mDataValue": "{fcb67619}"
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "Calc_Max_Health_Damage"
+						},
+						"Calc_Max_Health_Monster_Minimum": {},
+						"Calc_Max_Health_Monster_Maximum": {
+							"mFormulaParts": [
+								{
+									"mNumber": 200,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Dragon's Descent",
+					"objectName": "ShyvanaR",
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaRAbility/ShyvanaR",
+					"image": "assets/characters/shyvana/hud/icons2d/shyvana_r.shyvana_rework.png",
+					"tooltip": "<spellPassive>Passive</spellPassive>: Shyvana generates <keywordMajor>@Fury_Generation@ Dragon Fury</keywordMajor> by striking enemies with Attacks and Abilities, increased by @TT_Fury_Mult@ while in <keywordMajor>Dragon Form</keywordMajor>, and reduced @TT_Fury_AoE_Penalty@ by when striking in an area against non-champions.<br><br><spellActive>Active</spellActive>: Shyvana transforms into her <keywordMajor>Dragon Form</keywordMajor>, becoming <attention>Unstoppable</attention>, and flying to the target location breathing fire on enemies below dealing <magicDamage>@Damage@ magic damage</magicDamage> and causing them <status>Flee for @FearDuration@ seconds</status>.<br><br>While transformed, Shyvana's basic Abilities are upgraded, she gains <scaleHealth>@Calc_Bonus_Health@ bonus Health</scaleHealth>, size, and Attack Range. Shyvana loses <keywordMajor>Dragon Fury</keywordMajor> over time and her transformation ends when she has no <keywordMajor>Dragon Fury</keywordMajor> remaining.",
+					"extendedVariables": [
+						{
+							"name": "FuryGain",
+							"nameOverride": "spell_shyvana_listtype_furygainpersecond"
+						},
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "BonusHealth",
+							"nameOverride": "spell_listtype_bonushealth"
+						},
+						{
+							"name": "SizeScaling",
+							"nameOverride": "spell_shyvana_listtype_dragonformsize"
+						},
+						{
+							"name": "BonusAttackRange",
+							"nameOverride": "spell_shyvana_listtype_dragonformattackrange"
+						}
+					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"MinCastRange": [400, 400, 400, 400, 400, 400, 400],
+						"JumpDelay": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"JumpDampening": [70, 70, 70, 70, 70, 70, 70],
+						"JumpGravity": [25, 25, 25, 25, 25, 25, 25],
+						"JumpForwardMultiplier": [100, 100, 100, 100, 100, 100, 100],
+						"Width": [225, 225, 225, 225, 225, 225, 225],
+						"FuryGain": [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75],
+						"FuryDrainPerSecond": [6.667, 6.667, 6.667, 6.667, 6.667, 6.667, 6.667],
+						"Fury_Generation": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"FuryDragonFormMult": [3, 3, 3, 3, 3, 3, 3],
+						"Fury_AoE_Efficacy": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"FearDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
+						"BonusHealth": [50, 150, 250, 350, 450, 550, 650],
+						"SizeScaling": [-0.025, 0.05, 0.125, 0.2, 0.275, 0.35, 0.425],
+						"BonusAttackRange": [0, 25, 50, 75, 100, 125, 150],
+						"FuryGainPerUltHaste": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_Bonus_Health": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusHealth",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{57d26a55}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 1050,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"TT_Fury_Mult": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "FuryDragonFormMult",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mNumber": -1,
+									"__type": "NumberCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"TT_Fury_AoE_Penalty": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mPart1": {
+										"mNumber": -1
+									},
+									"mPart2": {
+										"mDataValue": "Fury_AoE_Efficacy"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Scalemail",
+					"objectName": "ShyvanaPassive",
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaPassiveAbility/ShyvanaPassive",
+					"image": "assets/characters/shyvana/hud/icons2d/shyvana_passive.shyvana_rework.png",
+					"tooltip": "{{Spell_Shyvana_Passive_Tooltip}}",
+					"tooltipExtended": "{{Spell_Shyvana_Passive_Tooltip}}<br><br><rules>Large monsters and siege minions grant @Stacks_Per_Large_Monster@ stack.<br>Champions and Epic monsters grant @Stacks_Per_Epic_Monster@ stacks.</rules>",
+					"dataValues": {
+						"BonusArmor": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"BonusMagicResist": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"PassiveScale": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"Stacks_Per_Epic_Monster": [3, 3, 3, 3, 3, 3, 3],
+						"Stacks_Per_Champion": [3, 3, 3, 3, 3, 3, 3],
+						"Stacks_Per_Buff_Monster": [1, 1, 1, 1, 1, 1, 1],
+						"Stacks_Per_Large_Monster": [1, 1, 1, 1, 1, 1, 1]
+					},
+					"spellCalculations": {
+						"Calc_Bonus_Armor": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{bba88b2a}",
+									"mIconKey": "%i:Shyvana%",
+									"mDataValue": "BonusArmor",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						},
+						"Calc_Bonus_MR": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{bba88b2a}",
+									"mIconKey": "%i:Shyvana%",
+									"mDataValue": "BonusMagicResist",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_apratio": "Total AP Ratio",
+		"spell_shyvana_listtype_furygainpersecond": "Dragon Fury Generation per Second",
+		"spell_listtype_bonushealth": "Bonus Health",
+		"spell_shyvana_listtype_dragonformsize": "Ability Size",
+		"spell_shyvana_listtype_dragonformattackrange": "Attack Range",
+		"spell_shyvana_passive_name": "Scalemail",
+		"spell_shyvana_passive_tooltip": "Takedowns on champions, large minions, and monsters earn Shyvana stacks of <spellName>{{Spell_Shyvana_Passive_Name}} %i:Shyvana%</spellName>, each stack grants Shyvana permanent <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMagicResist@ Magic Resist</scaleMR>.<br><br><scaleArmor>Bonus Armor: @Calc_Bonus_Armor@</scaleArmor><br><scaleMR>Bonus Magic Resist: @Calc_Bonus_MR@</scaleMR>"
+	}
+}

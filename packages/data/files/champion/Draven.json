@@ -1,0 +1,282 @@
+{
+	"id": "Draven",
+	"key": "119",
+	"name": "Draven",
+	"partype": "Mana",
+	"stats": {
+		"hp": 675,
+		"hpperlevel": 104,
+		"mp": 361,
+		"mpperlevel": 39,
+		"movespeed": 330,
+		"armor": 29,
+		"armorperlevel": 4.5,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 550,
+		"hpregen": 3.75,
+		"hpregenperlevel": 0.7,
+		"mpregen": 8.05,
+		"mpregenperlevel": 0.65,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 62,
+		"attackdamageperlevel": 3.4,
+		"attackspeedperlevel": 2.7,
+		"attackspeed": 0.679,
+		"attackspeedratio": 0.679
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Spinning Axe",
+					"objectName": "DravenSpinning",
+					"dataKey": "Characters/Draven/Spells/DravenSpinningAbility/DravenSpinning",
+					"image": "assets/characters/draven/hud/icons2d/draven_spinningaxe.png",
+					"tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "ADScaling",
+							"nameOverride": "spell_listtype_bonusadpercentage"
+						}
+					],
+					"mana": [45, 45, 45, 45, 45, 45],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
+					"dataValues": {
+						"BaseDamage": [35, 40, 45, 50, 55, 60, 65],
+						"ADScaling": [0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25],
+						"DurationTOOLTIP": [6, 6, 6, 6, 6, 6, 6]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADScaling",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"1": [75, 75, 75, 75, 75, 75, 75],
+						"3": [5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75]
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Blood Rush",
+					"objectName": "DravenFury",
+					"dataKey": "Characters/Draven/Spells/DravenFuryAbility/DravenFury",
+					"image": "assets/characters/draven/hud/icons2d/draven_bloodrage.png",
+					"tooltip": "Draven becomes Ghosted, gains <speed>@Effect2Amount@% Move Speed</speed> decaying over @Effect3Amount@ seconds and <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's Cooldown is refreshed.",
+					"extendedVariables": [
+						{
+							"name": "MoveSpeed",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"name": "AttackSpeed",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [40, 35, 30, 25, 20, 15],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"dataValues": {
+						"AttackSpeed": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
+						"AttackSpeedDuration": [3, 3, 3, 3, 3, 3, 3],
+						"MoveSpeed": [0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75],
+						"MoveSpeedDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
+					},
+					"effectAmount": {
+						"1": [45, 50, 55, 60, 65, 70, 75],
+						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"3": [20, 20, 25, 30, 35, 40, 45],
+						"4": [3, 3, 3, 3, 3, 3, 3],
+						"5": [-0.056, -0.062, -0.069, -0.075, -0.081, -0.087, -0.094]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Stand Aside",
+					"objectName": "DravenDoubleShot",
+					"dataKey": "Characters/Draven/Spells/DravenDoubleShotAbility/DravenDoubleShot",
+					"image": "assets/characters/draven/hud/icons2d/draven_twinaxe.png",
+					"tooltip": "Draven chucks a sideways axe that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>, <status>Knocks Back</status>, and <status>Slows</status> by @Effect2Amount@% for @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Effect2Amount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [19, 18, 17, 16, 15, 14, 14],
+					"dataValues": {
+						"BaseDamage": [40, 75, 110, 145, 180, 215, 250]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [40, 75, 110, 145, 180, 215, 250],
+						"1": [15, 20, 25, 30, 35, 40, 45],
+						"2": [2, 2, 2, 2, 2, 2, 2],
+						"3": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Whirling Death",
+					"objectName": "DravenRCast",
+					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast",
+					"image": "assets/characters/draven/hud/icons2d/draven_whirlingdeath.png",
+					"tooltip": "Draven hurls two massive axes that deal <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal @RDamageReductionPerHit*100@% less damage for each enemy hit, down to a minimum of @RMinDamagePercent@%.<br><br>If <keywordMajor>{{ Spell_DravenRCast_Name }}</keywordMajor> would leave an enemy champion with less health than @RPassiveStacksCoefficient*100@% of Draven's current <keywordMajor>{{Spell_DravenPassive_Name}}</keywordMajor> stacks (@RPassiveTrueDamage@), he will execute them.",
+					"extendedVariables": [
+						{
+							"name": "RBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "RCoefficient",
+							"nameOverride": "spell_listtype_bonusadratio"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 90, 80, 0, 0, 0],
+					"dataValues": {
+						"RBaseDamage": [100, 200, 300, 400, 500, 600, 700],
+						"RMinDamagePercent": [40, 40, 40, 40, 40, 40, 40],
+						"RDamageReductionPerHit": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"RCoefficient": [0.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1],
+						"RPassiveStacksCoefficient": [1, 1, 1, 1, 1, 1, 1]
+					},
+					"spellCalculations": {
+						"RCalculatedDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "RCoefficient",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"RPassiveTrueDamage": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{577427b5}",
+									"mDataValue": "RPassiveStacksCoefficient",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "League of Draven",
+					"objectName": "DravenPassive",
+					"dataKey": "Characters/Draven/Spells/DravenPassiveAbility/DravenPassive",
+					"image": "assets/characters/draven/hud/icons2d/draven_passive.png",
+					"tooltip": "Draven gains @StackGain@ stack whenever he kills a non-champion unit or turret, catches a <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven gains @PassiveGoldBase@ gold plus @PassiveGoldPerStack@ additional gold per stack upon killing a champion. Draven loses @PercentOfStacksLost@% of stacks upon death.<br><br>Total Gold Earned: <statTracking>@DravenPassiveGoldEarned@</statTracking><br>Highest Reward: <statTracking>@DravenPassiveHighestBounty@</statTracking>",
+					"dataValues": {
+						"PassiveGoldBase": [25, 25, 25, 25, 25, 25, 25],
+						"PassiveGoldPerStack": [2, 2, 2, 2, 2, 2, 2],
+						"PercentOfStacksLost": [50, 50, 50, 50, 50, 50, 50],
+						"StackGain": [1, 1, 1, 1, 1, 1, 1],
+						"StackGainEnemy": [10, 10, 10, 10, 10, 10, 10],
+						"CherryStacksPerRoundBeforeMultiplier": [10, 10, 10, 10, 10, 10, 10],
+						"CherryStackMultiplier": [5, 5, 5, 5, 5, 5, 5]
+					},
+					"spellCalculations": {
+						"DravenPassiveGoldEarned": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "DravenPassiveGoldEarned",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						},
+						"DravenPassiveHighestBounty": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "DravenPassiveHighestBounty",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_bonusadpercentage": "Bonus AD Percentage",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_bonusadratio": "Bonus AD Ratio"
+	}
+}

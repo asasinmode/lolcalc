@@ -1,6 +1,12 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
+import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { IChampionStatName, IChampionStats } from '@lolcalc/shared';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
+import { PATCH_VERSION } from '@lolcalc/data';
+import { STAT_ICON } from '@lolcalc/data/meta';
+import { ALL_CHAMPION_STATS, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 
 const props = defineProps<IExtraComponentProps<'champion'>>();
 
@@ -8,7 +14,7 @@ defineEmits<IExtraComponentEmits>();
 
 const el = useTemplateRef('el');
 
-const { minorVersion } = usePatchVersion();
+const { vMinor } = PATCH_VERSION;
 
 const damageSources = inject<Ref<DamageSource[]>>('damageSources')!;
 const damageTargets = inject<Ref<DamageSource[]>>('damageTargets')!;
@@ -17,7 +23,7 @@ function statImage(statName: IChampionStatName) {
 	const icon = STAT_ICON[statName];
 	return typeof icon === 'string'
 		? {
-				src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
+				src: `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
 				width: 20,
 				height: 20,
 			}

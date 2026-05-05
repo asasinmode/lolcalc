@@ -1,0 +1,39 @@
+{
+	"name": "@lolcalc/monorepo",
+	"type": "module",
+	"version": "0.0.1",
+	"private": true,
+	"packageManager": "pnpm@10.33.2",
+	"description": "collection of tools and apps related to lolcalc",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"license": "AGPL-3.0-only",
+	"scripts": {
+		"typecheck:packages": "vue-tsc --noEmit",
+		"typecheck:website": "cd packages/website && pnpm typecheck",
+		"typecheck": "run-p --aggregate-output -c \"typecheck:packages\" \"typecheck:website\"",
+		"lint": "eslint --fix --cache ."
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "catalog:",
+		"@lolcalc/core": "workspace:*",
+		"@lolcalc/data": "workspace:*",
+		"@lolcalc/shared": "workspace:*",
+		"@lolcalc/website": "workspace:*",
+		"@nuxt/eslint": "catalog:",
+		"@types/node": "catalog:",
+		"@unocss/eslint-config": "catalog:",
+		"eslint": "catalog:",
+		"eslint-plugin-format": "catalog:",
+		"npm-run-all2": "catalog:",
+		"typescript": "catalog:",
+		"vue-tsc": "catalog:"
+	},
+	"simple-git-hooks": {
+		"pre-push": "npx lint-staged"
+	},
+	"lint-staged": {
+		"*.{js,ts,vue,md,json,css}": [
+			"eslint --cache --fix"
+		]
+	}
+}

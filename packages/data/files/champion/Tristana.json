@@ -1,0 +1,313 @@
+{
+	"id": "Tristana",
+	"key": "18",
+	"name": "Tristana",
+	"partype": "Mana",
+	"stats": {
+		"hp": 640,
+		"hpperlevel": 102,
+		"mp": 300,
+		"mpperlevel": 32,
+		"movespeed": 325,
+		"armor": 30,
+		"armorperlevel": 4,
+		"spellblock": 28,
+		"spellblockperlevel": 1.3,
+		"attackrange": 550,
+		"hpregen": 4,
+		"hpregenperlevel": 0.5,
+		"mpregen": 7.2,
+		"mpregenperlevel": 0.45,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 60,
+		"attackdamageperlevel": 2.9,
+		"attackspeedperlevel": 1.5,
+		"attackspeed": 0.656,
+		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Rapid Fire",
+					"objectName": "TristanaQ",
+					"dataKey": "Characters/Tristana/Spells/TristanaQAbility/TristanaQ",
+					"image": "assets/characters/tristana/hud/icons2d/tristana_q.png",
+					"tooltip": "Tristana goes full-auto, gaining <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "AttackSpeedMod",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [30, 35, 40, 45, 50, 50],
+					"cooldownTime": [21, 20, 19, 18, 17, 16, 16],
+					"dataValues": {
+						"AttackSpeedMod": [0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35],
+						"BuffDuration": [7, 7, 7, 7, 7, 7, 7]
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Rocket Jump",
+					"objectName": "TristanaW",
+					"dataKey": "Characters/Tristana/Spells/TristanaWAbility/TristanaW",
+					"image": "assets/characters/tristana/hud/icons2d/tristana_w.png",
+					"tooltip": "Tristana launches herself, dealing <magicDamage>@LandingDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowMod*-100@% for @SlowDuration@ seconds upon landing.<br><br>Champion takedowns and max stack <spellName>{{Spell_TristanaE_Name}}</spellName> detonations on champions refresh this Ability's Cooldown.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [30, 35, 40, 45, 50, 50],
+					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
+					"dataValues": {
+						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SlowMod": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, -0.4],
+						"DamageRadius": [350, 350, 350, 350, 350, 350, 350],
+						"ADRatio": [1, 1, 1, 1, 1, 1, 1],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"LandingDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Explosive Charge",
+					"objectName": "TristanaE",
+					"dataKey": "Characters/Tristana/Spells/TristanaEAbility/TristanaE",
+					"image": "assets/characters/tristana/hud/icons2d/tristana_e.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>@PassiveDamage@ magic damage</magicDamage> to surrounding enemies.<br><br><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>@ActiveDamage@ physical damage</physicalDamage> to surrounding enemies after @ActiveDuration@ seconds. The damage is increased by @ActivePerStackAmp*100@% each time Tristana hits an Attack or Ability (max 4 stacks).<br><br>At @ActiveMaxStacks@ stacks, the bomb explodes immediately (max <physicalDamage>@ActiveMaxDamage@ physical damage</physicalDamage>).",
+					"extendedVariables": [
+						{
+							"name": "PassiveBaseDamage",
+							"nameOverride": "spell_listtype_tristanapassiveexplosiondamage"
+						},
+						{
+							"name": "ActiveBaseDamage",
+							"nameOverride": "spell_listtype_tristanabasechargedamage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 14],
+					"dataValues": {
+						"PassiveBaseDamage": [30, 45, 60, 75, 90, 105, 120],
+						"PassiveRadius": [300, 300, 300, 300, 300, 300, 300],
+						"ActiveBaseDamage": [35, 60, 85, 110, 135, 160, 185],
+						"ActiveBADRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"ActiveRadius": [300, 300, 300, 300, 300, 300, 300],
+						"ActiveTowerRadius": [600, 600, 600, 600, 600, 600, 600],
+						"ActiveMaxStacks": [4, 4, 4, 4, 4, 4, 4],
+						"ActiveDuration": [4, 4, 4, 4, 4, 4, 4],
+						"ActivePerStackAmp": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"CritChanceModifier": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"PassiveDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ActiveDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mStat": 8,
+											"mDataValue": "CritChanceModifier"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "ActiveBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mSubpart": {
+										"mDataValue": "ActiveBADRatio"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ActiveMaxDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mDataValue": "ActivePerStackAmp"
+										},
+										"mPart2": {
+											"mDataValue": "ActiveMaxStacks"
+										}
+									}
+								]
+							},
+							"mModifiedGameCalculation": "ActiveDamage"
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Buster Shot",
+					"objectName": "TristanaR",
+					"dataKey": "Characters/Tristana/Spells/TristanaRAbility/TristanaR",
+					"image": "assets/characters/tristana/hud/icons2d/tristana_r.png",
+					"tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for @StunDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "KnockbackDistance",
+							"nameOverride": "spell_listtype_tristanaknockbackdistance"
+						},
+						{
+							"name": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
+					"dataValues": {
+						"BaseDamage": [175, 225, 275, 325, 375, 425, 475],
+						"KnockbackDistance": [400, 600, 800, 1000, 1200, 1400, 1600],
+						"KnockbackArea": [200, 200, 200, 200, 200, 200, 200],
+						"StunDuration": [0.25, 0.4, 0.55, 0.7, 0.85, 1, 1.15],
+						"APRatio": [1, 1, 1, 1, 1, 1, 1]
+					},
+					"spellCalculations": {
+						"DamageCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Draw a Bead",
+					"objectName": "TristanaPassive",
+					"dataKey": "Characters/Tristana/Spells/TristanaPassiveAbility/TristanaPassive",
+					"image": "assets/characters/tristana/hud/icons2d/tristana_passive.png",
+					"tooltip": "Tristana's Attack Range and the range of <spellName>{{Spell_TristanaE_Name}}</spellName> and <spellName>{{Spell_TristanaR_Name}}</spellName> are increased by @BonusPassiveRange@.",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"spellCalculations": {
+						"BonusPassiveRange": {
+							"mFormulaParts": [
+								{
+									"mEndValue": 150,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_tristanapassiveexplosiondamage": "Passive Explosion Damage",
+		"spell_listtype_tristanabasechargedamage": "Base Charge Damage",
+		"spell_listtype_tristanaknockbackdistance": "Knockback Distance",
+		"spell_listtype_stunduration": "Stun Duration:",
+		"spell_tristanae_name": "Explosive Charge",
+		"spell_tristanar_name": "Buster Shot"
+	}
+}

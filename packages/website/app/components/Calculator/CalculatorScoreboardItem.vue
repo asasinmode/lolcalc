@@ -1,5 +1,20 @@
 <script setup lang="ts">
-import type { IEffectAbilityId, IExtraComponentEmits, IGameAbilityId, IWithCalculateDynamicValues } from '~/utils/types';
+import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
+import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IChampionId, IDragonName, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
+import type { IChampionRole } from '@lolcalc/shared/types';
+import type { IExtraComponentEmits, IWithCalculateDynamicValues } from '~/utils/types';
+import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
+import { formatChampionStatValue, isMasterworkSlot } from '@lolcalc/core/DamageSource';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion';
+import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune';
+import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/game';
+import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
+import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, UI } from '@lolcalc/data';
+import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
+import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
@@ -33,16 +48,12 @@ const emit = defineEmits<{
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const highlightedDamageSources = useHighlightedDamageSources();
-const { championImage, abilityImage, abilityImageSize, championImageSize } = useChampionImages();
-const runes = useRunes();
-const ui = useUi();
-const misc = useMisc();
-const { version, minorVersion } = usePatchVersion();
+const { championImage, abilityImage, abilityImageSize, championImageSize } = CHAMPION_IMAGES;
+const { vSemver, vMinor } = PATCH_VERSION;
 const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
 const { selectItems } = useItemShop();
 const { selectEffects } = useEffectsDialog();
-const text = useText();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const el = useTemplateRef('el');
@@ -70,16 +81,14 @@ const imageSizes = computed(() => {
 	return { champion, ability };
 });
 
-const runeIconImgSrc = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
-
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
 	if (primarySlots[0]) {
-		const { icon } = runes.paths[primary].slots[0]![primarySlots[0]]!;
-		const { name } = text.runes.slots[primarySlots[0]!]!;
-		const { name: pathName } = text.runes.paths[primary]!;
+		const { icon } = RUNES.paths[primary].slots[0]![primarySlots[0]]!;
+		const { name } = TEXT.runes.slots[primarySlots[0]!]!;
+		const { name: pathName } = TEXT.runes.paths[primary]!;
 		return {
-			icon: `https://raw.communitydragon.org/${minorVersion}/game/${icon}`,
+			icon: `https://raw.communitydragon.org/${vMinor}/game/${icon}`,
 			name,
 			pathName,
 		};
@@ -90,10 +99,10 @@ const runePathPrimary = computed(() => {
 const runePathSecondary = computed(() => {
 	const { secondary } = props.value.runes.value.paths;
 	if (secondary) {
-		const { iconColor } = runes.paths[secondary]!;
-		const { name } = text.runes.paths[secondary]!;
+		const { iconColor } = RUNES.paths[secondary]!;
+		const { name } = TEXT.runes.paths[secondary]!;
 		return {
-			icon: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`,
+			icon: `https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`,
 			iconColor,
 			name,
 		};
@@ -274,17 +283,17 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 
 	let shardAnyUnknown = 0;
 	const shardDescriptions = Object.entries(shards as any).map(([shardSlot, shardName]) => {
-		const rune = (runes.shards[shardSlot as IRuneShardSlotName] as any)[shardName as string];
+		const rune = (RUNES.shards[shardSlot as IRuneShardSlotName] as any)[shardName as string];
 
 		const dynamicValues = (RUNE_SPECIFICS.shards as IWithCalculateDynamicValues)[shardName as string]?.calculateDynamicVariables?.(props.value);
 
-		const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceGameDescriptionStringtableVariables(
-			text.runes.shards.slotValues[shardName as string]!.tooltipStats,
-			text.stringtable,
+		const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceStringtableVariables(
+			TEXT.runes.shards.slotValues[shardName as string]!.tooltipStats,
+			TEXT.stringtable,
 			dynamicValues,
 		);
 
-		const { replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
+		const { replaced, unknownVariables: unknownV } = replaceGameVariables(
 			stringtableVariableReplaced,
 			'rune',
 			[{
@@ -304,23 +313,23 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 			name: 'Rune shards',
 			description: shardDescriptions.join('<br>'),
 			anyUnknownVariables: shardAnyUnknown,
-			icon: runeIconImgSrc,
+			icon: ICON_RUNE_SRC,
 			iconDimensions: 80,
 		}]);
 });
 
 function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePathName, isPrimary: boolean): IChampionRune {
-	const rune = runes.paths[path].slots[isPrimary ? slotNumber : RUNE_SLOT_NAME_TO_NUMBER[slotName]!]![slotName]!;
-	const { name, tooltipStats } = text.runes.slots[slotName]!;
+	const rune = RUNES.paths[path].slots[isPrimary ? slotNumber : RUNE_SLOT_NAME_TO_NUMBER[slotName]!]![slotName]!;
+	const { name, tooltipStats } = TEXT.runes.slots[slotName]!;
 
-	const icon = `https://raw.communitydragon.org/${minorVersion}/game/${rune.icon}`;
+	const icon = `https://raw.communitydragon.org/${vMinor}/game/${rune.icon}`;
 
-	const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceGameDescriptionStringtableVariables(
+	const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceStringtableVariables(
 		tooltipStats,
-		text.stringtable,
+		TEXT.stringtable,
 	);
 
-	const { replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
+	const { replaced, unknownVariables: unknownV } = replaceGameVariables(
 		stringtableVariableReplaced,
 		'rune',
 		[rune],
@@ -350,7 +359,7 @@ function hideStatTooltip() {
 
 interface IChampionStat {
 	name: string;
-	iconTextureKey: keyof (typeof ui)['playerStats'];
+	iconTextureKey: keyof (typeof UI)['playerStats'];
 	description: string;
 	values: {
 		stat: IChampionStatName;
@@ -768,16 +777,16 @@ const hoveredDragonThingText = computed(() => {
 	}
 
 	const [dragonName, abilityName] = hoveredDragonThing.value;
-	const ability = misc.dragons[dragonName][abilityName];
-	const string = text.dragons[dragonName][abilityName];
+	const ability = MISC.dragons[dragonName][abilityName];
+	const string = TEXT.dragons[dragonName][abilityName];
 	const isStack = abilityName === 'stack';
 
-	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(string);
+	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
 
-	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
+	const { replaced, unknownVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		[ability, 1, [misc.dragons[dragonName].stack, misc.dragons[dragonName].soul]],
+		[ability, 1, [MISC.dragons[dragonName].stack, MISC.dragons[dragonName].soul]],
 	);
 
 	let invalid: string | undefined;
@@ -792,7 +801,7 @@ const hoveredDragonThingText = computed(() => {
 
 	return {
 		title: `${dragonName} ${isStack ? 'Dragon' : 'Soul'}`,
-		description: replaceGameDescriptionIcons(minorVersion, replaced),
+		description: replaceGameIcons(replaced),
 		anyUnknown: unknownStringtableVariables.size || unknownVariables.length,
 		invalid,
 	};
@@ -923,7 +932,7 @@ defineExpose({ el });
 				>
 				<img
 					v-else
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+					:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
 					width="256"
 					height="256"
 					style="--focus-brightness: 1.5"
@@ -970,7 +979,7 @@ defineExpose({ el });
 			</template>
 			<img
 				v-else
-				:src="runeIconImgSrc"
+				:src="ICON_RUNE_SRC"
 				aria-hidden="true"
 				width="32"
 				height="32"
@@ -991,7 +1000,7 @@ defineExpose({ el });
 		<button data-select-items="" class="other-ui-btn" @click="selectItems(value)">
 			items
 			<img
-				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
+				:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
 				width="32"
 				height="28"
 				aria-hidden="true"
@@ -1027,7 +1036,7 @@ defineExpose({ el });
 					<span>{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
 					<img
 						v-if="value.items.value[i - 1]"
-						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${value.items.value[i - 1]!.image}`"
+						:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${value.items.value[i - 1]!.image}`"
 						width="64"
 						height="64"
 						loading="lazy"
@@ -1124,7 +1133,7 @@ defineExpose({ el });
 					<template v-for="stat in stats" :key="stat.name">
 						<dt @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
 							<span>{{ stat.name }}</span>
-							<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
+							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)">
 						</dt>
 						<dd
 							:data-has-bonus="stat.values.some(statValue => statValue.bonus) || undefined"
@@ -1161,7 +1170,7 @@ defineExpose({ el });
 				<h4>effects</h4>
 				<button class="other-ui-btn" @click="selectEffects(value)">
 					effects
-					<img v-bind="textureBgImageAttrs(ui.practiceTool.statusEffect, 24)">
+					<img v-bind="textureBgImageAttrs(UI.practiceTool.statusEffect, 24)">
 				</button>
 				<ul>
 					<li
@@ -1258,7 +1267,7 @@ defineExpose({ el });
 					@click="value.shapeshift"
 				>
 					<span>shapeshift</span>
-					<icon class="i-ph:arrows-clockwise-bold" />
+					<Icon class="i-ph:arrows-clockwise-bold" />
 				</button>
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
@@ -1317,7 +1326,7 @@ defineExpose({ el });
 				<VSelect
 					:id="`${idPrefix}-role-quest`"
 					:model-value="value.roleQuest.value"
-					:options="Object.keys(text.roleQuests).map(role => [role, role]) as [IChampionRole, string][]"
+					:options="Object.keys(TEXT.roleQuests).map(role => [role, role]) as [IChampionRole, string][]"
 					label="role quest"
 					clearable
 					@update:model-value="updateRoleQuest"
@@ -1326,14 +1335,14 @@ defineExpose({ el });
 					<template v-if="value.roleQuest.value">
 						<img
 
-							:src="`https://raw.communitydragon.org/${minorVersion}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
+							:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
 							width="64"
 							height="64"
 							loading="lazy"
 							aria-hidden="true"
 						>
 						<img
-							:src="`https://raw.communitydragon.org/${minorVersion}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
+							:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
 							width="32"
 							height="32"
 							loading="lazy"
@@ -1344,7 +1353,7 @@ defineExpose({ el });
 				<div ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
 					<h5>{{ value.roleQuest.value }}{{ value.roleQuest.value !== 'jungle' && value.roleQuest.value !== 'support' ? ' lane' : '' }} quest rewards</h5>
 					<ul class="game-description">
-						<li v-for="(reward, i) in value.roleQuest.value ? text.roleQuests[value.roleQuest.value] : []" :key="i">
+						<li v-for="(reward, i) in value.roleQuest.value ? TEXT.roleQuests[value.roleQuest.value] : []" :key="i">
 							{{ reward }}
 						</li>
 					</ul>
@@ -1364,7 +1373,7 @@ defineExpose({ el });
 					@update:model-value="updateDragonThing($event, 'stack', i - 1)"
 					@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, [value.dragonStacks.value[i - 1]!, 'stack'])"
 				>
-					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
+					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(UI.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
 					<template #post>
 						<div v-show="value.dragonStacksInvalid.value">
 							<span>(invalid)</span>
@@ -1382,7 +1391,7 @@ defineExpose({ el });
 					@update:model-value="updateDragonThing($event, 'soul')"
 					@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, [value.dragonSoul.value, 'soul'])"
 				>
-					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 44)" />
+					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(UI.dragons[value.dragonSoul.value].soulActive, 44)" />
 					<template #post>
 						<div v-show="value.dragonSoulInvalid.value">
 							<span>(invalid)</span>

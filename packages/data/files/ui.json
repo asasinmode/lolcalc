@@ -1,0 +1,435 @@
+{
+	"version": "16.9.1",
+	"data": {
+		"shop": {
+			"categories": {
+				"all": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [222, 95, 244, 117]
+				},
+				"fighter": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [869, 29, 893, 55]
+				},
+				"marksman": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [869, 86, 897, 109]
+				},
+				"assassin": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [940, 205, 964, 226]
+				},
+				"mage": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [869, 60, 893, 82]
+				},
+				"tank": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [875, 112, 893, 137]
+				},
+				"support": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [843, 216, 869, 238]
+				}
+			},
+			"stats": {
+				"attackDamage": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [2, 2, 20, 20]
+					},
+					"selected": {
+						"uv": [54, 3, 72, 21]
+					}
+				},
+				"crit": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [5, 30, 21, 46]
+					},
+					"selected": {
+						"uv": [56, 30, 72, 46]
+					}
+				},
+				"attackSpeed": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 55, 21, 73]
+					},
+					"selected": {
+						"uv": [54, 55, 72, 73]
+					}
+				},
+				"onHit": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [2, 83, 23, 101]
+					},
+					"selected": {
+						"uv": [53, 83, 74, 101]
+					}
+				},
+				"armorPen": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 110, 21, 128]
+					},
+					"selected": {
+						"uv": [54, 110, 72, 128]
+					}
+				},
+				"abilityPower": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [2, 138, 22, 158]
+					},
+					"selected": {
+						"uv": [53, 138, 73, 158]
+					}
+				},
+				"mana": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [5, 168, 19, 186]
+					},
+					"selected": {
+						"uv": [56, 168, 70, 186]
+					}
+				},
+				"magicPen": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 195, 21, 213]
+					},
+					"selected": {
+						"uv": [54, 195, 72, 213]
+					}
+				},
+				"health": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [2, 223, 22, 241]
+					},
+					"selected": {
+						"uv": [53, 223, 73, 241]
+					}
+				},
+				"magicResist": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 278, 21, 296]
+					},
+					"selected": {
+						"uv": [54, 278, 72, 296]
+					}
+				},
+				"armor": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 251, 21, 269]
+					},
+					"selected": {
+						"uv": [54, 251, 72, 269]
+					}
+				},
+				"abilityHaste": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 306, 21, 324]
+					},
+					"selected": {
+						"uv": [54, 306, 72, 324]
+					}
+				},
+				"movement": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 333, 21, 351]
+					},
+					"selected": {
+						"uv": [54, 333, 72, 351]
+					}
+				},
+				"vamp": {
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [3, 364, 23, 379]
+					},
+					"selected": {
+						"uv": [56, 364, 76, 379]
+					}
+				}
+			},
+			"clearFilters": {
+				"default": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas_2.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [71, 511, 135, 575]
+				},
+				"hover": {
+					"uv": [71, 680, 135, 744]
+				}
+			},
+			"swapItemOrder": {
+				"default": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas_2.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [31, 381, 111, 461]
+				},
+				"hover": {
+					"uv": [448, 139, 528, 219]
+				}
+			},
+			"pin": {
+				"default": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas_2.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [542, 83, 598, 139]
+				},
+				"hover": {
+					"uv": [542, 15, 598, 71]
+				},
+				"slcHover": {
+					"uv": [542, 219, 598, 275]
+				}
+			}
+		},
+		"playerStats": {
+			"healthResourceRegen": {
+				"spriteSheet": "uiautoatlas/clientstates/gameplay/ux/lol/playerstats/atlas_0.png",
+				"resWidth": 64,
+				"resHeight": 32,
+				"uv": [30, 2, 54, 26]
+			},
+			"healShieldPower": {
+				"spriteSheet": "uiautoatlas/clientstates/gameplay/ux/lol/playerstats/atlas_0.png",
+				"resWidth": 64,
+				"resHeight": 32,
+				"uv": [2, 2, 26, 26]
+			},
+			"armorPen": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [231, 435, 255, 459]
+			},
+			"magicPen": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [258, 435, 282, 459]
+			},
+			"lifeSteal": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [285, 461, 309, 485]
+			},
+			"omnivamp": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [258, 461, 282, 485]
+			},
+			"attackRange": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [312, 487, 336, 511]
+			},
+			"tenacity": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [258, 487, 282, 511]
+			},
+			"attackDamage": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [285, 409, 309, 433]
+			},
+			"abilityPower": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [312, 409, 336, 433]
+			},
+			"armor": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [285, 435, 309, 459]
+			},
+			"magicResist": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [312, 435, 336, 459]
+			},
+			"attackSpeed": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [231, 461, 255, 485]
+			},
+			"abilityHaste": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [312, 461, 336, 485]
+			},
+			"crit": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [231, 487, 255, 511]
+			},
+			"moveSpeed": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [285, 487, 309, 511]
+			}
+		},
+		"dragons": {
+			"Cloud": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [18, 263, 58, 303]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [4, 113, 72, 182]
+				}
+			},
+			"Mountain": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [93, 263, 133, 303]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [79, 113, 147, 182]
+				}
+			},
+			"Infernal": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [168, 263, 208, 303]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [154, 113, 222, 182]
+				}
+			},
+			"Ocean": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [243, 263, 283, 303]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [229, 113, 297, 182]
+				}
+			},
+			"Chemtech": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [395, 263, 435, 303]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [381, 114, 449, 182]
+				}
+			},
+			"Hextech": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [25, 468, 64, 507]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [13, 318, 82, 386]
+				}
+			}
+		},
+		"practiceTool": {
+			"statusEffect": {
+				"spriteSheet": "uiautoatlas/clientstates/gameplay/ux/lol/practicetool/atlas_0.png",
+				"resWidth": 1024,
+				"resHeight": 64,
+				"uv": [222, 2, 262, 42]
+			}
+		}
+	}
+}

@@ -1,3 +1,4 @@
+import type { IChampionRunes } from '@lolcalc/data/types';
 import LolRuneSelect from '~/components/Lol/LolRuneSelect.vue';
 
 let resolve: (() => void) | undefined;

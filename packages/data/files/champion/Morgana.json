@@ -1,0 +1,249 @@
+{
+	"id": "Morgana",
+	"key": "25",
+	"name": "Morgana",
+	"partype": "Mana",
+	"stats": {
+		"hp": 630,
+		"hpperlevel": 104,
+		"mp": 340,
+		"mpperlevel": 60,
+		"movespeed": 335,
+		"armor": 25,
+		"armorperlevel": 4.2,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 450,
+		"hpregen": 5.5,
+		"hpregenperlevel": 0.4,
+		"mpregen": 11,
+		"mpregenperlevel": 0.4,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 56,
+		"attackdamageperlevel": 3.5,
+		"attackspeedperlevel": 1.53,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Dark Binding",
+					"objectName": "MorganaQ",
+					"dataKey": "Characters/Morgana/Spells/MorganaQAbility/MorganaQ",
+					"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
+					"tooltip": "Morgana hurls a blast of starfire that <status>Roots</status> the first enemy hit for @RootDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"name": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "RootDuration",
+							"nameOverride": "spell_listtype_rootduration"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"dataValues": {
+						"Damage": [25, 80, 135, 190, 245, 300, 355],
+						"RootDuration": [1.75, 2, 2.25, 2.5, 2.75, 3, 3.25]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.9,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Tormented Shadow",
+					"objectName": "MorganaW",
+					"dataKey": "Characters/Morgana/Spells/MorganaWAbility/MorganaW",
+					"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png",
+					"tooltip": "Morgana ignites the ground for @WDuration@ seconds, dealing <magicDamage>@TotalMinDamage@ magic damage</magicDamage> per second, increased by up to <magicDamage>@TotalMaxDamage@</magicDamage> based on the targets' missing Health.<br><br>This Ability's Cooldown is reduced by @CDRefundPercent*100@% every time Morgana is healed by <spellName>{{Spell_MorganaPassive_Name}}</spellName>.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [70, 80, 90, 100, 110, 120],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"dataValues": {
+						"BaseDamage": [5, 18, 31, 44, 57, 70, 83],
+						"BaseAPRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"TickRate": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MissingHealthAmpPercent": [1, 1, 1, 1, 1, 1, 1],
+						"WDuration": [5, 5, 5, 5, 5, 5, 5],
+						"CDRefundPercent": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"MonsterMod": [170, 170, 170, 170, 170, 170, 170]
+					},
+					"spellCalculations": {
+						"TotalMinDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "BaseApRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalMaxDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mDataValue": "MissingHealthAmpPercent"
+									}
+								]
+							},
+							"mModifiedGameCalculation": "TotalMinDamage"
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Black Shield",
+					"objectName": "MorganaE",
+					"dataKey": "Characters/Morgana/Spells/MorganaEAbility/MorganaE",
+					"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png",
+					"tooltip": "Morgana grants an ally champion <shield>@TotalShieldStrength@ Magic Shield</shield> for @ShieldDuration@ seconds. The shield prevents <status>Disabling</status> and <status>Immobilizing</status> effects until it breaks.",
+					"extendedVariables": [
+						{
+							"name": "ShieldStrength",
+							"nameOverride": "spell_listtype_shieldamount"
+						}
+					],
+					"mana": [80, 80, 80, 80, 80, 80],
+					"cooldownTime": [26, 26, 23.5, 21, 18.5, 16, 16],
+					"dataValues": {
+						"ShieldStrength": [45, 100, 155, 210, 265, 320, 375],
+						"ShieldDuration": [5, 5, 5, 5, 5, 5, 5]
+					},
+					"spellCalculations": {
+						"TotalShieldStrength": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShieldStrength",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Soul Shackles",
+					"objectName": "MorganaR",
+					"dataKey": "Characters/Morgana/Spells/MorganaRAbility/MorganaR",
+					"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png",
+					"tooltip": "Morgana chains herself to nearby enemy Champions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowPercent@%. After @ChainDuration@ seconds, enemies unable to break the chains take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and are <status>Stunned</status> for @StunDuration@ seconds.<br><br>While casting this Ability, Morgana gains <speed>@HastePercent@% Move Speed</speed>.",
+					"extendedVariables": [
+						{
+							"name": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "HastePercent",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"name": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						}
+					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [10, 120, 110, 100, 10, 10, 10],
+					"dataValues": {
+						"Damage": [125, 200, 275, 350, 425, 500, 575],
+						"ChainDuration": [3, 3, 3, 3, 3, 3, 3],
+						"StunDuration": [1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75],
+						"SlowPercent": [20, 20, 20, 20, 20, 20, 20],
+						"HastePercent": [0, 20, 40, 60, 80, 100, 120]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Soul Siphon",
+					"objectName": "MorganaPassive",
+					"dataKey": "Characters/Morgana/Spells/MorganaPassiveAbility/MorganaPassive",
+					"image": "assets/characters/morgana/hud/icons2d/fallenangel_empathize.png",
+					"tooltip": "Morgana <healing>Heals for @HealPercent@%</healing> of the damage dealt by her Abilities to champions, large minions, and medium and larger jungle monsters.",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"HealPercent": [18, 18, 18, 18, 18, 18, 18]
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_rootduration": "Root Duration",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_stunduration": "Stun Duration:"
+	}
+}

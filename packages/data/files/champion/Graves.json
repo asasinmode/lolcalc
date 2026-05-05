@@ -1,0 +1,338 @@
+{
+	"id": "Graves",
+	"key": "104",
+	"name": "Graves",
+	"partype": "Mana",
+	"stats": {
+		"hp": 625,
+		"hpperlevel": 106,
+		"mp": 325,
+		"mpperlevel": 40,
+		"movespeed": 340,
+		"armor": 33,
+		"armorperlevel": 4.6,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 425,
+		"hpregen": 8,
+		"hpregenperlevel": 0.7,
+		"mpregen": 8,
+		"mpregenperlevel": 0.7,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 66,
+		"attackdamageperlevel": 4,
+		"attackspeedperlevel": 3,
+		"attackspeed": 0.475,
+		"attackspeedratio": 0.49
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "End of the Line",
+					"objectName": "GravesQLineSpell",
+					"dataKey": "Characters/Graves/Spells/GravesQLineSpellAbility/GravesQLineSpell",
+					"image": "assets/characters/graves/hud/icons2d/gravesq.png",
+					"tooltip": "Graves fires a powder round dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. After 1 second or after colliding with terrain, it detonates, dealing <physicalDamage>@TotalDetonationDamage@ physical damage</physicalDamage> along the travel path again and to enemies near the blast.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "BaseDetonationDamage",
+							"nameOverride": "spell_gravesqlinespell_damage2"
+						},
+						{
+							"name": "bADDetonationRatio",
+							"nameOverride": "spell_listtype_gravesdetonationadratio"
+						}
+					],
+					"mana": [80, 80, 80, 80, 80, 80],
+					"cooldownTime": [13, 13, 11.25, 9.5, 7.75, 6, 6],
+					"dataValues": {
+						"BaseDamage": [25, 50, 75, 100, 125, 150, 175],
+						"FirstADRatio": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"BaseDetonationDamage": [35, 80, 125, 170, 215, 260, 305],
+						"bADDetonationRatio": [0.4, 0.55, 0.7, 0.85, 1, 1.15, 1.3],
+						"TerrainCollisionDelay": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "FirstADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalDetonationDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDetonationDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "bADDetonationRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Smoke Screen",
+					"objectName": "GravesSmokeGrenade",
+					"dataKey": "Characters/Graves/Spells/GravesSmokeGrenadeAbility/GravesSmokeGrenade",
+					"image": "assets/characters/graves/hud/icons2d/gravesw.png",
+					"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @Effect2Amount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [70, 75, 80, 85, 90, 95],
+					"cooldownTime": [26, 26, 24, 22, 20, 18, 18],
+					"dataValues": {
+						"BaseDamage": [10, 60, 110, 160, 210, 260, 310]
+					},
+					"spellCalculations": {
+						"ImpactDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [60, 60, 110, 160, 210, 260, 310],
+						"1": [50, 50, 50, 50, 50, 50, 50],
+						"2": [200, 200, 200, 200, 200, 200, 200],
+						"3": [4, 4, 4, 4, 4, 4, 4],
+						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Quickdraw",
+					"objectName": "GravesMove",
+					"dataKey": "Characters/Graves/Spells/GravesMoveAbility/GravesMove",
+					"image": "assets/characters/graves/hud/icons2d/gravese.png",
+					"tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for @BuffDuration@ seconds (max @MaxStacks@ stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>@ArmorPerStack@ Armor</scaleArmor> and <scaleMR>@MRGrant@ Magic Resist</scaleMR>. Stacks are refreshed when damaging a non-minion.<br><br>Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by @CooldownPerHit@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "ArmorPerStack",
+							"nameOverride": "spell_listtype_gravestruegritarmor"
+						},
+						{
+							"name": "ArmorPerStack",
+							"nameOverride": "spell_gravese_magicresist"
+						}
+					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
+					"dataValues": {
+						"ArmorPerStack": [4, 7, 10, 13, 16, 19, 22],
+						"MRGrantPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"CooldownPerHit": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MaxStacks": [8, 8, 8, 8, 8, 8, 8]
+					},
+					"spellCalculations": {
+						"MRGrant": {
+							"mMultiplier": {
+								"mDataValue": "MRGrantPercent"
+							},
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "ArmorPerStack",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"effectAmount": {
+						"0": [20, 30, 40, 50, 60, 70, 80],
+						"1": [4, 4, 4, 4, 4, 4, 4],
+						"2": [15, 20, 25, 30, 35, 40, 45],
+						"3": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"5": [750, 750, 750, 750, 750, 750, 750],
+						"6": [375, 375, 375, 375, 375, 375, 375],
+						"7": [275, 275, 275, 275, 275, 275, 275],
+						"8": [60, 60, 60, 60, 60, 60, 60],
+						"9": [8, 8, 8, 8, 8, 8, 8]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Collateral Damage",
+					"objectName": "GravesChargeShot",
+					"dataKey": "Characters/Graves/Spells/GravesChargeShotAbility/GravesChargeShot",
+					"image": "assets/characters/graves/hud/icons2d/gravesr.png",
+					"tooltip": "Graves fires an explosive cartridge, blasting himself backwards. The cartridge deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After hitting an enemy champion or reaching the end of its range, the cartridge explodes outward, dealing <physicalDamage>@FalloffDamage@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"name": "RBaseDamage",
+							"nameOverride": "spell_listtype_gravesprimarydamage"
+						},
+						{
+							"name": "RFalloffDamage",
+							"nameOverride": "spell_listtype_gravesconedamage"
+						}
+					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
+					"dataValues": {
+						"RBaseDamage": [125, 275, 425, 575, 725, 875, 1025],
+						"RFalloffDamage": [80, 200, 320, 440, 560, 680, 800],
+						"RKnockbackDistance": [400, 400, 400, 400, 400, 400, 400]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"FalloffDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "RFalloffDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "New Destiny",
+					"objectName": "GravesPassive",
+					"dataKey": "Characters/Graves/Spells/GravesPassiveAbility/GravesPassive",
+					"image": "assets/characters/graves/hud/icons2d/gravesp.png",
+					"tooltip": "Graves' Attacks have unique properties:<br><li>It can only fire two <keywordMajor>Shells</keywordMajor> before he must reload. <attackSpeed>Attack Speed</attackSpeed> reduces reload time slightly, but reduces time between shots dramatically.<li>Each Attack fires 4 bullets. The first bullet on a target deals <physicalDamage>@SingleBulletDamage@ physical damage</physicalDamage>, and subsequent bullets deal <physicalDamage>@MultiBulletDamage@</physicalDamage> each. Instead of normal Critical effects, Critical strikes fire 6 bullets and deal @CritDamageMult@ more damage. Structures take @StructureDamageReduction*100@% reduced damage.<li>Bullets stop on the first unit hit. Non-champions struck by multiple bullets are <status>Knocked Back</status>.",
+					"dataValues": {
+						"CritDamageRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"StructureDamageReduction": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
+					},
+					"spellCalculations": {
+						"SingleBulletDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"values": [0, 0.7, 0.711, 0.723, 0.736, 0.75, 0.764, 0.78, 0.796, 0.813, 0.83, 0.849, 0.868, 0.888, 0.909, 0.93, 0.953, 0.976, 1, 1.025, 1.05, 1.077, 1.104, 1.132, 1.161, 1.19, 1.221, 1.252, 1.284, 1.317, 1.35]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"MultiBulletDamage": {
+							"mMultiplier": {
+								"mNumber": 0.333
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "SingleBulletDamage"
+						},
+						"CritDamageMult": {
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "CritDamageRatio"
+									},
+									"mPart2": {
+										"mSubparts": [
+											{
+												"mNumber": -1
+											},
+											{
+												"mStat": 9,
+												"mCoefficient": 1
+											}
+										]
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{549cda4d}": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_gravesqlinespell_damage2": "Detonation Damage",
+		"spell_listtype_gravesdetonationadratio": "Detonation AD Ratio",
+		"spell_listtype_gravestruegritarmor": "Armor",
+		"spell_gravese_magicresist": "Magic Resist",
+		"spell_listtype_gravesprimarydamage": "Primary Damage",
+		"spell_listtype_gravesconedamage": "Cone Damage"
+	}
+}

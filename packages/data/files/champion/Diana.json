@@ -1,0 +1,345 @@
+{
+	"id": "Diana",
+	"key": "131",
+	"name": "Diana",
+	"partype": "Mana",
+	"stats": {
+		"hp": 640,
+		"hpperlevel": 109,
+		"mp": 375,
+		"mpperlevel": 25,
+		"movespeed": 345,
+		"armor": 31,
+		"armorperlevel": 4.3,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 150,
+		"hpregen": 6.5,
+		"hpregenperlevel": 0.85,
+		"mpregen": 8,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 57,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 2,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Crescent Strike",
+					"objectName": "DianaQ",
+					"dataKey": "Characters/Diana/Spells/DianaQAbility/DianaQ",
+					"image": "assets/characters/diana/hud/icons2d/diana_q_moonsedge.png",
+					"tooltip": "Diana unleashes an arc of lunar energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and marking with <keywordMajor>Moonlight</keywordMajor> for @MoonlightDuration@ seconds. <br><br><keywordMajor>Moonlight</keywordMajor> reveals enemies that are not <keywordStealth>stealthed</keywordStealth>.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
+					"dataValues": {
+						"MoonlightDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"1": [1, 1, 1, 1, 1, 1, 1],
+						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"3": [3, 3, 3, 3, 3, 3, 3]
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Pale Cascade",
+					"objectName": "DianaOrbs",
+					"dataKey": "Characters/Diana/Spells/DianaOrbsAbility/DianaOrbs",
+					"image": "assets/characters/diana/hud/icons2d/diana_w_lunarshower.png",
+					"tooltip": "Diana creates three orbiting spheres for @ShieldDuration@ seconds that explode on contact, each dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, up to a max of <magicDamage>@TotalMaxDamage@ damage</magicDamage>.<br><br>Diana also gains <shield>@ShieldValue@ Shield</shield> for the same duration. When the last sphere detonates, she gains an additional <shield>@ShieldValue@ Shield</shield> and refreshes the duration.",
+					"extendedVariables": [
+						{
+							"name": "OrbDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "ShieldBase",
+							"nameOverride": "spell_listtype_shield"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [15, 15, 13.5, 12, 10.5, 9, 7.5],
+					"dataValues": {
+						"ShieldBase": [30, 45, 60, 75, 90, 105, 120],
+						"OrbDamage": [8, 20, 32, 44, 56, 68, 80],
+						"ShieldAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"ShieldDuration": [5, 5, 5, 5, 5, 5, 5],
+						"OrbAPRatio": [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18],
+						"ShieldBHPRatio": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09]
+					},
+					"spellCalculations": {
+						"ShieldValue": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShieldBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "ShieldBHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "OrbDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "OrbAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalMaxDamage": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"effectAmount": {
+						"0": [5, 5, 5, 5, 5, 5, 5],
+						"3": [1, 1, 1, 1, 1, 1, 1],
+						"4": [4, 4, 4, 4, 4, 4, 4]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Lunar Rush",
+					"objectName": "DianaTeleport",
+					"dataKey": "Characters/Diana/Spells/DianaTeleportAbility/DianaTeleport",
+					"image": "assets/characters/diana/hud/icons2d/diana_e_fasterthanlight.png",
+					"tooltip": "Diana becomes as the vengeful moon, dashing to an enemy and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. If the target is afflicted with <keywordMajor>Moonlight</keywordMajor>, this Ability's Cooldown is refreshed.",
+					"extendedVariables": [
+						{
+							"name": "Cost"
+						},
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [22, 22, 20, 18, 16, 14, 10],
+					"dataValues": {
+						"BaseDamage": [30, 50, 70, 90, 110, 130, 150],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"CDResetTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [0, 4, 4, 4, 0, 0, 0],
+						"1": [0, 40, 60, 80, 100, 120, 0],
+						"2": [0, 50, 75, 100, 0, 0, 0]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Moonfall",
+					"objectName": "DianaR",
+					"dataKey": "Characters/Diana/Spells/DianaRAbility/DianaR",
+					"image": "assets/characters/diana/hud/icons2d/diana_r_moonfall.png",
+					"tooltip": "Diana <status>Pulls In</status>, <status>Slows</status> by @SlowTooltip@%, and reveals nearby enemies for @SlowDuration@ seconds.<br><br>If Diana hits at least one enemy champion, she calls to the moon, dealing <magicDamage>@RExplosionDamage@ magic damage</magicDamage> plus <magicDamage>@RMultihitAmplification@</magicDamage> for each champion pulled beyond the first, up to a max of an additional <magicDamage>@MaxDamage@ damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"name": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "SlowTooltip",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
+					"dataValues": {
+						"Damage": [100, 200, 300, 400, 500, 600, 700],
+						"Delay": [1, 1, 1, 1, 1, 1, 1],
+						"SlowPotency": [-0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SlowTooltip": [30, 40, 50, 60, 70, 80, 90],
+						"MultihitAmp": [10, 35, 60, 85, 110, 135, 160]
+					},
+					"spellCalculations": {
+						"RExplosionDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"RMultiHitAmplification": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MultiHitAmp",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.15,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MaxDamage": {
+							"mMultiplier": {
+								"mNumber": 5
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "RMultiHitAmplification"
+						}
+					},
+					"effectAmount": {
+						"0": [-0.35, -0.35, -0.4, -0.45, -0.5, -0.55, -0.6],
+						"1": [2, 2, 2, 2, 2, 2, 2],
+						"2": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"3": [3, 3, 3, 3, 3, 3, 3],
+						"4": [4, 4, 4, 4, 4, 4, 4]
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Moonsilver Blade",
+					"objectName": "DianaPassive",
+					"dataKey": "Characters/Diana/Spells/DianaPassiveAbility/DianaPassive",
+					"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png",
+					"tooltip": "{{Spell_DianaPassive_Tooltip}}",
+					"tooltipExtended": "{{Spell_DianaPassive_Tooltip}}<br><br><rules>Moonsilver Blade deals @Monstermod*100@% damage to monsters.</rules>",
+					"cooldownTime": [32, 28, 24, 20, 16, 12, 12],
+					"dataValues": {
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BuffDuration": [5, 5, 5, 5, 5, 5, 5],
+						"AttackSpeedValue": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"AttackCount": [3, 3, 3, 3, 3, 3, 3],
+						"MonsterMod": [2.3, 2.3, 2.3, 2.3, 2.3, 2.3, 2.3]
+					},
+					"spellCalculations": {
+						"CleaveDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": 5,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 10
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 15
+										},
+										{
+											"mLevel": 17,
+											"mBonusPerLevelAtAndAfter": 25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BonusAS": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.15,
+									"mEndValue": 0.35,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"EmpoweredAS": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "BonusAS"
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_slow": "Slow",
+		"spell_dianapassive_tooltip": "Diana gains <attackSpeed>@BonusAS@ Attack Speed</attackSpeed>, increased to <attackSpeed>@EmpoweredAS@</attackSpeed> for @BuffDuration@ seconds after using an Ability.<br><br>Every third Attack cleaves nearby enemies for an additional <magicDamage>@CleaveDamage@ magic damage</magicDamage>. "
+	}
+}

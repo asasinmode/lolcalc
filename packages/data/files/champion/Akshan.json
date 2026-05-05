@@ -1,0 +1,481 @@
+{
+	"id": "Akshan",
+	"key": "166",
+	"name": "Akshan",
+	"partype": "Mana",
+	"stats": {
+		"hp": 610,
+		"hpperlevel": 107,
+		"mp": 350,
+		"mpperlevel": 40,
+		"movespeed": 330,
+		"armor": 26,
+		"armorperlevel": 4.7,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 500,
+		"hpregen": 3.75,
+		"hpregenperlevel": 0.65,
+		"mpregen": 8.2,
+		"mpregenperlevel": 0.7,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 52,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 4,
+		"attackspeed": 0.638,
+		"attackspeedratio": 0.4
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Avengerang",
+					"objectName": "AkshanQ",
+					"dataKey": "Characters/Akshan/Spells/AkshanQAbility/AkshanQ",
+					"image": "assets/characters/akshan/hud/icons2d/akshan_q.png",
+					"tooltip": "Akshan throws a boomerang that deals <physicalDamage>@FinalDamage@ physical damage</physicalDamage>, extending the range each time an enemy is hit.<br><br>Champion hits grant Akshan <speed>@TotalHaste@ Move Speed</speed> decaying over @HasteDuration@ second.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "SecondaryTargetDamage",
+							"nameOverride": "spell_akshanq_miniondamagemod"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [60, 65, 70, 75, 80, 80],
+					"cooldownTime": [9, 9, 8, 7, 6, 5, 5],
+					"dataValues": {
+						"BaseDamage": [15, 45, 75, 105, 135, 165, 195],
+						"ADRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"SecondaryTargetDamage": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+						"HasteDuration": [1, 1, 1, 1, 1, 1, 1],
+						"HasteValue": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"ExtensionDistance": [500, 500, 500, 500, 500, 500, 500],
+						"RevealDuration": [1, 1, 1, 1, 1, 1, 1],
+						"HasteAPRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
+					},
+					"spellCalculations": {
+						"FinalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalHaste": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "HasteValue",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "HasteAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Going Rogue",
+					"objectName": "AkshanW",
+					"dataKey": "Characters/Akshan/Spells/AkshanWAbility/AkshanW",
+					"image": "assets/characters/akshan/hud/icons2d/akshan_w.png",
+					"tooltip": "{{ Spell_AkshanW_Tooltip_@GameModeInteger@ }}",
+					"extendedVariables": [
+						{
+							"name": "Cost"
+						},
+						{
+							"name": "MSValue",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
+					"mana": [40, 30, 20, 10, 0, 30],
+					"cooldownTime": [10, 18, 14, 10, 6, 2, 10],
+					"dataValues": {
+						"VengeanceDuration": [60, 60, 60, 60, 60, 60, 60],
+						"MSValue": [70, 80, 90, 100, 110, 120, 130],
+						"ShredValue": [12.5, 15, 17.5, 20, 22.5, 25, 27.5],
+						"DeathTimer": [1, 1, 1, 1, 1, 1, 1],
+						"PassiveSecondAutoRatio": [0.4, 0.46, 0.52, 0.58, 0.64, 0.7, 0.76],
+						"WallGracePeriod": [2, 2, 2, 2, 2, 2, 2],
+						"MissingManaRegen": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
+						"GoldReward": [100, 100, 100, 100, 100, 100, 100],
+						"RecentlyDamagedWindow": [3, 3, 3, 3, 3, 3, 3],
+						"VFXTrailSpeed": [3, 3, 3, 3, 3, 3, 3],
+						"PassiveWallRange": [175, 175, 175, 175, 175, 175, 175],
+						"StealthDetectionRange": [800, 800, 800, 800, 800, 800, 800],
+						"GameModeInteger": [1, 1, 1, 1, 1, 1, 1],
+						"ReviveHealthPercent": [1, 1, 1, 1, 1, 1, 1]
+					},
+					"spellCalculations": {
+						"SecondAutoDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "PassiveSecondAutoRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Heroic Swing",
+					"objectName": "AkshanE",
+					"dataKey": "Characters/Akshan/Spells/AkshanEAbility/AkshanE",
+					"image": "assets/characters/akshan/hud/icons2d/akshan_e.png",
+					"tooltip": "<spellActive>First Cast:</spellActive> Akshan fires a grappling hook, attaching to the first terrain hit.<br><br><spellActive>Second Cast:</spellActive> Akshan swings around the terrain, repeatedly firing at the nearest enemy for <physicalDamage>@DamageToDeal@ physical damage</physicalDamage> per shot.<br><br><spellActive>Third Cast:</spellActive> Akshan dives off the rope, firing a final shot.<br><br>Colliding with an enemy Champion or terrain ends the swing early.<br><br>Champion takedowns refresh this Ability's Cooldown.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [8, 18, 16.5, 15, 13.5, 12, 8],
+					"dataValues": {
+						"BaseDamage": [0, 8, 16, 24, 32, 40, 48],
+						"ADRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"AttackSpeedCoefficient": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"CritDamageMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"OnHitDamageReduction": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"AttackFrequency": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"TimeToCastE2": [2, 2, 2, 2, 2, 2, 2],
+						"AnchorLifetime": [3, 3, 3, 3, 3, 3, 3],
+						"MinJumpbackDistance": [250, 250, 250, 250, 250, 250, 250],
+						"EdgeToEdgeCollisionRadius": [50, 50, 50, 50, 50, 50, 50],
+						"ResetCooldownToSet": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DistanceShiftTowardsWall": [175, 175, 175, 175, 175, 175, 175],
+						"E3LockoutDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SpinDuration": [25000, 25000, 25000, 25000, 25000, 25000, 25000]
+					},
+					"spellCalculations": {
+						"DamageToDeal": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mStat": 4,
+										"mStatFormula": 2,
+										"mDataValue": "AttackSpeedCoefficient"
+									}
+								]
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"CriticalCalc": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mDataValue": "CritDamageMod"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mModifiedGameCalculation": "DamageToDeal"
+						},
+						"{36ebd3cf}": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Comeuppance",
+					"objectName": "AkshanR",
+					"dataKey": "Characters/Akshan/Spells/AkshanRAbility/AkshanR",
+					"image": "assets/characters/akshan/hud/icons2d/akshan_r.png",
+					"tooltip": "Akshan locks onto a champion and begins overcharging his gun for up to @ChannelDuration@ seconds, storing up to @NumberOfBullets@ bullets.<br><br><recast>Recast:</recast> Akshan unleashes the stored bullets, each dealing at least <physicalDamage>@DamagePerBulletWithCrit@ physical damage</physicalDamage> to the first enemy or structure hit, increased up to <physicalDamage>@MaxDamagePerBullet@ physical damage</physicalDamage> based on missing Health.",
+					"extendedVariables": [
+						{
+							"name": "NumberOfBullets",
+							"nameOverride": "spell_akshanr_numberofbullets"
+						},
+						{
+							"name": "BonusDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
+					"dataValues": {
+						"BonusDamage": [15, 25, 35, 45, 55, 65, 75],
+						"ADRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"CritDamageMod": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"MaxIncrease": [3, 3, 3, 3, 3, 3, 3],
+						"ChannelDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"GraceCooldown": [5, 5, 5, 5, 5, 5, 5],
+						"CastTimePerBullet": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"MinimumChannelDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"NumberOfBullets": [4, 5, 6, 7, 8, 9, 10]
+					},
+					"spellCalculations": {
+						"MaxDamagePerBullet": {
+							"mMultiplier": {
+								"mDataValue": "MaxIncrease"
+							},
+							"mModifiedGameCalculation": "DamagePerBulletWithCrit"
+						},
+						"DamagePerBulletWithCrit": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mStat": 8,
+											"mDataValue": "CritDamageMod"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Dirty Fighting",
+					"objectName": "AkshanPassive",
+					"dataKey": "Characters/Akshan/Spells/AkshanPassiveAbility/AkshanPassive",
+					"image": "assets/characters/akshan/hud/icons2d/akshan_p.png",
+					"tooltip": "{{Spell_AkshanPassive_Tooltip}}",
+					"tooltipExtended": "{{Spell_AkshanPassive_Tooltip}}<br><rules>The second Attack can critically strike at @SecondAutoCritRatio*100@% effectiveness.<br>The second Attack deals 100% total attack damage to minions.<br>The first Attack <speed>Move Speed</speed> scales with <attackSpeed>100% Attack Speed.</attackSpeed></rules>",
+					"dataValues": {
+						"MaxStacks": [3, 3, 3, 3, 3, 3, 3],
+						"DebuffDuration": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
+						"ShieldBADRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"ShieldDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SecondAutoADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"HasteDuration": [1, 1, 1, 1, 1, 1, 1],
+						"SecondAutoFlexedAttackRange": [200, 200, 200, 200, 200, 200, 200],
+						"SecondAutoCritRatio": [1, 1, 1, 1, 1, 1, 1],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
+					},
+					"spellCalculations": {
+						"MS": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 20,
+									"mEndValue": 75,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"TotalShieldAmount": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 40,
+									"mEndValue": 280,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ShieldBADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PassiveProcDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 15,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 25
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 40
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 70
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"SecondAutoDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "SecondAutoADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PassiveCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 16,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -4
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ASModdedMS": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mStat": 4,
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									}
+								]
+							},
+							"mModifiedGameCalculation": "MS"
+						},
+						"{82593567}": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mDataValue": "SecondAutoCritRatio"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mModifiedGameCalculation": "SecondAutoDamage"
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_akshanq_miniondamagemod": "Minion Damage %",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_akshanr_numberofbullets": "Maximum Bullets",
+		"spell_akshanpassive_tooltip": "After launching an Attack, Akshan will fire an additional shot for <physicalDamage>@SecondAutoDamage@ physical damage</physicalDamage>. He can cancel this shot to instead gain <speed>@ASModdedMS@ Move Speed</speed> decaying over @HasteDuration@ second.<br><br>Every three hits from Attacks or Abilities deals an additional <magicDamage>@PassiveProcDamage@ magic damage</magicDamage>. Against champions, Akshan also gains <shield>@TotalShieldAmount@ Shield</shield> for @ShieldDuration@ seconds (@PassiveCooldown@ second Cooldown)."
+	}
+}

@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { CHAMPION_IMAGES } from '@lolcalc/data';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 
 const props = defineProps<IExtraComponentProps<'champion'>>();
 
 defineEmits<IExtraComponentEmits>();
 
-const { abilityImage, abilityImageSize } = useChampionImages();
+const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 
 const imgSize = abilityImageSize('Aphelios');
 

@@ -1,17 +1,23 @@
+<<<<<<< HEAD
 import type { DamageSource } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
 import type { IChampionRunes, IRuneShardSlotValue } from '../types/rune';
 // TODO figure out type assertion if champion.ts also imports champion.json and there are errors
 import runeData from '../../app/assets/rune.json' with { type: 'json' };
+=======
+import type { TRunes } from '@lolcalc/data';
+import type { IChampionRunes, IRuneShardSlotValue } from '@lolcalc/data/types';
+import type { DamageSource } from '../DamageSource';
+import type { IPossibleDynamicValues } from '../types';
+import { RUNES } from '@lolcalc/data';
+>>>>>>> feat/separate-logic-package
 
-const { data } = runeData;
-
-export function runePathsEmpty(runes: IChampionRunes) {
+export function runePathsEmpty(runes: IChampionRunes): boolean {
 	const { primarySlots, secondary, secondarySlots } = runes.paths;
 	return !(primarySlots.length || secondary || secondarySlots.length);
 };
 
-export function runesInvalid(runes: IChampionRunes, areEmpty = runePathsEmpty(runes)) {
+export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runePathsEmpty(runes)): boolean {
 	const { primarySlots, secondary, secondarySlots } = runes.paths;
 	return !areEmpty && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
 };
@@ -25,7 +31,7 @@ export const RUNE_SPECIFICS = {
 
 				return {
 					f1: adaptiveForceStatVariable,
-					f2: data.shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
+					f2: (RUNES as TRunes).shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
 				};
 			},
 		},

@@ -1,0 +1,304 @@
+{
+	"id": "Nasus",
+	"key": "75",
+	"name": "Nasus",
+	"partype": "Mana",
+	"stats": {
+		"hp": 650,
+		"hpperlevel": 104,
+		"mp": 326,
+		"mpperlevel": 62,
+		"movespeed": 350,
+		"armor": 34,
+		"armorperlevel": 4.7,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 125,
+		"hpregen": 9,
+		"hpregenperlevel": 0.9,
+		"mpregen": 7.45,
+		"mpregenperlevel": 0.5,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 67,
+		"attackdamageperlevel": 4,
+		"attackspeedperlevel": 3.48,
+		"attackspeed": 0.638,
+		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Siphoning Strike",
+					"objectName": "NasusQ",
+					"dataKey": "Characters/Nasus/Spells/NasusQAbility/NasusQ",
+					"image": "assets/characters/nasus/hud/icons2d/nasus_q.png",
+					"tooltip": "Nasus' next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Killing an enemy with this Attack permanently increases its damage by @BasicStacks@, increased to @BigStacks@ against champions, large minions and large jungle monsters.",
+					"extendedVariables": [
+						{
+							"name": "BonusDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						}
+					],
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [8.5, 7.5, 6.5, 5.5, 4.5, 3.5, 2.5],
+					"dataValues": {
+						"BonusRange": [50, 50, 50, 50, 50, 50, 50],
+						"BonusDamage": [20, 40, 60, 80, 100, 120, 140],
+						"BasicStacks": [3, 3, 3, 3, 3, 3, 3],
+						"BigStacks": [12, 12, 12, 12, 12, 12, 12],
+						"BuffDuration": [10, 10, 10, 10, 10, 10, 10]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mBuffName": "{1b1d7345}",
+									"mIconKey": "%i:nasusStackIcon%",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CritDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mStat": 9,
+										"mCoefficient": 1
+									},
+									"mPart2": {
+										"mSubparts": [
+											{
+												"mDataValue": "BonusDamage"
+											},
+											{
+												"mStat": 2,
+												"mCoefficient": 1
+											}
+										]
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								},
+								{
+									"mBuffName": "{1b1d7345}",
+									"mIconKey": "%i:nasusStackIcon%",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Wither",
+					"objectName": "NasusW",
+					"dataKey": "Characters/Nasus/Spells/NasusWAbility/NasusW",
+					"image": "assets/characters/nasus/hud/icons2d/nasus_w.png",
+					"tooltip": "Nasus ages a champion, <status>Slowing</status> them by @SlowBase@%, increasing to @MaxSlowTooltipOnly@% over @Duration@ seconds. Their <attackSpeed>Attack Speed</attackSpeed> is also reduced by @AttackSpeedSlowMult*100@% of the <status>Slow</status>.",
+					"extendedVariables": [
+						{
+							"name": "MaxSlowTooltipOnly",
+							"nameOverride": "spell_listtype_maxslow"
+						}
+					],
+					"mana": [80, 80, 80, 80, 80, 80],
+					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
+					"dataValues": {
+						"SlowBase": [35, 35, 35, 35, 35, 35, 35],
+						"SlowPerTick": [0, 3, 6, 9, 12, 15, 18],
+						"MaxSlowTooltipOnly": [35, 47, 59, 71, 83, 95, 107],
+						"AttackSpeedSlowMult": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"Duration": [5, 5, 5, 5, 5, 5, 5]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Spirit Fire",
+					"objectName": "NasusE",
+					"dataKey": "Characters/Nasus/Spells/NasusEAbility/NasusE",
+					"image": "assets/characters/nasus/hud/icons2d/nasus_e.png",
+					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@Effect2Amount*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"name": "Effect4Amount",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"name": "Effect1Amount",
+							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"name": "Effect2Amount",
+							"nameOverride": "spell_listtype_armorreductionpercent"
+						},
+						{
+							"name": "Cost"
+						}
+					],
+					"mana": [60, 70, 80, 90, 100, 100],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"spellCalculations": {
+						"TotalDotDamage": {
+							"mMultiplier": {
+								"mEffectIndex": 3
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.12,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"InitialDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 4,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [10, 10, 16, 22, 28, 34, 34],
+						"1": [-0.3, -0.3, -0.35, -0.4, -0.45, -0.5, -0.5],
+						"2": [5, 5, 5, 5, 5, 5, 5],
+						"3": [50, 50, 80, 110, 140, 170, 170]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Fury of the Sands",
+					"objectName": "NasusR",
+					"dataKey": "Characters/Nasus/Spells/NasusRAbility/NasusR",
+					"image": "assets/characters/nasus/hud/icons2d/nasus_r.png",
+					"tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <healing>maximum Health by @BonusHealth@</healing> and <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR> by @InitialResistGain@.<br><br>While the storm rages, nearby enemies take <magicDamage>@DamageCalc@ of their maximum Health as magic damage</magicDamage> each second and <spellName>Siphoning Strike</spellName> has a @QCDR*100@% reduced Cooldown.",
+					"extendedVariables": [
+						{
+							"name": "BonusHealth",
+							"nameOverride": "spell_listtype_bonushealth"
+						},
+						{
+							"name": "AOEDamagePercent",
+							"nameOverride": "spell_listtype_maxhealthpercent"
+						},
+						{
+							"name": "InitialResistGain",
+							"nameOverride": "spell_nasusr_bonusresistances"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 0],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
+					"dataValues": {
+						"BonusHealth": [150, 300, 450, 600, 750, 900, 1050],
+						"AttackRangeIncrease": [50, 50, 50, 50, 50, 50, 50],
+						"AOEDamagePercent": [0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08],
+						"TickRate": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"InitialResistGain": [25, 40, 55, 70, 85, 100, 115],
+						"MaxDamageCap": [240, 240, 240, 240, 240, 240, 240],
+						"Duration": [15, 15, 15, 15, 15, 15, 15],
+						"QCDR": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SizeIncreasePercent": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
+						"BaseAoERadius": [376, 376, 376, 376, 376, 376, 376],
+						"MinAoERadius": [400, 400, 400, 400, 400, 400, 400]
+					},
+					"spellCalculations": {
+						"DamageCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "AoeDamagePercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Soul Eater",
+					"objectName": "NasusPassive",
+					"dataKey": "Characters/Nasus/Spells/NasusPassiveAbility/NasusPassive",
+					"image": "assets/characters/nasus/hud/icons2d/nasus_passive.png",
+					"tooltip": "Nasus has an additional @Spell.NasusPassive:LifestealTooltip@% Life Steal.",
+					"spellCalculations": {
+						"LifestealTooltip": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 12,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 6
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_listtype_maxslow": "Max Slow",
+		"spell_listtype_initialdamage": "Initial Damage",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_armorreductionpercent": "Armor Reduction %",
+		"spell_listtype_bonushealth": "Bonus Health",
+		"spell_listtype_maxhealthpercent": "Max Health %",
+		"spell_nasusr_bonusresistances": "Bonus Armor and Magic Resistance"
+	}
+}

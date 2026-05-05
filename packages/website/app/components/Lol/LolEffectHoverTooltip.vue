@@ -1,14 +1,19 @@
 <script setup lang="ts">
+import type { IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
+import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
+import type { TEffects } from '@lolcalc/data';
+import type { IChampion } from '@lolcalc/data/types';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
+import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
+import { gameAbilityImage } from '@lolcalc/core/misc';
+import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
+import { EFFECTS, ITEMS, useChampion } from '@lolcalc/data';
+import { ABILITY_TYPE } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
 
 const props = defineProps<IEffectHoverTooltipProps>();
 
-const text = useText();
 const globalKeyModifiers = useGlobalKeyModifiers();
-const effects = useEffects();
-const { minorVersion } = usePatchVersion();
-const items = useItems();
 
 const abilityImage = shallowRef<Awaited<ReturnType<typeof gameAbilityImage>>>(['', 0]);
 const champion = shallowRef<IChampion>();
@@ -48,18 +53,17 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 
 	if (type === ABILITY_TYPE.champion && champion.value && champion.value.id === id) {
 		return computeAbilityDescription(
-			minorVersion,
 			champion.value,
 			sourceAbilityId.value,
 			props.damageSource,
 		);
 	}
 
-	const item = items[id]!;
-	return computeItemDescription(text, minorVersion, item, props.damageSource);
+	const item = ITEMS[id]!;
+	return computeItemDescription(item, props.damageSource);
 });
 
-const computedDescription = computed(() => props.abilityId && effects.data[props.abilityId.id].description);
+const computedDescription = computed(() => props.abilityId && (EFFECTS as TEffects)[props.abilityId.id].description);
 
 const el = useTemplateRef('el');
 

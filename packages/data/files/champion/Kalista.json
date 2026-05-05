@@ -1,0 +1,347 @@
+{
+	"id": "Kalista",
+	"key": "429",
+	"name": "Kalista",
+	"partype": "Mana",
+	"stats": {
+		"hp": 560,
+		"hpperlevel": 114,
+		"mp": 300,
+		"mpperlevel": 45,
+		"movespeed": 330,
+		"armor": 24,
+		"armorperlevel": 5.2,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 525,
+		"hpregen": 4,
+		"hpregenperlevel": 0.75,
+		"mpregen": 6.3,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 57,
+		"attackdamageperlevel": 4.75,
+		"attackspeedperlevel": 4.5,
+		"attackspeed": 0.694,
+		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Pierce",
+					"objectName": "KalistaMysticShot",
+					"dataKey": "Characters/Kalista/Spells/KalistaMysticShotAbility/KalistaMysticShot",
+					"image": "assets/characters/kalista/hud/icons2d/kalista_q.png",
+					"tooltip": "Kalista hurls a spear, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first target hit. If this kills the target, the spear continues onward, carrying any <spellName>{{Spell_KalistaExpungeWrapper_Name}}</spellName> stacks to the next target hit.<br><br>Kalista can dash after using this Ability using <spellName>{{Spell_KalistaPassiveBuff_Name}}</spellName>.",
+					"extendedVariables": [
+						{
+							"name": "Cost"
+						},
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
+					"dataValues": {
+						"BaseDamage": [-55, 10, 75, 140, 205, 270, 335],
+						"TotalADRatio": [1.05, 1.05, 1.05, 1.05, 1.05, 1.05, 1.05]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "TotalADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Sentinel",
+					"objectName": "KalistaW",
+					"dataKey": "Characters/Kalista/Spells/KalistaWAbility/KalistaW",
+					"image": "assets/characters/kalista/hud/icons2d/kalista_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
+					"extendedVariables": [
+						{
+							"name": "MaxHealthDamage",
+							"nameOverride": "spell_listtype_maxhealthdamage"
+						},
+						{
+							"name": "AmmoRechargeTooltip",
+							"nameOverride": "spell_listtype_ammorecharge"
+						},
+						{
+							"name": "MaximumMonsterDamage",
+							"nameOverride": "spell_listtype_maxdamagetomonsters"
+						}
+					],
+					"cooldownTime": [30, 30, 30, 30, 30, 30, 30],
+					"dataValues": {
+						"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
+						"MaximumMonsterDamage": [75, 100, 125, 150, 175, 200, 225],
+						"MaxHealthDamage": [0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2],
+						"PerTargetCooldown": [10, 10, 10, 10, 10, 10, 10],
+						"AmmoRechargeTooltip": [100, 90, 80, 70, 60, 50, 40]
+					},
+					"effectAmount": {
+						"0": [80, 80, 80, 80, 80, 80, 80],
+						"2": [100, 125, 150, 175, 200, 225, 250],
+						"3": [100, 90, 80, 70, 60, 50, 40],
+						"5": [50, 75, 100, 125, 150, 175, 200],
+						"6": [10, 10, 10, 10, 10, 10, 10]
+					}
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Rend",
+					"objectName": "KalistaExpungeWrapper",
+					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper",
+					"image": "assets/characters/kalista/hud/icons2d/kalista_e.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
+					"extendedVariables": [
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "AdditionalBaseDamage",
+							"nameOverride": "spell_listtype_damageperstack"
+						},
+						{
+							"name": "AdditionalADRatio",
+							"nameOverride": "spell_kalistaexpungewrapper_ratioperstack"
+						},
+						{
+							"name": "SlowAmount",
+							"nameOverride": "spell_listtype_movementspeedslow"
+						},
+						{
+							"name": "ManaRefund",
+							"nameOverride": "spell_listtype_manarefund"
+						},
+						{
+							"name": "FakedCooldown",
+							"nameOverride": "spell_listtype_cooldown"
+						}
+					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"EpicMonsterDamageMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BaseDamage": [-5, 5, 15, 25, 35, 45, 55],
+						"MaxSpears": [254, 254, 254, 254, 254, 254, 254],
+						"AdditionalBaseDamage": [0, 7, 14, 21, 28, 35, 42],
+						"ManaRefund": [5, 10, 15, 20, 25, 30, 35],
+						"SlowAmount": [0.02, 0.1, 0.18, 0.26, 0.34, 0.42, 0.5],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"AdditionalADRatio": [0.125, 0.2, 0.275, 0.35, 0.425, 0.5, 0.575],
+						"FakedCooldown": [10.5, 10, 9.5, 9, 8.5, 8, 7.5],
+						"APRatio": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"SlowAPRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001],
+						"BaseADRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"AdditionalAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
+					"spellCalculations": {
+						"NormalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "BaseADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"AdditionalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "AdditionalBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "AdditionalADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "AdditionalAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalSlowAmount": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlowAmount",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "SlowAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"effectAmount": {
+						"6": [2, 2, 2, 2, 2, 2, 2]
+					}
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Fate's Call",
+					"objectName": "KalistaRx",
+					"dataKey": "Characters/Kalista/Spells/KalistaRxAbility/KalistaRx",
+					"image": "assets/characters/kalista/hud/icons2d/kalista_r.png",
+					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
+					"extendedVariables": [
+						{
+							"name": "Effect2Amount",
+							"nameOverride": "spell_listtype_knockupduration"
+						}
+					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 140, 120, 100, 80, 60],
+					"effectAmount": {
+						"1": [0, 1, 1.5, 2, 0, 0, 0],
+						"2": [0, 40, 60, 80, 0, 0, 0]
+					}
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Martial Poise",
+					"objectName": "KalistaPassiveBuff",
+					"dataKey": "Characters/Kalista/Spells/KalistaPassiveBuffAbility/KalistaPassiveBuff",
+					"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png",
+					"tooltip": "{{Spell_KalistaPassiveBuff_Tooltip}}",
+					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules>",
+					"dataValues": {
+						"DashSpeedDivisor": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"GameModeInteger": [1, 1, 1, 1, 1, 1, 1],
+						"ModesASCap": [6, 6, 6, 6, 6, 6, 6],
+						"ModesAStoADRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+					},
+					"spellCalculations": {
+						"MoveSpeedMultiplier": {
+							"mMultiplier": {
+								"mNumber": 0.001
+							},
+							"mFormulaParts": [
+								{
+									"mNumber": 280,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{c3169619}": {
+							"mMultiplier": {
+								"mDataValue": "DashSpeedDivisor"
+							},
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"{091295b4}": {
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{5728f7e1}": {
+							"mMultiplier": {
+								"mDataValue": "ModesAStoADRatio"
+							},
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mPart1": {
+												"mDataValue": "ModesASCap"
+											},
+											"mPart2": {
+												"mNumber": -1
+											}
+										},
+										{
+											"mStat": 4,
+											"mCoefficient": 1
+										}
+									],
+									"__type": "ClampSubPartsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						}
+					}
+				}
+			]
+		}
+	},
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_maxhealthdamage": "Maximum Health Damage",
+		"spell_listtype_ammorecharge": "Ammo Recharge",
+		"spell_listtype_maxdamagetomonsters": "Monster Damage Cap",
+		"spell_listtype_damageperstack": "Damage per Stack",
+		"spell_kalistaexpungewrapper_ratioperstack": "AD Ratio per Stack",
+		"spell_listtype_movementspeedslow": "Move Speed Slow",
+		"spell_listtype_manarefund": "Mana Refund",
+		"spell_listtype_cooldown": "Cooldown",
+		"spell_listtype_knockupduration": "Knockup Duration",
+		"spell_kalistapassivebuff_tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}"
+	}
+}

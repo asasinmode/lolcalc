@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import type { IShopItem } from '~/utils/types';
+import type { IShopItem } from '@lolcalc/data/types';
+import { PATCH_VERSION } from '@lolcalc/data';
 
 defineProps<{
 	component?: boolean;
 	shopItem: IShopItem;
 }>();
 
-const { version } = usePatchVersion();
+const { vSemver } = PATCH_VERSION;
 </script>
 
 <template>
@@ -18,7 +19,7 @@ const { version } = usePatchVersion();
 	>
 		<span>{{ shopItem.item.name }}</span>
 		<img
-			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
+			:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
 			width="64"
 			height="64"
 			aria-hidden="true"
