@@ -10,10 +10,10 @@
 		".": "./external.ts"
 	},
 	"scripts": {
-		"build": "nuxt build",
+		"build": "nuxt generate",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
-		"preview": "nuxt preview",
+		"preview": "echo \"run: 'pnpx serve .output/public'\"",
 		"postinstall": "nuxt prepare",
 		"typecheck": "nuxt typecheck"
 	},
