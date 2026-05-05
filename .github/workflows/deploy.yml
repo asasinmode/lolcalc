@@ -15,8 +15,8 @@ jobs:
       - uses: pnpm/action-setup@v5
         with:
           cache: true
-          package_json_file: packages/website/package.json
-          cache_dependency_path: packages/website/pnpm-lock.yaml
+          package_json_file: package.json
+          cache_dependency_path: pnpm-lock.yaml
       - run: pnpm i --frozen-lockfile
       - run: NUXT_APP_BASE_URL=/lolcalc/ pnpx nuxt build --preset github_pages
         working-directory: packages/website
