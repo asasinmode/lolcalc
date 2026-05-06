@@ -491,6 +491,8 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			ITEM_NAME_TO_ID.armoredAdvanced,
 			ITEM_NAME_TO_ID.spellslingersShoes,
 			ITEM_NAME_TO_ID.foreverForward,
+			ITEM_NAME_TO_ID.gluttonousGreaves,
+			ITEM_NAME_TO_ID.immortalPath,
 		];
 
 		if (!itemMoreData.mItemAttributes) {

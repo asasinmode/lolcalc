@@ -383,7 +383,7 @@ const bootItems = computed<IShopItem[]>(() => BOOT_ITEM_IDS.map((id) => {
 	return item!;
 }));
 
-const bootsPanelPinned = ref(false);
+const bootsPanelPinned = ref(true);
 const inventoryPanelPinned = ref(true);
 
 let itemDragData: {
