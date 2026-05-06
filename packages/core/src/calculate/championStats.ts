@@ -42,8 +42,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
-	if (source.calculateStatsHooks.value.postInit) {
-		for (const hook of source.calculateStatsHooks.value.postInit) {
+	if (source.calculateStatsHooks.all.value.postInit) {
+		for (const hook of source.calculateStatsHooks.all.value.postInit) {
 			hook(source, baseStats);
 		}
 	}

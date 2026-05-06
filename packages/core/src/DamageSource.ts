@@ -57,35 +57,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	maxLevel = computed((): number => this.roleQuest.value === 'top' ? 20 : 18);
 
 	isRanged = computed((): boolean => Boolean(this.champion.value && (this.stats.value.base.attackRange > 325)));
-	calculateStatsHooks = computed((): {
-		[K in keyof ICalculateChampionStatsHookSource]?: NonNullable<ICalculateChampionStatsHookSource[K]>['handler'][]
-	} => {
-		const rv: ICalculateStatsGroupedHooks = {};
-
-		for (const shard of Object.values(this.runes.value.shards)) {
-			groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shard]);
-		}
-		for (const rune of this.runes.value.paths.primarySlots) {
-			rune && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).slots[rune]);
-		}
-		for (const rune of this.runes.value.paths.secondarySlots) {
-			rune && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).slots[rune]);
-		}
-		for (const item in this.items.value) {
-			item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item]);
-		};
-		this.champion.value?.id && groupCalculateStatsHooks(rv, (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id]);
-		if (this.appliedEffects) {
-			for (const effect of this.appliedEffects.value) {
-				groupCalculateStatsHooks(rv, (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id]);
-			}
-		}
-
-		return Object.fromEntries(Object.entries(rv).map(([key, value]) => [
-			key,
-			value.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0)).map(value => value.handler),
-		]));
-	});
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 
 	runes: Ref<IChampionRunes>;
@@ -921,6 +892,69 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			isActive: computedSpecific.specific?.imgActive?.(this.internalItemData.value),
 		}))),
 	};
+
+	/** the specifics' hooks grouped by type */
+	calculateStatsHooks = {
+		runes: computed((): ICalculateStatsGroupedHooks => {
+			const rv: ICalculateStatsGroupedHooks = {};
+			for (const shard of Object.values(this.runes.value.shards)) {
+				groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shard]);
+			}
+			for (const rune of this.runes.value.paths.primarySlots) {
+				rune && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).slots[rune]);
+			}
+			for (const rune of this.runes.value.paths.secondarySlots) {
+				rune && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).slots[rune]);
+			}
+			return rv;
+		}),
+		items: computed((): ICalculateStatsGroupedHooks => {
+			const rv: ICalculateStatsGroupedHooks = {};
+			for (const item in this.items.value) {
+				item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item]);
+			}
+			return rv;
+		}),
+		effects: computed((): ICalculateStatsGroupedHooks => {
+			const rv: ICalculateStatsGroupedHooks = {};
+			if (this.appliedEffects) {
+				for (const effect of this.appliedEffects.value) {
+					groupCalculateStatsHooks(rv, (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id]);
+				}
+			}
+			return rv;
+		}),
+		/* all of the specifics' hooks grouped by type */
+		all: computed((): {
+			[K in keyof ICalculateChampionStatsHookSource]?: NonNullable<ICalculateChampionStatsHookSource[K]>['handler'][]
+		} => {
+			const rv: ICalculateStatsGroupedHooks = {};
+			for (const key in this.calculateStatsHooks.runes.value) {
+				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.runes.value[key as keyof ICalculateChampionStatsHookSource]!);
+			}
+			for (const key in this.calculateStatsHooks.items.value) {
+				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.items.value[key as keyof ICalculateChampionStatsHookSource]!);
+			}
+			for (const key in this.calculateStatsHooks.effects.value) {
+				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.effects.value[key as keyof ICalculateChampionStatsHookSource]!);
+			}
+			if (this.champion.value?.id) {
+				const championHooks = groupCalculateStatsHooks({}, (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id]);
+				for (const key in championHooks) {
+					rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+					rv[key as keyof ICalculateChampionStatsHookSource]!.push(...championHooks[key as keyof ICalculateChampionStatsHookSource]!);
+				}
+			}
+
+			return Object.fromEntries(Object.entries(rv).map(([key, value]) => [
+				key,
+				value.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0)).map(value => value.handler),
+			]));
+		}),
+	};
 }
 
 function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampionRole): void {
@@ -1303,13 +1337,14 @@ export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean
 	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
 }
 
-function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSource?: { calculateHooks?: ICalculateChampionStatsHookSource }) {
+function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSource?: { calculateHooks?: ICalculateChampionStatsHookSource }): ICalculateStatsGroupedHooks {
 	if (hookSource?.calculateHooks) {
 		for (const hook in hookSource.calculateHooks) {
 			target[hook as keyof ICalculateChampionStatsHookSource] ??= [];
 			target[hook as keyof ICalculateChampionStatsHookSource]!.push(hookSource.calculateHooks[hook as keyof ICalculateChampionStatsHookSource]!);
 		}
 	}
+	return target;
 }
 
 type IInternalDataSetupChampions = {
