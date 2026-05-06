@@ -13,7 +13,6 @@
 				"sell": 210
 			},
 			"image": "1001.png",
-			"mapMask": 3,
 			"into": [
 				"3047",
 				"3008",
@@ -45,7 +44,6 @@
 				"sell": 140
 			},
 			"image": "1004.png",
-			"mapMask": 3,
 			"into": [
 				"3114",
 				"4642"
@@ -67,7 +65,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1006.png",
-			"mapMask": 3,
 			"into": [
 				"3109",
 				"3211",
@@ -89,7 +86,6 @@
 				"sell": 630
 			},
 			"image": "1011.png",
-			"mapMask": 3,
 			"into": [
 				"3084",
 				"2525",
@@ -123,7 +119,6 @@
 				"sell": 420
 			},
 			"image": "1018.png",
-			"mapMask": 3,
 			"into": [
 				"3031",
 				"3086",
@@ -149,7 +144,6 @@
 				"sell": 595
 			},
 			"image": "1026.png",
-			"mapMask": 3,
 			"into": [
 				"2522",
 				"3100",
@@ -178,7 +172,6 @@
 				"sell": 210
 			},
 			"image": "1027.png",
-			"mapMask": 3,
 			"into": [
 				"3024",
 				"3802",
@@ -201,7 +194,6 @@
 				"sell": 280
 			},
 			"image": "1028.png",
-			"mapMask": 3,
 			"into": [
 				"3742",
 				"1011",
@@ -246,7 +238,6 @@
 				"sell": 210
 			},
 			"image": "1029.png",
-			"mapMask": 3,
 			"into": [
 				"2420",
 				"1031",
@@ -280,7 +271,6 @@
 				"sell": 560
 			},
 			"image": "1031.png",
-			"mapMask": 3,
 			"into": [
 				"3742",
 				"3068",
@@ -311,7 +301,6 @@
 				"sell": 280
 			},
 			"image": "1033.png",
-			"mapMask": 3,
 			"into": [
 				"1057",
 				"3140",
@@ -344,7 +333,6 @@
 				"sell": 245
 			},
 			"image": "1036.png",
-			"mapMask": 3,
 			"into": [
 				"1053",
 				"4003",
@@ -386,7 +374,6 @@
 				"sell": 613
 			},
 			"image": "1037.png",
-			"mapMask": 3,
 			"into": [
 				"3071",
 				"6333",
@@ -425,7 +412,6 @@
 				"sell": 910
 			},
 			"image": "1038.png",
-			"mapMask": 3,
 			"into": [
 				"3031",
 				"3026",
@@ -451,7 +437,6 @@
 				"sell": 175
 			},
 			"image": "1042.png",
-			"mapMask": 3,
 			"into": [
 				"1043",
 				"3086",
@@ -482,7 +467,6 @@
 				"sell": 490
 			},
 			"image": "1043.png",
-			"mapMask": 3,
 			"into": [
 				"3302",
 				"3153",
@@ -527,7 +511,6 @@
 				"sell": 280
 			},
 			"image": "1052.png",
-			"mapMask": 3,
 			"into": [
 				"3113",
 				"2420",
@@ -563,7 +546,6 @@
 				"sell": 630
 			},
 			"image": "1053.png",
-			"mapMask": 3,
 			"into": [
 				"3153",
 				"3146",
@@ -594,7 +576,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1054.png",
-			"mapMask": 3,
 			"epicness": 1,
 			"dataValues": {
 				"RegenDuration": 8,
@@ -648,7 +629,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1055.png",
-			"mapMask": 3,
 			"epicness": 1,
 			"itemGroups": [
 				"Items/ItemGroups/DoransItems"
@@ -673,7 +653,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1056.png",
-			"mapMask": 3,
 			"epicness": 1,
 			"dataValues": {
 				"BonusDamage": 5,
@@ -713,7 +692,6 @@
 				"sell": 595
 			},
 			"image": "1057.png",
-			"mapMask": 3,
 			"into": [
 				"2504",
 				"8020",
@@ -743,7 +721,6 @@
 				"sell": 840
 			},
 			"image": "1058.png",
-			"mapMask": 3,
 			"into": [
 				"3157",
 				"4645",
@@ -768,7 +745,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1082.png",
-			"mapMask": 1,
 			"into": [
 				"3041"
 			],
@@ -811,7 +787,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1083.png",
-			"mapMask": 1,
 			"isOnHit": true,
 			"epicness": 1,
 			"dataValues": {
@@ -841,7 +816,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1086.png",
-			"mapMask": 3,
 			"epicness": 1,
 			"dataValues": {
 				"HealthOnHit": 3
@@ -868,7 +842,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "1120.png",
-			"mapMask": 3,
 			"epicness": 1,
 			"dataValues": {
 				"BonusDamageToMinions": 5
@@ -893,7 +866,6 @@
 				"sell": 770
 			},
 			"image": "2019.png",
-			"mapMask": 3,
 			"into": [
 				"6333",
 				"3026"
@@ -927,7 +899,6 @@
 				"sell": 936
 			},
 			"image": "2020.png",
-			"mapMask": 3,
 			"into": [
 				"6698",
 				"2520",
@@ -959,7 +930,6 @@
 				"sell": 805
 			},
 			"image": "2021.png",
-			"mapMask": 3,
 			"into": [
 				"2501",
 				"3053",
@@ -993,7 +963,6 @@
 				"sell": 175
 			},
 			"image": "2022.png",
-			"mapMask": 3,
 			"into": [
 				"2020",
 				"3024",
@@ -1028,7 +997,6 @@
 				"sell": 665
 			},
 			"image": "2051.png",
-			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [15, 0.25],
 			"itemGroups": [
@@ -1055,7 +1023,6 @@
 				"sell": 1540
 			},
 			"image": "2065.png",
-			"mapMask": 3,
 			"from": [
 				"3113",
 				"4642"
@@ -1090,7 +1057,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "2420.png",
-			"mapMask": 3,
 			"into": [
 				"3157"
 			],
@@ -1124,7 +1090,6 @@
 				"sellBackModifier": 0.3
 			},
 			"image": "2422.png",
-			"mapMask": 3,
 			"into": [
 				"3006",
 				"3047",
@@ -1157,7 +1122,6 @@
 				"sell": 2310
 			},
 			"image": "2501.png",
-			"mapMask": 3,
 			"from": [
 				"2021",
 				"2021"
@@ -1209,7 +1173,6 @@
 				"sell": 1960
 			},
 			"image": "2502.png",
-			"mapMask": 3,
 			"from": [
 				"1031",
 				"3067",
@@ -1266,7 +1229,6 @@
 				"sell": 1960
 			},
 			"image": "2503.png",
-			"mapMask": 3,
 			"from": [
 				"3802",
 				"2508"
@@ -1343,7 +1305,6 @@
 				"sell": 2030
 			},
 			"image": "2504.png",
-			"mapMask": 3,
 			"from": [
 				"3211",
 				"1057"
@@ -1383,7 +1344,6 @@
 				"sell": 630
 			},
 			"image": "2508.png",
-			"mapMask": 3,
 			"into": [
 				"2503",
 				"6653"
@@ -1417,7 +1377,6 @@
 				"sell": 2170
 			},
 			"image": "2510.png",
-			"mapMask": 3,
 			"from": [
 				"3057",
 				"1026",
@@ -1482,7 +1441,6 @@
 				"sell": 1855
 			},
 			"image": "2512.png",
-			"mapMask": 3,
 			"from": [
 				"3086",
 				"3144"
@@ -1518,7 +1476,6 @@
 				"sell": 2170
 			},
 			"image": "2517.png",
-			"mapMask": 3,
 			"from": [
 				"3133",
 				"1037",
@@ -1588,7 +1545,6 @@
 				"sell": 2240
 			},
 			"image": "2520.png",
-			"mapMask": 1,
 			"from": [
 				"2020",
 				"3134"
@@ -1658,7 +1614,6 @@
 				"sell": 1960
 			},
 			"image": "2522.png",
-			"mapMask": 3,
 			"from": [
 				"3802",
 				"1026"
@@ -1712,7 +1667,6 @@
 				"sell": 1960
 			},
 			"image": "2523.png",
-			"mapMask": 3,
 			"from": [
 				"1037",
 				"6670",
@@ -1748,7 +1702,6 @@
 				"sell": 1610
 			},
 			"image": "2524.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"1029",
@@ -1810,7 +1763,6 @@
 				"sell": 1750
 			},
 			"image": "2525.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"1011"
@@ -1879,7 +1831,6 @@
 				"sell": 1575
 			},
 			"image": "2526.png",
-			"mapMask": 3,
 			"into": [
 				"2530"
 			],
@@ -1931,7 +1882,6 @@
 				"sell": 1575
 			},
 			"image": "2530.png",
-			"mapMask": 3,
 			"epicness": 5,
 			"dataValues": {
 				"PercentManaToHeal": 0.01,
@@ -1978,7 +1928,6 @@
 				"sell": 2030
 			},
 			"image": "3003.png",
-			"mapMask": 3,
 			"from": [
 				"3070",
 				"3802",
@@ -2016,7 +1965,6 @@
 				"sell": 2030
 			},
 			"image": "3004.png",
-			"mapMask": 3,
 			"from": [
 				"3070",
 				"3133",
@@ -2064,7 +2012,6 @@
 				"sell": 770
 			},
 			"image": "3006.png",
-			"mapMask": 3,
 			"into": [
 				"3172"
 			],
@@ -2100,7 +2047,6 @@
 				"sell": 665
 			},
 			"image": "3008.png",
-			"mapMask": 3,
 			"into": [
 				"3168"
 			],
@@ -2131,7 +2077,6 @@
 				"sell": 700
 			},
 			"image": "3009.png",
-			"mapMask": 3,
 			"into": [
 				"3170"
 			],
@@ -2167,7 +2112,6 @@
 				"sell": 770
 			},
 			"image": "3020.png",
-			"mapMask": 3,
 			"into": [
 				"3175"
 			],
@@ -2201,7 +2145,6 @@
 				"sell": 630
 			},
 			"image": "3024.png",
-			"mapMask": 3,
 			"into": [
 				"3110"
 			],
@@ -2230,7 +2173,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "3026.png",
-			"mapMask": 1,
 			"from": [
 				"2019",
 				"1038"
@@ -2263,7 +2205,6 @@
 				"sell": 2450
 			},
 			"image": "3031.png",
-			"mapMask": 3,
 			"from": [
 				"1038",
 				"1037",
@@ -2291,7 +2232,6 @@
 				"sell": 2170
 			},
 			"image": "3032.png",
-			"mapMask": 3,
 			"from": [
 				"1038",
 				"3144",
@@ -2343,7 +2283,6 @@
 				"sell": 2100
 			},
 			"image": "3033.png",
-			"mapMask": 3,
 			"from": [
 				"3123",
 				"3035",
@@ -2375,7 +2314,6 @@
 				"sell": 1015
 			},
 			"image": "3035.png",
-			"mapMask": 3,
 			"into": [
 				"3033",
 				"3036",
@@ -2408,7 +2346,6 @@
 				"sell": 2310
 			},
 			"image": "3036.png",
-			"mapMask": 3,
 			"from": [
 				"3035",
 				"6670"
@@ -2439,7 +2376,6 @@
 				"sell": 2030
 			},
 			"image": "3040.png",
-			"mapMask": 3,
 			"epicness": 5,
 			"dataValues": {
 				"APFromMana": 0.02,
@@ -2489,7 +2425,6 @@
 				"sell": 1050
 			},
 			"image": "3041.png",
-			"mapMask": 1,
 			"from": [
 				"1082"
 			],
@@ -2535,7 +2470,6 @@
 				"sell": 2030
 			},
 			"image": "3042.png",
-			"mapMask": 3,
 			"isOnHit": true,
 			"epicness": 5,
 			"dataValues": {
@@ -2601,7 +2535,6 @@
 				"sell": 770
 			},
 			"image": "3044.png",
-			"mapMask": 3,
 			"into": [
 				"3071",
 				"3078",
@@ -2651,7 +2584,6 @@
 				"sell": 1855
 			},
 			"image": "3046.png",
-			"mapMask": 3,
 			"from": [
 				"1042",
 				"3086",
@@ -2678,7 +2610,6 @@
 				"sell": 840
 			},
 			"image": "3047.png",
-			"mapMask": 3,
 			"into": [
 				"3174"
 			],
@@ -2717,7 +2648,6 @@
 				"sell": 1540
 			},
 			"image": "3050.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"1029",
@@ -2753,7 +2683,6 @@
 				"sell": 840
 			},
 			"image": "3051.png",
-			"mapMask": 3,
 			"into": [
 				"3078",
 				"3302",
@@ -2783,7 +2712,6 @@
 				"sell": 2240
 			},
 			"image": "3053.png",
-			"mapMask": 3,
 			"from": [
 				"1037",
 				"2021",
@@ -2909,7 +2837,6 @@
 				"sell": 630
 			},
 			"image": "3057.png",
-			"mapMask": 3,
 			"into": [
 				"3078",
 				"3100",
@@ -2963,7 +2890,6 @@
 				"sell": 1890
 			},
 			"image": "3065.png",
-			"mapMask": 3,
 			"from": [
 				"3211",
 				"3067"
@@ -2993,7 +2919,6 @@
 				"sell": 560
 			},
 			"image": "3066.png",
-			"mapMask": 3,
 			"into": [
 				"3742",
 				"3181",
@@ -3022,7 +2947,6 @@
 				"sell": 560
 			},
 			"image": "3067.png",
-			"mapMask": 3,
 			"into": [
 				"3071",
 				"8020",
@@ -3067,7 +2991,6 @@
 				"sell": 1890
 			},
 			"image": "3068.png",
-			"mapMask": 3,
 			"from": [
 				"6660",
 				"1031",
@@ -3133,7 +3056,6 @@
 				"sell": 280
 			},
 			"image": "3070.png",
-			"mapMask": 3,
 			"into": [
 				"3003",
 				"3004",
@@ -3186,7 +3108,6 @@
 				"sell": 2100
 			},
 			"image": "3071.png",
-			"mapMask": 3,
 			"from": [
 				"3044",
 				"3067",
@@ -3221,7 +3142,6 @@
 				"sell": 2380
 			},
 			"image": "3072.png",
-			"mapMask": 3,
 			"from": [
 				"1038",
 				"1037",
@@ -3270,7 +3190,6 @@
 				"sell": 2100
 			},
 			"image": "3073.png",
-			"mapMask": 3,
 			"from": [
 				"2021",
 				"3044",
@@ -3305,7 +3224,6 @@
 				"sell": 2310
 			},
 			"image": "3074.png",
-			"mapMask": 3,
 			"from": [
 				"3077",
 				"1053",
@@ -3370,7 +3288,6 @@
 				"sell": 1715
 			},
 			"image": "3075.png",
-			"mapMask": 3,
 			"from": [
 				"3076",
 				"1031",
@@ -3420,7 +3337,6 @@
 				"sell": 560
 			},
 			"image": "3076.png",
-			"mapMask": 3,
 			"into": [
 				"3075"
 			],
@@ -3461,7 +3377,6 @@
 				"sell": 840
 			},
 			"image": "3077.png",
-			"mapMask": 3,
 			"into": [
 				"3074",
 				"3748",
@@ -3534,7 +3449,6 @@
 				"sell": 2333
 			},
 			"image": "3078.png",
-			"mapMask": 3,
 			"from": [
 				"3057",
 				"3044",
@@ -3590,7 +3504,6 @@
 				"sell": 700
 			},
 			"image": "3082.png",
-			"mapMask": 3,
 			"into": [
 				"3110",
 				"3143"
@@ -3623,7 +3536,6 @@
 				"sell": 2170
 			},
 			"image": "3083.png",
-			"mapMask": 3,
 			"from": [
 				"1011",
 				"1011",
@@ -3675,7 +3587,6 @@
 				"sell": 2100
 			},
 			"image": "3084.png",
-			"mapMask": 3,
 			"from": [
 				"1011",
 				"3801",
@@ -3765,7 +3676,6 @@
 				"sell": 1855
 			},
 			"image": "3085.png",
-			"mapMask": 3,
 			"from": [
 				"3086",
 				"3144"
@@ -3821,7 +3731,6 @@
 				"sell": 840
 			},
 			"image": "3086.png",
-			"mapMask": 3,
 			"into": [
 				"2512",
 				"3094",
@@ -3853,7 +3762,6 @@
 				"sell": 2100
 			},
 			"image": "3087.png",
-			"mapMask": 3,
 			"from": [
 				"3144",
 				"3113",
@@ -3914,7 +3822,6 @@
 				"sell": 2450
 			},
 			"image": "3089.png",
-			"mapMask": 3,
 			"from": [
 				"1058",
 				"1058"
@@ -3945,7 +3852,6 @@
 				"sell": 1960
 			},
 			"image": "3091.png",
-			"mapMask": 3,
 			"from": [
 				"1043",
 				"1057",
@@ -3986,7 +3892,6 @@
 				"sell": 1855
 			},
 			"image": "3094.png",
-			"mapMask": 3,
 			"from": [
 				"3086",
 				"3144"
@@ -4018,7 +3923,6 @@
 				"sell": 2240
 			},
 			"image": "3097.png",
-			"mapMask": 3,
 			"from": [
 				"1038",
 				"1018",
@@ -4060,7 +3964,6 @@
 				"sell": 2030
 			},
 			"image": "3100.png",
-			"mapMask": 3,
 			"from": [
 				"3057",
 				"3113",
@@ -4113,7 +4016,6 @@
 				"sell": 2100
 			},
 			"image": "3102.png",
-			"mapMask": 3,
 			"from": [
 				"1058",
 				"4632"
@@ -4146,7 +4048,6 @@
 				"sell": 1610
 			},
 			"image": "3107.png",
-			"mapMask": 3,
 			"from": [
 				"3108",
 				"3114"
@@ -4222,7 +4123,6 @@
 				"sell": 595
 			},
 			"image": "3108.png",
-			"mapMask": 3,
 			"into": [
 				"3115",
 				"4005",
@@ -4262,7 +4162,6 @@
 				"sell": 1610
 			},
 			"image": "3109.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"1031",
@@ -4299,7 +4198,6 @@
 				"sell": 1750
 			},
 			"image": "3110.png",
-			"mapMask": 3,
 			"from": [
 				"3082",
 				"3024"
@@ -4331,7 +4229,6 @@
 				"sell": 875
 			},
 			"image": "3111.png",
-			"mapMask": 3,
 			"into": [
 				"3173"
 			],
@@ -4367,7 +4264,6 @@
 				"sell": 665
 			},
 			"image": "3112.png",
-			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [3],
 			"itemGroups": [
@@ -4392,7 +4288,6 @@
 				"sell": 630
 			},
 			"image": "3113.png",
-			"mapMask": 3,
 			"into": [
 				"3100",
 				"2065",
@@ -4423,7 +4318,6 @@
 				"sell": 420
 			},
 			"image": "3114.png",
-			"mapMask": 3,
 			"into": [
 				"2526",
 				"3107",
@@ -4454,7 +4348,6 @@
 				"sell": 2030
 			},
 			"image": "3115.png",
-			"mapMask": 3,
 			"from": [
 				"1043",
 				"1026",
@@ -4502,7 +4395,6 @@
 				"sell": 1820
 			},
 			"image": "3116.png",
-			"mapMask": 3,
 			"from": [
 				"1026",
 				"1011",
@@ -4535,7 +4427,6 @@
 				"sell": 1890
 			},
 			"image": "3118.png",
-			"mapMask": 3,
 			"from": [
 				"3802",
 				"1026"
@@ -4609,7 +4500,6 @@
 				"sell": 1680
 			},
 			"image": "3119.png",
-			"mapMask": 3,
 			"from": [
 				"3070",
 				"1011",
@@ -4657,7 +4547,6 @@
 				"sell": 1680
 			},
 			"image": "3121.png",
-			"mapMask": 3,
 			"epicness": 5,
 			"dataValues": {
 				"Cooldown": 8,
@@ -4703,7 +4592,6 @@
 				"sell": 560
 			},
 			"image": "3123.png",
-			"mapMask": 3,
 			"into": [
 				"3033",
 				"6609"
@@ -4737,7 +4625,6 @@
 				"sell": 2100
 			},
 			"image": "3124.png",
-			"mapMask": 3,
 			"from": [
 				"1052",
 				"1043",
@@ -4822,7 +4709,6 @@
 				"sell": 735
 			},
 			"image": "3133.png",
-			"mapMask": 3,
 			"into": [
 				"6333",
 				"6697",
@@ -4863,7 +4749,6 @@
 				"sell": 700
 			},
 			"image": "3134.png",
-			"mapMask": 3,
 			"into": [
 				"3142",
 				"6697",
@@ -4903,7 +4788,6 @@
 				"sell": 2100
 			},
 			"image": "3135.png",
-			"mapMask": 3,
 			"from": [
 				"4630",
 				"1026"
@@ -4930,7 +4814,6 @@
 				"sell": 2100
 			},
 			"image": "3137.png",
-			"mapMask": 3,
 			"from": [
 				"4630",
 				"3108",
@@ -4979,7 +4862,6 @@
 				"sell": 2240
 			},
 			"image": "3139.png",
-			"mapMask": 3,
 			"from": [
 				"3140",
 				"1037",
@@ -5012,7 +4894,6 @@
 				"sell": 910
 			},
 			"image": "3140.png",
-			"mapMask": 3,
 			"into": [
 				"3139"
 			],
@@ -5044,7 +4925,6 @@
 				"sell": 1960
 			},
 			"image": "3142.png",
-			"mapMask": 3,
 			"from": [
 				"3134",
 				"6690",
@@ -5105,7 +4985,6 @@
 				"sell": 1890
 			},
 			"image": "3143.png",
-			"mapMask": 3,
 			"from": [
 				"3082",
 				"1011"
@@ -5137,7 +5016,6 @@
 				"sell": 420
 			},
 			"image": "3144.png",
-			"mapMask": 3,
 			"into": [
 				"2512",
 				"3094",
@@ -5180,7 +5058,6 @@
 				"sell": 770
 			},
 			"image": "3145.png",
-			"mapMask": 3,
 			"into": [
 				"4645",
 				"3146",
@@ -5224,7 +5101,6 @@
 				"sell": 2100
 			},
 			"image": "3146.png",
-			"mapMask": 3,
 			"from": [
 				"1053",
 				"3145",
@@ -5272,7 +5148,6 @@
 				"sell": 910
 			},
 			"image": "3147.png",
-			"mapMask": 3,
 			"into": [
 				"8010",
 				"4633",
@@ -5310,7 +5185,6 @@
 				"sell": 1855
 			},
 			"image": "3152.png",
-			"mapMask": 3,
 			"from": [
 				"3145",
 				"3108",
@@ -5357,7 +5231,6 @@
 				"sell": 2240
 			},
 			"image": "3153.png",
-			"mapMask": 3,
 			"from": [
 				"1053",
 				"1043",
@@ -5504,7 +5377,6 @@
 				"sell": 910
 			},
 			"image": "3155.png",
-			"mapMask": 3,
 			"into": [
 				"3156"
 			],
@@ -5566,7 +5438,6 @@
 				"sell": 2170
 			},
 			"image": "3156.png",
-			"mapMask": 3,
 			"from": [
 				"3155",
 				"3133"
@@ -5627,7 +5498,6 @@
 				"sell": 2275
 			},
 			"image": "3157.png",
-			"mapMask": 3,
 			"from": [
 				"1058",
 				"2420"
@@ -5659,7 +5529,6 @@
 				"sell": 630
 			},
 			"image": "3158.png",
-			"mapMask": 3,
 			"into": [
 				"3171"
 			],
@@ -5696,7 +5565,6 @@
 				"sell": 2170
 			},
 			"image": "3161.png",
-			"mapMask": 3,
 			"from": [
 				"1037",
 				"2021",
@@ -5749,7 +5617,6 @@
 				"sell": 1995
 			},
 			"image": "3165.png",
-			"mapMask": 3,
 			"from": [
 				"3916",
 				"1026",
@@ -5781,7 +5648,6 @@
 				"sell": 665
 			},
 			"image": "3168.png",
-			"mapMask": 1,
 			"from": [
 				"3008"
 			],
@@ -5811,7 +5677,6 @@
 				"sell": 700
 			},
 			"image": "3170.png",
-			"mapMask": 1,
 			"from": [
 				"3009"
 			],
@@ -5860,7 +5725,6 @@
 				"sell": 630
 			},
 			"image": "3171.png",
-			"mapMask": 1,
 			"from": [
 				"3158"
 			],
@@ -5914,7 +5778,6 @@
 				"sell": 770
 			},
 			"image": "3172.png",
-			"mapMask": 1,
 			"from": [
 				"3006"
 			],
@@ -5967,7 +5830,6 @@
 				"sell": 875
 			},
 			"image": "3173.png",
-			"mapMask": 1,
 			"from": [
 				"3111"
 			],
@@ -6027,7 +5889,6 @@
 				"sell": 840
 			},
 			"image": "3174.png",
-			"mapMask": 1,
 			"from": [
 				"3047"
 			],
@@ -6089,7 +5950,6 @@
 				"sell": 770
 			},
 			"image": "3175.png",
-			"mapMask": 1,
 			"from": [
 				"3020"
 			],
@@ -6125,7 +5985,6 @@
 				"sell": 665
 			},
 			"image": "3177.png",
-			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [10],
 			"itemGroups": [
@@ -6152,7 +6011,6 @@
 				"sell": 1960
 			},
 			"image": "3179.png",
-			"mapMask": 3,
 			"from": [
 				"3134",
 				"3133"
@@ -6234,7 +6092,6 @@
 				"sell": 2100
 			},
 			"image": "3181.png",
-			"mapMask": 3,
 			"from": [
 				"2021",
 				"3066",
@@ -6344,7 +6201,6 @@
 				"sell": 665
 			},
 			"image": "3184.png",
-			"mapMask": 2,
 			"epicness": 1,
 			"itemGroups": [
 				"Items/ItemGroups/GuardianItems"
@@ -6370,7 +6226,6 @@
 				"sell": 1540
 			},
 			"image": "3190.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"1029",
@@ -6424,7 +6279,6 @@
 				"sell": 875
 			},
 			"image": "3211.png",
-			"mapMask": 3,
 			"into": [
 				"2504",
 				"3065",
@@ -6459,7 +6313,6 @@
 				"sell": 1610
 			},
 			"image": "3222.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"3114"
@@ -6529,7 +6382,6 @@
 				"sell": 2100
 			},
 			"image": "3302.png",
-			"mapMask": 3,
 			"from": [
 				"3051",
 				"1043"
@@ -6603,7 +6455,6 @@
 				"sell": 1540
 			},
 			"image": "3504.png",
-			"mapMask": 3,
 			"from": [
 				"3113",
 				"3114"
@@ -6635,7 +6486,6 @@
 				"sell": 2135
 			},
 			"image": "3508.png",
-			"mapMask": 3,
 			"from": [
 				"3057",
 				"3133",
@@ -6698,7 +6548,6 @@
 				"sell": 2030
 			},
 			"image": "3742.png",
-			"mapMask": 3,
 			"from": [
 				"3066",
 				"1028",
@@ -6756,7 +6605,6 @@
 				"sell": 2310
 			},
 			"image": "3748.png",
-			"mapMask": 3,
 			"from": [
 				"3077",
 				"2021",
@@ -6872,7 +6720,6 @@
 				"sell": 560
 			},
 			"image": "3801.png",
-			"mapMask": 3,
 			"into": [
 				"3084",
 				"3083"
@@ -6900,7 +6747,6 @@
 				"sell": 840
 			},
 			"image": "3802.png",
-			"mapMask": 3,
 			"into": [
 				"2522",
 				"3003",
@@ -6938,7 +6784,6 @@
 				"sell": 910
 			},
 			"image": "3803.png",
-			"mapMask": 3,
 			"into": [
 				"6657"
 			],
@@ -6976,7 +6821,6 @@
 				"sell": 2100
 			},
 			"image": "3814.png",
-			"mapMask": 3,
 			"from": [
 				"3134",
 				"2021"
@@ -7010,7 +6854,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "3865.png",
-			"mapMask": 1,
 			"epicness": 1,
 			"dataValues": {
 				"GP10": 3,
@@ -7151,7 +6994,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "3869.png",
-			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
 			"dataValues": {
@@ -7189,7 +7031,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "3870.png",
-			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
 			"dataValues": {
@@ -7258,7 +7099,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "3871.png",
-			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
 			"dataValues": {
@@ -7323,7 +7163,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "3876.png",
-			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
 			"dataValues": {
@@ -7375,7 +7214,6 @@
 				"sellBackModifier": 0.4
 			},
 			"image": "3877.png",
-			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
 			"dataValues": {
@@ -7433,7 +7271,6 @@
 				"sell": 560
 			},
 			"image": "3916.png",
-			"mapMask": 3,
 			"into": [
 				"3165"
 			],
@@ -7464,7 +7301,6 @@
 				"sell": 1120
 			},
 			"image": "4003.png",
-			"mapMask": 2,
 			"into": [
 				"4004"
 			],
@@ -7499,7 +7335,6 @@
 				"sell": 1960
 			},
 			"image": "4004.png",
-			"mapMask": 2,
 			"from": [
 				"4003",
 				"3134"
@@ -7531,7 +7366,6 @@
 				"sell": 1575
 			},
 			"image": "4005.png",
-			"mapMask": 3,
 			"from": [
 				"3108",
 				"4642"
@@ -7566,7 +7400,6 @@
 				"sell": 1960
 			},
 			"image": "4401.png",
-			"mapMask": 3,
 			"from": [
 				"1057",
 				"1028",
@@ -7601,7 +7434,6 @@
 				"sell": 1890
 			},
 			"image": "4628.png",
-			"mapMask": 3,
 			"from": [
 				"3108",
 				"3108",
@@ -7640,7 +7472,6 @@
 				"sell": 2100
 			},
 			"image": "4629.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"3113",
@@ -7684,7 +7515,6 @@
 				"sell": 770
 			},
 			"image": "4630.png",
-			"mapMask": 3,
 			"into": [
 				"3135",
 				"3137"
@@ -7713,7 +7543,6 @@
 				"sell": 1120
 			},
 			"image": "4632.png",
-			"mapMask": 3,
 			"into": [
 				"3102"
 			],
@@ -7752,7 +7581,6 @@
 				"sell": 2170
 			},
 			"image": "4633.png",
-			"mapMask": 3,
 			"from": [
 				"3147",
 				"3108"
@@ -7819,7 +7647,6 @@
 				"sell": 630
 			},
 			"image": "4642.png",
-			"mapMask": 3,
 			"into": [
 				"2065",
 				"6620",
@@ -7849,7 +7676,6 @@
 				"sell": 2240
 			},
 			"image": "4645.png",
-			"mapMask": 3,
 			"from": [
 				"3145",
 				"1058"
@@ -7881,7 +7707,6 @@
 				"sell": 1960
 			},
 			"image": "4646.png",
-			"mapMask": 3,
 			"from": [
 				"3145",
 				"3113"
@@ -7950,7 +7775,6 @@
 				"sell": 2310
 			},
 			"image": "6333.png",
-			"mapMask": 3,
 			"from": [
 				"2019",
 				"1037",
@@ -8015,7 +7839,6 @@
 				"sell": 2100
 			},
 			"image": "6609.png",
-			"mapMask": 3,
 			"from": [
 				"3123",
 				"1011",
@@ -8048,7 +7871,6 @@
 				"sell": 2170
 			},
 			"image": "6610.png",
-			"mapMask": 3,
 			"from": [
 				"2021",
 				"3133",
@@ -8113,7 +7935,6 @@
 				"sell": 1575
 			},
 			"image": "6616.png",
-			"mapMask": 3,
 			"from": [
 				"3108",
 				"3114"
@@ -8146,7 +7967,6 @@
 				"sell": 1540
 			},
 			"image": "6617.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"4642"
@@ -8223,7 +8043,6 @@
 				"sell": 1540
 			},
 			"image": "6620.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"4642"
@@ -8266,7 +8085,6 @@
 				"sell": 1750
 			},
 			"image": "6621.png",
-			"mapMask": 3,
 			"from": [
 				"1026",
 				"3114",
@@ -8298,7 +8116,6 @@
 				"sell": 2310
 			},
 			"image": "6631.png",
-			"mapMask": 3,
 			"from": [
 				"3077",
 				"3044",
@@ -8367,7 +8184,6 @@
 				"sell": 2100
 			},
 			"image": "6653.png",
-			"mapMask": 3,
 			"from": [
 				"3147",
 				"2508"
@@ -8405,7 +8221,6 @@
 				"sell": 1925
 			},
 			"image": "6655.png",
-			"mapMask": 3,
 			"from": [
 				"3802",
 				"3145"
@@ -8460,7 +8275,6 @@
 				"sell": 1820
 			},
 			"image": "6657.png",
-			"mapMask": 3,
 			"from": [
 				"1026",
 				"3803"
@@ -8498,7 +8312,6 @@
 				"sell": 630
 			},
 			"image": "6660.png",
-			"mapMask": 3,
 			"into": [
 				"3068",
 				"6664"
@@ -8553,7 +8366,6 @@
 				"sell": 2030
 			},
 			"image": "6662.png",
-			"mapMask": 3,
 			"from": [
 				"3057",
 				"1028",
@@ -8633,7 +8445,6 @@
 				"sell": 1960
 			},
 			"image": "6664.png",
-			"mapMask": 3,
 			"from": [
 				"6660",
 				"3211"
@@ -8717,7 +8528,6 @@
 				"sell": 2240
 			},
 			"image": "6665.png",
-			"mapMask": 3,
 			"from": [
 				"1011",
 				"1031",
@@ -8748,7 +8558,6 @@
 				"sell": 910
 			},
 			"image": "6670.png",
-			"mapMask": 3,
 			"into": [
 				"2523",
 				"3036",
@@ -8777,7 +8586,6 @@
 				"sell": 2100
 			},
 			"image": "6672.png",
-			"mapMask": 3,
 			"from": [
 				"6690",
 				"3051",
@@ -8836,7 +8644,6 @@
 				"sell": 2100
 			},
 			"image": "6673.png",
-			"mapMask": 3,
 			"from": [
 				"1037",
 				"6670"
@@ -8889,7 +8696,6 @@
 				"sell": 1855
 			},
 			"image": "6675.png",
-			"mapMask": 3,
 			"from": [
 				"1042",
 				"3086",
@@ -8921,7 +8727,6 @@
 				"sell": 2100
 			},
 			"image": "6676.png",
-			"mapMask": 3,
 			"from": [
 				"1037",
 				"3134",
@@ -8954,7 +8759,6 @@
 				"sell": 543
 			},
 			"image": "6690.png",
-			"mapMask": 3,
 			"into": [
 				"4003",
 				"6672",
@@ -8983,7 +8787,6 @@
 				"sell": 2030
 			},
 			"image": "6692.png",
-			"mapMask": 3,
 			"from": [
 				"3133",
 				"1037",
@@ -9070,7 +8873,6 @@
 				"sell": 2100
 			},
 			"image": "6694.png",
-			"mapMask": 3,
 			"from": [
 				"3133",
 				"3035"
@@ -9116,7 +8918,6 @@
 				"sell": 1750
 			},
 			"image": "6695.png",
-			"mapMask": 3,
 			"from": [
 				"3134",
 				"1037"
@@ -9163,7 +8964,6 @@
 				"sell": 1925
 			},
 			"image": "6696.png",
-			"mapMask": 3,
 			"from": [
 				"2020",
 				"3133"
@@ -9210,7 +9010,6 @@
 				"sell": 1960
 			},
 			"image": "6697.png",
-			"mapMask": 1,
 			"from": [
 				"3134",
 				"3133"
@@ -9259,7 +9058,6 @@
 				"sell": 1995
 			},
 			"image": "6698.png",
-			"mapMask": 3,
 			"from": [
 				"3077",
 				"2020"
@@ -9344,7 +9142,6 @@
 				"sell": 2030
 			},
 			"image": "6699.png",
-			"mapMask": 3,
 			"from": [
 				"2020",
 				"1036",
@@ -9393,7 +9190,6 @@
 				"sell": 2030
 			},
 			"image": "8010.png",
-			"mapMask": 3,
 			"from": [
 				"3147",
 				"3108"
@@ -9428,7 +9224,6 @@
 				"sell": 1855
 			},
 			"image": "8020.png",
-			"mapMask": 3,
 			"from": [
 				"3067",
 				"1057"

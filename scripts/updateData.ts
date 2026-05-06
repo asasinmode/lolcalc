@@ -16,7 +16,7 @@ import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, KEPT_UNPURCHASABLE_ITEMS } from '@lolcalc/shared';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS } from '@lolcalc/shared';
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
@@ -385,11 +385,11 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	const moreItemData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`, 'game/items.cdtb.bin.json');
 
 	const SPECIAL_EPICNESS_ITEMS: Record<string, number> = {
-		3869: 7,	// celestial opposition
-		3870: 7,	// dream maker
-		3871: 7,	// zaz'zak's realmspike
-		3876: 7,	// solstice sleigh
-		3877: 7,	// bloodsong
+		[ITEM_NAME_TO_ID.celestialOpposition]: 7,
+		[ITEM_NAME_TO_ID.dreamMaker]: 7,
+		[ITEM_NAME_TO_ID.zazZakRealmspike]: 7,
+		[ITEM_NAME_TO_ID.solsticeSleigh]: 7,
+		[ITEM_NAME_TO_ID.bloodsong]: 7,
 	};
 
 	textData.data.items = {} as any;
@@ -468,11 +468,11 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient);
 
 		const SPECIAL_CATEGORY_ITEMS: Record<string, IItemCategory[]> = {
-			3869: ['support'],	// celestial opposition
-			3870: ['support'],	// dream maker
-			3871: ['support'],	// zaz'zak's realmspike
-			3876: ['support'],	// solstice sleigh
-			3877: ['support'],	// bloodsong
+			[ITEM_NAME_TO_ID.celestialOpposition]: ['support'],
+			[ITEM_NAME_TO_ID.dreamMaker]: ['support'],
+			[ITEM_NAME_TO_ID.zazZakRealmspike]: ['support'],
+			[ITEM_NAME_TO_ID.solsticeSleigh]: ['support'],
+			[ITEM_NAME_TO_ID.bloodsong]: ['support'],
 		};
 
 		if (SPECIAL_CATEGORY_ITEMS[itemId]) {
@@ -483,14 +483,14 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			continue;
 		}
 
-		const KNOWN_CATEGORYLESS_ITEMS = [
-			'3170',	// swiftmarch
-			'3171',	// crimson lucidity
-			'3172',	// gunmetal greaves
-			'3173',	// chainlaced crushers
-			'3174',	// armored advance
-			'3175',	// spellslinger's shoes
-			'3176',	// forever forward
+		const KNOWN_CATEGORYLESS_ITEMS: string[] = [
+			ITEM_NAME_TO_ID.swiftmarch,
+			ITEM_NAME_TO_ID.crimsonLucidity,
+			ITEM_NAME_TO_ID.gunmetalGreaves,
+			ITEM_NAME_TO_ID.chainlacedCrushers,
+			ITEM_NAME_TO_ID.armoredAdvanced,
+			ITEM_NAME_TO_ID.spellslingersShoes,
+			ITEM_NAME_TO_ID.foreverForward,
 		];
 
 		if (!itemMoreData.mItemAttributes) {

@@ -38,7 +38,7 @@ export function useChampion(id: IChampionId | (string & {})): Promise<IChampion>
 		return cacheHit;
 	}
 	/** conditional parse because raw node imports it properly as json and nuxt imports a string */
-	const promise = import(`../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then(module => typeof module.default === 'string' ? JSON.parse(module.default) : module.default);
+	const promise = import(/* @vite-ignore */ `../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then(module => typeof module.default === 'string' ? JSON.parse(module.default) : module.default);
 	championCache.set(id as IChampionId, promise);
 	return promise;
 }

@@ -178,7 +178,6 @@ export const ITEM_NAME_TO_ID = {
 	shurelya: '2065',
 	runaan: '3085',
 	trinity: '3078',
-	celestialOpposition: '3869',
 	phage: '3044',
 	ardentCensor: '3504',
 	staffOfFlowingWater: '6616',
@@ -202,6 +201,19 @@ export const ITEM_NAME_TO_ID = {
 	endlessHunger: '2517',
 	mawOfMalmortius: '3156',
 	jakSho: '6665',
+	gluttonousGreaves: '3008',
+	swiftmarch: '3170',
+	crimsonLucidity: '3171',
+	gunmetalGreaves: '3172',
+	chainlacedCrushers: '3173',
+	armoredAdvanced: '3174',
+	spellslingersShoes: '3175',
+	foreverForward: '3176',
+	celestialOpposition: '3869',
+	dreamMaker: '3870',
+	zazZakRealmspike: '3871',
+	solsticeSleigh: '3876',
+	bloodsong: '3877',
 } as const;
 
 export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
