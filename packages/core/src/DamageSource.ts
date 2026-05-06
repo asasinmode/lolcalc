@@ -931,20 +931,24 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			const rv: ICalculateStatsGroupedHooks = {};
 			for (const key in this.calculateStatsHooks.runes.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+				// @ts-expect-error the hook being pushed is of correct type
 				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.runes.value[key as keyof ICalculateChampionStatsHookSource]!);
 			}
 			for (const key in this.calculateStatsHooks.items.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+				// @ts-expect-error the hook being pushed is of correct type
 				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.items.value[key as keyof ICalculateChampionStatsHookSource]!);
 			}
 			for (const key in this.calculateStatsHooks.effects.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+				// @ts-expect-error the hook being pushed is of correct type
 				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.effects.value[key as keyof ICalculateChampionStatsHookSource]!);
 			}
 			if (this.champion.value?.id) {
 				const championHooks = groupCalculateStatsHooks({}, (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id]);
 				for (const key in championHooks) {
 					rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+					// @ts-expect-error the hook being pushed is of correct type
 					rv[key as keyof ICalculateChampionStatsHookSource]!.push(...championHooks[key as keyof ICalculateChampionStatsHookSource]!);
 				}
 			}
@@ -964,8 +968,8 @@ function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampion
 	if (boots?.epicness) {
 		if (roleQuest === 'mid' && boots.into?.length) {
 			items[bootsIndex] = ITEMS[boots.into[0]!];
-		} else if (roleQuest !== 'mid' && boots.from?.length === 1) {
-			items[bootsIndex] = ITEMS[boots.from[0]!];
+		} else if (roleQuest !== 'mid' && boots.epicness === 7) {
+			items[bootsIndex] = ITEMS[boots.from![0]!];
 		}
 	}
 }
@@ -1341,6 +1345,7 @@ function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSourc
 	if (hookSource?.calculateHooks) {
 		for (const hook in hookSource.calculateHooks) {
 			target[hook as keyof ICalculateChampionStatsHookSource] ??= [];
+			// @ts-expect-error the hook being pushed is of correct type
 			target[hook as keyof ICalculateChampionStatsHookSource]!.push(hookSource.calculateHooks[hook as keyof ICalculateChampionStatsHookSource]!);
 		}
 	}
