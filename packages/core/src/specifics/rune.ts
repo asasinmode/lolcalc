@@ -1,5 +1,5 @@
 import type { TRunes } from '@lolcalc/data';
-import type { IChampionRunes, IRuneShardSlotValue } from '@lolcalc/data/types';
+import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
 import { RUNES } from '@lolcalc/data';
@@ -38,11 +38,15 @@ export const RUNE_SPECIFICS = {
 			},
 		},
 	},
+	slots: {},
 } satisfies IHypotheticalRuneSpecifics;
 
 export type TRuneSpecifics = typeof RUNE_SPECIFICS;
 export interface IHypotheticalRuneSpecifics {
 	shards: Partial<Record<IRuneShardSlotValue, IRuneSpecific>>;
+	slots: {
+		[K in IRuneSlotName]?: IRuneSpecific;
+	};
 };
 
 export type IRuneSpecific = IProviderGroupDynamicVariables & {

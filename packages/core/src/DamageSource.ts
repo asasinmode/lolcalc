@@ -5,7 +5,7 @@ import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
-import type { IEffectSpecific } from './specifics/effect';
+import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
 import type { IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune.ts';
@@ -65,10 +65,19 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		for (const shard of Object.values(this.runes.value.shards)) {
 			groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shard]);
 		}
+		for (const rune of this.runes.value.paths.primarySlots) {
+			rune && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).slots[rune]);
+		}
+		for (const rune of this.runes.value.paths.secondarySlots) {
+			rune && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).slots[rune]);
+		}
 		for (const item in this.items.value) {
 			item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item]);
 		};
 		this.champion.value?.id && groupCalculateStatsHooks(rv, (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id]);
+		for (const effect of this.appliedEffects.value) {
+			groupCalculateStatsHooks(rv, (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id]);
+		}
 
 		return Object.fromEntries(Object.entries(rv).map(([key, value]) => [
 			key,
