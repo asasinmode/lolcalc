@@ -5,6 +5,7 @@ import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core
 import { ITEMS } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { ItemExtraTearItem } from '#components';
+import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 
 const items = ITEMS as TItems;
 
@@ -37,7 +38,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackfireTorch), 'bBlaze', 'Balefully blazing'),
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.guinsoo), 'seething', 'Seething strikes stacks', 0, 4),
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.guinsoo), 'seething', 'Seething strikes stacks', 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks),
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
 		extras: [
@@ -161,6 +162,12 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.jakSho]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.jakSho), 'vbResistance', 'Voidborn Resistance'),
+	},
+	[ITEM_NAME_TO_ID.gluttonousGreaves]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.gluttonousGreaves), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.gluttonousGreaves].MAX_STACKS),
+	},
+	[ITEM_NAME_TO_ID.immortalPath]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.immortalPath), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.immortalPath].MAX_STACKS),
 	},
 };
 

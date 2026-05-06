@@ -18,6 +18,19 @@ const tearItemSpecifics = {
 	},
 } satisfies IItemSpecific;
 
+const gluttonousGreavesSpecific = {
+	MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.gluttonousGreaves].dataValues.MaxStacks,
+	internalDataProperties: ['slay'],
+	setupData(self) {
+		self.internalItemData.value.slay = clamp(0, self.internalItemData.value.slay ?? 0, gluttonousGreavesSpecific.MAX_STACKS);
+		return { slay: 0 };
+	},
+	imgTextLabel: 'Slay stacks',
+	imgText(self) {
+		return (self.internalItemData.value as { slay: number }).slay;
+	},
+} satisfies IItemSpecific;
+
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
 		internalDataProperties: ['eminence'],
@@ -455,6 +468,8 @@ export const ITEM_SPECIFICS = {
 			return internalData.vbResistance;
 		},
 	},
+	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
+	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific,
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
@@ -467,6 +482,7 @@ export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItem
 	 */
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
+	[key: string]: any;
 };
 
 export function calculateItemDiscount(
