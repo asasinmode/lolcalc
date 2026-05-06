@@ -1,6 +1,6 @@
 import type { TItems } from '@lolcalc/data';
 import type { IItem, IShopItem } from '@lolcalc/data/types';
-import type { DamageSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS } from '@lolcalc/data';
 import { EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
@@ -466,6 +466,7 @@ export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItem
 	 * when array, the indicator dot will be split in half and colored based on the array 1/2 being trueish, useful for youmuu
 	 */
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
+	calculateHooks?: ICalculateChampionStatsHookSource;
 };
 
 export function calculateItemDiscount(

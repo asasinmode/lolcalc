@@ -14,7 +14,7 @@ import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
-import type { DamageSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { IPossibleDynamicValues } from '../types';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -43,13 +43,15 @@ export const CHAMPION_SPECIFICS = {
 			},
 			)) as IChampionStats;
 		},
-		hooks: {
-			postInit(self, _initialStats, baseStats) {
-				for (const [statName, statMeta] of ALL_CHAMPION_STATS_ENTRIES) {
-					if (self.internalData.value[statName] !== undefined) {
-						baseStats[statName] = self.internalData.value[statName] * (statMeta.isPercentage ? 0.01 : 1);
+		calculateHooks: {
+			postInit: {
+				handler(self, baseStats) {
+					for (const [statName, statMeta] of ALL_CHAMPION_STATS_ENTRIES) {
+						if (self.internalData.value[statName] !== undefined) {
+							baseStats[statName] = self.internalData.value[statName] * (statMeta.isPercentage ? 0.01 : 1);
+						}
 					}
-				}
+				},
 			},
 		},
 	},
@@ -572,11 +574,7 @@ export type IChampionSpecific = IProviderGroupDataSetup & {
 } & {
 	/** champion's possible dynamic values, can be overriden per ability and ability variant */
 	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
-	/** any hooks that will be called at various points in calculations, if provided */
-	hooks?: {
-		/** runs after resolving the champion in `calculateChampionStats`. Receives any `IStatsCalculationResult` present at this point */
-		postInit?: (self: DamageSource, initialStats: IChampionStats, baseStats: IChampionStats, bonusStats: IChampionStats) => void;
-	};
+	calculateHooks?: ICalculateChampionStatsHookSource;
 	[key: string]: any;
 };
 

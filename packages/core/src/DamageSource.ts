@@ -1,6 +1,6 @@
 import type { ITextData } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey, IStatsCalculationResult } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationResult } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -8,6 +8,7 @@ import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific } from './specifics/effect';
 import type { IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
+import type { IHypotheticalRuneSpecifics } from './specifics/rune.ts';
 import type { IReplaceGameVariablesRV } from './types';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
@@ -21,7 +22,7 @@ import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
 import { resolveAbilitySpecific } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
-import { runePathsEmpty, runesInvalid } from './specifics/rune.ts';
+import { RUNE_SPECIFICS, runePathsEmpty, runesInvalid } from './specifics/rune.ts';
 import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
 import { replaceStringtableVariables } from './variables/stringtable.ts';
 
@@ -56,6 +57,24 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	maxLevel = computed((): number => this.roleQuest.value === 'top' ? 20 : 18);
 
 	isRanged = computed((): boolean => Boolean(this.champion.value && (this.stats.value.base.attackRange > 325)));
+	calculateStatsHooks = computed((): {
+		[K in keyof ICalculateChampionStatsHookSource]?: NonNullable<ICalculateChampionStatsHookSource[K]>['handler'][]
+	} => {
+		const rv: ICalculateStatsGroupedHooks = {};
+
+		for (const shard of Object.values(this.runes.value.shards)) {
+			groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shard]);
+		}
+		for (const item in this.items.value) {
+			item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item]);
+		};
+		this.champion.value?.id && groupCalculateStatsHooks(rv, (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id]);
+
+		return Object.fromEntries(Object.entries(rv).map(([key, value]) => [
+			key,
+			value.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0)),
+		]));
+	});
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 
 	runes: Ref<IChampionRunes>;
@@ -1273,6 +1292,15 @@ export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean
 	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
 }
 
+function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSource?: { calculateHooks?: ICalculateChampionStatsHookSource }) {
+	if (hookSource?.calculateHooks) {
+		for (const hook in hookSource.calculateHooks) {
+			target[hook as keyof ICalculateChampionStatsHookSource] ??= [];
+			target[hook as keyof ICalculateChampionStatsHookSource]!.push(hookSource.calculateHooks[hook as keyof ICalculateChampionStatsHookSource]!);
+		}
+	}
+}
+
 type IInternalDataSetupChampions = {
 	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
 		? K
@@ -1370,4 +1398,24 @@ export interface IComputedAppliedEffect {
 	specific: IEffectSpecific;
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
+}
+
+/**
+ * any hooks that will be called at various points in calculations, if provided
+ */
+export interface ICalculateChampionStatsHookSource {
+	/** runs after resolving the champion in `calculateChampionStats` */
+	postInit?: ICalculateChampionStatsHook<(self: DamageSource, baseStats: IChampionStats) => void>;
+	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
+	postRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, runeShardStats: IChampionStats) => void>;
+};
+
+type ICalculateStatsGroupedHooks = {
+	[K in keyof ICalculateChampionStatsHookSource]?: NonNullable<ICalculateChampionStatsHookSource[K]>[]
+};
+
+interface ICalculateChampionStatsHook<T> {
+	handler: T;
+	/** the higher the, the **later** it will run */
+	priority?: number;
 }

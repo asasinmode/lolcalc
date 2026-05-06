@@ -1,6 +1,6 @@
 import type { TItems } from '@lolcalc/data';
 import type { IEffectObjectName } from '@lolcalc/shared';
-import type { DamageSource, IDamageSourceEffect } from '../DamageSource.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IGameAbilityId } from '../GameAbilityId.ts';
 import { ITEMS, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
@@ -272,6 +272,7 @@ export interface IEffectSpecific {
 	minValue?: number;
 	/** @default 1 */
 	maxValue?: number | (() => Promise<number> | number);
+	calculateHooks?: ICalculateChampionStatsHookSource;
 }
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
