@@ -75,13 +75,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item]);
 		};
 		this.champion.value?.id && groupCalculateStatsHooks(rv, (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id]);
-		for (const effect of this.appliedEffects.value) {
-			groupCalculateStatsHooks(rv, (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id]);
+		if (this.appliedEffects) {
+			for (const effect of this.appliedEffects.value) {
+				groupCalculateStatsHooks(rv, (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id]);
+			}
 		}
 
 		return Object.fromEntries(Object.entries(rv).map(([key, value]) => [
 			key,
-			value.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0)),
+			value.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0)).map(value => value.handler),
 		]));
 	});
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));

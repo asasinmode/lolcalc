@@ -42,8 +42,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
-	const championSpecific = champion ? (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id] : undefined;
-	championSpecific?.hooks?.postInit?.(source, initialStats, baseStats, bonusStats);
+	if (source.calculateStatsHooks.value.postInit) {
+		for (const hook of source.calculateStatsHooks.value.postInit) {
+			hook(source, baseStats);
+		}
+	}
 
 	const levelStats: Partial<IChampionStats> = {
 		hp: champion?.stats.hpperlevel ?? 0,
