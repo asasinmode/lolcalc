@@ -358,6 +358,10 @@ defineExpose({ header });
 			--at-apply: 'text-blue';
 		}
 
+		scaleenergy {
+			--at-apply: 'text-yellow-200';
+		}
+
 		scalearmor {
 			--at-apply: 'text-orange-300';
 		}

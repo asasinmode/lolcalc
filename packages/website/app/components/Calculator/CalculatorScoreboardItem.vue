@@ -367,6 +367,7 @@ interface IChampionStat {
 		name?: string;
 		base?: number;
 		bonus: number;
+		valueSuffix?: string;
 	}[];
 	displayedValue: string;
 	bottomText?: string;
@@ -376,7 +377,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 	const minorStats = [
 		{
 			name: 'Health | Resource Regeneration',
-			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <energy>Energy</energy>).',
+			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <scaleenergy>Energy</scaleenergy>).',
 			iconTextureKey: 'healthResourceRegen',
 			values: [
 				{
@@ -440,7 +441,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 		},
 		{
 			name: CHAMPION_STAT_META.omnivamp.name,
-			description: 'Returns a portion of all damage you deal as <scalehealth>Health</scalehealth>.<br><br>Reduced to 20% effectiveness when dealing damage to minions or monsters.',
+			description: 'Returns a portion of all damage you deal as <scalehealth>Health</scalehealth>.<br><br><br>Reduced to 20% effectiveness when dealing damage to minions or monsters.',
 			iconTextureKey: 'omnivamp',
 			values: [
 				{
@@ -455,6 +456,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					stat: 'attackRange',
+					valueSuffix: 'units',
 				},
 			],
 		},
@@ -479,7 +481,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 	const majorStats = [
 		{
 			name: CHAMPION_STAT_META.attackDamage.name,
-			description: 'The amount of <physicaldamage>physical damage</physicaldamage> your Attack deal.<br><br>Also increases the amount of damage you deal with certain Abilities.',
+			description: 'The amount of <physicaldamage>physical damage</physicaldamage> your Attack deal.<br><br><br>Also increases the amount of damage you deal with certain Abilities.',
 			iconTextureKey: 'attackDamage',
 			values: [
 				{
@@ -521,7 +523,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 		},
 		{
 			name: CHAMPION_STAT_META.attackSpeed.name,
-			description: 'Increases the rate at which you can Attack.<br><br>Ratio determines the effectiveness of bonus Attack Speed.',
+			description: 'Increases the rate at which you can Attack.<br><br><br>Ratio determines the effectiveness of bonus Attack Speed.',
 			iconTextureKey: 'attackSpeed',
 			values: [
 				{
@@ -567,6 +569,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					stat: 'moveSpeed',
+					valueSuffix: 'units per second',
 				},
 			],
 		},
@@ -1152,9 +1155,10 @@ defineExpose({ el });
 							<dt>{{ statValue.name ?? CHAMPION_STAT_META[statValue.stat].name }}:</dt>
 							<dd :data-has-bonus="statValue.bonus || undefined">
 								<span data-total="">{{ value.computed.formattedStatTotals.value[statValue.stat] }}</span>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
-								<template v-if="'base' in statValue">
+								<template v-if="'base' in statValue && !(statValue.stat === 'attackSpeed' || statValue.stat === 'attackSpeedRatio')">
 									(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
 								</template>
+								{{ statValue.valueSuffix }}
 							</dd>
 							<br v-if="valueIndex !== ((hoveredStat?.values.length || 1) - 1)">
 						</template>
