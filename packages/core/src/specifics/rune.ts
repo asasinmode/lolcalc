@@ -20,21 +20,84 @@ export const RUNE_SPECIFICS = {
 			POSSIBLE_DYNAMIC_VALUES: { f1: [0, 1] } satisfies IPossibleDynamicValues,
 			calculateDynamicVariables(self) {
 				const { adaptiveForceStatVariable } = self.stats.value.meta;
-
 				return {
 					f1: adaptiveForceStatVariable,
 					f2: (RUNES as TRunes).shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
 				};
 			},
+			calculateHooks: {
+				postRuneShards: {
+					handler(_self, runeShardStats, _, adaptiveForceMeta) {
+						runeShardStats[adaptiveForceMeta[0]] ??= 0;
+						runeShardStats[adaptiveForceMeta[0]]! += (RUNES as TRunes).shards.flex.adaptive.effectAmount[`StatGain${(adaptiveForceMeta[1] + 1) as 1 | 2}`];
+					},
+				},
+			},
+		},
+		attackspeed: {
+			calculateHooks: {
+				postRuneShards: {
+					handler(_self, runeShardStats, baseStats) {
+						runeShardStats.bonusAttackSpeedPercent = (RUNES as TRunes).shards.offensive.attackspeed.effectAmount.StatGain / 100;
+						runeShardStats.attackSpeed = runeShardStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+					},
+				},
+			},
+		},
+		cdrscaling: {
+			calculateHooks: {
+				postRuneShards: {
+					handler(_self, runeShardStats) {
+						runeShardStats.abilityHaste = (RUNES as TRunes).shards.offensive.cdrscaling.effectAmount.HasteGain;
+					},
+				},
+			},
+		},
+		movementspeed: {
+			calculateHooks: {
+				postRuneShards: {
+					handler(_self, runeShardStats, _a, _b, baseWithFlatItemMoveSpeed) {
+						runeShardStats.moveSpeed = baseWithFlatItemMoveSpeed * (RUNES as TRunes).shards.flex.movementspeed.effectAmount.StatGain1 / 100;
+					},
+				},
+			},
+		},
+		health: {
+			calculateHooks: {
+				postRuneShards: {
+					handler(_self, runeShardStats) {
+						runeShardStats.hp ??= 0;
+						runeShardStats.hp = (RUNES as TRunes).shards.defensive.health.effectAmount.StatGain;
+					},
+				},
+			},
 		},
 		healthscaling: {
-			/* in reality `f1` goes from 10-200 by 10-increments but it's not used in stringtable so just this */
+			/** [wiki formula](https://wiki.leagueoflegends.com/en-us/Rune#Shards) */
+			calculateValue: (self: DamageSource): number => 10 + (180 - 10) / 17 * (self.level.value - 1),
+			/* in reality `f1` goes from 10-200 by 10-increments but it's not used in stringtable so just this to supress updateData script warning */
 			POSSIBLE_DYNAMIC_VALUES: { f1: [10, 200] } satisfies IPossibleDynamicValues,
 			calculateDynamicVariables(self) {
 				return {
-					/** [wiki formula](https://wiki.leagueoflegends.com/en-us/Rune#Shards) */
-					f1: 10 + (180 - 10) / 17 * (self.level.value - 1),
+					f1: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
 				};
+			},
+			calculateHooks: {
+				postRuneShards: {
+					handler(self, runeShardStats) {
+						runeShardStats.hp ??= 0;
+						runeShardStats.hp += RUNE_SPECIFICS.shards.healthscaling.calculateValue(self);
+					},
+				},
+			},
+		},
+		tenacity: {
+			calculateHooks: {
+				postRuneShards: {
+					handler(_self, runeShardStats) {
+						runeShardStats.tenacity = (RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100;
+					},
+				},
 			},
 		},
 	},
@@ -52,6 +115,7 @@ export interface IHypotheticalRuneSpecifics {
 export type IRuneSpecific = IProviderGroupDynamicVariables & {
 	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
 	calculateHooks?: ICalculateChampionStatsHookSource;
+	[key: string]: any;
 };
 
 type IProviderGroupDynamicVariables = { calculateDynamicVariables?: never } | {

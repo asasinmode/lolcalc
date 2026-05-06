@@ -1,6 +1,6 @@
 import type { ITextData } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationResult } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationResult } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -1453,7 +1453,7 @@ export interface ICalculateChampionStatsHookSource {
 	/** runs after resolving the champion in `calculateChampionStats` */
 	postInit?: ICalculateChampionStatsHook<(self: DamageSource, baseStats: IChampionStats) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
-	postRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, runeShardStats: IChampionStats) => void>;
+	postRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, runeShardStats: Partial<IChampionStats>, baseStats: IChampionStats, adaptiveForceMeta: IAdaptiveForceStatRv, baseWithFlatItemMoveSpeed: number) => void>;
 };
 
 type ICalculateStatsGroupedHooks = {

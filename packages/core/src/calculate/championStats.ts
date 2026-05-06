@@ -95,36 +95,31 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
-	const baseWithFlatFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemStats.moveSpeed);
+	const baseWithFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemStats.moveSpeed);
 
-	itemStats.moveSpeed += baseWithFlatFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
+	itemStats.moveSpeed += baseWithFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
 	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 
-	// TODO make sure it works, calculate rune shards (use initialStats instead champion.stats)
-	const [_adaptiveForceTargetStat, adaptiveForceStatVariable, _adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion?.id, itemStats.attackDamage, itemStats.abilityPower);
+	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemStats.attackDamage, itemStats.abilityPower);
 
-	// const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);
-	// const runeShardStats: Partial<IChampionStats> = {
-	// 	...preAdaptiveRuneShardStats,
-	// 	moveSpeed: baseWithFlatFlatItemMoveSpeed * preAdaptiveRuneShardStats.percentMoveSpeedMod,
-	// 	attackSpeed: preAdaptiveRuneShardStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio * 100,
-	// 	[adaptiveForceTargetStat]: runeShardsAdaptiveForce * adaptiveForceStatMultiplier,
-	// };
+	const runeShardStats: Partial<IChampionStats> = {};
 
-	// TODO changed attack speed on champion to be kept as % (0.25 instead 25), make sure everything ok, the multiplication below can be removed
-	// to keep it consistent with the way it's displayed stored on `champion.stats.attackspeedperlevel`
-	// itemStats.bonusAttackSpeedPercent *= 100;
-	// runeShardStats.bonusAttackSpeedPercent! *= 100;
+	if (source.calculateStatsHooks.all.value.postRuneShards) {
+		for (const hook of source.calculateStatsHooks.all.value.postRuneShards) {
+			hook(source, runeShardStats, baseStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed);
+		}
+	}
 
 	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
-		([statName, statValue]) => [statName, statValue],
-		// + (runeShardStats[statName as keyof typeof runeShardStats] || 0)],
+		([statName, statValue]) => [
+			statName,
+			statValue + (runeShardStats[statName as IChampionStatName] ?? 0),
+		],
 	)) as IChampionStats;
 
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
-		// TODO add runes
-		bonusStats[stat as keyof typeof bonusStats]! += itemStats[stat as keyof typeof itemStats];
+		bonusStats[stat as IChampionStatName]! += itemStats[stat as IChampionStatName] + (runeShardStats[stat as IChampionStatName] ?? 0);
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
@@ -148,7 +143,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		total: totalStats,
 		meta: {
 			hasMana: !champion || champion.partype === 'mana',
-			adaptiveForceStatVariable,
+			adaptiveForceStatVariable: adaptiveForceMeta[1],
 		},
 	};
 }
@@ -177,42 +172,3 @@ function getAdaptiveForceStat(championId: string | undefined, attackDamage: numb
 				? adRv
 				: ['abilityPower', 1, 1];
 }
-
-// function getRuneShardStats(shards: IRuneShards, level: number) {
-// 	const stats = {
-// 		hp: 0,
-// 		adaptiveForce: 0,
-// 		abilityHaste: 0,
-// 		bonusAttackSpeedPercent: 0,
-// 		tenacity: 0,
-// 		percentMoveSpeedMod: 0,
-// 	} satisfies Partial<Record<IChampionStatName | 'adaptiveForce' | 'percentMoveSpeedMod', number>>;
-
-// 	const adaptiveForceValue = runes.shards.offensive.adaptiveForce;
-// 	const scalingHealthValue = level * runes.shards.defensive.scalingHealth;
-
-// 	const slotStats: Record<keyof IRuneShards, Record<string, [keyof typeof stats, number]>> = {
-// 		offensive: {
-// 			adaptiveForce: ['adaptiveForce', adaptiveForceValue],
-// 			percentAttackSpeed: ['bonusAttackSpeedPercent', runes.shards.offensive.percentAttackSpeed],
-// 			abilityHaste: ['abilityHaste', runes.shards.offensive.abilityHaste],
-// 		} satisfies Record<IRuneShards['offensive'], [keyof typeof stats, number]>,
-// 		flex: {
-// 			adaptiveForce: ['adaptiveForce', adaptiveForceValue],
-// 			percentMoveSpeed: ['percentMoveSpeedMod', runes.shards.flex.percentMoveSpeed],
-// 			scalingHealth: ['hp', scalingHealthValue],
-// 		} satisfies Record<IRuneShards['flex'], [keyof typeof stats, number]>,
-// 		defensive: {
-// 			flatHealth: ['hp', runes.shards.defensive.flatHealth],
-// 			percentTenacityMod: ['tenacity', runes.shards.defensive.percentTenacityMod],
-// 			scalingHealth: ['hp', scalingHealthValue],
-// 		} satisfies Record<IRuneShards['defensive'], [keyof typeof stats, number]>,
-// 	};
-
-// 	for (const [slotKey, slotValue] of Object.entries(shards)) {
-// 		const [slotStat, slotStatValue] = slotStats[slotKey as keyof IRuneShards][slotValue]!;
-// 		stats[slotStat] += slotStatValue;
-// 	}
-
-// 	return stats;
-// }
