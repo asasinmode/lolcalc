@@ -8,6 +8,7 @@ import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 const CALC_HOOK_PRIORITY = {
 	[ITEM_NAME_TO_ID.riftmaker]: 10,
 	[ITEM_NAME_TO_ID.blackfireTorch]: 20,
+	[ITEM_NAME_TO_ID.rabadon]: 100,
 };
 
 const tearItemSpecifics = {
@@ -149,14 +150,22 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			postItems: {
-				handler(self, { itemStats }) {
-					itemStats.abilityPower += itemStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
+				handler(self, { itemStats }, { calculatedVariables }) {
+					const value = itemStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
+					itemStats.abilityPower += value;
+
+					calculatedVariables.blackfireTorchBBlaze = value;
 				},
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 			postRuneShards: {
-				handler(self, { itemStats }) {
-					itemStats.abilityPower += itemStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
+				handler(self, { runeShardStats, itemStats }, { calculatedVariables }) {
+					if (runeShardStats.abilityPower) {
+						const value = runeShardStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
+						itemStats.abilityPower += value;
+
+						calculatedVariables.blackfireTorchBBlaze! += value;
+					}
 				},
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.blackfireTorch],
 			},
@@ -574,6 +583,41 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
 	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific,
+	[ITEM_NAME_TO_ID.rabadon]: {
+		calculateHooks: {
+			postItems: {
+				handler(_self, { itemStats }, { calculatedVariables, miscDebug }) {
+					miscDebug.rabadonApBase = itemStats.abilityPower;
+
+					const value = itemStats.abilityPower * (ITEMS as TItems)[ITEM_NAME_TO_ID.rabadon].dataValues.APAmp;
+					itemStats.abilityPower += value;
+
+					calculatedVariables.rabadonMagicalOpus = value;
+				},
+				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.rabadon],
+			},
+			postRuneShards: {
+				handler(_self, { runeShardStats, itemStats }, { calculatedVariables, miscDebug }) {
+					if (runeShardStats.abilityPower) {
+						miscDebug.rabadonApBase! += runeShardStats.abilityPower;
+
+						/*
+						 * this is very dubious behavior, subtracting the calculated earlier blackfire torch value so that it doesn't get multiplied by rabadon
+						 * how I suspect the calculation should be done is rabadon is X multiplier, blackfire torch is Y, so
+						 * `finalAp = bonusAp * (1 + X + Y)`
+						 * but this seems like it would make tracking the calculated rabadon/torch's passives' values harder/possibly have to be moved to `calculateStats` and at the moment I want to keep all passive logic inside the specifics
+						 * maybe Vladimir will fuck things up further, consider refactor then
+						 */
+						const value = (runeShardStats.abilityPower - (calculatedVariables.blackfireTorchBBlaze ?? 0)) * (ITEMS as TItems)[ITEM_NAME_TO_ID.rabadon].dataValues.APAmp;
+						itemStats.abilityPower += value;
+
+						calculatedVariables.rabadonMagicalOpus! += value;
+					}
+				},
+				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.rabadon],
+			},
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

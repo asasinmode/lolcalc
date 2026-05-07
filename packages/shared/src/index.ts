@@ -49,12 +49,20 @@ export interface IStatsCalculationResult {
 // TODO maybe make more elaborate, like a record of strings where keys are appropriate stringified GameAbilityId
 /** the variables calculated by various things, like riftmaker's void infusion */
 export interface IStatsCalculationVariables {
+	/** ap gained from blackfire torch's passive */
+	blackfireTorchBBlaze?: number;
+	/** ap gained from riftmaker's passive */
 	riftmakerVoidInfusion?: number;
+	/** ap gained from rabadon's passive */
+	rabadonMagicalOpus?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
+	/** bonus hp used in riftmaker passive calculation */
 	riftmakerBonusHp?: number;
+	/** ap used in rabadon passive calculation */
+	rabadonApBase?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
@@ -230,6 +238,7 @@ export const ITEM_NAME_TO_ID = {
 	zazZakRealmspike: '3871',
 	solsticeSleigh: '3876',
 	bloodsong: '3877',
+	rabadon: '3089',
 } as const;
 
 export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
