@@ -33,7 +33,14 @@ export interface IStatsCalculationResult {
 	level: Partial<IChampionStats>;
 	/** base + level combined */
 	baseOnLevel: IChampionStats;
-	item: IChampionStats;
+	/** stats from rune shards */
+	runeShards: Partial<IChampionStats>;
+	/** raw stats given by items, no passives */
+	itemBase: IChampionStats;
+	/** stats from item passives */
+	itemPassive: IChampionStats;
+	/** sum of `itemBase` and `itemPassive` */
+	itemTotal: IChampionStats;
 	bonus: IChampionStats;
 	total: IChampionStats;
 	meta: {
@@ -53,6 +60,11 @@ export interface IStatsCalculationVariables {
 	blackfireTorchBBlaze?: number;
 	/** ap gained from riftmaker's passive */
 	riftmakerVoidInfusion?: number;
+	/**
+	 * ap value affected by multipliers like rabadon & blackfire torch passives
+	 * from my understanding it's all "flat" ap bonuses, multipliers add, so rabadon's 30% and 1 blackfire burning champion's 4% would be 34% bonus ap
+	 */
+	apMultipliersBase: number;
 	/** ap gained from rabadon's passive */
 	rabadonMagicalOpus?: number;
 }
@@ -61,8 +73,6 @@ export interface IStatsCalculationVariables {
 export interface IStatsCalculationMiscDebug {
 	/** bonus hp used in riftmaker passive calculation */
 	riftmakerBonusHp?: number;
-	/** ap used in rabadon passive calculation */
-	rabadonApBase?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

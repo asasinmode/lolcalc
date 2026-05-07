@@ -37,7 +37,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		slowResist: 0,
 	};
 
-	const calculatedVariables: IStatsCalculationVariables = {};
+	const calculatedVariables: IStatsCalculationVariables = {
+		apMultipliersBase: 0,
+	};
 	const miscDebug: IStatsCalculationMiscDebug = {};
 
 	const baseStats = structuredClone(initialStats);
@@ -74,46 +76,52 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
 	)) as IChampionStats;
 
-	const itemStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
 	let itemsTotalPercentMovementSpeed = 0;
 	for (const item of items.filter(Boolean)) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
 			/** hpRegen is stored in per second in item but per 5 seconds in champion/displayed */
-			itemStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
+			itemBaseStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
 		}
 
 		if (item!.stats.PercentBaseHPRegenMod) {
-			itemStats.hpRegen += baseOnLevelStats.hpRegen * item!.stats.PercentBaseHPRegenMod;
+			itemBaseStats.hpRegen += baseOnLevelStats.hpRegen * item!.stats.PercentBaseHPRegenMod;
 		}
 		if (item!.stats.PercentBaseMPRegenMod) {
-			itemStats.manaRegen += baseOnLevelStats.manaRegen * item!.stats.PercentBaseMPRegenMod;
+			itemBaseStats.manaRegen += baseOnLevelStats.manaRegen * item!.stats.PercentBaseMPRegenMod;
 		}
 		if (item!.stats.PercentMovementSpeedMod) {
 			itemsTotalPercentMovementSpeed += item!.stats.PercentMovementSpeedMod;
 		}
 	}
 
-	const baseWithFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemStats.moveSpeed);
+	const baseWithFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemBaseStats.moveSpeed);
 
-	itemStats.moveSpeed += baseWithFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
-	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+	itemBaseStats.moveSpeed += baseWithFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
+	itemBaseStats.attackSpeed = itemBaseStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 
-	if (source.calculateStatsHooks.all.value.postItems) {
-		for (const hook of source.calculateStatsHooks.all.value.postItems) {
-			hook(source, { itemStats, baseStats }, { calculatedVariables, miscDebug });
+	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+
+	if (source.calculateStatsHooks.all.value.preItemTotal) {
+		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
+			hook(source, { itemBaseStats, itemPassivesStats, baseStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
-	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemStats.attackDamage, itemStats.abilityPower);
+	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [key, value + itemPassivesStats[key as IChampionStatName]])) as IChampionStats;
+	calculatedVariables.apMultipliersBase += itemTotalStats.abilityPower;
+
+	// TODO check if works with item passives
+	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemBaseStats.attackDamage, itemBaseStats.abilityPower);
 
 	const runeShardStats: Partial<IChampionStats> = {};
-
-	if (source.calculateStatsHooks.all.value.postRuneShards) {
-		for (const hook of source.calculateStatsHooks.all.value.postRuneShards) {
-			hook(source, { runeShardStats, baseStats, itemStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
+	if (source.calculateStatsHooks.all.value.onRuneShards) {
+		for (const hook of source.calculateStatsHooks.all.value.onRuneShards) {
+			hook(source, { runeShardStats, baseStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
 		}
 	}
+	calculatedVariables.apMultipliersBase += runeShardStats.abilityPower ?? 0;
 
 	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
 		([statName, statValue]) => [
@@ -122,14 +130,20 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		],
 	)) as IChampionStats;
 
+	if (source.calculateStatsHooks.all.value.preBonus) {
+		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
+			hook(source, { runeShardStats, baseStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
+		}
+	}
+
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
-		bonusStats[stat as IChampionStatName]! += itemStats[stat as IChampionStatName] + (runeShardStats[stat as IChampionStatName] ?? 0);
+		bonusStats[stat as IChampionStatName]! += itemTotalStats[stat as IChampionStatName] + (runeShardStats[stat as IChampionStatName] ?? 0);
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
-		+ (itemStats[statName as keyof typeof itemStats] || 0)],
+		+ (itemTotalStats[statName as IChampionStatName] || 0)],
 	)) as IChampionStats;
 
 	// TODO figure out if its ok to do it
@@ -143,7 +157,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		base: baseStats,
 		level: levelStats,
 		baseOnLevel: baseOnLevelStats,
-		item: itemStats,
+		runeShards: runeShardStats,
+		itemBase: itemBaseStats,
+		itemPassive: itemPassivesStats,
+		itemTotal: itemTotalStats,
 		bonus: bonusStats,
 		total: totalStats,
 		meta: {

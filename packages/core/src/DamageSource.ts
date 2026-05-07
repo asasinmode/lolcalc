@@ -1449,16 +1449,25 @@ export interface IComputedAppliedEffect {
 export interface ICalculateChampionStatsHookSource {
 	/** runs after resolving the champion in `calculateChampionStats` */
 	postInit?: ICalculateChampionStatsHook<(self: DamageSource, args: { baseStats: IChampionStats }) => void>;
-	postItems?: ICalculateChampionStatsHook<(self: DamageSource, args: {
-		itemStats: IChampionStats;
+	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+		itemBaseStats: IChampionStats;
+		itemPassivesStats: IChampionStats;
 		baseStats: IChampionStats;
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
-	postRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+		baseStats: Partial<IChampionStats>;
+		runeShardStats: Partial<IChampionStats>;
+		adaptiveForceMeta: IAdaptiveForceStatRv;
+		baseWithFlatItemMoveSpeed: number;
+	}) => void>;
+	/** runs before totalling all stats to total bonus */
+	preBonus?: ICalculateChampionStatsHook<(self: DamageSource, args: {
 		runeShardStats: Partial<IChampionStats>;
 		baseStats: IChampionStats;
-		itemStats: IChampionStats;
-		adaptiveForceMeta: IAdaptiveForceStatRv;
+		itemBaseStats: IChampionStats;
+		itemPassivesStats: IChampionStats;
+		itemTotalStats: IChampionStats;
 		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 };
