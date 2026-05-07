@@ -1456,7 +1456,7 @@ export interface ICalculateChampionStatsHookSource {
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, args: {
-		baseStats: Partial<IChampionStats>;
+		baseStats: IChampionStats;
 		runeShardStats: Partial<IChampionStats>;
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 		baseWithFlatItemMoveSpeed: number;

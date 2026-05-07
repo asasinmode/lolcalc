@@ -27,6 +27,11 @@
 		}
 	},
 	"items": {
-
+		"3089": {
+			"name": "Rabadon's Deathcap",
+			"dataValues": {
+				"APAmp": 0.5
+			}
+		}
 	}
 }

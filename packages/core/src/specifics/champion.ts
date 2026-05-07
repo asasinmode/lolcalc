@@ -45,7 +45,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, baseStats) {
+				handler(self, { baseStats }) {
 					for (const [statName, statMeta] of ALL_CHAMPION_STATS_ENTRIES) {
 						if (self.internalData.value[statName] !== undefined) {
 							baseStats[statName] = self.internalData.value[statName] * (statMeta.isPercentage ? 0.01 : 1);
