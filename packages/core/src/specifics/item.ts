@@ -68,6 +68,13 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			return (self.internalItemData.value as { glory: number }).glory;
 		},
+		calculateHooks: {
+			postItems: {
+				handler(self, itemStats) {
+					itemStats.abilityPower += self.internalItemData.value.glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.APPerGlory;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.mejai]: {
 		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.MaxGloryStacks,
@@ -79,6 +86,13 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Glory stacks',
 		imgText(self) {
 			return (self.internalItemData.value as { glory: number }).glory;
+		},
+		calculateHooks: {
+			postItems: {
+				handler(self, itemStats) {
+					itemStats.abilityPower += self.internalItemData.value.glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.APPerGlory;
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
@@ -105,6 +119,17 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			return (self.internalItemData.value as { eternity: number }).eternity;
 		},
+		calculateHooks: {
+			postItems: {
+				handler(self, itemStats) {
+					const { eternity } = self.internalItemData.value;
+					const { APPerStack, HealthPerStack, ManaPerStack } = (ITEMS as TItems)[ITEM_NAME_TO_ID.roa].dataValues;
+					itemStats.abilityPower += eternity * APPerStack;
+					itemStats.hp += eternity * HealthPerStack;
+					itemStats.mana += eternity * ManaPerStack;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.blackfireTorch]: {
 		internalDataProperties: ['bBlaze'],
@@ -116,6 +141,22 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			const { bBlaze } = self.internalItemData.value as { bBlaze: number };
 			return bBlaze && `${Math.round(bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
+		},
+		calculateHooks: {
+			postItems: {
+				handler(self, itemStats) {
+					itemStats.abilityPower += itemStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
+				},
+				priority: 10,
+			},
+			postRuneShards: {
+				handler(self, runeShardStats) {
+					if (runeShardStats.abilityPower) {
+						runeShardStats.abilityPower += runeShardStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
+					}
+				},
+				priority: 10,
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.liandry]: {

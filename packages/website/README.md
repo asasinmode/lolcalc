@@ -138,6 +138,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
   - [ ] items passives
+  - [ ] hook priorities in one file for easier precedence management
   - [ ] item effects
   - [ ] dragons/souls
   - [ ] champion passives
