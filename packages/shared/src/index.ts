@@ -236,6 +236,7 @@ export const ITEM_NAME_TO_ID = {
 	jakSho: '6665',
 	swiftmarch: '3170',
 	crimsonLucidity: '3171',
+	berserkerGreaves: '3006',
 	gunmetalGreaves: '3172',
 	chainlacedCrushers: '3173',
 	armoredAdvanced: '3174',

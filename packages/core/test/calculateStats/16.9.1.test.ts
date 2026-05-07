@@ -11,9 +11,20 @@ test.before(() => {
 
 test('16.9.1 Ahri, shards 100', async (t) => {
 	await t.test('mejai, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Ahri', { items: [ITEMS[ITEM_NAME_TO_ID.rabadon]] });
+		const damageSource = await setupDamageSource(fixture, 'Ahri', {
+			level: 18,
+			runes: {
+				shards: {
+					offensive: 'attackspeed',
+					flex: 'adaptive',
+					defensive: 'health',
+				},
+			},
+			items: [ITEMS[ITEM_NAME_TO_ID.mejai], ITEMS[ITEM_NAME_TO_ID.blackfireTorch], ITEMS[ITEM_NAME_TO_ID.berserkerGreaves], ITEMS[ITEM_NAME_TO_ID.guinsoo], ITEMS[ITEM_NAME_TO_ID.riftmaker], ITEMS[ITEM_NAME_TO_ID.rabadon]],
+		});
 
-		assert.strictEqual(damageSource.champion.value?.id, 'Ahri');
-		assert.strictEqual(damageSource.items.value[0]?.dataValues?.APAmp, 0.5);
+		console.log(JSON.stringify(damageSource.stats.value, null, 2))
+
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 602);
 	});
 });

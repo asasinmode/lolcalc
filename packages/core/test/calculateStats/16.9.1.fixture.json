@@ -27,10 +27,88 @@
 		}
 	},
 	"items": {
+		"2503": {
+			"name": "Blackfire Torch",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 80,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"BurnFlatDamagePerSecond": 20,
+				"APRatio": 0.02,
+				"BurnDuration": 3,
+				"MonsterDamageBonus": 20,
+				"TickFrequency": 0.5,
+				"APPerStack": 0.04,
+				"MinionDPS": 20,
+				"MinionAP": 0.02,
+				"MonsterDPS": 40,
+				"MonsterAP": 0.02
+			}
+		},
+		"3006": {
+			"name": "Berserker's Greaves",
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentAttackSpeedMod": 0.25
+			}
+		},
+		"3041": {
+			"name": "Mejai's Soulstealer",
+			"stats": {
+				"FlatHPPoolMod": 100,
+				"FlatMagicDamageMod": 20
+			},
+			"dataValues": {
+				"MaxGloryStacks": 25,
+				"APPerGlory": 5,
+				"GloryOnKill": 4,
+				"GloryOnAssist": 2,
+				"GloryLossOnDeath": 10,
+				"GloryThreshold": 10,
+				"MoveSpeedMod": 0.1
+			}
+		},
 		"3089": {
 			"name": "Rabadon's Deathcap",
+			"stats": {
+				"FlatMagicDamageMod": 130
+			},
 			"dataValues": {
 				"APAmp": 0.5
+			}
+		},
+		"3124": {
+			"name": "Guinsoo's Rageblade",
+			"stats": {
+				"FlatMagicDamageMod": 30,
+				"FlatPhysicalDamageMod": 30,
+				"PercentAttackSpeedMod": 0.25
+			},
+			"dataValues": {
+				"OnHitDamage": 30,
+				"AttackSpeedPerStack": 0.08,
+				"MaxStacks": 4,
+				"BuffDuration": 3
+			}
+		},
+		"4633": {
+			"name": "Riftmaker",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"SecondsInCombat": 4,
+				"EternityDamageIncreasePerSecond": 0.02,
+				"EternityDamageIncreaseMax": 0.08,
+				"BuffCounterDuration": 4,
+				"HealthToAPConversionPercent": 0.02,
+				"MaxAPMultiplier": 0.05,
+				"VampAmountMelee": 0.1,
+				"VampAmountRanged": 0.06
 			}
 		}
 	}
