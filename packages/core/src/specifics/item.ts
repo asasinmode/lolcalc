@@ -5,6 +5,11 @@ import { ITEMS } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 
+const CALC_HOOK_PRIORITY = {
+	[ITEM_NAME_TO_ID.riftmaker]: 10,
+	[ITEM_NAME_TO_ID.blackfireTorch]: 20,
+};
+
 const tearItemSpecifics = {
 	MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.tear].dataValues.MaxMana,
 	internalDataProperties: ['manaflow'],
@@ -51,7 +56,7 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			postItems: {
-				handler(self, itemStats) {
+				handler(self, { itemStats }) {
 					itemStats.attackDamage += ITEM_SPECIFICS[ITEM_NAME_TO_ID.hubris].calculateBonusAd(self);
 				},
 			},
@@ -70,7 +75,7 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			postItems: {
-				handler(self, itemStats) {
+				handler(self, { itemStats }) {
 					itemStats.abilityPower += self.internalItemData.value.glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.APPerGlory;
 				},
 			},
@@ -89,7 +94,7 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			postItems: {
-				handler(self, itemStats) {
+				handler(self, { itemStats }) {
 					itemStats.abilityPower += self.internalItemData.value.glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.APPerGlory;
 				},
 			},
@@ -121,7 +126,7 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			postItems: {
-				handler(self, itemStats) {
+				handler(self, { itemStats }) {
 					const { eternity } = self.internalItemData.value;
 					const { APPerStack, HealthPerStack, ManaPerStack } = (ITEMS as TItems)[ITEM_NAME_TO_ID.roa].dataValues;
 					itemStats.abilityPower += eternity * APPerStack;
@@ -144,18 +149,16 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			postItems: {
-				handler(self, itemStats) {
+				handler(self, { itemStats }) {
 					itemStats.abilityPower += itemStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
 				},
-				priority: 10,
+				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 			postRuneShards: {
-				handler(self, runeShardStats) {
-					if (runeShardStats.abilityPower) {
-						runeShardStats.abilityPower += runeShardStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
-					}
+				handler(self, { itemStats }) {
+					itemStats.abilityPower += itemStats.abilityPower * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
 				},
-				priority: 10,
+				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 		},
 	},
@@ -209,6 +212,22 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			const { corruption } = self.internalItemData.value as { corruption: number };
 			return corruption && `${Math.round(corruption * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
+		},
+		calculateHooks: {
+			postItems: {
+				handler(_self, { itemStats }) {
+					itemStats.abilityPower += itemStats.abilityPower * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+				},
+				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
+			},
+			postRuneShards: {
+				handler(_self, { itemStats, runeShardStats }) {
+					if (runeShardStats.hp) {
+						itemStats.abilityPower += runeShardStats.hp * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+					}
+				},
+				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
@@ -478,6 +497,17 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Seething Strikes stacks',
 		imgText(self) {
 			return (self.internalItemData.value as { seething: number }).seething;
+		},
+		calculateHooks: {
+			postItems: {
+				handler(self, { itemStats, baseStats }) {
+					const { seething } = self.internalItemData.value;
+					const bonusAttackSpeedPercent = seething * (ITEMS as TItems)[ITEM_NAME_TO_ID.guinsoo].dataValues.AttackSpeedPerStack;
+					itemStats.bonusAttackSpeedPercent += bonusAttackSpeedPercent;
+					itemStats.attackSpeed += bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+				},
+				priority: 10,
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.terminus]: {

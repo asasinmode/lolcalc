@@ -42,7 +42,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postInit) {
 		for (const hook of source.calculateStatsHooks.all.value.postInit) {
-			hook(source, baseStats);
+			hook(source, { baseStats });
 		}
 	}
 
@@ -98,7 +98,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postItems) {
 		for (const hook of source.calculateStatsHooks.all.value.postItems) {
-			hook(source, itemStats, baseStats, baseWithFlatItemMoveSpeed);
+			hook(source, { itemStats, baseStats });
 		}
 	}
 
@@ -108,7 +108,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.postRuneShards) {
-			hook(source, runeShardStats, baseStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed);
+			hook(source, { runeShardStats, baseStats, itemStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed });
 		}
 	}
 

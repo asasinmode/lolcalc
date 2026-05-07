@@ -27,7 +27,7 @@ export const RUNE_SPECIFICS = {
 			},
 			calculateHooks: {
 				postRuneShards: {
-					handler(_self, runeShardStats, _, adaptiveForceMeta) {
+					handler(_self, { runeShardStats, adaptiveForceMeta }) {
 						runeShardStats[adaptiveForceMeta[0]] ??= 0;
 						runeShardStats[adaptiveForceMeta[0]]! += (RUNES as TRunes).shards.flex.adaptive.effectAmount[`StatGain${(adaptiveForceMeta[1] + 1) as 1 | 2}`];
 					},
@@ -37,7 +37,7 @@ export const RUNE_SPECIFICS = {
 		attackspeed: {
 			calculateHooks: {
 				postRuneShards: {
-					handler(_self, runeShardStats, baseStats) {
+					handler(_self, { runeShardStats, baseStats }) {
 						runeShardStats.bonusAttackSpeedPercent = (RUNES as TRunes).shards.offensive.attackspeed.effectAmount.StatGain / 100;
 						runeShardStats.attackSpeed = runeShardStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 					},
@@ -47,7 +47,7 @@ export const RUNE_SPECIFICS = {
 		cdrscaling: {
 			calculateHooks: {
 				postRuneShards: {
-					handler(_self, runeShardStats) {
+					handler(_self, { runeShardStats }) {
 						runeShardStats.abilityHaste = (RUNES as TRunes).shards.offensive.cdrscaling.effectAmount.HasteGain;
 					},
 				},
@@ -56,7 +56,7 @@ export const RUNE_SPECIFICS = {
 		movementspeed: {
 			calculateHooks: {
 				postRuneShards: {
-					handler(_self, runeShardStats, _a, _b, baseWithFlatItemMoveSpeed) {
+					handler(_self, { runeShardStats, baseWithFlatItemMoveSpeed }) {
 						runeShardStats.moveSpeed = baseWithFlatItemMoveSpeed * (RUNES as TRunes).shards.flex.movementspeed.effectAmount.StatGain1 / 100;
 					},
 				},
@@ -65,7 +65,7 @@ export const RUNE_SPECIFICS = {
 		health: {
 			calculateHooks: {
 				postRuneShards: {
-					handler(_self, runeShardStats) {
+					handler(_self, { runeShardStats }) {
 						runeShardStats.hp ??= 0;
 						runeShardStats.hp = (RUNES as TRunes).shards.defensive.health.effectAmount.StatGain;
 					},
@@ -84,7 +84,7 @@ export const RUNE_SPECIFICS = {
 			},
 			calculateHooks: {
 				postRuneShards: {
-					handler(self, runeShardStats) {
+					handler(self, { runeShardStats }) {
 						runeShardStats.hp ??= 0;
 						runeShardStats.hp += RUNE_SPECIFICS.shards.healthscaling.calculateValue(self);
 					},
@@ -94,7 +94,7 @@ export const RUNE_SPECIFICS = {
 		tenacity: {
 			calculateHooks: {
 				postRuneShards: {
-					handler(_self, runeShardStats) {
+					handler(_self, { runeShardStats }) {
 						runeShardStats.tenacity = (RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100;
 					},
 				},

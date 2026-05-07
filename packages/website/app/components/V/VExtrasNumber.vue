@@ -66,7 +66,7 @@ const value = defineModel<number>({ required: true });
 		--at-apply: 'grid grid-cols-[auto_auto_1fr_min-content] grid-rows-2 relative';
 
 		> label {
-			--at-apply: 'col-span-3 self-center of-hidden leading-[1]';
+			--at-apply: 'col-span-3 self-center of-hidden leading-[1] pb-[0.2em] -mb-[0.2em]';
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2;

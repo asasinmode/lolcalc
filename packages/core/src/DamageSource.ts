@@ -1453,10 +1453,19 @@ export interface IComputedAppliedEffect {
  */
 export interface ICalculateChampionStatsHookSource {
 	/** runs after resolving the champion in `calculateChampionStats` */
-	postInit?: ICalculateChampionStatsHook<(self: DamageSource, baseStats: IChampionStats) => void>;
-	postItems?: ICalculateChampionStatsHook<(self: DamageSource, itemStats: IChampionStats, baseStats: IChampionStats, baseWithFlatItemMoveSpeed: number) => void>;
+	postInit?: ICalculateChampionStatsHook<(self: DamageSource, args: { baseStats: IChampionStats }) => void>;
+	postItems?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+		itemStats: IChampionStats;
+		baseStats: IChampionStats;
+	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
-	postRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, runeShardStats: Partial<IChampionStats>, baseStats: IChampionStats, adaptiveForceMeta: IAdaptiveForceStatRv, baseWithFlatItemMoveSpeed: number) => void>;
+	postRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+		runeShardStats: Partial<IChampionStats>;
+		baseStats: IChampionStats;
+		itemStats: IChampionStats;
+		adaptiveForceMeta: IAdaptiveForceStatRv;
+		baseWithFlatItemMoveSpeed: number;
+	}) => void>;
 };
 
 type ICalculateStatsGroupedHooks = {
