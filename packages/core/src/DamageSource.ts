@@ -1,6 +1,6 @@
 import type { ITextData } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationResult } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -928,24 +928,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			const rv: ICalculateStatsGroupedHooks = {};
 			for (const key in this.calculateStatsHooks.runes.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
-				// @ts-expect-error the hook being pushed is of correct type
 				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.runes.value[key as keyof ICalculateChampionStatsHookSource]!);
 			}
 			for (const key in this.calculateStatsHooks.items.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
-				// @ts-expect-error the hook being pushed is of correct type
 				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.items.value[key as keyof ICalculateChampionStatsHookSource]!);
 			}
 			for (const key in this.calculateStatsHooks.effects.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
-				// @ts-expect-error the hook being pushed is of correct type
 				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.effects.value[key as keyof ICalculateChampionStatsHookSource]!);
 			}
 			if (this.champion.value?.id) {
 				const championHooks = groupCalculateStatsHooks({}, (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id]);
 				for (const key in championHooks) {
 					rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
-					// @ts-expect-error the hook being pushed is of correct type
 					rv[key as keyof ICalculateChampionStatsHookSource]!.push(...championHooks[key as keyof ICalculateChampionStatsHookSource]!);
 				}
 			}
@@ -1342,7 +1338,6 @@ function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSourc
 	if (hookSource?.calculateHooks) {
 		for (const hook in hookSource.calculateHooks) {
 			target[hook as keyof ICalculateChampionStatsHookSource] ??= [];
-			// @ts-expect-error the hook being pushed is of correct type
 			target[hook as keyof ICalculateChampionStatsHookSource]!.push(hookSource.calculateHooks[hook as keyof ICalculateChampionStatsHookSource]!);
 		}
 	}
@@ -1472,8 +1467,13 @@ type ICalculateStatsGroupedHooks = {
 	[K in keyof ICalculateChampionStatsHookSource]?: NonNullable<ICalculateChampionStatsHookSource[K]>[]
 };
 
-interface ICalculateChampionStatsHook<T> {
-	handler: T;
+interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) => void> {
+	handler: (self: Parameters<T>[0], args: Parameters<T>[1], meta: {
+		/** see the type definition for info */
+		calculatedVariables: IStatsCalculationVariables;
+		/** see the type definition for info */
+		miscDebug: IStatsCalculationMiscDebug;
+	}) => void;
 	/** the higher the, the **later** it will run */
 	priority?: number;
 }

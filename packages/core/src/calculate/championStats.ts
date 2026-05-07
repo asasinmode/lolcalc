@@ -1,5 +1,5 @@
 import type { IChampionId, IItem } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationResult } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
 
@@ -37,12 +37,15 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		slowResist: 0,
 	};
 
+	const calculatedVariables: IStatsCalculationVariables = {};
+	const miscDebug: IStatsCalculationMiscDebug = {};
+
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
 	if (source.calculateStatsHooks.all.value.postInit) {
 		for (const hook of source.calculateStatsHooks.all.value.postInit) {
-			hook(source, { baseStats });
+			hook(source, { baseStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -98,7 +101,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postItems) {
 		for (const hook of source.calculateStatsHooks.all.value.postItems) {
-			hook(source, { itemStats, baseStats });
+			hook(source, { itemStats, baseStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -108,7 +111,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.postRuneShards) {
-			hook(source, { runeShardStats, baseStats, itemStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed });
+			hook(source, { runeShardStats, baseStats, itemStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -147,6 +150,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			hasMana: !champion || champion.partype === 'mana',
 			adaptiveForceStatVariable: adaptiveForceMeta[1],
 		},
+		variables: calculatedVariables,
+		miscDebug,
 	};
 }
 

@@ -40,6 +40,21 @@ export interface IStatsCalculationResult {
 		hasMana: boolean;
 		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
 	};
+	/** see the type definition for info */
+	variables: IStatsCalculationVariables;
+	/** see the type definition for info */
+	miscDebug: IStatsCalculationMiscDebug;
+}
+
+// TODO maybe make more elaborate, like a record of strings where keys are appropriate stringified GameAbilityId
+/** the variables calculated by various things, like riftmaker's void infusion */
+export interface IStatsCalculationVariables {
+	riftmakerVoidInfusion?: number;
+}
+
+/** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
+export interface IStatsCalculationMiscDebug {
+	riftmakerBonusHp?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

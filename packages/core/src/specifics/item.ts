@@ -215,15 +215,23 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			postItems: {
-				handler(_self, { itemStats }) {
-					itemStats.abilityPower += itemStats.abilityPower * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+				handler(_self, { itemStats }, { calculatedVariables, miscDebug }) {
+					const value = itemStats.hp * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+					itemStats.abilityPower += value;
+
+					calculatedVariables.riftmakerVoidInfusion = value;
+					miscDebug.riftmakerBonusHp = itemStats.hp;
 				},
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
 			},
 			postRuneShards: {
-				handler(_self, { itemStats, runeShardStats }) {
+				handler(_self, { itemStats, runeShardStats }, { calculatedVariables, miscDebug }) {
 					if (runeShardStats.hp) {
-						itemStats.abilityPower += runeShardStats.hp * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+						const value = runeShardStats.hp * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+						itemStats.abilityPower += value;
+
+						calculatedVariables.riftmakerVoidInfusion! += value;
+						miscDebug.riftmakerBonusHp! += runeShardStats.hp;
 					}
 				},
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
