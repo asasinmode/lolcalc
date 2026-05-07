@@ -71,8 +71,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
 	)) as IChampionStats;
 
-	baseOnLevelStats.attackSpeed += baseOnLevelStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
-
 	const itemStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
 	let itemsTotalPercentMovementSpeed = 0;
