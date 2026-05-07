@@ -14,6 +14,7 @@ const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
 const { _component: EffectsDialog } = useEffectsDialog();
+const { _component: DamageSourceDebugDialog } = useDamageSourceDebug();
 
 useHead({
 	htmlAttrs: { lang: 'en' },
@@ -325,6 +326,7 @@ onBeforeUnmount(() => {
 		<ItemShop />
 		<RuneSelect />
 		<EffectsDialog />
+		<DamageSourceDebugDialog />
 	</ClientOnly>
 </template>
 

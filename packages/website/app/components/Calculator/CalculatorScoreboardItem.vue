@@ -54,6 +54,7 @@ const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
 const { selectItems } = useItemShop();
 const { selectEffects } = useEffectsDialog();
+const { openDebugDialog } = useDamageSourceDebug();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const el = useTemplateRef('el');
@@ -1150,7 +1151,7 @@ defineExpose({ el });
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</div>
 			</section>
-			<section data-stats="" :inert="isLoading">
+			<section data-stats="" :inert="isLoading" @dblclick.ctrl="openDebugDialog(value)">
 				<h4>stats</h4>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
