@@ -64,7 +64,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	runesInvalid = computed((): boolean => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	currentHealth: Ref<number>;
-	maxHealth = computed((): number => Math.round(this.stats.value?.total.hp || 1));
+	maxHealth = computed((): number => Math.round(this.stats.value?.total.hp ?? 1));
 	currentAbilityResource: Ref<number>;
 	// TODO make available under dynamic variables `@AbilityResourceName@`
 	abilityResourceName = computed((): string => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
@@ -258,9 +258,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			}),
 
 			watch(() => [this.stats.value?.total.hp, this.stats.value?.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
-				if (!this.champion.value) {
-					return;
-				}
 				if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
 					this.currentHealth.value = this.stats.value?.total.hp ?? 0;
 				} else {

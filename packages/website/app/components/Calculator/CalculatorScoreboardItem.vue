@@ -1303,10 +1303,10 @@ defineExpose({ el });
 				<div
 					ref="healthBar"
 					data-current-health=""
-					:style="`--fill-percentage: ${value.champion.value ? Math.min(healthDragValueRef / value.maxHealth.value, 1) : 1}`"
+					:style="`--fill-percentage: ${value.maxHealth.value === 0 ? 1 : Math.min(healthDragValueRef / value.maxHealth.value, 1)}`"
 					@mousedown="startHealthBarDrag"
 				>
-					<template v-if="value.champion.value">
+					<template v-if="value.maxHealth.value !== 0">
 						<label :for="`${idPrefix}-current-ability-health`">
 							health
 						</label>
@@ -1324,7 +1324,7 @@ defineExpose({ el });
 				<div
 					ref="resourceBar"
 					data-current-ability-resource=""
-					:data-partype="value.champion.value?.partype?.toLowerCase()"
+					:data-partype="value.champion.value ? value.champion.value?.partype?.toLowerCase() : 'mana'"
 					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(abilityResourceDragValueRef / value.maxAbilityResource.value, 1)}` : undefined"
 					@mousedown="startAbilityResourceBarDrag"
 				>
