@@ -834,6 +834,21 @@ const activeEffects = computed<[IComputedAppliedEffect, number][]>(() =>
 		.filter(([effect]) => effect.isActive),
 );
 
+const hoveredEffectId = shallowRef<IEffectAbilityId>();
+const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
+
+function showEffectTooltip(event: MouseEvent, effect: IComputedAppliedEffect) {
+	hoveredEffectId.value = effect.abilityId;
+	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
+	effect.specific.sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
+	effectHoverTooltipEl.value?.el?.showPopover();
+}
+
+function hideEffectTooltip() {
+	effectHoverTooltipEl.value?.el?.hidePopover();
+	removeItemTooltipViewListeners();
+}
+
 function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	const effect = props.value.appliedEffects.value[effectIndex]!;
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
@@ -850,21 +865,11 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	} else {
 		effect.data[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data[0] + by) : (effect.data[0] + by));
 	}
-}
-
-const hoveredEffectId = shallowRef<IEffectAbilityId>();
-const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
-
-function showEffectTooltip(event: MouseEvent, effect: IComputedAppliedEffect) {
-	hoveredEffectId.value = effect.abilityId;
-	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
-	effect.specific.sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
-	effectHoverTooltipEl.value?.el?.showPopover();
-}
-
-function hideEffectTooltip() {
-	effectHoverTooltipEl.value?.el?.hidePopover();
-	removeItemTooltipViewListeners();
+	nextTick(() => {
+		if (!effect.data[0] && hoveredEffectId.value === effect.abilityId) {
+			hideEffectTooltip();
+		}
+	});
 }
 
 onBeforeUnmount(() => {
