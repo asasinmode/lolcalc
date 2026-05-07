@@ -16,4 +16,4 @@ Monorepository for everything related to [lolcalc.app](https://lolcalc.app) - da
 ## TODOS
 
 - [ ] CONTRIBUTING.md
-- [ ] specific packages' readme
+- [ ] specific packages' readme, describe core tests

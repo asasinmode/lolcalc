@@ -93,6 +93,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [ ] basic attack section normal/crit/average
+  - [ ] basic attack hover tooltip, note that it already includes everything and might not make sense in custom total
   - [ ] friendlier variable names? Try to filter out simple variables like 5 more dmg to minions?
 - [ ] rune dialog
   - [x] layout
@@ -152,7 +153,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
   - [ ] check if can save only gold cost, not whole object
-  - [ ] are health/ability resource floats?
+  - [ ] are health/ability resource rounded?
 - [ ] update hover tooltips with more calculation info (`= X - Y`) when holding shift
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles

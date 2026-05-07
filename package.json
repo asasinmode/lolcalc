@@ -11,7 +11,10 @@
 		"typecheck:packages": "vue-tsc --noEmit",
 		"typecheck:website": "cd packages/website && pnpm typecheck",
 		"typecheck": "run-p --aggregate-output -c \"typecheck:packages\" \"typecheck:website\"",
-		"lint": "eslint --fix --cache ."
+		"lint": "eslint --fix --cache .",
+		"test:shared": "cd packages/shared && node --test",
+		"test:core": "cd packages/shared && node --test",
+		"test": "run-p --aggregate-output -c test:shared test:core"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "catalog:",
