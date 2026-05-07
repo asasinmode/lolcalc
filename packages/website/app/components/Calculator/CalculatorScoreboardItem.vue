@@ -189,8 +189,26 @@ onMounted(() => {
 	emit('mounted');
 });
 
+const effectsEl = useTemplateRef('effects');
+const effectsListEl = useTemplateRef('effectsList');
+const abiltiesEl = useTemplateRef('abilities');
+const healthAbilityResourceEl = useTemplateRef('healthAbilityResource');
+const roleQuestEl = useTemplateRef('roleQuest');
+const dragonsEl = useTemplateRef('dragons');
+const extrasEl = useTemplateRef('extras');
+
 function doubleClickToggle(event: MouseEvent) {
-	event.target === event.currentTarget && toggleExpanded();
+	[
+		event.currentTarget,
+		detailsContainer.value,
+		effectsEl.value,
+		effectsListEl.value,
+		abiltiesEl.value,
+		healthAbilityResourceEl.value,
+		roleQuestEl.value,
+		dragonsEl.value,
+		extrasEl.value,
+	].includes(event.target) && toggleExpanded();
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
@@ -1167,6 +1185,7 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section
+				ref="effects"
 				data-effects=""
 				:inert="isLoading"
 				:style="`--effects-number: ${value.computed.effects.value.filter(effect => effect.isActive).length}`"
@@ -1176,7 +1195,7 @@ defineExpose({ el });
 					effects
 					<img v-bind="textureBgImageAttrs(UI.practiceTool.statusEffect, 24)">
 				</button>
-				<ul>
+				<ul ref="effectsList">
 					<li
 						v-for="[effect, effectIndex] in activeEffects"
 						:key="effect.id"
@@ -1203,7 +1222,7 @@ defineExpose({ el });
 					:damage-source="value"
 				/>
 			</section>
-			<section data-abilities="" :inert="isLoading">
+			<section ref="abilities" data-abilities="" :inert="isLoading">
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
@@ -1279,7 +1298,7 @@ defineExpose({ el });
 					:precomputed-description="hoveredAbilityKey && value.computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
-			<section data-health-ability-resource="">
+			<section ref="healthAbilityResource" data-health-ability-resource="">
 				<h4>health and ability resource</h4>
 				<div
 					ref="healthBar"
@@ -1325,7 +1344,7 @@ defineExpose({ el });
 					</template>
 				</div>
 			</section>
-			<section data-role-quest="">
+			<section ref="roleQuest" data-role-quest="">
 				<h4>role quest</h4>
 				<VSelect
 					:id="`${idPrefix}-role-quest`"
@@ -1363,7 +1382,7 @@ defineExpose({ el });
 					</ul>
 				</div>
 			</section>
-			<section data-dragons="">
+			<section ref="dragons" data-dragons="">
 				<h4>dragons</h4>
 				<VSelect
 					v-for="i in 4"
@@ -1413,7 +1432,7 @@ defineExpose({ el });
 					</p>
 				</div>
 			</section>
-			<section data-extras="">
+			<section ref="extras" data-extras="">
 				<component
 					:is="extra[0]"
 					v-for="(extra, extraIndex) in championExtra"
