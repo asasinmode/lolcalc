@@ -53,7 +53,7 @@ defineExpose({
 			> details {
 				--at-apply: 'me-4 pe-4';
 
-				&:last-chlid {
+				&:last-child {
 					--at-apply: 'me-0 pe-0';
 				}
 

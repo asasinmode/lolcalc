@@ -23,7 +23,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			items: [ITEMS[ITEM_NAME_TO_ID.mejai], ITEMS[ITEM_NAME_TO_ID.blackfireTorch], ITEMS[ITEM_NAME_TO_ID.berserkerGreaves], ITEMS[ITEM_NAME_TO_ID.guinsoo], ITEMS[ITEM_NAME_TO_ID.riftmaker], ITEMS[ITEM_NAME_TO_ID.rabadon]],
 		});
 
-		console.log(JSON.stringify(damageSource.stats.value, null, 2))
+		console.log(JSON.stringify(damageSource.stats.value, null, 2));
 
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 602);
 	});

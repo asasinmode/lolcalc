@@ -32,7 +32,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	champion: UnwrapRef<IDamageSource['listedChampion']>;
 	level: UnwrapRef<IDamageSource['level']>;
 	items: UnwrapRef<IDamageSource['items']>;
-	runes: UnwrapRef<IDamageSource['runes']>;
+	runes: Partial<UnwrapRef<IDamageSource['runes']>>;
 	abilityLevels: Partial<UnwrapRef<IDamageSource['abilityLevels']>>;
 	abilityVariants: Partial<UnwrapRef<IDamageSource['abilityVariantsIndexes']>>;
 	currentHealth: UnwrapRef<IDamageSource['currentHealth']>;
@@ -154,7 +154,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
 	}) = {}) {
-		/* + 1 because it's a nicer color */
 		const hue = (damageSourcesCount++ * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
@@ -164,17 +163,19 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		this.level = ref(overrides.level ?? 1);
 		this.items = ref(Array.from({ length: 7 }, (_, i) => overrides.items?.[i]));
 		this.itemsUndoSnapshots = ref([]);
-		this.runes = ref<IChampionRunes>(overrides.runes ?? {
+		this.runes = ref<IChampionRunes>({
 			paths: {
 				primary: 'Precision',
 				primarySlots: [],
 				secondary: undefined,
 				secondarySlots: [],
+				...overrides.runes?.paths,
 			},
 			shards: {
 				offensive: 'adaptive',
 				flex: 'adaptive',
 				defensive: 'health',
+				...overrides.runes?.shards,
 			},
 		});
 		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.total.hp ?? 0));
@@ -813,7 +814,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	}
 
 	computed: {
-		formattedStatTotals: ComputedRef<Record<IChampionStatName, string>>;
+		formattedStatTotals: ComputedRef<Record<IChampionStatName, number>>;
 		items: ComputedRef<(IComputedItemDescription | undefined)[]>;
 		itemSpecifics: ComputedRef<({
 			specific: IItemSpecific;
@@ -824,12 +825,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		effects: ShallowRef<IComputedAppliedEffect[]>;
 	} = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
-		formattedStatTotals: computed((): Record<IChampionStatName, string> => Object.fromEntries(
+		formattedStatTotals: computed((): Record<IChampionStatName, number> => Object.fromEntries(
 			ALL_CHAMPION_STATS.map(statName => [
 				statName,
 				formatChampionStatValue(statName, this.stats.value.total[statName as IChampionStatName]),
 			]),
-		) as unknown as Record<IChampionStatName, string>),
+		) as Record<IChampionStatName, number>),
 		items: computed((): (IComputedItemDescription | undefined)[] => {
 			return this.items.value.map((item): IComputedItemDescription | undefined =>
 				item && computeItemDescription(item, this),
