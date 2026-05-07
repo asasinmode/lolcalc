@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"packageManager": "pnpm@10.33.2",
+	"packageManager": "pnpm@11.0.8",
 	"description": "collection of tools and apps related to lolcalc",
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
