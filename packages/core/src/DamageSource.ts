@@ -910,8 +910,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		}),
 		items: computed((): ICalculateStatsGroupedHooks => {
 			const rv: ICalculateStatsGroupedHooks = {};
-			for (const item in this.items.value) {
-				item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item]);
+			for (const item of this.items.value) {
+				item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id]);
 			}
 			return rv;
 		}),
@@ -1457,6 +1457,7 @@ export interface IComputedAppliedEffect {
 export interface ICalculateChampionStatsHookSource {
 	/** runs after resolving the champion in `calculateChampionStats` */
 	postInit?: ICalculateChampionStatsHook<(self: DamageSource, baseStats: IChampionStats) => void>;
+	postItems?: ICalculateChampionStatsHook<(self: DamageSource, itemStats: IChampionStats, baseStats: IChampionStats, baseWithFlatItemMoveSpeed: number) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	postRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, runeShardStats: Partial<IChampionStats>, baseStats: IChampionStats, adaptiveForceMeta: IAdaptiveForceStatRv, baseWithFlatItemMoveSpeed: number) => void>;
 };

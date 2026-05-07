@@ -1,9 +1,7 @@
 import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationResult } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
-import type { IHypotheticalChampionSpecifics } from '../specifics/champion';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
-import { CHAMPION_SPECIFICS } from '../specifics/champion.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;
@@ -99,6 +97,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	itemStats.moveSpeed += baseWithFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
 	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+
+	if (source.calculateStatsHooks.all.value.postItems) {
+		for (const hook of source.calculateStatsHooks.all.value.postItems) {
+			hook(source, itemStats, baseStats, baseWithFlatItemMoveSpeed);
+		}
+	}
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemStats.attackDamage, itemStats.abilityPower);
 

@@ -33,15 +33,28 @@ const gluttonousGreavesSpecific = {
 
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
+		calculateBonusAd: (self: DamageSource): number => {
+			const { eminence } = self.internalItemData.value;
+			if (eminence) {
+				return (ITEMS as TItems)[ITEM_NAME_TO_ID.hubris].dataValues.BaseADBonus + eminence * (ITEMS as TItems)[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
+			}
+			return 0;
+		},
 		internalDataProperties: ['eminence'],
 		setupData(self) {
 			self.internalItemData.value.eminence = Math.max(0, self.internalItemData.value.eminence ?? 0);
 			return { eminence: 0 };
 		},
 		imgTextLabel: 'Eminence stacks',
-		imgText(self) {
-			const { eminence } = self.internalItemData.value as { eminence: number };
-			return eminence && (ITEMS as TItems)[ITEM_NAME_TO_ID.hubris].dataValues.BonusLethality + eminence * (ITEMS as TItems)[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
+		imgText(self): number {
+			return ITEM_SPECIFICS[ITEM_NAME_TO_ID.hubris].calculateBonusAd(self);
+		},
+		calculateHooks: {
+			postItems: {
+				handler(self, itemStats) {
+					itemStats.attackDamage += ITEM_SPECIFICS[ITEM_NAME_TO_ID.hubris].calculateBonusAd(self);
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
