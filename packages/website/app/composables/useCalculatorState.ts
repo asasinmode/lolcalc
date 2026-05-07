@@ -92,31 +92,33 @@ export function useCalculatorState(
 
 		const savedChampionIds = new Set<string>();
 		const savedItemIds = new Set<string>();
-		for (const column of resultsTable.value?.resultColumns || []) {
-			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
-			const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
-			if (~columnSourceIndex || ~columnTargetIndex) {
-				column.source?.champion.value?.id && savedChampionIds.add(column.source.champion.value!.id);
-				column.target?.champion.value?.id && savedChampionIds.add(column.target.champion.value!.id);
-				if (column.source) {
-					for (const item of (column.source as unknown as DamageSource).items.value) {
-						item && savedItemIds.add(item.id);
+		if (resultsTable.value && (resultsTable.value.resultColumns.slice(1).some(col => col.source || col.target) || resultsTable.value.resultColumns[0]!.source !== damageSources.value[0] || resultsTable.value.resultColumns[0]!.target !== damageTargets.value[0])) {
+			for (const column of resultsTable.value?.resultColumns || []) {
+				const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
+				const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
+				if (~columnSourceIndex || ~columnTargetIndex) {
+					column.source?.champion.value?.id && savedChampionIds.add(column.source.champion.value!.id);
+					column.target?.champion.value?.id && savedChampionIds.add(column.target.champion.value!.id);
+					if (column.source) {
+						for (const item of (column.source as unknown as DamageSource).items.value) {
+							item && savedItemIds.add(item.id);
+						}
 					}
-				}
-				if (column.target) {
-					for (const item of (column.target as unknown as DamageSource).items.value) {
-						item && savedItemIds.add(item.id);
+					if (column.target) {
+						for (const item of (column.target as unknown as DamageSource).items.value) {
+							item && savedItemIds.add(item.id);
+						}
 					}
-				}
 
-				const params = new URLSearchParams();
-				params.append('tblCol', `${~columnSourceIndex ? columnSourceIndex : ''}-${~columnTargetIndex ? columnTargetIndex : ''}`);
-				const str = params.toString();
-				wholeState += `&${str}`;
-				if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
-					break;
+					const params = new URLSearchParams();
+					params.append('tblCol', `${~columnSourceIndex ? columnSourceIndex : ''}-${~columnTargetIndex ? columnTargetIndex : ''}`);
+					const str = params.toString();
+					wholeState += `&${str}`;
+					if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
+						break;
+					}
+					queryState += `&${str}`;
 				}
-				queryState += `&${str}`;
 			}
 		}
 
