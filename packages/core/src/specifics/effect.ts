@@ -1,12 +1,12 @@
-import type { TItems } from '@lolcalc/data';
 import type { IEffectObjectName } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IGameAbilityId } from '../GameAbilityId.ts';
-import { ITEMS, useChampion } from '@lolcalc/data';
+import { useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
+import { ITEM_SPECIFICS } from './item.ts';
 
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: {
@@ -159,7 +159,7 @@ export const EFFECT_SPECIFICS = {
 	},
 	[EFFECT_OBJECT_NAME.bloodletterVileDecay]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodlettersCurse),
-		maxValue: (ITEMS as TItems)[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
+		maxValue: ITEM_SPECIFICS[ITEM_NAME_TO_ID.bloodlettersCurse].MAX_STACKS,
 		label: 'Vile Decay stacks',
 		imgText(data: [vDecay: number]) {
 			return data[0];
@@ -175,7 +175,7 @@ export const EFFECT_SPECIFICS = {
 	},
 	[EFFECT_OBJECT_NAME.blackCleaverCarve]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver),
-		maxValue: 5,
+		maxValue: ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].MAX_STACKS,
 		label: 'Carve stacks',
 		imgText(data: [carve: number]) {
 			return data[0];

@@ -2,14 +2,14 @@ import type { TItems } from '@lolcalc/data';
 import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS } from '@lolcalc/data';
-import { EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { EFFECT_SPECIFICS } from './effect.ts';
 
 const tearItemSpecifics = {
+	MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.tear].dataValues.MaxMana,
 	internalDataProperties: ['manaflow'],
 	setupData(self: DamageSource) {
-		self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.tear].dataValues.MaxMana);
+		self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, tearItemSpecifics.MAX_STACKS);
 		return { manaflow: 0 };
 	},
 	imgTextLabel: 'Manaflow stacks',
@@ -58,9 +58,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks,
 		internalDataProperties: ['glory'],
 		setupData(self) {
-			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks);
+			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.darkSeal].MAX_STACKS);
 			return { glory: 0 };
 		},
 		imgTextLabel: 'Glory stacks',
@@ -69,9 +70,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.mejai]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.MaxGloryStacks,
 		internalDataProperties: ['glory'],
 		setupData(self) {
-			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.MaxGloryStacks);
+			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.mejai].MAX_STACKS);
 			return { glory: 0 };
 		},
 		imgTextLabel: 'Glory stacks',
@@ -80,9 +82,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.hauntingGuise].dataValues.SecondsInCombat,
 		internalDataProperties: ['madness'],
 		setupData(self) {
-			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.hauntingGuise].dataValues.SecondsInCombat);
+			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hauntingGuise].MAX_STACKS);
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
@@ -92,9 +95,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.roa].dataValues.MaxStacks,
 		internalDataProperties: ['eternity'],
 		setupData(self) {
-			self.internalItemData.value.eternity = clamp(0, self.internalItemData.value.eternity ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.roa].dataValues.MaxStacks);
+			self.internalItemData.value.eternity = clamp(0, self.internalItemData.value.eternity ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.roa].MAX_STACKS);
 			return { eternity: 0 };
 		},
 		imgTextLabel: 'Eternity stacks',
@@ -115,9 +119,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.liandry].dataValues.MaxStackNumber,
 		internalDataProperties: ['madness'],
 		setupData(self) {
-			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.liandry].dataValues.MaxStackNumber);
+			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.liandry].MAX_STACKS);
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
@@ -127,9 +132,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.yunTal].dataValues.CritMax,
 		internalDataProperties: ['practice'],
 		setupData(self) {
-			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.yunTal].dataValues.CritMax);
+			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_STACKS);
 			return { practice: 0 };
 		},
 		imgTextLabel: 'Practice Makes Lethal critical strike chance',
@@ -139,9 +145,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.shojin].dataValues.StackCount,
 		internalDataProperties: ['fWill'],
 		setupData(self) {
-			self.internalItemData.value.fWill = clamp(0, self.internalItemData.value.fWill ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.shojin].dataValues.StackCount);
+			self.internalItemData.value.fWill = clamp(0, self.internalItemData.value.fWill ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.shojin].MAX_STACKS);
 			return { fWill: 0 };
 		},
 		imgTextLabel: 'Focused Will ability damage increase',
@@ -151,9 +158,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.SecondsInCombat,
 		internalDataProperties: ['corruption'],
 		setupData(self) {
-			self.internalItemData.value.corruption = clamp(0, self.internalItemData.value.corruption ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.SecondsInCombat);
+			self.internalItemData.value.corruption = clamp(0, self.internalItemData.value.corruption ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.riftmaker].MAX_STACKS);
 			return { corruption: 0 };
 		},
 		imgTextLabel: 'Corruption bonus damage',
@@ -178,10 +186,11 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
+		MAX_STACKS: 5,
 		internalDataProperties: ['carve', 'fervor'],
 		setupData(self) {
 			self.internalItemData.value.carve = Math.max(0, Math.min(
-				EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue,
+				ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].MAX_STACKS,
 				self.internalItemData.value.carve ?? 0,
 			));
 			self.internalItemData.value.fervor = clamp(0, self.internalItemData.value.carve ?? 0, 1);
@@ -336,9 +345,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange,
 		internalDataProperties: ['magnification'],
 		setupData(self) {
-			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange);
+			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_STACKS);
 			return { magnification: 0 };
 		},
 		imgTextLabel: 'Magnification % damage increase',
@@ -370,9 +380,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.deadMansPlate]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.deadMansPlate].dataValues.MaxMovementSpeed,
 		internalDataProperties: ['shipwrecker'],
 		setupData(self) {
-			self.internalItemData.value.shipwrecker = clamp(0, self.internalItemData.value.shipwrecker ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.deadMansPlate].dataValues.MaxMovementSpeed);
+			self.internalItemData.value.shipwrecker = clamp(0, self.internalItemData.value.shipwrecker ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.deadMansPlate].MAX_STACKS);
 			return { shipwrecker: 0 };
 		},
 		imgTextLabel: 'Shipwrecker built up movement speed',
@@ -381,10 +392,11 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.bloodlettersCurse]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
 		internalDataProperties: ['vDecay'],
 		setupData(self) {
 			self.internalItemData.value.vDecay = Math.max(0, Math.min(
-				EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.bloodletterVileDecay].maxValue,
+				ITEM_SPECIFICS[ITEM_NAME_TO_ID.bloodlettersCurse].MAX_STACKS,
 				self.internalItemData.value.vDecay ?? 0,
 			));
 			return { vDecay: 0 };
@@ -416,9 +428,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
+		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks,
 		internalDataProperties: ['seething'],
 		setupData(self) {
-			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, (ITEMS as TItems)[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks);
+			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.guinsoo].MAX_STACKS);
 			return { seething: 0 };
 		},
 		imgTextLabel: 'Seething Strikes stacks',
@@ -427,12 +440,11 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
+		MAX_STACKS: Math.round((ITEMS as TItems)[ITEM_NAME_TO_ID.terminus].dataValues.PenPerHit / (ITEMS as TItems)[ITEM_NAME_TO_ID.terminus].dataValues.PenMax),
 		internalDataProperties: ['jxtpL', 'jxtpD'],
 		setupData(self) {
-			const { PenPerHit, PenMax } = (ITEMS as TItems)[ITEM_NAME_TO_ID.terminus].dataValues;
-			const maxStacks = Math.round(PenPerHit / PenMax);
-			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, maxStacks);
-			self.internalItemData.value.jxtpD = clamp(0, self.internalItemData.value.jxtpD ?? 0, maxStacks);
+			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.terminus].MAX_STACKS);
+			self.internalItemData.value.jxtpD = clamp(0, self.internalItemData.value.jxtpD ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.terminus].MAX_STACKS);
 			return { jxtpL: 0, jxtpD: 0 };
 		},
 		imgTextLabel: 'Juxtaposition stacks (light | dark)',
