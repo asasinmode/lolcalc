@@ -102,6 +102,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] rune paths not implemented alert
   - [x] save button? Changes are saved instantly so it doesn't really make sense
   - [x] alert that configuration is incorrect
+  - [ ] maybe open dialog on panel click
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting

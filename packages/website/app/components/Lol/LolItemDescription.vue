@@ -3,6 +3,7 @@ import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
 import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
+import { SUPPORT_ITEMS } from '@lolcalc/shared/index';
 
 const props = defineProps<IItemDescriptionProps>();
 
@@ -30,6 +31,8 @@ const isMidQuestBoots = computed(() => {
 
 	return item.isBoots && item.epicness === 7;
 });
+
+const isSupportItem = computed(() => computedDescription.value?.item && SUPPORT_ITEMS.includes(computedDescription.value.item.id));
 
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
 const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
@@ -92,8 +95,8 @@ defineExpose({ header });
 		</a>
 	</component>
 	<div class="item-description" :class="descriptionClass">
-		<p v-if="isMidQuestBoots && damageSource && damageSource.roleQuest.value !== 'mid'">
-			(Only Mid Lane) Locked until Quest is Completed
+		<p v-if="damageSource && ((isMidQuestBoots && damageSource.roleQuest.value !== 'mid') || (isSupportItem && damageSource.roleQuest.value !== 'support'))">
+			{{ isMidQuestBoots ? '(Only Mid Lane) Locked until Quest is Completed' : '(Only Support Role) Locked until Support or no quest is chosen' }}
 		</p>
 		<ul>
 			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">

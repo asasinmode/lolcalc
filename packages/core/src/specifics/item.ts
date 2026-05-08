@@ -3,7 +3,7 @@ import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 
 const CALC_HOOK_PRIORITY = {
@@ -684,9 +684,10 @@ export function itemBuyability(
 	}
 
 	if (
-		(target.champion.value && !target.isRanged.value && (RANGED_ONLY_ITEM_IDS as string[]).includes(item.id))
+		(target.champion.value && !target.isRanged.value && (RANGED_ONLY_ITEMS as string[]).includes(item.id))
 		|| (!(transformBoots && isMove && item.isBoots) && inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
 		|| (!transformBoots && target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
+		|| (target?.roleQuest.value && target.roleQuest.value !== 'support' && SUPPORT_ITEMS.includes(item.id))
 	) {
 		buyability = -1;
 	} else if (!isMove && inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5 && (target.roleQuest.value !== 'bot' || inventoryAfterBuying[6])) {

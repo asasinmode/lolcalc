@@ -265,7 +265,18 @@ export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.bountyOfWorlds,
 ];
 
-export const RANGED_ONLY_ITEM_IDS: string[] = [ITEM_NAME_TO_ID.runaan];
+export const RANGED_ONLY_ITEMS: string[] = [ITEM_NAME_TO_ID.runaan];
+
+export const SUPPORT_ITEMS: string[] = [
+	ITEM_NAME_TO_ID.worldAtlas,
+	ITEM_NAME_TO_ID.runicCompass,
+	ITEM_NAME_TO_ID.bountyOfWorlds,
+	ITEM_NAME_TO_ID.celestialOpposition,
+	ITEM_NAME_TO_ID.dreamMaker,
+	ITEM_NAME_TO_ID.zazZakRealmspike,
+	ITEM_NAME_TO_ID.solsticeSleigh,
+	ITEM_NAME_TO_ID.bloodsong,
+];
 
 /**
 	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text

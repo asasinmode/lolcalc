@@ -12,7 +12,7 @@ import type { IHypotheticalRuneSpecifics } from './specifics/rune.ts';
 import type { IReplaceGameVariablesRV } from './types';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ICON_GOLD, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
+import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
@@ -304,7 +304,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 				if (!value) {
 					for (let i = 0; i < this.items.value.length; i++) {
 						const item = this.items.value[i];
-						if (item && (RANGED_ONLY_ITEM_IDS as string[]).includes(item.id)) {
+						if (item && (RANGED_ONLY_ITEMS as string[]).includes(item.id)) {
 							this.items.value[i] = undefined;
 						}
 					}
