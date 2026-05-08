@@ -335,7 +335,6 @@
 			"image": "1036.png",
 			"into": [
 				"1053",
-				"4003",
 				"2019",
 				"2021",
 				"3077",
@@ -982,30 +981,6 @@
 				"tank": true,
 				"mage": true,
 				"support": true
-			}
-		},
-		"2051": {
-			"id": "2051",
-			"name": "Guardian's Horn",
-			"searchString": "guardianshorn;health;healthregen;healtheveryseconds",
-			"stats": {
-				"FlatHPPoolMod": 150,
-				"FlatHPRegenMod": 4
-			},
-			"gold": {
-				"total": 950,
-				"sell": 665
-			},
-			"image": "2051.png",
-			"epicness": 1,
-			"effectAmount": [15, 0.25],
-			"itemGroups": [
-				"Items/ItemGroups/GuardianItems"
-			],
-			"categories": {
-				"tank": true,
-				"support": true,
-				"fighter": true
 			}
 		},
 		"2065": {
@@ -4251,30 +4226,6 @@
 				"fighter": true
 			}
 		},
-		"3112": {
-			"id": "3112",
-			"name": "Guardian's Orb",
-			"searchString": "guardiansorb;health;spelldamage;manaregen;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 150,
-				"FlatMagicDamageMod": 50
-			},
-			"gold": {
-				"total": 950,
-				"sell": 665
-			},
-			"image": "3112.png",
-			"epicness": 1,
-			"effectAmount": [3],
-			"itemGroups": [
-				"Items/ItemGroups/GuardianItems"
-			],
-			"categories": {
-				"mage": true,
-				"support": true,
-				"tank": true
-			}
-		},
 		"3113": {
 			"id": "3113",
 			"name": "Aether Wisp",
@@ -4753,7 +4704,6 @@
 				"3142",
 				"6697",
 				"2520",
-				"4004",
 				"6695",
 				"3814",
 				"3179",
@@ -5971,32 +5921,6 @@
 				"Items/ItemGroups/Boots"
 			]
 		},
-		"3177": {
-			"id": "3177",
-			"name": "Guardian's Blade",
-			"searchString": "guardiansblade;dblade;health;damage;abilityhaste;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 150,
-				"FlatPhysicalDamageMod": 30,
-				"AbilityHasteMod": 15
-			},
-			"gold": {
-				"total": 950,
-				"sell": 665
-			},
-			"image": "3177.png",
-			"epicness": 1,
-			"effectAmount": [10],
-			"itemGroups": [
-				"Items/ItemGroups/GuardianItems"
-			],
-			"categories": {
-				"fighter": true,
-				"marksman": true,
-				"assassin": true,
-				"tank": true
-			}
-		},
 		"3179": {
 			"id": "3179",
 			"name": "Umbral Glaive",
@@ -6185,30 +6109,6 @@
 			],
 			"categories": {
 				"fighter": true
-			}
-		},
-		"3184": {
-			"id": "3184",
-			"name": "Guardian's Hammer",
-			"searchString": "guardianshammer;dblade;health;damage;lifesteal;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 150,
-				"FlatPhysicalDamageMod": 25,
-				"PercentLifeStealMod": 0.05
-			},
-			"gold": {
-				"total": 950,
-				"sell": 665
-			},
-			"image": "3184.png",
-			"epicness": 1,
-			"itemGroups": [
-				"Items/ItemGroups/GuardianItems"
-			],
-			"categories": {
-				"fighter": true,
-				"marksman": true,
-				"assassin": true
 			}
 		},
 		"3190": {
@@ -7285,71 +7185,6 @@
 			"categories": {
 				"mage": true,
 				"support": true
-			}
-		},
-		"4003": {
-			"id": "4003",
-			"name": "Lifeline",
-			"searchString": "lifeline;damage;movement;armorpenetration;attackdamage;movespeed",
-			"stats": {
-				"FlatPhysicalDamageMod": 25,
-				"PercentMovementSpeedMod": 0.04,
-				"PhysicalLethality": 5
-			},
-			"gold": {
-				"total": 1600,
-				"sell": 1120
-			},
-			"image": "4003.png",
-			"into": [
-				"4004"
-			],
-			"from": [
-				"6690",
-				"1036"
-			],
-			"epicness": 4,
-			"dataValues": {
-				"Duration": 4,
-				"Cooldown": 45,
-				"LethalityAmount": 5
-			},
-			"itemGroups": [
-				"{602a9b91}"
-			],
-			"categories": {
-				"assassin": true
-			}
-		},
-		"4004": {
-			"id": "4004",
-			"name": "Spectral Cutlass",
-			"searchString": "spectralcutlass;damage;movement;armorpenetration;attackdamage;movespeed",
-			"stats": {
-				"FlatPhysicalDamageMod": 50,
-				"PercentMovementSpeedMod": 0.04,
-				"PhysicalLethality": 15
-			},
-			"gold": {
-				"total": 2800,
-				"sell": 1960
-			},
-			"image": "4004.png",
-			"from": [
-				"4003",
-				"3134"
-			],
-			"epicness": 5,
-			"dataValues": {
-				"Duration": 4,
-				"Cooldown": 45,
-				"LethalityAmount": 15
-			},
-			"itemGroups": [
-				"{602a9b91}"
-			],
-			"categories": {
-				"assassin": true
 			}
 		},
 		"4005": {
@@ -8760,7 +8595,6 @@
 			},
 			"image": "6690.png",
 			"into": [
-				"4003",
 				"6672",
 				"3142"
 			],

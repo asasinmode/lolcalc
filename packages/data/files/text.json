@@ -81,18 +81,6 @@
 					]
 				]
 			},
-			"2051": {
-				"subtitleRight": "Unique: Starter",
-				"tooltipShop": [
-					[
-						"<passive>Recovery</passive>",
-						"Restores <healing>@FlatHPRegenMod*5@ Health</healing> every 5 seconds.",
-						"<passive>Undaunted</passive>",
-						"Blocks @Effect1Amount@ damage from attacks and spells from champions (@Effect2Amount*100@% effectiveness vs. damage over time abilities)."
-					]
-				],
-				"footerLeft": "Damage Blocked: <attention>@f3@</attention>"
-			},
 			"2065": {
 				"subtitleLeft": "Team Mobility",
 				"tooltipShop": [
@@ -875,15 +863,6 @@
 				"subtitleLeft": "Anti-Magic",
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Tenacity }}"
 			},
-			"3112": {
-				"subtitleRight": "Unique: Starter",
-				"tooltipShop": [
-					[
-						"<passive>Recovery</passive>",
-						"Restores <scaleMana>@FlatMPRegenMod*5@ Mana</scaleMana> every 5 seconds. If you can't gain mana, restores <healing>@Effect1Amount*5@ Health</healing> instead."
-					]
-				]
-			},
 			"3115": {
 				"subtitleLeft": "Magic On-Hit",
 				"tooltipShop": [
@@ -1239,9 +1218,6 @@
 				],
 				"footerLeft": "Damage shielded: <attention>@f5@</attention>"
 			},
-			"3177": {
-				"subtitleRight": "Unique: Starter"
-			},
 			"3179": {
 				"subtitleLeft": "Anti-Vision",
 				"tooltipShop": [
@@ -1270,9 +1246,6 @@
 					]
 				],
 				"footerLeft": "Damage to Champions: <attention>@f1@</attention><br>Damage to Structures: <attention>@f2@</attention>"
-			},
-			"3184": {
-				"subtitleRight": "Unique: Starter"
 			},
 			"3190": {
 				"subtitleLeft": "Team Shield",
@@ -1494,22 +1467,6 @@
 				],
 				"footerLeft": "Healing Reduced: <attention>@f2@</attention><br>Regen Reduced: <attention>@f3@</attention>",
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Wounds }}"
-			},
-			"4003": {
-				"tooltipShop": [
-					[
-						"{{ Item_Active_Named }} <active>Soul Anchor</active> {{ Item_Cooldown }}",
-						"Mark your current location. After @Duration@ seconds, return to that location. You may recast at any point during <active>Soul Anchor's</active> duration to return to your marked location early."
-					]
-				]
-			},
-			"4004": {
-				"tooltipShop": [
-					[
-						"{{ Item_Active_Named }} <active>Soul Anchor</active> {{ Item_Cooldown }}",
-						"Mark your current location. After @Duration@ seconds, return to that location. You may recast at any point during <active>Soul Anchor's</active> duration to return to your marked location early."
-					]
-				]
 			},
 			"4005": {
 				"subtitleLeft": "Ally Burst",

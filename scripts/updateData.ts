@@ -322,18 +322,22 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		'2421', // shattered armguard
 		'3039',	// atma's reckoning
 		'3095', // stormrazor, there are 2 for some reason
+		'2051', // guardian's horn
+		'3112', // guardian's orb
+		'3177', // guardian's blade
+		'3184', // guardian's hammer
 	];
 
 	const filteredItems = Object.entries(data)
 		.filter(([itemId, itemData]) => {
-			const { maps: { 11: sr, 12: ha }, requiredChampion, gold } = itemData as {
+			const { maps: { 11: sr }, requiredChampion, gold } = itemData as {
 				maps: Record<number, boolean>;
 				requiredChampion?: boolean;
 				gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
 			};
 
 			return !UNINTERESTING_ITEMS.includes(itemId)
-				&& (sr || ha)
+				&& sr
 				&& itemId.length <= 4
 				&& gold.inStore !== false
 				&& gold.hideFromAll !== false
