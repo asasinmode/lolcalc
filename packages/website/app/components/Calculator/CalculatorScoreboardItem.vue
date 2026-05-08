@@ -199,7 +199,7 @@ const dragonsEl = useTemplateRef('dragons');
 const extrasEl = useTemplateRef('extras');
 
 function doubleClickToggle(event: MouseEvent) {
-	[
+	if ([
 		event.currentTarget,
 		detailsContainer.value,
 		effectsEl.value,
@@ -209,7 +209,10 @@ function doubleClickToggle(event: MouseEvent) {
 		roleQuestEl.value,
 		dragonsEl.value,
 		extrasEl.value,
-	].includes(event.target) && toggleExpanded();
+	].includes(event.target)) {
+		toggleExpanded();
+		event.preventDefault();
+	};
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');

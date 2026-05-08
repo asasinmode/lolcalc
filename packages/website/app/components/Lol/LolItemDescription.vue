@@ -313,13 +313,19 @@ defineExpose({ header });
 		}
 
 		> li + br,
-		> rules > br:is(:first-child, :last-child),
+		> rules > br:first-child:not(:has(~ br)),
 		> br + br + br {
 			--at-apply: 'hidden';
 		}
 
-		> br:nth-last-child(2):not(br + br) + rules {
-			--at-apply: 'mt-[1em] block';
+		> br:nth-last-child(2):not(br + br) {
+			&:has(+ rules) {
+				--at-apply: 'hidden';
+			}
+
+			& + rules {
+				--at-apply: 'mt-[1em] block';
+			}
 		}
 
 		font[size] {
