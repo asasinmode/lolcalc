@@ -1,3 +1,4 @@
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS } from '@lolcalc/data';
@@ -21,10 +22,14 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 				},
 			},
 			items: [ITEMS[ITEM_NAME_TO_ID.mejai], ITEMS[ITEM_NAME_TO_ID.blackfireTorch], ITEMS[ITEM_NAME_TO_ID.berserkerGreaves], ITEMS[ITEM_NAME_TO_ID.guinsoo], ITEMS[ITEM_NAME_TO_ID.riftmaker], ITEMS[ITEM_NAME_TO_ID.rabadon]],
+			internalItemData: {
+				glory: 20,
+				bBlaze: 1,
+				seething: 1,
+			} satisfies IInternalItemDataOf<'mejai' | 'blackfireTorch' | 'guinsoo'>,
 		});
 
-		console.log(JSON.stringify(damageSource.stats.value, null, 2));
-
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 1.33);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 602);
 	});
 });

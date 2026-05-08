@@ -1,5 +1,6 @@
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
+import type { TItemNameToId } from '../meta.ts';
 import type { IChampionSpecific, TChampionSpecifics } from './champion';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
@@ -51,3 +52,8 @@ export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySp
 		: never;
 
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
+
+export type IInternalItemDataOf<K extends keyof TItemNameToId>
+	= K extends any
+		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>
+		: never;
