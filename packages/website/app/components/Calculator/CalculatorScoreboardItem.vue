@@ -2577,6 +2577,7 @@ defineExpose({ el });
 				&:last-child {
 					--at-apply: 'ps-0 pe-[--pe]';
 				}
+			}
 		}
 
 		> details {
