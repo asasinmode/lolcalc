@@ -22,7 +22,7 @@ import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
 import { resolveAbilitySpecific } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
-import { RUNE_SPECIFICS, runePathsEmpty, runesInvalid } from './specifics/rune.ts';
+import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
 import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
 import { replaceStringtableVariables } from './variables/stringtable.ts';
 
@@ -60,7 +60,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 
 	runes: Ref<IChampionRunes>;
-	runePathsEmpty = computed((): boolean => runePathsEmpty(this.runes.value));
+	runePathsEmpty = computed((): boolean => runesEmpty(this.runes.value));
 	runesInvalid = computed((): boolean => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	currentHealth: Ref<number>;
@@ -172,9 +172,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 				...overrides.runes?.paths,
 			},
 			shards: {
-				offensive: 'adaptive',
-				flex: 'adaptive',
-				defensive: 'health',
+				offensive: undefined,
+				flex: undefined,
+				defensive: undefined,
 				...overrides.runes?.shards,
 			},
 		});
@@ -369,9 +369,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		this.runes.value.paths.primarySlots.length = 0;
 		this.runes.value.paths.secondary = undefined;
 		this.runes.value.paths.secondarySlots.length = 0;
-		this.runes.value.shards.offensive = 'adaptive';
-		this.runes.value.shards.flex = 'adaptive';
-		this.runes.value.shards.defensive = 'health';
+		this.runes.value.shards.offensive = undefined;
+		this.runes.value.shards.flex = undefined;
+		this.runes.value.shards.defensive = undefined;
 		this.currentHealth.value = this.stats.value?.total.hp ?? 0;
 		this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
 		this.abilityLevels.value.q = 0;
@@ -902,7 +902,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		runes: computed((): ICalculateStatsGroupedHooks => {
 			const rv: ICalculateStatsGroupedHooks = {};
 			for (const shard of Object.values(this.runes.value.shards)) {
-				groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shard]);
+				shard && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shard]);
 			}
 			for (const rune of this.runes.value.paths.primarySlots) {
 				rune && groupCalculateStatsHooks(rv, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).slots[rune]);

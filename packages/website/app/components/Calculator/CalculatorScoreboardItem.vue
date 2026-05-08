@@ -301,13 +301,17 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 	const { paths: { primary, primarySlots, secondary, secondarySlots }, shards } = props.value.runes.value;
 
 	let shardAnyUnknown = 0;
-	const shardDescriptions = Object.entries(shards as any).map(([shardSlot, shardName]) => {
-		const rune = (RUNES.shards[shardSlot as IRuneShardSlotName] as any)[shardName as string];
+	const shardDescriptions = Object.entries(shards).map(([shardSlot, shardValue]) => {
+		if (!shardValue) {
+			return 'unset';
+		}
 
-		const dynamicValues = (RUNE_SPECIFICS.shards as IWithCalculateDynamicValues)[shardName as string]?.calculateDynamicVariables?.(props.value);
+		const rune = (RUNES.shards[shardSlot as IRuneShardSlotName] as any)[shardValue as string];
+
+		const dynamicValues = (RUNE_SPECIFICS.shards as IWithCalculateDynamicValues)[shardValue as string]?.calculateDynamicVariables?.(props.value);
 
 		const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceStringtableVariables(
-			TEXT.runes.shards.slotValues[shardName as string]!.tooltipStats,
+			TEXT.runes.shards.slotValues[shardValue as string]!.tooltipStats,
 			TEXT.stringtable,
 			dynamicValues,
 		);
@@ -1309,10 +1313,10 @@ defineExpose({ el });
 				<div
 					ref="healthBar"
 					data-current-health=""
-					:style="`--fill-percentage: ${value.maxHealth.value === 0 ? 1 : Math.min(healthDragValueRef / value.maxHealth.value, 1)}`"
+					:style="`--fill-percentage: ${!value.anythingFilled.value || value.maxHealth.value === 0 ? 1 : Math.min(healthDragValueRef / value.maxHealth.value, 1)}`"
 					@mousedown="startHealthBarDrag"
 				>
-					<template v-if="value.maxHealth.value !== 0">
+					<template v-if="value.anythingFilled.value && value.maxHealth.value !== 0">
 						<label :for="`${idPrefix}-current-ability-health`">
 							health
 						</label>

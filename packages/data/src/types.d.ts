@@ -170,6 +170,6 @@ export interface IChampionRunes {
 		secondarySlots: (IRuneSlotName | undefined)[];
 	};
 	shards: {
-		[K in IRuneShardSlotName]: keyof IDataShards[K];
+		[K in IRuneShardSlotName]: keyof IDataShards[K] | undefined;
 	};
 }

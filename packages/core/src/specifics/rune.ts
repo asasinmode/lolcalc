@@ -4,14 +4,14 @@ import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageS
 import type { IPossibleDynamicValues } from '../types';
 import { RUNES } from '@lolcalc/data';
 
-export function runePathsEmpty(runes: IChampionRunes): boolean {
-	const { primarySlots, secondary, secondarySlots } = runes.paths;
-	return !(primarySlots.length || secondary || secondarySlots.length);
+export function runesEmpty(runes: IChampionRunes): boolean {
+	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;
+	return !(primarySlots.length || secondary || secondarySlots.length || shards.offensive || shards.flex || shards.defensive);
 };
 
-export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runePathsEmpty(runes)): boolean {
-	const { primarySlots, secondary, secondarySlots } = runes.paths;
-	return !areEmpty && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
+export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmpty(runes)): boolean {
+	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;
+	return !areEmpty && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2 && shards.offensive && shards.flex && shards.defensive);
 };
 
 export const RUNE_SPECIFICS = {
@@ -71,7 +71,7 @@ export const RUNE_SPECIFICS = {
 				onRuneShards: {
 					handler(_self, { runeShardStats }) {
 						runeShardStats.hp ??= 0;
-						runeShardStats.hp = (RUNES as TRunes).shards.defensive.health.effectAmount.StatGain;
+						runeShardStats.hp += (RUNES as TRunes).shards.defensive.health.effectAmount.StatGain;
 					},
 					priority: -1,
 				},
