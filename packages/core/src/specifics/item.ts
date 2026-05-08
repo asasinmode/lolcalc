@@ -592,6 +592,11 @@ export const ITEM_SPECIFICS = {
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.rabadon],
 			},
 		},
+		dynamicVariables(self) {
+			return {
+				f1: self.stats.value.variables.rabadonMagicalOpus,
+			};
+		},
 	},
 } satisfies IHypotheticalItemSpecifics;
 
@@ -605,6 +610,7 @@ export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItem
 	 */
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
+	dynamicVariables?: (self: DamageSource) => Record<string, any>;
 	[key: string]: any;
 };
 

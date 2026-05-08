@@ -55,6 +55,8 @@ export function itemVariableValue(variable: string, item: IItem, isRanged?: bool
 		// value = result;
 	} else if (variable.startsWith('Effect')) {
 		value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
+	} else if (damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable]) {
+		value = Math.round(damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable]);
 	}
 
 	return { value, isMeleeRanged };

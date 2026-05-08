@@ -829,6 +829,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		masterworkItemSlotIndex: ComputedRef<number>;
 		abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
 		effects: ShallowRef<IComputedAppliedEffect[]>;
+		dynamicVariables: ComputedRef<{
+			items: Record<string, Record<string, any>>;
+		}>;
 	} = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
 		formattedStatTotals: computed((): Record<IChampionStatName, number> => Object.fromEntries(
@@ -885,6 +888,18 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			})) as Record<IChampionAbilityKey, IComputedAbilityDescription[]>;
 		}),
 		effects: ref<IComputedAppliedEffect[]>([]) as unknown as ShallowRef<IComputedAppliedEffect[]>,
+		dynamicVariables: computed((): {
+			items: Record<string, Record<string, any>>;
+		} => {
+			return {
+				items: Object.fromEntries(
+					this.items.value.filter(Boolean).map(item => [
+						item!.id,
+						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id]?.dynamicVariables?.(this) ?? {},
+					]),
+				),
+			};
+		}),
 	};
 
 	/** like computed but can depend on the computed */
