@@ -256,9 +256,12 @@ defineExpose({ header });
 			> img {
 				--at-apply: 'inline-block size-4 align-middle';
 			}
+		}
 
+		> div,
+		> p {
 			> li {
-				--at-apply: 'ms-5 list-item list-disc';
+				--at-apply: 'ms-5 list-item list-disc text-netural-300';
 			}
 		}
 
