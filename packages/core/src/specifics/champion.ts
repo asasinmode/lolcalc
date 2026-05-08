@@ -329,8 +329,8 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				masterworkLevel,
 				masterworkItemSlot: self.level.value >= masterworkLevel
-					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 0), 6)
-					: 0,
+					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 1), 6)
+					: 1,
 				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self)),
 				_watchHandles: [watch(self.level, () => {
 					if (self.level.value < self.internalData.value.masterworkLevel) {

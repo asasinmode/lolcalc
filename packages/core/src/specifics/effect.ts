@@ -226,7 +226,7 @@ export const EFFECT_SPECIFICS = {
 		minValue: 0,
 		maxValue: 6,
 		setupData(data): [masterworkSlotIndex: number] {
-			return [clamp(this.minValue!, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.ornnPLivingForge].maxValue!)];
+			return [clamp(this.minValue!, data?.[0] ?? 1, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.ornnPLivingForge].maxValue!)];
 		},
 		isActive(data: [masterworkSlotIndex: number]) {
 			return data[0];
