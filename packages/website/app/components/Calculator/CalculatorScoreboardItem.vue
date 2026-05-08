@@ -1530,7 +1530,8 @@ defineExpose({ el });
 			background-image: linear-gradient(
 				var(--bg-direction, 90deg),
 				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.35) 0%,
-				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.15) 12.5%,
+				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.25) 12.5%,
+				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.2) 20%,
 				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.15) 100%
 			);
 		}
