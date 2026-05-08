@@ -35,6 +35,6 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.magicResist, 52);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 1.33);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 35);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.moveSpeed, 412.5);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.moveSpeed, 413);
 	});
 });

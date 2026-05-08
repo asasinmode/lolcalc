@@ -584,15 +584,6 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					/*
-					 * this is very dubious behavior, subtracting the calculated earlier blackfire torch value so that it doesn't get multiplied by rabadon
-					 * how I suspect the calculation should be done is rabadon is X multiplier, blackfire torch is Y, so
-					 * `finalAp = bonusAp * (1 + X + Y)`
-					 * but this seems like it would make tracking the calculated rabadon/torch's passives' values harder/possibly have to be moved to `calculateStats` and at the moment I want to keep all passive logic inside the specifics
-					 * maybe Vladimir will fuck things up further, consider refactor then
-					 */
-					// calculatedVariables.apMultipliersBase -= calculatedVariables.blackfireTorchBBlaze ?? 0;
-
 					const value = calculatedVariables.apMultipliersBase * (ITEMS as TItems)[ITEM_NAME_TO_ID.rabadon].dataValues.APAmp;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
