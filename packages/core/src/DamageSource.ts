@@ -297,7 +297,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 					}
 				}
 
-				handleMidQuestBoots(this.items.value, this.roleQuest.value);
+				handleRoleQuestItems(this.items.value, this.roleQuest.value);
 			}),
 
 			watch(this.isRanged, (value) => {
@@ -525,7 +525,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 					rv.items.value[i] = item;
 				}
 			}
-			handleMidQuestBoots(rv.items.value, rv.roleQuest.value);
+			handleRoleQuestItems(rv.items.value, rv.roleQuest.value);
 		}
 
 		const runePaths = Object.keys(RUNES.paths);
@@ -733,7 +733,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			}
 		}
 
-		handleMidQuestBoots(this.items.value, this.roleQuest.value);
+		handleRoleQuestItems(this.items.value, this.roleQuest.value);
 	}
 
 	removeItem(index: number): IItem | undefined {
@@ -772,7 +772,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			false,
 			!itemAtSlot.isBoots && fromSlotIndex === 6 ? undefined : fromSlotIndex,
 		);
-		handleMidQuestBoots(this.items.value, this.roleQuest.value);
+		handleRoleQuestItems(this.items.value, this.roleQuest.value);
 	}
 
 	getEffect(abilityId: IGameAbilityId): [IDamageSourceEffect, index: number] | undefined {
@@ -976,7 +976,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	};
 }
 
-function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampionRole): void {
+function handleRoleQuestItems(items: (IItem | undefined)[], roleQuest?: IChampionRole): void {
 	const bootsIndex = items.findIndex(item => item?.isBoots);
 	const boots = items[bootsIndex]!;
 
@@ -985,6 +985,14 @@ function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampion
 			items[bootsIndex] = ITEMS[boots.into[0]!];
 		} else if (roleQuest !== 'mid' && boots.epicness === 7) {
 			items[bootsIndex] = ITEMS[boots.from![0]!];
+		}
+	}
+
+	if (roleQuest && roleQuest !== 'support') {
+		const itemIndexes = items.map((item, index) => item && SUPPORT_ITEMS.includes(item.id) ? index : undefined).filter(index => index !== undefined);
+
+		for (const index of itemIndexes) {
+			items[index] = undefined;
 		}
 	}
 }
