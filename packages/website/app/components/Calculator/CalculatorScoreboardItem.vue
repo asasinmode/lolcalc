@@ -2231,11 +2231,11 @@ defineExpose({ el });
 					}
 				}
 
-				[data-current-health] {
+				> [data-current-health] {
 					--fill-bg: theme('colors.green.500');
 				}
 
-				[data-current-ability-resource] {
+				> [data-current-ability-resource] {
 					--fill-bg: var(--unknown-clr);
 
 					&[data-partype='mana'],
@@ -2525,6 +2525,16 @@ defineExpose({ el });
 							mix-blend-mode: normal;
 						}
 					}
+				}
+			}
+		}
+	}
+
+	#scoreboard > div > ul > [data-scoreboard-item='Belveth'] {
+		> details {
+			> [data-health-ability-resource] {
+				> [data-current-ability-resource] {
+					--fill-bg: theme('colors.purple.500');
 				}
 			}
 		}
