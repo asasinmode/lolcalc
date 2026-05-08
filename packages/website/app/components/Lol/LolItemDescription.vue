@@ -261,7 +261,7 @@ defineExpose({ header });
 		> div,
 		> p {
 			> li {
-				--at-apply: 'ms-5 list-item list-disc text-netural-300';
+				--at-apply: 'text-neutral-300 ms-5 list-item list-disc';
 			}
 		}
 
