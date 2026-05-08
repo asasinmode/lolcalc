@@ -10,7 +10,7 @@ import type { IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune.ts';
 import type { IReplaceGameVariablesRV } from './types';
-import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
+import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ICON_GOLD, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
@@ -1027,8 +1027,18 @@ export function computeItemDescription(
 				STAT_ICON[statName as IItemStat],
 				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
 				name,
-			] as [string, number, string];
+			] as [typeof STAT_ICON[IItemStat], number, string];
 		});
+
+	const gp10 = itemVariableValue('GP10', item, damageSource?.isRanged.value, damageSource);
+	/* should probably handle the array output (value for melee/ranged) but not necessary for now */
+	if (typeof gp10.value === 'number') {
+		stats.push([
+			[ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height],
+			gp10.value,
+			'Gold per 10 seconds',
+		]);
+	}
 
 	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, replaceOptions);
 	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, replaceOptions);
@@ -1448,7 +1458,7 @@ export interface IComputedAbilityDescription {
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
 	item: IItem;
-	stats: [iconName: string, value: number, name: string][];
+	stats: [iconName: typeof STAT_ICON[IItemStat], value: number, name: string][];
 	variables: ReturnType<typeof replaceGameVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
 }

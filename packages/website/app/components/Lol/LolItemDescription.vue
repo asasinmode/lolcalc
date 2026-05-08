@@ -98,9 +98,9 @@ defineExpose({ header });
 		<ul>
 			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
 				<img
-					:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
-					width="20"
-					height="20"
+					:src="typeof icon === 'string' ? `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png` : icon[0]"
+					:width="typeof icon === 'string' ? 20 : icon[1]"
+					:height="typeof icon === 'string' ? 20 : (icon[2] ?? icon[1])"
 					aria-hidden="true"
 				>
 				<span>{{ value }}</span>
