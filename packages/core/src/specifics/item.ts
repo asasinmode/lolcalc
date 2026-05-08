@@ -165,6 +165,11 @@ export const ITEM_SPECIFICS = {
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 		},
+		dynamicVariables() {
+			return {
+				f2: 0,
+			};
+		},
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
 		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.liandry].dataValues.MaxStackNumber,
@@ -242,6 +247,11 @@ export const ITEM_SPECIFICS = {
 				},
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
 			},
+		},
+		dynamicVariables(self) {
+			return {
+				f1: self.stats.value.variables.riftmakerVoidInfusion,
+			};
 		},
 	},
 	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
