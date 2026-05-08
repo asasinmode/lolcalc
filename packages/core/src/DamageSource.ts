@@ -262,18 +262,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 				this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 			}),
 
-			watch(() => [this.stats.value?.total.hp, this.stats.value?.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
-				if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
-					this.currentHealth.value = this.stats.value?.total.hp ?? 0;
-				} else {
-					this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.total.hp ?? 0);
+			watch(() => [this.maxHealth.value, this.maxAbilityResource.value], ([currentMaxHp, currentMaxAbilityResource], previousValues) => {
+				if (this.listedChampion.value?.id === this.champion.value?.id) {
+					if ((!previousValues && !this.currentHealth.value) || this.currentHealth.value === previousValues?.[0]) {
+						this.currentHealth.value = currentMaxHp ?? 0;
+					} else {
+						this.currentHealth.value = Math.min(this.currentHealth.value, currentMaxHp ?? 0);
+					}
+					if ((!previousValues && !this.currentAbilityResource.value) || this.currentAbilityResource.value === previousValues?.[1]) {
+						this.currentAbilityResource.value = currentMaxAbilityResource ?? 0;
+					} else {
+						this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
+					}
 				}
-				if (previousTotalAbilityResource && this.currentAbilityResource.value === previousTotalAbilityResource) {
-					this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
-				} else {
-					this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.maxAbilityResource.value);
-				}
-			}),
+			}, { immediate: true }),
 
 			watch(this.roleQuest, (value) => {
 				if (value !== 'top' && this.level.value > 18) {
@@ -352,7 +354,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			/* not cloned, same as `internalData` */
 			appliedEffects: this.appliedEffects.value,
 			...overrides,
-		});
+		}, true);
 	}
 
 	clear(): void {
