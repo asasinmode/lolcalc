@@ -3,7 +3,7 @@ import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
 import type { IChampion } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, TAbilityType } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import type { WatchHandle } from 'vue';
 import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
@@ -11,7 +11,8 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { roundVariable } from '@lolcalc/shared/utils';
 
 const props = defineProps<{
 	damageSources: DamageSource[];
@@ -182,7 +183,7 @@ interface IComputedSectionRowColumn {
 	isUnknown?: boolean;
 	numberValue?: number;
 	value: string | number;
-	comparisonMap: Record<string, 'higher' | 'lower'>;
+	comparisonMap: Record<string, number>;
 }
 
 const customTotalRows = ref<string[]>([]);
@@ -668,11 +669,11 @@ function recalculateResultCellComparisonNumbers() {
 
 function calculateComputedSectionComparisonMaps(section: IComputedSection) {
 	for (const row of section.rows.values()) {
-		calculateComputedRowComparisonMap(row);
+		calculateComputedRowComparisonMap(row, section.sectionId);
 	}
 }
 
-function calculateComputedRowComparisonMap(row: IComputedSectionRow) {
+function calculateComputedRowComparisonMap(row: IComputedSectionRow, sectionId: string) {
 	const columns = Array.from(row.columns.entries());
 
 	for (const [idA, colA] of columns) {
@@ -686,11 +687,8 @@ function calculateComputedRowComparisonMap(row: IComputedSectionRow) {
 			const a = colA.numberValue;
 			const b = colB.numberValue;
 			if (a !== undefined && b !== undefined) {
-				if (a > b) {
-					map[idB] = 'higher';
-				} else if (a < b) {
-					map[idB] = 'lower';
-				}
+				const meta = sectionId === 'a-stats' ? CHAMPION_STAT_META[row.rowId as IChampionStatName] : undefined;
+				map[idB] = roundVariable((a - b) * (meta?.isPercentage ? 100 : 1), meta?.isPercentage ? 4 : 1);
 			}
 		}
 
@@ -1079,7 +1077,7 @@ function recomputeCustomTotalRow() {
 			computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow, column),
 		);
 	}
-	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow);
+	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, CUSTOM_TOTAL_SECTION_ID);
 }
 
 const colW = computed(() => {
@@ -1520,11 +1518,11 @@ defineExpose({
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 							:key="cell.key"
-							:class="[{
+							:class="{
 								unknown: cell.computedColumn.isUnknown,
 								irrelevant: cell.computedColumn.isIrrelevant,
 								highlighted: highlightedColumns[cellIndex],
-							}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
+							}"
 							:style="columnDamageSourceColors[cellIndex]"
 							:data-drop-direction="columnDragDropIndex === cellIndex ? 'before' : columnDragDropIndex === cellIndex + 1 ? 'after' : undefined"
 							@mouseenter="highlightColumnIdSources(cell.computedColumn.columnId)"
@@ -1534,7 +1532,14 @@ defineExpose({
 							@dragleave="onResultColumnDragleave"
 							@drop="onResultColumnDrop($event, cellIndex)"
 						>
-							<span>{{ cell.computedColumn.value }}</span>
+							<span
+								v-bind="highlightedColumnId && (cell.computedColumn.comparisonMap[highlightedColumnId] !== 0) ? {
+									[cell.computedColumn.comparisonMap[highlightedColumnId!]! < 0 ? 'data-lower' : 'data-higher']:
+										cell.computedColumn.comparisonMap[highlightedColumnId!],
+								} : undefined"
+							>
+								{{ cell.computedColumn.value }}
+							</span>
 						</td>
 					</tr>
 				</tbody>
@@ -2069,19 +2074,19 @@ defineExpose({
 						}
 
 						> td:not(.irrelevant) {
-							&.higher {
+							&:has(> span[data-higher]) {
 								--at-apply: 'text-green-400';
 
 								> span::after {
-									content: '▲';
+									content: '+' attr(data-higher);
 								}
 							}
 
-							&.lower {
+							&:has(> span[data-lower]) {
 								--at-apply: 'text-red-400';
 
 								> span::after {
-									content: '▼';
+									content: attr(data-lower);
 								}
 							}
 						}
@@ -2143,7 +2148,7 @@ defineExpose({
 							--at-apply: 'relative';
 
 							&::after {
-								--at-apply: 'absolute text-xs top-1/2 -translate-y-1/2 -end-4';
+								--at-apply: 'absolute text-xs top-1/2 -translate-y-1/2 -end-1.5 translate-x-full whitespace-nowrap brightness-70';
 							}
 						}
 					}
