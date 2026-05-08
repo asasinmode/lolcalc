@@ -3,7 +3,6 @@ import type { DamageSource } from '../DamageSource.ts';
 import type { IReplaceGameVariablesRV } from '../types';
 import { ICON_ON_HIT_IMG, PATCH_VERSION } from '@lolcalc/data';
 import { STAT_ICON } from '@lolcalc/data/meta.ts';
-import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
 type IWithDynamic<T> = T & {

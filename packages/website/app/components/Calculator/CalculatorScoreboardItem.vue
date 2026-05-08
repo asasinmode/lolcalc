@@ -1704,14 +1704,15 @@ defineExpose({ el });
 			--ms: calc(5 * var(--spacing));
 
 			> li {
-				--at-apply: 'pe-0.5';
+				--at-apply: 'pe-[--pe]';
+				--pe: calc(0.5 * var(--spacing));
 
 				&:nth-child(6) {
 					--at-apply: 'pe-0';
 				}
 
 				&:last-child {
-					--at-apply: 'pe-0 ps-0.5';
+					--at-apply: 'pe-0 ps-[--pe]';
 				}
 
 				> * {
@@ -1765,7 +1766,7 @@ defineExpose({ el });
 					}
 
 					> span:last-child {
-						--at-apply: 'absolute text-xs bottom-0.5 end-0.25 leading-[1] pointer-events-none';
+						--at-apply: 'absolute text-xs bottom-0.5 end-0.25 leading-[1] pointer-events-none z-2';
 						paint-order: stroke fill;
 						-webkit-text-stroke: black 0.2em;
 
@@ -2565,6 +2566,17 @@ defineExpose({ el });
 
 		> ul {
 			--at-apply: 'ms-[--me] me-[--ms] justify-self-end flex-row-reverse';
+
+			> li {
+				--at-apply: 'ps-[--pe] pe-0';
+
+				&:nth-child(6) {
+					--at-apply: 'ps-0';
+				}
+
+				&:last-child {
+					--at-apply: 'ps-0 pe-[--pe]';
+				}
 		}
 
 		> details {
