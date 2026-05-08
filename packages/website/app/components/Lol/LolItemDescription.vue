@@ -2,7 +2,7 @@
 import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
-import { PATCH_VERSION } from '@lolcalc/data';
+import { ICON_GOLD_SRC, PATCH_VERSION } from '@lolcalc/data';
 
 const props = defineProps<IItemDescriptionProps>();
 
@@ -71,7 +71,7 @@ defineExpose({ header });
 			<span>Sells for:</span>
 			<img
 				v-show="computedDescription?.item"
-				:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
+				:src="ICON_GOLD_SRC"
 				width="32"
 				height="28"
 				alt="gold coins"

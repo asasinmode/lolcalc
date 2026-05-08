@@ -212,3 +212,5 @@ export const ICON_COOLDOWN_IMG: string = `<img src="https://raw.communitydragon.
 export const ICON_ON_HIT_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 export const ICON_RUNE_SRC: string = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
+
+export const ICON_GOLD_SRC: string = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`;
