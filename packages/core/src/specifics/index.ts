@@ -1,6 +1,6 @@
 import type { IChampionId } from '@lolcalc/data/types';
+import type { TItemNameToId } from '@lolcalc/shared';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
-import type { TItemNameToId } from '../meta.ts';
 import type { IChampionSpecific, TChampionSpecifics } from './champion';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';

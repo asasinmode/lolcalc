@@ -255,6 +255,8 @@ export const ITEM_NAME_TO_ID = {
 	bountyOfWorlds: '3867',
 } as const;
 
+export type TItemNameToId = typeof ITEM_NAME_TO_ID;
+
 export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.diademOfSongs,
 	ITEM_NAME_TO_ID.slightlyMagicalFootwear,
