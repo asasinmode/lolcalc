@@ -250,6 +250,9 @@ export const ITEM_NAME_TO_ID = {
 	solsticeSleigh: '3876',
 	bloodsong: '3877',
 	rabadon: '3089',
+	worldAtlas: '3865',
+	runicCompass: '3866',
+	bountyOfWorlds: '3867',
 } as const;
 
 export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
@@ -258,6 +261,8 @@ export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.seraphsEmbrace,
 	ITEM_NAME_TO_ID.muramana,
 	ITEM_NAME_TO_ID.fimbulwinter,
+	ITEM_NAME_TO_ID.runicCompass,
+	ITEM_NAME_TO_ID.bountyOfWorlds,
 ];
 
 export const RANGED_ONLY_ITEM_IDS: string[] = [ITEM_NAME_TO_ID.runaan];

@@ -377,8 +377,8 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 						sell: gold.sell,
 					},
 					image: image.full,
-					into,
-					from,
+					into: into?.length ? into : undefined,
+					from: from?.length ? from : undefined,
 					...(tags.includes('Boots') ? { isBoots: true } : undefined),
 					...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
 				}];
@@ -520,6 +520,14 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				...acc,
 				[CATEGORY_NUMBER_TO_NAME[categoryNumber]!]: true,
 			}), {} as Partial<Record<IItemCategory, boolean>>);
+	}
+
+	itemData.data[ITEM_NAME_TO_ID.worldAtlas].into = [ITEM_NAME_TO_ID.runicCompass];
+	itemData.data[ITEM_NAME_TO_ID.runicCompass].from = [ITEM_NAME_TO_ID.worldAtlas];
+	itemData.data[ITEM_NAME_TO_ID.runicCompass].into = [ITEM_NAME_TO_ID.bountyOfWorlds];
+	itemData.data[ITEM_NAME_TO_ID.bountyOfWorlds].from = [ITEM_NAME_TO_ID.runicCompass];
+	for (const itemId of [ITEM_NAME_TO_ID.celestialOpposition, ITEM_NAME_TO_ID.dreamMaker, ITEM_NAME_TO_ID.zazZakRealmspike, ITEM_NAME_TO_ID.solsticeSleigh, ITEM_NAME_TO_ID.bloodsong]) {
+		(itemData.data[itemId] as IItem).from = undefined;
 	}
 
 	await fs.writeFile(itemFilePath, stringifyObject(itemData));

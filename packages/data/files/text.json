@@ -1379,6 +1379,39 @@
 				"extended": "<li>Damaging Abilities and Attacks against champions or structures grant <gold>@lolcalcChampRange@ gold</gold>;<li>Killing a minion grants you <gold>@ExecuteMinionGold@ gold</gold> and the nearest allied champion the kill gold.",
 				"footerLeft": "Quest gold: <attention>@f4@</attention>/@QuestGoldRequirement@"
 			},
+			"3866": {
+				"subtitleRight": "Unique: Starter",
+				"tooltipShop": [
+					[
+						"<passive>Support Quest</passive>",
+						"Earn <keywordMajor>@QuestGoldRequirement@</keywordMajor> gold from this item to transform it into <rarityGeneric>Bounty of Worlds</rarityGeneric>."
+					],
+					[
+						"<passive>Shared Riches</passive> %i:cooldown% (@ChargeCooldown@s, max @MaxCharges@ charges)",
+						"While near an ally champion, damage enemy champions or kill minions to gain gold."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
+					]
+				],
+				"extended": "<li>Damaging Abilities and Attacks against champions or buildings grant <keywordMajor>@lolcalcChampRange@</keywordMajor> gold;<li>Killing a minion grants you <keywordMajor>@ExecuteMinionGold@</keywordMajor> gold and the nearest allied champion the kill gold.",
+				"footerLeft": "Quest gold: <attention>@f4@</attention>/@QuestGoldRequirement@<br>Current Stealth Wards placed: <attention>@f5@/@f6@</attention>"
+			},
+			"3867": {
+				"subtitleRight": "Unique: Support",
+				"tooltipShop": [
+					[
+						"<passive>Upgrade</passive>",
+						"This item can be upgraded into <rarityLegendary>Bloodsong</rarityLegendary>, <rarityLegendary>Celestial Opposition</rarityLegendary>, <rarityLegendary>Dream Maker</rarityLegendary>, <rarityLegendary>Zaz'Zak's Realmspike</rarityLegendary>, or <rarityLegendary>Solstice Sleigh</rarityLegendary> for free."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
+					]
+				],
+				"footerLeft": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention>"
+			},
 			"3869": {
 				"subtitleLeft": "Anti-Burst",
 				"subtitleRight": "Unique: Support",
