@@ -64,7 +64,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	runesInvalid = computed((): boolean => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	currentHealth: Ref<number>;
-	maxHealth = computed((): number => Math.round(this.stats.value?.total.hp ?? 1));
+	maxHealth = computed((): number => Math.round(this.stats.value?.total.hp ?? 0));
 	currentAbilityResource: Ref<number>;
 	// TODO make available under dynamic variables `@AbilityResourceName@`
 	abilityResourceName = computed((): string => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
@@ -153,7 +153,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 
 	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
-	}) = {}) {
+	}) = {}, cloned = false) {
 		const hue = (damageSourcesCount++ * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
@@ -178,8 +178,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 				...overrides.runes?.shards,
 			},
 		});
-		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.total.hp ?? 0));
-		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.total.mana ?? 0));
+		this.currentHealth = ref(overrides.currentHealth ?? 0);
+		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? 0);
 		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...overrides.abilityLevels });
 		this.abilityVariantsIndexes = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...overrides.abilityVariants });
 		this.dragonStacks = ref(overrides.dragonStacks ?? Array.from({ length: 4 }));
@@ -247,12 +247,16 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 					return;
 				}
 
-				this.currentHealth.value = this.stats.value?.total.hp ?? 0;
-				this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
+				if (cloned) {
+					cloned = false;
+				} else {
+					this.currentHealth.value = this.stats.value?.total.hp ?? 0;
+					this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
 
-				const level = c?.id === 'TargetDummy' ? 1 : 0;
-				this.abilityLevels.value = { q: level, w: level, e: level, r: level };
-				this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+					const level = c?.id === 'TargetDummy' ? 1 : 0;
+					this.abilityLevels.value = { q: level, w: level, e: level, r: level };
+					this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+				}
 
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this)) ?? {};
 				this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
