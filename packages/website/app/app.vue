@@ -4,7 +4,7 @@ import type { IChampionStatName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
-import { ICON_GOLD_SRC, PATCH_VERSION } from '@lolcalc/data';
+import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { STAT_ICON } from '@lolcalc/data/meta';
 import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
@@ -87,11 +87,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 			{
 				id: 'eqValue',
 				name: 'Inventory Value',
-				image: {
-					src: ICON_GOLD_SRC,
-					width: 32,
-					height: 28,
-				},
+				image: ICON_GOLD,
 			},
 		])),
 		getCellValue(_section, rowId, source, _target) {

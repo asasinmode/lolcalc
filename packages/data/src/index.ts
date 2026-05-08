@@ -213,4 +213,8 @@ export const ICON_ON_HIT_IMG: string = `<img src="https://raw.communitydragon.or
 
 export const ICON_RUNE_SRC: string = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
 
-export const ICON_GOLD_SRC: string = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`;
+export const ICON_GOLD = {
+	src: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
+	width: 32,
+	height: 28,
+};

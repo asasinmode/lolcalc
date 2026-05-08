@@ -2,7 +2,7 @@
 import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
-import { ICON_GOLD_SRC, PATCH_VERSION } from '@lolcalc/data';
+import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 
 const props = defineProps<IItemDescriptionProps>();
 
@@ -71,9 +71,7 @@ defineExpose({ header });
 			<span>Sells for:</span>
 			<img
 				v-show="computedDescription?.item"
-				:src="ICON_GOLD_SRC"
-				width="32"
-				height="28"
+				v-bind="ICON_GOLD"
 				alt="gold coins"
 				loading="lazy"
 			>

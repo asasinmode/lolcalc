@@ -5,7 +5,7 @@ import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IItemCategory } from '@lolcalc/shared';
 import { isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { calculateItemDiscount, itemBuyability } from '@lolcalc/core/specifics/item';
-import { ICON_GOLD_SRC, ITEMS, PATCH_VERSION, UI } from '@lolcalc/data';
+import { ICON_GOLD, ITEMS, PATCH_VERSION, UI } from '@lolcalc/data';
 import { ITEM_SHOP_STAT_FILTERS } from '@lolcalc/data/meta';
 import { ALL_ITEM_CATEGORIES, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
@@ -901,9 +901,7 @@ defineExpose({
 			</section>
 			<p>
 				<img
-					:src="ICON_GOLD_SRC"
-					width="32"
-					height="28"
+					v-bind="ICON_GOLD"
 					alt="gold coins"
 					loading="lazy"
 				>

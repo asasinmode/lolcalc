@@ -12,7 +12,7 @@ import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/ch
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune';
 import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD_SRC, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, UI } from '@lolcalc/data';
+import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
 import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
@@ -1031,9 +1031,7 @@ defineExpose({ el });
 		<button data-select-items="" class="other-ui-btn" @click="selectItems(value)">
 			items
 			<img
-				:src="ICON_GOLD_SRC"
-				width="32"
-				height="28"
+				v-bind="ICON_GOLD"
 				aria-hidden="true"
 				loading="lazy"
 			>
