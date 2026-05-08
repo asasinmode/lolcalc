@@ -1,5 +1,6 @@
 import type { TItems } from '@lolcalc/data';
 import type { IItem, IShopItem } from '@lolcalc/data/types';
+import type { IInternalItemDataOf } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEM_IDS } from '@lolcalc/shared';
@@ -95,8 +96,13 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }) {
-					itemPassivesStats.abilityPower += self.internalItemData.value.glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.APPerGlory;
+				handler(self, { itemPassivesStats, baseWithFlatItemMoveSpeed }) {
+					const { glory } = self.internalItemData.value as IInternalItemDataOf<'mejai'>;
+					itemPassivesStats.abilityPower += glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.APPerGlory;
+					if (glory >= (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.GloryThreshold) {
+						const bonusMs = baseWithFlatItemMoveSpeed * (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.MoveSpeedMod;
+						itemPassivesStats.moveSpeed += bonusMs;
+					}
 				},
 			},
 		},

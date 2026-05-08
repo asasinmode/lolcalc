@@ -11,7 +11,7 @@ test.before(() => {
 });
 
 test('16.9.1 Ahri, shards 100', async (t) => {
-	await t.test('mejai, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
+	await t.test('lvl 18 | mejai, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ahri', {
 			level: 18,
 			runes: {
@@ -29,7 +29,12 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			} satisfies IInternalItemDataOf<'mejai' | 'blackfireTorch' | 'guinsoo'>,
 		});
 
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 1.33);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackDamage, 134);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 602);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.armor, 92);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.magicResist, 52);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 1.33);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 35);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.moveSpeed, 412.5);
 	});
 });

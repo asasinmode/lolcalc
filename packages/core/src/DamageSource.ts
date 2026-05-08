@@ -1460,6 +1460,7 @@ export interface ICalculateChampionStatsHookSource {
 		itemBaseStats: IChampionStats;
 		itemPassivesStats: IChampionStats;
 		baseStats: IChampionStats;
+		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, args: {
