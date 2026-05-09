@@ -28,21 +28,21 @@ import { replaceStringtableVariables } from './variables/stringtable.ts';
 
 export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
-interface IOverrides<Id extends IChampionId | undefined = undefined> {
-	champion: UnwrapRef<IDamageSource['listedChampion']>;
-	level: UnwrapRef<IDamageSource['level']>;
-	items: UnwrapRef<IDamageSource['items']>;
-	runes: Partial<UnwrapRef<IDamageSource['runes']>>;
-	abilityLevels: Partial<UnwrapRef<IDamageSource['abilityLevels']>>;
-	abilityVariants: Partial<UnwrapRef<IDamageSource['abilityVariantsIndexes']>>;
-	currentHealth: UnwrapRef<IDamageSource['currentHealth']>;
-	currentAbilityResource: UnwrapRef<IDamageSource['currentAbilityResource']>;
-	dragonStacks: UnwrapRef<IDamageSource['dragonStacks']>;
-	dragonSoul: UnwrapRef<IDamageSource['dragonSoul']>;
-	roleQuest: UnwrapRef<IDamageSource['roleQuest']>;
-	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
-	internalItemData: UnwrapRef<IDamageSource<Id>['internalItemData']>;
-	appliedEffects: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
+export interface IOverrides<Id extends IChampionId | undefined = undefined> {
+	champion?: UnwrapRef<IDamageSource['listedChampion']>;
+	level?: UnwrapRef<IDamageSource['level']>;
+	items?: UnwrapRef<IDamageSource['items']>;
+	runes?: Partial<UnwrapRef<IDamageSource['runes']>>;
+	abilityLevels?: Partial<UnwrapRef<IDamageSource['abilityLevels']>>;
+	abilityVariants?: Partial<UnwrapRef<IDamageSource['abilityVariantsIndexes']>>;
+	currentHealth?: UnwrapRef<IDamageSource['currentHealth']>;
+	currentAbilityResource?: UnwrapRef<IDamageSource['currentAbilityResource']>;
+	dragonStacks?: UnwrapRef<IDamageSource['dragonStacks']>;
+	dragonSoul?: UnwrapRef<IDamageSource['dragonSoul']>;
+	roleQuest?: UnwrapRef<IDamageSource['roleQuest']>;
+	internalData?: UnwrapRef<IDamageSource<Id>['internalData']>;
+	internalItemData?: UnwrapRef<IDamageSource<Id>['internalItemData']>;
+	appliedEffects?: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
 }
 
 let damageSourcesCount = 0;
@@ -151,7 +151,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 	 */
 	fromStringifiedInternalData: any[] | undefined;
 
-	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
+	constructor(overrides: (Omit<IOverrides<Id>, 'champion'> & {
 		champion?: { id: Id } & IListedChampion;
 	}) = {}, cloned = false) {
 		const hue = (damageSourcesCount++ * 137.508) % 360;
@@ -334,7 +334,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		markRaw(this);
 	}
 
-	clone(overrides: Partial<IOverrides> = {}): DamageSource<Id> {
+	clone(overrides: IOverrides = {}): DamageSource<Id> {
 		return new DamageSource<Id>({
 			champion: this.listedChampion.value,
 			level: this.level.value,

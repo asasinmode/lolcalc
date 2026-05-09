@@ -1,3 +1,4 @@
+import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IChampion, IChampionId, IItem } from '@lolcalc/data/types';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { CHAMPIONS, ITEMS } from '@lolcalc/data';
@@ -13,7 +14,7 @@ const overriden: {
 	items: string[];
 } = { champion: [], items: [] };
 
-export async function setupDamageSource(fixture: IPatchOverridesFixture, championId: IChampionId, overrides: ConstructorParameters<typeof DamageSource>[0]): Promise<DamageSource> {
+export async function setupDamageSource<T extends IChampionId>(fixture: IPatchOverridesFixture, championId: T, overrides: IOverrides<T> = {}): Promise<DamageSource<T>> {
 	const rv = await new DamageSource({ champion: CHAMPIONS[championId], ...overrides }).await();
 	Object.assign(rv.champion.value!, fixture.champions[championId]);
 

@@ -1,4 +1,5 @@
-import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IOverrides } from '@lolcalc/core/DamageSource';
+import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS } from '@lolcalc/data';
@@ -11,16 +12,20 @@ test.before(() => {
 });
 
 test('16.9.1 Ahri, shards 100', async (t) => {
+	const sourceCommon: IOverrides<'Ahri'> = {
+		level: 18,
+		runes: {
+			shards: {
+				offensive: 'attackspeed',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+	};
+
 	await t.test('lvl 18 | mejai, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ahri', {
-			level: 18,
-			runes: {
-				shards: {
-					offensive: 'attackspeed',
-					flex: 'adaptive',
-					defensive: 'health',
-				},
-			},
+			...sourceCommon,
 			items: [ITEMS[ITEM_NAME_TO_ID.mejai], ITEMS[ITEM_NAME_TO_ID.blackfireTorch], ITEMS[ITEM_NAME_TO_ID.berserkerGreaves], ITEMS[ITEM_NAME_TO_ID.guinsoo], ITEMS[ITEM_NAME_TO_ID.riftmaker], ITEMS[ITEM_NAME_TO_ID.rabadon]],
 			internalItemData: {
 				glory: 20,
@@ -42,14 +47,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 
 	await t.test('lvl 18 | archangel, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ahri', {
-			level: 18,
-			runes: {
-				shards: {
-					offensive: 'attackspeed',
-					flex: 'adaptive',
-					defensive: 'health',
-				},
-			},
+			...sourceCommon,
 			items: [ITEMS[ITEM_NAME_TO_ID.archangelsStaff], ITEMS[ITEM_NAME_TO_ID.blackfireTorch], ITEMS[ITEM_NAME_TO_ID.berserkerGreaves], ITEMS[ITEM_NAME_TO_ID.guinsoo], ITEMS[ITEM_NAME_TO_ID.riftmaker], ITEMS[ITEM_NAME_TO_ID.rabadon]],
 			internalItemData: {
 				manaflow: 10,
@@ -64,14 +62,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 
 	await t.test('lvl 18 | seraph, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ahri', {
-			level: 18,
-			runes: {
-				shards: {
-					offensive: 'attackspeed',
-					flex: 'adaptive',
-					defensive: 'health',
-				},
-			},
+			...sourceCommon,
 			items: [ITEMS[ITEM_NAME_TO_ID.seraphsEmbrace], ITEMS[ITEM_NAME_TO_ID.blackfireTorch], ITEMS[ITEM_NAME_TO_ID.berserkerGreaves], ITEMS[ITEM_NAME_TO_ID.guinsoo], ITEMS[ITEM_NAME_TO_ID.riftmaker], ITEMS[ITEM_NAME_TO_ID.rabadon]],
 			internalItemData: {
 				bBlaze: 1,
@@ -85,21 +76,25 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 });
 
 test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
-	await t.test('lvl 1 | seraph', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
-			level: 1,
-			roleQuest: 'bot',
-			runes: {
-				shards: {
-					offensive: 'adaptive',
-					flex: 'healthscaling',
-					defensive: 'health',
-				},
+	const sourceCommon: IOverrides<'Ezreal'> = {
+		roleQuest: 'bot',
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'healthscaling',
+				defensive: 'health',
 			},
+		},
+	};
+
+	await t.test('lvl 1 | archangel', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			...sourceCommon,
+			level: 1,
 			items: [ITEMS[ITEM_NAME_TO_ID.archangelsStaff]],
 			internalData: {
 				passiveStacks: 5,
-			} satisfies IInternalDataOf<'Ezreal'>,
+			},
 			internalItemData: {
 				manaflow: 20,
 			} satisfies IInternalItemDataOf<'archangelsStaff'>,
