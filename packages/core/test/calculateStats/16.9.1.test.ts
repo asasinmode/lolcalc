@@ -1,4 +1,4 @@
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS } from '@lolcalc/data';
@@ -83,4 +83,32 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 2443);
 	});
 });
+
+test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
+	await t.test('lvl 1 | seraph', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			level: 1,
+			roleQuest: 'bot',
+			runes: {
+				shards: {
+					offensive: 'adaptive',
+					flex: 'healthscaling',
+					defensive: 'health',
+				},
+			},
+			items: [ITEMS[ITEM_NAME_TO_ID.archangelsStaff]],
+			internalData: {
+				passiveStacks: 5,
+			} satisfies IInternalDataOf<'Ezreal'>,
+			internalItemData: {
+				manaflow: 20,
+			} satisfies IInternalItemDataOf<'archangelsStaff'>,
+		});
+
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 85);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 0.938);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 25);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.hp, 675);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 995);
+	});
 });

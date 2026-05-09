@@ -179,6 +179,16 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS(self)),
 			};
 		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats, baseStats }) {
+					const { passiveStacks } = (self as DamageSource<'Ezreal'>).internalData.value;
+					const bonusAttackSpeedPercent = passiveStacks * (self.champion.value as typeof IEzreal).abilities.passive.variants[0]!.dataValues.AttackSpeedPerStack[1]!;
+					championPassiveStats.bonusAttackSpeedPercent = bonusAttackSpeedPercent;
+					championPassiveStats.attackSpeed = bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+				},
+			},
+		},
 	},
 	Garen: {
 		setupData(self): { isPassiveActive: number } {

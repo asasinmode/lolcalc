@@ -123,12 +123,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}
 	calculatedVariables.apMultipliersBase += runeShardStats.abilityPower ?? 0;
 
-	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
-		([statName, statValue]) => [
-			statName,
-			statValue + (runeShardStats[statName as IChampionStatName] ?? 0),
-		],
-	)) as IChampionStats;
+	const championPassiveStats: Partial<IChampionStats> = {};
+	if (source.calculateStatsHooks.all.value.onChampionPassive) {
+		for (const hook of source.calculateStatsHooks.all.value.onChampionPassive) {
+			hook(source, { championPassiveStats, baseStats }, { calculatedVariables, miscDebug });
+		}
+	}
 
 	if (source.calculateStatsHooks.all.value.preBonus) {
 		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
@@ -136,14 +136,25 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
+	/* attack speed from level counts towards bonus */
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
-		bonusStats[stat as IChampionStatName]! += itemTotalStats[stat as IChampionStatName] + (runeShardStats[stat as IChampionStatName] ?? 0);
+		bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
+			+ itemTotalStats[stat as IChampionStatName]
+			+ (championPassiveStats[stat as IChampionStatName] ?? 0);
 	}
+
+	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
+		([statName, statValue]) => [
+			statName,
+			statValue + (runeShardStats[statName as IChampionStatName] ?? 0),
+		],
+	)) as IChampionStats;
 
 	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
-		+ (itemTotalStats[statName as IChampionStatName] || 0)],
+		+ (championPassiveStats[statName as IChampionStatName] ?? 0)
+		+ (itemTotalStats[statName as IChampionStatName] ?? 0)],
 	)) as IChampionStats;
 
 	// TODO figure out if its ok to do it
@@ -161,6 +172,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemBase: itemBaseStats,
 		itemPassive: itemPassivesStats,
 		itemTotal: itemTotalStats,
+		championPassive: championPassiveStats,
 		bonus: bonusStats,
 		total: totalStats,
 		meta: {

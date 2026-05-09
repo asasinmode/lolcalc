@@ -53,6 +53,8 @@ export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySp
 
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
+export type IInternalDataOf<Champion extends keyof TChampionSpecifics> = IGameAbilityData<any, (typeof CHAMPION_SPECIFICS)[Champion]>;
+
 export type IInternalItemDataOf<K extends keyof TItemNameToId>
 	= K extends any
 		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>

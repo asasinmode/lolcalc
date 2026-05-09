@@ -1502,6 +1502,11 @@ export interface ICalculateChampionStatsHookSource {
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
+	/** runs after creating empty `championPassiveStats` */
+	onChampionPassive?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+		baseStats: IChampionStats;
+		championPassiveStats: Partial<IChampionStats>;
+	}) => void>;
 	/** runs before totalling all stats to total bonus */
 	preBonus?: ICalculateChampionStatsHook<(self: DamageSource, args: {
 		runeShardStats: Partial<IChampionStats>;

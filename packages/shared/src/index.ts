@@ -41,6 +41,8 @@ export interface IStatsCalculationResult {
 	itemPassive: IChampionStats;
 	/** sum of `itemBase` and `itemPassive` */
 	itemTotal: IChampionStats;
+	/** stats from champion's passive */
+	championPassive: Partial<IChampionStats>;
 	bonus: IChampionStats;
 	total: IChampionStats;
 	meta: {
@@ -257,6 +259,7 @@ export const ITEM_NAME_TO_ID = {
 	worldAtlas: '3865',
 	runicCompass: '3866',
 	bountyOfWorlds: '3867',
+	overlordsBloodmail: '2501',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
