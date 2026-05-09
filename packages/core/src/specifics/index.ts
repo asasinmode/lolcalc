@@ -1,7 +1,6 @@
-import type { IChampionId } from '@lolcalc/data/types';
 import type { TItemNameToId } from '@lolcalc/shared';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
-import type { IChampionSpecific, TChampionSpecifics } from './champion';
+import type { IHypotheticalChampionSpecifics, TChampionSpecifics } from './champion';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import { ABILITY_TYPE } from '@lolcalc/shared';
@@ -13,7 +12,7 @@ export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, w
 	const specific = abilityId.type === ABILITY_TYPE.item
 		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
 		: abilityId.type === ABILITY_TYPE.champion
-			? (CHAMPION_SPECIFICS as Partial<Record<IChampionId, IChampionSpecific>>)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
+			? (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
 			: abilityId.type === ABILITY_TYPE.effect
 				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
 				: undefined;

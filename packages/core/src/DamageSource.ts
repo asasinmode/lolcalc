@@ -47,7 +47,7 @@ export interface IOverrides<Id extends IChampionId | undefined = undefined> {
 
 let damageSourcesCount = 0;
 
-export class DamageSource<Id extends IChampionId | undefined = any> implements IDamageSource<Id> {
+export class DamageSource<Id extends IChampionId | undefined = any> {
 	id: string;
 	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
@@ -226,7 +226,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 						));
 					}
 
-					this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this)) || {};
+					this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) ?? {};
 
 					const internalDataKeys = Object.keys(this.internalData.value).filter(key => !key.startsWith('_'));
 					if (internalDataKeys.length && this.fromStringifiedInternalData.length) {
@@ -239,7 +239,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 						for (const unwatch of this.internalData.value?._watchHandles || []) {
 							unwatch();
 						}
-						this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this)) || {};
+						this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) || {};
 						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 					}
 
@@ -258,7 +258,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 					this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 				}
 
-				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this)) ?? {};
+				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any)) ?? {};
 				this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 			}),
 
@@ -847,7 +847,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			let index = -1;
 
 			if (this.champion.value?.id === 'Ornn') {
-				if (this.level.value >= (this as DamageSource<'Ornn'>).internalData.value.masterworkLevel) {
+				if (this.level.value >= (this as DamageSource<'Ornn'>).internalData.value._masterworkLevel) {
 					index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
 				}
 			} else {
@@ -1409,13 +1409,13 @@ export interface IDamageSourceInternalDataBase {
 	_watchHandles?: WatchHandle[];
 }
 
-export interface IDamageSourceInternalDataProvider {
+export interface IDamageSourceInternalDataProvider<Id extends IChampionId | undefined = undefined> {
 	/**
 	 * returns the `internalData.value` for specific `DamageSource`'s champion
 	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
 	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
 	 */
-	setupData: (self: DamageSource) => any;
+	setupData: (self: DamageSource<Id>) => any;
 }
 
 export interface IDamageSourceInternalItemDataProvider {
@@ -1435,7 +1435,7 @@ export type IProviderGroupInternalItemData = {
 	internalDataProperties?: never;
 } | IDamageSourceInternalItemDataProvider;
 
-export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
+export type IProviderGroupDataSetup<Id extends IChampionId | undefined = undefined> = { setupData?: never } | IDamageSourceInternalDataProvider<Id>;
 
 type IPossibleDynamicVariables = Record<string, (string | number)[]>;
 

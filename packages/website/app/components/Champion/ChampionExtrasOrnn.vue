@@ -14,7 +14,7 @@ const maxUpgradedAllies = computed(() => CHAMPION_SPECIFICS.Ornn.calcMaxUpgraded
 const SlotIndexComponent = await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', 1, 6);
 const UpgradedAlliesComponent = await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'passiveUpgradedAllies', 'Allies with masterwork item', 0, maxUpgradedAllies);
 
-const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalData.value.masterworkLevel;
+const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalData.value._masterworkLevel;
 </script>
 
 <template>

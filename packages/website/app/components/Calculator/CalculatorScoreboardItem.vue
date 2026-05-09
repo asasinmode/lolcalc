@@ -811,7 +811,7 @@ const hoveredDragonThingText = computed(() => {
 	const { replaced, unknownVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		[ability, 1, [MISC.dragons[dragonName].stack, MISC.dragons[dragonName].soul]],
+		[ability, undefined, 1, [MISC.dragons[dragonName].stack, MISC.dragons[dragonName].soul]],
 	);
 
 	let invalid: string | undefined;

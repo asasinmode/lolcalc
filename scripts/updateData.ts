@@ -1396,7 +1396,7 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	}
 }
 
-function championAbilityDynamicVariables(specific?: IChampionSpecific, abilityKey?: IChampionAbilityKey) {
+function championAbilityDynamicVariables(specific?: IChampionSpecific<any>, abilityKey?: IChampionAbilityKey) {
 	return specific && (abilityKey
 		? {
 				...specific.POSSIBLE_DYNAMIC_VARIABLES,

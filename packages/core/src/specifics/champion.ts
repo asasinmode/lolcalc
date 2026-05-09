@@ -340,30 +340,27 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ornn: {
-		MASTERWORK_LEVEL: (self: DamageSource): number => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
-		MAX_UPGRADED_ALLIES: 5,
-		calcMaxUpgradedAllies(self: DamageSource) {
-			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - self.internalData.value.masterworkLevel));
+		MASTERWORK_LEVEL: (self: DamageSource<'Ornn'>): number => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
+		MAX_UPGRADED_ALLIES: 4,
+		calcMaxUpgradedAllies(self: DamageSource<'Ornn'>): number {
+			return Math.min(CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL(self)));
 		},
-		setupData(self): { masterworkLevel: number; masterworkItemSlot: number; passiveUpgradedAllies: number } & IDamageSourceInternalDataBase {
-			const masterworkLevel = CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL(self);
+		setupData(self): { _masterworkLevel: number; masterworkItemSlot: number; passiveUpgradedAllies: number } & IDamageSourceInternalDataBase {
+			const _masterworkLevel = CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL(self);
 			return {
-				masterworkLevel,
-				masterworkItemSlot: self.level.value >= masterworkLevel
+				masterworkItemSlot: self.level.value >= _masterworkLevel
 					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 1), 6)
 					: 1,
 				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self)),
+				_masterworkLevel,
 				_watchHandles: [watch(self.level, () => {
-					if (self.level.value < self.internalData.value.masterworkLevel) {
-						self.internalData.value.masterworkItemSlot = 0;
-					}
 					self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self));
-				}, { immediate: true })],
+				})],
 			};
 		},
 	},
 	Rell: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Rell'>): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS(self)),
@@ -588,9 +585,11 @@ export const CHAMPION_SPECIFICS = {
 } satisfies IHypotheticalChampionSpecifics;
 
 export type TChampionSpecifics = typeof CHAMPION_SPECIFICS;
-export type IHypotheticalChampionSpecifics = Partial<Record<IChampionId, IChampionSpecific>>;
+export type IHypotheticalChampionSpecifics = {
+	[Id in IChampionId]?: IChampionSpecific<Id>;
+};
 
-export type IChampionSpecific = IProviderGroupDataSetup & IProviderGroupDynamicVariables & {
+export type IChampionSpecific<Id extends IChampionId | undefined = undefined> = IProviderGroupDataSetup<Id> & IProviderGroupDynamicVariables & {
 	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
 } & {
 	/** champion's possible dynamic values, can be overriden per ability and ability variant */
