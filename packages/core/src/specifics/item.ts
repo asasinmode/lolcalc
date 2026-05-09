@@ -1,8 +1,7 @@
-import type { TItems } from '@lolcalc/data';
 import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
-import { ITEMS } from '@lolcalc/data';
+import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 
@@ -13,7 +12,7 @@ const CALC_HOOK_PRIORITY = {
 };
 
 const tearItemSpecifics = {
-	MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.tear].dataValues.MaxMana,
+	MAX_STACKS: ITEMS_BY_NAME.tear.dataValues.MaxMana,
 	internalDataProperties: ['manaflow'],
 	setupData(self: DamageSource) {
 		self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, tearItemSpecifics.MAX_STACKS);
@@ -26,7 +25,7 @@ const tearItemSpecifics = {
 } satisfies IItemSpecific;
 
 const gluttonousGreavesSpecific = {
-	MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.gluttonousGreaves].dataValues.MaxStacks,
+	MAX_STACKS: ITEMS_BY_NAME.gluttonousGreaves.dataValues.MaxStacks,
 	internalDataProperties: ['slay'],
 	setupData(self) {
 		self.internalItemData.value.slay = clamp(0, self.internalItemData.value.slay ?? 0, gluttonousGreavesSpecific.MAX_STACKS);
@@ -43,7 +42,7 @@ export const ITEM_SPECIFICS = {
 		calculateBonusAd: (self: DamageSource): number => {
 			const { eminence } = self.internalItemData.value;
 			if (eminence) {
-				return (ITEMS as TItems)[ITEM_NAME_TO_ID.hubris].dataValues.BaseADBonus + eminence * (ITEMS as TItems)[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
+				return ITEMS_BY_NAME.hubris.dataValues.BaseADBonus + eminence * ITEMS_BY_NAME.hubris.dataValues.ADPerStatue;
 			}
 			return 0;
 		},
@@ -65,7 +64,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks,
+		MAX_STACKS: ITEMS_BY_NAME.darkSeal.dataValues.MaxGloryStacks,
 		internalDataProperties: ['glory'],
 		setupData(self) {
 			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.darkSeal].MAX_STACKS);
@@ -78,13 +77,13 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }) {
-					itemPassivesStats.abilityPower += self.internalItemData.value.glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.APPerGlory;
+					itemPassivesStats.abilityPower += self.internalItemData.value.glory * ITEMS_BY_NAME.darkSeal.dataValues.APPerGlory;
 				},
 			},
 		},
 	},
 	[ITEM_NAME_TO_ID.mejai]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.MaxGloryStacks,
+		MAX_STACKS: ITEMS_BY_NAME.mejai.dataValues.MaxGloryStacks,
 		internalDataProperties: ['glory'],
 		setupData(self) {
 			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.mejai].MAX_STACKS);
@@ -98,9 +97,9 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats, baseWithFlatItemMoveSpeed }) {
 					const { glory } = self.internalItemData.value as IInternalItemDataOf<'mejai'>;
-					itemPassivesStats.abilityPower += glory * (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.APPerGlory;
-					if (glory >= (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.GloryThreshold) {
-						const bonusMs = baseWithFlatItemMoveSpeed * (ITEMS as TItems)[ITEM_NAME_TO_ID.mejai].dataValues.MoveSpeedMod;
+					itemPassivesStats.abilityPower += glory * ITEMS_BY_NAME.mejai.dataValues.APPerGlory;
+					if (glory >= ITEMS_BY_NAME.mejai.dataValues.GloryThreshold) {
+						const bonusMs = baseWithFlatItemMoveSpeed * ITEMS_BY_NAME.mejai.dataValues.MoveSpeedMod;
 						itemPassivesStats.moveSpeed += bonusMs;
 					}
 				},
@@ -108,7 +107,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.hauntingGuise].dataValues.SecondsInCombat,
+		MAX_STACKS: ITEMS_BY_NAME.hauntingGuise.dataValues.SecondsInCombat,
 		internalDataProperties: ['madness'],
 		setupData(self) {
 			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hauntingGuise].MAX_STACKS);
@@ -117,11 +116,11 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Madness bonus damage',
 		imgText(self) {
 			const { madness } = self.internalItemData.value as { madness: number };
-			return madness && `${Math.round(madness * (ITEMS as TItems)[ITEM_NAME_TO_ID.hauntingGuise].dataValues.DamageIncreasePerSecond * 100)}%`;
+			return madness && `${Math.round(madness * ITEMS_BY_NAME.hauntingGuise.dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.roa].dataValues.MaxStacks,
+		MAX_STACKS: ITEMS_BY_NAME.roa.dataValues.MaxStacks,
 		internalDataProperties: ['eternity'],
 		setupData(self) {
 			self.internalItemData.value.eternity = clamp(0, self.internalItemData.value.eternity ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.roa].MAX_STACKS);
@@ -135,7 +134,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }) {
 					const { eternity } = self.internalItemData.value;
-					const { APPerStack, HealthPerStack, ManaPerStack } = (ITEMS as TItems)[ITEM_NAME_TO_ID.roa].dataValues;
+					const { APPerStack, HealthPerStack, ManaPerStack } = ITEMS_BY_NAME.roa.dataValues;
 					itemPassivesStats.abilityPower += eternity * APPerStack;
 					itemPassivesStats.hp += eternity * HealthPerStack;
 					itemPassivesStats.mana += eternity * ManaPerStack;
@@ -152,12 +151,12 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Baleful Blaze ap increase',
 		imgText(self) {
 			const { bBlaze } = self.internalItemData.value as { bBlaze: number };
-			return bBlaze && `${Math.round(bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
+			return bBlaze && `${Math.round(bBlaze * ITEMS_BY_NAME.blackfireTorch.dataValues.APPerStack * 100)}%`;
 		},
 		calculateHooks: {
 			preBonus: {
 				handler(self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const value = calculatedVariables.apMultipliersBase * self.internalItemData.value.bBlaze * (ITEMS as TItems)[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack;
+					const value = calculatedVariables.apMultipliersBase * self.internalItemData.value.bBlaze * ITEMS_BY_NAME.blackfireTorch.dataValues.APPerStack;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;
@@ -173,7 +172,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.liandry].dataValues.MaxStackNumber,
+		MAX_STACKS: ITEMS_BY_NAME.liandry.dataValues.MaxStackNumber,
 		internalDataProperties: ['madness'],
 		setupData(self) {
 			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.liandry].MAX_STACKS);
@@ -182,11 +181,11 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Madness bonus damage',
 		imgText(self) {
 			const { madness } = self.internalItemData.value as { madness: number };
-			return madness && `${Math.round(madness * (ITEMS as TItems)[ITEM_NAME_TO_ID.liandry].dataValues.DamageIncreasePerSecond * 100)}%`;
+			return madness && `${Math.round(madness * ITEMS_BY_NAME.liandry.dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.yunTal].dataValues.CritMax,
+		MAX_STACKS: ITEMS_BY_NAME.yunTal.dataValues.CritMax,
 		internalDataProperties: ['practice'],
 		setupData(self) {
 			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_STACKS);
@@ -199,7 +198,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.shojin].dataValues.StackCount,
+		MAX_STACKS: ITEMS_BY_NAME.shojin.dataValues.StackCount,
 		internalDataProperties: ['fWill'],
 		setupData(self) {
 			self.internalItemData.value.fWill = clamp(0, self.internalItemData.value.fWill ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.shojin].MAX_STACKS);
@@ -208,11 +207,11 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Focused Will ability damage increase',
 		imgText(self) {
 			const { fWill } = self.internalItemData.value as { fWill: number };
-			return fWill && `${Math.round(fWill * (ITEMS as TItems)[ITEM_NAME_TO_ID.shojin].dataValues.SpellDamageIncrease * 100)}%`;
+			return fWill && `${Math.round(fWill * ITEMS_BY_NAME.shojin.dataValues.SpellDamageIncrease * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.SecondsInCombat,
+		MAX_STACKS: ITEMS_BY_NAME.riftmaker.dataValues.SecondsInCombat,
 		internalDataProperties: ['corruption'],
 		setupData(self) {
 			self.internalItemData.value.corruption = clamp(0, self.internalItemData.value.corruption ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.riftmaker].MAX_STACKS);
@@ -221,12 +220,12 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Corruption bonus damage',
 		imgText(self) {
 			const { corruption } = self.internalItemData.value as { corruption: number };
-			return corruption && `${Math.round(corruption * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
+			return corruption && `${Math.round(corruption * ITEMS_BY_NAME.riftmaker.dataValues.EternityDamageIncreasePerSecond * 100)}%`;
 		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					const value = itemBaseStats.hp * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+					const value = itemBaseStats.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent;
 					itemPassivesStats.abilityPower += value;
 
 					calculatedVariables.riftmakerVoidInfusion = value;
@@ -237,7 +236,7 @@ export const ITEM_SPECIFICS = {
 			preBonus: {
 				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					if (runeShardStats.hp) {
-						const value = runeShardStats.hp * (ITEMS as TItems)[ITEM_NAME_TO_ID.riftmaker].dataValues.HealthToAPConversionPercent;
+						const value = runeShardStats.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent;
 						itemPassivesStats.abilityPower += value;
 						itemTotalStats.abilityPower += value;
 
@@ -271,7 +270,7 @@ export const ITEM_SPECIFICS = {
 			},
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const bonusAp = itemTotalStats.mana * (ITEMS as TItems)[ITEM_NAME_TO_ID.archangelsStaff].dataValues.APFromMana;
+					const bonusAp = itemTotalStats.mana * ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana;
 					calculatedVariables.apMultipliersBase += bonusAp;
 					itemPassivesStats.abilityPower += bonusAp;
 					itemTotalStats.abilityPower += bonusAp;
@@ -290,7 +289,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const bonusAp = itemTotalStats.mana * (ITEMS as TItems)[ITEM_NAME_TO_ID.seraphsEmbrace].dataValues.APFromMana;
+					const bonusAp = itemTotalStats.mana * ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana;
 					calculatedVariables.apMultipliersBase += bonusAp;
 					itemPassivesStats.abilityPower += bonusAp;
 					itemTotalStats.abilityPower += bonusAp;
@@ -479,7 +478,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange,
+		MAX_STACKS: ITEMS_BY_NAME.hexoptics.dataValues.MaxRange,
 		internalDataProperties: ['magnification'],
 		setupData(self) {
 			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_STACKS);
@@ -488,7 +487,7 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Magnification % damage increase',
 		imgText(self) {
 			const { magnification } = self.internalItemData.value as { magnification: number };
-			const { dataValues: { MaxRange, MaxDamageAmp } } = (ITEMS as TItems)[ITEM_NAME_TO_ID.hexoptics];
+			const { dataValues: { MaxRange, MaxDamageAmp } } = ITEMS_BY_NAME.hexoptics;
 			return magnification && `${roundVariable(Math.round((magnification / MaxRange * 100 * MaxDamageAmp) * 10) / 10)}%`;
 		},
 	},
@@ -514,7 +513,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.deadMansPlate]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.deadMansPlate].dataValues.MaxMovementSpeed,
+		MAX_STACKS: ITEMS_BY_NAME.deadMansPlate.dataValues.MaxMovementSpeed,
 		internalDataProperties: ['shipwrecker'],
 		setupData(self) {
 			self.internalItemData.value.shipwrecker = clamp(0, self.internalItemData.value.shipwrecker ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.deadMansPlate].MAX_STACKS);
@@ -526,7 +525,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.bloodlettersCurse]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
+		MAX_STACKS: ITEMS_BY_NAME.bloodlettersCurse.dataValues.MaxStacks,
 		internalDataProperties: ['vDecay'],
 		setupData(self) {
 			self.internalItemData.value.vDecay = Math.max(0, Math.min(
@@ -562,7 +561,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
-		MAX_STACKS: (ITEMS as TItems)[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks,
+		MAX_STACKS: ITEMS_BY_NAME.guinsoo.dataValues.MaxStacks,
 		internalDataProperties: ['seething'],
 		setupData(self) {
 			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.guinsoo].MAX_STACKS);
@@ -576,7 +575,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats, baseStats }) {
 					const { seething } = self.internalItemData.value;
-					const bonusAttackSpeedPercent = seething * (ITEMS as TItems)[ITEM_NAME_TO_ID.guinsoo].dataValues.AttackSpeedPerStack;
+					const bonusAttackSpeedPercent = seething * ITEMS_BY_NAME.guinsoo.dataValues.AttackSpeedPerStack;
 					itemPassivesStats.bonusAttackSpeedPercent += bonusAttackSpeedPercent;
 					itemPassivesStats.attackSpeed += bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 				},
@@ -585,7 +584,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
-		MAX_STACKS: Math.round((ITEMS as TItems)[ITEM_NAME_TO_ID.terminus].dataValues.PenPerHit / (ITEMS as TItems)[ITEM_NAME_TO_ID.terminus].dataValues.PenMax),
+		MAX_STACKS: Math.round(ITEMS_BY_NAME.terminus.dataValues.PenPerHit / ITEMS_BY_NAME.terminus.dataValues.PenMax),
 		internalDataProperties: ['jxtpL', 'jxtpD'],
 		setupData(self) {
 			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.terminus].MAX_STACKS);
@@ -644,7 +643,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const value = calculatedVariables.apMultipliersBase * (ITEMS as TItems)[ITEM_NAME_TO_ID.rabadon].dataValues.APAmp;
+					const value = calculatedVariables.apMultipliersBase * ITEMS_BY_NAME.rabadon.dataValues.APAmp;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;

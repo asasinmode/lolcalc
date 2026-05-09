@@ -1,7 +1,8 @@
-import type { IItemCategory } from '@lolcalc/shared';
+import type { IItemCategory, TItemNameToId } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { IItemShopStatFilter } from './meta';
 import type { IChampion, IChampionId, IDragonName, IItem, IListedChampion, IRunes, IRuneSlotName } from './types';
+import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { markRaw } from 'vue';
 import championData from '../files/champion.json' with { type: 'json' };
 import effectData from '../files/effect.json' with { type: 'json' };
@@ -57,6 +58,12 @@ export const ITEMS = itemData.data satisfies Record<string, IItem> as Record<str
  * ```
  */
 export type TItems = typeof itemData['data'];
+
+export const ITEMS_BY_NAME = Object.fromEntries(
+	Object.entries(ITEM_NAME_TO_ID).map(([name, id]) => [name, ITEMS[id]]),
+) as {
+	[K in keyof TItemNameToId]: TItemNameToId[K] extends keyof TItems ? TItems[TItemNameToId[K]] : never
+};
 
 export const RUNES = runeData.data as IRunes;
 
