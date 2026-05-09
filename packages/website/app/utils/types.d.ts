@@ -1,12 +1,6 @@
 import type { DamageSource, IComputedAbilityDescription } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 
-/**
- * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value
- * possible values for these can be specified in `champion.ts` and `rune.ts` under proper key, these are then used in calculations
- */
-export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVariables?: (damageSource: DamageSource) => any }>;
-
 export interface IDamageResultTableSection {
 	/** stringified `GameAbilityId` or freestyled for `all` */
 	id: string;

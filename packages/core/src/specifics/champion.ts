@@ -14,8 +14,7 @@ import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
-import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
-import type { IPossibleDynamicValues } from '../types';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupDynamicVariables, IProviderGroupImageText } from '../DamageSource';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
@@ -81,7 +80,7 @@ export const CHAMPION_SPECIFICS = {
 		WEAPON_VARIANT_INDEX_TO_NAME: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[],
 		/** stringtable indexes are different from the actual weapon order - `apheliosgun_name_1` is for calibrum and so */
 		WEAPON_NAME_TO_STRINGTABLE_INDEX: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
-		POSSIBLE_DYNAMIC_VALUES: {
+		POSSIBLE_DYNAMIC_VARIABLES: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
 			f1: [1, 2, 3, 4, 5],
 			f2: [],
@@ -90,6 +89,10 @@ export const CHAMPION_SPECIFICS = {
 			f5: [],
 			/* array of 12, 13, ..., 21, 23, ..., 53, 53 - no 2 repeated numbers like 11, 22 */
 			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
+		},
+		dynamicVariables() {
+			// TODO
+			return {};
 		},
 		setupData(self): {} & IDamageSourceInternalDataBase {
 			const abilityVariantsIndexes = self.abilityVariantsIndexes.value;
@@ -117,8 +120,12 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		e: {
-			POSSIBLE_DYNAMIC_VALUES: {
+			POSSIBLE_DYNAMIC_VARIABLES: {
 				f1: [1, 2, 3],
+			},
+			dynamicVariables() {
+				// TODO
+				return {};
 			},
 		},
 	},
@@ -244,8 +251,12 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Kayn: {
-		POSSIBLE_DYNAMIC_VALUES: {
+		POSSIBLE_DYNAMIC_VARIABLES: {
 			f1: [0, 1, 2],
+		},
+		dynamicVariables() {
+			// TODO
+			return {};
 		},
 		FORM_OPTIONS: {
 			base: 0,
@@ -579,27 +590,20 @@ export const CHAMPION_SPECIFICS = {
 export type TChampionSpecifics = typeof CHAMPION_SPECIFICS;
 export type IHypotheticalChampionSpecifics = Partial<Record<IChampionId, IChampionSpecific>>;
 
-export type IChampionSpecific = IProviderGroupDataSetup & {
+export type IChampionSpecific = IProviderGroupDataSetup & IProviderGroupDynamicVariables & {
 	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
 } & {
 	/** champion's possible dynamic values, can be overriden per ability and ability variant */
-	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	[key: string]: any;
 };
 
-export interface IChampionAbilitySpecific {
-	/** ability's possible dynamic values, variant can override */
-	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+export type IChampionAbilitySpecific = IProviderGroupDynamicVariables & {
 	/**
 	 * ability's variant specific
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
 	 */
 	[key: number]: IChampionAbilityVariantSpecific;
-}
-
-export type IChampionAbilityVariantSpecific = IProviderGroupImageText & {
-	// TODO unused at the moment, possibly no need for it and just the one on ability level is fine
-	// if used, `updateGameData` script should also merge it in `possibleChampionDynamicVariableValues`
-	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
 };
+
+export type IChampionAbilityVariantSpecific = IProviderGroupImageText;

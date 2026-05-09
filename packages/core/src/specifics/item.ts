@@ -1,6 +1,6 @@
 import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf } from '.';
-import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupDynamicVariables, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
@@ -23,6 +23,15 @@ const tearItemSpecifics = {
 		return (self.internalItemData.value as { manaflow: number }).manaflow;
 	},
 } satisfies IItemSpecific;
+
+const tearItemCalculateHookPreItemTotal = {
+	handler(self, { itemBaseStats, itemPassivesStats }, { miscDebug }) {
+		const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
+		const bonusMana = manaflow;
+		itemPassivesStats.mana += bonusMana;
+		miscDebug.tearItemBonusMana = itemBaseStats.mana + bonusMana;
+	},
+} satisfies ICalculateChampionStatsHookSource['preItemTotal'];
 
 const gluttonousGreavesSpecific = {
 	MAX_STACKS: ITEMS_BY_NAME.gluttonousGreaves.dataValues.MaxStacks,
@@ -164,10 +173,15 @@ export const ITEM_SPECIFICS = {
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 		},
+		POSSIBLE_DYNAMIC_VARIABLES: {
+			f2: [],
+		},
 		dynamicVariables() {
 			return {
 				/** damage dealt to champions */
-				f2: 0,
+				f2: {
+					value: 0,
+				},
 			};
 		},
 	},
@@ -248,10 +262,15 @@ export const ITEM_SPECIFICS = {
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
 			},
 		},
+		POSSIBLE_DYNAMIC_VARIABLES: {
+			f1: [],
+		},
 		dynamicVariables(self) {
 			return {
 				/** ap gained from passive */
-				f1: self.stats.value.variables.riftmakerVoidInfusion,
+				f1: {
+					value: self.stats.value.variables.riftmakerVoidInfusion!,
+				},
 			};
 		},
 	},
@@ -260,28 +279,26 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.archangelsStaff]: {
 		...tearItemSpecifics,
 		calculateHooks: {
-			preItemTotal: {
-				handler(self, { itemBaseStats, itemPassivesStats }, { miscDebug }) {
-					const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'archangelsStaff'>;
-					const bonusMana = manaflow;
-					itemPassivesStats.mana += bonusMana;
-					miscDebug.archangelSeraphBonusMana = itemBaseStats.mana + bonusMana;
-				},
-			},
+			preItemTotal: tearItemCalculateHookPreItemTotal,
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const bonusAp = itemTotalStats.mana * ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana;
-					calculatedVariables.apMultipliersBase += bonusAp;
-					itemPassivesStats.abilityPower += bonusAp;
-					itemTotalStats.abilityPower += bonusAp;
-					calculatedVariables.archangelSeraphAwe = bonusAp;
+					const bonusAP = itemTotalStats.mana * ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana;
+					calculatedVariables.apMultipliersBase += bonusAP;
+					itemPassivesStats.abilityPower += bonusAP;
+					itemTotalStats.abilityPower += bonusAP;
+					calculatedVariables.archangelSeraphAwe = bonusAP;
 				},
 			},
+		},
+		POSSIBLE_DYNAMIC_VARIABLES: {
+			f2: [],
 		},
 		dynamicVariables(self) {
 			return {
 				/** ap gained from passive */
-				f2: self.stats.value.variables.archangelSeraphAwe,
+				f2: {
+					value: self.stats.value.variables.archangelSeraphAwe!,
+				},
 			};
 		},
 	},
@@ -289,24 +306,57 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const bonusAp = itemTotalStats.mana * ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana;
-					calculatedVariables.apMultipliersBase += bonusAp;
-					itemPassivesStats.abilityPower += bonusAp;
-					itemTotalStats.abilityPower += bonusAp;
-					calculatedVariables.archangelSeraphAwe = bonusAp;
+					const bonusAP = itemTotalStats.mana * ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana;
+					calculatedVariables.apMultipliersBase += bonusAP;
+					itemPassivesStats.abilityPower += bonusAP;
+					itemTotalStats.abilityPower += bonusAP;
+					calculatedVariables.archangelSeraphAwe = bonusAP;
 				},
 			},
+		},
+		POSSIBLE_DYNAMIC_VARIABLES: {
+			BonusAPCalc: [],
+			f5: [],
 		},
 		dynamicVariables(self) {
 			return {
 				/** ap gained from passive */
-				BonusAPCalc: self.stats.value.variables.archangelSeraphAwe,
+				BonusAPCalc: {
+					value: self.stats.value.variables.archangelSeraphAwe!,
+				},
 				/** damage shielded */
-				f5: 0,
+				f5: {
+					value: 0,
+				},
 			};
 		},
 	},
-	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.manamune]: {
+		...tearItemSpecifics,
+		ADFromMana: ITEMS_BY_NAME.manamune.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient,
+		calculateHooks: {
+			preItemTotal: tearItemCalculateHookPreItemTotal,
+			preBonus: {
+				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					const bonusAD = itemTotalStats.mana * ITEM_SPECIFICS[ITEM_NAME_TO_ID.manamune].ADFromMana;
+					itemPassivesStats.attackDamage += bonusAD;
+					itemTotalStats.attackDamage += bonusAD;
+					calculatedVariables.manaMuraAwe = bonusAD;
+				},
+			},
+		},
+		POSSIBLE_DYNAMIC_VARIABLES: {
+			BonusADFromMana: [],
+		},
+		dynamicVariables(self) {
+			return {
+				/** ad gained from passive */
+				BonusADFromMana: {
+					value: self.stats.value.variables.manaMuraAwe!,
+				},
+			};
+		},
+	},
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.trinity]: {
 		internalDataProperties: ['quicken'],
@@ -651,10 +701,15 @@ export const ITEM_SPECIFICS = {
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.rabadon],
 			},
 		},
+		POSSIBLE_DYNAMIC_VARIABLES: {
+			f1: [],
+		},
 		dynamicVariables(self) {
 			return {
 				/** ap gained from passive */
-				f1: self.stats.value.variables.rabadonMagicalOpus,
+				f1: {
+					value: self.stats.value.variables.rabadonMagicalOpus!,
+				},
 			};
 		},
 	},
@@ -663,14 +718,13 @@ export const ITEM_SPECIFICS = {
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
 export type IHypotheticalItemSpecifics = Record<string, IItemSpecific>;
 
-export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItemData & {
+export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItemData & IProviderGroupDynamicVariables & {
 	/**
 	 * whether to show the green dot that the item is active in the top right corner of the image
 	 * when array, the indicator dot will be split in half and colored based on the array 1/2 being trueish, useful for youmuu
 	 */
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	dynamicVariables?: (self: DamageSource) => Record<string, any>;
 	[key: string]: any;
 };
 

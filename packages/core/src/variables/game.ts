@@ -1,17 +1,13 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
-import type { DamageSource } from '../DamageSource.ts';
+import type { DamageSource, ICalculatedDynamicVariable } from '../DamageSource.ts';
 import type { IReplaceGameVariablesRV } from '../types';
 import { ICON_ON_HIT_IMG, PATCH_VERSION } from '@lolcalc/data';
 import { STAT_ICON } from '@lolcalc/data/meta.ts';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
-type IWithDynamic<T> = T & {
-	dynamicValues?: number | number[];
-};
-
 interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
-	value?: string | number | [number | undefined, number | undefined];
+	value?: ICalculatedDynamicVariable['value'];
 	/** if `true`, the variable is different for melee and ranged champions */
 	isMeleeRanged?: boolean;
 	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
@@ -20,85 +16,105 @@ interface IVariableValueResult {
 	allValues?: number[];
 }
 
-export function itemVariableValue(variable: string, item: IItem, isRanged?: boolean, damageSource?: DamageSource): IVariableValueResult {
-	let value: IVariableValueResult['value'];
-	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
+/**
+ * `dynamicVariables` can be either
+ * - `IDynamicVariablesProvider['POSSIBLE_DYNAMIC_VARIABLES']` when variables are resolved in `updateData` script. These are used only for supressing warning for unknown variables that are actually calculated by `dynamicVariables`
+ * - the return value of `IDynamicVariablesProvider['dynamicVariables']` when actually calculating and using the values
+ */
+export interface IDynamicVariables {
+	[key: string]: ICalculatedDynamicVariable | (string | number)[];
+}
 
-	if (damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable] !== undefined) {
-		value = Math.round(damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable]);
+function resolveDynamicVariable(value: IDynamicVariables[string]): IVariableValueResult {
+	return Array.isArray(value) ? { value: value[0] ?? 0 } : value;
+}
+
+export function itemVariableValue(
+	variable: string,
+	item: IItem,
+	dynamicVariables: IDynamicVariables = {},
+	isRanged?: boolean,
+	damageSource?: DamageSource,
+): IVariableValueResult {
+	let rv: IVariableValueResult = {};
+
+	if (dynamicVariables[variable] !== undefined) {
+		rv = resolveDynamicVariable(dynamicVariables[variable]);
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
-		value = item.stats[variable as IItemStat];
+		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
-		value = item.dataValues[variable];
+		rv.value = item.dataValues[variable];
 	} else if (item.stringCalculations?.[variable]) {
-		isMeleeRanged = true;
+		rv.isMeleeRanged = true;
 		if (damageSource?.isRanged.value === undefined) {
-			value = [
+			rv.value = [
 				itemVariableValue(
 					item.stringCalculations[variable].MeleeResult.slice(1, -1),
 					item,
+					dynamicVariables,
 					false,
 					damageSource,
 				).value as number | undefined,
 				itemVariableValue(
 					item.stringCalculations[variable].RangedResult.slice(1, -1),
 					item,
+					dynamicVariables,
 					true,
 					damageSource,
 				).value as number | undefined,
 			];
 		} else {
 			const key: keyof NonNullable<IItem['stringCalculations']>[string] = damageSource.isRanged.value ? 'RangedResult' : 'MeleeResult';
-			value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, isRanged, damageSource).value;
+			rv.value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, dynamicVariables, isRanged, damageSource).value;
 		}
 	} else if (item.itemCalculations?.[variable]) {
 		// TODO
 		// const result = ITEM_SPECIFICS[item.id]?.[variable]?.(target);
 		// value = result;
 	} else if (variable.startsWith('Effect')) {
-		value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
+		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	}
 
-	return { value, isMeleeRanged };
+	return rv;
 }
 
-export function runeVariableValue(variable: string, rune: IWithDynamic<IRune>): IVariableValueResult {
-	let value: IVariableValueResult['value'];
-	let actualVariableName: IVariableValueResult['actualVariableName'];
+export function runeVariableValue(variable: string, rune: IRune, dynamicVariables: IDynamicVariables = {}): IVariableValueResult {
+	const rv: IVariableValueResult = {};
 
 	const [variableName, ...dotPath] = variable.split('.');
 
 	if (dotPath.length) {
-		actualVariableName = variableName;
+		rv.actualVariableName = variableName;
 	}
 
-	/* expected to be an array only in `updateGameData` for debug logs */
-	if (Array.isArray((rune as any).dynamicValues?.[variableName!])) {
-		return { value: '__DYNAMIC VALUE__', actualVariableName };
+	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated */
+	if (dynamicVariables[variable]) {
+		rv.value = resolveDynamicVariable(dynamicVariables[variable]).value;
+		return rv;
 	}
 
-	const sources = [(rune as any).calculations, (rune as any).effectAmount, (rune as any).dynamicValues];
+	const sources = [(rune as any).calculations, (rune as any).effectAmount, dynamicVariables];
 	for (const source of sources) {
 		if (!source) {
 			continue;
 		}
 
-		value = source[variableName!];
-		if (value !== undefined) {
+		rv.value = source[variableName!];
+		if (rv.value !== undefined) {
 			for (const path in dotPath) {
 				// TODO figure this out, some paths seem to have .0 or .-1
 				const number = Number(path);
-				if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
-					value = (value as any)[path];
+				if (Number.isNaN(number) || (number >= 0 && Array.isArray(rv.value))) {
+					rv.value = (rv.value as any)[path];
 				}
 			}
 		}
-		if (value !== undefined) {
+		if (rv.value !== undefined) {
 			break;
 		}
 	}
 
-	return { value, actualVariableName };
+	return rv;
 }
 
 interface IChampionAbilityVariableVariant {
@@ -113,12 +129,11 @@ interface IChampionAbilityVariableVariant {
 export function championAbilityVariableValue(
 	variable: string,
 	abilityVariant: IChampionAbilityVariableVariant,
+	dynamicVariables: IDynamicVariables = {},
 	abilityLevel = 1,
 	allAbilitiesVariants: IChampionAbilityVariableVariant[] = [],
 ): IVariableValueResult {
-	let value: IVariableValueResult['value'];
-	let actualVariableName: IVariableValueResult['actualVariableName'];
-	let allValues: IVariableValueResult['allValues'];
+	const rv: IVariableValueResult = {};
 
 	const colonIndex = variable.indexOf(':');
 	if (~colonIndex) {
@@ -134,7 +149,7 @@ export function championAbilityVariableValue(
 		// TODO maybe can keep object names in lowercase, same as variable names
 		const otherAbilityVariant = allAbilitiesVariants.find(variant => variant.objectName === variantObjectName || variant.objectName.toLowerCase() === variantObjectName?.toLowerCase());
 		if (otherAbilityVariant) {
-			return championAbilityVariableValue(variantVariableName!, otherAbilityVariant, abilityLevel, allAbilitiesVariants);
+			return championAbilityVariableValue(variantVariableName!, otherAbilityVariant, dynamicVariables, abilityLevel, allAbilitiesVariants);
 		} else {
 			console.warn(`[championAbilityVariableValue] variant referenced in ${variable} not found`);
 		}
@@ -150,7 +165,7 @@ export function championAbilityVariableValue(
 	];
 
 	if (dotPath.length) {
-		actualVariableName = variableName;
+		rv.actualVariableName = variableName;
 	}
 
 	if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
@@ -159,39 +174,39 @@ export function championAbilityVariableValue(
 			if (Number.isNaN(index)) {
 				console.warn('potential effectAmount variable index NaN', variableName);
 			} else {
-				value = abilityVariant.effectAmount[index - 1];
+				rv.value = abilityVariant.effectAmount[index - 1];
 			}
 		}
 	}
 
-	if (value === undefined) {
+	if (rv.value === undefined) {
 		for (const source of sources) {
 			if (!source) {
 				continue;
 			}
 
-			value = source.find(source => source[0] === variableName || source[0].toLowerCase() === variableName!.toLowerCase())?.[1];
-			if (value !== undefined) {
+			rv.value = source.find(source => source[0] === variableName || source[0].toLowerCase() === variableName!.toLowerCase())?.[1];
+			if (rv.value !== undefined) {
 				for (const path in dotPath) {
 					// TODO figure this out, some paths seem to have .0 or .-1
 					const number = Number(path);
-					if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
-						value = (value as any)[path];
+					if (Number.isNaN(number) || (number >= 0 && Array.isArray(rv.value))) {
+						rv.value = (rv.value as any)[path];
 					}
 				}
 			}
-			if (value !== undefined) {
+			if (rv.value !== undefined) {
 				break;
 			}
 		}
 	}
 
-	if (Array.isArray(value)) {
-		allValues = value as number[];
-		value = value[abilityLevel];
+	if (Array.isArray(rv.value)) {
+		rv.allValues = rv.value as number[];
+		rv.value = rv.value[abilityLevel];
 	}
 
-	return { value, actualVariableName, allValues };
+	return rv;
 }
 
 export type IGameVariableType = 'item' | 'rune' | 'championAbility';

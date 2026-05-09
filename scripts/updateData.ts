@@ -1,9 +1,9 @@
-import type { IChampionSpecific } from '@lolcalc/core/specifics/champion.ts';
-import type { IRuneSpecific } from '@lolcalc/core/specifics/rune';
+import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
+import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type { IEffectData } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
-import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion } from '@lolcalc/data/types';
+import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types';
 import buffer from 'node:buffer';
@@ -623,12 +623,8 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 							variables: {
 								variableType: 'rune',
 								variableValueParameters: [
-									(RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]?.POSSIBLE_DYNAMIC_VALUES
-										? {
-												...slotValue,
-												dynamicValues: (RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]!.POSSIBLE_DYNAMIC_VALUES,
-											}
-										: slotValue,
+									slotValue,
+									(RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.POSSIBLE_DYNAMIC_VARIABLES,
 								],
 								variableSourceKeys: ['effectAmount'],
 							},
@@ -730,7 +726,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 			variables: {
 				variableSourceKeys: ['DataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: [stackAbility, undefined, allSpells],
+				variableValueParameters: [stackAbility, undefined, undefined, allSpells],
 			},
 		});
 		const soul = getStringtableValue(soulTooltipKey, {
@@ -739,7 +735,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 			variables: {
 				variableSourceKeys: ['DataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: [soulAbility, undefined, allSpells],
+				variableValueParameters: [soulAbility, undefined, undefined, allSpells],
 			},
 		});
 
@@ -1186,7 +1182,7 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 			variableSourceKeys: [],
 			variableType: 'item',
 			/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
-			variableValueParameters: [{ ...item, dynamicValues: { lolcalcChampRange: [1, 2], ChampRange: [1, 2] } } as IItem],
+			variableValueParameters: [item, { lolcalcChampRange: [1, 2], ChampRange: [1, 2] }],
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
@@ -1324,7 +1320,7 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 function debugStringVariables(value: string, variableDebug: IStringtableVariableDebug) {
 	const { category, key, stringtableVariableSaveUnder, variables } = variableDebug;
 
-	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceStringtableVariables(value, stringtable, (variables?.variableValueParameters[0] as any)?.dynamicValues, false);
+	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceStringtableVariables(value, stringtable, variables?.variableValueParameters[1], false);
 
 	if (stringtableVariables.size && stringtableVariableSaveUnder) {
 		stringtableVariableSaveUnder.stringtable ||= {};
@@ -1392,13 +1388,13 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	}
 }
 
-function possibleChampionDynamicVariableValues(specific?: IChampionSpecific, abilityKey?: IChampionAbilityKey) {
+function championAbilityDynamicVariables(specific?: IChampionSpecific, abilityKey?: IChampionAbilityKey) {
 	return specific && (abilityKey
 		? {
-				...specific.POSSIBLE_DYNAMIC_VALUES,
-				...specific[abilityKey]?.POSSIBLE_DYNAMIC_VALUES,
+				...specific.POSSIBLE_DYNAMIC_VARIABLES,
+				...specific[abilityKey]?.POSSIBLE_DYNAMIC_VARIABLES,
 			}
-		: specific.POSSIBLE_DYNAMIC_VALUES);
+		: specific.POSSIBLE_DYNAMIC_VARIABLES);
 }
 
 function championAbilityData(
@@ -1742,12 +1738,10 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				category: 'champion',
 				variables: {
 					variableType: 'championAbility',
-					variableValueParameters: [{
-						...variant,
-						dynamicValues: {
-							...variant.dataValues,
-							...possibleChampionDynamicVariableValues((CHAMPION_SPECIFICS as Record<string, IChampionSpecific>)[champion.id], abilityKey),
-						},
+					variableValueParameters: [variant, {
+						/* some champions use `GameModeInteger` variable that seems to be in their `dataValues`, maybe should be handled differently. Is also done in `DamageSource.computed.dynamicVariables.abilities` */
+						...variant.dataValues,
+						...championAbilityDynamicVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id], abilityKey),
 					}, undefined, allVariants],
 					variableSourceKeys: ['effectAmount'],
 				},

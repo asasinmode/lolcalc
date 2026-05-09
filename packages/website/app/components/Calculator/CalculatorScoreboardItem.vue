@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IChampionId, IDragonName, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
-import type { IExtraComponentEmits, IWithCalculateDynamicValues } from '~/utils/types';
+import type { IExtraComponentEmits } from '~/utils/types';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
 import { formatChampionStatValue, isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
@@ -311,21 +312,16 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 
 		const rune = (RUNES.shards[shardSlot as IRuneShardSlotName] as any)[shardValue as string];
 
-		const dynamicValues = (RUNE_SPECIFICS.shards as IWithCalculateDynamicValues)[shardValue as string]?.calculateDynamicVariables?.(props.value);
-
 		const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceStringtableVariables(
 			TEXT.runes.shards.slotValues[shardValue as string]!.tooltipStats,
 			TEXT.stringtable,
-			dynamicValues,
+			props.value?.computed.dynamicVariables.value.runes.shards[shardSlot as IRuneShardSlotName],
 		);
 
 		const { replaced, unknownVariables: unknownV } = replaceGameVariables(
 			stringtableVariableReplaced,
 			'rune',
-			[{
-				...rune,
-				dynamicValues,
-			}],
+			[rune, props.value?.computed.dynamicVariables.value.runes.shards[shardSlot as IRuneShardSlotName]],
 		);
 
 		shardAnyUnknown ||= unknownSV.size || unknownV.length;

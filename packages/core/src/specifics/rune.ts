@@ -1,7 +1,6 @@
 import type { TRunes } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
-import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
-import type { IPossibleDynamicValues } from '../types';
+import type { DamageSource, ICalculateChampionStatsHookSource, ICalculatedDynamicVariable, IProviderGroupDynamicVariables } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
 
 export function runesEmpty(runes: IChampionRunes): boolean {
@@ -17,12 +16,16 @@ export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmp
 export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {
-			POSSIBLE_DYNAMIC_VALUES: { f1: [0, 1] } satisfies IPossibleDynamicValues,
-			calculateDynamicVariables(self) {
+			POSSIBLE_DYNAMIC_VARIABLES: { f1: [0, 1] },
+			dynamicVariables(self) {
 				const { adaptiveForceStatVariable } = self.stats.value.meta;
 				return {
-					f1: adaptiveForceStatVariable,
-					f2: (RUNES as TRunes).shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
+					f1: {
+						value: adaptiveForceStatVariable,
+					},
+					f2: {
+						value: (RUNES as TRunes).shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
+					},
 				};
 			},
 			calculateHooks: {
@@ -80,11 +83,12 @@ export const RUNE_SPECIFICS = {
 		healthscaling: {
 			/** [wiki formula](https://wiki.leagueoflegends.com/en-us/Rune#Shards) */
 			calculateValue: (self: DamageSource): number => 10 + (180 - 10) / 17 * (self.level.value - 1),
-			/* in reality `f1` goes from 10-200 by 10-increments but it's not used in stringtable so just this to supress updateData script warning */
-			POSSIBLE_DYNAMIC_VALUES: { f1: [10, 200] } satisfies IPossibleDynamicValues,
-			calculateDynamicVariables(self) {
+			POSSIBLE_DYNAMIC_VARIABLES: { f1: [] },
+			dynamicVariables(self): { f1: ICalculatedDynamicVariable } {
 				return {
-					f1: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
+					f1: {
+						value: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
+					},
 				};
 			},
 			calculateHooks: {
@@ -119,12 +123,7 @@ export interface IHypotheticalRuneSpecifics {
 	};
 };
 
-export type IRuneSpecific = IProviderGroupDynamicVariables & {
-	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+export type IRuneSpecific = IProviderGroupDynamicVariables & IProviderGroupDynamicVariables & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	[key: string]: any;
-};
-
-type IProviderGroupDynamicVariables = { calculateDynamicVariables?: never } | {
-	calculateDynamicVariables: (self: DamageSource) => any;
 };

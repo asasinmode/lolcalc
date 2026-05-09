@@ -1,8 +1,11 @@
+import type { IDynamicVariables } from './game';
+
 export function replaceStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},
 	/** either resolved dynamic variables or possible values of dynamic variables */
-	dynamicValues: Record<string, unknown> = {},
+	dynamicVariables: IDynamicVariables = {},
+	/** whether to wrap unknown variables in `<unknown>` */
 	wrapUnknown = true,
 	unknownStringtableVariables: Map<string, Set<string>> = new Map(),
 	stringtableVariables: Map<string, string> = new Map(),
@@ -20,7 +23,7 @@ export function replaceStringtableVariables(
 			let subVariableName = variableName.slice(subVariableStartIndex + 1);
 			subVariableName = subVariableName.slice(0, subVariableName.indexOf('@'));
 
-			const subVariableValue = subVariableName in dynamicValues ? dynamicValues[subVariableName] : Object.entries(dynamicValues).find(([key]) => key.toLowerCase() === subVariableName)?.[1];
+			const subVariableValue = subVariableName in dynamicVariables ? dynamicVariables[subVariableName] : Object.entries(dynamicVariables).find(([key]) => key.toLowerCase() === subVariableName)?.[1];
 
 			if (subVariableValue !== undefined) {
 				/** array branch means it's most likely updateGameData and it's being used to get all of the possible values for this variable to save in the champion's stringtable */
@@ -37,17 +40,18 @@ export function replaceStringtableVariables(
 							continue;
 						}
 
-						const { replaced } = replaceStringtableVariables(possibleValueText, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
+						const { replaced } = replaceStringtableVariables(possibleValueText, stringtable, dynamicVariables, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 						stringtableVariables.set(possibleValueVariableName, replaced);
 
 						if (replaced.includes('{{')) {
-							replaceStringtableVariables(replaced, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
+							replaceStringtableVariables(replaced, stringtable, dynamicVariables, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 						}
 					}
 
 					return `{{${name}}}`;
-				} else {
-					variableName = `${variableName.slice(0, subVariableStartIndex - 1)}_${subVariableValue}`;
+					// TODO possibly have to handle array values too
+				} else if (typeof subVariableValue.value === 'number') {
+					variableName = `${variableName.slice(0, subVariableStartIndex - 1)}_${subVariableValue.value}`;
 				}
 			}
 		}
@@ -63,7 +67,7 @@ export function replaceStringtableVariables(
 			const { replaced } = replaceStringtableVariables(
 				value,
 				stringtable,
-				dynamicValues,
+				dynamicVariables,
 				wrapUnknown,
 				unknownStringtableVariables,
 				stringtableVariables,

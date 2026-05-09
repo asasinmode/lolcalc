@@ -819,36 +819,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		}
 	}
 
-	computed: {
-		formattedStatTotals: ComputedRef<Record<IChampionStatName, number>>;
-		items: ComputedRef<(IComputedItemDescription | undefined)[]>;
-		itemSpecifics: ComputedRef<({
-			specific: IItemSpecific;
-			abilityId: IItemAbilityId;
-		} | undefined)[]>;
-		masterworkItemSlotIndex: ComputedRef<number>;
-		abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
-		effects: ShallowRef<IComputedAppliedEffect[]>;
-		dynamicVariables: ComputedRef<{
-			items: Record<string, Record<string, any>>;
-		}>;
-	} = {
+	computed: IDamageSourceComputed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
-		formattedStatTotals: computed((): Record<IChampionStatName, number> => Object.fromEntries(
+		formattedStatTotals: computed((): UnwrapRef<IDamageSourceComputed['formattedStatTotals']> => Object.fromEntries(
 			ALL_CHAMPION_STATS.map(statName => [
 				statName,
 				formatChampionStatValue(statName, this.stats.value.total[statName as IChampionStatName]),
 			]),
-		) as Record<IChampionStatName, number>),
+		) as UnwrapRef<IDamageSourceComputed['formattedStatTotals']>),
 		items: computed((): (IComputedItemDescription | undefined)[] => {
 			return this.items.value.map((item): IComputedItemDescription | undefined =>
 				item && computeItemDescription(item, this),
 			);
 		}),
-		itemSpecifics: computed((): ({
-			specific: IItemSpecific;
-			abilityId: IItemAbilityId;
-		} | undefined)[] => this.items.value.map((item) => {
+		itemSpecifics: computed((): UnwrapRef<IDamageSourceComputed['itemSpecifics']> => this.items.value.map((item) => {
 			if (item) {
 				const abilityId = GameAbilityId.build(ABILITY_TYPE.item, item.id);
 				const specific = resolveAbilitySpecific<any>(abilityId) as IItemSpecific;
@@ -859,7 +843,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 			}
 			return undefined;
 		})),
-		masterworkItemSlotIndex: computed((): number => {
+		masterworkItemSlotIndex: computed((): UnwrapRef<IDamageSourceComputed['masterworkItemSlotIndex']> => {
 			let index = -1;
 
 			if (this.champion.value?.id === 'Ornn') {
@@ -877,7 +861,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 
 			return index;
 		}),
-		abilities: computed((): Record<IChampionAbilityKey, IComputedAbilityDescription[]> => {
+		abilities: computed((): UnwrapRef<IDamageSourceComputed['abilities']> => {
 			return Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
 				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
@@ -885,12 +869,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 					GameAbilityId.build(ABILITY_TYPE.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
 					this,
 				)) || []];
-			})) as Record<IChampionAbilityKey, IComputedAbilityDescription[]>;
+			})) as UnwrapRef<IDamageSourceComputed['abilities']>;
 		}),
-		effects: ref<IComputedAppliedEffect[]>([]) as unknown as ShallowRef<IComputedAppliedEffect[]>,
-		dynamicVariables: computed((): {
-			items: Record<string, Record<string, any>>;
-		} => {
+		effects: ref([]),
+		dynamicVariables: computed((): UnwrapRef<IDamageSourceComputed['dynamicVariables']> => {
 			return {
 				items: Object.fromEntries(
 					this.items.value.filter(Boolean).map(item => [
@@ -898,6 +880,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id]?.dynamicVariables?.(this) ?? {},
 					]),
 				),
+				runes: {
+					shards: Object.fromEntries(Object.entries(this.runes.value.shards).map(([shardSlot, shardValue]) => [
+						shardSlot,
+						shardValue && (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.dynamicVariables?.(this),
+					])) as UnwrapRef<IDamageSourceComputed['dynamicVariables']>['runes']['shards'],
+				},
 			};
 		}),
 	};
@@ -1038,7 +1026,7 @@ export function computeItemDescription(
 			] as [typeof STAT_ICON[IItemStat], number, string];
 		});
 
-	const gp10 = itemVariableValue('GP10', item, damageSource?.isRanged.value, damageSource);
+	const gp10 = itemVariableValue('GP10', item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource);
 	/* should probably handle the array output (value for melee/ranged) but not necessary for now */
 	if (typeof gp10.value === 'number') {
 		stats.push([
@@ -1083,7 +1071,7 @@ function additionalItemText(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 				replaceStringtableVariables(value, TEXT.stringtable).replaced,
 				'item',
-				[item, damageSource?.isRanged.value, damageSource],
+				[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
 				replaceOptions,
 			)
 		: {};
@@ -1248,7 +1236,8 @@ function abilityVariantText(
 	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		[variant, level, allAbilityVariants],
+		// TODO use computed dynamic variables
+		[variant, {}, level, allAbilityVariants],
 		{ replaceWithName: replaceVariablesWithNames },
 	);
 
@@ -1303,7 +1292,7 @@ function formatItemDescriptionText(
 		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 		const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
 			.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-				const { value } = itemVariableValue('Cooldown', item, damageSource?.isRanged.value, damageSource);
+				const { value } = itemVariableValue('Cooldown', item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource);
 				return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
 			})
 			.replace('(', '<span>(')
@@ -1312,7 +1301,7 @@ function formatItemDescriptionText(
 		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameVariables(
 			headingStringtableReplaced,
 			'item',
-			[item, damageSource?.isRanged.value, damageSource],
+			[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
 			replaceOptions,
 		);
 
@@ -1330,7 +1319,7 @@ function formatItemDescriptionText(
 				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameVariables(
 					paragraphStringtableReplaced,
 					'item',
-					[item, damageSource?.isRanged.value, damageSource],
+					[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
 					replaceOptions,
 				);
 
@@ -1422,6 +1411,35 @@ export type IProviderGroupInternalItemData = {
 
 export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
 
+type IPossibleDynamicVariables = Record<string, (string | number)[]>;
+
+export interface ICalculatedDynamicVariable {
+	value: string | number | [number | undefined, number | undefined];
+}
+
+export interface ICalculatedDynamicVariables {
+	[key: string]: ICalculatedDynamicVariable;
+}
+
+export interface IDynamicVariablesProvider {
+	/**
+	 * record containing possible dynamic values for an ability variable (all values the variable is expected to resolve to)
+	 * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
+	 * but also for reporting unresolved description variables (if not found during `updateData`, will be reported as unknown)
+	 * they should be calculated in `dynamicVariables`
+	 *
+	 * if empty `[]`, variable is not expected to be used for resolving a stringtable value like `{{ game_spell_Kayn_Q_main_@f1@ }}` and is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
+	 */
+	POSSIBLE_DYNAMIC_VARIABLES: IPossibleDynamicVariables;
+	/** calculate any dynamic variable used in the ability's description */
+	dynamicVariables: (self: DamageSource) => ICalculatedDynamicVariables;
+}
+
+export type IProviderGroupDynamicVariables = {
+	POSSIBLE_DYNAMIC_VARIABLES?: never;
+	dynamicVariables?: never;
+} | IDynamicVariablesProvider;
+
 export interface IAbilityImageTextProvider {
 	/**
 	 * text on the item's image, like current heartsteel/mejai stacks
@@ -1481,6 +1499,24 @@ export interface IComputedAppliedEffect {
 	specific: IEffectSpecific;
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
+}
+
+interface IDamageSourceComputed {
+	formattedStatTotals: ComputedRef<Record<IChampionStatName, number>>;
+	items: ComputedRef<(IComputedItemDescription | undefined)[]>;
+	itemSpecifics: ComputedRef<({
+		specific: IItemSpecific;
+		abilityId: IItemAbilityId;
+	} | undefined)[]>;
+	masterworkItemSlotIndex: ComputedRef<number>;
+	abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
+	effects: ShallowRef<IComputedAppliedEffect[]>;
+	dynamicVariables: ComputedRef<{
+		items: Record<string, ICalculatedDynamicVariables>;
+		runes: {
+			shards: Record<IRuneShardSlotName, ICalculatedDynamicVariables | undefined>;
+		};
+	}>;
 }
 
 /**
