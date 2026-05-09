@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import { ITEM_SPECIFICS, type IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
+import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
@@ -10,6 +10,7 @@ import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDama
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared';
@@ -573,7 +574,6 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 	const removedIds = prevIds.filter(id => !currIds.includes(id));
 	const columnProperty = target === props.damageSources ? 'source' : 'target';
 
-	let isFirstAffected = false;
 	for (const id of removedIds) {
 		damageSourceWatchers.get(id)?.();
 		damageSourceWatchers.delete(id);
@@ -583,18 +583,12 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 			if (column[columnProperty]?.id === id) {
 				column[columnProperty] = undefined;
 				recalculateColumn(column);
-				if (i === 0) {
-					isFirstAffected = true;
-				}
 			}
 		}
 	}
 
 	for (const id of addedIds) {
 		const source = (target.find(damageSource => damageSource.id === id))!;
-		if (target[0] === source) {
-			isFirstAffected = true;
-		}
 		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
 			emit('configurationChanged');
 			const columns = resultColumns.value.filter(column => column.source?.id === source.id || column.target?.id === source.id);
@@ -602,10 +596,6 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 				recalculateColumn(column);
 			}
 		}));
-	}
-
-	if (isFirstAffected && resultColumns.value.length === 1 && target.length === 1) {
-		resultColumns.value[0]![columnProperty] ??= target[0];
 	}
 }
 

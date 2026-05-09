@@ -228,6 +228,7 @@ export function useCalculatorState(
 			resultsTable.value.flipResults = true;
 		}
 
+		let noColumnsRestored = true;
 		const savedColumns = params.getAll('tblCol');
 		for (let i = 0; i < savedColumns.length; i++) {
 			const [rawSourceIndex, rawTargetIndex] = savedColumns[i]!.split('-');
@@ -250,9 +251,10 @@ export function useCalculatorState(
 			const target = targetIndex !== undefined ? damageTargets.value[targetIndex] : undefined;
 
 			if (source || target) {
+				noColumnsRestored = false;
 				i && resultsTable.value.addResultsColumn();
-				resultsTable.value.resultColumns.at(-1)!.target = target;
 				resultsTable.value.resultColumns.at(-1)!.source = source;
+				resultsTable.value.resultColumns.at(-1)!.target = target;
 			}
 		}
 
@@ -305,7 +307,7 @@ export function useCalculatorState(
 			}
 		}
 
-		if (damageSources.value.length === 1 && damageTargets.value.length === 1) {
+		if (noColumnsRestored && damageSources.value.length === 1 && damageTargets.value.length === 1) {
 			resultsTable.value.resultColumns[0]!.source = damageSources.value[0];
 			resultsTable.value.resultColumns[0]!.target = damageTargets.value[0];
 		}

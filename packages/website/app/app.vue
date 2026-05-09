@@ -48,7 +48,7 @@ if (import.meta.client) {
 
 _setupGlobalKeyModifiers();
 
-/* expected to have DamageSources added in `restoreState` */
+/* expected to have DamageSources added in `restoreState`, shallowRefs because otherwise ref properties inside of classes get messed up */
 const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 
