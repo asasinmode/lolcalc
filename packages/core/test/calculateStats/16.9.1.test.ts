@@ -36,6 +36,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 1.33);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 35);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.moveSpeed, 413);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.hp, 2874);
 	});
 
 	await t.test('lvl 18 | archangel, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
@@ -59,4 +60,26 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 60);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 2053);
 	});
+
+	await t.test('lvl 18 | seraph, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ahri', {
+			level: 18,
+			runes: {
+				shards: {
+					offensive: 'attackspeed',
+					flex: 'adaptive',
+					defensive: 'health',
+				},
+			},
+			items: [ITEMS[ITEM_NAME_TO_ID.seraphsEmbrace], ITEMS[ITEM_NAME_TO_ID.blackfireTorch], ITEMS[ITEM_NAME_TO_ID.berserkerGreaves], ITEMS[ITEM_NAME_TO_ID.guinsoo], ITEMS[ITEM_NAME_TO_ID.riftmaker], ITEMS[ITEM_NAME_TO_ID.rabadon]],
+			internalItemData: {
+				bBlaze: 1,
+			} satisfies IInternalItemDataOf<'blackfireTorch'>,
+		});
+
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 575);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 60);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 2443);
+	});
+});
 });

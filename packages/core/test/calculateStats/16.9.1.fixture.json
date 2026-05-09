@@ -92,6 +92,56 @@
 				"PercentAttackSpeedMod": 0.25
 			}
 		},
+		"3040": {
+			"id": "3040",
+			"name": "Seraph's Embrace",
+			"searchString": "seraphsembrace;spelldamage;mana;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 25
+			},
+			"gold": {
+				"total": 2900,
+				"sell": 2030
+			},
+			"image": "3040.png",
+			"epicness": 5,
+			"dataValues": {
+				"APFromMana": 0.02,
+				"HealthThreshold": 0.3,
+				"ShieldDuration": 3,
+				"LifelineCooldown": 90,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"ShieldValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.18,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusAPCalc": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"itemGroups": [
+				"{2bb000ae}",
+				"Items/ItemGroups/LifelineItems"
+			],
+			"categories": {
+				"mage": true
+			}
+		},
 		"3041": {
 			"name": "Mejai's Soulstealer",
 			"stats": {

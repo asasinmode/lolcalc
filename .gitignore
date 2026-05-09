@@ -6,4 +6,4 @@ node_modules
 .cache
 *.tsbuildinfo
 
-reference_images
+game_reference

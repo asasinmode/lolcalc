@@ -278,6 +278,19 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 	},
+	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
+		calculateHooks: {
+			preBonus: {
+				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					const bonusAp = itemTotalStats.mana * (ITEMS as TItems)[ITEM_NAME_TO_ID.seraphsEmbrace].dataValues.APFromMana;
+					calculatedVariables.apMultipliersBase += bonusAp;
+					itemPassivesStats.abilityPower += bonusAp;
+					itemTotalStats.abilityPower += bonusAp;
+					calculatedVariables.archangelSeraphAwe = bonusAp;
+				},
+			},
+		},
+	},
 	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.trinity]: {
