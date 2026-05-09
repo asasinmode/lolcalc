@@ -1044,7 +1044,8 @@ export function computeItemDescription(
 			] as [typeof STAT_ICON[IItemStat], number, string];
 		});
 
-	const gp10 = itemVariableValue('GP10', item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource);
+	/* dynamic variables not passed as they shouldn't be needed */
+	const gp10 = itemVariableValue('GP10', item, undefined, damageSource?.isRanged.value, damageSource);
 	/* should probably handle the array output (value for melee/ranged) but not necessary for now */
 	if (typeof gp10.value === 'number') {
 		stats.push([

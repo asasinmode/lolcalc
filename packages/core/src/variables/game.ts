@@ -18,7 +18,8 @@ interface IVariableValueResult {
 
 /**
  * `dynamicVariables` can be either
- * - `IDynamicVariablesProvider['POSSIBLE_DYNAMIC_VARIABLES']` when variables are resolved in `updateData` script. These are used only for supressing warning for unknown variables that are actually calculated by `dynamicVariables`
+ * - `IDynamicVariablesProvider['POSSIBLE_DYNAMIC_VARIABLES']` when variables are resolved in `updateData` script or a description is created without a `DamageSource` and it needs known/unknown variables to be valid. See `replaceGameVariables`' `options.overrideDynamicVariables`
+ *     In `updateData` script these are used only for supressing warning for unknown variables that are actually calculated by `dynamicVariables`
  * - the return value of `IDynamicVariablesProvider['dynamicVariables']` when actually calculating and using the values
  */
 export interface IDynamicVariables {
@@ -221,6 +222,11 @@ export interface IGameVariableValueParameters {
 
 interface IOptions {
 	replaceWithName: boolean;
+	/**
+	 * dynamicVariables to use instead of the ones passed in the `variableValueFunctionArguments`
+	 * used by results table since it gets the item/ability variables from creating the ability's description without any `DamageSource`, which normally provides its `computed.dynamicVariables`
+	 */
+	overrideDynamicVariables: IDynamicVariables;
 }
 
 // TODO rename to replaceGameVariables
@@ -255,7 +261,9 @@ export function replaceGameVariables(
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
 				// @ts-expect-error spread is fine
-				: runeVariableValue)(variableName, ...variableValueFunctionArguments);
+				: runeVariableValue)(variableName, ...(options.overrideDynamicVariables
+			? variableValueFunctionArguments.slice(0, 1).concat(options.overrideDynamicVariables, variableValueFunctionArguments.slice(2))
+			: variableValueFunctionArguments));
 
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {

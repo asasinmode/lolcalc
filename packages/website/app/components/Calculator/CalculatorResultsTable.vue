@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import { ITEM_SPECIFICS, type IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
@@ -264,7 +265,8 @@ function computeSectionRowColumn(
 		|| (section.id === 'aa' && source.champion.value?.id === 'Zeri')
 	) {
 		rv.value = 'n/a';
-	} else if (section.id === CUSTOM_TOTAL_SECTION_ID) { /* expected to be called only for the total row */
+	} else if (section.id === CUSTOM_TOTAL_SECTION_ID) {
+		/* this branch is expected to happen only for the total row, other custom total rows use computedCustomTotalRows */
 		if (!customTotalRows.value.length) {
 			return rv;
 		}
@@ -508,7 +510,10 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computeItemDescription(item, undefined, { replaceWithName: true })!;
+		const precomputedDescription = computeItemDescription(item, undefined, {
+			replaceWithName: true,
+			overrideDynamicVariables: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id]?.POSSIBLE_DYNAMIC_VARIABLES,
+		})!;
 
 		section.name ||= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);
