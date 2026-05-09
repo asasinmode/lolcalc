@@ -256,7 +256,28 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.whisperingCirclet]: tearItemSpecifics,
-	[ITEM_NAME_TO_ID.archangelsStaff]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.archangelsStaff]: {
+		...tearItemSpecifics,
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemBaseStats, itemPassivesStats }, { miscDebug }) {
+					const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'archangelsStaff'>;
+					const bonusMana = manaflow;
+					itemPassivesStats.mana += bonusMana;
+					miscDebug.archangelSeraphBonusMana = itemBaseStats.mana + bonusMana;
+				},
+			},
+			preBonus: {
+				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					const bonusAp = itemTotalStats.mana * (ITEMS as TItems)[ITEM_NAME_TO_ID.archangelsStaff].dataValues.APFromMana;
+					calculatedVariables.apMultipliersBase += bonusAp;
+					itemPassivesStats.abilityPower += bonusAp;
+					itemTotalStats.abilityPower += bonusAp;
+					calculatedVariables.archangelSeraphAwe = bonusAp;
+				},
+			},
+		},
+	},
 	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.trinity]: {

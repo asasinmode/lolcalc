@@ -67,12 +67,16 @@ export interface IStatsCalculationVariables {
 	apMultipliersBase: number;
 	/** ap gained from rabadon's passive */
 	rabadonMagicalOpus?: number;
+	/** ap gained from archangel'seraph's passive */
+	archangelSeraphAwe?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
 	/** bonus hp used in riftmaker passive calculation */
 	riftmakerBonusHp?: number;
+	/** bonus mana used in archangel/seraph's passive calculation */
+	archangelSeraphBonusMana?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
