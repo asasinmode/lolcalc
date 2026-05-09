@@ -1,4 +1,5 @@
 import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
+import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type { IEffectData } from '@lolcalc/data';
@@ -12,6 +13,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
+import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
@@ -1181,8 +1183,14 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 		variables: {
 			variableSourceKeys: [],
 			variableType: 'item',
-			/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
-			variableValueParameters: [item, { lolcalcChampRange: [1, 2], ChampRange: [1, 2] }],
+			variableValueParameters: [
+				item,
+				Object.assign(
+					/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
+					{ lolcalcChampRange: [1, 2], ChampRange: [1, 2] },
+					(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id]?.POSSIBLE_DYNAMIC_VARIABLES,
+				),
+			],
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
