@@ -1,5 +1,6 @@
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
+import type { IDamageResultTableColumn } from '~/utils/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
@@ -92,34 +93,42 @@ export function useCalculatorState(
 
 		const savedChampionIds = new Set<string>();
 		const savedItemIds = new Set<string>();
-		if (resultsTable.value && (resultsTable.value.resultColumns.slice(1).some(col => col.source || col.target) || resultsTable.value.resultColumns[0]!.source !== damageSources.value[0] || resultsTable.value.resultColumns[0]!.target !== damageTargets.value[0])) {
-			for (const column of resultsTable.value?.resultColumns || []) {
-				const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
-				const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
-				if (~columnSourceIndex || ~columnTargetIndex) {
-					column.source?.champion.value?.id && savedChampionIds.add(column.source.champion.value!.id);
-					column.target?.champion.value?.id && savedChampionIds.add(column.target.champion.value!.id);
-					if (column.source) {
-						for (const item of (column.source as unknown as DamageSource).items.value) {
-							item && savedItemIds.add(item.id);
-						}
-					}
-					if (column.target) {
-						for (const item of (column.target as unknown as DamageSource).items.value) {
-							item && savedItemIds.add(item.id);
-						}
-					}
 
-					const params = new URLSearchParams();
-					params.append('tblCol', `${~columnSourceIndex ? columnSourceIndex : ''}-${~columnTargetIndex ? columnTargetIndex : ''}`);
-					const str = params.toString();
-					wholeState += `&${str}`;
-					if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
-						break;
+		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
+			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
+			const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
+			if (~columnSourceIndex || ~columnTargetIndex) {
+				column.source?.champion.value?.id && savedChampionIds.add(column.source.champion.value!.id);
+				column.target?.champion.value?.id && savedChampionIds.add(column.target.champion.value!.id);
+				if (column.source) {
+					for (const item of (column.source as unknown as DamageSource).items.value) {
+						item && savedItemIds.add(item.id);
 					}
-					queryState += `&${str}`;
+				}
+				if (column.target) {
+					for (const item of (column.target as unknown as DamageSource).items.value) {
+						item && savedItemIds.add(item.id);
+					}
 				}
 			}
+			return [columnSourceIndex, columnTargetIndex];
+		}
+
+		if (resultsTable.value && (resultsTable.value.resultColumns.slice(1).some(col => col.source || col.target) || resultsTable.value.resultColumns[0]!.source !== damageSources.value[0] || resultsTable.value.resultColumns[0]!.target !== damageTargets.value[0])) {
+			for (const column of resultsTable.value?.resultColumns || []) {
+				const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
+
+				const params = new URLSearchParams();
+				params.append('tblCol', `${~columnSourceIndex ? columnSourceIndex : ''}-${~columnTargetIndex ? columnTargetIndex : ''}`);
+				const str = params.toString();
+				wholeState += `&${str}`;
+				if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
+					break;
+				}
+				queryState += `&${str}`;
+			}
+		} else if (resultsTable.value) {
+			savedUsedResultColumnIds(resultsTable.value.resultColumns[0]!);
 		}
 
 		const keptSections = resultsTable.value?.resultSections.filter(section => section.abilityId.type === 'all'
