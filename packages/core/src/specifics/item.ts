@@ -167,6 +167,7 @@ export const ITEM_SPECIFICS = {
 		},
 		dynamicVariables() {
 			return {
+				/** damage dealt to champions */
 				f2: 0,
 			};
 		},
@@ -250,6 +251,7 @@ export const ITEM_SPECIFICS = {
 		},
 		dynamicVariables(self) {
 			return {
+				/** ap gained from passive */
 				f1: self.stats.value.variables.riftmakerVoidInfusion,
 			};
 		},
@@ -277,6 +279,12 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
+		dynamicVariables(self) {
+			return {
+				/** ap gained from passive */
+				f2: self.stats.value.variables.archangelSeraphAwe,
+			};
+		},
 	},
 	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
 		calculateHooks: {
@@ -289,6 +297,14 @@ export const ITEM_SPECIFICS = {
 					calculatedVariables.archangelSeraphAwe = bonusAp;
 				},
 			},
+		},
+		dynamicVariables(self) {
+			return {
+				/** ap gained from passive */
+				BonusAPCalc: self.stats.value.variables.archangelSeraphAwe,
+				/** damage shielded */
+				f5: 0,
+			};
 		},
 	},
 	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
@@ -638,6 +654,7 @@ export const ITEM_SPECIFICS = {
 		},
 		dynamicVariables(self) {
 			return {
+				/** ap gained from passive */
 				f1: self.stats.value.variables.rabadonMagicalOpus,
 			};
 		},

@@ -24,7 +24,9 @@ export function itemVariableValue(variable: string, item: IItem, isRanged?: bool
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
 
-	if (item.stats?.[variable as IItemStat] !== undefined) {
+	if (damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable] !== undefined) {
+		value = Math.round(damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable]);
+	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
 		value = item.dataValues[variable];
@@ -55,8 +57,6 @@ export function itemVariableValue(variable: string, item: IItem, isRanged?: bool
 		// value = result;
 	} else if (variable.startsWith('Effect')) {
 		value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
-	} else if (damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable] !== undefined) {
-		value = Math.round(damageSource?.computed.dynamicVariables.value.items[item.id]?.[variable]);
 	}
 
 	return { value, isMeleeRanged };
