@@ -3,7 +3,7 @@ import type { IDynamicVariables } from './game';
 export function replaceStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},
-	/** either resolved dynamic variables or possible values of dynamic variables */
+	/** either resolved dynamic variables or possible values of dynamic variables, see also the interface's itself documentation */
 	dynamicVariables: IDynamicVariables = {},
 	/** whether to wrap unknown variables in `<unknown>` */
 	wrapUnknown = true,

@@ -12,7 +12,7 @@ import type { IHypotheticalRuneSpecifics } from './specifics/rune.ts';
 import type { IReplaceGameVariablesRV } from './types';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ICON_GOLD, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
+import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
@@ -873,6 +873,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 		}),
 		effects: ref([]),
 		dynamicVariables: computed((): UnwrapRef<IDamageSourceComputed['dynamicVariables']> => {
+			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
+
 			return {
 				items: Object.fromEntries(
 					this.items.value.filter(Boolean).map(item => [
@@ -886,6 +888,22 @@ export class DamageSource<Id extends IChampionId | undefined = any> implements I
 						shardValue && (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.dynamicVariables?.(this),
 					])) as UnwrapRef<IDamageSourceComputed['dynamicVariables']>['runes']['shards'],
 				},
+				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
+					const abilityLevel = abilityKey === 'passive' ? 1 : this.abilityLevels.value[abilityKey];
+					return [
+						abilityKey,
+						this.champion.value
+							? this.champion.value!.abilities[abilityKey].variants.map(abilityVariant => Object.assign(
+									Object.fromEntries(Object.entries(abilityVariant.dataValues ?? {}).map(([key, values]) => [
+										key,
+										{ value: (values as number[])[abilityLevel]! } satisfies ICalculatedDynamicVariable,
+									])),
+									championSpecific?.dynamicVariables?.(this),
+									championSpecific?.[abilityKey]?.dynamicVariables?.(this),
+								))
+							: [],
+					];
+				})) as UnwrapRef<IDamageSourceComputed>['dynamicVariables']['abilities'],
 			};
 		}),
 	};
@@ -1107,9 +1125,12 @@ export function computeAbilityDescription(
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
 	const allVariants = allChampionAbilityVariants(champion);
 
+	const dynamicVariables = damageSource?.computed.dynamicVariables.value.abilities[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex];
+
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceStringtableVariables(
 		variant.name,
 		champion.stringtable,
+		dynamicVariables,
 	);
 
 	const variables: IComputedAbilityDescription['variables'] = new Map();
@@ -1125,6 +1146,7 @@ export function computeAbilityDescription(
 		allVariants,
 		variant.tooltip || '<unknown>UNKNOWN</unknown>',
 		variant,
+		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
 		replaceOptions?.replaceWithName,
@@ -1139,6 +1161,7 @@ export function computeAbilityDescription(
 		allVariants,
 		variant.tooltipExtended || '',
 		variant,
+		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
 		replaceOptions?.replaceWithName,
@@ -1152,6 +1175,7 @@ export function computeAbilityDescription(
 		allVariants,
 		variant.tooltipExtendedBelowLine || '',
 		variant,
+		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
 		replaceOptions?.replaceWithName,
@@ -1223,6 +1247,7 @@ function abilityVariantText(
 	allAbilityVariants: IChampionAbilityVariant[],
 	value: string,
 	variant: IChampionAbilityVariant,
+	dynamicVariables?: ICalculatedDynamicVariables,
 	level?: number,
 	/** champion's stringtable */
 	stringtable?: Record<string, string>,
@@ -1231,13 +1256,13 @@ function abilityVariantText(
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(
 		value,
 		stringtable,
+		dynamicVariables,
 	);
 
 	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		// TODO use computed dynamic variables
-		[variant, {}, level, allAbilityVariants],
+		[variant, dynamicVariables, level, allAbilityVariants],
 		{ replaceWithName: replaceVariablesWithNames },
 	);
 
@@ -1516,6 +1541,7 @@ interface IDamageSourceComputed {
 		runes: {
 			shards: Record<IRuneShardSlotName, ICalculatedDynamicVariables | undefined>;
 		};
+		abilities: Record<IChampionAbilityKey, (ICalculatedDynamicVariables | undefined)[]>;
 	}>;
 }
 
