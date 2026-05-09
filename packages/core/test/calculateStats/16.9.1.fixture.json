@@ -1,4 +1,5 @@
 {
+	"version": "16.9.1",
 	"champions": {
 		"Ahri": {
 			"stats": {
@@ -45,6 +46,43 @@
 				"MinionAP": 0.02,
 				"MonsterDPS": 40,
 				"MonsterAP": 0.02
+			}
+		},
+		"3003": {
+			"id": "3003",
+			"name": "Archangel's Staff",
+			"searchString": "archangelsstaff;aa;seraphsembrace;tear;spelldamage;mana;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 25
+			},
+			"gold": {
+				"total": 2900,
+				"sell": 2030
+			},
+			"image": "3003.png",
+			"from": [
+				"3070",
+				"3802",
+				"3108"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"ManaPerCharge": 5,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 5,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5,
+				"APFromMana": 0.01
+			},
+			"itemGroups": [
+				"Items/ItemGroups/TearItems",
+				"Items/ItemGroups/LifelineItems",
+				"{2bb000ae}"
+			],
+			"categories": {
+				"mage": true
 			}
 		},
 		"3006": {

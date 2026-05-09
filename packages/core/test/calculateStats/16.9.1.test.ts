@@ -52,7 +52,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			internalItemData: {
 				manaflow: 10,
 				bBlaze: 1,
-			} satisfies IInternalItemDataOf<'archangelsStaff' | 'blackfireTorch' | 'guinsoo'>,
+			} satisfies IInternalItemDataOf<'archangelsStaff' | 'blackfireTorch'>,
 		});
 
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 549);
