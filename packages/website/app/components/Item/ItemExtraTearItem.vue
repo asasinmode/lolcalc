@@ -2,6 +2,7 @@
 import type { IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IGameAbilityData } from '@lolcalc/core/specifics';
 import type { IItemSpecific } from '@lolcalc/core/specifics/item';
+import type { TItems } from '@lolcalc/data';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { resolveAbilitySpecific } from '@lolcalc/core/specifics';
 import { ITEMS, PATCH_VERSION } from '@lolcalc/data';
@@ -34,7 +35,7 @@ const TRANSFORMED_IDS: string[] = [
 	ITEM_NAME_TO_ID.fimbulwinter,
 ];
 
-const UNTRANSFORMED_IDS: string[] = [
+const UNTRANSFORMED_IDS = [
 	ITEM_NAME_TO_ID.whisperingCirclet,
 	ITEM_NAME_TO_ID.archangelsStaff,
 	ITEM_NAME_TO_ID.manamune,
@@ -70,6 +71,8 @@ function updateValue(value: number) {
 		(props.damageSource.internalItemData.value as IData).manaflow = value;
 	}
 }
+
+const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRANSFORMED_IDS[number]].dataValues.ManaPerCharge ?? 3);
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
@@ -82,7 +85,7 @@ function updateValue(value: number) {
 		label="Manaflow stacks"
 		:used-number-input="useNumberInput([damageSource.internalItemData as Ref<IData>, 'manaflow'])"
 		:max="360"
-		:step="4"
+		:step
 		:id-prefix="`${idPrefix}-${abilityId.id}`"
 		:disabled="isTransformed"
 		@update:model-value="updateValue"
