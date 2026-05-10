@@ -20,7 +20,7 @@ import { GameAbilityId } from './GameAbilityId.ts';
 import { gameAbilityImage } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
-import { resolveAbilitySpecific } from './specifics/index.ts';
+import { calculateDynamicVariables, resolveAbilitySpecific } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
 import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
@@ -879,13 +879,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				items: Object.fromEntries(
 					this.items.value.filter(Boolean).map(item => [
 						item!.id,
-						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id]?.dynamicVariables?.calculate(this as any) ?? {},
+						calculateDynamicVariables(this, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id]?.dynamicVariables) ?? {},
 					]),
 				),
 				runes: {
 					shards: Object.fromEntries(Object.entries(this.runes.value.shards).map(([shardSlot, shardValue]) => [
 						shardSlot,
-						shardValue && (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.dynamicVariables?.calculate(this as any),
+						shardValue && calculateDynamicVariables(this, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.dynamicVariables),
 					])) as UnwrapRef<IDamageSourceComputed['dynamicVariables']>['runes']['shards'],
 				},
 				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
@@ -893,14 +893,17 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					return [
 						abilityKey,
 						this.champion.value
-							? this.champion.value!.abilities[abilityKey].variants.map(abilityVariant => Object.assign(
-									Object.fromEntries(Object.entries(abilityVariant.dataValues ?? {}).map(([key, values]) => [
-										key,
-										{ value: (values as number[])[abilityLevel]! } satisfies ICalculatedDynamicVariable,
-									])),
-									championSpecific?.dynamicVariables?.calculate(this as any),
-									championSpecific?.[abilityKey]?.dynamicVariables?.calculate(this as any),
-								))
+							? this.champion.value!.abilities[abilityKey].variants.map((abilityVariant) => {
+									const abilitySpecific = championSpecific?.[abilityKey];
+									return Object.assign(
+										Object.fromEntries(Object.entries(abilityVariant.dataValues ?? {}).map(([key, values]) => [
+											key,
+										{ value: (values as number[])[abilityLevel]! } satisfies Omit<ICalculatedDynamicVariable, 'meta'>,
+										])),
+										calculateDynamicVariables(this, championSpecific?.dynamicVariables),
+										calculateDynamicVariables(this, abilitySpecific?.dynamicVariables),
+									);
+								})
 							: [],
 					];
 				})) as UnwrapRef<IDamageSourceComputed>['dynamicVariables']['abilities'],
@@ -1509,7 +1512,7 @@ interface IDamageSourceComputed {
 	abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
 	effects: ShallowRef<IComputedAppliedEffect[]>;
 	dynamicVariables: ComputedRef<{
-		items: Record<string, ICalculatedDynamicVariables>;
+		items: Record<string, ICalculatedDynamicVariables | undefined>;
 		runes: {
 			shards: Record<IRuneShardSlotName, ICalculatedDynamicVariables | undefined>;
 		};

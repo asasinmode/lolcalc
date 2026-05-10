@@ -1,6 +1,6 @@
 import type { TRunes } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
-import type { ICalculatedDynamicVariables, ISpecificDynamicVariables } from '.';
+import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, ISpecificDynamicVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
 import { defineDynamicVariables } from '.';
@@ -96,7 +96,7 @@ export const RUNE_SPECIFICS = {
 						/** the hp gained on current level */
 						f1: {
 							value: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
-						},
+						} satisfies ReturnType<ISpecificDynamicVariables['calculate']>[string] as ICalculatedDynamicVariable,
 					};
 				},
 			}),

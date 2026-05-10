@@ -64,6 +64,7 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 
 export interface ICalculatedDynamicVariable {
 	value: string | number | [number | undefined, number | undefined];
+	meta?: IDynamicVariableMeta;
 }
 
 export type ICalculatedDynamicVariables<T extends string = string> = Record<T, ICalculatedDynamicVariable>;
@@ -90,7 +91,7 @@ export interface ISpecificDynamicVariables<T extends string = string, Id extends
 	 */
 	known: Record<T, (string | number)[]>;
 	/** calculate any dynamic variable used in the ability's description */
-	calculate: (self: DamageSource<Id>) => ICalculatedDynamicVariables<T>;
+	calculate: (self: DamageSource<Id>) => Record<T, Omit<ICalculatedDynamicVariable, 'meta'>>;
 	/** any dynamic variables' meta information like icon of the stat they scale from */
 	meta?: Partial<Record<T, IDynamicVariableMeta>>;
 }
@@ -99,4 +100,17 @@ export function defineDynamicVariables<T extends string, Id extends IChampionId 
 	config: ISpecificDynamicVariables<T, Id>,
 ): ISpecificDynamicVariables<T, Id> {
 	return config;
+}
+
+/**
+ * calls provided config's `.calculate` then merges `meta: config.meta[variable]` onto each calculated variable
+ */
+export function calculateDynamicVariables(self: DamageSource, config?: ISpecificDynamicVariables): ICalculatedDynamicVariables | undefined {
+	const calculatedVariables = config?.calculate(self);
+	if (calculatedVariables) {
+		for (const variable in calculatedVariables) {
+			Object.assign(calculatedVariables[variable]!, { meta: config!.meta?.[variable] });
+		}
+	}
+	return calculatedVariables;
 }
