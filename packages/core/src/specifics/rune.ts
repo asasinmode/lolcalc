@@ -3,7 +3,7 @@ import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcal
 import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, ISpecificDynamicVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
-import { defineDynamicVariables } from '.';
+import { defineDynamicVariables } from './index.ts';
 
 export function runesEmpty(runes: IChampionRunes): boolean {
 	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;

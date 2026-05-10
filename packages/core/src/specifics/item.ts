@@ -4,7 +4,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupIma
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { defineDynamicVariables } from '.';
+import { defineDynamicVariables } from './index.ts';
 
 const CALC_HOOK_PRIORITY = {
 	[ITEM_NAME_TO_ID.riftmaker]: 10,

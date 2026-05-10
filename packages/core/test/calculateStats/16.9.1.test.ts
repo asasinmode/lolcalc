@@ -105,4 +105,20 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.hp, 675);
 		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 995);
 	});
+
+	await t.test('lvl 1 | seraph, manamune', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			...sourceCommon,
+			level: 1,
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.manamune],
+			internalItemData: {
+				manaflow: 0,
+			} satisfies IInternalItemDataOf<'manamune'>,
+		});
+
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackDamage, 133);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 109);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 40);
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 1875);
+	});
 });
