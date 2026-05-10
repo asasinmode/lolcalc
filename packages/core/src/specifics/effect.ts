@@ -8,6 +8,7 @@ import { GameAbilityId } from '../GameAbilityId.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
 import { ITEM_SPECIFICS } from './item.ts';
 
+/** specific effects' helpers, utils and calculations */
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWounds),

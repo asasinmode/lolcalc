@@ -10,7 +10,7 @@ import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, IGameAbil
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
-import type { IReplaceGameVariablesOptions } from './variables/game.ts';
+import type { IDynamicVariables, IReplaceGameVariablesOptions } from './variables/game.ts';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ICON_GOLD, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
@@ -875,6 +875,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		effects: ref([]),
 		dynamicVariables: computed((): UnwrapRef<IDamageSourceComputed['dynamicVariables']> => {
 			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
+			const championDynamicVariables = calculateDynamicVariables(this, championSpecific?.dynamicVariables);
 
 			return {
 				items: Object.fromEntries(
@@ -891,19 +892,22 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				},
 				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
 					const abilityLevel = abilityKey === 'passive' ? 1 : this.abilityLevels.value[abilityKey];
+
 					return [
 						abilityKey,
 						this.champion.value
-							? this.champion.value!.abilities[abilityKey].variants.map((abilityVariant) => {
+							? this.champion.value!.abilities[abilityKey].variants.map((abilityVariant): IDynamicVariables => {
 									const abilitySpecific = championSpecific?.[abilityKey];
-									return Object.assign(
-										Object.fromEntries(Object.entries(abilityVariant.dataValues ?? {}).map(([key, values]) => [
-											key,
-										{ value: (values as number[])[abilityLevel]! } satisfies Omit<ICalculatedDynamicVariable, 'meta'>,
-										])),
-										calculateDynamicVariables(this, championSpecific?.dynamicVariables),
-										calculateDynamicVariables(this, abilitySpecific?.dynamicVariables),
-									);
+									const dataValues: ICalculatedDynamicVariables = Object.fromEntries(Object.entries(abilityVariant.dataValues ?? {}).map(([key, values]) => [
+										key,
+										{ value: (values as number[])[abilityLevel]! } satisfies ICalculatedDynamicVariable,
+									]));
+									const abilityDynamicVariables = calculateDynamicVariables(this, abilitySpecific?.dynamicVariables);
+
+									return {
+										values: Object.assign(dataValues, championDynamicVariables?.values, abilityDynamicVariables?.values),
+										meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.values),
+									};
 								})
 							: [],
 					];
@@ -1262,7 +1266,7 @@ function abilityVariantText(
 	allAbilityVariants: IChampionAbilityVariant[],
 	value: string,
 	variant: IChampionAbilityVariant,
-	dynamicVariables?: ICalculatedDynamicVariables,
+	dynamicVariables?: IDynamicVariables,
 	level?: number,
 	/** champion's stringtable */
 	stringtable?: Record<string, string>,
@@ -1549,11 +1553,11 @@ interface IDamageSourceComputed {
 	abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
 	effects: ShallowRef<IComputedAppliedEffect[]>;
 	dynamicVariables: ComputedRef<{
-		items: Record<string, ICalculatedDynamicVariables | undefined>;
+		items: Record<string, IDynamicVariables | undefined>;
 		runes: {
-			shards: Record<IRuneShardSlotName, ICalculatedDynamicVariables | undefined>;
+			shards: Record<IRuneShardSlotName, IDynamicVariables | undefined>;
 		};
-		abilities: Record<IChampionAbilityKey, (ICalculatedDynamicVariables | undefined)[]>;
+		abilities: Record<IChampionAbilityKey, (IDynamicVariables | undefined)[]>;
 	}>;
 }
 

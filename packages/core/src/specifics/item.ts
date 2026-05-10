@@ -46,6 +46,7 @@ const gluttonousGreavesSpecific = {
 	},
 } satisfies IItemSpecific;
 
+/** specific items' helpers, utils and calculations */
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
 		calculateBonusAd: (self: DamageSource): number => {

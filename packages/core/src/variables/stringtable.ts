@@ -20,7 +20,11 @@ export function replaceStringtableVariables(
 			let subVariableName = variableName.slice(subVariableStartIndex + 1);
 			subVariableName = subVariableName.slice(0, subVariableName.indexOf('@'));
 
-			const subVariableValue = subVariableName in dynamicVariables ? dynamicVariables[subVariableName] : Object.entries(dynamicVariables).find(([key]) => key.toLowerCase() === subVariableName)?.[1];
+			const subVariableValue = dynamicVariables.values
+				? subVariableName in dynamicVariables.values
+					? dynamicVariables.values[subVariableName]
+					: Object.entries(dynamicVariables.values).find(([key]) => key.toLowerCase() === subVariableName)?.[1]
+				: undefined;
 
 			if (subVariableValue !== undefined) {
 				/** array branch means it's most likely updateGameData and it's being used to get all of the possible values for this variable to save in the champion's stringtable */

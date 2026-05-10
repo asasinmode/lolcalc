@@ -513,7 +513,10 @@ async function addResultsSection(
 
 		const precomputedDescription = computeItemDescription(item, undefined, {
 			replaceWithName: true,
-			overrideDynamicVariables: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id]?.POSSIBLE_DYNAMIC_VARIABLES,
+			overrideDynamicVariables: {
+				values: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id]?.dynamicVariables?.known,
+				meta: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id]?.dynamicVariables?.meta,
+			},
 		})!;
 
 		section.name ||= item.name;

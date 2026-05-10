@@ -626,7 +626,10 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 								variableType: 'rune',
 								variableValueParameters: [
 									slotValue,
-									(RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.POSSIBLE_DYNAMIC_VARIABLES,
+									{
+										values: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.dynamicVariables?.known,
+										meta: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.dynamicVariables?.meta,
+									},
 								],
 								variableSourceKeys: ['effectAmount'],
 							},
@@ -1185,11 +1188,13 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 			variableType: 'item',
 			variableValueParameters: [
 				item,
-				Object.assign(
-					/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
-					{ lolcalcChampRange: [1, 2], ChampRange: [1, 2] },
-					(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id]?.POSSIBLE_DYNAMIC_VARIABLES,
-				),
+				{
+					values: Object.assign(
+						/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
+						{ lolcalcChampRange: [1, 2], ChampRange: [1, 2] },
+						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id]?.dynamicVariables?.known,
+					),
+				},
 			],
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;

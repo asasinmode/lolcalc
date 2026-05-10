@@ -15,6 +15,7 @@ export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmp
 	return !areEmpty && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2 && shards.offensive && shards.flex && shards.defensive);
 };
 
+/** specific runes' helpers, utils and calculations */
 export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {

@@ -28,10 +28,7 @@ export function cooldownReductionPercentageFromHaste(haste: number): number {
 
 export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';
 
-/**
- * object containing specific champion's helpers, utils and calculations
- * for `POSSIBLE_DYNAMIC_VALUES` see `./types.d.ts`
- */
+/** specific champions' helpers, utils and calculations */
 export const CHAMPION_SPECIFICS = {
 	TargetDummy: {
 		setupData(self): IChampionStats {

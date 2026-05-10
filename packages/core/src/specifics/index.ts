@@ -3,6 +3,7 @@ import type { IChampionId } from '@lolcalc/data/types';
 import type { TItemNameToId } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
+import type { IDynamicVariables } from '../variables/game';
 import type { IHypotheticalChampionSpecifics, TChampionSpecifics } from './champion';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
@@ -64,7 +65,6 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 
 export interface ICalculatedDynamicVariable {
 	value: string | number | [number | undefined, number | undefined];
-	meta?: IDynamicVariableMeta;
 }
 
 export type ICalculatedDynamicVariables<T extends string = string> = Record<T, ICalculatedDynamicVariable>;
@@ -95,8 +95,11 @@ export interface ISpecificDynamicVariables<T extends string = string, Id extends
 	 */
 	known: Record<T, (string | number)[]>;
 	/** calculate any dynamic variable used in the ability's description */
-	calculate: (self: DamageSource<Id>) => Record<T, Omit<ICalculatedDynamicVariable, 'meta'>>;
-	/** any dynamic variables' meta information like icon of the stat they scale from */
+	calculate: (self: DamageSource<Id>) => Record<T, ICalculatedDynamicVariable>;
+	/**
+	 * any dynamic variables' meta information like icon of the stat they scale from.
+	 * this is added by `defineDynamicVariables` to `known` when called and later on added to calculated variables by `calculateDynamicVariables`
+	 */
 	meta?: Partial<Record<T, IDynamicVariableMeta>>;
 }
 
@@ -106,15 +109,9 @@ export function defineDynamicVariables<T extends string, Id extends IChampionId 
 	return config;
 }
 
-/**
- * calls provided config's `.calculate` then merges `meta: config.meta[variable]` onto each calculated variable
- */
-export function calculateDynamicVariables(self: DamageSource, config?: ISpecificDynamicVariables): ICalculatedDynamicVariables | undefined {
-	const calculatedVariables = config?.calculate(self);
-	if (calculatedVariables) {
-		for (const variable in calculatedVariables) {
-			Object.assign(calculatedVariables[variable]!, { meta: config!.meta?.[variable] });
-		}
-	}
-	return calculatedVariables;
+export function calculateDynamicVariables(self: DamageSource, config?: ISpecificDynamicVariables): IDynamicVariables | undefined {
+	return config && {
+		values: config.calculate(self),
+		meta: config.meta,
+	};
 }

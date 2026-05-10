@@ -15,23 +15,23 @@ interface IVariableValueResult {
 	actualVariableName?: string;
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[];
-	meta?: IDynamicVariableMeta & {
-		/** if `true`, will round the formatted variable. Used for all dynamic variables atm */
-		round?: boolean;
-	};
+	meta?: IDynamicVariableMeta;
+	/** whether was resolved from the provided dynamic variables */
+	isDynamic?: boolean;
 }
 
 /**
  * `dynamicVariables` can be either
- * - `IDynamicVariablesProvider['POSSIBLE_DYNAMIC_VARIABLES']` when variables are resolved in `updateData` script or a description is created without a `DamageSource` and it needs known/unknown variables to be valid. See `replaceGameVariables`' `options.overrideDynamicVariables`
+ * - `ISpecificDynamicVariables.known` when variables are resolved in `updateData` script or a description is created without a `DamageSource` and it needs known/unknown variables to be valid. See `replaceGameVariables`' `options.overrideDynamicVariables`
  *     In `updateData` script these are used only for supressing warning for unknown variables that are actually calculated by `dynamicVariables`
- * - the return value of `IDynamicVariablesProvider['dynamicVariables']` when actually calculating and using the values
+ * - the return value of `ISpecificDynamicVariables.calculate`'s return value when actually calculating and using the values
  */
 export interface IDynamicVariables {
-	[key: string]: ICalculatedDynamicVariable | (string | number)[];
+	values?: Record<string, ICalculatedDynamicVariable | (string | number)[]>;
+	meta?: Partial<Record<string, IDynamicVariableMeta>> | undefined;
 }
 
-function resolveDynamicVariable(value: IDynamicVariables[string]): IVariableValueResult {
+function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[string]): IVariableValueResult {
 	return Array.isArray(value) ? { value: value[0] ?? 0 } : value;
 }
 
@@ -44,10 +44,10 @@ export function itemVariableValue(
 ): IVariableValueResult {
 	let rv: IVariableValueResult = {};
 
-	if (dynamicVariables[variable] !== undefined) {
-		rv = resolveDynamicVariable(dynamicVariables[variable]);
-		rv.meta ??= {};
-		rv.meta.round = true;
+	if (dynamicVariables.values?.[variable] !== undefined) {
+		rv = resolveDynamicVariable(dynamicVariables.values[variable]);
+		rv.meta = dynamicVariables.meta?.[variable] ?? {};
+		rv.isDynamic = true;
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
@@ -96,10 +96,10 @@ export function runeVariableValue(variable: string, rune: IRune, dynamicVariable
 	}
 
 	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated */
-	if (dynamicVariables[variable]) {
-		rv.value = resolveDynamicVariable(dynamicVariables[variable]).value;
-		rv.meta ??= {};
-		rv.meta.round = true;
+	if (dynamicVariables.values?.[variable]) {
+		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]).value;
+		rv.meta = dynamicVariables.meta?.[variable] ?? {};
+		rv.isDynamic = true;
 		return rv;
 	}
 
@@ -267,7 +267,7 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName, allValues, meta } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues, isDynamic, meta } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
@@ -338,8 +338,8 @@ export function replaceGameVariables(
 			variables.set(variableName, variable as [number, number]);
 
 			return `%i:meleeactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable[0]) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : meta?.round ? Math.round(variable[1]) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+				options.replaceWithName ? variableName : (isDynamic ? Math.round(variable[0]) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+				options.replaceWithName ? variableName : isDynamic ? Math.round(variable[1]) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -350,9 +350,9 @@ export function replaceGameVariables(
 			: 'melee';
 
 		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}`
+			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}`
 			: `${tagWrapStart}${
-				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)
+				options.replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)
 			}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
