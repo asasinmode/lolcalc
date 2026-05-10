@@ -436,7 +436,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
 			.map(([, value]) => value)
-			.join('|');
+			.join('.');
 
 		const runePathKeys = Object.keys(RUNES.paths);
 		const roleQuestKeys = Object.keys(TEXT.roleQuests);
@@ -456,11 +456,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
-			Object.entries(this.internalItemData.value).filter(([key]) => !key.startsWith('_')).map(([key, value]) => `${key}~${value}`).join('|'),
+			Object.entries(this.internalItemData.value).filter(([key]) => !key.startsWith('_')).map(([key, value]) => `${key}~${value}`).join('.'),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
 				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}-${effect.data.join('-')}`)
-				.join('|'),
+				.join('.'),
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
@@ -506,7 +506,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawInternalItemData?.length) {
-			for (const keyValue of rawInternalItemData.split('|')) {
+			for (const keyValue of rawInternalItemData.split('.')) {
 				const [key, rawValue] = keyValue.split('~');
 				if (key && rawValue) {
 					const value = Number.parseInt(rawValue);
@@ -648,14 +648,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		const fromStringifiedInternalData: (number | undefined)[] = [];
 		if (rawInternalData?.length) {
-			for (const rawValue of rawInternalData.split('|')) {
+			for (const rawValue of rawInternalData.split('.')) {
 				const value = Number.parseFloat(rawValue);
 				fromStringifiedInternalData.push(Number.isNaN(value) ? undefined : value);
 			}
 		}
 
 		if (rawEffectsData?.length) {
-			for (const rawEffect of rawEffectsData.split('|')) {
+			for (const rawEffect of rawEffectsData.split('.')) {
 				const [effectObjectNameIndex, ...rawData] = rawEffect.split('-');
 				const effectSpecificEntry = effectObjectNameIndex && EFFECT_SPECIFICS_OBJECT_ENTRIES[Number.parseInt(effectObjectNameIndex)];
 				if (effectSpecificEntry) {
