@@ -36,7 +36,7 @@ export const CHAMPION_SPECIFICS = {
 			return Object.fromEntries(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
 				return [
 					statName,
-					Math.max(0, (self.internalData.value as IChampionStats)[statName]
+					Math.max(0, (self.internalData.value)[statName]
 					?? (self.stats.value.initial[statName]) * (statMeta.isPercentage ? 100 : 1)),
 				];
 			},
@@ -180,7 +180,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ezreal: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Ezreal'>): number => (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS(self)),
@@ -189,7 +189,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats, baseStats }) {
-					const { passiveStacks } = (self as DamageSource<'Ezreal'>).internalData.value;
+					const { passiveStacks } = self.internalData.value;
 					const bonusAttackSpeedPercent = passiveStacks * (self.champion.value as typeof IEzreal).abilities.passive.variants[0]!.dataValues.AttackSpeedPerStack[1]!;
 					championPassiveStats.bonusAttackSpeedPercent = bonusAttackSpeedPercent;
 					championPassiveStats.attackSpeed = bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
@@ -212,7 +212,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Irelia: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IIrelia).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Irelia'>): number => (self.champion.value! as typeof IIrelia).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Irelia.MAX_PASSIVE_STACKS(self)),
@@ -220,7 +220,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Jax: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IJax).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Jax'>): number => (self.champion.value! as typeof IJax).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS(self)),
@@ -243,7 +243,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Kaisa: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IKaisa).abilities.passive.variants[0]!.dataValues.PMaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Kaisa'>): number => (self.champion.value! as typeof IKaisa).abilities.passive.variants[0]!.dataValues.PMaxStacks[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS(self)),
@@ -298,7 +298,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Naafiri: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): ComputedRef<number> => computed((): number =>
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Naafiri'>): ComputedRef<number> => computed((): number =>
 			(VARIABLE_CALCULATION_FNS.mFormulaParts(self, (self.champion.value! as typeof INaafiri).abilities.passive.variants[0]!.spellCalculations.PackmateCap) ?? 0)
 			+ (self.champion.value! as typeof INaafiri).abilities.w.variants[0]!.dataValues.PackmatesToAdd[self.abilityLevels.value.w]!,
 		),
@@ -332,7 +332,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Orianna: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IOrianna).abilities.passive.variants[0]!.dataValues.StackCount[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Orianna'>): number => (self.champion.value! as typeof IOrianna).abilities.passive.variants[0]!.dataValues.StackCount[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS(self)),
@@ -377,7 +377,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Rumble: {
-		setupData(self: DamageSource): { isOverheated: number } {
+		setupData(self): { isOverheated: number } {
 			return {
 				isOverheated: clamp(0, Math.round(self.internalData.value.isOverheated ?? 0), 1),
 			};
@@ -414,7 +414,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Seraphine: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof ISeraphine).abilities.passive.variants[0]!.dataValues.MaxNotes[1]! * 5,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Seraphine'>): number => (self.champion.value! as typeof ISeraphine).abilities.passive.variants[0]!.dataValues.MaxNotes[1]! * 5,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Seraphine.MAX_PASSIVE_STACKS(self)),
@@ -444,7 +444,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Sona: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof ISona).abilities.passive.variants[0]!.dataValues.AccelerandoCap[1]! * 2,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Sona'>): number => (self.champion.value! as typeof ISona).abilities.passive.variants[0]!.dataValues.AccelerandoCap[1]! * 2,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Sona.MAX_PASSIVE_STACKS(self)),
@@ -473,7 +473,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Syndra: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof ISyndra).abilities.passive.variants[0]!.dataValues.MaxStackAmount[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Syndra'>): number => (self.champion.value! as typeof ISyndra).abilities.passive.variants[0]!.dataValues.MaxStackAmount[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Syndra.MAX_PASSIVE_STACKS(self)),
@@ -567,7 +567,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	MonkeyKing: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IMonkeyKing).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'MonkeyKing'>): number => (self.champion.value! as typeof IMonkeyKing).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.MonkeyKing.MAX_PASSIVE_STACKS(self)),
@@ -575,7 +575,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Zaahen: {
-		MAX_PASSIVE_STACKS: (self: DamageSource): number => (self.champion.value! as typeof IZaahen).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Zaahen'>): number => (self.champion.value! as typeof IZaahen).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Zaahen.MAX_PASSIVE_STACKS(self)),
@@ -593,7 +593,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined> = 
 	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
 } & {
 	/** champion's possible dynamic values, can be overriden per ability and ability variant */
-	calculateHooks?: ICalculateChampionStatsHookSource;
+	calculateHooks?: ICalculateChampionStatsHookSource<Id>;
 	[key: string]: any;
 };
 

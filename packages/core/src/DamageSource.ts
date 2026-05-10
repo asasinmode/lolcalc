@@ -1549,29 +1549,29 @@ interface IDamageSourceComputed {
 /**
  * any hooks that will be called at various points in calculations, if provided
  */
-export interface ICalculateChampionStatsHookSource {
+export interface ICalculateChampionStatsHookSource<Id extends IChampionId | undefined = undefined> {
 	/** runs after resolving the champion in `calculateChampionStats` */
-	postInit?: ICalculateChampionStatsHook<(self: DamageSource, args: { baseStats: IChampionStats }) => void>;
-	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+	postInit?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: { baseStats: IChampionStats }) => void>;
+	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		itemBaseStats: IChampionStats;
 		itemPassivesStats: IChampionStats;
 		baseStats: IChampionStats;
 		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
-	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		baseStats: IChampionStats;
 		runeShardStats: Partial<IChampionStats>;
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 	/** runs after creating empty `championPassiveStats` */
-	onChampionPassive?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+	onChampionPassive?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		baseStats: IChampionStats;
 		championPassiveStats: Partial<IChampionStats>;
 	}) => void>;
 	/** runs before totalling all stats to total bonus */
-	preBonus?: ICalculateChampionStatsHook<(self: DamageSource, args: {
+	preBonus?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		runeShardStats: Partial<IChampionStats>;
 		baseStats: IChampionStats;
 		itemBaseStats: IChampionStats;
