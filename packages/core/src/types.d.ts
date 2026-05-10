@@ -29,4 +29,12 @@ export interface IReplaceGameVariablesRV {
 	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
 	variablesAllValues: Map<string, (string | number)[]>;
 	unknownVariables: [rawName: string, actualName: string | undefined][];
+	/** whether any of the detected variables has additional info expected to be shown in the extended version (when holding shift) */
+	anyExtendedVariables: boolean;
+}
+
+export interface IReplaceStringtableVariablesRV {
+	replaced: string;
+	stringtableVariables: Map<string, string>;
+	unknownStringtableVariables: Map<string, Set<string>>;
 }

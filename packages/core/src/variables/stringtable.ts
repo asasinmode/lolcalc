@@ -1,3 +1,4 @@
+import type { IReplaceStringtableVariablesRV } from '../types';
 import type { IDynamicVariables } from './game';
 
 export function replaceStringtableVariables(
@@ -9,11 +10,7 @@ export function replaceStringtableVariables(
 	wrapUnknown = true,
 	unknownStringtableVariables: Map<string, Set<string>> = new Map(),
 	stringtableVariables: Map<string, string> = new Map(),
-): {
-	replaced: string;
-	stringtableVariables: Map<string, string>;
-	unknownStringtableVariables: Map<string, Set<string>>;
-} {
+): IReplaceStringtableVariablesRV {
 	const replaced = text.replace(/\{\{ ?(.+?) ?\}\}/g, (_, name) => {
 		let variableName = name.toLowerCase();
 

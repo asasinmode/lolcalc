@@ -49,6 +49,10 @@ const abilitySize = computed(() => props.gameAbilityId ? abilityImageSize(props.
 
 const el = useTemplateRef('el');
 
+const anyExtendedInfo = computed(() => computedDescription.value?.tooltipExtendedBelowLine
+	|| computedDescription.value?.extendedVariables?.length
+	|| computedDescription.value?.anyExtendedVariableInfo);
+
 defineExpose({ el });
 </script>
 
@@ -87,9 +91,8 @@ defineExpose({ el });
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
 		<footer
 			v-if="(computedDescription?.tooltipExtended && computedDescription.tooltipExtended !== computedDescription.tooltip)
-				|| computedDescription?.tooltipExtendedBelowLine
-				|| computedDescription?.extendedVariables?.length"
-			v-show="!globalKeyModifiers.shift || computedDescription?.tooltipExtendedBelowLine || computedDescription?.extendedVariables"
+				|| anyExtendedInfo"
+			v-show="!globalKeyModifiers.shift || anyExtendedInfo"
 		>
 			<div
 				v-if="computedDescription?.tooltipExtendedBelowLine"

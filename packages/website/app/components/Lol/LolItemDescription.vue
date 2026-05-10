@@ -39,7 +39,7 @@ const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
 
 const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inventory');
 
-const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions) && !globalKeyModifiers.value.shift);
+const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions || computedDescription.value?.anyExtendedVariableInfo) && !globalKeyModifiers.value.shift);
 const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.tooltipInventory);
 const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
 const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);
@@ -110,7 +110,12 @@ defineExpose({ header });
 				<span>{{ name }}</span>
 			</li>
 		</ul>
-		<template v-for="([heading, ...paragraphs], i) in hasOtherView && hoverTooltip ? computedDescription?.[`tooltip${view}`] : computedDescription?.tooltipShop" :key="i">
+		<template
+			v-for="([heading, ...paragraphs], i) in hasOtherView && hoverTooltip
+				? computedDescription?.[`tooltip${view}${globalKeyModifiers.shift ? 'Extended' : ''}`]
+				: (computedDescription?.[`tooltipShop${globalKeyModifiers.shift ? 'Extended' : ''}`])"
+			:key="i"
+		>
 			<h4 v-html="heading" />
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>

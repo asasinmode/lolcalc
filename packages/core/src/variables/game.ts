@@ -229,24 +229,27 @@ export interface IGameVariableValueParameters {
 	championAbility: ParametersExceptFirst<typeof championAbilityVariableValue>;
 };
 
-interface IOptions {
-	replaceWithName: boolean;
+export interface IReplaceGameVariablesOptions {
+	replaceWithName?: boolean;
 	/**
 	 * dynamicVariables to use instead of the ones passed in the `variableValueFunctionArguments`
 	 * used by results table since it gets the item/ability variables from creating the ability's description without any `DamageSource`, which normally provides its `computed.dynamicVariables`
 	 */
-	overrideDynamicVariables: IDynamicVariables;
+	overrideDynamicVariables?: IDynamicVariables;
+	/** whether to show some additional info about the variable, usually expected when holding shift */
+	isExtended?: boolean;
 }
 
-export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
-export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
-export function replaceGameVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: Partial<IOptions>): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
 export function replaceGameVariables(
 	text: string,
 	variableType: IGameVariableType,
 	variableValueFunctionArguments: any[],
-	options: Partial<IOptions> = {},
+	options: Partial<IReplaceGameVariablesOptions> = {},
 ): IReplaceGameVariablesRV {
+	let anyExtendedVariables = false;
 	const unknownVariables: [string, string | undefined][] = [];
 	const variables = new Map<string, number | [number, number]>();
 	const variablesAllValues = new Map<string, (string | number)[]>();
@@ -273,6 +276,16 @@ export function replaceGameVariables(
 			? variableValueFunctionArguments.slice(0, 1).concat(options.overrideDynamicVariables, variableValueFunctionArguments.slice(2))
 			: variableValueFunctionArguments));
 
+		let metaSuffix = '';
+		if (meta?.statIconKey) {
+			(meta?.extendedEquals && options.isExtended)
+				? metaSuffix = ` = (${meta.extendedEquals}%i:${STAT_ICON[meta.statIconKey]}%)`
+				: metaSuffix = ` (%i:${STAT_ICON[meta.statIconKey]}%)`;
+		} else if (meta?.extendedEquals && options.isExtended) {
+			metaSuffix = ` = (${meta.extendedEquals})`;
+		}
+		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
+
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
 				let parsedValue: string | number = roundVariable(value * multiplier);
@@ -294,11 +307,11 @@ export function replaceGameVariables(
 
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
-			return `${tagWrapStart}<unknown>@${options.replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}`;
+			return `${tagWrapStart}<unknown>@${options.replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
 		}
 
 		if (typeof variable === 'string') {
-			return `${tagWrapStart}${options.replaceWithName ? variableName : variable}${tagWrapEnd}`;
+			return `${tagWrapStart}${options.replaceWithName ? variableName : variable}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		if (Array.isArray(variable)) {
@@ -313,7 +326,7 @@ export function replaceGameVariables(
 
 			return `%i:meleeactive%${tagWrapStart}${
 				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable[0]) : variable[0])}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : meta?.round ? Math.round(variable[1]) : variable[1]}${tagWrapEnd}`;
+				options.replaceWithName ? variableName : meta?.round ? Math.round(variable[1]) : variable[1]}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -327,12 +340,10 @@ export function replaceGameVariables(
 			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)}${tagWrapEnd}`
 			: `${tagWrapStart}${
 				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)
-			}${
-				meta?.statIconKey ? ` (%i:${STAT_ICON[meta.statIconKey]}%)` : ''
-			}${tagWrapEnd}`;
+			}${tagWrapEnd}${metaSuffix}`;
 	});
 
-	return { replaced, variables, unknownVariables, variablesAllValues };
+	return { replaced, variables, unknownVariables, variablesAllValues, anyExtendedVariables };
 }
 
 const statIconNameValues = Object.values(STAT_ICON);

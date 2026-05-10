@@ -9,7 +9,8 @@ import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/
 import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
-import type { IReplaceGameVariablesRV } from './types';
+import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
+import type { IReplaceGameVariablesOptions } from './variables/game.ts';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ICON_GOLD, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
@@ -1058,8 +1059,11 @@ export function computeItemDescription(
 		]);
 	}
 
-	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, replaceOptions);
-	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, replaceOptions);
+	const { text: tooltipShopReplaced, anyExtendedVariables: shopAnyExtendedVariables } = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, replaceOptions);
+	const { text: tooltipInventoryReplaced, anyExtendedVariables: inventoryAnyExtendedVariables } = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, replaceOptions);
+
+	const { text: tooltipShopExtended } = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
+	const { text: tooltipInventoryExtended } = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
 
 	const replacedExtended = additionalItemText(extended, item, damageSource, variables, unknownVariables, replaceOptions);
 	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, replaceOptions);
@@ -1075,8 +1079,11 @@ export function computeItemDescription(
 		subtitleLeft,
 		subtitleRight,
 		stats,
-		tooltipShop: shopFormatted,
-		tooltipInventory: inventoryFormatted,
+		tooltipShop: tooltipShopReplaced,
+		tooltipInventory: tooltipInventoryReplaced,
+		tooltipShopExtended,
+		tooltipInventoryExtended,
+		anyExtendedVariableInfo: shopAnyExtendedVariables || inventoryAnyExtendedVariables,
 	};
 }
 
@@ -1146,6 +1153,7 @@ export function computeAbilityDescription(
 		unknownV: tooltipUnknownV,
 		variablesAllValues: tooltipVariablesAV,
 		variables: tooltipVariables,
+		anyExtendedVariables: tooltipAnyExtendedVariables,
 	} = abilityVariantText(
 		allVariants,
 		variant.tooltip || '<unknown>UNKNOWN</unknown>',
@@ -1153,7 +1161,7 @@ export function computeAbilityDescription(
 		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
-		replaceOptions?.replaceWithName,
+		replaceOptions,
 	);
 	const {
 		replaced: tooltipExtendedReplaced,
@@ -1161,6 +1169,7 @@ export function computeAbilityDescription(
 		unknownV: tooltipExtendedUnknownV,
 		variablesAllValues: tooltipExtendedVariablesAV,
 		variables: tooltipExtendedVariables,
+		anyExtendedVariables: tooltipExtendedAnyExtendedVariables,
 	} = abilityVariantText(
 		allVariants,
 		variant.tooltipExtended || '',
@@ -1168,13 +1177,14 @@ export function computeAbilityDescription(
 		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
-		replaceOptions?.replaceWithName,
+		{ ...replaceOptions, isExtended: true },
 	);
 	const {
-		replaced: tooltipExtendedBelowLineReplaced,
-		unknownSV: tooltipExtendedBelowLineUnknownSV,
-		unknownV: tooltipExtendedBelowLineUnknownV,
-		variables: tooltipExtendedBelowLineVariables,
+		replaced: tooltipExtendedBLReplaced,
+		unknownSV: tooltipExtendedBLUnknownSV,
+		unknownV: tooltipExtendedBLUnknownV,
+		variables: tooltipExtendedBLVariables,
+		anyExtendedVariables: tooltipExtendedBLAnyExtendedVariables,
 	} = abilityVariantText(
 		allVariants,
 		variant.tooltipExtendedBelowLine || '',
@@ -1182,14 +1192,14 @@ export function computeAbilityDescription(
 		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
-		replaceOptions?.replaceWithName,
+		{ ...replaceOptions, isExtended: true },
 	);
 
 	mergeMaps(variables, tooltipVariables);
 	mergeMaps(variables, tooltipExtendedVariables);
-	mergeMaps(variables, tooltipExtendedBelowLineVariables);
+	mergeMaps(variables, tooltipExtendedBLVariables);
 
-	for (const unknownVariablesGroup of [tooltipUnknownV, tooltipExtendedUnknownV, tooltipExtendedBelowLineUnknownV]) {
+	for (const unknownVariablesGroup of [tooltipUnknownV, tooltipExtendedUnknownV, tooltipExtendedBLUnknownV]) {
 		for (const unknownVariable of unknownVariablesGroup) {
 			if (!unknownVariables.some(unknownV => unknownV[0] === unknownVariable[0])) {
 				unknownVariables.push(unknownVariable);
@@ -1228,14 +1238,14 @@ export function computeAbilityDescription(
 	}
 
 	// TODO detect unknown cost/cooldown
-	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
+	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBLUnknownSV.size || tooltipExtendedBLUnknownV.length;
 
 	return {
 		gameAbilityId,
 		name: nameReplaced,
 		tooltip: tooltipReplaced,
 		tooltipExtended: tooltipExtendedReplaced,
-		tooltipExtendedBelowLine: tooltipExtendedBelowLineReplaced,
+		tooltipExtendedBelowLine: tooltipExtendedBLReplaced,
 		anyUnknownVariables,
 		cooldown,
 		cost,
@@ -1244,6 +1254,7 @@ export function computeAbilityDescription(
 		variables,
 		unknownVariables,
 		variant,
+		anyExtendedVariableInfo: tooltipAnyExtendedVariables || tooltipExtendedAnyExtendedVariables || tooltipExtendedBLAnyExtendedVariables,
 	};
 }
 
@@ -1255,19 +1266,26 @@ function abilityVariantText(
 	level?: number,
 	/** champion's stringtable */
 	stringtable?: Record<string, string>,
-	replaceVariablesWithNames?: boolean,
-) {
+	replaceOptions?: IReplaceGameVariablesOptions,
+): {
+	replaced: string;
+	unknownSV: IReplaceStringtableVariablesRV['unknownStringtableVariables'];
+	unknownV: IReplaceGameVariablesRV['unknownVariables'];
+	variablesAllValues: IReplaceGameVariablesRV['variablesAllValues'];
+	variables: IReplaceGameVariablesRV['variables'];
+	anyExtendedVariables: IReplaceGameVariablesRV['anyExtendedVariables'];
+} {
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(
 		value,
 		stringtable,
 		dynamicVariables,
 	);
 
-	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameVariables(
+	const { replaced, unknownVariables, variablesAllValues, variables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
 		[variant, dynamicVariables, level, allAbilityVariants],
-		{ replaceWithName: replaceVariablesWithNames },
+		replaceOptions,
 	);
 
 	return {
@@ -1276,6 +1294,7 @@ function abilityVariantText(
 		unknownV: unknownVariables,
 		variablesAllValues,
 		variables,
+		anyExtendedVariables,
 	};
 }
 
@@ -1315,55 +1334,66 @@ function formatItemDescriptionText(
 	damageSource: DamageSource | undefined,
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
-	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
-): [string, ...string[]][] | undefined {
-	return value?.map(([heading, ...paragraphs]) => {
+	replaceOptions?: IReplaceGameVariablesOptions,
+): {
+	text: [string, ...string[]][] | undefined;
+	anyExtendedVariables: boolean;
+} {
+	let anyExtendedVariables = false;
+	return {
+		text: value?.map(([heading, ...paragraphs]) => {
 		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
-		const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
-			.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-				const { value } = itemVariableValue('Cooldown', item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource);
-				return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
-			})
-			.replace('(', '<span>(')
-			.replace(')', ')</span>'), TEXT.stringtable);
+			const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
+				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
+					const { value } = itemVariableValue('Cooldown', item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource);
+					return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+				})
+				.replace('(', '<span>(')
+				.replace(')', ')</span>'), TEXT.stringtable);
 
-		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameVariables(
-			headingStringtableReplaced,
-			'item',
-			[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
-			replaceOptions,
-		);
+			const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown, anyExtendedVariables: headingAnyExtendedVariables } = replaceGameVariables(
+				headingStringtableReplaced,
+				'item',
+				[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+				replaceOptions,
+			);
 
-		for (const unknownVariable of headingUnknown || []) {
-			if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
-				unknownVariables.push(unknownVariable);
-			}
-		}
-		mergeMaps(variables, headingVariables);
+			anyExtendedVariables ||= headingAnyExtendedVariables;
 
-		return [
-			replaceGameIcons(replacedHeading),
-			...paragraphs.map((paragraph) => {
-				const { replaced: paragraphStringtableReplaced } = replaceStringtableVariables(paragraph, TEXT.stringtable);
-				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameVariables(
-					paragraphStringtableReplaced,
-					'item',
-					[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
-					replaceOptions,
-				);
-
-				for (const unknownVariable of paragraphUnknown || []) {
-					if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
-						unknownVariables.push(unknownVariable);
-					}
+			for (const unknownVariable of headingUnknown || []) {
+				if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
+					unknownVariables.push(unknownVariable);
 				}
-				mergeMaps(variables, paragraphVariables);
+			}
+			mergeMaps(variables, headingVariables);
 
-				return replaceGameIcons(replacedParagraph);
-			},
-			),
-		];
-	});
+			return [
+				replaceGameIcons(replacedHeading),
+				...paragraphs.map((paragraph) => {
+					const { replaced: paragraphStringtableReplaced } = replaceStringtableVariables(paragraph, TEXT.stringtable);
+					const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown, anyExtendedVariables: paragraphAnyExtendedVariables } = replaceGameVariables(
+						paragraphStringtableReplaced,
+						'item',
+						[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+						replaceOptions,
+					);
+
+					anyExtendedVariables ||= paragraphAnyExtendedVariables;
+
+					for (const unknownVariable of paragraphUnknown || []) {
+						if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
+							unknownVariables.push(unknownVariable);
+						}
+					}
+					mergeMaps(variables, paragraphVariables);
+
+					return replaceGameIcons(replacedParagraph);
+				},
+				),
+			];
+		}),
+		anyExtendedVariables,
+	};
 }
 
 async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): Promise<IComputedAppliedEffect> {
@@ -1480,6 +1510,8 @@ export interface IComputedAbilityDescription {
 	variables: IReplaceGameVariablesRV['variables'];
 	unknownVariables: IReplaceGameVariablesRV['unknownVariables'];
 	variant: IChampionAbilityVariant;
+	/** see original type's docs */
+	anyExtendedVariableInfo: IReplaceGameVariablesRV['anyExtendedVariables'];
 }
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
@@ -1487,6 +1519,11 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	stats: [iconName: typeof STAT_ICON[IItemStat], value: number, name: string][];
 	variables: ReturnType<typeof replaceGameVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
+	anyExtendedVariableInfo: boolean;
+	/** same as `tooltipShop` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
+	tooltipShopExtended?: ITextData['items'][keyof ITextData['items']]['tooltipShop'];
+	/** same as `tooltipInventory` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
+	tooltipInventoryExtended?: ITextData['items'][keyof ITextData['items']]['tooltipInventory'];
 }
 
 export interface IComputedAppliedEffect {
