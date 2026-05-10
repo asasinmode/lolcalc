@@ -348,20 +348,34 @@ export const ITEM_SPECIFICS = {
 		},
 		dynamicVariables: defineDynamicVariables({
 			known: {
-				BonusAPCalc: [],
 				f5: [],
+				BonusAPCalc: [],
+				ShieldValue: [],
 			},
 			calculate(self) {
 				return {
-					/** ap gained from passive */
-					BonusAPCalc: {
-						value: self.stats.value.variables.archangelSeraphAwe!,
-					},
 					/** damage shielded */
 					f5: {
 						value: 0,
 					},
+					/** ap gained from passive */
+					BonusAPCalc: {
+						value: self.stats.value.variables.archangelSeraphAwe!,
+					},
+					ShieldValue: {
+						value: self.stats.value.total.mana * ITEMS_BY_NAME.seraphsEmbrace.itemCalculations.ShieldValue.mFormulaParts[0]!.mCoefficient,
+					},
 				};
+			},
+			meta: {
+				BonusAPCalc: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana * 100)}% bonus</scalemana>`,
+				},
+				ShieldValue: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.seraphsEmbrace.itemCalculations.ShieldValue.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
+				},
 			},
 		}),
 	},
