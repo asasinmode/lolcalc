@@ -350,8 +350,8 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: tearItemCalculateHookPreItemTotal,
 			preBonus: {
-				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const bonusAD = itemTotalStats.mana * ITEM_SPECIFICS[ITEM_NAME_TO_ID.manamune].ADFromMana;
+				handler(_self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables }) {
+					const bonusAD = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEM_SPECIFICS[ITEM_NAME_TO_ID.manamune].ADFromMana;
 					itemPassivesStats.attackDamage += bonusAD;
 					itemTotalStats.attackDamage += bonusAD;
 					calculatedVariables.manaMuraAwe = bonusAD;

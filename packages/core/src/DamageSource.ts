@@ -1551,6 +1551,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemBaseStats: IChampionStats;
 		itemPassivesStats: IChampionStats;
 		itemTotalStats: IChampionStats;
+		baseOnLevelStats: IChampionStats;
 		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 };
