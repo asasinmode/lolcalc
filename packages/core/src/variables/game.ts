@@ -14,6 +14,8 @@ interface IVariableValueResult {
 	actualVariableName?: string;
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[];
+	/** if `true`, will round the formatted variable. Used for all dynamic variables atm */
+	round?: boolean;
 }
 
 /**
@@ -41,6 +43,7 @@ export function itemVariableValue(
 
 	if (dynamicVariables[variable] !== undefined) {
 		rv = resolveDynamicVariable(dynamicVariables[variable]);
+		rv.round = true;
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
@@ -91,6 +94,7 @@ export function runeVariableValue(variable: string, rune: IRune, dynamicVariable
 	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated */
 	if (dynamicVariables[variable]) {
 		rv.value = resolveDynamicVariable(dynamicVariables[variable]).value;
+		rv.round = true;
 		return rv;
 	}
 
@@ -255,7 +259,7 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName, allValues } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues, round } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
@@ -302,7 +306,9 @@ export function replaceGameVariables(
 			variable[1] = roundVariable(variable[1] * multiplier);
 			variables.set(variableName, variable as [number, number]);
 
-			return `%i:meleeactive%${tagWrapStart}${options.replaceWithName ? variableName : variable[0]}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${options.replaceWithName ? variableName : variable[1]}${tagWrapEnd}`;
+			return `%i:meleeactive%${tagWrapStart}${
+				options.replaceWithName ? variableName : (round ? Math.round(variable[0]) : variable[0])}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+				options.replaceWithName ? variableName : round ? Math.round(variable[1]) : variable[1]}${tagWrapEnd}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -313,8 +319,8 @@ export function replaceGameVariables(
 			: 'melee';
 
 		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : variable}${tagWrapEnd}`
-			: `${tagWrapStart}${options.replaceWithName ? variableName : variable.toString()}${tagWrapEnd}`;
+			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (round ? Math.round(variable) : variable)}${tagWrapEnd}`
+			: `${tagWrapStart}${options.replaceWithName ? variableName : (round ? Math.round(variable) : variable)}${tagWrapEnd}`;
 	});
 
 	return { replaced, variables, unknownVariables, variablesAllValues };
