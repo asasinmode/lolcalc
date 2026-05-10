@@ -240,12 +240,18 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					const value = itemBaseStats.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent;
-					itemPassivesStats.abilityPower += value;
-
-					calculatedVariables.riftmakerVoidInfusion = value;
+				handler(self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
+					const { corruption } = self.internalItemData.value as IInternalItemDataOf<'riftmaker'>;
+					const abilityPower = itemBaseStats.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent;
+					itemPassivesStats.abilityPower += abilityPower;
+					calculatedVariables.riftmakerVoidInfusion = abilityPower;
 					miscDebug.riftmakerBonusHp = itemBaseStats.hp;
+
+					if (corruption === ITEM_SPECIFICS[ITEM_NAME_TO_ID.riftmaker].MAX_STACKS) {
+						const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker.dataValues;
+						const omnivamp = self.isRanged.value ? VampAmountRanged : VampAmountMelee;
+						itemPassivesStats.omnivamp += omnivamp;
+					}
 				},
 				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
 			},
