@@ -273,14 +273,28 @@ export const ITEM_SPECIFICS = {
 		dynamicVariables: defineDynamicVariables({
 			known: {
 				f1: [],
+				lolcalcChampRange: [],
 			},
 			calculate(self) {
+				const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker.dataValues;
+
 				return {
 					/** ap gained from passive */
 					f1: {
 						value: self.stats.value.variables.riftmakerVoidInfusion!,
 					},
+					lolcalcChampRange: {
+						value: self.champion.value
+							? self.isRanged.value ? VampAmountRanged : VampAmountMelee
+							: [VampAmountMelee, VampAmountRanged],
+					},
 				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					multiplier: 100,
+					isPercentage: true,
+				},
 			},
 		}),
 	},

@@ -75,8 +75,12 @@ export interface IDynamicVariableMeta {
 	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
 	 */
 	statIconKey?: Exclude<keyof typeof STAT_ICON, 'slowResist'>;
-	/* when present, formatted variable will have `= (calculation info)` appended to in the extended version (holding shift) */
+	/** when present, formatted variable will have `= (calculation info)` appended to in the extended version (holding shift) */
 	extendedEquals?: string;
+	/** displayed value multiplied by */
+	multiplier?: number;
+	/** `%` will be suffixed to the formatted value */
+	isPercentage?: boolean;
 }
 
 /** the `dynamicVariables` related calculations of a game specific (item/champion/rune/...) */

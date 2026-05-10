@@ -276,6 +276,14 @@ export function replaceGameVariables(
 			? variableValueFunctionArguments.slice(0, 1).concat(options.overrideDynamicVariables, variableValueFunctionArguments.slice(2))
 			: variableValueFunctionArguments));
 
+		/*
+		 * if meta's present, the variable was most likely gotten from dynamicVariables which store their values cached on `DamageSource`
+		 * later on, the variable is multiplied by the multiplier in place, so if this was the original variable, every time `replaceGameVariables` was called the underlying dynamic variable would be modified
+		 */
+		if (meta && Array.isArray(variable)) {
+			variable = [...variable];
+		}
+
 		let metaSuffix = '';
 		if (meta?.statIconKey) {
 			(meta?.extendedEquals && options.isExtended)
@@ -285,6 +293,11 @@ export function replaceGameVariables(
 			metaSuffix = ` = (${meta.extendedEquals})`;
 		}
 		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
+		if (meta?.multiplier) {
+			multiplier = meta.multiplier;
+		}
+
+		const varSymbolSuffix = meta?.isPercentage ? '%' : '';
 
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
@@ -325,8 +338,8 @@ export function replaceGameVariables(
 			variables.set(variableName, variable as [number, number]);
 
 			return `%i:meleeactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable[0]) : variable[0])}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : meta?.round ? Math.round(variable[1]) : variable[1]}${tagWrapEnd}${metaSuffix}`;
+				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable[0]) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+				options.replaceWithName ? variableName : meta?.round ? Math.round(variable[1]) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -337,10 +350,10 @@ export function replaceGameVariables(
 			: 'melee';
 
 		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)}${tagWrapEnd}`
+			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}`
 			: `${tagWrapStart}${
 				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)
-			}${tagWrapEnd}${metaSuffix}`;
+			}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
 	return { replaced, variables, unknownVariables, variablesAllValues, anyExtendedVariables };
