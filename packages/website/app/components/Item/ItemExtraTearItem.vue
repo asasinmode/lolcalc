@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IGameAbilityData } from '@lolcalc/core/specifics';
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics';
 import type { IItemSpecific } from '@lolcalc/core/specifics/item';
 import type { TItems } from '@lolcalc/data';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
@@ -16,7 +15,7 @@ defineEmits<IExtraComponentEmits>();
 
 const { vSemver } = PATCH_VERSION;
 
-type IData = IGameAbilityData<IItemAbilityId<typeof ITEM_NAME_TO_ID.tear>>;
+type IData = IInternalItemDataOf<'tear'>;
 
 const ALTERNATE_ITEM_FORMS: Record<string, string> = {
 	[ITEM_NAME_TO_ID.whisperingCirclet]: ITEM_NAME_TO_ID.diademOfSongs,

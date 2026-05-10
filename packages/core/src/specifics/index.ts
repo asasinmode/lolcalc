@@ -69,8 +69,11 @@ export interface ICalculatedDynamicVariable {
 export type ICalculatedDynamicVariables<T extends string = string> = Record<T, ICalculatedDynamicVariable>;
 
 export interface IDynamicVariableMeta {
-	/** when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it */
-	statIconKey?: keyof typeof STAT_ICON;
+	/**
+	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it
+	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
+	 */
+	statIconKey?: Exclude<keyof typeof STAT_ICON, 'slowResist'>;
 	/* when present, formatted variable will have `= (calculation info)` appended to in the extended version (holding shift) */
 	extendedEquals?: string;
 }

@@ -328,7 +328,6 @@ export function replaceGameVariables(
 			: `${tagWrapStart}${
 				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)
 			}${
-				/* TODO this doesnt handle the elaborate stat icons that are full blown paths like `slotResist` but for now unused */
 				meta?.statIconKey ? ` (%i:${STAT_ICON[meta.statIconKey]}%)` : ''
 			}${tagWrapEnd}`;
 	});

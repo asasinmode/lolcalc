@@ -28,9 +28,8 @@ const tearItemSpecifics = {
 const tearItemCalculateHookPreItemTotal = {
 	handler(self, { itemBaseStats, itemPassivesStats }, { miscDebug }) {
 		const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
-		const bonusMana = manaflow;
-		itemPassivesStats.mana += bonusMana;
-		miscDebug.tearItemBonusMana = itemBaseStats.mana + bonusMana;
+		itemPassivesStats.mana += manaflow;
+		miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
 	},
 } satisfies ICalculateChampionStatsHookSource['preItemTotal'];
 
@@ -279,7 +278,12 @@ export const ITEM_SPECIFICS = {
 			},
 		}),
 	},
-	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.tear]: {
+		...tearItemSpecifics,
+		calculateHooks: {
+			preItemTotal: tearItemCalculateHookPreItemTotal,
+		},
+	},
 	[ITEM_NAME_TO_ID.whisperingCirclet]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.archangelsStaff]: {
 		...tearItemSpecifics,
