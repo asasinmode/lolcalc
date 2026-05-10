@@ -28,7 +28,7 @@ const tearItemSpecifics = {
 const tearItemCalculateHookPreItemTotal = {
 	handler(self, { itemBaseStats, itemPassivesStats }, { miscDebug }) {
 		const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
-		itemPassivesStats.mana += manaflow;
+		itemPassivesStats.mana += manaflow ?? 0;
 		miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
 	},
 } satisfies ICalculateChampionStatsHookSource['preItemTotal'];
