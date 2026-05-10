@@ -1,7 +1,9 @@
 import type { TRunes } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
-import type { DamageSource, ICalculateChampionStatsHookSource, ICalculatedDynamicVariable, IProviderGroupDynamicVariables } from '../DamageSource';
+import type { ICalculatedDynamicVariables, ISpecificDynamicVariables } from '.';
+import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
+import { defineDynamicVariables } from '.';
 
 export function runesEmpty(runes: IChampionRunes): boolean {
 	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;
@@ -16,18 +18,22 @@ export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmp
 export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {
-			POSSIBLE_DYNAMIC_VARIABLES: { f1: [0, 1] },
-			dynamicVariables(self) {
-				const { adaptiveForceStatVariable } = self.stats.value.meta;
-				return {
-					f1: {
-						value: adaptiveForceStatVariable,
-					},
-					f2: {
-						value: (RUNES as TRunes).shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
-					},
-				};
-			},
+			dynamicVariables: defineDynamicVariables({
+				known: { f1: [0, 1], f2: [] },
+				calculate(self) {
+					const { adaptiveForceStatVariable } = self.stats.value.meta;
+					return {
+						/** which `perk_tooltip_dynamic_statmodadaptive_@f1@` to use. 0 for ad; 1 for ap */
+						f1: {
+							value: adaptiveForceStatVariable,
+						},
+						/** how much of the `@f1` stat is gained */
+						f2: {
+							value: (RUNES as TRunes).shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
+						},
+					};
+				},
+			}),
 			calculateHooks: {
 				onRuneShards: {
 					handler(_self, { runeShardStats, adaptiveForceMeta }) {
@@ -83,14 +89,17 @@ export const RUNE_SPECIFICS = {
 		healthscaling: {
 			/** [wiki formula](https://wiki.leagueoflegends.com/en-us/Rune#Shards) */
 			calculateValue: (self: DamageSource): number => 10 + (180 - 10) / 17 * (self.level.value - 1),
-			POSSIBLE_DYNAMIC_VARIABLES: { f1: [] },
-			dynamicVariables(self): { f1: ICalculatedDynamicVariable } {
-				return {
-					f1: {
-						value: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
-					},
-				};
-			},
+			dynamicVariables: defineDynamicVariables({
+				known: { f1: [] },
+				calculate(self): ICalculatedDynamicVariables<'f1'> {
+					return {
+						/** the hp gained on current level */
+						f1: {
+							value: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
+						},
+					};
+				},
+			}),
 			calculateHooks: {
 				onRuneShards: {
 					handler(self, { runeShardStats }) {
@@ -123,7 +132,8 @@ export interface IHypotheticalRuneSpecifics {
 	};
 };
 
-export type IRuneSpecific = IProviderGroupDynamicVariables & IProviderGroupDynamicVariables & {
+export interface IRuneSpecific {
+	dynamicVariables?: ISpecificDynamicVariables;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	[key: string]: any;
-};
+}

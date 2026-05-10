@@ -6,9 +6,9 @@ import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHa
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
-import type { IGameAbilityData } from './specifics/index';
+import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
-import type { IHypotheticalRuneSpecifics } from './specifics/rune.ts';
+import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IReplaceGameVariablesRV } from './types';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ICON_GOLD, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
@@ -879,13 +879,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				items: Object.fromEntries(
 					this.items.value.filter(Boolean).map(item => [
 						item!.id,
-						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id]?.dynamicVariables?.(this) ?? {},
+						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id]?.dynamicVariables?.calculate(this as any) ?? {},
 					]),
 				),
 				runes: {
 					shards: Object.fromEntries(Object.entries(this.runes.value.shards).map(([shardSlot, shardValue]) => [
 						shardSlot,
-						shardValue && (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.dynamicVariables?.(this),
+						shardValue && (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.dynamicVariables?.calculate(this as any),
 					])) as UnwrapRef<IDamageSourceComputed['dynamicVariables']>['runes']['shards'],
 				},
 				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
@@ -898,8 +898,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 										key,
 										{ value: (values as number[])[abilityLevel]! } satisfies ICalculatedDynamicVariable,
 									])),
-									championSpecific?.dynamicVariables?.(this),
-									championSpecific?.[abilityKey]?.dynamicVariables?.(this),
+									championSpecific?.dynamicVariables?.calculate(this as any),
+									championSpecific?.[abilityKey]?.dynamicVariables?.calculate(this as any),
 								))
 							: [],
 					];
@@ -1436,35 +1436,6 @@ export type IProviderGroupInternalItemData = {
 } | IDamageSourceInternalItemDataProvider;
 
 export type IProviderGroupDataSetup<Id extends IChampionId | undefined = undefined> = { setupData?: never } | IDamageSourceInternalDataProvider<Id>;
-
-type IPossibleDynamicVariables = Record<string, (string | number)[]>;
-
-export interface ICalculatedDynamicVariable {
-	value: string | number | [number | undefined, number | undefined];
-}
-
-export interface ICalculatedDynamicVariables {
-	[key: string]: ICalculatedDynamicVariable;
-}
-
-export interface IDynamicVariablesProvider {
-	/**
-	 * record containing possible dynamic values for an ability variable (all values the variable is expected to resolve to)
-	 * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
-	 * but also for reporting unresolved description variables (if not found during `updateData`, will be reported as unknown)
-	 * they should be calculated in `dynamicVariables`
-	 *
-	 * if empty `[]`, variable is not expected to be used for resolving a stringtable value like `{{ game_spell_Kayn_Q_main_@f1@ }}` and is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
-	 */
-	POSSIBLE_DYNAMIC_VARIABLES: IPossibleDynamicVariables;
-	/** calculate any dynamic variable used in the ability's description */
-	dynamicVariables: (self: DamageSource) => ICalculatedDynamicVariables;
-}
-
-export type IProviderGroupDynamicVariables = {
-	POSSIBLE_DYNAMIC_VARIABLES?: never;
-	dynamicVariables?: never;
-} | IDynamicVariablesProvider;
 
 export interface IAbilityImageTextProvider {
 	/**

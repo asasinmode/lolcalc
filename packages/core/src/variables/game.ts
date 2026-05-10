@@ -1,5 +1,6 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
-import type { DamageSource, ICalculatedDynamicVariable } from '../DamageSource.ts';
+import type { DamageSource } from '../DamageSource.ts';
+import type { ICalculatedDynamicVariable, IDynamicVariableMeta } from '../specifics/index';
 import type { IReplaceGameVariablesRV } from '../types';
 import { ICON_ON_HIT_IMG, PATCH_VERSION } from '@lolcalc/data';
 import { STAT_ICON } from '@lolcalc/data/meta.ts';
@@ -14,8 +15,10 @@ interface IVariableValueResult {
 	actualVariableName?: string;
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[];
-	/** if `true`, will round the formatted variable. Used for all dynamic variables atm */
-	round?: boolean;
+	meta?: IDynamicVariableMeta & {
+		/** if `true`, will round the formatted variable. Used for all dynamic variables atm */
+		round?: boolean;
+	};
 }
 
 /**
@@ -43,7 +46,8 @@ export function itemVariableValue(
 
 	if (dynamicVariables[variable] !== undefined) {
 		rv = resolveDynamicVariable(dynamicVariables[variable]);
-		rv.round = true;
+		rv.meta ??= {};
+		rv.meta.round = true;
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
@@ -94,7 +98,8 @@ export function runeVariableValue(variable: string, rune: IRune, dynamicVariable
 	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated */
 	if (dynamicVariables[variable]) {
 		rv.value = resolveDynamicVariable(dynamicVariables[variable]).value;
-		rv.round = true;
+		rv.meta ??= {};
+		rv.meta.round = true;
 		return rv;
 	}
 
@@ -259,7 +264,7 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName, allValues, round } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues, meta } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
@@ -307,8 +312,8 @@ export function replaceGameVariables(
 			variables.set(variableName, variable as [number, number]);
 
 			return `%i:meleeactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : (round ? Math.round(variable[0]) : variable[0])}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : round ? Math.round(variable[1]) : variable[1]}${tagWrapEnd}`;
+				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable[0]) : variable[0])}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+				options.replaceWithName ? variableName : meta?.round ? Math.round(variable[1]) : variable[1]}${tagWrapEnd}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -319,8 +324,13 @@ export function replaceGameVariables(
 			: 'melee';
 
 		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (round ? Math.round(variable) : variable)}${tagWrapEnd}`
-			: `${tagWrapStart}${options.replaceWithName ? variableName : (round ? Math.round(variable) : variable)}${tagWrapEnd}`;
+			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)}${tagWrapEnd}`
+			: `${tagWrapStart}${
+				options.replaceWithName ? variableName : (meta?.round ? Math.round(variable) : variable)
+			}${
+				/* TODO this doesnt handle the elaborate stat icons that are full blown paths like `slotResist` but for now unused */
+				meta?.statIconKey ? ` (%i:${STAT_ICON[meta.statIconKey]}%)` : ''
+			}${tagWrapEnd}`;
 	});
 
 	return { replaced, variables, unknownVariables, variablesAllValues };

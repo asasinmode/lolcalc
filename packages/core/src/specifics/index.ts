@@ -1,4 +1,7 @@
+import type { STAT_ICON } from '@lolcalc/data/meta.ts';
+import type { IChampionId } from '@lolcalc/data/types';
 import type { TItemNameToId } from '@lolcalc/shared';
+import type { DamageSource } from '../DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
 import type { IHypotheticalChampionSpecifics, TChampionSpecifics } from './champion';
 import type { TEffectSpecifics } from './effect';
@@ -58,3 +61,39 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 	= K extends any
 		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>
 		: never;
+
+export interface ICalculatedDynamicVariable {
+	value: string | number | [number | undefined, number | undefined];
+}
+
+export type ICalculatedDynamicVariables<T extends string = string> = Record<T, ICalculatedDynamicVariable>;
+
+export interface IDynamicVariableMeta {
+	/** when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it */
+	statIconKey?: keyof typeof STAT_ICON;
+	/* when present, formatted variable will have `= (calculation info)` appended to in the extended version (holding shift) */
+	extendedEquals?: string;
+}
+
+/** the `dynamicVariables` related calculations of a game specific (item/champion/rune/...) */
+export interface ISpecificDynamicVariables<T extends string = string, Id extends IChampionId | undefined = undefined> {
+	/**
+	 * record containing possible dynamic values for an ability variable (all values the variable is expected to resolve to)
+	 * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
+	 * but also for reporting unresolved description variables (if not found during `updateData`, will be reported as unknown)
+	 * they should be calculated in `dynamicVariables`
+	 *
+	 * if empty `[]`, variable is not expected to be used for resolving a stringtable value like `{{ game_spell_Kayn_Q_main_@f1@ }}` and is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
+	 */
+	known: Record<T, (string | number)[]>;
+	/** calculate any dynamic variable used in the ability's description */
+	calculate: (self: DamageSource<Id>) => ICalculatedDynamicVariables<T>;
+	/** any dynamic variables' meta information like icon of the stat they scale from */
+	meta?: Partial<Record<T, IDynamicVariableMeta>>;
+}
+
+export function defineDynamicVariables<T extends string, Id extends IChampionId | undefined = undefined>(
+	config: ISpecificDynamicVariables<T, Id>,
+): ISpecificDynamicVariables<T, Id> {
+	return config;
+}
