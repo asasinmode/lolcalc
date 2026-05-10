@@ -6,7 +6,8 @@ import type { TItems } from '@lolcalc/data';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { resolveAbilitySpecific } from '@lolcalc/core/specifics';
 import { ITEMS, PATCH_VERSION } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
+
 import { VExtrasNumber } from '#components';
 
 const props = defineProps<IExtraComponentProps<'item'>>();
@@ -28,13 +29,6 @@ const ALTERNATE_ITEM_FORMS: Record<string, string> = {
 	[ITEM_NAME_TO_ID.fimbulwinter]: ITEM_NAME_TO_ID.wintersApproach,
 };
 
-const TRANSFORMED_IDS: string[] = [
-	ITEM_NAME_TO_ID.diademOfSongs,
-	ITEM_NAME_TO_ID.seraphsEmbrace,
-	ITEM_NAME_TO_ID.muramana,
-	ITEM_NAME_TO_ID.fimbulwinter,
-];
-
 const UNTRANSFORMED_IDS = [
 	ITEM_NAME_TO_ID.whisperingCirclet,
 	ITEM_NAME_TO_ID.archangelsStaff,
@@ -45,7 +39,7 @@ const UNTRANSFORMED_IDS = [
 const itemIndex = computed(() => props.damageSource.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === ALTERNATE_ITEM_FORMS[props.abilityId.id]));
 const transformedItem = computed(() => ITEMS[ALTERNATE_ITEM_FORMS[props.abilityId.id]!]!);
 
-const isTransformed = ref((TRANSFORMED_IDS as string[]).includes(props.abilityId.id));
+const isTransformed = ref((TRANSFORMED_TEAR_ITEM_IDS).includes(props.abilityId.id));
 
 function transform() {
 	// eslint-disable-next-line vue/no-mutating-props

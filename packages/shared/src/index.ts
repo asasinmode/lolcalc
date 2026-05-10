@@ -289,6 +289,13 @@ export const SUPPORT_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.bloodsong,
 ];
 
+export const TRANSFORMED_TEAR_ITEM_IDS: string[] = [
+	ITEM_NAME_TO_ID.diademOfSongs,
+	ITEM_NAME_TO_ID.seraphsEmbrace,
+	ITEM_NAME_TO_ID.muramana,
+	ITEM_NAME_TO_ID.fimbulwinter,
+];
+
 /**
 	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
 	* `lolcalc` prefixed ones are custom, handled in `updateGameData.ts`

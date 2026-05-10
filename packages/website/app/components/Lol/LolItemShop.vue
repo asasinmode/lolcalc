@@ -7,7 +7,7 @@ import { isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { calculateItemDiscount, itemBuyability } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, ITEMS, PATCH_VERSION, UI } from '@lolcalc/data';
 import { ITEM_SHOP_STAT_FILTERS } from '@lolcalc/data/meta';
-import { ALL_ITEM_CATEGORIES, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { ALL_ITEM_CATEGORIES, ITEM_NAME_TO_ID, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 
 const damageSource = defineModel<DamageSource>();
 
@@ -42,13 +42,6 @@ const BOOT_ITEM_IDS: string[] = [
 	'3020', /* sorcerer's shoes */
 	'3158', /* ionian boots of lucidity */
 	'3008', /* gluttonous grieves */
-];
-
-const TRANSFORMED_TEAR_ITEM_IDS: string[] = [
-	ITEM_NAME_TO_ID.diademOfSongs,
-	ITEM_NAME_TO_ID.seraphsEmbrace,
-	ITEM_NAME_TO_ID.muramana,
-	ITEM_NAME_TO_ID.fimbulwinter,
 ];
 
 const sortedByPrice = computed(() => Object
@@ -212,7 +205,6 @@ const searchResults = computed(() => {
 	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v);
 	return shopItems.value.filter(({ item }) =>
 		item.id !== ITEM_NAME_TO_ID.slightlyMagicalFootwear
-		&& !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id)
 		&& splitSearch.every(word => item.searchString.includes(word)),
 	);
 });
