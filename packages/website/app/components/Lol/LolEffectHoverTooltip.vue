@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import type { IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
+import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { TEffects } from '@lolcalc/data';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
+import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { EFFECTS, ITEMS, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
@@ -60,7 +62,11 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 	}
 
 	const item = ITEMS[id]!;
-	return computeItemDescription(item, props.damageSource);
+	return computeItemDescription(
+		item,
+		props.damageSource,
+		{ overrideDynamicVariables: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id]?.POSSIBLE_DYNAMIC_VARIABLES },
+	);
 });
 
 const computedDescription = computed(() => props.abilityId && (EFFECTS as TEffects)[props.abilityId.id].description);

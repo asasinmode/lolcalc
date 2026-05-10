@@ -713,6 +713,18 @@ export const ITEM_SPECIFICS = {
 			};
 		},
 	},
+	[ITEM_NAME_TO_ID.knightsVow]: {
+		POSSIBLE_DYNAMIC_VARIABLES: {
+			f1: [],
+			f3: [],
+		},
+		dynamicVariables() {
+			return {
+				f1: { value: 0 },
+				f3: { value: 0 },
+			};
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
