@@ -40,9 +40,17 @@ const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
 const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inventory');
 
 const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions || computedDescription.value?.anyExtendedVariableInfo) && !globalKeyModifiers.value.shift);
-const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.tooltipInventory);
+const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some(stat => stat[3])));
 const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
 const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);
+
+const descriptionText = computed(() => {
+	const suffix = globalKeyModifiers.value.shift ? 'Extended' : '';
+	return (hasOtherView.value && props.hoverTooltip
+		? computedDescription.value?.[`tooltip${view.value}${suffix}`]
+		: (computedDescription.value?.[`tooltipShop${suffix}`]))
+	?? computedDescription.value?.[`tooltipShop${suffix}`];
+});
 
 const header = useTemplateRef<HTMLButtonElement>('header');
 
@@ -99,21 +107,21 @@ defineExpose({ header });
 			{{ isMidQuestBoots ? '(Only Mid Lane) Locked until Quest is Completed' : '(Only Support Role) Locked until Support or no quest is chosen' }}
 		</p>
 		<ul>
-			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
+			<li v-for="([icon, value, name, increasedBy], i) in computedDescription?.stats" :key="i">
 				<img
 					:src="typeof icon === 'string' ? `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png` : icon[0]"
 					:width="typeof icon === 'string' ? 20 : icon[1]"
 					:height="typeof icon === 'string' ? 20 : (icon[2] ?? icon[1])"
 					aria-hidden="true"
 				>
-				<span>{{ value }}</span>
+				<span :data-increased="hoverTooltip && isInventoryView && increasedBy ? '' : undefined">
+					{{ value + (hoverTooltip && isInventoryView ? increasedBy ?? 0 : 0) }}
+				</span>
 				<span>{{ name }}</span>
 			</li>
 		</ul>
 		<template
-			v-for="([heading, ...paragraphs], i) in hasOtherView && hoverTooltip
-				? computedDescription?.[`tooltip${view}${globalKeyModifiers.shift ? 'Extended' : ''}`]
-				: (computedDescription?.[`tooltipShop${globalKeyModifiers.shift ? 'Extended' : ''}`])"
+			v-for="([heading, ...paragraphs], i) in descriptionText"
 			:key="i"
 		>
 			<h4 v-html="heading" />
@@ -216,6 +224,10 @@ defineExpose({ header });
 
 				> img {
 					--at-apply: 'size-4.5';
+				}
+
+				> span[data-increased] {
+					--at-apply: 'text-orange-400';
 				}
 
 				> span:last-child {

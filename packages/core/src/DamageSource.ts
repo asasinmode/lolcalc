@@ -1049,7 +1049,7 @@ export function computeItemDescription(
 				STAT_ICON[statName as IItemStat],
 				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
 				name,
-				// damageSource?.stats.value?.itemStatIncreases[item.id]?.[statName as IItemStat],
+				damageSource?.stats.value?.itemStatIncreases[item.id]?.[statName as IItemStat],
 			] as typeof stats[number];
 		});
 
