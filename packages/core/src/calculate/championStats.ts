@@ -101,11 +101,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	itemBaseStats.moveSpeed += baseWithFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
 	itemBaseStats.attackSpeed = itemBaseStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 
+	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
 	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
-			hook(source, { itemBaseStats, itemPassivesStats, baseStats, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
+			hook(source, { itemBaseStats, itemPassivesStats, baseStats, itemStatIncreases, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -172,6 +173,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemBase: itemBaseStats,
 		itemPassive: itemPassivesStats,
 		itemTotal: itemTotalStats,
+		itemStatIncreases,
 		championPassive: championPassiveStats,
 		bonus: bonusStats,
 		total: totalStats,

@@ -1040,7 +1040,7 @@ export function computeItemDescription(
 		footerLeft,
 		keywordDefinitions,
 	} = TEXT.items[item.id] || {};
-	const stats = Object.entries(item.stats)
+	const stats: IComputedItemDescription['stats'] = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
 		.map(([statName, value]) => {
@@ -1049,7 +1049,8 @@ export function computeItemDescription(
 				STAT_ICON[statName as IItemStat],
 				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
 				name,
-			] as [typeof STAT_ICON[IItemStat], number, string];
+				// damageSource?.stats.value?.itemStatIncreases[item.id]?.[statName as IItemStat],
+			] as typeof stats[number];
 		});
 
 	/* dynamic variables not passed as they shouldn't be needed */
@@ -1520,7 +1521,8 @@ export interface IComputedAbilityDescription {
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
 	item: IItem;
-	stats: [iconName: typeof STAT_ICON[IItemStat], value: number, name: string][];
+	/** increasedBy used for items like tear or gluttonous greaves which passives' */
+	stats: [iconName: typeof STAT_ICON[IItemStat], value: number, name: string, increasedBy?: number][];
 	variables: ReturnType<typeof replaceGameVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
 	anyExtendedVariableInfo: boolean;
@@ -1571,6 +1573,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemBaseStats: IChampionStats;
 		itemPassivesStats: IChampionStats;
 		baseStats: IChampionStats;
+		itemStatIncreases: IStatsCalculationResult['itemStatIncreases'];
 		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */

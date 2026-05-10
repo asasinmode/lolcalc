@@ -5,7 +5,7 @@ import type { TItems } from '@lolcalc/data';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { resolveAbilitySpecific } from '@lolcalc/core/specifics';
 import { ITEMS, PATCH_VERSION } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 
 import { VExtrasNumber } from '#components';
 
@@ -28,13 +28,6 @@ const ALTERNATE_ITEM_FORMS: Record<string, string> = {
 	[ITEM_NAME_TO_ID.fimbulwinter]: ITEM_NAME_TO_ID.wintersApproach,
 };
 
-const UNTRANSFORMED_IDS = [
-	ITEM_NAME_TO_ID.whisperingCirclet,
-	ITEM_NAME_TO_ID.archangelsStaff,
-	ITEM_NAME_TO_ID.manamune,
-	ITEM_NAME_TO_ID.wintersApproach,
-];
-
 const itemIndex = computed(() => props.damageSource.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === ALTERNATE_ITEM_FORMS[props.abilityId.id]));
 const transformedItem = computed(() => ITEMS[ALTERNATE_ITEM_FORMS[props.abilityId.id]!]!);
 
@@ -48,7 +41,7 @@ function transform() {
 	if (!isTransformed.value) {
 		for (let i = 0; i < props.damageSource.items.value.length; i++) {
 			const item = props.damageSource.items.value[i];
-			if (item && i !== itemIndex.value && (UNTRANSFORMED_IDS as string[]).includes(item.id)) {
+			if (item && i !== itemIndex.value && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id)) {
 				// eslint-disable-next-line vue/no-mutating-props
 				props.damageSource.items.value[i] = ITEMS[(ALTERNATE_ITEM_FORMS as Record<string, string>)[item.id]!];
 			} else if (item?.id === ITEM_NAME_TO_ID.tear) {

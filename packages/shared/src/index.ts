@@ -1,3 +1,5 @@
+import type { IItemStat } from '@lolcalc/data/types';
+
 export const ABILITY_TYPE = {
 	champion: 'champion',
 	item: 'item',
@@ -43,6 +45,8 @@ export interface IStatsCalculationResult {
 	itemTotal: IChampionStats;
 	/** stats from champion's passive */
 	championPassive: Partial<IChampionStats>;
+	/** specific items' stat increases from their passives used in displaying the item tooltip, like current tear item mana */
+	itemStatIncreases: Record<string, Partial<Record<IItemStat, number>>>;
 	bonus: IChampionStats;
 	total: IChampionStats;
 	meta: {
@@ -287,6 +291,14 @@ export const SUPPORT_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.zazZakRealmspike,
 	ITEM_NAME_TO_ID.solsticeSleigh,
 	ITEM_NAME_TO_ID.bloodsong,
+];
+
+export const UNTRANSFORMED_TEAR_ITEM_IDS: string[] = [
+	ITEM_NAME_TO_ID.tear,
+	ITEM_NAME_TO_ID.whisperingCirclet,
+	ITEM_NAME_TO_ID.archangelsStaff,
+	ITEM_NAME_TO_ID.manamune,
+	ITEM_NAME_TO_ID.wintersApproach,
 ];
 
 export const TRANSFORMED_TEAR_ITEM_IDS: string[] = [

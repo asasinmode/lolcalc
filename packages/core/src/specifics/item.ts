@@ -2,7 +2,7 @@ import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf, ISpecificDynamicVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { defineDynamicVariables } from './index.ts';
 
@@ -26,10 +26,16 @@ const tearItemSpecifics = {
 } satisfies IItemSpecific;
 
 const tearItemCalculateHookPreItemTotal = {
-	handler(self, { itemBaseStats, itemPassivesStats }, { miscDebug }) {
+	handler(self, { itemBaseStats, itemPassivesStats, itemStatIncreases }, { miscDebug }) {
 		const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
 		itemPassivesStats.mana += manaflow ?? 0;
 		miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
+
+		const tearItemId = self.items.value.find(item => item && UNTRANSFORMED_TEAR_ITEM_IDS.includes(item.id))?.id;
+		if (tearItemId) {
+			itemStatIncreases[tearItemId] ??= {};
+			itemStatIncreases[tearItemId]!.FlatMPPoolMod = manaflow;
+		}
 	},
 } satisfies ICalculateChampionStatsHookSource['preItemTotal'];
 
