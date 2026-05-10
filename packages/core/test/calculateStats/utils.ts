@@ -10,17 +10,17 @@ interface IPatchOverridesFixture {
 }
 
 const overriden: {
-	champion: IChampionId[];
 	items: string[];
-} = { champion: [], items: [] };
+} = { items: [] };
 
 export async function setupDamageSource<T extends IChampionId>(fixture: IPatchOverridesFixture, championId: T, overrides: IOverrides<T> = {}): Promise<DamageSource<T>> {
 	const rv = await new DamageSource({ champion: CHAMPIONS[championId], ...overrides }).await();
 	Object.assign(rv.champion.value!, fixture.champions[championId]);
 
-	if (!overriden.champion.includes(championId)) {
+	if (!(championId in fixture.champions)) {
 		console.warn('[setupDamageSource] using champion not present in the fixture', fixture.version, championId);
 	}
+
 	for (const item of rv.items.value) {
 		if (item && !overriden.items.includes(item.id)) {
 			console.warn('[setupDamageSource] using item not present in the fixture', fixture.version, item.id, item.name);
