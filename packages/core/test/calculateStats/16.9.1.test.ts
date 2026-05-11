@@ -1,5 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource';
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics';
+import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
@@ -33,15 +33,17 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			} satisfies IInternalItemDataOf<'mejai' | 'blackfireTorch' | 'guinsoo'>,
 		});
 
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackDamage, 134);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 602);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.armor, 92);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.magicResist, 52);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 1.33);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 35);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.moveSpeed, 413);
-		/* the game actualy shows `2874` and I'm not sure why because everything in calculator seems to add up */
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.hp, 2873);
+		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 134,
+			abilityPower: 602,
+			armor: 92,
+			magicResist: 52,
+			attackSpeed: 1.33,
+			abilityHaste: 35,
+			moveSpeed: 413,
+			/* thing in calculator seems to add up */
+			hp: 2873,
+		});
 	});
 
 	await t.test('lvl 18 | archangel, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
@@ -54,9 +56,11 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			} satisfies IInternalItemDataOf<'archangelsStaff' | 'blackfireTorch'>,
 		});
 
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 549);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 60);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 2053);
+		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 549,
+			abilityHaste: 60,
+			mana: 2053,
+		});
 	});
 
 	await t.test('lvl 18 | seraph, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
@@ -68,9 +72,11 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			} satisfies IInternalItemDataOf<'blackfireTorch'>,
 		});
 
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 575);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 60);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 2443);
+		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 575,
+			abilityHaste: 60,
+			mana: 2443,
+		});
 	});
 });
 
@@ -99,11 +105,13 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			} satisfies IInternalItemDataOf<'archangelsStaff'>,
 		});
 
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 85);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackSpeed, 0.938);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 25);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.hp, 675);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 995);
+		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 85,
+			attackSpeed: 0.938,
+			abilityHaste: 25,
+			hp: 675,
+			mana: 995,
+		});
 	});
 
 	await t.test('lvl 1 | seraph, manamune', async () => {
@@ -116,9 +124,56 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			} satisfies IInternalItemDataOf<'manamune'>,
 		});
 
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackDamage, 133);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityPower, 109);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.abilityHaste, 40);
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.mana, 1875);
+		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 133,
+			abilityPower: 109,
+			abilityHaste: 40,
+			mana: 1875,
+		});
+	});
+
+	await t.test('lvl 11 | seraph, manamune', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			...sourceCommon,
+			level: 11,
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.manamune],
+			internalItemData: {
+				manaflow: 12,
+			} satisfies IInternalItemDataOf<'manamune'>,
+		});
+
+		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackDamage, 178);
+	});
+
+	await t.test('lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, endless hunger, overlord\'s bloodmail, gluttonous greaves', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			...sourceCommon,
+			level: 18,
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.manamune, ITEMS_BY_NAME.diademOfSongs, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.gluttonousGreaves],
+			internalData: {
+				passiveStacks: 5,
+			} satisfies IInternalDataOf<'Ezreal'>,
+			internalItemData: {
+				feast: 1,
+				slay: 4,
+			} satisfies IInternalItemDataOf<'endlessHunger' | 'gluttonousGreaves'>,
+		});
+
+		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 424,
+			abilityPower: 150,
+			armor: 95,
+			magicResist: 52,
+			attackSpeed: 0.89,
+			abilityHaste: 90,
+			moveSpeed: 370,
+			hp: 4479,
+			mana: 5565,
+			hpRegen: 15,
+			manaRegen: 51,
+			healShieldPower: 28,
+			omnivamp: 28,
+			tenacity: 13,
+		});
 	});
 });
