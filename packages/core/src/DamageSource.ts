@@ -65,8 +65,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	runePathsEmpty = computed((): boolean => runesEmpty(this.runes.value));
 	runesInvalid = computed((): boolean => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
+	/** can go up to `maxHealth` which is ceiled, so when used in calculations should be `Math.min(stats.value.total.hp, value)` */
 	currentHealth: Ref<number>;
-	maxHealth = computed((): number => Math.round(this.stats.value?.total.hp ?? 0));
+	/**
+	 * intended to be used only for displaying the value in ui, for actual max health use `stats.value.total.hp`
+	 * it's ceiled on purpose as that's what the game does, which also results in stuff like `2773.000001` showing up as `2774` (16.9.1 Ahri test)
+	 */
+	maxHealth = computed((): number => Math.ceil(this.stats.value.total.hp ?? 0));
 	currentAbilityResource: Ref<number>;
 	// TODO make available under dynamic variables `@AbilityResourceName@`
 	abilityResourceName = computed((): string => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');

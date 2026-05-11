@@ -25,6 +25,31 @@
 				"attackspeed": 0.668,
 				"attackspeedratio": 0.625
 			}
+		},
+		"Ezreal": {
+			"stats": {
+				"hp": 600,
+				"hpperlevel": 102,
+				"mp": 375,
+				"mpperlevel": 70,
+				"movespeed": 325,
+				"armor": 24,
+				"armorperlevel": 4.2,
+				"spellblock": 30,
+				"spellblockperlevel": 1.3,
+				"attackrange": 550,
+				"hpregen": 4,
+				"hpregenperlevel": 0.65,
+				"mpregen": 8.5,
+				"mpregenperlevel": 1,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 60,
+				"attackdamageperlevel": 3.75,
+				"attackspeedperlevel": 2.5,
+				"attackspeed": 0.625,
+				"attackspeedratio": 0.625
+			}
 		}
 	},
 	"items": {
@@ -83,6 +108,32 @@
 			],
 			"categories": {
 				"mage": true
+			}
+		},
+		"3004": {
+			"id": "3004",
+			"name": "Manamune",
+			"stats": {
+				"FlatMPPoolMod": 500,
+				"FlatPhysicalDamageMod": 35,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"ManaPerCharge": 3,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 4,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"BonusADFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
 			}
 		},
 		"3006": {

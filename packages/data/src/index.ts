@@ -37,7 +37,10 @@ export function useChampion(id: IChampionId | (string & {})): Promise<IChampion>
 	if (cacheHit) {
 		return cacheHit;
 	}
-	/** conditional parse because raw node imports it properly as json and nuxt imports a string */
+	/**
+	 * conditional parse because raw node imports it properly as json and nuxt imports a string
+	 * also there's a vite warning that this import cannot be analyzed propertly with suggestion to @vite-ignore it but it works without it and breaks when added
+	 */
 	const promise = import(`../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then(module => typeof module.default === 'string' ? JSON.parse(module.default) : module.default);
 	championCache.set(id as IChampionId, promise);
 	return promise;
