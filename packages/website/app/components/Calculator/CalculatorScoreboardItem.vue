@@ -616,7 +616,7 @@ function updateComputedStats(stats: IChampionStat[]) {
 
 			value.bonus = formatChampionStatValue(value.stat, props.value.stats.value.bonus[value.stat]);
 
-			const baseValue = props.value.stats.value.base[value.stat];
+			const baseValue = props.value.stats.value[value.stat === 'bonusAttackSpeedPercent' ? 'base' : 'baseOnLevel'][value.stat];
 			if (baseValue) {
 				value.base = formatChampionStatValue(value.stat, baseValue);
 			}
