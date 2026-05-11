@@ -1053,12 +1053,11 @@ export function computeItemDescription(
 			const { displayMultiplier, isPercentage } = ITEM_STAT_META[statName as IItemStat];
 			const increasedBy = damageSource?.stats.value?.itemStatIncreases[item.id]?.[statName as IItemStat];
 			const baseValue = displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? Math.round(value * 100) : value;
-			const totalValue = baseValue + (increasedBy ?? 0);
 			return {
 				icon: STAT_ICON[statName as IItemStat],
 				statName: statName as IItemStat,
-				baseValue: isPercentage ? `${baseValue}%` : baseValue,
-				totalValue: isPercentage ? `${totalValue}` : totalValue,
+				baseValue,
+				totalValue: baseValue + (increasedBy ?? 0),
 				increasedBy,
 			};
 		});

@@ -50,6 +50,20 @@ const gluttonousGreavesSpecific = {
 	imgText(self) {
 		return (self.internalItemData.value as { slay: number }).slay;
 	},
+	calculateHooks: {
+		preItemTotal: {
+			handler(self, { itemPassivesStats, itemStatIncreases }) {
+				const { slay } = self.internalItemData.value as IInternalItemDataOf<'gluttonousGreaves'>;
+				itemPassivesStats.omnivamp += (slay ?? 0) / 100;
+
+				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
+				if (bootsId) {
+					itemStatIncreases[bootsId] ??= {};
+					itemStatIncreases[bootsId]!.PercentOmnivampMod = slay;
+				}
+			},
+		},
+	},
 } satisfies IItemSpecific;
 
 /** specific items' helpers, utils and calculations */

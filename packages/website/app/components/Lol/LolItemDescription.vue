@@ -117,7 +117,7 @@ defineExpose({ header });
 				>
 				<span :data-increased="hoverTooltip && isInventoryView && increasedBy ? '' : undefined">
 					{{ hoverTooltip && isInventoryView ? totalValue : baseValue }}
-				</span>
+				</span>{{ ITEM_STAT_META[statName].isPercentage ? '%' : '' }}
 				<span>{{ ITEM_STAT_META[statName].name }}</span>
 			</li>
 		</ul>
@@ -221,10 +221,10 @@ defineExpose({ header });
 	.item-description {
 		> ul {
 			> li {
-				--at-apply: 'flex items-center gap-[0.5ch] text-neutral-200';
+				--at-apply: 'flex items-center gap- text-neutral-200';
 
 				> img {
-					--at-apply: 'size-4.5';
+					--at-apply: 'size-4.5 me-[0.5ch]';
 				}
 
 				> span[data-increased] {
@@ -232,7 +232,7 @@ defineExpose({ header });
 				}
 
 				> span:last-child {
-					--at-apply: 'capitalize';
+					--at-apply: 'capitalize ms-[0.5ch]';
 				}
 			}
 		}
