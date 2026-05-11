@@ -671,6 +671,17 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			return (self.internalItemData.value as { cConsumption: number }).cConsumption;
 		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats, itemStatIncreases }) {
+					const { cConsumption } = self.internalItemData.value as IInternalItemDataOf<'heartsteel'>;
+					itemPassivesStats.hp += cConsumption ?? 0;
+
+					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel] ??= {};
+					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod = cConsumption;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		MAX_STACKS: ITEMS_BY_NAME.guinsoo.dataValues.MaxStacks,

@@ -45,7 +45,12 @@ export interface IStatsCalculationResult {
 	itemTotal: IChampionStats;
 	/** stats from champion's passive */
 	championPassive: Partial<IChampionStats>;
-	/** specific items' stat increases from their passives used in displaying the item tooltip, like current tear item mana */
+	/**
+	 * specific items' stat increases from their passives used in displaying the item tooltip, like current tear item mana
+	 *
+	 * known items that could but don't have it
+	 * `mejai, hubris`
+	 */
 	itemStatIncreases: Record<string, Partial<Record<IItemStat, number>>>;
 	bonus: IChampionStats;
 	total: IChampionStats;
