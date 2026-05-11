@@ -316,6 +316,17 @@ export const TRANSFORMED_TEAR_ITEM_IDS: string[] = [
 	ITEM_NAME_TO_ID.fimbulwinter,
 ];
 
+export const TEAR_ITEM_TRANSFORMATIONS: Record<string, string> = {
+	[ITEM_NAME_TO_ID.whisperingCirclet]: ITEM_NAME_TO_ID.diademOfSongs,
+	[ITEM_NAME_TO_ID.archangelsStaff]: ITEM_NAME_TO_ID.seraphsEmbrace,
+	[ITEM_NAME_TO_ID.manamune]: ITEM_NAME_TO_ID.muramana,
+	[ITEM_NAME_TO_ID.wintersApproach]: ITEM_NAME_TO_ID.fimbulwinter,
+	[ITEM_NAME_TO_ID.diademOfSongs]: ITEM_NAME_TO_ID.whisperingCirclet,
+	[ITEM_NAME_TO_ID.seraphsEmbrace]: ITEM_NAME_TO_ID.archangelsStaff,
+	[ITEM_NAME_TO_ID.muramana]: ITEM_NAME_TO_ID.manamune,
+	[ITEM_NAME_TO_ID.fimbulwinter]: ITEM_NAME_TO_ID.wintersApproach,
+};
+
 /**
 	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
 	* `lolcalc` prefixed ones are custom, handled in `updateGameData.ts`

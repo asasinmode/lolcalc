@@ -2,7 +2,7 @@ import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type { IEffectData } from '@lolcalc/data';
+import type { IEffectData, ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
@@ -18,7 +18,7 @@ import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS } from '@lolcalc/shared';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
@@ -524,12 +524,17 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			}), {} as Partial<Record<IItemCategory, boolean>>);
 	}
 
+	/* manually set some from/into observed in game */
 	itemData.data[ITEM_NAME_TO_ID.worldAtlas].into = [ITEM_NAME_TO_ID.runicCompass];
 	itemData.data[ITEM_NAME_TO_ID.runicCompass].from = [ITEM_NAME_TO_ID.worldAtlas];
 	itemData.data[ITEM_NAME_TO_ID.runicCompass].into = [ITEM_NAME_TO_ID.bountyOfWorlds];
 	itemData.data[ITEM_NAME_TO_ID.bountyOfWorlds].from = [ITEM_NAME_TO_ID.runicCompass];
 	for (const itemId of [ITEM_NAME_TO_ID.celestialOpposition, ITEM_NAME_TO_ID.dreamMaker, ITEM_NAME_TO_ID.zazZakRealmspike, ITEM_NAME_TO_ID.solsticeSleigh, ITEM_NAME_TO_ID.bloodsong]) {
 		(itemData.data[itemId] as IItem).from = undefined;
+	}
+
+	for (const [item, transformation] of Object.entries(TEAR_ITEM_TRANSFORMATIONS)) {
+		(itemData.data as typeof ITEMS)[item]![TRANSFORMED_TEAR_ITEM_IDS.includes(item) ? 'from' : 'into']! = [transformation];
 	}
 
 	await fs.writeFile(itemFilePath, stringifyObject(itemData));

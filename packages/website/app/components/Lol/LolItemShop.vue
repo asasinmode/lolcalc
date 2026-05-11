@@ -184,7 +184,13 @@ const displayedItemBuildsFrom = computed<IShopItem[] | undefined>(() =>
 		const secondLevelItem = shopItemsMap.value.get(secondLevelItemId)!;
 		return {
 			...secondLevelItem,
-			from: (secondLevelItem.item.from || []).map(thirdLevelItemId => shopItemsMap.value.get(thirdLevelItemId)!),
+			from: (secondLevelItem.item.from ?? []).map((thirdLevelItemId) => {
+				const thirdLevelItem = shopItemsMap.value.get(thirdLevelItemId)!;
+				return {
+					...thirdLevelItem,
+					from: (thirdLevelItem.item.from ?? []).map(fourthLevelItemId => shopItemsMap.value.get(fourthLevelItemId)!),
+				};
+			}),
 		} satisfies IShopItem;
 	}),
 );
@@ -205,6 +211,7 @@ const searchResults = computed(() => {
 	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v);
 	return shopItems.value.filter(({ item }) =>
 		item.id !== ITEM_NAME_TO_ID.slightlyMagicalFootwear
+		&& !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id)
 		&& splitSearch.every(word => item.searchString.includes(word)),
 	);
 });
@@ -336,8 +343,7 @@ function updateTooltipPosition(event: MouseEvent) {
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
 
 const buildsIntoItems = computed(() => selectedItem.value?.item.into
-	?.filter(id => !TRANSFORMED_TEAR_ITEM_IDS.includes(id))
-	.map(id => shopItemsMap.value.get(id)!)
+	?.map(id => shopItemsMap.value.get(id)!)
 	.sort((a, b) => a.item.gold.total - b.item.gold.total) || []);
 
 function closeBuildsIntoMoreListIfOutside(event: FocusEvent) {
@@ -817,6 +823,22 @@ defineExpose({
 									@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 								/>
+								<ul v-if="thirdLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
+									<li
+										v-for="(fourthLevelBuildsFromItem, fourthLevelIndex) in thirdLevelBuildsFromItem.from"
+										:key="`${secondLevelIndex}-${thirdLevelIndex}-${fourthLevelIndex}`"
+									>
+										<LolItemBuildPathButton
+											component
+											:shop-item="fourthLevelBuildsFromItem"
+											:class="{ selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id }"
+											@mouseenter="enterTooltipableElement($event, fourthLevelBuildsFromItem)"
+											@click="selectItem(fourthLevelBuildsFromItem, false)"
+											@click.right.prevent="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
+											@dblclick="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
+										/>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</li>
@@ -930,7 +952,7 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
-		--at-apply: 'bg-[--bg-clr] h-200 max-w-[90vw] of-visible b b-[--ui-btn-border-clr]';
+		--at-apply: 'bg-[--bg-clr] h-216 max-w-[90vw] of-visible b b-[--ui-btn-border-clr]';
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
@@ -1598,8 +1620,9 @@ defineExpose({
 				#item-shop-build-path {
 					--at-apply: 'b-t box-content py-3 mt-3 text-center flex flex-col items-center justify-center order-3 shrink-0';
 					min-height: calc(
-						3 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 2 *
-							var(--item-mt)
+						4 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 3 *
+							var(--item-mt) + 5 * var(--spacing)
+							/* not sure why 5 spacing is needed here, turned up when adding 4th row for tear items */
 					);
 					--item-mb: calc(1.5 * var(--spacing));
 					--item-mt: calc(4 * var(--spacing));

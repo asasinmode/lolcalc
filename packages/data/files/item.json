@@ -1857,6 +1857,9 @@
 				"sell": 1575
 			},
 			"image": "2530.png",
+			"from": [
+				"2526"
+			],
 			"epicness": 5,
 			"dataValues": {
 				"PercentManaToHeal": 0.01,
@@ -1903,6 +1906,9 @@
 				"sell": 2030
 			},
 			"image": "3003.png",
+			"into": [
+				"3040"
+			],
 			"from": [
 				"3070",
 				"3802",
@@ -1940,6 +1946,9 @@
 				"sell": 2030
 			},
 			"image": "3004.png",
+			"into": [
+				"3042"
+			],
 			"from": [
 				"3070",
 				"3133",
@@ -2351,6 +2360,9 @@
 				"sell": 2030
 			},
 			"image": "3040.png",
+			"from": [
+				"3003"
+			],
 			"epicness": 5,
 			"dataValues": {
 				"APFromMana": 0.02,
@@ -2445,6 +2457,9 @@
 				"sell": 2030
 			},
 			"image": "3042.png",
+			"from": [
+				"3004"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"dataValues": {
@@ -4451,6 +4466,9 @@
 				"sell": 1680
 			},
 			"image": "3119.png",
+			"into": [
+				"3121"
+			],
 			"from": [
 				"3070",
 				"1011",
@@ -4498,6 +4516,9 @@
 				"sell": 1680
 			},
 			"image": "3121.png",
+			"from": [
+				"3119"
+			],
 			"epicness": 5,
 			"dataValues": {
 				"Cooldown": 8,
