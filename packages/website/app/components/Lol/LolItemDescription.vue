@@ -3,6 +3,7 @@ import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
 import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
+import { ITEM_STAT_META } from '@lolcalc/data/meta';
 import { SUPPORT_ITEMS } from '@lolcalc/shared/index';
 
 const props = defineProps<IItemDescriptionProps>();
@@ -40,7 +41,7 @@ const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
 const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inventory');
 
 const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions || computedDescription.value?.anyExtendedVariableInfo) && !globalKeyModifiers.value.shift);
-const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some(stat => stat[3])));
+const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some(stat => stat.increasedBy)));
 const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
 const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);
 
@@ -107,7 +108,7 @@ defineExpose({ header });
 			{{ isMidQuestBoots ? '(Only Mid Lane) Locked until Quest is Completed' : '(Only Support Role) Locked until Support or no quest is chosen' }}
 		</p>
 		<ul>
-			<li v-for="([icon, value, name, increasedBy], i) in computedDescription?.stats" :key="i">
+			<li v-for="{ icon, statName, baseValue, totalValue, increasedBy } in computedDescription?.stats" :key="statName">
 				<img
 					:src="typeof icon === 'string' ? `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png` : icon[0]"
 					:width="typeof icon === 'string' ? 20 : icon[1]"
@@ -115,9 +116,9 @@ defineExpose({ header });
 					aria-hidden="true"
 				>
 				<span :data-increased="hoverTooltip && isInventoryView && increasedBy ? '' : undefined">
-					{{ value + (hoverTooltip && isInventoryView ? increasedBy ?? 0 : 0) }}
+					{{ hoverTooltip && isInventoryView ? totalValue : baseValue }}
 				</span>
-				<span>{{ name }}</span>
+				<span>{{ ITEM_STAT_META[statName].name }}</span>
 			</li>
 		</ul>
 		<template

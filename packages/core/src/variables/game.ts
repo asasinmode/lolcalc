@@ -2,8 +2,8 @@ import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatedDynamicVariable, IDynamicVariableMeta } from '../specifics/index';
 import type { IReplaceGameVariablesRV } from '../types';
-import { ICON_ON_HIT_IMG, PATCH_VERSION } from '@lolcalc/data';
-import { STAT_ICON } from '@lolcalc/data/meta.ts';
+import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
 interface IVariableValueResult {

@@ -4,8 +4,7 @@ import type { IChampionStatName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
-import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
-import { STAT_ICON } from '@lolcalc/data/meta';
+import { ICON_GOLD, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 

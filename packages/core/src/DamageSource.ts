@@ -11,8 +11,9 @@ import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from '
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
 import type { IDynamicVariables, IReplaceGameVariablesOptions } from './variables/game.ts';
-import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ICON_GOLD, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, useChampion } from '@lolcalc/data';
-import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS, STAT_ICON } from '@lolcalc/data/meta.ts';
+import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
+
+import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
@@ -1043,25 +1044,30 @@ export function computeItemDescription(
 	const stats: IComputedItemDescription['stats'] = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
-		.map(([statName, value]) => {
-			const { name, displayMultiplier, isPercentage } = ITEM_STAT_META[statName as IItemStat];
-			return [
-				STAT_ICON[statName as IItemStat],
-				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
-				name,
-				damageSource?.stats.value?.itemStatIncreases[item.id]?.[statName as IItemStat],
-			] as typeof stats[number];
+		.map(([statName, value]): IComputedItemDescription['stats'][number] => {
+			const { displayMultiplier, isPercentage } = ITEM_STAT_META[statName as IItemStat];
+			const increasedBy = damageSource?.stats.value?.itemStatIncreases[item.id]?.[statName as IItemStat];
+			const baseValue = displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? Math.round(value * 100) : value;
+			const totalValue = baseValue + (increasedBy ?? 0);
+			return {
+				icon: STAT_ICON[statName as IItemStat],
+				statName: statName as IItemStat,
+				baseValue: isPercentage ? `${baseValue}%` : baseValue,
+				totalValue: isPercentage ? `${totalValue}` : totalValue,
+				increasedBy,
+			};
 		});
 
 	/* dynamic variables not passed as they shouldn't be needed */
 	const gp10 = itemVariableValue('GP10', item, undefined, damageSource?.isRanged.value, damageSource);
 	/* should probably handle the array output (value for melee/ranged) but not necessary for now */
 	if (typeof gp10.value === 'number') {
-		stats.push([
-			[ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height],
-			gp10.value,
-			'Gold per 10 seconds',
-		]);
+		stats.push({
+			icon: STAT_ICON.GP10,
+			statName: 'GP10',
+			baseValue: gp10.value,
+			totalValue: gp10.value,
+		});
 	}
 
 	const { text: tooltipShopReplaced, anyExtendedVariables: shopAnyExtendedVariables } = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, replaceOptions);
@@ -1521,8 +1527,15 @@ export interface IComputedAbilityDescription {
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
 	item: IItem;
-	/** increasedBy used for items like tear or gluttonous greaves which passives' */
-	stats: [iconName: typeof STAT_ICON[IItemStat], value: number, name: string, increasedBy?: number][];
+	stats: {
+		icon: typeof STAT_ICON[keyof typeof STAT_ICON];
+		statName: IItemStat;
+		baseValue: string | number;
+		/** base value modified by `increasedBy` */
+		totalValue: string | number;
+		/** set in items like tear or gluttonous greaves which passives' modify the displayed number */
+		increasedBy?: number;
+	}[];
 	variables: ReturnType<typeof replaceGameVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
 	anyExtendedVariableInfo: boolean;

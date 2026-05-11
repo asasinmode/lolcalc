@@ -1,7 +1,7 @@
-import type { IItemCategory, TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { IItemShopStatFilter } from './meta';
-import type { IChampion, IChampionId, IDragonName, IItem, IListedChampion, IRunes, IRuneSlotName } from './types';
+import type { IChampion, IChampionId, IDragonName, IItem, IItemStat, IListedChampion, IRunes, IRuneSlotName } from './types';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { markRaw } from 'vue';
 import championData from '../files/champion.json' with { type: 'json' };
@@ -11,7 +11,6 @@ import miscData from '../files/misc.json' with { type: 'json' };
 import runeData from '../files/rune.json' with { type: 'json' };
 import textData from '../files/text.json' with { type: 'json' };
 import uiData from '../files/ui.json' with { type: 'json' };
-import { STAT_ICON } from './meta.ts';
 
 export const PATCH_VERSION = {
 	vSemver: championData.version as string,
@@ -216,8 +215,6 @@ export const CHAMPION_IMAGES = {
 
 export const ICON_COOLDOWN_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
 
-export const ICON_ON_HIT_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
-
 export const ICON_RUNE_SRC: string = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
 
 export const ICON_GOLD = {
@@ -225,3 +222,68 @@ export const ICON_GOLD = {
 	width: 32,
 	height: 28,
 };
+
+/**
+ * paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON}.png`
+ * or full external ones if starting with `http`
+ */
+export const STAT_ICON: Record<
+	IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
+	string | [url: string, size: number] | [url: string, width: number, height: number]
+> = {
+	OnHit: 'onhit',
+	attackDamage: 'scalead',
+	FlatPhysicalDamageMod: 'scalead',
+	adaptiveForce: 'adaptiveforce',
+	AbilityHasteMod: 'scaleah',
+	abilityHaste: 'scaleah',
+	cooldown: 'scalecooldown',
+	FlatMagicDamageMod: 'scaleap',
+	abilityPower: 'scaleap',
+	PhysicalLethality: 'scaleapen',
+	lethality: 'scaleapen',
+	PercentArmorPenetrationMod: 'scaleapen',
+	percentArmorPen: 'scaleapen',
+	FlatArmorMod: 'scalearmor',
+	armor: 'scalearmor',
+	PercentAttackSpeedMod: 'scaleas',
+	attackSpeed: 'scaleas',
+	bonusAttackSpeedPercent: 'scaleas',
+	attackSpeedRatio: 'scaleas',
+	FlatCritChanceMod: 'scalecrit',
+	critChance: 'scalecrit',
+	FlatCritDamageMod: 'scalecritmult',
+	critDamageMultiplier: 'scalecritmult',
+	PercentHealingAmountMod: 'scalehealshield',
+	healShieldPower: 'scalehealshield',
+	FlatHPPoolMod: 'scalehealth',
+	hp: 'scalehealth',
+	FlatHPRegenMod: 'scalehpregen',
+	PercentBaseHPRegenMod: 'scalehpregen',
+	hpRegen: 'scalehpregen',
+	level: 'scalelevel',
+	PercentLifeStealMod: 'scalels',
+	lifeSteal: 'scalels',
+	FlatMPPoolMod: 'scalemana',
+	mana: 'scalemana',
+	PercentBaseMPRegenMod: 'scalemanaregen',
+	manaRegen: 'scalemanaregen',
+	FlatMagicPenetrationMod: 'scalempen',
+	flatMagicPen: 'scalempen',
+	PercentMagicPenetrationMod: 'scalempen',
+	percentMagicPen: 'scalempen',
+	FlatSpellBlockMod: 'scalemr',
+	magicResist: 'scalemr',
+	FlatMovementSpeedMod: 'scalems',
+	PercentMovementSpeedMod: 'scalems',
+	moveSpeed: 'scalems',
+	attackRange: 'scalerange',
+	PercentOmnivampMod: 'scalesv',
+	omnivamp: 'scalesv',
+	PercentTenacityMod: 'scaletenacity',
+	tenacity: 'scaletenacity',
+	slowResist: ['https://wiki.leagueoflegends.com/en-us/images/Slow_immune_icon.png', 65],
+	GP10: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height],
+};
+
+export const ICON_ON_HIT_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;

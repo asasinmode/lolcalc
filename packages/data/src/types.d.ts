@@ -8,7 +8,7 @@ import type IRuneData from '../files/rune.json';
 
 export type IDragonName = keyof typeof IMiscData['data']['dragons'];
 
-export type IItemStat = UnionKeys<(typeof IItemData)['data'][keyof typeof IItemData['data']]['stats']> | 'PercentOmnivampMod';
+export type IItemStat = UnionKeys<(typeof IItemData)['data'][keyof typeof IItemData['data']]['stats']> | 'PercentOmnivampMod' | 'GP10';
 
 export interface IItem {
 	id: string;

@@ -44,11 +44,13 @@ export const ITEM_STAT_META: Record<IItemStat, {
 
 	PercentLifeStealMod: { name: 'Life steal', order: 5, isPercentage: true },
 	PercentOmnivampMod: { name: 'Omnivamp', order: 0, isPercentage: true },
+
+	GP10: { name: 'Gold per 10 seconds', order: -1 },
 };
 
 export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
 	IItemStat,
-	'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
+	'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod' | 'GP10'
 >, IChampionStatName> = {
 	AbilityHasteMod: 'abilityHaste',
 	FlatArmorMod: 'armor',
@@ -133,65 +135,3 @@ export const ITEM_SHOP_STAT_FILTERS = {
 } as const satisfies Record<string, { name: string; filter: (item: IItem) => boolean }>;
 
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
-
-/**
- * paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON}.png`
- * or full external ones if starting with `http`
- */
-export const STAT_ICON: Record<
-	IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
-	string | [url: string, size: number] | [url: string, width: number, height: number]
-> = {
-	OnHit: 'onhit',
-	attackDamage: 'scalead',
-	FlatPhysicalDamageMod: 'scalead',
-	adaptiveForce: 'adaptiveforce',
-	AbilityHasteMod: 'scaleah',
-	abilityHaste: 'scaleah',
-	cooldown: 'scalecooldown',
-	FlatMagicDamageMod: 'scaleap',
-	abilityPower: 'scaleap',
-	PhysicalLethality: 'scaleapen',
-	lethality: 'scaleapen',
-	PercentArmorPenetrationMod: 'scaleapen',
-	percentArmorPen: 'scaleapen',
-	FlatArmorMod: 'scalearmor',
-	armor: 'scalearmor',
-	PercentAttackSpeedMod: 'scaleas',
-	attackSpeed: 'scaleas',
-	bonusAttackSpeedPercent: 'scaleas',
-	attackSpeedRatio: 'scaleas',
-	FlatCritChanceMod: 'scalecrit',
-	critChance: 'scalecrit',
-	FlatCritDamageMod: 'scalecritmult',
-	critDamageMultiplier: 'scalecritmult',
-	PercentHealingAmountMod: 'scalehealshield',
-	healShieldPower: 'scalehealshield',
-	FlatHPPoolMod: 'scalehealth',
-	hp: 'scalehealth',
-	FlatHPRegenMod: 'scalehpregen',
-	PercentBaseHPRegenMod: 'scalehpregen',
-	hpRegen: 'scalehpregen',
-	level: 'scalelevel',
-	PercentLifeStealMod: 'scalels',
-	lifeSteal: 'scalels',
-	FlatMPPoolMod: 'scalemana',
-	mana: 'scalemana',
-	PercentBaseMPRegenMod: 'scalemanaregen',
-	manaRegen: 'scalemanaregen',
-	FlatMagicPenetrationMod: 'scalempen',
-	flatMagicPen: 'scalempen',
-	PercentMagicPenetrationMod: 'scalempen',
-	percentMagicPen: 'scalempen',
-	FlatSpellBlockMod: 'scalemr',
-	magicResist: 'scalemr',
-	FlatMovementSpeedMod: 'scalems',
-	PercentMovementSpeedMod: 'scalems',
-	moveSpeed: 'scalems',
-	attackRange: 'scalerange',
-	PercentOmnivampMod: 'scalesv',
-	omnivamp: 'scalesv',
-	PercentTenacityMod: 'scaletenacity',
-	tenacity: 'scaletenacity',
-	slowResist: ['https://wiki.leagueoflegends.com/en-us/images/Slow_immune_icon.png', 65],
-};
