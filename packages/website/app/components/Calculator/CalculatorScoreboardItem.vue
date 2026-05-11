@@ -606,8 +606,13 @@ function updateComputedStats(stats: IChampionStat[]) {
 
 		for (let i = 0; i <= championStat.values.length - 1; i++) {
 			const value = championStat.values[i]!;
+			let formattedTotal = props.value.computed.formattedStatTotals.value[value.stat];
 
-			displayedValue.push(`${props.value.computed.formattedStatTotals.value[value.stat]}${CHAMPION_STAT_META[value.stat].isPercentage ? '%' : ''}`);
+			if (CHAMPION_STAT_META[value.stat].maxDisplayed) {
+				formattedTotal = Math.min(CHAMPION_STAT_META[value.stat].maxDisplayed!, formattedTotal);
+			}
+
+			displayedValue.push(`${formattedTotal}${CHAMPION_STAT_META[value.stat].isPercentage ? '%' : ''}`);
 
 			value.bonus = formatChampionStatValue(value.stat, props.value.stats.value.bonus[value.stat]);
 
@@ -1177,7 +1182,11 @@ defineExpose({ el });
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 							<dt>{{ statValue.name ?? CHAMPION_STAT_META[statValue.stat].name }}:</dt>
 							<dd :data-has-bonus="statValue.bonus || undefined">
-								<span data-total="">{{ value.computed.formattedStatTotals.value[statValue.stat] }}</span>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
+								<span data-total="">{{
+									CHAMPION_STAT_META[statValue.stat].maxDisplayed
+										? Math.min(CHAMPION_STAT_META[statValue.stat].maxDisplayed!, value.computed.formattedStatTotals.value[statValue.stat])
+										: value.computed.formattedStatTotals.value[statValue.stat]
+								}}</span>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
 								<template v-if="'base' in statValue && !(statValue.stat === 'attackSpeed' || statValue.stat === 'attackSpeedRatio')">
 									(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
 								</template>
