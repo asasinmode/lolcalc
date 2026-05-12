@@ -75,8 +75,8 @@ const shopItems = computed<IShopItem[]>(() => sortedByPrice.value.map((item) => 
 const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v.item.id, v])));
 const filteredByCategory = computed(() =>
 	selectedCategory.value === 'all'
-		? shopItems.value.filter(({ item }) => !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id))
-		: shopItems.value.filter(({ item }) => !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id) && item.categories?.[selectedCategory.value as IItemCategory]),
+		? shopItems.value.filter(({ item }) => !(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))
+		: shopItems.value.filter(({ item }) => !(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id) && item.categories?.[selectedCategory.value as IItemCategory]),
 );
 const filteredByStats = computed(() => {
 	const filterFunctions = Object.entries(appliedStatFilters.value).filter(([, isEnabled]) => isEnabled).map(([filter]) => ITEM_SHOP_STAT_FILTERS[filter as IItemShopStatFilter].filter);
@@ -211,7 +211,7 @@ const searchResults = computed(() => {
 	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v);
 	return shopItems.value.filter(({ item }) =>
 		item.id !== ITEM_NAME_TO_ID.slightlyMagicalFootwear
-		&& !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id)
+		&& !(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id)
 		&& splitSearch.every(word => item.searchString.includes(word)),
 	);
 });

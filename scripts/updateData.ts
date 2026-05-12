@@ -534,7 +534,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	}
 
 	for (const [item, transformation] of Object.entries(TEAR_ITEM_TRANSFORMATIONS)) {
-		(itemData.data as typeof ITEMS)[item]![TRANSFORMED_TEAR_ITEM_IDS.includes(item) ? 'from' : 'into']! = [transformation];
+		(itemData.data as typeof ITEMS)[item]![(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item) ? 'from' : 'into']! = [transformation];
 	}
 
 	await fs.writeFile(itemFilePath, stringifyObject(itemData));

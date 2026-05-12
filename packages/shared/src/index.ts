@@ -301,7 +301,7 @@ export const SUPPORT_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.bloodsong,
 ];
 
-export const UNTRANSFORMED_TEAR_ITEM_IDS: string[] = [
+export const UNTRANSFORMED_TEAR_ITEM_IDS = [
 	ITEM_NAME_TO_ID.tear,
 	ITEM_NAME_TO_ID.whisperingCirclet,
 	ITEM_NAME_TO_ID.archangelsStaff,
@@ -309,7 +309,7 @@ export const UNTRANSFORMED_TEAR_ITEM_IDS: string[] = [
 	ITEM_NAME_TO_ID.wintersApproach,
 ];
 
-export const TRANSFORMED_TEAR_ITEM_IDS: string[] = [
+export const TRANSFORMED_TEAR_ITEM_IDS = [
 	ITEM_NAME_TO_ID.diademOfSongs,
 	ITEM_NAME_TO_ID.seraphsEmbrace,
 	ITEM_NAME_TO_ID.muramana,
@@ -371,3 +371,11 @@ export const EFFECT_OBJECT_NAME = {
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
+
+export const VARIABLE_TYPE = {
+	shield: 'shield',
+	physical: 'physical',
+	magic: 'magic',
+} as const;
+
+export type IVariableType = typeof VARIABLE_TYPE[keyof typeof VARIABLE_TYPE];

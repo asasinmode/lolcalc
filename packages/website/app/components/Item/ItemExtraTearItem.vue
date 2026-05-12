@@ -20,7 +20,7 @@ type IData = IInternalItemDataOf<'tear'>;
 const itemIndex = computed(() => props.damageSource.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === TEAR_ITEM_TRANSFORMATIONS[props.abilityId.id]));
 const transformedItem = computed(() => ITEMS[TEAR_ITEM_TRANSFORMATIONS[props.abilityId.id]!]!);
 
-const isTransformed = ref((TRANSFORMED_TEAR_ITEM_IDS).includes(props.abilityId.id));
+const isTransformed = ref((TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(props.abilityId.id));
 
 function transform() {
 	// eslint-disable-next-line vue/no-mutating-props
@@ -47,7 +47,7 @@ function updateValue(value: number) {
 	}
 }
 
-const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRANSFORMED_IDS[number]].dataValues.ManaPerCharge ?? 3);
+const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRANSFORMED_TEAR_ITEM_IDS[number]].dataValues.ManaPerCharge ?? 3);
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->

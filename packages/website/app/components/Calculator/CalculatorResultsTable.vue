@@ -390,7 +390,7 @@ const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (sectio
 			)
 		: undefined;
 	if (computedItem) {
-		let numberValue = computedItem.variables.get(rowId);
+		let numberValue = computedItem.variables.get(rowId)?.value;
 		let value: string | number = numberValue as unknown as string;
 		let isUnknown = false;
 
@@ -424,7 +424,7 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 			value: '?',
 			isUnknown: false,
 		};
-		const value = computedDescription.variables.get(rowId);
+		const value = computedDescription.variables.get(rowId)?.value;
 
 		if (value === undefined) {
 			rv.numberValue = 0;

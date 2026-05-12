@@ -1,7 +1,7 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource.ts';
-import type { ICalculatedDynamicVariable, IDynamicVariableMeta } from '../specifics/index';
-import type { IReplaceGameVariablesRV } from '../types';
+import type { ICalculatedDynamicVariable } from '../specifics/index';
+import type { IReplaceGameVariablesRV, IVariableMeta } from '../types';
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 
 import { roundVariable } from '@lolcalc/shared/utils.ts';
@@ -15,7 +15,7 @@ interface IVariableValueResult {
 	actualVariableName?: string;
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[];
-	meta?: IDynamicVariableMeta;
+	meta?: IVariableMeta;
 	/** whether was resolved from the provided dynamic variables */
 	isDynamic?: boolean;
 }
@@ -28,7 +28,7 @@ interface IVariableValueResult {
  */
 export interface IDynamicVariables {
 	values?: Record<string, ICalculatedDynamicVariable | (string | number)[]>;
-	meta?: Partial<Record<string, IDynamicVariableMeta>> | undefined;
+	meta?: Partial<Record<string, IVariableMeta>> | undefined;
 }
 
 function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[string]): IVariableValueResult {
@@ -250,9 +250,9 @@ export function replaceGameVariables(
 	options: Partial<IReplaceGameVariablesOptions> = {},
 ): IReplaceGameVariablesRV {
 	let anyExtendedVariables = false;
-	const unknownVariables: [string, string | undefined][] = [];
-	const variables = new Map<string, number | [number, number]>();
-	const variablesAllValues = new Map<string, (string | number)[]>();
+	const unknownVariables: IReplaceGameVariablesRV['unknownVariables'] = [];
+	const variables: IReplaceGameVariablesRV['variables'] = new Map();
+	const variablesAllValues: IReplaceGameVariablesRV['variablesAllValues'] = new Map();
 
 	const tagWrapStart = options.replaceWithName ? '<var>' : '';
 	const tagWrapEnd = options.replaceWithName ? '</var>' : '';
@@ -335,7 +335,10 @@ export function replaceGameVariables(
 
 			variable[0] = roundVariable(variable[0] * multiplier);
 			variable[1] = roundVariable(variable[1] * multiplier);
-			variables.set(variableName, variable as [number, number]);
+			variables.set(variableName, {
+				value: variable as [number, number],
+				meta,
+			});
 
 			return `%i:meleeactive%${tagWrapStart}${
 				options.replaceWithName ? variableName : (isDynamic ? Math.round(variable[0]) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
@@ -343,7 +346,7 @@ export function replaceGameVariables(
 		}
 
 		variable = roundVariable(variable * multiplier);
-		variables.set(variableName, variable);
+		variables.set(variableName, { value: variable, meta });
 
 		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]
 			? 'ranged'
