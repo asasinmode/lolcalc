@@ -205,6 +205,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
+- variable type shield
+- init effects applyToVariable or something, start with serpent's fang
+- refactor returned variables to {value: X; baseValue: Y; type: Z}
+
 ### future features
 
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
