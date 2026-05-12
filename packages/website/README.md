@@ -207,9 +207,12 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
-- variable type shield
 - init effects applyToVariable or something, start with serpent's fang
-- refactor returned variables to {value: X; baseValue: Y; type: Z}
+- apply frozen heart's effect
+- results table "duplicate" damage targets and apply source's effects onto them
+- finish up uninteresting variables, global ones like `Cooldown` ? make sure items with all uninteresting aren't listed in results table
+- effects dialog restyle to show all components, selected on top, searchable
+- result sections order is not preserved, frozen heart -> seraph
 
 ### future features
 

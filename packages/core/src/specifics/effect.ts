@@ -1,5 +1,5 @@
 import type { IEffectObjectName } from '@lolcalc/shared';
-import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IGameAbilityId } from '../GameAbilityId.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';

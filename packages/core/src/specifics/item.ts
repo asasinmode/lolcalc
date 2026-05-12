@@ -1,10 +1,11 @@
+import type { TItems } from '@lolcalc/data';
 import type { IItem, IShopItem } from '@lolcalc/data/types';
-import type { IInternalItemDataOf, ISpecificDynamicVariables } from '.';
+import type { IInternalItemDataOf, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VARIABLE_TYPE } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { defineDynamicVariables } from './index.ts';
+import { defineVariables } from './index.ts';
 
 const tearItemSpecifics = {
 	MAX_STACKS: ITEMS_BY_NAME.tear.dataValues.MaxMana,
@@ -186,7 +187,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				f2: [],
 			},
@@ -281,7 +282,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				f1: [],
 				lolcalcChampRange: [],
@@ -330,7 +331,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				f2: [],
 			},
@@ -356,7 +357,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				f5: [],
 				BonusAPCalc: [],
@@ -388,6 +389,7 @@ export const ITEM_SPECIFICS = {
 					type: VARIABLE_TYPE.shield,
 				},
 			},
+			uninteresting: ['f5'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.manamune]: {
@@ -404,7 +406,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				BonusADFromMana: [],
 			},
@@ -533,6 +535,9 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { wCaress: number }) {
 			return internalData.wCaress;
 		},
+		variables: defineVariables({
+			uninteresting: ['ASPDSlow'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.serpentsFang]: {
 		internalDataProperties: ['sVenom'],
@@ -778,7 +783,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				f1: [],
 			},
@@ -793,7 +798,7 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.knightsVow]: {
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				f1: [],
 				f3: [],
@@ -809,18 +814,26 @@ export const ITEM_SPECIFICS = {
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
-export type IHypotheticalItemSpecifics = Record<string, IItemSpecific>;
+export type IHypotheticalItemSpecifics = {
+	[K in keyof TItems]?: IItemSpecific<K>
+};
 
-export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItemData & {
+export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGroupImageText & IProviderGroupInternalItemData & {
 	/**
 	 * whether to show the green dot that the item is active in the top right corner of the image
 	 * when array, the indicator dot will be split in half and colored based on the array 1/2 being trueish, useful for youmuu
 	 */
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	dynamicVariables?: ISpecificDynamicVariables;
+	variables?: ISpecificVariables<string, undefined, Exclude<GetKeyNames<TItems[T]>, 'Cooldown'>>;
 	[key: string]: any;
 };
+
+type GetKeyNames<T>
+	= | (T extends { dataValues: object } ? keyof T['dataValues'] : never)
+		| (T extends { stringCalculations: object } ? keyof T['stringCalculations'] : never)
+		| (T extends { itemCalculations: object } ? keyof T['itemCalculations'] : never)
+		| (T extends { effectAmount: any[] } ? `Effect${number}Amount` : never);
 
 export function calculateItemDiscount(
 	itemId: string,

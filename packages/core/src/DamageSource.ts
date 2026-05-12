@@ -325,7 +325,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					(addedId && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[addedId])?.setupData?.(this);
 				}
 
-				const usedProperties = newIds.flatMap(id => id ? (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id]?.internalDataProperties ?? [] : []);
+				const usedProperties = newIds.flatMap(id => id ? (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.internalDataProperties ?? [] : []);
 				for (const removedId of removedItems) {
 					if (removedId && (ITEM_SPECIFICS[removedId] as any)?.internalDataProperties?.length) {
 						for (const key of (ITEM_SPECIFICS[removedId] as any).internalDataProperties) {
@@ -879,22 +879,22 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			})) as UnwrapRef<IDamageSourceComputed['abilities']>;
 		}),
 		effects: ref([]),
-		dynamicVariables: computed((): UnwrapRef<IDamageSourceComputed['dynamicVariables']> => {
+		variables: computed((): UnwrapRef<IDamageSourceComputed['variables']> => {
 			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
-			const championDynamicVariables = calculateDynamicVariables(this, championSpecific?.dynamicVariables);
+			const championDynamicVariables = calculateDynamicVariables(this, championSpecific?.variables);
 
 			return {
 				items: Object.fromEntries(
 					this.items.value.filter(Boolean).map(item => [
 						item!.id,
-						calculateDynamicVariables(this, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id]?.dynamicVariables) ?? {},
+						calculateDynamicVariables(this, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id as keyof IHypotheticalItemSpecifics]?.variables) ?? {},
 					]),
 				),
 				runes: {
 					shards: Object.fromEntries(Object.entries(this.runes.value.shards).map(([shardSlot, shardValue]) => [
 						shardSlot,
-						shardValue && calculateDynamicVariables(this, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.dynamicVariables),
-					])) as UnwrapRef<IDamageSourceComputed['dynamicVariables']>['runes']['shards'],
+						shardValue && calculateDynamicVariables(this, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.variables),
+					])) as UnwrapRef<IDamageSourceComputed['variables']>['runes']['shards'],
 				},
 				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
 					return [
@@ -902,7 +902,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						this.champion.value
 							? this.champion.value!.abilities[abilityKey].variants.map((): IDynamicVariables => {
 									const abilitySpecific = championSpecific?.[abilityKey];
-									const abilityDynamicVariables = calculateDynamicVariables(this, abilitySpecific?.dynamicVariables);
+									const abilityDynamicVariables = calculateDynamicVariables(this, abilitySpecific?.variables);
 
 									return {
 										values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values),
@@ -911,7 +911,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								})
 							: [],
 					];
-				})) as UnwrapRef<IDamageSourceComputed>['dynamicVariables']['abilities'],
+				})) as UnwrapRef<IDamageSourceComputed>['variables']['abilities'],
 			};
 		}),
 	};
@@ -944,7 +944,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		items: computed((): ICalculateStatsGroupedHooks => {
 			const rv: ICalculateStatsGroupedHooks = {};
 			for (const item of this.items.value) {
-				item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id]);
+				item && groupCalculateStatsHooks(rv, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]);
 			}
 			return rv;
 		}),
@@ -1109,7 +1109,7 @@ function additionalItemText(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 				replaceStringtableVariables(value, TEXT.stringtable).replaced,
 				'item',
-				[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+				[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
 				replaceOptions,
 			)
 		: {};
@@ -1145,7 +1145,7 @@ export function computeAbilityDescription(
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
 	const allVariants = allChampionAbilityVariants(champion);
 
-	const dynamicVariables = damageSource?.computed.dynamicVariables.value.abilities[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex];
+	const dynamicVariables = damageSource?.computed.variables.value.abilities[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex];
 
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceStringtableVariables(
 		variant.name,
@@ -1354,7 +1354,7 @@ function formatItemDescriptionText(
 		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 			const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
 				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-					const { value } = itemVariableValue('Cooldown', item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource);
+					const { value } = itemVariableValue('Cooldown', item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource);
 					return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
 				})
 				.replace('(', '<span>(')
@@ -1363,7 +1363,7 @@ function formatItemDescriptionText(
 			const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown, anyExtendedVariables: headingAnyExtendedVariables } = replaceGameVariables(
 				headingStringtableReplaced,
 				'item',
-				[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+				[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
 				replaceOptions,
 			);
 
@@ -1383,7 +1383,7 @@ function formatItemDescriptionText(
 					const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown, anyExtendedVariables: paragraphAnyExtendedVariables } = replaceGameVariables(
 						paragraphStringtableReplaced,
 						'item',
-						[item, damageSource?.computed.dynamicVariables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+						[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
 						replaceOptions,
 					);
 
@@ -1565,7 +1565,7 @@ interface IDamageSourceComputed {
 	masterworkItemSlotIndex: ComputedRef<number>;
 	abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
 	effects: ShallowRef<IComputedAppliedEffect[]>;
-	dynamicVariables: ComputedRef<{
+	variables: ComputedRef<{
 		items: Record<string, IDynamicVariables | undefined>;
 		runes: {
 			shards: Record<IRuneShardSlotName, IDynamicVariables | undefined>;

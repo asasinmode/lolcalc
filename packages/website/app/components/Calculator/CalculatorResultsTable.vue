@@ -51,14 +51,14 @@ function columnOptions(from: DamageSource[]): [string, string][] {
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
 
-function setColumnChampion(column: IDamageResultTableColumn, damageSources: DamageSource[], championId?: string) {
+function setColumnChampion(column: IDamageResultTableColumn, damageSources: DamageSource[], damageSourceId?: string) {
 	const oldDamageSourceId = column[damageSources === props.damageSources ? 'source' : 'target']?.id;
 	oldDamageSourceId && highlightedDamageSources.remove(oldDamageSourceId);
 
 	const property = damageSources === props.damageSources ? 'source' : 'target';
 
-	column[property] = championId
-		? damageSources.find(damageSource => damageSource.id === championId)
+	column[property] = damageSourceId
+		? damageSources.find(damageSource => damageSource.id === damageSourceId)
 		: undefined;
 	recalculateColumn(column);
 
@@ -514,8 +514,8 @@ async function addResultsSection(
 		const precomputedDescription = computeItemDescription(item, undefined, {
 			replaceWithName: true,
 			overrideDynamicVariables: {
-				values: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id]?.dynamicVariables?.known,
-				meta: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id]?.dynamicVariables?.meta,
+				values: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id as keyof IHypotheticalItemSpecifics]?.variables?.known,
+				meta: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id as keyof IHypotheticalItemSpecifics]?.variables?.meta,
 			},
 		})!;
 

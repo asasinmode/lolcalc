@@ -66,8 +66,8 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 		item,
 		props.damageSource,
 		{ overrideDynamicVariables: {
-			values: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id]?.dynamicVariables?.known,
-			meta: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id]?.dynamicVariables?.meta,
+			values: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables?.known,
+			meta: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables?.meta,
 		} },
 	);
 });

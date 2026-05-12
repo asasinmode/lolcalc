@@ -1,9 +1,9 @@
 import type { TRunes } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
-import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, ISpecificDynamicVariables } from '.';
+import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
-import { defineDynamicVariables } from './index.ts';
+import { defineVariables } from './index.ts';
 
 export function runesEmpty(runes: IChampionRunes): boolean {
 	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;
@@ -19,7 +19,7 @@ export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmp
 export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {
-			dynamicVariables: defineDynamicVariables({
+			variables: defineVariables({
 				known: { f1: [0, 1], f2: [] },
 				calculate(self) {
 					const { adaptiveForceStatVariable } = self.stats.value.meta;
@@ -90,14 +90,14 @@ export const RUNE_SPECIFICS = {
 		healthscaling: {
 			/** [wiki formula](https://wiki.leagueoflegends.com/en-us/Rune#Shards) */
 			calculateValue: (self: DamageSource): number => 10 + (180 - 10) / 17 * (self.level.value - 1),
-			dynamicVariables: defineDynamicVariables({
+			variables: defineVariables({
 				known: { f1: [] },
 				calculate(self): ICalculatedDynamicVariables<'f1'> {
 					return {
 						/** the hp gained on current level */
 						f1: {
 							value: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
-						} satisfies ReturnType<ISpecificDynamicVariables['calculate']>[string] as ICalculatedDynamicVariable,
+						} satisfies ReturnType<NonNullable<ISpecificVariables['calculate']>>[string] as ICalculatedDynamicVariable,
 					};
 				},
 			}),
@@ -134,7 +134,7 @@ export interface IHypotheticalRuneSpecifics {
 };
 
 export interface IRuneSpecific {
-	dynamicVariables?: ISpecificDynamicVariables;
+	variables?: ISpecificVariables;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	[key: string]: any;
 }

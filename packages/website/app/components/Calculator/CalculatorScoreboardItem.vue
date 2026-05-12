@@ -313,13 +313,13 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 		const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceStringtableVariables(
 			TEXT.runes.shards.slotValues[shardValue as string]!.tooltipStats,
 			TEXT.stringtable,
-			props.value?.computed.dynamicVariables.value.runes.shards[shardSlot as IRuneShardSlotName],
+			props.value?.computed.variables.value.runes.shards[shardSlot as IRuneShardSlotName],
 		);
 
 		const { replaced, unknownVariables: unknownV } = replaceGameVariables(
 			stringtableVariableReplaced,
 			'rune',
-			[rune, props.value?.computed.dynamicVariables.value.runes.shards[shardSlot as IRuneShardSlotName]],
+			[rune, props.value?.computed.variables.value.runes.shards[shardSlot as IRuneShardSlotName]],
 		);
 
 		shardAnyUnknown ||= unknownSV.size || unknownV.length;

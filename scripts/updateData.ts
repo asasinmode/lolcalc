@@ -632,8 +632,8 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 								variableValueParameters: [
 									slotValue,
 									{
-										values: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.dynamicVariables?.known,
-										meta: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.dynamicVariables?.meta,
+										values: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.variables?.known,
+										meta: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.variables?.meta,
 									},
 								],
 								variableSourceKeys: ['effectAmount'],
@@ -1197,7 +1197,7 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 					values: Object.assign(
 						/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
 						{ lolcalcChampRange: [1, 2], ChampRange: [1, 2] },
-						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id]?.dynamicVariables?.known,
+						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.variables?.known,
 					),
 				},
 			],
@@ -1409,10 +1409,10 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 function championAbilityDynamicVariables(specific?: IChampionSpecific<any>, abilityKey?: IChampionAbilityKey) {
 	return specific && (abilityKey
 		? {
-				...specific.dynamicVariables?.known,
-				...specific[abilityKey]?.dynamicVariables?.known,
+				...specific.variables?.known,
+				...specific[abilityKey]?.variables?.known,
 			}
-		: specific.dynamicVariables?.known);
+		: specific.variables?.known);
 }
 
 function championAbilityData(

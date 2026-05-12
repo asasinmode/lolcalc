@@ -44,9 +44,12 @@ export function itemVariableValue(
 ): IVariableValueResult {
 	let rv: IVariableValueResult = {};
 
+	if (dynamicVariables.meta?.[variable]) {
+		rv.meta = dynamicVariables.meta[variable];
+	}
+
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		rv = resolveDynamicVariable(dynamicVariables.values[variable]);
-		rv.meta = dynamicVariables.meta?.[variable] ?? {};
 		rv.isDynamic = true;
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
@@ -95,7 +98,7 @@ export function runeVariableValue(variable: string, rune: IRune, dynamicVariable
 		rv.actualVariableName = variableName;
 	}
 
-	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated */
+	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated, when it changes also make sure to resolve meta the same way it is in items/champions (not dependant on value existing) */
 	if (dynamicVariables.values?.[variable]) {
 		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]).value;
 		rv.meta = dynamicVariables.meta?.[variable] ?? {};
@@ -254,9 +257,6 @@ export function replaceGameVariables(
 	const variables: IReplaceGameVariablesRV['variables'] = new Map();
 	const variablesAllValues: IReplaceGameVariablesRV['variablesAllValues'] = new Map();
 
-	const tagWrapStart = options.replaceWithName ? '<var>' : '';
-	const tagWrapEnd = options.replaceWithName ? '</var>' : '';
-
 	const replaced = text.replace(/@(.+?)@/g, (_, name) => {
 		let variableName = name;
 		let multiplier = 1;
@@ -298,6 +298,10 @@ export function replaceGameVariables(
 		}
 
 		const varSymbolSuffix = meta?.isPercentage ? '%' : '';
+		const replaceWithName = options.replaceWithName && !meta?.isUninteresting;
+
+		const tagWrapStart = replaceWithName ? '<var>' : '';
+		const tagWrapEnd = replaceWithName ? '</var>' : '';
 
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
@@ -320,17 +324,17 @@ export function replaceGameVariables(
 
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
-			return `${tagWrapStart}<unknown>@${options.replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
+			return `${tagWrapStart}<unknown>@${replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
 		}
 
 		if (typeof variable === 'string') {
-			return `${tagWrapStart}${options.replaceWithName ? variableName : variable}${tagWrapEnd}${metaSuffix}`;
+			return `${tagWrapStart}${replaceWithName ? variableName : variable}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
 				unknownVariables.push([name, actualVariableName]);
-				return `${tagWrapStart}<unknown>@${options.replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}`;
+				return `${tagWrapStart}<unknown>@${replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}`;
 			}
 
 			variable[0] = roundVariable(variable[0] * multiplier);
@@ -341,8 +345,8 @@ export function replaceGameVariables(
 			});
 
 			return `%i:meleeactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : (isDynamic ? Math.round(variable[0]) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
-				options.replaceWithName ? variableName : isDynamic ? Math.round(variable[1]) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+				replaceWithName ? variableName : (isDynamic ? Math.round(variable[0]) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+				replaceWithName ? variableName : isDynamic ? Math.round(variable[1]) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -353,9 +357,9 @@ export function replaceGameVariables(
 			: 'melee';
 
 		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}`
+			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}`
 			: `${tagWrapStart}${
-				options.replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)
+				replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)
 			}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 

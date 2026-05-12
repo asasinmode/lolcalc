@@ -15,12 +15,12 @@ import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
-import type { ISpecificDynamicVariables } from './index';
+import type { ISpecificVariables } from './index';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
-import { defineDynamicVariables } from './index.ts';
+import { defineVariables } from './index.ts';
 
 export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
@@ -79,7 +79,7 @@ export const CHAMPION_SPECIFICS = {
 		WEAPON_VARIANT_INDEX_TO_NAME: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[],
 		/** stringtable indexes are different from the actual weapon order - `apheliosgun_name_1` is for calibrum and so */
 		WEAPON_NAME_TO_STRINGTABLE_INDEX: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
 				f1: [1, 2, 3, 4, 5],
@@ -121,7 +121,7 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		e: {
-			dynamicVariables: defineDynamicVariables({
+			variables: defineVariables({
 				known: {
 					f1: [1, 2, 3],
 				},
@@ -254,7 +254,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Kayn: {
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				f1: [0, 1, 2],
 			},
@@ -363,7 +363,7 @@ export const CHAMPION_SPECIFICS = {
 				})],
 			};
 		},
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -526,7 +526,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	TwistedFate: {
-		dynamicVariables: defineDynamicVariables({
+		variables: defineVariables({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -625,13 +625,13 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		& {
 			[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
 		} & {
-			dynamicVariables?: ISpecificDynamicVariables;
+			variables?: ISpecificVariables;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
 			[key: string]: any;
 		};
 
 export interface IChampionAbilitySpecific {
-	dynamicVariables?: ISpecificDynamicVariables;
+	variables?: ISpecificVariables;
 	/**
 	 * ability's variant specific
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
