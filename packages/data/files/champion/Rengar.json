@@ -385,7 +385,7 @@
 					"dataKey": "Characters/Rengar/Spells/RengarPassiveAbility/RengarPassive",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_p.png",
 					"tooltip": "{{Spell_RengarPassive_Tooltip}}",
-					"tooltipExtended": "{{Spell_RengarPassive_Tooltip}}<br><rules><br>Rengar loses all <keywordMajor>Ferocity</keywordMajor> after being out of combat for @InCombatTimer@ seconds.<br>Rengar gains extra <physicalDamage>Attack Damage</physicalDamage> for killing Kha'Zix.</rules>",
+					"tooltipExtended": "{{Spell_RengarPassive_Tooltip}}<br><rules>Rengar loses all <keywordMajor>Ferocity</keywordMajor> after being out of combat for @InCombatTimer@ seconds.<br>Rengar gains extra <physicalDamage>Attack Damage</physicalDamage> for killing Kha'Zix.</rules>",
 					"dataValues": {
 						"MaxFerocity": [4, 4, 4, 4, 4, 4, 4],
 						"InCombatTimer": [10, 10, 10, 10, 10, 10, 10],

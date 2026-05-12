@@ -363,6 +363,18 @@ export const CHAMPION_SPECIFICS = {
 				})],
 			};
 		},
+		dynamicVariables: defineDynamicVariables({
+			known: {
+				GameModeInteger: [1],
+			},
+			calculate() {
+				return {
+					GameModeInteger: {
+						value: 1,
+					},
+				};
+			},
+		}),
 	},
 	Rell: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Rell'>): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
@@ -512,6 +524,20 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
+	},
+	TwistedFate: {
+		dynamicVariables: defineDynamicVariables({
+			known: {
+				GameModeInteger: [1],
+			},
+			calculate() {
+				return {
+					GameModeInteger: {
+						value: 1,
+					},
+				};
+			},
+		}),
 	},
 	Udyr: {
 		setupData(self): { hasPassiveStack: number } {

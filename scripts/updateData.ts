@@ -1757,9 +1757,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				variables: {
 					variableType: 'championAbility',
 					variableValueParameters: [variant, {
-						/* some champions use `GameModeInteger` variable that seems to be in their `dataValues`, maybe should be handled differently. Is also done in `DamageSource.computed.dynamicVariables.abilities` */
-						...variant.dataValues,
-						...championAbilityDynamicVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id], abilityKey),
+						values: championAbilityDynamicVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id], abilityKey),
 					}, undefined, allVariants],
 					variableSourceKeys: ['effectAmount'],
 				},
@@ -1828,7 +1826,7 @@ function transformAbilityText(value: string) {
 		value = trimBr(value);
 	}
 
-	return value;
+	return value.replace('<rules><br>', '<rules>');
 }
 
 function extractEffectDescription(description: string) {

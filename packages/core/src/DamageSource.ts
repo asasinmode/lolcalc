@@ -6,7 +6,7 @@ import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHa
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
-import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, IGameAbilityData } from './specifics/index';
+import type { IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
@@ -673,7 +673,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						}
 						return undefined;
 					}).filter(v => v !== undefined) as number[];
-					rv.addEffect(GameAbilityId.build(ABILITY_TYPE.effect, effectSpecificEntry[0]), data);
+					rv.addEffect(GameAbilityId.build(ABILITY_TYPE.effect, effectSpecificEntry[0]), data as any);
 				}
 			}
 		}
@@ -897,21 +897,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					])) as UnwrapRef<IDamageSourceComputed['dynamicVariables']>['runes']['shards'],
 				},
 				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
-					const abilityLevel = abilityKey === 'passive' ? 1 : this.abilityLevels.value[abilityKey];
-
 					return [
 						abilityKey,
 						this.champion.value
-							? this.champion.value!.abilities[abilityKey].variants.map((abilityVariant): IDynamicVariables => {
+							? this.champion.value!.abilities[abilityKey].variants.map((): IDynamicVariables => {
 									const abilitySpecific = championSpecific?.[abilityKey];
-									const dataValues: ICalculatedDynamicVariables = Object.fromEntries(Object.entries(abilityVariant.dataValues ?? {}).map(([key, values]) => [
-										key,
-										{ value: (values as number[])[abilityLevel]! } satisfies ICalculatedDynamicVariable,
-									]));
 									const abilityDynamicVariables = calculateDynamicVariables(this, abilitySpecific?.dynamicVariables);
 
 									return {
-										values: Object.assign(dataValues, championDynamicVariables?.values, abilityDynamicVariables?.values),
+										values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values),
 										meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.values),
 									};
 								})

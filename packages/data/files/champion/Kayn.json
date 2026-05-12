@@ -297,7 +297,7 @@
 					"dataKey": "Characters/Kayn/Spells/KaynPassiveAbility/KaynPassive",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_passive_primary.png",
 					"tooltip": "{{Spell_KaynPassive_Tooltip}}",
-					"tooltipExtended": "{{Spell_KaynPassive_Tooltip}}<br><rules><br>@PassiveSecondFormDelayTooltip@ minutes after reaching full charge on either form, Kayn can transform into either, even if it is not at full charge. The timer is reduced by 5 seconds when gaining charge in the non-full form.<br>Kayn gains Homeguard after transforming.<br></rules>",
+					"tooltipExtended": "{{Spell_KaynPassive_Tooltip}}<br><rules>@PassiveSecondFormDelayTooltip@ minutes after reaching full charge on either form, Kayn can transform into either, even if it is not at full charge. The timer is reduced by 5 seconds when gaining charge in the non-full form.<br>Kayn gains Homeguard after transforming.<br></rules>",
 					"dataValues": {
 						"TransformationVariable": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"PAmpCooldownAss": [8, 8, 8, 8, 8, 8, 8],

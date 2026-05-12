@@ -328,7 +328,7 @@
 					"dataKey": "Characters/Viktor/Spells/ViktorPassiveAbility/ViktorPassive",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_passive.png",
 					"tooltip": "{{Spell_ViktorP_Tooltip}}",
-					"tooltipExtended": "{{Spell_ViktorP_Tooltip}}<br><rules><br>Viktor can upgrade his ultimate only after upgrading all non-ultimate Abilities.</rules>",
+					"tooltipExtended": "{{Spell_ViktorP_Tooltip}}<br><rules>Viktor can upgrade his ultimate only after upgrading all non-ultimate Abilities.</rules>",
 					"dataValues": {
 						"MinionStacks": [1, 1, 1, 1, 1, 1, 1],
 						"CannonStacks": [10, 10, 10, 10, 10, 10, 10],
