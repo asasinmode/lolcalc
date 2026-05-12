@@ -1913,7 +1913,7 @@ defineExpose({
 						}
 
 						&:nth-of-type(4) {
-							--at-apply: 'absolute inset-0 h-full grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
+							--at-apply: 'absolute inset-0 -top-[--header-row-pt] h-[calc(100%+2*var(--header-row-pt))] grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
 							-webkit-text-stroke: black 0.15em;
 							paint-order: stroke fill;
 
