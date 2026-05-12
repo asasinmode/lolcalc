@@ -1499,7 +1499,7 @@ export type IProviderGroupImageText = {
 	imgTextLabel?: never;
 } | IAbilityImageTextProvider;
 
-export interface IDamageSourceEffect<T extends IEffectAbilityId = any> {
+export interface IDamageSourceEffect<T extends IEffectAbilityId = IEffectAbilityId> {
 	/** stringified `abilityId` */
 	id: string;
 	abilityId: T;

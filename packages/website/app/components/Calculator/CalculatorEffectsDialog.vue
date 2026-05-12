@@ -235,7 +235,6 @@ defineExpose({
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
 			:ability-id="hoveredEffectId?.[0]"
-			:damage-source
 			:style="damageSource && hoveredEffectId && `position-anchor: --effect-${damageSource.appliedEffects.value[hoveredEffectId[1]]?.id}`"
 		/>
 	</VDialog>
