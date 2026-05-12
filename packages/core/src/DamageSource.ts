@@ -1626,6 +1626,9 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 		/** see the type definition for info */
 		miscDebug: IStatsCalculationMiscDebug;
 	}) => void;
-	/** the higher the, the **later** it will run */
+	/**
+	 * the higher the, the **later** it will run
+	 * @deprecated TODO unused atm
+	 */
 	priority?: number;
 }

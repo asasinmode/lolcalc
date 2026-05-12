@@ -180,7 +180,7 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 	});
 });
 
-test.only('16.9.1 Ryze, shards 211', async (t) => {
+test('16.9.1 Ryze, shards 211', async (t) => {
 	const sourceCommon: IOverrides<'Ryze'> = {
 		runes: {
 			shards: {

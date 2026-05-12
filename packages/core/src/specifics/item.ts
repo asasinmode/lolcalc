@@ -6,12 +6,6 @@ import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_I
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { defineDynamicVariables } from './index.ts';
 
-const CALC_HOOK_PRIORITY = {
-	[ITEM_NAME_TO_ID.riftmaker]: 10,
-	[ITEM_NAME_TO_ID.blackfireTorch]: 20,
-	[ITEM_NAME_TO_ID.rabadon]: 100,
-};
-
 const tearItemSpecifics = {
 	MAX_STACKS: ITEMS_BY_NAME.tear.dataValues.MaxMana,
 	internalDataProperties: ['manaflow'],
@@ -189,9 +183,7 @@ export const ITEM_SPECIFICS = {
 					const value = calculatedVariables.apMultipliersBase * self.internalItemData.value.bBlaze * ITEMS_BY_NAME.blackfireTorch.dataValues.APPerStack;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
-					calculatedVariables.rabadonMagicalOpus = value;
 				},
-				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 		},
 		dynamicVariables: defineDynamicVariables({
@@ -274,7 +266,6 @@ export const ITEM_SPECIFICS = {
 						itemPassivesStats.omnivamp += omnivamp;
 					}
 				},
-				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
 			},
 			preBonus: {
 				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
@@ -288,7 +279,6 @@ export const ITEM_SPECIFICS = {
 						miscDebug.riftmakerBonusHp! += runeShardStats.hp;
 					}
 				},
-				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.riftmaker],
 			},
 		},
 		dynamicVariables: defineDynamicVariables({
@@ -786,7 +776,6 @@ export const ITEM_SPECIFICS = {
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;
 				},
-				priority: CALC_HOOK_PRIORITY[ITEM_NAME_TO_ID.rabadon],
 			},
 		},
 		dynamicVariables: defineDynamicVariables({
