@@ -231,7 +231,7 @@ onBeforeUnmount(() => {
 			--at-apply: 'relative';
 
 			> #share-configuration {
-				--at-apply: 'px-2 py-0.5';
+				--at-apply: 'px-2 py-0.5 absolute end-0 top-4.5';
 				anchor-name: --share-configuration;
 
 				> [popover] {

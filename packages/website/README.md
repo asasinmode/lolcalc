@@ -158,6 +158,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] check if can always lowercase match variables
   - [ ] check if can save only gold cost, not whole object
   - [ ] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)`
+  - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?
 - [ ] update hover tooltips with more calculation info (`= X - Y`) when holding shift
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles

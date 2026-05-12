@@ -3,6 +3,7 @@ import { PATCH_VERSION } from '@lolcalc/data';
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
 const { vSemver, vMinor } = PATCH_VERSION;
+const enableUnimplementedUi = useEnableUnimplementedUi();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
@@ -98,6 +99,10 @@ onMounted(() => {
 		<p>
 			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 		</p>
+		<label for="scoreboard-enable-unimplemented-ui">
+			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
+			enable unimplemented ui
+		</label>
 		<label for="TMP-toggle-button-style">
 			<input id="TMP-toggle-button-style" v-model="iconButtonsShowText" type="checkbox">
 			TMP icon buttons show text
@@ -186,6 +191,10 @@ onMounted(() => {
 
 			> label {
 				--at-apply: 'absolute end-0 bottom-0 text-neutral-700';
+
+				&:nth-of-type(1) {
+					--at-apply: 'bottom-5';
+				}
 
 				> input:not(:checked) {
 					--at-apply: 'op-40';

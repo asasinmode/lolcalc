@@ -7,7 +7,6 @@ import { CHAMPION_IMAGES, PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
 const { vMinor, vSemver } = PATCH_VERSION;
 
 const globalKeyModifiers = useGlobalKeyModifiers();
-const enableUnimplementedUi = useEnableUnimplementedUi();
 const { championImage, championImageSize } = CHAMPION_IMAGES;
 
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
@@ -341,10 +340,6 @@ function setLocalMirrorLayout() {
 			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout">
 			mirror layout
 		</label>
-		<label for="scoreboard-enable-unimplemented-ui">
-			enable unimplemented ui
-			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
-		</label>
 		<div>
 			<h3>
 				damage sources
@@ -470,10 +465,6 @@ function setLocalMirrorLayout() {
 
 			&:nth-of-type(1) {
 				--at-apply: 'end-0';
-			}
-
-			&:nth-of-type(2) {
-				--at-apply: 'start-0';
 			}
 		}
 

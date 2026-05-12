@@ -54,7 +54,7 @@ function clear(event: MouseEvent) {
 		--at-apply: 'relative';
 
 		select {
-			--at-apply: 'absolute inset-0 of-hidden cursor-pointer z-0';
+			--at-apply: 'absolute inset-0 of-hidden cursor-pointer z-100 op-0';
 		}
 
 		select:focus-visible + label {
