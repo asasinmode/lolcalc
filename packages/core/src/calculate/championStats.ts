@@ -7,7 +7,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const level = source.level.value;
 	const champion = source.champion.value;
 	const items = source.items.value;
-	// const runes = source.runes.value;
 
 	const initialStats: IChampionStats = {
 		hp: champion?.stats.hp ?? 0,
@@ -158,6 +157,18 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (itemTotalStats[statName as IChampionStatName] ?? 0)],
 	)) as IChampionStats;
 
+	const effectStats: Partial<IChampionStats> = {};
+
+	if (source.calculateStatsHooks.all.value.postTotal) {
+		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
+			hook(source, { totalStats, effectStats }, { calculatedVariables, miscDebug });
+		}
+	}
+
+	for (const stat in effectStats) {
+		totalStats[stat as IChampionStatName] += effectStats[stat as IChampionStatName]!;
+	}
+
 	// TODO figure out if its ok to do it
 	if (champion && champion.partype !== 'Mana') {
 		// TODO should be done by CHAMPION_SPECIFICS like `.postTotal()`
@@ -176,6 +187,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemStatIncreases,
 		championPassive: championPassiveStats,
 		bonus: bonusStats,
+		effect: effectStats,
 		total: totalStats,
 		meta: {
 			hasMana: !champion || champion.partype === 'mana',

@@ -2,7 +2,9 @@ import type { IOverrides } from '@lolcalc/core/DamageSource';
 import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
 import assert from 'node:assert';
 import test from 'node:test';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from './16.9.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupItems } from './utils.ts';
 
@@ -41,7 +43,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			attackSpeed: 1.33,
 			abilityHaste: 35,
 			moveSpeed: 413,
-			/* thing in calculator seems to add up */
+			/* in game it shows 2874 but 2873 should be correct with the difference steming from something like `Math.ceil(2873.000001)` */
 			hp: 2873,
 		});
 	});
@@ -174,6 +176,32 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			healShieldPower: 28,
 			omnivamp: 28,
 			tenacity: 13,
+		});
+	});
+});
+
+test.only('16.9.1 Ryze, shards 211', async (t) => {
+	const sourceCommon: IOverrides<'Ryze'> = {
+		runes: {
+			shards: {
+				offensive: 'cdrscaling',
+				flex: 'movementspeed',
+				defensive: 'tenacity',
+			},
+		},
+	};
+
+	const frozenHeartEffectAbilityId = GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.frozenHeartWintersCaress);
+
+	await t.test('lvl 1 | frozen heart', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart],
+		});
+		await damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
+
+		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 0.526,
 		});
 	});
 });

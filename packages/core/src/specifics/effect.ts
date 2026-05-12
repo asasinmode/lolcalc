@@ -1,7 +1,7 @@
 import type { IEffectObjectName } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IGameAbilityId } from '../GameAbilityId.ts';
-import { useChampion } from '@lolcalc/data';
+import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
@@ -116,6 +116,13 @@ export const EFFECT_SPECIFICS = {
 		},
 		isActive(data: [wCaress: number]) {
 			return data[0];
+		},
+		calculateHooks: {
+			postTotal: {
+				handler(_self, { totalStats, effectStats }) {
+					effectStats.attackSpeed = totalStats.attackSpeed * ITEMS_BY_NAME.frozenHeart.dataValues.ASPDSlow;
+				},
+			},
 		},
 	},
 	[EFFECT_OBJECT_NAME.serpentsFangVenom]: {

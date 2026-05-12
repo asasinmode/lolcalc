@@ -53,6 +53,7 @@ export interface IStatsCalculationResult {
 	 */
 	itemStatIncreases: Record<string, Partial<Record<IItemStat, number>>>;
 	bonus: IChampionStats;
+	effect: Partial<IChampionStats>;
 	total: IChampionStats;
 	meta: {
 		hasMana: boolean;

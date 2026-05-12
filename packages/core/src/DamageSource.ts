@@ -148,7 +148,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
 	/* object containing the internal data of applied effects, like item passives or champion abilities */
-	appliedEffects: Ref<IDamageSourceEffect[]>;
+	appliedEffects: Ref<IDamageSourceEffect<any>[]>;
 
 	watchHandles: WatchHandle[];
 
@@ -788,7 +788,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	async addEffect(abilityId: IEffectAbilityId, data?: IDamageSourceEffect['data']): Promise<void> {
+	async addEffect<T extends IEffectAbilityId>(abilityId: T, data?: IDamageSourceEffect<T>['data']): Promise<void> {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
@@ -1499,12 +1499,12 @@ export type IProviderGroupImageText = {
 	imgTextLabel?: never;
 } | IAbilityImageTextProvider;
 
-export interface IDamageSourceEffect<T extends any[] = any[]> {
+export interface IDamageSourceEffect<T extends IEffectAbilityId> {
 	/** stringified `abilityId` */
 	id: string;
-	abilityId: IEffectAbilityId;
+	abilityId: T;
 	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
-	data: T;
+	data: IGameAbilityData<T>;
 }
 
 export interface IComputedAbilityDescription {
@@ -1614,6 +1614,10 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemTotalStats: IChampionStats;
 		baseOnLevelStats: IChampionStats;
 		baseWithFlatItemMoveSpeed: number;
+	}) => void>;
+	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		totalStats: IChampionStats;
+		effectStats: Partial<IChampionStats>;
 	}) => void>;
 };
 
