@@ -71,11 +71,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS),
 	},
 	Kayn: {
-		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kayn', 'passive', 0), 'form', 'Form', {
-			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.base]: 'base',
-			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.assassin]: 'assassin',
-			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.rhaast]: 'rhaast',
-		}),
+		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kayn', 'passive', 0), 'form', 'Form', Object.fromEntries(Object.entries(CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS).map(([key, value]) => [value, key]))),
 	},
 	Kindred: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
@@ -174,7 +170,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Udyr', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},
 	Varus: {
-		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Varus', 'passive', 0), 'passiveVariantActive', 'passive buff from enemy', Object.fromEntries(Object.entries(CHAMPION_SPECIFICS.Varus.PASSIVE_OPTIONS).map(([label, value]) => [value, label]))),
+		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Varus', 'passive', 0), 'passiveVariantActive', 'passive buff from enemy', Object.fromEntries(Object.entries(CHAMPION_SPECIFICS.Varus.PASSIVE_OPTIONS).map(([key, value]) => [value, key]))),
 	},
 	Vayne: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Vayne', 'passive', 0), 'isPassiveMSActive', 'is moving towards enemy', false),
@@ -199,12 +195,15 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === ABILITY_TYPE.champion) {
 		const abilityId = GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName);
-		const { label, minValue = 0, maxValue = 1 } = effectSpecific;
+		const { label, minValue = 0, maxValue = 1, enumOptions } = effectSpecific;
 
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with , it works only on first value
-		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue !== 1
-			? await numberExtra(abilityId, 0, label, minValue, maxValue)
-			: await booleanExtra(abilityId, 0, label);
+		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
+			??= enumOptions
+				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
+				: maxValue !== 1
+					? await numberExtra(abilityId, 0, label, minValue, maxValue)
+					: await booleanExtra(abilityId, 0, label);
 	}
 }

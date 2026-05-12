@@ -123,7 +123,7 @@
 		}
 
 		> .icon {
-			--at-apply: 'text-[--ui-pretend-button-icon-clr]';
+			--at-apply: 'text-[--ui-pretend-button-icon-clr] z-1';
 		}
 
 		> span:first-of-type > span {

@@ -159,7 +159,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] check if can save only gold cost, not whole object
   - [ ] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)`
   - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?
-- [ ] update hover tooltips with more calculation info (`= X - Y`) when holding shift
+- [x] update hover tooltips with more calculation info (`= X - Y`) when holding shift
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
@@ -198,6 +198,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] future features in github project page thingy?
 - [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
+- [ ] try to generate specific components from data in specific, like effect are?
 - [ ] consider used images "locally" / service worker for caching stuff
 - [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold
 - [ ] kind of a code documentation where yap about

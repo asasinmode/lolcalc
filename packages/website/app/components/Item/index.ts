@@ -170,11 +170,14 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === ABILITY_TYPE.item) {
 		const abilityId = GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName);
-		const { label, minValue = 0, maxValue = 1 } = effectSpecific;
+		const { label, minValue = 0, maxValue = 1, enumOptions } = effectSpecific;
 
 		ITEM_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue !== 1
-			? await numberExtra(abilityId, 0, label, minValue, maxValue!)
-			: await booleanExtra(abilityId, 0, label);
+		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
+			??= enumOptions
+				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
+				: maxValue !== 1
+					? await numberExtra(abilityId, 0, label, minValue, maxValue)
+					: await booleanExtra(abilityId, 0, label);
 	}
 }

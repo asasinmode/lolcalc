@@ -49,7 +49,6 @@ function updateValue(event: Event) {
 				{{ optionLabel }}
 			</option>
 		</select>
-		<slot />
 	</article>
 </template>
 
@@ -67,7 +66,7 @@ function updateValue(event: Event) {
 		}
 
 		> select {
-			--at-apply: 'box-content h-min min-w-[6ch] px-1 py-0.5 row-span-2 bg-white text-black';
+			--at-apply: 'box-content h-min min-w-[8ch] px-1 py-0.5 row-span-2 bg-white text-black';
 			color-scheme: light;
 
 			> option {

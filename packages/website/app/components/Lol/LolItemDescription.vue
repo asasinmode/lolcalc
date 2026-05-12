@@ -330,6 +330,7 @@ defineExpose({ header });
 			}
 		}
 
+		/* trouble makers to check when changing this: kassadin passive, jhin passive, nidalee passive, viktor passive */
 		> li + br,
 		> rules > br:first-child:not(:has(~ br)),
 		> br + br + br {

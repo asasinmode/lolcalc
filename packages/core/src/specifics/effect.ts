@@ -128,11 +128,20 @@ export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.serpentsFangVenom]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.serpentsFang),
 		label: 'Serpent\'s Venom',
+		enumOptions: {
+			none: 0,
+			melee: 1,
+			ranged: 2,
+		},
+		maxValue: 2,
 		setupData(data): [sVenom: number] {
-			return [clamp(0, data?.[0] ?? 0, 1)];
+			return [clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.serpentsFangVenom].enumOptions.ranged)];
 		},
 		isActive(data: [sVenom: number]) {
 			return data[0];
+		},
+		imgText(data) {
+			return data[0] === 1 ? 'm' : data[0] === 2 ? 'r' : '';
 		},
 	},
 	[EFFECT_OBJECT_NAME.rylaisRimefrost]: {
@@ -272,7 +281,7 @@ export interface IEffectSpecific {
 	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.appliedEffects[number].data`
 	 * @param data the existing effect's data for cloning
 	 */
-	setupData: (data?: IDamageSourceEffect['data']) => Promise<IDamageSourceEffect['data']> | IDamageSourceEffect['data'];
+	setupData: (data?: any[]) => Promise<any[]> | any[];
 	/** checks if effect's data is not the default value */
 	isActive: (data: any) => number | boolean;
 	imgText?: (data: any) => number | string;
@@ -280,6 +289,7 @@ export interface IEffectSpecific {
 	minValue?: number;
 	/** @default 1 */
 	maxValue?: number | (() => Promise<number> | number);
+	enumOptions?: Record<string, number>;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 }
 
