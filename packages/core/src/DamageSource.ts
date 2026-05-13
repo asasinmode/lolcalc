@@ -1172,7 +1172,7 @@ export function computeAbilityDescription(
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceStringtableVariables(
 		variant.name,
 		champion.stringtable,
-		dynamicVariables,
+		replaceOptions?.overrideVariables ?? dynamicVariables,
 	);
 
 	const variables: IComputedAbilityDescription['variables'] = new Map();
@@ -1309,7 +1309,7 @@ function abilityVariantText(
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(
 		value,
 		stringtable,
-		dynamicVariables,
+		replaceOptions?.overrideVariables ?? dynamicVariables,
 	);
 
 	const { replaced, unknownVariables, variablesAllValues, variables, anyExtendedVariables } = replaceGameVariables(

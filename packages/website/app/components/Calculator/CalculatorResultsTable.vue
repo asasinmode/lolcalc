@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
 import type { IChampion } from '@lolcalc/data/types';
@@ -10,6 +11,7 @@ import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDama
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
+import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
@@ -492,7 +494,11 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computeAbilityDescription(champion, abilityId, undefined, { replaceWithName: true });
+		const precomputedDescription = computeAbilityDescription(champion, abilityId, undefined, {
+			replaceWithName: true,
+			overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.variables,
+			),
+		});
 
 		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);

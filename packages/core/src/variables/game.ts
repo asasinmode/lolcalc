@@ -172,16 +172,18 @@ export function championAbilityVariableValue(
 	}
 
 	const [variableName, ...dotPath] = variable.split('.');
-	/* some variables names' cases don't match so keep them in form of key/value and try all lowercase key if exact case not found */
-	// TODO maybe can just always do lowercase variables
-	const sources: (false | [string, any][])[] = [
-		abilityVariant.spellCalculations && Object.entries(abilityVariant.spellCalculations),
-		abilityVariant.dataValues && Object.entries(abilityVariant.dataValues),
-		abilityVariant.effectAmount && Object.entries(abilityVariant.effectAmount),
-	];
-
 	if (dotPath.length) {
 		rv.actualVariableName = variableName;
+	}
+
+	rv.isUninteresting = dynamicVariables.uninteresting?.includes(variableName!);
+	if (dynamicVariables.meta?.[variable]) {
+		rv.meta = dynamicVariables.meta[variable];
+	}
+
+	if (dynamicVariables.values?.[variable] !== undefined) {
+		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
+		rv.isDynamic = true;
 	}
 
 	if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
@@ -194,6 +196,14 @@ export function championAbilityVariableValue(
 			}
 		}
 	}
+
+	/* some variables names' cases don't match so keep them in form of key/value and try all lowercase key if exact case not found */
+	// TODO maybe can just always do lowercase variables
+	const sources: (false | [string, any][])[] = [
+		abilityVariant.spellCalculations && Object.entries(abilityVariant.spellCalculations),
+		abilityVariant.dataValues && Object.entries(abilityVariant.dataValues),
+		abilityVariant.effectAmount && Object.entries(abilityVariant.effectAmount),
+	];
 
 	if (rv.value === undefined) {
 		for (const source of sources) {

@@ -113,9 +113,11 @@ export function calculateDynamicVariables(self: DamageSource, config?: ISpecific
 	};
 }
 
+/* `known` array values are used during `updateData` to find all used stringtable variables, while here they have to be resolved so that they can be used for descriptions without underlying damage source, like champion's ability effect
+ * TODO maybe think of something other than duplicating the object, also it's duplicating what `resolveDynamicVariable` does for when it receives raw `known` because these are also passed to `replaceStringtableVariables` which won't resolve them unless they are actual values, not array of possible ones which */
 export function specificKnownVariables(config?: ISpecificVariables): IDynamicVariables | undefined {
 	return config && {
-		values: config.known,
+		values: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => [key, { value: value[0] ?? 0 }])),
 		meta: config.meta,
 		uninteresting: config.uninteresting,
 	};
