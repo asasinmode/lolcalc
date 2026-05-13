@@ -198,7 +198,7 @@ test('16.9.1 Ryze, shards 211', async (t) => {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.frozenHeart],
 		});
-		await damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
+		damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
 
 		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 0.526,

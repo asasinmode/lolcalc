@@ -19,7 +19,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
 
 		let localMax = max;
 		if (typeof localMax === 'function') {
@@ -59,7 +59,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue] = extraAppliedEffect(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
 		return () => h(VExtrasBoolean, {
 			'modelValue': modelValue.value,
@@ -92,7 +92,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue] = extraAppliedEffect(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
 		return () => h(VExtrasEnum, {
 			'modelValue': modelValue.value,
@@ -109,20 +109,16 @@ export async function enumExtra<T extends IGameAbilityId>(
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
 
-function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource): [
+function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource): [
 	stringifiedAbilityId: string,
 	value: ComputedRef<any>,
 	updateValue: (value: any) => void,
 	appliedEffect: IDamageSourceEffect | undefined,
 ] {
 	const isEffect = abilityId.type === ABILITY_TYPE.effect;
-	const appliedEffect = isEffect
+	let appliedEffect = isEffect
 		? damageSource.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id)
 		: undefined;
-
-	if (isEffect && !appliedEffect) {
-		console.error(`[numberExtra] failed to resolve effect from`, abilityId, damageSource.appliedEffects);
-	}
 
 	const dataProperty = abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData';
 
@@ -130,11 +126,16 @@ function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, da
 		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 		computed(() =>
 			isEffect
-				? appliedEffect?.data[property as number]
+				? appliedEffect?.data[property as number] ?? 0
 				: damageSource[dataProperty].value?.[property as string]),
 		function updateValue(value: any) {
 			if (isEffect) {
-				appliedEffect!.data[property as number] = value;
+				if (appliedEffect) {
+					appliedEffect.data[property as number] = value;
+				} else {
+					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
+					appliedEffect = damageSource.addEffect(abilityId, [value]);
+				}
 			} else {
 				damageSource[dataProperty].value[property] = value;
 			}

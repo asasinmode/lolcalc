@@ -148,7 +148,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
 	/* object containing the internal data of applied effects, like item passives or champion abilities */
-	appliedEffects: Ref<IDamageSourceEffect<any>[]>;
+	appliedEffects: Ref<IDamageSourceEffect<IEffectAbilityId>[]>;
 
 	watchHandles: WatchHandle[];
 
@@ -788,20 +788,38 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	async addEffect<T extends IEffectAbilityId>(abilityId: T, data?: IDamageSourceEffect<T>['data']): Promise<void> {
+	addEffect<T extends IEffectAbilityId>(abilityId: T, data?: IDamageSourceEffect<T>['data']): IDamageSourceEffect<T> {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
 		if (~existingEffectIndex) {
 			console.warn(`[DamageSource addEffect] adding existing effect`, abilityId);
-			this.appliedEffects.value[existingEffectIndex]!.data = await specific.setupData(data);
+
+			const newValue = specific.setupData(data);
+			if ('then' in newValue) {
+				newValue.then(value => this.appliedEffects.value[existingEffectIndex]!.data = value);
+			} else {
+				this.appliedEffects.value[existingEffectIndex]!.data = newValue;
+			}
+
+			return this.appliedEffects.value[existingEffectIndex] as IDamageSourceEffect<T>;
 		} else {
-			this.appliedEffects.value.push({
+			const rv: IDamageSourceEffect<any> = {
 				id: GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 				abilityId,
-				data: await specific.setupData(data),
-			});
-			this.computed.effects.value.push(await computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
+				data: [],
+			};
+
+			const newValue = specific.setupData(data);
+			if ('then' in newValue) {
+				newValue.then(value => rv.data = value);
+			} else {
+				rv.data = newValue;
+			}
+
+			this.appliedEffects.value.push(rv);
+			this.computed.effects.value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
+			return rv;
 		}
 	}
 
@@ -1409,7 +1427,7 @@ function formatItemDescriptionText(
 	};
 }
 
-async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): Promise<IComputedAppliedEffect> {
+function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
 	const specific = EFFECT_SPECIFICS[effect.abilityId.id] as IEffectSpecific;
 	const rv: IComputedAppliedEffect = {
 		id: effect.id,
@@ -1419,8 +1437,16 @@ async function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEf
 		imgText: computed((): string | number | undefined => specific.imgText?.(effect.data)),
 		isActive: computed((): number | boolean => specific.isActive(effect.data)),
 		specific,
-		maxValue: typeof specific.maxValue === 'function' ? await specific.maxValue() : specific.maxValue,
+		maxValue: undefined,
 	};
+
+	const maxValue = typeof specific.maxValue === 'function' ? specific.maxValue() : specific.maxValue;
+
+	if (typeof maxValue === 'number') {
+		rv.maxValue = maxValue;
+	} else if (maxValue) {
+		maxValue.then(value => rv.maxValue = value);
+	}
 
 	gameAbilityImage(specific.sourceAbility).then(([imgSrc, imgSize]) => {
 		rv.imgSrc = imgSrc;
