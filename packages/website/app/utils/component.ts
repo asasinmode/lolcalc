@@ -19,7 +19,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
+		let [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
 
 		let localMax = max;
 		if (typeof localMax === 'function') {
@@ -37,7 +37,8 @@ export async function numberExtra<T extends IGameAbilityId>(
 			step,
 			'usedNumberInput': useNumberInput(
 				abilityId.type === ABILITY_TYPE.effect
-					? [appliedEffect!.data, property as number]
+					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
+					? () => [(appliedEffect ??= props.damageSource.addEffect(abilityId)).data, property as number]
 					: [props.damageSource[abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData'], property as string],
 				true,
 				localMax,
