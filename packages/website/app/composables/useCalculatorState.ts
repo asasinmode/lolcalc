@@ -266,7 +266,7 @@ export function useCalculatorState(
 				continue;
 			}
 
-			/* `all` sections start with 'a-' */
+			/* `all` (permanent) sections start with 'a-' */
 			if (id.startsWith('a-')) {
 				const sectionIndex = resultsTable.value.resultSections.findIndex(section => section.id === id);
 				if (~sectionIndex) {
@@ -286,7 +286,7 @@ export function useCalculatorState(
 
 			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES);
 			if (abilityId) {
-				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded);
+				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded, currentSectionIndex);
 				currentSectionIndex += 1;
 			}
 		}

@@ -457,8 +457,9 @@ function submitResultsSection(event: SubmitEvent) {
 
 async function addResultsSection(
 	abilityId: IGameAbilityId,
-	name = '',
+	name?: string,
 	expand = true,
+	spliceAt = 0,
 ) {
 	const id = GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES);
 	if (resultSections.value.some(section => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) {
@@ -467,15 +468,15 @@ async function addResultsSection(
 
 	const section = {
 		id,
+		/* if empty, it's set when underlying ability is resolved but put it here to avoid recomputing if adding from options (it's empty when restoring) */
+		name: name!,
 		abilityId,
-		name,
 		image: undefined,
 		imageSize: 64,
 		rows: [],
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
-	/* when name is undefined it's being restored from state which does so in order */
-	resultSections.value[name === undefined ? 'push' : 'unshift'](section);
+	resultSections.value.splice(spliceAt, 0, section);
 	expand && expandedSections.value.push(section.id);
 
 	if (abilityId.type === 'champion') {
@@ -493,7 +494,7 @@ async function addResultsSection(
 
 		const precomputedDescription = computeAbilityDescription(champion, abilityId, undefined, { replaceWithName: true });
 
-		section.name ||= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
+		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
 		section.imageSize = abilityImageSize(champion.id);
 		section.rows = getAbilitySectionRows(precomputedDescription);
@@ -519,7 +520,7 @@ async function addResultsSection(
 			overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id as keyof IHypotheticalItemSpecifics]?.variables),
 		})!;
 
-		section.name ||= item.name;
+		section.name ??= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.image = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
 		section.getCellValue = itemVariableCellValue;
@@ -1032,7 +1033,7 @@ async function addColumnAbilities(columnIndex: number) {
 	const option = damageSectionOptions.value[championOptionIndex!];
 	if (option) {
 		for (let i = option.abilities.length - 1; i >= 0; i--) {
-			addResultsSection(option.abilities[i]!.id, '');
+			addResultsSection(option.abilities[i]!.id, option.abilities[i]!.name);
 		}
 	}
 	emit('configurationChanged');

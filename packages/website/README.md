@@ -95,7 +95,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [ ] basic attack section normal/crit/average
   - [ ] basic attack hover tooltip, note that it already includes everything and might not make sense in custom total
-  - [ ] friendlier variable names? Try to filter out simple variables like 5 more dmg to minions?
+  - [ ] friendlier variable names?
+  - [x] try to filter out simple variables like 5 more dmg to minions?
   - [ ] whether/what to round in results like manamune awe ad
 - [ ] rune dialog
   - [x] layout
