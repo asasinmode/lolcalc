@@ -138,19 +138,14 @@ function effectComponent(effectId: IEffectAbilityId): Component | undefined {
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
-const hoveredEffectId = shallowRef<[ IEffectAbilityId, number ]>();
+const hoveredEffectId = shallowRef<IEffectAbilityId>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-function showEffectTooltip(event: MouseEvent, appliedEffectIndexOrId: number | IEffectAbilityId) {
-	if (typeof appliedEffectIndexOrId === 'number' && damageSource.value) {
-		const effect = damageSource.value.computed.effects.value[appliedEffectIndexOrId]!;
-		hoveredEffectId.value = [effect.abilityId, appliedEffectIndexOrId];
-		event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
-		effect.specific.sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
-		effectHoverTooltipEl.value?.el?.showPopover();
-	} else if (typeof appliedEffectIndexOrId !== 'number') {
-		console.log('showing', appliedEffectIndexOrId);
-	}
+function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId) {
+	hoveredEffectId.value = effectId;
+	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
+	EFFECT_SPECIFICS[effectId.id].sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
+	effectHoverTooltipEl.value?.el?.showPopover();
 }
 
 function hideEffectTooltip() {
@@ -183,16 +178,16 @@ defineExpose({
 		<h2>loading...</h2>
 		<ul :inert="isLoading">
 			<li
-				v-for="(effect, i) in damageSource?.appliedEffects.value"
+				v-for="effect in damageSource?.appliedEffects.value"
 				:key="effect.id"
-				:style="`anchor-name: --effect-${effect.id}`"
+				:style="`anchor-name: --effect-${effect.abilityId.id}`"
 			>
 				<component
 					:is="effectComponent(effect.abilityId) ?? UnknownComponent"
 					:ability-id="effect.abilityId"
 					:damage-source
 					id-prefix="effects-dialog"
-					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, i)"
+					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId)"
 				>
 					<button
 						class="pretend-ui-btn remove"
@@ -275,8 +270,8 @@ defineExpose({
 		<!-- </form> -->
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
-			:ability-id="hoveredEffectId?.[0]"
-			:style="damageSource && hoveredEffectId && `position-anchor: --effect-${damageSource.appliedEffects.value[hoveredEffectId[1]]?.id}`"
+			:ability-id="hoveredEffectId"
+			:style="hoveredEffectId && `position-anchor: --effect-${hoveredEffectId.id}`"
 		/>
 	</VDialog>
 </template>
