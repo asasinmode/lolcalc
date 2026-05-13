@@ -952,7 +952,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const rv: ICalculateStatsGroupedHooks = {};
 			if (this.appliedEffects) {
 				for (const effect of this.appliedEffects.value) {
-					groupCalculateStatsHooks(rv, (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id]);
+					const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
+					specific?.isActive(effect.data) && groupCalculateStatsHooks(rv, specific);
 				}
 			}
 			return rv;
