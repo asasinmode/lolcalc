@@ -71,9 +71,9 @@ export type ICalculatedDynamicVariables<T extends string = string> = Record<T, I
 
 /** the related calculations and meta of a game specific's (item/champion/rune/...) variables */
 export interface ISpecificVariables<
-	T extends string = string,
-	Id extends IChampionId | undefined = undefined,
-	PossibleUninterestingVariables extends string = string,
+	DetectedVariables extends string = string,
+	T extends string = DetectedVariables,
+	Id extends IChampionId | undefined = IChampionId,
 > {
 	/**
 	 * record containing possible dynamic values for an ability variable (all values the variable is expected to resolve to)
@@ -83,20 +83,25 @@ export interface ISpecificVariables<
 	 *
 	 * if empty `[]`, variable is not expected to be used for resolving a stringtable value like `{{ game_spell_Kayn_Q_main_@f1@ }}` and is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
 	 */
-	known?: Record<T, (string | number)[]>;
+	known?: NoInfer<Partial<Record<DetectedVariables, (string | number)[]>>> & Record<T, (string | number)[]>;
 	/** calculate any dynamic variable used in the ability's description */
-	calculate?: (self: DamageSource<Id>) => Record<T, ICalculatedDynamicVariable>;
+	calculate?: (self: DamageSource<Id>) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
 	/**
 	 * any dynamic variables' meta information like icon of the stat they scale from.
 	 * this is added by `defineDynamicVariables` to `known` when called and later on added to calculated variables by `calculateDynamicVariables`
 	 */
 	meta?: Partial<Record<T, IVariableMeta>>;
-	uninteresting?: (PossibleUninterestingVariables | NoInfer<T>)[];
+	/* this works almost perfectly except that when no other keys (known/calculate/meta) is provided, then it resolves to `string[]` but at the moment I can't find a fix for it */
+	uninteresting?: NoInfer<(DetectedVariables | T)>[];
 }
 
-export function defineVariables<T extends string, Id extends IChampionId | undefined = undefined, PossibleUninterestingVariables extends string = string>(
-	config: ISpecificVariables<T, Id, PossibleUninterestingVariables>,
-): ISpecificVariables<T, Id, PossibleUninterestingVariables> {
+export function defineVariables<
+	DetectedVariables extends string = string,
+	T extends string = DetectedVariables,
+	Id extends IChampionId | undefined = IChampionId,
+>(
+	config: ISpecificVariables<DetectedVariables, T, Id>,
+): ISpecificVariables<DetectedVariables, T, Id> {
 	return config;
 }
 
@@ -104,5 +109,14 @@ export function calculateDynamicVariables(self: DamageSource, config?: ISpecific
 	return config && {
 		values: config.calculate?.(self),
 		meta: config.meta,
+		uninteresting: config.uninteresting,
+	};
+}
+
+export function specificKnownVariables(config?: ISpecificVariables): IDynamicVariables | undefined {
+	return config && {
+		values: config.known,
+		meta: config.meta,
+		uninteresting: config.uninteresting,
 	};
 }

@@ -17,3 +17,5 @@ where the fixture contains the overrides of the game data relevant to the test.
 
 > [!IMPORTANT]
 > The tests must expect **concrete**, **non-variable** values observed in the game, no calculations are to be made there.
+
+When test has to be updated, recreate and observe the test cases in game, then move it and its fixtured data to the current patch.

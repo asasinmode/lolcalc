@@ -1078,6 +1078,8 @@ export function computeItemDescription(
 	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, replaceOptions);
 	const replacedKeywordDefinitions = additionalItemText(keywordDefinitions, item, damageSource, variables, unknownVariables, replaceOptions);
 
+	const hasAnyInterestingVariables = variables.values().some(variable => !variable.isUninteresting);
+
 	return {
 		item,
 		variables,
@@ -1093,6 +1095,7 @@ export function computeItemDescription(
 		tooltipShopExtended,
 		tooltipInventoryExtended,
 		anyExtendedVariableInfo: shopAnyExtendedVariables || inventoryAnyExtendedVariables,
+		hasAnyInterestingVariables,
 	};
 }
 
@@ -1541,6 +1544,8 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	tooltipShopExtended?: ITextData['items'][keyof ITextData['items']]['tooltipShop'];
 	/** same as `tooltipInventory` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
 	tooltipInventoryExtended?: ITextData['items'][keyof ITextData['items']]['tooltipInventory'];
+	/** if any variable found doesn't have `isUninteresting: true` (which itself is set based on item specifics) */
+	hasAnyInterestingVariables: boolean;
 }
 
 export interface IComputedAppliedEffect {

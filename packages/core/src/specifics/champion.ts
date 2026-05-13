@@ -95,7 +95,7 @@ export const CHAMPION_SPECIFICS = {
 				return {} as any;
 			},
 		}),
-		setupData(self): {} & IDamageSourceInternalDataBase {
+		setupData(self): IDamageSourceInternalDataBase {
 			const abilityVariantsIndexes = self.abilityVariantsIndexes.value;
 			const { WEAPON_NAME_TO_VARIANT_INDEX, WEAPON_VARIANT_INDEX_TO_NAME } = CHAMPION_SPECIFICS.Aphelios;
 
@@ -623,15 +623,15 @@ export type IHypotheticalChampionSpecifics = {
 export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 	= IProviderGroupDataSetup<Id>
 		& {
-			[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
+			[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific<Id>;
 		} & {
-			variables?: ISpecificVariables;
+			variables?: ISpecificVariables<string, string, Id>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
 			[key: string]: any;
 		};
 
-export interface IChampionAbilitySpecific {
-	variables?: ISpecificVariables;
+export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
+	variables?: ISpecificVariables<string, string, Id>;
 	/**
 	 * ability's variant specific
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive

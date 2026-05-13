@@ -389,7 +389,7 @@ export const ITEM_SPECIFICS = {
 					type: VARIABLE_TYPE.shield,
 				},
 			},
-			uninteresting: ['f5'],
+			uninteresting: ['f5', 'ShieldDuration', 'HealthThreshold'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.manamune]: {
@@ -825,11 +825,12 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	 */
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	variables?: ISpecificVariables<string, undefined, Exclude<GetKeyNames<TItems[T]>, 'Cooldown'>>;
+	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, string>;
 	[key: string]: any;
 };
 
-type GetKeyNames<T>
+/** creates a union of all variable properties detected on an item */
+type DetectItemVariables<T>
 	= | (T extends { dataValues: object } ? keyof T['dataValues'] : never)
 		| (T extends { stringCalculations: object } ? keyof T['stringCalculations'] : never)
 		| (T extends { itemCalculations: object } ? keyof T['itemCalculations'] : never)

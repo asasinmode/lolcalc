@@ -7,6 +7,7 @@ import type { IChampion } from '@lolcalc/data/types';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { gameAbilityImage } from '@lolcalc/core/misc';
+import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { EFFECTS, ITEMS, useChampion } from '@lolcalc/data';
@@ -65,10 +66,7 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 	return computeItemDescription(
 		item,
 		props.damageSource,
-		{ overrideDynamicVariables: {
-			values: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables?.known,
-			meta: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables?.meta,
-		} },
+		{ overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables) },
 	);
 });
 

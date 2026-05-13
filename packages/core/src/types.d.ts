@@ -31,6 +31,7 @@ export interface IReplaceGameVariablesRV {
 	variables: Map<string, {
 		value: number | [number, number];
 		meta?: IVariableMeta;
+		isUninteresting?: boolean;
 	}>;
 	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
 	variablesAllValues: Map<string, (string | number)[]>;
@@ -58,6 +59,4 @@ export interface IVariableMeta {
 	/** `%` will be suffixed to the formatted value */
 	isPercentage?: boolean;
 	type?: IVariableType;
-	/** if `true`, won't be shown in results, as well as have its value resolved regardless of `IReplaceGameVariablesOptions.replaceWithName` */
-	isUninteresting?: boolean;
 }

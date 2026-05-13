@@ -1,6 +1,6 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { DamageSource } from '../DamageSource.ts';
-import type { ICalculatedDynamicVariable } from '../specifics/index';
+import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
 import type { IReplaceGameVariablesRV, IVariableMeta } from '../types';
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 
@@ -18,6 +18,8 @@ interface IVariableValueResult {
 	meta?: IVariableMeta;
 	/** whether was resolved from the provided dynamic variables */
 	isDynamic?: boolean;
+	/** whether `ISpecificVariables.uninteresting` includes it */
+	isUninteresting?: boolean;
 }
 
 /**
@@ -26,13 +28,12 @@ interface IVariableValueResult {
  *     In `updateData` script these are used only for supressing warning for unknown variables that are actually calculated by `dynamicVariables`
  * - the return value of `ISpecificDynamicVariables.calculate`'s return value when actually calculating and using the values
  */
-export interface IDynamicVariables {
+export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting'> {
 	values?: Record<string, ICalculatedDynamicVariable | (string | number)[]>;
-	meta?: Partial<Record<string, IVariableMeta>> | undefined;
 }
 
-function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[string]): IVariableValueResult {
-	return Array.isArray(value) ? { value: value[0] ?? 0 } : value;
+function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[string]): IVariableValueResult['value'] {
+	return Array.isArray(value) ? value[0] ?? 0 : value.value;
 }
 
 export function itemVariableValue(
@@ -42,14 +43,16 @@ export function itemVariableValue(
 	isRanged?: boolean,
 	damageSource?: DamageSource,
 ): IVariableValueResult {
-	let rv: IVariableValueResult = {};
+	const rv: IVariableValueResult = {
+		isUninteresting: dynamicVariables.uninteresting?.includes(variable),
+	};
 
 	if (dynamicVariables.meta?.[variable]) {
 		rv.meta = dynamicVariables.meta[variable];
 	}
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
-		rv = resolveDynamicVariable(dynamicVariables.values[variable]);
+		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
 		rv.isDynamic = true;
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
@@ -100,7 +103,7 @@ export function runeVariableValue(variable: string, rune: IRune, dynamicVariable
 
 	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated, when it changes also make sure to resolve meta the same way it is in items/champions (not dependant on value existing) */
 	if (dynamicVariables.values?.[variable]) {
-		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]).value;
+		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
 		rv.meta = dynamicVariables.meta?.[variable] ?? {};
 		rv.isDynamic = true;
 		return rv;
@@ -235,10 +238,10 @@ export interface IGameVariableValueParameters {
 export interface IReplaceGameVariablesOptions {
 	replaceWithName?: boolean;
 	/**
-	 * dynamicVariables to use instead of the ones passed in the `variableValueFunctionArguments`
-	 * used by results table since it gets the item/ability variables from creating the ability's description without any `DamageSource`, which normally provides its `computed.dynamicVariables`
+	 * variables to use instead of the ones passed in the `variableValueFunctionArguments`
+	 * used by results table since it gets the item/ability variables from creating the ability's description without any `DamageSource`, which normally provides its `computed.variables`
 	 */
-	overrideDynamicVariables?: IDynamicVariables;
+	overrideVariables?: IDynamicVariables;
 	/** whether to show some additional info about the variable, usually expected when holding shift */
 	isExtended?: boolean;
 }
@@ -267,13 +270,13 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName, allValues, isDynamic, meta } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues, isDynamic, meta, isUninteresting } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
 				// @ts-expect-error spread is fine
-				: runeVariableValue)(variableName, ...(options.overrideDynamicVariables
-			? variableValueFunctionArguments.slice(0, 1).concat(options.overrideDynamicVariables, variableValueFunctionArguments.slice(2))
+				: runeVariableValue)(variableName, ...(options.overrideVariables
+			? variableValueFunctionArguments.slice(0, 1).concat(options.overrideVariables, variableValueFunctionArguments.slice(2))
 			: variableValueFunctionArguments));
 
 		/*
@@ -298,7 +301,7 @@ export function replaceGameVariables(
 		}
 
 		const varSymbolSuffix = meta?.isPercentage ? '%' : '';
-		const replaceWithName = options.replaceWithName && !meta?.isUninteresting;
+		const replaceWithName = options.replaceWithName && !isUninteresting;
 
 		const tagWrapStart = replaceWithName ? '<var>' : '';
 		const tagWrapEnd = replaceWithName ? '</var>' : '';
@@ -342,6 +345,7 @@ export function replaceGameVariables(
 			variables.set(variableName, {
 				value: variable as [number, number],
 				meta,
+				isUninteresting,
 			});
 
 			return `%i:meleeactive%${tagWrapStart}${
@@ -350,7 +354,7 @@ export function replaceGameVariables(
 		}
 
 		variable = roundVariable(variable * multiplier);
-		variables.set(variableName, { value: variable, meta });
+		variables.set(variableName, { value: variable, meta, isUninteresting });
 
 		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]
 			? 'ranged'

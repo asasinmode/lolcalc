@@ -9,6 +9,7 @@ import type { WatchHandle } from 'vue';
 import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
@@ -130,7 +131,7 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 	const itemIds = new Set(props.damageSources
 		.concat(props.damageTargets)
 		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
-			item?.variables.size || item?.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
+			item?.hasAnyInterestingVariables || item?.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
 		))
 		.filter(Boolean));
 
@@ -479,6 +480,7 @@ async function addResultsSection(
 
 	if (abilityId.type === 'champion') {
 		const champion = await useChampion(abilityId.id);
+		/* since abilities are added eagerly despite potentially needing to await something to fully resolve, if the champion is not resolved then remove the section. Unknown champions can be added when restoring state */
 		if (!champion?.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]) {
 			const index = resultSections.value.indexOf(section);
 			~index && resultSections.value.splice(index, 1);
@@ -501,6 +503,7 @@ async function addResultsSection(
 		section.getCellValue = abilityVariableCellValue;
 	} else {
 		const item = ITEMS[abilityId.id];
+		/* since abilities are added eagerly despite potentially needing to await (champion ability) something to fully resolve, if the item is not resolved then remove the section. Unknown items can be added when restoring state */
 		if (!item) {
 			const index = resultSections.value.indexOf(section);
 			~index && resultSections.value.splice(index, 1);
@@ -513,10 +516,7 @@ async function addResultsSection(
 
 		const precomputedDescription = computeItemDescription(item, undefined, {
 			replaceWithName: true,
-			overrideDynamicVariables: {
-				values: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id as keyof IHypotheticalItemSpecifics]?.variables?.known,
-				meta: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id as keyof IHypotheticalItemSpecifics]?.variables?.meta,
-			},
+			overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id as keyof IHypotheticalItemSpecifics]?.variables),
 		})!;
 
 		section.name ||= item.name;
@@ -532,7 +532,9 @@ async function addResultsSection(
 
 function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): IDamageResultTableSection['rows'] {
 	return markRaw(variables
-		.keys()
+		.entries()
+		.filter(entry => !entry[1].isUninteresting)
+		.map(entry => entry[0])
 		.toArray()
 		.map(name => ({ id: name, name }))
 		.concat(unknownVariables.map(([rawName, actualName]) => ({
