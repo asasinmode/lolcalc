@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
+import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
@@ -123,10 +123,10 @@ function submitAnotherEffect(event: SubmitEvent) {
 
 const UnknownComponent = () => h('article', { class: 'unknown' }, ['UNKNOWN']);
 
-function effectComponent(effect: IDamageSourceEffect): Component | undefined {
-	const effectSpecific = EFFECT_SPECIFICS[effect.abilityId.id];
+function effectComponent(effectId: IEffectAbilityId): Component | undefined {
+	const effectSpecific = EFFECT_SPECIFICS[effectId.id];
 	if (!effectSpecific) {
-		console.warn(`[CalculatorEffectsDialog effectComponent] failed to find specific for`, effect.abilityId);
+		console.warn(`[CalculatorEffectsDialog effectComponent] failed to find specific for`, effectId);
 		return;
 	}
 
@@ -141,13 +141,15 @@ const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemH
 const hoveredEffectId = shallowRef<[ IEffectAbilityId, number ]>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-function showEffectTooltip(event: MouseEvent, appliedEffectIndex: number) {
-	if (damageSource.value) {
-		const effect = damageSource.value.computed.effects.value[appliedEffectIndex]!;
-		hoveredEffectId.value = [effect.abilityId, appliedEffectIndex];
+function showEffectTooltip(event: MouseEvent, appliedEffectIndexOrId: number | IEffectAbilityId) {
+	if (typeof appliedEffectIndexOrId === 'number' && damageSource.value) {
+		const effect = damageSource.value.computed.effects.value[appliedEffectIndexOrId]!;
+		hoveredEffectId.value = [effect.abilityId, appliedEffectIndexOrId];
 		event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
 		effect.specific.sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
 		effectHoverTooltipEl.value?.el?.showPopover();
+	} else if (typeof appliedEffectIndexOrId !== 'number') {
+		console.log('showing', appliedEffectIndexOrId);
 	}
 }
 
@@ -155,6 +157,8 @@ function hideEffectTooltip() {
 	effectHoverTooltipEl.value?.el?.hidePopover();
 	removeItemTooltipViewListeners();
 }
+
+const search = ref('');
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -184,7 +188,7 @@ defineExpose({
 				:style="`anchor-name: --effect-${effect.id}`"
 			>
 				<component
-					:is="effectComponent(effect) ?? UnknownComponent"
+					:is="effectComponent(effect.abilityId) ?? UnknownComponent"
 					:ability-id="effect.abilityId"
 					:damage-source
 					id-prefix="effects-dialog"
@@ -201,37 +205,74 @@ defineExpose({
 				</component>
 			</li>
 		</ul>
-		<form :inert="isLoading" @submit.prevent="submitAnotherEffect">
-			<label for="dialog-effects-add-new-effect">
-				add effect
+		<div class="inline-search-label">
+			<input
+				id="champ-select-search"
+				v-model="search"
+				autofocus
+				type="text"
+				:data-empty="!search"
+			>
+			<label for="item-shop-search">
+				<Icon class="i-ph:magnifying-glass-bold" />
+				Search
 			</label>
-			<select
-				id="dialog-effects-add-new-effect"
-				name="optionIndexes"
-				required
-				:disabled="!effectOptionGroups.length"
-			>
-				<option v-if="!effectOptionGroups.length">
-					no options left
-				</option>
-				<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label">
-					<option
-						v-for="(option, optionIndex) in group.options"
-						:key="GameAbilityId.stringify(option.abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES)"
-						:value="`${groupIndex}-${optionIndex}`"
-					>
-						{{ option.name }}
-					</option>
-				</optgroup>
-			</select>
-			<button
-				type="submit"
-				class="other-ui-btn"
-				:disabled="!effectOptionGroups.length"
-			>
-				add
+			<button title="clear" @mousedown.prevent="search = ''">
+				<span>
+					clear
+				</span>
+				<Icon class="i-ph:x-bold" />
 			</button>
-		</form>
+		</div>
+		<template v-for="group in effectOptionGroups" :key="group.type">
+			<h2>{{ group.label }}</h2>
+			<ul :inert="isLoading">
+				<li
+					v-for="effect in damageSource && group.options"
+					:key="`${group.type}-${effect.abilityId.id}`"
+					:style="`anchor-name: --effect-${effect.abilityId.id}`"
+				>
+					<component
+						:is="effectComponent(effect.abilityId) ?? UnknownComponent"
+						:ability-id="effect.abilityId"
+						:damage-source
+						id-prefix="effects-dialog"
+						@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId)"
+					/>
+				</li>
+			</ul>
+		</template>
+		<!-- <form :inert="isLoading" @submit.prevent="submitAnotherEffect"> -->
+		<!-- 	<label for="dialog-effects-add-new-effect"> -->
+		<!-- 		add effect -->
+		<!-- 	</label> -->
+		<!-- 	<select -->
+		<!-- 		id="dialog-effects-add-new-effect" -->
+		<!-- 		name="optionIndexes" -->
+		<!-- 		required -->
+		<!-- 		:disabled="!effectOptionGroups.length" -->
+		<!-- 	> -->
+		<!-- 		<option v-if="!effectOptionGroups.length"> -->
+		<!-- 			no options left -->
+		<!-- 		</option> -->
+		<!-- 		<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label"> -->
+		<!-- 			<option -->
+		<!-- 				v-for="(option, optionIndex) in group.options" -->
+		<!-- 				:key="GameAbilityId.stringify(option.abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES)" -->
+		<!-- 				:value="`${groupIndex}-${optionIndex}`" -->
+		<!-- 			> -->
+		<!-- 				{{ option.name }} -->
+		<!-- 			</option> -->
+		<!-- 		</optgroup> -->
+		<!-- 	</select> -->
+		<!-- 	<button -->
+		<!-- 		type="submit" -->
+		<!-- 		class="other-ui-btn" -->
+		<!-- 		:disabled="!effectOptionGroups.length" -->
+		<!-- 	> -->
+		<!-- 		add -->
+		<!-- 	</button> -->
+		<!-- </form> -->
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
 			:ability-id="hoveredEffectId?.[0]"
@@ -258,7 +299,7 @@ defineExpose({
 			}
 		}
 
-		> h2 {
+		> h2:first-of-type {
 			--at-apply: 'hidden z-10 text-center absolute inset-0 inset-t-10 font-600 text-2xl backdrop-blur-2';
 			-webkit-text-stroke: black 0.1em;
 			paint-order: stroke fill;
