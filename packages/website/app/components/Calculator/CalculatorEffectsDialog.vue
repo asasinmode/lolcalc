@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { TAbilityType } from '@lolcalc/shared';
+import type { IEffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { ITEMS, useChampion } from '@lolcalc/data';
+import { EFFECTS, ITEMS, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
@@ -21,8 +21,16 @@ interface IEffectOptionGroup {
 	options: {
 		abilityId: IEffectAbilityId;
 		sourceAbilityId: IGameAbilityId;
+		/** used for sorting */
 		name: string;
+		searchString: string;
 	}[];
+}
+
+const effectSearchStrings = new Map<IEffectObjectName, string>();
+
+function createSearchString(value?: string) {
+	return (value ?? '').toLocaleLowerCase().replaceAll(/[^a-z;]/g, '');
 }
 
 const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
@@ -31,10 +39,14 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
 		const item = ITEMS[sourceAbilityId.id]!;
 
+		const searchString = createSearchString(`${effectSpecific.label};${createSearchString(EFFECTS[effectObjectName]?.description)};`).concat(item.searchString);
+		effectSearchStrings.set(effectObjectName, searchString);
+
 		return {
 			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
 			sourceAbilityId,
 			name: item.name,
+			searchString,
 		};
 	})
 	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
@@ -43,12 +55,15 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 	.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.effect)
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
-		const effect = EFFECT_SPECIFICS[sourceAbilityId.id]!;
+
+		const searchString = createSearchString(`${effectSpecific.label};${EFFECTS[effectObjectName]?.description}`);
+		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
 			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
 			sourceAbilityId,
-			name: effect.label,
+			name: effectSpecific.label,
+			searchString,
 		};
 	})
 	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
@@ -85,6 +100,8 @@ const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 	return groups.filter(group => group.options.length);
 });
 
+const htmlTagRegex = /<(\/)?[a-z ="0-9]+>/gi;
+
 async function loadChampionEffects() {
 	if (championEffects.value || isLoading.value) {
 		return;
@@ -98,10 +115,14 @@ async function loadChampionEffects() {
 			const champion = await useChampion(sourceAbilityId.id);
 			const precomputedSourceAbilityDesc = computeAbilityDescription(champion, sourceAbilityId);
 
+			const searchString = createSearchString(`${effectSpecific.label};${champion.name};${precomputedSourceAbilityDesc.tooltip.replaceAll(htmlTagRegex, '')}`);
+			effectSearchStrings.set(effectObjectName, searchString);
+
 			return {
 				abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
 				sourceAbilityId,
 				name: `${champion.name} ${sourceAbilityId.abilityKey === 'passive' ? 'P' : sourceAbilityId.abilityKey.toUpperCase()} - ${precomputedSourceAbilityDesc.name}`,
+				searchString,
 			};
 		})));
 
