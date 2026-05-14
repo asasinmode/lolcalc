@@ -162,6 +162,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?
   - [ ] calculate static % values like liandry burn or GA health to?
 - [x] update hover tooltips with more calculation info (`= X - Y`) when holding shift
+- [ ] defineSpecific functions for better types
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests

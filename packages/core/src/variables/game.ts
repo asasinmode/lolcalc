@@ -1,14 +1,15 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
+import type { IVariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
 import type { IReplaceGameVariablesRV, IVariableMeta } from '../types';
-import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 
+import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
-interface IVariableValueResult {
+export interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
-	value?: ICalculatedDynamicVariable['value'] | string;
+	value?: ICalculatedDynamicVariable['value'];
 	/** if `true`, the variable is different for melee and ranged champions */
 	isMeleeRanged?: boolean;
 	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
@@ -60,7 +61,7 @@ export function itemVariableValue(
 		rv.value = item.dataValues[variable];
 	} else if (item.stringCalculations?.[variable]) {
 		rv.isMeleeRanged = true;
-		if (damageSource?.isRanged.value === undefined) {
+		if (isRanged === undefined) {
 			rv.value = [
 				itemVariableValue(
 					item.stringCalculations[variable].MeleeResult.slice(1, -1),
@@ -78,7 +79,7 @@ export function itemVariableValue(
 				).value as number | undefined,
 			];
 		} else {
-			const key: keyof NonNullable<IItem['stringCalculations']>[string] = damageSource.isRanged.value ? 'RangedResult' : 'MeleeResult';
+			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
 			rv.value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, dynamicVariables, isRanged, damageSource).value;
 		}
 	} else if (variable.startsWith('Effect')) {
@@ -252,13 +253,17 @@ export interface IReplaceGameVariablesOptions {
 	isExtended?: boolean;
 }
 
-export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
-export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
-export function replaceGameVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
+export type IModifyVariableFunction = (value: Exclude<IVariableValueResult['value'], any[]>) => Exclude<IVariableValueResult['value'], any[]>;
+export type IModifyVariableFunctions = Partial<Record<IVariableType, IModifyVariableFunction[]>>;
+
+export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
+export function replaceGameVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
 export function replaceGameVariables(
 	text: string,
 	variableType: IGameVariableType,
 	variableValueFunctionArguments: any[],
+	modifyVariableFunctions: IModifyVariableFunctions = {},
 	options: Partial<IReplaceGameVariablesOptions> = {},
 ): IReplaceGameVariablesRV {
 	let anyExtendedVariables = false;
@@ -346,21 +351,36 @@ export function replaceGameVariables(
 				return `${tagWrapStart}<unknown>@${replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}`;
 			}
 
-			variable[0] = roundVariable(variable[0] * multiplier);
-			variable[1] = roundVariable(variable[1] * multiplier);
+			const baseValue = [roundVariable(variable[0]! * multiplier), roundVariable(variable[1]! * multiplier)] as [number, number];
+
+			if (meta?.type && modifyVariableFunctions[meta.type]) {
+				variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc), variable[0]);
+				variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc), variable[1]);
+			}
+
+			variable[0] = roundVariable(variable[0]! * multiplier);
+			variable[1] = roundVariable(variable[1]! * multiplier);
+
 			variables.set(variableName, {
+				baseValue,
 				value: variable as [number, number],
 				meta,
 				isUninteresting,
 			});
 
 			return `%i:meleeactive%${tagWrapStart}${
-				replaceWithName ? variableName : (isDynamic ? Math.round(variable[0]) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
-				replaceWithName ? variableName : isDynamic ? Math.round(variable[1]) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+				replaceWithName ? variableName : (isDynamic ? Math.round(variable[0]!) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+				replaceWithName ? variableName : isDynamic ? Math.round(variable[1]!) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+		}
+
+		const baseValue = roundVariable(variable * multiplier);
+
+		if (meta?.type && modifyVariableFunctions[meta.type]) {
+			variable = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc), variable);
 		}
 
 		variable = roundVariable(variable * multiplier);
-		variables.set(variableName, { value: variable, meta, isUninteresting });
+		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting });
 
 		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]
 			? 'ranged'

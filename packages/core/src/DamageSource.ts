@@ -1,6 +1,6 @@
 import type { ITextData } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -10,7 +10,7 @@ import type { IGameAbilityData } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
-import type { IDynamicVariables, IReplaceGameVariablesOptions } from './variables/game.ts';
+import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions } from './variables/game.ts';
 import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
@@ -1007,6 +1007,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			]));
 		}),
 	};
+
+	modifyVariableFunctions = computed((): IDamageSourceModifyVariableFunctions => {
+		const rv: IDamageSourceModifyVariableFunctions = {};
+
+		for (const effect of this.appliedEffects.value) {
+			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
+			if (specific?.modifyVariable && specific.isActive(effect.data)) {
+				rv[specific.modifyVariable.type] ??= [];
+				rv[specific.modifyVariable.type]!.push(value => specific.modifyVariable!.handler(value, effect.data));
+			}
+		}
+
+		return rv;
+	});
 }
 
 function handleRoleQuestItems(items: (IItem | undefined)[], roleQuest?: IChampionRole): void {
@@ -1041,7 +1055,7 @@ export function formatChampionStatValue(statName: IChampionStatName, value: numb
 export function computeItemDescription(
 	item?: IItem,
 	damageSource?: DamageSource<any>,
-	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
+	replaceOptions?: IReplaceGameVariablesOptions,
 ): IComputedItemDescription | undefined {
 	const variables: IComputedItemDescription['variables'] = new Map();
 	const unknownVariables: IComputedItemDescription['unknownVariables'] = [];
@@ -1124,7 +1138,7 @@ function additionalItemText(
 	damageSource: DamageSource | undefined,
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
-	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
+	replaceOptions?: IReplaceGameVariablesOptions,
 ): string | undefined {
 	const { replaced, variables: newVariables, unknownVariables: newUnknownVariables } = value
 		? replaceGameVariables(
@@ -1132,6 +1146,7 @@ function additionalItemText(
 				replaceStringtableVariables(value, TEXT.stringtable).replaced,
 				'item',
 				[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+				damageSource?.modifyVariableFunctions.value,
 				replaceOptions,
 			)
 		: {};
@@ -1160,7 +1175,7 @@ export function computeAbilityDescription(
 	champion: IChampion,
 	gameAbilityId: IChampionAbilityId,
 	damageSource?: DamageSource<any>,
-	replaceOptions?: Parameters<typeof replaceGameVariables>[3],
+	replaceOptions?: IReplaceGameVariablesOptions,
 ): IComputedAbilityDescription {
 	const abilityLevel = gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];
@@ -1192,6 +1207,7 @@ export function computeAbilityDescription(
 		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
+		damageSource,
 		replaceOptions,
 	);
 	const {
@@ -1208,6 +1224,7 @@ export function computeAbilityDescription(
 		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
+		damageSource,
 		{ ...replaceOptions, isExtended: true },
 	);
 	const {
@@ -1223,6 +1240,7 @@ export function computeAbilityDescription(
 		dynamicVariables,
 		abilityLevel,
 		champion.stringtable,
+		damageSource,
 		{ ...replaceOptions, isExtended: true },
 	);
 
@@ -1297,6 +1315,7 @@ function abilityVariantText(
 	level?: number,
 	/** champion's stringtable */
 	stringtable?: Record<string, string>,
+	damageSource?: DamageSource,
 	replaceOptions?: IReplaceGameVariablesOptions,
 ): {
 	replaced: string;
@@ -1316,6 +1335,7 @@ function abilityVariantText(
 		stringtableReplaced,
 		'championAbility',
 		[variant, dynamicVariables, level, allAbilityVariants],
+		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,
 	);
 
@@ -1386,6 +1406,7 @@ function formatItemDescriptionText(
 				headingStringtableReplaced,
 				'item',
 				[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+				damageSource?.modifyVariableFunctions.value,
 				replaceOptions,
 			);
 
@@ -1406,6 +1427,7 @@ function formatItemDescriptionText(
 						paragraphStringtableReplaced,
 						'item',
 						[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+						damageSource?.modifyVariableFunctions.value,
 						replaceOptions,
 					);
 
@@ -1664,3 +1686,5 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 	 */
 	priority?: number;
 }
+
+export type IDamageSourceModifyVariableFunctions = Partial<Record<IVariableType, IModifyVariableFunction[]>>;

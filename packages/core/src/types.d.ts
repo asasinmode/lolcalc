@@ -29,6 +29,7 @@ export interface IAbilityImageTextProvider {
 export interface IReplaceGameVariablesRV {
 	replaced: string;
 	variables: Map<string, {
+		baseValue: number | [number, number];
 		value: number | [number, number];
 		meta?: IVariableMeta;
 		isUninteresting?: boolean;
@@ -60,3 +61,10 @@ export interface IVariableMeta {
 	isPercentage?: boolean;
 	type?: IVariableType;
 }
+
+/** creates a union of all variable properties detected on an item */
+export type DetectItemVariables<T>
+	= | (T extends { dataValues: object } ? keyof T['dataValues'] : never)
+		| (T extends { stringCalculations: object } ? keyof T['stringCalculations'] : never)
+		| (T extends { itemCalculations: object } ? keyof T['itemCalculations'] : never)
+		| (T extends { effectAmount: any[] } ? `Effect${number}Amount` : never);

@@ -1,10 +1,13 @@
-import type { IEffectObjectName } from '@lolcalc/shared';
+import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IGameAbilityId } from '../GameAbilityId.ts';
+import type { DetectItemVariables } from '../types';
+import type { IVariableValueResult } from '../variables/game.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
+import { itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
 import { ITEM_SPECIFICS } from './item.ts';
 
@@ -140,8 +143,24 @@ export const EFFECT_SPECIFICS = {
 		isActive(data: [sVenom: number]) {
 			return data[0];
 		},
-		imgText(data) {
+		imgText(data: [sVenom: number]) {
 			return data[0] === 1 ? 'm' : data[0] === 2 ? 'r' : '';
+		},
+		modifyVariable: {
+			type: 'shield',
+			handler(value, effectData: [sVenom: number]) {
+				if (typeof value === 'number') {
+					const reducePercentage = itemVariableValue(
+						'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
+						ITEMS_BY_NAME.serpentsFang,
+						undefined,
+						effectData[0] === 2,
+					);
+					value *= 1 - (reducePercentage.value as number / 100);
+				}
+
+				return value;
+			},
 		},
 	},
 	[EFFECT_OBJECT_NAME.rylaisRimefrost]: {
@@ -291,7 +310,15 @@ export interface IEffectSpecific {
 	maxValue?: number | (() => Promise<number> | number);
 	enumOptions?: Record<string, number>;
 	calculateHooks?: ICalculateChampionStatsHookSource;
+	modifyVariable?: {
+		type: IVariableType;
+		handler: IEffectModifyVariableFunction;
+	};
 }
+
+export type IEffectModifyVariableFunctions = Partial<Record<IVariableType, NonNullable<IEffectSpecific['modifyVariable']>['handler'][]>>;
+
+export type IEffectModifyVariableFunction = (value: Exclude<IVariableValueResult['value'], any[]>, effectData: any) => Exclude<IVariableValueResult['value'], any[]>;
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 

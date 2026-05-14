@@ -2,6 +2,7 @@ import type { TItems } from '@lolcalc/data';
 import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
+import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VARIABLE_TYPE } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
@@ -828,13 +829,6 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, string>;
 	[key: string]: any;
 };
-
-/** creates a union of all variable properties detected on an item */
-type DetectItemVariables<T>
-	= | (T extends { dataValues: object } ? keyof T['dataValues'] : never)
-		| (T extends { stringCalculations: object } ? keyof T['stringCalculations'] : never)
-		| (T extends { itemCalculations: object } ? keyof T['itemCalculations'] : never)
-		| (T extends { effectAmount: any[] } ? `Effect${number}Amount` : never);
 
 export function calculateItemDiscount(
 	itemId: string,

@@ -64,7 +64,7 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 		: never;
 
 export interface ICalculatedDynamicVariable {
-	value: number | [number | undefined, number | undefined];
+	value: string | number | [number | undefined, number | undefined];
 }
 
 export type ICalculatedDynamicVariables<T extends string = string> = Record<T, ICalculatedDynamicVariable>;
@@ -83,7 +83,7 @@ export interface ISpecificVariables<
 	 *
 	 * if empty `[]`, variable is not expected to be used for resolving a stringtable value like `{{ game_spell_Kayn_Q_main_@f1@ }}` and is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
 	 */
-	known?: NoInfer<Partial<Record<DetectedVariables, number[]>>> & Record<T, number[]>;
+	known?: NoInfer<Partial<Record<DetectedVariables, (number | string)[]>>> & Record<T, (number | string)[]>;
 	/**
 	 * the first value of each `known` variable, computed by `defineVariables`
 	 * used for game descriptions created without damage source like the ones for effects or in results
