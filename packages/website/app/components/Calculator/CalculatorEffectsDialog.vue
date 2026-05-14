@@ -5,7 +5,7 @@ import type { TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { CHAMPION_ID_TO_KEY, ITEMS, useChampion } from '@lolcalc/data';
+import { ITEMS, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
@@ -60,16 +60,16 @@ const isLoading = ref(false);
 const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 	const groups: IEffectOptionGroup[] = [
 		{
-			type: ABILITY_TYPE.champion,
-			label: 'champions',
-			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
+			type: ABILITY_TYPE.item,
+			label: 'items',
+			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
 				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
 		{
-			type: ABILITY_TYPE.item,
-			label: 'items',
-			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
+			type: ABILITY_TYPE.champion,
+			label: 'champions',
+			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
 				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
@@ -106,19 +106,6 @@ async function loadChampionEffects() {
 		})));
 
 	isLoading.value = false;
-}
-
-function submitAnotherEffect(event: SubmitEvent) {
-	const value = new FormData(event.target as HTMLFormElement).get('optionIndexes')! as string;
-	if (!value) {
-		return;
-	}
-
-	const [rawGroupIndex, rawOptionIndex] = value.split('-');
-	const group = effectOptionGroups.value[Number.parseInt(rawGroupIndex!)]!;
-	const option = group.options[Number.parseInt(rawOptionIndex!)]!;
-	damageSource.value?.addEffect(option.abilityId);
-	(event.target as HTMLFormElement).reset();
 }
 
 const UnknownComponent = () => h('article', { class: 'unknown' }, ['UNKNOWN']);
@@ -166,8 +153,27 @@ defineExpose({
 			<h1>
 				effects
 			</h1>
+			<div class="inline-search-label">
+				<input
+					id="champ-select-search"
+					v-model="search"
+					autofocus
+					type="text"
+					:data-empty="!search"
+				>
+				<label for="item-shop-search">
+					<Icon class="i-ph:magnifying-glass-bold" />
+					Search
+				</label>
+				<button title="clear" @mousedown.prevent="search = ''">
+					<span>
+						clear
+					</span>
+					<Icon class="i-ph:x-bold" />
+				</button>
+			</div>
 			<form method="dialog">
-				<button autofocus value="cancel" class="other-ui-btn">
+				<button value="cancel" class="other-ui-btn">
 					<span>
 						close
 					</span>
@@ -200,25 +206,6 @@ defineExpose({
 				</component>
 			</li>
 		</ul>
-		<div class="inline-search-label">
-			<input
-				id="champ-select-search"
-				v-model="search"
-				autofocus
-				type="text"
-				:data-empty="!search"
-			>
-			<label for="item-shop-search">
-				<Icon class="i-ph:magnifying-glass-bold" />
-				Search
-			</label>
-			<button title="clear" @mousedown.prevent="search = ''">
-				<span>
-					clear
-				</span>
-				<Icon class="i-ph:x-bold" />
-			</button>
-		</div>
 		<template v-for="group in effectOptionGroups" :key="group.type">
 			<h2>{{ group.label }}</h2>
 			<ul :inert="isLoading">
@@ -237,37 +224,6 @@ defineExpose({
 				</li>
 			</ul>
 		</template>
-		<!-- <form :inert="isLoading" @submit.prevent="submitAnotherEffect"> -->
-		<!-- 	<label for="dialog-effects-add-new-effect"> -->
-		<!-- 		add effect -->
-		<!-- 	</label> -->
-		<!-- 	<select -->
-		<!-- 		id="dialog-effects-add-new-effect" -->
-		<!-- 		name="optionIndexes" -->
-		<!-- 		required -->
-		<!-- 		:disabled="!effectOptionGroups.length" -->
-		<!-- 	> -->
-		<!-- 		<option v-if="!effectOptionGroups.length"> -->
-		<!-- 			no options left -->
-		<!-- 		</option> -->
-		<!-- 		<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label"> -->
-		<!-- 			<option -->
-		<!-- 				v-for="(option, optionIndex) in group.options" -->
-		<!-- 				:key="GameAbilityId.stringify(option.abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES)" -->
-		<!-- 				:value="`${groupIndex}-${optionIndex}`" -->
-		<!-- 			> -->
-		<!-- 				{{ option.name }} -->
-		<!-- 			</option> -->
-		<!-- 		</optgroup> -->
-		<!-- 	</select> -->
-		<!-- 	<button -->
-		<!-- 		type="submit" -->
-		<!-- 		class="other-ui-btn" -->
-		<!-- 		:disabled="!effectOptionGroups.length" -->
-		<!-- 	> -->
-		<!-- 		add -->
-		<!-- 	</button> -->
-		<!-- </form> -->
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
 			:ability-id="hoveredEffectId"
@@ -279,37 +235,26 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-effects {
-		--at-apply: 'bg-[--cyan-bg] grid-rows-[auto_auto_1fr] w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] h-200 of-y-auto';
+		--at-apply: 'bg-[--cyan-bg] flex-col w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] h-200 of-y-auto';
 		anchor-scope: all;
+		--pt: calc(2 * var(--spacing));
 
 		&[open] {
-			--at-apply: 'grid';
+			--at-apply: 'flex';
 		}
 
 		> header {
-			--at-apply: 'mb-2';
+			--at-apply: 'pt-[--pt] flex items-center pb-2 sticky top-0 gap-3 z-2 bg-inherit b-b b-[--ui-btn-border-clr]';
 
 			> h1 {
 				--at-apply: 'leading-7 text-neutral-200 font-700 uppercase text-lg';
 			}
-		}
 
-		> h2:first-of-type {
-			--at-apply: 'hidden z-10 text-center absolute inset-0 inset-t-10 font-600 text-2xl backdrop-blur-2';
-			-webkit-text-stroke: black 0.1em;
-			paint-order: stroke fill;
-		}
-
-		&[aria-busy='true'] > h2 {
-			--at-apply: 'block';
-		}
-
-		> header {
-			--at-apply: 'pt-2 flex';
+			> div {
+				--at-apply: 'ms-auto';
+			}
 
 			> form {
-				--at-apply: 'ms-auto';
-
 				> button {
 					--at-apply: 'grid place-items-center size-7 rounded-1/2';
 
@@ -324,32 +269,35 @@ defineExpose({
 			}
 		}
 
-		> ul {
-			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 justify-items-center mb-3 h-min';
-			--ability-size: calc(14 * var(--spacing));
-
-			> li {
-				--at-apply: 'w-full';
-			}
+		> h2:first-of-type {
+			--at-apply: 'hidden z-10 text-center absolute inset-0 inset-t-10 font-600 text-2xl backdrop-blur-2';
+			-webkit-text-stroke: black 0.1em;
+			paint-order: stroke fill;
 		}
 
-		> form {
-			--at-apply: 'grid grid-cols-[auto_1fr] grids-rows-[auto_1fr] gap-x-2 h-min';
+		> h2:not(:first-of-type) {
+			--at-apply: 'mb-0.5';
+		}
 
-			> label {
-				--at-apply: 'col-span-full text-start text-lg';
-			}
+		&[aria-busy='true'] > h2 {
+			--at-apply: 'block';
+		}
 
-			> select {
-				--at-apply: 'w-64 px-1 py-1';
+		> ul {
+			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 justify-items-center mb-3 h-min last-of-type:mb-0';
+			--ability-size: calc(14 * var(--spacing));
 
-				&:disabled {
-					--at-apply: 'text-neutral-400';
+			&:first-of-type {
+				--at-apply: 'min-h-[max(40%,20rem)] pt-2';
+
+				&:empty::before {
+					--at-apply: 'text-center block col-span-full text-neutral-300 font-500 text-lg mt-[calc((var(--ability-size))/2-var(--spacing)*1.75)]';
+					content: 'select effects to apply';
 				}
 			}
 
-			> button {
-				--at-apply: 'w-fit px-2 h-full';
+			> li {
+				--at-apply: 'w-full';
 			}
 		}
 
