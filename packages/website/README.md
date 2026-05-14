@@ -212,7 +212,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - init effects applyToVariable or something, start with serpent's fang
 - apply frozen heart's effect
 - results table "duplicate" damage targets and apply source's effects onto them
-- effects dialog restyle to show all components, selected on top, searchable
 
 ### future features
 

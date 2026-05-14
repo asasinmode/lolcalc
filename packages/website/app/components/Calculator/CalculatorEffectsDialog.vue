@@ -286,6 +286,7 @@ defineExpose({
 		--at-apply: 'bg-[--cyan-bg] flex-col w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] h-200 of-y-auto';
 		anchor-scope: all;
 		--pt: calc(2 * var(--spacing));
+		--ability-size: calc(14 * var(--spacing));
 
 		&[open] {
 			--at-apply: 'flex';
@@ -318,7 +319,7 @@ defineExpose({
 		}
 
 		> h2:first-of-type {
-			--at-apply: 'hidden z-10 text-center absolute inset-0 inset-t-10 font-600 text-2xl backdrop-blur-2';
+			--at-apply: 'hidden z-10 text-center absolute inset-0 inset-t-12 pt-[calc(var(--ability-size)/2)] font-600 text-2xl backdrop-blur-2';
 			-webkit-text-stroke: black 0.1em;
 			paint-order: stroke fill;
 		}
@@ -337,7 +338,6 @@ defineExpose({
 
 		> ul {
 			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 mb-3 h-min last-of-type:mb-0';
-			--ability-size: calc(14 * var(--spacing));
 
 			&::before {
 				--at-apply: 'col-span-full text-neutral-300 font-500 text-lg';
