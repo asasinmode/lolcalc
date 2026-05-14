@@ -81,10 +81,6 @@ export function itemVariableValue(
 			const key: keyof NonNullable<IItem['stringCalculations']>[string] = damageSource.isRanged.value ? 'RangedResult' : 'MeleeResult';
 			rv.value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, dynamicVariables, isRanged, damageSource).value;
 		}
-	} else if (item.itemCalculations?.[variable]) {
-		// TODO
-		// const result = ITEM_SPECIFICS[item.id]?.[variable]?.(target);
-		// value = result;
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	}
