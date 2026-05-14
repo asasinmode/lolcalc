@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IEffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
@@ -162,6 +162,27 @@ function hideEffectTooltip() {
 }
 
 const search = ref('');
+const splitSearch = computed(() => search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v));
+
+interface IAppliedEffectWithSearchString {
+	effect: IDamageSourceEffect;
+	searchString?: string;
+}
+
+const appliedEffectsWithSearchStrings = computed((): IAppliedEffectWithSearchString[] | undefined =>
+	damageSource.value?.appliedEffects.value.map((effect): IAppliedEffectWithSearchString => ({
+		effect,
+		searchString: effectSearchStrings.get(effect.abilityId.id),
+	})),
+);
+
+function searchFilteredEffects<T extends { searchString?: string }>(options?: T[]): T[] | undefined {
+	if (search.value) {
+		return options?.filter(option =>
+			splitSearch.value.every(word => !option.searchString || option.searchString.includes(word)));
+	}
+	return options;
+}
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -169,7 +190,13 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-effects" ref="vDialog" :aria-busy="isLoading" @open="loadChampionEffects">
+	<VDialog
+		id="dialog-effects"
+		ref="vDialog"
+		:aria-busy="isLoading"
+		:data-is-searched="search ? '' : undefined"
+		@open="loadChampionEffects"
+	>
 		<header>
 			<h1>
 				effects
@@ -205,7 +232,7 @@ defineExpose({
 		<h2>loading...</h2>
 		<ul :inert="isLoading">
 			<li
-				v-for="effect in damageSource?.appliedEffects.value"
+				v-for="{ effect } in searchFilteredEffects(appliedEffectsWithSearchStrings)"
 				:key="effect.id"
 				:style="`anchor-name: --effect-${effect.abilityId.id}`"
 			>
@@ -231,7 +258,7 @@ defineExpose({
 			<h2>{{ group.label }}</h2>
 			<ul :inert="isLoading">
 				<li
-					v-for="effect in damageSource && group.options"
+					v-for="effect in damageSource && searchFilteredEffects(group.options)"
 					:key="`${group.type}-${effect.abilityId.id}`"
 					:style="`anchor-name: --effect-${effect.abilityId.id}`"
 				>
@@ -296,6 +323,10 @@ defineExpose({
 			paint-order: stroke fill;
 		}
 
+		> h2:nth-of-type(2) {
+			--at-apply: 'mt-auto';
+		}
+
 		> h2:not(:first-of-type) {
 			--at-apply: 'mb-0.5';
 		}
@@ -305,21 +336,34 @@ defineExpose({
 		}
 
 		> ul {
-			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 justify-items-center mb-3 h-min last-of-type:mb-0';
+			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 mb-3 h-min last-of-type:mb-0';
 			--ability-size: calc(14 * var(--spacing));
+
+			&::before {
+				--at-apply: 'col-span-full text-neutral-300 font-500 text-lg';
+			}
 
 			&:first-of-type {
 				--at-apply: 'min-h-[max(40%,20rem)] pt-2';
 
 				&:empty::before {
-					--at-apply: 'text-center block col-span-full text-neutral-300 font-500 text-lg mt-[calc((var(--ability-size))/2-var(--spacing)*1.75)]';
+					--at-apply: 'text-center mt-[calc((var(--ability-size))/2-var(--spacing)*1.75)]';
 					content: 'select effects to apply';
 				}
+			}
+
+			&:not(:first-of-type):empty::before {
+				--at-apply: 'text-start py-1';
+				content: 'no effects left';
 			}
 
 			> li {
 				--at-apply: 'w-full';
 			}
+		}
+
+		&[data-is-searched] > ul:not(:first-of-type):empty::before {
+			content: 'no effects matching search';
 		}
 
 		> .effect-hover-tooltip-container {
