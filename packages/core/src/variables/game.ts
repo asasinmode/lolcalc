@@ -8,7 +8,7 @@ import { roundVariable } from '@lolcalc/shared/utils.ts';
 
 interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
-	value?: ICalculatedDynamicVariable['value'];
+	value?: ICalculatedDynamicVariable['value'] | string;
 	/** if `true`, the variable is different for melee and ranged champions */
 	isMeleeRanged?: boolean;
 	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
@@ -29,11 +29,11 @@ interface IVariableValueResult {
  * - the return value of `ISpecificDynamicVariables.calculate`'s return value when actually calculating and using the values
  */
 export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting'> {
-	values?: Record<string, ICalculatedDynamicVariable | (string | number)[]>;
+	values?: Record<string, ICalculatedDynamicVariable>;
 }
 
 function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[string]): IVariableValueResult['value'] {
-	return Array.isArray(value) ? value[0] ?? 0 : value.value;
+	return value.value;
 }
 
 export function itemVariableValue(

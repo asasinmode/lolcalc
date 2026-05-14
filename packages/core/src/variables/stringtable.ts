@@ -1,11 +1,11 @@
+import type { ICalculatedDynamicVariable } from '../specifics';
 import type { IReplaceStringtableVariablesRV } from '../types';
-import type { IDynamicVariables } from './game';
 
 export function replaceStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},
 	/** either resolved dynamic variables or possible values of dynamic variables, see also the interface's itself documentation */
-	dynamicVariables: IDynamicVariables = {},
+	dynamicVariables: { values?: Record<string, ICalculatedDynamicVariable | number[]> } = {},
 	/** whether to wrap unknown variables in `<unknown>` */
 	wrapUnknown = true,
 	unknownStringtableVariables: Map<string, Set<string>> = new Map(),

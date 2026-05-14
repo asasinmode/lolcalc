@@ -64,7 +64,7 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 		: never;
 
 export interface ICalculatedDynamicVariable {
-	value: string | number | [number | undefined, number | undefined];
+	value: number | [number | undefined, number | undefined];
 }
 
 export type ICalculatedDynamicVariables<T extends string = string> = Record<T, ICalculatedDynamicVariable>;
@@ -83,7 +83,13 @@ export interface ISpecificVariables<
 	 *
 	 * if empty `[]`, variable is not expected to be used for resolving a stringtable value like `{{ game_spell_Kayn_Q_main_@f1@ }}` and is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
 	 */
-	known?: NoInfer<Partial<Record<DetectedVariables, (string | number)[]>>> & Record<T, (string | number)[]>;
+	known?: NoInfer<Partial<Record<DetectedVariables, number[]>>> & Record<T, number[]>;
+	/**
+	 * the first value of each `known` variable, computed by `defineVariables`
+	 * used for game descriptions created without damage source like the ones for effects or in results
+	 * if `known` is empty `[]`, the value will be `0`
+	 */
+	default?: NoInfer<Partial<Record<DetectedVariables, Pick<ICalculatedDynamicVariable, 'value'>>> & Record<T, Pick<ICalculatedDynamicVariable, 'value'>>>;
 	/** calculate any dynamic variable used in the ability's description */
 	calculate?: (self: DamageSource<Id>) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
 	/**
@@ -100,9 +106,13 @@ export function defineVariables<
 	T extends string = DetectedVariables,
 	Id extends IChampionId | undefined = IChampionId,
 >(
-	config: ISpecificVariables<DetectedVariables, T, Id>,
+	config: Omit<ISpecificVariables<DetectedVariables, T, Id>, 'default'>,
 ): ISpecificVariables<DetectedVariables, T, Id> {
-	return config;
+	return Object.assign(config, {
+		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) =>
+			[key, { value: (value as (string | number)[])[0] ?? 0 }],
+		)) as ISpecificVariables<DetectedVariables, T, Id>['default'],
+	});
 }
 
 export function calculateDynamicVariables(self: DamageSource, config?: ISpecificVariables): IDynamicVariables | undefined {
@@ -113,11 +123,10 @@ export function calculateDynamicVariables(self: DamageSource, config?: ISpecific
 	};
 }
 
-/* `known` array values are used during `updateData` to find all used stringtable variables, while here they have to be resolved so that they can be used for descriptions without underlying damage source, like champion's ability effect
- * TODO maybe think of something other than duplicating the object, also it's duplicating what `resolveDynamicVariable` does for when it receives raw `known` because these are also passed to `replaceStringtableVariables` which won't resolve them unless they are actual values, not array of possible ones which */
+/* `known` array values are used during `updateData` to find all used stringtable variables, while here they have to be resolved so that they can be used for descriptions without underlying damage source, like champion's ability effect */
 export function specificKnownVariables(config?: ISpecificVariables): IDynamicVariables | undefined {
 	return config && {
-		values: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => [key, { value: value[0] ?? 0 }])),
+		values: config.default,
 		meta: config.meta,
 		uninteresting: config.uninteresting,
 	};
