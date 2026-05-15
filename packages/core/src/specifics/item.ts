@@ -549,6 +549,17 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { sVenom: number }) {
 			return internalData.sVenom;
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			uninteresting: ['f1', 'DebuffDuration', 'ShieldShredMeleeRangedSplit', 'ShieldWoundMeleeRangedSplit'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.rylaisScepter]: {
 		internalDataProperties: ['rimefrost'],
