@@ -788,18 +788,27 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	addEffect<T extends IEffectAbilityId>(abilityId: T, data?: IDamageSourceEffect<T>['data']): IDamageSourceEffect<T> {
+	addEffect<T extends IEffectAbilityId>(
+		abilityId: T,
+		data?: IDamageSourceEffect<T>['data'],
+		/** when data is already expected to be "safe", not in need of `setupData`, like from `EFFECT_SPECIFICS.itemAppliedOnTargetEffectData` */
+		trustData = false,
+	): IDamageSourceEffect<T> {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
 		if (~existingEffectIndex) {
 			console.warn(`[DamageSource addEffect] adding existing effect`, abilityId);
 
-			const newValue = specific.setupData(data);
-			if ('then' in newValue) {
-				newValue.then(value => this.appliedEffects.value[existingEffectIndex]!.data = value);
+			if (data && trustData) {
+				this.appliedEffects.value[existingEffectIndex]!.data = data;
 			} else {
-				this.appliedEffects.value[existingEffectIndex]!.data = newValue;
+				const newData = specific.setupData(data);
+				if ('then' in newData) {
+					newData.then(value => this.appliedEffects.value[existingEffectIndex]!.data = value);
+				} else {
+					this.appliedEffects.value[existingEffectIndex]!.data = newData;
+				}
 			}
 
 			return this.appliedEffects.value[existingEffectIndex] as IDamageSourceEffect<T>;
@@ -810,11 +819,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				data: [],
 			};
 
-			const newValue = specific.setupData(data);
-			if ('then' in newValue) {
-				newValue.then(value => rv.data = value);
+			if (data && trustData) {
+				rv.data = data;
 			} else {
-				rv.data = newValue;
+				const newData = specific.setupData(data);
+				if ('then' in newData) {
+					newData.then(value => rv.data = value);
+				} else {
+					rv.data = newData;
+				}
 			}
 
 			this.appliedEffects.value.push(rv);

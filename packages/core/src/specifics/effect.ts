@@ -360,7 +360,7 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 
 	for (const [effectAbilityId, effectSpecific] of itemsWithEffects) {
 		const effectData = effectSpecific.itemAppliedOnTargetEffectData!(source);
-		effectData && target.addEffect(effectAbilityId, effectData as any)
+		effectData && target.addEffect(effectAbilityId, effectData as any, true);
 	}
 	console.log('applied', target.computed.items.value);
 
