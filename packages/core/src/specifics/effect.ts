@@ -121,7 +121,7 @@ export const EFFECT_SPECIFICS = {
 		isActive(data: [wCaress: number]) {
 			return data[0];
 		},
-		itemAppliedOnTargetEffectData(damageSource) {
+		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'frozenHeart'>).wCaress) {
 				return [1];
 			}
@@ -152,7 +152,7 @@ export const EFFECT_SPECIFICS = {
 		imgText(data: [sVenom: number]) {
 			return data[0] === 1 ? 'm' : data[0] === 2 ? 'r' : '';
 		},
-		itemAppliedOnTargetEffectData(damageSource) {
+		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'serpentsFang'>).sVenom) {
 				if (damageSource.isRanged.value) {
 					return [2];
@@ -327,7 +327,7 @@ export interface IEffectSpecific {
 	 *	- `1` when `internalItemData.sVenom` is `1` **AND** `damageSource.isRanged` is `false`
 	 *	- `2` when `internalItemData.sVenom` is `1` **AND** `damageSource.isRanged` is `true`
 	 */
-	itemAppliedOnTargetEffectData?: (damageSource: DamageSource) => any[] | undefined;
+	setupDataFromSourceItem?: (damageSource: DamageSource) => any[] | undefined;
 	/** @default 0 */
 	minValue?: number;
 	/** @default 1 */
@@ -355,7 +355,7 @@ export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: stri
 
 /** all effects that can be applied by toggling `apply X to target` checkbox */
 export const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, effectSpecific]) => effectSpecific.itemAppliedOnTargetEffectData)
+	.filter(([, effectSpecific]) => effectSpecific.setupDataFromSourceItem)
 	.map(([effectObjectName, effectSpecific]) => {
 		return [effectSpecific.sourceAbility.id, [GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName), effectSpecific]];
 	})) as Record<string, [IEffectAbilityId, IEffectSpecific]>;
@@ -364,7 +364,7 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 	const itemsWithEffects = source.items.value.map(item => item && EFFECTS_APPLIED_BY_ITEMS_TO_TARGET[item.id]).filter(Boolean) as (typeof EFFECTS_APPLIED_BY_ITEMS_TO_TARGET)[string][];
 
 	for (const [effectAbilityId, effectSpecific] of itemsWithEffects) {
-		const effectData = effectSpecific.itemAppliedOnTargetEffectData!(source);
+		const effectData = effectSpecific.setupDataFromSourceItem!(source);
 		effectData && target.addEffect(effectAbilityId, effectData as any, true);
 	}
 
