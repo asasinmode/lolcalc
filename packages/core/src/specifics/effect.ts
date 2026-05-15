@@ -121,6 +121,11 @@ export const EFFECT_SPECIFICS = {
 		isActive(data: [wCaress: number]) {
 			return data[0];
 		},
+		itemAppliedOnTargetEffectData(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'frozenHeart'>).wCaress) {
+				return [1];
+			}
+		},
 		calculateHooks: {
 			postTotal: {
 				handler(_self, { totalStats, effectStats }) {
