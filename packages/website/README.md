@@ -62,7 +62,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] aphelios q rotating
   - [x] mirror layout
   - [x] expand scoreboard item double click to expand/collapse
-  - [ ] drag indicator next to buttons
+  - [ ] drag indicator next to buttons?
+  - [ ] drag with champion icon?
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
   - [x] source vs target column headers

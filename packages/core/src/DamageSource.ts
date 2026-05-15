@@ -971,6 +971,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			if (this.appliedEffects) {
 				for (const effect of this.appliedEffects.value) {
 					const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
+					/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
 					specific?.isActive(effect.data) && groupCalculateStatsHooks(rv, specific);
 				}
 			}
@@ -1013,6 +1014,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (const effect of this.appliedEffects.value) {
 			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
+			/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
 			if (specific?.modifyVariable && specific.isActive(effect.data)) {
 				rv[specific.modifyVariable.type] ??= [];
 				rv[specific.modifyVariable.type]!.push(value => specific.modifyVariable!.handler(value, effect.data));

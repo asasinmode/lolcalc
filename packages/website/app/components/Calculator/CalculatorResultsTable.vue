@@ -657,6 +657,7 @@ function recalculateAllColumns() {
 }
 
 function recalculateColumn(column: IDamageResultTableColumn) {
+	column._computedTarget = console.log(column.target?.clone());
 	for (const section of resultSections.value) {
 		for (const row of section.rows) {
 			computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
