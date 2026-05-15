@@ -12,7 +12,7 @@ import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { applyEffectsFromTo, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
@@ -657,7 +657,7 @@ function recalculateAllColumns() {
 }
 
 function recalculateColumn(column: IDamageResultTableColumn) {
-	column._computedTarget = console.log(column.target?.clone());
+	column._computedTarget = column.source && column.target && applyEffectsFromTo(column.source, column.target.clone());
 	for (const section of resultSections.value) {
 		for (const row of section.rows) {
 			computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
