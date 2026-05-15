@@ -63,12 +63,13 @@
 		);
 		--cyan-bg: oklch(0.249 0.0608 229.695);
 		--unknown-clr: #f0f;
+		--mauve-bg: theme('colors.mauve.950'); /* tailwind mauve-950 */
 	}
 
 	body {
 		font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
 		min-height: 100vh;
-		background-color: theme('colors.mauve.900');
+		background-color: var(--mauve-bg);
 
 		@supports (font-variation-settings: 'wdth' 800) {
 			font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;

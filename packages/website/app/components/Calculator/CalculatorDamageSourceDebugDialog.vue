@@ -33,7 +33,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-damage-source-debug {
-		--at-apply: 'bg-mauve-900 b b-[--ui-btn-border-clr] shadow-lg of-x-auto p-4';
+		--at-apply: 'bg-[--mauve-bg] b b-[--ui-btn-border-clr] shadow-lg of-x-auto p-4';
 
 		> h1 {
 			--at-apply: 'text-xl mb-3';
