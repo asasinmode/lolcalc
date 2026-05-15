@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO this should be a `page/index.vue` but (not sure if intended) url query isn't resolved to the navigated to one when nuxt is generated with query, maybe this is relevant? https://github.com/nuxt/nuxt/issues/34651
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionStatName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
