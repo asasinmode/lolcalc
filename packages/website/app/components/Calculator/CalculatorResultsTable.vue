@@ -250,7 +250,7 @@ function computeSectionRowColumn(
 	row: IDamageResultTableSection['rows'][number],
 	column: IDamageResultTableColumn,
 ): IComputedSectionRowColumn {
-	const source = column[sourceProperty.value];
+	const source = column[flipResults.value ? '_computedTarget' : sourceProperty.value];
 	const target = column[targetProperty.value];
 	const rv: IComputedSectionRowColumn = {
 		columnId: column.id,
@@ -657,7 +657,14 @@ function recalculateAllColumns() {
 }
 
 function recalculateColumn(column: IDamageResultTableColumn) {
-	column._computedTarget = column.source && column.target && applyEffectsFromTo(column.source, column.target.clone());
+	if (column.target) {
+		column._computedTarget = column.target.clone({}, false);
+		column._computedTarget.champion.value = column.target.champion.value;
+		if (column.source) {
+			applyEffectsFromTo(column.source, column._computedTarget);
+		}
+	}
+
 	for (const section of resultSections.value) {
 		for (const row of section.rows) {
 			computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
