@@ -341,7 +341,7 @@ export type IEffectModifyVariableFunction = (value: Exclude<IVariableValueResult
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 
-export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [ path: string, imgSize: number ]>> = {
+export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: string, imgSize: number]>> = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
 	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
 	[EFFECT_OBJECT_NAME.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
@@ -362,7 +362,6 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 		const effectData = effectSpecific.itemAppliedOnTargetEffectData!(source);
 		effectData && target.addEffect(effectAbilityId, effectData as any, true);
 	}
-	console.log('applied', target.computed.items.value);
 
 	return target;
 }

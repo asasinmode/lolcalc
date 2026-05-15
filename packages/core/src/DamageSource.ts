@@ -158,9 +158,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 */
 	fromStringifiedInternalData: any[] | undefined;
 
-	constructor(overrides: (Omit<IOverrides<Id>, 'champion'> & {
-		champion?: { id: Id } & IListedChampion;
-	}) = {}, cloned = false) {
+	constructor(
+		overrides: (Omit<IOverrides<Id>, 'champion'> & {
+			champion?: { id: Id } & IListedChampion;
+		}) = {},
+		cloned = false,
+		/** when DamageSource is one & done cloned, like in `CalculatorResultsTable`'s `recalculateColumn` when it's intended to have source's effects applied, note that `this.champion.value` will be empty without it and needs to be set manually */
+		noWatch = false,
+	) {
 		const hue = (damageSourcesCount++ * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
@@ -203,145 +208,147 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.addEffect(effect.abilityId, effect.data);
 		}
 
-		this.watchHandles = [
-			watch(this.listedChampion, async (c) => {
-				this.champion.value = undefined;
+		this.watchHandles = noWatch
+			? []
+			: [
+					watch(this.listedChampion, async (c) => {
+						this.champion.value = undefined;
 
-				const champion = c && await useChampion(c.id);
-				if (this.listedChampion.value?.id === champion?.id) {
-					this.champion.value = champion;
-				}
-			}, { immediate: true }),
-
-			watch(this.champion, (c) => {
-				for (const unwatch of this.internalData.value?._watchHandles || []) {
-					unwatch();
-				}
-
-				if (this.fromStringifiedInternalData) {
-					for (const abilityKey in this.abilityLevels.value) {
-						this.abilityLevels.value[abilityKey as INonPassiveAbilityKey] = Math.max(0, Math.min(
-							this.abilityLevels.value[abilityKey as INonPassiveAbilityKey],
-							this.maxAbilityLevels.value[abilityKey as INonPassiveAbilityKey],
-						));
-					}
-
-					for (const abilityKey in this.abilityVariantsIndexes.value) {
-						this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey] = Math.max(0, Math.min(
-							this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey],
-							this.maxAbilityVariantsIndexes.value[abilityKey as IChampionAbilityKey],
-						));
-					}
-
-					this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) ?? {};
-
-					const internalDataKeys = Object.keys(this.internalData.value).filter(key => !key.startsWith('_'));
-					if (internalDataKeys.length && this.fromStringifiedInternalData.length) {
-						for (let i = 0; i < internalDataKeys.length; i++) {
-							const key = internalDataKeys[i]!;
-							if (this.fromStringifiedInternalData[i] !== undefined) {
-								this.internalData.value[key as keyof typeof this.internalData['value']] = this.fromStringifiedInternalData[i];
-							}
+						const champion = c && await useChampion(c.id);
+						if (this.listedChampion.value?.id === champion?.id) {
+							this.champion.value = champion;
 						}
+					}, { immediate: true }),
+
+					watch(this.champion, (c) => {
 						for (const unwatch of this.internalData.value?._watchHandles || []) {
 							unwatch();
 						}
-						this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) || {};
-						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
-					}
 
-					this.fromStringifiedInternalData = undefined;
-					return;
-				}
+						if (this.fromStringifiedInternalData) {
+							for (const abilityKey in this.abilityLevels.value) {
+								this.abilityLevels.value[abilityKey as INonPassiveAbilityKey] = Math.max(0, Math.min(
+									this.abilityLevels.value[abilityKey as INonPassiveAbilityKey],
+									this.maxAbilityLevels.value[abilityKey as INonPassiveAbilityKey],
+								));
+							}
 
-				if (cloned) {
-					cloned = false;
-				} else {
-					this.currentHealth.value = this.stats.value?.total.hp ?? 0;
-					this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
+							for (const abilityKey in this.abilityVariantsIndexes.value) {
+								this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey] = Math.max(0, Math.min(
+									this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey],
+									this.maxAbilityVariantsIndexes.value[abilityKey as IChampionAbilityKey],
+								));
+							}
 
-					const level = c?.id === 'TargetDummy' ? 1 : 0;
-					this.abilityLevels.value = { q: level, w: level, e: level, r: level };
-					this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
-				}
+							this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) ?? {};
 
-				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any)) ?? {};
-				this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
-			}),
+							const internalDataKeys = Object.keys(this.internalData.value).filter(key => !key.startsWith('_'));
+							if (internalDataKeys.length && this.fromStringifiedInternalData.length) {
+								for (let i = 0; i < internalDataKeys.length; i++) {
+									const key = internalDataKeys[i]!;
+									if (this.fromStringifiedInternalData[i] !== undefined) {
+										this.internalData.value[key as keyof typeof this.internalData['value']] = this.fromStringifiedInternalData[i];
+									}
+								}
+								for (const unwatch of this.internalData.value?._watchHandles || []) {
+									unwatch();
+								}
+								this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) || {};
+								this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
+							}
 
-			watch(() => [this.maxHealth.value, this.maxAbilityResource.value], ([currentMaxHp, currentMaxAbilityResource], previousValues) => {
-				if (this.listedChampion.value?.id === this.champion.value?.id) {
-					if ((!previousValues && !this.currentHealth.value) || this.currentHealth.value === previousValues?.[0]) {
-						this.currentHealth.value = currentMaxHp ?? 0;
-					} else {
-						this.currentHealth.value = Math.min(this.currentHealth.value, currentMaxHp ?? 0);
-					}
-					if ((!previousValues && !this.currentAbilityResource.value) || this.currentAbilityResource.value === previousValues?.[1]) {
-						this.currentAbilityResource.value = currentMaxAbilityResource ?? 0;
-					} else {
-						this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
-					}
-				}
-			}, { immediate: true }),
-
-			watch(this.roleQuest, (value) => {
-				if (value !== 'top' && this.level.value > 18) {
-					this.level.value = 18;
-				}
-
-				if (value === 'bot') {
-					const bootsIndex = this.items.value.findIndex(item => item?.isBoots);
-					const boots = this.items.value[bootsIndex];
-					if (~bootsIndex) {
-						this.items.value[bootsIndex] = undefined;
-						this.items.value[6] = boots;
-					}
-				} else if (this.items.value[6]?.isBoots) {
-					const firstEmptyIndex = this.items.value.indexOf(undefined);
-					if (~firstEmptyIndex) {
-						this.items.value[firstEmptyIndex] = this.items.value[6];
-						this.items.value[6] = undefined;
-					}
-				}
-
-				handleRoleQuestItems(this.items.value, this.roleQuest.value);
-			}),
-
-			watch(this.isRanged, (value) => {
-				if (!value) {
-					for (let i = 0; i < this.items.value.length; i++) {
-						const item = this.items.value[i];
-						if (item && (RANGED_ONLY_ITEMS as string[]).includes(item.id)) {
-							this.items.value[i] = undefined;
+							this.fromStringifiedInternalData = undefined;
+							return;
 						}
-					}
-				}
-			}),
 
-			watch(() => this.items.value.map(i => i?.id), (newIds, oldIds) => {
-				const removedItems = (oldIds?.filter(id => !newIds.includes(id)) ?? []) as (keyof TItemSpecifics | undefined)[];
-				const addedItems = newIds.filter(id => !oldIds?.includes(id)) as (keyof TItemSpecifics | undefined)[];
-				for (const addedId of addedItems) {
-					(addedId && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[addedId])?.setupData?.(this);
-				}
+						if (cloned) {
+							cloned = false;
+						} else {
+							this.currentHealth.value = this.stats.value?.total.hp ?? 0;
+							this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
 
-				const usedProperties = newIds.flatMap(id => id ? (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.internalDataProperties ?? [] : []);
-				for (const removedId of removedItems) {
-					if (removedId && (ITEM_SPECIFICS[removedId] as any)?.internalDataProperties?.length) {
-						for (const key of (ITEM_SPECIFICS[removedId] as any).internalDataProperties) {
-							if (!usedProperties.includes(key)) {
-								this.internalItemData.value[key] = undefined;
+							const level = c?.id === 'TargetDummy' ? 1 : 0;
+							this.abilityLevels.value = { q: level, w: level, e: level, r: level };
+							this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+						}
+
+						this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any)) ?? {};
+						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
+					}),
+
+					watch(() => [this.maxHealth.value, this.maxAbilityResource.value], ([currentMaxHp, currentMaxAbilityResource], previousValues) => {
+						if (this.listedChampion.value?.id === this.champion.value?.id) {
+							if ((!previousValues && !this.currentHealth.value) || this.currentHealth.value === previousValues?.[0]) {
+								this.currentHealth.value = currentMaxHp ?? 0;
+							} else {
+								this.currentHealth.value = Math.min(this.currentHealth.value, currentMaxHp ?? 0);
+							}
+							if ((!previousValues && !this.currentAbilityResource.value) || this.currentAbilityResource.value === previousValues?.[1]) {
+								this.currentAbilityResource.value = currentMaxAbilityResource ?? 0;
+							} else {
+								this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
 							}
 						}
-					}
-				}
-			}, { immediate: true, deep: true }),
-		];
+					}, { immediate: true }),
+
+					watch(this.roleQuest, (value) => {
+						if (value !== 'top' && this.level.value > 18) {
+							this.level.value = 18;
+						}
+
+						if (value === 'bot') {
+							const bootsIndex = this.items.value.findIndex(item => item?.isBoots);
+							const boots = this.items.value[bootsIndex];
+							if (~bootsIndex) {
+								this.items.value[bootsIndex] = undefined;
+								this.items.value[6] = boots;
+							}
+						} else if (this.items.value[6]?.isBoots) {
+							const firstEmptyIndex = this.items.value.indexOf(undefined);
+							if (~firstEmptyIndex) {
+								this.items.value[firstEmptyIndex] = this.items.value[6];
+								this.items.value[6] = undefined;
+							}
+						}
+
+						handleRoleQuestItems(this.items.value, this.roleQuest.value);
+					}),
+
+					watch(this.isRanged, (value) => {
+						if (!value) {
+							for (let i = 0; i < this.items.value.length; i++) {
+								const item = this.items.value[i];
+								if (item && (RANGED_ONLY_ITEMS as string[]).includes(item.id)) {
+									this.items.value[i] = undefined;
+								}
+							}
+						}
+					}),
+
+					watch(() => this.items.value.map(i => i?.id), (newIds, oldIds) => {
+						const removedItems = (oldIds?.filter(id => !newIds.includes(id)) ?? []) as (keyof TItemSpecifics | undefined)[];
+						const addedItems = newIds.filter(id => !oldIds?.includes(id)) as (keyof TItemSpecifics | undefined)[];
+						for (const addedId of addedItems) {
+							(addedId && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[addedId])?.setupData?.(this);
+						}
+
+						const usedProperties = newIds.flatMap(id => id ? (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.internalDataProperties ?? [] : []);
+						for (const removedId of removedItems) {
+							if (removedId && (ITEM_SPECIFICS[removedId] as any)?.internalDataProperties?.length) {
+								for (const key of (ITEM_SPECIFICS[removedId] as any).internalDataProperties) {
+									if (!usedProperties.includes(key)) {
+										this.internalItemData.value[key] = undefined;
+									}
+								}
+							}
+						}
+					}, { immediate: true, deep: true }),
+				];
 
 		markRaw(this);
 	}
 
-	clone(overrides: IOverrides = {}): DamageSource<Id> {
+	clone(overrides: IOverrides = {}, noWatch?: boolean): DamageSource<Id> {
 		return new DamageSource<Id>({
 			champion: this.listedChampion.value,
 			level: this.level.value,
@@ -361,7 +368,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			/* not cloned, same as `internalData` */
 			appliedEffects: this.appliedEffects.value,
 			...overrides,
-		}, true);
+		}, true, noWatch);
 	}
 
 	clear(): void {
