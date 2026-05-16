@@ -404,6 +404,8 @@ const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (sectio
 		} else if (typeof numberValue !== 'number') {
 			value = `${numberValue[0]} | ${numberValue[1]}`;
 			numberValue = undefined;
+		} else {
+			value = roundVariable(numberValue);
 		}
 
 		return {
@@ -702,7 +704,7 @@ function calculateComputedRowComparisonMap(row: IComputedSectionRow, sectionId: 
 			const b = colB.numberValue;
 			if (a !== undefined && b !== undefined) {
 				const meta = sectionId === 'a-stats' ? CHAMPION_STAT_META[row.rowId as IChampionStatName] : undefined;
-				map[idB] = roundVariable((a - b) * (meta?.isPercentage ? 100 : 1), meta?.isPercentage ? 4 : 1);
+				map[idB] = roundVariable((a - b) * (meta?.isPercentage ? 100 : 1));
 			}
 		}
 

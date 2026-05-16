@@ -131,7 +131,7 @@ export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = 
 	},
 	bonusAttackSpeedPercent: {
 		name: 'Bonus Attack Speed',
-		decimal: 5,
+		decimal: 3,
 		isPercentage: true,
 	},
 	critChance: {

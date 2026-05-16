@@ -10,6 +10,9 @@ test('@lolcalc/shared/utils', async (t) => {
 		assert.strictEqual(roundVariable(3 * 0.6).toString(), '1.8', 'absolute focus');
 		assert.strictEqual(roundVariable(2.5).toString(), '2.5', 'triumph');
 		/* damage results attack speed comparison */
-		assert.strictEqual(roundVariable(105.4, 4).toString(), '105.4', 'results comparison attack speed');
+		assert.strictEqual(roundVariable(105.4).toString(), '105.4', 'results comparison attack speed');
+		/* damage results calculated item variables */
+		assert.strictEqual(roundVariable(105.0375).toString(), '105.04', 'results muramana');
+		assert.strictEqual(roundVariable(70.025).toString(), '70.03', 'results muramana');
 	});
 });

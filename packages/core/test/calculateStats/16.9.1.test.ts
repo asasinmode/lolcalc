@@ -1,6 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource';
 import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
-import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
@@ -40,7 +39,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			abilityPower: 602,
 			armor: 92,
 			magicResist: 52,
-			attackSpeed: 1.33,
+			attackSpeed: 1.327,
 			abilityHaste: 35,
 			moveSpeed: 413,
 			/* in game it shows 2874 but it's ceiled 2873, see help page known discrepancies */
