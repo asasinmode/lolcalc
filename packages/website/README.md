@@ -242,6 +242,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] item shop champion specific consumables like gp ult
 - [ ] consumables panel
 - [ ] alternative mode of configuration, step by step choose champion -> runes -> items -> level...
+- [ ] dorans shield full calculation? It's based on melee/ranged + missing hp
 
 #### very future
 

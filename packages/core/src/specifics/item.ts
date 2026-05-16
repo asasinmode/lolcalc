@@ -8,32 +8,34 @@ import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_I
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { defineVariables } from './index.ts';
 
-const tearItemSpecifics = {
-	MAX_STACKS: ITEMS_BY_NAME.tear.dataValues.MaxMana,
-	internalDataProperties: ['manaflow'],
-	setupData(self: DamageSource) {
-		self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, tearItemSpecifics.MAX_STACKS);
-		return { manaflow: 0 };
-	},
-	imgTextLabel: 'Manaflow stacks',
-	imgText(self) {
-		return (self.internalItemData.value as { manaflow: number }).manaflow;
-	},
-} satisfies IItemSpecific;
+const tearItem = {
+	specific: {
+		MAX_STACKS: ITEMS_BY_NAME.tear.dataValues.MaxMana,
+		internalDataProperties: ['manaflow'],
+		setupData(self: DamageSource) {
+			self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, tearItem.specific.MAX_STACKS);
+			return { manaflow: 0 };
+		},
+		imgTextLabel: 'Manaflow stacks',
+		imgText(self) {
+			return (self.internalItemData.value as { manaflow: number }).manaflow;
+		},
+	} satisfies IItemSpecific,
+	calculateHookPreItemTotal: {
+		handler(self, { itemBaseStats, itemPassivesStats, itemStatIncreases }, { miscDebug }) {
+			const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
+			itemPassivesStats.mana += manaflow ?? 0;
+			miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
 
-const tearItemCalculateHookPreItemTotal = {
-	handler(self, { itemBaseStats, itemPassivesStats, itemStatIncreases }, { miscDebug }) {
-		const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
-		itemPassivesStats.mana += manaflow ?? 0;
-		miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
-
-		const tearItemId = self.items.value.find(item => item && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))?.id;
-		if (tearItemId) {
-			itemStatIncreases[tearItemId] ??= {};
-			itemStatIncreases[tearItemId]!.FlatMPPoolMod = manaflow;
-		}
-	},
-} satisfies ICalculateChampionStatsHookSource['preItemTotal'];
+			const tearItemId = self.items.value.find(item => item && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))?.id;
+			if (tearItemId) {
+				itemStatIncreases[tearItemId] ??= {};
+				itemStatIncreases[tearItemId]!.FlatMPPoolMod = manaflow;
+			}
+		},
+	} satisfies ICalculateChampionStatsHookSource['preItemTotal'],
+	uninterestingVariables: ['ManaPerCharge', 'ManaChargeAmmoCD', 'ManaChargeMaxAmmo', 'ManaPerCharge', 'MaxMana', 'BonusMinionDamage'] satisfies (DetectItemVariables<TItems[typeof ITEM_NAME_TO_ID['tear']]>)[] as any[],
+};
 
 const gluttonousGreavesSpecific = {
 	MAX_STACKS: ITEMS_BY_NAME.gluttonousGreaves.dataValues.MaxStacks,
@@ -254,6 +256,7 @@ export const ITEM_SPECIFICS = {
 			return corruption && `${Math.round(corruption * ITEMS_BY_NAME.riftmaker.dataValues.EternityDamageIncreasePerSecond * 100)}%`;
 		},
 		calculateHooks: {
+			// TODO should probably have priority to run post winters approach/heartsteel and calculate based on `itemPassivesStats.hp` too
 			preItemTotal: {
 				handler(self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
 					const { corruption } = self.internalItemData.value as IInternalItemDataOf<'riftmaker'>;
@@ -315,16 +318,24 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.tear]: {
-		...tearItemSpecifics,
+		...tearItem.specific,
 		calculateHooks: {
-			preItemTotal: tearItemCalculateHookPreItemTotal,
+			preItemTotal: tearItem.calculateHookPreItemTotal,
+		},
+		variables: {
+			uninteresting: tearItem.uninterestingVariables.concat('BonusMinionDamage'),
 		},
 	},
-	[ITEM_NAME_TO_ID.whisperingCirclet]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.whisperingCirclet]: {
+		...tearItem.specific,
+		variables: {
+			uninteresting: tearItem.uninterestingVariables,
+		},
+	},
 	[ITEM_NAME_TO_ID.archangelsStaff]: {
-		...tearItemSpecifics,
+		...tearItem.specific,
 		calculateHooks: {
-			preItemTotal: tearItemCalculateHookPreItemTotal,
+			preItemTotal: tearItem.calculateHookPreItemTotal,
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 					const bonusAP = itemTotalStats.mana * ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana;
@@ -347,6 +358,12 @@ export const ITEM_SPECIFICS = {
 					},
 				};
 			},
+			meta: {
+				f2: {
+					displayedName: 'APFromMana',
+				},
+			},
+			uninteresting: ['APFromMana', ...tearItem.uninterestingVariables],
 		}),
 	},
 	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
@@ -397,9 +414,9 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.manamune]: {
-		...tearItemSpecifics,
+		...tearItem.specific,
 		calculateHooks: {
-			preItemTotal: tearItemCalculateHookPreItemTotal,
+			preItemTotal: tearItem.calculateHookPreItemTotal,
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables }) {
 					const bonusAD = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEMS_BY_NAME.manamune.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
@@ -427,6 +444,7 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.manamune.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
 				},
 			},
+			uninteresting: tearItem.uninterestingVariables,
 		}),
 	},
 	[ITEM_NAME_TO_ID.muramana]: {
@@ -496,7 +514,39 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1'],
 		}),
 	},
-	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.wintersApproach]: {
+		...tearItem.specific,
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, args, meta) {
+					tearItem.calculateHookPreItemTotal.handler(self, args, meta);
+					const bonusHP = ((args.itemBaseStats.mana ?? 0) + args.itemPassivesStats.mana) * ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient;
+					// calculatedVariables.apMultipliersBase += bonusAP;
+					args.itemPassivesStats.hp += bonusHP;
+					meta.calculatedVariables.approachFimbulAwe = bonusHP;
+				},
+			},
+		},
+		variables: defineVariables({
+			known: {
+				BonusHPFromMana: [],
+			},
+			calculate(self) {
+				return {
+					BonusHPFromMana: {
+						value: self.stats.value.variables.approachFimbulAwe!,
+					},
+				};
+			},
+			meta: {
+				BonusHPFromMana: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient * 100)}% bonus</scalemana> `,
+				},
+			},
+			uninteresting: tearItem.uninterestingVariables,
+		}),
+	},
 	[ITEM_NAME_TO_ID.trinity]: {
 		internalDataProperties: ['quicken'],
 		setupData(self) {

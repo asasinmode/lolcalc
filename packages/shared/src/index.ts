@@ -81,8 +81,10 @@ export interface IStatsCalculationVariables {
 	rabadonMagicalOpus?: number;
 	/** ap gained from archangel'seraph's passive */
 	archangelSeraphAwe?: number;
-	/** as gained from manamune/muramana's passive */
+	/** ad gained from manamune/muramana's passive */
 	manaMuraAwe?: number;
+	/** hp gained from winter's approach/fimbulwinter's passive */
+	approachFimbulAwe?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

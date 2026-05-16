@@ -43,7 +43,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			attackSpeed: 1.33,
 			abilityHaste: 35,
 			moveSpeed: 413,
-			/* in game it shows 2874 but 2873 should be correct with the difference steming from something like `Math.ceil(2873.000001)` */
+			/* in game it shows 2874 but it's ceiled 2873, see help page known discrepancies */
 			hp: 2873,
 		});
 	});
@@ -139,19 +139,22 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			...sourceCommon,
 			level: 11,
 			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.wintersApproach, ITEMS_BY_NAME.gluttonousGreaves],
+			internalData: {
+				passiveStacks: 2,
+			} satisfies IInternalDataOf<'Ezreal'>,
 			internalItemData: {
-				manaflow: 0,
-			} satisfies IInternalItemDataOf<'muramana' | 'wintersApproach'>,
+				manaflow: 12,
+			} satisfies IInternalItemDataOf<'wintersApproach'>,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 198,
 			abilityPower: 129,
-			attackSpeed: 0.762,
+			attackSpeed: 0.887,
 			abilityHaste: 55,
 			moveSpeed: 370,
-			hp: 2596,
-			mana: 3489,
+			hp: 2597,
+			mana: 3501,
 			omnivamp: 4,
 		});
 	});
