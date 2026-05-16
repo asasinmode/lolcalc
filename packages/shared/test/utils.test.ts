@@ -4,6 +4,7 @@ import { roundVariable } from '../src/utils.ts';
 
 test('@lolcalc/shared/utils', async (t) => {
 	await t.test('roundVariable formats numbers correctly', () => {
+		assert.strictEqual(roundVariable(7.0 + 1e-9).toString(), '7');
 		/* runes */
 		assert.strictEqual(roundVariable(1.8).toString(), '1.8', 'conqueror');
 		assert.strictEqual(roundVariable(7.000000000000001).toString(), '7', 'celerity');

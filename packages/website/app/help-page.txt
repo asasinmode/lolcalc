@@ -20,7 +20,7 @@
 			while it's impossible for me to check all 172+ champions with every item combination, I tried my best to make it work and here are some examples of it working
 		</p>
 		<p>!IMPORTANT for now only champions, their passives, items and their passives, and rune shards are taken into account.</p>
-		<p>non-passive abilities (like <a>Ambessa R passive</a> or <a>Nocturne W passive</a>) and major runes <strong>are not considered</strong> in the calculations. See the <a>champion/item/rune setup</a> recommended for verifying the calculations yourself</p>
+		<p>non-passive abilities (like <a>Ambessa R passive</a> or <a>Nocturne W passive</a>) and rune paths <strong>are not considered</strong> <i>(yet)</i> in the calculations. See the <a>champion/item/rune setup</a> recommended for verifying the calculations yourself</p>
 		<p>for when these and other features will be implemented, see the <a>roadmap</a></p>
 
 		<h2>how do I use it?</h2>

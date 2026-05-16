@@ -168,12 +168,16 @@
 				"PercentAttackSpeedMod": 0.25
 			}
 		},
-		"3110": {
-			"name": "Frozen Heart",
+		"3008": {
+			"name": "Gluttonous Greaves",
 			"stats": {
-				"FlatMPPoolMod": 400,
-				"FlatArmorMod": 75,
-				"AbilityHasteMod": 20
+				"FlatMovementSpeedMod": 45,
+				"PercentOmnivampMod": 0.04
+			},
+			"isBoots": true,
+			"dataValues": {
+				"OmnivampOnTakedown": 0.01,
+				"MaxStacks": 6
 			}
 		},
 		"3040": {
@@ -242,6 +246,56 @@
 				"MoveSpeedMod": 0.1
 			}
 		},
+		"3042": {
+			"name": "Muramana",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatPhysicalDamageMod": 35,
+				"AbilityHasteMod": 15
+			},
+			"isOnHit": true,
+			"dataValues": {
+				"BonusADManaRatioTOOLTIPONLY": 0.02,
+				"OnHitManaRatioTOOLTIPONLY": 0.012,
+				"AbilityManaRatioRangedTOOLTIPONLY": 0.03,
+				"PerCastIDLockout": 6.5,
+				"AbilityManaRatioMeleeTOOLTIPONLY": 0.04
+			},
+			"itemCalculations": {
+				"BonusADFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.012,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.04,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.03,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3089": {
 			"name": "Rabadon's Deathcap",
 			"stats": {
@@ -249,6 +303,40 @@
 			},
 			"dataValues": {
 				"APAmp": 0.3
+			}
+		},
+		"3110": {
+			"name": "Frozen Heart",
+			"stats": {
+				"FlatMPPoolMod": 400,
+				"FlatArmorMod": 75,
+				"AbilityHasteMod": 20
+			}
+		},
+		"3119": {
+			"name": "Winter's Approach",
+			"stats": {
+				"FlatMPPoolMod": 500,
+				"FlatHPPoolMod": 550,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"ManaPerCharge": 3,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 4,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"BonusHPFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.15,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
 			}
 		},
 		"3124": {

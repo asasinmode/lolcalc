@@ -1147,7 +1147,7 @@ defineExpose({ el });
 							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>
-					<ComingSoonCover feature="major runes" class="text-xs px-1 end-1/2 start-0 inset-y-0 absolute" />
+					<ComingSoonCover feature="rune paths" class="text-xs px-1 end-1/2 start-0 inset-y-0 absolute" />
 				</dl>
 				<div ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="manual">
 					<h5>{{ hoveredRune?.name }}</h5>

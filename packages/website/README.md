@@ -191,7 +191,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
-    - [ ] is it accurate? yes except for: no major runes; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling
+    - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling
     - [ ] screenshots showing it accurately calculating things
   - [ ] github readme
 - [ ] submit feedback on page / report issues
