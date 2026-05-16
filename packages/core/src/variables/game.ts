@@ -354,8 +354,8 @@ export function replaceGameVariables(
 			const baseValue = [roundVariable(variable[0]! * multiplier), roundVariable(variable[1]! * multiplier)] as [number, number];
 
 			if (meta?.type && modifyVariableFunctions[meta.type]) {
-				variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc), variable[0]);
-				variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc), variable[1]);
+				variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[0]!);
+				variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[1]!);
 			}
 
 			variable[0] = roundVariable(variable[0]! * multiplier);
@@ -368,15 +368,17 @@ export function replaceGameVariables(
 				isUninteresting,
 			});
 
-			return `%i:meleeactive%${tagWrapStart}${
-				replaceWithName ? variableName : (isDynamic ? Math.round(variable[0]!) : variable[0])}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
-				replaceWithName ? variableName : isDynamic ? Math.round(variable[1]!) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+			return replaceWithName
+				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${variableName}${varSymbolSuffix}${tagWrapEnd}`
+				: `%i:meleeactive%${tagWrapStart}${
+					isDynamic ? Math.round(variable[0]!) : variable[0]}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+					isDynamic ? Math.round(variable[1]!) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		const baseValue = roundVariable(variable * multiplier);
 
 		if (meta?.type && modifyVariableFunctions[meta.type]) {
-			variable = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc), variable);
+			variable = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable);
 		}
 
 		variable = roundVariable(variable * multiplier);
