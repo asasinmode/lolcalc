@@ -53,8 +53,17 @@ export interface IVariableMeta {
 	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
 	 */
 	statIconKey?: Exclude<keyof typeof STAT_ICON, 'slowResist' | 'GP10'>;
-	/** when present, formatted variable will have `= (calculation info)` appended to in the extended version (holding shift) */
-	extendedEquals?: string;
+	/**
+	 * when present, formatted variable will have `= (${extendedEquals})` appended to in the extended version (holding shift)
+	 * if `extendedEquals` is an object, it's assumed to have different info values for melee/ranged and will be formatted accordingly in `replaceGameVariables`
+	 */
+	extendedEquals?: string | {
+		prefix: string;
+		meleeValue: string | number;
+		rangedValue: string | number;
+		valueSuffix?: string;
+		suffix: string;
+	};
 	/** displayed value multiplied by */
 	multiplier?: number;
 	/** `%` will be suffixed to the formatted value */

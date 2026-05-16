@@ -479,7 +479,13 @@ export const ITEM_SPECIFICS = {
 				},
 				lolcalcChampRange: {
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${roundVariable(ITEMS_BY_NAME.muramana.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
+					extendedEquals: {
+						prefix: '<scalemana>',
+						meleeValue: roundVariable(ITEMS_BY_NAME.muramana.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
+						rangedValue: roundVariable(ITEMS_BY_NAME.muramana.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
+						valueSuffix: '%',
+						suffix: '</scalemana>',
+					},
 				},
 			},
 			uninteresting: ['f1'],

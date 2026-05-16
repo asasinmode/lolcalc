@@ -333,19 +333,25 @@ export function replaceGameVariables(
 		}
 
 		let metaSuffix = '';
+		const extendedEquals = typeof meta?.extendedEquals !== 'object' || isMeleeRanged === undefined
+			? meta?.extendedEquals
+			: `${meta.extendedEquals.prefix}${isMeleeRanged === true
+				? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix} | ${meta.extendedEquals.rangedValue}`
+				: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
+			}${meta.extendedEquals.valueSuffix}${meta.extendedEquals.suffix}`;
 		if (meta?.statIconKey) {
-			(meta?.extendedEquals && options.isExtended)
-				? metaSuffix = ` = (${meta.extendedEquals}%i:${STAT_ICON[meta.statIconKey]}%)`
+			(extendedEquals && options.isExtended)
+				? metaSuffix = ` = (${extendedEquals}%i:${STAT_ICON[meta.statIconKey]}%)`
 				: metaSuffix = ` (%i:${STAT_ICON[meta.statIconKey]}%)`;
-		} else if (meta?.extendedEquals && options.isExtended) {
-			metaSuffix = ` = (${meta.extendedEquals})`;
+		} else if (extendedEquals && options.isExtended) {
+			metaSuffix = ` = (${extendedEquals})`;
 		}
 		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
 		if (meta?.multiplier) {
 			multiplier = meta.multiplier;
 		}
 
-		const varSymbolSuffix = meta?.isPercentage ? '%' : '';
+		const varValueSuffix = meta?.isPercentage ? '%' : '';
 		const replaceWithName = options.replaceWithName && !isUninteresting;
 
 		const tagWrapStart = replaceWithName ? '<var>' : '';
@@ -384,10 +390,10 @@ export function replaceGameVariables(
 			});
 
 			return replaceWithName
-				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${variableName}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`
+				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${variableName}${varValueSuffix}${tagWrapEnd}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
-					isDynamic ? Math.round(variable[0]!) : variable[0]}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
-					isDynamic ? Math.round(variable[1]!) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+					isDynamic ? Math.round(variable[0]!) : variable[0]}${varValueSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
+					isDynamic ? Math.round(variable[1]!) : variable[1]}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		const baseValue = roundVariable(variable * multiplier);
@@ -406,7 +412,7 @@ export function replaceGameVariables(
 				: undefined;
 		const iconPrefix = meleeRangedIconPath ? `%i:${meleeRangedIconPath}active% ` : '';
 
-		return `${iconPrefix}${tagWrapStart}${replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+		return `${iconPrefix}${tagWrapStart}${replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
 	return { replaced, variables, unknownVariables, variablesAllValues, anyExtendedVariables };
