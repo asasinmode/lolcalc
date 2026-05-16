@@ -55,6 +55,7 @@ export function itemVariableValue(
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
 		rv.isDynamic = true;
+		rv.isMeleeRanged = Array.isArray(rv.value);
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {

@@ -1147,7 +1147,7 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 }
 
 /**
- * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that's TODO supposed to be handled manually, figure out if makese sense
+ * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that gets special treatment in `@lolcalc/core/variables/game` and `@lolcalc/core/specifics/index`
  */
 function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	/* for more info about where these are used/what they turn into check `app/composables/useText.ts` */

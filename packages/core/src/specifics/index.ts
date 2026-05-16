@@ -88,6 +88,7 @@ export interface ISpecificVariables<
 	 * the first value of each `known` variable, computed by `defineVariables`
 	 * used for game descriptions created without damage source like the ones for effects or in results
 	 * if `known` is empty `[]`, the value will be `0`
+	 * if variable is named `lolcalcChampRange`, value will be `[value[0] ?? 0, value[1] ?? 0]` so it can be treated as a melee/ranged variable in `replaceGameVariables`
 	 */
 	default?: NoInfer<Partial<Record<DetectedVariables, Pick<ICalculatedDynamicVariable, 'value'>>> & Record<T, Pick<ICalculatedDynamicVariable, 'value'>>>;
 	/** calculate any dynamic variables used in the ability's description */
@@ -109,8 +110,11 @@ export function defineVariables<
 	config: Omit<ISpecificVariables<DetectedVariables, T, Id>, 'default'>,
 ): ISpecificVariables<DetectedVariables, T, Id> {
 	return Object.assign(config, {
-		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) =>
-			[key, { value: (value as (string | number)[])[0] ?? 0 }],
+		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => {
+			return [key, { value: key === 'lolcalcChampRange'
+				? [(value as number[])[0] ?? 0, (value as number[])[1] ?? 0]
+				: ((value as (string | number)[])[0] ?? 0) }];
+		},
 		)) as ISpecificVariables<DetectedVariables, T, Id>['default'],
 	});
 }

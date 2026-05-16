@@ -601,7 +601,7 @@ export const ITEM_SPECIFICS = {
 					f1: { value: 0 },
 				};
 			},
-			uninteresting: ['f1', 'DebuffDuration', 'ShieldShredMeleeRangedSplit', 'ShieldWoundMeleeRangedSplit'],
+			uninteresting: ['f1', 'DebuffDuration'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.rylaisScepter]: {
