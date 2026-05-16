@@ -205,6 +205,7 @@ export const ALL_CHAMPION_STATS_ENTRIES = Object.entries(CHAMPION_STAT_META) as 
 
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {
+	doransShield: '1054',
 	slightlyMagicalFootwear: '2422',
 	tear: '3070',
 	whisperingCirclet: '2526',

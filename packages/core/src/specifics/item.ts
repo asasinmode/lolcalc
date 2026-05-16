@@ -297,9 +297,7 @@ export const ITEM_SPECIFICS = {
 						value: self.stats.value.variables.riftmakerVoidInfusion!,
 					},
 					lolcalcChampRange: {
-						value: self.champion.value
-							? self.isRanged.value ? VampAmountRanged : VampAmountMelee
-							: [VampAmountMelee, VampAmountRanged],
+						value: [VampAmountMelee, VampAmountRanged],
 					},
 				};
 			},
@@ -309,6 +307,7 @@ export const ITEM_SPECIFICS = {
 					isPercentage: true,
 				},
 			},
+			uninteresting: ['EternityDamageIncreasePerSecond', 'EternityDamageIncreaseMax', 'HealthToAPConversionPercent'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.tear]: {
@@ -440,17 +439,29 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				BonusADFromMana: [],
-				f1: [],
 				OnHitDamage: [],
+				lolcalcChampRange: [],
+				f1: [],
 			},
 			calculate(self) {
+				const totalMana = self.stats.value.total.mana;
+				const meleeAbilitiesBonusModifier = ITEMS_BY_NAME.muramana.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient;
+				const rangedAbilitiesBonusModifier = ITEMS_BY_NAME.muramana.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient;
+
 				return {
 					/** ad gained from passive */
 					BonusADFromMana: {
 						value: self.stats.value.variables.manaMuraAwe!,
 					},
 					OnHitDamage: {
-						value: self.stats.value.total.mana * ITEMS_BY_NAME.muramana.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient,
+						value: totalMana * ITEMS_BY_NAME.muramana.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient,
+					},
+					/** passive damaging abilities bonus damage */
+					lolcalcChampRange: {
+						value: [
+							totalMana * meleeAbilitiesBonusModifier,
+							totalMana * rangedAbilitiesBonusModifier,
+						],
 					},
 					f1: {
 						value: 0,
@@ -465,6 +476,10 @@ export const ITEM_SPECIFICS = {
 				OnHitDamage: {
 					statIconKey: 'mana',
 					extendedEquals: `<scalemana>${roundVariable(ITEMS_BY_NAME.muramana.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
+				},
+				lolcalcChampRange: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${roundVariable(ITEMS_BY_NAME.muramana.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
 				},
 			},
 			uninteresting: ['f1'],
@@ -865,6 +880,11 @@ export const ITEM_SPECIFICS = {
 				};
 			},
 		}),
+	},
+	[ITEM_NAME_TO_ID.doransShield]: {
+		variables: {
+			uninteresting: ['FlatHPRegenMod', 'RegenDuration', 'BonusDamageToMinions', 'RangeRegenMult'],
+		},
 	},
 } satisfies IHypotheticalItemSpecifics;
 

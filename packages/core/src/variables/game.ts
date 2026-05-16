@@ -10,14 +10,18 @@ import { roundVariable } from '@lolcalc/shared/utils.ts';
 export interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
 	value?: ICalculatedDynamicVariable['value'];
-	/** if `true`, the variable is different for melee and ranged champions */
-	isMeleeRanged?: boolean;
+	/**
+	 * if `true`, the variable is different for melee and ranged champions and the calculation target's range is unknown
+	 * if `0`, same as `true` except the target is melee
+	 * if `1`, same as `true` except the target is ranged
+	 */
+	isMeleeRanged?: true | 0 | 1;
 	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
 	actualVariableName?: string;
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[];
 	meta?: IVariableMeta;
-	/** whether was resolved from the provided dynamic variables */
+	/** whether was resolved from the provided dynamic variables. If `true`, the **replaced** (not the one saved in variables map) value will be rounded */
 	isDynamic?: boolean;
 	/** whether `ISpecificVariables.uninteresting` includes it */
 	isUninteresting?: boolean;
@@ -54,14 +58,24 @@ export function itemVariableValue(
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
+		if (Array.isArray(rv.value)) {
+			if (isRanged === undefined) {
+				rv.isMeleeRanged = true;
+			} else if (isRanged) {
+				rv.isMeleeRanged = 1;
+				rv.value = rv.value[1];
+			} else {
+				rv.isMeleeRanged = 0;
+				rv.value = rv.value[0];
+			}
+		}
 		rv.isDynamic = true;
-		rv.isMeleeRanged = Array.isArray(rv.value);
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
 		rv.value = item.dataValues[variable];
 	} else if (item.stringCalculations?.[variable]) {
-		rv.isMeleeRanged = true;
+		rv.isMeleeRanged = isRanged === true ? 1 : isRanged === false ? 0 : true;
 		if (isRanged === undefined) {
 			rv.value = [
 				itemVariableValue(
@@ -299,25 +313,6 @@ export function replaceGameVariables(
 			variable = [...variable];
 		}
 
-		let metaSuffix = '';
-		if (meta?.statIconKey) {
-			(meta?.extendedEquals && options.isExtended)
-				? metaSuffix = ` = (${meta.extendedEquals}%i:${STAT_ICON[meta.statIconKey]}%)`
-				: metaSuffix = ` (%i:${STAT_ICON[meta.statIconKey]}%)`;
-		} else if (meta?.extendedEquals && options.isExtended) {
-			metaSuffix = ` = (${meta.extendedEquals})`;
-		}
-		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
-		if (meta?.multiplier) {
-			multiplier = meta.multiplier;
-		}
-
-		const varSymbolSuffix = meta?.isPercentage ? '%' : '';
-		const replaceWithName = options.replaceWithName && !isUninteresting;
-
-		const tagWrapStart = replaceWithName ? '<var>' : '';
-		const tagWrapEnd = replaceWithName ? '</var>' : '';
-
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
 				let parsedValue: string | number = roundVariable(value * multiplier);
@@ -336,6 +331,25 @@ export function replaceGameVariables(
 				? variable.map(v => (typeof v !== 'number' || Number.isNaN(v)) ? undefined : v) as typeof variable
 				: undefined;
 		}
+
+		let metaSuffix = '';
+		if (meta?.statIconKey) {
+			(meta?.extendedEquals && options.isExtended)
+				? metaSuffix = ` = (${meta.extendedEquals}%i:${STAT_ICON[meta.statIconKey]}%)`
+				: metaSuffix = ` (%i:${STAT_ICON[meta.statIconKey]}%)`;
+		} else if (meta?.extendedEquals && options.isExtended) {
+			metaSuffix = ` = (${meta.extendedEquals})`;
+		}
+		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
+		if (meta?.multiplier) {
+			multiplier = meta.multiplier;
+		}
+
+		const varSymbolSuffix = meta?.isPercentage ? '%' : '';
+		const replaceWithName = options.replaceWithName && !isUninteresting;
+
+		const tagWrapStart = replaceWithName ? '<var>' : '';
+		const tagWrapEnd = replaceWithName ? '</var>' : '';
 
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
@@ -370,9 +384,9 @@ export function replaceGameVariables(
 			});
 
 			return replaceWithName
-				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${variableName}${varSymbolSuffix}${tagWrapEnd}`
-				: `%i:meleeactive%${tagWrapStart}${
-					isDynamic ? Math.round(variable[0]!) : variable[0]}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${
+				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${variableName}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`
+				: `%i:meleeactive% ${tagWrapStart}${
+					isDynamic ? Math.round(variable[0]!) : variable[0]}${varSymbolSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
 					isDynamic ? Math.round(variable[1]!) : variable[1]}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
@@ -385,15 +399,14 @@ export function replaceGameVariables(
 		variable = roundVariable(variable * multiplier);
 		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting });
 
-		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]
-			? 'ranged'
-			: 'melee';
+		const meleeRangedIconPath = isMeleeRanged === 0
+			? 'melee'
+			: isMeleeRanged === 1
+				? 'ranged'
+				: undefined;
+		const iconPrefix = meleeRangedIconPath ? `%i:${meleeRangedIconPath}active% ` : '';
 
-		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}`
-			: `${tagWrapStart}${
-				replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)
-			}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
+		return `${iconPrefix}${tagWrapStart}${replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varSymbolSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
 	return { replaced, variables, unknownVariables, variablesAllValues, anyExtendedVariables };
