@@ -541,9 +541,8 @@ function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGam
 	return markRaw(variables
 		.entries()
 		.filter(entry => !entry[1].isUninteresting)
-		.map(entry => entry[0])
+		.map(entry => ({ id: entry[0], name: entry[1].meta?.displayedName ?? entry[0] }))
 		.toArray()
-		.map(name => ({ id: name, name }))
 		.concat(unknownVariables.map(([rawName, actualName]) => ({
 			id: rawName,
 			name: actualName || rawName,

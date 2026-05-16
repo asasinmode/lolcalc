@@ -303,8 +303,12 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				lolcalcChampRange: {
+					displayedName: 'MaxStacksOmnivamp',
 					multiplier: 100,
 					isPercentage: true,
+				},
+				f1: {
+					displayedName: 'BonusAPFromHP',
 				},
 			},
 			uninteresting: ['EternityDamageIncreasePerSecond', 'EternityDamageIncreaseMax', 'HealthToAPConversionPercent'],
@@ -478,6 +482,7 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<scalemana>${roundVariable(ITEMS_BY_NAME.muramana.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
 				},
 				lolcalcChampRange: {
+					displayedName: 'AdditionalAbilityDamage',
 					statIconKey: 'mana',
 					extendedEquals: {
 						prefix: '<scalemana>',

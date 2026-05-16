@@ -313,6 +313,10 @@ export function replaceGameVariables(
 			variable = [...variable];
 		}
 
+		const replaceWithName = options.replaceWithName && !isUninteresting;
+		const tagWrapStart = replaceWithName ? '<var>' : '';
+		const tagWrapEnd = replaceWithName ? '</var>' : '';
+
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
 				let parsedValue: string | number = roundVariable(value * multiplier);
@@ -351,25 +355,21 @@ export function replaceGameVariables(
 			multiplier = meta.multiplier;
 		}
 
-		const varValueSuffix = meta?.isPercentage ? '%' : '';
-		const replaceWithName = options.replaceWithName && !isUninteresting;
-
-		const tagWrapStart = replaceWithName ? '<var>' : '';
-		const tagWrapEnd = replaceWithName ? '</var>' : '';
-
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
-			return `${tagWrapStart}<unknown>@${replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
+			return `${tagWrapStart}<unknown>@${replaceWithName ? (meta?.displayedName ?? variableName) : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
 		}
 
 		if (typeof variable === 'string') {
-			return `${tagWrapStart}${replaceWithName ? variableName : variable}${tagWrapEnd}${metaSuffix}`;
+			return `${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : variable}${tagWrapEnd}${metaSuffix}`;
 		}
+
+		const varValueSuffix = meta?.isPercentage ? '%' : '';
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
 				unknownVariables.push([name, actualVariableName]);
-				return `${tagWrapStart}<unknown>@${replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}`;
+				return `${tagWrapStart}<unknown>@${replaceWithName ? (meta?.displayedName ?? variableName) : name}@</unknown>${tagWrapEnd}`;
 			}
 
 			const baseValue = [roundVariable(variable[0]! * multiplier), roundVariable(variable[1]! * multiplier)] as [number, number];
@@ -390,7 +390,7 @@ export function replaceGameVariables(
 			});
 
 			return replaceWithName
-				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${variableName}${varValueSuffix}${tagWrapEnd}${metaSuffix}`
+				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${(meta?.displayedName ?? variableName)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
 					isDynamic ? Math.round(variable[0]!) : variable[0]}${varValueSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
 					isDynamic ? Math.round(variable[1]!) : variable[1]}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
@@ -412,7 +412,7 @@ export function replaceGameVariables(
 				: undefined;
 		const iconPrefix = meleeRangedIconPath ? `%i:${meleeRangedIconPath}active% ` : '';
 
-		return `${iconPrefix}${tagWrapStart}${replaceWithName ? variableName : (isDynamic ? Math.round(variable) : variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
+		return `${iconPrefix}${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : (isDynamic ? Math.round(variable) : variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
 	return { replaced, variables, unknownVariables, variablesAllValues, anyExtendedVariables };

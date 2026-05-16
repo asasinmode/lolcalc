@@ -48,6 +48,8 @@ export interface IReplaceStringtableVariablesRV {
 }
 
 export interface IVariableMeta {
+	/** variable name shown in description when `replaceGameVariables`' `options.replaceWithName` is true instead of the actual variable name */
+	displayedName?: string;
 	/**
 	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it
 	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
