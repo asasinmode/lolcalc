@@ -1698,7 +1698,8 @@ function championAbilityVariant(
 		name: undefined!,
 		objectName: variantData.ObjectName,
 		dataKey: variantDataKey,
-		image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
+		/** belveth has the fully highlighted q at last index */
+		image: mImgIconName.at(championId === 'Belveth' && abilityKey === 'q' && variantIndex === 0 ? -1 : 0).toLowerCase().replace('.dds', '.png'),
 		tooltip: undefined,
 		tooltipExtended: undefined,
 		tooltipExtendedBelowLine: undefined,

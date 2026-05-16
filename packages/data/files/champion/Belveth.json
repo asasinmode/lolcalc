@@ -34,7 +34,7 @@
 					"name": "Void Surge",
 					"objectName": "BelvethQ",
 					"dataKey": "Characters/Belveth/Spells/BelvethQAbility/BelvethQ",
-					"image": "assets/characters/belveth/hud/icons2d/bv_q_1.png",
+					"image": "assets/characters/belveth/hud/icons2d/bv_q_15.png",
 					"tooltip": "Bel'Veth dashes, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to enemies she passes through.<br><br>Each direction has an unique Cooldown of @f1@ seconds that scales down based on her <attackSpeed>Attack Speed</attackSpeed>.",
 					"extendedVariables": [
 						{
