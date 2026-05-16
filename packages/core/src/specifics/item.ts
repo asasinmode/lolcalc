@@ -441,12 +441,16 @@ export const ITEM_SPECIFICS = {
 			known: {
 				BonusADFromMana: [],
 				f1: [],
+				OnHitDamage: [],
 			},
 			calculate(self) {
 				return {
 					/** ad gained from passive */
 					BonusADFromMana: {
 						value: self.stats.value.variables.manaMuraAwe!,
+					},
+					OnHitDamage: {
+						value: self.stats.value.total.mana * ITEMS_BY_NAME.muramana.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient,
 					},
 					f1: {
 						value: 0,
@@ -457,6 +461,10 @@ export const ITEM_SPECIFICS = {
 				BonusADFromMana: {
 					statIconKey: 'mana',
 					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.muramana.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
+				},
+				OnHitDamage: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${roundVariable(ITEMS_BY_NAME.muramana.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
 				},
 			},
 			uninteresting: ['f1'],

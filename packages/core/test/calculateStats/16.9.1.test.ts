@@ -149,6 +149,7 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			abilityPower: 129,
 			attackSpeed: 0.762,
 			abilityHaste: 55,
+			moveSpeed: 370,
 			hp: 2596,
 			mana: 3489,
 			omnivamp: 4,
