@@ -6,7 +6,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from './16.9.1.fixture.json' with { type: 'json' };
-import { setupDamageSource, setupItems } from './utils.ts';
+import { setupDamageSource, setupItems, typedPartialDeepStrictEqual } from './utils.ts';
 
 test.before(() => {
 	setupItems(fixture);
@@ -35,7 +35,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			} satisfies IInternalItemDataOf<'mejai' | 'blackfireTorch' | 'guinsoo'>,
 		});
 
-		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 134,
 			abilityPower: 602,
 			armor: 92,
@@ -58,7 +58,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			} satisfies IInternalItemDataOf<'archangelsStaff' | 'blackfireTorch'>,
 		});
 
-		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 549,
 			abilityHaste: 60,
 			mana: 2053,
@@ -74,7 +74,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			} satisfies IInternalItemDataOf<'blackfireTorch'>,
 		});
 
-		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 575,
 			abilityHaste: 60,
 			mana: 2443,
@@ -107,7 +107,7 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			} satisfies IInternalItemDataOf<'archangelsStaff'>,
 		});
 
-		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 85,
 			attackSpeed: 0.938,
 			abilityHaste: 25,
@@ -126,7 +126,7 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			} satisfies IInternalItemDataOf<'manamune'>,
 		});
 
-		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 133,
 			abilityPower: 109,
 			abilityHaste: 40,
@@ -134,48 +134,24 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 		});
 	});
 
-	await t.test('lvl 11 | seraph, manamune', async () => {
+	await t.test('lvl 11 | seraph, muramana, winter\'s approach, gluttonous greaves', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
 			...sourceCommon,
 			level: 11,
-			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.manamune],
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.wintersApproach, ITEMS_BY_NAME.gluttonousGreaves],
 			internalItemData: {
-				manaflow: 12,
-			} satisfies IInternalItemDataOf<'manamune'>,
+				manaflow: 0,
+			} satisfies IInternalItemDataOf<'muramana' | 'wintersApproach'>,
 		});
 
-		assert.strictEqual(damageSource.computed.formattedStatTotals.value.attackDamage, 178);
-	});
-
-	await t.test('lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, endless hunger, overlord\'s bloodmail, gluttonous greaves', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
-			...sourceCommon,
-			level: 18,
-			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.manamune, ITEMS_BY_NAME.diademOfSongs, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.gluttonousGreaves],
-			internalData: {
-				passiveStacks: 5,
-			} satisfies IInternalDataOf<'Ezreal'>,
-			internalItemData: {
-				feast: 1,
-				slay: 4,
-			} satisfies IInternalItemDataOf<'endlessHunger' | 'gluttonousGreaves'>,
-		});
-
-		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 424,
-			abilityPower: 150,
-			armor: 95,
-			magicResist: 52,
-			attackSpeed: 0.89,
-			abilityHaste: 90,
-			moveSpeed: 370,
-			hp: 4479,
-			mana: 5565,
-			hpRegen: 15,
-			manaRegen: 51,
-			healShieldPower: 28,
-			omnivamp: 28,
-			tenacity: 13,
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 198,
+			abilityPower: 129,
+			attackSpeed: 0.762,
+			abilityHaste: 55,
+			hp: 2596,
+			mana: 3489,
+			omnivamp: 4,
 		});
 	});
 });
@@ -200,7 +176,7 @@ test('16.9.1 Ryze, shards 211', async (t) => {
 		});
 		damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
 
-		assert.partialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 0.526,
 		});
 	});

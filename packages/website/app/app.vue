@@ -127,7 +127,7 @@ onMounted(() => {
 	#__nuxt {
 		> header {
 			--at-apply: 'flex b-b b-neutral-500 grid grid-cols-subgrid py-2.5';
-			grid-column: page-start / page-end;
+			grid-column: page;
 
 			> div {
 				--at-apply: 'flex items-center justify-between relative';
@@ -156,6 +156,7 @@ onMounted(() => {
 
 		> footer {
 			--at-apply: 'pt-3 pb-3 text-neutral-400 mt-auto text-center b-t b-neutral-500 relative';
+			grid-column: page;
 
 			> h2 {
 				--at-apply: 'text-lg font-700 text-neutral-300 mb-0.5';

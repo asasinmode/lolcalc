@@ -86,7 +86,7 @@
 			[page-end];
 		grid-template-rows: auto max-content 1fr;
 
-		> * {
+		> main {
 			grid-column: content;
 		}
 	}

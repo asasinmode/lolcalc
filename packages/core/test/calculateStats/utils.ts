@@ -1,5 +1,6 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IChampion, IChampionId, IItem } from '@lolcalc/data/types';
+import assert from 'node:assert';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { CHAMPIONS, ITEMS } from '@lolcalc/data';
 
@@ -39,4 +40,8 @@ export function setupItems(fixture: IPatchOverridesFixture) {
 			console.warn('[setupItems] unknown item specified in fixture', item, fixture.version);
 		}
 	}
+}
+
+export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>) {
+	return assert.partialDeepStrictEqual(actual, expected);
 }

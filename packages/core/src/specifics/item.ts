@@ -395,12 +395,11 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.manamune]: {
 		...tearItemSpecifics,
-		ADFromMana: ITEMS_BY_NAME.manamune.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient,
 		calculateHooks: {
 			preItemTotal: tearItemCalculateHookPreItemTotal,
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables }) {
-					const bonusAD = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEM_SPECIFICS[ITEM_NAME_TO_ID.manamune].ADFromMana;
+					const bonusAD = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEMS_BY_NAME.manamune.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					itemPassivesStats.attackDamage += bonusAD;
 					itemTotalStats.attackDamage += bonusAD;
 					calculatedVariables.manaMuraAwe = bonusAD;
@@ -425,6 +424,42 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.manamune.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
 				},
 			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.muramana]: {
+		calculateHooks: {
+			preBonus: {
+				handler(_self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables }) {
+					const bonusAD = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEMS_BY_NAME.muramana.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
+					itemPassivesStats.attackDamage += bonusAD;
+					itemTotalStats.attackDamage += bonusAD;
+					calculatedVariables.manaMuraAwe = bonusAD;
+				},
+			},
+		},
+		variables: defineVariables({
+			known: {
+				BonusADFromMana: [],
+				f1: [],
+			},
+			calculate(self) {
+				return {
+					/** ad gained from passive */
+					BonusADFromMana: {
+						value: self.stats.value.variables.manaMuraAwe!,
+					},
+					f1: {
+						value: 0,
+					},
+				};
+			},
+			meta: {
+				BonusADFromMana: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.muramana.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
+				},
+			},
+			uninteresting: ['f1'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,

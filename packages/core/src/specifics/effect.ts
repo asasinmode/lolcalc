@@ -10,7 +10,7 @@ import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
-import { IHypotheticalItemSpecifics, ITEM_SPECIFICS } from './item.ts';
+import { ITEM_SPECIFICS } from './item.ts';
 
 /** specific effects' helpers, utils and calculations */
 export const EFFECT_SPECIFICS = {

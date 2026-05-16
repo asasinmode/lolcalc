@@ -16,6 +16,6 @@ They are structured by patch, with a fixture, like
 where the fixture contains the overrides of the game data relevant to the test.
 
 > [!IMPORTANT]
-> The tests must expect **concrete**, **non-variable** values observed in the game, no calculations are to be made there.
+> The tests must expect **concrete**, **non-variable** values observed in the game, no calculations are to be made there. If test is added, it has to be based on data seen in game.
 
 When test has to be updated, recreate and observe the test cases in game, then move it and its fixtured data to the current patch.
