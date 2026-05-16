@@ -230,7 +230,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
 - [ ] more custom/other effects - root, silence, any needed
 - [ ] explicit calculation formulas you can look at
-- [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
+- [ ] [rune paths](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
   - [ ] choose shield source to get shield bash value for
   - [ ] components for stuff like manaflow band or precision legends for setting values
   - [ ] results section, hover tooltip, extract variables

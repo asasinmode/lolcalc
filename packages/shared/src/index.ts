@@ -85,6 +85,8 @@ export interface IStatsCalculationVariables {
 	manaMuraAwe?: number;
 	/** hp gained from winter's approach/fimbulwinter's passive */
 	approachFimbulAwe?: number;
+	/** attack speed value reduced by frozen heart's passive */
+	frozenHeartCaress?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

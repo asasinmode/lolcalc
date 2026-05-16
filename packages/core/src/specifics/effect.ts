@@ -128,8 +128,10 @@ export const EFFECT_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(_self, { totalStats, effectStats }) {
-					effectStats.attackSpeed = totalStats.attackSpeed * ITEMS_BY_NAME.frozenHeart.dataValues.ASPDSlow;
+				handler(_self, { totalStats, effectStats }, { calculatedVariables }) {
+					const value = totalStats.attackSpeed * ITEMS_BY_NAME.frozenHeart.dataValues.ASPDSlow;
+					effectStats.attackSpeed = value;
+					calculatedVariables.frozenHeartCaress = value;
 				},
 			},
 		},
