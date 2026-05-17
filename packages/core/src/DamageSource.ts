@@ -48,6 +48,7 @@ export interface IOverrides<Id extends IChampionId | undefined = undefined> {
 }
 
 let damageSourcesCount = 0;
+let hueIncrement = 0;
 
 export class DamageSource<Id extends IChampionId | undefined = any> {
 	id: string;
@@ -166,9 +167,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		/** when DamageSource is one & done cloned, like in `CalculatorResultsTable`'s `recalculateColumn` when it's intended to have source's effects applied, note that `this.champion.value` will be empty without it and needs to be set manually */
 		noWatch = false,
 	) {
-		const hue = (damageSourcesCount++ * 137.508) % 360;
+		const hue = ((noWatch ? hueIncrement : hueIncrement++) * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
+		damageSourcesCount += 1;
 		this.id = damageSourcesCount.toString();
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
@@ -1482,6 +1484,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		isActive: computed((): number | boolean => specific.isActive(effect.data)),
 		specific,
 		maxValue: undefined,
+		resultVariables: computed(() => specific.variables?.calculate(self)),
 	};
 
 	const maxValue = typeof specific.maxValue === 'function' ? specific.maxValue() : specific.maxValue;
@@ -1496,10 +1499,6 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		rv.imgSrc = imgSrc;
 		rv.imgSize = imgSize;
 	});
-
-	if (specific.calculateResultVariables) {
-		rv.resultVariables = computed(() => specific.calculateResultVariables!(self));
-	}
 
 	return rv;
 }
@@ -1630,7 +1629,7 @@ export interface IComputedAppliedEffect {
 	specific: IEffectSpecific;
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
-	resultVariables?: ComputedRef<IReplaceGameVariablesRV['variables']>;
+	resultVariables: ComputedRef<IReplaceGameVariablesRV['variables'] | undefined>;
 }
 
 interface IDamageSourceComputed {
