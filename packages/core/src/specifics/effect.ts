@@ -138,11 +138,13 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 		variables: defineEffectSpecificVariables(
-			['attack speed reduction'],
+			['attack speed reduction', 'attack speed % reduction'],
 			(damageSource) => {
 				const value = -damageSource.stats.value.variables.frozenHeartCaress!;
+				const percentValue = value / damageSource.stats.value.base.attackSpeedRatio * 100;
 				return new Map([
 					['attack speed reduction', { baseValue: value, value }],
+					['attack speed % reduction', { baseValue: percentValue, value: percentValue, meta: { isPercentage: true } }],
 				]);
 			},
 		),

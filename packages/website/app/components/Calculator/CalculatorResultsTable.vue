@@ -152,10 +152,10 @@ const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>
 	const effectObjectNames = new Set(props.damageSources
 		.flatMap(damageSource =>
 			damageSource.computed.effects.value
-				.map(effect => effect.resultVariables.value && effect.abilityId.id)
+				.map(effect => effect.resultVariables && effect.abilityId.id)
 				.concat(damageSource.effectsAppliedToTarget.value.map(([effectAbilityId, effectSpecific]) => effectSpecific.variables && effectAbilityId.id)))
 		.concat(props.damageTargets.flatMap(damageSource => damageSource.computed.effects.value.map(effect =>
-			effect.resultVariables.value && effect.abilityId.id)))
+			effect.resultVariables && effect.abilityId.id)))
 		.filter(Boolean));
 
 	return effectObjectNames.values()
@@ -435,7 +435,7 @@ const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (sect
 	const rv = gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === section.abilityId.id)?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
 	/* other variable's values are rounded by `replaceGameVariables` but these are gotten raw from IEffectSpecifics.variables.calulate() so round them here */
 	if (typeof rv?.numberValue === 'number') {
-		rv.value = roundVariable(rv.numberValue);
+		rv.value = `${roundVariable(rv.numberValue)}${rv.meta?.isPercentage ? '%' : ''}`;
 	}
 	return rv;
 };
@@ -446,8 +446,10 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 			value: '?',
 			isUnknown: false,
 		};
-		const value = variables.get(variableName)?.value;
+		const variable = variables.get(variableName);
+		rv.meta = variable?.meta;
 
+		const value = variable?.value;
 		if (value === undefined) {
 			rv.numberValue = 0;
 			rv.value = '?';

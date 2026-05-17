@@ -1,5 +1,6 @@
 import type { DamageSource, IComputedAbilityDescription } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IReplacedGameVariable } from '@lolcalc/core/types';
 
 export interface IDamageResultTableSection {
 	/** stringified `GameAbilityId` or freestyled for `all` */
@@ -14,9 +15,11 @@ export interface IDamageResultTableSection {
 	imageSize: number;
 	/** expected to be undefined only when loading */
 	getCellValue?: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
+		/** formatted `numberValue` */
 		value: string | number;
 		numberValue?: number;
 		isUnknown?: boolean;
+		meta?: IReplacedGameVariable['meta'];
 	} | undefined;
 	/** when present, the row will have a select to choose from provided options used for setting `selectValue` */
 	selectOptions?: Raw<[value: string, text: string][]>;
