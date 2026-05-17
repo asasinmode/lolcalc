@@ -2,6 +2,7 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
+import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
 import type { IChampion } from '@lolcalc/data/types';
@@ -12,7 +13,7 @@ import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
-import { applyEffectsFromTo, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
@@ -146,6 +147,25 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 		.sort((a, b) => a.name.localeCompare(b.name));
 });
 
+const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
+	const effectObjectNames = new Set(props.damageSources
+		.flatMap(damageSource =>
+			damageSource.computed.effects.value
+				.map(effect => effect.resultVariables && effect.abilityId.id)
+				.concat(damageSource.effectsAppliedToTarget.value.map(([effectAbilityId, effectSpecific]) => effectSpecific.calculateResultVariables && effectAbilityId.id)))
+		.concat(props.damageTargets.flatMap(damageSource => damageSource.computed.effects.value.map(effect =>
+			effect.resultVariables && effect.abilityId.id)))
+		.filter(Boolean));
+
+	return effectObjectNames.values()
+		.map((effectObjectName): IDamageSectionOption['abilities'][number] => ({
+			name: (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effectObjectName!]!.label,
+			id: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName!),
+		}))
+		.toArray()
+		.sort((a, b) => a.name.localeCompare(b.name));
+});
+
 const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 	const options: IDamageSectionOption[] = damageSectionChampionAbilityOptions.value.map((option): IDamageSectionOption => ({
 		type: option.type,
@@ -161,6 +181,15 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		optionName: 'items',
 		type: 'item',
 		abilities: damageSectionItemAbilities.value.filter(ability =>
+			!resultSections.value.some(section => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id)),
+		),
+	});
+
+	options.push({
+		optionId: 'effects',
+		optionName: 'effects',
+		type: 'effect',
+		abilities: damageSectionEffectAbilities.value.filter(ability =>
 			!resultSections.value.some(section => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id)),
 		),
 	});
@@ -483,7 +512,7 @@ async function addResultsSection(
 	resultSections.value.splice(spliceAt, 0, section);
 	expand && expandedSections.value.push(section.id);
 
-	if (abilityId.type === 'champion') {
+	if (abilityId.type === ABILITY_TYPE.champion) {
 		const champion = await useChampion(abilityId.id);
 		/* since abilities are added eagerly despite potentially needing to await something to fully resolve, if the champion is not resolved then remove the section. Unknown champions can be added when restoring state */
 		if (!champion?.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]) {
@@ -510,7 +539,7 @@ async function addResultsSection(
 			precomputedDescription,
 		};
 		section.getCellValue = abilityVariableCellValue;
-	} else {
+	} else if (abilityId.type === ABILITY_TYPE.item) {
 		const item = ITEMS[abilityId.id];
 		/* since abilities are added eagerly despite potentially needing to await (champion ability) something to fully resolve, if the item is not resolved then remove the section. Unknown items can be added when restoring state */
 		if (!item) {
@@ -533,6 +562,8 @@ async function addResultsSection(
 		section.image = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
+	} else {
+		console.log('adding', abilityId);
 	}
 
 	addComputedSection(section.id);

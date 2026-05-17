@@ -1,7 +1,7 @@
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
-import type { DetectItemVariables } from '../types';
+import type { DetectItemVariables, IReplaceGameVariablesRV } from '../types';
 import type { IVariableValueResult } from '../variables/game.ts';
 import type { IInternalItemDataOf } from './index.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
@@ -134,6 +134,10 @@ export const EFFECT_SPECIFICS = {
 					calculatedVariables.frozenHeartCaress = value;
 				},
 			},
+		},
+		calculateResultVariables(self) {
+			console.log('calculating variables');
+			return new Map([['attackSpeed', { value: 123, baseValue: 123 }]]);
 		},
 	}),
 	[EFFECT_OBJECT_NAME.serpentsFangVenom]: {
@@ -357,6 +361,7 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 		type: IVariableType;
 		handler: IEffectModifyVariableFunction<T>;
 	};
+	calculateResultVariables?: (self: DamageSource) => IReplaceGameVariablesRV['variables'];
 }
 
 export type IEffectModifyVariableFunctions = Partial<Record<IVariableType, NonNullable<IEffectSpecific['modifyVariable']>['handler'][]>>;
@@ -383,13 +388,17 @@ export const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPEC
 		return [effectSpecific.sourceAbility.id, [GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName), effectSpecific]];
 	})) as Record<string, [IEffectAbilityId, IEffectSpecific]>;
 
-export function applyEffectsFromTo(source: DamageSource, target: DamageSource): DamageSource {
-	const itemsWithEffects = source.items.value.map(item => item && EFFECTS_APPLIED_BY_ITEMS_TO_TARGET[item.id]).filter(Boolean) as (typeof EFFECTS_APPLIED_BY_ITEMS_TO_TARGET)[string][];
+/** get all effects a damage source applies to its target */
+export function effectsAppliedBy(source: DamageSource): [effectAbilityId: IEffectAbilityId, effectSpecific: IEffectSpecific][] {
+	const itemEffects = source.items.value.map(item => item && EFFECTS_APPLIED_BY_ITEMS_TO_TARGET[item.id]).filter(Boolean) as (typeof EFFECTS_APPLIED_BY_ITEMS_TO_TARGET)[string][];
 
-	for (const [effectAbilityId, effectSpecific] of itemsWithEffects) {
+	return itemEffects;
+}
+
+export function applyEffectsFromTo(source: DamageSource, target: DamageSource): DamageSource {
+	for (const [effectAbilityId, effectSpecific] of source.effectsAppliedToTarget.value) {
 		const effectData = effectSpecific.setupDataFromSourceItem!(source);
 		effectData && target.addEffect(effectAbilityId, effectData as any, true);
 	}
-
 	return target;
 }

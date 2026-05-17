@@ -21,7 +21,7 @@ import { calculateChampionStats } from './calculate/championStats.ts';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { gameAbilityImage } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
-import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from './specifics/effect.ts';
+import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } from './specifics/effect.ts';
 import { calculateDynamicVariables, resolveAbilitySpecific } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
@@ -963,6 +963,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}))),
 	};
 
+	effectsAppliedToTarget = computed(() => effectsAppliedBy(this));
+
 	/** the specifics' hooks grouped by type */
 	calculateStatsHooks = {
 		runes: computed((): ICalculateStatsGroupedHooks => {
@@ -1470,7 +1472,7 @@ function formatItemDescriptionText(
 	};
 }
 
-function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
+function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
 	const specific = EFFECT_SPECIFICS[effect.abilityId.id] as IEffectSpecific;
 	const rv: IComputedAppliedEffect = {
 		abilityId: effect.abilityId,
@@ -1494,6 +1496,10 @@ function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect):
 		rv.imgSrc = imgSrc;
 		rv.imgSize = imgSize;
 	});
+
+	if (specific.calculateResultVariables) {
+		rv.resultVariables = computed(() => specific.calculateResultVariables!(self));
+	}
 
 	return rv;
 }
@@ -1624,6 +1630,7 @@ export interface IComputedAppliedEffect {
 	specific: IEffectSpecific;
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
+	resultVariables?: ComputedRef<IReplaceGameVariablesRV['variables']>;
 }
 
 interface IDamageSourceComputed {
