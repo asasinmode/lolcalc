@@ -1,3 +1,4 @@
+import type { IEffectObjectName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn } from '~/utils/types';
@@ -93,6 +94,7 @@ export function useCalculatorState(
 
 		const savedChampionIds = new Set<string>();
 		const savedItemIds = new Set<string>();
+		const savedEffectObjectNames = new Set<IEffectObjectName>();
 
 		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
 			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
@@ -101,13 +103,22 @@ export function useCalculatorState(
 				column.source?.champion.value?.id && savedChampionIds.add(column.source.champion.value!.id);
 				column.target?.champion.value?.id && savedChampionIds.add(column.target.champion.value!.id);
 				if (column.source) {
-					for (const item of (column.source as unknown as DamageSource).items.value) {
+					for (const item of column.source.items.value) {
 						item && savedItemIds.add(item.id);
+					}
+					for (const effect of column.source.appliedEffects.value) {
+						savedEffectObjectNames.add(effect.abilityId.id);
+					}
+					for (const effectEntry of column.source.effectsAppliedToTarget.value) {
+						savedEffectObjectNames.add(effectEntry[0].id);
 					}
 				}
 				if (column.target) {
-					for (const item of (column.target as unknown as DamageSource).items.value) {
+					for (const item of column.target.items.value) {
 						item && savedItemIds.add(item.id);
+					}
+					for (const effect of column.target.appliedEffects.value) {
+						savedEffectObjectNames.add(effect.abilityId.id);
 					}
 				}
 			}
@@ -132,7 +143,11 @@ export function useCalculatorState(
 		}
 
 		const keptSections = resultsTable.value?.resultSections.filter(section => section.abilityId.type === 'all'
-			|| (section.abilityId.type === ABILITY_TYPE.item ? savedItemIds.has(section.abilityId.id) : savedChampionIds.has(section.abilityId.id))) ?? [];
+			|| (section.abilityId.type === ABILITY_TYPE.item
+				? savedItemIds.has(section.abilityId.id)
+				: section.abilityId.type === ABILITY_TYPE.champion
+					?	savedChampionIds.has(section.abilityId.id)
+					: savedEffectObjectNames.has(section.abilityId.id))) ?? [];
 		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
 		const savedSectionIds: string[] = [];
 		const isSectionsChanged = keptSections?.[0] && (keptSections.length > 3

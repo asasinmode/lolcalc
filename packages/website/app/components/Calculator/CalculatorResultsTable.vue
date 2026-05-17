@@ -746,9 +746,15 @@ const cleanableColumnsSections = computed<[
 				? !resultColumns.value.some(column =>
 						column.source?.items.value.some(item => item?.id === section.abilityId.id) || column.target?.items.value.some(item => item?.id === section.abilityId.id),
 					)
-				: section.abilityId.type === 'champion' && !resultColumns.value.some(column =>
-					column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id,
-				));
+				: section.abilityId.type === 'champion'
+					? !resultColumns.value.some(column =>
+							column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id)
+					: section.abilityId.type === 'effect' && !resultColumns.value.some(column =>
+						column.source?.appliedEffects.value.some(effect => effect.abilityId.id === section.abilityId.id)
+						|| column.source?.effectsAppliedToTarget.value.some(effectEntry => effectEntry[0].id === section.abilityId.id)
+						|| column._computedTarget?.appliedEffects.value.some(effect => effect.abilityId.id === section.abilityId.id),
+					),
+		);
 
 	return [columns, sections];
 });
