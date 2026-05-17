@@ -12,7 +12,7 @@ import { itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
 import { ITEM_SPECIFICS } from './item.ts';
 
-const PLACEHOLDER_REPLACED_GAME_VARIABLE: IReplacedGameVariable = { value: 0, baseValue: 0 };
+const PLACEHOLDER_REPLACED_GAME_VARIABLE: IReplacedGameVariable = { baseValue: 0, value: 0 };
 
 /** specific effects' helpers, utils and calculations */
 export const EFFECT_SPECIFICS = {
@@ -138,11 +138,11 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 		variables: defineEffectSpecificVariables(
-			['attackSpeed'],
+			['attack speed reduction'],
 			(damageSource) => {
-				const value = damageSource?.stats.value.variables.frozenHeartCaress!;
+				const value = -damageSource.stats.value.variables.frozenHeartCaress!;
 				return new Map([
-					['attackSpeed', { value, baseValue: value, meta: { displayedName: 'AttackSpeedReduction' } }],
+					['attack speed reduction', { baseValue: value, value }],
 				]);
 			},
 		),

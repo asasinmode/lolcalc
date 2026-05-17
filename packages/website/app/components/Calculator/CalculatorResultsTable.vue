@@ -432,7 +432,12 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 };
 
 const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	return gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === section.abilityId.id)?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
+	const rv = gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === section.abilityId.id)?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
+	/* other variable's values are rounded by `replaceGameVariables` but these are gotten raw from IEffectSpecifics.variables.calulate() so round them here */
+	if (typeof rv?.numberValue === 'number') {
+		rv.value = roundVariable(rv.numberValue);
+	}
+	return rv;
 };
 
 function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVariablesRV['variables']): ReturnType<NonNullable<IDamageResultTableSection['getCellValue']>> {
