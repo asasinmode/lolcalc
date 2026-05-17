@@ -233,7 +233,7 @@ defineExpose({
 		<ul :inert="isLoading">
 			<li
 				v-for="{ effect } in searchFilteredEffects(appliedEffectsWithSearchStrings)"
-				:key="effect.id"
+				:key="effect.abilityId.id"
 				:style="`anchor-name: --effect-${effect.abilityId.id}`"
 			>
 				<component

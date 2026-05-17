@@ -11,7 +11,7 @@ import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from '
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
 import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions } from './variables/game.ts';
-import { CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
+import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
@@ -424,7 +424,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonSoul,
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.id}-${effect.data.join('-')}`).join('|'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}-${effect.data.join('-')}`).join('|'),
 		];
 	}
 
@@ -821,7 +821,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			return this.appliedEffects.value[existingEffectIndex] as IDamageSourceEffect<T>;
 		} else {
 			const rv: IDamageSourceEffect<any> = {
-				id: GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 				abilityId,
 				data: [],
 			};
@@ -1474,7 +1473,6 @@ function formatItemDescriptionText(
 function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
 	const specific = EFFECT_SPECIFICS[effect.abilityId.id] as IEffectSpecific;
 	const rv: IComputedAppliedEffect = {
-		id: effect.id,
 		abilityId: effect.abilityId,
 		imgSrc: '',
 		imgSize: 0,
@@ -1568,8 +1566,6 @@ export type IProviderGroupImageText = {
 } | IAbilityImageTextProvider;
 
 export interface IDamageSourceEffect<T extends IEffectAbilityId = IEffectAbilityId> {
-	/** stringified `abilityId` */
-	id: string;
 	abilityId: T;
 	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
 	data: IGameAbilityData<T>;
@@ -1620,7 +1616,6 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 }
 
 export interface IComputedAppliedEffect {
-	id: string;
 	abilityId: IEffectAbilityId;
 	imgSrc: string;
 	imgSize: number;

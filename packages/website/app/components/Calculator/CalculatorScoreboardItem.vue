@@ -1212,7 +1212,7 @@ defineExpose({ el });
 				<ul ref="effectsList">
 					<li
 						v-for="[effect, effectIndex] in activeEffects"
-						:key="effect.id"
+						:key="effect.abilityId.id"
 						@mouseenter="showEffectTooltip($event, effect)"
 					>
 						<span>{{ effect.specific.label }}</span>
