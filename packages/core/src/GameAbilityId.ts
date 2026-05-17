@@ -143,7 +143,7 @@ export class GameAbilityId {
 		}
 
 		if (type === ABILITY_TYPE.effect) {
-			const specificEntry = effectSpecificsObjectEntries.find(entry => entry[0] === id);
+			const specificEntry = effectSpecificsObjectEntries[Number.parseInt(id)];
 			if (!specificEntry) {
 				return;
 			}
