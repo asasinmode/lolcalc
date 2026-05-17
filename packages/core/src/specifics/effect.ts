@@ -361,7 +361,11 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 		type: IVariableType;
 		handler: IEffectModifyVariableFunction<T>;
 	};
-	calculateResultVariables?: (self: DamageSource) => IReplaceGameVariablesRV['variables'];
+	/**
+	 * calculate any variables that are supposed to be shown in results for this effect
+	 * `damageSource` can be undefined so that this can be called in `CalculatorResultsTable` to get the effect section's rows (all the variables effect has)
+	 */
+	calculateResultVariables?: (damageSource?: DamageSource) => IReplaceGameVariablesRV['variables'];
 }
 
 export type IEffectModifyVariableFunctions = Partial<Record<IVariableType, NonNullable<IEffectSpecific['modifyVariable']>['handler'][]>>;
@@ -381,7 +385,7 @@ function defineEffectSpecific<T extends [number]>(config: IEffectSpecific<T>): I
 	return config;
 }
 
-/** all effects that can be applied by toggling `apply X to target` checkbox */
+/** all effects that can be applied by toggling item's extra `apply X to target` checkbox */
 export const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPECIFICS_OBJECT_ENTRIES
 	.filter(([, effectSpecific]) => effectSpecific.setupDataFromSourceItem)
 	.map(([effectObjectName, effectSpecific]) => {

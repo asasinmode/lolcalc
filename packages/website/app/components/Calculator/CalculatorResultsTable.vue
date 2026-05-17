@@ -11,6 +11,7 @@ import type { WatchHandle } from 'vue';
 import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { gameAbilityImage } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
@@ -416,49 +417,31 @@ function preventDoubleClickSelect(event: MouseEvent) {
 }
 
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	const computedItem = section.abilityId.type === 'item'
-		? source?.computed.items.value.find(item =>
-				item?.item!.id === (section.abilityId as IItemAbilityId).id,
-			)
-		: undefined;
-	if (computedItem) {
-		let numberValue = computedItem.variables.get(rowId)?.value;
-		let value: string | number = numberValue as unknown as string;
-		let isUnknown = false;
-
-		if (numberValue === undefined) {
-			numberValue = 0;
-			value = '?';
-			isUnknown = true;
-		} else if (typeof numberValue !== 'number') {
-			value = `${numberValue[0]} | ${numberValue[1]}`;
-			numberValue = undefined;
-		} else {
-			value = roundVariable(numberValue);
-		}
-
-		return {
-			numberValue,
-			value,
-			isUnknown,
-		};
-	}
+	const computedItem = source?.computed.items.value.find(item =>
+		item?.item!.id === (section.abilityId as IItemAbilityId).id,
+	);
+	return gameVariablesCellValue(rowId, computedItem?.variables);
 };
 
 const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	if (!source) {
-		return;
+	if (source) {
+		const { gameAbilityId } = (section.hoverTooltipData as IChampionAbilityHoverTooltipProps).precomputedDescription!;
+		const computedDescription = source.computed.abilities.value[gameAbilityId.abilityKey!][gameAbilityId.abilityVariantIndex!];
+		return gameVariablesCellValue(rowId, computedDescription?.variables);
 	}
+};
 
-	const { gameAbilityId } = (section.hoverTooltipData as IChampionAbilityHoverTooltipProps).precomputedDescription!;
+const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+	return gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === rowId)?.resultVariables?.value);
+};
 
-	const computedDescription = source.computed.abilities.value[gameAbilityId.abilityKey!][gameAbilityId.abilityVariantIndex!];
-	if (computedDescription) {
+function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVariablesRV['variables']): ReturnType<NonNullable<IDamageResultTableSection['getCellValue']>> {
+	if (variables) {
 		const rv: ReturnType<NonNullable<IDamageResultTableSection['getCellValue']>> = {
 			value: '?',
 			isUnknown: false,
 		};
-		const value = computedDescription.variables.get(rowId)?.value;
+		const value = variables.get(variableName)?.value;
 
 		if (value === undefined) {
 			rv.numberValue = 0;
@@ -473,7 +456,7 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 
 		return rv;
 	}
-};
+}
 
 function submitResultsSection(event: SubmitEvent) {
 	const value = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex')! as string;
@@ -486,6 +469,15 @@ function submitResultsSection(event: SubmitEvent) {
 	const ability = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!.abilities[Number.parseInt(rawAbilityIndex!)]!;
 	addResultsSection(ability.id, ability.name);
 	emit('configurationChanged');
+}
+
+/** to be used for removing a section that was eagerly added but during full resolve turned out to be incorrect */
+function removeBeingAddedSection(section: IDamageResultTableSection) {
+	const index = resultSections.value.indexOf(section);
+	~index && resultSections.value.splice(index, 1);
+	const expandedIndex = expandedSections.value.indexOf(section.id);
+	~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
+	triggerRef(resultSections);
 }
 
 async function addResultsSection(
@@ -516,12 +508,7 @@ async function addResultsSection(
 		const champion = await useChampion(abilityId.id);
 		/* since abilities are added eagerly despite potentially needing to await something to fully resolve, if the champion is not resolved then remove the section. Unknown champions can be added when restoring state */
 		if (!champion?.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]) {
-			const index = resultSections.value.indexOf(section);
-			~index && resultSections.value.splice(index, 1);
-			const expandedIndex = expandedSections.value.indexOf(section.id);
-			~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
-			triggerRef(resultSections);
-
+			removeBeingAddedSection(section);
 			return;
 		}
 
@@ -535,22 +522,12 @@ async function addResultsSection(
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
 		section.imageSize = abilityImageSize(champion.id);
 		section.rows = getAbilitySectionRows(precomputedDescription);
+		section.getCellValue = abilityVariableCellValue;
 		section.hoverTooltipData = {
 			precomputedDescription,
 		};
-		section.getCellValue = abilityVariableCellValue;
 	} else if (abilityId.type === ABILITY_TYPE.item) {
-		const item = ITEMS[abilityId.id];
-		/* since abilities are added eagerly despite potentially needing to await (champion ability) something to fully resolve, if the item is not resolved then remove the section. Unknown items can be added when restoring state */
-		if (!item) {
-			const index = resultSections.value.indexOf(section);
-			~index && resultSections.value.splice(index, 1);
-			const expandedIndex = expandedSections.value.indexOf(section.id);
-			~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
-			triggerRef(resultSections);
-
-			return;
-		}
+		const item = ITEMS[abilityId.id]!;
 
 		const precomputedDescription = computeItemDescription(item, undefined, {
 			replaceWithName: true,
@@ -558,12 +535,22 @@ async function addResultsSection(
 		})!;
 
 		section.name ??= item.name;
-		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.image = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
+		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
 	} else {
-		console.log('adding', abilityId);
+		const effectSpecific = EFFECT_SPECIFICS[abilityId.id]!;
+		if (!effectSpecific.calculateResultVariables) {
+			removeBeingAddedSection(section);
+			return;
+		}
+
+		section.name ??= effectSpecific.label;
+		([section.image, section.imageSize] = await gameAbilityImage(abilityId));
+		section.rows = getAbilitySectionRows({ variables: effectSpecific.calculateResultVariables(), unknownVariables: [] });
+		section.getCellValue = effectVariableCellValue;
+		section.hoverTooltipData = { abilityId };
 	}
 
 	addComputedSection(section.id);
@@ -1477,11 +1464,15 @@ defineExpose({
 								>
 								<span v-html="section.image ? section.name : 'loading...'" />
 								<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
-									<div v-if="section.abilityId.type === 'item'" popover="manual" class="hover-tooltip champion-item">
+									<div v-if="section.abilityId.type === ABILITY_TYPE.item" popover="manual" class="hover-tooltip champion-item">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 									</div>
 									<LolChampionAbilityHoverTooltip
-										v-else-if="section.abilityId.type === 'champion'"
+										v-else-if="section.abilityId.type === ABILITY_TYPE.champion"
+										v-bind="section.hoverTooltipData as any"
+									/>
+									<LolEffectHoverTooltip
+										v-else-if="section.abilityId.type === ABILITY_TYPE.effect"
 										v-bind="section.hoverTooltipData as any"
 									/>
 								</template>
