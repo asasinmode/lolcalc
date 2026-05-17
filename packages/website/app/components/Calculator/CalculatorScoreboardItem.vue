@@ -2117,7 +2117,7 @@ defineExpose({ el });
 			}
 
 			> [data-abilities] {
-				--at-apply: 'relative gap-x-[--abilities-gap] flex justify-self-center';
+				--at-apply: 'relative gap-x-[--abilities-gap] flex justify-self-center ms-[--gap-x]';
 				grid-area: abilities;
 				anchor-name: --scoreboard-item-abilities;
 				width: var(--abilities-width);
