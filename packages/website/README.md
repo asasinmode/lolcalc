@@ -93,11 +93,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
   - [x] stats inventory value row
-  - [ ] damage type row, use the actual calculated value in the cells
-  - [ ] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
+  - [x] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [ ] basic attack section normal/crit/average
   - [ ] basic attack hover tooltip, note that it already includes everything and might not make sense in custom total
-  - [ ] friendlier variable names?
+  - [x] friendlier variable names?
   - [x] try to filter out simple variables like 5 more dmg to minions?
   - [ ] whether/what to round in results like manamune awe ad
 - [ ] rune dialog
@@ -160,12 +159,14 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] maybe dynamic variables can be cached on damage source under a key then reused
   - [x] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
-  - [ ] check if can save only gold cost, not whole object
-  - [ ] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)` / note in help page the discrepancy
+  - [x] check if can save only gold cost, not whole object
+  - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)` / note in help page the discrepancy
   - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?
   - [ ] calculate static % values like liandry burn or GA health to?
 - [x] update hover tooltips with more calculation info (`= X - Y`) when holding shift
 - [ ] defineSpecific functions for better types
+  - [x] effects
+  - [ ] champions
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
