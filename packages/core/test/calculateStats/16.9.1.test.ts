@@ -159,6 +159,7 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 	});
 });
 
+// TODO make sure to check uncaressed attack speed @ 18
 test('16.9.1 Ryze, shards 211', async (t) => {
 	const sourceCommon: IOverrides<'Ryze'> = {
 		runes: {
@@ -172,7 +173,7 @@ test('16.9.1 Ryze, shards 211', async (t) => {
 
 	const frozenHeartEffectAbilityId = GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.frozenHeartWintersCaress);
 
-	await t.test('lvl 1 | frozen heart', async () => {
+	await t.test('lvl 1 | wCaressed', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ryze', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.frozenHeart],
@@ -181,6 +182,29 @@ test('16.9.1 Ryze, shards 211', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 0.526,
+		});
+	});
+
+	await t.test('lvl 1 | dagger, dagger', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.dagger, ITEMS_BY_NAME.dagger],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 0.783,
+		});
+	});
+
+	await t.test('lvl 1 | dagger, dagger | wCaressed', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.dagger, ITEMS_BY_NAME.dagger],
+		});
+		damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 0.626,
 		});
 	});
 });
