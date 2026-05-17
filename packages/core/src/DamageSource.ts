@@ -1633,7 +1633,7 @@ export interface IComputedAppliedEffect {
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
 	/** output of `IEffectSpecific.variables?.calculate()` */
-	resultVariables?: ComputedRef<IReplaceGameVariablesRV['variables']>;
+	resultVariables?: ComputedRef<ReturnType<NonNullable<IEffectSpecific['variables']>['calculate']>>;
 }
 
 interface IDamageSourceComputed {

@@ -140,12 +140,14 @@ export const EFFECT_SPECIFICS = {
 		variables: defineEffectSpecificVariables(
 			['attack speed reduction', 'attack speed % reduction'],
 			(damageSource) => {
-				const value = -damageSource.stats.value.variables.frozenHeartCaress!;
-				const percentValue = value / damageSource.stats.value.base.attackSpeedRatio * 100;
-				return new Map([
-					['attack speed reduction', { baseValue: value, value }],
-					['attack speed % reduction', { baseValue: percentValue, value: percentValue, meta: { isPercentage: true } }],
-				]);
+				if (damageSource.stats.value.variables.frozenHeartCaress !== undefined) {
+					const value = -damageSource.stats.value.variables.frozenHeartCaress;
+					const percentValue = value / damageSource.stats.value.base.attackSpeedRatio * 100;
+					return new Map([
+						['attack speed reduction', { baseValue: value, value }],
+						['attack speed % reduction', { baseValue: percentValue, value: percentValue, meta: { isPercentage: true } }],
+					]);
+				}
 			},
 		),
 	}),
@@ -374,7 +376,7 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 	/** variables to be showned in results */
 	variables?: {
 		/** calculate any variables that are supposed to be shown in results for this effect. Result is converted to a map in `CalculatorResultsTable` to match `IReplaceGameVariablesRV['variables']` */
-		calculate: (damageSource: DamageSource) => Map<string, IReplacedGameVariable>;
+		calculate: (damageSource: DamageSource) => (Map<string, IReplacedGameVariable> | undefined);
 		/** the variables that will be returned from `calculate` with any values. Used for getting the list of them to show as result section rows */
 		known: Map<string, IReplacedGameVariable>;
 	};
@@ -399,7 +401,7 @@ function defineEffectSpecific<T extends [number]>(config: IEffectSpecific<T>): I
 
 function defineEffectSpecificVariables<K extends string>(
 	keys: K[],
-	calculate: (damageSource: DamageSource) => Map<K, IReplacedGameVariable>,
+	calculate: (damageSource: DamageSource) => (Map<K, IReplacedGameVariable> | undefined),
 ): IEffectSpecific['variables'] {
 	return {
 		known: new Map(keys.map(k => [k, PLACEHOLDER_REPLACED_GAME_VARIABLE])),
