@@ -1,7 +1,7 @@
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
-import type { DetectItemVariables, IReplaceGameVariablesRV } from '../types';
+import type { DetectItemVariables, IReplacedGameVariable } from '../types';
 import type { IVariableValueResult } from '../variables/game.ts';
 import type { IInternalItemDataOf } from './index.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
@@ -11,6 +11,8 @@ import { GameAbilityId } from '../GameAbilityId.ts';
 import { itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
 import { ITEM_SPECIFICS } from './item.ts';
+
+const PLACEHOLDER_REPLACED_GAME_VARIABLE: IReplacedGameVariable = { value: 0, baseValue: 0 };
 
 /** specific effects' helpers, utils and calculations */
 export const EFFECT_SPECIFICS = {
@@ -135,10 +137,15 @@ export const EFFECT_SPECIFICS = {
 				},
 			},
 		},
-		calculateResultVariables(self) {
-			console.log('calculating variables');
-			return new Map([['attackSpeed', { value: 123, baseValue: 123 }]]);
-		},
+		variables: defineEffectSpecificVariables(
+			['attackSpeed'],
+			(damageSource) => {
+				const value = damageSource?.stats.value.variables.frozenHeartCaress!;
+				return new Map([
+					['attackSpeed', { value, baseValue: value, meta: { displayedName: 'AttackSpeedReduction' } }],
+				]);
+			},
+		),
 	}),
 	[EFFECT_OBJECT_NAME.serpentsFangVenom]: {
 		...defineEffectSpecific<[shieldReavedBy: number]>({
@@ -167,10 +174,10 @@ export const EFFECT_SPECIFICS = {
 				handler(value, effectData) {
 					if (typeof value === 'number') {
 						const reducePercentage = itemVariableValue(
-						'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
-						ITEMS_BY_NAME.serpentsFang,
-						undefined,
-						effectData[0] === 2,
+							'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
+							ITEMS_BY_NAME.serpentsFang,
+							undefined,
+							effectData[0] === 2,
 						);
 						value *= 1 - (reducePercentage.value as number / 100);
 					}
@@ -357,15 +364,18 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 	/** if specified, the component for this effect will be `VExtraEnum` */
 	enumOptions?: Record<string, number>;
 	calculateHooks?: ICalculateChampionStatsHookSource;
+	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */
 	modifyVariable?: {
 		type: IVariableType;
 		handler: IEffectModifyVariableFunction<T>;
 	};
-	/**
-	 * calculate any variables that are supposed to be shown in results for this effect
-	 * `damageSource` can be undefined so that this can be called in `CalculatorResultsTable` to get the effect section's rows (all the variables effect has)
-	 */
-	calculateResultVariables?: (damageSource?: DamageSource) => IReplaceGameVariablesRV['variables'];
+	/** variables to be showned in results */
+	variables?: {
+		/** calculate any variables that are supposed to be shown in results for this effect. Result is converted to a map in `CalculatorResultsTable` to match `IReplaceGameVariablesRV['variables']` */
+		calculate: (damageSource: DamageSource) => Map<string, IReplacedGameVariable>;
+		/** the variables that will be returned from `calculate` with any values. Used for getting the list of them to show as result section rows */
+		known: Map<string, IReplacedGameVariable>;
+	};
 }
 
 export type IEffectModifyVariableFunctions = Partial<Record<IVariableType, NonNullable<IEffectSpecific['modifyVariable']>['handler'][]>>;
@@ -383,6 +393,16 @@ export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: stri
 
 function defineEffectSpecific<T extends [number]>(config: IEffectSpecific<T>): IEffectSpecific<T> {
 	return config;
+}
+
+function defineEffectSpecificVariables<K extends string>(
+	keys: K[],
+	calculate: (damageSource: DamageSource) => Map<K, IReplacedGameVariable>,
+): IEffectSpecific['variables'] {
+	return {
+		known: new Map(keys.map(k => [k, PLACEHOLDER_REPLACED_GAME_VARIABLE])),
+		calculate,
+	};
 }
 
 /** all effects that can be applied by toggling item's extra `apply X to target` checkbox */

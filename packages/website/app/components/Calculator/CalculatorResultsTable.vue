@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
@@ -7,7 +7,7 @@ import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
-import type { WatchHandle } from 'vue';
+import type { UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
@@ -152,10 +152,10 @@ const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>
 	const effectObjectNames = new Set(props.damageSources
 		.flatMap(damageSource =>
 			damageSource.computed.effects.value
-				.map(effect => effect.resultVariables && effect.abilityId.id)
-				.concat(damageSource.effectsAppliedToTarget.value.map(([effectAbilityId, effectSpecific]) => effectSpecific.calculateResultVariables && effectAbilityId.id)))
+				.map(effect => effect.resultVariables.value && effect.abilityId.id)
+				.concat(damageSource.effectsAppliedToTarget.value.map(([effectAbilityId, effectSpecific]) => effectSpecific.variables && effectAbilityId.id)))
 		.concat(props.damageTargets.flatMap(damageSource => damageSource.computed.effects.value.map(effect =>
-			effect.resultVariables && effect.abilityId.id)))
+			effect.resultVariables.value && effect.abilityId.id)))
 		.filter(Boolean));
 
 	return effectObjectNames.values()
@@ -432,7 +432,7 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 };
 
 const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	return gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === rowId)?.resultVariables?.value);
+	return gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === section.abilityId.id)?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
 };
 
 function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVariablesRV['variables']): ReturnType<NonNullable<IDamageResultTableSection['getCellValue']>> {
@@ -541,14 +541,14 @@ async function addResultsSection(
 		section.hoverTooltipData = { precomputedDescription };
 	} else {
 		const effectSpecific = EFFECT_SPECIFICS[abilityId.id]!;
-		if (!effectSpecific.calculateResultVariables) {
+		if (!effectSpecific.variables) {
 			removeBeingAddedSection(section);
 			return;
 		}
 
 		section.name ??= effectSpecific.label;
 		([section.image, section.imageSize] = await gameAbilityImage(abilityId));
-		section.rows = getAbilitySectionRows({ variables: effectSpecific.calculateResultVariables(), unknownVariables: [] });
+		section.rows = getAbilitySectionRows({ variables: effectSpecific.variables.known, unknownVariables: [] });
 		section.getCellValue = effectVariableCellValue;
 		section.hoverTooltipData = { abilityId };
 	}

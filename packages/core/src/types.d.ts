@@ -26,14 +26,16 @@ export interface IAbilityImageTextProvider {
 	imgTextLabel: string;
 }
 
+export interface IReplacedGameVariable {
+	baseValue: number | [number, number];
+	value: number | [number, number];
+	meta?: IVariableMeta;
+	isUninteresting?: boolean;
+}
+
 export interface IReplaceGameVariablesRV {
 	replaced: string;
-	variables: Map<string, {
-		baseValue: number | [number, number];
-		value: number | [number, number];
-		meta?: IVariableMeta;
-		isUninteresting?: boolean;
-	}>;
+	variables: Map<string, IReplacedGameVariable>;
 	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
 	variablesAllValues: Map<string, (string | number)[]>;
 	unknownVariables: [rawName: string, actualName: string | undefined][];

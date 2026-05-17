@@ -1475,7 +1475,7 @@ function formatItemDescriptionText(
 }
 
 function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
-	const specific = EFFECT_SPECIFICS[effect.abilityId.id] as IEffectSpecific;
+	const specific = EFFECT_SPECIFICS[effect.abilityId.id];
 	const rv: IComputedAppliedEffect = {
 		abilityId: effect.abilityId,
 		imgSrc: '',
@@ -1484,7 +1484,6 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		isActive: computed((): number | boolean => specific.isActive(effect.data)),
 		specific,
 		maxValue: undefined,
-		resultVariables: computed(() => specific.variables?.calculate(self)),
 	};
 
 	const maxValue = typeof specific.maxValue === 'function' ? specific.maxValue() : specific.maxValue;
@@ -1493,6 +1492,10 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		rv.maxValue = maxValue;
 	} else if (maxValue) {
 		maxValue.then(value => rv.maxValue = value);
+	}
+
+	if (specific.variables) {
+		rv.resultVariables = computed(() => specific.variables!.calculate(self));
 	}
 
 	gameAbilityImage(specific.sourceAbility).then(([imgSrc, imgSize]) => {
@@ -1629,7 +1632,8 @@ export interface IComputedAppliedEffect {
 	specific: IEffectSpecific;
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
-	resultVariables: ComputedRef<IReplaceGameVariablesRV['variables'] | undefined>;
+	/** output of `IEffectSpecific.variables?.calculate()` */
+	resultVariables?: ComputedRef<IReplaceGameVariablesRV['variables']>;
 }
 
 interface IDamageSourceComputed {
