@@ -286,7 +286,8 @@ export function replaceGameVariables(
 	const variables: IReplaceGameVariablesRV['variables'] = new Map();
 	const variablesAllValues: IReplaceGameVariablesRV['variablesAllValues'] = new Map();
 
-	const replaced = text.replace(/@(.+?)@/g, (_, name) => {
+	/* capture `@VariableName@` followed by optional ` (%i:iconName%)` which the replacement will fallback to if it exists and no `ISpecificVariables.meta.statIconKey` is defined */
+	const replaced = text.replace(/@(.+?)@(?:\s*\((%[^)\s]+%)\))?/g, (_, name, varIcon) => {
 		let variableName = name;
 		let multiplier = 1;
 
@@ -336,6 +337,7 @@ export function replaceGameVariables(
 				: undefined;
 		}
 
+		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
 		let metaSuffix = '';
 		const extendedEquals = typeof meta?.extendedEquals !== 'object' || isMeleeRanged === undefined
 			? meta?.extendedEquals
@@ -343,14 +345,16 @@ export function replaceGameVariables(
 				? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix} | ${meta.extendedEquals.rangedValue}`
 				: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
 			}${meta.extendedEquals.valueSuffix}${meta.extendedEquals.suffix}`;
-		if (meta?.statIconKey) {
+
+		if (meta?.statIconKey || varIcon) {
+			const iconStr = (meta?.statIconKey && `%i:${STAT_ICON[meta.statIconKey]}%`) || varIcon || '';
 			(extendedEquals && options.isExtended)
-				? metaSuffix = ` = (${extendedEquals}%i:${STAT_ICON[meta.statIconKey]}%)`
-				: metaSuffix = ` (%i:${STAT_ICON[meta.statIconKey]}%)`;
+				? metaSuffix = ` = (${extendedEquals}${iconStr})`
+				: metaSuffix = ` (${iconStr})`;
 		} else if (extendedEquals && options.isExtended) {
 			metaSuffix = ` = (${extendedEquals})`;
 		}
-		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
+
 		if (meta?.multiplier) {
 			multiplier = meta.multiplier;
 		}

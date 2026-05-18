@@ -316,6 +316,8 @@ export const ITEM_SPECIFICS = {
 				},
 				f1: {
 					displayedName: 'BonusAPFromHP',
+					statIconKey: 'hp',
+					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent * 100)}%</scalehealth>`,
 				},
 			},
 			uninteresting: ['EternityDamageIncreasePerSecond', 'EternityDamageIncreaseMax', 'HealthToAPConversionPercent'],
@@ -365,6 +367,8 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				f2: {
 					displayedName: 'APFromMana',
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana * 100)}%</scalemana>`,
 				},
 			},
 			uninteresting: ['APFromMana', ...tearItem.uninterestingVariables],
@@ -525,7 +529,6 @@ export const ITEM_SPECIFICS = {
 				handler(self, args, meta) {
 					tearItem.calculateHookPreItemTotal.handler(self, args, meta);
 					const bonusHP = ((args.itemBaseStats.mana ?? 0) + args.itemPassivesStats.mana) * ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient;
-					// calculatedVariables.apMultipliersBase += bonusAP;
 					args.itemPassivesStats.hp += bonusHP;
 					meta.calculatedVariables.approachFimbulAwe = bonusHP;
 				},
