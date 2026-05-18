@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
+import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
+import { specificKnownVariables } from '@lolcalc/core/specifics';
+import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta';
 import { SUPPORT_ITEMS } from '@lolcalc/shared/index';
@@ -21,7 +24,10 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 	|| computeItemDescription(
 		props.item,
 		props.damageSource,
-		{ replaceWithName: props.replaceVariablesWithNames },
+		{
+			replaceWithName: props.replaceVariablesWithNames,
+			overrideVariables: props.item && specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables),
+		},
 	));
 
 const isMidQuestBoots = computed(() => {
