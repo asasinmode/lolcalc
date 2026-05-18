@@ -228,8 +228,8 @@ defineExpose({
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</form>
+			<h2>loading...</h2>
 		</header>
-		<h2>loading...</h2>
 		<ul :inert="isLoading">
 			<li
 				v-for="{ effect } in searchFilteredEffects(appliedEffectsWithSearchStrings)"
@@ -316,23 +316,19 @@ defineExpose({
 					}
 				}
 			}
+
+			> h2:first-of-type {
+				--at-apply: 'hidden z-1 text-center absolute inset-x-0 inset-t-12 pt-[calc(var(--ability-size)/2)] font-600 text-2xl';
+				-webkit-text-stroke: black 0.1em;
+				paint-order: stroke fill;
+			}
 		}
 
-		> h2:first-of-type {
-			--at-apply: 'hidden z-10 text-center absolute inset-0 inset-t-12 pt-[calc(var(--ability-size)/2)] font-600 text-2xl backdrop-blur-2';
-			-webkit-text-stroke: black 0.1em;
-			paint-order: stroke fill;
+		> h2 {
+			--at-apply: 'mt-auto mb-0.5';
 		}
 
-		> h2:nth-of-type(2) {
-			--at-apply: 'mt-auto';
-		}
-
-		> h2:not(:first-of-type) {
-			--at-apply: 'mb-0.5';
-		}
-
-		&[aria-busy='true'] > h2 {
+		&[aria-busy='true'] > header > h2 {
 			--at-apply: 'block';
 		}
 
@@ -360,6 +356,11 @@ defineExpose({
 			> li {
 				--at-apply: 'w-full';
 			}
+		}
+
+		> ul[inert],
+		> h2:has(+ ul[inert]) {
+			--at-apply: 'blur-2';
 		}
 
 		&[data-is-searched] > ul:not(:first-of-type):empty::before {
