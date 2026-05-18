@@ -961,6 +961,16 @@ export const ITEM_SPECIFICS = {
 			return internalData.spActive;
 		},
 	},
+	[ITEM_NAME_TO_ID.botrk]: {
+		internalDataProperties: ['cShadows'],
+		setupData(self) {
+			self.internalItemData.value.cShadows = clamp(0, self.internalItemData.value.cShadows ?? 0, 1);
+			return { cShadows: 0 };
+		},
+		imgActive(internalData: { cShadows: number }) {
+			return internalData.cShadows;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

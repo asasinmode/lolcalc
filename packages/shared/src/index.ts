@@ -282,6 +282,7 @@ export const ITEM_NAME_TO_ID = {
 	bountyOfWorlds: '3867',
 	overlordsBloodmail: '2501',
 	lichBane: '3100',
+	botrk: '3153',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -365,6 +366,7 @@ export const EFFECT_OBJECT_NAME = {
 	abyssalMaskUnmake: '8020VisualDebuff',
 	horizonFocusHypershot: '4628Marker',
 	bloodletterVileDecay: '8010VisualDebuff',
+	botrkClawingShadows: '3153Slow',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

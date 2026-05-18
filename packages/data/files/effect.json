@@ -65,6 +65,10 @@
 			"description": "This unit's Armor is reduced by a percentage.",
 			"dataKey": "Items/3071/Spells/3071BlackCleaverShred"
 		},
+		"3153Slow": {
+			"description": "This unit's movement is slowed.",
+			"dataKey": "Items/3153/Spells/3153Slow"
+		},
 		"AmumuPDebuff": {
 			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
 			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"
