@@ -250,7 +250,7 @@ defineExpose({ header });
 		}
 
 		> ul + h4 {
-			--at-apply: 'mt-3';
+			--at-apply: 'mt-4';
 		}
 
 		> h4 {

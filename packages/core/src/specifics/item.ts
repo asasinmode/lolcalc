@@ -230,9 +230,9 @@ export const ITEM_SPECIFICS = {
 			const { practice } = self.internalItemData.value as { practice: number };
 			return practice && `${practice}%`;
 		},
-		imgActive(internalData: {flurry: number}){
-			return internalData.flurry
-		}
+		imgActive(internalData: { flurry: number }) {
+			return internalData.flurry;
+		},
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
 		MAX_STACKS: ITEMS_BY_NAME.shojin.dataValues.StackCount,
@@ -949,6 +949,16 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.doransShield]: {
 		variables: {
 			uninteresting: ['FlatHPRegenMod', 'RegenDuration', 'BonusDamageToMinions', 'RangeRegenMult'],
+		},
+	},
+	[ITEM_NAME_TO_ID.lichBane]: {
+		internalDataProperties: ['spActive'],
+		setupData(self) {
+			self.internalItemData.value.spActive = clamp(0, self.internalItemData.value.spActive ?? 0, 1);
+			return { spActive: 0 };
+		},
+		imgActive(internalData: { spActive: number }) {
+			return internalData.spActive;
 		},
 	},
 } satisfies IHypotheticalItemSpecifics;

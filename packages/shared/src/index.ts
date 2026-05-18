@@ -281,6 +281,7 @@ export const ITEM_NAME_TO_ID = {
 	runicCompass: '3866',
 	bountyOfWorlds: '3867',
 	overlordsBloodmail: '2501',
+	lichBane: '3100',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
