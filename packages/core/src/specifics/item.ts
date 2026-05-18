@@ -219,16 +219,20 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		MAX_STACKS: ITEMS_BY_NAME.yunTal.dataValues.CritMax,
-		internalDataProperties: ['practice'],
+		internalDataProperties: ['practice', 'flurry'],
 		setupData(self) {
 			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_STACKS);
-			return { practice: 0 };
+			self.internalItemData.value.flurry = clamp(0, self.internalItemData.value.flurry ?? 0, 1);
+			return { practice: 0, flurry: 0 };
 		},
 		imgTextLabel: 'Practice Makes Lethal critical strike chance',
 		imgText(self) {
 			const { practice } = self.internalItemData.value as { practice: number };
 			return practice && `${practice}%`;
 		},
+		imgActive(internalData: {flurry: number}){
+			return internalData.flurry
+		}
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
 		MAX_STACKS: ITEMS_BY_NAME.shojin.dataValues.StackCount,

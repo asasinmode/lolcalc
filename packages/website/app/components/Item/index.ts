@@ -43,7 +43,10 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		],
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.yunTal), 'practice', 'Practice stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_STACKS),
+		extras: [
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.yunTal), 'practice', 'Practice stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_STACKS),
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.yunTal), 'flurry', 'Flurry'),
+		],
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shojin), 'fWill', 'Focused will stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.shojin].MAX_STACKS),
