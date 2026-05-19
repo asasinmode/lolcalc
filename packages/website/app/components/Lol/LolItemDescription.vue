@@ -46,7 +46,8 @@ const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
 
 const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inventory');
 
-const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions || computedDescription.value?.anyExtendedVariableInfo) && !globalKeyModifiers.value.shift);
+const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions || computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`]) && !globalKeyModifiers.value.shift,
+);
 const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some(stat => stat.increasedBy)));
 const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
 const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);

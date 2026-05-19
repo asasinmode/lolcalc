@@ -1152,7 +1152,8 @@ export function computeItemDescription(
 		tooltipInventory: tooltipInventoryReplaced,
 		tooltipShopExtended,
 		tooltipInventoryExtended,
-		anyExtendedVariableInfo: shopAnyExtendedVariables || inventoryAnyExtendedVariables,
+		tooltipShopAnyExtendedVInfo: shopAnyExtendedVariables,
+		tooltipInventoryAnyExtendedVInfo: inventoryAnyExtendedVariables,
 		hasAnyInterestingVariables,
 	};
 }
@@ -1614,7 +1615,8 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	}[];
 	variables: ReturnType<typeof replaceGameVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
-	anyExtendedVariableInfo: boolean;
+	tooltipShopAnyExtendedVInfo: boolean;
+	tooltipInventoryAnyExtendedVInfo: boolean;
 	/** same as `tooltipShop` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
 	tooltipShopExtended?: ITextData['items'][keyof ITextData['items']]['tooltipShop'];
 	/** same as `tooltipInventory` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
