@@ -361,6 +361,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				BonusHSPCalc: {
 					statIconKey: 'mana',
+					resultsIsPercentage: true,
 					extendedEquals: `<scalemana>${ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}%</scalemana>`,
 				},
 			},

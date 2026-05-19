@@ -436,7 +436,7 @@ const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (sect
 	const rv = gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === section.abilityId.id)?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
 	/* other variable's values are rounded by `replaceGameVariables` but these are gotten raw from IEffectSpecifics.variables.calulate() so round them here */
 	if (typeof rv?.numberValue === 'number') {
-		rv.value = `${roundVariable(rv.numberValue)}${rv.meta?.isPercentage ? '%' : ''}`;
+		rv.value = `${roundVariable(rv.numberValue)}${rv.meta?.resultsIsPercentage ? '%' : ''}`;
 	}
 	return rv;
 };
@@ -449,6 +449,7 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 		};
 		const variable = variables.get(variableName);
 		rv.meta = variable?.meta;
+		const suffix = rv.meta?.resultsIsPercentage ? '%' : '';
 
 		const value = variable?.value;
 		if (value === undefined) {
@@ -456,9 +457,9 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 			rv.value = '?';
 			rv.isUnknown = true;
 		} else if (typeof value !== 'number') {
-			rv.value = `${value[0]} | ${value[1]}`;
+			rv.value = `${value[0]}${suffix} | ${value[1]}${suffix}`;
 		} else {
-			rv.value = value;
+			rv.value = `${value}${suffix}`;
 			rv.numberValue = value;
 		}
 

@@ -145,7 +145,7 @@ export const EFFECT_SPECIFICS = {
 					const percentValue = value / damageSource.stats.value.base.attackSpeedRatio * 100;
 					return new Map([
 						['attack speed reduction', { baseValue: value, value }],
-						['attack speed % reduction', { baseValue: percentValue, value: percentValue, meta: { isPercentage: true } }],
+						['attack speed % reduction', { baseValue: percentValue, value: percentValue, meta: { resultsIsPercentage: true } }],
 					]);
 				}
 			},

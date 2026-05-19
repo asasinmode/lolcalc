@@ -70,8 +70,10 @@ export interface IVariableMeta {
 	};
 	/** displayed value multiplied by */
 	multiplier?: number;
-	/** `%` will be suffixed to the formatted value */
+	/** `%` will be suffixed to the formatted value in replaced description */
 	isPercentage?: boolean;
+	/** `%` will be suffixed to the formatted value in results */
+	resultsIsPercentage?: boolean;
 	type?: IVariableType;
 }
 
