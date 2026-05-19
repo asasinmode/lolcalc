@@ -21,6 +21,7 @@ const { vSemver, vMinor } = PATCH_VERSION;
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const computedDescription = computed<IComputedItemDescription | undefined>(() => props.precomputedDescription
+	|| (props.item && props.damageSource?.computed.items.value.find(item => props.item!.id === item?.item.id))
 	|| computeItemDescription(
 		props.item,
 		props.damageSource,
