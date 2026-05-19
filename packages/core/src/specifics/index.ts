@@ -85,17 +85,33 @@ export interface ISpecificVariables<
 	 */
 	known?: NoInfer<Partial<Record<DetectedVariables, (number | string)[]>>> & Record<T, (number | string)[]>;
 	/**
-	 * the first value of each `known` variable, computed by `defineVariables`
+	 * the first value of each `known` variable, computed from `known` by the `defineVariables` function
 	 * used for game descriptions created without damage source like the ones for effects or in results
 	 * if `known` is empty `[]`, the value will be `0`
-	 * if variable is named `lolcalcChampRange`, value will be `[value[0] ?? 0, value[1] ?? 0]` so it can be treated as a melee/ranged variable in `replaceGameVariables`
+	 * if variable is named `lolcalcChampRange`, value will be `[value[0] ?? 0, value[1] ?? 0]` so it's detected as a melee/ranged variable in `replaceGameVariables`
 	 */
 	default?: NoInfer<Partial<Record<DetectedVariables, Pick<ICalculatedDynamicVariable, 'value'>>> & Record<T, Pick<ICalculatedDynamicVariable, 'value'>>>;
-	/** calculate any dynamic variables used in the ability's description */
+	/**
+	 * calculate any dynamic variables used in the ability's description
+	 *
+	 * note that while variables can rely on already calculated stats like `damageSource.stats.value.variables.manaMuraAwe`, the should still fallback to actual calculation since these variables on stats are only calculated when the damage source actually has that item. When the item is hovered in item shop, before being bought, the values need to be calculated from scratch
+	 *
+	 * @example
+	 * ```ts
+	 * calculate(self) {
+	 *   return {
+	 *     f1: {
+	 *       value: self.stats.value.variables.riftmakerVoidInfusion
+	 *				 ?? (self.stats.value.bonus.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent),
+	 *     }
+	 *   }
+	 * }
+	 * ```
+	 */
 	calculate?: (self: DamageSource<Id>) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
-	/* any dynamic variables' meta information like icon of the stat they scale from. */
+	/** any dynamic variables' meta information like icon of the stat they scale from. */
 	meta?: Partial<Record<T, IVariableMeta>>;
-	/*
+	/**
 	 * variables listed here won't be shown in results, as well as have their actual values resolved regardless of the `replaceWithName` option of `replaceGameVariables`
 	 * the type works almost perfectly except that when no other keys (known/calculate/meta) is provided, then it resolves to `string[]` but at the moment I can't find a fix for it
 	 */
