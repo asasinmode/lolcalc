@@ -588,6 +588,48 @@ export const ITEM_SPECIFICS = {
 			uninteresting: tearItem.uninterestingVariables,
 		}),
 	},
+	[ITEM_NAME_TO_ID.fimbulwinter]: {
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, args, meta) {
+					const bonusHP = ((args.itemBaseStats.mana ?? 0) + args.itemPassivesStats.mana) * ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient;
+					args.itemPassivesStats.hp += bonusHP;
+					meta.calculatedVariables.approachFimbulAwe = bonusHP;
+				},
+			},
+		},
+		variables: defineVariables({
+			known: {
+				BonusHPFromMana: [],
+				ShieldBase: [ITEMS_BY_NAME.fimbulwinter.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber],
+				f2: [],
+			},
+			calculate(self) {
+				return {
+					BonusHPFromMana: {
+						value: self.stats.value.variables.approachFimbulAwe
+							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient),
+					},
+					ShieldBase: {
+						value: ITEMS_BY_NAME.fimbulwinter.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber,
+					},
+					f2: {
+						value: 0,
+					},
+				};
+			},
+			meta: {
+				BonusHPFromMana: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient * 100)}% bonus</scalemana> `,
+				},
+				ShieldBase: {
+					type: 'shield',
+				},
+			},
+			uninteresting: ['f2', 'CurrentManaShieldRatio', 'ShieldDuration', 'Multiplier', 'ShieldBase', ...tearItem.uninterestingVariables],
+		}),
+	},
 	[ITEM_NAME_TO_ID.trinity]: {
 		internalDataProperties: ['quicken'],
 		setupData(self) {

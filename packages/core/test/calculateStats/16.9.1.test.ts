@@ -42,7 +42,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 			attackSpeed: 1.327,
 			abilityHaste: 35,
 			moveSpeed: 413,
-			/* in game it shows 2874 but it's ceiled 2873, see help page known discrepancies */
+			/* in game it shows 2874, see help page known discrepancies */
 			hp: 2873,
 		});
 	});
@@ -155,6 +155,29 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			hp: 2597,
 			mana: 3501,
 			omnivamp: 4,
+		});
+	});
+
+	await t.test('lvl 11 | seraph, muramana, fimbulwinter, whispering circlet, gluttonous greaves', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			...sourceCommon,
+			level: 11,
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.whisperingCirclet, ITEMS_BY_NAME.gluttonousGreaves],
+			internalItemData: {
+				manaflow: 4,
+				slay: 1,
+			} satisfies IInternalItemDataOf<'whisperingCirclet' | 'gluttonousGreaves'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 214,
+			abilityPower: 145,
+			/* in game it shows 2916, see help page known discrepancies */
+			hp: 2915,
+			mana: 4293,
+			healShieldPower: 25,
+			manaRegen: 30,
+			omnivamp: 5,
 		});
 	});
 });
