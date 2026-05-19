@@ -301,7 +301,8 @@ export const ITEM_SPECIFICS = {
 				return {
 					/** ap gained from passive */
 					f1: {
-						value: self.stats.value.variables.riftmakerVoidInfusion!,
+						value: self.stats.value.variables.riftmakerVoidInfusion
+							?? (self.stats.value.bonus.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent),
 					},
 					lolcalcChampRange: {
 						value: [VampAmountMelee, VampAmountRanged],
@@ -360,7 +361,8 @@ export const ITEM_SPECIFICS = {
 				return {
 					/** ap gained from passive */
 					f2: {
-						value: self.stats.value.variables.archangelSeraphAwe!,
+						value: self.stats.value.variables.archangelSeraphAwe
+							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana),
 					},
 				};
 			},
@@ -400,7 +402,8 @@ export const ITEM_SPECIFICS = {
 					},
 					/** ap gained from passive */
 					BonusAPCalc: {
-						value: self.stats.value.variables.archangelSeraphAwe!,
+						value: self.stats.value.variables.archangelSeraphAwe
+							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana),
 					},
 					ShieldValue: {
 						value: self.stats.value.total.mana * ITEMS_BY_NAME.seraphsEmbrace.itemCalculations.ShieldValue.mFormulaParts[0]!.mCoefficient,
@@ -442,7 +445,8 @@ export const ITEM_SPECIFICS = {
 				return {
 					/** ad gained from passive */
 					BonusADFromMana: {
-						value: self.stats.value.variables.manaMuraAwe!,
+						value: self.stats.value.variables.manaMuraAwe
+							?? (self.stats.value.total.mana * ITEMS_BY_NAME.manamune.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient),
 					},
 				};
 			},
@@ -481,7 +485,8 @@ export const ITEM_SPECIFICS = {
 				return {
 					/** ad gained from passive */
 					BonusADFromMana: {
-						value: self.stats.value.variables.manaMuraAwe!,
+						value: self.stats.value.variables.manaMuraAwe
+							?? (totalMana * ITEMS_BY_NAME.muramana.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient),
 					},
 					OnHitDamage: {
 						value: totalMana * ITEMS_BY_NAME.muramana.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient,
@@ -541,7 +546,8 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					BonusHPFromMana: {
-						value: self.stats.value.variables.approachFimbulAwe!,
+						value: self.stats.value.variables.approachFimbulAwe
+							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient),
 					},
 				};
 			},
@@ -929,7 +935,8 @@ export const ITEM_SPECIFICS = {
 				return {
 					/** ap gained from passive */
 					f1: {
-						value: self.stats.value.variables.rabadonMagicalOpus!,
+						value: self.stats.value.variables.rabadonMagicalOpus
+							?? (self.stats.value.total.abilityPower * ITEMS_BY_NAME.rabadon.dataValues.APAmp),
 					},
 				};
 			},

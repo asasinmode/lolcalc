@@ -3,7 +3,7 @@ import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
-import { specificKnownVariables } from '@lolcalc/core/specifics';
+import { calculateDynamicVariables, specificKnownVariables } from '@lolcalc/core/specifics';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta';
@@ -27,17 +27,19 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 		props.damageSource,
 		{
 			replaceWithName: props.replaceVariablesWithNames,
-			overrideVariables: props.item && specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables),
+			overrideVariables: props.item && (props.damageSource
+				? calculateDynamicVariables(props.damageSource, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)
+				: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)),
 		},
-	));
+	),
+);
 
 const isMidQuestBoots = computed(() => {
-	if (!computedDescription.value) {
-		return false;
+	if (computedDescription.value) {
+		const { item } = computedDescription.value;
+		return item.isBoots && item.epicness === 7;
 	}
-	const { item } = computedDescription.value;
-
-	return item.isBoots && item.epicness === 7;
+	return false;
 });
 
 const isSupportItem = computed(() => computedDescription.value?.item && SUPPORT_ITEMS.includes(computedDescription.value.item.id));
