@@ -146,6 +146,7 @@ defineExpose({ header });
 		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="computedDescription!.footerLeft" />
+			<br v-if="showDynamicValueFooter && computedDescription?.keywordDefinitions" v-show="globalKeyModifiers.shift">
 			<p
 				v-if="computedDescription?.keywordDefinitions"
 				v-show="globalKeyModifiers.shift"
