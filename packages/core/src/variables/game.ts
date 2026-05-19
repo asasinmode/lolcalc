@@ -419,6 +419,25 @@ export function replaceGameVariables(
 		return `${iconPrefix}${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : (isDynamic ? Math.round(variable) : variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
+	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionArguments[1]) as IDynamicVariables | undefined;
+	const additionalVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isAdditional);
+	if (additionalVariables?.length) {
+		for (const [variableName, meta] of additionalVariables) {
+			let value = dynamicVariables!.values?.[variableName]?.value as number | [number, number] | undefined;
+			if (value !== undefined) {
+				if (meta?.type && modifyVariableFunctions[meta.type]) {
+					value = Array.isArray(value)
+						? [
+								modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[0]),
+								modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[1]),
+							]
+						: modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value);
+				}
+				variables.set(variableName, { baseValue: value, value });
+			}
+		}
+	}
+
 	return { replaced, variables, unknownVariables, variablesAllValues, anyExtendedVariables };
 }
 

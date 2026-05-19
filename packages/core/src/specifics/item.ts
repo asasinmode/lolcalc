@@ -604,6 +604,7 @@ export const ITEM_SPECIFICS = {
 				BonusHPFromMana: [],
 				ShieldBase: [ITEMS_BY_NAME.fimbulwinter.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber],
 				f2: [],
+				ComputedShield: [],
 			},
 			calculate(self) {
 				return {
@@ -617,6 +618,9 @@ export const ITEM_SPECIFICS = {
 					f2: {
 						value: 0,
 					},
+					ComputedShield: {
+						value: 123,
+					},
 				};
 			},
 			meta: {
@@ -625,6 +629,10 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient * 100)}% bonus</scalemana> `,
 				},
 				ShieldBase: {
+					type: 'shield',
+				},
+				ComputedShield: {
+					isAdditional: true,
 					type: 'shield',
 				},
 			},

@@ -75,6 +75,8 @@ export interface IVariableMeta {
 	/** `%` will be suffixed to the formatted value in results */
 	resultsIsPercentage?: boolean;
 	type?: IVariableType;
+	/** whether the variable is an additional one, not found in description but computed by lolcalc and wanted in results */
+	isAdditional?: boolean;
 }
 
 /** creates a union of all variable properties detected on an item */
