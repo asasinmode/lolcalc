@@ -335,9 +335,37 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.whisperingCirclet]: {
 		...tearItem.specific,
-		variables: {
-			uninteresting: tearItem.uninterestingVariables,
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, args, meta) {
+					tearItem.calculateHookPreItemTotal.handler(self, args, meta);
+					const bonusHSP = ((args.itemBaseStats.mana ?? 0) + args.itemPassivesStats.mana) * ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient / 100;
+					args.itemPassivesStats.healShieldPower += bonusHSP;
+					meta.calculatedVariables.whisperingDiademAwe = bonusHSP;
+				},
+			},
 		},
+		variables: defineVariables({
+			known: {
+				BonusHSPCalc: [],
+			},
+			calculate(self) {
+				return {
+					BonusHSPCalc: {
+						value: self.stats.value.variables.whisperingDiademAwe
+							? self.stats.value.variables.whisperingDiademAwe * 100
+							: (self.stats.value.bonus.mana * ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient),
+					},
+				};
+			},
+			meta: {
+				BonusHSPCalc: {
+					statIconKey: 'mana',
+					extendedEquals: `<scalemana>${ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}%</scalemana>`,
+				},
+			},
+			uninteresting: tearItem.uninterestingVariables,
+		}),
 	},
 	[ITEM_NAME_TO_ID.archangelsStaff]: {
 		...tearItem.specific,

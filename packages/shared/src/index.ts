@@ -85,6 +85,8 @@ export interface IStatsCalculationVariables {
 	manaMuraAwe?: number;
 	/** hp gained from winter's approach/fimbulwinter's passive */
 	approachFimbulAwe?: number;
+	/** heal shield power gained from whispering circlet's/diadem of songs passive */
+	whisperingDiademAwe?: number;
 	/** attack speed value reduced by frozen heart's passive */
 	frozenHeartCaress?: number;
 }
