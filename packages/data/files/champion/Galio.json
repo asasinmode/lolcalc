@@ -45,7 +45,7 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 95],
+					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
 						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
@@ -264,7 +264,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
-						"BaseDamage": [50, 90, 130, 170, 210, 250, 290],
+						"BaseDamage": [65, 100, 135, 170, 205, 240, 275],
 						"KnockupDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"MinRange": [250, 250, 250, 250, 250, 250, 250]
 					},
@@ -276,7 +276,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.9,
+									"mCoefficient": 1,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -325,6 +325,12 @@
 								},
 								{
 									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

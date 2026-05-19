@@ -1,5 +1,5 @@
 {
-	"version": "16.9.1",
+	"version": "16.10.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -853,8 +853,8 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 0.4,
-											"mEndValue": 0.4,
+											"mStartValue": 0.48,
+											"mEndValue": 0.48,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									],
@@ -865,18 +865,14 @@
 								}
 							},
 							"effectAmount": {
-								"HasteBase": 0.25,
-								"HasteMax": 0.4,
 								"SlowResist": 0.5,
-								"Duration": 3,
+								"Duration": 4,
 								"Window": 3,
-								"MaxBonusSeconds": 4,
-								"{f9adb0b2}": 1,
 								"MinCooldown": 10,
 								"MaxCooldown": 20,
-								"NumberToProc": 3,
 								"RangedEffectiveness": 0.75,
-								"DamageThreshold": 0.25
+								"DamageThreshold": 0.25,
+								"HasteMax": 0.48
 							}
 						},
 						"DeathfireTouch": {
@@ -889,7 +885,7 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 4,
+											"mStartValue": 3,
 											"mEndValue": 12,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
@@ -907,17 +903,16 @@
 								}
 							},
 							"effectAmount": {
-								"ADRatio": 0.08,
-								"APRatio": 0.03,
+								"ADRatio": 0.07,
+								"APRatio": 0.025,
 								"Duration": 4,
-								"DamageAmp": 0.1,
 								"TimeToAmp": 3,
-								"DamageMultiplier": 1,
+								"DamageMultiplier": 0.75,
 								"AoEDuration": 2,
 								"DotDuration": 1,
-								"Level1DamageTOOLTIP": 1,
+								"Level1DamageTOOLTIP": 3,
 								"TicksPerSecond": 2,
-								"Level18DamageTOOLTIP": 10,
+								"Level18DamageTOOLTIP": 12,
 								"__renamedVariables": {
 									"{2156e250}": "Level18DamageTOOLTIP"
 								}

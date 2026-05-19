@@ -88,10 +88,19 @@
 					"objectName": "PykeW",
 					"dataKey": "Characters/Pyke/Spells/PykeWAbility/PykeW",
 					"image": "assets/characters/pyke/hud/icons2d/pykew.png",
-					"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @Effect10Amount@ seconds.",
+					"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @CamoDuration@ seconds.",
 					"extendedVariables": [],
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
+					"dataValues": {
+						"BaseMoveSpeed": [45, 45, 45, 45, 45, 45, 45],
+						"BaseHealCap": [80, 80, 80, 80, 80, 80, 80],
+						"MaxHPHealCap": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
+						"HealADRatio": [8, 8, 8, 8, 8, 8, 8],
+						"HealRampBase": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"HealRampPerTick": [1.15, 1.15, 1.15, 1.15, 1.15, 1.15, 1.15],
+						"CamoDuration": [5, 5, 5, 5, 5, 5, 5]
+					},
 					"spellCalculations": {
 						"{601654a1}": {
 							"mFormulaParts": [
@@ -117,8 +126,8 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseMoveSpeed",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 29,
@@ -163,7 +172,9 @@
 						"BaseDamage": [100, 100, 150, 200, 250, 300, 350],
 						"BonusADRatio": [1, 1, 1, 1, 1, 1, 1],
 						"BaseStunDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
-						"ELethalityRatio": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+						"ELethalityRatio": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"DashDistance": [550, 550, 550, 550, 550, 550, 550],
+						"StunDelay": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"StunDuration": {
@@ -333,7 +344,10 @@
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"OneEnemy": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
-						"AdditionalBonus": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"AdditionalBonus": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"HPPerBAD": [14, 14, 14, 14, 14, 14, 14],
+						"CooldownPerChamp": [1, 1, 1, 1, 1, 1, 1],
+						"AmmoCooldown": [30, 30, 30, 30, 30, 30, 30]
 					},
 					"spellCalculations": {
 						"DamageStorageMax": {

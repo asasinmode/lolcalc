@@ -56,7 +56,10 @@
 						"APRatio": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85],
 						"MaxRange": [850, 850, 850, 850, 850, 850, 850],
 						"MaxRangeFirstBounce": [325, 325, 325, 325, 325, 325, 325],
-						"MaxRangeSecondBounce": [225, 225, 225, 225, 225, 225, 225]
+						"MaxRangeSecondBounce": [225, 225, 225, 225, 225, 225, 225],
+						"BombTriggerRange": [180, 180, 180, 180, 180, 180, 180],
+						"ExplosionRadius": [240, 240, 240, 240, 240, 240, 240],
+						"BoundingBoxTrigger": [70, 70, 70, 70, 70, 70, 70]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -94,7 +97,7 @@
 					"tooltip": "Ziggs flings an explosive charge that detonates after @BombDuration@ seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br><br>Satchel Charge will automatically destroy towers below @TurretDestroyPercent*100@% of their Health.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -145,7 +148,7 @@
 					"objectName": "ZiggsE",
 					"dataKey": "Characters/Ziggs/Spells/ZiggsEAbility/ZiggsE",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggse.png",
-					"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @Effect4Amount@ seconds. Mines last @MineDuration@ seconds.",
+					"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds. Mines last @MineDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "DamagePerMine",
@@ -169,7 +172,11 @@
 						"APRatioPerMine": [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
 						"Slow": [0, -0.1, -0.2, -0.3, -0.4, -0.5, -0.6],
 						"DamagePerMine": [-10, 30, 70, 110, 150, 190, 230],
-						"MineDuration": [10, 10, 10, 10, 10, 10, 10]
+						"MineDuration": [10, 10, 10, 10, 10, 10, 10],
+						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"SubsequentMineDamageMod": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"TriggerRange": [135, 135, 135, 135, 135, 135, 135],
+						"MinePerceptionBubbleSize": [150, 150, 150, 150, 150, 150, 150]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -187,7 +194,7 @@
 						},
 						"ReducedDamage": {
 							"mMultiplier": {
-								"mEffectIndex": 5
+								"mDataValue": "{86159046}"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,

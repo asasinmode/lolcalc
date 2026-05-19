@@ -35,7 +35,7 @@
 					"objectName": "TaliyahQ",
 					"dataKey": "Characters/Taliyah/Spells/TaliyahQAbility/TaliyahQ",
 					"image": "assets/characters/taliyah/hud/icons2d/taliyah_q.png",
-					"tooltip": "Taliyah hurls 5 rocks, each dealing <magicDamage>@RockDamage@ magic damage</magicDamage> in an area around the first enemy hit while creating Worked Ground at that area. Subsequent hits against the same enemy deal @ExtraMissileReducedDamagePercent@% less damage.<br><br>Casts on worked ground cost @Effect7Amount@ Mana and have @WorkedGroundCDR*100@% less Cooldown, consume the Worked Ground, and hurl a boulder that <status>Slows</status> enemies it hits by @SlowPercent*100@% for @SlowDuration@ seconds, dealing <magicDamage>@BigRockDamage@ magic damage</magicDamage> to the primary target. Monsters hit by the boulder are <status>Stunned</status> for @MonsterStunDuration@ seconds.",
+					"tooltip": "Taliyah hurls 5 rocks, each dealing <magicDamage>@RockDamage@ magic damage</magicDamage> in an area around the first enemy hit while creating Worked Ground at that area. Subsequent hits against the same enemy deal @ExtraMissileReducedDamagePercent@% less damage.<br><br>Casts on worked ground cost @BigRockManaCost@ Mana and have @WorkedGroundCDR*100@% less Cooldown, consume the Worked Ground, and hurl a boulder that <status>Slows</status> enemies it hits by @SlowPercent*100@% for @SlowDuration@ seconds, dealing <magicDamage>@BigRockDamage@ magic damage</magicDamage> to the primary target. Monsters hit by the boulder are <status>Stunned</status> for @MonsterStunDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -67,7 +67,10 @@
 						"MonsterStunDuration": [3, 3, 3, 3, 3, 3, 3],
 						"AoERadius": [175, 175, 175, 175, 175, 175, 175],
 						"AoERadiusBig": [225, 225, 225, 225, 225, 225, 225],
-						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"GroundExhaustDuration": [30, 30, 30, 30, 30, 30, 30],
+						"BigRockManaCost": [10, 10, 10, 10, 10, 10, 10],
+						"GroundExhaustRadius": [400, 400, 400, 400, 400, 400, 400]
 					},
 					"spellCalculations": {
 						"RockDamage": {
@@ -135,6 +138,10 @@
 					],
 					"mana": [40, 30, 20, 10, 0, 0],
 					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
+					"dataValues": {
+						"KnockupDelay": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"ThrowDistance": [400, 400, 400, 400, 400, 400, 400]
+					},
 					"effectAmount": {
 						"1": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"2": [400, 400, 400, 400, 400, 400, 400]
@@ -171,7 +178,9 @@
 						"MaxStunDuration": [2, 2, 2, 2, 2, 2, 2],
 						"MineDamageFalloff": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"DelayBetweenRows": [0.17, 0.17, 0.17, 0.17, 0.17, 0.17, 0.17],
-						"SlowPercent": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+						"SlowPercent": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"MineLifetime": [4, 4, 4, 4, 4, 4, 4],
+						"MineRadius": [85, 85, 85, 85, 85, 85, 85]
 					},
 					"spellCalculations": {
 						"ScatterDamage": {
@@ -222,7 +231,7 @@
 					"objectName": "TaliyahR",
 					"dataKey": "Characters/Taliyah/Spells/TaliyahRAbility/TaliyahR",
 					"image": "assets/characters/taliyah/hud/icons2d/taliyah_r.png",
-					"tooltip": "Taliyah creates a massive earthen wall for @Effect1Amount@ seconds. If she immediately <recast>Recasts</recast>, she will ride along the wall as it unravels. Moving or being immobilized will end the ride.<br><br>This ability cannot be cast if Taliyah has taken damage from Champions or structures within the last @DamageLockoutTime@ seconds.",
+					"tooltip": "Taliyah creates a massive earthen wall for @WallDuration@ seconds. If she immediately <recast>Recasts</recast>, she will ride along the wall as it unravels. Moving or being immobilized will end the ride.<br><br>This ability cannot be cast if Taliyah has taken damage from Champions or structures within the last @DamageLockoutTime@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "WallLength",

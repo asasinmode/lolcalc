@@ -1,5 +1,5 @@
 {
-	"version": "16.9.1",
+	"version": "16.10.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -805,7 +805,7 @@
 			"name": "Doran's Bow",
 			"searchString": "doransbow;damage;attackspeed;spellvamp;attackdamage",
 			"stats": {
-				"FlatPhysicalDamageMod": 6,
+				"FlatPhysicalDamageMod": 8,
 				"PercentAttackSpeedMod": 0.15,
 				"PercentOmnivampMod": 0.015
 			},
@@ -832,7 +832,7 @@
 			"searchString": "doranshelm;health;magicresist;armor",
 			"stats": {
 				"FlatSpellBlockMod": 10,
-				"FlatHPPoolMod": 110,
+				"FlatHPPoolMod": 140,
 				"FlatArmorMod": 10
 			},
 			"gold": {
@@ -2027,8 +2027,8 @@
 				"PercentOmnivampMod": 0.04
 			},
 			"gold": {
-				"total": 950,
-				"sell": 665
+				"total": 1000,
+				"sell": 700
 			},
 			"image": "3008.png",
 			"into": [
@@ -2040,8 +2040,8 @@
 			"isBoots": true,
 			"epicness": 4,
 			"dataValues": {
-				"OmnivampOnTakedown": 0.01,
-				"MaxStacks": 6
+				"OmnivampOnTakedown": 0.006,
+				"MaxStacks": 10
 			},
 			"itemGroups": [
 				"Items/ItemGroups/BootsWithoutActives",
@@ -3740,7 +3740,7 @@
 		"3087": {
 			"id": "3087",
 			"name": "Statikk Shiv",
-			"searchString": "statikkshiv;damage;attackspeed;spelldamage;onhit;movement;abilitypower;attackdamage;movespeed",
+			"searchString": "statikkshiv;energized;energised;damage;attackspeed;spelldamage;onhit;movement;abilitypower;attackdamage;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 45,
 				"FlatPhysicalDamageMod": 40,
@@ -3871,7 +3871,7 @@
 		"3094": {
 			"id": "3094",
 			"name": "Rapid Firecannon",
-			"searchString": "rapidfirecannon;rfc;rapidfire;canon;gun;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
+			"searchString": "rapidfirecannon;rfc;rapidfire;canon;gun;energized;energised;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"PercentAttackSpeedMod": 0.35,
@@ -3902,7 +3902,7 @@
 		"3097": {
 			"id": "3097",
 			"name": "Stormrazor",
-			"searchString": "stormrazor;damage;criticalstrike;attackspeed;movement;criticalstrikechance;attackdamage",
+			"searchString": "stormrazor;energized;energised;damage;criticalstrike;attackspeed;movement;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 50,
@@ -3946,7 +3946,7 @@
 			"searchString": "lichbane;spellblade;spelldamage;onhit;movement;abilityhaste;abilitypower;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 100,
-				"PercentMovementSpeedMod": 0.04,
+				"PercentMovementSpeedMod": 0.06,
 				"AbilityHasteMod": 10
 			},
 			"gold": {
@@ -3963,7 +3963,7 @@
 			"epicness": 5,
 			"dataValues": {
 				"SpellbladeCooldown": 1.5,
-				"LichBaneAPValue": 0.4,
+				"LichBaneAPValue": 0.45,
 				"SpellbladeADRatio": 0.75,
 				"SheenASBuff": 0.5,
 				"Cooldown": 1.5,
@@ -5615,8 +5615,8 @@
 				"PercentOmnivampMod": 0.04
 			},
 			"gold": {
-				"total": 950,
-				"sell": 665
+				"total": 1000,
+				"sell": 700
 			},
 			"image": "3168.png",
 			"from": [
@@ -5625,8 +5625,8 @@
 			"isBoots": true,
 			"epicness": 7,
 			"dataValues": {
-				"OmnivampOnTakedown": 0.01,
-				"MaxStacks": 6,
+				"OmnivampOnTakedown": 0.006,
+				"MaxStacks": 10,
 				"DamageMod": 0.05,
 				"HealingMod": 0.15
 			},
@@ -9166,15 +9166,15 @@
 		"6699": {
 			"id": "6699",
 			"name": "Voltaic Cyclosword",
-			"searchString": "voltaiccyclosword;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
+			"searchString": "voltaiccyclosword;lethality;energized;energised;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 10,
 				"PhysicalLethality": 10
 			},
 			"gold": {
-				"total": 2900,
-				"sell": 2030
+				"total": 3000,
+				"sell": 2100
 			},
 			"image": "6699.png",
 			"from": [

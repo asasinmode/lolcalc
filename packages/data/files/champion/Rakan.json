@@ -146,25 +146,26 @@
 					"objectName": "RakanE",
 					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanE",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_e.png",
-					"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Effect3Amount@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @Effect2Amount@ seconds.",
+					"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Duration@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @RecastWindow@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shieldhealth"
 						},
 						{
-							"name": "Effect4Amount",
-							"nameOverride": "spell_listtype_cooldown"
-						},
-						{
-							"name": "Effect5Amount",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
 						}
 					],
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"BaseShield": [25, 50, 75, 100, 125, 150, 175]
+						"BaseShield": [25, 50, 75, 100, 125, 150, 175],
+						"RecastWindow": [5, 5, 5, 5, 5, 5, 5],
+						"Duration": [3, 3, 3, 3, 3, 3, 3],
+						"Cooldown": [20, 20, 18, 16, 14, 12, 12],
+						"BonusDashSpeed": [1150, 1150, 1150, 1150, 1150, 1150, 1150],
+						"XayahBonusDashSpeed": [1250, 1250, 1250, 1250, 1250, 1250, 1250]
 					},
 					"spellCalculations": {
 						"TotalShield": {
@@ -201,25 +202,34 @@
 					"objectName": "RakanR",
 					"dataKey": "Characters/Rakan/Spells/RakanRAbility/RakanR",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_r.png",
-					"tooltip": "Rakan gains <speed>@Effect5Amount@% Move Speed</speed> for @Effect2Amount@ seconds. Rakan deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Charms</status> enemies for @Effect3Amount@ second(s) the first time he touches them. The first champion touched grants Rakan <speed>@Effect6Amount@% decaying Move Speed</speed>.",
+					"tooltip": "Rakan gains <speed>@InitialCastSpeed@% Move Speed</speed> for @Duration@ seconds. Rakan deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Charms</status> enemies for @CharmDuration@ second(s) the first time he touches them. The first champion touched grants Rakan <speed>@TouchSpeed@% decaying Move Speed</speed>.",
 					"extendedVariables": [
 						{
-							"name": "Effect3Amount",
+							"name": "CharmDuration",
 							"nameOverride": "spell_listtype_charmduration"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [130, 130, 110, 90, 0, 0, 0],
+					"dataValues": {
+						"BaseDamage": [100, 100, 200, 300, 0, 0, 0],
+						"Duration": [4, 4, 4, 4, 4, 4, 4],
+						"CharmDuration": [1, 1, 1.25, 1.5, 0, 0, 0],
+						"BuffExtensionDuration": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"InitialCastSpeed": [75, 75, 75, 75, 75, 75, 75],
+						"TouchSpeed": [150, 150, 150, 150, 150, 150, 150],
+						"TouchRadius": [150, 150, 150, 150, 150, 150, 150]
+					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.5,
@@ -293,7 +303,6 @@
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_manacost": "Mana Cost",
 		"spell_listtype_shieldhealth": "Shield Health",
-		"spell_listtype_cooldown": "Cooldown",
 		"spell_listtype_cost": "@AbilityResourceName@ Cost",
 		"spell_listtype_charmduration": "Charm Duration"
 	}

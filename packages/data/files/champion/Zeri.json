@@ -50,8 +50,8 @@
 					"dataValues": {
 						"MinCooldown": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"AttackSpeedCap": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"ExcessAttackSpeedToADMult": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"BaseDamage": [18, 21, 24, 27, 30, 33, 36],
+						"ExcessAttackSpeedToADMult": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"BaseDamage": [18, 22, 26, 30, 34, 38, 42],
 						"ActiveADRatio": [1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12],
 						"NumberOfMissiles": [7, 7, 7, 7, 7, 7, 7],
 						"EnergizedMissiles": [3, 3, 3, 3, 3, 3, 3],
@@ -357,7 +357,8 @@
 					"dataValues": {
 						"StackDuration": [5, 5, 5, 5, 5, 5, 5],
 						"MaxStacks": [100000, 100000, 100000, 100000, 100000, 100000, 100000],
-						"DurationIncreasePerHit": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"DurationIncreasePerHit": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"MaxHyperchargeDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"BaseASPercent": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"MSPercent": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
 						"RDuration": [5, 5, 5, 5, 5, 5, 5],
@@ -366,7 +367,6 @@
 						"NovaRange": [825, 825, 825, 825, 825, 825, 825],
 						"MaxChainTargets": [5, 5, 5, 5, 5, 5, 5],
 						"BaseBonusMS": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-						"MaxHyperchargeDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"ChainADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
 					},
 					"spellCalculations": {

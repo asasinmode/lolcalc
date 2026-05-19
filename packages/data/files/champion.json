@@ -1,5 +1,5 @@
 {
-	"version": "16.9.1",
+	"version": "16.10.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -38,8 +38,8 @@
 			"name": "Akali",
 			"image": "Akali.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Akshan": {
@@ -266,7 +266,6 @@
 			"name": "Dr. Mundo",
 			"image": "DrMundo.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -448,8 +447,8 @@
 			"name": "Irelia",
 			"image": "Irelia.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Ivern": {
@@ -1065,8 +1064,8 @@
 			"name": "Senna",
 			"image": "Senna.png",
 			"roles": {
-				"bot": true,
-				"support": true
+				"support": true,
+				"bot": true
 			}
 		},
 		"Seraphine": {
@@ -1339,8 +1338,8 @@
 			"name": "Vayne",
 			"image": "Vayne.png",
 			"roles": {
-				"bot": true,
-				"top": true
+				"top": true,
+				"bot": true
 			}
 		},
 		"Veigar": {
@@ -1468,8 +1467,8 @@
 			"name": "Yasuo",
 			"image": "Yasuo.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Yone": {
@@ -1478,8 +1477,8 @@
 			"name": "Yone",
 			"image": "Yone.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Yorick": {

@@ -35,21 +35,26 @@
 					"objectName": "OrianaIzunaCommand",
 					"dataKey": "Characters/Orianna/Spells/OrianaIzunaCommandAbility/OrianaIzunaCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
-					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first.",
+					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @ReducedDamagePercent@% less damage to all enemies after the first.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
+					"dataValues": {
+						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"ReducedDamagePercent": [30, 30, 30, 30, 30, 30, 30],
+						"MinimumDamagePercent": [70, 70, 70, 70, 70, 70, 70]
+					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.55,
@@ -63,7 +68,7 @@
 									"mNumber": 0.01
 								},
 								"mPart2": {
-									"mEffectIndex": 3
+									"mDataValue": "{2af22d8f}"
 								}
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -140,34 +145,40 @@
 					"objectName": "OrianaRedactCommand",
 					"dataKey": "Characters/Orianna/Spells/OrianaRedactCommandAbility/OrianaRedactCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
-					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
+					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@DefenseBonus@ Armor</scaleArmor> and <scaleMR>@DefenseBonus@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @ShieldDuration@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect3Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "DefenseBonus",
 							"nameOverride": "spell_listtype_armorbonus"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "DefenseBonus",
 							"nameOverride": "spell_listtype_magicresistbonus"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "ShieldAmount",
 							"nameOverride": "spell_listtype_shieldamount"
 						}
 					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
+					"dataValues": {
+						"ShieldAmount": [20, 55, 90, 125, 160, 195, 230],
+						"DefenseBonus": [0, 6, 12, 18, 24, 30, 36],
+						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
+					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 3,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.3,
@@ -179,8 +190,8 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "ShieldAmount",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.45,

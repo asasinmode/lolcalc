@@ -46,7 +46,16 @@
 					"dataValues": {
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
 						"APRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-						"HealthRatio": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
+						"HealthRatio": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
+						"HPCost": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"MissileRange": [800, 800, 800, 800, 800, 800, 800],
+						"SlowAmount": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, -0.4],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"TetherDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"TetherFalloffDistance": [900, 900, 900, 900, 900, 900, 900],
+						"MaxSlamDistance": [700, 700, 700, 700, 700, 700, 700],
+						"YankDistance": [300, 300, 300, 300, 300, 300, 300],
+						"CollisionAoE": [300, 300, 300, 300, 300, 300, 300]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -87,7 +96,7 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mEffectIndex": 2
+										"mDataValue": "{af757bd8}"
 									},
 									"mPart2": {
 										"mPart1": {
@@ -142,7 +151,11 @@
 						"BaseDamage": [30, 40, 50, 60, 70, 80, 90],
 						"APRatioToPercentDamage": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
 						"BaseMaxHealthDamage": [0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
-						"HealthPercentTooltip": [3, 4, 5, 6, 7, 8, 9]
+						"HealthPercentTooltip": [3, 4, 5, 6, 7, 8, 9],
+						"HPCost": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+						"PercentHealthDamage": [0.04, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
+						"RefundOnBlobPickup": [1, 1, 1, 1, 1, 1, 1],
+						"MaxMinionDamage": [200, 200, 200, 200, 200, 200, 200]
 					},
 					"spellCalculations": {
 						"DisplayPercentDamage": {
@@ -169,7 +182,7 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mEffectIndex": 2
+										"mDataValue": "{af757bd8}"
 									},
 									"mPart2": {
 										"mPart1": {
@@ -204,25 +217,37 @@
 					"objectName": "ZacE",
 					"dataKey": "Characters/Zac/Spells/ZacEAbility/ZacE",
 					"image": "assets/characters/zac/hud/icons2d/zace.png",
-					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
+					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @ChannelTime@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "MaxRange",
 							"nameOverride": "spell_listtype_range"
 						}
 					],
 					"cooldownTime": [25, 22, 19, 16, 13, 10, 10],
+					"dataValues": {
+						"BaseDamage": [60, 60, 105, 150, 195, 240, 240],
+						"HPCost": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+						"MaxRange": [1050, 1200, 1350, 1500, 1650, 1800, 1950],
+						"ChannelTime": [0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4],
+						"MinimumStun": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MinimumSpeed": [500, 500, 500, 500, 500, 500, 500],
+						"MaximumSpeed": [1350, 1350, 1350, 1350, 1350, 1350, 1350],
+						"DistanceToSpeedRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"KnockupRadius": [265, 265, 265, 265, 265, 265, 265],
+						"VFXWarningTime": [1, 1, 1, 1, 1, 1, 1]
+					},
 					"spellCalculations": {
 						"MaxStun": {
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mEffectIndex": 5
+										"mDataValue": "{583e88ab}"
 									},
 									"mPart2": {
 										"mNumber": 2
@@ -234,8 +259,8 @@
 						"Damage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.8,
@@ -249,7 +274,7 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mEffectIndex": 2
+										"mDataValue": "{af757bd8}"
 									},
 									"mPart2": {
 										"mPart1": {
@@ -394,17 +419,6 @@
 								}
 							]
 						}
-					},
-					"effectAmount": {
-						"1": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
-						"2": [700, 700, 850, 1000, 1000, 1000, 1000],
-						"3": [-0.3, -0.3, -0.4, -0.5, -0.5, -0.5, -0.5],
-						"4": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
-						"5": [275, 275, 275, 275, 275, 275, 275],
-						"6": [300, 300, 300, 300, 300, 300, 300],
-						"7": [1, 1, 1, 1, 1, 1, 1],
-						"8": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
-						"9": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					}
 				}
 			]

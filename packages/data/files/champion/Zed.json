@@ -132,8 +132,8 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [5, 5, 4.5, 4, 3.5, 3, 3],
 					"dataValues": {
-						"BaseDamage": [45, 70, 95, 120, 145, 170, 195],
-						"ADRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"BaseDamage": [47.5, 70, 92.5, 115, 137.5, 160, 182.5],
+						"ADRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"MoveSpeedMod": [-0.15, -0.2, -0.25, -0.3, -0.35, -0.4, -0.45],
 						"MoveSpeedModBonus": [-0.225, -0.3, -0.375, -0.45, -0.525, -0.6, -0.675],
 						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -233,25 +233,26 @@
 						"{6a1a62e9}": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 0.06,
+									"mLevel1Value": 0.05,
 									"mBreakpoints": [
 										{
 											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 0.02
+											"mAdditionalBonusAtThisLevel": 0.025
 										},
 										{
 											"mLevel": 17,
-											"mAdditionalBonusAtThisLevel": 0.02
+											"mAdditionalBonusAtThisLevel": 0.025
 										},
 										{
 											"mLevel": 25,
-											"mAdditionalBonusAtThisLevel": 0.02
+											"mAdditionalBonusAtThisLevel": 0.025
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							],
-							"mDisplayAsPercent": true
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
 						"{ad3d785f}": {
 							"mFormulaParts": [

@@ -49,7 +49,11 @@
 						"MultiHitRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"StartingCastTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"MinCastTime": [0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
-						"ASpeedCastTimeScalarPerHundrethSecond": [0, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07]
+						"ASpeedCastTimeScalarPerHundrethSecond": [0, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07],
+						"Missile1DelayTime": [0.334, 0.334, 0.334, 0.334, 0.334, 0.334, 0.334],
+						"Missile2DelayTime": [0.584, 0.584, 0.584, 0.584, 0.584, 0.584, 0.584],
+						"Missile1DelaySpeed": [3500, 3500, 3500, 3500, 3500, 3500, 3500],
+						"Missile2DelaySpeed": [3500, 3500, 3500, 3500, 3500, 3500, 3500]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -92,10 +96,10 @@
 					"objectName": "XayahW",
 					"dataKey": "Characters/Xayah/Spells/XayahWAbility/XayahW",
 					"image": "assets/characters/xayah/hud/icons2d/xayahw.png",
-					"tooltip": "Xayah creates a storm of blades for @Effect2Amount@ seconds that grants her <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed> and cause her Attacks to fire a secondary blade that deals @BonusDamagePercent@% damage.<br><br>When the secondary blade hits a champion, she grants herself <speed>@Effect3Amount@% Move Speed</speed> for @Effect4Amount@ seconds.<br><br>If Rakan is nearby he will also gain the effects of this Ability, except he gains <speed>Move Speed</speed> when <i>Xayah</i> strikes a target.",
+					"tooltip": "Xayah creates a storm of blades for @WAttackSpeedDuration@ seconds that grants her <attackSpeed>@WAttackSpeedAmount@% Attack Speed</attackSpeed> and cause her Attacks to fire a secondary blade that deals @BonusDamagePercent@% damage.<br><br>When the secondary blade hits a champion, she grants herself <speed>@WMoveSpeedAmount@% Move Speed</speed> for @WMoveSpeedDuration@ seconds.<br><br>If Rakan is nearby he will also gain the effects of this Ability, except he gains <speed>Move Speed</speed> when <i>Xayah</i> strikes a target.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "WAttackSpeedAmount",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
@@ -105,7 +109,12 @@
 					"mana": [60, 55, 50, 45, 40, 35],
 					"cooldownTime": [20, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
-						"BonusDamagePercent": [25, 25, 25, 25, 25, 25, 25]
+						"BonusDamagePercent": [25, 25, 25, 25, 25, 25, 25],
+						"WAttackSpeedAmount": [30, 35, 40, 45, 50, 55, 60],
+						"WAttackSpeedDuration": [4, 4, 4, 4, 4, 4, 4],
+						"WMoveSpeedAmount": [30, 30, 30, 30, 30, 30, 30],
+						"WMoveSpeedDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"WRakanSeekDistance": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
 					},
 					"effectAmount": {
 						"0": [30, 35, 40, 45, 50, 55, 60],
@@ -246,6 +255,17 @@
 					"tooltip": "{{Spell_XayahPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_XayahPassive_Tooltip}}<br><br><rules>Primary target of empowered Attacks take full damage and On-Hit effects as normal.</rules>",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"dataValues": {
+						"PFeatherDuration": [6, 6, 6, 6, 6, 6, 6],
+						"PFeatherSpacingMin": [25, 25, 25, 25, 25, 25, 25],
+						"PFeatherSpacingMax": [40, 40, 40, 40, 40, 40, 40],
+						"PDamageFalloffMax": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
+						"PEmpoweredDuration": [8, 8, 8, 8, 8, 8, 8],
+						"PStacksPerCast": [3, 3, 3, 3, 3, 3, 3],
+						"PStackMax": [5, 5, 5, 5, 5, 5, 5],
+						"PDamageFalloffMin": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"PDamageFalloffMid": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45]
+					},
 					"effectAmount": {
 						"0": [6, 6, 6, 6, 6, 6, 6],
 						"1": [25, 25, 25, 25, 25, 25, 25],

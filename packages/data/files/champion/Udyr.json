@@ -831,6 +831,7 @@
 		"spell_listtype_attackspeed": "Attack Speed",
 		"spell_listtype_percentmaxhealthdamage": "% Max Health Damage",
 		"spell_listtype_onhitdamage": "On-Hit Damage",
+		"spell_udyrq_onhit_bonushpratio": "On-Hit Damage Bonus HP Ratio",
 		"spell_listtype_shield": "Shield Amount",
 		"spell_listtype_percenthealthshieldratio": "% Health Shield",
 		"spell_listtype_lifesteal": "Life Steal",

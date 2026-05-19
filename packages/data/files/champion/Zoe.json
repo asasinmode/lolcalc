@@ -98,7 +98,7 @@
 					"objectName": "ZoeW",
 					"dataKey": "Characters/Zoe/Spells/ZoeWAbility/ZoeW",
 					"image": "assets/characters/zoe/hud/icons2d/zoe_w.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Enemies drop spell shards when casting a Summoner Spell or using an Active Item. Specific minions also drop a spell shard when Zoe or a nearby ally kills them. Zoe can pick up this shard to cast that ability once.<br><br><spellPassive>Passive:</spellPassive> When Zoe casts this Ability or any Summoner Spell, she gains <speed>@Effect9Amount*100@% Move Speed</speed> for @Effect10Amount@ seconds and tosses 3 missiles at the target she Attacked most recently. These missiles deal <magicDamage>@MissileDamageTooltip@ magic damage</magicDamage> each.<br><br><spellActive>Active:</spellActive> Cast the Ability from a spell shard Zoe has picked up.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Enemies drop spell shards when casting a Summoner Spell or using an Active Item. Specific minions also drop a spell shard when Zoe or a nearby ally kills them. Zoe can pick up this shard to cast that ability once.<br><br><spellPassive>Passive:</spellPassive> When Zoe casts this Ability or any Summoner Spell, she gains <speed>@MovementSpeed*100@% Move Speed</speed> for @MSDuration@ seconds and tosses 3 missiles at the target she Attacked most recently. These missiles deal <magicDamage>@MissileDamageTooltip@ magic damage</magicDamage> each.<br><br><spellActive>Active:</spellActive> Cast the Ability from a spell shard Zoe has picked up.",
 					"extendedVariables": [
 						{
 							"name": "TotalBaseDamage",
@@ -118,7 +118,10 @@
 						"TotalBaseDamage": [5, 15, 25, 35, 45, 55, 65],
 						"TotalAPRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"MoveSpeedMod": [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
-						"MoveSpeedDuration": [1.75, 2, 2.25, 2.5, 2.75, 3, 3.25]
+						"MoveSpeedDuration": [1.75, 2, 2.25, 2.5, 2.75, 3, 3.25],
+						"DurationOfSummonerCanCast": [60, 60, 60, 60, 60, 60, 60],
+						"MovementSpeed": [0.3, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+						"MSDuration": [2, 2, 2.25, 2.5, 2.75, 3, 3.25]
 					},
 					"spellCalculations": {
 						"MissileDamageTooltip": {
@@ -175,7 +178,12 @@
 					"dataValues": {
 						"PercentPen": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"BaseDamage": [30, 70, 110, 150, 190, 230, 270],
-						"CooldownRefresh": [0.125, 0.16, 0.195, 0.23, 0.265, 0.3, 0.335]
+						"CooldownRefresh": [0.125, 0.16, 0.195, 0.23, 0.265, 0.3, 0.335],
+						"TrapLife": [5, 5, 5, 5, 5, 5, 5],
+						"DrowsySlow": [0.1, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35],
+						"DrowsyDuration": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
+						"SleepDuration": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],
+						"BrittleLinger": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
@@ -252,7 +260,9 @@
 					"tooltip": "{{Spell_ZoePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ZoePassive_Tooltip}}<br><br><rules>The empowered Attack deals damage instantly.</rules>",
 					"dataValues": {
-						"APRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+						"APRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"WPickupDurationMinion": [20, 20, 20, 20, 20, 20, 20],
+						"WPickupDurationChampion": [40, 40, 40, 40, 40, 40, 40]
 					},
 					"spellCalculations": {
 						"PassiveDamage": {
@@ -301,6 +311,7 @@
 		"spell_listtype_speedduration": "Speed Duration",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_zoeqbonusdamagecap": "Bonus Damage Cap",
+		"spell_listtype_ecooldownrefresh": "Cooldown Refresh",
 		"spell_zoepassive_tooltip": "After using an Ability, Zoe's next Attack deals an additional <magicDamage>@PassiveDamage@ magic damage</magicDamage>."
 	}
 }

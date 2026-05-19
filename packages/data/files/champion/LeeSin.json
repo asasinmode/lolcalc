@@ -112,7 +112,7 @@
 					"objectName": "LeeSinWOne",
 					"dataKey": "Characters/LeeSin/Spells/LeeSinWOneAbility/LeeSinWOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
-					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
+					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "ShieldValue",
@@ -124,10 +124,10 @@
 						}
 					],
 					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"LifestealAndSpellVamp": [6, 10, 14, 18, 22, 26, 30],
-						"ShieldValue": [25, 70, 115, 160, 205, 250, 295],
+						"ShieldValue": [15, 60, 105, 150, 195, 240, 285],
 						"ShieldDuration": [2, 2, 2, 2, 2, 2, 2],
 						"DashSpeed": [1350, 1350, 1350, 1350, 1350, 1350, 1350],
 						"W1ReactivateTime": [3, 3, 3, 3, 3, 3, 3],
@@ -188,7 +188,7 @@
 								},
 								{
 									"mStat": 2,
-									"mCoefficient": 1,
+									"mCoefficient": 0.9,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

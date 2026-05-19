@@ -88,7 +88,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
   - [x] wider columns initially, shrink slightly as more are added
   - [x] move add section to the top
-  - [?] effect sections with actual calculated values
+  - [x] effect sections with actual calculated values
   - [ ] add option to remove stats/basic attack sections if more feedback
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?

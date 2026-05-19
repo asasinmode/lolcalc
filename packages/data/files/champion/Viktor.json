@@ -333,7 +333,9 @@
 						"MinionStacks": [1, 1, 1, 1, 1, 1, 1],
 						"CannonStacks": [10, 10, 10, 10, 10, 10, 10],
 						"ChampionStacks": [20, 20, 20, 20, 20, 20, 20],
-						"EvolutionStackBreakpoint": [100, 100, 100, 100, 100, 100, 100]
+						"EvolutionStackBreakpoint": [100, 100, 100, 100, 100, 100, 100],
+						"ARAMStacksoverTime": [1, 1, 1, 1, 1, 1, 1],
+						"ARAMStackCadence": [5, 5, 5, 5, 5, 5, 5]
 					}
 				}
 			]

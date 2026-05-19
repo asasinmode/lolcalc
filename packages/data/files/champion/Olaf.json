@@ -203,15 +203,19 @@
 					"dataValues": {
 						"Cast_Time_Base": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"Cast_Time_Min": [0.175, 0.175, 0.175, 0.175, 0.175, 0.175, 0.175],
-						"Cast_Time_Attack_Speed_Cap": [125, 125, 125, 125, 125, 125, 125]
+						"Cast_Time_Attack_Speed_Cap": [125, 125, 125, 125, 125, 125, 125],
+						"ADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BaseHealthCost": [10, 28, 46, 64, 82, 100, 118],
+						"HealthCostADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"BaseDamage": [25, 70, 115, 160, 205, 250, 295],
+						"HealthCostPercent": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -219,6 +223,25 @@
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
+						},
+						"{fcf1daee}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "{6318e36f}",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "{fa4c3946}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{30412ba3}": {
+							"mMultiplier": {
+								"mDataValue": "{60aa666f}"
+							},
+							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
 					"effectAmount": {

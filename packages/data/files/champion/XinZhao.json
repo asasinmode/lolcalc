@@ -44,6 +44,9 @@
 					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
+					"dataValues": {
+						"BADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+					},
 					"spellCalculations": {
 						"BonusDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -55,8 +58,8 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.4,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "BADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						}
