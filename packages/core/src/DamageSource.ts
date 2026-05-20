@@ -472,7 +472,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
-			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value !== undefined).map(([key, value]) => `${key}~${value}`).join('.'),
+			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('.'),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
 				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}-${effect.data.join('-')}`)
