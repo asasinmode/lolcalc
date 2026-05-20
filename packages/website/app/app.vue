@@ -67,7 +67,7 @@ onMounted(() => {
 				<span>alpha</span>
 			</h1>
 			<span>
-				{{ vSemver }}
+				26{{ vSemver.slice(vSemver.indexOf('.')) }}
 			</span>
 		</div>
 	</header>
