@@ -131,7 +131,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 			return { value: numberValue, numberValue };
 		},
 	},
-]);
+]) as unknown as ShallowRef<IDamageResultTableSection[]>;
 
 const resultsTable = useTemplateRef('resultsTable');
 

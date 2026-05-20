@@ -99,6 +99,11 @@ export function itemVariableValue(
 		}
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
+	} else if (item.itemCalculations?.[variable]) {
+		const value = variableResolveFn(item.itemCalculations?.[variable])?.(item.itemCalculations[variable], item, damageSource);
+		if (value) {
+			Object.assign(rv, value);
+		}
 	}
 
 	return rv;
@@ -463,27 +468,42 @@ export function replaceGameIcons(text: string): string {
 
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
-	mFormulaParts(self, variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[] }) {
-		const values = variable.mFormulaParts.map(part => variableResolveFn(part)?.(self, part));
+	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, self) {
+		const values = variable.mFormulaParts.map((part) => {
+			if ('mNumber' in part) {
+				return part.mNumber;
+			} else if ('mDataValue' in part) {
+				return whole.dataValues?.[part.mDataValue];
+			}
+			return variableResolveFn(part)?.(part, whole, self);
+		});
 		if (values.includes(undefined)) {
 			return undefined;
 		}
-		return values.reduce((acc, curr) => curr! + acc!, 0);
+		const multiplier = 'mMultiplier' in variable ? (variable.mMultiplier as Record<string, number>).mNumber : undefined;
+
+		return {
+			value: values.reduce((acc, curr) => curr! + acc!, 0) * (multiplier ?? 1),
+			meta: {
+				isPercentage: variable.mDisplayAsPercent,
+				multiplier: variable.mDisplayAsPercent ? 100 : undefined,
+			},
+		};
 	},
-	ByCharLevelBreakpointsCalculationPart(self, variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart']) {
+	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, self) {
 		let rv = variable.mLevel1Value;
 		for (const { mAdditionalBonusAtThisLevel, mLevel } of variable.mBreakpoints) {
-			if (self.level.value >= mLevel) {
+			if ((self?.level.value ?? 1) >= mLevel) {
 				rv += mAdditionalBonusAtThisLevel;
 			} else {
 				break;
 			}
 		}
-		return rv;
+		return { value: rv };
 	},
 } satisfies IHypotheticalVariableCalculationFns;
 
-export type IHypotheticalVariableCalculationFns = Record<string, (self: DamageSource, variable: any) => number | undefined>;
+export type IHypotheticalVariableCalculationFns = Record<string, (variable: any, whole: any, self?: DamageSource) => IVariableValueResult | undefined>;
 
 interface IGameVariablesByType {
 	ByCharLevelBreakpointsCalculationPart: {
@@ -494,11 +514,21 @@ interface IGameVariablesByType {
 		}[];
 		__type: string;
 	};
+	NumberCalculationPart: {
+		mNumber: number;
+		__type: string;
+	};
+	NamedDataValueCalculationPart: {
+		mDataValue: string;
+		__type: string;
+	};
 }
 
 function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
 	if ('__type' in variable && variable.__type in VARIABLE_CALCULATION_FNS) {
 		return VARIABLE_CALCULATION_FNS[variable.__type as keyof typeof VARIABLE_CALCULATION_FNS];
+	} else if ('mFormulaParts' in variable) {
+		return VARIABLE_CALCULATION_FNS.mFormulaParts;
 	}
 	console.warn('[variableResolveFn] unknown variable', variable);
 	return undefined;

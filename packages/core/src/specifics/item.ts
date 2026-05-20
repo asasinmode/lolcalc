@@ -1166,7 +1166,7 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'BonusHPAD',
 				},
 			},
-			uninteresting: ['HPToADPercentage', 'MissingHealthAD'],
+			uninteresting: ['HPToADPercentage', 'MissingHealthAD', 'RemainingHealthThreshold'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
