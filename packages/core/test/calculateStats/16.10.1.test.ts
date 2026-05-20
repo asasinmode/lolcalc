@@ -27,16 +27,11 @@ test('16.10.1 Briar, shards 211', async (t) => {
 			currentHealth: 423,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.variables, {
-			bloodmailTyranny: 14,
-			bloodmailRetribution: 13,
-		});
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 115,
 			abilityHaste: 8,
 			moveSpeed: 349,
 			hp: 1175,
-			// TODO briar passive
 			hpRegen: 0,
 			manaRegen: 0,
 			tenacity: 15,

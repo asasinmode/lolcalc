@@ -1695,7 +1695,10 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	}) => void>;
 	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		totalStats: IChampionStats;
+		bonusStats: IChampionStats;
 		effectStats: Partial<IChampionStats>;
+		itemPassivesStats: IChampionStats;
+		itemTotalStats: IChampionStats;
 	}) => void>;
 };
 

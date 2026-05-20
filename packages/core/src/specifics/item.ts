@@ -1125,7 +1125,19 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
-		// TODO retribution passive
+		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {
+			const maxValueAt = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.overlordsBloodmail.itemCalculations.RemainingHealthThreshold, ITEMS_BY_NAME.overlordsBloodmail, damageSource);
+			if (!maxValueAt) {
+				console.warn('[item specifics bloodmail] failed to resolve RemainingHealthThreshold variable value');
+				return 0;
+			}
+
+			const currentHealthP = damageSource.currentHealth.value / (maxHpOverride ?? Math.max(damageSource.stats.value.total.hp, 1));
+			const missingHealthP = 1 - currentHealthP;
+			const maxMissingHealthP = 1 - maxValueAt.value;
+			console.log('bonus ad percentaging', { currentHealthP, missingHealthP, maxMissingHealthP }, maxValueAt);
+			return ITEMS_BY_NAME.overlordsBloodmail.dataValues.MissingHealthAD * Math.min(1, missingHealthP / maxMissingHealthP);
+		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
@@ -1149,16 +1161,33 @@ export const ITEM_SPECIFICS = {
 				},
 				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
+			postTotal: {
+				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
+
+					calculatedVariables.bloodmailRetribution = totalStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
+					totalStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					bonusStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					itemTotalStats.attackDamage += calculatedVariables.bloodmailRetribution;
+				},
+				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
+			},
 		},
 		variables: defineVariables({
 			known: {
 				f1: [],
+				f2: [],
 			},
 			calculate(self) {
 				return {
 					f1: {
 						value: self.stats.value.variables.bloodmailTyranny
 							?? self.stats.value.bonus.attackDamage * ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage,
+					},
+					f2: {
+						value: self.stats.value.variables.bloodmailRetribution
+							?? self.stats.value.bonus.attackDamage,
 					},
 				};
 			},
@@ -1167,9 +1196,18 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<scalehealth>${ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage * 100}% bonus</scalehealth> `,
 					displayedName: 'BonusHPAD',
 				},
+				f2: {
+					displayedName: 'MissingHPAD',
+				},
 			},
 			uninteresting: ['HPToADPercentage', 'MissingHealthAD', 'RemainingHealthThreshold'],
 		}),
+		imgTextLabel: 'Retribution ad increase',
+		imgText(damageSource) {
+			return damageSource.stats.value.variables.bloodmailRetribution
+				? Math.round(damageSource.stats.value.variables.bloodmailRetribution)
+				: 0;
+		},
 	},
 } satisfies IHypotheticalItemSpecifics;
 
