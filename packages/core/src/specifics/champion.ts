@@ -304,8 +304,10 @@ export const CHAMPION_SPECIFICS = {
 	},
 	Naafiri: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Naafiri'>): ComputedRef<number> => computed((): number =>
-			(VARIABLE_CALCULATION_FNS.mFormulaParts(self, (self.champion.value! as typeof INaafiri).abilities.passive.variants[0]!.spellCalculations.PackmateCap) ?? 0)
-			+ (self.champion.value! as typeof INaafiri).abilities.w.variants[0]!.dataValues.PackmatesToAdd[self.abilityLevels.value.w]!,
+			self.champion.value
+				? ((VARIABLE_CALCULATION_FNS.mFormulaParts((self.champion.value as typeof INaafiri).abilities.passive.variants[0]!.spellCalculations.PackmateCap, {}, self) ?? 0)
+					+ (self.champion.value! as typeof INaafiri).abilities.w.variants[0]!.dataValues.PackmatesToAdd[self.abilityLevels.value.w]!)
+				: 0,
 		),
 		setupData(self): { passiveStacks: number } & IDamageSourceInternalDataBase {
 			const maxPassiveStacks = CHAMPION_SPECIFICS.Naafiri.MAX_PASSIVE_STACKS(self);
