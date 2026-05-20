@@ -330,7 +330,7 @@ defineExpose({ header });
 	.item-description,
 	.game-description {
 		img {
-			--at-apply: 'inline-block align-middle size-4';
+			--at-apply: 'inline-block align-middle size-4 z-1 relative';
 		}
 
 		> li {

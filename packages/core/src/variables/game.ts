@@ -339,8 +339,8 @@ export function replaceGameVariables(
 
 		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
 		let metaSuffix = '';
-		const extendedEquals = typeof meta?.extendedEquals !== 'object' || isMeleeRanged === undefined
-			? meta?.extendedEquals
+		const extendedEquals = typeof meta?.extendedEquals !== 'object'
+			? meta?.extendedEquals as string
 			: `${meta.extendedEquals.prefix}${isMeleeRanged === true
 				? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix} | ${meta.extendedEquals.rangedValue}`
 				: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']

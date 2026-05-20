@@ -367,7 +367,7 @@ export const ITEM_SPECIFICS = {
 				BonusHSPCalc: {
 					statIconKey: 'mana',
 					resultsIsPercentage: true,
-					extendedEquals: `<scalemana>${ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}% bonus</scalemana>`,
+					extendedEquals: `<scalemana>${ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}% bonus</scalemana> `,
 				},
 			},
 			uninteresting: tearItem.uninterestingVariables,
@@ -408,7 +408,7 @@ export const ITEM_SPECIFICS = {
 				BonusHSPCalc: {
 					statIconKey: 'mana',
 					resultsIsPercentage: true,
-					extendedEquals: `<scalemana>${ITEMS_BY_NAME.diademOfSongs.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}% bonus</scalemana>`,
+					extendedEquals: `<scalemana>${ITEMS_BY_NAME.diademOfSongs.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}% bonus</scalemana> `,
 				},
 				ManaToHeal: {
 					statIconKey: 'mana',
@@ -450,7 +450,7 @@ export const ITEM_SPECIFICS = {
 				f2: {
 					displayedName: 'APFromMana',
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana * 100)}%</scalemana>`,
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana * 100)}%</scalemana> `,
 				},
 			},
 			uninteresting: ['APFromMana', ...tearItem.uninterestingVariables],
@@ -493,7 +493,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				BonusAPCalc: {
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana * 100)}% bonus</scalemana>`,
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana * 100)}% bonus</scalemana> `,
 				},
 				ShieldValue: {
 					statIconKey: 'mana',
