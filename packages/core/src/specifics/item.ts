@@ -362,10 +362,56 @@ export const ITEM_SPECIFICS = {
 				BonusHSPCalc: {
 					statIconKey: 'mana',
 					resultsIsPercentage: true,
-					extendedEquals: `<scalemana>${ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}%</scalemana>`,
+					extendedEquals: `<scalemana>${ITEMS_BY_NAME.whisperingCirclet.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}% bonus</scalemana>`,
 				},
 			},
 			uninteresting: tearItem.uninterestingVariables,
+		}),
+	},
+	[ITEM_NAME_TO_ID.diademOfSongs]: {
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables }) {
+					const bonusHSP = ((itemBaseStats.mana ?? 0) + itemPassivesStats.mana) * ITEMS_BY_NAME.diademOfSongs.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient / 100;
+					itemPassivesStats.healShieldPower += bonusHSP;
+					calculatedVariables.whisperingDiademAwe = bonusHSP;
+				},
+			},
+		},
+		variables: defineVariables({
+			known: {
+				BonusHSPCalc: [],
+				ManaToHeal: [],
+				f1: [],
+			},
+			calculate(self) {
+				return {
+					BonusHSPCalc: {
+						value: self.stats.value.variables.whisperingDiademAwe
+							? self.stats.value.variables.whisperingDiademAwe * 100
+							: (self.stats.value.bonus.mana * ITEMS_BY_NAME.diademOfSongs.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient),
+					},
+					ManaToHeal: {
+						value: self.stats.value.total.mana * ITEMS_BY_NAME.diademOfSongs.itemCalculations.ManaToHeal.mFormulaParts[0]!.mCoefficient,
+					},
+					f1: {
+						value: 0,
+					},
+				};
+			},
+			meta: {
+				BonusHSPCalc: {
+					statIconKey: 'mana',
+					resultsIsPercentage: true,
+					extendedEquals: `<scalemana>${ITEMS_BY_NAME.diademOfSongs.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient * 100}% bonus</scalemana>`,
+				},
+				ManaToHeal: {
+					statIconKey: 'mana',
+					resultsIsPercentage: true,
+					extendedEquals: `<scalemana>${ITEMS_BY_NAME.diademOfSongs.itemCalculations.ManaToHeal.mFormulaParts[0]!.mCoefficient * 100}%</scalemana>`,
+				},
+			},
+			uninteresting: ['f1', 'AllyCombatDuration'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.archangelsStaff]: {
@@ -600,10 +646,10 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, args, meta) {
-					const bonusHP = ((args.itemBaseStats.mana ?? 0) + args.itemPassivesStats.mana) * ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient;
-					args.itemPassivesStats.hp += bonusHP;
-					meta.calculatedVariables.approachFimbulAwe = bonusHP;
+				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables }) {
+					const bonusHP = ((itemBaseStats.mana ?? 0) + itemPassivesStats.mana) * ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient;
+					itemPassivesStats.hp += bonusHP;
+					calculatedVariables.approachFimbulAwe = bonusHP;
 				},
 			},
 		},
@@ -647,7 +693,7 @@ export const ITEM_SPECIFICS = {
 					type: 'shield',
 				},
 			},
-			uninteresting: ['f2', 'CurrentManaShieldRatio', 'ShieldDuration', 'Multiplier', 'ShieldBase', ...tearItem.uninterestingVariables],
+			uninteresting: ['f2', 'CurrentManaShieldRatio', 'ShieldDuration', 'Multiplier', 'ShieldBase'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.trinity]: {
