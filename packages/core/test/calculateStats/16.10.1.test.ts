@@ -24,8 +24,8 @@ test('16.10.1 Briar, shards 211', async (t) => {
 		const damageSource = await setupDamageSource(fixture, 'Briar', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.overlordsBloodmail],
-			currentHealth: 423,
 		});
+		damageSource.currentHealth.value = 423;
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 115,

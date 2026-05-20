@@ -15,7 +15,7 @@ const overriden: {
 } = { items: [] };
 
 export async function setupDamageSource<T extends IChampionId>(fixture: IPatchOverridesFixture, championId: T, overrides: IOverrides<T> = {}): Promise<DamageSource<T>> {
-	const rv = await new DamageSource({ champion: CHAMPIONS[championId], ...overrides }, true).await();
+	const rv = await new DamageSource({ champion: CHAMPIONS[championId], ...overrides }).await();
 	Object.assign(rv.champion.value!, fixture.champions[championId]);
 
 	if (!(championId in fixture.champions)) {

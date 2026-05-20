@@ -78,6 +78,12 @@
 		}
 	},
 	"items": {
+		"1042": {
+			"name": "Dagger",
+			"stats": {
+				"PercentAttackSpeedMod": 0.1
+			}
+		},
 		"2501": {
 			"name": "Overlord's Bloodmail",
 			"dataValues": {

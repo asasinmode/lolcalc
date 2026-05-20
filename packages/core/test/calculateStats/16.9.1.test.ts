@@ -198,6 +198,38 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			manaRegen: 35,
 		});
 	});
+
+	await t.test('lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, overlord\'s bloodmail endless hunger, , gluttonous greaves', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			...sourceCommon,
+			level: 18,
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.diademOfSongs, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.gluttonousGreaves],
+			internalData: {
+				passiveStacks: 5,
+			} satisfies IInternalDataOf<'Ezreal'>,
+			internalItemData: {
+				feast: 1,
+				slay: 4,
+			} satisfies IInternalItemDataOf<'endlessHunger' | 'gluttonousGreaves'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 424,
+			abilityPower: 150,
+			armor: 95,
+			magicResist: 52,
+			attackSpeed: 1.203,
+			abilityHaste: 90,
+			moveSpeed: 370,
+			hp: 4479,
+			mana: 5565,
+			hpRegen: 15,
+			manaRegen: 51,
+			healShieldPower: 28,
+			omnivamp: 28,
+			tenacity: 20,
+		});
+	});
 });
 
 // TODO make sure to check uncaressed attack speed @ 18

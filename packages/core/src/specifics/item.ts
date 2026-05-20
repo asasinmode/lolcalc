@@ -1132,19 +1132,18 @@ export const ITEM_SPECIFICS = {
 				return 0;
 			}
 
-			const currentHealthP = damageSource.currentHealth.value / (maxHpOverride ?? Math.max(damageSource.stats.value.total.hp, 1));
+			const currentHealthP = Math.min(damageSource.currentHealth.value / (maxHpOverride ?? Math.max(damageSource.stats.value.total.hp, 1)), 1);
 			const missingHealthP = 1 - currentHealthP;
 			const maxMissingHealthP = 1 - maxValueAt.value;
-			console.log('bonus ad percentaging', { currentHealthP, missingHealthP, maxMissingHealthP }, maxValueAt);
 			return ITEMS_BY_NAME.overlordsBloodmail.dataValues.MissingHealthAD * Math.min(1, missingHealthP / maxMissingHealthP);
 		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					const attackDamage = (itemBaseStats.hp + itemPassivesStats.hp) * ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage;
-					itemPassivesStats.attackDamage += attackDamage;
-					calculatedVariables.bloodmailTyranny = attackDamage;
+					const value = (itemBaseStats.hp + itemPassivesStats.hp) * ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage;
 					miscDebug.bloodmailBonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
+					calculatedVariables.bloodmailTyranny = value;
+					itemPassivesStats.attackDamage += value;
 				},
 				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
@@ -1152,11 +1151,10 @@ export const ITEM_SPECIFICS = {
 				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					if (runeShardStats.hp) {
 						const value = runeShardStats.hp * ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage;
+						miscDebug.bloodmailBonusHp! += runeShardStats.hp;
+						calculatedVariables.bloodmailTyranny! += value;
 						itemPassivesStats.attackDamage += value;
 						itemTotalStats.attackDamage += value;
-
-						calculatedVariables.bloodmailTyranny! += value;
-						miscDebug.bloodmailBonusHp! += runeShardStats.hp;
 					}
 				},
 				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
@@ -1164,8 +1162,8 @@ export const ITEM_SPECIFICS = {
 			postTotal: {
 				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
-
 					calculatedVariables.bloodmailRetribution = totalStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
+
 					totalStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					bonusStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
