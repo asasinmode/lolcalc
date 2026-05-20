@@ -79,7 +79,7 @@ export interface IStatsCalculationVariables {
 	apMultipliersBase: number;
 	/** ap gained from rabadon's passive */
 	rabadonMagicalOpus?: number;
-	/** ap gained from archangel'seraph's passive */
+	/** ap gained from archangel/seraph's passive */
 	archangelSeraphAwe?: number;
 	/** ad gained from manamune/muramana's passive */
 	manaMuraAwe?: number;
@@ -89,14 +89,23 @@ export interface IStatsCalculationVariables {
 	whisperingDiademAwe?: number;
 	/** attack speed value reduced by frozen heart's passive */
 	frozenHeartCaress?: number;
+	/** ad gained from overlord's bloodmail bonus hp to ad passive */
+	bloodmailTyranny?: number;
+	/** ad gained from overlord's bloodmail missing hp ad increase passive */
+	bloodmailRetribution?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
+	// TODO maybe merge these into single total bonus hp like rabadon does
 	/** bonus hp used in riftmaker passive calculation */
 	riftmakerBonusHp?: number;
+	/** bonus hp used in overlord's bloodmail passive calculation */
+	bloodmailBonusHp?: number;
 	/** bonus mana used in tear items' passives' calculations */
 	tearItemBonusMana?: number;
+	/** % ad gained from bloodmail's retribution passive */
+	bloodmailRetributionPercentage?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

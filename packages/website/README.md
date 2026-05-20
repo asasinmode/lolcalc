@@ -143,6 +143,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] calculations
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
+  - [?] heal and shield power affecting known shields & lifesteal
   - [ ] items passives
   - [ ] resolved item passives values for target like randuin/tabi
   - [ ] hook priorities in one file for easier precedence management
@@ -154,9 +155,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] basic attack damage
   - [ ] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
   - [x] DamageSource.internalData set from utils/champion.ts
-  - [ ] `{{ Item_Melee_Ranged_Split_Dynamic }}` and `@lolcalcChampRange@` try to do what doran's shield does
+  - [x] `{{ Item_Melee_Ranged_Split_Dynamic }}` and `@lolcalcChampRange@` try to do what doran's shield does
   - [ ] resolve game variables
-  - [ ] maybe dynamic variables can be cached on damage source under a key then reused
+  - [x] maybe dynamic variables can be cached on damage source under a key then reused
   - [x] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
   - [x] check if can save only gold cost, not whole object

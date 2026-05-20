@@ -8,6 +8,11 @@ import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_I
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { defineVariables } from './index.ts';
 
+const HOOK_PRIORITIES = {
+	[ITEM_NAME_TO_ID.guinsoo]: 10,
+	[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
+};
+
 const tearItem = {
 	specific: {
 		MAX_STACKS: ITEMS_BY_NAME.tear.dataValues.MaxMana,
@@ -992,7 +997,7 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.bonusAttackSpeedPercent += bonusAttackSpeedPercent;
 					itemPassivesStats.attackSpeed += bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 				},
-				priority: 10,
+				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.guinsoo],
 			},
 		},
 	},
@@ -1115,6 +1120,33 @@ export const ITEM_SPECIFICS = {
 		},
 		imgActive(internalData: { cShadows: number }) {
 			return internalData.cShadows;
+		},
+	},
+	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
+		// TODO retribution passive
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
+					const attackDamage = (itemBaseStats.hp + itemPassivesStats.hp) * ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage;
+					itemPassivesStats.attackDamage += attackDamage;
+					calculatedVariables.bloodmailTyranny = attackDamage;
+					miscDebug.bloodmailBonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
+				},
+				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
+			},
+			preBonus: {
+				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+					if (runeShardStats.hp) {
+						const value = runeShardStats.hp * ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage;
+						itemPassivesStats.attackDamage += value;
+						itemTotalStats.attackDamage += value;
+
+						calculatedVariables.bloodmailTyranny! += value;
+						miscDebug.bloodmailBonusHp! += runeShardStats.hp;
+					}
+				},
+				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
+			},
 		},
 	},
 } satisfies IHypotheticalItemSpecifics;

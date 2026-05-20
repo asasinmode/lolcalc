@@ -180,6 +180,24 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 			omnivamp: 5,
 		});
 	});
+
+	await t.test('lvl 11 | seraph, muramana, fimbulwinter, diadem of songs, overlord\'s bloodmail, gluttonous greaves', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
+			...sourceCommon,
+			level: 11,
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.diademOfSongs, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.gluttonousGreaves],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 315,
+			abilityPower: 150,
+			/* in game it shows 3571, see help page known discrepancies */
+			hp: 3570,
+			mana: 4989,
+			healShieldPower: 28,
+			manaRegen: 35,
+		});
+	});
 });
 
 // TODO make sure to check uncaressed attack speed @ 18
