@@ -363,13 +363,8 @@ defineExpose({ header });
 		}
 
 		var {
-			--at-apply: 'font-500';
+			--at-apply: 'font-500 rounded bg-neutral-800 px-0.75 py-0.25 -mx-0.75 -my-0.25';
 			font-style: normal;
-			text-decoration-line: underline;
-			text-decoration-thickness: 0.1em;
-			text-decoration-color: var(--unknown-clr);
-			text-decoration-skip-ink: auto;
-			text-decoration-style: dashed;
 		}
 
 		unknown {
