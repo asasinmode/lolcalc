@@ -112,8 +112,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [key, value + itemPassivesStats[key as IChampionStatName]])) as IChampionStats;
 	calculatedVariables.apMultipliersBase += itemTotalStats.abilityPower;
 
-	// TODO check if works with item passives
-	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemBaseStats.attackDamage, itemBaseStats.abilityPower);
+	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
 
 	const runeShardStats: Partial<IChampionStats> = {};
 	if (source.calculateStatsHooks.all.value.onRuneShards) {
