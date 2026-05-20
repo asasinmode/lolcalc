@@ -425,14 +425,23 @@ export function replaceGameVariables(
 		for (const [variableName, meta] of additionalVariables) {
 			let value = dynamicVariables!.values?.[variableName]?.value as number | [number, number] | undefined;
 			if (value !== undefined) {
-				if (meta?.type && modifyVariableFunctions[meta.type]) {
-					value = Array.isArray(value)
-						? [
-								modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[0]),
-								modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[1]),
-							]
-						: modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value);
+				if (Array.isArray(value)) {
+					value = [...value];
+					value[0] = roundVariable(value[0]);
+					value[1] = roundVariable(value[1]);
+				} else {
+					value = roundVariable(value);
 				}
+
+				if (meta?.type && modifyVariableFunctions[meta.type]) {
+					if (Array.isArray(value)) {
+						value[0] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[0]));
+						value[1] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[1]));
+					} else {
+						value = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value));
+					}
+				}
+
 				variables.set(variableName, { baseValue: value, value });
 			}
 		}

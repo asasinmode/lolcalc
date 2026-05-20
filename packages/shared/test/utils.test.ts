@@ -15,5 +15,6 @@ test('@lolcalc/shared/utils', async (t) => {
 		/* damage results calculated item variables */
 		assert.strictEqual(roundVariable(105.0375).toString(), '105.04', 'results muramana');
 		assert.strictEqual(roundVariable(70.025).toString(), '70.03', 'results muramana');
+		assert.strictEqual(roundVariable(272.66499999999996).toString(), '272.66', 'results fimbulwinter computed shield');
 	});
 });
