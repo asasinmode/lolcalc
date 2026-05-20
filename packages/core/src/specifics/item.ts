@@ -590,6 +590,14 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.fimbulwinter]: {
+		internalDataProperties: ['enemiesNearby'],
+		setupData(self) {
+			self.internalItemData.value.enemiesNearby = clamp(0, self.internalItemData.value.enemiesNearby ?? 0, 1);
+			return { enemiesNearby: 0 };
+		},
+		imgActive(internalData: { enemiesNearby: number }) {
+			return internalData.enemiesNearby;
+		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, args, meta) {

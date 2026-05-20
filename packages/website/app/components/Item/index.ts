@@ -79,7 +79,10 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: ItemExtraTearItem,
 	},
 	[ITEM_NAME_TO_ID.fimbulwinter]: {
-		extras: ItemExtraTearItem,
+		extras: [
+			ItemExtraTearItem,
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.fimbulwinter), 'enemiesNearby', 'more than one enemy nearby', false),
+		],
 	},
 	[ITEM_NAME_TO_ID.trinity]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.trinity), 'quicken', 'Quicken'),
