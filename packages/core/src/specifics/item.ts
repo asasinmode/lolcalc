@@ -1148,6 +1148,26 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate(self) {
+				return {
+					f1: {
+						value: self.stats.value.variables.bloodmailTyranny
+							?? self.stats.value.bonus.attackDamage * ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage,
+					},
+				};
+			},
+			meta: {
+				f1: {
+					extendedEquals: `<scalehealth>${ITEMS_BY_NAME.overlordsBloodmail.dataValues.HPToADPercentage * 100}% bonus</scalehealth> `,
+					displayedName: 'BonusHPAD',
+				},
+			},
+			uninteresting: ['HPToADPercentage', 'MissingHealthAD'],
+		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
 
