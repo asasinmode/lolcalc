@@ -142,7 +142,7 @@ export const EFFECT_SPECIFICS = {
 			(damageSource) => {
 				if (damageSource.stats.value.variables.frozenHeartCaress !== undefined) {
 					const value = -damageSource.stats.value.variables.frozenHeartCaress;
-					const percentValue = value / damageSource.stats.value.base.attackSpeedRatio * 100;
+					const percentValue = value / (damageSource.stats.value.base.attackSpeedRatio || 1) * 100;
 					return new Map([
 						['attack speed reduction', { baseValue: value, value }],
 						['attack speed % reduction', { baseValue: percentValue, value: percentValue, meta: { resultsIsPercentage: true } }],
