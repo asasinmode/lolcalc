@@ -1015,7 +1015,7 @@ export const ITEM_SPECIFICS = {
 					/** ap gained from passive */
 					f1: {
 						value: self.stats.value.variables.rabadonMagicalOpus
-							?? (self.stats.value.total.abilityPower * ITEMS_BY_NAME.rabadon.dataValues.APAmp),
+							?? (self.stats.value.variables.apMultipliersBase * ITEMS_BY_NAME.rabadon.dataValues.APAmp),
 					},
 				};
 			},
