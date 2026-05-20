@@ -290,7 +290,7 @@ function computeSectionRowColumn(
 		isUnknown: false,
 	};
 
-	if (!source || (!source.listedChampion.value && section.abilityId.type !== 'item')) {
+	if (!source || (!source.listedChampion.value && (section.abilityId.type === ABILITY_TYPE.champion || section.abilityId.type === 'all'))) {
 		rv.value = '-';
 	} else if (source.listedChampion.value && source.listedChampion.value.id !== source.champion.value?.id) {
 		rv.value = 'loading...';
