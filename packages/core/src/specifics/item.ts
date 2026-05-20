@@ -627,7 +627,10 @@ export const ITEM_SPECIFICS = {
 						value: 0,
 					},
 					ComputedShield: {
-						value: 123,
+						value: self.hasMana.value
+							? (ITEMS_BY_NAME.fimbulwinter.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber + self.currentAbilityResource.value * ITEMS_BY_NAME.fimbulwinter.dataValues.CurrentManaShieldRatio)
+							* (1 + ((self.internalItemData.value).enemiesNearby ? ITEMS_BY_NAME.fimbulwinter.dataValues.Multiplier : 0))
+							: 0,
 					},
 				};
 			},
