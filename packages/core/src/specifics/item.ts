@@ -4,8 +4,9 @@ import type { IInternalItemDataOf, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VARIABLE_TYPE } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
+import { VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables } from './index.ts';
 
 const HOOK_PRIORITIES = {
@@ -414,6 +415,7 @@ export const ITEM_SPECIFICS = {
 					statIconKey: 'mana',
 					resultsIsPercentage: true,
 					extendedEquals: `<scalemana>${ITEMS_BY_NAME.diademOfSongs.itemCalculations.ManaToHeal.mFormulaParts[0]!.mCoefficient * 100}%</scalemana>`,
+					type: VariableType.heal,
 				},
 			},
 			uninteresting: ['f1', 'AllyCombatDuration'],
@@ -498,7 +500,7 @@ export const ITEM_SPECIFICS = {
 				ShieldValue: {
 					statIconKey: 'mana',
 					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.seraphsEmbrace.itemCalculations.ShieldValue.mFormulaParts[0]!.mCoefficient * 100)}%</scalemana>`,
-					type: VARIABLE_TYPE.shield,
+					type: VariableType.shield,
 				},
 			},
 			uninteresting: ['f5', 'ShieldDuration', 'HealthThreshold'],
@@ -691,11 +693,11 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient * 100)}% bonus</scalemana> `,
 				},
 				ShieldBase: {
-					type: 'shield',
+					type: VariableType.shield,
 				},
 				ComputedShield: {
 					isAdditional: true,
-					type: 'shield',
+					type: VariableType.shield,
 				},
 			},
 			uninteresting: ['f2', 'CurrentManaShieldRatio', 'ShieldDuration', 'Multiplier', 'ShieldBase'],

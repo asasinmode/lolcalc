@@ -393,10 +393,11 @@ export const EFFECT_OBJECT_NAME = {
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
 
-export const VARIABLE_TYPE = {
+export const VariableType = {
 	shield: 'shield',
+	heal: 'heal',
 	physical: 'physical',
 	magic: 'magic',
 } as const;
 
-export type IVariableType = typeof VARIABLE_TYPE[keyof typeof VARIABLE_TYPE];
+export type IVariableType = typeof VariableType[keyof typeof VariableType];

@@ -78,6 +78,33 @@
 		}
 	},
 	"items": {
+		"2501": {
+			"name": "Overlord's Bloodmail",
+			"dataValues": {
+				"HPToADPercentage": 0.025,
+				"MissingHealthAD": 0.12,
+				"MissingHealthThreshold": 0.7
+			},
+			"itemCalculations": {
+				"RemainingHealthThreshold": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": -1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mDataValue": "MissingHealthThreshold",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
+		},
 		"2503": {
 			"name": "Blackfire Torch",
 			"stats": {
@@ -96,6 +123,111 @@
 				"MinionAP": 0.02,
 				"MonsterDPS": 40,
 				"MonsterAP": 0.02
+			}
+		},
+		"2517": {
+			"name": "Endless Hunger",
+			"dataValues": {
+				"OmnivampOnTakedown": 0.15,
+				"OmnivampDuration": 8,
+				"TakedownWindow": 3
+			},
+			"itemCalculations": {
+				"{e4d9f16b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.13,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{87892572}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"stringCalculations": {
+				"HasteFromAD": {
+					"MeleeResult": "@HasteFromADMelee@",
+					"RangedResult": "@HasteFromADRanged@",
+					"DefaultResult": "@HasteFromADMelee@"
+				}
+			}
+		},
+		"2526": {
+			"name": "Whispering Circlet",
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatHPPoolMod": 200,
+				"PercentBaseMPRegenMod": 0.75,
+				"PercentHealingAmountMod": 0.08
+			},
+			"dataValues": {
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 5,
+				"ManaPerCharge": 4,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"BonusHSPCalc": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.005,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"2530": {
+			"name": "Diadem of Songs",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatHPPoolMod": 200,
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.08
+			},
+			"dataValues": {
+				"PercentManaToHeal": 0.01,
+				"AllyRangeCheck": 900,
+				"AllyCombatDuration": 3
+			},
+			"itemCalculations": {
+				"BonusHSPCalc": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.005,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ManaToHeal": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.008,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
 			}
 		},
 		"3003": {
@@ -334,6 +466,39 @@
 							"mCoefficient": 0.15,
 							"mStatFormula": 2,
 							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3121": {
+			"name": "Fimbulwinter",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatHPPoolMod": 550,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"Cooldown": 8,
+				"ShieldDuration": 3,
+				"CurrentManaShieldRatio": 0.045,
+				"Multiplier": 0.8
+			},
+			"itemCalculations": {
+				"BonusHPFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.15,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ShieldBase": {
+					"mFormulaParts": [
+						{
+							"mNumber": 100,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
