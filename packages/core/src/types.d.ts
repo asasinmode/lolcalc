@@ -38,7 +38,7 @@ export interface IReplaceGameVariablesRV {
 	variables: Map<string, IReplacedGameVariable>;
 	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
 	variablesAllValues: Map<string, (string | number)[]>;
-	unknownVariables: [rawName: string, actualName: string | undefined][];
+	unknownVariables: [rawName: string, actualName?: string][];
 	/** whether any of the detected variables has additional info expected to be shown in the extended version (when holding shift) */
 	anyExtendedVariables: boolean;
 }

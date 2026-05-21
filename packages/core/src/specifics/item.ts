@@ -58,13 +58,13 @@ const gluttonousGreavesSpecific = {
 		preItemTotal: {
 			handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
 				const { slay } = self.internalItemData.value as IInternalItemDataOf<'gluttonousGreaves'>;
-				calculatedVariables.gluttonousImmortalOmnivamp = (slay ?? 0) / 100;
+				calculatedVariables.gluttonousImmortalOmnivamp = (slay ?? 0) * ITEMS_BY_NAME.gluttonousGreaves.dataValues.OmnivampOnTakedown;
 				itemPassivesStats.omnivamp += calculatedVariables.gluttonousImmortalOmnivamp;
 
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
 					itemStatIncreases[bootsId] ??= {};
-					itemStatIncreases[bootsId]!.PercentOmnivampMod = slay;
+					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp * 100;
 				}
 			},
 		},

@@ -41,28 +41,39 @@ function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[
 	return value.value;
 }
 
-interface IItemVariableParams {
-	item: IItem;
+interface IBaseVariableParams {
 	dynamicVariables?: IDynamicVariables;
-	isRanged?: boolean;
-	damageSource?: DamageSource;
-	// /** if present, missing variables will try their hashed variants. If found, they will be renamed to the value. Expected to be used only in `updateData` */
-	// hashFnv1a?: (value: string) => string;
-	// /** indicates that the currently resolved variable is a hash made from this value, which if resolved will rename the hash to that value. Expected to be used only in `updateData` */
-	// hashedFrom?: string;
+	/** any other variables that were accessed while trying to resolve the current one. Used in `updateData` for trying to resolve hashed versions of unknown variables */
+	accessedVariables?: Map<string, string[]>;
 }
 
-export function itemVariableValue(variable: string, {
-	item,
-	isRanged,
-	damageSource,
-	dynamicVariables = {},
-	// hashFnv1a,
-	// hashedFrom,
-}: IItemVariableParams): IVariableValueResult {
+interface IItemVariableParams extends IBaseVariableParams {
+	item: IItem;
+	isRanged?: boolean;
+	damageSource?: DamageSource;
+}
+
+export function itemVariableValue(
+	variable: string,
+	params: IItemVariableParams,
+	overrideDynamicVariables?: IDynamicVariables,
+	/** if subvariables are being resolved, like for melee/ranged values, track what they are being resolved from */
+	accessedFrom?: string,
+): IVariableValueResult {
+	const {
+		item,
+		isRanged,
+		damageSource,
+		dynamicVariables = overrideDynamicVariables ?? {},
+	} = params;
+
 	const rv: IVariableValueResult = {
 		isUninteresting: dynamicVariables.uninteresting?.includes(variable),
 	};
+
+	if (accessedFrom) {
+		params.accessedVariables?.getOrInsert(accessedFrom, [])?.push(variable);
+	}
 
 	if (dynamicVariables.meta?.[variable]) {
 		rv.meta = dynamicVariables.meta[variable];
@@ -93,28 +104,17 @@ export function itemVariableValue(variable: string, {
 		if (isRanged === undefined) {
 			rv.value = [
 				itemVariableValue(item.stringCalculations[variable].MeleeResult.slice(1, -1), {
-					item,
-					dynamicVariables,
+					...params,
 					isRanged: false,
-					damageSource,
-				}).value as number | undefined,
+				}, overrideDynamicVariables, variable).value as number | undefined,
 				itemVariableValue(item.stringCalculations[variable].RangedResult.slice(1, -1), {
-					item,
-					dynamicVariables,
+					...params,
 					isRanged: true,
-					damageSource,
-				}).value as number | undefined,
+				}, overrideDynamicVariables, variable).value as number | undefined,
 			];
 		} else {
 			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
-			rv.value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), {
-				item,
-				dynamicVariables,
-				isRanged,
-				damageSource,
-				// hashFnv1a,
-				// hashedFrom,
-			}).value;
+			rv.value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), params, overrideDynamicVariables, variable).value;
 		}
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
@@ -125,29 +125,19 @@ export function itemVariableValue(variable: string, {
 		}
 	}
 
-	// if (rv.value === undefined && hashFnv1a && !hashedFrom) {
-	// 	return itemVariableValue(hashFnv1a(variable), {
-	// 		item,
-	// 		dynamicVariables,
-	// 		isRanged,
-	// 		damageSource,
-	// 		hashFnv1a,
-	// 		hashedFrom: variable,
-	// 	});
-	// }
-
 	return rv;
 }
 
-interface IRuneVariableParams {
+interface IRuneVariableParams extends IBaseVariableParams {
 	rune: IRune;
 	dynamicVariables?: IDynamicVariables;
 }
 
-export function runeVariableValue(variable: string, {
-	rune,
-	dynamicVariables = {},
-}: IRuneVariableParams): IVariableValueResult {
+export function runeVariableValue(variable: string, params: IRuneVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
+	const {
+		rune,
+		dynamicVariables = overrideDynamicVariables ?? {},
+	} = params;
 	const rv: IVariableValueResult = {};
 
 	const [variableName, ...dotPath] = variable.split('.');
@@ -196,7 +186,7 @@ interface IChampionAbilityVariableVariant {
 	[key: string]: any;
 }
 
-interface IChampionAbilityVariableParams {
+interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityVariant: IChampionAbilityVariableVariant;
 	dynamicVariables?: IDynamicVariables;
 	abilityLevel?: number;
@@ -205,12 +195,13 @@ interface IChampionAbilityVariableParams {
 }
 
 // TODO make sure it handles hextech soul description
-export function championAbilityVariableValue(variable: string, {
-	abilityVariant,
-	dynamicVariables = {},
-	abilityLevel = 1,
-	allAbilitiesVariants = [],
-}: IChampionAbilityVariableParams): IVariableValueResult {
+export function championAbilityVariableValue(variable: string, arg: IChampionAbilityVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
+	const {
+		abilityVariant,
+		dynamicVariables = overrideDynamicVariables ?? {},
+		abilityLevel = 1,
+		allAbilitiesVariants = [],
+	} = arg;
 	const rv: IVariableValueResult = {};
 
 	const colonIndex = variable.indexOf(':');
@@ -350,13 +341,12 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
+		variableValueFunctionData.accessedVariables ??= new Map();
 		let { value: variable, isMeleeRanged, actualVariableName, allValues, isDynamic, meta, isUninteresting } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
-				: runeVariableValue)(variableName, options.overrideVariables
-			? { ...variableValueFunctionData, dynamicVariables: options.overrideVariables }
-			: variableValueFunctionData as any);
+				: runeVariableValue)(variableName, variableValueFunctionData as any, options.overrideVariables);
 
 		/*
 		 * if meta's present, the variable was most likely gotten from dynamicVariables which store their values cached on `DamageSource`
@@ -413,6 +403,13 @@ export function replaceGameVariables(
 
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
+			const accessedVariables = variableValueFunctionData.accessedVariables?.get(variableName);
+			if (accessedVariables) {
+				for (const accessedVariable of accessedVariables) {
+					unknownVariables.push([accessedVariable]);
+				}
+			}
+
 			return `${tagWrapStart}<unknown>@${replaceWithName ? (meta?.displayedName ?? variableName) : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
 		}
 
@@ -425,6 +422,13 @@ export function replaceGameVariables(
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
 				unknownVariables.push([name, actualVariableName]);
+				const accessedVariables = variableValueFunctionData.accessedVariables?.get(variableName);
+				if (accessedVariables) {
+					for (const accessedVariable of accessedVariables) {
+						unknownVariables.push([accessedVariable]);
+					}
+				}
+
 				return `${tagWrapStart}<unknown>@${replaceWithName ? (meta?.displayedName ?? variableName) : name}@</unknown>${tagWrapEnd}`;
 			}
 
@@ -555,7 +559,7 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 } satisfies IHypotheticalVariableCalculationFns;
 
-export type IHypotheticalVariableCalculationFns = Record<string, (variable: any, whole: any, self?: DamageSource) => IVariableValueResult | undefined>;
+type IHypotheticalVariableCalculationFns = Record<string, (variable: any, whole: any, self?: DamageSource) => IVariableValueResult | undefined>;
 
 interface IGameVariablesByType {
 	ByCharLevelBreakpointsCalculationPart: {
