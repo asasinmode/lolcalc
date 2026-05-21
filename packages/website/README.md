@@ -144,6 +144,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
   - [?] heal and shield power affecting known shields & lifesteal
+  - [?] cap attack speed
   - [ ] items passives
   - [ ] resolved item passives values for target like randuin/tabi
   - [ ] hook priorities in one file for easier precedence management
@@ -159,7 +160,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] resolve game variables
   - [x] maybe dynamic variables can be cached on damage source under a key then reused
   - [x] think of something other than spread copying `{...champion, dynamicValues: ...}`
-  - [ ] check if can always lowercase match variables
+  - [ ] check if can always lowercase match variables. Probably can, not sure if worth it because it would have to navigate whole object instead of trying to dot access? If implemented, check renaming variables resolved with different case like cosmic drive `MoveSpeedAmount`
   - [x] check if can save only gold cost, not whole object
   - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)` / note in help page the discrepancy
   - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?

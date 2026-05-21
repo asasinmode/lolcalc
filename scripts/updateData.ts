@@ -1191,7 +1191,7 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	const variableDebug = {
 		category: 'item',
 		variables: {
-			variableSourceKeys: [],
+			variableSourceKeys: ['itemCalculations'],
 			variableType: 'item',
 			variableValueParameters: {
 				item,
@@ -1371,12 +1371,22 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 		const { unknownVariables } = replaceGameVariables(
 			stringtableReplaced,
 			variableType as any,
-			{ ...variableValueParameters, dynamicVariables: variableValueParameters.dynamicVariables?.default, hashFnv1a } as any,
+			variableValueParameters as any,
+			undefined,
+			{ overrideVariables: variableValueParameters.dynamicVariables?.default },
 		);
+
+		let unknownChanged = false;
 
 		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
-			const hash = hashRuneVariable(variableName);
+			const subaccessedVariables = variableValueParameters.accessedVariables?.get(variableName);
+			if (subaccessedVariables?.values().some(variable => !unknownVariables.some(unknownV => unknownV[0] === variable))) {
+				unknownChanged = true;
+				unknownVariables.splice(i, 1);
+				continue;
+			}
+			const hash = hashFnv1a(variableName);
 			for (const sourceKey of variableSourceKeys as (keyof typeof variableSource)[]) {
 				let rename: [from: string, to: string] | undefined;
 
@@ -1401,12 +1411,18 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 					variableSource[sourceKey].__renamedVariables[from] = to;
 					variableSource[sourceKey][from] = undefined;
 					unknownVariables.splice(i, 1);
+					unknownChanged = true;
 					continue outer;
 				}
 			}
 		}
 		if (unknownVariables.length) {
 			debug[category].variables.set(key, unknownVariables.map(v => v[0]));
+		}
+
+		// TODO probably shouldn't do that, it's expected to happen when some unknown variables were resolved using their hashes. Rerun debug then to see if the newly resolved variables are actually known or also unknown but at least without a hash
+		if (unknownChanged) {
+			debugStringVariables(value, variableDebug);
 		}
 	}
 
@@ -1948,12 +1964,9 @@ function stringifyObject(obj: object) {
 	return json.replace(/"__ARRAY__(.*?)__ARRAY__"/g, '$1');
 }
 
-function hashRuneVariable(variable: string): string {
-	return `{${hashFnv1a(variable)}}`;
-}
-
 function hashFnv1a(value: string): string {
-	return fnv1a(value.toLowerCase(), { size: 32 }).toString(16);
+	const rv = fnv1a(value.toLowerCase(), { size: 32 }).toString(16);
+	return `{${rv}}`;
 }
 
 // TODO champion variables hash resolving possibly

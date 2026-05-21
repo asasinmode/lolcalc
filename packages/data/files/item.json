@@ -1463,21 +1463,7 @@
 				"TakedownWindow": 3
 			},
 			"itemCalculations": {
-				"{e4d9f16b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 5,
-							"__type": "NumberCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.13,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"{87892572}": {
+				"HasteFromADRanged": {
 					"mFormulaParts": [
 						{
 							"mNumber": 5,
@@ -1487,6 +1473,24 @@
 							"mStat": 2,
 							"mStatFormula": 2,
 							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"__renamedVariables": {
+					"{87892572}": "HasteFromADRanged",
+					"{e4d9f16b}": "HasteFromADMelee"
+				},
+				"HasteFromADMelee": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.13,
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
@@ -7522,13 +7526,16 @@
 				"ItemCooldown": 10
 			},
 			"itemCalculations": {
-				"MoveSpeedAmount": {
+				"MovespeedAmount": {
 					"mFormulaParts": [
 						{
 							"mNumber": 20,
 							"__type": "NumberCalculationPart"
 						}
 					]
+				},
+				"__renamedVariables": {
+					"MoveSpeedAmount": "MovespeedAmount"
 				}
 			},
 			"itemGroups": [

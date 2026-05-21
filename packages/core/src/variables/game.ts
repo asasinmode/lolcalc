@@ -44,7 +44,7 @@ function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[
 interface IBaseVariableParams {
 	dynamicVariables?: IDynamicVariables;
 	/** any other variables that were accessed while trying to resolve the current one. Used in `updateData` for trying to resolve hashed versions of unknown variables */
-	accessedVariables?: Map<string, string[]>;
+	accessedVariables?: Map<string, Set<string>>;
 }
 
 interface IItemVariableParams extends IBaseVariableParams {
@@ -72,7 +72,7 @@ export function itemVariableValue(
 	};
 
 	if (accessedFrom) {
-		params.accessedVariables?.getOrInsert(accessedFrom, [])?.push(variable);
+		params.accessedVariables?.getOrInsert(accessedFrom, new Set())?.add(variable);
 	}
 
 	if (dynamicVariables.meta?.[variable]) {
