@@ -56,9 +56,10 @@ const gluttonousGreavesSpecific = {
 	},
 	calculateHooks: {
 		preItemTotal: {
-			handler(self, { itemPassivesStats, itemStatIncreases }) {
+			handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
 				const { slay } = self.internalItemData.value as IInternalItemDataOf<'gluttonousGreaves'>;
-				itemPassivesStats.omnivamp += (slay ?? 0) / 100;
+				calculatedVariables.gluttonousImmortalOmnivamp = (slay ?? 0) / 100;
+				itemPassivesStats.omnivamp += calculatedVariables.gluttonousImmortalOmnivamp;
 
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
@@ -1035,6 +1036,16 @@ export const ITEM_SPECIFICS = {
 		},
 		imgActive(internalData: { feast: number }) {
 			return internalData.feast;
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'endlessHunger'>).feast) {
+						calculatedVariables.endlessOmnivamp = ITEMS_BY_NAME.endlessHunger.dataValues.OmnivampOnTakedown;
+						itemPassivesStats.omnivamp += calculatedVariables.endlessOmnivamp;
+					}
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.mawOfMalmortius]: {

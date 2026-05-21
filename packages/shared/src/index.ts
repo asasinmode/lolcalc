@@ -93,6 +93,12 @@ export interface IStatsCalculationVariables {
 	bloodmailTyranny?: number;
 	/** ad gained from overlord's bloodmail missing hp ad increase passive */
 	bloodmailRetribution?: number;
+	/** omnivamp gained from endless hunger's feast passive */
+	endlessOmnivamp?: number;
+	/** ability haste gained from endless hunger's famine passive */
+	endlessHaste?: number;
+	/** omnivamp gained from gluttonous greaves/immortal path's passive */
+	gluttonousImmortalOmnivamp?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
