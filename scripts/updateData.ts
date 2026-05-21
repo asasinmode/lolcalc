@@ -624,16 +624,16 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 
 					(textData.data.runes.shards.slotValues as any)[perkName] = {
 						name: getStringtableValue(mDisplayNameLocalizationKey, `rune shards ${slotKey} ${perkKey} name`),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `rune shards ${slotKey} ${perkKey} tooltip`, variables: { variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] } }),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `rune shards ${slotKey} ${perkKey} tooltip`, variables: { variableType: 'rune', variableValueParameters: { rune: slotValue }, variableSourceKeys: ['effectAmount'] } }),
 						tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, {
 							category: 'rune',
 							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
 							variables: {
 								variableType: 'rune',
-								variableValueParameters: [
-									slotValue,
-									(RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.variables,
-								],
+								variableValueParameters: {
+									rune: slotValue,
+									dynamicVariables: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.variables,
+								},
 								variableSourceKeys: ['effectAmount'],
 							},
 						}),
@@ -734,7 +734,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 			variables: {
 				variableSourceKeys: ['DataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: [stackAbility, undefined, undefined, allSpells],
+				variableValueParameters: { abilityVariant: stackAbility, allAbilitiesVariants: allSpells },
 			},
 		});
 		const soul = getStringtableValue(soulTooltipKey, {
@@ -743,7 +743,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 			variables: {
 				variableSourceKeys: ['DataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: [soulAbility, undefined, undefined, allSpells],
+				variableValueParameters: { abilityVariant: soulAbility, allAbilitiesVariants: allSpells },
 			},
 		});
 
@@ -1150,6 +1150,10 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
  * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that gets special treatment in `@lolcalc/core/variables/game` and `@lolcalc/core/specifics/index`
  */
 function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
+	if (item.id !== ITEM_NAME_TO_ID.endlessHunger) {
+		return;
+	}
+
 	/* for more info about where these are used/what they turn into check `app/composables/useText.ts` */
 	/**
 		* `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
@@ -1194,9 +1198,9 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 		variables: {
 			variableSourceKeys: [],
 			variableType: 'item',
-			variableValueParameters: [
+			variableValueParameters: {
 				item,
-				{
+				dynamicVariables: {
 					known: Object.assign(
 						/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
 						{ lolcalcChampRange: [1, 2], ChampRange: [1, 2] },
@@ -1204,7 +1208,7 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 					),
 					default: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.variables?.default,
 				},
-			],
+			},
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
@@ -1277,7 +1281,7 @@ function createRuneSlotData(dataKey: string, data: any) {
 		category: 'rune' as const,
 		variables: {
 			variableType: 'rune',
-			variableValueParameters: [value],
+			variableValueParameters: { rune: value },
 			variableSourceKeys: ['calculations', 'effectAmount'],
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
@@ -1308,11 +1312,11 @@ async function loadRcpFeLolCollectionsCss() {
 	}
 }
 
-type IStringtableVariableDebug = IBaseStringtableVariableDebug<'item', IGameVariableValueParameters['item']>
-	| IBaseStringtableVariableDebug<'rune', IGameVariableValueParameters['rune']>
-	| IBaseStringtableVariableDebug<'championAbility', IGameVariableValueParameters['championAbility']>;
+type IStringtableVariableDebug = IBaseStringtableVariableDebug<'item'>
+	| IBaseStringtableVariableDebug<'rune'>
+	| IBaseStringtableVariableDebug<'championAbility'>;
 
-interface IBaseStringtableVariableDebug<T extends IGameVariableType, P extends IGameVariableValueParameters[T] = IGameVariableValueParameters[T]> {
+interface IBaseStringtableVariableDebug<T extends IGameVariableType> {
 	category: keyof typeof debug;
 	/** identifier of the variable, like rune-X-tooltipShort */
 	key: string;
@@ -1320,19 +1324,13 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType, P extends I
 		/** type of the game variable being resolved */
 		variableType: T;
 		/** parameters of the function used for resolving game variables except the dynamicValues parameter has both `known`, which will used in resolving stringtable variable, and `default`, which will be used in resolving game variable */
-		variableValueParameters: OverrideDynamicVariablesParam<P>;
+		variableValueParameters: Omit<IGameVariableValueParameters[T], 'dynamicVariables'> & { dynamicVariables?: Pick<ISpecificVariables, 'known' | 'default'> };
 		/** the keys under which variables can be found on the target of the replacement. They will be used to replace recognized variables with their resolved names if they are hashed */
 		variableSourceKeys: string[];
 	};
 	/** the object under which to save the stringtable variables. `textData` by default */
 	stringtableVariableSaveUnder?: { stringtable?: Record<string, string> };
 }
-
-/** done (implemented below in `debugStringVariables`) because stringtable needs `known` to resolve and save all possible stringtable variables while game expects actual values (any non-undefined) to not mark variables as unknown */
-type OverrideDynamicVariablesParam<P extends any[]>
-	= P extends [infer First, any?, ...infer Rest]
-		? [First, Pick<ISpecificVariables, 'known' | 'default'>?, ...Rest]
-		: never;
 
 function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug, optional?: boolean) {
 	const value = stringtable[path.toLowerCase()];
@@ -1348,7 +1346,7 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 function debugStringVariables(value: string, variableDebug: IStringtableVariableDebug) {
 	const { category, key, stringtableVariableSaveUnder, variables } = variableDebug;
 
-	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceStringtableVariables(value, stringtable, { values: variables?.variableValueParameters[1]?.known }, false);
+	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceStringtableVariables(value, stringtable, { values: variables?.variableValueParameters.dynamicVariables?.known }, false);
 
 	if (stringtableVariables.size && stringtableVariableSaveUnder) {
 		stringtableVariableSaveUnder.stringtable ||= {};
@@ -1369,9 +1367,17 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 
 	if (variables) {
 		const { variableType, variableValueParameters, variableSourceKeys } = variables;
-		const variableSource = variableValueParameters[0];
+		const variableSource = variableType === 'item'
+			? variableValueParameters.item
+			: variableType === 'championAbility'
+				? variableValueParameters.abilityVariant
+				: variableValueParameters.rune;
 
-		const { unknownVariables } = replaceGameVariables(stringtableReplaced, variableType as any, [variableValueParameters[0], { values: variableValueParameters[1]?.default }, ...variableValueParameters.slice(2)] as any);
+		const { unknownVariables } = replaceGameVariables(
+			stringtableReplaced,
+			variableType as any,
+			{ ...variableValueParameters, dynamicVariables: variableValueParameters.dynamicVariables?.default, hashFnv1a } as any,
+		);
 
 		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
@@ -1773,12 +1779,11 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				category: 'champion',
 				variables: {
 					variableType: 'championAbility',
-					variableValueParameters: [
-						variant,
-						championAbilityDynamicVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id], abilityKey),
-						undefined,
-						allVariants,
-					],
+					variableValueParameters: {
+						abilityVariant: variant,
+						allAbilitiesVariants: allVariants,
+						dynamicVariables: championAbilityDynamicVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id], abilityKey),
+					},
 					variableSourceKeys: ['effectAmount'],
 				},
 				stringtableVariableSaveUnder: champion,
@@ -1948,9 +1953,12 @@ function stringifyObject(obj: object) {
 	return json.replace(/"__ARRAY__(.*?)__ARRAY__"/g, '$1');
 }
 
-function hashRuneVariable(variable: string) {
-	const value = fnv1a(variable.toLowerCase(), { size: 32 });
-	return `{${value.toString(16)}}`;
+function hashRuneVariable(variable: string): string {
+	return `{${hashFnv1a(variable)}}`;
+}
+
+function hashFnv1a(value: string): string {
+	return fnv1a(value.toLowerCase(), { size: 32 }).toString(16);
 }
 
 // TODO champion variables hash resolving possibly
