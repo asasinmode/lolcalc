@@ -200,6 +200,7 @@ interface IChampionAbilityVariableParams {
 	abilityVariant: IChampionAbilityVariableVariant;
 	dynamicVariables?: IDynamicVariables;
 	abilityLevel?: number;
+	/** ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive */
 	allAbilitiesVariants?: IChampionAbilityVariableVariant[];
 }
 

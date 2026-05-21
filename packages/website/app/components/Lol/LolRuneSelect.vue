@@ -188,7 +188,7 @@ const hoveredRuneTooltip = computed(() => {
 	const { replaced: shortReplaced, unknownVariables: shortUnknownV } = replaceGameVariables(
 		shortStringtableVariableReplaced,
 		'rune',
-		[hoveredRune.value.rune],
+		{ rune: hoveredRune.value.rune },
 	);
 
 	const { replaced: longStringtableVariableReplaced, unknownStringtableVariables: longUnknownSV } = replaceStringtableVariables(
@@ -199,7 +199,7 @@ const hoveredRuneTooltip = computed(() => {
 	const { replaced: longReplaced, unknownVariables: longUnknownV } = replaceGameVariables(
 		longStringtableVariableReplaced,
 		'rune',
-		[hoveredRune.value.rune],
+		{ rune: hoveredRune.value.rune },
 	);
 
 	const anyUnknownVariables = shortUnknownSV.size || shortUnknownV.length || longUnknownSV.size || longUnknownV.length;

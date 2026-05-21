@@ -179,9 +179,7 @@ export const EFFECT_SPECIFICS = {
 					if (typeof value === 'number') {
 						const reducePercentage = itemVariableValue(
 							'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
-							ITEMS_BY_NAME.serpentsFang,
-							undefined,
-							effectData[0] === 2,
+							{ item: ITEMS_BY_NAME.serpentsFang, isRanged: effectData[0] === 2 },
 						);
 						value *= 1 - (reducePercentage.value as number / 100);
 					}

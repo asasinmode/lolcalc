@@ -319,7 +319,7 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 		const { replaced, unknownVariables: unknownV } = replaceGameVariables(
 			stringtableVariableReplaced,
 			'rune',
-			[rune, props.value?.computed.variables.value.runes.shards[shardSlot as IRuneShardSlotName]],
+			{ rune, dynamicVariables: props.value?.computed.variables.value.runes.shards[shardSlot as IRuneShardSlotName] },
 		);
 
 		shardAnyUnknown ||= unknownSV.size || unknownV.length;
@@ -352,7 +352,7 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 	const { replaced, unknownVariables: unknownV } = replaceGameVariables(
 		stringtableVariableReplaced,
 		'rune',
-		[rune],
+		{ rune },
 	);
 
 	return {
@@ -814,7 +814,7 @@ const hoveredDragonThingText = computed(() => {
 	const { replaced, unknownVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		[ability, undefined, 1, [MISC.dragons[dragonName].stack, MISC.dragons[dragonName].soul]],
+		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragonName].stack, MISC.dragons[dragonName].soul] },
 	);
 
 	let invalid: string | undefined;

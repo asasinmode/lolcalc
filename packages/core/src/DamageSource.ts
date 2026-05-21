@@ -1116,7 +1116,7 @@ export function computeItemDescription(
 		});
 
 	/* dynamic variables not passed as they shouldn't be needed */
-	const gp10 = itemVariableValue('GP10', item, undefined, damageSource?.isRanged.value, damageSource);
+	const gp10 = itemVariableValue('GP10', { item, damageSource, isRanged: damageSource?.isRanged.value });
 	/* should probably handle the array output (value for melee/ranged) but not necessary for now */
 	if (typeof gp10.value === 'number') {
 		stats.push({
@@ -1172,7 +1172,7 @@ function additionalItemText(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 				replaceStringtableVariables(value, TEXT.stringtable).replaced,
 				'item',
-				[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+				{ item, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value, damageSource },
 				damageSource?.modifyVariableFunctions.value,
 				replaceOptions,
 			)
@@ -1194,7 +1194,7 @@ function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
 	}
 }
 
-export function allChampionAbilityVariants(champion?: IChampion): IChampionAbilityVariant[] {
+export function allChampionAbilitiesVariants(champion?: IChampion): IChampionAbilityVariant[] {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
 
@@ -1207,7 +1207,7 @@ export function computeAbilityDescription(
 	const abilityLevel = gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
-	const allVariants = allChampionAbilityVariants(champion);
+	const allVariants = allChampionAbilitiesVariants(champion);
 
 	const dynamicVariables = damageSource?.computed.variables.value.abilities[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex];
 
@@ -1335,11 +1335,11 @@ export function computeAbilityDescription(
 }
 
 function abilityVariantText(
-	allAbilityVariants: IChampionAbilityVariant[],
+	allAbilitiesVariants: IChampionAbilityVariant[],
 	value: string,
-	variant: IChampionAbilityVariant,
+	abilityVariant: IChampionAbilityVariant,
 	dynamicVariables?: IDynamicVariables,
-	level?: number,
+	abilityLevel?: number,
 	/** champion's stringtable */
 	stringtable?: Record<string, string>,
 	damageSource?: DamageSource,
@@ -1361,7 +1361,7 @@ function abilityVariantText(
 	const { replaced, unknownVariables, variablesAllValues, variables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		[variant, dynamicVariables, level, allAbilityVariants],
+		{ abilityVariant, dynamicVariables, abilityLevel, allAbilitiesVariants },
 		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,
 	);
@@ -1423,7 +1423,7 @@ function formatItemDescriptionText(
 		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 			const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
 				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-					const { value } = itemVariableValue('Cooldown', item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource);
+					const { value } = itemVariableValue('Cooldown', { item, damageSource, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value });
 					return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
 				})
 				.replace('(', '<span>(')
@@ -1432,7 +1432,7 @@ function formatItemDescriptionText(
 			const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown, anyExtendedVariables: headingAnyExtendedVariables } = replaceGameVariables(
 				headingStringtableReplaced,
 				'item',
-				[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+				{ item, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value, damageSource },
 				damageSource?.modifyVariableFunctions.value,
 				replaceOptions,
 			);
@@ -1453,7 +1453,7 @@ function formatItemDescriptionText(
 					const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown, anyExtendedVariables: paragraphAnyExtendedVariables } = replaceGameVariables(
 						paragraphStringtableReplaced,
 						'item',
-						[item, damageSource?.computed.variables.value.items[item.id], damageSource?.isRanged.value, damageSource],
+						{ item, damageSource, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value },
 						damageSource?.modifyVariableFunctions.value,
 						replaceOptions,
 					);
