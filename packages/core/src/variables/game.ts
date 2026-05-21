@@ -539,12 +539,17 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, self) {
 		let rv = variable.mLevel1Value;
-		for (const { mAdditionalBonusAtThisLevel, mLevel } of variable.mBreakpoints) {
-			if ((self?.level.value ?? 1) >= mLevel) {
-				rv += mAdditionalBonusAtThisLevel;
-			} else {
-				break;
+		if ('mBreakpoints' in variable) {
+			for (const { mAdditionalBonusAtThisLevel, mLevel } of variable.mBreakpoints) {
+				if ((self?.level.value ?? 1) >= mLevel) {
+					rv += mAdditionalBonusAtThisLevel;
+				} else {
+					break;
+				}
 			}
+		} else {
+			// TODO check if it works, echoes of helia
+			rv += variable.mInitialBonusPerLevel * ((self?.level.value ?? 1) - 1);
 		}
 		return { value: rv };
 	},
@@ -559,6 +564,10 @@ interface IGameVariablesByType {
 			mLevel: number;
 			mAdditionalBonusAtThisLevel: number;
 		}[];
+		__type: string;
+	} | {
+		mLevel1Value: number;
+		mInitialBonusPerLevel: number;
 		__type: string;
 	};
 	NumberCalculationPart: {

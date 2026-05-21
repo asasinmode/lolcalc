@@ -1150,11 +1150,6 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
  * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that gets special treatment in `@lolcalc/core/variables/game` and `@lolcalc/core/specifics/index`
  */
 function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
-	if (item.id !== ITEM_NAME_TO_ID.endlessHunger) {
-		return;
-	}
-
-	/* for more info about where these are used/what they turn into check `app/composables/useText.ts` */
 	/**
 		* `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
 		* `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
