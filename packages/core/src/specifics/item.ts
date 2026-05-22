@@ -1077,6 +1077,21 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.endlessHunger],
 			},
 		},
+		variables: defineVariables({
+			meta: {
+				HasteFromAD: {
+					statIconKey: 'attackDamage',
+					extendedEquals: {
+						prefix: `<const>${ITEMS_BY_NAME.endlessHunger.itemCalculations.HasteFromADMelee.mFormulaParts[0]!.mNumber}</const> + <scalead>`,
+						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger.itemCalculations.HasteFromADMelee.mFormulaParts[1]!.mCoefficient! * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger.itemCalculations.HasteFromADRanged.mFormulaParts[1]!.mCoefficient! * 100),
+						valueSuffix: '%',
+						suffix: '</scalead>',
+					},
+				},
+			},
+			uninteresting: ['OmnivampDuration', 'OmnivampOnTakedown', 'TakedownWindow'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.mawOfMalmortius]: {
 		internalDataProperties: ['mawLifeline'],

@@ -469,6 +469,10 @@ defineExpose({ header });
 			--at-apply: 'text-neutral-400';
 		}
 
+		const {
+			--at-apply: 'text-white';
+		}
+
 		keyword {
 			--at-apply: 'text-pink-300';
 		}
