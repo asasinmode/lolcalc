@@ -11,7 +11,7 @@ test.before(() => {
 	setupItems(fixture);
 });
 
-test('16.9.1 Ahri, shards 100', async (t) => {
+test('Ahri misc ap passives items', async (t) => {
 	const sourceCommon: IOverrides<'Ahri'> = {
 		level: 18,
 		runes: {
@@ -81,7 +81,7 @@ test('16.9.1 Ahri, shards 100', async (t) => {
 	});
 });
 
-test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
+test('Ezreal tear items', async (t) => {
 	const sourceCommon: IOverrides<'Ezreal'> = {
 		roleQuest: 'bot',
 		runes: {
@@ -233,7 +233,7 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 });
 
 // TODO make sure to check uncaressed attack speed @ 18
-test('16.9.1 Ryze, shards 211', async (t) => {
+test('Ryze tear/ad items', async (t) => {
 	const sourceCommon: IOverrides<'Ryze'> = {
 		runes: {
 			shards: {

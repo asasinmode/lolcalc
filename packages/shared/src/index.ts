@@ -302,6 +302,7 @@ export const ITEM_NAME_TO_ID = {
 	overlordsBloodmail: '2501',
 	lichBane: '3100',
 	botrk: '3153',
+	steraksGage: '3053',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
