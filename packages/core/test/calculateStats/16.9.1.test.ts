@@ -199,7 +199,7 @@ test('16.9.1 Ezreal, shards 020, bot quest', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, overlord\'s bloodmail endless hunger, , gluttonous greaves', async () => {
+	await t.test('lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, overlord\'s bloodmail, endless hunger, gluttonous greaves', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
 			...sourceCommon,
 			level: 18,

@@ -104,14 +104,16 @@ export interface IStatsCalculationVariables {
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
 	// TODO maybe merge these into single total bonus hp like rabadon does
-	/** bonus hp used in riftmaker passive calculation */
+	/** bonus hp riftmaker's passive is based on */
 	riftmakerBonusHp?: number;
-	/** bonus hp used in overlord's bloodmail passive calculation */
+	/** bonus hp overlord's bloodmail's passive is based on */
 	bloodmailBonusHp?: number;
-	/** bonus mana used in tear items' passives' calculations */
-	tearItemBonusMana?: number;
 	/** % ad gained from bloodmail's retribution passive */
 	bloodmailRetributionPercentage?: number;
+	/** bonus mana tear items' passives calculations are based on */
+	tearItemBonusMana?: number;
+	/** bonus hp endless hunger's famine passive is based on */
+	endlessBonusAd?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

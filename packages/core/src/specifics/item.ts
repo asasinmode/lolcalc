@@ -6,12 +6,14 @@ import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
+import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables } from './index.ts';
 
 const HOOK_PRIORITIES = {
 	[ITEM_NAME_TO_ID.guinsoo]: 10,
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
+	/** should be TODO before/after overlord's bloodmail */
+	[ITEM_NAME_TO_ID.endlessHunger]: 20,
 };
 
 const tearItem = {
@@ -64,7 +66,7 @@ const gluttonousGreavesSpecific = {
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
 					itemStatIncreases[bootsId] ??= {};
-					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp * 100;
+					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp;
 				}
 			},
 		},
@@ -1046,6 +1048,33 @@ export const ITEM_SPECIFICS = {
 					}
 				},
 			},
+			postTotal: {
+				handler(self, { bonusStats, totalStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+					miscDebug.endlessBonusAd = bonusStats.attackDamage;
+					const value = itemVariableValue('HasteFromAD', {
+						item: ITEMS_BY_NAME.endlessHunger,
+						isRanged: self.isRanged.value,
+						damageSource: {
+							stats: {
+								value: {
+									bonus: bonusStats,
+								},
+							},
+						} as DamageSource,
+					});
+					if (typeof value?.value === 'number') {
+						calculatedVariables.endlessHaste = value.value;
+
+						totalStats.abilityHaste += calculatedVariables.endlessHaste;
+						bonusStats.abilityHaste += calculatedVariables.endlessHaste;
+						itemPassivesStats.abilityHaste += calculatedVariables.endlessHaste;
+						itemTotalStats.abilityHaste += calculatedVariables.endlessHaste;
+					} else if (!value?.value) {
+						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste', value);
+					}
+				},
+				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.endlessHunger],
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.mawOfMalmortius]: {
@@ -1138,8 +1167,8 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
 		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {
 			const maxValueAt = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.overlordsBloodmail.itemCalculations.RemainingHealthThreshold, ITEMS_BY_NAME.overlordsBloodmail, damageSource);
-			if (!maxValueAt) {
-				console.warn('[item specifics bloodmail] failed to resolve RemainingHealthThreshold variable value');
+			if (!maxValueAt || typeof maxValueAt.value !== 'number') {
+				console.warn('[ITEM_SPECIFICS bloodmail] failed to resolve RemainingHealthThreshold variable value');
 				return 0;
 			}
 
