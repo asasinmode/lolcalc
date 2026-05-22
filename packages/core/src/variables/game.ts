@@ -21,8 +21,8 @@ export interface IVariableValueResult {
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[];
 	meta?: IVariableMeta;
-	/** whether was resolved from the provided dynamic variables. If `true`, the **replaced** (not the one saved in variables map) value will be rounded */
-	isDynamic?: boolean;
+	/** usually when value was calculated in some way and might have floating points that should be rounded in description */
+	roundReplaced?: boolean;
 	/** whether `ISpecificVariables.uninteresting` includes it */
 	isUninteresting?: boolean;
 }
@@ -96,7 +96,7 @@ export function itemVariableValue(
 				rv.value = rv.value[0];
 			}
 		}
-		rv.isDynamic = true;
+		rv.roundReplaced = true;
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
@@ -114,7 +114,7 @@ export function itemVariableValue(
 			}, overrideDynamicVariables, variable);
 
 			rv.value = [melee.value as number | undefined, ranged.value as number | undefined];
-			rv.isDynamic ||= melee?.isDynamic || ranged?.isDynamic;
+			rv.roundReplaced ||= melee?.roundReplaced || ranged?.roundReplaced;
 			if (melee?.meta || ranged?.meta) {
 				rv.meta ??= {};
 				Object.assign(rv.meta, melee.meta, ranged.meta);
@@ -123,7 +123,7 @@ export function itemVariableValue(
 			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
 			const meleeRangedV = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), params, overrideDynamicVariables, variable);
 			rv.value = meleeRangedV?.value;
-			rv.isDynamic ||= meleeRangedV?.isDynamic;
+			rv.roundReplaced ||= meleeRangedV?.roundReplaced;
 			if (meleeRangedV?.meta) {
 				rv.meta ??= {};
 				Object.assign(rv.meta, meleeRangedV.meta);
@@ -163,7 +163,7 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 	if (dynamicVariables.values?.[variable]) {
 		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
 		rv.meta = dynamicVariables.meta?.[variable] ?? {};
-		rv.isDynamic = true;
+		rv.roundReplaced = true;
 		return rv;
 	}
 
@@ -254,7 +254,7 @@ export function championAbilityVariableValue(variable: string, arg: IChampionAbi
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
-		rv.isDynamic = true;
+		rv.roundReplaced = true;
 	}
 
 	if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
@@ -355,7 +355,7 @@ export function replaceGameVariables(
 		}
 
 		variableValueFunctionData.accessedVariables ??= new Map();
-		let { value: variable, isMeleeRanged, actualVariableName, allValues, isDynamic, meta, isUninteresting } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues, roundReplaced, meta, isUninteresting } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
@@ -465,8 +465,8 @@ export function replaceGameVariables(
 			return replaceWithName
 				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${(meta?.displayedName ?? variableName)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
-					isDynamic ? Math.round(variable[0]!) : variable[0]}${varValueSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
-					isDynamic ? Math.round(variable[1]!) : variable[1]}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
+					roundReplaced ? Math.round(variable[0]!) : variable[0]}${varValueSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
+					roundReplaced ? Math.round(variable[1]!) : variable[1]}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		const baseValue = roundVariable(variable * multiplier);
@@ -485,7 +485,7 @@ export function replaceGameVariables(
 				: undefined;
 		const iconPrefix = meleeRangedIconPath ? `%i:${meleeRangedIconPath}active% ` : '';
 
-		return `${iconPrefix}${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : (isDynamic ? Math.round(variable) : variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
+		return `${iconPrefix}${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : (roundReplaced ? Math.round(variable) : variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
 	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionData.dynamicVariables);
@@ -542,7 +542,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			}
 			const resolved = variableResolveFn(part)?.(part, whole, self);
 			if (resolved) {
-				rv.isDynamic ||= resolved.isDynamic;
+				rv.roundReplaced ||= resolved.roundReplaced;
 			}
 			return resolved?.value;
 		});
@@ -581,7 +581,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (variable.mStat === 2 && variable.mStatFormula === 2 && variable.mCoefficient) {
 			return {
 				value: (self?.stats.value.bonus.attackDamage ?? 0) * variable.mCoefficient,
-				isDynamic: true,
+				roundReplaced: true,
 			};
 		}
 	},
