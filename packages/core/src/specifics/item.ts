@@ -1050,8 +1050,7 @@ export const ITEM_SPECIFICS = {
 			},
 			postTotal: {
 				handler(self, { bonusStats, totalStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
-					miscDebug.endlessBonusAd = bonusStats.attackDamage;
-					const value = itemVariableValue('HasteFromAD', {
+					const variable = itemVariableValue('HasteFromAD', {
 						item: ITEMS_BY_NAME.endlessHunger,
 						isRanged: self.isRanged.value,
 						damageSource: {
@@ -1062,15 +1061,17 @@ export const ITEM_SPECIFICS = {
 							},
 						} as DamageSource,
 					});
-					if (typeof value?.value === 'number') {
-						calculatedVariables.endlessHaste = value.value;
+					const value = Array.isArray(variable.value) ? variable.value[0] : variable.value;
+					if (typeof value === 'number') {
+						miscDebug.endlessBonusAd = bonusStats.attackDamage;
+						calculatedVariables.endlessHaste = value;
 
 						totalStats.abilityHaste += calculatedVariables.endlessHaste;
 						bonusStats.abilityHaste += calculatedVariables.endlessHaste;
 						itemPassivesStats.abilityHaste += calculatedVariables.endlessHaste;
 						itemTotalStats.abilityHaste += calculatedVariables.endlessHaste;
-					} else if (!value?.value) {
-						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste', value);
+					} else {
+						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste', variable);
 					}
 				},
 				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.endlessHunger],
