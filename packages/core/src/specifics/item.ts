@@ -1086,7 +1086,7 @@ export const ITEM_SPECIFICS = {
 						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger.itemCalculations.HasteFromADMelee.mFormulaParts[1]!.mCoefficient! * 100),
 						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger.itemCalculations.HasteFromADRanged.mFormulaParts[1]!.mCoefficient! * 100),
 						valueSuffix: '%',
-						suffix: '</scalead>',
+						suffix: ' bonus</scalead> ',
 					},
 				},
 			},
