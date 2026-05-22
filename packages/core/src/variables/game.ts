@@ -43,7 +43,11 @@ function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[
 
 interface IBaseVariableParams {
 	dynamicVariables?: IDynamicVariables;
-	/** any other variables that were accessed while trying to resolve the current one. Used in `updateData` for trying to resolve hashed versions of unknown variables */
+	/**
+	 * any other variables that were accessed while trying to resolve the current one.
+	 * for example Endless Hunger's `HasteFromAD` resolves to (originally hashed) either `HasteFromADMelee` or `HasteFromADRanged`, so these 2 will be listed under `accessedVariables.get('HasteFromAD')`
+	 * used in `updateData` for trying to resolve hashed versions of unknown variables
+	 */
 	accessedVariables?: Map<string, Set<string>>;
 }
 
@@ -79,8 +83,6 @@ export function itemVariableValue(
 		rv.meta = dynamicVariables.meta[variable];
 	}
 
-	// console.log('checking for', variable, hashedFrom, { item, dynamicVariables, isRanged, damageSource });
-
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
 		if (Array.isArray(rv.value)) {
@@ -102,19 +104,30 @@ export function itemVariableValue(
 	} else if (item.stringCalculations?.[variable]) {
 		rv.isMeleeRanged = isRanged === true ? 1 : isRanged === false ? 0 : true;
 		if (isRanged === undefined) {
-			rv.value = [
-				itemVariableValue(item.stringCalculations[variable].MeleeResult.slice(1, -1), {
-					...params,
-					isRanged: false,
-				}, overrideDynamicVariables, variable).value as number | undefined,
-				itemVariableValue(item.stringCalculations[variable].RangedResult.slice(1, -1), {
-					...params,
-					isRanged: true,
-				}, overrideDynamicVariables, variable).value as number | undefined,
-			];
+			const melee = itemVariableValue(item.stringCalculations[variable].MeleeResult.slice(1, -1), {
+				...params,
+				isRanged: false,
+			}, overrideDynamicVariables, variable);
+			const ranged = itemVariableValue(item.stringCalculations[variable].RangedResult.slice(1, -1), {
+				...params,
+				isRanged: true,
+			}, overrideDynamicVariables, variable);
+
+			rv.value = [melee.value as number | undefined, ranged.value as number | undefined];
+			rv.isDynamic ||= melee?.isDynamic || ranged?.isDynamic;
+			if (melee?.meta || ranged?.meta) {
+				rv.meta ??= {};
+				Object.assign(rv.meta, melee.meta, ranged.meta);
+			}
 		} else {
 			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
-			rv.value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), params, overrideDynamicVariables, variable).value;
+			const meleeRangedV = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), params, overrideDynamicVariables, variable);
+			rv.value = meleeRangedV?.value;
+			rv.isDynamic ||= meleeRangedV?.isDynamic;
+			if (meleeRangedV?.meta) {
+				rv.meta ??= {};
+				Object.assign(rv.meta, meleeRangedV.meta);
+			}
 		}
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
@@ -520,26 +533,32 @@ export function replaceGameIcons(text: string): string {
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
 	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, self) {
+		const rv: IVariableValueResult = {};
 		const values = variable.mFormulaParts.map((part) => {
 			if ('mNumber' in part) {
 				return part.mNumber;
 			} else if ('mDataValue' in part) {
 				return whole.dataValues?.[part.mDataValue];
 			}
-			return variableResolveFn(part)?.(part, whole, self);
+			const resolved = variableResolveFn(part)?.(part, whole, self);
+			if (resolved) {
+				rv.isDynamic ||= resolved.isDynamic;
+			}
+			return resolved?.value;
 		});
+
 		if (values.includes(undefined)) {
 			return undefined;
 		}
 		const multiplier = 'mMultiplier' in variable ? (variable.mMultiplier as Record<string, number>).mNumber : undefined;
+		rv.value = values.reduce((acc, curr) => curr! + acc!, 0) * (multiplier ?? 1);
+		if (variable.mDisplayAsPercent) {
+			rv.meta ??= {};
+			rv.meta.isPercentage = true;
+			rv.meta.multiplier ??= variable.mDisplayAsPercent ? 100 : undefined;
+		}
 
-		return {
-			value: values.reduce((acc, curr) => curr! + acc!, 0) * (multiplier ?? 1),
-			meta: {
-				isPercentage: variable.mDisplayAsPercent,
-				multiplier: variable.mDisplayAsPercent ? 100 : undefined,
-			},
-		};
+		return rv;
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, self) {
 		let rv = variable.mLevel1Value;
@@ -556,6 +575,15 @@ export const VARIABLE_CALCULATION_FNS = {
 			rv += variable.mInitialBonusPerLevel * ((self?.level.value ?? 1) - 1);
 		}
 		return { value: rv };
+	},
+	StatByCoefficientCalculationPart(variable: IGameVariablesByType['StatByCoefficientCalculationPart'], _whole, self) {
+		// TODO only endless hunger works with this atm, when other variables using this are encountered, adjust
+		if (variable.mStat === 2 && variable.mStatFormula === 2 && variable.mCoefficient) {
+			return {
+				value: (self?.stats.value.bonus.attackDamage ?? 0) * variable.mCoefficient,
+				isDynamic: true,
+			};
+		}
 	},
 } satisfies IHypotheticalVariableCalculationFns;
 
@@ -580,6 +608,12 @@ interface IGameVariablesByType {
 	};
 	NamedDataValueCalculationPart: {
 		mDataValue: string;
+		__type: string;
+	};
+	StatByCoefficientCalculationPart: {
+		mStat: number;
+		mStatFormula: number;
+		mCoefficient: number;
 		__type: string;
 	};
 }
