@@ -105,7 +105,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
-			hook(source, { itemBaseStats, itemPassivesStats, baseStats, itemStatIncreases, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
+			hook(source, { itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
 		}
 	}
 

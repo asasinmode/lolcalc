@@ -99,6 +99,8 @@ export interface IStatsCalculationVariables {
 	endlessHaste?: number;
 	/** omnivamp gained from gluttonous greaves/immortal path's passive */
 	gluttonousImmortalOmnivamp?: number;
+	/** ad gained from sterak's gage passive */
+	sterakAd?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

@@ -1263,6 +1263,40 @@ export const ITEM_SPECIFICS = {
 				: 0;
 		},
 	},
+	[ITEM_NAME_TO_ID.steraksGage]: {
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemPassivesStats, baseOnLevelStats }, { calculatedVariables }) {
+					const value = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.steraksGage.itemCalculations.BonusAD, ITEMS_BY_NAME.steraksGage, { stats: { value: { baseOnLevel: baseOnLevelStats } } } as DamageSource);
+					if (typeof value?.value === 'number') {
+						calculatedVariables.sterakAd = value.value;
+						itemPassivesStats.attackDamage += calculatedVariables.sterakAd;
+					} else {
+						console.warn('[ITEM_SPECIFICS sterak\'s gage] failed to resolve BonusAD variable value');
+					}
+				},
+			},
+		},
+		variables: defineVariables({
+			known: {
+				f5: [],
+			},
+			calculate() {
+				return {
+					f5: {
+						value: 0,
+					},
+				};
+			},
+			meta: {
+				BonusAD: {
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.steraksGage.dataValues.ADtoAD * 100)}% base</scalead> `,
+				},
+			},
+			uninteresting: ['f5', 'LowHealthThreshold', 'ShieldDuration'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

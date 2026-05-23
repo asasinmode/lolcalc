@@ -110,7 +110,7 @@ export interface ISpecificVariables<
 	 */
 	calculate?: (self: DamageSource<Id>) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
 	/** any dynamic variables' meta information like icon of the stat they scale from. */
-	meta?: Partial<Record<T, IVariableMeta>>;
+	meta?: NoInfer<Partial<Record<T | DetectedVariables, IVariableMeta>>>;
 	/**
 	 * variables listed here won't be shown in results, as well as have their actual values resolved regardless of the `replaceWithName` option of `replaceGameVariables`
 	 * the type works almost perfectly except that when no other keys (known/calculate/meta) is provided, then it resolves to `string[]` but at the moment I can't find a fix for it

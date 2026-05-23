@@ -535,16 +535,20 @@ export const VARIABLE_CALCULATION_FNS = {
 	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, self) {
 		const rv: IVariableValueResult = {};
 		const values = variable.mFormulaParts.map((part) => {
+			const resolveFn = variableResolveFn(part);
+			if (resolveFn) {
+				const resolved = variableResolveFn(part)?.(part, whole, self);
+				if (resolved) {
+					rv.roundReplaced ||= resolved.roundReplaced;
+				}
+				return resolved?.value;
+			}
 			if ('mNumber' in part) {
 				return part.mNumber;
 			} else if ('mDataValue' in part) {
 				return whole.dataValues?.[part.mDataValue];
 			}
-			const resolved = variableResolveFn(part)?.(part, whole, self);
-			if (resolved) {
-				rv.roundReplaced ||= resolved.roundReplaced;
-			}
-			return resolved?.value;
+			return undefined;
 		});
 
 		if (values.includes(undefined)) {
@@ -585,6 +589,16 @@ export const VARIABLE_CALCULATION_FNS = {
 			};
 		}
 	},
+	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self) {
+		// TODO only sterak's gage works with this atm, when other variables using this are encountered, adjust
+		const value = whole.dataValues?.[variable.mDataValue];
+		if (value !== undefined && variable.mStat === 2 && variable.mStatFormula === 1) {
+			return {
+				value: (self?.stats.value.baseOnLevel.attackDamage ?? 0) * value,
+				roundReplaced: true,
+			};
+		}
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 type IHypotheticalVariableCalculationFns = Record<string, (variable: any, whole: any, self?: DamageSource) => IVariableValueResult | undefined>;
@@ -614,6 +628,12 @@ interface IGameVariablesByType {
 		mStat: number;
 		mStatFormula: number;
 		mCoefficient: number;
+		__type: string;
+	};
+	StatByNamedDataValueCalculationPart: {
+		mStat: number;
+		mStatFormula: number;
+		mDataValue: string;
 		__type: string;
 	};
 }
