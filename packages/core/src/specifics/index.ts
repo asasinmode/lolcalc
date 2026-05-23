@@ -1,32 +1,32 @@
 import type { IChampionId } from '@lolcalc/data/types';
 import type { TItemNameToId } from '@lolcalc/shared';
-import type { DamageSource } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
 import type { IVariableMeta } from '../types';
 import type { IDynamicVariables } from '../variables/game';
-import type { IHypotheticalChampionSpecifics, TChampionSpecifics } from './champion';
+import type { TChampionSpecifics } from './champion';
+import type { CHAMPION_SPECIFICS } from './champion.ts';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
-import { ABILITY_TYPE } from '@lolcalc/shared';
-import { CHAMPION_SPECIFICS } from './champion.ts';
-import { EFFECT_SPECIFICS } from './effect.ts';
-import { ITEM_SPECIFICS } from './item.ts';
+import type { ITEM_SPECIFICS } from './item.ts';
+import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
-export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
-	const specific = abilityId.type === ABILITY_TYPE.item
-		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
-		: abilityId.type === ABILITY_TYPE.champion
-			? (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
-			: abilityId.type === ABILITY_TYPE.effect
-				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
-				: undefined;
-
-	if (!specific && warnPrefix) {
-		console.warn(`[${warnPrefix}] failed to resolve specific for`, abilityId);
-	}
-
-	return specific;
-}
+export const HOOK_PRIORITIES = {
+	preItemTotal: {
+		[ITEM_NAME_TO_ID.guinsoo]: 10,
+		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
+	},
+	preBonus: {
+		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
+	},
+	postTotal: {
+		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
+		/** should be TODO after overlord's bloodmail */
+		[ITEM_NAME_TO_ID.endlessHunger]: 20,
+		// TODO
+		Ryze: 1,
+	},
+} satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;
 
 // for getting specific ability's specific, maybe will be useful
 // ? T['id'] extends keyof TChampionSpecifics

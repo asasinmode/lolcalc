@@ -3,7 +3,7 @@ import type { IInternalItemDataOf } from '@lolcalc/core/specifics';
 import type { IItemSpecific } from '@lolcalc/core/specifics/item';
 import type { TItems } from '@lolcalc/data';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
-import { resolveAbilitySpecific } from '@lolcalc/core/specifics';
+import { resolveAbilitySpecific } from '@lolcalc/core/DamageSource';
 import { ITEMS, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 

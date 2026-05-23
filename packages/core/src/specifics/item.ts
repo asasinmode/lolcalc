@@ -7,14 +7,7 @@ import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
-import { defineVariables } from './index.ts';
-
-const HOOK_PRIORITIES = {
-	[ITEM_NAME_TO_ID.guinsoo]: 10,
-	[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
-	/** should be TODO before/after overlord's bloodmail */
-	[ITEM_NAME_TO_ID.endlessHunger]: 20,
-};
+import { defineVariables, HOOK_PRIORITIES } from './index.ts';
 
 const tearItem = {
 	specific: {
@@ -1002,7 +995,7 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.bonusAttackSpeedPercent += bonusAttackSpeedPercent;
 					itemPassivesStats.attackSpeed += bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 				},
-				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.guinsoo],
+				priority: HOOK_PRIORITIES.preItemTotal[ITEM_NAME_TO_ID.guinsoo],
 			},
 		},
 	},
@@ -1074,7 +1067,7 @@ export const ITEM_SPECIFICS = {
 						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste', variable);
 					}
 				},
-				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.endlessHunger],
+				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.endlessHunger],
 			},
 		},
 		variables: defineVariables({
@@ -1201,7 +1194,7 @@ export const ITEM_SPECIFICS = {
 					calculatedVariables.bloodmailTyranny = value;
 					itemPassivesStats.attackDamage += value;
 				},
-				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
+				priority: HOOK_PRIORITIES.preItemTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 			preBonus: {
 				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
@@ -1213,7 +1206,7 @@ export const ITEM_SPECIFICS = {
 						itemTotalStats.attackDamage += value;
 					}
 				},
-				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
+				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 			postTotal: {
 				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
@@ -1225,7 +1218,7 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					itemTotalStats.attackDamage += calculatedVariables.bloodmailRetribution;
 				},
-				priority: HOOK_PRIORITIES[ITEM_NAME_TO_ID.overlordsBloodmail],
+				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 		},
 		variables: defineVariables({

@@ -6,7 +6,7 @@ import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHa
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
-import type { IGameAbilityData } from './specifics/index';
+import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
@@ -22,7 +22,7 @@ import { GameAbilityId } from './GameAbilityId.ts';
 import { gameAbilityImage } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } from './specifics/effect.ts';
-import { calculateDynamicVariables, resolveAbilitySpecific } from './specifics/index.ts';
+import { calculateDynamicVariables } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
 import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
@@ -96,6 +96,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			? (this.champion.value?.abilities.e.variants.length ?? 1) - 1
 			: (this.champion.value?.abilities[key as IChampionAbilityKey].variants.length ?? 1) - 1,
 	])) as Record<IChampionAbilityKey, number>);
+	allAbilityVariants = computed(() => allChampionAbilitiesVariants(this.champion.value));
 
 	dragonStacks: Ref<(IDragonName | undefined)[]>;
 	dragonSoul: Ref<IDragonName | undefined>;
@@ -1197,7 +1198,7 @@ function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
 	}
 }
 
-export function allChampionAbilitiesVariants(champion?: IChampion): IChampionAbilityVariant[] {
+function allChampionAbilitiesVariants(champion?: IChampion): IChampionAbilityVariant[] {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
 
@@ -1526,6 +1527,22 @@ function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSourc
 	return target;
 }
 
+export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
+	const specific = abilityId.type === ABILITY_TYPE.item
+		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
+		: abilityId.type === ABILITY_TYPE.champion
+			? (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
+			: abilityId.type === ABILITY_TYPE.effect
+				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
+				: undefined;
+
+	if (!specific && warnPrefix) {
+		console.warn(`[${warnPrefix}] failed to resolve specific for`, abilityId);
+	}
+
+	return specific;
+}
+
 type IInternalDataSetupChampions = {
 	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
 		? K
@@ -1542,7 +1559,7 @@ export interface IDamageSourceInternalDataProvider<Id extends IChampionId | unde
 	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
 	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
 	 */
-	setupData: (self: DamageSource<Id>) => any;
+	setupData?: (self: DamageSource<Id>) => any;
 }
 
 export interface IDamageSourceInternalItemDataProvider {
