@@ -1293,6 +1293,11 @@ export const ITEM_SPECIFICS = {
 					statIconKey: 'attackDamage',
 					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.steraksGage.dataValues.ADtoAD * 100)}% base</scalead> `,
 				},
+				ShieldSize: {
+					statIconKey: 'hp',
+					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.steraksGage.dataValues.BaseShieldRatio * 100)}% bonus</scalehealth> `,
+					type: VariableType.shield,
+				},
 			},
 			uninteresting: ['f5', 'LowHealthThreshold', 'ShieldDuration'],
 		}),
