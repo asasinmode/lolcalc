@@ -205,6 +205,7 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityLevel?: number;
 	/** ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive */
 	allAbilitiesVariants?: IChampionAbilityVariableVariant[];
+	damageSource?: DamageSource;
 }
 
 // TODO make sure it handles hextech soul description
@@ -214,6 +215,7 @@ export function championAbilityVariableValue(variable: string, arg: IChampionAbi
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityLevel = 1,
 		allAbilitiesVariants = [],
+		damageSource,
 	} = arg;
 	const rv: IVariableValueResult = {};
 
@@ -277,7 +279,8 @@ export function championAbilityVariableValue(variable: string, arg: IChampionAbi
 	];
 
 	if (rv.value === undefined) {
-		for (const source of sources) {
+		for (let i = 0; i < sources.length; i++) {
+			const source = sources[i]!;
 			if (!source) {
 				continue;
 			}
@@ -285,7 +288,6 @@ export function championAbilityVariableValue(variable: string, arg: IChampionAbi
 			rv.value = source.find(source => source[0] === variableName || source[0].toLowerCase() === variableName!.toLowerCase())?.[1];
 			if (rv.value !== undefined) {
 				for (const path in dotPath) {
-					// TODO figure this out, some paths seem to have .0 or .-1
 					const number = Number(path);
 					if (Number.isNaN(number) || (number >= 0 && Array.isArray(rv.value))) {
 						rv.value = (rv.value as any)[path];
@@ -298,9 +300,25 @@ export function championAbilityVariableValue(variable: string, arg: IChampionAbi
 		}
 	}
 
+	let multiplier = 1;
+	if (typeof rv.value === 'object') {
+		if ('mMultiplier' in rv.value) {
+			multiplier = resolveMMultiplier(rv.value.mMultiplier as any, abilityVariant);
+		}
+		if ('mFormulaParts' in rv.value) {
+			// eslint-disable-next-line ts/no-use-before-define
+			const formulaValue = VARIABLE_CALCULATION_FNS.mFormulaParts(rv.value as any, abilityVariant, damageSource);
+			Object.assign(rv, formulaValue);
+		}
+	}
+
 	if (Array.isArray(rv.value)) {
 		rv.allValues = rv.value as number[];
 		rv.value = rv.value[abilityLevel];
+	}
+
+	if (typeof rv.value === 'number') {
+		rv.value *= multiplier;
 	}
 
 	return rv;
@@ -546,18 +564,18 @@ export const VARIABLE_CALCULATION_FNS = {
 			return undefined;
 		});
 
+		if (values.length === 1) {
+			rv.value = values[0];
+			return rv;
+		}
+
 		if (values.some(v => typeof v !== 'number')) {
 			return undefined;
 		}
 
 		let multiplier: number | undefined;
 		if ('mMultiplier' in variable) {
-			const { mNumber, mDataValue } = variable.mMultiplier as IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'];
-			if (mNumber) {
-				multiplier = mNumber;
-			} else {
-				multiplier = whole.dataValues?.[mDataValue];
-			}
+			multiplier = resolveMMultiplier(variable as any, whole);
 		}
 
 		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)! * (multiplier ?? 1);
@@ -607,11 +625,17 @@ export const VARIABLE_CALCULATION_FNS = {
 	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self) {
 		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
 		const dataValue = whole.dataValues?.[variable.mDataValue];
-		if (statValue !== undefined && variable.mDataValue !== undefined) {
-			return {
-				value: statValue * dataValue,
-				roundReplaced: true,
-			};
+		if (dataValue !== undefined) {
+			if (statValue !== undefined) {
+				return {
+					value: statValue * dataValue,
+					roundReplaced: true,
+				};
+			} else {
+				return {
+					value: dataValue,
+				};
+			}
 		}
 	},
 } satisfies IHypotheticalVariableCalculationFns;
@@ -683,7 +707,7 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 		statsKey = 'baseOnLevel';
 	} else if (stat.mStatFormula === 2) {
 		statsKey = 'bonus';
-	} else if (!stat.mStatFormula) {
+	} else if (stat.mStatFormula === undefined) {
 		statsKey = 'total';
 	}
 	const targetStat = MSTAT_TO_NAMED_STAT[stat.mStat];
@@ -692,4 +716,15 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 		return (stats && stats[statsKey][targetStat]) ?? 0;
 	}
 	return undefined;
+}
+
+function resolveMMultiplier(variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'], whole: any): number {
+	const { mNumber, mDataValue } = variable;
+	if (mNumber) {
+		return mNumber;
+	} else if (mDataValue) {
+		return whole.dataValues?.[mDataValue];
+	}
+	console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
+	return 0;
 }

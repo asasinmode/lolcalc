@@ -455,7 +455,7 @@ export const ITEM_SPECIFICS = {
 				f2: {
 					displayedName: 'APFromMana',
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana * 100)}%</scalemana> `,
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana * 100)}% bonus</scalemana> `,
 				},
 			},
 			uninteresting: ['APFromMana', ...tearItem.uninterestingVariables],
