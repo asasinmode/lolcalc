@@ -121,6 +121,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
 
+	// TODO tenacity should be added using the same formula as items
 	const runeShardStats: Partial<IChampionStats> = {};
 	if (source.calculateStatsHooks.all.value.onRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.onRuneShards) {

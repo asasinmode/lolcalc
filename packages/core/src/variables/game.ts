@@ -655,7 +655,7 @@ function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[k
 	} else if ('mFormulaParts' in variable) {
 		return VARIABLE_CALCULATION_FNS.mFormulaParts;
 	}
-	console.warn('[variableResolveFn] unknown variable', variable);
+	console.warn('[variableResolveFn] unknown variable type', variable);
 	return undefined;
 }
 
@@ -668,6 +668,7 @@ interface IStatWithFormula {
 /** item variables sometimes have fields with `mStat: number`, which from what I can tell is supposed to be a champion's stat. This is a map of known numbers to their corresponding stats, supposed to be used with */
 const MSTAT_TO_NAMED_STAT: Record<number, IChampionStatName> = {
 	2: 'attackDamage',
+	7: 'moveSpeed',
 	12: 'hp',
 };
 
@@ -682,6 +683,8 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 		statsKey = 'baseOnLevel';
 	} else if (stat.mStatFormula === 2) {
 		statsKey = 'bonus';
+	} else if (!stat.mStatFormula) {
+		statsKey = 'total';
 	}
 	const targetStat = MSTAT_TO_NAMED_STAT[stat.mStat];
 	/** resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */

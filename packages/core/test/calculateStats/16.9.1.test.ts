@@ -242,11 +242,12 @@ test('Ryze tear/ad items', async (t) => {
 				defensive: 'tenacity',
 			},
 		},
+		roleQuest: 'mid',
 	};
 
 	const frozenHeartEffectAbilityId = GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.frozenHeartWintersCaress);
 
-	await t.test('lvl 1 | wCaressed', async () => {
+	await t.test('wCaressed', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ryze', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.frozenHeart],
@@ -258,7 +259,7 @@ test('Ryze tear/ad items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 1 | dagger, dagger', async () => {
+	await t.test('dagger, dagger', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ryze', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.dagger, ITEMS_BY_NAME.dagger],
@@ -269,7 +270,7 @@ test('Ryze tear/ad items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 1 | dagger, dagger | wCaressed', async () => {
+	await t.test('dagger, dagger | wCaressed', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ryze', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.dagger, ITEMS_BY_NAME.dagger],
@@ -278,6 +279,22 @@ test('Ryze tear/ad items', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 0.626,
+		});
+	});
+
+	await t.test('lvl 1 | frozen heart, swiftmarch', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.swiftmarch],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			mana: 715,
+			abilityPower: 22,
+			armor: 97,
+			abilityHaste: 28,
+			moveSpeed: 415,
+			tenacity: 15,
 		});
 	});
 });
