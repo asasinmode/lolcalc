@@ -541,21 +541,26 @@ export const VARIABLE_CALCULATION_FNS = {
 				if (resolved) {
 					rv.roundReplaced ||= resolved.roundReplaced;
 				}
-				return resolved?.value;
-			}
-			if ('mNumber' in part) {
-				return part.mNumber;
-			} else if ('mDataValue' in part) {
-				return whole.dataValues?.[part.mDataValue];
+				return resolved?.value as number;
 			}
 			return undefined;
 		});
 
-		if (values.includes(undefined)) {
+		if (values.some(v => typeof v !== 'number')) {
 			return undefined;
 		}
-		const multiplier = 'mMultiplier' in variable ? (variable.mMultiplier as Record<string, number>).mNumber : undefined;
-		rv.value = values.reduce((acc, curr) => curr! + acc!, 0) * (multiplier ?? 1);
+
+		let multiplier: number | undefined;
+		if ('mMultiplier' in variable) {
+			const { mNumber, mDataValue } = variable.mMultiplier as IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'];
+			if (mNumber) {
+				multiplier = mNumber;
+			} else {
+				multiplier = whole.dataValues?.[mDataValue];
+			}
+		}
+
+		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)! * (multiplier ?? 1);
 		if (variable.mDisplayAsPercent) {
 			rv.meta ??= {};
 			rv.meta.isPercentage = true;
@@ -563,6 +568,16 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 
 		return rv;
+	},
+	NumberCalculationPart(variable: IGameVariablesByType['NumberCalculationPart']) {
+		return {
+			value: variable.mNumber,
+		};
+	},
+	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole) {
+		return {
+			value: whole.dataValues?.[variable.mDataValue],
+		};
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, self) {
 		let rv = variable.mLevel1Value;
