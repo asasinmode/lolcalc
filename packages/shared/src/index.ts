@@ -68,6 +68,10 @@ export interface IStatsCalculationResult {
 // TODO maybe make more elaborate, like a record of strings where keys are appropriate stringified GameAbilityId
 /** the variables calculated by various things, like riftmaker's void infusion */
 export interface IStatsCalculationVariables {
+	/** ad gained from completed mid quest */
+	midQuestAd?: number;
+	/** ap gained from completed mid quest */
+	midQuestAp?: number;
 	/** ap gained from blackfire torch's passive */
 	blackfireTorchBBlaze?: number;
 	/** ap gained from riftmaker's passive */

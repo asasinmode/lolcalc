@@ -176,6 +176,15 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalStats[stat as IChampionStatName] += effectStats[stat as IChampionStatName]!;
 	}
 
+	if (source.roleQuest.value === 'mid') {
+		calculatedVariables.midQuestAp = totalStats.abilityPower * 0.06;
+		calculatedVariables.midQuestAd = bonusStats.attackDamage * 0.06;
+		bonusStats.abilityPower += calculatedVariables.midQuestAp;
+		bonusStats.attackDamage += calculatedVariables.midQuestAd;
+		totalStats.abilityPower += calculatedVariables.midQuestAp;
+		totalStats.attackDamage += calculatedVariables.midQuestAd;
+	}
+
 	// TODO figure out if its ok to do it
 	if (champion && champion.partype !== 'Mana') {
 		// TODO should be done by CHAMPION_SPECIFICS like `.postTotal()`
