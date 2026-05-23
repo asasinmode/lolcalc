@@ -1134,8 +1134,9 @@ export function computeItemDescription(
 	const { text: tooltipInventoryExtended } = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
 
 	const replacedExtended = additionalItemText(extended, item, damageSource, variables, unknownVariables, replaceOptions);
-	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, replaceOptions);
-	const replacedKeywordDefinitions = additionalItemText(keywordDefinitions, item, damageSource, variables, unknownVariables, replaceOptions);
+	const { replaced: replacedFooterLeft, anyExtendedVariables: footerLeftAnyExtendedVariables } = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, replaceOptions);
+	const { replaced: replacedFooterLeftExtended } = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
+	const { replaced: replacedKeywordDefinitions } = additionalItemText(keywordDefinitions, item, damageSource, variables, unknownVariables, replaceOptions);
 
 	const hasAnyInterestingVariables = variables.values().some(variable => !variable.isUninteresting);
 
@@ -1143,8 +1144,10 @@ export function computeItemDescription(
 		item,
 		variables,
 		unknownVariables,
-		extended: replacedExtended,
+		extended: replacedExtended.replaced,
 		footerLeft: replacedFooterLeft && replaceGameIcons(replacedFooterLeft),
+		footerLeftExtended: replacedFooterLeftExtended && replaceGameIcons(replacedFooterLeftExtended),
+		footerLeftAnyExtendedVInfo: footerLeftAnyExtendedVariables,
 		keywordDefinitions: replacedKeywordDefinitions,
 		subtitleLeft,
 		subtitleRight,
@@ -1166,8 +1169,8 @@ function additionalItemText(
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
 	replaceOptions?: IReplaceGameVariablesOptions,
-): string | undefined {
-	const { replaced, variables: newVariables, unknownVariables: newUnknownVariables } = value
+): { replaced?: string; anyExtendedVariables?: boolean } {
+	const { replaced, variables: newVariables, unknownVariables: newUnknownVariables, anyExtendedVariables } = value
 		? replaceGameVariables(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 				replaceStringtableVariables(value, TEXT.stringtable).replaced,
@@ -1185,7 +1188,7 @@ function additionalItemText(
 	}
 	newVariables && mergeMaps(variables, newVariables);
 
-	return replaced;
+	return { replaced, anyExtendedVariables };
 }
 
 function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
@@ -1618,10 +1621,13 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
 	tooltipShopAnyExtendedVInfo: boolean;
 	tooltipInventoryAnyExtendedVInfo: boolean;
+	footerLeftAnyExtendedVInfo?: boolean;
 	/** same as `tooltipShop` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
 	tooltipShopExtended?: ITextData['items'][keyof ITextData['items']]['tooltipShop'];
 	/** same as `tooltipInventory` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
 	tooltipInventoryExtended?: ITextData['items'][keyof ITextData['items']]['tooltipInventory'];
+	/** same as `footerLeft` but with `replaceGameVariables`' `replaceOptions.isExtended: true` */
+	footerLeftExtended?: ITextData['items'][keyof ITextData['items']]['footerLeft'];
 	/** if any variable found doesn't have `isUninteresting: true` (which itself is set based on item specifics) */
 	hasAnyInterestingVariables: boolean;
 }

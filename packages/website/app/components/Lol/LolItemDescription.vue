@@ -49,11 +49,15 @@ const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
 
 const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inventory');
 
-const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions || computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`]) && !globalKeyModifiers.value.shift,
+const hasMoreInfo = computed(() => !globalKeyModifiers.value.shift && (computedDescription.value?.extended
+	|| computedDescription.value?.keywordDefinitions
+	|| computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`]
+	|| (isInventoryView.value && computedDescription.value?.footerLeftAnyExtendedVInfo)
+),
 );
 const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some(stat => stat.increasedBy)));
 const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
-const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);
+const showDynamicValueFooter = computed(() => isInventoryView.value && computedDescription.value?.footerLeft);
 
 const descriptionText = computed(() => {
 	const suffix = globalKeyModifiers.value.shift ? 'Extended' : '';
@@ -145,7 +149,7 @@ defineExpose({ header });
 		/>
 		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
-			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="computedDescription!.footerLeft" />
+			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && globalKeyModifiers.shift ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
 			<br v-if="showDynamicValueFooter && computedDescription?.keywordDefinitions" v-show="globalKeyModifiers.shift">
 			<p
 				v-if="computedDescription?.keywordDefinitions"
