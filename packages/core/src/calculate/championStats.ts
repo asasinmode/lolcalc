@@ -76,12 +76,18 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	)) as IChampionStats;
 
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	itemBaseStats.tenacity = 1;
 
 	let itemsTotalPercentMovementSpeed = 0;
 	for (const item of items.filter(Boolean)) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
-			/** hpRegen is stored in per second in item but per 5 seconds in champion/displayed */
-			itemBaseStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
+			if (statName === 'tenacity') {
+				/* item tenacity calculated according to [wiki formula](https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking) */
+				itemBaseStats.tenacity *= 1 - statValue;
+			} else {
+				/* hpRegen is stored in per second in item but per 5 seconds in champion/displayed */
+				itemBaseStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
+			}
 		}
 
 		if (item!.stats.PercentBaseHPRegenMod) {
@@ -94,6 +100,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			itemsTotalPercentMovementSpeed += item!.stats.PercentMovementSpeedMod;
 		}
 	}
+	itemBaseStats.tenacity = 1 - itemBaseStats.tenacity;
 
 	const baseWithFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemBaseStats.moveSpeed);
 

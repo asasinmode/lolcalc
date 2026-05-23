@@ -91,7 +91,6 @@ test('Briar ad related passive items', async (t) => {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.steraksGage],
 		});
-		damageSource.currentHealth.value = 564;
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 218,
