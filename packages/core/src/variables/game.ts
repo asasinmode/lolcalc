@@ -1,5 +1,5 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
-import type { IVariableType } from '@lolcalc/shared';
+import type { IChampionStatName, IChampionStats, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
 import type { IReplaceGameVariablesRV, IVariableMeta } from '../types';
@@ -581,20 +581,20 @@ export const VARIABLE_CALCULATION_FNS = {
 		return { value: rv };
 	},
 	StatByCoefficientCalculationPart(variable: IGameVariablesByType['StatByCoefficientCalculationPart'], _whole, self) {
-		// TODO only endless hunger works with this atm, when other variables using this are encountered, adjust
-		if (variable.mStat === 2 && variable.mStatFormula === 2 && variable.mCoefficient) {
+		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
+		if (statValue !== undefined && variable.mCoefficient) {
 			return {
-				value: (self?.stats.value.bonus.attackDamage ?? 0) * variable.mCoefficient,
+				value: statValue * variable.mCoefficient,
 				roundReplaced: true,
 			};
 		}
 	},
 	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self) {
-		// TODO only sterak's gage works with this atm, when other variables using this are encountered, adjust
-		const value = whole.dataValues?.[variable.mDataValue];
-		if (value !== undefined && variable.mStat === 2 && variable.mStatFormula === 1) {
+		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
+		const dataValue = whole.dataValues?.[variable.mDataValue];
+		if (statValue !== undefined && variable.mDataValue !== undefined) {
 			return {
-				value: (self?.stats.value.baseOnLevel.attackDamage ?? 0) * value,
+				value: statValue * dataValue,
 				roundReplaced: true,
 			};
 		}
@@ -624,15 +624,11 @@ interface IGameVariablesByType {
 		mDataValue: string;
 		__type: string;
 	};
-	StatByCoefficientCalculationPart: {
-		mStat: number;
-		mStatFormula: number;
+	StatByCoefficientCalculationPart: IStatWithFormula & {
 		mCoefficient: number;
 		__type: string;
 	};
-	StatByNamedDataValueCalculationPart: {
-		mStat: number;
-		mStatFormula: number;
+	StatByNamedDataValueCalculationPart: IStatWithFormula & {
 		mDataValue: string;
 		__type: string;
 	};
@@ -645,5 +641,37 @@ function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[k
 		return VARIABLE_CALCULATION_FNS.mFormulaParts;
 	}
 	console.warn('[variableResolveFn] unknown variable', variable);
+	return undefined;
+}
+
+/** info in `MSTAT_TO_NAMED_STAT` and `resolveMStatWithFormula` */
+interface IStatWithFormula {
+	mStat: number;
+	mStatFormula: number;
+}
+
+/** item variables sometimes have fields with `mStat: number`, which from what I can tell is supposed to be a champion's stat. This is a map of known numbers to their corresponding stats, supposed to be used with */
+const MSTAT_TO_NAMED_STAT: Record<number, IChampionStatName> = {
+	2: 'attackDamage',
+	12: 'hp',
+};
+
+type IStatsCalculationResultsStatKey = {
+	[P in keyof IStatsCalculationResult]: IStatsCalculationResult[P] extends IChampionStats ? P : never
+}[keyof IStatsCalculationResult];
+
+/** used for resolving variables of type `IStatWithFormula`, which basically are supposed to be various kinds (like base, bonus, total, determined by `mStatFormula`) of champion's stats (determined by `mStat`) */
+function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculationResult): number | undefined {
+	let statsKey: IStatsCalculationResultsStatKey | undefined;
+	if (stat.mStatFormula === 1) {
+		statsKey = 'baseOnLevel';
+	} else if (stat.mStatFormula === 2) {
+		statsKey = 'bonus';
+	}
+	const targetStat = MSTAT_TO_NAMED_STAT[stat.mStat];
+	/** resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
+	if (statsKey && targetStat) {
+		return (stats && stats[statsKey][targetStat]) ?? 0;
+	}
 	return undefined;
 }
