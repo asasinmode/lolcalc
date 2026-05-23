@@ -1302,6 +1302,34 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f5', 'LowHealthThreshold', 'ShieldDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.swiftmarch]: {
+		calculateHooks: {
+			postTotal: {
+				handler(_self, { totalStats, bonusStats, itemTotalStats, itemPassivesStats, adaptiveForceMeta }, { calculatedVariables, miscDebug }) {
+					miscDebug.swiftmarchTotalMs = totalStats.moveSpeed;
+					const adaptiveForce = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.swiftmarch.itemCalculations.MSToAdaptiveCalc, ITEMS_BY_NAME.swiftmarch, { stats: { value: { total: totalStats } } } as DamageSource);
+					if (typeof adaptiveForce?.value === 'number') {
+						calculatedVariables.swiftmarchAdaptive = adaptiveForce.value;
+						const statValue = calculatedVariables.swiftmarchAdaptive * adaptiveForceMeta[2];
+						bonusStats[adaptiveForceMeta[0]] += statValue;
+						itemPassivesStats[adaptiveForceMeta[0]] += statValue;
+						itemTotalStats[adaptiveForceMeta[0]] += statValue;
+						totalStats[adaptiveForceMeta[0]] += statValue;
+					} else {
+						console.warn('[ITEM_SPECIFICS swiftmarch] failed to resolve MSToAdaptiveCalc variable value');
+					}
+				},
+			},
+		},
+		variables: defineVariables({
+			meta: {
+				MSToAdaptiveCalc: {
+					statIconKey: 'moveSpeed',
+					extendedEquals: `<speed>${Math.round(ITEMS_BY_NAME.swiftmarch.dataValues.MSAdaptiveRatio * 100)}%</speed>`,
+				},
+			},
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

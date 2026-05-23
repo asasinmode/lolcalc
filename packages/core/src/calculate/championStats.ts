@@ -168,7 +168,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { totalStats, effectStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug });
+			hook(source, { totalStats, effectStats, bonusStats, itemPassivesStats, itemTotalStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
 

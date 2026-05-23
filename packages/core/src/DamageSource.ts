@@ -1144,7 +1144,7 @@ export function computeItemDescription(
 		variables,
 		unknownVariables,
 		extended: replacedExtended,
-		footerLeft: replacedFooterLeft,
+		footerLeft: replacedFooterLeft && replaceGameIcons(replacedFooterLeft),
 		keywordDefinitions: replacedKeywordDefinitions,
 		subtitleLeft,
 		subtitleRight,
@@ -1700,6 +1700,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		effectStats: Partial<IChampionStats>;
 		itemPassivesStats: IChampionStats;
 		itemTotalStats: IChampionStats;
+		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
 };
 

@@ -290,6 +290,7 @@ test('Ryze tear/ad items', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			mana: 715,
+			attackDamage: 58,
 			abilityPower: 22,
 			armor: 97,
 			abilityHaste: 28,

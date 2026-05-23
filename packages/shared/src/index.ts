@@ -101,6 +101,8 @@ export interface IStatsCalculationVariables {
 	gluttonousImmortalOmnivamp?: number;
 	/** ad gained from sterak's gage passive */
 	sterakAd?: number;
+	/** adaptive force gained from swiftmarch's passive */
+	swiftmarchAdaptive?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
@@ -116,6 +118,8 @@ export interface IStatsCalculationMiscDebug {
 	tearItemBonusMana?: number;
 	/** bonus hp endless hunger's famine passive is based on */
 	endlessBonusAd?: number;
+	/** total movespeed swiftmarch's passive is based on */
+	swiftmarchTotalMs?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
