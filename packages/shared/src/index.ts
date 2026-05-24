@@ -325,6 +325,7 @@ export const ITEM_NAME_TO_ID = {
 	lichBane: '3100',
 	botrk: '3153',
 	steraksGage: '3053',
+	duskAndDawn: '2510',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

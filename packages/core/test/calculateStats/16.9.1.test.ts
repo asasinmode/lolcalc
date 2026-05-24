@@ -232,7 +232,6 @@ test('Ezreal tear items', async (t) => {
 	});
 });
 
-// TODO make sure to check uncaressed attack speed @ 18
 test('Ryze tear/ad items', async (t) => {
 	const sourceCommon: IOverrides<'Ryze'> = {
 		runes: {
@@ -296,6 +295,131 @@ test('Ryze tear/ad items', async (t) => {
 			abilityHaste: 28,
 			moveSpeed: 415,
 			tenacity: 15,
+		});
+	});
+
+	await t.test('lvl 1 | frozen heart, swiftmarch, archangel', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.archangelsStaff],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			mana: 1440,
+			abilityPower: 108,
+			abilityHaste: 53,
+		});
+	});
+
+	await t.test('lvl 1 | frozen heart, swiftmarch, seraph, cosmic drive', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.cosmicDrive],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			mana: 2054,
+			abilityPower: 208,
+			abilityHaste: 78,
+			moveSpeed: 428,
+		});
+	});
+
+	await t.test('lvl 1 | frozen heart, swiftmarch, seraph, cosmic drive, winter\'s approach', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.cosmicDrive, ITEMS_BY_NAME.wintersApproach],
+			internalItemData: {
+				manaflow: 11,
+			} satisfies IInternalItemDataOf<'wintersApproach'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			hp: 1906,
+			mana: 2701,
+			abilityPower: 222,
+			abilityHaste: 93,
+		});
+	});
+
+	await t.test('lvl 1 | frozen heart, swiftmarch, seraph, cosmic drive, fimbulwinter, dusk and dawn', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.cosmicDrive, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.duskAndDawn],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			hp: 2336,
+			mana: 3520,
+			abilityPower: 303,
+			abilityHaste: 113,
+		});
+	});
+
+	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, cosmic drive, fimbulwinter, dusk and dawn', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			level: 18,
+			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.cosmicDrive, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.duskAndDawn],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			hp: 4827,
+			mana: 4979,
+			abilityPower: 427,
+			abilityHaste: 108,
+			attackSpeed: 1.01,
+		});
+	});
+
+	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, rabadon, fimbulwinter', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			level: 18,
+			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.fimbulwinter],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			hp: 4237,
+			mana: 5380,
+			abilityPower: 542,
+			abilityHaste: 63,
+		});
+	});
+
+	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, rabadon, fimbulwinter, force of nature', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			level: 18,
+			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.forceOfNature],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			hp: 4644,
+			mana: 5426,
+			abilityPower: 555,
+			magicResist: 109,
+			abilityHaste: 63,
+			moveSpeed: 428,
+		});
+	});
+
+	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, rabadon, fimbulwinter, cosmic drive', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ryze', {
+			...sourceCommon,
+			level: 18,
+			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.cosmicDrive],
+			internalItemData: {
+				spelldance: 1,
+			} satisfies IInternalItemDataOf<'cosmicDrive'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			hp: 4649,
+			mana: 5797,
+			abilityPower: 661,
+			abilityHaste: 88,
+			moveSpeed: 445,
 		});
 	});
 });

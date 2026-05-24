@@ -131,6 +131,49 @@
 				"MonsterAP": 0.02
 			}
 		},
+		"2510": {
+			"id": "2510",
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatMagicDamageMod": 60,
+				"PercentAttackSpeedMod": 0.2,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SpellbladeHealing": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"2517": {
 			"name": "Endless Hunger",
 			"dataValues": {
@@ -556,6 +599,55 @@
 							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
+				}
+			}
+		},
+		"4401": {
+			"name": "Force of Nature",
+			"stats": {
+				"FlatSpellBlockMod": 55,
+				"FlatHPPoolMod": 400,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"BuffDuration": 7,
+				"MoveSpeed": 0.06,
+				"MaxStacks": 8,
+				"ImmobilizeStacks": 2,
+				"StackRefreshTimer": 1,
+				"BonusMagicResist": 70
+			}
+		},
+		"4629": {
+			"name": "Cosmic Drive",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 70,
+				"PercentMovementSpeedMod": 0.04,
+				"AbilityHasteMod": 25
+			},
+			"gold": {
+				"total": 3000,
+				"sell": 2100
+			},
+			"dataValues": {
+				"StackDuration": 4,
+				"MaxStacks": 3,
+				"MovespeedToGrant": 40,
+				"MaxMovespeedTooltip": 0.15,
+				"ItemCooldown": 10
+			},
+			"itemCalculations": {
+				"MovespeedAmount": {
+					"mFormulaParts": [
+						{
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"__renamedVariables": {
+					"MoveSpeedAmount": "MovespeedAmount"
 				}
 			}
 		},
