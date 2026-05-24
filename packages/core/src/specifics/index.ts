@@ -23,7 +23,8 @@ export const HOOK_PRIORITIES = {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
 		/** should be TODO after overlord's bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
-		// TODO
+	},
+	postTotal: {
 		Ryze: 1,
 	},
 } satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;

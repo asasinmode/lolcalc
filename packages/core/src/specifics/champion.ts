@@ -7,6 +7,7 @@ import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
 import type IRell from '@lolcalc/data/files/champion/Rell.json';
+import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
 import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
@@ -15,12 +16,13 @@ import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
+import type { DetectChampionVariables } from '../types';
 import type { ISpecificVariables } from './index';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
-import { VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
-import { defineVariables } from './index.ts';
+import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
+import { defineVariables, HOOK_PRIORITIES } from './index.ts';
 
 export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
@@ -401,6 +403,54 @@ export const CHAMPION_SPECIFICS = {
 				isOverheated: clamp(0, Math.round(self.internalData.value.isOverheated ?? 0), 1),
 			};
 		},
+	},
+	Ryze: {
+		calculateHooks: {
+			postTotal: {
+				handler(self, { totalStats }, { calculatedVariables, miscDebug }) {
+					if (self.champion.value) {
+						const apMultiplier = championAbilityVariableValue(
+							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
+							{
+								abilityVariant: self.champion.value.abilities.passive.variants[0]!,
+								allAbilitiesVariants: self.allAbilityVariants.value,
+								damageSource: self,
+								dynamicVariables: self.computed.variables.value.abilities.passive[0],
+							},
+						);
+						if (typeof apMultiplier.value === 'number') {
+							miscDebug.ryzePTotalAp = totalStats.abilityPower;
+							miscDebug.ryzePManaBase = totalStats.mana;
+							calculatedVariables.ryzePManaPercentIncrease = miscDebug.ryzePTotalAp * apMultiplier.value / 10_000;
+							miscDebug.ryzePMana = miscDebug.ryzePManaBase * calculatedVariables.ryzePManaPercentIncrease;
+							totalStats.mana += miscDebug.ryzePMana;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
+						}
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal.Ryze,
+			},
+		},
+		variables: defineVariables<DetectChampionVariables<typeof IRyze>>({
+			known: {
+				PassiveManaCalcTooltip: [],
+			},
+			calculate(self) {
+				return {
+					PassiveManaCalcTooltip: {
+						value: self.stats.value.variables.ryzePManaPercentIncrease ?? 0,
+					},
+				};
+			},
+			meta: {
+				PassiveManaCalcTooltip: {
+					statIconKey: 'abilityPower',
+					multiplier: 100,
+					extendedEquals: `<scaleap>${10}</scaleap>`,
+				},
+			},
+		}),
 	},
 	Samira: {
 		PASSIVE_OPTIONS: {

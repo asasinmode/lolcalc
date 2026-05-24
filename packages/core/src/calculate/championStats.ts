@@ -189,8 +189,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		},
 	)) as IChampionStats;
 
-	// TODO figure out if its ok to do it
-	if (champion && champion.partype !== 'Mana') {
+	// TODO figure out if its ok to do it, also handle other non mana champions not gaining mana
+	if (!source.hasMana.value) {
 		totalStats.mana = baseStats.mana;
 	}
 
@@ -211,8 +211,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotal: itemTotalStats,
 		itemStatIncreases,
 		championPassive: championPassiveStats,
-		totalMultipliersStats,
 		totalPreMultipliersStats,
+		totalMultipliersStats,
 		bonus: bonusStats,
 		total: totalStats,
 		effect: effectStats,

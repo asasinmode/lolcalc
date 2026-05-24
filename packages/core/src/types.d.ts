@@ -1,5 +1,5 @@
 import type { STAT_ICON } from '@lolcalc/data';
-import type { IVariableType } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IVariableType } from '@lolcalc/shared';
 
 export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
 
@@ -85,3 +85,8 @@ export type DetectItemVariables<T>
 		| (T extends { stringCalculations: object } ? keyof T['stringCalculations'] : never)
 		| (T extends { itemCalculations: object } ? keyof T['itemCalculations'] : never)
 		| (T extends { effectAmount: any[] } ? `Effect${number}Amount` : never);
+
+/** creates a union of all variable properties detected on a champion */
+export type DetectChampionVariables<T, AbilityKey extends IChampionAbilityKey = IChampionAbilityKey, U = T['abilities'][AbilityKey]['variants'][number]>
+	= | U extends { dataValues: any } ? keyof U['dataValues'] : never
+		| U extends { spellCalculations: any } ? keyof U['spellCalculations'] : never;
