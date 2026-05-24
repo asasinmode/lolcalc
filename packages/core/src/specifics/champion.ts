@@ -443,16 +443,16 @@ export const CHAMPION_SPECIFICS = {
 				return {
 					PassiveManaCalcTooltip: {
 						value: self.stats.value.variables.ryzePManaPercentIncrease ?? 0,
+						roundReplaced: 1,
 					},
 				};
 			},
 			meta: {
+				// TODO custom variable how much mana he gains
 				PassiveManaCalcTooltip: {
 					statIconKey: 'abilityPower',
-					// TODO multiplier doesn't seem to be applied?
 					multiplier: 100,
 					resultsIsPercentage: true,
-					// TODO show extended thingies in ability description, also need to get that value from champion, ideally calculated like hook does
 					extendedEquals(params, dynamicVariables) {
 						const apMultiplier = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,

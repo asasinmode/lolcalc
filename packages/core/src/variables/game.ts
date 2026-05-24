@@ -57,8 +57,11 @@ export interface IVariableValueResult {
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[];
 	meta?: IVariableMeta;
-	/** usually when value was calculated in some way and might have floating points that should be rounded in description */
-	roundReplaced?: boolean;
+	/**
+	 * usually when value was calculated in some way and might have floating points that should be rounded in description
+	 * if `number`, assumed to be `roundVariable`'s `precision` parameter
+	 */
+	roundReplaced?: boolean | number;
 	/** whether `ISpecificVariables.uninteresting` includes it */
 	isUninteresting?: boolean;
 }
@@ -71,10 +74,6 @@ export interface IVariableValueResult {
  */
 export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting'> {
 	values?: Record<string, ICalculatedDynamicVariable>;
-}
-
-function resolveDynamicVariable(value: NonNullable<IDynamicVariables['values']>[string]): IVariableValueResult['value'] {
-	return value.value;
 }
 
 interface IBaseVariableParams {
@@ -120,7 +119,8 @@ export function itemVariableValue(
 	}
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
-		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
+		rv.roundReplaced = true;
+		Object.assign(rv, dynamicVariables.values[variable]);
 		if (Array.isArray(rv.value)) {
 			if (isRanged === undefined) {
 				rv.isMeleeRanged = true;
@@ -132,7 +132,6 @@ export function itemVariableValue(
 				rv.value = rv.value[0];
 			}
 		}
-		rv.roundReplaced = true;
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
@@ -197,9 +196,9 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 
 	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated, when it changes also make sure to resolve meta the same way it is in items/champions (not dependant on value existing) */
 	if (dynamicVariables.values?.[variable]) {
-		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
-		rv.meta = dynamicVariables.meta?.[variable] ?? {};
 		rv.roundReplaced = true;
+		Object.assign(rv, dynamicVariables.values[variable]);
+		rv.meta = dynamicVariables.meta?.[variable] ?? {};
 		return rv;
 	}
 
@@ -291,8 +290,8 @@ export function championAbilityVariableValue(variable: string, arg: IChampionAbi
 	}
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
-		rv.value = resolveDynamicVariable(dynamicVariables.values[variable]);
 		rv.roundReplaced = true;
+		Object.assign(rv, dynamicVariables.values[variable]);
 	}
 
 	if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
@@ -521,8 +520,16 @@ export function replaceGameVariables(
 			return replaceWithName
 				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${(meta?.displayedName ?? variableName)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
-					roundReplaced ? Math.round(variable[0]!) : variable[0]}${varValueSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
-					roundReplaced ? Math.round(variable[1]!) : variable[1]}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
+					typeof roundReplaced === 'number'
+						? roundVariable(variable[0], roundReplaced)
+						: roundReplaced
+							? Math.round(variable[0]!)
+							: variable[0]}${varValueSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
+					typeof roundReplaced === 'number'
+						? roundVariable(variable[1], roundReplaced)
+						: roundReplaced
+							? Math.round(variable[1]!)
+							: variable[1]}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		const baseValue = roundVariable(variable * multiplier);
@@ -541,7 +548,13 @@ export function replaceGameVariables(
 				: undefined;
 		const iconPrefix = meleeRangedIconPath ? `%i:${meleeRangedIconPath}active% ` : '';
 
-		return `${iconPrefix}${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : (roundReplaced ? Math.round(variable) : variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
+		return `${iconPrefix}${tagWrapStart}${replaceWithName
+			? (meta?.displayedName ?? variableName)
+			: (typeof roundReplaced === 'number'
+					? roundVariable(variable, roundReplaced)
+					: roundReplaced
+						? Math.round(variable)
+						: variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
 	});
 
 	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionData.dynamicVariables);
