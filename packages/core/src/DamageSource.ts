@@ -1250,7 +1250,7 @@ export function computeAbilityDescription(
 		anyExtendedVariables: tooltipExtendedAnyExtendedVariables,
 	} = abilityVariantText(
 		allVariants,
-		variant.tooltipExtended || '',
+		variant.tooltipExtended || variant.tooltip || '<unknown>UNKNOWN</unknown>',
 		variant,
 		dynamicVariables,
 		abilityLevel,
