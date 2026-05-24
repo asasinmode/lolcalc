@@ -1,5 +1,4 @@
-import type { STAT_ICON } from '@lolcalc/data';
-import type { IChampionAbilityKey, IVariableType } from '@lolcalc/shared';
+import type { IChampionAbilityKey } from '@lolcalc/shared';
 
 export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
 
@@ -49,36 +48,6 @@ export interface IReplaceStringtableVariablesRV {
 	unknownStringtableVariables: Map<string, Set<string>>;
 }
 
-export interface IVariableMeta {
-	/** variable name shown in description when `replaceGameVariables`' `options.replaceWithName` is true instead of the actual variable name */
-	displayedName?: string;
-	/**
-	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it
-	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
-	 */
-	statIconKey?: Exclude<keyof typeof STAT_ICON, 'slowResist' | 'GP10'>;
-	/**
-	 * when present, formatted variable will have `= (${extendedEquals})` appended to in the extended version (holding shift)
-	 * if `extendedEquals` is an object, it's assumed to have different info values for melee/ranged and will be formatted accordingly in `replaceGameVariables`
-	 */
-	extendedEquals?: string | {
-		prefix: string;
-		meleeValue: string | number;
-		rangedValue: string | number;
-		valueSuffix?: string;
-		suffix: string;
-	};
-	/** displayed value multiplied by */
-	multiplier?: number;
-	/** `%` will be suffixed to the formatted value in replaced description */
-	isPercentage?: boolean;
-	/** `%` will be suffixed to the formatted value in results */
-	resultsIsPercentage?: boolean;
-	type?: IVariableType;
-	/** whether the variable is an additional one, not found in description but computed by lolcalc and wanted in results */
-	isAdditional?: boolean;
-}
-
 /** creates a union of all variable properties detected on an item */
 export type DetectItemVariables<T>
 	= | (T extends { dataValues: object } ? keyof T['dataValues'] : never)
@@ -88,5 +57,5 @@ export type DetectItemVariables<T>
 
 /** creates a union of all variable properties detected on a champion */
 export type DetectChampionVariables<T, AbilityKey extends IChampionAbilityKey = IChampionAbilityKey, U = T['abilities'][AbilityKey]['variants'][number]>
-	= | U extends { dataValues: any } ? keyof U['dataValues'] : never
-		| U extends { spellCalculations: any } ? keyof U['spellCalculations'] : never;
+	= | (U extends { dataValues: any } ? keyof U['dataValues'] & string : never)
+		| (U extends { spellCalculations: any } ? keyof U['spellCalculations'] & string : never);

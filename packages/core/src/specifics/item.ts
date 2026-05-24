@@ -1,5 +1,5 @@
 import type { TItems } from '@lolcalc/data';
-import type { IItem, IShopItem } from '@lolcalc/data/types';
+import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
@@ -1340,7 +1340,7 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	 */
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, string>;
+	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, string, IChampionId, 'item'>;
 	[key: string]: any;
 };
 

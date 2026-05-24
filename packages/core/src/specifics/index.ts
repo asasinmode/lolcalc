@@ -2,8 +2,7 @@ import type { IChampionId } from '@lolcalc/data/types';
 import type { TItemNameToId } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
-import type { IVariableMeta } from '../types';
-import type { IDynamicVariables } from '../variables/game';
+import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game';
 import type { TChampionSpecifics } from './champion';
 import type { CHAMPION_SPECIFICS } from './champion.ts';
 import type { TEffectSpecifics } from './effect';
@@ -75,6 +74,7 @@ export interface ISpecificVariables<
 	DetectedVariables extends string = string,
 	T extends string = DetectedVariables,
 	Id extends IChampionId | undefined = IChampionId,
+	VariableType extends IGameVariableType = IGameVariableType,
 > {
 	/**
 	 * record containing possible dynamic values for an ability variable (all values the variable is expected to resolve to)
@@ -111,7 +111,7 @@ export interface ISpecificVariables<
 	 */
 	calculate?: (self: DamageSource<Id>) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
 	/** any dynamic variables' meta information like icon of the stat they scale from. */
-	meta?: NoInfer<Partial<Record<T | DetectedVariables, IVariableMeta>>>;
+	meta?: NoInfer<Partial<Record<T | DetectedVariables, IVariableMeta<IGameVariableValueParameters[VariableType]>>>>;
 	/**
 	 * variables listed here won't be shown in results, as well as have their actual values resolved regardless of the `replaceWithName` option of `replaceGameVariables`
 	 * the type works almost perfectly except that when no other keys (known/calculate/meta) is provided, then it resolves to `string[]` but at the moment I can't find a fix for it
@@ -121,22 +121,23 @@ export interface ISpecificVariables<
 
 export function defineVariables<
 	DetectedVariables extends string = string,
-	T extends string = DetectedVariables,
+	T extends string = string,
 	Id extends IChampionId | undefined = IChampionId,
+	U extends IGameVariableType = IGameVariableType,
 >(
-	config: Omit<ISpecificVariables<DetectedVariables, T, Id>, 'default'>,
-): ISpecificVariables<DetectedVariables, T, Id> {
+	config: Omit<ISpecificVariables<DetectedVariables, T, Id, U>, 'default'>,
+): ISpecificVariables<DetectedVariables, T, Id, U> {
 	return Object.assign(config, {
 		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => {
 			return [key, { value: key === 'lolcalcChampRange'
 				? [(value as number[])[0] ?? 0, (value as number[])[1] ?? 0]
 				: ((value as (string | number)[])[0] ?? 0) }];
 		},
-		)) as ISpecificVariables<DetectedVariables, T, Id>['default'],
+		)) as ISpecificVariables<DetectedVariables, T, Id, U>['default'],
 	});
 }
 
-export function calculateDynamicVariables(self: DamageSource, config?: ISpecificVariables): IDynamicVariables | undefined {
+export function calculateDynamicVariables(self: DamageSource, config?: ISpecificVariables<string, string, IChampionId, any>): IDynamicVariables | undefined {
 	return config && {
 		values: config.calculate?.(self),
 		meta: config.meta,

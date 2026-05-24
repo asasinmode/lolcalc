@@ -2,10 +2,46 @@ import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/
 import type { IChampionStatName, IChampionStats, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
-import type { IReplaceGameVariablesRV, IVariableMeta } from '../types';
+import type { IReplaceGameVariablesRV } from '../types';
 
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
+
+type IVariableMetaExtendedEquals = string | {
+	prefix: string;
+	meleeValue: string | number;
+	rangedValue: string | number;
+	valueSuffix?: string;
+	suffix: string;
+};
+
+export interface IVariableMeta<T = any> {
+	/** variable name shown in description when `replaceGameVariables`' `options.replaceWithName` is true instead of the actual variable name */
+	displayedName?: string;
+	/**
+	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it
+	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
+	 */
+	statIconKey?: Exclude<keyof typeof STAT_ICON, 'slowResist' | 'GP10'>;
+	/**
+	 * when present, formatted variable will have `= (${extendedEquals})` appended to in the extended version (holding shift)
+	 * if `extendedEquals` is an object, it's assumed to have different info values for melee/ranged and will be formatted accordingly in `replaceGameVariables`
+	 * if it's a function, it will be passed the same arguments the variable value function receives
+	 *	- item: `IItemVariableParams`
+	 *	- rune: `IRuneVariableParams`
+	 *	- champion: `IChampionAbilityVariableParams`
+	 */
+	extendedEquals?: IVariableMetaExtendedEquals | ((variableValueParams: T, overrideDynamicVariables?: IDynamicVariables) => IVariableMetaExtendedEquals);
+	/** displayed value multiplied by */
+	multiplier?: number;
+	/** `%` will be suffixed to the formatted value in replaced description */
+	isPercentage?: boolean;
+	/** `%` will be suffixed to the formatted value in results */
+	resultsIsPercentage?: boolean;
+	type?: IVariableType;
+	/** whether the variable is an additional one, not found in description but computed by lolcalc and wanted in results */
+	isAdditional?: boolean;
+}
 
 export interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
@@ -412,12 +448,14 @@ export function replaceGameVariables(
 
 		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
 		let metaSuffix = '';
-		const extendedEquals = typeof meta?.extendedEquals !== 'object'
-			? meta?.extendedEquals as string
-			: `${meta.extendedEquals.prefix}${isMeleeRanged === true
-				? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix} | ${meta.extendedEquals.rangedValue}`
-				: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
-			}${meta.extendedEquals.valueSuffix}${meta.extendedEquals.suffix}`;
+		const extendedEquals = typeof meta?.extendedEquals === 'function'
+			? meta.extendedEquals(variableValueFunctionData, options.overrideVariables)
+			: typeof meta?.extendedEquals !== 'object'
+				? meta?.extendedEquals as string
+				: `${meta.extendedEquals.prefix}${isMeleeRanged === true
+					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix} | ${meta.extendedEquals.rangedValue}`
+					: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
+				}${meta.extendedEquals.valueSuffix}${meta.extendedEquals.suffix}`;
 
 		if (meta?.statIconKey || varIcon) {
 			const iconStr = (meta?.statIconKey && `%i:${STAT_ICON[meta.statIconKey]}%`) || varIcon || '';

@@ -1,7 +1,9 @@
+import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
 import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
+import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
@@ -11,6 +13,7 @@ import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
 import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
+import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
@@ -81,7 +84,7 @@ export const CHAMPION_SPECIFICS = {
 		WEAPON_VARIANT_INDEX_TO_NAME: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[],
 		/** stringtable indexes are different from the actual weapon order - `apheliosgun_name_1` is for calibrum and so */
 		WEAPON_NAME_TO_STRINGTABLE_INDEX: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
-		variables: defineVariables({
+		variables: defineChampionVariables<'Aphelios', typeof IAphelios>({
 			known: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
 				f1: [1, 2, 3, 4, 5],
@@ -123,7 +126,7 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		e: {
-			variables: defineVariables({
+			variables: defineChampionVariables<'Aphelios', typeof IAphelios>({
 				known: {
 					f1: [1, 2, 3],
 				},
@@ -256,15 +259,6 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Kayn: {
-		variables: defineVariables({
-			known: {
-				f1: [0, 1, 2],
-			},
-			calculate() {
-				// TODO
-				return {} as any;
-			},
-		}),
 		FORM_OPTIONS: {
 			base: 0,
 			assassin: 1,
@@ -275,6 +269,15 @@ export const CHAMPION_SPECIFICS = {
 				form: clamp(0, Math.round(self.internalData.value.form ?? 0), CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.rhaast),
 			};
 		},
+		variables: defineChampionVariables<'Kayn', typeof IKayn>({
+			known: {
+				f1: [0, 1, 2],
+			},
+			calculate() {
+				// TODO
+				return {} as any;
+			},
+		}),
 	},
 	Kindred: {
 		setupData(self): { passiveStacks: number } {
@@ -367,7 +370,7 @@ export const CHAMPION_SPECIFICS = {
 				})],
 			};
 		},
-		variables: defineVariables({
+		variables: defineChampionVariables<'Ornn', typeof IOrnn>({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -432,7 +435,7 @@ export const CHAMPION_SPECIFICS = {
 				priority: HOOK_PRIORITIES.postTotal.Ryze,
 			},
 		},
-		variables: defineVariables<DetectChampionVariables<typeof IRyze>>({
+		variables: defineChampionVariables<'Ryze', typeof IRyze>({
 			known: {
 				PassiveManaCalcTooltip: [],
 			},
@@ -446,8 +449,12 @@ export const CHAMPION_SPECIFICS = {
 			meta: {
 				PassiveManaCalcTooltip: {
 					statIconKey: 'abilityPower',
+					// TODO multiplier doesn't seem to be applied?
 					multiplier: 100,
-					extendedEquals: `<scaleap>${10}</scaleap>`,
+					// TODO show extended thingies in ability description, also need to get that value from champion, ideally calculated like hook does
+					extendedEquals(_a, _b) {
+						return `<scaleap>${10}</scaleap>`;
+					},
 				},
 			},
 		}),
@@ -578,7 +585,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	TwistedFate: {
-		variables: defineVariables({
+		variables: defineChampionVariables<'TwistedFate', typeof ITwistedFate>({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -686,13 +693,13 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		& {
 			[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific<Id>;
 		} & {
-			variables?: ISpecificVariables<string, string, Id>;
+			variables?: ISpecificVariables<string, string, Id, 'championAbility'>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
 			[key: string]: any;
 		};
 
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
-	variables?: ISpecificVariables<string, string, Id>;
+	variables?: ISpecificVariables<string, string, Id, 'championAbility'>;
 	/**
 	 * ability's variant specific
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
@@ -701,3 +708,14 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 };
 
 export type IChampionAbilityVariantSpecific = IProviderGroupImageText;
+
+/** wrapper around `defineVariables` for types on champion specific's variables */
+export function defineChampionVariables<
+	Id extends IChampionId,
+	T = never,
+	DetectedVariables extends string = DetectChampionVariables<T>,
+>(
+	config: Omit<ISpecificVariables<DetectedVariables, string, Id, 'championAbility'>, 'default'>,
+): ISpecificVariables<DetectedVariables, string, Id, 'championAbility'> {
+	return defineVariables(config);
+}
