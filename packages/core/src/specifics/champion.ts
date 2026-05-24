@@ -451,9 +451,15 @@ export const CHAMPION_SPECIFICS = {
 					statIconKey: 'abilityPower',
 					// TODO multiplier doesn't seem to be applied?
 					multiplier: 100,
+					resultsIsPercentage: true,
 					// TODO show extended thingies in ability description, also need to get that value from champion, ideally calculated like hook does
-					extendedEquals(_a, _b) {
-						return `<scaleap>${10}</scaleap>`;
+					extendedEquals(params, dynamicVariables) {
+						const apMultiplier = championAbilityVariableValue(
+							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
+							params,
+							dynamicVariables,
+						);
+						return `<scaleap>${apMultiplier.value}%</scaleap>`;
 					},
 				},
 			},

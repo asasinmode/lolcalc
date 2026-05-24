@@ -1296,6 +1296,11 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.swiftmarch]: {
 		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemPassivesStats }) {
+					itemPassivesStats.slowResist += ITEMS_BY_NAME.swiftmarch.dataValues.SlowResistTooltip;
+				},
+			},
 			onTotalPreMultipliers: {
 				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, itemTotalStats, itemPassivesStats, adaptiveForceMeta }, { calculatedVariables, miscDebug }) {
 					miscDebug.swiftmarchTotalMs = totalPreMultipliersStats.moveSpeed;
@@ -1324,6 +1329,7 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<speed>${Math.round(ITEMS_BY_NAME.swiftmarch.dataValues.MSAdaptiveRatio * 100)}%</speed>`,
 				},
 			},
+			uninteresting: ['SlowResistTooltip', 'MSAdaptiveRatio'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
