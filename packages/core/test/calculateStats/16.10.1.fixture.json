@@ -215,6 +215,37 @@
 					]
 				}
 			}
+		},
+		"3170": {
+			"name": "Swiftmarch",
+			"stats": {
+				"FlatMovementSpeedMod": 65
+			},
+			"dataValues": {
+				"MoveSpeedMultiplier": 0.04,
+				"SlowResistTooltip": 0.4,
+				"MSAdaptiveRatio": 0.05
+			},
+			"itemCalculations": {
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MSToAdaptiveCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 7,
+							"mDataValue": "MSAdaptiveRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

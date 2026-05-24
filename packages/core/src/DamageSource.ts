@@ -1717,13 +1717,22 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		baseOnLevelStats: IChampionStats;
 		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
-	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		totalStats: IChampionStats;
+	/** runs when total stats have been calculated but before any total multipliers like mid quest or dragons */
+	onTotalPreMultipliers?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		totalPreMultipliersStats: IChampionStats;
+		totalMultipliersStats: IChampionStats;
 		bonusStats: IChampionStats;
 		effectStats: Partial<IChampionStats>;
 		itemPassivesStats: IChampionStats;
 		itemTotalStats: IChampionStats;
 		adaptiveForceMeta: IAdaptiveForceStatRv;
+	}) => void>;
+	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, argsd: {
+		totalStats: IChampionStats;
+		totalMultipliersStats: IChampionStats;
+		bonusStats: IChampionStats;
+		itemPassivesStats: IChampionStats;
+		itemTotalStats: IChampionStats;
 	}) => void>;
 };
 

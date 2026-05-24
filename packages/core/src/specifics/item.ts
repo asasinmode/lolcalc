@@ -1042,7 +1042,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { bonusStats, totalStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					const variable = itemVariableValue('HasteFromAD', {
 						item: ITEMS_BY_NAME.endlessHunger,
 						isRanged: self.isRanged.value,
@@ -1067,7 +1067,7 @@ export const ITEM_SPECIFICS = {
 						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste', variable);
 					}
 				},
-				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.endlessHunger],
+				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.endlessHunger],
 			},
 		},
 		variables: defineVariables({
@@ -1208,17 +1208,16 @@ export const ITEM_SPECIFICS = {
 				},
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
-			postTotal: {
-				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
-					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
-					calculatedVariables.bloodmailRetribution = totalStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
+			onTotalPreMultipliers: {
+				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalPreMultipliersStats.hp);
+					calculatedVariables.bloodmailRetribution = totalPreMultipliersStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
 
-					totalStats.attackDamage += calculatedVariables.bloodmailRetribution;
-					bonusStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					totalMultipliersStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					itemTotalStats.attackDamage += calculatedVariables.bloodmailRetribution;
 				},
-				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
+				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 		},
 		variables: defineVariables({
@@ -1297,17 +1296,21 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.swiftmarch]: {
 		calculateHooks: {
-			postTotal: {
-				handler(_self, { totalStats, bonusStats, itemTotalStats, itemPassivesStats, adaptiveForceMeta }, { calculatedVariables, miscDebug }) {
-					miscDebug.swiftmarchTotalMs = totalStats.moveSpeed;
-					const adaptiveForce = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.swiftmarch.itemCalculations.MSToAdaptiveCalc, ITEMS_BY_NAME.swiftmarch, { stats: { value: { total: totalStats } } } as DamageSource);
+			onTotalPreMultipliers: {
+				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, itemTotalStats, itemPassivesStats, adaptiveForceMeta }, { calculatedVariables, miscDebug }) {
+					miscDebug.swiftmarchTotalMs = totalPreMultipliersStats.moveSpeed;
+					const adaptiveForce = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.swiftmarch.itemCalculations.MSToAdaptiveCalc, ITEMS_BY_NAME.swiftmarch, { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource);
 					if (typeof adaptiveForce?.value === 'number') {
 						calculatedVariables.swiftmarchAdaptive = adaptiveForce.value;
 						const statValue = calculatedVariables.swiftmarchAdaptive * adaptiveForceMeta[2];
-						bonusStats[adaptiveForceMeta[0]] += statValue;
+
+						totalMultipliersStats[adaptiveForceMeta[0]] += statValue;
 						itemPassivesStats[adaptiveForceMeta[0]] += statValue;
 						itemTotalStats[adaptiveForceMeta[0]] += statValue;
-						totalStats[adaptiveForceMeta[0]] += statValue;
+
+						if (adaptiveForceMeta[0] === 'abilityPower') {
+							calculatedVariables.apMultipliersBase += statValue;
+						}
 					} else {
 						console.warn('[ITEM_SPECIFICS swiftmarch] failed to resolve MSToAdaptiveCalc variable value');
 					}

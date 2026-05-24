@@ -575,7 +575,7 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		let multiplier: number | undefined;
 		if ('mMultiplier' in variable) {
-			multiplier = resolveMMultiplier(variable as any, whole);
+			multiplier = resolveMMultiplier(variable.mMultiplier as any, whole);
 		}
 
 		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)! * (multiplier ?? 1);

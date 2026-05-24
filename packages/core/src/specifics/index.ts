@@ -19,7 +19,7 @@ export const HOOK_PRIORITIES = {
 	preBonus: {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
 	},
-	postTotal: {
+	onTotalPreMultipliers: {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
 		/** should be TODO after overlord's bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,

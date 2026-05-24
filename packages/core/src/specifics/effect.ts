@@ -129,10 +129,11 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 		calculateHooks: {
-			postTotal: {
-				handler(_self, { totalStats, effectStats }, { calculatedVariables }) {
-					const value = totalStats.attackSpeed * ITEMS_BY_NAME.frozenHeart.dataValues.ASPDSlow;
+			onTotalPreMultipliers: {
+				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, effectStats }, { calculatedVariables }) {
+					const value = totalPreMultipliersStats.attackSpeed * ITEMS_BY_NAME.frozenHeart.dataValues.ASPDSlow;
 					effectStats.attackSpeed = value;
+					totalMultipliersStats.attackSpeed += value;
 					calculatedVariables.frozenHeartCaress = value;
 				},
 			},

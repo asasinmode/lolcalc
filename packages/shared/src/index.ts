@@ -52,6 +52,10 @@ export interface IStatsCalculationResult {
 	 * `mejai, hubris`
 	 */
 	itemStatIncreases: Record<string, Partial<Record<IItemStat, number>>>;
+	/** stats gained from any multipliers like mid role quest, dragons or rabadon */
+	totalMultipliersStats: IChampionStats;
+	/** total stat before applying multipliers (`totalMultipliersStats`) */
+	totalPreMultipliersStats: IChampionStats;
 	bonus: IChampionStats;
 	effect: Partial<IChampionStats>;
 	total: IChampionStats;

@@ -43,6 +43,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	// atm only frozen heart and these are not automatically added to total, only used for tracking - frozen heart uses onTotalPreMultipliers and totalMultipliersStats
+	const effectStats: Partial<IChampionStats> = {};
 
 	if (source.calculateStatsHooks.all.value.postInit) {
 		for (const hook of source.calculateStatsHooks.all.value.postInit) {
@@ -158,37 +160,44 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		],
 	)) as IChampionStats;
 
-	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
+	const totalPreMultipliersStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (championPassiveStats[statName as IChampionStatName] ?? 0)
 		+ (itemTotalStats[statName as IChampionStatName] ?? 0)],
 	)) as IChampionStats;
 
-	const effectStats: Partial<IChampionStats> = {};
+	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
-	if (source.calculateStatsHooks.all.value.postTotal) {
-		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { totalStats, effectStats, bonusStats, itemPassivesStats, itemTotalStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
+	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
+		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
+			hook(source, { totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
 
-	for (const stat in effectStats) {
-		totalStats[stat as IChampionStatName] += effectStats[stat as IChampionStatName]!;
+	if (source.roleQuest.value === 'mid') {
+		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * 0.06;
+		calculatedVariables.midQuestAd = bonusStats.attackDamage * 0.06;
+		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
+		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 	}
 
-	if (source.roleQuest.value === 'mid') {
-		calculatedVariables.midQuestAp = totalStats.abilityPower * 0.06;
-		calculatedVariables.midQuestAd = bonusStats.attackDamage * 0.06;
-		bonusStats.abilityPower += calculatedVariables.midQuestAp;
-		bonusStats.attackDamage += calculatedVariables.midQuestAd;
-		totalStats.abilityPower += calculatedVariables.midQuestAp;
-		totalStats.attackDamage += calculatedVariables.midQuestAd;
-	}
+	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
+		([statName, statValue]) => {
+			const value = totalMultipliersStats[statName as IChampionStatName];
+			bonusStats[statName as IChampionStatName] += value;
+			return [statName, statValue + value];
+		},
+	)) as IChampionStats;
 
 	// TODO figure out if its ok to do it
 	if (champion && champion.partype !== 'Mana') {
-		// TODO should be done by CHAMPION_SPECIFICS like `.postTotal()`
-		totalStats.mana = champion.id === 'Viego' ? 0 : baseStats.mana ?? 0;
+		totalStats.mana = baseStats.mana;
+	}
+
+	if (source.calculateStatsHooks.all.value.postTotal) {
+		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
+			hook(source, { totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug });
+		}
 	}
 
 	return {
@@ -202,9 +211,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotal: itemTotalStats,
 		itemStatIncreases,
 		championPassive: championPassiveStats,
+		totalMultipliersStats,
+		totalPreMultipliersStats,
 		bonus: bonusStats,
-		effect: effectStats,
 		total: totalStats,
+		effect: effectStats,
 		meta: {
 			hasMana: !champion || champion.partype === 'mana',
 			adaptiveForceStatVariable: adaptiveForceMeta[1],
