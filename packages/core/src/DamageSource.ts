@@ -1250,7 +1250,7 @@ export function computeAbilityDescription(
 		anyExtendedVariables: tooltipExtendedAnyExtendedVariables,
 	} = abilityVariantText(
 		allVariants,
-		variant.tooltipExtended || variant.tooltip || '<unknown>UNKNOWN</unknown>',
+		variant.tooltipExtended ?? (tooltipAnyExtendedVariables ? variant.tooltip : '') ?? '',
 		variant,
 		dynamicVariables,
 		abilityLevel,
@@ -1605,6 +1605,7 @@ export interface IComputedAbilityDescription {
 	gameAbilityId: IChampionAbilityId;
 	name: string;
 	tooltip: string;
+	/** will be empty if there are no extended variables in normal `tooltip` and the game data itself doesn't have it/is identical to normal `tooltip` */
 	tooltipExtended: string;
 	tooltipExtendedBelowLine: string;
 	anyUnknownVariables: number;
