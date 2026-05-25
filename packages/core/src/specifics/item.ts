@@ -66,6 +66,15 @@ const gluttonousGreavesSpecific = {
 	},
 } satisfies IItemSpecific;
 
+export const ITEM_SPECIFICS_SHARED = {
+	[ITEM_NAME_TO_ID.archangelsStaff]: {
+		AP_FROM_MANA: ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana,
+	},
+	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
+		AP_FROM_MANA: ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana,
+	},
+};
+
 /** specific items' helpers, utils and calculations */
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -423,7 +432,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: tearItem.calculateHookPreItemTotal,
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const bonusAP = itemTotalStats.mana * ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana;
+					const bonusAP = itemTotalStats.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.archangelsStaff].AP_FROM_MANA;
 					calculatedVariables.apMultipliersBase += bonusAP;
 					itemPassivesStats.abilityPower += bonusAP;
 					itemTotalStats.abilityPower += bonusAP;
@@ -440,7 +449,7 @@ export const ITEM_SPECIFICS = {
 					/** ap gained from passive */
 					f2: {
 						value: self.stats.value.variables.archangelSeraphAwe
-							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana),
+							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.archangelsStaff].AP_FROM_MANA),
 					},
 				};
 			},
@@ -448,7 +457,7 @@ export const ITEM_SPECIFICS = {
 				f2: {
 					displayedName: 'APFromMana',
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana * 100)}% bonus</scalemana> `,
+					extendedEquals: `<scalemana>${Math.round(ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.archangelsStaff].AP_FROM_MANA * 100)}% bonus</scalemana> `,
 				},
 			},
 			uninteresting: ['APFromMana', ...tearItem.uninterestingVariables],
@@ -458,7 +467,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const bonusAP = itemTotalStats.mana * ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana;
+					const bonusAP = itemTotalStats.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA;
 					calculatedVariables.apMultipliersBase += bonusAP;
 					itemPassivesStats.abilityPower += bonusAP;
 					itemTotalStats.abilityPower += bonusAP;
@@ -481,7 +490,7 @@ export const ITEM_SPECIFICS = {
 					/** ap gained from passive */
 					BonusAPCalc: {
 						value: self.stats.value.variables.archangelSeraphAwe
-							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana),
+							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA),
 					},
 					ShieldValue: {
 						value: self.stats.value.total.mana * ITEMS_BY_NAME.seraphsEmbrace.itemCalculations.ShieldValue.mFormulaParts[0]!.mCoefficient,
@@ -491,7 +500,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				BonusAPCalc: {
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana * 100)}% bonus</scalemana> `,
+					extendedEquals: `<scalemana>${Math.round(ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA * 100)}% bonus</scalemana> `,
 				},
 				ShieldValue: {
 					statIconKey: 'mana',
