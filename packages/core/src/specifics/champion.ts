@@ -410,7 +410,7 @@ export const CHAMPION_SPECIFICS = {
 	Ryze: {
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats }, { calculatedVariables, miscDebug }) {
 					if (self.champion.value) {
 						const apMultiplier = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
@@ -427,6 +427,7 @@ export const CHAMPION_SPECIFICS = {
 							calculatedVariables.ryzePManaPercentIncrease = miscDebug.ryzePTotalAp * apMultiplier.value / 10_000;
 							miscDebug.ryzePMana = miscDebug.ryzePManaBase * calculatedVariables.ryzePManaPercentIncrease;
 							totalStats.mana += miscDebug.ryzePMana;
+							bonusStats.mana += miscDebug.ryzePMana;
 						} else {
 							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
 						}

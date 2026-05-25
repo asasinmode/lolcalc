@@ -163,7 +163,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const totalPreMultipliersStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (championPassiveStats[statName as IChampionStatName] ?? 0)
-		+ (itemTotalStats[statName as IChampionStatName] ?? 0)],
+		+ itemTotalStats[statName as IChampionStatName]],
 	)) as IChampionStats;
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
