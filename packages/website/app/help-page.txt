@@ -11,6 +11,9 @@
 			<li>
 				displayed max health can be off by 1 due to floating point arithmetic and the in game ui rounding the displayed value up. This means that the game displays something like <b>2773.0000001</b> (<a>example config</a>), which is effectively <b>2773></b> as <b>2774</b>. Only the displayed value is inaccurate, the calculations are correct.
 			</li>
+			<li>
+				displayed max mana is off by 1? ryze 16.9.1 test. Doesn't seem to be round/ceil issue, maybe Ryze's passive is wrong? TODO when ryze's passive has more test cases
+			</li>
 		</ul>
 
 		<h2 id="does-it-work">

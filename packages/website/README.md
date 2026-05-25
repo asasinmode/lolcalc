@@ -155,6 +155,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champion effects
   - [ ] basic attack damage
   - [ ] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
+  - [ ] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
   - [x] DamageSource.internalData set from utils/champion.ts
   - [x] `{{ Item_Melee_Ranged_Split_Dynamic }}` and `@lolcalcChampRange@` try to do what doran's shield does
   - [ ] resolve game variables
@@ -196,6 +197,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] help/faq page
     - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling
     - [ ] screenshots showing it accurately calculating things
+    - [ ] decaying move speed bonuses
   - [ ] github readme
 - [ ] submit feedback on page / report issues
   - [ ] rust/go server
@@ -221,7 +223,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
 - [ ] graph results in style of post game ones, table data but graph?
 - [ ] detect invalid ability levels
-- [ ] decaying movement speed stuff like fiora/nami/sivir passive, theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
+- [ ] decaying movement speed stuff like fiora/nami/sivir passive / stridebreaker active. Theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
