@@ -450,12 +450,14 @@ export const CHAMPION_SPECIFICS = {
 							totalStats.mana += addedMana;
 							bonusStats.mana += addedMana;
 							totalStats.abilityPower += addedAP;
-							if (bonusStats.abilityPower !== undefined) {
-								bonusStats.abilityPower += addedAP;
-							}
+							bonusStats.abilityPower += addedAP;
 
 							miscDebug.ryzePMana = addedMana;
 							calculatedVariables.ryzePManaPercentIncrease = addedMana / baseMana;
+							if (calculatedVariables.archangelSeraphAwe !== undefined) {
+								calculatedVariables.archangelSeraphAwe += addedAP;
+								miscDebug.tearItemBonusMana! += addedMana;
+							}
 						} else {
 							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
 						}
