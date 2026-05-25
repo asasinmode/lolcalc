@@ -21,11 +21,11 @@ import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { ISpecificVariables } from './index';
-import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
+import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
-import { defineVariables, HOOK_PRIORITIES } from './index.ts';
+import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
 export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
@@ -421,13 +421,41 @@ export const CHAMPION_SPECIFICS = {
 								dynamicVariables: self.computed.variables.value.abilities.passive[0],
 							},
 						);
+						const tearItemId = [ITEM_NAME_TO_ID.archangelsStaff, ITEM_NAME_TO_ID.seraphsEmbrace]
+							.find(tearItemId => self.items.value.some(item => item && item.id === tearItemId));
+
 						if (typeof apMultiplier.value === 'number') {
-							miscDebug.ryzePTotalAp = totalStats.abilityPower;
-							miscDebug.ryzePManaBase = totalStats.mana;
-							calculatedVariables.ryzePManaPercentIncrease = miscDebug.ryzePTotalAp * apMultiplier.value / 10_000;
-							miscDebug.ryzePMana = miscDebug.ryzePManaBase * calculatedVariables.ryzePManaPercentIncrease;
-							totalStats.mana += miscDebug.ryzePMana;
-							bonusStats.mana += miscDebug.ryzePMana;
+							const baseMana = totalStats.mana;
+							const baseAbilityPower = totalStats.abilityPower;
+							const manaPerAPFraction = apMultiplier.value / 10_000; // K
+							const tearAPPerBonusMana = tearItemId
+								? ITEM_SPECIFICS_SHARED[tearItemId].AP_FROM_MANA
+								: 0;
+
+							miscDebug.ryzePTotalAp = baseAbilityPower;
+							miscDebug.ryzePManaBase = baseMana;
+
+							const numerator = baseMana * manaPerAPFraction * baseAbilityPower;
+							const denominator = 1 - (baseMana * manaPerAPFraction * tearAPPerBonusMana);
+
+							let addedMana, addedAP;
+							if (tearAPPerBonusMana === 0 || denominator <= 0) {
+								addedMana = numerator;
+								addedAP = 0;
+							} else {
+								addedMana = numerator / denominator;
+								addedAP = tearAPPerBonusMana * addedMana;
+							}
+
+							totalStats.mana += addedMana;
+							bonusStats.mana += addedMana;
+							totalStats.abilityPower += addedAP;
+							if (bonusStats.abilityPower !== undefined) {
+								bonusStats.abilityPower += addedAP;
+							}
+
+							miscDebug.ryzePMana = addedMana;
+							calculatedVariables.ryzePManaPercentIncrease = addedMana / baseMana;
 						} else {
 							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
 						}
@@ -444,7 +472,7 @@ export const CHAMPION_SPECIFICS = {
 				return {
 					PassiveManaCalcTooltip: {
 						value: self.stats.value.variables.ryzePManaPercentIncrease ?? 0,
-						roundReplaced: 1,
+						roundReplaced: 2,
 					},
 				};
 			},
