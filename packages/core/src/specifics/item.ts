@@ -7,7 +7,7 @@ import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
-import { defineVariables, HOOK_PRIORITIES } from './index.ts';
+import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
 const tearItem = {
 	specific: {
@@ -65,15 +65,6 @@ const gluttonousGreavesSpecific = {
 		},
 	},
 } satisfies IItemSpecific;
-
-export const ITEM_SPECIFICS_SHARED = {
-	[ITEM_NAME_TO_ID.archangelsStaff]: {
-		AP_FROM_MANA: ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana,
-	},
-	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
-		AP_FROM_MANA: ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana,
-	},
-};
 
 /** specific items' helpers, utils and calculations */
 export const ITEM_SPECIFICS = {

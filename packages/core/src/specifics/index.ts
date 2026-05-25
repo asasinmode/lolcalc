@@ -8,6 +8,7 @@ import type { CHAMPION_SPECIFICS } from './champion.ts';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import type { ITEM_SPECIFICS } from './item.ts';
+import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 export const HOOK_PRIORITIES = {
@@ -27,6 +28,15 @@ export const HOOK_PRIORITIES = {
 		Ryze: 1,
 	},
 } satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;
+
+export const ITEM_SPECIFICS_SHARED = {
+	[ITEM_NAME_TO_ID.archangelsStaff]: {
+		AP_FROM_MANA: ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana,
+	},
+	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
+		AP_FROM_MANA: ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana,
+	},
+};
 
 // for getting specific ability's specific, maybe will be useful
 // ? T['id'] extends keyof TChampionSpecifics
