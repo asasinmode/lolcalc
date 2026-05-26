@@ -1694,14 +1694,12 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		baseStats: IChampionStats;
 		baseOnLevelStats: IChampionStats;
 		itemStatIncreases: IStatsCalculationResult['itemStatIncreases'];
-		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		baseStats: IChampionStats;
 		runeShardStats: Partial<IChampionStats>;
 		adaptiveForceMeta: IAdaptiveForceStatRv;
-		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 	/** runs after creating empty `championPassiveStats` */
 	onChampionPassive?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
@@ -1716,7 +1714,6 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemPassivesStats: IChampionStats;
 		itemTotalStats: IChampionStats;
 		baseOnLevelStats: IChampionStats;
-		baseWithFlatItemMoveSpeed: number;
 	}) => void>;
 	/** runs when total stats have been calculated but before any total multipliers like mid quest or dragons */
 	onTotalPreMultipliers?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {

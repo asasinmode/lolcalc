@@ -38,8 +38,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const calculatedVariables: IStatsCalculationVariables = {
 		apMultipliersBase: 0,
+		totalBonusPercentMoveSpeed: 0,
 	};
-	const miscDebug: IStatsCalculationMiscDebug = {};
+	const miscDebug: IStatsCalculationMiscDebug = {
+		movespeedSoftCapPenalty: 0,
+	};
 
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
@@ -80,7 +83,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	itemBaseStats.tenacity = 1;
 
-	let itemsTotalPercentMovementSpeed = 0;
 	for (const item of items.filter(Boolean)) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
 			if (statName === 'tenacity') {
@@ -99,14 +101,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			itemBaseStats.manaRegen += baseOnLevelStats.manaRegen * item!.stats.PercentBaseMPRegenMod;
 		}
 		if (item!.stats.PercentMovementSpeedMod) {
-			itemsTotalPercentMovementSpeed += item!.stats.PercentMovementSpeedMod;
+			calculatedVariables.totalBonusPercentMoveSpeed += item!.stats.PercentMovementSpeedMod;
 		}
 	}
 	itemBaseStats.tenacity = 1 - itemBaseStats.tenacity;
-
-	const baseWithFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemBaseStats.moveSpeed);
-
-	itemBaseStats.moveSpeed += baseWithFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
 	itemBaseStats.attackSpeed = itemBaseStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 
 	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
@@ -114,7 +112,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
-			hook(source, { itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
+			hook(source, { itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -127,7 +125,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const runeShardStats: Partial<IChampionStats> = {};
 	if (source.calculateStatsHooks.all.value.onRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.onRuneShards) {
-			hook(source, { runeShardStats, baseStats, adaptiveForceMeta, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
+			hook(source, { runeShardStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
 	calculatedVariables.apMultipliersBase += runeShardStats.abilityPower ?? 0;
@@ -141,7 +139,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preBonus) {
 		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
-			hook(source, { runeShardStats, baseStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats, baseWithFlatItemMoveSpeed }, { calculatedVariables, miscDebug });
+			hook(source, { runeShardStats, baseStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -165,6 +163,20 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (championPassiveStats[statName as IChampionStatName] ?? 0)
 		+ itemTotalStats[statName as IChampionStatName]],
 	)) as IChampionStats;
+
+	// TODO possibly has to be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
+	totalPreMultipliersStats.moveSpeed *= (1 + calculatedVariables.totalBonusPercentMoveSpeed);
+	/* soft cap according to wiki https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps */
+	let penalty = 0;
+	if (totalPreMultipliersStats.moveSpeed > 415) {
+		if (totalPreMultipliersStats.moveSpeed > 490) {
+			penalty = totalPreMultipliersStats.moveSpeed * 0.5 - 230;
+		} else {
+			penalty = totalPreMultipliersStats.moveSpeed * 0.2 - 83;
+		}
+	}
+	miscDebug.movespeedSoftCapPenalty = penalty;
+	totalPreMultipliersStats.moveSpeed -= penalty;
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 

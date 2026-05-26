@@ -319,7 +319,8 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			mana: 2054,
+			/* in game it shows 1440, see help page known discrepancies */
+			mana: 2053,
 			abilityPower: 208,
 			abilityHaste: 78,
 			moveSpeed: 428,

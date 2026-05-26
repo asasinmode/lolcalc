@@ -69,8 +69,8 @@ export const RUNE_SPECIFICS = {
 		movementspeed: {
 			calculateHooks: {
 				onRuneShards: {
-					handler(_self, { runeShardStats, baseWithFlatItemMoveSpeed }) {
-						runeShardStats.moveSpeed = baseWithFlatItemMoveSpeed * (RUNES as TRunes).shards.flex.movementspeed.effectAmount.StatGain1 / 100;
+					handler(_self, _stats, { calculatedVariables }) {
+						calculatedVariables.totalBonusPercentMoveSpeed += (RUNES as TRunes).shards.flex.movementspeed.effectAmount.StatGain1 / 100;
 					},
 					priority: -1,
 				},

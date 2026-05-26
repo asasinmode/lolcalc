@@ -125,12 +125,11 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats, baseWithFlatItemMoveSpeed }) {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
 					const { glory } = self.internalItemData.value as IInternalItemDataOf<'mejai'>;
 					itemPassivesStats.abilityPower += glory * ITEMS_BY_NAME.mejai.dataValues.APPerGlory;
 					if (glory >= ITEMS_BY_NAME.mejai.dataValues.GloryThreshold) {
-						const bonusMs = baseWithFlatItemMoveSpeed * ITEMS_BY_NAME.mejai.dataValues.MoveSpeedMod;
-						itemPassivesStats.moveSpeed += bonusMs;
+						calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.mejai.dataValues.MoveSpeedMod;
 					}
 				},
 			},
