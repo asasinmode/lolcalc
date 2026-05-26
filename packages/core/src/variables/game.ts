@@ -461,7 +461,7 @@ export function replaceGameVariables(
 		if (meta?.statIconKey || varIcon) {
 			const iconStr = (typeof meta?.statIconKey === 'string'
 				? meta?.statIconKey ? `%i:${STAT_ICON[meta.statIconKey]}%` : ''
-				: options.isExtended ? '' : meta?.statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon;
+				: options.isExtended ? '' : meta?.statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon || '';
 
 			(extendedEquals && options.isExtended)
 				? metaSuffix = ` = (${extendedEquals}${iconStr})`

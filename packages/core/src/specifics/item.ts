@@ -1351,6 +1351,8 @@ export const ITEM_SPECIFICS = {
 				},
 				SpellbladeHealing: {
 					type: 'heal',
+					statIconKey: ['abilityPower', 'hp'],
+					extendedEquals: `<scaleap>${Math.round(ITEMS_BY_NAME.duskAndDawn.itemCalculations.SpellbladeHealing.mFormulaParts[0]!.mCoefficient * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap> <scalehealth>+ ${Math.round(ITEMS_BY_NAME.duskAndDawn.itemCalculations.SpellbladeHealing.mFormulaParts[1]!.mCoefficient * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
 				},
 			},
 			uninteresting: ['f1', 'f2'],
