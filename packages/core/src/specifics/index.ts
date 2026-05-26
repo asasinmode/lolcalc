@@ -36,6 +36,12 @@ export const ITEM_SPECIFICS_SHARED = {
 	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
 		AP_FROM_MANA: ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana,
 	},
+	[ITEM_NAME_TO_ID.wintersApproach]: {
+		HP_FROM_MANA: ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient,
+	},
+	[ITEM_NAME_TO_ID.fimbulwinter]: {
+		HP_FROM_MANA: ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient,
+	},
 };
 
 // for getting specific ability's specific, maybe will be useful

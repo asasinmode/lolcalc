@@ -609,7 +609,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, args, meta) {
 					tearItem.calculateHookPreItemTotal.handler(self, args, meta);
-					const bonusHP = (meta.miscDebug.tearItemBonusMana ?? 0) * ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient;
+					const bonusHP = (meta.miscDebug.tearItemBonusMana ?? 0) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA;
 					args.itemPassivesStats.hp += bonusHP;
 					meta.calculatedVariables.approachFimbulAwe = bonusHP;
 				},
@@ -623,14 +623,14 @@ export const ITEM_SPECIFICS = {
 				return {
 					BonusHPFromMana: {
 						value: self.stats.value.variables.approachFimbulAwe
-							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient),
+							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA),
 					},
 				};
 			},
 			meta: {
 				BonusHPFromMana: {
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient * 100)}% bonus</scalemana> `,
+					extendedEquals: `<scalemana>${Math.round(ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA * 100)}% bonus</scalemana> `,
 				},
 			},
 			uninteresting: tearItem.uninterestingVariables,
@@ -649,7 +649,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
 					miscDebug.tearItemBonusMana = itemBaseStats.mana;
-					const bonusHP = miscDebug.tearItemBonusMana * ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient;
+					const bonusHP = miscDebug.tearItemBonusMana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA;
 					itemPassivesStats.hp += bonusHP;
 					calculatedVariables.approachFimbulAwe = bonusHP;
 				},
@@ -666,7 +666,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					BonusHPFromMana: {
 						value: self.stats.value.variables.approachFimbulAwe
-							?? (self.stats.value.bonus.mana * ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient),
+							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA),
 					},
 					ShieldBase: {
 						value: ITEMS_BY_NAME.fimbulwinter.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber,
@@ -685,7 +685,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				BonusHPFromMana: {
 					statIconKey: 'mana',
-					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient * 100)}% bonus</scalemana> `,
+					extendedEquals: `<scalemana>${Math.round(ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA * 100)}% bonus</scalemana> `,
 				},
 				ShieldBase: {
 					type: VariableType.shield,
