@@ -421,16 +421,17 @@ export const CHAMPION_SPECIFICS = {
 								dynamicVariables: self.computed.variables.value.abilities.passive[0],
 							},
 						);
-						const tearItemId = [ITEM_NAME_TO_ID.archangelsStaff, ITEM_NAME_TO_ID.seraphsEmbrace]
-							.find(tearItemId => self.items.value.some(item => item && item.id === tearItemId));
+						const apTearItemId = [ITEM_NAME_TO_ID.archangelsStaff, ITEM_NAME_TO_ID.seraphsEmbrace]
+							.find(id => self.items.value.some(item => item && item.id === id));
+						const hpTearItemId = [ITEM_NAME_TO_ID.wintersApproach, ITEM_NAME_TO_ID.fimbulwinter]
+							.find(id => self.items.value.some(item => item && item.id === id));
 
 						if (typeof apMultiplier.value === 'number') {
 							const baseMana = totalStats.mana;
 							const baseAbilityPower = totalStats.abilityPower;
 							const manaPerAPFraction = apMultiplier.value / 10_000; // K
-							const tearAPPerBonusMana = tearItemId
-								? ITEM_SPECIFICS_SHARED[tearItemId].AP_FROM_MANA
-								: 0;
+							const tearAPPerBonusMana = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
+							const tearHPPerBonusMana = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
 
 							miscDebug.ryzePTotalAp = baseAbilityPower;
 							miscDebug.ryzePManaBase = baseMana;
@@ -447,16 +448,24 @@ export const CHAMPION_SPECIFICS = {
 								addedAP = tearAPPerBonusMana * addedMana;
 							}
 
+							const addedHP = tearHPPerBonusMana * addedMana;
+
 							totalStats.mana += addedMana;
 							bonusStats.mana += addedMana;
 							totalStats.abilityPower += addedAP;
 							bonusStats.abilityPower += addedAP;
+							totalStats.hp += addedHP;
+							bonusStats.hp += addedHP;
 
 							miscDebug.ryzePMana = addedMana;
+							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + addedMana;
 							calculatedVariables.ryzePManaPercentIncrease = addedMana / baseMana;
+
 							if (calculatedVariables.archangelSeraphAwe !== undefined) {
 								calculatedVariables.archangelSeraphAwe += addedAP;
-								miscDebug.tearItemBonusMana! += addedMana;
+							}
+							if (calculatedVariables.approachFimbulAwe !== undefined) {
+								calculatedVariables.approachFimbulAwe += addedHP;
 							}
 						} else {
 							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
