@@ -1331,6 +1331,21 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['SlowResistTooltip', 'MSAdaptiveRatio'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.duskAndDawn]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+				};
+			},
+			uninteresting: ['f1', 'f2'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

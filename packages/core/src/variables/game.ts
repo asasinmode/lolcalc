@@ -761,7 +761,8 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 	} else if (stat.mStatFormula === undefined) {
 		statsKey = 'total';
 	}
-	const targetStat = MSTAT_TO_NAMED_STAT[stat.mStat];
+	// TODO not sure if can just fall back to ap, at the moment dusk and dawn doesn't have `mStat` specified and seems to be using ap there
+	const targetStat = MSTAT_TO_NAMED_STAT[stat.mStat] ?? 'abilityPower';
 	/** resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
 	if (statsKey && targetStat) {
 		return (stats && stats[statsKey][targetStat]) ?? 0;
