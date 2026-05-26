@@ -349,12 +349,14 @@ test('Ryze tear/ad items', async (t) => {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.frozenHeart, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.cosmicDrive, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.duskAndDawn],
 		});
+		damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			hp: 2336,
 			mana: 3520,
 			abilityPower: 303,
 			abilityHaste: 113,
+			attackSpeed: 0.626,
 		});
 	});
 

@@ -428,26 +428,18 @@ export const CHAMPION_SPECIFICS = {
 
 						if (typeof apMultiplier.value === 'number') {
 							const baseMana = totalStats.mana;
-							const baseAbilityPower = totalStats.abilityPower;
-							const manaPerAPFraction = apMultiplier.value / 10_000; // K
+							const baseAP = totalStats.abilityPower;
+							const manaPerAP = apMultiplier.value / 10_000;
 							const tearAPPerBonusMana = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
 							const tearHPPerBonusMana = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
 
-							miscDebug.ryzePTotalAp = baseAbilityPower;
+							miscDebug.ryzePTotalAp = baseAP;
 							miscDebug.ryzePManaBase = baseMana;
 
-							const numerator = baseMana * manaPerAPFraction * baseAbilityPower;
-							const denominator = 1 - (baseMana * manaPerAPFraction * tearAPPerBonusMana);
-
-							let addedMana, addedAP;
-							if (tearAPPerBonusMana === 0 || denominator <= 0) {
-								addedMana = numerator;
-								addedAP = 0;
-							} else {
-								addedMana = numerator / denominator;
-								addedAP = tearAPPerBonusMana * addedMana;
-							}
-
+							const numerator = baseMana * manaPerAP * baseAP;
+							const denominator = 1 - (baseMana * manaPerAP * tearAPPerBonusMana);
+							const addedMana = (tearAPPerBonusMana === 0 || denominator <= 0) ? numerator : numerator / denominator;
+							const addedAP = tearAPPerBonusMana * addedMana;
 							const addedHP = tearHPPerBonusMana * addedMana;
 
 							totalStats.mana += addedMana;
