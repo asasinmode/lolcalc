@@ -1158,7 +1158,7 @@ export function computeItemDescription(
 		tooltipShopExtended,
 		tooltipInventoryExtended,
 		tooltipShopAnyExtendedVInfo: shopAnyExtendedVariables,
-		tooltipInventoryAnyExtendedVInfo: inventoryAnyExtendedVariables,
+		tooltipInventoryAnyExtendedVInfo: tooltipInventoryReplaced ? inventoryAnyExtendedVariables : shopAnyExtendedVariables,
 		hasAnyInterestingVariables,
 	};
 }
