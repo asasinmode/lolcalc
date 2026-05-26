@@ -3,7 +3,7 @@ import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
-import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
+import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
@@ -1342,6 +1342,16 @@ export const ITEM_SPECIFICS = {
 					f1: { value: 0 },
 					f2: { value: 0 },
 				};
+			},
+			meta: {
+				SpellbladeDamage: {
+					type: 'magic',
+					statIconKey: ['attackDamage', 'abilityPower'],
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.duskAndDawn.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mCoefficient * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scaleap>+ ${Math.round(ITEMS_BY_NAME.duskAndDawn.itemCalculations.SpellbladeDamage.mFormulaParts[1]!.mCoefficient * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
+				},
+				SpellbladeHealing: {
+					type: 'heal',
+				},
 			},
 			uninteresting: ['f1', 'f2'],
 		}),

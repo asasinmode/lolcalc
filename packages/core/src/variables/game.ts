@@ -15,6 +15,8 @@ type IVariableMetaExtendedEquals = string | {
 	suffix: string;
 };
 
+type IVariableMetaStatIcon = Exclude<keyof typeof STAT_ICON, 'slowResist' | 'GP10'>;
+
 export interface IVariableMeta<T = any> {
 	/** variable name shown in description when `replaceGameVariables`' `options.replaceWithName` is true instead of the actual variable name */
 	displayedName?: string;
@@ -22,7 +24,7 @@ export interface IVariableMeta<T = any> {
 	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it
 	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
 	 */
-	statIconKey?: Exclude<keyof typeof STAT_ICON, 'slowResist' | 'GP10'>;
+	statIconKey?: IVariableMetaStatIcon | IVariableMetaStatIcon[];
 	/**
 	 * when present, formatted variable will have `= (${extendedEquals})` appended to in the extended version (holding shift)
 	 * if `extendedEquals` is an object, it's assumed to have different info values for melee/ranged and will be formatted accordingly in `replaceGameVariables`
@@ -457,7 +459,10 @@ export function replaceGameVariables(
 				}${meta.extendedEquals.valueSuffix}${meta.extendedEquals.suffix}`;
 
 		if (meta?.statIconKey || varIcon) {
-			const iconStr = (meta?.statIconKey && `%i:${STAT_ICON[meta.statIconKey]}%`) || varIcon || '';
+			const iconStr = (typeof meta?.statIconKey === 'string'
+				? meta?.statIconKey ? `%i:${STAT_ICON[meta.statIconKey]}%` : ''
+				: options.isExtended ? '' : meta?.statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon;
+
 			(extendedEquals && options.isExtended)
 				? metaSuffix = ` = (${extendedEquals}${iconStr})`
 				: metaSuffix = ` (${iconStr})`;
