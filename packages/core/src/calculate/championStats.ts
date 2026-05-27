@@ -164,8 +164,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ itemTotalStats[statName as IChampionStatName]],
 	)) as IChampionStats;
 
+	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
 	// TODO possibly has to be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
-	totalPreMultipliersStats.moveSpeed *= (1 + calculatedVariables.totalBonusPercentMoveSpeed);
+	totalPreMultipliersStats.moveSpeed += multiplierBonusMoveSpeed;
 	/* soft cap according to wiki https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps */
 	let penalty = 0;
 	if (totalPreMultipliersStats.moveSpeed > 415) {
@@ -177,6 +178,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}
 	miscDebug.movespeedSoftCapPenalty = penalty;
 	totalPreMultipliersStats.moveSpeed -= penalty;
+	bonusStats.moveSpeed += multiplierBonusMoveSpeed;
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
