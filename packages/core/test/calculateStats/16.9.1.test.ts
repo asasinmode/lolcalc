@@ -352,8 +352,8 @@ test('Ryze tear/ad items', async (t) => {
 		damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			hp: 2336,
-			mana: 3520,
+			hp: 2328,
+			mana: 3517,
 			abilityPower: 303,
 			abilityHaste: 113,
 			attackSpeed: 0.626,

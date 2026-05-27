@@ -186,9 +186,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
+	let questStatMultiplier = 0;
+
 	if (source.roleQuest.value === 'mid') {
-		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * 0.06;
-		calculatedVariables.midQuestAd = bonusStats.attackDamage * 0.06;
+		questStatMultiplier = 0.06;
+		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * questStatMultiplier;
+		calculatedVariables.midQuestAd = bonusStats.attackDamage * questStatMultiplier;
 		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
 		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 	}
@@ -208,7 +211,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug });
+			hook(source, { totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, questStatMultiplier }, { calculatedVariables, miscDebug });
 		}
 	}
 

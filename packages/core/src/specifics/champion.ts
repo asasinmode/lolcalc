@@ -410,7 +410,7 @@ export const CHAMPION_SPECIFICS = {
 	Ryze: {
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, totalMultipliersStats, questStatMultiplier }, { calculatedVariables, miscDebug }) {
 					if (self.champion.value) {
 						const apMultiplier = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
@@ -427,31 +427,52 @@ export const CHAMPION_SPECIFICS = {
 							.find(id => self.items.value.some(item => item && item.id === id));
 
 						if (typeof apMultiplier.value === 'number') {
-							const baseMana = totalStats.mana;
-							const baseAP = totalStats.abilityPower;
 							const manaPerAP = apMultiplier.value / 10_000;
+
+							miscDebug.ryzePManaBase = totalStats.mana;
+							miscDebug.ryzePTotalAp = totalStats.abilityPower;
+							miscDebug.ryzePMana = 0;
+							calculatedVariables.ryzePManaPercentIncrease = 0;
+
 							const tearAPPerBonusMana = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
 							const tearHPPerBonusMana = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
 
-							miscDebug.ryzePTotalAp = baseAP;
-							miscDebug.ryzePManaBase = baseMana;
+							let depth = 0;
+							let addedAP = 0;
+							let addedHP = 0;
+							let currentRecursiveManaPercentIncrease = 0;
+							let currentRecursiveMana = miscDebug.ryzePManaBase;
+							let currentRecursiveAp = miscDebug.ryzePTotalAp;
+							do {
+								currentRecursiveManaPercentIncrease = currentRecursiveAp * manaPerAP;
+								currentRecursiveMana = currentRecursiveMana * currentRecursiveManaPercentIncrease;
+								currentRecursiveAp = currentRecursiveMana * tearAPPerBonusMana;
+								const questStatBonus = currentRecursiveAp * questStatMultiplier;
+								currentRecursiveAp += questStatBonus;
 
-							const numerator = baseMana * manaPerAP * baseAP;
-							const denominator = 1 - (baseMana * manaPerAP * tearAPPerBonusMana);
-							const addedMana = (tearAPPerBonusMana === 0 || denominator <= 0) ? numerator : numerator / denominator;
-							const addedAP = tearAPPerBonusMana * addedMana;
-							const addedHP = tearHPPerBonusMana * addedMana;
+								// TODO
+								totalMultipliersStats.abilityPower += questStatBonus;
 
-							totalStats.mana += addedMana;
-							bonusStats.mana += addedMana;
+								calculatedVariables.ryzePManaPercentIncrease += currentRecursiveManaPercentIncrease;
+								calculatedVariables.midQuestAp! += questStatBonus;
+								miscDebug.ryzePMana += currentRecursiveMana;
+								addedAP += currentRecursiveAp;
+								addedHP += tearHPPerBonusMana * miscDebug.ryzePMana;
+
+								if (!tearAPPerBonusMana) {
+									break;
+								}
+								depth += 1;
+							} while (depth < 10);
+
+							totalStats.mana += miscDebug.ryzePMana;
+							bonusStats.mana += miscDebug.ryzePMana;
 							totalStats.abilityPower += addedAP;
 							bonusStats.abilityPower += addedAP;
 							totalStats.hp += addedHP;
 							bonusStats.hp += addedHP;
 
-							miscDebug.ryzePMana = addedMana;
-							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + addedMana;
-							calculatedVariables.ryzePManaPercentIncrease = addedMana / baseMana;
+							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
 
 							if (calculatedVariables.archangelSeraphAwe !== undefined) {
 								calculatedVariables.archangelSeraphAwe += addedAP;
