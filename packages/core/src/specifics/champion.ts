@@ -426,59 +426,48 @@ export const CHAMPION_SPECIFICS = {
 						const hpTearItemId = [ITEM_NAME_TO_ID.wintersApproach, ITEM_NAME_TO_ID.fimbulwinter]
 							.find(id => self.items.value.some(item => item && item.id === id));
 
+						// TODO cleanup & try to better track variables
 						if (typeof apMultiplier.value === 'number') {
-							const manaPerAP = apMultiplier.value / 10_000;
+							const baseMana = totalStats.mana;
+							const baseAP = totalStats.abilityPower;
+							const K = apMultiplier.value / 10_000;
+							const aAP = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
+							const aHP = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
+							const questFactor = (questStatMultiplier ?? 0);
 
-							miscDebug.ryzePManaBase = totalStats.mana;
-							miscDebug.ryzePTotalAp = totalStats.abilityPower;
-							miscDebug.ryzePMana = 0;
-							calculatedVariables.ryzePManaPercentIncrease = 0;
+							miscDebug.ryzePTotalAp = baseAP;
+							miscDebug.ryzePManaBase = baseMana;
 
-							const tearAPPerBonusMana = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
-							const tearHPPerBonusMana = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
+							const effectiveAAP = aAP * (1 + questFactor);
 
-							let depth = 0;
-							let addedAP = 0;
-							let addedHP = 0;
-							let currentRecursiveManaPercentIncrease = 0;
-							let currentRecursiveMana = miscDebug.ryzePManaBase;
-							let currentRecursiveAp = miscDebug.ryzePTotalAp;
-							do {
-								currentRecursiveManaPercentIncrease = currentRecursiveAp * manaPerAP;
-								currentRecursiveMana = currentRecursiveMana * currentRecursiveManaPercentIncrease;
-								currentRecursiveAp = currentRecursiveMana * tearAPPerBonusMana;
-								const questStatBonus = currentRecursiveAp * questStatMultiplier;
-								currentRecursiveAp += questStatBonus;
+							const numerator = baseMana * K * baseAP;
+							const denominator = 1 - (baseMana * K * effectiveAAP);
+							const addedMana = (effectiveAAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
+							const baseAddedAP = aAP * addedMana;
+							const questBonusAP = baseAddedAP * questFactor;
+							const addedAP = baseAddedAP + questBonusAP;
+							const addedHP = aHP * addedMana;
 
-								// TODO
-								totalMultipliersStats.abilityPower += questStatBonus;
-
-								calculatedVariables.ryzePManaPercentIncrease += currentRecursiveManaPercentIncrease;
-								calculatedVariables.midQuestAp! += questStatBonus;
-								miscDebug.ryzePMana += currentRecursiveMana;
-								addedAP += currentRecursiveAp;
-								addedHP += tearHPPerBonusMana * miscDebug.ryzePMana;
-
-								if (!tearAPPerBonusMana) {
-									break;
-								}
-								depth += 1;
-							} while (depth < 10);
-
-							totalStats.mana += miscDebug.ryzePMana;
-							bonusStats.mana += miscDebug.ryzePMana;
+							totalStats.mana += addedMana;
+							bonusStats.mana += addedMana;
 							totalStats.abilityPower += addedAP;
+							totalMultipliersStats.abilityPower += questBonusAP;
 							bonusStats.abilityPower += addedAP;
 							totalStats.hp += addedHP;
 							bonusStats.hp += addedHP;
 
-							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
+							miscDebug.ryzePMana = addedMana;
+							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana || 0) + addedMana;
+							calculatedVariables.ryzePManaPercentIncrease = addedMana / baseMana;
 
 							if (calculatedVariables.archangelSeraphAwe !== undefined) {
-								calculatedVariables.archangelSeraphAwe += addedAP;
+								calculatedVariables.archangelSeraphAwe += baseAddedAP;
 							}
 							if (calculatedVariables.approachFimbulAwe !== undefined) {
 								calculatedVariables.approachFimbulAwe += addedHP;
+							}
+							if (calculatedVariables.midQuestAp !== undefined && questBonusAP !== 0) {
+								calculatedVariables.midQuestAp += questBonusAP;
 							}
 						} else {
 							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
