@@ -1,5 +1,6 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource';
 import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
+import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
@@ -42,9 +43,8 @@ test('Ahri misc ap passives items', async (t) => {
 			attackSpeed: 1.327,
 			abilityHaste: 35,
 			moveSpeed: 413,
-			/* in game it shows 2874, see help page known discrepancies */
-			hp: 2873,
 		});
+		assert.equal(damageSource.maxHealth.value, 2873);
 	});
 
 	await t.test('lvl 18 | archangel, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
@@ -60,8 +60,8 @@ test('Ahri misc ap passives items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 549,
 			abilityHaste: 60,
-			mana: 2053,
 		});
+		assert.equal(damageSource.maxAbilityResource.value, 2053);
 	});
 
 	await t.test('lvl 18 | seraph, blackfire, berserkers, guinsoo, riftmaker, rabadon', async () => {
@@ -76,8 +76,8 @@ test('Ahri misc ap passives items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 575,
 			abilityHaste: 60,
-			mana: 2443,
 		});
+		assert.equal(damageSource.maxAbilityResource.value, 2443);
 	});
 });
 
@@ -110,9 +110,9 @@ test('Ezreal tear items', async (t) => {
 			abilityPower: 85,
 			attackSpeed: 0.938,
 			abilityHaste: 25,
-			hp: 675,
-			mana: 995,
 		});
+		assert.equal(damageSource.maxHealth.value, 675);
+		assert.equal(damageSource.maxAbilityResource.value, 995);
 	});
 
 	await t.test('lvl 1 | seraph, manamune', async () => {
@@ -129,8 +129,8 @@ test('Ezreal tear items', async (t) => {
 			attackDamage: 133,
 			abilityPower: 109,
 			abilityHaste: 40,
-			mana: 1875,
 		});
+		assert.equal(damageSource.maxAbilityResource.value, 1875);
 	});
 
 	await t.test('lvl 11 | seraph, muramana, winter\'s approach, gluttonous greaves', async () => {
@@ -152,10 +152,10 @@ test('Ezreal tear items', async (t) => {
 			attackSpeed: 0.887,
 			abilityHaste: 55,
 			moveSpeed: 370,
-			hp: 2597,
-			mana: 3501,
 			omnivamp: 4,
 		});
+		assert.equal(damageSource.maxHealth.value, 2597);
+		assert.equal(damageSource.maxAbilityResource.value, 3501);
 	});
 
 	await t.test('lvl 11 | seraph, muramana, fimbulwinter, whispering circlet, gluttonous greaves', async () => {
@@ -172,13 +172,12 @@ test('Ezreal tear items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 214,
 			abilityPower: 145,
-			/* in game it shows 2916, see help page known discrepancies */
-			hp: 2915,
-			mana: 4293,
 			healShieldPower: 25,
 			manaRegen: 30,
 			omnivamp: 5,
 		});
+		assert.equal(damageSource.maxHealth.value, 2916);
+		assert.equal(damageSource.maxAbilityResource.value, 4293);
 	});
 
 	await t.test('lvl 11 | seraph, muramana, fimbulwinter, diadem of songs, overlord\'s bloodmail, gluttonous greaves', async () => {
@@ -191,12 +190,11 @@ test('Ezreal tear items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 315,
 			abilityPower: 150,
-			/* in game it shows 3571, see help page known discrepancies */
-			hp: 3570,
-			mana: 4989,
 			healShieldPower: 28,
 			manaRegen: 35,
 		});
+		assert.equal(damageSource.maxHealth.value, 3571);
+		assert.equal(damageSource.maxAbilityResource.value, 4989);
 	});
 
 	await t.test('lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, overlord\'s bloodmail, endless hunger, gluttonous greaves', async () => {
@@ -221,14 +219,14 @@ test('Ezreal tear items', async (t) => {
 			attackSpeed: 1.203,
 			abilityHaste: 90,
 			moveSpeed: 370,
-			hp: 4479,
-			mana: 5565,
 			hpRegen: 15,
 			manaRegen: 51,
 			healShieldPower: 28,
 			omnivamp: 28,
 			tenacity: 20,
 		});
+		assert.equal(damageSource.maxHealth.value, 4479);
+		assert.equal(damageSource.maxAbilityResource.value, 5565);
 	});
 });
 
@@ -288,7 +286,6 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			mana: 715,
 			attackDamage: 58,
 			abilityPower: 22,
 			armor: 97,
@@ -296,6 +293,7 @@ test('Ryze tear/ad items', async (t) => {
 			moveSpeed: 415,
 			tenacity: 15,
 		});
+		assert.equal(damageSource.maxAbilityResource.value, 715);
 	});
 
 	await t.test('lvl 1 | frozen heart, swiftmarch, archangel', async () => {
@@ -305,11 +303,10 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			/* in game it shows 1440, see help page known discrepancies */
-			mana: 1441,
 			abilityPower: 108,
 			abilityHaste: 53,
 		});
+		assert.equal(damageSource.maxAbilityResource.value, 1440);
 	});
 
 	await t.test('lvl 1 | frozen heart, swiftmarch, seraph, cosmic drive', async () => {
@@ -319,12 +316,11 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			/* in game it shows 1440, see help page known discrepancies */
-			mana: 2053,
 			abilityPower: 208,
 			abilityHaste: 78,
 			moveSpeed: 428,
 		});
+		assert.equal(damageSource.maxAbilityResource.value, 2054);
 	});
 
 	await t.test('lvl 1 | frozen heart, swiftmarch, seraph, cosmic drive, winter\'s approach', async () => {
@@ -337,11 +333,11 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			hp: 1906,
-			mana: 2701,
 			abilityPower: 222,
 			abilityHaste: 93,
 		});
+		assert.equal(damageSource.maxHealth.value, 1906);
+		assert.equal(damageSource.maxAbilityResource.value, 2701);
 	});
 
 	await t.test('lvl 1 | frozen heart, swiftmarch, seraph, cosmic drive, fimbulwinter, dusk and dawn', async () => {
@@ -352,12 +348,12 @@ test('Ryze tear/ad items', async (t) => {
 		damageSource.addEffect(frozenHeartEffectAbilityId, [1]);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			hp: 2328,
-			mana: 3517,
 			abilityPower: 303,
 			abilityHaste: 113,
 			attackSpeed: 0.626,
 		});
+		assert.equal(damageSource.maxHealth.value, 2328);
+		assert.equal(damageSource.maxAbilityResource.value, 3517);
 	});
 
 	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, cosmic drive, fimbulwinter, dusk and dawn', async () => {
@@ -368,12 +364,12 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			hp: 4827,
-			mana: 4979,
 			abilityPower: 427,
 			abilityHaste: 108,
 			attackSpeed: 1.01,
 		});
+		assert.equal(damageSource.maxHealth.value, 4479);
+		assert.equal(damageSource.maxAbilityResource.value, 4827);
 	});
 
 	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, rabadon, fimbulwinter', async () => {
@@ -384,11 +380,11 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			hp: 4237,
-			mana: 5380,
 			abilityPower: 542,
 			abilityHaste: 63,
 		});
+		assert.equal(damageSource.maxHealth.value, 4237);
+		assert.equal(damageSource.maxAbilityResource.value, 5380);
 	});
 
 	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, rabadon, fimbulwinter, force of nature', async () => {
@@ -399,13 +395,13 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			hp: 4644,
-			mana: 5426,
 			abilityPower: 555,
 			magicResist: 109,
 			abilityHaste: 63,
 			moveSpeed: 428,
 		});
+		assert.equal(damageSource.maxHealth.value, 4644);
+		assert.equal(damageSource.maxAbilityResource.value, 5426);
 	});
 
 	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, rabadon, fimbulwinter, cosmic drive', async () => {
@@ -419,11 +415,11 @@ test('Ryze tear/ad items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			hp: 4649,
-			mana: 5797,
 			abilityPower: 661,
 			abilityHaste: 88,
 			moveSpeed: 445,
 		});
+		assert.equal(damageSource.maxHealth.value, 4649);
+		assert.equal(damageSource.maxAbilityResource.value, 5797);
 	});
 });

@@ -1,4 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource';
+import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import fixture from './16.10.1.fixture.json' with { type: 'json' };
@@ -30,11 +31,11 @@ test('Briar, shards 211', async (t) => {
 			attackDamage: 115,
 			abilityHaste: 8,
 			moveSpeed: 349,
-			hp: 1175,
 			hpRegen: 0,
 			manaRegen: 0,
 			tenacity: 15,
 		});
+		assert.equal(damageSource.maxHealth.value, 1175);
 	});
 });
 
