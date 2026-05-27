@@ -426,48 +426,42 @@ export const CHAMPION_SPECIFICS = {
 						const hpTearItemId = [ITEM_NAME_TO_ID.wintersApproach, ITEM_NAME_TO_ID.fimbulwinter]
 							.find(id => self.items.value.some(item => item && item.id === id));
 
-						// TODO cleanup & try to better track variables
 						if (typeof apMultiplier.value === 'number') {
-							const baseMana = totalStats.mana;
-							const baseAP = totalStats.abilityPower;
-							const K = apMultiplier.value / 10_000;
-							const aAP = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
-							const aHP = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
-							const questFactor = (questStatMultiplier ?? 0);
+							miscDebug.ryzePassiveAPBase = totalStats.mana;
+							miscDebug.ryzePassiveManaBase = totalStats.abilityPower;
+							const apToManaPercentIncreaseRatio = apMultiplier.value / 10_000;
+							const tearItemAPRatio = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
+							const tearItemHPRatio = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
 
-							miscDebug.ryzePTotalAp = baseAP;
-							miscDebug.ryzePManaBase = baseMana;
+							const effectiveAAP = tearItemAPRatio * (1 + questStatMultiplier);
 
-							const effectiveAAP = aAP * (1 + questFactor);
+							const numerator = miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * miscDebug.ryzePassiveAPBase;
+							const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * effectiveAAP);
+							miscDebug.ryzePMana = (effectiveAAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
+							const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
+							const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questStatMultiplier;
+							const addedAP = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
+							const tearItemAddedHP = tearItemHPRatio * miscDebug.ryzePMana;
 
-							const numerator = baseMana * K * baseAP;
-							const denominator = 1 - (baseMana * K * effectiveAAP);
-							const addedMana = (effectiveAAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
-							const baseAddedAP = aAP * addedMana;
-							const questBonusAP = baseAddedAP * questFactor;
-							const addedAP = baseAddedAP + questBonusAP;
-							const addedHP = aHP * addedMana;
-
-							totalStats.mana += addedMana;
-							bonusStats.mana += addedMana;
+							totalStats.mana += miscDebug.ryzePMana;
+							bonusStats.mana += miscDebug.ryzePMana;
 							totalStats.abilityPower += addedAP;
-							totalMultipliersStats.abilityPower += questBonusAP;
+							totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP;
 							bonusStats.abilityPower += addedAP;
-							totalStats.hp += addedHP;
-							bonusStats.hp += addedHP;
+							totalStats.hp += tearItemAddedHP;
+							bonusStats.hp += tearItemAddedHP;
 
-							miscDebug.ryzePMana = addedMana;
-							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana || 0) + addedMana;
-							calculatedVariables.ryzePManaPercentIncrease = addedMana / baseMana;
+							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
+							calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
 
 							if (calculatedVariables.archangelSeraphAwe !== undefined) {
-								calculatedVariables.archangelSeraphAwe += baseAddedAP;
+								calculatedVariables.archangelSeraphAwe += tearItemBaseAddedAP;
 							}
 							if (calculatedVariables.approachFimbulAwe !== undefined) {
-								calculatedVariables.approachFimbulAwe += addedHP;
+								calculatedVariables.approachFimbulAwe += tearItemAddedHP;
 							}
-							if (calculatedVariables.midQuestAp !== undefined && questBonusAP !== 0) {
-								calculatedVariables.midQuestAp += questBonusAP;
+							if (calculatedVariables.midQuestAp !== undefined && tearItemFromQuestAddedAP !== 0) {
+								calculatedVariables.midQuestAp += tearItemFromQuestAddedAP;
 							}
 						} else {
 							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
@@ -484,7 +478,7 @@ export const CHAMPION_SPECIFICS = {
 			calculate(self) {
 				return {
 					PassiveManaCalcTooltip: {
-						value: self.stats.value.variables.ryzePManaPercentIncrease ?? 0,
+						value: self.stats.value.variables.ryzePassivePercentManaIncrease ?? 0,
 						roundReplaced: 2,
 					},
 				};

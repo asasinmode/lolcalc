@@ -113,7 +113,7 @@ export interface IStatsCalculationVariables {
 	/** adaptive force gained from swiftmarch's passive */
 	swiftmarchAdaptive?: number;
 	/** % of mana gained from ryze's passive */
-	ryzePManaPercentIncrease?: number;
+	ryzePassivePercentManaIncrease?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
@@ -132,9 +132,9 @@ export interface IStatsCalculationMiscDebug {
 	/** total movespeed swiftmarch's passive is based on */
 	swiftmarchTotalMs?: number;
 	/** total ap ryze passive is based on */
-	ryzePTotalAp?: number;
+	ryzePassiveAPBase?: number;
 	/** mana value ryze's passive is applied onto */
-	ryzePManaBase?: number;
+	ryzePassiveManaBase?: number;
 	/** mana gained from ryze's passive */
 	ryzePMana?: number;
 	/** penalty from move speed soft cap */
