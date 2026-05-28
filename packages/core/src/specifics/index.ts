@@ -15,6 +15,7 @@ export const HOOK_PRIORITIES = {
 	preItemTotal: {
 		[ITEM_NAME_TO_ID.guinsoo]: 10,
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
+		[ITEM_NAME_TO_ID.riftmaker]: 20,
 	},
 	preBonus: {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
@@ -41,6 +42,9 @@ export const ITEM_SPECIFICS_SHARED = {
 	},
 	[ITEM_NAME_TO_ID.fimbulwinter]: {
 		HP_FROM_MANA: ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient,
+	},
+	[ITEM_NAME_TO_ID.riftmaker]: {
+		HP_TO_AP: ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent,
 	},
 };
 

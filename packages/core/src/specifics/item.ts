@@ -261,30 +261,30 @@ export const ITEM_SPECIFICS = {
 			return corruption && `${Math.round(corruption * ITEMS_BY_NAME.riftmaker.dataValues.EternityDamageIncreasePerSecond * 100)}%`;
 		},
 		calculateHooks: {
-			// TODO should probably have priority to run post winters approach/heartsteel and calculate based on `itemPassivesStats.hp` too
 			preItemTotal: {
 				handler(self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					const { corruption } = self.internalItemData.value as IInternalItemDataOf<'riftmaker'>;
-					const abilityPower = itemBaseStats.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent;
-					itemPassivesStats.abilityPower += abilityPower;
-					calculatedVariables.riftmakerVoidInfusion = abilityPower;
-					miscDebug.riftmakerBonusHp = itemBaseStats.hp;
+					const bonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
+					calculatedVariables.riftmakerVoidInfusion = bonusHp * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
+					itemPassivesStats.abilityPower += calculatedVariables.riftmakerVoidInfusion;
+					miscDebug.riftmakerBonusHp = bonusHp;
 
+					const { corruption } = self.internalItemData.value as IInternalItemDataOf<'riftmaker'>;
 					if (corruption === ITEM_SPECIFICS[ITEM_NAME_TO_ID.riftmaker].MAX_STACKS) {
 						const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker.dataValues;
 						const omnivamp = self.isRanged.value ? VampAmountRanged : VampAmountMelee;
 						itemPassivesStats.omnivamp += omnivamp;
 					}
 				},
+				priority: HOOK_PRIORITIES.preItemTotal[ITEM_NAME_TO_ID.riftmaker],
 			},
 			preBonus: {
 				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					if (runeShardStats.hp) {
-						const value = runeShardStats.hp * ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent;
+						const value = runeShardStats.hp * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
+						calculatedVariables.riftmakerVoidInfusion! += value;
 						itemPassivesStats.abilityPower += value;
 						itemTotalStats.abilityPower += value;
 
-						calculatedVariables.riftmakerVoidInfusion! += value;
 						calculatedVariables.apMultipliersBase += value;
 						miscDebug.riftmakerBonusHp! += runeShardStats.hp;
 					}

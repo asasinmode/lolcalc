@@ -366,10 +366,12 @@ test('Ryze tear/ad items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 427,
 			abilityHaste: 108,
-			attackSpeed: 1.01,
+			attackSpeed: 1.007,
 		});
-		assert.equal(damageSource.maxHealth.value, 4479);
-		assert.equal(damageSource.maxAbilityResource.value, 4827);
+		/* game shows 4839, see help page for known discrepancies */
+		assert.equal(damageSource.maxHealth.value, 4840);
+		/* game shows 4980, see help page for known discrepancies */
+		assert.equal(damageSource.maxAbilityResource.value, 4979);
 	});
 
 	await t.test('lvl 18 | riftmaker, swiftmarch, seraph, rabadon, fimbulwinter', async () => {
