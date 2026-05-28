@@ -427,8 +427,8 @@ export const CHAMPION_SPECIFICS = {
 							.find(id => self.items.value.some(item => item && item.id === id));
 
 						if (typeof apMultiplier.value === 'number') {
-							miscDebug.ryzePassiveAPBase = totalStats.mana;
-							miscDebug.ryzePassiveManaBase = totalStats.abilityPower;
+							miscDebug.ryzePassiveAPBase = totalStats.abilityPower;
+							miscDebug.ryzePassiveManaBase = totalStats.mana;
 							const apToManaPercentIncreaseRatio = apMultiplier.value / 10_000;
 							const tearItemAPRatio = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
 							const tearItemHPRatio = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
