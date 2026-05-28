@@ -443,36 +443,37 @@ export const CHAMPION_SPECIFICS = {
 					miscDebug.ryzePassiveAPBase = totalStats.abilityPower;
 					miscDebug.ryzePassiveManaBase = totalStats.mana;
 
-					const effectiveAddedAPRatio = tearItemAPRatio * (1 + questStatMultiplier);
-					const effectiveAddedHPRatio = tearItemHPRatio * (riftmakerHpToApRatio ? (1 + questStatMultiplier) : 1);
+					const questMultiplier = questStatMultiplier;
+					const globalApMultiplier = calculatedVariables.totalItemApMultipliers ?? 1;
 
-					const totalAddedAP = effectiveAddedAPRatio + (riftmakerHpToApRatio * effectiveAddedHPRatio);
-
+					const rawApPerMana = tearItemAPRatio + (riftmakerHpToApRatio * tearItemHPRatio);
+					const effectiveApPerMana = rawApPerMana * (1 + questMultiplier) * globalApMultiplier;
 					const numerator = miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * miscDebug.ryzePassiveAPBase;
-					const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * totalAddedAP);
-					miscDebug.ryzePMana = (totalAddedAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
+					const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * effectiveApPerMana);
+					miscDebug.ryzePMana = (effectiveApPerMana === 0 || denominator <= 0) ? numerator : numerator / denominator;
 
 					const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
-					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questStatMultiplier;
-					const tearItemTotalAp = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
+					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questMultiplier;
+					const tearItemTotalAp = (tearItemBaseAddedAP + tearItemFromQuestAddedAP) * globalApMultiplier;
 
-					const addedHP = effectiveAddedHPRatio * miscDebug.ryzePMana;
-					const riftmakerAddedAP = riftmakerHpToApRatio * addedHP;
-					const addedAP = tearItemTotalAp + riftmakerAddedAP;
+					const addedHP = tearItemHPRatio * miscDebug.ryzePMana;
+
+					const riftmakerBaseAddedAP = riftmakerHpToApRatio * addedHP;
+					const riftmakerFromQuestAddedAP = riftmakerBaseAddedAP * questMultiplier;
+					const riftmakerTotalAp = (riftmakerBaseAddedAP + riftmakerFromQuestAddedAP) * globalApMultiplier;
+
+					const addedAP = tearItemTotalAp + riftmakerTotalAp;
 
 					totalStats.mana += miscDebug.ryzePMana;
 					bonusStats.mana += miscDebug.ryzePMana;
 					championPassiveStats.mana = miscDebug.ryzePMana;
 
 					totalStats.abilityPower += addedAP;
-					totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP;
+					totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP + riftmakerFromQuestAddedAP;
 					bonusStats.abilityPower += addedAP;
 
 					totalStats.hp += addedHP;
 					bonusStats.hp += addedHP;
-
-					miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
-					calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
 
 					miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
 					calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
@@ -484,10 +485,14 @@ export const CHAMPION_SPECIFICS = {
 						calculatedVariables.approachFimbulAwe += addedHP;
 					}
 					if (calculatedVariables.midQuestAp !== undefined) {
-						calculatedVariables.midQuestAp += tearItemFromQuestAddedAP;
+						calculatedVariables.midQuestAp += tearItemFromQuestAddedAP + riftmakerFromQuestAddedAP;
 					}
 					if (calculatedVariables.riftmakerVoidInfusion !== undefined) {
-						calculatedVariables.riftmakerVoidInfusion += riftmakerAddedAP;
+						calculatedVariables.riftmakerVoidInfusion += riftmakerBaseAddedAP;
+					}
+					if (calculatedVariables.rabadonMagicalOpus !== undefined && globalApMultiplier > 1) {
+						const rabadonContribution = (globalApMultiplier - 1) * ((tearItemBaseAddedAP + tearItemFromQuestAddedAP) + (riftmakerBaseAddedAP + riftmakerFromQuestAddedAP));
+						calculatedVariables.rabadonMagicalOpus += rabadonContribution;
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal.Ryze,
