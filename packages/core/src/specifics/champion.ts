@@ -410,9 +410,12 @@ export const CHAMPION_SPECIFICS = {
 	Ryze: {
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, totalMultipliersStats, questStatMultiplier }, { calculatedVariables, miscDebug }) {
-					if (self.champion.value) {
-						const apMultiplier = championAbilityVariableValue(
+				handler(self, { totalStats, bonusStats, totalMultipliersStats, questStatMultiplier, championPassiveStats }, { calculatedVariables, miscDebug }) {
+					if (!self.champion.value) {
+						return;
+					}
+
+					const apMultiplier = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
 								abilityVariant: self.champion.value.abilities.passive.variants[0]!,
@@ -420,52 +423,54 @@ export const CHAMPION_SPECIFICS = {
 								damageSource: self,
 								dynamicVariables: self.computed.variables.value.abilities.passive[0],
 							},
-						);
-						const apTearItemId = [ITEM_NAME_TO_ID.archangelsStaff, ITEM_NAME_TO_ID.seraphsEmbrace]
-							.find(id => self.items.value.some(item => item && item.id === id));
-						const hpTearItemId = [ITEM_NAME_TO_ID.wintersApproach, ITEM_NAME_TO_ID.fimbulwinter]
-							.find(id => self.items.value.some(item => item && item.id === id));
+					);
 
-						if (typeof apMultiplier.value === 'number') {
-							miscDebug.ryzePassiveAPBase = totalStats.abilityPower;
-							miscDebug.ryzePassiveManaBase = totalStats.mana;
-							const apToManaPercentIncreaseRatio = apMultiplier.value / 10_000;
-							const tearItemAPRatio = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
-							const tearItemHPRatio = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
+					if (typeof apMultiplier.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
+						return;
+					}
 
-							const effectiveAAP = tearItemAPRatio * (1 + questStatMultiplier);
+					const apTearItemId = [ITEM_NAME_TO_ID.archangelsStaff, ITEM_NAME_TO_ID.seraphsEmbrace]
+						.find(id => self.items.value.some(item => item && item.id === id));
+					const hpTearItemId = [ITEM_NAME_TO_ID.wintersApproach, ITEM_NAME_TO_ID.fimbulwinter]
+						.find(id => self.items.value.some(item => item && item.id === id));
 
-							const numerator = miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * miscDebug.ryzePassiveAPBase;
-							const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * effectiveAAP);
-							miscDebug.ryzePMana = (effectiveAAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
-							const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
-							const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questStatMultiplier;
-							const addedAP = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
-							const tearItemAddedHP = tearItemHPRatio * miscDebug.ryzePMana;
+					miscDebug.ryzePassiveAPBase = totalStats.abilityPower;
+					miscDebug.ryzePassiveManaBase = totalStats.mana;
+					const apToManaPercentIncreaseRatio = apMultiplier.value / 10_000;
+					const tearItemAPRatio = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
+					const tearItemHPRatio = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
 
-							totalStats.mana += miscDebug.ryzePMana;
-							bonusStats.mana += miscDebug.ryzePMana;
-							totalStats.abilityPower += addedAP;
-							totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP;
-							bonusStats.abilityPower += addedAP;
-							totalStats.hp += tearItemAddedHP;
-							bonusStats.hp += tearItemAddedHP;
+					const effectiveAAP = tearItemAPRatio * (1 + questStatMultiplier);
 
-							miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
-							calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
+					const numerator = miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * miscDebug.ryzePassiveAPBase;
+					const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * effectiveAAP);
+					miscDebug.ryzePMana = (effectiveAAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
+					const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
+					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questStatMultiplier;
+					const addedAP = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
+					const tearItemAddedHP = tearItemHPRatio * miscDebug.ryzePMana;
 
-							if (calculatedVariables.archangelSeraphAwe !== undefined) {
-								calculatedVariables.archangelSeraphAwe += tearItemBaseAddedAP;
-							}
-							if (calculatedVariables.approachFimbulAwe !== undefined) {
-								calculatedVariables.approachFimbulAwe += tearItemAddedHP;
-							}
-							if (calculatedVariables.midQuestAp !== undefined && tearItemFromQuestAddedAP !== 0) {
-								calculatedVariables.midQuestAp += tearItemFromQuestAddedAP;
-							}
-						} else {
-							console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
-						}
+					totalStats.mana += miscDebug.ryzePMana;
+					bonusStats.mana += miscDebug.ryzePMana;
+					championPassiveStats.mana = miscDebug.ryzePMana;
+					totalStats.abilityPower += addedAP;
+					totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP;
+					bonusStats.abilityPower += addedAP;
+					totalStats.hp += tearItemAddedHP;
+					bonusStats.hp += tearItemAddedHP;
+
+					miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
+					calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
+
+					if (calculatedVariables.archangelSeraphAwe !== undefined) {
+						calculatedVariables.archangelSeraphAwe += tearItemBaseAddedAP;
+					}
+					if (calculatedVariables.approachFimbulAwe !== undefined) {
+						calculatedVariables.approachFimbulAwe += tearItemAddedHP;
+					}
+					if (calculatedVariables.midQuestAp !== undefined && tearItemFromQuestAddedAP !== 0) {
+						calculatedVariables.midQuestAp += tearItemFromQuestAddedAP;
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal.Ryze,

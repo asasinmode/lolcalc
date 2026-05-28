@@ -1732,6 +1732,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemPassivesStats: IChampionStats;
 		itemTotalStats: IChampionStats;
 		questStatMultiplier: number;
+		championPassiveStats: Partial<IChampionStats>;
 	}) => void>;
 };
 
