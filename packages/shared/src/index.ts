@@ -86,6 +86,8 @@ export interface IStatsCalculationVariables {
 	 * from my understanding it's all "flat" ap bonuses, multipliers add, so rabadon's 30% and 1 blackfire burning champion's 4% would be 34% bonus ap
 	 */
 	apMultipliersBase: number;
+	/** ap multipliers from items like rabadon and blackfire torch */
+	totalItemApMultipliers: number;
 	/** ap gained from rabadon's passive */
 	rabadonMagicalOpus?: number;
 	/** ap gained from archangel/seraph's passive */

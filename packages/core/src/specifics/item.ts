@@ -185,7 +185,9 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const value = calculatedVariables.apMultipliersBase * self.internalItemData.value.bBlaze * ITEMS_BY_NAME.blackfireTorch.dataValues.APPerStack;
+					const multiplier = self.internalItemData.value.bBlaze * ITEMS_BY_NAME.blackfireTorch.dataValues.APPerStack;
+					const value = calculatedVariables.apMultipliersBase * multiplier;
+					calculatedVariables.totalItemApMultipliers += multiplier;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
 				},
@@ -1112,6 +1114,7 @@ export const ITEM_SPECIFICS = {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 					const value = calculatedVariables.apMultipliersBase * ITEMS_BY_NAME.rabadon.dataValues.APAmp;
+					calculatedVariables.totalItemApMultipliers += ITEMS_BY_NAME.rabadon.dataValues.APAmp;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;

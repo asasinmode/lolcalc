@@ -38,6 +38,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const calculatedVariables: IStatsCalculationVariables = {
 		apMultipliersBase: 0,
+		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
 	};
 	const miscDebug: IStatsCalculationMiscDebug = {
