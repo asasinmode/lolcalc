@@ -136,7 +136,8 @@ export interface ISpecificVariables<
 	 * variables listed here won't be shown in results, as well as have their actual values resolved regardless of the `replaceWithName` option of `replaceGameVariables`
 	 * the type works almost perfectly except that when no other keys (known/calculate/meta) is provided, then it resolves to `string[]` but at the moment I can't find a fix for it
 	 */
-	uninteresting?: NoInfer<(DetectedVariables | T)>[];
+	// TODO 'Cooldown' to be resolved in future features
+	uninteresting?: NoInfer<(DetectedVariables | T | 'Cooldown')>[];
 }
 
 export function defineVariables<

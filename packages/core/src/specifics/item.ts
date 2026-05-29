@@ -1378,6 +1378,25 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'f2'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.unendingDespair]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				DrainCalc: {
+					statIconKey: 'hp',
+					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.unendingDespair?.dataValues.BonusHealthDrainPercentage * 100)}% bonus</scalehealth> `
+				},
+			},
+			uninteresting: ['f1', 'HealMultiplier', 'Cooldown'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
