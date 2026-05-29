@@ -169,7 +169,11 @@ export function itemVariableValue(
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	} else if (item.itemCalculations?.[variable]) {
-		const value = variableResolveFn(item.itemCalculations?.[variable])?.(item.itemCalculations[variable], item, damageSource);
+		const value = variableResolveFn(
+			item.itemCalculations?.[variable],
+		)?.(item.itemCalculations[variable], item, damageSource, {
+			accessedVariables: params.accessedVariables?.getOrInsert(accessedFrom ?? variable, new Set()),
+		});
 		if (value) {
 			Object.assign(rv, value);
 		}
@@ -246,14 +250,14 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 }
 
 // TODO make sure it handles hextech soul description
-export function championAbilityVariableValue(variable: string, arg: IChampionAbilityVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
+export function championAbilityVariableValue(variable: string, params: IChampionAbilityVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
 	const {
 		abilityVariant,
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityLevel = 1,
 		allAbilitiesVariants = [],
 		damageSource,
-	} = arg;
+	} = params;
 	const rv: IVariableValueResult = {};
 
 	const colonIndex = variable.indexOf(':');
@@ -340,11 +344,11 @@ export function championAbilityVariableValue(variable: string, arg: IChampionAbi
 	let multiplier = 1;
 	if (typeof rv.value === 'object') {
 		if ('mMultiplier' in rv.value) {
-			multiplier = resolveMMultiplier(rv.value.mMultiplier as any, abilityVariant);
+			multiplier = resolveMMultiplier(rv.value.mMultiplier as any, abilityVariant, { accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()) });
 		}
 		if ('mFormulaParts' in rv.value) {
 			// eslint-disable-next-line ts/no-use-before-define
-			const formulaValue = VARIABLE_CALCULATION_FNS.mFormulaParts(rv.value as any, abilityVariant, damageSource);
+			const formulaValue = VARIABLE_CALCULATION_FNS.mFormulaParts(rv.value as any, abilityVariant, damageSource, { accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()) });
 			Object.assign(rv, formulaValue);
 		}
 	}
@@ -606,12 +610,12 @@ export function replaceGameIcons(text: string): string {
 
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
-	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, self) {
+	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, self, meta = undefined) {
 		const rv: IVariableValueResult = {};
 		const values = variable.mFormulaParts.map((part) => {
 			const resolveFn = variableResolveFn(part);
 			if (resolveFn) {
-				const resolved = variableResolveFn(part)?.(part, whole, self);
+				const resolved = variableResolveFn(part)?.(part, whole, self, meta);
 				if (resolved) {
 					rv.roundReplaced ||= resolved.roundReplaced;
 				}
@@ -648,7 +652,8 @@ export const VARIABLE_CALCULATION_FNS = {
 			value: variable.mNumber,
 		};
 	},
-	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole) {
+	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole, _self, meta) {
+		meta?.accessedVariables?.add(variable.mDataValue);
 		return {
 			value: whole.dataValues?.[variable.mDataValue],
 		};
@@ -678,9 +683,11 @@ export const VARIABLE_CALCULATION_FNS = {
 			};
 		}
 	},
-	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self) {
+	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self, meta) {
 		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
 		const dataValue = whole.dataValues?.[variable.mDataValue];
+		meta?.accessedVariables?.add(variable.mDataValue);
+
 		if (dataValue !== undefined) {
 			if (statValue !== undefined) {
 				return {
@@ -696,7 +703,15 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 } satisfies IHypotheticalVariableCalculationFns;
 
-type IHypotheticalVariableCalculationFns = Record<string, (variable: any, whole: any, self?: DamageSource) => IVariableValueResult | undefined>;
+type IHypotheticalVariableCalculationFns = Record<
+	string,
+	(
+		variable: any,
+		whole: any,
+		self?: DamageSource,
+		meta?: { accessedVariables?: Set<string> },
+	) => IVariableValueResult | undefined
+>;
 
 interface IGameVariablesByType {
 	ByCharLevelBreakpointsCalculationPart: {
@@ -775,11 +790,16 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 	return undefined;
 }
 
-function resolveMMultiplier(variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'], whole: any): number {
+function resolveMMultiplier(
+	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'],
+	whole: any,
+	meta?: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[3],
+): number {
 	const { mNumber, mDataValue } = variable;
 	if (mNumber) {
 		return mNumber;
 	} else if (mDataValue) {
+		meta?.accessedVariables?.add(variable.mDataValue);
 		return whole.dataValues?.[mDataValue];
 	}
 	console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);

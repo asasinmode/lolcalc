@@ -1078,9 +1078,10 @@ export const ITEM_SPECIFICS = {
 				HasteFromAD: {
 					statIconKey: 'attackDamage',
 					extendedEquals: {
-						prefix: `<const>${ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee.mFormulaParts[0]!.mNumber}</const> + <scalead>`,
-						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee.mFormulaParts[1]!.mCoefficient! * 100),
-						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADRanged.mFormulaParts[1]!.mCoefficient! * 100),
+						/* these are behind `?` because when developing, sometimes I resolve only singular item variables and these are originally hashed, so without them being resolved code doesn't run because it can't find them under the `HasteFromX` names */
+						prefix: `<const>${ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[0]!.mNumber}</const> + <scalead>`,
+						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[1]!.mCoefficient! * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADRanged?.mFormulaParts[1]!.mCoefficient! * 100),
 						valueSuffix: '%',
 						suffix: ' bonus</scalead> ',
 					},
