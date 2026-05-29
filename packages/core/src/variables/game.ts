@@ -169,6 +169,7 @@ export function itemVariableValue(
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	} else if (item.itemCalculations?.[variable]) {
+		const existingMeta = rv.meta;
 		const value = variableResolveFn(
 			item.itemCalculations?.[variable],
 		)?.(item.itemCalculations[variable], item, damageSource, {
@@ -176,6 +177,11 @@ export function itemVariableValue(
 		});
 		if (value) {
 			Object.assign(rv, value);
+			if (rv.meta) {
+				Object.assign(rv.meta, existingMeta);
+			} else {
+				rv.meta = existingMeta;
+			}
 		}
 	}
 
