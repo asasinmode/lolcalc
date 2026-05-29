@@ -1134,7 +1134,7 @@ export function computeItemDescription(
 	const { text: tooltipShopExtended } = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
 	const { text: tooltipInventoryExtended } = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
 
-	const replacedExtended = additionalItemText(extended, item, damageSource, variables, unknownVariables, replaceOptions);
+	const replacedExtended = additionalItemText(extended, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
 	const { replaced: replacedFooterLeft, anyExtendedVariables: footerLeftAnyExtendedVariables } = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, replaceOptions);
 	const { replaced: replacedFooterLeftExtended } = additionalItemText(footerLeft, item, damageSource, variables, unknownVariables, { ...replaceOptions, isExtended: true });
 	const { replaced: replacedKeywordDefinitions } = additionalItemText(keywordDefinitions, item, damageSource, variables, unknownVariables, replaceOptions);
@@ -1145,7 +1145,7 @@ export function computeItemDescription(
 		item,
 		variables,
 		unknownVariables,
-		extended: replacedExtended.replaced,
+		extended: replacedExtended.replaced && replaceGameIcons(replacedExtended.replaced),
 		footerLeft: replacedFooterLeft && replaceGameIcons(replacedFooterLeft),
 		footerLeftExtended: replacedFooterLeftExtended && replaceGameIcons(replacedFooterLeftExtended),
 		footerLeftAnyExtendedVInfo: footerLeftAnyExtendedVariables,
