@@ -205,6 +205,20 @@ export const ITEM_SPECIFICS = {
 					},
 				};
 			},
+			meta: {
+				BurnDamagePerSecondCalc: {
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.BurnFlatDamagePerSecond}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.APRatio * 100)}%</scalemana>`,
+				},
+				MinionBurnCalc: {
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.MinionDPS}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.MinionAP * 100)}%</scalemana>`,
+				},
+				MonsterBurnCalc: {
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.MonsterDPS}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.MonsterAP * 100)}%</scalemana>`,
+				},
+			},
 			uninteresting: ['MinionBurnCalc', 'MonsterBurnCalc', 'f2', 'APPerStack', 'BurnDuration'],
 		}),
 	},
