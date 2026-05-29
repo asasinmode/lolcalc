@@ -32,19 +32,19 @@ export const HOOK_PRIORITIES = {
 
 export const ITEM_SPECIFICS_SHARED = {
 	[ITEM_NAME_TO_ID.archangelsStaff]: {
-		AP_FROM_MANA: ITEMS_BY_NAME.archangelsStaff.dataValues.APFromMana,
+		AP_FROM_MANA: ITEMS_BY_NAME.archangelsStaff?.dataValues.APFromMana,
 	},
 	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
-		AP_FROM_MANA: ITEMS_BY_NAME.seraphsEmbrace.dataValues.APFromMana,
+		AP_FROM_MANA: ITEMS_BY_NAME.seraphsEmbrace?.dataValues.APFromMana,
 	},
 	[ITEM_NAME_TO_ID.wintersApproach]: {
-		HP_FROM_MANA: ITEMS_BY_NAME.wintersApproach.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient,
+		HP_FROM_MANA: ITEMS_BY_NAME.wintersApproach?.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient,
 	},
 	[ITEM_NAME_TO_ID.fimbulwinter]: {
-		HP_FROM_MANA: ITEMS_BY_NAME.fimbulwinter.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient,
+		HP_FROM_MANA: ITEMS_BY_NAME.fimbulwinter?.itemCalculations.BonusHPFromMana.mFormulaParts[0]!.mCoefficient,
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
-		HP_TO_AP: ITEMS_BY_NAME.riftmaker.dataValues.HealthToAPConversionPercent,
+		HP_TO_AP: ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent,
 	},
 };
 

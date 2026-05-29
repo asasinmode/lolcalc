@@ -131,7 +131,7 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			onTotalPreMultipliers: {
 				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, effectStats }, { calculatedVariables }) {
-					const value = totalPreMultipliersStats.attackSpeed * ITEMS_BY_NAME.frozenHeart.dataValues.ASPDSlow;
+					const value = totalPreMultipliersStats.attackSpeed * ITEMS_BY_NAME.frozenHeart?.dataValues.ASPDSlow;
 					effectStats.attackSpeed = value;
 					totalMultipliersStats.attackSpeed += value;
 					calculatedVariables.frozenHeartCaress = value;
