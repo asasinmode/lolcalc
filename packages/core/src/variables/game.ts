@@ -699,6 +699,15 @@ export const VARIABLE_CALCULATION_FNS = {
 			};
 		}
 	},
+	/** basically same as `StatByCoefficientCalculationPart` but just for mana */
+	AbilityResourceByCoefficientCalculationPart(variable: IGameVariablesByType['AbilityResourceByCoefficientCalculationPart'], _whole, self) {
+		const statsKey = mStatFormulaStatKey(variable);
+		if (statsKey) {
+			return {
+				value: self?.stats.value ? self.stats.value[statsKey].mana * (variable.mCoefficient ?? 1) : 0,
+			};
+		}
+	},
 	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self, meta) {
 		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
 		const dataValue = whole.dataValues?.[variable.mDataValue];
@@ -758,6 +767,10 @@ interface IGameVariablesByType {
 		mDataValue: string;
 		__type: string;
 	};
+	AbilityResourceByCoefficientCalculationPart: IStatWithFormula & {
+		mCoefficient?: number;
+		__type: string;
+	};
 }
 
 function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
@@ -788,21 +801,24 @@ type IStatsCalculationResultsStatKey = {
 	[P in keyof IStatsCalculationResult]: IStatsCalculationResult[P] extends IChampionStats ? P : never
 }[keyof IStatsCalculationResult];
 
+function mStatFormulaStatKey(stat: IStatWithFormula): IStatsCalculationResultsStatKey | undefined {
+	if (stat.mStatFormula === 1) {
+		return 'baseOnLevel';
+	} else if (stat.mStatFormula === 2) {
+		return 'bonus';
+	} else if (stat.mStatFormula === undefined) {
+		return 'total';
+	}
+}
+
 /** used for resolving variables of type `IStatWithFormula`, which basically are supposed to be various kinds (like base, bonus, total, determined by `mStatFormula`) of champion's stats (determined by `mStat`) */
 function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculationResult): number | undefined {
-	let statsKey: IStatsCalculationResultsStatKey | undefined;
-	if (stat.mStatFormula === 1) {
-		statsKey = 'baseOnLevel';
-	} else if (stat.mStatFormula === 2) {
-		statsKey = 'bonus';
-	} else if (stat.mStatFormula === undefined) {
-		statsKey = 'total';
-	}
+	const statsKey = mStatFormulaStatKey(stat);
 	// TODO not sure if can just fall back to ap, at the moment dusk and dawn doesn't have `mStat` specified and seems to be using ap there
 	const targetStat = stat.mStat ? MSTAT_TO_NAMED_STAT[stat.mStat] : 'abilityPower';
 	/** resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
 	if (statsKey && targetStat) {
-		return (stats && stats[statsKey][targetStat]) ?? 0;
+		return stats ? stats[statsKey][targetStat] : 0;
 	}
 	return undefined;
 }
