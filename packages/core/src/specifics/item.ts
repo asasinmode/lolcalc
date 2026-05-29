@@ -824,6 +824,28 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { pHLifeline: number }) {
 			return internalData.pHLifeline;
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				MaxHealthGain: {
+					statIconKey: 'level',
+					extendedEquals: `<const>${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.MaxHealthGain.mFormulaParts[0]?.mStartValue} - ${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.MaxHealthGain.mFormulaParts[0]?.mEndValue}</const>`,
+				},
+				TotalHealthRegen: {
+					statIconKey: ['level', 'armor', 'magicResist'],
+					extendedEquals: `<const>${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mStartValue} - ${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mEndValue}%i:${STAT_ICON.level}%</const> <scalearmor>+ ${Math.round((ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}%%i:${STAT_ICON.armor}%</scalearmor> <scalemr>+ ${Math.round((ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[2]!.mCoefficient ?? 0) * 100)}%%i:${STAT_ICON.magicResist}%</scalemr>`,
+					type: VariableType.heal
+				},
+			},
+			uninteresting: ['f1', 'LowHealthThreshold', 'Duration', 'SizeIncrease', 'MSAmount', 'TenacityAmount'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.frozenHeart]: {
 		internalDataProperties: ['wCaress'],
