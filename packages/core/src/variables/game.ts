@@ -732,6 +732,13 @@ export const VARIABLE_CALCULATION_FNS = {
 			}
 		}
 	},
+	/** calculates the value between `mStartValue` and `mEndValue` based on damage source's level. Formula taken from [Protoplasm Harness' wiki](https://wiki.leagueoflegends.com/en-us/Protoplasm_Harness) */
+	ByCharLevelInterpolationCalculationPart(variable: IGameVariablesByType['ByCharLevelInterpolationCalculationPart'], _whole, self) {
+		const { mStartValue, mEndValue } = variable;
+		return {
+			value: mStartValue + (mEndValue - mStartValue) / 17 * ((self?.level.value ?? 1) - 1),
+		};
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 type IHypotheticalVariableCalculationFns = Record<
@@ -777,6 +784,11 @@ interface IGameVariablesByType {
 		mCoefficient?: number;
 		__type: string;
 	};
+	ByCharLevelInterpolationCalculationPart: {
+		mStartValue: number;
+		mEndValue: number;
+		__type: string;
+	};
 }
 
 function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
@@ -797,7 +809,9 @@ interface IStatWithFormula {
 
 /** item variables sometimes have fields with `mStat: number`, which from what I can tell is supposed to be a champion's stat. This is a map of known numbers to their corresponding stats, supposed to be used with */
 const MSTAT_TO_NAMED_STAT: Record<number, IChampionStatName> = {
+	1: 'armor',
 	2: 'attackDamage',
+	6: 'magicResist',
 	7: 'moveSpeed',
 	12: 'hp',
 	29: 'lethality',
