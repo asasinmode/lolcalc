@@ -66,6 +66,15 @@ const gluttonousGreavesSpecific = {
 	},
 } satisfies IItemSpecific;
 
+const bastionBreakerSpecifics = {
+	abilityDamageCalcBase: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.AbilityDamageCalc.mFormulaParts[0]!.mNumber ?? 0,
+	abilityDamageCalcRangeCoefficient: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.AbilityDamageCalc.mFormulaParts[1]!.mCoefficient ?? 0,
+	abilityDamageCalcRangeModifier: (ITEMS_BY_NAME.bastionBreaker?.dataValues as any)[ITEMS_BY_NAME.bastionBreaker.itemCalculations.AbilityDamageCalc.mRangedMultiplier.mDataValue],
+	damageCalcBase: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.DamageCalc.mFormulaParts[0]!.mNumber ?? 0,
+	damageCalcRangeCoefficient: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.DamageCalc.mFormulaParts[1]!.mCoefficient ?? 0,
+	damageCalcRangeModifier: (ITEMS_BY_NAME.bastionBreaker?.dataValues as any)[ITEMS_BY_NAME.bastionBreaker.itemCalculations.DamageCalc.mRangedMultiplier.mDataValue],
+};
+
 /** specific items' helpers, utils and calculations */
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -1415,6 +1424,41 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f2', 'BurnDuration', 'MonsterDamageBonus'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.bastionBreaker]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				AbilityDamageCalc: {
+					statIconKey: 'lethality',
+					extendedEquals: {
+						prefix: `<const>`,
+						meleeValue: `${bastionBreakerSpecifics.abilityDamageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * 100)}`,
+						rangedValue: `${bastionBreakerSpecifics.abilityDamageCalcBase * bastionBreakerSpecifics.abilityDamageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * bastionBreakerSpecifics.abilityDamageCalcRangeModifier * 100)}`,
+						valueSuffix: '%',
+						suffix: `</scalelethality>`,
+					},
+				},
+				DamageCalc: {
+					statIconKey: 'lethality',
+					extendedEquals: {
+						prefix: `<const>`,
+						meleeValue: `${bastionBreakerSpecifics.damageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * 100)}`,
+						rangedValue: `${bastionBreakerSpecifics.damageCalcBase * bastionBreakerSpecifics.damageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * bastionBreakerSpecifics.damageCalcRangeModifier * 100)}`,
+						valueSuffix: '%',
+						suffix: `</scalelethality>`,
+					},
+				},
+			},
+			uninteresting: ['f1', 'TakedownWindow', 'BuffDuration', 'DoTDuration'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
