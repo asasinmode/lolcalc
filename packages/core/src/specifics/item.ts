@@ -209,7 +209,7 @@ export const ITEM_SPECIFICS = {
 				BurnDamagePerSecondCalc: {
 					statIconKey: 'abilityPower',
 					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.BurnFlatDamagePerSecond}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.APRatio * 100)}%</scalemana>`,
-					type: 'magic',
+					type: VariableType.magic,
 				},
 				MinionBurnCalc: {
 					statIconKey: 'abilityPower',
@@ -1366,12 +1366,12 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				SpellbladeDamage: {
-					type: 'magic',
+					type: VariableType.magic,
 					statIconKey: ['attackDamage', 'abilityPower'],
 					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.duskAndDawn?.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mCoefficient * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scaleap>+ ${Math.round(ITEMS_BY_NAME.duskAndDawn?.itemCalculations.SpellbladeDamage.mFormulaParts[1]!.mCoefficient * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
 				},
 				SpellbladeHealing: {
-					type: 'heal',
+					type: VariableType.heal,
 					statIconKey: ['abilityPower', 'hp'],
 					extendedEquals: `<scaleap>${Math.round(ITEMS_BY_NAME.duskAndDawn?.itemCalculations.SpellbladeHealing.mFormulaParts[0]!.mCoefficient * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap> <scalehealth>+ ${Math.round(ITEMS_BY_NAME.duskAndDawn?.itemCalculations.SpellbladeHealing.mFormulaParts[1]!.mCoefficient * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
 				},
@@ -1393,7 +1393,7 @@ export const ITEM_SPECIFICS = {
 				DrainCalc: {
 					statIconKey: 'hp',
 					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.unendingDespair?.dataValues.BonusHealthDrainPercentage * 100)}% bonus</scalehealth> `,
-					type: 'magic',
+					type: VariableType.magic,
 				},
 			},
 			uninteresting: ['f1', 'HealMultiplier', 'Cooldown'],
@@ -1411,7 +1411,7 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				BurnFlatDamagePerSecond: {
-					type: 'magic',
+					type: VariableType.magic,
 				},
 			},
 			uninteresting: ['f2', 'BurnDuration', 'MonsterDamageBonus'],

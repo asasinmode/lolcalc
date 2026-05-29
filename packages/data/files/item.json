@@ -1557,7 +1557,7 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "{a99340ef}"
+						"mDataValue": "RangeModifier"
 					}
 				},
 				"AbilityDamageCalc": {
@@ -1573,13 +1573,17 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "{d62bdfef}"
+						"mDataValue": "AbilityDamageRangeMod"
 					}
 				}
 			},
 			"itemGroups": [
 				"{f2405c8e}"
 			],
+			"__replacedVariables": {
+				"{a99340ef}": "RangeModifier",
+				"{d62bdfef}": "AbilityDamageRangeMod"
+			},
 			"categories": {
 				"assassin": true
 			}

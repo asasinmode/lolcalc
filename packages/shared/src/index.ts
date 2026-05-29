@@ -331,6 +331,9 @@ export const ITEM_NAME_TO_ID = {
 	botrk: '3153',
 	steraksGage: '3053',
 	duskAndDawn: '2510',
+	unendingDespair: '2502',
+	fatedAshes: '2508',
+	bastionBreaker: '2520',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -435,6 +438,7 @@ export const VariableType = {
 	heal: 'heal',
 	physical: 'physical',
 	magic: 'magic',
+	true: 'true',
 } as const;
 
 export type IVariableType = typeof VariableType[keyof typeof VariableType];

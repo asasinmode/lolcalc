@@ -633,12 +633,28 @@ export const VARIABLE_CALCULATION_FNS = {
 			return undefined;
 		}
 
-		let multiplier: number | undefined;
+		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)!;
+
 		if ('mMultiplier' in variable) {
-			multiplier = resolveMMultiplier(variable.mMultiplier as any, whole);
+			const multiplier = resolveMMultiplier(variable.mMultiplier as any, whole, meta) ?? 1;
+			rv.value *= multiplier;
+		} else if ('mRangedMultiplier' in variable) {
+			rv.isMeleeRanged = true;
+			const multiplier = resolveMMultiplier(variable.mRangedMultiplier as any, whole, meta);
+
+			if (multiplier === undefined) {
+				rv.value = undefined;
+			} else if (self?.isRanged.value === undefined) {
+				rv.isMeleeRanged = true;
+				rv.value = [rv.value, rv.value * (multiplier ?? 1)];
+			} else if (self.isRanged.value) {
+				rv.isMeleeRanged = 1;
+				rv.value *= multiplier ?? 1;
+			} else {
+				rv.isMeleeRanged = 0;
+			}
 		}
 
-		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)! * (multiplier ?? 1);
 		if (variable.mDisplayAsPercent) {
 			rv.meta ??= {};
 			rv.meta.isPercentage = true;
@@ -765,6 +781,7 @@ const MSTAT_TO_NAMED_STAT: Record<number, IChampionStatName> = {
 	2: 'attackDamage',
 	7: 'moveSpeed',
 	12: 'hp',
+	29: 'lethality',
 };
 
 type IStatsCalculationResultsStatKey = {
@@ -782,7 +799,7 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 		statsKey = 'total';
 	}
 	// TODO not sure if can just fall back to ap, at the moment dusk and dawn doesn't have `mStat` specified and seems to be using ap there
-	const targetStat = MSTAT_TO_NAMED_STAT[stat.mStat] ?? 'abilityPower';
+	const targetStat = stat.mStat ? MSTAT_TO_NAMED_STAT[stat.mStat] : 'abilityPower';
 	/** resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
 	if (statsKey && targetStat) {
 		return (stats && stats[statsKey][targetStat]) ?? 0;
