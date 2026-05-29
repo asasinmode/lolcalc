@@ -205,6 +205,7 @@ export const ITEM_SPECIFICS = {
 					},
 				};
 			},
+			uninteresting: ['MinionBurnCalc', 'MonsterBurnCalc', 'f2', 'APPerStack', 'BurnDuration'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
