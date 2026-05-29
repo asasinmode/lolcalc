@@ -666,6 +666,7 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(self) {
 				return {
+					/* TODO this should be calculable from item.json since the variable seems to be just bonus mana % with __type `AbilityResourceByCoefficientCalculationPart` but atm Ryze's passive is unimplemented and making trouble so try to revisit it later */
 					BonusHPFromMana: {
 						value: self.stats.value.variables.approachFimbulAwe
 							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA),

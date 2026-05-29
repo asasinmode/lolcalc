@@ -2,7 +2,7 @@ import type { ISpecificVariables } from '@lolcalc/core/specifics';
 import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
-import type { IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type { IEffectData, ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
@@ -1368,12 +1368,14 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 				? variableValueParameters.abilityVariant
 				: variableValueParameters.rune;
 
+		if (variableValueParameters.dynamicVariables?.default) {
+			(variableValueParameters.dynamicVariables as IDynamicVariables) = { values: variableValueParameters.dynamicVariables.default };
+		}
+
 		const { unknownVariables } = replaceGameVariables(
 			stringtableReplaced,
 			variableType as any,
 			variableValueParameters as any,
-			undefined,
-			{ overrideVariables: variableValueParameters.dynamicVariables?.default },
 		);
 
 		let unknownChanged = false;
