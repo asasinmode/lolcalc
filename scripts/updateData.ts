@@ -1382,22 +1382,40 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 
 		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
+			const isHash = variableName.startsWith('{');
 			const subaccessedVariables = variableValueParameters.accessedVariables?.get(variableName);
 			if (subaccessedVariables?.values().some(variable => !unknownVariables.some(unknownV => unknownV[0] === variable))) {
 				unknownChanged = true;
 				unknownVariables.splice(i, 1);
-				continue;
-			}
-			const hash = hashFnv1a(variableName);
-			for (const sourceKey of variableSourceKeys as (keyof typeof variableSource)[]) {
-				let rename: [from: string, to: string] | undefined;
 
-				if (variableSource[sourceKey]?.[hash]) {
-					rename = [hash, variableName];
+				for (const subVar of subaccessedVariables!) {
+					const subIndex = unknownVariables.findIndex(unknownV => unknownV[0] === subVar);
+					if (subIndex !== -1) {
+						unknownVariables.splice(subIndex, 1);
+					}
 				}
 
-				// TODO not sure if legal for variables other than the rune ones, they might be case sensitive
-				if (!rename) {
+				continue;
+			}
+			const hash = isHash ? undefined : hashFnv1a(variableName);
+			for (const sourceKey of variableSourceKeys.concat('dataValues') as (keyof typeof variableSource)[]) {
+				let rename: [from: string, to: string] | undefined;
+
+				if (isHash) {
+					const hashedSourceKeys: [string, string][] = Object.keys(variableSource[sourceKey]).filter(key => !key.startsWith('{')).map(key => [key, hashFnv1a(key)]);
+					const matchingKey = hashedSourceKeys.find(key => key[1] === variableName);
+					if (matchingKey) {
+						unknownChanged = objectReplaceAllEncounteredValues(variableSource, variableSourceKeys, variableName, matchingKey[0]);
+						if (unknownChanged) {
+							unknownVariables.splice(i, 1);
+							(variableSource as any).__replacedVariables ||= {};
+							(variableSource as any).__replacedVariables[variableName] = matchingKey[0];
+							continue outer;
+						}
+					}
+				} else if (hash && variableSource[sourceKey]?.[hash]) {
+					rename = [hash, variableName];
+				} else {
 					const lowercaseKeys = Object.keys(variableSource[sourceKey] || {});
 					for (const key of lowercaseKeys) {
 						if (variableName !== key && variableName.toLowerCase() === key.toLowerCase()) {
@@ -1957,6 +1975,7 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 	return data;
 }
 
+/** like JSON.stringify but formats `number[]` into single line */
 function stringifyObject(obj: object) {
 	const json = JSON.stringify(obj, (_k, v) =>
 		Array.isArray(v) && v.every(item => typeof item === 'number')
@@ -1964,6 +1983,31 @@ function stringifyObject(obj: object) {
 			: v, '\t');
 
 	return json.replace(/"__ARRAY__(.*?)__ARRAY__"/g, '$1');
+}
+
+/** goes through all of the `properties` in the given object deeply, then replaces any values matching `searchValue` with `replaceValue` */
+function objectReplaceAllEncounteredValues(object: any, keys: string[], searchValue: string, replaceValue: string): boolean {
+	let anyReplaced = false;
+
+	function deepReplace(obj: any): void {
+		if (obj === null || typeof obj !== 'object') {
+			return;
+		}
+		for (const key of Object.keys(obj)) {
+			if (obj[key] === searchValue) {
+				obj[key] = replaceValue;
+				anyReplaced = true;
+			} else {
+				deepReplace(obj[key]);
+			}
+		}
+	}
+
+	for (const key of keys) {
+		deepReplace(object[key]);
+	}
+
+	return anyReplaced;
 }
 
 function hashFnv1a(value: string): string {

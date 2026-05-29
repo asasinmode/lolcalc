@@ -1237,7 +1237,7 @@
 				"MinionBurnCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{9adc0c64}",
+							"mDataValue": "MinionDPS",
 							"__type": "NamedDataValueCalculationPart"
 						},
 						{
@@ -1249,11 +1249,11 @@
 				"MonsterBurnCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{afd69c5a}",
+							"mDataValue": "MonsterDPS",
 							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "{434396e0}",
+							"mDataValue": "MonsterAP",
 							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
@@ -1262,6 +1262,11 @@
 			"itemGroups": [
 				"{693b07b5}"
 			],
+			"__replacedVariables": {
+				"{434396e0}": "MonsterAP",
+				"{afd69c5a}": "MonsterDPS",
+				"{9adc0c64}": "MinionDPS"
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1711,7 +1716,7 @@
 				"AuraAttackSpeed": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{eb8d750f}",
+							"mDataValue": "MeleeAuraAttackSpeed",
 							"__type": "NamedDataValueCalculationPart"
 						}
 					],
@@ -1724,6 +1729,9 @@
 			"itemGroups": [
 				"{f64062da}"
 			],
+			"__replacedVariables": {
+				"{eb8d750f}": "MeleeAuraAttackSpeed"
+			},
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2240,7 +2248,7 @@
 				"CritPerStackCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{52d90ad0}",
+							"mDataValue": "CritPerStackMelee",
 							"__type": "NamedDataValueCalculationPart"
 						}
 					],
@@ -2253,6 +2261,9 @@
 			"itemGroups": [
 				"{aba3fe3b}"
 			],
+			"__replacedVariables": {
+				"{52d90ad0}": "CritPerStackMelee"
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -4931,7 +4942,7 @@
 				"OOCMS": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{74ac7847}",
+							"mDataValue": "BaseOOCMS",
 							"__type": "NamedDataValueCalculationPart"
 						}
 					],
@@ -4943,6 +4954,9 @@
 			"itemGroups": [
 				"{9833c2cb}"
 			],
+			"__replacedVariables": {
+				"{74ac7847}": "BaseOOCMS"
+			},
 			"categories": {
 				"assassin": true
 			}
