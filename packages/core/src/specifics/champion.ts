@@ -443,37 +443,59 @@ export const CHAMPION_SPECIFICS = {
 					miscDebug.ryzePassiveAPBase = totalStats.abilityPower;
 					miscDebug.ryzePassiveManaBase = totalStats.mana;
 
-					const questMultiplier = questStatMultiplier;
-					const globalApMultiplier = calculatedVariables.totalItemApMultipliers ?? 1;
+					// eslint-disable-next-line no-console
+					console.log('INPUT', {
+						apToManaPercentIncreaseRatio,
+						tearItemAPRatio,
+						tearItemHPRatio,
+						riftmakerHpToApRatio,
+						ryzePassiveAPBase: totalStats.abilityPower,
+						ryzePassiveManaBase: totalStats.mana,
+						questStatMultiplier,
+						totalStats: {
+							abilityPower: totalStats.abilityPower,
+							hp: totalStats.hp,
+							mana: totalStats.mana,
+						},
+						calculatedVariables: {
+							totalItemApMultipliers: calculatedVariables.totalItemApMultipliers,
+							archangelSeraphAwe: calculatedVariables.archangelSeraphAwe,
+							approachFimbulAwe: calculatedVariables.approachFimbulAwe,
+							riftmakerVoidInfusion: calculatedVariables.riftmakerVoidInfusion,
+							rabadonMagicalOpus: calculatedVariables.rabadonMagicalOpus,
+						},
+					});
 
-					const rawApPerMana = tearItemAPRatio + (riftmakerHpToApRatio * tearItemHPRatio);
-					const effectiveApPerMana = rawApPerMana * (1 + questMultiplier) * globalApMultiplier;
+					const effectiveAddedAPRatio = tearItemAPRatio * (1 + questStatMultiplier);
+					const effectiveAddedHPRatio = tearItemHPRatio * (riftmakerHpToApRatio ? (1 + questStatMultiplier) : 1);
+
+					const totalAddedAP = effectiveAddedAPRatio + (riftmakerHpToApRatio * effectiveAddedHPRatio);
+
 					const numerator = miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * miscDebug.ryzePassiveAPBase;
-					const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * effectiveApPerMana);
-					miscDebug.ryzePMana = (effectiveApPerMana === 0 || denominator <= 0) ? numerator : numerator / denominator;
+					const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * totalAddedAP);
+					miscDebug.ryzePMana = (totalAddedAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
 
 					const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
-					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questMultiplier;
-					const tearItemTotalAp = (tearItemBaseAddedAP + tearItemFromQuestAddedAP) * globalApMultiplier;
+					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questStatMultiplier;
+					const tearItemTotalAp = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
 
-					const addedHP = tearItemHPRatio * miscDebug.ryzePMana;
-
-					const riftmakerBaseAddedAP = riftmakerHpToApRatio * addedHP;
-					const riftmakerFromQuestAddedAP = riftmakerBaseAddedAP * questMultiplier;
-					const riftmakerTotalAp = (riftmakerBaseAddedAP + riftmakerFromQuestAddedAP) * globalApMultiplier;
-
-					const addedAP = tearItemTotalAp + riftmakerTotalAp;
+					const addedHP = effectiveAddedHPRatio * miscDebug.ryzePMana;
+					const riftmakerAddedAP = riftmakerHpToApRatio * addedHP;
+					const addedAP = tearItemTotalAp + riftmakerAddedAP;
 
 					totalStats.mana += miscDebug.ryzePMana;
 					bonusStats.mana += miscDebug.ryzePMana;
 					championPassiveStats.mana = miscDebug.ryzePMana;
 
 					totalStats.abilityPower += addedAP;
-					totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP + riftmakerFromQuestAddedAP;
+					totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP;
 					bonusStats.abilityPower += addedAP;
 
 					totalStats.hp += addedHP;
 					bonusStats.hp += addedHP;
+
+					miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
+					calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
 
 					miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
 					calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
@@ -485,15 +507,27 @@ export const CHAMPION_SPECIFICS = {
 						calculatedVariables.approachFimbulAwe += addedHP;
 					}
 					if (calculatedVariables.midQuestAp !== undefined) {
-						calculatedVariables.midQuestAp += tearItemFromQuestAddedAP + riftmakerFromQuestAddedAP;
+						calculatedVariables.midQuestAp += tearItemFromQuestAddedAP;
 					}
 					if (calculatedVariables.riftmakerVoidInfusion !== undefined) {
-						calculatedVariables.riftmakerVoidInfusion += riftmakerBaseAddedAP;
+						calculatedVariables.riftmakerVoidInfusion += riftmakerAddedAP;
 					}
-					if (calculatedVariables.rabadonMagicalOpus !== undefined && globalApMultiplier > 1) {
-						const rabadonContribution = (globalApMultiplier - 1) * ((tearItemBaseAddedAP + tearItemFromQuestAddedAP) + (riftmakerBaseAddedAP + riftmakerFromQuestAddedAP));
-						calculatedVariables.rabadonMagicalOpus += rabadonContribution;
-					}
+
+					// eslint-disable-next-line no-console
+					console.log('OUTPUT', {
+						totalStats: {
+							abilityPower: totalStats.abilityPower,
+							hp: totalStats.hp,
+							mana: totalStats.mana,
+						},
+						calculatedVariables: {
+							archangelSeraphAwe: calculatedVariables.archangelSeraphAwe,
+							approachFimbulAwe: calculatedVariables.approachFimbulAwe,
+							riftmakerVoidInfusion: calculatedVariables.riftmakerVoidInfusion,
+							ryzePassivePercentManaIncrease: calculatedVariables.ryzePassivePercentManaIncrease,
+							rabadonMagicalOpus: calculatedVariables.rabadonMagicalOpus,
+						},
+					});
 				},
 				priority: HOOK_PRIORITIES.postTotal.Ryze,
 			},
