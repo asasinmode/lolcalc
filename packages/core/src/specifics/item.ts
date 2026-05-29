@@ -209,6 +209,7 @@ export const ITEM_SPECIFICS = {
 				BurnDamagePerSecondCalc: {
 					statIconKey: 'abilityPower',
 					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.BurnFlatDamagePerSecond}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.APRatio * 100)}%</scalemana>`,
+					type: 'magic',
 				},
 				MinionBurnCalc: {
 					statIconKey: 'abilityPower',
@@ -1391,10 +1392,29 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				DrainCalc: {
 					statIconKey: 'hp',
-					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.unendingDespair?.dataValues.BonusHealthDrainPercentage * 100)}% bonus</scalehealth> `
+					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.unendingDespair?.dataValues.BonusHealthDrainPercentage * 100)}% bonus</scalehealth> `,
+					type: 'magic',
 				},
 			},
 			uninteresting: ['f1', 'HealMultiplier', 'Cooldown'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.fatedAshes]: {
+		variables: defineVariables({
+			known: {
+				f2: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+				};
+			},
+			meta: {
+				BurnFlatDamagePerSecond: {
+					type: 'magic',
+				},
+			},
+			uninteresting: ['f2', 'BurnDuration', 'MonsterDamageBonus'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;

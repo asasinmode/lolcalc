@@ -187,11 +187,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] item/passive extra popped up, look here it is, use it
   - [ ] double click to select & close champ select
   - [ ] double click expand/collapse scoreboard item/results section
-- [ ] keyboard navigation
-  - [ ] somehow right clicks, like clearing selects/removing items
-  - [ ] show hover tooltips when navigated to with keyboard
-  - [ ] skip links around busy areas (scoreboard, item shop?)
-- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
@@ -233,6 +228,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] abilities that give effects like attack speed and scale with champion stats - add possibility to link a source to use for stats
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
+- [ ] [item haste](https://wiki.leagueoflegends.com/en-us/Haste#Item_haste) & affect displayed item cooldowns
 - [ ] more custom/other effects - root, silence, any needed
 - [ ] explicit calculation formulas you can look at
 - [ ] [rune paths](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
@@ -250,6 +246,12 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] consumables panel
 - [ ] alternative mode of configuration, step by step choose champion -> runes -> items -> level...
 - [ ] dorans shield full calculation? It's based on melee/ranged + missing hp
+- [ ] monster damage values in results table. They are supposed to be affected by resists so they'd be hit by target resists but you could use that to make a target dummy with monster stats then see how much it will deal?
+- [ ] keyboard navigation
+  - [ ] somehow right clicks, like clearing selects/removing items
+  - [ ] show hover tooltips when navigated to with keyboard
+  - [ ] skip links around busy areas (scoreboard, item shop?)
+- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 
 #### very future
 
