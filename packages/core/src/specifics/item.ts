@@ -908,6 +908,15 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { empowered: number }) {
 			return internalData.empowered;
 		},
+		variables: defineVariables({
+			meta: {
+				ManaCalc: {
+					statIconKey: 'mana',
+					extendedEquals: `<const>${ITEMS_BY_NAME.actualizer?.itemCalculations.ManaCalc.mFormulaParts[0]!.mNumber}</const><scalemana> + ${ITEMS_BY_NAME.actualizer?.itemCalculations.ManaCalc.mFormulaParts[1]!.mCoefficient}% bonus</scalemana> `,
+				},
+			},
+			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
 		MAX_STACKS: ITEMS_BY_NAME.hexoptics?.dataValues.MaxRange,
