@@ -1,3 +1,4 @@
+import type { IEffectData } from '@lolcalc/data';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
@@ -286,6 +287,11 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'botrk'>).cShadows) {
+				return [1];
+			}
+		},
 	}),
 	[EFFECT_OBJECT_NAME.zekesConvergenceFrostfireTempest]: defineEffectSpecific<[fTempested: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.zekesConvergence),
@@ -295,6 +301,26 @@ export const EFFECT_SPECIFICS = {
 		},
 		isActive(data) {
 			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'zekesConvergence'>).fTempest) {
+				return [1];
+			}
+		},
+	}),
+	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: defineEffectSpecific<[mBlessingShattered: number]>({
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.celestialOpposition),
+		label: 'Mountain Blessing',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'celestialOpposition'>).mbSlow) {
+				return [1];
+			}
 		},
 	}),
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: defineEffectSpecific<[isCursed: number]>({
@@ -431,6 +457,33 @@ export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: stri
 	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
 	[EFFECT_OBJECT_NAME.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
 	[EFFECT_OBJECT_NAME.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
+};
+
+/** `effect.json` values for purely custom effects - if an effectObjectName has this specified, it will be put in `effect.json` during `scripts/updateData` */
+export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | string>> = {
+	/* items */
+	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
+		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
+	},
+	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: {
+		description: 'This unit\'s movement is slowed.',
+	},
+	/* champion passives */
+	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
+	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
+		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
+	},
+	/* other */
+	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
+	[EFFECT_OBJECT_NAME.stun]: {
+		description: 'This unit is <keyword>stunned</keyword>.',
+	},
+	[EFFECT_OBJECT_NAME.slowFlat]: {
+		description: 'This unit is <keyword>slowed</keyword> by a flat amount.',
+	},
+	[EFFECT_OBJECT_NAME.slowPercent]: {
+		description: 'This unit is <keyword>slowed</keyword> by a percentage amount.',
+	},
 };
 
 function defineEffectSpecific<T extends [number]>(config: IEffectSpecific<T>): IEffectSpecific<T> {

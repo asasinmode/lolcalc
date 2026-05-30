@@ -73,6 +73,10 @@
 			"description": "<mainText>This unit is slowed and is taking damage from a Zeke's Convergence storm.</mainText>",
 			"dataKey": "Items/3050/Spells/3050_EnemyBuff"
 		},
+		"lolcalc3869BlessingShattered": {
+			"dataKey": "lolcalc3869BlessingShattered",
+			"description": "This unit's movement is slowed."
+		},
 		"AmumuPDebuff": {
 			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
 			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"

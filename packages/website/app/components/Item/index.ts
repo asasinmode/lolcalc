@@ -88,7 +88,10 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.trinity), 'quicken', 'Quicken'),
 	},
 	[ITEM_NAME_TO_ID.celestialOpposition]: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.celestialOpposition), 'mBlessing', 'Blessing of the Mountain'),
+		extras: [
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.celestialOpposition), 'mbReduction', 'Blessing of the Mountain damage reduction'),
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.celestialOpposition), 'mbSlow', 'Blessing of the Mountain slow', true, true),
+		],
 	},
 	[ITEM_NAME_TO_ID.phage]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.phage), 'rage', 'Rage'),

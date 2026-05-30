@@ -3,23 +3,23 @@ import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type { IEffectData, ITEMS } from '@lolcalc/data';
+import type { ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types';
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
-import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
+import { CUSTOM_EFFECTS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
+import { ABILITY_TYPE, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
@@ -944,29 +944,6 @@ try {
 	await fs.access(effectFilePath);
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch { }
-
-const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | string>> = {
-	/* items */
-	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
-		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
-	},
-	/* champion passives */
-	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
-	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
-		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
-	},
-	/* other */
-	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
-	[EFFECT_OBJECT_NAME.stun]: {
-		description: 'This unit is <keyword>stunned</keyword>.',
-	},
-	[EFFECT_OBJECT_NAME.slowFlat]: {
-		description: 'This unit is <keyword>slowed</keyword> by a flat amount.',
-	},
-	[EFFECT_OBJECT_NAME.slowPercent]: {
-		description: 'This unit is <keyword>slowed</keyword> by a percentage amount.',
-	},
-};
 
 if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {
 	console.log('effect data not present or outdated, fetching...');

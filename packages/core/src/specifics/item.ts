@@ -772,10 +772,11 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.celestialOpposition]: {
-		internalDataProperties: ['mBlessing'],
+		internalDataProperties: ['mbReduction', 'mbSlow'],
 		setupData(self) {
-			self.internalItemData.value.mBlessing = clamp(0, self.internalItemData.value.mBlessing ?? 0, 1);
-			return { mBlessing: 0 };
+			self.internalItemData.value.mbReduction = clamp(0, self.internalItemData.value.mbReduction ?? 0, 1);
+			self.internalItemData.value.mbSlow = clamp(0, self.internalItemData.value.mbSlow ?? 0, 1);
+			return { mbReduction: 0, mbSlow: 0 };
 		},
 		imgActive(internalData: { mBlessing: number }) {
 			return internalData.mBlessing;

@@ -443,6 +443,7 @@ export const EFFECT_OBJECT_NAME = {
 	bloodletterVileDecay: '8010VisualDebuff',
 	botrkClawingShadows: '3153Slow',
 	zekesConvergenceFrostfireTempest: '3050_EnemyBuff',
+	celestialOppositionBlessingShattered: 'lolcalc3869BlessingShattered',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
