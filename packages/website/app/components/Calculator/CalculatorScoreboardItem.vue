@@ -1121,7 +1121,7 @@ defineExpose({ el });
 			<h4 data-loading="">
 				loading...
 			</h4>
-			<section data-runes="" :inert="isLoading">
+			<section data-runes="" :inert="isLoading" @click="selectRunes(value.runes)">
 				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
