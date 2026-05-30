@@ -1572,6 +1572,7 @@ export const ITEM_SPECIFICS = {
 				DPS: {
 					statIconKey: 'hp',
 					extendedEquals: `<const>${ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[0]!.mNumber}</const> <scalehealth>+ ${Math.round((ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}% bonus</scalehealth> `,
+					type: VariableType.magic,
 				},
 			},
 			uninteresting: ['f1', 'AuraDuration', 'MinionMod', 'MonsterMod'],

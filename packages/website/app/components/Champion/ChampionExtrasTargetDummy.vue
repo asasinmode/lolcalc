@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type { IChampionStatName, IChampionStats } from '@lolcalc/shared';
+import type { ALL_CHAMPION_STATS, IChampionStatName, IChampionStats } from '@lolcalc/shared';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
-import { ALL_CHAMPION_STATS, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 
 const props = defineProps<IExtraComponentProps<'champion'>>();
 
@@ -17,6 +17,10 @@ const { vMinor } = PATCH_VERSION;
 
 const damageSources = inject<Ref<DamageSource[]>>('damageSources')!;
 const damageTargets = inject<Ref<DamageSource[]>>('damageTargets')!;
+
+const MODIFIABLE_CHAMPION_STATS = Object.fromEntries(ALL_CHAMPION_STATS_ENTRIES.filter(([statName]) => statName !== 'ultimateHaste')) as unknown as typeof ALL_CHAMPION_STATS;
+const ALL_MODFIABLE_CHAMPION_STATS = Object.keys(MODIFIABLE_CHAMPION_STATS);
+const MODIFIABLE_CHAMPION_STAT_ENTRIES = Object.entries(MODIFIABLE_CHAMPION_STATS) as unknown as typeof ALL_CHAMPION_STATS_ENTRIES;
 
 function statImage(statName: IChampionStatName) {
 	const icon = STAT_ICON[statName];
@@ -33,7 +37,7 @@ function statImage(statName: IChampionStatName) {
 			};
 }
 
-const statInputs = ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]): {
+const statInputs = MODIFIABLE_CHAMPION_STAT_ENTRIES.map(([statName, statMeta]): {
 	name: string;
 	label: string;
 	onInput: (event: Event) => void;
@@ -49,7 +53,7 @@ const statInputs = ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]): {
 });
 
 onMounted(() => {
-	for (const statName of ALL_CHAMPION_STATS) {
+	for (const statName of ALL_MODFIABLE_CHAMPION_STATS) {
 		updateStat(
 			undefined,
 			props.damageSource.internalData.value[statName],
@@ -67,7 +71,7 @@ function reset(event: MouseEvent, statName: IChampionStatName) {
 }
 
 function resetAll() {
-	for (const [statName, statMeta] of ALL_CHAMPION_STATS_ENTRIES) {
+	for (const [statName, statMeta] of MODIFIABLE_CHAMPION_STAT_ENTRIES) {
 		updateStat(
 			statName as IChampionStatName,
 			props.damageSource.stats.value.initial[statName as IChampionStatName] * (statMeta.isPercentage ? 100 : 1),
@@ -111,7 +115,7 @@ function copyFrom(event: SubmitEvent) {
 		return;
 	}
 
-	for (const statName of ALL_CHAMPION_STATS) {
+	for (const statName of MODIFIABLE_CHAMPION_STATS) {
 		updateStat(
 			statName as IChampionStatName,
 			formatChampionStatValue(statName, source.stats.value[stats][statName]),
@@ -193,7 +197,7 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 			</button>
 		</header>
 		<div
-			v-for="([statName, statMeta], statIndex) in ALL_CHAMPION_STATS_ENTRIES"
+			v-for="([statName, statMeta], statIndex) in MODIFIABLE_CHAMPION_STAT_ENTRIES"
 			:key="statName"
 		>
 			<label :for="`${idPrefix}-${statName}`" :title="`${statInputs[statIndex]!.name}${statInputs[statIndex]!.label}`">

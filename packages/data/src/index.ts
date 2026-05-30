@@ -240,6 +240,7 @@ export const STAT_ICON: Record<
 	adaptiveForce: 'adaptiveforce',
 	AbilityHasteMod: 'scaleah',
 	abilityHaste: 'scaleah',
+	ultimateHaste: 'scaleah',
 	cooldown: 'scalecooldown',
 	FlatMagicDamageMod: 'scaleap',
 	abilityPower: 'scaleap',

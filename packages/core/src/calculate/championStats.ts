@@ -34,6 +34,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		critDamageMultiplier: 2,
 		moveSpeed: champion?.stats.movespeed ?? 0,
 		slowResist: 0,
+		ultimateHaste: 0,
 	};
 
 	const calculatedVariables: IStatsCalculationVariables = {
