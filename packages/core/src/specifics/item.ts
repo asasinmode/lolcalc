@@ -1628,6 +1628,40 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.ravenousHydra]: {
+		variables: defineVariables({
+			known: {
+				lolcalcChampRange: [],
+			},
+			calculate(self) {
+				return {
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					statIconKey: 'attackDamage',
+					displayedName: 'CleaveDamage',
+					extendedEquals: {
+						prefix: '<scalead>',
+						meleeValue: Math.round((ITEMS_BY_NAME.ravenousHydra.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						rangedValue: Math.round((ITEMS_BY_NAME.ravenousHydra.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						valueSuffix: '%',
+						suffix: '</scalead>',
+					},
+				},
+				PrimaryDamage: {
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.ravenousHydra.dataValues.ActiveADRatio ?? 0) * 100)}%</scalead>`,
+				},
+			},
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
