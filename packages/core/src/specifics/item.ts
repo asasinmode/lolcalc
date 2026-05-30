@@ -780,6 +780,23 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { mBlessing: number }) {
 			return internalData.mBlessing;
 		},
+		variables: defineVariables({
+			known: {
+				f3: [],
+				f5: [],
+				f6: [],
+			},
+			calculate() {
+				return {
+					f3: { value: 0 },
+					f5: { value: 0 },
+					f6: { value: 0 },
+				};
+			},
+			meta: {
+			},
+			uninteresting: ['f3', 'f5', 'f6', 'MeleeShieldDRPercentage', 'RangedShieldDRPercentage', 'ShieldLingerAfterInitiallyPopped', 'SlowAmount', 'SlowDuration', 'StealthWardCap'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.phage]: {
 		internalDataProperties: ['rage'],
@@ -1530,7 +1547,36 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'GoldOnEnemyDamage',
 				},
 			},
-			uninteresting: ['f4', 'ExecuteMinionGold', 'MaxCharges', 'ChargeCooldown', 'QuestGoldRequirement'],
+			uninteresting: ['f4', 'ChargeCooldown', 'QuestGoldRequirement', 'MaxCharges', 'ExecuteMinionGold'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.runicCompass]: {
+		variables: defineVariables({
+			known: {
+				f4: [],
+				f5: [],
+				f6: [],
+				lolcalcChampRange: [],
+			},
+			calculate(self) {
+				return {
+					f4: { value: 0 },
+					f5: { value: 0 },
+					f6: { value: 0 },
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.runicCompass, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.runicCompass, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					displayedName: 'GoldOnEnemyDamage',
+				},
+			},
+			uninteresting: ['f4', 'f5', 'f6', 'QuestGoldRequirement', 'ChargeCooldown', 'QuestGoldRequirement', 'MaxCharges', 'ExecuteMinionGold', 'StealthWardCap'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.zekesConvergence]: {
