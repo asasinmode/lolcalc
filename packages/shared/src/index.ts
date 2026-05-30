@@ -342,6 +342,12 @@ export const ITEM_NAME_TO_ID = {
 	sunfireAegis: '3068',
 	ravenousHydra: '3074',
 	brambleVest: '3076',
+	thornmail: '3075',
+	executionersCalling: '3123',
+	morellonomicon: '3165',
+	oblivionOrb: '3916',
+	chempunkChainsword: '6609',
+	mortalReminder: '3033',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -394,6 +400,16 @@ export const TEAR_ITEM_TRANSFORMATIONS: Record<string, string> = {
 	[ITEM_NAME_TO_ID.muramana]: ITEM_NAME_TO_ID.manamune,
 	[ITEM_NAME_TO_ID.fimbulwinter]: ITEM_NAME_TO_ID.wintersApproach,
 };
+
+export const GRIEVOUS_WOUND_ITEMS = [
+	ITEM_NAME_TO_ID.brambleVest,
+	ITEM_NAME_TO_ID.executionersCalling,
+	ITEM_NAME_TO_ID.oblivionOrb,
+	ITEM_NAME_TO_ID.thornmail,
+	ITEM_NAME_TO_ID.mortalReminder,
+	ITEM_NAME_TO_ID.chempunkChainsword,
+	ITEM_NAME_TO_ID.morellonomicon,
+];
 
 /**
 	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text

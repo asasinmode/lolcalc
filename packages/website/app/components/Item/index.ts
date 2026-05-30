@@ -2,7 +2,7 @@ import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { ABILITY_TYPE, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { ABILITY_TYPE, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { ItemExtraTearItem } from '#components';
 
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
@@ -180,6 +180,12 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.zekesConvergence]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.zekesConvergence), 'fTempest', 'Frosfire Tempest', true, true),
 	},
+	...Object.fromEntries(await Promise.all(GRIEVOUS_WOUND_ITEMS.map(async (itemId): Promise<[string, ISpecificComponents]> => [
+		itemId,
+		{
+			extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, itemId), 'gWounds', 'Grievous Wounds', true, true),
+		},
+	]))),
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {

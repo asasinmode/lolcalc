@@ -4,7 +4,7 @@ import type { IInternalItemDataOf, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
+import { GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -74,6 +74,17 @@ const bastionBreakerSpecifics = {
 	damageCalcRangeCoefficient: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.DamageCalc.mFormulaParts[1]!.mCoefficient ?? 0,
 	damageCalcRangeModifier: (ITEMS_BY_NAME.bastionBreaker?.dataValues as any)[ITEMS_BY_NAME.bastionBreaker.itemCalculations.DamageCalc.mRangedMultiplier.mDataValue],
 };
+
+const grievousWoundItemSpecific = {
+	internalDataProperties: ['gWounds'],
+	setupData(self) {
+		self.internalItemData.value.gWounds = clamp(0, self.internalItemData.value.gWounds ?? 0, 1);
+		return { gWounds: 0 };
+	},
+	imgActive(internalData: { gWounds: number }) {
+		return internalData.gWounds;
+	},
+} satisfies IItemSpecific<typeof GRIEVOUS_WOUND_ITEMS[number]>;
 
 /** specific items' helpers, utils and calculations */
 export const ITEM_SPECIFICS = {
@@ -1585,6 +1596,10 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'AuraDuration', 'MinionMod', 'MonsterMod'],
 		}),
 	},
+	...(Object.fromEntries(GRIEVOUS_WOUND_ITEMS.map((itemId): [string, IItemSpecific<typeof itemId>] => [
+		itemId,
+		grievousWoundItemSpecific,
+	])) as Record<typeof GRIEVOUS_WOUND_ITEMS[number], typeof grievousWoundItemSpecific>),
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
