@@ -9,6 +9,11 @@ import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
+const actualGWoundsItems = Object.values(ITEMS).filter(item => item.dataValues?.GrievousAmount);
+if (!actualGWoundsItems.every(item => (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id))) {
+	console.warn('[ITEM_SPECIFICS] grievous wounds item is missing from GRIEVOUS_WOUND_ITEMS, all:', actualGWoundsItems.map(item => item.name), 'known:', GRIEVOUS_WOUND_ITEMS.map(id => ITEMS[id]?.name));
+}
+
 const tearItem = {
 	specific: {
 		MAX_STACKS: ITEMS_BY_NAME.tear?.dataValues.MaxMana,
