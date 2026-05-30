@@ -1605,6 +1605,29 @@ export const ITEM_SPECIFICS = {
 		itemId,
 		grievousWoundItemSpecific,
 	])) as Record<typeof GRIEVOUS_WOUND_ITEMS[number], typeof grievousWoundItemSpecific>),
+	[ITEM_NAME_TO_ID.brambleVest]: {
+		...grievousWoundItemSpecific,
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+				f3: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+					f3: { value: 0 },
+				};
+			},
+			meta: {
+				TotalDamage: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['f1', 'f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
