@@ -864,11 +864,20 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	const max = computedEffect.maxValue;
 
 	if (globalKeyModifiers.value.ctrl) {
-		effect.data[0] = by < 0
-			? computedEffect.specific.minValue === 0 ? Math.max(min, effect.data[0] - 10) : min
-			: max === undefined
-				? effect.data[0] + 10
-				: max;
+		if (globalKeyModifiers.value.shift) {
+			effect.data[0] = by < 0
+				/* this branch doesn't happen, right click + ctrl + shift is hijacked by the browser and the event doesn't fire, potential TODO */
+				? min
+				: max === undefined
+					? effect.data[0] + 100
+					: max;
+		} else {
+			effect.data[0] = by < 0
+				? computedEffect.specific.minValue === 0 || computedEffect.maxValue !== undefined ? Math.max(min, effect.data[0] - 10) : min
+				: max === undefined
+					? effect.data[0] + 10
+					: Math.min(max, effect.data[0] + 10);
+		}
 	} else {
 		effect.data[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data[0] + by) : (effect.data[0] + by));
 	}

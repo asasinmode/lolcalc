@@ -26,6 +26,11 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
+		imgText(data) {
+			// TODO maybe don't hide text on default, might be confusing
+			return data[0] === 40 ? '' : `${data[0]}%`;
+		},
+		maxValue: 100,
 		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(ABILITY_TYPE.item, itemId)),
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
