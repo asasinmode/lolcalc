@@ -739,6 +739,36 @@ export const VARIABLE_CALCULATION_FNS = {
 			value: mStartValue + (mEndValue - mStartValue) / 17 * ((self?.level.value ?? 1) - 1),
 		};
 	},
+	mModifiedGameCalculation(variable: { mModifiedGameCalculation: string; mMultiplier?: any }, whole, self, meta) {
+		if (!variable.mModifiedGameCalculation) {
+			return;
+		}
+
+		let multiplier = 1;
+		if ('mMultiplier' in variable) {
+			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta);
+		}
+		// TODO might have to be more sophisticated, only sunfire aegis does this atm and probably won't work if any champions attempt to do it
+		const accessedVariables: IBaseVariableParams['accessedVariables'] = new Map();
+		const rv = itemVariableValue(variable.mModifiedGameCalculation, { item: whole, damageSource: self, isRanged: self?.isRanged.value, accessedVariables });
+		if (typeof rv.value === 'number') {
+			rv.value *= multiplier;
+		} else if (Array.isArray(rv.value)) {
+			if (rv.value[0]) {
+				rv.value[0] *= multiplier;
+			}
+			if (rv.value[1]) {
+				rv.value[1] *= multiplier;
+			}
+		}
+		const accessed = accessedVariables.get(variable.mModifiedGameCalculation);
+		if (accessed?.size) {
+			for (const variable of accessed.values()) {
+				meta?.accessedVariables?.add(variable);
+			}
+		}
+		return rv;
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 type IHypotheticalVariableCalculationFns = Record<
@@ -796,6 +826,8 @@ function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[k
 		return VARIABLE_CALCULATION_FNS[variable.__type as keyof typeof VARIABLE_CALCULATION_FNS];
 	} else if ('mFormulaParts' in variable) {
 		return VARIABLE_CALCULATION_FNS.mFormulaParts;
+	} else if ('mModifiedGameCalculation' in variable) {
+		return VARIABLE_CALCULATION_FNS.mModifiedGameCalculation;
 	}
 	console.warn('[variableResolveFn] unknown variable type', variable);
 	return undefined;
