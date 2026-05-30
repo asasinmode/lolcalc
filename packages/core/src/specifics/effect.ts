@@ -5,7 +5,8 @@ import type { DetectItemVariables, IReplacedGameVariable } from '../types';
 import type { IVariableValueResult } from '../variables/game.ts';
 import type { IInternalItemDataOf } from './index.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { itemVariableValue } from '../variables/game.ts';
@@ -20,10 +21,21 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWounds),
 		label: 'Grievous Wounds',
 		setupData(data) {
-			return [clamp(0, data?.[0] ?? 0, 1)];
+			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
 		isActive(data) {
 			return data[0];
+		},
+		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(ABILITY_TYPE.item, itemId)),
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
+				const item = damageSource.items.value.find(item => item && (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id));
+				const strength = item?.dataValues?.GrievousAmount;
+				if (!strength) {
+					console.warn('[EFFECT_SPECIFICS] detected a grievous wounds item but it has no GrievousAmount dataValue', item);
+				}
+				return [strength ? strength * 100 : 40];
+			}
 		},
 	}),
 	[EFFECT_OBJECT_NAME.stun]: defineEffectSpecific<[isStunned: number]>({
@@ -47,7 +59,7 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 		imgText(data) {
-			return data[0];
+			return `${data[0]}%`;
 		},
 	}),
 	[EFFECT_OBJECT_NAME.slowPercent]: defineEffectSpecific<[slowedByPercent: number]>({
@@ -354,6 +366,8 @@ export type IHypotheticalEffectSpecifics = Record<string, IEffectSpecific>;
 
 export interface IEffectSpecific<T extends [number] = [number]> {
 	sourceAbility: IGameAbilityId;
+	/** used when an effect is applied by multiple items, overrides `sourceAbility` when creating EFFECTS_APPLIED_BY_ITEMS_TO_TARGET */
+	appliedByItems?: IGameAbilityId[];
 	label: string;
 	/**
 	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.appliedEffects[number].data`
@@ -428,11 +442,14 @@ function defineEffectSpecificVariables<K extends string>(
 	};
 }
 
-/** all effects that can be applied by toggling item's extra `apply X to target` checkbox */
+/** map (item id to effect) of all effects that can be applied by toggling item's extra `apply X to target` checkbox */
 export const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPECIFICS_OBJECT_ENTRIES
 	.filter(([, effectSpecific]) => effectSpecific.setupDataFromSourceItem)
-	.map(([effectObjectName, effectSpecific]) => {
-		return [effectSpecific.sourceAbility.id, [GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName), effectSpecific]];
+	.flatMap(([effectObjectName, effectSpecific]): [string, [IEffectAbilityId, IEffectSpecific]][] => {
+		const value: [IEffectAbilityId, IEffectSpecific] = [GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName), effectSpecific];
+		return effectSpecific.appliedByItems
+			? effectSpecific.appliedByItems.map(itemAbilityId => [itemAbilityId.id, value])
+			: [[effectSpecific.sourceAbility.id, value]];
 	})) as Record<string, [IEffectAbilityId, IEffectSpecific]>;
 
 /** get all effects a damage source applies to its target */
