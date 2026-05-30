@@ -59,7 +59,7 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 		imgText(data) {
-			return `${data[0]}%`;
+			return data[0];
 		},
 	}),
 	[EFFECT_OBJECT_NAME.slowPercent]: defineEffectSpecific<[slowedByPercent: number]>({

@@ -865,10 +865,10 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 
 	if (globalKeyModifiers.value.ctrl) {
 		effect.data[0] = by < 0
-			? min
-			: max !== undefined
-				? max
-				: effect.data[0] + 10;
+			? computedEffect.specific.minValue === 0 ? Math.max(min, effect.data[0] - 10) : min
+			: max === undefined
+				? effect.data[0] + 10
+				: max;
 	} else {
 		effect.data[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data[0] + by) : (effect.data[0] + by));
 	}
