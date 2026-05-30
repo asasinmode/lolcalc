@@ -334,6 +334,11 @@ export const ITEM_NAME_TO_ID = {
 	unendingDespair: '2502',
 	fatedAshes: '2508',
 	bastionBreaker: '2520',
+	zekesConvergence: '3050',
+	spiritVisage: '3065',
+	sunfireAegis: '3068',
+	ravenousHydra: '3074',
+	brambleVest: '3076',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -418,6 +423,7 @@ export const EFFECT_OBJECT_NAME = {
 	horizonFocusHypershot: '4628Marker',
 	bloodletterVileDecay: '8010VisualDebuff',
 	botrkClawingShadows: '3153Slow',
+	zekesConvergenceFrostfireTempest: '3050_EnemyBuff',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

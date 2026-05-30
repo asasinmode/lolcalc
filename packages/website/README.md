@@ -143,16 +143,17 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] calculations
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
-  - [?] heal and shield power affecting known shields & lifesteal
-  - [?] cap attack speed
   - [ ] items passives
+  - [ ] heal and shield power affecting known shields & lifesteal
+  - [ ] cap attack speed
+  - [ ] item effects & their result sections like frozen heart or zeke's convergence
   - [ ] resolved item passives values for target like randuin/tabi
-  - [ ] hook priorities in one file for easier precedence management
-  - [ ] item effects
+  - [x] hook priorities in one file for easier precedence management
   - [ ] dragons/souls
   - [ ] champion passives
-    - [ ] results table hover tooltips, try to not unknown/resolve dynamic variables
+    - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
   - [ ] champion effects
+  - [ ] other effects
   - [ ] basic attack damage
   - [ ] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
   - [ ] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps

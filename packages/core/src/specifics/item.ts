@@ -1517,6 +1517,32 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f4', 'ExecuteMinionGold', 'MaxCharges', 'ChargeCooldown', 'QuestGoldRequirement'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.zekesConvergence]: {
+		internalDataProperties: ['fTempest'],
+		setupData(self) {
+			self.internalItemData.value.fTempest = clamp(0, self.internalItemData.value.fTempest ?? 0, 1);
+			return { fTempest: 0 };
+		},
+		imgActive(internalData: { fTempest: number }) {
+			return internalData.fTempest;
+		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				DamagePerSecond: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['f1', 'UltimateHaste', 'Duration', 'SlowAmount'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
