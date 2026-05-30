@@ -52,8 +52,7 @@ export interface IReplaceStringtableVariablesRV {
 export type DetectItemVariables<T>
 	= | (T extends { dataValues: object } ? keyof T['dataValues'] : never)
 		| (T extends { stringCalculations: object } ? keyof T['stringCalculations'] : never)
-		| (T extends { itemCalculations: object } ? keyof T['itemCalculations'] : never)
-		| (T extends { effectAmount: any[] } ? `Effect${number}Amount` : never);
+		| (T extends { itemCalculations: object } ? keyof T['itemCalculations'] : never);
 
 /** creates a union of all variable properties detected on a champion */
 export type DetectChampionVariables<T, AbilityKey extends IChampionAbilityKey = IChampionAbilityKey, U = T['abilities'][AbilityKey]['variants'][number]>

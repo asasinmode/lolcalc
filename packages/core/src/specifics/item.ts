@@ -841,7 +841,7 @@ export const ITEM_SPECIFICS = {
 				TotalHealthRegen: {
 					statIconKey: ['level', 'armor', 'magicResist'],
 					extendedEquals: `<const>${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mStartValue} - ${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mEndValue}%i:${STAT_ICON.level}%</const> <scalearmor>+ ${Math.round((ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}%%i:${STAT_ICON.armor}%</scalearmor> <scalemr>+ ${Math.round((ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[2]!.mCoefficient ?? 0) * 100)}%%i:${STAT_ICON.magicResist}%</scalemr>`,
-					type: VariableType.heal
+					type: VariableType.heal,
 				},
 			},
 			uninteresting: ['f1', 'LowHealthThreshold', 'Duration', 'SizeIncrease', 'MSAmount', 'TenacityAmount'],
@@ -1490,6 +1490,31 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f1', 'TakedownWindow', 'BuffDuration', 'DoTDuration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.worldAtlas]: {
+		variables: defineVariables({
+			known: {
+				f4: [],
+				lolcalcChampRange: [],
+			},
+			calculate(self) {
+				return {
+					f4: { value: 0 },
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.worldAtlas, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.worldAtlas, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					displayedName: 'GoldOnEnemyDamage',
+				},
+			},
+			uninteresting: ['f4', 'ExecuteMinionGold', 'MaxCharges', 'ChargeCooldown', 'QuestGoldRequirement'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
