@@ -1526,6 +1526,13 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { fTempest: number }) {
 			return internalData.fTempest;
 		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemPassivesStats }) {
+					itemPassivesStats.ultimateHaste += ITEMS_BY_NAME.zekesConvergence?.dataValues.UltimateHaste ?? 0;
+				},
+			},
+		},
 		variables: defineVariables({
 			known: {
 				f1: [],
