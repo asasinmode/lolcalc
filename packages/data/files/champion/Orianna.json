@@ -68,7 +68,7 @@
 									"mNumber": 0.01
 								},
 								"mPart2": {
-									"mDataValue": "{2af22d8f}"
+									"mDataValue": "MinimumDamagePercent"
 								}
 							},
 							"mSimpleTooltipCalculationDisplay": 6,

@@ -1,5 +1,5 @@
 {
-	"version": "16.10.1",
+	"version": "16.11.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -150,6 +150,7 @@
 				"3135",
 				"3165",
 				"3115",
+				"4005",
 				"2510",
 				"3116",
 				"3118",
@@ -2669,7 +2670,8 @@
 				"SlowAmount": 0.3,
 				"DamagePerSecond": 30,
 				"StormRadius": 350,
-				"UltimateHaste": 15
+				"UltimateHaste": 15,
+				"ReadyDuration": 5
 			},
 			"itemGroups": [
 				"{31b248b7}"
@@ -3127,9 +3129,11 @@
 			"dataValues": {
 				"DebuffDuration": 6,
 				"MoveSpeedBonus": 20,
-				"MoveSpeedDuration": 2
+				"MoveSpeedDuration": 2,
+				"InternalCD": 0.01,
+				"MaxStacks": 5,
+				"ShredPerStack": 0.06
 			},
-			"effectAmount": [0, 0.06, 6, 5, 0.3, 0, 0, 0, 0, 0.01],
 			"itemGroups": [
 				"{24adb712}",
 				"Items/ItemGroups/LastWhisper"
@@ -3201,16 +3205,31 @@
 			"image": "3073.png",
 			"from": [
 				"2021",
-				"3044",
-				"1042"
+				"1042",
+				"3044"
 			],
 			"epicness": 5,
 			"dataValues": {
 				"UltimateHaste": 30,
-				"AttackSpeedProc": 0.5,
 				"MovementSpeedBonus": 0.2,
 				"HasteDuration": 8,
-				"Cooldown": 30
+				"Cooldown": 30,
+				"BonusASRanged": 35,
+				"BonusASMelee": 50,
+				"BonusMSRanged": 14,
+				"BonusMSMelee": 20
+			},
+			"stringCalculations": {
+				"BonusAS": {
+					"MeleeResult": "@BonusASMelee@",
+					"RangedResult": "@BonusASRanged@",
+					"DefaultResult": "@BonusASMelee@"
+				},
+				"BonusMS": {
+					"MeleeResult": "@BonusMSMelee@",
+					"RangedResult": "@BonusMSRanged@",
+					"DefaultResult": "@BonusMSMelee@"
+				}
 			},
 			"itemGroups": [
 				"{22adb3ec}"
@@ -3327,7 +3346,8 @@
 				}
 			},
 			"itemGroups": [
-				"{20adb0c6}"
+				"{20adb0c6}",
+				"{87f1e822}"
 			],
 			"categories": {
 				"tank": true,
@@ -3369,6 +3389,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{87f1e822}"
+			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -3606,7 +3629,7 @@
 				"PerTargetCooldown": 30,
 				"BaseDamage": 70,
 				"HPRatio": 0.06,
-				"DamageToMaxHealthRatio": 0.08,
+				"DamageToMaxHealthRatio": 0.1,
 				"DistanceToChampion": 700,
 				"NumTicksToTrigger": 6,
 				"RangeTrackingBuffDuration": 5,
@@ -3762,7 +3785,7 @@
 			"searchString": "statikkshiv;energized;energised;damage;attackspeed;spelldamage;onhit;movement;abilitypower;attackdamage;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 45,
-				"FlatPhysicalDamageMod": 40,
+				"FlatPhysicalDamageMod": 45,
 				"PercentAttackSpeedMod": 0.3,
 				"PercentMovementSpeedMod": 0.04
 			},
@@ -4134,7 +4157,6 @@
 			"image": "3108.png",
 			"into": [
 				"3115",
-				"4005",
 				"3003",
 				"3107",
 				"3152",
@@ -4178,11 +4200,10 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"DamageRedirection": 0.12,
+				"DamageRedirection": 0.14,
 				"DamageRedirectionThreshold": 0.3,
-				"ActiveCooldown": 60,
 				"TetherRange": 1250,
-				"AllyHealingConversion": 0.1,
+				"AllyHealingConversion": 0.12,
 				"Cooldown": 60
 			},
 			"itemGroups": [
@@ -6159,9 +6180,9 @@
 			"name": "Locket of the Iron Solari",
 			"searchString": "locketoftheironsolari;health;magicresist;armor;aura;active;abilityhaste",
 			"stats": {
-				"FlatSpellBlockMod": 25,
+				"FlatSpellBlockMod": 30,
 				"FlatHPPoolMod": 200,
-				"FlatArmorMod": 25,
+				"FlatArmorMod": 30,
 				"AbilityHasteMod": 10
 			},
 			"gold": {
@@ -7164,33 +7185,31 @@
 				"IncreasedWardRange": 300,
 				"GP10": 9,
 				"RechargeTime": 8,
-				"BubbleBlueDmgRed": 140,
-				"BubblePurpleMagicDmg": 90,
-				"MaxStack": 2,
+				"MaxBubbleStack": 2,
 				"BubbleDuration": 3,
-				"PurpleBubbleAoEModifier": 0.333,
+				"PurpleBubbleAoEMod": 0.333,
 				"MinHealAmount": 20,
 				"Cooldown": 8
 			},
 			"itemCalculations": {
-				"DamageBlockCalc": {
+				"FlatDR": {
 					"mFormulaParts": [
 						{
-							"mLevel1Value": 75,
+							"mLevel1Value": 50,
 							"mBreakpoints": [
 								{
 									"mLevel": 7,
-									"mBonusPerLevelAtAndAfter": 15
+									"mBonusPerLevelAtAndAfter": 12
 								}
 							],
 							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				},
-				"BonusDamageCalc": {
+				"{05809103}": {
 					"mFormulaParts": [
 						{
-							"mLevel1Value": 50,
+							"mLevel1Value": 40,
 							"mBreakpoints": [
 								{
 									"mLevel": 7,
@@ -7415,33 +7434,31 @@
 			"name": "Imperial Mandate",
 			"searchString": "imperialmandate;bannerofcommand;flag;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
-				"FlatMagicDamageMod": 60,
-				"AbilityHasteMod": 20,
-				"PercentBaseMPRegenMod": 1.25
+				"FlatMagicDamageMod": 65,
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1.5
 			},
 			"gold": {
-				"total": 2250,
-				"sell": 1575
+				"total": 2400,
+				"sell": 1680
 			},
 			"image": "4005.png",
 			"from": [
-				"3108",
+				"1026",
 				"4642"
 			],
 			"epicness": 5,
 			"dataValues": {
-				"BuffDuration": 5,
-				"MoveSpeedDuration": 0.01,
-				"PerTargetCooldown": 9,
-				"AllyDamageUnused": 80,
-				"AllyDamagePerc": 0.1,
-				"Cooldown": 9
+				"DamageAmp": 0.06,
+				"DamageAmpDuration": 4,
+				"ImmobilizingAbilityAH": 15
 			},
 			"itemGroups": [
 				"{5f2a99fe}"
 			],
 			"categories": {
-				"support": true
+				"support": true,
+				"mage": true
 			}
 		},
 		"4401": {
@@ -8034,53 +8051,11 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"HealRange": 800,
-				"ChainHealMinTOOLTIPunused": 0.2,
-				"ChainHealMaxTOOLTIPunused": 0.4,
-				"SingleHealMinTOOLTIPunused": 0.15,
-				"SingleHealMaxTOOLTIPunused": 0.3,
-				"SingleShieldMinTOOLTIPunused": 0.2,
-				"SingleShieldMaxTOOLTIPunused": 0.3,
-				"ChainShieldMinTOOLTIPunused": 0.3,
-				"ChainShieldMaxTOOLTIPunused": 0.4,
+				"EffectRange": 800,
 				"ChainHeal": 0.3,
 				"ChainShield": 0.35,
 				"SingleHeal": 0.3,
 				"SingleShield": 0.35
-			},
-			"itemCalculations": {
-				"{b389d204}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ChainHeal",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{b5d7f85b}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "SingleHeal",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{288eb5c0}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "SingleShield",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{3e41fb6f}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ChainShield",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				}
 			},
 			"itemGroups": [
 				"{ae562925}"
@@ -8110,7 +8085,7 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"DamageStorageRate": 0.35,
+				"DamageStorageRate": 0.3,
 				"ChargeToHealConversion": 1,
 				"MinimumHealToTrigger": 10
 			},
@@ -9256,10 +9231,9 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"MRPerStack": 0.075,
-				"Duration": 6,
-				"MaxMRReduction": 0.3,
-				"StaleCastTime": 0.3,
+				"ShredPerStack": 0.075,
+				"DebuffDuration": 6,
+				"InternalCD": 0.3,
 				"MaxStacks": 4
 			},
 			"itemGroups": [

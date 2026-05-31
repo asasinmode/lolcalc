@@ -375,6 +375,6 @@
 		"spell_listtype_shieldamount": "Shield Amount",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_healing": "Healing",
-		"spell_ekkopassive_tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 5 seconds."
+		"spell_ekkopassive_tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 4 seconds."
 	}
 }

@@ -35,14 +35,14 @@
 					"objectName": "DariusCleave",
 					"dataKey": "Characters/Darius/Spells/DariusCleaveAbility/DariusCleave",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png",
-					"tooltip": "Darius hefts his axe then swings it around, dealing <physicalDamage>@BladeDamage@ physical damage</physicalDamage> with the edge and <physicalDamage>@HandleDamage@ damage</physicalDamage> with the handle. Enemies hit with the handle do not take a <keywordMajor>Hemorrhage</keywordMajor> stack.<br><br>Darius restores <healing>@Effect5Amount@% missing Health</healing> per enemy champion and large jungle monster hit with the edge, up to a max of <healing>@Effect7Amount@%</healing>.",
+					"tooltip": "Darius hefts his axe then swings it around, dealing <physicalDamage>@BladeDamage@ physical damage</physicalDamage> with the edge and <physicalDamage>@HandleDamage@ damage</physicalDamage> with the handle. Enemies hit with the handle do not take a <keywordMajor>Hemorrhage</keywordMajor> stack.<br><br>Darius restores <healing>@MissingHealthHeal@% missing Health</healing> per enemy champion and large jungle monster hit with the edge, up to a max of <healing>@MissingHealPercent@%</healing>.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "TotalADRatio",
 							"nameOverride": "spell_listtype_totaladscalar"
 						},
 						{
@@ -53,21 +53,24 @@
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"dataValues": {
 						"MissingHealthHeal": [17, 17, 17, 17, 17, 17, 17],
-						"TotalADRatio": [90, 100, 110, 120, 130, 140, 150]
+						"TotalADRatio": [90, 100, 110, 120, 130, 140, 150],
+						"BaseDamage": [10, 50, 80, 110, 140, 170, 200],
+						"InnerCircleDamagePercent": [35, 35, 35, 35, 35, 35, 35],
+						"MissingHealPercent": [51, 51, 51, 51, 51, 51, 51]
 					},
 					"spellCalculations": {
 						"BladeDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 2,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
 									"mSubpart": {
 										"mPart1": {
-											"mEffectIndex": 1
+											"mDataValue": "TotalADRatio"
 										},
 										"mPart2": {
 											"mNumber": 0.01
@@ -105,15 +108,21 @@
 					"objectName": "DariusNoxianTacticsONH",
 					"dataKey": "Characters/Darius/Spells/DariusNoxianTacticsONHAbility/DariusNoxianTacticsONH",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png",
-					"tooltip": "Darius' next Attack deals <physicalDamage>@EmpoweredAttackDamage@ physical damage</physicalDamage> and <status>Slows</status> by @Effect2Amount@% for @Effect5Amount@ second.<br><br>This Ability refunds its Mana cost and reduces its Cooldown by @Effect3Amount@% if it kills the target.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
+					"tooltip": "Darius' next Attack deals <physicalDamage>@EmpoweredAttackDamage@ physical damage</physicalDamage> and <status>Slows</status> by @SlowPercent@% for @SlowDuration@ second.<br><br>This Ability refunds its Mana cost and reduces its Cooldown by @PercentCDRefund@% if it kills the target.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"extendedVariables": [
 						{
-							"name": "Effect4Amount",
+							"name": "ADRatio",
 							"nameOverride": "spell_listtype_totaladscalar"
 						}
 					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
+					"dataValues": {
+						"SlowPercent": [90, 90, 90, 90, 90, 90, 90],
+						"PercentCDRefund": [50, 50, 50, 50, 50, 50, 50],
+						"ADRatio": [1.5, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65],
+						"SlowDuration": [1, 1, 1, 1, 1, 1, 1]
+					},
 					"spellCalculations": {
 						"EmpoweredAttackDamage": {
 							"tooltipOnly": true,
@@ -121,7 +130,7 @@
 								{
 									"mStat": 2,
 									"mSubpart": {
-										"mEffectIndex": 4
+										"mDataValue": "ADRatio"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -145,10 +154,10 @@
 					"objectName": "DariusAxeGrabCone",
 					"dataKey": "Characters/Darius/Spells/DariusAxeGrabConeAbility/DariusAxeGrabCone",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Darius gains @Effect1Amount@% Armor Penetration.<br><br><spellActive>Active:</spellActive> Darius hooks with his axe, <status>Pulling</status>, and <status>Knocking Up</status> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Darius gains @PassivePercentArmorPen@% Armor Penetration.<br><br><spellActive>Active:</spellActive> Darius hooks with his axe, <status>Pulling</status>, and <status>Knocking Up</status> and <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ second.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "PassivePercentArmorPen",
 							"nameOverride": "spell_dariuse_percentagearmorpenetration"
 						},
 						{
@@ -157,6 +166,11 @@
 					],
 					"mana": [70, 60, 50, 40, 30, 20],
 					"cooldownTime": [26, 26, 23.5, 21, 18.5, 16, 16],
+					"dataValues": {
+						"PassivePercentArmorPen": [20, 20, 25, 30, 35, 40, 45],
+						"SlowPercent": [40, 40, 40, 40, 40, 40, 40],
+						"SlowDuration": [1, 1, 1, 1, 1, 1, 1]
+					},
 					"effectAmount": {
 						"0": [20, 20, 25, 30, 35, 40, 45],
 						"1": [40, 40, 40, 40, 40, 40, 40],

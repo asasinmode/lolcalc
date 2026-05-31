@@ -35,10 +35,10 @@
 					"objectName": "BandageToss",
 					"dataKey": "Characters/Amumu/Spells/BandageTossAbility/BandageToss",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_q.png",
-					"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @Effect2Amount@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges.",
+					"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @StunDuration@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -48,14 +48,19 @@
 					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
+					"dataValues": {
+						"BaseDamage": [45, 70, 95, 120, 145, 170, 195],
+						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
+						"DashSpeed": [1800, 1800, 1800, 1800, 1800, 1800, 1800]
+					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.85,
@@ -137,29 +142,33 @@
 					"objectName": "Tantrum",
 					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_e.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @Effect3Amount@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @CDROnHit@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamageReduction",
 							"nameOverride": "spell_listtype_damagereduced"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 4],
 					"dataValues": {
-						"FlatDamageReductionMax": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+						"FlatDamageReductionMax": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BaseDamage": [35, 65, 95, 125, 155, 185, 215],
+						"BaseDamageReduction": [0, 5, 7, 9, 11, 13, 15],
+						"CDROnHit": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"PassiveScaling": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
 					},
 					"spellCalculations": {
 						"DamageReduction": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamageReduction",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 1,
@@ -178,8 +187,8 @@
 						"TantrumDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 2,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.5,

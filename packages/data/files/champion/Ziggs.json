@@ -194,7 +194,7 @@
 						},
 						"ReducedDamage": {
 							"mMultiplier": {
-								"mDataValue": "{86159046}"
+								"mDataValue": "SubsequentMineDamageMod"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,

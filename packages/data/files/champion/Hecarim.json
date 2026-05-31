@@ -35,7 +35,7 @@
 					"objectName": "HecarimRapidSlash",
 					"dataKey": "Characters/Hecarim/Spells/HecarimRapidSlashAbility/HecarimRapidSlash",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png",
-					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.",
+					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @BuffDuration@ seconds. Stacks up to @MaxStacks@ times.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -54,7 +54,9 @@
 						"RampageBonusRatio": [3, 3, 3, 3, 3, 3, 3],
 						"RampageDuration": [6, 6, 6, 6, 6, 6, 6],
 						"RampageCooldownReduction": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
-						"BaseDamageBonusAD": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+						"BaseDamageBonusAD": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+						"MaxStacks": [3, 3, 3, 3, 3, 3, 3],
+						"BuffDuration": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -183,7 +185,7 @@
 					"objectName": "HecarimRamp",
 					"dataKey": "Characters/Hecarim/Spells/HecarimRampAbility/HecarimRamp",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_devastingcharge.png",
-					"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Effect5Amount@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
+					"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Duration@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
 					"extendedVariables": [
 						{
 							"name": "MinBaseDamage",
@@ -201,7 +203,12 @@
 						"MaxMoveSpeed": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
 						"MinBaseDamage": [15, 30, 45, 60, 75, 90, 105],
 						"BonusADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"MaxBaseDamage": [30, 60, 90, 120, 150, 180, 210]
+						"MaxBaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"MinKnockback": [150, 150, 150, 150, 150, 150, 150],
+						"MaxKnockback": [350, 350, 350, 350, 350, 350, 350],
+						"Duration": [4, 4, 4, 4, 4, 4, 4],
+						"DistanceToMaxDamage": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+						"TimeToMaxMoveSpeed": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
 					"spellCalculations": {
 						"MinDamage": {
@@ -261,7 +268,10 @@
 						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
 						"FearDurationMin": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"FearDurationMax": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"APRatio": [1, 1, 1, 1, 1, 1, 1]
+						"APRatio": [1, 1, 1, 1, 1, 1, 1],
+						"DashSpeed": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
+						"MaxDashRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"RangeForMaxFearDuration": [950, 950, 950, 950, 950, 950, 950]
 					},
 					"spellCalculations": {
 						"DamageDone": {

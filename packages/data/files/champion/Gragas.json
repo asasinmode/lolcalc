@@ -35,21 +35,27 @@
 					"objectName": "GragasQ",
 					"dataKey": "Characters/Gragas/Spells/GragasQAbility/GragasQ",
 					"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
-					"tooltip": "Gragas rolls a cask that explodes after @Effect4Amount@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @Effect2Amount@ and @Effect2Amount*1.5@% for @Effect3Amount@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
+					"tooltip": "Gragas rolls a cask that explodes after @BarrelMaxDuration@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @SlowPercent@ and @SlowPercent*1.5@% for @SlowDuration@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"BaseDamage": [40, 80, 120, 160, 200, 240, 280]
+						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
+						"SlowPercent": [35, 40, 45, 50, 55, 60, 65],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"BarrelMaxDuration": [4, 4, 4, 4, 4, 4, 4],
+						"BarrelCookMaxTime": [2, 2, 2, 2, 2, 2, 2],
+						"BarrelCookMaxAmp": [150, 150, 150, 150, 150, 150, 150],
+						"MinionDamageMod": [70, 70, 70, 70, 70, 70, 70]
 					},
 					"spellCalculations": {
 						"MinDamage": {
@@ -189,9 +195,6 @@
 								}
 							]
 						}
-					},
-					"effectAmount": {
-						"1": [1, 1, 1, 1, 1, 1, 1]
 					}
 				}
 			]

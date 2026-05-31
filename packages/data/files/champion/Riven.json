@@ -85,21 +85,25 @@
 					"objectName": "RivenMartyr",
 					"dataKey": "Characters/Riven/Spells/RivenMartyrAbility/RivenMartyr",
 					"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
-					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
+					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 7],
+					"dataValues": {
+						"StunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"BaseDamage": [30, 65, 95, 125, 155, 185, 215]
+					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -131,17 +135,22 @@
 					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "ShieldAmount",
 							"nameOverride": "spell_listtype_shieldamount"
 						}
 					],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
+					"dataValues": {
+						"ShieldAmount": [45, 70, 95, 120, 145, 170, 195],
+						"BaseShieldAmount": [50, 70, 95, 120, 145, 170, 235],
+						"ShieldDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
+					},
 					"spellCalculations": {
 						"TotalShield": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "ShieldAmount",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,

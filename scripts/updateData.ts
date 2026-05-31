@@ -59,7 +59,7 @@ const debug = {
 	misc: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 };
 
-const textFilePath = `${import.meta.dirname}/../packages/data/files/text.json`;
+const textFilePath = path.join(import.meta.dirname, '../packages/data/files/text.json');
 let textData = {
 	version: latestVersion,
 	data: {
@@ -77,7 +77,7 @@ try {
 	textData.data.stringtable ||= {} as any;
 } catch { }
 
-const championFilePath = `${import.meta.dirname}/../packages/data/files/champion.json`;
+const championFilePath = path.join(import.meta.dirname, '../packages/data/files/champion.json');
 let championData: typeof import('../packages/data/files/champion.json') | undefined;
 
 try {
@@ -223,7 +223,7 @@ if (!championData || championData?.version !== latestVersion) {
 						stats.attackdamageperlevel = formatNumber(damagePerLevelModifiable.baseValue);
 					}
 
-					const dedicatedChampionFilePath = `${import.meta.dirname}/../packages/data/files/champion/${id}.json`;
+					const dedicatedChampionFilePath = path.join(import.meta.dirname, `../packages/data/files/champion/${id}.json`);
 					const championFileDataStringtable: IChampion['stringtable'] = {};
 
 					const dedicatedChampionFileData: IChampion = {
@@ -284,13 +284,13 @@ if (!championData || championData?.version !== latestVersion) {
 		}
 	}
 
-	await fs.writeFile(`${import.meta.dirname}/../packages/data/files/champion/${TargetDummy.id}.json`, stringifyObject(TargetDummy));
+	await fs.writeFile(path.join(import.meta.dirname, `../packages/data/files/champion/${TargetDummy.id}.json`), stringifyObject(TargetDummy));
 
 	await fs.writeFile(championFilePath, stringifyObject(championData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const itemFilePath = `${import.meta.dirname}/../packages/data/files/item.json`;
+const itemFilePath = path.join(import.meta.dirname, '../packages/data/files/item.json');
 let itemData: typeof import('../packages/data/files/item.json') | undefined;
 
 try {
@@ -542,7 +542,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const runeFilePath = `${import.meta.dirname}/../packages/data/files/rune.json`;
+const runeFilePath = path.join(import.meta.dirname, '../packages/data/files/rune.json');
 let runeData: typeof import('../packages/data/files/rune.json') | undefined;
 
 try {
@@ -657,7 +657,7 @@ const DRAGONS: ([name: IDragonName] | [name: IDragonName, spellDataKey: string])
 	['Chemtech', 'ChemTech'],
 	['Hextech'],
 ];
-const miscFilePath = `${import.meta.dirname}/../packages/data/files/misc.json`;
+const miscFilePath = path.join(import.meta.dirname, '../packages/data/files/misc.json');
 let miscData: typeof import('../packages/data/files/misc.json') | undefined;
 
 try {
@@ -768,7 +768,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const uiFilePath = `${import.meta.dirname}/../packages/data/files/ui.json`;
+const uiFilePath = path.join(import.meta.dirname, '../packages/data/files/ui.json');
 let uiData: typeof import('../packages/data/files/ui.json') | undefined;
 
 try {
@@ -937,7 +937,7 @@ if (!uiData || uiData?.version !== latestVersion) {
 	await fs.writeFile(uiFilePath, stringifyObject(uiData));
 }
 
-const effectFilePath = `${import.meta.dirname}/../packages/data/files/effect.json`;
+const effectFilePath = path.join(import.meta.dirname, '../packages/data/files/effect.json');
 let effectData: typeof import('../packages/data/files/effect.json') | undefined;
 
 try {
@@ -1338,12 +1338,14 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	}
 
 	if (variables) {
-		const { variableType, variableValueParameters, variableSourceKeys } = variables;
+		const { variableType, variableSourceKeys } = variables;
+		/* duplicated because if original is modified then recursive calls (at the end of this if block) when any unknown variables are resolved won't work */
+		const variableValueParameters = { ...variables.variableValueParameters };
 		const variableSource = variableType === 'item'
-			? variableValueParameters.item
+			? (variableValueParameters as IGameVariableValueParameters['item']).item
 			: variableType === 'championAbility'
-				? variableValueParameters.abilityVariant
-				: variableValueParameters.rune;
+				? (variableValueParameters as IGameVariableValueParameters['championAbility']).abilityVariant
+				: (variableValueParameters as IGameVariableValueParameters['rune']).rune;
 
 		if (variableValueParameters.dynamicVariables?.default) {
 			(variableValueParameters.dynamicVariables as IDynamicVariables) = { values: variableValueParameters.dynamicVariables.default };
@@ -1929,7 +1931,7 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 		return cacheHits[filename];
 	}
 
-	const cacheFilePath = `${import.meta.dirname}/.cache/${minorVersion}/${filename}`;
+	const cacheFilePath = path.join(import.meta.dirname, `.cache/${minorVersion}/${filename}`);
 	let data;
 	try {
 		await fs.access(cacheFilePath);

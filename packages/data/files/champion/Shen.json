@@ -35,25 +35,25 @@
 					"objectName": "ShenQ",
 					"dataKey": "Characters/Shen/Spells/ShenQAbility/ShenQ",
 					"image": "assets/characters/shen/hud/icons2d/shen_q.png",
-					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @Effect4Amount@% while moving away from Shen for the next @Effect5Amount@ seconds.<br><br>Additionally, Shen's next @Effect3Amount@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@Effect9Amount@% Attack Speed</attackSpeed> for those Attacks.",
+					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @SlowPercent@% while moving away from Shen for the next @SlowDuration@ seconds.<br><br>Additionally, Shen's next @NumEnhancedAttacks@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@SteroidAS@% Attack Speed</attackSpeed> for those Attacks.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "BasePercentDamage",
 							"nameOverride": "spell_listtype_shenqbasepercentdamage"
 						},
 						{
-							"name": "Effect6Amount",
+							"name": "EnhancedPercentDamage",
 							"nameOverride": "spell_listtype_shenqenhancedpercentdamage"
 						},
 						{
-							"name": "Effect4Amount",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
 							"name": "Cost"
 						},
 						{
-							"name": "Effect7Amount",
+							"name": "MinionDamageCap",
 							"nameOverride": "spell_listtype_maxdamagetomonsters"
 						}
 					],
@@ -62,7 +62,19 @@
 					"dataValues": {
 						"QBaseOnHitDamage": [10, 10, 10, 10, 10, 10, 10],
 						"QPerLevelOnHitDamage": [6, 6, 6, 6, 6, 6, 6],
-						"QTowerDamageModifier": [1, 1, 1, 1, 1, 1, 1]
+						"QTowerDamageModifier": [1, 1, 1, 1, 1, 1, 1],
+						"QCollisionRadiusStart": [110, 110, 110, 110, 110, 110, 110],
+						"QCollisionRadiusEnd": [130, 130, 130, 130, 130, 130, 130],
+						"MonsterAmp": [1, 1, 1, 1, 1, 1, 1],
+						"BasePercentDamage": [1.5, 2, 2.5, 3, 3.5, 4, 4.5],
+						"NumEnhancedAttacks": [3, 3, 3, 3, 3, 3, 3],
+						"SlowPercent": [25, 25, 30, 35, 40, 45, 50],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"EnhancedPercentDamage": [4.5, 5, 5.5, 6, 6.5, 7, 7.5],
+						"MinionDamageCap": [75, 100, 125, 150, 175, 200, 225],
+						"AttackBuffDuration": [8, 8, 8, 8, 8, 8, 8],
+						"SteroidAS": [50, 50, 50, 50, 50, 50, 50],
+						"SteroidDuration": [75, 75, 75, 75, 75, 75, 75]
 					},
 					"spellCalculations": {
 						"BaseFlatDamage": {
@@ -103,8 +115,8 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 2,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BasePercentDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.015,
@@ -120,8 +132,8 @@
 							},
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 6,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "EnhancedPercentDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.02,
@@ -161,10 +173,14 @@
 					"objectName": "ShenW",
 					"dataKey": "Characters/Shen/Spells/ShenWAbility/ShenW",
 					"image": "assets/characters/shen/hud/icons2d/shen_w.png",
-					"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @Effect1Amount@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @Effect2Amount@ seconds.",
+					"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @ZoneDuration@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @ZoneDelay@ seconds.",
 					"extendedVariables": [],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [18.5, 16, 14.5, 13, 11.5, 10, 10],
+					"dataValues": {
+						"ZoneDuration": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
+						"ZoneDelay": [2, 2, 2, 2, 2, 2, 2]
+					},
 					"effectAmount": {
 						"0": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
 						"1": [2, 2, 2, 2, 2, 2, 2]

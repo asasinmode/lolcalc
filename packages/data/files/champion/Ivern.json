@@ -343,7 +343,7 @@
 								}
 							]
 						},
-						"{60aa666f}": {
+						"HealthCostPercent": {
 							"mFormulaParts": [
 								{
 									"mLevel1Value": 15,
@@ -367,7 +367,7 @@
 								"mStatFormula": 1,
 								"mCoefficient": 0.01
 							},
-							"mModifiedGameCalculation": "{60aa666f}"
+							"mModifiedGameCalculation": "HealthCostPercent"
 						},
 						"ManaTooltip": {
 							"mMultiplier": {

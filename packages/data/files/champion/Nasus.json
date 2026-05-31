@@ -140,18 +140,18 @@
 					"objectName": "NasusE",
 					"dataKey": "Characters/Nasus/Spells/NasusEAbility/NasusE",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_e.png",
-					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@Effect2Amount*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds.",
+					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@ArmorShredPercent*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Duration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect4Amount",
+							"name": "InitialHitDamage",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "DamagePerTick",
 							"nameOverride": "spell_listtype_damagepersecond"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "ArmorShredPercent",
 							"nameOverride": "spell_listtype_armorreductionpercent"
 						},
 						{
@@ -160,17 +160,23 @@
 					],
 					"mana": [60, 70, 80, 90, 100, 100],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"dataValues": {
+						"DamagePerTick": [10, 10, 16, 22, 28, 34, 34],
+						"ArmorShredPercent": [-0.3, -0.3, -0.35, -0.4, -0.45, -0.5, -0.5],
+						"Duration": [5, 5, 5, 5, 5, 5, 5],
+						"InitialHitDamage": [50, 50, 80, 110, 140, 170, 170]
+					},
 					"spellCalculations": {
 						"TotalDotDamage": {
 							"mMultiplier": {
-								"mEffectIndex": 3
+								"mDataValue": "Duration"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "DamagePerTick",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.12,
@@ -183,8 +189,8 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 4,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "InitialHitDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.6,

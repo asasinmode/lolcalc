@@ -96,7 +96,7 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "{af757bd8}"
+										"mDataValue": "HPCost"
 									},
 									"mPart2": {
 										"mPart1": {
@@ -182,7 +182,7 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "{af757bd8}"
+										"mDataValue": "HPCost"
 									},
 									"mPart2": {
 										"mPart1": {
@@ -247,7 +247,7 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "{583e88ab}"
+										"mDataValue": "MinimumStun"
 									},
 									"mPart2": {
 										"mNumber": 2
@@ -274,7 +274,7 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "{af757bd8}"
+										"mDataValue": "HPCost"
 									},
 									"mPart2": {
 										"mPart1": {

@@ -1,5 +1,5 @@
 {
-	"version": "16.10.1",
+	"version": "16.11.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -175,7 +175,8 @@
 			"name": "Brand",
 			"image": "Brand.png",
 			"roles": {
-				"support": true
+				"support": true,
+				"bot": true
 			}
 		},
 		"Braum": {
@@ -911,7 +912,8 @@
 			"name": "Pantheon",
 			"image": "Pantheon.png",
 			"roles": {
-				"support": true
+				"support": true,
+				"top": true
 			}
 		},
 		"Poppy": {
@@ -947,6 +949,7 @@
 			"name": "Quinn",
 			"image": "Quinn.png",
 			"roles": {
+				"jungle": true,
 				"top": true
 			}
 		},
@@ -1411,7 +1414,6 @@
 			"name": "Volibear",
 			"image": "Volibear.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -1458,7 +1460,8 @@
 			"name": "Xin Zhao",
 			"image": "XinZhao.png",
 			"roles": {
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Yasuo": {

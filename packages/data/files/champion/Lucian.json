@@ -83,21 +83,28 @@
 					"objectName": "LucianW",
 					"dataKey": "Characters/Lucian/Spells/LucianWAbility/LucianW",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_w.png",
-					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@Effect2Amount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
+					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@MoveSpeedAmount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "MoveSpeedAmount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
-						"BaseDamage": [40, 75, 110, 145, 180, 215, 250]
+						"BaseDamage": [40, 75, 110, 145, 180, 215, 250],
+						"MoveSpeedAmount": [55, 60, 65, 70, 75, 80, 85],
+						"BuffDuration": [1, 1, 1, 1, 1, 1, 1],
+						"VisionBubbleSize": [200, 200, 200, 200, 200, 200, 200],
+						"VisionBubbleDuration": [1, 1, 1, 1, 1, 1, 1],
+						"DebuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"DebuffMarkerDuration": [1, 1, 1, 1, 1, 1, 1],
+						"ImpactRangeCheck": [700, 700, 700, 700, 700, 700, 700]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -135,7 +142,7 @@
 					"objectName": "LucianE",
 					"dataKey": "Characters/Lucian/Spells/LucianEAbility/LucianE",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_e.png",
-					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @Effect1Amount@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@Effect2Amount@ seconds for champions). ",
+					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @CDRefundBase@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@CDRefundChampion@ seconds for champions). ",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -143,6 +150,13 @@
 					],
 					"mana": [32, 24, 16, 8, 0, 0],
 					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
+					"dataValues": {
+						"CDRefundBase": [1, 1, 1, 1, 1, 1, 1],
+						"CDRefundChampion": [2, 2, 2, 2, 2, 2, 2],
+						"MaxDistance": [425, 425, 425, 425, 425, 425, 425],
+						"MinDistance": [200, 200, 200, 200, 200, 200, 200],
+						"DashSpeed": [1350, 1350, 1350, 1350, 1350, 1350, 1350]
+					},
 					"effectAmount": {
 						"0": [1, 1, 1, 1, 1, 1, 1],
 						"1": [2, 2, 2, 2, 2, 2, 2],
@@ -179,7 +193,9 @@
 						"NumShots": [22, 22, 22, 22, 22, 22, 22],
 						"Duration": [3, 3, 3, 3, 3, 3, 3],
 						"RecastLockout": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
-						"RangeCheck": [1050, 1050, 1050, 1050, 1050, 1050, 1050]
+						"RangeCheck": [1050, 1050, 1050, 1050, 1050, 1050, 1050],
+						"VisionBubbleRadius": [100, 100, 100, 100, 100, 100, 100],
+						"VisionBubbleDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"DamagePerBullet": {

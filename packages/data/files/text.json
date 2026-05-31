@@ -515,7 +515,10 @@
 					],
 					[
 						"<passive>Frostfire Tempest</passive> {{ Item_Cooldown }}",
-						"Casting your Ultimate summons a storm around you for @Duration@ seconds. The storm deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second to enemy champions and <keyword>Slows</keyword> them by @SlowAmount*100@%."
+						"Casting your Ultimate readies a storm for @ReadyDuration@ seconds."
+					],
+					[
+						"When you get near an enemy champion, summon the storm around you for @Duration@ seconds, dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second and <keyword>Slowing</keyword> enemies affected by @SlowAmount*100@%."
 					]
 				],
 				"footerLeft": "Damage Dealt: <attention>@f1@</attention>"
@@ -586,7 +589,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Carve</passive>",
-						"Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces their <scaleArmor>Armor by @Effect2Amount*100@%</scaleArmor> for @DebuffDuration@ seconds. (stacks @Effect4Amount@ times)."
+						"Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces the target's <scaleArmor>Armor by @ShredPerStack*100@%</scaleArmor> for @DebuffDuration@ seconds. (stacks @MaxStacks@ times)."
 					],
 					[
 						"<passive>Fervor</passive>",
@@ -612,7 +615,7 @@
 					],
 					[
 						"<passive>Overdrive</passive> {{Item_Cooldown}}",
-						"After casting your Ultimate, gain <attackSpeed>@AttackSpeedProc*100@% Attack Speed</attackSpeed> and <speed>@MovementSpeedBonus*100@% Move Speed</speed> for @HasteDuration@ seconds."
+						"After casting your Ultimate, gain <attackSpeed>@BonusAS@% Attack Speed</attackSpeed> and <speed>@BonusMS@% Move Speed</speed> for @HasteDuration@ seconds."
 					]
 				]
 			},
@@ -1434,13 +1437,14 @@
 				"tooltipShop": [
 					[
 						"<passive>Dream Maker</passive> {{ Item_Cooldown }}",
-						"Healing or Shielding another ally blows Dream Bubbles to them for 3 seconds. Their next Attack deals <magicDamage>@BonusDamageCalc@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and the next damage they take is reduced by @DamageBlockCalc@."
+						"Healing or Shielding another ally blows Dream Bubbles to them for 3 seconds. Their next damaging attack or ability deals <magicDamage>@ProcDmg@ bonus magic damage</magicDamage> and the next instance of damage they take is reduced by @FlatDR@."
 					],
 					[
 						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
 						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
+				"extended": "<rules>Deals @PurpleBubbleAoEMod*100@% damage to non-champions when empowering area of effect Abilities.</rules>",
 				"footerLeft": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Damage blocked: <attention>@f3@</attention><br>Damage dealt: <attention>@f2@</attention>"
 			},
 			"3871": {
@@ -1502,15 +1506,20 @@
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Wounds }}"
 			},
 			"4005": {
-				"subtitleLeft": "Ally Burst",
+				"subtitleLeft": "CC Enhancement",
 				"tooltipShop": [
 					[
-						"<passive>Coordinated Fire</passive> {{ Item_Cooldown }} per target",
-						"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion marks them for @BuffDuration@ seconds. Ally champion damage detonates the mark, dealing <magicDamage>magic damage equal to @AllyDamagePerc*100@% of current health</magicDamage>."
+						"<passive>Control</passive>",
+						"Gain %i:scaleAH% @ImmobilizingAbilityAH@ Ability Haste for your abilities with <keyword>Immobilizing</keyword> effects."
+					],
+					[
+						"<passive>Command</passive>",
+						"On <keyword>Immobilizing</keyword> an enemy champion, mark them as @DamageAmp*100@% <Keyword>Vulnerable</Keyword> for @DamageAmpDuration@ seconds."
 					]
 				],
+				"extended": "<rules>Immobilizing enemies you have already marked Vulnerable by Command will extend the effect rather than stacking the amplification</rules>",
 				"footerLeft": "Bonus damage dealt: <attention>@f2@</attention>",
-				"keywordDefinitions": "{{ Item_KeywordDefinition_Slow }}<br>{{ Item_KeywordDefinition_Immobilize }}"
+				"keywordDefinitions": "{{ Item_KeywordDefinition_Immobilize }}<br>{{ Item_KeywordDefinition_Vulnerable }}"
 			},
 			"4401": {
 				"subtitleLeft": "Anti-Magic",
@@ -1937,10 +1946,10 @@
 				"tooltipShop": [
 					[
 						"<passive>Vile Decay</passive>",
-						"Dealing <magicDamage>magic damage</magicDamage> with abilities or passives to champions reduces their <scaleMR>Magic Resist by @MRPerStack*100@%</scaleMR> for @Duration@ seconds, up to @MaxMRReduction*100@%."
+						"Dealing <magicDamage>magic damage</magicDamage> with abilities or passives to champions reduces their <scaleMR>Magic Resist by @ShredPerStack*100@%</scaleMR> for @DebuffDuration@ seconds. (Stacks @MaxStacks@ times)."
 					]
 				],
-				"extended": "<rules>The same ability cast can only apply stacks to each champion every 0.3 seconds.</rules>"
+				"extended": "<rules>Each ability cast instance can only apply 1 Vile Decay stack to each champion once every @InternalCD@ second(s).</rules>"
 			},
 			"8020": {
 				"subtitleLeft": "Debuff Enemies",
@@ -2148,8 +2157,8 @@
 				"DeathfireTouch": {
 					"name": "Deathfire Touch",
 					"tooltipShort": "Damaging a champion with an ability burns them over time.",
-					"tooltipLong": "Damaging a champion with an ability burns them for @Level1DamageTOOLTIP@ - @Level18DamageTOOLTIP@ based on level (+<scaleAP>@APRatio.-1@ AP</scaleAP>) (+<scaleAD>@ADRatio.-1@ bonus AD</scaleAD>)  adaptive damage per second. After burning for @TimeToAmp@ seconds, the damage of the burn increases by @DamageMultiplier*100@% while they remain on fire.<br><rules><br>Duration:<br>Single Target: @Duration@s<br>Area of Effect: @AoEDuration@s<br>Damage over Time: @DotDuration@s<br></rules>",
-					"tooltipStats": "Damaging a champion with an ability burns them for @DamageCalc@ adaptive damage per second. After burning for @TimeToAmp@ seconds, the damage of the burn increases by @DamageMultiplier*100@% while they remain on fire.<br><rules><br>Duration:<br>Single Target: @Duration@s<br>Area of Effect: @AoEDuration@s<br>Damage over Time: @DotDuration@s<br></rules><br>You have dealt @f1@ damage to champions with Deathfire Touch burn."
+					"tooltipLong": "Damaging a champion with an ability burns them for @Level1DamageTOOLTIP@ - @Level18DamageTOOLTIP@ based on level (+<scaleAP>@APRatioTT.1@% AP</scaleAP>) (+<scaleAD>@ADRatioTT@% bonus AD</scaleAD>)  magical damage per second. After burning for @TimeToAmp@ seconds, the damage of the burn increases by @DamageMultiplier*100@% while they remain on fire.<br><rules><br>Duration:<br>Single Target: @Duration@s<br>Area of Effect: @AoEDuration@s<br>Damage over Time: @DotDuration@s<br></rules>",
+					"tooltipStats": "Damaging a champion with an ability burns them for <magicalDamage>@DamageCalc@ magical damage</magicalDamage> per second. After burning for @TimeToAmp@ seconds, the damage of the burn increases by @DamageMultiplier*100@% while they remain on fire.<br><rules><br>Duration:<br>Single Target: @Duration@s<br>Area of Effect: @AoEDuration@s<br>Damage over Time: @DotDuration@s<br></rules><br>You have dealt @f1@ damage to champions with Deathfire Touch burn."
 				},
 				"NullifyingOrb": {
 					"name": "Axiom Arcanist",

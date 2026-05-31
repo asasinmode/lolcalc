@@ -35,25 +35,27 @@
 					"objectName": "XinZhaoQ",
 					"dataKey": "Characters/XinZhao/Spells/XinZhaoQAbility/XinZhaoQ",
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkq.png",
-					"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @Effect2Amount@ seconds.",
+					"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @KnockUpDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_bonusdamage"
 						}
 					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
 					"dataValues": {
-						"BADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"BADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"BaseDamage": [0, 15, 30, 45, 60, 75, 90],
+						"KnockUpDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"spellCalculations": {
 						"BonusDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -63,10 +65,6 @@
 								}
 							]
 						}
-					},
-					"effectAmount": {
-						"0": [15, 15, 30, 45, 60, 75, 75],
-						"1": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					}
 				}
 			]
@@ -331,6 +329,34 @@
 										]
 									},
 									"__type": "StatBySubPartCalculationPart"
+								},
+								{
+									"mSubpart": {
+										"mLevel1Value": 0.05,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 16,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 21,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 26,
+												"mAdditionalBonusAtThisLevel": 0.05
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
 								}
 							]
 						},
@@ -383,11 +409,11 @@
 						"HealAPRatio": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 0.5,
+									"mLevel1Value": 0.45,
 									"mBreakpoints": [
 										{
 											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.15
+											"mAdditionalBonusAtThisLevel": 0.1
 										},
 										{
 											"mLevel": 11,

@@ -101,7 +101,7 @@
 						"ShieldAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"ShieldDuration": [5, 5, 5, 5, 5, 5, 5],
 						"OrbAPRatio": [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18],
-						"ShieldBHPRatio": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09]
+						"ShieldBHPRatio": [0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11]
 					},
 					"spellCalculations": {
 						"ShieldValue": {
@@ -284,7 +284,7 @@
 						"BuffDuration": [5, 5, 5, 5, 5, 5, 5],
 						"AttackSpeedValue": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"AttackCount": [3, 3, 3, 3, 3, 3, 3],
-						"MonsterMod": [2.3, 2.3, 2.3, 2.3, 2.3, 2.3, 2.3]
+						"MonsterMod": [2.7, 2.7, 2.7, 2.7, 2.7, 2.7, 2.7]
 					},
 					"spellCalculations": {
 						"CleaveDamage": {

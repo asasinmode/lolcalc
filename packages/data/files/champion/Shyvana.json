@@ -205,7 +205,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mDataValue": "{1cf2fe1c}",
+									"mDataValue": "ShieldMaxHealth",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
@@ -393,7 +393,7 @@
 						},
 						"{bb85c3b6}": {
 							"mMultiplier": {
-								"mDataValue": "{fcb67619}"
+								"mDataValue": "DamageDragonMod"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 6,

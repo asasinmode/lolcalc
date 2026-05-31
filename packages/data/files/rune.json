@@ -1,5 +1,5 @@
 {
-	"version": "16.10.1",
+	"version": "16.11.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -748,7 +748,7 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 30,
+											"mStartValue": 20,
 											"mEndValue": 100,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
@@ -766,7 +766,7 @@
 								}
 							},
 							"effectAmount": {
-								"ShieldBase": 30,
+								"ShieldBase": 20,
 								"ShieldMax": 100,
 								"ShieldRatio": 0.05,
 								"DamageMax": 50,
@@ -879,7 +879,7 @@
 							"id": 8992,
 							"name": "DeathfireTouch",
 							"icon": "assets/perks/styles/sorcery/deathfiretouch/deathfire_touch_keystone.png",
-							"dataKey": "{c9d12615}",
+							"dataKey": "Perks/Styles/Sorcery/DeathfireTouch",
 							"calculations": {
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -912,10 +912,13 @@
 								"DotDuration": 1,
 								"Level1DamageTOOLTIP": 3,
 								"TicksPerSecond": 2,
-								"Level18DamageTOOLTIP": 12,
+								"ADRatioTT": 2.5,
+								"APRatioTT": 7,
 								"__renamedVariables": {
+									"{7c0d555f}": "APRatioTT",
 									"{2156e250}": "Level18DamageTOOLTIP"
-								}
+								},
+								"Level18DamageTOOLTIP": 12
 							}
 						}
 					},
@@ -1203,10 +1206,10 @@
 								"MaxBaseDamage": 120,
 								"DelayBeforeBurst": 2.5,
 								"HealthRatio": 0.08,
-								"FlatResists": 35,
+								"FlatResists": 45,
 								"BonusResistMin": 80,
 								"BonusResistMax": 150,
-								"PercentBonusResist": 0.8
+								"PercentBonusResist": 0.75
 							}
 						},
 						"Guardian": {
@@ -1219,8 +1222,8 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 50,
-											"mEndValue": 165,
+											"mStartValue": 40,
+											"mEndValue": 150,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
@@ -1229,8 +1232,8 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 45,
-											"mEndValue": 180,
+											"mStartValue": 40,
+											"mEndValue": 150,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
@@ -1250,7 +1253,7 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 90,
+											"mStartValue": 75,
 											"mEndValue": 40,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
@@ -1259,12 +1262,12 @@
 							},
 							"effectAmount": {
 								"SnuggleRange": 350,
-								"ShieldBase": 45,
-								"ShieldMax": 180,
-								"APRatio": 0.25,
-								"HPRatio": 0.05,
+								"ShieldBase": 40,
+								"ShieldMax": 150,
+								"APRatio": 0.2,
+								"HPRatio": 0.06,
 								"ShieldDuration": 1.5,
-								"Cooldown": 90,
+								"Cooldown": 75,
 								"GuardDuration": 2.5,
 								"CooldownMaxLevel": 40,
 								"ThresholdMin": 50,
