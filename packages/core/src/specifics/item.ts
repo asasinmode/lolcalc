@@ -1675,6 +1675,31 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.thornmail]: {
+		...grievousWoundItemSpecific,
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+				f3: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+					f3: { value: 0 },
+				};
+			},
+			meta: {
+				TotalDamage: {
+					statIconKey: 'armor',
+					type: 'magic',
+					extendedEquals: `<const>${ITEMS_BY_NAME.thornmail?.dataValues.BaseDamage}</const><scalearmor> + ${Math.round((ITEMS_BY_NAME.thornmail?.dataValues.BonusArmorDamageRatio ?? 0) * 100)}% bonus</scalearmor> `,
+				},
+			},
+			uninteresting: ['f1', 'f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+		}),
+	},
 	[ITEM_NAME_TO_ID.ravenousHydra]: {
 		variables: defineVariables({
 			known: {
