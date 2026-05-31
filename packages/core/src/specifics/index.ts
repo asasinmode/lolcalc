@@ -167,7 +167,7 @@ export function calculateDynamicVariables(self: DamageSource, config?: ISpecific
 }
 
 /* `known` array values are used during `updateData` to find all used stringtable variables, while here they have to be resolved so that they can be used for descriptions without underlying damage source, like champion's ability effect */
-export function specificKnownVariables(config?: ISpecificVariables): IDynamicVariables | undefined {
+export function specificKnownVariables(config?: ISpecificVariables<any, any, any, any>): IDynamicVariables | undefined {
 	return config && {
 		values: config.default,
 		meta: config.meta,
