@@ -1692,8 +1692,8 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				TotalDamage: {
+					type: VariableType.magic,
 					statIconKey: 'armor',
-					type: 'magic',
 					extendedEquals: `<const>${ITEMS_BY_NAME.thornmail?.dataValues.BaseDamage}</const><scalearmor> + ${Math.round((ITEMS_BY_NAME.thornmail?.dataValues.BonusArmorDamageRatio ?? 0) * 100)}% bonus</scalearmor> `,
 				},
 			},
@@ -1721,16 +1721,52 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'CleaveDamage',
 					extendedEquals: {
 						prefix: '<scalead>',
-						meleeValue: Math.round((ITEMS_BY_NAME.ravenousHydra.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
-						rangedValue: Math.round((ITEMS_BY_NAME.ravenousHydra.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						meleeValue: Math.round((ITEMS_BY_NAME.ravenousHydra?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						rangedValue: Math.round((ITEMS_BY_NAME.ravenousHydra?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
 						valueSuffix: '%',
 						suffix: '</scalead>',
 					},
 				},
 				PrimaryDamage: {
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.ravenousHydra.dataValues.ActiveADRatio ?? 0) * 100)}%</scalead>`,
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.ravenousHydra?.dataValues.ActiveADRatio ?? 0) * 100)}%</scalead>`,
 				},
+			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.tiamat]: {
+		variables: defineVariables({
+			known: {
+				lolcalcChampRange: [],
+			},
+			calculate(self) {
+				return {
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					displayedName: 'CleaveDamage',
+					extendedEquals: {
+						prefix: '<scalead>',
+						meleeValue: Math.round((ITEMS_BY_NAME.tiamat?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						rangedValue: Math.round((ITEMS_BY_NAME.tiamat?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						valueSuffix: '%',
+						suffix: '</scalead>',
+					},
+				},
+				PrimaryDamage: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.tiamat?.dataValues.ActiveADRatio ?? 0) * 100)}%</scalead>`,
+				}
 			},
 		}),
 	},

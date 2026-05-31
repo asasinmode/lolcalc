@@ -348,6 +348,9 @@ export const ITEM_NAME_TO_ID = {
 	oblivionOrb: '3916',
 	chempunkChainsword: '6609',
 	mortalReminder: '3033',
+	tiamat: '3077',
+	wardensMail: '3082',
+	warmogsArmor: '3083',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
