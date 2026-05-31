@@ -114,6 +114,8 @@ export interface IStatsCalculationVariables {
 	sterakAd?: number;
 	/** adaptive force gained from swiftmarch's passive */
 	swiftmarchAdaptive?: number;
+	/** hp gained from warmog's passive */
+	warmogsVitality?: number;
 	/** % of mana gained from ryze's passive */
 	ryzePassivePercentManaIncrease?: number;
 }

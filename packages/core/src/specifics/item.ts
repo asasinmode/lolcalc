@@ -751,6 +751,24 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { quicken: number }) {
 			return internalData.quicken;
 		},
+		variables: defineVariables({
+			known: {
+				f4: [],
+			},
+			calculate() {
+				return {
+					f4: { value: 0 },
+				};
+			},
+			meta: {
+				SpellbladeDamage: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.trinity?.dataValues.SpellbladeMultiplier ?? 0) * 100)}% bonus</scalead> `,
+				},
+			},
+			uninteresting: ['f4', 'MoveSpeedBonus', 'MSDuration'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
 		MAX_STACKS: 5,
@@ -1766,8 +1784,56 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 					statIconKey: 'attackDamage',
 					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.tiamat?.dataValues.ActiveADRatio ?? 0) * 100)}%</scalead>`,
-				}
+				},
 			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.wardensMail]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			uninteresting: ['f1', 'BlockBase', 'WardenDamageMax'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.warmogsArmor]: {
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables }) {
+					calculatedVariables.warmogsVitality = itemBaseStats.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp;
+					itemPassivesStats.hp += calculatedVariables.warmogsVitality;
+				},
+			},
+		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate(self) {
+				return {
+					f1: { value: 0 },
+					f2: {
+						value: self.stats.value.variables.warmogsVitality
+							?? self.stats.value.itemBase.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp,
+					},
+				};
+			},
+			meta: {
+				TotalHealingTooltip: {
+					statIconKey: 'hp',
+					extendedEquals: `<scalehealth>${Math.round((ITEMS_BY_NAME.warmogsArmor?.dataValues.MaxHealthRatio ?? 0) * (ITEMS_BY_NAME.warmogsArmor?.itemCalculations.TotalHealingTooltip.mMultiplier.mNumber ?? 0) * 100)}%</scalehealth>`,
+				},
+				f2: {
+					displayedName: 'BonusMaxHP',
+				},
+			},
+			uninteresting: ['f1', 'HealthThreshold', 'OOCTimerChampion', 'HPAmp', 'OOCTimer'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
