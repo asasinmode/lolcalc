@@ -6,10 +6,10 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from './16.9.1.fixture.json' with { type: 'json' };
-import { setupDamageSource, setupItems, typedPartialDeepStrictEqual } from './utils.ts';
+import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from './utils.ts';
 
 test.before(() => {
-	setupItems(fixture);
+	setupPatchFixture(fixture);
 });
 
 test('Ahri misc ap passives items', async (t) => {
@@ -231,7 +231,7 @@ test('Ezreal tear items', async (t) => {
 });
 
 // TODO can't implement Ryze's passive with rabadon and other items interaction, moving on for now
-test.skip('Ryze tear/ad items', async (t) => {
+test.only('Ryze tear/ad items', async (t) => {
 	const sourceCommon: IOverrides<'Ryze'> = {
 		runes: {
 			shards: {

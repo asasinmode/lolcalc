@@ -293,6 +293,10 @@
 					}
 				}
 			}
+		},
+		"roleQuest": {
+			"apMultiplier": 0.08,
+			"adMultiplier": 0.08
 		}
 	}
 }

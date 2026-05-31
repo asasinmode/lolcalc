@@ -21,6 +21,7 @@ import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { ISpecificVariables } from './index';
+import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
@@ -410,7 +411,7 @@ export const CHAMPION_SPECIFICS = {
 	Ryze: {
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, totalMultipliersStats, questStatMultiplier, championPassiveStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, totalMultipliersStats, championPassiveStats }, { calculatedVariables, miscDebug }) {
 					if (!self.champion.value) {
 						return;
 					}
@@ -451,7 +452,7 @@ export const CHAMPION_SPECIFICS = {
 						riftmakerHpToApRatio,
 						ryzePassiveAPBase: totalStats.abilityPower,
 						ryzePassiveManaBase: totalStats.mana,
-						questStatMultiplier,
+						questStatMultiplier: MISC.roleQuest.apMultiplier,
 						totalStats: {
 							abilityPower: totalStats.abilityPower,
 							hp: totalStats.hp,
@@ -466,8 +467,8 @@ export const CHAMPION_SPECIFICS = {
 						},
 					});
 
-					const effectiveAddedAPRatio = tearItemAPRatio * (1 + questStatMultiplier);
-					const effectiveAddedHPRatio = tearItemHPRatio * (riftmakerHpToApRatio ? (1 + questStatMultiplier) : 1);
+					const effectiveAddedAPRatio = tearItemAPRatio * (1 + MISC.roleQuest.apMultiplier);
+					const effectiveAddedHPRatio = tearItemHPRatio * (riftmakerHpToApRatio ? (1 + MISC.roleQuest.apMultiplier) : 1);
 
 					const totalAddedAP = effectiveAddedAPRatio + (riftmakerHpToApRatio * effectiveAddedHPRatio);
 
@@ -476,7 +477,7 @@ export const CHAMPION_SPECIFICS = {
 					miscDebug.ryzePMana = (totalAddedAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
 
 					const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
-					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * questStatMultiplier;
+					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * MISC.roleQuest.apMultiplier;
 					const tearItemTotalAp = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
 
 					const addedHP = effectiveAddedHPRatio * miscDebug.ryzePMana;

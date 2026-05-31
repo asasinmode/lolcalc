@@ -2,6 +2,7 @@ import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
+import { MISC } from '@lolcalc/data';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;
@@ -190,12 +191,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
-	let questStatMultiplier = 0;
-
 	if (source.roleQuest.value === 'mid') {
-		questStatMultiplier = 0.06;
-		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * questStatMultiplier;
-		calculatedVariables.midQuestAd = bonusStats.attackDamage * questStatMultiplier;
+		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * MISC.roleQuest.apMultiplier;
+		calculatedVariables.midQuestAd = bonusStats.attackDamage * MISC.roleQuest.adMultiplier;
 		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
 		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 	}
@@ -215,7 +213,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, questStatMultiplier }, { calculatedVariables, miscDebug });
+			hook(source, { totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
 		}
 	}
 

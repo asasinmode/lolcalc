@@ -669,5 +669,11 @@
 				"VampAmountRanged": 0.06
 			}
 		}
+	},
+	"misc": {
+		"roleQuest": {
+			"apMultiplier": 0.06,
+			"adMultiplier": 0.06
+		}
 	}
 }

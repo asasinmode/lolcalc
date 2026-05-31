@@ -150,7 +150,7 @@ export const MISC: IMiscData = miscData.data;
 
 export const ALL_DRAGON_NAMES = Object.keys(MISC.dragons) as IDragonName[];
 
-interface IMiscData {
+export interface IMiscData {
 	dragons: Record<IDragonName, {
 		name: string;
 		stack: {
@@ -162,6 +162,11 @@ interface IMiscData {
 			dataValues: any;
 		};
 	}>;
+	/** not extracted from game data, set manually in `scripts/updateData` */
+	roleQuest: {
+		apMultiplier: number;
+		adMultiplier: number;
+	};
 }
 
 export const UI: IUiData = uiData.data;

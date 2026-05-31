@@ -663,7 +663,7 @@ let miscData: typeof import('../packages/data/files/misc.json') | undefined;
 try {
 	await fs.access(miscFilePath);
 	miscData = JSON.parse(await fs.readFile(miscFilePath, 'utf8'));
-} catch { }
+} catch {}
 
 if (!miscData || miscData?.version !== latestVersion) {
 	console.log('misc data not present or outdated, fetching...');
@@ -763,6 +763,11 @@ if (!miscData || miscData?.version !== latestVersion) {
 	textData.data.roleQuests = Object.fromEntries(['top', 'jungle', 'mid', 'bot', 'support'].map(role =>
 		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`)?.split('<br>')],
 	)) as NonNullable<(typeof textData)>['data']['roleQuests'];
+
+	miscData.data.roleQuest = {
+		apMultiplier: 0.08,
+		adMultiplier: 0.08,
+	};
 
 	await fs.writeFile(miscFilePath, stringifyObject(miscData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));

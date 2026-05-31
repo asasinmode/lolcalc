@@ -1,13 +1,15 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IMiscData } from '@lolcalc/data';
 import type { IChampion, IChampionId, IItem } from '@lolcalc/data/types';
 import assert from 'node:assert';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import { CHAMPIONS, ITEMS } from '@lolcalc/data';
+import { CHAMPIONS, ITEMS, MISC } from '@lolcalc/data';
 
 interface IPatchOverridesFixture {
 	version: string;
 	champions: Partial<Record<IChampionId, Partial<IChampion>>>;
 	items: Record<string, Partial<IItem>>;
+	misc?: Partial<IMiscData>;
 }
 
 const overriden: {
@@ -31,7 +33,7 @@ export async function setupDamageSource<T extends IChampionId>(fixture: IPatchOv
 	return rv;
 }
 
-export function setupItems(fixture: IPatchOverridesFixture) {
+export function setupPatchFixture(fixture: IPatchOverridesFixture) {
 	for (const item in fixture.items) {
 		if (ITEMS[item]) {
 			Object.assign(ITEMS[item], fixture.items[item]);
@@ -39,6 +41,9 @@ export function setupItems(fixture: IPatchOverridesFixture) {
 		} else {
 			console.warn('[setupItems] unknown item specified in fixture', item, fixture.version);
 		}
+	}
+	if (fixture.misc) {
+		Object.assign(MISC, fixture.misc);
 	}
 }
 
