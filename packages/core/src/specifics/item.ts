@@ -1085,6 +1085,35 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
+		variables: defineVariables({
+			known: {
+				f4: [],
+				f5: [],
+			},
+			calculate(self) {
+				const consumptionDamage = ITEMS_BY_NAME.heartsteel?.dataValues.BaseDamage + self.stats.value.total.hp * ITEMS_BY_NAME.heartsteel?.dataValues.HPRatio;
+				return {
+					f4: {
+						value: consumptionDamage,
+					},
+					f5: {
+						value: consumptionDamage * ITEMS_BY_NAME.heartsteel?.dataValues.DamageToMaxHealthRatio,
+					},
+				};
+			},
+			meta: {
+				f4: {
+					type: VariableType.physical,
+					statIconKey: 'hp',
+					displayedName: 'ConsumptionDamage',
+					extendedEquals: `<const>${ITEMS_BY_NAME.heartsteel?.dataValues.BaseDamage}</const> <scalehealth>+ ${Math.round((ITEMS_BY_NAME.heartsteel?.dataValues.HPRatio ?? 0) * 100)}%</scalehealth>`,
+				},
+				f5: {
+					displayedName: 'ConsumptionHPGain',
+				},
+			},
+			uninteresting: ['TotalDemolishTime', 'BaseDamage', 'MaxHPRatio', 'DamageToMaxHealthRatio', 'HealthSizeThreshold', 'SizeAmount', 'SizeCap'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		MAX_STACKS: ITEMS_BY_NAME.guinsoo?.dataValues.MaxStacks,
@@ -1647,6 +1676,11 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.sunfireAegis]: {
+		imgTextLabel: '',
+		imgText(damageSource) {
+			const value = damageSource.computed.items.value.find(item => item && item.item.id === ITEM_NAME_TO_ID.sunfireAegis)?.variables.get('DPS')?.value;
+			return typeof value === 'number' ? Math.round(value) : '';
+		},
 		variables: defineVariables({
 			known: {
 				f1: [],
@@ -1658,9 +1692,9 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				DPS: {
+					type: VariableType.magic,
 					statIconKey: 'hp',
 					extendedEquals: `<const>${ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[0]!.mNumber}</const> <scalehealth>+ ${Math.round((ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}% bonus</scalehealth> `,
-					type: VariableType.magic,
 				},
 			},
 			uninteresting: ['f1', 'AuraDuration', 'MinionMod', 'MonsterMod'],
