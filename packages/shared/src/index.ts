@@ -353,6 +353,9 @@ export const ITEM_NAME_TO_ID = {
 	tiamat: '3077',
 	wardensMail: '3082',
 	warmogsArmor: '3083',
+	statikkShiv: '3087',
+	witsEnd: '3091',
+	redemption: '3107',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

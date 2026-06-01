@@ -1898,6 +1898,33 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['Effect3Amount' as any],
 		}),
 	},
+	[ITEM_NAME_TO_ID.statikkShiv]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+				};
+			},
+			meta: {
+				ChainDamage: {
+					type: VariableType.magic,
+				},
+				NonChampChainDamage: {
+					type: VariableType.magic,
+				},
+				BounceCount: {
+					statIconKey: 'level',
+					extendedEquals: `<const>${ITEMS_BY_NAME.statikkShiv?.itemCalculations.BounceCount.mFormulaParts[0]?.mLevel1Value} - ${ITEMS_BY_NAME.statikkShiv ? VARIABLE_CALCULATION_FNS.ByCharLevelBreakpointsCalculationPart(ITEMS_BY_NAME.statikkShiv.itemCalculations.BounceCount.mFormulaParts[0]!, {}, { level: { value: 18 } } as DamageSource)?.value : 0}</const>`,
+				},
+			},
+			uninteresting: ['f1', 'f2', 'BounceCount', 'BonusEnergizedStacks'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
