@@ -595,7 +595,7 @@ export function replaceGameVariables(
 					}
 				}
 
-				variables.set(variableName, { baseValue: value, value });
+				variables.set(variableName, { baseValue: value, value, meta });
 			}
 		}
 	}
