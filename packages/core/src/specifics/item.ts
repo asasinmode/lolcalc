@@ -1752,6 +1752,22 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.mortalReminder]: {
+		...grievousWoundItemSpecific,
+		variables: defineVariables({
+			known: {
+				f2: [],
+				f3: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+					f3: { value: 0 },
+				};
+			},
+			uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+		}),
+	},
 	[ITEM_NAME_TO_ID.ravenousHydra]: {
 		variables: defineVariables({
 			known: {
@@ -1868,6 +1884,18 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f1', 'HealthThreshold', 'OOCTimerChampion', 'HPAmp', 'OOCTimer'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.runaan]: {
+		variables: defineVariables({
+			meta: {
+				BoltDamage: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.runaan?.itemCalculations.BoltDamage.mFormulaParts[0]?.mSubpart.mNumber ?? 0) * 100)}%</scalead>`,
+				},
+			},
+			uninteresting: ['Effect3Amount' as any],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
