@@ -27,11 +27,6 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
-		imgText(data) {
-			// TODO maybe don't hide text on default, might be confusing
-			return data[0] === 40 ? '' : `${data[0]}%`;
-		},
-		maxValue: 100,
 		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(ABILITY_TYPE.item, itemId)),
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
@@ -43,6 +38,20 @@ export const EFFECT_SPECIFICS = {
 				return [strength ? strength * 100 : 40];
 			}
 		},
+	}),
+	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: defineEffectSpecific<[gWounds: number]>({
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWoundsPercent),
+		label: 'Grievous Wounds (percent)',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 100)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		imgText(data) {
+			return `${data[0]}%`;
+		},
+		maxValue: 100,
 	}),
 	[EFFECT_OBJECT_NAME.stun]: defineEffectSpecific<[isStunned: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.stun),
@@ -454,6 +463,7 @@ export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) 
 
 export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: string, imgSize: number]>> = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
+	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
 	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
 	[EFFECT_OBJECT_NAME.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
 	[EFFECT_OBJECT_NAME.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
@@ -475,6 +485,7 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	},
 	/* other */
 	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
+	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: 'game_buff_tooltip_grievouswound',
 	[EFFECT_OBJECT_NAME.stun]: {
 		description: 'This unit is <keyword>stunned</keyword>.',
 	},

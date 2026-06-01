@@ -5,6 +5,10 @@
 			"dataKey": "lolcalcGrievousWounds",
 			"description": "This unit receives reduced healing."
 		},
+		"lolcalcGrievousWoundsPercent": {
+			"dataKey": "lolcalcGrievousWoundsPercent",
+			"description": "This unit receives reduced healing."
+		},
 		"lolcalcStun": {
 			"dataKey": "lolcalcStun",
 			"description": "This unit is <keyword>stunned</keyword>."

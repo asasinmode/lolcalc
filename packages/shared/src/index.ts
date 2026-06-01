@@ -460,6 +460,7 @@ export const EFFECT_OBJECT_NAME = {
 	rellPBreakMold: 'RellP_Debuff',
 	/* other */
 	grievousWounds: 'lolcalcGrievousWounds',
+	grievousWoundsPercent: 'lolcalcGrievousWoundsPercent',
 	stun: 'lolcalcStun',
 	slowFlat: 'lolcalcSlowFlat',
 	slowPercent: 'lolcalcSlowPercent',
