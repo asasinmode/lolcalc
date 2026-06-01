@@ -129,7 +129,7 @@ export interface ISpecificVariables<
 	 * }
 	 * ```
 	 */
-	calculate?: (self: DamageSource<Id>) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
+	calculate?: (self: DamageSource<Id>, damageTarget?: DamageSource) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
 	/** any dynamic variables' meta information like icon of the stat they scale from. */
 	meta?: NoInfer<Partial<Record<T | DetectedVariables, IVariableMeta<IGameVariableValueParameters[VariableType]>>>>;
 	/**
@@ -158,9 +158,9 @@ export function defineVariables<
 	});
 }
 
-export function calculateDynamicVariables(self: DamageSource, config?: ISpecificVariables<string, string, IChampionId, any>): IDynamicVariables | undefined {
+export function calculateDynamicVariables(self: DamageSource, damageTarget?: DamageSource, config?: ISpecificVariables<string, string, IChampionId, any>): IDynamicVariables | undefined {
 	return config && {
-		values: config.calculate?.(self),
+		values: config.calculate?.(self, damageTarget),
 		meta: config.meta,
 		uninteresting: config.uninteresting,
 	};

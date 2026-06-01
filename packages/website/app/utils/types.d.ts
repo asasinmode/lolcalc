@@ -53,6 +53,8 @@ export interface IDamageResultTableColumn {
 	 * note that while the table results can be flipped, this is only for the `column.target`. It doesn't get recomputed to `column.source`, despite it being shown as "target" when table is flipped. Applying effects from items/runes/abilites works only from source -> target, not the other way around. To apply effects on the source, add them directly through `.addEffect()`
 	 */
 	_computedTarget?: DamageSource;
+	/** same as _computedTarget */
+	_computedSource?: DamageSource;
 }
 
 export interface IChampionAbilityHoverTooltipProps {

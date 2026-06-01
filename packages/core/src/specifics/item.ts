@@ -2004,6 +2004,30 @@ export const ITEM_SPECIFICS = {
 			return value.replace('@HealMin@ - @HealMax@', '@lolcalcHeal@');
 		},
 	},
+	[ITEM_NAME_TO_ID.ldr]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+				DamageIncreasePercent: [],
+			},
+			calculate(_self, target) {
+				const { MaxBonusDamagePercent, MaxBonusHealth } = ITEMS_BY_NAME.ldr?.dataValues ?? {};
+				return {
+					f1: { value: 0 },
+					DamageIncreasePercent: {
+						value: MaxBonusDamagePercent * Math.min(target?.stats.value.bonus.hp ?? 0, MaxBonusHealth) / MaxBonusHealth * 100,
+					},
+				};
+			},
+			meta: {
+				DamageIncreasePercent: {
+					isAdditional: true,
+					resultsIsPercentage: true,
+				},
+			},
+			uninteresting: ['f1', 'MaxBonusDamagePercent', 'MaxBonusHealth'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

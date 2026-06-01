@@ -356,6 +356,10 @@ export const ITEM_NAME_TO_ID = {
 	statikkShiv: '3087',
 	witsEnd: '3091',
 	redemption: '3107',
+	ldr: '3036',
+	nashorsTooth: '3115',
+	malignance: '3118',
+	cryptbloom: '3137',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

@@ -196,7 +196,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling
     - [ ] screenshots showing it accurately calculating things
     - [ ] decaying move speed bonuses
-    - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source
+    - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
   - [ ] github readme
 - [ ] submit feedback on page / report issues
   - [ ] rust/go server

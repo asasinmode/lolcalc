@@ -155,6 +155,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	watchHandles: WatchHandle[];
 
+	calculationDamageTarget: ShallowRef<DamageSource | undefined>;
+
 	/**
 	 * set to the values of the `this.internalData.value` being restored when parsing back from stringified
 	 * if not `undefined`, the champion watch will assume the `DamageSource` is being restored and handle it specially
@@ -205,6 +207,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
 		this.appliedEffects = ref([]);
+		/** set in results on a duplicate of the underlying source to the configured target */
+		this.calculationDamageTarget = shallowRef();
 		this.fromStringifiedInternalData = undefined;
 
 		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
@@ -922,19 +926,19 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		effects: ref([]),
 		variables: computed((): UnwrapRef<IDamageSourceComputed['variables']> => {
 			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
-			const championDynamicVariables = calculateDynamicVariables(this, championSpecific?.variables);
+			const championDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, championSpecific?.variables);
 
 			return {
 				items: Object.fromEntries(
 					this.items.value.filter(Boolean).map(item => [
 						item!.id,
-						calculateDynamicVariables(this, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id as keyof IHypotheticalItemSpecifics]?.variables) ?? {},
+						calculateDynamicVariables(this, this.calculationDamageTarget.value, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item!.id as keyof IHypotheticalItemSpecifics]?.variables) ?? {},
 					]),
 				),
 				runes: {
 					shards: Object.fromEntries(Object.entries(this.runes.value.shards).map(([shardSlot, shardValue]) => [
 						shardSlot,
-						shardValue && calculateDynamicVariables(this, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.variables),
+						shardValue && calculateDynamicVariables(this, this.calculationDamageTarget.value, (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[shardValue]?.variables),
 					])) as UnwrapRef<IDamageSourceComputed['variables']>['runes']['shards'],
 				},
 				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
@@ -943,7 +947,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						this.champion.value
 							? this.champion.value!.abilities[abilityKey].variants.map((): IDynamicVariables => {
 									const abilitySpecific = championSpecific?.[abilityKey];
-									const abilityDynamicVariables = calculateDynamicVariables(this, abilitySpecific?.variables);
+									const abilityDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.variables);
 
 									return {
 										values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values),
