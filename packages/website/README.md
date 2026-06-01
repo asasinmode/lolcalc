@@ -149,6 +149,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] item effects & their result sections like frozen heart or zeke's convergence
   - [ ] resolved item passives values for target like randuin/tabi
   - [x] hook priorities in one file for easier precedence management
+  - [ ] grievous wounds affecting all heal type things
   - [ ] dragons/souls
   - [ ] champion passives
     - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
@@ -162,6 +163,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] resolve game variables
   - [x] maybe dynamic variables can be cached on damage source under a key then reused
   - [x] think of something other than spread copying `{...champion, dynamicValues: ...}`
+  - [ ] check redemption and other level calculations if they keep scaling past lvl 18 for toplaners
   - [ ] check if can always lowercase match variables. Probably can, not sure if worth it because it would have to navigate whole object instead of trying to dot access? If implemented, check renaming variables resolved with different case like cosmic drive `MoveSpeedAmount`
   - [x] check if can save only gold cost, not whole object
   - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)` / note in help page the discrepancy
@@ -194,6 +196,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling
     - [ ] screenshots showing it accurately calculating things
     - [ ] decaying move speed bonuses
+    - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source
   - [ ] github readme
 - [ ] submit feedback on page / report issues
   - [ ] rust/go server

@@ -189,6 +189,9 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 			extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, itemId), 'gWounds', 'Grievous Wounds', true, true),
 		},
 	]))),
+	[ITEM_NAME_TO_ID.redemption]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.redemption), 'aLevel', 'Target ally level', ITEM_SPECIFICS[ITEM_NAME_TO_ID.redemption].MIN_ALLY_LEVEL, ITEM_SPECIFICS[ITEM_NAME_TO_ID.redemption].MAX_ALLY_LEVEL),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {

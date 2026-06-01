@@ -1303,6 +1303,24 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { spActive: number }) {
 			return internalData.spActive;
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				SpellbladeDamage: {
+					type: VariableType.magic,
+					statIconKey: ['attackDamage', 'abilityPower'],
+					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.lichBane?.dataValues as any)[ITEMS_BY_NAME.lichBane?.itemCalculations.SpellbladeDamage.mFormulaParts[0]?.mDataValue!] ?? 0) * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.lichBane?.dataValues as any)[ITEMS_BY_NAME.lichBane?.itemCalculations.SpellbladeDamage.mFormulaParts[1]?.mDataValue!] ?? 0) * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
+				},
+			},
+			uninteresting: ['f1', 'SpellBladeDuration', 'SheenASBuff'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.botrk]: {
 		internalDataProperties: ['cShadows'],
@@ -1942,6 +1960,48 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f4'],
 		}),
+	},
+	[ITEM_NAME_TO_ID.redemption]: {
+		MIN_ALLY_LEVEL: 1,
+		MAX_ALLY_LEVEL: 20,
+		internalDataProperties: ['aLevel'],
+		setupData(self) {
+			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
+			return { aLevel: 0 };
+		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+				lolcalcHeal: [],
+			},
+			calculate(self) {
+				const { HealMin, HealMax } = ITEMS_BY_NAME.redemption?.dataValues ?? {};
+
+				return {
+					f1: { value: 0 },
+					lolcalcHeal: {
+						value: VARIABLE_CALCULATION_FNS.ByCharLevelInterpolationCalculationPart(
+							{
+								mStartValue: HealMin,
+								mEndValue: HealMax,
+							} as any,
+							{},
+							{ level: { value: Math.min(self.internalItemData.value.aLevel, 18) } } as DamageSource,
+						).value,
+					},
+				};
+			},
+			meta: {
+				lolcalcHeal: {
+					type: VariableType.heal,
+					displayedName: 'Heal',
+				},
+			},
+			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect'],
+		}),
+		textPreplace(value) {
+			return value.replace('@HealMin@ - @HealMax@', '@lolcalcHeal@');
+		},
 	},
 } satisfies IHypotheticalItemSpecifics;
 
