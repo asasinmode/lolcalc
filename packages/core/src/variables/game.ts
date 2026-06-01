@@ -769,6 +769,23 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 		return rv;
 	},
+	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], _whole, self) {
+		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
+		const { mNumber } = variable.mSubpart;
+
+		if (mNumber !== undefined) {
+			if (statValue !== undefined) {
+				return {
+					value: statValue * mNumber,
+					roundReplaced: true,
+				};
+			} else {
+				return {
+					value: mNumber,
+				};
+			}
+		}
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 type IHypotheticalVariableCalculationFns = Record<
@@ -819,6 +836,13 @@ interface IGameVariablesByType {
 		mEndValue: number;
 		__type: string;
 	};
+	StatBySubPartCalculationPart: {
+		mStat: number;
+		mSubpart: {
+			mNumber: number;
+		};
+		__type: string;
+	};
 }
 
 function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
@@ -836,7 +860,7 @@ function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[k
 /** info in `MSTAT_TO_NAMED_STAT` and `resolveMStatWithFormula` */
 interface IStatWithFormula {
 	mStat: number;
-	mStatFormula: number;
+	mStatFormula?: number;
 }
 
 /** item variables sometimes have fields with `mStat: number`, which from what I can tell is supposed to be a champion's stat. This is a map of known numbers to their corresponding stats, supposed to be used with */

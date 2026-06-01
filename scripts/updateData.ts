@@ -296,7 +296,7 @@ let itemData: typeof import('../packages/data/files/item.json') | undefined;
 try {
 	await fs.access(itemFilePath);
 	itemData = JSON.parse(await fs.readFile(itemFilePath, 'utf8'));
-} catch { }
+} catch {}
 
 if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	console.log('item data not present or outdated, fetching...');
