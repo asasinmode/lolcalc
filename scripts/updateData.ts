@@ -1132,6 +1132,9 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
  * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that gets special treatment in `@lolcalc/core/variables/game` and `@lolcalc/core/specifics/index`
  */
 function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
+	const specific = (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics];
+	const textPreplace = specific?.textPreplace;
+
 	/**
 		* `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
 		* `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
@@ -1161,8 +1164,8 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	const subtitleRightEndIndex = textShop.indexOf('</subtitleRight>');
 	const subtitleRight = textShop.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
 
-	const tooltipShop = itemDescriptionText(textShop, '</section><section>');
-	let tooltipInventory = textInventory ? itemDescriptionText(textInventory, '<mainText><section>') : undefined;
+	const tooltipShop = itemDescriptionText(textPreplace ? textPreplace(textShop) : textShop, '</section><section>');
+	let tooltipInventory = textInventory ? itemDescriptionText(textPreplace ? textPreplace(textInventory) : textInventory, '<mainText><section>') : undefined;
 
 	if (tooltipShop && tooltipInventory?.every((extra, extraIndex) => extra.every((line, lineIndex) =>
 		tooltipShop[extraIndex]?.[lineIndex] === line,
@@ -1181,9 +1184,9 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 					known: Object.assign(
 						/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
 						{ lolcalcChampRange: [1, 2], ChampRange: [1, 2] },
-						(ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.variables?.known,
+						specific?.variables?.known,
 					),
-					default: (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.variables?.default,
+					default: specific?.variables?.default,
 				},
 			},
 		},

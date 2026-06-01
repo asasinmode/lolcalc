@@ -1925,6 +1925,24 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'f2', 'BounceCount', 'BonusEnergizedStacks'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.witsEnd]: {
+		variables: defineVariables({
+			known: {
+				f4: [],
+			},
+			calculate() {
+				return {
+					f4: { value: 0 },
+				};
+			},
+			meta: {
+				OnHitDamage: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['f4'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
@@ -1940,6 +1958,11 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, string, IChampionId, 'item'>;
+	/**
+	 * called in `scripts/updateData`, does additional replacing of the text before any attempts at resolving variables
+	 * ATM done only for textShop and textInventory, used for redemption, which by default shows `\@HealMin\@ - \@HealMax\@` that depends on ally level. Calculator gives an option to set ally's level to a concrete value so we should display the heal for selected ally level
+	 */
+	textPreplace?: (value: string) => string;
 	[key: string]: any;
 };
 
