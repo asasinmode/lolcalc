@@ -1995,6 +1995,7 @@ export const ITEM_SPECIFICS = {
 				lolcalcHeal: {
 					type: VariableType.heal,
 					displayedName: 'Heal',
+					extendedEquals: `<const>${ITEMS_BY_NAME.redemption?.dataValues.HealMin} - ${ITEMS_BY_NAME.redemption?.dataValues.HealMax}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect'],
