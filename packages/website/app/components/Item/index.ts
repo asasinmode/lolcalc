@@ -195,6 +195,9 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.malignance]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.malignance), 'hatefog', 'Hatefog', true, true),
 	},
+	[ITEM_NAME_TO_ID.randuinsOmen]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.randuinsOmen), 'humility', 'Humility', true, true),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {

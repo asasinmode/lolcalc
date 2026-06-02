@@ -332,6 +332,21 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 	}),
+	[EFFECT_OBJECT_NAME.randuinsHumility]: defineEffectSpecific<[humiliated: number]>({
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.randuinsOmen),
+		label: 'Humility',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'randuinsOmen'>).humility) {
+				return [1];
+			}
+		},
+	}),
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: defineEffectSpecific<[isCursed: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
 		label: 'Cursed touch',
@@ -478,6 +493,7 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: {
 		description: 'This unit\'s movement is slowed.',
 	},
+	[EFFECT_OBJECT_NAME.randuinsHumility]: 'game_buff_tooltip_slow',
 	/* champion passives */
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {

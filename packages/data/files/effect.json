@@ -81,6 +81,10 @@
 			"dataKey": "lolcalc3869BlessingShattered",
 			"description": "This unit's movement is slowed."
 		},
+		"lolcalc3143HumilitySlow": {
+			"dataKey": "lolcalc3143HumilitySlow",
+			"description": "This unit's Move Speed is slowed."
+		},
 		"AmumuPDebuff": {
 			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
 			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"

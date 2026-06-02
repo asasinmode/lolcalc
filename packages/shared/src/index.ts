@@ -458,6 +458,7 @@ export const EFFECT_OBJECT_NAME = {
 	botrkClawingShadows: '3153Slow',
 	zekesConvergenceFrostfireTempest: '3050_EnemyBuff',
 	celestialOppositionBlessingShattered: 'lolcalc3869BlessingShattered',
+	randuinsHumility: 'lolcalc3143HumilitySlow',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
