@@ -28,7 +28,7 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 		{
 			replaceWithName: props.replaceVariablesWithNames,
 			overrideVariables: props.item && (props.damageSource
-				? calculateDynamicVariables(props.damageSource, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)
+				? calculateDynamicVariables(props.damageSource, undefined, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)
 				: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)),
 		},
 	),
