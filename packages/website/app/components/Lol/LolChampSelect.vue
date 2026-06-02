@@ -129,8 +129,7 @@ defineExpose({
 			>
 				<button
 					class="leading-tight text-center min-w-0 block hyphens-auto"
-					@click="selectedChampion = champion"
-					@dblclick="vDialog?.el?.close()"
+					@click="(selectedChampion = champion) && vDialog?.el?.close()"
 				>
 					<img
 						:title="champion.name"
