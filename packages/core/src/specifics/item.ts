@@ -89,6 +89,9 @@ const grievousWoundItemSpecific = {
 	imgActive(internalData: { gWounds: number }) {
 		return internalData.gWounds;
 	},
+	variables: {
+		uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'] as const,
+	}
 } satisfies IItemSpecific<typeof GRIEVOUS_WOUND_ITEMS[number]>;
 
 /** specific items' helpers, utils and calculations */
@@ -1737,10 +1740,6 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'AuraDuration', 'MinionMod', 'MonsterMod'],
 		}),
 	},
-	...(Object.fromEntries(GRIEVOUS_WOUND_ITEMS.map((itemId): [string, IItemSpecific<typeof itemId>] => [
-		itemId,
-		grievousWoundItemSpecific,
-	])) as Record<typeof GRIEVOUS_WOUND_ITEMS[number], typeof grievousWoundItemSpecific>),
 	[ITEM_NAME_TO_ID.brambleVest]: {
 		...grievousWoundItemSpecific,
 		variables: defineVariables({
@@ -1761,7 +1760,39 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.magic,
 				},
 			},
-			uninteresting: ['f1', 'f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+			uninteresting: [...grievousWoundItemSpecific.variables.uninteresting, 'f1'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.oblivionOrb]: {
+		...grievousWoundItemSpecific,
+		variables: defineVariables({
+			known: {
+				f2: [],
+				f3: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+					f3: { value: 0 },
+				};
+			},
+			uninteresting: grievousWoundItemSpecific.variables.uninteresting,
+		}),
+	},
+	[ITEM_NAME_TO_ID.executionersCalling]: {
+		...grievousWoundItemSpecific,
+		variables: defineVariables({
+			known: {
+				f2: [],
+				f3: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+					f3: { value: 0 },
+				};
+			},
+			uninteresting: grievousWoundItemSpecific.variables.uninteresting,
 		}),
 	},
 	[ITEM_NAME_TO_ID.thornmail]: {
@@ -1786,7 +1817,7 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<const>${ITEMS_BY_NAME.thornmail?.dataValues.BaseDamage}</const><scalearmor> + ${Math.round((ITEMS_BY_NAME.thornmail?.dataValues.BonusArmorDamageRatio ?? 0) * 100)}% bonus</scalearmor> `,
 				},
 			},
-			uninteresting: ['f1', 'f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+			uninteresting: [...grievousWoundItemSpecific.variables.uninteresting, 'f1'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.mortalReminder]: {
@@ -1802,10 +1833,10 @@ export const ITEM_SPECIFICS = {
 					f3: { value: 0 },
 				};
 			},
-			uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+			uninteresting: grievousWoundItemSpecific.variables.uninteresting,
 		}),
 	},
-	[ITEM_NAME_TO_ID.executionersCalling]: {
+	[ITEM_NAME_TO_ID.chempunkChainsword]: {
 		...grievousWoundItemSpecific,
 		variables: defineVariables({
 			known: {
@@ -1818,7 +1849,23 @@ export const ITEM_SPECIFICS = {
 					f3: { value: 0 },
 				};
 			},
-			uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+			uninteresting: grievousWoundItemSpecific.variables.uninteresting,
+		}),
+	},
+	[ITEM_NAME_TO_ID.morellonomicon]: {
+		...grievousWoundItemSpecific,
+		variables: defineVariables({
+			known: {
+				f2: [],
+				f3: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+					f3: { value: 0 },
+				};
+			},
+			uninteresting: grievousWoundItemSpecific.variables.uninteresting,
 		}),
 	},
 	[ITEM_NAME_TO_ID.ravenousHydra]: {
