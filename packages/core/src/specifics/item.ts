@@ -1998,7 +1998,7 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: `<const>${ITEMS_BY_NAME.redemption?.dataValues.HealMin} - ${ITEMS_BY_NAME.redemption?.dataValues.HealMax}</const>`,
 				},
 			},
-			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect'],
+			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect', 'HealMin', 'HealMax'],
 		}),
 		preplaceTextInventory(value) {
 			return value.replace('@HealMin@ - @HealMax@', '@lolcalcHeal@');
@@ -2026,6 +2026,26 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f1', 'MaxBonusDamagePercent', 'MaxBonusHealth'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.nashorsTooth]: {
+		variables: defineVariables({
+			known: {
+				f2: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+				};
+			},
+			meta: {
+				TotalOnHitDamage: {
+					type: VariableType.magic,
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${ITEMS_BY_NAME.nashorsTooth?.dataValues.NashorsBaseValue}</const> <scaleap>+ ${Math.round((ITEMS_BY_NAME.nashorsTooth?.dataValues.NashorsAPValue ?? 0) * 100)}%</scaleap>`,
+				},
+			},
+			uninteresting: ['f2'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
