@@ -125,7 +125,11 @@ export function useCalculatorState(
 			return [columnSourceIndex, columnTargetIndex];
 		}
 
-		if (resultsTable.value && (resultsTable.value.resultColumns.slice(1).some(col => col.source || col.target) || resultsTable.value.resultColumns[0]!.source !== damageSources.value[0] || resultsTable.value.resultColumns[0]!.target !== damageTargets.value[0])) {
+		if (resultsTable.value && (
+			resultsTable.value.resultColumns.slice(1).some(col => col.source || col.target)
+			|| damageSources.value.length > 1 || damageTargets.value.length > 1
+			|| resultsTable.value.resultColumns[0]!.source !== damageSources.value[0]
+			|| resultsTable.value.resultColumns[0]!.target !== damageTargets.value[0])) {
 			for (const column of resultsTable.value?.resultColumns || []) {
 				const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
 
