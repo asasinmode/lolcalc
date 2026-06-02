@@ -896,6 +896,9 @@
 				"subtitleLeft": "Anti-Magic",
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Tenacity }}"
 			},
+			"3114": {
+				"footerLeft": "Total Heal and Shield power: <attention>@f4@%</attention>"
+			},
 			"3115": {
 				"subtitleLeft": "Magic On-Hit",
 				"tooltipShop": [

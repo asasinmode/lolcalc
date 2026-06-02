@@ -78,7 +78,7 @@ let championData: typeof import('../packages/data/files/champion.json') | undefi
 try {
 	await fs.access(championFilePath);
 	championData = JSON.parse(await fs.readFile(championFilePath, 'utf8'));
-} catch { }
+} catch {}
 
 const potentialShapeshifters = new Set<string>();
 
@@ -1217,7 +1217,7 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	keywordDefinitions = cleanupItemText(keywordDefinitions);
 	keywordDefinitions && debugStringVariables(keywordDefinitions, { ...variableDebug, key: `${item.id} ${item.name} keyKeywordDefinitions` });
 
-	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || extended?.length) {
+	if (subtitleLeft || subtitleRight || tooltipShop?.length || tooltipInventory?.length || extended || footerLeft || keywordDefinitions) {
 		(textData.data.items as any)[item.id] = {
 			subtitleLeft: subtitleLeft || undefined,
 			subtitleRight: subtitleRight || undefined,
