@@ -1786,6 +1786,22 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.executionersCalling]: {
+		...grievousWoundItemSpecific,
+		variables: defineVariables({
+			known: {
+				f2: [],
+				f3: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+					f3: { value: 0 },
+				};
+			},
+			uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'],
+		}),
+	},
 	[ITEM_NAME_TO_ID.ravenousHydra]: {
 		variables: defineVariables({
 			known: {
@@ -2071,6 +2087,28 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f4', 'UltimateHaste', 'GroundDuration', 'MagicResistanceShred'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.cryptbloom]: {
+		variables: defineVariables({
+			known: {
+				f5: [],
+				f6: [],
+			},
+			calculate() {
+				return {
+					f5: { value: 0 },
+					f6: { value: 0 },
+				};
+			},
+			meta: {
+				TotalHealAmount: {
+					type: VariableType.heal,
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${(ITEMS_BY_NAME.cryptbloom?.dataValues as any)[ITEMS_BY_NAME.cryptbloom?.itemCalculations.TotalHealAmount.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.cryptbloom?.dataValues as any)[ITEMS_BY_NAME.cryptbloom?.itemCalculations.TotalHealAmount.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+				},
+			},
+			uninteresting: ['f5', 'f6', 'TakedownWindow'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
