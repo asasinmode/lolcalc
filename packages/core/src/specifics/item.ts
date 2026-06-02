@@ -1353,6 +1353,39 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { cShadows: number }) {
 			return internalData.cShadows;
 		},
+		variables: defineVariables({
+			known: {
+				f4: [],
+				lolcalcChampRange: [ITEMS_BY_NAME.botrk?.dataValues.MeleeValue, ITEMS_BY_NAME.botrk?.dataValues.RangedValue],
+				CurrentHealthDamage: [],
+			},
+			calculate() {
+				const { MeleeValue, RangedValue } = ITEMS_BY_NAME.botrk?.dataValues ?? {};
+				return {
+					f4: { value: 0 },
+					lolcalcChampRange: {
+						value: [MeleeValue, RangedValue],
+					},
+					CurrentHealthDamage: {
+						// TODO
+						value: 123,
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					type: VariableType.physical,
+					displayedName: 'CurrentHealthPercent',
+					isPercentage: true,
+					multiplier: 100,
+				},
+				CurrentHealthDamage: {
+					type: VariableType.physical,
+					isAdditional: true,
+				},
+			},
+			uninteresting: ['f4', 'lolcalcChampRange', 'MoveSpeedMod', 'MoveSpeedDuration'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
 		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {
@@ -2203,6 +2236,26 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.rocketbelt]: {
+		variables: defineVariables({
+			known: {
+				f5: [],
+			},
+			calculate() {
+				return {
+					f5: { value: 0 },
+				};
+			},
+			meta: {
+				FireboltDamage: {
+					type: VariableType.magic,
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${(ITEMS_BY_NAME.rocketbelt?.dataValues as any)[ITEMS_BY_NAME.rocketbelt?.itemCalculations.FireboltDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.rocketbelt?.dataValues as any)[ITEMS_BY_NAME.rocketbelt?.itemCalculations.FireboltDamage.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+				},
+			},
+			uninteresting: ['f5'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
