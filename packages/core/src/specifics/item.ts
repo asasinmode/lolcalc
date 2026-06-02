@@ -2048,6 +2048,31 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.malignance]: {
+		internalDataProperties: ['hatefog'],
+		setupData(self) {
+			self.internalItemData.value.hatefog = clamp(0, self.internalItemData.value.hatefog ?? 0, 1);
+			return { hatefog: 0 };
+		},
+		variables: defineVariables({
+			known: {
+				f4: [],
+			},
+			calculate() {
+				return {
+					f4: { value: 0 },
+				};
+			},
+			meta: {
+				GroundBurnDamagePerTickTooltipOnly: {
+					type: VariableType.magic,
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${(ITEMS_BY_NAME.malignance?.dataValues as any)[ITEMS_BY_NAME.malignance?.itemCalculations.GroundBurnDamagePerTickTooltipOnly.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.malignance?.dataValues as any)[ITEMS_BY_NAME.malignance?.itemCalculations.GroundBurnDamagePerTickTooltipOnly.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+				},
+			},
+			uninteresting: ['f4', 'UltimateHaste', 'GroundDuration', 'MagicResistanceShred'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

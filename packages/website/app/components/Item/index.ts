@@ -192,6 +192,9 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.redemption]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.redemption), 'aLevel', 'Target ally level', ITEM_SPECIFICS[ITEM_NAME_TO_ID.redemption].MIN_ALLY_LEVEL, ITEM_SPECIFICS[ITEM_NAME_TO_ID.redemption].MAX_ALLY_LEVEL),
 	},
+	[ITEM_NAME_TO_ID.malignance]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.malignance), 'hatefog', 'Hatefog', true, true),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
