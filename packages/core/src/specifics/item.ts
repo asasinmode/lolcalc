@@ -299,6 +299,17 @@ export const ITEM_SPECIFICS = {
 			const { fWill } = self.internalItemData.value as { fWill: number };
 			return fWill && `${Math.round(fWill * ITEMS_BY_NAME.shojin?.dataValues.SpellDamageIncrease * 100)}%`;
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			uninteresting: ['f1', 'AHBase', 'TooltipValue', 'StackDuration', 'StackCount', 'CastIDLockout'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
 		MAX_STACKS: ITEMS_BY_NAME.riftmaker?.dataValues.SecondsInCombat,
@@ -2297,6 +2308,19 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f5'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.chainlacedCrushers]: {
+		variables: defineVariables({
+			known: {
+				f5: [],
+			},
+			calculate() {
+				return {
+					f5: { value: 0 },
+				};
+			},
+			uninteresting: ['f5', 'ShieldDuration'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
