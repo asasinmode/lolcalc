@@ -80,6 +80,12 @@ const bastionBreakerSpecifics = {
 	damageCalcRangeModifier: (ITEMS_BY_NAME.bastionBreaker?.dataValues as any)[ITEMS_BY_NAME.bastionBreaker.itemCalculations.DamageCalc.mRangedMultiplier.mDataValue],
 };
 
+const mawOfMalmortiusSpecific = {
+	meleeShield: (ITEMS_BY_NAME.mawOfMalmortius?.dataValues as any)[ITEMS_BY_NAME.mawOfMalmortius?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mDataValue!],
+	meleeAdScaling: (ITEMS_BY_NAME.mawOfMalmortius?.dataValues as any)[ITEMS_BY_NAME.mawOfMalmortius?.itemCalculations.MeleeItemCalcValue.mFormulaParts[1]!.mDataValue!],
+	rangedModifier: (ITEMS_BY_NAME.mawOfMalmortius?.dataValues as any)[ITEMS_BY_NAME.mawOfMalmortius?.itemCalculations.RangedItemCalcValue.mMultiplier.mDataValue!],
+};
+
 const grievousWoundItemSpecific = {
 	internalDataProperties: ['gWounds'],
 	setupData(self) {
@@ -1260,6 +1266,37 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { mawLifeline: number }) {
 			return internalData.mawLifeline;
 		},
+		variables: defineVariables({
+			known: {
+				f4: [],
+				lolcalcChampRange: [],
+			},
+			calculate(self) {
+				return {
+					f4: { value: 0 },
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					/* array `statIconKey` usually used for when the variable scales with multiple stats, but it also makes it so when description is extended, no icon is appended after `extendedEquals`. Used here so the ad icon can be inserted at appropriate points in melee/ranged values since they have a <const> */
+					statIconKey: ['attackDamage'],
+					displayedName: 'Shield',
+					extendedEquals: {
+						prefix: '',
+						meleeValue: `<const>${mawOfMalmortiusSpecific.meleeShield}</const> <scalead>+ ${Math.round((mawOfMalmortiusSpecific.meleeAdScaling) * 100)}% bonus %i:${STAT_ICON.attackDamage}%</scalead>`,
+						rangedValue: `<const>${mawOfMalmortiusSpecific.meleeShield * mawOfMalmortiusSpecific.rangedModifier}</const> <scalead>+ ${roundVariable(mawOfMalmortiusSpecific.meleeAdScaling * mawOfMalmortiusSpecific.rangedModifier * 100, 1)}% bonus %i:${STAT_ICON.attackDamage}%</scalead>`,
+						suffix: '',
+					},
+				},
+			},
+			uninteresting: ['f4', 'LowHealthThreshold', 'ShieldDuration', 'BuffVamp'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.jakSho]: {
 		internalDataProperties: ['vbResistance'],
@@ -1627,23 +1664,23 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				AbilityDamageCalc: {
-					statIconKey: 'lethality',
+					/* statIconKey array for same reason as maw of malmortius */
+					statIconKey: ['lethality'],
 					extendedEquals: {
-						prefix: `<const>`,
-						meleeValue: `${bastionBreakerSpecifics.abilityDamageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * 100)}`,
-						rangedValue: `${bastionBreakerSpecifics.abilityDamageCalcBase * bastionBreakerSpecifics.abilityDamageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * bastionBreakerSpecifics.abilityDamageCalcRangeModifier * 100)}`,
-						valueSuffix: '%',
-						suffix: `</scalelethality>`,
+						prefix: '',
+						meleeValue: `<const>${bastionBreakerSpecifics.abilityDamageCalcBase}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						rangedValue: `${bastionBreakerSpecifics.abilityDamageCalcBase * bastionBreakerSpecifics.abilityDamageCalcRangeModifier}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * bastionBreakerSpecifics.abilityDamageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						suffix: '',
 					},
 				},
 				DamageCalc: {
-					statIconKey: 'lethality',
+					/* statIconKey array for same reason as maw of malmortius */
+					statIconKey: ['lethality'],
 					extendedEquals: {
-						prefix: `<const>`,
-						meleeValue: `${bastionBreakerSpecifics.damageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * 100)}`,
-						rangedValue: `${bastionBreakerSpecifics.damageCalcBase * bastionBreakerSpecifics.damageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * bastionBreakerSpecifics.damageCalcRangeModifier * 100)}`,
-						valueSuffix: '%',
-						suffix: `</scalelethality>`,
+						prefix: '',
+						meleeValue: `<const>${bastionBreakerSpecifics.damageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						rangedValue: `${bastionBreakerSpecifics.damageCalcBase * bastionBreakerSpecifics.damageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * bastionBreakerSpecifics.damageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						suffix: '',
 					},
 				},
 			},
