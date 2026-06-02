@@ -533,18 +533,18 @@ export function replaceGameVariables(
 			});
 
 			return replaceWithName
-				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${(meta?.displayedName ?? variableName)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`
+				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${(meta?.displayedName ?? variableName)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
 					typeof roundReplaced === 'number'
 						? roundVariable(variable[0], roundReplaced)
 						: roundReplaced
 							? Math.round(variable[0]!)
-							: variable[0]}${varValueSuffix}${tagWrapEnd} | %i:rangedactive% ${tagWrapStart}${
+							: variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
 					typeof roundReplaced === 'number'
 						? roundVariable(variable[1], roundReplaced)
 						: roundReplaced
 							? Math.round(variable[1]!)
-							: variable[1]}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
+							: variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 		}
 
 		const baseValue = roundVariable(variable * multiplier);
