@@ -1,6 +1,30 @@
 {
-	"version": "16.1.1",
 	"data": {
+		"stringtable": {
+			"item_keyword_onhit": "%i:OnHit% <OnHit>On-Hit</OnHit>",
+			"item_keyworddefinition_takedown": "<keyword>Takedown</keyword>: Scoring Kills and Assists count as a <keyword>Takedown</keyword>.",
+			"item_cooldown": "%i:cooldown% (@Cooldown@s)",
+			"item_keyworddefinition_stasis": "<keyword>Stasis</keyword>: Become <keyword>Invulnerable</keyword> and <keyword>Untargetable</keyword>. Cannot move for the duration.",
+			"item_keyworddefinition_slow": "<keyword>Slow</keyword>: Move speed is reduced.",
+			"item_keyworddefinition_immobilize": "<keyword>Immobilize</keyword>: Can't control movement. ",
+			"item_keyworddefinition_wounds": "<keyword>Wounds</keyword>: Reduces the effectiveness of Healing and Regeneration effects.",
+			"item_keyworddefinition_ghost": "<keyword>Ghost</keyword>: Ignore collision with other units.",
+			"item_keyworddefinition_energized": "<keyword>Energized</keyword>: Moving and attacking will generate an <keyword>Energized Attack</keyword>.",
+			"item_energized": "<passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.",
+			"item_keyworddefinition_tenacity": "<keyword>Tenacity</keyword>: Reduces the duration of stuns, slows, taunts, fears, silences, blinds, sleep, polymorphs and immobilizes.",
+			"item_keyworddefinition_airborne": "<keyword>Airborne</keyword>: Launched into the air. Can't move, attack, cast abilities, or use item activates for the duration. ",
+			"item_onactivation": "<br><br>%i:activeEffect% <active>ACTIVE</active>",
+			"item_melee_ranged_rules": "Item performance differs for %i:meleeInactive% melee and %i:rangedInactive% ranged users.",
+			"perk_displayname_darkharvest": "Dark Harvest",
+			"perk_subtext_adaptiveforce_max": "an <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword> bonus of up to @MaxAdaptive.-1*0.6@ Attack Damage or @MaxAdaptive@ Ability Power",
+			"perk_shared_desc_guardian": "<i>Guard</i> allies within @SnuggleRange@ units of you, and allies you target with spells for @GuardDuration@s. While <i>Guarding</i>, if you or the ally take more than a small amount of damage over the duration of the <i>Guard</i>, both of you gain a shield for @ShieldDuration@s.",
+			"perk_short_desc_conditioning": "After @MinutesRequired@ min gain +@ArmorBase@ Armor and +@MRBase@ Magic Resist and increase your Armor and Magic Resist by @ExtraResist*100@%.",
+			"perk_long_desc_boneplating": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockBase@-@BlockMax@ (based on level) less damage.<br><br>Duration: @BlockDuration@s<br>Cooldown: @Cooldown@s",
+			"item_2422_name": "Slightly Magical Footwear",
+			"game_item_displayname_2010": "Total Biscuit of Everlasting Will",
+			"perk_tooltip_dynamic_statmodadaptive_0": "<scaleAD>+@f2@ Attack Damage</scaleAD>",
+			"perk_tooltip_dynamic_statmodadaptive_1": "<scaleAP>+@f2@ Ability Power</scaleAP>"
+		},
 		"items": {
 			"1043": {
 				"tooltipShop": [
@@ -1013,7 +1037,7 @@
 					],
 					[
 						"%i:activeEffect% <active>Wraith Step</active> {{ Item_Cooldown }}",
-						"Gain <speed>{{Item_Melee_Ranged_Split_Dynamic_B}}% Move Speed</speed> and <keyword>Ghosting</keyword> for @Duration@ seconds."
+						"Gain <speed>@lolcalcChampRange@ Move Speed</speed> and <keyword>Ghosting</keyword> for @Duration@ seconds."
 					]
 				],
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Ghost }}"
@@ -2416,39 +2440,6 @@
 				}
 			}
 		},
-		"stringtable": {
-			"perk_displayname_darkharvest": "Dark Harvest",
-			"perk_subtext_adaptiveforce_max": "an <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword> bonus of up to @MaxAdaptive.-1*0.6@ Attack Damage or @MaxAdaptive@ Ability Power",
-			"perk_shared_desc_guardian": "<i>Guard</i> allies within @SnuggleRange@ units of you, and allies you target with spells for @GuardDuration@s. While <i>Guarding</i>, if you or the ally take more than a small amount of damage over the duration of the <i>Guard</i>, both of you gain a shield for @ShieldDuration@s.",
-			"perk_short_desc_conditioning": "After @MinutesRequired@ min gain +@ArmorBase@ Armor and +@MRBase@ Magic Resist and increase your Armor and Magic Resist by @ExtraResist*100@%.",
-			"perk_long_desc_boneplating": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockBase@-@BlockMax@ (based on level) less damage.<br><br>Duration: @BlockDuration@s<br>Cooldown: @Cooldown@s",
-			"item_2422_name": "Slightly Magical Footwear",
-			"game_item_displayname_2010": "Total Biscuit of Everlasting Will",
-			"perk_tooltip_dynamic_statmodadaptive_0": "<scaleAD>+@f2@ Attack Damage</scaleAD>",
-			"perk_tooltip_dynamic_statmodadaptive_1": "<scaleAP>+@f2@ Ability Power</scaleAP>",
-			"item_keyword_onhit": "%i:OnHit% <OnHit>On-Hit</OnHit>",
-			"item_cooldown": "%i:cooldown% (@Cooldown@s)",
-			"item_melee_ranged_split": "{{Item_Range_Mod_@ChampRange@}}",
-			"item_energized": "<passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.",
-			"item_onactivation": "<br><br>%i:activeEffect% <active>ACTIVE</active>",
-			"item_support_minion_warning": "This item grants reduced gold from minions if anyone on your team with this item kill excessive numbers of them.",
-			"item_active_named": "%i:activeEffect% <active>Active -</active>",
-			"item_melee_ranged_rules": "Item performance differs for %i:meleeInactive% melee and %i:rangedInactive% ranged users.",
-			"item_range_type_melee": "(%i:meleeActive%@MeleeItemCalcValue@ | %i:rangedInactive%<if0is0>@RangedItemCalcValue@</if0is0>)",
-			"item_range_mod_1": "(%i:meleeActive%@MeleeItemCalcValue@ | %i:rangedInactive%<if0is0>@RangedItemCalcValue@</if0is0>)",
-			"item_range_type_ranged": "(%i:meleeInactive%<if0is0>@MeleeItemCalcValue@</if0is0> | %i:rangedActive%@RangedItemCalcValue@)",
-			"item_range_mod_2": "(%i:meleeInactive%<if0is0>@MeleeItemCalcValue@</if0is0> | %i:rangedActive%@RangedItemCalcValue@)",
-			"item_keyworddefinition_takedown": "<keyword>Takedown</keyword>: Scoring Kills and Assists count as a <keyword>Takedown</keyword>.",
-			"item_keyworddefinition_stasis": "<keyword>Stasis</keyword>: Become <keyword>Invulnerable</keyword> and <keyword>Untargetable</keyword>. Cannot move for the duration.",
-			"item_keyworddefinition_slow": "<keyword>Slow</keyword>: Move speed is reduced.",
-			"item_keyworddefinition_immobilize": "<keyword>Immobilize</keyword>: Can't control movement. ",
-			"item_keyworddefinition_ghost": "<keyword>Ghost</keyword>: Ignore collision with other units.",
-			"item_keyworddefinition_energized": "<keyword>Energized</keyword>: Moving and attacking will generate an <keyword>Energized Attack</keyword>.",
-			"item_keyworddefinition_tenacity": "<keyword>Tenacity</keyword>: Reduces the duration of stuns, slows, taunts, fears, silences, blinds, sleep, polymorphs and immobilizes.",
-			"item_keyworddefinition_airborne": "<keyword>Airborne</keyword>: Launched into the air. Can't move, attack, cast abilities, or use item activates for the duration. ",
-			"item_keyworddefinition_wounds": "<keyword>Wounds</keyword>: Reduces the effectiveness of Healing and Regeneration effects.",
-			"item_melee_ranged_split_dynamic_b": "{{Item_Range_Mod_@ChampRange@_Dynamic_B}}"
-		},
 		"dragons": {
 			"Cloud": {
 				"stack": "+@Spell.SRX_DragonBuffCloud:MSAmountPerStack*100@% Out Of Combat Move Speed and +@Spell.SRX_DragonBuffCloud:SRAmountPerStack*100@% Slow Resistance",
@@ -2499,5 +2490,6 @@
 				"Discounted control wards"
 			]
 		}
-	}
+	},
+	"version": "16.11.1"
 }

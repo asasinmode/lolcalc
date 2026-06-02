@@ -62,20 +62,15 @@ const debug = {
 const textFilePath = path.join(import.meta.dirname, '../packages/data/files/text.json');
 let textData = {
 	version: latestVersion,
-	data: {
-		items: {},
-		runes: {
-			paths: {},
-		},
-		stringtable: {},
-	},
+	data: {} as any,
 } as typeof import('../packages/data/files/text.json');
 
 try {
 	await fs.access(textFilePath);
 	textData = JSON.parse(await fs.readFile(textFilePath, 'utf8'));
-	textData.data.stringtable ||= {} as any;
-} catch { }
+	textData.data.stringtable ??= {} as any;
+	textData.version ??= latestVersion;
+} catch {}
 
 const championFilePath = path.join(import.meta.dirname, '../packages/data/files/champion.json');
 let championData: typeof import('../packages/data/files/champion.json') | undefined;
@@ -665,7 +660,7 @@ try {
 	miscData = JSON.parse(await fs.readFile(miscFilePath, 'utf8'));
 } catch {}
 
-if (!miscData || miscData?.version !== latestVersion) {
+if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuests || !textData.data.dragons) {
 	console.log('misc data not present or outdated, fetching...');
 
 	const sharedData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/shared.cdtb.bin.json`, 'game/shared.cdtb.bin.json');
@@ -1073,6 +1068,8 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 	const rawExtra = extraToEnd.slice(0, extraEndIndex)
 		.replace(/\{\{ ?Item_Passive_List ?\}\}/g, '')
 		.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@')
+		/* exclusively for youmuu that seems to be done kind of silly */
+		.replace(/\{\{ ?Item_Melee_Ranged_Split_Dynamic_B ?\}\}%/g, '@lolcalcChampRange@')
 		.replaceAll(':</passive>', '</passive>')
 		.replaceAll('</section><section>', '<br><br>');
 
