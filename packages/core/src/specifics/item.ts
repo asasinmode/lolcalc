@@ -361,6 +361,7 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'MaxStacksOmnivamp',
 					multiplier: 100,
 					isPercentage: true,
+					resultsIsPercentage: true,
 				},
 				f1: {
 					displayedName: 'BonusAPFromHP',
@@ -1034,6 +1035,8 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				lolcalcChampRange: {
 					isPercentage: true,
+					displayedName: 'ActiveMoveSpeed',
+					resultsIsPercentage: true,
 				},
 			},
 			uninteresting: ['OOCMS', 'Duration'],
@@ -1377,6 +1380,7 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 					displayedName: 'CurrentHealthPercent',
 					isPercentage: true,
+					resultsIsPercentage: true,
 					multiplier: 100,
 				},
 				CurrentHealthDamage: {
@@ -1384,7 +1388,7 @@ export const ITEM_SPECIFICS = {
 					isAdditional: true,
 				},
 			},
-			uninteresting: ['f4', 'lolcalcChampRange', 'MoveSpeedMod', 'MoveSpeedDuration'],
+			uninteresting: ['f4', 'MoveSpeedMod', 'MoveSpeedDuration'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
@@ -2123,19 +2127,19 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				f1: [],
-				DamageIncreasePercent: [],
+				DamageIncrease: [],
 			},
 			calculate(_self, target) {
 				const { MaxBonusDamagePercent, MaxBonusHealth } = ITEMS_BY_NAME.ldr?.dataValues ?? {};
 				return {
 					f1: { value: 0 },
-					DamageIncreasePercent: {
+					DamageIncrease: {
 						value: MaxBonusDamagePercent * Math.min(target?.stats.value.bonus.hp ?? 0, MaxBonusHealth) / MaxBonusHealth * 100,
 					},
 				};
 			},
 			meta: {
-				DamageIncreasePercent: {
+				DamageIncrease: {
 					isAdditional: true,
 					resultsIsPercentage: true,
 				},
