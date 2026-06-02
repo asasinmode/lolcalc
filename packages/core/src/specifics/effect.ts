@@ -347,6 +347,21 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 	}),
+	[EFFECT_OBJECT_NAME.malignanceHatefog]: defineEffectSpecific<[hatefogged: number]>({
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.malignance),
+		label: 'Hatefog',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'malignance'>).hatefog) {
+				return [1];
+			}
+		},
+	}),
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: defineEffectSpecific<[isCursed: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
 		label: 'Cursed touch',

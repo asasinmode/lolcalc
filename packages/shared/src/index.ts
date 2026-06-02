@@ -459,6 +459,7 @@ export const EFFECT_OBJECT_NAME = {
 	zekesConvergenceFrostfireTempest: '3050_EnemyBuff',
 	celestialOppositionBlessingShattered: 'lolcalc3869BlessingShattered',
 	randuinsHumility: 'lolcalc3143HumilitySlow',
+	malignanceHatefog: '3118VisualDebuff',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
