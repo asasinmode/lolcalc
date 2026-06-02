@@ -91,7 +91,7 @@ const grievousWoundItemSpecific = {
 	},
 	variables: {
 		uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'] as const,
-	}
+	},
 } satisfies IItemSpecific<typeof GRIEVOUS_WOUND_ITEMS[number]>;
 
 /** specific items' helpers, utils and calculations */
@@ -2175,6 +2175,34 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f5', 'f6', 'TakedownWindow'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.randuinsOmen]: {
+		internalDataProperties: ['humility'],
+		setupData(self) {
+			self.internalItemData.value.humility = clamp(0, self.internalItemData.value.humility ?? 0, 1);
+			return { humility: 0 };
+		},
+		variables: defineVariables({
+			known: {
+				'f2': [],
+				'damage reduced from crit': [],
+			},
+			calculate() {
+				return {
+					'f2': { value: 0 },
+					// TODO
+					'damage reduced from crit': {
+						value: 123,
+					},
+				};
+			},
+			meta: {
+				'damage reduced from crit': {
+					isAdditional: true,
+				},
+			},
+			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;

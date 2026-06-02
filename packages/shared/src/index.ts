@@ -360,6 +360,8 @@ export const ITEM_NAME_TO_ID = {
 	nashorsTooth: '3115',
 	malignance: '3118',
 	cryptbloom: '3137',
+	randuinsOmen: '3143',
+	rocketbelt: '3152',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
