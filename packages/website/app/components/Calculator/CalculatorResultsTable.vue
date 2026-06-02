@@ -280,7 +280,7 @@ function computeSectionRowColumn(
 	row: IDamageResultTableSection['rows'][number],
 	column: IDamageResultTableColumn,
 ): IComputedSectionRowColumn {
-	const source = column[flipResults.value ? '_computedTarget' : sourceProperty.value];
+	const source = column[flipResults.value ? '_computedTarget' : '_computedSource'];
 	const target = column[targetProperty.value];
 	const rv: IComputedSectionRowColumn = {
 		columnId: column.id,
@@ -685,11 +685,17 @@ function recalculateAllColumns() {
 }
 
 function recalculateColumn(column: IDamageResultTableColumn) {
+	if (column.source) {
+		column._computedSource = column.source.clone({}, false);
+		column._computedSource.champion.value = column.source.champion.value;
+	}
+
 	if (column.target) {
 		column._computedTarget = column.target.clone({}, false);
 		column._computedTarget.champion.value = column.target.champion.value;
 		if (column.source) {
 			applyEffectsFromTo(column.source, column._computedTarget);
+			column._computedSource!.calculationDamageTarget.value = column._computedTarget;
 		}
 	}
 
@@ -1066,8 +1072,8 @@ function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption 
 		}
 	}
 
-	const itemOptions = damageSectionOptions.value.at(-1)!;
-	rv.itemOptionsIndexes = damageSource && damageSectionOptions.value.at(-1)?.type === 'item'
+	const itemOptions = damageSectionOptions.value.findLast(option => option.type === 'item');
+	rv.itemOptionsIndexes = damageSource && itemOptions
 		? damageSource!.items.value
 			.map(item => item ? itemOptions.abilities.findIndex(ability => ability.id.id === item.id) : undefined)
 			.filter(index => index !== undefined && ~index) as number[]
@@ -1089,8 +1095,8 @@ async function addColumnAbilities(columnIndex: number) {
 
 function addColumnItems(columnIndex: number) {
 	const { itemOptionsIndexes } = columnAddableOptions.value[columnIndex]!;
-	const option = damageSectionOptions.value.at(-1);
-	if (option?.type === 'item') {
+	const option = damageSectionOptions.value.findLast(option => option.type === 'item');
+	if (option) {
 		/* `addResultsSection` causes the underlying ability to disappear, which would make indexes not match so first collect the relevant abilities then add them */
 		const abilities = [];
 		for (let i = itemOptionsIndexes.length - 1; i >= 0; i--) {
