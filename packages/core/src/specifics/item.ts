@@ -1016,6 +1016,25 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { haunt: number; wStep: number }) {
 			return [internalData.haunt, internalData.wStep];
 		},
+		variables: defineVariables({
+			known: {
+				lolcalcChampRange: [],
+			},
+			calculate() {
+				const { MeleeItemCalcValueB, RangedItemCalcValueB } = ITEMS_BY_NAME.youmuu?.dataValues ?? {};
+				return {
+					lolcalcChampRange: {
+						value: [MeleeItemCalcValueB, RangedItemCalcValueB],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					isPercentage: true,
+				},
+			},
+			uninteresting: ['OOCMS', 'Duration'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.forceOfNature]: {
 		internalDataProperties: ['steadfast'],
