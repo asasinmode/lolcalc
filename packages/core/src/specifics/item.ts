@@ -2000,7 +2000,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect'],
 		}),
-		textPreplace(value) {
+		preplaceTextInventory(value) {
 			return value.replace('@HealMin@ - @HealMax@', '@lolcalcHeal@');
 		},
 	},
@@ -2044,10 +2044,10 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, string, IChampionId, 'item'>;
 	/**
-	 * called in `scripts/updateData`, does additional replacing of the text before any attempts at resolving variables
+	 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)
 	 * ATM done only for textShop and textInventory, used for redemption, which by default shows `\@HealMin\@ - \@HealMax\@` that depends on ally level. Calculator gives an option to set ally's level to a concrete value so we should display the heal for selected ally level
 	 */
-	textPreplace?: (value: string) => string;
+	preplaceTextInventory?: (value: string) => string;
 	[key: string]: any;
 };
 

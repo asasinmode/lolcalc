@@ -1133,7 +1133,7 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
  */
 function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	const specific = (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics];
-	const textPreplace = specific?.textPreplace;
+	const preplaceTextInventory = specific?.preplaceTextInventory;
 
 	/**
 		* `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
@@ -1164,8 +1164,10 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	const subtitleRightEndIndex = textShop.indexOf('</subtitleRight>');
 	const subtitleRight = textShop.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
 
-	const tooltipShop = itemDescriptionText(textPreplace ? textPreplace(textShop) : textShop, '</section><section>');
-	let tooltipInventory = textInventory ? itemDescriptionText(textPreplace ? textPreplace(textInventory) : textInventory, '<mainText><section>') : undefined;
+	const tooltipShop = itemDescriptionText(textShop, '</section><section>');
+	let tooltipInventory = preplaceTextInventory
+		? itemDescriptionText(preplaceTextInventory(textShop), '</section><section>')
+		: textInventory ? itemDescriptionText(textInventory, '<mainText><section>') : undefined;
 
 	if (tooltipShop && tooltipInventory?.every((extra, extraIndex) => extra.every((line, lineIndex) =>
 		tooltipShop[extraIndex]?.[lineIndex] === line,

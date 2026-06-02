@@ -833,6 +833,12 @@
 				"tooltipShop": [
 					[
 						"%i:activeEffect% <active>Intervention</active> {{ Item_Cooldown }}",
+						"Restore <healing>@HealMin@ - @HealMax@ (ally %i:scaleLevel%) Health</healing> to allied units and deal <trueDamage>@DamageToChampions*100@% max Health true damage</trueDamage> to enemy champions after 2.5 seconds."
+					]
+				],
+				"tooltipInventory": [
+					[
+						"%i:activeEffect% <active>Intervention</active> {{ Item_Cooldown }}",
 						"Restore <healing>@lolcalcHeal@ (ally %i:scaleLevel%) Health</healing> to allied units and deal <trueDamage>@DamageToChampions*100@% max Health true damage</trueDamage> to enemy champions after 2.5 seconds."
 					]
 				],
