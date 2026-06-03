@@ -2320,6 +2320,18 @@ export const ITEM_SPECIFICS = {
 					f5: { value: 0 },
 				};
 			},
+			meta: {
+				ShieldAmountCalc: {
+					statIconKey: ['level', 'hp'],
+					extendedEquals: `<const>${ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]?.mLevel1Value} - ${
+						ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mLevel1Value!
+						+ (
+							ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mBonusPerLevelAtAndAfter
+							* (18 + 1 - ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mLevel)
+						)
+					}%i:${STAT_ICON.level}%</const> <scalehealth>+ ${Math.round(((ITEMS_BY_NAME.chainlacedCrushers?.dataValues as any)[ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
+				},
+			},
 			uninteresting: ['f5', 'ShieldDuration'],
 		}),
 	},
