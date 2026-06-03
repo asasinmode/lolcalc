@@ -317,7 +317,7 @@ export const ITEM_NAME_TO_ID = {
 	berserkerGreaves: '3006',
 	gunmetalGreaves: '3172',
 	chainlacedCrushers: '3173',
-	armoredAdvanced: '3174',
+	armoredAdvance: '3174',
 	spellslingersShoes: '3175',
 	gluttonousGreaves: '3008',
 	immortalPath: '3168',

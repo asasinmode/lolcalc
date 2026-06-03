@@ -491,7 +491,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			ITEM_NAME_TO_ID.crimsonLucidity,
 			ITEM_NAME_TO_ID.gunmetalGreaves,
 			ITEM_NAME_TO_ID.chainlacedCrushers,
-			ITEM_NAME_TO_ID.armoredAdvanced,
+			ITEM_NAME_TO_ID.armoredAdvance,
 			ITEM_NAME_TO_ID.spellslingersShoes,
 			ITEM_NAME_TO_ID.foreverForward,
 			ITEM_NAME_TO_ID.gluttonousGreaves,

@@ -2356,6 +2356,54 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2', 'ImmobilizingAbilityAH', 'DamageAmp', 'DamageAmpDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.forbiddenIdol]: {
+		variables: defineVariables({
+			known: {
+				f4: [],
+			},
+			calculate(self) {
+				return {
+					f4: {
+						value: self.stats.value.total.healShieldPower * 100,
+					},
+				};
+			},
+			uninteresting: ['f4'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.armoredAdvance]: {
+		variables: defineVariables({
+			known: {
+				f5: [],
+				AttackDamageReduced: [],
+			},
+			calculate() {
+				return {
+					f5: { value: 0 },
+					// TODO
+					AttackDamageReduced: { value: 123 },
+				};
+			},
+			meta: {
+				ShieldAmountCalc: {
+					// TODO check if is reduced by shield reaver
+					type: VariableType.shield,
+					statIconKey: ['level', 'hp'],
+					extendedEquals: `<const>${ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]?.mLevel1Value} - ${
+						ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mLevel1Value!
+						+ (
+							ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mBonusPerLevelAtAndAfter
+							* (18 + 1 - ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mLevel)
+						)
+					}%i:${STAT_ICON.level}%</const> <scalehealth>+ ${Math.round(((ITEMS_BY_NAME.armoredAdvance?.dataValues as any)[ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
+				},
+				AttackDamageReduced: {
+					isAdditional: true,
+				},
+			},
+			uninteresting: ['f5', 'ShieldDuration', 'DamageReduction'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
