@@ -630,7 +630,10 @@ export const VARIABLE_CALCULATION_FNS = {
 			return undefined;
 		});
 
-		if (values.length === 1) {
+		const hasMMultiplier = ('mMultiplier' in variable);
+		const hasMRangedMultiplier = ('mRangedMultiplier' in variable);
+
+		if (values.length === 1 && !hasMMultiplier && !hasMRangedMultiplier) {
 			rv.value = values[0];
 			return rv;
 		}
@@ -641,10 +644,10 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)!;
 
-		if ('mMultiplier' in variable) {
+		if (hasMMultiplier) {
 			const multiplier = resolveMMultiplier(variable.mMultiplier as any, whole, meta) ?? 1;
 			rv.value *= multiplier;
-		} else if ('mRangedMultiplier' in variable) {
+		} else if (hasMRangedMultiplier) {
 			rv.isMeleeRanged = true;
 			const multiplier = resolveMMultiplier(variable.mRangedMultiplier as any, whole, meta);
 
