@@ -89,6 +89,10 @@
 			"description": "This unit takes increased magic damage.",
 			"dataKey": "Items/3118/Spells/3118VisualDebuff"
 		},
+		"4005Debuff": {
+			"description": "This unit has been <status>Immobilized</status> recently and is now vulnerable, taking increased damage from all sources.",
+			"dataKey": "Items/4005/Spells/4005Debuff"
+		},
 		"AmumuPDebuff": {
 			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
 			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"

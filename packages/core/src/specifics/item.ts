@@ -2323,6 +2323,27 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f5', 'ShieldDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.imperialMandate]: {
+		internalDataProperties: ['command'],
+		setupData(self) {
+			self.internalItemData.value.command = clamp(0, self.internalItemData.value.command ?? 0, 1);
+			return { command: 0 };
+		},
+		imgActive(internalData: { command: number }) {
+			return internalData.command;
+		},
+		variables: defineVariables({
+			known: {
+				f2: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+				};
+			},
+			uninteresting: ['f2', 'ImmobilizingAbilityAH', 'DamageAmp', 'DamageAmpDuration'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
