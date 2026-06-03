@@ -681,11 +681,18 @@ export const VARIABLE_CALCULATION_FNS = {
 		};
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, self) {
-		let rv = variable.mLevel1Value;
+		let rv: number | undefined = variable.mLevel1Value;
 		if ('mBreakpoints' in variable) {
-			for (const { mAdditionalBonusAtThisLevel, mLevel } of variable.mBreakpoints) {
+			for (const { mAdditionalBonusAtThisLevel, mBonusPerLevelAtAndAfter, mLevel } of variable.mBreakpoints) {
 				if ((self?.level.value ?? 1) >= mLevel) {
-					rv += mAdditionalBonusAtThisLevel;
+					if (mBonusPerLevelAtAndAfter || mAdditionalBonusAtThisLevel) {
+						rv! += mBonusPerLevelAtAndAfter === undefined
+							? mAdditionalBonusAtThisLevel!
+							: (mBonusPerLevelAtAndAfter * ((self?.level.value ?? 1) + 1 - mLevel));
+					} else {
+						console.warn(`[variables/game fn ByCharLevelBreakpointsCalculationPart] unknown mBreakpoints structure`, variable);
+						rv = undefined;
+					}
 				} else {
 					break;
 				}
@@ -803,7 +810,8 @@ interface IGameVariablesByType {
 		mLevel1Value: number;
 		mBreakpoints: {
 			mLevel: number;
-			mAdditionalBonusAtThisLevel: number;
+			mAdditionalBonusAtThisLevel?: number;
+			mBonusPerLevelAtAndAfter?: number;
 		}[];
 		__type: string;
 	} | {
