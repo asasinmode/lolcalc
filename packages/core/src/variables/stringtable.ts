@@ -50,7 +50,7 @@ export function replaceStringtableVariables(
 					}
 
 					return `{{${name}}}`;
-					// TODO possibly have to handle array values too
+					// TODO possibly have to handle array values too, forgot where this todo came from
 				} else if (typeof subVariableValue.value === 'number') {
 					variableName = `${variableName.slice(0, subVariableStartIndex - 1)}_${subVariableValue.value}`;
 				}

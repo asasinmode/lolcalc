@@ -362,6 +362,11 @@ export const ITEM_NAME_TO_ID = {
 	cryptbloom: '3137',
 	randuinsOmen: '3143',
 	rocketbelt: '3152',
+	imperialMandate: '4005',
+	forbiddenIdol: '3114',
+	umbralGlaive: '3179',
+	hullbreaker: '3181',
+	solariLocket: '3190',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

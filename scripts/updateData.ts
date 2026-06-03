@@ -21,6 +21,7 @@ import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
+import { xxh3 } from '@node-rs/xxhash';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 
@@ -1328,7 +1329,7 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceStringtableVariables(value, stringtable, { values: variables?.variableValueParameters.dynamicVariables?.known }, false);
 
 	if (stringtableVariables.size && stringtableVariableSaveUnder) {
-		stringtableVariableSaveUnder.stringtable ||= {};
+		stringtableVariableSaveUnder.stringtable ??= {};
 	}
 
 	for (const [stringtableKey, value] of stringtableVariables.entries()) {
@@ -1341,6 +1342,38 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	// so when implementing trying hash variable either make some workaround with checking if 9 match or find the cause of the problem
 	// same for Hecarim in extended variables has `spell_listtype_hecarimw: resist amount`, which hashes to `ad503eb14e` but in stringtable there's `2d503eb14e`
 	if (unknownStringtableVariables.size) {
+		let anyUnknownResolved = false;
+		const entries = unknownStringtableVariables.entries();
+		for (const [variableName, resolvedNames] of entries) {
+			let resolvedValue: [hashedKey: string, value: string, resolvedName: string] | undefined;
+			for (const resolvedName of resolvedNames.values()) {
+				const hash = hashXxh3(resolvedName);
+				const stringtableValue = stringtable[hash];
+
+				if (stringtableValue) {
+					anyUnknownResolved = true;
+					/* not sure if it can ever happen but unknown variables store a set of resolved names so idk */
+					if (resolvedValue && resolvedValue[1] !== stringtableValue) {
+						console.warn(`[debugStringVariables ${variableDebug.key}] unknown stringtable variable had multiple entries and their resolved values don't match`, { variableName, resolvedNames, resolvedValue, stringtableValue });
+					}
+					resolvedValue = [hash, stringtableValue, resolvedName];
+					anyUnknownResolved ||= true;
+				}
+			}
+			if (resolvedValue) {
+				/* save on global stringtable for reuse in `updateData` (replaceStringtableVariables gets variables from this) */
+				stringtable[resolvedValue[2]] = resolvedValue[1];
+				/* save under target stringtable for use in rest of the code */
+				((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[resolvedValue[2]] = resolvedValue[1];
+				((stringtableVariableSaveUnder ?? textData.data).stringtable as any).__resolvedHashes ??= {};
+				((stringtableVariableSaveUnder ?? textData.data).stringtable as any).__resolvedHashes[resolvedValue[0]] = variableName;
+				unknownStringtableVariables.delete(variableName);
+				anyUnknownResolved ||= true;
+			}
+		}
+		if (anyUnknownResolved) {
+			return debugStringVariables(value, variableDebug);
+		}
 		debug[category].stringtableVariables.set(key, unknownStringtableVariables);
 	}
 
@@ -2001,14 +2034,12 @@ function hashFnv1a(value: string): string {
 	return `{${rv}}`;
 }
 
-// TODO champion variables hash resolving possibly
-// import { xxh3 } from '@node-rs/xxhash';
-// function hashVariableName(variable: string, bits = 32) {
-// 	const hash = xxh3.Xxh3.withSeed(0n).update(variable.toLowerCase()).digest();
-//
-// 	const mask = (1n << BigInt(bits)) - 1n;
-// 	const value = hash & mask;
-//
-// 	const hexLen = bits / 4;
-// 	return `{${value.toString(16).padStart(hexLen, '0')}}`;
-// }
+function hashXxh3(variable: string, bits = 40) {
+	const hash = xxh3.Xxh3.withSeed(0n).update(variable.toLowerCase()).digest();
+
+	const mask = (1n << BigInt(bits)) - 1n;
+	const value = hash & mask;
+
+	const hexLen = bits / 4;
+	return `{${value.toString(16).padStart(hexLen, '0')}}`;
+}

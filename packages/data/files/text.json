@@ -14,6 +14,10 @@
 			"item_keyworddefinition_tenacity": "<keyword>Tenacity</keyword>: Reduces the duration of stuns, slows, taunts, fears, silences, blinds, sleep, polymorphs and immobilizes.",
 			"item_keyworddefinition_airborne": "<keyword>Airborne</keyword>: Launched into the air. Can't move, attack, cast abilities, or use item activates for the duration. ",
 			"item_onactivation": "<br><br>%i:activeEffect% <active>ACTIVE</active>",
+			"item_keyworddefinition_vulnerable": "<keyword>Vulnerable</keyword>: Take percent increased damage from all sources.",
+			"__resolvedHashes": {
+				"{3139cd2bac}": "Item_KeywordDefinition_Vulnerable"
+			},
 			"item_melee_ranged_rules": "Item performance differs for %i:meleeInactive% melee and %i:rangedInactive% ranged users.",
 			"perk_displayname_darkharvest": "Dark Harvest",
 			"perk_subtext_adaptiveforce_max": "an <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword> bonus of up to @MaxAdaptive.-1*0.6@ Attack Damage or @MaxAdaptive@ Ability Power",
