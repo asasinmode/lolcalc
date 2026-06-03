@@ -1727,7 +1727,7 @@
 					],
 					"mDisplayAsPercent": true,
 					"mRangedMultiplier": {
-						"mDataValue": "{ca6deae2}"
+						"mDataValue": "RangedAttackSpeedMultiplier"
 					}
 				}
 			},
@@ -1735,7 +1735,8 @@
 				"{f64062da}"
 			],
 			"__replacedVariables": {
-				"{eb8d750f}": "MeleeAuraAttackSpeed"
+				"{eb8d750f}": "MeleeAuraAttackSpeed",
+				"{ca6deae2}": "RangedAttackSpeedMultiplier"
 			},
 			"categories": {
 				"tank": true,
@@ -2259,7 +2260,7 @@
 					],
 					"mPrecision": 1,
 					"mRangedMultiplier": {
-						"mDataValue": "{1eea3407}"
+						"mDataValue": "StackRangedMultiplier"
 					}
 				}
 			},
@@ -2267,7 +2268,8 @@
 				"{aba3fe3b}"
 			],
 			"__replacedVariables": {
-				"{52d90ad0}": "CritPerStackMelee"
+				"{52d90ad0}": "CritPerStackMelee",
+				"{1eea3407}": "StackRangedMultiplier"
 			},
 			"categories": {
 				"marksman": true

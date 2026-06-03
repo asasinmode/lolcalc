@@ -622,8 +622,8 @@ export const VARIABLE_CALCULATION_FNS = {
 			const resolveFn = variableResolveFn(part);
 			if (resolveFn) {
 				const resolved = variableResolveFn(part)?.(part, whole, self, meta);
-				if (resolved) {
-					rv.roundReplaced ||= resolved.roundReplaced;
+				if (resolved?.roundReplaced) {
+					rv.roundReplaced = resolved.roundReplaced;
 				}
 				return resolved?.value as number;
 			}
@@ -744,7 +744,7 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	/** calculates the value between `mStartValue` and `mEndValue` based on damage source's level. Formula taken from [Protoplasm Harness' wiki](https://wiki.leagueoflegends.com/en-us/Protoplasm_Harness) */
 	ByCharLevelInterpolationCalculationPart(variable: IGameVariablesByType['ByCharLevelInterpolationCalculationPart'], _whole, self) {
-		const { mStartValue, mEndValue } = variable;
+		const { mStartValue = 0, mEndValue } = variable;
 		return {
 			value: mStartValue + (mEndValue - mStartValue) / 17 * ((self?.level.value ?? 1) - 1),
 		};
@@ -794,6 +794,38 @@ export const VARIABLE_CALCULATION_FNS = {
 					value: mNumber,
 				};
 			}
+		}
+	},
+	SumOfSubPartsCalculationPart(variable: IGameVariablesByType['SumOfSubPartsCalculationPart'], whole, self, meta) {
+		const rv: IVariableValueResult = { };
+		const values = variable.mSubparts.map((part) => {
+			const resolveFn = variableResolveFn(part);
+			if (resolveFn) {
+				const resolved = variableResolveFn(part)?.(part, whole, self, meta);
+				if (resolved?.roundReplaced) {
+					rv.roundReplaced = resolved.roundReplaced;
+				}
+				return resolved?.value as number;
+			}
+			return undefined;
+		});
+
+		if (values.some(v => typeof v !== 'number')) {
+			return undefined;
+		}
+
+		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)!;
+
+		return rv;
+	},
+	ProductOfSubPartsCalculationPart(variable: IGameVariablesByType['ProductOfSubPartsCalculationPart'], whole, self, meta) {
+		const rv1 = variableResolveFn(variable.mPart1)?.(variable.mPart1, whole, self, meta);
+		const rv2 = variableResolveFn(variable.mPart2)?.(variable.mPart2, whole, self, meta);
+		if (rv1 && rv2 && typeof rv1.value === 'number' && typeof rv2.value === 'number') {
+			/* at the moment used only for redemption, if any meta or more variable rv information is needed/appears for other variables, adjust */
+			return {
+				value: rv1.value * rv2.value,
+			};
 		}
 	},
 } satisfies IHypotheticalVariableCalculationFns;
@@ -854,6 +886,15 @@ interface IGameVariablesByType {
 		};
 		__type: string;
 	};
+	SumOfSubPartsCalculationPart: {
+		mSubparts: IGameVariablesByType[keyof IGameVariablesByType][];
+		__type: string;
+	};
+	ProductOfSubPartsCalculationPart: {
+		mPart1: IGameVariablesByType[keyof IGameVariablesByType];
+		mPart2: IGameVariablesByType[keyof IGameVariablesByType];
+		__type: string;
+	};
 }
 
 function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
@@ -863,7 +904,24 @@ function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[k
 		return VARIABLE_CALCULATION_FNS.mFormulaParts;
 	} else if ('mModifiedGameCalculation' in variable) {
 		return VARIABLE_CALCULATION_FNS.mModifiedGameCalculation;
+	} else if ('mSubparts' in variable) {
+		return VARIABLE_CALCULATION_FNS.SumOfSubPartsCalculationPart;
+	} else if ('mPart1' in variable && 'mPart2' in variable) {
+		return VARIABLE_CALCULATION_FNS.ProductOfSubPartsCalculationPart;
 	}
+
+	const keys = Object.keys(variable);
+	if (keys.length === 1) {
+		const [key] = keys;
+		if (key === 'mNumber') {
+			return VARIABLE_CALCULATION_FNS.NumberCalculationPart;
+		} else if (key === 'mDataValue') {
+			return VARIABLE_CALCULATION_FNS.NamedDataValueCalculationPart;
+		} else if (key === 'mEndValue') {
+			return VARIABLE_CALCULATION_FNS.ByCharLevelInterpolationCalculationPart;
+		}
+	}
+
 	console.warn('[variableResolveFn] unknown variable type', variable);
 	return undefined;
 }

@@ -2151,36 +2151,28 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				f1: [],
-				lolcalcHeal: [],
+				HealAmount: [],
 			},
 			calculate(self) {
-				const { HealMin, HealMax } = ITEMS_BY_NAME.redemption?.dataValues ?? {};
-
 				return {
 					f1: { value: 0 },
-					lolcalcHeal: {
-						value: VARIABLE_CALCULATION_FNS.ByCharLevelInterpolationCalculationPart(
-							{
-								mStartValue: HealMin,
-								mEndValue: HealMax,
-							} as any,
-							{},
-							{ level: { value: Math.min(self.internalItemData.value.aLevel, 18) } } as DamageSource,
-						).value,
+					HealAmount: {
+						value: itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }).value as number,
 					},
 				};
 			},
 			meta: {
-				lolcalcHeal: {
+				/* 99% sure this goes above the declared `350` for toplaners with lvl 19/20 */
+				HealAmount: {
 					type: VariableType.heal,
-					displayedName: 'Heal',
-					extendedEquals: `<const>${ITEMS_BY_NAME.redemption?.dataValues.HealMin} - ${ITEMS_BY_NAME.redemption?.dataValues.HealMax}</const>`,
+					displayedName: 'HealAmount',
+					extendedEquals: `<const>${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: 1 } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: 20 } } as DamageSource }).value as number)}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect', 'HealMin', 'HealMax'],
 		}),
 		preplaceTextInventory(value) {
-			return value.replace('@HealMin@ - @HealMax@', '@lolcalcHeal@');
+			return value.replace('@HealMin@ - @HealMax@', '@HealAmount@');
 		},
 	},
 	[ITEM_NAME_TO_ID.ldr]: {
@@ -2480,6 +2472,41 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'f2'],
 		}),
+	},
+	[ITEM_NAME_TO_ID.solariLocket]: {
+		MIN_ALLY_LEVEL: 1,
+		MAX_ALLY_LEVEL: 20,
+		internalDataProperties: ['aLevel'],
+		setupData(self) {
+			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
+			return { aLevel: 0 };
+		},
+		variables: defineVariables({
+			known: {
+				f3: [],
+				ShieldAmount: [],
+			},
+			calculate(self) {
+				return {
+					f3: { value: 0 },
+					ShieldAmount: {
+						value: itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }).value as number,
+					},
+				};
+			},
+			meta: {
+				/* 99% sure this goes above the declared `360` for toplaners with lvl 19/20 */
+				ShieldAmount: {
+					type: VariableType.shield,
+					displayedName: 'ShieldAmount',
+					extendedEquals: `<const>${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: 1 } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: 20 } } as DamageSource }).value}</const>`,
+				},
+			},
+			uninteresting: ['f3', 'ShieldDuration', 'DiminishedTimer', 'DiminishedEffectMulitplier', 'ShieldMinTOOLTIP', 'ShieldMaxTOOLTIP'],
+		}),
+		preplaceTextInventory(value) {
+			return value.replace('@ShieldMinTOOLTIP@ - @ShieldMaxTOOLTIP@', '@ShieldAmount@');
+		},
 	},
 } satisfies IHypotheticalItemSpecifics;
 
