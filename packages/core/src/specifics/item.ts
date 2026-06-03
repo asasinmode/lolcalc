@@ -86,6 +86,18 @@ const mawOfMalmortiusSpecific = {
 	rangedModifier: (ITEMS_BY_NAME.mawOfMalmortius?.dataValues as any)[ITEMS_BY_NAME.mawOfMalmortius?.itemCalculations.RangedItemCalcValue.mMultiplier.mDataValue!],
 };
 
+const hullbreakerSpecifics = {
+	nonStructureAdRatio: (ITEMS_BY_NAME.hullbreaker?.dataValues as any)[ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamage.mFormulaParts[0]!.mDataValue!],
+	nonStructureHpRatio: (ITEMS_BY_NAME.hullbreaker?.dataValues as any)[ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamage.mFormulaParts[1]!.mDataValue!],
+	nonStructureRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamage.mRangedMultiplier.mNumber,
+	structureAdRatio: (ITEMS_BY_NAME.hullbreaker?.dataValues as any)[ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamageVSStructures.mFormulaParts[0]!.mDataValue!],
+	structureHpRatio: (ITEMS_BY_NAME.hullbreaker?.dataValues as any)[ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamageVSStructures.mFormulaParts[1]!.mDataValue!],
+	structureRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamageVSStructures.mRangedMultiplier.mNumber,
+	meleeBonusMinionResistsLvl1: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value,
+	meleeBonusMinionResistsLvl18: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value + ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mBonusPerLevelAtAndAfter! * (18 + 1 - ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mLevel!),
+	bonusMinionResistsRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mRangedMultiplier.mNumber,
+};
+
 const grievousWoundItemSpecific = {
 	internalDataProperties: ['gWounds'],
 	setupData(self) {
@@ -2402,6 +2414,71 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f5', 'ShieldDuration', 'DamageReduction'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.umbralGlaive]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				ProcDamage: {
+					statIconKey: 'lethality',
+					extendedEquals: `<const>${ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[0]!.mNumber}</const> <scalelethality>+ ${Math.round((ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}%</scalelethality>`,
+				},
+			},
+			uninteresting: ['f1', 'OutOfVisionDuration', 'Effect2Amount' as any, 'TotalWardDamage'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.hullbreaker]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+				};
+			},
+			meta: {
+				MaxStackDamage: {
+					type: VariableType.physical,
+					statIconKey: ['attackDamage', 'hp'],
+					extendedEquals: {
+						prefix: '',
+						meleeValue: `<scalead>${Math.round(hullbreakerSpecifics.nonStructureAdRatio * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scalehealth>+ ${Math.round(hullbreakerSpecifics.nonStructureHpRatio * 100)}%%i:${STAT_ICON.hp}%</scalehealth>`,
+						rangedValue: `<scalead>${Math.round(hullbreakerSpecifics.nonStructureAdRatio * 100 * hullbreakerSpecifics.structureRangedModifier)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scalehealth>+ ${roundVariable(hullbreakerSpecifics.nonStructureHpRatio * 100 * hullbreakerSpecifics.structureRangedModifier, 1)}%%i:${STAT_ICON.hp}%</scalehealth>`,
+						suffix: '',
+					},
+				},
+				MaxStackDamageVSStructures: {
+					type: VariableType.physical,
+					statIconKey: ['attackDamage', 'hp'],
+					extendedEquals: {
+						prefix: '',
+						meleeValue: `<scalead>${Math.round(hullbreakerSpecifics.structureAdRatio * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scalehealth>+ ${Math.round(hullbreakerSpecifics.structureHpRatio * 100)}%%i:${STAT_ICON.hp}%</scalehealth>`,
+						rangedValue: `<scalead>${Math.round(hullbreakerSpecifics.structureAdRatio * 100 * hullbreakerSpecifics.structureRangedModifier)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scalehealth>+ ${roundVariable(hullbreakerSpecifics.structureHpRatio * 100 * hullbreakerSpecifics.structureRangedModifier, 1)}%%i:${STAT_ICON.hp}%</scalehealth>`,
+						suffix: '',
+					},
+				},
+				BonusMinionResists: {
+					statIconKey: ['level'],
+					extendedEquals: {
+						prefix: '',
+						meleeValue: `<const>${hullbreakerSpecifics.meleeBonusMinionResistsLvl1} - ${hullbreakerSpecifics.meleeBonusMinionResistsLvl18}%i:${STAT_ICON.level}%</const>`,
+						rangedValue: `<const>${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl1 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)} - ${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl18 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)}%i:${STAT_ICON.level}%</const>`,
+						suffix: '',
+					},
+				},
+			},
+			uninteresting: ['f1', 'f2'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
