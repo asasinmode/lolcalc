@@ -836,7 +836,7 @@ export const ITEM_SPECIFICS = {
 			known: {
 				f3: [],
 				f5: [],
-				f6: [],
+				f6: [ITEMS_BY_NAME.celestialOpposition?.dataValues.StealthWardCap],
 			},
 			calculate() {
 				return {
@@ -1835,7 +1835,7 @@ export const ITEM_SPECIFICS = {
 			known: {
 				f4: [],
 				f5: [],
-				f6: [],
+				f6: [ITEMS_BY_NAME.runicCompass?.dataValues.StealthWardCap],
 				lolcalcChampRange: [],
 			},
 			calculate(self) {
@@ -2669,6 +2669,40 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f1', 'f2'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.zazZakRealmspike]: {
+		variables: defineVariables({
+			known: {
+				f4: [],
+				f5: [],
+				f6: [ITEMS_BY_NAME.zazZakRealmspike?.dataValues.StealthWardCap],
+				TotalDamage: [],
+			},
+			calculate(self, target) {
+				const apDamage = itemVariableValue('TooltipDamage', { item: ITEMS_BY_NAME.zazZakRealmspike, damageSource: self, isRanged: self.isRanged.value });
+				const { PercentHPDamage } = ITEMS_BY_NAME?.zazZakRealmspike.dataValues ?? {};
+				return {
+					f4: { value: 0 },
+					f5: { value: 0 },
+					f6: { value: ITEMS_BY_NAME.zazZakRealmspike?.dataValues.StealthWardCap },
+					TotalDamage: {
+						value: apDamage.value as number + (target?.stats.value.total.hp ?? 0) * PercentHPDamage,
+					},
+				};
+			},
+			meta: {
+				TooltipDamage: {
+					type: VariableType.magic,
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${(ITEMS_BY_NAME.zazZakRealmspike?.dataValues as any)[ITEMS_BY_NAME.zazZakRealmspike?.itemCalculations.TooltipDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.zazZakRealmspike?.dataValues as any)[ITEMS_BY_NAME.zazZakRealmspike?.itemCalculations.TooltipDamage.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+				},
+				TotalDamage: {
+					type: VariableType.magic,
+					isAdditional: true,
+				},
+			},
+			uninteresting: ['f4', 'f5', 'f6', 'StealthWardCap', 'MonsterDamageCap', 'PercentHPDamage'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.echoesOfHelia]: {
