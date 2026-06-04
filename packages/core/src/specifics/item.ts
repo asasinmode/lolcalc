@@ -1092,6 +1092,7 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			return (self.internalItemData.value as { shipwrecker: number }).shipwrecker;
 		},
+		// TODO check why variables show up in `updateData` but nothing in description
 	},
 	[ITEM_NAME_TO_ID.bloodlettersCurse]: {
 		MAX_STACKS: ITEMS_BY_NAME.bloodlettersCurse?.dataValues.MaxStacks,
@@ -2141,8 +2142,6 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.redemption]: {
-		MIN_ALLY_LEVEL: 1,
-		MAX_ALLY_LEVEL: 20,
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
 			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
@@ -2474,8 +2473,6 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.solariLocket]: {
-		MIN_ALLY_LEVEL: 1,
-		MAX_ALLY_LEVEL: 20,
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
 			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
@@ -2507,6 +2504,40 @@ export const ITEM_SPECIFICS = {
 		preplaceTextInventory(value) {
 			return value.replace('@ShieldMinTOOLTIP@ - @ShieldMaxTOOLTIP@', '@ShieldAmount@');
 		},
+	},
+	[ITEM_NAME_TO_ID.mikaelsBlessing]: {
+		internalDataProperties: ['aLevel'],
+		setupData(self) {
+			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
+			return { aLevel: 0 };
+		},
+		variables: defineVariables({
+			known: {
+				f2: [],
+				AmountToHeal: [],
+			},
+			calculate(self) {
+				return {
+					f2: { value: 0 },
+					AmountToHeal: {
+						value: itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }).value as number,
+					},
+				};
+			},
+			meta: {
+				AmountToHeal: {
+					type: VariableType.heal,
+					extendedEquals: `<const>${itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: 1 } } as DamageSource }).value} - ${Math.round(itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: 20 } } as DamageSource }).value as number)}</const>`,
+				},
+			},
+			uninteresting: ['f2', 'HealAmountMin', 'HealAmountMax'],
+		}),
+		preplaceTextInventory(value) {
+			return value.replace('@HealAmountMin@ - @HealAmountMax@', '@AmountToHeal@');
+		},
+	},
+	[ITEM_NAME_TO_ID.echoesOfHelia]: {
+		// TODO check if ByCharLevelBreakpointsCalculationPart is correct
 	},
 } satisfies IHypotheticalItemSpecifics;
 

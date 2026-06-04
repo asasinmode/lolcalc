@@ -2,7 +2,7 @@ import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { ABILITY_TYPE, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { ABILITY_TYPE, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { ItemExtraTearItem } from '#components';
 
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
@@ -190,10 +190,13 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		},
 	]))),
 	[ITEM_NAME_TO_ID.redemption]: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.redemption), 'aLevel', 'Target ally level', ITEM_SPECIFICS[ITEM_NAME_TO_ID.redemption].MIN_ALLY_LEVEL, ITEM_SPECIFICS[ITEM_NAME_TO_ID.redemption].MAX_ALLY_LEVEL),
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.redemption), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.max),
 	},
 	[ITEM_NAME_TO_ID.solariLocket]: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.solariLocket), 'aLevel', 'Target ally level', ITEM_SPECIFICS[ITEM_NAME_TO_ID.solariLocket].MIN_ALLY_LEVEL, ITEM_SPECIFICS[ITEM_NAME_TO_ID.solariLocket].MAX_ALLY_LEVEL),
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.solariLocket), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.max),
+	},
+	[ITEM_NAME_TO_ID.mikaelsBlessing]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.mikaelsBlessing), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.max),
 	},
 	[ITEM_NAME_TO_ID.malignance]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.malignance), 'hatefog', 'Hatefog', true, true),

@@ -367,6 +367,13 @@ export const ITEM_NAME_TO_ID = {
 	umbralGlaive: '3179',
 	hullbreaker: '3181',
 	solariLocket: '3190',
+	mikaelsBlessing: '3222',
+	essenceReaver: '3508',
+	stormsurge: '4646',
+	deathsDance: '6333',
+	sunderedSky: '6610',
+	moonstoneRenewer: '6617',
+	echoesOfHelia: '6620',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -491,3 +498,9 @@ export const VariableType = {
 } as const;
 
 export type IVariableType = typeof VariableType[keyof typeof VariableType];
+
+export const CHAMPION_LEVEL = {
+	min: 1,
+	vanillaMax: 18,
+	max: 20,
+};
