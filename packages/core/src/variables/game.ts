@@ -578,12 +578,15 @@ export function replaceGameVariables(
 		for (const [variableName, meta] of additionalVariables) {
 			let value = dynamicVariables!.values?.[variableName]?.value as number | [number, number] | undefined;
 			if (value !== undefined) {
+				let baseValue: number | [number, number];
 				if (Array.isArray(value)) {
-					value = [...value];
+					value = [value[0], value[1]];
 					value[0] = roundVariable(value[0]);
 					value[1] = roundVariable(value[1]);
+					baseValue = [value[0], value[1]];
 				} else {
 					value = roundVariable(value);
+					baseValue = value;
 				}
 
 				if (meta?.type && modifyVariableFunctions[meta.type]) {
@@ -595,7 +598,7 @@ export function replaceGameVariables(
 					}
 				}
 
-				variables.set(variableName, { baseValue: value, value, meta });
+				variables.set(variableName, { baseValue, value, meta });
 			}
 		}
 	}
