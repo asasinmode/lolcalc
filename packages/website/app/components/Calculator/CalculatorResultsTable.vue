@@ -568,7 +568,11 @@ function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGam
 	return markRaw(variables
 		.entries()
 		.filter(entry => !entry[1].isUninteresting)
-		.map(entry => ({ id: entry[0], name: entry[1].meta?.displayedName ?? entry[0] }))
+		.map((entry): IDamageResultTableSection['rows'][number] => ({
+			id: entry[0],
+			name: entry[1].meta?.displayedName ?? entry[0],
+			isCustom: entry[1].meta?.isCustom,
+		}))
 		.toArray()
 		.concat(unknownVariables.map(([rawName, actualName]) => ({
 			id: rawName,
@@ -1575,6 +1579,13 @@ defineExpose({
 							>
 							<span v-if="row.isUnknown">unknown</span>
 							{{ row.name }}
+							<img
+								v-if="row.isCustom"
+								src="/logo_dark.webp"
+								alt="lolcalc logo"
+								width="192"
+								height="192"
+							>
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
@@ -2170,9 +2181,17 @@ defineExpose({
 						}
 
 						> img {
-							--at-apply: 'inline-block size-[--size] align-middle -ms-[--ms] me-[calc(0.5*var(--size))]';
+							--at-apply: 'inline-block size-[--size] align-middle';
 							--size: calc(5 * var(--spacing));
 							--ms: calc(0.5 * (var(--ps) + var(--size)));
+
+							&[aria-hidden] {
+								--at-apply: '-ms-[--ms] me-[calc(0.5*var(--size))]';
+							}
+
+							&:not([aria-hidden]) {
+								--at-apply: 'size-4.5 align-[-0.25rem] ms-0.5';
+							}
 						}
 
 						> span {
