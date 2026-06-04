@@ -842,7 +842,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					f3: { value: 0 },
 					f5: { value: 0 },
-					f6: { value: 0 },
+					f6: { value: ITEMS_BY_NAME.celestialOpposition?.dataValues.StealthWardCap },
 				};
 			},
 			meta: {
@@ -1748,7 +1748,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					f4: { value: 0 },
 					f5: { value: 0 },
-					f6: { value: 0 },
+					f6: { value: ITEMS_BY_NAME.runicCompass?.dataValues.StealthWardCap },
 					lolcalcChampRange: {
 						value: [
 							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.runicCompass, damageSource: self, isRanged: false }).value as number,
@@ -2535,6 +2535,21 @@ export const ITEM_SPECIFICS = {
 		preplaceTextInventory(value) {
 			return value.replace('@HealAmountMin@ - @HealAmountMax@', '@AmountToHeal@');
 		},
+	},
+	[ITEM_NAME_TO_ID.bountyOfWorlds]: {
+		variables: defineVariables({
+			known: {
+				f5: [],
+				f6: [],
+			},
+			calculate() {
+				return {
+					f5: { value: 0 },
+					f6: { value: ITEMS_BY_NAME.worldAtlas?.dataValues.MaxCharges },
+				};
+			},
+			uninteresting: ['f5', 'f6', 'StealthWardCap'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.echoesOfHelia]: {
 		// TODO check if ByCharLevelBreakpointsCalculationPart is correct
