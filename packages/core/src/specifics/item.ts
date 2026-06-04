@@ -1143,12 +1143,14 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, { itemPassivesStats }) {
+				handler(self, { itemPassivesStats }) {
+					const { MaxStacks, MaxMovementSpeed } = ITEMS_BY_NAME.deadMansPlate?.dataValues ?? {};
+					// TODO verify with the game
+					itemPassivesStats.moveSpeed += MaxMovementSpeed * (self.internalItemData.value as IInternalItemDataOf<'deadMansPlate'>).shipwrecker / MaxStacks;
 					itemPassivesStats.slowResist += ITEMS_BY_NAME.deadMansPlate?.dataValues.SlowResistTooltip;
 				},
 			},
 		},
-		// TODO check why variables show up in `updateData` but nothing in description
 	},
 	[ITEM_NAME_TO_ID.bloodlettersCurse]: {
 		MAX_STACKS: ITEMS_BY_NAME.bloodlettersCurse?.dataValues.MaxStacks,
