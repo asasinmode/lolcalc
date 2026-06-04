@@ -2705,6 +2705,57 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f4', 'f5', 'f6', 'StealthWardCap', 'MonsterDamageCap', 'PercentHPDamage'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.stormsurge]: {
+		variables: defineVariables({
+			known: {
+				f5: [],
+			},
+			calculate() {
+				return {
+					f5: { value: 0 },
+				};
+			},
+			meta: {
+				SquallDamage: {
+					type: VariableType.magic,
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${(ITEMS_BY_NAME.stormsurge?.dataValues as any)[ITEMS_BY_NAME.stormsurge.itemCalculations.SquallDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.stormsurge?.dataValues as any)[ITEMS_BY_NAME.stormsurge.itemCalculations.SquallDamage.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+				},
+			},
+			uninteresting: ['f5', 'DamageThreshold', 'WindowDuration', 'DelayDuration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.deathsDance]: {
+		variables: defineVariables({
+			known: {
+				lolcalcChampRange: [],
+			},
+			calculate(self) {
+				return {
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					displayedName: 'IgnoreDamagePercent',
+					isPercentage: true,
+					multiplier: 100,
+					resultsIsPercentage: true,
+				},
+				HealTotal: {
+					type: VariableType.heal,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.deathsDance?.dataValues as any)[ITEMS_BY_NAME.deathsDance?.itemCalculations.HealTotal.mFormulaParts[0]!.mDataValue!] ?? 0) * 100)}% bonus</scalead> `,
+				},
+			},
+			uninteresting: ['BleedDurationWorst', 'TakedownWindow', 'HealDuration'],
+		}),
+	},
 	[ITEM_NAME_TO_ID.echoesOfHelia]: {
 		// TODO check if ByCharLevelBreakpointsCalculationPart is correct
 	},
