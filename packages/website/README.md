@@ -197,6 +197,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] screenshots showing it accurately calculating things
     - [ ] decaying move speed bonuses
     - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
+    - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia do indeed to above 20 (and test it)
   - [ ] github readme
 - [ ] submit feedback on page / report issues
   - [ ] rust/go server

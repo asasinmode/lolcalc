@@ -1289,7 +1289,7 @@ export const ITEM_SPECIFICS = {
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 					).value} - ${itemVariableValue(
 						'ARMRPerHitScaling',
-						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
 					).value}%i:${STAT_ICON.level}%</const>`,
 				},
 				ARMRMaxScaling: {
@@ -1299,7 +1299,7 @@ export const ITEM_SPECIFICS = {
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: {} } as DamageSource },
 					).value} - ${itemVariableValue(
 						'ARMRMaxScaling',
-						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: {} } as DamageSource },
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: {} } as DamageSource },
 					).value}%i:${STAT_ICON.level}%</const>`,
 				},
 			},
@@ -2243,7 +2243,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.redemption]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.vanillaMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2264,7 +2264,7 @@ export const ITEM_SPECIFICS = {
 				HealAmount: {
 					type: VariableType.heal,
 					displayedName: 'HealAmount',
-					extendedEquals: `<const>${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: 1 } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: 20 } } as DamageSource }).value as number)}</const>`,
+					extendedEquals: `<const>${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number)}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect', 'HealMin', 'HealMax'],
@@ -2574,7 +2574,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.solariLocket]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.max);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2591,11 +2591,10 @@ export const ITEM_SPECIFICS = {
 				};
 			},
 			meta: {
-				/* 99% sure this goes above the declared `360` for toplaners with lvl 19/20 */
 				ShieldAmount: {
 					type: VariableType.shield,
 					displayedName: 'ShieldAmount',
-					extendedEquals: `<const>${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: 1 } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: 20 } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
 				},
 			},
 			uninteresting: ['f3', 'ShieldDuration', 'DiminishedTimer', 'DiminishedEffectMulitplier', 'ShieldMinTOOLTIP', 'ShieldMaxTOOLTIP'],
@@ -2607,7 +2606,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.mikaelsBlessing]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(1, self.internalItemData.value.aLevel ?? 1, 20);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.vanillaMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2626,7 +2625,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				AmountToHeal: {
 					type: VariableType.heal,
-					extendedEquals: `<const>${itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: 1 } } as DamageSource }).value} - ${Math.round(itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: 20 } } as DamageSource }).value as number)}</const>`,
+					extendedEquals: `<const>${itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${Math.round(itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number)}</const>`,
 				},
 			},
 			uninteresting: ['f2', 'HealAmountMin', 'HealAmountMax'],
@@ -2807,8 +2806,42 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2', 'CritModifier', 'MissingHealthHeal'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.moonstoneRenewer]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+				};
+			},
+			uninteresting: ['f1', 'f2', 'ChainHeal', 'ChainShield', 'SingleHeal', 'SingleShield'],
+		}),
+	},
 	[ITEM_NAME_TO_ID.echoesOfHelia]: {
 		// TODO check if ByCharLevelBreakpointsCalculationPart is correct
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				MaxCharges: {
+					// TODO check if affected by grievous, wording bit weird "restore as Health"
+					type: 'heal',
+					statIconKey: 'level',
+					extendedEquals: `<const>${itemVariableValue('MaxCharges', { item: ITEMS_BY_NAME.echoesOfHelia, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('MaxCharges', { item: ITEMS_BY_NAME.echoesOfHelia, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+				},
+			},
+			uninteresting: ['f1', 'DamageStorageRate', 'ChargeToHealConversion'],
+		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
 
