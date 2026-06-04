@@ -256,6 +256,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] show hover tooltips when navigated to with keyboard
   - [ ] skip links around busy areas (scoreboard, item shop?)
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
+- [ ] useX dialog composables don't work on hotReload because component ref is lost (`dialogRef.value` is `undefined`)
+- [ ] calculate variables function maybe accept a const for purely static ones
 
 #### very future
 

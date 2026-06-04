@@ -1,10 +1,10 @@
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
-import type { IInternalItemDataOf, ISpecificVariables } from '.';
+import type { ICalculatedDynamicVariable, IInternalItemDataOf, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
-import { GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
+import { CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, SUPPORT_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -879,6 +879,22 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { sanctify: number }) {
 			return internalData.sanctify;
 		},
+		variables: defineVariables({
+			known: {
+				f3: [],
+			},
+			calculate() {
+				return {
+					f3: { value: 0 },
+				};
+			},
+			meta: {
+				OnHitMin: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['f3', 'Duration', 'AttackSpeedMin'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.staffOfFlowingWater]: {
 		internalDataProperties: ['rapids'],
@@ -1082,15 +1098,55 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.deadMansPlate]: {
-		MAX_STACKS: ITEMS_BY_NAME.deadMansPlate?.dataValues.MaxMovementSpeed,
+		MAX_STACKS: ITEMS_BY_NAME.deadMansPlate?.dataValues.MaxStacks,
 		internalDataProperties: ['shipwrecker'],
 		setupData(self) {
 			self.internalItemData.value.shipwrecker = clamp(0, self.internalItemData.value.shipwrecker ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.deadMansPlate].MAX_STACKS);
 			return { shipwrecker: 0 };
 		},
-		imgTextLabel: 'Shipwrecker built up movement speed',
+		imgTextLabel: 'Shipwrecker stacks',
 		imgText(self) {
 			return (self.internalItemData.value as { shipwrecker: number }).shipwrecker;
+		},
+		variables: defineVariables({
+			known: {
+				DamageCalc: [],
+			},
+			calculate(self): {
+				DamageCalc: ICalculatedDynamicVariable;
+			} {
+				const { shipwrecker = 0 } = self.internalItemData.value;
+				/* according to the [wiki](https://wiki.leagueoflegends.com/en-us/Dead_Man's_Plate) the ad ratio also scales with stacks reaching 100% base at 100 stacks */
+				const baseRatio = shipwrecker / ITEM_SPECIFICS[ITEM_NAME_TO_ID.deadMansPlate].MAX_STACKS;
+
+				const base = VARIABLE_CALCULATION_FNS.StatByNamedDataValueCalculationPart(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0] as any, ITEMS_BY_NAME.deadMansPlate, self)?.value;
+				const { BonusDamagePerStack } = ITEMS_BY_NAME.deadMansPlate?.dataValues ?? 0;
+
+				return {
+					DamageCalc: {
+						value: base * baseRatio + BonusDamagePerStack * shipwrecker,
+					},
+				};
+			},
+			meta: {
+				MaxDamageCalc: {
+					type: VariableType.physical,
+					statIconKey: ['attackDamage'],
+					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.deadMansPlate?.dataValues as any)[ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0]?.mDataValue!] ?? 0) * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <const>+ ${ITEMS_BY_NAME.deadMansPlate?.dataValues.MaxStacks * ITEMS_BY_NAME.deadMansPlate?.dataValues.BonusDamagePerStack}</const>`,
+				},
+				DamageCalc: {
+					type: VariableType.physical,
+					isAdditional: true,
+				},
+			},
+			uninteresting: ['MaxMovementSpeed', 'SlowResistTooltip'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemPassivesStats }) {
+					itemPassivesStats.slowResist += ITEMS_BY_NAME.deadMansPlate?.dataValues.SlowResistTooltip;
+				},
+			},
 		},
 		// TODO check why variables show up in `updateData` but nothing in description
 	},
@@ -1206,6 +1262,42 @@ export const ITEM_SPECIFICS = {
 			const data = self.internalItemData.value as { jxtpL: number; jxtpD: number };
 			return property ? data[property] : (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				OnHitDamage: {
+					type: VariableType.magic,
+				},
+				ARMRPerHitScaling: {
+					statIconKey: ['level'],
+					extendedEquals: `<const>${itemVariableValue(
+						'ARMRPerHitScaling',
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
+					).value} - ${itemVariableValue(
+						'ARMRPerHitScaling',
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
+					).value}%i:${STAT_ICON.level}%</const>`,
+				},
+				ARMRMaxScaling: {
+					statIconKey: ['level'],
+					extendedEquals: `<const>${itemVariableValue(
+						'ARMRMaxScaling',
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: {} } as DamageSource },
+					).value} - ${itemVariableValue(
+						'ARMRMaxScaling',
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: {} } as DamageSource },
+					).value}%i:${STAT_ICON.level}%</const>`,
+				},
+			},
+			uninteresting: ['f1', 'ARMRMaxScaling', 'PenPerHit', 'PenMax', 'BuffDuration'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.cosmicDrive]: {
 		internalDataProperties: ['spelldance'],
@@ -2549,6 +2641,32 @@ export const ITEM_SPECIFICS = {
 				};
 			},
 			uninteresting: ['f5', 'f6', 'StealthWardCap'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.essenceReaver]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+				};
+			},
+			meta: {
+				SpellbladeDamage: {
+					type: VariableType.physical,
+					statIconKey: ['attackDamage', 'critChance'],
+					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.essenceReaver?.dataValues as any)[ITEMS_BY_NAME.essenceReaver?.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mDataValue!] ?? 0) * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> + ${(ITEMS_BY_NAME.essenceReaver?.dataValues as any)[ITEMS_BY_NAME.essenceReaver?.itemCalculations.SpellbladeDamage.mFormulaParts[1]!.mDataValue!] ?? 0}%%i:${STAT_ICON.critChance}%`,
+				},
+				TotalManaRefund: {
+					statIconKey: ['attackDamage', 'critChance'],
+					extendedEquals: `${Math.round((ITEMS_BY_NAME.essenceReaver?.itemCalculations.TotalManaRefund.mMultiplier.mNumber ?? 0) * 100)}% <var>Spellblade damage</var>`,
+				},
+			},
+			uninteresting: ['f1', 'f2'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.echoesOfHelia]: {

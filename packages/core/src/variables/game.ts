@@ -21,7 +21,7 @@ export interface IVariableMeta<T = any> {
 	/** variable name shown in description when `replaceGameVariables`' `options.replaceWithName` is true instead of the actual variable name */
 	displayedName?: string;
 	/**
-	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it
+	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it. If the value is an array of icons, no `(...icons)` will be appended when replace's `isExtended: true`, the icons are to be manually added in `extendedEquals` in that case
 	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
 	 */
 	statIconKey?: IVariableMetaStatIcon | IVariableMetaStatIcon[];
@@ -724,7 +724,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			};
 		}
 	},
-	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self, meta) {
+	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self, meta = undefined) {
 		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
 		const dataValue = whole.dataValues?.[variable.mDataValue];
 		meta?.accessedVariables?.add(variable.mDataValue);
@@ -938,6 +938,7 @@ const MSTAT_TO_NAMED_STAT: Record<number, IChampionStatName> = {
 	2: 'attackDamage',
 	6: 'magicResist',
 	7: 'moveSpeed',
+	8: 'critChance',
 	12: 'hp',
 	29: 'lethality',
 };
