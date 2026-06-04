@@ -98,6 +98,11 @@ const hullbreakerSpecifics = {
 	bonusMinionResistsRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mRangedMultiplier.mNumber,
 };
 
+const sunderedSkySpecifics = {
+	meleeAdRatio: (ITEMS_BY_NAME.sunderedSky?.dataValues as any)[ITEMS_BY_NAME.sunderedSky?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mDataValue!],
+	rangedModifier: (ITEMS_BY_NAME.sunderedSky?.dataValues as any)[ITEMS_BY_NAME.sunderedSky?.itemCalculations.RangedItemCalcValue.mMultiplier.mDataValue!],
+};
+
 const grievousWoundItemSpecific = {
 	internalDataProperties: ['gWounds'],
 	setupData(self) {
@@ -2754,6 +2759,52 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['BleedDurationWorst', 'TakedownWindow', 'HealDuration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.sunderedSky]: {
+		variables: defineVariables({
+			known: {
+				f2: [],
+				lolcalcChampRange: [],
+				Heal: [],
+			},
+			calculate(self) {
+				const baseMelee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: false }).value as number;
+				const baseRanged = itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: true }).value as number;
+				const missingHp = self.stats.value.total.hp - self.currentHealth.value;
+				const missingHpHeal = missingHp * ITEMS_BY_NAME.sunderedSky?.dataValues.MissingHealthHeal;
+
+				return {
+					f2: { value: 0 },
+					lolcalcChampRange: {
+						value: [baseMelee, baseRanged],
+					},
+					/* this is an additional variables and these don't resolve melee/ranged value on themselves, they are added as is so it needs to handle the proper rv */
+					Heal: {
+						value: self.isRanged.value === undefined
+							? [baseMelee + missingHpHeal, baseRanged + missingHpHeal]
+							: ((self.isRanged.value ? baseRanged : baseMelee) + missingHpHeal),
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					type: VariableType.heal,
+					displayedName: 'BaseHeal',
+					statIconKey: ['attackDamage'],
+					extendedEquals: {
+						prefix: '',
+						meleeValue: `<scalead>${Math.round(sunderedSkySpecifics.meleeAdRatio * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead>`,
+						rangedValue: `<scalead>${Math.round(sunderedSkySpecifics.meleeAdRatio * sunderedSkySpecifics.rangedModifier * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead>`,
+						suffix: ' ',
+					},
+				},
+				Heal: {
+					type: VariableType.heal,
+					isAdditional: true,
+				},
+			},
+			uninteresting: ['f2', 'CritModifier', 'MissingHealthHeal'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.echoesOfHelia]: {
