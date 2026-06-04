@@ -253,8 +253,6 @@ const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 	return rows;
 });
 
-recalculateResultCellComparisonNumbers();
-
 function addComputedSection(sectionId: string) {
 	const section = computeSection(resultSections.value.find(section => section.id === sectionId)!);
 	calculateComputedSectionComparisonMaps(section);
@@ -685,6 +683,20 @@ function recalculateAllColumns() {
 }
 
 function recalculateColumn(column: IDamageResultTableColumn) {
+	addComputedColumnSources(column);
+
+	for (const section of resultSections.value) {
+		for (const row of section.rows) {
+			computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
+				column.id,
+				computeSectionRowColumn(section, row, column),
+			);
+		}
+	}
+	recalculateResultCellComparisonNumbers();
+}
+
+function addComputedColumnSources(column: IDamageResultTableColumn) {
 	if (column.source) {
 		column._computedSource = column.source.clone({}, false);
 		column._computedSource.champion.value = column.source.champion.value;
@@ -698,16 +710,6 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 			column._computedSource!.calculationDamageTarget.value = column._computedTarget;
 		}
 	}
-
-	for (const section of resultSections.value) {
-		for (const row of section.rows) {
-			computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
-				column.id,
-				computeSectionRowColumn(section, row, column),
-			);
-		}
-	}
-	recalculateResultCellComparisonNumbers();
 }
 
 function recalculateResultCellComparisonNumbers() {
@@ -1159,7 +1161,7 @@ defineExpose({
 	resultSections,
 	flipResults,
 	addResultsColumn,
-	recalculateAllColumns,
+	addComputedColumnSources,
 	addResultsSection,
 	expandedSections,
 	customTotalRows,

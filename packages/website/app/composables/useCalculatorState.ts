@@ -272,9 +272,17 @@ export function useCalculatorState(
 			if (source || target) {
 				noColumnsRestored = false;
 				i && resultsTable.value.addResultsColumn();
-				resultsTable.value.resultColumns.at(-1)!.source = source;
-				resultsTable.value.resultColumns.at(-1)!.target = target;
+				const column = resultsTable.value.resultColumns.at(-1)!;
+				column.source = source;
+				column.target = target;
+				resultsTable.value.addComputedColumnSources(column);
 			}
+		}
+
+		if (noColumnsRestored && damageSources.value.length === 1 && damageTargets.value.length === 1) {
+			resultsTable.value.resultColumns[0]!.source = damageSources.value[0];
+			resultsTable.value.resultColumns[0]!.target = damageTargets.value[0];
+			resultsTable.value.addComputedColumnSources(resultsTable.value.resultColumns[0]!);
 		}
 
 		const savedSections = params.getAll('tblSct');
@@ -324,11 +332,6 @@ export function useCalculatorState(
 					}
 				}
 			}
-		}
-
-		if (noColumnsRestored && damageSources.value.length === 1 && damageTargets.value.length === 1) {
-			resultsTable.value.resultColumns[0]!.source = damageSources.value[0];
-			resultsTable.value.resultColumns[0]!.target = damageTargets.value[0];
 		}
 	}
 
