@@ -4,7 +4,7 @@ import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcal
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
-import type { IReplaceGameVariablesRV } from '@lolcalc/core/types';
+import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import type { UnwrapRef, WatchHandle } from 'vue';

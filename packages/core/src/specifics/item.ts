@@ -773,7 +773,7 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.shield,
 				},
 				ComputedShield: {
-					isAdditional: true,
+					isCustom: true,
 					type: VariableType.shield,
 				},
 			},
@@ -1141,7 +1141,7 @@ export const ITEM_SPECIFICS = {
 				},
 				DamageCalc: {
 					type: VariableType.physical,
-					isAdditional: true,
+					isCustom: true,
 				},
 			},
 			uninteresting: ['MaxMovementSpeed', 'SlowResistTooltip'],
@@ -1545,7 +1545,7 @@ export const ITEM_SPECIFICS = {
 				},
 				CurrentHealthDamage: {
 					type: VariableType.physical,
-					isAdditional: true,
+					isCustom: true,
 				},
 			},
 			uninteresting: ['f4', 'MoveSpeedMod', 'MoveSpeedDuration'],
@@ -2290,7 +2290,7 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				DamageIncrease: {
-					isAdditional: true,
+					isCustom: true,
 					resultsIsPercentage: true,
 				},
 			},
@@ -2386,7 +2386,7 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				'damage reduced from crit': {
-					isAdditional: true,
+					isCustom: true,
 				},
 			},
 			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
@@ -2500,7 +2500,7 @@ export const ITEM_SPECIFICS = {
 					}%i:${STAT_ICON.level}%</const> <scalehealth>+ ${Math.round(((ITEMS_BY_NAME.armoredAdvance?.dataValues as any)[ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
 				},
 				AttackDamageReduced: {
-					isAdditional: true,
+					isCustom: true,
 				},
 			},
 			uninteresting: ['f5', 'ShieldDuration', 'DamageReduction'],
@@ -2703,7 +2703,7 @@ export const ITEM_SPECIFICS = {
 				},
 				TotalDamage: {
 					type: VariableType.magic,
-					isAdditional: true,
+					isCustom: true,
 				},
 			},
 			uninteresting: ['f4', 'f5', 'f6', 'StealthWardCap', 'MonsterDamageCap', 'PercentHPDamage'],
@@ -2800,7 +2800,7 @@ export const ITEM_SPECIFICS = {
 				},
 				Heal: {
 					type: VariableType.heal,
-					isAdditional: true,
+					isCustom: true,
 				},
 			},
 			uninteresting: ['f2', 'CritModifier', 'MissingHealthHeal'],

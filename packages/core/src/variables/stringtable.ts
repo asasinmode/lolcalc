@@ -1,5 +1,10 @@
 import type { ICalculatedDynamicVariable } from '../specifics';
-import type { IReplaceStringtableVariablesRV } from '../types';
+
+export interface IReplaceStringtableVariablesRV {
+	replaced: string;
+	stringtableVariables: Map<string, string>;
+	unknownStringtableVariables: Map<string, Set<string>>;
+}
 
 export function replaceStringtableVariables(
 	text: string,

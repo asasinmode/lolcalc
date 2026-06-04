@@ -2,10 +2,26 @@ import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/
 import type { IChampionStatName, IChampionStats, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
-import type { IReplaceGameVariablesRV } from '../types';
 
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
+
+export interface IReplacedGameVariable {
+	baseValue: number | [number, number];
+	value: number | [number, number];
+	meta?: IVariableMeta;
+	isUninteresting?: boolean;
+}
+
+export interface IReplaceGameVariablesRV {
+	replaced: string;
+	variables: Map<string, IReplacedGameVariable>;
+	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
+	variablesAllValues: Map<string, (string | number)[]>;
+	unknownVariables: [rawName: string, actualName?: string][];
+	/** whether any of the detected variables has additional info expected to be shown in the extended version (when holding shift) */
+	anyExtendedVariables: boolean;
+}
 
 type IVariableMetaExtendedEquals = string | {
 	prefix: string;
@@ -41,8 +57,8 @@ export interface IVariableMeta<T = any> {
 	/** `%` will be suffixed to the formatted value in results */
 	resultsIsPercentage?: boolean;
 	type?: IVariableType;
-	/** whether the variable is an additional one, not found in description but computed by lolcalc and wanted in results */
-	isAdditional?: boolean;
+	/** whether the variable is a custom one, not found in description but computed by lolcalc and wanted in results */
+	isCustom?: boolean;
 }
 
 export interface IVariableValueResult {
@@ -573,7 +589,7 @@ export function replaceGameVariables(
 	});
 
 	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionData.dynamicVariables);
-	const additionalVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isAdditional);
+	const additionalVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isCustom);
 	if (additionalVariables?.length) {
 		for (const [variableName, meta] of additionalVariables) {
 			let value = dynamicVariables!.values?.[variableName]?.value as number | [number, number] | undefined;

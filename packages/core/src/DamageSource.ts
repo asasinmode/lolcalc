@@ -9,8 +9,8 @@ import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/
 import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
-import type { IReplaceGameVariablesRV, IReplaceStringtableVariablesRV } from './types';
-import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions } from './variables/game.ts';
+import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
+import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';

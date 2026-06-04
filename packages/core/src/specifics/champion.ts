@@ -535,6 +535,7 @@ export const CHAMPION_SPECIFICS = {
 		variables: defineChampionVariables<'Ryze', typeof IRyze>({
 			known: {
 				PassiveManaCalcTooltip: [],
+				PassiveMana: [],
 			},
 			calculate(self) {
 				return {
@@ -542,10 +543,12 @@ export const CHAMPION_SPECIFICS = {
 						value: self.stats.value.variables.ryzePassivePercentManaIncrease ?? 0,
 						roundReplaced: 2,
 					},
+					PassiveMana: {
+						value: self.stats.value.miscDebug.ryzePMana ?? 0,
+					},
 				};
 			},
 			meta: {
-				// TODO custom variable how much mana he gains
 				PassiveManaCalcTooltip: {
 					statIconKey: 'abilityPower',
 					multiplier: 100,
@@ -558,6 +561,9 @@ export const CHAMPION_SPECIFICS = {
 						);
 						return `<scaleap>${apMultiplier.value}%</scaleap>`;
 					},
+				},
+				PassiveMana: {
+					isCustom: true,
 				},
 			},
 		}),
