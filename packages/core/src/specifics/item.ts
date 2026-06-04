@@ -2822,7 +2822,6 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.echoesOfHelia]: {
-		// TODO check if ByCharLevelBreakpointsCalculationPart is correct
 		variables: defineVariables({
 			known: {
 				f1: [],

@@ -422,7 +422,6 @@ export const CHAMPION_SPECIFICS = {
 								abilityVariant: self.champion.value.abilities.passive.variants[0]!,
 								allAbilitiesVariants: self.allAbilityVariants.value,
 								damageSource: self,
-								dynamicVariables: self.computed.variables.value.abilities.passive[0],
 							},
 					);
 
