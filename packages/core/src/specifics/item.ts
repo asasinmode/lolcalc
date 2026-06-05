@@ -3181,7 +3181,7 @@ export function itemBuyability(
 		(target.champion.value && !target.isRanged.value && (RANGED_ONLY_ITEMS as string[]).includes(item.id))
 		|| (!(transformBoots && isMove && item.isBoots) && inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
 		|| (!transformBoots && target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
-		|| (target?.roleQuest.value && target.roleQuest.value !== 'support' && SUPPORT_ITEMS.includes(item.id))
+		|| (target.roleQuest.value !== 'support' && SUPPORT_ITEMS.includes(item.id))
 	) {
 		buyability = -1;
 	} else if (!isMove && inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5 && (target.roleQuest.value !== 'bot' || inventoryAfterBuying[6])) {
