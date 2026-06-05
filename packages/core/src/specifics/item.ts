@@ -109,6 +109,12 @@ const ludensEchoSpecifics = {
 	singleTargetMaxMultiplier: ITEMS_BY_NAME.ludensEcho?.itemCalculations.SingleTargetMax.mMultiplier.mNumber,
 };
 
+const hollowRadianceSpecifics = {
+	const: ITEMS_BY_NAME.hollowRadiance?.itemCalculations.DamagePerTick.mFormulaParts[0]!.mNumber,
+	hpRatio: ITEMS_BY_NAME.hollowRadiance?.itemCalculations.DamagePerTick.mFormulaParts[1]!.mCoefficient!,
+	procMultiplier: (ITEMS_BY_NAME.hollowRadiance?.dataValues as any)[ITEMS_BY_NAME.hollowRadiance.itemCalculations.ProcDamageTOOLTIPONLY.mMultiplier.mDataValue],
+};
+
 const grievousWoundItemSpecific = {
 	internalDataProperties: ['gWounds'],
 	setupData(self) {
@@ -3154,6 +3160,33 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f1', 'SlowFieldDuration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.hollowRadiance]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+				};
+			},
+			meta: {
+				DPS: {
+					type: VariableType.magic,
+					statIconKey: 'hp',
+					extendedEquals: `<const>${hollowRadianceSpecifics.const}</const> <scalehealth>+ ${Math.round(hollowRadianceSpecifics.hpRatio * 100)}% bonus</scalehealth> `,
+				},
+				ProcDamageTOOLTIPONLY: {
+					type: VariableType.magic,
+					statIconKey: 'hp',
+					extendedEquals: `<const>${hollowRadianceSpecifics.const! * hollowRadianceSpecifics.procMultiplier}</const> <scalehealth>+ ${Math.round(hollowRadianceSpecifics.hpRatio * hollowRadianceSpecifics.procMultiplier * 100)}% bonus</scalehealth> `,
+				},
+			},
+			uninteresting: ['f1', 'f2', 'AuraDuration', 'MinionMod', 'MonsterMod'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
