@@ -130,6 +130,12 @@ export interface IStatsCalculationVariables {
 	dawncoreHsp?: number;
 	/** ability power gained from dawncore's passive */
 	dawncoreAp?: number;
+	/** hp gained from roa's passive */
+	roaHp?: number;
+	/** mana gained from roa's passive */
+	roaMana?: number;
+	/** ap gained from roa's passive */
+	roaAp?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

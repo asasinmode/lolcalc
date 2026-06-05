@@ -245,15 +245,53 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }) {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
 					const { eternity } = self.internalItemData.value;
 					const { APPerStack, HealthPerStack, ManaPerStack } = ITEMS_BY_NAME.roa?.dataValues;
-					itemPassivesStats.abilityPower += eternity * APPerStack;
-					itemPassivesStats.hp += eternity * HealthPerStack;
-					itemPassivesStats.mana += eternity * ManaPerStack;
+					itemPassivesStats.abilityPower += (calculatedVariables.roaAp = eternity * APPerStack);
+					itemPassivesStats.hp += (calculatedVariables.roaHp = eternity * HealthPerStack);
+					itemPassivesStats.mana += (calculatedVariables.roaMana = eternity * ManaPerStack);
 				},
 			},
 		},
+		variables: defineVariables({
+			known: {
+				f4: [],
+				f5: [],
+				StacksHealth: [],
+				StacksMana: [],
+				StacksAP: [],
+			},
+			calculate(self) {
+				const { eternity = 0 } = self.internalItemData.value;
+				const { APPerStack, HealthPerStack, ManaPerStack } = ITEMS_BY_NAME.roa?.dataValues;
+				return {
+					f4: { value: 0 },
+					f5: { value: 0 },
+					StacksHealth: {
+						value: self.stats.value.variables.roaHp ?? (eternity * HealthPerStack),
+					},
+					StacksMana: {
+						value: self.stats.value.variables.roaMana ?? (eternity * ManaPerStack),
+					},
+					StacksAP: {
+						value: self.stats.value.variables.roaAp ?? (eternity * APPerStack),
+					},
+				};
+			},
+			meta: {
+				StacksHealth: {
+					isCustom: true,
+				},
+				StacksMana: {
+					isCustom: true,
+				},
+				StacksAP: {
+					isCustom: true,
+				},
+			},
+			uninteresting: ['f4', 'f5', 'HealthPerStack', 'ManaPerStack', 'APPerStack', 'SecondsPerStack', 'MaxStacks', 'EternityManaRestore', 'EternityHealthRestore', 'EternityMaxHealPerCast'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.blackfireTorch]: {
 		internalDataProperties: ['bBlaze'],
