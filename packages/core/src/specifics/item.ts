@@ -3189,6 +3189,60 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'f2', 'AuraDuration', 'MinionMod', 'MonsterMod'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.krakenSlayer]: {
+		variables: defineVariables({
+			known: {
+				f2: [],
+				CalculatedDamage: [],
+			},
+			calculate(self, target) {
+				const damage = itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: self, isRanged: self.isRanged.value });
+				const maxMultiplier = (ITEMS_BY_NAME.krakenSlayer?.dataValues as any)[ITEMS_BY_NAME.krakenSlayer?.itemCalculations.MaximumDamage.mMultiplier.mDataValue!] ?? 1;
+				const targetMissingHpPercent = target
+					? target.currentHealth.value ? (target.stats.value.total.hp - target.currentHealth.value) / Math.max(target.stats.value.total.hp, 1) : 1
+					: 1;
+				const damageMultiplier = 1 + (maxMultiplier - 1) * targetMissingHpPercent;
+
+				return {
+					f2: { value: 0 },
+					CalculatedDamage: {
+						value: Array.isArray(damage.value)
+							? [damage.value[0]! * damageMultiplier, damage.value[1]! * damageMultiplier]
+							: ((damage.value as number) * damageMultiplier),
+					},
+				};
+			},
+			meta: {
+				DamageAmount: {
+					type: VariableType.physical,
+					statIconKey: 'level',
+					roundReplaced: true,
+					extendedEquals: {
+						prefix: '<const>',
+						meleeValue: `${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value} - ${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: false } } as DamageSource }).value}`,
+						rangedValue: `${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value} - ${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: true } } as DamageSource }).value}`,
+						suffix: '</const>',
+					},
+				},
+				MaximumDamage: {
+					type: VariableType.physical,
+					statIconKey: 'level',
+					roundReplaced: true,
+					extendedEquals: {
+						prefix: '<const>',
+						meleeValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: false } } as DamageSource }).value as number)}`,
+						rangedValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: true } } as DamageSource }).value as number)}`,
+						suffix: '</const>',
+					},
+				},
+				CalculatedDamage: {
+					type: VariableType.physical,
+					isCustom: true,
+				},
+			},
+			uninteresting: ['f2'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
