@@ -72,7 +72,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		critChance: champion?.stats.critperlevel ?? 0,
 	};
 
-	// TODO health/resource can calculate decimal because of this, make sure it works
 	/** [statistics growth formula modifier](https://wiki.leagueoflegends.com/en-us/Champion_statistic#Growth_statistic_calculations) */
 	const STAT_GFM = 0.7025 + 0.0175 * (level - 1);
 	for (const stat in levelStats) {

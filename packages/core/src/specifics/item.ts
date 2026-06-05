@@ -3095,6 +3095,36 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'AuraDuration', 'MinionMod', 'MonsterMod'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.dreamMaker]: {
+		variables: defineVariables({
+			known: {
+				f2: [],
+				f3: [],
+				f5: [],
+				f6: [ITEMS_BY_NAME.dreamMaker?.dataValues.StealthWardCap],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+					f3: { value: 0 },
+					f5: { value: 0 },
+					f6: { value: ITEMS_BY_NAME.dreamMaker?.dataValues.StealthWardCap },
+				};
+			},
+			meta: {
+				ProcDmg: {
+					type: VariableType.magic,
+					statIconKey: 'level',
+					extendedEquals: `<const>${itemVariableValue('ProcDmg', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ProcDmg', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+				},
+				FlatDR: {
+					statIconKey: 'level',
+					extendedEquals: `<const>${itemVariableValue('FlatDR', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('FlatDR', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+				},
+			},
+			uninteresting: ['f2', 'f3', 'f5', 'f6', 'StealthWardCap', 'PurpleBubbleAoEMod'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
