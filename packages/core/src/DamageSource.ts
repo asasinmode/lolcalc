@@ -286,12 +286,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 					watch(() => [this.maxHealth.value, this.maxAbilityResource.value], ([currentMaxHp, currentMaxAbilityResource], previousValues) => {
 						if (this.listedChampion.value?.id === this.champion.value?.id) {
-							if ((!previousValues && !this.currentHealth.value) || this.currentHealth.value === previousValues?.[0]) {
+							if (this.currentHealth.value && this.currentHealth.value === previousValues?.[0]) {
 								this.currentHealth.value = currentMaxHp ?? 0;
 							} else {
 								this.currentHealth.value = Math.min(this.currentHealth.value, currentMaxHp ?? 0);
 							}
-							if ((!previousValues && !this.currentAbilityResource.value) || this.currentAbilityResource.value === previousValues?.[1]) {
+							if (this.currentAbilityResource.value && this.currentAbilityResource.value === previousValues?.[1]) {
 								this.currentAbilityResource.value = currentMaxAbilityResource ?? 0;
 							} else {
 								this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
