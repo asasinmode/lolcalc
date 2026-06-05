@@ -2936,12 +2936,12 @@ export const ITEM_SPECIFICS = {
 				f2: {
 					displayedName: 'TotalAP',
 					statIconKey: 'manaRegen',
-					extendedEquals: `${ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen}% base `,
+					extendedEquals: `<scalemana>${ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen}% base</scalemana> `,
 				},
 				f3: {
 					displayedName: 'TotalHSPower',
 					statIconKey: 'manaRegen',
-					extendedEquals: `${Math.round((ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen ?? 0) * 100)}% base `,
+					extendedEquals: `<scalemana>${Math.round((ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen ?? 0) * 100)}% base</scalemana> `,
 					resultsIsPercentage: true,
 				},
 			},
