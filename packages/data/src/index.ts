@@ -1,4 +1,4 @@
-import type { IChampionStatName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, IEffectObjectName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { IItemShopStatFilter } from './meta';
 import type { IChampion, IChampionId, IDragonName, IItem, IItemStat, IListedChampion, IRunes, IRuneSlotName } from './types';
@@ -91,11 +91,23 @@ export type TEffects = typeof effectData['data'];
 export const EFFECTS_STRINGTABLE = effectData.stringtable as Record<string, string>;
 
 export interface IEffectData extends Record<string, {
-	description: string;
 	dataKey: string;
+	description: string;
+} | {
+	dataKey: string;
+	stringtable: string;
 }> {};
 
-export const TEXT = textData.data satisfies ITextData as ITextData;
+export function resolveEffectDescription(effectObjectName: IEffectObjectName): string | undefined {
+	const source = (EFFECTS as TEffects)[effectObjectName];
+	if ('stringtable' in source) {
+		return EFFECTS_STRINGTABLE[source.stringtable];
+	} else {
+		return source.description;
+	}
+}
+
+export const TEXT = textData.data satisfies Omit<ITextData, 'stringtable'> as unknown as ITextData;
 
 export interface ITextData {
 	items: Record<string, {
@@ -143,7 +155,10 @@ export interface ITextData {
 		soul: string;
 	}>;
 	roleQuests: Record<IChampionRole, string[]>;
-	stringtable: Record<string, string>;
+	stringtable: {
+		/* technically typescript ignores it but it's there so */
+		__resolvedHashes: Record<string, string>;
+	} & Record<string, string>;
 }
 
 export const MISC: IMiscData = miscData.data;

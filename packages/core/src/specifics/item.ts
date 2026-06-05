@@ -2963,7 +2963,10 @@ export const ITEM_SPECIFICS = {
 		internalDataProperties: ['tBShockwave'],
 		setupData(self) {
 			self.internalItemData.value.tBShockwave = clamp(0, self.internalItemData.value.tBShockwave ?? 0, 1);
-			return { tBShockwave: 0 };
+			return {
+				/** _target_ breaking shockwave, since there's also "self" breaking shockwave giving move speed, not implemented atm */
+				tBShockwave: 0,
+			};
 		},
 		variables: defineVariables({
 			known: {

@@ -5,7 +5,7 @@ import type { IEffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { EFFECTS, ITEMS, useChampion } from '@lolcalc/data';
+import { ITEMS, resolveEffectDescription, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
@@ -39,7 +39,7 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
 		const item = ITEMS[sourceAbilityId.id]!;
 
-		const searchString = createSearchString(`${effectSpecific.label};${createSearchString(EFFECTS[effectObjectName]?.description)};`).concat(item.searchString);
+		const searchString = createSearchString(`${effectSpecific.label};${createSearchString(resolveEffectDescription(effectObjectName))};`).concat(item.searchString);
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
@@ -56,7 +56,7 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
 
-		const searchString = createSearchString(`${effectSpecific.label};${EFFECTS[effectObjectName]?.description}`);
+		const searchString = createSearchString(`${effectSpecific.label};${resolveEffectDescription(effectObjectName)}`);
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
@@ -272,6 +272,7 @@ defineExpose({
 				</li>
 			</ul>
 		</template>
+		<!-- deliberately not passing damageSource here because these effects are applied by a different champion. Effects from own items are applied with item extras -->
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
 			:ability-id="hoveredEffectId"

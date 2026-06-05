@@ -2,8 +2,8 @@ import type { IEffectData } from '@lolcalc/data';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
-import type { DetectItemVariables, IReplacedGameVariable } from '../types';
-import type { IVariableValueResult } from '../variables/game.ts';
+import type { DetectItemVariables } from '../types';
+import type { IReplacedGameVariable, IVariableValueResult } from '../variables/game.ts';
 import type { IInternalItemDataOf } from './index.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
@@ -232,6 +232,11 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'rylaisScepter'>).rimefrost) {
+				return [1];
+			}
+		},
 	}),
 	[EFFECT_OBJECT_NAME.abyssalMaskUnmake]: defineEffectSpecific<[isUnmade: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.abyssalMask),
@@ -242,6 +247,11 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'abyssalMask'>).unmake) {
+				return [1];
+			}
+		},
 	}),
 	[EFFECT_OBJECT_NAME.horizonFocusHypershot]: defineEffectSpecific<[isHypershot: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.horizonFocus),
@@ -251,6 +261,11 @@ export const EFFECT_SPECIFICS = {
 		},
 		isActive(data) {
 			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'horizonFocus'>).hypershot) {
+				return [1];
+			}
 		},
 	}),
 	[EFFECT_OBJECT_NAME.bloodletterVileDecay]: {
@@ -270,6 +285,11 @@ export const EFFECT_SPECIFICS = {
 			},
 		}),
 		maxValue: ITEM_SPECIFICS[ITEM_NAME_TO_ID.bloodlettersCurse].MAX_STACKS,
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay) {
+				return [(damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay];
+			}
+		},
 	},
 	[EFFECT_OBJECT_NAME.blackCleaverCarve]: defineEffectSpecific<[carveStacks: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver),
@@ -285,6 +305,11 @@ export const EFFECT_SPECIFICS = {
 		},
 		isActive(data) {
 			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve) {
+				return [(damageSource.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve];
+			}
 		},
 	}),
 	[EFFECT_OBJECT_NAME.botrkClawingShadows]: defineEffectSpecific<[isClawed: number]>({
@@ -362,7 +387,7 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 	}),
-	[EFFECT_OBJECT_NAME.imperialMandate]: defineEffectSpecific<[commanded: number]>({
+	[EFFECT_OBJECT_NAME.imperialMandateCommand]: defineEffectSpecific<[commanded: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.imperialMandate),
 		label: 'Command',
 		setupData(data) {
@@ -373,6 +398,21 @@ export const EFFECT_SPECIFICS = {
 		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'imperialMandate'>).command) {
+				return [1];
+			}
+		},
+	}),
+	[EFFECT_OBJECT_NAME.stridebreakerBShockwaveSlow]: defineEffectSpecific<[bShockwaved: number]>({
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.stridebreaker),
+		label: 'Breaking Shockwave',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'stridebreaker'>).tBShockwave) {
 				return [1];
 			}
 		},
@@ -521,17 +561,26 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
 	},
 	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: {
-		description: 'This unit\'s movement is slowed.',
+		stringtable: 'game_buff_tooltip_slow',
 	},
-	[EFFECT_OBJECT_NAME.randuinsHumility]: 'game_buff_tooltip_slow',
+	[EFFECT_OBJECT_NAME.randuinsHumility]: {
+		stringtable: 'game_buff_tooltip_slow',
+	},
+	[EFFECT_OBJECT_NAME.stridebreakerBShockwaveSlow]: {
+		stringtable: 'game_buff_tooltip_slow',
+	},
 	/* champion passives */
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
 		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
 	},
 	/* other */
-	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
-	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: 'game_buff_tooltip_grievouswound',
+	[EFFECT_OBJECT_NAME.grievousWounds]: {
+		stringtable: 'game_buff_tooltip_grievouswound',
+	},
+	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: {
+		stringtable: 'game_buff_tooltip_grievouswound',
+	},
 	[EFFECT_OBJECT_NAME.stun]: {
 		description: 'This unit is <keyword>stunned</keyword>.',
 	},

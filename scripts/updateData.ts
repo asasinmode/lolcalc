@@ -3,7 +3,7 @@ import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type { ITEMS } from '@lolcalc/data';
+import type { IEffectData, ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
@@ -954,14 +954,15 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 		loadStringTable(),
 	]);
 
-	const effectDataStringtable = { stringtable: {} };
+	const effectDataStringtable = { stringtable: {} as Record<string, string> };
 
 	effectData = {
 		version: latestVersion,
 		data: Object.fromEntries(await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES.map(async ([effectObjectName, effectSpecific]) => {
 			if (CUSTOM_EFFECTS[effectObjectName]) {
-				if (typeof CUSTOM_EFFECTS[effectObjectName] === 'string') {
-					const description = getStringtableValue(CUSTOM_EFFECTS[effectObjectName], `custom effect ${effectObjectName} description`);
+				const customEffect = CUSTOM_EFFECTS[effectObjectName];
+				if (typeof customEffect === 'string') {
+					const description = getStringtableValue(customEffect, `custom effect ${effectObjectName} description`);
 
 					if (!description) {
 						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
@@ -969,10 +970,23 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 
 					return [effectObjectName, {
 						dataKey: effectObjectName,
-						description: description && extractEffectDescription(description),
+						description: extractEffectDescription(description),
+					}];
+				} else if ('stringtable' in customEffect) {
+					const description = getStringtableValue(customEffect.stringtable as string, `custom effect ${effectObjectName} description`);
+
+					if (!description) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
+					}
+
+					effectDataStringtable.stringtable[customEffect.stringtable as string] = extractEffectDescription(description);
+
+					return [effectObjectName, {
+						dataKey: effectObjectName,
+						stringtable: customEffect.stringtable,
 					}];
 				} else {
-					return [effectObjectName, { dataKey: effectObjectName, ...CUSTOM_EFFECTS[effectObjectName] }];
+					return [effectObjectName, { dataKey: effectObjectName, ...customEffect }];
 				}
 			}
 
@@ -1026,7 +1040,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 				dataKey: data[0],
 			}];
 		}))) as unknown as NonNullable<(typeof effectData)>['data'],
-		stringtable: effectDataStringtable.stringtable,
+		stringtable: effectDataStringtable.stringtable as NonNullable<typeof effectData>['stringtable'],
 	};
 
 	await fs.writeFile(effectFilePath, stringifyObject(effectData));

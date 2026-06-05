@@ -494,7 +494,8 @@ export const EFFECT_OBJECT_NAME = {
 	celestialOppositionBlessingShattered: 'lolcalc3869BlessingShattered',
 	randuinsHumility: 'lolcalc3143HumilitySlow',
 	malignanceHatefog: '3118VisualDebuff',
-	imperialMandate: '4005Debuff',
+	imperialMandateCommand: '4005Debuff',
+	stridebreakerBShockwaveSlow: 'lolcalc6631BShockwaveSlow',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

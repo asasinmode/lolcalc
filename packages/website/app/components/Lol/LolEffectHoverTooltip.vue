@@ -3,7 +3,6 @@ import type { IComputedAbilityDescription, IComputedItemDescription } from '@lol
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
-import type { TEffects } from '@lolcalc/data';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
@@ -12,7 +11,7 @@ import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { EFFECTS, ITEMS, useChampion } from '@lolcalc/data';
+import { ITEMS, resolveEffectDescription, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
 
@@ -73,7 +72,12 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 	);
 });
 
-const computedDescription = computed(() => props.abilityId && (EFFECTS as TEffects)[props.abilityId.id].description);
+const computedDescription = computed((): string | undefined => {
+	if (props.abilityId) {
+		return resolveEffectDescription(props.abilityId.id);
+	}
+	return undefined;
+});
 
 const el = useTemplateRef('el');
 
