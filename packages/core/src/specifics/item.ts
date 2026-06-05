@@ -2994,6 +2994,7 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				lolcalcChampRange: {
+					type: VariableType.physical,
 					displayedName: 'CleaveDamage',
 					statIconKey: 'attackDamage',
 					extendedEquals: {
@@ -3005,6 +3006,7 @@ export const ITEM_SPECIFICS = {
 					},
 				},
 				SlashDamage: {
+					type: VariableType.physical,
 					statIconKey: 'attackDamage',
 					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.stridebreaker?.dataValues as any)[ITEMS_BY_NAME.stridebreaker?.itemCalculations.SlashDamage.mFormulaParts[0]!.mDataValue!] * 100)}%</scalead>`,
 				},
@@ -3024,10 +3026,12 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				Damage: {
+					type: VariableType.magic,
 					statIconKey: 'abilityPower',
 					extendedEquals: `<const>${ludensEchoSpecifics.const}</const> <scaleap>+ ${Math.round(ludensEchoSpecifics.apRatio * 100)}%</scaleap>`,
 				},
 				SingleTargetMax: {
+					type: VariableType.magic,
 					statIconKey: 'abilityPower',
 					extendedEquals: `<const>${ludensEchoSpecifics.const * ludensEchoSpecifics.singleTargetMaxMultiplier}</const> <scaleap>+ ${Math.round(ludensEchoSpecifics.apRatio * ludensEchoSpecifics.singleTargetMaxMultiplier * 100)}%</scaleap>`,
 				},
