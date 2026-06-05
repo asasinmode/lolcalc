@@ -72,11 +72,11 @@ const gluttonousGreavesSpecific = {
 } satisfies IItemSpecific;
 
 const bastionBreakerSpecifics = {
-	abilityDamageCalcBase: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.AbilityDamageCalc.mFormulaParts[0]!.mNumber ?? 0,
-	abilityDamageCalcRangeCoefficient: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.AbilityDamageCalc.mFormulaParts[1]!.mCoefficient ?? 0,
+	abilityDamageCalcBase: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.AbilityDamageCalc.mFormulaParts[0]!.mNumber,
+	abilityDamageCalcRangeCoefficient: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.AbilityDamageCalc.mFormulaParts[1]!.mCoefficient,
 	abilityDamageCalcRangeModifier: (ITEMS_BY_NAME.bastionBreaker?.dataValues as any)[ITEMS_BY_NAME.bastionBreaker.itemCalculations.AbilityDamageCalc.mRangedMultiplier.mDataValue],
-	damageCalcBase: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.DamageCalc.mFormulaParts[0]!.mNumber ?? 0,
-	damageCalcRangeCoefficient: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.DamageCalc.mFormulaParts[1]!.mCoefficient ?? 0,
+	damageCalcBase: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.DamageCalc.mFormulaParts[0]!.mNumber,
+	damageCalcRangeCoefficient: ITEMS_BY_NAME.bastionBreaker?.itemCalculations.DamageCalc.mFormulaParts[1]!.mCoefficient,
 	damageCalcRangeModifier: (ITEMS_BY_NAME.bastionBreaker?.dataValues as any)[ITEMS_BY_NAME.bastionBreaker.itemCalculations.DamageCalc.mRangedMultiplier.mDataValue],
 };
 
@@ -94,13 +94,19 @@ const hullbreakerSpecifics = {
 	structureHpRatio: (ITEMS_BY_NAME.hullbreaker?.dataValues as any)[ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamageVSStructures.mFormulaParts[1]!.mDataValue!],
 	structureRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamageVSStructures.mRangedMultiplier.mNumber,
 	meleeBonusMinionResistsLvl1: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value,
-	meleeBonusMinionResistsLvl18: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value + ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mBonusPerLevelAtAndAfter! * (18 + 1 - ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mLevel!),
+	meleeBonusMinionResistsLvl18: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value + ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mBonusPerLevelAtAndAfter! * 18 + 1 - (ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mLevel!),
 	bonusMinionResistsRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mRangedMultiplier.mNumber,
 };
 
 const sunderedSkySpecifics = {
 	meleeAdRatio: (ITEMS_BY_NAME.sunderedSky?.dataValues as any)[ITEMS_BY_NAME.sunderedSky?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mDataValue!],
 	rangedModifier: (ITEMS_BY_NAME.sunderedSky?.dataValues as any)[ITEMS_BY_NAME.sunderedSky?.itemCalculations.RangedItemCalcValue.mMultiplier.mDataValue!],
+};
+
+const ludensEchoSpecifics = {
+	const: (ITEMS_BY_NAME.ludensEcho?.dataValues as any)[ITEMS_BY_NAME.ludensEcho.itemCalculations.Damage.mFormulaParts[0]!.mDataValue!],
+	apRatio: (ITEMS_BY_NAME.ludensEcho?.dataValues as any)[ITEMS_BY_NAME.ludensEcho.itemCalculations.Damage.mFormulaParts[1]!.mDataValue!],
+	singleTargetMaxMultiplier: ITEMS_BY_NAME.ludensEcho?.itemCalculations.SingleTargetMax.mMultiplier.mNumber,
 };
 
 const grievousWoundItemSpecific = {
@@ -872,7 +878,7 @@ export const ITEM_SPECIFICS = {
 				SpellbladeDamage: {
 					type: VariableType.physical,
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.trinity?.dataValues.SpellbladeMultiplier ?? 0) * 100)}% bonus</scalead> `,
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.trinity?.dataValues.SpellbladeMultiplier * 100)}% bonus</scalead> `,
 				},
 			},
 			uninteresting: ['f4', 'MoveSpeedBonus', 'MSDuration'],
@@ -1016,7 +1022,7 @@ export const ITEM_SPECIFICS = {
 				},
 				TotalHealthRegen: {
 					statIconKey: ['level', 'armor', 'magicResist'],
-					extendedEquals: `<const>${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mStartValue} - ${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mEndValue}%i:${STAT_ICON.level}%</const> <scalearmor>+ ${Math.round((ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}%%i:${STAT_ICON.armor}%</scalearmor> <scalemr>+ ${Math.round((ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[2]!.mCoefficient ?? 0) * 100)}%%i:${STAT_ICON.magicResist}%</scalemr>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mStartValue} - ${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mEndValue}%i:${STAT_ICON.level}%</const> <scalearmor>+ ${Math.round(ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[1]!.mCoefficient! * 100)}%%i:${STAT_ICON.armor}%</scalearmor> <scalemr>+ ${Math.round(ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[2]!.mCoefficient! * 100)}%%i:${STAT_ICON.magicResist}%</scalemr>`,
 					type: VariableType.heal,
 				},
 			},
@@ -1207,7 +1213,7 @@ export const ITEM_SPECIFICS = {
 				MaxDamageCalc: {
 					type: VariableType.physical,
 					statIconKey: ['attackDamage'],
-					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.deadMansPlate?.dataValues as any)[ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0]?.mDataValue!] ?? 0) * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <const>+ ${ITEMS_BY_NAME.deadMansPlate?.dataValues.MaxStacks * ITEMS_BY_NAME.deadMansPlate?.dataValues.BonusDamagePerStack}</const>`,
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.deadMansPlate?.dataValues as any)[ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0]?.mDataValue!] * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <const>+ ${ITEMS_BY_NAME.deadMansPlate?.dataValues.MaxStacks * ITEMS_BY_NAME.deadMansPlate?.dataValues.BonusDamagePerStack}</const>`,
 				},
 				DamageCalc: {
 					type: VariableType.physical,
@@ -1294,7 +1300,7 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 					statIconKey: 'hp',
 					displayedName: 'ConsumptionDamage',
-					extendedEquals: `<const>${ITEMS_BY_NAME.heartsteel?.dataValues.BaseDamage}</const> <scalehealth>+ ${Math.round((ITEMS_BY_NAME.heartsteel?.dataValues.HPRatio ?? 0) * 100)}%</scalehealth>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.heartsteel?.dataValues.BaseDamage}</const> <scalehealth>+ ${Math.round(ITEMS_BY_NAME.heartsteel?.dataValues.HPRatio * 100)}%</scalehealth>`,
 				},
 				f5: {
 					displayedName: 'ConsumptionHPGain',
@@ -1571,7 +1577,7 @@ export const ITEM_SPECIFICS = {
 				SpellbladeDamage: {
 					type: VariableType.magic,
 					statIconKey: ['attackDamage', 'abilityPower'],
-					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.lichBane?.dataValues as any)[ITEMS_BY_NAME.lichBane?.itemCalculations.SpellbladeDamage.mFormulaParts[0]?.mDataValue!] ?? 0) * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.lichBane?.dataValues as any)[ITEMS_BY_NAME.lichBane?.itemCalculations.SpellbladeDamage.mFormulaParts[1]?.mDataValue!] ?? 0) * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.lichBane?.dataValues as any)[ITEMS_BY_NAME.lichBane?.itemCalculations.SpellbladeDamage.mFormulaParts[0]?.mDataValue!] * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> <scaleap>+ ${Math.round((ITEMS_BY_NAME.lichBane?.dataValues as any)[ITEMS_BY_NAME.lichBane?.itemCalculations.SpellbladeDamage.mFormulaParts[1]?.mDataValue!] * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
 				},
 			},
 			uninteresting: ['f1', 'SpellBladeDuration', 'SheenASBuff'],
@@ -2001,7 +2007,7 @@ export const ITEM_SPECIFICS = {
 				DPS: {
 					type: VariableType.magic,
 					statIconKey: 'hp',
-					extendedEquals: `<const>${ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[0]!.mNumber}</const> <scalehealth>+ ${Math.round((ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}% bonus</scalehealth> `,
+					extendedEquals: `<const>${ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[0]!.mNumber}</const> <scalehealth>+ ${Math.round(ITEMS_BY_NAME.sunfireAegis?.itemCalculations.DamagePerTick.mFormulaParts[1]!.mCoefficient! * 100)}% bonus</scalehealth> `,
 				},
 			},
 			uninteresting: ['f1', 'AuraDuration', 'MinionMod', 'MonsterMod'],
@@ -2081,7 +2087,7 @@ export const ITEM_SPECIFICS = {
 				TotalDamage: {
 					type: VariableType.magic,
 					statIconKey: 'armor',
-					extendedEquals: `<const>${ITEMS_BY_NAME.thornmail?.dataValues.BaseDamage}</const><scalearmor> + ${Math.round((ITEMS_BY_NAME.thornmail?.dataValues.BonusArmorDamageRatio ?? 0) * 100)}% bonus</scalearmor> `,
+					extendedEquals: `<const>${ITEMS_BY_NAME.thornmail?.dataValues.BaseDamage}</const><scalearmor> + ${Math.round(ITEMS_BY_NAME.thornmail?.dataValues.BonusArmorDamageRatio * 100)}% bonus</scalearmor> `,
 				},
 			},
 			uninteresting: [...grievousWoundItemSpecific.variables.uninteresting, 'f1'],
@@ -2156,15 +2162,15 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'CleaveDamage',
 					extendedEquals: {
 						prefix: '<scalead>',
-						meleeValue: Math.round((ITEMS_BY_NAME.ravenousHydra?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
-						rangedValue: Math.round((ITEMS_BY_NAME.ravenousHydra?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						meleeValue: Math.round(ITEMS_BY_NAME.ravenousHydra?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.ravenousHydra?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
 						valueSuffix: '%',
 						suffix: '</scalead>',
 					},
 				},
 				PrimaryDamage: {
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.ravenousHydra?.dataValues.ActiveADRatio ?? 0) * 100)}%</scalead>`,
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.ravenousHydra?.dataValues.ActiveADRatio * 100)}%</scalead>`,
 				},
 			},
 		}),
@@ -2191,8 +2197,8 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'CleaveDamage',
 					extendedEquals: {
 						prefix: '<scalead>',
-						meleeValue: Math.round((ITEMS_BY_NAME.tiamat?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
-						rangedValue: Math.round((ITEMS_BY_NAME.tiamat?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient ?? 0) * 100),
+						meleeValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient * 100),
 						valueSuffix: '%',
 						suffix: '</scalead>',
 					},
@@ -2200,7 +2206,7 @@ export const ITEM_SPECIFICS = {
 				PrimaryDamage: {
 					type: VariableType.physical,
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.tiamat?.dataValues.ActiveADRatio ?? 0) * 100)}%</scalead>`,
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.tiamat?.dataValues.ActiveADRatio * 100)}%</scalead>`,
 				},
 			},
 		}),
@@ -2244,7 +2250,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				TotalHealingTooltip: {
 					statIconKey: 'hp',
-					extendedEquals: `<scalehealth>${Math.round((ITEMS_BY_NAME.warmogsArmor?.dataValues.MaxHealthRatio ?? 0) * (ITEMS_BY_NAME.warmogsArmor?.itemCalculations.TotalHealingTooltip.mMultiplier.mNumber ?? 0) * 100)}%</scalehealth>`,
+					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.warmogsArmor?.dataValues.MaxHealthRatio * ITEMS_BY_NAME.warmogsArmor?.itemCalculations.TotalHealingTooltip.mMultiplier.mNumber * 100)}%</scalehealth>`,
 				},
 				f2: {
 					displayedName: 'BonusMaxHP',
@@ -2259,7 +2265,7 @@ export const ITEM_SPECIFICS = {
 				BoltDamage: {
 					type: VariableType.physical,
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.runaan?.itemCalculations.BoltDamage.mFormulaParts[0]?.mSubpart.mNumber ?? 0) * 100)}%</scalead>`,
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.runaan?.itemCalculations.BoltDamage.mFormulaParts[0]?.mSubpart.mNumber * 100)}%</scalead>`,
 				},
 			},
 			uninteresting: ['Effect3Amount' as any],
@@ -2381,7 +2387,7 @@ export const ITEM_SPECIFICS = {
 				TotalOnHitDamage: {
 					type: VariableType.magic,
 					statIconKey: 'abilityPower',
-					extendedEquals: `<const>${ITEMS_BY_NAME.nashorsTooth?.dataValues.NashorsBaseValue}</const> <scaleap>+ ${Math.round((ITEMS_BY_NAME.nashorsTooth?.dataValues.NashorsAPValue ?? 0) * 100)}%</scaleap>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.nashorsTooth?.dataValues.NashorsBaseValue}</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.nashorsTooth?.dataValues.NashorsAPValue * 100)}%</scaleap>`,
 				},
 			},
 			uninteresting: ['f2'],
@@ -2406,7 +2412,7 @@ export const ITEM_SPECIFICS = {
 				GroundBurnDamagePerTickTooltipOnly: {
 					type: VariableType.magic,
 					statIconKey: 'abilityPower',
-					extendedEquals: `<const>${(ITEMS_BY_NAME.malignance?.dataValues as any)[ITEMS_BY_NAME.malignance?.itemCalculations.GroundBurnDamagePerTickTooltipOnly.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.malignance?.dataValues as any)[ITEMS_BY_NAME.malignance?.itemCalculations.GroundBurnDamagePerTickTooltipOnly.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+					extendedEquals: `<const>${(ITEMS_BY_NAME.malignance?.dataValues as any)[ITEMS_BY_NAME.malignance?.itemCalculations.GroundBurnDamagePerTickTooltipOnly.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round((ITEMS_BY_NAME.malignance?.dataValues as any)[ITEMS_BY_NAME.malignance?.itemCalculations.GroundBurnDamagePerTickTooltipOnly.mFormulaParts[1]!.mDataValue!] * 100)}%</scaleap>`,
 				},
 			},
 			uninteresting: ['f4', 'UltimateHaste', 'GroundDuration', 'MagicResistanceShred'],
@@ -2428,7 +2434,7 @@ export const ITEM_SPECIFICS = {
 				TotalHealAmount: {
 					type: VariableType.heal,
 					statIconKey: 'abilityPower',
-					extendedEquals: `<const>${(ITEMS_BY_NAME.cryptbloom?.dataValues as any)[ITEMS_BY_NAME.cryptbloom?.itemCalculations.TotalHealAmount.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.cryptbloom?.dataValues as any)[ITEMS_BY_NAME.cryptbloom?.itemCalculations.TotalHealAmount.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+					extendedEquals: `<const>${(ITEMS_BY_NAME.cryptbloom?.dataValues as any)[ITEMS_BY_NAME.cryptbloom?.itemCalculations.TotalHealAmount.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round((ITEMS_BY_NAME.cryptbloom?.dataValues as any)[ITEMS_BY_NAME.cryptbloom?.itemCalculations.TotalHealAmount.mFormulaParts[1]!.mDataValue!] * 100)}%</scaleap>`,
 				},
 			},
 			uninteresting: ['f5', 'f6', 'TakedownWindow'],
@@ -2476,7 +2482,7 @@ export const ITEM_SPECIFICS = {
 				FireboltDamage: {
 					type: VariableType.magic,
 					statIconKey: 'abilityPower',
-					extendedEquals: `<const>${(ITEMS_BY_NAME.rocketbelt?.dataValues as any)[ITEMS_BY_NAME.rocketbelt?.itemCalculations.FireboltDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.rocketbelt?.dataValues as any)[ITEMS_BY_NAME.rocketbelt?.itemCalculations.FireboltDamage.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+					extendedEquals: `<const>${(ITEMS_BY_NAME.rocketbelt?.dataValues as any)[ITEMS_BY_NAME.rocketbelt?.itemCalculations.FireboltDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round((ITEMS_BY_NAME.rocketbelt?.dataValues as any)[ITEMS_BY_NAME.rocketbelt?.itemCalculations.FireboltDamage.mFormulaParts[1]!.mDataValue!] * 100)}%</scaleap>`,
 				},
 			},
 			uninteresting: ['f5'],
@@ -2501,7 +2507,7 @@ export const ITEM_SPECIFICS = {
 							ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mBonusPerLevelAtAndAfter
 							* (18 + 1 - ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mLevel)
 						)
-					}%i:${STAT_ICON.level}%</const> <scalehealth>+ ${Math.round(((ITEMS_BY_NAME.chainlacedCrushers?.dataValues as any)[ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
+					}%i:${STAT_ICON.level}%</const> <scalehealth>+ ${Math.round((ITEMS_BY_NAME.chainlacedCrushers?.dataValues as any)[ITEMS_BY_NAME.chainlacedCrushers?.itemCalculations.ShieldAmountCalc.mFormulaParts[1]!.mDataValue!] * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
 				},
 			},
 			uninteresting: ['f5', 'ShieldDuration'],
@@ -2567,7 +2573,7 @@ export const ITEM_SPECIFICS = {
 							ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mBonusPerLevelAtAndAfter
 							* (18 + 1 - ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[0]!.mBreakpoints![0]!.mLevel)
 						)
-					}%i:${STAT_ICON.level}%</const> <scalehealth>+ ${Math.round(((ITEMS_BY_NAME.armoredAdvance?.dataValues as any)[ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
+					}%i:${STAT_ICON.level}%</const> <scalehealth>+ ${Math.round((ITEMS_BY_NAME.armoredAdvance?.dataValues as any)[ITEMS_BY_NAME.armoredAdvance?.itemCalculations.ShieldAmountCalc.mFormulaParts[1]!.mDataValue!] * 100)}% bonus %i:${STAT_ICON.hp}%</scalehealth>`,
 				},
 				AttackDamageReduced: {
 					isCustom: true,
@@ -2589,7 +2595,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ProcDamage: {
 					statIconKey: 'lethality',
-					extendedEquals: `<const>${ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[0]!.mNumber}</const> <scalelethality>+ ${Math.round((ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[1]!.mCoefficient ?? 0) * 100)}%</scalelethality>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[0]!.mNumber}</const> <scalelethality>+ ${Math.round(ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[1]!.mCoefficient * 100)}%</scalelethality>`,
 				},
 			},
 			uninteresting: ['f1', 'OutOfVisionDuration', 'Effect2Amount' as any, 'TotalWardDamage'],
@@ -2735,11 +2741,11 @@ export const ITEM_SPECIFICS = {
 				SpellbladeDamage: {
 					type: VariableType.physical,
 					statIconKey: ['attackDamage', 'critChance'],
-					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.essenceReaver?.dataValues as any)[ITEMS_BY_NAME.essenceReaver?.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mDataValue!] ?? 0) * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> + ${(ITEMS_BY_NAME.essenceReaver?.dataValues as any)[ITEMS_BY_NAME.essenceReaver?.itemCalculations.SpellbladeDamage.mFormulaParts[1]!.mDataValue!] ?? 0}%%i:${STAT_ICON.critChance}%`,
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.essenceReaver?.dataValues as any)[ITEMS_BY_NAME.essenceReaver?.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mDataValue!] * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead> + ${(ITEMS_BY_NAME.essenceReaver?.dataValues as any)[ITEMS_BY_NAME.essenceReaver?.itemCalculations.SpellbladeDamage.mFormulaParts[1]!.mDataValue!]}%%i:${STAT_ICON.critChance}%`,
 				},
 				TotalManaRefund: {
 					statIconKey: ['attackDamage', 'critChance'],
-					extendedEquals: `${Math.round((ITEMS_BY_NAME.essenceReaver?.itemCalculations.TotalManaRefund.mMultiplier.mNumber ?? 0) * 100)}% <var>Spellblade damage</var>`,
+					extendedEquals: `${Math.round(ITEMS_BY_NAME.essenceReaver?.itemCalculations.TotalManaRefund.mMultiplier.mNumber * 100)}% <var>Spellblade damage</var>`,
 				},
 			},
 			uninteresting: ['f1', 'f2'],
@@ -2769,7 +2775,7 @@ export const ITEM_SPECIFICS = {
 				TooltipDamage: {
 					type: VariableType.magic,
 					statIconKey: 'abilityPower',
-					extendedEquals: `<const>${(ITEMS_BY_NAME.zazZakRealmspike?.dataValues as any)[ITEMS_BY_NAME.zazZakRealmspike?.itemCalculations.TooltipDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.zazZakRealmspike?.dataValues as any)[ITEMS_BY_NAME.zazZakRealmspike?.itemCalculations.TooltipDamage.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+					extendedEquals: `<const>${(ITEMS_BY_NAME.zazZakRealmspike?.dataValues as any)[ITEMS_BY_NAME.zazZakRealmspike?.itemCalculations.TooltipDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round((ITEMS_BY_NAME.zazZakRealmspike?.dataValues as any)[ITEMS_BY_NAME.zazZakRealmspike?.itemCalculations.TooltipDamage.mFormulaParts[1]!.mDataValue!] * 100)}%</scaleap>`,
 				},
 				TotalDamage: {
 					type: VariableType.magic,
@@ -2793,7 +2799,7 @@ export const ITEM_SPECIFICS = {
 				SquallDamage: {
 					type: VariableType.magic,
 					statIconKey: 'abilityPower',
-					extendedEquals: `<const>${(ITEMS_BY_NAME.stormsurge?.dataValues as any)[ITEMS_BY_NAME.stormsurge.itemCalculations.SquallDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round(((ITEMS_BY_NAME.stormsurge?.dataValues as any)[ITEMS_BY_NAME.stormsurge.itemCalculations.SquallDamage.mFormulaParts[1]!.mDataValue!] ?? 0) * 100)}%</scaleap>`,
+					extendedEquals: `<const>${(ITEMS_BY_NAME.stormsurge?.dataValues as any)[ITEMS_BY_NAME.stormsurge.itemCalculations.SquallDamage.mFormulaParts[0]!.mDataValue!]}</const> <scaleap>+ ${Math.round((ITEMS_BY_NAME.stormsurge?.dataValues as any)[ITEMS_BY_NAME.stormsurge.itemCalculations.SquallDamage.mFormulaParts[1]!.mDataValue!] * 100)}%</scaleap>`,
 				},
 			},
 			uninteresting: ['f5', 'DamageThreshold', 'WindowDuration', 'DelayDuration'],
@@ -2824,7 +2830,7 @@ export const ITEM_SPECIFICS = {
 				HealTotal: {
 					type: VariableType.heal,
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.deathsDance?.dataValues as any)[ITEMS_BY_NAME.deathsDance?.itemCalculations.HealTotal.mFormulaParts[0]!.mDataValue!] ?? 0) * 100)}% bonus</scalead> `,
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.deathsDance?.dataValues as any)[ITEMS_BY_NAME.deathsDance?.itemCalculations.HealTotal.mFormulaParts[0]!.mDataValue!] * 100)}% bonus</scalead> `,
 				},
 			},
 			uninteresting: ['BleedDurationWorst', 'TakedownWindow', 'HealDuration'],
@@ -2941,7 +2947,7 @@ export const ITEM_SPECIFICS = {
 				f3: {
 					displayedName: 'TotalHSPower',
 					statIconKey: 'manaRegen',
-					extendedEquals: `<scalemana>${Math.round((ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen ?? 0) * 100)}% base</scalemana> `,
+					extendedEquals: `<scalemana>${Math.round(ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen * 100)}% base</scalemana> `,
 					resultsIsPercentage: true,
 				},
 			},
@@ -2968,6 +2974,10 @@ export const ITEM_SPECIFICS = {
 				tBShockwave: 0,
 			};
 		},
+		/* should be 2 part, same as youmuu, when the 2nd part of the passive that applies the move speed bonus on self is implemented */
+		imgActive(internalData: { tBShockwave: number }) {
+			return internalData.tBShockwave;
+		},
 		variables: defineVariables({
 			known: {
 				lolcalcChampRange: [],
@@ -2988,18 +2998,41 @@ export const ITEM_SPECIFICS = {
 					statIconKey: 'attackDamage',
 					extendedEquals: {
 						prefix: '<scalead>',
-						meleeValue: Math.round((ITEMS_BY_NAME.stridebreaker?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient ?? 0) * 100),
-						rangedValue: Math.round((ITEMS_BY_NAME.stridebreaker?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient ?? 0) * 100),
+						meleeValue: Math.round(ITEMS_BY_NAME.stridebreaker?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.stridebreaker?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
 						valueSuffix: '%',
 						suffix: '</scalead>',
 					},
 				},
 				SlashDamage: {
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.stridebreaker?.dataValues as any)[ITEMS_BY_NAME.stridebreaker?.itemCalculations.SlashDamage.mFormulaParts[0]!.mDataValue!] ?? 0) * 100)}%</scalead>`,
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.stridebreaker?.dataValues as any)[ITEMS_BY_NAME.stridebreaker?.itemCalculations.SlashDamage.mFormulaParts[0]!.mDataValue!] * 100)}%</scalead>`,
 				},
 			},
 			uninteresting: ['MSSlow', 'ActiveMS', 'Duration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.ludensEcho]: {
+		variables: defineVariables({
+			known: {
+				f2: [],
+			},
+			calculate() {
+				return {
+					f2: { value: 0 },
+				};
+			},
+			meta: {
+				Damage: {
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${ludensEchoSpecifics.const}</const> <scaleap>+ ${Math.round(ludensEchoSpecifics.apRatio * 100)}%</scaleap>`,
+				},
+				SingleTargetMax: {
+					statIconKey: 'abilityPower',
+					extendedEquals: `<const>${ludensEchoSpecifics.const * ludensEchoSpecifics.singleTargetMaxMultiplier}</const> <scaleap>+ ${Math.round(ludensEchoSpecifics.apRatio * ludensEchoSpecifics.singleTargetMaxMultiplier * 100)}%</scaleap>`,
+				},
+			},
+			uninteresting: ['f2', 'MaxCharges', 'RepeatDamageReduction'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
