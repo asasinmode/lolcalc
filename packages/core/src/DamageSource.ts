@@ -14,7 +14,7 @@ import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts'
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, SUPPORT_ITEMS } from '@lolcalc/shared';
+import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
@@ -1066,8 +1066,8 @@ function handleRoleQuestItems(items: (IItem | undefined)[], roleQuest?: IChampio
 		}
 	}
 
-	if (roleQuest && roleQuest !== 'support') {
-		const itemIndexes = items.map((item, index) => item && SUPPORT_ITEMS.includes(item.id) ? index : undefined).filter(index => index !== undefined);
+	if (roleQuest !== 'support') {
+		const itemIndexes = items.map((item, index) => item && UPGRADED_SUPPORT_ITEMS.includes(item.id) ? index : undefined).filter(index => index !== undefined);
 
 		for (const index of itemIndexes) {
 			items[index] = undefined;

@@ -418,15 +418,19 @@ export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
 
 export const RANGED_ONLY_ITEMS: string[] = [ITEM_NAME_TO_ID.runaan];
 
-export const SUPPORT_ITEMS: string[] = [
-	ITEM_NAME_TO_ID.worldAtlas,
-	ITEM_NAME_TO_ID.runicCompass,
-	ITEM_NAME_TO_ID.bountyOfWorlds,
+export const UPGRADED_SUPPORT_ITEMS: string[] = [
 	ITEM_NAME_TO_ID.celestialOpposition,
 	ITEM_NAME_TO_ID.dreamMaker,
 	ITEM_NAME_TO_ID.zazZakRealmspike,
 	ITEM_NAME_TO_ID.solsticeSleigh,
 	ITEM_NAME_TO_ID.bloodsong,
+];
+
+export const SUPPORT_ITEMS: string[] = [
+	ITEM_NAME_TO_ID.worldAtlas,
+	ITEM_NAME_TO_ID.runicCompass,
+	ITEM_NAME_TO_ID.bountyOfWorlds,
+	...UPGRADED_SUPPORT_ITEMS,
 ];
 
 export const UNTRANSFORMED_TEAR_ITEM_IDS = [

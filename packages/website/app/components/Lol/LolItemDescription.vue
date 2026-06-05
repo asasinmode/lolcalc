@@ -7,7 +7,7 @@ import { calculateDynamicVariables, specificKnownVariables } from '@lolcalc/core
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta';
-import { SUPPORT_ITEMS } from '@lolcalc/shared/index';
+import { UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared/index';
 
 const props = defineProps<IItemDescriptionProps>();
 
@@ -42,7 +42,7 @@ const isMidQuestBoots = computed(() => {
 	return false;
 });
 
-const isSupportItem = computed(() => computedDescription.value?.item && SUPPORT_ITEMS.includes(computedDescription.value.item.id));
+const isSupportItem = computed(() => computedDescription.value?.item && UPGRADED_SUPPORT_ITEMS.includes(computedDescription.value.item.id));
 
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
 const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
