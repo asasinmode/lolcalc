@@ -2889,6 +2889,46 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 	},
+	[ITEM_NAME_TO_ID.stridebreaker]: {
+		internalDataProperties: ['tBShockwave'],
+		setupData(self) {
+			self.internalItemData.value.tBShockwave = clamp(0, self.internalItemData.value.tBShockwave ?? 0, 1);
+			return { tBShockwave: 0 };
+		},
+		variables: defineVariables({
+			known: {
+				lolcalcChampRange: [],
+			},
+			calculate(self) {
+				return {
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					displayedName: 'CleaveDamage',
+					statIconKey: 'attackDamage',
+					extendedEquals: {
+						prefix: '<scalead>',
+						meleeValue: Math.round((ITEMS_BY_NAME.stridebreaker?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient ?? 0) * 100),
+						rangedValue: Math.round((ITEMS_BY_NAME.stridebreaker?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient ?? 0) * 100),
+						valueSuffix: '%',
+						suffix: '</scalead>',
+					},
+				},
+				SlashDamage: {
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round(((ITEMS_BY_NAME.stridebreaker?.dataValues as any)[ITEMS_BY_NAME.stridebreaker?.itemCalculations.SlashDamage.mFormulaParts[0]!.mDataValue!] ?? 0) * 100)}%</scalead>`,
+				},
+			},
+			uninteresting: ['MSSlow', 'ActiveMS', 'Duration'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
