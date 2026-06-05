@@ -2044,8 +2044,9 @@ function objectReplaceAllEncounteredValues(object: any, keys: string[], searchVa
 }
 
 function hashFnv1a(value: string): string {
-	const rv = fnv1a(value.toLowerCase(), { size: 32 }).toString(16);
-	return `{${rv}}`;
+	const bits = 32;
+	const rv = fnv1a(value.toLowerCase(), { size: bits }).toString(16);
+	return `{${rv.padStart(bits / 4, '0')}}`;
 }
 
 function hashXxh3(variable: string, bits = 40) {

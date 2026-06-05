@@ -7208,7 +7208,7 @@
 						}
 					]
 				},
-				"{05809103}": {
+				"ProcDmg": {
 					"mFormulaParts": [
 						{
 							"mLevel1Value": 40,
@@ -7221,6 +7221,9 @@
 							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
+				},
+				"__renamedVariables": {
+					"{05809103}": "ProcDmg"
 				}
 			},
 			"effectAmount": [9],
