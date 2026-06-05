@@ -1,6 +1,6 @@
 import type { DamageSource, IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IReplacedGameVariable } from '@lolcalc/core/types';
+import type { IReplacedGameVariable } from '@lolcalc/core/variables/game';
 import type { IItem } from '@lolcalc/data/types';
 
 export interface IDamageResultTableSection {

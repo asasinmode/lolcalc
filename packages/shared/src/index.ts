@@ -77,6 +77,12 @@ export interface IStatsCalculationVariables {
 	midQuestAd?: number;
 	/** ap gained from completed mid quest */
 	midQuestAp?: number;
+	/** bonus damage % gained from liandry's passive stacks, doesn't affect stats but is kept here */
+	liandryBonusDamagePercent?: number;
+	/** bonus damage % gained from haunting guise's passive stacks, doesn't affect stats but is kept here */
+	hauntingGuiseBonusDamagePercent?: number;
+	/** bonus damage % gained from riftmaker's passive stacks, doesn't affect stats but is kept here */
+	riftmakerBonusDamagePercent?: number;
 	/** ap gained from blackfire torch's passive */
 	blackfireTorchBBlaze?: number;
 	/** ap gained from riftmaker's passive */

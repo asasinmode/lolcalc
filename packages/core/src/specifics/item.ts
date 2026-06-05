@@ -195,8 +195,35 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Madness bonus damage',
 		imgText(self) {
-			const { madness } = self.internalItemData.value as { madness: number };
-			return madness && `${Math.round(madness * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond * 100)}%`;
+			const { hauntingGuiseBonusDamagePercent } = self.stats.value.variables;
+			return hauntingGuiseBonusDamagePercent ? `${Math.round(hauntingGuiseBonusDamagePercent * 100)}%` : '';
+		},
+		variables: defineVariables({
+			known: {
+				BonusDamage: [],
+			},
+			calculate(self) {
+				return {
+					BonusDamage: {
+						value: self.stats.value.variables.hauntingGuiseBonusDamagePercent ?? 0,
+					},
+				};
+			},
+			meta: {
+				BonusDamage: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+			},
+			uninteresting: ['DamageIncreasePerSecond', 'DamageIncreaseMax'],
+		}),
+		calculateHooks: {
+			postTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					calculatedVariables.hauntingGuiseBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness ?? 0) * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond;
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
@@ -283,8 +310,37 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Madness bonus damage',
 		imgText(self) {
-			const { madness } = self.internalItemData.value as { madness: number };
-			return madness && `${Math.round(madness * ITEMS_BY_NAME.liandry?.dataValues.DamageIncreasePerSecond * 100)}%`;
+			const { liandryBonusDamagePercent } = self.stats.value.variables;
+			return liandryBonusDamagePercent ? `${Math.round(liandryBonusDamagePercent * 100)}%` : '';
+		},
+		variables: defineVariables({
+			known: {
+				f2: [],
+				BonusDamage: [],
+			},
+			calculate(self) {
+				return {
+					f2: { value: 0 },
+					BonusDamage: {
+						value: self.stats.value.variables.liandryBonusDamagePercent ?? 0,
+					},
+				};
+			},
+			meta: {
+				BonusDamage: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+			},
+			uninteresting: ['f2', 'BurnPercentHealthDamage', 'BurnDuration', 'DamageIncreasePerSecond', 'DamageIncreaseMax'],
+		}),
+		calculateHooks: {
+			postTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					calculatedVariables.liandryBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'liandry'>).madness ?? 0) * ITEMS_BY_NAME.liandry?.dataValues.DamageIncreasePerSecond;
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
@@ -337,9 +393,52 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Corruption bonus damage',
 		imgText(self) {
-			const { corruption } = self.internalItemData.value as { corruption: number };
-			return corruption && `${Math.round(corruption * ITEMS_BY_NAME.riftmaker?.dataValues.EternityDamageIncreasePerSecond * 100)}%`;
+			const { riftmakerBonusDamagePercent } = self.stats.value.variables;
+			return riftmakerBonusDamagePercent ? `${Math.round(riftmakerBonusDamagePercent * 100)}%` : '';
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+				lolcalcChampRange: [],
+				BonusDamage: [],
+			},
+			calculate(self) {
+				const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker?.dataValues;
+
+				return {
+					/** ap gained from passive */
+					f1: {
+						value: self.stats.value.variables.riftmakerVoidInfusion
+							?? (self.stats.value.bonus.hp * ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent),
+					},
+					lolcalcChampRange: {
+						value: [VampAmountMelee, VampAmountRanged],
+					},
+					BonusDamage: {
+						value: self.stats.value.variables.riftmakerBonusDamagePercent ?? 0,
+					},
+				};
+			},
+			meta: {
+				lolcalcChampRange: {
+					displayedName: 'MaxStacksOmnivamp',
+					multiplier: 100,
+					isPercentage: true,
+					resultsIsPercentage: true,
+				},
+				f1: {
+					displayedName: 'BonusAPFromHP',
+					statIconKey: 'hp',
+					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent * 100)}%</scalehealth>`,
+				},
+				BonusDamage: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+			},
+			uninteresting: ['EternityDamageIncreasePerSecond', 'EternityDamageIncreaseMax', 'HealthToAPConversionPercent'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
@@ -370,41 +469,12 @@ export const ITEM_SPECIFICS = {
 					}
 				},
 			},
+			postTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					calculatedVariables.riftmakerBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'riftmaker'>).corruption ?? 0) * ITEMS_BY_NAME.riftmaker?.dataValues.EternityDamageIncreasePerSecond;
+				},
+			},
 		},
-		variables: defineVariables({
-			known: {
-				f1: [],
-				lolcalcChampRange: [],
-			},
-			calculate(self) {
-				const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker?.dataValues;
-
-				return {
-					/** ap gained from passive */
-					f1: {
-						value: self.stats.value.variables.riftmakerVoidInfusion
-							?? (self.stats.value.bonus.hp * ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent),
-					},
-					lolcalcChampRange: {
-						value: [VampAmountMelee, VampAmountRanged],
-					},
-				};
-			},
-			meta: {
-				lolcalcChampRange: {
-					displayedName: 'MaxStacksOmnivamp',
-					multiplier: 100,
-					isPercentage: true,
-					resultsIsPercentage: true,
-				},
-				f1: {
-					displayedName: 'BonusAPFromHP',
-					statIconKey: 'hp',
-					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent * 100)}%</scalehealth>`,
-				},
-			},
-			uninteresting: ['EternityDamageIncreasePerSecond', 'EternityDamageIncreaseMax', 'HealthToAPConversionPercent'],
-		}),
 	},
 	[ITEM_NAME_TO_ID.tear]: {
 		...tearItem.specific,

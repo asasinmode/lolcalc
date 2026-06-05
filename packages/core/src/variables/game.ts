@@ -56,6 +56,8 @@ export interface IVariableMeta<T = any> {
 	isPercentage?: boolean;
 	/** `%` will be suffixed to the formatted value in results */
 	resultsIsPercentage?: boolean;
+	/** same as `multiplier` but only for results */
+	resultsMultiplier?: number;
 	type?: IVariableType;
 	/** whether the variable is a custom one, not found in description but computed by lolcalc and wanted in results */
 	isCustom?: boolean;
