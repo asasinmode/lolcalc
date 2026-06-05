@@ -3077,6 +3077,24 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2', 'MaxCharges', 'RepeatDamageReduction'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.bamisCinder]: {
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				DPS: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['f1', 'AuraDuration', 'MinionMod', 'MonsterMod'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
