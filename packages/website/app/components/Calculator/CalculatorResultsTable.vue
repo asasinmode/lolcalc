@@ -45,8 +45,6 @@ const STATS_SECTION_ID = 'a-stats';
 const CUSTOM_TOTAL_SECTION_ID = 'a-cTtl';
 
 const flipResults = ref(false);
-const sourceProperty = computed(() => flipResults.value ? 'target' : 'source');
-const targetProperty = computed(() => flipResults.value ? 'source' : 'target');
 
 const highlightedColumnId = ref<string>();
 
@@ -279,7 +277,7 @@ function computeSectionRowColumn(
 	column: IDamageResultTableColumn,
 ): IComputedSectionRowColumn {
 	const source = column[flipResults.value ? '_computedTarget' : '_computedSource'];
-	const target = column[targetProperty.value];
+	const target = column[flipResults.value ? '_computedSource' : '_computedTarget'];
 	const rv: IComputedSectionRowColumn = {
 		columnId: column.id,
 		isIrrelevant: true,
@@ -526,7 +524,7 @@ async function addResultsSection(
 		});
 
 		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
-		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
+		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`);
 		section.imageSize = abilityImageSize(champion.id);
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = abilityVariableCellValue;
@@ -1063,7 +1061,7 @@ const columnAddableSourceOptions = computed<IColumnAddableOption[]>(() =>
 const columnAddableTargetOptions = computed<IColumnAddableOption[]>(() =>
 	resultColumns.value.map(column => columnAddableOption(column.target)),
 );
-const columnAddableOptions = computed(() => sourceProperty.value === 'source' ? columnAddableSourceOptions.value : columnAddableTargetOptions.value);
+const columnAddableOptions = computed(() => flipResults.value ? columnAddableTargetOptions.value : columnAddableSourceOptions.value);
 
 function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption {
 	const rv: IColumnAddableOption = {
