@@ -97,6 +97,10 @@
 			"dataKey": "lolcalc6631BShockwaveSlow",
 			"stringtable": "game_buff_tooltip_slow"
 		},
+		"lolcalc6662FrostField": {
+			"dataKey": "lolcalc6662FrostField",
+			"stringtable": "game_buff_tooltip_slow"
+		},
 		"AmumuPDebuff": {
 			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
 			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"

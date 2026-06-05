@@ -3125,6 +3125,37 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2', 'f3', 'f5', 'f6', 'StealthWardCap', 'PurpleBubbleAoEMod'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.icebornGauntlet]: {
+		internalDataProperties: ['frostField'],
+		setupData(self) {
+			self.internalItemData.value.frostField = clamp(0, self.internalItemData.value.frostField ?? 0, 1);
+			return { frostField: 0 };
+		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+			meta: {
+				SpellbladeDamage: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.icebornGauntlet?.dataValues as any)[ITEMS_BY_NAME.icebornGauntlet?.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mDataValue!] * 100)}% base</scalead> `,
+				},
+				/* technically game rounds this to 13% for ranged but showing `12.5` should be fine */
+				SlowAmountMeleeRangedSplit: {
+					isPercentage: true,
+					multiplier: 100,
+					resultsIsPercentage: true,
+				},
+			},
+			uninteresting: ['f1', 'SlowFieldDuration'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

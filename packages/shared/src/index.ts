@@ -506,6 +506,7 @@ export const EFFECT_OBJECT_NAME = {
 	malignanceHatefog: '3118VisualDebuff',
 	imperialMandateCommand: '4005Debuff',
 	stridebreakerBShockwaveSlow: 'lolcalc6631BShockwaveSlow',
+	icebornGauntletFrostField: 'lolcalc6662FrostField',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

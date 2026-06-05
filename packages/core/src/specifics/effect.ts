@@ -16,6 +16,12 @@ import { ITEM_SPECIFICS } from './item.ts';
 
 const PLACEHOLDER_REPLACED_GAME_VARIABLE: IReplacedGameVariable = { baseValue: 0, value: 0 };
 
+const MeleeRangedEnumOptions = {
+	none: 0,
+	melee: 1,
+	ranged: 2,
+};
+
 /** specific effects' helpers, utils and calculations */
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
@@ -190,15 +196,11 @@ export const EFFECT_SPECIFICS = {
 				return data[0];
 			},
 			imgText(data) {
-				return data[0] === 1 ? 'm' : data[0] === 2 ? 'r' : '';
+				return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
 			},
 			setupDataFromSourceItem(damageSource) {
 				if ((damageSource.internalItemData.value as IInternalItemDataOf<'serpentsFang'>).sVenom) {
-					if (damageSource.isRanged.value) {
-						return [2];
-					} else {
-						return [1];
-					}
+					return [damageSource.isRanged.value ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
 				}
 			},
 			modifyVariable: {
@@ -207,7 +209,7 @@ export const EFFECT_SPECIFICS = {
 					if (typeof value === 'number') {
 						const reducePercentage = itemVariableValue(
 							'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
-							{ item: ITEMS_BY_NAME.serpentsFang, isRanged: effectData[0] === 2 },
+							{ item: ITEMS_BY_NAME.serpentsFang, isRanged: effectData[0] === MeleeRangedEnumOptions.ranged },
 						);
 						value *= 1 - (reducePercentage.value as number / 100);
 					}
@@ -216,12 +218,8 @@ export const EFFECT_SPECIFICS = {
 				},
 			},
 		}),
-		enumOptions: {
-			none: 0,
-			melee: 1,
-			ranged: 2,
-		},
-		maxValue: 2,
+		enumOptions: MeleeRangedEnumOptions,
+		maxValue: MeleeRangedEnumOptions.ranged,
 	},
 	[EFFECT_OBJECT_NAME.rylaisRimefrost]: defineEffectSpecific<[isRimefrosted: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.rylaisScepter),
@@ -417,6 +415,28 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 	}),
+	[EFFECT_OBJECT_NAME.icebornGauntletFrostField]: {
+		...defineEffectSpecific<[frostField: number]>({
+			sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.icebornGauntlet),
+			label: 'Frost Field',
+			setupData(data): [frostField: number] {
+				return [clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.icebornGauntletFrostField].maxValue)];
+			},
+			isActive(data) {
+				return data[0];
+			},
+			imgText(data) {
+				return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
+			},
+			setupDataFromSourceItem(damageSource): [frostField: number] | undefined {
+				if ((damageSource.internalItemData.value as IInternalItemDataOf<'icebornGauntlet'>).frostField) {
+					return [damageSource.isRanged.value ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
+				}
+			},
+		}),
+		enumOptions: MeleeRangedEnumOptions,
+		maxValue: MeleeRangedEnumOptions.ranged,
+	},
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: defineEffectSpecific<[isCursed: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
 		label: 'Cursed touch',
@@ -554,21 +574,20 @@ export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: stri
 	[EFFECT_OBJECT_NAME.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
 };
 
+const slowEffectDescriptionObj = {
+	stringtable: 'game_buff_tooltip_slow',
+};
+
 /** `effect.json` values for purely custom effects - if an effectObjectName has this specified, it will be put in `effect.json` during `scripts/updateData` */
 export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | string>> = {
 	/* items */
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
 	},
-	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: {
-		stringtable: 'game_buff_tooltip_slow',
-	},
-	[EFFECT_OBJECT_NAME.randuinsHumility]: {
-		stringtable: 'game_buff_tooltip_slow',
-	},
-	[EFFECT_OBJECT_NAME.stridebreakerBShockwaveSlow]: {
-		stringtable: 'game_buff_tooltip_slow',
-	},
+	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: slowEffectDescriptionObj,
+	[EFFECT_OBJECT_NAME.randuinsHumility]: slowEffectDescriptionObj,
+	[EFFECT_OBJECT_NAME.stridebreakerBShockwaveSlow]: slowEffectDescriptionObj,
+	[EFFECT_OBJECT_NAME.icebornGauntletFrostField]: slowEffectDescriptionObj,
 	/* champion passives */
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
