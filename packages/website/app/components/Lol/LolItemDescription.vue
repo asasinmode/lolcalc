@@ -118,8 +118,8 @@ defineExpose({ header });
 		</a>
 	</component>
 	<div class="item-description" :class="descriptionClass">
-		<p v-if="damageSource && ((isMidQuestBoots && damageSource.roleQuest.value !== 'mid') || (isSupportItem && damageSource.roleQuest.value !== 'support'))">
-			{{ isMidQuestBoots ? '(Only Mid Lane) Locked until Quest is Completed' : '(Only Support Role) Locked until Support or no quest is chosen' }}
+		<p v-if="damageSource && (isMidQuestBoots ? damageSource.roleQuest.value !== 'mid' : isSupportItem ? damageSource.roleQuest.value !== 'support' : false)">
+			{{ isMidQuestBoots ? '(Only Mid Lane)' : '(Only Support Role)' }} Locked until Quest is Completed
 		</p>
 		<ul>
 			<li v-for="{ icon, statName, baseValue, totalValue, increasedBy } in computedDescription?.stats" :key="statName">
