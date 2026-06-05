@@ -52,6 +52,8 @@ export interface IVariableMeta<T = any> {
 	extendedEquals?: IVariableMetaExtendedEquals | ((variableValueParams: T, overrideDynamicVariables?: IDynamicVariables) => IVariableMetaExtendedEquals);
 	/** displayed value multiplied by */
 	multiplier?: number;
+	/** same as `IVariableValueResult.roundReplaced` */
+	roundReplaced?: number | boolean;
 	/** `%` will be suffixed to the formatted value in replaced description */
 	isPercentage?: boolean;
 	/** `%` will be suffixed to the formatted value in results */
@@ -445,6 +447,10 @@ export function replaceGameVariables(
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
 				: runeVariableValue)(variableName, variableValueFunctionData as any, options.overrideVariables);
+
+		if (meta?.roundReplaced !== undefined) {
+			roundReplaced = meta.roundReplaced;
+		}
 
 		/*
 		 * if meta's present, the variable was most likely gotten from dynamicVariables which store their values cached on `DamageSource`

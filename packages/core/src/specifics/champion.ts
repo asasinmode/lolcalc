@@ -541,7 +541,6 @@ export const CHAMPION_SPECIFICS = {
 				return {
 					PassiveManaCalcTooltip: {
 						value: self.stats.value.variables.ryzePassivePercentManaIncrease ?? 0,
-						roundReplaced: 2,
 					},
 					PassiveMana: {
 						value: self.stats.value.miscDebug.ryzePMana ?? 0,
@@ -552,6 +551,7 @@ export const CHAMPION_SPECIFICS = {
 				PassiveManaCalcTooltip: {
 					statIconKey: 'abilityPower',
 					multiplier: 100,
+					roundReplaced: 2,
 					resultsIsPercentage: true,
 					extendedEquals(params, dynamicVariables) {
 						const apMultiplier = championAbilityVariableValue(
