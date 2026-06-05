@@ -40,6 +40,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const calculatedVariables: IStatsCalculationVariables = {
 		apMultipliersBase: 0,
+		baseItemManaRegenPercent: 0,
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
 	};
@@ -102,6 +103,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 		if (item!.stats.PercentBaseMPRegenMod) {
 			itemBaseStats.manaRegen += baseOnLevelStats.manaRegen * item!.stats.PercentBaseMPRegenMod;
+			calculatedVariables.baseItemManaRegenPercent += item!.stats.PercentBaseMPRegenMod;
 		}
 		if (item!.stats.PercentMovementSpeedMod) {
 			calculatedVariables.totalBonusPercentMoveSpeed += item!.stats.PercentMovementSpeedMod;

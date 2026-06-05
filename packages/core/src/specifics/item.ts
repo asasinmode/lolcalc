@@ -2842,6 +2842,53 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f1', 'DamageStorageRate', 'ChargeToHealConversion'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.dawncore]: {
+		variables: defineVariables({
+			known: {
+				f2: [],
+				f3: [],
+			},
+			calculate(self) {
+				return {
+					f2: {
+						value: self.stats.value.variables.dawncoreAp === undefined
+							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen
+							: self.stats.value.variables.dawncoreAp,
+					},
+					f3: {
+						value: self.stats.value.variables.dawncoreHsp === undefined
+							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen
+							: self.stats.value.variables.dawncoreHsp,
+					},
+				};
+			},
+			meta: {
+				f2: {
+					displayedName: 'TotalAP',
+					statIconKey: 'manaRegen',
+					extendedEquals: `${ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen}% base `,
+				},
+				f3: {
+					displayedName: 'TotalHSPower',
+					statIconKey: 'manaRegen',
+					extendedEquals: `${Math.round((ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen ?? 0) * 100)}% base `,
+					resultsIsPercentage: true,
+				},
+			},
+			uninteresting: ['HSPowerPerManaRegen', 'APPerManaRegen'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemBaseStats }, { calculatedVariables }) {
+					const { APPerManaRegen, HSPowerPerManaRegen } = ITEMS_BY_NAME.dawncore?.dataValues ?? {};
+					calculatedVariables.dawncoreAp = APPerManaRegen * calculatedVariables.baseItemManaRegenPercent;
+					calculatedVariables.dawncoreHsp = HSPowerPerManaRegen * calculatedVariables.baseItemManaRegenPercent;
+					itemBaseStats.abilityPower += calculatedVariables.dawncoreAp;
+					itemBaseStats.healShieldPower += calculatedVariables.dawncoreHsp;
+				},
+			},
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

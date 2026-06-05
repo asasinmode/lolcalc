@@ -424,8 +424,10 @@ export function replaceGameVariables(
 	const variables: IReplaceGameVariablesRV['variables'] = new Map();
 	const variablesAllValues: IReplaceGameVariablesRV['variablesAllValues'] = new Map();
 
-	/* capture `@VariableName@` followed by optional ` (%i:iconName%)` which the replacement will fallback to if it exists and no `ISpecificVariables.meta.statIconKey` is defined */
-	const replaced = text.replace(/@(.+?)@(?:\s*\((%[^)\s]+%)\))?/g, (_, name, varIcon) => {
+	/* capture `@VariableName@` followed by
+	 * - optional `%` which will be put back after replacing
+	 * - another optional ` (%i:iconName%)` which the replacement will fallback to if it exists and no `ISpecificVariables.meta.statIconKey` is defined */
+	const replaced = text.replace(/@(.+?)@(%?)(?:\s*\((%[^)\s]+%)\))?/g, (_, name, optionalPercent, varIcon) => {
 		let variableName = name;
 		let multiplier = 1;
 
@@ -516,7 +518,7 @@ export function replaceGameVariables(
 			return `${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : variable}${tagWrapEnd}${metaSuffix}`;
 		}
 
-		const varValueSuffix = meta?.isPercentage ? '%' : '';
+		const varValueSuffix = meta?.isPercentage ? '%' : (optionalPercent ?? '');
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
@@ -585,7 +587,7 @@ export function replaceGameVariables(
 					? roundVariable(variable, roundReplaced)
 					: roundReplaced
 						? Math.round(variable)
-						: variable)}${varValueSuffix}${tagWrapEnd}${metaSuffix}`;
+						: variable)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 	});
 
 	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionData.dynamicVariables);

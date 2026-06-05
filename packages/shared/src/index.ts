@@ -88,6 +88,8 @@ export interface IStatsCalculationVariables {
 	apMultipliersBase: number;
 	/** ap multipliers from items like rabadon and blackfire torch */
 	totalItemApMultipliers: number;
+	/** mana regen % gained from items (`1` = 100%, `1.5` would be 150%) */
+	baseItemManaRegenPercent: number;
 	/** ap gained from rabadon's passive */
 	rabadonMagicalOpus?: number;
 	/** ap gained from archangel/seraph's passive */
@@ -118,6 +120,10 @@ export interface IStatsCalculationVariables {
 	warmogsVitality?: number;
 	/** % of mana gained from ryze's passive */
 	ryzePassivePercentManaIncrease?: number;
+	/** heal and shield power gained from dawncore's passive */
+	dawncoreHsp?: number;
+	/** ability power gained from dawncore's passive */
+	dawncoreAp?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
@@ -374,6 +380,16 @@ export const ITEM_NAME_TO_ID = {
 	sunderedSky: '6610',
 	moonstoneRenewer: '6617',
 	echoesOfHelia: '6620',
+	dawncore: '6621',
+	stridebreaker: '6631',
+	ludensEcho: '6655',
+	bamisCinder: '6660',
+	icebornGauntlet: '6662',
+	hollowRadiance: '6664',
+	krakenSlayer: '6672',
+	immortalShieldbow: '6673',
+	eclipse: '6692',
+	voltaicCyclosword: '6699',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
