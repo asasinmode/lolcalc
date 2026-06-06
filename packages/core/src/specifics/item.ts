@@ -2391,7 +2391,7 @@ export const ITEM_SPECIFICS = {
 				/* 99% sure this goes above the declared `350` for toplaners with lvl 19/20 */
 				HealAmount: {
 					type: VariableType.heal,
-					displayedName: 'HealAmount',
+					isCustom: true,
 					extendedEquals: `<const>${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number)}</const>`,
 				},
 			},
@@ -2721,6 +2721,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ShieldAmount: {
 					type: VariableType.shield,
+					isCustom: true,
 					displayedName: 'ShieldAmount',
 					extendedEquals: `<const>${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
 				},
@@ -2753,6 +2754,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				AmountToHeal: {
 					type: VariableType.heal,
+					isCustom: true,
 					extendedEquals: `<const>${itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${Math.round(itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number)}</const>`,
 				},
 			},
