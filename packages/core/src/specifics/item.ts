@@ -3247,6 +3247,31 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.immortalShieldbow]: {
+		variables: defineVariables({
+			known: {
+				f3: [],
+			},
+			calculate() {
+				return {
+					f3: { value: 0 },
+				};
+			},
+			meta: {
+				ShieldAmount: {
+					type: VariableType.shield,
+					statIconKey: 'level',
+					extendedEquals: {
+						prefix: '<const>',
+						meleeValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: false } } as DamageSource }).value}`,
+						rangedValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: true } } as DamageSource }).value}`,
+						suffix: `</const>`,
+					},
+				},
+			},
+			uninteresting: ['f3', 'HealthThreshold', 'ShieldDuration'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
