@@ -1652,10 +1652,7 @@ export const ITEM_SPECIFICS = {
 						value: [MeleeValue, RangedValue],
 					},
 					CurrentHealthDamage: {
-						/* this is an additional variable and these don't resolve melee/ranged value on themselves, they are added as is so it needs to handle the proper rv */
-						value: self.isRanged.value === undefined
-							? [targetHealth * MeleeValue, targetHealth * RangedValue]
-							: (targetHealth * (self.isRanged.value ? RangedValue : MeleeValue)),
+						value: [targetHealth * MeleeValue, targetHealth * RangedValue],
 					},
 				};
 			},
@@ -2902,11 +2899,8 @@ export const ITEM_SPECIFICS = {
 					lolcalcChampRange: {
 						value: [baseMelee, baseRanged],
 					},
-					/* this is an additional variable and these don't resolve melee/ranged value on themselves, they are added as is so it needs to handle the proper rv */
 					Heal: {
-						value: self.isRanged.value === undefined
-							? [baseMelee + missingHpHeal, baseRanged + missingHpHeal]
-							: ((self.isRanged.value ? baseRanged : baseMelee) + missingHpHeal),
+						value: [baseMelee + missingHpHeal, baseRanged + missingHpHeal],
 					},
 				};
 			},

@@ -106,12 +106,12 @@ interface IBaseVariableParams {
 	 * used in `updateData` for trying to resolve hashed versions of unknown variables
 	 */
 	accessedVariables?: Map<string, Set<string>>;
+	damageSource?: DamageSource;
 }
 
 interface IItemVariableParams extends IBaseVariableParams {
 	item: IItem;
 	isRanged?: boolean;
-	damageSource?: DamageSource;
 }
 
 export function itemVariableValue(
@@ -272,7 +272,6 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityLevel?: number;
 	/** ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive */
 	allAbilitiesVariants?: IChampionAbilityVariableVariant[];
-	damageSource?: DamageSource;
 }
 
 // TODO make sure it handles hextech soul description
@@ -428,6 +427,8 @@ export function replaceGameVariables(
 	const variables: IReplaceGameVariablesRV['variables'] = new Map();
 	const variablesAllValues: IReplaceGameVariablesRV['variablesAllValues'] = new Map();
 
+	variableValueFunctionData.accessedVariables ??= new Map();
+
 	/* capture `@VariableName@` followed by
 	 * - optional `%` which will be put back after replacing
 	 * - another optional ` (%i:iconName%)` which the replacement will fallback to if it exists and no `ISpecificVariables.meta.statIconKey` is defined */
@@ -441,7 +442,6 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		variableValueFunctionData.accessedVariables ??= new Map();
 		let { value: variable, isMeleeRanged, actualVariableName, allValues, roundReplaced, meta, isUninteresting } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
@@ -599,32 +599,39 @@ export function replaceGameVariables(
 	});
 
 	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionData.dynamicVariables);
-	const additionalVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isCustom);
-	if (additionalVariables?.length) {
-		for (const [variableName, meta] of additionalVariables) {
+	const customVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isCustom);
+	if (customVariables?.length) {
+		for (const [variableName, meta] of customVariables) {
 			let value = dynamicVariables!.values?.[variableName]?.value as number | [number, number] | undefined;
 			if (value !== undefined) {
+				const isArray = Array.isArray(value);
 				let baseValue: number | [number, number];
-				if (Array.isArray(value)) {
-					value = [value[0], value[1]];
+				if (isArray) {
+					value = [(value as number[])[0]!, (value as number[])[1]!];
 					value[0] = roundVariable(value[0]);
 					value[1] = roundVariable(value[1]);
 					baseValue = [value[0], value[1]];
 				} else {
-					value = roundVariable(value);
+					value = roundVariable(value as number);
 					baseValue = value;
 				}
 
+				if (isArray && variableValueFunctionData.damageSource?.isRanged.value !== undefined) {
+					value = variableValueFunctionData.damageSource.isRanged.value
+						? (value as number[])[1]
+						: (value as number[])[0];
+				}
+
 				if (meta?.type && modifyVariableFunctions[meta.type]) {
-					if (Array.isArray(value)) {
-						value[0] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[0]));
-						value[1] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value[1]));
+					if (isArray) {
+						(value as number[])[0] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[0]!));
+						(value as number[])[1] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[1]!));
 					} else {
-						value = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value));
+						(value as number) = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value as number));
 					}
 				}
 
-				variables.set(variableName, { baseValue, value, meta });
+				variables.set(variableName, { baseValue, value: value as number | [number, number], meta });
 			}
 		}
 	}
