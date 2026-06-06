@@ -115,6 +115,13 @@ const hollowRadianceSpecifics = {
 	procMultiplier: (ITEMS_BY_NAME.hollowRadiance?.dataValues as any)[ITEMS_BY_NAME.hollowRadiance.itemCalculations.ProcDamageTOOLTIPONLY.mMultiplier.mDataValue],
 };
 
+const eclipseSpecifics = {
+	meleeConst: (ITEMS_BY_NAME.eclipse?.dataValues as any)[ITEMS_BY_NAME.eclipse?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mDataValue],
+	meleeAdRatio: (ITEMS_BY_NAME.eclipse?.dataValues as any)[ITEMS_BY_NAME.eclipse?.itemCalculations.MeleeItemCalcValue.mFormulaParts[1]!.mDataValue],
+	rangedConst: (ITEMS_BY_NAME.eclipse?.dataValues as any)[ITEMS_BY_NAME.eclipse?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mDataValue],
+	rangedAdRatio: (ITEMS_BY_NAME.eclipse?.dataValues as any)[ITEMS_BY_NAME.eclipse?.itemCalculations.RangedItemCalcValue.mFormulaParts[1]!.mDataValue],
+};
+
 const grievousWoundItemSpecific = {
 	internalDataProperties: ['gWounds'],
 	setupData(self) {
@@ -3264,6 +3271,54 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			uninteresting: ['f3', 'HealthThreshold', 'ShieldDuration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.eclipse]: {
+		variables: defineVariables({
+			known: {
+				f3: [],
+				lolcalcChampRange: [],
+				MaxHealthDamage: [],
+			},
+			calculate(self, target) {
+				const meleeHpPercent = itemVariableValue('MaxHealthDamageCalc', { item: ITEMS_BY_NAME.eclipse, damageSource: { isRanged: { value: false } } as DamageSource, isRanged: false }).value as number;
+				const rangedHpPercent = itemVariableValue('MaxHealthDamageCalc', { item: ITEMS_BY_NAME.eclipse, damageSource: { isRanged: { value: true } } as DamageSource, isRanged: true }).value as number;
+
+				return {
+					f3: { value: 0 },
+					lolcalcChampRange: {
+						value: [
+							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: false }).value as number,
+							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: true }).value as number,
+						],
+					},
+					MaxHealthDamage: {
+						value: [meleeHpPercent / 100 * (target?.stats.value.total.hp ?? 0), rangedHpPercent / 100 * (target?.stats.value.total.hp ?? 0)],
+					},
+				};
+			},
+			meta: {
+				MaxHealthDamageCalc: {
+					type: VariableType.physical,
+					resultsIsPercentage: true,
+				},
+				lolcalcChampRange: {
+					displayedName: 'Shield',
+					type: VariableType.shield,
+					statIconKey: ['attackDamage'],
+					extendedEquals: {
+						prefix: '',
+						meleeValue: `<const>${eclipseSpecifics.meleeConst}</const> <scalead>+ ${Math.round(eclipseSpecifics.meleeAdRatio * 100)}% bonus %i:${STAT_ICON.attackDamage}%</scalead>`,
+						rangedValue: `<const>${eclipseSpecifics.rangedConst}</const> <scalead>+ ${Math.round(eclipseSpecifics.rangedAdRatio * 100)}% bonus %i:${STAT_ICON.attackDamage}%</scalead>`,
+						suffix: '',
+					},
+				},
+				MaxHealthDamage: {
+					isCustom: true,
+					type: VariableType.physical,
+				},
+			},
+			uninteresting: ['f3', 'WindowDuration', 'ShieldDuration'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
