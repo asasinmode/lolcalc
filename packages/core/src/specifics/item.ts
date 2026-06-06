@@ -3147,6 +3147,9 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.frostField = clamp(0, self.internalItemData.value.frostField ?? 0, 1);
 			return { frostField: 0 };
 		},
+		imgActive(internalData: { frostField: number }) {
+			return internalData.frostField;
+		},
 		variables: defineVariables({
 			known: {
 				f1: [],
@@ -3326,7 +3329,25 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f3', 'WindowDuration', 'ShieldDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.seryldasGrudge]: {
+		internalDataProperties: ['bitterCold'],
+		setupData(self) {
+			self.internalItemData.value.bitterCold = clamp(0, self.internalItemData.value.bitterCold ?? 0, 1);
+			return { bitterCold: 0 };
+		},
+		imgActive(internalData: { bitterCold: number }) {
+			return internalData.bitterCold;
+		},
+	},
 	[ITEM_NAME_TO_ID.bloodsong]: {
+		internalDataProperties: ['bloodsonged'],
+		setupData(self) {
+			self.internalItemData.value.bloodsonged = clamp(0, self.internalItemData.value.bloodsonged ?? 0, 1);
+			return { bloodsonged: 0 };
+		},
+		imgActive(internalData: { bloodsonged: number }) {
+			return internalData.bloodsonged;
+		},
 		variables: defineVariables({
 			known: {
 				f3: [],

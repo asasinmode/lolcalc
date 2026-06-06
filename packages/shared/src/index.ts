@@ -404,6 +404,7 @@ export const ITEM_NAME_TO_ID = {
 	immortalShieldbow: '6673',
 	eclipse: '6692',
 	voltaicCyclosword: '6699',
+	seryldasGrudge: '6694',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -509,6 +510,8 @@ export const EFFECT_OBJECT_NAME = {
 	imperialMandateCommand: '4005Debuff',
 	stridebreakerBShockwaveSlow: 'lolcalc6631BShockwaveSlow',
 	icebornGauntletFrostField: 'lolcalc6662FrostField',
+	bloodsongSpellbladed: 'lolcalc3877Spellbladed',
+	seryldaBitterCold: 'lolcalc6694BitterCold',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

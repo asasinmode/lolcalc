@@ -225,7 +225,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
 - [ ] graph results in style of post game ones, table data but graph?
 - [ ] detect invalid ability levels
-- [ ] decaying movement speed stuff like fiora/nami/sivir passive / stridebreaker active. Theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
+- [ ] decaying movement speed stuff like fiora/nami/sivir passive / stridebreaker/solstice sleigh active. Theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl

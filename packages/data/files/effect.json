@@ -101,6 +101,10 @@
 			"dataKey": "lolcalc6662FrostField",
 			"stringtable": "game_buff_tooltip_slow"
 		},
+		"lolcalc3877Spellbladed": {
+			"dataKey": "lolcalc3877Spellbladed",
+			"description": "This unit takes increased damage."
+		},
 		"AmumuPDebuff": {
 			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
 			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"
@@ -120,6 +124,10 @@
 		"RellP_Debuff": {
 			"description": "Rell has stolen Armor and Magic Resist from this unit.",
 			"dataKey": "Characters/Rell/Spells/RellPAbility/RellP_Debuff"
+		},
+		"lolcalc6694BitterCold": {
+			"description": "This unit is slowed.",
+			"dataKey": "lolcalc6694BitterCold"
 		}
 	},
 	"stringtable": {

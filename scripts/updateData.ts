@@ -3,10 +3,10 @@ import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type { ITEMS } from '@lolcalc/data';
+import type { IEffectData, ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types';
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
@@ -955,10 +955,18 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 	]);
 
 	const effectDataStringtable = { stringtable: {} as Record<string, string> };
+	const referenceEffectObjectNames: IEffectObjectName[] = [];
 
 	effectData = {
 		version: latestVersion,
-		data: Object.fromEntries(await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES.map(async ([effectObjectName, effectSpecific]) => {
+		data: Object.fromEntries(await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([effectObjectName]) => {
+			const customEffect = CUSTOM_EFFECTS[effectObjectName];
+			if (typeof customEffect === 'object' && 'objectName' in customEffect) {
+				referenceEffectObjectNames.push(effectObjectName);
+				return false;
+			}
+			return true;
+		}).map(async ([effectObjectName, effectSpecific]) => {
 			if (CUSTOM_EFFECTS[effectObjectName]) {
 				const customEffect = CUSTOM_EFFECTS[effectObjectName];
 				if (typeof customEffect === 'string') {
@@ -1042,6 +1050,18 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 		}))) as unknown as NonNullable<(typeof effectData)>['data'],
 		stringtable: effectDataStringtable.stringtable as NonNullable<typeof effectData>['stringtable'],
 	};
+
+	for (const effectObjectName of referenceEffectObjectNames) {
+		const customEffect = CUSTOM_EFFECTS[effectObjectName];
+		const referencedText = (effectData.data as IEffectData)[(customEffect as Extract<NonNullable<typeof CUSTOM_EFFECTS[IEffectObjectName]>, { objectName: string }>).objectName as keyof IEffectData];
+		if (!referencedText) {
+			throw new Error('[effectData] unresolved custom effect referenced objectName', effectObjectName, customEffect);
+		}
+		(effectData.data as IEffectData)[effectObjectName] = {
+			...referencedText,
+			dataKey: effectObjectName,
+		};
+	}
 
 	await fs.writeFile(effectFilePath, stringifyObject(effectData));
 }

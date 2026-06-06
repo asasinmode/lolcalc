@@ -90,13 +90,13 @@ export type TEffects = typeof effectData['data'];
 
 export const EFFECTS_STRINGTABLE = effectData.stringtable as Record<string, string>;
 
-export interface IEffectData extends Record<string, {
+export interface IEffectData extends Record<string, ({
 	dataKey: string;
 	description: string;
 } | {
 	dataKey: string;
 	stringtable: string;
-}> {};
+})> {};
 
 export function resolveEffectDescription(effectObjectName: IEffectObjectName): string | undefined {
 	const source = (EFFECTS as TEffects)[effectObjectName];
