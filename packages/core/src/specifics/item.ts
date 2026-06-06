@@ -1649,7 +1649,7 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				f4: [],
-				lolcalcChampRange: [ITEMS_BY_NAME.botrk?.dataValues.MeleeValue, ITEMS_BY_NAME.botrk?.dataValues.RangedValue],
+				lolcalcChampRange: [],
 				CurrentHealthDamage: [],
 			},
 			calculate(_self, target) {
@@ -3325,6 +3325,50 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f3', 'WindowDuration', 'ShieldDuration'],
 		}),
+	},
+	[ITEM_NAME_TO_ID.bloodsong]: {
+		variables: defineVariables({
+			known: {
+				f3: [],
+				f4: [],
+				f5: [],
+				f6: [ITEMS_BY_NAME.bloodsong?.dataValues.StealthWardCap],
+				lolcalcChampRange: [],
+			},
+			calculate() {
+				return {
+					f3: { value: 0 },
+					f4: { value: 0 },
+					f5: { value: 0 },
+					f6: { value: ITEMS_BY_NAME.bloodsong?.dataValues.StealthWardCap },
+					lolcalcChampRange: {
+						value: [
+							ITEMS_BY_NAME.bloodsong?.dataValues.MeleeDamageAmp,
+							ITEMS_BY_NAME.bloodsong?.dataValues.RangedDamageAmp,
+						],
+					},
+				};
+			},
+			meta: {
+				SpellbladeDamage: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round((ITEMS_BY_NAME.bloodsong?.dataValues as any)[ITEMS_BY_NAME.bloodsong?.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mDataValue!] * 100)}% base</scalead> `,
+				},
+				lolcalcChampRange: {
+					displayedName: 'DamageIncrease',
+					isCustom: true,
+					isPercentage: true,
+					multiplier: 100,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+			},
+			uninteresting: ['f3', 'f4', 'f5', 'f6', 'StealthWardCap', 'MeleeDamageAmp', 'RangedDamageAmp', 'DebuffDuration'],
+		}),
+		preplaceTextInventory(value) {
+			return value.replace('%i:meleeActive% @MeleeDamageAmp*100@ % / %i:rangedActive% @RangedDamageAmp*100@%', '@lolcalcChampRange@');
+		},
 	},
 } satisfies IHypotheticalItemSpecifics;
 

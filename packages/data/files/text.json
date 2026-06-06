@@ -1541,6 +1541,16 @@
 						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
+				"tooltipInventory": [
+					[
+						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
+						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. If the target is a champion, they take @lolcalcChampRange@ increased damage for @DebuffDuration@ seconds."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
+					]
+				],
 				"footerLeft": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Spellblade Damage to champions: <attention>@f4@</attention><br>Bonus Damage from Damage Amp: <attention>@f3@</attention>"
 			},
 			"3916": {
