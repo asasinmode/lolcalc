@@ -710,6 +710,7 @@ function addComputedColumnSources(column: IDamageResultTableColumn) {
 		column._computedTarget.champion.value = column.target.champion.value;
 		if (column.source) {
 			applyEffectsFromTo(column.source, column._computedTarget);
+			column._computedTarget.calculationDamageTarget.value = column.source;
 			column._computedSource!.calculationDamageTarget.value = column._computedTarget;
 		}
 	}
