@@ -291,15 +291,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 					watch(() => [this.maxHealth.value, this.maxAbilityResource.value], ([currentMaxHp, currentMaxAbilityResource], previousValues) => {
 						if (this.listedChampion.value?.id === this.champion.value?.id) {
-							if (this.currentHealth.value && this.currentHealth.value === previousValues?.[0]) {
+							if (overrides.currentHealth !== undefined) {
+								this.currentHealth.value = Math.max(0, Math.min(overrides.currentHealth, currentMaxHp ?? 0));
+							} else if (this.currentHealth.value === previousValues?.[0]) {
 								this.currentHealth.value = currentMaxHp ?? 0;
 							} else {
-								this.currentHealth.value = Math.min(this.currentHealth.value, currentMaxHp ?? 0);
+								this.currentHealth.value = previousValues?.[0] === undefined ? (currentMaxHp ?? 0) : Math.min(this.currentHealth.value, currentMaxHp ?? 0);
 							}
-							if (this.currentAbilityResource.value && this.currentAbilityResource.value === previousValues?.[1]) {
+
+							if (overrides.currentAbilityResource !== undefined) {
+								this.currentAbilityResource.value = Math.max(0, Math.min(overrides.currentAbilityResource, currentMaxAbilityResource ?? 0));
+							} else if (this.currentAbilityResource.value === previousValues?.[1]) {
 								this.currentAbilityResource.value = currentMaxAbilityResource ?? 0;
 							} else {
-								this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
+								this.currentAbilityResource.value = previousValues?.[1] === undefined ? (currentMaxAbilityResource ?? 0) : Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
 							}
 						}
 					}, { immediate: true }),
