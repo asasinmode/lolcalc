@@ -701,12 +701,12 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 
 function addComputedColumnSources(column: IDamageResultTableColumn) {
 	if (column.source) {
-		column._computedSource = column.source.clone({}, false);
+		column._computedSource = column.source.clone({}, true);
 		column._computedSource.champion.value = column.source.champion.value;
 	}
 
 	if (column.target) {
-		column._computedTarget = column.target.clone({}, false);
+		column._computedTarget = column.target.clone({}, true);
 		column._computedTarget.champion.value = column.target.champion.value;
 		if (column.source) {
 			applyEffectsFromTo(column.source, column._computedTarget);

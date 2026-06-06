@@ -53,6 +53,7 @@ let hueIncrement = 0;
 export class DamageSource<Id extends IChampionId | undefined = any> {
 	id: string;
 	color: string;
+	isResultsCopy: boolean;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
 
@@ -168,10 +169,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			champion?: { id: Id } & IListedChampion;
 		}) = {},
 		cloned = false,
-		/** when DamageSource is one & done cloned, like in `CalculatorResultsTable`'s `recalculateColumn` when it's intended to have source's effects applied, note that `this.champion.value` will be empty without it and needs to be set manually */
-		noWatch = false,
+		/**
+		 * when DamageSource is one & done cloned for results (`CalculatorResultsTable`'s `recalculateColumn`). It's intended to have source's effects applied and calculationDamageTarget set
+		 * note that `this.champion.value` will be empty without it and needs to be set manually after cloning/creating with this set to `true`
+		 */
+		isResultsCopy = false,
 	) {
-		const hue = ((noWatch ? hueIncrement : hueIncrement++) * 137.508) % 360;
+		const hue = ((isResultsCopy ? hueIncrement : hueIncrement++) * 137.508) % 360;
+		this.isResultsCopy = isResultsCopy;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
 		damageSourcesCount += 1;
@@ -216,7 +221,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.addEffect(effect.abilityId, effect.data);
 		}
 
-		this.watchHandles = noWatch
+		this.watchHandles = isResultsCopy
 			? []
 			: [
 					watch(this.listedChampion, async (c) => {
@@ -1040,6 +1045,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	modifyVariableFunctions = computed((): IDamageSourceModifyVariableFunctions => {
 		const rv: IDamageSourceModifyVariableFunctions = {};
+
+		/*
+		 * if this is not a results copy, the variables will be used in displayed descriptions for items/abilities and they shouldn't be modified by any effects
+		 * `isResultsCopy` being true means that this damage source was cloned so that the effects/calculationDamageTarget can be set on it without modifying the original one. Then the variable values are displayed in the table and should be affected by effects
+		 * this is probably a dirty way of doing so and ideally original damage sources could be used (no cloning) with external `calculateVariables(source, target)` stored in results but atm this stays, there's a TODO about it
+		 */
+		if (!this.isResultsCopy) {
+			return rv;
+		}
 
 		for (const effect of this.appliedEffects.value) {
 			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
