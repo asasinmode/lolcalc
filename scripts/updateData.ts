@@ -3,7 +3,7 @@ import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type { IEffectData, ITEMS } from '@lolcalc/data';
+import type { ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
@@ -1177,14 +1177,29 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	const subtitleRight = textShop.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
 
 	const tooltipShop = itemDescriptionText(textShop, '</section><section>');
-	let tooltipInventory = preplaceTextInventory
-		? itemDescriptionText(preplaceTextInventory(textShop), '</section><section>')
-		: textInventory ? itemDescriptionText(textInventory, '<mainText><section>') : undefined;
+
+	let preplacedTextInventory: string | undefined;
+	if (preplaceTextInventory) {
+		preplacedTextInventory = preplaceTextInventory(textShop);
+		if (preplacedTextInventory.length === textShop.length) {
+			console.warn(`[updateItemShopItemTooltipText] preplaceTextInventory ran but text length didn't change ${item.name} (${item.id})`);
+		}
+	}
+
+	let tooltipInventory = textInventory ? itemDescriptionText(textInventory, '<mainText><section>') : undefined;
 
 	if (tooltipShop && tooltipInventory?.every((extra, extraIndex) => extra.every((line, lineIndex) =>
 		tooltipShop[extraIndex]?.[lineIndex] === line,
 	))) {
 		tooltipInventory = undefined;
+	}
+
+	if (preplacedTextInventory) {
+		if (tooltipInventory) {
+			/* if this ever pops up probably remove existing preplaceTextInventory/adjust it and below make it run on original `textInventory` */
+			console.warn(`[updateItemShopItemTooltipText] preplaceTextInventory present but ${item.name} (${item.id}) has own 'textInventory'`);
+		}
+		tooltipInventory = itemDescriptionText(preplacedTextInventory, '</section><section>');
 	}
 
 	const variableDebug = {
