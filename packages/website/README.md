@@ -198,6 +198,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] decaying move speed bonuses
     - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
     - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (and test it)
+    - [ ] item description inventory/shop view, possibly add it for runes too
     - [ ] serpent's fang displayed values don't match up, probably test more
   - [ ] github readme
 - [ ] submit feedback on page / report issues

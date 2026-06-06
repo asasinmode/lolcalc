@@ -150,7 +150,8 @@ export function defineVariables<
 ): ISpecificVariables<DetectedVariables, T, Id, U> {
 	return Object.assign(config, {
 		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => {
-			return [key, { value: key === 'lolcalcChampRange'
+			/* if the value is an array, it's assumed to be melee/ranged. The array with length 2 check might result in melee/ranged icons added to variables they shouldn't be but for now there are no variables like that */
+			return [key, { value: (key === 'lolcalcChampRange' || (Array.isArray(value) && value.length === 2))
 				? [(value as number[])[0] ?? 0, (value as number[])[1] ?? 0]
 				: ((value as (string | number)[])[0] ?? 0) }];
 		},

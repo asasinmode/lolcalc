@@ -1,3 +1,7 @@
+/*
+ * `ITEMS_BY_NAME.item` or `ITEMS_BY_NAME.itemId.` access is behind `?` because when developing, sometimes I resolve only singular items/their variables and they might not be present which would result in `undefined.propertyAccess` error
+ */
+
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { ICalculatedDynamicVariable, IInternalItemDataOf, ISpecificVariables } from '.';
@@ -1495,7 +1499,6 @@ export const ITEM_SPECIFICS = {
 				HasteFromAD: {
 					statIconKey: 'attackDamage',
 					extendedEquals: {
-						/* these are behind `?` because when developing, sometimes I resolve only singular item variables and these are originally hashed, so without them being resolved code doesn't run because it can't find them under the `HasteFromX` names */
 						prefix: `<const>${ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[0]!.mNumber}</const> + <scalead>`,
 						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[1]!.mCoefficient! * 100),
 						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADRanged?.mFormulaParts[1]!.mCoefficient! * 100),
@@ -1649,7 +1652,7 @@ export const ITEM_SPECIFICS = {
 				lolcalcChampRange: [ITEMS_BY_NAME.botrk?.dataValues.MeleeValue, ITEMS_BY_NAME.botrk?.dataValues.RangedValue],
 				CurrentHealthDamage: [],
 			},
-			calculate(self, target) {
+			calculate(_self, target) {
 				const { MeleeValue, RangedValue } = ITEMS_BY_NAME.botrk?.dataValues ?? {};
 				const targetHealth = target?.currentHealth.value ?? 0;
 
@@ -1919,8 +1922,8 @@ export const ITEM_SPECIFICS = {
 					statIconKey: ['lethality'],
 					extendedEquals: {
 						prefix: '',
-						meleeValue: `<const>${bastionBreakerSpecifics.abilityDamageCalcBase}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
-						rangedValue: `${bastionBreakerSpecifics.abilityDamageCalcBase * bastionBreakerSpecifics.abilityDamageCalcRangeModifier}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient * bastionBreakerSpecifics.abilityDamageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						meleeValue: `<const>${bastionBreakerSpecifics.abilityDamageCalcBase}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient! * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						rangedValue: `${bastionBreakerSpecifics.abilityDamageCalcBase! * bastionBreakerSpecifics.abilityDamageCalcRangeModifier}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient! * bastionBreakerSpecifics.abilityDamageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
 						suffix: '',
 					},
 				},
@@ -1929,8 +1932,8 @@ export const ITEM_SPECIFICS = {
 					statIconKey: ['lethality'],
 					extendedEquals: {
 						prefix: '',
-						meleeValue: `<const>${bastionBreakerSpecifics.damageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
-						rangedValue: `${bastionBreakerSpecifics.damageCalcBase * bastionBreakerSpecifics.damageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient * bastionBreakerSpecifics.damageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						meleeValue: `<const>${bastionBreakerSpecifics.damageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient! * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						rangedValue: `${bastionBreakerSpecifics.damageCalcBase! * bastionBreakerSpecifics.damageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient! * bastionBreakerSpecifics.damageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
 						suffix: '',
 					},
 				},
@@ -2249,8 +2252,8 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'CleaveDamage',
 					extendedEquals: {
 						prefix: '<scalead>',
-						meleeValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient * 100),
-						rangedValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient * 100),
+						meleeValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
 						valueSuffix: '%',
 						suffix: '</scalead>',
 					},
@@ -2317,7 +2320,7 @@ export const ITEM_SPECIFICS = {
 				BoltDamage: {
 					type: VariableType.physical,
 					statIconKey: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.runaan?.itemCalculations.BoltDamage.mFormulaParts[0]?.mSubpart.mNumber * 100)}%</scalead>`,
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.runaan?.itemCalculations.BoltDamage.mFormulaParts[0]?.mSubpart.mNumber! * 100)}%</scalead>`,
 				},
 			},
 			uninteresting: ['Effect3Amount' as any],
@@ -2647,7 +2650,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ProcDamage: {
 					statIconKey: 'lethality',
-					extendedEquals: `<const>${ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[0]!.mNumber}</const> <scalelethality>+ ${Math.round(ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[1]!.mCoefficient * 100)}%</scalelethality>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[0]!.mNumber}</const> <scalelethality>+ ${Math.round(ITEMS_BY_NAME.umbralGlaive?.itemCalculations.ProcDamage.mFormulaParts[1]!.mCoefficient! * 100)}%</scalelethality>`,
 				},
 			},
 			uninteresting: ['f1', 'OutOfVisionDuration', 'Effect2Amount' as any, 'TotalWardDamage'],
