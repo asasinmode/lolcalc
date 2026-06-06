@@ -100,9 +100,13 @@ export interface ISpecificVariables<
 	 * record containing possible dynamic values for an ability variable (all values the variable is expected to resolve to)
 	 * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
 	 * but also for reporting unresolved description variables (if not found during `updateData`, will be reported as unknown)
-	 * they should be calculated in `calculate`
+	 * they must be calculated in `calculate`
 	 *
-	 * if empty `[]`, variable is not expected to be used for resolving a stringtable value like `{{ game_spell_Kayn_Q_main_@f1@ }}` and is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
+	 * if empty `[]`, variable is used like `&lt;scaleAP&gt;Ability Power by \@APAmp*100\@%&lt;/scaleAP&gt;`
+	 *
+	 * if not empty, it's either used for resolving a stringtable variable like `{{ game_spell_Kayn_Q_main_@f1@ }}` or the specified values should be displayed in the replaced description instead of the default `0`. For example `f6: [ITEMS_BY_NAME.bloodsong?.dataValues.StealthWardCap]` will always be replaced to that value (for example when `calculate` doesn't run, like in the item shop on an item that's not bought).
+	 *
+	 * additionally, when the array has 2 items like `lolcalcChampRange: [ITEMS_BY_NAME.botrk?.dataValues.MeleeValue, ITEMS_BY_NAME.botrk?.dataValues.RangedValue]`, the variable replaced with `replaceWithName: true` option will have melee/ranged icons prepended to it
 	 */
 	known?: NoInfer<Partial<Record<DetectedVariables, (number | string)[]>>> & Record<T, (number | string)[]>;
 	/**
