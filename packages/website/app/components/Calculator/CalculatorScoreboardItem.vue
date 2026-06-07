@@ -1088,13 +1088,13 @@ defineExpose({ el });
 				</component>
 			</li>
 		</ul>
-		<div ref="itemHoverTooltip" popover="manual" class="hover-tooltip champion-item">
+		<article ref="itemHoverTooltip" popover="manual" class="hover-tooltip champion-item">
 			<LolItemDescription
 				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
 				source="Inventory"
 				hover-tooltip
 			/>
-		</div>
+		</article>
 		<button ref="undoRemoveButton" style="display: none" @click="undoRemove">
 			restore
 		</button>
@@ -1158,11 +1158,11 @@ defineExpose({ el });
 					</template>
 					<ComingSoonCover feature="rune paths" class="text-xs px-1 end-1/2 start-0 inset-y-0 absolute" />
 				</dl>
-				<div ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="manual">
+				<article ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="manual">
 					<h5>{{ hoveredRune?.name }}</h5>
 					<p class="game-description" v-html="hoveredRune?.description" />
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
-				</div>
+				</article>
 			</section>
 			<section data-stats="" :inert="isLoading" @dblclick.ctrl="openDebugDialog(value)">
 				<h4>stats</h4>
@@ -1184,7 +1184,7 @@ defineExpose({ el });
 						</dd>
 					</template>
 				</dl>
-				<div ref="championStatTooltip" class="hover-tooltip champion-stat" popover="manual">
+				<article ref="championStatTooltip" class="hover-tooltip champion-stat" popover="manual">
 					<h5>{{ hoveredStat?.name }}</h5>
 					<p class="game-description" v-html="hoveredStat?.description" />
 					<dl>
@@ -1205,7 +1205,7 @@ defineExpose({ el });
 						</template>
 					</dl>
 					<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
-				</div>
+				</article>
 			</section>
 			<section
 				ref="effects"
@@ -1395,14 +1395,14 @@ defineExpose({ el });
 						>
 					</template>
 				</VSelect>
-				<div ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
+				<article ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
 					<h5>{{ value.roleQuest.value }}{{ value.roleQuest.value !== 'jungle' && value.roleQuest.value !== 'support' ? ' lane' : '' }} quest rewards</h5>
 					<ul class="game-description">
 						<li v-for="(reward, i) in value.roleQuest.value ? TEXT.roleQuests[value.roleQuest.value] : []" :key="i">
 							{{ reward }}
 						</li>
 					</ul>
-				</div>
+				</article>
 			</section>
 			<section ref="dragons" data-dragons="">
 				<h4>dragons</h4>
@@ -1444,7 +1444,7 @@ defineExpose({ el });
 						</div>
 					</template>
 				</VSelect>
-				<div ref="dragonTooltip" popover="hint" class="dragon-thing hover-tooltip">
+				<article ref="dragonTooltip" popover="hint" class="dragon-thing hover-tooltip">
 					<h5>{{ hoveredDragonThingText?.title }}</h5>
 					<p class="game-description" v-html="hoveredDragonThingText?.description" />
 					<UnresolvedVariablesAlert v-if="hoveredDragonThingText?.anyUnknown" />
@@ -1452,7 +1452,7 @@ defineExpose({ el });
 						{{ hoveredDragonThingText.invalid }}
 						<Icon class="i-ph:warning-circle-light" />
 					</p>
-				</div>
+				</article>
 			</section>
 			<section ref="extras" data-extras="">
 				<component

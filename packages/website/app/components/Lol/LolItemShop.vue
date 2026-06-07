@@ -677,9 +677,7 @@ defineExpose({
 				:item="selectedItem?.item"
 				:gold="selectedItem?.calculatedPrice"
 				:damage-source="damageSource"
-				header-class="order-5"
 				header-tag="h2"
-				description-class="order-6"
 				source="Shop"
 			/>
 			<button
@@ -926,7 +924,7 @@ defineExpose({
 				sell all
 			</button>
 		</footer>
-		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="manual" class="hover-tooltip">
+		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="manual" class="hover-tooltip">
 			<LolItemDescription
 				:item="hoveredItem?.item"
 				:damage-source="damageSource"
@@ -934,7 +932,7 @@ defineExpose({
 				hover-tooltip
 				source="Shop"
 			/>
-		</div>
+		</article>
 	</VDialog>
 </template>
 
@@ -1610,7 +1608,11 @@ defineExpose({
 				}
 
 				> .item-description-header {
-					--at-apply: 'pt-2 mt-3 b-t';
+					--at-apply: 'pt-2 mt-3 b-t order-5';
+				}
+
+				> .item-description {
+					--at-apply: 'order-6';
 				}
 
 				#item-shop-builds-into-list {

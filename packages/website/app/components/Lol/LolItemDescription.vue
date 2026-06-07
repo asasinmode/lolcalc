@@ -77,7 +77,6 @@ defineExpose({ header });
 		:is="headerTag || 'div'"
 		ref="header"
 		class="item-description-header"
-		:class="headerClass"
 		:data-show-subtitles="showHeaderSubtitles || undefined"
 		:data-inventory-view="isInventoryView || undefined"
 		@click="$emit('headerClick', $event)"
@@ -117,7 +116,7 @@ defineExpose({ header });
 			wiki
 		</a>
 	</component>
-	<div class="item-description" :class="descriptionClass">
+	<div class="item-description">
 		<p v-if="damageSource && (isMidQuestBoots ? damageSource.roleQuest.value !== 'mid' : isSupportItem ? damageSource.roleQuest.value !== 'support' : false)">
 			{{ isMidQuestBoots ? '(Only Mid Lane)' : '(Only Support Role)' }} Locked until Quest is Completed
 		</p>

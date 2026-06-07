@@ -86,7 +86,7 @@ defineExpose({ el });
 
 <template>
 	<div ref="el" popover="manual" class="effect-hover-tooltip-container">
-		<div class="hover-tooltip effect">
+		<article class="hover-tooltip effect">
 			<img
 				v-show="!isLoading"
 				:src="abilityImage[0]"
@@ -102,20 +102,20 @@ defineExpose({ el });
 			<footer v-if="precomputedDescription" v-show="!globalKeyModifiers.shift">
 				Hold <kbd>[Shift]</kbd> to show source
 			</footer>
-		</div>
+		</article>
 		<template v-if="precomputedDescription">
 			<LolChampionAbilityHoverTooltip
 				v-if="sourceAbilityId?.type === ABILITY_TYPE.champion"
 				v-show="globalKeyModifiers.shift"
 				:precomputed-description="precomputedDescription as IComputedAbilityDescription"
 			/>
-			<div v-else-if="sourceAbilityId?.type === ABILITY_TYPE.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
+			<article v-else-if="sourceAbilityId?.type === ABILITY_TYPE.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
 				<LolItemDescription
 					:precomputed-description="precomputedDescription as IComputedItemDescription"
 					source="Inventory"
 					hover-tooltip
 				/>
-			</div>
+			</article>
 		</template>
 	</div>
 </template>

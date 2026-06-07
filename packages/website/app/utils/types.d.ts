@@ -80,8 +80,6 @@ export interface IItemDescriptionProps {
 	gold?: number;
 	headerTag?: string;
 	headerButton?: boolean;
-	headerClass?: string;
-	descriptionClass?: string;
 	headerSubtitles?: boolean;
 	damageSource?: DamageSource;
 	replaceVariablesWithNames?: boolean;
