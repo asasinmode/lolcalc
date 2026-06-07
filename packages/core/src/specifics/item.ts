@@ -3438,6 +3438,30 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 	},
+	[ITEM_NAME_TO_ID.solsticeSleigh]: {
+		variables: defineVariables({
+			known: {
+				f3: [],
+				f5: [],
+				f6: [ITEMS_BY_NAME.solsticeSleigh?.dataValues.StealthWardCap],
+			},
+			calculate() {
+				return {
+					f3: { value: 0 },
+					f5: { value: 0 },
+					f6: { value: ITEMS_BY_NAME.solsticeSleigh?.dataValues.StealthWardCap },
+				};
+			},
+			meta: {
+				BonusHealthBuff: {
+					type: VariableType.heal,
+					statIconKey: 'level',
+					extendedEquals: `<const>${itemVariableValue('BonusHealthBuff', { item: ITEMS_BY_NAME.solsticeSleigh, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('BonusHealthBuff', { item: ITEMS_BY_NAME.solsticeSleigh, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+				},
+			},
+			uninteresting: ['f3', 'f5', 'f6', 'StealthWardCap', 'BuffDuration', 'MoveSpeedBuff'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
