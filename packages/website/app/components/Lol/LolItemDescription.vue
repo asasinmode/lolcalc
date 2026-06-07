@@ -60,7 +60,7 @@ const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryV
 const showDynamicValueFooter = computed(() => isInventoryView.value && computedDescription.value?.footerLeft);
 
 const descriptionText = computed(() => {
-	const suffix = globalKeyModifiers.value.shift ? 'Extended' : '';
+	const suffix = props.hoverTooltip && globalKeyModifiers.value.shift ? 'Extended' : '';
 	return (hasOtherView.value && props.hoverTooltip
 		? computedDescription.value?.[`tooltip${view.value}${suffix}`]
 		: (computedDescription.value?.[`tooltipShop${suffix}`]))
