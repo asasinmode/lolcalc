@@ -310,10 +310,14 @@ defineExpose({ header });
 		}
 
 		> footer {
-			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt] grid grid-cols-2 grid-rows-[min-content_min-content] grid-flow-col';
+			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt] grid grid-cols-[1fr_min-content] grid-rows-[min-content_min-content] grid-flow-col';
 
 			> div {
 				--at-apply: 'row-span-2 col-start-2';
+
+				> p {
+					--at-apply: 'whitespace-nowrap';
+				}
 			}
 
 			p {
