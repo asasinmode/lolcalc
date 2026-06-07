@@ -33,8 +33,8 @@ const tearItem = {
 	} satisfies IItemSpecific,
 	calculateHookPreItemTotal: {
 		handler(self, { itemBaseStats, itemPassivesStats, itemStatIncreases }, { miscDebug }) {
-			const { manaflow } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
-			itemPassivesStats.mana += manaflow ?? 0;
+			const { manaflow = 0 } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
+			itemPassivesStats.mana += manaflow;
 			miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
 
 			const tearItemId = self.items.value.find(item => item && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))?.id;
@@ -3389,6 +3389,53 @@ export const ITEM_SPECIFICS = {
 		}),
 		preplaceTextInventory(value) {
 			return value.replace('%i:meleeActive% @MeleeDamageAmp*100@ % / %i:rangedActive% @RangedDamageAmp*100@%', '@lolcalcChampRange@');
+		},
+	},
+	[ITEM_NAME_TO_ID.voltaicCyclosword]: {
+		internalDataProperties: ['firmanent'],
+		setupData(self) {
+			self.internalItemData.value.firmanent = clamp(0, self.internalItemData.value.firmanent ?? 0, 1);
+			return { firmanent: 0 };
+		},
+		imgActive(internalData: { firmanent: number }) {
+			return internalData.firmanent;
+		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+				PercentHPDamage: [],
+			},
+			calculate(_self, target) {
+				const { PercentCurrentHPMelee, PercentCurrentHPRanged } = ITEMS_BY_NAME.voltaicCyclosword?.dataValues ?? {};
+				const currentHealth = target?.currentHealth.value ?? 0;
+				return {
+					f1: { value: 0 },
+					PercentHPDamage: {
+						value: [currentHealth * PercentCurrentHPMelee / 100, currentHealth * PercentCurrentHPRanged / 100],
+					},
+				};
+			},
+			meta: {
+				PercentHPDamage: {
+					isCustom: true,
+				},
+			},
+			uninteresting: ['f1', 'LethalityBonusDuration'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'voltaicCyclosword'>).firmanent && self.isRanged.value !== undefined) {
+						const value = itemVariableValue('LethalityBonusModMeleeRangedSplit', { item: ITEMS_BY_NAME.voltaicCyclosword, isRanged: self.isRanged.value });
+						if (value.value === undefined) {
+							console.warn('[ITEM_SPECIFICS voltaicCyclosword] failed to calculate firmanent lethality', value);
+						} else {
+							calculatedVariables.voltaicLethality = value.value as number;
+							itemPassivesStats.lethality += calculatedVariables.voltaicLethality;
+						}
+					}
+				},
+			},
 		},
 	},
 } satisfies IHypotheticalItemSpecifics;

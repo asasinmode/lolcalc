@@ -136,6 +136,8 @@ export interface IStatsCalculationVariables {
 	roaMana?: number;
 	/** ap gained from roa's passive */
 	roaAp?: number;
+	/** lethality gained from voltaic's passive trigger */
+	voltaicLethality?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
