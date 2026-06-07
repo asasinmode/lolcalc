@@ -150,19 +150,20 @@ defineExpose({ header });
 		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && globalKeyModifiers.shift ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
-			<br v-if="showDynamicValueFooter && computedDescription?.keywordDefinitions" v-show="globalKeyModifiers.shift">
 			<p
 				v-if="computedDescription?.keywordDefinitions"
 				v-show="globalKeyModifiers.shift"
 				class="keyword-definitions"
 				v-html="computedDescription.keywordDefinitions"
 			/>
-			<p v-show="hasMoreInfo">
-				Hold <kbd>[Shift]</kbd> to show more info
-			</p>
-			<p v-show="hasOtherView || computedDescription?.footerLeft">
-				Press <kbd>[Ctrl]</kbd> to toggle to <b>{{ otherView }}</b> view
-			</p>
+			<div>
+				<p v-show="hasMoreInfo">
+					Hold <kbd>[Shift]</kbd> to show more info
+				</p>
+				<p v-show="hasOtherView || computedDescription?.footerLeft">
+					Press <kbd>[Ctrl]</kbd> to toggle to <b>{{ otherView }}</b> view
+				</p>
+			</div>
 		</footer>
 	</div>
 </template>
@@ -310,18 +311,18 @@ defineExpose({ header });
 		}
 
 		> footer {
-			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt]';
+			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt] grid grid-cols-2 grid-rows-[min-content_min-content] grid-flow-col';
 
-			> p {
-				--at-apply: 'text-end float-end';
+			> div {
+				--at-apply: 'row-span-2 col-start-2';
+			}
+
+			p {
+				--at-apply: 'text-end';
 
 				&.dynamic-value,
 				&.keyword-definitions {
-					--at-apply: 'text-start float-start';
-				}
-
-				&:not(.dynamic-value, .keyword-definitions):has(+ p) {
-					--at-apply: 'float-none';
+					--at-apply: 'text-start';
 				}
 
 				> kbd {
