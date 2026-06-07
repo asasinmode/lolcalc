@@ -1051,6 +1051,14 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { fanfare: number }) {
 			return internalData.fanfare;
 		},
+		variables: defineVariables({
+			meta: {
+				AuraAttackSpeed: {
+					resultsIsPercentage: true,
+					roundReplaced: true,
+				}
+			}
+		})
 	},
 	[ITEM_NAME_TO_ID.protoplasmHarness]: {
 		internalDataProperties: ['pHLifeline'],
@@ -1562,7 +1570,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
-	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific,
+	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific, // TODO calculate passive
 	[ITEM_NAME_TO_ID.rabadon]: {
 		calculateHooks: {
 			preBonus: {
@@ -3463,6 +3471,22 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
+
+// slingshot magic damage
+// recurve bow physical damage
+// sheen physical damage
+// phage grant ms
+// hextech alternator magic dmg
+// crimson lucidity move speed effect
+// rfc magic dmg
+// kaenic rookern extended equals
+// guinsoo magic dmg
+// gunblade variables
+// check yuntal description
+// stormrazor magic dmg & move speed effect
+// mercurial scimitar move speed effect
+// titanic hydra variables
+// bloodthirster extended equals
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
 export type IHypotheticalItemSpecifics = {
