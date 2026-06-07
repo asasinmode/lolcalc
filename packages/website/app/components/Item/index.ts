@@ -21,8 +21,8 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.shurelya]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya), 'iSpeech', 'Inspiring Speech'),
 	},
-	[ITEM_NAME_TO_ID.ardentCensor]: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCensor), 'sanctify', 'Sanctify'),
+	[ITEM_NAME_TO_ID.ardentCenser]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCenser), 'sanctify', 'Sanctify'),
 	},
 	[ITEM_NAME_TO_ID.staffOfFlowingWater]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.staffOfFlowingWater), 'rapids', 'Rapids'),

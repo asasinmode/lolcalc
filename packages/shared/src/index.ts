@@ -312,7 +312,7 @@ export const ITEM_NAME_TO_ID = {
 	runaan: '3085',
 	trinity: '3078',
 	phage: '3044',
-	ardentCensor: '3504',
+	ardentCenser: '3504',
 	staffOfFlowingWater: '6616',
 	bandlepipes: '2524',
 	knightsVow: '3109',

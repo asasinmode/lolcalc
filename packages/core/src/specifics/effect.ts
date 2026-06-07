@@ -108,7 +108,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.ardentSanctify]: defineEffectSpecific<[isSanctified: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCensor),
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCenser),
 		label: 'Sanctify',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];

@@ -1006,7 +1006,7 @@ export const ITEM_SPECIFICS = {
 			return internalData.iSpeech;
 		},
 	},
-	[ITEM_NAME_TO_ID.ardentCensor]: {
+	[ITEM_NAME_TO_ID.ardentCenser]: {
 		internalDataProperties: ['sanctify'],
 		setupData(self) {
 			self.internalItemData.value.sanctify = clamp(0, self.internalItemData.value.sanctify ?? 0, 1);
