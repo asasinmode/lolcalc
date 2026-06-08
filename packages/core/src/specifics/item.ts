@@ -443,15 +443,15 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
-					if (self.isRanged.value !== undefined) {
-						const critPerStack = itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: self.isRanged.value } } as DamageSource });
-						if (typeof critPerStack.value === 'number') {
-							const { practice = 0 } = self.internalItemData.value as IInternalItemDataOf<'yunTal'>;
-							calculatedVariables.yuntalCritChance = practice * critPerStack.value;
-						} else {
-							console.warn('[ITEM_SPECIFICS yuntal] failed to calculate crit per stack', critPerStack);
-						}
+				handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
+					const critPerStack = itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: self.isRanged.value ?? true } } as DamageSource });
+					if (typeof critPerStack.value === 'number') {
+						const { practice = 0 } = self.internalItemData.value as IInternalItemDataOf<'yunTal'>;
+						calculatedVariables.yuntalCritChance = roundVariable(critPerStack.value * practice, 1);
+						itemPassivesStats.critChance += calculatedVariables.yuntalCritChance;
+						console.log('practice thing', calculatedVariables.yuntalCritChance);
+					} else {
+						console.warn('[ITEM_SPECIFICS yuntal] failed to calculate crit per stack', critPerStack);
 					}
 				},
 			},
@@ -1037,8 +1037,8 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
-					if ((self.internalItemData.value as IInternalItemDataOf<'phage'>).rage && self.isRanged.value !== undefined) {
-						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, damageSource: { isRanged: { value: self.isRanged.value } } as DamageSource });
+					if ((self.internalItemData.value as IInternalItemDataOf<'phage'>).rage) {
+						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, damageSource: { isRanged: { value: self.isRanged.value ?? true } } as DamageSource });
 						if (typeof moveSpeed.value === 'number') {
 							calculatedVariables.phageMoveSpeed = moveSpeed.value;
 							itemPassivesStats.moveSpeed += calculatedVariables.phageMoveSpeed;
@@ -3500,8 +3500,8 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
-					if ((self.internalItemData.value as IInternalItemDataOf<'voltaicCyclosword'>).firmanent && self.isRanged.value !== undefined) {
-						const value = itemVariableValue('LethalityBonusModMeleeRangedSplit', { item: ITEMS_BY_NAME.voltaicCyclosword, isRanged: self.isRanged.value });
+					if ((self.internalItemData.value as IInternalItemDataOf<'voltaicCyclosword'>).firmanent) {
+						const value = itemVariableValue('LethalityBonusModMeleeRangedSplit', { item: ITEMS_BY_NAME.voltaicCyclosword, isRanged: self.isRanged.value ?? true });
 						if (value.value === undefined) {
 							console.warn('[ITEM_SPECIFICS voltaicCyclosword] failed to calculate firmanent lethality', value);
 						} else {
@@ -3592,8 +3592,8 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, _args, { calculatedVariables }) {
-					if ((self.internalItemData.value as IInternalItemDataOf<'crimsonLucidity'>).noxianHaste && self.isRanged.value !== undefined) {
-						const moveSpeedPercent = itemVariableValue('MSAmount', { item: ITEMS_BY_NAME.crimsonLucidity, damageSource: { isRanged: { value: self.isRanged.value } } as DamageSource });
+					if ((self.internalItemData.value as IInternalItemDataOf<'crimsonLucidity'>).noxianHaste) {
+						const moveSpeedPercent = itemVariableValue('MSAmount', { item: ITEMS_BY_NAME.crimsonLucidity, damageSource: { isRanged: { value: self.isRanged.value ?? true } } as DamageSource });
 						if (typeof moveSpeedPercent.value === 'number') {
 							calculatedVariables.crimsonLucidityMSPercent = moveSpeedPercent.value;
 							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.crimsonLucidityMSPercent;
