@@ -142,6 +142,8 @@ export interface IStatsCalculationVariables {
 	phageMoveSpeed?: number;
 	/** move speed percent gained from crimson lucidity passive */
 	crimsonLucidityMSPercent?: number;
+	/** move speed percent gained from storm razor's passive */
+	stormrazorMSPercent?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

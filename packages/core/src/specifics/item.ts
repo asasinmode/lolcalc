@@ -3619,11 +3619,38 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['SlowAmount', 'SlowDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.stormrazor]: {
+		internalDataProperties: ['bolt'],
+		setupData(self) {
+			self.internalItemData.value.bolt = clamp(0, self.internalItemData.value.bolt ?? 0, 1);
+			return { bolt: 0 };
+		},
+		variables: defineVariables({
+			meta: {
+				TotalProcDamage: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['BuffStrength', 'BuffDuration'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'stormrazor'>).bolt) {
+						const moveSpeedPercent = itemVariableValue('BuffStrength', { item: ITEMS_BY_NAME.stormrazor });
+						if (typeof moveSpeedPercent.value === 'number') {
+							calculatedVariables.stormrazorMSPercent = moveSpeedPercent.value;
+							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.stormrazorMSPercent;
+						} else {
+							console.warn('[ITEM_SPECIFICS stormrazor] failed to calculate move speed', moveSpeedPercent);
+						}
+					}
+				},
+			},
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
-// check yuntal description
-// stormrazor magic dmg & move speed effect
-//
 // mercurial scimitar move speed effect
 // titanic hydra variables
 // bloodthirster extended equals
