@@ -138,6 +138,10 @@ export interface IStatsCalculationVariables {
 	roaAp?: number;
 	/** lethality gained from voltaic's passive trigger */
 	voltaicLethality?: number;
+	/** move speed gained from phage's passive */
+	phageMoveSpeed?: number;
+	/** move speed percent gained from crimson lucidity passive */
+	crimsonLucidityMSPercent?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
@@ -407,6 +411,19 @@ export const ITEM_NAME_TO_ID = {
 	eclipse: '6692',
 	voltaicCyclosword: '6699',
 	seryldasGrudge: '6694',
+	scoutsSlingshot: '3144',
+	recurveBow: '1043',
+	sheen: '3057',
+	hextechAlternator: '3145',
+	rfc: '3094',
+	kaenicRookern: '2504',
+	hextechGunblade: '3146',
+	stormrazor: '3097',
+	mercurialScimitar: '3139',
+	titanicHydra: '3748',
+	bloodthirster: '3072',
+	axiomArc: '6696',
+	profaneHydra: '6698',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

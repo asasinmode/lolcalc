@@ -995,6 +995,24 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { rage: number }) {
 			return internalData.rage;
 		},
+		variables: defineVariables({
+			uninteresting: ['MoveSpeedDuration'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'phage'>).rage && self.isRanged.value !== undefined) {
+						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, damageSource: { isRanged: { value: self.isRanged.value } } as DamageSource });
+						if (typeof moveSpeed.value === 'number') {
+							calculatedVariables.phageMoveSpeed = moveSpeed.value;
+							itemPassivesStats.moveSpeed += calculatedVariables.phageMoveSpeed;
+						} else {
+							console.warn('[ITEM_SPECIFICS phage] failed to calculate move speed', moveSpeed);
+						}
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
 		internalDataProperties: ['iSpeech'],
@@ -1056,9 +1074,9 @@ export const ITEM_SPECIFICS = {
 				AuraAttackSpeed: {
 					resultsIsPercentage: true,
 					roundReplaced: true,
-				}
-			}
-		})
+				},
+			},
+		}),
 	},
 	[ITEM_NAME_TO_ID.protoplasmHarness]: {
 		internalDataProperties: ['pHLifeline'],
@@ -3470,23 +3488,100 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f3', 'f5', 'f6', 'StealthWardCap', 'BuffDuration', 'MoveSpeedBuff'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.scoutsSlingshot]: {
+		variables: defineVariables({
+			meta: {
+				DamageAmount: {
+					type: VariableType.magic,
+				},
+			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.recurveBow]: {
+		variables: defineVariables({
+			meta: {
+				OnHitDamage: {
+					type: VariableType.magic,
+				},
+			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.sheen]: {
+		variables: defineVariables({
+			meta: {
+				SpellbladeDamage: {
+					type: VariableType.magic,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.sheen?.itemCalculations.SpellbladeDamage.mFormulaParts[0]!.mCoefficient * 100)}% base</scalead> `,
+				},
+			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.hextechAlternator]: {
+		variables: defineVariables({
+			meta: {
+				DamageAmount: {
+					type: VariableType.magic,
+				},
+			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.crimsonLucidity]: {
+		internalDataProperties: ['noxianHaste'],
+		setupData(self) {
+			self.internalItemData.value.noxianHaste = clamp(0, self.internalItemData.value.noxianHaste ?? 0, 1);
+			return { noxianHaste: 0 };
+		},
+		variables: defineVariables({
+			meta: {
+				MSAmount: {
+					resultsIsPercentage: true,
+				},
+			},
+			uninteresting: ['Duration', 'SummonerHaste'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'crimsonLucidity'>).noxianHaste && self.isRanged.value !== undefined) {
+						const moveSpeedPercent = itemVariableValue('MSAmount', { item: ITEMS_BY_NAME.crimsonLucidity, damageSource: { isRanged: { value: self.isRanged.value } } as DamageSource });
+						if (typeof moveSpeedPercent.value === 'number') {
+							calculatedVariables.crimsonLucidityMSPercent = moveSpeedPercent.value;
+							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.crimsonLucidityMSPercent;
+						} else {
+							console.warn('[ITEM_SPECIFICS crimson lucidty] failed to calculate move speed', moveSpeedPercent);
+						}
+					}
+				},
+			},
+		},
+	},
+	[ITEM_NAME_TO_ID.rfc]: {
+		variables: defineVariables({
+			meta: {
+				dmg: {
+					type: VariableType.magic,
+				},
+			},
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
-// slingshot magic damage
-// recurve bow physical damage
-// sheen physical damage
-// phage grant ms
-// hextech alternator magic dmg
-// crimson lucidity move speed effect
 // rfc magic dmg
 // kaenic rookern extended equals
 // guinsoo magic dmg
 // gunblade variables
 // check yuntal description
 // stormrazor magic dmg & move speed effect
+//
 // mercurial scimitar move speed effect
 // titanic hydra variables
 // bloodthirster extended equals
+//
+// axiom arc extended equals
+// profane hydra variables
+// item passives like phage/voltaic when toggled and page reloaded don't update in the stats panel
+// item variables unify using isRanged, don't mix between damage source/passed thingy, probably always use passed thingy
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
 export type IHypotheticalItemSpecifics = {
