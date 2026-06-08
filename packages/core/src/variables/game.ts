@@ -933,7 +933,7 @@ interface IGameVariablesByType {
 	};
 }
 
-function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
+export function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
 	if ('__type' in variable && variable.__type in VARIABLE_CALCULATION_FNS) {
 		return VARIABLE_CALCULATION_FNS[variable.__type as keyof typeof VARIABLE_CALCULATION_FNS];
 	} else if ('mFormulaParts' in variable) {

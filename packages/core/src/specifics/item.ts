@@ -10,7 +10,7 @@ import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import { CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { itemVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
+import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
 const actualGWoundsItems = Object.values(ITEMS).filter(item => item.dataValues?.GrievousAmount);
@@ -1281,12 +1281,16 @@ export const ITEM_SPECIFICS = {
 				/* according to the [wiki](https://wiki.leagueoflegends.com/en-us/Dead_Man's_Plate) the ad ratio also scales with stacks reaching 100% base at 100 stacks */
 				const baseRatio = shipwrecker / ITEM_SPECIFICS[ITEM_NAME_TO_ID.deadMansPlate].MAX_STACKS;
 
-				const base = VARIABLE_CALCULATION_FNS.StatByNamedDataValueCalculationPart(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0] as any, ITEMS_BY_NAME.deadMansPlate, self)?.value;
+				const base = variableResolveFn(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0])?.(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0] as any, ITEMS_BY_NAME.deadMansPlate, self)?.value;
+				if (typeof base !== 'number') {
+					console.warn(`[ITEM_SPECIFICS] dead man's plate failed to calculate base damage`);
+				}
+
 				const { BonusDamagePerStack } = ITEMS_BY_NAME.deadMansPlate?.dataValues ?? 0;
 
 				return {
 					DamageCalc: {
-						value: base * baseRatio + BonusDamagePerStack * shipwrecker,
+						value: (base as number) * baseRatio + BonusDamagePerStack * shipwrecker,
 					},
 				};
 			},
@@ -1401,6 +1405,14 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			return (self.internalItemData.value as { seething: number }).seething;
 		},
+		variables: defineVariables({
+			meta: {
+				OnHitDamage: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['AttackSpeedPerStack', 'BuffDuration', 'MaxStacks'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats, baseStats }) {
@@ -1710,7 +1722,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
 		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {
-			const maxValueAt = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold, ITEMS_BY_NAME.overlordsBloodmail, damageSource);
+			const maxValueAt = variableResolveFn(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold)?.(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold, ITEMS_BY_NAME.overlordsBloodmail, damageSource);
 			if (!maxValueAt || typeof maxValueAt.value !== 'number') {
 				console.warn('[ITEM_SPECIFICS bloodmail] failed to resolve RemainingHealthThreshold variable value');
 				return 0;
@@ -1794,7 +1806,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemPassivesStats, baseOnLevelStats }, { calculatedVariables }) {
-					const value = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD, ITEMS_BY_NAME.steraksGage, { stats: { value: { baseOnLevel: baseOnLevelStats } } } as DamageSource);
+					const value = variableResolveFn(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD)?.(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD, ITEMS_BY_NAME.steraksGage, { stats: { value: { baseOnLevel: baseOnLevelStats } } } as DamageSource);
 					if (typeof value?.value === 'number') {
 						calculatedVariables.sterakAd = value.value;
 						itemPassivesStats.attackDamage += calculatedVariables.sterakAd;
@@ -1839,7 +1851,8 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, itemTotalStats, itemPassivesStats, adaptiveForceMeta }, { calculatedVariables, miscDebug }) {
 					miscDebug.swiftmarchTotalMs = totalPreMultipliersStats.moveSpeed;
-					const adaptiveForce = VARIABLE_CALCULATION_FNS.mFormulaParts(ITEMS_BY_NAME.swiftmarch?.itemCalculations.MSToAdaptiveCalc, ITEMS_BY_NAME.swiftmarch, { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource);
+					const adaptiveForce = variableResolveFn(ITEMS_BY_NAME.swiftmarch?.itemCalculations.MSToAdaptiveCalc)?.(ITEMS_BY_NAME.swiftmarch?.itemCalculations.MSToAdaptiveCalc, ITEMS_BY_NAME.swiftmarch, { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource);
+
 					if (typeof adaptiveForce?.value === 'number') {
 						calculatedVariables.swiftmarchAdaptive = adaptiveForce.value;
 						const statValue = calculatedVariables.swiftmarchAdaptive * adaptiveForceMeta[2];
@@ -2373,7 +2386,7 @@ export const ITEM_SPECIFICS = {
 				},
 				BounceCount: {
 					statIconKey: 'level',
-					extendedEquals: `<const>${ITEMS_BY_NAME.statikkShiv?.itemCalculations.BounceCount.mFormulaParts[0]?.mLevel1Value} - ${ITEMS_BY_NAME.statikkShiv ? VARIABLE_CALCULATION_FNS.ByCharLevelBreakpointsCalculationPart(ITEMS_BY_NAME.statikkShiv.itemCalculations.BounceCount.mFormulaParts[0]!, {}, { level: { value: 18 } } as DamageSource)?.value : 0}</const>`,
+					extendedEquals: `<const>${itemVariableValue('BounceCount', { item: ITEMS_BY_NAME.statikkShiv, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('BounceCount', { item: ITEMS_BY_NAME.statikkShiv, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'f2', 'BounceCount', 'BonusEnergizedStacks'],
@@ -3557,20 +3570,57 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.rfc]: {
+		internalDataProperties: ['sharpshooter'],
+		setupData(self) {
+			self.internalItemData.value.sharpshooter = clamp(0, self.internalItemData.value.sharpshooter ?? 0, 1);
+			return { sharpshooter: 0 };
+		},
 		variables: defineVariables({
 			meta: {
-				dmg: {
+				BonusDamage: {
 					type: VariableType.magic,
 				},
+				RangePercentIncrease: {
+					resultsIsPercentage: true,
+				},
 			},
+		}),
+		calculateHooks: {
+			// preItemTotal: {
+			// TODO add range when toggled
+			// }
+		},
+	},
+	[ITEM_NAME_TO_ID.kaenicRookern]: {
+		variables: defineVariables({
+			meta: {
+				ShieldCalc: {
+					statIconKey: 'hp',
+					extendedEquals: `<scalehealth>${Math.round((ITEMS_BY_NAME.kaenicRookern?.dataValues as any)[ITEMS_BY_NAME.kaenicRookern?.itemCalculations.ShieldCalc.mFormulaParts[0]!.mDataValue!] * 100)}%</scalehealth>`,
+				},
+			},
+			uninteresting: ['OutOfCombatDuration'],
+		}),
+	},
+	[ITEM_NAME_TO_ID.hextechGunblade]: {
+		internalDataProperties: ['lBolt'],
+		setupData(self) {
+			self.internalItemData.value.lBolt = clamp(0, self.internalItemData.value.lBolt ?? 0, 1);
+			return { lBolt: 0 };
+		},
+		variables: defineVariables({
+			meta: {
+				ActiveDamage: {
+					type: VariableType.magic,
+					statIconKey: ['level', 'abilityPower'],
+					extendedEquals: `<const>${variableResolveFn(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0]!)?.(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0] as any, ITEMS_BY_NAME.hextechGunblade, { level: { value: CHAMPION_LEVEL.min } } as DamageSource)?.value} - ${variableResolveFn(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0]!)?.(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0] as any, ITEMS_BY_NAME.hextechGunblade, { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource)?.value}%i:${STAT_ICON.level}%</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[1]!.mCoefficient! * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
+				},
+			},
+			uninteresting: ['SlowAmount', 'SlowDuration'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
 
-// rfc magic dmg
-// kaenic rookern extended equals
-// guinsoo magic dmg
-// gunblade variables
 // check yuntal description
 // stormrazor magic dmg & move speed effect
 //
