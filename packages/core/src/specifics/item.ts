@@ -420,6 +420,42 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { flurry: number }) {
 			return internalData.flurry;
 		},
+		// TODO show crit in item stats, check if is shown at 0%, make input allow float with any value from 0-25, possibly an increment of 0.2
+		variables: defineVariables({
+			known: {
+				BonusCrit: [],
+			},
+			calculate(self) {
+				return {
+					BonusCrit: {
+						// TODO
+						value: 123,
+					},
+				};
+			},
+			meta: {
+				BonusCrit: {
+					isCustom: true,
+					resultsIsPercentage: true,
+				},
+			},
+			uninteresting: ['CritPerStackCalc', 'CritMax', 'ASMod', 'ASDuration', 'AACDR', 'CritCDR'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if (self.isRanged.value !== undefined) {
+						const critPerStack = itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: self.isRanged.value } } as DamageSource });
+						if (typeof critPerStack.value === 'number') {
+							const { practice = 0 } = self.internalItemData.value as IInternalItemDataOf<'yunTal'>;
+							calculatedVariables.yuntalCritChance = practice * critPerStack.value;
+						} else {
+							console.warn('[ITEM_SPECIFICS yuntal] failed to calculate crit per stack', critPerStack);
+						}
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
 		MAX_STACKS: ITEMS_BY_NAME.shojin?.dataValues.StackCount,

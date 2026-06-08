@@ -142,6 +142,10 @@ export interface IStatsCalculationVariables {
 	phageMoveSpeed?: number;
 	/** move speed percent gained from crimson lucidity passive */
 	crimsonLucidityMSPercent?: number;
+	/** crit chance gained from yuntal's practice passive */
+	yuntalCritChance?: number;
+	/** attack speed gained from yuntal's flurry passive */
+	yuntalAttackSpeed?: number;
 	/** move speed percent gained from storm razor's passive */
 	stormrazorMSPercent?: number;
 }
