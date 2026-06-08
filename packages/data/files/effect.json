@@ -128,6 +128,10 @@
 		"lolcalc6694BitterCold": {
 			"description": "This unit is slowed.",
 			"dataKey": "lolcalc6694BitterCold"
+		},
+		"lolcalc3146LightningBolt": {
+			"description": "This unit's movement is slowed.",
+			"dataKey": "lolcalc3146LightningBolt"
 		}
 	},
 	"stringtable": {

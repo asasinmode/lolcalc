@@ -531,6 +531,7 @@ export const EFFECT_OBJECT_NAME = {
 	icebornGauntletFrostField: 'lolcalc6662FrostField',
 	bloodsongSpellbladed: 'lolcalc3877Spellbladed',
 	seryldaBitterCold: 'lolcalc6694BitterCold',
+	gunbladeLightningBolt: 'lolcalc3146LightningBolt',
 	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

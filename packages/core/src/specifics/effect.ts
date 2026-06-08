@@ -467,6 +467,21 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 	}),
+	[EFFECT_OBJECT_NAME.gunbladeLightningBolt]: defineEffectSpecific<[lightningBolt: number]>({
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.hextechGunblade),
+		label: 'Lightning Bolt',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'hextechGunblade'>).lBolt) {
+				return [1];
+			}
+		},
+	}),
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: defineEffectSpecific<[isCursed: number]>({
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
 		label: 'Cursed touch',
@@ -619,11 +634,15 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	[EFFECT_OBJECT_NAME.stridebreakerBShockwaveSlow]: slowEffectDescriptionObj,
 	[EFFECT_OBJECT_NAME.icebornGauntletFrostField]: slowEffectDescriptionObj,
 	[EFFECT_OBJECT_NAME.seryldaBitterCold]: {
-		/* serylda seems to have identical text to rylai  */
+		/* effect seems to have identical text to rylai  */
 		objectName: EFFECT_OBJECT_NAME.rylaisRimefrost,
 	},
 	[EFFECT_OBJECT_NAME.bloodsongSpellbladed]: {
 		description: 'This unit takes increased damage.',
+	},
+	[EFFECT_OBJECT_NAME.gunbladeLightningBolt]: {
+		/* effect seems to have identical text to botrk  */
+		objectName: EFFECT_OBJECT_NAME.botrkClawingShadows,
 	},
 	/* champion passives */
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',

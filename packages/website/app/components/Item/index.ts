@@ -228,6 +228,9 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.rfc]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.rfc), 'sharpshooter', 'Sharpshooter'),
 	},
+	[ITEM_NAME_TO_ID.hextechGunblade]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.hextechGunblade), 'lBolt', 'Lightning Bolt', true, true),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
