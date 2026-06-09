@@ -119,6 +119,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			hook(source, { itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases }, { calculatedVariables, miscDebug });
 		}
 	}
+	itemPassivesStats.attackSpeed = itemPassivesStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 
 	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [key, value + itemPassivesStats[key as IChampionStatName]])) as IChampionStats;
 	calculatedVariables.apMultipliersBase += itemTotalStats.abilityPower;

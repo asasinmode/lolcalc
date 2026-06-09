@@ -408,6 +408,7 @@ export const ITEM_SPECIFICS = {
 		MAX_PRACTICE_CRIT: ITEMS_BY_NAME.yunTal?.dataValues.CritMax,
 		MELEE_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: false } } as DamageSource }).value as number,
 		RANGED_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: true } } as DamageSource }).value as number,
+		FLURRY_ATTACK_SPEED: itemVariableValue('ASMod', { item: ITEMS_BY_NAME.yunTal }).value as number,
 		internalDataProperties: ['practice', 'flurry'],
 		setupData(self) {
 			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_PRACTICE_CRIT);
@@ -452,6 +453,10 @@ export const ITEM_SPECIFICS = {
 					itemStatIncreases[ITEM_NAME_TO_ID.yunTal] = {
 						FlatCritChanceMod: practice,
 					};
+					if ((self.internalItemData.value as IInternalItemDataOf<'yunTal'>).flurry) {
+						calculatedVariables.yuntalAttackSpeed = ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].FLURRY_ATTACK_SPEED;
+						itemPassivesStats.bonusAttackSpeedPercent += calculatedVariables.yuntalAttackSpeed;
+					}
 				},
 			},
 		},
