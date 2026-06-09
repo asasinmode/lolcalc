@@ -978,6 +978,16 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f4', 'MoveSpeedBonus', 'MSDuration'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'trinity'>).quicken) {
+						calculatedVariables.trinityForceMoveSpeed = ITEMS_BY_NAME.trinity?.dataValues.MoveSpeedBonus;
+						itemPassivesStats.moveSpeed += calculatedVariables.trinityForceMoveSpeed;
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
 		MAX_STACKS: 5,
@@ -3691,9 +3701,9 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, _args, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'stormrazor'>).bolt) {
-						const moveSpeedPercent = itemVariableValue('BuffStrength', { item: ITEMS_BY_NAME.stormrazor });
-						if (typeof moveSpeedPercent.value === 'number') {
-							calculatedVariables.stormrazorMSPercent = moveSpeedPercent.value;
+						const moveSpeedPercent = ITEMS_BY_NAME.stormrazor?.dataValues.BuffStrength;
+						if (typeof moveSpeedPercent === 'number') {
+							calculatedVariables.stormrazorMSPercent = moveSpeedPercent;
 							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.stormrazorMSPercent;
 						} else {
 							console.warn('[ITEM_SPECIFICS stormrazor] failed to calculate move speed', moveSpeedPercent);
@@ -3703,9 +3713,30 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 	},
+	[ITEM_NAME_TO_ID.mercurialScimitar]: {
+		internalDataProperties: ['quicksilver'],
+		setupData(self) {
+			self.internalItemData.value.quicksilver = clamp(0, self.internalItemData.value.quicksilver, 1);
+			return { quicksilver: 0 };
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'mercurialScimitar'>).quicksilver) {
+						const moveSpeedPercent = ITEMS_BY_NAME.mercurialScimitar?.dataValues.MoveSpeed;
+						if (typeof moveSpeedPercent === 'number') {
+							calculatedVariables.mercurialMSPercent = moveSpeedPercent;
+							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.mercurialMSPercent;
+						} else {
+							console.warn('[ITEM_SPECIFICS mercurial scimitar] failed to calculate move speed', moveSpeedPercent);
+						}
+					}
+				},
+			},
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
-// mercurial scimitar move speed effect
 // titanic hydra variables
 // bloodthirster extended equals
 //

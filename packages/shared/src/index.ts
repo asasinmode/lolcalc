@@ -142,6 +142,8 @@ export interface IStatsCalculationVariables {
 	voltaicLethality?: number;
 	/** move speed gained from phage's passive */
 	phageMoveSpeed?: number;
+	/** move speed gained from trinity force's passive */
+	trinityForceMoveSpeed?: number;
 	/** move speed percent gained from crimson lucidity passive */
 	crimsonLucidityMSPercent?: number;
 	/** crit chance gained from yuntal's practice passive */
@@ -150,6 +152,8 @@ export interface IStatsCalculationVariables {
 	yuntalAttackSpeed?: number;
 	/** move speed percent gained from storm razor's passive */
 	stormrazorMSPercent?: number;
+	/** move speed percent gained from mercurial scimitar's passive */
+	mercurialMSPercent?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
