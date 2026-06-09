@@ -1245,16 +1245,26 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
 		MAX_STACKS: ITEMS_BY_NAME.hexoptics?.dataValues.MaxRange,
-		internalDataProperties: ['magnification'],
+		internalDataProperties: ['magnification', 'arcaneAim'],
 		setupData(self) {
 			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_STACKS);
-			return { magnification: 0 };
+			self.internalItemData.value.arcaneAim = clamp(0, self.internalItemData.value.arcaneAim ?? 0, 1);
+			return { magnification: 0, arcaneAim: 0 };
 		},
 		imgTextLabel: 'Magnification % damage increase',
 		imgText(self) {
 			const { magnification } = self.internalItemData.value as { magnification: number };
 			const { dataValues: { MaxRange, MaxDamageAmp } } = ITEMS_BY_NAME.hexoptics;
 			return magnification && `${roundVariable(Math.round((magnification / MaxRange * 100 * MaxDamageAmp) * 10) / 10)}%`;
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'hexoptics'>).arcaneAim) {
+						itemPassivesStats.attackRange += ITEMS_BY_NAME.hexoptics?.dataValues.ExtraRange;
+					}
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.youmuu]: {
@@ -2692,7 +2702,7 @@ export const ITEM_SPECIFICS = {
 			calculate() {
 				return {
 					f5: { value: 0 },
-					// TODO
+					// TODO + same for steelcaps
 					AttackDamageReduced: { value: 123 },
 				};
 			},
@@ -3626,9 +3636,13 @@ export const ITEM_SPECIFICS = {
 			},
 		}),
 		calculateHooks: {
-			// preItemTotal: {
-			// TODO add range when toggled
-			// }
+			preItemTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'rfc'>).sharpshooter) {
+						calculatedVariables.totalAttackRangeMultiplier += ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease;
+					}
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.kaenicRookern]: {
