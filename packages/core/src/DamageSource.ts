@@ -60,6 +60,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	level: Ref<number>;
 	maxLevel = computed((): number => this.roleQuest.value === 'top' ? 20 : 18);
 
+	// TODO supposed to count range from senna's passive but not items like rfc/hexoptics
 	isRanged = computed((): boolean | undefined => this.champion.value && (this.stats.value?.base.attackRange ?? 0) > 325);
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 
