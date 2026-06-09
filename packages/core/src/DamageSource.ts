@@ -488,7 +488,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
-			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('.'),
+			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('-'),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
 				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}-${effect.data.join('-')}`)
@@ -538,10 +538,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawInternalItemData?.length) {
-			for (const keyValue of rawInternalItemData.split('.')) {
+			for (const keyValue of rawInternalItemData.split('-')) {
 				const [key, rawValue] = keyValue.split('~');
 				if (key && rawValue) {
-					const value = Number.parseInt(rawValue);
+					const value = Number.parseFloat(rawValue);
 					if (!Number.isNaN(value)) {
 						rv.internalItemData.value[key] = value;
 					}
@@ -1138,6 +1138,18 @@ export function computeItemDescription(
 				increasedBy,
 			};
 		});
+	for (const key in damageSource?.stats.value?.itemStatIncreases[item.id] ?? {}) {
+		if (!stats.some(stat => stat.statName === key)) {
+			const value = damageSource!.stats.value.itemStatIncreases[item.id]![key as IItemStat] as number;
+			stats.push({
+				icon: STAT_ICON[key as IItemStat],
+				statName: key as IItemStat,
+				baseValue: 0,
+				totalValue: value,
+				increasedBy: value,
+			});
+		}
+	}
 
 	/* dynamic variables not passed as they shouldn't be needed */
 	const gp10 = itemVariableValue('GP10', { item, damageSource, isRanged: damageSource?.isRanged.value });

@@ -44,7 +44,14 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		extras: [
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.yunTal), 'practice', 'Practice stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_STACKS),
+			await numberExtra(
+				GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.yunTal),
+				'practice',
+				'Practice stacks crit chance',
+				0,
+				ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_PRACTICE_CRIT,
+				damageSource => computed(() => damageSource.isRanged.value ? ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].RANGED_CRIT_STEP : ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MELEE_CRIT_STEP),
+			),
 			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.yunTal), 'flurry', 'Flurry'),
 		],
 	},

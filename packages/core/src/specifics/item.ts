@@ -23,7 +23,7 @@ const tearItem = {
 		MAX_STACKS: ITEMS_BY_NAME.tear?.dataValues.MaxMana,
 		internalDataProperties: ['manaflow'],
 		setupData(self: DamageSource) {
-			self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, tearItem.specific.MAX_STACKS);
+			self.internalItemData.value.manaflow = clamp(0, Math.round(self.internalItemData.value.manaflow ?? 0), tearItem.specific.MAX_STACKS);
 			return { manaflow: 0 };
 		},
 		imgTextLabel: 'Manaflow stacks',
@@ -405,31 +405,33 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
-		MAX_STACKS: ITEMS_BY_NAME.yunTal?.dataValues.CritMax,
+		MAX_PRACTICE_CRIT: ITEMS_BY_NAME.yunTal?.dataValues.CritMax,
+		MELEE_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: false } } as DamageSource }).value as number,
+		RANGED_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: true } } as DamageSource }).value as number,
 		internalDataProperties: ['practice', 'flurry'],
 		setupData(self) {
-			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_STACKS);
+			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_PRACTICE_CRIT);
 			self.internalItemData.value.flurry = clamp(0, self.internalItemData.value.flurry ?? 0, 1);
 			return { practice: 0, flurry: 0 };
 		},
 		imgTextLabel: 'Practice Makes Lethal critical strike chance',
 		imgText(self) {
 			const { practice } = self.internalItemData.value as { practice: number };
-			return practice && `${practice}%`;
+			return practice && `${Math.round(practice)}%`;
 		},
 		imgActive(internalData: { flurry: number }) {
 			return internalData.flurry;
 		},
-		// TODO show crit in item stats, check if is shown at 0%, make input allow float with any value from 0-25, possibly an increment of 0.2
 		variables: defineVariables({
 			known: {
 				BonusCrit: [],
 			},
-			calculate(self) {
+			calculate(self): {
+				BonusCrit: ICalculatedDynamicVariable;
+			} {
 				return {
 					BonusCrit: {
-						// TODO
-						value: 123,
+						value: (self.internalItemData.value as IInternalItemDataOf<'yunTal'>).practice,
 					},
 				};
 			},
@@ -444,15 +446,12 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
-					const critPerStack = itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: self.isRanged.value ?? true } } as DamageSource });
-					if (typeof critPerStack.value === 'number') {
-						const { practice = 0 } = self.internalItemData.value as IInternalItemDataOf<'yunTal'>;
-						calculatedVariables.yuntalCritChance = roundVariable(critPerStack.value * practice, 1);
-						itemPassivesStats.critChance += calculatedVariables.yuntalCritChance;
-						console.log('practice thing', calculatedVariables.yuntalCritChance);
-					} else {
-						console.warn('[ITEM_SPECIFICS yuntal] failed to calculate crit per stack', critPerStack);
-					}
+					const { practice = 0 } = self.internalItemData.value as IInternalItemDataOf<'yunTal'>;
+					calculatedVariables.yuntalCritChance = roundVariable(practice / 100, 2);
+					itemPassivesStats.critChance += calculatedVariables.yuntalCritChance;
+					itemStatIncreases[ITEM_NAME_TO_ID.yunTal] = {
+						FlatCritChanceMod: practice,
+					};
 				},
 			},
 		},

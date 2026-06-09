@@ -15,7 +15,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 	label: string,
 	min?: number,
 	max?: MaybeRef<number> | ((self: DamageSource) => Promise<MaybeRef<number>> | MaybeRef<number>),
-	step?: number,
+	step?: MaybeRef<number> | ((self: DamageSource) => MaybeRef<number>),
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
@@ -26,6 +26,11 @@ export async function numberExtra<T extends IGameAbilityId>(
 			localMax = await localMax(props.damageSource);
 		}
 
+		let localStep = step;
+		if (typeof localStep === 'function') {
+			localStep = localStep(props.damageSource);
+		}
+
 		return () => h(VExtrasNumber, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
@@ -34,13 +39,13 @@ export async function numberExtra<T extends IGameAbilityId>(
 			label,
 			min,
 			'max': toValue(localMax),
-			step,
+			'step': toValue(localStep),
 			'usedNumberInput': useNumberInput(
 				abilityId.type === ABILITY_TYPE.effect
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
 					? () => [(appliedEffect ??= props.damageSource.addEffect(abilityId)).data, property as number]
 					: [props.damageSource[abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData'], property as string],
-				true,
+				localStep === undefined || Number.isInteger(toValue(localStep)),
 				localMax,
 			),
 			onImgMouseenter(event) {
