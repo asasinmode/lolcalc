@@ -3796,11 +3796,29 @@ export const ITEM_SPECIFICS = {
 			},
 		}),
 	},
+	[ITEM_NAME_TO_ID.bloodthirster]: {
+		variables: defineVariables({
+			meta: {
+				OvershieldCalc: {
+					type: VariableType.shield,
+				},
+			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.axiomArc]: {
+		variables: defineVariables({
+			meta: {
+				UltimateRefund: {
+					statIconKey: 'lethality',
+					resultsIsPercentage: true,
+					extendedEquals: `<const>${(ITEMS_BY_NAME.axiomArc?.dataValues as any)[ITEMS_BY_NAME.axiomArc?.itemCalculations.UltimateRefund.mFormulaParts[0]!.mDataValue!]}</const> <scalelethality>+ ${Math.round(ITEMS_BY_NAME.axiomArc?.itemCalculations.UltimateRefund.mFormulaParts[1]!.mCoefficient! * 100)}%</scalelethality>`,
+				},
+			},
+			uninteresting: ['ResetWindow'],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
-// bloodthirster extended equals
-//
-// axiom arc extended equals
 // profane hydra variables
 // item passives like phage/voltaic when toggled and page reloaded don't update in the stats panel
 // item variables unify using isRanged, don't mix between damage source/passed thingy, probably always use passed thingy
