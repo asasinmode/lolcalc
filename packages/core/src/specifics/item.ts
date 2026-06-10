@@ -3817,9 +3817,30 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['ResetWindow'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.profaneHydra]: {
+		variables: defineVariables({
+			meta: {
+				CleaveDamage: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					extendedEquals: {
+						prefix: '<scalead>',
+						meleeValue: Math.round(ITEMS_BY_NAME.profaneHydra?.itemCalculations.CleaveDamage.mFormulaParts[0]!.mCoefficient * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.profaneHydra?.itemCalculations.CleaveDamage.mFormulaParts[0]!.mCoefficient * ITEMS_BY_NAME.profaneHydra?.itemCalculations.CleaveDamage.mRangedMultiplier.mNumber * 100),
+						valueSuffix: '%',
+						suffix: '</scalead>',
+					},
+				},
+				SlashDamageBase: {
+					type: VariableType.physical,
+					statIconKey: 'attackDamage',
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.profaneHydra?.itemCalculations.SlashDamageBase.mFormulaParts[0]!.mCoefficient * 100)}%</scalead>`,
+				},
+			},
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
-// profane hydra variables
 // item passives like phage/voltaic when toggled and page reloaded don't update in the stats panel
 // item variables unify using isRanged, don't mix between damage source/passed thingy, probably always use passed thingy
 
