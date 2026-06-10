@@ -142,6 +142,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			hook(source, { championPassiveStats, baseStats }, { calculatedVariables, miscDebug });
 		}
 	}
+	championPassiveStats.attackSpeed = (championPassiveStats.bonusAttackSpeedPercent ?? 0) * baseOnLevelStats.attackSpeedRatio;
 
 	if (source.calculateStatsHooks.all.value.preBonus) {
 		for (const hook of source.calculateStatsHooks.all.value.preBonus) {

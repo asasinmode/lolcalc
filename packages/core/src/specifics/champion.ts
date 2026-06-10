@@ -235,6 +235,18 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS(self)),
 			};
 		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof attackSpeedPerStack.value === 'number') {
+						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS jax] failed to calculate passive attack speed');
+					}
+				},
+			},
+		},
 	},
 	Jhin: {
 		setupData(self): { isPassiveMSActive: number } {
