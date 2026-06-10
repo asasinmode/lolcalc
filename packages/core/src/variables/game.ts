@@ -310,7 +310,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		}
 	}
 
-	const [variableName, ...dotPath] = variable.split('.');
+	const [variableName, ...dotPath] = variable.split('.') as [string, ...string[]];
 	if (dotPath.length) {
 		rv.actualVariableName = variableName;
 	}
@@ -418,7 +418,7 @@ export function replaceGameVariables(text: string, variableType: 'championAbilit
 export function replaceGameVariables(
 	text: string,
 	variableType: IGameVariableType,
-	variableValueFunctionData: IItemVariableParams | IRuneVariableParams | IChampionAbilityVariableParams,
+	variableValueFunctionParams: IItemVariableParams | IRuneVariableParams | IChampionAbilityVariableParams,
 	modifyVariableFunctions: IModifyVariableFunctions = {},
 	options: Partial<IReplaceGameVariablesOptions> = {},
 ): IReplaceGameVariablesRV {
@@ -427,7 +427,7 @@ export function replaceGameVariables(
 	const variables: IReplaceGameVariablesRV['variables'] = new Map();
 	const variablesAllValues: IReplaceGameVariablesRV['variablesAllValues'] = new Map();
 
-	variableValueFunctionData.accessedVariables ??= new Map();
+	variableValueFunctionParams.accessedVariables ??= new Map();
 
 	/* capture `@VariableName@` followed by
 	 * - optional `%` which will be put back after replacing
@@ -446,7 +446,7 @@ export function replaceGameVariables(
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
-				: runeVariableValue)(variableName, variableValueFunctionData as any, options.overrideVariables);
+				: runeVariableValue)(variableName, variableValueFunctionParams as any, options.overrideVariables);
 
 		if (meta?.roundReplaced !== undefined) {
 			roundReplaced = meta.roundReplaced;
@@ -486,7 +486,7 @@ export function replaceGameVariables(
 		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
 		let metaSuffix = '';
 		const extendedEquals = typeof meta?.extendedEquals === 'function'
-			? meta.extendedEquals(variableValueFunctionData, options.overrideVariables)
+			? meta.extendedEquals(variableValueFunctionParams, options.overrideVariables)
 			: typeof meta?.extendedEquals !== 'object'
 				? meta?.extendedEquals as string
 				: `${meta.extendedEquals.prefix}${isMeleeRanged === true
@@ -512,7 +512,7 @@ export function replaceGameVariables(
 
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
-			const accessedVariables = variableValueFunctionData.accessedVariables?.get(variableName);
+			const accessedVariables = variableValueFunctionParams.accessedVariables?.get(variableName);
 			if (accessedVariables) {
 				for (const accessedVariable of accessedVariables) {
 					unknownVariables.push([accessedVariable]);
@@ -531,7 +531,7 @@ export function replaceGameVariables(
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
 				unknownVariables.push([name, actualVariableName]);
-				const accessedVariables = variableValueFunctionData.accessedVariables?.get(variableName);
+				const accessedVariables = variableValueFunctionParams.accessedVariables?.get(variableName);
 				if (accessedVariables) {
 					for (const accessedVariable of accessedVariables) {
 						unknownVariables.push([accessedVariable]);
@@ -598,7 +598,7 @@ export function replaceGameVariables(
 						: variable)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 	});
 
-	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionData.dynamicVariables);
+	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionParams.dynamicVariables);
 	const customVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isCustom);
 	if (customVariables?.length) {
 		for (const [variableName, meta] of customVariables) {
@@ -616,8 +616,8 @@ export function replaceGameVariables(
 					baseValue = value;
 				}
 
-				if (isArray && variableValueFunctionData.damageSource?.isRanged.value !== undefined) {
-					value = variableValueFunctionData.damageSource.isRanged.value
+				if (isArray && variableValueFunctionParams.damageSource?.isRanged.value !== undefined) {
+					value = variableValueFunctionParams.damageSource.isRanged.value
 						? (value as number[])[1]
 						: (value as number[])[0];
 				}

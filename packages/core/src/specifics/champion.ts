@@ -247,6 +247,16 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 		},
+		passive: {
+			variables: defineChampionVariables<'Jax', typeof IJax, 'passive'>({
+				meta: {
+					AttackSpeedPerStack: {
+						statIconKey: 'level',
+						extendedEquals: `<const>${1} - ${2}</const>`,
+					},
+				},
+			}),
+		},
 	},
 	Jhin: {
 		setupData(self): { isPassiveMSActive: number } {
@@ -834,7 +844,8 @@ export type IChampionAbilityVariantSpecific = IProviderGroupImageText;
 export function defineChampionVariables<
 	Id extends IChampionId,
 	T = never,
-	DetectedVariables extends string = DetectChampionVariables<T>,
+	AbilityKey extends IChampionAbilityKey = IChampionAbilityKey,
+	DetectedVariables extends string = DetectChampionVariables<T, AbilityKey>,
 >(
 	config: Omit<ISpecificVariables<DetectedVariables, string, Id, 'championAbility'>, 'default'>,
 ): ISpecificVariables<DetectedVariables, string, Id, 'championAbility'> {

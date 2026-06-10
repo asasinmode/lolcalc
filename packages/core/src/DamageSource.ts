@@ -962,7 +962,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 									return {
 										values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values),
-										meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.values),
+										meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.meta),
 									};
 								})
 							: [],
