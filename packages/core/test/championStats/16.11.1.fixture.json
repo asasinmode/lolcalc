@@ -25,6 +25,31 @@
 				"attackspeed": 0.635,
 				"attackspeedratio": 0.635
 			}
+		},
+		"Jax": {
+			"stats": {
+				"hp": 650,
+				"hpperlevel": 103,
+				"mp": 339,
+				"mpperlevel": 52,
+				"movespeed": 350,
+				"armor": 36,
+				"armorperlevel": 4.2,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 8.5,
+				"hpregenperlevel": 0.55,
+				"mpregen": 8.2,
+				"mpregenperlevel": 0.7,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 68,
+				"attackdamageperlevel": 4.25,
+				"attackspeedperlevel": 3.4,
+				"attackspeed": 0.638,
+				"attackspeedratio": 0.638
+			}
 		}
 	},
 	"items": {
@@ -42,6 +67,70 @@
 				"MaxDamageAmp": 0.1
 			}
 		},
+		"3072": {
+			"name": "Bloodthirster",
+			"stats": {
+				"FlatPhysicalDamageMod": 80,
+				"PercentLifeStealMod": 0.15
+			},
+			"dataValues": {
+				"Threshold": 0.7,
+				"DecayTime": 25
+			},
+			"itemCalculations": {
+				"OvershieldCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 165,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3078": {
+			"name": "Trinity Force",
+			"stats": {
+				"FlatHPPoolMod": 333,
+				"FlatPhysicalDamageMod": 36,
+				"PercentAttackSpeedMod": 0.3,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"SpellbladeMultiplier": 2,
+				"MoveSpeedBonus": 20,
+				"MSDuration": 2,
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SpellbladeMultiplier",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{6e4cefdc}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": [25, 60, 2, 1.5, 1.5]
+		},
 		"3094": {
 			"name": "Rapid Firecannon",
 			"stats": {
@@ -53,6 +142,114 @@
 				"RangePercentIncrease": 0.35,
 				"MaxRangeIncrease": 150,
 				"BonusDamage": 40
+			}
+		},
+		"3139": {
+			"name": "Mercurial Scimitar",
+			"stats": {
+				"FlatSpellBlockMod": 35,
+				"FlatPhysicalDamageMod": 50,
+				"PercentLifeStealMod": 0.1
+			},
+			"dataValues": {
+				"Cooldown": 90,
+				"MSDuration": 2,
+				"MoveSpeed": 0.5
+			},
+			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0]
+		},
+		"3748": {
+			"name": "Titanic Hydra",
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"FlatPhysicalDamageMod": 40
+			},
+			"dataValues": {
+				"PrimaryTargetHPRatio": 0.01,
+				"SplashHPRatio": 0.03,
+				"RangedEffectiveness": 0.5,
+				"ActivePrimaryTargetHPRatio": 0.04,
+				"ActiveSplashHPRatio": 0.09,
+				"Cooldown": 10,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"CalcValueB": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "SplashHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValue": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "PrimaryTargetHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValueC": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ActivePrimaryTargetHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValueD": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ActiveSplashHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"OnHitDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.01,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				},
+				"ConeDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
 			}
 		}
 	}

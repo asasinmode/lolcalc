@@ -1,4 +1,5 @@
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
@@ -46,5 +47,45 @@ test('Rakan, attack range modifying items', async (t) => {
 			attackRange: 540,
 		});
 		assert.strictEqual(damageSource.isRanged.value, false);
+	});
+});
+
+test('Jax, passive and ms items', async (t) => {
+	const sourceCommon: IOverrides<'Jax'> = {
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+	};
+
+	await t.test('lvl 1 | passive 5 | quicken', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jax', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.titanicHydra, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.trinity],
+			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
+			internalItemData: { quicken: 1 } satisfies IInternalItemDataOf<'trinity'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			moveSpeed: 370,
+			attackSpeed: 0.989,
+		});
+	});
+
+	await t.test('lvl 1 | passive 8 | quicken, quicksilver', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jax', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.titanicHydra, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.trinity],
+			internalData: { passiveStacks: 8 } satisfies IInternalDataOf<'Jax'>,
+			internalItemData: { quicken: 1, quicksilver: 1 } satisfies IInternalItemDataOf<'trinity' | 'mercurialScimitar'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			moveSpeed: 508,
+			attackSpeed: 1.085,
+		});
 	});
 });
