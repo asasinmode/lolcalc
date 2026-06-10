@@ -22,8 +22,8 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInte
 import type { DetectChampionVariables } from '../types';
 import type { ISpecificVariables } from './index';
 import { MISC } from '@lolcalc/data';
-import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID } from '@lolcalc/shared';
-import { clamp } from '@lolcalc/shared/utils.ts';
+import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_LEVEL, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -252,7 +252,12 @@ export const CHAMPION_SPECIFICS = {
 				meta: {
 					AttackSpeedPerStack: {
 						statIconKey: 'level',
-						extendedEquals: `<const>${1} - ${2}</const>`,
+						isPercentage: true,
+						resultsIsPercentage: true,
+						multiplier: 100,
+						extendedEquals(params) {
+							return `<const>${roundVariable(championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number * 100, 1)}% - ${roundVariable(championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number * 100, 1)}%</const>`;
+						},
 					},
 				},
 			}),
