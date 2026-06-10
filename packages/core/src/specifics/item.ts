@@ -3719,6 +3719,14 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.quicksilver = clamp(0, self.internalItemData.value.quicksilver, 1);
 			return { quicksilver: 0 };
 		},
+		variables: defineVariables({
+			meta: {
+				MoveSpeed: {
+					resultsIsPercentage: true,
+				},
+			},
+			uninteresting: ['MSDuration'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, _args, { calculatedVariables }) {
@@ -3735,9 +3743,61 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 	},
+	[ITEM_NAME_TO_ID.titanicHydra]: {
+		variables: defineVariables({
+			meta: {
+				OnHitDamageCalc: {
+					type: VariableType.physical,
+					statIconKey: 'hp',
+					extendedEquals: {
+						prefix: `<scalehealth>`,
+						meleeValue: Math.round(ITEMS_BY_NAME.titanicHydra?.itemCalculations.OnHitDamageCalc.mFormulaParts[0]!.mCoefficient * 100),
+						rangedValue: roundVariable(ITEMS_BY_NAME.titanicHydra?.itemCalculations.OnHitDamageCalc.mFormulaParts[0]!.mCoefficient * ITEMS_BY_NAME.titanicHydra?.itemCalculations.OnHitDamageCalc.mRangedMultiplier.mNumber * 100, 1),
+						valueSuffix: '%',
+						suffix: '</scalehealth>',
+					},
+				},
+				ConeDamageCalc: {
+					type: VariableType.physical,
+					statIconKey: 'hp',
+					extendedEquals: {
+						prefix: `<scalehealth>`,
+						meleeValue: Math.round(ITEMS_BY_NAME.titanicHydra?.itemCalculations.ConeDamageCalc.mFormulaParts[0]!.mCoefficient * 100),
+						rangedValue: roundVariable(ITEMS_BY_NAME.titanicHydra?.itemCalculations.ConeDamageCalc.mFormulaParts[0]!.mCoefficient * ITEMS_BY_NAME.titanicHydra?.itemCalculations.ConeDamageCalc.mRangedMultiplier.mNumber * 100, 1),
+						valueSuffix: '%',
+						suffix: '</scalehealth>',
+					},
+
+				},
+				CalcValueC: {
+					type: VariableType.physical,
+					statIconKey: 'hp',
+					extendedEquals: {
+						prefix: `<scalehealth>`,
+						meleeValue: Math.round((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueC.mFormulaParts[0]!.mDataValue!] * 100),
+						rangedValue: roundVariable((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueC.mFormulaParts[0]!.mDataValue!] * (ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueC.mRangedMultiplier.mDataValue!] * 100),
+						valueSuffix: '%',
+						suffix: '</scalehealth>',
+					},
+
+				},
+				CalcValueD: {
+					type: VariableType.physical,
+					statIconKey: 'hp',
+					extendedEquals: {
+						prefix: `<scalehealth>`,
+						meleeValue: Math.round((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueD.mFormulaParts[0]!.mDataValue!] * 100),
+						rangedValue: roundVariable((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueD.mFormulaParts[0]!.mDataValue!] * (ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueD.mRangedMultiplier.mDataValue!] * 100),
+						valueSuffix: '%',
+						suffix: '</scalehealth>',
+					},
+
+				},
+			},
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
-// titanic hydra variables
 // bloodthirster extended equals
 //
 // axiom arc extended equals
