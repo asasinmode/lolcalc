@@ -50,8 +50,9 @@ test('Rakan, attack range modifying items', async (t) => {
 	});
 });
 
-test('Jax, passive and ms items', async (t) => {
-	const sourceCommon: IOverrides<'Jax'> = {
+test.only('Jax, passive and ms/as items', async (t) => {
+	t.runOnly(true);
+	let sourceCommon: IOverrides<'Jax'> = {
 		runes: {
 			shards: {
 				offensive: 'adaptive',
@@ -59,12 +60,12 @@ test('Jax, passive and ms items', async (t) => {
 				defensive: 'health',
 			},
 		},
+		items: [ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.titanicHydra, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.trinity],
 	};
 
 	await t.test('lvl 1 | passive 5 | quicken', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
-			items: [ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.titanicHydra, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.trinity],
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
 			internalItemData: { quicken: 1 } satisfies IInternalItemDataOf<'trinity'>,
 		});
@@ -78,7 +79,6 @@ test('Jax, passive and ms items', async (t) => {
 	await t.test('lvl 1 | passive 8 | quicken, quicksilver', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
-			items: [ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.titanicHydra, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.trinity],
 			internalData: { passiveStacks: 8 } satisfies IInternalDataOf<'Jax'>,
 			internalItemData: { quicken: 1, quicksilver: 1 } satisfies IInternalItemDataOf<'trinity' | 'mercurialScimitar'>,
 		});
@@ -86,6 +86,67 @@ test('Jax, passive and ms items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			moveSpeed: 508,
 			attackSpeed: 1.085,
+		});
+	});
+
+	await t.test('lvl 1 | quicksilver', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jax', {
+			...sourceCommon,
+			internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'trinity' | 'mercurialScimitar'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			moveSpeed: 493,
+		});
+	});
+
+	await t.test('lvl 8 | passive 8', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jax', {
+			...sourceCommon,
+			level: 8,
+			internalData: { passiveStacks: 8 } satisfies IInternalDataOf<'Jax'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 1.363,
+		});
+	});
+
+	await t.test('lvl 18 | passive 5', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jax', {
+			...sourceCommon,
+			level: 18,
+			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 1.597,
+		});
+	});
+
+	sourceCommon = {
+		runes: {
+			shards: {
+				offensive: 'attackspeed',
+				flex: 'adaptive',
+				defensive: 'tenacity',
+			},
+		},
+		level: 20,
+		roleQuest: 'top',
+		items: [ITEMS_BY_NAME.guinsoo, ITEMS_BY_NAME.yunTal, ITEMS_BY_NAME.lichBane, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.mercurysTreads],
+	};
+
+	await t.test('lvl 20 | passive 2 | guinsoo, yun\'tal, lich\'bane, sterak, endless hunger, mercury\'s treads', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jax', {
+			...sourceCommon,
+			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
+			internalItemData: { seething: 4, flurry: 1, practice: 0 } satisfies IInternalItemDataOf<'guinsoo' | 'yunTal'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			tenacity: 0.62,
+			attackSpeed: 2.385,
 		});
 	});
 });

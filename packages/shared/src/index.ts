@@ -436,6 +436,7 @@ export const ITEM_NAME_TO_ID = {
 	bloodthirster: '3072',
 	axiomArc: '6696',
 	profaneHydra: '6698',
+	mercurysTreads: '3111',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
