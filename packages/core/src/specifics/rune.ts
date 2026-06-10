@@ -3,6 +3,7 @@ import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcal
 import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, ISpecificVariables } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
+import { addTenacity } from '../calculate/util.ts';
 import { defineVariables } from './index.ts';
 
 export function runesEmpty(runes: IChampionRunes): boolean {
@@ -115,7 +116,7 @@ export const RUNE_SPECIFICS = {
 			calculateHooks: {
 				onRuneShards: {
 					handler(_self, { runeShardStats }) {
-						runeShardStats.tenacity = (RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100;
+						runeShardStats.tenacity = addTenacity(runeShardStats.tenacity, ((RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100));
 					},
 					priority: -1,
 				},

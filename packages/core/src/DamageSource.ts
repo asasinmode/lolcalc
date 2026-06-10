@@ -1725,49 +1725,49 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	/** runs after resolving the champion in `calculateChampionStats` */
 	postInit?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: { baseStats: IChampionStats }) => void>;
 	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		itemBaseStats: IChampionStats;
-		itemPassivesStats: IChampionStats;
-		baseStats: IChampionStats;
-		baseOnLevelStats: IChampionStats;
+		itemBaseStats: IStatsCalculationResult['itemBase'];
+		itemPassivesStats: IStatsCalculationResult['itemPassive'];
+		baseStats: IStatsCalculationResult['base'];
+		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 		itemStatIncreases: IStatsCalculationResult['itemStatIncreases'];
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		baseStats: IChampionStats;
-		runeShardStats: Partial<IChampionStats>;
+		baseStats: IStatsCalculationResult['base'];
+		runeShardStats: IStatsCalculationResult['runeShards'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
 	/** runs after creating empty `championPassiveStats` */
 	onChampionPassive?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		baseStats: IChampionStats;
-		championPassiveStats: Partial<IChampionStats>;
+		baseStats: IStatsCalculationResult['base'];
+		championPassiveStats: IStatsCalculationResult['championPassive'];
 	}) => void>;
 	/** runs before totalling all stats to total bonus */
 	preBonus?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		runeShardStats: Partial<IChampionStats>;
-		baseStats: IChampionStats;
-		itemBaseStats: IChampionStats;
-		itemPassivesStats: IChampionStats;
-		itemTotalStats: IChampionStats;
-		baseOnLevelStats: IChampionStats;
+		runeShardStats: IStatsCalculationResult['runeShards'];
+		baseStats: IStatsCalculationResult['base'];
+		itemBaseStats: IStatsCalculationResult['itemBase'];
+		itemPassivesStats: IStatsCalculationResult['itemPassive'];
+		itemTotalStats: IStatsCalculationResult['itemTotal'];
+		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 	}) => void>;
 	/** runs when total stats have been calculated but before any total multipliers like mid quest or dragons */
 	onTotalPreMultipliers?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		totalPreMultipliersStats: IChampionStats;
-		totalMultipliersStats: IChampionStats;
-		bonusStats: IChampionStats;
-		effectStats: Partial<IChampionStats>;
-		itemPassivesStats: IChampionStats;
-		itemTotalStats: IChampionStats;
+		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
+		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+		bonusStats: IStatsCalculationResult['bonus'];
+		effectStats: IStatsCalculationResult['effect'];
+		itemPassivesStats: IStatsCalculationResult['itemPassive'];
+		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
 	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, argsd: {
-		totalStats: IChampionStats;
-		totalMultipliersStats: IChampionStats;
-		bonusStats: IChampionStats;
-		itemPassivesStats: IChampionStats;
-		itemTotalStats: IChampionStats;
-		championPassiveStats: Partial<IChampionStats>;
+		totalStats: IStatsCalculationResult['total'];
+		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+		bonusStats: IStatsCalculationResult['bonus'];
+		itemPassivesStats: IStatsCalculationResult['itemPassive'];
+		itemTotalStats: IStatsCalculationResult['itemTotal'];
+		championPassiveStats: IStatsCalculationResult['championPassive'];
 	}) => void>;
 };
 

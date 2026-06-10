@@ -1,8 +1,9 @@
 import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
-import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
 import { MISC } from '@lolcalc/data';
+import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
+import { addTenacity } from './util.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;
@@ -91,7 +92,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		for (const [statName, statValue] of itemToChampionStats(item)) {
 			if (statName === 'tenacity') {
 				/* item tenacity calculated according to [wiki formula](https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking) */
-				itemBaseStats.tenacity *= 1 - statValue;
+				itemBaseStats.tenacity = addTenacity(itemBaseStats.tenacity, statValue);
 			} else {
 				/* hpRegen is stored in per second in item but per 5 seconds in champion/displayed */
 				itemBaseStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
@@ -127,13 +128,15 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
 
-	// TODO tenacity should be added using the same formula as items
-	const runeShardStats: Partial<IChampionStats> = {};
+	const runeShardStats: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity'> = {
+		tenacity: 1,
+	};
 	if (source.calculateStatsHooks.all.value.onRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.onRuneShards) {
 			hook(source, { runeShardStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
+	runeShardStats.tenacity = 1 - runeShardStats.tenacity;
 	calculatedVariables.apMultipliersBase += runeShardStats.abilityPower ?? 0;
 
 	const championPassiveStats: Partial<IChampionStats> = {};
@@ -153,9 +156,13 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	/* attack speed from level counts towards bonus */
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
-		bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
-			+ itemTotalStats[stat as IChampionStatName]
-			+ (championPassiveStats[stat as IChampionStatName] ?? 0);
+		if ((stat as IChampionStatName) === 'tenacity') {
+			bonusStats.tenacity = 1 - addTenacity(1, runeShardStats.tenacity, itemTotalStats.tenacity, championPassiveStats.tenacity ?? 0);
+		} else {
+			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
+				+ itemTotalStats[stat as IChampionStatName]
+				+ (championPassiveStats[stat as IChampionStatName] ?? 0);
+		}
 	}
 
 	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
@@ -164,12 +171,15 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			statValue + (runeShardStats[statName as IChampionStatName] ?? 0),
 		],
 	)) as IChampionStats;
+	levelAndRunesStats.tenacity = 1 - addTenacity(1, baseOnLevelStats.tenacity, runeShardStats.tenacity);
 
 	const totalPreMultipliersStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (championPassiveStats[statName as IChampionStatName] ?? 0)
 		+ itemTotalStats[statName as IChampionStatName]],
 	)) as IChampionStats;
+	/* possibly should not be done like that but that's what it is at this point */
+	totalPreMultipliersStats.tenacity = bonusStats.tenacity;
 
 	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
 	// TODO possibly has to be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
@@ -234,8 +244,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotal: itemTotalStats,
 		itemStatIncreases,
 		championPassive: championPassiveStats,
-		totalPreMultipliersStats,
-		totalMultipliersStats,
+		totalPreMultipliers: totalPreMultipliersStats,
+		totalMultipliers: totalMultipliersStats,
 		bonus: bonusStats,
 		total: totalStats,
 		effect: effectStats,

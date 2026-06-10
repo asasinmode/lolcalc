@@ -36,7 +36,7 @@ export interface IStatsCalculationResult {
 	/** base + level combined */
 	baseOnLevel: IChampionStats;
 	/** stats from rune shards */
-	runeShards: Partial<IChampionStats>;
+	runeShards: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity'>;
 	/** raw stats given by items, no passives */
 	itemBase: IChampionStats;
 	/** stats from item passives */
@@ -53,9 +53,9 @@ export interface IStatsCalculationResult {
 	 */
 	itemStatIncreases: Record<string, Partial<Record<IItemStat, number>>>;
 	/** stats gained from any multipliers like mid role quest, dragons or rabadon */
-	totalMultipliersStats: IChampionStats;
-	/** total stat before applying multipliers (`totalMultipliersStats`) */
-	totalPreMultipliersStats: IChampionStats;
+	totalMultipliers: IChampionStats;
+	/** total stats before applying multipliers (`totalMultipliersStats`) */
+	totalPreMultipliers: IChampionStats;
 	bonus: IChampionStats;
 	effect: Partial<IChampionStats>;
 	total: IChampionStats;

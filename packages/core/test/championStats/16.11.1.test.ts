@@ -50,8 +50,7 @@ test('Rakan, attack range modifying items', async (t) => {
 	});
 });
 
-test.only('Jax, passive and ms/as items', async (t) => {
-	t.runOnly(true);
+test('Jax, passive and ms/as items', async (t) => {
 	let sourceCommon: IOverrides<'Jax'> = {
 		runes: {
 			shards: {
@@ -137,7 +136,7 @@ test.only('Jax, passive and ms/as items', async (t) => {
 		items: [ITEMS_BY_NAME.guinsoo, ITEMS_BY_NAME.yunTal, ITEMS_BY_NAME.lichBane, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.mercurysTreads],
 	};
 
-	await t.test('lvl 20 | passive 2 | guinsoo, yun\'tal, lich\'bane, sterak, endless hunger, mercury\'s treads', { only: true }, async () => {
+	await t.test('lvl 20 | passive 2 | guinsoo, yun\'tal, lich\'bane, sterak, endless hunger, mercury\'s treads', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
@@ -145,7 +144,7 @@ test.only('Jax, passive and ms/as items', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			tenacity: 0.62,
+			tenacity: 62,
 			attackSpeed: 2.385,
 		});
 	});
