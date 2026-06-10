@@ -144,7 +144,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
   - [ ] items passives
-  - [ ] heal and shield power affecting known shields & lifesteal
+  - [ ] heal and shield power affecting known shields & heals
   - [ ] cap attack speed
   - [ ] item effects & their result sections like frozen heart or zeke's convergence
   - [ ] resolved item passives values for target like randuin/tabi
@@ -157,7 +157,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] other effects
   - [ ] basic attack damage
   - [ ] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
-  - [ ] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
+  - [x] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
   - [x] DamageSource.internalData set from utils/champion.ts
   - [x] `{{ Item_Melee_Ranged_Split_Dynamic }}` and `@lolcalcChampRange@` try to do what doran's shield does
   - [ ] resolve game variables
@@ -193,16 +193,16 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
-    - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling
+    - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling (actually might not have to be 1 diff, but probably add disclaimer and settle on acceptable margin of error)
     - [ ] screenshots showing it accurately calculating things
     - [ ] decaying move speed bonuses
     - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
     - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (and test it)
-    - [ ] item description inventory/shop view, possibly add it for runes too
-    - [ ] serpent's fang displayed values don't match up, probably test more
+    - [ ] describe item description inventory/shop view, possibly add it for runes too
+    - [ ] serpent's fang displayed values don't match up, probably test more (was tested on shieldbow, assumedly shieldbow "puts back" hp to the threshold then gives shield and that shield is then reduced)
   - [ ] github readme
 - [ ] submit feedback on page / report issues
-  - [ ] rust/go server
+  - [ ] go server
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
 - [ ] cleanup code
@@ -214,6 +214,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] try to generate specific components from data in specific, like effect are?
 - [ ] consider used images "locally" / service worker for caching stuff
 - [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold
+- [ ] automatically generate extended equals, ideally on ITEM_SPECIFICS so it doesn't have to do it on every replace, based on itemCalculations/stringCalculations r smth
 - [ ] kind of a code documentation where yap about
   - [ ] how to use game texture `textureBgImageAttrs`
 - [ ] configuration "profiles" in local storage (multiple saved configurations), when loading new shared config, put it in new profile? maybe future feature
