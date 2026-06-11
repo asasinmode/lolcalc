@@ -249,6 +249,20 @@ export const CHAMPION_SPECIFICS = {
 		},
 		passive: {
 			variables: defineChampionVariables<'Jax', typeof IJax, 'passive'>({
+				known: {
+					AttackSpeedPercent: [],
+					AttackSpeed: [],
+				},
+				calculate(self) {
+					return {
+						AttackSpeedPercent: {
+							value: self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0,
+						},
+						AttackSpeed: {
+							value: self.stats.value.championPassive.attackSpeed ?? 0,
+						},
+					};
+				},
 				meta: {
 					AttackSpeedPerStack: {
 						statIconKey: 'level',
@@ -279,6 +293,14 @@ export const CHAMPION_SPECIFICS = {
 								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, abilityLevel: 1, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
 							).value as number * 100, 1)}%</const>`;
 						},
+					},
+					AttackSpeedPercent: {
+						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
+					},
+					AttackSpeed: {
+						isCustom: true,
 					},
 				},
 			}),
