@@ -172,24 +172,19 @@ export function itemVariableValue(
 
 			rv.value = [melee.value as number | undefined, ranged.value as number | undefined];
 			rv.roundReplaced ||= melee?.roundReplaced || ranged?.roundReplaced;
-			if (melee?.meta || ranged?.meta) {
-				rv.meta ??= {};
-				Object.assign(rv.meta, melee.meta, ranged.meta);
-			}
+			rv.meta ??= Object.assign(melee.meta ?? {}, ranged.meta);
 		} else {
 			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
 			const meleeRangedV = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), params, overrideDynamicVariables, variable);
-			rv.value = meleeRangedV?.value;
-			rv.roundReplaced ||= meleeRangedV?.roundReplaced;
-			if (meleeRangedV?.meta) {
-				rv.meta ??= {};
-				Object.assign(rv.meta, meleeRangedV.meta);
+			for (const key in meleeRangedV) {
+				if (key !== 'meta') {
+					(rv as any)[key] = meleeRangedV[key as keyof typeof meleeRangedV];
+				}
 			}
 		}
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	} else if (item.itemCalculations?.[variable]) {
-		const existingMeta = rv.meta;
 		const value = variableResolveFn(
 			item.itemCalculations?.[variable],
 		)?.(item.itemCalculations[variable], item, {
@@ -198,11 +193,10 @@ export function itemVariableValue(
 			accessedVariables: params.accessedVariables?.getOrInsert(accessedFrom ?? variable, new Set()),
 		});
 		if (value) {
-			Object.assign(rv, value);
-			if (rv.meta) {
-				Object.assign(rv.meta, existingMeta);
-			} else {
-				rv.meta = existingMeta;
+			for (const key in value) {
+				if (key !== 'meta') {
+					(rv as any)[key] = value[key as keyof typeof value];
+				}
 			}
 			if (Array.isArray(rv.value)) {
 				if (isRanged === undefined) {
@@ -368,7 +362,6 @@ export function championAbilityVariableValue(
 				rv.value = (rv.value as any)[path];
 			}
 		} else if (abilityVariant.spellCalculations?.[variableName]) {
-			const existingMeta = rv.meta;
 			const value = variableResolveFn(
 				abilityVariant.spellCalculations[variableName],
 			)?.(abilityVariant.spellCalculations[variableName], abilityVariant, {
@@ -377,11 +370,10 @@ export function championAbilityVariableValue(
 				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
 			});
 			if (value) {
-				Object.assign(rv, value);
-				if (rv.meta) {
-					Object.assign(rv.meta, existingMeta);
-				} else {
-					rv.meta = existingMeta;
+				for (const key in value) {
+					if (key !== 'meta') {
+						(rv as any)[key] = value[key as keyof typeof value];
+					}
 				}
 			}
 		}
