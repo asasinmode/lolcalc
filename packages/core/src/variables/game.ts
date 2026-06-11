@@ -107,11 +107,12 @@ interface IBaseVariableParams {
 	 */
 	accessedVariables?: Map<string, Set<string>>;
 	damageSource?: DamageSource;
+	/** usually `damageSource.isRanged.value` but here for easier overriding when getting values for `isRanged: undefined` since then the variable value function is called with `true` and `false` replacing it */
+	isRanged?: boolean;
 }
 
 interface IItemVariableParams extends IBaseVariableParams {
 	item: IItem;
-	isRanged?: boolean;
 }
 
 export function itemVariableValue(
@@ -124,7 +125,6 @@ export function itemVariableValue(
 	const {
 		item,
 		isRanged,
-		damageSource,
 		dynamicVariables = overrideDynamicVariables ?? {},
 	} = params;
 
@@ -192,7 +192,9 @@ export function itemVariableValue(
 		const existingMeta = rv.meta;
 		const value = variableResolveFn(
 			item.itemCalculations?.[variable],
-		)?.(item.itemCalculations[variable], item, damageSource, {
+		)?.(item.itemCalculations[variable], item, {
+			variableValueFn: itemVariableValue,
+			variableValueParams: params,
 			accessedVariables: params.accessedVariables?.getOrInsert(accessedFrom ?? variable, new Set()),
 		});
 		if (value) {
@@ -275,13 +277,16 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 }
 
 // TODO make sure it handles hextech soul description
-export function championAbilityVariableValue(variable: string, params: IChampionAbilityVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
+export function championAbilityVariableValue(
+	variable: string,
+	params: IChampionAbilityVariableParams,
+	overrideDynamicVariables?: IDynamicVariables,
+): IVariableValueResult {
 	const {
 		abilityVariant,
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityLevel = 1,
 		allAbilitiesVariants = [],
-		damageSource,
 	} = params;
 	const rv: IVariableValueResult = {};
 
@@ -336,32 +341,37 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		}
 	}
 
-	/* some variables names' cases don't match so keep them in form of key/value and try all lowercase key if exact case not found */
-	// TODO maybe can just always do lowercase variables
-	const sources: (false | [string, any][])[] = [
-		abilityVariant.spellCalculations && Object.entries(abilityVariant.spellCalculations),
-		abilityVariant.dataValues && Object.entries(abilityVariant.dataValues),
-		abilityVariant.effectAmount && Object.entries(abilityVariant.effectAmount),
-	];
+	// TODO see if still needed /* some variables names' cases don't match so keep them in form of key/value and try all lowercase key if exact case not found */
+	// const sources: (false | [string, any][])[] = [
+	// 	abilityVariant.spellCalculations && Object.entries(abilityVariant.spellCalculations),
+	// 	abilityVariant.dataValues && Object.entries(abilityVariant.dataValues),
+	// 	abilityVariant.effectAmount && Object.entries(abilityVariant.effectAmount),
+	// ];
 
 	if (rv.value === undefined) {
-		for (let i = 0; i < sources.length; i++) {
-			const source = sources[i]!;
-			if (!source) {
-				continue;
+		if (abilityVariant.dataValues?.[variableName]) {
+			rv.value = abilityVariant.dataValues[variableName];
+		} else if (abilityVariant.effectAmount?.[variableName]) {
+			rv.value = abilityVariant.effectAmount[variableName];
+			for (const path in dotPath) {
+				rv.value = (rv.value as any)[path];
 			}
-
-			rv.value = source.find(source => source[0] === variableName || source[0].toLowerCase() === variableName!.toLowerCase())?.[1];
-			if (rv.value !== undefined) {
-				for (const path in dotPath) {
-					const number = Number(path);
-					if (Number.isNaN(number) || (number >= 0 && Array.isArray(rv.value))) {
-						rv.value = (rv.value as any)[path];
-					}
+		} else if (abilityVariant.spellCalculations?.[variableName]) {
+			const existingMeta = rv.meta;
+			const value = variableResolveFn(
+				abilityVariant.spellCalculations[variableName],
+			)?.(abilityVariant.spellCalculations[variableName], abilityVariant, {
+				variableValueFn: championAbilityVariableValue,
+				variableValueParams: params,
+				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
+			});
+			if (value) {
+				Object.assign(rv, value);
+				if (rv.meta) {
+					Object.assign(rv.meta, existingMeta);
+				} else {
+					rv.meta = existingMeta;
 				}
-			}
-			if (rv.value !== undefined) {
-				break;
 			}
 		}
 	}
@@ -369,11 +379,19 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	let multiplier = 1;
 	if (typeof rv.value === 'object') {
 		if ('mMultiplier' in rv.value) {
-			multiplier = resolveMMultiplier(rv.value.mMultiplier as any, abilityVariant, { accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()) });
+			multiplier = resolveMMultiplier(rv.value.mMultiplier as any, abilityVariant, {
+				variableValueFn: championAbilityVariableValue,
+				variableValueParams: params,
+				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
+			});
 		}
 		if ('mFormulaParts' in rv.value) {
 			// eslint-disable-next-line ts/no-use-before-define
-			const formulaValue = VARIABLE_CALCULATION_FNS.mFormulaParts(rv.value as any, abilityVariant, damageSource, { accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()) });
+			const formulaValue = VARIABLE_CALCULATION_FNS.mFormulaParts(rv.value as any, abilityVariant, {
+				variableValueFn: championAbilityVariableValue,
+				variableValueParams: params,
+				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
+			});
 			Object.assign(rv, formulaValue);
 		}
 	}
@@ -616,8 +634,8 @@ export function replaceGameVariables(
 					baseValue = value;
 				}
 
-				if (isArray && variableValueFunctionParams.damageSource?.isRanged.value !== undefined) {
-					value = variableValueFunctionParams.damageSource.isRanged.value
+				if (isArray && variableValueFunctionParams.isRanged !== undefined) {
+					value = variableValueFunctionParams.isRanged
 						? (value as number[])[1]
 						: (value as number[])[0];
 				}
@@ -652,12 +670,12 @@ export function replaceGameIcons(text: string): string {
 
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
-	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, self, meta = undefined) {
+	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, meta) {
 		const rv: IVariableValueResult = {};
 		const values = variable.mFormulaParts.map((part) => {
 			const resolveFn = variableResolveFn(part);
 			if (resolveFn) {
-				const resolved = variableResolveFn(part)?.(part, whole, self, meta);
+				const resolved = variableResolveFn(part)?.(part, whole, meta);
 				if (resolved?.roundReplaced) {
 					rv.roundReplaced = resolved.roundReplaced;
 				}
@@ -689,10 +707,10 @@ export const VARIABLE_CALCULATION_FNS = {
 
 			if (multiplier === undefined) {
 				rv.value = undefined;
-			} else if (self?.isRanged.value === undefined) {
+			} else if (meta?.isRanged === undefined) {
 				rv.isMeleeRanged = true;
 				rv.value = [rv.value, rv.value * (multiplier ?? 1)];
-			} else if (self.isRanged.value) {
+			} else if (meta.isRanged) {
 				rv.isMeleeRanged = 1;
 				rv.value *= multiplier ?? 1;
 			} else {
@@ -713,21 +731,22 @@ export const VARIABLE_CALCULATION_FNS = {
 			value: variable.mNumber,
 		};
 	},
-	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole, _self, meta) {
+	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole, meta) {
 		meta?.accessedVariables?.add(variable.mDataValue);
 		return {
 			value: whole.dataValues?.[variable.mDataValue],
 		};
 	},
-	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, self) {
+	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, meta) {
 		let rv: number | undefined = variable.mLevel1Value;
+		const level = meta.variableValueParams.damageSource?.level.value ?? 1;
 		if ('mBreakpoints' in variable) {
 			for (const { mAdditionalBonusAtThisLevel, mBonusPerLevelAtAndAfter, mLevel } of variable.mBreakpoints) {
-				if ((self?.level.value ?? 1) >= mLevel) {
+				if (level >= mLevel) {
 					if (mBonusPerLevelAtAndAfter || mAdditionalBonusAtThisLevel) {
 						rv! += mBonusPerLevelAtAndAfter === undefined
 							? mAdditionalBonusAtThisLevel!
-							: (mBonusPerLevelAtAndAfter * ((self?.level.value ?? 1) + 1 - mLevel));
+							: (mBonusPerLevelAtAndAfter * (level + 1 - mLevel));
 					} else {
 						console.warn(`[variables/game fn ByCharLevelBreakpointsCalculationPart] unknown mBreakpoints structure`, variable);
 						rv = undefined;
@@ -737,13 +756,12 @@ export const VARIABLE_CALCULATION_FNS = {
 				}
 			}
 		} else {
-			// TODO check if it works, echoes of helia
-			rv += variable.mInitialBonusPerLevel * ((self?.level.value ?? 1) - 1);
+			rv += variable.mInitialBonusPerLevel * (level - 1);
 		}
 		return { value: rv };
 	},
-	StatByCoefficientCalculationPart(variable: IGameVariablesByType['StatByCoefficientCalculationPart'], _whole, self) {
-		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
+	StatByCoefficientCalculationPart(variable: IGameVariablesByType['StatByCoefficientCalculationPart'], _whole, meta) {
+		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
 		if (statValue !== undefined && variable.mCoefficient) {
 			return {
 				value: statValue * variable.mCoefficient,
@@ -752,16 +770,16 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 	},
 	/** basically same as `StatByCoefficientCalculationPart` but just for mana */
-	AbilityResourceByCoefficientCalculationPart(variable: IGameVariablesByType['AbilityResourceByCoefficientCalculationPart'], _whole, self) {
+	AbilityResourceByCoefficientCalculationPart(variable: IGameVariablesByType['AbilityResourceByCoefficientCalculationPart'], _whole, meta) {
 		const statsKey = mStatFormulaStatKey(variable);
 		if (statsKey) {
 			return {
-				value: self?.stats.value ? self.stats.value[statsKey].mana * (variable.mCoefficient ?? 1) : 0,
+				value: meta.variableValueParams.damageSource?.stats.value ? meta.variableValueParams.damageSource.stats.value[statsKey].mana * (variable.mCoefficient ?? 1) : 0,
 			};
 		}
 	},
-	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, self, meta = undefined) {
-		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
+	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, meta) {
+		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
 		const dataValue = whole.dataValues?.[variable.mDataValue];
 		meta?.accessedVariables?.add(variable.mDataValue);
 
@@ -779,13 +797,13 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 	},
 	/** calculates the value between `mStartValue` and `mEndValue` based on damage source's level. Formula taken from [Protoplasm Harness' wiki](https://wiki.leagueoflegends.com/en-us/Protoplasm_Harness) */
-	ByCharLevelInterpolationCalculationPart(variable: IGameVariablesByType['ByCharLevelInterpolationCalculationPart'], _whole, self) {
+	ByCharLevelInterpolationCalculationPart(variable: IGameVariablesByType['ByCharLevelInterpolationCalculationPart'], _whole, meta) {
 		const { mStartValue = 0, mEndValue } = variable;
 		return {
-			value: mStartValue + (mEndValue - mStartValue) / 17 * ((self?.level.value ?? 1) - 1),
+			value: mStartValue + (mEndValue - mStartValue) / 17 * ((meta.variableValueParams.damageSource?.level.value ?? 1) - 1),
 		};
 	},
-	mModifiedGameCalculation(variable: { mModifiedGameCalculation: string; mMultiplier?: any }, whole, self, meta) {
+	mModifiedGameCalculation(variable: { mModifiedGameCalculation: string; mMultiplier?: any }, whole, meta) {
 		if (!variable.mModifiedGameCalculation) {
 			return;
 		}
@@ -794,9 +812,8 @@ export const VARIABLE_CALCULATION_FNS = {
 		if ('mMultiplier' in variable) {
 			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta);
 		}
-		// TODO might have to be more sophisticated, only sunfire aegis does this atm and probably won't work if any champions attempt to do it
-		const accessedVariables: IBaseVariableParams['accessedVariables'] = new Map();
-		const rv = itemVariableValue(variable.mModifiedGameCalculation, { item: whole, damageSource: self, isRanged: self?.isRanged.value, accessedVariables });
+		meta.variableValueParams.accessedVariables ??= new Map();
+		const rv = meta.variableValueFn(variable.mModifiedGameCalculation, meta.variableValueParams);
 		if (typeof rv.value === 'number') {
 			rv.value *= multiplier;
 		} else if (Array.isArray(rv.value)) {
@@ -807,16 +824,17 @@ export const VARIABLE_CALCULATION_FNS = {
 				rv.value[1] *= multiplier;
 			}
 		}
-		const accessed = accessedVariables.get(variable.mModifiedGameCalculation);
-		if (accessed?.size) {
-			for (const variable of accessed.values()) {
-				meta?.accessedVariables?.add(variable);
-			}
-		}
+		// TODO check sunfire aegis
+		// const accessed = me.get(variable.mModifiedGameCalculation);
+		// if (accessed?.size) {
+		// 	for (const variable of accessed.values()) {
+		// 		meta?.accessedVariables?.add(variable);
+		// 	}
+		// }
 		return rv;
 	},
-	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], _whole, self) {
-		const statValue = resolveMStatWithFormula(variable, self?.stats.value);
+	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], _whole, meta) {
+		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
 		const { mNumber } = variable.mSubpart;
 
 		if (mNumber !== undefined) {
@@ -832,12 +850,12 @@ export const VARIABLE_CALCULATION_FNS = {
 			}
 		}
 	},
-	SumOfSubPartsCalculationPart(variable: IGameVariablesByType['SumOfSubPartsCalculationPart'], whole, self, meta) {
+	SumOfSubPartsCalculationPart(variable: IGameVariablesByType['SumOfSubPartsCalculationPart'], whole, meta) {
 		const rv: IVariableValueResult = { };
 		const values = variable.mSubparts.map((part) => {
 			const resolveFn = variableResolveFn(part);
 			if (resolveFn) {
-				const resolved = variableResolveFn(part)?.(part, whole, self, meta);
+				const resolved = resolveFn(part, whole, meta);
 				if (resolved?.roundReplaced) {
 					rv.roundReplaced = resolved.roundReplaced;
 				}
@@ -854,9 +872,9 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
-	ProductOfSubPartsCalculationPart(variable: IGameVariablesByType['ProductOfSubPartsCalculationPart'], whole, self, meta) {
-		const rv1 = variableResolveFn(variable.mPart1)?.(variable.mPart1, whole, self, meta);
-		const rv2 = variableResolveFn(variable.mPart2)?.(variable.mPart2, whole, self, meta);
+	ProductOfSubPartsCalculationPart(variable: IGameVariablesByType['ProductOfSubPartsCalculationPart'], whole, meta) {
+		const rv1 = variableResolveFn(variable.mPart1)?.(variable.mPart1, whole, meta);
+		const rv2 = variableResolveFn(variable.mPart2)?.(variable.mPart2, whole, meta);
 		if (rv1 && rv2 && typeof rv1.value === 'number' && typeof rv2.value === 'number') {
 			/* at the moment used only for redemption, if any meta or more variable rv information is needed/appears for other variables, adjust */
 			return {
@@ -871,8 +889,12 @@ type IHypotheticalVariableCalculationFns = Record<
 	(
 		variable: any,
 		whole: any,
-		self?: DamageSource,
-		meta?: { accessedVariables?: Set<string> },
+		meta: {
+			variableValueFn: (variable: string, params: any) => IVariableValueResult;
+			variableValueParams: IItemVariableParams | IRuneVariableParams | IChampionAbilityVariableParams;
+			isRanged?: boolean;
+			accessedVariables?: Set<string>;
+		},
 	) => IVariableValueResult | undefined
 >;
 
@@ -1008,7 +1030,7 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 function resolveMMultiplier(
 	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'],
 	whole: any,
-	meta?: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[3],
+	meta?: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[2],
 ): number {
 	const { mNumber, mDataValue } = variable;
 	if (mNumber) {

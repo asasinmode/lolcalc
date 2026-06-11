@@ -1341,7 +1341,14 @@ export const ITEM_SPECIFICS = {
 				/* according to the [wiki](https://wiki.leagueoflegends.com/en-us/Dead_Man's_Plate) the ad ratio also scales with stacks reaching 100% base at 100 stacks */
 				const baseRatio = shipwrecker / ITEM_SPECIFICS[ITEM_NAME_TO_ID.deadMansPlate].MAX_STACKS;
 
-				const base = variableResolveFn(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0])?.(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0] as any, ITEMS_BY_NAME.deadMansPlate, self)?.value;
+				const base = variableResolveFn(
+					ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0],
+				)?.(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0] as any, ITEMS_BY_NAME.deadMansPlate, {
+					variableValueFn: itemVariableValue,
+					variableValueParams: {
+						item: ITEMS_BY_NAME.deadMansPlate,
+					},
+				})?.value;
 				if (typeof base !== 'number') {
 					console.warn(`[ITEM_SPECIFICS] dead man's plate failed to calculate base damage`);
 				}
@@ -1782,7 +1789,17 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
 		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {
-			const maxValueAt = variableResolveFn(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold)?.(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold, ITEMS_BY_NAME.overlordsBloodmail, damageSource);
+			const maxValueAt = variableResolveFn(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold)?.(
+				ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold,
+				ITEMS_BY_NAME.overlordsBloodmail,
+				{
+					variableValueFn: itemVariableValue,
+					variableValueParams: {
+						item: ITEMS_BY_NAME.overlordsBloodmail,
+						damageSource,
+					},
+				},
+			);
 			if (!maxValueAt || typeof maxValueAt.value !== 'number') {
 				console.warn('[ITEM_SPECIFICS bloodmail] failed to resolve RemainingHealthThreshold variable value');
 				return 0;
@@ -1866,7 +1883,17 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemPassivesStats, baseOnLevelStats }, { calculatedVariables }) {
-					const value = variableResolveFn(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD)?.(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD, ITEMS_BY_NAME.steraksGage, { stats: { value: { baseOnLevel: baseOnLevelStats } } } as DamageSource);
+					const value = variableResolveFn(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD)?.(
+						ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD,
+						ITEMS_BY_NAME.steraksGage,
+						{
+							variableValueFn: itemVariableValue,
+							variableValueParams: {
+								item: ITEMS_BY_NAME.steraksGage,
+								damageSource: { stats: { value: { baseOnLevel: baseOnLevelStats } } } as DamageSource,
+							},
+						},
+					);
 					if (typeof value?.value === 'number') {
 						calculatedVariables.sterakAd = value.value;
 						itemPassivesStats.attackDamage += calculatedVariables.sterakAd;
@@ -1911,7 +1938,17 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, itemTotalStats, itemPassivesStats, adaptiveForceMeta }, { calculatedVariables, miscDebug }) {
 					miscDebug.swiftmarchTotalMs = totalPreMultipliersStats.moveSpeed;
-					const adaptiveForce = variableResolveFn(ITEMS_BY_NAME.swiftmarch?.itemCalculations.MSToAdaptiveCalc)?.(ITEMS_BY_NAME.swiftmarch?.itemCalculations.MSToAdaptiveCalc, ITEMS_BY_NAME.swiftmarch, { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource);
+					const adaptiveForce = variableResolveFn(ITEMS_BY_NAME.swiftmarch?.itemCalculations.MSToAdaptiveCalc)?.(
+						ITEMS_BY_NAME.swiftmarch?.itemCalculations.MSToAdaptiveCalc,
+						ITEMS_BY_NAME.swiftmarch,
+						{
+							variableValueFn: itemVariableValue,
+							variableValueParams: {
+								item: ITEMS_BY_NAME.swiftmarch,
+								damageSource: { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource,
+							},
+						},
+					);
 
 					if (typeof adaptiveForce?.value === 'number') {
 						calculatedVariables.swiftmarchAdaptive = adaptiveForce.value;
@@ -3677,7 +3714,27 @@ export const ITEM_SPECIFICS = {
 				ActiveDamage: {
 					type: VariableType.magic,
 					statIconKey: ['level', 'abilityPower'],
-					extendedEquals: `<const>${variableResolveFn(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0]!)?.(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0] as any, ITEMS_BY_NAME.hextechGunblade, { level: { value: CHAMPION_LEVEL.min } } as DamageSource)?.value} - ${variableResolveFn(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0]!)?.(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0] as any, ITEMS_BY_NAME.hextechGunblade, { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource)?.value}%i:${STAT_ICON.level}%</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[1]!.mCoefficient! * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
+					extendedEquals: `<const>${variableResolveFn(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0]!)?.(
+						ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0] as any,
+						ITEMS_BY_NAME.hextechGunblade,
+						{
+							variableValueFn: itemVariableValue,
+							variableValueParams: {
+								item: ITEMS_BY_NAME.hextechGunblade,
+								damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource,
+							},
+						},
+					)?.value} - ${variableResolveFn(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0]!)?.(
+						ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[0] as any,
+						ITEMS_BY_NAME.hextechGunblade,
+						{
+							variableValueFn: itemVariableValue,
+							variableValueParams: {
+								item: ITEMS_BY_NAME.hextechGunblade,
+								damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource,
+							},
+						},
+					)?.value}%i:${STAT_ICON.level}%</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[1]!.mCoefficient! * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
 				},
 			},
 			uninteresting: ['SlowAmount', 'SlowDuration'],
