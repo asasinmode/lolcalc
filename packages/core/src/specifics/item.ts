@@ -406,8 +406,8 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		MAX_PRACTICE_CRIT: ITEMS_BY_NAME.yunTal?.dataValues.CritMax,
-		MELEE_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: false } } as DamageSource }).value as number,
-		RANGED_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, damageSource: { isRanged: { value: true } } as DamageSource }).value as number,
+		MELEE_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, isRanged: false }).value as number,
+		RANGED_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, isRanged: true }).value as number,
 		FLURRY_ATTACK_SPEED: itemVariableValue('ASMod', { item: ITEMS_BY_NAME.yunTal }).value as number,
 		internalDataProperties: ['practice', 'flurry'],
 		setupData(self) {
@@ -1052,7 +1052,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'phage'>).rage) {
-						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, damageSource: { isRanged: { value: self.isRanged.value ?? true } } as DamageSource });
+						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, isRanged: self.isRanged.value ?? true });
 						if (typeof moveSpeed.value === 'number') {
 							calculatedVariables.phageMoveSpeed = moveSpeed.value;
 							itemPassivesStats.moveSpeed += calculatedVariables.phageMoveSpeed;
@@ -1532,10 +1532,10 @@ export const ITEM_SPECIFICS = {
 					statIconKey: ['level'],
 					extendedEquals: `<const>${itemVariableValue(
 						'ARMRMaxScaling',
-						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: {} } as DamageSource },
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 					).value} - ${itemVariableValue(
 						'ARMRMaxScaling',
-						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: {} } as DamageSource },
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
 					).value}%i:${STAT_ICON.level}%</const>`,
 				},
 			},
@@ -3899,7 +3899,6 @@ export const ITEM_SPECIFICS = {
 } satisfies IHypotheticalItemSpecifics;
 
 // item passives like phage/voltaic when toggled and page reloaded don't update in the stats panel
-// item variables unify using isRanged, don't mix between damage source/passed thingy, probably always use passed thingy
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
 export type IHypotheticalItemSpecifics = {

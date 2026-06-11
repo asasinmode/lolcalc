@@ -204,6 +204,17 @@ export function itemVariableValue(
 			} else {
 				rv.meta = existingMeta;
 			}
+			if (Array.isArray(rv.value)) {
+				if (isRanged === undefined) {
+					rv.isMeleeRanged = true;
+				} else if (isRanged) {
+					rv.isMeleeRanged = 1;
+					rv.value = rv.value[1];
+				} else {
+					rv.isMeleeRanged = 0;
+					rv.value = rv.value[0];
+				}
+			}
 		}
 	}
 
