@@ -446,7 +446,7 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 		const variable = variables.get(variableName);
 		rv.meta = variable?.meta;
 		const suffix = rv.meta?.resultsIsPercentage ? '%' : '';
-		const multiplier = rv.meta?.resultsMultiplier ?? 1;
+		const multiplier = rv.meta?.resultsMultiplier;
 
 		const value = variable?.value;
 		if (value === undefined) {
@@ -454,10 +454,11 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 			rv.value = '?';
 			rv.isUnknown = true;
 		} else if (typeof value !== 'number') {
-			rv.value = `${value[0] * multiplier}${suffix} | ${value[1] * multiplier}${suffix}`;
+			rv.value = `${multiplier ? roundVariable(value[0] * multiplier) : value[0]}${suffix} | ${multiplier ? roundVariable(value[1] * multiplier) : value[0]}${suffix}`;
 		} else {
-			rv.value = `${value * multiplier}${suffix}`;
-			rv.numberValue = value * multiplier;
+			const totalValue = multiplier ? roundVariable(value * multiplier) : value;
+			rv.value = `${totalValue}${suffix}`;
+			rv.numberValue = totalValue;
 		}
 
 		return rv;
