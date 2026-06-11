@@ -835,13 +835,6 @@ export const VARIABLE_CALCULATION_FNS = {
 				rv.value[1] *= multiplier;
 			}
 		}
-		// TODO check sunfire aegis
-		// const accessed = me.get(variable.mModifiedGameCalculation);
-		// if (accessed?.size) {
-		// 	for (const variable of accessed.values()) {
-		// 		meta?.accessedVariables?.add(variable);
-		// 	}
-		// }
 		return rv;
 	},
 	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], _whole, meta) {

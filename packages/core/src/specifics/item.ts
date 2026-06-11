@@ -3858,6 +3858,8 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				OvershieldCalc: {
 					type: VariableType.shield,
+					statIconKey: 'level',
+					extendedEquals: `<const>${itemVariableValue('OvershieldCalc', { item: ITEMS_BY_NAME.bloodthirster, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('OvershieldCalc', { item: ITEMS_BY_NAME.bloodthirster, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
 				},
 			},
 		}),
