@@ -814,6 +814,10 @@ export const VARIABLE_CALCULATION_FNS = {
 		let multiplier = 1;
 		if ('mMultiplier' in variable) {
 			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta);
+			/* expected to happen for champions */
+			if (Array.isArray(multiplier) && 'abilityLevel' in meta.variableValueParams) {
+				multiplier = multiplier[meta.variableValueParams.abilityLevel ?? 1];
+			}
 		}
 		meta.variableValueParams.accessedVariables ??= new Map();
 		const rv = meta.variableValueFn(variable.mModifiedGameCalculation, meta.variableValueParams);
