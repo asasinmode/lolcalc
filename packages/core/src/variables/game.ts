@@ -369,6 +369,7 @@ export function championAbilityVariableValue(
 				variableValueParams: params,
 				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
 			});
+
 			if (value) {
 				for (const key in value) {
 					if (key !== 'meta') {

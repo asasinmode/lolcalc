@@ -256,7 +256,28 @@ export const CHAMPION_SPECIFICS = {
 						resultsIsPercentage: true,
 						multiplier: 100,
 						extendedEquals(params) {
-							return `<const>${roundVariable(championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number * 100, 1)}% - ${roundVariable(championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number * 100, 1)}%</const>`;
+							return `<const>${roundVariable(championAbilityVariableValue(
+								'AttackSpeedPerStack',
+								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
+							).value as number * 100, 1)}% - ${roundVariable(championAbilityVariableValue(
+								'AttackSpeedPerStack',
+								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
+							).value as number * 100, 1)}%</const>`;
+						},
+					},
+					MaxBonusAttackSpeed: {
+						statIconKey: 'level',
+						isPercentage: true,
+						resultsIsPercentage: true,
+						multiplier: 100,
+						extendedEquals(params) {
+							return `<const>${roundVariable(championAbilityVariableValue(
+								'MaxBonusAttackSpeed',
+								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, abilityLevel: 1, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
+							).value as number * 100, 1)}% - ${roundVariable(championAbilityVariableValue(
+								'MaxBonusAttackSpeed',
+								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, abilityLevel: 1, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
+							).value as number * 100, 1)}%</const>`;
 						},
 					},
 				},
