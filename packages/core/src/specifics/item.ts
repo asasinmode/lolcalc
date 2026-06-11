@@ -1525,7 +1525,7 @@ export const ITEM_SPECIFICS = {
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 					).value} - ${itemVariableValue(
 						'ARMRPerHitScaling',
-						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
 					).value}%i:${STAT_ICON.level}%</const>`,
 				},
 				ARMRMaxScaling: {
@@ -1535,7 +1535,7 @@ export const ITEM_SPECIFICS = {
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 					).value} - ${itemVariableValue(
 						'ARMRMaxScaling',
-						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
+						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
 					).value}%i:${STAT_ICON.level}%</const>`,
 				},
 			},
@@ -2483,7 +2483,7 @@ export const ITEM_SPECIFICS = {
 				},
 				BounceCount: {
 					statIconKey: 'level',
-					extendedEquals: `<const>${itemVariableValue('BounceCount', { item: ITEMS_BY_NAME.statikkShiv, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('BounceCount', { item: ITEMS_BY_NAME.statikkShiv, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('BounceCount', { item: ITEMS_BY_NAME.statikkShiv, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('BounceCount', { item: ITEMS_BY_NAME.statikkShiv, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'f2', 'BounceCount', 'BonusEnergizedStacks'],
@@ -2510,7 +2510,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.redemption]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.vanillaMax);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.max);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2531,7 +2531,7 @@ export const ITEM_SPECIFICS = {
 				HealAmount: {
 					type: VariableType.heal,
 					isCustom: true,
-					extendedEquals: `<const>${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number)}</const>`,
+					extendedEquals: `<const>${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value as number)}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'DamageToChampions', 'DiminishedEffect', 'HealMin', 'HealMax'],
@@ -2841,7 +2841,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.solariLocket]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.max);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.topQuestMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2862,7 +2862,7 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.shield,
 					isCustom: true,
 					displayedName: 'ShieldAmount',
-					extendedEquals: `<const>${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 			},
 			uninteresting: ['f3', 'ShieldDuration', 'DiminishedTimer', 'DiminishedEffectMulitplier', 'ShieldMinTOOLTIP', 'ShieldMaxTOOLTIP'],
@@ -2874,7 +2874,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.mikaelsBlessing]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.vanillaMax);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.max);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2894,7 +2894,7 @@ export const ITEM_SPECIFICS = {
 				AmountToHeal: {
 					type: VariableType.heal,
 					isCustom: true,
-					extendedEquals: `<const>${itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${Math.round(itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value as number)}</const>`,
+					extendedEquals: `<const>${itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${Math.round(itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value as number)}</const>`,
 				},
 			},
 			uninteresting: ['f2', 'HealAmountMin', 'HealAmountMax'],
@@ -3102,7 +3102,7 @@ export const ITEM_SPECIFICS = {
 					// TODO check if affected by grievous, wording bit weird "restore as Health"
 					type: 'heal',
 					statIconKey: 'level',
-					extendedEquals: `<const>${itemVariableValue('MaxCharges', { item: ITEMS_BY_NAME.echoesOfHelia, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('MaxCharges', { item: ITEMS_BY_NAME.echoesOfHelia, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('MaxCharges', { item: ITEMS_BY_NAME.echoesOfHelia, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('MaxCharges', { item: ITEMS_BY_NAME.echoesOfHelia, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'DamageStorageRate', 'ChargeToHealConversion'],
@@ -3267,11 +3267,11 @@ export const ITEM_SPECIFICS = {
 				ProcDmg: {
 					type: VariableType.magic,
 					statIconKey: 'level',
-					extendedEquals: `<const>${itemVariableValue('ProcDmg', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ProcDmg', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('ProcDmg', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ProcDmg', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 				FlatDR: {
 					statIconKey: 'level',
-					extendedEquals: `<const>${itemVariableValue('FlatDR', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('FlatDR', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('FlatDR', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('FlatDR', { item: ITEMS_BY_NAME.dreamMaker, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 			},
 			uninteresting: ['f2', 'f3', 'f5', 'f6', 'StealthWardCap', 'PurpleBubbleAoEMod'],
@@ -3368,8 +3368,8 @@ export const ITEM_SPECIFICS = {
 					roundReplaced: true,
 					extendedEquals: {
 						prefix: '<const>',
-						meleeValue: `${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value} - ${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: false } } as DamageSource }).value}`,
-						rangedValue: `${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value} - ${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: true } } as DamageSource }).value}`,
+						meleeValue: `${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value} - ${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: { value: false } } as DamageSource }).value}`,
+						rangedValue: `${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value} - ${itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: { value: true } } as DamageSource }).value}`,
 						suffix: '</const>',
 					},
 				},
@@ -3379,8 +3379,8 @@ export const ITEM_SPECIFICS = {
 					roundReplaced: true,
 					extendedEquals: {
 						prefix: '<const>',
-						meleeValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: false } } as DamageSource }).value as number)}`,
-						rangedValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: true } } as DamageSource }).value as number)}`,
+						meleeValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: { value: false } } as DamageSource }).value as number)}`,
+						rangedValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: { value: true } } as DamageSource }).value as number)}`,
 						suffix: '</const>',
 					},
 				},
@@ -3408,8 +3408,8 @@ export const ITEM_SPECIFICS = {
 					statIconKey: 'level',
 					extendedEquals: {
 						prefix: '<const>',
-						meleeValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: false } } as DamageSource }).value}`,
-						rangedValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax }, isRanged: { value: true } } as DamageSource }).value}`,
+						meleeValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: false } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: { value: false } } as DamageSource }).value}`,
+						rangedValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min }, isRanged: { value: true } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.max }, isRanged: { value: true } } as DamageSource }).value}`,
 						suffix: `</const>`,
 					},
 				},
@@ -3592,7 +3592,7 @@ export const ITEM_SPECIFICS = {
 				BonusHealthBuff: {
 					type: VariableType.heal,
 					statIconKey: 'level',
-					extendedEquals: `<const>${itemVariableValue('BonusHealthBuff', { item: ITEMS_BY_NAME.solsticeSleigh, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('BonusHealthBuff', { item: ITEMS_BY_NAME.solsticeSleigh, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('BonusHealthBuff', { item: ITEMS_BY_NAME.solsticeSleigh, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('BonusHealthBuff', { item: ITEMS_BY_NAME.solsticeSleigh, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 			},
 			uninteresting: ['f3', 'f5', 'f6', 'StealthWardCap', 'BuffDuration', 'MoveSpeedBuff'],
@@ -3731,7 +3731,7 @@ export const ITEM_SPECIFICS = {
 							variableValueFn: itemVariableValue,
 							variableValueParams: {
 								item: ITEMS_BY_NAME.hextechGunblade,
-								damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource,
+								damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource,
 							},
 						},
 					)?.value}%i:${STAT_ICON.level}%</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.hextechGunblade?.itemCalculations.ActiveDamage.mFormulaParts[1]!.mCoefficient! * 100)}%%i:${STAT_ICON.abilityPower}%</scaleap>`,
@@ -3859,7 +3859,7 @@ export const ITEM_SPECIFICS = {
 				OvershieldCalc: {
 					type: VariableType.shield,
 					statIconKey: 'level',
-					extendedEquals: `<const>${itemVariableValue('OvershieldCalc', { item: ITEMS_BY_NAME.bloodthirster, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('OvershieldCalc', { item: ITEMS_BY_NAME.bloodthirster, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource }).value}</const>`,
+					extendedEquals: `<const>${itemVariableValue('OvershieldCalc', { item: ITEMS_BY_NAME.bloodthirster, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('OvershieldCalc', { item: ITEMS_BY_NAME.bloodthirster, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 			},
 		}),

@@ -573,6 +573,6 @@ export type IVariableType = typeof VariableType[keyof typeof VariableType];
 
 export const CHAMPION_LEVEL = {
 	min: 1,
-	vanillaMax: 18,
-	max: 20,
+	max: 18,
+	topQuestMax: 20,
 };

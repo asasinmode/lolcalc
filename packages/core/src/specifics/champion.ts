@@ -275,7 +275,7 @@ export const CHAMPION_SPECIFICS = {
 								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 							).value as number * 100, 1)}% - ${roundVariable(championAbilityVariableValue(
 								'AttackSpeedPerStack',
-								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
+								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
 							).value as number * 100, 1)}%</const>`;
 						},
 					},
@@ -290,7 +290,7 @@ export const CHAMPION_SPECIFICS = {
 								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, abilityLevel: 1, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 							).value as number * 100, 1)}% - ${roundVariable(championAbilityVariableValue(
 								'MaxBonusAttackSpeed',
-								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, abilityLevel: 1, damageSource: { level: { value: CHAMPION_LEVEL.vanillaMax } } as DamageSource },
+								{ abilityVariant: params.abilityVariant, allAbilitiesVariants: params.allAbilitiesVariants, abilityLevel: 1, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
 							).value as number * 100, 1)}%</const>`;
 						},
 					},
