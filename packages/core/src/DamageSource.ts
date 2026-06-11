@@ -1401,7 +1401,7 @@ function abilityVariantText(
 	const { replaced, unknownVariables, variablesAllValues, variables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		{ abilityVariant, dynamicVariables, abilityLevel, allAbilitiesVariants },
+		{ abilityVariant, dynamicVariables, abilityLevel, allAbilitiesVariants, damageSource },
 		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,
 	);
