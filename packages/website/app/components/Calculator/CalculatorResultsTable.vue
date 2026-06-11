@@ -520,7 +520,7 @@ async function addResultsSection(
 
 		const precomputedDescription = computeAbilityDescription(champion, abilityId, undefined, {
 			replaceWithName: true,
-			overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.variables,
+			overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.[abilityId.abilityKey]?.variables,
 			),
 		});
 
