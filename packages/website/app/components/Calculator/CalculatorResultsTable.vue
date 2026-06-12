@@ -1161,6 +1161,20 @@ const colW = computed(() => {
 	};
 });
 
+function showRowTooltip(event: MouseEvent) {
+	const lastChild = (event.target as HTMLElement).lastElementChild;
+	if (lastChild?.hasAttribute('popover')) {
+		(lastChild as HTMLElement).showPopover();
+	}
+}
+
+function hideRowTooltip(event: MouseEvent) {
+	const lastChild = (event.target as HTMLElement).lastElementChild;
+	if (lastChild?.hasAttribute('popover')) {
+		(lastChild as HTMLElement).hidePopover();
+	}
+}
+
 defineExpose({
 	resultColumns,
 	resultSections,
@@ -1570,6 +1584,8 @@ defineExpose({
 							scope="row"
 							:colspan="section.isCustomTotal || section.id === STATS_SECTION_ID ? 2 : undefined"
 							headers="results-table-header-damage-type"
+							@mouseenter="showRowTooltip"
+							@mouseleave="hideRowTooltip"
 						>
 							<img
 								v-if="row.image"
@@ -1587,6 +1603,9 @@ defineExpose({
 								width="192"
 								height="192"
 							>
+							<p v-if="row.isCustom" popover="hint" class="hover-tooltip">
+								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
+							</p>
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
@@ -2176,6 +2195,8 @@ defineExpose({
 					> th {
 						--at-apply: 'hyphens-auto wrap-anywhere';
 						--ps: calc(2 * var(--control-btn-size));
+						anchor-scope: all;
+						anchor-name: --variable-row;
 
 						&[colspan] {
 							--at-apply: 'ps-[calc(var(--table-ps)+var(--ps))]';
@@ -2197,6 +2218,13 @@ defineExpose({
 
 						> span {
 							--at-apply: 'sr-only';
+						}
+
+						> [popover] {
+							--at-apply: 'max-inline-120 p-2 -translate-x-15 text-white';
+							position-anchor: --variable-row;
+							inset-block-end: calc(anchor(top) - 1px);
+							justify-self: anchor-start;
 						}
 					}
 

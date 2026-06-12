@@ -3342,7 +3342,7 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				f2: [],
-				CalculatedDamage: [],
+				Damage: [],
 			},
 			calculate(self, target) {
 				const damage = itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: self, isRanged: self.isRanged.value });
@@ -3354,7 +3354,7 @@ export const ITEM_SPECIFICS = {
 
 				return {
 					f2: { value: 0 },
-					CalculatedDamage: {
+					Damage: {
 						value: Array.isArray(damage.value)
 							? [damage.value[0]! * damageMultiplier, damage.value[1]! * damageMultiplier]
 							: ((damage.value as number) * damageMultiplier),
@@ -3384,7 +3384,7 @@ export const ITEM_SPECIFICS = {
 						suffix: '</const>',
 					},
 				},
-				CalculatedDamage: {
+				Damage: {
 					type: VariableType.physical,
 					isCustom: true,
 				},

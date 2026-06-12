@@ -236,7 +236,7 @@ defineExpose({ header });
 	.item-description {
 		> ul {
 			> li {
-				--at-apply: 'flex items-center gap- text-neutral-200';
+				--at-apply: 'flex items-center text-neutral-200';
 
 				> img {
 					--at-apply: 'size-4.5 me-[0.5ch]';
