@@ -756,6 +756,30 @@ function addCalculatesFrom(
 	}
 }
 
+function multiplyCalculatePartValues(part: ICalculatesFromPart, multiplier: number) {
+	if (Array.isArray(part.value)) {
+		if (typeof part.value[0] === 'number') {
+			part.value[0] *= multiplier;
+		} else {
+			part.value[0].min *= multiplier;
+			part.value[0].max *= multiplier;
+		}
+		if (typeof part.value[1] === 'number') {
+			part.value[1] *= multiplier;
+		} else {
+			(part.value[1]! as unknown as { min: number }).min *= multiplier;
+			(part.value[1]! as unknown as { max: number }).max *= multiplier;
+		}
+	} else {
+		if (typeof part.value === 'number') {
+			part.value *= multiplier;
+		} else {
+			part.value.min *= multiplier;
+			part.value.max *= multiplier;
+		}
+	}
+}
+
 const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IChampionStatName, string>> = {
 	hp: 'scalehealth',
 	armor: 'scalearmor',
@@ -943,6 +967,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 		meta.variableValueParams.accessedVariables ??= new Map();
 		const rv = meta.variableValueFn(variable.mModifiedGameCalculation, meta.variableValueParams);
+
 		if (typeof rv.value === 'number') {
 			rv.value *= multiplier;
 		} else if (Array.isArray(rv.value)) {
@@ -953,6 +978,13 @@ export const VARIABLE_CALCULATION_FNS = {
 				rv.value[1] *= multiplier;
 			}
 		}
+
+		if (rv.calculatesFrom?.length) {
+			for (const part of rv.calculatesFrom) {
+				multiplyCalculatePartValues(part, multiplier);
+			}
+		}
+
 		return rv;
 	},
 	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], _whole, meta) {
