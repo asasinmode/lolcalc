@@ -65,6 +65,14 @@ export interface IVariableMeta<T = any> {
 	isCustom?: boolean;
 }
 
+interface ICalculatesFromPart {
+	stat?: IVariableMetaStatIcon;
+	type?: 'baseOnLevel' | 'bonus' | 'total';
+	/** when array, expected to be for melee/ranged values */
+	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number } | { min: number; max: number }];
+	isPercentage?: boolean;
+}
+
 export interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
 	value?: ICalculatedDynamicVariable['value'];
@@ -86,6 +94,8 @@ export interface IVariableValueResult {
 	roundReplaced?: boolean | number;
 	/** whether `ISpecificVariables.uninteresting` includes it */
 	isUninteresting?: boolean;
+	/** components the variable was calculated from, used for creating `extendedEquals` */
+	calculatesFrom?: ICalculatesFromPart[];
 }
 
 /**
@@ -130,6 +140,7 @@ export function itemVariableValue(
 
 	const rv: IVariableValueResult = {
 		isUninteresting: dynamicVariables.uninteresting?.includes(variable),
+		calculatesFrom: [],
 	};
 
 	if (accessedFrom) {
@@ -173,11 +184,20 @@ export function itemVariableValue(
 			rv.value = [melee.value as number | undefined, ranged.value as number | undefined];
 			rv.roundReplaced ||= melee?.roundReplaced || ranged?.roundReplaced;
 			rv.meta ??= Object.assign(melee.meta ?? {}, ranged.meta);
+			if (melee.calculatesFrom?.length || ranged.calculatesFrom?.length) {
+				if (melee.calculatesFrom?.length === ranged.calculatesFrom?.length) {
+					addCalculatesFrom(rv.calculatesFrom, melee.calculatesFrom!, ranged.calculatesFrom!);
+				} else {
+					console.warn('[itemVariableValue] detected melee/ranged variable but only got calculatesFrom for one', item.name, variable, melee, ranged);
+				}
+			}
 		} else {
 			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
 			const meleeRangedV = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), params, overrideDynamicVariables, variable);
 			for (const key in meleeRangedV) {
-				if (key !== 'meta') {
+				if (key === 'calculatesFrom') {
+					addCalculatesFrom(rv.calculatesFrom, meleeRangedV.calculatesFrom!);
+				} else if (key !== 'meta') {
 					(rv as any)[key] = meleeRangedV[key as keyof typeof meleeRangedV];
 				}
 			}
@@ -194,7 +214,9 @@ export function itemVariableValue(
 		});
 		if (value) {
 			for (const key in value) {
-				if (key !== 'meta') {
+				if (key === 'calculatesFrom') {
+					addCalculatesFrom(rv.calculatesFrom, value.calculatesFrom!);
+				} else if (key !== 'meta') {
 					(rv as any)[key] = value[key as keyof typeof value];
 				}
 			}
@@ -293,7 +315,9 @@ export function championAbilityVariableValue(
 		abilityLevel = 1,
 		allAbilitiesVariants = [],
 	} = params;
-	const rv: IVariableValueResult = {};
+	const rv: IVariableValueResult = {
+		calculatesFrom: [],
+	};
 
 	const colonIndex = variable.indexOf(':');
 	if (~colonIndex) {
@@ -372,7 +396,9 @@ export function championAbilityVariableValue(
 
 			if (value) {
 				for (const key in value) {
-					if (key !== 'meta') {
+					if (key === 'calculatesFrom') {
+						addCalculatesFrom(rv.calculatesFrom, value.calculatesFrom!);
+					} else if (key !== 'meta') {
 						(rv as any)[key] = value[key as keyof typeof value];
 					}
 				}
@@ -464,7 +490,7 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName, allValues, roundReplaced, meta, isUninteresting } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues, roundReplaced, meta, isUninteresting, calculatesFrom } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
