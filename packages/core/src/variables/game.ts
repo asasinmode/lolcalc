@@ -797,7 +797,12 @@ function calculatesFromPartExtendedEquals(
 	prependPlus = false,
 ): string {
 	const tag = part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
-	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}value and icon go here?${tag ? `</${tag}>` : ''}`;
+	const value = Array.isArray(part.value)
+		? part.value[preferRangedValue ? 1 : 0]!
+		: part.value;
+	const multiplier = part.isPercentage ? 100 : 1;
+	const formattedValue = typeof value === 'number' ? value * multiplier : `${value.min * multiplier} - ${value.max * multiplier}`;
+	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${part.isPercentage ? '%' : ''}${tag ? `</${tag}>` : ''}`;
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */
