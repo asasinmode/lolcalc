@@ -1,5 +1,5 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
-import type { IChampionStatName, IChampionStats, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
+import type { IChampionStatName, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
 
@@ -66,7 +66,7 @@ export interface IVariableMeta<T = any> {
 }
 
 interface ICalculatesFromPart {
-	stat?: IVariableMetaStatIcon;
+	stat?: 'const' | IChampionStatName;
 	type?: 'baseOnLevel' | 'bonus' | 'total';
 	/** when array, expected to be for melee/ranged values */
 	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number } | { min: number; max: number }];
@@ -543,6 +543,46 @@ export function replaceGameVariables(
 				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
 		const statIconKey = meta?.scalesWithStatIcon;
+		// TODO convert to stat icons
+		let generatedStatIcon: IChampionStatName[] | IChampionStatName | undefined;
+
+		if (calculatesFrom?.length) {
+			const isMeleeRanged = calculatesFrom.some(part => Array.isArray(part.value));
+			let generatedEE = calculatesFromPartExtendedEquals(calculatesFrom[0]!, isMeleeRanged);
+			generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
+			for (const part of calculatesFrom.slice(1)) {
+				generatedEE += ` ${calculatesFromPartExtendedEquals(part, isMeleeRanged, true)}`;
+				if (part.stat && part.stat !== 'const') {
+					generatedStatIcon ??= [];
+					generatedStatIcon.push(part.stat);
+				}
+			}
+			if (generatedEE !== extendedEquals) {
+				console.warn('new extended different', {
+					variableName,
+					extendedEquals,
+					generatedEE,
+				}, calculatesFrom);
+			} else {
+				console.log('generated extended same', variableName, generatedEE);
+			}
+			if (Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
+				generatedStatIcon = generatedStatIcon[0];
+			}
+		} else if (extendedEquals) {
+			console.warn('didnt generate extended', { variableName, extendedEquals }, calculatesFrom);
+		}
+
+		if (
+			(statIconKey && !generatedStatIcon)
+			|| (generatedStatIcon && !statIconKey)
+			|| (Array.isArray(statIconKey) && !(Array.isArray(generatedStatIcon) && statIconKey.every((icon, i) => generatedStatIcon[i] !== icon)))
+			|| statIconKey !== generatedStatIcon
+		) {
+			console.warn('new icon diff', { variableName, statIconKey, generatedStatIcon }, calculatesFrom);
+		} else if (generatedStatIcon) {
+			console.log('generated icon same', variableName, generatedStatIcon);
+		}
 
 		if (statIconKey || varIcon) {
 			const iconStr = (typeof statIconKey === 'string'
@@ -700,16 +740,57 @@ export function replaceGameIcons(text: string): string {
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
 }
 
+function addCalculatesFrom(
+	to: ICalculatesFromPart[] | undefined,
+	source1: ICalculatesFromPart[],
+	/** expected to be used for melee/ranged calculates from and its value will be put into new calculation's value */
+	source2?: ICalculatesFromPart[],
+) {
+	for (let i = 0; i < source1.length; i++) {
+		to?.push({
+			stat: source1[i]!.stat,
+			type: source1[i]!.type,
+			isPercentage: source1[i]!.isPercentage,
+			value: source2 ? [source1[i]!.value as number, source2[i]!.value as number] : source1[i]!.value,
+		});
+	}
+}
+
+const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IChampionStatName, string>> = {
+	hp: 'scalehealth',
+	armor: 'scalearmor',
+	attackDamage: 'scalead',
+	abilityPower: 'scaleap',
+	lethality: 'scalelethality',
+	magicResist: 'scalemr',
+	moveSpeed: 'speed',
+	mana: 'scalemana',
+};
+
+function calculatesFromPartExtendedEquals(
+	part: ICalculatesFromPart,
+	preferRangedValue = false,
+	prependPlus = false,
+): string {
+	const tag = part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
+	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}value and icon go here?${tag ? `</${tag}>` : ''}`;
+}
+
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
 	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, meta) {
-		const rv: IVariableValueResult = {};
+		const rv: IVariableValueResult = {
+			calculatesFrom: [],
+		};
 		const values = variable.mFormulaParts.map((part) => {
 			const resolveFn = variableResolveFn(part);
 			if (resolveFn) {
-				const resolved = variableResolveFn(part)?.(part, whole, meta);
+				const resolved = resolveFn(part, whole, meta);
 				if (resolved?.roundReplaced) {
 					rv.roundReplaced = resolved.roundReplaced;
+				}
+				if (resolved?.calculatesFrom) {
+					addCalculatesFrom(rv.calculatesFrom, resolved.calculatesFrom);
 				}
 				return resolved?.value as number;
 			}
@@ -796,8 +877,14 @@ export const VARIABLE_CALCULATION_FNS = {
 		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
 		if (statValue !== undefined && variable.mCoefficient) {
 			return {
-				value: statValue * variable.mCoefficient,
+				value: statValue.value * variable.mCoefficient,
 				roundReplaced: true,
+				calculatesFrom: [{
+					value: variable.mCoefficient,
+					isPercentage: true,
+					stat: statValue.stat,
+					type: statValue.type,
+				}],
 			};
 		}
 	},
@@ -818,8 +905,14 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (dataValue !== undefined) {
 			if (statValue !== undefined) {
 				return {
-					value: statValue * dataValue,
+					value: statValue.value * dataValue,
 					roundReplaced: true,
+					calculatesFrom: [{
+						value: dataValue,
+						isPercentage: true,
+						stat: statValue.stat,
+						type: statValue.type,
+					}],
 				};
 			} else {
 				return {
@@ -869,8 +962,14 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (mNumber !== undefined) {
 			if (statValue !== undefined) {
 				return {
-					value: statValue * mNumber,
+					value: statValue.value * mNumber,
 					roundReplaced: true,
+					calculatesFrom: [{
+						value: mNumber,
+						isPercentage: true,
+						stat: statValue.stat,
+						type: statValue.type,
+					}],
 				};
 			} else {
 				return {
@@ -1020,7 +1119,7 @@ interface IStatWithFormula {
 }
 
 /** item variables sometimes have fields with `mStat: number`, which from what I can tell is supposed to be a champion's stat. This is a map of known numbers to their corresponding stats, supposed to be used with */
-const MSTAT_TO_NAMED_STAT: Record<number, IChampionStatName> = {
+const MSTAT_TO_NAMED_STAT = {
 	1: 'armor',
 	2: 'attackDamage',
 	6: 'magicResist',
@@ -1028,13 +1127,9 @@ const MSTAT_TO_NAMED_STAT: Record<number, IChampionStatName> = {
 	8: 'critChance',
 	12: 'hp',
 	29: 'lethality',
-};
+} satisfies Record<number, IChampionStatName>;
 
-type IStatsCalculationResultsStatKey = {
-	[P in keyof IStatsCalculationResult]: IStatsCalculationResult[P] extends IChampionStats ? P : never
-}[keyof IStatsCalculationResult];
-
-function mStatFormulaStatKey(stat: IStatWithFormula): IStatsCalculationResultsStatKey | undefined {
+function mStatFormulaStatKey(stat: IStatWithFormula): ICalculatesFromPart['type'] {
 	if (stat.mStatFormula === 1) {
 		return 'baseOnLevel';
 	} else if (stat.mStatFormula === 2) {
@@ -1045,13 +1140,17 @@ function mStatFormulaStatKey(stat: IStatWithFormula): IStatsCalculationResultsSt
 }
 
 /** used for resolving variables of type `IStatWithFormula`, which basically are supposed to be various kinds (like base, bonus, total, determined by `mStatFormula`) of champion's stats (determined by `mStat`) */
-function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculationResult): number | undefined {
+function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculationResult): {
+	value: number;
+	stat: IChampionStatName;
+	type: NonNullable<ICalculatesFromPart['type']>;
+} | undefined {
 	const statsKey = mStatFormulaStatKey(stat);
 	// TODO not sure if can just fall back to ap, at the moment dusk and dawn doesn't have `mStat` specified and seems to be using ap there
-	const targetStat = stat.mStat ? MSTAT_TO_NAMED_STAT[stat.mStat] : 'abilityPower';
+	const targetStat = stat.mStat ? MSTAT_TO_NAMED_STAT[stat.mStat as keyof typeof MSTAT_TO_NAMED_STAT] : 'abilityPower';
 	/** resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
 	if (statsKey && targetStat) {
-		return stats ? stats[statsKey][targetStat] : 0;
+		return { value: stats ? stats[statsKey][targetStat] : 0, stat: targetStat, type: statsKey };
 	}
 	return undefined;
 }
