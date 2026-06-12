@@ -1055,7 +1055,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 		const customEffect = CUSTOM_EFFECTS[effectObjectName];
 		const referencedText = (effectData.data as IEffectData)[(customEffect as Extract<NonNullable<typeof CUSTOM_EFFECTS[IEffectObjectName]>, { objectName: string }>).objectName as keyof IEffectData];
 		if (!referencedText) {
-			throw new Error('[effectData] unresolved custom effect referenced objectName', effectObjectName, customEffect);
+			throw new Error(`[effectData] unresolved custom effect referenced objectName ${effectObjectName} ${JSON.stringify(customEffect, null, 2)}`);
 		}
 		(effectData.data as IEffectData)[effectObjectName] = {
 			...referencedText,

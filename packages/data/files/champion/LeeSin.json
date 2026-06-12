@@ -21,7 +21,7 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 66,
-		"attackdamageperlevel": 3.7,
+		"attackdamageperlevel": 3.4,
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.651,
 		"attackspeedratio": 0.651
@@ -53,9 +53,10 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"Q1BaseDamage": [35, 65, 95, 125, 155, 185, 215],
-						"Q2BaseDamage": [35, 65, 95, 125, 155, 185, 215],
-						"Q2ADRatio": [0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95],
+						"Q1BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"Q2BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"Q1ADRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+						"Q2ADRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
 						"Q2MaxMissingHealthMod": [1, 1, 1, 1, 1, 1, 1],
 						"ReactivateTime": [3, 3, 3, 3, 3, 3, 3],
 						"CherryBonusHaste": [30, 30, 30, 30, 30, 30, 30],
@@ -72,8 +73,8 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.95,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "Q1ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
@@ -112,7 +113,7 @@
 					"objectName": "LeeSinWOne",
 					"dataKey": "Characters/LeeSin/Spells/LeeSinWOneAbility/LeeSinWOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
-					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
+					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "ShieldValue",

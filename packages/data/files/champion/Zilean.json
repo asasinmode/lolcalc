@@ -194,7 +194,10 @@
 					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
 					"dataValues": {
 						"PassiveCooldown": [120, 120, 120, 120, 120, 120, 120],
-						"GamemodeInteger": [1, 1, 1, 1, 1, 1, 1]
+						"GameModeInteger": [1, 1, 1, 1, 1, 1, 1],
+						"__renamedVariables": {
+							"GamemodeInteger": "GameModeInteger"
+						}
 					},
 					"spellCalculations": {
 						"{e359ec0d}": {

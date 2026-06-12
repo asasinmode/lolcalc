@@ -4,7 +4,7 @@
 	"name": "Ryze",
 	"partype": "Mana",
 	"stats": {
-		"hp": 645,
+		"hp": 620,
 		"hpperlevel": 124,
 		"mp": 300,
 		"mpperlevel": 70,
@@ -20,7 +20,7 @@
 		"mpregenperlevel": 1,
 		"crit": 0,
 		"critperlevel": 0,
-		"attackdamage": 58,
+		"attackdamage": 55,
 		"attackdamageperlevel": 3,
 		"attackspeedperlevel": 2.11,
 		"attackspeed": 0.658,

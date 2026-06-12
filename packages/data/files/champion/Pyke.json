@@ -347,7 +347,8 @@
 						"AdditionalBonus": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"HPPerBAD": [14, 14, 14, 14, 14, 14, 14],
 						"CooldownPerChamp": [1, 1, 1, 1, 1, 1, 1],
-						"AmmoCooldown": [30, 30, 30, 30, 30, 30, 30]
+						"AmmoCooldown": [30, 30, 30, 30, 30, 30, 30],
+						"DamageStoreMaxBonusADRatio": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"spellCalculations": {
 						"DamageStorageMax": {
@@ -360,8 +361,8 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 8,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "DamageStoreMaxBonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},

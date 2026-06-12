@@ -86,9 +86,6 @@
 						{
 							"name": "ThrustBaseDamage",
 							"nameOverride": "spell_listtype_xinzhaowthrustdamage"
-						},
-						{
-							"name": "Cost"
 						}
 					],
 					"mana": [60, 55, 50, 45, 40, 40],
@@ -366,17 +363,7 @@
 								{
 									"mStat": 12,
 									"mSubpart": {
-										"mLevel1Value": 0.03,
-										"mBreakpoints": [
-											{
-												"mLevel": 6,
-												"mAdditionalBonusAtThisLevel": 0.01
-											},
-											{
-												"mLevel": 11,
-												"mAdditionalBonusAtThisLevel": 0.01
-											}
-										]
+										"mSpellCalculationKey": "HealHPRatio"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
@@ -391,15 +378,15 @@
 						"HealHPRatio": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 0.03,
+									"mLevel1Value": 0.02,
 									"mBreakpoints": [
 										{
 											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.01
+											"mAdditionalBonusAtThisLevel": 0.015
 										},
 										{
 											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.01
+											"mAdditionalBonusAtThisLevel": 0.015
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -409,7 +396,7 @@
 						"HealAPRatio": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 0.45,
+									"mLevel1Value": 0.4,
 									"mBreakpoints": [
 										{
 											"mLevel": 6,
@@ -417,7 +404,7 @@
 										},
 										{
 											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.25
+											"mAdditionalBonusAtThisLevel": 0.2
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"

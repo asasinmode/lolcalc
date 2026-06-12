@@ -1,5 +1,5 @@
 {
-	"version": "16.11.1",
+	"version": "16.12.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -38,8 +38,8 @@
 			"name": "Akali",
 			"image": "Akali.png",
 			"roles": {
-				"mid": true,
-				"top": true
+				"top": true,
+				"mid": true
 			}
 		},
 		"Akshan": {
@@ -448,8 +448,8 @@
 			"name": "Irelia",
 			"image": "Irelia.png",
 			"roles": {
-				"mid": true,
-				"top": true
+				"top": true,
+				"mid": true
 			}
 		},
 		"Ivern": {
@@ -949,8 +949,7 @@
 			"name": "Quinn",
 			"image": "Quinn.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"jungle": true
 			}
 		},
 		"Rakan": {
@@ -1470,8 +1469,8 @@
 			"name": "Yasuo",
 			"image": "Yasuo.png",
 			"roles": {
-				"mid": true,
-				"top": true
+				"top": true,
+				"mid": true
 			}
 		},
 		"Yone": {
@@ -1480,8 +1479,8 @@
 			"name": "Yone",
 			"image": "Yone.png",
 			"roles": {
-				"mid": true,
-				"top": true
+				"top": true,
+				"mid": true
 			}
 		},
 		"Yorick": {

@@ -135,7 +135,7 @@
 						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
 						"PercentIncreasedPerDodge": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"MaxDodgesForDamageIncrease": [5, 5, 5, 5, 5, 5, 5],
-						"PercentHealthDamage": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+						"PercentHealthDamage": [4, 4, 4, 4, 4, 4, 4],
 						"DodgeDuration": [2, 2, 2, 2, 2, 2, 2],
 						"AoEDamageReduction": [25, 25, 25, 25, 25, 25, 25],
 						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]

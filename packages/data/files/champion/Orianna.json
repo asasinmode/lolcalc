@@ -4,7 +4,7 @@
 	"name": "Orianna",
 	"partype": "Mana",
 	"stats": {
-		"hp": 585,
+		"hp": 565,
 		"hpperlevel": 110,
 		"mp": 418,
 		"mpperlevel": 25,
@@ -228,7 +228,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 95, 80, 80, 80, 80],
 					"dataValues": {
-						"Damage": [100, 250, 400, 550, 700, 850, 1000],
+						"Damage": [100, 225, 350, 475, 600, 725, 850],
 						"AoERadius": [415, 415, 415, 415, 415, 415, 415],
 						"StunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
@@ -241,7 +241,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.95,
+									"mCoefficient": 1.1,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -260,7 +260,7 @@
 					"image": "assets/characters/orianna/hud/icons2d/oriannap.png",
 					"tooltip": "Orianna's Abilities originate from her <keywordMajor>Ball</keywordMajor>. Orianna's <keywordMajor>Ball</keywordMajor> automatically returns to her if she is too far away from it.<br><br>Orianna's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Subsequent Attacks against the same target within @StackDuration@ seconds deal an additional <magicDamage>@StackDamage@ magic damage</magicDamage> (max of <magicDamage>@StackDamageMax@ damage</magicDamage>).",
 					"dataValues": {
-						"StackMult": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"StackMult": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
 						"StackCount": [2, 2, 2, 2, 2, 2, 2],
 						"StackDuration": [4, 4, 4, 4, 4, 4, 4],
 						"APRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]

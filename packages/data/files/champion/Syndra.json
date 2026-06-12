@@ -4,7 +4,7 @@
 	"name": "Syndra",
 	"partype": "Mana",
 	"stats": {
-		"hp": 563,
+		"hp": 583,
 		"hpperlevel": 100,
 		"mp": 480,
 		"mpperlevel": 40,
@@ -51,7 +51,7 @@
 						"Upgrade1MaxAmmo": [2, 2, 2, 2, 2, 2, 2],
 						"Upgrade2MaxAmmo": [3, 3, 3, 3, 3, 3, 3],
 						"SphereDuration": [6, 6, 6, 6, 6, 6, 6],
-						"BaseDamage": [45, 80, 115, 150, 185, 220, 255]
+						"BaseDamage": [55, 90, 125, 160, 195, 230, 265]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -62,7 +62,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.65,
+									"mCoefficient": 0.7,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

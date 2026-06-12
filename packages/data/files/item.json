@@ -1,5 +1,5 @@
 {
-	"version": "16.11.1",
+	"version": "16.12.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -604,7 +604,8 @@
 			},
 			"effectAmount": [8, 5, 45, 0.66],
 			"itemGroups": [
-				"Items/ItemGroups/DoransItems"
+				"Items/ItemGroups/DoransItems",
+				"{5c63b904}"
 			],
 			"categories": {
 				"tank": true,
@@ -674,7 +675,8 @@
 				}
 			},
 			"itemGroups": [
-				"Items/ItemGroups/DoransItems"
+				"Items/ItemGroups/DoransItems",
+				"{5c63b904}"
 			],
 			"categories": {
 				"mage": true
@@ -847,7 +849,8 @@
 				"BonusDamageToMinions": 5
 			},
 			"itemGroups": [
-				"Items/ItemGroups/DoransItems"
+				"Items/ItemGroups/DoransItems",
+				"{5c63b904}"
 			],
 			"categories": {
 				"tank": true
@@ -888,7 +891,7 @@
 		"2020": {
 			"id": "2020",
 			"name": "The Brutalizer",
-			"searchString": "thebrutalizer;bloodstone;damage;cooldownreduction;armorpenetration;attackdamage",
+			"searchString": "thebrutalizer;damage;cooldownreduction;armorpenetration;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 25,
 				"AbilityHasteMod": 10,
@@ -1047,7 +1050,8 @@
 			},
 			"effectAmount": [0, 2.5],
 			"itemGroups": [
-				"Items/ItemGroups/StopwatchGroup"
+				"Items/ItemGroups/StopwatchGroup",
+				"{4c987493}"
 			],
 			"categories": {
 				"mage": true
@@ -1646,7 +1650,7 @@
 		"2523": {
 			"id": "2523",
 			"name": "Hexoptics C44",
-			"searchString": "hexopticsc;damage;criticalstrike;criticalstrikechance;attackdamage",
+			"searchString": "hexopticsc;snowbow;damage;criticalstrike;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 55
@@ -1854,7 +1858,9 @@
 			"itemGroups": [
 				"{f4405fb4}",
 				"Items/ItemGroups/TearItems",
-				"{f842a497}"
+				"{f842a497}",
+				"{6dcade42}",
+				"{20cbfb4d}"
 			],
 			"categories": {
 				"support": true
@@ -1904,7 +1910,8 @@
 				}
 			},
 			"itemGroups": [
-				"{f842a497}"
+				"{f842a497}",
+				"{6dcade42}"
 			],
 			"categories": {
 				"support": true
@@ -1944,7 +1951,8 @@
 			"itemGroups": [
 				"Items/ItemGroups/TearItems",
 				"Items/ItemGroups/LifelineItems",
-				"{2bb000ae}"
+				"{2bb000ae}",
+				"{20cbfb4d}"
 			],
 			"categories": {
 				"mage": true
@@ -1993,7 +2001,9 @@
 			},
 			"itemGroups": [
 				"Items/ItemGroups/TearItems",
-				"{29affd88}"
+				"{29affd88}",
+				"{33df72dd}",
+				"{20cbfb4d}"
 			],
 			"categories": {
 				"marksman": true,
@@ -2265,7 +2275,8 @@
 				}
 			},
 			"itemGroups": [
-				"{aba3fe3b}"
+				"{aba3fe3b}",
+				"{3bbe1bdd}"
 			],
 			"__replacedVariables": {
 				"{52d90ad0}": "CritPerStackMelee",
@@ -2301,7 +2312,8 @@
 			},
 			"itemGroups": [
 				"{aaa3fca8}",
-				"Items/ItemGroups/LastWhisper"
+				"Items/ItemGroups/LastWhisper",
+				"{8875daa8}"
 			],
 			"categories": {
 				"marksman": true
@@ -2415,7 +2427,8 @@
 			},
 			"itemGroups": [
 				"{2bb000ae}",
-				"Items/ItemGroups/LifelineItems"
+				"Items/ItemGroups/LifelineItems",
+				"{33df72dd}"
 			],
 			"categories": {
 				"mage": true
@@ -2526,7 +2539,8 @@
 				}
 			},
 			"itemGroups": [
-				"{29affd88}"
+				"{29affd88}",
+				"{33df72dd}"
 			],
 			"categories": {
 				"fighter": true,
@@ -3096,7 +3110,8 @@
 				}
 			},
 			"itemGroups": [
-				"Items/ItemGroups/TearItems"
+				"Items/ItemGroups/TearItems",
+				"{20cbfb4d}"
 			],
 			"categories": {
 				"mage": true,
@@ -3299,7 +3314,8 @@
 				}
 			},
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true
@@ -3349,7 +3365,8 @@
 			},
 			"itemGroups": [
 				"{20adb0c6}",
-				"{87f1e822}"
+				"{87f1e822}",
+				"{8875daa8}"
 			],
 			"categories": {
 				"tank": true,
@@ -3392,7 +3409,8 @@
 				}
 			},
 			"itemGroups": [
-				"{87f1e822}"
+				"{87f1e822}",
+				"{8875daa8}"
 			],
 			"categories": {
 				"tank": true,
@@ -3460,7 +3478,8 @@
 				}
 			},
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true,
@@ -3838,7 +3857,8 @@
 				}
 			},
 			"itemGroups": [
-				"{9e92a0a3}"
+				"{9e92a0a3}",
+				"{3bbe1bdd}"
 			],
 			"categories": {
 				"marksman": true
@@ -3937,7 +3957,8 @@
 				"BonusDamage": 40
 			},
 			"itemGroups": [
-				"{ad94f6d7}"
+				"{ad94f6d7}",
+				"{3bbe1bdd}"
 			],
 			"categories": {
 				"marksman": true
@@ -3978,7 +3999,8 @@
 				}
 			},
 			"itemGroups": [
-				"{ac94f544}"
+				"{ac94f544}",
+				"{3bbe1bdd}"
 			],
 			"categories": {
 				"marksman": true
@@ -4061,7 +4083,8 @@
 			"effectAmount": [40, 45, 10, -0.1, 8, 2, 0, 0],
 			"itemGroups": [
 				"{103d7a0f}",
-				"{3fcdbdac}"
+				"{3fcdbdac}",
+				"{1e7a50ee}"
 			],
 			"categories": {
 				"mage": true
@@ -4619,6 +4642,9 @@
 				"GrievousAmount": 0.4
 			},
 			"effectAmount": [3],
+			"itemGroups": [
+				"{8875daa8}"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -5526,7 +5552,8 @@
 			"effectAmount": [0, 2.5, 120],
 			"itemGroups": [
 				"Items/ItemGroups/BuildsFromStopwatchGroup",
-				"{9b3188ed}"
+				"{9b3188ed}",
+				"{4c987493}"
 			],
 			"categories": {
 				"mage": true
@@ -5644,7 +5671,8 @@
 				"GrievousDuration": 3
 			},
 			"itemGroups": [
-				"{0938f1dc}"
+				"{0938f1dc}",
+				"{8875daa8}"
 			],
 			"categories": {
 				"mage": true,
@@ -6666,7 +6694,8 @@
 				}
 			},
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true,
@@ -6799,7 +6828,8 @@
 			"effectAmount": [0, 0, 0, 40],
 			"itemGroups": [
 				"{c6c2af47}",
-				"{3fcdbdac}"
+				"{3fcdbdac}",
+				"{1e7a50ee}"
 			],
 			"categories": {
 				"assassin": true
@@ -7085,7 +7115,8 @@
 			"effectAmount": [5],
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"Items/ItemGroups/DoransItems"
+				"Items/ItemGroups/DoransItems",
+				"{4dbc5e26}"
 			],
 			"categories": {
 				"support": true
@@ -7124,7 +7155,9 @@
 			},
 			"effectAmount": [5],
 			"itemGroups": [
-				"Items/ItemGroups/GoldItems"
+				"Items/ItemGroups/GoldItems",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true
@@ -7160,7 +7193,9 @@
 			},
 			"effectAmount": [9],
 			"itemGroups": [
-				"Items/ItemGroups/GoldItems"
+				"Items/ItemGroups/GoldItems",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true
@@ -7228,7 +7263,9 @@
 			},
 			"effectAmount": [9],
 			"itemGroups": [
-				"Items/ItemGroups/GoldItems"
+				"Items/ItemGroups/GoldItems",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true
@@ -7291,7 +7328,9 @@
 			},
 			"effectAmount": [9],
 			"itemGroups": [
-				"Items/ItemGroups/GoldItems"
+				"Items/ItemGroups/GoldItems",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true
@@ -7341,7 +7380,9 @@
 			},
 			"effectAmount": [9],
 			"itemGroups": [
-				"Items/ItemGroups/GoldItems"
+				"Items/ItemGroups/GoldItems",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true
@@ -7400,7 +7441,9 @@
 			"effectAmount": [9],
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"{8b55a7b3}"
+				"{8b55a7b3}",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true
@@ -7429,6 +7472,9 @@
 				"GrievousAmount": 0.4,
 				"GrievousDuration": 3
 			},
+			"itemGroups": [
+				"{8875daa8}"
+			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -7933,7 +7979,8 @@
 				"GrievousDuration": 3
 			},
 			"itemGroups": [
-				"{b458712e}"
+				"{b458712e}",
+				"{8875daa8}"
 			],
 			"categories": {
 				"fighter": true,
@@ -8206,7 +8253,8 @@
 			},
 			"itemGroups": [
 				"{b45aafc5}",
-				"Items/ItemGroups/LegendaryClearingItems"
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true
@@ -9162,7 +9210,8 @@
 				}
 			},
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"assassin": true

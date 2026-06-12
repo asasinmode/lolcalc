@@ -51,7 +51,7 @@
 					"dataValues": {
 						"BaseDamageMax": [10, 80, 150, 220, 290, 360, 430],
 						"ChargeMultiplierInverse": [0.667, 0.667, 0.667, 0.667, 0.667, 0.667, 0.667],
-						"tADRatioMax": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"tADRatioMax": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
 						"MaxChargeAmp": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"FalloffPercent": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
 						"ManaRefund": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -129,7 +129,7 @@
 						"MaxMonsterDamage": [120, 120, 120, 120, 120, 120, 120],
 						"BasePercentHPPerStack": [0.025, 0.03, 0.035, 0.04, 0.045, 0.05, 0.055],
 						"QEmpowerMonsterCap": [360, 360, 360, 360, 360, 360, 360],
-						"VarusWOnHitDamage": [-1, 8, 17, 26, 35, 44, 53],
+						"VarusWOnHitDamage": [-5, 4, 13, 22, 31, 40, 49],
 						"CDRPerBlightStack": [0.13, 0.13, 0.13, 0.13, 0.13, 0.13, 0.13],
 						"VarusWMaxChargeHPDamage": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"OnHitRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
@@ -330,14 +330,14 @@
 					"image": "assets/characters/varus/hud/icons2d/varuspassive.png",
 					"tooltip": "When Varus kills an enemy, he gains <attackSpeed>@MinionAS@ Attack Speed</attackSpeed>, <scaleAD>@MinionAD@ Attack Damage</scaleAD>, and <scaleAP>@MinionAP@ Ability Power</scaleAP> for @ASDuration@ seconds.<br><br>Champion takedowns grant <attackSpeed>@ChampionAS@ Attack Speed</attackSpeed> that can bypass the Attack Speed cap, <scaleAD>@ChampionAD@ Attack Damage</scaleAD>, and <scaleAP>@ChampionAP@ Ability Power</scaleAP> instead.",
 					"dataValues": {
-						"PassiveAS": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"PassiveAS": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"PassiveASMinion": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"PassiveASRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"PassiveASRatioMinion": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
-						"AStoADMinion": [10, 10, 10, 10, 10, 10, 10],
-						"AStoAPMinion": [10, 10, 10, 10, 10, 10, 10],
-						"AStoADChampion": [25, 25, 25, 25, 25, 25, 25],
-						"AStoAPChampion": [25, 25, 25, 25, 25, 25, 25],
+						"AStoADMinion": [11, 11, 11, 11, 11, 11, 11],
+						"AStoAPMinion": [11, 11, 11, 11, 11, 11, 11],
+						"AStoADChampion": [33, 33, 33, 33, 33, 33, 33],
+						"AStoAPChampion": [33, 33, 33, 33, 33, 33, 33],
 						"NewASCap": [3.33, 3.33, 3.33, 3.33, 3.33, 3.33, 3.33]
 					},
 					"spellCalculations": {
