@@ -40,7 +40,7 @@ export interface IVariableMeta<T = any> {
 	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it. If the value is an array of icons, no `(...icons)` will be appended when replace's `isExtended: true`, the icons are to be manually added in `extendedEquals` in that case
 	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
 	 */
-	statIconKey?: IVariableMetaStatIcon | IVariableMetaStatIcon[];
+	scalesWithStatIcon?: IVariableMetaStatIcon | IVariableMetaStatIcon[];
 	/**
 	 * when present, formatted variable will have `= (${extendedEquals})` appended to in the extended version (holding shift)
 	 * if `extendedEquals` is an object, it's assumed to have different info values for melee/ranged and will be formatted accordingly in `replaceGameVariables`
@@ -478,7 +478,7 @@ export function replaceGameVariables(
 	variableValueFunctionParams.accessedVariables ??= new Map();
 
 	/* capture `@VariableName@` followed by
-	 * - optional `%` which will be put back after replacing
+	 * - optional `%` which will be put back after replacing (dawncore, maybe others too)
 	 * - another optional ` (%i:iconName%)` which the replacement will fallback to if it exists and no `ISpecificVariables.meta.statIconKey` is defined */
 	const replaced = text.replace(/@(.+?)@(%?)(?:\s*\((%[^)\s]+%)\))?/g, (_, name, optionalPercent, varIcon) => {
 		let variableName = name;
@@ -542,10 +542,12 @@ export function replaceGameVariables(
 					: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
 				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
-		if (meta?.statIconKey || varIcon) {
-			const iconStr = (typeof meta?.statIconKey === 'string'
-				? meta?.statIconKey ? `%i:${STAT_ICON[meta.statIconKey]}%` : ''
-				: options.isExtended ? '' : meta?.statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon || '';
+		const statIconKey = meta?.scalesWithStatIcon;
+
+		if (statIconKey || varIcon) {
+			const iconStr = (typeof statIconKey === 'string'
+				? statIconKey ? `%i:${STAT_ICON[statIconKey]}%` : ''
+				: options.isExtended ? '' : statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon || '';
 
 			(extendedEquals && options.isExtended)
 				? metaSuffix = ` = (${extendedEquals}${iconStr})`

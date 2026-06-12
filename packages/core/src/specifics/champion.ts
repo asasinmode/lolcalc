@@ -265,7 +265,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 				meta: {
 					AttackSpeedPerStack: {
-						statIconKey: 'level',
+						scalesWithStatIcon: 'level',
 						isPercentage: true,
 						resultsIsPercentage: true,
 						multiplier: 100,
@@ -280,7 +280,7 @@ export const CHAMPION_SPECIFICS = {
 						},
 					},
 					MaxBonusAttackSpeed: {
-						statIconKey: 'level',
+						scalesWithStatIcon: 'level',
 						isPercentage: true,
 						resultsIsPercentage: true,
 						multiplier: 100,
@@ -630,7 +630,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 			meta: {
 				PassiveManaCalcTooltip: {
-					statIconKey: 'abilityPower',
+					scalesWithStatIcon: 'abilityPower',
 					multiplier: 100,
 					roundReplaced: 2,
 					resultsIsPercentage: true,
