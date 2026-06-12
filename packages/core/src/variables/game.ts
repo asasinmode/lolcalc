@@ -801,7 +801,7 @@ function calculatesFromPartExtendedEquals(
 		? part.value[preferRangedValue ? 1 : 0]!
 		: part.value;
 	const multiplier = part.isPercentage ? 100 : 1;
-	const formattedValue = typeof value === 'number' ? value * multiplier : `${value.min * multiplier} - ${value.max * multiplier}`;
+	const formattedValue = typeof value === 'number' ? roundVariable(value * multiplier) : `${roundVariable(value.min * multiplier, 1)} - ${roundVariable(value.max * multiplier, 1)}`;
 	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${part.isPercentage ? '%' : ''}${tag ? `</${tag}>` : ''}`;
 }
 
@@ -928,10 +928,14 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	StatByNamedDataValueCalculationPart(variable: IGameVariablesByType['StatByNamedDataValueCalculationPart'], whole, meta) {
 		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
-		const dataValue = whole.dataValues?.[variable.mDataValue];
+		let dataValue = whole.dataValues?.[variable.mDataValue];
 		meta?.accessedVariables?.add(variable.mDataValue);
 
 		if (dataValue !== undefined) {
+			if (Array.isArray(dataValue)) {
+				dataValue = dataValue[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+			}
+
 			if (statValue !== undefined) {
 				return {
 					value: statValue.value * dataValue,
@@ -965,10 +969,6 @@ export const VARIABLE_CALCULATION_FNS = {
 		let multiplier = 1;
 		if ('mMultiplier' in variable) {
 			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta);
-			/* expected to happen for champions */
-			if (Array.isArray(multiplier) && 'abilityLevel' in meta.variableValueParams) {
-				multiplier = multiplier[meta.variableValueParams.abilityLevel ?? 1];
-			}
 		}
 		meta.variableValueParams.accessedVariables ??= new Map();
 		const rv = meta.variableValueFn(variable.mModifiedGameCalculation, meta.variableValueParams);
@@ -1202,7 +1202,13 @@ function resolveMMultiplier(
 		return mNumber;
 	} else if (mDataValue) {
 		meta?.accessedVariables?.add(variable.mDataValue);
-		return whole.dataValues?.[mDataValue];
+		const value = whole.dataValues?.[mDataValue];
+
+		/* expected to happen for champions */
+		if (Array.isArray(value)) {
+			return value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+		}
+		return value;
 	}
 	console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
 	return 0;
