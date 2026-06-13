@@ -550,15 +550,20 @@ export function replaceGameVariables(
 		// TODO TMP while extendedEquals is generated now in most cases, the items manual ones are kept for the time of implementing champion passives to make sure any changes made to generating preserve what the handmade item ones look like
 		if (calculatesFrom?.length) {
 			const isMeleeRanged = calculatesFrom.some(part => Array.isArray(part.value));
-			let generatedEE = calculatesFromPartExtendedEquals(calculatesFrom[0]!, isMeleeRanged);
+			const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1;
+			let generatedEE = calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, isMeleeRanged);
 			generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
 			for (const part of calculatesFrom.slice(1)) {
-				generatedEE += ` ${calculatesFromPartExtendedEquals(part, isMeleeRanged, true)}`;
+				generatedEE += ` ${calculatesFromPartExtendedEquals(part, insertIcon, isMeleeRanged, true)}`;
 				if (part.stat && part.stat !== 'const') {
 					generatedStatIcon ??= [];
 					generatedStatIcon.push(part.stat);
 				}
 			}
+			if (Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
+				generatedStatIcon = generatedStatIcon[0];
+			}
+
 			if (generatedEE !== extendedEquals) {
 				console.warn('new extended different', {
 					variableName,
@@ -568,9 +573,6 @@ export function replaceGameVariables(
 			} else {
 				console.log('generated extended same', variableName, generatedEE);
 			}
-			if (Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
-				generatedStatIcon = generatedStatIcon[0];
-			}
 		} else if (extendedEquals) {
 			console.warn('didnt generate extended', { variableName, extendedEquals }, calculatesFrom);
 		}
@@ -578,8 +580,10 @@ export function replaceGameVariables(
 		if (
 			(statIconKey && !generatedStatIcon)
 			|| (generatedStatIcon && !statIconKey)
-			|| (Array.isArray(statIconKey) && !(Array.isArray(generatedStatIcon) && statIconKey.every((icon, i) => generatedStatIcon[i] !== icon)))
-			|| statIconKey !== generatedStatIcon
+			|| (Array.isArray(statIconKey)
+				? !(Array.isArray(generatedStatIcon) && statIconKey.every((icon, i) => generatedStatIcon[i] === icon))
+				: statIconKey !== generatedStatIcon
+			)
 		) {
 			console.warn('new icon diff', { variableName, statIconKey, generatedStatIcon }, calculatesFrom);
 		} else if (generatedStatIcon) {
@@ -795,6 +799,7 @@ const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IChampionStatName, string>> =
 
 function calculatesFromPartExtendedEquals(
 	part: ICalculatesFromPart,
+	insertIcon = false,
 	preferRangedValue = false,
 	prependPlus = false,
 ): string {
@@ -803,8 +808,10 @@ function calculatesFromPartExtendedEquals(
 		? part.value[preferRangedValue ? 1 : 0]!
 		: part.value;
 	const multiplier = part.isPercentage ? 100 : 1;
+	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
+	const type = part.type === 'baseOnLevel' ? ' base ' : part.type === 'bonus' ? ' bonus ' : '';
 	const formattedValue = typeof value === 'number' ? roundVariable(value * multiplier) : `${roundVariable(value.min * multiplier, 1)} - ${roundVariable(value.max * multiplier, 1)}`;
-	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${part.isPercentage ? '%' : ''}${tag ? `</${tag}>` : ''}`;
+	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${part.isPercentage ? '%' : ''}${type}${icon ? `%i:${icon}%` : ''}${tag ? `</${tag}>` : ''}`;
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */
