@@ -98,7 +98,7 @@ const hullbreakerSpecifics = {
 	structureHpRatio: (ITEMS_BY_NAME.hullbreaker?.dataValues as any)[ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamageVSStructures.mFormulaParts[1]!.mDataValue!],
 	structureRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.MaxStackDamageVSStructures.mRangedMultiplier.mNumber,
 	meleeBonusMinionResistsLvl1: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value,
-	meleeBonusMinionResistsLvl18: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value + ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mBonusPerLevelAtAndAfter! * 18 + 1 - (ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mLevel!),
+	meleeBonusMinionResistsLvl18: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mLevel1Value + ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mBonusPerLevelAtAndAfter! * (CHAMPION_LEVEL.max + 1 - (ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mFormulaParts[0]!.mBreakpoints[0]?.mLevel!)),
 	bonusMinionResistsRangedModifier: ITEMS_BY_NAME.hullbreaker?.itemCalculations.BonusMinionResists.mRangedMultiplier.mNumber,
 };
 
@@ -2826,12 +2826,12 @@ export const ITEM_SPECIFICS = {
 					},
 				},
 				BonusMinionResists: {
-					scalesWithStatIcon: ['level'],
+					scalesWithStatIcon: 'level',
 					extendedEquals: {
-						prefix: '',
-						meleeValue: `<const>${hullbreakerSpecifics.meleeBonusMinionResistsLvl1} - ${hullbreakerSpecifics.meleeBonusMinionResistsLvl18}%i:${STAT_ICON.level}%</const>`,
-						rangedValue: `<const>${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl1 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)} - ${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl18 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)}%i:${STAT_ICON.level}%</const>`,
-						suffix: '',
+						prefix: '<const>',
+						meleeValue: `${hullbreakerSpecifics.meleeBonusMinionResistsLvl1} - ${hullbreakerSpecifics.meleeBonusMinionResistsLvl18}`,
+						rangedValue: `${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl1 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)} - ${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl18 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)}`,
+						suffix: '</const>',
 					},
 				},
 			},
