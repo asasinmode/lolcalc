@@ -1,6 +1,6 @@
 import type { TRunes } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
-import type { ICalculatedDynamicVariable, ICalculatedDynamicVariables, ISpecificVariables } from '.';
+import type { ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
 import { addTenacity } from '../calculate/util.ts';
@@ -93,12 +93,14 @@ export const RUNE_SPECIFICS = {
 			calculateValue: (self: DamageSource): number => 10 + (180 - 10) / 17 * (self.level.value - 1),
 			variables: defineVariables({
 				known: { f1: [] },
-				calculate(self): ICalculatedDynamicVariables<'f1'> {
+				calculate(self): {
+					f1: IVariableValueResult;
+				} {
 					return {
 						/** the hp gained on current level */
 						f1: {
 							value: RUNE_SPECIFICS.shards.healthscaling.calculateValue(self),
-						} satisfies ReturnType<NonNullable<ISpecificVariables['calculate']>>[string] as ICalculatedDynamicVariable,
+						},
 					};
 				},
 			}),

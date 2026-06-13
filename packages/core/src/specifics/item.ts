@@ -4,7 +4,7 @@
 
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
-import type { ICalculatedDynamicVariable, IInternalItemDataOf, ISpecificVariables } from '.';
+import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
@@ -428,7 +428,7 @@ export const ITEM_SPECIFICS = {
 				BonusCrit: [],
 			},
 			calculate(self): {
-				BonusCrit: ICalculatedDynamicVariable;
+				BonusCrit: IVariableValueResult;
 			} {
 				return {
 					BonusCrit: {
@@ -1335,7 +1335,7 @@ export const ITEM_SPECIFICS = {
 				DamageCalc: [],
 			},
 			calculate(self): {
-				DamageCalc: ICalculatedDynamicVariable;
+				DamageCalc: IVariableValueResult;
 			} {
 				const { shipwrecker = 0 } = self.internalItemData.value;
 				/* according to the [wiki](https://wiki.leagueoflegends.com/en-us/Dead_Man's_Plate) the ad ratio also scales with stacks reaching 100% base at 100 stacks */
@@ -3173,13 +3173,11 @@ export const ITEM_SPECIFICS = {
 				lolcalcChampRange: [],
 			},
 			calculate(self) {
+				const melee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: false });
+				const ranged = itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: true });
+
 				return {
-					lolcalcChampRange: {
-						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: true }).value as number,
-						],
-					},
+					lolcalcChampRange: [melee, ranged],
 				};
 			},
 			meta: {

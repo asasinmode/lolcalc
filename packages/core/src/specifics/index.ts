@@ -1,5 +1,5 @@
 import type { IChampionId } from '@lolcalc/data/types';
-import type { TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, TItemNameToId } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game';
@@ -83,11 +83,38 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>
 		: never;
 
-export interface ICalculatedDynamicVariable {
-	value: string | number | [number | undefined, number | undefined];
+export interface ICalculatesFromPart {
+	stat?: 'const' | 'level' | Exclude<IChampionStatName, 'slowResist'>;
+	type?: 'baseOnLevel' | 'bonus' | 'total';
+	/** when array, expected to be for melee/ranged values */
+	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number }, { min: number; max: number }];
+	isPercentage?: boolean;
 }
 
-export type ICalculatedDynamicVariables<T extends string = string> = Record<T, ICalculatedDynamicVariable>;
+export interface IVariableValueResult {
+	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
+	value?: string | number | [number | string | undefined, number | string | undefined];
+	/**
+	 * if `true`, the variable is different for melee and ranged champions and the calculation target's range is unknown
+	 * if `0`, same as `true` except the target is melee
+	 * if `1`, same as `true` except the target is ranged
+	 */
+	isMeleeRanged?: true | 0 | 1;
+	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
+	actualVariableName?: string;
+	/** all values the variable lists, like champion Q levels 0-6 */
+	allValues?: number[];
+	meta?: IVariableMeta;
+	/**
+	 * usually when value was calculated in some way and might have floating points that should be rounded in description
+	 * if `number`, assumed to be `roundVariable`'s `precision` parameter
+	 */
+	roundReplaced?: boolean | number;
+	/** whether `ISpecificVariables.uninteresting` includes it */
+	isUninteresting?: boolean;
+	/** components the variable was calculated from, used for creating `extendedEquals` */
+	calculatesFrom?: ICalculatesFromPart[];
+}
 
 /** the related calculations and meta of a game specific's (item/champion/rune/...) variables */
 export interface ISpecificVariables<
@@ -113,7 +140,13 @@ export interface ISpecificVariables<
 	 * if `known` is empty `[]`, the value will be `0`
 	 * if variable is named `lolcalcChampRange`, value will be `[value[0] ?? 0, value[1] ?? 0]` so it's detected as a melee/ranged variable in `replaceGameVariables`
 	 */
-	default?: NoInfer<Partial<Record<DetectedVariables, Pick<ICalculatedDynamicVariable, 'value'>>> & Record<T, Pick<ICalculatedDynamicVariable, 'value'>>>;
+	default?: NoInfer<Partial<Record<
+		DetectedVariables,
+		Pick<IVariableValueResult, 'value'> | [Pick<IVariableValueResult, 'value'>, Pick<IVariableValueResult, 'value'>]
+	>> & Record<
+		T,
+		Pick<IVariableValueResult, 'value'> | [Pick<IVariableValueResult, 'value'>, Pick<IVariableValueResult, 'value'>]
+	>>;
 	/**
 	 * calculate any dynamic variables used in the ability's description
 	 *
@@ -131,7 +164,13 @@ export interface ISpecificVariables<
 	 * }
 	 * ```
 	 */
-	calculate?: (self: DamageSource<Id>, damageTarget?: DamageSource) => NoInfer<Partial<Record<DetectedVariables, ICalculatedDynamicVariable>>> & Record<T, ICalculatedDynamicVariable>;
+	calculate?: (self: DamageSource<Id>, damageTarget?: DamageSource) => NoInfer<Partial<Record<
+		DetectedVariables,
+		IVariableValueResult | [IVariableValueResult, IVariableValueResult]
+	>>> & Record<
+		T,
+		IVariableValueResult | [IVariableValueResult, IVariableValueResult]
+	>;
 	/** any dynamic variables' meta information like icon of the stat they scale from. */
 	meta?: NoInfer<Partial<Record<T | DetectedVariables, IVariableMeta<IGameVariableValueParameters[VariableType]>>>>;
 	/**

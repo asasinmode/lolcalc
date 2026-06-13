@@ -1,7 +1,7 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { IChampionStatName, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
-import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
+import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } from '../specifics/index';
 
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { CHAMPION_LEVEL } from '@lolcalc/shared';
@@ -66,39 +66,6 @@ export interface IVariableMeta<T = any> {
 	isCustom?: boolean;
 }
 
-interface ICalculatesFromPart {
-	stat?: 'const' | 'level' | Exclude<IChampionStatName, 'slowResist'>;
-	type?: 'baseOnLevel' | 'bonus' | 'total';
-	/** when array, expected to be for melee/ranged values */
-	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number }, { min: number; max: number }];
-	isPercentage?: boolean;
-}
-
-export interface IVariableValueResult {
-	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
-	value?: ICalculatedDynamicVariable['value'];
-	/**
-	 * if `true`, the variable is different for melee and ranged champions and the calculation target's range is unknown
-	 * if `0`, same as `true` except the target is melee
-	 * if `1`, same as `true` except the target is ranged
-	 */
-	isMeleeRanged?: true | 0 | 1;
-	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
-	actualVariableName?: string;
-	/** all values the variable lists, like champion Q levels 0-6 */
-	allValues?: number[];
-	meta?: IVariableMeta;
-	/**
-	 * usually when value was calculated in some way and might have floating points that should be rounded in description
-	 * if `number`, assumed to be `roundVariable`'s `precision` parameter
-	 */
-	roundReplaced?: boolean | number;
-	/** whether `ISpecificVariables.uninteresting` includes it */
-	isUninteresting?: boolean;
-	/** components the variable was calculated from, used for creating `extendedEquals` */
-	calculatesFrom?: ICalculatesFromPart[];
-}
-
 /**
  * `dynamicVariables` can be either
  * - `ISpecificDynamicVariables.known` when variables are resolved in `updateData` script or a description is created without a `DamageSource` and it needs known/unknown variables to be valid. See `replaceGameVariables`' `options.overrideDynamicVariables`
@@ -106,7 +73,7 @@ export interface IVariableValueResult {
  * - the return value of `ISpecificDynamicVariables.calculate`'s return value when actually calculating and using the values
  */
 export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting'> {
-	values?: Record<string, ICalculatedDynamicVariable>;
+	values?: Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>;
 }
 
 interface IBaseVariableParams {
@@ -153,17 +120,40 @@ export function itemVariableValue(
 	}
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
+		const dynamicValue = dynamicVariables.values[variable];
 		rv.roundReplaced = true;
-		Object.assign(rv, dynamicVariables.values[variable]);
-		if (Array.isArray(rv.value)) {
+		if (Array.isArray(dynamicValue)) {
 			if (isRanged === undefined) {
 				rv.isMeleeRanged = true;
+				if (Array.isArray(dynamicValue[0].value) || Array.isArray(dynamicValue[1].value)) {
+					console.error('[itemVariableValue] dynamic variable got nested melee/ranged values', item.name, variable, dynamicValue);
+				} else {
+					rv.value = [dynamicValue[0].value, dynamicValue[1].value];
+					if (dynamicValue[0].calculatesFrom?.length || dynamicValue[1].calculatesFrom?.length) {
+						if (dynamicValue[0].calculatesFrom?.length === dynamicValue[1].calculatesFrom?.length) {
+							addCalculatesFrom(rv.calculatesFrom, dynamicValue[0].calculatesFrom!, dynamicValue[1].calculatesFrom!);
+						} else {
+							console.warn('[itemVariableValue] detected dynamic melee/ranged variable but got different calculatesFrom lengths', item.name, variable, dynamicValue[0], dynamicValue[1]);
+						}
+					}
+				}
 			} else if (isRanged) {
 				rv.isMeleeRanged = 1;
-				rv.value = rv.value[1];
+				rv.value = dynamicValue[1].value;
+				if (dynamicValue[1].calculatesFrom?.length) {
+					addCalculatesFrom(rv.calculatesFrom, dynamicValue[1].calculatesFrom);
+				}
 			} else {
 				rv.isMeleeRanged = 0;
-				rv.value = rv.value[0];
+				rv.value = dynamicValue[0].value;
+				if (dynamicValue[0].calculatesFrom?.length) {
+					addCalculatesFrom(rv.calculatesFrom, dynamicValue[0].calculatesFrom);
+				}
+			}
+		} else {
+			rv.value = dynamicValue.value;
+			if (dynamicValue.calculatesFrom?.length) {
+				addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom);
 			}
 		}
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
@@ -191,7 +181,7 @@ export function itemVariableValue(
 				if (melee.calculatesFrom?.length === ranged.calculatesFrom?.length) {
 					addCalculatesFrom(rv.calculatesFrom, melee.calculatesFrom!, ranged.calculatesFrom!);
 				} else {
-					console.warn('[itemVariableValue] detected melee/ranged variable but only got calculatesFrom for one', item.name, variable, melee, ranged);
+					console.warn('[itemVariableValue] detected melee/ranged variable but got different calculatesFrom lengths', item.name, variable, melee, ranged);
 				}
 			}
 		} else {
@@ -650,15 +640,33 @@ export function replaceGameVariables(
 				return `${tagWrapStart}<unknown>@${replaceWithName ? (meta?.displayedName ?? variableName) : name}@</unknown>${tagWrapEnd}`;
 			}
 
-			const baseValue = [roundVariable(variable[0]! * multiplier), roundVariable(variable[1]! * multiplier)] as [number, number];
+			const isV1Number = typeof variable[0] === 'number';
+			const isV2Number = typeof variable[1] === 'number';
+
+			const baseValue = [
+				isV1Number ? roundVariable(variable[0] as number * multiplier) : variable[0],
+				isV2Number ? roundVariable(variable[1] as number * multiplier) : variable[1],
+			] as [number, number];
 
 			if (meta?.type && modifyVariableFunctions[meta.type]) {
-				variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[0]!);
-				variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[1]!);
+				if (isV1Number) {
+					variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[0]!);
+				} else {
+					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[0]);
+				}
+				if (isV2Number) {
+					variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[1]!);
+				} else {
+					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[1]);
+				}
 			}
 
-			variable[0] = roundVariable(variable[0]! * multiplier);
-			variable[1] = roundVariable(variable[1]! * multiplier);
+			if (isV1Number) {
+				variable[0] = roundVariable(variable[0] as number * multiplier);
+			}
+			if (isV2Number) {
+				variable[1] = roundVariable(variable[1] as number * multiplier);
+			}
 
 			variables.set(variableName, {
 				baseValue,
@@ -670,16 +678,20 @@ export function replaceGameVariables(
 			return replaceWithName
 				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${(meta?.displayedName ?? variableName)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
-					typeof roundReplaced === 'number'
-						? roundVariable(variable[0], roundReplaced)
-						: roundReplaced
-							? Math.round(variable[0]!)
-							: variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
-					typeof roundReplaced === 'number'
-						? roundVariable(variable[1], roundReplaced)
-						: roundReplaced
-							? Math.round(variable[1]!)
-							: variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
+					isV1Number
+						? (typeof roundReplaced === 'number'
+								? roundVariable(variable[0] as number, roundReplaced)
+								: roundReplaced
+									? Math.round(variable[0] as number)
+									: variable[0])
+						: variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
+					isV2Number
+						? (typeof roundReplaced === 'number'
+								? roundVariable(variable[1] as number, roundReplaced)
+								: roundReplaced
+									? Math.round(variable[1] as number)
+									: variable[1])
+						: variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 		}
 
 		const baseValue = roundVariable(variable * multiplier);
@@ -711,32 +723,44 @@ export function replaceGameVariables(
 	const customVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isCustom);
 	if (customVariables?.length) {
 		for (const [variableName, meta] of customVariables) {
-			let value = dynamicVariables!.values?.[variableName]?.value as number | [number, number] | undefined;
-			if (value !== undefined) {
-				const isArray = Array.isArray(value);
-				let baseValue: number | [number, number];
-				if (isArray) {
-					value = [(value as number[])[0]!, (value as number[])[1]!];
-					value[0] = roundVariable(value[0]);
-					value[1] = roundVariable(value[1]);
-					baseValue = [value[0], value[1]];
+			let dynamicVariable = dynamicVariables!.values?.[variableName];
+			if (dynamicVariable !== undefined) {
+				const dynamicValue = Array.isArray(dynamicVariable) ? [(dynamicVariable as IVariableValueResult[])[0]!.value, (dynamicVariable as IVariableValueResult[])[1]!.value] : dynamicVariable.value;
+				let value: IVariableValueResult['value'] = Number.NaN;
+				let baseValue: number | [number, number] = Number.NaN;
+
+				if (dynamicValue === undefined) {
+					console.warn('[replaceGameVariables] custom got undefined dynamic value', variableName, dynamicVariable);
+				} else if (Array.isArray(dynamicValue)) {
+					if (typeof dynamicValue[0] === 'number' && typeof dynamicValue[1] === 'number') {
+						value = [roundVariable(dynamicValue[0]), roundVariable(dynamicValue[1])];
+						baseValue = [dynamicValue[0], dynamicValue[1]];
+					} else if (Array.isArray(dynamicValue[0]) || Array.isArray(dynamicValue[1])) {
+						console.warn('[replaceGameVariables] custom got nested melee/ranged values', variableName, dynamicVariable);
+					} else {
+						console.warn('[replaceGameVariables] custom ARRAY got non-number values', variableName, dynamicVariable);
+					}
 				} else {
-					value = roundVariable(value as number);
-					baseValue = value;
+					if (typeof dynamicValue === 'number') {
+						value = roundVariable(dynamicValue);
+						baseValue = dynamicValue;
+					} else {
+						console.warn('[replaceGameVariables] custom NOT ARRAY got non-number values', variableName, dynamicVariable);
+					}
 				}
 
-				if (isArray && variableValueFunctionParams.isRanged !== undefined) {
+				if (Array.isArray(value) && variableValueFunctionParams.isRanged !== undefined) {
 					value = variableValueFunctionParams.isRanged
 						? (value as number[])[1]
 						: (value as number[])[0];
 				}
 
 				if (meta?.type && modifyVariableFunctions[meta.type]) {
-					if (isArray) {
+					if (Array.isArray(value)) {
 						(value as number[])[0] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[0]!));
 						(value as number[])[1] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[1]!));
 					} else {
-						(value as number) = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value as number));
+						(dynamicVariable as number) = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, dynamicVariable as number));
 					}
 				}
 
@@ -1069,10 +1093,10 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (typeof rv.value === 'number') {
 			rv.value *= multiplier;
 		} else if (Array.isArray(rv.value)) {
-			if (rv.value[0]) {
+			if (typeof rv.value[0] === 'number') {
 				rv.value[0] *= multiplier;
 			}
-			if (rv.value[1]) {
+			if (typeof rv.value[1] === 'number') {
 				rv.value[1] *= multiplier;
 			}
 		}
