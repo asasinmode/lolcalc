@@ -70,7 +70,7 @@ interface ICalculatesFromPart {
 	stat?: 'const' | 'level' | Exclude<IChampionStatName, 'slowResist'>;
 	type?: 'baseOnLevel' | 'bonus' | 'total';
 	/** when array, expected to be for melee/ranged values */
-	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number } | { min: number; max: number }];
+	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number }, { min: number; max: number }];
 	isPercentage?: boolean;
 }
 
@@ -172,7 +172,9 @@ export function itemVariableValue(
 		rv.value = item.dataValues[variable];
 	} else if (item.stringCalculations?.[variable]) {
 		rv.isMeleeRanged = isRanged === true ? 1 : isRanged === false ? 0 : true;
-		if (isRanged === undefined) {
+		if (!item.stringCalculations[variable].MeleeResult || !item.stringCalculations[variable].RangedResult) {
+			console.error('[itemVariableValue] item has stringCalculations but no expected MeleeResult/RangedResult keys under', item.name, variable, item.stringCalculations);
+		} else if (isRanged === undefined) {
 			const melee = itemVariableValue(item.stringCalculations[variable].MeleeResult.slice(1, -1), {
 				...params,
 				isRanged: false,
@@ -539,7 +541,7 @@ export function replaceGameVariables(
 			: typeof meta?.extendedEquals !== 'object'
 				? meta?.extendedEquals as string
 				: `${meta.extendedEquals.prefix}${isMeleeRanged === true
-					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''} | ${meta.extendedEquals.rangedValue}`
+					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix} | ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
 					: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
 				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
@@ -550,12 +552,20 @@ export function replaceGameVariables(
 
 		// TODO TMP while extendedEquals is generated now in most cases, the items manual ones are kept for the time of implementing champion passives to make sure any changes made to generating preserve what the handmade item ones look like
 		if (calculatesFrom?.length && (calculatesFrom?.length > 1 || calculatesFrom[0]!.stat !== 'const')) {
-			const isMeleeRanged = calculatesFrom.some(part => Array.isArray(part.value));
+			const isEqualsMeleeRanged = isMeleeRanged === true && calculatesFrom.some(part => Array.isArray(part.value));
 			const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1;
-			let generatedEE = calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, isMeleeRanged);
+
+			const defaultEEPreferRangedValue = isMeleeRanged === 1;
 			generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
+			const rawGeneratedEE: [string, string] = [
+				calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, defaultEEPreferRangedValue),
+				isEqualsMeleeRanged ? calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, true) : '',
+			];
 			for (const part of calculatesFrom.slice(1)) {
-				generatedEE += ` ${calculatesFromPartExtendedEquals(part, insertIcon, isMeleeRanged, true)}`;
+				rawGeneratedEE[0] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, defaultEEPreferRangedValue, true)}`;
+				if (isEqualsMeleeRanged) {
+					rawGeneratedEE[1] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, true, true)}`;
+				}
 				if (part.stat && part.stat !== 'const') {
 					generatedStatIcon ??= [];
 					generatedStatIcon.push(part.stat);
@@ -564,6 +574,8 @@ export function replaceGameVariables(
 			if (Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
 				generatedStatIcon = generatedStatIcon[0];
 			}
+
+			const generatedEE = isEqualsMeleeRanged ? `${rawGeneratedEE[0]} | ${rawGeneratedEE[1]}` : rawGeneratedEE[0];
 
 			if (generatedEE !== extendedEquals) {
 				console.warn('new extended different', {
@@ -805,16 +817,14 @@ function calculatesFromPartExtendedEquals(
 	prependPlus = false,
 ): string {
 	const tag = part.stat === 'const' || part.stat === 'level' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
-	const value = Array.isArray(part.value)
-		? part.value[preferRangedValue ? 1 : 0]!
-		: part.value;
-	const multiplier = part.isPercentage ? 100 : 1;
 	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
 	const type = part.type === 'baseOnLevel' ? ' base ' : part.type === 'bonus' ? ' bonus ' : '';
-	const valueSuffix = part.isPercentage ? '%' : '';
-	const formattedValue = typeof value === 'number'
-		? `${part.isPercentage ? roundVariable(value * multiplier, 1) : Math.round(value * multiplier)}${valueSuffix}`
-		: `${part.isPercentage ? roundVariable(value.min * multiplier, 1) : Math.round(value.min * multiplier)}${valueSuffix} - ${part.isPercentage ? roundVariable(value.max * multiplier, 1) : Math.round(value.max * multiplier)}${valueSuffix}`;
+	const formattedValue = formatCalculatesFromPartValue(
+		Array.isArray(part.value)
+			? part.value[preferRangedValue ? 1 : 0]!
+			: part.value,
+		part.isPercentage,
+	);
 
 	return `${
 		tag ? `<${tag}>` : ''
@@ -825,6 +835,21 @@ function calculatesFromPartExtendedEquals(
 	}${
 		tag ? `</${tag}>` : ''
 	}`;
+}
+
+function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, isPercentage?: boolean): string {
+	let multiplier: number, valueSuffix: string;
+	if (isPercentage) {
+		multiplier = 100;
+		valueSuffix = '%';
+	} else {
+		multiplier = 1;
+		valueSuffix = '';
+	}
+
+	return typeof value === 'number'
+		? `${isPercentage ? roundVariable(value * multiplier, 1) : Math.round(value * multiplier)}${valueSuffix}`
+		: `${isPercentage ? roundVariable(value.min * multiplier, 1) : Math.round(value.min * multiplier)}${valueSuffix} - ${isPercentage ? roundVariable(value.max * multiplier, 1) : Math.round(value.max * multiplier)}${valueSuffix}`;
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */
@@ -871,6 +896,9 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (hasMMultiplier) {
 			const multiplier = resolveMMultiplier(variable.mMultiplier as any, whole, meta) ?? 1;
 			rv.value *= multiplier;
+			for (const part of rv.calculatesFrom!) {
+				multiplyCalculatePartValues(part, multiplier);
+			}
 		} else if (hasMRangedMultiplier) {
 			rv.isMeleeRanged = true;
 			const multiplier = resolveMMultiplier(variable.mRangedMultiplier as any, whole, meta);
@@ -879,10 +907,22 @@ export const VARIABLE_CALCULATION_FNS = {
 				rv.value = undefined;
 			} else if (meta?.isRanged === undefined) {
 				rv.isMeleeRanged = true;
-				rv.value = [rv.value, rv.value * (multiplier ?? 1)];
+				rv.value = [rv.value, rv.value * multiplier];
+				for (const part of rv.calculatesFrom!) {
+					if (Array.isArray(part.value)) {
+						console.warn('[mFormulaParts] tried to apply mRangedMultiplier to calculatesFrom part but it already is melee/ranged', variable, rv.value, rv.calculatesFrom);
+					} else if (typeof part.value === 'number') {
+						part.value = [part.value, part.value * multiplier];
+					} else {
+						part.value = [part.value, { min: part.value.min * multiplier, max: part.value.max * multiplier }];
+					}
+				}
 			} else if (meta.isRanged) {
 				rv.isMeleeRanged = 1;
 				rv.value *= multiplier ?? 1;
+				for (const part of rv.calculatesFrom!) {
+					multiplyCalculatePartValues(part, multiplier);
+				}
 			} else {
 				rv.isMeleeRanged = 0;
 			}
@@ -902,7 +942,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			calculatesFrom: [{
 				value: variable.mNumber,
 				stat: 'const',
-			}]
+			}],
 		};
 	},
 	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole, meta) {
