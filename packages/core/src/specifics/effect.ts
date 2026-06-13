@@ -3,8 +3,8 @@ import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IReplacedGameVariable, IVariableValueResult } from '../variables/game.ts';
-import type { IInternalItemDataOf } from './index.ts';
+import type { IReplacedGameVariable } from '../variables/game.ts';
+import type { IInternalItemDataOf, IVariableValueResult } from './index.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 

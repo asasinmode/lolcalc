@@ -1,4 +1,4 @@
-import type { ICalculatedDynamicVariable } from '../specifics';
+import type { IVariableValueResult } from '../specifics';
 
 export interface IReplaceStringtableVariablesRV {
 	replaced: string;
@@ -10,7 +10,7 @@ export function replaceStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},
 	/** either resolved dynamic variables or possible values of dynamic variables, see also the interface's itself documentation */
-	dynamicVariables: { values?: Record<string, ICalculatedDynamicVariable | (number | string)[]> } = {},
+	dynamicVariables: { values?: Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult] | (number | string)[]> } = {},
 	/** whether to wrap unknown variables in `<unknown>` */
 	wrapUnknown = true,
 	unknownStringtableVariables: Map<string, Set<string>> = new Map(),
@@ -32,9 +32,12 @@ export function replaceStringtableVariables(
 				: undefined;
 
 			if (subVariableValue !== undefined) {
-				/** array branch means it's most likely updateGameData and it's being used to get all of the possible values for this variable to save in the champion's stringtable */
+				/** non-IVariableValueResult array branch means it's most likely scripts/updateData and it's being used to get all of the possible values for this variable to save in the champion's stringtable */
 				if (Array.isArray(subVariableValue)) {
-					for (const possibleSubVariableValue of subVariableValue) {
+					const possibleValues = typeof subVariableValue[0] === 'object'
+						? subVariableValue.flatMap(variable => (variable as IVariableValueResult).value)
+						: (subVariableValue as (string | number)[]);
+					for (const possibleSubVariableValue of possibleValues) {
 						const possibleValueVariableName = `${subVariablePrefix}${possibleSubVariableValue}`;
 						if (stringtableVariables.has(possibleValueVariableName)) {
 							continue;

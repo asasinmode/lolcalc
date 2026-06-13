@@ -140,13 +140,7 @@ export interface ISpecificVariables<
 	 * if `known` is empty `[]`, the value will be `0`
 	 * if variable is named `lolcalcChampRange`, value will be `[value[0] ?? 0, value[1] ?? 0]` so it's detected as a melee/ranged variable in `replaceGameVariables`
 	 */
-	default?: NoInfer<Partial<Record<
-		DetectedVariables,
-		Pick<IVariableValueResult, 'value'> | [Pick<IVariableValueResult, 'value'>, Pick<IVariableValueResult, 'value'>]
-	>> & Record<
-		T,
-		Pick<IVariableValueResult, 'value'> | [Pick<IVariableValueResult, 'value'>, Pick<IVariableValueResult, 'value'>]
-	>>;
+	default?: NoInfer<Partial<Record<DetectedVariables, Pick<IVariableValueResult, 'value'>>> & Record<T, Pick<IVariableValueResult, 'value'>>>;
 	/**
 	 * calculate any dynamic variables used in the ability's description
 	 *

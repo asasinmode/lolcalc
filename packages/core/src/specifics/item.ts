@@ -3350,12 +3350,14 @@ export const ITEM_SPECIFICS = {
 					: 1;
 				const damageMultiplier = 1 + (maxMultiplier - 1) * targetMissingHpPercent;
 
+				if (!Array.isArray(damage.value) || damage.value.some(v => typeof v !== 'number')) {
+					console.error(`[ITEM_SPECIFICS kraken slayer] unexpected DamageAmount calculated value`, damage);
+				}
+
 				return {
 					f2: { value: 0 },
 					Damage: {
-						value: Array.isArray(damage.value)
-							? [damage.value[0]! * damageMultiplier, damage.value[1]! * damageMultiplier]
-							: ((damage.value as number) * damageMultiplier),
+						value: [(damage.value as number[])[0]! * damageMultiplier, (damage.value as number[])[1]! * damageMultiplier],
 					},
 				};
 			},
