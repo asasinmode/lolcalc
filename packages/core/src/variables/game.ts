@@ -543,9 +543,11 @@ export function replaceGameVariables(
 				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
 		const statIconKey = meta?.scalesWithStatIcon;
+		// TODO run updateData with logging to see what's changed
 		// TODO convert to stat icons
 		let generatedStatIcon: IChampionStatName[] | IChampionStatName | undefined;
 
+		// TODO TMP while extendedEquals is generated now in most cases, the items manual ones are kept for the time of implementing champion passives to make sure any changes made to generating preserve what the handmade item ones look like
 		if (calculatesFrom?.length) {
 			const isMeleeRanged = calculatesFrom.some(part => Array.isArray(part.value));
 			let generatedEE = calculatesFromPartExtendedEquals(calculatesFrom[0]!, isMeleeRanged);
@@ -933,6 +935,9 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		if (dataValue !== undefined) {
 			if (Array.isArray(dataValue)) {
+				if (dataValue.length === 2) {
+					console.warn('[StatByNamedDataValueCalculationPart] suspiciously melee/ranged looking value having abilityLevel applied to it', { dataValue, statValue }, variable);
+				}
 				dataValue = dataValue[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 			}
 
@@ -1206,6 +1211,9 @@ function resolveMMultiplier(
 
 		/* expected to happen for champions */
 		if (Array.isArray(value)) {
+			if (value.length === 2) {
+				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', { mNumber, mDataValue }, variable);
+			}
 			return value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 		}
 		return value;
