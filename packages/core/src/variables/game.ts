@@ -4,6 +4,7 @@ import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatedDynamicVariable, ISpecificVariables } from '../specifics/index';
 
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+import { CHAMPION_LEVEL } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
 export interface IReplacedGameVariable {
@@ -66,7 +67,7 @@ export interface IVariableMeta<T = any> {
 }
 
 interface ICalculatesFromPart {
-	stat?: 'const' | IChampionStatName;
+	stat?: 'const' | 'level' | IChampionStatName;
 	type?: 'baseOnLevel' | 'bonus' | 'total';
 	/** when array, expected to be for melee/ranged values */
 	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number } | { min: number; max: number }];
@@ -803,15 +804,16 @@ function calculatesFromPartExtendedEquals(
 	preferRangedValue = false,
 	prependPlus = false,
 ): string {
-	const tag = part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
+	const tag = part.stat === 'const' || part.stat === 'level' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
 	const value = Array.isArray(part.value)
 		? part.value[preferRangedValue ? 1 : 0]!
 		: part.value;
 	const multiplier = part.isPercentage ? 100 : 1;
 	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
 	const type = part.type === 'baseOnLevel' ? ' base ' : part.type === 'bonus' ? ' bonus ' : '';
-	const formattedValue = typeof value === 'number' ? roundVariable(value * multiplier) : `${roundVariable(value.min * multiplier, 1)} - ${roundVariable(value.max * multiplier, 1)}`;
-	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${part.isPercentage ? '%' : ''}${type}${icon ? `%i:${icon}%` : ''}${tag ? `</${tag}>` : ''}`;
+	const valueSuffix = part.isPercentage ? '%' : '';
+	const formattedValue = typeof value === 'number' ? `${roundVariable(value * multiplier)}${valueSuffix}` : `${roundVariable(value.min * multiplier, 1)}${valueSuffix} - ${roundVariable(value.max * multiplier, 1)}${valueSuffix}`;
+	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${type}${icon ? `%i:${icon}%` : ''}${tag ? `</${tag}>` : ''}`;
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */
@@ -838,9 +840,15 @@ export const VARIABLE_CALCULATION_FNS = {
 		const hasMMultiplier = ('mMultiplier' in variable);
 		const hasMRangedMultiplier = ('mRangedMultiplier' in variable);
 
-		if (values.length === 1 && !hasMMultiplier && !hasMRangedMultiplier) {
-			rv.value = values[0];
-			return rv;
+		if (values.length === 1) {
+			if (rv.calculatesFrom![0] && variable.mDisplayAsPercent) {
+				rv.calculatesFrom![0].isPercentage = true;
+			}
+
+			if (!hasMMultiplier && !hasMRangedMultiplier) {
+				rv.value = values[0];
+				return rv;
+			}
 		}
 
 		if (values.some(v => typeof v !== 'number')) {
@@ -889,27 +897,45 @@ export const VARIABLE_CALCULATION_FNS = {
 		};
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, meta) {
-		let rv: number | undefined = variable.mLevel1Value;
+		const rv: IVariableValueResult = {
+			value: variable.mLevel1Value,
+			calculatesFrom: [],
+		};
+		const min = rv.value as number;
 		const level = meta.variableValueParams.damageSource?.level.value ?? 1;
 		if ('mBreakpoints' in variable) {
+			let max = min;
 			for (const { mAdditionalBonusAtThisLevel, mBonusPerLevelAtAndAfter, mLevel } of variable.mBreakpoints) {
+				const levelBonus = mBonusPerLevelAtAndAfter === undefined
+					? mAdditionalBonusAtThisLevel!
+					: (mBonusPerLevelAtAndAfter * (level + 1 - mLevel));
+
 				if (level >= mLevel) {
 					if (mBonusPerLevelAtAndAfter || mAdditionalBonusAtThisLevel) {
-						rv! += mBonusPerLevelAtAndAfter === undefined
-							? mAdditionalBonusAtThisLevel!
-							: (mBonusPerLevelAtAndAfter * (level + 1 - mLevel));
+						(rv.value as number) += levelBonus;
 					} else {
 						console.warn(`[variables/game fn ByCharLevelBreakpointsCalculationPart] unknown mBreakpoints structure`, variable);
-						rv = undefined;
+						rv.value = undefined;
 					}
-				} else {
-					break;
+				}
+
+				if (CHAMPION_LEVEL.max >= mLevel) {
+					max += levelBonus;
 				}
 			}
+			rv.calculatesFrom!.push({
+				value: { min, max },
+				stat: 'level',
+			});
 		} else {
-			rv += variable.mInitialBonusPerLevel * (level - 1);
+			const max = min + (variable.mInitialBonusPerLevel * (CHAMPION_LEVEL.max - 1));
+			rv.calculatesFrom!.push({
+				value: { min, max },
+				stat: 'level',
+			});
+			(rv.value as number) += variable.mInitialBonusPerLevel * (level - 1);
 		}
-		return { value: rv };
+		return rv;
 	},
 	StatByCoefficientCalculationPart(variable: IGameVariablesByType['StatByCoefficientCalculationPart'], _whole, meta) {
 		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
