@@ -531,7 +531,7 @@ export function replaceGameVariables(
 			: typeof meta?.extendedEquals !== 'object'
 				? meta?.extendedEquals as string
 				: `${meta.extendedEquals.prefix}${isMeleeRanged === true
-					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix} | ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
+					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix} <const>|</const> ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
 					: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
 				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
@@ -565,7 +565,7 @@ export function replaceGameVariables(
 				generatedStatIcon = generatedStatIcon[0];
 			}
 
-			const generatedEE = isEqualsMeleeRanged ? `${rawGeneratedEE[0]} | ${rawGeneratedEE[1]}` : rawGeneratedEE[0];
+			const generatedEE = isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0];
 
 			if (generatedEE !== extendedEquals) {
 				console.warn('new extended different', {
