@@ -8,8 +8,8 @@ import { CHAMPION_LEVEL } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 
 export interface IReplacedGameVariable {
-	baseValue: number | [number, number];
-	value: number | [number, number];
+	baseValue: NonNullable<IVariableValueResult['value']>;
+	value: NonNullable<IVariableValueResult['value']>;
 	meta?: IVariableMeta;
 	isUninteresting?: boolean;
 }
@@ -646,7 +646,7 @@ export function replaceGameVariables(
 			const baseValue = [
 				isV1Number ? roundVariable(variable[0] as number * multiplier) : variable[0],
 				isV2Number ? roundVariable(variable[1] as number * multiplier) : variable[1],
-			] as [number, number];
+			] as [string | number, string | number];
 
 			if (meta?.type && modifyVariableFunctions[meta.type]) {
 				if (isV1Number) {
@@ -670,7 +670,7 @@ export function replaceGameVariables(
 
 			variables.set(variableName, {
 				baseValue,
-				value: variable as [number, number],
+				value: variable as [string | number, string | number],
 				meta,
 				isUninteresting,
 			});
