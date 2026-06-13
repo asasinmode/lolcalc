@@ -67,7 +67,7 @@ export interface IVariableMeta<T = any> {
 }
 
 interface ICalculatesFromPart {
-	stat?: 'const' | 'level' | IChampionStatName;
+	stat?: 'const' | 'level' | Exclude<IChampionStatName, 'slowResist'>;
 	type?: 'baseOnLevel' | 'bonus' | 'total';
 	/** when array, expected to be for melee/ranged values */
 	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number } | { min: number; max: number }];
@@ -546,7 +546,7 @@ export function replaceGameVariables(
 		const statIconKey = meta?.scalesWithStatIcon;
 		// TODO run updateData with logging to see what's changed
 		// TODO convert to stat icons
-		let generatedStatIcon: IChampionStatName[] | IChampionStatName | undefined;
+		let generatedStatIcon: IVariableMetaStatIcon[] | IVariableMetaStatIcon | undefined;
 
 		// TODO TMP while extendedEquals is generated now in most cases, the items manual ones are kept for the time of implementing champion passives to make sure any changes made to generating preserve what the handmade item ones look like
 		if (calculatesFrom?.length) {
@@ -787,7 +787,7 @@ function multiplyCalculatePartValues(part: ICalculatesFromPart, multiplier: numb
 	}
 }
 
-const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IChampionStatName, string>> = {
+const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon, string>> = {
 	hp: 'scalehealth',
 	armor: 'scalearmor',
 	attackDamage: 'scalead',
@@ -812,8 +812,19 @@ function calculatesFromPartExtendedEquals(
 	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
 	const type = part.type === 'baseOnLevel' ? ' base ' : part.type === 'bonus' ? ' bonus ' : '';
 	const valueSuffix = part.isPercentage ? '%' : '';
-	const formattedValue = typeof value === 'number' ? `${roundVariable(value * multiplier)}${valueSuffix}` : `${roundVariable(value.min * multiplier, 1)}${valueSuffix} - ${roundVariable(value.max * multiplier, 1)}${valueSuffix}`;
-	return `${tag ? `<${tag}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${type}${icon ? `%i:${icon}%` : ''}${tag ? `</${tag}>` : ''}`;
+	const formattedValue = typeof value === 'number'
+		? `${part.isPercentage ? roundVariable(value * multiplier, 1) : Math.round(value * multiplier)}${valueSuffix}`
+		: `${part.isPercentage ? roundVariable(value.min * multiplier, 1) : Math.round(value.min * multiplier)}${valueSuffix} - ${part.isPercentage ? roundVariable(value.max * multiplier, 1) : Math.round(value.max * multiplier)}${valueSuffix}`;
+
+	return `${
+		tag ? `<${tag}>` : ''
+	}${
+		prependPlus ? '+ ' : ''
+	}${formattedValue}${type}${
+		icon ? `%i:${icon}%` : ''
+	}${
+		tag ? `</${tag}>` : ''
+	}`;
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */
@@ -906,13 +917,11 @@ export const VARIABLE_CALCULATION_FNS = {
 		if ('mBreakpoints' in variable) {
 			let max = min;
 			for (const { mAdditionalBonusAtThisLevel, mBonusPerLevelAtAndAfter, mLevel } of variable.mBreakpoints) {
-				const levelBonus = mBonusPerLevelAtAndAfter === undefined
-					? mAdditionalBonusAtThisLevel!
-					: (mBonusPerLevelAtAndAfter * (level + 1 - mLevel));
-
 				if (level >= mLevel) {
 					if (mBonusPerLevelAtAndAfter || mAdditionalBonusAtThisLevel) {
-						(rv.value as number) += levelBonus;
+						(rv.value as number) += mBonusPerLevelAtAndAfter === undefined
+							? mAdditionalBonusAtThisLevel!
+							: (mBonusPerLevelAtAndAfter * (level + 1 - mLevel));
 					} else {
 						console.warn(`[variables/game fn ByCharLevelBreakpointsCalculationPart] unknown mBreakpoints structure`, variable);
 						rv.value = undefined;
@@ -920,7 +929,9 @@ export const VARIABLE_CALCULATION_FNS = {
 				}
 
 				if (CHAMPION_LEVEL.max >= mLevel) {
-					max += levelBonus;
+					max += mBonusPerLevelAtAndAfter === undefined
+						? mAdditionalBonusAtThisLevel!
+						: (mBonusPerLevelAtAndAfter * (CHAMPION_LEVEL.max + 1 - mLevel));
 				}
 			}
 			rv.calculatesFrom!.push({
@@ -946,7 +957,7 @@ export const VARIABLE_CALCULATION_FNS = {
 				calculatesFrom: [{
 					value: variable.mCoefficient,
 					isPercentage: true,
-					stat: statValue.stat,
+					stat: statValue.stat as ICalculatesFromPart['stat'],
 					type: statValue.type,
 				}],
 			};
@@ -981,7 +992,7 @@ export const VARIABLE_CALCULATION_FNS = {
 					calculatesFrom: [{
 						value: dataValue,
 						isPercentage: true,
-						stat: statValue.stat,
+						stat: statValue.stat as ICalculatesFromPart['stat'],
 						type: statValue.type,
 					}],
 				};
@@ -1042,7 +1053,7 @@ export const VARIABLE_CALCULATION_FNS = {
 					calculatesFrom: [{
 						value: mNumber,
 						isPercentage: true,
-						stat: statValue.stat,
+						stat: statValue.stat as ICalculatesFromPart['stat'],
 						type: statValue.type,
 					}],
 				};
