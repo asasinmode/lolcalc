@@ -549,7 +549,8 @@ export function replaceGameVariables(
 		// TODO TMP while extendedEquals is generated now in most cases, the items manual ones are kept for the time of implementing champion passives to make sure any changes made to generating preserve what the handmade item ones look like
 		if (calculatesFrom?.length && (calculatesFrom?.length > 1 || calculatesFrom[0]!.stat !== 'const')) {
 			const isEqualsMeleeRanged = isMeleeRanged === true && calculatesFrom.some(part => Array.isArray(part.value));
-			const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1;
+			const lastPart = calculatesFrom.at(-1);
+			const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1 || (calculatesFrom.length > 1 && (isEqualsMeleeRanged || (lastPart && lastPart.stat === 'const')));
 
 			const defaultEEPreferRangedValue = isMeleeRanged === 1;
 			generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
@@ -567,7 +568,7 @@ export function replaceGameVariables(
 					generatedStatIcon.push(part.stat);
 				}
 			}
-			if (Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
+			if (!insertIcon && Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
 				generatedStatIcon = generatedStatIcon[0];
 			}
 
@@ -576,8 +577,7 @@ export function replaceGameVariables(
 				generatedStatIcon = undefined;
 			}
 
-			const lastType = calculatesFrom.at(-1)?.type;
-			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${!lastType || lastType === 'total' || insertIcon ? '' : ' '}`;
+			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${generatedStatIcon || insertIcon || !lastPart || lastPart.type === 'total' ? '' : ' '}`;
 
 			if (generatedEE !== extendedEquals) {
 				console.warn('new extended different', {

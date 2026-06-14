@@ -2060,7 +2060,7 @@ export const ITEM_SPECIFICS = {
 					extendedEquals: {
 						prefix: '',
 						meleeValue: `<const>${bastionBreakerSpecifics.abilityDamageCalcBase}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient! * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
-						rangedValue: `${bastionBreakerSpecifics.abilityDamageCalcBase! * bastionBreakerSpecifics.abilityDamageCalcRangeModifier}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient! * bastionBreakerSpecifics.abilityDamageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						rangedValue: `<const>${bastionBreakerSpecifics.abilityDamageCalcBase! * bastionBreakerSpecifics.abilityDamageCalcRangeModifier}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.abilityDamageCalcRangeCoefficient! * bastionBreakerSpecifics.abilityDamageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
 						suffix: '',
 					},
 				},
@@ -2069,8 +2069,8 @@ export const ITEM_SPECIFICS = {
 					scalesWithStatIcon: ['lethality'],
 					extendedEquals: {
 						prefix: '',
-						meleeValue: `<const>${bastionBreakerSpecifics.damageCalcBase}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient! * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
-						rangedValue: `${bastionBreakerSpecifics.damageCalcBase! * bastionBreakerSpecifics.damageCalcRangeModifier}</const><scalelethality> + ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient! * bastionBreakerSpecifics.damageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						meleeValue: `<const>${bastionBreakerSpecifics.damageCalcBase}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient! * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
+						rangedValue: `<const>${bastionBreakerSpecifics.damageCalcBase! * bastionBreakerSpecifics.damageCalcRangeModifier}</const> <scalelethality>+ ${Math.round(bastionBreakerSpecifics.damageCalcRangeCoefficient! * bastionBreakerSpecifics.damageCalcRangeModifier * 100)}%%i:${STAT_ICON.lethality}%</scalelethality>`,
 						suffix: '',
 					},
 				},
