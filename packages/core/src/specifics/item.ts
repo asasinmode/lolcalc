@@ -2373,12 +2373,10 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(self) {
 				return {
-					lolcalcChampRange: {
-						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: true }).value as number,
-						],
-					},
+					lolcalcChampRange: [
+						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: false }),
+						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: true }),
+					],
 				};
 			},
 			meta: {
@@ -2852,9 +2850,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f3: { value: 0 },
-					ShieldAmount: {
-						value: itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }).value as number,
-					},
+					ShieldAmount: itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }),
 				};
 			},
 			meta: {
@@ -2862,6 +2858,8 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.shield,
 					isCustom: true,
 					displayedName: 'ShieldAmount',
+					/* the in game description has `(ally $i:level%)` so override the default generated 'level' to not have double */
+					scalesWithStatIcon: undefined,
 					extendedEquals: `<const>${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
 				},
 			},

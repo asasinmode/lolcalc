@@ -38,12 +38,16 @@ export interface IVariableMeta<T = any> {
 	/** variable name shown in description when `replaceGameVariables`' `options.replaceWithName` is true instead of the actual variable name */
 	displayedName?: string;
 	/**
-	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it. If the value is an array of icons, no `(...icons)` will be appended when replace's `isExtended: true`, the icons are to be manually added in `extendedEquals` in that case
+	 * when present, formatted variable will have `(%i:STAT_ICON[statIconKey]%)` appended to it. If the value is an array of icons, no `(...icons)` will be appended when replace's `isExtended: true`. The icons are to be manually added in `extendedEquals` in that case
+	 * it's automatically generated in `replaceGameVariables` from variable's `calculatesFrom` but this can be used to override them
+	 *
 	 * `replaceGameVariables` doesnt handle the elaborate stat icons that are full blown paths like `slowResist` so for now these are manually excluded
 	 */
 	scalesWithStatIcon?: IVariableMetaStatIcon | IVariableMetaStatIcon[];
 	/**
 	 * when present, formatted variable will have `= (${extendedEquals})` appended to in the extended version (holding shift)
+	 * it's automatically generated in `replaceGameVariables` from variable's `calculatesFrom` but this can be used to override them
+	 *
 	 * if `extendedEquals` is an object, it's assumed to have different info values for melee/ranged and will be formatted accordingly in `replaceGameVariables`
 	 * if it's a function, it will be passed the same arguments the variable value function receives
 	 *	- item: `IItemVariableParams`
@@ -565,6 +569,11 @@ export function replaceGameVariables(
 				generatedStatIcon = generatedStatIcon[0];
 			}
 
+			// TODO should override every time, not just when the specified is `undefined` but for now old, manual `extendedEquals` & icon are kept to make sure the generated one works properly
+			if (meta && 'scalesWithStatIcon' in meta && meta.scalesWithStatIcon === undefined) {
+				generatedStatIcon = undefined;
+			}
+
 			const lastType = calculatesFrom.at(-1)?.type;
 			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${!lastType || lastType === 'total' || insertIcon ? '' : ' '}`;
 
@@ -1080,7 +1089,14 @@ export const VARIABLE_CALCULATION_FNS = {
 	ByCharLevelInterpolationCalculationPart(variable: IGameVariablesByType['ByCharLevelInterpolationCalculationPart'], _whole, meta) {
 		const { mStartValue = 0, mEndValue } = variable;
 		return {
-			value: mStartValue + (mEndValue - mStartValue) / 17 * ((meta.variableValueParams.damageSource?.level.value ?? 1) - 1),
+			value: mStartValue + (mEndValue - mStartValue) / (CHAMPION_LEVEL.max - 1) * ((meta.variableValueParams.damageSource?.level.value ?? 1) - 1),
+			calculatesFrom: [{
+				stat: 'level',
+				value: {
+					min: mStartValue,
+					max: mEndValue,
+				},
+			}],
 		};
 	},
 	mModifiedGameCalculation(variable: { mModifiedGameCalculation: string; mMultiplier?: any }, whole, meta) {
