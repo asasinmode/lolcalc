@@ -2278,7 +2278,7 @@ export const ITEM_SPECIFICS = {
 				TotalDamage: {
 					type: VariableType.magic,
 					scalesWithStatIcon: 'armor',
-					extendedEquals: `<const>${ITEMS_BY_NAME.thornmail?.dataValues.BaseDamage}</const><scalearmor> + ${Math.round(ITEMS_BY_NAME.thornmail?.dataValues.BonusArmorDamageRatio * 100)}% bonus</scalearmor> `,
+					extendedEquals: `<const>${ITEMS_BY_NAME.thornmail?.dataValues.BaseDamage}</const> <scalearmor>+ ${Math.round(ITEMS_BY_NAME.thornmail?.dataValues.BonusArmorDamageRatio * 100)}% bonus</scalearmor> `,
 				},
 			},
 			uninteresting: [...grievousWoundItemSpecific.variables.uninteresting, 'f1'],
@@ -2883,15 +2883,14 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f2: { value: 0 },
-					AmountToHeal: {
-						value: itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }).value as number,
-					},
+					AmountToHeal: itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }),
 				};
 			},
 			meta: {
 				AmountToHeal: {
 					type: VariableType.heal,
 					isCustom: true,
+					scalesWithStatIcon: undefined,
 					extendedEquals: `<const>${itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${Math.round(itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value as number)}</const>`,
 				},
 			},

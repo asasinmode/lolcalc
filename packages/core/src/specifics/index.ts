@@ -91,9 +91,9 @@ export interface ICalculatesFromPart {
 	isPercentage?: boolean;
 }
 
-export interface IVariableValueResult {
+export interface IVariableValueResult<T = string | number | [number | string | undefined, number | string | undefined]> {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
-	value?: string | number | [number | string | undefined, number | string | undefined];
+	value?: T;
 	/**
 	 * if `true`, the variable is different for melee and ranged champions and the calculation target's range is unknown
 	 * if `0`, same as `true` except the target is melee

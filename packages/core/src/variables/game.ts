@@ -833,6 +833,30 @@ function multiplyCalculatePartValues(part: ICalculatesFromPart, multiplier: numb
 	}
 }
 
+function addToCalculatePartValues(part: ICalculatesFromPart, value: number) {
+	if (Array.isArray(part.value)) {
+		if (typeof part.value[0] === 'number') {
+			part.value[0] += value;
+		} else {
+			part.value[0].min += value;
+			part.value[0].max += value;
+		}
+		if (typeof part.value[1] === 'number') {
+			part.value[1] += value;
+		} else {
+			(part.value[1]! as unknown as { min: number }).min += value;
+			(part.value[1]! as unknown as { max: number }).max += value;
+		}
+	} else {
+		if (typeof part.value === 'number') {
+			part.value += value;
+		} else {
+			part.value.min += value;
+			part.value.max += value;
+		}
+	}
+}
+
 const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon, string>> = {
 	hp: 'scalehealth',
 	armor: 'scalearmor',
@@ -1154,36 +1178,108 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 	},
 	SumOfSubPartsCalculationPart(variable: IGameVariablesByType['SumOfSubPartsCalculationPart'], whole, meta) {
-		const rv: IVariableValueResult = { };
-		const values = variable.mSubparts.map((part) => {
-			const resolveFn = variableResolveFn(part);
-			if (resolveFn) {
-				const resolved = resolveFn(part, whole, meta);
-				if (resolved?.roundReplaced) {
-					rv.roundReplaced = resolved.roundReplaced;
-				}
-				return resolved?.value as number;
-			}
-			return undefined;
-		});
+		const rv: IVariableValueResult = {
+			calculatesFrom: [],
+		};
+		const values: (number | undefined)[] = [];
+		const calculatesFromConstOffset: number[] = [];
 
-		if (values.some(v => typeof v !== 'number')) {
-			return undefined;
-		}
+		for (const part of variable.mSubparts) {
+			const resolveFn = variableResolveFn(part);
+			if (!resolveFn) {
+				return undefined;
+			}
+
+			const resolved = resolveFn(part, whole, meta);
+			if (typeof resolved?.value !== 'number') {
+				console.warn('[SumOfSubPartsCalculationPart] resolved subpart value not a number', resolved, variable, whole, meta);
+				return undefined;
+			}
+
+			if (resolved.roundReplaced) {
+				rv.roundReplaced = resolved.roundReplaced;
+			}
+			values.push(resolved.value);
+
+			if (resolved.calculatesFrom?.length) {
+				addCalculatesFrom(rv.calculatesFrom, resolved.calculatesFrom);
+				/* try my best to collapse multiple calculatesFrom parts into a single, non const one if detected. Based on Mikael's AmountToHeal */
+				const nonConstParts = rv.calculatesFrom!.filter(part => part.stat && part.stat !== 'const');
+				if (nonConstParts.length === 1) {
+					const [nonConstPart] = nonConstParts;
+					const constValue = rv.calculatesFrom!.reduce((acc, part) => (part === nonConstPart ? 0 : (part.value as number)) + acc, 0);
+					if (Number.isNaN(constValue)) {
+						console.warn('[SumOfSubPartsCalculationPart] const part value not a number', rv.calculatesFrom);
+					} else {
+						addToCalculatePartValues(nonConstPart!, constValue);
+						for (let i = rv.calculatesFrom!.length - 1; i >= 0; i--) {
+							if (rv.calculatesFrom![i] !== nonConstPart) {
+								rv.calculatesFrom!.splice(i, 1);
+							}
+						}
+					}
+				} else if (nonConstParts.length) {
+					console.warn('[SumOfSubPartsCalculationPart] should somehow handle multiple non const calculatesFrom', rv.calculatesFrom);
+				}
+			} else {
+				calculatesFromConstOffset.push(resolved.value);
+			}
+		};
 
 		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)!;
+
+		const totalCalculatesFromConst = calculatesFromConstOffset.reduce((acc, curr) => acc + curr, 0);
+		if (totalCalculatesFromConst) {
+			for (const part of rv.calculatesFrom!) {
+				addToCalculatePartValues(part, totalCalculatesFromConst);
+			}
+		}
 
 		return rv;
 	},
 	ProductOfSubPartsCalculationPart(variable: IGameVariablesByType['ProductOfSubPartsCalculationPart'], whole, meta) {
-		const rv1 = variableResolveFn(variable.mPart1)?.(variable.mPart1, whole, meta);
-		const rv2 = variableResolveFn(variable.mPart2)?.(variable.mPart2, whole, meta);
-		if (rv1 && rv2 && typeof rv1.value === 'number' && typeof rv2.value === 'number') {
-			/* at the moment used only for redemption, if any meta or more variable rv information is needed/appears for other variables, adjust */
-			return {
-				value: rv1.value * rv2.value,
-			};
+		const left = variableResolveFn(variable.mPart1)?.(variable.mPart1, whole, meta);
+		const right = variableResolveFn(variable.mPart2)?.(variable.mPart2, whole, meta);
+		if (typeof left?.value !== 'number' || typeof right?.value !== 'number') {
+			return;
 		}
+
+		const rv: IVariableValueResult<number> = {
+			value: left.value * right.value,
+			roundReplaced: left.roundReplaced || right.roundReplaced,
+		};
+
+		const leftHasCalcFrom = left.calculatesFrom?.length;
+		const rightHasCalcFrom = right.calculatesFrom?.length;
+		if (leftHasCalcFrom && !rightHasCalcFrom) {
+			console.warn('[ProductOfSubPartsCalculationPart] debug left branch');
+			rv.calculatesFrom = left.calculatesFrom!;
+			for (const part of rv.calculatesFrom) {
+				multiplyCalculatePartValues(part, right.value);
+			}
+		} else if (!leftHasCalcFrom && rightHasCalcFrom) {
+			console.warn('[ProductOfSubPartsCalculationPart] debug right branch');
+			rv.calculatesFrom = right.calculatesFrom!;
+			for (const part of rv.calculatesFrom) {
+				multiplyCalculatePartValues(part, left.value);
+			}
+		} else if (leftHasCalcFrom && rightHasCalcFrom) {
+			/* try my best to collapse multiple calculatesFrom parts into a single, non const one if detected. Based on Mikael's AmountToHeal */
+			const [nonConstPart, constPart] = right.calculatesFrom![0]!.stat === 'const' ? [left.calculatesFrom!, right.calculatesFrom!] : [right.calculatesFrom!, left.calculatesFrom!];
+			if (nonConstPart.length === 1) {
+				rv.calculatesFrom = nonConstPart;
+				const constValue = constPart.reduce((acc, part) => (part.value as number) + acc, 0);
+				if (Number.isNaN(constValue)) {
+					console.warn('[ProductOfSubPartsCalculationPart] const part value not a number', left, right);
+				} else {
+					multiplyCalculatePartValues(rv.calculatesFrom[0]!, constValue);
+				}
+			} else {
+				console.warn('[ProductOfSubPartsCalculationPart] should somehow handle multiple non const calculatesFrom', left, right);
+			}
+		}
+
+		return rv;
 	},
 } satisfies IHypotheticalVariableCalculationFns;
 
