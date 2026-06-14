@@ -11,7 +11,7 @@ import type { UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
-import { gameAbilityImage } from '@lolcalc/core/misc';
+import { gameAbilityImage, simpleDescriptionFormatting } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
@@ -532,7 +532,7 @@ async function addResultsSection(
 		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`);
 		section.imageSize = abilityImageSize(champion.id);
-		section.rows = getAbilitySectionRows(precomputedDescription);
+		section.rows = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = abilityVariableCellValue;
 		section.hoverTooltipData = {
 			precomputedDescription,
@@ -547,7 +547,7 @@ async function addResultsSection(
 
 		section.name ??= item.name;
 		section.image = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
-		section.rows = getAbilitySectionRows(precomputedDescription);
+		section.rows = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
 	} else {
@@ -559,7 +559,7 @@ async function addResultsSection(
 
 		section.name ??= effectSpecific.label;
 		([section.image, section.imageSize] = await gameAbilityImage(abilityId));
-		section.rows = getAbilitySectionRows({ variables: effectSpecific.variables.known, unknownVariables: [] });
+		section.rows = await getAbilitySectionRows({ variables: effectSpecific.variables.known, unknownVariables: [] });
 		section.getCellValue = effectVariableCellValue;
 		section.hoverTooltipData = { abilityId };
 	}
@@ -568,21 +568,22 @@ async function addResultsSection(
 	triggerRef(resultSections);
 }
 
-function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): IDamageResultTableSection['rows'] {
-	return markRaw(variables
+async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): Promise<IDamageResultTableSection['rows']> {
+	const rows: IDamageResultTableSection['rows'] = await Promise.all(variables
 		.entries()
 		.filter(entry => !entry[1].isUninteresting)
-		.map((entry): IDamageResultTableSection['rows'][number] => ({
+		.map(async (entry): Promise<IDamageResultTableSection['rows'][number]> => ({
 			id: entry[0],
 			name: entry[1].meta?.displayedName ?? entry[0],
 			isCustom: entry[1].meta?.isCustom,
-		}))
-		.toArray()
-		.concat(unknownVariables.map(([rawName, actualName]) => ({
-			id: rawName,
-			name: actualName || rawName,
-			isUnknown: true,
-		}))));
+			additionalInfo: entry[1].meta?.additionalInfo && await simpleDescriptionFormatting(entry[1].meta?.additionalInfo),
+		})));
+
+	return markRaw(rows.concat(unknownVariables.map(([rawName, actualName]) => ({
+		id: rawName,
+		name: actualName || rawName,
+		isUnknown: true,
+	}))));
 }
 
 function removeResultsSection(index: number) {
@@ -1609,6 +1610,17 @@ defineExpose({
 									this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
 								</p>
 							</button>
+							<button
+								v-if="row.additionalInfo"
+								@focus="showRowTooltip"
+								@mouseenter="showRowTooltip"
+								@mouseleave="hideRowTooltip"
+								@blur="hideRowTooltip"
+							>
+								<span>additional info</span>
+								<Icon class="i-ph:info-fill" />
+								<p popover="hint" class="hover-tooltip" v-html="row.additionalInfo" />
+							</button>
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
@@ -2210,7 +2222,7 @@ defineExpose({
 						}
 
 						> span,
-						> button > span {
+						> button > span:first-child {
 							--at-apply: 'sr-only';
 						}
 
@@ -2221,11 +2233,15 @@ defineExpose({
 							anchor-scope: --parent;
 
 							&:before {
-								--at-apply: 'absolute content-empty inset-x-0 block-1.75 inset-bs-0 -translate-y-full';
+								--at-apply: 'absolute content-empty -inset-x-1 block-1.75 inset-bs-0 -translate-y-full';
 							}
 
 							> img {
 								--at-apply: 'size-full';
+							}
+
+							> .icon {
+								--at-apply: 'size-full text-blue-400';
 							}
 
 							> [popover] {
@@ -2234,6 +2250,14 @@ defineExpose({
 								position-anchor: --parent;
 								justify-self: anchor-center;
 								position-try: flip-block;
+
+								a {
+									--at-apply: 'text-blue-400 hoverable:underline';
+								}
+
+								img {
+									--at-apply: 'inline-block size-4';
+								}
 							}
 						}
 					}

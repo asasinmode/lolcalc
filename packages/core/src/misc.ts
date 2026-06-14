@@ -1,7 +1,9 @@
+import type { TAbilityType } from '@lolcalc/shared';
 import type { IGameAbilityId } from './GameAbilityId';
 import { CHAMPION_IMAGES, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { ABILITY_TYPE } from '@lolcalc/shared';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
+import { replaceGameIcons } from './variables/game.ts';
 
 export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src: string, size: number]> {
 	const imageAbilityId = abilityId.type === ABILITY_TYPE.effect
@@ -43,4 +45,28 @@ function imgUrl(url: string, version: string, isDDragon = false) {
 		: isDDragon
 			? `https://ddragon.leagueoflegends.com/cdn/${version}/${url}`
 			: `https://raw.communitydragon.org/${version}/${url}`;
+}
+
+/** used for creating a _game ability_ image string that will be parsed by `simpleDescriptionFormatting` */
+export function simpleFormattingGameAbilityImage(type: TAbilityType, id: string) {
+	return `%a:${type}-${id}%`;
+}
+
+export async function simpleDescriptionFormatting(text: string) {
+	const parts = replaceGameIcons(
+		text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>'),
+	)
+		.split(/(%a:[^-%]+-[^%]+%)/g);
+
+	for (let i = 0; i < parts.length; i++) {
+		const match = parts[i]!.match(/%a:([^-%]+)-([^%]+)%/);
+		if (match) {
+			const [src, size] = await gameAbilityImage({
+				type: match[1],
+				id: match[2],
+			} as IGameAbilityId);
+			parts[i] = `<img src="${src}" width="${size}" height="${size}">`;
+		}
+	}
+	return parts.join('');
 }

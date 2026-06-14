@@ -1,6 +1,6 @@
 import type { DamageSource, IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IReplacedGameVariable } from '@lolcalc/core/variables/game';
+import type { IReplacedGameVariable, IVariableMeta } from '@lolcalc/core/variables/game';
 import type { IItem } from '@lolcalc/data/types';
 
 export interface IDamageResultTableSection {
@@ -34,7 +34,8 @@ export interface IDamageResultTableSection {
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
 		id: string;
 		isUnknown?: boolean;
-		isCustom?: boolean;
+		isCustom?: IVariableMeta['isCustom'];
+		additionalInfo?: IVariableMeta['additionalInfo'];
 		image?: {
 			src: string;
 			width: number;

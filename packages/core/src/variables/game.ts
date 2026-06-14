@@ -65,6 +65,8 @@ export interface IVariableMeta<T = any> {
 	resultsIsPercentage?: boolean;
 	/** same as `multiplier` but only for results */
 	resultsMultiplier?: number;
+	/** if present, a tooltip will be added to results with the value shown inside it */
+	additionalInfo?: string;
 	type?: IVariableType;
 	/** whether the variable is a custom one, not found in description but computed by lolcalc and wanted in results */
 	isCustom?: boolean;
