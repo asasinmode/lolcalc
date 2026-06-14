@@ -453,12 +453,16 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 			rv.numberValue = 0;
 			rv.value = '?';
 			rv.isUnknown = true;
-		} else if (typeof value === 'number') {
-			const totalValue = multiplier ? roundVariable(value * multiplier) : value;
-			rv.value = `${totalValue}${suffix}`;
-			rv.numberValue = totalValue;
+		} else if (Array.isArray(value)) {
+			rv.value = `${typeof value[0] === 'number' && multiplier ? roundVariable(value[0] * multiplier) : value[0]}${suffix} | ${typeof value[1] === 'number' && multiplier ? roundVariable(value[1] * multiplier) : value[1]}${suffix}`;
 		} else {
-			rv.value = `${multiplier ? roundVariable(value[0] * multiplier) : value[0]}${suffix} | ${multiplier ? roundVariable(value[1] * multiplier) : value[1]}${suffix}`;
+			if (typeof value === 'number') {
+				const totalValue = multiplier ? roundVariable(value * multiplier) : value;
+				rv.value = `${totalValue}${suffix}`;
+				rv.numberValue = totalValue;
+			} else {
+				rv.value = `${value}${suffix}`;
+			}
 		}
 
 		return rv;
