@@ -974,6 +974,10 @@ export const VARIABLE_CALCULATION_FNS = {
 		meta?.accessedVariables?.add(variable.mDataValue);
 		return {
 			value: whole.dataValues?.[variable.mDataValue],
+			calculatesFrom: [{
+				value: whole.dataValues?.[variable.mDataValue],
+				stat: 'const',
+			}],
 		};
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, meta) {
