@@ -1153,7 +1153,7 @@ export const ITEM_SPECIFICS = {
 				},
 				TotalHealthRegen: {
 					scalesWithStatIcon: ['level', 'armor', 'magicResist'],
-					extendedEquals: `<const>${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mStartValue} - ${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mEndValue}%i:${STAT_ICON.level}%</const> <scalearmor>+ ${Math.round(ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[1]!.mCoefficient! * 100)}%%i:${STAT_ICON.armor}%</scalearmor> <scalemr>+ ${Math.round(ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[2]!.mCoefficient! * 100)}%%i:${STAT_ICON.magicResist}%</scalemr>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mStartValue} - ${ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[0]?.mEndValue}%i:${STAT_ICON.level}%</const> <scalearmor>+ ${Math.round(ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[1]!.mCoefficient! * 100)}% bonus %i:${STAT_ICON.armor}%</scalearmor> <scalemr>+ ${Math.round(ITEMS_BY_NAME.protoplasmHarness?.itemCalculations.TotalHealthRegen.mFormulaParts[2]!.mCoefficient! * 100)}% bonus %i:${STAT_ICON.magicResist}%</scalemr>`,
 					type: VariableType.heal,
 				},
 			},
