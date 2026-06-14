@@ -1165,18 +1165,12 @@ const colW = computed(() => {
 	};
 });
 
-function showRowTooltip(event: MouseEvent) {
-	const lastChild = (event.target as HTMLElement).lastElementChild;
-	if (lastChild?.hasAttribute('popover')) {
-		(lastChild as HTMLElement).showPopover();
-	}
+function showRowTooltip(event: Event) {
+	((event.currentTarget as HTMLElement).lastElementChild as HTMLElement).showPopover();
 }
 
-function hideRowTooltip(event: MouseEvent) {
-	const lastChild = (event.target as HTMLElement).lastElementChild;
-	if (lastChild?.hasAttribute('popover')) {
-		(lastChild as HTMLElement).hidePopover();
-	}
+function hideRowTooltip(event: Event) {
+	((event.currentTarget as HTMLElement).lastElementChild as HTMLElement).hidePopover();
 }
 
 defineExpose({
@@ -1588,8 +1582,6 @@ defineExpose({
 							scope="row"
 							:colspan="section.isCustomTotal || section.id === STATS_SECTION_ID ? 2 : undefined"
 							headers="results-table-header-damage-type"
-							@mouseenter="showRowTooltip"
-							@mouseleave="hideRowTooltip"
 						>
 							<img
 								v-if="row.image"
@@ -1600,16 +1592,23 @@ defineExpose({
 							>
 							<span v-if="row.isUnknown">unknown</span>
 							{{ row.name }}
-							<img
+							<button
 								v-if="row.isCustom"
-								src="/logo_dark.webp"
-								alt="lolcalc logo"
-								width="192"
-								height="192"
+								@focus="showRowTooltip"
+								@mouseenter="showRowTooltip"
+								@mouseleave="hideRowTooltip"
+								@blur="hideRowTooltip"
 							>
-							<p v-if="row.isCustom" popover="hint" class="hover-tooltip">
-								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
-							</p>
+								<img
+									src="/logo_dark.webp"
+									alt="lolcalc logo"
+									width="192"
+									height="192"
+								>
+								<p popover="hint" class="hover-tooltip">
+									this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
+								</p>
+							</button>
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
@@ -2199,36 +2198,43 @@ defineExpose({
 					> th {
 						--at-apply: 'hyphens-auto wrap-anywhere';
 						--ps: calc(2 * var(--control-btn-size));
-						anchor-scope: all;
-						anchor-name: --variable-row;
 
 						&[colspan] {
 							--at-apply: 'ps-[calc(var(--table-ps)+var(--ps))]';
 						}
 
 						> img {
-							--at-apply: 'inline-block size-[--size] align-middle';
+							--at-apply: 'inline-block size-[--size] align-middle -ms-[--ms] me-[calc(0.5*var(--size))]';
 							--size: calc(5 * var(--spacing));
 							--ms: calc(0.5 * (var(--ps) + var(--size)));
-
-							&[aria-hidden] {
-								--at-apply: '-ms-[--ms] me-[calc(0.5*var(--size))]';
-							}
-
-							&:not([aria-hidden]) {
-								--at-apply: 'size-4.5 align-[-0.25rem] ms-0.5';
-							}
 						}
 
-						> span {
+						> span,
+						> button > span {
 							--at-apply: 'sr-only';
 						}
 
-						> [popover] {
-							--at-apply: 'max-inline-120 p-2 -translate-x-15 text-white';
-							position-anchor: --variable-row;
-							inset-block-end: calc(anchor(top) - 1px);
-							justify-self: anchor-start;
+						> button {
+							--at-apply: 'relative inline-block size-4.5 align-[-0.25rem] ms-0.5';
+							--popover-offset-y: var(--spacing) * 1.75;
+							anchor-name: --parent;
+							anchor-scope: --parent;
+
+							&:before {
+								--at-apply: 'absolute content-empty inset-x-0 block-1.75 inset-bs-0 -translate-y-full';
+							}
+
+							> img {
+								--at-apply: 'size-full';
+							}
+
+							> [popover] {
+								--at-apply: 'max-inline-120 inline-fit p-2 text-white pointer-events-auto select-text cursor-auto';
+								inset-block-end: calc(anchor(top) + var(--popover-offset-y));
+								position-anchor: --parent;
+								justify-self: anchor-center;
+								position-try: flip-block;
+							}
 						}
 					}
 
