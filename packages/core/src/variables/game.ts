@@ -565,7 +565,8 @@ export function replaceGameVariables(
 				generatedStatIcon = generatedStatIcon[0];
 			}
 
-			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${calculatesFrom.at(-1)?.type ? ' ' : ''}`;
+			const lastType = calculatesFrom.at(-1)?.type;
+			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${!lastType || lastType === 'total' || insertIcon ? '' : ' '}`;
 
 			if (generatedEE !== extendedEquals) {
 				console.warn('new extended different', {
