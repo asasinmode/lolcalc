@@ -10,9 +10,9 @@ import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import { ABILITY_TYPE, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
+import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
-import { simpleFormattingGameAbilityImage } from '../misc.ts';
 
 const actualGWoundsItems = Object.values(ITEMS).filter(item => item.dataValues?.GrievousAmount);
 if (!actualGWoundsItems.every(item => (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id))) {
@@ -609,6 +609,12 @@ export const ITEM_SPECIFICS = {
 						value: self.stats.value.variables.whisperingDiademAwe
 							? self.stats.value.variables.whisperingDiademAwe * 100
 							: (self.stats.value.bonus.mana * ITEMS_BY_NAME.whisperingCirclet?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient),
+						calculatesFrom: [{
+							stat: 'mana',
+							isPercentage: true,
+							type: 'bonus',
+							value: ITEMS_BY_NAME.whisperingCirclet?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient,
+						}],
 					},
 				};
 			},
@@ -3348,14 +3354,12 @@ export const ITEM_SPECIFICS = {
 					: 1;
 				const damageMultiplier = 1 + (maxMultiplier - 1) * targetMissingHpPercent;
 
-				if (!Array.isArray(damage.value) || damage.value.some(v => typeof v !== 'number')) {
-					console.error(`[ITEM_SPECIFICS kraken slayer] unexpected DamageAmount calculated value`, damage);
-				}
-
 				return {
 					f2: { value: 0 },
 					Damage: {
-						value: [(damage.value as number[])[0]! * damageMultiplier, (damage.value as number[])[1]! * damageMultiplier],
+						value: Array.isArray(damage.value)
+							? [(damage.value as number[])[0]! * damageMultiplier, (damage.value as number[])[1]! * damageMultiplier]
+							: (damage.value as number * damageMultiplier),
 					},
 				};
 			},
