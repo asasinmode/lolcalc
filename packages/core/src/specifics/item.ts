@@ -650,9 +650,21 @@ export const ITEM_SPECIFICS = {
 						value: self.stats.value.variables.whisperingDiademAwe
 							? self.stats.value.variables.whisperingDiademAwe * 100
 							: (self.stats.value.bonus.mana * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient),
+						calculatesFrom: [{
+							stat: 'mana',
+							isPercentage: true,
+							type: 'bonus',
+							value: ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient,
+						}],
 					},
 					ManaToHeal: {
 						value: self.stats.value.total.mana * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.ManaToHeal.mFormulaParts[0]!.mCoefficient,
+						calculatesFrom: [{
+							stat: 'mana',
+							isPercentage: true,
+							type: 'total',
+							value: ITEMS_BY_NAME.diademOfSongs?.itemCalculations.ManaToHeal.mFormulaParts[0]!.mCoefficient,
+						}],
 					},
 					f1: {
 						value: 0,
@@ -883,6 +895,12 @@ export const ITEM_SPECIFICS = {
 					BonusHPFromMana: {
 						value: self.stats.value.variables.approachFimbulAwe
 							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA),
+						calculatesFrom: [{
+							stat: 'mana',
+							isPercentage: true,
+							type: 'bonus',
+							value: ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA,
+						}],
 					},
 				};
 			},
@@ -927,6 +945,12 @@ export const ITEM_SPECIFICS = {
 					BonusHPFromMana: {
 						value: self.stats.value.variables.approachFimbulAwe
 							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA),
+						calculatesFrom: [{
+							stat: 'mana',
+							isPercentage: true,
+							type: 'bonus',
+							value: ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA,
+						}],
 					},
 					ShieldBase: {
 						value: ITEMS_BY_NAME.fimbulwinter?.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber,
