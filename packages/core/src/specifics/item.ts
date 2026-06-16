@@ -3141,11 +3141,23 @@ export const ITEM_SPECIFICS = {
 						value: self.stats.value.variables.dawncoreAp === undefined
 							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen
 							: self.stats.value.variables.dawncoreAp,
+						calculatesFrom: [{
+							stat: 'manaRegen',
+							type: 'base',
+							value: ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen / 100,
+							isPercentage: true,
+						}],
 					},
 					f3: {
 						value: self.stats.value.variables.dawncoreHsp === undefined
 							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen
 							: self.stats.value.variables.dawncoreHsp,
+						calculatesFrom: [{
+							stat: 'manaRegen',
+							type: 'base',
+							value: ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen,
+							isPercentage: true,
+						}],
 					},
 				};
 			},

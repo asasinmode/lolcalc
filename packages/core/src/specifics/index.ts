@@ -85,7 +85,8 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 
 export interface ICalculatesFromPart {
 	stat?: 'const' | 'level' | Exclude<IChampionStatName, 'slowResist'>;
-	type?: 'baseOnLevel' | 'bonus' | 'total';
+	/** technically `base` is not the actual `stats.base` but some items, like dawncore, show "x% base", by which it means "item" so when it's set to `base`, that will be appended to the value */
+	type?: 'base' | 'baseOnLevel' | 'bonus' | 'total';
 	/** when array, expected to be for melee/ranged values */
 	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number }, { min: number; max: number }];
 	isPercentage?: boolean;

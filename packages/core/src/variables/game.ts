@@ -577,7 +577,7 @@ export function replaceGameVariables(
 				generatedStatIcon = undefined;
 			}
 
-			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type === 'baseOnLevel' || lastPart?.type === 'bonus') ? ' ' : ''}`;
+			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
 
 			if (generatedEE !== extendedEquals) {
 				console.warn('new extended different', {
@@ -871,6 +871,7 @@ const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon, string
 	magicResist: 'scalemr',
 	moveSpeed: 'speed',
 	mana: 'scalemana',
+	manaRegen: 'scalemana',
 };
 
 function calculatesFromPartExtendedEquals(
@@ -881,7 +882,7 @@ function calculatesFromPartExtendedEquals(
 ): string {
 	const tag = part.stat === 'const' || part.stat === 'level' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
 	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
-	const type = part.type === 'baseOnLevel' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
+	const type = part.type === 'baseOnLevel' || part.type === 'base' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
 	const formattedValue = formatCalculatesFromPartValue(
 		Array.isArray(part.value)
 			? part.value[preferRangedValue ? 1 : 0]!
