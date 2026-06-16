@@ -2526,9 +2526,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f1: { value: 0 },
-					HealAmount: {
-						value: itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }).value as number,
-					},
+					HealAmount: itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }),
 				};
 			},
 			meta: {
@@ -2536,6 +2534,8 @@ export const ITEM_SPECIFICS = {
 				HealAmount: {
 					type: VariableType.heal,
 					isCustom: true,
+					/* the in game description has `(ally $i:level%)` so override the default generated 'level' to not have double */
+					scalesWithStatIcon: undefined,
 					extendedEquals: `<const>${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value as number)}</const>`,
 				},
 			},
