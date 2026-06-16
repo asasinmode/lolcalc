@@ -348,6 +348,7 @@ export const ITEM_NAME_TO_ID = {
 	experimentalHexplate: '3073',
 	cosmicDrive: '4629',
 	endlessHunger: '2517',
+	hexdrinker: '3155',
 	mawOfMalmortius: '3156',
 	jakSho: '6665',
 	swiftmarch: '3170',

@@ -1622,6 +1622,23 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['OmnivampDuration', 'OmnivampOnTakedown', 'TakedownWindow'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.hexdrinker]: {
+		variables: defineVariables({
+			meta: {
+				MeleeRangedSplit: {
+					scalesWithStatIcon: 'level',
+					displayedName: 'Shield',
+					extendedEquals: {
+						prefix: '',
+						meleeValue: `<const>${itemVariableValue('MeleeRangedSplit', { item: ITEMS_BY_NAME.hexdrinker, isRanged: false, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value} - ${itemVariableValue('MeleeRangedSplit', { item: ITEMS_BY_NAME.hexdrinker, isRanged: false, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value}</const>`,
+						rangedValue: `<const>${Math.round(itemVariableValue('MeleeRangedSplit', { item: ITEMS_BY_NAME.hexdrinker, isRanged: true, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource }).value as number)} - ${Math.round(itemVariableValue('MeleeRangedSplit', { item: ITEMS_BY_NAME.hexdrinker, isRanged: true, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource }).value as number)}</const>`,
+						suffix: '',
+					},
+				},
+			},
+			uninteresting: ['LowHealthThreshold', 'ShieldLifetime'],
+		}),
+	},
 	[ITEM_NAME_TO_ID.mawOfMalmortius]: {
 		internalDataProperties: ['mawLifeline'],
 		setupData(self) {
