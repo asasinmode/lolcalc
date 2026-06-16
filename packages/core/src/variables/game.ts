@@ -577,13 +577,16 @@ export function replaceGameVariables(
 				generatedStatIcon = undefined;
 			}
 
-			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${generatedStatIcon || insertIcon || !lastPart || lastPart.type === 'total' ? '' : ' '}`;
+			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type === 'baseOnLevel' || lastPart?.type === 'bonus') ? ' ' : ''}`;
 
 			if (generatedEE !== extendedEquals) {
 				console.warn('new extended different', {
 					variableName,
 					extendedEquals,
 					generatedEE,
+					generatedStatIcon,
+					insertIcon,
+					lastPart: lastPart?.type,
 				}, calculatesFrom);
 			} else {
 				console.log('generated extended same', variableName, generatedEE);
