@@ -1281,7 +1281,7 @@ export const ITEM_SPECIFICS = {
 					isPercentage: true,
 					multiplier: 100,
 					resultsIsPercentage: true,
-					extendedEquals: `<const>${ITEMS_BY_NAME.actualizer?.itemCalculations.ManaCalc.mFormulaParts[0]!.mNumber}</const><scalemana> + ${ITEMS_BY_NAME.actualizer?.itemCalculations.ManaCalc.mFormulaParts[1]!.mCoefficient}% bonus</scalemana> `,
+					extendedEquals: `<const>${ITEMS_BY_NAME.actualizer?.itemCalculations.ManaCalc.mFormulaParts[0]!.mNumber}</const> <scalemana>+ ${ITEMS_BY_NAME.actualizer?.itemCalculations.ManaCalc.mFormulaParts[1]!.mCoefficient}% bonus</scalemana> `,
 				},
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],

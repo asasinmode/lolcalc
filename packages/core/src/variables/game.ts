@@ -903,17 +903,19 @@ function calculatesFromPartExtendedEquals(
 
 function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, isPercentage?: boolean): string {
 	let multiplier: number, valueSuffix: string;
+	let roundTo = 1;
 	if (isPercentage) {
 		multiplier = 100;
 		valueSuffix = '%';
+		roundTo = 3;
 	} else {
 		multiplier = 1;
 		valueSuffix = '';
 	}
 
 	return typeof value === 'number'
-		? `${isPercentage ? roundVariable(value * multiplier, 1) : Math.round(value * multiplier)}${valueSuffix}`
-		: `${isPercentage ? roundVariable(value.min * multiplier, 1) : Math.round(value.min * multiplier)}${valueSuffix} - ${isPercentage ? roundVariable(value.max * multiplier, 1) : Math.round(value.max * multiplier)}${valueSuffix}`;
+		? `${isPercentage ? roundVariable(value * multiplier, roundTo) : Math.round(value * multiplier)}${valueSuffix}`
+		: `${isPercentage ? roundVariable(value.min * multiplier, roundTo) : Math.round(value.min * multiplier)}${valueSuffix} - ${isPercentage ? roundVariable(value.max * multiplier, roundTo) : Math.round(value.max * multiplier)}${valueSuffix}`;
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */
@@ -961,7 +963,9 @@ export const VARIABLE_CALCULATION_FNS = {
 			const multiplier = resolveMMultiplier(variable.mMultiplier as any, whole, meta) ?? 1;
 			rv.value *= multiplier;
 			for (const part of rv.calculatesFrom!) {
-				multiplyCalculatePartValues(part, multiplier);
+				if (part.stat && part.stat !== 'const') {
+					multiplyCalculatePartValues(part, multiplier);
+				}
 			}
 		} else if (hasMRangedMultiplier) {
 			rv.isMeleeRanged = true;
@@ -1081,6 +1085,12 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (statsKey) {
 			return {
 				value: meta.variableValueParams.damageSource?.stats.value ? meta.variableValueParams.damageSource.stats.value[statsKey].mana * (variable.mCoefficient ?? 1) : 0,
+				calculatesFrom: [{
+					value: (variable.mCoefficient ?? 1),
+					stat: 'mana',
+					isPercentage: true,
+					type: 'bonus',
+				}],
 			};
 		}
 	},
