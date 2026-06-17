@@ -348,16 +348,16 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				BurnDamagePerSecondCalc: {
 					scalesWithStatIcon: 'abilityPower',
-					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.BurnFlatDamagePerSecond}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.APRatio * 100)}%</scalemana>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.BurnFlatDamagePerSecond}</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.APRatio * 100)}%</scaleap>`,
 					type: VariableType.magic,
 				},
 				MinionBurnCalc: {
 					scalesWithStatIcon: 'abilityPower',
-					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.MinionDPS}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.MinionAP * 100)}%</scalemana>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.MinionDPS}</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.MinionAP * 100)}%</scaleap>`,
 				},
 				MonsterBurnCalc: {
 					scalesWithStatIcon: 'abilityPower',
-					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.MonsterDPS}</const><scalemana> + ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.MonsterAP * 100)}%</scalemana>`,
+					extendedEquals: `<const>${ITEMS_BY_NAME.blackfireTorch?.dataValues.MonsterDPS}</const> <scaleap>+ ${Math.round(ITEMS_BY_NAME.blackfireTorch?.dataValues.MonsterAP * 100)}%</scaleap>`,
 				},
 			},
 			uninteresting: ['MinionBurnCalc', 'MonsterBurnCalc', 'f2', 'APPerStack', 'BurnDuration'],
