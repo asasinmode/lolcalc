@@ -506,13 +506,16 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(self) {
 				const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker?.dataValues;
+				const voidInfusion = itemVariableValue('{1247259a}', { item: ITEMS_BY_NAME.riftmaker, damageSource: self });
 
 				return {
 					/** ap gained from passive */
-					f1: {
-						value: self.stats.value.variables.riftmakerVoidInfusion
-							?? (self.stats.value.bonus.hp * ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent),
-					},
+					f1: self.stats.value.variables.riftmakerVoidInfusion === undefined
+						? voidInfusion
+						: {
+								value: self.stats.value.variables.riftmakerVoidInfusion,
+								calculatesFrom: voidInfusion.calculatesFrom,
+							},
 					lolcalcChampRange: {
 						value: [VampAmountMelee, VampAmountRanged],
 					},
@@ -531,7 +534,7 @@ export const ITEM_SPECIFICS = {
 				f1: {
 					displayedName: 'BonusAPFromHP',
 					scalesWithStatIcon: 'hp',
-					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent * 100)}%</scalehealth>`,
+					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent * 100)}% bonus</scalehealth> `,
 				},
 				BonusDamage: {
 					isCustom: true,
@@ -1559,24 +1562,24 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.magic,
 				},
 				ARMRPerHitScaling: {
-					scalesWithStatIcon: ['level'],
+					scalesWithStatIcon: 'level',
 					extendedEquals: `<const>${itemVariableValue(
 						'ARMRPerHitScaling',
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 					).value} - ${itemVariableValue(
 						'ARMRPerHitScaling',
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
-					).value}%i:${STAT_ICON.level}%</const>`,
+					).value}</const>`,
 				},
 				ARMRMaxScaling: {
-					scalesWithStatIcon: ['level'],
+					scalesWithStatIcon: 'level',
 					extendedEquals: `<const>${itemVariableValue(
 						'ARMRMaxScaling',
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource },
 					).value} - ${itemVariableValue(
 						'ARMRMaxScaling',
 						{ item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource },
-					).value}%i:${STAT_ICON.level}%</const>`,
+					).value}</const>`,
 				},
 			},
 			uninteresting: ['f1', 'ARMRMaxScaling', 'PenPerHit', 'PenMax', 'BuffDuration'],
@@ -2993,6 +2996,7 @@ export const ITEM_SPECIFICS = {
 				},
 				TotalManaRefund: {
 					scalesWithStatIcon: ['attackDamage', 'critChance'],
+					/* deliberately different from the generated one. In game it doesn't have any extended equals and wiki puts it as 50% of the spellblade damage too */
 					extendedEquals: `${Math.round(ITEMS_BY_NAME.essenceReaver?.itemCalculations.TotalManaRefund.mMultiplier.mNumber * 100)}% <var>Spellblade damage</var>`,
 				},
 			},

@@ -587,6 +587,8 @@ export function replaceGameVariables(
 					generatedStatIcon,
 					insertIcon,
 					lastPart: lastPart?.type,
+					isEqualsMeleeRanged,
+					isMeleeRanged,
 				}, calculatesFrom);
 			} else {
 				console.log('generated extended same', variableName, generatedEE);
@@ -887,6 +889,7 @@ function calculatesFromPartExtendedEquals(
 		Array.isArray(part.value)
 			? part.value[preferRangedValue ? 1 : 0]!
 			: part.value,
+		part.stat,
 		part.isPercentage,
 	);
 
@@ -901,11 +904,11 @@ function calculatesFromPartExtendedEquals(
 	}`;
 }
 
-function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, isPercentage?: boolean): string {
+function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, stat: ICalculatesFromPart['stat'], isPercentage?: boolean): string {
 	let multiplier: number, valueSuffix: string;
 	let roundTo = 1;
 	if (isPercentage) {
-		multiplier = 100;
+		multiplier = stat === 'critChance' ? 1 : 100;
 		valueSuffix = '%';
 		roundTo = 3;
 	} else {
