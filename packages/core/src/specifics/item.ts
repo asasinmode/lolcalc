@@ -1604,6 +1604,22 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { feast: number }) {
 			return internalData.feast;
 		},
+		variables: defineVariables({
+			meta: {
+				HasteFromAD: {
+					scalesWithStatIcon: ['attackDamage'],
+					// same as bastionbreaker, extened equals slightly different from generated one but should be fine
+					extendedEquals: {
+						prefix: `<const>${ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[0]!.mNumber}</const> <scalead>+ `,
+						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[1]!.mCoefficient! * 100),
+						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADRanged?.mFormulaParts[1]!.mCoefficient! * 100),
+						valueSuffix: `% bonus %i:${STAT_ICON.attackDamage}%`,
+						suffix: '</scalead>',
+					},
+				},
+			},
+			uninteresting: ['OmnivampDuration', 'OmnivampOnTakedown', 'TakedownWindow'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
@@ -1642,21 +1658,6 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.endlessHunger],
 			},
 		},
-		variables: defineVariables({
-			meta: {
-				HasteFromAD: {
-					scalesWithStatIcon: 'attackDamage',
-					extendedEquals: {
-						prefix: `<const>${ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[0]!.mNumber}</const> + <scalead>`,
-						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[1]!.mCoefficient! * 100),
-						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADRanged?.mFormulaParts[1]!.mCoefficient! * 100),
-						valueSuffix: '%',
-						suffix: ' bonus</scalead> ',
-					},
-				},
-			},
-			uninteresting: ['OmnivampDuration', 'OmnivampOnTakedown', 'TakedownWindow'],
-		}),
 	},
 	[ITEM_NAME_TO_ID.hexdrinker]: {
 		variables: defineVariables({
