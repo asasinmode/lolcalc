@@ -1089,7 +1089,7 @@ export const VARIABLE_CALCULATION_FNS = {
 					value: (variable.mCoefficient ?? 1),
 					stat: 'mana',
 					isPercentage: true,
-					type: 'bonus',
+					type: statsKey,
 				}],
 			};
 		}

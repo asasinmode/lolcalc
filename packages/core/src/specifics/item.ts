@@ -711,6 +711,12 @@ export const ITEM_SPECIFICS = {
 					f2: {
 						value: self.stats.value.variables.archangelSeraphAwe
 							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.archangelsStaff].AP_FROM_MANA),
+						calculatesFrom: [{
+							stat: 'mana',
+							type: 'bonus',
+							isPercentage: true,
+							value: ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.archangelsStaff].AP_FROM_MANA,
+						}],
 					},
 				};
 			},
@@ -740,7 +746,6 @@ export const ITEM_SPECIFICS = {
 			known: {
 				f5: [],
 				BonusAPCalc: [],
-				ShieldValue: [],
 			},
 			calculate(self) {
 				return {
@@ -752,9 +757,12 @@ export const ITEM_SPECIFICS = {
 					BonusAPCalc: {
 						value: self.stats.value.variables.archangelSeraphAwe
 							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA),
-					},
-					ShieldValue: {
-						value: self.stats.value.total.mana * ITEMS_BY_NAME.seraphsEmbrace?.itemCalculations.ShieldValue.mFormulaParts[0]!.mCoefficient,
+						calculatesFrom: [{
+							stat: 'mana',
+							type: 'bonus',
+							isPercentage: true,
+							value: ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA,
+						}],
 					},
 				};
 			},
@@ -1471,7 +1479,7 @@ export const ITEM_SPECIFICS = {
 				f5: [],
 			},
 			calculate(self) {
-				const consumptionDamage = itemVariableValue('DamageProcCalc', {item: ITEMS_BY_NAME.heartsteel, damageSource: self});
+				const consumptionDamage = itemVariableValue('DamageProcCalc', { item: ITEMS_BY_NAME.heartsteel, damageSource: self });
 				return {
 					f4: consumptionDamage,
 					f5: {
