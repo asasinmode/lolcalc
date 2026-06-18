@@ -1471,13 +1471,11 @@ export const ITEM_SPECIFICS = {
 				f5: [],
 			},
 			calculate(self) {
-				const consumptionDamage = ITEMS_BY_NAME.heartsteel?.dataValues.BaseDamage + self.stats.value.total.hp * ITEMS_BY_NAME.heartsteel?.dataValues.HPRatio;
+				const consumptionDamage = itemVariableValue('DamageProcCalc', {item: ITEMS_BY_NAME.heartsteel, damageSource: self});
 				return {
-					f4: {
-						value: consumptionDamage,
-					},
+					f4: consumptionDamage,
 					f5: {
-						value: consumptionDamage * ITEMS_BY_NAME.heartsteel?.dataValues.DamageToMaxHealthRatio,
+						value: consumptionDamage.value as number * ITEMS_BY_NAME.heartsteel?.dataValues.DamageToMaxHealthRatio,
 					},
 				};
 			},
@@ -3490,6 +3488,7 @@ export const ITEM_SPECIFICS = {
 
 				return {
 					f3: { value: 0 },
+					// TODO TMP same case as bastionbreaker, new generatedEE shuold be fine
 					lolcalcChampRange: [
 						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: false }),
 						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: true }),
