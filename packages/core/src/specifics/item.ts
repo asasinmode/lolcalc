@@ -2103,6 +2103,7 @@ export const ITEM_SPECIFICS = {
 					f1: { value: 0 },
 				};
 			},
+			// TODO this technically doesn't match new generatedEE but the new one works too so ignore the warning from it until manual ones are replaced by the generated ones
 			meta: {
 				AbilityDamageCalc: {
 					/* statIconKey array for same reason as maw of malmortius */
@@ -3489,12 +3490,10 @@ export const ITEM_SPECIFICS = {
 
 				return {
 					f3: { value: 0 },
-					lolcalcChampRange: {
-						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: true }).value as number,
-						],
-					},
+					lolcalcChampRange: [
+						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: false }),
+						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: true }),
+					],
 					MaxHealthDamage: {
 						value: [meleeHpPercent / 100 * (target?.stats.value.total.hp ?? 0), rangedHpPercent / 100 * (target?.stats.value.total.hp ?? 0)],
 					},
