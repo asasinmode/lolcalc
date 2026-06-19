@@ -579,7 +579,7 @@ export function replaceGameVariables(
 
 			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
 
-			if (generatedEE !== extendedEquals) {
+			if (extendedEquals && generatedEE !== extendedEquals) {
 				console.warn('new extended different', {
 					variableName,
 					extendedEquals,
@@ -876,7 +876,7 @@ const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon, string
 	manaRegen: 'scalemana',
 };
 
-function calculatesFromPartExtendedEquals(
+export function calculatesFromPartExtendedEquals(
 	part: ICalculatesFromPart,
 	insertIcon = false,
 	preferRangedValue = false,

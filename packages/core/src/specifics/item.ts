@@ -11,7 +11,7 @@ import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import { ABILITY_TYPE, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
-import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
+import { calculatesFromPartExtendedEquals, itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
 const actualGWoundsItems = Object.values(ITEMS).filter(item => item.dataValues?.GrievousAmount);
@@ -1814,6 +1814,42 @@ export const ITEM_SPECIFICS = {
 			const maxMissingHealthP = 1 - maxValueAt.value;
 			return ITEMS_BY_NAME.overlordsBloodmail?.dataValues.MissingHealthAD * Math.min(1, missingHealthP / maxMissingHealthP);
 		},
+		variables: defineVariables({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate(self) {
+				return {
+					f1: {
+						value: self.stats.value.variables.bloodmailTyranny
+							?? self.stats.value.bonus.hp * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
+						calculatesFrom: [{
+							stat: 'hp',
+							value: ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
+							isPercentage: true,
+							type: 'bonus',
+						}],
+					},
+					f2: {
+						value: self.stats.value.variables.bloodmailRetribution
+							?? self.stats.value.bonus.attackDamage,
+					},
+				};
+			},
+			meta: {
+				f1: {
+					scalesWithStatIcon: 'hp',
+					extendedEquals: `<scalehealth>${ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage * 100}% bonus</scalehealth> `,
+					displayedName: 'BonusHPAD',
+				},
+				f2: {
+					displayedName: 'MissingHPAD',
+					extendedEquals: '',
+				},
+			},
+			uninteresting: ['HPToADPercentage', 'MissingHealthAD', 'RemainingHealthThreshold'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
@@ -1848,35 +1884,6 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 		},
-		variables: defineVariables({
-			known: {
-				f1: [],
-				f2: [],
-			},
-			calculate(self) {
-				return {
-					f1: {
-						// TODO
-						value: self.stats.value.variables.bloodmailTyranny
-							?? self.stats.value.bonus.attackDamage * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
-					},
-					f2: {
-						value: self.stats.value.variables.bloodmailRetribution
-							?? self.stats.value.bonus.attackDamage,
-					},
-				};
-			},
-			meta: {
-				f1: {
-					extendedEquals: `<scalehealth>${ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage * 100}% bonus</scalehealth> `,
-					displayedName: 'BonusHPAD',
-				},
-				f2: {
-					displayedName: 'MissingHPAD',
-				},
-			},
-			uninteresting: ['HPToADPercentage', 'MissingHealthAD', 'RemainingHealthThreshold'],
-		}),
 		imgTextLabel: 'Retribution ad increase',
 		imgText(damageSource) {
 			return damageSource.stats.value.variables.bloodmailRetribution
@@ -2437,7 +2444,6 @@ export const ITEM_SPECIFICS = {
 				return {
 					f1: { value: 0 },
 					f2: {
-						// TODO
 						value: self.stats.value.variables.warmogsVitality
 							?? self.stats.value.itemBase.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp,
 					},
@@ -2446,7 +2452,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				TotalHealingTooltip: {
 					scalesWithStatIcon: 'hp',
-					extendedEquals: `<scalehealth>${Math.round(ITEMS_BY_NAME.warmogsArmor?.dataValues.MaxHealthRatio * ITEMS_BY_NAME.warmogsArmor?.itemCalculations.TotalHealingTooltip.mMultiplier.mNumber * 100)}%</scalehealth>`,
+					extendedEquals: calculatesFromPartExtendedEquals(itemVariableValue('TotalHealingTooltip', { item: ITEMS_BY_NAME.warmogsArmor }).calculatesFrom?.[0]!),
 				},
 				f2: {
 					displayedName: 'BonusMaxHP',
@@ -3122,7 +3128,6 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f2: {
-						// TODO
 						value: self.stats.value.variables.dawncoreAp === undefined
 							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen
 							: self.stats.value.variables.dawncoreAp,
