@@ -1551,7 +1551,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				HasteFromAD: {
 					scalesWithStatIcon: ['attackDamage'],
-					// same as bastionbreaker, extened equals slightly different from generated one but should be fine
+					// TODO same as bastionbreaker, extened equals slightly different from generated one but should be fine
 					extendedEquals: {
 						prefix: `<const>${ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[0]!.mNumber}</const> <scalead>+ `,
 						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[1]!.mCoefficient! * 100),
@@ -1636,12 +1636,10 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f4: { value: 0 },
-					lolcalcChampRange: {
-						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: true }).value as number,
-						],
-					},
+					lolcalcChampRange: [
+						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: false }),
+						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: true }),
+					],
 				};
 			},
 			meta: {
@@ -1649,6 +1647,7 @@ export const ITEM_SPECIFICS = {
 					/* array `statIconKey` usually used for when the variable scales with multiple stats, but it also makes it so when description is extended, no icon is appended after `extendedEquals`. Used here so the ad icon can be inserted at appropriate points in melee/ranged values since they have a <const> */
 					scalesWithStatIcon: ['attackDamage'],
 					displayedName: 'Shield',
+					// TODO same as bastionbreaker
 					extendedEquals: {
 						prefix: '',
 						meleeValue: `<const>${mawOfMalmortiusSpecific.meleeShield}</const> <scalead>+ ${Math.round((mawOfMalmortiusSpecific.meleeAdScaling) * 100)}% bonus %i:${STAT_ICON.attackDamage}%</scalead>`,
