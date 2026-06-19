@@ -603,24 +603,6 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 		variables: defineVariables({
-			known: {
-				BonusHSPCalc: [],
-			},
-			calculate(self) {
-				return {
-					BonusHSPCalc: {
-						value: self.stats.value.variables.whisperingDiademAwe
-							? self.stats.value.variables.whisperingDiademAwe * 100
-							: (self.stats.value.bonus.mana * ITEMS_BY_NAME.whisperingCirclet?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient),
-						calculatesFrom: [{
-							stat: 'mana',
-							isPercentage: true,
-							type: 'bonus',
-							value: ITEMS_BY_NAME.whisperingCirclet?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient,
-						}],
-					},
-				};
-			},
 			meta: {
 				BonusHSPCalc: {
 					scalesWithStatIcon: 'mana',
@@ -643,36 +625,7 @@ export const ITEM_SPECIFICS = {
 		},
 		variables: defineVariables({
 			known: {
-				BonusHSPCalc: [],
-				ManaToHeal: [],
 				f1: [],
-			},
-			calculate(self) {
-				return {
-					BonusHSPCalc: {
-						value: self.stats.value.variables.whisperingDiademAwe
-							? self.stats.value.variables.whisperingDiademAwe * 100
-							: (self.stats.value.bonus.mana * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient),
-						calculatesFrom: [{
-							stat: 'mana',
-							isPercentage: true,
-							type: 'bonus',
-							value: ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient,
-						}],
-					},
-					ManaToHeal: {
-						value: self.stats.value.total.mana * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.ManaToHeal.mFormulaParts[0]!.mCoefficient,
-						calculatesFrom: [{
-							stat: 'mana',
-							isPercentage: true,
-							type: 'total',
-							value: ITEMS_BY_NAME.diademOfSongs?.itemCalculations.ManaToHeal.mFormulaParts[0]!.mCoefficient,
-						}],
-					},
-					f1: {
-						value: 0,
-					},
-				};
 			},
 			meta: {
 				BonusHSPCalc: {
@@ -751,22 +704,20 @@ export const ITEM_SPECIFICS = {
 				BonusAPCalc: [],
 			},
 			calculate(self) {
+				const bonusAP = itemVariableValue('BonusAPCalc', { item: ITEMS_BY_NAME.seraphsEmbrace, damageSource: self });
+
 				return {
 					/** damage shielded */
 					f5: {
 						value: 0,
 					},
 					/** ap gained from passive */
-					BonusAPCalc: {
-						value: self.stats.value.variables.archangelSeraphAwe
-							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA),
-						calculatesFrom: [{
-							stat: 'mana',
-							type: 'bonus',
-							isPercentage: true,
-							value: ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA,
-						}],
-					},
+					BonusAPCalc: self.stats.value.variables.archangelSeraphAwe === undefined
+						? bonusAP
+						: {
+								value: self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA,
+								calculatesFrom: bonusAP.calculatesFrom,
+							},
 				};
 			},
 			meta: {
@@ -801,12 +752,16 @@ export const ITEM_SPECIFICS = {
 				BonusADFromMana: [],
 			},
 			calculate(self) {
+				const bonusAD = itemVariableValue('BonusADFromMana', { item: ITEMS_BY_NAME.manamune, damageSource: self });
+
 				return {
 					/** ad gained from passive */
-					BonusADFromMana: {
-						value: self.stats.value.variables.manaMuraAwe
-							?? (self.stats.value.total.mana * ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient),
-					},
+					BonusADFromMana: self.stats.value.variables.manaMuraAwe === undefined
+						? bonusAD
+						: {
+								value: self.stats.value.total.mana * ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient,
+								calculatesFrom: bonusAD.calculatesFrom,
+							},
 				};
 			},
 			meta: {
@@ -831,31 +786,24 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				BonusADFromMana: [],
-				OnHitDamage: [],
 				lolcalcChampRange: [],
 				f1: [],
 			},
 			calculate(self) {
-				const totalMana = self.stats.value.total.mana;
-				const meleeAbilitiesBonusModifier = ITEMS_BY_NAME.muramana?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient;
-				const rangedAbilitiesBonusModifier = ITEMS_BY_NAME.muramana?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient;
+				const bonusAD = itemVariableValue('BonusADFromMana', { item: ITEMS_BY_NAME.muramana, damageSource: self });
 
 				return {
-					/** ad gained from passive */
-					BonusADFromMana: {
-						value: self.stats.value.variables.manaMuraAwe
-							?? (totalMana * ITEMS_BY_NAME.muramana?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient),
-					},
-					OnHitDamage: {
-						value: totalMana * ITEMS_BY_NAME.muramana?.itemCalculations.OnHitDamage.mFormulaParts[0]!.mCoefficient,
-					},
+					BonusADFromMana: self.stats.value.variables.manaMuraAwe === undefined
+						? bonusAD
+						: {
+								value: self.stats.value.variables.manaMuraAwe,
+								calculatesFrom: bonusAD.calculatesFrom,
+							},
 					/** passive damaging abilities bonus damage */
-					lolcalcChampRange: {
-						value: [
-							totalMana * meleeAbilitiesBonusModifier,
-							totalMana * rangedAbilitiesBonusModifier,
-						],
-					},
+					lolcalcChampRange: [
+						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.muramana, damageSource: self, isRanged: false }),
+						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.muramana, damageSource: self, isRanged: true }),
+					],
 					f1: {
 						value: 0,
 					},
@@ -902,17 +850,15 @@ export const ITEM_SPECIFICS = {
 				BonusHPFromMana: [],
 			},
 			calculate(self) {
+				const bonusHP = itemVariableValue('BonusHPFromMana', { item: ITEMS_BY_NAME.wintersApproach, damageSource: self });
+
 				return {
-					BonusHPFromMana: {
-						value: self.stats.value.variables.approachFimbulAwe
-							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA),
-						calculatesFrom: [{
-							stat: 'mana',
-							isPercentage: true,
-							type: 'bonus',
-							value: ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA,
-						}],
-					},
+					BonusHPFromMana: self.stats.value.variables.approachFimbulAwe === undefined
+						? bonusHP
+						: {
+								value: self.stats.value.variables.approachFimbulAwe,
+								calculatesFrom: bonusHP.calculatesFrom,
+							},
 				};
 			},
 			meta: {
@@ -951,18 +897,15 @@ export const ITEM_SPECIFICS = {
 				ComputedShield: [],
 			},
 			calculate(self) {
+				const bonusHP = itemVariableValue('BonusHPFromMana', { item: ITEMS_BY_NAME.fimbulwinter, damageSource: self });
+
 				return {
-					/* TODO this should be calculable from item.json since the variable seems to be just bonus mana % with __type `AbilityResourceByCoefficientCalculationPart` but atm Ryze's passive is unimplemented and making trouble so try to revisit it later */
-					BonusHPFromMana: {
-						value: self.stats.value.variables.approachFimbulAwe
-							?? (self.stats.value.bonus.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA),
-						calculatesFrom: [{
-							stat: 'mana',
-							isPercentage: true,
-							type: 'bonus',
-							value: ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA,
-						}],
-					},
+					BonusHPFromMana: self.stats.value.variables.approachFimbulAwe === undefined
+						? bonusHP
+						: {
+								value: self.stats.value.variables.approachFimbulAwe,
+								calculatesFrom: bonusHP.calculatesFrom,
+							},
 					ShieldBase: {
 						value: ITEMS_BY_NAME.fimbulwinter?.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber,
 					},
@@ -1913,6 +1856,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f1: {
+						// TODO
 						value: self.stats.value.variables.bloodmailTyranny
 							?? self.stats.value.bonus.attackDamage * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
 					},
@@ -2493,6 +2437,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					f1: { value: 0 },
 					f2: {
+						// TODO
 						value: self.stats.value.variables.warmogsVitality
 							?? self.stats.value.itemBase.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp,
 					},
@@ -3177,6 +3122,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f2: {
+						// TODO
 						value: self.stats.value.variables.dawncoreAp === undefined
 							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen
 							: self.stats.value.variables.dawncoreAp,
