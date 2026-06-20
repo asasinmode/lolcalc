@@ -156,6 +156,20 @@ export function itemVariableValue(
 					addCalculatesFrom(rv.calculatesFrom, dynamicValue[0].calculatesFrom);
 				}
 			}
+		} else if (Array.isArray(dynamicValue.value)) {
+			if (dynamicValue.calculatesFrom?.length) {
+				addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom);
+			}
+			if (isRanged === undefined) {
+				rv.isMeleeRanged = true;
+				rv.value = dynamicValue.value;
+			} else if (isRanged) {
+				rv.isMeleeRanged = 1;
+				rv.value = dynamicValue.value[1];
+			} else {
+				rv.isMeleeRanged = 0;
+				rv.value = dynamicValue.value[0];
+			}
 		} else {
 			rv.value = dynamicValue.value;
 			if (dynamicValue.calculatesFrom?.length) {
@@ -580,7 +594,7 @@ export function replaceGameVariables(
 
 			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
 
-			if (extendedEquals && generatedEE !== extendedEquals) {
+			if ((extendedEquals && generatedEE !== extendedEquals) || (meta && !('extendedEquals' in meta) && generatedEE)) {
 				console.warn('new extended different', {
 					variableName,
 					extendedEquals,
