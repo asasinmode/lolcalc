@@ -825,8 +825,8 @@ export const ITEM_SPECIFICS = {
 						prefix: '<scalemana>',
 						meleeValue: roundVariable(ITEMS_BY_NAME.muramana?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
 						rangedValue: roundVariable(ITEMS_BY_NAME.muramana?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
-						valueSuffix: '%',
-						suffix: '</scalemana>',
+						valueSuffix: '%</scalemana>',
+						suffix: '',
 					},
 				},
 			},
@@ -1556,8 +1556,8 @@ export const ITEM_SPECIFICS = {
 						prefix: `<const>${ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[0]!.mNumber}</const> <scalead>+ `,
 						meleeValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADMelee?.mFormulaParts[1]!.mCoefficient! * 100),
 						rangedValue: Math.round(ITEMS_BY_NAME.endlessHunger?.itemCalculations.HasteFromADRanged?.mFormulaParts[1]!.mCoefficient! * 100),
-						valueSuffix: `% bonus %i:${STAT_ICON.attackDamage}%`,
-						suffix: '</scalead>',
+						valueSuffix: `% bonus %i:${STAT_ICON.attackDamage}%</scalead>`,
+						suffix: '',
 					},
 				},
 			},
@@ -3047,18 +3047,16 @@ export const ITEM_SPECIFICS = {
 				Heal: [],
 			},
 			calculate(self) {
-				const baseMelee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: false }).value as number;
-				const baseRanged = itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: true }).value as number;
+				const baseMelee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: false });
+				const baseRanged = itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: true });
 				const missingHp = self.stats.value.total.hp - self.currentHealth.value;
 				const missingHpHeal = missingHp * ITEMS_BY_NAME.sunderedSky?.dataValues.MissingHealthHeal;
 
 				return {
 					f2: { value: 0 },
-					lolcalcChampRange: {
-						value: [baseMelee, baseRanged],
-					},
+					lolcalcChampRange: [baseMelee, baseRanged],
 					Heal: {
-						value: [baseMelee + missingHpHeal, baseRanged + missingHpHeal],
+						value: [baseMelee.value as number + missingHpHeal, baseRanged.value as number + missingHpHeal],
 					},
 				};
 			},
@@ -3066,11 +3064,12 @@ export const ITEM_SPECIFICS = {
 				lolcalcChampRange: {
 					type: VariableType.heal,
 					displayedName: 'BaseHeal',
-					scalesWithStatIcon: ['attackDamage'],
+					scalesWithStatIcon: 'attackDamage',
+					// TODO same as bastionbreaker, generated slightly different but should be ok
 					extendedEquals: {
 						prefix: '',
-						meleeValue: `<scalead>${Math.round(sunderedSkySpecifics.meleeAdRatio * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead>`,
-						rangedValue: `<scalead>${Math.round(sunderedSkySpecifics.meleeAdRatio * sunderedSkySpecifics.rangedModifier * 100)}% base %i:${STAT_ICON.attackDamage}%</scalead>`,
+						meleeValue: `<scalead>${Math.round(sunderedSkySpecifics.meleeAdRatio * 100)}% base</scalead>`,
+						rangedValue: `<scalead>${Math.round(sunderedSkySpecifics.meleeAdRatio * sunderedSkySpecifics.rangedModifier * 100)}% base</scalead>`,
 						suffix: ' ',
 					},
 				},
@@ -3401,7 +3400,8 @@ export const ITEM_SPECIFICS = {
 						prefix: '<const>',
 						meleeValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource, isRanged: false }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource, isRanged: false }).value as number)}`,
 						rangedValue: `${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource, isRanged: true }).value as number)} - ${Math.round(itemVariableValue('MaximumDamage', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource, isRanged: true }).value as number)}`,
-						suffix: '</const>',
+						valueSuffix: '</const>',
+						suffix: '',
 					},
 				},
 				Damage: {

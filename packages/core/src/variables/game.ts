@@ -551,7 +551,7 @@ export function replaceGameVariables(
 			: typeof meta?.extendedEquals !== 'object'
 				? meta?.extendedEquals as string
 				: `${meta.extendedEquals.prefix}${isMeleeRanged === true
-					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix} <const>|</const> ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
+					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''} <const>|</const> ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
 					: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
 				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
