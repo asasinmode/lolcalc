@@ -866,7 +866,7 @@ function variableExtendedEquals(
 
 	let statIconKey = meta?.scalesWithStatIcon;
 
-	if (calculatesFrom?.length && !calculatesFrom.every(part => part.stat === 'const' && !part.type)) {
+	if (calculatesFrom?.length && calculatesFrom.some(part => part.stat !== 'const' || part.type)) {
 		calculatesFrom.sort((partA, partB) => (partB.stat === 'const' ? 1 : 0) - (partA.stat === 'const' ? 1 : 0));
 		let generatedStatIcon: IVariableMetaStatIcon[] | IVariableMetaStatIcon | undefined;
 
