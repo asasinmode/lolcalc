@@ -1102,6 +1102,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ManaCalc: {
 					isPercentage: true,
+					roundReplaced: 2,
 				},
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],

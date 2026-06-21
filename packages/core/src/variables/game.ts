@@ -1462,7 +1462,6 @@ function resolveMMultiplier(
 	const { mNumber, mDataValue } = variable;
 	let rv: number | undefined;
 	if (mNumber) {
-		/* there could be a better way */
 		rv = mNumber;
 	} else if (mDataValue) {
 		meta?.accessedVariables?.add(variable.mDataValue);
@@ -1481,5 +1480,6 @@ function resolveMMultiplier(
 		console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
 		return 0;
 	}
+	/* there could be a better way */
 	return rv === 0.667 ? (2 / 3) : rv;
 }
