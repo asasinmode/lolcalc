@@ -866,7 +866,7 @@ function variableExtendedEquals(
 
 	let statIconKey = meta?.scalesWithStatIcon;
 
-	if (!(meta && 'extendedEquals' in meta) && calculatesFrom?.length && !calculatesFrom.every(part => part.stat === 'const' && !part.type)) {
+	if (calculatesFrom?.length && !calculatesFrom.every(part => part.stat === 'const' && !part.type)) {
 		calculatesFrom.sort((partA, partB) => (partB.stat === 'const' ? 1 : 0) - (partA.stat === 'const' ? 1 : 0));
 		let generatedStatIcon: IVariableMetaStatIcon[] | IVariableMetaStatIcon | undefined;
 
@@ -899,7 +899,9 @@ function variableExtendedEquals(
 			statIconKey = generatedStatIcon;
 		}
 
-		extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
+		if (!(meta && 'extendedEquals' in meta)) {
+			extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
+		}
 	}
 
 	if (statIconKey || varIcon) {
