@@ -503,7 +503,7 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName, allValues, roundReplaced, meta, isUninteresting, calculatesFrom } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues, roundReplaced, meta, isUninteresting, isPercentage, multiplier: variableMultiplier, calculatesFrom } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
@@ -549,6 +549,8 @@ export function replaceGameVariables(
 
 		if (meta?.multiplier) {
 			multiplier = meta.multiplier;
+		} else if (variableMultiplier) {
+			multiplier = variableMultiplier;
 		}
 
 		if (variable === undefined) {
@@ -567,7 +569,7 @@ export function replaceGameVariables(
 			return `${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : variable}${tagWrapEnd}${metaSuffix}`;
 		}
 
-		const varValueSuffix = meta?.isPercentage ? '%' : (optionalPercent ?? '');
+		const varValueSuffix = meta?.isPercentage || isPercentage ? '%' : (optionalPercent ?? '');
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
@@ -891,16 +893,17 @@ function variableExtendedEquals(
 				generatedStatIcon.push(part.stat);
 			}
 		}
-		if (!insertIcon && Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
-			generatedStatIcon = generatedStatIcon[0];
-		}
-
-		if (!(meta && 'scalesWithStatIcon' in meta)) {
-			statIconKey = generatedStatIcon;
-		}
 
 		if (!(meta && 'extendedEquals' in meta)) {
 			extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
+		}
+
+		if (!(meta && 'scalesWithStatIcon' in meta)) {
+			if (!insertIcon && Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
+				generatedStatIcon = generatedStatIcon[0];
+			}
+
+			statIconKey = generatedStatIcon;
 		}
 	}
 
@@ -939,6 +942,12 @@ export const VARIABLE_CALCULATION_FNS = {
 			}
 			return undefined;
 		});
+
+		if (variable.mDisplayAsPercent) {
+			rv.isPercentage = true;
+			rv.multiplier = 100;
+			rv.roundReplaced = true;
+		}
 
 		const hasMMultiplier = ('mMultiplier' in variable);
 		const hasMRangedMultiplier = ('mRangedMultiplier' in variable);
@@ -995,12 +1004,6 @@ export const VARIABLE_CALCULATION_FNS = {
 			} else {
 				rv.isMeleeRanged = 0;
 			}
-		}
-
-		if (variable.mDisplayAsPercent) {
-			rv.meta ??= {};
-			rv.meta.isPercentage = true;
-			rv.meta.multiplier ??= variable.mDisplayAsPercent ? 100 : undefined;
 		}
 
 		return rv;
@@ -1449,8 +1452,10 @@ function resolveMMultiplier(
 	meta?: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[2],
 ): number {
 	const { mNumber, mDataValue } = variable;
+	let rv: number | undefined;
 	if (mNumber) {
-		return mNumber;
+		/* there could be a better way */
+		rv = mNumber;
 	} else if (mDataValue) {
 		meta?.accessedVariables?.add(variable.mDataValue);
 		const value = whole.dataValues?.[mDataValue];
@@ -1460,10 +1465,13 @@ function resolveMMultiplier(
 			if (value.length === 2) {
 				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', { mNumber, mDataValue }, variable);
 			}
-			return value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+			rv = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 		}
-		return value;
+		rv = value;
 	}
-	console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
-	return 0;
+	if (rv === undefined) {
+		console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
+		return 0;
+	}
+	return rv === 0.667 ? (2 / 3) : rv;
 }
