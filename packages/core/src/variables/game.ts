@@ -545,98 +545,7 @@ export function replaceGameVariables(
 		}
 
 		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
-		let metaSuffix = '';
-		const extendedEquals = typeof meta?.extendedEquals === 'function'
-			? meta.extendedEquals(variableValueFunctionParams, options.overrideVariables)
-			: typeof meta?.extendedEquals !== 'object'
-				? meta?.extendedEquals as string
-				: `${meta.extendedEquals.prefix}${isMeleeRanged === true
-					? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''} <const>|</const> ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
-					: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
-				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
-
-		const statIconKey = meta?.scalesWithStatIcon;
-		// TODO run updateData with logging to see what's changed
-		// TODO convert to stat icons
-		let generatedStatIcon: IVariableMetaStatIcon[] | IVariableMetaStatIcon | undefined;
-
-		// TODO TMP while extendedEquals is generated now in most cases, the items manual ones are kept for the time of implementing champion passives to make sure any changes made to generating preserve what the handmade item ones look like
-		if (calculatesFrom?.length && (calculatesFrom?.length > 1 || calculatesFrom[0]!.stat !== 'const')) {
-			const hasMeleeRangedValue = calculatesFrom.some(part => Array.isArray(part.value));
-			const isEqualsMeleeRanged = isMeleeRanged === true && hasMeleeRangedValue;
-			const lastPart = calculatesFrom.at(-1);
-			const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1 || (calculatesFrom.length > 1 && (hasMeleeRangedValue || (lastPart && lastPart.stat === 'const')));
-
-			const defaultEEPreferRangedValue = isMeleeRanged === 1;
-			generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
-			const rawGeneratedEE: [string, string] = [
-				calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, defaultEEPreferRangedValue),
-				isEqualsMeleeRanged ? calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, true) : '',
-			];
-			for (const part of calculatesFrom.slice(1)) {
-				rawGeneratedEE[0] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, defaultEEPreferRangedValue, true)}`;
-				if (isEqualsMeleeRanged) {
-					rawGeneratedEE[1] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, true, true)}`;
-				}
-				if (part.stat && part.stat !== 'const') {
-					generatedStatIcon ??= [];
-					generatedStatIcon.push(part.stat);
-				}
-			}
-			if (!insertIcon && Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
-				generatedStatIcon = generatedStatIcon[0];
-			}
-
-			// TODO should override every time, not just when the specified is `undefined` but for now old, manual `extendedEquals` & icon are kept to make sure the generated one works properly
-			if (meta && 'scalesWithStatIcon' in meta && meta.scalesWithStatIcon === undefined) {
-				generatedStatIcon = undefined;
-			}
-
-			const generatedEE = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
-
-			if ((extendedEquals && generatedEE !== extendedEquals) || (meta && !('extendedEquals' in meta) && generatedEE)) {
-				console.warn('new extended different', {
-					variableName,
-					extendedEquals,
-					generatedEE,
-					generatedStatIcon,
-					insertIcon,
-					lastPart: lastPart?.type,
-					hasMeleeRangedValue,
-					isEqualsMeleeRanged,
-					isMeleeRanged,
-				}, calculatesFrom);
-			} else {
-				console.log('generated extended same', variableName, generatedEE);
-			}
-		} else if (extendedEquals) {
-			console.warn('didnt generate extended', { variableName, extendedEquals }, calculatesFrom);
-		}
-
-		if (
-			(statIconKey && !generatedStatIcon)
-			|| (generatedStatIcon && !statIconKey)
-			|| (Array.isArray(statIconKey)
-				? !(Array.isArray(generatedStatIcon) && statIconKey.every((icon, i) => generatedStatIcon[i] === icon))
-				: statIconKey !== generatedStatIcon
-			)
-		) {
-			console.warn('new icon diff', { variableName, statIconKey, generatedStatIcon }, calculatesFrom);
-		} else if (generatedStatIcon) {
-			console.log('generated icon same', variableName, generatedStatIcon);
-		}
-
-		if (statIconKey || varIcon) {
-			const iconStr = (typeof statIconKey === 'string'
-				? statIconKey ? `%i:${STAT_ICON[statIconKey]}%` : ''
-				: options.isExtended ? '' : statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon || '';
-
-			(extendedEquals && options.isExtended)
-				? metaSuffix = ` = (${extendedEquals}${iconStr})`
-				: metaSuffix = ` (${iconStr})`;
-		} else if (extendedEquals && options.isExtended) {
-			metaSuffix = ` = (${extendedEquals})`;
-		}
+		const metaSuffix = variableExtendedEquals(variableValueFunctionParams, options, isMeleeRanged, calculatesFrom, meta, varIcon);
 
 		if (meta?.multiplier) {
 			multiplier = meta.multiplier;
@@ -935,6 +844,76 @@ function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value
 	return typeof value === 'number'
 		? `${isPercentage ? roundVariable(value * multiplier, roundTo) : Math.round(value * multiplier)}${valueSuffix}`
 		: `${isPercentage ? roundVariable(value.min * multiplier, roundTo) : Math.round(value.min * multiplier)}${valueSuffix} - ${isPercentage ? roundVariable(value.max * multiplier, roundTo) : Math.round(value.max * multiplier)}${valueSuffix}`;
+}
+
+function variableExtendedEquals(
+	variableValueFunctionParams: IItemVariableParams | IRuneVariableParams | IChampionAbilityVariableParams,
+	options: Partial<IReplaceGameVariablesOptions>,
+	isMeleeRanged: IVariableValueResult['isMeleeRanged'],
+	calculatesFrom: IVariableValueResult['calculatesFrom'],
+	meta: IVariableMeta | undefined,
+	varIcon?: string,
+): string {
+	let metaSuffix = '';
+	let extendedEquals = typeof meta?.extendedEquals === 'function'
+		? meta.extendedEquals(variableValueFunctionParams, options.overrideVariables)
+		: typeof meta?.extendedEquals !== 'object'
+			? meta?.extendedEquals as string
+			: `${meta.extendedEquals.prefix}${isMeleeRanged === true
+				? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''} <const>|</const> ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
+				: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
+			}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
+
+	let statIconKey = meta?.scalesWithStatIcon;
+
+	if (!(meta && 'extendedEquals' in meta) && calculatesFrom?.length && (calculatesFrom?.length > 1 || calculatesFrom[0]!.stat !== 'const')) {
+		let generatedStatIcon: IVariableMetaStatIcon[] | IVariableMetaStatIcon | undefined;
+
+		const hasMeleeRangedValue = calculatesFrom.some(part => Array.isArray(part.value));
+		const isEqualsMeleeRanged = isMeleeRanged === true && hasMeleeRangedValue;
+		const lastPart = calculatesFrom.at(-1);
+		const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1 || (calculatesFrom.length > 1 && (hasMeleeRangedValue || (lastPart && lastPart.stat === 'const')));
+
+		const defaultEEPreferRangedValue = isMeleeRanged === 1;
+		generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
+		const rawGeneratedEE: [string, string] = [
+			calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, defaultEEPreferRangedValue),
+			isEqualsMeleeRanged ? calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, true) : '',
+		];
+		for (const part of calculatesFrom.slice(1)) {
+			rawGeneratedEE[0] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, defaultEEPreferRangedValue, true)}`;
+			if (isEqualsMeleeRanged) {
+				rawGeneratedEE[1] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, true, true)}`;
+			}
+			if (part.stat && part.stat !== 'const') {
+				generatedStatIcon ??= [];
+				generatedStatIcon.push(part.stat);
+			}
+		}
+		if (!insertIcon && Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
+			generatedStatIcon = generatedStatIcon[0];
+		}
+
+		if (!(meta && 'scalesWithStatIcon' in meta)) {
+			statIconKey = generatedStatIcon;
+		}
+
+		extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
+	}
+
+	if (statIconKey || varIcon) {
+		const iconStr = (typeof statIconKey === 'string'
+			? statIconKey ? `%i:${STAT_ICON[statIconKey]}%` : ''
+			: options.isExtended ? '' : statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon || '';
+
+		(extendedEquals && options.isExtended)
+			? metaSuffix = ` = (${extendedEquals}${iconStr})`
+			: metaSuffix = ` (${iconStr})`;
+	} else if (extendedEquals && options.isExtended) {
+		metaSuffix = ` = (${extendedEquals})`;
+	}
+
+	return metaSuffix;
 }
 
 /** functions for resolving game variables named by their `__type` or other identifier */

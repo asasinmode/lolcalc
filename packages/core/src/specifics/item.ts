@@ -958,7 +958,7 @@ export const ITEM_SPECIFICS = {
 				SpellbladeDamage: {
 					type: VariableType.physical,
 					scalesWithStatIcon: 'attackDamage',
-					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.trinity?.dataValues.SpellbladeMultiplier * 100)}% bonus</scalead> `,
+					extendedEquals: `<scalead>${Math.round(ITEMS_BY_NAME.trinity?.dataValues.SpellbladeMultiplier * 100)}% base</scalead> `,
 				},
 			},
 			uninteresting: ['f4', 'MoveSpeedBonus', 'MSDuration'],
@@ -2351,12 +2351,10 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(self) {
 				return {
-					lolcalcChampRange: {
-						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: true }).value as number,
-						],
-					},
+					lolcalcChampRange: [
+						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: false }),
+						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: true }),
+					],
 				};
 			},
 			meta: {
@@ -2367,8 +2365,8 @@ export const ITEM_SPECIFICS = {
 						prefix: '<scalead>',
 						meleeValue: Math.round(ITEMS_BY_NAME.ravenousHydra?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
 						rangedValue: Math.round(ITEMS_BY_NAME.ravenousHydra?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
-						valueSuffix: '%',
-						suffix: '</scalead>',
+						valueSuffix: '%</scalead>',
+						suffix: '',
 					},
 				},
 				PrimaryDamage: {
@@ -2400,8 +2398,8 @@ export const ITEM_SPECIFICS = {
 						prefix: '<scalead>',
 						meleeValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
 						rangedValue: Math.round(ITEMS_BY_NAME.tiamat?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]?.mCoefficient! * 100),
-						valueSuffix: '%',
-						suffix: '</scalead>',
+						valueSuffix: '%</scalead>',
+						suffix: '',
 					},
 				},
 				PrimaryDamage: {
@@ -2841,7 +2839,8 @@ export const ITEM_SPECIFICS = {
 						prefix: '<const>',
 						meleeValue: `${hullbreakerSpecifics.meleeBonusMinionResistsLvl1} - ${hullbreakerSpecifics.meleeBonusMinionResistsLvl18}`,
 						rangedValue: `${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl1 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)} - ${Math.round(hullbreakerSpecifics.meleeBonusMinionResistsLvl18 * hullbreakerSpecifics.bonusMinionResistsRangedModifier)}`,
-						suffix: '</const>',
+						valueSuffix: '</const>',
+						suffix: '',
 					},
 				},
 			},
@@ -3210,8 +3209,8 @@ export const ITEM_SPECIFICS = {
 						prefix: '<scalead>',
 						meleeValue: Math.round(ITEMS_BY_NAME.stridebreaker?.itemCalculations.MeleeItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
 						rangedValue: Math.round(ITEMS_BY_NAME.stridebreaker?.itemCalculations.RangedItemCalcValue.mFormulaParts[0]!.mCoefficient * 100),
-						valueSuffix: '%',
-						suffix: '</scalead>',
+						valueSuffix: '%</scalead>',
+						suffix: '',
 					},
 				},
 				SlashDamage: {
@@ -3430,7 +3429,8 @@ export const ITEM_SPECIFICS = {
 						prefix: '<const>',
 						meleeValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource, isRanged: false }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource, isRanged: false }).value}`,
 						rangedValue: `${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.min } } as DamageSource, isRanged: true }).value} - ${itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.immortalShieldbow, damageSource: { level: { value: CHAMPION_LEVEL.max } } as DamageSource, isRanged: true }).value}`,
-						suffix: `</const>`,
+						valueSuffix: '</const>',
+						suffix: '',
 					},
 					additionalInfo: `while the calculated value is affected by [${simpleFormattingGameAbilityImage(ABILITY_TYPE.item, ITEM_NAME_TO_ID.serpentsFang)} Serpent's Fang's](https://wiki.leagueoflegends.com/en-us/Serpent%27s_Fang) Shield Reave, the actual shield in game will probably be bigger because of how the Lifeline triggers. See the [${simpleFormattingGameAbilityImage(ABILITY_TYPE.item, ITEM_NAME_TO_ID.immortalShieldbow)} Shieldbow's wiki notes](https://wiki.leagueoflegends.com/en-us/Immortal_Shieldbow#Notes)`,
 				},
@@ -3832,8 +3832,8 @@ export const ITEM_SPECIFICS = {
 						prefix: `<scalehealth>`,
 						meleeValue: Math.round(ITEMS_BY_NAME.titanicHydra?.itemCalculations.OnHitDamageCalc.mFormulaParts[0]!.mCoefficient * 100),
 						rangedValue: roundVariable(ITEMS_BY_NAME.titanicHydra?.itemCalculations.OnHitDamageCalc.mFormulaParts[0]!.mCoefficient * ITEMS_BY_NAME.titanicHydra?.itemCalculations.OnHitDamageCalc.mRangedMultiplier.mNumber * 100, 1),
-						valueSuffix: '%',
-						suffix: '</scalehealth>',
+						valueSuffix: '%</scalehealth>',
+						suffix: '',
 					},
 				},
 				ConeDamageCalc: {
@@ -3843,8 +3843,8 @@ export const ITEM_SPECIFICS = {
 						prefix: `<scalehealth>`,
 						meleeValue: Math.round(ITEMS_BY_NAME.titanicHydra?.itemCalculations.ConeDamageCalc.mFormulaParts[0]!.mCoefficient * 100),
 						rangedValue: roundVariable(ITEMS_BY_NAME.titanicHydra?.itemCalculations.ConeDamageCalc.mFormulaParts[0]!.mCoefficient * ITEMS_BY_NAME.titanicHydra?.itemCalculations.ConeDamageCalc.mRangedMultiplier.mNumber * 100, 1),
-						valueSuffix: '%',
-						suffix: '</scalehealth>',
+						valueSuffix: '%</scalehealth>',
+						suffix: '',
 					},
 
 				},
@@ -3855,8 +3855,8 @@ export const ITEM_SPECIFICS = {
 						prefix: `<scalehealth>`,
 						meleeValue: Math.round((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueC.mFormulaParts[0]!.mDataValue!] * 100),
 						rangedValue: roundVariable((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueC.mFormulaParts[0]!.mDataValue!] * (ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueC.mRangedMultiplier.mDataValue!] * 100),
-						valueSuffix: '%',
-						suffix: '</scalehealth>',
+						valueSuffix: '%</scalehealth>',
+						suffix: '',
 					},
 
 				},
@@ -3867,8 +3867,8 @@ export const ITEM_SPECIFICS = {
 						prefix: `<scalehealth>`,
 						meleeValue: Math.round((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueD.mFormulaParts[0]!.mDataValue!] * 100),
 						rangedValue: roundVariable((ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueD.mFormulaParts[0]!.mDataValue!] * (ITEMS_BY_NAME.titanicHydra?.dataValues as any)[ITEMS_BY_NAME.titanicHydra?.itemCalculations.CalcValueD.mRangedMultiplier.mDataValue!] * 100),
-						valueSuffix: '%',
-						suffix: '</scalehealth>',
+						valueSuffix: '%</scalehealth>',
+						suffix: '',
 					},
 
 				},
