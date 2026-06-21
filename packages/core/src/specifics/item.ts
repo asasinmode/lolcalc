@@ -468,7 +468,6 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'MaxStacksOmnivamp',
 					multiplier: 100,
 					isPercentage: true,
-					resultsIsPercentage: true,
 				},
 				f1: {
 					displayedName: 'BonusAPFromHP',
@@ -540,11 +539,6 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 		variables: defineVariables({
-			meta: {
-				BonusHSPCalc: {
-					resultsIsPercentage: true,
-				},
-			},
 			uninteresting: tearItem.uninterestingVariables,
 		}),
 	},
@@ -568,11 +562,7 @@ export const ITEM_SPECIFICS = {
 				};
 			},
 			meta: {
-				BonusHSPCalc: {
-					resultsIsPercentage: true,
-				},
 				ManaToHeal: {
-					resultsIsPercentage: true,
 					type: VariableType.heal,
 				},
 			},
@@ -1112,8 +1102,6 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ManaCalc: {
 					isPercentage: true,
-					multiplier: 100,
-					resultsIsPercentage: true,
 				},
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],
@@ -1169,7 +1157,6 @@ export const ITEM_SPECIFICS = {
 				lolcalcChampRange: {
 					isPercentage: true,
 					displayedName: 'ActiveMoveSpeed',
-					resultsIsPercentage: true,
 				},
 			},
 			uninteresting: ['OOCMS', 'Duration'],
@@ -1602,7 +1589,6 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 					displayedName: 'CurrentHealthPercent',
 					isPercentage: true,
-					resultsIsPercentage: true,
 					multiplier: 100,
 				},
 				CurrentHealthDamage: {
@@ -2693,12 +2679,10 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(self) {
 				return {
-					lolcalcChampRange: {
-						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: true }).value as number,
-						],
-					},
+					lolcalcChampRange: [
+						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: false }),
+						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: true }),
+					],
 				};
 			},
 			meta: {
@@ -2706,7 +2690,6 @@ export const ITEM_SPECIFICS = {
 					displayedName: 'IgnoreDamagePercent',
 					isPercentage: true,
 					multiplier: 100,
-					resultsIsPercentage: true,
 				},
 				HealTotal: {
 					type: VariableType.heal,
@@ -2821,7 +2804,6 @@ export const ITEM_SPECIFICS = {
 				},
 				f3: {
 					displayedName: 'TotalHSPower',
-					resultsIsPercentage: true,
 				},
 			},
 			uninteresting: ['HSPowerPerManaRegen', 'APPerManaRegen'],
@@ -2960,11 +2942,9 @@ export const ITEM_SPECIFICS = {
 				SpellbladeDamage: {
 					type: VariableType.physical,
 				},
-				/* technically game rounds this to 13% for ranged but showing `12.5` should be fine */
 				SlowAmountMeleeRangedSplit: {
 					isPercentage: true,
 					multiplier: 100,
-					resultsIsPercentage: true,
 				},
 			},
 			uninteresting: ['f1', 'SlowFieldDuration'],
@@ -3077,7 +3057,6 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				MaxHealthDamageCalc: {
 					type: VariableType.physical,
-					resultsIsPercentage: true,
 				},
 				lolcalcChampRange: {
 					displayedName: 'Shield',
@@ -3141,7 +3120,6 @@ export const ITEM_SPECIFICS = {
 					isCustom: true,
 					isPercentage: true,
 					multiplier: 100,
-					resultsIsPercentage: true,
 					resultsMultiplier: 100,
 				},
 			},
@@ -3263,13 +3241,6 @@ export const ITEM_SPECIFICS = {
 			return { noxianHaste: 0 };
 		},
 		variables: defineVariables({
-			meta: {
-				MSAmount: {
-					isPercentage: true,
-					multiplier: 100,
-					resultsIsPercentage: true,
-				},
-			},
 			uninteresting: ['Duration', 'SummonerHaste'],
 		}),
 		calculateHooks: {
@@ -3299,10 +3270,8 @@ export const ITEM_SPECIFICS = {
 				BonusDamage: {
 					type: VariableType.magic,
 				},
-				RangePercentIncrease: {
-					resultsIsPercentage: true,
-				},
 			},
+			uninteresting: ['RangePercentIncrease'],
 		}),
 		calculateHooks: {
 			preItemTotal: {
@@ -3371,11 +3340,6 @@ export const ITEM_SPECIFICS = {
 			return { quicksilver: 0 };
 		},
 		variables: defineVariables({
-			meta: {
-				MoveSpeed: {
-					resultsIsPercentage: true,
-				},
-			},
 			uninteresting: ['MSDuration'],
 		}),
 		calculateHooks: {
@@ -3423,11 +3387,6 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.axiomArc]: {
 		variables: defineVariables({
-			meta: {
-				UltimateRefund: {
-					resultsIsPercentage: true,
-				},
-			},
 			uninteresting: ['ResetWindow'],
 		}),
 	},

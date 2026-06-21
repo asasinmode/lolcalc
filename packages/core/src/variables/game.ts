@@ -514,6 +514,7 @@ export function replaceGameVariables(
 		if (meta?.roundReplaced !== undefined) {
 			roundReplaced = meta.roundReplaced;
 		}
+		isPercentage ??= meta?.isPercentage || Boolean(optionalPercent);
 
 		/*
 		 * if meta's present, the variable was most likely gotten from dynamicVariables which store their values cached on `DamageSource`
@@ -571,7 +572,7 @@ export function replaceGameVariables(
 			return `${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : variable}${tagWrapEnd}${metaSuffix}`;
 		}
 
-		const varValueSuffix = meta?.isPercentage || isPercentage ? '%' : (optionalPercent ?? '');
+		const varValueSuffix = isPercentage ? '%' : (optionalPercent ?? '');
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
@@ -618,7 +619,7 @@ export function replaceGameVariables(
 				baseValue,
 				value: variable as [string | number, string | number],
 				meta,
-				isPercentage: meta?.isPercentage || isPercentage,
+				isPercentage,
 				isUninteresting,
 			});
 
@@ -648,7 +649,7 @@ export function replaceGameVariables(
 		}
 
 		variable = roundVariable(variable * multiplier);
-		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage: meta?.isPercentage || isPercentage });
+		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
 			? 'melee'
@@ -941,6 +942,9 @@ export const VARIABLE_CALCULATION_FNS = {
 				if (resolved?.calculatesFrom) {
 					addCalculatesFrom(rv.calculatesFrom, resolved.calculatesFrom);
 				}
+				if (resolved?.isPercentage) {
+					rv.isPercentage ||= resolved.isPercentage;
+				}
 				return resolved?.value as number;
 			}
 			return undefined;
@@ -1092,6 +1096,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (statsKey) {
 			return {
 				value: meta.variableValueParams.damageSource?.stats.value ? meta.variableValueParams.damageSource.stats.value[statsKey].mana * (variable.mCoefficient ?? 1) : 0,
+				isPercentage: true,
 				calculatesFrom: [{
 					value: (variable.mCoefficient ?? 1),
 					stat: 'mana',
