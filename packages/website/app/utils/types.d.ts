@@ -20,6 +20,7 @@ export interface IDamageResultTableSection {
 		value: string | number;
 		numberValue?: number;
 		isUnknown?: boolean;
+		isPercentage?: boolean;
 		meta?: IReplacedGameVariable['meta'];
 	} | undefined;
 	/** when present, the row will have a select to choose from provided options used for setting `selectValue` */

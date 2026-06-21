@@ -11,6 +11,8 @@ export interface IReplacedGameVariable {
 	baseValue: NonNullable<IVariableValueResult['value']>;
 	value: NonNullable<IVariableValueResult['value']>;
 	meta?: IVariableMeta;
+	/** `%` will be suffixed to the formatted value in replaced description */
+	isPercentage?: boolean;
 	isUninteresting?: boolean;
 }
 
@@ -59,11 +61,11 @@ export interface IVariableMeta<T = any> {
 	multiplier?: number;
 	/** same as `IVariableValueResult.roundReplaced` */
 	roundReplaced?: number | boolean;
-	/** `%` will be suffixed to the formatted value in replaced description */
+	/** used for setting `IVariableValueResult.isPercentage` */
 	isPercentage?: boolean;
-	/** `%` will be suffixed to the formatted value in results */
+	/** `%` will be suffixed to the formatted value in results, separate from `isPercentage` for variables like custom Liandry's Torment `BonusDamage` */
 	resultsIsPercentage?: boolean;
-	/** same as `multiplier` but only for results */
+	/** same as `multiplier` but only for results for the same reason `resultsIsPercentage` is separate */
 	resultsMultiplier?: number;
 	/** if present, a tooltip will be added to results with the value shown inside it */
 	additionalInfo?: string;
@@ -616,6 +618,7 @@ export function replaceGameVariables(
 				baseValue,
 				value: variable as [string | number, string | number],
 				meta,
+				isPercentage: meta?.isPercentage || isPercentage,
 				isUninteresting,
 			});
 
@@ -645,7 +648,7 @@ export function replaceGameVariables(
 		}
 
 		variable = roundVariable(variable * multiplier);
-		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting });
+		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage: meta?.isPercentage || isPercentage });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
 			? 'melee'
@@ -708,7 +711,7 @@ export function replaceGameVariables(
 					}
 				}
 
-				variables.set(variableName, { baseValue, value: value as number | [number, number], meta });
+				variables.set(variableName, { baseValue, value: value as number | [number, number], meta, isPercentage: meta?.isPercentage });
 			}
 		}
 	}

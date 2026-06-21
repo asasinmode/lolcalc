@@ -111,6 +111,8 @@ export interface IVariableValueResult<T = string | number | [number | string | u
 	 * if `number`, assumed to be `roundVariable`'s `precision` parameter
 	 */
 	roundReplaced?: boolean | number;
+	isPercentage?: boolean;
+	multiplier?: number;
 	/** whether `ISpecificVariables.uninteresting` includes it */
 	isUninteresting?: boolean;
 	/** components the variable was calculated from, used for creating `extendedEquals` */

@@ -445,7 +445,7 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 		};
 		const variable = variables.get(variableName);
 		rv.meta = variable?.meta;
-		const suffix = rv.meta?.resultsIsPercentage ? '%' : '';
+		const suffix = variable?.isPercentage || rv.meta?.resultsIsPercentage ? '%' : '';
 		const multiplier = rv.meta?.resultsMultiplier;
 
 		const value = variable?.value;
