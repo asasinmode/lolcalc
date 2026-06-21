@@ -672,22 +672,22 @@ export function replaceGameVariables(
 				let baseValue: number | [number, number] = Number.NaN;
 
 				if (dynamicValue === undefined) {
-					console.warn('[replaceGameVariables] custom got undefined dynamic value', variableName, dynamicVariable);
+					console.warn('[replaceGameVariables] custom got undefined dynamic value', variableName, dynamicVariable, variableValueFunctionParams);
 				} else if (Array.isArray(dynamicValue)) {
 					if (typeof dynamicValue[0] === 'number' && typeof dynamicValue[1] === 'number') {
 						value = [roundVariable(dynamicValue[0]), roundVariable(dynamicValue[1])];
 						baseValue = [dynamicValue[0], dynamicValue[1]];
 					} else if (Array.isArray(dynamicValue[0]) || Array.isArray(dynamicValue[1])) {
-						console.warn('[replaceGameVariables] custom got nested melee/ranged values', variableName, dynamicVariable);
+						console.warn('[replaceGameVariables] custom got nested melee/ranged values', variableName, dynamicVariable, variableValueFunctionParams);
 					} else {
-						console.warn('[replaceGameVariables] custom ARRAY got non-number values', variableName, dynamicVariable);
+						console.warn('[replaceGameVariables] custom ARRAY got non-number values', variableName, dynamicVariable, variableValueFunctionParams);
 					}
 				} else {
 					if (typeof dynamicValue === 'number') {
 						value = roundVariable(dynamicValue);
 						baseValue = dynamicValue;
 					} else {
-						console.warn('[replaceGameVariables] custom NOT ARRAY got non-number values', variableName, dynamicVariable);
+						console.warn('[replaceGameVariables] custom NOT ARRAY got non-number values', variableName, dynamicVariable, variableValueFunctionParams);
 					}
 				}
 
@@ -866,7 +866,8 @@ function variableExtendedEquals(
 
 	let statIconKey = meta?.scalesWithStatIcon;
 
-	if (!(meta && 'extendedEquals' in meta) && calculatesFrom?.length && (calculatesFrom?.length > 1 || calculatesFrom[0]!.stat !== 'const')) {
+	if (!(meta && 'extendedEquals' in meta) && calculatesFrom?.length && !calculatesFrom.every(part => part.stat === 'const' && !part.type)) {
+		calculatesFrom.sort((partA, partB) => (partB.stat === 'const' ? 1 : 0) - (partA.stat === 'const' ? 1 : 0));
 		let generatedStatIcon: IVariableMetaStatIcon[] | IVariableMetaStatIcon | undefined;
 
 		const hasMeleeRangedValue = calculatesFrom.some(part => Array.isArray(part.value));
