@@ -6,7 +6,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.9.1.fixture.json' with { type: 'json' };
-import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from './utils.ts';
+import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
 test.before(() => {
 	setupPatchFixture(fixture);
