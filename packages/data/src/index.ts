@@ -109,6 +109,8 @@ export function resolveEffectDescription(effectObjectName: IEffectObjectName): s
 
 export const TEXT = textData.data satisfies Omit<ITextData, 'stringtable'> as unknown as ITextData;
 
+export type TText = typeof textData.data;
+
 export interface ITextData {
 	items: Record<string, {
 		subtitleLeft?: string;

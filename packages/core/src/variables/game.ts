@@ -14,6 +14,8 @@ export interface IReplacedGameVariable {
 	/** `%` will be suffixed to the formatted value in replaced description */
 	isPercentage?: boolean;
 	isUninteresting?: boolean;
+	/** the text appended after the replaced variable, usually something like ` = (55% [ad icon])` */
+	metaSuffix?: string;
 }
 
 export interface IReplaceGameVariablesRV {
@@ -621,6 +623,7 @@ export function replaceGameVariables(
 				meta,
 				isPercentage,
 				isUninteresting,
+				metaSuffix,
 			});
 
 			return replaceWithName
@@ -649,7 +652,7 @@ export function replaceGameVariables(
 		}
 
 		variable = roundVariable(variable * multiplier);
-		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage });
+		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage, metaSuffix });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
 			? 'melee'
