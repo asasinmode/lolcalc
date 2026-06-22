@@ -2,7 +2,7 @@ import type { IOverrides } from '@lolcalc/core/DamageSource';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-import fixture from './16.10.1.fixture.json' with { type: 'json' };
+import fixture from '../fixtures/16.10.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from './utils.ts';
 
 test.before(() => {
