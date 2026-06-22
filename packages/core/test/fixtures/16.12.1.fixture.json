@@ -1,7 +1,41 @@
 {
 	"version": "16.12.1",
-	"champions": {
-	},
+	"champions": {},
 	"items": {
+		"3085": {
+			"name": "Runaan's Hurricane",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"BoltMinPercent": 40,
+				"BoltMaxPercent": 40,
+				"ExtraRangeOnBoltCheck": 65
+			},
+			"itemCalculations": {
+				"BoltDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mNumber": 0.55
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"{232dac8a}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.55,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": [0, 40, 2, 0, 40, 1]
+		}
 	}
 }
