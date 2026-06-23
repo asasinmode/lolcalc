@@ -2,6 +2,68 @@
 	"version": "16.12.1",
 	"champions": {},
 	"items": {
+		"2502": {
+			"name": "Unending Despair",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatArmorMod": 50,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"DrainRange": 650,
+				"Cooldown": 4,
+				"BonusHealthDrainPercentage": 0.03,
+				"HealMultiplier": 2.5
+			},
+			"itemCalculations": {
+				"DrainCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "BonusHealthDrainPercentage",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"HealCalc": {
+					"mMultiplier": {
+						"mDataValue": "HealMultiplier"
+					},
+					"mFormulaParts": [
+						{
+							"mSpellCalculationKey": "DrainCalc",
+							"__type": "{f3cbe7b2}"
+						}
+					]
+				}
+			}
+		},
+		"3004": {
+			"name": "Manamune",
+			"stats": {
+				"FlatMPPoolMod": 500,
+				"FlatPhysicalDamageMod": 35,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"ManaPerCharge": 3,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 4,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"BonusADFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3085": {
 			"name": "Runaan's Hurricane",
 			"stats": {
@@ -36,6 +98,62 @@
 				}
 			},
 			"effectAmount": [0, 40, 2, 0, 40, 1]
+		},
+		"6662": {
+			"name": "Iceborn Gauntlet",
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatArmorMod": 50,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"SlowAmount": 0.25,
+				"SlowFieldDuration": 2,
+				"AoERadius": 300,
+				"MonsterMod": 1.5,
+				"AuraDuration": 3,
+				"RangedSlowAmount": 0.125,
+				"SpellbladeMultiplier": 1.5,
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlowAmount",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedSlowAmount",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SpellbladeMultiplier",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"stringCalculations": {
+				"SlowAmountMeleeRangedSplit": {
+					"MeleeResult": "@MeleeItemCalcValue@",
+					"RangedResult": "@RangedItemCalcValue@",
+					"DefaultResult": "@MeleeItemCalcValue@"
+				}
+			}
 		}
 	}
 }

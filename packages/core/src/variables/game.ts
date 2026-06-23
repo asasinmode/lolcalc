@@ -798,7 +798,7 @@ function addToCalculatePartValues(part: ICalculatesFromPart, value: number) {
 	}
 }
 
-const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon, string>> = {
+export const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon, string>> = {
 	hp: 'scalehealth',
 	armor: 'scalearmor',
 	attackDamage: 'scalead',
@@ -901,16 +901,16 @@ function variableExtendedEquals(
 			}
 		}
 
-		if (!(meta && 'extendedEquals' in meta)) {
-			extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
-		}
-
 		if (!(meta && 'scalesWithStatIcon' in meta)) {
 			if (!insertIcon && Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
 				generatedStatIcon = generatedStatIcon[0];
 			}
 
 			statIconKey = generatedStatIcon;
+		}
+
+		if (!(meta && 'extendedEquals' in meta)) {
+			extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
 		}
 	}
 
