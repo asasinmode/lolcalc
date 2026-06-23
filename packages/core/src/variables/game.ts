@@ -1099,7 +1099,6 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (statsKey) {
 			return {
 				value: meta.variableValueParams.damageSource?.stats.value ? meta.variableValueParams.damageSource.stats.value[statsKey].mana * (variable.mCoefficient ?? 1) : 0,
-				isPercentage: true,
 				calculatesFrom: [{
 					value: (variable.mCoefficient ?? 1),
 					stat: 'mana',

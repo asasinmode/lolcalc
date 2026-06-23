@@ -539,6 +539,11 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 		variables: defineVariables({
+			meta: {
+				BonusHSPCalc: {
+					roundReplaced: true,
+				}
+			},
 			uninteresting: tearItem.uninterestingVariables,
 		}),
 	},
@@ -562,8 +567,12 @@ export const ITEM_SPECIFICS = {
 				};
 			},
 			meta: {
+				BonusHSPCalc: {
+					roundReplaced: true,
+				},
 				ManaToHeal: {
 					type: VariableType.heal,
+					roundReplaced: true,
 				},
 			},
 			uninteresting: ['f1', 'AllyCombatDuration'],
@@ -1102,7 +1111,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ManaCalc: {
 					isPercentage: true,
-					roundReplaced: 2,
+					roundReplaced: 1,
 				},
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],
