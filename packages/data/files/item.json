@@ -5,9 +5,6 @@
 			"id": "1001",
 			"name": "Boots",
 			"searchString": "boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 25
-			},
 			"gold": {
 				"total": 300,
 				"sell": 210
@@ -30,15 +27,15 @@
 			],
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"FlatMovementSpeedMod": 25
 			}
 		},
 		"1004": {
 			"id": "1004",
 			"name": "Faerie Charm",
 			"searchString": "faeriecharm;manaregen",
-			"stats": {
-				"PercentBaseMPRegenMod": 0.5
-			},
 			"gold": {
 				"total": 200,
 				"sell": 140
@@ -50,15 +47,15 @@
 			],
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"PercentBaseMPRegenMod": 0.5
 			}
 		},
 		"1006": {
 			"id": "1006",
 			"name": "Rejuvenation Bead",
 			"searchString": "rejuvenationbead;healthregen",
-			"stats": {
-				"PercentBaseHPRegenMod": 1
-			},
 			"gold": {
 				"total": 300,
 				"sell": 120,
@@ -72,15 +69,16 @@
 			],
 			"categories": {
 				"tank": true
+			},
+			"stats": {
+				"PercentBaseHPRegenMod": 1
 			}
 		},
 		"1011": {
 			"id": "1011",
 			"name": "Giant's Belt",
 			"searchString": "giantsbelt;health",
-			"stats": {
-				"FlatHPPoolMod": 350
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -100,20 +98,19 @@
 			"from": [
 				"1028"
 			],
-			"epicness": 4,
 			"categories": {
 				"tank": true,
 				"mage": true,
 				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 350
 			}
 		},
 		"1018": {
 			"id": "1018",
 			"name": "Cloak of Agility",
 			"searchString": "cloakofagility;criticalstrike;criticalstrikechance",
-			"stats": {
-				"FlatCritChanceMod": 0.15
-			},
 			"gold": {
 				"total": 600,
 				"sell": 420
@@ -130,15 +127,15 @@
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.15
 			}
 		},
 		"1026": {
 			"id": "1026",
 			"name": "Blasting Wand",
 			"searchString": "blastingwand;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 45
-			},
 			"gold": {
 				"total": 850,
 				"sell": 595
@@ -159,15 +156,15 @@
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 45
 			}
 		},
 		"1027": {
 			"id": "1027",
 			"name": "Sapphire Crystal",
 			"searchString": "sapphirecrystal;blue;mana",
-			"stats": {
-				"FlatMPPoolMod": 300
-			},
 			"gold": {
 				"total": 300,
 				"sell": 210
@@ -181,15 +178,15 @@
 			"categories": {
 				"mage": true,
 				"tank": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 300
 			}
 		},
 		"1028": {
 			"id": "1028",
 			"name": "Ruby Crystal",
 			"searchString": "rubycrystal;red;health",
-			"stats": {
-				"FlatHPPoolMod": 150
-			},
 			"gold": {
 				"total": 400,
 				"sell": 280
@@ -225,15 +222,15 @@
 				"support": true,
 				"marksman": true,
 				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 150
 			}
 		},
 		"1029": {
 			"id": "1029",
 			"name": "Cloth Armor",
 			"searchString": "clotharmor;armor",
-			"stats": {
-				"FlatArmorMod": 15
-			},
 			"gold": {
 				"total": 300,
 				"sell": 210
@@ -258,15 +255,16 @@
 				"mage": true,
 				"support": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatArmorMod": 15
 			}
 		},
 		"1031": {
 			"id": "1031",
 			"name": "Chain Vest",
 			"searchString": "chainvest;armor",
-			"stats": {
-				"FlatArmorMod": 40
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 800,
 				"sell": 560
@@ -284,19 +282,18 @@
 			"from": [
 				"1029"
 			],
-			"epicness": 4,
 			"categories": {
 				"tank": true,
 				"fighter": true
+			},
+			"stats": {
+				"FlatArmorMod": 40
 			}
 		},
 		"1033": {
 			"id": "1033",
 			"name": "Null-Magic Mantle",
 			"searchString": "nullmagicmantle;magicresist",
-			"stats": {
-				"FlatSpellBlockMod": 20
-			},
 			"gold": {
 				"total": 400,
 				"sell": 280
@@ -320,15 +317,15 @@
 				"marksman": true,
 				"assassin": true,
 				"support": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 20
 			}
 		},
 		"1036": {
 			"id": "1036",
 			"name": "Long Sword",
 			"searchString": "longsword;damage;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 10
-			},
 			"gold": {
 				"total": 350,
 				"sell": 245
@@ -360,15 +357,15 @@
 				"fighter": true,
 				"marksman": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 10
 			}
 		},
 		"1037": {
 			"id": "1037",
 			"name": "Pickaxe",
 			"searchString": "pickaxe;damage;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 25
-			},
 			"gold": {
 				"total": 875,
 				"sell": 613
@@ -398,15 +395,15 @@
 				"marksman": true,
 				"fighter": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 25
 			}
 		},
 		"1038": {
 			"id": "1038",
 			"name": "B. F. Sword",
 			"searchString": "bfsword;bf;damage;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 40
-			},
 			"gold": {
 				"total": 1300,
 				"sell": 910
@@ -423,15 +420,15 @@
 				"fighter": true,
 				"marksman": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 40
 			}
 		},
 		"1042": {
 			"id": "1042",
 			"name": "Dagger",
 			"searchString": "dagger;attackspeed",
-			"stats": {
-				"PercentAttackSpeedMod": 0.1
-			},
 			"gold": {
 				"total": 250,
 				"sell": 175
@@ -453,15 +450,16 @@
 				"marksman": true,
 				"fighter": true,
 				"assassin": true
+			},
+			"stats": {
+				"PercentAttackSpeedMod": 0.1
 			}
 		},
 		"1043": {
 			"id": "1043",
 			"name": "Recurve Bow",
 			"searchString": "recurvebow;attackspeed;onhit",
-			"stats": {
-				"PercentAttackSpeedMod": 0.15
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 700,
 				"sell": 490
@@ -479,7 +477,13 @@
 				"1042"
 			],
 			"isOnHit": true,
-			"epicness": 4,
+			"categories": {
+				"marksman": true,
+				"fighter": true
+			},
+			"stats": {
+				"PercentAttackSpeedMod": 0.15
+			},
 			"dataValues": {
 				"OnHitDamage": 15
 			},
@@ -493,19 +497,12 @@
 						}
 					]
 				}
-			},
-			"categories": {
-				"marksman": true,
-				"fighter": true
 			}
 		},
 		"1052": {
 			"id": "1052",
 			"name": "Amplifying Tome",
 			"searchString": "amplifyingtome;amptome;book;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 20
-			},
 			"gold": {
 				"total": 400,
 				"sell": 280
@@ -531,16 +528,16 @@
 			"categories": {
 				"mage": true,
 				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 20
 			}
 		},
 		"1053": {
 			"id": "1053",
 			"name": "Vampiric Scepter",
 			"searchString": "vampiricscepter;damage;lifesteal;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 15,
-				"PercentLifeStealMod": 0.07
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -556,27 +553,41 @@
 			"from": [
 				"1036"
 			],
-			"epicness": 4,
 			"categories": {
 				"fighter": true,
 				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 15,
+				"PercentLifeStealMod": 0.07
 			}
 		},
 		"1054": {
 			"id": "1054",
 			"name": "Doran's Shield",
 			"searchString": "doransshield;dshield;health;healthregen;healtheveryseconds",
-			"stats": {
-				"FlatHPPoolMod": 110,
-				"FlatHPRegenMod": 0.8
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 450,
 				"sell": 180,
 				"sellBackModifier": 0.4
 			},
 			"image": "1054.png",
-			"epicness": 1,
+			"itemGroups": [
+				"Items/ItemGroups/DoransItems",
+				"{5c63b904}"
+			],
+			"categories": {
+				"tank": true,
+				"fighter": true,
+				"marksman": true,
+				"assassin": true,
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 110,
+				"FlatHPRegenMod": 0.8
+			},
 			"dataValues": {
 				"RegenDuration": 8,
 				"BonusDamageToMinions": 5,
@@ -602,35 +613,19 @@
 					"DefaultResult": "@MaxRegenAmount@"
 				}
 			},
-			"effectAmount": [8, 5, 45, 0.66],
-			"itemGroups": [
-				"Items/ItemGroups/DoransItems",
-				"{5c63b904}"
-			],
-			"categories": {
-				"tank": true,
-				"fighter": true,
-				"marksman": true,
-				"assassin": true,
-				"mage": true
-			}
+			"effectAmount": [8, 5, 45, 0.66]
 		},
 		"1055": {
 			"id": "1055",
 			"name": "Doran's Blade",
 			"searchString": "doransblade;dblade;health;damage;lifesteal;spellvamp;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 80,
-				"FlatPhysicalDamageMod": 10,
-				"PercentOmnivampMod": 0.025
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 450,
 				"sell": 180,
 				"sellBackModifier": 0.4
 			},
 			"image": "1055.png",
-			"epicness": 1,
 			"itemGroups": [
 				"Items/ItemGroups/DoransItems"
 			],
@@ -638,23 +633,35 @@
 				"fighter": true,
 				"marksman": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 80,
+				"FlatPhysicalDamageMod": 10,
+				"PercentOmnivampMod": 0.025
 			}
 		},
 		"1056": {
 			"id": "1056",
 			"name": "Doran's Ring",
 			"searchString": "doransring;dring;health;manaregen;spelldamage;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 90,
-				"FlatMagicDamageMod": 18
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 400,
 				"sell": 160,
 				"sellBackModifier": 0.4
 			},
 			"image": "1056.png",
-			"epicness": 1,
+			"itemGroups": [
+				"Items/ItemGroups/DoransItems",
+				"{5c63b904}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 90,
+				"FlatMagicDamageMod": 18
+			},
 			"dataValues": {
 				"BonusDamage": 5,
 				"ManaRestorePerSecond": 1,
@@ -673,22 +680,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/DoransItems",
-				"{5c63b904}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"1057": {
 			"id": "1057",
 			"name": "Negatron Cloak",
 			"searchString": "negatroncloak;magicresist",
-			"stats": {
-				"FlatSpellBlockMod": 45
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 850,
 				"sell": 595
@@ -704,20 +702,19 @@
 			"from": [
 				"1033"
 			],
-			"epicness": 4,
 			"categories": {
 				"tank": true,
 				"fighter": true,
 				"support": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 45
 			}
 		},
 		"1058": {
 			"id": "1058",
 			"name": "Needlessly Large Rod",
 			"searchString": "needlesslylargerod;nlr;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 65
-			},
 			"gold": {
 				"total": 1200,
 				"sell": 840
@@ -731,16 +728,16 @@
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 65
 			}
 		},
 		"1082": {
 			"id": "1082",
 			"name": "Dark Seal",
 			"searchString": "darkseal;health;spelldamage;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 50,
-				"FlatMagicDamageMod": 15
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 350,
 				"sell": 140,
@@ -750,7 +747,16 @@
 			"into": [
 				"3041"
 			],
-			"epicness": 1,
+			"itemGroups": [
+				"Items/ItemGroups/Glory"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 50,
+				"FlatMagicDamageMod": 15
+			},
 			"dataValues": {
 				"MaxGloryStacks": 10,
 				"APPerGlory": 4,
@@ -768,21 +774,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/Glory"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"1083": {
 			"id": "1083",
 			"name": "Cull",
 			"searchString": "cull;damage;onhit;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 7
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 450,
 				"sell": 180,
@@ -790,80 +788,79 @@
 			},
 			"image": "1083.png",
 			"isOnHit": true,
-			"epicness": 1,
+			"categories": {
+				"fighter": true,
+				"marksman": true,
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 7
+			},
 			"dataValues": {
 				"MinionKillGold": 1,
 				"CompleteGold": 350,
 				"MinionKillThreshold": 100,
 				"OnHitHeal": 3
-			},
-			"categories": {
-				"fighter": true,
-				"marksman": true,
-				"assassin": true
 			}
 		},
 		"1086": {
 			"id": "1086",
 			"name": "Doran's Bow",
 			"searchString": "doransbow;damage;attackspeed;spellvamp;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 8,
-				"PercentAttackSpeedMod": 0.15,
-				"PercentOmnivampMod": 0.015
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 400,
 				"sell": 160,
 				"sellBackModifier": 0.4
 			},
 			"image": "1086.png",
-			"epicness": 1,
-			"dataValues": {
-				"HealthOnHit": 3
-			},
 			"itemGroups": [
 				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 8,
+				"PercentAttackSpeedMod": 0.15,
+				"PercentOmnivampMod": 0.015
+			},
+			"dataValues": {
+				"HealthOnHit": 3
 			}
 		},
 		"1120": {
 			"id": "1120",
 			"name": "Doran's Helm",
 			"searchString": "doranshelm;health;magicresist;armor",
-			"stats": {
-				"FlatSpellBlockMod": 10,
-				"FlatHPPoolMod": 140,
-				"FlatArmorMod": 10
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 450,
 				"sell": 180,
 				"sellBackModifier": 0.4
 			},
 			"image": "1120.png",
-			"epicness": 1,
-			"dataValues": {
-				"BonusDamageToMinions": 5
-			},
 			"itemGroups": [
 				"Items/ItemGroups/DoransItems",
 				"{5c63b904}"
 			],
 			"categories": {
 				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 10,
+				"FlatHPPoolMod": 140,
+				"FlatArmorMod": 10
+			},
+			"dataValues": {
+				"BonusDamageToMinions": 5
 			}
 		},
 		"2019": {
 			"id": "2019",
 			"name": "Steel Sigil",
 			"searchString": "steelsigil;bloodstone;armor;damage;attackdamage",
-			"stats": {
-				"FlatArmorMod": 30,
-				"FlatPhysicalDamageMod": 15
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -878,25 +875,24 @@
 				"1036",
 				"1029"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"FlatDR": 3
-			},
 			"categories": {
 				"assassin": true,
 				"fighter": true,
 				"marksman": true
+			},
+			"stats": {
+				"FlatArmorMod": 30,
+				"FlatPhysicalDamageMod": 15
+			},
+			"dataValues": {
+				"FlatDR": 3
 			}
 		},
 		"2020": {
 			"id": "2020",
 			"name": "The Brutalizer",
 			"searchString": "thebrutalizer;damage;cooldownreduction;armorpenetration;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 25,
-				"AbilityHasteMod": 10,
-				"PhysicalLethality": 5
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1337,
 				"sell": 936
@@ -912,22 +908,23 @@
 				"2022",
 				"1037"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"LethalityAmount": 5
-			},
 			"categories": {
 				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 25,
+				"AbilityHasteMod": 10,
+				"PhysicalLethality": 5
+			},
+			"dataValues": {
+				"LethalityAmount": 5
 			}
 		},
 		"2021": {
 			"id": "2021",
 			"name": "Tunneler",
 			"searchString": "tunneler;drill;health;damage;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 250,
-				"FlatPhysicalDamageMod": 15
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1150,
 				"sell": 805
@@ -947,20 +944,20 @@
 				"1036",
 				"1028"
 			],
-			"epicness": 4,
 			"categories": {
 				"assassin": true,
 				"fighter": true,
 				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 250,
+				"FlatPhysicalDamageMod": 15
 			}
 		},
 		"2022": {
 			"id": "2022",
 			"name": "Glowing Mote",
 			"searchString": "glowingmote;haste;cooldownreduction",
-			"stats": {
-				"AbilityHasteMod": 5
-			},
 			"gold": {
 				"total": 250,
 				"sell": 175
@@ -985,18 +982,16 @@
 				"tank": true,
 				"mage": true,
 				"support": true
+			},
+			"stats": {
+				"AbilityHasteMod": 5
 			}
 		},
 		"2065": {
 			"id": "2065",
 			"name": "Shurelya's Battlesong",
 			"searchString": "shurelyasbattlesong;spelldamage;manaregen;active;cooldownreduction;movement;abilityhaste;abilitypower;movespeed",
-			"stats": {
-				"FlatMagicDamageMod": 50,
-				"PercentMovementSpeedMod": 0.04,
-				"AbilityHasteMod": 15,
-				"PercentBaseMPRegenMod": 1.25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2200,
 				"sell": 1540
@@ -1006,7 +1001,18 @@
 				"3113",
 				"4642"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{3179bd6e}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 50,
+				"PercentMovementSpeedMod": 0.04,
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1.25
+			},
 			"dataValues": {
 				"ActiveMoveSpeed": 0.3,
 				"BuffDuration": 4,
@@ -1014,22 +1020,13 @@
 				"ItemRange": 1000,
 				"PerChampCD": 4,
 				"Cooldown": 75
-			},
-			"itemGroups": [
-				"{3179bd6e}"
-			],
-			"categories": {
-				"support": true
 			}
 		},
 		"2420": {
 			"id": "2420",
 			"name": "Seeker's Armguard",
 			"searchString": "seekersarmguard;zhg;zhonyas;zonyas;armor;spelldamage;active;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 40,
-				"FlatArmorMod": 25
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1600,
 				"sell": 640,
@@ -1044,26 +1041,26 @@
 				"1029",
 				"1052"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"Duration": 2.5
-			},
-			"effectAmount": [0, 2.5],
 			"itemGroups": [
 				"Items/ItemGroups/StopwatchGroup",
 				"{4c987493}"
 			],
 			"categories": {
 				"mage": true
-			}
+			},
+			"stats": {
+				"FlatMagicDamageMod": 40,
+				"FlatArmorMod": 25
+			},
+			"dataValues": {
+				"Duration": 2.5
+			},
+			"effectAmount": [0, 2.5]
 		},
 		"2422": {
 			"id": "2422",
 			"name": "Slightly Magical Footwear",
 			"searchString": "slightlymagicalfootwear;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 25
-			},
 			"gold": {
 				"total": 300,
 				"sell": 90,
@@ -1087,16 +1084,16 @@
 			],
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"FlatMovementSpeedMod": 25
 			}
 		},
 		"2501": {
 			"id": "2501",
 			"name": "Overlord's Bloodmail",
 			"searchString": "overlordsbloodmail;health;damage;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 550,
-				"FlatPhysicalDamageMod": 30
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3300,
 				"sell": 2310
@@ -1106,7 +1103,17 @@
 				"2021",
 				"2021"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{673b048f}"
+			],
+			"categories": {
+				"fighter": true,
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 550,
+				"FlatPhysicalDamageMod": 30
+			},
 			"dataValues": {
 				"HPToADPercentage": 0.025,
 				"MissingHealthAD": 0.12,
@@ -1130,24 +1137,13 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			},
-			"itemGroups": [
-				"{673b048f}"
-			],
-			"categories": {
-				"fighter": true,
-				"tank": true
 			}
 		},
 		"2502": {
 			"id": "2502",
 			"name": "Unending Despair",
 			"searchString": "unendingdespair;health;armor;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 400,
-				"FlatArmorMod": 50,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -1158,7 +1154,17 @@
 				"3067",
 				"1028"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{683b0622}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatArmorMod": 50,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"DrainRange": 650,
 				"Cooldown": 4,
@@ -1187,23 +1193,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{683b0622}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"2503": {
 			"id": "2503",
 			"name": "Blackfire Torch",
 			"searchString": "blackfiretorch;spelldamage;mana;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 600,
-				"FlatMagicDamageMod": 80,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -1213,7 +1209,17 @@
 				"3802",
 				"2508"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{693b07b5}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 80,
+				"AbilityHasteMod": 20
+			},
 			"dataValues": {
 				"BurnFlatDamagePerSecond": 20,
 				"APRatio": 0.02,
@@ -1264,27 +1270,17 @@
 					]
 				}
 			},
-			"itemGroups": [
-				"{693b07b5}"
-			],
 			"__replacedVariables": {
 				"{434396e0}": "MonsterAP",
 				"{afd69c5a}": "MonsterDPS",
 				"{9adc0c64}": "MinionDPS"
-			},
-			"categories": {
-				"mage": true
 			}
 		},
 		"2504": {
 			"id": "2504",
 			"name": "Kaenic Rookern",
 			"searchString": "kaenicrookern;health;magicresist;healthregen",
-			"stats": {
-				"FlatSpellBlockMod": 80,
-				"FlatHPPoolMod": 400,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -1294,7 +1290,17 @@
 				"3211",
 				"1057"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{623afcb0}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 80,
+				"FlatHPPoolMod": 400,
+				"PercentBaseHPRegenMod": 1
+			},
 			"dataValues": {
 				"ShieldAmount": 0.15,
 				"OutOfCombatDuration": 15
@@ -1309,21 +1315,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{623afcb0}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"2508": {
 			"id": "2508",
 			"name": "Fated Ashes",
 			"searchString": "fatedashes;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 30
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -1336,27 +1334,24 @@
 			"from": [
 				"1052"
 			],
-			"epicness": 4,
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 30
+			},
 			"dataValues": {
 				"BurnFlatDamagePerSecond": 5,
 				"BurnDuration": 3,
 				"MonsterDamageBonus": 15,
 				"TickFrequency": 0.5
-			},
-			"categories": {
-				"mage": true
 			}
 		},
 		"2510": {
 			"id": "2510",
 			"name": "Dusk and Dawn",
 			"searchString": "duskanddawn;spellblade;bonking;health;attackspeed;spelldamage;onhit;abilityhaste;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 300,
-				"FlatMagicDamageMod": 60,
-				"PercentAttackSpeedMod": 0.2,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -1369,7 +1364,19 @@
 				"1042"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{6c3d4b05}",
+				"{8b55a7b3}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatMagicDamageMod": 60,
+				"PercentAttackSpeedMod": 0.2,
+				"AbilityHasteMod": 20
+			},
 			"dataValues": {
 				"SpellbladeCooldown": 1.5,
 				"Cooldown": 1.5
@@ -1403,24 +1410,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{6c3d4b05}",
-				"{8b55a7b3}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"2512": {
 			"id": "2512",
 			"name": "Fiendhunter Bolts",
 			"searchString": "fiendhunterbolts;criticalstrike;attackspeed;movement;abilityhaste;criticalstrikechance;movespeed",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"PercentAttackSpeedMod": 0.45,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2650,
 				"sell": 1855
@@ -1430,7 +1426,17 @@
 				"3086",
 				"3144"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{6a3d47df}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.45,
+				"PercentMovementSpeedMod": 0.04
+			},
 			"dataValues": {
 				"UltimateHaste": 30,
 				"Cooldown": 45,
@@ -1439,23 +1445,13 @@
 				"BonusAS": 0.5,
 				"NumberOfAttacks": 3,
 				"CritModifier": 0.8
-			},
-			"itemGroups": [
-				"{6a3d47df}"
-			],
-			"categories": {
-				"marksman": true
 			}
 		},
 		"2517": {
 			"id": "2517",
 			"name": "Endless Hunger",
 			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 65,
-				"PercentOmnivampMod": 0.05,
-				"PercentTenacityMod": 0.2
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -1466,7 +1462,17 @@
 				"1037",
 				"1036"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{653d4000}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 65,
+				"PercentOmnivampMod": 0.05,
+				"PercentTenacityMod": 0.2
+			},
 			"dataValues": {
 				"OmnivampOnTakedown": 0.15,
 				"OmnivampDuration": 8,
@@ -1512,23 +1518,13 @@
 					"RangedResult": "@HasteFromADRanged@",
 					"DefaultResult": "@HasteFromADMelee@"
 				}
-			},
-			"itemGroups": [
-				"{653d4000}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"2520": {
 			"id": "2520",
 			"name": "Bastionbreaker",
 			"searchString": "bastionbreaker;damage;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"AbilityHasteMod": 15,
-				"PhysicalLethality": 22
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 2240
@@ -1538,7 +1534,17 @@
 				"2020",
 				"3134"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{f2405c8e}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 15,
+				"PhysicalLethality": 22
+			},
 			"dataValues": {
 				"LethalityAmount": 22,
 				"Cooldown": 20,
@@ -1562,7 +1568,7 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangeModifier"
+						"mDataValue": "{a99340ef}"
 					}
 				},
 				"AbilityDamageCalc": {
@@ -1578,30 +1584,16 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "AbilityDamageRangeMod"
+						"mDataValue": "{d62bdfef}"
 					}
 				}
-			},
-			"itemGroups": [
-				"{f2405c8e}"
-			],
-			"__replacedVariables": {
-				"{a99340ef}": "RangeModifier",
-				"{d62bdfef}": "AbilityDamageRangeMod"
-			},
-			"categories": {
-				"assassin": true
 			}
 		},
 		"2522": {
 			"id": "2522",
 			"name": "Actualizer",
 			"searchString": "actualizer;spelldamage;mana;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 300,
-				"FlatMagicDamageMod": 90,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -1611,7 +1603,17 @@
 				"3802",
 				"1026"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{f0405968}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatMagicDamageMod": 90,
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"Cooldown": 60,
 				"Duration": 8,
@@ -1639,22 +1641,13 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
 				}
-			},
-			"itemGroups": [
-				"{f0405968}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"2523": {
 			"id": "2523",
 			"name": "Hexoptics C44",
 			"searchString": "hexopticsc;snowbow;damage;criticalstrike;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 55
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -1665,31 +1658,29 @@
 				"6670",
 				"1036"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{f1405afb}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 55
+			},
 			"dataValues": {
 				"ExtraRange": 100,
 				"TakedownWindow": 3,
 				"Duration": 8,
 				"MaxRange": 500,
 				"MaxDamageAmp": 0.1
-			},
-			"itemGroups": [
-				"{f1405afb}"
-			],
-			"categories": {
-				"marksman": true
 			}
 		},
 		"2524": {
 			"id": "2524",
 			"name": "Bandlepipes",
 			"searchString": "bandlepipes;health;magicresist;armor;attackspeed;movement;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 20,
-				"FlatHPPoolMod": 200,
-				"FlatArmorMod": 20,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2300,
 				"sell": 1610
@@ -1700,7 +1691,19 @@
 				"1029",
 				"1033"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{f64062da}"
+			],
+			"categories": {
+				"tank": true,
+				"support": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 20,
+				"FlatHPPoolMod": 200,
+				"FlatArmorMod": 20,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"EnemyDetectRange": 400,
 				"Duration": 8,
@@ -1731,30 +1734,19 @@
 					],
 					"mDisplayAsPercent": true,
 					"mRangedMultiplier": {
-						"mDataValue": "RangedAttackSpeedMultiplier"
+						"mDataValue": "{ca6deae2}"
 					}
 				}
 			},
-			"itemGroups": [
-				"{f64062da}"
-			],
 			"__replacedVariables": {
-				"{eb8d750f}": "MeleeAuraAttackSpeed",
-				"{ca6deae2}": "RangedAttackSpeedMultiplier"
-			},
-			"categories": {
-				"tank": true,
-				"support": true
+				"{eb8d750f}": "MeleeAuraAttackSpeed"
 			}
 		},
 		"2525": {
 			"id": "2525",
 			"name": "Protoplasm Harness",
 			"searchString": "protoplasmharness;health;movement;tenacity;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 600,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2500,
 				"sell": 1750
@@ -1764,7 +1756,17 @@
 				"3067",
 				"1011"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{f740646d}",
+				"Items/ItemGroups/LifelineItems"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"AbilityHasteMod": 20
+			},
 			"dataValues": {
 				"LowHealthThreshold": 0.3,
 				"Duration": 5,
@@ -1804,25 +1806,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{f740646d}",
-				"Items/ItemGroups/LifelineItems"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"2526": {
 			"id": "2526",
 			"name": "Whispering Circlet",
 			"searchString": "whisperingcirclet;superbell;tear;diadem;songs;health;mana;manaregen",
-			"stats": {
-				"FlatMPPoolMod": 300,
-				"FlatHPPoolMod": 200,
-				"PercentBaseMPRegenMod": 0.75,
-				"PercentHealingAmountMod": 0.08
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2250,
 				"sell": 1575
@@ -1836,7 +1826,22 @@
 				"1028",
 				"3070"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{f4405fb4}",
+				"Items/ItemGroups/TearItems",
+				"{f842a497}",
+				"{6dcade42}",
+				"{20cbfb4d}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatHPPoolMod": 200,
+				"PercentBaseMPRegenMod": 0.75,
+				"PercentHealingAmountMod": 0.08
+			},
 			"dataValues": {
 				"ManaChargeAmmoCD": 8,
 				"ManaChargeMaxAmmo": 5,
@@ -1854,28 +1859,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{f4405fb4}",
-				"Items/ItemGroups/TearItems",
-				"{f842a497}",
-				"{6dcade42}",
-				"{20cbfb4d}"
-			],
-			"categories": {
-				"support": true
 			}
 		},
 		"2530": {
 			"id": "2530",
 			"name": "Diadem of Songs",
 			"searchString": "diademofsongs;health;mana;manaregen;abilityhaste",
-			"stats": {
-				"FlatMPPoolMod": 1000,
-				"FlatHPPoolMod": 200,
-				"PercentBaseMPRegenMod": 1,
-				"PercentHealingAmountMod": 0.08
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2250,
 				"sell": 1575
@@ -1884,7 +1874,19 @@
 			"from": [
 				"2526"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{f842a497}",
+				"{6dcade42}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatHPPoolMod": 200,
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.08
+			},
 			"dataValues": {
 				"PercentManaToHeal": 0.01,
 				"AllyRangeCheck": 900,
@@ -1908,24 +1910,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{f842a497}",
-				"{6dcade42}"
-			],
-			"categories": {
-				"support": true
 			}
 		},
 		"3003": {
 			"id": "3003",
 			"name": "Archangel's Staff",
 			"searchString": "archangelsstaff;aa;seraphsembrace;tear;spelldamage;mana;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 600,
-				"FlatMagicDamageMod": 70,
-				"AbilityHasteMod": 25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -1939,15 +1930,6 @@
 				"3802",
 				"3108"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"ManaPerCharge": 5,
-				"ManaChargeAmmoCD": 8,
-				"ManaChargeMaxAmmo": 5,
-				"MaxMana": 360,
-				"InternalCDPerCastID": 6.5,
-				"APFromMana": 0.01
-			},
 			"itemGroups": [
 				"Items/ItemGroups/TearItems",
 				"Items/ItemGroups/LifelineItems",
@@ -1956,17 +1938,26 @@
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 25
+			},
+			"dataValues": {
+				"ManaPerCharge": 5,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 5,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5,
+				"APFromMana": 0.01
 			}
 		},
 		"3004": {
 			"id": "3004",
 			"name": "Manamune",
 			"searchString": "manamune;muramana;tear;damage;mana;cooldownreduction;onhit;abilityhaste;attackdamage",
-			"stats": {
-				"FlatMPPoolMod": 500,
-				"FlatPhysicalDamageMod": 35,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -1981,7 +1972,22 @@
 				"1036"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/TearItems",
+				"{29affd88}",
+				"{33df72dd}",
+				"{20cbfb4d}"
+			],
+			"categories": {
+				"marksman": true,
+				"fighter": true,
+				"assassin": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 500,
+				"FlatPhysicalDamageMod": 35,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"ManaPerCharge": 3,
 				"ManaChargeAmmoCD": 8,
@@ -1998,27 +2004,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/TearItems",
-				"{29affd88}",
-				"{33df72dd}",
-				"{20cbfb4d}"
-			],
-			"categories": {
-				"marksman": true,
-				"fighter": true,
-				"assassin": true
 			}
 		},
 		"3006": {
 			"id": "3006",
 			"name": "Berserker's Greaves",
 			"searchString": "berserkersgreaves;zerker;attackspeed;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"PercentAttackSpeedMod": 0.25
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -2033,10 +2025,6 @@
 				"1042"
 			],
 			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"FeatsAS": 0.05
-			},
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
 				"Items/ItemGroups/BootsWithoutActives"
@@ -2044,16 +2032,20 @@
 			"categories": {
 				"fighter": true,
 				"marksman": true
+			},
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentAttackSpeedMod": 0.25
+			},
+			"dataValues": {
+				"FeatsAS": 0.05
 			}
 		},
 		"3008": {
 			"id": "3008",
 			"name": "Gluttonous Greaves",
 			"searchString": "gluttonousgreaves;lifesteal;spellvamp;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"PercentOmnivampMod": 0.04
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1000,
 				"sell": 700
@@ -2066,24 +2058,25 @@
 				"1001"
 			],
 			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"OmnivampOnTakedown": 0.006,
-				"MaxStacks": 10
-			},
 			"itemGroups": [
 				"Items/ItemGroups/BootsWithoutActives",
 				"Items/ItemGroups/Boots",
 				"{aba63cd2}"
-			]
+			],
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentOmnivampMod": 0.04
+			},
+			"dataValues": {
+				"OmnivampOnTakedown": 0.006,
+				"MaxStacks": 10
+			}
 		},
 		"3009": {
 			"id": "3009",
 			"name": "Boots of Swiftness",
 			"searchString": "bootsofswiftness;swifties;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 55
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1000,
 				"sell": 700
@@ -2096,11 +2089,6 @@
 				"1001"
 			],
 			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"SlowResistTooltip": 25,
-				"FeatsMS": 5
-			},
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
 				"Items/ItemGroups/BootsWithoutActives"
@@ -2109,16 +2097,20 @@
 				"support": true,
 				"marksman": true,
 				"fighter": true
+			},
+			"stats": {
+				"FlatMovementSpeedMod": 55
+			},
+			"dataValues": {
+				"SlowResistTooltip": 25,
+				"FeatsMS": 5
 			}
 		},
 		"3020": {
 			"id": "3020",
 			"name": "Sorcerer's Shoes",
 			"searchString": "sorcerersshoes;sorcs;boots;magicpenetration;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"FlatMagicPenetrationMod": 12
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -2131,27 +2123,26 @@
 				"1001"
 			],
 			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"FeatsMPen": 2
-			},
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
 				"Items/ItemGroups/BootsWithoutActives"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"FlatMagicPenetrationMod": 12
+			},
+			"dataValues": {
+				"FeatsMPen": 2
 			}
 		},
 		"3024": {
 			"id": "3024",
 			"name": "Glacial Buckler",
 			"searchString": "glacialbuckler;armor;mana;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatMPPoolMod": 300,
-				"FlatArmorMod": 25,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -2165,20 +2156,21 @@
 				"1027",
 				"2022"
 			],
-			"epicness": 4,
 			"categories": {
 				"tank": true,
 				"support": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatArmorMod": 25,
+				"AbilityHasteMod": 10
 			}
 		},
 		"3026": {
 			"id": "3026",
 			"name": "Guardian Angel",
 			"searchString": "guardianangel;ga;armor;damage;attackdamage",
-			"stats": {
-				"FlatArmorMod": 45,
-				"FlatPhysicalDamageMod": 55
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 1280,
@@ -2189,11 +2181,6 @@
 				"2019",
 				"1038"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"Cooldown": 300
-			},
-			"effectAmount": [0.5, 4, 300, 1, 0],
 			"itemGroups": [
 				"{2da0f94a}"
 			],
@@ -2201,17 +2188,21 @@
 				"fighter": true,
 				"assassin": true,
 				"marksman": true
-			}
+			},
+			"stats": {
+				"FlatArmorMod": 45,
+				"FlatPhysicalDamageMod": 55
+			},
+			"dataValues": {
+				"Cooldown": 300
+			},
+			"effectAmount": [0.5, 4, 300, 1, 0]
 		},
 		"3031": {
 			"id": "3031",
 			"name": "Infinity Edge",
 			"searchString": "infinityedge;ie;criticalstrike;damage;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 75,
-				"FlatCritDamageMod": 0.3
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3500,
 				"sell": 2450
@@ -2222,23 +2213,24 @@
 				"1037",
 				"1018"
 			],
-			"epicness": 5,
 			"itemGroups": [
 				"{aca3ffce}",
 				"{0321bdeb}"
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 75,
+				"FlatCritDamageMod": 0.3
 			}
 		},
 		"3032": {
 			"id": "3032",
 			"name": "Yun Tal Wildarrows",
 			"searchString": "yuntalwildarrows;yuntal;arrow;damage;criticalstrike;attackspeed;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 50,
-				"PercentAttackSpeedMod": 0.4
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -2249,7 +2241,17 @@
 				"3144",
 				"1036"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{aba3fe3b}",
+				"{3bbe1bdd}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 50,
+				"PercentAttackSpeedMod": 0.4
+			},
 			"dataValues": {
 				"ASDuration": 6,
 				"CritMax": 25,
@@ -2270,31 +2272,19 @@
 					],
 					"mPrecision": 1,
 					"mRangedMultiplier": {
-						"mDataValue": "StackRangedMultiplier"
+						"mDataValue": "{1eea3407}"
 					}
 				}
 			},
-			"itemGroups": [
-				"{aba3fe3b}",
-				"{3bbe1bdd}"
-			],
 			"__replacedVariables": {
-				"{52d90ad0}": "CritPerStackMelee",
-				"{1eea3407}": "StackRangedMultiplier"
-			},
-			"categories": {
-				"marksman": true
+				"{52d90ad0}": "CritPerStackMelee"
 			}
 		},
 		"3033": {
 			"id": "3033",
 			"name": "Mortal Reminder",
 			"searchString": "mortalreminder;grievouswounds;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 35,
-				"PercentArmorPenetrationMod": 0.3
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -2305,11 +2295,6 @@
 				"3035",
 				"1018"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"GrievousDuration": 3,
-				"GrievousAmount": 0.4
-			},
 			"itemGroups": [
 				"{aaa3fca8}",
 				"Items/ItemGroups/LastWhisper",
@@ -2317,16 +2302,22 @@
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 35,
+				"PercentArmorPenetrationMod": 0.3
+			},
+			"dataValues": {
+				"GrievousDuration": 3,
+				"GrievousAmount": 0.4
 			}
 		},
 		"3035": {
 			"id": "3035",
 			"name": "Last Whisper",
 			"searchString": "lastwhisper;lw;armorpenetration;damage;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 20,
-				"PercentArmorPenetrationMod": 0.18
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1450,
 				"sell": 1015
@@ -2341,24 +2332,23 @@
 				"1036",
 				"1036"
 			],
-			"epicness": 4,
 			"itemGroups": [
 				"Items/ItemGroups/LastWhisper"
 			],
 			"categories": {
 				"marksman": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 20,
+				"PercentArmorPenetrationMod": 0.18
 			}
 		},
 		"3036": {
 			"id": "3036",
 			"name": "Lord Dominik's Regards",
 			"searchString": "lorddominiksregards;lw;ldr;doms;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 35,
-				"PercentArmorPenetrationMod": 0.35
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3300,
 				"sell": 2310
@@ -2368,27 +2358,27 @@
 				"3035",
 				"6670"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"MaxBonusDamagePercent": 0.15,
-				"MaxBonusHealth": 1500
-			},
 			"itemGroups": [
 				"Items/ItemGroups/LastWhisper"
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 35,
+				"PercentArmorPenetrationMod": 0.35
+			},
+			"dataValues": {
+				"MaxBonusDamagePercent": 0.15,
+				"MaxBonusHealth": 1500
 			}
 		},
 		"3040": {
 			"id": "3040",
 			"name": "Seraph's Embrace",
 			"searchString": "seraphsembrace;spelldamage;mana;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 1000,
-				"FlatMagicDamageMod": 70,
-				"AbilityHasteMod": 25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -2397,7 +2387,19 @@
 			"from": [
 				"3003"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{2bb000ae}",
+				"Items/ItemGroups/LifelineItems",
+				"{33df72dd}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 25
+			},
 			"dataValues": {
 				"APFromMana": 0.02,
 				"HealthThreshold": 0.3,
@@ -2424,24 +2426,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{2bb000ae}",
-				"Items/ItemGroups/LifelineItems",
-				"{33df72dd}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"3041": {
 			"id": "3041",
 			"name": "Mejai's Soulstealer",
 			"searchString": "mejaissoulstealer;book;health;spelldamage;movement;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 100,
-				"FlatMagicDamageMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 1500,
 				"sell": 1050
@@ -2450,7 +2441,16 @@
 			"from": [
 				"1082"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/Glory"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 100,
+				"FlatMagicDamageMod": 20
+			},
 			"dataValues": {
 				"MaxGloryStacks": 25,
 				"APPerGlory": 5,
@@ -2470,23 +2470,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/Glory"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"3042": {
 			"id": "3042",
 			"name": "Muramana",
 			"searchString": "muramana;damage;mana;cooldownreduction;onhit;armorpenetration;attackdamage",
-			"stats": {
-				"FlatMPPoolMod": 1000,
-				"FlatPhysicalDamageMod": 35,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -2496,7 +2486,20 @@
 				"3004"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{29affd88}",
+				"{33df72dd}"
+			],
+			"categories": {
+				"fighter": true,
+				"assassin": true,
+				"marksman": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatPhysicalDamageMod": 35,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"BonusADManaRatioTOOLTIPONLY": 0.02,
 				"OnHitManaRatioTOOLTIPONLY": 0.012,
@@ -2537,25 +2540,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{29affd88}",
-				"{33df72dd}"
-			],
-			"categories": {
-				"fighter": true,
-				"assassin": true,
-				"marksman": true
 			}
 		},
 		"3044": {
 			"id": "3044",
 			"name": "Phage",
 			"searchString": "phage;mallet;health;damage;movement;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"FlatPhysicalDamageMod": 15
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -2571,7 +2562,13 @@
 				"1028",
 				"1036"
 			],
-			"epicness": 4,
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"FlatPhysicalDamageMod": 15
+			},
 			"dataValues": {
 				"MoveSpeedBonus": 20,
 				"MoveSpeedDuration": 2,
@@ -2591,20 +2588,13 @@
 					}
 				}
 			},
-			"effectAmount": [20, 2, 60, 0, 0, 0, 0, 8],
-			"categories": {
-				"fighter": true
-			}
+			"effectAmount": [20, 2, 60, 0, 0, 0, 0, 8]
 		},
 		"3046": {
 			"id": "3046",
 			"name": "Phantom Dancer",
 			"searchString": "phantomdancer;pd;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"PercentAttackSpeedMod": 0.65,
-				"PercentMovementSpeedMod": 0.1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2650,
 				"sell": 1855
@@ -2615,22 +2605,23 @@
 				"3086",
 				"1042"
 			],
-			"epicness": 5,
 			"itemGroups": [
 				"{2db003d4}"
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.65,
+				"PercentMovementSpeedMod": 0.1
 			}
 		},
 		"3047": {
 			"id": "3047",
 			"name": "Plated Steelcaps",
 			"searchString": "platedsteelcaps;ninjatabi;armor;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"FlatArmorMod": 25
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1200,
 				"sell": 840
@@ -2644,11 +2635,6 @@
 				"1029"
 			],
 			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"FeatsArmor": 5
-			},
-			"effectAmount": [0.1],
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
 				"Items/ItemGroups/BootsWithoutActives"
@@ -2657,18 +2643,21 @@
 				"tank": true,
 				"assassin": true,
 				"fighter": true
-			}
+			},
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"FlatArmorMod": 25
+			},
+			"dataValues": {
+				"FeatsArmor": 5
+			},
+			"effectAmount": [0.1]
 		},
 		"3050": {
 			"id": "3050",
 			"name": "Zeke's Convergence",
 			"searchString": "zekesconvergence;health;magicresist;armor;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 25,
-				"FlatHPPoolMod": 300,
-				"FlatArmorMod": 25,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2200,
 				"sell": 1540
@@ -2679,7 +2668,19 @@
 				"1029",
 				"1033"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{31b248b7}"
+			],
+			"categories": {
+				"support": true,
+				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 25,
+				"FlatHPPoolMod": 300,
+				"FlatArmorMod": 25,
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"Duration": 5,
 				"Cooldown": 45,
@@ -2688,23 +2689,13 @@
 				"StormRadius": 350,
 				"UltimateHaste": 15,
 				"ReadyDuration": 5
-			},
-			"itemGroups": [
-				"{31b248b7}"
-			],
-			"categories": {
-				"support": true,
-				"tank": true
 			}
 		},
 		"3051": {
 			"id": "3051",
 			"name": "Hearthbound Axe",
 			"searchString": "hearthboundaxe;bluearrow;damage;attackspeed;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 20,
-				"PercentAttackSpeedMod": 0.2
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1200,
 				"sell": 840
@@ -2720,20 +2711,20 @@
 				"1042",
 				"1036"
 			],
-			"epicness": 4,
 			"categories": {
 				"fighter": true,
 				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 20,
+				"PercentAttackSpeedMod": 0.2
 			}
 		},
 		"3053": {
 			"id": "3053",
 			"name": "Sterak's Gage",
 			"searchString": "steraksgage;shield;sterakscage;health;damage;tenacity",
-			"stats": {
-				"FlatHPPoolMod": 400,
-				"PercentTenacityMod": 0.2
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 2240
@@ -2744,7 +2735,16 @@
 				"2021",
 				"1028"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"PercentTenacityMod": 0.2
+			},
 			"dataValues": {
 				"LowHealthThreshold": 0.3,
 				"ShieldDuration": 4.5,
@@ -2844,21 +2844,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LifelineItems"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"3057": {
 			"id": "3057",
 			"name": "Sheen",
 			"searchString": "sheen;jimmyneutron;onhit;abilityhaste",
-			"stats": {
-				"AbilityHasteMod": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -2875,7 +2867,18 @@
 				"2022"
 			],
 			"isOnHit": true,
-			"epicness": 4,
+			"itemGroups": [
+				"{8b55a7b3}"
+			],
+			"categories": {
+				"fighter": true,
+				"mage": true,
+				"marksman": true,
+				"tank": true
+			},
+			"stats": {
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"SpellbladeCooldown": 1.5,
 				"Cooldown": 1.5
@@ -2891,27 +2894,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{8b55a7b3}"
-			],
-			"categories": {
-				"fighter": true,
-				"mage": true,
-				"marksman": true,
-				"tank": true
 			}
 		},
 		"3065": {
 			"id": "3065",
 			"name": "Spirit Visage",
 			"searchString": "spiritvisage;sv;health;magicresist;healthregen;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 50,
-				"FlatHPPoolMod": 400,
-				"AbilityHasteMod": 10,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2700,
 				"sell": 1890
@@ -2921,26 +2910,28 @@
 				"3211",
 				"3067"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"HealingIncrease": 0.25,
-				"ShieldIncrease": 0.25
-			},
 			"itemGroups": [
 				"{1cab6be3}"
 			],
 			"categories": {
 				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 50,
+				"FlatHPPoolMod": 400,
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
+			},
+			"dataValues": {
+				"HealingIncrease": 0.25,
+				"ShieldIncrease": 0.25
 			}
 		},
 		"3066": {
 			"id": "3066",
 			"name": "Winged Moonplate",
 			"searchString": "wingedmoonplate;pants;chaps;zoomin;leggings;health;movement;movespeed",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 800,
 				"sell": 560
@@ -2954,21 +2945,21 @@
 			"from": [
 				"1028"
 			],
-			"epicness": 4,
 			"categories": {
 				"tank": true,
 				"support": true,
 				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"PercentMovementSpeedMod": 0.04
 			}
 		},
 		"3067": {
 			"id": "3067",
 			"name": "Kindlegem",
 			"searchString": "kindlegem;health;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 800,
 				"sell": 560
@@ -2996,23 +2987,22 @@
 				"1028",
 				"2022"
 			],
-			"epicness": 4,
 			"categories": {
 				"fighter": true,
 				"tank": true,
 				"mage": true,
 				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"AbilityHasteMod": 10
 			}
 		},
 		"3068": {
 			"id": "3068",
 			"name": "Sunfire Aegis",
 			"searchString": "sunfireaegis;sunfire;sunborn;burn;health;armor;aura;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatArmorMod": 50,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2700,
 				"sell": 1890
@@ -3023,7 +3013,18 @@
 				"1031",
 				"1028"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/ImmolateItems",
+				"{27ab7d34}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 50,
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"Range": 325,
 				"MinionMod": 0.6,
@@ -3062,22 +3063,13 @@
 					},
 					"mModifiedGameCalculation": "DPS"
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/ImmolateItems",
-				"{27ab7d34}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"3070": {
 			"id": "3070",
 			"name": "Tear of the Goddess",
 			"searchString": "tearofthegoddess;archangelsstaff;seraphsembrace;wintersapproach;fimbulwinter;muramana;manamune;whisperingcirclet;diademofsongs;mana;manaregen",
-			"stats": {
-				"FlatMPPoolMod": 240
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 400,
 				"sell": 280
@@ -3089,7 +3081,21 @@
 				"2526",
 				"3119"
 			],
-			"epicness": 1,
+			"itemGroups": [
+				"Items/ItemGroups/TearItems",
+				"{20cbfb4d}"
+			],
+			"categories": {
+				"mage": true,
+				"marksman": true,
+				"fighter": true,
+				"assassin": true,
+				"tank": true,
+				"support": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 240
+			},
 			"dataValues": {
 				"ManaPerCharge": 3,
 				"ManaChargeAmmoCD": 8,
@@ -3108,29 +3114,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/TearItems",
-				"{20cbfb4d}"
-			],
-			"categories": {
-				"mage": true,
-				"marksman": true,
-				"fighter": true,
-				"assassin": true,
-				"tank": true,
-				"support": true
 			}
 		},
 		"3071": {
 			"id": "3071",
 			"name": "Black Cleaver",
 			"searchString": "blackcleaver;bc;health;damage;cooldownreduction;onhit;movement;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 400,
-				"FlatPhysicalDamageMod": 40,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -3142,7 +3132,18 @@
 				"1037"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{24adb712}",
+				"Items/ItemGroups/LastWhisper"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatPhysicalDamageMod": 40,
+				"AbilityHasteMod": 20
+			},
 			"dataValues": {
 				"DebuffDuration": 6,
 				"MoveSpeedBonus": 20,
@@ -3150,23 +3151,13 @@
 				"InternalCD": 0.01,
 				"MaxStacks": 5,
 				"ShredPerStack": 0.06
-			},
-			"itemGroups": [
-				"{24adb712}",
-				"Items/ItemGroups/LastWhisper"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"3072": {
 			"id": "3072",
 			"name": "Bloodthirster",
 			"searchString": "bloodthirster;bt;healsword;damage;lifesteal;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 80,
-				"PercentLifeStealMod": 0.15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3400,
 				"sell": 2380
@@ -3177,7 +3168,17 @@
 				"1037",
 				"1053"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{23adb57f}"
+			],
+			"categories": {
+				"marksman": true,
+				"fighter": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 80,
+				"PercentLifeStealMod": 0.15
+			},
 			"dataValues": {
 				"Threshold": 0.7,
 				"DecayTime": 25
@@ -3197,24 +3198,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{23adb57f}"
-			],
-			"categories": {
-				"marksman": true,
-				"fighter": true
 			}
 		},
 		"3073": {
 			"id": "3073",
 			"name": "Experimental Hexplate",
 			"searchString": "experimentalhexplate;health;damage;attackspeed;cooldownreduction;movement;abilityhaste;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 450,
-				"FlatPhysicalDamageMod": 40,
-				"PercentAttackSpeedMod": 0.2
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -3225,7 +3215,17 @@
 				"1042",
 				"3044"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{22adb3ec}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 450,
+				"FlatPhysicalDamageMod": 40,
+				"PercentAttackSpeedMod": 0.2
+			},
 			"dataValues": {
 				"UltimateHaste": 30,
 				"MovementSpeedBonus": 0.2,
@@ -3247,23 +3247,13 @@
 					"RangedResult": "@BonusMSRanged@",
 					"DefaultResult": "@BonusMSMelee@"
 				}
-			},
-			"itemGroups": [
-				"{22adb3ec}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"3074": {
 			"id": "3074",
 			"name": "Ravenous Hydra",
 			"searchString": "ravenoushydra;ravhydra;damage;lifesteal;cooldownreduction;onhit;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 65,
-				"PercentLifeStealMod": 0.12,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3300,
 				"sell": 2310
@@ -3275,7 +3265,18 @@
 				"3133"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 65,
+				"PercentLifeStealMod": 0.12,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"CleaveRadius": 350,
 				"Cooldown": 10,
@@ -3312,23 +3313,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"3075": {
 			"id": "3075",
 			"name": "Thornmail",
 			"searchString": "thornmail;grievouswounds;health;armor",
-			"stats": {
-				"FlatHPPoolMod": 150,
-				"FlatArmorMod": 75
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2450,
 				"sell": 1715
@@ -3339,7 +3330,19 @@
 				"1031",
 				"1028"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{20adb0c6}",
+				"{87f1e822}",
+				"{8875daa8}"
+			],
+			"categories": {
+				"tank": true,
+				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 150,
+				"FlatArmorMod": 75
+			},
 			"dataValues": {
 				"BaseDamage": 20,
 				"BonusArmorDamageRatio": 0.1,
@@ -3362,24 +3365,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{20adb0c6}",
-				"{87f1e822}",
-				"{8875daa8}"
-			],
-			"categories": {
-				"tank": true,
-				"support": true
 			}
 		},
 		"3076": {
 			"id": "3076",
 			"name": "Bramble Vest",
 			"searchString": "bramblevest;grievouswounds;armor",
-			"stats": {
-				"FlatArmorMod": 30
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 800,
 				"sell": 560
@@ -3392,7 +3384,17 @@
 				"1029",
 				"1029"
 			],
-			"epicness": 4,
+			"itemGroups": [
+				"{87f1e822}",
+				"{8875daa8}"
+			],
+			"categories": {
+				"tank": true,
+				"support": true
+			},
+			"stats": {
+				"FlatArmorMod": 30
+			},
 			"dataValues": {
 				"GrievousAmount": 0.4,
 				"GrievousDuration": 3,
@@ -3407,23 +3409,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{87f1e822}",
-				"{8875daa8}"
-			],
-			"categories": {
-				"tank": true,
-				"support": true
 			}
 		},
 		"3077": {
 			"id": "3077",
 			"name": "Tiamat",
 			"searchString": "tiamat;damage;onhit;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 20
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1200,
 				"sell": 840
@@ -3440,7 +3432,18 @@
 				"1036"
 			],
 			"isOnHit": true,
-			"epicness": 4,
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
+			],
+			"categories": {
+				"fighter": true,
+				"tank": true,
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 20
+			},
 			"dataValues": {
 				"CleaveRadius": 350,
 				"Cooldown": 10,
@@ -3476,27 +3479,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
-			],
-			"categories": {
-				"fighter": true,
-				"tank": true,
-				"assassin": true
 			}
 		},
 		"3078": {
 			"id": "3078",
 			"name": "Trinity Force",
 			"searchString": "trinityforce;triforce;tonsofdamage;spellblade;health;damage;attackspeed;cooldownreduction;onhit;movement;abilityhaste;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 333,
-				"FlatPhysicalDamageMod": 36,
-				"PercentAttackSpeedMod": 0.3,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3333,
 				"sell": 2333
@@ -3508,7 +3497,19 @@
 				"3051"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{2dadc53d}",
+				"{8b55a7b3}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 333,
+				"FlatPhysicalDamageMod": 36,
+				"PercentAttackSpeedMod": 0.3,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"SpellbladeMultiplier": 2,
 				"MoveSpeedBonus": 20,
@@ -3536,22 +3537,13 @@
 					]
 				}
 			},
-			"effectAmount": [25, 60, 2, 1.5, 1.5],
-			"itemGroups": [
-				"{2dadc53d}",
-				"{8b55a7b3}"
-			],
-			"categories": {
-				"fighter": true
-			}
+			"effectAmount": [25, 60, 2, 1.5, 1.5]
 		},
 		"3082": {
 			"id": "3082",
 			"name": "Warden's Mail",
 			"searchString": "wardensmail;armor",
-			"stats": {
-				"FlatArmorMod": 40
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1000,
 				"sell": 700
@@ -3565,25 +3557,24 @@
 				"1029",
 				"1029"
 			],
-			"epicness": 4,
+			"categories": {
+				"tank": true,
+				"support": true
+			},
+			"stats": {
+				"FlatArmorMod": 40
+			},
 			"dataValues": {
 				"MaxHPRatio": 0.005,
 				"WardenDamageMax": 0.2,
 				"BlockBase": 15
-			},
-			"categories": {
-				"tank": true,
-				"support": true
 			}
 		},
 		"3083": {
 			"id": "3083",
 			"name": "Warmog's Armor",
 			"searchString": "warmogsarmor;health;healthregen",
-			"stats": {
-				"FlatHPPoolMod": 1000,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -3594,7 +3585,16 @@
 				"1011",
 				"3801"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{a292a6ef}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 1000,
+				"PercentBaseHPRegenMod": 1
+			},
 			"dataValues": {
 				"MaxHealthRatio": 0.015,
 				"SecondsPerHeal": 0.5,
@@ -3619,22 +3619,13 @@
 					},
 					"mModifiedGameCalculation": "TotalHealing"
 				}
-			},
-			"itemGroups": [
-				"{a292a6ef}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"3084": {
 			"id": "3084",
 			"name": "Heartsteel",
 			"searchString": "heartsteel;quest;steal;boyband;health;healthregen",
-			"stats": {
-				"FlatHPPoolMod": 900,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -3645,7 +3636,16 @@
 				"3801",
 				"1011"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{9f92a236}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 900,
+				"PercentBaseHPRegenMod": 1
+			},
 			"dataValues": {
 				"PerTargetCooldown": 30,
 				"BaseDamage": 70,
@@ -3707,23 +3707,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9f92a236}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"3085": {
 			"id": "3085",
 			"name": "Runaan's Hurricane",
 			"searchString": "runaanshurricane;criticalstrike;attackspeed;onhit;movement;criticalstrikechance;movespeed",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"PercentAttackSpeedMod": 0.4,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2650,
 				"sell": 1855
@@ -3734,7 +3724,18 @@
 				"3144"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{a092a3c9}",
+				"{78ac5965}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentMovementSpeedMod": 0.04
+			},
 			"dataValues": {
 				"BoltMinPercent": 40,
 				"BoltMaxPercent": 40,
@@ -3761,24 +3762,13 @@
 					]
 				}
 			},
-			"effectAmount": [0, 40, 2, 0, 40, 1],
-			"itemGroups": [
-				"{a092a3c9}",
-				"{78ac5965}"
-			],
-			"categories": {
-				"marksman": true
-			}
+			"effectAmount": [0, 40, 2, 0, 40, 1]
 		},
 		"3086": {
 			"id": "3086",
 			"name": "Zeal",
 			"searchString": "zeal;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
-			"stats": {
-				"FlatCritChanceMod": 0.15,
-				"PercentAttackSpeedMod": 0.15,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1200,
 				"sell": 840
@@ -3795,21 +3785,20 @@
 				"1018",
 				"1042"
 			],
-			"epicness": 4,
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.15,
+				"PercentAttackSpeedMod": 0.15,
+				"PercentMovementSpeedMod": 0.04
 			}
 		},
 		"3087": {
 			"id": "3087",
 			"name": "Statikk Shiv",
 			"searchString": "statikkshiv;energized;energised;damage;attackspeed;spelldamage;onhit;movement;abilitypower;attackdamage;movespeed",
-			"stats": {
-				"FlatMagicDamageMod": 45,
-				"FlatPhysicalDamageMod": 45,
-				"PercentAttackSpeedMod": 0.3,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -3821,7 +3810,19 @@
 				"1037"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{9e92a0a3}",
+				"{3bbe1bdd}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 45,
+				"FlatPhysicalDamageMod": 45,
+				"PercentAttackSpeedMod": 0.3,
+				"PercentMovementSpeedMod": 0.04
+			},
 			"dataValues": {
 				"BounceRange": 500,
 				"BonusEnergizedStacks": 9,
@@ -3855,22 +3856,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9e92a0a3}",
-				"{3bbe1bdd}"
-			],
-			"categories": {
-				"marksman": true
 			}
 		},
 		"3089": {
 			"id": "3089",
 			"name": "Rabadon's Deathcap",
 			"searchString": "rabadonsdeathcap;dc;dcap;hat;banksys;wooglets;witchcap;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 130
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3500,
 				"sell": 2450
@@ -3880,27 +3872,25 @@
 				"1058",
 				"1058"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"APAmp": 0.3
-			},
 			"itemGroups": [
 				"{ac92b6ad}",
 				"{bbcc250a}"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 130
+			},
+			"dataValues": {
+				"APAmp": 0.3
 			}
 		},
 		"3091": {
 			"id": "3091",
 			"name": "Wit's End",
 			"searchString": "witsend;magicresist;attackspeed;onhit;tenacity",
-			"stats": {
-				"FlatSpellBlockMod": 45,
-				"PercentAttackSpeedMod": 0.5,
-				"PercentTenacityMod": 0.2
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -3912,7 +3902,18 @@
 				"1043"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{a894eef8}"
+			],
+			"categories": {
+				"fighter": true,
+				"marksman": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 45,
+				"PercentAttackSpeedMod": 0.5,
+				"PercentTenacityMod": 0.2
+			},
 			"itemCalculations": {
 				"OnHitDamage": {
 					"{72c5c2a8}": 1,
@@ -3923,24 +3924,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{a894eef8}"
-			],
-			"categories": {
-				"fighter": true,
-				"marksman": true
 			}
 		},
 		"3094": {
 			"id": "3094",
 			"name": "Rapid Firecannon",
 			"searchString": "rapidfirecannon;rfc;rapidfire;canon;gun;energized;energised;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"PercentAttackSpeedMod": 0.35,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2650,
 				"sell": 1855
@@ -3950,29 +3940,29 @@
 				"3086",
 				"3144"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"RangePercentIncrease": 0.35,
-				"MaxRangeIncrease": 150,
-				"BonusDamage": 40
-			},
 			"itemGroups": [
 				"{ad94f6d7}",
 				"{3bbe1bdd}"
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.35,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"RangePercentIncrease": 0.35,
+				"MaxRangeIncrease": 150,
+				"BonusDamage": 40
 			}
 		},
 		"3097": {
 			"id": "3097",
 			"name": "Stormrazor",
 			"searchString": "stormrazor;energized;energised;damage;criticalstrike;attackspeed;movement;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 50,
-				"PercentAttackSpeedMod": 0.2
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 2240
@@ -3983,7 +3973,18 @@
 				"1018",
 				"3144"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{ac94f544}",
+				"{3bbe1bdd}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50,
+				"PercentAttackSpeedMod": 0.2
+			},
 			"dataValues": {
 				"BuffStrength": 0.45,
 				"BuffDuration": 1.5
@@ -3997,24 +3998,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{ac94f544}",
-				"{3bbe1bdd}"
-			],
-			"categories": {
-				"marksman": true
 			}
 		},
 		"3100": {
 			"id": "3100",
 			"name": "Lich Bane",
 			"searchString": "lichbane;spellblade;spelldamage;onhit;movement;abilityhaste;abilitypower;movespeed",
-			"stats": {
-				"FlatMagicDamageMod": 100,
-				"PercentMovementSpeedMod": 0.06,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -4026,7 +4016,18 @@
 				"1026"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{123d7d35}",
+				"{8b55a7b3}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 100,
+				"PercentMovementSpeedMod": 0.06,
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"SpellbladeCooldown": 1.5,
 				"LichBaneAPValue": 0.45,
@@ -4050,23 +4051,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{123d7d35}",
-				"{8b55a7b3}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"3102": {
 			"id": "3102",
 			"name": "Banshee's Veil",
 			"searchString": "bansheesveil;bv;spellshield;magicresist;spelldamage;abilitypower",
-			"stats": {
-				"FlatSpellBlockMod": 40,
-				"FlatMagicDamageMod": 105
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -4076,11 +4067,6 @@
 				"1058",
 				"4632"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"Cooldown": 40
-			},
-			"effectAmount": [40, 45, 10, -0.1, 8, 2, 0, 0],
 			"itemGroups": [
 				"{103d7a0f}",
 				"{3fcdbdac}",
@@ -4088,18 +4074,21 @@
 			],
 			"categories": {
 				"mage": true
-			}
+			},
+			"stats": {
+				"FlatSpellBlockMod": 40,
+				"FlatMagicDamageMod": 105
+			},
+			"dataValues": {
+				"Cooldown": 40
+			},
+			"effectAmount": [40, 45, 10, -0.1, 8, 2, 0, 0]
 		},
 		"3107": {
 			"id": "3107",
 			"name": "Redemption",
 			"searchString": "redemption;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 30,
-				"AbilityHasteMod": 15,
-				"PercentBaseMPRegenMod": 1,
-				"PercentHealingAmountMod": 0.1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2300,
 				"sell": 1610
@@ -4109,7 +4098,18 @@
 				"3108",
 				"3114"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{0b3d7230}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 30,
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.1
+			},
 			"dataValues": {
 				"HealMin": 150,
 				"HealMax": 350,
@@ -4159,22 +4159,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{0b3d7230}"
-			],
-			"categories": {
-				"support": true
 			}
 		},
 		"3108": {
 			"id": "3108",
 			"name": "Fiendish Codex",
 			"searchString": "fiendishcodex;book;spelldamage;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 25,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 850,
 				"sell": 595
@@ -4196,23 +4187,21 @@
 				"1052",
 				"2022"
 			],
-			"epicness": 4,
-			"effectAmount": [-0.1, 0, 0, 0, 0, 0, 0, 0],
 			"categories": {
 				"mage": true,
 				"support": true
-			}
+			},
+			"stats": {
+				"FlatMagicDamageMod": 25,
+				"AbilityHasteMod": 10
+			},
+			"effectAmount": [-0.1, 0, 0, 0, 0, 0, 0, 0]
 		},
 		"3109": {
 			"id": "3109",
 			"name": "Knight's Vow",
 			"searchString": "knightsvow;kv;health;healthregen;armor;aura;active;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"FlatArmorMod": 40,
-				"AbilityHasteMod": 10,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2300,
 				"sell": 1610
@@ -4223,31 +4212,32 @@
 				"1031",
 				"1006"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"DamageRedirection": 0.14,
-				"DamageRedirectionThreshold": 0.3,
-				"TetherRange": 1250,
-				"AllyHealingConversion": 0.12,
-				"Cooldown": 60
-			},
 			"itemGroups": [
 				"{193d883a}"
 			],
 			"categories": {
 				"support": true,
 				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"FlatArmorMod": 40,
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
+			},
+			"dataValues": {
+				"DamageRedirection": 0.14,
+				"DamageRedirectionThreshold": 0.3,
+				"TetherRange": 1250,
+				"AllyHealingConversion": 0.12,
+				"Cooldown": 60
 			}
 		},
 		"3110": {
 			"id": "3110",
 			"name": "Frozen Heart",
 			"searchString": "frozenheart;armor;mana;aura;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatMPPoolMod": 400,
-				"FlatArmorMod": 75,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2500,
 				"sell": 1750
@@ -4257,28 +4247,28 @@
 				"3082",
 				"3024"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"ASPDSlow": -0.2,
-				"AuraRadius": 700
-			},
 			"itemGroups": [
 				"{0c3b352c}"
 			],
 			"categories": {
 				"tank": true,
 				"support": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 400,
+				"FlatArmorMod": 75,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"ASPDSlow": -0.2,
+				"AuraRadius": 700
 			}
 		},
 		"3111": {
 			"id": "3111",
 			"name": "Mercury's Treads",
 			"searchString": "mercurystreads;mercs;boots;magicresist;tenacity;movespeed",
-			"stats": {
-				"FlatSpellBlockMod": 20,
-				"FlatMovementSpeedMod": 45,
-				"PercentTenacityMod": 0.3
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1250,
 				"sell": 875
@@ -4292,10 +4282,6 @@
 				"1033"
 			],
 			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"FeatsMR": 5
-			},
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
 				"Items/ItemGroups/BootsWithoutActives"
@@ -4304,16 +4290,21 @@
 				"tank": true,
 				"assassin": true,
 				"fighter": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 20,
+				"FlatMovementSpeedMod": 45,
+				"PercentTenacityMod": 0.3
+			},
+			"dataValues": {
+				"FeatsMR": 5
 			}
 		},
 		"3113": {
 			"id": "3113",
 			"name": "Aether Wisp",
 			"searchString": "aetherwisp;spookyghost;movement;spelldamage;abilitypower;movespeed",
-			"stats": {
-				"FlatMagicDamageMod": 30,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -4330,20 +4321,20 @@
 			"from": [
 				"1052"
 			],
-			"epicness": 4,
 			"categories": {
 				"mage": true,
 				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 30,
+				"PercentMovementSpeedMod": 0.04
 			}
 		},
 		"3114": {
 			"id": "3114",
 			"name": "Forbidden Idol",
 			"searchString": "forbiddenidol;manaregen",
-			"stats": {
-				"PercentBaseMPRegenMod": 0.5,
-				"PercentHealingAmountMod": 0.08
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 600,
 				"sell": 420
@@ -4360,20 +4351,19 @@
 			"from": [
 				"1004"
 			],
-			"epicness": 4,
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"PercentBaseMPRegenMod": 0.5,
+				"PercentHealingAmountMod": 0.08
 			}
 		},
 		"3115": {
 			"id": "3115",
 			"name": "Nashor's Tooth",
 			"searchString": "nashorstooth;nashors;attackspeed;spelldamage;onhit;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 80,
-				"PercentAttackSpeedMod": 0.5,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -4385,7 +4375,18 @@
 				"3108"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{093b3073}"
+			],
+			"categories": {
+				"mage": true,
+				"marksman": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 80,
+				"PercentAttackSpeedMod": 0.5,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"NashorsBaseValue": 15,
 				"NashorsAPValue": 0.15
@@ -4404,23 +4405,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{093b3073}"
-			],
-			"categories": {
-				"mage": true,
-				"marksman": true
 			}
 		},
 		"3116": {
 			"id": "3116",
 			"name": "Rylai's Crystal Scepter",
 			"searchString": "rylaiscrystalscepter;rylais;health;spelldamage;slow;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 400,
-				"FlatMagicDamageMod": 65
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2600,
 				"sell": 1820
@@ -4431,28 +4422,27 @@
 				"1011",
 				"1052"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"SlowAmount": 0.3,
-				"SlowDuration": 1
-			},
-			"effectAmount": [-0.3, -0.3, -0.3, 1, 1, 1],
 			"itemGroups": [
 				"{0a3b3206}"
 			],
 			"categories": {
 				"mage": true
-			}
+			},
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatMagicDamageMod": 65
+			},
+			"dataValues": {
+				"SlowAmount": 0.3,
+				"SlowDuration": 1
+			},
+			"effectAmount": [-0.3, -0.3, -0.3, 1, 1, 1]
 		},
 		"3118": {
 			"id": "3118",
 			"name": "Malignance",
 			"searchString": "malignance;burn;spelldamage;mana;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 600,
-				"FlatMagicDamageMod": 90,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2700,
 				"sell": 1890
@@ -4462,7 +4452,17 @@
 				"3802",
 				"1026"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{143b41c4}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 90,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"AOESize": 250,
 				"UltimateHaste": 20,
@@ -4509,23 +4509,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{143b41c4}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"3119": {
 			"id": "3119",
 			"name": "Winter's Approach",
 			"searchString": "wintersapproach;fimbulwinter;tear;health;mana;abilityhaste",
-			"stats": {
-				"FlatMPPoolMod": 500,
-				"FlatHPPoolMod": 550,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2400,
 				"sell": 1680
@@ -4539,7 +4529,19 @@
 				"1011",
 				"3067"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/TearItems",
+				"{153b4357}",
+				"{9d42d534}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 500,
+				"FlatHPPoolMod": 550,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"ManaPerCharge": 3,
 				"ManaChargeAmmoCD": 8,
@@ -4557,25 +4559,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/TearItems",
-				"{153b4357}",
-				"{9d42d534}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"3121": {
 			"id": "3121",
 			"name": "Fimbulwinter",
 			"searchString": "fimbulwinter;health;mana;abilityhaste",
-			"stats": {
-				"FlatMPPoolMod": 1000,
-				"FlatHPPoolMod": 550,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2400,
 				"sell": 1680
@@ -4584,7 +4574,17 @@
 			"from": [
 				"3119"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{9d42d534}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatHPPoolMod": 550,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"Cooldown": 8,
 				"ShieldDuration": 3,
@@ -4609,21 +4609,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9d42d534}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"3123": {
 			"id": "3123",
 			"name": "Executioner's Calling",
 			"searchString": "executionerscalling;grievouswounds;damage;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 15
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 800,
 				"sell": 560
@@ -4636,12 +4628,6 @@
 			"from": [
 				"1036"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"GrievousDuration": 3,
-				"GrievousAmount": 0.4
-			},
-			"effectAmount": [3],
 			"itemGroups": [
 				"{8875daa8}"
 			],
@@ -4649,17 +4635,21 @@
 				"fighter": true,
 				"marksman": true,
 				"assassin": true
-			}
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 15
+			},
+			"dataValues": {
+				"GrievousDuration": 3,
+				"GrievousAmount": 0.4
+			},
+			"effectAmount": [3]
 		},
 		"3124": {
 			"id": "3124",
 			"name": "Guinsoo's Rageblade",
 			"searchString": "guinsoosrageblade;damage;attackspeed;spelldamage;onhit;abilitypower;attackdamage",
-			"stats": {
-				"FlatMagicDamageMod": 30,
-				"FlatPhysicalDamageMod": 30,
-				"PercentAttackSpeedMod": 0.25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -4671,7 +4661,17 @@
 				"1037"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{9a42d07b}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 30,
+				"FlatPhysicalDamageMod": 30,
+				"PercentAttackSpeedMod": 0.25
+			},
 			"dataValues": {
 				"OnHitDamage": 30,
 				"AttackSpeedPerStack": 0.08,
@@ -4728,22 +4728,13 @@
 					]
 				}
 			},
-			"effectAmount": [0.08, 2.5, 2.5, 3, 4, 0.1, 0.1, 15, 1, 3, 0, 0, 3],
-			"itemGroups": [
-				"{9a42d07b}"
-			],
-			"categories": {
-				"marksman": true
-			}
+			"effectAmount": [0.08, 2.5, 2.5, 3, 4, 0.1, 0.1, 15, 1, 3, 0, 0, 3]
 		},
 		"3133": {
 			"id": "3133",
 			"name": "Caulfield's Warhammer",
 			"searchString": "caulfieldswarhammer;damage;cooldownreduction;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 20,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1050,
 				"sell": 735
@@ -4769,21 +4760,21 @@
 				"2022",
 				"1036"
 			],
-			"epicness": 4,
 			"categories": {
 				"fighter": true,
 				"marksman": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 20,
+				"AbilityHasteMod": 10
 			}
 		},
 		"3134": {
 			"id": "3134",
 			"name": "Serrated Dirk",
 			"searchString": "serrateddirk;lethality;damage;armorpenetration;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 20,
-				"PhysicalLethality": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1000,
 				"sell": 700
@@ -4802,26 +4793,26 @@
 				"1036",
 				"1036"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"LethalityAmount": 10
-			},
 			"itemGroups": [
 				"{1c3fcb8a}"
 			],
 			"categories": {
 				"assassin": true,
 				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 20,
+				"PhysicalLethality": 10
+			},
+			"dataValues": {
+				"LethalityAmount": 10
 			}
 		},
 		"3135": {
 			"id": "3135",
 			"name": "Void Staff",
 			"searchString": "voidstaff;magicpenetration;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 95,
-				"PercentMagicPenetrationMod": 0.4
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -4831,23 +4822,22 @@
 				"4630",
 				"1026"
 			],
-			"epicness": 5,
 			"itemGroups": [
 				"Items/ItemGroups/VoidPen"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 95,
+				"PercentMagicPenetrationMod": 0.4
 			}
 		},
 		"3137": {
 			"id": "3137",
 			"name": "Cryptbloom",
 			"searchString": "cryptbloom;spelldamage;magicpenetration;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 75,
-				"AbilityHasteMod": 20,
-				"PercentMagicPenetrationMod": 0.3
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -4858,7 +4848,17 @@
 				"3108",
 				"3108"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/VoidPen"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 75,
+				"AbilityHasteMod": 20,
+				"PercentMagicPenetrationMod": 0.3
+			},
 			"dataValues": {
 				"BaseHeal": 100,
 				"HealAPRatio": 0.2,
@@ -4879,23 +4879,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/VoidPen"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"3139": {
 			"id": "3139",
 			"name": "Mercurial Scimitar",
 			"searchString": "mercurialscimitar;mercscim;quicksilversash;qss;silvermeredawn;magicresist;damage;lifesteal;active;movement;tenacity;attackdamage",
-			"stats": {
-				"FlatSpellBlockMod": 35,
-				"FlatPhysicalDamageMod": 50,
-				"PercentLifeStealMod": 0.1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 2240
@@ -4906,28 +4896,30 @@
 				"1037",
 				"1053"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"Cooldown": 90,
-				"MSDuration": 2,
-				"MoveSpeed": 0.5
-			},
-			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0],
 			"itemGroups": [
 				"Items/ItemGroups/Quicksilver"
 			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
-			}
+			},
+			"stats": {
+				"FlatSpellBlockMod": 35,
+				"FlatPhysicalDamageMod": 50,
+				"PercentLifeStealMod": 0.1
+			},
+			"dataValues": {
+				"Cooldown": 90,
+				"MSDuration": 2,
+				"MoveSpeed": 0.5
+			},
+			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0]
 		},
 		"3140": {
 			"id": "3140",
 			"name": "Quicksilver Sash",
 			"searchString": "quicksilversash;qss;mercurialscimitar;silvermeredawn;active;magicresist",
-			"stats": {
-				"FlatSpellBlockMod": 30
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1300,
 				"sell": 910
@@ -4939,26 +4931,24 @@
 			"from": [
 				"1033"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"Cooldown": 90
-			},
 			"itemGroups": [
 				"Items/ItemGroups/Quicksilver"
 			],
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 30
+			},
+			"dataValues": {
+				"Cooldown": 90
 			}
 		},
 		"3142": {
 			"id": "3142",
 			"name": "Youmuu's Ghostblade",
 			"searchString": "youmuusghostblade;lethality;haste;damage;active;movement;armorpenetration;attackdamage;movespeed",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"PercentMovementSpeedMod": 0.04,
-				"PhysicalLethality": 18
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -4969,7 +4959,17 @@
 				"6690",
 				"1036"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{9833c2cb}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"PercentMovementSpeedMod": 0.04,
+				"PhysicalLethality": 18
+			},
 			"dataValues": {
 				"LethalityAmount": 18,
 				"CombatTimer": 3,
@@ -5004,24 +5004,15 @@
 					}
 				}
 			},
-			"itemGroups": [
-				"{9833c2cb}"
-			],
 			"__replacedVariables": {
 				"{74ac7847}": "BaseOOCMS"
-			},
-			"categories": {
-				"assassin": true
 			}
 		},
 		"3143": {
 			"id": "3143",
 			"name": "Randuin's Omen",
 			"searchString": "randuinsomen;health;armor;active;slow",
-			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatArmorMod": 75
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2700,
 				"sell": 1890
@@ -5031,28 +5022,29 @@
 				"3082",
 				"1011"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{9733c138}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 75
+			},
 			"dataValues": {
 				"PercentCritDamageReduction": 0.3,
 				"SlowAmount": 0.7,
 				"SlowDuration": 2,
 				"Radius": 500,
 				"Cooldown": 90
-			},
-			"itemGroups": [
-				"{9733c138}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"3144": {
 			"id": "3144",
 			"name": "Scout's Slingshot",
 			"searchString": "scoutsslingshot;attackspeed",
-			"stats": {
-				"PercentAttackSpeedMod": 0.2
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 600,
 				"sell": 420
@@ -5070,7 +5062,12 @@
 				"1042",
 				"1042"
 			],
-			"epicness": 4,
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"PercentAttackSpeedMod": 0.2
+			},
 			"dataValues": {
 				"Cooldown": 40
 			},
@@ -5083,18 +5080,13 @@
 						}
 					]
 				}
-			},
-			"categories": {
-				"marksman": true
 			}
 		},
 		"3145": {
 			"id": "3145",
 			"name": "Hextech Alternator",
 			"searchString": "hextechalternator;revolver;pewpew;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 45
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -5111,7 +5103,12 @@
 				"1052",
 				"1052"
 			],
-			"epicness": 4,
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 45
+			},
 			"dataValues": {
 				"Cooldown": 40
 			},
@@ -5124,20 +5121,13 @@
 						}
 					]
 				}
-			},
-			"categories": {
-				"mage": true
 			}
 		},
 		"3146": {
 			"id": "3146",
 			"name": "Hextech Gunblade",
 			"searchString": "hextechgunblade;damage;lifesteal;spelldamage;active;spellvamp;abilitypower;attackdamage",
-			"stats": {
-				"FlatMagicDamageMod": 80,
-				"FlatPhysicalDamageMod": 40,
-				"PercentOmnivampMod": 0.1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -5148,7 +5138,18 @@
 				"3145",
 				"1052"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{9c33c917}"
+			],
+			"categories": {
+				"mage": true,
+				"assassin": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 80,
+				"FlatPhysicalDamageMod": 40,
+				"PercentOmnivampMod": 0.1
+			},
 			"dataValues": {
 				"SlowAmount": 0.25,
 				"SlowDuration": 1.5,
@@ -5168,23 +5169,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9c33c917}"
-			],
-			"categories": {
-				"mage": true,
-				"assassin": true
 			}
 		},
 		"3147": {
 			"id": "3147",
 			"name": "Haunting Guise",
 			"searchString": "hauntingguise;health;spelldamage;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"FlatMagicDamageMod": 30
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1300,
 				"sell": 910
@@ -5199,29 +5190,28 @@
 				"1052",
 				"1028"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"BuffCounterDuration": 3,
-				"SecondsInCombat": 3,
-				"DamageIncreasePerSecond": 0.02,
-				"DamageIncreaseMax": 0.06
-			},
 			"itemGroups": [
 				"{9b33c784}"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"FlatMagicDamageMod": 30
+			},
+			"dataValues": {
+				"BuffCounterDuration": 3,
+				"SecondsInCombat": 3,
+				"DamageIncreasePerSecond": 0.02,
+				"DamageIncreaseMax": 0.06
 			}
 		},
 		"3152": {
 			"id": "3152",
 			"name": "Hextech Rocketbelt",
 			"searchString": "hextechrocketbelt;protobelt;health;spelldamage;active;cooldownreduction;movement;abilityhaste;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 300,
-				"FlatMagicDamageMod": 70,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2650,
 				"sell": 1855
@@ -5232,7 +5222,17 @@
 				"3108",
 				"1028"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{9631810e}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 20
+			},
 			"dataValues": {
 				"Cooldown": 40,
 				"BaseDamage": 100,
@@ -5251,23 +5251,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9631810e}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"3153": {
 			"id": "3153",
 			"name": "Blade of The Ruined King",
 			"searchString": "bladeoftheruinedking;brk;bork;botrk;mist;damage;attackspeed;lifesteal;slow;onhit;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 40,
-				"PercentAttackSpeedMod": 0.25,
-				"PercentLifeStealMod": 0.1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 2240
@@ -5279,7 +5269,18 @@
 				"1037"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{973182a1}"
+			],
+			"categories": {
+				"fighter": true,
+				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 40,
+				"PercentAttackSpeedMod": 0.25,
+				"PercentLifeStealMod": 0.1
+			},
 			"dataValues": {
 				"MoveSpeedMod": -0.3,
 				"MoveSpeedDuration": 1,
@@ -5397,23 +5398,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{973182a1}"
-			],
-			"categories": {
-				"fighter": true,
-				"marksman": true
 			}
 		},
 		"3155": {
 			"id": "3155",
 			"name": "Hexdrinker",
 			"searchString": "hexdrinker;damage;magicresist;attackdamage",
-			"stats": {
-				"FlatSpellBlockMod": 25,
-				"FlatPhysicalDamageMod": 25
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1300,
 				"sell": 910
@@ -5427,7 +5418,18 @@
 				"1033",
 				"1036"
 			],
-			"epicness": 4,
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems"
+			],
+			"categories": {
+				"fighter": true,
+				"assassin": true,
+				"marksman": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 25,
+				"FlatPhysicalDamageMod": 25
+			},
 			"dataValues": {
 				"LowHealthThreshold": 0.3,
 				"ShieldLifetime": 2.5,
@@ -5456,25 +5458,13 @@
 					"RangedResult": "@RangedItemCalcValue@",
 					"DefaultResult": "@MeleeItemCalcValue@"
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LifelineItems"
-			],
-			"categories": {
-				"fighter": true,
-				"assassin": true,
-				"marksman": true
 			}
 		},
 		"3156": {
 			"id": "3156",
 			"name": "Maw of Malmortius",
 			"searchString": "mawofmalmortius;magicresist;damage;lifesteal;spellvamp;abilityhaste;attackdamage",
-			"stats": {
-				"FlatSpellBlockMod": 40,
-				"FlatPhysicalDamageMod": 60,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -5484,7 +5474,19 @@
 				"3155",
 				"3133"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems"
+			],
+			"categories": {
+				"fighter": true,
+				"assassin": true,
+				"marksman": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 40,
+				"FlatPhysicalDamageMod": 60,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"ShieldSize": 200,
 				"LowHealthThreshold": 0.3,
@@ -5517,24 +5519,13 @@
 					},
 					"mModifiedGameCalculation": "MeleeItemCalcValue"
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LifelineItems"
-			],
-			"categories": {
-				"fighter": true,
-				"assassin": true,
-				"marksman": true
 			}
 		},
 		"3157": {
 			"id": "3157",
 			"name": "Zhonya's Hourglass",
 			"searchString": "zhonyashourglass;zhg;zonyas;wooglets;witchcap;armor;spelldamage;active;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 105,
-				"FlatArmorMod": 50
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3250,
 				"sell": 2275
@@ -5544,12 +5535,6 @@
 				"1058",
 				"2420"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"Cooldown": 120,
-				"Duration": 2.5
-			},
-			"effectAmount": [0, 2.5, 120],
 			"itemGroups": [
 				"Items/ItemGroups/BuildsFromStopwatchGroup",
 				"{9b3188ed}",
@@ -5557,16 +5542,22 @@
 			],
 			"categories": {
 				"mage": true
-			}
+			},
+			"stats": {
+				"FlatMagicDamageMod": 105,
+				"FlatArmorMod": 50
+			},
+			"dataValues": {
+				"Cooldown": 120,
+				"Duration": 2.5
+			},
+			"effectAmount": [0, 2.5, 120]
 		},
 		"3158": {
 			"id": "3158",
 			"name": "Ionian Boots of Lucidity",
 			"searchString": "ionianbootsoflucidity;boots;cooldownreduction;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -5580,11 +5571,6 @@
 				"2022"
 			],
 			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"SummonerHaste": 10,
-				"FeatsHaste": 5
-			},
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
 				"Items/ItemGroups/BootsWithoutActives"
@@ -5593,16 +5579,21 @@
 				"support": true,
 				"mage": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"SummonerHaste": 10,
+				"FeatsHaste": 5
 			}
 		},
 		"3161": {
 			"id": "3161",
 			"name": "Spear of Shojin",
 			"searchString": "spearofshojin;health;damage;abilityhaste;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 450,
-				"FlatPhysicalDamageMod": 45
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -5613,7 +5604,16 @@
 				"2021",
 				"1028"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{0538eb90}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 450,
+				"FlatPhysicalDamageMod": 45
+			},
 			"dataValues": {
 				"SpellDamageIncrease": 0.03,
 				"AHBase": 25,
@@ -5638,23 +5638,13 @@
 					},
 					"mModifiedGameCalculation": "MeleeItemCalcValue"
 				}
-			},
-			"itemGroups": [
-				"{0538eb90}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"3165": {
 			"id": "3165",
 			"name": "Morellonomicon",
 			"searchString": "morellonomicon;nmst;grievouswounds;forbiddenbook;lastshadow;health;spelldamage;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatMagicDamageMod": 75,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2850,
 				"sell": 1995
@@ -5665,11 +5655,6 @@
 				"1026",
 				"3067"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"GrievousAmount": 0.4,
-				"GrievousDuration": 3
-			},
 			"itemGroups": [
 				"{0938f1dc}",
 				"{8875daa8}"
@@ -5677,16 +5662,22 @@
 			"categories": {
 				"mage": true,
 				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 75,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3
 			}
 		},
 		"3168": {
 			"id": "3168",
 			"name": "Immortal Path",
 			"searchString": "immortalpath;lifesteal;spellvamp;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"PercentOmnivampMod": 0.04
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 1000,
 				"sell": 700
@@ -5696,26 +5687,27 @@
 				"3008"
 			],
 			"isBoots": true,
-			"epicness": 7,
+			"itemGroups": [
+				"Items/ItemGroups/BootsWithoutActives",
+				"Items/ItemGroups/Boots",
+				"{0e38f9bb}"
+			],
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentOmnivampMod": 0.04
+			},
 			"dataValues": {
 				"OmnivampOnTakedown": 0.006,
 				"MaxStacks": 10,
 				"DamageMod": 0.05,
 				"HealingMod": 0.15
-			},
-			"itemGroups": [
-				"Items/ItemGroups/BootsWithoutActives",
-				"Items/ItemGroups/Boots",
-				"{0e38f9bb}"
-			]
+			}
 		},
 		"3170": {
 			"id": "3170",
 			"name": "Swiftmarch",
 			"searchString": "swiftmarch;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 65
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 1000,
 				"sell": 700
@@ -5725,7 +5717,13 @@
 				"3009"
 			],
 			"isBoots": true,
-			"epicness": 7,
+			"itemGroups": [
+				"{a0360dfa}",
+				"Items/ItemGroups/Boots"
+			],
+			"stats": {
+				"FlatMovementSpeedMod": 65
+			},
 			"dataValues": {
 				"MoveSpeedMultiplier": 0.04,
 				"SlowResistTooltip": 0.4,
@@ -5750,20 +5748,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{a0360dfa}",
-				"Items/ItemGroups/Boots"
-			]
+			}
 		},
 		"3171": {
 			"id": "3171",
 			"name": "Crimson Lucidity",
 			"searchString": "crimsonlucidity;cooldownreduction;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -5773,7 +5764,14 @@
 				"3158"
 			],
 			"isBoots": true,
-			"epicness": 7,
+			"itemGroups": [
+				"{a1360f8d}",
+				"Items/ItemGroups/Boots"
+			],
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"AbilityHasteMod": 20
+			},
 			"dataValues": {
 				"SummonerHaste": 20,
 				"MeleeMS": 0.1,
@@ -5802,21 +5800,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{a1360f8d}",
-				"Items/ItemGroups/Boots"
-			]
+			}
 		},
 		"3172": {
 			"id": "3172",
 			"name": "Gunmetal Greaves",
 			"searchString": "gunmetalgreaves;attackspeed;lifesteal;movement;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"PercentAttackSpeedMod": 0.4,
-				"PercentLifeStealMod": 0.05
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -5825,7 +5815,15 @@
 			"from": [
 				"3006"
 			],
-			"epicness": 7,
+			"itemGroups": [
+				"{9e360ad4}",
+				"Items/ItemGroups/Boots"
+			],
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentLifeStealMod": 0.05
+			},
 			"dataValues": {
 				"MeleeMS": 0.15,
 				"RangedMSMultiplier": 0.667,
@@ -5854,21 +5852,13 @@
 					]
 				}
 			},
-			"itemGroups": [
-				"{9e360ad4}",
-				"Items/ItemGroups/Boots"
-			],
 			"isBoots": true
 		},
 		"3173": {
 			"id": "3173",
 			"name": "Chainlaced Crushers",
 			"searchString": "chainlacedcrushers;magicresist;boots;tenacity;movespeed",
-			"stats": {
-				"FlatSpellBlockMod": 30,
-				"FlatMovementSpeedMod": 45,
-				"PercentTenacityMod": 0.3
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 1250,
 				"sell": 875
@@ -5878,7 +5868,15 @@
 				"3111"
 			],
 			"isBoots": true,
-			"epicness": 7,
+			"itemGroups": [
+				"{9f360c67}",
+				"Items/ItemGroups/Boots"
+			],
+			"stats": {
+				"FlatSpellBlockMod": 30,
+				"FlatMovementSpeedMod": 45,
+				"PercentTenacityMod": 0.3
+			},
 			"dataValues": {
 				"Cooldown": 15,
 				"ShieldAmount": 0.08,
@@ -5914,20 +5912,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9f360c67}",
-				"Items/ItemGroups/Boots"
-			]
+			}
 		},
 		"3174": {
 			"id": "3174",
 			"name": "Armored Advance",
 			"searchString": "armoredadvance;armor;boots;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"FlatArmorMod": 35
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 1200,
 				"sell": 840
@@ -5937,7 +5928,14 @@
 				"3047"
 			],
 			"isBoots": true,
-			"epicness": 7,
+			"itemGroups": [
+				"{9c3607ae}",
+				"Items/ItemGroups/Boots"
+			],
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"FlatArmorMod": 35
+			},
 			"dataValues": {
 				"DamageReduction": 0.1,
 				"Cooldown": 15,
@@ -5974,21 +5972,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9c3607ae}",
-				"Items/ItemGroups/Boots"
-			]
+			}
 		},
 		"3175": {
 			"id": "3175",
 			"name": "Spellslinger's Shoes",
 			"searchString": "spellslingersshoes;boots;magicpenetration;movespeed",
-			"stats": {
-				"FlatMovementSpeedMod": 45,
-				"FlatMagicPenetrationMod": 18,
-				"PercentMagicPenetrationMod": 0.08
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -5998,7 +5988,15 @@
 				"3020"
 			],
 			"isBoots": true,
-			"epicness": 7,
+			"itemGroups": [
+				"{9d360941}",
+				"Items/ItemGroups/Boots"
+			],
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"FlatMagicPenetrationMod": 18,
+				"PercentMagicPenetrationMod": 0.08
+			},
 			"itemCalculations": {
 				"{5e4a31e2}": {
 					"mFormulaParts": [
@@ -6009,21 +6007,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9d360941}",
-				"Items/ItemGroups/Boots"
-			]
+			}
 		},
 		"3179": {
 			"id": "3179",
 			"name": "Umbral Glaive",
 			"searchString": "umbralglaive;lethality;damage;vision;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 60,
-				"AbilityHasteMod": 15,
-				"PhysicalLethality": 18
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -6033,7 +6023,17 @@
 				"3134",
 				"3133"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{993602f5}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 60,
+				"AbilityHasteMod": 15,
+				"PhysicalLethality": 18
+			},
 			"dataValues": {
 				"LethalityAmount": 18,
 				"MeleeDamage": 3,
@@ -6088,23 +6088,13 @@
 					}
 				}
 			},
-			"effectAmount": [10, 8, 90],
-			"itemGroups": [
-				"{993602f5}"
-			],
-			"categories": {
-				"assassin": true
-			}
+			"effectAmount": [10, 8, 90]
 		},
 		"3181": {
 			"id": "3181",
 			"name": "Hullbreaker",
 			"searchString": "hullbreaker;hull;pirate;yarrr;ahoy;health;damage;movement;attackdamage;movespeed",
-			"stats": {
-				"FlatHPPoolMod": 500,
-				"FlatPhysicalDamageMod": 40,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -6115,7 +6105,18 @@
 				"3066",
 				"1037"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{212a0d1a}",
+				"Items/ItemGroups/DisabledOnFIRSTBLOODMode"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 500,
+				"FlatPhysicalDamageMod": 40,
+				"PercentMovementSpeedMod": 0.04
+			},
 			"dataValues": {
 				"SkipperADRatio": 1.2,
 				"SkipperADRatioVSStructures": 3,
@@ -6196,25 +6197,13 @@
 					"RangedResult": "@RangedBonusMinionResists@",
 					"DefaultResult": "@MeleeBonusMinionResists@"
 				}
-			},
-			"itemGroups": [
-				"{212a0d1a}",
-				"Items/ItemGroups/DisabledOnFIRSTBLOODMode"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"3190": {
 			"id": "3190",
 			"name": "Locket of the Iron Solari",
 			"searchString": "locketoftheironsolari;health;magicresist;armor;aura;active;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 30,
-				"FlatHPPoolMod": 200,
-				"FlatArmorMod": 30,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2200,
 				"sell": 1540
@@ -6225,7 +6214,19 @@
 				"1029",
 				"1033"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{9c26fd24}"
+			],
+			"categories": {
+				"support": true,
+				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 30,
+				"FlatHPPoolMod": 200,
+				"FlatArmorMod": 30,
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"ShieldDuration": 2.5,
 				"DiminishedEffectMulitplier": 0.25,
@@ -6250,24 +6251,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{9c26fd24}"
-			],
-			"categories": {
-				"support": true,
-				"tank": true
 			}
 		},
 		"3211": {
 			"id": "3211",
 			"name": "Spectre's Cowl",
 			"searchString": "spectrescowl;ghost;health;healthregen;magicresist",
-			"stats": {
-				"FlatSpellBlockMod": 35,
-				"FlatHPPoolMod": 200,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1250,
 				"sell": 875
@@ -6283,25 +6273,24 @@
 				"1033",
 				"1006"
 			],
-			"epicness": 4,
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 35,
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 1
+			},
 			"dataValues": {
 				"HealthRegenDuration": 10,
 				"DamageToRegenDurationRatio": 0.333
-			},
-			"categories": {
-				"tank": true
 			}
 		},
 		"3222": {
 			"id": "3222",
 			"name": "Mikael's Blessing",
 			"searchString": "mikaelsblessing;crucible;michael;mikael;health;manaregen;active;cooldownreduction;tenacity;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 250,
-				"AbilityHasteMod": 15,
-				"PercentBaseMPRegenMod": 1,
-				"PercentHealingAmountMod": 0.12
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2300,
 				"sell": 1610
@@ -6311,7 +6300,18 @@
 				"3067",
 				"3114"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{bf3ed580}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 250,
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.12
+			},
 			"dataValues": {
 				"CleanseCooldown": 120,
 				"HealAmountMin": 100,
@@ -6355,22 +6355,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{bf3ed580}"
-			],
-			"categories": {
-				"support": true
 			}
 		},
 		"3302": {
 			"id": "3302",
 			"name": "Terminus",
 			"searchString": "terminus;bow;sentinel;damage;attackspeed;onhit;magicpenetration;armorpenetration;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 30,
-				"PercentAttackSpeedMod": 0.35
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -6381,7 +6372,19 @@
 				"1043"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{370ee665}",
+				"Items/ItemGroups/LastWhisper",
+				"Items/ItemGroups/VoidPen"
+			],
+			"categories": {
+				"marksman": true,
+				"fighter": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 30,
+				"PercentAttackSpeedMod": 0.35
+			},
 			"dataValues": {
 				"OnHitDamage": 30,
 				"BuffDuration": 5,
@@ -6423,27 +6426,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{370ee665}",
-				"Items/ItemGroups/LastWhisper",
-				"Items/ItemGroups/VoidPen"
-			],
-			"categories": {
-				"marksman": true,
-				"fighter": true
 			}
 		},
 		"3504": {
 			"id": "3504",
 			"name": "Ardent Censer",
 			"searchString": "ardentcenser;attackspeed;spelldamage;manaregen;movement;abilitypower;movespeed",
-			"stats": {
-				"FlatMagicDamageMod": 45,
-				"PercentMovementSpeedMod": 0.04,
-				"PercentBaseMPRegenMod": 1.25,
-				"PercentHealingAmountMod": 0.1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2200,
 				"sell": 1540
@@ -6453,28 +6442,29 @@
 				"3113",
 				"3114"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"AttackSpeedMin": 0.25,
-				"Duration": 6,
-				"OnHitMin": 20
-			},
 			"itemGroups": [
 				"{5aa31b15}"
 			],
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 45,
+				"PercentMovementSpeedMod": 0.04,
+				"PercentBaseMPRegenMod": 1.25,
+				"PercentHealingAmountMod": 0.1
+			},
+			"dataValues": {
+				"AttackSpeedMin": 0.25,
+				"Duration": 6,
+				"OnHitMin": 20
 			}
 		},
 		"3508": {
 			"id": "3508",
 			"name": "Essence Reaver",
 			"searchString": "essencereaver;er;spellblade;damage;criticalstrike;manaregen;cooldownreduction;onhit;abilityhaste;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 50,
-				"AbilityHasteMod": 20
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3050,
 				"sell": 2135
@@ -6486,7 +6476,18 @@
 				"1018"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{5ea32161}",
+				"{8b55a7b3}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50,
+				"AbilityHasteMod": 20
+			},
 			"dataValues": {
 				"FlatManaRefund": 15,
 				"ManaRefundRatio": 0.15,
@@ -6519,24 +6520,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{5ea32161}",
-				"{8b55a7b3}"
-			],
-			"categories": {
-				"marksman": true
 			}
 		},
 		"3742": {
 			"id": "3742",
 			"name": "Dead Man's Plate",
 			"searchString": "deadmansplate;dmp;gangplank;health;armor;slow;movement;movespeed",
-			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatArmorMod": 55,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -6547,7 +6537,19 @@
 				"1028",
 				"1031"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{92901b7d}",
+				"{1b1c30d5}"
+			],
+			"categories": {
+				"tank": true,
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 55,
+				"PercentMovementSpeedMod": 0.04
+			},
 			"dataValues": {
 				"MaxMovementSpeed": 20,
 				"MaxStacks": 100,
@@ -6576,24 +6578,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{92901b7d}",
-				"{1b1c30d5}"
-			],
-			"categories": {
-				"tank": true,
-				"fighter": true
 			}
 		},
 		"3748": {
 			"id": "3748",
 			"name": "Titanic Hydra",
 			"searchString": "titanichydra;beefer;health;healthregen;damage;onhit;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 600,
-				"FlatPhysicalDamageMod": 40
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3300,
 				"sell": 2310
@@ -6605,7 +6596,18 @@
 				"1011"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
+			],
+			"categories": {
+				"fighter": true,
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"FlatPhysicalDamageMod": 40
+			},
 			"dataValues": {
 				"PrimaryTargetHPRatio": 0.01,
 				"SplashHPRatio": 0.03,
@@ -6692,24 +6694,13 @@
 						"mNumber": 0.5
 					}
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
-			],
-			"categories": {
-				"fighter": true,
-				"tank": true
 			}
 		},
 		"3801": {
 			"id": "3801",
 			"name": "Crystalline Bracer",
 			"searchString": "crystallinebracer;health;healthregen",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 800,
 				"sell": 560
@@ -6723,20 +6714,19 @@
 				"1028",
 				"1006"
 			],
-			"epicness": 4,
 			"categories": {
 				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 1
 			}
 		},
 		"3802": {
 			"id": "3802",
 			"name": "Lost Chapter",
 			"searchString": "lostchapter;manabook;spelldamage;mana;manaregen;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 300,
-				"FlatMagicDamageMod": 40,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1200,
 				"sell": 840
@@ -6754,26 +6744,27 @@
 				"1027",
 				"2022"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"ManaRestorePercent": 0.2,
-				"RestorationDuration": 3
-			},
 			"itemGroups": [
 				"Items/ItemGroups/MythicItems"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatMagicDamageMod": 40,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"ManaRestorePercent": 0.2,
+				"RestorationDuration": 3
 			}
 		},
 		"3803": {
 			"id": "3803",
 			"name": "Catalyst of Aeons",
 			"searchString": "catalystofaeons;protector;health;healthregen;mana;manaregen",
-			"stats": {
-				"FlatMPPoolMod": 375,
-				"FlatHPPoolMod": 300
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1300,
 				"sell": 910
@@ -6787,30 +6778,29 @@
 				"1028",
 				"1027"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"EternityManaRestore": 0.1,
-				"EternityHealthRestore": 0.25,
-				"EternityMaxHealPerCast": 20,
-				"EternityCDPerCast": 1
-			},
 			"itemGroups": [
 				"Items/ItemGroups/EternityItems"
 			],
 			"categories": {
 				"tank": true,
 				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 375,
+				"FlatHPPoolMod": 300
+			},
+			"dataValues": {
+				"EternityManaRestore": 0.1,
+				"EternityHealthRestore": 0.25,
+				"EternityMaxHealPerCast": 20,
+				"EternityCDPerCast": 1
 			}
 		},
 		"3814": {
 			"id": "3814",
 			"name": "Edge of Night",
 			"searchString": "edgeofnight;eon;spellshield;lethality;health;damage;armorpenetration;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 250,
-				"FlatPhysicalDamageMod": 50,
-				"PhysicalLethality": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -6820,12 +6810,6 @@
 				"3134",
 				"2021"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"LethalityAmount": 15,
-				"Cooldown": 40
-			},
-			"effectAmount": [0, 0, 0, 40],
 			"itemGroups": [
 				"{c6c2af47}",
 				"{3fcdbdac}",
@@ -6833,17 +6817,23 @@
 			],
 			"categories": {
 				"assassin": true
-			}
+			},
+			"stats": {
+				"FlatHPPoolMod": 250,
+				"FlatPhysicalDamageMod": 50,
+				"PhysicalLethality": 15
+			},
+			"dataValues": {
+				"LethalityAmount": 15,
+				"Cooldown": 40
+			},
+			"effectAmount": [0, 0, 0, 40]
 		},
 		"3865": {
 			"id": "3865",
 			"name": "World Atlas",
 			"searchString": "worldatlas;map;health;manaregen;vision;goldper",
-			"stats": {
-				"FlatHPPoolMod": 30,
-				"PercentBaseHPRegenMod": 0.25,
-				"PercentBaseMPRegenMod": 0.25
-			},
+			"epicness": 1,
 			"gold": {
 				"total": 400,
 				"sell": 160,
@@ -6853,7 +6843,20 @@
 			"into": [
 				"3866"
 			],
-			"epicness": 1,
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems",
+				"Items/ItemGroups/DoransItems",
+				"{2b093179}"
+			],
+			"categories": {
+				"support": true,
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 30,
+				"PercentBaseHPRegenMod": 0.25,
+				"PercentBaseMPRegenMod": 0.25
+			},
 			"dataValues": {
 				"GP10": 3,
 				"QuestGoldRequirement": 400,
@@ -6967,26 +6970,13 @@
 					]
 				}
 			},
-			"effectAmount": [3],
-			"itemGroups": [
-				"Items/ItemGroups/GoldItems",
-				"Items/ItemGroups/DoransItems",
-				"{2b093179}"
-			],
-			"categories": {
-				"support": true,
-				"tank": true
-			}
+			"effectAmount": [3]
 		},
 		"3866": {
 			"id": "3866",
 			"name": "Runic Compass",
 			"searchString": "runiccompass;spelldamage;manaregen;vision;goldper;health",
-			"stats": {
-				"FlatHPPoolMod": 100,
-				"PercentBaseHPRegenMod": 0.5,
-				"PercentBaseMPRegenMod": 0.5
-			},
+			"epicness": 3,
 			"gold": {
 				"total": 400,
 				"sell": 160,
@@ -6999,7 +6989,19 @@
 			"from": [
 				"3865"
 			],
-			"epicness": 3,
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems",
+				"Items/ItemGroups/DoransItems",
+				"{4dbc5e26}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 100,
+				"PercentBaseHPRegenMod": 0.5,
+				"PercentBaseMPRegenMod": 0.5
+			},
 			"dataValues": {
 				"StealthWardCap": 3,
 				"GP10": 5,
@@ -7112,25 +7114,13 @@
 					]
 				}
 			},
-			"effectAmount": [5],
-			"itemGroups": [
-				"Items/ItemGroups/GoldItems",
-				"Items/ItemGroups/DoransItems",
-				"{4dbc5e26}"
-			],
-			"categories": {
-				"support": true
-			}
+			"effectAmount": [5]
 		},
 		"3867": {
 			"id": "3867",
 			"name": "Bounty of Worlds",
 			"searchString": "bountyofworlds;spelldamage;manaregen;vision;goldper;health",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"PercentBaseHPRegenMod": 0.75,
-				"PercentBaseMPRegenMod": 0.75
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 400,
 				"sell": 160,
@@ -7147,13 +7137,6 @@
 			"from": [
 				"3866"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"StealthWardCap": 4,
-				"IncreasedWardRange": 300,
-				"GP10": 5
-			},
-			"effectAmount": [5],
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
 				"{4dbc5e26}",
@@ -7161,24 +7144,43 @@
 			],
 			"categories": {
 				"support": true
-			}
-		},
-		"3869": {
-			"id": "3869",
-			"name": "Celestial Opposition",
-			"searchString": "celestialopposition;health;healthregen;manaregen;vision;goldper",
+			},
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"PercentBaseHPRegenMod": 0.75,
 				"PercentBaseMPRegenMod": 0.75
 			},
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 5
+			},
+			"effectAmount": [5]
+		},
+		"3869": {
+			"id": "3869",
+			"name": "Celestial Opposition",
+			"searchString": "celestialopposition;health;healthregen;manaregen;vision;goldper",
+			"epicness": 7,
 			"gold": {
 				"total": 400,
 				"sell": 160,
 				"sellBackModifier": 0.4
 			},
 			"image": "3869.png",
-			"epicness": 7,
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
+			},
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
@@ -7191,7 +7193,19 @@
 				"SlowDuration": 1.5,
 				"SlowAmount": 0.5
 			},
-			"effectAmount": [9],
+			"effectAmount": [9]
+		},
+		"3870": {
+			"id": "3870",
+			"name": "Dream Maker",
+			"searchString": "dreammaker;plushie;health;healthregen;manaregen;vision;goldper",
+			"epicness": 7,
+			"gold": {
+				"total": 400,
+				"sell": 160,
+				"sellBackModifier": 0.4
+			},
+			"image": "3870.png",
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
 				"{4dbc5e26}",
@@ -7199,24 +7213,12 @@
 			],
 			"categories": {
 				"support": true
-			}
-		},
-		"3870": {
-			"id": "3870",
-			"name": "Dream Maker",
-			"searchString": "dreammaker;plushie;health;healthregen;manaregen;vision;goldper",
+			},
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"PercentBaseHPRegenMod": 0.75,
 				"PercentBaseMPRegenMod": 0.75
 			},
-			"gold": {
-				"total": 400,
-				"sell": 160,
-				"sellBackModifier": 0.4
-			},
-			"image": "3870.png",
-			"epicness": 7,
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
@@ -7261,7 +7263,19 @@
 					"{05809103}": "ProcDmg"
 				}
 			},
-			"effectAmount": [9],
+			"effectAmount": [9]
+		},
+		"3871": {
+			"id": "3871",
+			"name": "Zaz'Zak's Realmspike",
+			"searchString": "zazzaksrealmspike;health;healthregen;manaregen;vision;goldper",
+			"epicness": 7,
+			"gold": {
+				"total": 400,
+				"sell": 160,
+				"sellBackModifier": 0.4
+			},
+			"image": "3871.png",
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
 				"{4dbc5e26}",
@@ -7269,24 +7283,12 @@
 			],
 			"categories": {
 				"support": true
-			}
-		},
-		"3871": {
-			"id": "3871",
-			"name": "Zaz'Zak's Realmspike",
-			"searchString": "zazzaksrealmspike;health;healthregen;manaregen;vision;goldper",
+			},
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"PercentBaseHPRegenMod": 0.75,
 				"PercentBaseMPRegenMod": 0.75
 			},
-			"gold": {
-				"total": 400,
-				"sell": 160,
-				"sellBackModifier": 0.4
-			},
-			"image": "3871.png",
-			"epicness": 7,
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
@@ -7326,7 +7328,19 @@
 					]
 				}
 			},
-			"effectAmount": [9],
+			"effectAmount": [9]
+		},
+		"3876": {
+			"id": "3876",
+			"name": "Solstice Sleigh",
+			"searchString": "solsticesleigh;health;healthregen;manaregen;vision;goldper",
+			"epicness": 7,
+			"gold": {
+				"total": 400,
+				"sell": 160,
+				"sellBackModifier": 0.4
+			},
+			"image": "3876.png",
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
 				"{4dbc5e26}",
@@ -7334,24 +7348,12 @@
 			],
 			"categories": {
 				"support": true
-			}
-		},
-		"3876": {
-			"id": "3876",
-			"name": "Solstice Sleigh",
-			"searchString": "solsticesleigh;health;healthregen;manaregen;vision;goldper",
+			},
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"PercentBaseHPRegenMod": 0.75,
 				"PercentBaseMPRegenMod": 0.75
 			},
-			"gold": {
-				"total": 400,
-				"sell": 160,
-				"sellBackModifier": 0.4
-			},
-			"image": "3876.png",
-			"epicness": 7,
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
@@ -7378,32 +7380,33 @@
 					]
 				}
 			},
-			"effectAmount": [9],
-			"itemGroups": [
-				"Items/ItemGroups/GoldItems",
-				"{4dbc5e26}",
-				"Items/ItemGroups/DoransItems"
-			],
-			"categories": {
-				"support": true
-			}
+			"effectAmount": [9]
 		},
 		"3877": {
 			"id": "3877",
 			"name": "Bloodsong",
 			"searchString": "bloodsong;spellblade;health;healthregen;manaregen;vision;goldper",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"PercentBaseHPRegenMod": 0.75,
-				"PercentBaseMPRegenMod": 0.75
-			},
+			"epicness": 7,
 			"gold": {
 				"total": 400,
 				"sell": 160,
 				"sellBackModifier": 0.4
 			},
 			"image": "3877.png",
-			"epicness": 7,
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems",
+				"{8b55a7b3}",
+				"{4dbc5e26}",
+				"Items/ItemGroups/DoransItems"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
+			},
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
@@ -7438,24 +7441,13 @@
 					]
 				}
 			},
-			"effectAmount": [9],
-			"itemGroups": [
-				"Items/ItemGroups/GoldItems",
-				"{8b55a7b3}",
-				"{4dbc5e26}",
-				"Items/ItemGroups/DoransItems"
-			],
-			"categories": {
-				"support": true
-			}
+			"effectAmount": [9]
 		},
 		"3916": {
 			"id": "3916",
 			"name": "Oblivion Orb",
 			"searchString": "oblivionorb;grievouswounds;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 25
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 800,
 				"sell": 560
@@ -7467,28 +7459,26 @@
 			"from": [
 				"1052"
 			],
-			"epicness": 4,
-			"dataValues": {
-				"GrievousAmount": 0.4,
-				"GrievousDuration": 3
-			},
 			"itemGroups": [
 				"{8875daa8}"
 			],
 			"categories": {
 				"mage": true,
 				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 25
+			},
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3
 			}
 		},
 		"4005": {
 			"id": "4005",
 			"name": "Imperial Mandate",
 			"searchString": "imperialmandate;bannerofcommand;flag;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 65,
-				"AbilityHasteMod": 15,
-				"PercentBaseMPRegenMod": 1.5
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2400,
 				"sell": 1680
@@ -7498,29 +7488,29 @@
 				"1026",
 				"4642"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"DamageAmp": 0.06,
-				"DamageAmpDuration": 4,
-				"ImmobilizingAbilityAH": 15
-			},
 			"itemGroups": [
 				"{5f2a99fe}"
 			],
 			"categories": {
 				"support": true,
 				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 65,
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1.5
+			},
+			"dataValues": {
+				"DamageAmp": 0.06,
+				"DamageAmpDuration": 4,
+				"ImmobilizingAbilityAH": 15
 			}
 		},
 		"4401": {
 			"id": "4401",
 			"name": "Force of Nature",
 			"searchString": "forceofnature;fon;health;magicresist;movement;movespeed",
-			"stats": {
-				"FlatSpellBlockMod": 55,
-				"FlatHPPoolMod": 400,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -7531,7 +7521,17 @@
 				"1028",
 				"3066"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{27df203e}"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 55,
+				"FlatHPPoolMod": 400,
+				"PercentMovementSpeedMod": 0.04
+			},
 			"dataValues": {
 				"BuffDuration": 7,
 				"MoveSpeed": 0.06,
@@ -7539,22 +7539,13 @@
 				"ImmobilizeStacks": 2,
 				"StackRefreshTimer": 1,
 				"BonusMagicResist": 70
-			},
-			"itemGroups": [
-				"{27df203e}"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"4628": {
 			"id": "4628",
 			"name": "Horizon Focus",
 			"searchString": "horizonfocus;snipe;lockon;spelldamage;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 75,
-				"AbilityHasteMod": 25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2700,
 				"sell": 1890
@@ -7565,7 +7556,16 @@
 				"3108",
 				"1052"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{466ecfe1}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 75,
+				"AbilityHasteMod": 25
+			},
 			"dataValues": {
 				"BuffDuration": 6,
 				"SnipeRange": 600,
@@ -7575,24 +7575,13 @@
 				"SecondaryBuffDuration": 3,
 				"Cooldown": 30,
 				"DamageAmp": 0.1
-			},
-			"itemGroups": [
-				"{466ecfe1}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"4629": {
 			"id": "4629",
 			"name": "Cosmic Drive",
 			"searchString": "cosmicdrive;cooldownhat;health;spelldamage;movement;abilityhaste;abilitypower;movespeed",
-			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatMagicDamageMod": 70,
-				"PercentMovementSpeedMod": 0.04,
-				"AbilityHasteMod": 25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -7603,7 +7592,18 @@
 				"3113",
 				"3108"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{456ece4e}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 70,
+				"PercentMovementSpeedMod": 0.04,
+				"AbilityHasteMod": 25
+			},
 			"dataValues": {
 				"StackDuration": 4,
 				"MaxStacks": 3,
@@ -7623,22 +7623,13 @@
 				"__renamedVariables": {
 					"MoveSpeedAmount": "MovespeedAmount"
 				}
-			},
-			"itemGroups": [
-				"{456ece4e}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"4630": {
 			"id": "4630",
 			"name": "Blighting Jewel",
 			"searchString": "blightingjewel;pen;purple;magicpenetration;spelldamage;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 25,
-				"PercentMagicPenetrationMod": 0.13
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1100,
 				"sell": 770
@@ -7651,22 +7642,22 @@
 			"from": [
 				"1052"
 			],
-			"epicness": 4,
 			"itemGroups": [
 				"Items/ItemGroups/VoidPen"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 25,
+				"PercentMagicPenetrationMod": 0.13
 			}
 		},
 		"4632": {
 			"id": "4632",
 			"name": "Verdant Barrier",
 			"searchString": "verdantbarrier;necklace;magicresist;spelldamage;abilitypower",
-			"stats": {
-				"FlatSpellBlockMod": 25,
-				"FlatMagicDamageMod": 40
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1600,
 				"sell": 1120
@@ -7680,7 +7671,16 @@
 				"1033",
 				"1052"
 			],
-			"epicness": 4,
+			"itemGroups": [
+				"{3fcdbdac}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 25,
+				"FlatMagicDamageMod": 40
+			},
 			"dataValues": {
 				"MagicResistPerStack": 0.3,
 				"Period": 60,
@@ -7688,23 +7688,13 @@
 				"CooldownReductionAmount": 0.05,
 				"SpellShieldCooldown": 60,
 				"Cooldown": 60
-			},
-			"itemGroups": [
-				"{3fcdbdac}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"4633": {
 			"id": "4633",
 			"name": "Riftmaker",
 			"searchString": "riftmaker;velkoz;health;spelldamage;cooldownreduction;spellvamp;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatMagicDamageMod": 70,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -7714,7 +7704,17 @@
 				"3147",
 				"3108"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{bb6bb679}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"SecondsInCombat": 4,
 				"EternityDamageIncreasePerSecond": 0.02,
@@ -7754,23 +7754,13 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			},
-			"itemGroups": [
-				"{bb6bb679}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"4642": {
 			"id": "4642",
 			"name": "Bandleglass Mirror",
 			"searchString": "bandleglassmirror;yordle;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 20,
-				"AbilityHasteMod": 10,
-				"PercentBaseMPRegenMod": 1
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -7787,19 +7777,20 @@
 				"1052",
 				"2022"
 			],
-			"epicness": 4,
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 20,
+				"AbilityHasteMod": 10,
+				"PercentBaseMPRegenMod": 1
 			}
 		},
 		"4645": {
 			"id": "4645",
 			"name": "Shadowflame",
 			"searchString": "shadowflame;spelldamage;magicpenetration;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 110,
-				"FlatMagicPenetrationMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 2240
@@ -7809,28 +7800,27 @@
 				"3145",
 				"1058"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"HealthThreshold": 0.4,
-				"SpellItemDamageAmp": 0.2,
-				"DamageOverTimeAmp": 0.2
-			},
 			"itemGroups": [
 				"{bd7d02c0}"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 110,
+				"FlatMagicPenetrationMod": 15
+			},
+			"dataValues": {
+				"HealthThreshold": 0.4,
+				"SpellItemDamageAmp": 0.2,
+				"DamageOverTimeAmp": 0.2
 			}
 		},
 		"4646": {
 			"id": "4646",
 			"name": "Stormsurge",
 			"searchString": "stormsurge;spelldamage;goldper;movement;magicpenetration;abilitypower;movespeed",
-			"stats": {
-				"FlatMagicDamageMod": 90,
-				"PercentMovementSpeedMod": 0.06,
-				"FlatMagicPenetrationMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -7840,7 +7830,17 @@
 				"3145",
 				"3113"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{c07d0779}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 90,
+				"PercentMovementSpeedMod": 0.06,
+				"FlatMagicPenetrationMod": 15
+			},
 			"dataValues": {
 				"WindowDuration": 2.5,
 				"Cooldown": 30,
@@ -7882,23 +7882,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{c07d0779}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"6333": {
 			"id": "6333",
 			"name": "Death's Dance",
 			"searchString": "deathsdance;dd;armor;damage;abilityhaste;attackdamage",
-			"stats": {
-				"FlatArmorMod": 50,
-				"FlatPhysicalDamageMod": 60,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3300,
 				"sell": 2310
@@ -7909,7 +7899,17 @@
 				"1037",
 				"3133"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{001c1988}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatArmorMod": 50,
+				"FlatPhysicalDamageMod": 60,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"BleedDurationWorst": 3,
 				"HealDuration": 2,
@@ -7946,23 +7946,13 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			},
-			"itemGroups": [
-				"{001c1988}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"6609": {
 			"id": "6609",
 			"name": "Chempunk Chainsword",
 			"searchString": "chempunkchainsword;grievouswounds;health;damage;cooldownreduction;abilityhaste;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 450,
-				"FlatPhysicalDamageMod": 45,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -7973,11 +7963,6 @@
 				"1011",
 				"3133"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"GrievousAmount": 0.4,
-				"GrievousDuration": 3
-			},
 			"itemGroups": [
 				"{b458712e}",
 				"{8875daa8}"
@@ -7985,17 +7970,22 @@
 			"categories": {
 				"fighter": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 450,
+				"FlatPhysicalDamageMod": 45,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3
 			}
 		},
 		"6610": {
 			"id": "6610",
 			"name": "Sundered Sky",
 			"searchString": "sunderedsky;health;damage;cooldownreduction;abilityhaste;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 400,
-				"FlatPhysicalDamageMod": 45,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3100,
 				"sell": 2170
@@ -8006,7 +7996,17 @@
 				"3133",
 				"1028"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{a7561e20}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatPhysicalDamageMod": 45,
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"CritModifier": 0.8,
 				"HealAmount": 0.2,
@@ -8042,24 +8042,13 @@
 					},
 					"mModifiedGameCalculation": "MeleeItemCalcValue"
 				}
-			},
-			"itemGroups": [
-				"{a7561e20}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"6616": {
 			"id": "6616",
 			"name": "Staff of Flowing Water",
 			"searchString": "staffofflowingwater;nami;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 35,
-				"AbilityHasteMod": 10,
-				"PercentBaseMPRegenMod": 1.25,
-				"PercentHealingAmountMod": 0.1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2250,
 				"sell": 1575
@@ -8069,29 +8058,29 @@
 				"3108",
 				"3114"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"BuffDuration": 6,
-				"APMod": 40,
-				"AHMod": 15
-			},
 			"itemGroups": [
 				"{ad562792}"
 			],
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 35,
+				"AbilityHasteMod": 10,
+				"PercentBaseMPRegenMod": 1.25,
+				"PercentHealingAmountMod": 0.1
+			},
+			"dataValues": {
+				"BuffDuration": 6,
+				"APMod": 40,
+				"AHMod": 15
 			}
 		},
 		"6617": {
 			"id": "6617",
 			"name": "Moonstone Renewer",
 			"searchString": "moonstonerenewer;yuumi;health;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"FlatMagicDamageMod": 25,
-				"AbilityHasteMod": 20,
-				"PercentBaseMPRegenMod": 1.25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2200,
 				"sell": 1540
@@ -8101,31 +8090,31 @@
 				"3067",
 				"4642"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{ae562925}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"FlatMagicDamageMod": 25,
+				"AbilityHasteMod": 20,
+				"PercentBaseMPRegenMod": 1.25
+			},
 			"dataValues": {
 				"EffectRange": 800,
 				"ChainHeal": 0.3,
 				"ChainShield": 0.35,
 				"SingleHeal": 0.3,
 				"SingleShield": 0.35
-			},
-			"itemGroups": [
-				"{ae562925}"
-			],
-			"categories": {
-				"support": true
 			}
 		},
 		"6620": {
 			"id": "6620",
 			"name": "Echoes of Helia",
 			"searchString": "echoesofhelia;spookycup;health;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 200,
-				"FlatMagicDamageMod": 35,
-				"AbilityHasteMod": 20,
-				"PercentBaseMPRegenMod": 1.25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2200,
 				"sell": 1540
@@ -8135,7 +8124,18 @@
 				"3067",
 				"4642"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{395dbfbb}"
+			],
+			"categories": {
+				"support": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"FlatMagicDamageMod": 35,
+				"AbilityHasteMod": 20,
+				"PercentBaseMPRegenMod": 1.25
+			},
 			"dataValues": {
 				"DamageStorageRate": 0.3,
 				"ChargeToHealConversion": 1,
@@ -8151,23 +8151,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{395dbfbb}"
-			],
-			"categories": {
-				"support": true
 			}
 		},
 		"6621": {
 			"id": "6621",
 			"name": "Dawncore",
 			"searchString": "dawncore;spelldamage;manaregen;abilitypower",
-			"stats": {
-				"FlatMagicDamageMod": 45,
-				"PercentBaseMPRegenMod": 1,
-				"PercentHealingAmountMod": 0.16
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2500,
 				"sell": 1750
@@ -8178,27 +8168,27 @@
 				"3114",
 				"3114"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"APPerManaRegen": 10,
-				"HSPowerPerManaRegen": 0.02
-			},
 			"itemGroups": [
 				"{3432bd77}"
 			],
 			"categories": {
 				"support": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 45,
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.16
+			},
+			"dataValues": {
+				"APPerManaRegen": 10,
+				"HSPowerPerManaRegen": 0.02
 			}
 		},
 		"6631": {
 			"id": "6631",
 			"name": "Stridebreaker",
 			"searchString": "stridebreaker;kneecapper;whipchain;health;damage;attackspeed;slow;attackdamage",
-			"stats": {
-				"FlatHPPoolMod": 450,
-				"FlatPhysicalDamageMod": 40,
-				"PercentAttackSpeedMod": 0.25
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3300,
 				"sell": 2310
@@ -8209,7 +8199,19 @@
 				"3044",
 				"1042"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{b45aafc5}",
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 450,
+				"FlatPhysicalDamageMod": 40,
+				"PercentAttackSpeedMod": 0.25
+			},
 			"dataValues": {
 				"Cooldown": 15,
 				"ADRatio": 0.8,
@@ -8250,24 +8252,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{b45aafc5}",
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"6653": {
 			"id": "6653",
 			"name": "Liandry's Torment",
 			"searchString": "liandrystorment;lastshadow;ls;burn;health;spelldamage;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 300,
-				"FlatMagicDamageMod": 60
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -8277,7 +8268,16 @@
 				"3147",
 				"2508"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{42600c7d}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatMagicDamageMod": 60
+			},
 			"dataValues": {
 				"BurnDuration": 3,
 				"BurnPercentHealthDamage": 0.02,
@@ -8288,23 +8288,13 @@
 				"MaxDamageHPThreshold": 1250,
 				"BuffCounterDuration": 3,
 				"MaxStackNumber": 3
-			},
-			"itemGroups": [
-				"{42600c7d}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"6655": {
 			"id": "6655",
 			"name": "Luden's Echo",
 			"searchString": "ludensecho;spelldamage;mana;cooldownreduction;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 600,
-				"FlatMagicDamageMod": 100,
-				"AbilityHasteMod": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2750,
 				"sell": 1925
@@ -8314,7 +8304,17 @@
 				"3802",
 				"3145"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{3c60030b}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 100,
+				"AbilityHasteMod": 10
+			},
 			"dataValues": {
 				"Cooldown": 12,
 				"BaseDamage": 75,
@@ -8342,23 +8342,13 @@
 					},
 					"mModifiedGameCalculation": "Damage"
 				}
-			},
-			"itemGroups": [
-				"{3c60030b}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"6657": {
 			"id": "6657",
 			"name": "Rod of Ages",
 			"searchString": "rodofages;roa;health;healthregen;spelldamage;mana;manaregen;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 500,
-				"FlatHPPoolMod": 350,
-				"FlatMagicDamageMod": 45
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2600,
 				"sell": 1820
@@ -8368,7 +8358,18 @@
 				"1026",
 				"3803"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/EternityItems",
+				"{3e600631}"
+			],
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMPPoolMod": 500,
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 45
+			},
 			"dataValues": {
 				"HealthPerStack": 10,
 				"ManaPerStack": 30,
@@ -8379,23 +8380,13 @@
 				"EternityMaxHealPerCast": 20,
 				"EternityCDPerCast": 1,
 				"SecondsPerStack": 60
-			},
-			"itemGroups": [
-				"Items/ItemGroups/EternityItems",
-				"{3e600631}"
-			],
-			"categories": {
-				"mage": true
 			}
 		},
 		"6660": {
 			"id": "6660",
 			"name": "Bami's Cinder",
 			"searchString": "bamiscinder;fire;health;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 150,
-				"AbilityHasteMod": 5
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 900,
 				"sell": 630
@@ -8409,7 +8400,16 @@
 				"1028",
 				"2022"
 			],
-			"epicness": 4,
+			"itemGroups": [
+				"Items/ItemGroups/ImmolateItems"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 150,
+				"AbilityHasteMod": 5
+			},
 			"dataValues": {
 				"Range": 325,
 				"MinionMod": 0.5,
@@ -8433,23 +8433,13 @@
 					},
 					"mModifiedGameCalculation": "DamagePerTick"
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/ImmolateItems"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"6662": {
 			"id": "6662",
 			"name": "Iceborn Gauntlet",
 			"searchString": "iceborngauntlet;frostfire;frozen;frozengauntlet;ibg;spellblade;health;armor;cooldownreduction;slow;onhit;abilityhaste",
-			"stats": {
-				"FlatHPPoolMod": 300,
-				"FlatArmorMod": 50,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -8461,7 +8451,19 @@
 				"1031"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{b3677a25}",
+				"{8b55a7b3}"
+			],
+			"categories": {
+				"tank": true,
+				"fighter": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatArmorMod": 50,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"SlowAmount": 0.25,
 				"SlowFieldDuration": 2,
@@ -8509,26 +8511,13 @@
 					"RangedResult": "@RangedItemCalcValue@",
 					"DefaultResult": "@MeleeItemCalcValue@"
 				}
-			},
-			"itemGroups": [
-				"{b3677a25}",
-				"{8b55a7b3}"
-			],
-			"categories": {
-				"tank": true,
-				"fighter": true
 			}
 		},
 		"6664": {
 			"id": "6664",
 			"name": "Hollow Radiance",
 			"searchString": "hollowradiance;health;magicresist;healthregen;aura;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 40,
-				"FlatHPPoolMod": 400,
-				"AbilityHasteMod": 10,
-				"PercentBaseHPRegenMod": 1
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -8538,7 +8527,19 @@
 				"6660",
 				"3211"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{ad6770b3}",
+				"Items/ItemGroups/ImmolateItems"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 40,
+				"FlatHPPoolMod": 400,
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
+			},
 			"dataValues": {
 				"MinionMod": 0.25,
 				"MonsterMod": 0.25,
@@ -8594,24 +8595,13 @@
 					},
 					"mModifiedGameCalculation": "DamagePerTick"
 				}
-			},
-			"itemGroups": [
-				"{ad6770b3}",
-				"Items/ItemGroups/ImmolateItems"
-			],
-			"categories": {
-				"tank": true
 			}
 		},
 		"6665": {
 			"id": "6665",
 			"name": "Jak'Sho, The Protean",
 			"searchString": "jakshotheprotean;health;magicresist;armor",
-			"stats": {
-				"FlatSpellBlockMod": 45,
-				"FlatHPPoolMod": 350,
-				"FlatArmorMod": 45
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3200,
 				"sell": 2240
@@ -8622,26 +8612,27 @@
 				"1031",
 				"1057"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"BonusResistPercentage": 0.3,
-				"MaxStacks": 5
-			},
 			"itemGroups": [
 				"{ac676f20}"
 			],
 			"categories": {
 				"tank": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 45,
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 45
+			},
+			"dataValues": {
+				"BonusResistPercentage": 0.3,
+				"MaxStacks": 5
 			}
 		},
 		"6670": {
 			"id": "6670",
 			"name": "Noonquiver",
 			"searchString": "noonquiver;damage;criticalstrike;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.2,
-				"FlatPhysicalDamageMod": 15
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 1300,
 				"sell": 910
@@ -8656,20 +8647,19 @@
 				"1036",
 				"1018"
 			],
-			"epicness": 4,
 			"categories": {
 				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.2,
+				"FlatPhysicalDamageMod": 15
 			}
 		},
 		"6672": {
 			"id": "6672",
 			"name": "Kraken Slayer",
 			"searchString": "krakenslayer;damage;attackspeed;onhit;movement;attackdamage;movespeed",
-			"stats": {
-				"FlatPhysicalDamageMod": 45,
-				"PercentAttackSpeedMod": 0.4,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -8681,7 +8671,17 @@
 				"1043"
 			],
 			"isOnHit": true,
-			"epicness": 5,
+			"itemGroups": [
+				"{a9652bd0}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 45,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentMovementSpeedMod": 0.04
+			},
 			"dataValues": {
 				"AttackCount": 3,
 				"BuffDuration": 4,
@@ -8712,22 +8712,13 @@
 					},
 					"mModifiedGameCalculation": "DamageAmount"
 				}
-			},
-			"itemGroups": [
-				"{a9652bd0}"
-			],
-			"categories": {
-				"marksman": true
 			}
 		},
 		"6673": {
 			"id": "6673",
 			"name": "Immortal Shieldbow",
 			"searchString": "immortalshieldbow;damage;criticalstrike;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 55
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -8737,7 +8728,17 @@
 				"1037",
 				"6670"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems",
+				"{aa652d63}"
+			],
+			"categories": {
+				"marksman": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 55
+			},
 			"dataValues": {
 				"ShieldDuration": 3,
 				"Cooldown": 90,
@@ -8762,24 +8763,13 @@
 						"mNumber": 0.8
 					}
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LifelineItems",
-				"{aa652d63}"
-			],
-			"categories": {
-				"marksman": true
 			}
 		},
 		"6675": {
 			"id": "6675",
 			"name": "Navori Flickerblade",
 			"searchString": "navoriflickerblade;critshojin;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"PercentAttackSpeedMod": 0.4,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2650,
 				"sell": 1855
@@ -8790,27 +8780,27 @@
 				"3086",
 				"1042"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"CDRAmount": 0.15
-			},
-			"effectAmount": [0.5, 1, 90, 0, 0, 0, 0, 0],
 			"itemGroups": [
 				"{b06536d5}"
 			],
 			"categories": {
 				"marksman": true
-			}
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"CDRAmount": 0.15
+			},
+			"effectAmount": [0.5, 1, 90, 0, 0, 0, 0, 0]
 		},
 		"6676": {
 			"id": "6676",
 			"name": "The Collector",
 			"searchString": "thecollector;deathblade;lethality;gun;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 50,
-				"PhysicalLethality": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -8821,28 +8811,29 @@
 				"3134",
 				"1018"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"LethalityAmount": 10,
-				"ExecuteThreshold": 0.05,
-				"GoldAmount": 25
-			},
 			"itemGroups": [
 				"{ad65321c}"
 			],
 			"categories": {
 				"marksman": true,
 				"assassin": true
+			},
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50,
+				"PhysicalLethality": 10
+			},
+			"dataValues": {
+				"LethalityAmount": 10,
+				"ExecuteThreshold": 0.05,
+				"GoldAmount": 25
 			}
 		},
 		"6690": {
 			"id": "6690",
 			"name": "Rectrix",
 			"searchString": "rectrix;damage;movement;attackdamage;movespeed",
-			"stats": {
-				"FlatPhysicalDamageMod": 15,
-				"PercentMovementSpeedMod": 0.04
-			},
+			"epicness": 4,
 			"gold": {
 				"total": 775,
 				"sell": 543
@@ -8855,21 +8846,21 @@
 			"from": [
 				"1036"
 			],
-			"epicness": 4,
 			"categories": {
 				"assassin": true,
 				"fighter": true,
 				"marksman": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 15,
+				"PercentMovementSpeedMod": 0.04
 			}
 		},
 		"6692": {
 			"id": "6692",
 			"name": "Eclipse",
 			"searchString": "eclipse;damage;cooldownreduction;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 60,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -8880,7 +8871,16 @@
 				"1037",
 				"1036"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{b969c22e}"
+			],
+			"categories": {
+				"fighter": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 60,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"WindowDuration": 2,
 				"MeleeItemCalcValueB": 6,
@@ -8939,23 +8939,13 @@
 					"RangedResult": "@RangedMaxHealthPercent@",
 					"DefaultResult": "@MaxHealthPercent@"
 				}
-			},
-			"itemGroups": [
-				"{b969c22e}"
-			],
-			"categories": {
-				"fighter": true
 			}
 		},
 		"6694": {
 			"id": "6694",
 			"name": "Serylda's Grudge",
 			"searchString": "seryldasgrudge;slow;damage;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 45,
-				"AbilityHasteMod": 15,
-				"PercentArmorPenetrationMod": 0.35
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -8965,7 +8955,17 @@
 				"3133",
 				"3035"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/LastWhisper"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 45,
+				"AbilityHasteMod": 15,
+				"PercentArmorPenetrationMod": 0.35
+			},
 			"dataValues": {
 				"SlowAmount": 0.3,
 				"SlowDuration": 1,
@@ -8985,22 +8985,13 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LastWhisper"
-			],
-			"categories": {
-				"assassin": true
 			}
 		},
 		"6695": {
 			"id": "6695",
 			"name": "Serpent's Fang",
 			"searchString": "serpentsfang;lethality;damage;armorpenetration;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"PhysicalLethality": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2500,
 				"sell": 1750
@@ -9010,7 +9001,16 @@
 				"3134",
 				"1037"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{bc69c6e7}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"PhysicalLethality": 15
+			},
 			"dataValues": {
 				"LethalityAmount": 15,
 				"ShieldShred": 50,
@@ -9030,23 +9030,13 @@
 					"RangedResult": "@ShieldShredRange@",
 					"DefaultResult": "@ShieldShred@"
 				}
-			},
-			"itemGroups": [
-				"{bc69c6e7}"
-			],
-			"categories": {
-				"assassin": true
 			}
 		},
 		"6696": {
 			"id": "6696",
 			"name": "Axiom Arc",
 			"searchString": "axiomarc;damage;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"AbilityHasteMod": 20,
-				"PhysicalLethality": 18
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2750,
 				"sell": 1925
@@ -9056,7 +9046,17 @@
 				"2020",
 				"3133"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{bd69c87a}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 20,
+				"PhysicalLethality": 18
+			},
 			"dataValues": {
 				"UltimateRefundBase": 10,
 				"LethalityAmount": 18,
@@ -9076,23 +9076,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{bd69c87a}"
-			],
-			"categories": {
-				"assassin": true
 			}
 		},
 		"6697": {
 			"id": "6697",
 			"name": "Hubris",
 			"searchString": "hubris;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"AbilityHasteMod": 10,
-				"PhysicalLethality": 18
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2800,
 				"sell": 1960
@@ -9102,7 +9092,17 @@
 				"3134",
 				"3133"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{be69ca0d}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 10,
+				"PhysicalLethality": 18
+			},
 			"dataValues": {
 				"LethalityAmount": 18,
 				"MSDuration": 3,
@@ -9124,23 +9124,13 @@
 						}
 					]
 				}
-			},
-			"itemGroups": [
-				"{be69ca0d}"
-			],
-			"categories": {
-				"assassin": true
 			}
 		},
 		"6698": {
 			"id": "6698",
 			"name": "Profane Hydra",
 			"searchString": "profanehydra;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"AbilityHasteMod": 10,
-				"PhysicalLethality": 18
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2850,
 				"sell": 1995
@@ -9150,7 +9140,18 @@
 				"3077",
 				"2020"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems",
+				"{cf1a44c0}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 10,
+				"PhysicalLethality": 18
+			},
 			"dataValues": {
 				"LethalityAmount": 18,
 				"Cooldown": 10,
@@ -9208,24 +9209,13 @@
 						"mNumber": 0.5
 					}
 				}
-			},
-			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
-			],
-			"categories": {
-				"assassin": true
 			}
 		},
 		"6699": {
 			"id": "6699",
 			"name": "Voltaic Cyclosword",
 			"searchString": "voltaiccyclosword;lethality;energized;energised;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
-			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"AbilityHasteMod": 10,
-				"PhysicalLethality": 10
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 3000,
 				"sell": 2100
@@ -9236,7 +9226,17 @@
 				"1036",
 				"1036"
 			],
-			"epicness": 5,
+			"itemGroups": [
+				"{b069b403}"
+			],
+			"categories": {
+				"assassin": true
+			},
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 10,
+				"PhysicalLethality": 10
+			},
 			"dataValues": {
 				"PercentCurrentHPMelee": 9,
 				"PercentCurrentHPRanged": 7,
@@ -9257,23 +9257,13 @@
 					"RangedResult": "@LethalityBonusModRanged@",
 					"DefaultResult": "@LethalityBonusModMelee@"
 				}
-			},
-			"itemGroups": [
-				"{b069b403}"
-			],
-			"categories": {
-				"assassin": true
 			}
 		},
 		"8010": {
 			"id": "8010",
 			"name": "Bloodletter's Curse",
 			"searchString": "bloodletterscurse;health;spelldamage;cooldownreduction;magicpenetration;abilitypower",
-			"stats": {
-				"FlatHPPoolMod": 400,
-				"FlatMagicDamageMod": 65,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2900,
 				"sell": 2030
@@ -9283,30 +9273,30 @@
 				"3147",
 				"3108"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"ShredPerStack": 0.075,
-				"DebuffDuration": 6,
-				"InternalCD": 0.3,
-				"MaxStacks": 4
-			},
 			"itemGroups": [
 				"{6219a9e8}",
 				"Items/ItemGroups/VoidPen"
 			],
 			"categories": {
 				"mage": true
+			},
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatMagicDamageMod": 65,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"ShredPerStack": 0.075,
+				"DebuffDuration": 6,
+				"InternalCD": 0.3,
+				"MaxStacks": 4
 			}
 		},
 		"8020": {
 			"id": "8020",
 			"name": "Abyssal Mask",
 			"searchString": "abyssalmask;health;magicresist;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 45,
-				"FlatHPPoolMod": 350,
-				"AbilityHasteMod": 15
-			},
+			"epicness": 5,
 			"gold": {
 				"total": 2650,
 				"sell": 1855
@@ -9316,17 +9306,21 @@
 				"3067",
 				"1057"
 			],
-			"epicness": 5,
-			"dataValues": {
-				"Radius": 700,
-				"DamageAmp": 0.12
-			},
 			"itemGroups": [
 				"{d4211923}"
 			],
 			"categories": {
 				"tank": true,
 				"support": true
+			},
+			"stats": {
+				"FlatSpellBlockMod": 45,
+				"FlatHPPoolMod": 350,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"Radius": 700,
+				"DamageAmp": 0.12
 			}
 		}
 	}

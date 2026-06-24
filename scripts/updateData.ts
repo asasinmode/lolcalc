@@ -370,7 +370,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 					id: itemId,
 					name,
 					searchString: searchTerms.join(';'),
-					stats,
+					epicness: undefined,
 					gold: {
 						total: gold.total,
 						sell: gold.sell,
@@ -380,6 +380,13 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 					from: from?.length ? from : undefined,
 					...(tags.includes('Boots') ? { isBoots: true } : undefined),
 					...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
+					itemGroups: undefined,
+					categories: undefined,
+					stats,
+					dataValues: undefined,
+					itemCalculations: undefined,
+					stringCalculations: undefined,
+					effectAmount: undefined,
 				}];
 			}),
 		) as unknown as NonNullable<typeof itemData>['data'],
