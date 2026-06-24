@@ -19,32 +19,52 @@ test.before(() => {
 test.only('extended equals', async (t) => {
 	t.test('single stat scaling', () => {
 		const runaan = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.runaan].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.runaan }, undefined, { isExtended: true });
-		assertMetaSuffix('BoltDamage', `<${CHAMPION_STAT_TO_SCALING_TAG.attackDamage}>55%</${CHAMPION_STAT_TO_SCALING_TAG.attackDamage}>%i:${STAT_ICON.attackDamage}%`, runaan);
+		assertMetaSuffix('BoltDamage', '<scalead>55%</scalead>%i:scalead%', runaan);
 
 		const manamune = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.manamune].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.manamune }, undefined, { isExtended: true });
-		assertMetaSuffix('BonusADFromMana', `<${CHAMPION_STAT_TO_SCALING_TAG.mana}>2%</${CHAMPION_STAT_TO_SCALING_TAG.mana}>%i:${STAT_ICON.mana}%`, manamune);
+		assertMetaSuffix('BonusADFromMana', '<scalemana>2%</scalemana>%i:scalemana%', manamune);
 
 		const unendingDespair = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.unendingDespair].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.unendingDespair }, undefined, { isExtended: true });
-		assertMetaSuffix('DrainCalc', `<${CHAMPION_STAT_TO_SCALING_TAG.hp}>3% bonus</${CHAMPION_STAT_TO_SCALING_TAG.hp}> %i:${STAT_ICON.hp}%`, unendingDespair);
+		assertMetaSuffix('DrainCalc', '<scalehealth>3% bonus</scalehealth> %i:scalehealth%', unendingDespair);
 
 		const icebornGauntlet = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.icebornGauntlet].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.icebornGauntlet }, undefined, { isExtended: true });
-		assertMetaSuffix('SpellbladeDamage', `<${CHAMPION_STAT_TO_SCALING_TAG.attackDamage}>150% base</${CHAMPION_STAT_TO_SCALING_TAG.attackDamage}> %i:${STAT_ICON.attackDamage}%`, icebornGauntlet);
+		assertMetaSuffix('SpellbladeDamage', '<scalead>150% base</scalead> %i:scalead%', icebornGauntlet);
 	});
 
 	t.test('const + single stat scaling', () => {
 		const zazzak = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.zazZakRealmspike].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.zazZakRealmspike }, undefined, { isExtended: true });
-		assertMetaSuffix('TooltipDamage', `<const>10</const> <${CHAMPION_STAT_TO_SCALING_TAG.abilityPower}>+ 15%</${CHAMPION_STAT_TO_SCALING_TAG.abilityPower}>%i:${STAT_ICON.abilityPower}%`, zazzak);
+		assertMetaSuffix('TooltipDamage', '<const>10</const> <scaleap>+ 15%</scaleap>%i:scaleap%', zazzak);
 
 		const thornmail = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.thornmail].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.thornmail }, undefined, { isExtended: true });
-		assertMetaSuffix('TotalDamage', `<const>20</const> <${CHAMPION_STAT_TO_SCALING_TAG.armor}>+ 10% bonus</${CHAMPION_STAT_TO_SCALING_TAG.armor}> %i:${STAT_ICON.armor}%`, thornmail);
+		assertMetaSuffix('TotalDamage', '<const>20</const> <scalearmor>+ 10% bonus</scalearmor> %i:scalearmor%', thornmail);
 
 		const sunfireAegis = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.sunfireAegis].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.sunfireAegis }, undefined, { isExtended: true });
-		assertMetaSuffix('DPS', `<const>20</const> <${CHAMPION_STAT_TO_SCALING_TAG.hp}>+ 1% bonus</${CHAMPION_STAT_TO_SCALING_TAG.hp}> %i:${STAT_ICON.hp}%`, sunfireAegis);
+		assertMetaSuffix('DPS', '<const>20</const> <scalehealth>+ 1% bonus</scalehealth> %i:scalehealth%', sunfireAegis);
 
 		const axiomArc = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.axiomArc].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.axiomArc }, undefined, { isExtended: true });
-		assertMetaSuffix('UltimateRefund', `<const>10</const> <${CHAMPION_STAT_TO_SCALING_TAG.lethality}>+ 25%</${CHAMPION_STAT_TO_SCALING_TAG.lethality}>%i:${STAT_ICON.lethality}%`, axiomArc);
+		assertMetaSuffix('UltimateRefund', '<const>10</const> <scalelethality>+ 25%</scalelethality>%i:scaleapen%', axiomArc);
 
 		const deadMansPlate = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.deadMansPlate].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.deadMansPlate }, undefined, { isExtended: true });
-		assertMetaSuffix('MaxDamageCalc', `<const>40</const> <${CHAMPION_STAT_TO_SCALING_TAG.attackDamage}>+ 100% base</${CHAMPION_STAT_TO_SCALING_TAG.attackDamage}> %i:${STAT_ICON.attackDamage}%`, deadMansPlate);
+		assertMetaSuffix('MaxDamageCalc', '<const>40</const> <scalead>+ 100% base</scalead> %i:scalead%', deadMansPlate);
+	});
+
+	t.test('level', () => {
+		const dreamMaker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.dreamMaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.dreamMaker }, undefined, { isExtended: true });
+		assertMetaSuffix('ProcDmg', '<const>40 - 160</const>%i:scalelevel%', dreamMaker);
+
+		const solariLocket = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.solariLocket].tooltipInventory[0]![1]!, 'item', { item: ITEMS_BY_NAME.solariLocket }, undefined, { isExtended: true });
+		assertMetaSuffix('ShieldAmount', '<const>290 - 360</const>%i:scalelevel%', solariLocket);
+
+		const statikkShiv = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.statikkShiv].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.statikkShiv }, undefined, { isExtended: true });
+		assertMetaSuffix('BounceCount', '<const>4 - 7</const>%i:scalelevel%', statikkShiv);
+
+		const hextechGunblade = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hextechGunblade].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.hextechGunblade }, undefined, { isExtended: true });
+		assertMetaSuffix('ActiveDamage', '<const>175 - 253%i:scalelevel%</const> <scaleap>+ 30%%i:scaleap%</scaleap>', hextechGunblade);
+
+		const terminus = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.terminus].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.terminus }, undefined, { isExtended: true });
+		assertMetaSuffix('ARMRPerHitScaling', '<const>6 - 8</const>%i:scalelevel%', terminus);
+
+		const bloodthirster = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.bloodthirster].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.bloodthirster }, undefined, { isExtended: true });
+		assertMetaSuffix('OvershieldCalc', '<const>165 - 315</const>%i:scalelevel%', bloodthirster);
 	});
 });

@@ -64,6 +64,110 @@
 				}
 			}
 		},
+		"3068": {
+			"name": "Sunfire Aegis",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 50,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"Range": 325,
+				"MinionMod": 0.6,
+				"MaxStacks": 1,
+				"StackDuration": 1,
+				"MonsterMod": 1,
+				"AuraDuration": 3,
+				"TicksPerSecond": 1,
+				"BaseDamagePerTickTOOLTIPONLY": 20,
+				"HPRatioPerTickTOOLTIPONLY": 1
+			},
+			"itemCalculations": {
+				"DamagePerTick": {
+					"mFormulaParts": [
+						{
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.01,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"DPS": {
+					"mMultiplier": {
+						"mDataValue": "TicksPerSecond"
+					},
+					"mModifiedGameCalculation": "DamagePerTick"
+				},
+				"{049cea52}": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mModifiedGameCalculation": "DPS"
+				}
+			}
+		},
+		"3072": {
+			"name": "Bloodthirster",
+			"stats": {
+				"FlatPhysicalDamageMod": 80,
+				"PercentLifeStealMod": 0.15
+			},
+			"dataValues": {
+				"Threshold": 0.7,
+				"DecayTime": 25
+			},
+			"itemCalculations": {
+				"OvershieldCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 165,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3075": {
+			"name": "Thornmail",
+			"stats": {
+				"FlatHPPoolMod": 150,
+				"FlatArmorMod": 75
+			},
+			"dataValues": {
+				"BaseDamage": 20,
+				"BonusArmorDamageRatio": 0.1,
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3,
+				"EnhancedGrievousAmount": 0.4
+			},
+			"itemCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mDataValue": "BonusArmorDamageRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3085": {
 			"name": "Runaan's Hurricane",
 			"stats": {
@@ -98,6 +202,297 @@
 				}
 			},
 			"effectAmount": [0, 40, 2, 0, 40, 1]
+		},
+		"3087": {
+			"name": "Statikk Shiv",
+			"stats": {
+				"FlatMagicDamageMod": 45,
+				"FlatPhysicalDamageMod": 45,
+				"PercentAttackSpeedMod": 0.3,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"BounceRange": 500,
+				"BonusEnergizedStacks": 9,
+				"ChainDamage": 60,
+				"NonChampChainDamage": 90
+			},
+			"itemCalculations": {
+				"BounceCount": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 4,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 10,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 14,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 20,
+									"mAdditionalBonusAtThisLevel": 1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3146": {
+			"name": "Hextech Gunblade",
+			"stats": {
+				"FlatMagicDamageMod": 80,
+				"FlatPhysicalDamageMod": 40,
+				"PercentOmnivampMod": 0.1
+			},
+			"dataValues": {
+				"SlowAmount": 0.25,
+				"SlowDuration": 1.5,
+				"Cooldown": 60
+			},
+			"itemCalculations": {
+				"ActiveDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 175,
+							"mEndValue": 253,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3190": {
+			"name": "Locket of the Iron Solari",
+			"stats": {
+				"FlatSpellBlockMod": 30,
+				"FlatHPPoolMod": 200,
+				"FlatArmorMod": 30,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"ShieldDuration": 2.5,
+				"DiminishedEffectMulitplier": 0.25,
+				"DiminishedTimer": 20,
+				"Cooldown": 90,
+				"ShieldRange": 850,
+				"ShieldMinTOOLTIP": 290,
+				"ShieldMaxTOOLTIP": 360
+			},
+			"itemCalculations": {
+				"ShieldAmount": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 290,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 7
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3302": {
+			"name": "Terminus",
+			"stats": {
+				"FlatPhysicalDamageMod": 30,
+				"PercentAttackSpeedMod": 0.35
+			},
+			"dataValues": {
+				"OnHitDamage": 30,
+				"BuffDuration": 5,
+				"DebuffDuration": 5,
+				"PenMax": 0.3,
+				"PenPerHit": 0.1
+			},
+			"itemCalculations": {
+				"ARMRPerHitScaling": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 6,
+							"mBreakpoints": [
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 14,
+									"mAdditionalBonusAtThisLevel": 1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"ARMRMaxScaling": {
+					"mMultiplier": {
+						"mNumber": 3
+					},
+					"mModifiedGameCalculation": "ARMRPerHitScaling"
+				},
+				"{592c02e8}": {
+					"{72c5c2a8}": 1,
+					"mFormulaParts": [
+						{
+							"mDataValue": "OnHitDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3742": {
+			"name": "Dead Man's Plate",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 55,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"MaxMovementSpeed": 20,
+				"MaxStacks": 100,
+				"BonusDamagePerStack": 0.4,
+				"MaxStacksADRatio": 1,
+				"DurationToMaxStack": 4,
+				"SlowResistTooltip": 0.15
+			},
+			"itemCalculations": {
+				"MaxDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "MaxStacksADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mPart1": {
+								"mDataValue": "BonusDamagePerStack"
+							},
+							"mPart2": {
+								"mNumber": 100
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3870": {
+			"name": "Dream Maker",
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
+			},
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 9,
+				"RechargeTime": 8,
+				"MaxBubbleStack": 2,
+				"BubbleDuration": 3,
+				"PurpleBubbleAoEMod": 0.333,
+				"MinHealAmount": 20,
+				"Cooldown": 8
+			},
+			"itemCalculations": {
+				"FlatDR": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 50,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 12
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"ProcDmg": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 40,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"__renamedVariables": {
+					"{05809103}": "ProcDmg"
+				}
+			},
+			"effectAmount": [9]
+		},
+		"3871": {
+			"name": "Zaz'Zak's Realmspike",
+			"stats": {
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
+			},
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 9,
+				"APRatio": 0.15,
+				"PercentHPDamage": 0.03,
+				"MonsterDamageCap": 300,
+				"BaseDamage": 10
+			},
+			"itemCalculations": {
+				"Cooldown": {
+					"mFormulaParts": [
+						{
+							"mNumber": 10,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"{425b6f6e}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TooltipDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"6662": {
 			"name": "Iceborn Gauntlet",
@@ -152,6 +547,34 @@
 					"MeleeResult": "@MeleeItemCalcValue@",
 					"RangedResult": "@RangedItemCalcValue@",
 					"DefaultResult": "@MeleeItemCalcValue@"
+				}
+			}
+		},
+		"6696": {
+			"name": "Axiom Arc",
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 20,
+				"PhysicalLethality": 18
+			},
+			"dataValues": {
+				"UltimateRefundBase": 10,
+				"LethalityAmount": 18,
+				"ResetWindow": 3
+			},
+			"itemCalculations": {
+				"UltimateRefund": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "UltimateRefundBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 0.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
 				}
 			}
 		}
