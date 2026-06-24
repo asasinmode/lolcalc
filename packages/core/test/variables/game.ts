@@ -2,8 +2,8 @@ import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game.ts';
 import type { TText } from '@lolcalc/data';
 import assert from 'node:assert';
 import test from 'node:test';
-import { CHAMPION_STAT_TO_SCALING_TAG, replaceGameVariables } from '@lolcalc/core/variables/game.ts';
-import { ITEMS_BY_NAME, STAT_ICON, TEXT } from '@lolcalc/data';
+import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
+import { ITEMS_BY_NAME, TEXT } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
 import { setupPatchFixture } from '../utils.ts';
@@ -46,6 +46,9 @@ test.only('extended equals', async (t) => {
 
 		const deadMansPlate = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.deadMansPlate].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.deadMansPlate }, undefined, { isExtended: true });
 		assertMetaSuffix('MaxDamageCalc', '<const>40</const> <scalead>+ 100% base</scalead> %i:scalead%', deadMansPlate);
+
+		const actualizer = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.actualizer].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.actualizer }, undefined, { isExtended: true });
+		assertMetaSuffix('ManaCalc', '<const>15</const> <scalemana>+ 0.005% bonus</scalemana> %i:scalemana%', actualizer);
 	});
 
 	t.test('level', () => {
@@ -67,4 +70,24 @@ test.only('extended equals', async (t) => {
 		const bloodthirster = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.bloodthirster].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.bloodthirster }, undefined, { isExtended: true });
 		assertMetaSuffix('OvershieldCalc', '<const>165 - 315</const>%i:scalelevel%', bloodthirster);
 	});
+
+	t.test('multiple stats', () => {
+		// dusk and dawn, essence reaver, lich bane
+	})
+
+	t.test('melee', () => {
+		// hexdrinker, bastionbreaker, kraken slayer, endless hunger, ravenous hydra
+	})
+
+	t.test('ranged', () => {
+		// profane hydra, eclipse, hullbreaker, shieldbow, titanic hydra, stridebreaker
+	})
+
+	t.test('melee ranged', () => {
+		// bastionbreaker, hullbreaker, kraken slayer, endless hunger, stridebreaker
+	})
+
+	t.test('misc', () => {
+		// protoplasm harness
+	})
 });

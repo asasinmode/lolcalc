@@ -39,6 +39,42 @@
 				}
 			}
 		},
+		"2522": {
+			"name": "Actualizer",
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatMagicDamageMod": 90,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"Cooldown": 60,
+				"Duration": 8,
+				"ManaCostIncrease": 1,
+				"CooldownTick": 0.3,
+				"OverflowAddition": 3,
+				"OverflowRevert": 1
+			},
+			"itemCalculations": {
+				"ManaCalc": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mNumber": 15,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.005,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
+		},
 		"3004": {
 			"name": "Manamune",
 			"stats": {
