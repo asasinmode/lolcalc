@@ -324,7 +324,7 @@ onMounted(() => {
 });
 
 function setLocalMirrorLayout() {
-	localStorage.setItem('localc-mirror-scoreboard-layout', mirrorLayout.value.toString());
+	localStorage.setItem('lolcalc-mirror-scoreboard-layout', mirrorLayout.value.toString());
 }
 </script>
 
