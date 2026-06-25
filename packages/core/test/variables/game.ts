@@ -22,6 +22,9 @@ test.only('extended equals', async (t) => {
 	const meleeDamageSource = await setupDamageSource(fixture, 'Aatrox', {
 		items: [ITEMS_BY_NAME.ravenousHydra],
 	});
+	const rangedDamageSource = await setupDamageSource(fixture, 'Ahri', {
+		items: [ITEMS_BY_NAME.eclipse, ITEMS_BY_NAME.stridebreaker],
+	});
 
 	t.test('single stat scaling', () => {
 		const runaan = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.runaan].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.runaan }, undefined, { isExtended: true });
@@ -107,8 +110,26 @@ test.only('extended equals', async (t) => {
 		assertMetaSuffix('lolcalcChampRange', '<scalead>40%</scalead>%i:scalead%', ravenousHydra);
 	});
 
-	t.test('ranged', () => {
-		// profane hydra, eclipse, hullbreaker, shieldbow, titanic hydra, stridebreaker
+	t.test('ranged', { only: true }, () => {
+		const profaneHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.profaneHydra].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.profaneHydra, isRanged: true }, undefined, { isExtended: true });
+		assertMetaSuffix('CleaveDamage', '<scalead>20%</scalead>%i:scalead%', profaneHydra);
+
+		const eclipse = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.eclipse].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.eclipse, isRanged: true, dynamicVariables: rangedDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.eclipse] }, undefined, { isExtended: true });
+		assertMetaSuffix('lolcalcChampRange', '<const>80</const> <scalead>+ 20% bonus</scalead> %i:scalead%', eclipse);
+
+		const hullbreaker1 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker, isRanged: true }, undefined, { isExtended: true });
+		assertMetaSuffix('MaxStackDamage', '<scalead>84% base %i:scalead%</scalead> <scalehealth>+ 3.5%%i:scalehealth%</scalehealth>', hullbreaker1);
+		const hullbreaker2 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker, isRanged: true }, undefined, { isExtended: true });
+		assertMetaSuffix('BonusMinionResists', '<const>35 - 65</const>%i:scalelevel%', hullbreaker2);
+
+		const immortalShieldbow = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.immortalShieldbow].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.immortalShieldbow, isRanged: true }, undefined, { isExtended: true });
+		assertMetaSuffix('ShieldAmount', '<const>320 - 560</const>%i:scalelevel%', immortalShieldbow);
+
+		const titanicHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.titanicHydra].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.titanicHydra, isRanged: true }, undefined, { isExtended: true });
+		assertMetaSuffix('OnHitDamageCalc', '<scalehealth>0.5%</scalehealth>%i:scalehealth%', titanicHydra);
+
+		const stridebreaker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.stridebreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.stridebreaker, isRanged: true, dynamicVariables: rangedDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.stridebreaker] }, undefined, { isExtended: true });
+		assertMetaSuffix('lolcalcChampRange', '<scalead>20%</scalead>%i:scalead%', stridebreaker);
 	});
 
 	t.test('melee ranged', () => {
