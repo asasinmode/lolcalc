@@ -1568,7 +1568,7 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "{a99340ef}"
+						"mDataValue": "RangeModifier"
 					}
 				},
 				"AbilityDamageCalc": {
@@ -1584,9 +1584,13 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "{d62bdfef}"
+						"mDataValue": "AbilityDamageRangeMod"
 					}
 				}
+			},
+			"__replacedVariables": {
+				"{a99340ef}": "RangeModifier",
+				"{d62bdfef}": "AbilityDamageRangeMod"
 			}
 		},
 		"2522": {
@@ -1734,12 +1738,13 @@
 					],
 					"mDisplayAsPercent": true,
 					"mRangedMultiplier": {
-						"mDataValue": "{ca6deae2}"
+						"mDataValue": "RangedAttackSpeedMultiplier"
 					}
 				}
 			},
 			"__replacedVariables": {
-				"{eb8d750f}": "MeleeAuraAttackSpeed"
+				"{eb8d750f}": "MeleeAuraAttackSpeed",
+				"{ca6deae2}": "RangedAttackSpeedMultiplier"
 			}
 		},
 		"2525": {
@@ -2272,12 +2277,13 @@
 					],
 					"mPrecision": 1,
 					"mRangedMultiplier": {
-						"mDataValue": "{1eea3407}"
+						"mDataValue": "StackRangedMultiplier"
 					}
 				}
 			},
 			"__replacedVariables": {
-				"{52d90ad0}": "CritPerStackMelee"
+				"{52d90ad0}": "CritPerStackMelee",
+				"{1eea3407}": "StackRangedMultiplier"
 			}
 		},
 		"3033": {

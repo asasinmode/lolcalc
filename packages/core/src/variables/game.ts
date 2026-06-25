@@ -430,7 +430,7 @@ export function championAbilityVariableValue(
 				variableValueFn: championAbilityVariableValue,
 				variableValueParams: params,
 				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
-			});
+			})!;
 		}
 		if ('mFormulaParts' in rv.value) {
 			// eslint-disable-next-line ts/no-use-before-define
@@ -1160,7 +1160,7 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		let multiplier = 1;
 		if ('mMultiplier' in variable) {
-			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta);
+			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta)!;
 		}
 		meta.variableValueParams.accessedVariables ??= new Map();
 		const rv = meta.variableValueFn(variable.mModifiedGameCalculation, meta.variableValueParams);
@@ -1460,7 +1460,7 @@ function resolveMMultiplier(
 	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'],
 	whole: any,
 	meta?: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[2],
-): number {
+): number | undefined {
 	const { mNumber, mDataValue } = variable;
 	let rv: number | undefined;
 	if (mNumber) {
@@ -1477,10 +1477,9 @@ function resolveMMultiplier(
 			rv = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 		}
 		rv = value;
-	}
-	if (rv === undefined) {
+	} else {
 		console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
-		return 0;
+		rv = undefined;
 	}
 	/* there could be a better way */
 	return rv === 0.667 ? (2 / 3) : rv;

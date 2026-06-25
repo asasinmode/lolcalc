@@ -428,7 +428,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		item.gold.sellBackModifier = itemMoreData.sellBackModifier && formatNumber(itemMoreData.sellBackModifier);
 		item.effectAmount = itemMoreData.mEffectAmount?.some((amount: number) => amount !== 0) ? itemMoreData.mEffectAmount?.map((amount: number) => formatNumber(amount)) : undefined;
 
-		/* remove unused ChampRange, it's TODO resolved more or less manually in `util/gameVariable.ts`, with some more info in this file's `updateItemShopItemTooltipText` */
+		/* remove unused ChampRange, it's resolved more or less manually in `util/gameVariable.ts`, with some more info in this file's `updateItemShopItemTooltipText` */
 		if (item.itemCalculations?.ChampRange) {
 			const { mDefaultGameCalculation, mConditionalGameCalculation } = item.itemCalculations.ChampRange;
 
