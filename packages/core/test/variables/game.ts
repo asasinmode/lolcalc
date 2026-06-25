@@ -8,7 +8,7 @@ import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { ITEMS_BY_NAME, TEXT } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
-import { setupPatchFixture } from '../utils.ts';
+import { setupDamageSource, setupPatchFixture } from '../utils.ts';
 
 function assertMetaSuffix(variableName: string, expected: string, replaceResult: IReplaceGameVariablesRV) {
 	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`);
@@ -19,6 +19,10 @@ test.before(() => {
 });
 
 test.only('extended equals', async (t) => {
+	const meleeDamageSource = await setupDamageSource(fixture, 'Aatrox', {
+		items: [ITEMS_BY_NAME.ravenousHydra],
+	});
+
 	t.test('single stat scaling', () => {
 		const runaan = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.runaan].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.runaan }, undefined, { isExtended: true });
 		assertMetaSuffix('BoltDamage', '<scalead>55%</scalead>%i:scalead%', runaan);
@@ -87,7 +91,20 @@ test.only('extended equals', async (t) => {
 	});
 
 	t.test('melee', () => {
-		// hexdrinker, bastionbreaker, kraken slayer, endless hunger, ravenous hydra
+		const hexdrinker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hexdrinker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hexdrinker, isRanged: false }, undefined, { isExtended: true });
+		assertMetaSuffix('MeleeRangedSplit', '<const>110 - 280</const>%i:scalelevel%', hexdrinker);
+
+		const bastionBreaker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.bastionBreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.bastionBreaker, isRanged: false }, undefined, { isExtended: true });
+		assertMetaSuffix('AbilityDamageCalc', '<const>30</const> <scalelethality>+ 150%%i:scaleapen%</scalelethality>', bastionBreaker);
+
+		const krakenSlayer = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.krakenSlayer].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.krakenSlayer, isRanged: false }, undefined, { isExtended: true });
+		assertMetaSuffix('DamageAmount', '<const>150 - 200</const>%i:scalelevel%', krakenSlayer);
+
+		const endlessHunger = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.endlessHunger].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.endlessHunger, isRanged: false }, undefined, { isExtended: true });
+		assertMetaSuffix('HasteFromAD', '<const>5</const> <scalead>+ 13% bonus</scalead> %i:scalead%', endlessHunger);
+
+		const ravenousHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.ravenousHydra].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.ravenousHydra, isRanged: false, dynamicVariables: meleeDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.ravenousHydra] }, undefined, { isExtended: true });
+		assertMetaSuffix('lolcalcChampRange', '<scalead>40%</scalead>%i:scalead%', ravenousHydra);
 	});
 
 	t.test('ranged', () => {
