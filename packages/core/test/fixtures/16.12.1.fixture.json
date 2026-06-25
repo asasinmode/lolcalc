@@ -39,6 +39,158 @@
 				}
 			}
 		},
+		"2510": {
+			"name": "Dusk and Dawn",
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatMagicDamageMod": 60,
+				"PercentAttackSpeedMod": 0.2,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SpellbladeHealing": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"2517": {
+			"name": "Endless Hunger",
+			"stats": {
+				"FlatPhysicalDamageMod": 65,
+				"PercentOmnivampMod": 0.05,
+				"PercentTenacityMod": 0.2
+			},
+			"dataValues": {
+				"OmnivampOnTakedown": 0.15,
+				"OmnivampDuration": 8,
+				"TakedownWindow": 3
+			},
+			"itemCalculations": {
+				"HasteFromADRanged": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"__renamedVariables": {
+					"{87892572}": "HasteFromADRanged",
+					"{e4d9f16b}": "HasteFromADMelee"
+				},
+				"HasteFromADMelee": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.13,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"stringCalculations": {
+				"HasteFromAD": {
+					"MeleeResult": "@HasteFromADMelee@",
+					"RangedResult": "@HasteFromADRanged@",
+					"DefaultResult": "@HasteFromADMelee@"
+				}
+			}
+		},
+		"2520": {
+			"name": "Bastionbreaker",
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 15,
+				"PhysicalLethality": 22
+			},
+			"dataValues": {
+				"LethalityAmount": 22,
+				"Cooldown": 20,
+				"TakedownWindow": 3,
+				"BuffDuration": 90,
+				"RangeModifier": 0.8,
+				"DoTDuration": 3,
+				"AbilityDamageRangeMod": 0.5
+			},
+			"itemCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mNumber": 300,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangeModifier"
+					}
+				},
+				"AbilityDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mNumber": 30,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "AbilityDamageRangeMod"
+					}
+				}
+			},
+			"__replacedVariables": {
+				"{a99340ef}": "RangeModifier",
+				"{d62bdfef}": "AbilityDamageRangeMod"
+			}
+		},
 		"2522": {
 			"name": "Actualizer",
 			"stats": {
@@ -72,6 +224,53 @@
 					],
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
+				}
+			}
+		},
+		"2525": {
+			"name": "Protoplasm Harness",
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"Duration": 5,
+				"MSAmount": 0.1,
+				"TenacityAmount": 0.25,
+				"Cooldown": 90,
+				"SizeIncrease": 0.15
+			},
+			"itemCalculations": {
+				"TotalHealthRegen": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 200,
+							"mEndValue": 400,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxHealthGain": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 200,
+							"mEndValue": 300,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
 				}
 			}
 		},
@@ -169,6 +368,51 @@
 								}
 							],
 							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3074": {
+			"name": "Ravenous Hydra",
+			"stats": {
+				"FlatPhysicalDamageMod": 65,
+				"PercentLifeStealMod": 0.12,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"CleaveRadius": 350,
+				"Cooldown": 10,
+				"Radius": 450,
+				"ActiveADRatio": 0.8,
+				"VampAmp": 1,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PrimaryDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "ActiveADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -282,6 +526,38 @@
 				}
 			}
 		},
+		"3100": {
+			"name": "Lich Bane",
+			"stats": {
+				"FlatMagicDamageMod": 100,
+				"PercentMovementSpeedMod": 0.06,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"SpellbladeCooldown": 1.5,
+				"LichBaneAPValue": 0.45,
+				"SpellbladeADRatio": 0.75,
+				"SheenASBuff": 0.5,
+				"Cooldown": 1.5,
+				"SpellBladeDuration": 10
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SpellbladeADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "LichBaneAPValue",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3146": {
 			"name": "Hextech Gunblade",
 			"stats": {
@@ -307,6 +583,131 @@
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
+				}
+			}
+		},
+		"3155": {
+			"name": "Hexdrinker",
+			"stats": {
+				"FlatSpellBlockMod": 25,
+				"FlatPhysicalDamageMod": 25
+			},
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"ShieldLifetime": 2.5,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 110,
+							"mEndValue": 280,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mNumber": 0.75
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				}
+			},
+			"stringCalculations": {
+				"MeleeRangedSplit": {
+					"MeleeResult": "@MeleeItemCalcValue@",
+					"RangedResult": "@RangedItemCalcValue@",
+					"DefaultResult": "@MeleeItemCalcValue@"
+				}
+			}
+		},
+		"3181": {
+			"name": "Hullbreaker",
+			"stats": {
+				"FlatHPPoolMod": 500,
+				"FlatPhysicalDamageMod": 40,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"SkipperADRatio": 1.2,
+				"SkipperADRatioVSStructures": 3,
+				"MaxStackDamageHPRatio": 0.05,
+				"MaxStackDamageVSStructuresHPRatio": 0.1,
+				"SkipperStackDuration": 10,
+				"RangedSkipperADRatio": 0.7,
+				"RangedSkipperADRatioVSStructures": 2
+			},
+			"itemCalculations": {
+				"MaxStackDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SkipperADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "MaxStackDamageHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.7
+					}
+				},
+				"MaxStackDamageVSStructures": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SkipperADRatioVSStructures",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "MaxStackDamageVSStructuresHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.7
+					}
+				},
+				"BonusMinionResists": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 70,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 6
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
+			},
+			"stringCalculations": {
+				"ProcDamageMeleeRangedSplit": {
+					"MeleeResult": "@MaxStackDamage@",
+					"RangedResult": "@RangedMaxStackDamage@",
+					"DefaultResult": "@MaxStackDamage@"
+				},
+				"StructureDamageMeleeRangedSplit": {
+					"MeleeResult": "@MaxStackDamageVSStructures@",
+					"RangedResult": "@RangedMaxStackDamageVSStructures@",
+					"DefaultResult": "@MaxStackDamageVSStructures@"
+				},
+				"MinionResistMeleeRangedSplit": {
+					"MeleeResult": "@MeleeBonusMinionResists@",
+					"RangedResult": "@RangedBonusMinionResists@",
+					"DefaultResult": "@MeleeBonusMinionResists@"
 				}
 			}
 		},
@@ -393,6 +794,47 @@
 				}
 			}
 		},
+		"3508": {
+			"name": "Essence Reaver",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"FlatManaRefund": 15,
+				"ManaRefundRatio": 0.15,
+				"BaseADRatio": 1.25,
+				"CritChanceMultiplier": 50,
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"TotalManaRefund": {
+					"mMultiplier": {
+						"mNumber": 0.5
+					},
+					"mExpandedTooltipCalculationDisplay": 0,
+					"mModifiedGameCalculation": "SpellbladeDamage"
+				},
+				"SpellbladeDamage": {
+					"mExpandedTooltipCalculationDisplay": 0,
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "BaseADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 8,
+							"mDataValue": "CritChanceMultiplier",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3742": {
 			"name": "Dead Man's Plate",
 			"stats": {
@@ -427,6 +869,100 @@
 							"__type": "ProductOfSubPartsCalculationPart"
 						}
 					]
+				}
+			}
+		},
+		"3748": {
+			"name": "Titanic Hydra",
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"FlatPhysicalDamageMod": 40
+			},
+			"dataValues": {
+				"PrimaryTargetHPRatio": 0.01,
+				"SplashHPRatio": 0.03,
+				"RangedEffectiveness": 0.5,
+				"ActivePrimaryTargetHPRatio": 0.04,
+				"ActiveSplashHPRatio": 0.09,
+				"Cooldown": 10,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"CalcValueB": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "SplashHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValue": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "PrimaryTargetHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValueC": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ActivePrimaryTargetHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValueD": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ActiveSplashHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"OnHitDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.01,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				},
+				"ConeDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
 				}
 			}
 		},
@@ -530,6 +1066,55 @@
 				}
 			}
 		},
+		"6631": {
+			"name": "Stridebreaker",
+			"stats": {
+				"FlatHPPoolMod": 450,
+				"FlatPhysicalDamageMod": 40,
+				"PercentAttackSpeedMod": 0.25
+			},
+			"dataValues": {
+				"Cooldown": 15,
+				"ADRatio": 0.8,
+				"MSSlow": -0.35,
+				"Duration": 3,
+				"CleaveRadius": 450,
+				"ActiveMS": 0.35,
+				"PassiveRadius": 350,
+				"MoveSpeedDuration": 2,
+				"DecayRate": 0.8,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"SlashDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"6662": {
 			"name": "Iceborn Gauntlet",
 			"stats": {
@@ -586,6 +1171,139 @@
 				}
 			}
 		},
+		"6672": {
+			"name": "Kraken Slayer",
+			"stats": {
+				"FlatPhysicalDamageMod": 45,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"AttackCount": 3,
+				"BuffDuration": 4,
+				"MaxAmpNumber": 1.75,
+				"RangedDamageMultiplier": 0.8
+			},
+			"itemCalculations": {
+				"DamageAmount": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 150,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedDamageMultiplier"
+					}
+				},
+				"MaximumDamage": {
+					"mMultiplier": {
+						"mDataValue": "MaxAmpNumber"
+					},
+					"mModifiedGameCalculation": "DamageAmount"
+				}
+			}
+		},
+		"6673": {
+			"name": "Immortal Shieldbow",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 55
+			},
+			"dataValues": {
+				"ShieldDuration": 3,
+				"Cooldown": 90,
+				"BuffDuration": 8,
+				"HealthThreshold": 0.3
+			},
+			"itemCalculations": {
+				"ShieldAmount": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 400,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 30
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.8
+					}
+				}
+			}
+		},
+		"6692": {
+			"name": "Eclipse",
+			"dataValues": {
+				"WindowDuration": 2,
+				"MeleeItemCalcValueB": 6,
+				"RangedItemCalcValueB": 4,
+				"Cooldown": 6,
+				"ShieldDuration": 2,
+				"MeleeBaseShield": 160,
+				"RangedBaseShield": 80,
+				"MeleeShieldADRatio": 0.4,
+				"RangedShieldADRatio": 0.2
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeBaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "MeleeShieldADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedBaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "RangedShieldADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxHealthDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mNumber": 6,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.667
+					}
+				}
+			},
+			"stringCalculations": {
+				"{4217e5fd}": {
+					"MeleeResult": "@MaxHealthPercent@",
+					"RangedResult": "@RangedMaxHealthPercent@",
+					"DefaultResult": "@MaxHealthPercent@"
+				}
+			}
+		},
 		"6696": {
 			"name": "Axiom Arc",
 			"stats": {
@@ -611,6 +1329,72 @@
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
+				}
+			}
+		},
+		"6698": {
+			"name": "Profane Hydra",
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 10,
+				"PhysicalLethality": 18
+			},
+			"dataValues": {
+				"LethalityAmount": 18,
+				"Cooldown": 10,
+				"CleaveRadius": 350,
+				"ActiveRadius": 450,
+				"HealthThreshold": 0.5,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"SlashDamageBase": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SlashDamageMax": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"CleaveDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
 				}
 			}
 		}
