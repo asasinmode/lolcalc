@@ -2,6 +2,8 @@ import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game.ts';
 import type { TText } from '@lolcalc/data';
 import assert from 'node:assert';
 import test from 'node:test';
+import { specificKnownVariables } from '@lolcalc/core/specifics/index.ts';
+import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { ITEMS_BY_NAME, TEXT } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
@@ -72,22 +74,31 @@ test.only('extended equals', async (t) => {
 	});
 
 	t.test('multiple stats', () => {
-		// dusk and dawn, essence reaver, lich bane
-	})
+		const duskAndDawn = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.duskAndDawn].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.duskAndDawn }, undefined, { isExtended: true });
+		assertMetaSuffix('SpellbladeDamage', '<scalead>75% base %i:scalead%</scalead> <scaleap>+ 10%%i:scaleap%</scaleap>', duskAndDawn);
+		assertMetaSuffix('SpellbladeHealing', '<scaleap>10%%i:scaleap%</scaleap> <scalehealth>+ 3% bonus %i:scalehealth%</scalehealth>', duskAndDawn);
+
+		const essenceReaver = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.essenceReaver].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.essenceReaver, dynamicVariables: specificKnownVariables(ITEM_SPECIFICS[ITEM_NAME_TO_ID.essenceReaver].variables) }, undefined, { isExtended: true });
+		assertMetaSuffix('SpellbladeDamage', '<scalead>125% base %i:scalead%</scalead> + 50%%i:scalecrit%', essenceReaver);
+		assertMetaSuffix('TotalManaRefund', '50% <var>Spellblade damage</var>', essenceReaver);
+
+		const lichBane = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.lichBane].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.lichBane }, undefined, { isExtended: true });
+		assertMetaSuffix('SpellbladeDamage', '<scalead>75% base %i:scalead%</scalead> <scaleap>+ 45%%i:scaleap%</scaleap>', lichBane);
+	});
 
 	t.test('melee', () => {
 		// hexdrinker, bastionbreaker, kraken slayer, endless hunger, ravenous hydra
-	})
+	});
 
 	t.test('ranged', () => {
 		// profane hydra, eclipse, hullbreaker, shieldbow, titanic hydra, stridebreaker
-	})
+	});
 
 	t.test('melee ranged', () => {
 		// bastionbreaker, hullbreaker, kraken slayer, endless hunger, stridebreaker
-	})
+	});
 
 	t.test('misc', () => {
 		// protoplasm harness
-	})
+	});
 });
