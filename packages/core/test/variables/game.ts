@@ -9,6 +9,7 @@ import { ITEMS_BY_NAME, TEXT } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture } from '../utils.ts';
+import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 
 function assertMetaSuffix(variableName: string, expected: string, replaceResult: IReplaceGameVariablesRV) {
 	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`);
@@ -25,6 +26,7 @@ test.only('extended equals', async (t) => {
 	const rangedDamageSource = await setupDamageSource(fixture, 'Ahri', {
 		items: [ITEMS_BY_NAME.eclipse, ITEMS_BY_NAME.stridebreaker],
 	});
+	const championlessDamageSource = new DamageSource({items: [ITEMS_BY_NAME.eclipse]});
 
 	t.test('single stat scaling', () => {
 		const runaan = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.runaan].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.runaan }, undefined, { isExtended: true });
@@ -110,7 +112,7 @@ test.only('extended equals', async (t) => {
 		assertMetaSuffix('lolcalcChampRange', '<scalead>40%</scalead>%i:scalead%', ravenousHydra);
 	});
 
-	t.test('ranged', { only: true }, () => {
+	t.test('ranged', () => {
 		const profaneHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.profaneHydra].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.profaneHydra, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('CleaveDamage', '<scalead>20%</scalead>%i:scalead%', profaneHydra);
 
@@ -133,7 +135,22 @@ test.only('extended equals', async (t) => {
 	});
 
 	t.test('melee ranged', () => {
-		// bastionbreaker, hullbreaker, kraken slayer, endless hunger, stridebreaker
+		const bastionBreaker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.bastionBreaker].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.bastionBreaker }, undefined, { isExtended: true });
+		assertMetaSuffix('DamageCalc', '<const>300</const> <scalelethality>+ 2500%%i:scaleapen%</scalelethality> <const>|</const> <const>240</const> <scalelethality>+ 2000%%i:scaleapen%</scalelethality>', bastionBreaker);
+
+		const krakenSlayer = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.krakenSlayer].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.krakenSlayer }, undefined, { isExtended: true });
+		assertMetaSuffix('MaximumDamage', '<const>263 - 350</const> <const>|</const> <const>210 - 280</const>%i:scalelevel%', krakenSlayer);
+
+		const eclipse = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.eclipse].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.eclipse, dynamicVariables: championlessDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.eclipse] }, undefined, { isExtended: true });
+		assertMetaSuffix('lolcalcChampRange', '<const>160</const> <scalead>+ 40% bonus %i:scalead%</scalead> <const>|</const> <const>80</const> <scalead>+ 20% bonus %i:scalead%</scalead>', eclipse);
+
+		const hullbreaker1 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker }, undefined, { isExtended: true });
+		assertMetaSuffix('MaxStackDamageVSStructures', '<scalead>300% base %i:scalead%</scalead> <scalehealth>+ 10%%i:scalehealth%</scalehealth> <const>|</const> <scalead>210% base %i:scalead%</scalead> <scalehealth>+ 7%%i:scalehealth%</scalehealth>', hullbreaker1);
+		const hullbreaker2 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker }, undefined, { isExtended: true });
+		assertMetaSuffix('BonusMinionResists', '<const>70 - 130</const> <const>|</const> <const>35 - 65</const>%i:scalelevel%', hullbreaker2);
+
+		const titanicHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.titanicHydra].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.titanicHydra, isRanged: true }, undefined, { isExtended: true });
+		assertMetaSuffix('CalcValueD', '<scalehealth>4.5%</scalehealth>%i:scalehealth%', titanicHydra);
 	});
 
 	t.test('misc', () => {
