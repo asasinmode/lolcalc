@@ -2,6 +2,7 @@ import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game.ts';
 import type { TText } from '@lolcalc/data';
 import assert from 'node:assert';
 import test from 'node:test';
+import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { specificKnownVariables } from '@lolcalc/core/specifics/index.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
@@ -9,7 +10,6 @@ import { ITEMS_BY_NAME, TEXT } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture } from '../utils.ts';
-import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 
 function assertMetaSuffix(variableName: string, expected: string, replaceResult: IReplaceGameVariablesRV) {
 	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`);
@@ -19,14 +19,14 @@ test.before(() => {
 	setupPatchFixture(fixture);
 });
 
-test.only('extended equals', async (t) => {
+test('extended equals', async (t) => {
 	const meleeDamageSource = await setupDamageSource(fixture, 'Aatrox', {
 		items: [ITEMS_BY_NAME.ravenousHydra],
 	});
 	const rangedDamageSource = await setupDamageSource(fixture, 'Ahri', {
 		items: [ITEMS_BY_NAME.eclipse, ITEMS_BY_NAME.stridebreaker],
 	});
-	const championlessDamageSource = new DamageSource({items: [ITEMS_BY_NAME.eclipse]});
+	const championlessDamageSource = new DamageSource({ items: [ITEMS_BY_NAME.eclipse] });
 
 	t.test('single stat scaling', () => {
 		const runaan = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.runaan].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.runaan }, undefined, { isExtended: true });
@@ -154,6 +154,7 @@ test.only('extended equals', async (t) => {
 	});
 
 	t.test('misc', () => {
-		// protoplasm harness
+		const protoplasmHarness = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.protoplasmHarness].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.protoplasmHarness, isRanged: true }, undefined, { isExtended: true });
+		assertMetaSuffix('TotalHealthRegen', '<const>200 - 400%i:scalelevel%</const> <scalearmor>+ 175% bonus %i:scalearmor%</scalearmor> <scalemr>+ 175% bonus %i:scalemr%</scalemr>', protoplasmHarness);
 	});
 });
