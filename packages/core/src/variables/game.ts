@@ -95,7 +95,7 @@ interface IBaseVariableParams {
 	 */
 	accessedVariables?: Map<string, Set<string>>;
 	damageSource?: DamageSource;
-	/** usually `damageSource.isRanged.value` but here for easier overriding when getting values for `isRanged: undefined` since then the variable value function is called with `true` and `false` replacing it */
+	/** usually `damageSource.stats.value.isRanged` but here for easier overriding when getting values for `isRanged: undefined` since then the variable value function is called with `true` and `false` replacing it */
 	isRanged?: boolean;
 }
 

@@ -27,6 +27,7 @@ export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 export type IChampionStats = Record<IChampionStatName, number>;
 
 export interface IStatsCalculationResult {
+	isRanged?: boolean;
 	/** raw stats from champion file */
 	initial: IChampionStats;
 	/** stats that could've been already modified from raw, like custom target dummy ones */

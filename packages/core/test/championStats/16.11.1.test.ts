@@ -21,7 +21,7 @@ test('Rakan, attack range modifying items', async (t) => {
 			/* game shows 404, not sure why */
 			attackRange: 405,
 		});
-		assert.strictEqual(damageSource.isRanged.value, false);
+		assert.strictEqual(damageSource.stats.value.isRanged, false);
 	});
 
 	await t.test('hexoptics arcane aim', async () => {
@@ -33,7 +33,7 @@ test('Rakan, attack range modifying items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackRange: 400,
 		});
-		assert.strictEqual(damageSource.isRanged.value, false);
+		assert.strictEqual(damageSource.stats.value.isRanged, false);
 	});
 
 	await t.test('rfc sharpshooter + hexoptics arcane aim', async () => {
@@ -46,7 +46,7 @@ test('Rakan, attack range modifying items', async (t) => {
 			/* game shows 539, not sure why */
 			attackRange: 540,
 		});
-		assert.strictEqual(damageSource.isRanged.value, false);
+		assert.strictEqual(damageSource.stats.value.isRanged, false);
 	});
 });
 

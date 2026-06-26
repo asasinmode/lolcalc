@@ -52,6 +52,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+
+	const isRanged: IStatsCalculationResult['isRanged'] = champion && (baseStats.attackRange ?? 0) > 325;
+
 	// atm only frozen heart and these are not automatically added to total, only used for tracking - frozen heart uses onTotalPreMultipliers and totalMultipliersStats
 	const effectStats: Partial<IChampionStats> = {};
 
@@ -118,7 +121,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
-			hook(source, { itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases }, { calculatedVariables, miscDebug });
 		}
 	}
 	itemPassivesStats.attackSpeed = itemPassivesStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
@@ -133,7 +136,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 	if (source.calculateStatsHooks.all.value.onRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.onRuneShards) {
-			hook(source, { runeShardStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, runeShardStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
 	runeShardStats.tenacity = 1 - runeShardStats.tenacity;
@@ -142,14 +145,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const championPassiveStats: Partial<IChampionStats> = {};
 	if (source.calculateStatsHooks.all.value.onChampionPassive) {
 		for (const hook of source.calculateStatsHooks.all.value.onChampionPassive) {
-			hook(source, { championPassiveStats, baseStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, championPassiveStats, baseStats }, { calculatedVariables, miscDebug });
 		}
 	}
 	championPassiveStats.attackSpeed = (championPassiveStats.bonusAttackSpeedPercent ?? 0) * baseOnLevelStats.attackSpeedRatio;
 
 	if (source.calculateStatsHooks.all.value.preBonus) {
 		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
-			hook(source, { runeShardStats, baseStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, runeShardStats, baseStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -201,7 +204,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
-			hook(source, { totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -229,7 +232,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -254,6 +257,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			adaptiveForceStatVariable: adaptiveForceMeta[1],
 		},
 		variables: calculatedVariables,
+		isRanged,
 		miscDebug,
 	};
 }

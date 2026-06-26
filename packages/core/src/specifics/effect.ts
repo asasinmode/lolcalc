@@ -200,7 +200,7 @@ export const EFFECT_SPECIFICS = {
 			},
 			setupDataFromSourceItem(damageSource) {
 				if ((damageSource.internalItemData.value as IInternalItemDataOf<'serpentsFang'>).sVenom) {
-					return [damageSource.isRanged.value ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
+					return [damageSource.stats.value.isRanged ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
 				}
 			},
 			modifyVariable: {
@@ -430,7 +430,7 @@ export const EFFECT_SPECIFICS = {
 			},
 			setupDataFromSourceItem(damageSource): [frostField: number] | undefined {
 				if ((damageSource.internalItemData.value as IInternalItemDataOf<'icebornGauntlet'>).frostField) {
-					return [damageSource.isRanged.value ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
+					return [damageSource.stats.value.isRanged ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
 				}
 			},
 		}),

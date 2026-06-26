@@ -60,8 +60,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	level: Ref<number>;
 	maxLevel = computed((): number => this.roleQuest.value === 'top' ? 20 : 18);
 
-	// TODO supposed to count range from senna's passive but not items like rfc/hexoptics
-	isRanged = computed((): boolean | undefined => this.champion.value && (this.stats.value?.base.attackRange ?? 0) > 325);
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 
 	runes: Ref<IChampionRunes>;
@@ -333,7 +331,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						handleRoleQuestItems(this.items.value, this.roleQuest.value);
 					}),
 
-					watch(this.isRanged, (value) => {
+					watch(() => this.stats.value.isRanged, (value) => {
 						if (!value) {
 							for (let i = 0; i < this.items.value.length; i++) {
 								const item = this.items.value[i];
@@ -884,12 +882,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	computed: IDamageSourceComputed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
-		formattedStatTotals: computed((): UnwrapRef<IDamageSourceComputed['formattedStatTotals']> => Object.fromEntries(
-			ALL_CHAMPION_STATS.map(statName => [
-				statName,
-				formatChampionStatValue(statName, this.stats.value.total[statName as IChampionStatName]),
-			]),
-		) as UnwrapRef<IDamageSourceComputed['formattedStatTotals']>),
+		formattedStatTotals: computed((): UnwrapRef<IDamageSourceComputed['formattedStatTotals']> => {
+			const rv = Object.fromEntries(
+				ALL_CHAMPION_STATS.map(statName => [
+					statName,
+					formatChampionStatValue(statName, this.stats.value.total[statName as IChampionStatName]),
+				]),
+			) as UnwrapRef<IDamageSourceComputed['formattedStatTotals']>;
+			return rv;
+		}),
 		items: computed((): (IComputedItemDescription | undefined)[] => {
 			return this.items.value.map((item): IComputedItemDescription | undefined =>
 				item && computeItemDescription(item, this),
@@ -1153,7 +1154,7 @@ export function computeItemDescription(
 	}
 
 	/* dynamic variables not passed as they shouldn't be needed */
-	const gp10 = itemVariableValue('GP10', { item, damageSource, isRanged: damageSource?.isRanged.value });
+	const gp10 = itemVariableValue('GP10', { item, damageSource, isRanged: damageSource?.stats.value.isRanged });
 	/* should probably handle the array output (value for melee/ranged) but not necessary for now */
 	if (typeof gp10.value === 'number') {
 		stats.push({
@@ -1212,7 +1213,7 @@ function additionalItemText(
 			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 				replaceStringtableVariables(value, TEXT.stringtable).replaced,
 				'item',
-				{ item, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value, damageSource },
+				{ item, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.stats.value.isRanged, damageSource },
 				damageSource?.modifyVariableFunctions.value,
 				replaceOptions,
 			)
@@ -1463,7 +1464,7 @@ function formatItemDescriptionText(
 		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 			const { replaced: headingStringtableReplaced } = replaceStringtableVariables(heading!
 				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-					const { value } = itemVariableValue('Cooldown', { item, damageSource, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value });
+					const { value } = itemVariableValue('Cooldown', { item, damageSource, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.stats.value.isRanged });
 					return `${ICON_COOLDOWN_IMG}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
 				})
 				.replace('(', '<span>(')
@@ -1472,7 +1473,7 @@ function formatItemDescriptionText(
 			const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown, anyExtendedVariables: headingAnyExtendedVariables } = replaceGameVariables(
 				headingStringtableReplaced,
 				'item',
-				{ item, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value, damageSource },
+				{ item, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.stats.value.isRanged, damageSource },
 				damageSource?.modifyVariableFunctions.value,
 				replaceOptions,
 			);
@@ -1493,7 +1494,7 @@ function formatItemDescriptionText(
 					const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown, anyExtendedVariables: paragraphAnyExtendedVariables } = replaceGameVariables(
 						paragraphStringtableReplaced,
 						'item',
-						{ item, damageSource, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.isRanged.value },
+						{ item, damageSource, dynamicVariables: damageSource?.computed.variables.value.items[item.id], isRanged: damageSource?.stats.value.isRanged },
 						damageSource?.modifyVariableFunctions.value,
 						replaceOptions,
 					);
@@ -1725,6 +1726,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	/** runs after resolving the champion in `calculateChampionStats` */
 	postInit?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: { baseStats: IChampionStats }) => void>;
 	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		isRanged: IStatsCalculationResult['isRanged'];
 		itemBaseStats: IStatsCalculationResult['itemBase'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		baseStats: IStatsCalculationResult['base'];
@@ -1733,17 +1735,20 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		isRanged: IStatsCalculationResult['isRanged'];
 		baseStats: IStatsCalculationResult['base'];
 		runeShardStats: IStatsCalculationResult['runeShards'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
 	/** runs after creating empty `championPassiveStats` */
 	onChampionPassive?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		isRanged: IStatsCalculationResult['isRanged'];
 		baseStats: IStatsCalculationResult['base'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
 	}) => void>;
 	/** runs before totalling all stats to total bonus */
 	preBonus?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		isRanged: IStatsCalculationResult['isRanged'];
 		runeShardStats: IStatsCalculationResult['runeShards'];
 		baseStats: IStatsCalculationResult['base'];
 		itemBaseStats: IStatsCalculationResult['itemBase'];
@@ -1753,6 +1758,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	}) => void>;
 	/** runs when total stats have been calculated but before any total multipliers like mid quest or dragons */
 	onTotalPreMultipliers?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		isRanged: IStatsCalculationResult['isRanged'];
 		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];
@@ -1761,7 +1767,8 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
-	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, argsd: {
+	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		isRanged: IStatsCalculationResult['isRanged'];
 		totalStats: IStatsCalculationResult['total'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];

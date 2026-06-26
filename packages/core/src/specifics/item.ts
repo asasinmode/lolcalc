@@ -482,7 +482,7 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { isRanged, itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
 					const bonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
 					calculatedVariables.riftmakerVoidInfusion = bonusHp * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
 					itemPassivesStats.abilityPower += calculatedVariables.riftmakerVoidInfusion;
@@ -491,7 +491,7 @@ export const ITEM_SPECIFICS = {
 					const { corruption } = self.internalItemData.value as IInternalItemDataOf<'riftmaker'>;
 					if (corruption === ITEM_SPECIFICS[ITEM_NAME_TO_ID.riftmaker].MAX_STACKS) {
 						const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker?.dataValues;
-						const omnivamp = self.isRanged.value ? VampAmountRanged : VampAmountMelee;
+						const omnivamp = isRanged ? VampAmountRanged : VampAmountMelee;
 						itemPassivesStats.omnivamp += omnivamp;
 					}
 				},
@@ -542,7 +542,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				BonusHSPCalc: {
 					roundReplaced: true,
-				}
+				},
 			},
 			uninteresting: tearItem.uninterestingVariables,
 		}),
@@ -928,9 +928,9 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'phage'>).rage) {
-						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, isRanged: self.isRanged.value ?? true });
+						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, isRanged: isRanged ?? false });
 						if (typeof moveSpeed.value === 'number') {
 							calculatedVariables.phageMoveSpeed = moveSpeed.value;
 							itemPassivesStats.moveSpeed += calculatedVariables.phageMoveSpeed;
@@ -1411,10 +1411,10 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+				handler(_self, { isRanged, totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					const variable = itemVariableValue('HasteFromAD', {
 						item: ITEMS_BY_NAME.endlessHunger,
-						isRanged: self.isRanged.value,
+						isRanged,
 						damageSource: {
 							stats: {
 								value: {
@@ -2641,7 +2641,7 @@ export const ITEM_SPECIFICS = {
 				TotalDamage: [],
 			},
 			calculate(self, target) {
-				const apDamage = itemVariableValue('TooltipDamage', { item: ITEMS_BY_NAME.zazZakRealmspike, damageSource: self, isRanged: self.isRanged.value });
+				const apDamage = itemVariableValue('TooltipDamage', { item: ITEMS_BY_NAME.zazZakRealmspike, damageSource: self, isRanged: self.stats.value.isRanged });
 				const { PercentHPDamage } = ITEMS_BY_NAME?.zazZakRealmspike.dataValues ?? {};
 				return {
 					f4: { value: 0 },
@@ -2990,7 +2990,7 @@ export const ITEM_SPECIFICS = {
 				Damage: [],
 			},
 			calculate(self, target) {
-				const damage = itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: self, isRanged: self.isRanged.value });
+				const damage = itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: self, isRanged: self.stats.value.isRanged });
 				const maxMultiplier = (ITEMS_BY_NAME.krakenSlayer?.dataValues as any)[ITEMS_BY_NAME.krakenSlayer?.itemCalculations.MaximumDamage.mMultiplier.mDataValue!] ?? 1;
 				const targetMissingHpPercent = target
 					? target.currentHealth.value ? (target.stats.value.total.hp - target.currentHealth.value) / Math.max(target.stats.value.total.hp, 1) : 1
@@ -3172,9 +3172,9 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'voltaicCyclosword'>).firmanent) {
-						const value = itemVariableValue('LethalityBonusModMeleeRangedSplit', { item: ITEMS_BY_NAME.voltaicCyclosword, isRanged: self.isRanged.value ?? true });
+						const value = itemVariableValue('LethalityBonusModMeleeRangedSplit', { item: ITEMS_BY_NAME.voltaicCyclosword, isRanged: isRanged ?? false });
 						if (value.value === undefined) {
 							console.warn('[ITEM_SPECIFICS voltaicCyclosword] failed to calculate firmanent lethality', value);
 						} else {
@@ -3255,9 +3255,9 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, _args, { calculatedVariables }) {
+				handler(self, { isRanged }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'crimsonLucidity'>).noxianHaste) {
-						const moveSpeedPercent = itemVariableValue('MSAmount', { item: ITEMS_BY_NAME.crimsonLucidity, isRanged: self.isRanged.value ?? true });
+						const moveSpeedPercent = itemVariableValue('MSAmount', { item: ITEMS_BY_NAME.crimsonLucidity, isRanged: isRanged ?? false });
 						if (typeof moveSpeedPercent.value === 'number') {
 							calculatedVariables.crimsonLucidityMSPercent = moveSpeedPercent.value;
 							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.crimsonLucidityMSPercent;
@@ -3495,7 +3495,7 @@ export function itemBuyability(
 	}
 
 	if (
-		(target.champion.value && !target.isRanged.value && (RANGED_ONLY_ITEMS as string[]).includes(item.id))
+		(target.champion.value && !target.stats.value.isRanged && (RANGED_ONLY_ITEMS as string[]).includes(item.id))
 		|| (!(transformBoots && isMove && item.isBoots) && inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
 		|| (!transformBoots && target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
 		|| (target.roleQuest.value !== 'support' && UPGRADED_SUPPORT_ITEMS.includes(item.id))
