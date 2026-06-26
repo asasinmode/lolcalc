@@ -1564,6 +1564,17 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'SpellBladeDuration', 'SheenASBuff'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats, baseStats }) {
+					const { spActive } = self.internalItemData.value;
+					const bonusAttackSpeedPercent = spActive * ITEMS_BY_NAME.lichBane?.dataValues.SheenASBuff;
+					itemPassivesStats.bonusAttackSpeedPercent += bonusAttackSpeedPercent;
+					itemPassivesStats.attackSpeed += bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+				},
+				priority: HOOK_PRIORITIES.preItemTotal[ITEM_NAME_TO_ID.guinsoo],
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.botrk]: {
 		internalDataProperties: ['cShadows'],

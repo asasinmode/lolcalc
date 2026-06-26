@@ -62,7 +62,7 @@ test('Jax, passive and ms/as items', async (t) => {
 		items: [ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.titanicHydra, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.trinity],
 	};
 
-	await t.test('lvl 1 | passive 5 | quicken', async () => {
+	await t.test('lvl 1 | passive 5 | quicken*', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
@@ -75,7 +75,7 @@ test('Jax, passive and ms/as items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 1 | passive 8 | quicken, quicksilver', async () => {
+	await t.test('lvl 1 | passive 8 | quicken*, quicksilver*', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
 			internalData: { passiveStacks: 8 } satisfies IInternalDataOf<'Jax'>,
@@ -88,7 +88,7 @@ test('Jax, passive and ms/as items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 1 | quicksilver', async () => {
+	await t.test('lvl 1 | quicksilver*', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
 			internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'trinity' | 'mercurialScimitar'>,
@@ -136,7 +136,7 @@ test('Jax, passive and ms/as items', async (t) => {
 		items: [ITEMS_BY_NAME.guinsoo, ITEMS_BY_NAME.yunTal, ITEMS_BY_NAME.lichBane, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.mercurysTreads],
 	};
 
-	await t.test('lvl 20 | passive 2 | guinsoo, yun\'tal, lich\'bane, sterak, endless hunger, mercury\'s treads', async () => {
+	await t.test('lvl 20 | passive 5 | guinsoo*, yun\'tal*, lich\'bane, sterak, endless hunger, mercury\'s treads', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
@@ -146,6 +146,19 @@ test('Jax, passive and ms/as items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			tenacity: 62,
 			attackSpeed: 2.385,
+		});
+	});
+
+	await t.test('lvl 20 | passive 8 | guinsoo*, yun\'tal*, lich\'bane*, sterak, endless hunger, mercury\'s treads', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jax', {
+			...sourceCommon,
+			internalData: { passiveStacks: 8 } satisfies IInternalDataOf<'Jax'>,
+			internalItemData: { seething: 4, flurry: 1, practice: 0, spActive: 1 } satisfies IInternalItemDataOf<'guinsoo' | 'yunTal' | 'lichBane'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			tenacity: 62,
+			attackSpeed: 2.972,
 		});
 	});
 });
