@@ -372,7 +372,7 @@ export const ITEM_SPECIFICS = {
 			} {
 				return {
 					BonusCrit: {
-						value: (self.internalItemData.value as IInternalItemDataOf<'yunTal'>).practice,
+						value: (self.internalItemData.value as IInternalItemDataOf<'yunTal'>).practice ?? 0,
 					},
 				};
 			},
