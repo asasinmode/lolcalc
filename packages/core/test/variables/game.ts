@@ -64,22 +64,22 @@ test('extended equals', async (t) => {
 
 	t.test('level', () => {
 		const dreamMaker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.dreamMaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.dreamMaker }, undefined, { isExtended: true });
-		assertMetaSuffix('ProcDmg', '<const>40 - 160</const>%i:scalelevel%', dreamMaker);
+		assertMetaSuffix('ProcDmg', '<scalelevel>40 - 160</scalelevel>%i:scalelevel%', dreamMaker);
 
 		const solariLocket = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.solariLocket].tooltipInventory[0]![1]!, 'item', { item: ITEMS_BY_NAME.solariLocket }, undefined, { isExtended: true });
-		assertMetaSuffix('ShieldAmount', '<const>290 - 360</const>%i:scalelevel%', solariLocket);
+		assertMetaSuffix('ShieldAmount', '<scalelevel>290 - 360</scalelevel>%i:scalelevel%', solariLocket);
 
 		const statikkShiv = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.statikkShiv].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.statikkShiv }, undefined, { isExtended: true });
-		assertMetaSuffix('BounceCount', '<const>4 - 7</const>%i:scalelevel%', statikkShiv);
+		assertMetaSuffix('BounceCount', '<scalelevel>4 - 7</scalelevel>%i:scalelevel%', statikkShiv);
 
 		const hextechGunblade = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hextechGunblade].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.hextechGunblade }, undefined, { isExtended: true });
-		assertMetaSuffix('ActiveDamage', '<const>175 - 253%i:scalelevel%</const> <scaleap>+ 30%%i:scaleap%</scaleap>', hextechGunblade);
+		assertMetaSuffix('ActiveDamage', '<scalelevel>175 - 253%i:scalelevel%</scalelevel> <scaleap>+ 30%%i:scaleap%</scaleap>', hextechGunblade);
 
 		const terminus = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.terminus].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.terminus }, undefined, { isExtended: true });
-		assertMetaSuffix('ARMRPerHitScaling', '<const>6 - 8</const>%i:scalelevel%', terminus);
+		assertMetaSuffix('ARMRPerHitScaling', '<scalelevel>6 - 8</scalelevel>%i:scalelevel%', terminus);
 
 		const bloodthirster = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.bloodthirster].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.bloodthirster }, undefined, { isExtended: true });
-		assertMetaSuffix('OvershieldCalc', '<const>165 - 315</const>%i:scalelevel%', bloodthirster);
+		assertMetaSuffix('OvershieldCalc', '<scalelevel>165 - 315</scalelevel>%i:scalelevel%', bloodthirster);
 	});
 
 	t.test('multiple stats', () => {
@@ -97,13 +97,13 @@ test('extended equals', async (t) => {
 
 	t.test('melee', () => {
 		const hexdrinker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hexdrinker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hexdrinker, isRanged: false }, undefined, { isExtended: true });
-		assertMetaSuffix('MeleeRangedSplit', '<const>110 - 280</const>%i:scalelevel%', hexdrinker);
+		assertMetaSuffix('MeleeRangedSplit', '<scalelevel>110 - 280</scalelevel>%i:scalelevel%', hexdrinker);
 
 		const bastionBreaker = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.bastionBreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.bastionBreaker, isRanged: false }, undefined, { isExtended: true });
 		assertMetaSuffix('AbilityDamageCalc', '<const>30</const> <scalelethality>+ 150%%i:scaleapen%</scalelethality>', bastionBreaker);
 
 		const krakenSlayer = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.krakenSlayer].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.krakenSlayer, isRanged: false }, undefined, { isExtended: true });
-		assertMetaSuffix('DamageAmount', '<const>150 - 200</const>%i:scalelevel%', krakenSlayer);
+		assertMetaSuffix('DamageAmount', '<scalelevel>150 - 200</scalelevel>%i:scalelevel%', krakenSlayer);
 
 		const endlessHunger = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.endlessHunger].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.endlessHunger, isRanged: false }, undefined, { isExtended: true });
 		assertMetaSuffix('HasteFromAD', '<const>5</const> <scalead>+ 13% bonus</scalead> %i:scalead%', endlessHunger);
@@ -122,10 +122,10 @@ test('extended equals', async (t) => {
 		const hullbreaker1 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('MaxStackDamage', '<scalead>84% base %i:scalead%</scalead> <scalehealth>+ 3.5%%i:scalehealth%</scalehealth>', hullbreaker1);
 		const hullbreaker2 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker, isRanged: true }, undefined, { isExtended: true });
-		assertMetaSuffix('BonusMinionResists', '<const>35 - 65</const>%i:scalelevel%', hullbreaker2);
+		assertMetaSuffix('BonusMinionResists', '<scalelevel>35 - 65</scalelevel>%i:scalelevel%', hullbreaker2);
 
 		const immortalShieldbow = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.immortalShieldbow].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.immortalShieldbow, isRanged: true }, undefined, { isExtended: true });
-		assertMetaSuffix('ShieldAmount', '<const>320 - 560</const>%i:scalelevel%', immortalShieldbow);
+		assertMetaSuffix('ShieldAmount', '<scalelevel>320 - 560</scalelevel>%i:scalelevel%', immortalShieldbow);
 
 		const titanicHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.titanicHydra].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.titanicHydra, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('OnHitDamageCalc', '<scalehealth>0.5%</scalehealth>%i:scalehealth%', titanicHydra);
@@ -139,7 +139,7 @@ test('extended equals', async (t) => {
 		assertMetaSuffix('DamageCalc', '<const>300</const> <scalelethality>+ 2500%%i:scaleapen%</scalelethality> <const>|</const> <const>240</const> <scalelethality>+ 2000%%i:scaleapen%</scalelethality>', bastionBreaker);
 
 		const krakenSlayer = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.krakenSlayer].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.krakenSlayer }, undefined, { isExtended: true });
-		assertMetaSuffix('MaximumDamage', '<const>263 - 350</const> <const>|</const> <const>210 - 280</const>%i:scalelevel%', krakenSlayer);
+		assertMetaSuffix('MaximumDamage', '<scalelevel>263 - 350</scalelevel> <const>|</const> <scalelevel>210 - 280</scalelevel>%i:scalelevel%', krakenSlayer);
 
 		const eclipse = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.eclipse].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.eclipse, dynamicVariables: championlessDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.eclipse] }, undefined, { isExtended: true });
 		assertMetaSuffix('lolcalcChampRange', '<const>160</const> <scalead>+ 40% bonus %i:scalead%</scalead> <const>|</const> <const>80</const> <scalead>+ 20% bonus %i:scalead%</scalead>', eclipse);
@@ -147,7 +147,7 @@ test('extended equals', async (t) => {
 		const hullbreaker1 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker }, undefined, { isExtended: true });
 		assertMetaSuffix('MaxStackDamageVSStructures', '<scalead>300% base %i:scalead%</scalead> <scalehealth>+ 10%%i:scalehealth%</scalehealth> <const>|</const> <scalead>210% base %i:scalead%</scalead> <scalehealth>+ 7%%i:scalehealth%</scalehealth>', hullbreaker1);
 		const hullbreaker2 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker }, undefined, { isExtended: true });
-		assertMetaSuffix('BonusMinionResists', '<const>70 - 130</const> <const>|</const> <const>35 - 65</const>%i:scalelevel%', hullbreaker2);
+		assertMetaSuffix('BonusMinionResists', '<scalelevel>70 - 130</scalelevel> <const>|</const> <scalelevel>35 - 65</scalelevel>%i:scalelevel%', hullbreaker2);
 
 		const titanicHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.titanicHydra].tooltipShop[1]![1]!, 'item', { item: ITEMS_BY_NAME.titanicHydra, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('CalcValueD', '<scalehealth>4.5%</scalehealth>%i:scalehealth%', titanicHydra);
@@ -155,6 +155,6 @@ test('extended equals', async (t) => {
 
 	t.test('misc', () => {
 		const protoplasmHarness = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.protoplasmHarness].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.protoplasmHarness, isRanged: true }, undefined, { isExtended: true });
-		assertMetaSuffix('TotalHealthRegen', '<const>200 - 400%i:scalelevel%</const> <scalearmor>+ 175% bonus %i:scalearmor%</scalearmor> <scalemr>+ 175% bonus %i:scalemr%</scalemr>', protoplasmHarness);
+		assertMetaSuffix('TotalHealthRegen', '<scalelevel>200 - 400%i:scalelevel%</scalelevel> <scalearmor>+ 175% bonus %i:scalearmor%</scalearmor> <scalemr>+ 175% bonus %i:scalemr%</scalemr>', protoplasmHarness);
 	});
 });

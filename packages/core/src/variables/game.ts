@@ -808,6 +808,7 @@ export const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon,
 	moveSpeed: 'speed',
 	mana: 'scalemana',
 	manaRegen: 'scalemana',
+	level: 'scalelevel',
 };
 
 export function calculatesFromPartExtendedEquals(
@@ -816,7 +817,7 @@ export function calculatesFromPartExtendedEquals(
 	preferRangedValue = false,
 	prependPlus = false,
 ): string {
-	const tag = part.stat === 'const' || part.stat === 'level' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
+	const tag = part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
 	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
 	const type = part.type === 'baseOnLevel' || part.type === 'base' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
 	const formattedValue = formatCalculatesFromPartValue(

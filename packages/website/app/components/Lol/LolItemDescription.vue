@@ -384,6 +384,10 @@ defineExpose({ header });
 			--at-apply: 'font-700 text-white';
 		}
 
+		scalelevel {
+			--at-apply: 'text-white';
+		}
+
 		scaleap {
 			--at-apply: 'text-indigo-400';
 		}
