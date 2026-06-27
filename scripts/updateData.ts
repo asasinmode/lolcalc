@@ -439,7 +439,22 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			}
 		}
 
-		const itemGroups = itemMoreData.mItemGroups.filter((group: string) => group !== 'Items/ItemGroups/Default');
+		const itemGroups = itemMoreData.mItemGroups.filter((group: string) => {
+			if (group === 'Items/ItemGroups/Default') {
+				return false;
+			}
+			const groupObject = moreItemData[group];
+			if (!groupObject) {
+				console.error('[itemData item groups] no group object', { id: item.id, name: item.name, group });
+			}
+			if ('mMaxGroupOwnable' in groupObject) {
+				if (groupObject.mMaxGroupOwnable !== 1) {
+					console.warn('[itemData item groups] detected a group with mMaxGroupOwnable not 1', { id: item.id, name: item.name, group }, groupObject);
+				}
+				return true;
+			}
+			return false;
+		});
 		if (itemGroups.length) {
 			item.itemGroups = itemGroups;
 			if (itemGroups.includes('Items/ItemGroups/Boots')) {

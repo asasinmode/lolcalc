@@ -22,7 +22,6 @@
 			"isBoots": true,
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
-				"Items/ItemGroups/BootsOfSpeed",
 				"Items/ItemGroups/BootsWithoutActives"
 			],
 			"categories": {
@@ -574,8 +573,7 @@
 			},
 			"image": "1054.png",
 			"itemGroups": [
-				"Items/ItemGroups/DoransItems",
-				"{5c63b904}"
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"tank": true,
@@ -652,8 +650,7 @@
 			},
 			"image": "1056.png",
 			"itemGroups": [
-				"Items/ItemGroups/DoransItems",
-				"{5c63b904}"
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"mage": true
@@ -841,8 +838,7 @@
 			},
 			"image": "1120.png",
 			"itemGroups": [
-				"Items/ItemGroups/DoransItems",
-				"{5c63b904}"
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"tank": true
@@ -1042,8 +1038,7 @@
 				"1052"
 			],
 			"itemGroups": [
-				"Items/ItemGroups/StopwatchGroup",
-				"{4c987493}"
+				"Items/ItemGroups/StopwatchGroup"
 			],
 			"categories": {
 				"mage": true
@@ -1079,7 +1074,6 @@
 			"isBoots": true,
 			"itemGroups": [
 				"Items/ItemGroups/Boots",
-				"Items/ItemGroups/BootsOfSpeed",
 				"Items/ItemGroups/BootsWithoutActives"
 			],
 			"categories": {
@@ -1834,9 +1828,7 @@
 			"itemGroups": [
 				"{f4405fb4}",
 				"Items/ItemGroups/TearItems",
-				"{f842a497}",
-				"{6dcade42}",
-				"{20cbfb4d}"
+				"{f842a497}"
 			],
 			"categories": {
 				"support": true
@@ -1880,8 +1872,7 @@
 				"2526"
 			],
 			"itemGroups": [
-				"{f842a497}",
-				"{6dcade42}"
+				"{f842a497}"
 			],
 			"categories": {
 				"support": true
@@ -1938,8 +1929,7 @@
 			"itemGroups": [
 				"Items/ItemGroups/TearItems",
 				"Items/ItemGroups/LifelineItems",
-				"{2bb000ae}",
-				"{20cbfb4d}"
+				"{2bb000ae}"
 			],
 			"categories": {
 				"mage": true
@@ -1979,9 +1969,7 @@
 			"isOnHit": true,
 			"itemGroups": [
 				"Items/ItemGroups/TearItems",
-				"{29affd88}",
-				"{33df72dd}",
-				"{20cbfb4d}"
+				"{29affd88}"
 			],
 			"categories": {
 				"marksman": true,
@@ -2247,8 +2235,7 @@
 				"1036"
 			],
 			"itemGroups": [
-				"{aba3fe3b}",
-				"{3bbe1bdd}"
+				"{aba3fe3b}"
 			],
 			"categories": {
 				"marksman": true
@@ -2303,8 +2290,7 @@
 			],
 			"itemGroups": [
 				"{aaa3fca8}",
-				"Items/ItemGroups/LastWhisper",
-				"{8875daa8}"
+				"Items/ItemGroups/LastWhisper"
 			],
 			"categories": {
 				"marksman": true
@@ -2395,8 +2381,7 @@
 			],
 			"itemGroups": [
 				"{2bb000ae}",
-				"Items/ItemGroups/LifelineItems",
-				"{33df72dd}"
+				"Items/ItemGroups/LifelineItems"
 			],
 			"categories": {
 				"mage": true
@@ -2493,8 +2478,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"{29affd88}",
-				"{33df72dd}"
+				"{29affd88}"
 			],
 			"categories": {
 				"fighter": true,
@@ -3088,8 +3072,7 @@
 				"3119"
 			],
 			"itemGroups": [
-				"Items/ItemGroups/TearItems",
-				"{20cbfb4d}"
+				"Items/ItemGroups/TearItems"
 			],
 			"categories": {
 				"mage": true,
@@ -3272,8 +3255,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
+				"Items/ItemGroups/LegendaryClearingItems"
 			],
 			"categories": {
 				"fighter": true
@@ -3338,8 +3320,7 @@
 			],
 			"itemGroups": [
 				"{20adb0c6}",
-				"{87f1e822}",
-				"{8875daa8}"
+				"{87f1e822}"
 			],
 			"categories": {
 				"tank": true,
@@ -3391,8 +3372,7 @@
 				"1029"
 			],
 			"itemGroups": [
-				"{87f1e822}",
-				"{8875daa8}"
+				"{87f1e822}"
 			],
 			"categories": {
 				"tank": true,
@@ -3439,8 +3419,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
+				"Items/ItemGroups/LegendaryClearingItems"
 			],
 			"categories": {
 				"fighter": true,
@@ -3817,8 +3796,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"{9e92a0a3}",
-				"{3bbe1bdd}"
+				"{9e92a0a3}"
 			],
 			"categories": {
 				"marksman": true
@@ -3947,8 +3925,7 @@
 				"3144"
 			],
 			"itemGroups": [
-				"{ad94f6d7}",
-				"{3bbe1bdd}"
+				"{ad94f6d7}"
 			],
 			"categories": {
 				"marksman": true
@@ -3980,8 +3957,7 @@
 				"3144"
 			],
 			"itemGroups": [
-				"{ac94f544}",
-				"{3bbe1bdd}"
+				"{ac94f544}"
 			],
 			"categories": {
 				"marksman": true
@@ -4075,8 +4051,7 @@
 			],
 			"itemGroups": [
 				"{103d7a0f}",
-				"{3fcdbdac}",
-				"{1e7a50ee}"
+				"{3fcdbdac}"
 			],
 			"categories": {
 				"mage": true
@@ -4633,9 +4608,6 @@
 			],
 			"from": [
 				"1036"
-			],
-			"itemGroups": [
-				"{8875daa8}"
 			],
 			"categories": {
 				"fighter": true,
@@ -5542,9 +5514,7 @@
 				"2420"
 			],
 			"itemGroups": [
-				"Items/ItemGroups/BuildsFromStopwatchGroup",
-				"{9b3188ed}",
-				"{4c987493}"
+				"{9b3188ed}"
 			],
 			"categories": {
 				"mage": true
@@ -5662,8 +5632,7 @@
 				"3067"
 			],
 			"itemGroups": [
-				"{0938f1dc}",
-				"{8875daa8}"
+				"{0938f1dc}"
 			],
 			"categories": {
 				"mage": true,
@@ -6112,8 +6081,7 @@
 				"1037"
 			],
 			"itemGroups": [
-				"{212a0d1a}",
-				"Items/ItemGroups/DisabledOnFIRSTBLOODMode"
+				"{212a0d1a}"
 			],
 			"categories": {
 				"fighter": true
@@ -6603,8 +6571,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
+				"Items/ItemGroups/LegendaryClearingItems"
 			],
 			"categories": {
 				"fighter": true,
@@ -6818,8 +6785,7 @@
 			],
 			"itemGroups": [
 				"{c6c2af47}",
-				"{3fcdbdac}",
-				"{1e7a50ee}"
+				"{3fcdbdac}"
 			],
 			"categories": {
 				"assassin": true
@@ -6851,8 +6817,7 @@
 			],
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"Items/ItemGroups/DoransItems",
-				"{2b093179}"
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true,
@@ -6997,8 +6962,7 @@
 			],
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"Items/ItemGroups/DoransItems",
-				"{4dbc5e26}"
+				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
 				"support": true
@@ -7145,7 +7109,6 @@
 			],
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"{4dbc5e26}",
 				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
@@ -7176,7 +7139,6 @@
 			"image": "3869.png",
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"{4dbc5e26}",
 				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
@@ -7214,7 +7176,6 @@
 			"image": "3870.png",
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"{4dbc5e26}",
 				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
@@ -7284,7 +7245,6 @@
 			"image": "3871.png",
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"{4dbc5e26}",
 				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
@@ -7349,7 +7309,6 @@
 			"image": "3876.png",
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
-				"{4dbc5e26}",
 				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
@@ -7402,7 +7361,6 @@
 			"itemGroups": [
 				"Items/ItemGroups/GoldItems",
 				"{8b55a7b3}",
-				"{4dbc5e26}",
 				"Items/ItemGroups/DoransItems"
 			],
 			"categories": {
@@ -7464,9 +7422,6 @@
 			],
 			"from": [
 				"1052"
-			],
-			"itemGroups": [
-				"{8875daa8}"
 			],
 			"categories": {
 				"mage": true,
@@ -7970,8 +7925,7 @@
 				"3133"
 			],
 			"itemGroups": [
-				"{b458712e}",
-				"{8875daa8}"
+				"{b458712e}"
 			],
 			"categories": {
 				"fighter": true,
@@ -8207,8 +8161,7 @@
 			],
 			"itemGroups": [
 				"{b45aafc5}",
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
+				"Items/ItemGroups/LegendaryClearingItems"
 			],
 			"categories": {
 				"fighter": true
@@ -9147,8 +9100,7 @@
 				"2020"
 			],
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems",
-				"{cf1a44c0}"
+				"Items/ItemGroups/LegendaryClearingItems"
 			],
 			"categories": {
 				"assassin": true
@@ -9280,7 +9232,6 @@
 				"3108"
 			],
 			"itemGroups": [
-				"{6219a9e8}",
 				"Items/ItemGroups/VoidPen"
 			],
 			"categories": {
