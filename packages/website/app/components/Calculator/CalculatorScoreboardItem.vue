@@ -2209,7 +2209,7 @@ defineExpose({ el });
 			}
 
 			> [data-health-ability-resource] {
-				--at-apply: 'pt-1.5 pb-2 grid grid-rows-subgrid grid-cols-subgrid ms-[--gap-x]';
+				--at-apply: 'pt-1.5 pb-2 grid grid-rows-subgrid grid-cols-subgrid gap-y-px ms-[--gap-x] translate-y-[0.5px] -mbs-px';
 				grid-area: resources;
 
 				[data-current-health],
