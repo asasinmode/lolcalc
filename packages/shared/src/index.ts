@@ -74,8 +74,6 @@ export interface IStatsCalculationResult {
 /** the variables calculated by various things, like riftmaker's void infusion */
 export interface IStatsCalculationVariables {
 	totalBonusPercentMoveSpeed: number;
-	/** total attack range multiplier, like from rfc energize that should apply to "flat" attack range gains like hexoptics/senna */
-	totalAttackRangeMultiplier: number;
 	/** ad gained from completed mid quest */
 	midQuestAd?: number;
 	/** ap gained from completed mid quest */

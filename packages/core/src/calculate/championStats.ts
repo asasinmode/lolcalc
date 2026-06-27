@@ -40,7 +40,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 
 	const calculatedVariables: IStatsCalculationVariables = {
-		totalAttackRangeMultiplier: 0,
 		apMultipliersBase: 0,
 		baseItemManaRegenPercent: 0,
 		totalItemApMultipliers: 1,
@@ -207,8 +206,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
-
-	totalMultipliersStats.attackRange = totalPreMultipliersStats.attackRange * calculatedVariables.totalAttackRangeMultiplier;
 
 	if (source.roleQuest.value === 'mid') {
 		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * MISC.roleQuest.apMultiplier;

@@ -3295,10 +3295,12 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['RangePercentIncrease'],
 		}),
 		calculateHooks: {
-			preItemTotal: {
-				handler(self, _args, { calculatedVariables }) {
+			onTotalPreMultipliers: {
+				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'rfc'>).sharpshooter) {
-						calculatedVariables.totalAttackRangeMultiplier += ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease;
+						totalMultipliersStats.attackRange = Math.min(ITEMS_BY_NAME.rfc.dataValues.MaxRangeIncrease, totalPreMultipliersStats.attackRange * ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease);
+						itemPassivesStats.attackRange ??= 0;
+						itemPassivesStats.attackRange += totalMultipliersStats.attackRange;
 					}
 				},
 			},
