@@ -506,6 +506,20 @@ defineExpose({ header });
 		}
 	}
 
+	.game-description {
+		> ul {
+			--at-apply: 'list-disc';
+
+			> li {
+				--at-apply: 'list-item ms-5 text-base';
+
+				&:not(:last-child) {
+					--at-apply: 'mbe-[1em]';
+				}
+			}
+		}
+	}
+
 	.hover-tooltip.champion-item {
 		--at-apply: 'w-160 max-w-screen';
 		justify-self: anchor-center;
