@@ -23,7 +23,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInte
 import type { DetectChampionVariables } from '../types';
 import type { ISpecificVariables } from './index';
 import { MISC } from '@lolcalc/data';
-import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_LEVEL, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_LEVEL, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
@@ -336,6 +336,16 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Kayle.MAX_PASSIVE_STACKS(self)),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Kayle', typeof IKayle, 'passive'>({
+				meta: {
+					PassiveWaveDamage: {
+						type: VariableType.magic,
+					},
+				},
+				uninteresting: ['LevelForPassiveRank0', 'LevelForPassiveRank1', 'LevelForPassiveRank2', 'LevelForPassiveRank3', 'MSTowardsEnemy', 'EnrageDuration', 'UpgradedAttackRange', 'FinalAttackRange'],
+			}),
 		},
 		calculateHooks: {
 			postInit: {
