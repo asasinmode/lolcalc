@@ -163,8 +163,7 @@ test('Jax, passive and ms/as items', async (t) => {
 	});
 });
 
-test.only('Kayle, passive and as items', async (t) => {
-	t.runOnly(true);
+test('Kayle, passive and as items/rfc', async (t) => {
 	const sourceCommon: IOverrides<'Kayle'> = {
 		runes: {
 			shards: {
@@ -176,16 +175,49 @@ test.only('Kayle, passive and as items', async (t) => {
 		items: [ITEMS_BY_NAME.rfc, ITEMS_BY_NAME.guinsoo, ITEMS_BY_NAME.yunTal, ITEMS_BY_NAME.stormrazor],
 	};
 
-	await t.test('lvl 1 | passive 5 | yun\'tal*, guinsoo*, rfc, stormrazor', { only: true }, async () => {
+	await t.test('lvl 1 | passive 5 | yun\'tal*, guinsoo*, rfc*, stormrazor', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Kayle', {
 			...sourceCommon,
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Kayle'>,
-			internalItemData: { flurry: 1, seething: 4 } satisfies IInternalItemDataOf<'yunTal' | 'guinsoo'>,
+			internalItemData: { flurry: 1, seething: 4, sharpshooter: 1 } satisfies IInternalItemDataOf<'yunTal' | 'guinsoo' | 'rfc'>,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 2.039,
 			moveSpeed: 382,
+			attackRange: 236,
 		});
+		assert.strictEqual(damageSource.stats.value.isRanged, false);
+	});
+
+	await t.test('lvl 6 | passive 5 | yun\'tal, guinsoo, rfc*, stormrazor', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kayle', {
+			...sourceCommon,
+			level: 6,
+			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Kayle'>,
+			internalItemData: { sharpshooter: 1 } satisfies IInternalItemDataOf<'rfc'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 1.665,
+			attackRange: 675,
+		});
+		assert.strictEqual(damageSource.stats.value.isRanged, true);
+	});
+
+	await t.test('lvl 16 | passive 5 | yun\'tal*, guinsoo*, rfc, stormrazor*', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kayle', {
+			...sourceCommon,
+			level: 16,
+			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Kayle'>,
+			internalItemData: { seething: 4, flurry: 1, bolt: 1 } satisfies IInternalItemDataOf<'yunTal' | 'guinsoo' | 'stormrazor' | 'stormrazor'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 2.184,
+			moveSpeed: 496,
+			attackRange: 625,
+		});
+		assert.strictEqual(damageSource.stats.value.isRanged, true);
 	});
 });
