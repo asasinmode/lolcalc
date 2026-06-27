@@ -360,12 +360,17 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			onChampionPassive: {
-				handler(self, { championPassiveStats }) {
+				handler(self, { championPassiveStats }, { calculatedVariables }) {
 					const attackSpeedPerStack = championAbilityVariableValue('EnrageTotalASPerStack', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof attackSpeedPerStack.value === 'number') {
 						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value / 100;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS kayle] failed to calculate passive attack speed');
+					}
+
+					if (self.internalData.value.passiveStacks === CHAMPION_SPECIFICS.Kayle.MAX_PASSIVE_STACKS(self)) {
+						const { MSTowardsEnemy } = (self.champion.value! as typeof IKayle).abilities.passive.variants[0]!.dataValues;
+						calculatedVariables.totalBonusPercentMoveSpeed += MSTowardsEnemy[1]!;
 					}
 				},
 			},

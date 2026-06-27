@@ -162,3 +162,30 @@ test('Jax, passive and ms/as items', async (t) => {
 		});
 	});
 });
+
+test.only('Kayle, passive and as items', async (t) => {
+	t.runOnly(true);
+	const sourceCommon: IOverrides<'Kayle'> = {
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [ITEMS_BY_NAME.rfc, ITEMS_BY_NAME.guinsoo, ITEMS_BY_NAME.yunTal, ITEMS_BY_NAME.stormrazor],
+	};
+
+	await t.test('lvl 1 | passive 5 | yun\'tal*, guinsoo*, rfc, stormrazor', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kayle', {
+			...sourceCommon,
+			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Kayle'>,
+			internalItemData: { flurry: 1, seething: 4 } satisfies IInternalItemDataOf<'yunTal' | 'guinsoo'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 2.039,
+			moveSpeed: 382,
+		});
+	});
+});
