@@ -59,13 +59,16 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Irelia', 'passive', 0), 'passiveStacks', 'Ionian Fervor stacks', 0, CHAMPION_SPECIFICS.Irelia.MAX_PASSIVE_STACKS),
 	},
 	Jax: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jax', 'passive', 0), 'passiveStacks', 'Ionian Fervor stacks', 0, CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS),
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jax', 'passive', 0), 'passiveStacks', 'Relentless Assault stacks', 0, CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS),
 	},
 	Jhin: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jhin', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after crit)', false),
 	},
 	Jinx: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.MAX_PASSIVE_STACKS),
+	},
+	Kayle: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kayle', 'passive', 0), 'passiveStacks', 'Divine Ascent stacks', 0, CHAMPION_SPECIFICS.Kayle.MAX_PASSIVE_STACKS),
 	},
 	Kaisa: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS),

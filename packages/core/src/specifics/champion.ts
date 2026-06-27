@@ -3,6 +3,7 @@ import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
 import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
+import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
@@ -326,6 +327,14 @@ export const CHAMPION_SPECIFICS = {
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS(self)),
+			};
+		},
+	},
+	Kayle: {
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Kayle'>): number => (self.champion.value! as typeof IKayle).abilities.passive.variants[0]!.dataValues.EnrageMaxStacks[1]!,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Kayle.MAX_PASSIVE_STACKS(self)),
 			};
 		},
 	},
