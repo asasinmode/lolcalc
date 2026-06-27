@@ -350,12 +350,22 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(self, { baseStats, championPassiveStats }) {
-					const { LevelForPassiveRank1, LevelForPassiveRank2, LevelForPassiveRank3, UpgradedAttackRange, FinalAttackRange } = (self.champion.value! as typeof IKayle).abilities.passive.variants[0]!.dataValues;
+					const { LevelForPassiveRank1, LevelForPassiveRank3, UpgradedAttackRange, FinalAttackRange } = (self.champion.value! as typeof IKayle).abilities.passive.variants[0]!.dataValues;
 
 					if (self.level.value >= LevelForPassiveRank3[1]!) {
 						championPassiveStats.attackRange = FinalAttackRange[1]! - baseStats.attackRange;
 					} else if (self.level.value >= LevelForPassiveRank1[1]!) {
 						championPassiveStats.attackRange = UpgradedAttackRange[1]! - baseStats.attackRange;
+					}
+				},
+			},
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const attackSpeedPerStack = championAbilityVariableValue('EnrageTotalASPerStack', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof attackSpeedPerStack.value === 'number') {
+						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value / 100;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS kayle] failed to calculate passive attack speed');
 					}
 				},
 			},
