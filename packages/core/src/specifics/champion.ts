@@ -337,6 +337,19 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Kayle.MAX_PASSIVE_STACKS(self)),
 			};
 		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { baseStats, championPassiveStats }) {
+					const { LevelForPassiveRank1, LevelForPassiveRank2, LevelForPassiveRank3, UpgradedAttackRange, FinalAttackRange } = (self.champion.value! as typeof IKayle).abilities.passive.variants[0]!.dataValues;
+
+					if (self.level.value >= LevelForPassiveRank3[1]!) {
+						championPassiveStats.attackRange = FinalAttackRange[1]! - baseStats.attackRange;
+					} else if (self.level.value >= LevelForPassiveRank1[1]!) {
+						championPassiveStats.attackRange = UpgradedAttackRange[1]! - baseStats.attackRange;
+					}
+				},
+			},
+		},
 	},
 	Kayn: {
 		FORM_OPTIONS: {

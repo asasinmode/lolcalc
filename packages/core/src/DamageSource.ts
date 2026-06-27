@@ -1,6 +1,6 @@
 import type { ITextData } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IChampionStats, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -1724,7 +1724,11 @@ interface IDamageSourceComputed {
  */
 export interface ICalculateChampionStatsHookSource<Id extends IChampionId | undefined = undefined> {
 	/** runs after resolving the champion in `calculateChampionStats` */
-	postInit?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: { baseStats: IChampionStats }) => void>;
+	postInit?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		baseStats: IStatsCalculationResult['base'];
+		bonusStats: IStatsCalculationResult['bonus'];
+		championPassiveStats: IStatsCalculationResult['championPassive'];
+	}) => void>;
 	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		itemBaseStats: IStatsCalculationResult['itemBase'];
@@ -1789,10 +1793,7 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 		/** see the type definition for info */
 		miscDebug: IStatsCalculationMiscDebug;
 	}) => void;
-	/**
-	 * the higher the, the **later** it will run
-	 * @deprecated TODO unused atm
-	 */
+	/** the higher the, the **later** it will run */
 	priority?: number;
 }
 

@@ -52,17 +52,18 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
-
-	const isRanged: IStatsCalculationResult['isRanged'] = champion && (baseStats.attackRange ?? 0) > 325;
+	const championPassiveStats: Partial<IChampionStats> = {};
 
 	// atm only frozen heart and these are not automatically added to total, only used for tracking - frozen heart uses onTotalPreMultipliers and totalMultipliersStats
 	const effectStats: Partial<IChampionStats> = {};
 
 	if (source.calculateStatsHooks.all.value.postInit) {
 		for (const hook of source.calculateStatsHooks.all.value.postInit) {
-			hook(source, { baseStats }, { calculatedVariables, miscDebug });
+			hook(source, { baseStats, bonusStats, championPassiveStats }, { calculatedVariables, miscDebug });
 		}
 	}
+
+	const isRanged: IStatsCalculationResult['isRanged'] = champion && ((baseStats.attackRange ?? 0) + (championPassiveStats.attackRange ?? 0) > 325);
 
 	const levelStats: Partial<IChampionStats> = {
 		hp: champion?.stats.hpperlevel ?? 0,
@@ -142,7 +143,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	runeShardStats.tenacity = 1 - runeShardStats.tenacity;
 	calculatedVariables.apMultipliersBase += runeShardStats.abilityPower ?? 0;
 
-	const championPassiveStats: Partial<IChampionStats> = {};
 	if (source.calculateStatsHooks.all.value.onChampionPassive) {
 		for (const hook of source.calculateStatsHooks.all.value.onChampionPassive) {
 			hook(source, { isRanged, championPassiveStats, baseStats }, { calculatedVariables, miscDebug });
