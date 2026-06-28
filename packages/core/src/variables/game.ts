@@ -1476,8 +1476,9 @@ function resolveMMultiplier(
 				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', { mNumber, mDataValue }, variable);
 			}
 			rv = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+		} else {
+			rv = value;
 		}
-		rv = value;
 	} else {
 		console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
 		rv = undefined;
