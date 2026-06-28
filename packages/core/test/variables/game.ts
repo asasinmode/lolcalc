@@ -153,11 +153,16 @@ test('extended equals', async (t) => {
 		assertMetaSuffix('CalcValueD', '<scalehealth>4.5%</scalehealth>%i:scalehealth%', titanicHydra);
 	});
 
-	t.test('misc', () => {
+	await t.test('misc', async () => {
 		const protoplasmHarness = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.protoplasmHarness].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.protoplasmHarness, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('TotalHealthRegen', '<scalelevel>200 - 400%i:scalelevel%</scalelevel> <scalearmor>+ 175% bonus %i:scalearmor%</scalearmor> <scalemr>+ 175% bonus %i:scalemr%</scalemr>', protoplasmHarness);
 
 		const kaylePassive = replaceGameVariables(kayle.champion.value!.stringtable.spell_kaylepassive_tooltip!, 'championAbility', { abilityVariant: kayle.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: kayle.allAbilityVariants.value }, undefined, { isExtended: true });
 		assertMetaSuffix('PassiveWaveDamage', '<scalelevel>20 - 41%i:scalelevel%</scalelevel> <scaleap>+ 25%%i:scaleap%</scaleap> <scalead>+ 10% bonus %i:scalead%</scalead>', kaylePassive);
+
+		const jax = await setupDamageSource(fixture, 'Jax', { level: 4 });
+		const jaxPassive = replaceGameVariables(jax.champion.value!.abilities.passive.variants[0]!.tooltip!, 'championAbility', { abilityVariant: jax.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: jax.allAbilityVariants.value, damageSource: jax }, undefined, { isExtended: true });
+		assert.strictEqual(jaxPassive.anyExtendedVariables, true);
+		assertMetaSuffix('MaxBonusAttackSpeed', '<scalelevel>40% - 100%</scalelevel>%i:scalelevel%', jaxPassive);
 	});
 });

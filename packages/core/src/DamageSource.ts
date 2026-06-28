@@ -956,7 +956,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				abilities: Object.fromEntries(ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => {
 					return [
 						abilityKey,
-						this.champion.value
+						/* test fixtures might not have all abilities filled so check against it */
+						this.champion.value?.abilities[abilityKey]
 							? this.champion.value!.abilities[abilityKey].variants.map((): IDynamicVariables => {
 									const abilitySpecific = championSpecific?.[abilityKey];
 									const abilityDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.variables);
