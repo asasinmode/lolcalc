@@ -7,7 +7,7 @@ import { CHAMPIONS, ITEMS, MISC } from '@lolcalc/data';
 
 interface IPatchOverridesFixture {
 	version: string;
-	champions: Partial<Record<IChampionId, Partial<IChampion>>>;
+	champions: Partial<Record<IChampionId, Partial<Omit<IChampion, 'abilities'>> & { abilities?: Partial<IChampion['abilities']> }>>;
 	items: Record<string, Partial<IItem>>;
 	misc?: Partial<IMiscData>;
 }

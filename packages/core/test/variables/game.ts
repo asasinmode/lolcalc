@@ -20,7 +20,7 @@ test.before(() => {
 });
 
 test('extended equals', async (t) => {
-	const meleeDamageSource = await setupDamageSource(fixture, 'Aatrox', {
+	const kayle = await setupDamageSource(fixture, 'Kayle', {
 		items: [ITEMS_BY_NAME.ravenousHydra],
 	});
 	const rangedDamageSource = await setupDamageSource(fixture, 'Ahri', {
@@ -108,7 +108,7 @@ test('extended equals', async (t) => {
 		const endlessHunger = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.endlessHunger].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.endlessHunger, isRanged: false }, undefined, { isExtended: true });
 		assertMetaSuffix('HasteFromAD', '<const>5</const> <scalead>+ 13% bonus</scalead> %i:scalead%', endlessHunger);
 
-		const ravenousHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.ravenousHydra].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.ravenousHydra, isRanged: false, dynamicVariables: meleeDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.ravenousHydra] }, undefined, { isExtended: true });
+		const ravenousHydra = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.ravenousHydra].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.ravenousHydra, isRanged: false, dynamicVariables: kayle.computed.variables.value.items[ITEM_NAME_TO_ID.ravenousHydra] }, undefined, { isExtended: true });
 		assertMetaSuffix('lolcalcChampRange', '<scalead>40%</scalead>%i:scalead%', ravenousHydra);
 	});
 
@@ -156,5 +156,8 @@ test('extended equals', async (t) => {
 	t.test('misc', () => {
 		const protoplasmHarness = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.protoplasmHarness].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.protoplasmHarness, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('TotalHealthRegen', '<scalelevel>200 - 400%i:scalelevel%</scalelevel> <scalearmor>+ 175% bonus %i:scalearmor%</scalearmor> <scalemr>+ 175% bonus %i:scalemr%</scalemr>', protoplasmHarness);
+
+		const kaylePassive = replaceGameVariables(kayle.champion.value!.stringtable.spell_kaylepassive_tooltip!, 'championAbility', { abilityVariant: kayle.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: kayle.allAbilityVariants.value }, undefined, { isExtended: true });
+		assertMetaSuffix('PassiveWaveDamage', '<scalelevel>20 - 41%i:scalelevel%</scalelevel> <scaleap>+ 25%%i:scaleap%</scaleap> <scalead>+ 10% bonus %i:scalead%</scalead>', kaylePassive);
 	});
 });
