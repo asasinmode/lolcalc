@@ -549,8 +549,8 @@ export function replaceGameVariables(
 				: undefined;
 		}
 
-		anyExtendedVariables ||= Boolean(meta?.extendedEquals);
 		const metaSuffix = variableExtendedEquals(variableValueFunctionParams, options, isMeleeRanged, calculatesFrom, meta, varIcon);
+		anyExtendedVariables ||= Boolean(metaSuffix);
 
 		if (meta?.multiplier) {
 			multiplier = meta.multiplier;
