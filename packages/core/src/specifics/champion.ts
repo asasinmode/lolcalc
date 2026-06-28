@@ -339,12 +339,34 @@ export const CHAMPION_SPECIFICS = {
 		},
 		passive: {
 			variables: defineChampionVariables<'Kayle', typeof IKayle, 'passive'>({
+				known: {
+					AttackSpeedPercent: [],
+					AttackSpeed: [],
+				},
+				calculate(self) {
+					return {
+						AttackSpeedPercent: {
+							value: self.stats.value.championPassive.bonusAttackSpeedPercent,
+						},
+						AttackSpeed: {
+							value: self.stats.value.championPassive.attackSpeed,
+						},
+					};
+				},
 				meta: {
 					PassiveWaveDamage: {
 						type: VariableType.magic,
 					},
+					AttackSpeedPercent: {
+						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
+					},
+					AttackSpeed: {
+						isCustom: true,
+					},
 				},
-				uninteresting: ['LevelForPassiveRank0', 'LevelForPassiveRank1', 'LevelForPassiveRank2', 'LevelForPassiveRank3', 'MSTowardsEnemy', 'EnrageDuration', 'UpgradedAttackRange', 'FinalAttackRange'],
+				uninteresting: ['LevelForPassiveRank0', 'LevelForPassiveRank1', 'LevelForPassiveRank2', 'LevelForPassiveRank3', 'MSTowardsEnemy', 'EnrageDuration', 'UpgradedAttackRange', 'FinalAttackRange', 'EnrageTotalASPerStack'],
 			}),
 		},
 		calculateHooks: {
