@@ -216,9 +216,9 @@
 						"FreeTargetRangeAO": [400, 400, 400, 400, 400, 400, 400],
 						"FreeTargetSpeedAO": [1250, 1250, 1250, 1250, 1250, 1250, 1250],
 						"AllySpeedAO": [1400, 1400, 1400, 1400, 1400, 1400, 1400],
-						"ShieldBaseAmountFast": [40, 80, 120, 160, 200, 240, 280],
+						"ShieldBaseAmountFast": [27.5, 70, 112.5, 155, 197.5, 240, 282.5],
 						"DashArrivial": [500, 500, 500, 500, 500, 500, 500],
-						"ShieldHealthRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"ShieldHealthRatio": [0.135, 0.135, 0.135, 0.135, 0.135, 0.135, 0.135],
 						"CooldownModAO": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {

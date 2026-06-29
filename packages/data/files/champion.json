@@ -1,5 +1,5 @@
 {
-	"version": "16.12.1",
+	"version": "16.13.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -38,8 +38,8 @@
 			"name": "Akali",
 			"image": "Akali.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Akshan": {
@@ -66,7 +66,6 @@
 			"name": "Ambessa",
 			"image": "Ambessa.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -175,8 +174,8 @@
 			"name": "Brand",
 			"image": "Brand.png",
 			"roles": {
-				"support": true,
-				"bot": true
+				"bot": true,
+				"support": true
 			}
 		},
 		"Braum": {
@@ -257,8 +256,8 @@
 			"name": "Diana",
 			"image": "Diana.png",
 			"roles": {
-				"jungle": true,
-				"mid": true
+				"mid": true,
+				"jungle": true
 			}
 		},
 		"DrMundo": {
@@ -285,8 +284,8 @@
 			"name": "Ekko",
 			"image": "Ekko.png",
 			"roles": {
-				"jungle": true,
-				"mid": true
+				"mid": true,
+				"jungle": true
 			}
 		},
 		"Elise": {
@@ -448,8 +447,8 @@
 			"name": "Irelia",
 			"image": "Irelia.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Ivern": {
@@ -485,8 +484,8 @@
 			"name": "Jax",
 			"image": "Jax.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Jayce": {
@@ -687,6 +686,16 @@
 				"mid": true
 			}
 		},
+		"Locke": {
+			"id": "Locke",
+			"key": "805",
+			"name": "Locke",
+			"image": "Locke.png",
+			"roles": {
+				"mid": true,
+				"jungle": true
+			}
+		},
 		"Lucian": {
 			"id": "Lucian",
 			"key": "236",
@@ -711,8 +720,8 @@
 			"name": "Lux",
 			"image": "Lux.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"Malphite": {
@@ -757,8 +766,8 @@
 			"name": "Mel",
 			"image": "Mel.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"Milio": {
@@ -803,8 +812,8 @@
 			"name": "Naafiri",
 			"image": "Naafiri.png",
 			"roles": {
-				"jungle": true,
-				"mid": true
+				"mid": true,
+				"jungle": true
 			}
 		},
 		"Nami": {
@@ -912,8 +921,8 @@
 			"name": "Pantheon",
 			"image": "Pantheon.png",
 			"roles": {
-				"support": true,
-				"top": true
+				"top": true,
+				"support": true
 			}
 		},
 		"Poppy": {
@@ -1066,8 +1075,8 @@
 			"name": "Senna",
 			"image": "Senna.png",
 			"roles": {
-				"support": true,
-				"bot": true
+				"bot": true,
+				"support": true
 			}
 		},
 		"Seraphine": {
@@ -1193,8 +1202,8 @@
 			"name": "Sylas",
 			"image": "Sylas.png",
 			"roles": {
-				"jungle": true,
-				"mid": true
+				"mid": true,
+				"jungle": true
 			}
 		},
 		"Syndra": {
@@ -1212,8 +1221,8 @@
 			"name": "Tahm Kench",
 			"image": "TahmKench.png",
 			"roles": {
-				"support": true,
-				"top": true
+				"top": true,
+				"support": true
 			}
 		},
 		"Taliyah": {
@@ -1231,8 +1240,8 @@
 			"name": "Talon",
 			"image": "Talon.png",
 			"roles": {
-				"jungle": true,
-				"mid": true
+				"mid": true,
+				"jungle": true
 			}
 		},
 		"Taric": {
@@ -1449,8 +1458,8 @@
 			"name": "Xerath",
 			"image": "Xerath.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"XinZhao": {
@@ -1459,8 +1468,8 @@
 			"name": "Xin Zhao",
 			"image": "XinZhao.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Yasuo": {
@@ -1469,8 +1478,8 @@
 			"name": "Yasuo",
 			"image": "Yasuo.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Yone": {
@@ -1479,8 +1488,8 @@
 			"name": "Yone",
 			"image": "Yone.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Yorick": {
@@ -1534,8 +1543,8 @@
 			"name": "Zed",
 			"image": "Zed.png",
 			"roles": {
-				"jungle": true,
-				"mid": true
+				"mid": true,
+				"jungle": true
 			}
 		},
 		"Zeri": {

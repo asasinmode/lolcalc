@@ -1384,7 +1384,10 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType> {
 }
 
 function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug, optional?: boolean) {
-	const value = stringtable[path.toLowerCase()];
+	let value = stringtable[path.toLowerCase()];
+	if (!value) {
+		value = stringtable[hashXxh3(path, 38)];
+	}
 	if (!optional && !value) {
 		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
@@ -2106,12 +2109,13 @@ function hashFnv1a(value: string): string {
 	return `{${rv.padStart(bits / 4, '0')}}`;
 }
 
-function hashXxh3(variable: string, bits = 40) {
+/* 38 bits according to testing and https://github.com/CommunityDragon/CDTB/blob/1826df05b502190a49fc77a21d29543a5727d484/cdtb/rstfile.py#L78 */
+function hashXxh3(variable: string, bits = 38) {
 	const hash = xxh3.Xxh3.withSeed(0n).update(variable.toLowerCase()).digest();
 
 	const mask = (1n << BigInt(bits)) - 1n;
 	const value = hash & mask;
 
-	const hexLen = bits / 4;
+	const hexLen = Math.ceil(bits / 4);
 	return `{${value.toString(16).padStart(hexLen, '0')}}`;
 }

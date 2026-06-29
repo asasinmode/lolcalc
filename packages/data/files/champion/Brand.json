@@ -16,7 +16,7 @@
 		"attackrange": 550,
 		"hpregen": 5.5,
 		"hpregenperlevel": 0.55,
-		"mpregen": 9,
+		"mpregen": 11,
 		"mpregenperlevel": 0.6,
 		"crit": 0,
 		"critperlevel": 0,
@@ -134,9 +134,6 @@
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
-						},
-						{
-							"name": "Cost"
 						}
 					],
 					"mana": [70, 75, 80, 85, 90, 95],
@@ -266,14 +263,9 @@
 							},
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 8,
-									"mInitialBonusPerLevel": 0.25,
-									"mBreakpoints": [
-										{
-											"mLevel": 18
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
+									"mStartValue": 6,
+									"mEndValue": 12,
+									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{
 									"mCoefficient": 0.02,

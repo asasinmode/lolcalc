@@ -1,5 +1,5 @@
 {
-	"version": "16.12.1",
+	"version": "16.13.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -146,7 +146,6 @@
 				"3135",
 				"3165",
 				"3115",
-				"4005",
 				"2510",
 				"3116",
 				"3118",
@@ -515,6 +514,7 @@
 				"3147",
 				"3146",
 				"3802",
+				"4005",
 				"2508",
 				"3108",
 				"3116",
@@ -844,9 +844,9 @@
 				"tank": true
 			},
 			"stats": {
-				"FlatSpellBlockMod": 10,
-				"FlatHPPoolMod": 140,
-				"FlatArmorMod": 10
+				"FlatSpellBlockMod": 8,
+				"FlatHPPoolMod": 150,
+				"FlatArmorMod": 8
 			},
 			"dataValues": {
 				"BonusDamageToMinions": 5
@@ -7225,9 +7225,6 @@
 							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
-				},
-				"__renamedVariables": {
-					"{05809103}": "ProcDmg"
 				}
 			},
 			"effectAmount": [9]
@@ -7446,8 +7443,9 @@
 			},
 			"image": "4005.png",
 			"from": [
-				"1026",
-				"4642"
+				"1052",
+				"4642",
+				"1052"
 			],
 			"itemGroups": [
 				"{5f2a99fe}"
@@ -7457,14 +7455,14 @@
 				"mage": true
 			},
 			"stats": {
-				"FlatMagicDamageMod": 65,
+				"FlatMagicDamageMod": 60,
 				"AbilityHasteMod": 15,
 				"PercentBaseMPRegenMod": 1.5
 			},
 			"dataValues": {
-				"DamageAmp": 0.06,
+				"DamageAmp": 0.07,
 				"DamageAmpDuration": 4,
-				"ImmobilizingAbilityAH": 15
+				"ImmobilizingAbilityAH": 20
 			}
 		},
 		"4401": {

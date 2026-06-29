@@ -1,5 +1,5 @@
 {
-	"version": "16.12.1",
+	"version": "16.13.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -912,8 +912,8 @@
 								"DotDuration": 1,
 								"Level1DamageTOOLTIP": 3,
 								"TicksPerSecond": 2,
-								"ADRatioTT": 2.5,
-								"APRatioTT": 7,
+								"ADRatioTT": 7,
+								"APRatioTT": 2.5,
 								"__renamedVariables": {
 									"{7c0d555f}": "APRatioTT",
 									"{2156e250}": "Level18DamageTOOLTIP"

@@ -355,6 +355,7 @@
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_manacost": "Mana Cost",
+		"spell_listtype_hecarimw: resist amount": "Bonus Resistances",
 		"spell_listtype_healingcap": "Healing Cap",
 		"spell_listtype_minimumdamage": "Minimum Damage",
 		"spell_listtype_maximumdamage": "Maximum Damage",

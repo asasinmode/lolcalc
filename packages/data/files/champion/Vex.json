@@ -224,7 +224,7 @@
 						"BaseDamage": [25, 75, 125, 175, 225, 275, 325],
 						"RecastDamage": [50, 150, 250, 350, 450, 550, 650],
 						"R2Duration": [4, 4, 4, 4, 4, 4, 4],
-						"TakedownWindow": [6, 6, 6, 6, 6, 6, 6],
+						"TakedownWindow": [8, 8, 8, 8, 8, 8, 8],
 						"ResetWindow": [12, 12, 12, 12, 12, 12, 12]
 					},
 					"spellCalculations": {

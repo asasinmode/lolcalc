@@ -177,15 +177,15 @@
 					"objectName": "RekSaiE",
 					"dataKey": "Characters/RekSai/Spells/RekSaiEAbility/RekSaiE",
 					"image": "assets/characters/reksai/hud/icons2d/reksai_e1.png",
-					"tooltip": "<keywordMajor>Unburrowed:</keywordMajor> Rek'Sai bites a target, dealing <physicalDamage>@spell.RekSaiE:BaseDamage@ physical damage</physicalDamage>. At max <keywordMajor>Fury</keywordMajor>, the bite deals <trueDamage>@spell.RekSaiE:EmpoweredDamage@ true damage</trueDamage> instead.",
+					"tooltip": "<keywordMajor>Unburrowed:</keywordMajor> Rek'Sai bites a target, dealing <physicalDamage>@spell.RekSaiE:BaseDamageCalculation@ physical damage</physicalDamage>. At max <keywordMajor>Fury</keywordMajor>, the bite deals <trueDamage>@spell.RekSaiE:EmpoweredDamageCalculation@ true damage</trueDamage> instead.",
 					"tooltipExtended": "{{Spell_RekSaiE_Tooltip}}<br><br>{{Spell_RekSaiEBurrowed_Tooltip}}",
 					"extendedVariables": [
 						{
-							"name": "EmpoweredBaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"name": "EmpoweredBaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_empowereddamage"
 						},
 						{
@@ -199,9 +199,9 @@
 					],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"EmpoweredBaseDamage": [65, 100, 135, 170, 205, 240, 275],
-						"EmpoweredADRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
-						"UnempoweredModifier": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"BaseDamage": [45, 70, 95, 120, 145, 170, 195],
+						"BonusAD": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"EmpoweredRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
 						"DashDistance": [850, 850, 850, 850, 850, 850, 850],
 						"MinimumRange": [850, 850, 850, 850, 850, 850, 850],
 						"DashSpeedBase": [500, 500, 500, 500, 500, 500, 500],
@@ -213,25 +213,25 @@
 						"TunnelTimeRatio": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65]
 					},
 					"spellCalculations": {
-						"BaseDamage": {
-							"mMultiplier": {
-								"mDataValue": "UnempoweredModifier"
-							},
-							"mModifiedGameCalculation": "EmpoweredDamage"
-						},
-						"EmpoweredDamage": {
+						"BaseDamageCalculation": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "EmpoweredBaseDamage",
+									"mDataValue": "BaseDamage",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mDataValue": "EmpoweredADRatio",
+									"mDataValue": "BonusAD",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
+						},
+						"EmpoweredDamageCalculation": {
+							"mMultiplier": {
+								"mDataValue": "EmpoweredRatio"
+							},
+							"mModifiedGameCalculation": "BaseDamageCalculation"
 						},
 						"DashSpeed": {
 							"mFormulaParts": [

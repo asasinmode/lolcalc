@@ -56,7 +56,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.1,
+									"mCoefficient": 0.15,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -224,7 +224,7 @@
 								{
 									"mStat": 2,
 									"mSubpart": {
-										"mLevel1Value": 0.19,
+										"mLevel1Value": 0.2,
 										"mBreakpoints": [
 											{
 												"mLevel": 3,
@@ -664,7 +664,7 @@
 									"mStat": 2,
 									"mStatFormula": 2,
 									"mSubpart": {
-										"mLevel1Value": 0.1,
+										"mLevel1Value": 0.15,
 										"mBreakpoints": [
 											{
 												"mLevel": 3,
@@ -837,7 +837,7 @@
 									"mStat": 2,
 									"mStatFormula": 2,
 									"mSubpart": {
-										"mLevel1Value": 0.3,
+										"mLevel1Value": 0.34,
 										"mBreakpoints": [
 											{
 												"mLevel": 3,

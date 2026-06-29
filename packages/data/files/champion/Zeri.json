@@ -175,7 +175,8 @@
 						"BeamCastTime": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85],
 						"MinCastTime": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"ASpeedCastTimeScalarPerHundrethSecond": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
-						"BaseCastTime": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55]
+						"BaseCastTime": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -190,8 +191,8 @@
 									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.5,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
