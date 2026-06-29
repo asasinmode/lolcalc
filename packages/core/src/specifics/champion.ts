@@ -3,6 +3,7 @@ import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
 import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
+import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
 import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
@@ -16,6 +17,7 @@ import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
+import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
@@ -23,8 +25,8 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInte
 import type { DetectChampionVariables } from '../types';
 import type { ISpecificVariables } from './index';
 import { MISC } from '@lolcalc/data';
-import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_LEVEL, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
-import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
+import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
+import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -299,6 +301,20 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS(self)),
 			};
 		},
+	},
+	Kalista: {
+		variables: defineChampionVariables<'Kalista', typeof IKalista>({
+			known: {
+				GameModeInteger: [1],
+			},
+			calculate() {
+				return {
+					GameModeInteger: {
+						value: 1,
+					},
+				};
+			},
+		}),
 	},
 	Kayle: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Kayle'>): number => (self.champion.value! as typeof IKayle).abilities.passive.variants[0]!.dataValues.EnrageMaxStacks[1]!,
@@ -909,6 +925,20 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Zaahen.MAX_PASSIVE_STACKS(self)),
 			};
 		},
+	},
+	Zilean: {
+		variables: defineChampionVariables<'Zilean', typeof IZilean>({
+			known: {
+				GameModeInteger: [1],
+			},
+			calculate() {
+				return {
+					GameModeInteger: {
+						value: 1,
+					},
+				};
+			},
+		}),
 	},
 } satisfies IHypotheticalChampionSpecifics;
 

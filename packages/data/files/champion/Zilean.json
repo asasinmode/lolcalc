@@ -194,10 +194,7 @@
 					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
 					"dataValues": {
 						"PassiveCooldown": [120, 120, 120, 120, 120, 120, 120],
-						"GameModeInteger": [1, 1, 1, 1, 1, 1, 1],
-						"__renamedVariables": {
-							"GamemodeInteger": "GameModeInteger"
-						}
+						"GamemodeInteger": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"{e359ec0d}": {
@@ -262,6 +259,10 @@
 		"spell_listtype_slow": "Slow",
 		"spell_listtype_movementspeed": "Move Speed",
 		"spell_listtype_healing": "Healing",
+		"spell_heightenedlearning_tooltip_1": "Zilean stores time as Experience at a rate of @XPPer5@ per 5 seconds. Zilean can grant this Experience to his allies when he has enough to complete their next level up by right-clicking them, and doing so gives Zilean the same amount of Experience. This effect has a @PassiveCooldown@ second Cooldown.",
+		"__resolvedHashes": {
+			"{3ce6b5f53c}": "spell_heightenedlearning_tooltip_@gamemodeinteger@"
+		},
 		"spell_heightenedlearning_tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}"
 	}
 }

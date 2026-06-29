@@ -1384,10 +1384,7 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType> {
 }
 
 function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug, optional?: boolean) {
-	let value = stringtable[path.toLowerCase()];
-	if (!value) {
-		value = stringtable[hashXxh3(path, 38)];
-	}
+	const value = stringtable[path.toLowerCase()] || stringtable[hashXxh3(path, 38)];
 	if (!optional && !value) {
 		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}

@@ -342,6 +342,10 @@
 		"spell_listtype_manarefund": "Mana Refund",
 		"spell_listtype_cooldown": "Cooldown",
 		"spell_listtype_knockupduration": "Knockup Duration",
+		"spell_kalistap_tooltip_1": "When Kalista winds up her Attacks, issuing a move order will cause her to dash in that direction after she throws.<br><br>Kalista also begins the game with the Black Spear, allowing her to become <keywordMajor>Oathsworn</keywordMajor> to one of her allies permanently.",
+		"__resolvedHashes": {
+			"{34fdc9540b}": "spell_kalistap_tooltip_@gamemodeinteger@"
+		},
 		"spell_kalistapassivebuff_tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}"
 	}
 }
