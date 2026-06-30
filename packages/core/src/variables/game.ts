@@ -725,13 +725,33 @@ export function replaceGameVariables(
 
 const statIconNameValues = Object.values(STAT_ICON);
 
+/** images found in [assets/ux/fonts/texticons/lol/champion](https://raw.communitydragon.org/16.13/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/champion) that are also encountered in some champion ability descriptions without the extension like `%i:asolstackicon%` or `%i:kindredpassiveicon%` */
+const championGameIcons = [
+	'asolstackicon',
+	'kindredpassiveicon',
+	'nasusstackicon',
+	'sennascalingicon',
+	'shyvana',
+	'smolder',
+	'threshscalingicon',
+];
+
 export function replaceGameIcons(text: string): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
-			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
+			const isChampionIcon = championGameIcons.includes(name);
+			if (isChampionIcon && name === 'shyvana') {
+				/* at least on current version `16.13.1` the icon on cdragon is actually named that while in the description it's just `%i:shyvana%` so try to handle it */
+				name = 'shyvana.shyvana_rework';
+			}
+
+			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name)
+				? 'statsicon'
+				: isChampionIcon ? 'champion' : 'gameplay'
+			}/${name}.png" width="20" height="20" aria-hidden="true">`;
 		})
-		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
+		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
 }
 
 function addCalculatesFrom(
