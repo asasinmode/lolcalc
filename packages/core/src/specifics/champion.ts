@@ -1,4 +1,5 @@
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
+import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
@@ -189,6 +190,13 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
+		},
+	},
+	Evelynn: {
+		passive: {
+			variables: defineChampionVariables<'Evelynn', typeof IEvelynn, 'passive'>({
+				uninteresting: ['DemonShadeTimer', 'StealthDropTimer'],
+			}),
 		},
 	},
 	Ezreal: {
