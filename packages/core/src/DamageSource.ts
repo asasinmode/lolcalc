@@ -8,11 +8,12 @@ import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
 import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
+import type { IHypotheticalMiscSpecifics } from './specifics/misc.ts';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
 import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
-import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 
+import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
@@ -24,6 +25,7 @@ import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } from './specifics/effect.ts';
 import { calculateDynamicVariables } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
+import { MISC_SPECIFICS } from './specifics/misc.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
 import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
 import { replaceStringtableVariables } from './variables/stringtable.ts';
@@ -44,6 +46,7 @@ export interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	roleQuest?: UnwrapRef<IDamageSource['roleQuest']>;
 	internalData?: UnwrapRef<IDamageSource<Id>['internalData']>;
 	internalItemData?: UnwrapRef<IDamageSource<Id>['internalItemData']>;
+	internalMiscData?: UnwrapRef<IDamageSource<Id>['internalMiscData']>;
 	appliedEffects?: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
 }
 
@@ -150,6 +153,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		: IDamageSourceInternalDataBase>;
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
+	/* object containing the internal data of misc things like dragon souls, same as `internalItemData` */
+	internalMiscData: Ref<any>;
 	/* object containing the internal data of applied effects, like item passives or champion abilities */
 	appliedEffects: Ref<IDamageSourceEffect<IEffectAbilityId>[]>;
 
@@ -210,6 +215,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
+		this.internalMiscData = ref(overrides.internalMiscData ?? {});
 		this.appliedEffects = ref([]);
 		/** set in results on a duplicate of the underlying source to the configured target */
 		this.calculationDamageTarget = shallowRef();
@@ -360,6 +366,22 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 							}
 						}
 					}, { immediate: true, deep: true }),
+
+					/* watcher for internalMiscData, atm only dragonSoul has any but watch source should be adjusted when new ones are added */
+					watch(this.dragonSoul, (newValue, oldValue) => {
+						const newSoulSpecificKey = newValue && `${newValue}Soul` as const;
+						(newSoulSpecificKey && (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[newSoulSpecificKey])?.setupData?.(this);
+
+						const usedProperties = newSoulSpecificKey && (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[newSoulSpecificKey]?.internalDataProperties;
+						const oldSoulSpecificKey = oldValue && `${oldValue}Soul` as const;
+						if (oldSoulSpecificKey && (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[oldSoulSpecificKey]?.internalDataProperties?.length) {
+							for (const key of (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[oldSoulSpecificKey]!.internalDataProperties!) {
+								if (!usedProperties?.includes(key)) {
+									this.internalMiscData.value[key] = undefined;
+								}
+							}
+						}
+					}, { immediate: true }),
 				];
 
 		markRaw(this);
@@ -382,6 +404,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			internalData: this.internalData.value as any,
 			/* has to be cloned because multiple items use the same object and only set its properties */
 			internalItemData: structuredClone(toRaw(this.internalItemData.value)),
+			/* same as `internalItemData` */
+			internalMiscData: structuredClone(toRaw(this.internalMiscData.value)),
 			/* not cloned, same as `internalData` */
 			appliedEffects: this.appliedEffects.value,
 			...overrides,
@@ -1618,6 +1642,20 @@ export type IProviderGroupInternalItemData = {
 } | IDamageSourceInternalItemDataProvider;
 
 export type IProviderGroupDataSetup<Id extends IChampionId | undefined = undefined> = { setupData?: never } | IDamageSourceInternalDataProvider<Id>;
+
+export interface IDamageSourceInternalMiscDataProvider {
+	/**
+	 * same as `IDamageSourceInternalItemDataProvider.setupData` for `DamageSource.internalMiscData`
+	 */
+	setupData: (self: DamageSource) => any;
+	/** the properties `setupData` uses, needed for cleanup */
+	internalDataProperties: string[];
+}
+
+export type IProviderGroupInternalMiscData = {
+	setupData?: never;
+	internalDataProperties?: never;
+} | IDamageSourceInternalMiscDataProvider;
 
 export interface IAbilityImageTextProvider {
 	/**
