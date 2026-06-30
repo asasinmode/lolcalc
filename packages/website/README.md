@@ -60,6 +60,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [x] shapeshifting champions
     - [x] aphelios q rotating
+    - [ ] extras shared component like is out combat (youmuu, cloud stack/soul) try to scan internal properties then if detected override component, ideally list the things affected
   - [x] mirror layout
   - [x] expand scoreboard item double click to expand/collapse
   - [ ] drag indicator next to buttons?
@@ -98,7 +99,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] basic attack hover tooltip, note that it already includes everything and might not make sense in custom total
   - [x] friendlier variable names?
   - [x] try to filter out simple variables like 5 more dmg to minions?
-  - [ ] whether/what to round in results like manamune awe ad
+  - [x] whether/what to round in results like manamune awe ad
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
@@ -106,7 +107,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] rune paths not implemented alert
   - [x] save button? Changes are saved instantly so it doesn't really make sense
   - [x] alert that configuration is incorrect
-  - [ ] maybe open dialog on panel click
+  - [x] maybe open dialog on panel click
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
@@ -146,24 +147,24 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] items passives
   - [ ] heal and shield power affecting known shields & heals
   - [ ] cap attack speed
-  - [ ] item effects & their result sections like frozen heart or zeke's convergence
-  - [ ] resolved item passives values for target like randuin/tabi
+  - [?] item effects & their result sections like frozen heart or zeke's convergence
+  - [?] resolved item passives values for target like randuin/tabi
   - [x] hook priorities in one file for easier precedence management
   - [ ] grievous wounds affecting all heal type things
-  - [ ] dragons/souls
+  - [?] dragons/souls
   - [ ] champion passives
     - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
   - [ ] champion effects
   - [ ] other effects
   - [ ] basic attack damage
-  - [ ] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
+  - [x] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
   - [x] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
   - [x] DamageSource.internalData set from utils/champion.ts
   - [x] `{{ Item_Melee_Ranged_Split_Dynamic }}` and `@lolcalcChampRange@` try to do what doran's shield does
   - [ ] resolve game variables
   - [x] maybe dynamic variables can be cached on damage source under a key then reused
   - [x] think of something other than spread copying `{...champion, dynamicValues: ...}`
-  - [ ] check redemption and other level calculations if they keep scaling past lvl 18 for toplaners
+  - [x] check redemption and other level calculations if they keep scaling past lvl 18 for toplaners
   - [ ] check if can always lowercase match variables. Probably can, not sure if worth it because it would have to navigate whole object instead of trying to dot access? If implemented, check renaming variables resolved with different case like cosmic drive `MoveSpeedAmount`
   - [x] check if can save only gold cost, not whole object
   - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)` / note in help page the discrepancy
