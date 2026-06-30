@@ -18,7 +18,7 @@ import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES }
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
-import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils';
 
 const props = defineProps<{
@@ -102,7 +102,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 		}
 
 		return {
-			type: ABILITY_TYPE.champion,
+			type: AbilityType.champion,
 			optionId: championId,
 			optionName: champion.name,
 			abilities: abilityEntries
@@ -286,7 +286,7 @@ function computeSectionRowColumn(
 		isUnknown: false,
 	};
 
-	if (!source || (!source.listedChampion.value && (section.abilityId.type === ABILITY_TYPE.champion || section.abilityId.type === 'all'))) {
+	if (!source || (!source.listedChampion.value && (section.abilityId.type === AbilityType.champion || section.abilityId.type === 'all'))) {
 		rv.value = '-';
 	} else if (source.listedChampion.value && source.listedChampion.value.id !== source.champion.value?.id) {
 		rv.value = 'loading...';
@@ -515,7 +515,7 @@ async function addResultsSection(
 	resultSections.value.splice(spliceAt, 0, section);
 	expand && expandedSections.value.push(section.id);
 
-	if (abilityId.type === ABILITY_TYPE.champion) {
+	if (abilityId.type === AbilityType.champion) {
 		const champion = await useChampion(abilityId.id);
 		/* since abilities are added eagerly despite potentially needing to await something to fully resolve, if the champion is not resolved then remove the section. Unknown champions can be added when restoring state */
 		if (!champion?.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]) {
@@ -537,7 +537,7 @@ async function addResultsSection(
 		section.hoverTooltipData = {
 			precomputedDescription,
 		};
-	} else if (abilityId.type === ABILITY_TYPE.item) {
+	} else if (abilityId.type === AbilityType.item) {
 		const item = ITEMS[abilityId.id]!;
 
 		const precomputedDescription = computeItemDescription(item, undefined, {
@@ -1260,7 +1260,7 @@ defineExpose({
 											v-for="(ability, abilityIndex) in option.abilities"
 											:key="GameAbilityId.stringify(ability.id, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES)"
 											:value="`${optionIndex}-${abilityIndex}`"
-											:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== ABILITY_TYPE.champion || ability.id.abilityKey === 'passive')"
+											:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== AbilityType.champion || ability.id.abilityKey === 'passive')"
 										>
 											{{ ability.name }}
 										</option>
@@ -1271,7 +1271,7 @@ defineExpose({
 									type="submit"
 									:disabled="!damageSectionOptions.length
 										|| !enableUnimplementedUi
-										&& !damageSectionOptions.some(option => option.type !== ABILITY_TYPE.champion || option.abilities.some(ability => (ability.id as IChampionAbilityId).abilityKey === 'passive'))"
+										&& !damageSectionOptions.some(option => option.type !== AbilityType.champion || option.abilities.some(ability => (ability.id as IChampionAbilityId).abilityKey === 'passive'))"
 								>
 									add
 								</button>
@@ -1505,15 +1505,15 @@ defineExpose({
 								>
 								<span v-html="section.image ? section.name : 'loading...'" />
 								<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
-									<article v-if="section.abilityId.type === ABILITY_TYPE.item" popover="manual" class="hover-tooltip champion-item">
+									<article v-if="section.abilityId.type === AbilityType.item" popover="manual" class="hover-tooltip champion-item">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 									</article>
 									<LolChampionAbilityHoverTooltip
-										v-else-if="section.abilityId.type === ABILITY_TYPE.champion"
+										v-else-if="section.abilityId.type === AbilityType.champion"
 										v-bind="section.hoverTooltipData as any"
 									/>
 									<LolEffectHoverTooltip
-										v-else-if="section.abilityId.type === ABILITY_TYPE.effect"
+										v-else-if="section.abilityId.type === AbilityType.effect"
 										v-bind="section.hoverTooltipData as any"
 									/>
 								</template>

@@ -3,7 +3,7 @@ import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { AbilityType } from '@lolcalc/shared';
 
 const props = defineProps<IExtraComponentProps<'champion'>>();
 
@@ -11,8 +11,8 @@ defineEmits<IExtraComponentEmits>();
 
 const maxUpgradedAllies = computed(() => CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(props.damageSource));
 
-const SlotIndexComponent = await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', 1, 6);
-const UpgradedAlliesComponent = await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'passiveUpgradedAllies', 'Allies with masterwork item', 0, maxUpgradedAllies);
+const SlotIndexComponent = await numberExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', 1, 6);
+const UpgradedAlliesComponent = await numberExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'passiveUpgradedAllies', 'Allies with masterwork item', 0, maxUpgradedAllies);
 
 const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalData.value._masterworkLevel;
 </script>

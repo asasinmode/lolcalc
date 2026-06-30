@@ -13,7 +13,7 @@ import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
-import { ABILITY_TYPE, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
@@ -262,7 +262,7 @@ const championExtra = computed<[Component, IGameAbilityId][]>((): [Component, IG
 		return component
 			? (Array.isArray(component) ? component : [component]).map(c =>
 					// TODO handle other abilities components, dont hardcode everything to passive
-					[markRaw(c), GameAbilityId.build(ABILITY_TYPE.champion, props.value.champion.value!.id, 'passive', props.value.abilityVariantsIndexes.value.passive)])
+					[markRaw(c), GameAbilityId.build(AbilityType.champion, props.value.champion.value!.id, 'passive', props.value.abilityVariantsIndexes.value.passive)])
 			: [];
 	}
 	return [];
@@ -847,7 +847,7 @@ const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 function showEffectTooltip(event: MouseEvent, effect: IComputedAppliedEffect) {
 	hoveredEffectId.value = effect.abilityId;
 	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
-	effect.specific.sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
+	effect.specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
 	effectHoverTooltipEl.value?.el?.showPopover();
 }
 
@@ -1470,7 +1470,7 @@ defineExpose({ el });
 					:key="`${itemId}-${extraIndex}`"
 					:id-prefix
 					:damage-source="value"
-					:ability-id="GameAbilityId.build(ABILITY_TYPE.item, itemId)"
+					:ability-id="GameAbilityId.build(AbilityType.item, itemId)"
 					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showItemHoverTooltip(mouseEvent, itemIndex, true)"
 				/>
 			</section>

@@ -6,7 +6,7 @@ import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEMS, resolveEffectDescription, useChampion } from '@lolcalc/data';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { AbilityType } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
@@ -34,7 +34,7 @@ function createSearchString(value?: string) {
 }
 
 const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.item)
+	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.item)
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
 		const item = ITEMS[sourceAbilityId.id]!;
@@ -52,7 +52,7 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
 
 const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.effect)
+	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.effect)
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
 
@@ -75,21 +75,21 @@ const isLoading = ref(false);
 const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 	const groups: IEffectOptionGroup[] = [
 		{
-			type: ABILITY_TYPE.item,
+			type: AbilityType.item,
 			label: 'items',
 			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
 				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
 		{
-			type: ABILITY_TYPE.champion,
+			type: AbilityType.champion,
 			label: 'champions',
 			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
 				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
 		{
-			type: ABILITY_TYPE.effect,
+			type: AbilityType.effect,
 			label: 'other',
 			options: otherEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
 				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
@@ -109,7 +109,7 @@ async function loadChampionEffects() {
 	isLoading.value = true;
 
 	championEffects.value = (await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES
-		.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.champion)
+		.filter(([, specific]) => specific.sourceAbility.type === AbilityType.champion)
 		.map(async ([effectObjectName, effectSpecific]): Promise<IEffectOptionGroup['options'][number]> => {
 			const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
 			const champion = await useChampion(sourceAbilityId.id);
@@ -138,9 +138,9 @@ function effectComponent(effectId: IEffectAbilityId): Component | undefined {
 		return;
 	}
 
-	return effectSpecific.sourceAbility.type === ABILITY_TYPE.item
+	return effectSpecific.sourceAbility.type === AbilityType.item
 		? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-		: effectSpecific.sourceAbility.type === ABILITY_TYPE.champion
+		: effectSpecific.sourceAbility.type === AbilityType.champion
 			? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
 			: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
 }
@@ -152,7 +152,7 @@ const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId) {
 	hoveredEffectId.value = effectId;
 	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
-	EFFECT_SPECIFICS[effectId.id].sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
+	EFFECT_SPECIFICS[effectId.id].sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
 	effectHoverTooltipEl.value?.el?.showPopover();
 }
 

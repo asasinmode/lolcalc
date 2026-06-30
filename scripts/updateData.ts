@@ -19,7 +19,7 @@ import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
+import { AbilityType, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import { xxh3 } from '@node-rs/xxhash';
 import fnv1a from '@sindresorhus/fnv1a';
@@ -1026,7 +1026,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 			}
 
 			const { id, type } = effectSpecific.sourceAbility;
-			const dataSource = type === ABILITY_TYPE.champion
+			const dataSource = type === AbilityType.champion
 				? await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`)
 				: itemMoreData;
 

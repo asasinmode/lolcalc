@@ -4,7 +4,7 @@ import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
+import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.9.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -231,7 +231,7 @@ test('Ezreal tear items', async (t) => {
 });
 
 // TODO can't implement Ryze's passive with rabadon and other items interaction, moving on for now
-test.only('Ryze tear/ad items', async (t) => {
+test.skip('Ryze tear/ad items', async (t) => {
 	const sourceCommon: IOverrides<'Ryze'> = {
 		runes: {
 			shards: {
@@ -243,7 +243,7 @@ test.only('Ryze tear/ad items', async (t) => {
 		roleQuest: 'mid',
 	};
 
-	const frozenHeartEffectAbilityId = GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.frozenHeartWintersCaress);
+	const frozenHeartEffectAbilityId = GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.frozenHeartWintersCaress);
 
 	await t.test('wCaressed', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ryze', {

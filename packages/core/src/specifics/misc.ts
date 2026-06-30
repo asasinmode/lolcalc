@@ -1,4 +1,4 @@
-import type { IDragonName } from '@lolcalc/data/types';
+import type { IMiscSpecificKey } from '@lolcalc/shared';
 import type { IProviderGroupInternalMiscData } from '../DamageSource';
 import { clamp } from '@lolcalc/shared/utils';
 
@@ -22,6 +22,6 @@ export const MISC_SPECIFICS = {
 
 export type IHypotheticalMiscSpecifics = Partial<Record<IMiscSpecificKey, IMiscSpecific>>;
 
-type IMiscSpecificKey = `${IDragonName}Stack` | `${IDragonName}Soul`;
+export type TMiscSpecifics = typeof MISC_SPECIFICS;
 
 export type IMiscSpecific = IProviderGroupInternalMiscData;

@@ -2,14 +2,14 @@ import type { IEffectObjectName } from '@lolcalc/shared';
 import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { AbilityType } from '@lolcalc/shared';
 
 export const EFFECT_COMPONENTS: Partial<Record<IEffectObjectName, ISpecificComponents>> = {
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
-	if (effectSpecific.sourceAbility.type === ABILITY_TYPE.effect) {
-		const abilityId = GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName);
+	if (effectSpecific.sourceAbility.type === AbilityType.effect) {
+		const abilityId = GameAbilityId.build(AbilityType.effect, effectObjectName);
 		const { label, minValue, maxValue, enumOptions } = effectSpecific;
 
 		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};

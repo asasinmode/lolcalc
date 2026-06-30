@@ -6,7 +6,7 @@ import type { DetectItemVariables } from '../types';
 import type { IReplacedGameVariable } from '../variables/game.ts';
 import type { IInternalItemDataOf, IVariableValueResult } from './index.ts';
 import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
-import { ABILITY_TYPE, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
@@ -25,7 +25,7 @@ const MeleeRangedEnumOptions = {
 /** specific effects' helpers, utils and calculations */
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWounds),
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),
 		label: 'Grievous Wounds',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
@@ -33,7 +33,7 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
-		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(ABILITY_TYPE.item, itemId)),
+		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(AbilityType.item, itemId)),
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
 				const item = damageSource.items.value.find(item => item && (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id));
@@ -46,7 +46,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: defineEffectSpecific<[gWounds: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWoundsPercent),
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWoundsPercent),
 		label: 'Grievous Wounds (percent)',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
@@ -60,7 +60,7 @@ export const EFFECT_SPECIFICS = {
 		maxValue: 100,
 	}),
 	[EFFECT_OBJECT_NAME.stun]: defineEffectSpecific<[isStunned: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.stun),
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.stun),
 		label: 'Stun',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -70,7 +70,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.slowFlat]: defineEffectSpecific<[slowedByFlat: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.slowFlat),
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.slowFlat),
 		label: 'Slow (flat)',
 		minValue: 0,
 		setupData(data) {
@@ -84,7 +84,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.slowPercent]: defineEffectSpecific<[slowedByPercent: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.slowPercent),
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.slowPercent),
 		label: 'Slow (percent)',
 		minValue: 0,
 		setupData(data) {
@@ -98,7 +98,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.shurelyaInspiringSpeech]: defineEffectSpecific<[isInspired: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.shurelya),
 		label: 'Inspiring speech',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -108,7 +108,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.ardentSanctify]: defineEffectSpecific<[isSanctified: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCenser),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.ardentCenser),
 		label: 'Sanctify',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -118,7 +118,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.flowingWaterRapids]: defineEffectSpecific<[isRapidsed: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.staffOfFlowingWater),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.staffOfFlowingWater),
 		label: 'Rapids',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -128,7 +128,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.bandlepipesFanfare]: defineEffectSpecific<[isFanfared: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bandlepipes),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bandlepipes),
 		label: 'Fanfare',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -138,7 +138,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: defineEffectSpecific<[hasSacrifice: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.knightsVow),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.knightsVow),
 		label: 'Sacrifice',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -148,7 +148,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.frozenHeartWintersCaress]: defineEffectSpecific<[wCaressed: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.frozenHeart),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart),
 		label: 'Winter\'s Caress',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -187,7 +187,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EFFECT_OBJECT_NAME.serpentsFangVenom]: {
 		...defineEffectSpecific<[shieldReavedBy: number]>({
-			sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.serpentsFang),
+			sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
 			label: 'Serpent\'s Venom',
 			setupData(data): [shieldReavedBy: number] {
 				return [clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.serpentsFangVenom].enumOptions.ranged!)];
@@ -222,7 +222,7 @@ export const EFFECT_SPECIFICS = {
 		maxValue: MeleeRangedEnumOptions.ranged,
 	},
 	[EFFECT_OBJECT_NAME.rylaisRimefrost]: defineEffectSpecific<[isRimefrosted: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.rylaisScepter),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rylaisScepter),
 		label: 'Rimefrost',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -237,7 +237,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.abyssalMaskUnmake]: defineEffectSpecific<[isUnmade: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.abyssalMask),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.abyssalMask),
 		label: 'Cursed',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -252,7 +252,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.horizonFocusHypershot]: defineEffectSpecific<[isHypershot: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.horizonFocus),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.horizonFocus),
 		label: 'Hypershot',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -268,7 +268,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EFFECT_OBJECT_NAME.bloodletterVileDecay]: {
 		...defineEffectSpecific<[vileDecayStacks: number]>({
-			sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodlettersCurse),
+			sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bloodlettersCurse),
 			label: 'Vile Decay stacks',
 			setupData(data): [vileDecayStacks: number] {
 				return [
@@ -290,7 +290,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	},
 	[EFFECT_OBJECT_NAME.blackCleaverCarve]: defineEffectSpecific<[carveStacks: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.blackCleaver),
 		maxValue: () => ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].MAX_STACKS,
 		label: 'Carve stacks',
 		setupData(data): [carveStacks: number] {
@@ -311,7 +311,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.botrkClawingShadows]: defineEffectSpecific<[isClawed: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.botrk),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.botrk),
 		label: 'Clawing Shadows',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -326,7 +326,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.zekesConvergenceFrostfireTempest]: defineEffectSpecific<[fTempested: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.zekesConvergence),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.zekesConvergence),
 		label: 'Frostfire Tempest',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -341,7 +341,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: defineEffectSpecific<[mBlessingShattered: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.celestialOpposition),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.celestialOpposition),
 		label: 'Mountain Blessing',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -356,7 +356,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.randuinsHumility]: defineEffectSpecific<[humiliated: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.randuinsOmen),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.randuinsOmen),
 		label: 'Humility',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -371,7 +371,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.malignanceHatefog]: defineEffectSpecific<[hatefogged: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.malignance),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.malignance),
 		label: 'Hatefog',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -386,7 +386,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.imperialMandateCommand]: defineEffectSpecific<[commanded: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.imperialMandate),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.imperialMandate),
 		label: 'Command',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -401,7 +401,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.stridebreakerBShockwaveSlow]: defineEffectSpecific<[bShockwaved: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.stridebreaker),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker),
 		label: 'Breaking Shockwave',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -417,7 +417,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EFFECT_OBJECT_NAME.icebornGauntletFrostField]: {
 		...defineEffectSpecific<[frostField: number]>({
-			sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.icebornGauntlet),
+			sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet),
 			label: 'Frost Field',
 			setupData(data): [frostField: number] {
 				return [clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.icebornGauntletFrostField].maxValue)];
@@ -438,7 +438,7 @@ export const EFFECT_SPECIFICS = {
 		maxValue: MeleeRangedEnumOptions.ranged,
 	},
 	[EFFECT_OBJECT_NAME.bloodsongSpellbladed]: defineEffectSpecific<[bloodsonged: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodsong),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bloodsong),
 		label: 'Bloodsong',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -453,7 +453,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.seryldaBitterCold]: defineEffectSpecific<[bitterCold: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.seryldasGrudge),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge),
 		label: 'Bitter Cold',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -468,7 +468,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.gunbladeLightningBolt]: defineEffectSpecific<[lightningBolt: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.hextechGunblade),
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hextechGunblade),
 		label: 'Lightning Bolt',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -483,7 +483,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: defineEffectSpecific<[isCursed: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Amumu', 'passive', 0),
 		label: 'Cursed touch',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -493,7 +493,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.jannaPTailwind]: defineEffectSpecific<[isTailwinded: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Janna', 'passive', 0),
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Janna', 'passive', 0),
 		label: 'Tailwind',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -503,7 +503,7 @@ export const EFFECT_SPECIFICS = {
 		},
 	}),
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: defineEffectSpecific<[isCalledByFreljord: number]>({
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Nunu', 'passive', 0),
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0),
 		label: 'Call of the Freljord',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -514,7 +514,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
 		...defineEffectSpecific<[livingForgeItemSlot: number]>({
-			sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0),
+			sourceAbility: GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0),
 			label: 'Masterwork item slot',
 			setupData(data): [livingForgeItemSlot: number] {
 				return [clamp(this.minValue!, data?.[0] ?? 1, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.ornnPLivingForge].maxValue!)];
@@ -532,7 +532,7 @@ export const EFFECT_SPECIFICS = {
 	},
 	[EFFECT_OBJECT_NAME.rellPBreakMold]: {
 		...defineEffectSpecific<[breakTheMoldStacks: number]>({
-			sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Rell', 'passive', 0),
+			sourceAbility: GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0),
 			label: 'Break the Mold stacks',
 			async setupData(data): Promise<[breakTheMoldStacks: number]> {
 				return [clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.rellPBreakMold].maxValue())];
@@ -685,7 +685,7 @@ function defineEffectSpecificVariables<K extends string>(
 export const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPECIFICS_OBJECT_ENTRIES
 	.filter(([, effectSpecific]) => effectSpecific.setupDataFromSourceItem)
 	.flatMap(([effectObjectName, effectSpecific]): [string, [IEffectAbilityId, IEffectSpecific]][] => {
-		const value: [IEffectAbilityId, IEffectSpecific] = [GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName), effectSpecific];
+		const value: [IEffectAbilityId, IEffectSpecific] = [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific];
 		return effectSpecific.appliedByItems
 			? effectSpecific.appliedByItems.map(itemAbilityId => [itemAbilityId.id, value])
 			: [[effectSpecific.sourceAbility.id, value]];

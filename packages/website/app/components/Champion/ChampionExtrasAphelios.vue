@@ -3,7 +3,7 @@ import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { AbilityType } from '@lolcalc/shared';
 
 const props = defineProps<IExtraComponentProps<'champion'>>();
 
@@ -28,7 +28,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(ABILITY_TYPE.champion, 'Aphelios', 'passive', 0))"
+			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(AbilityType.champion, 'Aphelios', 'passive', 0))"
 		>
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup

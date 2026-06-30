@@ -8,6 +8,7 @@ import type { CHAMPION_SPECIFICS } from './champion.ts';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import type { ITEM_SPECIFICS } from './item.ts';
+import type { TMiscSpecifics } from './misc.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
@@ -67,7 +68,9 @@ export type IGameAbilitySpecific<T extends IGameAbilityId> = T extends IChampion
 			: never
 		: T['id'] extends keyof TItemSpecifics
 			? TItemSpecifics[T['id']]
-			: never;
+			: T['id'] extends keyof TMiscSpecifics
+				? TMiscSpecifics[T['id']]
+				: never;
 
 export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>
 	= Specific extends { setupData: (...args: any) => any }

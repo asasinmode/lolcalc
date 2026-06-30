@@ -1,7 +1,8 @@
 import type { IChampionId } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IEffectObjectName, TAbilityType } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IEffectObjectName, IMiscSpecificKey, TAbilityType } from '@lolcalc/shared';
+import type { IHypotheticalMiscSpecifics } from './specifics/misc';
 import { CHAMPIONS, ITEMS } from '@lolcalc/data';
-import { ABILITY_TYPE, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
+import { AbilityType, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
 import { markRaw } from 'vue';
 
 export interface IChampionAbilityId<
@@ -9,24 +10,29 @@ export interface IChampionAbilityId<
 	AbilityKey extends IChampionAbilityKey = IChampionAbilityKey,
 	AbilityVariantIndex extends number = number,
 > {
-	type: typeof ABILITY_TYPE['champion'];
+	type: typeof AbilityType['champion'];
 	id: Id;
 	abilityKey: AbilityKey;
 	abilityVariantIndex: AbilityVariantIndex;
 }
 
 export interface IItemAbilityId<Id extends string = string> {
-	type: typeof ABILITY_TYPE['item'];
+	type: typeof AbilityType['item'];
 	/** item id */
 	id: Id;
 }
 
 export interface IEffectAbilityId<Id extends IEffectObjectName = IEffectObjectName> {
-	type: typeof ABILITY_TYPE['effect'];
+	type: typeof AbilityType['effect'];
 	id: Id;
 }
 
-export type IGameAbilityId = IChampionAbilityId | IItemAbilityId | IEffectAbilityId;
+export interface IMiscAbilityId<Id extends IMiscSpecificKey = IMiscSpecificKey> {
+	type: typeof AbilityType['misc'];
+	id: Id;
+}
+
+export type IGameAbilityId = IChampionAbilityId | IItemAbilityId | IEffectAbilityId | IMiscAbilityId;
 
 export class GameAbilityId {
 	static build<
@@ -45,13 +51,17 @@ export class GameAbilityId {
 	static build<Id extends IEffectObjectName>(
 		type: 'effect',
 		id: Id): IEffectAbilityId<Id>;
+	static build<Id extends IMiscSpecificKey>(
+		type: 'misc',
+		id: Id,
+	): IMiscAbilityId<Id>;
 	static build(
 		type: TAbilityType,
 		id: string,
 		abilityKey?: IChampionAbilityKey,
 		abilityVariantIndex?: number,
 	): IGameAbilityId {
-		if (type === ABILITY_TYPE.champion) {
+		if (type === AbilityType.champion) {
 			return markRaw({
 				type,
 				id: id as IChampionId,
@@ -60,8 +70,12 @@ export class GameAbilityId {
 			});
 		}
 
-		if (type === ABILITY_TYPE.effect) {
+		if (type === AbilityType.effect) {
 			return markRaw({ type, id: id as IEffectObjectName });
+		}
+
+		if (type === AbilityType.misc) {
+			return markRaw({ type, id: id as IMiscSpecificKey });
 		}
 
 		return markRaw({ type, id });
@@ -82,7 +96,7 @@ export class GameAbilityId {
 		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
 	): string {
 		const typeIndex = ALL_ABILITY_TYPES.indexOf(id.type);
-		if (id.type === ABILITY_TYPE.champion) {
+		if (id.type === AbilityType.champion) {
 			return [
 				typeIndex,
 				championIdToKey[id.id],
@@ -91,20 +105,21 @@ export class GameAbilityId {
 			].join('-');
 		}
 
-		if (id.type === ABILITY_TYPE.effect) {
+		if (id.type === AbilityType.effect) {
 			return [
 				typeIndex,
 				effectSpecificsObjectEntries.findIndex(entry => entry[0] === id.id),
 			].join('-');
 		}
 
-		return [typeIndex, id.id].join('-');
+		return `${typeIndex}-${id.id}`;
 	}
 
 	static parse(
 		value: string,
 		championKeyToId: Record<string, IChampionId>,
 		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
+		miscSpecifics: IHypotheticalMiscSpecifics,
 	): IGameAbilityId | undefined {
 		const [rawType, id, rawAbilityKeyIndex, rawAbilityVariantIndex] = value.split('-');
 		if (!id) {
@@ -113,7 +128,7 @@ export class GameAbilityId {
 
 		const type = rawType ? ALL_ABILITY_TYPES[Number.parseInt(rawType)] : undefined;
 
-		if (type === ABILITY_TYPE.champion) {
+		if (type === AbilityType.champion) {
 			const championId = championKeyToId[id];
 			if (!championId || !(championId in CHAMPIONS)) {
 				return;
@@ -134,7 +149,7 @@ export class GameAbilityId {
 			return GameAbilityId.build(type, championId, abilityKey, abilityVariantIndex);
 		}
 
-		if (type === ABILITY_TYPE.item) {
+		if (type === AbilityType.item) {
 			if (!(id in ITEMS)) {
 				return;
 			}
@@ -142,13 +157,21 @@ export class GameAbilityId {
 			return GameAbilityId.build(type, id);
 		}
 
-		if (type === ABILITY_TYPE.effect) {
+		if (type === AbilityType.effect) {
 			const specificEntry = effectSpecificsObjectEntries[Number.parseInt(id)];
 			if (!specificEntry) {
 				return;
 			}
 
 			return GameAbilityId.build(type, specificEntry[0]);
+		}
+
+		if (type === AbilityType.misc) {
+			if (!miscSpecifics[id as IMiscSpecificKey]) {
+				return;
+			}
+
+			return GameAbilityId.build(type, id as IMiscSpecificKey);
 		}
 
 		return undefined;
@@ -159,7 +182,7 @@ export class GameAbilityId {
 			return false;
 		}
 
-		if (id1.type === ABILITY_TYPE.champion) {
+		if (id1.type === AbilityType.champion) {
 			return id1.abilityKey === (id2 as IChampionAbilityId).abilityKey
 				&& id1.abilityVariantIndex === (id2 as IChampionAbilityId).abilityVariantIndex;
 		}

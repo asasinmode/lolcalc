@@ -15,7 +15,7 @@ import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts'
 
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { ABILITY_TYPE, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
+import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
@@ -721,7 +721,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						}
 						return undefined;
 					}).filter(v => v !== undefined) as number[];
-					rv.addEffect(GameAbilityId.build(ABILITY_TYPE.effect, effectSpecificEntry[0]), data as any);
+					rv.addEffect(GameAbilityId.build(AbilityType.effect, effectSpecificEntry[0]), data as any);
 				}
 			}
 		}
@@ -922,7 +922,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}),
 		itemSpecifics: computed((): UnwrapRef<IDamageSourceComputed['itemSpecifics']> => this.items.value.map((item) => {
 			if (item) {
-				const abilityId = GameAbilityId.build(ABILITY_TYPE.item, item.id);
+				const abilityId = GameAbilityId.build(AbilityType.item, item.id);
 				const specific = resolveAbilitySpecific<any>(abilityId) as IItemSpecific;
 				return {
 					specific,
@@ -939,7 +939,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
 				}
 			} else {
-				const effectAbilityId = GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.ornnPLivingForge);
+				const effectAbilityId = GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ornnPLivingForge);
 				const effect = this.getEffect(effectAbilityId);
 
 				if (effect) {
@@ -954,7 +954,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
 					this.champion.value!,
-					GameAbilityId.build(ABILITY_TYPE.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
+					GameAbilityId.build(AbilityType.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
 					this,
 				)) || []];
 			})) as UnwrapRef<IDamageSourceComputed['abilities']>;
@@ -1590,13 +1590,15 @@ function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSourc
 }
 
 export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
-	const specific = abilityId.type === ABILITY_TYPE.item
+	const specific = abilityId.type === AbilityType.item
 		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
-		: abilityId.type === ABILITY_TYPE.champion
+		: abilityId.type === AbilityType.champion
 			? (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
-			: abilityId.type === ABILITY_TYPE.effect
+			: abilityId.type === AbilityType.effect
 				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
-				: undefined;
+				: abilityId.type === AbilityType.misc
+					? (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[abilityId.id]
+					: undefined;
 
 	if (!specific && warnPrefix) {
 		console.warn(`[${warnPrefix}] failed to resolve specific for`, abilityId);

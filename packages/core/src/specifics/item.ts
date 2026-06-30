@@ -8,7 +8,7 @@ import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } fr
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
-import { ABILITY_TYPE, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
+import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
@@ -3047,7 +3047,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ShieldAmount: {
 					type: VariableType.shield,
-					additionalInfo: `while the calculated value is affected by [${simpleFormattingGameAbilityImage(ABILITY_TYPE.item, ITEM_NAME_TO_ID.serpentsFang)} Serpent's Fang's](https://wiki.leagueoflegends.com/en-us/Serpent%27s_Fang) Shield Reave, the actual shield in game will probably be bigger because of how the Lifeline triggers. See the [${simpleFormattingGameAbilityImage(ABILITY_TYPE.item, ITEM_NAME_TO_ID.immortalShieldbow)} Shieldbow's wiki notes](https://wiki.leagueoflegends.com/en-us/Immortal_Shieldbow#Notes)`,
+					additionalInfo: `while the calculated value is affected by [${simpleFormattingGameAbilityImage(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang)} Serpent's Fang's](https://wiki.leagueoflegends.com/en-us/Serpent%27s_Fang) Shield Reave, the actual shield in game will probably be bigger because of how the Lifeline triggers. See the [${simpleFormattingGameAbilityImage(AbilityType.item, ITEM_NAME_TO_ID.immortalShieldbow)} Shieldbow's wiki notes](https://wiki.leagueoflegends.com/en-us/Immortal_Shieldbow#Notes)`,
 				},
 			},
 			uninteresting: ['f3', 'HealthThreshold', 'ShieldDuration'],
