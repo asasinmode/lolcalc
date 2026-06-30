@@ -2405,9 +2405,13 @@ defineExpose({ el });
 				}
 
 				.dragon-thing.hover-tooltip {
-					--at-apply: 'w-fit max-w-screen fixed whitespace-nowrap';
+					--at-apply: 'w-fit max-w-[min(100vw,calc(154*var(--spacing)))] fixed whitespace-nowrap';
 					top: calc(anchor(bottom));
 					position-anchor: --scoreboard-item-dragons;
+
+					> .game-description {
+						--at-apply: 'text-wrap leading-normal';
+					}
 				}
 			}
 
