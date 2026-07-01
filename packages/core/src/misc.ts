@@ -1,11 +1,16 @@
 import type { TAbilityType } from '@lolcalc/shared';
+import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
-import { CHAMPION_IMAGES, PATCH_VERSION, useChampion } from '@lolcalc/data';
+import type { IHypotheticalMiscSpecifics } from './specifics/misc.ts';
+import { CHAMPION_IMAGES, imgUrl, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
+import { MISC_SPECIFICS } from './specifics/misc.ts';
 import { replaceGameIcons } from './variables/game.ts';
 
-export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src: string, size: number]> {
+export type IGameImageData = [src: string, size: number] | [ITexture, targetSize?: number];
+
+export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGameImageData> {
 	const imageAbilityId = abilityId.type === AbilityType.effect
 		? EFFECT_SPECIFICS[abilityId.id].sourceAbility
 		: abilityId;
@@ -17,16 +22,20 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src:
 
 	if (imageAbilityId.type === AbilityType.item) {
 		return [
-			imgUrl(`img/item/${imageAbilityId.id}.png`, PATCH_VERSION.vSemver, true),
+			imgUrl(`img/item/${imageAbilityId.id}.png`, true),
 			64,
 		];
 	} else if (imageAbilityId.type === AbilityType.effect) {
-		return CUSTOM_EFFECT_IMAGES[imageAbilityId.id]
-			? [
-					imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0], PATCH_VERSION.vMinor),
-					CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
-				]
-			: ['', 0];
+		if (!CUSTOM_EFFECT_IMAGES[imageAbilityId.id]) {
+			console.warn('[gameAbilityImage] no effect image found for', imageAbilityId);
+			return ['', 0];
+		}
+		return [
+			imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0]),
+			CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
+		];
+	} else if (imageAbilityId.type === AbilityType.misc) {
+		return (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[imageAbilityId.id]?.abilityImage ?? ['', 0];
 	}
 
 	const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
@@ -37,14 +46,6 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src:
 		abilityImage(champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.image, imageAbilityId.id),
 		abilityImageSize(imageAbilityId.id),
 	];
-}
-
-function imgUrl(url: string, version: string, isDDragon = false) {
-	return url.startsWith('http')
-		? url
-		: isDDragon
-			? `https://ddragon.leagueoflegends.com/cdn/${version}/${url}`
-			: `https://raw.communitydragon.org/${version}/${url}`;
 }
 
 /** used for creating a _game ability_ image string that will be parsed by `simpleDescriptionFormatting` */

@@ -120,7 +120,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 							);
 
 							return {
-								id: GameAbilityId.build(ABILITY_TYPE.champion, champion.id, abilityKey as IChampionAbilityKey, abilityVariantIndex),
+								id: GameAbilityId.build(AbilityType.champion, champion.id, abilityKey as IChampionAbilityKey, abilityVariantIndex),
 								name: championAbilitySectionName(champion.name, abilityKey as IChampionAbilityKey, nameReplaced),
 							};
 						}),
@@ -140,7 +140,7 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 	return itemIds.values()
 		.map((itemId): IDamageSectionOption['abilities'][number] => ({
 			name: ITEMS[itemId!]!.name,
-			id: GameAbilityId.build(ABILITY_TYPE.item, itemId!),
+			id: GameAbilityId.build(AbilityType.item, itemId!),
 		}))
 		.toArray()
 		.sort((a, b) => a.name.localeCompare(b.name));
@@ -159,7 +159,7 @@ const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>
 	return effectObjectNames.values()
 		.map((effectObjectName): IDamageSectionOption['abilities'][number] => ({
 			name: (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effectObjectName!]!.label,
-			id: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName!),
+			id: GameAbilityId.build(AbilityType.effect, effectObjectName!),
 		}))
 		.toArray()
 		.sort((a, b) => a.name.localeCompare(b.name));

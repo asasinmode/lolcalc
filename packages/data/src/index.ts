@@ -18,6 +18,14 @@ export const PATCH_VERSION = {
 	vMinor: championData.version.slice(0, championData.version.lastIndexOf('.')) as string,
 };
 
+export function imgUrl(url: string, isDDragon = false) {
+	return url.startsWith('http')
+		? url
+		: isDDragon
+			? `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/${url}`
+			: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/${url}`;
+}
+
 export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListedChampion> as IChampionData;
 
 type IChampionData = { [Id in IChampionId]: IListedChampion<Id> };

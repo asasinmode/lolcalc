@@ -118,6 +118,7 @@ export const RUNE_SPECIFICS = {
 			calculateHooks: {
 				onRuneShards: {
 					handler(_self, { runeShardStats }) {
+						// TODO add slow resist, also add it to swiftness boots - should be calculated same as tenacity
 						runeShardStats.tenacity = addTenacity(runeShardStats.tenacity, ((RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100));
 					},
 					priority: -1,

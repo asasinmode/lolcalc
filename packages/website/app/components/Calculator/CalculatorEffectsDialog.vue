@@ -43,7 +43,7 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
-			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
+			abilityId: GameAbilityId.build(AbilityType.effect, effectObjectName),
 			sourceAbilityId,
 			name: item.name,
 			searchString,
@@ -60,7 +60,7 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
-			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
+			abilityId: GameAbilityId.build(AbilityType.effect, effectObjectName),
 			sourceAbilityId,
 			name: effectSpecific.label,
 			searchString,
@@ -119,7 +119,7 @@ async function loadChampionEffects() {
 			effectSearchStrings.set(effectObjectName, searchString);
 
 			return {
-				abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
+				abilityId: GameAbilityId.build(AbilityType.effect, effectObjectName),
 				sourceAbilityId,
 				name: `${champion.name} ${sourceAbilityId.abilityKey === 'passive' ? 'P' : sourceAbilityId.abilityKey.toUpperCase()} - ${precomputedSourceAbilityDesc.name}`,
 				searchString,

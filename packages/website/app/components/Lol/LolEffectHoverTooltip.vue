@@ -12,7 +12,7 @@ import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ITEMS, resolveEffectDescription, useChampion } from '@lolcalc/data';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { AbilityType } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
 
 const props = defineProps<IEffectHoverTooltipProps>();
@@ -28,7 +28,7 @@ const effectSpecific = computed<IEffectSpecific | undefined>(() => props.ability
 const sourceAbilityId = computed(() => effectSpecific.value?.sourceAbility);
 
 watch(sourceAbilityId, async (abilityId) => {
-	if (abilityId?.type === ABILITY_TYPE.champion) {
+	if (abilityId?.type === AbilityType.champion) {
 		isLoading.value = true;
 		useChampion(abilityId.id).then((usedChampion) => {
 			if (sourceAbilityId.value?.id === usedChampion.id) {
@@ -49,13 +49,13 @@ watch(sourceAbilityId, async (abilityId) => {
 }, { immediate: true });
 
 const precomputedDescription = computed<IComputedAbilityDescription | IComputedItemDescription | undefined>(() => {
-	if (!sourceAbilityId.value || sourceAbilityId.value.type === ABILITY_TYPE.effect) {
+	if (!sourceAbilityId.value || sourceAbilityId.value.type === AbilityType.effect) {
 		return undefined;
 	}
 
 	const { type, id } = sourceAbilityId.value;
 
-	if (type === ABILITY_TYPE.champion && champion.value && champion.value.id === id) {
+	if (type === AbilityType.champion && champion.value && champion.value.id === id) {
 		return computeAbilityDescription(
 			champion.value,
 			sourceAbilityId.value,
@@ -105,11 +105,11 @@ defineExpose({ el });
 		</article>
 		<template v-if="precomputedDescription">
 			<LolChampionAbilityHoverTooltip
-				v-if="sourceAbilityId?.type === ABILITY_TYPE.champion"
+				v-if="sourceAbilityId?.type === AbilityType.champion"
 				v-show="globalKeyModifiers.shift"
 				:precomputed-description="precomputedDescription as IComputedAbilityDescription"
 			/>
-			<article v-else-if="sourceAbilityId?.type === ABILITY_TYPE.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
+			<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
 				<LolItemDescription
 					:precomputed-description="precomputedDescription as IComputedItemDescription"
 					source="Inventory"

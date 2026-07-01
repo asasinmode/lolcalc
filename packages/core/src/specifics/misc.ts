@@ -1,9 +1,12 @@
 import type { IMiscSpecificKey } from '@lolcalc/shared';
 import type { IProviderGroupInternalMiscData } from '../DamageSource';
-import { clamp } from '@lolcalc/shared/utils';
+import type { IGameImageData } from '../misc';
+import { imgUrl } from '@lolcalc/data';
+import { clamp } from '@lolcalc/shared/utils.ts';
 
 export const MISC_SPECIFICS = {
 	CloudStack: {
+		abilityImage: [imgUrl(''), 0],
 		internalDataProperties: ['isOOC'],
 		setupData(self) {
 			self.internalMiscData.value.isOOC = clamp(0, self.internalMiscData.value.isOOC ?? 0, 1);
@@ -11,6 +14,7 @@ export const MISC_SPECIFICS = {
 		},
 	},
 	CloudSoul: {
+		abilityImage: [imgUrl(''), 0],
 		internalDataProperties: ['isOOC', 'hasUlted'],
 		setupData(self) {
 			self.internalMiscData.value.isOOC = clamp(0, self.internalMiscData.value.isOOC ?? 0, 1);
@@ -24,4 +28,6 @@ export type IHypotheticalMiscSpecifics = Partial<Record<IMiscSpecificKey, IMiscS
 
 export type TMiscSpecifics = typeof MISC_SPECIFICS;
 
-export type IMiscSpecific = IProviderGroupInternalMiscData;
+export type IMiscSpecific = IProviderGroupInternalMiscData & {
+	abilityImage: IGameImageData;
+};

@@ -6,7 +6,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { AbilityType } from '@lolcalc/shared';
 import { VExtrasBoolean, VExtrasEnum, VExtrasNumber } from '#components';
 
 export async function numberExtra<T extends IGameAbilityId>(
@@ -41,10 +41,10 @@ export async function numberExtra<T extends IGameAbilityId>(
 			'max': toValue(localMax),
 			'step': toValue(localStep),
 			'usedNumberInput': useNumberInput(
-				abilityId.type === ABILITY_TYPE.effect
+				abilityId.type === AbilityType.effect
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
 					? () => [(appliedEffect ??= props.damageSource.addEffect(abilityId)).data, property as number]
-					: [props.damageSource[abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData'], property as string],
+					: [props.damageSource[abilityId.type === AbilityType.champion ? 'internalData' : 'internalItemData'], property as string],
 				localStep === undefined || Number.isInteger(toValue(localStep)),
 				localMax,
 			),
@@ -121,12 +121,12 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 	updateValue: (value: any) => void,
 	appliedEffect: IDamageSourceEffect | undefined,
 ] {
-	const isEffect = abilityId.type === ABILITY_TYPE.effect;
+	const isEffect = abilityId.type === AbilityType.effect;
 	let appliedEffect = isEffect
 		? damageSource.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id)
 		: undefined;
 
-	const dataProperty = abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData';
+	const dataProperty = abilityId.type === AbilityType.champion ? 'internalData' : 'internalItemData';
 
 	return [
 		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),

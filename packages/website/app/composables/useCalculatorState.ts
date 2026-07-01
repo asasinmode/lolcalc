@@ -6,7 +6,7 @@ import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { CHAMPION_KEY_TO_ID } from '@lolcalc/data';
-import { ABILITY_TYPE } from '@lolcalc/shared';
+import { AbilityType } from '@lolcalc/shared';
 
 const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';
@@ -147,9 +147,9 @@ export function useCalculatorState(
 		}
 
 		const keptSections = resultsTable.value?.resultSections.filter(section => section.abilityId.type === 'all'
-			|| (section.abilityId.type === ABILITY_TYPE.item
+			|| (section.abilityId.type === AbilityType.item
 				? savedItemIds.has(section.abilityId.id)
-				: section.abilityId.type === ABILITY_TYPE.champion
+				: section.abilityId.type === AbilityType.champion
 					?	savedChampionIds.has(section.abilityId.id)
 					: savedEffectObjectNames.has(section.abilityId.id))) ?? [];
 		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
