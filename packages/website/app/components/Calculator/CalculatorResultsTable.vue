@@ -771,19 +771,31 @@ const cleanableColumnsSections = computed<[
 
 	const sections = (resultSections.value
 		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
-		.filter(([, section]) =>
-			section.abilityId.type === 'item'
-				? !resultColumns.value.some(column =>
-						column.source?.items.value.some(item => item?.id === section.abilityId.id) || column.target?.items.value.some(item => item?.id === section.abilityId.id),
-					)
-				: section.abilityId.type === 'champion'
-					? !resultColumns.value.some(column =>
-							column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id)
-					: section.abilityId.type === 'effect' && !resultColumns.value.some(column =>
-						column.source?.appliedEffects.value.some(effect => effect.abilityId.id === section.abilityId.id)
-						|| column.source?.effectsAppliedToTarget.value.some(effectEntry => effectEntry[0].id === section.abilityId.id)
-						|| column._computedTarget?.appliedEffects.value.some(effect => effect.abilityId.id === section.abilityId.id),
-					),
+		.filter(([, section]) => {
+			if (section.abilityId.type === 'all') {
+				return false;
+			} else if (section.abilityId.type === AbilityType.item) {
+				return !resultColumns.value.some(column =>
+					column.source?.items.value.some(item => item?.id === section.abilityId.id) || column.target?.items.value.some(item => item?.id === section.abilityId.id),
+				);
+			} else if (section.abilityId.type === AbilityType.champion) {
+				return !resultColumns.value.some(column =>
+					column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id);
+			} else if (section.abilityId.type === AbilityType.effect) {
+				return !resultColumns.value.some(column =>
+					column.source?.appliedEffects.value.some(effect => effect.abilityId.id === section.abilityId.id)
+					|| column.source?.effectsAppliedToTarget.value.some(effectEntry => effectEntry[0].id === section.abilityId.id)
+					|| column._computedTarget?.appliedEffects.value.some(effect => effect.abilityId.id === section.abilityId.id),
+				);
+			}
+
+			return !resultColumns.value.some(column =>
+				(column.source?.dragonSoul.value && section.abilityId.id === `${column.source.dragonSoul.value}Soul`)
+				|| column.source?.dragonStacks.value.some(stack => section.abilityId.id === `${stack}Stack`)
+				|| (column._computedTarget?.dragonSoul.value && section.abilityId.id === `${column._computedTarget.dragonSoul.value}Soul`)
+				|| column._computedTarget?.dragonStacks.value.some(stack => section.abilityId.id === `${stack}Stack`),
+			);
+		},
 		);
 
 	return [columns, sections];
