@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { IGameImageData } from '@lolcalc/core/misc';
+
 withDefaults(defineProps<{
 	idPrefix: string;
-	imgSrc: string;
-	imgSize: string | number;
+	imgSrc: IGameImageData;
 	label: string;
 	usedNumberInput: ReturnType<typeof useNumberInput>;
 	min?: number;
@@ -23,9 +24,7 @@ const value = defineModel<number>({ required: true });
 <template>
 	<article class="v-extras-number">
 		<img
-			:src="imgSrc"
-			:width="imgSize"
-			:height="imgSize"
+			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>

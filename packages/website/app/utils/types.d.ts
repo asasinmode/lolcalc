@@ -1,5 +1,6 @@
 import type { DamageSource, IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IReplacedGameVariable, IVariableMeta } from '@lolcalc/core/variables/game';
 import type { IItem } from '@lolcalc/data/types';
 
@@ -12,8 +13,8 @@ export interface IDamageResultTableSection {
 	isCustomTotal?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
-	image?: string;
-	imageSize: number;
+	/** technically should always be present but it can be undefined while async stuff is resolving */
+	image?: IGameImageData;
 	/** expected to be undefined only when loading */
 	getCellValue?: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
 		/** formatted `numberValue` */
@@ -37,11 +38,7 @@ export interface IDamageResultTableSection {
 		isUnknown?: boolean;
 		isCustom?: IVariableMeta['isCustom'];
 		additionalInfo?: IVariableMeta['additionalInfo'];
-		image?: {
-			src: string;
-			width: number;
-			height: number;
-		};
+		image?: IGameImageData;
 	}[];
 }
 

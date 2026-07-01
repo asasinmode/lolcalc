@@ -16,8 +16,9 @@ import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
+import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
+import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, imgUrl, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils';
 
@@ -39,7 +40,7 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 const iconButtonsShowText = useIconButtonsShowText();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
-const { vSemver, vMinor } = PATCH_VERSION;
+const { vMinor } = PATCH_VERSION;
 
 const STATS_SECTION_ID = 'a-stats';
 const CUSTOM_TOTAL_SECTION_ID = 'a-cTtl';
@@ -244,7 +245,7 @@ const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 			...row,
 			sectionId: section.id,
 			rowIndex,
-			image: section.image ? { src: section.image, width: section.imageSize, height: section.imageSize } : undefined,
+			image: section.image,
 		};
 	}));
 
@@ -507,8 +508,8 @@ async function addResultsSection(
 		/* if empty, it's set when underlying ability is resolved but put it here to avoid recomputing if adding from options (it's empty when restoring) */
 		name: name!,
 		abilityId,
+		/* expected to be filled by async stuff below */
 		image: undefined,
-		imageSize: 64,
 		rows: [],
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
@@ -530,8 +531,7 @@ async function addResultsSection(
 		});
 
 		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
-		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`);
-		section.imageSize = abilityImageSize(champion.id);
+		section.image = [abilityImage(precomputedDescription.variant.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
 		section.rows = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = abilityVariableCellValue;
 		section.hoverTooltipData = {
@@ -546,10 +546,13 @@ async function addResultsSection(
 		})!;
 
 		section.name ??= item.name;
-		section.image = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
+		section.image = [imgUrl(`img/item/${item.image}`, true), 64];
 		section.rows = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
+	} else if (abilityId.type === AbilityType.misc) {
+		const specific = MISC_SPECIFICS[abilityId.id];
+		console.log('TODO handle misc specific', abilityId, specific)
 	} else {
 		const effectSpecific = EFFECT_SPECIFICS[abilityId.id]!;
 		if (!effectSpecific.variables) {
@@ -558,7 +561,7 @@ async function addResultsSection(
 		}
 
 		section.name ??= effectSpecific.label;
-		([section.image, section.imageSize] = await gameAbilityImage(abilityId));
+		section.image = await gameAbilityImage(abilityId);
 		section.rows = await getAbilitySectionRows({ variables: effectSpecific.variables.known, unknownVariables: [] });
 		section.getCellValue = effectVariableCellValue;
 		section.hoverTooltipData = { abilityId };
@@ -1498,9 +1501,7 @@ defineExpose({
 						>
 							<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event, section.abilityId.type)">
 								<img
-									:src="section.image"
-									:width="section.imageSize"
-									:height="section.imageSize"
+									v-bind="section.image && gameImageAttrs(section.image, 24)"
 									aria-hidden="true"
 								>
 								<span v-html="section.image ? section.name : 'loading...'" />
@@ -1586,9 +1587,7 @@ defineExpose({
 						>
 							<img
 								v-if="row.image"
-								:src="row.image.src"
-								:width="row.image.width"
-								:height="row.image.height"
+								v-bind="gameImageAttrs(row.image)"
 								aria-hidden="true"
 							>
 							<span v-if="row.isUnknown">unknown</span>
@@ -2257,6 +2256,10 @@ defineExpose({
 
 								img {
 									--at-apply: 'inline-block size-4';
+
+									&[data-sprite-image] {
+										--at-apply: '-translate-y-px';
+									}
 								}
 							}
 						}

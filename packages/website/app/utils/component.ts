@@ -18,7 +18,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 	step?: MaybeRef<number> | ((self: DamageSource) => MaybeRef<number>),
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
+		const imgSrc = await gameAbilityImage(abilityId);
 		let [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
 
 		let localMax = max;
@@ -35,7 +35,6 @@ export async function numberExtra<T extends IGameAbilityId>(
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
 			imgSrc,
-			imgSize,
 			label,
 			min,
 			'max': toValue(localMax),
@@ -64,14 +63,13 @@ export async function booleanExtra<T extends IGameAbilityId>(
 	labelAppendOnTarget = false,
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
+		const imgSrc = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
 		return () => h(VExtrasBoolean, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
 			imgSrc,
-			imgSize,
 			labelPrefixApply,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
 			onImgMouseenter(event) {
@@ -97,14 +95,13 @@ export async function enumExtra<T extends IGameAbilityId>(
 	options: Record<number, string>,
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
+		const imgSrc = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
 		return () => h(VExtrasEnum, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
 			imgSrc,
-			imgSize,
 			label,
 			options,
 			onImgMouseenter(event) {

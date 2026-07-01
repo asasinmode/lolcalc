@@ -93,6 +93,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] add option to remove stats/basic attack sections if more feedback
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
+  - [ ] custom value row, choose type input own value
   - [x] stats inventory value row
   - [x] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [ ] basic attack section normal/crit/average

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
@@ -19,7 +20,7 @@ const props = defineProps<IEffectHoverTooltipProps>();
 
 const globalKeyModifiers = useGlobalKeyModifiers();
 
-const abilityImage = shallowRef<Awaited<ReturnType<typeof gameAbilityImage>>>(['', 0]);
+const abilityImage = shallowRef<IGameImageData>(['', 0]);
 const champion = shallowRef<IChampion>();
 const isLoading = ref(false);
 
@@ -89,9 +90,7 @@ defineExpose({ el });
 		<article class="hover-tooltip effect">
 			<img
 				v-show="!isLoading"
-				:src="abilityImage[0]"
-				:width="abilityImage[1]"
-				:height="abilityImage[1]"
+				v-bind="gameImageAttrs(abilityImage, 56)"
 				aria-hidden="true"
 			>
 			<h5

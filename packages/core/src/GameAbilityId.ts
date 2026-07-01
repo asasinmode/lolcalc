@@ -167,11 +167,9 @@ export class GameAbilityId {
 		}
 
 		if (type === AbilityType.misc) {
-			if (!miscSpecifics[id as IMiscSpecificKey]) {
-				return;
+			if (miscSpecifics[id as IMiscSpecificKey]) {
+				return GameAbilityId.build(type, id as IMiscSpecificKey);
 			}
-
-			return GameAbilityId.build(type, id as IMiscSpecificKey);
 		}
 
 		return undefined;

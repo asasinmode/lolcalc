@@ -5,7 +5,7 @@ import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IItemCategory } from '@lolcalc/shared';
 import { isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { calculateItemDiscount, itemBuyability } from '@lolcalc/core/specifics/item';
-import { ICON_GOLD, ITEMS, PATCH_VERSION, UI } from '@lolcalc/data';
+import { ICON_GOLD, ITEMS, PATCH_VERSION, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { ITEM_SHOP_STAT_FILTERS } from '@lolcalc/data/meta';
 import { ALL_ITEM_CATEGORIES, ITEM_NAME_TO_ID, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 

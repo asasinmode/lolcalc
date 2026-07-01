@@ -10,6 +10,7 @@ import { AbilityType } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
+import { MISC_COMPONENTS } from '~/components/Misc';
 
 const damageSource = defineModel<DamageSource>();
 
@@ -142,7 +143,9 @@ function effectComponent(effectId: IEffectAbilityId): Component | undefined {
 		? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
 		: effectSpecific.sourceAbility.type === AbilityType.champion
 			? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-			: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
+			: effectSpecific.sourceAbility.type === AbilityType.misc
+				? MISC_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+				: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');

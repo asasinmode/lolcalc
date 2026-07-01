@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { IGameImageData } from '@lolcalc/core/misc';
+
 defineProps<{
 	idPrefix: string;
-	imgSrc: string;
-	imgSize: string | number;
+	imgSrc: IGameImageData;
 	label: string;
 	/**
 	 * values have to be numbers
@@ -30,9 +31,7 @@ function updateValue(event: Event) {
 <template>
 	<article class="v-extras-enum">
 		<img
-			:src="imgSrc"
-			:width="imgSize"
-			:height="imgSize"
+			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>

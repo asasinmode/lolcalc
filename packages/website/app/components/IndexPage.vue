@@ -1,11 +1,12 @@
 <script setup lang="ts">
 // TODO this should be a `page/index.vue` but (not sure if intended) url query isn't resolved to the navigated to one when nuxt is generated with query, maybe this is relevant? https://github.com/nuxt/nuxt/issues/34651
 import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IChampionStatName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
-import { ICON_GOLD, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 
 const { vMinor } = PATCH_VERSION;
@@ -24,21 +25,15 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		abilityId: { type: 'all', id: 'stats' },
 		name: 'stats',
 		isPermanent: true,
-		image: `https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`,
-		imageSize: 32,
+		image: [`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32],
 		rows: markRaw(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
 			const icon = STAT_ICON[statName as IChampionStatName];
-			const image = typeof icon === 'string'
-				? {
-						src: `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
-						width: 20,
-						height: 20,
-					}
-				:	{
-						src: icon[0],
-						width: icon[1],
-						height: icon[2] ?? icon[1],
-					};
+			const image: IGameImageData = typeof icon === 'string'
+				? [
+						`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
+						20,
+					]
+				:	icon;
 
 			return {
 				id: statName as string,
@@ -49,7 +44,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 			{
 				id: 'eqValue',
 				name: 'Inventory Value',
-				image: ICON_GOLD,
+				image: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height] as Extract<IGameImageData, any[]>,
 			},
 		])),
 		getCellValue(_section, rowId, source, _target) {
@@ -73,8 +68,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		abilityId: { type: 'all', id: 'basicAttack' },
 		name: 'basic attack',
 		isPermanent: true,
-		image: `https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/autoattack.png`,
-		imageSize: 32,
+		image: [imgUrl('game/assets/ux/deathrecap/autoattack.png'), 32],
 		rows: markRaw([
 			{
 				name: 'total',
@@ -114,8 +108,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		name: 'custom total',
 		isPermanent: true,
 		isCustomTotal: true,
-		image: `https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/unknowndamage.png`,
-		imageSize: 32,
+		image: [imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32],
 		rows: markRaw([
 			{
 				id: 'cTtl-total',

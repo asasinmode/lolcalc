@@ -4,6 +4,7 @@ import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, INon
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
+import type { IGameImageData } from './misc.ts';
 import type { IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
 import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
@@ -11,8 +12,8 @@ import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from '
 import type { IHypotheticalMiscSpecifics } from './specifics/misc.ts';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
-import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
 
+import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
@@ -1546,8 +1547,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 	const specific = EFFECT_SPECIFICS[effect.abilityId.id];
 	const rv: IComputedAppliedEffect = {
 		abilityId: effect.abilityId,
-		imgSrc: '',
-		imgSize: 0,
+		imgData: ['', 0],
 		imgText: computed((): string | number | undefined => specific.imgText?.(effect.data)),
 		isActive: computed((): number | boolean => specific.isActive(effect.data)),
 		specific,
@@ -1566,10 +1566,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		rv.resultVariables = computed(() => specific.variables!.calculate(self));
 	}
 
-	gameAbilityImage(specific.sourceAbility).then(([imgSrc, imgSize]) => {
-		rv.imgSrc = imgSrc;
-		rv.imgSize = imgSize;
-	});
+	gameAbilityImage(specific.sourceAbility).then(value => rv.imgData = value);
 
 	return rv;
 }
@@ -1597,7 +1594,7 @@ export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, w
 			: abilityId.type === AbilityType.effect
 				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
 				: abilityId.type === AbilityType.misc
-					? (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[abilityId.id]
+					? (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[abilityId.id] as IGameAbilitySpecific<T>
 					: undefined;
 
 	if (!specific && warnPrefix) {
@@ -1730,8 +1727,7 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 
 export interface IComputedAppliedEffect {
 	abilityId: IEffectAbilityId;
-	imgSrc: string;
-	imgSize: number;
+	imgData: IGameImageData;
 	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
 	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
 	specific: IEffectSpecific;

@@ -11,7 +11,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion';
 import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, UI } from '@lolcalc/data';
+import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
@@ -1227,10 +1227,8 @@ defineExpose({ el });
 						<span>{{ effect.specific.label }}</span>
 						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)">
 							<img
-								v-show="effect.imgSrc"
-								:src="effect.imgSrc"
-								:width="effect.imgSize"
-								:height="effect.imgSize"
+								v-show="effect.imgData"
+								v-bind="gameImageAttrs(effect.imgData)"
 								loading="lazy"
 							>
 							<span v-if="effect.specific.imgText" v-show="effect.imgText">

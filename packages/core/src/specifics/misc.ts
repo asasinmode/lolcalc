@@ -1,12 +1,12 @@
 import type { IMiscSpecificKey } from '@lolcalc/shared';
 import type { IProviderGroupInternalMiscData } from '../DamageSource';
 import type { IGameImageData } from '../misc';
-import { imgUrl } from '@lolcalc/data';
+import { UI } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
 
 export const MISC_SPECIFICS = {
 	CloudStack: {
-		abilityImage: [imgUrl(''), 0],
+		abilityImage: UI.dragons.Cloud.stack,
 		internalDataProperties: ['isOOC'],
 		setupData(self) {
 			self.internalMiscData.value.isOOC = clamp(0, self.internalMiscData.value.isOOC ?? 0, 1);
@@ -14,7 +14,7 @@ export const MISC_SPECIFICS = {
 		},
 	},
 	CloudSoul: {
-		abilityImage: [imgUrl(''), 0],
+		abilityImage: UI.dragons.Cloud.soulActive,
 		internalDataProperties: ['isOOC', 'hasUlted'],
 		setupData(self) {
 			self.internalMiscData.value.isOOC = clamp(0, self.internalMiscData.value.isOOC ?? 0, 1);

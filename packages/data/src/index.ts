@@ -1,5 +1,6 @@
 import type { IChampionStatName, IEffectObjectName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
+import type { ImgHTMLAttributes } from 'vue';
 import type { IItemShopStatFilter } from './meta';
 import type { IChampion, IChampionId, IDragonName, IItem, IItemStat, IListedChampion, IRunes, IRuneSlotName } from './types';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
@@ -10,6 +11,7 @@ import itemData from '../files/item.json' with { type: 'json' };
 import miscData from '../files/misc.json' with { type: 'json' };
 import runeData from '../files/rune.json' with { type: 'json' };
 import textData from '../files/text.json' with { type: 'json' };
+
 import uiData from '../files/ui.json' with { type: 'json' };
 
 export const PATCH_VERSION = {
@@ -17,14 +19,6 @@ export const PATCH_VERSION = {
 	/** semver up without patch */
 	vMinor: championData.version.slice(0, championData.version.lastIndexOf('.')) as string,
 };
-
-export function imgUrl(url: string, isDDragon = false) {
-	return url.startsWith('http')
-		? url
-		: isDDragon
-			? `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/${url}`
-			: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/${url}`;
-}
 
 export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListedChampion> as IChampionData;
 
@@ -321,3 +315,40 @@ export const STAT_ICON: Record<
 };
 
 export const ICON_ON_HIT_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+
+export function imgUrl(url: string, isDDragon = false) {
+	return url.startsWith('http')
+		? url
+		: isDDragon
+			? `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/${url}`
+			: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/${url}`;
+}
+
+export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: number): ImgHTMLAttributes & {
+	['data-sprite-image']: string;
+} {
+	const width = endX! - startX!;
+	const height = endY! - startY!;
+	const src = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/game/${spriteSheet}`;
+
+	const largerDim = Math.max(width, height);
+	const targetDim = targetSize || largerDim;
+	const scale = targetDim / largerDim;
+
+	return {
+		src,
+		'loading': 'lazy',
+		'aria-hidden': true,
+		'data-sprite-image': '',
+		'style': {
+			'background-image': `url(${src})`,
+			'background-size': `calc(${resWidth}px * var(--txt-scale)) calc(${resHeight}px * var(--txt-scale))`,
+			'object-position': `calc(${width}px * var(--txt-scale)) calc(${height}px * var(--txt-scale))`,
+			'aspect-ratio': `${width} / ${height}`,
+			'width': `${width * scale}px`,
+			'--txt-scale': `${scale}`,
+			'--txt-uv-start-x': `-${startX}px`,
+			'--txt-uv-start-y': `-${startY}px`,
+		},
+	};
+}

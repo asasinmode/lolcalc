@@ -2,13 +2,14 @@ import type { TAbilityType } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
 import type { IHypotheticalMiscSpecifics } from './specifics/misc.ts';
+import { textureBgImageAttrs } from '@lolcalc/data';
 import { CHAMPION_IMAGES, imgUrl, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
 import { MISC_SPECIFICS } from './specifics/misc.ts';
 import { replaceGameIcons } from './variables/game.ts';
 
-export type IGameImageData = [src: string, size: number] | [ITexture, targetSize?: number];
+export type IGameImageData = [src: string, width: number, height?: number] | ITexture;
 
 export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGameImageData> {
 	const imageAbilityId = abilityId.type === AbilityType.effect
@@ -62,11 +63,13 @@ export async function simpleDescriptionFormatting(text: string) {
 	for (let i = 0; i < parts.length; i++) {
 		const match = parts[i]!.match(/%a:([^-%]+)-([^%]+)%/);
 		if (match) {
-			const [src, size] = await gameAbilityImage({
+			const abilityImage = await gameAbilityImage({
 				type: match[1],
 				id: match[2],
 			} as IGameAbilityId);
-			parts[i] = `<img src="${src}" width="${size}" height="${size}">`;
+			parts[i] = Array.isArray(abilityImage)
+				? `<img src="${abilityImage[0]}" width="${abilityImage[1]}" height="${abilityImage[2] ?? abilityImage[1]}">`
+				: `<img ${Object.entries(textureBgImageAttrs(abilityImage, 16)).map(([attr, value]) => `${attr}="${typeof value === 'string' ? value : Object.entries(value).map(([vAttr, vValue]) => `${vAttr}: ${vValue}`).join('; ')}"`).join(' ')}>`;
 		}
 	}
 	return parts.join('');

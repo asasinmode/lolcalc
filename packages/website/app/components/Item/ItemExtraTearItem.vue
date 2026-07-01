@@ -4,7 +4,7 @@ import type { IItemSpecific } from '@lolcalc/core/specifics/item';
 import type { TItems } from '@lolcalc/data';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { resolveAbilitySpecific } from '@lolcalc/core/DamageSource';
-import { ITEMS, PATCH_VERSION } from '@lolcalc/data';
+import { imgUrl, ITEMS } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 
 import { VExtrasNumber } from '#components';
@@ -12,8 +12,6 @@ import { VExtrasNumber } from '#components';
 const props = defineProps<IExtraComponentProps<'item'>>();
 
 defineEmits<IExtraComponentEmits>();
-
-const { vSemver } = PATCH_VERSION;
 
 type IData = IInternalItemDataOf<'tear'>;
 
@@ -54,9 +52,8 @@ const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRA
 <template>
 	<VExtrasNumber
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
-		:img-src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${abilityId.id}.png`"
+		:img-src="[imgUrl(`img/item/${abilityId.id}.png`, true), 64]"
 		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.imgText?.(damageSource, abilityId)"
-		img-size="64"
 		label="Manaflow stacks"
 		:used-number-input="useNumberInput([damageSource.internalItemData as Ref<IData>, 'manaflow'])"
 		:max="360"

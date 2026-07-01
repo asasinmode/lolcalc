@@ -1,10 +1,11 @@
-import type { IEffectObjectName } from '@lolcalc/shared';
+import type { IEffectObjectName, IMiscSpecificKey } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn } from '~/utils/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
 import { CHAMPION_KEY_TO_ID } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 
@@ -95,6 +96,7 @@ export function useCalculatorState(
 		const savedChampionIds = new Set<string>();
 		const savedItemIds = new Set<string>();
 		const savedEffectObjectNames = new Set<IEffectObjectName>();
+		const savedMiscIds = new Set<IMiscSpecificKey>();
 
 		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
 			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
@@ -151,7 +153,9 @@ export function useCalculatorState(
 				? savedItemIds.has(section.abilityId.id)
 				: section.abilityId.type === AbilityType.champion
 					?	savedChampionIds.has(section.abilityId.id)
-					: savedEffectObjectNames.has(section.abilityId.id))) ?? [];
+					: section.abilityId.type === AbilityType.effect
+						? savedEffectObjectNames.has(section.abilityId.id)
+						: savedMiscIds.has(section.abilityId.id))) ?? [];
 		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
 		const savedSectionIds: string[] = [];
 		const isSectionsChanged = keptSections?.[0] && (keptSections.length > 3
@@ -311,7 +315,7 @@ export function useCalculatorState(
 				continue;
 			}
 
-			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES);
+			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS);
 			if (abilityId) {
 				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded, currentSectionIndex);
 				currentSectionIndex += 1;
