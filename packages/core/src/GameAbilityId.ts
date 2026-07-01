@@ -1,6 +1,5 @@
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IEffectObjectName, IMiscSpecificKey, TAbilityType } from '@lolcalc/shared';
-import type { IHypotheticalMiscSpecifics } from './specifics/misc';
 import { CHAMPIONS, ITEMS } from '@lolcalc/data';
 import { AbilityType, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
 import { markRaw } from 'vue';

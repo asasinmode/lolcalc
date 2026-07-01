@@ -96,7 +96,7 @@ export function useCalculatorState(
 		const savedChampionIds = new Set<string>();
 		const savedItemIds = new Set<string>();
 		const savedEffectObjectNames = new Set<IEffectObjectName>();
-		const savedMiscIds = new Set<IMiscSpecificKey>();
+		const savedMiscSpecificKeys = new Set<IMiscSpecificKey>();
 
 		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
 			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
@@ -114,10 +114,9 @@ export function useCalculatorState(
 					for (const effectEntry of column.source.effectsAppliedToTarget.value) {
 						savedEffectObjectNames.add(effectEntry[0].id);
 					}
-					for (const dragon of column.source.dragonStacks.value) {
-						dragon && savedMiscIds.add(`${dragon}Stack`);
+					for (const key of column.source.computed.usedMiscSpecificKeys.value) {
+						savedMiscSpecificKeys.add(key);
 					}
-					column.source.dragonSoul.value && savedMiscIds.add(`${column.source.dragonSoul.value}Soul`);
 				}
 				if (column.target) {
 					for (const item of column.target.items.value) {
@@ -126,10 +125,9 @@ export function useCalculatorState(
 					for (const effect of column.target.appliedEffects.value) {
 						savedEffectObjectNames.add(effect.abilityId.id);
 					}
-					for (const dragon of column.target.dragonStacks.value) {
-						dragon && savedMiscIds.add(`${dragon}Stack`);
+					for (const key of column.target.computed.usedMiscSpecificKeys.value) {
+						savedMiscSpecificKeys.add(key);
 					}
-					column.target.dragonSoul.value && savedMiscIds.add(`${column.target.dragonSoul.value}Soul`);
 				}
 			}
 			return [columnSourceIndex, columnTargetIndex];
@@ -163,7 +161,7 @@ export function useCalculatorState(
 					?	savedChampionIds.has(section.abilityId.id)
 					: section.abilityId.type === AbilityType.effect
 						? savedEffectObjectNames.has(section.abilityId.id)
-						: savedMiscIds.has(section.abilityId.id))) ?? [];
+						: savedMiscSpecificKeys.has(section.abilityId.id))) ?? [];
 		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
 		const savedSectionIds: string[] = [];
 		const isSectionsChanged = keptSections?.[0] && (keptSections.length > 3

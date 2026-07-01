@@ -1,4 +1,4 @@
-import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
+import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IGameAbilityData } from '@lolcalc/core/specifics';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
@@ -34,7 +34,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 
 		return () => h(VExtrasNumber, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
+			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
 			min,
@@ -44,7 +44,14 @@ export async function numberExtra<T extends IGameAbilityId>(
 				abilityId.type === AbilityType.effect
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
 					? () => [(appliedEffect ??= props.damageSource.addEffect(abilityId)).data, property as number]
-					: [props.damageSource[abilityId.type === AbilityType.champion ? 'internalData' : 'internalItemData'], property as string],
+					: [
+							props.damageSource[abilityId.type === AbilityType.champion
+								? 'internalData'
+								: abilityId.type === AbilityType.misc
+									? 'internalMiscData'
+									: 'internalItemData'],
+							property as string,
+						],
 				localStep === undefined || Number.isInteger(toValue(localStep)),
 				localMax,
 			),
@@ -69,7 +76,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 
 		return () => h(VExtrasBoolean, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
+			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			labelPrefixApply,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
@@ -101,7 +108,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 
 		return () => h(VExtrasEnum, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
+			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
 			options,
@@ -124,7 +131,11 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 		? damageSource.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id)
 		: undefined;
 
-	const dataProperty = abilityId.type === AbilityType.champion ? 'internalData' : 'internalItemData';
+	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion
+		? 'internalData'
+		: abilityId.type === AbilityType.misc
+			? 'internalMiscData'
+			: 'internalItemData';
 
 	return [
 		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS_OBJECT_ENTRIES),

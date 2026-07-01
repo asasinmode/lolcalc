@@ -2,8 +2,8 @@ import type { TAbilityType } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
 import type { IHypotheticalMiscSpecifics } from './specifics/misc.ts';
-import { textureBgImageAttrs } from '@lolcalc/data';
-import { CHAMPION_IMAGES, imgUrl, useChampion } from '@lolcalc/data';
+import { CHAMPION_IMAGES, imgUrl, textureBgImageAttrs, useChampion } from '@lolcalc/data';
+
 import { AbilityType } from '@lolcalc/shared';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
 import { MISC_SPECIFICS } from './specifics/misc.ts';

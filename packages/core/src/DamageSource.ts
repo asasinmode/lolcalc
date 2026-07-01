@@ -1,6 +1,6 @@
 import type { ITextData } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IMiscSpecificKey, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -960,6 +960,24 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				)) || []];
 			})) as UnwrapRef<IDamageSourceComputed['abilities']>;
 		}),
+		usedMiscSpecificKeys: computed((): IMiscSpecificKey[] => {
+			const rv: IMiscSpecificKey[] = [];
+
+			if (this.dragonSoul.value) {
+				rv.push(`${this.dragonSoul.value}Soul`);
+			}
+
+			for (const stack of this.dragonStacks.value) {
+				if (stack) {
+					const key: IMiscSpecificKey = `${stack}Stack`;
+					if (!rv.includes(key)) {
+						rv.push(key);
+					}
+				}
+			}
+
+			return rv;
+		}),
 		effects: ref([]),
 		variables: computed((): UnwrapRef<IDamageSourceComputed['variables']> => {
 			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
@@ -1746,6 +1764,7 @@ interface IDamageSourceComputed {
 	} | undefined)[]>;
 	masterworkItemSlotIndex: ComputedRef<number>;
 	abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
+	usedMiscSpecificKeys: ComputedRef<IMiscSpecificKey[]>;
 	effects: ShallowRef<IComputedAppliedEffect[]>;
 	variables: ComputedRef<{
 		items: Record<string, IDynamicVariables | undefined>;

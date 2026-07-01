@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId, IMiscAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
@@ -790,10 +790,8 @@ const cleanableColumnsSections = computed<[
 			}
 
 			return !resultColumns.value.some(column =>
-				(column.source?.dragonSoul.value && section.abilityId.id === `${column.source.dragonSoul.value}Soul`)
-				|| column.source?.dragonStacks.value.some(stack => section.abilityId.id === `${stack}Stack`)
-				|| (column._computedTarget?.dragonSoul.value && section.abilityId.id === `${column._computedTarget.dragonSoul.value}Soul`)
-				|| column._computedTarget?.dragonStacks.value.some(stack => section.abilityId.id === `${stack}Stack`),
+				column.source?.computed.usedMiscSpecificKeys.value.includes((section.abilityId as IMiscAbilityId).id)
+				|| column._computedTarget?.computed.usedMiscSpecificKeys.value.includes((section.abilityId as IMiscAbilityId).id),
 			);
 		},
 		);
