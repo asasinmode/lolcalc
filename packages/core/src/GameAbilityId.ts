@@ -94,6 +94,7 @@ export class GameAbilityId {
 		id: IGameAbilityId,
 		championIdToKey: Record<IChampionId, string>,
 		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
+		miscSpecificsObjectEntries: [miscSpecificKey: IMiscSpecificKey, any][],
 	): string {
 		const typeIndex = ALL_ABILITY_TYPES.indexOf(id.type);
 		if (id.type === AbilityType.champion) {
@@ -112,6 +113,13 @@ export class GameAbilityId {
 			].join('-');
 		}
 
+		if (id.type === AbilityType.misc) {
+			return [
+				typeIndex,
+				miscSpecificsObjectEntries.findIndex(entry => entry[0] === id.id),
+			].join('-');
+		}
+
 		return `${typeIndex}-${id.id}`;
 	}
 
@@ -119,7 +127,7 @@ export class GameAbilityId {
 		value: string,
 		championKeyToId: Record<string, IChampionId>,
 		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
-		miscSpecifics: IHypotheticalMiscSpecifics,
+		miscSpecificsObjectEntries: [miscSpecificKey: IMiscSpecificKey, any][],
 	): IGameAbilityId | undefined {
 		const [rawType, id, rawAbilityKeyIndex, rawAbilityVariantIndex] = value.split('-');
 		if (!id) {
@@ -167,9 +175,12 @@ export class GameAbilityId {
 		}
 
 		if (type === AbilityType.misc) {
-			if (miscSpecifics[id as IMiscSpecificKey]) {
-				return GameAbilityId.build(type, id as IMiscSpecificKey);
+			const specificEntry = miscSpecificsObjectEntries[Number.parseInt(id)];
+			if (!specificEntry) {
+				return;
 			}
+
+			return GameAbilityId.build(type, specificEntry[0]);
 		}
 
 		return undefined;

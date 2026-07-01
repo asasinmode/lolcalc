@@ -22,7 +22,10 @@ const MeleeRangedEnumOptions = {
 	ranged: 2,
 };
 
-/** specific effects' helpers, utils and calculations */
+/**
+ * specific effects' helpers, utils and calculations
+ * order of the keys matters for stringifying game ability id, if it changes it could warrant updating stringified state version
+ */
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),

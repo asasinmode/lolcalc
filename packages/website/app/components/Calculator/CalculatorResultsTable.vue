@@ -16,7 +16,7 @@ import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
+import { MISC_SPECIFICS, MISC_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/misc';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, imgUrl, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
@@ -498,7 +498,7 @@ async function addResultsSection(
 	expand = true,
 	spliceAt = 0,
 ) {
-	const id = GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES);
+	const id = GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS_OBJECT_ENTRIES);
 	if (resultSections.value.some(section => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) {
 		return;
 	}
@@ -552,7 +552,7 @@ async function addResultsSection(
 		section.hoverTooltipData = { precomputedDescription };
 	} else if (abilityId.type === AbilityType.misc) {
 		const specific = MISC_SPECIFICS[abilityId.id];
-		console.log('TODO handle misc specific', abilityId, specific)
+		console.log('TODO handle misc specific', abilityId, specific);
 	} else {
 		const effectSpecific = EFFECT_SPECIFICS[abilityId.id]!;
 		if (!effectSpecific.variables) {
@@ -1261,7 +1261,7 @@ defineExpose({
 									<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
 										<option
 											v-for="(ability, abilityIndex) in option.abilities"
-											:key="GameAbilityId.stringify(ability.id, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES)"
+											:key="GameAbilityId.stringify(ability.id, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS_OBJECT_ENTRIES)"
 											:value="`${optionIndex}-${abilityIndex}`"
 											:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== AbilityType.champion || ability.id.abilityKey === 'passive')"
 										>

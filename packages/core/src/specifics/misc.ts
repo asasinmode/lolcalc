@@ -4,6 +4,10 @@ import type { IGameImageData } from '../misc';
 import { UI } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
 
+/**
+ * various misc ability specifics
+ * order of the keys matters for stringifying game ability id, if it changes it could warrant updating stringified state version
+ */
 export const MISC_SPECIFICS = {
 	CloudStack: {
 		abilityImage: UI.dragons.Cloud.stack,
@@ -23,6 +27,8 @@ export const MISC_SPECIFICS = {
 		},
 	},
 } satisfies IHypotheticalMiscSpecifics;
+
+export const MISC_SPECIFICS_OBJECT_ENTRIES = Object.entries(MISC_SPECIFICS) as [IMiscSpecificKey, IMiscSpecific][];
 
 export type IHypotheticalMiscSpecifics = Partial<Record<IMiscSpecificKey, IMiscSpecific>>;
 

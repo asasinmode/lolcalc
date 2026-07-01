@@ -5,7 +5,7 @@ import type { IDamageResultTableColumn } from '~/utils/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
+import { MISC_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/misc';
 import { CHAMPION_KEY_TO_ID } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 
@@ -114,6 +114,10 @@ export function useCalculatorState(
 					for (const effectEntry of column.source.effectsAppliedToTarget.value) {
 						savedEffectObjectNames.add(effectEntry[0].id);
 					}
+					for (const dragon of column.source.dragonStacks.value) {
+						dragon && savedMiscIds.add(`${dragon}Stack`);
+					}
+					column.source.dragonSoul.value && savedMiscIds.add(`${column.source.dragonSoul.value}Soul`);
 				}
 				if (column.target) {
 					for (const item of column.target.items.value) {
@@ -122,6 +126,10 @@ export function useCalculatorState(
 					for (const effect of column.target.appliedEffects.value) {
 						savedEffectObjectNames.add(effect.abilityId.id);
 					}
+					for (const dragon of column.target.dragonStacks.value) {
+						dragon && savedMiscIds.add(`${dragon}Stack`);
+					}
+					column.target.dragonSoul.value && savedMiscIds.add(`${column.target.dragonSoul.value}Soul`);
 				}
 			}
 			return [columnSourceIndex, columnTargetIndex];
@@ -315,7 +323,7 @@ export function useCalculatorState(
 				continue;
 			}
 
-			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS);
+			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS_OBJECT_ENTRIES);
 			if (abilityId) {
 				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded, currentSectionIndex);
 				currentSectionIndex += 1;
