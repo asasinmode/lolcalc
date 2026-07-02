@@ -525,15 +525,5 @@ defineExpose({ header });
 		justify-self: anchor-center;
 		position-try: flip-block;
 	}
-
-	.hover-tooltip.dragon {
-		--at-apply: 'w-fit max-w-[min(100vw,calc(154*var(--spacing)))]';
-		justify-self: anchor-center;
-		position-try: flip-block;
-
-		> .game-description {
-			--at-apply: 'leading-normal';
-		}
-	}
 }
 </style>
