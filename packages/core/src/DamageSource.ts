@@ -1595,8 +1595,8 @@ export function computeDragonAbilityDescription(
 	damageSource?: DamageSource,
 	checkIfValid = false,
 ): IComputedDragonAbilityDescription {
-	const ability = MISC.dragons[dragon].soul;
-	const string = TEXT.dragons[dragon].soul;
+	const ability = MISC.dragons[dragon][type];
+	const string = TEXT.dragons[dragon][type];
 	const isStack = type === 'stack';
 
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);

@@ -2,7 +2,7 @@
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IChampionId, IDragonName, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStatName, IMiscSpecificKey, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { IExtraComponentEmits } from '~/utils/types';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
@@ -11,11 +11,12 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion';
 import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
+import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
+import { MISC_COMPONENTS } from '../Misc';
 
 type IShowTooltipEventArgs = IExtraComponentEmits['imgMouseenter'];
 
@@ -268,15 +269,25 @@ const championExtra = computed<[Component, IGameAbilityId][]>((): [Component, IG
 	return [];
 });
 
-type IItemComponent = [is: Component, itemId: string, itemIndex: number];
-const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.flatMap((item, index) => {
+type IMiscComponent = [Component, IMiscSpecificKey, abilityComponentIndex: number];
+const miscExtras = computed<IMiscComponent[]>((): IMiscComponent[] => {
+	return props.value.computed.usedMiscSpecificKeys.value.flatMap((miscSpecificKey): IMiscComponent[] => {
+		const component = MISC_COMPONENTS[miscSpecificKey]?.extras;
+		return component
+			? (Array.isArray(component) ? component.map((c, i) => [c, miscSpecificKey, i]) : [[component, miscSpecificKey, 0]])
+			: [];
+	});
+});
+
+type IItemComponent = [is: Component, itemId: string, itemIndex: number, itemComponentIndex: number];
+const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.flatMap((item, index): IItemComponent[] => {
 	const component = item && ITEM_COMPONENTS[item.id]?.extras;
 	if (component) {
 		const components = Array.isArray(component) ? component : [component];
-		return components.map(c => [c, item.id, index]);
+		return components.map((c, i) => [c, item.id, index, i]);
 	}
 	return [];
-}) as [is: Component, itemId: string, itemIndex: number][]);
+}));
 
 const hoveredRune = shallowRef<IChampionRune>();
 const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
@@ -783,57 +794,27 @@ const dragonOptions = ALL_DRAGON_NAMES.map(name => [name, name.toLowerCase()]) a
 
 let dragonTooltipAnchor: HTMLElement | undefined;
 const hoveredDragonThing = shallowRef<[IDragonName, 'stack' | 'soul']>();
-const dragonHoverTooltipEl = useTemplateRef('dragonTooltip');
+const dragonHoverTooltipEl = useTemplateRef('dragonHoverTooltip');
 
-function showDragonTooltip(event: MouseEvent, dragonThing: [IDragonName, 'stack' | 'soul']) {
+function showDragonTooltip(event: MouseEvent, dragonThing: [IDragonName, 'stack' | 'soul'], fromExtras = false) {
 	const { target } = event as unknown as { target: HTMLElement };
-	dragonHoverTooltipEl.value?.showPopover();
+	dragonHoverTooltipEl.value?.el?.showPopover();
 	dragonTooltipAnchor = target;
 	dragonTooltipAnchor?.addEventListener('mouseleave', hideDragonTooltip, { passive: true, once: true });
 	hoveredDragonThing.value = dragonThing;
+
+	if (fromExtras) {
+		el.value!.setAttribute('data-dragon-tooltip-extras', '');
+	} else {
+		el.value!.removeAttribute('data-dragon-tooltip-extras');
+	}
 }
 
 function hideDragonTooltip() {
-	dragonHoverTooltipEl.value?.hidePopover();
+	dragonHoverTooltipEl.value?.el?.hidePopover();
 	dragonTooltipAnchor?.removeEventListener('mouseleave', hideDragonTooltip);
 	dragonTooltipAnchor = undefined;
 }
-
-const hoveredDragonThingText = computed(() => {
-	if (!hoveredDragonThing.value) {
-		return;
-	}
-
-	const [dragonName, abilityName] = hoveredDragonThing.value;
-	const ability = MISC.dragons[dragonName][abilityName];
-	const string = TEXT.dragons[dragonName][abilityName];
-	const isStack = abilityName === 'stack';
-
-	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
-
-	const { replaced, unknownVariables } = replaceGameVariables(
-		stringtableReplaced,
-		'championAbility',
-		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragonName].stack, MISC.dragons[dragonName].soul] },
-	);
-
-	let invalid: string | undefined;
-
-	if (isStack) {
-		if (props.value.dragonStacksInvalid.value) {
-			invalid = props.value.dragonStacksInvalid.value === 1 ? 'Only 1 dragon type can be repeated' : 'There can be only 3 different dragon types';
-		}
-	} else if (props.value.dragonSoulInvalid.value) {
-		invalid = 'Soul needs at least 4 total and 2 matching stacks';
-	}
-
-	return {
-		title: `${dragonName} ${isStack ? 'Dragon' : 'Soul'}`,
-		description: replaceGameIcons(replaced),
-		anyUnknown: unknownStringtableVariables.size || unknownVariables.length,
-		invalid,
-	};
-});
 
 const activeEffects = computed<[IComputedAppliedEffect, number][]>(() =>
 	props.value.computed.effects.value
@@ -974,7 +955,7 @@ defineExpose({ el });
 				>
 				<img
 					v-else
-					:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+					:src="imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')"
 					width="256"
 					height="256"
 					style="--focus-brightness: 1.5"
@@ -1442,15 +1423,13 @@ defineExpose({ el });
 						</div>
 					</template>
 				</VSelect>
-				<article ref="dragonTooltip" popover="hint" class="dragon-thing hover-tooltip">
-					<h5>{{ hoveredDragonThingText?.title }}</h5>
-					<p class="game-description" v-html="hoveredDragonThingText?.description" />
-					<UnresolvedVariablesAlert v-if="hoveredDragonThingText?.anyUnknown" />
-					<p v-if="hoveredDragonThingText?.invalid" class="alert error">
-						{{ hoveredDragonThingText.invalid }}
-						<Icon class="i-ph:warning-circle-light" />
-					</p>
-				</article>
+				<LolDragonHoverTooltip
+					ref="dragonHoverTooltip"
+					check-if-valid
+					:dragon="hoveredDragonThing?.[0]"
+					:type="hoveredDragonThing?.[1]"
+					:damage-source="value"
+				/>
 			</section>
 			<section ref="extras" data-extras="">
 				<component
@@ -1462,10 +1441,20 @@ defineExpose({ el });
 					:ability-id="extra[1]"
 					@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
 				/>
+				<!-- only dragons use misc extras, something more clever has to be came up with when other miscs need tooltips as well -->
 				<component
 					:is
-					v-for="([is, itemId, itemIndex], extraIndex) in itemExtras"
-					:key="`${itemId}-${extraIndex}`"
+					v-for="[is, miscSpecificKey, componentIndex] in miscExtras"
+					:key="`${miscSpecificKey}-${componentIndex}`"
+					:id-prefix
+					:damage-source="value"
+					:ability-id="GameAbilityId.build(AbilityType.misc, miscSpecificKey)"
+					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showDragonTooltip(mouseEvent, [miscSpecificKey.slice(0, -4), miscSpecificKey.slice(-4).toLowerCase()] as [IDragonName, 'stack' | 'soul'], true)"
+				/>
+				<component
+					:is
+					v-for="[is, itemId, itemIndex, componentIndex] in itemExtras"
+					:key="`${itemId}-${componentIndex}`"
 					:id-prefix
 					:damage-source="value"
 					:ability-id="GameAbilityId.build(AbilityType.item, itemId)"
@@ -1831,6 +1820,12 @@ defineExpose({ el });
 		}
 
 		&[data-item-tooltip-extras] > .hover-tooltip.champion-item {
+			position-anchor: --scoreboard-item-extras;
+			inset-block-start: auto;
+			inset-block-end: calc(anchor(top));
+		}
+
+		&[data-dragon-tooltip-extras] > details > [data-dragons] > .hover-tooltip.dragon {
 			position-anchor: --scoreboard-item-extras;
 			inset-block-start: auto;
 			inset-block-end: calc(anchor(top));
@@ -2403,8 +2398,8 @@ defineExpose({ el });
 				}
 
 				.dragon.hover-tooltip {
-					top: calc(anchor(bottom));
 					position-anchor: --scoreboard-item-dragons;
+					inset-block-start: calc(anchor(bottom));
 				}
 			}
 

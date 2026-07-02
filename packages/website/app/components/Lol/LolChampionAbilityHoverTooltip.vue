@@ -139,7 +139,7 @@ defineExpose({ el });
 	.hover-tooltip.champion-stat,
 	.hover-tooltip.champion-rune,
 	.hover-tooltip.champion-ability,
-	.hover-tooltip.dragon-thing,
+	.hover-tooltip.dragon,
 	.hover-tooltip.role-quest,
 	.hover-tooltip.effect {
 		--at-apply: 'p-2';

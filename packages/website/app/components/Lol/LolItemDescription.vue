@@ -525,5 +525,16 @@ defineExpose({ header });
 		justify-self: anchor-center;
 		position-try: flip-block;
 	}
+
+	.hover-tooltip.dragon,
+	.hover-tooltip.effect {
+		> footer {
+			--at-apply: 'col-span-full text-end leading-5';
+
+			> kbd {
+				--at-apply: 'font-inherit';
+			}
+		}
+	}
 }
 </style>

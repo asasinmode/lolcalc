@@ -8,7 +8,7 @@ const props = defineProps<IDragonHoverTooltipProps>();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const computedDescription = computed<IComputedDragonAbilityDescription | undefined>(() =>
-	props.damageSource && props.damageSource.computed.dragonSoulAbility.value?.dragon === props.dragon && props.damageSource.computed.dragonSoulAbility.value?.type === props.type
+	(props.damageSource && props.damageSource.computed.dragonSoulAbility.value?.dragon === props.dragon && props.damageSource.computed.dragonSoulAbility.value?.type === props.type)
 		? props.damageSource.computed.dragonSoulAbility.value
 		: props.dragon && props.type
 			? computeDragonAbilityDescription(props.dragon, props.type, props.damageSource, props.checkIfValid)
@@ -28,6 +28,11 @@ defineExpose({ el });
 			{{ computedDescription?.invalidMessage }}
 			<Icon class="i-ph:warning-circle-light" />
 		</p>
+		<footer v-show="computedDescription?.anyExtendedVariables && !globalKeyModifiers.shift">
+			<p>
+				Hold <kbd>[Shift]</kbd> to show more info
+			</p>
+		</footer>
 	</article>
 </template>
 

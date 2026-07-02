@@ -140,14 +140,6 @@ defineExpose({ el });
 		> div {
 			--at-apply: 'col-span-full b-b-0 pb-0 mb-0 mt-[--description-mt]';
 		}
-
-		> footer {
-			--at-apply: 'col-span-full text-end leading-5';
-
-			> kbd {
-				--at-apply: 'font-inherit';
-			}
-		}
 	}
 }
 

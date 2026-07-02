@@ -79,6 +79,7 @@ export interface IDragonHoverTooltipProps {
 	dragon?: IDragonName;
 	type?: 'stack' | 'soul';
 	checkIfValid?: boolean;
+	damageSource?: DamageSource;
 }
 
 export interface IItemDescriptionProps {

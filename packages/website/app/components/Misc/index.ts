@@ -5,12 +5,12 @@ import { AbilityType } from '@lolcalc/shared/index';
 
 export const MISC_COMPONENTS: Partial<Record<IMiscSpecificKey, ISpecificComponents>> = {
 	CloudStack: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.misc, 'CloudStack'), 'isOOC', 'Is out of combat'),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.misc, 'CloudStack'), 'isOOC', 'is out of combat', false),
 	},
 	CloudSoul: {
 		extras: [
-			await booleanExtra(GameAbilityId.build(AbilityType.misc, 'CloudSoul'), 'isOOC', 'Is out of combat'),
-			await booleanExtra(GameAbilityId.build(AbilityType.misc, 'CloudSoul'), 'hasUlted', 'Has ulted'),
+			await booleanExtra(GameAbilityId.build(AbilityType.misc, 'CloudSoul'), 'isOOC', 'is out of combat', false),
+			await booleanExtra(GameAbilityId.build(AbilityType.misc, 'CloudSoul'), 'hasUlted', 'has ulted', false),
 		],
 	},
 };
