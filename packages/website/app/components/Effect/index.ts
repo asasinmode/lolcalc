@@ -22,3 +22,9 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 					: await booleanExtra(abilityId, 0, label);
 	}
 }
+
+for (const key in EFFECT_COMPONENTS) {
+	const { extras, effects } = EFFECT_COMPONENTS[key as keyof typeof EFFECT_COMPONENTS]!;
+	extras && (Array.isArray(extras) ? extras.forEach(component => markRaw(component)) : markRaw(extras));
+	effects && (Array.isArray(effects) ? effects.forEach(component => markRaw(component)) : markRaw(effects));
+}

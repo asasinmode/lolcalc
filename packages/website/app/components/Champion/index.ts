@@ -210,3 +210,9 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 					: await booleanExtra(abilityId, 0, label);
 	}
 }
+
+for (const key in CHAMPION_COMPONENTS) {
+	const { extras, effects } = CHAMPION_COMPONENTS[key as keyof typeof CHAMPION_COMPONENTS]!;
+	extras && (Array.isArray(extras) ? extras.forEach(component => markRaw(component)) : markRaw(extras));
+	effects && (Array.isArray(effects) ? effects.forEach(component => markRaw(component)) : markRaw(effects));
+}

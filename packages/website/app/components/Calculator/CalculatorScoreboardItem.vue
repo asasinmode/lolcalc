@@ -262,7 +262,7 @@ const championExtra = computed<[Component, IGameAbilityId][]>((): [Component, IG
 		return component
 			? (Array.isArray(component) ? component : [component]).map(c =>
 					// TODO handle other abilities components, dont hardcode everything to passive
-					[markRaw(c), GameAbilityId.build(AbilityType.champion, props.value.champion.value!.id, 'passive', props.value.abilityVariantsIndexes.value.passive)])
+					[c, GameAbilityId.build(AbilityType.champion, props.value.champion.value!.id, 'passive', props.value.abilityVariantsIndexes.value.passive)])
 			: [];
 	}
 	return [];
@@ -273,7 +273,7 @@ const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.flat
 	const component = item && ITEM_COMPONENTS[item.id]?.extras;
 	if (component) {
 		const components = Array.isArray(component) ? component : [component];
-		return components.map(c => [markRaw(c), item.id, index]);
+		return components.map(c => [c, item.id, index]);
 	}
 	return [];
 }) as [is: Component, itemId: string, itemIndex: number][]);
