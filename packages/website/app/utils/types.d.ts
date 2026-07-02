@@ -75,6 +75,12 @@ export interface IEffectHoverTooltipProps {
 	damageSource?: DamageSource;
 }
 
+export interface IDragonHoverTooltipProps {
+	dragon?: IDragonName;
+	type?: 'stack' | 'soul';
+	checkIfValid?: boolean;
+}
+
 export interface IItemDescriptionProps {
 	gold?: number;
 	headerTag?: string;

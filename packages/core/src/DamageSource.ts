@@ -14,7 +14,7 @@ import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
 
 import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
-import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
+import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, MISC, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
@@ -963,21 +963,21 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		usedMiscSpecificKeys: computed((): IMiscSpecificKey[] => {
 			const rv: IMiscSpecificKey[] = [];
 
-			if (this.dragonSoul.value) {
-				rv.push(`${this.dragonSoul.value}Soul`);
-			}
-
 			for (const stack of this.dragonStacks.value) {
 				if (stack) {
 					const key: IMiscSpecificKey = `${stack}Stack`;
-					if (!rv.includes(key)) {
-						rv.push(key);
-					}
+					!rv.includes(key) && (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[key] && rv.push(key);
 				}
+			}
+
+			if (this.dragonSoul.value) {
+				const key: IMiscSpecificKey = `${this.dragonSoul.value}Soul`;
+				(MISC_SPECIFICS as IHypotheticalMiscSpecifics)[key] && rv.push(key);
 			}
 
 			return rv;
 		}),
+		dragonSoulAbility: computed(() => this.dragonSoul.value && computeDragonAbilityDescription(this.dragonSoul.value, 'soul', this)),
 		effects: ref([]),
 		variables: computed((): UnwrapRef<IDamageSourceComputed['variables']> => {
 			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
@@ -1589,6 +1589,62 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 	return rv;
 }
 
+export function computeDragonAbilityDescription(
+	dragon: IDragonName,
+	type: 'stack' | 'soul',
+	damageSource?: DamageSource,
+	checkIfValid = false,
+): IComputedDragonAbilityDescription {
+	const ability = MISC.dragons[dragon].soul;
+	const string = TEXT.dragons[dragon].soul;
+	const isStack = type === 'stack';
+
+	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
+
+	const { replaced, variables, unknownVariables, anyExtendedVariables } = replaceGameVariables(
+		stringtableReplaced,
+		'championAbility',
+		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul] },
+	);
+
+	let invalidMessage: string | undefined;
+
+	if (checkIfValid) {
+		if (isStack) {
+			if (damageSource?.dragonStacksInvalid.value) {
+				invalidMessage = damageSource.dragonStacksInvalid.value === 1 ? 'Only 1 dragon type can be repeated' : 'There can be only 3 different dragon types';
+			}
+		} else if (damageSource?.dragonSoulInvalid.value) {
+			invalidMessage = 'Soul needs at least 4 total and 2 matching stacks';
+		}
+	}
+
+	let extendedReplaced: string | undefined;
+
+	if (anyExtendedVariables) {
+		({ replaced: extendedReplaced } = replaceGameVariables(
+			stringtableReplaced,
+			'championAbility',
+			{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul] },
+			damageSource?.modifyVariableFunctions.value,
+			{ isExtended: true },
+		));
+	}
+
+	return {
+		dragon,
+		type,
+		title: `${dragon} ${isStack ? 'Dragon' : 'Soul'}`,
+		text: replaceGameIcons(replaced),
+		textExtended: extendedReplaced ? replaceGameIcons(extendedReplaced) : undefined,
+		invalidMessage,
+		variables,
+		unknownVariables,
+		anyUnknownVariables: unknownStringtableVariables.size || unknownVariables.length,
+		anyExtendedVariables,
+	};
+}
+
 export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean {
 	const item = self.computed.items.value[itemIndex];
 	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
@@ -1743,6 +1799,20 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	hasAnyInterestingVariables: boolean;
 }
 
+export interface IComputedDragonAbilityDescription {
+	dragon: IDragonName;
+	type: 'stack' | 'soul';
+	title: string;
+	text: string;
+	textExtended?: string;
+	invalidMessage?: string;
+	anyUnknownVariables?: number;
+	variables: ReturnType<typeof replaceGameVariables>['variables'];
+	unknownVariables: ReturnType<typeof replaceGameVariables>['unknownVariables'];
+	/** see original type's docs */
+	anyExtendedVariables: IReplaceGameVariablesRV['anyExtendedVariables'];
+}
+
 export interface IComputedAppliedEffect {
 	abilityId: IEffectAbilityId;
 	imgData: IGameImageData;
@@ -1765,6 +1835,7 @@ interface IDamageSourceComputed {
 	masterworkItemSlotIndex: ComputedRef<number>;
 	abilities: ComputedRef<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>;
 	usedMiscSpecificKeys: ComputedRef<IMiscSpecificKey[]>;
+	dragonSoulAbility: ComputedRef<IComputedDragonAbilityDescription | undefined>;
 	effects: ShallowRef<IComputedAppliedEffect[]>;
 	variables: ComputedRef<{
 		items: Record<string, IDynamicVariables | undefined>;
