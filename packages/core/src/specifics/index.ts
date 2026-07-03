@@ -1,14 +1,14 @@
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionStatName, TItemNameToId } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
-import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '../GameAbilityId';
-import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game';
+import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
+import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game.ts';
 import type { TChampionSpecifics } from './champion';
 import type { CHAMPION_SPECIFICS } from './champion.ts';
+import type { TDragonSpecifics } from './dragon.ts';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import type { ITEM_SPECIFICS } from './item.ts';
-import type { TMiscSpecifics } from './misc.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
@@ -66,10 +66,16 @@ export type IGameAbilitySpecific<T extends IGameAbilityId> = T extends IChampion
 		? T['id'] extends keyof TEffectSpecifics
 			? TEffectSpecifics[T['id']]
 			: never
-		: T['id'] extends keyof TItemSpecifics
-			? TItemSpecifics[T['id']]
-			: T['id'] extends keyof TMiscSpecifics
-				? TMiscSpecifics[T['id']]
+		: T extends IDragonAbilityId
+			? T['id'] extends keyof TDragonSpecifics
+				? T['subtype'] extends keyof TDragonSpecifics[T['id']]
+					? TDragonSpecifics[T['id']][T['subtype']]
+					: never
+				: never
+			: T extends IItemAbilityId
+				? T['id'] extends keyof TItemSpecifics
+					? TItemSpecifics[T['id']]
+					: never
 				: never;
 
 export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>

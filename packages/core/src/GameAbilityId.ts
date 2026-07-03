@@ -1,6 +1,6 @@
-import type { IChampionId } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IEffectObjectName, IMiscSpecificKey, TAbilityType } from '@lolcalc/shared';
-import { CHAMPIONS, ITEMS } from '@lolcalc/data';
+import type { IChampionId, IDragonName } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, IEffectObjectName, TAbilityType } from '@lolcalc/shared';
+import { ALL_DRAGON_NAMES, CHAMPIONS, ITEMS } from '@lolcalc/data';
 import { AbilityType, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
 import { markRaw } from 'vue';
 
@@ -26,12 +26,16 @@ export interface IEffectAbilityId<Id extends IEffectObjectName = IEffectObjectNa
 	id: Id;
 }
 
-export interface IMiscAbilityId<Id extends IMiscSpecificKey = IMiscSpecificKey> {
-	type: typeof AbilityType['misc'];
+export interface IDragonAbilityId<
+	Id extends IDragonName = IDragonName,
+	Subtype extends 'stack' | 'soul' = 'stack' | 'soul',
+> {
+	type: typeof AbilityType['dragon'];
 	id: Id;
+	subtype: Subtype;
 }
 
-export type IGameAbilityId = IChampionAbilityId | IItemAbilityId | IEffectAbilityId | IMiscAbilityId;
+export type IGameAbilityId = IChampionAbilityId | IItemAbilityId | IEffectAbilityId | IDragonAbilityId;
 
 export class GameAbilityId {
 	static build<
@@ -50,21 +54,22 @@ export class GameAbilityId {
 	static build<Id extends IEffectObjectName>(
 		type: 'effect',
 		id: Id): IEffectAbilityId<Id>;
-	static build<Id extends IMiscSpecificKey>(
-		type: 'misc',
+	static build<Id extends IDragonName, Subtype extends 'stack' | 'soul'>(
+		type: 'dragon',
 		id: Id,
-	): IMiscAbilityId<Id>;
+		subtype: Subtype,
+	): IDragonAbilityId<Id, Subtype>;
 	static build(
 		type: TAbilityType,
 		id: string,
-		abilityKey?: IChampionAbilityKey,
+		abilityKey?: IChampionAbilityKey | 'stack' | 'soul',
 		abilityVariantIndex?: number,
 	): IGameAbilityId {
 		if (type === AbilityType.champion) {
 			return markRaw({
 				type,
 				id: id as IChampionId,
-				abilityKey: abilityKey!,
+				abilityKey: abilityKey! as IChampionAbilityKey,
 				abilityVariantIndex: abilityVariantIndex!,
 			});
 		}
@@ -73,8 +78,8 @@ export class GameAbilityId {
 			return markRaw({ type, id: id as IEffectObjectName });
 		}
 
-		if (type === AbilityType.misc) {
-			return markRaw({ type, id: id as IMiscSpecificKey });
+		if (type === AbilityType.dragon) {
+			return markRaw({ type, id: id as IDragonName, subtype: abilityKey as 'stack' | 'soul' });
 		}
 
 		return markRaw({ type, id });
@@ -93,7 +98,6 @@ export class GameAbilityId {
 		id: IGameAbilityId,
 		championIdToKey: Record<IChampionId, string>,
 		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
-		miscSpecificsObjectEntries: [miscSpecificKey: IMiscSpecificKey, any][],
 	): string {
 		const typeIndex = ALL_ABILITY_TYPES.indexOf(id.type);
 		if (id.type === AbilityType.champion) {
@@ -112,10 +116,11 @@ export class GameAbilityId {
 			].join('-');
 		}
 
-		if (id.type === AbilityType.misc) {
+		if (id.type === AbilityType.dragon) {
 			return [
 				typeIndex,
-				miscSpecificsObjectEntries.findIndex(entry => entry[0] === id.id),
+				ALL_DRAGON_NAMES.indexOf(id.id),
+				id.subtype === 'stack' ? 0 : 1,
 			].join('-');
 		}
 
@@ -126,7 +131,6 @@ export class GameAbilityId {
 		value: string,
 		championKeyToId: Record<string, IChampionId>,
 		effectSpecificsObjectEntries: [effectObjectName: IEffectObjectName, any][],
-		miscSpecificsObjectEntries: [miscSpecificKey: IMiscSpecificKey, any][],
 	): IGameAbilityId | undefined {
 		const [rawType, id, rawAbilityKeyIndex, rawAbilityVariantIndex] = value.split('-');
 		if (!id) {
@@ -173,13 +177,17 @@ export class GameAbilityId {
 			return GameAbilityId.build(type, specificEntry[0]);
 		}
 
-		if (type === AbilityType.misc) {
-			const specificEntry = miscSpecificsObjectEntries[Number.parseInt(id)];
-			if (!specificEntry) {
+		if (type === AbilityType.dragon) {
+			const dragon = ALL_DRAGON_NAMES[Number.parseInt(id)];
+			if (!dragon) {
+				return;
+			}
+			const subtype = rawAbilityKeyIndex ? Number.parseInt(rawAbilityKeyIndex) ? 'soul' : 'stack' : undefined;
+			if (!subtype) {
 				return;
 			}
 
-			return GameAbilityId.build(type, specificEntry[0]);
+			return GameAbilityId.build(type, dragon, subtype);
 		}
 
 		return undefined;

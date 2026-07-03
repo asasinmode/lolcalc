@@ -8,9 +8,9 @@ import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core
 import { ITEMS, resolveEffectDescription, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
+import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
-import { MISC_COMPONENTS } from '~/components/Misc';
 
 const damageSource = defineModel<DamageSource>();
 
@@ -143,8 +143,8 @@ function effectComponent(effectId: IEffectAbilityId): Component | undefined {
 		? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
 		: effectSpecific.sourceAbility.type === AbilityType.champion
 			? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-			: effectSpecific.sourceAbility.type === AbilityType.misc
-				? MISC_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+			: effectSpecific.sourceAbility.type === AbilityType.dragon
+				? DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]?.[effectSpecific.sourceAbility.subtype]?.effects
 				: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
 }
 

@@ -5,7 +5,6 @@ import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { MISC_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/misc';
 import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { VExtrasBoolean, VExtrasEnum, VExtrasNumber } from '#components';
@@ -47,8 +46,8 @@ export async function numberExtra<T extends IGameAbilityId>(
 					: [
 							props.damageSource[abilityId.type === AbilityType.champion
 								? 'internalData'
-								: abilityId.type === AbilityType.misc
-									? 'internalMiscData'
+								: abilityId.type === AbilityType.dragon
+									? 'internalDragonData'
 									: 'internalItemData'],
 							property as string,
 						],
@@ -133,12 +132,12 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 
 	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion
 		? 'internalData'
-		: abilityId.type === AbilityType.misc
-			? 'internalMiscData'
+		: abilityId.type === AbilityType.dragon
+			? 'internalDragonData'
 			: 'internalItemData';
 
 	return [
-		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS_OBJECT_ENTRIES),
+		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 		computed(() =>
 			isEffect
 				? appliedEffect?.data[property as number] ?? 0

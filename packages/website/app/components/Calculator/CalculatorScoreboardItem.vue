@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
-import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IDragonAbilityId, IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IChampionId, IDragonName, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, IMiscSpecificKey, INonPassiveAbilityKey } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { IExtraComponentEmits } from '~/utils/types';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
 import { formatChampionStatValue, isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion';
-import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/game';
+import { replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
+import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
+import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
-import { MISC_COMPONENTS } from '../Misc';
 
 type IShowTooltipEventArgs = IExtraComponentEmits['imgMouseenter'];
 
@@ -269,14 +269,36 @@ const championExtra = computed<[Component, IGameAbilityId][]>((): [Component, IG
 	return [];
 });
 
-type IMiscComponent = [Component, IMiscSpecificKey, abilityComponentIndex: number];
-const miscExtras = computed<IMiscComponent[]>((): IMiscComponent[] => {
-	return props.value.computed.usedMiscSpecificKeys.value.flatMap((miscSpecificKey): IMiscComponent[] => {
-		const component = MISC_COMPONENTS[miscSpecificKey]?.extras;
-		return component
-			? (Array.isArray(component) ? component.map((c, i) => [c, miscSpecificKey, i]) : [[component, miscSpecificKey, 0]])
-			: [];
-	});
+type IDragonComponent = [Component, IDragonAbilityId, abilityComponentIndex: number];
+const dragonExtras = computed<IDragonComponent[]>((): IDragonComponent[] => {
+	const components: IDragonComponent[] = [];
+	for (const stack of new Set(props.value.dragonStacks.value)) {
+		const stackComponents = stack && DRAGON_COMPONENTS[stack]?.stack?.extras;
+		if (stackComponents) {
+			const abilityId = GameAbilityId.build(AbilityType.dragon, stack, 'stack');
+			if (Array.isArray(stackComponents)) {
+				for (let i = 0; i < stackComponents.length; i++) {
+					components.push([stackComponents[i]!, abilityId, i]);
+				}
+			} else {
+				components.push([stackComponents, abilityId, 0]);
+			}
+		}
+	}
+	if (props.value.dragonSoul.value) {
+		const soulComponents = DRAGON_COMPONENTS[props.value.dragonSoul.value]?.soul?.extras;
+		if (soulComponents) {
+			const abilityId = GameAbilityId.build(AbilityType.dragon, props.value.dragonSoul.value, 'soul');
+			if (Array.isArray(soulComponents)) {
+				for (let i = 0; i < soulComponents.length; i++) {
+					components.push([soulComponents[i]!, abilityId, i]);
+				}
+			} else {
+				components.push([soulComponents, abilityId, 0]);
+			}
+		}
+	}
+	return components;
 });
 
 type IItemComponent = [is: Component, itemId: string, itemIndex: number, itemComponentIndex: number];
@@ -793,15 +815,16 @@ function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'so
 const dragonOptions = ALL_DRAGON_NAMES.map(name => [name, name.toLowerCase()]) as [IDragonName, string][];
 
 let dragonTooltipAnchor: HTMLElement | undefined;
-const hoveredDragonThing = shallowRef<[IDragonName, 'stack' | 'soul']>();
+type IHoveredDragonThing = [IDragonName, IDragonAbilityId['subtype']];
+const hoveredDragonThing = shallowRef<IHoveredDragonThing>();
 const dragonHoverTooltipEl = useTemplateRef('dragonHoverTooltip');
 
-function showDragonTooltip(event: MouseEvent, dragonThing: [IDragonName, 'stack' | 'soul'], fromExtras = false) {
+function showDragonTooltip(event: MouseEvent, dragonName: IDragonName, subtype: IDragonAbilityId['subtype'], fromExtras = false) {
 	const { target } = event as unknown as { target: HTMLElement };
 	dragonHoverTooltipEl.value?.el?.showPopover();
 	dragonTooltipAnchor = target;
 	dragonTooltipAnchor?.addEventListener('mouseleave', hideDragonTooltip, { passive: true, once: true });
-	hoveredDragonThing.value = dragonThing;
+	hoveredDragonThing.value = [dragonName, subtype];
 
 	if (fromExtras) {
 		el.value!.setAttribute('data-dragon-tooltip-extras', '');
@@ -1395,7 +1418,7 @@ defineExpose({ el });
 					data-dragon-stack=""
 					clearable
 					@update:model-value="updateDragonThing($event, 'stack', i - 1)"
-					@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, [value.dragonStacks.value[i - 1]!, 'stack'])"
+					@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, value.dragonStacks.value[i - 1]!, 'stack')"
 				>
 					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(UI.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
 					<template #post>
@@ -1413,7 +1436,7 @@ defineExpose({ el });
 					label="soul"
 					clearable
 					@update:model-value="updateDragonThing($event, 'soul')"
-					@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, [value.dragonSoul.value, 'soul'])"
+					@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, value.dragonSoul.value, 'soul')"
 				>
 					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(UI.dragons[value.dragonSoul.value].soulActive, 44)" />
 					<template #post>
@@ -1444,12 +1467,12 @@ defineExpose({ el });
 				<!-- only dragons use misc extras, something more clever has to be came up with when other miscs need tooltips as well -->
 				<component
 					:is
-					v-for="[is, miscSpecificKey, componentIndex] in miscExtras"
-					:key="`${miscSpecificKey}-${componentIndex}`"
+					v-for="[is, abilityId, componentIndex] in dragonExtras"
+					:key="`${abilityId.id}-${abilityId.subtype}-${componentIndex}`"
 					:id-prefix
 					:damage-source="value"
-					:ability-id="GameAbilityId.build(AbilityType.misc, miscSpecificKey)"
-					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showDragonTooltip(mouseEvent, [miscSpecificKey.slice(0, -4), miscSpecificKey.slice(-4).toLowerCase()] as [IDragonName, 'stack' | 'soul'], true)"
+					:ability-id
+					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showDragonTooltip(mouseEvent, abilityId.id, abilityId.subtype, true)"
 				/>
 				<component
 					:is

@@ -1,11 +1,11 @@
-import type { IEffectObjectName, IMiscSpecificKey } from '@lolcalc/shared';
+import type { IDragonName } from '@lolcalc/data/types';
+import type { IEffectObjectName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
 import type { IDamageResultTableColumn } from '~/utils/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { MISC_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/misc';
 import { CHAMPION_KEY_TO_ID } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 
@@ -96,7 +96,7 @@ export function useCalculatorState(
 		const savedChampionIds = new Set<string>();
 		const savedItemIds = new Set<string>();
 		const savedEffectObjectNames = new Set<IEffectObjectName>();
-		const savedMiscSpecificKeys = new Set<IMiscSpecificKey>();
+		const savedDragonsSoulAbilities = new Set<IDragonName>();
 
 		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
 			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
@@ -114,9 +114,7 @@ export function useCalculatorState(
 					for (const effectEntry of column.source.effectsAppliedToTarget.value) {
 						savedEffectObjectNames.add(effectEntry[0].id);
 					}
-					for (const key of column.source.computed.usedMiscSpecificKeys.value) {
-						savedMiscSpecificKeys.add(key);
-					}
+					column.source.dragonSoul.value && savedDragonsSoulAbilities.add(column.source.dragonSoul.value);
 				}
 				if (column.target) {
 					for (const item of column.target.items.value) {
@@ -125,9 +123,7 @@ export function useCalculatorState(
 					for (const effect of column.target.appliedEffects.value) {
 						savedEffectObjectNames.add(effect.abilityId.id);
 					}
-					for (const key of column.target.computed.usedMiscSpecificKeys.value) {
-						savedMiscSpecificKeys.add(key);
-					}
+					column.target.dragonSoul.value && savedDragonsSoulAbilities.add(column.target.dragonSoul.value);
 				}
 			}
 			return [columnSourceIndex, columnTargetIndex];
@@ -161,7 +157,7 @@ export function useCalculatorState(
 					?	savedChampionIds.has(section.abilityId.id)
 					: section.abilityId.type === AbilityType.effect
 						? savedEffectObjectNames.has(section.abilityId.id)
-						: savedMiscSpecificKeys.has(section.abilityId.id))) ?? [];
+						: savedDragonsSoulAbilities.has(section.abilityId.id))) ?? [];
 		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
 		const savedSectionIds: string[] = [];
 		const isSectionsChanged = keptSections?.[0] && (keptSections.length > 3
@@ -321,7 +317,7 @@ export function useCalculatorState(
 				continue;
 			}
 
-			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES, MISC_SPECIFICS_OBJECT_ENTRIES);
+			const abilityId = GameAbilityId.parse(id, CHAMPION_KEY_TO_ID, EFFECT_SPECIFICS_OBJECT_ENTRIES);
 			if (abilityId) {
 				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded, currentSectionIndex);
 				currentSectionIndex += 1;

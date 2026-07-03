@@ -1,11 +1,11 @@
-import type { IDragonName, IItemStat } from '@lolcalc/data/types';
+import type { IItemStat } from '@lolcalc/data/types';
 
 /** order should be preserved when new ones are added because it's used for stringifying the type - `champion` will become 0. If order were to be changed, it would probably be a breaking change to parsing & stringifying */
 export const AbilityType = {
 	champion: 'champion',
 	item: 'item',
 	effect: 'effect',
-	misc: 'misc',
+	dragon: 'dragon',
 } as const;
 
 export const ALL_ABILITY_TYPES: string[] = Object.values(AbilityType);
@@ -570,8 +570,6 @@ export const VariableType = {
 	magic: 'magic',
 	true: 'true',
 } as const;
-
-export type IMiscSpecificKey = `${IDragonName}Stack` | `${IDragonName}Soul`;
 
 export type IVariableType = typeof VariableType[keyof typeof VariableType];
 

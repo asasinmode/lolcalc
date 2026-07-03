@@ -1,12 +1,12 @@
 import type { TAbilityType } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
-import type { IHypotheticalMiscSpecifics } from './specifics/misc.ts';
+import type { IHypotheticalDragonSpecifics } from './specifics/dragon';
 import { CHAMPION_IMAGES, imgUrl, textureBgImageAttrs, useChampion } from '@lolcalc/data';
 
 import { AbilityType } from '@lolcalc/shared';
+import { DRAGON_SPECIFICS } from './specifics/dragon.ts';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
-import { MISC_SPECIFICS } from './specifics/misc.ts';
 import { replaceGameIcons } from './variables/game.ts';
 
 export type IGameImageData = [src: string, width: number, height?: number] | ITexture;
@@ -35,8 +35,8 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 			imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0]),
 			CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
 		];
-	} else if (imageAbilityId.type === AbilityType.misc) {
-		return (MISC_SPECIFICS as IHypotheticalMiscSpecifics)[imageAbilityId.id]?.abilityImage ?? ['', 0];
+	} else if (imageAbilityId.type === AbilityType.dragon) {
+		return (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[imageAbilityId.id]?.[imageAbilityId.subtype]?.abilityImage ?? ['', 0];
 	}
 
 	const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
