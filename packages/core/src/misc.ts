@@ -1,11 +1,8 @@
 import type { TAbilityType } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
-import type { IHypotheticalDragonSpecifics } from './specifics/dragon';
-import { CHAMPION_IMAGES, imgUrl, textureBgImageAttrs, useChampion } from '@lolcalc/data';
-
+import { CHAMPION_IMAGES, imgUrl, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
-import { DRAGON_SPECIFICS } from './specifics/dragon.ts';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
 import { replaceGameIcons } from './variables/game.ts';
 
@@ -36,7 +33,7 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 			CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
 		];
 	} else if (imageAbilityId.type === AbilityType.dragon) {
-		return (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[imageAbilityId.id]?.[imageAbilityId.subtype]?.abilityImage ?? ['', 0];
+		return UI.dragons[imageAbilityId.id][imageAbilityId.subtype === 'stack' ? 'stack' : 'soulActive'];
 	}
 
 	const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;

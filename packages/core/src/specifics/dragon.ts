@@ -1,7 +1,5 @@
 import type { IDragonName } from '@lolcalc/data/types';
 import type { IProviderGroupInternalDragonData } from '../DamageSource';
-import type { IGameImageData } from '../misc';
-import { UI } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
 
 /**
@@ -11,7 +9,6 @@ import { clamp } from '@lolcalc/shared/utils.ts';
 export const DRAGON_SPECIFICS = {
 	Cloud: {
 		stack: {
-			abilityImage: UI.dragons.Cloud.stack,
 			internalDataProperties: ['isOOC'],
 			setupData(self) {
 				self.internalDragonData.value.isOOC = clamp(0, self.internalDragonData.value.isOOC ?? 0, 1);
@@ -19,7 +16,6 @@ export const DRAGON_SPECIFICS = {
 			},
 		},
 		soul: {
-			abilityImage: UI.dragons.Cloud.soulActive,
 			internalDataProperties: ['isOOC', 'hasUlted'],
 			setupData(self) {
 				self.internalDragonData.value.isOOC = clamp(0, self.internalDragonData.value.isOOC ?? 0, 1);
@@ -40,5 +36,4 @@ export interface IDragonSpecific {
 };
 
 export type IDragonAbilitySpecific = IProviderGroupInternalDragonData & {
-	abilityImage: IGameImageData;
 };
