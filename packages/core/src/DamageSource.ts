@@ -373,12 +373,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						const newSoulSpecific = (newSoul && (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[newSoul as IDragonName])?.soul;
 						newSoulSpecific?.setupData?.(this);
 
-						const addedStacks = new Set<IDragonName>();
-						const removedStacks = new Set<IDragonName>();
+						const addedStacks: IDragonName[] = [];
+						const removedStacks: IDragonName[] = [];
 
 						for (const newStack of newStacks as IDragonName[]) {
 							if (!(oldValue?.[1] as IDragonName[] | undefined)?.includes(newStack)) {
-								addedStacks.add(newStack);
+								!addedStacks.includes(newStack) && addedStacks.push(newStack);
 								const newStackSpecific = (newStack && (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[newStack as IDragonName])?.stack;
 								newStackSpecific?.setupData?.(this);
 							}
@@ -386,7 +386,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						if (oldValue?.[1]) {
 							for (const oldStack of (oldValue?.[1] as IDragonName[])) {
 								if (!(newStacks as IDragonName[]).includes(oldStack)) {
-									removedStacks.add(oldStack);
+									!removedStacks.includes(oldStack) && removedStacks.push(oldStack);
 								}
 							}
 						}
@@ -398,7 +398,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								usedProperties.push(property);
 							}
 						}
-						for (const stack of addedStacks) {
+						for (const stack of newStacks as IDragonName[]) {
 							const properties = (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[stack]?.stack?.internalDataProperties;
 							if (properties) {
 								for (const property of properties) {
