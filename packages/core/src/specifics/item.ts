@@ -1764,6 +1764,15 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f5', 'LowHealthThreshold', 'ShieldDuration'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.bootsOfSwiftness]: {
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemPassivesStats }) {
+					itemPassivesStats.slowResist += ITEMS_BY_NAME.bootsOfSwiftness?.dataValues.SlowResistTooltip / 100;
+				},
+			},
+		},
+	},
 	[ITEM_NAME_TO_ID.swiftmarch]: {
 		calculateHooks: {
 			preItemTotal: {

@@ -354,6 +354,7 @@ export const ITEM_NAME_TO_ID = {
 	hexdrinker: '3155',
 	mawOfMalmortius: '3156',
 	jakSho: '6665',
+	bootsOfSwiftness: '3009',
 	swiftmarch: '3170',
 	crimsonLucidity: '3171',
 	berserkerGreaves: '3006',
