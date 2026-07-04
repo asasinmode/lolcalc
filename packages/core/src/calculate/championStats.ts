@@ -3,7 +3,7 @@ import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCal
 import type { DamageSource } from '../DamageSource';
 import { MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
-import { addTenacity } from './util.ts';
+import { addMultiplicative } from './util.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;
@@ -104,7 +104,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		for (const [statName, statValue] of itemToChampionStats(item)) {
 			if (statName === 'tenacity') {
 				/* item tenacity calculated according to [wiki formula](https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking) */
-				itemBaseStats.tenacity = addTenacity(itemBaseStats.tenacity, statValue);
+				itemBaseStats.tenacity = addMultiplicative(itemBaseStats.tenacity, statValue);
 			} else {
 				/* hpRegen is stored in per second in item but per 5 seconds in champion/displayed */
 				itemBaseStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
@@ -140,8 +140,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
 
-	const runeShardStats: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity'> = {
+	const runeShardStats: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity' | 'slowResist'> = {
 		tenacity: 1,
+		slowResist: 1,
 	};
 	if (source.calculateStatsHooks.all.value.onRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.onRuneShards) {
@@ -149,6 +150,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 	runeShardStats.tenacity = 1 - runeShardStats.tenacity;
+	runeShardStats.slowResist = 1 - runeShardStats.slowResist;
 	calculatedVariables.apMultipliersBase += runeShardStats.abilityPower ?? 0;
 
 	if (source.calculateStatsHooks.all.value.onChampionPassive) {
@@ -168,7 +170,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
 		if ((stat as IChampionStatName) === 'tenacity') {
-			bonusStats.tenacity = 1 - addTenacity(1, runeShardStats.tenacity, itemTotalStats.tenacity, championPassiveStats.tenacity ?? 0);
+			bonusStats.tenacity = 1 - addMultiplicative(1, runeShardStats.tenacity, itemTotalStats.tenacity, championPassiveStats.tenacity ?? 0);
 		} else {
 			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
 				+ (dragonStats[stat as IChampionStatName] ?? 0)
@@ -183,7 +185,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			statValue + (runeShardStats[statName as IChampionStatName] ?? 0),
 		],
 	)) as IChampionStats;
-	levelAndRunesStats.tenacity = 1 - addTenacity(1, baseOnLevelStats.tenacity, runeShardStats.tenacity);
+	levelAndRunesStats.tenacity = 1 - addMultiplicative(1, baseOnLevelStats.tenacity, runeShardStats.tenacity);
 
 	const totalPreMultipliersStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue

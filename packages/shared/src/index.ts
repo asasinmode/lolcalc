@@ -39,7 +39,7 @@ export interface IStatsCalculationResult {
 	/** base + level combined */
 	baseOnLevel: IChampionStats;
 	/** stats from rune shards */
-	runeShards: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity'>;
+	runeShards: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity' | 'slowResist'>;
 	/** raw stats given by items, no passives */
 	itemBase: IChampionStats;
 	/** stats from item passives */

@@ -3,7 +3,7 @@ import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcal
 import type { ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
-import { addTenacity } from '../calculate/util.ts';
+import { addMultiplicative } from '../calculate/util.ts';
 import { defineVariables } from './index.ts';
 
 export function runesEmpty(runes: IChampionRunes): boolean {
@@ -118,8 +118,8 @@ export const RUNE_SPECIFICS = {
 			calculateHooks: {
 				onRuneShards: {
 					handler(_self, { runeShardStats }) {
-						// TODO add slow resist, also add it to swiftness boots - should be calculated same as tenacity
-						runeShardStats.tenacity = addTenacity(runeShardStats.tenacity, ((RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100));
+						runeShardStats.tenacity = addMultiplicative(runeShardStats.tenacity, ((RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100));
+						runeShardStats.slowResist = addMultiplicative(runeShardStats.slowResist, ((RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100));
 					},
 					priority: -1,
 				},

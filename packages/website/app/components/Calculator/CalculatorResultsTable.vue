@@ -594,7 +594,6 @@ async function addResultsSection(
 		}
 
 		const precomputedDescription = computeDragonAbilityDescription(abilityId.id, abilityId.subtype, undefined, false); ;
-		console.log('precomputed', precomputedDescription);
 		section.name ??= `${abilityId.id} Soul`;
 		section.image = await gameAbilityImage(abilityId);
 		section.rows = await getAbilitySectionRows(precomputedDescription);
