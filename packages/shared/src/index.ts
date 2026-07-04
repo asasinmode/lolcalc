@@ -46,6 +46,8 @@ export interface IStatsCalculationResult {
 	itemPassive: IChampionStats;
 	/** sum of `itemBase` and `itemPassive` */
 	itemTotal: IChampionStats;
+	/** stats from dragon stacks/soul */
+	dragon: Partial<IChampionStats>;
 	/** stats from champion's passive */
 	championPassive: Partial<IChampionStats>;
 	/**

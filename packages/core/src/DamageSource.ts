@@ -1087,6 +1087,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 			return rv;
 		}),
+		dragons: computed((): ICalculateStatsGroupedHooks => {
+			const rv: ICalculateStatsGroupedHooks = {};
+			for (const stack of this.dragonStacks.value) {
+				stack && groupCalculateStatsHooks(rv, (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[stack]?.stack);
+			}
+			this.dragonSoul.value && groupCalculateStatsHooks(rv, (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[this.dragonSoul.value]?.soul);
+			return rv;
+		}),
 		items: computed((): ICalculateStatsGroupedHooks => {
 			const rv: ICalculateStatsGroupedHooks = {};
 			for (const item of this.items.value) {
@@ -1113,6 +1121,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			for (const key in this.calculateStatsHooks.runes.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
 				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.runes.value[key as keyof ICalculateChampionStatsHookSource]!);
+			}
+			for (const key in this.calculateStatsHooks.dragons.value) {
+				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
+				rv[key as keyof ICalculateChampionStatsHookSource]!.push(...this.calculateStatsHooks.dragons.value[key as keyof ICalculateChampionStatsHookSource]!);
 			}
 			for (const key in this.calculateStatsHooks.items.value) {
 				rv[key as keyof ICalculateChampionStatsHookSource] ??= [];
@@ -1897,6 +1909,11 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		baseStats: IStatsCalculationResult['base'];
 		bonusStats: IStatsCalculationResult['bonus'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
+	}) => void>;
+	/** runs after base stats are calculated, before any item stats calculations */
+	onDragon?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		isRanged: IStatsCalculationResult['isRanged'];
+		dragonStats: IStatsCalculationResult['dragon'];
 	}) => void>;
 	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];

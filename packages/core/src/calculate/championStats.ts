@@ -88,6 +88,15 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
 	)) as IChampionStats;
 
+	const dragonStats: Partial<IChampionStats> = {};
+
+	if (source.calculateStatsHooks.all.value.onDragon) {
+		for (const hook of source.calculateStatsHooks.all.value.onDragon) {
+			hook(source, { isRanged, dragonStats }, { calculatedVariables, miscDebug });
+		}
+	}
+	dragonStats.attackSpeed = (dragonStats.bonusAttackSpeedPercent ?? 0) * baseStats.attackSpeedRatio;
+
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	itemBaseStats.tenacity = 1;
 
@@ -162,6 +171,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			bonusStats.tenacity = 1 - addTenacity(1, runeShardStats.tenacity, itemTotalStats.tenacity, championPassiveStats.tenacity ?? 0);
 		} else {
 			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
+				+ (dragonStats[stat as IChampionStatName] ?? 0)
 				+ itemTotalStats[stat as IChampionStatName]
 				+ (championPassiveStats[stat as IChampionStatName] ?? 0);
 		}
@@ -238,6 +248,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		base: baseStats,
 		level: levelStats,
 		baseOnLevel: baseOnLevelStats,
+		dragon: dragonStats,
 		runeShards: runeShardStats,
 		itemBase: itemBaseStats,
 		itemPassive: itemPassivesStats,
