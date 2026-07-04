@@ -511,6 +511,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonSoul,
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
+			() => Object.values(this.internalDragonData.value || {}).join('-'),
 			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}-${effect.data.join('-')}`).join('|'),
 		];
 	}
@@ -558,6 +559,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
 			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('-'),
+			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('-'),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
 				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}-${effect.data.join('-')}`)
@@ -586,6 +588,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			rawDragonSoulIndex,
 			rawInternalData,
 			rawInternalItemData,
+			rawInternalDragonData,
 			rawEffectsData,
 			rawRoleQuestIndex,
 		] = data.split('_');
@@ -613,6 +616,18 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					const value = Number.parseFloat(rawValue);
 					if (!Number.isNaN(value)) {
 						rv.internalItemData.value[key] = value;
+					}
+				}
+			}
+		}
+
+		if (rawInternalDragonData?.length) {
+			for (const keyValue of rawInternalDragonData.split('-')) {
+				const [key, rawValue] = keyValue.split('~');
+				if (key && rawValue) {
+					const value = Number.parseFloat(rawValue);
+					if (!Number.isNaN(value)) {
+						rv.internalDragonData.value[key] = value;
 					}
 				}
 			}
