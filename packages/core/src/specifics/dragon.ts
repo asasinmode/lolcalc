@@ -1,5 +1,7 @@
+import type { TMiscData } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
-import type { IProviderGroupInternalDragonData } from '../DamageSource';
+import type { ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
+import { MISC } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
 
 /**
@@ -13,6 +15,14 @@ export const DRAGON_SPECIFICS = {
 			setupData(self) {
 				self.internalDragonData.value.isOOC = clamp(0, self.internalDragonData.value.isOOC ?? 0, 1);
 				return { isOOC: 0 };
+			},
+			calculateHooks: {
+				onDragon: {
+					handler(_self, { dragonStats }, { calculatedVariables }) {
+						calculatedVariables.totalBonusPercentMoveSpeed += (MISC as TMiscData).dragons.Cloud.stack.dataValues.MSAmountPerStack[1]!;
+						dragonStats.slowResist = (dragonStats.slowResist ?? 0) + (MISC as TMiscData).dragons.Cloud.stack.dataValues.SRAmountPerStack[1]!;
+					},
+				},
 			},
 		},
 		soul: {
@@ -36,4 +46,5 @@ export interface IDragonSpecific {
 };
 
 export type IDragonAbilitySpecific = IProviderGroupInternalDragonData & {
+	calculateHooks?: ICalculateChampionStatsHookSource;
 };
