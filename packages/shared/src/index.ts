@@ -26,6 +26,8 @@ export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShield
 
 export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 
+export type IMultiplicativeChampionStatName = 'tenacity' | 'slowResist';
+
 export type IChampionStats = Record<IChampionStatName, number>;
 
 export interface IStatsCalculationResult {
@@ -39,7 +41,7 @@ export interface IStatsCalculationResult {
 	/** base + level combined */
 	baseOnLevel: IChampionStats;
 	/** stats from rune shards */
-	runeShards: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity' | 'slowResist'>;
+	runeShards: Partial<IChampionStats> & Pick<IChampionStats, IMultiplicativeChampionStatName>;
 	/** raw stats given by items, no passives */
 	itemBase: IChampionStats;
 	/** stats from item passives */
@@ -47,7 +49,7 @@ export interface IStatsCalculationResult {
 	/** sum of `itemBase` and `itemPassive` */
 	itemTotal: IChampionStats;
 	/** stats from dragon stacks/soul */
-	dragon: Partial<IChampionStats>;
+	dragon: Partial<IChampionStats> & Pick<IChampionStats, IMultiplicativeChampionStatName>;
 	/** stats from champion's passive */
 	championPassive: Partial<IChampionStats>;
 	/**

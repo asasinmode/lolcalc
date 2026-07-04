@@ -1,5 +1,5 @@
 import type { IChampionId, IItem } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
@@ -88,7 +88,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
 	)) as IChampionStats;
 
-	const dragonStats: Partial<IChampionStats> = {};
+	const dragonStats: IStatsCalculationResult['dragon'] = {
+		tenacity: 1,
+		slowResist: 1,
+	};
 
 	if (source.calculateStatsHooks.all.value.onDragon) {
 		for (const hook of source.calculateStatsHooks.all.value.onDragon) {
@@ -96,6 +99,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 	dragonStats.attackSpeed = (dragonStats.bonusAttackSpeedPercent ?? 0) * baseStats.attackSpeedRatio;
+	dragonStats.tenacity = 1 - dragonStats.tenacity;
+	dragonStats.slowResist = 1 - dragonStats.slowResist;
 
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	itemBaseStats.tenacity = 1;
@@ -140,7 +145,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
 
-	const runeShardStats: Partial<IChampionStats> & Pick<IChampionStats, 'tenacity' | 'slowResist'> = {
+	const runeShardStats: IStatsCalculationResult['runeShards'] = {
 		tenacity: 1,
 		slowResist: 1,
 	};
@@ -169,8 +174,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	/* attack speed from level counts towards bonus */
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
-		if ((stat as IChampionStatName) === 'tenacity') {
-			bonusStats.tenacity = 1 - addMultiplicative(1, runeShardStats.tenacity, itemTotalStats.tenacity, championPassiveStats.tenacity ?? 0);
+		if ((stat as IChampionStatName) === 'tenacity' || (stat as IChampionStatName === 'slowResist')) {
+			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(1, runeShardStats[stat as IMultiplicativeChampionStatName], dragonStats[stat as IMultiplicativeChampionStatName], itemTotalStats[stat as IMultiplicativeChampionStatName], championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0);
 		} else {
 			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
 				+ (dragonStats[stat as IChampionStatName] ?? 0)
@@ -192,8 +197,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (championPassiveStats[statName as IChampionStatName] ?? 0)
 		+ itemTotalStats[statName as IChampionStatName]],
 	)) as IChampionStats;
-	/* possibly should not be done like that but that's what it is at this point */
+	/* maybe should not be done like that but that's what it is at this point */
 	totalPreMultipliersStats.tenacity = bonusStats.tenacity;
+	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
 	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
 	// TODO possibly has to be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it

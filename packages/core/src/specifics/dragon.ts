@@ -3,6 +3,7 @@ import type { IDragonName } from '@lolcalc/data/types';
 import type { ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
 import { MISC } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
+import { addMultiplicative } from '../calculate/util';
 
 /**
  * dragon ability specifics
@@ -20,7 +21,7 @@ export const DRAGON_SPECIFICS = {
 				onDragon: {
 					handler(_self, { dragonStats }, { calculatedVariables }) {
 						calculatedVariables.totalBonusPercentMoveSpeed += (MISC as TMiscData).dragons.Cloud.stack.dataValues.MSAmountPerStack[1]!;
-						dragonStats.slowResist = (dragonStats.slowResist ?? 0) + (MISC as TMiscData).dragons.Cloud.stack.dataValues.SRAmountPerStack[1]!;
+						dragonStats.slowResist = addMultiplicative(dragonStats.slowResist, (MISC as TMiscData).dragons.Cloud.stack.dataValues.SRAmountPerStack[1]!);
 					},
 				},
 			},
