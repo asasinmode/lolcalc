@@ -1,4 +1,4 @@
-import type { DamageSource, IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
+import type { DamageSource, IComputedAbilityDescription, IComputedDragonAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IReplacedGameVariable, IVariableMeta } from '@lolcalc/core/variables/game';
@@ -30,7 +30,7 @@ export interface IDamageResultTableSection {
 	selectValue?: string;
 	/** use with selectOptions */
 	selectLabel?: string;
-	hoverTooltipData?: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'> | IEffectHoverTooltipProps;
+	hoverTooltipData?: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'> | IEffectHoverTooltipProps | Pick<IDragonHoverTooltipProps, 'precomputedDescription'>;
 	rows: {
 		name: string;
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
@@ -76,10 +76,14 @@ export interface IEffectHoverTooltipProps {
 }
 
 export interface IDragonHoverTooltipProps {
+	/** either this and `type` or `precomputedDescription` should be provided */
 	dragon?: IDragonName;
+	/** either this and `dragon` or `precomputedDescription` should be provided */
 	type?: 'stack' | 'soul';
 	checkIfValid?: boolean;
 	damageSource?: DamageSource;
+	/** either this or `dragon` and `type` should be provided */
+	precomputedDescription?: IComputedDragonAbilityDescription;
 }
 
 export interface IItemDescriptionProps {

@@ -169,6 +169,9 @@ export const MISC: IMiscData = miscData.data;
 
 export const ALL_DRAGON_NAMES = Object.keys(MISC.dragons) as IDragonName[];
 
+/** dragons which souls have an ability that should be shown in results, for example cloud/chemtech souls only increase stats so there's no variables to be shown in results */
+export const INTERESTING_SOULS_DRAGONS: IDragonName[] = ['Mountain', 'Ocean', 'Hextech', 'Infernal'];
+
 export interface IMiscData {
 	dragons: Record<IDragonName, {
 		name: string;

@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IChampionAbilityId, IDragonAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
-import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
-import type { IChampion } from '@lolcalc/data/types';
+import type { IChampion, IDragonName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import type { UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
-import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
+import { computeAbilityDescription, computeDragonAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage, simpleDescriptionFormatting } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
-import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon';
 import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, imgUrl, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
+import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, imgUrl, INTERESTING_SOULS_DRAGONS, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils';
 
@@ -148,6 +146,29 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 		.sort((a, b) => a.name.localeCompare(b.name));
 });
 
+const damageSectionDragonAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
+	const dragons: IDragonName[] = [];
+	for (const damageSource of props.damageSources) {
+		const { value } = damageSource.dragonSoul;
+		if (value && INTERESTING_SOULS_DRAGONS.includes(value) && !dragons.includes(value)) {
+			dragons.push(value);
+		}
+	}
+	for (const damageSource of props.damageTargets) {
+		const { value } = damageSource.dragonSoul;
+		if (value && INTERESTING_SOULS_DRAGONS.includes(value) && !dragons.includes(value)) {
+			dragons.push(value);
+		}
+	}
+
+	return dragons
+		.map((dragon): IDamageSectionOption['abilities'][number] => ({
+			name: `${dragon} Soul`,
+			id: GameAbilityId.build(AbilityType.dragon, dragon, 'soul'),
+		}))
+		.sort((a, b) => a.name.localeCompare(b.name));
+});
+
 const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
 	const effectObjectNames = new Set(props.damageSources
 		.flatMap(damageSource =>
@@ -182,6 +203,15 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		optionName: 'items',
 		type: 'item',
 		abilities: damageSectionItemAbilities.value.filter(ability =>
+			!resultSections.value.some(section => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id)),
+		),
+	});
+
+	options.push({
+		optionId: 'dragons',
+		optionName: 'dragons',
+		type: 'dragon',
+		abilities: damageSectionDragonAbilities.value.filter(ability =>
 			!resultSections.value.some(section => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id)),
 		),
 	});
@@ -421,6 +451,12 @@ const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (sectio
 	return gameVariablesCellValue(rowId, computedItem?.variables);
 };
 
+const dragonVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+	if (source?.computed.dragonSoulAbility.value?.dragon === (section.abilityId as IDragonAbilityId).id) {
+		return gameVariablesCellValue(rowId, source.computed.dragonSoulAbility.value.variables);
+	}
+};
+
 const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
 	if (source) {
 		const { gameAbilityId } = (section.hoverTooltipData as IChampionAbilityHoverTooltipProps).precomputedDescription!;
@@ -552,8 +588,18 @@ async function addResultsSection(
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
 	} else if (abilityId.type === AbilityType.dragon) {
-		const specific = (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[abilityId.id];
-		console.log('TODO handle dragon specific', abilityId, specific);
+		if (!INTERESTING_SOULS_DRAGONS.includes(abilityId.id)) {
+			removeBeingAddedSection(section);
+			return;
+		}
+
+		const precomputedDescription = computeDragonAbilityDescription(abilityId.id, abilityId.subtype, undefined, false); ;
+		console.log('precomputed', precomputedDescription);
+		section.name ??= `${abilityId.id} Soul`;
+		section.image = await gameAbilityImage(abilityId);
+		section.rows = await getAbilitySectionRows(precomputedDescription);
+		section.getCellValue = dragonVariableCellValue;
+		section.hoverTooltipData = { precomputedDescription };
 	} else {
 		const effectSpecific = EFFECT_SPECIFICS[abilityId.id]!;
 		if (!effectSpecific.variables) {
@@ -1526,6 +1572,10 @@ defineExpose({
 									/>
 									<LolEffectHoverTooltip
 										v-else-if="section.abilityId.type === AbilityType.effect"
+										v-bind="section.hoverTooltipData as any"
+									/>
+									<LolDragonHoverTooltip
+										v-else-if="section.abilityId.type === AbilityType.dragon"
 										v-bind="section.hoverTooltipData as any"
 									/>
 								</template>
