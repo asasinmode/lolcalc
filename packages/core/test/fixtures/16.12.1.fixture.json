@@ -26,6 +26,31 @@
 				"attackspeedratio": 0.625
 			}
 		},
+		"Evelynn": {
+			"stats": {
+				"hp": 642,
+				"hpperlevel": 98,
+				"mp": 315,
+				"mpperlevel": 42,
+				"movespeed": 335,
+				"armor": 37,
+				"armorperlevel": 4.7,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 8.5,
+				"hpregenperlevel": 0.75,
+				"mpregen": 8.11,
+				"mpregenperlevel": 0.6,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 61,
+				"attackdamageperlevel": 3,
+				"attackspeedperlevel": 2.1,
+				"attackspeed": 0.667,
+				"attackspeedratio": 0.667
+			}
+		},
 		"Kayle": {
 			"stats": {
 				"hp": 670,
@@ -536,6 +561,16 @@
 				}
 			}
 		},
+		"3020": {
+			"name": "Sorcerer's Shoes",
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"FlatMagicPenetrationMod": 12
+			},
+			"dataValues": {
+				"FeatsMPen": 2
+			}
+		},
 		"3068": {
 			"name": "Sunfire Aegis",
 			"stats": {
@@ -763,6 +798,15 @@
 				}
 			}
 		},
+		"3089": {
+			"name": "Rabadon's Deathcap",
+			"stats": {
+				"FlatMagicDamageMod": 130
+			},
+			"dataValues": {
+				"APAmp": 0.3
+			}
+		},
 		"3100": {
 			"name": "Lich Bane",
 			"stats": {
@@ -858,6 +902,18 @@
 					"DefaultResult": "@MeleeItemCalcValue@"
 				}
 			}
+		},
+		"3157": {
+			"name": "Zhonya's Hourglass",
+			"stats": {
+				"FlatMagicDamageMod": 105,
+				"FlatArmorMod": 50
+			},
+			"dataValues": {
+				"Cooldown": 120,
+				"Duration": 2.5
+			},
+			"effectAmount": [0, 2.5, 120]
 		},
 		"3181": {
 			"name": "Hullbreaker",
@@ -1290,6 +1346,71 @@
 					]
 				},
 				"TooltipDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"4645": {
+			"name": "Shadowflame",
+			"stats": {
+				"FlatMagicDamageMod": 110,
+				"FlatMagicPenetrationMod": 15
+			},
+			"dataValues": {
+				"HealthThreshold": 0.4,
+				"SpellItemDamageAmp": 0.2,
+				"DamageOverTimeAmp": 0.2
+			}
+		},
+		"4646": {
+			"name": "Stormsurge",
+			"categories": {
+				"mage": true
+			},
+			"stats": {
+				"FlatMagicDamageMod": 90,
+				"PercentMovementSpeedMod": 0.06,
+				"FlatMagicPenetrationMod": 15
+			},
+			"dataValues": {
+				"WindowDuration": 2.5,
+				"Cooldown": 30,
+				"DelayDuration": 2,
+				"APRatio": 0.1,
+				"DamageThreshold": 0.25,
+				"ProcMoveSpeedDuration": 1.5,
+				"RangedProcDamageMod": 1,
+				"BaseDamage": 125
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedProcDamageMod"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				},
+				"SquallDamage": {
 					"mFormulaParts": [
 						{
 							"mDataValue": "BaseDamage",

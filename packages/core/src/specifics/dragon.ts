@@ -3,7 +3,7 @@ import type { IDragonName } from '@lolcalc/data/types';
 import type { ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
 import { MISC } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
-import { addMultiplicative } from '../calculate/util';
+import { addMultiplicative } from '../calculate/util.ts';
 
 /**
  * dragon ability specifics

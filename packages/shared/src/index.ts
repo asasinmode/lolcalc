@@ -357,6 +357,7 @@ export const ITEM_NAME_TO_ID = {
 	mawOfMalmortius: '3156',
 	jakSho: '6665',
 	bootsOfSwiftness: '3009',
+	sorcerersShoes: '3020',
 	swiftmarch: '3170',
 	crimsonLucidity: '3171',
 	berserkerGreaves: '3006',
@@ -444,6 +445,8 @@ export const ITEM_NAME_TO_ID = {
 	axiomArc: '6696',
 	profaneHydra: '6698',
 	mercurysTreads: '3111',
+	zhonya: '3157',
+	shadowflame: '4645',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
