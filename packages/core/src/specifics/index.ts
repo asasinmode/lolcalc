@@ -1,4 +1,4 @@
-import type { IChampionId } from '@lolcalc/data/types';
+import type { IChampionId, IDragonName } from '@lolcalc/data/types';
 import type { IChampionStatName, TItemNameToId } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
@@ -90,6 +90,13 @@ export type IInternalDataOf<Champion extends keyof TChampionSpecifics> = IGameAb
 export type IInternalItemDataOf<K extends keyof TItemNameToId>
 	= K extends any
 		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>
+		: never;
+
+export type IInternalDragonDataOf<Dragon extends IDragonName, Subtype extends 'stack' | 'soul'>
+	= Dragon extends keyof TDragonSpecifics
+		? Subtype extends keyof TDragonSpecifics[Dragon]
+			? IGameAbilityData<any, TDragonSpecifics[Dragon][Subtype]>
+			: never
 		: never;
 
 export interface ICalculatesFromPart {

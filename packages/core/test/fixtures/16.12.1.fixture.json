@@ -561,6 +561,16 @@
 				}
 			}
 		},
+		"3009": {
+			"name": "Boots of Swiftness",
+			"stats": {
+				"FlatMovementSpeedMod": 55
+			},
+			"dataValues": {
+				"SlowResistTooltip": 25,
+				"FeatsMS": 5
+			}
+		},
 		"3020": {
 			"name": "Sorcerer's Shoes",
 			"stats": {
