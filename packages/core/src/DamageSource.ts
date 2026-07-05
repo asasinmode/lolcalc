@@ -1923,6 +1923,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		baseStats: IStatsCalculationResult['base'];
 		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 		itemStatIncreases: IStatsCalculationResult['itemStatIncreases'];
+		totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'];
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {

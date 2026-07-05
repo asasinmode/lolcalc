@@ -59,7 +59,10 @@ export interface IStatsCalculationResult {
 	 * `mejai, hubris`
 	 */
 	itemStatIncreases: Record<string, Partial<Record<IItemStat, number>>>;
-	/** stats gained from any multipliers like mid role quest, dragons or rabadon */
+	/**
+	 * stats gained from any multipliers like mid role quest, dragons, rabadon or jak'sho
+	 * atm this tries to include both multipliers to all types of stats, base/bonus/total. Maybe they should be separated
+	 */
 	totalMultipliers: IChampionStats;
 	/** total stats before applying multipliers (`totalMultipliersStats`) */
 	totalPreMultipliers: IChampionStats;
@@ -161,6 +164,10 @@ export interface IStatsCalculationVariables {
 	stormrazorMSPercent?: number;
 	/** move speed percent gained from mercurial scimitar's passive */
 	mercurialMSPercent?: number;
+	/** armor gained from jak'sho's passive */
+	jakShoArmor?: number;
+	/** magic resist gained from jak'sho's passive */
+	jakShoMagicResist?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
