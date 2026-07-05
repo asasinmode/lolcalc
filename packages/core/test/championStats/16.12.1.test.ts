@@ -33,7 +33,7 @@ test('Evelynn, dragons', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18, mountain', async () => {
+	await t.test('lvl 18 | mountain', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
 			...sorcShoesCommon,
 			level: 18,
@@ -52,7 +52,7 @@ test('Evelynn, dragons', async (t) => {
 		items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.zhonya, ITEMS_BY_NAME.shadowflame, ITEMS_BY_NAME.stormsurge, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.lichBane],
 	};
 
-	await t.test('lvl 18, mountain, cloud', async () => {
+	await t.test('lvl 18 | mountain, cloud', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
 			...swiftnessBootsCommon,
 			level: 18,
@@ -66,7 +66,7 @@ test('Evelynn, dragons', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18, mountain, cloud, hextech', async () => {
+	await t.test('lvl 18 | mountain, cloud, hextech', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
 			...swiftnessBootsCommon,
 			level: 18,
@@ -94,7 +94,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 		items: [ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.krakenSlayer, ITEMS_BY_NAME.collector, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.ldr],
 	};
 
-	await t.test('lvl 18, ad', async () => {
+	await t.test('lvl 18 | ad', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', adItemsCommon);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -102,7 +102,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18, ad, infernal', async () => {
+	await t.test('lvl 18 | ad | infernal', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', {
 			...adItemsCommon,
 			dragonStacks: ['Infernal'],
@@ -110,6 +110,18 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 483,
+		});
+	});
+
+	await t.test('lvl 18 | ad | infernal, chemtech', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...adItemsCommon,
+			dragonStacks: ['Infernal', 'Chemtech'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			healShieldPower: 6,
+			tenacity: 20,
 		});
 	});
 

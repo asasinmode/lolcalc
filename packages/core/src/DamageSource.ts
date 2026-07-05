@@ -1962,6 +1962,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalStats: IStatsCalculationResult['total'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+		totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];

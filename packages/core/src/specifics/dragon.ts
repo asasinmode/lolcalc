@@ -11,6 +11,18 @@ import { addMultiplicative } from '../calculate/util.ts';
  * order of the keys matters for stringifying game ability id, if it changes it could warrant updating stringified state version
  */
 export const DRAGON_SPECIFICS = {
+	Chemtech: {
+		stack: {
+			calculateHooks: {
+				onDragon: {
+					handler(_self, { dragonStats }) {
+						dragonStats.healShieldPower = (dragonStats.healShieldPower ?? 0) + (MISC as TMiscData).dragons.Chemtech.stack.dataValues.HealShieldPerStack[1]!;
+						dragonStats.tenacity = addMultiplicative(dragonStats.tenacity, (MISC as TMiscData).dragons.Chemtech.stack.dataValues.TenacityPerStack[1]!);
+					},
+				},
+			},
+		},
+	},
 	Cloud: {
 		stack: {
 			internalDataProperties: ['isOOC'],

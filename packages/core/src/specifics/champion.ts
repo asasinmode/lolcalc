@@ -532,12 +532,14 @@ export const CHAMPION_SPECIFICS = {
 	Rammus: {
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, championPassiveStats, bonusStats }) {
+				handler(self, { totalStats, totalMultipliersStats, totalStatMultipliers, championPassiveStats, bonusStats }) {
 					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 					if (typeof bonusAd.value === 'number') {
 						championPassiveStats.attackDamage = bonusAd.value;
-						totalStats.attackDamage += championPassiveStats.attackDamage;
-						bonusStats.attackDamage += championPassiveStats.attackDamage;
+						const multiplierValue = championPassiveStats.attackDamage * totalStatMultipliers.attackDamage;
+						totalMultipliersStats.attackDamage += multiplierValue;
+						totalStats.attackDamage += championPassiveStats.attackDamage + multiplierValue;
+						bonusStats.attackDamage += championPassiveStats.attackDamage + multiplierValue;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad', bonusAd);
 					}

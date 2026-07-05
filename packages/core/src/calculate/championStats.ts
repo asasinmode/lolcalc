@@ -263,11 +263,16 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { isRanged, totalStats, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, totalStats, totalStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
 	return {
+		meta: {
+			hasMana: !champion || champion.partype === 'mana',
+			adaptiveForceStatVariable: adaptiveForceMeta[1],
+		},
+		isRanged,
 		initial: initialStats,
 		base: baseStats,
 		level: levelStats,
@@ -279,18 +284,13 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotal: itemTotalStats,
 		itemStatIncreases,
 		championPassive: championPassiveStats,
+		effect: effectStats,
 		totalPreMultipliers: totalPreMultipliersStats,
 		totalMultipliers: totalMultipliersStats,
 		totalStatMultipliers,
 		bonus: bonusStats,
 		total: totalStats,
-		effect: effectStats,
-		meta: {
-			hasMana: !champion || champion.partype === 'mana',
-			adaptiveForceStatVariable: adaptiveForceMeta[1],
-		},
 		variables: calculatedVariables,
-		isRanged,
 		miscDebug,
 	};
 }

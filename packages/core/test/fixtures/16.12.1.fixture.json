@@ -2130,6 +2130,17 @@
 			"adMultiplier": 0.08
 		},
 		"dragons": {
+			"Chemtech": {
+				"name": "Chemtech",
+				"stack": {
+					"objectName": "SRX_DragonBuffChemTech",
+					"dataKey": "Shared/Spells/SRX_DragonBuffChemTech",
+					"dataValues": {
+						"TenacityPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06],
+						"HealShieldPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
+					}
+				}
+			},
 			"Cloud": {
 				"name": "Cloud",
 				"stack": {
@@ -2149,15 +2160,6 @@
 					}
 				}
 			},
-			"Mountain": {
-				"name": "Mountain",
-				"stack": {
-					"objectName": "SRX_DragonBuffMountain",
-					"dataValues": {
-						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
-					}
-				}
-			},
 			"Hextech": {
 				"name": "Hextech",
 				"stack": {
@@ -2165,6 +2167,25 @@
 					"dataValues": {
 						"AbilityHaste": [5, 5, 5, 5, 5, 5, 5],
 						"AttackSpeed": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				}
+			},
+			"Infernal": {
+				"name": "Infernal",
+				"stack": {
+					"objectName": "SRX_DragonBuffInfernal",
+					"dataKey": "Shared/Spells/SRX_DragonBuffInfernal",
+					"dataValues": {
+						"ADandAPPercentIncrease": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
+					}
+				}
+			},
+			"Mountain": {
+				"name": "Mountain",
+				"stack": {
+					"objectName": "SRX_DragonBuffMountain",
+					"dataValues": {
+						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 					}
 				}
 			}
