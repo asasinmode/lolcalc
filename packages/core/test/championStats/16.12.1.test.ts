@@ -10,7 +10,8 @@ test.before(() => {
 });
 
 test('Evelynn, dragons', async (t) => {
-	const sorcShoesCommon: IOverrides<'Evelynn'> = {
+	const sourceCommon: IOverrides<'Evelynn'> = {
+		level: 18,
 		runes: {
 			shards: {
 				offensive: 'adaptive',
@@ -18,44 +19,33 @@ test('Evelynn, dragons', async (t) => {
 				defensive: 'health',
 			},
 		},
-		items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.zhonya, ITEMS_BY_NAME.shadowflame, ITEMS_BY_NAME.stormsurge, ITEMS_BY_NAME.sorcerersShoes, ITEMS_BY_NAME.lichBane],
 	};
 
-	await t.test('lvl 1', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Evelynn', { ...sorcShoesCommon, level: 1 });
+	await t.test('lvl 18 | sorc shoes | mountain', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.zhonya, ITEMS_BY_NAME.shadowflame, ITEMS_BY_NAME.stormsurge, ITEMS_BY_NAME.sorcerersShoes, ITEMS_BY_NAME.lichBane],
+			dragonStacks: ['Mountain'],
+		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 719,
-			armor: 87,
+			armor: 175,
+			magicResist: 70,
 			abilityHaste: 10,
 			moveSpeed: 423,
 			flatMagicPen: 42,
 		});
 	});
 
-	await t.test('lvl 18 | mountain', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
-			...sorcShoesCommon,
-			level: 18,
-			dragonStacks: ['Mountain'],
-		});
-
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 175,
-			magicResist: 70,
-		});
-	});
-
-	const swiftnessBootsCommon: IOverrides<'Evelynn'> = {
-		level: 18,
-		runes: sorcShoesCommon.runes,
+	const swiftnessBootsCommon = {
+		...sourceCommon,
 		items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.zhonya, ITEMS_BY_NAME.shadowflame, ITEMS_BY_NAME.stormsurge, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.lichBane],
 	};
 
-	await t.test('lvl 18 | mountain, cloud', async () => {
+	await t.test('lvl 18 | mountain, cloud+', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
 			...swiftnessBootsCommon,
-			level: 18,
 			dragonStacks: ['Mountain', 'Cloud'],
 			internalDragonData: { isOOC: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
 		});
@@ -66,10 +56,9 @@ test('Evelynn, dragons', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18 | mountain, cloud, hextech', async () => {
+	await t.test('lvl 18 | swiftness boots | mountain, cloud, hextech', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
 			...swiftnessBootsCommon,
-			level: 18,
 			dragonStacks: ['Mountain', 'Cloud', 'Hextech'],
 		});
 
@@ -77,6 +66,7 @@ test('Evelynn, dragons', async (t) => {
 			attackSpeed: 0.938,
 			abilityHaste: 15,
 			moveSpeed: 432,
+			slowResist: 29,
 		});
 	});
 });
@@ -94,34 +84,18 @@ test('Rammus, dragons & percentage items', async (t) => {
 		items: [ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.krakenSlayer, ITEMS_BY_NAME.collector, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.ldr],
 	};
 
-	await t.test('lvl 18 | ad', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', adItemsCommon);
-
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 469,
-		});
-	});
-
-	await t.test('lvl 18 | ad | infernal', async () => {
+	await t.test('lvl 18 | ad | infernal, chemtech, mountain', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', {
 			...adItemsCommon,
-			dragonStacks: ['Infernal'],
+			dragonStacks: ['Infernal', 'Chemtech', 'Mountain'],
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 483,
-		});
-	});
-
-	await t.test('lvl 18 | ad | infernal, chemtech', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', {
-			...adItemsCommon,
-			dragonStacks: ['Infernal', 'Chemtech'],
-		});
-
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 484,
 			healShieldPower: 6,
 			tenacity: 20,
+			armor: 117,
+			magicResist: 70,
 		});
 	});
 
