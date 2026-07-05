@@ -48,6 +48,13 @@ export const DRAGON_SPECIFICS = {
 				self.internalDragonData.value.hasUlted = clamp(0, self.internalDragonData.value.hasUlted ?? 0, 1);
 				return { isOOC: 0, hasUlted: 0 };
 			},
+			calculateHooks: {
+				onDragon: {
+					handler(_self, _args, { calculatedVariables }) {
+						calculatedVariables.totalBonusPercentMoveSpeed += (MISC as TMiscData).dragons.Cloud.soul.dataValues.PersistentMSValue[1]!;
+					},
+				},
+			},
 		},
 	},
 	Hextech: {

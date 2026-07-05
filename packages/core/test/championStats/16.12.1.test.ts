@@ -99,6 +99,18 @@ test('Rammus, dragons & percentage items', async (t) => {
 		});
 	});
 
+	await t.test('lvl 18 | ad | infernal, chemtech, mountain, cloud | cloud soul', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...adItemsCommon,
+			dragonStacks: ['Infernal', 'Chemtech', 'Mountain', 'Cloud'],
+			dragonSoul: 'Cloud',
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			moveSpeed: 407,
+		});
+	});
+
 	// const apTankItemsCommon: IOverrides<'Rammus'> = {
 	// 	level: adItemsCommon.level,
 	// 	runes: adItemsCommon.runes,
