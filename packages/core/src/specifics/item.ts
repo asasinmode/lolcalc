@@ -1008,7 +1008,6 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.moveSpeed += ITEM_SPECIFICS[ITEM_NAME_TO_ID.bandlepipes].FANFARE_MOVE_SPEED;
 
 					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: isRanged ?? true });
-
 					if (typeof attackSpeed.value === 'number') {
 						itemPassivesStats.bonusAttackSpeedPercent += attackSpeed.value;
 					} else {

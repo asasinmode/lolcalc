@@ -144,13 +144,19 @@ export const EFFECT_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }) {
+				handler(self, { itemPassivesStats, effectStats }) {
 					const effect = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.bandlepipesFanfare));
-					if (!effect?.[0].data[0]) {
+					if (!effect?.[0].data[0] || (self.internalItemData.value as IInternalItemDataOf<'bandlepipes'>).fanfare) {
 						return;
 					}
 
-					console.log('bandlepiping', effect[0].data);
+					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: effect?.[0].data[0] === MeleeRangedEnumOptions.ranged });
+					if (typeof attackSpeed.value === 'number') {
+						itemPassivesStats.bonusAttackSpeedPercent += attackSpeed.value;
+						effectStats.bonusAttackSpeedPercent = (effectStats.bonusAttackSpeedPercent ?? 0) + attackSpeed.value;
+					} else {
+						console.warn('[EFFECT_SPECIFICS Bandlepipes] failed to calculate bonus attack speed');
+					}
 				},
 			},
 		},
@@ -185,7 +191,7 @@ export const EFFECT_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, effectStats }, { calculatedVariables }) {
 					const value = totalPreMultipliersStats.attackSpeed * ITEMS_BY_NAME.frozenHeart?.dataValues.ASPDSlow;
-					effectStats.attackSpeed = value;
+					effectStats.attackSpeed = (effectStats.attackSpeed ?? 0) + value;
 					totalMultipliersStats.attackSpeed += value;
 					calculatedVariables.frozenHeartCaress = value;
 				},
