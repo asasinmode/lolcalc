@@ -65,4 +65,18 @@ test('Evelynn, dragons', async (t) => {
 			slowResist: 29,
 		});
 	});
+
+	await t.test('lvl 18, mountain, cloud, hextech', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
+			...swiftnessBootsCommon,
+			level: 18,
+			dragonStacks: ['Mountain', 'Cloud', 'Hextech'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 0.938,
+			abilityHaste: 15,
+			moveSpeed: 432,
+		});
+	});
 });

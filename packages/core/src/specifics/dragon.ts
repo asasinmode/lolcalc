@@ -50,6 +50,18 @@ export const DRAGON_SPECIFICS = {
 			},
 		},
 	},
+	Hextech: {
+		stack: {
+			calculateHooks: {
+				onDragon: {
+					handler(_self, { dragonStats }) {
+						dragonStats.abilityHaste = (dragonStats.abilityHaste ?? 0) + (MISC as TMiscData).dragons.Hextech.stack.dataValues.AbilityHaste[1]!;
+						dragonStats.bonusAttackSpeedPercent = (dragonStats.bonusAttackSpeedPercent ?? 0) + (MISC as TMiscData).dragons.Hextech.stack.dataValues.AttackSpeed[1]!;
+					},
+				},
+			},
+		},
+	},
 } satisfies IHypotheticalDragonSpecifics;
 
 export type IHypotheticalDragonSpecifics = Partial<Record<IDragonName, IDragonSpecific>>;
