@@ -1766,5 +1766,51 @@
 				}
 			}
 		}
+	},
+	"misc": {
+		"roleQuest": {
+			"apMultiplier": 0.08,
+			"adMultiplier": 0.08
+		},
+		"dragons": {
+			"Cloud": {
+				"name": "Cloud",
+				"stack": {
+					"objectName": "SRX_DragonBuffCloud",
+					"dataValues": {
+						"SRAmountPerStack": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"MSAmountPerStack": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				},
+				"soul": {
+					"objectName": "SRX_DragonSoulBuffCloud",
+					"dataValues": {
+						"MSBuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"MSAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MSBuffCooldown": [30, 30, 30, 30, 30, 30, 30],
+						"PersistentMSValue": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
+					}
+				}
+			},
+			"Mountain": {
+				"name": "Mountain",
+				"stack": {
+					"objectName": "SRX_DragonBuffMountain",
+					"dataValues": {
+						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				}
+			},
+			"Hextech": {
+				"name": "Hextech",
+				"stack": {
+					"objectName": "SRX_DragonBuffHextech",
+					"dataValues": {
+						"AbilityHaste": [5, 5, 5, 5, 5, 5, 5],
+						"AttackSpeed": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				}
+			}
+		}
 	}
 }
