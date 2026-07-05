@@ -38,18 +38,6 @@ export const DRAGON_SPECIFICS = {
 			},
 		},
 	},
-	Mountain: {
-		stack: {
-			calculateHooks: {
-				onDragon: {
-					handler(_self, { totalStatMultipliers }) {
-						totalStatMultipliers.armor += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
-						totalStatMultipliers.magicResist += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
-					},
-				},
-			},
-		},
-	},
 	Hextech: {
 		stack: {
 			calculateHooks: {
@@ -57,6 +45,31 @@ export const DRAGON_SPECIFICS = {
 					handler(_self, { dragonStats }) {
 						dragonStats.abilityHaste = (dragonStats.abilityHaste ?? 0) + (MISC as TMiscData).dragons.Hextech.stack.dataValues.AbilityHaste[1]!;
 						dragonStats.bonusAttackSpeedPercent = (dragonStats.bonusAttackSpeedPercent ?? 0) + (MISC as TMiscData).dragons.Hextech.stack.dataValues.AttackSpeed[1]!;
+					},
+				},
+			},
+		},
+	},
+	Infernal: {
+		stack: {
+			calculateHooks: {
+				onDragon: {
+					handler(_self, { dragonStats, totalStatMultipliers }) {
+						const multiplier = (dragonStats.abilityHaste ?? 0) + (MISC as TMiscData).dragons.Infernal.stack.dataValues.ADandAPPercentIncrease[1]!;
+						totalStatMultipliers.attackDamage += multiplier;
+						totalStatMultipliers.abilityPower += multiplier;
+					},
+				},
+			},
+		},
+	},
+	Mountain: {
+		stack: {
+			calculateHooks: {
+				onDragon: {
+					handler(_self, { totalStatMultipliers }) {
+						totalStatMultipliers.armor += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
+						totalStatMultipliers.magicResist += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
 					},
 				},
 			},

@@ -102,6 +102,17 @@ test('Rammus, dragons & percentage items', async (t) => {
 		});
 	});
 
+	await t.test('lvl 18, ad, infernal', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...adItemsCommon,
+			dragonStacks: ['Infernal'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 483,
+		});
+	});
+
 	// const apTankItemsCommon: IOverrides<'Rammus'> = {
 	// 	level: adItemsCommon.level,
 	// 	runes: adItemsCommon.runes,
