@@ -142,6 +142,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 			armor: 206,
 			magicResist: 234,
 			moveSpeed: 479,
+			attackSpeed: 1.12,
 		});
 	});
 });

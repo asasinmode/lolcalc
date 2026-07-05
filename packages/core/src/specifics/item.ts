@@ -989,6 +989,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.bandlepipes]: {
+		FANFARE_MOVE_SPEED: itemVariableValue('MoveSpeed', { item: ITEMS_BY_NAME.bandlepipes }).value as number,
 		internalDataProperties: ['fanfare'],
 		setupData(self) {
 			self.internalItemData.value.fanfare = clamp(0, self.internalItemData.value.fanfare ?? 0, 1);
@@ -997,6 +998,28 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { fanfare: number }) {
 			return internalData.fanfare;
 		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { isRanged, itemPassivesStats }) {
+					if (!(self.internalItemData.value as IInternalItemDataOf<'bandlepipes'>).fanfare) {
+						return;
+					}
+
+					itemPassivesStats.moveSpeed += ITEM_SPECIFICS[ITEM_NAME_TO_ID.bandlepipes].FANFARE_MOVE_SPEED;
+
+					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: isRanged ?? true });
+
+					if (typeof attackSpeed.value === 'number') {
+						itemPassivesStats.bonusAttackSpeedPercent += attackSpeed.value;
+					} else {
+						console.warn('[ITEM_SPECIFICS Bandlepipes] failed to calculate bonus attack speed');
+					}
+				},
+			},
+		},
+		variables: defineVariables({
+			uninteresting: ['BuffDuration', 'MoveSpeed', 'AuraAttackSpeed'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.protoplasmHarness]: {
 		internalDataProperties: ['pHLifeline'],
@@ -1518,21 +1541,19 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			onTotalPreMultipliers: {
 				handler(self, { itemPassivesStats, bonusStats, totalPreMultipliersStats }, { calculatedVariables }) {
-					if ((self.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance) {
-						const resistPercentage = itemVariableValue('BonusResistPercentage', { item: ITEMS_BY_NAME.jakSho });
-						if (typeof resistPercentage.value === 'number') {
-							calculatedVariables.jakShoArmor = bonusStats.armor * resistPercentage.value;
-							calculatedVariables.jakShoMagicResist = bonusStats.magicResist * resistPercentage.value;
-							totalPreMultipliersStats.armor += calculatedVariables.jakShoArmor;
-							totalPreMultipliersStats.magicResist += calculatedVariables.jakShoMagicResist;
-							itemPassivesStats.armor += calculatedVariables.jakShoArmor;
-							itemPassivesStats.magicResist += calculatedVariables.jakShoMagicResist;
-						} else {
-							console.warn('[ITEM_SPECIFICS Jak\'Sho] failed to calculate bonus resist percentage');
-						}
+					if (!(self.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance) {
+						return;
+					}
+					const resistPercentage = itemVariableValue('BonusResistPercentage', { item: ITEMS_BY_NAME.jakSho });
+					if (typeof resistPercentage.value === 'number') {
+						calculatedVariables.jakShoArmor = bonusStats.armor * resistPercentage.value;
+						calculatedVariables.jakShoMagicResist = bonusStats.magicResist * resistPercentage.value;
+						totalPreMultipliersStats.armor += calculatedVariables.jakShoArmor;
+						totalPreMultipliersStats.magicResist += calculatedVariables.jakShoMagicResist;
+						itemPassivesStats.armor += calculatedVariables.jakShoArmor;
+						itemPassivesStats.magicResist += calculatedVariables.jakShoMagicResist;
 					} else {
-						calculatedVariables.jakShoArmor = 0;
-						calculatedVariables.jakShoMagicResist = 0;
+						console.warn('[ITEM_SPECIFICS Jak\'Sho] failed to calculate bonus resist percentage');
 					}
 				},
 			},
