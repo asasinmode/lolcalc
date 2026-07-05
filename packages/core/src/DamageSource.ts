@@ -1914,6 +1914,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	onDragon?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		dragonStats: IStatsCalculationResult['dragon'];
+		totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'];
 	}) => void>;
 	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];

@@ -1,5 +1,4 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
@@ -11,7 +10,6 @@ test.before(() => {
 
 test('Evelynn, dragons', async (t) => {
 	const sourceCommon: IOverrides<'Evelynn'> = {
-		level: 18,
 		runes: {
 			shards: {
 				offensive: 'adaptive',
@@ -22,13 +20,28 @@ test('Evelynn, dragons', async (t) => {
 		items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.zhonya, ITEMS_BY_NAME.shadowflame, ITEMS_BY_NAME.stormsurge, ITEMS_BY_NAME.sorcerersShoes, ITEMS_BY_NAME.lichBane],
 	};
 
-	await t.test('rfc sharpshooter', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Evelynn', sourceCommon);
+	await t.test('lvl 1', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Evelynn', { ...sourceCommon, level: 1 });
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			/* game shows 404, not sure why */
-			attackRange: 405,
+			abilityPower: 719,
+			armor: 87,
+			abilityHaste: 10,
+			moveSpeed: 423,
+			flatMagicPen: 42,
 		});
-		assert.strictEqual(damageSource.stats.value.isRanged, false);
+	});
+
+	await t.test('lvl 18, mountain', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Evelynn', {
+			...sourceCommon,
+			level: 18,
+			dragonStacks: ['Mountain'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 175,
+			magicResist: 70,
+		});
 	});
 });

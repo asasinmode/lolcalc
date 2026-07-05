@@ -63,6 +63,8 @@ export interface IStatsCalculationResult {
 	totalMultipliers: IChampionStats;
 	/** total stats before applying multipliers (`totalMultipliersStats`) */
 	totalPreMultipliers: IChampionStats;
+	/** multipliers applied to some `preTotalMultipliers` stats. They can come from stuff like dragons or items like Rabadon or Jak'Sho */
+	totalStatMultipliers: Pick<IChampionStats, 'attackDamage' | 'abilityPower' | 'armor' | 'magicResist'>;
 	bonus: IChampionStats;
 	effect: Partial<IChampionStats>;
 	total: IChampionStats;

@@ -35,6 +35,18 @@ export const DRAGON_SPECIFICS = {
 			},
 		},
 	},
+	Mountain: {
+		stack: {
+			calculateHooks: {
+				onDragon: {
+					handler(_self, { totalStatMultipliers }) {
+						totalStatMultipliers.armor += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
+						totalStatMultipliers.magicResist += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
+					},
+				},
+			},
+		},
+	},
 } satisfies IHypotheticalDragonSpecifics;
 
 export type IHypotheticalDragonSpecifics = Partial<Record<IDragonName, IDragonSpecific>>;

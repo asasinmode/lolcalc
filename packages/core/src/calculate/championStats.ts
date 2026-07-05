@@ -45,6 +45,13 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
 	};
+	// TODO try to see if mid quest can or if item ability power multipliers should be here, infernal soul works different from mid quest?
+	const totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'] = {
+		attackDamage: 0,
+		abilityPower: 0,
+		armor: 0,
+		magicResist: 0,
+	};
 	const miscDebug: IStatsCalculationMiscDebug = {
 		movespeedSoftCapPenalty: 0,
 	};
@@ -95,7 +102,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.onDragon) {
 		for (const hook of source.calculateStatsHooks.all.value.onDragon) {
-			hook(source, { isRanged, dragonStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, dragonStats, totalStatMultipliers }, { calculatedVariables, miscDebug });
 		}
 	}
 	dragonStats.attackSpeed = (dragonStats.bonusAttackSpeedPercent ?? 0) * baseStats.attackSpeedRatio;
@@ -232,6 +239,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 	}
 
+	for (const stat in totalStatMultipliers) {
+		if (stat === 'abilityPower') {
+			totalMultipliersStats[stat as IChampionStatName] += calculatedVariables.apMultipliersBase * totalStatMultipliers[stat as keyof typeof totalStatMultipliers];
+		} else {
+			totalMultipliersStats[stat as IChampionStatName] += totalPreMultipliersStats[stat as keyof typeof totalStatMultipliers] * totalStatMultipliers[stat as keyof typeof totalStatMultipliers];
+		}
+	}
+
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
 		([statName, statValue]) => {
 			const value = totalMultipliersStats[statName as IChampionStatName];
@@ -265,6 +280,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		championPassive: championPassiveStats,
 		totalPreMultipliers: totalPreMultipliersStats,
 		totalMultipliers: totalMultipliersStats,
+		totalStatMultipliers,
 		bonus: bonusStats,
 		total: totalStats,
 		effect: effectStats,
