@@ -1449,6 +1449,7 @@ defineExpose({ el });
 				<LolDragonHoverTooltip
 					ref="dragonHoverTooltip"
 					check-if-valid
+					:precomputed-description="hoveredDragonThing?.[1] === 'soul' ? value.computed.dragonSoulAbility.value : undefined"
 					:dragon="hoveredDragonThing?.[0]"
 					:type="hoveredDragonThing?.[1]"
 					:damage-source="value"

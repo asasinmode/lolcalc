@@ -9,11 +9,9 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 
 const computedDescription = computed<IComputedDragonAbilityDescription | undefined>(() =>
 	props.precomputedDescription
-	?? ((props.damageSource && props.damageSource.computed.dragonSoulAbility.value?.dragon === props.dragon && props.damageSource.computed.dragonSoulAbility.value?.type === props.type)
-		? props.damageSource.computed.dragonSoulAbility.value
-		: props.dragon && props.type
-			? computeDragonAbilityDescription(props.dragon, props.type, props.damageSource, props.checkIfValid)
-			: undefined));
+	?? (props.dragon && props.type
+		? computeDragonAbilityDescription(props.dragon, props.type, props.damageSource, props.checkIfValid)
+		: undefined));
 
 const el = useTemplateRef('el');
 

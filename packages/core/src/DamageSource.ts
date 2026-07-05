@@ -1020,7 +1020,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				)) || []];
 			})) as UnwrapRef<IDamageSourceComputed['abilities']>;
 		}),
-		dragonSoulAbility: computed(() => this.dragonSoul.value && computeDragonAbilityDescription(this.dragonSoul.value, 'soul', this)),
+		dragonSoulAbility: computed(() => this.dragonSoul.value && computeDragonAbilityDescription(this.dragonSoul.value, 'soul', this, true)),
 		effects: ref([]),
 		variables: computed((): UnwrapRef<IDamageSourceComputed['variables']> => {
 			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
