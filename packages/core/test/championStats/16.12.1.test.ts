@@ -1,5 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalDragonDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IInternalDragonDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
@@ -111,9 +111,37 @@ test('Rammus, dragons & percentage items', async (t) => {
 		});
 	});
 
-	// const apTankItemsCommon: IOverrides<'Rammus'> = {
-	// 	level: adItemsCommon.level,
-	// 	runes: adItemsCommon.runes,
-	// 	items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.forceOfNature, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.rabadon],
-	// };
+	const apTankItemsCommon: IOverrides<'Rammus'> = {
+		level: adItemsCommon.level,
+		runes: adItemsCommon.runes,
+		items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.forceOfNature, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.rabadon],
+		dragonStacks: ['Infernal', 'Chemtech', 'Mountain', 'Cloud'],
+		dragonSoul: 'Cloud',
+	};
+
+	await t.test('lvl 18 | ap tank | "', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', apTankItemsCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 174,
+			abilityPower: 291,
+			armor: 185,
+			magicResist: 196,
+			moveSpeed: 462,
+		});
+	});
+
+	await t.test('lvl 18 | ap tank | " bandlepipes+ jak\'sho+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...apTankItemsCommon,
+			internalItemData: { fanfare: 1, vbResistance: 1 } satisfies IInternalItemDataOf<'bandlepipes' | 'jakSho'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 183,
+			armor: 206,
+			magicResist: 234,
+			moveSpeed: 479,
+		});
+	});
 });
