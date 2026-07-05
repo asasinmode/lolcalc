@@ -11,6 +11,7 @@ import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
+import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
 import type IRell from '@lolcalc/data/files/champion/Rell.json';
 import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
 import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
@@ -527,6 +528,22 @@ export const CHAMPION_SPECIFICS = {
 				};
 			},
 		}),
+	},
+	Rammus: {
+		calculateHooks: {
+			postTotal: {
+				handler(self, { totalStats, championPassiveStats, bonusStats }) {
+					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
+					if (typeof bonusAd.value === 'number') {
+						championPassiveStats.attackDamage = bonusAd.value;
+						totalStats.attackDamage += championPassiveStats.attackDamage;
+						bonusStats.attackDamage += championPassiveStats.attackDamage;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad', bonusAd);
+					}
+				},
+			},
+		},
 	},
 	Rell: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Rell'>): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,

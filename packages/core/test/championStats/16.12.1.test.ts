@@ -83,6 +83,7 @@ test('Evelynn, dragons', async (t) => {
 
 test('Rammus, dragons & percentage items', async (t) => {
 	const adItemsCommon: IOverrides<'Rammus'> = {
+		level: 18,
 		runes: {
 			shards: {
 				offensive: 'adaptive',
@@ -94,7 +95,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 	};
 
 	await t.test('lvl 18, ad', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', { ...adItemsCommon, level: 1 });
+		const damageSource = await setupDamageSource(fixture, 'Rammus', adItemsCommon);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 469,
@@ -102,6 +103,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 	});
 
 	// const apTankItemsCommon: IOverrides<'Rammus'> = {
+	// 	level: adItemsCommon.level,
 	// 	runes: adItemsCommon.runes,
 	// 	items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.forceOfNature, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.rabadon],
 	// };

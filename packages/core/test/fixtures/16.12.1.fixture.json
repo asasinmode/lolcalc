@@ -285,6 +285,41 @@
 				"attackspeedperlevel": 2.215,
 				"attackspeed": 0.7,
 				"attackspeedratio": 0.625
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Spiked Shell",
+							"objectName": "RammusP",
+							"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP",
+							"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
+							"tooltip": "Rammus's gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
+							"dataValues": {
+								"ArmorRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+								"MagicResistRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+								"BaseDamage": [10, 10, 10, 10, 10, 10, 10]
+							},
+							"spellCalculations": {
+								"TotalDamage": {
+									"mFormulaParts": [
+										{
+											"mStat": 1,
+											"mDataValue": "ArmorRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "MagicResistRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
 			}
 		}
 	},
