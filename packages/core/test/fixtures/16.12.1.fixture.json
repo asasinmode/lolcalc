@@ -261,6 +261,31 @@
 			"stringtable": {
 				"spell_kaylepassive_tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>"
 			}
+		},
+		"Rammus": {
+			"stats": {
+				"hp": 645,
+				"hpperlevel": 100,
+				"mp": 310,
+				"mpperlevel": 33,
+				"movespeed": 335,
+				"armor": 35,
+				"armorperlevel": 4.5,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 8,
+				"hpregenperlevel": 0.55,
+				"mpregen": 7.85,
+				"mpregenperlevel": 0.5,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 65,
+				"attackdamageperlevel": 2.75,
+				"attackspeedperlevel": 2.215,
+				"attackspeed": 0.7,
+				"attackspeedratio": 0.625
+			}
 		}
 	},
 	"items": {
@@ -299,6 +324,69 @@
 						}
 					]
 				}
+			}
+		},
+		"2503": {
+			"name": "Blackfire Torch",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 80,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"BurnFlatDamagePerSecond": 20,
+				"APRatio": 0.02,
+				"BurnDuration": 3,
+				"MonsterDamageBonus": 20,
+				"TickFrequency": 0.5,
+				"APPerStack": 0.04,
+				"MinionDPS": 20,
+				"MinionAP": 0.02,
+				"MonsterDPS": 40,
+				"MonsterAP": 0.02
+			},
+			"itemCalculations": {
+				"BurnDamagePerSecondCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BurnFlatDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinionDPS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MinionAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MonsterBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterDPS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MonsterAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"__replacedVariables": {
+				"{434396e0}": "MonsterAP",
+				"{afd69c5a}": "MonsterDPS",
+				"{9adc0c64}": "MinionDPS"
 			}
 		},
 		"2510": {
@@ -489,6 +577,53 @@
 				}
 			}
 		},
+		"2524": {
+			"name": "Bandlepipes",
+			"stats": {
+				"FlatSpellBlockMod": 20,
+				"FlatHPPoolMod": 200,
+				"FlatArmorMod": 20,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"EnemyDetectRange": 400,
+				"Duration": 8,
+				"MeleeAuraAttackSpeed": 0.3,
+				"AuraRange": 900,
+				"ASDuration": 1,
+				"MoveSpeed": 20,
+				"RangedAttackSpeedMultiplier": 0.667
+			},
+			"itemCalculations": {
+				"BuffDuration": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Duration",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				},
+				"AuraAttackSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeAuraAttackSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "RangedAttackSpeedMultiplier"
+					}
+				}
+			},
+			"__replacedVariables": {
+				"{eb8d750f}": "MeleeAuraAttackSpeed",
+				"{ca6deae2}": "RangedAttackSpeedMultiplier"
+			}
+		},
 		"2525": {
 			"name": "Protoplasm Harness",
 			"stats": {
@@ -579,6 +714,26 @@
 			},
 			"dataValues": {
 				"FeatsMPen": 2
+			}
+		},
+		"3031": {
+			"name": "Infinity Edge",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 75,
+				"FlatCritDamageMod": 0.3
+			}
+		},
+		"3036": {
+			"name": "Lord Dominik's Regards",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 35,
+				"PercentArmorPenetrationMod": 0.35
+			},
+			"dataValues": {
+				"MaxBonusDamagePercent": 0.15,
+				"MaxBonusHealth": 1500
 			}
 		},
 		"3068": {
@@ -871,6 +1026,132 @@
 						},
 						{
 							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3153": {
+			"name": "Blade of The Ruined King",
+			"stats": {
+				"FlatPhysicalDamageMod": 40,
+				"PercentAttackSpeedMod": 0.25,
+				"PercentLifeStealMod": 0.1
+			},
+			"dataValues": {
+				"MoveSpeedMod": -0.3,
+				"MoveSpeedDuration": 1,
+				"Cooldown": 15,
+				"RangedValue": 0.06,
+				"MeleeValue": 0.09,
+				"MonsterDamageCap": 100,
+				"AttackCounterDuration": 6,
+				"RangedMoveSpeedMod": -0.15
+			},
+			"itemCalculations": {
+				"SiphonDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 40,
+							"mBreakpoints": [
+								{
+									"mLevel": 10,
+									"mBonusPerLevelAtAndAfter": 7
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{c0b34d7a}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{fe7dca43}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedMoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValueB": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValueB": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedMoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{d96e60e3}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{42565e68}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{79b6144b}": {
+					"mDefaultGameCalculation": "{d96e60e3}",
+					"mConditionalGameCalculation": "{42565e68}"
+				},
+				"{405deeb1}": {
+					"mMultiplier": {
+						"mSpellCalculationKey": "{79b6144b}"
+					},
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"{a8cb9c14}": true,
+							"mStat": 13,
+							"mCoefficient": 1,
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
@@ -1369,6 +1650,22 @@
 				}
 			}
 		},
+		"4401": {
+			"name": "Force of Nature",
+			"stats": {
+				"FlatSpellBlockMod": 55,
+				"FlatHPPoolMod": 400,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"BuffDuration": 7,
+				"MoveSpeed": 0.06,
+				"MaxStacks": 8,
+				"ImmobilizeStacks": 2,
+				"StackRefreshTimer": 1,
+				"BonusMagicResist": 70
+			}
+		},
 		"4645": {
 			"name": "Shadowflame",
 			"stats": {
@@ -1539,6 +1836,18 @@
 				}
 			}
 		},
+		"6665": {
+			"name": "Jak'Sho, The Protean",
+			"stats": {
+				"FlatSpellBlockMod": 45,
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 45
+			},
+			"dataValues": {
+				"BonusResistPercentage": 0.3,
+				"MaxStacks": 5
+			}
+		},
 		"6672": {
 			"name": "Kraken Slayer",
 			"stats": {
@@ -1608,6 +1917,19 @@
 						"mNumber": 0.8
 					}
 				}
+			}
+		},
+		"6676": {
+			"name": "The Collector",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50,
+				"PhysicalLethality": 10
+			},
+			"dataValues": {
+				"LethalityAmount": 10,
+				"ExecuteThreshold": 0.05,
+				"GoldAmount": 25
 			}
 		},
 		"6692": {

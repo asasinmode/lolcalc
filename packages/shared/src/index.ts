@@ -449,6 +449,8 @@ export const ITEM_NAME_TO_ID = {
 	mercurysTreads: '3111',
 	zhonya: '3157',
 	shadowflame: '4645',
+	infinityEdge: '3031',
+	collector: '6676',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

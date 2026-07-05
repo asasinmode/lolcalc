@@ -80,3 +80,29 @@ test('Evelynn, dragons', async (t) => {
 		});
 	});
 });
+
+test('Rammus, dragons & percentage items', async (t) => {
+	const adItemsCommon: IOverrides<'Rammus'> = {
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'movementspeed',
+				defensive: 'tenacity',
+			},
+		},
+		items: [ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.krakenSlayer, ITEMS_BY_NAME.collector, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.ldr],
+	};
+
+	await t.test('lvl 18, ad', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', { ...adItemsCommon, level: 1 });
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 469,
+		});
+	});
+
+	// const apTankItemsCommon: IOverrides<'Rammus'> = {
+	// 	runes: adItemsCommon.runes,
+	// 	items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.forceOfNature, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.rabadon],
+	// };
+});
