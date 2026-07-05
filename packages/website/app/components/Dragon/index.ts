@@ -10,8 +10,7 @@ export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificC
 		},
 		soul: {
 			extras: [
-				await booleanExtra(GameAbilityId.build(AbilityType.dragon, 'Cloud', 'soul'), 'isOOC', 'is out of combat', false),
-				await booleanExtra(GameAbilityId.build(AbilityType.dragon, 'Cloud', 'soul'), 'hasUlted', 'has ulted', false),
+				await booleanExtra(GameAbilityId.build(AbilityType.dragon, 'Cloud', 'soul'), 'hasUlted', 'bonus ms after ult'),
 			],
 		},
 	},

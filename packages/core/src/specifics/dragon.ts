@@ -42,7 +42,7 @@ export const DRAGON_SPECIFICS = {
 			},
 		},
 		soul: {
-			internalDataProperties: ['isOOC', 'hasUlted'],
+			internalDataProperties: ['hasUlted'],
 			setupData(self) {
 				self.internalDragonData.value.isOOC = clamp(0, self.internalDragonData.value.isOOC ?? 0, 1);
 				self.internalDragonData.value.hasUlted = clamp(0, self.internalDragonData.value.hasUlted ?? 0, 1);
