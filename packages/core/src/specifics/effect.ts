@@ -130,15 +130,32 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	}),
-	[EFFECT_OBJECT_NAME.bandlepipesFanfare]: defineEffectSpecific<[isFanfared: number]>({
+	[EFFECT_OBJECT_NAME.bandlepipesFanfare]: defineEffectSpecific<[fanfare: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bandlepipes),
 		label: 'Fanfare',
-		setupData(data) {
-			return [clamp(0, data?.[0] ?? 0, 1)];
+		setupData(data): [fanfare: number] {
+			return [clamp(0, data?.[0] ?? 0, MeleeRangedEnumOptions.ranged)];
 		},
 		isActive(data) {
 			return data[0];
 		},
+		imgText(data) {
+			return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }) {
+					const effect = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.bandlepipesFanfare));
+					if (!effect?.[0].data[0]) {
+						return;
+					}
+
+					console.log('bandlepiping', effect[0].data);
+				},
+			},
+		},
+		enumOptions: MeleeRangedEnumOptions,
+		maxValue: MeleeRangedEnumOptions.ranged,
 	}),
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: defineEffectSpecific<[hasSacrifice: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.knightsVow),
@@ -188,42 +205,40 @@ export const EFFECT_SPECIFICS = {
 			},
 		),
 	}),
-	[EFFECT_OBJECT_NAME.serpentsFangVenom]: {
-		...defineEffectSpecific<[shieldReavedBy: number]>({
-			sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
-			label: 'Serpent\'s Venom',
-			setupData(data): [shieldReavedBy: number] {
-				return [clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.serpentsFangVenom].enumOptions.ranged!)];
-			},
-			isActive(data) {
-				return data[0];
-			},
-			imgText(data) {
-				return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
-			},
-			setupDataFromSourceItem(damageSource) {
-				if ((damageSource.internalItemData.value as IInternalItemDataOf<'serpentsFang'>).sVenom) {
-					return [damageSource.stats.value.isRanged ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
-				}
-			},
-			modifyVariable: {
-				type: 'shield',
-				handler(value, effectData) {
-					if (typeof value === 'number') {
-						const reducePercentage = itemVariableValue(
+	[EFFECT_OBJECT_NAME.serpentsFangVenom]: defineEffectSpecific<[shieldReavedBy: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
+		label: 'Serpent\'s Venom',
+		setupData(data): [shieldReavedBy: number] {
+			return [clamp(0, data?.[0] ?? 0, MeleeRangedEnumOptions.ranged)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		imgText(data) {
+			return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
+		},
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'serpentsFang'>).sVenom) {
+				return [damageSource.stats.value.isRanged ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
+			}
+		},
+		modifyVariable: {
+			type: 'shield',
+			handler(value, effectData) {
+				if (typeof value === 'number') {
+					const reducePercentage = itemVariableValue(
 							'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
 							{ item: ITEMS_BY_NAME.serpentsFang, isRanged: effectData[0] === MeleeRangedEnumOptions.ranged },
-						);
-						value *= 1 - (reducePercentage.value as number / 100);
-					}
+					);
+					value *= 1 - (reducePercentage.value as number / 100);
+				}
 
-					return value;
-				},
+				return value;
 			},
-		}),
+		},
 		enumOptions: MeleeRangedEnumOptions,
 		maxValue: MeleeRangedEnumOptions.ranged,
-	},
+	}),
 	[EFFECT_OBJECT_NAME.rylaisRimefrost]: defineEffectSpecific<[isRimefrosted: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rylaisScepter),
 		label: 'Rimefrost',
@@ -418,28 +433,26 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 	}),
-	[EFFECT_OBJECT_NAME.icebornGauntletFrostField]: {
-		...defineEffectSpecific<[frostField: number]>({
-			sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet),
-			label: 'Frost Field',
-			setupData(data): [frostField: number] {
-				return [clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.icebornGauntletFrostField].maxValue)];
-			},
-			isActive(data) {
-				return data[0];
-			},
-			imgText(data) {
-				return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
-			},
-			setupDataFromSourceItem(damageSource): [frostField: number] | undefined {
-				if ((damageSource.internalItemData.value as IInternalItemDataOf<'icebornGauntlet'>).frostField) {
-					return [damageSource.stats.value.isRanged ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
-				}
-			},
-		}),
+	[EFFECT_OBJECT_NAME.icebornGauntletFrostField]: defineEffectSpecific<[frostField: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet),
+		label: 'Frost Field',
+		setupData(data): [frostField: number] {
+			return [clamp(0, data?.[0] ?? 0, MeleeRangedEnumOptions.ranged)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		imgText(data) {
+			return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
+		},
+		setupDataFromSourceItem(damageSource): [frostField: number] | undefined {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'icebornGauntlet'>).frostField) {
+				return [damageSource.stats.value.isRanged ? MeleeRangedEnumOptions.ranged : MeleeRangedEnumOptions.melee];
+			}
+		},
 		enumOptions: MeleeRangedEnumOptions,
 		maxValue: MeleeRangedEnumOptions.ranged,
-	},
+	}),
 	[EFFECT_OBJECT_NAME.bloodsongSpellbladed]: defineEffectSpecific<[bloodsonged: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bloodsong),
 		label: 'Bloodsong',
