@@ -345,7 +345,7 @@ defineExpose({ header });
 			--at-apply: 'ms-5 list-item list-disc';
 
 			&:first-of-type {
-				--at-apply: 'mt-3';
+				--at-apply: 'mbs-3';
 			}
 		}
 
@@ -517,6 +517,16 @@ defineExpose({ header });
 					--at-apply: 'mbe-[1em]';
 				}
 			}
+		}
+	}
+
+	ul.game-description > li {
+		&:first-of-type {
+			--at-apply: 'mbs-1.5';
+		}
+
+		&:not(:last-child) {
+			--at-apply: 'mbe-0';
 		}
 	}
 
