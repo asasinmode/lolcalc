@@ -146,11 +146,9 @@ test('Rammus, dragons & percentage items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18 | ap tank | " | bandlepipes+, blackfire torch+ | mid quest', { only: true }, async () => {
+	await t.test('lvl 18 | ap tank | " | bandlepipes+, blackfire torch+ | mid quest', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', {
 			...apTankItemsCommon,
-			/* swiftmarch over boots of swiftness, it should happen when nextTicked so quest watch can kick in but just change it here */
-			// items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.forceOfNature, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.rabadon],
 			roleQuest: 'mid',
 			internalItemData: { fanfare: 1, bBlaze: 1 } satisfies IInternalItemDataOf<'bandlepipes' | 'blackfireTorch'>,
 		});

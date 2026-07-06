@@ -23,8 +23,12 @@ export const HOOK_PRIORITIES = {
 	},
 	onTotalPreMultipliers: {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
-		/** should be TODO after overlord's bloodmail */
+		/** should be after overlord's bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
+		/** should be before rabadon and blackfire torch */
+		[ITEM_NAME_TO_ID.swiftmarch]: 10,
+		[ITEM_NAME_TO_ID.rabadon]: 20,
+		[ITEM_NAME_TO_ID.blackfireTorch]: 20,
 	},
 	postTotal: {
 		Ryze: 1,

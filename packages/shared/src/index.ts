@@ -96,7 +96,9 @@ export interface IStatsCalculationVariables {
 	/** bonus damage % gained from riftmaker's passive stacks, doesn't affect stats but is kept here */
 	riftmakerBonusDamagePercent?: number;
 	/** ap gained from blackfire torch's passive */
-	blackfireTorchBBlaze?: number;
+	blackfireTorchBBlazeAP?: number;
+	/** multiplier value from blackfire torch's passive */
+	blackfireTorchBBlazeMultiplier?: number;
 	/** ap gained from riftmaker's passive */
 	riftmakerVoidInfusion?: number;
 	/**

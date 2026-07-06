@@ -276,11 +276,24 @@ export const ITEM_SPECIFICS = {
 			preBonus: {
 				handler(self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 					const multiplier = self.internalItemData.value.bBlaze * ITEMS_BY_NAME.blackfireTorch?.dataValues.APPerStack;
-					const value = calculatedVariables.apMultipliersBase * multiplier;
+					calculatedVariables.blackfireTorchBBlazeMultiplier = multiplier;
+					calculatedVariables.blackfireTorchBBlazeAP = calculatedVariables.apMultipliersBase * multiplier;
 					calculatedVariables.totalItemApMultipliers += multiplier;
-					itemPassivesStats.abilityPower += value;
-					itemTotalStats.abilityPower += value;
+					itemPassivesStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
+					itemTotalStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 				},
+			},
+			onTotalPreMultipliers: {
+				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
+					if (calculatedVariables.swiftmarchAdaptive && adaptiveForceMeta[0] === 'abilityPower') {
+						const value = calculatedVariables.swiftmarchAdaptive * calculatedVariables.blackfireTorchBBlazeMultiplier!;
+						calculatedVariables.blackfireTorchBBlazeAP! += value;
+						itemPassivesStats.abilityPower += value;
+						totalMultipliersStats.abilityPower += value;
+						itemTotalStats.abilityPower += value;
+					}
+				},
+				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 		},
 		variables: defineVariables({
@@ -1562,15 +1575,28 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
 	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific, // TODO calculate passive
 	[ITEM_NAME_TO_ID.rabadon]: {
+		AP_MULTIPLIER: ITEMS_BY_NAME.rabadon?.dataValues.APAmp,
 		calculateHooks: {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const value = calculatedVariables.apMultipliersBase * ITEMS_BY_NAME.rabadon?.dataValues.APAmp;
-					calculatedVariables.totalItemApMultipliers += ITEMS_BY_NAME.rabadon?.dataValues.APAmp;
+					const value = calculatedVariables.apMultipliersBase * ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER;
+					calculatedVariables.totalItemApMultipliers += ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;
 				},
+			},
+			onTotalPreMultipliers: {
+				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
+					if (calculatedVariables.swiftmarchAdaptive && adaptiveForceMeta[0] === 'abilityPower') {
+						const value = calculatedVariables.swiftmarchAdaptive * ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER!;
+						calculatedVariables.rabadonMagicalOpus! += value;
+						itemPassivesStats.abilityPower += value;
+						totalMultipliersStats.abilityPower += value;
+						itemTotalStats.abilityPower += value;
+					}
+				},
+				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.rabadon],
 			},
 		},
 		variables: defineVariables({
@@ -1872,12 +1898,14 @@ export const ITEM_SPECIFICS = {
 						itemTotalStats[adaptiveForceMeta[0]] += statValue;
 
 						if (adaptiveForceMeta[0] === 'abilityPower') {
+							/** multiplied in blackfire torch's and rabadon's onTotalPreMultipliers hooks */
 							calculatedVariables.apMultipliersBase += statValue;
 						}
 					} else {
 						console.warn('[ITEM_SPECIFICS swiftmarch] failed to resolve MSToAdaptiveCalc variable value');
 					}
 				},
+				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.swiftmarch],
 			},
 		},
 		variables: defineVariables({
