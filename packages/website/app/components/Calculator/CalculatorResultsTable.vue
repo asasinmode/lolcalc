@@ -318,7 +318,7 @@ function computeSectionRowColumn(
 		isUnknown: false,
 	};
 
-	if (!source || (!source.listedChampion.value && (section.abilityId.type === AbilityType.champion || section.abilityId.type === 'all'))) {
+	if (!source || (!source.listedChampion.value && section.abilityId.type === AbilityType.champion)) {
 		rv.value = '-';
 	} else if (source.listedChampion.value && source.listedChampion.value.id !== source.champion.value?.id) {
 		rv.value = 'loading...';
