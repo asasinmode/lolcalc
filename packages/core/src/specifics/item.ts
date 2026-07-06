@@ -10,6 +10,7 @@ import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
+import { addMultiplicative } from '../calculate/util.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -1263,7 +1264,7 @@ export const ITEM_SPECIFICS = {
 					const { MaxStacks, MaxMovementSpeed } = ITEMS_BY_NAME.deadMansPlate?.dataValues ?? {};
 					// TODO verify with the game
 					itemPassivesStats.moveSpeed += MaxMovementSpeed * (self.internalItemData.value as IInternalItemDataOf<'deadMansPlate'>).shipwrecker / MaxStacks;
-					itemPassivesStats.slowResist += ITEMS_BY_NAME.deadMansPlate?.dataValues.SlowResistTooltip;
+					itemPassivesStats.slowResist = addMultiplicative(itemPassivesStats.slowResist, ITEMS_BY_NAME.deadMansPlate?.dataValues.SlowResistTooltip);
 				},
 			},
 		},
@@ -1835,7 +1836,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemPassivesStats }) {
-					itemPassivesStats.slowResist += ITEMS_BY_NAME.bootsOfSwiftness?.dataValues.SlowResistTooltip / 100;
+					itemPassivesStats.slowResist = addMultiplicative(itemPassivesStats.slowResist, ITEMS_BY_NAME.bootsOfSwiftness?.dataValues.SlowResistTooltip / 100);
 				},
 			},
 		},
@@ -1844,7 +1845,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemPassivesStats }) {
-					itemPassivesStats.slowResist += ITEMS_BY_NAME.swiftmarch?.dataValues.SlowResistTooltip;
+					itemPassivesStats.slowResist = addMultiplicative(itemPassivesStats.slowResist, ITEMS_BY_NAME.swiftmarch?.dataValues.SlowResistTooltip);
 				},
 			},
 			onTotalPreMultipliers: {

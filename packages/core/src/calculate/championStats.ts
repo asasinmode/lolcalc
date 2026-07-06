@@ -111,6 +111,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	itemBaseStats.tenacity = 1;
+	itemBaseStats.slowResist = 1;
 
 	for (const item of items.filter(Boolean)) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
@@ -134,11 +135,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			calculatedVariables.totalBonusPercentMoveSpeed += item!.stats.PercentMovementSpeedMod;
 		}
 	}
-	itemBaseStats.tenacity = 1 - itemBaseStats.tenacity;
 	itemBaseStats.attackSpeed = itemBaseStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+	itemBaseStats.tenacity = 1 - itemBaseStats.tenacity;
+	itemBaseStats.slowResist = 1 - itemBaseStats.slowResist;
 
 	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
 	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	itemPassivesStats.tenacity = 1;
+	itemPassivesStats.slowResist = 1;
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
@@ -146,8 +150,18 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 	itemPassivesStats.attackSpeed = itemPassivesStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
+	itemPassivesStats.tenacity = 1 - itemPassivesStats.tenacity;
+	itemPassivesStats.slowResist = 1 - itemPassivesStats.slowResist;
 
-	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [key, value + itemPassivesStats[key as IChampionStatName]])) as IChampionStats;
+	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [
+		key,
+		key === 'slowResist' || key === 'tenacity'
+			? addMultiplicative(1, value, itemPassivesStats[key as IChampionStatName])
+			: (value + itemPassivesStats[key as IChampionStatName]),
+	]),
+	) as IChampionStats;
+	itemTotalStats.tenacity = 1 - itemTotalStats.tenacity;
+	itemTotalStats.slowResist = 1 - itemTotalStats.slowResist;
 	calculatedVariables.apMultipliersBase += itemTotalStats.abilityPower;
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
