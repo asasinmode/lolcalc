@@ -131,7 +131,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18 | ap tank | " bandlepipes+ jak\'sho+', async () => {
+	await t.test('lvl 18 | ap tank | " | bandlepipes+ jak\'sho+', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', {
 			...apTankItemsCommon,
 			internalItemData: { fanfare: 1, vbResistance: 1 } satisfies IInternalItemDataOf<'bandlepipes' | 'jakSho'>,
@@ -143,6 +143,24 @@ test('Rammus, dragons & percentage items', async (t) => {
 			magicResist: 234,
 			moveSpeed: 479,
 			attackSpeed: 1.123,
+		});
+	});
+
+	await t.test('lvl 18 | ap tank | " | bandlepipes+, blackfire torch+ | mid quest', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...apTankItemsCommon,
+			/* swiftmarch over boots of swiftness, it should happen when nextTicked so quest watch can kick in but just change it here */
+			// items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.forceOfNature, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.rabadon],
+			roleQuest: 'mid',
+			internalItemData: { fanfare: 1, bBlaze: 1 } satisfies IInternalItemDataOf<'bandlepipes' | 'blackfireTorch'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 179,
+			abilityPower: 353,
+			moveSpeed: 485,
+			attackSpeed: 1.123,
+			slowResist: 52,
 		});
 	});
 });

@@ -336,7 +336,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						}
 
 						handleRoleQuestItems(this.items.value, this.roleQuest.value);
-					}),
+					}, { immediate: true }),
 
 					watch(() => this.stats.value.isRanged, (value) => {
 						if (!value) {
