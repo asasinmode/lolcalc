@@ -1968,6 +1968,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
+		roleQuest: IChampionRole | undefined;
 	}) => void>;
 };
 
