@@ -324,6 +324,37 @@
 		}
 	},
 	"items": {
+		"2501": {
+			"name": "Overlord's Bloodmail",
+			"stats": {
+				"FlatHPPoolMod": 550,
+				"FlatPhysicalDamageMod": 30
+			},
+			"dataValues": {
+				"HPToADPercentage": 0.025,
+				"MissingHealthAD": 0.12,
+				"MissingHealthThreshold": 0.7
+			},
+			"itemCalculations": {
+				"RemainingHealthThreshold": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": -1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mDataValue": "MissingHealthThreshold",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
+		},
 		"2502": {
 			"name": "Unending Despair",
 			"stats": {
@@ -1730,6 +1761,54 @@
 				"ImmobilizeStacks": 2,
 				"StackRefreshTimer": 1,
 				"BonusMagicResist": 70
+			}
+		},
+		"4633": {
+			"name": "Riftmaker",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"SecondsInCombat": 4,
+				"EternityDamageIncreasePerSecond": 0.02,
+				"EternityDamageIncreaseMax": 0.08,
+				"BuffCounterDuration": 4,
+				"HealthToAPConversionPercent": 0.02,
+				"MaxAPMultiplier": 0.05,
+				"VampAmountMelee": 0.1,
+				"VampAmountRanged": 0.06
+			},
+			"itemCalculations": {
+				"{1247259a}": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthToAPConversionPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountMelee",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountRanged",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
 			}
 		},
 		"4645": {

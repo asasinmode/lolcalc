@@ -2,12 +2,12 @@
  * `ITEMS_BY_NAME.item` or `ITEMS_BY_NAME.itemId.` access is behind `?` because when developing, sometimes I resolve only singular items/their variables and they might not be present which would result in `undefined.propertyAccess` error
  */
 
-import type { TItems } from '@lolcalc/data';
+import type { TItems, TMiscData } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
-import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
+import { ITEMS, ITEMS_BY_NAME, MISC } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative } from '../calculate/util.ts';
@@ -1799,11 +1799,17 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalPreMultipliersStats.hp);
-					calculatedVariables.bloodmailRetribution = totalPreMultipliersStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
+					let value = totalPreMultipliersStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
+					calculatedVariables.bloodmailRetribution = value;
 
-					totalMultipliersStats.attackDamage += calculatedVariables.bloodmailRetribution;
-					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
-					itemTotalStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					if (self.roleQuest.value === 'mid') {
+						const multiplierValue = value * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
+						value += multiplierValue;
+						calculatedVariables.midQuestAd = (calculatedVariables.midQuestAd ?? 0) + multiplierValue;
+					}
+					totalMultipliersStats.attackDamage += value;
+					itemPassivesStats.attackDamage += value;
+					itemTotalStats.attackDamage += value;
 				},
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},

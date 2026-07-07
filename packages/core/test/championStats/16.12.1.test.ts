@@ -1,5 +1,6 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalDragonDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
@@ -165,6 +166,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 	const mixedItemsCommon: IOverrides<'Rammus'> = {
 		level: adItemsCommon.level,
 		runes: adItemsCommon.runes,
+		roleQuest: 'mid',
 		items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon],
 		dragonStacks: ['Infernal', 'Chemtech', 'Mountain', 'Cloud'],
 		dragonSoul: 'Cloud',
@@ -173,7 +175,6 @@ test('Rammus, dragons & percentage items', async (t) => {
 	await t.test('lvl 18 | mixed | " | jak\'sho+, riftmaker+, blackfire torch+ | mid quest', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', {
 			...mixedItemsCommon,
-			roleQuest: 'mid',
 			internalItemData: { vbResistance: 1, corruption: 4, bBlaze: 1 } satisfies IInternalItemDataOf<'jakSho' | 'riftmaker' | 'blackfireTorch'>,
 		});
 
@@ -188,7 +189,6 @@ test('Rammus, dragons & percentage items', async (t) => {
 	await t.test('lvl 18 | mixed | " cloud soul+ | - | mid quest', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', {
 			...mixedItemsCommon,
-			roleQuest: 'mid',
 			internalDragonData: { isOOC: 1, hasUlted: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack' | 'soul'>,
 		});
 
@@ -196,5 +196,22 @@ test('Rammus, dragons & percentage items', async (t) => {
 			abilityPower: 483,
 			moveSpeed: 575,
 		});
+	});
+
+	await t.test('lvl 18 | mixed | " | jak\'sho+, bloodmail+ | mid quest', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...mixedItemsCommon,
+			currentHealth: 932,
+			internalItemData: { vbResistance: 1 } satisfies IInternalItemDataOf<'jakSho'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 257,
+			abilityPower: 475,
+			armor: 179,
+			magicResist: 132,
+		});
+		/* game shows 3596, see help page for known discrepancies */
+		assert.equal(damageSource.maxHealth.value, 3595);
 	});
 });
