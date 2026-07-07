@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IDragonAbilityId, IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IChampionId, IDragonName, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';
+import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { IExtraComponentEmits } from '~/utils/types';
@@ -9,9 +10,10 @@ import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/dama
 import { formatChampionStatValue, isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion';
-import { replaceGameVariables } from '@lolcalc/core/variables/game';
+import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
+import { replaceGameIcons, replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
-import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
+import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
@@ -778,6 +780,18 @@ function hideAbilityTooltip() {
 }
 
 const roleQuestHoverTooltipEl = useTemplateRef('roleQuestHoverTooltip');
+const roleQuestDescription = computed(() => {
+	if (!props.value.roleQuest.value) {
+		return;
+	}
+
+	const { title, description } = TEXT.roleQuests[props.value.roleQuest.value];
+	const specific = (MISC_SPECIFICS as IHypotheticalMiscSpecifics).roleQuests[props.value.roleQuest.value];
+
+	const { replaced, unknownVariables } = replaceGameVariables(description, AbilityType.item, { item: MISC.roleQuests[props.value.roleQuest.value] as IItem, damageSource: props.value, dynamicVariables: specific?.variables?.calculate?.(props.value) });
+
+	return { title, description: replaceGameIcons(replaced), anyUnknown: unknownVariables.length };
+});
 
 function updateRoleQuest(value?: IChampionRole) {
 	// eslint-disable-next-line vue/no-mutating-props
@@ -1398,12 +1412,8 @@ defineExpose({ el });
 					</template>
 				</VSelect>
 				<article ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
-					<h5>{{ value.roleQuest.value }}{{ value.roleQuest.value !== 'jungle' && value.roleQuest.value !== 'support' ? ' lane' : '' }} quest rewards</h5>
-					<ul class="game-description">
-						<li v-for="(reward, i) in value.roleQuest.value ? TEXT.roleQuests[value.roleQuest.value] : []" :key="i">
-							{{ reward }}
-						</li>
-					</ul>
+					<h5>{{ roleQuestDescription?.title }}</h5>
+					<div class="game-description" v-html="roleQuestDescription?.description" />
 				</article>
 			</section>
 			<section ref="dragons" data-dragons="">

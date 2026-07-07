@@ -520,16 +520,6 @@ defineExpose({ header });
 		}
 	}
 
-	ul.game-description > li {
-		&:first-of-type {
-			--at-apply: 'mbs-1.5';
-		}
-
-		&:not(:last-child) {
-			--at-apply: 'mbe-0';
-		}
-	}
-
 	.hover-tooltip.champion-item {
 		--at-apply: 'w-160 max-w-screen';
 		justify-self: anchor-center;

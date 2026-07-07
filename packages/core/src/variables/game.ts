@@ -497,7 +497,7 @@ export function replaceGameVariables(
 	/* capture `@VariableName@` followed by
 	 * - optional `%` which will be put back after replacing (dawncore, maybe others too)
 	 * - another optional ` (%i:iconName%)` which the replacement will fallback to if it exists and no `ISpecificVariables.meta.statIconKey` is defined */
-	const replaced = text.replace(/@(.+?)@(%?)(?:\s*\((%[^)\s]+%)\))?/g, (_, name, optionalPercent, varIcon) => {
+	const replaced = text.replace(/@(.+?)@(%?(?!i:))(?:\s*\((%[^)\s]+%)\))?/g, (_, name, optionalPercent, varIcon) => {
 		let variableName = name;
 		let multiplier = 1;
 
