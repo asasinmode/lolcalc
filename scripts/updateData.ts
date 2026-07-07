@@ -1,6 +1,7 @@
 import type { ISpecificVariables } from '@lolcalc/core/specifics';
 import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
+import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc.ts';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type { IEffectData, ITEMS } from '@lolcalc/data';
@@ -15,6 +16,7 @@ import process from 'node:process';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
 import { CUSTOM_EFFECTS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
+import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc.ts';
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
@@ -806,13 +808,28 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 			description: getStringtableValue(tooltipData.keyTooltip, `role quest ${role}`)!,
 		};
 
-		return [role, {
+		const value = {
 			dataValues: itemMoreData.mDataValues?.length
 				? Object.fromEntries(itemMoreData.mDataValues.map(({ mName, mValue }: Record<string, number>) =>
 						[mName, mValue !== undefined ? formatNumber(mValue) : undefined],
 					))
 				: undefined,
-		}];
+		};
+
+		debugStringVariables(textData.data.roleQuests[role].description, {
+			key: `role-quest-${role}`,
+			category: 'misc',
+			variables: {
+				variableType: 'item',
+				variableSourceKeys: [],
+				variableValueParameters: {
+					item: value as IItem,
+					dynamicVariables: (MISC_SPECIFICS as IHypotheticalMiscSpecifics).roleQuests[role]?.variables,
+				},
+			},
+		});
+
+		return [role, value];
 	})) as unknown as NonNullable<(typeof miscData)>['data']['roleQuests'];
 
 	/* jungle technically has 3 different items, each for a different smite with different pet name so to make it cooler manually put all of them here */
