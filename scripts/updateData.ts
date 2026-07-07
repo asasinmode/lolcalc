@@ -833,7 +833,7 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 	})) as unknown as NonNullable<(typeof miscData)>['data']['roleQuests'];
 
 	/* jungle technically has 3 different items, each for a different smite with different pet name so to make it cooler manually put all of them here */
-	textData.data.roleQuests.jungle.description = textData.data.roleQuests.jungle.description.replace('<font color = \'#800000\'>Scorchclaw</font>', '<font color = \'#800000\'>Scorchclaw</font>/<font color = \'#0B6623\'>Mosstomper</font>/<font color = \'#4682B4\'>Gustwalker</font>');
+	textData.data.roleQuests.jungle.description = textData.data.roleQuests.jungle.description.replace('<font color = \'#800000\'>Scorchclaw</font>', '<font color = \'#800000\'>Scorchclaw</font> / <font color = \'#0B6623\'>Mosstomper</font> / <font color = \'#4682B4\'>Gustwalker</font>');
 
 	await fs.writeFile(miscFilePath, stringifyObject(miscData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));

@@ -2502,7 +2502,7 @@
 			},
 			"jungle": {
 				"title": "Jungle Quest Reward",
-				"description": "<font color = '#00FF00'>Rewards</font><br>• Upgraded Smite and evolve jungle pet to <font color = '#800000'>Scorchclaw</font>/<font color = '#0B6623'>Mosstomper</font>/<font color = '#4682B4'>Gustwalker</font><br>• Increased gold and XP from large monsters<br>• Bonus movement speed in the jungle"
+				"description": "<font color = '#00FF00'>Rewards</font><br>• Upgraded Smite and evolve jungle pet to <font color = '#800000'>Scorchclaw</font> / <font color = '#0B6623'>Mosstomper</font> / <font color = '#4682B4'>Gustwalker</font><br>• Increased gold and XP from large monsters<br>• Bonus movement speed in the jungle"
 			},
 			"mid": {
 				"title": "Mid Lane Quest Reward",
