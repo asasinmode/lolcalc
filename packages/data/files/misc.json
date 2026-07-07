@@ -294,9 +294,41 @@
 				}
 			}
 		},
-		"roleQuest": {
-			"apMultiplier": 0.08,
-			"adMultiplier": 0.08
+		"roleQuests": {
+			"top": {
+				"dataValues": {
+					"ChannelDuration": 8,
+					"UpgradeTimeMins": 15,
+					"Cooldown": 420,
+					"XPMultTT": 0.11,
+					"XPBonusTakedownTT": 80,
+					"LevelCapTT": 2,
+					"LumpXPTT": 600
+				}
+			},
+			"jungle": {},
+			"mid": {
+				"dataValues": {
+					"BonusADAP": 0.08
+				}
+			},
+			"bot": {
+				"dataValues": {
+					"MinionGold": 2,
+					"TakedownGold": 40,
+					"LumpGold": 300
+				}
+			},
+			"support": {
+				"dataValues": {
+					"QuestGoldRequirement": 400,
+					"GoldOnHit": 20,
+					"GoldOnHitMelee": 22,
+					"ExecuteMinionGold": 15,
+					"ExecuteCannonGold": 20,
+					"MaxJammerCharges": 2
+				}
+			}
 		}
 	}
 }

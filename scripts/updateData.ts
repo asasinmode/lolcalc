@@ -7,7 +7,7 @@ import type { IEffectData, ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
-import type { ITexture } from '@lolcalc/shared/types';
+import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -778,14 +778,45 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 		return [name, { stack, soul }];
 	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
 
-	textData.data.roleQuests = Object.fromEntries(['top', 'jungle', 'mid', 'bot', 'support'].map(role =>
-		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`)?.split('<br>')],
-	)) as NonNullable<(typeof textData)>['data']['roleQuests'];
+	/* role quest descriptions and values seem to be stored under items under item ids listed below */
+	const moreItemData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`, 'game/items.cdtb.bin.json');
 
-	miscData.data.roleQuest = {
-		apMultiplier: 0.08,
-		adMultiplier: 0.08,
-	};
+	textData.data.roleQuests = {} as any;
+	miscData.data.roleQuests = Object.fromEntries(([
+		['top', 1220],
+		['jungle', 1211],
+		['mid', 1206],
+		['bot', 1207],
+		['support', 1208],
+	] as [IChampionRole, number][]).map(([role, itemId]) => {
+		const itemMoreData = moreItemData[`Items/${itemId}`];
+
+		if (!itemMoreData) {
+			throw new Error(`[misc role quest] failed to get ${role} quest item data "Items/${itemId}"`);
+		}
+
+		const tooltipData = itemMoreData.mItemDataClient?.mTooltipData?.mLocKeys;
+
+		if (!(tooltipData?.keyName || tooltipData?.keyTooltip)) {
+			throw new Error(`[misc role quest] ${role} quest item doesn't have expected tooltip names`);
+		}
+
+		textData.data.roleQuests[role] = {
+			title: getStringtableValue(tooltipData.keyName, `role quest ${role}`)!,
+			description: getStringtableValue(tooltipData.keyTooltip, `role quest ${role}`)!,
+		};
+
+		return [role, {
+			dataValues: itemMoreData.mDataValues?.length
+				? Object.fromEntries(itemMoreData.mDataValues.map(({ mName, mValue }: Record<string, number>) =>
+						[mName, mValue !== undefined ? formatNumber(mValue) : undefined],
+					))
+				: undefined,
+		}];
+	})) as unknown as NonNullable<(typeof miscData)>['data']['roleQuests'];
+
+	/* jungle technically has 3 different items, each for a different smite with different pet name so to make it cooler manually put all of them here */
+	textData.data.roleQuests.jungle.description = textData.data.roleQuests.jungle.description.replace('<font color = \'#800000\'>Scorchclaw</font>', '<font color = \'#800000\'>Scorchclaw</font>/<font color = \'#0B6623\'>Mosstomper</font>/<font color = \'#4682B4\'>Gustwalker</font>');
 
 	await fs.writeFile(miscFilePath, stringifyObject(miscData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));

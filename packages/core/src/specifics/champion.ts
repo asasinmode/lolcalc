@@ -1,3 +1,4 @@
+import type { TMiscData } from '@lolcalc/data';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
@@ -537,7 +538,7 @@ export const CHAMPION_SPECIFICS = {
 					if (typeof bonusAd.value === 'number') {
 						championPassiveStats.attackDamage = bonusAd.value;
 						const multiplierValue = championPassiveStats.attackDamage * totalStatMultipliers.attackDamage;
-						const midQuestMultiplierValue = championPassiveStats.attackDamage * (roleQuest === 'mid' ? MISC.roleQuest.adMultiplier : 0);
+						const midQuestMultiplierValue = championPassiveStats.attackDamage * (roleQuest === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0);
 
 						calculatedVariables.midQuestAd! += midQuestMultiplierValue;
 						let value = multiplierValue + midQuestMultiplierValue;
@@ -619,7 +620,7 @@ export const CHAMPION_SPECIFICS = {
 						riftmakerHpToApRatio,
 						ryzePassiveAPBase: totalStats.abilityPower,
 						ryzePassiveManaBase: totalStats.mana,
-						questStatMultiplier: MISC.roleQuest.apMultiplier,
+						questStatMultiplier: (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP,
 						totalStats: {
 							abilityPower: totalStats.abilityPower,
 							hp: totalStats.hp,
@@ -634,8 +635,8 @@ export const CHAMPION_SPECIFICS = {
 						},
 					});
 
-					const effectiveAddedAPRatio = tearItemAPRatio * (1 + MISC.roleQuest.apMultiplier);
-					const effectiveAddedHPRatio = tearItemHPRatio * (riftmakerHpToApRatio ? (1 + MISC.roleQuest.apMultiplier) : 1);
+					const effectiveAddedAPRatio = tearItemAPRatio * (1 + (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP);
+					const effectiveAddedHPRatio = tearItemHPRatio * (riftmakerHpToApRatio ? (1 + (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP) : 1);
 
 					const totalAddedAP = effectiveAddedAPRatio + (riftmakerHpToApRatio * effectiveAddedHPRatio);
 
@@ -644,7 +645,7 @@ export const CHAMPION_SPECIFICS = {
 					miscDebug.ryzePMana = (totalAddedAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
 
 					const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
-					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * MISC.roleQuest.apMultiplier;
+					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
 					const tearItemTotalAp = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
 
 					const addedHP = effectiveAddedHPRatio * miscDebug.ryzePMana;

@@ -158,7 +158,10 @@ export interface ITextData {
 		stack: string;
 		soul: string;
 	}>;
-	roleQuests: Record<IChampionRole, string[]>;
+	roleQuests: Record<IChampionRole, {
+		title: string;
+		description: string;
+	}>;
 	stringtable: {
 		/* technically typescript ignores it but it's there so */
 		__resolvedHashes: Record<string, string>;
@@ -186,11 +189,9 @@ export interface IMiscData {
 			dataValues: any;
 		};
 	}>;
-	/** not extracted from game data, set manually in `scripts/updateData` */
-	roleQuest: {
-		apMultiplier: number;
-		adMultiplier: number;
-	};
+	roleQuests: Record<IChampionRole, {
+		dataValues?: Record<string, number>;
+	}>;
 }
 
 export const UI: IUiData = uiData.data;

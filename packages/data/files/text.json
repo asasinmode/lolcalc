@@ -2496,28 +2496,26 @@
 			}
 		},
 		"roleQuests": {
-			"top": [
-				"Teleport or Enhanced Teleport",
-				"Increased experience gain and level cap"
-			],
-			"jungle": [
-				"Upgraded jungle pet and Smite",
-				"Increased rewards from large monsters",
-				"Bonus Movement Speed in the jungle"
-			],
-			"mid": [
-				"Tier 3 boots",
-				"Increased Attack Damage and Ability Power"
-			],
-			"bot": [
-				"An immediate lump sum of gold",
-				"Increased gold from minions and takedowns",
-				"Dedicated slot for boots"
-			],
-			"support": [
-				"Upgraded Support item",
-				"Discounted control wards"
-			]
+			"top": {
+				"title": "Unleashed Teleport (Top Lane Quest Reward)",
+				"description": "<font color = '#00FF00'>Rewards</font><br>• Extra Action - Teleport: After channeling for @f1@ seconds, become <keyword>Untargetable</keyword> and travel to target allied structure, minion, or ward.<br>• Flat bonus experience, more experience from all sources, and an increased level cap"
+			},
+			"jungle": {
+				"title": "Jungle Quest Reward",
+				"description": "<font color = '#00FF00'>Rewards</font><br>• Upgraded Smite and evolve jungle pet to <font color = '#800000'>Scorchclaw</font>/<font color = '#0B6623'>Mosstomper</font>/<font color = '#4682B4'>Gustwalker</font><br>• Increased gold and XP from large monsters<br>• Bonus movement speed in the jungle"
+			},
+			"mid": {
+				"title": "Mid Lane Quest Reward",
+				"description": "<font color = '#00FF00'>Rewards</font><br>• Upgrade boots to tier 3<br>• +@BonusADAP*100@% bonus Attack Damage (@f1@%i:scaleAD%) and Ability Power (@f2@%i:scaleAP%)"
+			},
+			"bot": {
+				"title": "Bot Lane Quest Reward",
+				"description": "<font color = '#00FF00'>Rewards</font><br>• +@LumpGold@%i:tokenGold% immediately and Boots move to a 7th slot, freeing up your inventory for 6 items<br>• +@MinionGold@%i:tokenGold% from Minion kills<br>• +@TakedownGold@%i:tokenGold% from Champion takedowns"
+			},
+			"support": {
+				"title": "Support Quest Reward",
+				"description": "<font color = '#00FF00'>Rewards</font><br>• A new slot for control wards<br>• Discounted control wards<br>• Bounty of Worlds item"
+			}
 		}
 	},
 	"version": "16.11.1"

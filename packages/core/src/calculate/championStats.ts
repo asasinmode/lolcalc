@@ -1,3 +1,4 @@
+import type { TMiscData } from '@lolcalc/data';
 import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
@@ -248,8 +249,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}
 
 	if (source.roleQuest.value === 'mid') {
-		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * MISC.roleQuest.apMultiplier;
-		calculatedVariables.midQuestAd = bonusStats.attackDamage * MISC.roleQuest.adMultiplier;
+		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
+		calculatedVariables.midQuestAd = bonusStats.attackDamage * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
 		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
 		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 	}
