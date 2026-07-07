@@ -161,4 +161,40 @@ test('Rammus, dragons & percentage items', async (t) => {
 			slowResist: 52,
 		});
 	});
+
+	const mixedItemsCommon: IOverrides<'Rammus'> = {
+		level: adItemsCommon.level,
+		runes: adItemsCommon.runes,
+		items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon],
+		dragonStacks: ['Infernal', 'Chemtech', 'Mountain', 'Cloud'],
+		dragonSoul: 'Cloud',
+	};
+
+	await t.test('lvl 18 | mixed | " | jak\'sho+, riftmaker+, blackfire torch+ | mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...mixedItemsCommon,
+			roleQuest: 'mid',
+			internalItemData: { vbResistance: 1, corruption: 4, bBlaze: 1 } satisfies IInternalItemDataOf<'jakSho' | 'riftmaker' | 'blackfireTorch'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 235,
+			abilityPower: 489,
+			moveSpeed: 459,
+			omnivamp: 10,
+		});
+	});
+
+	await t.test('lvl 18 | mixed | " cloud soul+ | - | mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...mixedItemsCommon,
+			roleQuest: 'mid',
+			internalDragonData: { isOOC: 1, hasUlted: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack' | 'soul'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 483,
+			moveSpeed: 575,
+		});
+	});
 });

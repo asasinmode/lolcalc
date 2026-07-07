@@ -46,12 +46,15 @@ export const DRAGON_SPECIFICS = {
 			setupData(self) {
 				self.internalDragonData.value.isOOC = clamp(0, self.internalDragonData.value.isOOC ?? 0, 1);
 				self.internalDragonData.value.hasUlted = clamp(0, self.internalDragonData.value.hasUlted ?? 0, 1);
-				return { isOOC: 0, hasUlted: 0 };
+				return { hasUlted: 0 };
 			},
 			calculateHooks: {
 				onDragon: {
-					handler(_self, _args, { calculatedVariables }) {
+					handler(self, _args, { calculatedVariables }) {
 						calculatedVariables.totalBonusPercentMoveSpeed += (MISC as TMiscData).dragons.Cloud.soul.dataValues.PersistentMSValue[1]!;
+						if ((self.internalDragonData.value as IInternalDragonDataOf<'Cloud', 'soul'>).hasUlted) {
+							calculatedVariables.totalBonusPercentMoveSpeed += (MISC as TMiscData).dragons.Cloud.soul.dataValues.MSAmount[1]!;
+						}
 					},
 				},
 			},
