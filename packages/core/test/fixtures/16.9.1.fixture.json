@@ -671,9 +671,12 @@
 		}
 	},
 	"misc": {
-		"roleQuest": {
-			"apMultiplier": 0.06,
-			"adMultiplier": 0.06
+		"roleQuests": {
+			"mid": {
+				"dataValues": {
+					"BonusADAP": 0.06
+				}
+			}
 		}
 	}
 }

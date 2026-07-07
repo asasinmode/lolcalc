@@ -1241,6 +1241,37 @@
 			},
 			"effectAmount": [0, 2.5, 120]
 		},
+		"3170": {
+			"name": "Swiftmarch",
+			"stats": {
+				"FlatMovementSpeedMod": 65
+			},
+			"dataValues": {
+				"MoveSpeedMultiplier": 0.04,
+				"SlowResistTooltip": 0.4,
+				"MSAdaptiveRatio": 0.05
+			},
+			"itemCalculations": {
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MSToAdaptiveCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 7,
+							"mDataValue": "MSAdaptiveRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3181": {
 			"name": "Hullbreaker",
 			"stats": {
@@ -2125,9 +2156,12 @@
 		}
 	},
 	"misc": {
-		"roleQuest": {
-			"apMultiplier": 0.08,
-			"adMultiplier": 0.08
+		"roleQuests": {
+			"mid": {
+				"dataValues": {
+					"BonusADAP": 0.08
+				}
+			}
 		},
 		"dragons": {
 			"Chemtech": {

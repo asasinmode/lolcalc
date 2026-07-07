@@ -10,7 +10,7 @@ interface IPatchOverridesFixture {
 	champions: Partial<Record<IChampionId, Partial<Omit<IChampion, 'abilities'>> & { abilities?: Partial<IChampion['abilities']> }>>;
 	items: Record<string, Partial<IItem>>;
 	/** dragon fixture's type allows partial but the test will crash if it's trying to use a dragon that's not fixtured. It's intended */
-	misc?: { roleQuest: IMiscData['roleQuest'] } & Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>>;
+	misc?: { roleQuests: Partial<IMiscData['roleQuests']> } & Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>>;
 }
 
 const overriden: {
