@@ -790,7 +790,7 @@ const roleQuestDescription = computed(() => {
 
 	const { replaced, unknownVariables } = replaceGameVariables(description, AbilityType.item, { item: MISC.roleQuests[props.value.roleQuest.value] as IItem, damageSource: props.value, dynamicVariables: specific?.variables?.calculate?.(props.value) });
 
-	return { title, description: replaceGameIcons(replaced), anyUnknown: unknownVariables.length };
+	return { title, description: replaceGameIcons(replaced, 'challenges'), anyUnknown: unknownVariables.length };
 });
 
 function updateRoleQuest(value?: IChampionRole) {
@@ -1411,9 +1411,10 @@ defineExpose({ el });
 						>
 					</template>
 				</VSelect>
-				<article ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
+				<article ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest">
 					<h5>{{ roleQuestDescription?.title }}</h5>
 					<div class="game-description" v-html="roleQuestDescription?.description" />
+					<UnresolvedVariablesAlert v-show="roleQuestDescription?.anyUnknown" />
 				</article>
 			</section>
 			<section ref="dragons" data-dragons="">

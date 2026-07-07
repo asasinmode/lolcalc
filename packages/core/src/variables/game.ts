@@ -736,7 +736,7 @@ const championGameIcons = [
 	'threshscalingicon',
 ];
 
-export function replaceGameIcons(text: string): string {
+export function replaceGameIcons(text: string, subpath?: string): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
@@ -748,7 +748,7 @@ export function replaceGameIcons(text: string): string {
 
 			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name)
 				? 'statsicon'
-				: isChampionIcon ? 'champion' : 'gameplay'
+				: subpath ?? (isChampionIcon ? 'champion' : 'gameplay')
 			}/${name}.png" width="20" height="20" aria-hidden="true">`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);

@@ -526,6 +526,18 @@ defineExpose({ header });
 		position-try: flip-block;
 	}
 
+	.hover-tooltip.role-quest {
+		--at-apply: 'w-fit max-w-[min(100vw,calc(158*var(--spacing)))]';
+
+		> .game-description {
+			--at-apply: 'leading-normal';
+
+			br {
+				--at-apply: 'block my-0.5';
+			}
+		}
+	}
+
 	.hover-tooltip.dragon,
 	.hover-tooltip.effect {
 		> footer {
