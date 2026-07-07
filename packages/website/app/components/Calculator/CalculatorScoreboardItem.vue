@@ -788,7 +788,7 @@ const roleQuestDescription = computed(() => {
 	const { title, description } = TEXT.roleQuests[props.value.roleQuest.value];
 	const specific = (MISC_SPECIFICS as IHypotheticalMiscSpecifics).roleQuests[props.value.roleQuest.value];
 
-	const { replaced, unknownVariables } = replaceGameVariables(description, AbilityType.item, { item: MISC.roleQuests[props.value.roleQuest.value] as IItem, damageSource: props.value, dynamicVariables: specific?.variables?.calculate?.(props.value) });
+	const { replaced, unknownVariables } = replaceGameVariables(description, AbilityType.item, { item: MISC.roleQuests[props.value.roleQuest.value] as IItem, damageSource: props.value, dynamicVariables: { values: specific?.variables?.calculate?.(props.value) } });
 
 	return { title, description: replaceGameIcons(replaced, 'challenges'), anyUnknown: unknownVariables.length };
 });
