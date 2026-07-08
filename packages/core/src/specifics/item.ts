@@ -504,6 +504,8 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { isRanged, itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
+					calculatedVariables.riftmakerBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'riftmaker'>).corruption ?? 0) * ITEMS_BY_NAME.riftmaker?.dataValues.EternityDamageIncreasePerSecond;
+
 					const bonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
 					calculatedVariables.riftmakerVoidInfusion = bonusHp * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
 					itemPassivesStats.abilityPower += calculatedVariables.riftmakerVoidInfusion;
@@ -529,11 +531,6 @@ export const ITEM_SPECIFICS = {
 						calculatedVariables.apMultipliersBase += value;
 						miscDebug.riftmakerBonusHp! += runeShardStats.hp;
 					}
-				},
-			},
-			postTotal: {
-				handler(self, _args, { calculatedVariables }) {
-					calculatedVariables.riftmakerBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'riftmaker'>).corruption ?? 0) * ITEMS_BY_NAME.riftmaker?.dataValues.EternityDamageIncreasePerSecond;
 				},
 			},
 		},
@@ -905,6 +902,16 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Carve stacks',
 		imgText(self) {
 			return self.internalItemData.value.carve;
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).fervor) {
+						calculatedVariables.blackCleaverMoveSpeed = ITEMS_BY_NAME.blackCleaver?.dataValues.MoveSpeedBonus;
+						itemPassivesStats.moveSpeed += calculatedVariables.blackCleaverMoveSpeed;
+					}
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.celestialOpposition]: {

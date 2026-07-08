@@ -158,6 +158,8 @@ export interface IStatsCalculationVariables {
 	phageMoveSpeed?: number;
 	/** move speed gained from trinity force's passive */
 	trinityForceMoveSpeed?: number;
+	/** move speed gained from black cleaver's passive */
+	blackCleaverMoveSpeed?: number;
 	/** move speed percent gained from crimson lucidity passive */
 	crimsonLucidityMSPercent?: number;
 	/** crit chance gained from yuntal's practice passive */
