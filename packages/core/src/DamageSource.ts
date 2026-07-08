@@ -293,7 +293,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 						this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any)) ?? {};
 						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
-					}),
+					}, { flush: 'sync' }), /* not sure about this flush, it should avoid the hp/ability resource watcher below triggering before this one and this one overriding the proper value set below but there might be a better solution */
 
 					watch(() => [this.maxHealth.value, this.maxAbilityResource.value], ([currentMaxHp, currentMaxAbilityResource], previousValues) => {
 						if (this.listedChampion.value?.id === this.champion.value?.id) {

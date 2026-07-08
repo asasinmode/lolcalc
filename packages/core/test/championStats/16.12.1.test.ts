@@ -198,7 +198,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 18 | mixed | " | jak\'sho+, bloodmail+ | mid quest', { only: true }, async () => {
+	await t.test('lvl 18 | mixed | " | jak\'sho+, bloodmail+ | mid quest', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rammus', {
 			...mixedItemsCommon,
 			currentHealth: 932,
