@@ -907,7 +907,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
 		if (~existingEffectIndex) {
-			console.warn(`[DamageSource addEffect] adding existing effect`, abilityId);
+			console.warn('[DamageSource addEffect] adding existing effect', abilityId);
 
 			if (data && trustData) {
 				this.appliedEffects.value[existingEffectIndex]!.data = data;
@@ -920,7 +920,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				}
 			}
 
-			return this.appliedEffects.value[existingEffectIndex] as IDamageSourceEffect<T>;
+			return this.appliedEffects.value[existingEffectIndex] as unknown as IDamageSourceEffect<T>;
 		} else {
 			const rv: IDamageSourceEffect<any> = {
 				abilityId,
