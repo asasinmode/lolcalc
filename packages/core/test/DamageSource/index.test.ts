@@ -236,4 +236,18 @@ test('maxHealth watch', async (t) => {
 		assert.equal(damageSource.currentHealth.value, damageSource.maxHealth.value);
 		assert.equal(damageSource.currentAbilityResource.value, damageSource.maxAbilityResource.value);
 	});
+
+	await t.test('override, update then change max', { only: true }, async () => {
+		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], currentHealth: partialHp, currentAbilityResource: partialMp }).await();
+		await nextTick();
+
+		damageSource.currentHealth.value += partialHp / 2;
+		damageSource.currentAbilityResource.value += partialMp / 2;
+		damageSource.addItem(hpItem);
+		damageSource.addItem(mpItem);
+		await nextTick();
+
+		assert.equal(damageSource.currentHealth.value, partialHp * 1.5);
+		assert.equal(damageSource.currentAbilityResource.value, partialMp * 1.5);
+	});
 });
