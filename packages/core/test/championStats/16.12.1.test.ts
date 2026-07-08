@@ -10,7 +10,7 @@ test.before(() => {
 	setupPatchFixture(fixture);
 });
 
-test('Evelynn, dragons', async (t) => {
+test('Evelynn dragons', async (t) => {
 	const sourceCommon: IOverrides<'Evelynn'> = {
 		level: 18,
 		runes: {
