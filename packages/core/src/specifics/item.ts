@@ -193,7 +193,7 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['DamageIncreasePerSecond', 'DamageIncreaseMax'],
 		}),
 		calculateHooks: {
-			postTotal: {
+			preItemTotal: {
 				handler(self, _args, { calculatedVariables }) {
 					calculatedVariables.hauntingGuiseBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness ?? 0) * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond;
 				},
@@ -351,7 +351,7 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['f2', 'BurnPercentHealthDamage', 'BurnDuration', 'DamageIncreasePerSecond', 'DamageIncreaseMax'],
 		}),
 		calculateHooks: {
-			postTotal: {
+			preItemTotal: {
 				handler(self, _args, { calculatedVariables }) {
 					calculatedVariables.liandryBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'liandry'>).madness ?? 0) * ITEMS_BY_NAME.liandry?.dataValues.DamageIncreasePerSecond;
 				},
@@ -424,8 +424,8 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Focused Will ability damage increase',
 		imgText(self) {
-			const { fWill } = self.internalItemData.value as { fWill: number };
-			return fWill && `${Math.round(fWill * ITEMS_BY_NAME.shojin?.dataValues.SpellDamageIncrease * 100)}%`;
+			const { shojinBonusDamagePercent } = self.stats.value.variables;
+			return shojinBonusDamagePercent ? `${Math.round(shojinBonusDamagePercent * 100)}%` : '';
 		},
 		variables: defineVariables({
 			known: {
@@ -438,6 +438,13 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'AHBase', 'TooltipValue', 'StackDuration', 'StackCount', 'CastIDLockout'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					calculatedVariables.shojinBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'shojin'>).fWill ?? 0) * ITEMS_BY_NAME.shojin?.dataValues.SpellDamageIncrease;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
 		MAX_STACKS: ITEMS_BY_NAME.riftmaker?.dataValues.SecondsInCombat,
