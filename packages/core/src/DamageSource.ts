@@ -168,6 +168,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 * if not `undefined`, the champion watch will assume the `DamageSource` is being restored and handle it specially
 	 */
 	fromStringifiedInternalData: any[] | undefined;
+	/**
+	 * one time use when restoring with `fromStringifiedData`, without it the maxHealth/abilityResource watcher will run and override the restored values after loading the champion
+	 */
+	hpAbilityResourceOverridesOnFirstChampLoad?: { hp?: number; abilityResource?: number };
 
 	constructor(
 		overrides: (Omit<IOverrides<Id>, 'champion'> & {
@@ -227,6 +231,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.addEffect(effect.abilityId, effect.data);
 		}
 
+		/** used in maxHealth/abilityResource watcher to ensure overrides are used only once */
+		let hpAbilityResourceWatchUsedOverrides = false;
+
 		this.watchHandles = isResultsCopy
 			? []
 			: [
@@ -283,9 +290,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						if (cloned) {
 							cloned = false;
 						} else {
-							this.currentHealth.value = this.stats.value?.total.hp ?? 0;
-							this.currentAbilityResource.value = this.stats.value?.total.mana ?? 0;
-
 							const level = c?.id === 'TargetDummy' ? 1 : 0;
 							this.abilityLevels.value = { q: level, w: level, e: level, r: level };
 							this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
@@ -293,25 +297,41 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 						this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any)) ?? {};
 						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
-					}, { flush: 'sync' }), /* not sure about this flush, it should avoid the hp/ability resource watcher below triggering before this one and this one overriding the proper value set below but there might be a better solution */
+					}, { flush: 'sync' }),
 
-					watch(() => [this.maxHealth.value, this.maxAbilityResource.value], ([currentMaxHp, currentMaxAbilityResource], previousValues) => {
+					watch(() => [this.maxHealth.value, this.maxAbilityResource.value, this.champion.value?.id] as [number, number, string | undefined], ([currentMaxHp, currentMaxAbilityResource, championId], previousValues) => {
+						let markOverridesUsed = false;
+						let useFirstChampionLoadOverride = false;
+
+						if (championId !== previousValues?.[2]) {
+							this.currentHealth.value = this.hpAbilityResourceOverridesOnFirstChampLoad?.hp ?? this.stats.value?.total.hp ?? 0;
+							this.currentAbilityResource.value = this.hpAbilityResourceOverridesOnFirstChampLoad?.abilityResource ?? this.stats.value?.total.mana ?? 0;
+							useFirstChampionLoadOverride = true;
+						}
+
 						if (this.listedChampion.value?.id === this.champion.value?.id) {
-							if (overrides.currentHealth !== undefined) {
+							if (!hpAbilityResourceWatchUsedOverrides && overrides.currentHealth !== undefined) {
 								this.currentHealth.value = Math.max(0, Math.min(overrides.currentHealth, currentMaxHp ?? 0));
-							} else if (this.currentHealth.value === previousValues?.[0]) {
+								markOverridesUsed = true;
+							} else if (this.currentHealth.value === previousValues?.[0] && !useFirstChampionLoadOverride) {
 								this.currentHealth.value = currentMaxHp ?? 0;
 							} else {
 								this.currentHealth.value = previousValues?.[0] === undefined ? (currentMaxHp ?? 0) : Math.min(this.currentHealth.value, currentMaxHp ?? 0);
 							}
 
-							if (overrides.currentAbilityResource !== undefined) {
+							if (!hpAbilityResourceWatchUsedOverrides && overrides.currentAbilityResource !== undefined) {
 								this.currentAbilityResource.value = Math.max(0, Math.min(overrides.currentAbilityResource, currentMaxAbilityResource ?? 0));
-							} else if (this.currentAbilityResource.value === previousValues?.[1]) {
+								markOverridesUsed = true;
+							} else if (this.currentAbilityResource.value === previousValues?.[1] && !useFirstChampionLoadOverride) {
 								this.currentAbilityResource.value = currentMaxAbilityResource ?? 0;
 							} else {
 								this.currentAbilityResource.value = previousValues?.[1] === undefined ? (currentMaxAbilityResource ?? 0) : Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
 							}
+						}
+
+						hpAbilityResourceWatchUsedOverrides ||= markOverridesUsed;
+						if (useFirstChampionLoadOverride) {
+							this.hpAbilityResourceOverridesOnFirstChampLoad = undefined;
 						}
 					}, { immediate: true }),
 
@@ -702,17 +722,21 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 		}
 
+		let restoredHp: number | undefined;
 		if (rawCurrentHealth) {
 			const parsedValue = Number.parseFloat(rawCurrentHealth);
 			if (!Number.isNaN(parsedValue)) {
 				rv.currentHealth.value = Math.max(0, rv.champion.value ? Math.min(rv.maxHealth.value, parsedValue) : parsedValue);
+				restoredHp = rv.currentHealth.value;
 			}
 		}
 
+		let restoredAbilityResource: number | undefined;
 		if (rawCurrentAbilityResource) {
 			const parsedValue = Number.parseFloat(rawCurrentAbilityResource);
 			if (!Number.isNaN(parsedValue)) {
 				rv.currentAbilityResource.value = Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityResource.value, parsedValue) : parsedValue);
+				restoredAbilityResource = rv.currentHealth.value;
 			}
 		}
 
@@ -790,6 +814,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
 			rv.fromStringifiedInternalData = fromStringifiedInternalData;
 			rv.listedChampion.value = CHAMPIONS[CHAMPION_KEY_TO_ID[championKey]];
+			rv.hpAbilityResourceOverridesOnFirstChampLoad = { hp: restoredHp, abilityResource: restoredAbilityResource };
 		}
 
 		return rv;

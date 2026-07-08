@@ -4,7 +4,7 @@ import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { CHAMPIONS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { nextTick } from 'vue';
 
-test('maxHealth watch', async (t) => {
+test('maxHealth/maxAbilityResource watch', async (t) => {
 	const champion = await useChampion('Ahri');
 	const championHp = champion.stats.hp;
 	const championMp = champion.stats.mp;
@@ -237,7 +237,7 @@ test('maxHealth watch', async (t) => {
 		assert.equal(damageSource.currentAbilityResource.value, damageSource.maxAbilityResource.value);
 	});
 
-	await t.test('override, update then change max', { only: true }, async () => {
+	await t.test('override, update then change max', async () => {
 		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], currentHealth: partialHp, currentAbilityResource: partialMp }).await();
 		await nextTick();
 
@@ -249,5 +249,21 @@ test('maxHealth watch', async (t) => {
 
 		assert.equal(damageSource.currentHealth.value, partialHp * 1.5);
 		assert.equal(damageSource.currentAbilityResource.value, partialMp * 1.5);
+	});
+
+	await t.test('no champion from stringified', async () => {
+		const damageSource = DamageSource.fromStringifiedData('_1_1028-1027_0___1_1');
+		await nextTick();
+
+		assert.equal(damageSource.currentHealth.value, 1);
+		assert.equal(damageSource.currentAbilityResource.value, 1);
+	});
+
+	await t.test('champion from stringified', async () => {
+		const damageSource = await DamageSource.fromStringifiedData(`${champion.key}_1__0___0_0`).await();
+		await nextTick();
+
+		assert.equal(damageSource.currentHealth.value, 0);
+		assert.equal(damageSource.currentAbilityResource.value, 0);
 	});
 });
