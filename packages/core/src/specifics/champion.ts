@@ -171,10 +171,10 @@ export const CHAMPION_SPECIFICS = {
 	Cassiopeia: {
 		calculateHooks: {
 			onTotalPreMultipliers: {
-				handler(self, { championPassiveStats, totalPreMultipliersStats, bonusStats }, { miscDebug }) {
+				handler(self, { championPassiveStats, totalPreMultipliersStats, bonusStats }, { calculatedVariables }) {
 					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityVariant: (self.champion.value as typeof ICassiopeia).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof msMultiplier.value === 'number') {
-						const oldPenalty = miscDebug.movespeedSoftCapPenalty;
+						const oldPenalty = calculatedVariables.movespeedSoftCapPenalty;
 						championPassiveStats.moveSpeed = (bonusStats.moveSpeed + oldPenalty) * msMultiplier.value;
 
 						const uncappedMoveSpeed = totalPreMultipliersStats.moveSpeed + oldPenalty;
@@ -186,7 +186,7 @@ export const CHAMPION_SPECIFICS = {
 
 						totalPreMultipliersStats.moveSpeed = newUncappedMoveSpeed - newPenalty;
 						bonusStats.moveSpeed += effectiveValue;
-						miscDebug.movespeedSoftCapPenalty = newPenalty;
+						calculatedVariables.movespeedSoftCapPenalty = newPenalty;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS cassiopeia] failed to calculate passive ms multiplier');
 					}

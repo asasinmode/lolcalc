@@ -45,6 +45,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		baseItemManaRegenPercent: 0,
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
+		movespeedSoftCapPenalty: 0,
 	};
 	// TODO try to see if mid quest can or if item ability power multipliers should be here, infernal soul works different from mid quest?
 	const totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'] = {
@@ -53,9 +54,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		armor: 0,
 		magicResist: 0,
 	};
-	const miscDebug: IStatsCalculationMiscDebug = {
-		movespeedSoftCapPenalty: 0,
-	};
+	const miscDebug: IStatsCalculationMiscDebug = {};
 
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
@@ -228,7 +227,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	// TODO possibly has to be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	totalPreMultipliersStats.moveSpeed += multiplierBonusMoveSpeed;
 	const penalty = calculateMSCapPenalty(totalPreMultipliersStats.moveSpeed);
-	miscDebug.movespeedSoftCapPenalty = penalty;
+	calculatedVariables.movespeedSoftCapPenalty = penalty;
 	totalPreMultipliersStats.moveSpeed -= penalty;
 	bonusStats.moveSpeed += multiplierBonusMoveSpeed - penalty;
 
