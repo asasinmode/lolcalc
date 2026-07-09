@@ -1221,6 +1221,27 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['OOCMS', 'Duration'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'youmuu'>).haunt) {
+						const oocMS = itemVariableValue('OOCMS', { item: ITEMS_BY_NAME.youmuu, isRanged: isRanged ?? true });
+
+						if (typeof oocMS.value === 'number') {
+							itemPassivesStats.moveSpeed += oocMS.value;
+						} else {
+							console.warn('[ITEM_SPECIFICS youmuu] failed to calculate ooc ms');
+						}
+					}
+
+					if ((self.internalItemData.value as IInternalItemDataOf<'youmuu'>).wStep) {
+						const { MeleeItemCalcValueB, RangedItemCalcValueB } = ITEMS_BY_NAME.youmuu?.dataValues ?? {};
+
+						calculatedVariables.totalBonusPercentMoveSpeed += (isRanged === true ? RangedItemCalcValueB : MeleeItemCalcValueB) / 100;
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.forceOfNature]: {
 		internalDataProperties: ['steadfast'],
