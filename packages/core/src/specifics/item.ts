@@ -988,6 +988,9 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
+		variables: defineVariables({
+			uninteresting: ['ActiveMoveSpeed', 'BuffDuration'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.ardentCenser]: {
 		internalDataProperties: ['sanctify'],
@@ -1349,6 +1352,34 @@ export const ITEM_SPECIFICS = {
 		},
 		imgActive(internalData: { overdrive: number }) {
 			return internalData.overdrive;
+		},
+		variables: defineVariables({
+			uninteresting: ['UltimateHaste', 'HasteDuration'],
+		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
+					itemPassivesStats.ultimateHaste += ITEMS_BY_NAME.experimentalHexplate?.dataValues.UltimateHaste ?? 0;
+
+					if (!(self.internalItemData.value as IInternalItemDataOf<'experimentalHexplate'>).overdrive) {
+						return;
+					}
+
+					const bonusAS = itemVariableValue('BonusAS', { item: ITEMS_BY_NAME.experimentalHexplate, isRanged: isRanged ?? true });
+					if (typeof bonusAS.value === 'number') {
+						itemPassivesStats.bonusAttackSpeedPercent += bonusAS.value / 100;
+					} else {
+						console.warn('[ITEM_SPECIFICS experimental hexplate] failed to calculate bonus attack speed', bonusAS);
+					}
+
+					const bonusMS = itemVariableValue('BonusMS', { item: ITEMS_BY_NAME.experimentalHexplate, isRanged: isRanged ?? true });
+					if (typeof bonusMS.value === 'number') {
+						calculatedVariables.totalBonusPercentMoveSpeed += bonusMS.value / 100;
+					} else {
+						console.warn('[ITEM_SPECIFICS experimental hexplate] failed to calculate bonus attack speed', bonusMS);
+					}
+				},
+			},
 		},
 	},
 	[ITEM_NAME_TO_ID.heartsteel]: {
