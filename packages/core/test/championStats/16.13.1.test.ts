@@ -1,5 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IInternalDragonDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import fixture from '../fixtures/16.13.1.fixture.json' with { type: 'json' };
@@ -23,6 +23,24 @@ test('Cassiopeia ms items & dragons', async (t) => {
 		dragonStacks: ['Mountain', 'Infernal'],
 	};
 
+	await t.test('lvl 5 | youmuu+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+			level: 5,
+			items: [ITEMS_BY_NAME.youmuu],
+			internalItemData: { haunt: 1, wStep: 0 } satisfies IInternalItemDataOf<'youmuu'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			moveSpeed: 362,
+		});
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'youmuu'>).wStep = 1;
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			moveSpeed: 420,
+		});
+	});
+
 	await t.test('lvl 2 | phage+, black cleaver+, trinity force+', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
 			...sourceCommon,
@@ -36,8 +54,22 @@ test('Cassiopeia ms items & dragons', async (t) => {
 			magicResist: 35,
 			attackSpeed: 0.977,
 			abilityHaste: 58,
-			/* in game shows 467, TODO maybe is rounded up? */
+			/* game shows 467 */
 			moveSpeed: 466,
+		});
+	});
+
+	await t.test('lvl 6 | cloud stack ooc', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+			...sourceCommon,
+			level: 6,
+			dragonStacks: sourceCommon.dragonStacks!.concat('Cloud'),
+			internalDragonData: { isOOC: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			/* game shows 445 */
+			moveSpeed: 444,
 		});
 	});
 });
