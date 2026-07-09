@@ -109,6 +109,18 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					/* checked and it doesn't stack */
+					if ((self.internalItemData.value as IInternalItemDataOf<'shurelya'>).iSpeech) {
+						return;
+					}
+
+					calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.shurelya?.dataValues.ActiveMoveSpeed;
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.ardentSanctify]: defineEffectSpecific<[isSanctified: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.ardentCenser),
@@ -145,11 +157,12 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats, effectStats }) {
-					const effect = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.bandlepipesFanfare));
-					if (!effect?.[0].data[0] || (self.internalItemData.value as IInternalItemDataOf<'bandlepipes'>).fanfare) {
+					/* checked and it doesn't stack */
+					if ((self.internalItemData.value as IInternalItemDataOf<'bandlepipes'>).fanfare) {
 						return;
 					}
 
+					const effect = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.bandlepipesFanfare));
 					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: effect?.[0].data[0] === MeleeRangedEnumOptions.ranged });
 					if (typeof attackSpeed.value === 'number') {
 						itemPassivesStats.bonusAttackSpeedPercent += attackSpeed.value;

@@ -979,6 +979,15 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { iSpeech: number }) {
 			return internalData.iSpeech;
 		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _args, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'shurelya'>).iSpeech) {
+						calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.shurelya?.dataValues.ActiveMoveSpeed;
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.ardentCenser]: {
 		internalDataProperties: ['sanctify'],
