@@ -19,3 +19,16 @@ export function addMultiplicative(currentValue: number, ...values: number[]) {
 	}
 	return currentValue;
 }
+
+/** soft cap according to wiki https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps */
+export function calculateMSCapPenalty(moveSpeed: number) {
+	let penalty = 0;
+	if (moveSpeed > 415) {
+		if (moveSpeed > 490) {
+			penalty = moveSpeed * 0.5 - 230;
+		} else {
+			penalty = moveSpeed * 0.2 - 83;
+		}
+	}
+	return penalty;
+}

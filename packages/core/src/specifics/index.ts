@@ -27,6 +27,8 @@ export const HOOK_PRIORITIES = {
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
 		/** should be before rabadon and blackfire torch */
 		[ITEM_NAME_TO_ID.swiftmarch]: 10,
+		/** should be before swiftmarch */
+		Cassiopeia: 9,
 		[ITEM_NAME_TO_ID.rabadon]: 20,
 		[ITEM_NAME_TO_ID.blackfireTorch]: 20,
 	},

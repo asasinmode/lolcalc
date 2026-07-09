@@ -1982,6 +1982,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		effectStats: IStatsCalculationResult['effect'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
+		championPassiveStats: IStatsCalculationResult['championPassive'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
 	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {

@@ -4,7 +4,7 @@ import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultipli
 import type { DamageSource } from '../DamageSource';
 import { MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
-import { addMultiplicative } from './util.ts';
+import { addMultiplicative, calculateMSCapPenalty } from './util.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;
@@ -227,24 +227,16 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
 	// TODO possibly has to be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	totalPreMultipliersStats.moveSpeed += multiplierBonusMoveSpeed;
-	/* soft cap according to wiki https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps */
-	let penalty = 0;
-	if (totalPreMultipliersStats.moveSpeed > 415) {
-		if (totalPreMultipliersStats.moveSpeed > 490) {
-			penalty = totalPreMultipliersStats.moveSpeed * 0.5 - 230;
-		} else {
-			penalty = totalPreMultipliersStats.moveSpeed * 0.2 - 83;
-		}
-	}
+	const penalty = calculateMSCapPenalty(totalPreMultipliersStats.moveSpeed);
 	miscDebug.movespeedSoftCapPenalty = penalty;
 	totalPreMultipliersStats.moveSpeed -= penalty;
-	bonusStats.moveSpeed += multiplierBonusMoveSpeed;
+	bonusStats.moveSpeed += multiplierBonusMoveSpeed - penalty;
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
-			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
 		}
 	}
 

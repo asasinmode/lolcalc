@@ -1,5 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
+import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
@@ -31,6 +32,7 @@ import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
+import { calculateMSCapPenalty } from '../calculate/util.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
@@ -164,6 +166,42 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 				hasPassiveStack: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), 1),
 			};
+		},
+	},
+	Cassiopeia: {
+		calculateHooks: {
+			onTotalPreMultipliers: {
+				handler(self, { championPassiveStats, totalPreMultipliersStats, bonusStats }, { miscDebug }) {
+					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityVariant: (self.champion.value as typeof ICassiopeia).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof msMultiplier.value === 'number') {
+						const oldPenalty = miscDebug.movespeedSoftCapPenalty;
+						championPassiveStats.moveSpeed = (bonusStats.moveSpeed + oldPenalty) * msMultiplier.value;
+
+						const uncappedMoveSpeed = totalPreMultipliersStats.moveSpeed + oldPenalty;
+						const newUncappedMoveSpeed = uncappedMoveSpeed + championPassiveStats.moveSpeed;
+						const newPenalty = calculateMSCapPenalty(newUncappedMoveSpeed);
+
+						const additionalPenalty = newPenalty - oldPenalty;
+						const effectiveValue = championPassiveStats.moveSpeed - additionalPenalty;
+
+						totalPreMultipliersStats.moveSpeed = newUncappedMoveSpeed - newPenalty;
+						bonusStats.moveSpeed += effectiveValue;
+						miscDebug.movespeedSoftCapPenalty = newPenalty;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS cassiopeia] failed to calculate passive ms multiplier');
+					}
+				},
+				priority: HOOK_PRIORITIES.onTotalPreMultipliers.Cassiopeia,
+			},
+		},
+		passive: {
+			variables: defineChampionVariables<'Cassiopeia', typeof ICassiopeia, 'passive'>({
+				meta: {
+					PercentHasteMod: {
+						displayedName: 'MoveSpeedPercent',
+					},
+				},
+			}),
 		},
 	},
 	Darius: {
