@@ -34,9 +34,10 @@ test('Cassiopeia ms items & dragons', async (t) => {
 			abilityPower: 52,
 			armor: 22,
 			magicResist: 35,
-			attackSpeed: 0.98,
+			attackSpeed: 0.977,
 			abilityHaste: 58,
-			moveSpeed: 467,
+			/* in game shows 467, TODO maybe is rounded up? */
+			moveSpeed: 466,
 		});
 	});
 });

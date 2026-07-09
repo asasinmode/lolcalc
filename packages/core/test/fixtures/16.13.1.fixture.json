@@ -252,6 +252,26 @@
 						"PersistentMSValue": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
 					}
 				}
+			},
+			"Mountain": {
+				"name": "Mountain",
+				"stack": {
+					"objectName": "SRX_DragonBuffMountain",
+					"dataKey": "Shared/Spells/SRX_DragonBuffMountain",
+					"dataValues": {
+						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				}
+			},
+			"Infernal": {
+				"name": "Infernal",
+				"stack": {
+					"objectName": "SRX_DragonBuffInfernal",
+					"dataKey": "Shared/Spells/SRX_DragonBuffInfernal",
+					"dataValues": {
+						"ADandAPPercentIncrease": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
+					}
+				}
 			}
 		}
 	}
