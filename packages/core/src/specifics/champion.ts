@@ -302,15 +302,11 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Jax', typeof IJax, 'passive'>({
 				known: {
 					AttackSpeedPercent: [],
-					AttackSpeed: [],
 				},
 				calculate(self) {
 					return {
 						AttackSpeedPercent: {
 							value: self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0,
-						},
-						AttackSpeed: {
-							value: self.stats.value.championPassive.attackSpeed ?? 0,
 						},
 					};
 				},
@@ -319,9 +315,6 @@ export const CHAMPION_SPECIFICS = {
 						isCustom: true,
 						resultsIsPercentage: true,
 						resultsMultiplier: 100,
-					},
-					AttackSpeed: {
-						isCustom: true,
 					},
 				},
 			}),
@@ -375,15 +368,11 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Kayle', typeof IKayle, 'passive'>({
 				known: {
 					AttackSpeedPercent: [],
-					AttackSpeed: [],
 				},
 				calculate(self) {
 					return {
 						AttackSpeedPercent: {
 							value: self.stats.value.championPassive.bonusAttackSpeedPercent,
-						},
-						AttackSpeed: {
-							value: self.stats.value.championPassive.attackSpeed,
 						},
 					};
 				},
@@ -395,9 +384,6 @@ export const CHAMPION_SPECIFICS = {
 						isCustom: true,
 						resultsIsPercentage: true,
 						resultsMultiplier: 100,
-					},
-					AttackSpeed: {
-						isCustom: true,
 					},
 				},
 				uninteresting: ['LevelForPassiveRank0', 'LevelForPassiveRank1', 'LevelForPassiveRank2', 'LevelForPassiveRank3', 'MSTowardsEnemy', 'EnrageDuration', 'UpgradedAttackRange', 'FinalAttackRange', 'EnrageTotalASPerStack'],

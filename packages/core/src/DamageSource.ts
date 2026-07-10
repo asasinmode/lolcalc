@@ -1979,6 +1979,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];
+		baseStats: IStatsCalculationResult['bonus'];
 		effectStats: IStatsCalculationResult['effect'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
