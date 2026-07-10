@@ -13,7 +13,7 @@ export function runesEmpty(runes: IChampionRunes): boolean {
 
 export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmpty(runes)): boolean {
 	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;
-	return !areEmpty && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2 && shards.offensive && shards.flex && shards.defensive);
+	return !areEmpty && !(secondary && primarySlots.filter(Boolean).length === 4 && secondarySlots.length === 2 && shards.offensive && shards.flex && shards.defensive);
 };
 
 /** specific runes' helpers, utils and calculations */
