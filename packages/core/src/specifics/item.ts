@@ -893,7 +893,7 @@ export const ITEM_SPECIFICS = {
 				ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].MAX_STACKS,
 				self.internalItemData.value.carve ?? 0,
 			));
-			self.internalItemData.value.fervor = clamp(0, self.internalItemData.value.carve ?? 0, 1);
+			self.internalItemData.value.fervor = clamp(0, self.internalItemData.value.fervor ?? 0, 1);
 			return { carve: 0, fervor: 0 };
 		},
 		imgActive(internalData: { fervor: number }) {
