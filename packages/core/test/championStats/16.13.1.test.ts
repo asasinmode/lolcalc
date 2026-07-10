@@ -54,8 +54,7 @@ test('Cassiopeia ms items & dragons', async (t) => {
 			magicResist: 35,
 			attackSpeed: 0.977,
 			abilityHaste: 58,
-			/* game shows 467 */
-			moveSpeed: 466,
+			moveSpeed: 467,
 		});
 	});
 
@@ -68,8 +67,24 @@ test('Cassiopeia ms items & dragons', async (t) => {
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			/* game shows 445 */
-			moveSpeed: 444,
+			moveSpeed: 445,
+		});
+	});
+
+	await t.test('lvl 6 | experimental hexplate+, shurelya+ | cloud stack+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+			...sourceCommon,
+			level: 6,
+			dragonStacks: sourceCommon.dragonStacks!.concat('Cloud'),
+			internalDragonData: { isOOC: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
+			internalItemData: { iSpeech: 1, overdrive: 1 } satisfies IInternalItemDataOf<'experimentalHexplate' | 'shurelya'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackSpeed: 1.235,
+			moveSpeed: 558,
+		});
+	});
 		});
 	});
 });

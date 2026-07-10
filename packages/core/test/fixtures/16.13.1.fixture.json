@@ -196,6 +196,51 @@
 			},
 			"effectAmount": [25, 60, 2, 1.5, 1.5]
 		},
+		"3142": {
+			"name": "Youmuu's Ghostblade",
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"PercentMovementSpeedMod": 0.04,
+				"PhysicalLethality": 18
+			},
+			"dataValues": {
+				"LethalityAmount": 18,
+				"CombatTimer": 3,
+				"Cooldown": 45,
+				"MeleeItemCalcValueB": 20,
+				"RangedItemCalcValueB": 15,
+				"DurationNDV": 6,
+				"OOCMSndv": 20,
+				"BaseOOCMS": 20
+			},
+			"itemCalculations": {
+				"Duration": {
+					"mFormulaParts": [
+						{
+							"mNumber": 6,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.667
+					}
+				},
+				"OOCMS": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseOOCMS",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
+			},
+			"__replacedVariables": {
+				"{74ac7847}": "BaseOOCMS"
+			}
+		},
 		"3170": {
 			"name": "Swiftmarch",
 			"dataValues": {
