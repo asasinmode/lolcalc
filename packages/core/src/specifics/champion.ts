@@ -171,21 +171,25 @@ export const CHAMPION_SPECIFICS = {
 	Cassiopeia: {
 		calculateHooks: {
 			onTotalPreMultipliers: {
-				handler(self, { championPassiveStats, totalPreMultipliersStats, bonusStats }, { calculatedVariables }) {
+				handler(self, { championPassiveStats, totalPreMultipliersStats, baseStats, bonusStats }, { calculatedVariables }) {
 					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityVariant: (self.champion.value as typeof ICassiopeia).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof msMultiplier.value === 'number') {
-						const oldPenalty = calculatedVariables.movespeedSoftCapPenalty;
-						championPassiveStats.moveSpeed = (bonusStats.moveSpeed + oldPenalty) * msMultiplier.value;
+						const standardPrePenalty = totalPreMultipliersStats.moveSpeed + calculatedVariables.movespeedSoftCapPenalty;
+						const percent = calculatedVariables.totalBonusPercentMoveSpeed;
+						const flat = standardPrePenalty / (1 + percent) - baseStats.moveSpeed;
 
-						const uncappedMoveSpeed = totalPreMultipliersStats.moveSpeed + oldPenalty;
-						const newUncappedMoveSpeed = uncappedMoveSpeed + championPassiveStats.moveSpeed;
-						const newPenalty = calculateMSCapPenalty(newUncappedMoveSpeed);
+						const mult = 1 + msMultiplier.value;
+						const effectiveFlat = flat * mult;
+						const effectivePercent = percent * mult;
 
-						const additionalPenalty = newPenalty - oldPenalty;
-						const effectiveValue = championPassiveStats.moveSpeed - additionalPenalty;
+						const newPrePenaltyMS = (baseStats.moveSpeed + effectiveFlat) * (1 + effectivePercent);
+						const newPenalty = calculateMSCapPenalty(newPrePenaltyMS);
+						const newFinalMS = newPrePenaltyMS - newPenalty;
 
-						totalPreMultipliersStats.moveSpeed = newUncappedMoveSpeed - newPenalty;
-						bonusStats.moveSpeed += effectiveValue;
+						totalPreMultipliersStats.moveSpeed = newFinalMS;
+						const newBonus = newFinalMS - baseStats.moveSpeed;
+						championPassiveStats.moveSpeed = newBonus - bonusStats.moveSpeed;
+						bonusStats.moveSpeed = newBonus;
 						calculatedVariables.movespeedSoftCapPenalty = newPenalty;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS cassiopeia] failed to calculate passive ms multiplier');
