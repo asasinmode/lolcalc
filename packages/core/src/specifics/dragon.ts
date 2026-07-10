@@ -83,7 +83,8 @@ export const DRAGON_SPECIFICS = {
 				},
 				onDragon: {
 					handler(_self, { baseOnLevelStats, totalMultipliersStats, bonusStats, dragonStats, dragonStatMultipliers }) {
-						dragonStats.attackDamage = (baseOnLevelStats.attackDamage + bonusStats.attackDamage) * dragonStatMultipliers.attackDamage;
+						/* the multiplier should also apply to `bonusStats.attackDamage` but instead is specially handled in `calculateChampionStats` where mid role quest multiplier is applied */
+						dragonStats.attackDamage = (baseOnLevelStats.attackDamage) * dragonStatMultipliers.attackDamage;
 						totalMultipliersStats.attackDamage += dragonStats.attackDamage;
 						bonusStats.attackDamage += dragonStats.attackDamage;
 					},

@@ -254,13 +254,19 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
+	/* dragon shenanigans are here to turn infernal stack % increase into a multiplicative one. This seems to produce correct values but doesn't seem to be what [the wiki](https://wiki.leagueoflegends.com/en-us/Dragon_Slayer#General_notes) says should happen? I might be misunderstanding */
 	if (source.roleQuest.value === 'mid') {
 		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
-		calculatedVariables.midQuestAd = bonusStats.attackDamage * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
+		calculatedVariables.midQuestAd = bonusStats.attackDamage * ((MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP + dragonStatMultipliers.attackDamage);
 		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
 		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 		bonusStats.abilityPower += calculatedVariables.midQuestAp;
 		bonusStats.attackDamage += calculatedVariables.midQuestAd;
+	} else {
+		const infernalAdBonus = bonusStats.attackDamage * dragonStatMultipliers.attackDamage;
+		bonusStats.attackDamage += infernalAdBonus;
+		dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + infernalAdBonus;
+		totalMultipliersStats.attackDamage += infernalAdBonus;
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
