@@ -173,7 +173,9 @@ export const CHAMPION_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(self, { championPassiveStats, totalPreMultipliersStats, baseStats, bonusStats }, { calculatedVariables }) {
 					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityVariant: (self.champion.value as typeof ICassiopeia).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+
 					if (typeof msMultiplier.value === 'number') {
+						/* could store those variables pre applying mult & penalty in `championStats` but since it's only cassio for now that needs them it can stay, if more stuff needs access to them then refactor */
 						const standardPrePenalty = totalPreMultipliersStats.moveSpeed + calculatedVariables.movespeedSoftCapPenalty;
 						const percent = calculatedVariables.totalBonusPercentMoveSpeed;
 						const flat = standardPrePenalty / (1 + percent) - baseStats.moveSpeed;
