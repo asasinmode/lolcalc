@@ -101,4 +101,38 @@ test('Cassiopeia ms items & dragons', async (t) => {
 			moveSpeed: 490,
 		});
 	});
+
+	await t.test('lvl 18 | shurelya+, experimental hexplate+ | cloud soul & stack+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+			...sourceCommon,
+			level: 18,
+			roleQuest: 'mid',
+			dragonStacks: sourceCommon.dragonStacks!.concat('Cloud', 'Cloud'),
+			dragonSoul: 'Cloud',
+			internalDragonData: { isOOC: 1, hasUlted: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack' | 'soul'>,
+			internalItemData: { iSpeech: 1, overdrive: 1 } satisfies IInternalItemDataOf<'shurelya' | 'experimentalHexplate'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 280,
+			attackSpeed: 1.362,
+			moveSpeed: 817,
+		});
+	});
+
+	await t.test('lvl 18 | black cleaver+, trinity+, phage+ | cloud soul+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+			...sourceCommon,
+			level: 18,
+			roleQuest: 'mid',
+			dragonStacks: sourceCommon.dragonStacks!.concat('Cloud', 'Cloud'),
+			dragonSoul: 'Cloud',
+			internalItemData: { quicken: 1, fervor: 1, carve: 0, rage: 1, iSpeech: 1, overdrive: 1 } satisfies IInternalItemDataOf<'blackCleaver' | 'trinity' | 'phage' | 'shurelya' | 'experimentalHexplate'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 276,
+			moveSpeed: 705,
+		});
+	});
 });
