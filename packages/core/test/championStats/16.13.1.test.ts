@@ -58,7 +58,7 @@ test('Cassiopeia ms items & dragons', async (t) => {
 		});
 	});
 
-	await t.test('lvl 6 | cloud stack ooc', async () => {
+	await t.test('lvl 6 | cloud stack+', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
 			...sourceCommon,
 			level: 6,
@@ -85,6 +85,20 @@ test('Cassiopeia ms items & dragons', async (t) => {
 			moveSpeed: 558,
 		});
 	});
+
+	await t.test('lvl 11 | black cleaver+, trinity+, phage+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+			...sourceCommon,
+			level: 11,
+			roleQuest: 'mid',
+			dragonStacks: sourceCommon.dragonStacks!.concat('Cloud'),
+			internalItemData: { quicken: 1, fervor: 1, carve: 0, rage: 1 } satisfies IInternalItemDataOf<'blackCleaver' | 'trinity' | 'phage'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 244,
+			abilityPower: 56,
+			moveSpeed: 490,
 		});
 	});
 });

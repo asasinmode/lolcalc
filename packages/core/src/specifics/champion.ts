@@ -561,15 +561,16 @@ export const CHAMPION_SPECIFICS = {
 	Rammus: {
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalMultipliersStats, totalStatMultipliers, championPassiveStats, bonusStats, roleQuest }, { calculatedVariables }) {
+				handler(self, { totalStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, roleQuest }, { calculatedVariables }) {
 					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 					if (typeof bonusAd.value === 'number') {
 						championPassiveStats.attackDamage = bonusAd.value;
-						const multiplierValue = championPassiveStats.attackDamage * totalStatMultipliers.attackDamage;
+						// TODO test with larger armor value, dragon multiplier should be multiplied again by role quest? */
+						const dragonStackValue = championPassiveStats.attackDamage * dragonStatMultipliers.attackDamage;
 						const midQuestMultiplierValue = championPassiveStats.attackDamage * (roleQuest === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0);
 
 						calculatedVariables.midQuestAd! += midQuestMultiplierValue;
-						let value = multiplierValue + midQuestMultiplierValue;
+						let value = dragonStackValue + midQuestMultiplierValue;
 						totalMultipliersStats.attackDamage += value;
 						value += championPassiveStats.attackDamage;
 						totalStats.attackDamage += value;

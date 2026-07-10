@@ -14,7 +14,7 @@ export const DRAGON_SPECIFICS = {
 	Chemtech: {
 		stack: {
 			calculateHooks: {
-				onDragon: {
+				preItemTotal: {
 					handler(_self, { dragonStats }) {
 						dragonStats.healShieldPower = (dragonStats.healShieldPower ?? 0) + (MISC as TMiscData).dragons.Chemtech.stack.dataValues.HealShieldPerStack[1]!;
 						dragonStats.tenacity = addMultiplicative(dragonStats.tenacity, (MISC as TMiscData).dragons.Chemtech.stack.dataValues.TenacityPerStack[1]!);
@@ -31,7 +31,7 @@ export const DRAGON_SPECIFICS = {
 				return { isOOC: 0 };
 			},
 			calculateHooks: {
-				onDragon: {
+				preItemTotal: {
 					handler(self, { dragonStats }, { calculatedVariables }) {
 						dragonStats.slowResist = addMultiplicative(dragonStats.slowResist, (MISC as TMiscData).dragons.Cloud.stack.dataValues.SRAmountPerStack[1]!);
 						if ((self.internalDragonData.value as IInternalDragonDataOf<'Cloud', 'stack'>).isOOC) {
@@ -49,7 +49,7 @@ export const DRAGON_SPECIFICS = {
 				return { hasUlted: 0 };
 			},
 			calculateHooks: {
-				onDragon: {
+				preItemTotal: {
 					handler(self, _args, { calculatedVariables }) {
 						calculatedVariables.totalBonusPercentMoveSpeed += (MISC as TMiscData).dragons.Cloud.soul.dataValues.PersistentMSValue[1]!;
 						if ((self.internalDragonData.value as IInternalDragonDataOf<'Cloud', 'soul'>).hasUlted) {
@@ -63,7 +63,7 @@ export const DRAGON_SPECIFICS = {
 	Hextech: {
 		stack: {
 			calculateHooks: {
-				onDragon: {
+				preItemTotal: {
 					handler(_self, { dragonStats }) {
 						dragonStats.abilityHaste = (dragonStats.abilityHaste ?? 0) + (MISC as TMiscData).dragons.Hextech.stack.dataValues.AbilityHaste[1]!;
 						dragonStats.bonusAttackSpeedPercent = (dragonStats.bonusAttackSpeedPercent ?? 0) + (MISC as TMiscData).dragons.Hextech.stack.dataValues.AttackSpeed[1]!;
@@ -75,11 +75,17 @@ export const DRAGON_SPECIFICS = {
 	Infernal: {
 		stack: {
 			calculateHooks: {
+				preItemTotal: {
+					handler(_self, { dragonStatMultipliers }) {
+						dragonStatMultipliers.abilityPower += (MISC as TMiscData).dragons.Infernal.stack.dataValues.ADandAPPercentIncrease[1]!;
+						dragonStatMultipliers.attackDamage += (MISC as TMiscData).dragons.Infernal.stack.dataValues.ADandAPPercentIncrease[1]!;
+					},
+				},
 				onDragon: {
-					handler(_self, { dragonStats, totalStatMultipliers }) {
-						const multiplier = (dragonStats.abilityHaste ?? 0) + (MISC as TMiscData).dragons.Infernal.stack.dataValues.ADandAPPercentIncrease[1]!;
-						totalStatMultipliers.attackDamage += multiplier;
-						totalStatMultipliers.abilityPower += multiplier;
+					handler(_self, { baseOnLevelStats, totalMultipliersStats, bonusStats, dragonStats, dragonStatMultipliers }) {
+						dragonStats.attackDamage = (baseOnLevelStats.attackDamage + bonusStats.attackDamage) * dragonStatMultipliers.attackDamage;
+						totalMultipliersStats.attackDamage += dragonStats.attackDamage;
+						bonusStats.attackDamage += dragonStats.attackDamage;
 					},
 				},
 			},
@@ -88,10 +94,10 @@ export const DRAGON_SPECIFICS = {
 	Mountain: {
 		stack: {
 			calculateHooks: {
-				onDragon: {
-					handler(_self, { totalStatMultipliers }) {
-						totalStatMultipliers.armor += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
-						totalStatMultipliers.magicResist += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
+				preItemTotal: {
+					handler(_self, { dragonStatMultipliers }) {
+						dragonStatMultipliers.armor += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
+						dragonStatMultipliers.magicResist += (MISC as TMiscData).dragons.Mountain.stack.dataValues.BonusDefenses[1]!;
 					},
 				},
 			},

@@ -47,13 +47,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalBonusPercentMoveSpeed: 0,
 		movespeedSoftCapPenalty: 0,
 	};
-	// TODO try to see if mid quest can or if item ability power multipliers should be here, infernal soul works different from mid quest?
-	const totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'] = {
-		attackDamage: 0,
-		abilityPower: 0,
-		armor: 0,
-		magicResist: 0,
-	};
 	const miscDebug: IStatsCalculationMiscDebug = {};
 
 	const baseStats = structuredClone(initialStats);
@@ -99,15 +92,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		tenacity: 1,
 		slowResist: 1,
 	};
-
-	if (source.calculateStatsHooks.all.value.onDragon) {
-		for (const hook of source.calculateStatsHooks.all.value.onDragon) {
-			hook(source, { isRanged, dragonStats, totalStatMultipliers }, { calculatedVariables, miscDebug });
-		}
-	}
-	dragonStats.attackSpeed = (dragonStats.bonusAttackSpeedPercent ?? 0) * baseStats.attackSpeedRatio;
-	dragonStats.tenacity = 1 - dragonStats.tenacity;
-	dragonStats.slowResist = 1 - dragonStats.slowResist;
+	const dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'] = {
+		abilityPower: 0,
+		attackDamage: 0,
+		armor: 0,
+		magicResist: 0,
+	};
 
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	itemBaseStats.tenacity = 1;
@@ -146,12 +136,17 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
-			hook(source, { isRanged, itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, effectStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, effectStats, dragonStatMultipliers, dragonStats }, { calculatedVariables, miscDebug });
 		}
 	}
 	itemPassivesStats.attackSpeed = itemPassivesStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
 	itemPassivesStats.tenacity = 1 - itemPassivesStats.tenacity;
 	itemPassivesStats.slowResist = 1 - itemPassivesStats.slowResist;
+
+	/* non multiplier dragon stacks are done preItemTotal so adjust those early calculated stats here */
+	dragonStats.attackSpeed = (dragonStats.bonusAttackSpeedPercent ?? 0) * baseStats.attackSpeedRatio;
+	dragonStats.tenacity = 1 - dragonStats.tenacity;
+	dragonStats.slowResist = 1 - dragonStats.slowResist;
 
 	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [
 		key,
@@ -188,7 +183,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preBonus) {
 		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
-			hook(source, { isRanged, runeShardStats, baseStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, runeShardStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -224,7 +219,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
 	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
-	// TODO possibly has to be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
+	// TODO possibly could be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	totalPreMultipliersStats.moveSpeed += multiplierBonusMoveSpeed;
 	const penalty = calculateMSCapPenalty(totalPreMultipliersStats.moveSpeed);
 	calculatedVariables.movespeedSoftCapPenalty = penalty;
@@ -239,27 +234,37 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
+	for (const stat in dragonStatMultipliers) {
+		if (stat === 'abilityPower') {
+			dragonStats.abilityPower = calculatedVariables.apMultipliersBase * dragonStatMultipliers[stat as keyof typeof dragonStatMultipliers];
+			totalMultipliersStats[stat as IChampionStatName] += dragonStats.abilityPower;
+		} else if (stat !== 'attackDamage') { /* attack damage is handled in `onDragon` */
+			dragonStats[stat as IChampionStatName] = totalPreMultipliersStats[stat as keyof typeof dragonStatMultipliers] * dragonStatMultipliers[stat as keyof typeof dragonStatMultipliers];
+			totalMultipliersStats[stat as IChampionStatName] += dragonStats[stat as IChampionStatName]!;
+		}
+	}
+
+	for (const [statName, value] of Object.entries(totalMultipliersStats)) {
+		bonusStats[statName as IChampionStatName] += value;
+	}
+
+	if (source.calculateStatsHooks.all.value.onDragon) {
+		for (const hook of source.calculateStatsHooks.all.value.onDragon) {
+			hook(source, { baseOnLevelStats, totalMultipliersStats, bonusStats, dragonStats, dragonStatMultipliers }, { calculatedVariables, miscDebug });
+		}
+	}
+
 	if (source.roleQuest.value === 'mid') {
 		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
 		calculatedVariables.midQuestAd = bonusStats.attackDamage * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
 		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
 		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
-	}
-
-	for (const stat in totalStatMultipliers) {
-		if (stat === 'abilityPower') {
-			totalMultipliersStats[stat as IChampionStatName] += calculatedVariables.apMultipliersBase * totalStatMultipliers[stat as keyof typeof totalStatMultipliers];
-		} else {
-			totalMultipliersStats[stat as IChampionStatName] += totalPreMultipliersStats[stat as keyof typeof totalStatMultipliers] * totalStatMultipliers[stat as keyof typeof totalStatMultipliers];
-		}
+		bonusStats.abilityPower += calculatedVariables.midQuestAp;
+		bonusStats.attackDamage += calculatedVariables.midQuestAd;
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
-		([statName, statValue]) => {
-			const value = totalMultipliersStats[statName as IChampionStatName];
-			bonusStats[statName as IChampionStatName] += value;
-			return [statName, statValue + value];
-		},
+		([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]],
 	)) as IChampionStats;
 
 	// TODO figure out if its ok to do it, also handle other non mana champions not gaining mana
@@ -269,7 +274,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { roleQuest: source.roleQuest.value, isRanged, totalStats, totalStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
+			hook(source, { roleQuest: source.roleQuest.value, isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -293,7 +298,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		effect: effectStats,
 		totalPreMultipliers: totalPreMultipliersStats,
 		totalMultipliers: totalMultipliersStats,
-		totalStatMultipliers,
+		dragonStatMultipliers,
 		bonus: bonusStats,
 		total: totalStats,
 		variables: calculatedVariables,

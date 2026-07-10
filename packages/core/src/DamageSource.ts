@@ -1935,12 +1935,6 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		bonusStats: IStatsCalculationResult['bonus'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
 	}) => void>;
-	/** runs after base stats are calculated, before any item stats calculations */
-	onDragon?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		isRanged: IStatsCalculationResult['isRanged'];
-		dragonStats: IStatsCalculationResult['dragon'];
-		totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'];
-	}) => void>;
 	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		itemBaseStats: IStatsCalculationResult['itemBase'];
@@ -1949,6 +1943,8 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 		itemStatIncreases: IStatsCalculationResult['itemStatIncreases'];
 		effectStats: IStatsCalculationResult['effect'];
+		dragonStats: IStatsCalculationResult['dragon'];
+		dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
@@ -1967,7 +1963,6 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	preBonus?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		runeShardStats: IStatsCalculationResult['runeShards'];
-		baseStats: IStatsCalculationResult['base'];
 		itemBaseStats: IStatsCalculationResult['itemBase'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
@@ -1979,18 +1974,26 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];
-		baseStats: IStatsCalculationResult['bonus'];
+		baseStats: IStatsCalculationResult['base'];
 		effectStats: IStatsCalculationResult['effect'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
+	/** runs after `onTotalPreMultipliers` hook and regular dragonStatMultipliers have been applied */
+	onDragon?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
+		bonusStats: IStatsCalculationResult['bonus'];
+		dragonStats: IStatsCalculationResult['dragon'];
+		dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
+		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+	}) => void>;
 	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalStats: IStatsCalculationResult['total'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
-		totalStatMultipliers: IStatsCalculationResult['totalStatMultipliers'];
+		dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
