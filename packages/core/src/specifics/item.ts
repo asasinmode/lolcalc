@@ -1874,6 +1874,7 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalPreMultipliersStats.hp);
+					/* not that this value is not supposed to be affected by infernal/role quest multiplier. They subtract it before applying the multiplier in `calculateChampionStats` */
 					calculatedVariables.bloodmailRetribution = totalPreMultipliersStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
 
 					totalMultipliersStats.attackDamage += calculatedVariables.bloodmailRetribution;

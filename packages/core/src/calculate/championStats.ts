@@ -248,28 +248,20 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats[statName as IChampionStatName] += value;
 	}
 
-	/* turn infernal stack % increase into an additive one. This seems to produce correct values but it's not what [the wiki](https://wiki.leagueoflegends.com/en-us/Dragon_Slayer#General_notes) says should happen? I might be misunderstanding */
-	if (source.roleQuest.value === 'mid') {
-		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
-		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
-		bonusStats.abilityPower += calculatedVariables.midQuestAp;
+	const midQuestMultiplier = source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0;
 
-		const adBase = (bonusStats.attackDamage - (calculatedVariables.bloodmailRetribution ?? 0));
-		calculatedVariables.midQuestAd = adBase * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
-		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
-		bonusStats.attackDamage += calculatedVariables.midQuestAd;
+	calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * midQuestMultiplier;
+	totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
+	bonusStats.abilityPower += calculatedVariables.midQuestAp;
 
-		if (dragonStatMultipliers.attackDamage) {
-			dragonStats.attackDamage = (baseOnLevelStats.attackDamage + adBase) * dragonStatMultipliers.attackDamage;
-			totalPreMultipliersStats.attackDamage += dragonStatMultipliers.attackDamage;
-			bonusStats.attackDamage += dragonStatMultipliers.attackDamage;
-		}
-	} else {
-		const infernalAdBonus = (baseOnLevelStats.attackDamage + bonusStats.attackDamage - (calculatedVariables.bloodmailRetribution ?? 0)) * dragonStatMultipliers.attackDamage;
-		dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + infernalAdBonus;
-		totalMultipliersStats.attackDamage += dragonStats.attackDamage;
-		bonusStats.attackDamage += dragonStats.attackDamage;
-	}
+	/** ad that was already added to bonusStats.attackDamage but shouldn't be affected by multipliers */
+	const bonusAdExcludedFromMult = calculatedVariables.bloodmailRetribution ?? 0;
+	const bonusAdMultiplierBase = bonusStats.attackDamage - bonusAdExcludedFromMult;
+	dragonStats.attackDamage = (baseOnLevelStats.attackDamage + bonusAdMultiplierBase) * (dragonStatMultipliers.attackDamage ?? 0);
+	calculatedVariables.midQuestAd = (bonusAdMultiplierBase + bonusAdExcludedFromMult) * midQuestMultiplier;
+
+	bonusStats.attackDamage += dragonStats.attackDamage + calculatedVariables.midQuestAd;
+	totalMultipliersStats.attackDamage += dragonStats.attackDamage + calculatedVariables.midQuestAd;
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
 		([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]],
@@ -296,8 +288,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		base: baseStats,
 		level: levelStats,
 		baseOnLevel: baseOnLevelStats,
-		dragon: dragonStats,
 		runeShards: runeShardStats,
+		dragonStatMultipliers,
 		itemBase: itemBaseStats,
 		itemPassive: itemPassivesStats,
 		itemTotal: itemTotalStats,
@@ -305,8 +297,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		championPassive: championPassiveStats,
 		effect: effectStats,
 		totalPreMultipliers: totalPreMultipliersStats,
+		dragon: dragonStats,
 		totalMultipliers: totalMultipliersStats,
-		dragonStatMultipliers,
 		bonus: bonusStats,
 		total: totalStats,
 		variables: calculatedVariables,
