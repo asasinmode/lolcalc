@@ -2,12 +2,12 @@
  * `ITEMS_BY_NAME.item` or `ITEMS_BY_NAME.itemId.` access is behind `?` because when developing, sometimes I resolve only singular items/their variables and they might not be present which would result in `undefined.propertyAccess` error
  */
 
-import type { TItems, TMiscData } from '@lolcalc/data';
+import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
-import { ITEMS, ITEMS_BY_NAME, MISC } from '@lolcalc/data';
+import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative } from '../calculate/util.ts';
@@ -1523,31 +1523,25 @@ export const ITEM_SPECIFICS = {
 			},
 			postTotal: {
 				handler(_self, { isRanged, totalStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
-					const variable = itemVariableValue('HasteFromAD', {
+					const hasteMultiplier = itemVariableValue('HasteFromAD', {
 						item: ITEMS_BY_NAME.endlessHunger,
-						isRanged,
-						damageSource: {
-							stats: {
-								value: {
-									bonus: bonusStats,
-								},
-							},
-						} as DamageSource,
+						isRanged: isRanged ?? true,
+						// TODO possibly test using rounded ad
+						damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource,
 					});
-					const value = Array.isArray(variable.value) ? variable.value[0] : variable.value;
-					if (typeof value === 'number') {
+
+					if (typeof hasteMultiplier.value === 'number') {
 						miscDebug.endlessBonusAd = bonusStats.attackDamage;
-						calculatedVariables.endlessHaste = value;
+						calculatedVariables.endlessHaste = hasteMultiplier.value;
 
 						totalStats.abilityHaste += calculatedVariables.endlessHaste;
 						bonusStats.abilityHaste += calculatedVariables.endlessHaste;
 						itemPassivesStats.abilityHaste += calculatedVariables.endlessHaste;
 						itemTotalStats.abilityHaste += calculatedVariables.endlessHaste;
 					} else {
-						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste', variable);
+						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste multiplier', hasteMultiplier);
 					}
 				},
-				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.endlessHunger],
 			},
 		},
 	},

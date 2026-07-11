@@ -22,9 +22,8 @@ export const HOOK_PRIORITIES = {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
 	},
 	onTotalPreMultipliers: {
-		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
-		/** should be after overlord's bloodmail */
-		[ITEM_NAME_TO_ID.endlessHunger]: 20,
+		/* should be after swiftmarch */
+		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
 		/** should be before rabadon and blackfire torch */
 		[ITEM_NAME_TO_ID.swiftmarch]: 10,
 		/** should be before swiftmarch */
