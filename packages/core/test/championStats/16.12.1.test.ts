@@ -215,3 +215,54 @@ test('Rammus, dragons & percentage items', async (t) => {
 		assert.equal(damageSource.maxHealth.value, 3595);
 	});
 });
+
+test('Briar, overlord & infernal', async (t) => {
+	const mixedItemsCommon: IOverrides<'Briar'> = {
+		level: 18,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon],
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Briar', {
+			...mixedItemsCommon,
+			currentHealth: 1828,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 179,
+			abilityPower: 422,
+		});
+	});
+
+	await t.test('3 infernals', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...mixedItemsCommon,
+			dragonStacks: ['Infernal', 'Infernal', 'Infernal'],
+			currentHealth: 932,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 257,
+		});
+	});
+
+	await t.test('3 infernals | mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...mixedItemsCommon,
+			roleQuest: 'mid',
+			dragonStacks: ['Infernal', 'Infernal', 'Infernal'],
+			currentHealth: 932,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 257,
+		});
+	});
+});
