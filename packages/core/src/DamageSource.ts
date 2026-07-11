@@ -1981,14 +1981,6 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		championPassiveStats: IStatsCalculationResult['championPassive'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
-	/** runs after `onTotalPreMultipliers` hook and regular dragonStatMultipliers have been applied */
-	onDragon?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
-		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
-		bonusStats: IStatsCalculationResult['bonus'];
-		dragonStats: IStatsCalculationResult['dragon'];
-		dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
-		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
-	}) => void>;
 	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalStats: IStatsCalculationResult['total'];

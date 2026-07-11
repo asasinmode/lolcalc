@@ -1874,17 +1874,11 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalPreMultipliersStats.hp);
-					let value = totalPreMultipliersStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
-					calculatedVariables.bloodmailRetribution = value;
+					calculatedVariables.bloodmailRetribution = totalPreMultipliersStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
 
-					if (self.roleQuest.value === 'mid') {
-						const multiplierValue = value * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
-						value += multiplierValue;
-						calculatedVariables.midQuestAd = (calculatedVariables.midQuestAd ?? 0) + multiplierValue;
-					}
-					totalMultipliersStats.attackDamage += value;
-					itemPassivesStats.attackDamage += value;
-					itemTotalStats.attackDamage += value;
+					totalMultipliersStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					itemTotalStats.attackDamage += calculatedVariables.bloodmailRetribution;
 				},
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},

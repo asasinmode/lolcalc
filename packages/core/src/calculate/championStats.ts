@@ -248,25 +248,27 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats[statName as IChampionStatName] += value;
 	}
 
-	if (source.calculateStatsHooks.all.value.onDragon) {
-		for (const hook of source.calculateStatsHooks.all.value.onDragon) {
-			hook(source, { baseOnLevelStats, totalMultipliersStats, bonusStats, dragonStats, dragonStatMultipliers }, { calculatedVariables, miscDebug });
-		}
-	}
-
-	/* dragon shenanigans are here to turn infernal stack % increase into a multiplicative one. This seems to produce correct values but doesn't seem to be what [the wiki](https://wiki.leagueoflegends.com/en-us/Dragon_Slayer#General_notes) says should happen? I might be misunderstanding */
+	/* turn infernal stack % increase into an additive one. This seems to produce correct values but it's not what [the wiki](https://wiki.leagueoflegends.com/en-us/Dragon_Slayer#General_notes) says should happen? I might be misunderstanding */
 	if (source.roleQuest.value === 'mid') {
 		calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
-		calculatedVariables.midQuestAd = bonusStats.attackDamage * ((MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP + dragonStatMultipliers.attackDamage);
 		totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
-		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 		bonusStats.abilityPower += calculatedVariables.midQuestAp;
+
+		const adBase = (bonusStats.attackDamage - (calculatedVariables.bloodmailRetribution ?? 0));
+		calculatedVariables.midQuestAd = adBase * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
+		totalMultipliersStats.attackDamage += calculatedVariables.midQuestAd;
 		bonusStats.attackDamage += calculatedVariables.midQuestAd;
+
+		if (dragonStatMultipliers.attackDamage) {
+			dragonStats.attackDamage = (baseOnLevelStats.attackDamage + adBase) * dragonStatMultipliers.attackDamage;
+			totalPreMultipliersStats.attackDamage += dragonStatMultipliers.attackDamage;
+			bonusStats.attackDamage += dragonStatMultipliers.attackDamage;
+		}
 	} else {
-		const infernalAdBonus = bonusStats.attackDamage * dragonStatMultipliers.attackDamage;
-		bonusStats.attackDamage += infernalAdBonus;
+		const infernalAdBonus = (baseOnLevelStats.attackDamage + bonusStats.attackDamage - (calculatedVariables.bloodmailRetribution ?? 0)) * dragonStatMultipliers.attackDamage;
 		dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + infernalAdBonus;
-		totalMultipliersStats.attackDamage += infernalAdBonus;
+		totalMultipliersStats.attackDamage += dragonStats.attackDamage;
+		bonusStats.attackDamage += dragonStats.attackDamage;
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(

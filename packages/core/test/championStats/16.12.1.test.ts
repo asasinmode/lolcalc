@@ -1,5 +1,6 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalDragonDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IDragonName } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
@@ -226,43 +227,49 @@ test('Briar, overlord & infernal', async (t) => {
 				defensive: 'health',
 			},
 		},
-		items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon],
+		items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.endlessHunger],
 	};
+	const dragonStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Mountain'];
 
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Briar', {
 			...mixedItemsCommon,
-			currentHealth: 1828,
+			currentHealth: 1943,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 179,
-			abilityPower: 422,
+			attackDamage: 248,
+			abilityPower: 194,
+			abilityHaste: 59,
 		});
 	});
 
-	await t.test('3 infernals', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+	await t.test('3 infernals 1 mountain', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Briar', {
 			...mixedItemsCommon,
-			dragonStacks: ['Infernal', 'Infernal', 'Infernal'],
-			currentHealth: 932,
+			dragonStacks,
+			currentHealth: 1738,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 257,
+			attackDamage: 271,
+			abilityPower: 212,
+			abilityHaste: 62,
 		});
 	});
 
-	await t.test('3 infernals | mid quest', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+	await t.test('" | mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Briar', {
 			...mixedItemsCommon,
 			roleQuest: 'mid',
-			dragonStacks: ['Infernal', 'Infernal', 'Infernal'],
-			currentHealth: 932,
+			dragonStacks,
+			currentHealth: 1738,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 257,
+			attackDamage: 283,
+			abilityPower: 251,
+			abilityHaste: 64,
 		});
 	});
 });

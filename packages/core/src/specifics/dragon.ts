@@ -81,14 +81,6 @@ export const DRAGON_SPECIFICS = {
 						dragonStatMultipliers.attackDamage += (MISC as TMiscData).dragons.Infernal.stack.dataValues.ADandAPPercentIncrease[1]!;
 					},
 				},
-				onDragon: {
-					handler(_self, { baseOnLevelStats, totalMultipliersStats, bonusStats, dragonStats, dragonStatMultipliers }) {
-						/* the multiplier should also apply to `bonusStats.attackDamage` but instead is specially handled in `calculateChampionStats` where mid role quest multiplier is applied */
-						dragonStats.attackDamage = (baseOnLevelStats.attackDamage) * dragonStatMultipliers.attackDamage;
-						totalMultipliersStats.attackDamage += dragonStats.attackDamage;
-						bonusStats.attackDamage += dragonStats.attackDamage;
-					},
-				},
 			},
 		},
 	},
