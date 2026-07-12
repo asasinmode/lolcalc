@@ -5,7 +5,7 @@ import type { IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative } from '../calculate/util.ts';
-import { championAbilityVariableValue } from '../variables/game.ts';
+import { addCalculatesFrom, championAbilityVariableValue } from '../variables/game.ts';
 import { defineVariables } from './index.ts';
 
 /**
@@ -93,6 +93,8 @@ export const DRAGON_SPECIFICS = {
 						displayedName: 'SlowAmount',
 						isPercentage: true,
 						multiplier: 100,
+						/* since I'm overriding the builtin total slows with this one, use overwritten variables' calculatesFrom */
+						calculatesFrom: addCalculatesFrom([], championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? [], championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? []),
 					},
 				},
 				uninteresting: ['SlowDuration', 'BaseUnitsToHit'],

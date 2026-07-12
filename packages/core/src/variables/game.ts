@@ -59,6 +59,8 @@ export interface IVariableMeta<T = any> {
 	 *	- champion: `IChampionAbilityVariableParams`
 	 */
 	extendedEquals?: IVariableMetaExtendedEquals | ((variableValueParams: T, overrideDynamicVariables?: IDynamicVariables) => IVariableMetaExtendedEquals);
+	/** will override variable's calculatesFrom */
+	calculatesFrom?: ICalculatesFromPart[];
 	/** displayed value multiplied by */
 	multiplier?: number;
 	/** same as `IVariableValueResult.roundReplaced` */
@@ -699,12 +701,12 @@ export function replaceGameIcons(text: string, subpath?: string): string {
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
 }
 
-function addCalculatesFrom(
+export function addCalculatesFrom(
 	to: ICalculatesFromPart[] | undefined,
 	source1: ICalculatesFromPart[],
 	/** expected to be used for melee/ranged calculates from and its value will be put into new calculation's value */
 	source2?: ICalculatesFromPart[],
-) {
+): ICalculatesFromPart[] | undefined {
 	for (let i = 0; i < source1.length; i++) {
 		to?.push({
 			stat: source1[i]!.stat,
@@ -713,6 +715,7 @@ function addCalculatesFrom(
 			value: source2 ? [source1[i]!.value as number, source2[i]!.value as number] : source1[i]!.value,
 		});
 	}
+	return to;
 }
 
 function multiplyCalculatePartValues(part: ICalculatesFromPart, multiplier: number) {
@@ -829,6 +832,10 @@ function variableExtendedEquals(
 	meta: IVariableMeta | undefined,
 	varIcon?: string,
 ): string {
+	if (meta?.calculatesFrom) {
+		calculatesFrom = meta.calculatesFrom;
+	}
+
 	let metaSuffix = '';
 	let extendedEquals = typeof meta?.extendedEquals === 'function'
 		? meta.extendedEquals(variableValueFunctionParams, options.overrideVariables)
@@ -1466,7 +1473,6 @@ function resolveDynamicValue(
 	rv: IVariableValueResult,
 	isRanged?: IBaseVariableParams['isRanged'],
 ): void {
-	console.log('resolving', isRanged, dynamicValue);
 	if (Array.isArray(dynamicValue)) {
 		if (isRanged === undefined) {
 			rv.isMeleeRanged = true;
