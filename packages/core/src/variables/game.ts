@@ -1050,8 +1050,17 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole, meta) {
 		meta?.accessedVariables?.add(variable.mDataValue);
+
+		let value = whole.dataValues?.[variable.mDataValue];
+		if (Array.isArray(value)) {
+			if (value.length === 2) {
+				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', whole, meta);
+			}
+			value = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+		}
+
 		return {
-			value: whole.dataValues?.[variable.mDataValue],
+			value,
 			calculatesFrom: [{
 				value: whole.dataValues?.[variable.mDataValue],
 				stat: 'const',
