@@ -2492,7 +2492,7 @@
 			},
 			"Hextech": {
 				"stack": "Grants %i:scaleCooldown% @Spell.SRX_DragonBuffHextech:AbilityHaste@ Ability Haste and %i:scaleAS% @Spell.SRX_DragonBuffHextech:AttackSpeed*100@% Attack Speed per stack.",
-				"soul": "When you damage an enemy with an attack or ability, also strike them with lightning, dealing <trueDamage>@Spell.SRX_DragonSoulBuffHextech:TotalDamage@</trueDamage> and slowing them by (%i:meleeActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountMelee@% || %i:rangedActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountRanged@%) decaying over @Spell.SRX_DragonSoulBuffHextech:SlowDuration@ seconds. Lightning then chains to up to @Spell.SRX_DragonSoulBuffHextech:BaseUnitsToHit@ nearby enemies, repeating the effect.<br><br>This slow stacks from multiple sources. The slow decays slower when striking ranged opponents."
+				"soul": "When you damage an enemy with an attack or ability, also strike them with lightning, dealing <trueDamage>@Spell.SRX_DragonSoulBuffHextech:TotalDamage@</trueDamage> and slowing them by @lolcalcChampRange@ decaying over @Spell.SRX_DragonSoulBuffHextech:SlowDuration@ seconds. Lightning then chains to up to @Spell.SRX_DragonSoulBuffHextech:BaseUnitsToHit@ nearby enemies, repeating the effect.<br><br>This slow stacks from multiple sources. The slow decays slower when striking ranged opponents."
 			}
 		},
 		"roleQuests": {

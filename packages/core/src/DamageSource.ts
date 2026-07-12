@@ -1081,6 +1081,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 							: [],
 					];
 				})) as UnwrapRef<IDamageSourceComputed>['variables']['abilities'],
+				dragonSoulAbility: this.dragonSoul.value && calculateDynamicVariables(this, this.calculationDamageTarget.value, (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)?.[this.dragonSoul.value]?.soul?.variables),
 			};
 		}),
 	};
@@ -1682,12 +1683,10 @@ export function computeDragonAbilityDescription(
 
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
 
-	const specific = (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[dragon]?.[type];
-
 	const { replaced, variables, unknownVariables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: specific?.variables },
+		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
 		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,
 	);
@@ -1710,9 +1709,9 @@ export function computeDragonAbilityDescription(
 		({ replaced: extendedReplaced } = replaceGameVariables(
 			stringtableReplaced,
 			'championAbility',
-			{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul] },
+			{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
 			damageSource?.modifyVariableFunctions.value,
-			{ isExtended: true },
+			{ ...replaceOptions, isExtended: true },
 		));
 	}
 
@@ -1927,6 +1926,7 @@ interface IDamageSourceComputed {
 			shards: Record<IRuneShardSlotName, IDynamicVariables | undefined>;
 		};
 		abilities: Record<IChampionAbilityKey, (IDynamicVariables | undefined)[]>;
+		dragonSoulAbility: IDynamicVariables | undefined;
 	}>;
 }
 

@@ -132,54 +132,7 @@ export function itemVariableValue(
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		const dynamicValue = dynamicVariables.values[variable];
 		rv.roundReplaced = true;
-		if (Array.isArray(dynamicValue)) {
-			if (isRanged === undefined) {
-				rv.isMeleeRanged = true;
-				if (Array.isArray(dynamicValue[0].value) || Array.isArray(dynamicValue[1].value)) {
-					console.error('[itemVariableValue] dynamic variable got nested melee/ranged values', item.name, variable, dynamicValue);
-				} else {
-					rv.value = [dynamicValue[0].value, dynamicValue[1].value];
-					if (dynamicValue[0].calculatesFrom?.length || dynamicValue[1].calculatesFrom?.length) {
-						if (dynamicValue[0].calculatesFrom?.length === dynamicValue[1].calculatesFrom?.length) {
-							addCalculatesFrom(rv.calculatesFrom, dynamicValue[0].calculatesFrom!, dynamicValue[1].calculatesFrom!);
-						} else {
-							console.warn('[itemVariableValue] detected dynamic melee/ranged variable but got different calculatesFrom lengths', item.name, variable, dynamicValue[0], dynamicValue[1]);
-						}
-					}
-				}
-			} else if (isRanged) {
-				rv.isMeleeRanged = 1;
-				rv.value = dynamicValue[1].value;
-				if (dynamicValue[1].calculatesFrom?.length) {
-					addCalculatesFrom(rv.calculatesFrom, dynamicValue[1].calculatesFrom);
-				}
-			} else {
-				rv.isMeleeRanged = 0;
-				rv.value = dynamicValue[0].value;
-				if (dynamicValue[0].calculatesFrom?.length) {
-					addCalculatesFrom(rv.calculatesFrom, dynamicValue[0].calculatesFrom);
-				}
-			}
-		} else if (Array.isArray(dynamicValue.value)) {
-			if (dynamicValue.calculatesFrom?.length) {
-				addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom);
-			}
-			if (isRanged === undefined) {
-				rv.isMeleeRanged = true;
-				rv.value = dynamicValue.value;
-			} else if (isRanged) {
-				rv.isMeleeRanged = 1;
-				rv.value = dynamicValue.value[1];
-			} else {
-				rv.isMeleeRanged = 0;
-				rv.value = dynamicValue.value[0];
-			}
-		} else {
-			rv.value = dynamicValue.value;
-			if (dynamicValue.calculatesFrom?.length) {
-				addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom);
-			}
-		}
+		resolveDynamicValue(item.name, variable, dynamicValue, rv, isRanged);
 	} else if (item.stats?.[variable as IItemStat] !== undefined) {
 		rv.value = item.stats[variable as IItemStat];
 	} else if (item.dataValues?.[variable] !== undefined) {
@@ -320,7 +273,6 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	allAbilitiesVariants?: IChampionAbilityVariableVariant[];
 }
 
-// TODO make sure it handles hextech soul description
 export function championAbilityVariableValue(
 	variable: string,
 	params: IChampionAbilityVariableParams,
@@ -332,6 +284,7 @@ export function championAbilityVariableValue(
 		abilityLevel = 1,
 		allAbilitiesVariants = [],
 		damageSource,
+		isRanged,
 	} = params;
 	const rv: IVariableValueResult = {
 		calculatesFrom: [],
@@ -373,12 +326,13 @@ export function championAbilityVariableValue(
 		rv.meta = dynamicVariables.meta[variable];
 	}
 
+	let resolveArrayValueToAbilityLevel = true;
+
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		rv.roundReplaced = true;
-		Object.assign(rv, dynamicVariables.values[variable]);
-	}
-
-	if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
+		resolveDynamicValue(params.abilityVariant.objectName, variable, dynamicVariables.values[variable], rv, isRanged);
+		resolveArrayValueToAbilityLevel = Array.isArray(rv.value) && rv.value.length !== 2;
+	} else if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
 		const index = Number(variableName!.slice(6, -6));
 		if ('effectAmount' in abilityVariant) {
 			if (Number.isNaN(index)) {
@@ -387,39 +341,28 @@ export function championAbilityVariableValue(
 				rv.value = abilityVariant.effectAmount[index - 1];
 			}
 		}
-	}
+	} else if (abilityVariant.dataValues?.[variableName]) {
+		rv.value = abilityVariant.dataValues[variableName];
+	} else if (abilityVariant.effectAmount?.[variableName]) {
+		rv.value = abilityVariant.effectAmount[variableName];
+		for (const path in dotPath) {
+			rv.value = (rv.value as any)[path];
+		}
+	} else if (abilityVariant.spellCalculations?.[variableName]) {
+		const value = variableResolveFn(
+			abilityVariant.spellCalculations[variableName],
+		)?.(abilityVariant.spellCalculations[variableName], abilityVariant, {
+			variableValueFn: championAbilityVariableValue,
+			variableValueParams: params,
+			accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
+		});
 
-	// TODO see if still needed /* some variables names' cases don't match so keep them in form of key/value and try all lowercase key if exact case not found */
-	// const sources: (false | [string, any][])[] = [
-	// 	abilityVariant.spellCalculations && Object.entries(abilityVariant.spellCalculations),
-	// 	abilityVariant.dataValues && Object.entries(abilityVariant.dataValues),
-	// 	abilityVariant.effectAmount && Object.entries(abilityVariant.effectAmount),
-	// ];
-
-	if (rv.value === undefined) {
-		if (abilityVariant.dataValues?.[variableName]) {
-			rv.value = abilityVariant.dataValues[variableName];
-		} else if (abilityVariant.effectAmount?.[variableName]) {
-			rv.value = abilityVariant.effectAmount[variableName];
-			for (const path in dotPath) {
-				rv.value = (rv.value as any)[path];
-			}
-		} else if (abilityVariant.spellCalculations?.[variableName]) {
-			const value = variableResolveFn(
-				abilityVariant.spellCalculations[variableName],
-			)?.(abilityVariant.spellCalculations[variableName], abilityVariant, {
-				variableValueFn: championAbilityVariableValue,
-				variableValueParams: params,
-				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
-			});
-
-			if (value) {
-				for (const key in value) {
-					if (key === 'calculatesFrom') {
-						addCalculatesFrom(rv.calculatesFrom, value.calculatesFrom!);
-					} else if (key !== 'meta') {
-						(rv as any)[key] = value[key as keyof typeof value];
-					}
+		if (value) {
+			for (const key in value) {
+				if (key === 'calculatesFrom') {
+					addCalculatesFrom(rv.calculatesFrom, value.calculatesFrom!);
+				} else if (key !== 'meta') {
+					(rv as any)[key] = value[key as keyof typeof value];
 				}
 			}
 		}
@@ -445,7 +388,7 @@ export function championAbilityVariableValue(
 		}
 	}
 
-	if (Array.isArray(rv.value)) {
+	if (resolveArrayValueToAbilityLevel && Array.isArray(rv.value)) {
 		rv.allValues = rv.value as number[];
 		rv.value = rv.value[abilityLevel];
 	}
@@ -1513,4 +1456,63 @@ function resolveMMultiplier(
 	}
 	/* there could be a better way */
 	return rv === 0.667 ? (2 / 3) : rv;
+}
+
+function resolveDynamicValue(
+	/** something to identify the value being resolved by, like `item.name` */
+	targetId: string,
+	variableName: string,
+	dynamicValue: IVariableValueResult | [IVariableValueResult, IVariableValueResult],
+	rv: IVariableValueResult,
+	isRanged?: IBaseVariableParams['isRanged'],
+): void {
+	console.log('resolving', isRanged, dynamicValue);
+	if (Array.isArray(dynamicValue)) {
+		if (isRanged === undefined) {
+			rv.isMeleeRanged = true;
+			if (Array.isArray(dynamicValue[0].value) || Array.isArray(dynamicValue[1].value)) {
+				console.error('[resolveDynamicValue] dynamic variable got nested melee/ranged values', targetId, variableName, dynamicValue);
+			} else {
+				rv.value = [dynamicValue[0].value, dynamicValue[1].value];
+				if (dynamicValue[0].calculatesFrom?.length || dynamicValue[1].calculatesFrom?.length) {
+					if (dynamicValue[0].calculatesFrom?.length === dynamicValue[1].calculatesFrom?.length) {
+						addCalculatesFrom(rv.calculatesFrom, dynamicValue[0].calculatesFrom!, dynamicValue[1].calculatesFrom!);
+					} else {
+						console.warn('[resolveDynamicValue] detected dynamic melee/ranged variable but got different calculatesFrom lengths', targetId, variableName, dynamicValue[0], dynamicValue[1]);
+					}
+				}
+			}
+		} else if (isRanged) {
+			rv.isMeleeRanged = 1;
+			rv.value = dynamicValue[1].value;
+			if (dynamicValue[1].calculatesFrom?.length) {
+				addCalculatesFrom(rv.calculatesFrom, dynamicValue[1].calculatesFrom);
+			}
+		} else {
+			rv.isMeleeRanged = 0;
+			rv.value = dynamicValue[0].value;
+			if (dynamicValue[0].calculatesFrom?.length) {
+				addCalculatesFrom(rv.calculatesFrom, dynamicValue[0].calculatesFrom);
+			}
+		}
+	} else if (Array.isArray(dynamicValue.value)) {
+		if (dynamicValue.calculatesFrom?.length) {
+			addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom);
+		}
+		if (isRanged === undefined) {
+			rv.isMeleeRanged = true;
+			rv.value = dynamicValue.value;
+		} else if (isRanged) {
+			rv.isMeleeRanged = 1;
+			rv.value = dynamicValue.value[1];
+		} else {
+			rv.isMeleeRanged = 0;
+			rv.value = dynamicValue.value[0];
+		}
+	} else {
+		rv.value = dynamicValue.value;
+		if (dynamicValue.calculatesFrom?.length) {
+			addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom);
+		}
+	}
 }

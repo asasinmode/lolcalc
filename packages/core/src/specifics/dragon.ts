@@ -5,6 +5,7 @@ import type { IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative } from '../calculate/util.ts';
+import { championAbilityVariableValue } from '../variables/game.ts';
 import { defineVariables } from './index.ts';
 
 /**
@@ -74,13 +75,27 @@ export const DRAGON_SPECIFICS = {
 		},
 		soul: {
 			variables: defineVariables({
-				uninteresting: ['SlowDuration', 'BaseUnitsToHit'],
+				known: {
+					lolcalcChampRange: [],
+				},
+				calculate(self) {
+					return {
+						lolcalcChampRange: [
+							championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
+							championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
+						],
+					};
+				},
 				meta: {
 					/* dragon variables are prefixed with something like `Spell.SRX_DragonSoulBuffHextech:TotalDamage` so overwrite the name */
 					TotalDamage: { displayedName: 'TotalDamage' },
-					TotalSlowAmountMelee: { displayedName: 'TotalSlowAmountMelee' },
-					TotalSlowAmountRanged: { displayedName: 'TotalSlowAmountRanged' },
+					lolcalcChampRange: {
+						displayedName: 'SlowAmount',
+						isPercentage: true,
+						multiplier: 100,
+					},
 				},
+				uninteresting: ['SlowDuration', 'BaseUnitsToHit'],
 			}),
 		},
 	},
@@ -127,5 +142,5 @@ type DetectDragonVariables<T>
 
 export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>>;
+	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>, 'lolcalcChampRange'>;
 };

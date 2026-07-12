@@ -1,5 +1,6 @@
 import type { ISpecificVariables } from '@lolcalc/core/specifics';
 import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
+import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc.ts';
 import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
@@ -757,13 +758,15 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 				variableValueParameters: { abilityVariant: stackAbility, allAbilitiesVariants: allSpells },
 			},
 		});
-		const soul = getStringtableValue(soulTooltipKey, {
+		/* hextech soul has text only for both melee | ranged split but everywhere else I try to display appropriate melee/ranged/both so alter it to make that possible */
+		const soul = getStringtableValue(soulTooltipKey, `dragon soul ${name}`)?.replace('(%i:meleeActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountMelee@% || %i:rangedActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountRanged@%)', '@lolcalcChampRange@')!;
+		debugStringVariables(soul, {
 			category: 'misc',
 			key: `dragon soul ${name}`,
 			variables: {
 				variableSourceKeys: ['DataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: { abilityVariant: soulAbility, allAbilitiesVariants: allSpells },
+				variableValueParameters: { abilityVariant: soulAbility, allAbilitiesVariants: allSpells, dynamicVariables: (DRAGONS as IHypotheticalDragonSpecifics)[name]?.soul?.variables },
 			},
 		});
 
