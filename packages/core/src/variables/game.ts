@@ -331,6 +331,7 @@ export function championAbilityVariableValue(
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityLevel = 1,
 		allAbilitiesVariants = [],
+		damageSource,
 	} = params;
 	const rv: IVariableValueResult = {
 		calculatesFrom: [],
@@ -355,6 +356,7 @@ export function championAbilityVariableValue(
 				dynamicVariables,
 				abilityLevel,
 				allAbilitiesVariants,
+				damageSource,
 			});
 		} else {
 			console.warn(`[championAbilityVariableValue] variant referenced in ${variable} not found`);
@@ -1061,10 +1063,7 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return {
 			value,
-			calculatesFrom: [{
-				value: whole.dataValues?.[variable.mDataValue],
-				stat: 'const',
-			}],
+			calculatesFrom: [{ value, stat: 'const' }],
 		};
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, meta) {

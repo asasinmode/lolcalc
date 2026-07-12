@@ -1684,7 +1684,7 @@ export function computeDragonAbilityDescription(
 	const { replaced, variables, unknownVariables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul] },
+		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource },
 	);
 
 	let invalidMessage: string | undefined;
