@@ -2,6 +2,7 @@
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
+import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
@@ -14,6 +15,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage, simpleDescriptionFormatting } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
+import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon';
 import { applyEffectsFromTo, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
@@ -593,7 +595,10 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computeDragonAbilityDescription(abilityId.id, abilityId.subtype, undefined, false); ;
+		const precomputedDescription = computeDragonAbilityDescription(abilityId.id, abilityId.subtype, undefined, false, {
+			replaceWithName: true,
+			overrideVariables: specificKnownVariables((DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[abilityId.id]?.[abilityId.subtype]?.variables),
+		}); ;
 		section.name ??= `${abilityId.id} Soul`;
 		section.image = await gameAbilityImage(abilityId);
 		section.rows = await getAbilitySectionRows(precomputedDescription);

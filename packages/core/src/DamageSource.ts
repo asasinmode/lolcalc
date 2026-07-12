@@ -1674,6 +1674,7 @@ export function computeDragonAbilityDescription(
 	type: 'stack' | 'soul',
 	damageSource?: DamageSource,
 	checkIfValid = false,
+	replaceOptions?: IReplaceGameVariablesOptions,
 ): IComputedDragonAbilityDescription {
 	const ability = MISC.dragons[dragon][type];
 	const string = TEXT.dragons[dragon][type];
@@ -1681,10 +1682,14 @@ export function computeDragonAbilityDescription(
 
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
 
+	const specific = (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[dragon]?.[type];
+
 	const { replaced, variables, unknownVariables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource },
+		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: specific?.variables },
+		damageSource?.modifyVariableFunctions.value,
+		replaceOptions,
 	);
 
 	let invalidMessage: string | undefined;

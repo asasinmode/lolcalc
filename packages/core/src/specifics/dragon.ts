@@ -1,10 +1,11 @@
 import type { TMiscData } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
 import type { ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
-import type { IInternalDragonDataOf } from './index.ts';
+import type { IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative } from '../calculate/util.ts';
+import { defineVariables } from './index.ts';
 
 /**
  * dragon ability specifics
@@ -71,6 +72,17 @@ export const DRAGON_SPECIFICS = {
 				},
 			},
 		},
+		soul: {
+			variables: defineVariables({
+				uninteresting: ['SlowDuration', 'BaseUnitsToHit'],
+				meta: {
+					/* dragon variables are prefixed with something like `Spell.SRX_DragonSoulBuffHextech:TotalDamage` so overwrite the name */
+					TotalDamage: { displayedName: 'TotalDamage' },
+					TotalSlowAmountMelee: { displayedName: 'TotalSlowAmountMelee' },
+					TotalSlowAmountRanged: { displayedName: 'TotalSlowAmountRanged' },
+				},
+			}),
+		},
 	},
 	Infernal: {
 		stack: {
@@ -98,15 +110,22 @@ export const DRAGON_SPECIFICS = {
 	},
 } satisfies IHypotheticalDragonSpecifics;
 
-export type IHypotheticalDragonSpecifics = Partial<Record<IDragonName, IDragonSpecific>>;
+export type IHypotheticalDragonSpecifics = {
+	[K in IDragonName]?: IDragonSpecific<K>
+};
 
 export type TDragonSpecifics = typeof DRAGON_SPECIFICS;
 
-export interface IDragonSpecific {
-	stack?: IDragonAbilitySpecific;
-	soul?: IDragonAbilitySpecific;
+export interface IDragonSpecific<Name extends IDragonName = IDragonName> {
+	stack?: IDragonAbilitySpecific<Name, 'stack'>;
+	soul?: IDragonAbilitySpecific<Name, 'soul'>;
 };
 
-export type IDragonAbilitySpecific = IProviderGroupInternalDragonData & {
+type DetectDragonVariables<T>
+	= | (T extends { dataValues: any } ? keyof T['dataValues'] & string : never)
+		| (T extends { spellCalculations: any } ? keyof T['spellCalculations'] & string : never);
+
+export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
+	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>>;
 };
