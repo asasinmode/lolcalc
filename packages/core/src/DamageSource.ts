@@ -736,7 +736,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const parsedValue = Number.parseFloat(rawCurrentAbilityResource);
 			if (!Number.isNaN(parsedValue)) {
 				rv.currentAbilityResource.value = Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityResource.value, parsedValue) : parsedValue);
-				restoredAbilityResource = rv.currentHealth.value;
+				restoredAbilityResource = rv.currentAbilityResource.value;
 			}
 		}
 
