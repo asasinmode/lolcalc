@@ -107,6 +107,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Ornn: {
 		extras: ChampionExtrasOrnn,
 	},
+	Rammus: {
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rammus', 'w', 0), 'defensiveCurl', 'Defensive Curl'),
+	},
 	Rell: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS),
 	},

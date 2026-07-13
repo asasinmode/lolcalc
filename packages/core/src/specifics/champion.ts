@@ -561,6 +561,11 @@ export const CHAMPION_SPECIFICS = {
 		}),
 	},
 	Rammus: {
+		setupData(self): { defensiveCurl: number } {
+			return {
+				defensiveCurl: clamp(0, self.internalData.value.defensiveCurl ?? 0, 1),
+			};
+		},
 		calculateHooks: {
 			postTotal: {
 				handler(self, { totalStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, roleQuest }, { calculatedVariables }) {

@@ -60,7 +60,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [x] shapeshifting champions
     - [x] aphelios q rotating
-    - [ ] extras shared component like is out combat (youmuu, cloud stack/soul isooc) try to scan internal properties then if detected override component, ideally list the things affected
+    - [ ] extras shared component like is out combat (youmuu, cloud stack isooc) try to scan internal properties then if detected override component, ideally list the things affected
   - [x] mirror layout
   - [x] expand scoreboard item double click to expand/collapse
   - [ ] drag indicator next to buttons?
