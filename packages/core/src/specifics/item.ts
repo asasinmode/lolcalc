@@ -1264,6 +1264,16 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { steadfast: number }) {
 			return internalData.steadfast;
 		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'forceOfNature'>).steadfast) {
+						itemPassivesStats.magicResist += ITEMS_BY_NAME.forceOfNature?.dataValues.BonusMagicResist;
+						calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.forceOfNature?.dataValues.MoveSpeed;
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.deadMansPlate]: {
 		MAX_STACKS: ITEMS_BY_NAME.deadMansPlate?.dataValues.MaxStacks,
@@ -1526,7 +1536,6 @@ export const ITEM_SPECIFICS = {
 					const hasteMultiplier = itemVariableValue('HasteFromAD', {
 						item: ITEMS_BY_NAME.endlessHunger,
 						isRanged: isRanged ?? true,
-						// TODO possibly test using rounded ad
 						damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource,
 					});
 
@@ -1542,6 +1551,7 @@ export const ITEM_SPECIFICS = {
 						console.warn('[ITEM_SPECIFICS endless hunger] failed to calculate haste multiplier', hasteMultiplier);
 					}
 				},
+				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.endlessHunger],
 			},
 		},
 	},
