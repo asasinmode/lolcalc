@@ -1642,6 +1642,8 @@ export const ITEM_SPECIFICS = {
 						calculatedVariables.jakShoMagicResist = bonusStats.magicResist * resistPercentage.value;
 						totalPreMultipliersStats.armor += calculatedVariables.jakShoArmor;
 						totalPreMultipliersStats.magicResist += calculatedVariables.jakShoMagicResist;
+						bonusStats.armor += calculatedVariables.jakShoArmor;
+						bonusStats.magicResist += calculatedVariables.jakShoMagicResist;
 						itemPassivesStats.armor += calculatedVariables.jakShoArmor;
 						itemPassivesStats.magicResist += calculatedVariables.jakShoMagicResist;
 					} else {
