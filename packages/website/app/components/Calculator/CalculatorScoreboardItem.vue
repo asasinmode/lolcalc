@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
-import type { IDragonAbilityId, IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IDragonAbilityId, IEffectAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';
 import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
@@ -258,14 +258,11 @@ function startItemDrag(event: DragEvent, index: number) {
 	emit('itemDragstart', event, index);
 }
 
-const championExtra = computed<[Component, IGameAbilityId][]>((): [Component, IGameAbilityId][] => {
+const championExtra = computed<Component[]>((): Component[] => {
 	if (props.value.champion.value) {
 		const component = CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras;
-
 		return component
-			? (Array.isArray(component) ? component : [component]).map(c =>
-					// TODO handle other abilities components, dont hardcode everything to passive
-					[c, GameAbilityId.build(AbilityType.champion, props.value.champion.value!.id, 'passive', props.value.abilityVariantsIndexes.value.passive)])
+			? (Array.isArray(component) ? component : [component])
 			: [];
 	}
 	return [];
@@ -1468,15 +1465,13 @@ defineExpose({ el });
 			</section>
 			<section ref="extras" data-extras="">
 				<component
-					:is="extra[0]"
-					v-for="(extra, extraIndex) in championExtra"
-					:key="`${extra[1].id}-${extraIndex}`"
+					:is
+					v-for="(is, componentIndex) in championExtra"
+					:key="`${value.champion.value?.id ?? ''}-${componentIndex}`"
 					:id-prefix
 					:damage-source="value"
-					:ability-id="extra[1]"
 					@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
 				/>
-				<!-- only dragons use misc extras, something more clever has to be came up with when other miscs need tooltips as well -->
 				<component
 					:is
 					v-for="[is, abilityId, componentIndex] in dragonExtras"

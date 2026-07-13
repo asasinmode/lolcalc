@@ -1,15 +1,18 @@
 <script setup lang="ts">
+import type { IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics';
 import type { IItemSpecific } from '@lolcalc/core/specifics/item';
 import type { TItems } from '@lolcalc/data';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { resolveAbilitySpecific } from '@lolcalc/core/DamageSource';
 import { imgUrl, ITEMS } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 
+import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { VExtrasNumber } from '#components';
 
-const props = defineProps<IExtraComponentProps<'item'>>();
+const props = defineProps<IExtraComponentProps & {
+	abilityId: IItemAbilityId;
+}>();
 
 defineEmits<IExtraComponentEmits>();
 

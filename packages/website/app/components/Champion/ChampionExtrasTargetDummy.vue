@@ -7,7 +7,7 @@ import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 
-const props = defineProps<IExtraComponentProps<'champion'>>();
+const props = defineProps<IExtraComponentProps>();
 
 defineEmits<IExtraComponentEmits>();
 

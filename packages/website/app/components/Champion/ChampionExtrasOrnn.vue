@@ -5,7 +5,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { AbilityType } from '@lolcalc/shared';
 
-const props = defineProps<IExtraComponentProps<'champion'>>();
+const props = defineProps<IExtraComponentProps>();
 
 defineEmits<IExtraComponentEmits>();
 

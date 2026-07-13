@@ -1,5 +1,5 @@
 import type { DamageSource, IComputedAbilityDescription, IComputedDragonAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IReplacedGameVariable, IVariableMeta } from '@lolcalc/core/variables/game';
 import type { IItem } from '@lolcalc/data/types';
@@ -101,10 +101,11 @@ export interface IItemDescriptionProps {
 	source: IItemHoverTooltipView;
 }
 
-export interface IExtraComponentProps<Type extends TAbilityType> {
+export interface IExtraComponentProps {
 	damageSource: DamageSource;
 	idPrefix: string;
-	abilityId: Type extends 'champion' ? IChampionAbilityId : IItemAbilityId;
+	/** it's not consistently provided and shouldn't really be relied upon. It's mostly declared so that there's no `ability-id="[Object object]"` in the dom. Used by tear item extra, provided in scoreboard item */
+	abilityId?: IGameAbilityId;
 	/*
 	 * declared both here and in emits to override the listener attaching onto actual extra component
 	 * as in without it 2 `@img-mouseenter` events happen, one from something like `VExtraBoolean.vue`, other from `booleanExtra()` wrapper
