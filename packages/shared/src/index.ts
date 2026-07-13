@@ -178,7 +178,6 @@ export interface IStatsCalculationVariables {
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
-	// TODO maybe merge these into single total bonus hp like rabadon does
 	/** bonus hp riftmaker's passive is based on */
 	riftmakerBonusHp?: number;
 	/** bonus hp overlord's bloodmail's passive is based on */

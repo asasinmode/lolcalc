@@ -216,96 +216,158 @@ test('Rammus, dragons & percentage items', async (t) => {
 		assert.equal(damageSource.maxHealth.value, 3595);
 	});
 
-	const percentageAdItems: IOverrides<'Rammus'> = {
-		level: 1,
-		runes: {
-			shards: {
-				offensive: 'cdrscaling',
-				flex: 'healthscaling',
-				defensive: 'healthscaling',
+	await t.test('bloodmail, mountain/infernal & mid quest interactions', async (t) => {
+		const percentageAdItems: IOverrides<'Rammus'> = {
+			level: 4,
+			runes: {
+				shards: {
+					offensive: 'cdrscaling',
+					flex: 'healthscaling',
+					defensive: 'healthscaling',
+				},
 			},
-		},
-		items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.forceOfNature],
-	};
-	const percentageAdItemsDragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
+			items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.forceOfNature],
+		};
+		const percentageAdItemsDragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
 
-	await t.test('lvl 1 | percentage ad', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', percentageAdItems);
+		await t.test('base', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', percentageAdItems);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 264,
-			armor: 80,
-			magicResist: 132,
-			abilityHaste: 39,
-		});
-	});
-
-	await t.test('lvl 4 | percentage ad | 2x infernal, 2x mountain', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', {
-			...percentageAdItems,
-			level: 4,
-			dragonStacks: percentageAdItemsDragonStacks,
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 277,
+				armor: 90,
+				magicResist: 137,
+				abilityHaste: 40,
+				moveSpeed: 406,
+			});
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 297,
-			armor: 99,
-			magicResist: 150,
-			abilityHaste: 42,
-			moveSpeed: 406,
-		});
-	});
+		await t.test('partial hp', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				currentHealth: 806,
+			});
 
-	await t.test('lvl 4 | percentage ad | 2x infernal, 2x mountain | partial hp | jak\'sho+, force of nature+', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', {
-			...percentageAdItems,
-			level: 4,
-			dragonStacks: percentageAdItemsDragonStacks,
-			currentHealth: 1200,
-			internalItemData: { vbResistance: 1, steadfast: 1 } satisfies IInternalItemDataOf<'jakSho' | 'forceOfNature'>,
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 310,
+				abilityHaste: 44,
+			});
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 349,
-			armor: 114,
-			magicResist: 283,
-			abilityHaste: 49,
-			moveSpeed: 426,
-		});
-	});
+		await t.test('dragons', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				dragonStacks: percentageAdItemsDragonStacks,
+			});
 
-	await t.test('lvl 5 | percentage ad | 2x infernal, 2x mountain | mid quest | partial hp | jak\'sho+, force of nature+', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', {
-			...percentageAdItems,
-			level: 5,
-			dragonStacks: percentageAdItemsDragonStacks,
-			currentHealth: 471,
-			roleQuest: 'mid',
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 297,
+				abilityHaste: 42,
+			});
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 396,
-			armor: 118,
-			magicResist: 285,
-			abilityHaste: 55,
-			moveSpeed: 435,
-		});
-	});
+		await t.test('mid quest', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				roleQuest: 'mid',
+			});
 
-	await t.test('lvl 4 | percentage ad | 2x infernal, 2x mountain | mid quest', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Rammus', {
-			...percentageAdItems,
-			level: 4,
-			dragonStacks: percentageAdItemsDragonStacks,
-			roleQuest: 'mid',
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 307,
+				abilityHaste: 44,
+			});
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 329,
-			armor: 99,
-			magicResist: 150,
-			abilityHaste: 47,
-			moveSpeed: 416,
+		await t.test('dragons | mid quest', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				dragonStacks: percentageAdItemsDragonStacks,
+				roleQuest: 'mid',
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 329,
+				armor: 99,
+				magicResist: 150,
+				abilityHaste: 47,
+				moveSpeed: 416,
+			});
+		});
+
+		await t.test('dragons | mid quest | partial hp', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				dragonStacks: percentageAdItemsDragonStacks,
+				roleQuest: 'mid',
+				currentHealth: 800,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 366,
+				abilityHaste: 51,
+			});
+		});
+
+		await t.test('dragons | partial hp', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				dragonStacks: percentageAdItemsDragonStacks,
+				currentHealth: 806,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 330,
+				abilityHaste: 47,
+			});
+		});
+
+		await t.test('mid quest | partial hp', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				roleQuest: 'mid',
+				currentHealth: 806,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 343,
+				abilityHaste: 48,
+			});
+		});
+
+		await t.test('dragons | partial hp | jak\'sho+, force of nature+', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				dragonStacks: percentageAdItemsDragonStacks,
+				currentHealth: 1200,
+				internalItemData: { vbResistance: 1, steadfast: 1 } satisfies IInternalItemDataOf<'jakSho' | 'forceOfNature'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 349,
+				armor: 114,
+				magicResist: 283,
+				abilityHaste: 49,
+				moveSpeed: 426,
+			});
+		});
+
+		await t.test('lvl 5 | dragons | mid quest | partial hp | jak\'sho+, force of nature+', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...percentageAdItems,
+				level: 5,
+				dragonStacks: percentageAdItemsDragonStacks,
+				currentHealth: 471,
+				roleQuest: 'mid',
+				internalItemData: { vbResistance: 1, steadfast: 1 } satisfies IInternalItemDataOf<'jakSho' | 'forceOfNature'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 396,
+				armor: 118,
+				magicResist: 285,
+				abilityHaste: 55,
+				moveSpeed: 435,
+			});
 		});
 	});
 });
