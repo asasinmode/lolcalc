@@ -215,6 +215,28 @@ test('Rammus, dragons & percentage items', async (t) => {
 		/* game shows 3596, see help page for known discrepancies */
 		assert.equal(damageSource.maxHealth.value, 3595);
 	});
+
+	const percentageAdItems: IOverrides<'Rammus'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'cdrscaling',
+				flex: 'healthscaling',
+				defensive: 'healthscaling',
+			},
+		},
+		items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.forceOfNature],
+	};
+
+	await t.test('lvl 1 | percentage ad', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', percentageAdItems);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 264,
+			armor: 80,
+			magicResist: 132,
+		});
+	});
 });
 
 test('Briar, overlord & infernal', async (t) => {
