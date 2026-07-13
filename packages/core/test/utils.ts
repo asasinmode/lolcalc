@@ -48,6 +48,6 @@ export function setupPatchFixture(fixture: IPatchOverridesFixture) {
 	}
 }
 
-export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>) {
-	return assert.partialDeepStrictEqual(actual, expected);
+export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, message: string | undefined = '') {
+	return assert.partialDeepStrictEqual(actual, expected, message);
 }
