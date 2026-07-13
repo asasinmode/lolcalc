@@ -504,6 +504,11 @@ defineExpose({ header });
 		stattracking {
 			--at-apply: 'text-orange-400';
 		}
+
+		recast {
+			/* kind of like a dirty salmon? Based on from Rammus W */
+			--at-apply: 'text-[oklch(0.6814_0.1413_36.07)]';
+		}
 	}
 
 	.game-description {
