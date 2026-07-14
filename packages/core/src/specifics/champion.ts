@@ -568,9 +568,8 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables }): void {
+				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables }): void {
 					const log = false;
-					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
@@ -579,8 +578,25 @@ export const CHAMPION_SPECIFICS = {
 						({ value: wBonusMr } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource }));
 					}
 
-					if (typeof bonusAd.value !== 'number' || typeof wBonusArmor !== 'number' || typeof wBonusMr !== 'number') {
-						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad or W bonus resists', bonusAd, wBonusArmor, wBonusMr);
+					if (typeof wBonusArmor !== 'number' || typeof wBonusMr !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve W bonus resists', wBonusArmor, wBonusMr);
+
+						return;
+					}
+
+					totalPreMultipliersStats.armor += wBonusArmor;
+					totalPreMultipliersStats.magicResist += wBonusMr;
+					championPassiveStats.armor = wBonusArmor;
+					championPassiveStats.magicResist = wBonusMr;
+					bonusStats.armor += wBonusArmor;
+					bonusStats.magicResist += wBonusMr;
+					totalStats.armor += wBonusArmor;
+					totalStats.armor += wBonusMr;
+
+					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
+
+					if (typeof bonusAd.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad', bonusAd);
 
 						return;
 					}

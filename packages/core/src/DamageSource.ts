@@ -1989,6 +1989,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalStats: IStatsCalculationResult['total'];
+		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
 		dragonStats: IStatsCalculationResult['dragon'];
 		dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
