@@ -27,7 +27,7 @@ import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
-import type { ISpecificVariables } from './index';
+import type { ISpecificVariables, IVariableValueResult } from './index';
 import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -572,37 +572,56 @@ export const CHAMPION_SPECIFICS = {
 					const log = false;
 					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 
-					if (typeof bonusAd.value === 'number') {
-						championPassiveStats.attackDamage = bonusAd.value;
-						const passiveAd = championPassiveStats.attackDamage;
-
-						log && console.debug('[Rammus passive] before', {
-							passiveAd,
-							totalArmor: totalStats.armor,
-							totalMr: totalStats.magicResist,
-							infernalMult: dragonStatMultipliers.attackDamage,
-							midQuestMult: calculatedVariables.midQuestMultiplier,
-							totalAdBeforePassive: totalStats.attackDamage,
-						});
-
-						const infernalMultiplierValue = passiveAd * dragonStatMultipliers.attackDamage;
-						const midQuestMultiplierValue = passiveAd * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
-						calculatedVariables.bloodmailRetributionExcludedAd += infernalMultiplierValue;
-
-						calculatedVariables.midQuestAd! += midQuestMultiplierValue;
-						let value = infernalMultiplierValue + midQuestMultiplierValue;
-						totalMultipliersStats.attackDamage += value;
-						value += passiveAd;
-						totalStats.attackDamage += value;
-						bonusStats.attackDamage += value;
-
-						log && console.debug('[Rammus passive] after', { infernalMultiplierValue, midQuestMultiplierValue, totalAdded: value, bonusAdAfter: bonusStats.attackDamage });
-					} else {
-						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad', bonusAd);
+					let wBonusArmor: IVariableValueResult['value'] = 0;
+					let wBonusMr: IVariableValueResult['value'] = 0;
+					if (self.internalData.value.defensiveCurl) {
+						({ value: wBonusArmor } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource }));
+						({ value: wBonusMr } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource }));
 					}
+
+					if (typeof bonusAd.value !== 'number' || typeof wBonusArmor !== 'number' || typeof wBonusMr !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad or W bonus resists', bonusAd, wBonusArmor, wBonusMr);
+
+						return;
+					}
+
+					championPassiveStats.attackDamage = bonusAd.value;
+					const passiveAd = championPassiveStats.attackDamage;
+
+					log && console.debug('[Rammus passive] before', {
+						passiveAd,
+						totalArmor: totalStats.armor,
+						totalMr: totalStats.magicResist,
+						infernalMult: dragonStatMultipliers.attackDamage,
+						midQuestMult: calculatedVariables.midQuestMultiplier,
+						totalAdBeforePassive: totalStats.attackDamage,
+					});
+
+					const infernalMultiplierValue = passiveAd * dragonStatMultipliers.attackDamage;
+					const midQuestMultiplierValue = passiveAd * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
+					calculatedVariables.bloodmailRetributionExcludedAd += infernalMultiplierValue;
+
+					calculatedVariables.midQuestAd! += midQuestMultiplierValue;
+					let value = infernalMultiplierValue + midQuestMultiplierValue;
+					totalMultipliersStats.attackDamage += value;
+					value += passiveAd;
+					totalStats.attackDamage += value;
+					bonusStats.attackDamage += value;
+
+					log && console.debug('[Rammus passive] after', { infernalMultiplierValue, midQuestMultiplierValue, totalAdded: value, bonusAdAfter: bonusStats.attackDamage });
 				},
 				priority: HOOK_PRIORITIES.postTotal.Rammus,
 			},
+		},
+		w: {
+			variables: defineChampionVariables<'Rammus', typeof IRammus, 'w'>({
+				meta: {
+					ReturnDamageCalc: {
+						type: VariableType.magic,
+					},
+				},
+				uninteresting: ['BuffDuration'],
+			}),
 		},
 	},
 	Rell: {
