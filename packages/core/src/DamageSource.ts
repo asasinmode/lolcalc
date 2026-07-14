@@ -89,7 +89,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	abilityLevels: Ref<Record<INonPassiveAbilityKey, number>>;
 	maxAbilityLevels = computed((): Record<INonPassiveAbilityKey, number> => Object.fromEntries(Object.keys(this.abilityLevels.value).map(key => [
 		key as INonPassiveAbilityKey,
-		this.champion.value?.abilities[key as IChampionAbilityKey].maxLevel ?? 5,
+		this.champion.value?.abilities[key as IChampionAbilityKey]?.maxLevel ?? 5,
 	])) as Record<INonPassiveAbilityKey, number>);
 
 	abilityVariantsIndexes: Ref<Record<IChampionAbilityKey, number>>;
@@ -97,8 +97,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		key as IChampionAbilityKey,
 		/* Aphelios' `W` index is used for the offhand weapon tooltip which itself is based on his `E` ability */
 		this.champion.value?.id === 'Aphelios' && key as IChampionAbilityKey === 'w'
-			? (this.champion.value?.abilities.e.variants.length ?? 1) - 1
-			: (this.champion.value?.abilities[key as IChampionAbilityKey].variants.length ?? 1) - 1,
+			? (this.champion.value?.abilities.e?.variants.length ?? 1) - 1
+			: (this.champion.value?.abilities[key as IChampionAbilityKey]?.variants.length ?? 1) - 1,
 	])) as Record<IChampionAbilityKey, number>);
 	allAbilityVariants = computed(() => allChampionAbilitiesVariants(this.champion.value));
 
