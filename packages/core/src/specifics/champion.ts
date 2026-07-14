@@ -568,7 +568,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables }): void {
+				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, dragonStats }, { calculatedVariables }): void {
 					const log = true;
 
 					log && console.debug('[Rammus W] before', {
@@ -587,9 +587,8 @@ export const CHAMPION_SPECIFICS = {
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
-						console.log('curling with', self.abilityLevels.value);
-						({ value: wBonusArmor } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource }));
-						({ value: wBonusMr } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource }));
+						({ value: wBonusArmor } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource }));
+						({ value: wBonusMr } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource }));
 					}
 
 					if (typeof wBonusArmor !== 'number' || typeof wBonusMr !== 'number') {
@@ -609,7 +608,21 @@ export const CHAMPION_SPECIFICS = {
 					totalStats.armor += wBonusArmor;
 					totalStats.magicResist += wBonusMr;
 
+					const mountainWBonusArmor = wBonusArmor * dragonStatMultipliers.armor;
+					const mountainWBonusMr = wBonusMr * dragonStatMultipliers.magicResist;
+
+					dragonStats.armor = (dragonStats.armor ?? 0) + mountainWBonusArmor;
+					dragonStats.magicResist = (dragonStats.magicResist ?? 0) + mountainWBonusMr;
+					totalMultipliersStats.armor += mountainWBonusArmor;
+					totalMultipliersStats.magicResist += mountainWBonusMr;
+					bonusStats.armor += mountainWBonusArmor;
+					bonusStats.magicResist += mountainWBonusMr;
+					totalStats.armor += mountainWBonusArmor;
+					totalStats.magicResist += mountainWBonusMr;
+
 					log && console.debug('[Rammus W] applied', {
+						mountainWBonusArmor,
+						mountainWBonusMr,
 						totalArmor: totalStats.armor,
 						totalMr: totalStats.magicResist,
 						bonusArmor: bonusStats.armor,

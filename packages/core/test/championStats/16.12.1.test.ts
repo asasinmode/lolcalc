@@ -266,14 +266,14 @@ test('Rammus, dragons & percentage items', async (t) => {
 				abilityHaste: 44,
 			});
 
-			// damageSource.currentHealth.value = 812;
-			// damageSource.internalData.value.defensiveCurl = 1;
-			// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			// 	attackDamage: 337,
-			// 	armor: 168,
-			// 	magicResist: 222,
-			// 	abilityHaste: 48,
-			// }, 'W enabled');
+			damageSource.currentHealth.value = 812;
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 337,
+				armor: 168,
+				magicResist: 222,
+				abilityHaste: 48,
+			}, 'W enabled');
 		});
 
 		await t.test('dragons', async () => {
@@ -284,16 +284,18 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				attackDamage: 297,
+				armor: 99,
+				magicResist: 150,
 				abilityHaste: 42,
 			});
 
-			// damageSource.internalData.value.defensiveCurl = 1;
-			// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			// 	attackDamage: 320,
-			// 	armor: 168,
-			// 	magicResist: 224,
-			// 	abilityHaste: 45,
-			// }, 'W enabled');
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 326,
+				armor: 185,
+				magicResist: 244,
+				abilityHaste: 46,
+			}, 'W enabled');
 		});
 
 		await t.test('mid quest', async () => {
