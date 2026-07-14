@@ -237,15 +237,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
-	for (const stat in dragonStatMultipliers) {
-		if (stat === 'abilityPower') {
-			dragonStats.abilityPower = calculatedVariables.apMultipliersBase * dragonStatMultipliers[stat as keyof typeof dragonStatMultipliers];
-			totalMultipliersStats[stat as IChampionStatName] += dragonStats.abilityPower;
-		} else if (stat !== 'attackDamage') { /* attack damage is handled below with role quest in mind */
-			dragonStats[stat as IChampionStatName] = totalPreMultipliersStats[stat as keyof typeof dragonStatMultipliers] * dragonStatMultipliers[stat as keyof typeof dragonStatMultipliers];
-			totalMultipliersStats[stat as IChampionStatName] += dragonStats[stat as IChampionStatName]!;
-		}
-	}
+	dragonStats.abilityPower = calculatedVariables.apMultipliersBase * dragonStatMultipliers.abilityPower;
+	totalMultipliersStats.abilityPower += dragonStats.abilityPower;
+	dragonStats.armor = (totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0)) * dragonStatMultipliers.armor;
+	totalMultipliersStats.armor += dragonStats.armor;
+	dragonStats.magicResist = (totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0)) * dragonStatMultipliers.magicResist;
+	totalMultipliersStats.magicResist += dragonStats.magicResist;
 
 	for (const [statName, value] of Object.entries(totalMultipliersStats)) {
 		bonusStats[statName as IChampionStatName] += value;
