@@ -312,6 +312,137 @@
 				"attackspeedratio": 0.625
 			},
 			"abilities": {
+				"w": {
+					"maxLevel": 5,
+					"variants": [
+						{
+							"name": "Defensive Ball Curl",
+							"objectName": "DefensiveBallCurl",
+							"dataKey": "Characters/Rammus/Spells/DefensiveBallCurlAbility/DefensiveBallCurl",
+							"image": "assets/characters/rammus/hud/icons2d/armordillo_shellbash.png",
+							"tooltip": "Rammus enters a defensive formation for @BuffDuration@ seconds, gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> and dealing <magicDamage>@ReturnDamageCalc@ magic damage</magicDamage> to enemies that Attack him.<br><br><recast>Recast</recast>: Rammus ends this Ability early.",
+							"extendedVariables": [
+								{
+									"name": "FlatBonusArmor",
+									"nameOverride": "spell_listtype_armorbonus"
+								},
+								{
+									"name": "FlatBonusMR",
+									"nameOverride": "spell_listtype_magicresistbonus"
+								},
+								{
+									"name": "BonusArmorPercent",
+									"nameOverride": "spell_listtype_percentarmorbonus"
+								},
+								{
+									"name": "BonusMRPercent",
+									"nameOverride": "spell_listtype_percentmagicresistbonus"
+								}
+							],
+							"mana": [40, 40, 40, 40, 40, 40],
+							"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
+							"dataValues": {
+								"BonusArmorPercent": [0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675],
+								"BonusMRPercent": [0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675],
+								"FlatBonusArmor": [22, 27, 32, 37, 42, 47, 52],
+								"FlatBonusMR": [15, 20, 25, 30, 35, 40, 45],
+								"BuffDuration": [7, 7, 7, 7, 7, 7, 7],
+								"DamageArmorRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+								"DamageMRRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+								"FlatDamageReturn": [15, 15, 15, 15, 15, 15, 15]
+							},
+							"spellCalculations": {
+								"ReturnDamageCalc": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatDamageReturn",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "DamageArmorRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "DamageMRRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"BonusArmorTooltip": {
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mDataValue": "FlatBonusArmor"
+											},
+											"mPart2": {
+												"mSubparts": [
+													{
+														"mNumber": 1
+													},
+													{
+														"mDataValue": "BonusArmorPercent"
+													}
+												]
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "BonusArmorPercent",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"BonusMRTooltip": {
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mDataValue": "FlatBonusMR"
+											},
+											"mPart2": {
+												"mSubparts": [
+													{
+														"mNumber": 1
+													},
+													{
+														"mDataValue": "BonusMRPercent"
+													}
+												]
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "BonusMRPercent",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"RecastDamageTooltip": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatDamageReturn",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "DamageArmorRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "DamageMRRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				},
 				"passive": {
 					"maxLevel": 0,
 					"variants": [

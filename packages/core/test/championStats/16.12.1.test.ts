@@ -229,6 +229,9 @@ test('Rammus, dragons & percentage items', async (t) => {
 				},
 			},
 			items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.forceOfNature],
+			abilityLevels: {
+				w: 2,
+			},
 		};
 		const percentageAdItemsDragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
 
@@ -243,13 +246,13 @@ test('Rammus, dragons & percentage items', async (t) => {
 				moveSpeed: 406,
 			});
 
-			// damageSource.internalData.value.defensiveCurl = 1;
-			// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			// 	attackDamage: 301,
-			// 	armor: 168,
-			// 	magicResist: 222,
-			// 	abilityHaste: 43,
-			// }, 'W enabled');
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 301,
+				armor: 168,
+				magicResist: 222,
+				abilityHaste: 43,
+			}, 'W enabled');
 		});
 
 		await t.test('partial hp', async () => {
@@ -412,6 +415,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				currentHealth: 466,
 				roleQuest: 'mid',
 				internalItemData: { vbResistance: 1, steadfast: 1 } satisfies IInternalItemDataOf<'jakSho' | 'forceOfNature'>,
+				abilityLevels: { w: 3 },
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {

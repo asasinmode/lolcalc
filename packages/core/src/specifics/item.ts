@@ -1879,7 +1879,7 @@ export const ITEM_SPECIFICS = {
 			},
 			postTotal: {
 				handler(self, { totalStats, bonusStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, baseOnLevelStats, dragonStats }, { calculatedVariables, miscDebug }) {
-					const log = false;
+					const log = true;
 
 					const retributionBaseTotal = totalStats.attackDamage - (dragonStats.attackDamage ?? 0) - calculatedVariables.bloodmailRetributionExcludedAd;
 
@@ -1902,6 +1902,8 @@ export const ITEM_SPECIFICS = {
 						retributionPercentage: miscDebug.bloodmailRetributionPercentage,
 						retribution: calculatedVariables.bloodmailRetribution,
 						totalAd: totalStats.attackDamage,
+						totalArmor: totalStats.armor,
+						totalMr: totalStats.magicResist,
 					});
 				},
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.overlordsBloodmail],

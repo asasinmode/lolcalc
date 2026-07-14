@@ -251,7 +251,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats[statName as IChampionStatName] += value;
 	}
 
-	const log = false;
+	const log = true;
 
 	calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * calculatedVariables.midQuestMultiplier;
 	totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
