@@ -568,24 +568,40 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, roleQuest }, { calculatedVariables }) {
+				handler(self, { totalStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables }): void {
+					const log = false;
 					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
+
 					if (typeof bonusAd.value === 'number') {
 						championPassiveStats.attackDamage = bonusAd.value;
-						// TODO test with larger armor value, dragon multiplier should be multiplied again by role quest? */
-						const dragonStackValue = championPassiveStats.attackDamage * dragonStatMultipliers.attackDamage;
-						const midQuestMultiplierValue = championPassiveStats.attackDamage * (roleQuest === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0);
+						const passiveAd = championPassiveStats.attackDamage;
+
+						log && console.debug('[Rammus passive] before', {
+							passiveAd,
+							totalArmor: totalStats.armor,
+							totalMr: totalStats.magicResist,
+							infernalMult: dragonStatMultipliers.attackDamage,
+							midQuestMult: calculatedVariables.midQuestMultiplier,
+							totalAdBeforePassive: totalStats.attackDamage,
+						});
+
+						const infernalMultiplierValue = passiveAd * dragonStatMultipliers.attackDamage;
+						const midQuestMultiplierValue = passiveAd * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
+						calculatedVariables.bloodmailRetributionExcludedAd += infernalMultiplierValue;
 
 						calculatedVariables.midQuestAd! += midQuestMultiplierValue;
-						let value = dragonStackValue + midQuestMultiplierValue;
+						let value = infernalMultiplierValue + midQuestMultiplierValue;
 						totalMultipliersStats.attackDamage += value;
-						value += championPassiveStats.attackDamage;
+						value += passiveAd;
 						totalStats.attackDamage += value;
 						bonusStats.attackDamage += value;
+
+						log && console.debug('[Rammus passive] after', { infernalMultiplierValue, midQuestMultiplierValue, totalAdded: value, bonusAdAfter: bonusStats.attackDamage });
 					} else {
 						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad', bonusAd);
 					}
 				},
+				priority: HOOK_PRIORITIES.postTotal.Rammus,
 			},
 		},
 	},

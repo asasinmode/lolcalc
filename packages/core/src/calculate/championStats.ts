@@ -47,6 +47,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalBonusPercentMoveSpeed: 0,
 		movespeedSoftCapPenalty: 0,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
+		preMultipliersBonusAd: 0,
+		bloodmailRetributionExcludedAd: 0,
 	};
 	const miscDebug: IStatsCalculationMiscDebug = {};
 
@@ -249,43 +251,35 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats[statName as IChampionStatName] += value;
 	}
 
-	const log = true;
-	const midQuestMultiplier = source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0;
+	const log = false;
 
-	calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * midQuestMultiplier;
+	calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * calculatedVariables.midQuestMultiplier;
 	totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
 	bonusStats.abilityPower += calculatedVariables.midQuestAp;
 
-	const bonusAdMultiplierBase = bonusStats.attackDamage;
-	const infernalMult = dragonStatMultipliers.attackDamage;
+	calculatedVariables.preMultipliersBonusAd = bonusStats.attackDamage;
 
 	log && console.debug('[AD calc] before', {
-		bloodmailRetribution: calculatedVariables.bloodmailRetribution,
 		baseAd: baseOnLevelStats.attackDamage,
-		bonusAdBeforeMultipliers: bonusAdMultiplierBase,
-		infernalMult,
-		midQuestMultiplier,
+		preMultipliersBonusAd: calculatedVariables.preMultipliersBonusAd,
+		infernalMult: dragonStatMultipliers.attackDamage,
+		midQuestMultiplier: calculatedVariables.midQuestMultiplier,
 	});
 
-	const infernalBonusFromBaseAd = baseOnLevelStats.attackDamage * infernalMult;
-	dragonStats.attackDamage = infernalBonusFromBaseAd + bonusAdMultiplierBase * infernalMult;
-
-	calculatedVariables.midQuestAd = midQuestMultiplier
-		? bonusAdMultiplierBase * (1 + infernalMult) * midQuestMultiplier
-		: 0;
+	dragonStats.attackDamage = baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage + calculatedVariables.preMultipliersBonusAd * dragonStatMultipliers.attackDamage;
+	calculatedVariables.midQuestAd = calculatedVariables.preMultipliersBonusAd * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
 
 	const adMultipliersBonus = dragonStats.attackDamage + calculatedVariables.midQuestAd;
 	bonusStats.attackDamage += adMultipliersBonus;
 	totalMultipliersStats.attackDamage += adMultipliersBonus;
 
 	log && console.debug('[AD calc] after', {
-		infernalBonusFromBaseAd,
+		infernalBonusFromBaseAd: baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage,
 		dragonStatsAttackDamage: dragonStats.attackDamage,
 		midQuestAd: calculatedVariables.midQuestAd,
 		adMultipliersBonus,
 		bonusAdAfter: bonusStats.attackDamage,
 		totalMultipliersAdAfter: totalMultipliersStats.attackDamage,
-		finalAd: totalPreMultipliersStats.attackDamage + totalMultipliersStats.attackDamage,
 	});
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
@@ -299,7 +293,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { roleQuest: source.roleQuest.value, isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStats, baseOnLevelStats, championPassiveStats }, { calculatedVariables, miscDebug });
 		}
 	}
 

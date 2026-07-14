@@ -74,6 +74,7 @@ test('Evelynn dragons', async (t) => {
 });
 
 test('Rammus, dragons & percentage items', async (t) => {
+	// t.runOnly(true);
 	const adItemsCommon: IOverrides<'Rammus'> = {
 		level: 18,
 		runes: {
@@ -217,6 +218,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 	});
 
 	await t.test('bloodmail, mountain/infernal & mid quest interactions', async (t) => {
+		// t.runOnly(true);
 		const percentageAdItems: IOverrides<'Rammus'> = {
 			level: 4,
 			runes: {
@@ -402,7 +404,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 			});
 		});
 
-		await t.test('lvl 5 | dragons | mid quest | partial hp | jak\'sho+, force of nature+', { only: true }, async () => {
+		await t.test('lvl 5 | dragons | mid quest | partial hp | jak\'sho+, force of nature+', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
 				...percentageAdItems,
 				level: 5,
@@ -411,8 +413,6 @@ test('Rammus, dragons & percentage items', async (t) => {
 				roleQuest: 'mid',
 				internalItemData: { vbResistance: 1, steadfast: 1 } satisfies IInternalItemDataOf<'jakSho' | 'forceOfNature'>,
 			});
-
-			console.log(damageSource.stringifiedData.value);
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				attackDamage: 401,
@@ -434,7 +434,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 	});
 });
 
-test('Briar, overlord & infernal', async (t) => {
+test('Briar, overlord\'s bloodmail & infernal', async (t) => {
 	const mixedItemsCommon: IOverrides<'Briar'> = {
 		level: 18,
 		runes: {

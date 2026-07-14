@@ -1990,13 +1990,13 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalStats: IStatsCalculationResult['total'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+		dragonStats: IStatsCalculationResult['dragon'];
 		dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
-		roleQuest: IChampionRole | undefined;
 	}) => void>;
 };
 

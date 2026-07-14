@@ -22,8 +22,6 @@ export const HOOK_PRIORITIES = {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
 	},
 	onTotalPreMultipliers: {
-		/* should be after swiftmarch */
-		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
 		/** should be before rabadon and blackfire torch */
 		[ITEM_NAME_TO_ID.swiftmarch]: 10,
 		/** should be before swiftmarch */
@@ -33,6 +31,12 @@ export const HOOK_PRIORITIES = {
 	},
 	postTotal: {
 		Ryze: 1,
+		/* should be before bloodmail */
+		Rammus: 10,
+		/* should be after rammus */
+		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
+		/* should be after bloodmail */
+		[ITEM_NAME_TO_ID.endlessHunger]: 20,
 	},
 } satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;
 

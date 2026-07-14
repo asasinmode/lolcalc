@@ -1809,8 +1809,8 @@ export const ITEM_SPECIFICS = {
 				},
 			);
 			if (!maxValueAt || typeof maxValueAt.value !== 'number') {
-				console.warn('[ITEM_SPECIFICS bloodmail] failed to resolve RemainingHealthThreshold variable value');
-				return 0;
+				console.error('[ITEM_SPECIFICS bloodmail] failed to resolve RemainingHealthThreshold variable value');
+				return Number.NaN;
 			}
 
 			const currentHealthP = Math.min(damageSource.currentHealth.value / (maxHpOverride ?? Math.max(damageSource.stats.value.total.hp, 1)), 1);
@@ -1877,17 +1877,34 @@ export const ITEM_SPECIFICS = {
 				},
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
-			onTotalPreMultipliers: {
-				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
-					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalPreMultipliersStats.hp);
-					/* not that this value is not supposed to be affected by infernal/role quest multiplier. They subtract it before applying the multiplier in `calculateChampionStats` */
-					calculatedVariables.bloodmailRetribution = totalPreMultipliersStats.attackDamage * miscDebug.bloodmailRetributionPercentage;
+			postTotal: {
+				handler(self, { totalStats, bonusStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, baseOnLevelStats, dragonStats }, { calculatedVariables, miscDebug }) {
+					const log = false;
 
-					totalMultipliersStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					const retributionBaseTotal = totalStats.attackDamage - (dragonStats.attackDamage ?? 0) - calculatedVariables.bloodmailRetributionExcludedAd;
+
+					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
+					calculatedVariables.bloodmailRetribution = retributionBaseTotal * miscDebug.bloodmailRetributionPercentage;
+
 					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					itemTotalStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					totalMultipliersStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					bonusStats.attackDamage += calculatedVariables.bloodmailRetribution;
+					totalStats.attackDamage += calculatedVariables.bloodmailRetribution;
+
+					log && console.debug('[Bloodmail] retribution', {
+						baseAd: baseOnLevelStats.attackDamage,
+						preMultipliersBonusAd: calculatedVariables.preMultipliersBonusAd,
+						bloodmailExcludedAd: calculatedVariables.bloodmailRetributionExcludedAd,
+						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
+						retributionBaseTotal,
+						dragonStatsAd: dragonStats.attackDamage ?? 0,
+						retributionPercentage: miscDebug.bloodmailRetributionPercentage,
+						retribution: calculatedVariables.bloodmailRetribution,
+						totalAd: totalStats.attackDamage,
+					});
 				},
-				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.overlordsBloodmail],
+				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 		},
 		imgTextLabel: 'Retribution ad increase',
