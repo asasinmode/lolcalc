@@ -233,6 +233,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		/** used in maxHealth/abilityResource watcher to ensure overrides are used only once */
 		let hpAbilityResourceWatchUsedOverrides = false;
+		let usedOverrideChampionOverrides = !overrides.champion?.id;
 
 		this.watchHandles = isResultsCopy
 			? []
@@ -290,9 +291,25 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						if (cloned) {
 							cloned = false;
 						} else {
-							const level = c?.id === 'TargetDummy' ? 1 : 0;
-							this.abilityLevels.value = { q: level, w: level, e: level, r: level };
-							this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+							if (overrides.champion?.id && !usedOverrideChampionOverrides) {
+								for (const abilityKey in this.abilityLevels.value) {
+									this.abilityLevels.value[abilityKey as INonPassiveAbilityKey] = Math.max(0, Math.min(
+										(overrides.abilityLevels?.[abilityKey as INonPassiveAbilityKey] ?? 0),
+										this.maxAbilityLevels.value[abilityKey as INonPassiveAbilityKey],
+									));
+								}
+								for (const abilityKey in this.abilityVariantsIndexes.value) {
+									this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey] = Math.max(0, Math.min(
+										(overrides.abilityVariants?.[abilityKey as INonPassiveAbilityKey] ?? 0),
+										this.maxAbilityVariantsIndexes.value[abilityKey as IChampionAbilityKey],
+									));
+								}
+								usedOverrideChampionOverrides = true;
+							} else {
+								const level = c?.id === 'TargetDummy' ? 1 : 0;
+								this.abilityLevels.value = { q: level, w: level, e: level, r: level };
+								this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+							}
 						}
 
 						this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any)) ?? {};
