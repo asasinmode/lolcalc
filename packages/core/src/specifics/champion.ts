@@ -585,11 +585,17 @@ export const CHAMPION_SPECIFICS = {
 						jakShoMr: calculatedVariables.jakShoMagicResist,
 					});
 
+					const rammusWStats = {
+						...totalPreMultipliersStats,
+						armor: totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0),
+						magicResist: totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0),
+					};
+
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
-						({ value: wBonusArmor } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource }));
-						({ value: wBonusMr } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource }));
+						({ value: wBonusArmor } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource }));
+						({ value: wBonusMr } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource }));
 					}
 
 					if (typeof wBonusArmor !== 'number' || typeof wBonusMr !== 'number') {
@@ -662,7 +668,15 @@ export const CHAMPION_SPECIFICS = {
 					totalStats.attackDamage += value;
 					bonusStats.attackDamage += value;
 
-					log && console.debug('[Rammus passive] after', { infernalMultiplierValue, midQuestMultiplierValue, totalAdded: value, bonusAdAfter: bonusStats.attackDamage });
+					log && console.debug('[Rammus passive] after', {
+						infernalMultiplierValue,
+						midQuestMultiplierValue,
+						totalAdded: value,
+						bonusAdAfter: bonusStats.attackDamage,
+						totalAd: totalStats.attackDamage,
+						totalArmor: totalStats.armor,
+						totalMr: totalStats.magicResist,
+					});
 				},
 				priority: HOOK_PRIORITIES.postTotal.Rammus,
 			},
