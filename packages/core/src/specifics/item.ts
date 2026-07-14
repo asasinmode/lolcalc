@@ -1632,20 +1632,21 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			onTotalPreMultipliers: {
-				handler(self, { itemPassivesStats, bonusStats, totalPreMultipliersStats }, { calculatedVariables }) {
+				handler(self, { itemPassivesStats, itemTotalStats, bonusStats, totalMultipliersStats }, { calculatedVariables }) {
 					if (!(self.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance) {
 						return;
 					}
 					const resistPercentage = itemVariableValue('BonusResistPercentage', { item: ITEMS_BY_NAME.jakSho });
 					if (typeof resistPercentage.value === 'number') {
+						calculatedVariables.jakShoBonusResistMultiplier = resistPercentage.value;
 						calculatedVariables.jakShoArmor = bonusStats.armor * resistPercentage.value;
 						calculatedVariables.jakShoMagicResist = bonusStats.magicResist * resistPercentage.value;
-						totalPreMultipliersStats.armor += calculatedVariables.jakShoArmor;
-						totalPreMultipliersStats.magicResist += calculatedVariables.jakShoMagicResist;
-						bonusStats.armor += calculatedVariables.jakShoArmor;
-						bonusStats.magicResist += calculatedVariables.jakShoMagicResist;
 						itemPassivesStats.armor += calculatedVariables.jakShoArmor;
 						itemPassivesStats.magicResist += calculatedVariables.jakShoMagicResist;
+						itemTotalStats.armor += calculatedVariables.jakShoArmor;
+						itemTotalStats.magicResist += calculatedVariables.jakShoMagicResist;
+						totalMultipliersStats.armor += calculatedVariables.jakShoArmor;
+						totalMultipliersStats.magicResist += calculatedVariables.jakShoMagicResist;
 					} else {
 						console.warn('[ITEM_SPECIFICS Jak\'Sho] failed to calculate bonus resist percentage');
 					}

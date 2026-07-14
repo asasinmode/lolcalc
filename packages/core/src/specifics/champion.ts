@@ -568,7 +568,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, dragonStats }, { calculatedVariables }): void {
+				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, dragonStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }): void {
 					const log = true;
 
 					log && console.debug('[Rammus W] before', {
@@ -580,6 +580,7 @@ export const CHAMPION_SPECIFICS = {
 						preMultiplierMr: totalPreMultipliersStats.magicResist,
 						mountainArmor: dragonStatMultipliers.armor,
 						mountainMr: dragonStatMultipliers.magicResist,
+						jakShoBonusResistMultiplier: calculatedVariables.jakShoBonusResistMultiplier,
 						jakShoArmor: calculatedVariables.jakShoArmor,
 						jakShoMr: calculatedVariables.jakShoMagicResist,
 					});
@@ -650,8 +651,9 @@ export const CHAMPION_SPECIFICS = {
 					});
 
 					const infernalMultiplierValue = passiveAd * dragonStatMultipliers.attackDamage;
-					const midQuestMultiplierValue = passiveAd * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
 					calculatedVariables.bloodmailRetributionExcludedAd += infernalMultiplierValue;
+
+					const midQuestMultiplierValue = passiveAd * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
 
 					calculatedVariables.midQuestAd! += midQuestMultiplierValue;
 					let value = infernalMultiplierValue + midQuestMultiplierValue;

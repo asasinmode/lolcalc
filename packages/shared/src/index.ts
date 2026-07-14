@@ -178,6 +178,8 @@ export interface IStatsCalculationVariables {
 	stormrazorMSPercent?: number;
 	/** move speed percent gained from mercurial scimitar's passive */
 	mercurialMSPercent?: number;
+	/** value bonus resists are multiplied by when jak'sho's passive is active, like `0.3` */
+	jakShoBonusResistMultiplier?: number;
 	/** armor gained from jak'sho's passive */
 	jakShoArmor?: number;
 	/** magic resist gained from jak'sho's passive */
