@@ -229,9 +229,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				},
 			},
 			items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.forceOfNature],
-			abilityLevels: {
-				w: 2,
-			},
+			abilityLevels: { w: 2 },
 		};
 		const percentageAdItemsDragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
 
@@ -436,6 +434,59 @@ test('Rammus, dragons & percentage items', async (t) => {
 			// 	magicResist: 476,
 			// 	abilityHaste: 64,
 			// }, 'W enabled');
+		});
+	});
+
+	await t.test('W interactions', { only: true }, async (t) => {
+		t.runOnly(true);
+		const sourceCommon: IOverrides<'Rammus'> = {
+			level: 5,
+			runes: {
+				shards: {
+					offensive: 'cdrscaling',
+					flex: 'healthscaling',
+					defensive: 'healthscaling',
+				},
+			},
+			items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail],
+			abilityLevels: { w: 3 },
+		};
+		const percentageAdItemsDragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
+
+		await t.test('base', { only: true }, async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', sourceCommon);
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 263,
+				armor: 94,
+				magicResist: 83,
+				abilityHaste: 38,
+			});
+
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 290,
+				armor: 190,
+				magicResist: 164,
+				abilityHaste: 41,
+			}, 'W enabled');
+
+			damageSource.internalData.value.defensiveCurl = 0;
+			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 267,
+				armor: 107,
+				magicResist: 97,
+				abilityHaste: 38,
+			}, 'jak\'sho');
+
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 300,
+				armor: 225,
+				magicResist: 197,
+				abilityHaste: 42,
+			}, 'W enabled & jak\'sho');
 		});
 	});
 });

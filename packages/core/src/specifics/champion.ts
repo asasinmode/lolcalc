@@ -578,6 +578,8 @@ export const CHAMPION_SPECIFICS = {
 						bonusMr: bonusStats.magicResist,
 						preMultiplierArmor: totalPreMultipliersStats.armor,
 						preMultiplierMr: totalPreMultipliersStats.magicResist,
+						baseArmor: baseOnLevelStats.armor,
+						baseMr: baseOnLevelStats.magicResist,
 						mountainArmor: dragonStatMultipliers.armor,
 						mountainMr: dragonStatMultipliers.magicResist,
 						jakShoBonusResistMultiplier: calculatedVariables.jakShoBonusResistMultiplier,
@@ -587,24 +589,39 @@ export const CHAMPION_SPECIFICS = {
 
 					const rammusWStats = {
 						...totalPreMultipliersStats,
-						armor: totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0),
-						magicResist: totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0),
+						armor: totalPreMultipliersStats.armor,
+						magicResist: totalPreMultipliersStats.magicResist,
 					};
 
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
-						({ value: wBonusArmor } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource }));
-						({ value: wBonusMr } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource }));
+						const { calculatesFrom: armorCalculatesFrom } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource });
+						const { calculatesFrom: mrCalculatesFrom } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource });
+
+						if (!armorCalculatesFrom || !mrCalculatesFrom) {
+							console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve W bonus resists', armorCalculatesFrom, mrCalculatesFrom);
+
+							return;
+						}
+
+						const wArmorMultiplier = armorCalculatesFrom[1]!.value as number;
+						const wMrMultiplier = mrCalculatesFrom[1]!.value as number;
+						const wConstArmorBonus = (armorCalculatesFrom[0]!.value as number) / (1 + wArmorMultiplier);
+						const wConstMrBonus = (mrCalculatesFrom[0]!.value as number) / (1 + wMrMultiplier);
+						const jakShoMultiplier = 1 + (calculatedVariables.jakShoBonusResistMultiplier ?? 0);
+
+						// (base + bonusWithJakSho + (W const * (1 + jakShoMultiplier))) * (1 + wArmorMultiplier)
+						console.log(`(${baseOnLevelStats.armor} + ${bonusStats.armor} + ${wConstArmorBonus} * ${jakShoMultiplier}) * ${1 + wArmorMultiplier}`);
+						console.log(`(${baseOnLevelStats.armor} + ${bonusStats.armor} + ${wConstArmorBonus * jakShoMultiplier}) * ${1 + wArmorMultiplier}`);
+						console.log(`${baseOnLevelStats.armor + bonusStats.armor + wConstArmorBonus * jakShoMultiplier} * ${(1 + wArmorMultiplier)}}`);
+						console.log((baseOnLevelStats.armor + bonusStats.armor + wConstArmorBonus * jakShoMultiplier) * (1 + wArmorMultiplier));
+
+						wBonusArmor = (baseOnLevelStats.armor + bonusStats.armor + (wConstArmorBonus * jakShoMultiplier)) * wArmorMultiplier + (wConstArmorBonus * jakShoMultiplier);
+						wBonusMr = (baseOnLevelStats.magicResist + bonusStats.magicResist + (wConstMrBonus * jakShoMultiplier)) * wMrMultiplier + (wConstMrBonus * jakShoMultiplier);
+
+						log && console.log('[Rammus W] calculated', { wArmorMultiplier, wMrMultiplier, wBaseArmorBonus: wConstArmorBonus, wBaseMrBonus: wConstMrBonus });
 					}
-
-					if (typeof wBonusArmor !== 'number' || typeof wBonusMr !== 'number') {
-						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve W bonus resists', wBonusArmor, wBonusMr);
-
-						return;
-					}
-
-					log && console.debug('[Rammus W] resolved', { wBonusArmor, wBonusMr });
 
 					totalPreMultipliersStats.armor += wBonusArmor;
 					totalPreMultipliersStats.magicResist += wBonusMr;
