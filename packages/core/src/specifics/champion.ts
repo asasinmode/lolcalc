@@ -568,7 +568,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, dragonStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }): void {
+				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, dragonStats, baseOnLevelStats }, { calculatedVariables }): void {
 					const log = true;
 
 					log && console.debug('[Rammus W] before', {
@@ -587,17 +587,11 @@ export const CHAMPION_SPECIFICS = {
 						jakShoMr: calculatedVariables.jakShoMagicResist,
 					});
 
-					const rammusWStats = {
-						...totalPreMultipliersStats,
-						armor: totalPreMultipliersStats.armor,
-						magicResist: totalPreMultipliersStats.magicResist,
-					};
-
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
-						const { calculatesFrom: armorCalculatesFrom } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource });
-						const { calculatesFrom: mrCalculatesFrom } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: rammusWStats } } } as DamageSource });
+						const { calculatesFrom: armorCalculatesFrom } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
+						const { calculatesFrom: mrCalculatesFrom } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 
 						if (!armorCalculatesFrom || !mrCalculatesFrom) {
 							console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve W bonus resists', armorCalculatesFrom, mrCalculatesFrom);

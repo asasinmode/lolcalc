@@ -47,7 +47,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalBonusPercentMoveSpeed: 0,
 		movespeedSoftCapPenalty: 0,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
-		preMultipliersBonusAd: 0,
 		bloodmailRetributionExcludedAd: 0,
 	};
 	const miscDebug: IStatsCalculationMiscDebug = {};
@@ -248,23 +247,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats[statName as IChampionStatName] += value;
 	}
 
-	const log = true;
-
 	calculatedVariables.midQuestAp = calculatedVariables.apMultipliersBase * calculatedVariables.midQuestMultiplier;
 	totalMultipliersStats.abilityPower += calculatedVariables.midQuestAp;
 	bonusStats.abilityPower += calculatedVariables.midQuestAp;
 
-	calculatedVariables.preMultipliersBonusAd = bonusStats.attackDamage;
-
-	log && console.debug('[AD calc] before', {
-		baseAd: baseOnLevelStats.attackDamage,
-		preMultipliersBonusAd: calculatedVariables.preMultipliersBonusAd,
-		infernalMult: dragonStatMultipliers.attackDamage,
-		midQuestMultiplier: calculatedVariables.midQuestMultiplier,
-	});
-
-	dragonStats.attackDamage = baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage + calculatedVariables.preMultipliersBonusAd * dragonStatMultipliers.attackDamage;
-	calculatedVariables.midQuestAd = calculatedVariables.preMultipliersBonusAd * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
+	dragonStats.attackDamage = baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage + bonusStats.attackDamage * dragonStatMultipliers.attackDamage;
+	calculatedVariables.midQuestAd = bonusStats.attackDamage * (1 + dragonStatMultipliers.attackDamage) * calculatedVariables.midQuestMultiplier;
 
 	const adMultipliersBonus = dragonStats.attackDamage + calculatedVariables.midQuestAd;
 	bonusStats.attackDamage += adMultipliersBonus;

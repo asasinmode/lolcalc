@@ -219,7 +219,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 	await t.test('bloodmail, mountain/infernal & mid quest interactions', async (t) => {
 		// t.runOnly(true);
-		const percentageAdItems: IOverrides<'Rammus'> = {
+		const sourceCommon: IOverrides<'Rammus'> = {
 			level: 4,
 			runes: {
 				shards: {
@@ -231,10 +231,10 @@ test('Rammus, dragons & percentage items', async (t) => {
 			items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.forceOfNature],
 			abilityLevels: { w: 2 },
 		};
-		const percentageAdItemsDragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
+		const dragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
 
 		await t.test('base', async () => {
-			const damageSource = await setupDamageSource(fixture, 'Rammus', percentageAdItems);
+			const damageSource = await setupDamageSource(fixture, 'Rammus', sourceCommon);
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				attackDamage: 277,
@@ -255,7 +255,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('partial hp', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
+				...sourceCommon,
 				currentHealth: 806,
 			});
 
@@ -276,8 +276,8 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('dragons', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
-				dragonStacks: percentageAdItemsDragonStacks,
+				...sourceCommon,
+				dragonStacks,
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -298,7 +298,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('mid quest', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
+				...sourceCommon,
 				roleQuest: 'mid',
 			});
 
@@ -320,8 +320,8 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('dragons | mid quest', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
-				dragonStacks: percentageAdItemsDragonStacks,
+				...sourceCommon,
+				dragonStacks,
 				roleQuest: 'mid',
 			});
 
@@ -334,8 +334,8 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('dragons | mid quest | partial hp', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
-				dragonStacks: percentageAdItemsDragonStacks,
+				...sourceCommon,
+				dragonStacks,
 				roleQuest: 'mid',
 				currentHealth: 800,
 			});
@@ -357,8 +357,8 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('dragons | partial hp', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
-				dragonStacks: percentageAdItemsDragonStacks,
+				...sourceCommon,
+				dragonStacks,
 				currentHealth: 806,
 			});
 
@@ -370,7 +370,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('mid quest | partial hp', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
+				...sourceCommon,
 				roleQuest: 'mid',
 				currentHealth: 806,
 			});
@@ -392,8 +392,8 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('dragons | partial hp | jak\'sho+, force of nature+', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
-				dragonStacks: percentageAdItemsDragonStacks,
+				...sourceCommon,
+				dragonStacks,
 				currentHealth: 1200,
 				internalItemData: { vbResistance: 1, steadfast: 1 } satisfies IInternalItemDataOf<'jakSho' | 'forceOfNature'>,
 			});
@@ -409,9 +409,9 @@ test('Rammus, dragons & percentage items', async (t) => {
 
 		await t.test('lvl 5 | dragons | mid quest | partial hp | jak\'sho+, force of nature+', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
-				...percentageAdItems,
+				...sourceCommon,
 				level: 5,
-				dragonStacks: percentageAdItemsDragonStacks,
+				dragonStacks,
 				currentHealth: 466,
 				roleQuest: 'mid',
 				internalItemData: { vbResistance: 1, steadfast: 1 } satisfies IInternalItemDataOf<'jakSho' | 'forceOfNature'>,
@@ -451,9 +451,9 @@ test('Rammus, dragons & percentage items', async (t) => {
 			items: [ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail],
 			abilityLevels: { w: 3 },
 		};
-		const percentageAdItemsDragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
+		const dragonStacks: IDragonName[] = ['Mountain', 'Mountain', 'Infernal', 'Infernal'];
 
-		await t.test('base', { only: true }, async () => {
+		await t.test('base', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', sourceCommon);
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -486,6 +486,45 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 225,
 				magicResist: 197,
 				abilityHaste: 42,
+			}, 'W enabled & jak\'sho');
+		});
+
+		await t.test('dragons', { only: true }, async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...sourceCommon,
+				dragonStacks,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 282,
+				armor: 103,
+				magicResist: 92,
+				abilityHaste: 40,
+			});
+
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 313,
+				armor: 209,
+				magicResist: 181,
+				abilityHaste: 44,
+			}, 'W enabled');
+
+			damageSource.internalData.value.defensiveCurl = 0;
+			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 286,
+				armor: 118,
+				magicResist: 107,
+				abilityHaste: 41,
+			}, 'jak\'sho');
+
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 325,
+				armor: 248,
+				magicResist: 217,
+				abilityHaste: 46,
 			}, 'W enabled & jak\'sho');
 		});
 	});

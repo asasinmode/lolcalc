@@ -1895,7 +1895,6 @@ export const ITEM_SPECIFICS = {
 
 					log && console.debug('[Bloodmail] retribution', {
 						baseAd: baseOnLevelStats.attackDamage,
-						preMultipliersBonusAd: calculatedVariables.preMultipliersBonusAd,
 						bloodmailExcludedAd: calculatedVariables.bloodmailRetributionExcludedAd,
 						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
 						retributionBaseTotal,

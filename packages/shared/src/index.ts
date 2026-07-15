@@ -87,7 +87,6 @@ export interface IStatsCalculationVariables {
 	totalBonusPercentMoveSpeed: number;
 	/** penalty from move speed soft cap */
 	movespeedSoftCapPenalty: number;
-	preMultipliersBonusAd: number;
 	/**
 	 * ad that's not supposed to be multiplied by overlord's retribution. Currently
 	 * - Rammus' passive infernal bonus. If Rammus' passive gives 100 ad and he has 1 infernal, it will be `3`
