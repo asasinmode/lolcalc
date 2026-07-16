@@ -258,15 +258,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	bonusStats.attackDamage += adMultipliersBonus;
 	totalMultipliersStats.attackDamage += adMultipliersBonus;
 
-	log && console.debug('[AD calc] after', {
-		infernalBonusFromBaseAd: baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage,
-		dragonStatsAttackDamage: dragonStats.attackDamage,
-		midQuestAd: calculatedVariables.midQuestAd,
-		adMultipliersBonus,
-		bonusAdAfter: bonusStats.attackDamage,
-		totalMultipliersAdAfter: totalMultipliersStats.attackDamage,
-	});
-
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
 		([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]],
 	)) as IChampionStats;

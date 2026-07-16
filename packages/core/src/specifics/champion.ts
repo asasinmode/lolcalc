@@ -568,28 +568,14 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats, dragonStats, baseOnLevelStats }, { calculatedVariables }): void {
-					const log = true;
-
-					log && console.debug('[Rammus W] before', {
-						totalArmor: totalStats.armor,
-						totalMr: totalStats.magicResist,
-						bonusArmor: bonusStats.armor,
-						bonusMr: bonusStats.magicResist,
-						preMultiplierArmor: totalPreMultipliersStats.armor,
-						preMultiplierMr: totalPreMultipliersStats.magicResist,
-						baseArmor: baseOnLevelStats.armor,
-						baseMr: baseOnLevelStats.magicResist,
-						mountainArmor: dragonStatMultipliers.armor,
-						mountainMr: dragonStatMultipliers.magicResist,
-						jakShoBonusResistMultiplier: calculatedVariables.jakShoBonusResistMultiplier,
-						jakShoArmor: calculatedVariables.jakShoArmor,
-						jakShoMr: calculatedVariables.jakShoMagicResist,
-					});
-
+				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables }): void {
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
+						/* rammus W bonus resists consist of a base value + a % of total armor, however this % also applies to base
+						 * i.e base 20 + 50% armor = (20 * 1.5) + armor * 0.5
+						 * so get that base & multiplier from tooltip variables' calculatesFrom
+						 */
 						const { calculatesFrom: armorCalculatesFrom } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 						const { calculatesFrom: mrCalculatesFrom } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 
@@ -604,19 +590,11 @@ export const CHAMPION_SPECIFICS = {
 						const wConstArmorBonus = (armorCalculatesFrom[0]!.value as number) / (1 + wArmorMultiplier);
 						const wConstMrBonus = (mrCalculatesFrom[0]!.value as number) / (1 + wMrMultiplier);
 						const jakShoMultiplier = 1 + (calculatedVariables.jakShoBonusResistMultiplier ?? 0);
-
-						// (base + bonusWithJakSho + (W const * (1 + jakShoMultiplier))) * (1 + wArmorMultiplier)
-						console.log(`(${baseOnLevelStats.armor} + ${bonusStats.armor} + ${wConstArmorBonus} * ${jakShoMultiplier}) * ${1 + wArmorMultiplier}`);
-						console.log(`(${baseOnLevelStats.armor} + ${bonusStats.armor} + ${wConstArmorBonus * jakShoMultiplier}) * ${1 + wArmorMultiplier}`);
-						console.log(`${baseOnLevelStats.armor + bonusStats.armor + wConstArmorBonus * jakShoMultiplier} * ${(1 + wArmorMultiplier)}}`);
-						console.log((baseOnLevelStats.armor + bonusStats.armor + wConstArmorBonus * jakShoMultiplier) * (1 + wArmorMultiplier));
-
 						const preDragonArmor = totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0);
 						const preDragonMr = totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0);
+
 						wBonusArmor = ((preDragonArmor + wConstArmorBonus * jakShoMultiplier) * wArmorMultiplier + wConstArmorBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.armor);
 						wBonusMr = ((preDragonMr + wConstMrBonus * jakShoMultiplier) * wMrMultiplier + wConstMrBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.magicResist);
-
-						log && console.log('[Rammus W] calculated', { wArmorMultiplier, wMrMultiplier, wBaseArmorBonus: wConstArmorBonus, wBaseMrBonus: wConstMrBonus });
 					}
 
 					totalPreMultipliersStats.armor += wBonusArmor;
@@ -627,13 +605,6 @@ export const CHAMPION_SPECIFICS = {
 					bonusStats.magicResist += wBonusMr;
 					totalStats.armor += wBonusArmor;
 					totalStats.magicResist += wBonusMr;
-
-					log && console.debug('[Rammus W] applied', {
-						totalArmor: totalStats.armor,
-						totalMr: totalStats.magicResist,
-						bonusArmor: bonusStats.armor,
-						bonusMr: bonusStats.magicResist,
-					});
 
 					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 
@@ -657,16 +628,6 @@ export const CHAMPION_SPECIFICS = {
 					value += passiveAd;
 					totalStats.attackDamage += value;
 					bonusStats.attackDamage += value;
-
-					log && console.debug('[Rammus passive] after', {
-						infernalMultiplierValue,
-						midQuestMultiplierValue,
-						totalAdded: value,
-						bonusAdAfter: bonusStats.attackDamage,
-						totalAd: totalStats.attackDamage,
-						totalArmor: totalStats.armor,
-						totalMr: totalStats.magicResist,
-					});
 				},
 				priority: HOOK_PRIORITIES.postTotal.Rammus,
 			},

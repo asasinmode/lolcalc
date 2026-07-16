@@ -74,7 +74,6 @@ test('Evelynn dragons', async (t) => {
 });
 
 test('Rammus, dragons & percentage items', async (t) => {
-	// t.runOnly(true);
 	const adItemsCommon: IOverrides<'Rammus'> = {
 		level: 18,
 		runes: {
@@ -218,7 +217,6 @@ test('Rammus, dragons & percentage items', async (t) => {
 	});
 
 	await t.test('bloodmail, mountain/infernal & mid quest interactions', async (t) => {
-		// t.runOnly(true);
 		const sourceCommon: IOverrides<'Rammus'> = {
 			level: 4,
 			runes: {
@@ -426,19 +424,18 @@ test('Rammus, dragons & percentage items', async (t) => {
 				moveSpeed: 435,
 			});
 
-			// damageSource.currentHealth.value = 459;
-			// damageSource.internalData.value.defensiveCurl = 1;
-			// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			// 	attackDamage: 462,
-			// 	armor: 248,
-			// 	magicResist: 476,
-			// 	abilityHaste: 64,
-			// }, 'W enabled');
+			damageSource.currentHealth.value = 459;
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 462,
+				armor: 248,
+				magicResist: 476,
+				abilityHaste: 64,
+			}, 'W enabled');
 		});
 	});
 
-	await t.test('W interactions', { only: true }, async (t) => {
-		t.runOnly(true);
+	await t.test('W interactions', async (t) => {
 		const sourceCommon: IOverrides<'Rammus'> = {
 			level: 5,
 			runes: {
@@ -489,7 +486,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 			}, 'W enabled & jak\'sho');
 		});
 
-		await t.test('dragons', { only: true }, async () => {
+		await t.test('dragons', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', {
 				...sourceCommon,
 				dragonStacks,
@@ -526,6 +523,91 @@ test('Rammus, dragons & percentage items', async (t) => {
 				magicResist: 217,
 				abilityHaste: 46,
 			}, 'W enabled & jak\'sho');
+		});
+
+		await t.test('dragons, partial hp, jak\'sho+', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...sourceCommon,
+				dragonStacks,
+				currentHealth: 755,
+				internalItemData: { vbResistance: 1 } satisfies IInternalItemDataOf<'jakSho'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 318,
+				armor: 118,
+				magicResist: 107,
+				abilityHaste: 45,
+			});
+
+			damageSource.internalData.value.defensiveCurl = 1;
+			damageSource.currentHealth.value = 360;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 361,
+				armor: 248,
+				magicResist: 217,
+				abilityHaste: 50,
+			}, 'W enabled');
+		});
+
+		await t.test('dragons, partial hp, jak\'sho+, mid quest', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...sourceCommon,
+				dragonStacks,
+				roleQuest: 'mid',
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 312,
+				armor: 103,
+				magicResist: 92,
+				abilityHaste: 44,
+			});
+
+			damageSource.internalData.value.defensiveCurl = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 345,
+				armor: 209,
+				magicResist: 181,
+				abilityHaste: 48,
+			}, 'W enabled');
+
+			damageSource.internalData.value.defensiveCurl = 0;
+			damageSource.currentHealth.value = 276;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 347,
+				armor: 103,
+				magicResist: 92,
+				abilityHaste: 49,
+			}, 'partial hp');
+
+			damageSource.currentHealth.value = 443;
+			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 353,
+				armor: 118,
+				magicResist: 107,
+				abilityHaste: 49,
+			}, 'jak\'sho');
+
+			damageSource.currentHealth.value = 285;
+			damageSource.internalData.value.defensiveCurl = 1;
+			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 384,
+				armor: 209,
+				magicResist: 181,
+				abilityHaste: 53,
+			}, 'W enabled & partial hp');
+
+			damageSource.currentHealth.value = 538;
+			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 399,
+				armor: 248,
+				magicResist: 217,
+				abilityHaste: 55,
+			}, 'W enabled & partial hp & jak\'sho');
 		});
 	});
 });

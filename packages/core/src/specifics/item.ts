@@ -1879,9 +1879,7 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 			postTotal: {
-				handler(self, { totalStats, bonusStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, baseOnLevelStats, dragonStats }, { calculatedVariables, miscDebug }) {
-					const log = true;
-
+				handler(self, { totalStats, bonusStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, dragonStats }, { calculatedVariables, miscDebug }) {
 					const retributionBaseTotal = totalStats.attackDamage - (dragonStats.attackDamage ?? 0) - calculatedVariables.bloodmailRetributionExcludedAd;
 
 					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
@@ -1892,19 +1890,6 @@ export const ITEM_SPECIFICS = {
 					totalMultipliersStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					bonusStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					totalStats.attackDamage += calculatedVariables.bloodmailRetribution;
-
-					log && console.debug('[Bloodmail] retribution', {
-						baseAd: baseOnLevelStats.attackDamage,
-						bloodmailExcludedAd: calculatedVariables.bloodmailRetributionExcludedAd,
-						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
-						retributionBaseTotal,
-						dragonStatsAd: dragonStats.attackDamage ?? 0,
-						retributionPercentage: miscDebug.bloodmailRetributionPercentage,
-						retribution: calculatedVariables.bloodmailRetribution,
-						totalAd: totalStats.attackDamage,
-						totalArmor: totalStats.armor,
-						totalMr: totalStats.magicResist,
-					});
 				},
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},

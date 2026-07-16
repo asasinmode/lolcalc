@@ -1957,6 +1957,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		bonusStats: IStatsCalculationResult['bonus'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
 	}) => void>;
+	/** anything added to `itemPassivesStats` will be added to `itemTotalStats` */
 	preItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		itemBaseStats: IStatsCalculationResult['itemBase'];
@@ -1990,7 +1991,10 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 	}) => void>;
-	/** runs when total stats have been calculated but before any total multipliers like mid quest or dragons */
+	/**
+	 * runs when total stats have been calculated but before any total multipliers like mid quest or dragons
+	 * anything added to `totalMultipliersStats` will be added into `bonusStats` and `totalStats`
+	 */
 	onTotalPreMultipliers?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
