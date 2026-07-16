@@ -611,8 +611,10 @@ export const CHAMPION_SPECIFICS = {
 						console.log(`${baseOnLevelStats.armor + bonusStats.armor + wConstArmorBonus * jakShoMultiplier} * ${(1 + wArmorMultiplier)}}`);
 						console.log((baseOnLevelStats.armor + bonusStats.armor + wConstArmorBonus * jakShoMultiplier) * (1 + wArmorMultiplier));
 
-						wBonusArmor = (baseOnLevelStats.armor + bonusStats.armor + (wConstArmorBonus * jakShoMultiplier)) * wArmorMultiplier + (wConstArmorBonus * jakShoMultiplier);
-						wBonusMr = (baseOnLevelStats.magicResist + bonusStats.magicResist + (wConstMrBonus * jakShoMultiplier)) * wMrMultiplier + (wConstMrBonus * jakShoMultiplier);
+						const preDragonArmor = totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0);
+						const preDragonMr = totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0);
+						wBonusArmor = ((preDragonArmor + wConstArmorBonus * jakShoMultiplier) * wArmorMultiplier + wConstArmorBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.armor);
+						wBonusMr = ((preDragonMr + wConstMrBonus * jakShoMultiplier) * wMrMultiplier + wConstMrBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.magicResist);
 
 						log && console.log('[Rammus W] calculated', { wArmorMultiplier, wMrMultiplier, wBaseArmorBonus: wConstArmorBonus, wBaseMrBonus: wConstMrBonus });
 					}
@@ -626,21 +628,7 @@ export const CHAMPION_SPECIFICS = {
 					totalStats.armor += wBonusArmor;
 					totalStats.magicResist += wBonusMr;
 
-					const mountainWBonusArmor = wBonusArmor * dragonStatMultipliers.armor;
-					const mountainWBonusMr = wBonusMr * dragonStatMultipliers.magicResist;
-
-					dragonStats.armor = (dragonStats.armor ?? 0) + mountainWBonusArmor;
-					dragonStats.magicResist = (dragonStats.magicResist ?? 0) + mountainWBonusMr;
-					totalMultipliersStats.armor += mountainWBonusArmor;
-					totalMultipliersStats.magicResist += mountainWBonusMr;
-					bonusStats.armor += mountainWBonusArmor;
-					bonusStats.magicResist += mountainWBonusMr;
-					totalStats.armor += mountainWBonusArmor;
-					totalStats.magicResist += mountainWBonusMr;
-
 					log && console.debug('[Rammus W] applied', {
-						mountainWBonusArmor,
-						mountainWBonusMr,
 						totalArmor: totalStats.armor,
 						totalMr: totalStats.magicResist,
 						bonusArmor: bonusStats.armor,
@@ -657,15 +645,6 @@ export const CHAMPION_SPECIFICS = {
 
 					championPassiveStats.attackDamage = bonusAd.value;
 					const passiveAd = championPassiveStats.attackDamage;
-
-					log && console.debug('[Rammus passive] before', {
-						passiveAd,
-						totalArmor: totalStats.armor,
-						totalMr: totalStats.magicResist,
-						infernalMult: dragonStatMultipliers.attackDamage,
-						midQuestMult: calculatedVariables.midQuestMultiplier,
-						totalAdBeforePassive: totalStats.attackDamage,
-					});
 
 					const infernalMultiplierValue = passiveAd * dragonStatMultipliers.attackDamage;
 					calculatedVariables.bloodmailRetributionExcludedAd += infernalMultiplierValue;
