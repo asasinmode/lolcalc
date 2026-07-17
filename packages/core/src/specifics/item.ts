@@ -1541,15 +1541,27 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				f1: [],
+				TotalPen: [],
+				TotalResists: [],
 			},
-			calculate() {
+			calculate(self) {
 				return {
 					f1: { value: 0 },
+					TotalPen: { value: self.stats.value.variables.terminusPercentagePen ?? 0 },
+					TotalResists: { value: self.stats.value.variables.terminusResists ?? 0 },
 				};
 			},
 			meta: {
 				OnHitDamage: {
 					type: VariableType.magic,
+				},
+				TotalPen: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+				TotalResists: {
+					isCustom: true,
 				},
 			},
 			uninteresting: ['f1', 'ARMRMaxScaling', 'PenPerHit', 'PenMax', 'BuffDuration'],

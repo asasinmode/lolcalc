@@ -185,6 +185,10 @@ export interface IStatsCalculationVariables {
 	jakShoArmor?: number;
 	/** magic resist gained from jak'sho's passive */
 	jakShoMagicResist?: number;
+	/** armor & magic penetration from terminus' passive */
+	terminusPercentagePen?: number;
+	/** armor & magic resist from terminus' passive */
+	terminusResists?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
