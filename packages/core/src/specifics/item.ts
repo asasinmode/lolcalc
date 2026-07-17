@@ -5,7 +5,7 @@
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IStatsCalculationResult } from '@lolcalc/shared';
-import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
+import type { IInternalDragonDataOf, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
@@ -1168,7 +1168,16 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { oBarrage: number }) {
 			return internalData.oBarrage;
 		},
-		// TODO calculate
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'fiendhunterBolts'>).oBarrage) {
+						itemPassivesStats.bonusAttackSpeedPercent += ITEMS_BY_NAME.fiendhunterBolts?.dataValues.BonusAS;
+					}
+				},
+			},
+		},
+		// TODO calculate attack damage
 	},
 	[ITEM_NAME_TO_ID.abyssalMask]: {
 		internalDataProperties: ['unmake'],
@@ -1208,7 +1217,22 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],
 		}),
-		// TODO calculate
+		calculateHooks: {
+			postTotal: {
+				// TODO use those values & check if works
+				handler(self, { bonusStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'actualizer'>).empowered) {
+						const bonusPercent = itemVariableValue('ManaCalc', { item: ITEMS_BY_NAME.actualizer, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
+						if (typeof bonusPercent.value === 'number') {
+							calculatedVariables.actualizerBuffPercent = bonusPercent.value;
+						} else {
+							console.warn('[ITEM_SPECIFICS actualizer] failed to calculate buff bonus percent', bonusPercent);
+						}
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.actualizer],
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
 		MAX_STACKS: ITEMS_BY_NAME.hexoptics?.dataValues.MaxRange,

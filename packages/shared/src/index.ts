@@ -102,6 +102,8 @@ export interface IStatsCalculationVariables {
 	hauntingGuiseBonusDamagePercent?: number;
 	/** bonus damage % gained from riftmaker's passive stacks, doesn't affect stats but is kept here */
 	riftmakerBonusDamagePercent?: number;
+	/** % increase of stuff from actualizer's passive, doesn't affect stats but is kept here */
+	actualizerBuffPercent?: number;
 	/** bonus damage % gained from shojin's passive stacks, doesn't affect stats but is kept here */
 	shojinBonusDamagePercent?: number;
 	/** ap gained from blackfire torch's passive */
