@@ -1231,11 +1231,11 @@ const colW = computed(() => {
 });
 
 function showRowTooltip(event: Event) {
-	((event.currentTarget as HTMLElement).lastElementChild as HTMLElement).showPopover();
+	((event.currentTarget as HTMLElement).nextElementSibling as HTMLElement).showPopover();
 }
 
 function hideRowTooltip(event: Event) {
-	((event.currentTarget as HTMLElement).lastElementChild as HTMLElement).hidePopover();
+	((event.currentTarget as HTMLElement).nextElementSibling as HTMLElement).hidePopover();
 }
 
 defineExpose({
@@ -1657,8 +1657,9 @@ defineExpose({
 							>
 							<span v-if="row.isUnknown">unknown</span>
 							{{ row.name }}
-							<button
+							<span
 								v-if="row.isCustom"
+								:aria-describedby="`${section.id}-${row.id}-tooltip-custom`"
 								@focus="showRowTooltip"
 								@mouseenter="showRowTooltip"
 								@mouseleave="hideRowTooltip"
@@ -1670,12 +1671,17 @@ defineExpose({
 									width="192"
 									height="192"
 								>
-								<p popover="hint" class="hover-tooltip">
-									this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
-								</p>
-							</button>
-							<button
+							</span>
+							<p
+								:id="`${section.id}-${row.id}-tooltip-custom`"
+								popover="hint"
+								class="hover-tooltip"
+							>
+								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
+							</p>
+							<span
 								v-if="row.additionalInfo"
+								:aria-describedby="`${section.id}-${row.id}-tooltip-info`"
 								@focus="showRowTooltip"
 								@mouseenter="showRowTooltip"
 								@mouseleave="hideRowTooltip"
@@ -1683,8 +1689,8 @@ defineExpose({
 							>
 								<span>additional info</span>
 								<Icon class="i-ph:info-fill" />
-								<p popover="hint" class="hover-tooltip" v-html="row.additionalInfo" />
-							</button>
+							</span>
+							<p :id="`${section.id}-${row.id}-tooltip-info`" popover="hint" class="hover-tooltip" v-html="row.additionalInfo" />
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
@@ -2274,6 +2280,7 @@ defineExpose({
 					> th {
 						--at-apply: 'hyphens-auto wrap-anywhere';
 						--ps: calc(2 * var(--control-btn-size));
+						anchor-scope: --parent;
 
 						&[colspan] {
 							--at-apply: 'ps-[calc(var(--table-ps)+var(--ps))]';
@@ -2285,16 +2292,14 @@ defineExpose({
 							--ms: calc(0.5 * (var(--ps) + var(--size)));
 						}
 
-						> span,
-						> button > span:first-child {
+						> span:not([aria-describedby]),
+						> span[aria-describedby] > span:first-child {
 							--at-apply: 'sr-only';
 						}
 
-						> button {
+						> span[aria-describedby] {
 							--at-apply: 'relative inline-block size-4.5 align-[-0.25rem] ms-0.5';
-							--popover-offset-y: var(--spacing) * 1.75;
 							anchor-name: --parent;
-							anchor-scope: --parent;
 
 							&:before {
 								--at-apply: 'absolute content-empty -inset-x-1 block-1.75 inset-bs-0 -translate-y-full';
@@ -2307,24 +2312,25 @@ defineExpose({
 							> .icon {
 								--at-apply: 'size-full text-blue-400';
 							}
+						}
 
-							> [popover] {
-								--at-apply: 'max-inline-120 inline-fit p-2 text-white pointer-events-auto select-text cursor-auto';
-								inset-block-end: calc(anchor(top) + var(--popover-offset-y));
-								position-anchor: --parent;
-								justify-self: anchor-center;
-								position-try: flip-block;
+						> span[aria-describedby] + [popover] {
+							--at-apply: 'max-inline-120 inline-fit p-2 text-white pointer-events-auto select-text cursor-auto';
+							--popover-offset-y: var(--spacing) * 1.75;
+							inset-block-end: calc(anchor(top) + var(--popover-offset-y));
+							position-anchor: --parent;
+							justify-self: anchor-center;
+							position-try: flip-block;
 
-								a {
-									--at-apply: 'text-blue-400 hoverable:underline';
-								}
+							a {
+								--at-apply: 'text-blue-400 hoverable:underline';
+							}
 
-								img {
-									--at-apply: 'inline-block size-4';
+							img {
+								--at-apply: 'inline-block size-4';
 
-									&[data-sprite-image] {
-										--at-apply: '-translate-y-px';
-									}
+								&[data-sprite-image] {
+									--at-apply: '-translate-y-px';
 								}
 							}
 						}
