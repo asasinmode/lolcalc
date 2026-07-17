@@ -561,6 +561,8 @@ export const CHAMPION_SPECIFICS = {
 		}),
 	},
 	Rammus: {
+		// TODO get w cancel variant spell_defensiveballcurlcancel_tooltip
+		// rammusdbc https://raw.communitydragon.org/latest/game/global/champions/champions.bin.json
 		setupData(self): { defensiveCurl: number } {
 			return {
 				defensiveCurl: clamp(0, self.internalData.value.defensiveCurl ?? 0, 1),
