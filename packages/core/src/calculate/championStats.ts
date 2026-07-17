@@ -134,8 +134,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
 	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
-	itemPassivesStats.tenacity = 1;
-	itemPassivesStats.slowResist = 1;
+	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
+		itemPassivesStats[stat] = 1;
+	}
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {

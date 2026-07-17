@@ -5,7 +5,7 @@
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IStatsCalculationResult } from '@lolcalc/shared';
-import type { IInternalDragonDataOf, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
+import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
@@ -1526,7 +1526,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
-		MAX_STACKS: Math.round(ITEMS_BY_NAME.terminus?.dataValues.PenPerHit / ITEMS_BY_NAME.terminus?.dataValues.PenMax),
+		MAX_STACKS: Math.round(ITEMS_BY_NAME.terminus?.dataValues.PenMax / ITEMS_BY_NAME.terminus?.dataValues.PenPerHit),
 		internalDataProperties: ['jxtpL', 'jxtpD'],
 		setupData(self) {
 			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.terminus].MAX_STACKS);
@@ -1554,7 +1554,29 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'ARMRMaxScaling', 'PenPerHit', 'PenMax', 'BuffDuration'],
 		}),
-		// TODO calculate
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					const { jxtpL, jxtpD } = self.internalItemData.value as IInternalItemDataOf<'terminus'>;
+					const penPerStack = ITEMS_BY_NAME.terminus?.dataValues.PenPerHit;
+
+					const totalPen = jxtpD * penPerStack;
+					itemPassivesStats.percentArmorPen = addMultiplicative(itemPassivesStats.percentArmorPen, totalPen);
+					itemPassivesStats.percentMagicPen = addMultiplicative(itemPassivesStats.percentMagicPen, totalPen);
+					calculatedVariables.terminusPercentagePen = totalPen;
+
+					const resistPerStack = itemVariableValue('ARMRPerHitScaling', { item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof resistPerStack.value === 'number') {
+						const totalResists = resistPerStack.value * jxtpL;
+						itemPassivesStats.armor += totalResists;
+						itemPassivesStats.magicResist += totalResists;
+						calculatedVariables.terminusResists = totalResists;
+					} else {
+						console.warn('[ITEM_SPECIFICS terminus] failed to calculate ', resistPerStack);
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.cosmicDrive]: {
 		internalDataProperties: ['spelldance'],
