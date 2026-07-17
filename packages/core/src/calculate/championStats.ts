@@ -3,7 +3,7 @@ import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { MISC } from '@lolcalc/data';
-import { ITEM_TO_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
+import { ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
 import { addMultiplicative, calculateMSCapPenalty } from './util.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
@@ -102,14 +102,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
-	itemBaseStats.tenacity = 1;
-	itemBaseStats.slowResist = 1;
+	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
+		itemBaseStats[stat] = 1;
+	}
 
 	for (const item of items.filter(Boolean)) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
-			if (statName === 'tenacity') {
-				/* item tenacity calculated according to [wiki formula](https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking) */
-				itemBaseStats.tenacity = addMultiplicative(itemBaseStats.tenacity, statValue);
+			if (MULTIPLICATIVE_CHAMPION_STATS.includes(statName)) {
+				itemBaseStats[statName] = addMultiplicative(itemBaseStats[statName], statValue);
 			} else {
 				/* hpRegen is stored in per second in item but per 5 seconds in champion/displayed */
 				itemBaseStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
@@ -128,8 +128,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 	itemBaseStats.attackSpeed = itemBaseStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
-	itemBaseStats.tenacity = 1 - itemBaseStats.tenacity;
-	itemBaseStats.slowResist = 1 - itemBaseStats.slowResist;
+	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
+		itemBaseStats[stat] = 1 - itemBaseStats[stat];
+	}
 
 	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
 	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
@@ -142,8 +143,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 	itemPassivesStats.attackSpeed = itemPassivesStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
-	itemPassivesStats.tenacity = 1 - itemPassivesStats.tenacity;
-	itemPassivesStats.slowResist = 1 - itemPassivesStats.slowResist;
+	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
+		itemPassivesStats[stat] = 1 - itemPassivesStats[stat];
+	}
 
 	/* non multiplier dragon stacks are done preItemTotal so adjust those early calculated stats here */
 	dragonStats.attackSpeed = (dragonStats.bonusAttackSpeedPercent ?? 0) * baseStats.attackSpeedRatio;
@@ -152,13 +154,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [
 		key,
-		key === 'slowResist' || key === 'tenacity'
+		MULTIPLICATIVE_CHAMPION_STATS.includes(key as IChampionStatName)
 			? addMultiplicative(1, value, itemPassivesStats[key as IChampionStatName])
 			: (value + itemPassivesStats[key as IChampionStatName]),
 	]),
 	) as IChampionStats;
-	itemTotalStats.tenacity = 1 - itemTotalStats.tenacity;
-	itemTotalStats.slowResist = 1 - itemTotalStats.slowResist;
+	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
+		itemTotalStats[stat] = 1 - itemTotalStats[stat];
+	}
 	calculatedVariables.apMultipliersBase += itemTotalStats.abilityPower;
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
@@ -192,7 +195,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	/* attack speed from level counts towards bonus */
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
-		if ((stat as IChampionStatName) === 'tenacity' || (stat as IChampionStatName === 'slowResist')) {
+		if (MULTIPLICATIVE_CHAMPION_STATS.includes(stat as IChampionStatName)) {
 			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(1, runeShardStats[stat as IMultiplicativeChampionStatName], dragonStats[stat as IMultiplicativeChampionStatName], itemTotalStats[stat as IMultiplicativeChampionStatName], championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0);
 		} else {
 			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)

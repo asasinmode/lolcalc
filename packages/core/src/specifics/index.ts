@@ -32,11 +32,13 @@ export const HOOK_PRIORITIES = {
 	postTotal: {
 		Ryze: 1,
 		/* should be before bloodmail */
-		Rammus: 10,
+		Rammus: 1,
 		/* should be after rammus */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
 		/* should be after bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
+		/* should be after Ryze */
+		[ITEM_NAME_TO_ID.actualizer]: 10,
 	},
 } satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;
 

@@ -74,6 +74,8 @@ export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
 	PercentOmnivampMod: 'omnivamp',
 };
 
+export const MULTIPLICATIVE_CHAMPION_STATS: IChampionStatName[] = ['slowResist', 'tenacity', 'percentArmorPen', 'percentMagicPen'];
+
 export const ITEM_SHOP_STAT_FILTERS = {
 	attackDamage: {
 		name: 'Attack damage',
