@@ -1247,8 +1247,8 @@ export const VARIABLE_CALCULATION_FNS = {
 		return rv;
 	},
 	ProductOfSubPartsCalculationPart(variable: IGameVariablesByType['ProductOfSubPartsCalculationPart'], whole, meta) {
-		const left = variableResolveFn(variable.mPart1)?.(variable.mPart1, whole, meta);
-		const right = variableResolveFn(variable.mPart2)?.(variable.mPart2, whole, meta);
+		const left = variable.mPart1 ? variableResolveFn(variable.mPart1)?.(variable.mPart1, whole, meta) : { value: 1 };
+		const right = variable.mPart2 ? variableResolveFn(variable.mPart2)?.(variable.mPart2, whole, meta) : { value: 2 };
 		if (typeof left?.value !== 'number' || typeof right?.value !== 'number') {
 			return;
 		}
@@ -1261,13 +1261,11 @@ export const VARIABLE_CALCULATION_FNS = {
 		const leftHasCalcFrom = left.calculatesFrom?.length;
 		const rightHasCalcFrom = right.calculatesFrom?.length;
 		if (leftHasCalcFrom && !rightHasCalcFrom) {
-			console.warn('[ProductOfSubPartsCalculationPart] debug left branch');
 			rv.calculatesFrom = left.calculatesFrom!;
 			for (const part of rv.calculatesFrom) {
 				multiplyCalculatePartValues(part, right.value);
 			}
 		} else if (!leftHasCalcFrom && rightHasCalcFrom) {
-			console.warn('[ProductOfSubPartsCalculationPart] debug right branch');
 			rv.calculatesFrom = right.calculatesFrom!;
 			for (const part of rv.calculatesFrom) {
 				multiplyCalculatePartValues(part, left.value);
@@ -1364,6 +1362,11 @@ interface IGameVariablesByType {
 }
 
 export function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
+	if (!variable) {
+		console.error('[variableResolveFn] got no variable');
+		return;
+	}
+
 	if ('__type' in variable && variable.__type in VARIABLE_CALCULATION_FNS) {
 		return VARIABLE_CALCULATION_FNS[variable.__type as keyof typeof VARIABLE_CALCULATION_FNS];
 	} else if ('mFormulaParts' in variable) {
@@ -1389,7 +1392,6 @@ export function variableResolveFn(variable: any): IHypotheticalVariableCalculati
 	}
 
 	console.warn('[variableResolveFn] unknown variable type', variable);
-	return undefined;
 }
 
 /** info in `MSTAT_TO_NAMED_STAT` and `resolveMStatWithFormula` */
