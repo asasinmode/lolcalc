@@ -155,7 +155,15 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
-		// TODO calculate
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if (!(self.internalItemData.value as IInternalItemDataOf<'staffOfFlowingWater'>).rapids) {
+						ITEM_SPECIFICS[ITEM_NAME_TO_ID.staffOfFlowingWater].calculatePassive(itemPassivesStats, calculatedVariables);
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.bandlepipesFanfare]: defineEffectSpecific<[fanfare: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bandlepipes),
