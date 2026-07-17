@@ -1017,6 +1017,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f3', 'Duration', 'AttackSpeedMin'],
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.staffOfFlowingWater]: {
 		internalDataProperties: ['rapids'],
@@ -1027,6 +1028,7 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { rapids: number }) {
 			return internalData.rapids;
 		},
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.bandlepipes]: {
 		FANFARE_MOVE_SPEED: itemVariableValue('MoveSpeed', { item: ITEMS_BY_NAME.bandlepipes }).value as number,
@@ -1038,6 +1040,9 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { fanfare: number }) {
 			return internalData.fanfare;
 		},
+		variables: defineVariables({
+			uninteresting: ['BuffDuration', 'MoveSpeed', 'AuraAttackSpeed'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { isRanged, itemPassivesStats }) {
@@ -1056,9 +1061,6 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		variables: defineVariables({
-			uninteresting: ['BuffDuration', 'MoveSpeed', 'AuraAttackSpeed'],
-		}),
 	},
 	[ITEM_NAME_TO_ID.protoplasmHarness]: {
 		internalDataProperties: ['pHLifeline'],
@@ -1139,6 +1141,7 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { oBarrage: number }) {
 			return internalData.oBarrage;
 		},
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.abyssalMask]: {
 		internalDataProperties: ['unmake'],
@@ -1178,6 +1181,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
 		MAX_STACKS: ITEMS_BY_NAME.hexoptics?.dataValues.MaxRange,
@@ -1402,17 +1406,6 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			return (self.internalItemData.value as { cConsumption: number }).cConsumption;
 		},
-		calculateHooks: {
-			preItemTotal: {
-				handler(self, { itemPassivesStats, itemStatIncreases }) {
-					const { cConsumption } = self.internalItemData.value as IInternalItemDataOf<'heartsteel'>;
-					itemPassivesStats.hp += cConsumption ?? 0;
-
-					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel] ??= {};
-					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod = cConsumption;
-				},
-			},
-		},
 		variables: defineVariables({
 			known: {
 				f4: [],
@@ -1438,6 +1431,17 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['TotalDemolishTime', 'BaseDamage', 'MaxHPRatio', 'DamageToMaxHealthRatio', 'HealthSizeThreshold', 'SizeAmount', 'SizeCap'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats, itemStatIncreases }) {
+					const { cConsumption } = self.internalItemData.value as IInternalItemDataOf<'heartsteel'>;
+					itemPassivesStats.hp += cConsumption ?? 0;
+
+					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel] ??= {};
+					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod = cConsumption;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		MAX_STACKS: ITEMS_BY_NAME.guinsoo?.dataValues.MaxStacks,
@@ -1499,6 +1503,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'ARMRMaxScaling', 'PenPerHit', 'PenMax', 'BuffDuration'],
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.cosmicDrive]: {
 		internalDataProperties: ['spelldance'],
@@ -1509,6 +1514,7 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { spelldance: number }) {
 			return internalData.spelldance;
 		},
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.endlessHunger]: {
 		internalDataProperties: ['feast'],
@@ -1595,6 +1601,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f4', 'LowHealthThreshold', 'ShieldDuration', 'BuffVamp'],
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.jakSho]: {
 		internalDataProperties: ['vbResistance'],
@@ -1709,11 +1716,13 @@ export const ITEM_SPECIFICS = {
 				};
 			},
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.doransShield]: {
 		variables: {
 			uninteresting: ['FlatHPRegenMod', 'RegenDuration', 'BonusDamageToMinions', 'RangeRegenMult'],
 		},
+		// TODO calculate? see if it adds to health regen
 	},
 	[ITEM_NAME_TO_ID.lichBane]: {
 		internalDataProperties: ['spActive'],
@@ -1819,6 +1828,12 @@ export const ITEM_SPECIFICS = {
 			const maxMissingHealthP = 1 - maxValueAt.value;
 			return ITEMS_BY_NAME.overlordsBloodmail?.dataValues.MissingHealthAD * Math.min(1, missingHealthP / maxMissingHealthP);
 		},
+		imgTextLabel: 'Retribution ad increase',
+		imgText(damageSource) {
+			return damageSource.stats.value.variables.bloodmailRetribution
+				? Math.round(damageSource.stats.value.variables.bloodmailRetribution)
+				: 0;
+		},
 		variables: defineVariables({
 			known: {
 				f1: [],
@@ -1893,12 +1908,6 @@ export const ITEM_SPECIFICS = {
 				},
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
-		},
-		imgTextLabel: 'Retribution ad increase',
-		imgText(damageSource) {
-			return damageSource.stats.value.variables.bloodmailRetribution
-				? Math.round(damageSource.stats.value.variables.bloodmailRetribution)
-				: 0;
 		},
 	},
 	[ITEM_NAME_TO_ID.steraksGage]: {
@@ -2133,13 +2142,6 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { fTempest: number }) {
 			return internalData.fTempest;
 		},
-		calculateHooks: {
-			preItemTotal: {
-				handler(_self, { itemPassivesStats }) {
-					itemPassivesStats.ultimateHaste += ITEMS_BY_NAME.zekesConvergence?.dataValues.UltimateHaste ?? 0;
-				},
-			},
-		},
 		variables: defineVariables({
 			known: {
 				f1: [],
@@ -2156,6 +2158,13 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'UltimateHaste', 'Duration', 'SlowAmount'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemPassivesStats }) {
+					itemPassivesStats.ultimateHaste += ITEMS_BY_NAME.zekesConvergence?.dataValues.UltimateHaste ?? 0;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
 		variables: defineVariables({
@@ -2171,6 +2180,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'f2', 'HealingIncrease'],
 		}),
+		// TODO calculate, idk if makes sense https://wiki.leagueoflegends.com/en-us/Spirit_Visage edge case for immortal path?
 	},
 	[ITEM_NAME_TO_ID.sunfireAegis]: {
 		imgTextLabel: '',
@@ -2377,16 +2387,9 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'BlockBase', 'WardenDamageMax'],
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.warmogsArmor]: {
-		calculateHooks: {
-			preItemTotal: {
-				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables }) {
-					calculatedVariables.warmogsVitality = itemBaseStats.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp;
-					itemPassivesStats.hp += calculatedVariables.warmogsVitality;
-				},
-			},
-		},
 		variables: defineVariables({
 			known: {
 				f1: [],
@@ -2408,6 +2411,14 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'HealthThreshold', 'OOCTimerChampion', 'HPAmp', 'OOCTimer'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables }) {
+					calculatedVariables.warmogsVitality = itemBaseStats.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp;
+					itemPassivesStats.hp += calculatedVariables.warmogsVitality;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.runaan]: {
 		variables: defineVariables({
@@ -2514,6 +2525,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'MaxBonusDamagePercent', 'MaxBonusHealth'],
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.nashorsTooth]: {
 		variables: defineVariables({
@@ -2603,6 +2615,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
 		}),
+		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.rocketbelt]: {
 		variables: defineVariables({
@@ -2655,6 +2668,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2', 'ImmobilizingAbilityAH', 'DamageAmp', 'DamageAmpDuration'],
 		}),
+		// TODO calculate, try to see if abilities have like a tag that then applies mandate?
 	},
 	[ITEM_NAME_TO_ID.forbiddenIdol]: {
 		variables: defineVariables({
