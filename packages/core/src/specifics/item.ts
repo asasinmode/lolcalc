@@ -4,6 +4,7 @@
 
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
+import type { IStatsCalculationResult } from '@lolcalc/shared';
 import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
@@ -1017,7 +1018,19 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f3', 'Duration', 'AttackSpeedMin'],
 		}),
-		// TODO calculate
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'ardentCenser'>).sanctify) {
+						ITEM_SPECIFICS[ITEM_NAME_TO_ID.ardentCenser].calculatePassive(itemPassivesStats);
+					}
+				},
+			},
+		},
+		calculatePassive(itemPassivesStats: IStatsCalculationResult['itemPassive']) {
+			itemPassivesStats.bonusAttackSpeedPercent += ITEMS_BY_NAME.ardentCenser?.dataValues.AttackSpeedMin;
+		},
+		// TODO calculate on hit
 	},
 	[ITEM_NAME_TO_ID.staffOfFlowingWater]: {
 		internalDataProperties: ['rapids'],

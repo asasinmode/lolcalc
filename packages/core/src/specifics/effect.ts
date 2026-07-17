@@ -136,7 +136,15 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
-		// TODO calculate
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }) {
+					if (!(self.internalItemData.value as IInternalItemDataOf<'ardentCenser'>).sanctify) {
+						ITEM_SPECIFICS[ITEM_NAME_TO_ID.ardentCenser].calculatePassive(itemPassivesStats);
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.flowingWaterRapids]: defineEffectSpecific<[isRapidsed: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.staffOfFlowingWater),
