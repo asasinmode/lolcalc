@@ -229,7 +229,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

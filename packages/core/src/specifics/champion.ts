@@ -277,12 +277,31 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Hwei: {
+		e: {
+			dataOverrides: {
+				isImmobilizing: true,
+			},
+		},
+	},
 	Irelia: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Irelia'>): number => (self.champion.value! as typeof IIrelia).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Irelia.MAX_PASSIVE_STACKS(self)),
 			};
+		},
+		r: {
+			dataOverrides: {
+				isImmobilizing: false,
+			},
+		},
+	},
+	JarvanIV: {
+		r: {
+			dataOverrides: {
+				isImmobilizing: true,
+			},
 		},
 	},
 	Jax: {
@@ -459,6 +478,13 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	KSante: {
+		q: {
+			dataOverrides: {
+				isImmobilizing: false,
+			},
+		},
+	},
 	LeeSin: {
 		setupData(self): { hasPassiveStack: number } {
 			return {
@@ -559,6 +585,16 @@ export const CHAMPION_SPECIFICS = {
 				};
 			},
 		}),
+		q: {
+			dataOverrides: {
+				isImmobilizing: false,
+			},
+		},
+		r: {
+			dataOverrides: {
+				isImmobilizing: true,
+			},
+		},
 	},
 	Rammus: {
 		// TODO get w cancel variant spell_defensiveballcurlcancel_tooltip
@@ -645,6 +681,16 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 	},
+	RekSai: {
+		w: {
+			// TODO not in reksai.json but checked to be affected by mandate, make sure to handle
+			1: {
+				dataOverrides: {
+					isImmobilizing: true
+				}
+			}
+		}
+	},
 	Rell: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Rell'>): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacksOnTarget: number } {
@@ -660,6 +706,13 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Rengar.MAX_PASSIVE_STACKS),
 				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
+		},
+	},
+	Riven: {
+		q: {
+			dataOverrides: {
+				isImmobilizing: false,
+			},
 		},
 	},
 	Rumble: {
@@ -851,6 +904,11 @@ export const CHAMPION_SPECIFICS = {
 				isPassiveActive: clamp(0, Math.round(self.internalData.value.isPassiveActive ?? 0), 1),
 			};
 		},
+		w: {
+			dataOverrides: {
+				isImmobilizing: false,
+			},
+		},
 	},
 	Senna: {
 		setupData(self): { passiveStacks: number } {
@@ -880,6 +938,11 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), CHAMPION_SPECIFICS.Singed.MAX_PASSIVE_STACKS),
 			};
+		},
+		w: {
+			dataOverrides: {
+				isImmobilizing: true,
+			},
 		},
 	},
 	Smolder: {
@@ -916,6 +979,11 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
 			};
+		},
+		e: {
+			dataOverrides: {
+				isImmobilizing: true,
+			},
 		},
 	},
 	Syndra: {
@@ -969,6 +1037,7 @@ export const CHAMPION_SPECIFICS = {
 		}),
 	},
 	Udyr: {
+		// TODO shojin works on all abilities but ultimate haste on none
 		setupData(self): { hasPassiveStack: number } {
 			return {
 				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
@@ -1044,9 +1113,14 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Yasuo: {
+		e: {
+			dataOverrides: {
+				isImmobilizing: false,
+			},
+		},
 		q: {
 			dataOverrides: {
-				isImmobilzing: false,
+				isImmobilizing: false,
 			},
 		},
 	},
@@ -1104,7 +1178,7 @@ export type IChampionAbilityVariantSpecific = IProviderGroupImageText & {
 };
 
 interface IChampionAbilityVariantDataOverrides {
-	isImmobilzing?: boolean;
+	isImmobilizing?: boolean;
 }
 
 /** wrapper around `defineVariables` for types on champion specific's variables */

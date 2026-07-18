@@ -1915,9 +1915,9 @@ function championAbilityVariant(
 		abilityOrVariantSpecific = (abilityOrVariantSpecific as IChampionAbilitySpecific)[variantIndex];
 	}
 
-	if (abilityOrVariantSpecific?.dataOverrides?.isImmobilzing) {
+	if (abilityOrVariantSpecific?.dataOverrides?.isImmobilizing) {
 		variant.isImmobilizing = true;
-	} else if (abilityOrVariantSpecific?.dataOverrides?.isImmobilzing === undefined && isImmobilizingAbilityVariant(abilityKey, variant.dataValues, mSpellTags, variantData.BotData)) {
+	} else if (abilityOrVariantSpecific?.dataOverrides?.isImmobilizing === undefined && isImmobilizingAbilityVariant(abilityKey, variant.dataValues, mSpellTags, variantData.BotData)) {
 		variant.isImmobilizing = true;
 	}
 
