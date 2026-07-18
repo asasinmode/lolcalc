@@ -309,7 +309,8 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "Damage"
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

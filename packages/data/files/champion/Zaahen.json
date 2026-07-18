@@ -157,7 +157,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

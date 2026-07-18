@@ -68,7 +68,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -217,7 +218,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

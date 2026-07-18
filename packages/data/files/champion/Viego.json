@@ -214,7 +214,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -340,7 +341,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

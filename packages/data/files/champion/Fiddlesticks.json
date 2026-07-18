@@ -74,7 +74,8 @@
 							},
 							"mModifiedGameCalculation": "TotalPercentHealthDamage"
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

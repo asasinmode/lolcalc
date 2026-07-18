@@ -108,7 +108,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -182,7 +183,8 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": -1
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -328,7 +330,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

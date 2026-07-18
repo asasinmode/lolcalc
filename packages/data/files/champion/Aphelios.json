@@ -578,7 +578,8 @@
 							],
 							"mPrecision": 2
 						}
-					}
+					},
+					"isImmobilizing": true
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",

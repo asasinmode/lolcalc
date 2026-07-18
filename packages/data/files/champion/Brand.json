@@ -64,7 +64,8 @@
 					},
 					"effectAmount": {
 						"0": [70, 70, 100, 130, 160, 190, 190]
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

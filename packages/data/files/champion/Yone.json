@@ -90,7 +90,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -302,7 +303,8 @@
 							},
 							"mModifiedGameCalculation": "Damage"
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

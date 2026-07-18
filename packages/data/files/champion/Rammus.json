@@ -95,7 +95,8 @@
 					},
 					"effectAmount": {
 						"9": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -269,7 +270,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -377,7 +379,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

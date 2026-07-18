@@ -61,7 +61,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -165,7 +166,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -270,7 +272,8 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "DamagePerSecond"
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

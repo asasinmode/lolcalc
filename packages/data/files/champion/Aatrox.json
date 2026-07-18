@@ -117,7 +117,8 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "QDamage"
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -162,7 +163,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

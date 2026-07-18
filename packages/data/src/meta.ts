@@ -137,3 +137,21 @@ export const ITEM_SHOP_STAT_FILTERS = {
 } as const satisfies Record<string, { name: string; filter: (item: IItem) => boolean }>;
 
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
+
+export const ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS: string[] = ['Trait_ImmobilizingCCSpell'];
+
+/*
+ * taken from llm, might need adjusting. Don't know where it's from
+ * other cc abilities are detected based on `mSpellTags`
+ */
+export const ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS: number
+	= (2 ** 16) // pull (Diana R, Orianna R)
+		| (2 ** 22) // knockback (Milio Q, Briar E)
+		| (2 ** 24) // knockup (Rammus R, Alistar Q)
+		| (2 ** 11) // stun (ASol R, etc.)
+		| (2 ** 12) // root
+		| (2 ** 13) // fear
+		| (2 ** 14); // charm / displacement (airborne)
+
+/** used alongside `ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS` */
+export const ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS = (2 ** 16) | (2 ** 22) | (2 ** 24);

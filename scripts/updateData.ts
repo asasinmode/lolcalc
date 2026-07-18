@@ -21,7 +21,7 @@ import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc.ts';
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
-import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
+import { ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS, ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS, ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS, ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { AbilityType, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import { xxh3 } from '@node-rs/xxhash';
@@ -1835,7 +1835,7 @@ function championAbilityVariant(
 		throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
 	}
 
-	const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
+	const { mImgIconName, DataValues, mSpellCalculations, mSpellTags, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
 
 	if (variantIndex === 0) {
 		if (!mClientData) {
@@ -1906,7 +1906,12 @@ function championAbilityVariant(
 			: undefined,
 		spellCalculations: cleanupObject(mSpellCalculations),
 		effectAmount: cleanupObject(mEffectAmount),
+		isImmobilizing: undefined,
 	} as IChampionAbilityVariant;
+
+	if (isImmobilizingAbilityVariant(abilityKey, variant.dataValues, mSpellTags, variantData.BotData)) {
+		variant.isImmobilizing = true;
+	}
 
 	/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
 	variant.name = mLocKeys.keyName;
@@ -1920,6 +1925,46 @@ function championAbilityVariant(
 	}
 
 	return [variant, maxLevel];
+}
+
+function isImmobilizingAbilityVariant(abilityKey: IChampionAbilityKey, dataValues?: IChampionAbilityVariant['dataValues'], mSpellTags?: string[], botData?: any): boolean {
+	if (abilityKey === 'passive' || !(mSpellTags || botData)) {
+		return false;
+	}
+
+	if (mSpellTags?.some(tag => ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS.includes(tag))) {
+		return true;
+	}
+
+	for (const key in botData) {
+		if (!Array.isArray(botData[key])) {
+			continue;
+		}
+
+		for (const entry of botData[key]) {
+			if (!entry || typeof entry.EffectTag !== 'number') {
+				continue;
+			}
+
+			if (entry.EffectTag & ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS) {
+				return true;
+			}
+
+			/*
+			 * most of the actual immobilzing spells should have been caught before this, through displacement flag or mSpellTags but this seems to be needed to catch ASol R and detect things like Annie R, which match the cc flag but don't have a data value that would be commonly used for cc duration
+			 */
+			if ((entry.EffectTag & ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS)) {
+				const durationNames = ['StunDuration', 'RootDuration', 'FearDuration', 'CharmDuration'];
+				for (const durationName of durationNames) {
+					if (dataValues?.[durationName]) {
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 /**

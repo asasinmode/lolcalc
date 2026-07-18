@@ -308,7 +308,8 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

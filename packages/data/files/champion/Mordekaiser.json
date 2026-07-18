@@ -201,7 +201,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -221,7 +222,8 @@
 						"StatStealPercentScalar": [0.13, 0.13, 0.13, 0.13, 0.13, 0.13, 0.13],
 						"ZoneRadius": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
 						"GhostAPRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

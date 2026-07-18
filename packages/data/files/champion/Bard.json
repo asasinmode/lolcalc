@@ -72,7 +72,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -204,7 +205,8 @@
 					"extendedVariables": [],
 					"dataValues": {
 						"RStasisDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

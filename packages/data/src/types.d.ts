@@ -92,6 +92,8 @@ export interface IChampionAbilityVariant {
 	name: string;
 	image: string;
 	mana?: number[];
+	dataKey: string;
+	objectName: string;
 	cooldownTime?: number[];
 	// TODO not sure if still needed, Aphelios variants use it maybe?
 	// /** if present, means the variant uses the tooltip of another variant at the specified index */
@@ -114,8 +116,7 @@ export interface IChampionAbilityVariant {
 	dataValues?: any;
 	spellCalculations?: any;
 	effectAmount?: any;
-	dataKey: string;
-	objectName: string;
+	isImmobilizing?: boolean;
 }
 
 type IDataShards = typeof IRuneData['data']['shards'];

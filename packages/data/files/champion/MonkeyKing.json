@@ -275,7 +275,8 @@
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "MonsterCap"
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

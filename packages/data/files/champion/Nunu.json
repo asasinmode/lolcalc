@@ -200,7 +200,8 @@
 							],
 							"mPrecision": 2
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -274,7 +275,8 @@
 							],
 							"mPrecision": 1
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

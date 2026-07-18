@@ -66,7 +66,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -278,7 +279,8 @@
 					"dataValues": {
 						"BerserkDuration": [0.75, 1.25, 1.75, 2.25, 2.75, 3.25, 3.75],
 						"BonusAttackSpeed": [1, 1, 1, 1, 1, 1, 1]
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

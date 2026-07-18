@@ -65,7 +65,8 @@
 					},
 					"effectAmount": {
 						"2": [2, 2, 2, 2, 2, 2, 2]
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

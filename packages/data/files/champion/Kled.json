@@ -101,7 +101,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -320,7 +321,8 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},

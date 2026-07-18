@@ -284,7 +284,8 @@
 							},
 							"mModifiedGameCalculation": "SmallSharkDamage"
 						}
-					}
+					},
+					"isImmobilizing": true
 				}
 			]
 		},
