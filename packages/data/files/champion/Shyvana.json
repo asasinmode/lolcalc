@@ -249,7 +249,7 @@
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mModifiedGameCalculation": "MoveSpeed"
 						},
-						"{f468ef05}": {
+						"Calc_Missing_Health_Heal": {
 							"mFormulaParts": [
 								{
 									"mStartValue": 0.04,
@@ -259,7 +259,7 @@
 							],
 							"mDisplayAsPercent": true
 						},
-						"{b35447ff}": {
+						"Calc_Base_Heal": {
 							"mFormulaParts": [
 								{
 									"mStartValue": 60,
@@ -391,7 +391,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
 						},
-						"{bb85c3b6}": {
+						"Calc_Max_Health_Dragon_Damage": {
 							"mMultiplier": {
 								"mDataValue": "DamageDragonMod"
 							},

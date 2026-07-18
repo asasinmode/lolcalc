@@ -98,7 +98,7 @@
 					"objectName": "Crystallize",
 					"dataKey": "Characters/Anivia/Spells/CrystallizeAbility/Crystallize",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_w.png",
-					"tooltip": "Anivia summons a wall of ice @Effect2Amount@ units wide. The wall lasts for @Effect1Amount@ seconds before it melts.",
+					"tooltip": "Anivia summons a wall of ice @WallWidth@ units wide. The wall lasts for @WallDuration@ seconds before it melts.",
 					"extendedVariables": [
 						{
 							"name": "Effect2Amount",

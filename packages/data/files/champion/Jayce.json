@@ -356,15 +356,15 @@
 									"mBreakpoints": [
 										{
 											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 10
+											"mAdditionalBonusAtThisLevel": 7
 										},
 										{
 											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 10
+											"mAdditionalBonusAtThisLevel": 7
 										},
 										{
 											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 10
+											"mAdditionalBonusAtThisLevel": 7
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -401,7 +401,7 @@
 					"tooltip": "Jayce can swap between melee and ranged weapons using <spellName>Mercury Cannon / Mercury Hammer</spellName> starting from level 1. Swapping weapons also swaps all his Abilities and grants him <speed>@FlatMovementSpeed@ Move Speed</speed> for @MovementSpeedDuration@ seconds.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"FlatMovementSpeed": [40, 40, 40, 40, 40, 40, 40],
+						"FlatMovementSpeed": [30, 30, 30, 30, 30, 30, 30],
 						"MovementSpeedDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					}
 				}

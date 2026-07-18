@@ -1,5 +1,5 @@
 {
-	"version": "16.13.1",
+	"version": "16.14.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -1747,8 +1747,8 @@
 			"searchString": "protoplasmharness;health;movement;tenacity;abilityhaste",
 			"epicness": 5,
 			"gold": {
-				"total": 2500,
-				"sell": 1750
+				"total": 2600,
+				"sell": 1820
 			},
 			"image": "2525.png",
 			"from": [
@@ -1778,7 +1778,7 @@
 				"TotalHealthRegen": {
 					"mFormulaParts": [
 						{
-							"mStartValue": 200,
+							"mStartValue": 100,
 							"mEndValue": 400,
 							"__type": "ByCharLevelInterpolationCalculationPart"
 						},
@@ -1799,7 +1799,7 @@
 				"MaxHealthGain": {
 					"mFormulaParts": [
 						{
-							"mStartValue": 200,
+							"mStartValue": 100,
 							"mEndValue": 300,
 							"__type": "ByCharLevelInterpolationCalculationPart"
 						}
@@ -2968,6 +2968,7 @@
 				"2525",
 				"6617",
 				"3065",
+				"3152",
 				"3119",
 				"3190",
 				"3222",
@@ -4156,7 +4157,6 @@
 				"3115",
 				"3003",
 				"3107",
-				"3152",
 				"3137",
 				"8010",
 				"6616",
@@ -5197,7 +5197,7 @@
 			"image": "3152.png",
 			"from": [
 				"3145",
-				"3108",
+				"3067",
 				"1028"
 			],
 			"itemGroups": [
@@ -5207,12 +5207,12 @@
 				"mage": true
 			},
 			"stats": {
-				"FlatHPPoolMod": 300,
-				"FlatMagicDamageMod": 70,
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 60,
 				"AbilityHasteMod": 20
 			},
 			"dataValues": {
-				"Cooldown": 40,
+				"Cooldown": 50,
 				"BaseDamage": 100,
 				"APRatio": 0.1
 			},
@@ -5674,8 +5674,8 @@
 			"dataValues": {
 				"OmnivampOnTakedown": 0.006,
 				"MaxStacks": 10,
-				"DamageMod": 0.05,
-				"HealingMod": 0.15
+				"DamageMod": 0.04,
+				"HealingMod": 0.12
 			}
 		},
 		"3170": {

@@ -21,7 +21,7 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 55,
-		"attackdamageperlevel": 2.5,
+		"attackdamageperlevel": 3,
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.65,
 		"attackspeedratio": 0.65

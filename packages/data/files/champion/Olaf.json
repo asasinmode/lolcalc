@@ -239,7 +239,7 @@
 								}
 							]
 						},
-						"{30412ba3}": {
+						"HealthCostCalc": {
 							"mMultiplier": {
 								"mDataValue": "HealthCostPercent"
 							},

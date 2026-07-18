@@ -78,7 +78,7 @@
 								}
 							]
 						},
-						"{a06afe5e}": {
+						"TotalDamageMonster": {
 							"mMultiplier": {
 								"mSubparts": [
 									{
@@ -268,7 +268,7 @@
 								}
 							]
 						},
-						"{929bc6f6}": {
+						"BonusMonsterDmg": {
 							"mFormulaParts": [
 								{
 									"mNumber": 75,

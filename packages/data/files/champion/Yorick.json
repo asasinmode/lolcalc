@@ -249,7 +249,6 @@
 						"RRadius": [700, 700, 700, 700, 700, 700, 700],
 						"RSummonDelay": [1, 1, 1, 1, 1, 1, 1],
 						"RControlTime": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
-						"CherryMaidenHealthMod": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"MinionDamageTakenModifier": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"MaidenHealthRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"MaidenADRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
