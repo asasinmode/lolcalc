@@ -1826,7 +1826,6 @@ export const ITEM_SPECIFICS = {
 		variables: {
 			uninteresting: ['FlatHPRegenMod', 'RegenDuration', 'BonusDamageToMinions', 'RangeRegenMult'],
 		},
-		// TODO calculate? see if it adds to health regen
 	},
 	[ITEM_NAME_TO_ID.lichBane]: {
 		internalDataProperties: ['spActive'],
