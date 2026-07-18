@@ -1584,7 +1584,7 @@ export const ITEM_SPECIFICS = {
 						itemPassivesStats.magicResist += totalResists;
 						calculatedVariables.terminusResists = totalResists;
 					} else {
-						console.warn('[ITEM_SPECIFICS terminus] failed to calculate ', resistPerStack);
+						console.warn('[ITEM_SPECIFICS terminus] failed to calculate resists per stack', resistPerStack);
 					}
 				},
 			},
@@ -1599,7 +1599,21 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { spelldance: number }) {
 			return internalData.spelldance;
 		},
-		// TODO calculate
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'cosmicDrive'>).spelldance) {
+						const moveSpeed = itemVariableValue('MovespeedAmount', { item: ITEMS_BY_NAME.cosmicDrive });
+
+						if (typeof moveSpeed.value === 'number') {
+							itemPassivesStats.moveSpeed += moveSpeed.value;
+						} else {
+							console.warn('[ITEM_SPECIFICS cosmic drive] failed to calculate move speed', moveSpeed);
+						}
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.endlessHunger]: {
 		internalDataProperties: ['feast'],
