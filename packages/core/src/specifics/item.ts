@@ -1030,7 +1030,6 @@ export const ITEM_SPECIFICS = {
 		calculatePassive(itemPassivesStats: IStatsCalculationResult['itemPassive']) {
 			itemPassivesStats.bonusAttackSpeedPercent += ITEMS_BY_NAME.ardentCenser?.dataValues.AttackSpeedMin;
 		},
-		// TODO calculate on hit
 	},
 	[ITEM_NAME_TO_ID.staffOfFlowingWater]: {
 		internalDataProperties: ['rapids'],
@@ -1177,7 +1176,6 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		// TODO calculate attack damage
 	},
 	[ITEM_NAME_TO_ID.abyssalMask]: {
 		internalDataProperties: ['unmake'],
@@ -1769,7 +1767,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
-	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific, // TODO calculate passive
+	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific, // TODO calculate passive, store healing strength increase in champion stats from stuff in here? https://wiki.leagueoflegends.com/en-us/Healing#Items https://wiki.leagueoflegends.com/en-us/Heal_and_shield_power#Notes
 	[ITEM_NAME_TO_ID.rabadon]: {
 		AP_MULTIPLIER: ITEMS_BY_NAME.rabadon?.dataValues.APAmp,
 		calculateHooks: {
@@ -1823,7 +1821,6 @@ export const ITEM_SPECIFICS = {
 				};
 			},
 		}),
-		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.doransShield]: {
 		variables: {
@@ -2494,7 +2491,6 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'BlockBase', 'WardenDamageMax'],
 		}),
-		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.warmogsArmor]: {
 		variables: defineVariables({
@@ -2632,7 +2628,6 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'MaxBonusDamagePercent', 'MaxBonusHealth'],
 		}),
-		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.nashorsTooth]: {
 		variables: defineVariables({
@@ -2722,7 +2717,6 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
 		}),
-		// TODO calculate
 	},
 	[ITEM_NAME_TO_ID.rocketbelt]: {
 		variables: defineVariables({
@@ -2801,7 +2795,6 @@ export const ITEM_SPECIFICS = {
 			calculate() {
 				return {
 					f5: { value: 0 },
-					// TODO + same for steelcaps
 					AttackDamageReduced: { value: 123 },
 				};
 			},

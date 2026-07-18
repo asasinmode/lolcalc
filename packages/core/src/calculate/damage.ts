@@ -1,5 +1,25 @@
 import type { IChampionStats } from '@lolcalc/shared';
 
+/** TODO intended to be a computed with everything related to source (and maybe takes in the target too, or that might be another separate thing) damage dealing */
+export function championDamage() {
+	// total damage multipliers. known multiplicative - haunting guise and items it builds into. immortal path somewhere
+	// actualizer
+	// knight's vow damage reduction
+	// vulnerable effect damage taken increase effect
+	// randuin's omen
+	// warden's mail
+	// steelcaps/armored advance
+	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
+	// ldr
+}
+
+/** TODO basic aa calc? not sure about the interface yet */
+export function basicAttack() {
+	// stuff from championDamage
+	// kraken slayer
+	// check tiamat items damage
+}
+
 export function calculateDamage(
 	rawDamage: number,
 	type: IDamageType,

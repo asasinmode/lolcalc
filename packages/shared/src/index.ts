@@ -79,7 +79,6 @@ export interface IStatsCalculationResult {
 	miscDebug: IStatsCalculationMiscDebug;
 }
 
-// TODO maybe make more elaborate, like a record of strings where keys are appropriate stringified GameAbilityId
 /** the variables calculated by various things, like riftmaker's void infusion */
 export interface IStatsCalculationVariables {
 	/** if mid quest is selected it will be the % the quest reward gives (`0.08`) */
