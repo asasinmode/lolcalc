@@ -35,6 +35,8 @@
 					"objectName": "TaricQ",
 					"dataKey": "Characters/Taric/Spells/TaricQAbility/TaricQ",
 					"image": "assets/characters/taric/hud/icons2d/taric_q.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @Effect6Amount@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @Effect6Amount@ stacks).",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_taricmaxhealing"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
 						"Recharge": [15, 15, 15, 15, 15, 15, 15],
 						"HealingPerStackBase": [25, 25, 25, 25, 25, 25, 25],
@@ -121,6 +121,8 @@
 					"objectName": "TaricW",
 					"dataKey": "Characters/Taric/Spells/TaricWAbility/TaricW",
 					"image": "assets/characters/taric/hud/icons2d/taric_w.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Taric gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and forms a tether between him and the ally bound by this Ability. As long as they are near each other, the ally gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and Taric casts all his Abilities from both himself and his linked ally.<br><br><spellPassive>Active: </spellPassive>Taric binds to an ally champion, granting a <shield>@Effect2Amount@% max Health Shield</shield> for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
@@ -132,8 +134,6 @@
 							"nameOverride": "spell_listtype_taricshieldratio"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
 						"ArmorBonusPercentage": [0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11]
 					},
@@ -165,6 +165,8 @@
 					"objectName": "TaricE",
 					"dataKey": "Characters/Taric/Spells/TaricEAbility/TaricE",
 					"image": "assets/characters/taric/hud/icons2d/taric_e.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"tooltip": "Taric projects a beam of starlight, bursting after @Effect3Amount@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @Effect2Amount@ seconds.",
 					"extendedVariables": [
 						{
@@ -172,8 +174,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
@@ -211,10 +211,10 @@
 					"objectName": "TaricR",
 					"dataKey": "Characters/Taric/Spells/TaricRAbility/TaricR",
 					"image": "assets/characters/taric/hud/icons2d/taric_r.png",
-					"tooltip": "Taric calls down protection from the heavens. After @InitialDelay@ seconds, nearby ally champions become invulnerable for @InvulnDuration@ seconds.",
-					"extendedVariables": [],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [210, 180, 150, 120, 90, 60, 30],
+					"tooltip": "Taric calls down protection from the heavens. After @InitialDelay@ seconds, nearby ally champions become invulnerable for @InvulnDuration@ seconds.",
+					"extendedVariables": [],
 					"dataValues": {
 						"InitialDelay": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"InvulnDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]

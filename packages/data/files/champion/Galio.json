@@ -35,6 +35,8 @@
 					"objectName": "GalioQ",
 					"dataKey": "Characters/Galio/Spells/GalioQAbility/GalioQ",
 					"image": "assets/characters/galio/hud/icons2d/galio_q.png",
+					"mana": [60, 65, 70, 75, 80, 80],
+					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 80],
-					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
 						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
 						"SuperQDuration": [2, 2, 2, 2, 2, 2, 2],
@@ -111,6 +111,8 @@
 					"objectName": "GalioW",
 					"dataKey": "Characters/Galio/Spells/GalioWAbility/GalioW",
 					"image": "assets/characters/galio/hud/icons2d/galio_w.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Galio gains a <shield>@TotalPassiveShield@ Magic Shield</shield> after not taking damage for @PassiveShieldOOCTimer@ seconds.<br><br><charge>Begin Charging:</charge> Galio reduces incoming magic damage by @MagicDamageReduction@ and incoming physical damage by @PhysicalDamageReduction@ and <status>Slows</status> himself by @SelfSlowPercent@%.<br><br><release>Release:</release> Galio <status>Taunts</status> enemy champions for between @CCDurationMin@ to @CCDurationMax@ seconds, deals between <magicDamage>@MinTotalDamage@</magicDamage> and <magicDamage>@MaxTotalDamage@ magic damage</magicDamage>, and refreshes the damage reduction for @DRLingerDuration@ seconds. Taunt duration, damage, and range increase with charge time.",
 					"extendedVariables": [
 						{
@@ -130,8 +132,6 @@
 							"nameOverride": "spell_listtype_maximumdamage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
 						"MinimumWBaseDamage": [10, 20, 30, 40, 50, 60, 70],
 						"MaximumWBaseDamage": [30, 60, 90, 120, 150, 180, 210],
@@ -254,6 +254,8 @@
 					"objectName": "GalioE",
 					"dataKey": "Characters/Galio/Spells/GalioEAbility/GalioE",
 					"image": "assets/characters/galio/hud/icons2d/galio_e.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for @KnockupDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>@PVEDamage@ magic damage</magicDamage>.<br><br>Galio's dash stops on hitting terrain.",
 					"extendedVariables": [
 						{
@@ -261,8 +263,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
 						"BaseDamage": [65, 100, 135, 170, 205, 240, 275],
 						"KnockupDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
@@ -299,6 +299,8 @@
 					"objectName": "GalioR",
 					"dataKey": "Characters/Galio/Spells/GalioRAbility/GalioR",
 					"image": "assets/characters/galio/hud/icons2d/galio_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for @TemporaryWShieldDuration@ seconds. Galio then flies to his landing zone.<br><br>When Galio lands, he <status>Knocks Up</status> for @StunDurationOuter@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -309,8 +311,6 @@
 							"name": "CastRange"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"dataValues": {
 						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
 						"StunDurationOuter": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],

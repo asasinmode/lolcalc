@@ -35,6 +35,8 @@
 					"objectName": "KindredQ",
 					"dataKey": "Characters/Kindred/Spells/KindredQAbility/KindredQ",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_q.png",
+					"mana": [35, 35, 35, 35, 35, 35],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @Effect8Amount@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_kindredqcooldowninw"
 						}
 					],
-					"mana": [35, 35, 35, 35, 35, 35],
-					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"dataValues": {
 						"DashSpeed": [500, 500, 500, 500, 500, 500, 500],
 						"DashSpeedScaling": [12, 12, 12, 12, 12, 12, 12],
@@ -106,6 +106,8 @@
 					"objectName": "KindredW",
 					"dataKey": "Characters/Kindred/Spells/KindredWAbility/KindredW",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_w.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [19, 18, 17, 16, 15, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>@AttackHeal@ Health</healing> based on their missing Health.<br><br><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>@BaseWolfDamage@</magicDamage> plus <magicDamage>@PercentWolfDamage@ current Health magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -113,8 +115,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [19, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
 						"LambToWolfAttackSpeedConversionPercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"RingRange": [800, 800, 800, 800, 800, 800, 800],
@@ -191,6 +191,7 @@
 					"objectName": "KindredEWrapper",
 					"dataKey": "Characters/Kindred/Spells/KindredEWrapperAbility/KindredEWrapper",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_e.png",
+					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
 					"tooltip": "Kindred weakens an enemy, <status>Slowing</status> them by @TotalSlow@% for @SlowDuration@ second.<br><br>Kindred's third Attack against the target within @TotalDuration@ seconds of each other directs Wolf to pounce on the enemy, dealing an additional <physicalDamage>@BaseBiteDamage@</physicalDamage> plus <physicalDamage>@PercentBiteDamage@ missing Health physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -198,7 +199,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
 					"dataValues": {
 						"MonsterCap": [200, 200, 200, 200, 200, 200, 200],
 						"BaseDamage": [50, 80, 110, 140, 170, 200, 230],
@@ -329,6 +329,8 @@
 					"objectName": "KindredR",
 					"dataKey": "Characters/Kindred/Spells/KindredRAbility/KindredR",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"tooltip": "Kindred blesses the ground for @Effect2Amount@ seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br><br>When the blessing ends, all units inside heal for <healing>@Effect1Amount@ Health</healing>.",
 					"extendedVariables": [
 						{
@@ -336,8 +338,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"dataValues": {
 						"HealFlat": [150, 225, 300, 375, 450, 525, 600],
 						"BuffDuration": [4, 4, 4, 4, 4, 4, 4],

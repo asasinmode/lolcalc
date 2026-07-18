@@ -35,6 +35,8 @@
 					"objectName": "KayleQ",
 					"dataKey": "Characters/Kayle/Spells/KayleQAbility/KayleQ",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_q.png",
+					"mana": [60, 70, 80, 90, 100, 100],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ seconds, and removing <scaleArmor>@ShredPercent@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds from the target and enemies behind them.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 70, 80, 90, 100, 100],
-					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
 						"ManaRefundPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"CastDelay": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
@@ -98,6 +98,8 @@
 					"objectName": "KayleW",
 					"dataKey": "Characters/Kayle/Spells/KayleWAbility/KayleW",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_w.png",
+					"mana": [70, 75, 80, 85, 90, 90],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -112,8 +114,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 90],
-					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
 						"Heal": [30, 55, 80, 105, 130, 155, 180],
 						"Haste": [0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44],
@@ -157,6 +157,7 @@
 					"objectName": "KayleE",
 					"dataKey": "Characters/Kayle/Spells/KayleEAbility/KayleE",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_e.png",
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 8],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
 					"extendedVariables": [
 						{
@@ -168,7 +169,6 @@
 							"nameOverride": "spell_listtype_missinghealthdamage"
 						}
 					],
-					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 8],
 					"dataValues": {
 						"PassiveDamage": [15, 15, 20, 25, 30, 35, 40],
 						"ActiveExecutePercent": [7.5, 8, 8.5, 9, 9.5, 10, 10.5],
@@ -235,6 +235,8 @@
 					"objectName": "KayleR",
 					"dataKey": "Characters/Kayle/Spells/KayleRAbility/KayleR",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_r.png",
+					"mana": [100, 50, 0, 0, 0, 0],
+					"cooldownTime": [160, 160, 120, 80, 80, 80, 80],
 					"tooltip": "Kayle makes an allied champion Invulnerable for @InvulnDuration@ seconds and then purifies the area around them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
 					"extendedVariables": [
 						{
@@ -249,8 +251,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [100, 50, 0, 0, 0, 0],
-					"cooldownTime": [160, 160, 120, 80, 80, 80, 80],
 					"dataValues": {
 						"Damage": [100, 200, 300, 400, 500, 600, 700],
 						"InvulnDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
@@ -287,9 +287,9 @@
 					"objectName": "KaylePassive",
 					"dataKey": "Characters/Kayle/Spells/KaylePassiveAbility/KaylePassive",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_KaylePassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"LevelForPassiveRank0": [1, 1, 1, 1, 1, 1, 1],
 						"LevelForPassiveRank1": [6, 6, 6, 6, 6, 6, 6],

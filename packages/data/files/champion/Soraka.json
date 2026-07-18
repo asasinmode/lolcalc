@@ -35,6 +35,8 @@
 					"objectName": "SorakaQ",
 					"dataKey": "Characters/Soraka/Spells/SorakaQAbility/SorakaQ",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_q.png",
+					"mana": [45, 50, 55, 60, 65, 65],
+					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"tooltip": "Soraka calls down a star, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @MoveSpeedSlow*100@% for @SlowDuration@ seconds. <br><br>Hitting an enemy champion grants Soraka <keywordMajor>Rejuvenation</keywordMajor>, which restores <healing>@TotalHoT@ Health</healing> over @HoTDuration@ seconds and grants <speed>@MoveSpeedHaste*100@% Move Speed</speed> decaying over the same duration.",
 					"extendedVariables": [
 						{
@@ -53,8 +55,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [45, 50, 55, 60, 65, 65],
-					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"dataValues": {
 						"BaseDamage": [50, 85, 120, 155, 190, 225, 260],
 						"BaseHoT": [45, 60, 75, 90, 105, 120, 135],
@@ -102,6 +102,8 @@
 					"objectName": "SorakaW",
 					"dataKey": "Characters/Soraka/Spells/SorakaWAbility/SorakaW",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_w.png",
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [6, 6, 5, 4, 3, 2, 2],
 					"tooltip": "Soraka restores <healing>@TotalHeal@ Health</healing> to another allied champion.<br><br>If Soraka is affected by <keywordMajor>Rejuvenation</keywordMajor>, the Health cost will be reduced by @PercentHealthCostRefund*100@%, and the target will gain <keywordMajor>Rejuvenation</keywordMajor> for @Spell.SorakaQ:HoTDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -116,8 +118,6 @@
 							"nameOverride": "spell_sorakaw_healthcostrefund"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 60],
-					"cooldownTime": [6, 6, 5, 4, 3, 2, 2],
 					"dataValues": {
 						"BaseHeal": [70, 90, 110, 130, 150, 170, 190],
 						"PercentHealthCost": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
@@ -158,6 +158,8 @@
 					"objectName": "SorakaE",
 					"dataKey": "Characters/Soraka/Spells/SorakaEAbility/SorakaE",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_e.png",
+					"mana": [70, 75, 80, 85, 90, 90],
+					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
 					"tooltip": "Soraka creates a starfield that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to champions. The field lingers for @RootDelay@ seconds, <status>Silencing</status> enemies inside. When the zone disappears, champions inside the zone are <status>Rooted</status> for @RootDuration@ second(s) and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -172,8 +174,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 90],
-					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
 					"dataValues": {
 						"BaseDamage": [45, 70, 95, 120, 145, 170, 195],
 						"RootDuration": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25],
@@ -204,6 +204,8 @@
 					"objectName": "SorakaR",
 					"dataKey": "Characters/Soraka/Spells/SorakaRAbility/SorakaR",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [150, 150, 135, 120, 10, 10, 10],
 					"tooltip": "Soraka calls upon divine powers, restoring <healing>@HealingCalc@ Health</healing> to all allied champions, regardless of distance. Healing is increased to <healing>@AmpedHealing@</healing> on targets below 40% Health.",
 					"extendedVariables": [
 						{
@@ -211,8 +213,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [150, 150, 135, 120, 10, 10, 10],
 					"dataValues": {
 						"BaseHeal": [50, 150, 250, 350, 450, 550, 650],
 						"HealingAmpForLowHealthAllies": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]

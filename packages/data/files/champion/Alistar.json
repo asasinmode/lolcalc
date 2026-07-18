@@ -35,6 +35,8 @@
 					"objectName": "Pulverize",
 					"dataKey": "Characters/Alistar/Spells/PulverizeAbility/Pulverize",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_q.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Alistar smashes the ground, <status>Knocking Up</status> enemies for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
 						"BaseDamage": [20, 60, 100, 140, 180, 220, 260],
 						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
@@ -79,6 +79,8 @@
 					"objectName": "Headbutt",
 					"dataKey": "Characters/Alistar/Spells/HeadbuttAbility/Headbutt",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_w.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Alistar rams into an enemy, <status>Knocking</status> them <status>Back</status> and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -89,8 +91,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"KnockBackDistance": [700, 700, 700, 700, 700, 700, 700],
 						"Damage": [0, 55, 110, 165, 220, 275, 330],
@@ -128,6 +128,8 @@
 					"objectName": "AlistarE",
 					"dataKey": "Characters/Alistar/Spells/AlistarEAbility/AlistarE",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_passive.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [12.5, 12, 11.5, 11, 10.5, 10, 9.5],
 					"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @MaxStacks@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @StunDuration@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -138,8 +140,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [12.5, 12, 11.5, 11, 10.5, 10, 9.5],
 					"dataValues": {
 						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"TrampleDamage": [80, 80, 110, 140, 170, 200, 230],
@@ -200,6 +200,8 @@
 					"objectName": "FerociousHowl",
 					"dataKey": "Characters/Alistar/Spells/FerociousHowlAbility/FerociousHowl",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [120, 120, 100, 80, 120, 120, 120],
 					"tooltip": "Alistar immediately cleanses all <status>Disabling</status> effects and takes @RDamageReduction@% reduced damage for @RDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -207,8 +209,6 @@
 							"nameOverride": "spell_listtype_damagereduction"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [120, 120, 100, 80, 120, 120, 120],
 					"dataValues": {
 						"RDuration": [7, 7, 7, 7, 7, 7, 7],
 						"RDamageReduction": [45, 55, 65, 75, 85, 95, 105]
@@ -224,8 +224,8 @@
 					"objectName": "AlistarPassive",
 					"dataKey": "Characters/Alistar/Spells/AlistarPassiveAbility/AlistarPassive",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_e.png",
-					"tooltip": "Alistar gains a stack whenever he <status>Stuns</status> or <status>Knocks</status> an enemy champion, or whenever an enemy dies. At @PassiveMaxStacks@ stacks, Alistar roars, restoring <healing>@BaseHeal@ Health</healing> to himself and <healing>@AllyHeal@ Health</healing> to nearby allied champions.<br><br>Enemy champion and epic jungle monster deaths fully charge this Ability.",
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
+					"tooltip": "Alistar gains a stack whenever he <status>Stuns</status> or <status>Knocks</status> an enemy champion, or whenever an enemy dies. At @PassiveMaxStacks@ stacks, Alistar roars, restoring <healing>@BaseHeal@ Health</healing> to himself and <healing>@AllyHeal@ Health</healing> to nearby allied champions.<br><br>Enemy champion and epic jungle monster deaths fully charge this Ability.",
 					"dataValues": {
 						"AlistarPassiveHealRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
 						"AlistarPassiveAllyHealRatio": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],

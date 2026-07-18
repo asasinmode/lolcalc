@@ -35,6 +35,8 @@
 					"objectName": "ViQ",
 					"dataKey": "Characters/Vi/Spells/ViQAbility/ViQ",
 					"image": "assets/characters/vi/hud/icons2d/viq.png",
+					"mana": [50, 60, 70, 80, 90, 80],
+					"cooldownTime": [12, 12, 10.5, 9, 7.5, 6, 6],
 					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 80],
-					"cooldownTime": [12, 12, 10.5, 9, 7.5, 6, 6],
 					"dataValues": {
 						"KnockbackDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"MinDamage": [20, 40, 60, 80, 100, 120, 140],
@@ -104,6 +104,7 @@
 					"objectName": "ViW",
 					"dataKey": "Characters/Vi/Spells/ViWAbility/ViW",
 					"image": "assets/characters/vi/hud/icons2d/viw.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every 3rd Attack on the same target deals an additional <physicalDamage>@TotalDamageTooltip@ max Health physical damage</physicalDamage>, removes <scaleArmor>@ShredAmount@% Armor</scaleArmor> and grants Vi <attackSpeed>@AttackSpeed@% Attack Speed</attackSpeed> for @SharedBuffsDuration@ seconds. It also reduces the remaining Cooldown of <spellName>Blast Shield</spellName> by @spell.ViPassive:CDReductionOn3Hit@ seconds.",
 					"extendedVariables": [
 						{
@@ -115,7 +116,6 @@
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"ADCoefficient": [0.035, 0.035, 0.035, 0.035, 0.035, 0.035, 0.035],
 						"MaxHealthDamage": [3, 4, 5, 6, 7, 8, 9],
@@ -157,6 +157,8 @@
 					"objectName": "ViE",
 					"dataKey": "Characters/Vi/Spells/ViEAbility/ViE",
 					"image": "assets/characters/vi/hud/icons2d/vie.png",
+					"mana": [26, 32, 38, 44, 50, 50],
+					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"tooltip": "Vi's next Attack deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to the target and enemies behind them.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
 					"extendedVariables": [
 						{
@@ -171,8 +173,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [26, 32, 38, 44, 50, 50],
-					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"dataValues": {
 						"ADRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
 						"BaseDamage": [-10, 10, 30, 50, 70, 90, 110],
@@ -229,6 +229,8 @@
 					"objectName": "ViR",
 					"dataKey": "Characters/Vi/Spells/ViRAbility/ViR",
 					"image": "assets/characters/vi/hud/icons2d/vir.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [140, 140, 115, 90, 90, 90, 90],
 					"tooltip": "Vi singles out an enemy champion, revealing them and dashing unstoppably towards them. Upon reaching them, Vi <status>Knocks</status> them <status>Up</status> for @RStunDuration@ seconds and deals <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Any other enemies Vi collides with are dealt damage, knocked aside, and <status>Stunned</status> for @SecondaryTargetStunDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -236,8 +238,6 @@
 							"nameOverride": "spell_listtype_basedamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [140, 140, 115, 90, 90, 90, 90],
 					"dataValues": {
 						"RBaseSpeed": [800, 800, 800, 800, 800, 800, 800],
 						"RStunDuration": [1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3],

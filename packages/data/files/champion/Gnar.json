@@ -35,6 +35,7 @@
 					"objectName": "GnarQ",
 					"dataKey": "Characters/Gnar/Spells/GnarQAbility/GnarQ",
 					"image": "assets/characters/gnar/hud/icons2d/gnar_q.png",
+					"cooldownTime": [17.5, 16, 14.5, 13, 11.5, 10, 10],
 					"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar throws a boomerang that deals <physicalDamage>@spell.GnarQ:MiniTotalDamage@ physical damage</physicalDamage> and <status>Slows</status> by @spell.GnarQ:SlowAmount*100@% for @spell.GnarQ:SlowDuration@ seconds. The boomerang returns after hitting an enemy, dealing reduced damage to subsequent targets. Each enemy can only be hit once. Catching the boomerang reduces its Cooldown by @spell.GnarQ:MiniCDRefund*100@%.",
 					"tooltipExtended": "{{spell_GnarQ_Tooltip}}<br><br>{{spell_GnarBigQ_Tooltip}}",
 					"extendedVariables": [
@@ -55,7 +56,6 @@
 							"nameOverride": "spell_gnarq_megaq_slowlevelup"
 						}
 					],
-					"cooldownTime": [17.5, 16, 14.5, 13, 11.5, 10, 10],
 					"dataValues": {
 						"MiniBaseDamage": [5, 5, 45, 85, 125, 165, 205],
 						"SlowAmount": [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4],
@@ -116,6 +116,7 @@
 					"objectName": "GnarW",
 					"dataKey": "Characters/Gnar/Spells/GnarWAbility/GnarW",
 					"image": "assets/characters/gnar/hud/icons2d/gnar_w.png",
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Every third Attack or Ability on the same enemy deals an additional <magicDamage>@spell.GnarW:MiniTotalDamage@ plus @spell.GnarW:MiniPercentHPDamage*100@% max Health magic damage</magicDamage> and grants <speed>@spell.GnarR:RHyperMovementSpeedPercent@% Move Speed</speed> decaying over @spell.GnarW:MiniHasteDuration@ seconds.",
 					"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}",
 					"extendedVariables": [
@@ -132,7 +133,6 @@
 							"nameOverride": "spell_listtype_gnarwallopdamage"
 						}
 					],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"MiniBaseDamage": [0, 0, 10, 20, 30, 40, 50],
 						"MiniPercentHPDamage": [0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16],
@@ -183,6 +183,7 @@
 					"objectName": "GnarE",
 					"dataKey": "Characters/Gnar/Spells/GnarEAbility/GnarE",
 					"image": "assets/characters/gnar/hud/icons2d/gnar_e.png",
+					"cooldownTime": [24.5, 22, 19.5, 17, 14.5, 12, 12],
 					"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar leaps, gaining <attackSpeed>@spell.GnarE:MinibAS*100@% Attack Speed</attackSpeed> for @spell.GnarE:MiniASDuration@ seconds. If Gnar lands on a unit he will bounce off it, traveling further. Bouncing off an enemy deals <physicalDamage>@spell.GnarE:MiniTotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @spell.GnarE:MoveSpeedMod*-100@%.",
 					"tooltipExtended": "{{spell_GnarE_Tooltip}}<br><br>{{spell_GnarBigE_Tooltip}}",
 					"extendedVariables": [
@@ -199,7 +200,6 @@
 							"nameOverride": "spell_listtype_statbonusattackspeed"
 						}
 					],
-					"cooldownTime": [24.5, 22, 19.5, 17, 14.5, 12, 12],
 					"dataValues": {
 						"MinibAS": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
 						"MiniASDuration": [6, 6, 6, 6, 6, 6, 6],
@@ -253,6 +253,7 @@
 					"objectName": "GnarR",
 					"dataKey": "Characters/Gnar/Spells/GnarRAbility/GnarR",
 					"image": "assets/characters/gnar/hud/icons2d/gnarbig_r.png",
+					"cooldownTime": [0, 90, 60, 30, 0, 0, 0],
 					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Increase <spellName>Hyper's</spellName> <speed>Move Speed</speed>.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gnar tosses nearby enemies, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, <status>Knocking Back</status>, and <status>Slowing</status> them by @RSlowPercent@% for @RCCDuration@ seconds. Enemies that hit a wall instead take <physicalDamage>@WallDamage@ physical damage</physicalDamage> and are <status>Stunned</status>.",
 					"extendedVariables": [
 						{
@@ -268,7 +269,6 @@
 							"nameOverride": "spell_listtype_gnarrhypemovementspeed"
 						}
 					],
-					"cooldownTime": [0, 90, 60, 30, 0, 0, 0],
 					"dataValues": {
 						"RBaseDamage": [100, 200, 300, 400, 500, 600, 700],
 						"RHyperMovementSpeedPercent": [20, 40, 60, 80, 100, 120, 140],

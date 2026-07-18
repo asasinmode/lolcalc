@@ -35,6 +35,8 @@
 					"objectName": "DravenSpinning",
 					"dataKey": "Characters/Draven/Spells/DravenSpinningAbility/DravenSpinning",
 					"image": "assets/characters/draven/hud/icons2d/draven_spinningaxe.png",
+					"mana": [45, 45, 45, 45, 45, 45],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_bonusadpercentage"
 						}
 					],
-					"mana": [45, 45, 45, 45, 45, 45],
-					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"BaseDamage": [35, 40, 45, 50, 55, 60, 65],
 						"ADScaling": [0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25],
@@ -85,6 +85,8 @@
 					"objectName": "DravenFury",
 					"dataKey": "Characters/Draven/Spells/DravenFuryAbility/DravenFury",
 					"image": "assets/characters/draven/hud/icons2d/draven_bloodrage.png",
+					"mana": [40, 35, 30, 25, 20, 15],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Draven becomes Ghosted, gains <speed>@Effect2Amount@% Move Speed</speed> decaying over @Effect3Amount@ seconds and <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's Cooldown is refreshed.",
 					"extendedVariables": [
 						{
@@ -99,8 +101,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 35, 30, 25, 20, 15],
-					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"AttackSpeed": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
 						"AttackSpeedDuration": [3, 3, 3, 3, 3, 3, 3],
@@ -125,6 +125,8 @@
 					"objectName": "DravenDoubleShot",
 					"dataKey": "Characters/Draven/Spells/DravenDoubleShotAbility/DravenDoubleShot",
 					"image": "assets/characters/draven/hud/icons2d/draven_twinaxe.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [19, 18, 17, 16, 15, 14, 14],
 					"tooltip": "Draven chucks a sideways axe that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>, <status>Knocks Back</status>, and <status>Slows</status> by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
@@ -136,8 +138,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [19, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
 						"BaseDamage": [40, 75, 110, 145, 180, 215, 250]
 					},
@@ -175,6 +175,8 @@
 					"objectName": "DravenRCast",
 					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast",
 					"image": "assets/characters/draven/hud/icons2d/draven_whirlingdeath.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 90, 80, 0, 0, 0],
 					"tooltip": "Draven hurls two massive axes that deal <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal @RDamageReductionPerHit*100@% less damage for each enemy hit, down to a minimum of @RMinDamagePercent@%.<br><br>If <keywordMajor>{{ Spell_DravenRCast_Name }}</keywordMajor> would leave an enemy champion with less health than @RPassiveStacksCoefficient*100@% of Draven's current <keywordMajor>{{Spell_DravenPassive_Name}}</keywordMajor> stacks (@RPassiveTrueDamage@), he will execute them.",
 					"extendedVariables": [
 						{
@@ -186,8 +188,6 @@
 							"nameOverride": "spell_listtype_bonusadratio"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [100, 100, 90, 80, 0, 0, 0],
 					"dataValues": {
 						"RBaseDamage": [100, 200, 300, 400, 500, 600, 700],
 						"RMinDamagePercent": [50, 50, 50, 50, 50, 50, 50],

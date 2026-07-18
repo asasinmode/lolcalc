@@ -35,6 +35,8 @@
 					"objectName": "ZaahenQ",
 					"dataKey": "Characters/Zaahen/Spells/ZaahenQAbility/ZaahenQ",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenq.png",
+					"mana": [25, 25, 25, 25, 25, 25],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 5],
 					"tooltip": "Zaahen slashes twice on his next Attack, dealing <physicalDamage>@InitialDamage@ bonus physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of his max Health</healing>.<br><br><recast>Recast:</recast> Zaahen's next Attack deals <physicalDamage>@SecondHitDamage@ bonus physical damage</physicalDamage> and <status>Knocks</status> the target Up for @KnockUpDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -54,8 +56,6 @@
 							"nameOverride": "spell_listtype_bonusadratio"
 						}
 					],
-					"mana": [25, 25, 25, 25, 25, 25],
-					"cooldownTime": [10, 10, 9, 8, 7, 6, 5],
 					"dataValues": {
 						"Q1BaseDamage": [0, 15, 30, 45, 60, 75, 90],
 						"KnockUpDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
@@ -109,6 +109,8 @@
 					"objectName": "ZaahenW",
 					"dataKey": "Characters/Zaahen/Spells/ZaahenWAbility/ZaahenW",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenw.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"tooltip": "Zaahen stabs in a direction, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to enemies hit, then <status>Pulls</status> them toward him, dealing <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -120,8 +122,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
 						"InitialBaseDamage": [20, 40, 60, 80, 100, 120, 140],
 						"SecondaryBaseDamage": [10, 30, 50, 70, 90, 110, 130],
@@ -169,6 +169,8 @@
 					"objectName": "ZaahenE",
 					"dataKey": "Characters/Zaahen/Spells/ZaahenEAbility/ZaahenE",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahene.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Zaahen dashes then slices around himself, dealing <physicalDamage>@BaseDamageCalc@ physical damage</physicalDamage> to nearby enemies.<br><br>Enemies at the edge of the slice take <physicalDamage>@BonusDamageCalc@ physical damage</physicalDamage> <magicDamage>+@PercentHPDamage*100@% of their maximum Health as magic damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
@@ -184,8 +186,6 @@
 							"nameOverride": "spell_listtype_percenthealthdamage"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
 						"Damage_Base": [20, 40, 60, 80, 100, 120, 140],
 						"DashDistance": [350, 350, 350, 350, 350, 350, 350],
@@ -231,6 +231,8 @@
 					"objectName": "ZaahenR",
 					"dataKey": "Characters/Zaahen/Spells/ZaahenRAbility/ZaahenR",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenr.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 95, 80, 65, 60, 20],
 					"tooltip": "<spellPassive>Passive</spellPassive>: Zaahen gains <armorPen>@ArmorPen*100@% %i:scaleAPen% Armor Penetration</armorPen>.<br><br><spellActive>Active</spellActive>: Zaahen rises, gaining @DamageReduction*100@% Damage Reduction while casting.<br><br>Zaahen then stabs downward, dealing <physicalDamage>@DamageEndCalc@ physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of the damage dealt to enemy champions as Health</healing>.",
 					"extendedVariables": [
 						{
@@ -242,8 +244,6 @@
 							"nameOverride": "spell_listtype_armorpenetration"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [110, 110, 95, 80, 65, 60, 20],
 					"dataValues": {
 						"DashMaxDistance": [600, 600, 600, 600, 600, 600, 600],
 						"DashMinDistance": [10, 10, 10, 10, 10, 10, 10],
@@ -282,9 +282,9 @@
 					"objectName": "ZaahenPassive",
 					"dataKey": "{4c6e6c43}",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenp.png",
+					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
 					"tooltip": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.",
 					"tooltipExtended": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.<br><br><rules>{{Reminder_Stasis}}</rules>",
-					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
 					"dataValues": {
 						"PercentBonusAD": [0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025],
 						"FallOffDuration": [5, 5, 5, 5, 5, 5, 5],

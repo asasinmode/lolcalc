@@ -35,6 +35,8 @@
 					"objectName": "PoppyQ",
 					"dataKey": "Characters/Poppy/Spells/PoppyQAbility/PoppyQ",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_q.png",
+					"mana": [35, 40, 45, 50, 55, 60],
+					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Slow_@% and erupts after @DelayBetweenTwoHits@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
 					"extendedVariables": [
 						{
@@ -53,8 +55,6 @@
 							"nameOverride": "spell_poppyq_monstercap"
 						}
 					],
-					"mana": [35, 40, 45, 50, 55, 60],
-					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"dataValues": {
 						"HealthDamagePercent": [9, 9, 9, 9, 9, 9, 9],
 						"BaseDamageValue": [30, 30, 55, 80, 105, 130, 130],
@@ -99,6 +99,8 @@
 					"objectName": "PoppyW",
 					"dataKey": "Characters/Poppy/Spells/PoppyWAbility/PoppyW",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_w.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Haste@% Move Speed</speed> and projects a field around her for @Duration@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -106,8 +108,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"dataValues": {
 						"GroundingDuration": [2, 2, 2, 2, 2, 2, 2],
 						"SlowAmount": [-0.25, -0.25, -0.25, -0.25, -0.25, -0.25, -0.25],
@@ -168,6 +168,8 @@
 					"objectName": "PoppyE",
 					"dataKey": "Characters/Poppy/Spells/PoppyEAbility/PoppyE",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_e.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @StunDuration@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -183,8 +185,6 @@
 							"nameOverride": "spell_listtype_stunduration"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"BaseDamageValue": [0, 40, 60, 80, 100, 120, 140],
 						"WallDamage": [0, 40, 60, 80, 100, 120, 140],
@@ -227,6 +227,8 @@
 					"objectName": "PoppyR",
 					"dataKey": "Characters/Poppy/Spells/PoppyRAbility/PoppyR",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [10, 140, 120, 100, 10, 10, 10],
 					"tooltip": "<charge>Begin Casting:</charge> Poppy begins charging her hammer for up to @ChannelMaxDuration@ seconds, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Poppy smashes the ground, creating a shockwave that deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first champion hit and surrounding enemies, <status>Knocks</status> them <status>Back</status> towards their Nexus, and makes them Untargetable while they fly. The range and <status>Knock Back</status> distance increase with charge duration.<br><br>An uncharged swing deals <physicalDamage>@HalfDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> for @KnockupDurationSnap@ seconds.",
 					"extendedVariables": [
 						{
@@ -234,8 +236,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [10, 140, 120, 100, 10, 10, 10],
 					"dataValues": {
 						"BaseDamage": [200, 200, 300, 400, 500, 600, 700],
 						"ChannelDistanceUpdateTick": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],

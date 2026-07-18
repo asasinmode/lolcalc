@@ -35,6 +35,8 @@
 					"objectName": "MalzaharQ",
 					"dataKey": "Characters/Malzahar/Spells/MalzaharQAbility/MalzaharQ",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_q.png",
+					"mana": [60, 65, 70, 75, 80, 80],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @SilenceDuration@ second(s).",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 80],
-					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"BaseDamage": [70, 70, 105, 140, 175, 210, 245],
 						"SilenceDuration": [1, 1, 1.25, 1.5, 1.75, 2, 2.25],
@@ -87,6 +87,8 @@
 					"objectName": "MalzaharW",
 					"dataKey": "Characters/Malzahar/Spells/MalzaharWAbility/MalzaharW",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_w.png",
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit.",
 					"extendedVariables": [
 						{
@@ -101,8 +103,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 60],
-					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
 						"VoidlingDuration": [8, 8, 8, 9, 9, 10, 8],
 						"VoidlingBaseDamage": [10, 12, 14, 16, 18, 20, 22],
@@ -167,6 +167,8 @@
 					"objectName": "MalzaharE",
 					"dataKey": "Characters/Malzahar/Spells/MalzaharEAbility/MalzaharE",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_e.png",
+					"mana": [60, 70, 80, 90, 100, 110],
+					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Malzahar inflicts terrible visions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds. Applying <spellName>Call of the Void</spellName> or <spellName>Nether Grasp</spellName> to the victim during this time refreshes the visions.<br><br>If the victim dies, Malzahar gains <scaleMana>@ManaRestore@ Mana</scaleMana> and the visions spread to the nearest enemy.<br><br><rules>Malefic Visions executes minions below @MinionExecuteThreshold@ Health.</rules>",
 					"extendedVariables": [
 						{
@@ -177,8 +179,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 70, 80, 90, 100, 110],
-					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
 						"BaseDamage": [45, 80, 115, 150, 185, 220, 255],
 						"SecondsPerTick": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
@@ -237,6 +237,8 @@
 					"objectName": "MalzaharR",
 					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [140, 140, 110, 80, 80, 80, 80],
 					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @CCDuration@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @PoolDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -248,8 +250,6 @@
 							"nameOverride": "spell_listtype_malzaharnullzonedamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [140, 140, 110, 80, 80, 80, 80],
 					"dataValues": {
 						"BeamDamage": [50, 125, 200, 275, 350, 425, 500],
 						"BeamAPRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],

@@ -35,6 +35,8 @@
 					"objectName": "MelQ",
 					"dataKey": "Characters/Mel/Spells/MelQAbility/MelQ",
 					"image": "assets/characters/mel/hud/icons2d/mel_q.png",
+					"mana": [70, 75, 80, 85, 90, 90],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Mel unleashes a barrage of @ExplosionCount@ projectiles that explode in the area around a target location.<br><br>The first explosion hit deals <magicDamage>@InitialExplosionDamage@ magic damage</magicDamage> and each subsequent explosion deals <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>, adding up to <magicDamage>@AllDamageHit@ magic damage</magicDamage> total.",
 					"extendedVariables": [
 						{
@@ -54,8 +56,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 90],
-					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"ExplosionDamage": [3, 5, 7, 9, 11, 13, 15],
 						"ExplosionCount": [5, 6, 7, 8, 9, 10, 11],
@@ -151,6 +151,8 @@
 					"objectName": "MelW",
 					"dataKey": "Characters/Mel/Spells/MelWAbility/MelW",
 					"image": "assets/characters/mel/hud/icons2d/mel_w.png",
+					"mana": [80, 60, 40, 20, 0, 0],
+					"cooldownTime": [38, 38, 35, 33, 29, 26, 26],
 					"tooltip": "Mel forms a barrier around herself that reflects projectiles from enemy champions, gaining <shield>@ShieldAmount@ Shields</shield> for @Duration@ seconds and <speed>@MoveSpeed*100@% decaying Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Reflected projectiles deal <magicDamage>@DamagePercent@ original damage as magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -166,8 +168,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [80, 60, 40, 20, 0, 0],
-					"cooldownTime": [38, 38, 35, 33, 29, 26, 26],
 					"dataValues": {
 						"Duration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"ShieldRadius": [175, 175, 175, 175, 175, 175, 175],
@@ -215,6 +215,8 @@
 					"objectName": "MelE",
 					"dataKey": "Characters/Mel/Spells/MelEAbility/MelE",
 					"image": "assets/characters/mel/hud/icons2d/mel_e.png",
+					"mana": [50, 60, 70, 80, 90, 90],
+					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
 					"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDuration@ seconds and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -230,8 +232,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 90],
-					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
 					"dataValues": {
 						"RootDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"BaseDamage": [15, 60, 105, 150, 195, 240, 285],
@@ -306,6 +306,8 @@
 					"objectName": "MelR",
 					"dataKey": "Characters/Mel/Spells/MelRAbility/MelR",
 					"image": "assets/characters/mel/hud/icons2d/mel_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 60],
 					"tooltip": "<spellPassive>Passive</spellPassive>: <keywordMajor>Overwhelm</keywordMajor> damage is increased to <magicDamage>@PassiveFlatDamage@ magic damage plus @PassiveStackDamage@ magic damage per stack</magicDamage>.<br><br><spellActive>Active</spellActive>: Mel unleashes her power on all enemies affected by <keywordMajor>Overwhelm</keywordMajor>, dealing <magicDamage>@UltFlatDamage@ magic damage plus @UltStackDamage@ magic damage per <keywordMajor>Overwhelm</keywordMajor> stack</magicDamage>.<br><br><rules>Can only be cast when an enemy champion is affected by <keywordMajor>Overwhelm</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
@@ -325,8 +327,6 @@
 							"nameOverride": "spell_melr_passivestackdamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 60],
 					"dataValues": {
 						"BasePassiveStackDamage": [2, 3, 4, 5, 6, 7, 8],
 						"BasePassiveFlatDamage": [50, 60, 70, 80, 90, 100, 110],

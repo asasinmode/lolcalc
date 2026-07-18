@@ -35,6 +35,8 @@
 					"objectName": "SwainQ",
 					"dataKey": "Characters/Swain/Spells/SwainQAbility/SwainQ",
 					"image": "assets/characters/swain/hud/icons2d/swain_q.png",
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Swain unleashes 5 eldritch bolts, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> plus <magicDamage>@ExtraBoltDamage@ magic damage</magicDamage> per bolt past the first (max <magicDamage>@MaxDamage@ magic damage</magicDamage>).",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 60],
-					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
 						"FirstBoltAPRatio": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45],
@@ -91,6 +91,8 @@
 					"objectName": "SwainW",
 					"dataKey": "Characters/Swain/Spells/SwainWAbility/SwainW",
 					"image": "assets/characters/swain/hud/icons2d/swain_w.png",
+					"mana": [60, 65, 70, 75, 80, 80],
+					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds.<br><br>Champions hit grant Swain a <font color='#FF3F3F' size='18'>Soul Fragment</font> and are revealed for @RevealDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -105,8 +107,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 80],
-					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"dataValues": {
 						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
 						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
@@ -148,6 +148,8 @@
 					"objectName": "SwainE",
 					"dataKey": "Characters/Swain/Spells/SwainEAbility/SwainE",
 					"image": "assets/characters/swain/hud/icons2d/swain_e.png",
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"tooltip": "Swain launches a wave of demonic power that returns, detonating on the first enemy hit to deal <magicDamage>@SecondaryDamage@ magic damage</magicDamage> and <status>Root</status> enemies in the area for @RootDuration@ seconds.<br><br><status>Rooting</status> a champion allows Swain to reactivate this ability to pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him, gaining a <font color='#FF3F3F' size='18'>Soul Fragment</font> for each.",
 					"extendedVariables": [
 						{
@@ -158,8 +160,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"dataValues": {
 						"E2Damage": [50, 90, 130, 170, 210, 250, 290],
 						"E2Ratio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
@@ -193,6 +193,8 @@
 					"objectName": "SwainR",
 					"dataKey": "Characters/Swain/Spells/SwainRAbility/SwainR",
 					"image": "assets/characters/swain/hud/icons2d/swain_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"tooltip": "Swain frees the demon, which deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and drains <healing>@HealingCalc@ Health</healing> per second from nearby enemies. His Demonic Energy depletes over time but can be recharged indefinitely by draining enemy Champions and is fully restored on Champion takedowns.<br><br>After @DemonflareCastDelay@ seconds and every @DemonflareCooldownTooltip@ seconds thereafter, Swain can cast <spellName>Demonflare</spellName> while transformed, which deals <magicDamage>@DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slows</status> enemies by @DemonflareSlowAmount*100@%, decaying over @DemonflareSlowDuration@s.",
 					"extendedVariables": [
 						{
@@ -208,8 +210,6 @@
 							"nameOverride": "spell_listtype_swaindetonationdamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"dataValues": {
 						"DamagePerSecond": [5, 15, 25, 35, 45, 55, 65],
 						"DamageAPRatio": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],

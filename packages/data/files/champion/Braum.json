@@ -35,6 +35,8 @@
 					"objectName": "BraumQ",
 					"dataKey": "Characters/Braum/Spells/BraumQAbility/BraumQ",
 					"image": "assets/characters/braum/hud/icons2d/braum_q.png",
+					"mana": [45, 50, 55, 60, 65, 70],
+					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 5.5],
 					"tooltip": "Braum propels freezing ice from his shield, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @InitialSlow@% decaying over @SlowDuration@ seconds.<br><br>Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [45, 50, 55, 60, 65, 70],
-					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 5.5],
 					"dataValues": {
 						"BaseDamage": [30, 75, 120, 165, 210, 255, 300],
 						"MaxHPDamageValue": [0.025, 0.025, 0.025, 0.025, 0.025, 0.025, 0.025],
@@ -92,6 +92,8 @@
 					"objectName": "BraumW",
 					"dataKey": "Characters/Braum/Spells/BraumWAbility/BraumW",
 					"image": "assets/characters/braum/hud/icons2d/braum_w.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [13, 12, 11, 10, 9, 8, 7],
 					"tooltip": "Braum leaps to an allied champion or minion. On arrival, Braum grants the target <scaleArmor>@GrantedAllyArmor@ Armor</scaleArmor> and <scaleMR>@GrantedAllyMR@ Magic Resist</scaleMR> for @Duration@ seconds. Braum grants himself <scaleArmor>@GrantedBraumArmor@ Armor</scaleArmor> and <scaleMR>@GrantedBraumMR@ Magic Resist</scaleMR> for the same duration.",
 					"extendedVariables": [
 						{
@@ -99,8 +101,6 @@
 							"nameOverride": "spell_braumw_baseresists_levelup"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [13, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
 						"RangedDamageThreshold": [400, 400, 400, 400, 400, 400, 400],
 						"AllyArmorPercent": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
@@ -183,6 +183,8 @@
 					"objectName": "BraumE",
 					"dataKey": "Characters/Braum/Spells/BraumEAbility/BraumE",
 					"image": "assets/characters/braum/hud/icons2d/braum_e.png",
+					"mana": [30, 35, 40, 45, 50, 55],
+					"cooldownTime": [18, 16, 14, 12, 10, 8, 8],
 					"tooltip": "Braum raises his shield for @ShieldHoldDuration@ seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal @ShieldFacingDRAmount@% reduced damage.<br><br>Braum gains <speed>@MoveSpeedPercent@% Move Speed</speed> while his shield is raised.",
 					"extendedVariables": [
 						{
@@ -197,8 +199,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [30, 35, 40, 45, 50, 55],
-					"cooldownTime": [18, 16, 14, 12, 10, 8, 8],
 					"dataValues": {
 						"RangedReflect": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
 						"ShieldHoldDuration": [2.75, 3, 3.25, 3.5, 3.75, 4, 4.25],
@@ -221,6 +221,8 @@
 					"objectName": "BraumRWrapper",
 					"dataKey": "Characters/Braum/Spells/BraumRWrapperAbility/BraumRWrapper",
 					"image": "assets/characters/braum/hud/icons2d/braum_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [130, 130, 115, 100, 85, 85, 85],
 					"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.",
 					"extendedVariables": [
 						{
@@ -236,8 +238,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [130, 130, 115, 100, 85, 85, 85],
 					"dataValues": {
 						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
 						"KnockupDuration": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],

@@ -35,6 +35,8 @@
 					"objectName": "GangplankQWrapper",
 					"dataKey": "Characters/Gangplank/Spells/GangplankQWrapperAbility/GangplankQWrapper",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_q.png",
+					"mana": [50, 45, 40, 35, 30, 30],
+					"cooldownTime": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
 					"tooltip": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}",
 					"tooltipExtended": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}<br><br>Total Gold plundered: <statTracking>@f1@ Gold</statTracking><br>Total SS plundered: <statTracking>@f3@ Silver Serpents</statTracking>",
 					"extendedVariables": [
@@ -54,8 +56,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 45, 40, 35, 30, 30],
-					"cooldownTime": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
 					"dataValues": {
 						"SpellDamage": [-20, 10, 40, 70, 100, 130, 160],
 						"ADRatio": [1, 1, 1, 1, 1, 1, 1],
@@ -124,6 +124,8 @@
 					"objectName": "GangplankW",
 					"dataKey": "Characters/Gangplank/Spells/GangplankWAbility/GangplankW",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_w.png",
+					"mana": [60, 70, 80, 90, 100, 110],
+					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @PercentHeal@% missing Health</healing>.",
 					"extendedVariables": [
 						{
@@ -134,8 +136,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 70, 80, 90, 100, 110],
-					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"dataValues": {
 						"BaseHeal": [20, 45, 70, 95, 120, 145, 170],
 						"PercentHeal": [13, 13, 13, 13, 13, 13, 13],
@@ -176,6 +176,7 @@
 					"objectName": "GangplankE",
 					"dataKey": "Characters/Gangplank/Spells/GangplankEAbility/GangplankE",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @BarrelDuration@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @DebuffDuration@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @BarrelArmorPenetration@% Armor. Champions take an additional <physicalDamage>@BonusDamageToChampions@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
 					"extendedVariables": [
 						{
@@ -194,7 +195,6 @@
 							"name": "AmmoRechargeTime"
 						}
 					],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"BarrelSlow": [30, 40, 50, 60, 70, 80, 90],
 						"MaxBarrels": [3, 3, 3, 4, 4, 5, 5],
@@ -260,6 +260,8 @@
 					"objectName": "GangplankR",
 					"dataKey": "Characters/Gangplank/Spells/GangplankRAbility/GangplankR",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"tooltip": "Gangplank signals his ship to fire @TotalWavesTooltip@ waves of cannonballs anywhere on the map over @ZoneDuration@ seconds. Each wave <status>Slows</status> by @SlowPercent@% for @SlowDuration@ seconds and deals <magicDamage>@OneWaveDamage@ magic damage</magicDamage>. Maximum damage: @TotalDamageTooltip@<br><br>This Ability can be upgraded in the shop via <spellName>{{Spell_GangplankQWrapper_Name}}</spellName>.<br><br><spellName>Fire at Will</spellName>: Fires 6 additional waves of cannonballs.<br><spellName>Death's Daughter</spellName>: Fires a Mega-Cannonball that deals <trueDamage>@DeathsDaughterDamage@ true damage</trueDamage> and <status>Slows</status> by @DeathsDaughterSlow@% for @DeathsDaughterSlowDuration@ second.<br><spellName>Raise Morale</spellName>: Allies inside Cannon Barrage gain <speed>@RaiseMoraleHaste@% Move Speed</speed> for @RaiseMoraleHasteDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -267,8 +269,6 @@
 							"nameOverride": "spell_listtype_gangplankrdamageperwave"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"dataValues": {
 						"DamagePerWave": [10, 40, 70, 100, 130, 160, 190],
 						"DeathsDaughterBaseDamage": [30, 120, 210, 300, 390, 480, 570],

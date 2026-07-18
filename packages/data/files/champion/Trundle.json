@@ -35,6 +35,8 @@
 					"objectName": "TrundleTrollSmash",
 					"dataKey": "Characters/Trundle/Spells/TrundleTrollSmashAbility/TrundleTrollSmash",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_q.png",
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"tooltip": "Trundle's next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @SlowAmount*100@%, then Trundle gains <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> for @SapDebuffDuration@ seconds and the enemy loses <physicalDamage>@SappedAD*-1@ Attack Damage</physicalDamage> for the same duration.",
 					"extendedVariables": [
 						{
@@ -54,8 +56,6 @@
 							"nameOverride": "spell_trundletrollsmash_sappedad"
 						}
 					],
-					"mana": [20, 20, 20, 20, 20, 20],
-					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"dataValues": {
 						"TooltipQADRatio": [0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65],
 						"BonusRange": [25, 25, 25, 25, 25, 25, 25],
@@ -94,6 +94,8 @@
 					"objectName": "trundledesecrate",
 					"dataKey": "Characters/Trundle/Spells/trundledesecrateAbility/trundledesecrate",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_w.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [18, 18, 17, 16, 15, 14, 13],
 					"tooltip": "Trundle freezes an area for @Duration@ seconds. While inside he gains <speed>@MSBonus*100@% Move Speed</speed>, <attackSpeed>@ASBonus*100@% Attack Speed</attackSpeed>, and @HealingBonus*100@% increased healing.",
 					"extendedVariables": [
 						{
@@ -105,8 +107,6 @@
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [18, 18, 17, 16, 15, 14, 13],
 					"dataValues": {
 						"MSBonus": [0.2, 0.2, 0.28, 0.36, 0.44, 0.52, 0.6],
 						"ASBonus": [0.3, 0.3, 0.45, 0.6, 0.75, 0.9, 0.9],
@@ -131,6 +131,8 @@
 					"objectName": "TrundleCircle",
 					"dataKey": "Characters/Trundle/Spells/TrundleCircleAbility/TrundleCircle",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_e.png",
+					"mana": [75, 75, 75, 75, 75, 75],
+					"cooldownTime": [21, 21, 19.5, 18, 16.5, 15, 15],
 					"tooltip": "Trundle creates an icy pillar for @PillarDuration@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @SlowAmount@%.",
 					"extendedVariables": [
 						{
@@ -138,8 +140,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [75, 75, 75, 75, 75, 75],
-					"cooldownTime": [21, 21, 19.5, 18, 16.5, 15, 15],
 					"dataValues": {
 						"PillarDuration": [6, 6, 6, 6, 6, 6, 6],
 						"SlowAmount": [30, 34, 38, 42, 46, 50, 54],
@@ -171,6 +171,8 @@
 					"objectName": "TrundlePain",
 					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Trundle drains the lifeforce of an enemy champion, dealing <magicDamage>@TotalPercentHPDamage@ max Health magic damage</magicDamage> and stealing <scaleArmor>@ArmorMRShred*100@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> over @ActualDurationOfDrainBuff@ seconds.",
 					"extendedVariables": [
 						{
@@ -178,8 +180,6 @@
 							"nameOverride": "spell_listtype_trundlehealthdrain"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
 						"PercentHPDamage": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
 						"ArmorMRShred": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],

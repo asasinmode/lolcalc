@@ -35,6 +35,8 @@
 					"objectName": "YorickQ",
 					"dataKey": "Characters/Yorick/Spells/YorickQAbility/YorickQ",
 					"image": "assets/characters/yorick/hud/icons2d/yorick_q.png",
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [6, 6, 5.5, 5, 4.5, 4, 3.5],
 					"tooltip": "Yorick's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and restores <healing>@QHeal@ plus @MissingHealthRatio@% of his missing Health</healing>, reduced by @HealReduction@% against non-Champions. If this Attack hits a Champion or large Monster or kills the target, it leaves a grave.<br><br>When there are 3 or more graves nearby and this Ability has already been used, Yorick can <recast>Recast</recast> to raise <keywordMajor>Mist Walkers</keywordMajor> from all nearby graves.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"mana": [20, 20, 20, 20, 20, 20],
-					"cooldownTime": [6, 6, 5.5, 5, 4.5, 4, 3.5],
 					"dataValues": {
 						"CherryGhoulPassiveSpawnRate": [8, 8, 8, 8, 8, 8, 8],
 						"BaseDamage": [10, 30, 50, 70, 90, 110, 130],
@@ -101,6 +101,8 @@
 					"objectName": "YorickW",
 					"dataKey": "Characters/Yorick/Spells/YorickWAbility/YorickW",
 					"image": "assets/characters/yorick/hud/icons2d/yorick_w.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"tooltip": "Yorick summons a wall of spirits blocking enemies' path, but not allies'. The wall has <healing>@WallHealthTooltip@ Health</healing> and disappears after @CircleDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -108,8 +110,6 @@
 							"nameOverride": "spell_listtype_yorickhealth"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"dataValues": {
 						"CircleDuration": [4, 4, 4, 4, 4, 4, 4],
 						"GhoulNumber": [18, 18, 18, 18, 18, 18, 18],
@@ -128,6 +128,8 @@
 					"objectName": "YorickE",
 					"dataKey": "Characters/Yorick/Spells/YorickEAbility/YorickE",
 					"image": "assets/characters/yorick/hud/icons2d/yorick_e.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Yorick throws a globule of Black Mist that deals <magicDamage>@Calc_HealthDamage@ max Health magic damage</magicDamage>, <status>Slows</status> by @Calc_Slow@ for @SlowDuration@ seconds and marks champions and monsters for @MarkDuration@ seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of @Spell.YorickPassive:YorickPassiveGhoulMax@) and suffer <scaleArmor>@ArmorShred*100@% reduced Armor</scaleArmor>.<br><br>Yorick and his summoned units gain <speed>@HasteAmount*100@% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them.",
 					"extendedVariables": [
 						{
@@ -146,8 +148,6 @@
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"SlowAmount": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -224,6 +224,8 @@
 					"objectName": "YorickR",
 					"dataKey": "Characters/Yorick/Spells/YorickRAbility/YorickR",
 					"image": "assets/characters/yorick/hud/icons2d/yorick_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 130, 100, 100, 100, 100],
 					"tooltip": "Yorick summons the <keywordMajor>Maiden of the Mist</keywordMajor> with <healing>@YorickBigGhoulHealth@ Health</healing> and <magicDamage>@YorickBigGhoulDamage@ Magic Attack Damage</magicDamage> plus @RGhoulNumbers@ <keywordMajor>Mist Walkers</keywordMajor>. The <keywordMajor>Maiden</keywordMajor> automatically raises <keywordMajor>Mist Walkers</keywordMajor> from nearby enemy deaths and marks enemy Champions with her attacks. When Yorick damages the <keywordMajor>Maiden's</keywordMajor> target, he deals <magicDamage>@RMarkDamagePercent@% max Health magic damage</magicDamage>.<br><br>After 10 seconds, Yorick can <recast>Recast</recast> this Ability to free the <keywordMajor>Maiden</keywordMajor>, sending her down the nearest lane.",
 					"extendedVariables": [
 						{
@@ -239,8 +241,6 @@
 							"nameOverride": "spell_listtype_yorickmistwalkers"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [160, 160, 130, 100, 100, 100, 100],
 					"dataValues": {
 						"RGhoulNumbers": [1, 2, 3, 4, 5, 6, 7],
 						"RBigGhoulBonusAD": [25, 50, 75, 100, 125, 150, 175],

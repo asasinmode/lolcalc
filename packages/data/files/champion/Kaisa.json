@@ -35,6 +35,8 @@
 					"objectName": "KaisaQ",
 					"dataKey": "Characters/Kaisa/Spells/KaisaQAbility/KaisaQ",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_q.png",
+					"mana": [55, 55, 55, 55, 55, 55],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Kai'Sa launches @Effect2Amount@ missiles that split among nearby enemies, each dealing <physicalDamage>@TotalIndividualMissileDamage@ physical damage</physicalDamage>, up to a maximum of @MaxDamageDisplay@. Additional missile hits on champions or monsters deal @ExtraHitReduction*100@% damage.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead fires @Effect7Amount@ missiles.<br>Current: <physicalDamage>@f11.1@/@Effect6Amount@ Bonus Attack Damage</physicalDamage>",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_kaisadamagepermissile"
 						}
 					],
-					"mana": [55, 55, 55, 55, 55, 55],
-					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"MaxDamage": [56.25, 90, 123.75, 157.5, 191.25, 225, 258.75],
 						"MaxDamageNL": [90, 123.75, 157.5, 191.25, 225, 258.75, 292.5],
@@ -212,6 +212,8 @@
 					"objectName": "KaisaW",
 					"dataKey": "Characters/Kaisa/Spells/KaisaWAbility/KaisaW",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_w.png",
+					"mana": [55, 60, 65, 70, 75, 85],
+					"cooldownTime": [26, 22, 20, 18, 16, 14, 14],
 					"tooltip": "Kai'Sa fires a void blast that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>, applies @Effect4Amount@ stacks of <keywordMajor>Plasma</keywordMajor>, and grants <keywordStealth>True Sight</keywordStealth> of the first enemy hit for @spell.KaisaPassive:PDuration@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead applies @Effect5Amount@ stacks of <keywordMajor>Plasma</keywordMajor> and hitting a champion reduces the Cooldown by @Effect3Amount@%.<br>Current: <scaleAP>@f2.1@/@Effect2Amount@ Ability Power</scaleAP>",
 					"extendedVariables": [
 						{
@@ -223,8 +225,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [55, 60, 65, 70, 75, 85],
-					"cooldownTime": [26, 22, 20, 18, 16, 14, 14],
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
@@ -263,6 +263,8 @@
 					"objectName": "KaisaE",
 					"dataKey": "Characters/Kaisa/Spells/KaisaEAbility/KaisaE",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_e.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [17, 16, 14.5, 13, 11.5, 10, 11],
 					"tooltip": "Kai'Sa supercharges her void energy, gaining <speed>@TotalMoveSpeed@ Move Speed</speed> and becoming Ghosted while charging, then gaining <attackSpeed>@Effect5Amount*100@% Attack Speed</attackSpeed> for @Effect2Amount@ seconds.<br><br>Attacks reduce this Ability's Cooldown by @Effect4Amount@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa also becomes <keywordStealth>Invisible</keywordStealth> for @Effect7Amount@ seconds.<br>Current: <attackSpeed>@f10.1@%/@Effect6Amount@% Bonus Attack Speed</attackSpeed>",
 					"extendedVariables": [
 						{
@@ -274,8 +276,6 @@
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [17, 16, 14.5, 13, 11.5, 10, 11],
 					"spellCalculations": {
 						"TotalMovespeed": {
 							"mMultiplier": {
@@ -343,6 +343,8 @@
 					"objectName": "KaisaR",
 					"dataKey": "Characters/Kaisa/Spells/KaisaRAbility/KaisaR",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [130, 130, 100, 70, 70, 70, 70],
 					"tooltip": "Kai'Sa warps near an enemy champion affected by <keywordMajor>Plasma</keywordMajor> and gains <shield>@RCalculatedShieldValue@ Shield</shield> for @RShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -358,8 +360,6 @@
 							"nameOverride": "spelllisttype_attackdamageratio"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [130, 130, 100, 70, 70, 70, 70],
 					"dataValues": {
 						"RBaseValue": [50, 100, 150, 200, 250, 300, 350],
 						"RRange": [1500, 2000, 2500, 3000, 3500, 4000, 4500],

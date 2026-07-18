@@ -35,6 +35,8 @@
 					"objectName": "HecarimRapidSlash",
 					"dataKey": "Characters/Hecarim/Spells/HecarimRapidSlashAbility/HecarimRapidSlash",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png",
+					"mana": [28, 26, 24, 22, 20, 20],
+					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @BuffDuration@ seconds. Stacks up to @MaxStacks@ times.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [28, 26, 24, 22, 20, 20],
-					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
 						"MinionDamageRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
@@ -114,6 +114,8 @@
 					"objectName": "HecarimW",
 					"dataKey": "Characters/Hecarim/Spells/HecarimWAbility/HecarimW",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_spiritofdread.png",
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"tooltip": "Hecarim deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over @BuffDuration@ seconds to nearby enemies. <br><br>Hecarim gains <passive>@ResistAmount@</passive> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and heals for <healing>@LeechAmount@% of damage</healing> nearby enemies take from Hecarim and <healing>@AllyTooltipLeachValue@% of damage</healing> taken from his allies.",
 					"extendedVariables": [
 						{
@@ -132,8 +134,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
 						"NonSelfLeechRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"DamageLeechPerc": [25, 25, 25, 25, 25, 25, 25],
@@ -185,6 +185,8 @@
 					"objectName": "HecarimRamp",
 					"dataKey": "Characters/Hecarim/Spells/HecarimRampAbility/HecarimRamp",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_devastingcharge.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [20, 20, 19, 18, 17, 16, 15],
 					"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Duration@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
 					"extendedVariables": [
 						{
@@ -196,8 +198,6 @@
 							"nameOverride": "spell_listtype_maximumdamage"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [20, 20, 19, 18, 17, 16, 15],
 					"dataValues": {
 						"MinMoveSpeed": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"MaxMoveSpeed": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
@@ -255,6 +255,8 @@
 					"objectName": "HecarimUlt",
 					"dataKey": "Characters/Hecarim/Spells/HecarimUltAbility/HecarimUlt",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_onslaughtofshadows.png",
+					"mana": [100, 100, 100, 100, 100, 0],
+					"cooldownTime": [0, 140, 120, 100, 100, 100, 0],
 					"tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>@DamageDone@ magic damage</magicDamage>. Hecarim unleashes a shockwave at the end of the charge that <status>Fears</status> for between @FearDurationMin@ to @FearDurationMax@ seconds, increased by charge distance.",
 					"extendedVariables": [
 						{
@@ -262,8 +264,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 0],
-					"cooldownTime": [0, 140, 120, 100, 100, 100, 0],
 					"dataValues": {
 						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
 						"FearDurationMin": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],

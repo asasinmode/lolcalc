@@ -35,6 +35,8 @@
 					"objectName": "ThreshQ",
 					"dataKey": "Characters/Thresh/Spells/ThreshQAbility/ThreshQ",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [19, 19, 16.5, 14, 11.5, 9, 9],
 					"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [19, 19, 16.5, 14, 11.5, 9, 9],
 					"dataValues": {
 						"BaseDamage": [50, 100, 150, 200, 250, 300, 350],
 						"APRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
@@ -83,6 +83,8 @@
 					"objectName": "ThreshW",
 					"dataKey": "Characters/Thresh/Spells/ThreshWAbility/ThreshW",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [21, 21, 20, 19, 18, 17, 16],
 					"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it.",
 					"extendedVariables": [
 						{
@@ -93,8 +95,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [21, 21, 20, 19, 18, 17, 16],
 					"dataValues": {
 						"ShieldPerSoul": [2, 2, 2, 2, 2, 2, 2],
 						"LanternDuration": [6, 6, 6, 6, 6, 6, 6],
@@ -134,6 +134,8 @@
 					"objectName": "ThreshE",
 					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshE",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [13, 13, 12.25, 11.5, 10.75, 10, 9.25],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -152,8 +154,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [13, 13, 12.25, 11.5, 10.75, 10, 9.25],
 					"dataValues": {
 						"PassiveADRatioTT": [0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4],
 						"PassiveADRatio": [60, 90, 120, 150, 180, 210, 240],
@@ -219,6 +219,8 @@
 					"objectName": "ThreshRPenta",
 					"dataKey": "Characters/Thresh/Spells/ThreshRPentaAbility/ThreshRPenta",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
+					"mana": [100, 100, 100, 100, 100, 0],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
 					"extendedVariables": [
 						{
@@ -226,8 +228,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 0],
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
 						"ThreshRCageRadius": [400, 400, 400, 400, 400, 400, 400],
 						"ThreshRWallThickness": [30, 30, 30, 30, 30, 30, 30],

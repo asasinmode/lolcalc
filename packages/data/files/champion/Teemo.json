@@ -35,6 +35,8 @@
 					"objectName": "TeemoQ",
 					"dataKey": "Characters/Teemo/Spells/TeemoQAbility/TeemoQ",
 					"image": "assets/characters/teemo/hud/icons2d/teemoq.png",
+					"mana": [70, 75, 80, 85, 90, 95],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 95],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"BaseDamage": [35, 80, 125, 170, 215, 260, 305],
 						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
@@ -94,6 +94,8 @@
 					"objectName": "TeemoW",
 					"dataKey": "Characters/Teemo/Spells/TeemoWAbility/TeemoW",
 					"image": "assets/characters/teemo/hud/icons2d/teemow.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -105,8 +107,6 @@
 							"nameOverride": "spell_teemow_activemovespeed"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
 						"PassiveMoveSpeedBonus": [0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32],
 						"ActiveMoveSpeedBuffDuration": [3, 3, 3, 3, 3, 3, 3],
@@ -124,6 +124,7 @@
 					"objectName": "TeemoE",
 					"dataKey": "Characters/Teemo/Spells/TeemoEAbility/TeemoE",
 					"image": "assets/characters/teemo/hud/icons2d/teemoe.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison %i:OnHit% <OnHit>On-Hit</OnHit>, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -135,7 +136,6 @@
 							"nameOverride": "spell_listtype_damagepersecond"
 						}
 					],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"TickBaseDamage": [0, 6, 12, 18, 24, 30, 36],
 						"TickAPRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
@@ -216,6 +216,8 @@
 					"objectName": "TeemoR",
 					"dataKey": "Characters/Teemo/Spells/TeemoRAbility/TeemoR",
 					"image": "assets/characters/teemo/hud/icons2d/teemor.png",
+					"mana": [75, 55, 35, 35, 35, 35],
+					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).",
 					"extendedVariables": [
 						{
@@ -243,8 +245,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [75, 55, 35, 35, 35, 35],
-					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"dataValues": {
 						"TriggerRadius": [160, 160, 160, 160, 160, 160, 160],
 						"MaxAmmo": [2, 3, 4, 5, 6, 7, 8],

@@ -35,6 +35,8 @@
 					"objectName": "PantheonQ",
 					"dataKey": "Characters/Pantheon/Spells/PantheonQAbility/PantheonQ",
 					"image": "assets/characters/pantheon/hud/icons2d/pantheon_q1.png",
+					"mana": [25, 25, 25, 25, 25, 25],
+					"cooldownTime": [11, 11, 10.25, 9.5, 8.75, 8, 8],
 					"tooltip": "<font color='#FF8C00'>Tap:</font> Pantheon thrusts his spear, dealing <physicalDamage>@TapDamageCalc@ physical damage</physicalDamage> to enemies hit. Refunds @TapCooldownRefund*100@% of this Ability's Cooldown.<br><br><font color='#FF8C00'>Hold:</font> Pantheon hurls his spear, dealing <physicalDamage>@HoldDamageCalc@ physical damage</physicalDamage> to the first enemy hit and @DamageFalloff*100@% less to further targets. <br><br>This Ability is enhanced against enemies below @CritHealthThreshold*100@% Health to deal <physicalDamage>@ExecuteDamageCalcModified@ physical damage</physicalDamage> instead.<br><br><font color='#EDDA74'>Mortal Will Bonus:</font> Deals an additional <physicalDamage>@EmpoweredDamageCalc@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_pantheonq_executedamage"
 						}
 					],
-					"mana": [25, 25, 25, 25, 25, 25],
-					"cooldownTime": [11, 11, 10.25, 9.5, 8.75, 8, 8],
 					"dataValues": {
 						"HoldDamage": [40, 70, 100, 130, 160, 190, 220],
 						"TapDamage": [40, 70, 100, 130, 160, 190, 220],
@@ -157,6 +157,8 @@
 					"objectName": "PantheonW",
 					"dataKey": "Characters/Pantheon/Spells/PantheonWAbility/PantheonW",
 					"image": "assets/characters/pantheon/hud/icons2d/pantheon_w1.png",
+					"mana": [55, 55, 55, 55, 55, 55],
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"tooltip": "Pantheon leaps on his target, <status>Stunning</status> for @StunDuration@ second and dealing <physicalDamage>@MaxHealthDamageCalc@ max Health physical damage</physicalDamage>.<br><br><keywordMajor>Mortal Will Bonus:</keywordMajor> Pantheon's next Attack strikes @EmpoweredNumHits@ times, dealing a total of <physicalDamage>@EmpoweredDamageMultCalcModified@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -164,8 +166,6 @@
 							"nameOverride": "game_effect_description_percenthppoolmod"
 						}
 					],
-					"mana": [55, 55, 55, 55, 55, 55],
-					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"dataValues": {
 						"BaseDamage": [25, 0, 0, 0, 0, 0, 0],
 						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
@@ -239,6 +239,8 @@
 					"objectName": "PantheonE",
 					"dataKey": "Characters/Pantheon/Spells/PantheonEAbility/PantheonE",
 					"image": "assets/characters/pantheon/hud/icons2d/pantheon_e1.png",
+					"mana": [80, 80, 80, 80, 80, 80],
+					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for @ShieldDuration@ seconds, becoming immune to non-tower damage from that direction and dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> over the duration. After channeling Pantheon slams with his shield, dealing <physicalDamage>@ShieldDamageCalc@ physical damage</physicalDamage>.<br><br><font color='#EDDA74'>Mortal Will Bonus:</font> When Pantheon slams his shield he gains <scaleArmor>@ResistsCalc@ Armor</scaleArmor> and <scaleMR>@ResistsCalc@ Magic Resist</scaleMR> for @ResistsDuration@ seconds, and <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -246,8 +248,6 @@
 							"nameOverride": "spell_pantheone_shielddamage"
 						}
 					],
-					"mana": [80, 80, 80, 80, 80, 80],
-					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"dataValues": {
 						"ShieldDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"AttacksPerSecond": [4, 4, 4, 4, 4, 4, 4],
@@ -348,6 +348,8 @@
 					"objectName": "PantheonR",
 					"dataKey": "Characters/Pantheon/Spells/PantheonRAbility/PantheonR",
 					"image": "assets/characters/pantheon/hud/icons2d/pantheon_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [180, 180, 165, 150, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Pantheon gains @ArmorPenetration*100@% Armor Penetration.<br><br><spellActive>Active:</spellActive> Pantheon gathers his strength to leap high into the air. He throws his spear from above which in a small area deals <physicalDamage>@spell.PantheonQ:HoldDamageCalc@ physical damage</physicalDamage> and <status>Slows</status> by @SpearSlow*100@% for @SpearSlowDuration@ seconds. <br><br>Pantheon then crashes down as a meteor at the target area. Deals up to <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in a line (decreased by up to @EdgeDamageReduction*100@% at the edges of the area).<br><br>This Ability instantly readies <font color='#EDDA74'>Mortal Will</font>.",
 					"extendedVariables": [
 						{
@@ -359,8 +361,6 @@
 							"nameOverride": "spell_listtype_armorpenetration"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [180, 180, 165, 150, 0, 0, 0],
 					"dataValues": {
 						"BaseDamage": [100, 300, 500, 700, 900, 1100, 1300],
 						"EdgeDamageReduction": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],

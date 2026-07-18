@@ -35,6 +35,8 @@
 					"objectName": "VexQ",
 					"dataKey": "Characters/Vex/Spells/VexQAbility/VexQ",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_q01.png",
+					"mana": [45, 50, 55, 60, 65, 65],
+					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"tooltip": "Vex launches a wave of mist that deals <magicDamage>@QDamageCalc@ magic damage</magicDamage>. After a delay, the wave becomes smaller and faster.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [45, 50, 55, 60, 65, 65],
-					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"dataValues": {
 						"BaseDamage": [25, 70, 115, 160, 205, 250, 295],
 						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
@@ -91,6 +91,8 @@
 					"objectName": "VexW",
 					"dataKey": "Characters/Vex/Spells/VexWAbility/VexW",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_w01.png",
+					"mana": [75, 75, 75, 75, 75, 75],
+					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"tooltip": "Vex gains <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds and emits a shockwave that deals <magicDamage>@WDamageCalc@ magic damage</magicDamage>.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
 					"extendedVariables": [
 						{
@@ -102,8 +104,6 @@
 							"nameOverride": "spell_listtype_shield"
 						}
 					],
-					"mana": [75, 75, 75, 75, 75, 75],
-					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
 						"ShieldAmount": [25, 50, 75, 100, 125, 150, 175],
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
@@ -149,6 +149,8 @@
 					"objectName": "VexE",
 					"dataKey": "Characters/Vex/Spells/VexEAbility/VexE",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_e01.png",
+					"mana": [70, 80, 90, 100, 110, 110],
+					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"tooltip": "Vex commands Shadow to fly to a location, increasing in size as it travels. Upon arriving, it deals <magicDamage>@EDamageCalc@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Killing an enemy with this ability reduces <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown by @GloomCDNonChampTooltip*100@%.<br><br>Applies <keywordMajor>Gloom</keywordMajor> to enemies hit.",
 					"tooltipExtended": "{{Spell_VexE_Tooltip}}<br><br><rules>Killing a champion refunds @GloomCDChampTooltip*100@% of <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown instead.<br>Enemies <status>Feared</status> by this Ability move away from the center rather than from Vex.</rules>",
 					"extendedVariables": [
@@ -165,8 +167,6 @@
 							"nameOverride": "spell_listtype_apratio"
 						}
 					],
-					"mana": [70, 80, 90, 100, 110, 110],
-					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"dataValues": {
 						"BaseDamage": [30, 50, 70, 90, 110, 130, 150],
 						"SlowAmount": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
@@ -203,6 +203,8 @@
 					"objectName": "VexR",
 					"dataKey": "Characters/Vex/Spells/VexRAbility/VexR",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_r01.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"tooltip": "Shadow excitedly surges forward, dealing <magicDamage>@spell.VexR:RDamageCalc@ magic damage</magicDamage> and marking the first enemy champion hit for 4 seconds.<br><br><recast>Recast</recast>: Dash to the marked champion, dealing <magicDamage>@spell.VexR:RecastDamageCalc@ magic damage</magicDamage> on arrival.<br><br>If the marked champion dies within @spell.VexR:TakedownWindow@ seconds of taking damage from this Ability, its Cooldown is temporarily reset.",
 					"extendedVariables": [
 						{
@@ -218,8 +220,6 @@
 							"nameOverride": "spell_listtype_range"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
 						"BaseDamage": [25, 75, 125, 175, 225, 275, 325],
 						"RecastDamage": [50, 150, 250, 350, 450, 550, 650],
@@ -264,9 +264,9 @@
 					"objectName": "VexP",
 					"dataKey": "Characters/Vex/Spells/VexPAbility/VexP",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_VexP_Tooltip}}",
 					"tooltipExtended": "{{Spell_VexP_Tooltip}}<br><br><rules>Non-champion targets take @GloomMinionMod@ damage and refund @GloomCDNonChamp*100@% of this Ability's Cooldown.<br>Enemies <status>Feared</status> by this Ability move more slowly the farther they are from Vex.</rules>",
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"GloomDuration": [6, 6, 6, 6, 6, 6, 6],
 						"MaxDoomCD": [15, 15, 15, 15, 15, 15, 15],

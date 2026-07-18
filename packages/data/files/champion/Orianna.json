@@ -35,6 +35,8 @@
 					"objectName": "OrianaIzunaCommand",
 					"dataKey": "Characters/Orianna/Spells/OrianaIzunaCommandAbility/OrianaIzunaCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
+					"mana": [35, 35, 35, 35, 35, 35],
+					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @ReducedDamagePercent@% less damage to all enemies after the first.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [35, 35, 35, 35, 35, 35],
-					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
 						"ReducedDamagePercent": [30, 30, 30, 30, 30, 30, 30],
@@ -91,6 +91,8 @@
 					"objectName": "OrianaDissonanceCommand",
 					"dataKey": "Characters/Orianna/Spells/OrianaDissonanceCommandAbility/OrianaDissonanceCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaw.png",
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -109,8 +111,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"BaseDamage": [30, 70, 110, 150, 190, 230, 270],
 						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
@@ -145,6 +145,8 @@
 					"objectName": "OrianaRedactCommand",
 					"dataKey": "Characters/Orianna/Spells/OrianaRedactCommandAbility/OrianaRedactCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@DefenseBonus@ Armor</scaleArmor> and <scaleMR>@DefenseBonus@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @ShieldDuration@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -164,8 +166,6 @@
 							"nameOverride": "spell_listtype_shieldamount"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"dataValues": {
 						"ShieldAmount": [20, 55, 90, 125, 160, 195, 230],
 						"DefenseBonus": [0, 6, 12, 18, 24, 30, 36],
@@ -218,6 +218,8 @@
 					"objectName": "OrianaDetonateCommand",
 					"dataKey": "Characters/Orianna/Spells/OrianaDetonateCommandAbility/OrianaDetonateCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannar.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 95, 80, 80, 80, 80],
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
 					"extendedVariables": [
 						{
@@ -225,8 +227,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [110, 110, 95, 80, 80, 80, 80],
 					"dataValues": {
 						"Damage": [100, 225, 350, 475, 600, 725, 850],
 						"AoERadius": [415, 415, 415, 415, 415, 415, 415],

@@ -35,6 +35,7 @@
 					"objectName": "BriarQ",
 					"dataKey": "Characters/Briar/Spells/BriarQAbility/BriarQ",
 					"image": "assets/characters/briar/hud/icons2d/briarq.png",
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 8],
 					"tooltip": "Briar leaps to a target, <status>Stunning</status> it for @StunDuration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and reducing @ShredPercent*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.<br><br><rules>Briar will stop prioritizing champions if she casts this Ability on a minion or monster during <keywordMajor>Blood Frenzy</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
@@ -46,7 +47,6 @@
 							"nameOverride": "spell_listtype_armorandmagicresistshred"
 						}
 					],
-					"cooldownTime": [13, 13, 12, 11, 10, 9, 8],
 					"dataValues": {
 						"BaseDamage": [35, 60, 85, 110, 135, 160, 185],
 						"DashSpeedBase": [600, 600, 600, 600, 600, 600, 600],
@@ -86,6 +86,7 @@
 					"objectName": "BriarW",
 					"dataKey": "Characters/Briar/Spells/BriarWAbility/BriarW",
 					"image": "assets/characters/briar/hud/icons2d/briarw.png",
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Briar leaps and enters a <keywordMajor>Blood Frenzy</keywordMajor>, self-taunting to the nearest enemy for @BerserkDuration@ seconds, prioritizing Champions. While in <keywordMajor>Blood Frenzy</keywordMajor> she gains <attackSpeed>@BerserkAS*100@% Attack Speed</attackSpeed> and <speed>@BerserkMS*100@% Move Speed</speed>, and her Attacks deal <physicalDamage>@TotalAoEDamage@ physical damage</physicalDamage> to enemies surrounding her target.<br><br>Briar can <recast>Recast</recast> this Ability to empower her next Attack. It deals <physicalDamage>@TotalAttackBonusDamage@ + @TotalAttackPercentMissingHealth@% missing Health physical damage</physicalDamage> and <healing>heals Briar for @AttackMaxHPHeal@ + @AttackHealPercent*100@% of the damage dealt</healing>.",
 					"extendedVariables": [
 						{
@@ -109,7 +110,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"TauntRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
 						"MinDashDistance": [75, 75, 75, 75, 75, 75, 75],
@@ -185,6 +185,7 @@
 					"objectName": "BriarE",
 					"dataKey": "Characters/Briar/Spells/BriarEAbility/BriarE",
 					"image": "assets/characters/briar/hud/icons2d/briare.png",
+					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"tooltip": "<charge>Begin Charging:</charge> Briar removes <keywordMajor>Blood Frenzy</keywordMajor> and gathers energy, gaining @DRPercent@% damage reduction and restoring <healing>@PercentMaxHPHeal@ Health</healing> over 1 second.<br><br><release>Release:</release> Briar unleashes a scream that deals up to <magicDamage>@Damage@ magic damage</magicDamage> based on time charged, and <status>Slows</status> by @SlowPercent*100@% for @SlowDuration@ seconds. When fully charged, the scream <status>Knocks Back</status> enemies, dealing <magicDamage>@WallHitDamage@ magic damage</magicDamage> to those who hit a wall and <status>Stunning</status> them for @WallStunDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -200,7 +201,6 @@
 							"nameOverride": "spell_briare_healratio"
 						}
 					],
-					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
 						"MaxBaseDamage": [45, 80, 115, 150, 185, 220, 255],
 						"WallHitBaseDamage": [65, 140, 215, 290, 365, 440, 515],
@@ -277,6 +277,7 @@
 					"objectName": "BriarR",
 					"dataKey": "Characters/Briar/Spells/BriarRAbility/BriarR",
 					"image": "assets/characters/briar/hud/icons2d/briarr.png",
+					"cooldownTime": [120, 120, 100, 80, 70, 70, 70],
 					"tooltip": "Briar kicks her pillory's hemolith gemstone and flies to the location of the first champion it hits, marking them as her prey. On landing, she deals <magicDamage>@Damage@ magic damage</magicDamage> to everything nearby and causes enemies who are not her prey to <status>Flee</status> for @FearDuration@ seconds. She then enters an empowered <keywordMajor>Blood Frenzy</keywordMajor> and will pursue her prey until death. During this time, she gains @TotalResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @LifeStealPercent*100@% Lifesteal, and an additional <speed>@ExtraMoveSpeedPercent*100@% Move Speed</speed>.",
 					"extendedVariables": [
 						{
@@ -292,7 +293,6 @@
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
-					"cooldownTime": [120, 120, 100, 80, 70, 70, 70],
 					"dataValues": {
 						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
 						"HuntDuration": [25000, 25000, 25000, 25000, 25000, 25000, 25000],

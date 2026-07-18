@@ -35,6 +35,8 @@
 					"objectName": "DariusCleave",
 					"dataKey": "Characters/Darius/Spells/DariusCleaveAbility/DariusCleave",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png",
+					"mana": [25, 30, 35, 40, 45, 50],
+					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"tooltip": "Darius hefts his axe then swings it around, dealing <physicalDamage>@BladeDamage@ physical damage</physicalDamage> with the edge and <physicalDamage>@HandleDamage@ damage</physicalDamage> with the handle. Enemies hit with the handle do not take a <keywordMajor>Hemorrhage</keywordMajor> stack.<br><br>Darius restores <healing>@MissingHealthHeal@% missing Health</healing> per enemy champion and large jungle monster hit with the edge, up to a max of <healing>@MissingHealPercent@%</healing>.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [25, 30, 35, 40, 45, 50],
-					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"dataValues": {
 						"MissingHealthHeal": [17, 17, 17, 17, 17, 17, 17],
 						"TotalADRatio": [90, 100, 110, 120, 130, 140, 150],
@@ -108,6 +108,8 @@
 					"objectName": "DariusNoxianTacticsONH",
 					"dataKey": "Characters/Darius/Spells/DariusNoxianTacticsONHAbility/DariusNoxianTacticsONH",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Darius' next Attack deals <physicalDamage>@EmpoweredAttackDamage@ physical damage</physicalDamage> and <status>Slows</status> by @SlowPercent@% for @SlowDuration@ second.<br><br>This Ability refunds its Mana cost and reduces its Cooldown by @PercentCDRefund@% if it kills the target.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"extendedVariables": [
 						{
@@ -115,8 +117,6 @@
 							"nameOverride": "spell_listtype_totaladscalar"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
 						"SlowPercent": [90, 90, 90, 90, 90, 90, 90],
 						"PercentCDRefund": [50, 50, 50, 50, 50, 50, 50],
@@ -154,6 +154,8 @@
 					"objectName": "DariusAxeGrabCone",
 					"dataKey": "Characters/Darius/Spells/DariusAxeGrabConeAbility/DariusAxeGrabCone",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png",
+					"mana": [70, 60, 50, 40, 30, 20],
+					"cooldownTime": [26, 26, 23.5, 21, 18.5, 16, 16],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Darius gains @PassivePercentArmorPen@% Armor Penetration.<br><br><spellActive>Active:</spellActive> Darius hooks with his axe, <status>Pulling</status>, and <status>Knocking Up</status> and <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ second.",
 					"extendedVariables": [
 						{
@@ -164,8 +166,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [70, 60, 50, 40, 30, 20],
-					"cooldownTime": [26, 26, 23.5, 21, 18.5, 16, 16],
 					"dataValues": {
 						"PassivePercentArmorPen": [20, 20, 25, 30, 35, 40, 45],
 						"SlowPercent": [40, 40, 40, 40, 40, 40, 40],
@@ -187,6 +187,8 @@
 					"objectName": "DariusExecute",
 					"dataKey": "Characters/Darius/Spells/DariusExecuteAbility/DariusExecute",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_sudden_death.png",
+					"mana": [100, 100, 0, 0, 0, 0],
+					"cooldownTime": [120, 120, 100, 80, 6, 6, 6],
 					"tooltip": "Darius leaps to an enemy and strikes a lethal blow, dealing <trueDamage>@Damage@ true damage</trueDamage>. For each <keywordMajor>Hemorrhage</keywordMajor> on the target, this Ability deals an additional @RDamagePercentPerHemoStack*100@% damage, up to a max of <trueDamage>@MaximumDamage@ damage</trueDamage>.<br><br>If this kills the target, Darius may <recast>Recast</recast> this Ability once within @RRecastDuration@ seconds. At rank 3, this Ability has no Mana cost and kills refresh the Cooldown completely.",
 					"extendedVariables": [
 						{
@@ -194,8 +196,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 0, 0, 0, 0],
-					"cooldownTime": [120, 120, 100, 80, 6, 6, 6],
 					"dataValues": {
 						"RBaseDamage": [0, 125, 250, 375, 500, 625, 750],
 						"RDamagePercentPerHemoStack": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],

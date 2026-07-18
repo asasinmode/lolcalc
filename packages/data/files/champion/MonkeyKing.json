@@ -35,6 +35,8 @@
 					"objectName": "MonkeyKingDoubleAttack",
 					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingDoubleAttackAbility/MonkeyKingDoubleAttack",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcrushingblow.png",
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains @AttackRangeBonus@ range, deals an additional <physicalDamage>@BonusDamageTT@ physical damage</physicalDamage>, and removes <scaleArmor>@ArmorShredPercent*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br>This Ability's cooldown is reduced by @CooldownDecrease@ seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"extendedVariables": [
 						{
@@ -50,8 +52,6 @@
 							"nameOverride": "spell_listtype_range"
 						}
 					],
-					"mana": [20, 20, 20, 20, 20, 20],
-					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
 						"BaseDamage": [-5, 20, 45, 70, 95, 120, 145],
 						"ADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -104,6 +104,8 @@
 					"objectName": "MonkeyKingDecoy",
 					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingDecoyAbility/MonkeyKingDecoy",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingdecoy.png",
+					"mana": [60, 55, 50, 45, 40, 40],
+					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"tooltip": "Wukong dashes and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ second, leaving behind a stationary <keywordMajor>Clone</keywordMajor> for @CloneDuration@ seconds.<br><br>The <keywordMajor>Clone</keywordMajor> Attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, each dealing @CloneDamageMod*100@% of normal damage.",
 					"extendedVariables": [
 						{
@@ -114,8 +116,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 55, 50, 45, 40, 40],
-					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"dataValues": {
 						"CloneDamageMod": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
 						"StealthDuration": [1, 1, 1, 1, 1, 1, 1],
@@ -135,6 +135,8 @@
 					"objectName": "MonkeyKingNimbus",
 					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingNimbusAbility/MonkeyKingNimbus",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingnimbusstrike.png",
+					"mana": [30, 35, 40, 45, 50, 50],
+					"cooldownTime": [10, 10, 9.25, 8.5, 7.75, 7, 7],
 					"tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to @ExtraTargets@ additional enemies nearby. Each enemy struck takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -149,8 +151,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [30, 35, 40, 45, 50, 50],
-					"cooldownTime": [10, 10, 9.25, 8.5, 7.75, 7, 7],
 					"dataValues": {
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
 						"AttackSpeed": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
@@ -193,6 +193,8 @@
 					"objectName": "MonkeyKingSpinToWin",
 					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingSpinToWinAbility/MonkeyKingSpinToWin",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcyclone.png",
+					"mana": [100, 100, 100, 100, 100, 0],
+					"cooldownTime": [10, 130, 110, 90, 90, 90, 10],
 					"tooltip": "Wukong gains <speed>@MoveSpeed*100@% Move Speed</speed> and spins his staff, <status>Knocking Up</status> nearby enemies for @KnockupDuration@ seconds and take <physicalDamage>@TotalDamageTT@ plus @PercentHPDamageTT@ max Health physical damage</physicalDamage> over @SpinDuration@ seconds.<br><br>This Ability can be cast a second time within @RecastWindow@ seconds before going on cooldown.",
 					"extendedVariables": [
 						{
@@ -200,8 +202,6 @@
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 0],
-					"cooldownTime": [10, 130, 110, 90, 90, 90, 10],
 					"dataValues": {
 						"KnockupDuration": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"SpinDuration": [2, 2, 2, 2, 2, 2, 2],
@@ -287,8 +287,8 @@
 					"objectName": "MonkeyKingPassive",
 					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingPassiveAbility/MonkeyKingPassive",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png",
-					"tooltip": "Wukong gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and regenerates <healing>@HealthPercentPer5*100@% max Health per 5 seconds</healing>. These bonuses are increased by @StackMultiplier*100@% for @StackDuration@ seconds every time he or his <keywordMajor>Clone</keywordMajor> hit an enemy champion or jungle monster with an Attack or Ability, stacking up to @MaxStacks@ times.",
 					"cooldownTime": [20, 20, 20, 20, 20, 20, 20],
+					"tooltip": "Wukong gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and regenerates <healing>@HealthPercentPer5*100@% max Health per 5 seconds</healing>. These bonuses are increased by @StackMultiplier*100@% for @StackDuration@ seconds every time he or his <keywordMajor>Clone</keywordMajor> hit an enemy champion or jungle monster with an Attack or Ability, stacking up to @MaxStacks@ times.",
 					"dataValues": {
 						"CombatDuration": [3, 3, 3, 3, 3, 3, 3],
 						"StackDuration": [5, 5, 5, 5, 5, 5, 5],

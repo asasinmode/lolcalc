@@ -35,6 +35,8 @@
 					"objectName": "NunuQ",
 					"dataKey": "Characters/Nunu/Spells/NunuQAbility/NunuQ",
 					"image": "assets/characters/nunu/hud/icons2d/nunuq.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 8],
 					"tooltip": "Nunu asks Willump to take a bite of an enemy, dealing <trueDamage>@MonsterMinionDamage@ true damage</trueDamage> and restoring <healing>@MonsterHealing@ Health</healing> when used against a minion or jungle monster. Against a champion, it instead deals <magicDamage>@TotalChampionDamage@ magic damage</magicDamage> and restores <healing>@ChampionHealing@ Health</healing>.<br><br>The <healing>healing</healing> is increased by @LowHealthHealingScalar*100@% when Nunu and Willump are below @LowHealthThreshhold*100@% Health.",
 					"extendedVariables": [
 						{
@@ -50,8 +52,6 @@
 							"nameOverride": "spell_listtype_heal"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [13, 13, 12, 11, 10, 9, 8],
 					"dataValues": {
 						"MonsterMinionDamage": [200, 400, 600, 800, 1000, 1200, 1400],
 						"BaseHealing": [35, 65, 95, 125, 155, 185, 215],
@@ -119,6 +119,8 @@
 					"objectName": "NunuW",
 					"dataKey": "Characters/Nunu/Spells/NunuWAbility/NunuW",
 					"image": "assets/characters/nunu/hud/icons2d/nunuw1.png",
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"tooltip": "Nunu and Willump create a snowball that grows in size and speed as they roll it. They turn slower while rolling it, but can increase turning speed by holding the turn.<br><br>The snowball does between <magicDamage>@NoImpactSnowballDamage@</magicDamage> and <magicDamage>@MaximumSnowballDamage@ magic damage</magicDamage>, and <status>Knocks Up</status> for between @BaseKnockupDuration@ and @MaximumStunDuration@ seconds when it collides with a champion, large monster or wall. These values scale up with distance rolled.<br><br>Nunu and Willump can <recast>Recast</recast> to let the snowball go early.",
 					"extendedVariables": [
 						{
@@ -129,8 +131,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
 						"MonsterCollisionRadiusScalar": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
 						"MonsterImpactRadiusScalar": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
@@ -212,6 +212,8 @@
 					"objectName": "NunuE",
 					"dataKey": "Characters/Nunu/Spells/NunuEAbility/NunuE",
 					"image": "assets/characters/nunu/hud/icons2d/nunue.png",
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Nunu throws three snowballs, dealing <magicDamage>@TotalSnowballDamage@ magic damage</magicDamage> per snowball and <status>Slowing</status> enemies hit by all three by @SlowAmount*-100@% for @SlowDuration@ second. Nunu can <recast>Recast</recast> this up to twice more.<br><br>After @TotalSpellDuration@ seconds, Nunu <status>Roots</status> all nearby enemies that had been <status>Slowed</status> by the snowballs for @RootDuration@ seconds and deals an additional <magicDamage>@TotalRootDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -227,8 +229,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"BaseDamage": [7.5, 15, 22.5, 30, 37.5, 45, 52.5],
 						"SlowAmount": [-0.25, -0.3, -0.35, -0.4, -0.45, -0.5, -0.55],
@@ -286,6 +286,8 @@
 					"objectName": "NunuR",
 					"dataKey": "Characters/Nunu/Spells/NunuRAbility/NunuR",
 					"image": "assets/characters/nunu/hud/icons2d/nunu_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 100, 90, 90, 90, 90],
 					"tooltip": "Nunu and Willump channel a powerful blizzard for up to @ChannelDuration@ seconds. Enemies inside are <status>Slowed</status> by @SlowStartAmount*-100@%, increasing to @MaxSlowAmount*-100@% over the duration. Nunu and Willump also gain <shield>@TotalShieldAmount@ Shield</shield> for the duration before decaying over @ShieldDecayDuration@ seconds afterwards.<br><br>When the blizzard ends, it detonates, dealing up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> based on channel time. Nunu and Willump can <recast>Recast</recast> to end the blizzard early.",
 					"extendedVariables": [
 						{
@@ -297,8 +299,6 @@
 							"nameOverride": "spell_listtype_shieldamount"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [110, 110, 100, 90, 90, 90, 90],
 					"dataValues": {
 						"BaseDamage": [625, 625, 925, 1275, 1275, 1275, 1275],
 						"SlowStartAmount": [-0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5],
@@ -360,10 +360,10 @@
 					"objectName": "NunuPassive",
 					"dataKey": "Characters/Nunu/Spells/NunuPassiveAbility/NunuPassive",
 					"image": "assets/characters/nunu/hud/icons2d/nunupassive.png",
-					"tooltip": "{{Spell_NunuPassive_Tooltip}}",
-					"tooltipExtended": "{{Spell_NunuPassive_Tooltip}}<br><br><rules>The buff range is increased against champions and structures.<br>The duration stacks but the effect can only occur once every 10 seconds per target.<br>The buff attempts to target the champion who will get the most use from it.</rules>",
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [20, 20, 20, 20, 20, 20, 20],
+					"tooltip": "{{Spell_NunuPassive_Tooltip}}",
+					"tooltipExtended": "{{Spell_NunuPassive_Tooltip}}<br><br><rules>The buff range is increased against champions and structures.<br>The duration stacks but the effect can only occur once every 10 seconds per target.<br>The buff attempts to target the champion who will get the most use from it.</rules>",
 					"dataValues": {
 						"MonsterRadius": [700, 700, 700, 700, 700, 700, 700],
 						"LargeRadius": [1000, 1000, 1000, 1000, 1000, 1000, 1000],

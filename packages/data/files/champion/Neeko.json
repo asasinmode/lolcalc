@@ -35,6 +35,8 @@
 					"objectName": "NeekoQ",
 					"dataKey": "Characters/Neeko/Spells/NeekoQAbility/NeekoQ",
 					"image": "assets/characters/neeko/hud/icons2d/neeko_q.png",
+					"mana": [50, 60, 70, 80, 90, 85],
+					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 7],
 					"tooltip": "Neeko throws a seed that blooms to deal <magicDamage>@ExplosionDamage@ magic damage</magicDamage>. If it kills a unit or hits a champion or large monster, it will bloom again, dealing <magicDamage>@SecondDamage@ magic damage</magicDamage>. Max 2 extra blooms.",
 					"extendedVariables": [
 						{
@@ -53,8 +55,6 @@
 							"nameOverride": "spell_alphastrike_bonusminionmonsterdamage"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 85],
-					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
 						"SlowAmount": [40, 40, 40, 40, 40, 40, 40],
 						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
@@ -100,6 +100,7 @@
 					"objectName": "NeekoW",
 					"dataKey": "Characters/Neeko/Spells/NeekoWAbility/NeekoW",
 					"image": "assets/characters/neeko/hud/icons2d/neeko_w.png",
+					"cooldownTime": [16, 16, 15, 14, 13, 12, 12],
 					"tooltip": "<passive>Passive:</passive> Every 3rd Attack deals an additional <magicDamage>@PassiveBonusDamageCalc@ bonus magic damage</magicDamage> and increases Neeko's <speed>Move Speed by @PassiveHaste@%</speed> for @PassiveHasteDuration@ second.<br><br><active>Active:</active> Neeko becomes <keywordStealth>invisible</keywordStealth> for @StealthDuration@ seconds and projects a clone that lasts @CloneDuration@ seconds. Neeko and the clone gain <speed>@Haste@% Move Speed</speed> for @HasteDuration@ seconds. <br><br><rules>The clone can be controlled using the Move Pet Click hotkey or by <recast>Recasting</recast> this Ability.<br>The clone mirrors her spellcasts, emotes, and recall.</rules>",
 					"extendedVariables": [
 						{
@@ -115,7 +116,6 @@
 							"nameOverride": "spell_listtype_passivemovementspeed"
 						}
 					],
-					"cooldownTime": [16, 16, 15, 14, 13, 12, 12],
 					"dataValues": {
 						"CloneDuration": [3, 3, 3, 3, 3, 3, 3],
 						"StealthDuration": [0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -153,6 +153,8 @@
 					"objectName": "NeekoE",
 					"dataKey": "Characters/Neeko/Spells/NeekoEAbility/NeekoE",
 					"image": "assets/characters/neeko/hud/icons2d/neeko_e.png",
+					"mana": [60, 65, 70, 75, 80, 60],
+					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"tooltip": "Neeko slings a tangle that deals <magicDamage>@BaseDamage@ magic damage</magicDamage> and <status>Roots</status> for @MinRootDuration@ seconds.<br><br>The tangle becomes empowered after hitting an enemy, growing larger, moving faster, and <status>Rooting</status> for @MaxRootDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -171,8 +173,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 60],
-					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"dataValues": {
 						"Damage": [35, 70, 105, 140, 175, 210, 245],
 						"BaseRootDuration": [0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -207,6 +207,8 @@
 					"objectName": "NeekoR",
 					"dataKey": "Characters/Neeko/Spells/NeekoRAbility/NeekoR",
 					"image": "assets/characters/neeko/hud/icons2d/neeko_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 105, 90, 90, 90, 90],
 					"tooltip": "After a delay Neeko leaps into the air, <status>Knocking Up</status> all nearby enemies for @DelayUntilExplosion@ seconds. She then crashes down, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all nearby enemies and <status>Stunning</status> them for @StunDuration@ seconds.<br><br><rules>This Ability can be prepared in secret if Neeko is disguised. @DelayBeforePassiveRemoval@ seconds after casting this ability Neeko breaks her disguise.</rules>",
 					"extendedVariables": [
 						{
@@ -214,8 +216,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 105, 90, 90, 90, 90],
 					"dataValues": {
 						"Damage": [-50, 150, 350, 550, 750, 950, 1150],
 						"Duration": [0, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],

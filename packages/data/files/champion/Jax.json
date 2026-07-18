@@ -35,6 +35,8 @@
 					"objectName": "JaxQ",
 					"dataKey": "Characters/Jax/Spells/JaxQAbility/JaxQ",
 					"image": "assets/characters/jax/hud/icons2d/jaxq.png",
+					"mana": [65, 65, 65, 65, 65, 65],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 5.5],
 					"tooltip": "Jax leaps to a friendly or enemy unit or ward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> if it is an enemy.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [65, 65, 65, 65, 65, 65],
-					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 5.5],
 					"dataValues": {
 						"Damage": [25, 65, 105, 145, 185, 225, 265]
 					},
@@ -74,6 +74,8 @@
 					"objectName": "JaxW",
 					"dataKey": "Characters/Jax/Spells/JaxWAbility/JaxW",
 					"image": "assets/characters/jax/hud/icons2d/jaxw.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -81,8 +83,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
 						"Damage": [15, 50, 85, 120, 155, 190, 225],
 						"StructureMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
@@ -118,6 +118,8 @@
 					"objectName": "JaxE",
 					"dataKey": "Characters/Jax/Spells/JaxEAbility/JaxE",
 					"image": "assets/characters/jax/hud/icons2d/jaxe.png",
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [17, 17, 15, 13, 11, 9, 9],
 					"tooltip": "Jax enters a defensive stance for up to @DodgeDuration@ seconds, dodging incoming Attacks and taking @AoEDamageReduction@% less damage from area of effect Abilities. After @DodgeDuration@ seconds or <recast>Recasting</recast>, Jax deals <magicDamage>@TotalDamage@ + @PercentHealthDamage@% max Health magic damage</magicDamage> and <status>Stuns</status> nearby enemies for @StunDuration@ second. <br><br>The damage is increased by @PercentIncreasedPerDodge*100@% per Attack dodged, up to a maximum of <magicDamage>@MaxDamage@ + @MaxPercentHealthDamage@% max Health</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -128,8 +130,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 100],
-					"cooldownTime": [17, 17, 15, 13, 11, 9, 9],
 					"dataValues": {
 						"BaseDamage": [10, 40, 70, 100, 130, 160, 190],
 						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
@@ -195,6 +195,8 @@
 					"objectName": "JaxR",
 					"dataKey": "Characters/Jax/Spells/JaxRAbility/JaxR",
 					"image": "assets/characters/jax/hud/icons2d/jaxr.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 100, 90, 8, 7, 7],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack within @PassiveFallOffTime@ seconds deals an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Jax slams his lantern down, dealing <magicDamage>@SwingDamageTotal@ magic damage</magicDamage> to nearby enemies. If he hits a champion he gains <scaleArmor>@BaseArmor@ Armor</scaleArmor> and <scaleMR>@BaseMR@ Magic Resist</scaleMR> plus <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR> per additional champion hit for @Duration@ seconds. During this time every second Attack deals additional <magicDamage>magic damage</magicDamage> instead of every third.",
 					"extendedVariables": [
 						{
@@ -222,8 +224,6 @@
 							"nameOverride": "spell_jaxrapexform_bonusmr"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [110, 110, 100, 90, 8, 7, 7],
 					"dataValues": {
 						"Duration": [8, 8, 8, 8, 8, 8, 8],
 						"PassiveBaseDamage": [20, 75, 130, 185, 240, 295, 350],

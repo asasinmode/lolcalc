@@ -35,6 +35,7 @@
 					"objectName": "LuxLightBinding",
 					"dataKey": "Characters/Lux/Spells/LuxLightBindingAbility/LuxLightBinding",
 					"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
+					"mana": [50, 50, 50, 50, 50, 50],
 					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @RootDuration@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
 					"extendedVariables": [
 						{
@@ -42,7 +43,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
 					"dataValues": {
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
 						"APRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
@@ -77,6 +77,8 @@
 					"objectName": "LuxPrismaticWave",
 					"dataKey": "Characters/Lux/Spells/LuxPrismaticWaveAbility/LuxPrismaticWave",
 					"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 9.5],
 					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @ShieldDuration@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
 					"extendedVariables": [
 						{
@@ -87,8 +89,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 9.5],
 					"dataValues": {
 						"BaseShieldAmount": [25, 40, 55, 70, 85, 100, 115],
 						"APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
@@ -125,6 +125,8 @@
 					"objectName": "LuxLightStrikeKugel",
 					"dataKey": "Characters/Lux/Spells/LuxLightStrikeKugelAbility/LuxLightStrikeKugel",
 					"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png",
+					"mana": [70, 80, 90, 100, 110, 110],
+					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Lux creates a light zone that <status>Slows</status> by @SlowPercent@% and reveals the area. After @SlowZoneDuration@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
 					"extendedVariables": [
 						{
@@ -139,8 +141,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [70, 80, 90, 100, 110, 110],
-					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
 						"VisionRadius": [650, 650, 650, 650, 650, 650, 650],
 						"SlowLingerDuration": [1, 1, 1, 1, 1, 1, 1],
@@ -191,6 +191,8 @@
 					"objectName": "LuxR",
 					"dataKey": "Characters/Lux/Spells/LuxRAbility/LuxR",
 					"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [60, 60, 50, 40, 40, 40, 30],
 					"tooltip": "Lux fires a dazzling ray of light, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in a line.",
 					"extendedVariables": [
 						{
@@ -198,8 +200,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [60, 60, 50, 40, 40, 40, 30],
 					"dataValues": {
 						"Damage": [200, 300, 400, 500, 600, 700, 800],
 						"ResetPercent": [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
@@ -231,8 +231,8 @@
 					"objectName": "LuxIlluminationPassive",
 					"dataKey": "Characters/Lux/Spells/LuxIlluminationPassiveAbility/LuxIlluminationPassive",
 					"image": "assets/characters/lux/hud/icons2d/luxilluminatingfraulein.png",
-					"tooltip": "Lux's damaging Abilities mark enemies for @DebuffDuration@ seconds. Lux's Attacks consume the mark, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><spellName>Final Spark</spellName> will consume marks on enemies it hits and refresh them.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"tooltip": "Lux's damaging Abilities mark enemies for @DebuffDuration@ seconds. Lux's Attacks consume the mark, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><spellName>Final Spark</spellName> will consume marks on enemies it hits and refresh them.",
 					"dataValues": {
 						"DebuffDuration": [6, 6, 6, 6, 6, 6, 6],
 						"APRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]

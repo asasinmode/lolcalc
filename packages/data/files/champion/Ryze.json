@@ -35,6 +35,8 @@
 					"objectName": "RyzeQWrapper",
 					"dataKey": "Characters/Ryze/Spells/RyzeQWrapperAbility/RyzeQWrapper",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_q.png",
+					"mana": [40, 38, 36, 34, 32, 32],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_RyzeW_Name}}</spellName> and <spellName>{{Spell_RyzeE_Name}}</spellName> refresh this Ability's Cooldown and charge a rune for @RuneDuration@ seconds (max @MaximumRunes@ runes).<br><br><spellActive>Active:</spellActive> Ryze unleashes a blast, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> to the first enemy hit. If the target has <keywordMajor>Flux</keywordMajor> on it, it is consumed, causing this Ability to deal @Spell.RyzeR:OverloadDamageBonus@% increased damage and bounces to nearby enemies with <keywordMajor>Flux</keywordMajor>.<br><br>Ryze also discharges all runes, granting Ryze <speed>@MovementSpeedAmount@% Move Speed</speed> for @MovementSpeedDuration@ seconds if @MaximumRunes@ runes were charged.",
 					"extendedVariables": [
 						{
@@ -50,8 +52,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [40, 38, 36, 34, 32, 32],
-					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
 						"BaseDamage": [55, 75, 95, 115, 135, 155, 175],
 						"DamageAmp": [30, 40, 50, 60, 70, 80, 90],
@@ -101,6 +101,8 @@
 					"objectName": "RyzeW",
 					"dataKey": "Characters/Ryze/Spells/RyzeWAbility/RyzeW",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_w.png",
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 8.5],
 					"tooltip": "Ryze deals <magicDamage>@WDamageCalc@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @CCDuration@ seconds. If the target has <keywordMajor>Flux</keywordMajor>, it is consumed and this Ability <status>Roots</status> instead of <status>Slowing</status>.",
 					"extendedVariables": [
 						{
@@ -112,8 +114,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 100],
-					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 8.5],
 					"dataValues": {
 						"SlowAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
@@ -149,6 +149,8 @@
 					"objectName": "RyzeE",
 					"dataKey": "Characters/Ryze/Spells/RyzeEAbility/RyzeE",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_e.png",
+					"mana": [35, 45, 55, 65, 75, 85],
+					"cooldownTime": [3.75, 3.5, 3.25, 3, 2.75, 2.5, 2.5],
 					"tooltip": "Ryze fires an orb, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and applies <keywordMajor>Flux</keywordMajor> for @DebuffDuration@ seconds to the target and nearby enemies. Enemies already afflicted with <keywordMajor>Flux</keywordMajor> will cause it to spread further.",
 					"extendedVariables": [
 						{
@@ -160,8 +162,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [35, 45, 55, 65, 75, 85],
-					"cooldownTime": [3.75, 3.5, 3.25, 3, 2.75, 2.5, 2.5],
 					"dataValues": {
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
 						"DebuffDuration": [4, 4, 4, 4, 4, 4, 4],
@@ -211,6 +211,8 @@
 					"objectName": "RyzeR",
 					"dataKey": "Characters/Ryze/Spells/RyzeRAbility/RyzeR",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_RyzeQWrapper_Name}}</spellName> damage bonus against targets with <keywordMajor>Flux</keywordMajor> increased to @OverloadDamageBonus@%.<br><br><spellActive>Active:</spellActive> Ryze opens a portal to another location. After @ChargeTimeTooltip@ seconds, all allies near the portal are teleported to that location.",
 					"extendedVariables": [
 						{
@@ -218,8 +220,6 @@
 							"nameOverride": "spell_listtype_ryzeoverloaddamageincrease"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"dataValues": {
 						"ChargeTime": [2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1],
 						"TeleportTime": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
@@ -244,8 +244,8 @@
 					"objectName": "RyzePassive",
 					"dataKey": "Characters/Ryze/Spells/RyzePassiveAbility/RyzePassive",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_p.png",
-					"tooltip": "Ryze gains <scaleMana>@PassiveManaCalcTooltip@% max Mana</scaleMana>. His Abilities do additional damage based on his <scaleMana>bonus Mana</scaleMana>.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"tooltip": "Ryze gains <scaleMana>@PassiveManaCalcTooltip@% max Mana</scaleMana>. His Abilities do additional damage based on his <scaleMana>bonus Mana</scaleMana>.",
 					"dataValues": {
 						"PercentManaIncrease": [10, 10, 10, 10, 10, 10, 10],
 						"APAmount": [100, 100, 100, 100, 100, 100, 100]

@@ -35,6 +35,8 @@
 					"objectName": "MissFortuneRicochetShot",
 					"dataKey": "Characters/MissFortune/Spells/MissFortuneRicochetShotAbility/MissFortuneRicochetShot",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
 						"BaseDamage": [-5, 20, 45, 70, 95, 120, 145],
 						"ADRatio": [1, 1, 1, 1, 1, 1, 1],
@@ -124,6 +124,8 @@
 					"objectName": "MissFortuneViciousStrikes",
 					"dataKey": "Characters/MissFortune/Spells/MissFortuneViciousStrikesAbility/MissFortuneViciousStrikes",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png",
+					"mana": [45, 45, 45, 45, 45, 45],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
 					"extendedVariables": [
 						{
@@ -139,8 +141,6 @@
 							"nameOverride": "spell_listtype_movementspeedmax"
 						}
 					],
-					"mana": [45, 45, 45, 45, 45, 45],
-					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"PassiveBaseMS": [25, 30, 35, 40, 45, 50, 55],
 						"PassiveMaxMS": [50, 60, 70, 80, 90, 100, 110],
@@ -172,6 +172,8 @@
 					"objectName": "MissFortuneScattershot",
 					"dataKey": "Characters/MissFortune/Spells/MissFortuneScattershotAbility/MissFortuneScattershot",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png",
+					"mana": [80, 80, 80, 80, 80, 80],
+					"cooldownTime": [20, 18, 17, 16, 15, 14, 13],
 					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
 					"extendedVariables": [
 						{
@@ -179,8 +181,6 @@
 							"nameOverride": "spell_listtype_damagepersecond"
 						}
 					],
-					"mana": [80, 80, 80, 80, 80, 80],
-					"cooldownTime": [20, 18, 17, 16, 15, 14, 13],
 					"dataValues": {
 						"BaseDamagePerSecond": [20, 35, 50, 65, 80, 95, 110],
 						"BaseDuration": [2, 2, 2, 2, 2, 2, 2],
@@ -235,6 +235,8 @@
 					"objectName": "MissFortuneBulletTime",
 					"dataKey": "Characters/MissFortune/Spells/MissFortuneBulletTimeAbility/MissFortuneBulletTime",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [130, 120, 110, 100, 90, 80, 70],
 					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -242,8 +244,6 @@
 							"nameOverride": "spell_missfortuner_bulletbarrages"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [130, 120, 110, 100, 90, 80, 70],
 					"dataValues": {
 						"BaseWaves": [12, 14, 16, 18, 20, 22, 24],
 						"BaseDamage": [10, 20, 30, 40, 50, 60, 70],
@@ -316,9 +316,9 @@
 					"objectName": "MissFortunePassive",
 					"dataKey": "Characters/MissFortune/Spells/MissFortunePassiveAbility/MissFortunePassive",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_MissFortunePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"spellCalculations": {
 						"TotalDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,

@@ -35,6 +35,8 @@
 					"objectName": "FizzQ",
 					"dataKey": "Characters/Fizz/Spells/FizzQAbility/FizzQ",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_q.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 6],
 					"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 6],
 					"spellCalculations": {
 						"QDamage": {
 							"mFormulaParts": [
@@ -88,6 +88,8 @@
 					"objectName": "FizzW",
 					"dataKey": "Characters/Fizz/Spells/FizzWAbility/FizzW",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_w.png",
+					"mana": [30, 40, 50, 60, 70, 80],
+					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"tooltip": "<spellPassive>Passive</spellPassive>: Fizz's Attacks cause his enemies to bleed, dealing <magicDamage>@DoTDamage@ magic damage</magicDamage> over @BleedDuration@ seconds. <br><br><spellActive>Active</spellActive>: Fizz's next Attack deals an additional <magicDamage>@ActiveDamage@ magic damage</magicDamage>. If this Attack kills its target, Fizz refunds <scaleMana>@OnKillManaRefund@ Mana</scaleMana> and reduces the cooldown of this Ability to @OnKillNewCooldown@ second. If it does not kill, Fizz's Attacks deal an additional <magicDamage>@OnHitBuffDamage@ magic damage</magicDamage> for @OnHitBuffDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -111,8 +113,6 @@
 							"nameOverride": "spell_listtype_cost"
 						}
 					],
-					"mana": [30, 40, 50, 60, 70, 80],
-					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
 						"DoTBaseDamage": [15, 30, 45, 60, 75, 90, 105],
 						"DoTRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
@@ -179,6 +179,8 @@
 					"objectName": "FizzE",
 					"dataKey": "Characters/Fizz/Spells/FizzEAbility/FizzE",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_e1.png",
+					"mana": [75, 80, 85, 90, 95, 100],
+					"cooldownTime": [16, 16, 14, 12, 10, 8, 6],
 					"tooltip": "Fizz hops onto his trident, becoming Untargetable for 0.75 seconds, after which he deals <magicDamage>@EDamage@ magic damage</magicDamage> to nearby enemies and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>Fizz can <recast>Recast</recast> this Ability while Untargetable to dash again, which ends the effect early, deals damage in a smaller area, and doesn't <status>Slow</status>.",
 					"extendedVariables": [
 						{
@@ -194,8 +196,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [75, 80, 85, 90, 95, 100],
-					"cooldownTime": [16, 16, 14, 12, 10, 8, 6],
 					"dataValues": {
 						"BaseDamage": [30, 80, 130, 180, 230, 280, 330],
 						"SmallAoESize": [225, 225, 225, 225, 225, 225, 225],
@@ -228,6 +228,8 @@
 					"objectName": "FizzR",
 					"dataKey": "Characters/Fizz/Spells/FizzRAbility/FizzR",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_r.png",
+					"mana": [100, 100, 100, 100, 100, 0],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Fizz launches a fish that attaches to the first champion hit. The victim is afflicted with <keywordStealth>True Sight</keywordStealth> and <status>Slowed</status> by between 40% to 80% based on how far the fish travelled before attaching. <br><br>After @DetonationTime@ seconds a shark erupts on the target, <status>Knocking Up</status> the target with the fish for 1 second, <status>Knocking Back</status> everything else, and dealing between <magicDamage>@SmallSharkDamage@ to @BigSharkDamage@ magic damage</magicDamage> based on how far the fish travelled before attaching.",
 					"extendedVariables": [
 						{
@@ -243,8 +245,6 @@
 							"nameOverride": "spell_fizzr_largefishdamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 0],
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
 						"SmallDamage": [60, 180, 300, 420, 540, 660, 780],
 						"SmallAPRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
@@ -296,9 +296,9 @@
 					"objectName": "FizzPassive",
 					"dataKey": "Characters/Fizz/Spells/FizzPassiveAbility/FizzPassive",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_p.png",
+					"mana": [40, 40, 40, 40, 40, 40],
 					"tooltip": "{{Spell_FizzPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_FizzPassive_Tooltip}}<br><br><rules>Ghosted units ignore collision with other units.<br>Damage reduction modified to @MonsterDamageReductionCalc@ against jungle monsters.<br>Damage cannot be reduced by more than @DamageReductionMax*100@%.</rules>",
-					"mana": [40, 40, 40, 40, 40, 40],
 					"dataValues": {
 						"DamageReduction": [4, 4, 4, 4, 4, 4, 4],
 						"DamageReductionMax": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],

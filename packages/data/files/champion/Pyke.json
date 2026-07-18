@@ -35,6 +35,8 @@
 					"objectName": "PykeQ",
 					"dataKey": "Characters/Pyke/Spells/PykeQAbility/PykeQ",
 					"image": "assets/characters/pyke/hud/icons2d/pykeq.png",
+					"mana": [70, 75, 80, 85, 90, 95],
+					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 7.5],
 					"tooltip": "<tap>Tap:</tap> Pyke stabs, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, preferring champions. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit and <status>Pulling</status> them towards him. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>If Pyke successfully hits an enemy champion or the channel does not complete successfully, @ManaRefund*100@% of the Mana cost is refunded.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 95],
-					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 7.5],
 					"dataValues": {
 						"ManaRefund": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"BaseDamage": [50, 100, 150, 200, 250, 300, 350],
@@ -88,10 +88,10 @@
 					"objectName": "PykeW",
 					"dataKey": "Characters/Pyke/Spells/PykeWAbility/PykeW",
 					"image": "assets/characters/pyke/hud/icons2d/pykew.png",
-					"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @CamoDuration@ seconds.",
-					"extendedVariables": [],
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
+					"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @CamoDuration@ seconds.",
+					"extendedVariables": [],
 					"dataValues": {
 						"BaseMoveSpeed": [45, 45, 45, 45, 45, 45, 45],
 						"BaseHealCap": [80, 80, 80, 80, 80, 80, 80],
@@ -159,6 +159,8 @@
 					"objectName": "PykeE",
 					"dataKey": "Characters/Pyke/Spells/PykeEAbility/PykeE",
 					"image": "assets/characters/pyke/hud/icons2d/pykee.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [15, 15, 14, 13, 12, 11, 11],
 					"tooltip": "Pyke dashes, leaving a drowned phantom behind him that returns to him shortly. The phantom <status>Stuns</status> for @StunDuration@ seconds and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to champions.",
 					"extendedVariables": [
 						{
@@ -166,8 +168,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [15, 15, 14, 13, 12, 11, 11],
 					"dataValues": {
 						"BaseDamage": [100, 100, 150, 200, 250, 300, 350],
 						"BonusADRatio": [1, 1, 1, 1, 1, 1, 1],
@@ -225,10 +225,10 @@
 					"objectName": "PykeR",
 					"dataKey": "Characters/Pyke/Spells/PykeRAbility/PykeR",
 					"image": "assets/characters/pyke/hud/icons2d/pyker.png",
-					"tooltip": "Pyke strikes all enemy champions in an X, teleporting to and <danger>executing</danger> targets below <scaleAD>@RDamage@</scaleAD> Health. Champions above the threshold and non-champions instead take physical damage equal to @ReducedDamage*100@% of that amount (<physicalDamage>@ReducedDamageFinal@</physicalDamage>). <br><br>When an enemy champion dies inside the X, Pyke can <recast>Recast</recast> this Ability for free within @RRecastDuration@ seconds. If he executed that champion, the last assisting ally will also get kill gold. If he did not, he will still get kill gold as if he did.",
-					"extendedVariables": [],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [115, 100, 85, 70, 55, 40, 25],
+					"tooltip": "Pyke strikes all enemy champions in an X, teleporting to and <danger>executing</danger> targets below <scaleAD>@RDamage@</scaleAD> Health. Champions above the threshold and non-champions instead take physical damage equal to @ReducedDamage*100@% of that amount (<physicalDamage>@ReducedDamageFinal@</physicalDamage>). <br><br>When an enemy champion dies inside the X, Pyke can <recast>Recast</recast> this Ability for free within @RRecastDuration@ seconds. If he executed that champion, the last assisting ally will also get kill gold. If he did not, he will still get kill gold as if he did.",
+					"extendedVariables": [],
 					"dataValues": {
 						"RRecastDuration": [20, 20, 20, 20, 20, 20, 20],
 						"ReducedDamage": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -339,9 +339,9 @@
 					"objectName": "PykePassive",
 					"dataKey": "Characters/Pyke/Spells/PykePassiveAbility/PykePassive",
 					"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_PykePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>",
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"OneEnemy": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
 						"AdditionalBonus": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],

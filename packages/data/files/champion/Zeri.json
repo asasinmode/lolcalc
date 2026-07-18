@@ -35,6 +35,7 @@
 					"objectName": "ZeriQ",
 					"dataKey": "Characters/Zeri/Spells/ZeriQAbility/ZeriQ",
 					"image": "assets/characters/zeri/hud/icons2d/zeriq.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. ",
 					"extendedVariables": [
 						{
@@ -46,7 +47,6 @@
 							"nameOverride": "spell_listtype_totaladratio"
 						}
 					],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"MinCooldown": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"AttackSpeedCap": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -148,6 +148,8 @@
 					"objectName": "ZeriW",
 					"dataKey": "Characters/Zeri/Spells/ZeriWAbility/ZeriW",
 					"image": "assets/characters/zeri/hud/icons2d/zeriw.png",
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -162,8 +164,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 100],
-					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"Damage": [-10, 30, 70, 110, 150, 190, 230],
 						"ADRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
@@ -234,6 +234,8 @@
 					"objectName": "ZeriE",
 					"dataKey": "Characters/Zeri/Spells/ZeriEAbility/ZeriE",
 					"image": "assets/characters/zeri/hud/icons2d/zerie.png",
+					"mana": [90, 85, 80, 75, 70, 70],
+					"cooldownTime": [24, 24, 22.5, 21, 19.5, 18, 18],
 					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy with an Attack reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
 					"extendedVariables": [
 						{
@@ -248,8 +250,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [90, 85, 80, 75, 70, 70],
-					"cooldownTime": [24, 24, 22.5, 21, 19.5, 18, 18],
 					"dataValues": {
 						"MaxDistance": [300, 300, 300, 300, 300, 300, 300],
 						"MaxDistanceOverWalls": [3000, 3000, 3000, 3000, 3000, 3000, 3000],
@@ -342,6 +342,8 @@
 					"objectName": "ZeriR",
 					"dataKey": "Characters/Zeri/Spells/ZeriRAbility/ZeriR",
 					"image": "assets/characters/zeri/hud/icons2d/zerir.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [80, 80, 75, 70, 70, 70, 70],
 					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.",
 					"extendedVariables": [
 						{
@@ -353,8 +355,6 @@
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [80, 80, 75, 70, 70, 70, 70],
 					"dataValues": {
 						"StackDuration": [5, 5, 5, 5, 5, 5, 5],
 						"MaxStacks": [100000, 100000, 100000, 100000, 100000, 100000, 100000],

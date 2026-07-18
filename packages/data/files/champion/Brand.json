@@ -35,6 +35,8 @@
 					"objectName": "BrandQ",
 					"dataKey": "Characters/Brand/Spells/BrandQAbility/BrandQ",
 					"image": "assets/characters/brand/hud/icons2d/brandq.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 6],
 					"tooltip": "Brand launches a fireball that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
 						"StunDuration": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
 						"SpellBaseDamage": [40, 70, 100, 130, 160, 190, 220]
@@ -76,6 +76,8 @@
 					"objectName": "BrandW",
 					"dataKey": "Characters/Brand/Spells/BrandWAbility/BrandW",
 					"image": "assets/characters/brand/hud/icons2d/brandw.png",
+					"mana": [60, 70, 80, 90, 100, 110],
+					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Brand creates a pillar of pure fire, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Units that are <keywordMajor>Ablaze</keywordMajor> take <magicDamage>@EmpoweredDamage@ damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
@@ -86,8 +88,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 70, 80, 90, 100, 110],
-					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
 						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"BaseDamage": [30, 75, 120, 165, 210, 255, 300]
@@ -129,6 +129,8 @@
 					"objectName": "BrandE",
 					"dataKey": "Characters/Brand/Spells/BrandEAbility/BrandE",
 					"image": "assets/characters/brand/hud/icons2d/brande.png",
+					"mana": [70, 75, 80, 85, 90, 95],
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"tooltip": "Brand conjures a powerful blast at his target, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> to surrounding units.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, the spread range is doubled.",
 					"extendedVariables": [
 						{
@@ -136,8 +138,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 95],
-					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"dataValues": {
 						"BaseDamage": [30, 55, 80, 105, 130, 155, 180],
 						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
@@ -170,6 +170,8 @@
 					"objectName": "BrandR",
 					"dataKey": "Characters/Brand/Spells/BrandRAbility/BrandR",
 					"image": "assets/characters/brand/hud/icons2d/brandr.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
 					"tooltip": "Brand unleashes a devastating torrent of fire that can bounce to Brand or another enemy up to 5 times, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies each bounce. Bounces prioritize stacking <keywordMajor>Blaze</keywordMajor> to max on champions.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they are briefly <status>Slowed</status> by @SlowAmount@%.",
 					"extendedVariables": [
 						{
@@ -181,8 +183,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
 					"dataValues": {
 						"BaseDamage": [25, 100, 175, 250, 325, 400, 475],
 						"SlowAmount": [15, 30, 45, 60, 75, 90, 105],

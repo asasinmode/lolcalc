@@ -35,6 +35,8 @@
 					"objectName": "VelkozQ",
 					"dataKey": "Characters/Velkoz/Spells/VelkozQAbility/VelkozQ",
 					"image": "assets/characters/velkoz/hud/icons2d/velkoz_q1.png",
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% decaying over @SlowDuration@ second(s). At the end of its range, on hitting a target, or on <recast>Recasting</recast>, the bolt splits and fires two new bolts at a 90 degree angle.<br><br>Killing a unit with this restores <scaleMana>@TooltipManaRefund@ Mana</scaleMana>.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 65],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"PassiveStacksToAdd": [1, 1, 1, 1, 1, 1, 1],
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
@@ -85,6 +85,8 @@
 					"objectName": "VelkozW",
 					"dataKey": "Characters/Velkoz/Spells/VelkozWAbility/VelkozW",
 					"image": "assets/characters/velkoz/hud/icons2d/velkoz_w.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"tooltip": "Vel'Koz opens a rift to the void, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. The rift then erupts, dealing <magicDamage>@SecondaryDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
 					"extendedVariables": [
 						{
@@ -102,8 +104,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"dataValues": {
 						"PassiveStacksToAdd": [1, 1, 1, 1, 1, 1, 1],
 						"BaseInitialDamage": [10, 30, 50, 70, 90, 110, 130],
@@ -155,6 +155,8 @@
 					"objectName": "VelkozE",
 					"dataKey": "Characters/Velkoz/Spells/VelkozEAbility/VelkozE",
 					"image": "assets/characters/velkoz/hud/icons2d/velkoz_e.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"tooltip": "Vel'Koz disrupts a nearby area, causing it to explode, <status>Knocking Up</status> for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Enemies close to Vel'Koz will be <status>Knocked Back</status> instead of <status>Knocked Up</status>.",
 					"extendedVariables": [
 						{
@@ -165,8 +167,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"dataValues": {
 						"PassiveStacksToAdd": [1, 1, 1, 1, 1, 1, 1],
 						"BaseDamage": [40, 70, 100, 130, 160, 190, 220],
@@ -201,6 +201,8 @@
 					"objectName": "VelkozR",
 					"dataKey": "Characters/Velkoz/Spells/VelkozRAbility/VelkozR",
 					"image": "assets/characters/velkoz/hud/icons2d/velkoz_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [10, 100, 90, 80, 10, 10, 10],
 					"tooltip": "Vel'Koz channels a ray of energy that follows the cursor, dealing a total of <magicDamage>@TotalDamage@ magic damage</magicDamage> over 2.5 seconds and <status>Slowing</status> by @Effect3Amount@%. Deals <trueDamage>true damage</trueDamage> instead to enemies recently damaged by <spellName>{{Spell_VelkozPassive_Name}}</spellName>.<br><br>Enemies gain stacks of <keywordMajor>Deconstruction</keywordMajor> periodically while in the beam.",
 					"extendedVariables": [
 						{
@@ -208,8 +210,6 @@
 							"nameOverride": "spell_listtype_totaldamage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [10, 100, 90, 80, 10, 10, 10],
 					"dataValues": {
 						"PassiveStacksToAddPerTick": [1, 1, 1, 1, 1, 1, 1]
 					},

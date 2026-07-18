@@ -1878,6 +1878,8 @@ function championAbilityVariant(
 		dataKey: variantDataKey,
 		/** belveth has the fully highlighted q at last index */
 		image: mImgIconName.at(championId === 'Belveth' && abilityKey === 'q' && variantIndex === 0 ? -1 : 0).toLowerCase().replace('.dds', '.png'),
+		mana,
+		cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 		tooltip: undefined,
 		tooltipExtended: undefined,
 		tooltipExtendedBelowLine: undefined,
@@ -1897,8 +1899,6 @@ function championAbilityVariant(
 						};
 					})
 			: undefined,
-		mana,
-		cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 		dataValues: DataValues?.length
 			? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) =>
 					[name, values?.length ? values.map(value => formatNumber(value)) : undefined],

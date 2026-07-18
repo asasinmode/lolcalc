@@ -35,6 +35,8 @@
 					"objectName": "LockeQ",
 					"dataKey": "Characters/Locke/Spells/LockeQAbility/LockeQ",
 					"image": "assets/characters/locke/hud/icons2d/locke_q.locke.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Locke readies a set of <keywordMajor>Soul Nails</keywordMajor> to throw, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> and marking enemies hit. Nails apply a @SlowAmount1*100@/@SlowAmount2*100@/@SlowAmount3*100@% <status>Slow</status> for @SlowDuration1@/@SlowDuration2@/@SlowDuration3@ seconds, stacking with the amount of nails hit.<br><br>Attacking the enemy consumes the <keywordMajor>Soul Nails</keywordMajor>, dealing <magicDamage>@NailDamage@ magic damage</magicDamage> per stack, increased by @TwoMarkBonusPercent@% and @ThreeMarkBonusPercent@% for two and three nails respectively.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_damageperstack"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"BaseMissileDamage": [42, 50, 58, 66, 74, 82, 90],
 						"Duration": [4, 4, 4, 4, 4, 4, 4],
@@ -114,6 +114,8 @@
 					"objectName": "LockeW",
 					"dataKey": "Characters/Locke/Spells/LockeWAbility/LockeW",
 					"image": "assets/characters/locke/hud/icons2d/locke_w.locke.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"tooltip": "Locke ignites his own soul, gaining <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and <speed>@MoveSpeed@ Move Speed</speed> that decays over @DecayTimeHelper@ seconds.<br><br>For @BaseDuration@ seconds, he suffers <trueDamage>@HealthCost*100@% current Health true damage</trueDamage> per second but <healing>Heals</healing> back the last <healing>@DamageRestoreAmount@</healing> damage taken, and an additional <healing>@AdditionalHeal@ Health</healing> based on missing Health and time passed, up to a maximum of <healing>@MaxHealingThreshold@ Health remaining</healing>.<br><br>Can be <recast>Recast</recast> to end early.",
 					"extendedVariables": [
 						{
@@ -128,8 +130,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"dataValues": {
 						"BaseMoveSpeed": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
 						"BaseDuration": [6, 6, 6, 6, 6, 6, 6],
@@ -236,6 +236,7 @@
 					"objectName": "LockeE",
 					"dataKey": "Characters/Locke/Spells/LockeEAbility/LockeE",
 					"image": "assets/characters/locke/hud/icons2d/locke_e.locke.png",
+					"mana": [30, 40, 50, 60, 70, 80],
 					"tooltip": "Locke teleports to a location, dealing <magicDamage>@OnHitDamage@ magic damage</magicDamage> to nearby enemies on arrival. <br><br>On his next Attack, he dashes to his target, dealing <magicDamage>@DashDamage@ magic damage</magicDamage> to all enemies in his path. Each hit consumes <keywordMajor>Soul Nails</keywordMajor>.<br><br>If Locke scores a takedown, the Cooldown of this Ability is reset.",
 					"extendedVariables": [
 						{
@@ -251,7 +252,6 @@
 							"nameOverride": "spell_listtype_dashdamage"
 						}
 					],
-					"mana": [30, 40, 50, 60, 70, 80],
 					"dataValues": {
 						"BaseOnHitDamage": [30, 40, 50, 60, 70, 80, 90],
 						"MinCastRange": [150, 150, 150, 150, 150, 150, 150],
@@ -298,6 +298,8 @@
 					"objectName": "LockeR",
 					"dataKey": "Characters/Locke/Spells/LockeRAbility/LockeR",
 					"image": "assets/characters/locke/hud/icons2d/locke_r.locke.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Locke throws a binding artifact to a location, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies in the area by @SlowAmount*100@%, decaying over @SlowDuration@ seconds. The artifact marks enemies hit for @Duration@ seconds, sealing away marked enemy champions brought below @ExecutionThreshold*100@%, and resetting the duration of the mark on other affected champions.<br><br>After the duration ends, if at least one champion was sealed, the artifact lands on the ground. Locke can pick up the artifact to permanently increase its execution threshold by @ExecuteThresholdPerStack*100@%, and refund @CooldownReduction@% of his current Cooldown, for each champion sealed.",
 					"extendedVariables": [
 						{
@@ -309,8 +311,6 @@
 							"nameOverride": "listtype_execute"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
 						"BaseDamage": [75, 150, 225, 300, 375, 450, 525],
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
@@ -381,9 +381,9 @@
 					"objectName": "LockePassive",
 					"dataKey": "{7531bb00}",
 					"image": "assets/characters/locke/hud/icons2d/locke_passive.locke.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Locke's Attacks deal an additional <magicDamage>@MinOnHitDamage@ magic damage</magicDamage> on-hit, increased up to <magicDamage>@MaxOnHitDamage@ magic damage</magicDamage> based on the target's missing Health.",
 					"tooltipExtendedBelowLine": "<rules>Effect has maximum power at 30% Health.</rules>",
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"spellCalculations": {
 						"MinOnHitDamage": {
 							"mFormulaParts": [

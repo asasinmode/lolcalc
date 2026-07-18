@@ -35,6 +35,8 @@
 					"objectName": "QuinnQ",
 					"dataKey": "Characters/Quinn/Spells/QuinnQAbility/QuinnQ",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_q.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [11.5, 11, 10.5, 10, 9.5, 9, 9],
 					"tooltip": "Quinn orders Valor to dive, making the first enemy hit with <keywordMajor>Harrier</keywordMajor>, reducing their vision radius for @VisionReductionDuration@ seconds and dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all surrounding enemies.<br><br>If the first enemy struck is not a champion, it is <status>Disarmed</status> for @VisionReductionDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [11.5, 11, 10.5, 10, 9.5, 9, 9],
 					"dataValues": {
 						"BaseDamage": [30, 65, 100, 135, 170, 205, 240],
 						"ADRatio": [0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05],
@@ -107,6 +107,7 @@
 					"objectName": "QuinnW",
 					"dataKey": "Characters/Quinn/Spells/QuinnWAbility/QuinnW",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_w.png",
+					"cooldownTime": [55, 50, 45, 40, 35, 30, 30],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Attacking a <keywordMajor>Harrier</keywordMajor> target grants Quinn <attackSpeed>@AttackSpeedBonus*100@% Attack Speed</attackSpeed> and <speed>@MovespeedAmount*100@% Move Speed</speed> for @BuffDuration@ seconds.<br><br><spellActive>Active:</spellActive> Valor reveals a large area nearby for @VisionDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -118,7 +119,6 @@
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
-					"cooldownTime": [55, 50, 45, 40, 35, 30, 30],
 					"dataValues": {
 						"AttackSpeedBonus": [0.15, 0.28, 0.41, 0.54, 0.67, 0.8, 0.93],
 						"CherryBonusHaste": [100, 100, 100, 100, 100, 100, 100],
@@ -144,6 +144,8 @@
 					"objectName": "QuinnE",
 					"dataKey": "Characters/Quinn/Spells/QuinnEAbility/QuinnE",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_e.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them with <keywordMajor>Harrier</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @SlowAmount*100@%, decaying over @SlowDecayTime@ seconds.",
 					"extendedVariables": [
 						{
@@ -151,8 +153,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"SlowAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BaseDamage": [40, 40, 65, 90, 115, 140, 140],
@@ -190,6 +190,8 @@
 					"objectName": "QuinnR",
 					"dataKey": "Characters/Quinn/Spells/QuinnRAbility/QuinnR",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_r1.png",
+					"mana": [50, 25, 0, 0, 0, 0],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "Quinn calls to Valor, pairing up after channeling for 2 seconds gaining <speed>@MovementSpeedMod*100@% Move Speed</speed> and allowing her to <recast>Recast</recast> this Ability. Attacking or using <spellName>{{Spell_QuinnQ_Name}}</spellName> or <spellName>{{Spell_QuinnE_Name}}</spellName> automatically <recast>Recasts</recast> this Ability.<br><br><recast>Recast</recast>: Quinn and Valor perform an aerial maneuver, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, marking champions with <keywordMajor>Harrier</keywordMajor>, and ending this Ability.",
 					"extendedVariables": [
 						{
@@ -205,8 +207,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [50, 25, 0, 0, 0, 0],
-					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
 						"MovementSpeedMod": [0.4, 0.7, 1, 1.3, 1.6, 1.9, 2.2],
 						"SlowDuration": [3, 3, 3, 3, 3, 3, 3],

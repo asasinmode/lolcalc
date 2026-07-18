@@ -35,6 +35,7 @@
 					"objectName": "GarenQ",
 					"dataKey": "Characters/Garen/Spells/GarenQAbility/GarenQ",
 					"image": "assets/characters/garen/hud/icons2d/garen_q.png",
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "Garen removes all <status>Slowing</status> effects on him and gains <speed>@MovementSpeedAmount*100@% Move Speed</speed> for @MovementSpeedDuration@ second(s).<br><br>His next Attack <status>Silences</status> for @SilenceDuration@ seconds and does <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -46,7 +47,6 @@
 							"nameOverride": "spell_listtype_movementspeedduration"
 						}
 					],
-					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
 						"BaseDamage": [0, 30, 60, 90, 120, 150, 180],
 						"SilenceDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -81,6 +81,7 @@
 					"objectName": "GarenW",
 					"dataKey": "Characters/Garen/Spells/GarenWAbility/GarenW",
 					"image": "assets/characters/garen/hud/icons2d/garen_w.png",
+					"cooldownTime": [22, 22, 19.5, 17, 14.5, 12, 12],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Garen has <scaleArmor>@ResistsForTooltip@ bonus Armor</scaleArmor> and <scaleMR>@ResistsForTooltip@ bonus Magic Resist</scaleMR>. Killing units permanently grants <attention>@ResistGainOnKillTooltip@ resists</attention>, up to a max of <attention>@ResistMax@</attention>.<br><br><spellActive>Active:</spellActive> Garen steels his courage for @DRDuration@ seconds, reducing incoming damage by @DRPercent*100@%. He also gains <shield>@TotalShield@ Shield</shield> and <slow>@UpfrontTenacity*100@% Tenacity</slow> for @UpfrontDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -92,7 +93,6 @@
 							"nameOverride": "spell_listtype_damagereduction"
 						}
 					],
-					"cooldownTime": [22, 22, 19.5, 17, 14.5, 12, 12],
 					"dataValues": {
 						"BuffCounterPerKill": [1, 1, 1, 1, 1, 1, 1],
 						"ResistGainOnKill": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
@@ -144,6 +144,7 @@
 					"objectName": "GarenE",
 					"dataKey": "Characters/Garen/Spells/GarenEAbility/GarenE",
 					"image": "assets/characters/garen/hud/icons2d/garen_e1.png",
+					"cooldownTime": [9, 9, 8.25, 7.5, 6.75, 6, 6],
 					"tooltip": "Garen rapidly spins his sword for @Duration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> @f1@ times over the duration. The nearest enemy takes <physicalDamage>@NearestEnemyBonus*100@% increased damage</physicalDamage>. Champions hit by @StacksToShred@ strikes lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br><recast>Recast</recast>: Garen ends this Ability early.",
 					"extendedVariables": [
 						{
@@ -155,7 +156,6 @@
 							"nameOverride": "spell_garene_adratioperspin"
 						}
 					],
-					"cooldownTime": [9, 9, 8.25, 7.5, 6.75, 6, 6],
 					"dataValues": {
 						"NumTicks": [7, 7, 7, 7, 7, 7, 7],
 						"ASPerTick": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
@@ -228,6 +228,7 @@
 					"objectName": "GarenR",
 					"dataKey": "Characters/Garen/Spells/GarenRAbility/GarenR",
 					"image": "assets/characters/garen/hud/icons2d/garen_r.png",
+					"cooldownTime": [120, 120, 100, 80, 120, 120, 120],
 					"tooltip": "Garen calls upon the might of Demacia to slay his enemy, dealing <trueDamage>@BaseDamage@ plus @ExecuteDamage*100@% missing Health true damage</trueDamage>.",
 					"extendedVariables": [
 						{
@@ -239,7 +240,6 @@
 							"nameOverride": "spell_listtype_percentmissinghealthdamage"
 						}
 					],
-					"cooldownTime": [120, 120, 100, 80, 120, 120, 120],
 					"dataValues": {
 						"BaseDamage": [50, 125, 200, 275, 350, 425, 500],
 						"ExecuteDamage": [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],

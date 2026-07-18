@@ -35,6 +35,8 @@
 					"objectName": "PhosphorusBomb",
 					"dataKey": "Characters/Corki/Spells/PhosphorusBombAbility/PhosphorusBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_phosphorusbomb.png",
+					"mana": [60, 65, 70, 75, 80, 80],
+					"cooldownTime": [8, 9, 8.5, 8, 7.5, 7, 7],
 					"tooltip": "Corki lobs a bomb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The area and champions hit are revealed for @RevealDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 80],
-					"cooldownTime": [8, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
 						"BaseDamage": [15, 60, 105, 150, 195, 240, 285],
 						"RevealDuration": [6, 6, 6, 6, 6, 6, 6],
@@ -84,6 +84,8 @@
 					"objectName": "CarpetBomb",
 					"dataKey": "Characters/Corki/Spells/CarpetBombAbility/CarpetBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_valkyrie.png",
+					"mana": [80, 85, 90, 95, 100, 100],
+					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"tooltip": "Corki flies over and scorches a path, burning it for @TrailDuration@ seconds. Enemies in the fire take up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> over the duration.",
 					"extendedVariables": [
 						{
@@ -94,8 +96,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [80, 85, 90, 95, 100, 100],
-					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"dataValues": {
 						"BaseDamage": [75, 150, 225, 300, 375, 450, 525],
 						"APRatio": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -153,6 +153,8 @@
 					"objectName": "GGun",
 					"dataKey": "Characters/Corki/Spells/GGunAbility/GGun",
 					"image": "assets/characters/corki/hud/icons2d/corki_gatlinggun.png",
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Corki fires a gatling gun in front of him, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> over @SprayDuration@ seconds and shredding up to <scaleArmor>@ShredMax*-1@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.",
 					"extendedVariables": [
 						{
@@ -167,8 +169,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"BaseDamage": [30, 80, 130, 180, 230, 280, 330],
 						"ADRatio": [2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4],
@@ -205,6 +205,8 @@
 					"objectName": "MissileBarrage",
 					"dataKey": "Characters/Corki/Spells/MissileBarrageAbility/MissileBarrage",
 					"image": "assets/characters/corki/hud/icons2d/corki_missilebarrage.png",
+					"mana": [35, 35, 35, 35, 35, 35],
+					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"tooltip": "Corki fires a missile that explodes on the first enemy hit, dealing <physicalDamage>@RSmallMissileDamage@ physical damage</physicalDamage> to surrounding enemies. Every third missile instead deals <physicalDamage>@RBigMissileDamage@ physical damage</physicalDamage>.<br><br>This Ability has up to @MaxAmmoTOOLTIP@ charges. Basic attacks against champions reduce the time between charges by <attention>@AttackRefund@</attention> seconds on hit.",
 					"extendedVariables": [
 						{
@@ -212,8 +214,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [35, 35, 35, 35, 35, 35],
-					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"dataValues": {
 						"BaseDamage": [10, 90, 170, 250, 330, 410, 490],
 						"ADRatio": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85],

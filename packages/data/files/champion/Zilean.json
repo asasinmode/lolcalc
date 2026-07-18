@@ -35,6 +35,8 @@
 					"objectName": "ZileanQ",
 					"dataKey": "Characters/Zilean/Spells/ZileanQAbility/ZileanQ",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @FuseDuration@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"nameOverride": "spell_listtype_stunduration"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
 						"BombBaseDamage": [30, 75, 115, 165, 230, 300, 380],
 						"APRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
@@ -89,10 +89,10 @@
 					"objectName": "ZileanW",
 					"dataKey": "Characters/Zilean/Spells/ZileanWAbility/ZileanW",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
-					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @CooldownReduction@ seconds.",
-					"extendedVariables": [],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [16, 14, 12, 10, 8, 6, 6],
+					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @CooldownReduction@ seconds.",
+					"extendedVariables": [],
 					"dataValues": {
 						"CooldownReduction": [10, 10, 10, 10, 10, 10, 10],
 						"ManaCost": [35, 35, 35, 35, 35, 35, 35]
@@ -112,6 +112,8 @@
 					"objectName": "TimeWarp",
 					"dataKey": "Characters/Zilean/Spells/TimeWarpAbility/TimeWarp",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Zilean <status>Slows</status> an enemy champion by @SpeedAmount@% or grants an allied champion <speed>@SpeedAmount@% Move Speed</speed> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
@@ -123,8 +125,6 @@
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
 						"Duration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"SpeedAmount": [25, 40, 55, 70, 85, 99, 114]
@@ -146,6 +146,8 @@
 					"objectName": "ChronoShift",
 					"dataKey": "Characters/Zilean/Spells/ChronoShiftAbility/ChronoShift",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
+					"mana": [125, 150, 175, 0, 0, 0],
+					"cooldownTime": [10, 120, 90, 60, 0, 0, 10],
 					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
 					"extendedVariables": [
 						{
@@ -156,8 +158,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"mana": [125, 150, 175, 0, 0, 0],
-					"cooldownTime": [10, 120, 90, 60, 0, 0, 10],
 					"dataValues": {
 						"RBaseHeal": [350, 600, 850, 1100, 1350, 1600, 1850],
 						"RDuration": [5, 5, 5, 5, 5, 5, 5],

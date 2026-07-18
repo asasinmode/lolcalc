@@ -35,6 +35,8 @@
 					"objectName": "KogMawQ",
 					"dataKey": "Characters/KogMaw/Spells/KogMawQAbility/KogMawQ",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_causticspittle.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>@ShredAmount@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -50,8 +52,6 @@
 							"nameOverride": "spell_listtype_armorandmagicresistshred"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"AttackSpeed": [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3],
 						"BaseDamage": [35, 80, 125, 170, 215, 260, 305],
@@ -89,6 +89,8 @@
 					"objectName": "KogMawBioArcaneBarrage",
 					"dataKey": "Characters/KogMaw/Spells/KogMawBioArcaneBarrageAbility/KogMawBioArcaneBarrage",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
 					"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> %i:OnHit% <OnHit>On-Hit</OnHit> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
@@ -100,8 +102,6 @@
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
 					"dataValues": {
 						"MaxHealthDamage": [2.25, 3, 3.75, 4.5, 5.25, 6, 6.75],
 						"APRatio": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
@@ -139,6 +139,8 @@
 					"objectName": "KogMawVoidOoze",
 					"dataKey": "Characters/KogMaw/Spells/KogMawVoidOozeAbility/KogMawVoidOoze",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_voidooze.png",
+					"mana": [40, 55, 70, 85, 100, 110],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Kog'Maw spits bile, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and leaving a trail of ooze for @TrailDuration@ seconds. Enemies in the ooze are <status>Slowed</status> by @SlowAmount@%.",
 					"extendedVariables": [
 						{
@@ -153,8 +155,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 55, 70, 85, 100, 110],
-					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"BaseDamage": [30, 70, 110, 150, 190, 230, 270],
 						"APRatio": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
@@ -187,6 +187,8 @@
 					"objectName": "KogMawLivingArtillery",
 					"dataKey": "Characters/KogMaw/Spells/KogMawLivingArtilleryAbility/KogMawLivingArtillery",
 					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_livingartillery.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [2, 2, 1.5, 1, 2, 2, 2],
 					"tooltip": "Kog'Maw shoots acid at an area, dealing <magicDamage>@BaseDamageCalc@ plus @TooltipMissingHealthDamageAmp@% per 1% missing Health magic damage</magicDamage> and revealing enemies hit for 2 seconds. Enemies below <healing>40% Health</healing> instead take <magicDamage>@MaxDamageCalc@ magic damage</magicDamage>.<br><br>Subsequent shots within @ManaCostDuration@ seconds cost an additional <scaleMana>@BaseCost@ Mana</scaleMana> (max: <scaleMana>@ManaCostCap@ Mana</scaleMana>).",
 					"extendedVariables": [
 						{
@@ -202,8 +204,6 @@
 							"nameOverride": "spell_listtype_apratio"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [2, 2, 1.5, 1, 2, 2, 2],
 					"dataValues": {
 						"Damage": [60, 100, 140, 180, 220, 260, 300],
 						"ManaCostDuration": [8, 8, 8, 8, 8, 8, 8],

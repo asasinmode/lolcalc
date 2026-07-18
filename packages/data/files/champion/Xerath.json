@@ -35,6 +35,8 @@
 					"objectName": "XerathArcanopulseChargeUp",
 					"dataKey": "Characters/Xerath/Spells/XerathArcanopulseChargeUpAbility/XerathArcanopulseChargeUp",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png",
+					"mana": [80, 90, 100, 110, 120, 120],
+					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [80, 90, 100, 110, 120, 120],
-					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"dataValues": {
 						"BaseDamage": [35, 75, 115, 155, 195, 235, 275],
 						"ChargeTime": [4, 4, 4, 4, 4, 4, 4],
@@ -97,6 +97,8 @@
 					"objectName": "XerathArcaneBarrage2",
 					"dataKey": "Characters/Xerath/Spells/XerathArcaneBarrage2Ability/XerathArcaneBarrage2",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png",
+					"mana": [80, 90, 100, 110, 120, 120],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. Enemies in the center take <magicDamage>@SweetSpotTotalDamage@ magic damage</magicDamage> instead and are <status>Slowed</status> by @SweetSpotSlowAmount*100@%, decaying over @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -111,8 +113,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [80, 90, 100, 110, 120, 120],
-					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
 						"BaseDamage": [15, 50, 85, 120, 155, 190, 225],
 						"SweetSpotMultiplier": [1.667, 1.667, 1.667, 1.667, 1.667, 1.667, 1.667],
@@ -153,6 +153,8 @@
 					"objectName": "XerathMageSpear",
 					"dataKey": "Characters/Xerath/Spells/XerathMageSpearAbility/XerathMageSpear",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png",
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [13.5, 13, 12.5, 12, 11.5, 11, 11],
 					"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. ",
 					"extendedVariables": [
 						{
@@ -163,8 +165,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [13.5, 13, 12.5, 12, 11.5, 11, 11],
 					"dataValues": {
 						"MinStunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"MaxStunDuration": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],
@@ -205,6 +205,8 @@
 					"objectName": "XerathLocusOfPower2",
 					"dataKey": "Characters/Xerath/Spells/XerathLocusOfPower2Ability/XerathLocusOfPower2",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [130, 130, 115, 100, 130, 130, 130],
 					"tooltip": "Xerath ascends to his true form and channels for @Duration@ seconds. During this time he may <recast>Recast</recast> up to @NumberOfShots@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -220,8 +222,6 @@
 							"nameOverride": "spell_xerathlocusofpower2_ampdamage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [130, 130, 115, 100, 130, 130, 130],
 					"dataValues": {
 						"RampBaseDamage": [15, 20, 25, 30, 35, 40, 45],
 						"BaseDamage": [120, 170, 220, 270, 320, 370, 420],

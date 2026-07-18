@@ -35,6 +35,8 @@
 					"objectName": "SyndraQ",
 					"dataKey": "Characters/Syndra/Spells/SyndraQAbility/SyndraQ",
 					"image": "assets/characters/syndra/hud/icons2d/syndra_q1.png",
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Syndra conjures a <keywordMajor>Dark Sphere</keywordMajor>, dealing {{Spell_SyndraQ_Damage_0}}. The <keywordMajor>Dark Sphere</keywordMajor> remains for @SphereDuration@ seconds and can be manipulated by Syndra's other Abilities.<br><br><evolve>@spell.SyndraPassive:Q1UpgradeThreshold@ Splinters of Wrath</evolve>: Syndra can store @Upgrade1MaxAmmo@ charges of <keywordMajor>Dark Sphere</keywordMajor>.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 60],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"Upgrade1MaxAmmo": [2, 2, 2, 2, 2, 2, 2],
 						"Upgrade2MaxAmmo": [3, 3, 3, 3, 3, 3, 3],
@@ -79,6 +79,8 @@
 					"objectName": "SyndraW",
 					"dataKey": "Characters/Syndra/Spells/SyndraWAbility/SyndraW",
 					"image": "assets/characters/syndra/hud/icons2d/syndra_w1.png",
+					"mana": [60, 70, 80, 90, 100, 100],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Syndra grabs a <keywordMajor>Dark Sphere</keywordMajor>, enemy minion, or non-epic monster. She drags it with her and can <recast>Recast</recast> for up to 5 seconds.<br><br><recast>Recast</recast>: Syndra hurls the object, dealing {{Spell_SyndraW_Damage@f3@}} and <status>Slowing</status> by @TotalSlowAmount@% for @f2@ seconds.<br><br><evolve>@spell.SyndraPassive:WUpgradeThreshold@ Splinters of Wrath</evolve>: This Ability deals an additional <trueDamage>@TOOLTIPONLYPassiveBonusPercent@ true damage</trueDamage>.",
 					"extendedVariables": [
 						{
@@ -89,8 +91,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [60, 70, 80, 90, 100, 100],
-					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"BaseSlow": [25, 25, 25, 25, 25, 25, 25],
 						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -168,6 +168,8 @@
 					"objectName": "SyndraE",
 					"dataKey": "Characters/Syndra/Spells/SyndraEAbility/SyndraE",
 					"image": "assets/characters/syndra/hud/icons2d/syndra_e1.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Syndra projects a wave of force, <status>Knocking Back</status> enemies and <keywordMajor>Dark Spheres</keywordMajor> and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><keywordMajor>Dark Spheres</keywordMajor> that are pushed <status>Stun</status> enemies for @StunDuration@ seconds and deal <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><evolve>@spell.SyndraPassive:EUpgradeThreshold@ Splinters of Wrath</evolve>: This Ability's width is increased and <status>Slows</status> enemies by <status>@UpgradedSlowAmount*100@%</status> for @UpgradedSlowDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -175,8 +177,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
 						"ConeAngle": [56, 56, 56, 56, 56, 56, 56],
 						"StunDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
@@ -211,6 +211,8 @@
 					"objectName": "SyndraR",
 					"dataKey": "Characters/Syndra/Spells/SyndraRAbility/SyndraR",
 					"image": "assets/characters/syndra/hud/icons2d/syndra_r1.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 100, 80, 60, 60, 60],
 					"tooltip": "<spellPassive>Passive</spellPassive>: <spellName>Dark Sphere</spellName> gains an additional @QHastePerRank@ Ability Haste for each rank of <spellName>Unleashed Power</spellName>.<br><br>Syndra draws on her full cataclysmic power, launching the 3 <keywordMajor>Dark Spheres</keywordMajor> orbiting her plus up to 4 more nearby at an enemy champion. Each <keywordMajor>Dark Sphere</keywordMajor> deals <magicDamage>@DamageCalc@ magic damage</magicDamage> (max <magicDamage>@MaxDamageCalc@ magic damage</magicDamage>).<br><br><evolve>@spell.SyndraPassive:RUpgradeThreshold@ Splinters of Wrath</evolve>: This Ability <danger>executes</danger> enemies below @UpgradeExecuteThreshold*100@% Health.",
 					"extendedVariables": [
 						{
@@ -222,8 +224,6 @@
 							"nameOverride": "spell_syndrar_qhaste"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 100, 80, 60, 60, 60],
 					"dataValues": {
 						"DamagePerSphere": [40, 80, 120, 160, 200, 240, 280],
 						"MaxSpheresToUse": [7, 7, 7, 7, 7, 7, 7],

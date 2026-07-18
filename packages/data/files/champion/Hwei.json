@@ -35,6 +35,8 @@
 					"objectName": "HweiQ",
 					"dataKey": "Characters/Hwei/Spells/HweiQAbility/HweiQ",
 					"image": "assets/characters/hwei/hud/icons2d/hweiq.png",
+					"mana": [80, 90, 100, 110, 120, 120],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>Hwei launches a blazing fast fireball that explodes on the first enemy hit, dealing <magicDamage>@Tooltip_QQDamage@ plus @Tooltip_QQBonusDamage@% max health magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>Hwei strikes over far distances with a delayed lightning bolt, dealing <magicDamage>@Tooltip_QWDamage@ magic damage</magicDamage>. Hitting an Isolated or <status>Immobilized</status> target increases the damage up to <magicDamage>@Tooltip_QWBonusDamage@ magic damage</magicDamage>, based on the target's missing health.<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>Hwei unleashes a path of eruptions, dealing <magicDamage>@Tooltip_QEDamage@ magic damage</magicDamage> in an area and leaving behind pools of lava that <status>Slow</status> enemies by @spell.HweiQE:SlowPercent@% and deal <magicDamage>@Tooltip_QEDamagePerSecond@ magic damage per second</magicDamage> for @spell.HweiQE:Duration@ seconds.",
 					"tooltipExtended": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>{{Spell_HweiQQ_Tooltip}}<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>{{Spell_HweiQW_Tooltip}}<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>{{Spell_HweiQE_Tooltip}}",
 					"extendedVariables": [
@@ -67,8 +69,6 @@
 							"nameOverride": "spell_listtype_cost"
 						}
 					],
-					"mana": [80, 90, 100, 110, 120, 120],
-					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"Tooltip_QQBaseDamage": [20, 50, 80, 110, 140, 170, 200],
 						"Tooltip_QQBonusDamage": [2, 3, 4, 5, 6, 7, 8],
@@ -149,6 +149,8 @@
 					"objectName": "HweiW",
 					"dataKey": "Characters/Hwei/Spells/HweiWAbility/HweiW",
 					"image": "assets/characters/hwei/hud/icons2d/hweiw.png",
+					"mana": [90, 95, 100, 105, 110, 110],
+					"cooldownTime": [18, 18, 17.5, 17, 16.5, 16, 16],
 					"tooltip": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>Hwei launches a current of swift waters in a line that grants allies <speed>@Tooltip_WQMoveSpeed@ Move Speed</speed>.<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>Hwei forms a protective pool that grants <shield>@Tooltip_WWShieldAmount@ Shields</shield> over time to allied champions inside reduced by @spell.HweiWW:ToolTipAllyMod*100@% for allies.<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>Hwei creates three swirling lights that empower his next three Abilities or Attacks to deal an additional <magicDamage>@Tooltip_WEOnHitDamage@ magic damage</magicDamage> and restore <scaleMana>@Tooltip_WEOnHitManaRestore@ Mana</scaleMana> each.",
 					"tooltipExtended": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>{{Spell_HweiWQ_Tooltip}}<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>{{Spell_HweiWW_Tooltip}}<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>{{Spell_HweiWE_Tooltip}}",
 					"extendedVariables": [
@@ -177,8 +179,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [90, 95, 100, 105, 110, 110],
-					"cooldownTime": [18, 18, 17.5, 17, 16.5, 16, 16],
 					"dataValues": {
 						"Tooltip_WQBaseMoveSpeed": [27.5, 30, 32.5, 35, 37.5, 40, 42.5],
 						"Tooltip_WQAreaDuration": [3.5, 4, 4.5, 5, 5.5, 6, 6.5],
@@ -258,6 +258,8 @@
 					"objectName": "HweiE",
 					"dataKey": "Characters/Hwei/Spells/HweiEAbility/HweiE",
 					"image": "assets/characters/hwei/hud/icons2d/hweie.png",
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [13, 13, 12.5, 12, 11.5, 11, 11],
 					"tooltip": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>Hwei launches a terrifying face that causes the first enemy hit to <status>Flee</status> for @Tooltip_EQFleeDuration@ second(s) and take <magicDamage>@Tooltip_EQDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>Hwei forms an eye that lingers and provides vision locking onto the first enemy champion that enters and launching a homing missile that <status>Roots</status> the first enemy hit for @Tooltip_EWRootDuration@ seconds dealing <magicDamage>@Tooltip_EWDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>Hwei paints a set of jaws at a target location that <status>Drags</status> enemies to the center dealing <magicDamage>@Tooltip_EEDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies caught by @Tooltip_EESlowAmount@% decaying over 1.25 seconds.",
 					"tooltipExtended": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>{{Spell_HweiEQ_Tooltip}}<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>{{Spell_HweiEW_Tooltip}}<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>{{Spell_HweiEE_Tooltip}}",
 					"extendedVariables": [
@@ -290,8 +292,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [13, 13, 12.5, 12, 11.5, 11, 11],
 					"dataValues": {
 						"Tooltip_EQBaseDamage": [30, 70, 110, 150, 190, 230, 270],
 						"Tooltip_EWBaseDamage": [30, 70, 110, 150, 190, 230, 270],
@@ -352,6 +352,8 @@
 					"objectName": "HweiR",
 					"dataKey": "Characters/Hwei/Spells/HweiRAbility/HweiR",
 					"image": "assets/characters/hwei/hud/icons2d/hweir.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Hwei launches a vision of pure despair that sticks to an enemy champion for @Duration@ seconds. The vision expands over time applying a <status>Slow</status> to enemies for @SlowPercentPerStack@% stacking every 0.25 seconds, and dealing <magicDamage>@DamageOverTime@ magic damage per second</magicDamage>.<br><br>Upon completion, the vision shatters, dealing <magicDamage>@Damage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -363,8 +365,6 @@
 							"nameOverride": "spell_listtype_damagepersecond"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
 						"RBaseDamage": [75, 200, 325, 450, 575, 700, 825],
 						"Duration": [3, 3, 3, 3, 3, 3, 3],

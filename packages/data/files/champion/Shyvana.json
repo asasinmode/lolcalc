@@ -35,6 +35,7 @@
 					"objectName": "ShyvanaQ",
 					"dataKey": "Characters/Shyvana/Spells/ShyvanaQAbility/ShyvanaQ",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvana_q1.shyvana_rework.png",
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Shyvana's Attacks deal <magicDamage>@Calc_Max_Health_Damage@ max Health magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit> and reduce this Ability's Cooldown by @Cooldown_Reduction@ seconds.<br><br><spellActive>Active:</spellActive> Shyvana's next Attack strikes the target and the surrounding area dealing <physicalDamage>@Calc_Damage@ physical damage</physicalDamage>. This Ability may be <recast>Recast</recast> after an Attack or short delay within the next @RecastDuration@ seconds.<br><br><keywordMajor>Dragon Form:</keywordMajor> Shyvana gains an additional <recast>Recast</recast>, causing her to bite the target of her next Attack dealing <trueDamage>@Calc_Dragon_Form_Damage@ true damage</trueDamage>.",
 					"tooltipExtended": "<spellPassive>Passive:</spellPassive> Shyvana's Attacks deal <magicDamage>@Calc_Max_Health_Damage@ max Health magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit> and reduce this Ability's cooldown by @Cooldown_Reduction@ seconds.<br><br><spellActive>Active:</spellActive> Shyvana's next Attack strikes in a cone around the target, dealing <physicalDamage>@Calc_Damage@ physical damage</physicalDamage>. This Ability may be <recast>Recast</recast> after an Attack or a short delay within @RecastDuration@ seconds; the <recast>Recast</recast> strikes in a circle around the target.<br><br><keywordMajor>Dragon Form</keywordMajor>: Shyvana gains an additional <recast>Recast</recast>, causing her to bite the target of her next Attack dealing <trueDamage>@Calc_Dragon_Form_Damage@ true damage</trueDamage>.",
 					"extendedVariables": [
@@ -43,7 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"EnhanceDuration": [6, 6, 6, 6, 6, 6, 6],
 						"RecastDuration": [4, 4, 4, 4, 4, 4, 4],
@@ -149,6 +149,7 @@
 					"objectName": "ShyvanaW",
 					"dataKey": "Characters/Shyvana/Spells/ShyvanaWAbility/ShyvanaW",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvana_w1.shyvana_rework.png",
+					"cooldownTime": [13, 13, 12.25, 11.5, 10.75, 10, 10],
 					"tooltip": "Shyvana wraps herself in flames for @Duration@ seconds, gaining <shield>@Calc_Shield@ Shield</shield>, increased by <shield>@Calc_Shield_Per_Nearby_Champion@</shield> per nearby enemy champion and <speed>@MoveSpeed@ Move Speed</speed>, increased to <speed>@MoveSpeedTowardsEnemies@</speed> when moving towards enemy champions.<br><br>When the effect ends, the <shield>Shield</shield> is broken, or upon <recast>Recast</recast> the area around her detonates, dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br><keywordMajor>Dragon Form:</keywordMajor> If the detonation hits an enemy champion Shyvana heals for <healing> @Calc_Base_Heal@ + @Calc_Missing_Health_Heal@ Missing Health</healing>.",
 					"extendedVariables": [
 						{
@@ -160,7 +161,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"cooldownTime": [13, 13, 12.25, 11.5, 10.75, 10, 10],
 					"dataValues": {
 						"Duration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"Radius": [350, 350, 350, 350, 350, 350, 350],
@@ -280,6 +280,7 @@
 					"objectName": "ShyvanaE",
 					"dataKey": "Characters/Shyvana/Spells/ShyvanaEAbility/ShyvanaE",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvana_e.shyvana_rework.png",
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Shyvana launches a fireball at the target location dealing <magicDamage>@Damage@ + @Calc_Max_Health_Damage@ Max health magic damage</magicDamage> and <status>Slowing by @Calc_Slow@ for @SlowDuration@ seconds</status>. It explodes upon striking an enemy or reaching its terminus.<br><br><keywordMajor>Dragon Form:</keywordMajor> Shyvana's fireball is larger and pierces through enemies. Upon striking a champion, large monster, or reaching its terminus it triggers a pulse of fire that deals <magicDamage>@Calc_Dragon_Damage@  + @Calc_Max_Health_Dragon_Damage@ Max Health magic damage</magicDamage> and <status>Slows by @Calc_Slow_Dragon@ for @SlowDuration@ seconds</status>. The fireball leaves behind a trail for @GroundLingerDuration@ seconds that deals <magicDamage>@DamagePerSecond@ magic damage per second</magicDamage>. ",
 					"extendedVariables": [
 						{
@@ -291,7 +292,6 @@
 							"nameOverride": "spell_listtype_apratio"
 						}
 					],
-					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"BaseDamage": [35, 50, 65, 80, 95, 110, 125],
 						"BaseDamagePerSecond": [0, 10, 20, 30, 40, 50, 60],
@@ -420,6 +420,7 @@
 					"objectName": "ShyvanaR",
 					"dataKey": "Characters/Shyvana/Spells/ShyvanaRAbility/ShyvanaR",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvana_r.shyvana_rework.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive</spellPassive>: Shyvana generates <keywordMajor>@Fury_Generation@ Dragon Fury</keywordMajor> by striking enemies with Attacks and Abilities, increased by @TT_Fury_Mult@ while in <keywordMajor>Dragon Form</keywordMajor>, and reduced @TT_Fury_AoE_Penalty@ by when striking in an area against non-champions.<br><br><spellActive>Active</spellActive>: Shyvana transforms into her <keywordMajor>Dragon Form</keywordMajor>, becoming <attention>Unstoppable</attention>, and flying to the target location breathing fire on enemies below dealing <magicDamage>@Damage@ magic damage</magicDamage> and causing them <status>Flee for @FearDuration@ seconds</status>.<br><br>While transformed, Shyvana's basic Abilities are upgraded, she gains <scaleHealth>@Calc_Bonus_Health@ bonus Health</scaleHealth>, size, and Attack Range. Shyvana loses <keywordMajor>Dragon Fury</keywordMajor> over time and her transformation ends when she has no <keywordMajor>Dragon Fury</keywordMajor> remaining.",
 					"extendedVariables": [
 						{
@@ -443,7 +444,6 @@
 							"nameOverride": "spell_shyvana_listtype_dragonformattackrange"
 						}
 					],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"MinCastRange": [400, 400, 400, 400, 400, 400, 400],
 						"JumpDelay": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],

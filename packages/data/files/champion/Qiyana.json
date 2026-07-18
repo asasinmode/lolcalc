@@ -35,6 +35,8 @@
 					"objectName": "QiyanaQ",
 					"dataKey": "Characters/Qiyana/Spells/QiyanaQAbility/QiyanaQ",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_q2_red.png",
+					"mana": [35, 35, 35, 35, 35, 35],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "If Qiyana does not have an <keywordMajor>Enchantment</keywordMajor>, she slashes, dealing <physicalDamage>@VanillaDamage@ physical damage</physicalDamage> to enemies in a small area. If she does, this Ability gains extra range and an additional effect based on the type of <keywordMajor>Enchantment</keywordMajor>:<li><keywordMajor>Ice Enchantment</keywordMajor>: Briefly <status>Roots</status>, then <status>Slows</status> by @SlowPotency*-100@% for @SlowDuration@ second.<li><keywordMajor>Rock Enchantment</keywordMajor>: Deals an additional <physicalDamage>@TremorDamage@ physical damage</physicalDamage> to units below @CritThreshold*100@% Health.<li><keywordMajor>Wild Enchantment</keywordMajor>: Leaves a trail that turns Qiyana <keywordStealth>Invisible</keywordStealth> and grants <speed>@Haste*100@% Move Speed</speed>.</li>",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [35, 35, 35, 35, 35, 35],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"VanillaBase": [40, 70, 100, 130, 160, 190, 220],
 						"BaseDamage": [40, 70, 100, 130, 160, 190, 220],
@@ -152,6 +152,8 @@
 					"objectName": "QiyanaW",
 					"dataKey": "Characters/Qiyana/Spells/QiyanaWAbility/QiyanaW",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_w.png",
+					"mana": [25, 30, 35, 40, 45, 50],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "<spellPassive>Passive:</spellPassive> While Qiyana's weapon is <keywordMajor>Enchanted</keywordMajor>, she gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> and her Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>. She also gains <speed>@PassiveMS*100@% Move Speed</speed> while out of combat near the corresponding terrain type.<br><br><spellActive>Active:</spellActive> Qiyana dashes towards a nearby brush, terrain, or river and <keywordMajor>Enchants</keywordMajor> her weapon with that particular terrain type. This refreshes <spellName>{{Spell_QiyanaQv2_Name}}</spellName>'s Cooldown.",
 					"extendedVariables": [
 						{
@@ -170,8 +172,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [25, 30, 35, 40, 45, 50],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"BaseDamage": [0, 8, 16, 24, 32, 40, 48],
 						"StealthDuration": [3, 3, 3, 3, 3, 3, 3],
@@ -236,6 +236,8 @@
 					"objectName": "QiyanaE",
 					"dataKey": "Characters/Qiyana/Spells/QiyanaEAbility/QiyanaE",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_e.png",
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Qiyana dashes through an enemy and deals <physicalDamage>@Damage@ physical damage</physicalDamage> to them.",
 					"extendedVariables": [
 						{
@@ -247,8 +249,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 60],
-					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
 						"BaseDamage": [10, 50, 90, 130, 170, 210, 250],
 						"DashSpeed": [600, 600, 600, 600, 600, 600, 600],
@@ -282,6 +282,8 @@
 					"objectName": "QiyanaR",
 					"dataKey": "Characters/Qiyana/Spells/QiyanaRAbility/QiyanaR",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"tooltip": "Qiyana launches a shockwave that <status>Knocks Back</status> enemies and detonates when it hits terrain. The explosion follows the entire edge of the terrain, <status>Stunning</status> for between 0.5 and @StunDuration@ seconds and dealing <physicalDamage>@Damage@</physicalDamage> plus <physicalDamage>@MissingHealthDamageRock@ max Health physical damage</physicalDamage>. <status>Stun</status> duration scales down with distance the shockwave has travelled.<br><br>Any river or brush the shockwave passes through also explode after a delay for the same damage and <status>Stun</status>.",
 					"extendedVariables": [
 						{
@@ -289,8 +291,6 @@
 							"nameOverride": "spell_listtype_initialdamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"dataValues": {
 						"BaseDamage": [0, 100, 200, 300, 400, 500, 600],
 						"Slow": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],

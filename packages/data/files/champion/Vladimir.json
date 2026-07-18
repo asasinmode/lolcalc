@@ -35,6 +35,7 @@
 					"objectName": "VladimirQ",
 					"dataKey": "Characters/Vladimir/Spells/VladimirQAbility/VladimirQ",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirq.png",
+					"cooldownTime": [10.1, 9, 7.9, 6.8, 5.7, 4.6, 3.5],
 					"tooltip": "Vladimir drains his target's lifeforce, dealing <magicDamage>@BaseDamageTooltip@ magic damage</magicDamage> and restoring <healing>@BaseHealTooltip@ Health</healing>. After using this Ability twice, Vladimir gains <speed>@MovementSpeedOnQ2@% Move Speed</speed> for 0.5 seconds and empowers the next use of this Ability for @Effect8Amount@ seconds.<br><br>The empowered version of this Ability deals <magicDamage>@EmpoweredDamageTooltip@ magic damage</magicDamage> instead and restores an additional <healing>@EmpoweredHealTooltip@ plus @EmpoweredHealPercentTooltip@ missing Health</healing>.",
 					"extendedVariables": [
 						{
@@ -46,7 +47,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"cooldownTime": [10.1, 9, 7.9, 6.8, 5.7, 4.6, 3.5],
 					"dataValues": {
 						"HealAPRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
 					},
@@ -169,6 +169,7 @@
 					"objectName": "VladimirSanguinePool",
 					"dataKey": "Characters/Vladimir/Spells/VladimirSanguinePoolAbility/VladimirSanguinePool",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirw.png",
+					"cooldownTime": [31, 28, 25, 22, 19, 16, 16],
 					"tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>@HasteBoost*100@% decaying Move Speed</speed> for @HasteDuration@ second and becoming <keyword>Untargetable</keyword> and <keyword>Ghosted</keyword> while <status>Slowing</status> enemies in the pool by @MoveSpeedMod*-100@%.<br><br>Vladimir deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and restores <healing>@TotalHeal@ Health</healing> per enemy over the duration.",
 					"extendedVariables": [
 						{
@@ -176,7 +177,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"cooldownTime": [31, 28, 25, 22, 19, 16, 16],
 					"dataValues": {
 						"MinionHealingMod": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"BaseDamage": [25, 80, 135, 190, 245, 300, 355],
@@ -220,6 +220,7 @@
 					"objectName": "VladimirE",
 					"dataKey": "Characters/Vladimir/Spells/VladimirEAbility/VladimirE",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimire.png",
+					"cooldownTime": [15, 13, 11, 9, 7, 5, 5],
 					"tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to <font color='#CC3300'>@ChargeHealthTooltip@ Health</font>. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br><br><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>@MinDamageTooltip@</magicDamage> and <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by @SlowPercent@% for 0.5 seconds.",
 					"extendedVariables": [
 						{
@@ -235,7 +236,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"cooldownTime": [15, 13, 11, 9, 7, 5, 5],
 					"dataValues": {
 						"SlowPercent": [35, 40, 45, 50, 55, 60, 65]
 					},
@@ -306,6 +306,7 @@
 					"objectName": "VladimirHemoplague",
 					"dataKey": "Characters/Vladimir/Spells/VladimirHemoplagueAbility/VladimirHemoplague",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirr.png",
+					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"tooltip": "Vladimir creates a virulent plague, causing its victims to take @Effect2Amount@% increased damage from all sources for @Effect4Amount@ seconds. After it expires, Vladimir deals <magicDamage>@Damage@ magic damage</magicDamage> to all infected targets. Vladimir restores <healing>@Damage@ Health</healing> if he hits a champion, and restores an additional <healing>@SecondaryHealingTooltip@ Health</healing> for each champion beyond the first.",
 					"extendedVariables": [
 						{
@@ -313,7 +314,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"spellCalculations": {
 						"Damage": {
 							"mFormulaParts": [

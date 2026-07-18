@@ -35,6 +35,7 @@
 					"objectName": "RengarQ",
 					"dataKey": "Characters/Rengar/Spells/RengarQAbility/RengarQ",
 					"image": "assets/characters/rengar/hud/icons2d/rengarq.png",
+					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Rengar's next 2 Attacks gain <attackSpeed>@ASBonus@% Attack Speed</attackSpeed>. The first Attack deals <physicalDamage>@QTotalDamage@ physical damage</physicalDamage>.<br><br><keywordMajor>Max Ferocity:</keywordMajor> The first Attack deals <physicalDamage>@EmpoweredQTotalDamage@ physical damage</physicalDamage> and grants Rengar <attackSpeed>@EmpoweredQAS@ Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 					"tooltipExtended": "Rengar's next 2 Attacks gain <attackSpeed>@ASBonus@% Attack Speed</attackSpeed>. The first Attack deals <physicalDamage>@QTotalDamage@ physical damage</physicalDamage>.<br><br><keywordMajor>Max Ferocity:</keywordMajor> The first Attack deals  <physicalDamage>@EmpoweredQTotalDamage@ physical damage</physicalDamage> and grants Rengar <attackSpeed>@EmpoweredQAS@ Attack Speed</attackSpeed> for @ASDuration@ seconds.<br><br><rules>This Ability's bonus damage is reduced to @TowerMod*100@% against structures.</rules>",
 					"extendedVariables": [
@@ -47,7 +48,6 @@
 							"nameOverride": "spell_listtype_cooldown"
 						}
 					],
-					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"dataValues": {
 						"BaseDamage": [-15, 20, 55, 90, 125, 160, 195],
 						"BaseADRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
@@ -203,6 +203,7 @@
 					"objectName": "RengarW",
 					"dataKey": "Characters/Rengar/Spells/RengarWAbility/RengarW",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_w.png",
+					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Rengar roars, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and restoring <healing>@DamagePercentageHealed@%</healing> of the damage taken in the last @HealingWindow@ seconds as Health.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <magicDamage>@TotalDamageEmpowered@ magic damage</magicDamage> and additionally cleanses Rengar of crowd control.",
 					"extendedVariables": [
 						{
@@ -214,7 +215,6 @@
 							"nameOverride": "spell_listtype_cooldown"
 						}
 					],
-					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"dataValues": {
 						"BaseDamage": [20, 50, 80, 110, 140, 170, 200],
 						"DamagePercentageHealed": [50, 50, 50, 50, 50, 50, 50],
@@ -270,6 +270,7 @@
 					"objectName": "RengarE",
 					"dataKey": "Characters/Rengar/Spells/RengarEAbility/RengarE",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_e.png",
+					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Rengar throws a bola, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, revealing and <status>Slowing</status> them by @SlowAmount@% for @CCDuration@ seconds.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <physicalDamage>@TotalEmpoweredDamage@ physical damage</physicalDamage> and <status>Roots</status> for @CCDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -281,7 +282,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"dataValues": {
 						"RevealDuration": [2, 2, 2, 2, 2, 2, 2],
 						"BaseDamage": [10, 55, 100, 145, 190, 235, 280],
@@ -331,6 +331,7 @@
 					"objectName": "RengarR",
 					"dataKey": "Characters/Rengar/Spells/RengarRAbility/RengarR",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_r.png",
+					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Rengar will also leap Attack when <keywordStealth>Camouflaged</keywordStealth>.<br><br><spellActive>Active:</spellActive> Rengar gains <speed>@StealthMS@% Move Speed</speed> and <keywordStealth>True Sight</keywordStealth> in a small area around the nearest enemy champion for @StealthDuration@ seconds.<br><br>After @FadeTime@ seconds, Rengar becomes <keywordStealth>Camouflaged</keywordStealth> and can leap without being in Brush. Leaping to the nearest champion deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage>, shreds <scaleArmor>@ArmorShred@ Armor</scaleArmor> for @ArmorShredDuration@ seconds, and ends this Ability.",
 					"extendedVariables": [
 						{
@@ -350,7 +351,6 @@
 							"nameOverride": "spell_listtype_rengartrackingrange"
 						}
 					],
-					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
 					"dataValues": {
 						"StealthDuration": [8, 12, 16, 20, 24, 28, 32],
 						"EnemyDetectionRange": [1600, 1600, 1600, 1600, 1600, 1600, 1600],

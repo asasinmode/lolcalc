@@ -35,6 +35,8 @@
 					"objectName": "LeeSinQOne",
 					"dataKey": "Characters/LeeSin/Spells/LeeSinQOneAbility/LeeSinQOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinq1.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to the first enemy hit, granting <keywordStealth>True Sight</keywordStealth> of them, and allows Lee Sin to <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>@RecastDamage@ to @EmpoweredDamage@ physical damage</physicalDamage> scaling with the target's missing Health. ",
 					"extendedVariables": [
 						{
@@ -50,8 +52,6 @@
 							"nameOverride": "spell_listtype_leesinresonatingstrikemaximumbasedamage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"Q1BaseDamage": [30, 60, 90, 120, 150, 180, 210],
 						"Q2BaseDamage": [30, 60, 90, 120, 150, 180, 210],
@@ -113,6 +113,8 @@
 					"objectName": "LeeSinWOne",
 					"dataKey": "Characters/LeeSin/Spells/LeeSinWOneAbility/LeeSinWOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
 					"extendedVariables": [
 						{
@@ -124,8 +126,6 @@
 							"nameOverride": "spell_listtype_leesinwlifesteal"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"LifestealAndSpellVamp": [6, 10, 14, 18, 22, 26, 30],
 						"ShieldValue": [15, 60, 105, 150, 195, 240, 285],
@@ -161,6 +161,8 @@
 					"objectName": "LeeSinEOne",
 					"dataKey": "Characters/LeeSin/Spells/LeeSinEOneAbility/LeeSinEOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesine1.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>@InitialDamage@ magic damage</magicDamage> and reveals them for @SlowDuration@ seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by @SlowAmount@% decaying over @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -172,8 +174,6 @@
 							"nameOverride": "spell_listtype_leesineslow"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
 						"SlowAmount": [25, 35, 45, 55, 65, 75, 85],
 						"E1Damage": [10, 35, 60, 85, 110, 135, 160],
@@ -206,6 +206,7 @@
 					"objectName": "LeeSinR",
 					"dataKey": "Characters/LeeSin/Spells/LeeSinRAbility/LeeSinR",
 					"image": "assets/characters/leesin/hud/icons2d/leesinr.png",
+					"cooldownTime": [100, 110, 85, 60, 60, 60, 60],
 					"tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>@Damage@ plus @PercentHPCarryThrough@% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -217,7 +218,6 @@
 							"nameOverride": "spell_listtype_leesinrdamage"
 						}
 					],
-					"cooldownTime": [100, 110, 85, 60, 60, 60, 60],
 					"dataValues": {
 						"BaseDamage": [-50, 175, 400, 625, 850, 1075, 1300],
 						"PercentHPCarryThrough": [12, 12, 15, 18, 21, 24, 27],

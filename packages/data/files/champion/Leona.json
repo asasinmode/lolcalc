@@ -35,6 +35,8 @@
 					"objectName": "LeonaShieldOfDaybreak",
 					"dataKey": "Characters/Leona/Spells/LeonaShieldOfDaybreakAbility/LeonaShieldOfDaybreak",
 					"image": "assets/characters/leona/hud/icons2d/leonaq.png",
+					"mana": [30, 35, 40, 45, 50, 55],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Leona's next Attack <status>Stuns</status> for @Effect1Amount@ seconds and deals an additional <magicDamage>@TotalDamageTooltip@</magicDamage> magic damage.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [30, 35, 40, 45, 50, 55],
-					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -77,6 +77,8 @@
 					"objectName": "LeonaSolarBarrier",
 					"dataKey": "Characters/Leona/Spells/LeonaSolarBarrierAbility/LeonaSolarBarrier",
 					"image": "assets/characters/leona/hud/icons2d/leonaw.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @Effect3Amount@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
@@ -92,8 +94,6 @@
 							"nameOverride": "spell_listtype_damagereduction"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [14, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
 						"FlatDamageReduction": [4, 8, 12, 16, 20, 24, 28],
 						"FlatDamageReductionMax": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -161,6 +161,8 @@
 					"objectName": "LeonaZenithBlade",
 					"dataKey": "Characters/Leona/Spells/LeonaZenithBladeAbility/LeonaZenithBlade",
 					"image": "assets/characters/leona/hud/icons2d/leonae.png",
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [13, 12, 10.5, 9, 7.5, 6, 6],
 					"tooltip": "Leona thrusts with a sword of light, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>. The last champion struck will be <status>Rooted</status> for @Effect2Amount@ seconds and Leona will dash to them.",
 					"extendedVariables": [
 						{
@@ -171,8 +173,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 65],
-					"cooldownTime": [13, 12, 10.5, 9, 7.5, 6, 6],
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -203,6 +203,8 @@
 					"objectName": "LeonaSolarFlare",
 					"dataKey": "Characters/Leona/Spells/LeonaSolarFlareAbility/LeonaSolarFlare",
 					"image": "assets/characters/leona/hud/icons2d/leonar.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [90, 90, 75, 60, 90, 90, 150],
 					"tooltip": "Leona calls down a radiant beam of solar energy dealing <magicDamage>@ExplosionCalculatedDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowPercent@% for @CCDuration@ seconds. Enemies in the center of the flare are <status>Stunned</status> instead of <status>Slowed</status>.",
 					"extendedVariables": [
 						{
@@ -210,8 +212,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [90, 90, 75, 60, 90, 90, 150],
 					"dataValues": {
 						"OnHitBaseDamage": [20, 30, 40, 50, 60, 70, 80],
 						"OnHitStacks": [2, 3, 4, 5, 6, 7, 8],

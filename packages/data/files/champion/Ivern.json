@@ -35,6 +35,8 @@
 					"objectName": "IvernQ",
 					"dataKey": "Characters/Ivern/Spells/IvernQAbility/IvernQ",
 					"image": "assets/characters/ivern/hud/icons2d/ivernq.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Ivern conjures a vine dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Rooting</status> the first enemy hit for @RootDuration@ seconds. Allies that Attack a <status>Rooted</status> enemy dash into Attack Range. <br><br><recast>Recast:</recast> Ivern dashes directly onto the <status>Rooted</status> enemy.<br><br><rules>Hitting non-epic monsters reduces <spellName>{{ Spell_IvernQ_Name }}'s</spellName> cooldown by 50%.</rules>",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
 						"DashSpeed": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
 						"BaseDamage": [35, 80, 125, 170, 215, 260, 305],
@@ -79,6 +79,8 @@
 					"objectName": "IvernW",
 					"dataKey": "Characters/Ivern/Spells/IvernWAbility/IvernW",
 					"image": "assets/characters/ivern/hud/icons2d/ivernw.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -90,8 +92,6 @@
 							"nameOverride": "spell_ivernw_levelup_allydamage"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
 						"BuffDuration": [3, 3, 3, 3, 3, 3, 3],
 						"AllyBuffDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -139,6 +139,8 @@
 					"objectName": "IvernE",
 					"dataKey": "Characters/Ivern/Spells/IvernEAbility/IvernE",
 					"image": "assets/characters/ivern/hud/icons2d/iverne.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
 					"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -154,8 +156,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
 					"dataValues": {
 						"BaseShield": [35, 75, 115, 155, 195, 235, 275],
 						"ShieldAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -202,6 +202,8 @@
 					"objectName": "IvernR",
 					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernR",
 					"image": "assets/characters/ivern/hud/icons2d/ivernr.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [150, 140, 130, 120, 110, 100, 90],
 					"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move.",
 					"extendedVariables": [
 						{
@@ -217,8 +219,6 @@
 							"nameOverride": "spell_listtype_ivernrbonusattackspeed"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [150, 140, 130, 120, 110, 100, 90],
 					"dataValues": {
 						"SpawnBuffDuration": [5, 5, 5, 5, 5, 5, 5],
 						"MSOnSpawn": [40, 40, 40, 40, 40, 40, 40],

@@ -35,6 +35,8 @@
 					"objectName": "AmbessaQ",
 					"dataKey": "Characters/Ambessa/Spells/AmbessaQAbility/AmbessaQ",
 					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_q1.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "<spellActive>Cunning Sweep</spellActive>: Ambessa sweeps her blades forward, dealing <physicalDamage>@Calc_Damage_1_Max@ + @Calc_Damage_1_Percent_Max@ max Health physical damage</physicalDamage> to enemies at the edge of the strike. All other enemies take @Calc_Damage_1_Min_Ratio@ damage. Striking an enemy readies a <spellActive>Sundering Slam</spellActive>.<br><br><spellActive>Sundering Slam</spellActive>: Ambessa slams her blades down, dealing <physicalDamage>@Calc_Damage_2_Max@ + @Calc_Damage_2_Percent_Max@ max Health physical damage</physicalDamage> against the first enemy hit. All other enemies take @Calc_Damage_2_Min_Ratio@ damage.",
 					"extendedVariables": [
 						{
@@ -54,8 +56,6 @@
 							"nameOverride": "spell_ambessaq_rankup_sunderingslam_maxhealthdamage"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"Swap_Duration": [4, 4, 4, 4, 4, 4, 4],
 						"Swap_Static_Cooldown": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -205,6 +205,8 @@
 					"objectName": "AmbessaW",
 					"dataKey": "Characters/Ambessa/Spells/AmbessaWAbility/AmbessaW",
 					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_w.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"tooltip": "Ambessa gains <shield>@Calc_Shield@ Shield</shield> for @Shield_Duration@ seconds and braces herself for @Buff_Duration@ seconds. She then slams the ground, dealing <physicalDamage>@Calc_Damage_Low@ physical damage</physicalDamage> to nearby enemies, which increases to <physicalDamage>@Calc_Damage_High@ physical damage</physicalDamage> if she braced herself from damage from an enemy champion, large monster, or structure.",
 					"extendedVariables": [
 						{
@@ -212,8 +214,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
 						"Dash_Delay": [0.225, 0.225, 0.225, 0.225, 0.225, 0.225, 0.225],
 						"Buff_Duration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -270,6 +270,8 @@
 					"objectName": "AmbessaE",
 					"dataKey": "Characters/Ambessa/Spells/AmbessaEAbility/AmbessaE",
 					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_e.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"tooltip": "Ambessa whips her chains around, dealing <physicalDamage>@Calc_Damage_Flat@ physical damage</physicalDamage> and <status>Slowing</status> enemies by <status>@Slow_Amount*100@%</status>, which decays over @Slow_Duration@ second. Initiating <spellName>{{Spell_AmbessaP_Name}}</spellName> from this Ability will trigger an additional strike.",
 					"extendedVariables": [
 						{
@@ -277,8 +279,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"dataValues": {
 						"Slow_Duration": [1, 1, 1, 1, 1, 1, 1],
 						"Slow_Amount": [0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99],
@@ -312,6 +312,7 @@
 					"objectName": "AmbessaR",
 					"dataKey": "Characters/Ambessa/Spells/AmbessaRAbility/AmbessaR",
 					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_r.png",
+					"cooldownTime": [130, 130, 115, 100, 100, 100, 100],
 					"tooltip": "<spellPassive>Passive</spellPassive>: Ambessa gains <armorPen>@Armor_Penetration*100@% %i:scaleAPen% Armor Penetration</armorPen> and her Abilities <healing>heal her for @Calc_Omnivamp@ of the damage she dealt</healing>.<br><br><spellActive>Active</spellActive>: Ambessa becomes <attention>Unstoppable</attention> and blinks to the farthest enemy champion in a line, <status>Suppressing</status> the target for @Suppress_Duration@ seconds and then slamming them into the ground, dealing <physicalDamage>@Calc_Damage@ physical damage</physicalDamage> and <status>Stunning</status> them for @Stun_Duration@ seconds.",
 					"extendedVariables": [
 						{
@@ -327,7 +328,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"cooldownTime": [130, 130, 115, 100, 100, 100, 100],
 					"dataValues": {
 						"Damage": [50, 150, 250, 350, 450, 550, 650],
 						"ADRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
@@ -380,9 +380,9 @@
 					"objectName": "AmbessaPassive",
 					"dataKey": "{3f70c67a}",
 					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_AmbessaP_Tooltip}}",
 					"tooltipExtended": "{{Spell_AmbessaP_Tooltip}}<br><br><rules>Commands issued during the cast time or duration of Abilities or Attacks are stored. Once the Ability or Attack finishes, the most recently stored command is executed. The windup of charged Attacks cannot be canceled. Issuing a Stop command after an Attack command has been issued during a Ability cast will cancel Ambessa's dash but maintain her Attack command if the target is in range.</rules>",
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"Buffer_Dash_Time": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"Buffer_Dash_Distance": [350, 350, 350, 350, 350, 350, 350],

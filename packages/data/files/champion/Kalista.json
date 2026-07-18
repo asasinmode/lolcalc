@@ -35,6 +35,8 @@
 					"objectName": "KalistaMysticShot",
 					"dataKey": "Characters/Kalista/Spells/KalistaMysticShotAbility/KalistaMysticShot",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_q.png",
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"tooltip": "Kalista hurls a spear, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first target hit. If this kills the target, the spear continues onward, carrying any <spellName>{{Spell_KalistaExpungeWrapper_Name}}</spellName> stacks to the next target hit.<br><br>Kalista can dash after using this Ability using <spellName>{{Spell_KalistaPassiveBuff_Name}}</spellName>.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"dataValues": {
 						"BaseDamage": [-55, 10, 75, 140, 205, 270, 335],
 						"TotalADRatio": [1.05, 1.05, 1.05, 1.05, 1.05, 1.05, 1.05]
@@ -77,6 +77,7 @@
 					"objectName": "KalistaW",
 					"dataKey": "Characters/Kalista/Spells/KalistaWAbility/KalistaW",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_w.png",
+					"cooldownTime": [30, 30, 30, 30, 30, 30, 30],
 					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
 					"extendedVariables": [
 						{
@@ -92,7 +93,6 @@
 							"nameOverride": "spell_listtype_maxdamagetomonsters"
 						}
 					],
-					"cooldownTime": [30, 30, 30, 30, 30, 30, 30],
 					"dataValues": {
 						"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
 						"MaximumMonsterDamage": [75, 100, 125, 150, 175, 200, 225],
@@ -118,6 +118,8 @@
 					"objectName": "KalistaExpungeWrapper",
 					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_e.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
 					"extendedVariables": [
 						{
@@ -145,8 +147,6 @@
 							"nameOverride": "spell_listtype_cooldown"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"EpicMonsterDamageMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BaseDamage": [-5, 5, 15, 25, 35, 45, 55],
@@ -225,6 +225,8 @@
 					"objectName": "KalistaRx",
 					"dataKey": "Characters/Kalista/Spells/KalistaRxAbility/KalistaRx",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 140, 120, 100, 80, 60],
 					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
 					"extendedVariables": [
 						{
@@ -232,8 +234,6 @@
 							"nameOverride": "spell_listtype_knockupduration"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [160, 160, 140, 120, 100, 80, 60],
 					"effectAmount": {
 						"1": [0, 1, 1.5, 2, 0, 0, 0],
 						"2": [0, 40, 60, 80, 0, 0, 0]

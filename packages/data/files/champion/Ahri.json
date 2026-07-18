@@ -35,6 +35,8 @@
 					"objectName": "AhriQ",
 					"dataKey": "Characters/Ahri/Spells/AhriQAbility/AhriQ",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_q.png",
+					"mana": [55, 65, 75, 85, 95, 95],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Ahri throws then pulls back her orb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> on the way out and <trueDamage>@TotalDamage@ true damage</trueDamage> on the way back.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [55, 65, 75, 85, 95, 95],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"BaseDamage": [10, 35, 60, 85, 110, 135, 160]
 					},
@@ -76,6 +76,8 @@
 					"objectName": "AhriW",
 					"dataKey": "Characters/Ahri/Spells/AhriWAbility/AhriW",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_w.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [9, 9, 8, 7, 6, 5, 4],
 					"tooltip": "Ahri releases 3 fox-fires that seek nearby enemies and deal <magicDamage>@SingleFireDamage@ magic damage</magicDamage>, reduced to <magicDamage>@MultiFireDamage@ damage</magicDamage> beyond the first. She also gains <speed>@MovementSpeed*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -83,8 +85,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [9, 9, 8, 7, 6, 5, 4],
 					"dataValues": {
 						"MovementSpeed": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"MovementSpeedDuration": [2, 2, 2, 2, 2, 2, 2],
@@ -133,6 +133,8 @@
 					"objectName": "AhriE",
 					"dataKey": "Characters/Ahri/Spells/AhriEAbility/AhriE",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_e.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Ahri blows a kiss that <status>Charms</status> the first enemy hit for @CharmDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -144,8 +146,6 @@
 							"nameOverride": "spell_listtype_duration"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
 						"SlowPercent": [-0.65, -0.65, -0.65, -0.65, -0.65, -0.65, -0.65],
@@ -178,6 +178,8 @@
 					"objectName": "AhriR",
 					"dataKey": "Characters/Ahri/Spells/AhriRAbility/AhriR",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"tooltip": "Ahri nimbly dashes, firing @RMaxTargetsPerCast@ essence bolts at nearby enemies, prioritizing champions. These bolts deal <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> each. <spellName>Spirit Rush</spellName> can be <recast>Recast</recast> up to 2 more times within @RRecastWindow@ seconds.<br><br>Consuming a champion's Essence with <spellName>Essence Theft</spellName> during this period extends the recast window by up to @PDurationExtension@ seconds and grants an additional recast of <spellName>Spirit Rush</spellName> (up to @RMaxCasts@ stored).",
 					"extendedVariables": [
 						{
@@ -185,8 +187,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
 						"RBaseDamage": [25, 75, 125, 175, 225, 275, 325],
 						"RMaxTargetsPerCast": [3, 3, 3, 3, 3, 3, 3],
@@ -225,8 +225,8 @@
 					"objectName": "AhriPassive",
 					"dataKey": "Characters/Ahri/Spells/AhriPassiveAbility/AhriPassive",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_passive.png",
-					"tooltip": "Killing minions or monsters grants Ahri an Essence Fragment. After obtaining @MaxStacks@ Fragments, Ahri consumes them to <healing>restore @MinionHeal@ Health</healing>.<br><br>When Ahri scores a takedown against an enemy champion within @TakedownWindow@ seconds of damaging them, she feasts upon their Essence, <healing>restoring @ChampionHeal@ Health</healing>.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"tooltip": "Killing minions or monsters grants Ahri an Essence Fragment. After obtaining @MaxStacks@ Fragments, Ahri consumes them to <healing>restore @MinionHeal@ Health</healing>.<br><br>When Ahri scores a takedown against an enemy champion within @TakedownWindow@ seconds of damaging them, she feasts upon their Essence, <healing>restoring @ChampionHeal@ Health</healing>.",
 					"dataValues": {
 						"TakedownWindow": [3, 3, 3, 3, 3, 3, 3],
 						"MaxStacks": [9, 9, 9, 9, 9, 9, 9]

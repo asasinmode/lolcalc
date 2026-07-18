@@ -35,6 +35,8 @@
 					"objectName": "SeismicShard",
 					"dataKey": "Characters/Malphite/Spells/SeismicShardAbility/SeismicShard",
 					"image": "assets/characters/malphite/hud/icons2d/malphite_q.png",
+					"mana": [70, 75, 80, 85, 90, 95],
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> them by @Effect2Amount@% for @SlowDuration@ seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 95],
-					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
 						"SpeedSteal": [10, 15, 20, 25, 30, 35, 40],
 						"SlowDuration": [3, 3, 3, 3, 3, 3, 3],
@@ -87,6 +87,8 @@
 					"objectName": "Obduracy",
 					"dataKey": "Characters/Malphite/Spells/ObduracyAbility/Obduracy",
 					"image": "assets/characters/malphite/hud/icons2d/malphite_w.png",
+					"mana": [30, 35, 40, 45, 50, 55],
+					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>@BonusArmorPassive*100@% Armor (%i:scaleArmor%@f1@)</scaleArmor>. This effect is increased to <scaleArmor>@BonusArmorPassive*300@% (%i:scaleArmor%@f2@)</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br><br><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>@TotalBonusDamage@ physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>@ThunderclapSplash@ physical damage</physicalDamage> %i:OnHit% <OnHit>On-Hit</OnHit> in their direction. His Attacks continue to create aftershocks %i:OnHit% <OnHit>On-Hit</OnHit> for the next @ThunderclapBuffDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -106,8 +108,6 @@
 							"nameOverride": "spell_obduracy_splash_damage"
 						}
 					],
-					"mana": [30, 35, 40, 45, 50, 55],
-					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
 						"ThunderclapBuffDuration": [5, 5, 5, 5, 5, 5, 5],
 						"ThunderclapBaseDamage": [20, 30, 40, 50, 60, 70, 80],
@@ -192,6 +192,8 @@
 					"objectName": "Landslide",
 					"dataKey": "Characters/Malphite/Spells/LandslideAbility/Landslide",
 					"image": "assets/characters/malphite/hud/icons2d/malphite_e.png",
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Malphite slams the ground, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and reducing <attackSpeed>Attack Speed by @ASReduction@%</attackSpeed> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
@@ -206,8 +208,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
-					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
 						"BaseDamage": [25, 60, 95, 130, 165, 200, 235],
 						"ASReduction": [25, 30, 35, 40, 45, 50, 55],
@@ -243,6 +243,8 @@
 					"objectName": "UFSlash",
 					"dataKey": "Characters/Malphite/Spells/UFSlashAbility/UFSlash",
 					"image": "assets/characters/malphite/hud/icons2d/malphite_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [130, 130, 115, 100, 100, 100, 100],
 					"tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for @KnockupDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -250,8 +252,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [130, 130, 115, 100, 100, 100, 100],
 					"dataValues": {
 						"BaseDamage": [100, 200, 300, 400, 500, 600, 700],
 						"KnockupDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]

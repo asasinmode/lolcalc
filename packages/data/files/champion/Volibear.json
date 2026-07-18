@@ -35,6 +35,8 @@
 					"objectName": "VolibearQ",
 					"dataKey": "Characters/Volibear/Spells/VolibearQAbility/VolibearQ",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_q.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [0, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Volibear gains <speed>@MinSpeedCalc@ Move Speed</speed>, doubled to <speed>@MaxSpeedCalc@</speed> towards enemy champions for the next @Duration@ seconds. While active, Volibear's next Attack deals <physicalDamage>@CalculatedDamage@ physical damage</physicalDamage> and <status>Stuns</status> the target for @StunDuration@ second.<br><br>Volibear becomes enraged if an enemy <status>Immobilizes</status> him before he <status>Stuns</status> a target, ending the Ability early but refreshing its Cooldown.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_volibearq_rankup_speed"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [0, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"BaseDamage": [0, 10, 20, 30, 40, 50, 60],
 						"MinSpeed": [0.085, 0.12, 0.155, 0.19, 0.225, 0.26, 0.295],
@@ -133,6 +133,8 @@
 					"objectName": "VolibearW",
 					"dataKey": "Characters/Volibear/Spells/VolibearWAbility/VolibearW",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_w.png",
+					"mana": [20, 25, 30, 35, 40, 40],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Volibear mauls an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them for @MarkDuration@ seconds.<br><br>If this Ability is used on a marked target, its damage is increased to <physicalDamage>@EmpoweredDamage@</physicalDamage> and Volibear restores <healing>@BaseHeal@ plus @PercentMissingHealthHealingRatio@ missing Health</healing>.",
 					"extendedVariables": [
 						{
@@ -151,8 +153,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [20, 25, 30, 35, 40, 40],
-					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
 						"BaseDamage": [-20, 5, 30, 55, 80, 105, 130],
 						"HealPercent": [0.05, 0.08, 0.11, 0.14, 0.17, 0.2, 0.23],
@@ -219,6 +219,8 @@
 					"objectName": "VolibearE",
 					"dataKey": "Characters/Volibear/Spells/VolibearEAbility/VolibearE",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_e.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"tooltip": "Volibear summons a thundercloud that fires a lightning bolt, dealing <magicDamage>@TotalDamageTooltip@ plus @PercentDamage*100@% max Health magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If Volibear is inside the blast zone, he gains a <shield>@ShieldAPRatioTooltip@ plus @ShieldAmount*100@% max Health Shield</shield> for @ShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -234,8 +236,6 @@
 							"nameOverride": "spell_listtype_maxdamagetomonsters"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
 						"SlowAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"BaseDamage": [50, 80, 110, 140, 170, 200, 230],
@@ -327,6 +327,8 @@
 					"objectName": "VolibearR",
 					"dataKey": "Characters/Volibear/Spells/VolibearRAbility/VolibearR",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 135, 110, 110, 110, 110],
 					"tooltip": "Volibear transforms and leaps, gaining <healing>@HealthAmount@ Health</healing> and @BonusAttackRange@ Attack Range for the next @TransformDuration@ seconds.<br><br>Upon landing, Volibear cracks the earth, <status>Disabling</status> nearby towers for @TowerDisableDuration@ seconds and dealing <physicalDamage>@TowerDamageTooltip@ physical damage to them</physicalDamage>. Nearby enemies are <status>Slowed</status> by @SlowAmount*100@%, decaying over 1 second. Enemies directly underneath Volibear suffer <physicalDamage>@SweetSpotDamageTooltip@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -342,8 +344,6 @@
 							"nameOverride": "spell_volibearr_rankup_towerdisable"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [160, 160, 135, 110, 110, 110, 110],
 					"dataValues": {
 						"SweetSpotDamage": [100, 300, 500, 700, 900, 1100, 1300],
 						"DashSpeed": [750, 750, 750, 750, 750, 750, 750],

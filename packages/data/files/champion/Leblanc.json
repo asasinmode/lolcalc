@@ -35,6 +35,8 @@
 					"objectName": "LeblancQ",
 					"dataKey": "Characters/Leblanc/Spells/LeblancQAbility/LeblancQ",
 					"image": "assets/characters/leblanc/hud/icons2d/leblancq.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "LeBlanc projects a sigil to an enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage> and marking them for @MarkDuration@ seconds.<br><br>Damaging the marked enemy with an Ability detonates the sigil, dealing <magicDamage>@MarkDamage@ magic damage</magicDamage>.<br><br>If either part kills the target, Leblanc refunds @ManaRefund*100@% of the Mana cost and @CooldownRefund*100@% of this spell's remaining Cooldown.<br><br><rules>The initial sigil deals an additional @BonusMinionDamage@ damage to minions. </rules>",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_leblancqdetonationdamage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"BaseDamage": [40, 65, 90, 115, 140, 165, 190],
 						"BaseMarkDamage": [40, 65, 90, 115, 140, 165, 190],
@@ -107,6 +107,8 @@
 					"objectName": "LeblancW",
 					"dataKey": "Characters/Leblanc/Spells/LeblancWAbility/LeblancW",
 					"image": "assets/characters/leblanc/hud/icons2d/leblancw.png",
+					"mana": [60, 70, 80, 90, 100, 120],
+					"cooldownTime": [15, 15, 13.75, 12.5, 11.25, 10, 10],
 					"tooltip": "LeBlanc dashes then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. For @SnapbackTimeAllowed@ seconds after dashing, LeBlanc can <recast>Recast</recast>.<br><br><recast>Recast:</recast> LeBlanc returns to her starting location.",
 					"extendedVariables": [
 						{
@@ -117,8 +119,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 70, 80, 90, 100, 120],
-					"cooldownTime": [15, 15, 13.75, 12.5, 11.25, 10, 10],
 					"dataValues": {
 						"WAPRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
 						"BaseDamage": [35, 75, 115, 155, 195, 235, 275],
@@ -159,6 +159,8 @@
 					"objectName": "LeblancE",
 					"dataKey": "Characters/Leblanc/Spells/LeblancEAbility/LeblancE",
 					"image": "assets/characters/leblanc/hud/icons2d/leblance.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [14, 14, 13.25, 12.5, 11.75, 11, 11],
 					"tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br><br>If they remain shackled for @TetherDuration@ seconds, LeBlanc <status>Roots</status> them for @RootDuration@ seconds and deals an additional <magicDamage>@DelayedDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -170,8 +172,6 @@
 							"nameOverride": "spell_listtype_leblancerootdamage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [14, 14, 13.25, 12.5, 11.75, 11, 11],
 					"dataValues": {
 						"BaseInitialDamage": [30, 50, 70, 90, 110, 130, 150],
 						"BaseDelayedDamage": [40, 80, 120, 160, 200, 240, 280],
@@ -224,6 +224,7 @@
 					"objectName": "LeblancR",
 					"dataKey": "Characters/Leblanc/Spells/LeblancRAbility/LeblancR",
 					"image": "assets/characters/leblanc/hud/icons2d/leblancr.png",
+					"cooldownTime": [45, 45, 35, 25, 25, 25, 25],
 					"tooltip": "LeBlanc mimics her most recent Ability, using it again. The mimicked Ability deals increased damage.<br><br><spellName>Mimicked Sigil of Malice</spellName> deals <magicDamage>@RQ1Damage@ magic damage</magicDamage> when applied, and <magicDamage>@RQ2Damage@ magic damage</magicDamage> when consumed.<br><spellName>Mimicked Distortion</spellName> deals <magicDamage>@RWDamage@ magic damage</magicDamage>.<br><spellName>Mimicked Ethereal Chains</spellName> deals <magicDamage>@RE1Damage@ magic damage</magicDamage> when shackled and <magicDamage>@RE2Damage@ magic damage</magicDamage> when <status>Rooting</status>.",
 					"extendedVariables": [
 						{
@@ -239,7 +240,6 @@
 							"nameOverride": "spell_leblancr_rwbase"
 						}
 					],
-					"cooldownTime": [45, 45, 35, 25, 25, 25, 25],
 					"dataValues": {
 						"RQ1Base": [-10, 70, 150, 230, 310, 390, 470],
 						"RQ2Base": [-20, 140, 300, 460, 620, 780, 940],
@@ -322,9 +322,9 @@
 					"objectName": "LeblancP",
 					"dataKey": "Characters/Leblanc/Spells/LeblancPAbility/LeblancP",
 					"image": "assets/characters/leblanc/hud/icons2d/leblancp.png",
+					"cooldownTime": [60, 60, 60, 60, 60, 60, 60],
 					"tooltip": "{{game_character_passiveTooltip_LeBlanc}}",
 					"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
-					"cooldownTime": [60, 60, 60, 60, 60, 60, 60],
 					"dataValues": {
 						"TooltipCooldown": [60, 60, 60, 60, 60, 60, 60]
 					}

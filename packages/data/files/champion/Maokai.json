@@ -35,6 +35,8 @@
 					"objectName": "MaokaiQ",
 					"dataKey": "Characters/Maokai/Spells/MaokaiQAbility/MaokaiQ",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_q.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
 					"tooltip": "Maokai smashes his fist into the ground, dealing <magicDamage>@TotalDamage@ plus @BasePercentHealth*100@% max Health magic damage</magicDamage> and briefly <status>Slowing</status>. Nearby enemies are also <status>Knocked Back</status>.",
 					"extendedVariables": [
 						{
@@ -50,8 +52,6 @@
 							"nameOverride": "spell_listtype_monsterdamage"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
 					"dataValues": {
 						"BaseDamage": [30, 75, 120, 165, 210, 255, 300],
 						"SlowAmount": [0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99],
@@ -100,6 +100,8 @@
 					"objectName": "MaokaiW",
 					"dataKey": "Characters/Maokai/Spells/MaokaiWAbility/MaokaiW",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_w.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Maokai transforms into a moving mass of roots, becoming Untargetable and dashing to an enemy. Upon arrival, he <status>Roots</status> the enemy for @RootDuration@ second(s) and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"extendedVariables": [
 						{
@@ -111,8 +113,6 @@
 							"nameOverride": "spell_listtype_rootduration"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"BaseDamage": [35, 60, 85, 110, 135, 160, 185],
 						"RootDuration": [0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5],
@@ -149,6 +149,8 @@
 					"objectName": "MaokaiE",
 					"dataKey": "Characters/Maokai/Spells/MaokaiEAbility/MaokaiE",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_e.png",
+					"mana": [60, 65, 70, 75, 80, 80],
+					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"tooltip": "Maokai flings a sapling, which stands watch for @SaplingDuration@ seconds. Saplings chase nearby enemies, detonating on arrival to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slow</status> surrounding enemies by @SlowAmount*100@% for @SlowDuration@ seconds. <keywordMajor>Sap Magic's</keywordMajor> Cooldown is reduced by an additional 4 seconds if the sapling hits an enemy champion or epic monster.<br><br>If placed in brush, Saplings instead last for @EmpoweredSaplingDuration@ seconds and cause a larger explosion, dealing <magicDamage>@TotalEmpoweredDamage@ magic damage</magicDamage> over @EmpoweredDoTDuration@ seconds and <status>Slowing</status> enemies by @EmpoweredSlowAmount@.",
 					"extendedVariables": [
 						{
@@ -163,8 +165,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 65, 70, 75, 80, 80],
-					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
 						"SaplingDuration": [30, 30, 30, 30, 30, 30, 30],
 						"BaseDamage": [25, 50, 75, 100, 125, 150, 175],
@@ -282,6 +282,8 @@
 					"objectName": "MaokaiR",
 					"dataKey": "Characters/Maokai/Spells/MaokaiRAbility/MaokaiR",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [130, 130, 110, 90, 90, 90, 90],
 					"tooltip": "Maokai summons a colossal wave of brambles and thorns, <status>Rooting</status> enemies for @MinRootDuration@ to @MaxRootDuration@ seconds, increasing with distance travelled, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Hitting a champion gives Maokai <speed>@MoveHaste*100@% Move Speed</speed>, decaying over @HasteDuration@ seconds. ",
 					"extendedVariables": [
 						{
@@ -293,8 +295,6 @@
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [130, 130, 110, 90, 90, 90, 90],
 					"dataValues": {
 						"MinRootDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"MaxRootDuration": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],

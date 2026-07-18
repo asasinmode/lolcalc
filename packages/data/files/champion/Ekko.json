@@ -35,6 +35,8 @@
 					"objectName": "EkkoQ",
 					"dataKey": "Characters/Ekko/Spells/EkkoQAbility/EkkoQ",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_q.png",
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @Effect2Amount*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -53,8 +55,6 @@
 							"nameOverride": "spell_listtype_returndamage"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 100],
-					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
 						"OutgoingDamage": [65, 80, 95, 110, 125, 140, 155],
 						"ReturnDamage": [15, 40, 65, 90, 115, 140, 165]
@@ -106,6 +106,8 @@
 					"objectName": "EkkoW",
 					"dataKey": "Characters/Ekko/Spells/EkkoWAbility/EkkoW",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_w.png",
+					"mana": [30, 35, 40, 45, 50, 50],
+					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
 					"extendedVariables": [
 						{
@@ -116,8 +118,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [30, 35, 40, 45, 50, 50],
-					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"dataValues": {
 						"BaseOnHitDamage": [3, 3, 3, 3, 3, 3, 3],
 						"BelowHealthThreshold": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
@@ -188,6 +188,8 @@
 					"objectName": "EkkoE",
 					"dataKey": "Characters/Ekko/Spells/EkkoEAbility/EkkoE",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_e.png",
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -198,8 +200,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 60],
-					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
@@ -232,6 +232,8 @@
 					"objectName": "EkkoR",
 					"dataKey": "Characters/Ekko/Spells/EkkoRAbility/EkkoR",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [110, 110, 80, 50, 50, 50, 50],
 					"tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>@TotalBaseHeal@ Health</healing>, increased by @PercentHealAmpPerPercentMissingHealth@% for each 1% Health he lost in last 4 seconds.",
 					"extendedVariables": [
 						{
@@ -243,8 +245,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [110, 110, 80, 50, 50, 50, 50],
 					"dataValues": {
 						"Damage": [50, 200, 350, 500, 650, 800, 950],
 						"FlatHeal": [50, 100, 150, 200, 250, 300, 350],

@@ -35,6 +35,8 @@
 					"objectName": "LucianQ",
 					"dataKey": "Characters/Lucian/Spells/LucianQAbility/LucianQ",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_q.png",
+					"mana": [48, 56, 64, 72, 80, 90],
+					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [48, 56, 64, 72, 80, 90],
-					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"dataValues": {
 						"BaseDamage": [45, 80, 115, 150, 185, 220, 255],
 						"BonusADRatio": [1, 1, 1, 1, 1, 1, 1],
@@ -83,6 +83,8 @@
 					"objectName": "LucianW",
 					"dataKey": "Characters/Lucian/Spells/LucianWAbility/LucianW",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_w.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@MoveSpeedAmount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
 					"extendedVariables": [
 						{
@@ -94,8 +96,6 @@
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"BaseDamage": [40, 75, 110, 145, 180, 215, 250],
 						"MoveSpeedAmount": [55, 60, 65, 70, 75, 80, 85],
@@ -142,14 +142,14 @@
 					"objectName": "LucianE",
 					"dataKey": "Characters/Lucian/Spells/LucianEAbility/LucianE",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_e.png",
+					"mana": [32, 24, 16, 8, 0, 0],
+					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @CDRefundBase@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@CDRefundChampion@ seconds for champions). ",
 					"extendedVariables": [
 						{
 							"name": "Cost"
 						}
 					],
-					"mana": [32, 24, 16, 8, 0, 0],
-					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"dataValues": {
 						"CDRefundBase": [1, 1, 1, 1, 1, 1, 1],
 						"CDRefundChampion": [2, 2, 2, 2, 2, 2, 2],
@@ -175,6 +175,8 @@
 					"objectName": "LucianR",
 					"dataKey": "Characters/Lucian/Spells/LucianRAbility/LucianR",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [10, 110, 100, 90, 10, 10, 10],
 					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage>",
 					"extendedVariables": [
 						{
@@ -182,8 +184,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [10, 110, 100, 90, 10, 10, 10],
 					"dataValues": {
 						"BaseDamage": [0, 15, 30, 45, 60, 75, 90],
 						"DamageADRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],

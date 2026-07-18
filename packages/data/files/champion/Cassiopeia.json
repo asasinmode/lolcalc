@@ -35,6 +35,8 @@
 					"objectName": "CassiopeiaQ",
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaQAbility/CassiopeiaQ",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_q.png",
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds. Hitting a champion grants Cassiopeia <speed>@ChampHitMSBonus@% Move Speed</speed> decaying over @ChampHitMSDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -49,8 +51,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 70],
-					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"dataValues": {
 						"BaseDamage": [30, 75, 110, 145, 180, 215, 250],
 						"PoisonDuration": [3, 3, 3, 3, 3, 3, 3],
@@ -91,6 +91,8 @@
 					"objectName": "CassiopeiaW",
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaWAbility/CassiopeiaW",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_w.png",
+					"mana": [70, 75, 80, 85, 90, 90],
+					"cooldownTime": [24, 24, 22, 20, 18, 16, 14],
 					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @CloudDuration@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @SlowPercent@%.",
 					"extendedVariables": [
 						{
@@ -105,8 +107,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [70, 75, 80, 85, 90, 90],
-					"cooldownTime": [24, 24, 22, 20, 18, 16, 14],
 					"dataValues": {
 						"BaseDamage": [20, 20, 25, 30, 35, 40, 45],
 						"SlowPercent": [30, 40, 50, 60, 70, 80, 90],
@@ -145,6 +145,8 @@
 					"objectName": "CassiopeiaE",
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaEAbility/CassiopeiaE",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_e.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 					"tooltip": "Cassiopeia launches deadly fangs, dealing <magicDamage>@BasicDamage@ magic damage</magicDamage>. If the enemy is <keywordMajor>Poisoned</keywordMajor>, they take an additional <magicDamage>@BonusPoisonedDamage@ magic damage</magicDamage> and Cassiopeia restores <healing>@HealCalc@ Health</healing>, reduced to <healing>@HealCalcMinion@ Health</healing> against lane minions and small monsters.<br><br>If this kills the target, Cassiopeia restores <scaleMana>@Cost@ Mana</scaleMana>.",
 					"extendedVariables": [
 						{
@@ -156,8 +158,6 @@
 							"nameOverride": "spell_cassiopeiae_healratio"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 					"dataValues": {
 						"BasicAPRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"BonusDamage": [-5, 20, 45, 70, 95, 120, 145],
@@ -218,6 +218,8 @@
 					"objectName": "CassiopeiaR",
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaRAbility/CassiopeiaR",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [120, 120, 100, 80, 10, 10, 10],
 					"tooltip": "Cassiopeia unleashes a petrifying gaze, dealing <magicDamage>@RDamage@ magic damage</magicDamage> and <status>Stunning</status> enemies facing her for @RCCDuration@ seconds. Enemies facing away are <status>Slowed</status> by @RSlowPercent@% decaying over the same duration instead.",
 					"extendedVariables": [
 						{
@@ -225,8 +227,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [120, 120, 100, 80, 10, 10, 10],
 					"dataValues": {
 						"RCCDuration": [2, 2, 2, 2, 2, 2, 2],
 						"RSlowPercent": [40, 40, 40, 40, 40, 40, 40],

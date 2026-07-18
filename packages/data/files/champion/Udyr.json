@@ -35,6 +35,8 @@
 					"objectName": "UdyrQ",
 					"dataKey": "Characters/Udyr/Spells/UdyrQAbility/UdyrQ",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_q.png",
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "<spellActive>Claw Stance:</spellActive> Udyr gains <attackSpeed>@AttackSpeedBase*100@% Attack Speed</attackSpeed> and his Attacks deal <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }} for @AttackSpeedDurationBase@ seconds. Additionally, Udyr's next two Attacks in this stance deal a bonus <physicalDamage>@MaxHPOnHit1@ max Health physical damage</physicalDamage> and gain @AttackRange@ range.<br><br><keywordMajor>Awaken:</keywordMajor> Increase bonus <attackSpeed>Attack Speed</attackSpeed> to <attackSpeed>@EmpoweredTotalAS@</attackSpeed> and max Health damage to <physicalDamage>@Q2TotalOnHitHPDamage@</physicalDamage>. Additionally, Udyr's next two Attacks call lightning six times, dealing a total of <magicDamage>@EmpoweredLightningBonusMax@ max Health magic damage</magicDamage> to isolated targets (strikes bounce to other nearby targets when possible).",
 					"extendedVariables": [
 						{
@@ -54,8 +56,6 @@
 							"nameOverride": "spell_udyrq_onhit_bonushpratio"
 						}
 					],
-					"mana": [20, 20, 20, 20, 20, 20],
-					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"AttackSpeedBase": [0.08, 0.2, 0.32, 0.44, 0.56, 0.68, 0.8],
 						"AttackSpeedDurationBase": [4, 4, 4, 4, 4, 4, 4],
@@ -287,6 +287,8 @@
 					"objectName": "UdyrW",
 					"dataKey": "Characters/Udyr/Spells/UdyrWAbility/UdyrW",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_w.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "<spellPassive>Mantle Stance:</spellPassive> Udyr gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. Additionally, Udyr's next two Attacks gain @LifeSteal*100@% Life Steal and restore <healing>@LifeOnHit@ Health</healing>.<br><br><keywordMajor>Awaken:</keywordMajor> Gain <shield>@RecastShield@ Shield</shield>, restore <healing>@RecastHeal@ Health</healing> over @ShieldDuration@ seconds, and Udyr's next two Attacks instead have @LifeSteal*200@% Life Steal and restore <healing>@LifeOnHitAwakened@ Health</healing>.",
 					"extendedVariables": [
 						{
@@ -302,8 +304,6 @@
 							"nameOverride": "spell_listtype_lifesteal"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"ShieldDuration": [4, 4, 4, 4, 4, 4, 4],
 						"ShieldBase": [25, 45, 65, 85, 105, 125, 145],
@@ -451,6 +451,8 @@
 					"objectName": "UdyrE",
 					"dataKey": "Characters/Udyr/Spells/UdyrEAbility/UdyrE",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_e.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "<spellActive>Stampede Stance:</spellActive> Udyr gains <speed>@MoveSpeed@ Move Speed</speed>, decaying over @MoveSpeedDuration@ seconds. Additionally, Udyr's Attacks dash him to the target and <status>Stun</status> for @StunDuration@ seconds (@ICD@ second Cooldown per target).<br><br><keywordMajor>Awaken:</keywordMajor> Grants immunity to <status>Immobilizing</status> and <status>Disabling</status> effects and an additional <speed>@MoveSpeedBonus@ Move Speed</speed> for @UnstoppableDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -462,8 +464,6 @@
 							"nameOverride": "spell_listtype_perunitcooldown"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"ICD": [6.4, 6, 5.6, 5.2, 4.8, 4.4, 4],
 						"BaseMoveSpeed": [0.19, 0.25, 0.31, 0.37, 0.43, 0.49, 0.55],
@@ -543,6 +543,8 @@
 					"objectName": "UdyrR",
 					"dataKey": "Characters/Udyr/Spells/UdyrRAbility/UdyrR",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_r.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for @BuffDuration@ seconds, dealing <magicDamage>@StormDamage@ magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by @SlowPotency*100@%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>@PulseDamage@ magic damage</magicDamage> to enemies in the storm.<br><br><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>@PercentHPBlast@ max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional @EmpoweredSlow@.",
 					"tooltipExtended": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for @BuffDuration@ seconds, dealing <magicDamage>@StormDamage@ magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by @SlowPotency*100@%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>@PulseDamage@ magic damage</magicDamage> to enemies in the storm <i>(or enemies around Udyr if the storm expires)</i>.<br><br><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>@PercentHPBlast@ max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional @EmpoweredSlow@.",
 					"extendedVariables": [
@@ -555,8 +557,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"BuffDuration": [4, 4, 4, 4, 4, 4, 4],
 						"SlowPotency": [0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3],

@@ -35,6 +35,8 @@
 					"objectName": "NilahQ",
 					"dataKey": "Characters/Nilah/Spells/NilahQAbility/NilahQ",
 					"image": "assets/characters/nilah/hud/icons2d/nilahq.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nilah gains @CritArmorPen@ Armor Penetration, and her Attacks against champions restore <healing>@CritLifesteal@ damage dealt as Health</healing>. Overhealing from this is converted into a <shield>Shield</shield> for @ShieldDuration@ seconds.<br><br><spellActive>Active:</spellActive> Nilah cracks her whip-blade, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage>. If an enemy unit or structure is hit, Nilah gains 125 Attack Range and <attackSpeed>@BonusAttackSpeedCalc@% Attack Speed</attackSpeed>, and her Attacks hit in a cone for @BuffDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
 						"BaseDamage": [-10, 0, 10, 20, 30, 40, 50],
 						"CheatingThreshold": [20, 20, 20, 20, 20, 20, 20],
@@ -146,6 +146,8 @@
 					"objectName": "NilahW",
 					"dataKey": "Characters/Nilah/Spells/NilahWAbility/NilahW",
 					"image": "assets/characters/nilah/hud/icons2d/nilahw.png",
+					"mana": [60, 45, 30, 15, 0, 0],
+					"cooldownTime": [26, 26, 25, 24, 23, 22, 21],
 					"tooltip": "Nilah envelops herself in mist for @BaseDuration@ seconds, becoming Ghosted, gaining <speed>@MoveSpeedPercent*100@% Move Speed</speed>, dodging Attacks, and reducing <magicDamage>magic damage</magicDamage> taken by @MagicDamageReduction*100@%.<br><br>While active, touching allied champions envelops them in mist, granting the same benefits for @ShareBaseDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -156,8 +158,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 45, 30, 15, 0, 0],
-					"cooldownTime": [26, 26, 25, 24, 23, 22, 21],
 					"dataValues": {
 						"MoveSpeedPercent": [0.125, 0.15, 0.175, 0.2, 0.225, 0.25, 0.275],
 						"BaseDuration": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],
@@ -177,6 +177,8 @@
 					"objectName": "NilahE",
 					"dataKey": "Characters/Nilah/Spells/NilahEAbility/NilahE",
 					"image": "assets/characters/nilah/hud/icons2d/nilahe.png",
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "Nilah dashes through a unit, dealing <physicalDamage>@DashDamage@ physical damage</physicalDamage> to any enemies she passes through.",
 					"extendedVariables": [
 						{
@@ -187,8 +189,6 @@
 							"name": "AmmoRechargeTime"
 						}
 					],
-					"mana": [40, 40, 40, 40, 40, 40],
-					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
 						"BaseDamage": [50, 60, 70, 80, 90, 100, 110],
 						"DashSpeed": [2200, 2200, 2200, 2200, 2200, 2200, 2200],
@@ -221,6 +221,8 @@
 					"objectName": "NilahR",
 					"dataKey": "Characters/Nilah/Spells/NilahRAbility/NilahR",
 					"image": "assets/characters/nilah/hud/icons2d/nilahr.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 95, 80, 160, 160, 100],
 					"tooltip": "Nilah whirls her whip-blade, dealing <physicalDamage>@DamagePerTickCalcTooltip@ physical damage</physicalDamage> over 1 second, then finishes with a burst of <physicalDamage>@DamageCalc@ physical damage</physicalDamage> that also <status>Pulls</status> nearby enemies toward her.<br><br>Apotheosis heals Nilah and her nearby allies for <healing>@ChampHealingPercent@ (+@spell.NilahQ:CritLifesteal@ {{ Spell_NilahQ_Name }}) of the damage dealt</healing> to enemy champions, converting any overhealing into a <shield>Shield</shield> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
@@ -232,8 +234,6 @@
 							"nameOverride": "spell_listtype_damageovertime"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [110, 110, 95, 80, 160, 160, 100],
 					"dataValues": {
 						"Duration": [6, 6, 6, 6, 6, 6, 6],
 						"DamageBase": [25, 125, 225, 325, 425, 525, 625],

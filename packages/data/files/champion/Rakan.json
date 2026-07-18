@@ -35,6 +35,8 @@
 					"objectName": "RakanQ",
 					"dataKey": "Characters/Rakan/Spells/RakanQAbility/RakanQ",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_q.png",
+					"mana": [45, 45, 45, 45, 45, 45],
+					"cooldownTime": [11, 11, 10, 9, 8, 7, 6],
 					"tooltip": "Rakan flings a magical feather that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the feather hits a champion or epic jungle monster, Rakan restores <healing>@TotalHeal@ Health</healing> to himself and nearby allies after @HealDelay@ seconds or when he touches an allied champion.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [45, 45, 45, 45, 45, 45],
-					"cooldownTime": [11, 11, 10, 9, 8, 7, 6],
 					"dataValues": {
 						"BaseDamage": [25, 70, 115, 160, 205, 250, 295],
 						"HealDelay": [3, 3, 3, 3, 3, 3, 3],
@@ -99,6 +99,8 @@
 					"objectName": "RakanW",
 					"dataKey": "Characters/Rakan/Spells/RakanWAbility/RakanW",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_w.png",
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Rakan dashes, then spirals into the air, <status>Knocking Up</status> for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -110,8 +112,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 100],
-					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
 						"BaseDashSpeed": [1700, 1700, 1700, 1700, 1700, 1700, 1700],
 						"BaseDamage": [20, 70, 120, 170, 220, 270, 320],
@@ -146,6 +146,8 @@
 					"objectName": "RakanE",
 					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanE",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_e.png",
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Duration@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @RecastWindow@ seconds.",
 					"extendedVariables": [
 						{
@@ -157,8 +159,6 @@
 							"nameOverride": "spell_listtype_cost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 65],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"BaseShield": [25, 50, 75, 100, 125, 150, 175],
 						"RecastWindow": [5, 5, 5, 5, 5, 5, 5],
@@ -202,6 +202,8 @@
 					"objectName": "RakanR",
 					"dataKey": "Characters/Rakan/Spells/RakanRAbility/RakanR",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [130, 130, 110, 90, 0, 0, 0],
 					"tooltip": "Rakan gains <speed>@InitialCastSpeed@% Move Speed</speed> for @Duration@ seconds. Rakan deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Charms</status> enemies for @CharmDuration@ second(s) the first time he touches them. The first champion touched grants Rakan <speed>@TouchSpeed@% decaying Move Speed</speed>.",
 					"extendedVariables": [
 						{
@@ -213,8 +215,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [130, 130, 110, 90, 0, 0, 0],
 					"dataValues": {
 						"BaseDamage": [100, 100, 200, 300, 0, 0, 0],
 						"Duration": [4, 4, 4, 4, 4, 4, 4],
@@ -259,8 +259,8 @@
 					"objectName": "RakanPassive",
 					"dataKey": "Characters/Rakan/Spells/RakanPassiveAbility/RakanPassive",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_p.png",
-					"tooltip": "Every @ShieldCooldown@ seconds, Rakan gains <shield>@TotalShield@ Shield</shield>. Rakan's Attacks and Abilities against enemy champions reduce this Cooldown by @HitCooldown@ second.<br><br><keywordMajor>Lover's Leap</keywordMajor> - Xayah and Rakan can recall together.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"tooltip": "Every @ShieldCooldown@ seconds, Rakan gains <shield>@TotalShield@ Shield</shield>. Rakan's Attacks and Abilities against enemy champions reduce this Cooldown by @HitCooldown@ second.<br><br><keywordMajor>Lover's Leap</keywordMajor> - Xayah and Rakan can recall together.",
 					"dataValues": {
 						"HitCooldown": [1, 1, 1, 1, 1, 1, 1]
 					},

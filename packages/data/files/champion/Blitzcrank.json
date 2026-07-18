@@ -35,6 +35,8 @@
 					"objectName": "RocketGrab",
 					"dataKey": "Characters/Blitzcrank/Spells/RocketGrabAbility/RocketGrab",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankq.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [21, 20, 19, 18, 17, 16, 16],
 					"tooltip": "Blitzcrank fires their right hand, <status>Pulling</status> the first enemy hit towards them and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [21, 20, 19, 18, 17, 16, 16],
 					"dataValues": {
 						"BaseDamage": [60, 110, 160, 210, 260, 310, 360],
 						"LolipopLength": [70, 70, 70, 70, 70, 70, 70],
@@ -78,6 +78,8 @@
 					"objectName": "Overdrive",
 					"dataKey": "Characters/Blitzcrank/Spells/OverdriveAbility/Overdrive",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankw.png",
+					"mana": [75, 75, 75, 75, 75, 75],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Blitzcrank supercharges themself, gaining <speed>@MoveSpeedMod*100@% decaying Move Speed</speed> and <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @Duration@ seconds.<br><br>Afterwards, Blitzcrank is <status>Slowed</status> by @MoveSpeedModReduction*100@% for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -89,8 +91,6 @@
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
-					"mana": [75, 75, 75, 75, 75, 75],
-					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
 						"MoveSpeedMod": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85],
 						"AttackSpeedMod": [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
@@ -129,10 +129,10 @@
 					"objectName": "PowerFist",
 					"dataKey": "Characters/Blitzcrank/Spells/PowerFistAbility/PowerFist",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcranke.png",
-					"tooltip": "Blitzcrank charges up their fist, causing their next Attack to <status>Knock Up</status> for @CCDuration@ second(s) and deal <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
-					"extendedVariables": [],
 					"mana": [25, 25, 25, 25, 25, 25],
 					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
+					"tooltip": "Blitzcrank charges up their fist, causing their next Attack to <status>Knock Up</status> for @CCDuration@ second(s) and deal <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"extendedVariables": [],
 					"dataValues": {
 						"CCDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
@@ -176,6 +176,8 @@
 					"objectName": "StaticField",
 					"dataKey": "Characters/Blitzcrank/Spells/StaticFieldAbility/StaticField",
 					"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankr.png",
+					"mana": [100, 100, 100, 150, 150, 0],
+					"cooldownTime": [0, 60, 40, 20, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive: </spellPassive>While this ability is available, lightning charges Blitzcrank's fists, marking those  Attacked. After 1 second, they are shocked for <magicDamage>@PassiveDamage@ magic damage</magicDamage>.<br><br><spellActive>Active: </spellActive>Blitzcrank overcharges, dealing <magicDamage>@ActiveDamage@ magic damage</magicDamage> and <status>Silencing</status> nearby enemies for @SilenceDuration@ seconds. Their shields are also destroyed.",
 					"extendedVariables": [
 						{
@@ -191,8 +193,6 @@
 							"nameOverride": "spell_staticfield_activedamage_levelup"
 						}
 					],
-					"mana": [100, 100, 100, 150, 150, 0],
-					"cooldownTime": [0, 60, 40, 20, 0, 0, 0],
 					"dataValues": {
 						"PassiveBaseDamage": [0, 50, 100, 150, 200, 250, 300],
 						"ZapCountdown": [1, 1, 1, 1, 1, 1, 1],

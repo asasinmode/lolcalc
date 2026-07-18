@@ -35,6 +35,8 @@
 					"objectName": "UrgotQ",
 					"dataKey": "Characters/Urgot/Spells/UrgotQAbility/UrgotQ",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_q.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 7.5],
 					"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 7.5],
 					"dataValues": {
 						"SlowDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
 						"SlowAmount": [0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7],
@@ -83,6 +83,8 @@
 					"objectName": "UrgotW",
 					"dataKey": "Characters/Urgot/Spells/UrgotWAbility/UrgotW",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_w.png",
+					"mana": [40, 30, 20, 10, 0, 0],
+					"cooldownTime": [12, 12, 9, 6, 3, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @WAttacksPerSecond@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @SlowResistance@% <status>Slow</status> resistance, but loses <speed>@MoveSpeedMod@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
 					"extendedVariables": [
 						{
@@ -93,8 +95,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 30, 20, 10, 0, 0],
-					"cooldownTime": [12, 12, 9, 6, 3, 0, 0],
 					"dataValues": {
 						"ADRatioTT": [0.165, 0.2, 0.235, 0.27, 0.305, 0.34, 0.375],
 						"OnHitDamageReduction": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -158,6 +158,8 @@
 					"objectName": "UrgotE",
 					"dataKey": "Characters/Urgot/Spells/UrgotEAbility/UrgotE",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_e.png",
+					"mana": [60, 70, 80, 90, 100, 110],
+					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
@@ -172,8 +174,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [60, 70, 80, 90, 100, 110],
-					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"dataValues": {
 						"EShieldDuration": [4, 4, 4, 4, 4, 4, 4],
 						"EShieldBaseHealth": [35, 55, 75, 95, 115, 135, 155],
@@ -233,6 +233,8 @@
 					"objectName": "UrgotR",
 					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotR",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_r.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -240,8 +242,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"dataValues": {
 						"RBaseDamage": [100, 100, 225, 350, 475, 600, 725],
 						"RBonusADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],

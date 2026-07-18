@@ -35,6 +35,8 @@
 					"objectName": "IllaoiQ",
 					"dataKey": "Characters/Illaoi/Spells/IllaoiQAbility/IllaoiQ",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_q.png",
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage> (currently <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>).<br><br><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [40, 45, 50, 55, 60, 65],
-					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"TentacleDamageAmp": [0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35],
 						"TotalADRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
@@ -116,6 +116,8 @@
 					"objectName": "IllaoiW",
 					"dataKey": "Characters/Illaoi/Spells/IllaoiWAbility/IllaoiW",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_w.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>@HealthPercentTotal@ max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target.",
 					"extendedVariables": [
 						{
@@ -127,8 +129,6 @@
 							"nameOverride": "spell_listtype_minimumdamage"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
 						"WMinDamage": [10, 20, 30, 40, 50, 60, 70],
 						"HealthPercentDamage": [2.5, 3, 3.5, 4, 4.5, 5, 5.5],
@@ -184,6 +184,8 @@
 					"objectName": "IllaoiE",
 					"dataKey": "Characters/Illaoi/Spells/IllaoiEAbility/IllaoiE",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_e.png",
+					"mana": [35, 40, 45, 50, 55, 60],
+					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"tooltip": "Illaoi pulls the spirit from an enemy champion for @SpiritDuration@ seconds. The spirit can be damaged like a champion, with @EchoPercent@ of that damage echoing to its owner.<br><br>If the spirit dies or the target leaves its range, the target becomes marked for @VesselDuration@ seconds and is <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds. Marked enemies spawn Tentacles if possible.<br><br>Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every @TimeBetweenVesselTentacleSlams@ seconds.",
 					"extendedVariables": [
 						{
@@ -194,8 +196,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [35, 40, 45, 50, 55, 60],
-					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
 						"BaseDamageTransferPercent": [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
 						"VesselDuration": [4, 4, 4, 4, 4, 4, 4],
@@ -273,6 +273,8 @@
 					"objectName": "IllaoiR",
 					"dataKey": "Characters/Illaoi/Spells/IllaoiRAbility/IllaoiR",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [120, 120, 95, 70, 70, 70, 70],
 					"tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br><br>For the next @Duration@ seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a @spell.IllaoiW:CooldownDuringR@ second cooldown.",
 					"extendedVariables": [
 						{
@@ -280,8 +282,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [120, 120, 95, 70, 70, 70, 70],
 					"dataValues": {
 						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
 						"BuffRadius": [500, 500, 500, 500, 500, 500, 500],

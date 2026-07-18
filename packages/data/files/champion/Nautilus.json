@@ -35,6 +35,8 @@
 					"objectName": "NautilusAnchorDrag",
 					"dataKey": "Characters/Nautilus/Spells/NautilusAnchorDragAbility/NautilusAnchorDrag",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_anchorchain.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Nautilus hurls his anchor forward. If it hits an enemy, Nautilus drags himself and the target together, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Stunning</status> them briefly. If the anchor hits terrain, Nautilus will drag himself towards it.",
 					"extendedVariables": [
 						{
@@ -42,8 +44,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [14, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
 						"BaseDamage": [40, 85, 130, 175, 220, 265, 310],
 						"TerrainCDR": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -81,6 +81,8 @@
 					"objectName": "NautilusPiercingGaze",
 					"dataKey": "Characters/Nautilus/Spells/NautilusPiercingGazeAbility/NautilusPiercingGaze",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_wrath.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Nautilus gains a <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds. While the <shield>Shield</shield> persists, Nautilus' Attacks deal an additional <magicDamage>@DotDamageCalc@ magic damage</magicDamage> over 2 seconds to his target and all surrounding enemies.",
 					"extendedVariables": [
 						{
@@ -96,8 +98,6 @@
 							"nameOverride": "spell_listtype_percentmaxhealth"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"ShieldBase": [40, 50, 60, 70, 80, 90, 100],
 						"ShieldHealthRatio": [0.07, 0.08, 0.09, 0.1, 0.11, 0.12, 0.13],
@@ -143,6 +143,8 @@
 					"objectName": "NautilusSplashZone",
 					"dataKey": "Characters/Nautilus/Spells/NautilusSplashZoneAbility/NautilusSplashZone",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_rippleeffect.png",
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 5],
 					"tooltip": "Nautilus creates three exploding waves around himself, each dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slows</status> them by @SlowPercent*100@% decaying over @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -161,8 +163,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 100],
-					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 5],
 					"dataValues": {
 						"DamageBase": [20, 55, 90, 125, 160, 195, 230],
 						"SlowPercent": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
@@ -211,6 +211,8 @@
 					"objectName": "NautilusGrandLine",
 					"dataKey": "Characters/Nautilus/Spells/NautilusGrandLineAbility/NautilusGrandLine",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_grandline.png",
+					"mana": [100, 100, 100, 100, 100, 0],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing <magicDamage>@PrimaryTargetDamage@ magic damage</magicDamage>, <status>Knocking</status> them <status>Up</status> and <status>Stunning</status> them for @StunDuration@ seconds. Other enemies hit by the shockwave are also <status>Knocked Up</status> and <status>Stunned</status> and take <magicDamage>@SecondaryTargetDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -226,8 +228,6 @@
 							"nameOverride": "spell_listtype_explosiondamage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 0],
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
 						"PrimaryDamage": [25, 150, 275, 400, 525, 650, 775],
 						"SecondaryDamage": [75, 125, 175, 225, 275, 325, 375],

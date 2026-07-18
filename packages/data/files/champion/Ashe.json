@@ -35,6 +35,8 @@
 					"objectName": "AsheQ",
 					"dataKey": "Characters/Ashe/Spells/AsheQAbility/AsheQ",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_q.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_asheflurryattackdamageratio"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"DamagePerStrike": [1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35],
 						"ShotsPerStrike": [5, 5, 5, 5, 5, 5, 5]
@@ -84,6 +84,8 @@
 					"objectName": "Volley",
 					"dataKey": "Characters/Ashe/Spells/VolleyAbility/Volley",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_w.png",
+					"mana": [75, 70, 65, 60, 55, 50],
+					"cooldownTime": [18, 18, 14.5, 11, 7.5, 4, 4],
 					"tooltip": "Ashe fires a volley of @NumberOfArrowsTooltip@ arrows, each dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies can be hit by multiple arrows, but only take damage from the first.",
 					"extendedVariables": [
 						{
@@ -98,8 +100,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [75, 70, 65, 60, 55, 50],
-					"cooldownTime": [18, 18, 14.5, 11, 7.5, 4, 4],
 					"dataValues": {
 						"BaseDamage": [25, 60, 95, 130, 165, 200, 235],
 						"NumberOfArrowsTooltip": [6, 7, 8, 9, 10, 11, 12],
@@ -136,13 +136,13 @@
 					"objectName": "AsheSpiritOfTheHawk",
 					"dataKey": "Characters/Ashe/Spells/AsheSpiritOfTheHawkAbility/AsheSpiritOfTheHawk",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_e.png",
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br><br>This Ability has 2 charges (@ChargeCooldown@ second recharge).",
 					"extendedVariables": [
 						{
 							"name": "AmmoRechargeTime"
 						}
 					],
-					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
 						"BaseCooldown": [100, 90, 80, 70, 60, 50, 40]
 					},
@@ -178,6 +178,8 @@
 					"objectName": "EnchantedCrystalArrow",
 					"dataKey": "Characters/Ashe/Spells/EnchantedCrystalArrowAbility/EnchantedCrystalArrow",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"tooltip": "Ashe launches a crystal arrow of ice that <status>Stuns</status> the first champion hit and deals <magicDamage>@RMainDamage@ magic damage</magicDamage>. The <status>Stun</status> duration increases with distance travelled, up to @MaxStunDuration@ seconds. Surrounding enemies are <status>Slowed</status> by <spellName>Frost Shot</spellName>.",
 					"extendedVariables": [
 						{
@@ -185,8 +187,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"dataValues": {
 						"RBaseDamage": [0, 200, 400, 600, 800, 1000, 1200],
 						"MinStunDuration": [1, 1, 1, 1, 1, 1, 1],

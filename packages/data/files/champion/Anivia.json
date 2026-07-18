@@ -35,6 +35,8 @@
 					"objectName": "FlashFrost",
 					"dataKey": "Characters/Anivia/Spells/FlashFrostAbility/FlashFrost",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_q.png",
+					"mana": [80, 85, 90, 95, 100, 100],
+					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Anivia fires a massive chunk of ice, dealing <magicDamage>@TotalPassthroughDamage@ magic damage</magicDamage> and <keywordMajor>Chilling</keywordMajor> enemies for @SlowDuration@ seconds, <status>Slowing</status> them by @Spell.GlacialStorm:SlowAmount@%. At the end of its range, the ice detonates, <status>Stunning</status> enemies for @StunDuration@ seconds and dealing <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>.<br><br>Anivia can <recast>Recast</recast> this ability while the ice flies to detonate it early.",
 					"extendedVariables": [
 						{
@@ -53,8 +55,6 @@
 							"name": "Cost"
 						}
 					],
-					"mana": [80, 85, 90, 95, 100, 100],
-					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
 						"PassthroughBaseDamage": [30, 50, 70, 90, 110, 130, 150],
 						"ExplosionBaseDamage": [25, 60, 95, 130, 165, 200, 235],
@@ -98,6 +98,8 @@
 					"objectName": "Crystallize",
 					"dataKey": "Characters/Anivia/Spells/CrystallizeAbility/Crystallize",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_w.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
 					"tooltip": "Anivia summons a wall of ice @WallWidth@ units wide. The wall lasts for @WallDuration@ seconds before it melts.",
 					"extendedVariables": [
 						{
@@ -105,8 +107,6 @@
 							"nameOverride": "spell_listtype_width"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
 					"dataValues": {
 						"WallDuration": [5, 5, 5, 5, 5, 5, 5],
 						"WallWidth": [300, 400, 500, 600, 700, 800, 900],
@@ -129,6 +129,8 @@
 					"objectName": "Frostbite",
 					"dataKey": "Characters/Anivia/Spells/FrostbiteAbility/Frostbite",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_e.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "Anivia blasts an enemy with a freezing wind, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Against <keywordMajor>Chilled</keywordMajor> enemies, Anivia deals <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
@@ -136,8 +138,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
 						"BaseDamage": [30, 55, 80, 105, 130, 155, 180]
 					},
@@ -174,6 +174,8 @@
 					"objectName": "GlacialStorm",
 					"dataKey": "Characters/Anivia/Spells/GlacialStormAbility/GlacialStorm",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_r.png",
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [4, 4, 3, 2, 2, 2, 2],
 					"tooltip": "<toggle>Toggle:</toggle> Anivia calls forth a driving rain of ice and hail that <status>Slows</status> enemies by @SlowAmount@% and deals <magicDamage>@TotalDamagePerSecond@ magic damage per second</magicDamage>. The storm increases in size over @GrowthTime@ seconds.<br><br>When the storm is fully formed, it <keywordMajor>Chills</keywordMajor>, <status>Slows</status> by @SlowPercentEmpoweredTT@%, and does <magicDamage>@EmpoweredDamagePerSecondTooltipOnly@ magic damage per second</magicDamage> instead.",
 					"extendedVariables": [
 						{
@@ -193,8 +195,6 @@
 							"nameOverride": "spell_listtype_manacostpersecond"
 						}
 					],
-					"mana": [60, 60, 60, 60, 60, 60],
-					"cooldownTime": [4, 4, 3, 2, 2, 2, 2],
 					"dataValues": {
 						"DamagePerSecond": [15, 30, 45, 60, 75, 90, 105],
 						"BonusMultiplier": [300, 300, 300, 300, 300, 300, 300],
@@ -267,8 +267,8 @@
 					"objectName": "RebirthMarker",
 					"dataKey": "Characters/Anivia/Spells/RebirthMarkerAbility/RebirthMarker",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_p.png",
-					"tooltip": "Upon taking fatal damage, Anivia reverts to an egg, healing to full Health and receiving <Level>@BonusResists@</Level> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. If she survives for 6 seconds, she is reborn.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+					"tooltip": "Upon taking fatal damage, Anivia reverts to an egg, healing to full Health and receiving <Level>@BonusResists@</Level> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. If she survives for 6 seconds, she is reborn.",
 					"dataValues": {
 						"Cooldown": [240, 240, 240, 240, 240, 240, 240]
 					},

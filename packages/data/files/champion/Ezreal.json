@@ -35,6 +35,8 @@
 					"objectName": "EzrealQ",
 					"dataKey": "Characters/Ezreal/Spells/EzrealQAbility/EzrealQ",
 					"image": "assets/characters/ezreal/hud/icons2d/ezreal_q.png",
+					"mana": [28, 31, 34, 37, 40, 43],
+					"cooldownTime": [5.75, 5.5, 5.25, 5, 4.75, 4.5, 3.5],
 					"tooltip": "Ezreal fires a bolt of energy, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit and reducing his Ability Cooldowns by @CDRefund@ seconds.",
 					"extendedVariables": [
 						{
@@ -45,8 +47,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [28, 31, 34, 37, 40, 43],
-					"cooldownTime": [5.75, 5.5, 5.25, 5, 4.75, 4.5, 3.5],
 					"dataValues": {
 						"BaseDamage": [-5, 20, 45, 70, 95, 120, 145],
 						"CDRefund": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -84,6 +84,8 @@
 					"objectName": "EzrealW",
 					"dataKey": "Characters/Ezreal/Spells/EzrealWAbility/EzrealW",
 					"image": "assets/characters/ezreal/hud/icons2d/ezreal_w.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "Ezreal fires a magical orb that sticks to the first champion, structure, or epic jungle monster hit for @DetonationTimeout@ seconds. If Ezreal hits that target with an Attack or Ability, it detonates, dealing <magicDamage>@Damage@ magic damage</magicDamage>. Detonating with an Ability refunds the Mana cost of that Ability plus <scaleMana>@ManaReturn@ Mana</scaleMana>.",
 					"extendedVariables": [
 						{
@@ -91,8 +93,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
 						"BaseDamage": [25, 80, 135, 190, 245, 300, 355],
 						"ManaReturn": [60, 60, 60, 60, 60, 60, 60],
@@ -131,6 +131,8 @@
 					"objectName": "EzrealE",
 					"dataKey": "Characters/Ezreal/Spells/EzrealEAbility/EzrealE",
 					"image": "assets/characters/ezreal/hud/icons2d/ezreal_e.png",
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [26, 26, 23, 20, 17, 14, 10],
 					"tooltip": "Ezreal teleports then fires a bolt at the nearest enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage>. The bolt prioritizes enemies affected by <spellName>Essence Flux</spellName>.",
 					"extendedVariables": [
 						{
@@ -138,8 +140,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [70, 70, 70, 70, 70, 70],
-					"cooldownTime": [26, 26, 23, 20, 17, 14, 10],
 					"dataValues": {
 						"BaseDamage": [30, 80, 130, 180, 230, 280, 330],
 						"MissileRange": [750, 750, 750, 750, 750, 750, 750],
@@ -181,6 +181,8 @@
 					"objectName": "EzrealR",
 					"dataKey": "Characters/Ezreal/Spells/EzrealRAbility/EzrealR",
 					"image": "assets/characters/ezreal/hud/icons2d/ezreal_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [10, 120, 105, 90, 10, 10, 10],
 					"tooltip": "Ezreal fires a massive energy arc that deals <magicDamage>@Damage@ magic damage</magicDamage>. Damage to minions and non-epic jungle monsters is reduced to <magicDamage>@DamageMinionMonster@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
@@ -192,8 +194,6 @@
 							"nameOverride": "spell_listtype_nonchampiondamage"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [10, 120, 105, 90, 10, 10, 10],
 					"dataValues": {
 						"BaseDamage": [150, 350, 550, 750, 950, 1150, 1350],
 						"DamageReductionPerHit": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],

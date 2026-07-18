@@ -35,6 +35,8 @@
 					"objectName": "GragasQ",
 					"dataKey": "Characters/Gragas/Spells/GragasQAbility/GragasQ",
 					"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
+					"mana": [80, 80, 80, 80, 80, 80],
+					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Gragas rolls a cask that explodes after @BarrelMaxDuration@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @SlowPercent@ and @SlowPercent*1.5@% for @SlowDuration@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
 					"extendedVariables": [
 						{
@@ -46,8 +48,6 @@
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
-					"mana": [80, 80, 80, 80, 80, 80],
-					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
 						"SlowPercent": [35, 40, 45, 50, 55, 60, 65],
@@ -98,6 +98,8 @@
 					"objectName": "GragasW",
 					"dataKey": "Characters/Gragas/Spells/GragasWAbility/GragasW",
 					"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png",
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Gragas samples his brew, reducing incoming damage by @DamageReduction@ for @DefenseDuration@ seconds and empowering his next Attack to deal an additional <magicDamage>@TotalDamage@</magicDamage> plus <magicDamage>@MaxHPPercentDamage@% max Health magic damage</magicDamage> to the target and surrounding enemies.",
 					"extendedVariables": [
 						{
@@ -109,8 +111,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [30, 30, 30, 30, 30, 30],
-					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
 						"AttackRangeBuff": [50, 50, 50, 50, 50, 50, 50],
 						"MaxHPPercentDamage": [7, 7, 7, 7, 7, 7, 7],
@@ -164,6 +164,8 @@
 					"objectName": "GragasE",
 					"dataKey": "Characters/Gragas/Spells/GragasEAbility/GragasE",
 					"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png",
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [14, 14, 13.5, 13, 12.5, 12, 12],
 					"tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for @StunDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to them.<br><br>This Ability's Cooldown is reduced by @CooldownRefund*100@% if Gragas collides with an enemy.",
 					"extendedVariables": [
 						{
@@ -171,8 +173,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [14, 14, 13.5, 13, 12.5, 12, 12],
 					"dataValues": {
 						"BaseDamage": [35, 80, 125, 170, 215, 260, 305],
 						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
@@ -207,6 +207,8 @@
 					"objectName": "GragasR",
 					"dataKey": "Characters/Gragas/Spells/GragasRAbility/GragasR",
 					"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png",
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"tooltip": "Gragas hurls his cask, dealing <magicDamage>@DamageDone@ magic damage</magicDamage> and <status>Knocking Away</status> enemies from the impact zone.",
 					"extendedVariables": [
 						{
@@ -214,8 +216,6 @@
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
-					"mana": [100, 100, 100, 100, 100, 100],
-					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"dataValues": {
 						"BaseDamage": [100, 200, 300, 400, 500, 600, 700],
 						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
@@ -246,8 +246,8 @@
 					"objectName": "GragasPassive",
 					"dataKey": "Characters/Gragas/Spells/GragasPassiveAbility/GragasPassive",
 					"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
-					"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. ",
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
+					"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. ",
 					"dataValues": {
 						"ArenaCooldownMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"HealRatio": [0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055]

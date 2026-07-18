@@ -35,6 +35,7 @@
 					"objectName": "MilioQ",
 					"dataKey": "Characters/Milio/Spells/MilioQAbility/MilioQ",
 					"image": "assets/characters/milio/hud/icons2d/milio_q.png",
+					"mana": [50, 55, 60, 65, 70, 75],
 					"tooltip": "Milio kicks a fireball, <status>Knocking Back</status> the first enemy hit. If it hits, the ball bounces past them and explodes, dealing <magicDamage>@Damage@ magic damage</magicDamage> to surrounding enemies and <status>Slowing</status> them by @SlowAmountPercent@ for @SlowDuration@ seconds.<br><br>Hitting at least one enemy champion with <spellName>{{Spell_MilioKickballQ_Name}}</spellName> refunds @RefundRatio*100@% of it's Mana cost.",
 					"extendedVariables": [
 						{
@@ -50,7 +51,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [50, 55, 60, 65, 70, 75],
 					"dataValues": {
 						"SlowAmount": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
 						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -103,6 +103,8 @@
 					"objectName": "MilioW",
 					"dataKey": "Characters/Milio/Spells/MilioWAbility/MilioW",
 					"image": "assets/characters/milio/hud/icons2d/milio_w.png",
+					"mana": [90, 100, 110, 120, 130, 140],
+					"cooldownTime": [29, 29, 27, 25, 23, 21, 19],
 					"tooltip": "Milio creates a hearth that follows ally champions for @ZoneDuration@ seconds. Ally champions nearby gain @RangePercent@ Attack Range and restore <healing>@HealingOverTime@ Health</healing> over the duration. The hearth also applies <spellName>{{Spell_MilioPassive_Name}}</spellName> every @HealFrequencySeconds@ seconds.<br><br><recast>Recast:</recast> Change the hearth's follow ally.",
 					"extendedVariables": [
 						{
@@ -118,8 +120,6 @@
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
-					"mana": [90, 100, 110, 120, 130, 140],
-					"cooldownTime": [29, 29, 27, 25, 23, 21, 19],
 					"dataValues": {
 						"ZoneDuration": [6, 6, 6, 6, 6, 6, 6],
 						"Radius": [350, 350, 350, 350, 350, 350, 350],
@@ -165,6 +165,8 @@
 					"objectName": "MilioE",
 					"dataKey": "Characters/Milio/Spells/MilioEAbility/MilioE",
 					"image": "assets/characters/milio/hud/icons2d/milio_e.png",
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "Milio wraps an ally champion in protective flames, granting <shield>@ShieldCalc@ Shield</shield> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>This ability has 2 charges and the effects stack on repeat targets.",
 					"extendedVariables": [
 						{
@@ -183,8 +185,6 @@
 							"name": "AmmoRechargeTime"
 						}
 					],
-					"mana": [50, 60, 70, 80, 90, 100],
-					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
 						"MoveSpeedAmount": [0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22],
 						"MoveSpeedDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
@@ -216,6 +216,8 @@
 					"objectName": "MilioR",
 					"dataKey": "Characters/Milio/Spells/MilioRAbility/MilioR",
 					"image": "assets/characters/milio/hud/icons2d/milio_r.png",
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [160, 160, 145, 130, 70, 40, 10],
 					"tooltip": "Milio unleashes a wave of soothing flames on nearby ally champions, cleansing <status>Disabling</status> and <status>Immobilizing</status> effects, restoring <healing>@HealCalc@ Health</healing>, and granting @TenacityAmount*100@% Tenacity for @TenacityDuration@ seconds.",
 					"extendedVariables": [
 						{
@@ -223,8 +225,6 @@
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
-					"mana": [100, 100, 100, 0, 0, 0],
-					"cooldownTime": [160, 160, 145, 130, 70, 40, 10],
 					"dataValues": {
 						"HealBase": [50, 150, 250, 350, 450, 550, 650],
 						"TenacityDuration": [3, 3, 3, 3, 3, 3, 3],
@@ -256,9 +256,9 @@
 					"objectName": "MilioPassive",
 					"dataKey": "{3e27cfac}",
 					"image": "assets/characters/milio/hud/icons2d/milio_p.png",
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_MilioPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MilioPassive_Tooltip}}<br><br><rules>Burn damage does not stack from multiple hits.</rules>",
-					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"MaxMonsterDamage": [100, 100, 100, 100, 100, 100, 100],
 						"BurnDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
