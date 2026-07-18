@@ -1043,6 +1043,13 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Yasuo: {
+		q: {
+			dataOverrides: {
+				isImmobilzing: false,
+			},
+		},
+	},
 	Zaahen: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Zaahen'>): number => (self.champion.value! as typeof IZaahen).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
 		setupData(self): { passiveStacks: number } {
@@ -1084,6 +1091,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
 	variables?: ISpecificVariables<string, string, Id, 'championAbility'>;
+	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	/**
 	 * ability's variant specific
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
@@ -1091,7 +1099,13 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	[key: number]: IChampionAbilityVariantSpecific;
 };
 
-export type IChampionAbilityVariantSpecific = IProviderGroupImageText;
+export type IChampionAbilityVariantSpecific = IProviderGroupImageText & {
+	dataOverrides?: IChampionAbilityVariantDataOverrides;
+};
+
+interface IChampionAbilityVariantDataOverrides {
+	isImmobilzing?: boolean;
+}
 
 /** wrapper around `defineVariables` for types on champion specific's variables */
 export function defineChampionVariables<

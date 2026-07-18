@@ -1,5 +1,5 @@
 import type { ISpecificVariables } from '@lolcalc/core/specifics';
-import type { IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
+import type { IChampionAbilitySpecific, IChampionAbilityVariantSpecific, IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
 import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc.ts';
@@ -1909,7 +1909,15 @@ function championAbilityVariant(
 		isImmobilizing: undefined,
 	} as IChampionAbilityVariant;
 
-	if (isImmobilizingAbilityVariant(abilityKey, variant.dataValues, mSpellTags, variantData.BotData)) {
+	let abilityOrVariantSpecific: IChampionAbilitySpecific<any> | IChampionAbilityVariantSpecific | undefined = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[championId]?.[abilityKey];
+
+	if ((abilityOrVariantSpecific as IChampionAbilitySpecific)?.[variantIndex]) {
+		abilityOrVariantSpecific = (abilityOrVariantSpecific as IChampionAbilitySpecific)[variantIndex];
+	}
+
+	if (abilityOrVariantSpecific?.dataOverrides?.isImmobilzing) {
+		variant.isImmobilizing = true;
+	} else if (abilityOrVariantSpecific?.dataOverrides?.isImmobilzing === undefined && isImmobilizingAbilityVariant(abilityKey, variant.dataValues, mSpellTags, variantData.BotData)) {
 		variant.isImmobilizing = true;
 	}
 
@@ -1927,6 +1935,7 @@ function championAbilityVariant(
 	return [variant, maxLevel];
 }
 
+/** used for detecting if an ability is an immobilzing one - will be affected by imperial mandate passive. It could possibly be improved because it returns some false flags like Yauso or Zaahen Q but I just have an option to override it (used above) from champion specifics */
 function isImmobilizingAbilityVariant(abilityKey: IChampionAbilityKey, dataValues?: IChampionAbilityVariant['dataValues'], mSpellTags?: string[], botData?: any): boolean {
 	if (abilityKey === 'passive' || !(mSpellTags || botData)) {
 		return false;
