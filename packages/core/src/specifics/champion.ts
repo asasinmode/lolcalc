@@ -87,6 +87,11 @@ export const CHAMPION_SPECIFICS = {
 				isEgg: clamp(0, Math.round(self.internalData.value.isEgg ?? 0), 1),
 			};
 		},
+		w: {
+			dataOverrides: {
+				isImmobilizing: true
+			}
+		},
 	},
 	Aphelios: {
 		WEAPON_NAME_TO_VARIANT_INDEX: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>,
@@ -1113,16 +1118,23 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Yasuo: {
-		e: {
-			dataOverrides: {
-				isImmobilizing: false,
-			},
-		},
 		q: {
 			dataOverrides: {
 				isImmobilizing: false,
 			},
 		},
+		e: {
+			dataOverrides: {
+				isImmobilizing: false,
+			},
+		},
+	},
+	Yone: {
+		q: {
+			dataOverrides: {
+				isImmobilizing: false
+			}
+		}
 	},
 	Zaahen: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Zaahen'>): number => (self.champion.value! as typeof IZaahen).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
