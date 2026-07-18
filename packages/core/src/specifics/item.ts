@@ -1700,7 +1700,15 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f4', 'LowHealthThreshold', 'ShieldDuration', 'BuffVamp'],
 		}),
-		// TODO calculate
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'mawOfMalmortius'>).mawLifeline) {
+						itemPassivesStats.omnivamp += ITEMS_BY_NAME.mawOfMalmortius.dataValues.BuffVamp;
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.jakSho]: {
 		internalDataProperties: ['vbResistance'],
