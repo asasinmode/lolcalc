@@ -1422,8 +1422,6 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
-					itemPassivesStats.ultimateHaste += ITEMS_BY_NAME.experimentalHexplate?.dataValues.UltimateHaste ?? 0;
-
 					if (!(self.internalItemData.value as IInternalItemDataOf<'experimentalHexplate'>).overdrive) {
 						return;
 					}
@@ -2261,13 +2259,6 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'UltimateHaste', 'Duration', 'SlowAmount'],
 		}),
-		calculateHooks: {
-			preItemTotal: {
-				handler(_self, { itemPassivesStats }) {
-					itemPassivesStats.ultimateHaste += ITEMS_BY_NAME.zekesConvergence?.dataValues.UltimateHaste ?? 0;
-				},
-			},
-		},
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
 		variables: defineVariables({

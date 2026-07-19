@@ -307,17 +307,21 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 }
 
-function itemToChampionStats(item?: IItem): [IChampionStatName, number][] {
-	return item
-		? Object.entries(item.stats)
-				.filter(([itemStatName]) => itemStatName in ITEM_TO_CHAMPION_STATS)
-				.map(([itemStatName, itemStatValue]) => {
-					return [
-						ITEM_TO_CHAMPION_STATS[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS],
-						itemStatValue,
-					];
-				})
-		: [];
+function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
+	const rv = Object.entries(item.stats)
+		.filter(([itemStatName]) => itemStatName in ITEM_TO_CHAMPION_STATS)
+		.map(([itemStatName, itemStatValue]) => {
+			return [
+				ITEM_TO_CHAMPION_STATS[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS],
+				itemStatValue,
+			] as [IChampionStatName, number];
+		});
+
+	if (item.dataValues?.UltimateHaste) {
+		rv.push(['ultimateHaste', item.dataValues.UltimateHaste]);
+	}
+
+	return rv;
 }
 
 // TODO maybe a better way exists
