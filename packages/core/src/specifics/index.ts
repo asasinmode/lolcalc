@@ -39,6 +39,8 @@ export const HOOK_PRIORITIES = {
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
 		/* should be after Ryze */
 		[ITEM_NAME_TO_ID.actualizer]: 10,
+		/* should be last, needs final total hp */
+		[ITEM_NAME_TO_ID.immortalPath]: 100,
 	},
 } satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;
 

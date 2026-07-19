@@ -182,7 +182,10 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.gluttonousGreaves), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.gluttonousGreaves].MAX_STACKS),
 	},
 	[ITEM_NAME_TO_ID.immortalPath]: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.immortalPath].MAX_STACKS),
+		extras: [
+			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.immortalPath].MAX_STACKS),
+			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'applyHSMult', 'passive multiplier to tooltip values'),
+		],
 	},
 	[ITEM_NAME_TO_ID.lichBane]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.lichBane), 'spActive', 'Spellblade'),
@@ -246,6 +249,9 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.mercurialScimitar]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.mercurialScimitar), 'quicksilver', 'Quicksilver'),
+	},
+	[ITEM_NAME_TO_ID.spiritVisage]: {
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.spiritVisage), 'applyHSMult', 'passive multiplier to tooltip values'),
 	},
 };
 

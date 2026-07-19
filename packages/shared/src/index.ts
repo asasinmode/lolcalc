@@ -91,6 +91,12 @@ export interface IStatsCalculationVariables {
 	 * - Rammus' passive infernal bonus. If Rammus' passive gives 100 ad and he has 1 infernal, it will be `3`
 	 */
 	bloodmailRetributionExcludedAd: number;
+	/**
+	 * heal and shield multiplier from spirit visage, actualizer and immortal path's passives
+	 * [wiki of sources](https://wiki.leagueoflegends.com/en-us/Heal_and_shield_power#Notes)
+	 * TODO include revitalize
+	 */
+	healShieldMult?: number;
 	/** ad gained from completed mid quest */
 	midQuestAd?: number;
 	/** ap gained from completed mid quest */

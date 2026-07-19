@@ -1232,6 +1232,7 @@ export const ITEM_SPECIFICS = {
 						const bonusPercent = itemVariableValue('ManaCalc', { item: ITEMS_BY_NAME.actualizer, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
 						if (typeof bonusPercent.value === 'number') {
 							calculatedVariables.actualizerBuffPercent = bonusPercent.value;
+							calculatedVariables.healShieldMult = (calculatedVariables.healShieldMult ?? 0) + calculatedVariables.actualizerBuffPercent;
 						} else {
 							console.warn('[ITEM_SPECIFICS actualizer] failed to calculate buff bonus percent', bonusPercent);
 						}
@@ -1776,20 +1777,24 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
 	[ITEM_NAME_TO_ID.immortalPath]: {
 		...gluttonousGreavesSpecific,
-		internalDataProperties: ['applyIPathMultiplier'],
+		internalDataProperties: gluttonousGreavesSpecific.internalDataProperties.concat('applyHSMult'),
 		setupData(self) {
-			self.internalData.value.applyIPathMultiplier = clamp(0, self.internalItemData.value.applyIPathMultiplier ?? 0, 1);
-			return { applyIPathMultiplier: 0 };
+			self.internalItemData.value.applyHSMult = clamp(0, self.internalItemData.value.applyHSMult ?? 0, 1);
+			return { ...gluttonousGreavesSpecific.setupData(self), applyHSMult: 0 };
 		},
 		imgActive(internalData) {
-			return internalData.applyIPathMultiplier;
+			return internalData.applyHSMult;
 		},
 		calculateHooks: {
-			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
-					const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
-					calculatedVariables.healShieldRegenMult = (calculatedVariables.healShieldRegenMult ?? 0) + value;
+			preItemTotal: gluttonousGreavesSpecific.calculateHooks.preItemTotal,
+			postTotal: {
+				handler(self, { totalStats }, { calculatedVariables }) {
+					if (self.currentHealth.value < Math.ceil(totalStats.hp / 2)) {
+						const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
+						calculatedVariables.healShieldMult = (calculatedVariables.healShieldMult ?? 0) + value;
+					}
 				},
+				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.immortalPath],
 			},
 		},
 	},
@@ -2288,13 +2293,13 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
-		internalDataProperties: ['applyVisageMultiplier'],
+		internalDataProperties: ['applyHSMult'],
 		setupData(self) {
-			self.internalData.value.applyVisageMultiplier = clamp(0, self.internalItemData.value.applyVisageMultiplier ?? 0, 1);
-			return { applyVisageMultiplier: 0 };
+			self.internalItemData.value.applyHSMult = clamp(0, self.internalItemData.value.applyHSMult ?? 0, 1);
+			return { applyHSMult: 0 };
 		},
 		imgActive(internalData) {
-			return internalData.applyVisageMultiplier;
+			return internalData.applyHSMult;
 		},
 		variables: defineVariables({
 			known: {
@@ -2309,6 +2314,19 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'f2', 'HealingIncrease'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if (ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease !== ITEMS_BY_NAME.spiritVisage?.dataValues.ShieldIncrease) {
+						/* could handle it but I don't expect it to change so save work */
+						console.error('[ITEM_SPECIFICS spirit visage] healing increase is diffeerent from shield');
+					}
+
+					const value = ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
+					calculatedVariables.healShieldMult = (calculatedVariables.healShieldMult ?? 0) + value;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.sunfireAegis]: {
 		imgTextLabel: '',
