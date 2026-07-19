@@ -99,6 +99,47 @@
 				"ShieldIncrease": 0.25
 			}
 		},
+		"3072": {
+			"name": "Bloodthirster",
+			"stats": {
+				"FlatPhysicalDamageMod": 80,
+				"PercentLifeStealMod": 0.15
+			},
+			"dataValues": {
+				"Threshold": 0.7,
+				"DecayTime": 25
+			},
+			"itemCalculations": {
+				"OvershieldCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 165,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3139": {
+			"name": "Mercurial Scimitar",
+			"stats": {
+				"FlatSpellBlockMod": 35,
+				"FlatPhysicalDamageMod": 50,
+				"PercentLifeStealMod": 0.1
+			},
+			"dataValues": {
+				"Cooldown": 90,
+				"MSDuration": 2,
+				"MoveSpeed": 0.5
+			},
+			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0]
+		},
 		"3146": {
 			"name": "Hextech Gunblade",
 			"stats": {

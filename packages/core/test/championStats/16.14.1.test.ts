@@ -1,4 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import fixture from '../fixtures/16.14.1.fixture.json' with { type: 'json' };
@@ -47,7 +48,7 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 			});
 		});
 
-		await t.test('spirit visage', async () => {
+		await t.test('spirit visage', { only: true }, async () => {
 			const damageSource = await setupDamageSource(fixture, 'Briar', {
 				...baseCommon,
 				items: baseCommon.items!.concat(ITEMS_BY_NAME.spiritVisage),
@@ -71,6 +72,34 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 8,
 				lifeSteal: 14,
 				omnivamp: 20,
+			});
+		});
+
+		const lotsOfLifestealItems = [ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.spiritVisage, ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.hextechGunblade, ITEMS_BY_NAME.immortalPath];
+
+		await t.test('lots of lifesteal | spirit visage', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Briar', {
+				...baseCommon,
+				items: lotsOfLifestealItems,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				lifeSteal: 44,
+				omnivamp: 25,
+			});
+		});
+
+		await t.test('lots of lifesteal | spirit visage, immortal path', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Briar', {
+				...baseCommon,
+				items: lotsOfLifestealItems,
+				currentHealth: 92,
+				internalItemData: { slay: 10, applyHSMult: 0 } satisfies IInternalItemDataOf<'immortalPath'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				lifeSteal: 51,
+				omnivamp: 29,
 			});
 		});
 	});
