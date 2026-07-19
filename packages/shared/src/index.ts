@@ -96,7 +96,11 @@ export interface IStatsCalculationVariables {
 	 * [wiki of sources](https://wiki.leagueoflegends.com/en-us/Heal_and_shield_power#Notes)
 	 * TODO include revitalize
 	 */
-	healShieldMult?: number;
+	healShieldMult: number;
+	/** same as `healShieldMult` but just for regen */
+	hpRegenMult: number;
+	/** same as `healShieldMult` but for life steal/omnivamp */
+	lifeStealOmnivampMult: number;
 	/** ad gained from completed mid quest */
 	midQuestAd?: number;
 	/** ap gained from completed mid quest */
@@ -194,6 +198,8 @@ export interface IStatsCalculationVariables {
 	terminusPercentagePen?: number;
 	/** armor & magic resist from terminus' passive */
 	terminusResists?: number;
+	/** heal, shield and regen mult from spirit visage's passive */
+	spiritVisageHSMult?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

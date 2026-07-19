@@ -1790,8 +1790,9 @@ export const ITEM_SPECIFICS = {
 			postTotal: {
 				handler(self, { totalStats }, { calculatedVariables }) {
 					if (self.currentHealth.value < Math.ceil(totalStats.hp / 2)) {
-						const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
-						calculatedVariables.healShieldMult = (calculatedVariables.healShieldMult ?? 0) + value;
+						calculatedVariables.healShieldMult += ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
+						calculatedVariables.hpRegenMult += ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
+						calculatedVariables.lifeStealOmnivampMult += ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.immortalPath],
@@ -2316,14 +2317,15 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+				handler(_self, _stats, { calculatedVariables }) {
 					if (ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease !== ITEMS_BY_NAME.spiritVisage?.dataValues.ShieldIncrease) {
 						/* could handle it but I don't expect it to change so save work */
 						console.error('[ITEM_SPECIFICS spirit visage] healing increase is diffeerent from shield');
 					}
 
-					const value = ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
-					calculatedVariables.healShieldMult = (calculatedVariables.healShieldMult ?? 0) + value;
+					calculatedVariables.healShieldMult += ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
+					calculatedVariables.hpRegenMult += ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
+					calculatedVariables.lifeStealOmnivampMult += ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
 				},
 			},
 		},
