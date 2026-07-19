@@ -1,5 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
+import type IBriar from '@lolcalc/data/files/champion/Briar.json';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
@@ -171,6 +172,22 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 				hasPassiveStack: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), 1),
 			};
+		},
+	},
+	Briar: {
+		calculateHooks: {
+			postTotal: {
+				handler(self, { championPassiveStats, bonusStats, totalStats }, { calculatedVariables }) {
+					const currentHpPercent = self.currentHealth.value / totalStats.hp;
+					console.log('briaring', currentHpPercent);
+				},
+				priority: HOOK_PRIORITIES.postTotal.Briar,
+			},
+		},
+		passive: {
+			variables: defineChampionVariables<'Briar', typeof IBriar, 'passive'>({
+				uninteresting: ['BleedDuration', 'MaxBleedStacks', 'HealPercent', 'CurrentHealthPercentCost', 'PercentOfBleedHealedOnKill'],
+			}),
 		},
 	},
 	Cassiopeia: {

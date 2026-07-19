@@ -129,6 +129,7 @@ export function itemVariableValue(
 
 	if (dynamicVariables.meta?.[variable]) {
 		rv.meta = dynamicVariables.meta[variable];
+		rv.isDynamic = true;
 	}
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
@@ -230,6 +231,7 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 	/* atm only shard stats' dynamic variables are properly resolved and this suffices, when doing major runes probably needs to be sophisticated, when it changes also make sure to resolve meta the same way it is in items/champions (not dependant on value existing) */
 	if (dynamicVariables.values?.[variable]) {
 		rv.roundReplaced = true;
+		rv.isDynamic = true;
 		Object.assign(rv, dynamicVariables.values[variable]);
 		rv.meta = dynamicVariables.meta?.[variable] ?? {};
 		return rv;
@@ -332,6 +334,7 @@ export function championAbilityVariableValue(
 
 	if (dynamicVariables.values?.[variable] !== undefined) {
 		rv.roundReplaced = true;
+		rv.isDynamic = true;
 		resolveDynamicValue(params.abilityVariant.objectName, variable, dynamicVariables.values[variable], rv, isRanged);
 		resolveArrayValueToAbilityLevel = Array.isArray(rv.value) && rv.value.length !== 2;
 	} else if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {

@@ -33,6 +33,8 @@ export const HOOK_PRIORITIES = {
 		Ryze: 1,
 		/* should be before bloodmail */
 		Rammus: 1,
+		/* should be last, needs final total hp */
+		Briar: 100,
 		/* should be after rammus */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
 		/* should be after bloodmail */
@@ -146,6 +148,7 @@ export interface IVariableValueResult<T = string | number | [number | string | u
 	isUninteresting?: boolean;
 	/** components the variable was calculated from, used for creating `extendedEquals` */
 	calculatesFrom?: ICalculatesFromPart[];
+	isDynamic?: boolean;
 }
 
 /** the related calculations and meta of a game specific's (item/champion/rune/...) variables */
