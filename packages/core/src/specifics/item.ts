@@ -1774,7 +1774,25 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
-	[ITEM_NAME_TO_ID.immortalPath]: gluttonousGreavesSpecific, // TODO calculate passive, store healing strength increase in champion stats from stuff in here? https://wiki.leagueoflegends.com/en-us/Healing#Items https://wiki.leagueoflegends.com/en-us/Heal_and_shield_power#Notes
+	[ITEM_NAME_TO_ID.immortalPath]: {
+		...gluttonousGreavesSpecific,
+		internalDataProperties: ['applyIPathMultiplier'],
+		setupData(self) {
+			self.internalData.value.applyIPathMultiplier = clamp(0, self.internalItemData.value.applyIPathMultiplier ?? 0, 1);
+			return { applyIPathMultiplier: 0 };
+		},
+		imgActive(internalData) {
+			return internalData.applyIPathMultiplier;
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
+					calculatedVariables.healShieldRegenMult = (calculatedVariables.healShieldRegenMult ?? 0) + value;
+				},
+			},
+		},
+	},
 	[ITEM_NAME_TO_ID.rabadon]: {
 		AP_MULTIPLIER: ITEMS_BY_NAME.rabadon?.dataValues.APAmp,
 		calculateHooks: {
@@ -2270,6 +2288,14 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
+		internalDataProperties: ['applyVisageMultiplier'],
+		setupData(self) {
+			self.internalData.value.applyVisageMultiplier = clamp(0, self.internalItemData.value.applyVisageMultiplier ?? 0, 1);
+			return { applyVisageMultiplier: 0 };
+		},
+		imgActive(internalData) {
+			return internalData.applyVisageMultiplier;
+		},
 		variables: defineVariables({
 			known: {
 				f1: [],
@@ -2283,7 +2309,6 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'f2', 'HealingIncrease'],
 		}),
-		// TODO calculate, idk if makes sense https://wiki.leagueoflegends.com/en-us/Spirit_Visage edge case for immortal path?
 	},
 	[ITEM_NAME_TO_ID.sunfireAegis]: {
 		imgTextLabel: '',
