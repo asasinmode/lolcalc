@@ -1167,6 +1167,14 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { oBarrage: number }) {
 			return internalData.oBarrage;
 		},
+		variables: defineVariables({
+			// TODO figure out if it's possible/makes sense to have these variables here
+			// known: {
+			// 	BasicAttackDamage: [],
+			// 	CriticalAttackDamage: [],
+			// },
+			uninteresting: ['UltimateHaste', 'NumberOfAttacks', 'Duration', 'BonusAS', 'CritModifier', 'BonusTrueDamage'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }) {
@@ -2257,7 +2265,7 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.magic,
 				},
 			},
-			uninteresting: ['f1', 'UltimateHaste', 'Duration', 'SlowAmount'],
+			uninteresting: ['f1', 'UltimateHaste', 'Duration', 'ReadyDuration', 'SlowAmount'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
@@ -3718,6 +3726,11 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 				},
 			},
+		}),
+	},
+	[ITEM_NAME_TO_ID.collector]: {
+		variables: defineVariables({
+			uninteresting: ['ExecuteThreshold', 'GoldAmount'],
 		}),
 	},
 } satisfies IHypotheticalItemSpecifics;
