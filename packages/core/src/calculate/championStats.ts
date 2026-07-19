@@ -51,8 +51,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
 		bloodmailRetributionExcludedAd: 0,
 		healShieldMult: 1,
-		hpRegenMult: 1,
-		lifeStealOmnivampMult: 1,
+		hpRegenMult: 0,
+		lifeStealOmnivampMult: 0,
 	};
 	const miscDebug: IStatsCalculationMiscDebug = {};
 
@@ -280,6 +280,23 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
 			hook(source, { isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStats, baseOnLevelStats, championPassiveStats, totalPreMultipliersStats }, { calculatedVariables, miscDebug });
 		}
+	}
+
+	{
+		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
+		totalMultipliersStats.hpRegen += hpRegenMultValue;
+		bonusStats.hpRegen += hpRegenMultValue;
+		totalStats.hpRegen += hpRegenMultValue;
+
+		const lifeStealMultValue = totalStats.lifeSteal * calculatedVariables.lifeStealOmnivampMult;
+		totalMultipliersStats.lifeSteal += lifeStealMultValue;
+		bonusStats.lifeSteal += lifeStealMultValue;
+		totalStats.lifeSteal += lifeStealMultValue;
+
+		const omnivampMultValue = totalStats.omnivamp * calculatedVariables.lifeStealOmnivampMult;
+		totalMultipliersStats.omnivamp += omnivampMultValue;
+		bonusStats.omnivamp += omnivampMultValue;
+		totalStats.omnivamp += omnivampMultValue;
 	}
 
 	return {

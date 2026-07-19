@@ -1136,7 +1136,6 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (!variable.mModifiedGameCalculation) {
 			return;
 		}
-
 		let multiplier = 1;
 		if ('mMultiplier' in variable) {
 			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta)!;
@@ -1438,16 +1437,16 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 }
 
 function resolveMMultiplier(
-	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'],
+	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'] & IGameVariablesByType['ProductOfSubPartsCalculationPart'],
 	whole: any,
-	meta?: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[2],
+	meta: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[2],
 ): number | undefined {
-	const { mNumber, mDataValue } = variable;
+	const { mNumber, mDataValue, mPart1 } = variable;
 	let rv: number | undefined;
 	if (mNumber) {
 		rv = mNumber;
 	} else if (mDataValue) {
-		meta?.accessedVariables?.add(variable.mDataValue);
+		meta.accessedVariables?.add(variable.mDataValue);
 		const value = whole.dataValues?.[mDataValue];
 
 		/* expected to happen for champions */
@@ -1455,10 +1454,12 @@ function resolveMMultiplier(
 			if (value.length === 2) {
 				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', { mNumber, mDataValue }, variable);
 			}
-			rv = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+			rv = value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 		} else {
 			rv = value;
 		}
+	} else if (mPart1) {
+		rv = VARIABLE_CALCULATION_FNS.ProductOfSubPartsCalculationPart(variable as IGameVariablesByType['ProductOfSubPartsCalculationPart'], whole, meta)?.value;
 	} else {
 		console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
 		rv = undefined;

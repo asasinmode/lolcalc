@@ -95,11 +95,12 @@ export interface IStatsCalculationVariables {
 	 * heal and shield multiplier from spirit visage, actualizer and immortal path's passives
 	 * [wiki of sources](https://wiki.leagueoflegends.com/en-us/Heal_and_shield_power#Notes)
 	 * TODO include revitalize
+	 * @note it starts from 1
 	 */
 	healShieldMult: number;
-	/** same as `healShieldMult` but just for regen */
+	/** same as `healShieldMult` but just for regen. Note that it starts at 0 */
 	hpRegenMult: number;
-	/** same as `healShieldMult` but for life steal/omnivamp */
+	/** same as `healShieldMult` but for life steal/omnivamp. Note that it starts at 0 */
 	lifeStealOmnivampMult: number;
 	/** ad gained from completed mid quest */
 	midQuestAd?: number;

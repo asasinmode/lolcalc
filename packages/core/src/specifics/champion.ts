@@ -89,8 +89,8 @@ export const CHAMPION_SPECIFICS = {
 		},
 		w: {
 			dataOverrides: {
-				isImmobilizing: true
-			}
+				isImmobilizing: true,
+			},
 		},
 	},
 	Aphelios: {
@@ -691,10 +691,10 @@ export const CHAMPION_SPECIFICS = {
 			// TODO not in reksai.json but checked to be affected by mandate, make sure to handle
 			1: {
 				dataOverrides: {
-					isImmobilizing: true
-				}
-			}
-		}
+					isImmobilizing: true,
+				},
+			},
+		},
 	},
 	Rell: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Rell'>): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
@@ -1132,9 +1132,9 @@ export const CHAMPION_SPECIFICS = {
 	Yone: {
 		q: {
 			dataOverrides: {
-				isImmobilizing: false
-			}
-		}
+				isImmobilizing: false,
+			},
+		},
 	},
 	Zaahen: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Zaahen'>): number => (self.champion.value! as typeof IZaahen).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
