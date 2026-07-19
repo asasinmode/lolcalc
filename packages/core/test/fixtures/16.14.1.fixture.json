@@ -1,0 +1,279 @@
+{
+	"version": "16.13.1",
+	"champions": {
+		"Briar": {
+			"stats": {
+				"hp": 625,
+				"hpperlevel": 95,
+				"mp": 0,
+				"mpperlevel": 0,
+				"movespeed": 340,
+				"armor": 30,
+				"armorperlevel": 4.5,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 0,
+				"hpregenperlevel": 0,
+				"mpregen": 0,
+				"mpregenperlevel": 0,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 60,
+				"attackdamageperlevel": 2.5,
+				"attackspeedperlevel": 2,
+				"attackspeed": 0.644,
+				"attackspeedratio": 0.669
+			}
+		},
+		"Rammus": {
+			"stats": {
+				"hp": 645,
+				"hpperlevel": 100,
+				"mp": 310,
+				"mpperlevel": 33,
+				"movespeed": 335,
+				"armor": 35,
+				"armorperlevel": 4.5,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 8,
+				"hpregenperlevel": 0.55,
+				"mpregen": 7.85,
+				"mpregenperlevel": 0.5,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 65,
+				"attackdamageperlevel": 2.75,
+				"attackspeedperlevel": 2.215,
+				"attackspeed": 0.7,
+				"attackspeedratio": 0.625
+			}
+		}
+	},
+	"items": {
+		"1054": {
+			"name": "Doran's Shield",
+			"stats": {
+				"FlatHPPoolMod": 110,
+				"FlatHPRegenMod": 0.8
+			},
+			"dataValues": {
+				"RegenDuration": 8,
+				"BonusDamageToMinions": 5,
+				"MaxRegenAmount": 40,
+				"RangeRegenMult": 0.66,
+				"MaxRangeRegenAmount": 30
+			},
+			"itemCalculations": {
+				"{592c02e8}": {
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusDamageToMinions",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"stringCalculations": {
+				"MeleeRangeSplitRegen": {
+					"MeleeResult": "@MaxRegenAmount@",
+					"RangedResult": "@MaxRangeRegenAmount@",
+					"DefaultResult": "@MaxRegenAmount@"
+				}
+			},
+			"effectAmount": [8, 5, 45, 0.66]
+		},
+		"3065": {
+			"name": "Spirit Visage",
+			"stats": {
+				"FlatSpellBlockMod": 50,
+				"FlatHPPoolMod": 400,
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
+			},
+			"dataValues": {
+				"HealingIncrease": 0.25,
+				"ShieldIncrease": 0.25
+			}
+		},
+		"3146": {
+			"name": "Hextech Gunblade",
+			"stats": {
+				"FlatMagicDamageMod": 80,
+				"FlatPhysicalDamageMod": 40,
+				"PercentOmnivampMod": 0.1
+			},
+			"dataValues": {
+				"SlowAmount": 0.25,
+				"SlowDuration": 1.5,
+				"Cooldown": 60
+			},
+			"itemCalculations": {
+				"ActiveDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 175,
+							"mEndValue": 253,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3153": {
+			"name": "Blade of The Ruined King",
+			"stats": {
+				"FlatPhysicalDamageMod": 40,
+				"PercentAttackSpeedMod": 0.25,
+				"PercentLifeStealMod": 0.1
+			},
+			"dataValues": {
+				"MoveSpeedMod": -0.3,
+				"MoveSpeedDuration": 1,
+				"Cooldown": 15,
+				"RangedValue": 0.06,
+				"MeleeValue": 0.09,
+				"MonsterDamageCap": 100,
+				"AttackCounterDuration": 6,
+				"RangedMoveSpeedMod": -0.15
+			},
+			"itemCalculations": {
+				"SiphonDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 40,
+							"mBreakpoints": [
+								{
+									"mLevel": 10,
+									"mBonusPerLevelAtAndAfter": 7
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{c0b34d7a}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{fe7dca43}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedMoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValueB": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValueB": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedMoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{d96e60e3}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{42565e68}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedValue",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{79b6144b}": {
+					"mDefaultGameCalculation": "{d96e60e3}",
+					"mConditionalGameCalculation": "{42565e68}"
+				},
+				"{405deeb1}": {
+					"mMultiplier": {
+						"mSpellCalculationKey": "{79b6144b}"
+					},
+					"{72c5c2a8}": 0,
+					"mFormulaParts": [
+						{
+							"{a8cb9c14}": true,
+							"mStat": 13,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3168": {
+			"name": "Immortal Path",
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentOmnivampMod": 0.04
+			},
+			"dataValues": {
+				"OmnivampOnTakedown": 0.006,
+				"MaxStacks": 10,
+				"DamageMod": 0.04,
+				"HealingMod": 0.12
+			}
+		}
+	},
+	"misc": {
+		"roleQuests": {
+			"mid": {
+				"dataValues": {
+					"BonusADAP": 0.08
+				}
+			}
+		}
+	}
+}
