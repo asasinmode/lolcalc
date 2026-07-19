@@ -62,12 +62,12 @@
 						"AttackSpeedDurationEmpowered": [4, 4, 4, 4, 4, 4, 4],
 						"MaxHPOnHitBase": [0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08],
 						"RepeatBouncePenalty": [1, 1, 1, 1, 1, 1, 1],
-						"LightningAPRatio": [0, 0, 0, 0, 0, 0, 0],
+						"LightningAPRatio": [0.00006, 0.00006, 0.00006, 0.00006, 0.00006, 0.00006, 0.00006],
 						"Bounces": [6, 6, 6, 6, 6, 6, 6],
 						"BounceRange": [450, 450, 450, 450, 450, 450, 450],
 						"BaseDamage": [0, 6, 12, 18, 24, 30, 36],
-						"MaxHPADRatio": [0, 0, 0, 0, 0, 0, 0],
-						"Q2MaxHPADRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001],
+						"MaxHPADRatio": [0.00035, 0.00035, 0.00035, 0.00035, 0.00035, 0.00035, 0.00035],
+						"Q2MaxHPADRatio": [0.0005, 0.0005, 0.0005, 0.0005, 0.0005, 0.0005, 0.0005],
 						"AttackRange": [50, 50, 50, 50, 50, 50, 50],
 						"LightningDamageLevel1": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
 						"LightningDamageLevel18": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
@@ -260,7 +260,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mCoefficient": 0,
+									"mCoefficient": 0.00001,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -525,7 +525,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.001,
+									"mCoefficient": 0.0005,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -563,7 +563,7 @@
 						"SlowPotency": [0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3],
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
 						"StormBaseDamage": [4, 20, 36, 52, 68, 84, 100],
-						"StormAPRatio": [0, 0, 0, 0, 0, 0, 0]
+						"StormAPRatio": [0.00035, 0.00035, 0.00035, 0.00035, 0.00035, 0.00035, 0.00035]
 					},
 					"spellCalculations": {
 						"PercentHPBlast": {

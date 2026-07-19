@@ -63,7 +63,7 @@
 						"Tier3_DotLength": [3, 3, 3, 3, 3, 3, 3],
 						"Tier2_BlowbackPercentageDamage": [50, 50, 50, 50, 50, 50, 50],
 						"minionmod": [1, 1, 1, 1, 1, 1, 1],
-						"Tier3_Burn_Stack_Mult": [0, 0, 0, 0, 0, 0, 0],
+						"Tier3_Burn_Stack_Mult": [0.00005, 0.00005, 0.00005, 0.00005, 0.00005, 0.00005, 0.00005],
 						"ManaRestore": [15, 15, 15, 15, 15, 15, 15]
 					},
 					"spellCalculations": {
@@ -138,7 +138,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0,
+									"mCoefficient": 0.00025,
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{

@@ -216,7 +216,7 @@ if (!championData || championData?.version !== latestVersion) {
 
 					const { attackSpeedRatioModifiable, damagePerLevelModifiable } = rootData;
 
-					stats.attackspeedratio = formatNumber(attackSpeedRatioModifiable.baseValue, 3);
+					stats.attackspeedratio = formatNumber(attackSpeedRatioModifiable.baseValue);
 					/* between patches `16.4` and `16.9` attackdamage in `champion.json` from ddragon was set to 0 on some champions, so take the one from additionalData until it hopefully comes back? */
 					if (damagePerLevelModifiable) {
 						stats.attackdamageperlevel = formatNumber(damagePerLevelModifiable.baseValue);
@@ -2094,8 +2094,8 @@ function getUnknownTags(text: string): Set<string> {
 	return new Set(Array.from(tags, m => m[1]!.toLocaleLowerCase()).filter(tag => !KNOWN_GAME_DESCRIPTION_TAGS.includes(tag)));
 }
 
-function formatNumber(n: number, precision = 3): number {
-	return Number.isInteger(n) ? n : Number(n.toFixed(precision));
+function formatNumber(n: number): number {
+	return Number(n.toPrecision(7));
 }
 
 function cleanupObject(obj?: object, removeType = true): any {

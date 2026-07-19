@@ -337,7 +337,7 @@
 							"mFormulaParts": [
 								{
 									"mLevel1Value": 0.004,
-									"mInitialBonusPerLevel": 0.001,
+									"mInitialBonusPerLevel": 0.0005,
 									"mBreakpoints": [
 										{
 											"mLevel": 7,
@@ -345,7 +345,7 @@
 										},
 										{
 											"mLevel": 13,
-											"mBonusPerLevelAtAndAfter": 0.002
+											"mBonusPerLevelAtAndAfter": 0.0015
 										},
 										{
 											"mLevel": 16,

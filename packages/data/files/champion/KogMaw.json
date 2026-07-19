@@ -215,7 +215,7 @@
 						"MaxExtraCost": [360, 360, 360, 360, 360, 360, 360],
 						"VisionRadius": [400, 400, 400, 400, 400, 400, 400],
 						"MidDamageMult": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"TooltipMissingHealthDamageAmp": [0.833, 0.833, 0.833, 0.833, 0.833, 0.833, 0.833],
+						"TooltipMissingHealthDamageAmp": [0.83333, 0.83333, 0.83333, 0.83333, 0.83333, 0.83333, 0.83333],
 						"APRatio": [0.35, 0.35, 0.4, 0.45, 0.45, 0.45, 0.45]
 					},
 					"spellCalculations": {

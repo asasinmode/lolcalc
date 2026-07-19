@@ -59,7 +59,7 @@
 						"ADRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
 						"EnemyMaxHealthDamage": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
 						"QMinimumDamage": [5, 10, 15, 20, 25, 30, 35],
-						"MaxHealthTADRatio": [0, 0, 0, 0, 0, 0, 0],
+						"MaxHealthTADRatio": [0.00005, 0.0001, 0.00015, 0.0002, 0.00025, 0.0003, 0.00035],
 						"MaxHealthTADRatioTOOLTIP": [0.5, 1, 1.5, 2, 2.5, 3, 3.5],
 						"MonsterCap": [400, 400, 400, 400, 400, 400, 400]
 					},
@@ -154,7 +154,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.002,
+									"mCoefficient": 0.0025,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],

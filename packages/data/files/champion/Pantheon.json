@@ -175,7 +175,7 @@
 						"MaxHealthDamage": [0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.085],
 						"MonsterDamageCap": [150, 150, 150, 150, 150, 150, 150],
 						"MonsterDamageMin": [60, 60, 60, 60, 60, 60, 60],
-						"MaxHealthPer100AP": [0, 0, 0, 0, 0, 0, 0]
+						"MaxHealthPer100AP": [0.00015, 0.00015, 0.00015, 0.00015, 0.00015, 0.00015, 0.00015]
 					},
 					"spellCalculations": {
 						"DamageCalc": {
@@ -217,7 +217,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mCoefficient": 0,
+									"mCoefficient": 0.00004,
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{

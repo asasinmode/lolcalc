@@ -246,7 +246,7 @@
 						"CamoRadius": [450, 450, 450, 450, 450, 450, 450],
 						"RestealthTime": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"RestealthTimeAfterHittingLargeMonster": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"MSAPRatio": [0, 0, 0, 0, 0, 0, 0]
+						"MSAPRatio": [0.0004, 0.0004, 0.0004, 0.0004, 0.0004, 0.0004, 0.0004]
 					},
 					"spellCalculations": {
 						"TotalMovespeed": {

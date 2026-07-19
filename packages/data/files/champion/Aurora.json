@@ -249,7 +249,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
+									"mCoefficient": 0.00027,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -269,7 +269,7 @@
 									"__type": "ByCharLevelBreakpointsCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
+									"mCoefficient": 0.0003,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -308,7 +308,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
+									"mCoefficient": 0.00015,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],

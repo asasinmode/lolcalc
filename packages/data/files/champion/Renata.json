@@ -296,7 +296,7 @@
 					"tooltip": "Renata's Attacks mark enemies for @PassiveDuration@ seconds and deal an additional <magicDamage>@PercentAmpCalcSelf@ max Health magic damage</magicDamage> if they were unmarked.<br><br>Allied champions' Attacks or Abilities consume the mark, dealing <magicDamage>@PercentAmpCalc@ max Health magic damage</magicDamage>.<br><br><rules>Renata may only have one target marked at a time.</rules>",
 					"dataValues": {
 						"PercentAmp": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
-						"APToPercentRatio": [0, 0, 0, 0, 0, 0, 0],
+						"APToPercentRatio": [0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002],
 						"MonsterDamageCap": [150, 150, 150, 150, 150, 150, 150],
 						"PassiveDuration": [6, 6, 6, 6, 6, 6, 6]
 					},
@@ -305,15 +305,15 @@
 							"mFormulaParts": [
 								{
 									"mLevel1Value": 0.01,
-									"mInitialBonusPerLevel": 0.001,
+									"mInitialBonusPerLevel": 0.0012,
 									"mBreakpoints": [
 										{
 											"mLevel": 6,
-											"mBonusPerLevelAtAndAfter": 0.001
+											"mBonusPerLevelAtAndAfter": 0.0013
 										},
 										{
 											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.001
+											"mAdditionalBonusAtThisLevel": 0.0013
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -330,15 +330,15 @@
 							"mFormulaParts": [
 								{
 									"mLevel1Value": 0.01,
-									"mInitialBonusPerLevel": 0.001,
+									"mInitialBonusPerLevel": 0.0012,
 									"mBreakpoints": [
 										{
 											"mLevel": 6,
-											"mBonusPerLevelAtAndAfter": 0.001
+											"mBonusPerLevelAtAndAfter": 0.0013
 										},
 										{
 											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.001
+											"mAdditionalBonusAtThisLevel": 0.0013
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"

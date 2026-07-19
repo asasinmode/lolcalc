@@ -374,8 +374,8 @@
 						"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 0.003,
-									"mInitialBonusPerLevel": 0.001,
+									"mLevel1Value": 0.0028,
+									"mInitialBonusPerLevel": 0.0006,
 									"mBreakpoints": [
 										{
 											"mLevel": 14

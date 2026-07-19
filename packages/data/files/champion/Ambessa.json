@@ -104,7 +104,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0,
+									"mCoefficient": 0.0003,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -146,7 +146,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0,
+									"mCoefficient": 0.0004,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],

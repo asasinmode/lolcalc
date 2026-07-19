@@ -408,7 +408,7 @@
 						"PAPRatioPerStack": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
 						"PExecuteRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
 						"PAllyStacks": [1, 1, 1, 1, 1, 1, 1],
-						"PExecuteAPRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001],
+						"PExecuteAPRatio": [0.0006, 0.0006, 0.0006, 0.0006, 0.0006, 0.0006, 0.0006],
 						"PTotalDamageMultiplier_ForModesBalance": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {

@@ -237,7 +237,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.001,
+									"mCoefficient": 0.0007,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -286,7 +286,7 @@
 						"Duration": [5, 5, 5, 5, 5, 5, 5],
 						"MaxStacks": [3, 3, 3, 3, 3, 3, 3],
 						"PerStackDecayTimer": [1, 1, 1, 1, 1, 1, 1],
-						"APRatioPer100BonusHP": [0.013, 0.013, 0.013, 0.013, 0.013, 0.013, 0.013]
+						"APRatioPer100BonusHP": [0.0125, 0.0125, 0.0125, 0.0125, 0.0125, 0.0125, 0.0125]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

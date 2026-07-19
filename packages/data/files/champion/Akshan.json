@@ -59,7 +59,7 @@
 						"HasteValue": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"ExtensionDistance": [500, 500, 500, 500, 500, 500, 500],
 						"RevealDuration": [1, 1, 1, 1, 1, 1, 1],
-						"HasteAPRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
+						"HasteAPRatio": [0.0005, 0.0005, 0.0005, 0.0005, 0.0005, 0.0005, 0.0005]
 					},
 					"spellCalculations": {
 						"FinalDamage": {

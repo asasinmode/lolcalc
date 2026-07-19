@@ -298,19 +298,19 @@
 						"MSBonusNew": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 0.027,
+									"mLevel1Value": 0.0275,
 									"mBreakpoints": [
 										{
 											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.002
+											"mAdditionalBonusAtThisLevel": 0.0025
 										},
 										{
 											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.002
+											"mAdditionalBonusAtThisLevel": 0.0025
 										},
 										{
 											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.002
+											"mAdditionalBonusAtThisLevel": 0.0025
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"

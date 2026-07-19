@@ -406,7 +406,7 @@
 								{
 									"mStat": 12,
 									"mStatFormula": 2,
-									"mCoefficient": 0,
+									"mCoefficient": 0.00025,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

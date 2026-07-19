@@ -212,7 +212,7 @@
 					"image": "assets/characters/fiora/hud/icons2d/fiora_p.png",
 					"tooltip": "Fiora identifies <keywordMajor>Vitals</keywordMajor> on enemy champions. Hitting this <keywordMajor>Vital</keywordMajor> with an Attack or Ability deals an additional <trueDamage>@PassiveDamageTotal@ max Health true damage</trueDamage>, grants Fiora <speed>@spell.FioraR:PercentMS*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds, and restores <healing>@PassiveHealAmount@ Health</healing>.<br><br>Fiora reveals a new <keywordMajor>Vital</keywordMajor> after 15 seconds or after striking one.",
 					"dataValues": {
-						"PassiveDamageADRatio": [0, 0, 0, 0, 0, 0, 0],
+						"PassiveDamageADRatio": [0.0004, 0.0004, 0.0004, 0.0004, 0.0004, 0.0004, 0.0004],
 						"PassiveDamageBase": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
 						"MovementSpeedDuration": [2, 2, 2, 2, 2, 2, 2]
 					},

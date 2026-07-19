@@ -178,7 +178,7 @@
 									"__type": "NumberCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
+									"mCoefficient": 0.0004,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -224,7 +224,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
+									"mCoefficient": 0.0002,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -237,7 +237,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
+									"mCoefficient": 0.0002,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
@@ -250,7 +250,7 @@
 									"__type": "NumberCalculationPart"
 								},
 								{
-									"mCoefficient": 0,
+									"mCoefficient": 0.0004,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],

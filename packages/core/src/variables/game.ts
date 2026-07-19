@@ -1468,7 +1468,7 @@ function resolveMMultiplier(
 		rv = undefined;
 	}
 	/* there could be a better way */
-	return rv === 0.667 ? (2 / 3) : rv;
+	return rv === 0.66667 ? (2 / 3) : rv === 0.33334 ? (1 / 3) : rv;
 }
 
 function resolveDynamicValue(
