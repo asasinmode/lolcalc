@@ -441,7 +441,8 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, _args, { calculatedVariables }) {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					itemPassivesStats.basicHaste += ITEMS_BY_NAME.shojin.dataValues?.AHBase;
 					calculatedVariables.shojinBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'shojin'>).fWill ?? 0) * ITEMS_BY_NAME.shojin?.dataValues.SpellDamageIncrease;
 				},
 			},
@@ -2767,7 +2768,13 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2', 'ImmobilizingAbilityAH', 'DamageAmp', 'DamageAmpDuration'],
 		}),
-		// TODO calculate, try to see if abilities have like a tag that then applies mandate?
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, { itemPassivesStats }) {
+					itemPassivesStats.immobilizingHaste += ITEMS_BY_NAME.imperialMandate?.dataValues.ImmobilizingAbilityAH;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.forbiddenIdol]: {
 		variables: defineVariables({
