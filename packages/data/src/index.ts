@@ -271,6 +271,8 @@ export const STAT_ICON: Record<
 	AbilityHasteMod: 'scaleah',
 	abilityHaste: 'scaleah',
 	ultimateHaste: 'scaleah',
+	immobilizingHaste: 'scaleah',
+	basicHaste: 'scaleah',
 	cooldown: 'scalecooldown',
 	FlatMagicDamageMod: 'scaleap',
 	abilityPower: 'scaleap',

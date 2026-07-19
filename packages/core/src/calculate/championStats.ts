@@ -38,6 +38,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		moveSpeed: champion?.stats.movespeed ?? 0,
 		slowResist: 0,
 		ultimateHaste: 0,
+		basicHaste: 0,
+		immobilizingHaste: 0,
 	};
 
 	const calculatedVariables: IStatsCalculationVariables = {

@@ -22,7 +22,7 @@ export type IChampionAbilityKey = typeof ALL_CHAMPION_ABILITY_KEYS[number];
 
 export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
 
-export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent', 'slowResist', 'ultimateHaste'] as const;
+export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent', 'slowResist', 'ultimateHaste', 'basicHaste', 'immobilizingHaste'] as const;
 
 export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 
@@ -310,6 +310,12 @@ export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = 
 	},
 	ultimateHaste: {
 		name: 'Ultimate Haste',
+	},
+	basicHaste: {
+		name: 'Basic Ability Haste',
+	},
+	immobilizingHaste: {
+		name: 'Immobilizing Ability Haste',
 	},
 };
 
