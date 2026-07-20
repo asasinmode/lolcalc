@@ -1814,6 +1814,8 @@ export const ITEM_SPECIFICS = {
 						calculatedVariables.healMult = combineRecursive(calculatedVariables.healMult, value);
 						calculatedVariables.shieldMult = combineRecursive(calculatedVariables.shieldMult, value);
 						calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, value);
+					} else {
+						calculatedVariables.immortalPathBonusDamagePercent = ITEMS_BY_NAME.immortalPath?.dataValues.DamageMod;
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.immortalPath],
