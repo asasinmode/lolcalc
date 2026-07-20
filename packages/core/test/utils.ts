@@ -48,6 +48,11 @@ export function setupPatchFixture(fixture: IPatchOverridesFixture) {
 	}
 }
 
-export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, message: string | undefined = '') {
-	return assert.partialDeepStrictEqual(actual, expected, message);
+export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, damageSource?: DamageSource, message: string = '') {
+	try {
+		assert.partialDeepStrictEqual(actual, expected, message);
+	} catch (e) {
+		damageSource && console.error(`failing${message ? ` ${message}` : ''} source: http://localhost:3000/?v=1&src=${damageSource.stringifiedData.value}`);
+		throw e;
+	}
 }

@@ -31,7 +31,7 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 4,
 				lifeSteal: 10,
 				omnivamp: 10,
-			});
+			}, damageSource);
 		});
 
 		await t.test('immortal path', async () => {
@@ -45,10 +45,10 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 6,
 				lifeSteal: 11,
 				omnivamp: 16,
-			});
+			}, damageSource);
 		});
 
-		await t.test('spirit visage', { only: true }, async () => {
+		await t.test('spirit visage', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Briar', {
 				...baseCommon,
 				items: baseCommon.items!.concat(ITEMS_BY_NAME.spiritVisage),
@@ -58,7 +58,7 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 5,
 				lifeSteal: 13,
 				omnivamp: 13,
-			});
+			}, damageSource);
 		});
 
 		await t.test('spirit visage, immortal path', async () => {
@@ -72,35 +72,37 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 8,
 				lifeSteal: 14,
 				omnivamp: 20,
-			});
+			}, damageSource);
 		});
 
 		const lotsOfLifestealItems = [ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.spiritVisage, ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.hextechGunblade, ITEMS_BY_NAME.immortalPath];
+		const lotsOfLifestealItemsData = { slay: 10, applyHSMult: 0 } satisfies IInternalItemDataOf<'immortalPath'>;
 
 		await t.test('lots of lifesteal | spirit visage', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Briar', {
 				...baseCommon,
 				items: lotsOfLifestealItems,
+				internalItemData: lotsOfLifestealItemsData,
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				lifeSteal: 44,
 				omnivamp: 25,
-			});
+			}, damageSource);
 		});
 
 		await t.test('lots of lifesteal | spirit visage, immortal path', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Briar', {
 				...baseCommon,
 				items: lotsOfLifestealItems,
+				internalItemData: lotsOfLifestealItemsData,
 				currentHealth: 92,
-				internalItemData: { slay: 10, applyHSMult: 0 } satisfies IInternalItemDataOf<'immortalPath'>,
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				lifeSteal: 51,
 				omnivamp: 29,
-			});
+			}, damageSource);
 		});
 	});
 
@@ -125,7 +127,7 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 12,
 				lifeSteal: 10,
 				omnivamp: 10,
-			});
+			}, damageSource);
 		});
 
 		await t.test('immortal path', async () => {
@@ -139,7 +141,7 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 13,
 				lifeSteal: 11,
 				omnivamp: 16,
-			});
+			}, damageSource);
 		});
 
 		await t.test('spirit visage', async () => {
@@ -152,7 +154,7 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 25,
 				lifeSteal: 13,
 				omnivamp: 13,
-			});
+			}, damageSource);
 		});
 
 		await t.test('spirit visage, immortal path', async () => {
@@ -166,7 +168,7 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 27,
 				lifeSteal: 14,
 				omnivamp: 20,
-			});
+			}, damageSource);
 		});
 	});
 });

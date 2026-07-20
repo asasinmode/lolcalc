@@ -248,7 +248,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 168,
 				magicResist: 222,
 				abilityHaste: 43,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 
 		await t.test('partial hp', async () => {
@@ -269,7 +269,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 168,
 				magicResist: 222,
 				abilityHaste: 48,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 
 		await t.test('dragons', async () => {
@@ -291,7 +291,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 185,
 				magicResist: 244,
 				abilityHaste: 46,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 
 		await t.test('mid quest', async () => {
@@ -313,7 +313,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 168,
 				magicResist: 222,
 				abilityHaste: 47,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 
 		await t.test('dragons | mid quest', async () => {
@@ -350,7 +350,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 185,
 				magicResist: 244,
 				abilityHaste: 56,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 
 		await t.test('dragons | partial hp', async () => {
@@ -385,7 +385,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 168,
 				magicResist: 222,
 				abilityHaste: 52,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 
 		await t.test('dragons | partial hp | jak\'sho+, force of nature+', async () => {
@@ -431,7 +431,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 248,
 				magicResist: 476,
 				abilityHaste: 64,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 	});
 
@@ -466,7 +466,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 190,
 				magicResist: 164,
 				abilityHaste: 41,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 
 			damageSource.internalData.value.defensiveCurl = 0;
 			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
@@ -475,7 +475,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 107,
 				magicResist: 97,
 				abilityHaste: 38,
-			}, 'jak\'sho');
+			}, damageSource, 'jak\'sho');
 
 			damageSource.internalData.value.defensiveCurl = 1;
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -483,7 +483,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 225,
 				magicResist: 197,
 				abilityHaste: 42,
-			}, 'W enabled & jak\'sho');
+			}, damageSource, 'W enabled & jak\'sho');
 		});
 
 		await t.test('dragons', async () => {
@@ -505,7 +505,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 209,
 				magicResist: 181,
 				abilityHaste: 44,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 
 			damageSource.internalData.value.defensiveCurl = 0;
 			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
@@ -514,7 +514,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 118,
 				magicResist: 107,
 				abilityHaste: 41,
-			}, 'jak\'sho');
+			}, damageSource, 'jak\'sho');
 
 			damageSource.internalData.value.defensiveCurl = 1;
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -522,7 +522,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 248,
 				magicResist: 217,
 				abilityHaste: 46,
-			}, 'W enabled & jak\'sho');
+			}, damageSource, 'W enabled & jak\'sho');
 		});
 
 		await t.test('dragons, partial hp, jak\'sho+', async () => {
@@ -547,7 +547,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 248,
 				magicResist: 217,
 				abilityHaste: 50,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 		});
 
 		await t.test('dragons, partial hp, jak\'sho+, mid quest', async () => {
@@ -570,7 +570,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 209,
 				magicResist: 181,
 				abilityHaste: 48,
-			}, 'W enabled');
+			}, damageSource, 'W enabled');
 
 			damageSource.internalData.value.defensiveCurl = 0;
 			damageSource.currentHealth.value = 276;
@@ -579,7 +579,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 103,
 				magicResist: 92,
 				abilityHaste: 49,
-			}, 'partial hp');
+			}, damageSource, 'partial hp');
 
 			damageSource.currentHealth.value = 443;
 			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
@@ -588,7 +588,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 118,
 				magicResist: 107,
 				abilityHaste: 49,
-			}, 'jak\'sho');
+			}, damageSource, 'jak\'sho');
 
 			damageSource.currentHealth.value = 285;
 			damageSource.internalData.value.defensiveCurl = 1;
@@ -598,7 +598,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 209,
 				magicResist: 181,
 				abilityHaste: 53,
-			}, 'W enabled & partial hp');
+			}, damageSource, 'W enabled & partial hp');
 
 			damageSource.currentHealth.value = 538;
 			(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
@@ -607,7 +607,7 @@ test('Rammus, dragons & percentage items', async (t) => {
 				armor: 248,
 				magicResist: 217,
 				abilityHaste: 55,
-			}, 'W enabled & partial hp & jak\'sho');
+			}, damageSource, 'W enabled & partial hp & jak\'sho');
 		});
 	});
 });
