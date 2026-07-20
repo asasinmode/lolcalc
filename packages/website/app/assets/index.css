@@ -240,6 +240,44 @@
 		}
 	}
 
+	.info-tooltip-trigger {
+		--at-apply: 'relative inline-block size-4.5 align-[-0.25rem] ms-0.5';
+		anchor-name: --parent;
+
+		&:before {
+			--at-apply: 'absolute content-empty -inset-x-1 block-2 inset-bs-px -translate-y-full';
+		}
+
+		> img {
+			--at-apply: 'size-full';
+		}
+
+		> .icon {
+			--at-apply: 'size-full text-blue-400';
+		}
+	}
+
+	.info-tooltip-trigger + [popover] {
+		--at-apply: 'max-inline-120 inline-fit p-2 text-white pointer-events-auto select-text cursor-auto';
+		--popover-offset-y: var(--spacing) * 1.75;
+		inset-block-end: calc(anchor(top) + var(--popover-offset-y));
+		position-anchor: --parent;
+		justify-self: anchor-center;
+		position-try: flip-block;
+
+		a {
+			--at-apply: 'text-blue-400 hoverable:underline';
+		}
+
+		img {
+			--at-apply: 'inline-block size-4';
+
+			&[data-sprite-image] {
+				--at-apply: '-translate-y-px';
+			}
+		}
+	}
+
 	/* TODO add masterwork border to hover tooltip in shop when hovering over inventory panel */
 	[data-masterwork] {
 		--at-apply: 'relative';

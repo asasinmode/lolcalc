@@ -1232,15 +1232,18 @@ const colW = computed(() => {
 
 function showRowTooltip(event: Event, isActivator: boolean) {
 	const currentTarget = event.currentTarget as HTMLElement;
-	const secondElement = isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling;
+	const secondElement = (isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling) as HTMLElement;
 	(isActivator ? secondElement : currentTarget).showPopover();
 }
 
 function hideRowTooltip(event: Event | FocusEvent, isActivator: boolean) {
 	const currentTarget = event.currentTarget as HTMLElement;
-	const secondElement = isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling;
-	if ('relatedTarget' in event) {
-		console.log('blurred to', secondElement === event.relatedTarget, event.target);
+	const secondElement = (isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling) as HTMLElement;
+
+	if ('relatedTarget' in event && event.relatedTarget) {
+		if (currentTarget.contains(event.relatedTarget as HTMLElement) || secondElement.contains(event.relatedTarget as HTMLElement)) {
+			return;
+		}
 	}
 	(isActivator ? secondElement : currentTarget).hidePopover();
 }
@@ -1668,6 +1671,7 @@ defineExpose({
 								v-if="row.isCustom"
 								:aria-describedby="`${section.id}-${row.id}-tooltip-custom`"
 								tabindex="0"
+								class="info-tooltip-trigger"
 								@focus="showRowTooltip($event, true)"
 								@mouseenter="showRowTooltip($event, true)"
 								@mouseleave="hideRowTooltip($event, true)"
@@ -1687,13 +1691,14 @@ defineExpose({
 								@focus="showRowTooltip($event, false)"
 								@mouseenter="showRowTooltip($event, false)"
 								@mouseleave="hideRowTooltip($event, false)"
-								@blur="hideRowTooltip($event, false)"
+								@focusout="hideRowTooltip($event, false)"
 							>
 								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
 							</p>
 							<span
 								v-if="row.additionalInfo"
 								:aria-describedby="`${section.id}-${row.id}-tooltip-info`"
+								class="info-tooltip-trigger"
 								tabindex="0"
 								@focus="showRowTooltip($event, true)"
 								@mouseenter="showRowTooltip($event, true)"
@@ -1710,7 +1715,7 @@ defineExpose({
 								@focus="showRowTooltip($event, false)"
 								@mouseenter="showRowTooltip($event, false)"
 								@mouseleave="hideRowTooltip($event, false)"
-								@blur="hideRowTooltip($event, false)"
+								@focusout="hideRowTooltip($event, false)"
 								v-html="row.additionalInfo"
 							/>
 						</th>
@@ -2317,44 +2322,6 @@ defineExpose({
 						> span:not([aria-describedby]),
 						> span[aria-describedby] > span:first-child {
 							--at-apply: 'sr-only';
-						}
-
-						> span[aria-describedby] {
-							--at-apply: 'relative inline-block size-4.5 align-[-0.25rem] ms-0.5';
-							anchor-name: --parent;
-
-							&:before {
-								--at-apply: 'absolute content-empty -inset-x-1 block-2 inset-bs-px -translate-y-full';
-							}
-
-							> img {
-								--at-apply: 'size-full';
-							}
-
-							> .icon {
-								--at-apply: 'size-full text-blue-400';
-							}
-						}
-
-						> span[aria-describedby] + [popover] {
-							--at-apply: 'max-inline-120 inline-fit p-2 text-white pointer-events-auto select-text cursor-auto';
-							--popover-offset-y: var(--spacing) * 1.75;
-							inset-block-end: calc(anchor(top) + var(--popover-offset-y));
-							position-anchor: --parent;
-							justify-self: anchor-center;
-							position-try: flip-block;
-
-							a {
-								--at-apply: 'text-blue-400 hoverable:underline';
-							}
-
-							img {
-								--at-apply: 'inline-block size-4';
-
-								&[data-sprite-image] {
-									--at-apply: '-translate-y-px';
-								}
-							}
 						}
 					}
 
