@@ -1278,7 +1278,7 @@ export function computeItemDescription(
 				icon: STAT_ICON[statName as IItemStat],
 				statName: statName as IItemStat,
 				baseValue,
-				totalValue: baseValue + (increasedBy ?? 0),
+				totalValue: baseValue + roundVariable(increasedBy ?? 0),
 				increasedBy,
 			};
 		});

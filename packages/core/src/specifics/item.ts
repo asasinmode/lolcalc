@@ -71,7 +71,7 @@ const gluttonousGreavesSpecific = {
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
 					itemStatIncreases[bootsId] ??= {};
-					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp;
+					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp * 100;
 				}
 			},
 		},
