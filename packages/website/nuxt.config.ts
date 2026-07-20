@@ -8,6 +8,9 @@ export default defineNuxtConfig({
 	features: {
 		inlineStyles: false,
 	},
+	future: {
+		compatibilityVersion: 5,
+	},
 	vite: {
 		build: {
 			target: 'esnext',
