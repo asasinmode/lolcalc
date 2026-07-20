@@ -5,6 +5,11 @@ import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { ItemExtraTearItem } from '#components';
 
+const passiveMultiplierToTooltip = {
+	label: 'passive multiplier to tooltip values',
+	tooltip: 'this item\'s passive affects heals and shields. When this is toggled, the multiplier will be applied to the values displayed in tooltips and results',
+};
+
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.hubris]: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hubris), 'eminence', 'Eminence stacks'),
@@ -184,7 +189,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.immortalPath]: {
 		extras: [
 			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.immortalPath].MAX_STACKS),
-			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'applyHSMult', 'passive multiplier to tooltip values'),
+			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'applyHSMult', passiveMultiplierToTooltip.label, undefined, undefined, passiveMultiplierToTooltip.tooltip),
 		],
 	},
 	[ITEM_NAME_TO_ID.lichBane]: {
@@ -251,7 +256,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.mercurialScimitar), 'quicksilver', 'Quicksilver'),
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.spiritVisage), 'applyHSMult', 'passive multiplier to tooltip values'),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.spiritVisage), 'applyHSMult', passiveMultiplierToTooltip.label, undefined, undefined, passiveMultiplierToTooltip.tooltip),
 	},
 };
 

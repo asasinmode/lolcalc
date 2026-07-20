@@ -68,6 +68,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 	label: string,
 	labelPrefixApply = true,
 	labelAppendOnTarget = false,
+	tooltip?: string,
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
@@ -78,6 +79,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			labelPrefixApply,
+			tooltip,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);

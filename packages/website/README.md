@@ -148,6 +148,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] stats from rune shards
   - [x] items passives
   - [ ] heal and shield power affecting known shields & heals
+    - [ ] `applyHSMult` spirit visage immortal path actualizer
   - [ ] cap attack speed
   - [?] item effects & their result sections like frozen heart or zeke's convergence
   - [?] resolved item passives values for target like randuin/tabi

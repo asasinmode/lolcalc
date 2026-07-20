@@ -1252,7 +1252,6 @@ export const ITEM_SPECIFICS = {
 						const bonusPercent = itemVariableValue('ManaCalc', { item: ITEMS_BY_NAME.actualizer, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
 						if (typeof bonusPercent.value === 'number') {
 							calculatedVariables.actualizerBuffPercent = bonusPercent.value;
-							calculatedVariables.healMult = (calculatedVariables.healMult ?? 0) + calculatedVariables.actualizerBuffPercent;
 						} else {
 							console.warn('[ITEM_SPECIFICS actualizer] failed to calculate buff bonus percent', bonusPercent);
 						}

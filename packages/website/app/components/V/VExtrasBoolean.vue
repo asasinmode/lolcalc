@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { IGameImageData } from '@lolcalc/core/misc';
+import { simpleDescriptionFormatting } from '@lolcalc/core/misc';
 
-defineProps<{
+const props = defineProps<{
 	idPrefix: string;
 	imgSrc: IGameImageData;
 	label: string;
 	labelPrefixApply?: boolean;
+	tooltip?: string;
 }>();
 
 defineEmits<{
@@ -13,6 +15,13 @@ defineEmits<{
 }>();
 
 const value = defineModel<number>({ required: true });
+
+const computedTooltip = ref<string>();
+if (props.tooltip) {
+	simpleDescriptionFormatting(props.tooltip).then(value => computedTooltip.value = value);
+}
+
+const { showTooltip, hideTooltip } = useInfoTooltip();
 </script>
 
 <template>
@@ -31,6 +40,31 @@ const value = defineModel<number>({ required: true });
 		>
 		<label :for="`vebln-${idPrefix}`">
 			{{ labelPrefixApply ? 'apply ' : '' }}{{ label }}
+			<template v-if="tooltip">
+				<span
+					:aria-describedby="`vebln-${idPrefix}-tooltip`"
+					class="info-tooltip-trigger"
+					tabindex="0"
+					@focus="showTooltip($event, true)"
+					@mouseenter="showTooltip($event, true)"
+					@mouseleave="hideTooltip($event, true)"
+					@blur="hideTooltip($event, true)"
+				>
+					<span>additional info</span>
+					<Icon class="i-ph:info-fill" />
+				</span>
+				<p
+					:id="`vebln-${idPrefix}-tooltip`"
+					popover="hint"
+					class="hover-tooltip"
+					@focus="showTooltip($event, false)"
+					@mouseenter="showTooltip($event, false)"
+					@mouseleave="hideTooltip($event, false)"
+					@focusout="hideTooltip($event, false)"
+					@click.stop.prevent=""
+					v-html="computedTooltip ?? 'loading...'"
+				/>
+			</template>
 		</label>
 		<slot />
 	</article>
