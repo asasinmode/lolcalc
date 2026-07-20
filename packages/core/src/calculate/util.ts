@@ -20,6 +20,14 @@ export function addMultiplicative(currentValue: number, ...values: number[]) {
 	return currentValue;
 }
 
+/**
+ * combine 2 multipliers that recursively interact with each other, for example spirit visage and immortal path's passive recursively multiply life steal
+ * so 20% from spirit visage + 12% from immortal path ends up being `1.4` instead of `1.37`
+ */
+export function addRecursive(current: number, value: number) {
+	return (1 + current) * (1 + value) - 1;
+}
+
 /** soft cap according to wiki https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps */
 export function calculateMSCapPenalty(moveSpeed: number) {
 	let penalty = 0;

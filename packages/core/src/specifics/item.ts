@@ -11,7 +11,7 @@ import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { addMultiplicative } from '../calculate/util.ts';
+import { addMultiplicative, addRecursive } from '../calculate/util.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -1790,9 +1790,10 @@ export const ITEM_SPECIFICS = {
 			postTotal: {
 				handler(self, { totalStats }, { calculatedVariables }) {
 					if (self.currentHealth.value < Math.ceil(totalStats.hp / 2)) {
-						calculatedVariables.healShieldMult += ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
-						calculatedVariables.hpRegenMult += ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
-						calculatedVariables.lifeStealOmnivampMult += ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
+						const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
+						calculatedVariables.hpRegenMult += value;
+						calculatedVariables.healShieldMult = addRecursive(calculatedVariables.healShieldMult, value);
+						calculatedVariables.lifeStealOmnivampMult = addRecursive(calculatedVariables.lifeStealOmnivampMult, value);
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.immortalPath],
@@ -2322,10 +2323,10 @@ export const ITEM_SPECIFICS = {
 						/* could handle it but I don't expect it to change so save work */
 						console.error('[ITEM_SPECIFICS spirit visage] healing increase is diffeerent from shield');
 					}
-
-					calculatedVariables.healShieldMult += ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
-					calculatedVariables.hpRegenMult += ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
-					calculatedVariables.lifeStealOmnivampMult += ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
+					const value = ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
+					calculatedVariables.hpRegenMult += value;
+					calculatedVariables.healShieldMult = addRecursive(calculatedVariables.healShieldMult, value);
+					calculatedVariables.lifeStealOmnivampMult = addRecursive(calculatedVariables.lifeStealOmnivampMult, value);
 				},
 			},
 		},

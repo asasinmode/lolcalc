@@ -33,7 +33,7 @@ import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
-import { calculateMSCapPenalty } from '../calculate/util.ts';
+import { addRecursive, calculateMSCapPenalty } from '../calculate/util.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
@@ -177,9 +177,21 @@ export const CHAMPION_SPECIFICS = {
 	Briar: {
 		calculateHooks: {
 			postTotal: {
-				handler(self, { championPassiveStats, bonusStats, totalStats }, { calculatedVariables }) {
+				handler(self, { bonusStats, totalStats }, { calculatedVariables }) {
 					const currentHpPercent = self.currentHealth.value / totalStats.hp;
-					console.log('briaring', currentHpPercent);
+					const missingHealthPercent = (1 - currentHpPercent) * 100;
+
+					calculatedVariables.briarHealingMult = missingHealthPercent * 0.004 + (bonusStats.hp / 100) * missingHealthPercent * 0.00025;
+
+					console.log('[debug briar', {
+						missingHealthPercent,
+						bonusHp: bonusStats.hp,
+						briarHealingMult: calculatedVariables.briarHealingMult,
+					});
+
+					calculatedVariables.hpRegenMult += calculatedVariables.briarHealingMult;
+					/* not sure how it's supposed to be added, test and adjust */
+					calculatedVariables.healShieldMult = addRecursive(calculatedVariables.healShieldMult, calculatedVariables.briarHealingMult);
 				},
 				priority: HOOK_PRIORITIES.postTotal.Briar,
 			},

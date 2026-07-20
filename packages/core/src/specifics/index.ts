@@ -33,7 +33,7 @@ export const HOOK_PRIORITIES = {
 		Ryze: 1,
 		/* should be before bloodmail */
 		Rammus: 1,
-		/* should be last, needs final total hp */
+		/* should be last, needs bonus hp */
 		Briar: 100,
 		/* should be after rammus */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,

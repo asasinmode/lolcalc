@@ -112,7 +112,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}
 
 	for (const item of items.filter(Boolean)) {
-		for (const [statName, statValue] of itemToChampionStats(item)) {
+		for (const [statName, statValue] of itemToChampionStats(item!)) {
 			if (MULTIPLICATIVE_CHAMPION_STATS.includes(statName)) {
 				itemBaseStats[statName] = addMultiplicative(itemBaseStats[statName], statValue);
 			} else {

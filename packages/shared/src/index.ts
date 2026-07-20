@@ -201,6 +201,8 @@ export interface IStatsCalculationVariables {
 	terminusResists?: number;
 	/** heal, shield and regen mult from spirit visage's passive */
 	spiritVisageHSMult?: number;
+	/** healing multiplier from Briar's passive, TODO check how it works on life steal/heals */
+	briarHealingMult?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
