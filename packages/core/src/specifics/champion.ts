@@ -181,7 +181,17 @@ export const CHAMPION_SPECIFICS = {
 					const currentHpPercent = self.currentHealth.value / totalStats.hp;
 					const missingHealthPercent = (1 - currentHpPercent) * 100;
 
-					calculatedVariables.briarHealingMult = missingHealthPercent * 0.004 + (bonusStats.hp / 100) * missingHealthPercent * 0.00025;
+					const healingMultVar = championAbilityVariableValue('TotalHealPerMissingHPPercentTooltip', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
+					const { calculatesFrom } = healingMultVar;
+
+					if (typeof calculatesFrom?.[0]?.value !== 'number' || typeof calculatesFrom?.[1]?.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS briar] failed to calculate passive healing multiplier', healingMultVar);
+
+						return;
+					}
+
+					calculatedVariables.briarHealingMult = calculatesFrom[0].value * missingHealthPercent / 10_000 + (bonusStats.hp / 100) * missingHealthPercent * calculatesFrom[1].value / 100;
+
 					calculatedVariables.hpRegenMult = combineCompounding(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
 					/* TODO not sure if that's the appropriate scaling for it test what heals Briar receives in game */
 					calculatedVariables.healShieldMult = combineCompounding(calculatedVariables.healShieldMult, calculatedVariables.briarHealingMult);
