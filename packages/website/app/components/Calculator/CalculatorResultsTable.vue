@@ -1230,12 +1230,19 @@ const colW = computed(() => {
 	};
 });
 
-function showRowTooltip(event: Event) {
-	((event.currentTarget as HTMLElement).nextElementSibling as HTMLElement).showPopover();
+function showRowTooltip(event: Event, isActivator: boolean) {
+	const currentTarget = event.currentTarget as HTMLElement;
+	const secondElement = isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling;
+	(isActivator ? secondElement : currentTarget).showPopover();
 }
 
-function hideRowTooltip(event: Event) {
-	((event.currentTarget as HTMLElement).nextElementSibling as HTMLElement).hidePopover();
+function hideRowTooltip(event: Event | FocusEvent, isActivator: boolean) {
+	const currentTarget = event.currentTarget as HTMLElement;
+	const secondElement = isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling;
+	if ('relatedTarget' in event) {
+		console.log('blurred to', secondElement === event.relatedTarget, event.target);
+	}
+	(isActivator ? secondElement : currentTarget).hidePopover();
 }
 
 defineExpose({
@@ -1660,10 +1667,11 @@ defineExpose({
 							<span
 								v-if="row.isCustom"
 								:aria-describedby="`${section.id}-${row.id}-tooltip-custom`"
-								@focus="showRowTooltip"
-								@mouseenter="showRowTooltip"
-								@mouseleave="hideRowTooltip"
-								@blur="hideRowTooltip"
+								tabindex="0"
+								@focus="showRowTooltip($event, true)"
+								@mouseenter="showRowTooltip($event, true)"
+								@mouseleave="hideRowTooltip($event, true)"
+								@blur="hideRowTooltip($event, true)"
 							>
 								<img
 									src="/logo_dark.webp"
@@ -1676,21 +1684,35 @@ defineExpose({
 								:id="`${section.id}-${row.id}-tooltip-custom`"
 								popover="hint"
 								class="hover-tooltip"
+								@focus="showRowTooltip($event, false)"
+								@mouseenter="showRowTooltip($event, false)"
+								@mouseleave="hideRowTooltip($event, false)"
+								@blur="hideRowTooltip($event, false)"
 							>
 								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
 							</p>
 							<span
 								v-if="row.additionalInfo"
 								:aria-describedby="`${section.id}-${row.id}-tooltip-info`"
-								@focus="showRowTooltip"
-								@mouseenter="showRowTooltip"
-								@mouseleave="hideRowTooltip"
-								@blur="hideRowTooltip"
+								tabindex="0"
+								@focus="showRowTooltip($event, true)"
+								@mouseenter="showRowTooltip($event, true)"
+								@mouseleave="hideRowTooltip($event, true)"
+								@blur="hideRowTooltip($event, true)"
 							>
 								<span>additional info</span>
 								<Icon class="i-ph:info-fill" />
 							</span>
-							<p :id="`${section.id}-${row.id}-tooltip-info`" popover="hint" class="hover-tooltip" v-html="row.additionalInfo" />
+							<p
+								:id="`${section.id}-${row.id}-tooltip-info`"
+								popover="hint"
+								class="hover-tooltip"
+								@focus="showRowTooltip($event, false)"
+								@mouseenter="showRowTooltip($event, false)"
+								@mouseleave="hideRowTooltip($event, false)"
+								@blur="hideRowTooltip($event, false)"
+								v-html="row.additionalInfo"
+							/>
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
@@ -2302,7 +2324,7 @@ defineExpose({
 							anchor-name: --parent;
 
 							&:before {
-								--at-apply: 'absolute content-empty -inset-x-1 block-1.75 inset-bs-0 -translate-y-full';
+								--at-apply: 'absolute content-empty -inset-x-1 block-2 inset-bs-px -translate-y-full';
 							}
 
 							> img {
