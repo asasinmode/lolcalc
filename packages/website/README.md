@@ -98,6 +98,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [ ] basic attack section normal/crit/average
   - [ ] basic attack hover tooltip, note that it already includes everything and might not make sense in custom total
+  - [ ] source indicator, similar to the drag one in scoreboard, when hovering over column
   - [x] friendlier variable names?
   - [x] try to filter out simple variables like 5 more dmg to minions?
   - [x] whether/what to round in results like manamune awe ad
@@ -145,14 +146,14 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] calculations
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
-  - [ ] items passives
+  - [x] items passives
   - [ ] heal and shield power affecting known shields & heals
   - [ ] cap attack speed
   - [?] item effects & their result sections like frozen heart or zeke's convergence
   - [?] resolved item passives values for target like randuin/tabi
   - [x] hook priorities in one file for easier precedence management
   - [ ] grievous wounds affecting all heal type things
-  - [?] dragons/souls
+  - [x] dragons/souls
   - [ ] champion passives
     - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
   - [ ] champion effects
@@ -213,7 +214,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] future features in github project page thingy?
-- [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
+- [ ] rewrite css classes to selectors with `@apply`
 - [ ] try to generate specific components from data in specific, like effect are?
 - [ ] consider used images "locally" / service worker for caching stuff
 - [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold

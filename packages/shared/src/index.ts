@@ -634,6 +634,7 @@ export const VariableType = {
 	physical: 'physical',
 	magic: 'magic',
 	true: 'true',
+	adaptive: 'adaptive',
 } as const;
 
 export type IVariableType = typeof VariableType[keyof typeof VariableType];

@@ -3,6 +3,7 @@ import type { IDragonName } from '@lolcalc/data/types';
 import type { ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
 import type { IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
+import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative } from '../calculate/util.ts';
 import { addCalculatesFrom, championAbilityVariableValue } from '../variables/game.ts';
@@ -112,6 +113,15 @@ export const DRAGON_SPECIFICS = {
 				},
 			},
 		},
+		soul: {
+			variables: defineVariables({
+				meta: {
+					TotalDamage: {
+						type: VariableType.adaptive,
+					},
+				},
+			}),
+		},
 	},
 	Mountain: {
 		stack: {
@@ -123,6 +133,28 @@ export const DRAGON_SPECIFICS = {
 					},
 				},
 			},
+		},
+		soul: {
+			variables: defineVariables({
+				meta: {
+					TotalShield: {
+						type: VariableType.shield,
+					},
+				},
+				uninteresting: ['TimeWithoutTakingDamage'],
+			}),
+		},
+	},
+	Ocean: {
+		soul: {
+			variables: defineVariables({
+				meta: {
+					TotalHeal: {
+						type: VariableType.heal,
+					},
+				},
+				uninteresting: ['HealDuration', 'MinionPenalty'],
+			}),
 		},
 	},
 } satisfies IHypotheticalDragonSpecifics;
