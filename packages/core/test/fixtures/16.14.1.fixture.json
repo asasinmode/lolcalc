@@ -53,6 +53,20 @@
 		}
 	},
 	"items": {
+		"1006": {
+			"name": "Rejuvenation Bead",
+			"into": [
+				"3109",
+				"3211",
+				"3801"
+			],
+			"categories": {
+				"tank": true
+			},
+			"stats": {
+				"PercentBaseHPRegenMod": 1
+			}
+		},
 		"1054": {
 			"name": "Doran's Shield",
 			"stats": {

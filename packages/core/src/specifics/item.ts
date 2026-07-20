@@ -11,7 +11,7 @@ import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { addMultiplicative, addRecursive } from '../calculate/util.ts';
+import { addMultiplicative, combineRecursive } from '../calculate/util.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -1792,8 +1792,8 @@ export const ITEM_SPECIFICS = {
 					if (self.currentHealth.value < Math.ceil(totalStats.hp / 2)) {
 						const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
 						calculatedVariables.hpRegenMult += value;
-						calculatedVariables.healShieldMult = addRecursive(calculatedVariables.healShieldMult, value);
-						calculatedVariables.lifeStealOmnivampMult = addRecursive(calculatedVariables.lifeStealOmnivampMult, value);
+						calculatedVariables.healShieldMult = combineRecursive(calculatedVariables.healShieldMult, value);
+						calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, value);
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.immortalPath],
@@ -2325,8 +2325,8 @@ export const ITEM_SPECIFICS = {
 					}
 					const value = ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
 					calculatedVariables.hpRegenMult += value;
-					calculatedVariables.healShieldMult = addRecursive(calculatedVariables.healShieldMult, value);
-					calculatedVariables.lifeStealOmnivampMult = addRecursive(calculatedVariables.lifeStealOmnivampMult, value);
+					calculatedVariables.healShieldMult = combineRecursive(calculatedVariables.healShieldMult, value);
+					calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, value);
 				},
 			},
 		},

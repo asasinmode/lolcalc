@@ -33,7 +33,7 @@ import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
-import { addRecursive, calculateMSCapPenalty } from '../calculate/util.ts';
+import { calculateMSCapPenalty, combineCompounding } from '../calculate/util.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
@@ -182,16 +182,9 @@ export const CHAMPION_SPECIFICS = {
 					const missingHealthPercent = (1 - currentHpPercent) * 100;
 
 					calculatedVariables.briarHealingMult = missingHealthPercent * 0.004 + (bonusStats.hp / 100) * missingHealthPercent * 0.00025;
-
-					console.log('[debug briar', {
-						missingHealthPercent,
-						bonusHp: bonusStats.hp,
-						briarHealingMult: calculatedVariables.briarHealingMult,
-					});
-
-					calculatedVariables.hpRegenMult = addRecursive(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
-					/* not sure how it's supposed to be added, test and adjust */
-					calculatedVariables.healShieldMult = addRecursive(calculatedVariables.healShieldMult, calculatedVariables.briarHealingMult);
+					calculatedVariables.hpRegenMult = combineCompounding(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
+					/* TODO not sure if that's the appropriate scaling for it test what heals Briar receives in game */
+					calculatedVariables.healShieldMult = combineCompounding(calculatedVariables.healShieldMult, calculatedVariables.briarHealingMult);
 				},
 				priority: HOOK_PRIORITIES.postTotal.Briar,
 			},

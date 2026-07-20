@@ -10,6 +10,9 @@ test.before(() => {
 });
 
 test('Spirit Visage/Immortal Path heal stats', async (t) => {
+	const lotsOfLifestealItems = [ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.spiritVisage, ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.hextechGunblade, ITEMS_BY_NAME.immortalPath];
+	const lotsOfLifestealItemsData = { slay: 10, applyHSMult: 0 } satisfies IInternalItemDataOf<'immortalPath'>;
+
 	await t.test('Briar', async (t) => {
 		const baseCommon: IOverrides<'Briar'> = {
 			level: 1,
@@ -74,9 +77,6 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				omnivamp: 20,
 			}, damageSource);
 		});
-
-		const lotsOfLifestealItems = [ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.spiritVisage, ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.hextechGunblade, ITEMS_BY_NAME.immortalPath];
-		const lotsOfLifestealItemsData = { slay: 10, applyHSMult: 0 } satisfies IInternalItemDataOf<'immortalPath'>;
 
 		await t.test('lots of lifesteal | spirit visage', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Briar', {
@@ -168,6 +168,53 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				hpRegen: 27,
 				lifeSteal: 14,
 				omnivamp: 20,
+			}, damageSource);
+		});
+
+		await t.test('lots of lifesteal | spirit visage', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...baseCommon,
+				level: 2,
+				items: lotsOfLifestealItems,
+				internalItemData: lotsOfLifestealItemsData,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				hpRegen: 21,
+				lifeSteal: 44,
+				omnivamp: 25,
+			}, damageSource);
+		});
+
+		await t.test('lots of lifesteal | immortal path', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...baseCommon,
+				level: 2,
+				currentHealth: 282,
+				items: [ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.rejuvenationBead, ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.hextechGunblade, ITEMS_BY_NAME.immortalPath],
+				internalItemData: lotsOfLifestealItemsData,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				hpRegen: 19,
+				lifeSteal: 39,
+				omnivamp: 22,
+			}, damageSource);
+		});
+
+		await t.test('lots of lifesteal | spirit visage, immortal path', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Rammus', {
+				...baseCommon,
+				level: 2,
+				currentHealth: 296,
+				items: lotsOfLifestealItems,
+				internalItemData: lotsOfLifestealItemsData,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				hpRegen: 23,
+				lifeSteal: 51,
+				omnivamp: 29,
 			}, damageSource);
 		});
 	});
