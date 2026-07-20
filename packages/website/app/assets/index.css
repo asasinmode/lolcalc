@@ -248,6 +248,10 @@
 			--at-apply: 'absolute content-empty -inset-x-1 block-2 inset-bs-px -translate-y-full';
 		}
 
+		> span:first-child {
+			--at-apply: 'sr-only';
+		}
+
 		> img {
 			--at-apply: 'size-full';
 		}

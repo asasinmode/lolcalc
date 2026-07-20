@@ -41,6 +41,7 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 const iconButtonsShowText = useIconButtonsShowText();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
+const { showTooltip: showRowTooltip, hideTooltip: hideRowTooltip } = useInfoTooltip();
 const { vMinor } = PATCH_VERSION;
 
 const STATS_SECTION_ID = 'a-stats';
@@ -1230,24 +1231,6 @@ const colW = computed(() => {
 	};
 });
 
-function showRowTooltip(event: Event, isActivator: boolean) {
-	const currentTarget = event.currentTarget as HTMLElement;
-	const secondElement = (isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling) as HTMLElement;
-	(isActivator ? secondElement : currentTarget).showPopover();
-}
-
-function hideRowTooltip(event: Event | FocusEvent, isActivator: boolean) {
-	const currentTarget = event.currentTarget as HTMLElement;
-	const secondElement = (isActivator ? currentTarget.nextElementSibling : currentTarget.previousElementSibling) as HTMLElement;
-
-	if ('relatedTarget' in event && event.relatedTarget) {
-		if (currentTarget.contains(event.relatedTarget as HTMLElement) || secondElement.contains(event.relatedTarget as HTMLElement)) {
-			return;
-		}
-	}
-	(isActivator ? secondElement : currentTarget).hidePopover();
-}
-
 defineExpose({
 	resultColumns,
 	resultSections,
@@ -2319,8 +2302,7 @@ defineExpose({
 							--ms: calc(0.5 * (var(--ps) + var(--size)));
 						}
 
-						> span:not([aria-describedby]),
-						> span[aria-describedby] > span:first-child {
+						> span:not([aria-describedby]) {
 							--at-apply: 'sr-only';
 						}
 					}
