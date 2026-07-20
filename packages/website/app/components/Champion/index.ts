@@ -26,7 +26,10 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'AurelionSol', 'passive', 0), 'passiveStacks', 'Cosmic Creator stacks'),
 	},
 	Bard: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Bard', 'passive', 0), 'passiveStacks', 'Chimes collected'),
+		extras: [
+			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Bard', 'passive', 0), 'passiveStacks', 'Chimes collected'),
+			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Bard', 'passive', 0), 'chimeMoveSpeed', 'Chime move speed', 0, CHAMPION_SPECIFICS.Bard.MAX_CHIME_MS),
+		],
 	},
 	Belveth: {
 		extras: [

@@ -1,5 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
+import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
@@ -160,9 +161,11 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Bard: {
-		setupData(self): { passiveStacks: number } {
+		MAX_CHIME_MS: (self: DamageSource<'Bard'>): number => (self.champion.value! as typeof IBard).abilities.passive.variants[0]!.dataValues.MaxSpeedStacks[1]!,
+		setupData(self): { passiveStacks: number; chimeMoveSpeed: number } {
 			return {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
+				chimeMoveSpeed: clamp(0, Math.round(self.internalData.value.chimeMoveSpeed ?? 0), CHAMPION_SPECIFICS.Bard.MAX_CHIME_MS(self)),
 			};
 		},
 	},

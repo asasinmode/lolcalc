@@ -113,6 +113,7 @@ export interface IStatsCalculationVariables {
 	midQuestAd?: number;
 	/** ap gained from completed mid quest */
 	midQuestAp?: number;
+	// TODO if all bonus damage percents are treated the same, store them under the same variable
 	/** bonus damage % gained from liandry's passive stacks, doesn't affect stats but is kept here */
 	liandryBonusDamagePercent?: number;
 	/** bonus damage % gained from haunting guise's passive stacks, doesn't affect stats but is kept here */

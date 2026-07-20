@@ -160,6 +160,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champion effects
   - [ ] other effects
   - [ ] basic attack damage
+  - [ ] damage multipliers (immortal path, haunting guise items - try to merge vars)
   - [x] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
   - [x] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
   - [x] DamageSource.internalData set from utils/champion.ts
