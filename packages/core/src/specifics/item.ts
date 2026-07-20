@@ -189,9 +189,8 @@ export const ITEM_SPECIFICS = {
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
-		imgText(self) {
-			const { hauntingGuiseBonusDamagePercent } = self.stats.value.variables;
-			return hauntingGuiseBonusDamagePercent ? `${Math.round(hauntingGuiseBonusDamagePercent * 100)}%` : '';
+		imgText(self): number | undefined {
+			return (self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness;
 		},
 		variables: defineVariables({
 			known: {
@@ -345,9 +344,8 @@ export const ITEM_SPECIFICS = {
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
-		imgText(self) {
-			const { liandryBonusDamagePercent } = self.stats.value.variables;
-			return liandryBonusDamagePercent ? `${Math.round(liandryBonusDamagePercent * 100)}%` : '';
+		imgText(self): number | undefined {
+			return (self.internalItemData.value as IInternalItemDataOf<'liandry'>).madness;
 		},
 		variables: defineVariables({
 			known: {
@@ -476,9 +474,8 @@ export const ITEM_SPECIFICS = {
 			return { corruption: 0 };
 		},
 		imgTextLabel: 'Corruption bonus damage',
-		imgText(self) {
-			const { riftmakerBonusDamagePercent } = self.stats.value.variables;
-			return riftmakerBonusDamagePercent ? `${Math.round(riftmakerBonusDamagePercent * 100)}%` : '';
+		imgText(self): number | undefined {
+			return (self.internalItemData.value as IInternalItemDataOf<'riftmaker'>).corruption;
 		},
 		variables: defineVariables({
 			known: {

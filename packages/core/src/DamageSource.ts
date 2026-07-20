@@ -1835,7 +1835,7 @@ export interface IAbilityImageTextProvider {
 	/**
 	 * text on the item's image, like current heartsteel/mejai stacks
 	 */
-	imgText: (damageSource: DamageSource, dataProperty?: any) => string | number;
+	imgText: (damageSource: DamageSource, dataProperty?: any) => string | number | undefined;
 	/** sr only label for the shown image text */
 	imgTextLabel: string;
 }
