@@ -16,6 +16,7 @@ export interface IReplacedGameVariable {
 	isUninteresting?: boolean;
 	/** the text appended after the replaced variable, usually something like ` = (55% [ad icon])` */
 	metaSuffix?: string;
+	actualName?: string;
 }
 
 export interface IReplaceGameVariablesRV {
@@ -275,6 +276,8 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityLevel?: number;
 	/** ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive */
 	allAbilitiesVariants?: IChampionAbilityVariableVariant[];
+	/** used for returning the name of the variable when it's taken from another spell, like `Spell.SRX_DragonSoulBuffMountain:TotalShield` should be `TotalShield` */
+	returnActualName?: boolean;
 }
 
 export function championAbilityVariableValue(
@@ -289,6 +292,7 @@ export function championAbilityVariableValue(
 		allAbilitiesVariants = [],
 		damageSource,
 		isRanged,
+		returnActualName,
 	} = params;
 	const rv: IVariableValueResult = {
 		calculatesFrom: [],
@@ -314,6 +318,7 @@ export function championAbilityVariableValue(
 				abilityLevel,
 				allAbilitiesVariants,
 				damageSource,
+				returnActualName: true,
 			});
 		} else {
 			console.warn(`[championAbilityVariableValue] variant referenced in ${variable} not found`);
@@ -402,6 +407,10 @@ export function championAbilityVariableValue(
 		rv.value *= multiplier;
 	}
 
+	if (returnActualName && !rv.actualVariableName) {
+		rv.actualVariableName = variable;
+	}
+
 	return rv;
 }
 
@@ -479,6 +488,7 @@ export function replaceGameVariables(
 		const replaceWithName = options.replaceWithName && !isUninteresting;
 		const tagWrapStart = replaceWithName ? '<var>' : '';
 		const tagWrapEnd = replaceWithName ? '</var>' : '';
+		const nameReplacement = meta?.displayedName ?? actualVariableName ?? variableName;
 
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
@@ -517,11 +527,11 @@ export function replaceGameVariables(
 				}
 			}
 
-			return `${tagWrapStart}<unknown>@${replaceWithName ? (meta?.displayedName ?? variableName) : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
+			return `${tagWrapStart}<unknown>@${replaceWithName ? nameReplacement : name}@</unknown>${tagWrapEnd}${metaSuffix}`;
 		}
 
 		if (typeof variable === 'string') {
-			return `${tagWrapStart}${replaceWithName ? (meta?.displayedName ?? variableName) : variable}${tagWrapEnd}${metaSuffix}`;
+			return `${tagWrapStart}${replaceWithName ? nameReplacement : variable}${tagWrapEnd}${metaSuffix}`;
 		}
 
 		const varValueSuffix = isPercentage ? '%' : (optionalPercent ?? '');
@@ -536,7 +546,7 @@ export function replaceGameVariables(
 					}
 				}
 
-				return `${tagWrapStart}<unknown>@${replaceWithName ? (meta?.displayedName ?? variableName) : name}@</unknown>${tagWrapEnd}`;
+				return `${tagWrapStart}<unknown>@${replaceWithName ? nameReplacement : name}@</unknown>${tagWrapEnd}`;
 			}
 
 			const isV1Number = typeof variable[0] === 'number';
@@ -574,10 +584,11 @@ export function replaceGameVariables(
 				isPercentage,
 				isUninteresting,
 				metaSuffix,
+				actualName: actualVariableName,
 			});
 
 			return replaceWithName
-				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${(meta?.displayedName ?? variableName)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
+				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${nameReplacement}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
 					isV1Number
 						? (typeof roundReplaced === 'number'
@@ -602,7 +613,7 @@ export function replaceGameVariables(
 		}
 
 		variable = roundVariable(variable * multiplier);
-		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage, metaSuffix });
+		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage, metaSuffix, actualName: actualVariableName });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
 			? 'melee'
@@ -612,7 +623,7 @@ export function replaceGameVariables(
 		const iconPrefix = meleeRangedIconPath ? `%i:${meleeRangedIconPath}active% ` : '';
 
 		return `${iconPrefix}${tagWrapStart}${replaceWithName
-			? (meta?.displayedName ?? variableName)
+			? nameReplacement
 			: (typeof roundReplaced === 'number'
 					? roundVariable(variable, roundReplaced)
 					: roundReplaced
