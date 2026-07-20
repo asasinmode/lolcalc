@@ -189,7 +189,7 @@ export const CHAMPION_SPECIFICS = {
 						briarHealingMult: calculatedVariables.briarHealingMult,
 					});
 
-					calculatedVariables.hpRegenMult += calculatedVariables.briarHealingMult;
+					calculatedVariables.hpRegenMult = addRecursive(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
 					/* not sure how it's supposed to be added, test and adjust */
 					calculatedVariables.healShieldMult = addRecursive(calculatedVariables.healShieldMult, calculatedVariables.briarHealingMult);
 				},
