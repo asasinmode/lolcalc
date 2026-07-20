@@ -1232,7 +1232,7 @@ export const ITEM_SPECIFICS = {
 						const bonusPercent = itemVariableValue('ManaCalc', { item: ITEMS_BY_NAME.actualizer, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
 						if (typeof bonusPercent.value === 'number') {
 							calculatedVariables.actualizerBuffPercent = bonusPercent.value;
-							calculatedVariables.healShieldMult = (calculatedVariables.healShieldMult ?? 0) + calculatedVariables.actualizerBuffPercent;
+							calculatedVariables.healMult = (calculatedVariables.healMult ?? 0) + calculatedVariables.actualizerBuffPercent;
 						} else {
 							console.warn('[ITEM_SPECIFICS actualizer] failed to calculate buff bonus percent', bonusPercent);
 						}
@@ -1792,7 +1792,8 @@ export const ITEM_SPECIFICS = {
 					if (self.currentHealth.value < Math.ceil(totalStats.hp / 2)) {
 						const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
 						calculatedVariables.hpRegenMult += value;
-						calculatedVariables.healShieldMult = combineRecursive(calculatedVariables.healShieldMult, value);
+						calculatedVariables.healMult = combineRecursive(calculatedVariables.healMult, value);
+						calculatedVariables.shieldMult = combineRecursive(calculatedVariables.shieldMult, value);
 						calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, value);
 					}
 				},
@@ -2319,14 +2320,11 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, _stats, { calculatedVariables }) {
-					if (ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease !== ITEMS_BY_NAME.spiritVisage?.dataValues.ShieldIncrease) {
-						/* could handle it but I don't expect it to change so save work */
-						console.error('[ITEM_SPECIFICS spirit visage] healing increase is diffeerent from shield');
-					}
-					const value = ITEMS_BY_NAME.spiritVisage?.dataValues.HealingIncrease;
-					calculatedVariables.hpRegenMult += value;
-					calculatedVariables.healShieldMult = combineRecursive(calculatedVariables.healShieldMult, value);
-					calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, value);
+					const { HealingIncrease, ShieldIncrease } = ITEMS_BY_NAME.spiritVisage?.dataValues ?? {};
+					calculatedVariables.hpRegenMult += HealingIncrease;
+					calculatedVariables.healMult = combineRecursive(calculatedVariables.healMult, HealingIncrease);
+					calculatedVariables.shieldMult = combineRecursive(calculatedVariables.shieldMult, ShieldIncrease);
+					calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, HealingIncrease);
 				},
 			},
 		},

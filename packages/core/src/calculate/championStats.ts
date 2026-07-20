@@ -50,7 +50,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		movespeedSoftCapPenalty: 0,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
 		bloodmailRetributionExcludedAd: 0,
-		healShieldMult: 1,
+		healMult: 1,
+		shieldMult: 1,
 		hpRegenMult: 0,
 		lifeStealOmnivampMult: 0,
 	};

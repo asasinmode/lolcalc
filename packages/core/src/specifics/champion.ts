@@ -194,7 +194,7 @@ export const CHAMPION_SPECIFICS = {
 
 					calculatedVariables.hpRegenMult = combineCompounding(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
 					/* TODO not sure if that's the appropriate scaling for it test what heals Briar receives in game */
-					calculatedVariables.healShieldMult = combineCompounding(calculatedVariables.healShieldMult, calculatedVariables.briarHealingMult);
+					calculatedVariables.healMult = combineCompounding(calculatedVariables.healMult, calculatedVariables.briarHealingMult);
 				},
 				priority: HOOK_PRIORITIES.postTotal.Briar,
 			},

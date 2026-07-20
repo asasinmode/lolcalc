@@ -22,7 +22,7 @@ export function addMultiplicative(currentValue: number, ...values: number[]) {
 
 /**
  * combine 2 multipliers that compound of off each other, for example Briar's passive interacts this way with Spirit Visage's and Immortal Path's passives on hp regen
- * so 20% from spirit visage + 12% from immortal path ends up being `1.34` instead of `1.32`
+ * so 20% from spirit visage + 12% from immortal path ends up being `34%` instead of `32%`
  */
 export function combineCompounding(current: number, value: number) {
 	return (1 + current) * (1 + value) - 1;
@@ -30,7 +30,7 @@ export function combineCompounding(current: number, value: number) {
 
 /**
  * combine 2 multipliers that recursively interact with each other, for example spirit visage and immortal path's passive recursively multiply life steal
- * so 20% from spirit visage + 12% from immortal path ends up being `0.3772%`
+ * so 20% from spirit visage + 12% from immortal path ends up being `37.72%`
  */
 export function combineRecursive(current: number, value: number) {
 	return current / (1 - value) + value / (1 - current);
