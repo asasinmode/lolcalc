@@ -61,17 +61,37 @@ const gluttonousGreavesSpecific = {
 	imgText(self) {
 		return (self.internalItemData.value as { slay: number }).slay;
 	},
+	variables: defineVariables({
+		known: {
+			Omnivamp: [],
+		},
+		calculate(self) {
+			return {
+				Omnivamp: {
+					value: self.stats.value.variables.gluttonousImmortalOmnivamp,
+				},
+			};
+		},
+		meta: {
+			Omnivamp: {
+				isCustom: true,
+				resultsIsPercentage: true,
+			},
+		},
+		uninteresting: ['OmnivampOnTakedown', 'MaxStacks', 'DamageMod', 'HealingMod'],
+	}),
 	calculateHooks: {
 		preItemTotal: {
 			handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
 				const { slay } = self.internalItemData.value as IInternalItemDataOf<'gluttonousGreaves'>;
 				calculatedVariables.gluttonousImmortalOmnivamp = (slay ?? 0) * ITEMS_BY_NAME.gluttonousGreaves?.dataValues.OmnivampOnTakedown;
 				itemPassivesStats.omnivamp += calculatedVariables.gluttonousImmortalOmnivamp;
+				calculatedVariables.gluttonousImmortalOmnivamp *= 100;
 
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
 					itemStatIncreases[bootsId] ??= {};
-					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp * 100;
+					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp;
 				}
 			},
 		},
