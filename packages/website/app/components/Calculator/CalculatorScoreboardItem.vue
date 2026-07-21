@@ -1001,7 +1001,7 @@ defineExpose({ el });
 				label="level"
 				:model-value="value.level.value as unknown as string"
 				data-select-champion-level=""
-				:options="Array.from({ length: value.maxLevel.value }, (_, i) => [i + 1, (i + 1).toString()])"
+				:options="Array.from({ length: value.maxLevel.value }, (_, i) => [i + 1, `&nbsp;${i + 1}&nbsp;`])"
 				@update:model-value="value.level.value = Number.parseInt($event!)"
 			>
 				<span>{{ value.level.value }}</span>
