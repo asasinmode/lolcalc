@@ -40,6 +40,7 @@ const computedDescription = computed<IComputedAbilityDescription | undefined>(()
 				props.gameAbilityId,
 				undefined,
 				{ replaceWithName: props.replaceVariablesWithNames },
+				props.abilityLevel,
 			)
 		: undefined),
 );
@@ -116,7 +117,7 @@ defineExpose({ el });
 								:data-current="abilityKey
 									? (variableIndex + 1 === (abilityKey === 'passive'
 										? 1
-										: abilityLevel || 1)) ? '' : undefined
+										: precomputedDescription?.abilityLevel || 1)) ? '' : undefined
 									: undefined"
 							>
 								{{ variable }}

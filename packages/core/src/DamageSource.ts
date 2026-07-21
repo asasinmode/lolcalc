@@ -1386,8 +1386,9 @@ export function computeAbilityDescription(
 	gameAbilityId: IChampionAbilityId,
 	damageSource?: DamageSource<any>,
 	replaceOptions?: IReplaceGameVariablesOptions,
+	abilityLevel?: number,
 ): IComputedAbilityDescription {
-	const abilityLevel = gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
+	abilityLevel ??= gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
 	const allVariants = allChampionAbilitiesVariants(champion);
@@ -1513,6 +1514,7 @@ export function computeAbilityDescription(
 		anyUnknownVariables,
 		cooldown,
 		cost,
+		abilityLevel,
 		partype: champion.partype,
 		extendedVariables,
 		variables,
@@ -1867,6 +1869,7 @@ export interface IComputedAbilityDescription {
 	cooldown?: number;
 	cost?: number;
 	partype?: string;
+	abilityLevel?: number;
 	extendedVariables?: {
 		name: string;
 		values?: (string | number)[];
