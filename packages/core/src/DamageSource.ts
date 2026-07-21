@@ -28,7 +28,7 @@ import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } f
 import { calculateDynamicVariables } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
-import { itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
+import { championAbilityVariableValue, itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
 import { replaceStringtableVariables } from './variables/stringtable.ts';
 
 export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
@@ -1479,11 +1479,16 @@ export function computeAbilityDescription(
 				isNameUnknown = true;
 			}
 		}
-		name ||= variable.name;
+		name ??= variable.name;
 
 		return {
 			name,
-			values: (tooltipVariablesAV.get(variable.name) || tooltipExtendedVariablesAV.get(variable.name))?.slice(1, lastExtendedVariableIndex),
+			values: (tooltipVariablesAV.get(name) ?? tooltipExtendedVariablesAV.get(name) ?? championAbilityVariableValue(variable.name, {
+				abilityVariant: variant,
+				allAbilitiesVariants: damageSource?.allAbilityVariants.value,
+				abilityLevel,
+				damageSource,
+			}, replaceOptions?.overrideVariables).allValues)?.slice(1, lastExtendedVariableIndex),
 			isNameUnknown,
 		};
 	});
