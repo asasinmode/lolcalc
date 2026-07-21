@@ -822,20 +822,19 @@ export function calculatesFromPartExtendedEquals(
 }
 
 function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, stat: ICalculatesFromPart['stat'], isPercentage?: boolean): string {
-	let multiplier: number, valueSuffix: string;
-	let roundTo = 1;
+	let multiplier = 1;
+	let valueSuffix = '';
+	let roundTo = stat === 'const' ? 2 : 0;
+
 	if (isPercentage) {
 		multiplier = stat === 'critChance' ? 1 : 100;
 		valueSuffix = '%';
 		roundTo = 3;
-	} else {
-		multiplier = 1;
-		valueSuffix = '';
 	}
 
 	return typeof value === 'number'
-		? `${isPercentage ? roundVariable(value * multiplier, roundTo) : Math.round(value * multiplier)}${valueSuffix}`
-		: `${isPercentage ? roundVariable(value.min * multiplier, roundTo) : Math.round(value.min * multiplier)}${valueSuffix} - ${isPercentage ? roundVariable(value.max * multiplier, roundTo) : Math.round(value.max * multiplier)}${valueSuffix}`;
+		? `${isPercentage ? roundVariable(value * multiplier, roundTo) : roundVariable(value * multiplier, roundTo)}${valueSuffix}`
+		: `${isPercentage ? roundVariable(value.min * multiplier, roundTo) : roundVariable(value.min * multiplier, roundTo)}${valueSuffix} - ${isPercentage ? roundVariable(value.max * multiplier, roundTo) : roundVariable(value.max * multiplier, roundTo)}${valueSuffix}`;
 }
 
 function variableExtendedEquals(

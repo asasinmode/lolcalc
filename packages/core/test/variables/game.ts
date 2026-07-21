@@ -164,5 +164,9 @@ test('extended equals', async (t) => {
 		const jaxPassive = replaceGameVariables(jax.champion.value!.abilities.passive.variants[0]!.tooltip!, 'championAbility', { abilityVariant: jax.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: jax.allAbilityVariants.value, damageSource: jax }, undefined, { isExtended: true });
 		assert.strictEqual(jaxPassive.anyExtendedVariables, true);
 		assertMetaSuffix('MaxBonusAttackSpeed', '<scalelevel>40% - 100%</scalelevel>%i:scalelevel%', jaxPassive);
+
+		const amumu = await setupDamageSource(fixture, 'Amumu', { abilityLevels: { w: 2 } });
+		const amumuW = replaceGameVariables(amumu.champion.value!.abilities.w.variants[0]!.tooltip!, 'championAbility', { abilityVariant: amumu.champion.value!.abilities.w.variants[0]!, allAbilitiesVariants: amumu.allAbilityVariants.value, damageSource: amumu, abilityLevel: amumu.abilityLevels.value.w }, undefined, { isExtended: true });
+		assertMetaSuffix('TotalHealthDamage', '<const>1.25</const> <scaleap>+ 0.5%</scaleap>%i:scaleap%', amumuW);
 	});
 });

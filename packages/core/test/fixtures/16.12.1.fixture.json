@@ -26,6 +26,67 @@
 				"attackspeedratio": 0.625
 			}
 		},
+		"Amumu": {
+			"abilities": {
+				"w": {
+					"maxLevel": 5,
+					"variants": [
+						{
+							"name": "Despair",
+							"objectName": "AuraofDespair",
+							"dataKey": "Characters/Amumu/Spells/AuraofDespairAbility/AuraofDespair",
+							"image": "assets/characters/amumu/hud/icons2d/amumu_w.png",
+							"mana": [8, 8, 8, 8, 8, 8],
+							"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
+							"tooltip": "<toggle>Toggle:</toggle> Amumu begins crying, dealing <magicDamage>@BaseDamage@ plus @TotalHealthDamage@% max Health magic damage</magicDamage> to nearby enemies every second and refreshing <keywordMajor>Curse</keywordMajor>.",
+							"extendedVariables": [
+								{
+									"name": "HealthDamage",
+									"nameOverride": "spell_listtype_percenthealthdamage"
+								}
+							],
+							"dataValues": {
+								"BaseDamage": [10, 10, 10, 10, 10, 10, 10],
+								"HealthDamage": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25],
+								"APRatio": [0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005]
+							},
+							"spellCalculations": {
+								"{c8e45bc3}": {
+									"mMultiplier": {
+										"mNumber": 0.5
+									},
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamage",
+											"__type": "NamedDataValueCalculationPart"
+										}
+									]
+								},
+								"TotalHealthDamage": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "HealthDamage",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									],
+									"mPrecision": 2
+								},
+								"{8a96509c}": {
+									"mMultiplier": {
+										"mNumber": 0.005
+									},
+									"mModifiedGameCalculation": "TotalHealthDamage"
+								}
+							}
+						}
+					]
+				}
+			}
+		},
 		"Briar": {
 			"stats": {
 				"hp": 625,
