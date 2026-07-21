@@ -63,8 +63,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] extras shared component like is out combat (youmuu, cloud stack isooc) try to scan internal properties then if detected override component, ideally list the things affected
   - [x] mirror layout
   - [x] expand scoreboard item double click to expand/collapse
-  - [ ] drag indicator next to buttons?
-  - [ ] drag with champion icon?
+  - [x] drag with champion icon?
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
   - [x] source vs target column headers
@@ -90,7 +89,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] wider columns initially, shrink slightly as more are added
   - [x] move add section to the top
   - [x] effect sections with actual calculated values
-  - [ ] add option to remove stats/basic attack sections if more feedback
+  - [?] add option to remove stats/basic attack sections if more feedback
+  - [?] custom value section
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
   - [ ] custom value row, choose type input own value
@@ -160,7 +160,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champion effects
   - [ ] other effects
   - [ ] basic attack damage
-  - [ ] damage multipliers (immortal path, haunting guise items - try to merge vars)
+  - [ ] damage multipliers (immortal path, haunting guise items, chemtech soul - try to merge vars)
   - [x] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
   - [x] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
   - [x] DamageSource.internalData set from utils/champion.ts

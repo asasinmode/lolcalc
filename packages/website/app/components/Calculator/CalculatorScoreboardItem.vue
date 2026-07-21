@@ -975,6 +975,7 @@ defineExpose({ el });
 			<button
 				title="select champion"
 				@click="selectChampion(value.listedChampion)"
+				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 			>
 				<span>
 					{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
