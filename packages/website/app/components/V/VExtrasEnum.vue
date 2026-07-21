@@ -65,7 +65,7 @@ function updateValue(event: Event) {
 		}
 
 		> select {
-			--at-apply: 'box-content h-min min-w-[8ch] px-1 py-0.5 row-span-2 bg-white text-black';
+			--at-apply: 'box-content h-min px-1 py-0.5 row-span-2 bg-white text-black col-span-2';
 			color-scheme: light;
 
 			> option {
