@@ -2,7 +2,7 @@ import type { IChampionStatName, IEffectObjectName, IItemCategory, TItemNameToId
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
 import type { IItemShopStatFilter } from './meta';
-import type { IChampion, IChampionId, IDragonName, IItem, IItemStat, IListedChampion, IRunes, IRuneSlotName } from './types';
+import type { IChampion, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IItemStat, IListedChampion, IRunes, IRuneSlotName } from './types';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { markRaw } from 'vue';
 import championData from '../files/champion.json' with { type: 'json' };
@@ -98,7 +98,12 @@ export interface IEffectData extends Record<string, ({
 } | {
 	dataKey: string;
 	stringtable: string;
-})> {};
+} | ({
+	dataKey: string;
+	sharedSpellObjectKey: string;
+	objectName: string;
+	description: string;
+} & Pick<IChampionAbilityVariant, 'name' | 'image' | 'dataValues' | 'spellCalculations'>))> {};
 
 export function resolveEffectDescription(effectObjectName: IEffectObjectName): string | undefined {
 	const source = (EFFECTS as TEffects)[effectObjectName];

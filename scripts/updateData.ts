@@ -764,7 +764,7 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 			category: 'misc',
 			key: `dragon soul ${name}`,
 			variables: {
-				variableSourceKeys: ['DataValues'],
+				variableSourceKeys: ['dataValues'],
 				variableType: 'championAbility',
 				variableValueParameters: { abilityVariant: soulAbility, allAbilitiesVariants: allSpells, dynamicVariables: (DRAGONS as IHypotheticalDragonSpecifics)[name]?.soul?.variables },
 			},
@@ -1074,23 +1074,85 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${customEffect.sharedSpellObjectKey}" not found in shared data`);
 					}
 
-					let description: string | undefined;
-
 					if (sharedSpell.mBuff?.mDescription) {
-						description = getStringtableValue(sharedSpell.mBuff.mDescription, `custom effect ${effectObjectName} description`);
+						let description = getStringtableValue(sharedSpell.mBuff.mDescription, `custom effect ${effectObjectName} description`)!;
+
+						description &&= extractEffectDescription(description);
+
+						if (!description) {
+							throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" description stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
+						}
+
+						return [effectObjectName, {
+							dataKey: effectObjectName,
+							sharedSpellObjectKey: customEffect.sharedSpellObjectKey,
+							objectName: sharedSpell.ObjectName,
+							description,
+						}];
 					}
 
-					description &&= extractEffectDescription(description);
-
-					if (!description) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
-					}
-
-					return [effectObjectName, {
+					const effectData: Extract<IEffectData[string], { sharedSpellObjectKey: string }> = {
 						dataKey: effectObjectName,
 						sharedSpellObjectKey: customEffect.sharedSpellObjectKey,
-						description,
-					}];
+						objectName: sharedSpell.ObjectName,
+						name: '',
+						description: '',
+						image: '',
+						dataValues: undefined,
+						spellCalculations: undefined,
+					};
+
+					if (!sharedSpell.mSpell) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" mSpell not found in shared spell "${customEffect.sharedSpellObjectKey}" object`);
+					}
+
+					const { mImgIconName, DataValues, mSpellCalculations, mClientData } = sharedSpell.mSpell;
+
+					if (!mClientData) {
+						throw new Error(`${effectObjectName} expected mClientData in shared spell`);
+					}
+					if (!mClientData.mTooltipData) {
+						throw new Error(`${effectObjectName} expected mTooltipData in shared spell`);
+					}
+					if (!mImgIconName?.[0]) {
+						throw new Error(`${effectObjectName} expected mImgIconName in shared spell`);
+					}
+
+					effectData.image = `assets/spells/icons2d/${mImgIconName[0].replace('.dds', '.png')}`;
+					effectData.dataValues = DataValues?.length
+						? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) =>
+								[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
+							))
+						: undefined;
+					effectData.spellCalculations = cleanupObject(mSpellCalculations);
+
+					const variables: IBaseStringtableVariableDebug<'championAbility'>['variables'] = {
+						variableType: 'championAbility',
+						variableValueParameters: {
+							abilityVariant: effectData,
+							allAbilitiesVariants: [],
+						},
+						variableSourceKeys: [],
+					};
+
+					effectData.name = mClientData?.mTooltipData?.mLocKeys?.keyName && getStringtableValue(mClientData.mTooltipData.mLocKeys.keyName, {
+						category: 'effect',
+						key: `${effectObjectName} name`,
+						stringtableVariableSaveUnder: effectDataStringtable,
+						variables,
+					});
+					effectData.description = mClientData?.mTooltipData?.mLocKeys?.keyTooltip && getStringtableValue(mClientData.mTooltipData.mLocKeys.keyTooltip, {
+						category: 'effect',
+						key: `${effectObjectName} tooltip`,
+						stringtableVariableSaveUnder: effectDataStringtable,
+						variables,
+					});
+
+					if (!(effectData.description && effectData.name)) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" name/description not resolved from stringtable`);
+					}
+
+					return [effectObjectName, effectData];
 				} else {
 					return [effectObjectName, { dataKey: effectObjectName, ...customEffect }];
 				}
@@ -1459,7 +1521,7 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType> {
 	stringtableVariableSaveUnder?: { stringtable?: Record<string, string> };
 }
 
-function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug, optional?: boolean) {
+function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug, optional?: boolean): string | undefined {
 	const value = stringtable[path.toLowerCase()] || stringtable[hashXxh3(path, 38)];
 	if (!optional && !value) {
 		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);

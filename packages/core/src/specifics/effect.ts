@@ -27,6 +27,16 @@ const MeleeRangedEnumOptions = {
  * order of the keys matters for stringifying game ability id, if it changes it could warrant updating stringified state version
  */
 export const EFFECT_SPECIFICS = {
+	[EFFECT_OBJECT_NAME.ghost]: defineEffectSpecific<[ghost: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost),
+		label: 'Ghost',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+	}),
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),
 		label: 'Grievous Wounds',
@@ -730,6 +740,9 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
 	},
 	/* other */
+	[EFFECT_OBJECT_NAME.ghost]: {
+		sharedSpellObjectKey: 'Shared/Spells/SummonerHaste',
+	},
 	[EFFECT_OBJECT_NAME.grievousWounds]: {
 		sharedSpellObjectKey: 'Shared/Spells/GrievousWound',
 	},

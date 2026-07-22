@@ -622,6 +622,7 @@ export const EFFECT_OBJECT_NAME = {
 	ornnPLivingForge: 'lolcalcOrnnPassive',
 	rellPBreakMold: 'RellP_Debuff',
 	/* other */
+	ghost: 'summonerHaste',
 	grievousWounds: 'lolcalcGrievousWounds',
 	grievousWoundsPercent: 'lolcalcGrievousWoundsPercent',
 	stun: 'lolcalcStun',

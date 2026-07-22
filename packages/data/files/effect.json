@@ -1,14 +1,49 @@
 {
 	"version": "16.14.1",
 	"data": {
+		"summonerHaste": {
+			"dataKey": "summonerHaste",
+			"sharedSpellObjectKey": "Shared/Spells/SummonerHaste",
+			"objectName": "SummonerHaste",
+			"name": "Ghost",
+			"description": "Gain <speed>@MovespeedMod@ Move Speed</speed> and become <keyword>Ghosted</keyword> for @Duration@ seconds.<br><br>{{ Item_KeywordDefinition_Ghost }}",
+			"image": "assets/spells/icons2d/Summoner_haste.png",
+			"dataValues": {
+				"Duration": [10, 10, 10, 10, 10, 10, 10]
+			},
+			"spellCalculations": {
+				"MoveSpeedMod": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.24,
+							"mEndValue": 0.48,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{7bcbbf47}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 4,
+							"mEndValue": 7,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				}
+			}
+		},
 		"lolcalcGrievousWounds": {
 			"dataKey": "lolcalcGrievousWounds",
 			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
+			"objectName": "GrievousWound",
 			"description": "This unit receives reduced healing."
 		},
 		"lolcalcGrievousWoundsPercent": {
 			"dataKey": "lolcalcGrievousWoundsPercent",
 			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
+			"objectName": "GrievousWound",
 			"description": "This unit receives reduced healing."
 		},
 		"lolcalcStun": {
@@ -137,6 +172,7 @@
 		}
 	},
 	"stringtable": {
+		"item_keyworddefinition_ghost": "<keyword>Ghost</keyword>: Ignore collision with other units.",
 		"game_buff_tooltip_slow": "This unit's Move Speed is slowed."
 	}
 }
