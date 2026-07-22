@@ -89,8 +89,9 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.slowFlat),
 		label: 'Slow (flat)',
 		minValue: 0,
+		maxValue: Number.POSITIVE_INFINITY,
 		setupData(data) {
-			return [Math.min(0, data?.[0] ?? 0)];
+			return [Math.max(0, data?.[0] ?? 0)];
 		},
 		isActive(data) {
 			return data[0];
@@ -104,8 +105,9 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.slowPercent),
 		label: 'Slow (percent)',
 		minValue: 0,
+		maxValue: Number.POSITIVE_INFINITY,
 		setupData(data) {
-			return [Math.min(0, data?.[0] ?? 0)];
+			return [Math.max(0, data?.[0] ?? 0)];
 		},
 		isActive(data) {
 			return data[0];
@@ -558,6 +560,9 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data) {
+			return data[0];
+		},
+		imgText(data) {
 			return data[0];
 		},
 		setupDataFromSourceItem(damageSource) {

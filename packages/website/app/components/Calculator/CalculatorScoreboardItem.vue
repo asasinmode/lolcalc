@@ -876,7 +876,7 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
 
 	const min = computedEffect.specific.minValue ?? 0;
-	const max = computedEffect.maxValue;
+	const max = computedEffect.maxValue ?? 1;
 
 	if (globalKeyModifiers.value.ctrl) {
 		if (globalKeyModifiers.value.shift) {
