@@ -1256,6 +1256,7 @@ defineExpose({ el });
 				<LolEffectHoverTooltip
 					ref="effectHoverTooltip"
 					:ability-id="hoveredEffectId"
+					:damage-source="value"
 				/>
 			</section>
 			<section ref="abilities" data-abilities="" :inert="isLoading">

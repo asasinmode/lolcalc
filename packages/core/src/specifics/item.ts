@@ -68,7 +68,7 @@ const gluttonousGreavesSpecific = {
 		calculate(self) {
 			return {
 				Omnivamp: {
-					value: self.stats.value.variables.gluttonousImmortalOmnivamp,
+					value: self.stats.value.variables.gluttonousImmortalOmnivamp ?? 0,
 				},
 			};
 		},

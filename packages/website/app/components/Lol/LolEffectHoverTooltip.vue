@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IComputedAbilityDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
+import type { IComputedAbilityDescription, IComputedEffectDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
@@ -60,7 +60,7 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 		return computeAbilityDescription(
 			champion.value,
 			sourceAbilityId.value,
-			props.damageSource,
+			undefined,
 			{ overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[id]?.variables) },
 		);
 	}
@@ -68,14 +68,14 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 	const item = ITEMS[id]!;
 	return computeItemDescription(
 		item,
-		props.damageSource,
+		undefined,
 		{ overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables) },
 	);
 });
 
-const computedDescription = computed((): string | undefined => {
+const computedDescription = computed((): IComputedEffectDescription | undefined => {
 	if (props.abilityId) {
-		return computeEffectDescription(props.abilityId.id);
+		return computeEffectDescription(props.abilityId.id, props.damageSource);
 	}
 	return undefined;
 });
@@ -97,7 +97,8 @@ defineExpose({ el });
 				class="game-description"
 				v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'"
 			/>
-			<div class="game-description" v-html="computedDescription" />
+			<div class="game-description" v-html="(globalKeyModifiers.shift && computedDescription?.tooltipExtended) || computedDescription?.tooltip" />
+			<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
 			<footer v-if="precomputedDescription" v-show="!globalKeyModifiers.shift">
 				Hold <kbd>[Shift]</kbd> to show source
 			</footer>

@@ -1566,13 +1566,50 @@ function abilityVariantText(
 	};
 }
 
-// TODO
-export function computeEffectDescription(effectObjectName: IEffectObjectName): string | undefined {
+export interface IComputedEffectDescription {
+	tooltip: string;
+	tooltipExtended?: string;
+	anyUnknownVariables?: number;
+	anyExtendedVariableInfo?: boolean;
+}
+
+export function computeEffectDescription(
+	effectObjectName: IEffectObjectName,
+	damageSource?: DamageSource,
+	replaceOptions?: IReplaceGameVariablesOptions,
+): IComputedEffectDescription {
 	const source = (EFFECTS as TEffects)[effectObjectName];
 	if ('stringtable' in source) {
-		return EFFECTS_STRINGTABLE[source.stringtable];
+		return {
+			tooltip: EFFECTS_STRINGTABLE[source.stringtable]!,
+		};
+	} else if ('objectName' in source) {
+		const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(source.description, EFFECTS_STRINGTABLE);
+
+		const tooltip = replaceGameVariables(stringtableReplaced, 'championAbility', {
+			abilityVariant: source,
+			damageSource,
+			isRanged: damageSource?.stats.value.isRanged,
+		}, undefined, replaceOptions);
+
+		const tooltipExtended = tooltip.anyExtendedVariables
+			? replaceGameVariables(stringtableReplaced, 'championAbility', {
+					abilityVariant: source,
+					damageSource,
+					isRanged: damageSource?.stats.value.isRanged,
+				}, undefined, { ...replaceOptions, isExtended: true })
+			: undefined;
+
+		return {
+			tooltip: replaceGameIcons(tooltip.replaced),
+			tooltipExtended: tooltipExtended?.replaced ? replaceGameIcons(tooltipExtended.replaced) : undefined,
+			anyUnknownVariables: unknownStringtableVariables.size || tooltip.unknownVariables.length || tooltipExtended?.unknownVariables.length,
+			anyExtendedVariableInfo: tooltip.anyExtendedVariables,
+		};
 	} else {
-		return source.description;
+		return {
+			tooltip: source.description!,
+		};
 	}
 }
 
