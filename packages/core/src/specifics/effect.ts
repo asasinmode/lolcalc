@@ -704,7 +704,7 @@ const slowEffectDescriptionObj = {
 };
 
 /** `effect.json` values for purely custom effects - if an effectObjectName has this specified, it will be put in `effect.json` during `scripts/updateData` */
-export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | { objectName: string } | string>> = {
+export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | { objectName: string } | { sharedSpellObjectKey: string } | string>> = {
 	/* items */
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
@@ -731,10 +731,10 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	},
 	/* other */
 	[EFFECT_OBJECT_NAME.grievousWounds]: {
-		stringtable: 'game_buff_tooltip_grievouswound',
+		sharedSpellObjectKey: 'Shared/Spells/GrievousWound',
 	},
 	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: {
-		stringtable: 'game_buff_tooltip_grievouswound',
+		sharedSpellObjectKey: 'Shared/Spells/GrievousWound',
 	},
 	[EFFECT_OBJECT_NAME.stun]: {
 		description: 'This unit is <keyword>stunned</keyword>.',

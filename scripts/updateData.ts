@@ -1022,8 +1022,9 @@ try {
 if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {
 	console.log('effect data not present or outdated, fetching...');
 
-	const [itemMoreData] = await Promise.all([
+	const [itemMoreData, sharedSpellsData] = await Promise.all([
 		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`, 'game/items.cdtb.bin.json'),
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/shared.cdtb.bin.json`, 'game/shared.cdtb.bin.json'),
 		loadStringTable(),
 	]);
 
@@ -1065,6 +1066,30 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 					return [effectObjectName, {
 						dataKey: effectObjectName,
 						stringtable: customEffect.stringtable,
+					}];
+				} else if ('sharedSpellObjectKey' in customEffect) {
+					const sharedSpell = sharedSpellsData[customEffect.sharedSpellObjectKey];
+
+					if (!sharedSpell) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${customEffect.sharedSpellObjectKey}" not found in shared data`);
+					}
+
+					let description: string | undefined;
+
+					if (sharedSpell.mBuff?.mDescription) {
+						description = getStringtableValue(sharedSpell.mBuff.mDescription, `custom effect ${effectObjectName} description`);
+					}
+
+					description &&= extractEffectDescription(description);
+
+					if (!description) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
+					}
+
+					return [effectObjectName, {
+						dataKey: effectObjectName,
+						sharedSpellObjectKey: customEffect.sharedSpellObjectKey,
+						description,
 					}];
 				} else {
 					return [effectObjectName, { dataKey: effectObjectName, ...customEffect }];

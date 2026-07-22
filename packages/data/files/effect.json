@@ -3,11 +3,13 @@
 	"data": {
 		"lolcalcGrievousWounds": {
 			"dataKey": "lolcalcGrievousWounds",
-			"stringtable": "game_buff_tooltip_grievouswound"
+			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
+			"description": "This unit receives reduced healing."
 		},
 		"lolcalcGrievousWoundsPercent": {
 			"dataKey": "lolcalcGrievousWoundsPercent",
-			"stringtable": "game_buff_tooltip_grievouswound"
+			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
+			"description": "This unit receives reduced healing."
 		},
 		"lolcalcStun": {
 			"dataKey": "lolcalcStun",
@@ -135,7 +137,6 @@
 		}
 	},
 	"stringtable": {
-		"game_buff_tooltip_grievouswound": "This unit receives reduced healing.",
 		"game_buff_tooltip_slow": "This unit's Move Speed is slowed."
 	}
 }
