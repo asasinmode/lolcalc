@@ -1,7 +1,10 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IItem } from '@lolcalc/data/types.js';
 import test from 'node:test';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.14.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -238,6 +241,33 @@ test('Hecarim', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 72,
 			moveSpeed: 354,
+		}, damageSource);
+	});
+
+	await t.test('ghost', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...sourceCommon,
+			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 82,
+			moveSpeed: 432,
+		}, damageSource);
+	});
+
+	const msItems: IItem[] = [ITEMS_BY_NAME.youmuu, ITEMS_BY_NAME.protoplasmHarness, ITEMS_BY_NAME.deadMansPlate, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.blackCleaver, ITEMS_BY_NAME.experimentalHexplate];
+
+	await t.test('ms items ooc', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...sourceCommon,
+			items: msItems,
+			internalItemData: { shipwrecker: 59, haunt: 1, wStep: 0 } satisfies IInternalItemDataOf<'youmuu' | 'deadMansPlate'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 215,
+			moveSpeed: 416,
 		}, damageSource);
 	});
 });

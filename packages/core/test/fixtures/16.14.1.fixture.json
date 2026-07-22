@@ -180,6 +180,100 @@
 			},
 			"effectAmount": [8, 5, 45, 0.66]
 		},
+		"2524": {
+			"name": "Bandlepipes",
+			"stats": {
+				"FlatSpellBlockMod": 20,
+				"FlatHPPoolMod": 200,
+				"FlatArmorMod": 20,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"EnemyDetectRange": 400,
+				"Duration": 8,
+				"MeleeAuraAttackSpeed": 0.3,
+				"AuraRange": 900,
+				"ASDuration": 1,
+				"MoveSpeed": 20,
+				"RangedAttackSpeedMultiplier": 0.667
+			},
+			"itemCalculations": {
+				"BuffDuration": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Duration",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				},
+				"AuraAttackSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeAuraAttackSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "RangedAttackSpeedMultiplier"
+					}
+				}
+			},
+			"__replacedVariables": {
+				"{eb8d750f}": "MeleeAuraAttackSpeed",
+				"{ca6deae2}": "RangedAttackSpeedMultiplier"
+			}
+		},
+		"2525": {
+			"name": "Protoplasm Harness",
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"Duration": 5,
+				"MSAmount": 0.1,
+				"TenacityAmount": 0.25,
+				"Cooldown": 90,
+				"SizeIncrease": 0.15
+			},
+			"itemCalculations": {
+				"TotalHealthRegen": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 400,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxHealthGain": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 300,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3065": {
 			"name": "Spirit Visage",
 			"stats": {
@@ -191,6 +285,22 @@
 			"dataValues": {
 				"HealingIncrease": 0.25,
 				"ShieldIncrease": 0.25
+			}
+		},
+		"3071": {
+			"name": "Black Cleaver",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatPhysicalDamageMod": 40,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"DebuffDuration": 6,
+				"MoveSpeedBonus": 20,
+				"MoveSpeedDuration": 2,
+				"InternalCD": 0.01,
+				"MaxStacks": 5,
+				"ShredPerStack": 0.06
 			}
 		},
 		"3072": {
@@ -220,6 +330,36 @@
 				}
 			}
 		},
+		"3073": {
+			"name": "Experimental Hexplate",
+			"stats": {
+				"FlatHPPoolMod": 450,
+				"FlatPhysicalDamageMod": 40,
+				"PercentAttackSpeedMod": 0.2
+			},
+			"dataValues": {
+				"UltimateHaste": 30,
+				"MovementSpeedBonus": 0.2,
+				"HasteDuration": 8,
+				"Cooldown": 30,
+				"BonusASRanged": 35,
+				"BonusASMelee": 50,
+				"BonusMSRanged": 14,
+				"BonusMSMelee": 20
+			},
+			"stringCalculations": {
+				"BonusAS": {
+					"MeleeResult": "@BonusASMelee@",
+					"RangedResult": "@BonusASRanged@",
+					"DefaultResult": "@BonusASMelee@"
+				},
+				"BonusMS": {
+					"MeleeResult": "@BonusMSMelee@",
+					"RangedResult": "@BonusMSRanged@",
+					"DefaultResult": "@BonusMSMelee@"
+				}
+			}
+		},
 		"3139": {
 			"name": "Mercurial Scimitar",
 			"stats": {
@@ -233,6 +373,51 @@
 				"MoveSpeed": 0.5
 			},
 			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0]
+		},
+		"3142": {
+			"name": "Youmuu's Ghostblade",
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"PercentMovementSpeedMod": 0.04,
+				"PhysicalLethality": 18
+			},
+			"dataValues": {
+				"LethalityAmount": 18,
+				"CombatTimer": 3,
+				"Cooldown": 45,
+				"MeleeItemCalcValueB": 20,
+				"RangedItemCalcValueB": 15,
+				"DurationNDV": 6,
+				"OOCMSndv": 20,
+				"BaseOOCMS": 20
+			},
+			"itemCalculations": {
+				"Duration": {
+					"mFormulaParts": [
+						{
+							"mNumber": 6,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.667
+					}
+				},
+				"OOCMS": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseOOCMS",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
+			},
+			"__replacedVariables": {
+				"{74ac7847}": "BaseOOCMS"
+			}
 		},
 		"3146": {
 			"name": "Hextech Gunblade",
@@ -399,6 +584,43 @@
 				"MaxStacks": 10,
 				"DamageMod": 0.04,
 				"HealingMod": 0.12
+			}
+		},
+		"3742": {
+			"name": "Dead Man's Plate",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 55,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"MaxMovementSpeed": 20,
+				"MaxStacks": 100,
+				"BonusDamagePerStack": 0.4,
+				"MaxStacksADRatio": 1,
+				"DurationToMaxStack": 4,
+				"SlowResistTooltip": 0.15
+			},
+			"itemCalculations": {
+				"MaxDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "MaxStacksADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mPart1": {
+								"mDataValue": "BonusDamagePerStack"
+							},
+							"mPart2": {
+								"mNumber": 100
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
 			}
 		}
 	},

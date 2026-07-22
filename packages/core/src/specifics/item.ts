@@ -1422,6 +1422,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
 					const { MaxStacks, MaxMovementSpeed } = ITEMS_BY_NAME.deadMansPlate?.dataValues ?? {};
+					/* either the numbers in the game of the current stacks are wrong or the scaling isn't linear but it's not a priority at the moment so keeping it linear */
 					calculatedVariables.deadMansMoveSpeed = MaxMovementSpeed * (self.internalItemData.value as IInternalItemDataOf<'deadMansPlate'>).shipwrecker / MaxStacks;
 					itemPassivesStats.moveSpeed += calculatedVariables.deadMansMoveSpeed;
 					itemPassivesStats.slowResist = addMultiplicative(itemPassivesStats.slowResist, ITEMS_BY_NAME.deadMansPlate?.dataValues.SlowResistTooltip);
