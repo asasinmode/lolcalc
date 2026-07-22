@@ -1175,17 +1175,24 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
-	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], _whole, meta) {
+	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], whole, meta) {
 		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
-		const { mNumber } = variable.mSubpart;
 
-		if (mNumber !== undefined) {
+		let multiplier;
+
+		if ('mBreakpoints' in variable.mSubpart) {
+			multiplier = VARIABLE_CALCULATION_FNS.ByCharLevelBreakpointsCalculationPart(variable.mSubpart, whole, meta).value as number;
+		} else if ('mNumber' in variable.mSubpart) {
+			multiplier = variable.mSubpart.mNumber;
+		}
+
+		if (typeof multiplier === 'number') {
 			if (statValue !== undefined) {
 				return {
-					value: statValue.value * mNumber,
+					value: statValue.value * multiplier,
 					roundReplaced: true,
 					calculatesFrom: [{
-						value: mNumber,
+						value: multiplier,
 						isPercentage: true,
 						stat: statValue.stat as ICalculatesFromPart['stat'],
 						type: statValue.type,
@@ -1193,7 +1200,7 @@ export const VARIABLE_CALCULATION_FNS = {
 				};
 			} else {
 				return {
-					value: mNumber,
+					value: multiplier,
 				};
 			}
 		}
@@ -1359,7 +1366,7 @@ interface IGameVariablesByType {
 		mStat: number;
 		mSubpart: {
 			mNumber: number;
-		};
+		} | IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'];
 		__type: string;
 	};
 	SumOfSubPartsCalculationPart: {

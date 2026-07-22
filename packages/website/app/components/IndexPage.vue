@@ -116,12 +116,8 @@ const resultSections = ref<IDamageResultTableSection[]>([
 			},
 		]),
 		getCellValue() {
-			// TODO return 0
 			console.warn('results section custom total \'getCellValue\' called, should be handled manually');
-			const value = Math.round(Math.random() * 500);
-			const numberValue = value;
-
-			return { value: numberValue, numberValue };
+			return { value: 0, numberValue: 0 };
 		},
 	},
 ]) as unknown as ShallowRef<IDamageResultTableSection[]>;
