@@ -1420,10 +1420,10 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }) {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
 					const { MaxStacks, MaxMovementSpeed } = ITEMS_BY_NAME.deadMansPlate?.dataValues ?? {};
-					// TODO verify with the game
-					itemPassivesStats.moveSpeed += MaxMovementSpeed * (self.internalItemData.value as IInternalItemDataOf<'deadMansPlate'>).shipwrecker / MaxStacks;
+					calculatedVariables.deadMansMoveSpeed = MaxMovementSpeed * (self.internalItemData.value as IInternalItemDataOf<'deadMansPlate'>).shipwrecker / MaxStacks;
+					itemPassivesStats.moveSpeed += calculatedVariables.deadMansMoveSpeed;
 					itemPassivesStats.slowResist = addMultiplicative(itemPassivesStats.slowResist, ITEMS_BY_NAME.deadMansPlate?.dataValues.SlowResistTooltip);
 				},
 			},

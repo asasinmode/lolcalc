@@ -213,6 +213,8 @@ export interface IStatsCalculationVariables {
 	spiritVisageHSMult?: number;
 	/** healing multiplier from Briar's passive, TODO check how it works on life steal/heals */
 	briarHealingMult?: number;
+	/** movement speed gained from dead man's plate passive */
+	deadMansMoveSpeed?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
