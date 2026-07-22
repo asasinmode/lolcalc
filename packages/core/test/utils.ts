@@ -1,14 +1,15 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IMiscData } from '@lolcalc/data';
+import type { IEffectData, IMiscData } from '@lolcalc/data';
 import type { IChampion, IChampionId, IDragonName, IItem } from '@lolcalc/data/types';
 import assert from 'node:assert';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import { CHAMPIONS, ITEMS, MISC } from '@lolcalc/data';
+import { CHAMPIONS, EFFECTS, ITEMS, MISC } from '@lolcalc/data';
 
 interface IPatchOverridesFixture {
 	version: string;
 	champions: Partial<Record<IChampionId, Partial<Omit<IChampion, 'abilities'>> & { abilities?: Partial<IChampion['abilities']> }>>;
 	items: Record<string, Partial<IItem>>;
+	effects: IEffectData;
 	/** dragon fixture's type allows partial but the test will crash if it's trying to use a dragon that's not fixtured. It's intended */
 	misc?: { roleQuests: Partial<IMiscData['roleQuests']> } & Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>>;
 }
@@ -43,9 +44,8 @@ export function setupPatchFixture(fixture: IPatchOverridesFixture) {
 			console.warn('[setupItems] unknown item specified in fixture', item, fixture.version);
 		}
 	}
-	if (fixture.misc) {
-		Object.assign(MISC, fixture.misc);
-	}
+	fixture.misc && Object.assign(MISC, fixture.misc);
+	fixture.effects && Object.assign(EFFECTS, fixture.effects);
 }
 
 export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, damageSource?: DamageSource, message: string = '') {

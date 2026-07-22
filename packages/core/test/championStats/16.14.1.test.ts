@@ -219,3 +219,25 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 		});
 	});
 });
+
+test('Hecarim', async (t) => {
+	const sourceCommon: IOverrides<'Hecarim'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'movementspeed',
+				defensive: 'health',
+			},
+		},
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 72,
+			moveSpeed: 354,
+		}, damageSource);
+	});
+});
