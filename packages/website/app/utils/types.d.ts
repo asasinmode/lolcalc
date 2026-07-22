@@ -99,6 +99,7 @@ export interface IItemDescriptionProps {
 	item?: IItem;
 	hoverTooltip?: boolean;
 	source: IItemHoverTooltipView;
+	showMasterwork?: boolean;
 }
 
 export interface IExtraComponentProps {

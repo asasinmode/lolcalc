@@ -67,6 +67,8 @@ const descriptionText = computed(() => {
 	?? computedDescription.value?.[`tooltipShop${suffix}`];
 });
 
+const isMasterwork = computed(() => props.showMasterwork && isInventoryView.value && computedDescription.value?.isMasterwork);
+
 const header = useTemplateRef<HTMLButtonElement>('header');
 
 defineExpose({ header });
@@ -79,6 +81,7 @@ defineExpose({ header });
 		class="item-description-header"
 		:data-show-subtitles="showHeaderSubtitles || undefined"
 		:data-inventory-view="isInventoryView || undefined"
+		:data-masterwork="isMasterwork ? '' : undefined"
 		@click="$emit('headerClick', $event)"
 		@click.right="$emit('headerRClick', $event)"
 		@dblclick="$emit('headerDblClick', $event)"
@@ -91,7 +94,7 @@ defineExpose({ header });
 			aria-hidden="true"
 			loading="lazy"
 		>
-		<span>{{ computedDescription?.item.name }}</span>
+		<span>{{ computedDescription?.item.name }}{{ isMasterwork ? ` (Masterwork)` : '' }}</span>
 		<span>
 			<span>Sells for:</span>
 			<img
@@ -170,10 +173,10 @@ defineExpose({ header });
 <style>
 @layer components {
 	.item-description-header {
-		--at-apply: 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full mb-2';
+		--at-apply: 'grid text-start gap-x-2 text-xl grid-rows-[auto_min-content] items-center font-500 grid-cols-[auto_1fr] w-full mb-2 pbs-(--pbs,0rem)';
 
 		> img {
-			--at-apply: 'row-span-full size-(--item-img-size)';
+			--at-apply: 'row-span-full size-(--item-img-size) self-start';
 		}
 
 		> span:first-of-type {
@@ -230,6 +233,16 @@ defineExpose({ header });
 
 		> a {
 			--at-apply: 'row-start-1 col-start-3';
+		}
+
+		&[data-masterwork] {
+			> span:nth-of-type(1) {
+				--at-apply: 'text-orange-500';
+			}
+
+			&::after {
+				--at-apply: 'inset-e-0 inset-be-0 inset-bs-(--pbs,0rem) size-(--item-img-size)';
+			}
 		}
 	}
 

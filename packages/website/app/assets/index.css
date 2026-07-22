@@ -282,7 +282,6 @@
 		}
 	}
 
-	/* TODO add masterwork border to hover tooltip in shop when hovering over inventory panel */
 	[data-masterwork] {
 		--at-apply: 'relative';
 

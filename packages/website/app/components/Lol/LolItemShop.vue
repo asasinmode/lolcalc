@@ -314,8 +314,9 @@ const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemH
 let itemTooltipAnchor: undefined | HTMLElement;
 const itemTooltip = useTemplateRef('itemTooltip');
 const hoveredItem = shallowRef<IShopItem>();
+const hoveredItemShowMasterwork = ref(false);
 
-function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem) {
+function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem, showMasterwork = false) {
 	const { target } = eventLike as { target: HTMLElement };
 	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
@@ -323,6 +324,7 @@ function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent
 	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
 	addItemTooltipViewListeners();
 	hoveredItem.value = item;
+	hoveredItemShowMasterwork.value = showMasterwork;
 	'clientX' in eventLike && updateTooltipPosition(eventLike);
 }
 
@@ -883,7 +885,7 @@ defineExpose({
 								:class="targetShopItems[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
 								:data-masterwork="damageSource && isMasterworkSlot(damageSource, i - 1) ? '' : undefined"
 								:draggable="targetShopItems[i - 1] ? 'true' : undefined"
-								@mouseenter="targetShopItems[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
+								@mouseenter="targetShopItems[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!, true)"
 								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true, i - 1)"
 								@click.right="targetShopItems[i - 1] && sellItem($event, i - 1)"
 								@dragstart="onItemDragstart($event, i - 1)"
@@ -928,6 +930,7 @@ defineExpose({
 			<LolItemDescription
 				:item="hoveredItem?.item"
 				:damage-source="damageSource"
+				:show-masterwork="hoveredItemShowMasterwork"
 				header-subtitles
 				hover-tooltip
 				source="Shop"
@@ -1481,7 +1484,7 @@ defineExpose({
 
 		#item-shop-hover-tooltip {
 			--at-apply: 'w-(--width) fixed p-2';
-			--width: 36rem;
+			--width: 40rem;
 			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 		}
@@ -1608,7 +1611,8 @@ defineExpose({
 				}
 
 				> .item-description-header {
-					--at-apply: 'pt-2 mt-3 b-t order-5';
+					--at-apply: 'mt-3 b-t order-5';
+					--pbs: calc(2 * var(--spacing));
 				}
 
 				> .item-description {

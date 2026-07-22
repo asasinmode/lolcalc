@@ -1108,6 +1108,7 @@ defineExpose({ el });
 			<LolItemDescription
 				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
 				source="Inventory"
+				show-masterwork
 				hover-tooltip
 			/>
 		</article>

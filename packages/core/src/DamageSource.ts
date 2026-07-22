@@ -1320,6 +1320,8 @@ export function computeItemDescription(
 
 	const hasAnyInterestingVariables = variables.values().some(variable => !variable.isUninteresting);
 
+	const itemIndex = damageSource?.items.value.findIndex(sourceItem => sourceItem?.id === item.id);
+
 	return {
 		item,
 		variables,
@@ -1339,6 +1341,7 @@ export function computeItemDescription(
 		tooltipShopAnyExtendedVInfo: shopAnyExtendedVariables,
 		tooltipInventoryAnyExtendedVInfo: tooltipInventoryReplaced ? inventoryAnyExtendedVariables : shopAnyExtendedVariables,
 		hasAnyInterestingVariables,
+		isMasterwork: (damageSource && ~itemIndex!) ? isMasterworkSlot(damageSource, itemIndex!) : false,
 	};
 }
 
@@ -1801,8 +1804,8 @@ export function computeDragonAbilityDescription(
 }
 
 export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean {
-	const item = self.computed.items.value[itemIndex];
-	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
+	const item = self.items.value[itemIndex];
+	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.epicness === 5);
 }
 
 function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSource?: { calculateHooks?: ICalculateChampionStatsHookSource }): ICalculateStatsGroupedHooks {
@@ -1953,6 +1956,7 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	footerLeftExtended?: ITextData['items'][keyof ITextData['items']]['footerLeft'];
 	/** if any variable found doesn't have `isUninteresting: true` (which itself is set based on item specifics) */
 	hasAnyInterestingVariables: boolean;
+	isMasterwork?: boolean;
 }
 
 export interface IComputedDragonAbilityDescription {
