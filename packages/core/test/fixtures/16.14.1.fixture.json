@@ -180,6 +180,91 @@
 			},
 			"effectAmount": [8, 5, 45, 0.66]
 		},
+		"2501": {
+			"name": "Overlord's Bloodmail",
+			"stats": {
+				"FlatHPPoolMod": 550,
+				"FlatPhysicalDamageMod": 30
+			},
+			"dataValues": {
+				"HPToADPercentage": 0.025,
+				"MissingHealthAD": 0.12,
+				"MissingHealthThreshold": 0.7
+			},
+			"itemCalculations": {
+				"RemainingHealthThreshold": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": -1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mDataValue": "MissingHealthThreshold",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
+		},
+		"2517": {
+			"name": "Endless Hunger",
+			"stats": {
+				"FlatPhysicalDamageMod": 65,
+				"PercentOmnivampMod": 0.05,
+				"PercentTenacityMod": 0.2
+			},
+			"dataValues": {
+				"OmnivampOnTakedown": 0.15,
+				"OmnivampDuration": 8,
+				"TakedownWindow": 3
+			},
+			"itemCalculations": {
+				"HasteFromADRanged": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"__renamedVariables": {
+					"{87892572}": "HasteFromADRanged",
+					"{e4d9f16b}": "HasteFromADMelee"
+				},
+				"HasteFromADMelee": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.13,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"stringCalculations": {
+				"HasteFromAD": {
+					"MeleeResult": "@HasteFromADMelee@",
+					"RangedResult": "@HasteFromADRanged@",
+					"DefaultResult": "@HasteFromADMelee@"
+				}
+			}
+		},
 		"2524": {
 			"name": "Bandlepipes",
 			"stats": {
@@ -274,6 +359,113 @@
 				}
 			}
 		},
+		"3053": {
+			"name": "Sterak's Gage",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"PercentTenacityMod": 0.2
+			},
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"ShieldDuration": 4.5,
+				"HealthPercent": 0.1,
+				"HealPercent": 0.02,
+				"RangedEffectiveness": 0.6,
+				"ReductionAmount": 0.5,
+				"BaseShieldRatio": 0.6,
+				"HealDuration": 5,
+				"ADtoAD": 0.45,
+				"TimeBeforeDecay": 0.75,
+				"TenacityDuration": 8,
+				"SizeIncrease": 0.1,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "HealPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusShield": {
+					"mMultiplier": {
+						"mBuffName": "{6faa06b7}",
+						"mCoefficient": 1
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+				},
+				"MeleeItemCalcValueB": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValueB": {
+					"mMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mCeiling": 3,
+							"mFloor": 2,
+							"mSubparts": [
+								{
+									"mStat": 31,
+									"mStatFormula": 1,
+									"mSubpart": {
+										"mNumber": 0.01
+									}
+								}
+							],
+							"__type": "ClampSubPartsCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				},
+				"ShieldSize": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "BaseShieldRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "ADtoAD",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3065": {
 			"name": "Spirit Visage",
 			"stats": {
@@ -357,6 +549,38 @@
 					"MeleeResult": "@BonusMSMelee@",
 					"RangedResult": "@BonusMSRanged@",
 					"DefaultResult": "@BonusMSMelee@"
+				}
+			}
+		},
+		"3100": {
+			"name": "Lich Bane",
+			"stats": {
+				"FlatMagicDamageMod": 100,
+				"PercentMovementSpeedMod": 0.06,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"SpellbladeCooldown": 1.5,
+				"LichBaneAPValue": 0.45,
+				"SpellbladeADRatio": 0.75,
+				"SheenASBuff": 0.5,
+				"Cooldown": 1.5,
+				"SpellBladeDuration": 10
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SpellbladeADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "LichBaneAPValue",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
 				}
 			}
 		},
@@ -584,6 +808,42 @@
 				"MaxStacks": 10,
 				"DamageMod": 0.04,
 				"HealingMod": 0.12
+			}
+		},
+		"3171": {
+			"name": "Crimson Lucidity",
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"SummonerHaste": 20,
+				"MeleeMS": 0.1,
+				"Duration": 4,
+				"RangedMSMultiplier": 0.8
+			},
+			"itemCalculations": {
+				"MSAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeMS",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "RangedMSMultiplier"
+					}
+				},
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				}
 			}
 		},
 		"3742": {

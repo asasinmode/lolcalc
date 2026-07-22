@@ -285,4 +285,44 @@ test('Hecarim', async (t) => {
 			moveSpeed: 598,
 		}, damageSource);
 	});
+
+	const bloodmailCommon: IOverrides<'Hecarim'> = {
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		level: 18,
+		roleQuest: 'mid',
+		items: [ITEMS_BY_NAME.crimsonLucidity, ITEMS_BY_NAME.youmuu, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.lichBane],
+	};
+
+	await t.test('lvl 18 | bloodmail items | base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...bloodmailCommon,
+			internalItemData: { haunt: 1, wStep: 0 } satisfies IInternalItemDataOf<'youmuu'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 418,
+			abilityPower: 108,
+			abilityHaste: 73,
+			moveSpeed: 444,
+		}, damageSource);
+	});
+
+	await t.test('lvl 18 | bloodmail items | base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...bloodmailCommon,
+			internalItemData: { noxianHaste: 1 } satisfies IInternalItemDataOf<'crimsonLucidity'>,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 422,
+			abilityHaste: 73,
+			moveSpeed: 457,
+		}, damageSource);
+	});
 });
