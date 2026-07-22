@@ -310,6 +310,24 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Hecarim: {
+		calculateHooks: {
+			postTotal: {
+				handler(self, { bonusStats, championPassiveStats, totalStats }) {
+					const bonusAd = championAbilityVariableValue('BonusAD', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: bonusStats } } } as DamageSource });
+
+					if (typeof bonusAd.value === 'number') {
+						championPassiveStats.attackDamage = bonusAd.value;
+						bonusStats.attackDamage += bonusAd.value;
+						totalStats.attackDamage += bonusAd.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS hecarim] failed to calculate passive attack damage', bonusAd);
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal.Hecarim,
+			},
+		},
+	},
 	Heimerdinger: {
 		setupData(self): { isPassiveMSActive: number } {
 			return {

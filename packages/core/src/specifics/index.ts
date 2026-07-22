@@ -31,11 +31,11 @@ export const HOOK_PRIORITIES = {
 	},
 	postTotal: {
 		Ryze: 1,
-		/* should be before bloodmail */
 		Rammus: 1,
+		Hecarim: 1,
 		/* should be last, needs bonus hp */
 		Briar: 100,
-		/* should be after rammus */
+		/* should be after champion passives that affect AD like Rammus/Hecarim */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
 		/* should be after bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
