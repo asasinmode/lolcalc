@@ -1,3 +1,3 @@
 export default defineNuxtPlugin(() => {
-	'serviceWorker' in navigator && navigator.serviceWorker.register('/sw.js');
+	'serviceWorker' in navigator && navigator.serviceWorker.register(`${useRuntimeConfig().app.baseURL}sw.js`);
 });
