@@ -313,7 +313,7 @@ test('Hecarim', async (t) => {
 		}, damageSource);
 	});
 
-	await t.test('lvl 18 | bloodmail items | base', async () => {
+	await t.test('lvl 18 | bloodmail items | crimson lucidity+', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
 			...bloodmailCommon,
 			internalItemData: { noxianHaste: 1 } satisfies IInternalItemDataOf<'crimsonLucidity'>,
@@ -323,6 +323,35 @@ test('Hecarim', async (t) => {
 			attackDamage: 422,
 			abilityHaste: 73,
 			moveSpeed: 457,
+		}, damageSource);
+	});
+
+	await t.test('lvl 18 | bloodmail items | actives', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...bloodmailCommon,
+			internalItemData: { noxianHaste: 1, haunt: 0, wStep: 1 } satisfies IInternalItemDataOf<'crimsonLucidity' | 'youmuu'>,
+			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 458,
+			abilityHaste: 78,
+			moveSpeed: 597,
+		}, damageSource);
+	});
+
+	await t.test('lvl 18 | bloodmail items | partial hp', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...bloodmailCommon,
+			currentHealth: 375,
+			internalItemData: { noxianHaste: 1, haunt: 0, wStep: 1 } satisfies IInternalItemDataOf<'crimsonLucidity' | 'youmuu'>,
+			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 513,
+			abilityHaste: 85,
+			moveSpeed: 597,
 		}, damageSource);
 	});
 });
