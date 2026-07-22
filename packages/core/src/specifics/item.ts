@@ -1131,6 +1131,17 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f1', 'LowHealthThreshold', 'Duration', 'SizeIncrease', 'MSAmount', 'TenacityAmount'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					if ((self.internalItemData.value as IInternalItemDataOf<'protoplasmHarness'>).pHLifeline) {
+						const { MSAmount, TenacityAmount } = ITEMS_BY_NAME.protoplasmHarness?.dataValues ?? {};
+						itemPassivesStats.tenacity = addMultiplicative(itemPassivesStats.tenacity, TenacityAmount);
+						calculatedVariables.totalBonusPercentMoveSpeed += MSAmount;
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.frozenHeart]: {
 		internalDataProperties: ['wCaress'],
