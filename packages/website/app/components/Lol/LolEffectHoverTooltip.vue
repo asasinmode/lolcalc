@@ -6,13 +6,13 @@ import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
-import { computeAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
+import { computeAbilityDescription, computeEffectDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { ITEMS, resolveEffectDescription, useChampion } from '@lolcalc/data';
+import { ITEMS, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
 
@@ -75,7 +75,7 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 
 const computedDescription = computed((): string | undefined => {
 	if (props.abilityId) {
-		return resolveEffectDescription(props.abilityId.id);
+		return computeEffectDescription(props.abilityId.id);
 	}
 	return undefined;
 });

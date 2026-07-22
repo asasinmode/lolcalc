@@ -2,10 +2,10 @@
 import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IEffectObjectName, TAbilityType } from '@lolcalc/shared';
-import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
+import { computeAbilityDescription, computeEffectDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { ITEMS, resolveEffectDescription, useChampion } from '@lolcalc/data';
+import { ITEMS, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
@@ -40,7 +40,7 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
 		const item = ITEMS[sourceAbilityId.id]!;
 
-		const searchString = createSearchString(`${effectSpecific.label};${createSearchString(resolveEffectDescription(effectObjectName))};`).concat(item.searchString);
+		const searchString = createSearchString(`${effectSpecific.label};${createSearchString(computeEffectDescription(effectObjectName))};`).concat(item.searchString);
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
@@ -57,7 +57,7 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
 
-		const searchString = createSearchString(`${effectSpecific.label};${resolveEffectDescription(effectObjectName)}`);
+		const searchString = createSearchString(`${effectSpecific.label};${computeEffectDescription(effectObjectName)}`);
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {

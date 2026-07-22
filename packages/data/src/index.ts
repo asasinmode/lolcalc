@@ -1,4 +1,4 @@
-import type { IChampionStatName, IEffectObjectName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
 import type { IItemShopStatFilter } from './meta';
@@ -104,15 +104,6 @@ export interface IEffectData extends Record<string, ({
 	objectName: string;
 	description: string;
 } & Pick<IChampionAbilityVariant, 'name' | 'image' | 'dataValues' | 'spellCalculations'>))> {};
-
-export function resolveEffectDescription(effectObjectName: IEffectObjectName): string | undefined {
-	const source = (EFFECTS as TEffects)[effectObjectName];
-	if ('stringtable' in source) {
-		return EFFECTS_STRINGTABLE[source.stringtable];
-	} else {
-		return source.description;
-	}
-}
 
 export const TEXT = textData.data satisfies Omit<ITextData, 'stringtable'> as unknown as ITextData;
 

@@ -1,6 +1,6 @@
-import type { ITextData } from '@lolcalc/data';
+import type { ITextData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -14,7 +14,7 @@ import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
 
 import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
-import { CHAMPION_KEY_TO_ID, CHAMPIONS, ICON_COOLDOWN_IMG, ITEMS, MISC, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
+import { CHAMPION_KEY_TO_ID, CHAMPIONS, EFFECTS, EFFECTS_STRINGTABLE, ICON_COOLDOWN_IMG, ITEMS, MISC, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils.ts';
@@ -1564,6 +1564,16 @@ function abilityVariantText(
 		variables,
 		anyExtendedVariables,
 	};
+}
+
+// TODO
+export function computeEffectDescription(effectObjectName: IEffectObjectName): string | undefined {
+	const source = (EFFECTS as TEffects)[effectObjectName];
+	if ('stringtable' in source) {
+		return EFFECTS_STRINGTABLE[source.stringtable];
+	} else {
+		return source.description;
+	}
 }
 
 function objectKeyIndex(key: string | undefined, object: object): string | number {
