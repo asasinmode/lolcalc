@@ -12,16 +12,6 @@
 				"Duration": [10, 10, 10, 10, 10, 10, 10]
 			},
 			"spellCalculations": {
-				"MoveSpeedMod": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 0.24,
-							"mEndValue": 0.48,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
 				"{7bcbbf47}": {
 					"mFormulaParts": [
 						{
@@ -31,6 +21,19 @@
 						}
 					],
 					"mPrecision": 1
+				},
+				"MovespeedMod": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.24,
+							"mEndValue": 0.48,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"__renamedVariables": {
+					"MoveSpeedMod": "MovespeedMod"
 				}
 			}
 		},

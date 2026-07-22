@@ -1132,7 +1132,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 							abilityVariant: effectData,
 							allAbilitiesVariants: [],
 						},
-						variableSourceKeys: [],
+						variableSourceKeys: ['spellCalculations'],
 					};
 
 					effectData.name = mClientData?.mTooltipData?.mLocKeys?.keyName && getStringtableValue(mClientData.mTooltipData.mLocKeys.keyName, {
