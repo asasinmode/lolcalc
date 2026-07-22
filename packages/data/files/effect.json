@@ -7,7 +7,7 @@
 			"objectName": "SummonerHaste",
 			"name": "Ghost",
 			"description": "Gain <speed>@MovespeedMod@ Move Speed</speed> and become <keyword>Ghosted</keyword> for @Duration@ seconds.<br><br>{{ Item_KeywordDefinition_Ghost }}",
-			"image": "assets/spells/icons2d/Summoner_haste.png",
+			"image": "assets/spells/icons2d/summoner_haste.png",
 			"dataValues": {
 				"Duration": [10, 10, 10, 10, 10, 10, 10]
 			},

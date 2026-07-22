@@ -1,7 +1,7 @@
 import type { TAbilityType } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
-import { CHAMPION_IMAGES, imgUrl, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
+import { CHAMPION_IMAGES, EFFECTS, imgUrl, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
 import { replaceGameIcons } from './variables/game.ts';
@@ -24,6 +24,13 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 			64,
 		];
 	} else if (imageAbilityId.type === AbilityType.effect) {
+		const effectData = EFFECTS[imageAbilityId.id];
+		if (effectData && 'image' in effectData) {
+			return [
+				imgUrl(`game/${effectData.image}`),
+				64,
+			];
+		}
 		if (!CUSTOM_EFFECT_IMAGES[imageAbilityId.id]) {
 			console.warn('[gameAbilityImage] no effect image found for', imageAbilityId);
 			return ['', 0];

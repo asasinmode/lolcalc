@@ -1118,7 +1118,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						throw new Error(`${effectObjectName} expected mImgIconName in shared spell`);
 					}
 
-					effectData.image = `assets/spells/icons2d/${mImgIconName[0].replace('.dds', '.png')}`;
+					effectData.image = `assets/spells/icons2d/${mImgIconName[0].toLowerCase().replace('.dds', '.png')}`;
 					effectData.dataValues = DataValues?.length
 						? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) =>
 								[name, values?.length ? values.map(value => formatNumber(value)) : undefined],

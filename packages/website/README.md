@@ -174,6 +174,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)` / note in help page the discrepancy
   - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?
   - [ ] calculate static % values like liandry burn or GA health to?
+  - [ ] exhaust effect
 - [x] update hover tooltips with more calculation info (`= X - Y`) when holding shift
 - [ ] defineSpecific functions for better types
   - [x] effects
