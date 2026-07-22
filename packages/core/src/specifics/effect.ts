@@ -1,16 +1,16 @@
-import type { IEffectData } from '@lolcalc/data';
+import type { IEffectData, TEffects } from '@lolcalc/data';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IReplacedGameVariable } from '../variables/game.ts';
 import type { IInternalItemDataOf, IVariableValueResult } from './index.ts';
-import { ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
+import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
-import { itemVariableValue } from '../variables/game.ts';
+import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
 import { ITEM_SPECIFICS } from './item.ts';
 
@@ -35,6 +35,18 @@ export const EFFECT_SPECIFICS = {
 		},
 		isActive(data) {
 			return data[0];
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _stats, { calculatedVariables }) {
+					const bonusMs = championAbilityVariableValue('MovespeedMod', { abilityVariant: (EFFECTS as TEffects)[EFFECT_OBJECT_NAME.ghost], allAbilitiesVariants: [], damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof bonusMs.value === 'number') {
+						calculatedVariables.totalBonusPercentMoveSpeed += bonusMs.value;
+					} else {
+						console.warn('[EFFECT_SPECIFICS ghost] failed to calculate bonus ms');
+					}
+				},
+			},
 		},
 	}),
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
