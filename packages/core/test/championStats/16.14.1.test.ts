@@ -270,4 +270,19 @@ test('Hecarim', async (t) => {
 			moveSpeed: 416,
 		}, damageSource);
 	});
+
+	await t.test('lvl 6 | ms items | ghost', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...sourceCommon,
+			level: 6,
+			items: msItems,
+			internalItemData: { shipwrecker: 100, haunt: 0, wStep: 1, fanfare: 1, overdrive: 1, carve: 0, fervor: 1 } satisfies IInternalItemDataOf<'youmuu' | 'deadMansPlate' | 'experimentalHexplate' | 'bandlepipes' | 'blackCleaver'>,
+			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 261,
+			moveSpeed: 598,
+		}, damageSource);
+	});
 });
