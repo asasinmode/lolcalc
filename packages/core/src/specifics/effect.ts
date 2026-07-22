@@ -562,9 +562,6 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
-		imgText(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'hextechGunblade'>).lBolt) {
 				return [1];

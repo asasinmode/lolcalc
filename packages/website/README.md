@@ -219,7 +219,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] future features in github project page thingy?
 - [ ] rewrite css classes to selectors with `@apply`
 - [ ] try to generate specific components from data in specific, like effect are?
-- [ ] consider used images "locally" / service worker for caching stuff
+- [x] consider used images "locally" / service worker for caching stuff
 - [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold
 - [ ] automatically generate extended equals, ideally on ITEM_SPECIFICS so it doesn't have to do it on every replace, based on itemCalculations/stringCalculations r smth
 - [ ] kind of a code documentation where yap about
