@@ -831,6 +831,7 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	/* other */
 	[EFFECT_OBJECT_NAME.ghost]: {
 		sharedSpellObjectKey: 'Shared/Spells/SummonerHaste',
+		sharedSpellEffectObjectKey: 'Shared/Spells/Haste',
 	},
 	[EFFECT_OBJECT_NAME.cleanse]: {
 		sharedSpellObjectKey: 'Shared/Spells/SummonerBoost',

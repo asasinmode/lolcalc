@@ -4,9 +4,10 @@
 		"summonerHaste": {
 			"dataKey": "summonerHaste",
 			"sharedSpellObjectKey": "Shared/Spells/SummonerHaste",
+			"sharedSpellEffectObjectKey": "Shared/Spells/Haste",
 			"objectName": "SummonerHaste",
 			"name": "Ghost",
-			"description": "Gain <speed>@MovespeedMod@ Move Speed</speed> and become <keyword>Ghosted</keyword> for @Duration@ seconds.<br><br>{{ Item_KeywordDefinition_Ghost }}",
+			"description": "This unit's Move Speed is increased.",
 			"image": "assets/spells/icons2d/summoner_haste.png",
 			"dataValues": {
 				"Duration": [10, 10, 10, 10, 10, 10, 10]
@@ -36,7 +37,8 @@
 					"MoveSpeedMod": "MovespeedMod"
 				}
 			},
-			"cooldownTime": [240, 240, 240, 240, 240, 240, 240]
+			"cooldownTime": [240, 240, 240, 240, 240, 240, 240],
+			"tooltip": "Gain <speed>@MovespeedMod@ Move Speed</speed> and become <keyword>Ghosted</keyword> for @Duration@ seconds.<br><br>{{ Item_KeywordDefinition_Ghost }}"
 		},
 		"summonerCleanse": {
 			"dataKey": "summonerCleanse",
