@@ -62,12 +62,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	const championPassiveStats: Partial<IChampionStats> = {};
 
-	// atm only frozen heart and these are not automatically added to total, only used for tracking - frozen heart uses onTotalPreMultipliers and totalMultipliersStats
+	// these are not automatically added to total, used for tracking
 	const effectStats: Partial<IChampionStats> = {};
 
 	if (source.calculateStatsHooks.all.value.postInit) {
 		for (const hook of source.calculateStatsHooks.all.value.postInit) {
-			hook(source, { baseStats, bonusStats, championPassiveStats }, { calculatedVariables, miscDebug });
+			hook(source, { baseStats, bonusStats, effectStats, championPassiveStats }, { calculatedVariables, miscDebug });
 		}
 	}
 
@@ -204,7 +204,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
 		if (MULTIPLICATIVE_CHAMPION_STATS.includes(stat as IChampionStatName)) {
-			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(1, runeShardStats[stat as IMultiplicativeChampionStatName], dragonStats[stat as IMultiplicativeChampionStatName], itemTotalStats[stat as IMultiplicativeChampionStatName], championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0);
+			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(1, bonusStats[stat as IMultiplicativeChampionStatName], runeShardStats[stat as IMultiplicativeChampionStatName], dragonStats[stat as IMultiplicativeChampionStatName], itemTotalStats[stat as IMultiplicativeChampionStatName], championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0);
 		} else {
 			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
 				+ (dragonStats[stat as IChampionStatName] ?? 0)
@@ -285,6 +285,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}
 
 	totalStats.attackSpeed = Math.min(totalStats.attackSpeed, calculatedVariables.attackSpeedCap);
+	totalStats.tenacity = Math.min(1, totalStats.tenacity);
 
 	{
 		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;

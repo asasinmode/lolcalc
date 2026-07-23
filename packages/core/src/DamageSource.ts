@@ -2029,6 +2029,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	postInit?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		baseStats: IStatsCalculationResult['base'];
 		bonusStats: IStatsCalculationResult['bonus'];
+		effectStats: IStatsCalculationResult['effect'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
 	}) => void>;
 	/** anything added to `itemPassivesStats` will be added to `itemTotalStats` */

@@ -12,6 +12,7 @@ import { clamp } from '@lolcalc/shared/utils.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
+import { HOOK_PRIORITIES } from './index.ts';
 import { ITEM_SPECIFICS } from './item.ts';
 
 const PLACEHOLDER_REPLACED_GAME_VARIABLE: IReplacedGameVariable = { baseValue: 0, value: 0 };
@@ -59,10 +60,15 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 		calculateHooks: {
-			preItemTotal: {
-				handler(self, _stats, { calculatedVariables }) {
-					// TODO
+			/* done in this hook to freely modify the tenacity of already calculated stats, before this moment they can be manipulated by `calculateChampionStats` */
+			onTotalPreMultipliers: {
+				handler(_self, { effectStats, totalPreMultipliersStats, bonusStats }) {
+					const tenacity = (EFFECTS as TEffects)[EFFECT_OBJECT_NAME.cleanse].dataValues.TenacityValue[1]!;
+					effectStats.tenacity = (effectStats.tenacity ?? 0) + tenacity;
+					bonusStats.tenacity = bonusStats.tenacity + tenacity;
+					totalPreMultipliersStats.tenacity = totalPreMultipliersStats.tenacity + tenacity;
 				},
+				priority: HOOK_PRIORITIES.onTotalPreMultipliers.cleanse,
 			},
 		},
 	}),
