@@ -55,6 +55,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		shieldMult: 1,
 		hpRegenMult: 0,
 		lifeStealOmnivampMult: 0,
+		tenacityBucketB: 1,
 	};
 	const miscDebug: IStatsCalculationMiscDebug = {};
 
@@ -212,6 +213,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 				+ (championPassiveStats[stat as IChampionStatName] ?? 0);
 		}
 	}
+
+	calculatedVariables.tenacityBucketB = 1 - calculatedVariables.tenacityBucketB;
+	bonusStats.tenacity += calculatedVariables.tenacityBucketB;
 
 	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
 		([statName, statValue]) => [

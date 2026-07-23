@@ -9,6 +9,7 @@ import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 import { clamp } from '@lolcalc/shared/utils.ts';
+import { addMultiplicative } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
@@ -60,13 +61,12 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 		calculateHooks: {
-			/* done in this hook to freely modify the tenacity of already calculated stats, before this moment they can be manipulated by `calculateChampionStats` */
-			onTotalPreMultipliers: {
-				handler(_self, { effectStats, totalPreMultipliersStats, bonusStats }) {
-					const tenacity = (EFFECTS as TEffects)[EFFECT_OBJECT_NAME.cleanse].dataValues.TenacityValue[1]!;
-					effectStats.tenacity = (effectStats.tenacity ?? 0) + tenacity;
-					bonusStats.tenacity = bonusStats.tenacity + tenacity;
-					totalPreMultipliersStats.tenacity = totalPreMultipliersStats.tenacity + tenacity;
+			postInit: {
+				handler(_self, _stats, { calculatedVariables }) {
+					calculatedVariables.tenacityBucketB = addMultiplicative(
+						calculatedVariables.tenacityBucketB,
+						(EFFECTS as TEffects)[EFFECT_OBJECT_NAME.cleanse].dataValues.TenacityValue[1]!,
+					);
 				},
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers.cleanse,
 			},
