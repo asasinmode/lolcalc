@@ -139,7 +139,8 @@ test('Cassiopeia ms items & dragons', async (t) => {
 	});
 });
 
-test('Heal, ghost, swiftmarch', async (t) => {
+test.only('Heal, ghost, swiftmarch', async (t) => {
+	t.runOnly(true);
 	const sourceCommon: IOverrides<'Cassiopeia' | 'Amumu'> = {
 		level: 1,
 		runes: {
@@ -155,7 +156,8 @@ test('Heal, ghost, swiftmarch', async (t) => {
 		internalDragonData: { isOOC: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
 	};
 
-	await t.test('Amumu', async (t) => {
+	await t.test('Amumu', { only: true }, async (t) => {
+		t.runOnly(true);
 		await t.test('base', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Amumu', sourceCommon);
 
@@ -178,6 +180,19 @@ test('Heal, ghost, swiftmarch', async (t) => {
 			}, damageSource);
 		});
 
+		await t.test('heal', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Amumu', {
+				...sourceCommon,
+				internalData: { applyPassive: 0 },
+				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] }],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 113,
+				moveSpeed: 520,
+			}, damageSource);
+		});
+
 		await t.test('ghost & heal', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Amumu', {
 				...sourceCommon,
@@ -195,13 +210,79 @@ test('Heal, ghost, swiftmarch', async (t) => {
 		});
 	});
 
-	// await t.test('lvl 1 | summoner spells base', async () => {
-	// 	const damageSource = await setupDamageSource(fixture, 'Cassiopeia', sourceCommon);
+	await t.test('Cassiopeia', { only: true }, async (t) => {
+		t.runOnly(true);
+		await t.test('base no cloud stack', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				internalDragonData: { isOOC: 0 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
+			});
 
-	// 	typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-	// 		attackDamage: 53,
-	// 		abilityPower: 108,
-	// 		moveSpeed: 427,
-	// 	}, damageSource);
-	// });
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 108,
+				moveSpeed: 427,
+			}, damageSource);
+		});
+
+		await t.test('base', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', sourceCommon);
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 109,
+				moveSpeed: 446,
+			}, damageSource);
+		});
+
+		await t.test('ghost', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 113,
+				moveSpeed: 508,
+			}, damageSource);
+		});
+
+		await t.test('heal', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] }],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 114,
+				moveSpeed: 530,
+			}, damageSource);
+		});
+
+		await t.test('heal | lvl 18', { only: true }, async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				level: 18,
+				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] }],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 117,
+				moveSpeed: 595,
+			}, damageSource);
+		});
+
+		await t.test('ghost & heal', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				appliedEffects: [
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] },
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] },
+				],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 118,
+				moveSpeed: 598,
+			}, damageSource);
+		});
+	});
 });
