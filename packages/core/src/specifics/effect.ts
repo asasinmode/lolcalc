@@ -83,8 +83,8 @@ export const EFFECT_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, _stats, { calculatedVariables }) {
-					// TODO
+				handler(_self, _stats, { calculatedVariables }) {
+					calculatedVariables.totalMultiplicativeMoveSpeed += (EFFECTS as TEffects)[EFFECT_OBJECT_NAME.heal].dataValues.MoveSpeed[1]!;
 				},
 			},
 		},
@@ -98,13 +98,7 @@ export const EFFECT_SPECIFICS = {
 		isActive(data) {
 			return data[0];
 		},
-		calculateHooks: {
-			preItemTotal: {
-				handler(self, _stats, { calculatedVariables }) {
-					// TODO
-				},
-			},
-		},
+		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),

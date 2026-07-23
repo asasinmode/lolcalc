@@ -326,7 +326,6 @@ export const CHAMPION_SPECIFICS = {
 
 					const moveSpeed = championAbilityVariableValue('TotalMS', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof moveSpeed.value === 'number') {
-						bonusStats.moveSpeed += moveSpeed.value;
 						championPassiveStats.moveSpeed = moveSpeed.value;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive move speed', moveSpeed);

@@ -84,6 +84,8 @@ export interface IStatsCalculationVariables {
 	/** if mid quest is selected it will be the % the quest reward gives (`0.08`) */
 	midQuestMultiplier: number;
 	totalBonusPercentMoveSpeed: number;
+	/** "bonus total movement speed", separate from usual `totalBonusPercentMoveSpeed`, currently heal uses it */
+	totalMultiplicativeMoveSpeed: number;
 	/** penalty from move speed soft cap */
 	movespeedSoftCapPenalty: number;
 	attackSpeedCap: number;

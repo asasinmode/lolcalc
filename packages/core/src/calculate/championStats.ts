@@ -47,6 +47,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		baseItemManaRegenPercent: 0,
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
+		totalMultiplicativeMoveSpeed: 0,
 		movespeedSoftCapPenalty: 0,
 		attackSpeedCap: 3.003,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
@@ -236,8 +237,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
 	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
-	// TODO possibly could be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	totalPreMultipliersStats.moveSpeed += multiplierBonusMoveSpeed;
+	const multiplicativeBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalMultiplicativeMoveSpeed;
+	totalPreMultipliersStats.moveSpeed += multiplicativeBonusMoveSpeed;
+
+	// TODO possibly could be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	const penalty = calculateMSCapPenalty(totalPreMultipliersStats.moveSpeed);
 	calculatedVariables.movespeedSoftCapPenalty = penalty;
 	totalPreMultipliersStats.moveSpeed -= penalty;
