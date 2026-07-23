@@ -35,7 +35,8 @@
 				"__renamedVariables": {
 					"MoveSpeedMod": "MovespeedMod"
 				}
-			}
+			},
+			"cooldownTime": [240, 240, 240, 240, 240, 240, 240]
 		},
 		"summonerCleanse": {
 			"dataKey": "summonerCleanse",
@@ -47,7 +48,8 @@
 			"dataValues": {
 				"TenacityValue": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 				"TenacityDuration": [3, 3, 3, 3, 3, 3, 3]
-			}
+			},
+			"cooldownTime": [240, 240, 240, 240, 240, 240, 240]
 		},
 		"summonerHeal": {
 			"dataKey": "summonerHeal",
@@ -74,7 +76,8 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": [240, 240, 240, 240, 240, 240, 240]
 		},
 		"summonerExhaust": {
 			"dataKey": "summonerExhaust",
@@ -97,7 +100,8 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": [240, 240, 240, 240, 240, 240, 240]
 		},
 		"lolcalcGrievousWounds": {
 			"dataKey": "lolcalcGrievousWounds",

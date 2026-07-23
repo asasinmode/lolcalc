@@ -1093,6 +1093,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						image: undefined,
 						dataValues: undefined,
 						spellCalculations: undefined,
+						cooldownTime: undefined,
 					};
 
 					if (sourceSpell.mBuff?.mDescription) {
@@ -1108,7 +1109,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 					}
 
 					if (sourceSpell.mSpell) {
-						const { mImgIconName, DataValues, mSpellCalculations, mClientData } = sourceSpell.mSpell;
+						const { mImgIconName, DataValues, mSpellCalculations, mClientData, cooldownTime } = sourceSpell.mSpell;
 
 						if (!mImgIconName?.[0]) {
 							throw new Error(`${effectObjectName} expected mImgIconName in shared spell`);
@@ -1121,6 +1122,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 								))
 							: undefined;
 						(effectData as any).spellCalculations = cleanupObject(mSpellCalculations);
+						(effectData as any).cooldownTime = cooldownTime && cooldownTime.map((v: number) => formatNumber(v));
 
 						if (!effectData.description || 'sharedSpellObjectKey' in effectData) {
 							if (!mClientData) {

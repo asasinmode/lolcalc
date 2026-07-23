@@ -108,7 +108,7 @@ export interface IEffectData extends Record<string, ({
 	sharedSpellObjectKey: string;
 	objectName: string;
 	description: string;
-} & Pick<IChampionAbilityVariant, 'name' | 'image' | 'dataValues' | 'spellCalculations'>))> {};
+} & Pick<IChampionAbilityVariant, 'name' | 'image' | 'dataValues' | 'spellCalculations' | 'cooldownTime'>))> {};
 
 export const TEXT = textData.data satisfies Omit<ITextData, 'stringtable'> as unknown as ITextData;
 
