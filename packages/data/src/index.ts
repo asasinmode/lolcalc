@@ -98,6 +98,11 @@ export interface IEffectData extends Record<string, ({
 } | {
 	dataKey: string;
 	stringtable: string;
+} | {
+	dataKey: string;
+	championSpellObjectKey: string;
+	objectName: string;
+	description: string;
 } | ({
 	dataKey: string;
 	sharedSpellObjectKey: string;

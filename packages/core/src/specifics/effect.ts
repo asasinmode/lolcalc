@@ -603,6 +603,17 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	}),
+	[EFFECT_OBJECT_NAME.ashePFrostShot]: defineEffectSpecific<[frostShot: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0),
+		label: 'Frost Shot',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		// TODO calculate
+	}),
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: defineEffectSpecific<[isCalledByFreljord: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0),
 		label: 'Call of the Freljord',
@@ -728,7 +739,7 @@ const slowEffectDescriptionObj = {
 };
 
 /** `effect.json` values for purely custom effects - if an effectObjectName has this specified, it will be put in `effect.json` during `scripts/updateData` */
-export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | { objectName: string } | { sharedSpellObjectKey: string } | string>> = {
+export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | { objectName: string } | { sharedSpellObjectKey: string } | { championSpellObjectKey: string } | string>> = {
 	/* items */
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
@@ -749,6 +760,9 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 		objectName: EFFECT_OBJECT_NAME.botrkClawingShadows,
 	},
 	/* champion passives */
+	[EFFECT_OBJECT_NAME.ashePFrostShot]: {
+		championSpellObjectKey: 'Characters/Ashe/Spells/AshePassiveAbility/AshePassiveSlow',
+	},
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
 		description: 'This unit\'s item is upgraded thanks to ally Ornn.',

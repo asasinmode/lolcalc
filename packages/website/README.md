@@ -134,6 +134,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] other effects options ui, like slow, stun, grievous wounds
   - [x] hover tooltips
   - [x] show source ability tooltip on shift
+  - [ ] choose a source for the effect, like existing configured ashe for passive application
 - [x] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
 - [x] close dialogs on click outside
 - [x] target dummy damage source

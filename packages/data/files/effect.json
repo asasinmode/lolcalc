@@ -153,6 +153,12 @@
 			"description": "Moving faster toward Janna.",
 			"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/Tailwind"
 		},
+		"AshePFrostShot": {
+			"dataKey": "AshePFrostShot",
+			"championSpellObjectKey": "Characters/Ashe/Spells/AshePassiveAbility/AshePassiveSlow",
+			"objectName": "AshePassiveSlow",
+			"description": "This unit is slowed."
+		},
 		"localcNunuPassive": {
 			"dataKey": "localcNunuPassive",
 			"description": "This unit has increased Attack Speed and Move Speed."

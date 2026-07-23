@@ -618,6 +618,7 @@ export const EFFECT_OBJECT_NAME = {
 	seryldaBitterCold: 'lolcalc6694BitterCold',
 	gunbladeLightningBolt: 'lolcalc3146LightningBolt',
 	/* champion passives */
+	ashePFrostShot: 'AshePFrostShot',
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
 	nunuPCallOfFreljord: 'localcNunuPassive',

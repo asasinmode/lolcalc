@@ -15,7 +15,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
-import { CUSTOM_EFFECTS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
+import { CUSTOM_EFFECTS, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc.ts';
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
@@ -1067,15 +1067,24 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						dataKey: effectObjectName,
 						stringtable: customEffect.stringtable,
 					}];
-				} else if ('sharedSpellObjectKey' in customEffect) {
-					const sharedSpell = sharedSpellsData[customEffect.sharedSpellObjectKey];
+				} else if ('sharedSpellObjectKey' in customEffect || 'championSpellObjectKey' in customEffect) {
+					const spellKey = (customEffect as any).sharedSpellObjectKey ?? (customEffect as any).championSpellObjectKey;
 
-					if (!sharedSpell) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${customEffect.sharedSpellObjectKey}" not found in shared data`);
+					let sourceSpell;
+					if ('sharedSpellObjectKey' in customEffect) {
+						sourceSpell = sharedSpellsData[customEffect.sharedSpellObjectKey];
+					} else {
+						const { id } = EFFECT_SPECIFICS[effectObjectName].sourceAbility;
+						const championData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`);
+						sourceSpell = championData[customEffect.championSpellObjectKey];
 					}
 
-					if (sharedSpell.mBuff?.mDescription) {
-						let description = getStringtableValue(sharedSpell.mBuff.mDescription, `custom effect ${effectObjectName} description`)!;
+					if (!sourceSpell) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${spellKey}" not found in target data`);
+					}
+
+					if (sourceSpell.mBuff?.mDescription) {
+						let description = getStringtableValue(sourceSpell.mBuff.mDescription, `custom effect ${effectObjectName} description`)!;
 
 						description &&= extractEffectDescription(description);
 
@@ -1085,16 +1094,18 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 
 						return [effectObjectName, {
 							dataKey: effectObjectName,
-							sharedSpellObjectKey: customEffect.sharedSpellObjectKey,
-							objectName: sharedSpell.ObjectName,
+							sharedSpellObjectKey: (customEffect as any).sharedSpellObjectKey,
+							championSpellObjectKey: (customEffect as any).championSpellObjectKey,
+							objectName: sourceSpell.ObjectName,
 							description,
 						}];
 					}
 
-					const effectData: Extract<IEffectData[string], { sharedSpellObjectKey: string }> = {
+					const effectData: Extract<IEffectData[string], { sharedSpellObjectKey: string }> | Extract<IEffectData[string], { championSpellObjectKey: string }> = {
 						dataKey: effectObjectName,
-						sharedSpellObjectKey: customEffect.sharedSpellObjectKey,
-						objectName: sharedSpell.ObjectName,
+						sharedSpellObjectKey: (customEffect as any).sharedSpellObjectKey,
+						championSpellObjectKey: (customEffect as any).championSpellObjectKey,
+						objectName: sourceSpell.ObjectName,
 						name: '',
 						description: '',
 						image: '',
@@ -1102,11 +1113,11 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						spellCalculations: undefined,
 					};
 
-					if (!sharedSpell.mSpell) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" mSpell not found in shared spell "${customEffect.sharedSpellObjectKey}" object`);
+					if (!sourceSpell.mSpell) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" mSpell not found in shared spell "${spellKey}" object`);
 					}
 
-					const { mImgIconName, DataValues, mSpellCalculations, mClientData } = sharedSpell.mSpell;
+					const { mImgIconName, DataValues, mSpellCalculations, mClientData } = sourceSpell.mSpell;
 
 					if (!mClientData) {
 						throw new Error(`${effectObjectName} expected mClientData in shared spell`);
