@@ -106,9 +106,10 @@ export interface IEffectData extends Record<string, ({
 } | ({
 	dataKey: string;
 	sharedSpellObjectKey: string;
+	sharedSpellEffectObjectKey?: string | string[];
 	objectName: string;
 	description: string;
-} & Pick<IChampionAbilityVariant, 'name' | 'image' | 'dataValues' | 'spellCalculations' | 'cooldownTime'>))> {};
+} & Pick<IChampionAbilityVariant, 'name' | 'image' | 'tooltip' | 'dataValues' | 'spellCalculations' | 'cooldownTime'>))> {};
 
 export const TEXT = textData.data satisfies Omit<ITextData, 'stringtable'> as unknown as ITextData;
 

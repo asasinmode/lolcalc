@@ -792,7 +792,15 @@ const slowEffectDescriptionObj = {
 };
 
 /** `effect.json` values for purely custom effects - if an effectObjectName has this specified, it will be put in `effect.json` during `scripts/updateData` */
-export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'> | { objectName: string } | { sharedSpellObjectKey: string } | { championSpellObjectKey: string } | string>> = {
+export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'>
+	| { objectName: string }
+	| {
+		/* effect sources like summoner spells can have their effect description in a separate object from the spell description, like Cleanse's summoner spell is in shared/SummonerBoost but the effect "this unit has increased tenacity" is in shared/Cleanse, so specify the effect object key if needed, otherwise will use just the main spell object */
+		sharedSpellObjectKey: string;
+		sharedSpellEffectObjectKey?: string | string[];
+	}
+	| { championSpellObjectKey: string } | string>
+> = {
 	/* items */
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
@@ -826,12 +834,14 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	},
 	[EFFECT_OBJECT_NAME.cleanse]: {
 		sharedSpellObjectKey: 'Shared/Spells/SummonerBoost',
+		sharedSpellEffectObjectKey: 'Shared/Spells/Cleanse',
 	},
 	[EFFECT_OBJECT_NAME.heal]: {
 		sharedSpellObjectKey: 'Shared/Spells/SummonerHeal',
 	},
 	[EFFECT_OBJECT_NAME.exhaust]: {
 		sharedSpellObjectKey: 'Shared/Spells/SummonerExhaust',
+		sharedSpellEffectObjectKey: ['Shared/Spells/SummonerExhaustDebuff', 'Shared/Spells/SummonerExhaustSlow'],
 	},
 	[EFFECT_OBJECT_NAME.grievousWounds]: {
 		sharedSpellObjectKey: 'Shared/Spells/GrievousWound',

@@ -1086,6 +1086,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 					const effectData: Extract<IEffectData[string], { sharedSpellObjectKey: string }> | Extract<IEffectData[string], { championSpellObjectKey: string }> = {
 						dataKey: effectObjectName,
 						sharedSpellObjectKey: (customEffect as any).sharedSpellObjectKey,
+						sharedSpellEffectObjectKey: (customEffect as any).sharedSpellEffectObjectKey,
 						championSpellObjectKey: (customEffect as any).championSpellObjectKey,
 						objectName: sourceSpell.ObjectName,
 						name: undefined,
@@ -1096,10 +1097,29 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						cooldownTime: undefined,
 					};
 
-					if (sourceSpell.mBuff?.mDescription) {
-						let description = getStringtableValue(sourceSpell.mBuff.mDescription, `custom effect ${effectObjectName} description`)!;
+					if (sourceSpell.mBuff?.mDescription || 'sharedSpellEffectObjectKey' in customEffect) {
+						let description = '';
 
-						description &&= extractEffectDescription(description);
+						/* currently only exhaust applies 2 effects, 1 for slow and 1 for damage reduction, so support extracting multiple descriptions and combine them into 1 */
+						const buffDescriptionSources = [sourceSpell];
+
+						type ICustomEffectSharedKey = Extract<IEffectData[string], { sharedSpellObjectKey: string }>;
+
+						if ((customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey) {
+							if (typeof (customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey === 'string') {
+								buffDescriptionSources[0] = sharedSpellsData[(customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey as string];
+							} else {
+								buffDescriptionSources.splice(0, 1, ...((customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey as string[]).map(key => sharedSpellsData[key]));
+							}
+						}
+
+						for (const buffDescriptionSource of buffDescriptionSources) {
+							const buffDescription = getStringtableValue(buffDescriptionSource.mBuff.mDescription, `custom effect ${effectObjectName} ${buffDescriptionSource.ObjectName} description`)!;
+
+							if (buffDescription) {
+								description += `${description ? ' ' : ''}${extractEffectDescription(buffDescription)}`;
+							}
+						}
 
 						if (description) {
 							effectData.description = description;
@@ -1147,7 +1167,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 								stringtableVariableSaveUnder: effectDataStringtable,
 								variables,
 							});
-							effectData.description = mClientData?.mTooltipData?.mLocKeys?.keyTooltip && getStringtableValue(mClientData.mTooltipData.mLocKeys.keyTooltip, {
+							(effectData as any)[effectData.description ? 'tooltip' : 'description'] = mClientData?.mTooltipData?.mLocKeys?.keyTooltip && getStringtableValue(mClientData.mTooltipData.mLocKeys.keyTooltip, {
 								category: 'effect',
 								key: `${effectObjectName} tooltip`,
 								stringtableVariableSaveUnder: effectDataStringtable,
