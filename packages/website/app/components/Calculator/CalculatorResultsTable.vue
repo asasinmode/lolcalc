@@ -1100,6 +1100,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
+function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSection) {
+	return implementedDamageSectionsMap.value[sectionIndex] && (section.hoverTooltipData || section.id === 'a-aa');
+}
+
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
 
 function showSectionHoverTooltip(event: MouseEvent, abilityId: IDamageResultTableSection['abilityId']['type']) {
@@ -1553,13 +1557,13 @@ defineExpose({
 							scope="colgroup"
 							:colspan="1 + resultColumns.length"
 						>
-							<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event, section.abilityId.type)">
+							<div @mouseenter="sectionHasTooltip(index, section) && showSectionHoverTooltip($event, section.abilityId.type)">
 								<img
 									v-bind="section.image && gameImageAttrs(section.image, 24)"
 									aria-hidden="true"
 								>
 								<span v-html="section.image ? section.name : 'loading...'" />
-								<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
+								<template v-if="sectionHasTooltip(index, section)">
 									<article v-if="section.abilityId.type === AbilityType.item" popover="manual" class="hover-tooltip champion-item">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 									</article>
@@ -1575,6 +1579,9 @@ defineExpose({
 										v-else-if="section.abilityId.type === AbilityType.dragon"
 										v-bind="section.hoverTooltipData as any"
 									/>
+									<article v-else-if="section.id === 'a-aa'" popover="hint" class="hover-tooltip custom">
+										TODO aa hover tooltip
+									</article>
 								</template>
 								<template v-if="section.selectOptions?.length">
 									<label :for="`results-table-header-select-${section.id}`">
@@ -1872,6 +1879,7 @@ defineExpose({
 		--section-header-row-pt: calc(2 * var(--spacing));
 		--section-header-row-pb: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
+		--section-row-btn-size: calc(6 * var(--spacing));
 
 		[data-icon-btns-show-text] & {
 			--header-h: calc(
@@ -2163,7 +2171,7 @@ defineExpose({
 						}
 
 						> button {
-							--at-apply: 'size-6 grid place-items-center';
+							--at-apply: 'size-(--section-row-btn-size) grid place-items-center';
 
 							> .icon {
 								--at-apply: 'size-5';
@@ -2222,7 +2230,16 @@ defineExpose({
 						> [popover] {
 							position-anchor: --section-header-row;
 							inset-block-start: auto;
-							inset-block-end: calc(anchor(start) - 1px);
+							inset-block-end: calc(
+								anchor(end) + var(--section-header-row-pb) + 2 * var(--section-row-btn-size) - 0.5px
+							);
+						}
+
+						> .hover-tooltip.custom {
+							--at-apply: 'max-inline-160';
+
+							justify-self: anchor-center;
+							position-try: flip-block;
 						}
 
 						> label {

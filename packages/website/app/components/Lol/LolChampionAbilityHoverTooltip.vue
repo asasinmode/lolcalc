@@ -142,6 +142,7 @@ defineExpose({ el });
 	.hover-tooltip.champion-ability,
 	.hover-tooltip.dragon,
 	.hover-tooltip.role-quest,
+	.hover-tooltip.custom,
 	.hover-tooltip.effect {
 		--at-apply: 'p-2';
 		--description-pt: calc(2 * var(--spacing));
