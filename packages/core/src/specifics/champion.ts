@@ -228,11 +228,30 @@ export const CHAMPION_SPECIFICS = {
 						const newPenalty = calculateMSCapPenalty(newPrePenaltyMS);
 						const newFinalMS = newPrePenaltyMS - newPenalty;
 
+						console.log('cassiopeia pre', {
+							msMultiplier: msMultiplier.value,
+							standardPrePenalty,
+							percent,
+							flat,
+							mult,
+							effectiveFlat,
+							effectivePercent,
+							newPrePenaltyMS,
+							newPenalty,
+							newFinalMS,
+						});
+
 						totalPreMultipliersStats.moveSpeed = newFinalMS;
 						const newBonus = newFinalMS - baseStats.moveSpeed;
 						championPassiveStats.moveSpeed = newBonus - bonusStats.moveSpeed;
 						bonusStats.moveSpeed = newBonus;
 						calculatedVariables.movespeedSoftCapPenalty = newPenalty;
+
+						console.log('casiopeia post', {
+							totalPreMultipliers: totalPreMultipliersStats.moveSpeed,
+							bonus: bonusStats.moveSpeed,
+							penalty: calculatedVariables.movespeedSoftCapPenalty,
+						});
 					} else {
 						console.warn('[CHAMPION_SPECIFICS cassiopeia] failed to calculate passive ms multiplier');
 					}

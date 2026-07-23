@@ -236,19 +236,35 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.tenacity = bonusStats.tenacity;
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
+	const totalPreMultipliersStatsMs = totalPreMultipliersStats.moveSpeed;
 	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
 	totalPreMultipliersStats.moveSpeed += multiplierBonusMoveSpeed;
 	const multiplicativeBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalMultiplicativeMoveSpeed;
 	totalPreMultipliersStats.moveSpeed += multiplicativeBonusMoveSpeed;
-
-	// TODO possibly could be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	const penalty = calculateMSCapPenalty(totalPreMultipliersStats.moveSpeed);
+
+	console.log('non-cassiopeia pre', {
+		totalPreMultipliersStatsMs,
+		totalBonusPercentMoveSpeed: calculatedVariables.totalBonusPercentMoveSpeed,
+		totalMultiplicativeMoveSpeed: calculatedVariables.totalMultiplicativeMoveSpeed,
+		multiplierBonusMoveSpeed,
+		multiplicativeBonusMoveSpeed,
+		penalty,
+	});
+
 	calculatedVariables.movespeedSoftCapPenalty = penalty;
 	totalPreMultipliersStats.moveSpeed -= penalty;
 	bonusStats.moveSpeed += multiplierBonusMoveSpeed - penalty;
 
+	console.log('non-cassiopeia post', {
+		movespeedSoftCapPenalty: calculatedVariables.movespeedSoftCapPenalty,
+		totalPreMultipliersStats: totalPreMultipliersStats.moveSpeed,
+		bonusStats: bonusStats.moveSpeed,
+	});
+
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
+	// TODO possibly could be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });

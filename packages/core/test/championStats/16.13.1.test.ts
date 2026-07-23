@@ -139,8 +139,7 @@ test('Cassiopeia ms items & dragons', async (t) => {
 	});
 });
 
-test.only('Heal, ghost, swiftmarch', async (t) => {
-	t.runOnly(true);
+test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 	const sourceCommon: IOverrides<'Cassiopeia' | 'Amumu'> = {
 		level: 1,
 		runes: {
@@ -150,14 +149,13 @@ test.only('Heal, ghost, swiftmarch', async (t) => {
 				defensive: 'health',
 			},
 		},
-		items: [ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.cosmicDrive],
+		items: [ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.cosmicDrive, ITEMS_BY_NAME.mercurialScimitar],
 		roleQuest: 'mid',
 		dragonStacks: ['Cloud'],
 		internalDragonData: { isOOC: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
 	};
 
-	await t.test('Amumu', { only: true }, async (t) => {
-		t.runOnly(true);
+	await t.test('Amumu', async (t) => {
 		await t.test('base', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Amumu', sourceCommon);
 
@@ -193,6 +191,19 @@ test.only('Heal, ghost, swiftmarch', async (t) => {
 			}, damageSource);
 		});
 
+		await t.test('scimitar', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Amumu', {
+				...sourceCommon,
+				internalData: { applyPassive: 0 },
+				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 116,
+				moveSpeed: 565,
+			}, damageSource);
+		});
+
 		await t.test('ghost & heal', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Amumu', {
 				...sourceCommon,
@@ -208,56 +219,68 @@ test.only('Heal, ghost, swiftmarch', async (t) => {
 				moveSpeed: 582,
 			}, damageSource);
 		});
-	});
 
-	await t.test('Cassiopeia', { only: true }, async (t) => {
-		t.runOnly(true);
-		await t.test('base no cloud stack', async () => {
-			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+		await t.test('ghost & scimitar', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Amumu', {
 				...sourceCommon,
-				internalDragonData: { isOOC: 0 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
+				internalData: { applyPassive: 0 },
+				appliedEffects: [
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] },
+				],
+				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 108,
-				moveSpeed: 427,
+				abilityPower: 120,
+				moveSpeed: 637,
 			}, damageSource);
 		});
 
-		await t.test('base', async () => {
-			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', sourceCommon);
+		await t.test('ghost & scimitar & heal', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Amumu', {
+				...sourceCommon,
+				internalData: { applyPassive: 0 },
+				appliedEffects: [
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] },
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] },
+				],
+				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
+			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 109,
-				moveSpeed: 446,
+				abilityPower: 126,
+				moveSpeed: 758,
+			}, damageSource);
+		});
+	});
+
+	await t.test('Cassiopeia', async (t) => {
+		await t.test('base', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				level: 18,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 111,
+				moveSpeed: 477,
 			}, damageSource);
 		});
 
 		await t.test('ghost', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
 				...sourceCommon,
+				level: 18,
 				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 113,
-				moveSpeed: 508,
+				abilityPower: 119,
+				moveSpeed: 620,
 			}, damageSource);
 		});
 
 		await t.test('heal', async () => {
-			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
-				...sourceCommon,
-				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] }],
-			});
-
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 114,
-				moveSpeed: 530,
-			}, damageSource);
-		});
-
-		await t.test('heal | lvl 18', { only: true }, async () => {
 			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
 				...sourceCommon,
 				level: 18,
@@ -270,9 +293,23 @@ test.only('Heal, ghost, swiftmarch', async (t) => {
 			}, damageSource);
 		});
 
+		await t.test('scimitar', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				level: 18,
+				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 123,
+				moveSpeed: 694,
+			}, damageSource);
+		});
+
 		await t.test('ghost & heal', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
 				...sourceCommon,
+				level: 18,
 				appliedEffects: [
 					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] },
 					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] },
@@ -280,8 +317,41 @@ test.only('Heal, ghost, swiftmarch', async (t) => {
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 118,
-				moveSpeed: 598,
+				abilityPower: 129,
+				moveSpeed: 807,
+			}, damageSource);
+		});
+
+		await t.test('ghost & scimitar', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				level: 18,
+				appliedEffects: [
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] },
+				],
+				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 137,
+				moveSpeed: 962,
+			}, damageSource);
+		});
+
+		await t.test('ghost & scimitar & heal', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
+				...sourceCommon,
+				level: 18,
+				appliedEffects: [
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] },
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] },
+				],
+				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 164,
+				moveSpeed: 1458,
 			}, damageSource);
 		});
 	});

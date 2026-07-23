@@ -11,7 +11,7 @@ import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
-import { addMultiplicative, combineRecursive } from '../calculate/util.ts';
+import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
@@ -3756,7 +3756,10 @@ export const ITEM_SPECIFICS = {
 						const moveSpeedPercent = ITEMS_BY_NAME.mercurialScimitar?.dataValues.MoveSpeed;
 						if (typeof moveSpeedPercent === 'number') {
 							calculatedVariables.mercurialMSPercent = moveSpeedPercent;
-							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.mercurialMSPercent;
+							calculatedVariables.totalMultiplicativeMoveSpeed = combineCompounding(
+								calculatedVariables.totalMultiplicativeMoveSpeed ?? 0,
+								calculatedVariables.mercurialMSPercent,
+							);
 						} else {
 							console.warn('[ITEM_SPECIFICS mercurial scimitar] failed to calculate move speed', moveSpeedPercent);
 						}

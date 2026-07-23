@@ -221,6 +221,20 @@
 			},
 			"effectAmount": [25, 60, 2, 1.5, 1.5]
 		},
+		"3139": {
+			"name": "Mercurial Scimitar",
+			"stats": {
+				"FlatSpellBlockMod": 35,
+				"FlatPhysicalDamageMod": 50,
+				"PercentLifeStealMod": 0.1
+			},
+			"dataValues": {
+				"Cooldown": 90,
+				"MSDuration": 2,
+				"MoveSpeed": 0.5
+			},
+			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0]
+		},
 		"3142": {
 			"name": "Youmuu's Ghostblade",
 			"stats": {

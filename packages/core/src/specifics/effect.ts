@@ -9,7 +9,7 @@ import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 import { clamp } from '@lolcalc/shared/utils.ts';
-import { addMultiplicative } from '../calculate/util.ts';
+import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
@@ -84,7 +84,10 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, _stats, { calculatedVariables }) {
-					calculatedVariables.totalMultiplicativeMoveSpeed += (EFFECTS as TEffects)[EFFECT_OBJECT_NAME.heal].dataValues.MoveSpeed[1]!;
+					calculatedVariables.totalMultiplicativeMoveSpeed = combineCompounding(
+						calculatedVariables.totalMultiplicativeMoveSpeed,
+						(EFFECTS as TEffects)[EFFECT_OBJECT_NAME.heal].dataValues.MoveSpeed[1]!,
+					);
 				},
 			},
 		},
