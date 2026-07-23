@@ -1031,13 +1031,29 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, meta) {
 		const rv: IVariableValueResult = {
-			value: variable.mLevel1Value,
+			value: variable.mLevel1Value ?? 0,
 			calculatesFrom: [],
 		};
 		const min = rv.value as number;
+		let max = min;
 		const level = meta.variableValueParams.damageSource?.level.value ?? 1;
-		if ('mBreakpoints' in variable) {
-			let max = min;
+
+		if (variable.mInitialBonusPerLevel) {
+			let maxInitialBonusLevel = Number.POSITIVE_INFINITY;
+			if (variable.mBreakpoints?.[0]?.mLevel) {
+				maxInitialBonusLevel = variable.mBreakpoints[0].mLevel - 1;
+			}
+
+			max = min + (variable.mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, CHAMPION_LEVEL.max) - 1));
+			rv.calculatesFrom![0] = {
+				value: { min, max },
+				stat: 'level',
+			};
+
+			(rv.value as number) += variable.mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, level) - 1);
+		}
+
+		if (variable.mBreakpoints) {
 			for (const { mAdditionalBonusAtThisLevel, mBonusPerLevelAtAndAfter, mLevel } of variable.mBreakpoints) {
 				if (level >= mLevel) {
 					if (mBonusPerLevelAtAndAfter || mAdditionalBonusAtThisLevel) {
@@ -1056,17 +1072,10 @@ export const VARIABLE_CALCULATION_FNS = {
 						: (mBonusPerLevelAtAndAfter * (CHAMPION_LEVEL.max + 1 - mLevel));
 				}
 			}
-			rv.calculatesFrom!.push({
+			rv.calculatesFrom![0] = {
 				value: { min, max },
 				stat: 'level',
-			});
-		} else {
-			const max = min + (variable.mInitialBonusPerLevel * (CHAMPION_LEVEL.max - 1));
-			rv.calculatesFrom!.push({
-				value: { min, max },
-				stat: 'level',
-			});
-			(rv.value as number) += variable.mInitialBonusPerLevel * (level - 1);
+			};
 		}
 		return rv;
 	},
@@ -1325,16 +1334,13 @@ type IHypotheticalVariableCalculationFns = Record<
 
 interface IGameVariablesByType {
 	ByCharLevelBreakpointsCalculationPart: {
-		mLevel1Value: number;
-		mBreakpoints: {
+		mLevel1Value?: number;
+		mInitialBonusPerLevel?: number;
+		mBreakpoints?: {
 			mLevel: number;
 			mAdditionalBonusAtThisLevel?: number;
 			mBonusPerLevelAtAndAfter?: number;
 		}[];
-		__type: string;
-	} | {
-		mLevel1Value: number;
-		mInitialBonusPerLevel: number;
 		__type: string;
 	};
 	NumberCalculationPart: {
