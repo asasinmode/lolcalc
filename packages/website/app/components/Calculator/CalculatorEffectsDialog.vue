@@ -67,7 +67,8 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 			searchString,
 		};
 	})
-	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
+	/* special case sort to have all 4 summoner spells together */
+	.sort((effectA, effectB) => effectA.name === 'Heal' && effectB.name.startsWith('Grievous') ? -1 : effectA.name.localeCompare(effectB.name));
 
 const championEffects = shallowRef<IEffectOptionGroup['options']>();
 
