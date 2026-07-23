@@ -1,7 +1,9 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalDragonDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import test from 'node:test';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.13.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -135,4 +137,71 @@ test('Cassiopeia ms items & dragons', async (t) => {
 			moveSpeed: 705,
 		});
 	});
+});
+
+test('Heal, ghost, swiftmarch', async (t) => {
+	const sourceCommon: IOverrides<'Cassiopeia' | 'Amumu'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'movementspeed',
+				defensive: 'health',
+			},
+		},
+		items: [ITEMS_BY_NAME.swiftmarch, ITEMS_BY_NAME.cosmicDrive],
+		roleQuest: 'mid',
+		dragonStacks: ['Cloud'],
+		internalDragonData: { isOOC: 1 } satisfies IInternalDragonDataOf<'Cloud', 'stack'>,
+	};
+
+	await t.test('Amumu', async (t) => {
+		await t.test('base', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Amumu', sourceCommon);
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 109,
+				moveSpeed: 440,
+			}, damageSource);
+		});
+
+		await t.test('ghost', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Amumu', {
+				...sourceCommon,
+				internalData: { applyPassive: 0 },
+				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 112,
+				moveSpeed: 501,
+			}, damageSource);
+		});
+
+		await t.test('ghost & heal', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Amumu', {
+				...sourceCommon,
+				internalData: { applyPassive: 0 },
+				appliedEffects: [
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] },
+					{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), data: [1] },
+				],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 117,
+				moveSpeed: 582,
+			}, damageSource);
+		});
+	});
+
+	// await t.test('lvl 1 | summoner spells base', async () => {
+	// 	const damageSource = await setupDamageSource(fixture, 'Cassiopeia', sourceCommon);
+
+	// 	typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+	// 		attackDamage: 53,
+	// 		abilityPower: 108,
+	// 		moveSpeed: 427,
+	// 	}, damageSource);
+	// });
 });
