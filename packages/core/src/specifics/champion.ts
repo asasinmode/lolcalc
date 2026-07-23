@@ -210,53 +210,16 @@ export const CHAMPION_SPECIFICS = {
 	},
 	Cassiopeia: {
 		calculateHooks: {
-			onTotalPreMultipliers: {
+			postInit: {
 				handler(self, { championPassiveStats, totalPreMultipliersStats, baseStats, bonusStats }, { calculatedVariables }) {
 					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityVariant: (self.champion.value as typeof ICassiopeia).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 
 					if (typeof msMultiplier.value === 'number') {
-						/* could store those variables pre applying mult & penalty in `championStats` but since it's only cassio for now that needs them it can stay, if more stuff needs access to them then refactor */
-						const standardPrePenalty = totalPreMultipliersStats.moveSpeed + calculatedVariables.movespeedSoftCapPenalty;
-						const percent = calculatedVariables.totalBonusPercentMoveSpeed;
-						const flat = standardPrePenalty / (1 + percent) - baseStats.moveSpeed;
-
-						const mult = 1 + msMultiplier.value;
-						const effectiveFlat = flat * mult;
-						const effectivePercent = percent * mult;
-
-						const newPrePenaltyMS = (baseStats.moveSpeed + effectiveFlat) * (1 + effectivePercent);
-						const newPenalty = calculateMSCapPenalty(newPrePenaltyMS);
-						const newFinalMS = newPrePenaltyMS - newPenalty;
-
-						console.log('cassiopeia pre', {
-							msMultiplier: msMultiplier.value,
-							standardPrePenalty,
-							percent,
-							flat,
-							mult,
-							effectiveFlat,
-							effectivePercent,
-							newPrePenaltyMS,
-							newPenalty,
-							newFinalMS,
-						});
-
-						totalPreMultipliersStats.moveSpeed = newFinalMS;
-						const newBonus = newFinalMS - baseStats.moveSpeed;
-						championPassiveStats.moveSpeed = newBonus - bonusStats.moveSpeed;
-						bonusStats.moveSpeed = newBonus;
-						calculatedVariables.movespeedSoftCapPenalty = newPenalty;
-
-						console.log('casiopeia post', {
-							totalPreMultipliers: totalPreMultipliersStats.moveSpeed,
-							bonus: bonusStats.moveSpeed,
-							penalty: calculatedVariables.movespeedSoftCapPenalty,
-						});
+						calculatedVariables.cassiopeiaMSMultiplier = 1 + msMultiplier.value;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS cassiopeia] failed to calculate passive ms multiplier');
 					}
 				},
-				priority: HOOK_PRIORITIES.onTotalPreMultipliers.Cassiopeia,
 			},
 		},
 		passive: {

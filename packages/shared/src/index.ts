@@ -220,6 +220,8 @@ export interface IStatsCalculationVariables {
 	briarHealingMult?: number;
 	/** movement speed gained from dead man's plate passive */
 	deadMansMoveSpeed?: number;
+	/** movement speed multiplier from cassiopeia's passive */
+	cassiopeiaMSMultiplier?: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

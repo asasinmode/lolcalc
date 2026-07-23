@@ -236,31 +236,25 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.tenacity = bonusStats.tenacity;
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
-	const totalPreMultipliersStatsMs = totalPreMultipliersStats.moveSpeed;
-	const multiplierBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalBonusPercentMoveSpeed;
-	totalPreMultipliersStats.moveSpeed += multiplierBonusMoveSpeed;
-	const multiplicativeBonusMoveSpeed = totalPreMultipliersStats.moveSpeed * calculatedVariables.totalMultiplicativeMoveSpeed;
-	totalPreMultipliersStats.moveSpeed += multiplicativeBonusMoveSpeed;
-	const penalty = calculateMSCapPenalty(totalPreMultipliersStats.moveSpeed);
+	const baseMS = baseStats.moveSpeed;
+	const initialFlatMS = totalPreMultipliersStats.moveSpeed;
+	const flatBonusMS = initialFlatMS - baseMS;
 
-	console.log('non-cassiopeia pre', {
-		totalPreMultipliersStatsMs,
-		totalBonusPercentMoveSpeed: calculatedVariables.totalBonusPercentMoveSpeed,
-		totalMultiplicativeMoveSpeed: calculatedVariables.totalMultiplicativeMoveSpeed,
-		multiplierBonusMoveSpeed,
-		multiplicativeBonusMoveSpeed,
-		penalty,
-	});
+	let effectiveFlatMS = flatBonusMS;
+	let effectivePercentMS = calculatedVariables.totalBonusPercentMoveSpeed;
+	const effectiveMultiplicativeMS = calculatedVariables.totalMultiplicativeMoveSpeed;
 
+	if (calculatedVariables.cassiopeiaMSMultiplier) {
+		effectiveFlatMS = flatBonusMS * calculatedVariables.cassiopeiaMSMultiplier;
+		effectivePercentMS = calculatedVariables.totalBonusPercentMoveSpeed * calculatedVariables.cassiopeiaMSMultiplier;
+	}
+
+	const rawMS = (baseMS + effectiveFlatMS) * (1 + effectivePercentMS) * (1 + effectiveMultiplicativeMS);
+
+	const penalty = calculateMSCapPenalty(rawMS);
 	calculatedVariables.movespeedSoftCapPenalty = penalty;
-	totalPreMultipliersStats.moveSpeed -= penalty;
-	bonusStats.moveSpeed += multiplierBonusMoveSpeed - penalty;
-
-	console.log('non-cassiopeia post', {
-		movespeedSoftCapPenalty: calculatedVariables.movespeedSoftCapPenalty,
-		totalPreMultipliersStats: totalPreMultipliersStats.moveSpeed,
-		bonusStats: bonusStats.moveSpeed,
-	});
+	totalPreMultipliersStats.moveSpeed = rawMS - penalty;
+	bonusStats.moveSpeed = rawMS - baseMS - penalty;
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
