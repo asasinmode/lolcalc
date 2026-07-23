@@ -48,6 +48,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
 		movespeedSoftCapPenalty: 0,
+		attackSpeedCap: 3.003,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
 		bloodmailRetributionExcludedAd: 0,
 		healMult: 1,
@@ -282,6 +283,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			hook(source, { isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStats, baseOnLevelStats, championPassiveStats, totalPreMultipliersStats }, { calculatedVariables, miscDebug });
 		}
 	}
+
+	totalStats.attackSpeed = Math.min(totalStats.attackSpeed, calculatedVariables.attackSpeedCap);
 
 	{
 		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
