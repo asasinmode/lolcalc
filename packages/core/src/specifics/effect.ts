@@ -49,6 +49,57 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
+	[EFFECT_OBJECT_NAME.cleanse]: defineEffectSpecific<[cleanse: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.cleanse),
+		label: 'Cleanse',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _stats, { calculatedVariables }) {
+					// TODO
+				},
+			},
+		},
+	}),
+	[EFFECT_OBJECT_NAME.heal]: defineEffectSpecific<[heal: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal),
+		label: 'Heal',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _stats, { calculatedVariables }) {
+					// TODO
+				},
+			},
+		},
+	}),
+	[EFFECT_OBJECT_NAME.exhaust]: defineEffectSpecific<[exhaust: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.exhaust),
+		label: 'Exhaust',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _stats, { calculatedVariables }) {
+					// TODO
+				},
+			},
+		},
+	}),
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),
 		label: 'Grievous Wounds',
@@ -727,6 +778,8 @@ export type IEffectModifyVariableFunction<T extends [number] = [number]> = (valu
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 
 export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: string, imgSize: number]>> = {
+	[EFFECT_OBJECT_NAME.cleanse]: ['game/assets/spells/icons2d/summoner_boost.png', 64],
+	[EFFECT_OBJECT_NAME.heal]: ['game/assets/spells/icons2d/summoner_heal.png', 64],
 	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
 	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
 	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
@@ -770,6 +823,15 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	/* other */
 	[EFFECT_OBJECT_NAME.ghost]: {
 		sharedSpellObjectKey: 'Shared/Spells/SummonerHaste',
+	},
+	[EFFECT_OBJECT_NAME.cleanse]: {
+		sharedSpellObjectKey: 'Shared/Spells/Cleanse',
+	},
+	[EFFECT_OBJECT_NAME.heal]: {
+		sharedSpellObjectKey: 'Shared/Spells/SummonerHeal',
+	},
+	[EFFECT_OBJECT_NAME.exhaust]: {
+		sharedSpellObjectKey: 'Shared/Spells/SummonerExhaust',
 	},
 	[EFFECT_OBJECT_NAME.grievousWounds]: {
 		sharedSpellObjectKey: 'Shared/Spells/GrievousWound',

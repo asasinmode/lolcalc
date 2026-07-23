@@ -627,6 +627,9 @@ export const EFFECT_OBJECT_NAME = {
 	rellPBreakMold: 'RellP_Debuff',
 	/* other */
 	ghost: 'summonerHaste',
+	cleanse: 'summonerCleanse',
+	heal: 'summonerHeal',
+	exhaust: 'summonerExhaust',
 	grievousWounds: 'lolcalcGrievousWounds',
 	grievousWoundsPercent: 'lolcalcGrievousWoundsPercent',
 	stun: 'lolcalcStun',

@@ -37,6 +37,61 @@
 				}
 			}
 		},
+		"summonerCleanse": {
+			"dataKey": "summonerCleanse",
+			"sharedSpellObjectKey": "Shared/Spells/Cleanse",
+			"objectName": "Cleanse",
+			"description": "This unit has increased Tenacity."
+		},
+		"summonerHeal": {
+			"dataKey": "summonerHeal",
+			"sharedSpellObjectKey": "Shared/Spells/SummonerHeal",
+			"objectName": "SummonerHeal",
+			"description": "This unit's Move Speed is increased.",
+			"image": "assets/spells/icons2d/summoner_heal.png",
+			"dataValues": {
+				"AllyRange": [900, 900, 900, 900, 900, 900, 900],
+				"MoveSpeed": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+				"MoveSpeedDuration": [1, 1, 1, 1, 1, 1, 1],
+				"StackingHealDebuff": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+				"DebuffDuration": [30, 30, 30, 30, 30, 30, 30],
+				"CursorForgiveness": [200, 200, 200, 200, 200, 200, 200]
+			},
+			"spellCalculations": {
+				"TotalHeal": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 80,
+							"mEndValue": 318,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"summonerExhaust": {
+			"dataKey": "summonerExhaust",
+			"sharedSpellObjectKey": "Shared/Spells/SummonerExhaust",
+			"objectName": "SummonerExhaust",
+			"name": "Exhaust",
+			"description": "<keyword>Slows</keyword> target enemy champion by @Slow@% and reduces their damage dealt by @DamageReduction@% for @DebuffDuration@ seconds.",
+			"image": "assets/spells/icons2d/summoner_exhaust.png",
+			"dataValues": {
+				"DebuffDuration": [3, 3, 3, 3, 3, 3, 3],
+				"DamageReduction": [35, 35, 35, 35, 35, 35, 35],
+				"Slow": [40, 40, 40, 40, 40, 40, 40]
+			},
+			"spellCalculations": {
+				"DamageReductionTOOLTIP": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 2,
+							"__type": "EffectValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"lolcalcGrievousWounds": {
 			"dataKey": "lolcalcGrievousWounds",
 			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
