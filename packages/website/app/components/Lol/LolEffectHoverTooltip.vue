@@ -12,7 +12,7 @@ import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { ITEMS, useChampion } from '@lolcalc/data';
+import { ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
 
@@ -49,7 +49,18 @@ watch(sourceAbilityId, async (abilityId) => {
 	}
 }, { immediate: true });
 
-const precomputedDescription = computed<IComputedAbilityDescription | IComputedItemDescription | undefined>(() => {
+const computedDescription = computed((): IComputedEffectDescription | undefined => {
+	if (props.abilityId) {
+		return computeEffectDescription(props.abilityId.id, props.damageSource);
+	}
+	return undefined;
+});
+
+const sourceAbilityDescription = computed<IComputedAbilityDescription | IComputedItemDescription | undefined>(() => {
+	if (computedDescription.value?.championAbilityLikePrecomputedDescription) {
+		return computedDescription.value.championAbilityLikePrecomputedDescription;
+	}
+
 	if (!sourceAbilityId.value || sourceAbilityId.value.type === AbilityType.effect) {
 		return undefined;
 	}
@@ -73,13 +84,6 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 	);
 });
 
-const computedDescription = computed((): IComputedEffectDescription | undefined => {
-	if (props.abilityId) {
-		return computeEffectDescription(props.abilityId.id, props.damageSource);
-	}
-	return undefined;
-});
-
 const el = useTemplateRef('el');
 
 defineExpose({ el });
@@ -97,21 +101,20 @@ defineExpose({ el });
 				class="game-description"
 				v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'"
 			/>
-			<div class="game-description" v-html="(globalKeyModifiers.shift && computedDescription?.tooltipExtended) || computedDescription?.tooltip" />
-			<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
-			<footer v-if="precomputedDescription" v-show="!globalKeyModifiers.shift">
+			<div class="game-description" v-html="computedDescription?.description" />
+			<footer v-if="sourceAbilityDescription" v-show="!globalKeyModifiers.shift">
 				Hold <kbd>[Shift]</kbd> to show source
 			</footer>
 		</article>
-		<template v-if="precomputedDescription">
+		<template v-if="sourceAbilityDescription">
 			<LolChampionAbilityHoverTooltip
-				v-if="sourceAbilityId?.type === AbilityType.champion"
+				v-if="sourceAbilityId?.type === AbilityType.champion || computedDescription?.championAbilityLikePrecomputedDescription"
 				v-show="globalKeyModifiers.shift"
-				:precomputed-description="precomputedDescription as IComputedAbilityDescription"
+				:precomputed-description="sourceAbilityDescription as IComputedAbilityDescription"
 			/>
 			<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
 				<LolItemDescription
-					:precomputed-description="precomputedDescription as IComputedItemDescription"
+					:precomputed-description="sourceAbilityDescription as IComputedItemDescription"
 					source="Inventory"
 					hover-tooltip
 				/>
@@ -132,7 +135,7 @@ defineExpose({ el });
 	}
 
 	.hover-tooltip.effect {
-		--at-apply: 'grid grid-cols-[auto_1fr] w-[min(90vw,30rem)] gap-x-[--gap-x]';
+		--at-apply: 'grid grid-cols-[auto_1fr] inline-[min(90vw,30rem)] gap-x-[--gap-x]';
 
 		> img {
 			--at-apply: 'size-[--item-img-size]';

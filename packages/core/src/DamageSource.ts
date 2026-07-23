@@ -1570,10 +1570,9 @@ function abilityVariantText(
 }
 
 export interface IComputedEffectDescription {
-	tooltip: string;
-	tooltipExtended?: string;
-	anyUnknownVariables?: number;
-	anyExtendedVariableInfo?: boolean;
+	description: string;
+	/** for summoner spell effects, build something that can be used for a champion ability hover tooltip to display the whole summoner spell's description that's a different thing from the description of the effect it grants */
+	championAbilityLikePrecomputedDescription?: IComputedAbilityDescription;
 }
 
 export function computeEffectDescription(
@@ -1584,34 +1583,50 @@ export function computeEffectDescription(
 	const source = (EFFECTS as TEffects)[effectObjectName];
 	if ('stringtable' in source) {
 		return {
-			tooltip: EFFECTS_STRINGTABLE[source.stringtable]!,
+			description: EFFECTS_STRINGTABLE[source.stringtable]!,
 		};
 	} else if ('objectName' in source) {
-		const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(source.description, EFFECTS_STRINGTABLE);
+		let championAbilityLikePrecomputedDescription: IComputedAbilityDescription | undefined;
 
-		const tooltip = replaceGameVariables(stringtableReplaced, 'championAbility', {
-			abilityVariant: source,
-			damageSource,
-			isRanged: damageSource?.stats.value.isRanged,
-		}, undefined, replaceOptions);
+		if ('tooltip' in source) {
+			const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(source.tooltip, EFFECTS_STRINGTABLE);
 
-		const tooltipExtended = tooltip.anyExtendedVariables
-			? replaceGameVariables(stringtableReplaced, 'championAbility', {
-					abilityVariant: source,
-					damageSource,
-					isRanged: damageSource?.stats.value.isRanged,
-				}, undefined, { ...replaceOptions, isExtended: true })
-			: undefined;
+			const tooltip = replaceGameVariables(stringtableReplaced, 'championAbility', {
+				abilityVariant: source,
+				damageSource,
+				isRanged: damageSource?.stats.value.isRanged,
+			}, undefined, replaceOptions);
+
+			const tooltipExtended = tooltip.anyExtendedVariables
+				? replaceGameVariables(stringtableReplaced, 'championAbility', {
+						abilityVariant: source,
+						damageSource,
+						isRanged: damageSource?.stats.value.isRanged,
+					}, undefined, { ...replaceOptions, isExtended: true })
+				: tooltip;
+
+			championAbilityLikePrecomputedDescription = {
+				gameAbilityId: GameAbilityId.build(AbilityType.champion, 'TargetDummy', 'passive', 0),
+				name: source.name,
+				tooltip: replaceGameIcons(tooltip.replaced),
+				tooltipExtended: replaceGameIcons(tooltipExtended.replaced),
+				tooltipExtendedBelowLine: '',
+				unknownVariables: [],
+				variables: new Map(),
+				variant: source,
+				cooldown: source.cooldownTime[1],
+				anyUnknownVariables: unknownStringtableVariables.size || tooltip.unknownVariables.length || tooltipExtended.unknownVariables.length,
+				anyExtendedVariableInfo: tooltip.anyExtendedVariables,
+			};
+		}
 
 		return {
-			tooltip: replaceGameIcons(tooltip.replaced),
-			tooltipExtended: tooltipExtended?.replaced ? replaceGameIcons(tooltipExtended.replaced) : undefined,
-			anyUnknownVariables: unknownStringtableVariables.size || tooltip.unknownVariables.length || tooltipExtended?.unknownVariables.length,
-			anyExtendedVariableInfo: tooltip.anyExtendedVariables,
+			description: source.description,
+			championAbilityLikePrecomputedDescription,
 		};
 	} else {
 		return {
-			tooltip: source.description!,
+			description: source.description!,
 		};
 	}
 }
