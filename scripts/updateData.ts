@@ -569,7 +569,7 @@ let runeData: typeof import('../packages/data/files/rune.json') | undefined;
 try {
 	await fs.access(runeFilePath);
 	runeData = JSON.parse(await fs.readFile(runeFilePath, 'utf8'));
-} catch { }
+} catch {}
 
 if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 	console.log('rune data not present or outdated, fetching...');
@@ -848,7 +848,7 @@ let uiData: typeof import('../packages/data/files/ui.json') | undefined;
 try {
 	await fs.access(uiFilePath);
 	uiData = JSON.parse(await fs.readFile(uiFilePath, 'utf8'));
-} catch { }
+} catch {}
 
 const uiAutoAtlasData: Record<string, any> = {};
 const autoAtlasImages: Record<string, {
@@ -1017,7 +1017,7 @@ let effectData: typeof import('../packages/data/files/effect.json') | undefined;
 try {
 	await fs.access(effectFilePath);
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
-} catch { }
+} catch {}
 
 if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {
 	console.log('effect data not present or outdated, fetching...');
@@ -1122,7 +1122,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 							: undefined;
 						(effectData as any).spellCalculations = cleanupObject(mSpellCalculations);
 
-						if (!effectData.description) {
+						if (!effectData.description || 'sharedSpellObjectKey' in effectData) {
 							if (!mClientData) {
 								throw new Error(`${effectObjectName} expected mClientData in shared spell`);
 							}
@@ -2254,7 +2254,7 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 			: responseMethod === 'json'
 				? JSON.parse(data.toString('utf8'))
 				: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
-	} catch { };
+	} catch {};
 	if (!data || (typeof data === 'object' && !Object.keys(data).length)) {
 		data = await fetch(url).then(r => r[responseMethod]()).catch((err) => {
 			console.log(`[fetchCached] ${url} ${responseMethod}`);

@@ -39,15 +39,22 @@
 		},
 		"summonerCleanse": {
 			"dataKey": "summonerCleanse",
-			"sharedSpellObjectKey": "Shared/Spells/Cleanse",
-			"objectName": "Cleanse",
-			"description": "This unit has increased Tenacity."
+			"sharedSpellObjectKey": "Shared/Spells/SummonerBoost",
+			"objectName": "SummonerBoost",
+			"name": "Cleanse",
+			"description": "Removes all crowd control debuffs (excluding <keyword>Suppression</keyword> and <keyword>Airborne</keyword>) and summoner spell debuffs from you and grants @TenacityValue*100@% Tenacity for @TenacityDuration@ seconds.",
+			"image": "assets/spells/icons2d/summoner_boost.png",
+			"dataValues": {
+				"TenacityValue": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+				"TenacityDuration": [3, 3, 3, 3, 3, 3, 3]
+			}
 		},
 		"summonerHeal": {
 			"dataKey": "summonerHeal",
 			"sharedSpellObjectKey": "Shared/Spells/SummonerHeal",
 			"objectName": "SummonerHeal",
-			"description": "This unit's Move Speed is increased.",
+			"name": "Heal",
+			"description": "Restores <healing>@TotalHeal@ Health</healing> and grants <speed>@MoveSpeed*100@% Move Speed</speed> for @MoveSpeedDuration@ second to you and target allied champion.<br><br><rules>If cast without a target, it will cast on the most wounded allied champion in range.<br>Healing is halved on units recently affected by Summoner Heal.</rules>",
 			"image": "assets/spells/icons2d/summoner_heal.png",
 			"dataValues": {
 				"AllyRange": [900, 900, 900, 900, 900, 900, 900],
