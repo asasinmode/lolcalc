@@ -310,6 +310,23 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Gnar: {
+		// TODO shapeshift
+		calculateHooks: {
+			postInit: {
+				handler(self, { bonusStats, championPassiveStats }) {
+					/* the passive states it grants 0%-99% attack speed but all of it except for the lvl 1 bonus is handled by attack speed per level, so add only the missing lvl 1 value */
+					const attackSpeed = championAbilityVariableValue('TotalAS', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
+					if (typeof attackSpeed.value === 'number') {
+						bonusStats.bonusAttackSpeedPercent += attackSpeed.value;
+						championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive attack speed', attackSpeed);
+					}
+				},
+			},
+		},
+	},
 	Hecarim: {
 		calculateHooks: {
 			postTotal: {
@@ -536,6 +553,7 @@ export const CHAMPION_SPECIFICS = {
 	Kled: {
 		setupData(self): { isDismounted: number } {
 			return {
+				// TODO skaarl hp, Q variant, disabled E & R when dismounted
 				isDismounted: clamp(0, Math.round(self.internalData.value.isDismounted ?? 0), 1),
 			};
 		},
