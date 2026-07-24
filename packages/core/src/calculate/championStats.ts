@@ -236,25 +236,34 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.tenacity = bonusStats.tenacity;
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
-	const baseMS = baseStats.moveSpeed;
-	const initialFlatMS = totalPreMultipliersStats.moveSpeed;
-	const flatBonusMS = initialFlatMS - baseMS;
+	{ /* ms calc */
+		const baseMS = baseStats.moveSpeed;
+		const initialFlatMS = totalPreMultipliersStats.moveSpeed;
+		const flatBonusMS = initialFlatMS - baseMS;
 
-	let effectiveFlatMS = flatBonusMS;
-	let effectivePercentMS = calculatedVariables.totalBonusPercentMoveSpeed;
-	const effectiveMultiplicativeMS = calculatedVariables.totalMultiplicativeMoveSpeed;
+		const percentMSMultiplier = calculatedVariables.totalBonusPercentMoveSpeed;
+		const multiplicativeMSMultiplier = calculatedVariables.totalMultiplicativeMoveSpeed;
+		const cassioPMult = calculatedVariables.cassiopeiaPassiveMSMultiplier ?? 0;
 
-	if (calculatedVariables.cassiopeiaMSMultiplier) {
-		effectiveFlatMS = flatBonusMS * calculatedVariables.cassiopeiaMSMultiplier;
-		effectivePercentMS = calculatedVariables.totalBonusPercentMoveSpeed * calculatedVariables.cassiopeiaMSMultiplier;
+		const effectiveFlatMS = flatBonusMS * (1 + cassioPMult);
+		const effectivePercentMS = percentMSMultiplier * (1 + cassioPMult);
+
+		const baseRawMS = (baseMS + effectiveFlatMS) * (1 + effectivePercentMS);
+
+		let multFactor = 1 + multiplicativeMSMultiplier;
+		if (multiplicativeMSMultiplier > 0 && cassioPMult > 0) {
+			const compoundingFactor = 1 + (cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (2.5 - multiplicativeMSMultiplier)));
+			multFactor *= compoundingFactor;
+		}
+
+		const rawTotalMS = baseRawMS * multFactor;
+
+		const penalty = calculateMSCapPenalty(rawTotalMS);
+		calculatedVariables.movespeedSoftCapPenalty = penalty;
+
+		totalPreMultipliersStats.moveSpeed = rawTotalMS - penalty;
+		bonusStats.moveSpeed = rawTotalMS - baseMS - penalty;
 	}
-
-	const rawMS = (baseMS + effectiveFlatMS) * (1 + effectivePercentMS) * (1 + effectiveMultiplicativeMS);
-
-	const penalty = calculateMSCapPenalty(rawMS);
-	calculatedVariables.movespeedSoftCapPenalty = penalty;
-	totalPreMultipliersStats.moveSpeed = rawMS - penalty;
-	bonusStats.moveSpeed = rawMS - baseMS - penalty;
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
@@ -305,7 +314,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalStats.attackSpeed = Math.min(totalStats.attackSpeed, calculatedVariables.attackSpeedCap);
 	totalStats.tenacity = Math.min(1, totalStats.tenacity);
 
-	{
+	{ /* stat related heal multipliers */
 		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
 		totalMultipliersStats.hpRegen += hpRegenMultValue;
 		bonusStats.hpRegen += hpRegenMultValue;

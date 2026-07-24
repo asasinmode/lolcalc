@@ -34,7 +34,7 @@ import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
-import { calculateMSCapPenalty, combineCompounding } from '../calculate/util.ts';
+import { combineCompounding } from '../calculate/util.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
 
@@ -211,11 +211,11 @@ export const CHAMPION_SPECIFICS = {
 	Cassiopeia: {
 		calculateHooks: {
 			postInit: {
-				handler(self, { championPassiveStats, totalPreMultipliersStats, baseStats, bonusStats }, { calculatedVariables }) {
+				handler(self, _stats, { calculatedVariables }) {
 					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityVariant: (self.champion.value as typeof ICassiopeia).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 
 					if (typeof msMultiplier.value === 'number') {
-						calculatedVariables.cassiopeiaMSMultiplier = 1 + msMultiplier.value;
+						calculatedVariables.cassiopeiaPassiveMSMultiplier = msMultiplier.value;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS cassiopeia] failed to calculate passive ms multiplier');
 					}

@@ -34,7 +34,7 @@ test('Briar, shards 211', async (t) => {
 			hpRegen: 0,
 			manaRegen: 0,
 			tenacity: 15,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 1175);
 	});
 });

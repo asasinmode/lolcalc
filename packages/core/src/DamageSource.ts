@@ -1243,7 +1243,8 @@ export function formatChampionStatValue(statName: IChampionStatName, value: numb
 	const multiplier = meta.isPercentage ? 100 : 1;
 	return meta.decimal
 		? roundVariable(value * multiplier, meta.decimal)
-		: Math.round(value * multiplier);
+		/* round variable here before rounding to try and get rid of small floating artifacts like `348.499999994` not being `349` */
+		: Math.round(roundVariable(value, 3) * multiplier);
 }
 
 export function computeItemDescription(
