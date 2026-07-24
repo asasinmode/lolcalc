@@ -20,6 +20,11 @@ export const PATCH_VERSION = {
 	vMinor: championData.version.slice(0, championData.version.lastIndexOf('.')) as string,
 };
 
+export const CONSTS = {
+	/** something mathy related to asymptotes that I don't quite understand */
+	moveSpeedMultFactorDenominator: 2.5,
+};
+
 export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListedChampion> as IChampionData;
 
 type IChampionData = { [Id in IChampionId]: IListedChampion<Id> };

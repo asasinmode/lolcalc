@@ -2,9 +2,9 @@ import type { TMiscData } from '@lolcalc/data';
 import type { IChampionId, IItem } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
-import { MISC } from '@lolcalc/data';
+import { CONSTS, MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
-import { addMultiplicative, calculateMSCapPenalty } from './util.ts';
+import { addMultiplicative, calculateMSCapPenalty, combineCompounding } from './util.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
 	const level = source.level.value;
@@ -237,24 +237,21 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
 	{ /* ms calc */
-		const baseMS = baseStats.moveSpeed;
-		const initialFlatMS = totalPreMultipliersStats.moveSpeed;
-		const flatBonusMS = initialFlatMS - baseMS;
-
 		const percentMSMultiplier = calculatedVariables.totalBonusPercentMoveSpeed;
 		const multiplicativeMSMultiplier = calculatedVariables.totalMultiplicativeMoveSpeed;
 		const cassioPMult = calculatedVariables.cassiopeiaPassiveMSMultiplier ?? 0;
 
-		const effectiveFlatMS = flatBonusMS * (1 + cassioPMult);
+		const bonusFlatMS = totalPreMultipliersStats.moveSpeed - baseStats.moveSpeed;
+
+		const effectiveFlatMS = bonusFlatMS * (1 + cassioPMult);
 		const effectivePercentMS = percentMSMultiplier * (1 + cassioPMult);
+		const baseRawMS = (baseStats.moveSpeed + effectiveFlatMS) * (1 + effectivePercentMS);
 
-		const baseRawMS = (baseMS + effectiveFlatMS) * (1 + effectivePercentMS);
-
-		let multFactor = 1 + multiplicativeMSMultiplier;
-		if (multiplicativeMSMultiplier > 0 && cassioPMult > 0) {
-			const compoundingFactor = 1 + (cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (2.5 - multiplicativeMSMultiplier)));
-			multFactor *= compoundingFactor;
-		}
+		const multFactor = 1 + combineCompounding(
+			multiplicativeMSMultiplier,
+			/* something mathy going on that I don't quite understand */
+			cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeedMultFactorDenominator - multiplicativeMSMultiplier)),
+		);
 
 		const rawTotalMS = baseRawMS * multFactor;
 
@@ -262,12 +259,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		calculatedVariables.movespeedSoftCapPenalty = penalty;
 
 		totalPreMultipliersStats.moveSpeed = rawTotalMS - penalty;
-		bonusStats.moveSpeed = rawTotalMS - baseMS - penalty;
+		bonusStats.moveSpeed = rawTotalMS - baseStats.moveSpeed - penalty;
 	}
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
-	// TODO possibly could be done in posttotal but it kind of messes up swiftmarch adaptive force, figure it out when something messes up because of it
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
