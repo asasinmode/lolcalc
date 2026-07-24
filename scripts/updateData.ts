@@ -15,6 +15,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
+import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon.ts';
 import { CUSTOM_EFFECTS, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc.ts';
@@ -766,7 +767,7 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 			variables: {
 				variableSourceKeys: ['dataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: { abilityVariant: soulAbility, allAbilitiesVariants: allSpells, dynamicVariables: (DRAGONS as IHypotheticalDragonSpecifics)[name]?.soul?.variables },
+				variableValueParameters: { abilityVariant: soulAbility, allAbilitiesVariants: allSpells, dynamicVariables: (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[name]?.soul?.variables },
 			},
 		});
 
