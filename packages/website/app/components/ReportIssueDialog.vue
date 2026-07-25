@@ -38,7 +38,7 @@ function submitIssue(_event: SubmitEvent) {
 		<form @submit.prevent="submitIssue">
 			<div>
 				<label for="issue-title">title<span>*</span></label>
-				<input id="issue-title" autofocus required>
+				<input id="issue-title" placeholder="Cassiopeia swiftmarch" autofocus required>
 			</div>
 			<div>
 				<label for="issue-category">category<span>*</span></label>
@@ -52,11 +52,11 @@ function submitIssue(_event: SubmitEvent) {
 			</div>
 			<div>
 				<label for="issue-message">message<span>*</span></label>
-				<textarea id="issue-message" rows="8" required />
+				<textarea id="issue-message" placeholder="level 5 Cassiopeia with swiftmarch, movement speed rune shard and cloud dragon shows wrong movement speed. Game shows 420, the linked configuration 415" rows="8" required />
 			</div>
 			<div>
 				<label for="issue-contact">where can I contact you?</label>
-				<input id="issue-contact" value="discord: asasinmode, email: suportmode@gmail.com">
+				<input id="issue-contact" placeholder="discord: username, email: example@email.com">
 			</div>
 			<label for="issue-configuration">
 				<input id="issue-configuration" type="checkbox" checked>
