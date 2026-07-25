@@ -71,7 +71,7 @@ onMounted(() => {
 			</span>
 		</div>
 	</header>
-	<IndexPage />
+	<NuxtPage />
 	<footer>
 		<h2>contact</h2>
 		<ul>
