@@ -159,6 +159,30 @@ onMounted(() => {
 				> nav {
 					> ul {
 						--at-apply: 'flex gap-5 font-500';
+
+						> li {
+							> *:hover,
+							> *:focus-visible,
+							> .router-link-active {
+								--at-apply: 'text-[--accent]';
+							}
+
+							&:nth-child(1) {
+								--accent: var(--colors-green-400);
+							}
+
+							&:nth-child(2) {
+								--accent: var(--colors-indigo-400);
+							}
+
+							&:nth-child(3) {
+								--accent: var(--colors-yellow-400);
+							}
+
+							&:nth-child(4) {
+								--accent: var(--colors-blue-400);
+							}
+						}
 					}
 				}
 
