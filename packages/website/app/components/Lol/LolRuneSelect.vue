@@ -259,7 +259,7 @@ defineExpose({
 				<button autofocus value="cancel" class="other-ui-btn">
 					save
 				</button>
-				<button value="cancel" class="other-ui-btn">
+				<button value="cancel" title="close" class="other-ui-btn">
 					<span>
 						close
 					</span>

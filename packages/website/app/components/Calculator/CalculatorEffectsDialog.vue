@@ -225,7 +225,7 @@ defineExpose({
 				</button>
 			</div>
 			<form method="dialog">
-				<button value="cancel" class="other-ui-btn">
+				<button value="cancel" title="close" class="other-ui-btn">
 					<span>
 						close
 					</span>

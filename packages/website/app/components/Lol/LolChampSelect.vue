@@ -169,7 +169,7 @@ defineExpose({
 				--at-apply: 'end-0 -top-[--mt] absolute translate-x-full';
 
 				> button {
-					--at-apply: 'p-1 text-neutral-200 hoverable:text-white';
+					--at-apply: 'p-1 text-neutral-200 block-8 hoverable:text-white';
 
 					> span:first-child {
 						--at-apply: 'size-6';
