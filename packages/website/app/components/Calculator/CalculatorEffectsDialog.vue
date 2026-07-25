@@ -40,7 +40,7 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
 		const item = ITEMS[sourceAbilityId.id]!;
 
-		const searchString = createSearchString(`${effectSpecific.label};${createSearchString(computeEffectDescription(effectObjectName).tooltip)};`).concat(item.searchString);
+		const searchString = createSearchString(`${effectSpecific.label};${createSearchString(computeEffectDescription(effectObjectName).description)};`).concat(item.searchString);
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
@@ -57,7 +57,7 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
 
-		const searchString = createSearchString(`${effectSpecific.label};${computeEffectDescription(effectObjectName).tooltip}`);
+		const searchString = createSearchString(`${effectSpecific.label};${computeEffectDescription(effectObjectName).description}`);
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
