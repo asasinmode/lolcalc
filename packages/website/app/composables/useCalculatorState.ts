@@ -27,7 +27,7 @@ export function useCalculatorState(
 		}
 		const data = calculatorStateString();
 		window?.sessionStorage.setItem(STATE_SESSION_STORAGE_KEY, data[0]);
-		window?.history.replaceState(null, '', `${location.pathname}${data[1] ? `?${data[1]}` : ''}`);
+		window?.history.replaceState(window?.history.state, '', `${location.pathname}${data[1] ? `?${data[1]}` : ''}`);
 		isStateTooLargeForQuery.value = data[1].length !== data[0].length;
 	}
 
