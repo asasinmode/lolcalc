@@ -5,7 +5,7 @@ let resolve: (() => void) | undefined;
 const damageSourceRef = shallowRef<DamageSource>();
 const dialogRef = shallowRef<InstanceType<typeof LolItemShop>>();
 
-async function selectItems(damageSource: DamageSource): Promise<void> {
+function selectItems(damageSource: DamageSource): Promise<void> {
 	damageSourceRef.value = damageSource;
 	return new Promise<void>((_resolve) => {
 		dialogRef.value?.open();

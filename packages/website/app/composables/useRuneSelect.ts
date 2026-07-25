@@ -5,7 +5,7 @@ let resolve: (() => void) | undefined;
 const valueRef = shallowRef<Ref<IChampionRunes>>();
 const dialogRef = shallowRef<InstanceType<typeof LolRuneSelect>>();
 
-async function selectRunes(targetRef: Ref<IChampionRunes>): Promise<void> {
+function selectRunes(targetRef: Ref<IChampionRunes>): Promise<void> {
 	valueRef.value = targetRef;
 	return new Promise<void>((_resolve) => {
 		dialogRef.value?.open();

@@ -5,7 +5,7 @@ let resolve: (() => void) | undefined;
 const damageSourceRef = shallowRef<DamageSource>();
 const dialogRef = shallowRef<InstanceType<typeof CalculatorDamageSourceDebugDialog>>();
 
-async function openDebugDialog(damageSource: DamageSource): Promise<void> {
+function openDebugDialog(damageSource: DamageSource): Promise<void> {
 	damageSourceRef.value = damageSource;
 	return new Promise<void>((_resolve) => {
 		dialogRef.value?.open();
