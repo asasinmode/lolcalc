@@ -1,6 +1,12 @@
 <template>
-	<main id="help">
-		<h1>help</h1>
+	<main id="about">
+		<h1>about</h1>
+
+		<p>
+			For instructions on how to use it, visit <NuxtLink to="/guide">
+				guide
+			</NuxtLink>
+		</p>
 
 		<h2>what is it?</h2>
 		<p>

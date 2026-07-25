@@ -69,6 +69,28 @@ onMounted(() => {
 			<span>
 				26{{ vSemver.slice(vSemver.indexOf('.')) }}
 			</span>
+			<nav>
+				<ul>
+					<li>
+						<NuxtLink to="/">
+							calculator
+						</NuxtLink>
+					</li>
+					<li>
+						<NuxtLink to="/guide">
+							guide
+						</NuxtLink>
+					</li>
+					<li>
+						<NuxtLink to="/about">
+							about
+						</NuxtLink>
+					</li>
+					<li>
+						<button>report an issue</button>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</header>
 	<NuxtPage />
@@ -133,6 +155,12 @@ onMounted(() => {
 				--at-apply: 'flex items-center justify-between relative';
 				--logo-size: calc(10 * var(--spacing));
 				grid-column: content-start / content-end;
+
+				> nav {
+					> ul {
+						--at-apply: 'flex gap-5 font-500';
+					}
+				}
 
 				> h1 {
 					--at-apply: 'text-3xl leading-[1] font-700 tracking-wide';
