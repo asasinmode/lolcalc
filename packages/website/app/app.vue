@@ -4,6 +4,7 @@ import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
 const { vSemver, vMinor } = PATCH_VERSION;
 const enableUnimplementedUi = useEnableUnimplementedUi();
+const { reportAnIssue } = useReportIssueDialog();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
@@ -87,13 +88,16 @@ onMounted(() => {
 						</NuxtLink>
 					</li>
 					<li>
-						<button>report an issue</button>
+						<button @click="reportAnIssue">
+							report an issue
+						</button>
 					</li>
 				</ul>
 			</nav>
 		</div>
 	</header>
 	<NuxtPage />
+	<ReportIssueDialog />
 	<footer>
 		<h2>contact</h2>
 		<ul>
