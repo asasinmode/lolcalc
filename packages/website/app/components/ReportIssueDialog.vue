@@ -41,7 +41,7 @@ function submitIssue(_event: SubmitEvent) {
 				<input id="issue-title" autofocus required>
 			</div>
 			<div>
-				<label for="issue-category">category</label>
+				<label for="issue-category">category<span>*</span></label>
 				<select id="issue-category" required>
 					<option selected>
 						calculations wrong
@@ -54,8 +54,12 @@ function submitIssue(_event: SubmitEvent) {
 				<label for="issue-message">message<span>*</span></label>
 				<textarea id="issue-message" rows="8" required />
 			</div>
+			<div>
+				<label for="issue-contact">where can I contact you?</label>
+				<input id="issue-contact" value="discord: asasinmode, email: suportmode@gmail.com">
+			</div>
 			<label for="issue-configuration">
-				<input id="issue-configuration" type="checkbox">
+				<input id="issue-configuration" type="checkbox" checked>
 				include link to the current configuration
 			</label>
 			<label for="issue-disclaimer">
