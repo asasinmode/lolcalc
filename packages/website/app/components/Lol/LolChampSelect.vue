@@ -166,7 +166,7 @@ defineExpose({
 			}
 
 			> form {
-				--at-apply: 'end-0 -top-[--mt] absolute translate-x-full';
+				--at-apply: 'end-0 -top-0.5 absolute translate-x-full';
 
 				> button {
 					--at-apply: 'p-1 text-neutral-200 block-8 hoverable:text-white';
