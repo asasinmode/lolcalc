@@ -176,7 +176,7 @@ onMounted(() => {
 							}
 
 							&:nth-child(2) {
-								--accent: var(--colors-indigo-400);
+								--accent: var(--colors-blue-400);
 							}
 
 							&:nth-child(3) {
@@ -184,7 +184,7 @@ onMounted(() => {
 							}
 
 							&:nth-child(4) {
-								--accent: var(--colors-blue-400);
+								--accent: var(--colors-red-400);
 							}
 						}
 					}

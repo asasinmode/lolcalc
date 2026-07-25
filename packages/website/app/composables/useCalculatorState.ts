@@ -9,7 +9,7 @@ import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect'
 import { CHAMPION_KEY_TO_ID } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 
-const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
+export const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';
 
 export function useCalculatorState(

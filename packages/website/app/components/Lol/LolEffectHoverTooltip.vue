@@ -12,7 +12,7 @@ import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
+import { ITEMS, useChampion } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
 
