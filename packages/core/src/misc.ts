@@ -53,6 +53,20 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 	];
 }
 
+export async function gameAbilityImgAttrs(abilityId: IGameAbilityId) {
+	const img = await gameAbilityImage(abilityId);
+
+	if (Array.isArray(img)) {
+		return {
+			src: img[0],
+			width: img[1],
+			height: img[2] ?? img[1],
+		};
+	} else {
+		return img;
+	}
+}
+
 /** used for creating a _game ability_ image string that will be parsed by `simpleDescriptionFormatting` */
 export function simpleFormattingGameAbilityImage(type: TAbilityType, id: string) {
 	return `%a:${type}-${id}%`;

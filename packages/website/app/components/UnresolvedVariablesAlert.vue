@@ -1,7 +1,7 @@
 <template>
 	<p class="alert warning">
-		<Icon class="i-ph:warning-light" />
 		Some variables weren't resolved correctly. Please <a href="#">TODO report this issue</a>
+		<Icon class="i-ph:warning-light" />
 	</p>
 </template>
 
@@ -47,6 +47,18 @@
 
 			.icon {
 				--at-apply: 'text-red-950';
+			}
+		}
+
+		&.info {
+			--at-apply: 'b-blue-600 bg-blue-900/10 text-blue-400';
+
+			&::after {
+				--at-apply: 'bg-blue-400';
+			}
+
+			.icon {
+				--at-apply: 'text-blue-950';
 			}
 		}
 	}

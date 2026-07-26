@@ -1,5 +1,5 @@
-import antfu from '@antfu/eslint-config';
 // @ts-check
+import antfu from '@antfu/eslint-config';
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat';
 import unocss from '@unocss/eslint-config/flat';
 
@@ -14,6 +14,7 @@ const nuxtConfig = createConfigForNuxt({
 }, {
 	rules: {
 		'vue/component-name-in-template-casing': ['warn', 'PascalCase', { registeredComponentsOnly: false }],
+		'vue/singleline-html-element-content-newline': 'off',
 	},
 	ignores: ['**/*.md'],
 }, unocss);
