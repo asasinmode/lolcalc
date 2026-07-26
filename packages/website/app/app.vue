@@ -233,19 +233,19 @@ function closeMenu() {
 							}
 
 							&:nth-child(1) {
-								--accent: var(--colors-green-400);
+								--accent: theme('colors.green.400');
 							}
 
 							&:nth-child(2) {
-								--accent: var(--colors-blue-400);
+								--accent: theme('colors.blue.400');
 							}
 
 							&:nth-child(3) {
-								--accent: var(--colors-yellow-400);
+								--accent: theme('colors.yellow.400');
 							}
 
 							&:nth-child(4) {
-								--accent: var(--colors-red-400);
+								--accent: theme('colors.red.400');
 							}
 						}
 					}
