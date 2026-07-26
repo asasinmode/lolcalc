@@ -51,10 +51,33 @@ onMounted(() => {
 	emailEl.value?.append(email);
 	emailEl.value?.setAttribute('href', `mailto:${email}`);
 });
+
+const header = useTemplateRef('header');
+const menuCloseBtn = useTemplateRef('menuCloseBtn');
+
+function openMenu() {
+	header.value?.setAttribute('data-open', '');
+	menuCloseBtn.value?.setAttribute('data-open', '');
+	setTimeout(() => {
+		menuCloseBtn.value?.style.setProperty('--menu-backdrop-bg-opacity', '1');
+	});
+}
+
+function closeMenu() {
+	header.value?.removeAttribute('data-open');
+	menuCloseBtn.value?.style.setProperty('--menu-backdrop-bg-opacity', '0');
+	header.value?.addEventListener('transitionend', () => {
+		menuCloseBtn.value?.removeAttribute('data-open');
+	}, { once: true });
+}
 </script>
 
 <template>
-	<header>
+	<button id="menu-btn" title="menu" @click="openMenu">
+		<span>menu</span>
+		<Icon class="i-ph:list-bold" />
+	</button>
+	<header ref="header">
 		<div>
 			<h1>
 				<a :href="$config.app.baseURL">
@@ -71,6 +94,10 @@ onMounted(() => {
 				26{{ vSemver.slice(vSemver.indexOf('.')) }}
 			</span>
 			<nav>
+				<button id="menu-close-btn" ref="menuCloseBtn" title="zamknij menu" @click="closeMenu">
+					<span>zamknij menu</span>
+					<Icon class="i-ph:x-bold" />
+				</button>
 				<ul>
 					<li>
 						<NuxtLink to="/">
@@ -148,19 +175,53 @@ onMounted(() => {
 	:root {
 		/* bg color of the 'plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png' */
 		--placeholder-champion-bg-clr: #020a13;
+		--header-logo-size: calc(10 * var(--spacing));
+		--header-py: calc(2.5 * var(--spacing));
 	}
 
 	#__nuxt {
+		#menu-btn {
+			--at-apply: 'fixed inset-e-0 inset-bs-2.75 z-11 ms-auto -translate-x-(--size-page-computed-px) translate-y-[calc(0.5*var(--header-logo-size)-50%)] rounded-[50%] b b-transparent bg-(--mauve-bg) transition-[box-shadow,border] lg:hidden';
+
+			&:has(+ [data-stuck]) {
+				--at-apply: 'b-neutral-400 shadow';
+			}
+
+			&:has(+ [data-open]) {
+				--at-apply: 'z-9';
+			}
+		}
+
+		#menu-close-btn {
+			--at-apply: 'before:transition-[--menu-backdrop-bg-opacity] data-open:before:block lg:hidden me-(--min-container-px) p-2 before:bg-black/20 before:opacity-(--menu-backdrop-bg-opacity) before:inline-screen before:hidden before:inset-y-0 before:inset-s-0 before:fixed before:-translate-x-full';
+		}
+
+		#menu-btn,
+		#menu-close-btn {
+			--at-apply: 'p-2 size-10';
+
+			> span {
+				&:nth-child(1) {
+					--at-apply: 'sr-only';
+				}
+
+				&:nth-child(2) {
+					--at-apply: 'size-6';
+				}
+			}
+		}
+
 		> header {
-			--at-apply: 'flex b-b b-neutral-500 grid grid-cols-subgrid py-2.5';
+			--at-apply: 'flex b-b b-neutral-500 grid grid-cols-subgrid py-[--header-py]';
 			grid-column: page;
 
 			> div {
 				--at-apply: 'flex items-center justify-between relative';
-				--logo-size: calc(10 * var(--spacing));
 				grid-column: content-start / content-end;
 
 				> nav {
+					--at-apply: 'fixed of-x-hidden of-y-auto inset-y-0 inset-e-0 z-10 flex grow translate-x-full flex-col items-end bg-(--mauve-bg) transition-[translate,box-shadow] max-inline-[80vw] min-inline-60 lg:static lg:translate-x-0 lg:py-0 lg:pe-0 lg:shadow-none lg:transition-shadow';
+
 					> ul {
 						--at-apply: 'flex gap-5 font-500';
 
@@ -195,7 +256,7 @@ onMounted(() => {
 
 					> a {
 						> img {
-							--at-apply: 'inline-block size-[--logo-size]';
+							--at-apply: 'inline-block size-[--header-logo-size]';
 						}
 					}
 
@@ -205,7 +266,15 @@ onMounted(() => {
 				}
 
 				> span {
-					--at-apply: 'absolute text-xs text-neutral-400 font-600 font-mono start-[calc(var(--logo-size)+0.6rem)] -bottom-0.5';
+					--at-apply: 'absolute text-xs text-neutral-400 font-600 font-mono start-[calc(var(--header-logo-size)+0.6rem)] -bottom-0.5';
+				}
+			}
+
+			&[data-open] {
+				> div {
+					> nav {
+						--at-apply: 'translate-x-0 shadow-lg';
+					}
 				}
 			}
 		}
