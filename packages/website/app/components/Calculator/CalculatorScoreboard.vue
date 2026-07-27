@@ -456,7 +456,8 @@ function setLocalMirrorLayout() {
 	#scoreboard {
 		--at-apply: 'b-b b-neutral-500 mt-5 relative mx-auto';
 		--extras-gap: calc(2 * var(--spacing));
-		--extra-item-w: calc((58.75 + 1/6) * var(--spacing));
+		/* this and `--scoreboard-item-max-w` should ensure that there are 3 extra columns starting from `1606px` (2 cols at 1605) that go up to 256px */
+		--extra-item-min-w: calc((58.75 + 1/6) * var(--spacing));
 		--extra-item-max-w: calc(64 * var(--spacing));
 		--scoreboard-item-px: calc(4 * var(--spacing));
 		--scoreboard-item-b-w: 0.25rem;

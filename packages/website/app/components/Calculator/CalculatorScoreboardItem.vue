@@ -2438,7 +2438,7 @@ defineExpose({ el });
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full w-full grid grid-cols-[repeat(auto-fit,minmax(var(--extra-item-w),1fr))] auto-rows-min gap-[--extras-gap] pt-3';
+				--at-apply: 'col-span-full w-full grid grid-cols-[repeat(auto-fit,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-[--extras-gap] pt-3';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
