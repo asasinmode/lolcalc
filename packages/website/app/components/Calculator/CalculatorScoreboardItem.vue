@@ -1501,24 +1501,16 @@ defineExpose({ el });
 <style>
 @layer components {
 	#scoreboard > div > ul:nth-of-type(1) > [data-scoreboard-item] {
-		border-inline-start: 0.25rem solid var(--damage-source-clr);
+		border-inline-start: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
 	}
 
 	#scoreboard > div > ul:nth-of-type(2) > [data-scoreboard-item] {
 		--bg-direction: 270deg;
-		border-inline-end: 0.25rem solid var(--damage-source-clr);
-	}
-
-	#scoreboard > div > ul {
-		--extras-gap: calc(2 * var(--spacing));
-		--extra-item-w: calc(64 * var(--spacing));
-
-		min-width: calc(3 * var(--extra-item-w) + 2 * var(--extras-gap));
+		border-inline-end: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
 	}
 
 	#scoreboard > div > ul > [data-scoreboard-item] {
-		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-4 box-content';
-		min-width: calc(3 * var(--extra-item-w) + 2 * var(--extras-gap));
+		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-[--scoreboard-item-px] box-content';
 
 		--py: calc(3 * var(--spacing));
 		--select-champion-size: calc(var(--spacing) * 14);
@@ -2446,7 +2438,7 @@ defineExpose({ el });
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full w-full grid grid-cols-[repeat(3,minmax(0,var(--extra-item-w)))] auto-rows-min gap-[--extras-gap] pt-3';
+				--at-apply: 'col-span-full w-full grid grid-cols-[repeat(auto-fit,minmax(100px,var(--extra-item-w)))] auto-rows-min gap-[--extras-gap] pt-3';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
@@ -2523,7 +2515,7 @@ defineExpose({ el });
 	#dialog-effects > ul > li,
 	#scoreboard > div > ul > [data-scoreboard-item] > details > [data-extras] {
 		> article {
-			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md w-[--extra-item-w,auto]';
+			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
 			--p: calc(2 * var(--spacing));
 
 			> img {

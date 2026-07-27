@@ -454,7 +454,14 @@ function setLocalMirrorLayout() {
 <style>
 @layer components {
 	#scoreboard {
-		--at-apply: 'b-b b-neutral-500 mt-5 relative w-max mx-auto';
+		--at-apply: 'b-b b-neutral-500 mt-5 relative mx-auto';
+		--extras-gap: calc(2 * var(--spacing));
+		--extra-item-w: calc(64 * var(--spacing));
+		--scoreboard-item-px: calc(4 * var(--spacing));
+		--scoreboard-item-b-w: 0.25rem;
+		--scoreboard-item-max-w: calc(
+			2 * var(--scoreboard-item-px) + 3 * var(--extra-item-w) + 2 * var(--extras-gap) + var(--scoreboard-item-b-w)
+		);
 
 		> h2 {
 			--at-apply: 'mb-3';
@@ -469,7 +476,7 @@ function setLocalMirrorLayout() {
 		}
 
 		> div {
-			--at-apply: 'mx-auto gap-x-10 grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-2 w-max relative pb-2';
+			--at-apply: 'mx-auto gap-x-10 inline-max grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2';
 
 			&::after {
 				--at-apply: 'bg-neutral-500 w-px content-empty start-1/2 top-2 bottom-0 absolute -translate-x-1/2';
