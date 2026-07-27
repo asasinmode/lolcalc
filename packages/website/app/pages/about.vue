@@ -21,7 +21,7 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 
 		<h2>what is it?</h2>
 		<p>
-			<strong>lolcalc</strong> is intended to be a fully fledged, all-included <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> damage calculator (WIP at the moment). You should be able to choose any champion/item/rune combination and see the same* numbers you will find in game. See <a href="#does-it-work">does it work?</a> section for examples.
+			<strong>lolcalc</strong> is intended to be a fully fledged, all-included <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> damage calculator (WIP at the moment). You should be able to choose any champion/item/rune combination and see the same* numbers you will find in game. See the "<a href="#does-it-work">does it work?</a>" section for examples.
 		</p>
 		<p>*with known discrepancies being</p>
 		<ul>

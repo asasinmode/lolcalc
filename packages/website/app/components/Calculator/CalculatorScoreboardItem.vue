@@ -1517,7 +1517,7 @@ defineExpose({ el });
 	}
 
 	#scoreboard > div > ul > [data-scoreboard-item] {
-		--at-apply: 'relative grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-4 box-content';
+		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-4 box-content';
 		min-width: calc(3 * var(--extra-item-w) + 2 * var(--extras-gap));
 
 		--py: calc(3 * var(--spacing));
@@ -1533,7 +1533,7 @@ defineExpose({ el });
 		);
 
 		--ability-size-passive: calc(var(--spacing) * 10);
-		--ability-size: calc(var(--spacing) * 14);
+		--ability-size: calc(14 * var(--spacing));
 		--ability-level-btn-indicator-size: calc(2 * var(--spacing));
 		--ability-level-btn-py: calc(1 * var(--spacing));
 		--ability-level-buttons-size: calc(var(--ability-level-btn-indicator-size) + 2 * var(--ability-level-btn-py));
@@ -2181,7 +2181,7 @@ defineExpose({ el });
 				[data-w],
 				[data-e],
 				[data-r] {
-					--at-apply: 'mb-[calc(var(--ability-level-btn-indicator-size)+2*var(--ability-level-btn-py))]';
+					--at-apply: 'mbe-[calc(var(--ability-level-btn-indicator-size)+2*var(--ability-level-btn-py))]';
 
 					&[data-level='0'],
 					&:not([data-level]) {
