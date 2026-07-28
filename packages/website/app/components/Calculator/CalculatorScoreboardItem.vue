@@ -1502,16 +1502,16 @@ defineExpose({ el });
 
 <style>
 @layer components {
-	#scoreboard > div > ul:nth-of-type(1) > [data-scoreboard-item] {
+	[data-scoreboard-item][data-group='sources'] {
 		border-inline-start: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
 	}
 
-	#scoreboard > div > ul:nth-of-type(2) > [data-scoreboard-item] {
+	[data-scoreboard-item][data-group='targets'] {
 		--bg-direction: 270deg;
 		border-inline-end: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
 	}
 
-	#scoreboard > div > ul > [data-scoreboard-item] {
+	[data-scoreboard-item] {
 		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-[--scoreboard-item-px] box-content';
 
 		--py: calc(3 * var(--spacing));
@@ -1522,9 +1522,13 @@ defineExpose({ el });
 		--runes-stats-img-w: calc(5 * var(--spacing));
 		--runes-stats-text-w: calc(20 * var(--spacing));
 		--runes-stats-px: calc(0.5 * var(--spacing));
+		--runes-stats-py: calc(0.5 * var(--spacing));
 		--runes-stats-section-w: calc(
 			2 * var(--runes-stats-px) + 2 * (var(--runes-stats-img-w) + var(--runes-stats-text-w)) + 1px /* 1px is border */
 		);
+		--runes-stats-rows: 4;
+		--runes-stats-row-h: calc(6 * var(--spacing));
+		--runes-stats-section-h: calc(var(--runes-stats-rows) * var(--runes-stats-row-h) + 2 * var(--runes-stats-py));
 
 		--ability-size-passive: calc(var(--spacing) * 10);
 		--ability-size: calc(14 * var(--spacing));
@@ -1538,6 +1542,7 @@ defineExpose({ el });
 		--stack-size: calc(8 * var(--spacing));
 		--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
 		--gap-x: calc(4 * var(--spacing));
+		--item-pe: calc(0.5 * var(--spacing));
 
 		grid-template-areas:
 			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
@@ -1553,6 +1558,12 @@ defineExpose({ el });
 			oklch(from var(--damage-source-clr) l c h / 0.1),
 			oklch(from var(--damage-source-clr) l c h / 0.1)
 		);
+
+		@media (width < 1606px) {
+			& {
+				--at-apply: 'inline-max';
+			}
+		}
 
 		&.highlighted {
 			background-image: linear-gradient(
@@ -1734,16 +1745,22 @@ defineExpose({ el });
 			--me: calc(3 * var(--spacing));
 			--ms: calc(5 * var(--spacing));
 
+			@media (width < 1606px) {
+				& {
+					--me: calc(2 * var(--spacing) - 1px);
+					--ms: calc(2.5 * var(--spacing));
+				}
+			}
+
 			> li {
-				--at-apply: 'pe-[--pe]';
-				--pe: calc(0.5 * var(--spacing));
+				--at-apply: 'pe-[--item-pe]';
 
 				&:nth-child(6) {
 					--at-apply: 'pe-0';
 				}
 
 				&:last-child {
-					--at-apply: 'pe-0 ps-[--pe]';
+					--at-apply: 'pe-0 ps-[--item-pe]';
 				}
 
 				> * {
@@ -1818,7 +1835,7 @@ defineExpose({ el });
 			}
 
 			&:not([data-role-quest='bot']) {
-				--at-apply: 'me-[calc(var(--item-size)+var(--me))]';
+				--at-apply: 'me-[calc(var(--item-size)+var(--me)+var(--item-pe))]';
 
 				> li:last-child {
 					--at-apply: 'hidden';
@@ -1883,24 +1900,34 @@ defineExpose({ el });
 			--at-apply: 'relative';
 			grid-area: expanded;
 
-			> div {
-				/* &::details-content { */
+			@media (width < 1606px) {
+				--at-apply: 'inline-max';
+			}
+
+			&::details-content {
 				--at-apply: 'pt-4 -mt-6 grid grid-cols-[min-content_min-content_1fr] grid-rows-[auto_min-content_min-content_1fr] auto-rows-min';
 				grid-template-areas:
 					'effects stats abilities'
 					'effects stats resources'
 					'runes stats resources'
 					'runes stats role-quest-dragons';
+			}
 
-				/* @media (width < 1606px) { */
-				/* 	--at-apply: 'grid-cols-2'; */
-				/* 	grid-template-areas: */
-				/* 		'abilities abilities' */
-				/* 		'resources resources' */
-				/* 		'effects stats' */
-				/* 		'runes stats' */
-				/* 		'role-quests-dragons role-quests-dragons'; */
-				/* } */
+			@media (width < 1606px) {
+				& {
+					--at-apply: 'ms-auto';
+				}
+
+				&::details-content {
+					--at-apply: 'grid-cols-[1fr_auto] grid-rows-none auto-rows-max inline-max justify-items-end';
+
+					grid-template-areas:
+						'abilities abilities'
+						'resources resources'
+						'effects stats'
+						'runes stats'
+						'role-quest-dragons role-quest-dragons';
+				}
 			}
 
 			.loading-header {
@@ -1933,10 +1960,16 @@ defineExpose({ el });
 
 			.runes,
 			.stats {
-				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid';
+				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid inline-min';
+
+				@media (width < 1606px) {
+					& {
+						--at-apply: 'grid-cols-[max-content]';
+					}
+				}
 
 				> dl {
-					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-[--cyan-bg] b b-[--ui-btn-border-clr] py-0.5 px-[--runes-stats-px] w-fit row-span-2';
+					--at-apply: 'grid grid-rows-[repeat(var(--runes-stats-rows),var(--runes-stats-row-h))] items-center whitespace-nowrap bg-[--cyan-bg] b b-[--ui-btn-border-clr] py-[--runes-stats-py] px-[--runes-stats-px] inline-fit row-span-2 box-content';
 					grid-template-columns: repeat(2, var(--runes-stats-img-w) var(--runes-stats-text-w));
 
 					> dt {
@@ -1973,7 +2006,7 @@ defineExpose({ el });
 				grid-area: runes;
 
 				> dl {
-					--at-apply: 'b-e-0 self-end relative';
+					--at-apply: 'b-e-0 ms-auto relative';
 					grid-area: runes;
 
 					&:has(> .coming-soon-cover)::before {
@@ -2071,6 +2104,12 @@ defineExpose({ el });
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
 
+				@media (width < 1606px) {
+					& {
+						--at-apply: 'block-max';
+					}
+				}
+
 				> dl:nth-of-type(1) {
 					--at-apply: 'b-b-0';
 				}
@@ -2111,7 +2150,7 @@ defineExpose({ el });
 			}
 
 			.effects {
-				--at-apply: 'size-full relative flex flex-col items-center pb-[--pb]';
+				--at-apply: 'block-[calc(var(--runes-stats-section-h)+1px)] inline-[--runes-stats-section-w] relative flex flex-col items-center pb-[--pb] ms-auto';
 				--gap: calc(0.5 * var(--spacing));
 				--img-w: calc((var(--runes-stats-section-w) - 8 * var(--gap)) / 8);
 				--pb: calc(round(up, var(--effects-number, 0) / 8) * (var(--img-w) + var(--gap)) + var(--gap));
@@ -2167,6 +2206,12 @@ defineExpose({ el });
 				anchor-name: --scoreboard-item-abilities;
 				width: var(--abilities-width);
 				height: var(--abilities-height);
+
+				@media (width < 1606px) {
+					& {
+						--at-apply: 'mx-0';
+					}
+				}
 
 				[data-ability] {
 					--at-apply: 'relative size-[--ability-size] b b-[--ui-btn-border-clr]';
@@ -2235,8 +2280,14 @@ defineExpose({ el });
 			}
 
 			.health-ability-resource {
-				--at-apply: 'pt-1.5 pb-2 grid grid-rows-subgrid grid-cols-subgrid gap-y-px ms-[--gap-x] translate-y-[0.5px] -mbs-px';
+				--at-apply: 'pbs-1.5 pbe-2 grid grid-rows-subgrid grid-cols-1 gap-y-px ms-[--gap-x] translate-y-[0.5px] -mbs-px';
 				grid-area: resources;
+
+				@media (width < 1606px) {
+					& {
+						--at-apply: 'grid-rows-2 mx-0 inline-[calc(2*var(--runes-stats-section-w)+1px)] pbe-2.75';
+					}
+				}
 
 				.current-health,
 				.current-ability-resource {
@@ -2320,14 +2371,34 @@ defineExpose({ el });
 			.role-quest-dragons {
 				--at-apply: 'flex justify-between gap-[--gap-x] ps-[--gap-x]';
 				grid-area: role-quest-dragons;
+
+				@media (width < 1606px) {
+					& {
+						--at-apply: 'px-0 pbs-3 inline-max';
+					}
+				}
+			}
+
+			.role-quest,
+			.dragons {
+				--at-apply: 'self-center';
+
+				> h4 {
+					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3 whitespace-nowrap';
+				}
 			}
 
 			.role-quest {
-				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))] w-max';
+				--at-apply: 'relative inline-max py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))]';
 				anchor-name: --scoreboard-item-role-quest;
 
+				&::before {
+					--at-apply: 'block block-0 of-hidden uppercase text-xs font-500 leading-3 op-0';
+					content: attr(data-text);
+				}
+
 				> .v-select {
-					--at-apply: 'w-max';
+					--at-apply: 'inline-max';
 
 					> select {
 						--at-apply: 'rounded-full size-8';
@@ -2439,17 +2510,8 @@ defineExpose({ el });
 				}
 			}
 
-			.role-quest,
-			.dragons {
-				--at-apply: 'self-center';
-
-				> h4 {
-					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3 whitespace-nowrap';
-				}
-			}
-
 			.extras {
-				--at-apply: 'col-span-full grid grid-cols-[repeat(3,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-[--extras-gap] pt-3';
+				--at-apply: 'col-span-full grid grid-cols-[repeat(3,minmax(var(--extra-item-min-w),var(--extra-item-max-w)))] auto-rows-min gap-[--extras-gap] pt-3';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
@@ -2458,7 +2520,7 @@ defineExpose({ el });
 
 				@media (width < 1606px) {
 					& {
-						--at-apply: 'grid-cols-[repeat(2,minmax(var(--extra-item-min-w),1fr))]';
+						--at-apply: 'grid-cols-[repeat(2,minmax(var(--extra-item-min-w),var(--extra-item-max-w)))]';
 					}
 				}
 			}
@@ -2605,14 +2667,14 @@ defineExpose({ el });
 			--at-apply: 'ms-[--me] me-[--ms] justify-self-end flex-row-reverse';
 
 			> li {
-				--at-apply: 'ps-[--pe] pe-0';
+				--at-apply: 'ps-[--item-pe] pe-0';
 
 				&:nth-child(6) {
 					--at-apply: 'ps-0';
 				}
 
 				&:last-child {
-					--at-apply: 'ps-0 pe-[--pe]';
+					--at-apply: 'ps-0 pe-[--item-pe]';
 				}
 			}
 		}
@@ -2630,8 +2692,7 @@ defineExpose({ el });
 
 	[data-mirrored] [data-scoreboard-item][data-group='targets'] {
 		> details {
-			> div {
-			/* &::details-content { */
+			&::details-content {
 				--at-apply: 'grid-cols-[1fr_min-content_min-content]';
 				grid-template-areas:
 					'abilities stats effects'
@@ -2640,7 +2701,25 @@ defineExpose({ el });
 					'role-quest-dragons stats runes';
 			}
 
+			@media (width < 1606px) {
+				&::details-content {
+					--at-apply: 'grid-cols-[1fr_max-content]';
+					grid-template-areas:
+						'abilities abilities'
+						'resources resources'
+						'stats effects'
+						'stats runes'
+						'role-quest-dragons role-quest-dragons';
+				}
+			}
+
 			.effects {
+				@media (width < 1606px) {
+					& {
+						--at-apply: 'ms-0 me-auto';
+					}
+				}
+
 				> ul {
 					direction: ltr;
 				}
