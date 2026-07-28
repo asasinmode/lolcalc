@@ -1383,7 +1383,7 @@ defineExpose({ el });
 				</div>
 			</section>
 			<div class="role-quest-dragons">
-				<section ref="roleQuest" class="role-quest">
+				<section ref="roleQuest" class="role-quest" data-text="role quest">
 					<h4>role quest</h4>
 					<VSelect
 						:id="`${idPrefix}-role-quest`"
@@ -1883,7 +1883,8 @@ defineExpose({ el });
 			--at-apply: 'relative';
 			grid-area: expanded;
 
-			&::details-content {
+			> div {
+				/* &::details-content { */
 				--at-apply: 'pt-4 -mt-6 grid grid-cols-[min-content_min-content_1fr] grid-rows-[auto_min-content_min-content_1fr] auto-rows-min';
 				grid-template-areas:
 					'effects stats abilities'
@@ -2629,7 +2630,8 @@ defineExpose({ el });
 
 	[data-mirrored] [data-scoreboard-item][data-group='targets'] {
 		> details {
-			&::details-content {
+			> div {
+			/* &::details-content { */
 				--at-apply: 'grid-cols-[1fr_min-content_min-content]';
 				grid-template-areas:
 					'abilities stats effects'
