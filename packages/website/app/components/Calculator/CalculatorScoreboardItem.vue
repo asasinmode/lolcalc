@@ -2515,7 +2515,7 @@ defineExpose({ el });
 	#dialog-effects > ul > li,
 	#scoreboard > div > ul > [data-scoreboard-item] > details > [data-extras] {
 		> article {
-			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
+			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md max-inline-[--extra-item-max-w]';
 			--p: calc(2 * var(--spacing));
 
 			> img {
