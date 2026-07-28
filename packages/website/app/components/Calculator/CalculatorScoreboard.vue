@@ -462,7 +462,7 @@ function setLocalMirrorLayout() {
 		--scoreboard-item-px: calc(4 * var(--spacing));
 		--scoreboard-item-b-w: 0.25rem;
 		--scoreboard-item-max-w: calc(
-			2 * var(--scoreboard-item-px) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) + var(--scoreboard-item-b-w) +
+			2 * var(--scoreboard-item-px) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) + var(--scoreboard-item-b-w)
 		);
 
 		> h2 {
