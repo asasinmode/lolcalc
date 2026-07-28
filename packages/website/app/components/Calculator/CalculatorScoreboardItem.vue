@@ -1915,11 +1915,11 @@ defineExpose({ el });
 
 			@media (width < 1606px) {
 				& {
-					--at-apply: 'ms-auto';
+					--at-apply: 'mx-auto';
 				}
 
 				&::details-content {
-					--at-apply: 'grid-cols-[1fr_auto] grid-rows-none auto-rows-max inline-max justify-items-end';
+					--at-apply: 'grid-cols-2 grid-rows-none auto-rows-max inline-max justify-items-end';
 
 					grid-template-areas:
 						'abilities abilities'
@@ -2101,6 +2101,7 @@ defineExpose({ el });
 			}
 
 			.stats {
+				--at-apply: 'justify-self-start';
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
 
@@ -2285,7 +2286,7 @@ defineExpose({ el });
 
 				@media (width < 1606px) {
 					& {
-						--at-apply: 'grid-rows-2 mx-0 inline-[calc(2*var(--runes-stats-section-w)+1px)] pbe-2.75';
+						--at-apply: 'grid-rows-2 mx-0 inline-[calc(2*var(--runes-stats-section-w)+1px)] pbe-2.75 justify-self-center';
 					}
 				}
 
@@ -2374,7 +2375,7 @@ defineExpose({ el });
 
 				@media (width < 1606px) {
 					& {
-						--at-apply: 'px-0 pbs-3 inline-max';
+						--at-apply: 'px-0 pbs-3 inline-max justify-self-center';
 					}
 				}
 			}
@@ -2535,6 +2536,12 @@ defineExpose({ el });
 			}
 		}
 	}
+
+	/* [data-scoreboard-item][data-group='targets'] { */
+	/* 	@media (width < 1606px) { */
+	/* 		. */
+	/* 	} */
+	/* } */
 
 	[data-scoreboard-item] > details[open]:not(:has(> .extras:not(:empty))) {
 		--at-apply: 'pb-1.5';
@@ -2703,7 +2710,6 @@ defineExpose({ el });
 
 			@media (width < 1606px) {
 				&::details-content {
-					--at-apply: 'grid-cols-[1fr_max-content]';
 					grid-template-areas:
 						'abilities abilities'
 						'resources resources'
