@@ -73,9 +73,9 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 		const item = damageSource.items.value[i];
 
 		if (isMasterworkSlot(damageSource, i)) {
-			li.setAttribute('data-masterwork', '');
+			li.classList.add('data-masterwork', '');
 		} else {
-			li.removeAttribute('data-masterwork');
+			li.classList.remove('data-masterwork');
 		}
 
 		if (item) {
@@ -434,12 +434,12 @@ function setLocalMirrorLayout() {
 					</button>
 				</li>
 			</ul>
-			<div ref="dragPreview" data-drag-preview="" inert aria-hidden="true">
+			<div ref="dragPreview" class="drag-preview" inert aria-hidden="true">
 				<span><img></span>
 				<span />
 				<div>
-					<img data-primary-path-keystone="">
-					<span data-secondary-path="" />
+					<img class="primary-path-keystone">
+					<span class="secondary-path" />
 				</div>
 				<ul>
 					<li v-for="i in 7" :key="i" :style="i === 7 ? 'display: none;' : undefined">
@@ -502,7 +502,7 @@ function setLocalMirrorLayout() {
 				}
 			}
 
-			> [data-drag-preview] {
+			> .drag-preview {
 				--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 absolute flex -z-1 -start-[9999px] -top-[9999px]';
 
 				> :nth-child(1) {

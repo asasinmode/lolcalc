@@ -69,7 +69,7 @@ function replaceMainWithNext(event: MouseEvent) {
 </script>
 
 <template>
-	<div data-passive="">
+	<div data-ability="passive">
 		<h5>passive</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariantsIndexes.value.passive]!.image, 'Aphelios') : undefined"
@@ -88,7 +88,7 @@ function replaceMainWithNext(event: MouseEvent) {
 		</a>
 	</div>
 	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
-	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
+	<div class="aphelios-q" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
 		<h5 v-html="`main weapon: ${weaponNames.main}`" />
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
@@ -106,7 +106,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'q', value.abilityVariantsIndexes.value.q))"
 		>
 	</div>
-	<div data-aphelios-w="" :inert="!enableUnimplementedUi">
+	<div class="aphelios-w" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
 		<h5 v-html="`offhand weapon: ${weaponNames.offhand}`" />
 		<button
@@ -137,7 +137,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			>
 		</button>
 	</div>
-	<div data-aphelios-r="" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
+	<div class="aphelios-r" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
 		<h5>R</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.r.variants[value.abilityVariantsIndexes.value.r]!.image, 'Aphelios') : undefined"
@@ -155,11 +155,11 @@ function replaceMainWithNext(event: MouseEvent) {
 
 <style>
 @layer overrides {
-	#scoreboard > div > ul > [data-scoreboard-item='Aphelios'] {
+	[data-scoreboard-item='Aphelios'] {
 		--aphelios-ui-clr: theme('colors.slate.300');
 	}
 
-	#scoreboard > div > ul > [data-scoreboard-item='Aphelios'] > details > [data-abilities] {
+	[data-scoreboard-item='Aphelios'] .abilities {
 		--at-apply: 'gap-x-0';
 		/* radius of the funny border */
 		--funny-rounded: 20% / 50%;
@@ -167,7 +167,7 @@ function replaceMainWithNext(event: MouseEvent) {
 		--image-funny-rounded: 17.5% / 50%;
 		--funny-ability-w: calc(var(--ability-size) * 10 / 9);
 
-		> [data-passive] {
+		> [data-ability='passive'] {
 			--at-apply: 'b-none size-auto pe-2';
 
 			> h5 {
@@ -179,15 +179,15 @@ function replaceMainWithNext(event: MouseEvent) {
 			}
 		}
 
-		> [data-aphelios-q] > h5:first-of-type,
-		> [data-aphelios-w] > button > span,
-		> [data-aphelios-w] > h5:nth-of-type(n + 2) {
+		> .aphelios-q > h5:first-of-type,
+		> .aphelios-w > button > span,
+		> .aphelios-w > h5:nth-of-type(n + 2) {
 			--at-apply: 'sr-only';
 		}
 
-		> [data-aphelios-q],
-		> [data-aphelios-w],
-		> [data-aphelios-r] {
+		> .aphelios-q,
+		> .aphelios-w,
+		> .aphelios-r {
 			--at-apply: 'relative h-[--ability-size]';
 
 			> h5 {
@@ -198,8 +198,8 @@ function replaceMainWithNext(event: MouseEvent) {
 			}
 		}
 
-		> [data-aphelios-q],
-		> [data-aphelios-r] {
+		> .aphelios-q,
+		> .aphelios-r {
 			&::after,
 			&::before {
 				--at-apply: 'content-empty block w-[--funny-ability-w] h-[--ability-size] rounded-[--funny-rounded] absolute end-0 top-0 top-1/2 -translate-y-1/2 pointer-events-none';
@@ -214,24 +214,24 @@ function replaceMainWithNext(event: MouseEvent) {
 			}
 		}
 
-		> [data-aphelios-q],
-		> [data-aphelios-r] {
+		> .aphelios-q,
+		> .aphelios-r {
 			&:not([data-level])::after {
 				--at-apply: 'b-neutral-400';
 			}
 		}
 
-		> [data-aphelios-q] > img:nth-of-type(2),
-		> [data-aphelios-r] > img {
+		> .aphelios-q > img:nth-of-type(2),
+		> .aphelios-r > img {
 			--at-apply: 'size-[--ability-size] rounded-[--image-funny-rounded] b-2 b-transparent';
 		}
 
-		> [data-aphelios-q]:not([data-level]) > img:nth-of-type(2),
-		> [data-aphelios-r]:not([data-level]) > img {
+		> .aphelios-q:not([data-level]) > img:nth-of-type(2),
+		> .aphelios-r:not([data-level]) > img {
 			--at-apply: 'grayscale-70 brightness-80';
 		}
 
-		> [data-aphelios-q] {
+		> .aphelios-q {
 			--at-apply: 'flex items-center z-1 pe-[calc((var(--funny-ability-w)-var(--ability-size))/2)]';
 
 			> h5 {
@@ -249,7 +249,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			}
 		}
 
-		> [data-aphelios-w] {
+		> .aphelios-w {
 			--at-apply: 'grid grid-cols-[auto_1fr_auto] place-items-center grid-rows-1';
 
 			> h5:first-of-type {
@@ -290,7 +290,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			}
 		}
 
-		> [data-aphelios-r] {
+		> .aphelios-r {
 			--at-apply: 'grid-center w-[--funny-ability-w] ms-auto';
 
 			> h5 {

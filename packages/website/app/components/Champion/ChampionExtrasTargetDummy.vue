@@ -226,8 +226,8 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 
 <style>
 @layer overrides {
-	#scoreboard > div > ul > [data-scoreboard-item='TargetDummy'] > details > [data-extras] > .extras-target-dummy-stats {
-		--at-apply: 'col-span-full w-full grid grid-cols-5 auto-rows-min gap-x-3.5 gap-y-2.5 py-[--p]';
+	[data-scoreboard-item='TargetDummy'] .extras-target-dummy-stats {
+		--at-apply: 'col-span-full max-inline-none grid grid-cols-5 auto-rows-min gap-x-3.5 gap-y-2.5 py-[--p]';
 
 		> header {
 			--at-apply: 'col-span-full flex';

@@ -52,13 +52,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 
 <style>
 @layer overrides {
-	#scoreboard
-		> div
-		> ul
-		> [data-scoreboard-item='Aphelios']
-		> details
-		> [data-extras]
-		> .extras-aphelios-ability-levels {
+	[data-scoreboard-item='Aphelios'] .extras-aphelios-ability-levels {
 		--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-[1fr_auto_1fr] gap-y-0.75';
 
 		> img {

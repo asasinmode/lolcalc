@@ -66,13 +66,7 @@ function toggle(abilityIndex: number) {
 
 <style>
 @layer overrides {
-	#scoreboard
-		> div
-		> ul
-		> [data-scoreboard-item='Viktor']
-		> details
-		> [data-extras]
-		> .extras-viktor-passive-ability-upgrades {
+	[data-scoreboard-item='Viktor'] .extras-viktor-passive-ability-upgrades {
 		--at-apply: 'grid grid-cols-[auto_1fr_1fr] grid-rows-[auto_1fr_1fr]';
 
 		> h5 {

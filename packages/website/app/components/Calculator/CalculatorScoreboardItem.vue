@@ -560,7 +560,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 					stat: 'armor',
 				},
 			],
-			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(props.value.stats.value.total.armor) * 100)}</span>% reduced physical damage.`,
+			bottomText: `You take <span class="total">${Math.round(calculateResistPercentageReduction(props.value.stats.value.total.armor) * 100)}</span>% reduced physical damage.`,
 		},
 		{
 			name: CHAMPION_STAT_META.magicResist.name,
@@ -571,7 +571,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 					stat: 'magicResist',
 				},
 			],
-			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(props.value.stats.value.total.magicResist) * 100)}</span>% reduced magic damage.`,
+			bottomText: `You take <span class="total">${Math.round(calculateResistPercentageReduction(props.value.stats.value.total.magicResist) * 100)}</span>% reduced magic damage.`,
 		},
 		{
 			name: CHAMPION_STAT_META.attackSpeed.name,
@@ -602,7 +602,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 					stat: 'abilityHaste',
 				},
 			],
-			bottomText: `Equivalent to reducing your Ability cooldowns by <span data-total="">${Math.round(cooldownReductionPercentageFromHaste(props.value.stats.value.total.abilityHaste))}</span>%`,
+			bottomText: `Equivalent to reducing your Ability cooldowns by <span class="total">${Math.round(cooldownReductionPercentageFromHaste(props.value.stats.value.total.abilityHaste))}</span>%`,
 		},
 		{
 			name: CHAMPION_STAT_META.critChance.name,
@@ -971,7 +971,7 @@ defineExpose({ el });
 			<span>duplicate<span>(shift+click to duplicate {{ iconButtonsShowText ? otherGroup : `into ${otherGroup}` }})</span></span>
 			<Icon class="i-ph:copy" />
 		</button>
-		<div data-select-champion="">
+		<div class="select-champion">
 			<button
 				title="select champion"
 				@click="selectChampion(value.listedChampion)"
@@ -1000,7 +1000,7 @@ defineExpose({ el });
 				:id="`${idPrefix}-level-select`"
 				label="level"
 				:model-value="value.level.value as unknown as string"
-				data-select-champion-level=""
+				class="select-champion-level"
 				:options="Array.from({ length: value.maxLevel.value }, (_, i) => [i + 1, `&nbsp;${i + 1}&nbsp;`])"
 				@update:model-value="value.level.value = Number.parseInt($event!)"
 			>
@@ -1009,8 +1009,7 @@ defineExpose({ el });
 		</div>
 		<button
 			:title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'"
-			data-select-runes=""
-			class="other-ui-btn"
+			class="select-runes other-ui-btn"
 			@click="selectRunes(value.runes)"
 		>
 			<span>{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
@@ -1031,8 +1030,6 @@ defineExpose({ el });
 					width="32"
 					height="32"
 					loading="lazy"
-					data-primary-path-keystone=""
-					class="size-5.5"
 				>
 			</template>
 			<img
@@ -1042,7 +1039,6 @@ defineExpose({ el });
 				width="32"
 				height="32"
 				loading="lazy"
-				class="size-5"
 			>
 			<template v-if="runePathSecondary">
 				<span class="sr-only">
@@ -1051,11 +1047,11 @@ defineExpose({ el });
 				<span
 					:style="`background-color: ${runePathSecondary.iconColor}; mask: url(${runePathSecondary.icon}) no-repeat center;`"
 					aria-hidden="true"
-					data-secondary-path-icon=""
+					class="secondary-path-icon"
 				/>
 			</template>
 		</button>
-		<button data-select-items="" class="other-ui-btn" @click="selectItems(value)">
+		<button class="select-items other-ui-btn" @click="selectItems(value)">
 			items
 			<img
 				v-bind="ICON_GOLD"
@@ -1079,12 +1075,16 @@ defineExpose({ el });
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
-					:class="{ active: value.coComputed.itemImage.value[i - 1]?.isActive }"
-					v-bind="typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object' ? {
-						'data-active-0': (value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 'true' : '',
-						'data-active-1': (value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 'true' : '',
-					} : undefined"
-					:data-masterwork="isMasterworkSlot(value, i - 1) ? '' : undefined"
+					:class="{
+						active: value.coComputed.itemImage.value[i - 1]?.isActive,
+						masterwork: isMasterworkSlot(value, i - 1),
+					}"
+					:data-active="typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object'
+						? (0
+							^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0)
+							^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 2 : 0)
+						)
+						: undefined"
 					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
 					@click.right="removeItem($event, i - 1)"
 					@dragstart="startItemDrag($event, i - 1)"
@@ -1137,17 +1137,17 @@ defineExpose({ el });
 		<details
 			:id="`${idPrefix}-details`"
 			ref="details"
+			:class="{ empty: !value.champion.value }"
 			:aria-busy="isLoading"
-			:data-empty="!value.champion.value ? '' : undefined"
 			@toggle="isExpanded = $event.newState === 'open'"
 		>
 			<summary>
 				details
 			</summary>
-			<h4 data-loading="">
+			<h4 class="loading-header">
 				loading...
 			</h4>
-			<section data-runes="" :inert="isLoading" @click="selectRunes(value.runes)">
+			<section class="runes" :inert="isLoading" @click="selectRunes(value.runes)">
 				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
@@ -1181,7 +1181,7 @@ defineExpose({ el });
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</article>
 			</section>
-			<section data-stats="" :inert="isLoading" @dblclick.ctrl="openDebugDialog(value)">
+			<section class="stats" :inert="isLoading" @dblclick.ctrl="openDebugDialog(value)">
 				<h4>stats</h4>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
@@ -1193,7 +1193,7 @@ defineExpose({ el });
 							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)">
 						</dt>
 						<dd
-							:data-has-bonus="stat.values.some(statValue => statValue.bonus) || undefined"
+							:class="{ 'has-bonus': stat.values.some(statValue => statValue.bonus) }"
 							@mouseenter="showStatTooltip($event, stat)"
 							@mouseleave="hideStatTooltip"
 						>
@@ -1207,26 +1207,26 @@ defineExpose({ el });
 					<dl>
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 							<dt>{{ statValue.name ?? CHAMPION_STAT_META[statValue.stat].name }}:</dt>
-							<dd :data-has-bonus="statValue.bonus || undefined">
-								<span data-total="">{{
+							<dd :class="{ 'has-bonus': statValue.bonus }">
+								<span class="total">{{
 									CHAMPION_STAT_META[statValue.stat].maxDisplayed
 										? Math.min(CHAMPION_STAT_META[statValue.stat].maxDisplayed!, value.computed.formattedStatTotals.value[statValue.stat])
 										: value.computed.formattedStatTotals.value[statValue.stat]
 								}}</span>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
 								<template v-if="'base' in statValue && !(statValue.stat === 'attackSpeed' || statValue.stat === 'attackSpeedRatio')">
-									(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
+									(<span class="base">{{ statValue.base }}</span> base + <span class="bonus">{{ statValue.bonus }}</span> bonus)
 								</template>
 								{{ statValue.valueSuffix }}
 							</dd>
 							<br v-if="valueIndex !== ((hoveredStat?.values.length || 1) - 1)">
 						</template>
 					</dl>
-					<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
+					<p v-if="hoveredStat?.bottomText" class="has-bonus" v-html="hoveredStat?.bottomText" />
 				</article>
 			</section>
 			<section
 				ref="effects"
-				data-effects=""
+				class="effects"
 				:inert="isLoading"
 				:style="`--effects-number: ${value.computed.effects.value.filter(effect => effect.isActive).length}`"
 			>
@@ -1260,7 +1260,7 @@ defineExpose({ el });
 					:damage-source="value"
 				/>
 			</section>
-			<section ref="abilities" data-abilities="" :inert="isLoading">
+			<section ref="abilities" class="abilities" :inert="isLoading">
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
@@ -1270,7 +1270,7 @@ defineExpose({ el });
 					@ability-hover="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('', ...args)"
 				/>
 				<template v-else>
-					<div data-passive="">
+					<div data-ability="passive">
 						<h5>passive</h5>
 						<img
 							v-show="!isLoading && value.champion.value"
@@ -1292,8 +1292,8 @@ defineExpose({ el });
 					<ComingSoonCover feature="abilities" class="text-white pt-1 inset-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] absolute items-start!" />
 					<div
 						v-for="abilityKey in ['q', 'w', 'e', 'r'] satisfies INonPassiveAbilityKey[]"
-						v-bind="{ [`data-${abilityKey}`]: '' }"
 						:key="abilityKey"
+						:data-ability="abilityKey"
 						:data-level="value.abilityLevels.value[abilityKey]"
 						:inert="!enableUnimplementedUi"
 					>
@@ -1336,11 +1336,11 @@ defineExpose({ el });
 					:precomputed-description="hoveredAbilityKey && value.computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
-			<section ref="healthAbilityResource" data-health-ability-resource="">
+			<section ref="healthAbilityResource" class="health-ability-resource">
 				<h4>health and ability resource</h4>
 				<div
 					ref="healthBar"
-					data-current-health=""
+					class="current-health"
 					:style="`--fill-percentage: ${!value.anythingFilled.value || value.maxHealth.value === 0 ? 1 : Math.min(healthDragValueRef / value.maxHealth.value, 1)}`"
 					@mousedown="startHealthBarDrag"
 				>
@@ -1361,7 +1361,7 @@ defineExpose({ el });
 				</div>
 				<div
 					ref="resourceBar"
-					data-current-ability-resource=""
+					class="current-ability-resource"
 					:data-partype="value.champion.value ? value.champion.value?.partype?.toLowerCase() : 'mana'"
 					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(abilityResourceDragValueRef / value.maxAbilityResource.value, 1)}` : undefined"
 					@mousedown="startAbilityResourceBarDrag"
@@ -1382,91 +1382,93 @@ defineExpose({ el });
 					</template>
 				</div>
 			</section>
-			<section ref="roleQuest" data-role-quest="">
-				<h4>role quest</h4>
-				<VSelect
-					:id="`${idPrefix}-role-quest`"
-					:model-value="value.roleQuest.value"
-					:options="Object.keys(TEXT.roleQuests).map(role => [role, role]) as [IChampionRole, string][]"
-					label="role quest"
-					clearable
-					@update:model-value="updateRoleQuest"
-					@label-mouseenter="showRoleQuestTooltip"
-				>
-					<template v-if="value.roleQuest.value">
-						<img
+			<div class="role-quest-dragons">
+				<section ref="roleQuest" class="role-quest">
+					<h4>role quest</h4>
+					<VSelect
+						:id="`${idPrefix}-role-quest`"
+						:model-value="value.roleQuest.value"
+						:options="Object.keys(TEXT.roleQuests).map(role => [role, role]) as [IChampionRole, string][]"
+						label="role quest"
+						clearable
+						@update:model-value="updateRoleQuest"
+						@label-mouseenter="showRoleQuestTooltip"
+					>
+						<template v-if="value.roleQuest.value">
+							<img
 
-							:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
-							width="64"
-							height="64"
-							loading="lazy"
-							aria-hidden="true"
-						>
-						<img
-							:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
-							width="32"
-							height="32"
-							loading="lazy"
-							aria-hidden="true"
-						>
-					</template>
-				</VSelect>
-				<article ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest">
-					<h5>{{ roleQuestDescription?.title }}</h5>
-					<div class="game-description" v-html="roleQuestDescription?.description" />
-					<UnresolvedVariablesAlert v-show="roleQuestDescription?.anyUnknown" />
-				</article>
-			</section>
-			<section ref="dragons" data-dragons="">
-				<h4>dragons</h4>
-				<VSelect
-					v-for="i in 4"
-					:id="`${idPrefix}-dragon-stack-${i}`"
-					:key="i"
-					:model-value="value.dragonStacks.value[i - 1]"
-					:options="dragonOptions"
-					label="soul"
-					data-dragon-stack=""
-					clearable
-					@update:model-value="updateDragonThing($event, 'stack', i - 1)"
-					@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, value.dragonStacks.value[i - 1]!, 'stack')"
-				>
-					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(UI.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
-					<template #post>
-						<div v-show="value.dragonStacksInvalid.value">
-							<span>(invalid)</span>
-							<Icon class="i-ph:exclamation-mark-bold" />
-						</div>
-					</template>
-				</VSelect>
-				<VSelect
-					:id="`${idPrefix}-dragon-soul`"
-					:model-value="value.dragonSoul.value"
-					:options="dragonOptions"
-					data-dragon-soul=""
-					label="soul"
-					clearable
-					@update:model-value="updateDragonThing($event, 'soul')"
-					@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, value.dragonSoul.value, 'soul')"
-				>
-					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(UI.dragons[value.dragonSoul.value].soulActive, 44)" />
-					<template #post>
-						<div v-show="value.dragonSoulInvalid.value">
-							<span>(invalid)</span>
-							<Icon class="i-ph:exclamation-mark-bold" />
-						</div>
-					</template>
-				</VSelect>
-				<LolDragonHoverTooltip
-					ref="dragonHoverTooltip"
-					check-if-valid
-					:precomputed-description="hoveredDragonThing?.[1] === 'soul' ? value.computed.dragonSoulAbility.value : undefined"
-					:dragon="hoveredDragonThing?.[0]"
-					:type="hoveredDragonThing?.[1]"
-					:damage-source="value"
-				/>
-			</section>
-			<section ref="extras" data-extras="">
+								:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
+								width="64"
+								height="64"
+								loading="lazy"
+								aria-hidden="true"
+							>
+							<img
+								:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
+								width="32"
+								height="32"
+								loading="lazy"
+								aria-hidden="true"
+							>
+						</template>
+					</VSelect>
+					<article ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest">
+						<h5>{{ roleQuestDescription?.title }}</h5>
+						<div class="game-description" v-html="roleQuestDescription?.description" />
+						<UnresolvedVariablesAlert v-show="roleQuestDescription?.anyUnknown" />
+					</article>
+				</section>
+				<section ref="dragons" class="dragons">
+					<h4>dragons</h4>
+					<VSelect
+						v-for="i in 4"
+						:id="`${idPrefix}-dragon-stack-${i}`"
+						:key="i"
+						:model-value="value.dragonStacks.value[i - 1]"
+						:options="dragonOptions"
+						label="soul"
+						class="dragon-stack"
+						clearable
+						@update:model-value="updateDragonThing($event, 'stack', i - 1)"
+						@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, value.dragonStacks.value[i - 1]!, 'stack')"
+					>
+						<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(UI.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
+						<template #post>
+							<div v-show="value.dragonStacksInvalid.value">
+								<span>(invalid)</span>
+								<Icon class="i-ph:exclamation-mark-bold" />
+							</div>
+						</template>
+					</VSelect>
+					<VSelect
+						:id="`${idPrefix}-dragon-soul`"
+						:model-value="value.dragonSoul.value"
+						:options="dragonOptions"
+						class="dragon-soul"
+						label="soul"
+						clearable
+						@update:model-value="updateDragonThing($event, 'soul')"
+						@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, value.dragonSoul.value, 'soul')"
+					>
+						<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(UI.dragons[value.dragonSoul.value].soulActive, 44)" />
+						<template #post>
+							<div v-show="value.dragonSoulInvalid.value">
+								<span>(invalid)</span>
+								<Icon class="i-ph:exclamation-mark-bold" />
+							</div>
+						</template>
+					</VSelect>
+					<LolDragonHoverTooltip
+						ref="dragonHoverTooltip"
+						check-if-valid
+						:precomputed-description="hoveredDragonThing?.[1] === 'soul' ? value.computed.dragonSoulAbility.value : undefined"
+						:dragon="hoveredDragonThing?.[0]"
+						:type="hoveredDragonThing?.[1]"
+						:damage-source="value"
+					/>
+				</section>
+			</div>
+			<section ref="extras" class="extras">
 				<component
 					:is
 					v-for="(is, componentIndex) in championExtra"
@@ -1648,7 +1650,7 @@ defineExpose({ el });
 			}
 		}
 
-		> [data-select-champion] {
+		.select-champion {
 			--at-apply: 'size-[--select-champion-size] ms-[--ms] me-[--me] relative';
 			--ms: calc(3 * var(--spacing));
 			--me: calc(2 * var(--spacing));
@@ -1673,7 +1675,7 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-select-champion-level] {
+			.select-champion-level {
 				--at-apply: 'absolute -bottom-0.5 end-[--inset-end]';
 				--inset-end: calc(-0.5 * var(--spacing));
 
@@ -1691,7 +1693,7 @@ defineExpose({ el });
 			}
 		}
 
-		> [data-select-runes] {
+		.select-runes {
 			--at-apply: 'rounded-full grid-center size-8 relative self-center';
 			--secondary-path-icon-size: calc(3 * var(--spacing));
 			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
@@ -1701,16 +1703,20 @@ defineExpose({ el });
 				--at-apply: 'sr-only';
 			}
 
-			[data-secondary-path-icon] {
+			> img:first-of-type {
+				--at-apply: 'size-5.5';
+			}
+
+			.secondary-path-icon {
 				--at-apply: 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 end-[--secondary-path-inset-end] absolute';
 			}
 
-			&:has([data-secondary-path-icon]):before {
+			&:has(> .secondary-path-icon):before {
 				--at-apply: 'content-empty z-10 absolute end-[--secondary-path-inset-end] -bottom-0.5 bg-inherit b b-[--ui-btn-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
 			}
 		}
 
-		> [data-select-items] {
+		.select-items {
 			--at-apply: 'self-center relative ms-[--ms]';
 			--ms: calc(2 * var(--spacing));
 			grid-area: select-items;
@@ -1754,13 +1760,12 @@ defineExpose({ el });
 						content: '';
 					}
 
-					&:not([data-active-0], [data-active-1]) {
+					&:not([data-active]) {
 						--left: theme('colors.green.400');
 						--right: var(--left);
 					}
 
-					&[data-active-0],
-					&[data-active-1] {
+					&[data-active] {
 						--left: theme('colors.black');
 						--right: theme('colors.black');
 
@@ -1770,7 +1775,8 @@ defineExpose({ el });
 						}
 					}
 
-					&[data-active-0='true'] {
+					&[data-active='1'],
+					&[data-active='3'] {
 						--left: theme('colors.green.400');
 
 						&::before {
@@ -1778,7 +1784,8 @@ defineExpose({ el });
 						}
 					}
 
-					&[data-active-1='true'] {
+					&[data-active='2'],
+					&[data-active='3'] {
 						--right: theme('colors.green.400');
 
 						&::before {
@@ -1839,7 +1846,7 @@ defineExpose({ el });
 			}
 		}
 
-		> .hover-tooltip.champion-item {
+		.hover-tooltip.champion-item {
 			position-anchor: --scoreboard-item-items;
 			inset-block-start: calc(anchor(end) + 4 * var(--spacing));
 		}
@@ -1850,7 +1857,7 @@ defineExpose({ el });
 			inset-block-end: calc(anchor(top));
 		}
 
-		&[data-dragon-tooltip-extras] > details > [data-dragons] > .hover-tooltip.dragon {
+		&[data-dragon-tooltip-extras] > details .dragons > .hover-tooltip.dragon {
 			position-anchor: --scoreboard-item-extras;
 			inset-block-start: auto;
 			inset-block-end: calc(anchor(top));
@@ -1877,21 +1884,31 @@ defineExpose({ el });
 			grid-area: expanded;
 
 			&::details-content {
-				--at-apply: 'pt-4 -mt-6 grid grid-cols-[min-content_min-content_1fr_auto] grid-rows-[auto_min-content_min-content_1fr]';
+				--at-apply: 'pt-4 -mt-6 grid grid-cols-[min-content_min-content_1fr] grid-rows-[auto_min-content_min-content_1fr] auto-rows-min';
 				grid-template-areas:
-					'effects stats abilities abilities'
-					'effects stats resources resources'
-					'runes stats resources resources'
-					'runes stats role-quest dragons';
+					'effects stats abilities'
+					'effects stats resources'
+					'runes stats resources'
+					'runes stats role-quest-dragons';
+
+				/* @media (width < 1606px) { */
+				/* 	--at-apply: 'grid-cols-2'; */
+				/* 	grid-template-areas: */
+				/* 		'abilities abilities' */
+				/* 		'resources resources' */
+				/* 		'effects stats' */
+				/* 		'runes stats' */
+				/* 		'role-quests-dragons role-quests-dragons'; */
+				/* } */
 			}
 
-			[data-loading] {
+			.loading-header {
 				--at-apply: 'hidden z-10 text-center pt-10 absolute -inset-1 inset-t-1 font-600 text-2xl backdrop-blur-2';
 				-webkit-text-stroke: black 0.1em;
 				paint-order: stroke fill;
 			}
 
-			&[aria-busy='true'] > [data-loading] {
+			&[aria-busy='true'] > .loading-header {
 				--at-apply: 'block';
 			}
 
@@ -1903,18 +1920,18 @@ defineExpose({ el });
 				--at-apply: 'h-min';
 			}
 
-			> [data-runes],
-			> [data-stats],
-			> [data-effects],
-			> [data-abilities],
-			> [data-health-ability-resource] {
+			.runes,
+			.stats,
+			.effects,
+			.abilities,
+			.health-ability-resource {
 				> h4 {
 					--at-apply: 'sr-only';
 				}
 			}
 
-			> [data-runes],
-			> [data-stats] {
+			.runes,
+			.stats {
 				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid';
 
 				> dl {
@@ -1932,7 +1949,7 @@ defineExpose({ el });
 					> dd {
 						--at-apply: 'leading-5 h-full w-full ps-1.5 py-0.5 pe-0.5';
 
-						&[data-has-bonus] {
+						&.has-bonus {
 							--at-apply: 'text-yellow-200';
 						}
 					}
@@ -1951,7 +1968,7 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-runes] {
+			.runes {
 				grid-area: runes;
 
 				> dl {
@@ -2049,7 +2066,7 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-stats] {
+			.stats {
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
 
@@ -2071,17 +2088,17 @@ defineExpose({ el });
 						}
 					}
 
-					[data-total],
-					[data-base] {
+					.total,
+					.base {
 						--at-apply: 'text-cyan-300 font-500';
 					}
 
-					[data-bonus] {
+					.bonus {
 						--at-apply: 'text-[#0f0] font-500';
 					}
 
-					[data-has-bonus] {
-						[data-total] {
+					.has-bonus {
+						.total {
 							--at-apply: 'text-[#0f0]';
 						}
 					}
@@ -2092,7 +2109,7 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-effects] {
+			.effects {
 				--at-apply: 'size-full relative flex flex-col items-center pb-[--pb]';
 				--gap: calc(0.5 * var(--spacing));
 				--img-w: calc((var(--runes-stats-section-w) - 8 * var(--gap)) / 8);
@@ -2136,25 +2153,21 @@ defineExpose({ el });
 					}
 				}
 
-				> .effect-hover-tooltip-container {
+				.effect-hover-tooltip-container {
 					position-anchor: --scoreboard-item-effects;
 					inset-block-start: calc(anchor(end));
 					inset-inline-start: calc(anchor(start));
 				}
 			}
 
-			> [data-abilities] {
+			.abilities {
 				--at-apply: 'relative gap-x-[--abilities-gap] flex justify-self-center ms-[--gap-x]';
 				grid-area: abilities;
 				anchor-name: --scoreboard-item-abilities;
 				width: var(--abilities-width);
 				height: var(--abilities-height);
 
-				[data-passive],
-				[data-q],
-				[data-w],
-				[data-e],
-				[data-r] {
+				[data-ability] {
 					--at-apply: 'relative size-[--ability-size] b b-[--ui-btn-border-clr]';
 
 					> h5 {
@@ -2165,14 +2178,14 @@ defineExpose({ el });
 					}
 				}
 
-				details[data-empty] & [data-passive] {
+				details[data-empty] & [data-ability='passive'] {
 					--at-apply: 'b-neutral-400';
 				}
 
-				[data-q],
-				[data-w],
-				[data-e],
-				[data-r] {
+				[data-ability='q'],
+				[data-ability='w'],
+				[data-ability='e'],
+				[data-ability='r'] {
 					--at-apply: 'mbe-[calc(var(--ability-level-btn-indicator-size)+2*var(--ability-level-btn-py))]';
 
 					&[data-level='0'],
@@ -2185,13 +2198,7 @@ defineExpose({ el });
 					}
 				}
 
-				[data-loading] {
-					--at-apply: 'grid-center';
-					grid-column: 1 / -1;
-					grid-row: 1 / span 1;
-				}
-
-				[data-passive] {
+				[data-ability='passive'] {
 					--at-apply: 'size-[--ability-size-passive] flex flex-col';
 
 					> h5 {
@@ -2220,18 +2227,18 @@ defineExpose({ el });
 				}
 			}
 
-			&[data-ability-tooltip-extras] > [data-abilities] > .hover-tooltip.champion-ability {
+			&[data-ability-tooltip-extras] > .abilities > .hover-tooltip.champion-ability {
 				position-anchor: --scoreboard-item-extras;
 				inset-block-start: auto;
 				inset-block-end: calc(anchor(top));
 			}
 
-			> [data-health-ability-resource] {
+			.health-ability-resource {
 				--at-apply: 'pt-1.5 pb-2 grid grid-rows-subgrid grid-cols-subgrid gap-y-px ms-[--gap-x] translate-y-[0.5px] -mbs-px';
 				grid-area: resources;
 
-				[data-current-health],
-				[data-current-ability-resource] {
+				.current-health,
+				.current-ability-resource {
 					--at-apply: 'relative col-span-full bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
 
 					&:before {
@@ -2260,11 +2267,11 @@ defineExpose({ el });
 					}
 				}
 
-				> [data-current-health] {
+				.current-health {
 					--fill-bg: theme('colors.green.500');
 				}
 
-				> [data-current-ability-resource] {
+				.current-ability-resource {
 					--fill-bg: var(--unknown-clr);
 
 					&[data-partype='mana'],
@@ -2309,9 +2316,13 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-role-quest] {
-				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))] mx-[--gap-x] w-max';
-				grid-area: role-quest;
+			.role-quest-dragons {
+				--at-apply: 'flex justify-between gap-[--gap-x] ps-[--gap-x]';
+				grid-area: role-quest-dragons;
+			}
+
+			.role-quest {
+				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))] w-max';
 				anchor-name: --scoreboard-item-role-quest;
 
 				> .v-select {
@@ -2367,10 +2378,9 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-dragons] {
-				--at-apply: 'flex-center mx-auto h-max relative items-center gap-[--gap]';
+			.dragons {
+				--at-apply: 'flex-center h-max relative items-center gap-[--gap]';
 				--gap: calc(2 * var(--spacing));
-				grid-area: dragons;
 				anchor-name: --scoreboard-item-dragons;
 
 				&::before {
@@ -2379,7 +2389,7 @@ defineExpose({ el });
 					--at-apply: 'absolute top-1/2 -translate-y-1/2 content-empty start-[--start] bg-black h-[calc(var(--stack-size)*0.2)] end-[--end]';
 				}
 
-				> [data-dragon-stack] {
+				.dragon-stack {
 					> select {
 						--at-apply: 'rounded-full';
 					}
@@ -2389,7 +2399,7 @@ defineExpose({ el });
 					}
 				}
 
-				> [data-dragon-soul] {
+				.dragon-soul {
 					--at-apply: 'm-[--soul-rotation-size-diff]';
 
 					> select {
@@ -2405,8 +2415,8 @@ defineExpose({ el });
 					}
 				}
 
-				> [data-dragon-stack],
-				> [data-dragon-soul] {
+				.dragon-stack,
+				.dragon-soul {
 					> :last-child {
 						--at-apply: 'text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0 -top-0 z-1';
 
@@ -2428,8 +2438,8 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-role-quest],
-			> [data-dragons] {
+			.role-quest,
+			.dragons {
 				--at-apply: 'self-center';
 
 				> h4 {
@@ -2437,8 +2447,8 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-extras] {
-				--at-apply: 'col-span-full w-full grid grid-cols-[repeat(auto-fit,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-[--extras-gap] pt-3';
+			.extras {
+				--at-apply: 'col-span-full grid grid-cols-[repeat(auto-fit,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-[--extras-gap] pt-3';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
@@ -2447,8 +2457,8 @@ defineExpose({ el });
 			}
 		}
 
-		> [data-select-items],
-		> details > [data-effects] > button {
+		.select-items,
+		.effects > button {
 			--at-apply: 'rounded-full h-8 ps-2.5 pe-2 w-max whitespace-nowrap';
 
 			img {
@@ -2457,24 +2467,12 @@ defineExpose({ el });
 		}
 	}
 
-	#scoreboard > div > ul > [data-scoreboard-item] > details[open]:not(:has(> [data-extras]:not(:empty))) {
+	[data-scoreboard-item] > details[open]:not(:has(> .extras:not(:empty))) {
 		--at-apply: 'pb-1.5';
 	}
 
-	#scoreboard
-		> div
-		> ul
-		> [data-scoreboard-item]
-		> details
-		> [data-abilities]
-		> :is([data-q], [data-w], [data-e], [data-r]),
-	#scoreboard
-		> div
-		> ul
-		> [data-scoreboard-item='Aphelios']
-		> details
-		> [data-extras]
-		> .extras-aphelios-ability-levels {
+	[data-scoreboard-item] .abilities > :is([data-ability]:not([data-ability='passive'])),
+	[data-scoreboard-item='Aphelios'] .extras-aphelios-ability-levels {
 		> [role='radiogroup'] {
 			--at-apply: 'flex justify-center';
 
@@ -2513,7 +2511,7 @@ defineExpose({ el });
 	}
 
 	#dialog-effects > ul > li,
-	#scoreboard > div > ul > [data-scoreboard-item] > details > [data-extras] {
+	[data-scoreboard-item] .extras {
 		> article {
 			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md max-inline-[--extra-item-max-w]';
 			--p: calc(2 * var(--spacing));
@@ -2542,33 +2540,25 @@ defineExpose({ el });
 }
 
 @layer overrides {
-	#scoreboard > div > ul > [data-scoreboard-item='Yone'] {
-		> details {
-			> [data-health-ability-resource] {
-				> [data-current-ability-resource] {
-					&[data-partype='flow'] {
-						--fill-bg: theme('colors.orange.500');
+	[data-scoreboard-item='Yone'] {
+		.current-ability-resource {
+			&[data-partype='flow'] {
+				--fill-bg: theme('colors.orange.500');
 
-						> * {
-							mix-blend-mode: normal;
-						}
-					}
+				> * {
+					mix-blend-mode: normal;
 				}
 			}
 		}
 	}
 
-	#scoreboard > div > ul > [data-scoreboard-item='Belveth'] {
-		> details {
-			> [data-health-ability-resource] {
-				> [data-current-ability-resource] {
-					--fill-bg: theme('colors.purple.500');
-				}
-			}
+	[data-scoreboard-item='Belveth'] {
+		.current-ability-resource {
+			--fill-bg: theme('colors.purple.500');
 		}
 	}
 
-	#scoreboard[data-mirrored] > div > ul:nth-of-type(1) > [data-scoreboard-item] {
+	[data-mirrored] [data-scoreboard-item][data-group='sources'] {
 		grid-template-columns: max-content 1fr repeat(5, max-content);
 		grid-template-areas:
 			'clear			items				select-items		select-runes	select-champion move-column move-up'
@@ -2582,25 +2572,25 @@ defineExpose({ el });
 			}
 		}
 
-		> [data-select-champion] {
+		> .select-champion {
 			--at-apply: 'ms-[--me] me-[--ms]';
 
-			> [data-select-champion-level] {
+			> .select-champion-level {
 				--at-apply: 'end-auto start-[--inset-end]';
 			}
 		}
 
-		> [data-select-runes] {
-			[data-secondary-path-icon] {
+		> .select-runes {
+			.secondary-path-icon {
 				--at-apply: 'end-auto start-[--secondary-path-inset-end]';
 			}
 
-			&:has([data-secondary-path-icon]):before {
+			&:has(.secondary-path-icon):before {
 				--at-apply: 'end-auto start-[--secondary-path-inset-end] -translate-x-0.5';
 			}
 		}
 
-		> [data-select-items] {
+		> .select-items {
 			--at-apply: 'me-[--ms] ms-0';
 		}
 
@@ -2621,7 +2611,7 @@ defineExpose({ el });
 		}
 
 		> details {
-			> [data-extras] {
+			> .extras {
 				direction: rtl;
 
 				> * {
@@ -2631,18 +2621,18 @@ defineExpose({ el });
 		}
 	}
 
-	#scoreboard[data-mirrored] > div > ul:nth-of-type(2) > [data-scoreboard-item] {
+	[data-mirrored] [data-scoreboard-item][data-group='targets'] {
 		> details {
 			&::details-content {
-				--at-apply: 'grid-cols-[auto_1fr_min-content_min-content]';
+				--at-apply: 'grid-cols-[1fr_min-content_min-content]';
 				grid-template-areas:
-					'abilities abilities stats effects'
-					'resources resources stats effects'
-					'resources resources stats runes'
-					'dragons role-quest stats runes';
+					'abilities stats effects'
+					'resources stats effects'
+					'resources stats runes'
+					'role-quest-dragons stats runes';
 			}
 
-			> [data-effects] {
+			.effects {
 				> ul {
 					direction: ltr;
 				}
@@ -2654,7 +2644,7 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-runes] {
+			.runes {
 				> dl {
 					&:nth-of-type(1) {
 						--at-apply: 'b-e b-s-0';
@@ -2662,43 +2652,47 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-abilities],
-			> [data-health-ability-resource] {
+			.abilities,
+			.health-ability-resource {
 				--at-apply: 'ms-0 me-[--gap-x]';
 			}
 
-			> [data-role-quest],
-			> [data-dragons] {
-				> h4 {
-					--at-apply: 'start-auto end-0';
-				}
-			}
+			.role-quest-dragons {
+				--at-apply: 'ps-0 pe-[--gap-x] flex-row-reverse';
 
-			> [data-role-quest] {
-				--at-apply: 'justify-self-end';
-
-				> .v-select {
-					--at-apply: 'ms-auto';
-
-					> select {
+				.role-quest,
+				.dragons {
+					> h4 {
 						--at-apply: 'start-auto end-0';
 					}
+				}
 
-					> label {
-						--at-apply: 'flex-row-reverse';
+				.role-quest {
+					--at-apply: 'justify-self-end';
 
-						> img:first-of-type {
+					> .v-select {
+						--at-apply: 'ms-auto';
+
+						> select {
 							--at-apply: 'start-auto end-0';
+						}
+
+						> label {
+							--at-apply: 'flex-row-reverse';
+
+							> img:first-of-type {
+								--at-apply: 'start-auto end-0';
+							}
 						}
 					}
 				}
-			}
 
-			> [data-dragons] {
-				--at-apply: 'flex-row-reverse';
+				.dragons {
+					--at-apply: 'flex-row-reverse';
 
-				&::before {
-					--at-apply: 'start-[--end] end-[--start]';
+					&::before {
+						--at-apply: 'start-[--end] end-[--start]';
+					}
 				}
 			}
 		}

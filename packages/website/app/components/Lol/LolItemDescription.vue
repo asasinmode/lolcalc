@@ -79,9 +79,11 @@ defineExpose({ header });
 		:is="headerTag || 'div'"
 		ref="header"
 		class="item-description-header"
+		:class="{
+			masterwork: isMasterwork,
+		}"
 		:data-show-subtitles="showHeaderSubtitles || undefined"
 		:data-inventory-view="isInventoryView || undefined"
-		:data-masterwork="isMasterwork ? '' : undefined"
 		@click="$emit('headerClick', $event)"
 		@click.right="$emit('headerRClick', $event)"
 		@dblclick="$emit('headerDblClick', $event)"
@@ -235,7 +237,7 @@ defineExpose({ header });
 			--at-apply: 'row-start-1 col-start-3';
 		}
 
-		&[data-masterwork] {
+		&.masterwork {
 			> span:nth-of-type(1) {
 				--at-apply: 'text-orange-500';
 			}
