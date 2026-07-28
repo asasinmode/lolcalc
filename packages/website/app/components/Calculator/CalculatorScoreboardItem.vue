@@ -1738,11 +1738,12 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'flex h-[--item-size] self-center relative me-[--me] ms-[--ms] w-min';
+			--at-apply: 'flex h-[--item-size] self-center relative me-[--computed-me] ms-[--ms] w-min';
 			grid-area: items;
 			anchor-name: --scoreboard-item-items;
 			--item-size: calc(8 * var(--spacing));
 			--me: calc(3 * var(--spacing));
+			--computed-me: var(--me);
 			--ms: calc(5 * var(--spacing));
 
 			@media (width < 1606px) {
@@ -1835,7 +1836,7 @@ defineExpose({ el });
 			}
 
 			&:not([data-role-quest='bot']) {
-				--at-apply: 'me-[calc(var(--item-size)+var(--me)+var(--item-pe))]';
+				--computed-me: calc(var(--item-size) + var(--me) + var(--item-pe));
 
 				> li:last-child {
 					--at-apply: 'hidden';
@@ -2671,7 +2672,7 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'ms-[--me] me-[--ms] justify-self-end flex-row-reverse';
+			--at-apply: 'ms-[--computed-me] me-[--ms] justify-self-end flex-row-reverse';
 
 			> li {
 				--at-apply: 'ps-[--item-pe] pe-0';
