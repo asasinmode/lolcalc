@@ -1082,7 +1082,7 @@ defineExpose({ el });
 					:data-active="typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object'
 						? (0
 							^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0)
-							^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 2 : 0)
+							^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 2 : 0)
 						)
 						: undefined"
 					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
@@ -2178,7 +2178,7 @@ defineExpose({ el });
 					}
 				}
 
-				details[data-empty] & [data-ability='passive'] {
+				details.empty & [data-ability='passive'] {
 					--at-apply: 'b-neutral-400';
 				}
 
@@ -2448,11 +2448,17 @@ defineExpose({ el });
 			}
 
 			.extras {
-				--at-apply: 'col-span-full grid grid-cols-[repeat(auto-fit,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-[--extras-gap] pt-3';
+				--at-apply: 'col-span-full grid grid-cols-[repeat(3,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-[--extras-gap] pt-3';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
 					--at-apply: 'hidden';
+				}
+
+				@media (width < 1606px) {
+					& {
+						--at-apply: 'grid-cols-[repeat(2,minmax(var(--extra-item-min-w),1fr))]';
+					}
 				}
 			}
 		}
@@ -2513,7 +2519,7 @@ defineExpose({ el });
 	#dialog-effects > ul > li,
 	[data-scoreboard-item] .extras {
 		> article {
-			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md max-inline-[--extra-item-max-w]';
+			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
 			--p: calc(2 * var(--spacing));
 
 			> img {
