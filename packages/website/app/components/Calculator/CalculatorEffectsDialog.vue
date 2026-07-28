@@ -288,7 +288,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-effects {
-		--at-apply: 'bg-[--cyan-bg] flex-col w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] h-200 of-y-auto';
+		--at-apply: 'bg-[--cyan-bg] flex-col w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] block-200 of-y-auto';
 		anchor-scope: all;
 		--pt: calc(2 * var(--spacing));
 		--ability-size: calc(14 * var(--spacing));
@@ -338,14 +338,14 @@ defineExpose({
 		}
 
 		> ul {
-			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 mb-3 h-min last-of-type:mb-0';
+			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 mb-3 block-min last-of-type:mb-0';
 
 			&::before {
 				--at-apply: 'col-span-full text-neutral-300 font-500 text-lg';
 			}
 
 			&:first-of-type {
-				--at-apply: 'min-h-[max(40%,20rem)] pt-2';
+				--at-apply: 'pt-2';
 
 				&:empty::before {
 					--at-apply: 'text-center mt-[calc((var(--ability-size))/2-var(--spacing)*1.75)]';

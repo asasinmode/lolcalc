@@ -51,7 +51,7 @@ const value = defineModel<number>({ required: true });
 		</button>
 		<button
 			class="pretend-ui-btn"
-			:disabled="disabled || max === undefined || value === max"
+			:disabled="disabled || max === undefined || value === max || max === Number.POSITIVE_INFINITY"
 			@click="value = max!"
 		>
 			max
