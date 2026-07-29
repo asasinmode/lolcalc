@@ -196,7 +196,7 @@
 						"MinBase": [50, 100, 150, 200, 250, 300, 350],
 						"MaxBase": [150, 300, 450, 600, 750, 900, 1050],
 						"Duration": [15, 15, 15, 15, 15, 15, 15],
-						"PercentBonusAD": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"PercentBonusAD": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"TooltipAttackRange": [75, 75, 75, 75, 75, 75, 75]
 					},
 					"spellCalculations": {
@@ -209,7 +209,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.6,
+									"mCoefficient": 0.55,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -223,7 +223,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 1.8,
+									"mCoefficient": 1.65,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

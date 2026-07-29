@@ -219,7 +219,7 @@
 					"extendedVariables": [],
 					"dataValues": {
 						"SpiritRealmDuration": [7, 7, 7, 7, 7, 7, 7],
-						"StatStealPercentScalar": [0.13, 0.13, 0.13, 0.13, 0.13, 0.13, 0.13],
+						"StatStealPercentScalar": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"ZoneRadius": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
 						"GhostAPRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},

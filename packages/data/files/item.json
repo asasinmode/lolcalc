@@ -1,5 +1,5 @@
 {
-	"version": "16.14.1",
+	"version": "16.15.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -1520,8 +1520,8 @@
 			"searchString": "bastionbreaker;damage;armorpenetration;abilityhaste;attackdamage",
 			"epicness": 5,
 			"gold": {
-				"total": 3200,
-				"sell": 2240
+				"total": 3000,
+				"sell": 2100
 			},
 			"image": "2520.png",
 			"from": [
@@ -1568,7 +1568,7 @@
 				"AbilityDamageCalc": {
 					"mFormulaParts": [
 						{
-							"mNumber": 30,
+							"mNumber": 50,
 							"__type": "NumberCalculationPart"
 						},
 						{
@@ -2194,7 +2194,7 @@
 		"3031": {
 			"id": "3031",
 			"name": "Infinity Edge",
-			"searchString": "infinityedge;ie;criticalstrike;damage;criticalstrikechance;attackdamage",
+			"searchString": "infinityedge;ie;banana;criticalstrike;damage;criticalstrikechance;attackdamage",
 			"epicness": 5,
 			"gold": {
 				"total": 3500,
@@ -2225,8 +2225,8 @@
 			"searchString": "yuntalwildarrows;yuntal;arrow;damage;criticalstrike;attackspeed;attackdamage",
 			"epicness": 5,
 			"gold": {
-				"total": 3100,
-				"sell": 2170
+				"total": 3000,
+				"sell": 2100
 			},
 			"image": "3032.png",
 			"from": [
@@ -2242,7 +2242,7 @@
 			},
 			"stats": {
 				"FlatPhysicalDamageMod": 50,
-				"PercentAttackSpeedMod": 0.4
+				"PercentAttackSpeedMod": 0.45
 			},
 			"dataValues": {
 				"ASDuration": 6,
@@ -6360,7 +6360,6 @@
 				"PercentAttackSpeedMod": 0.35
 			},
 			"dataValues": {
-				"OnHitDamage": 30,
 				"BuffDuration": 5,
 				"DebuffDuration": 5,
 				"PenMax": 0.3,
@@ -6395,8 +6394,26 @@
 					"{72c5c2a8}": 1,
 					"mFormulaParts": [
 						{
-							"mDataValue": "OnHitDamage",
-							"__type": "NamedDataValueCalculationPart"
+							"mSpellCalculationKey": "OnHitDamage",
+							"__type": "{f3cbe7b2}"
+						}
+					]
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mNumber": 30,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}

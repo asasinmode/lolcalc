@@ -137,18 +137,18 @@
 					"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [13, 13, 12.25, 11.5, 10.75, 10, 9.25],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @ActiveSlowPercentage@% for @SlowDuration@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
 							"name": "PassiveADRatio",
 							"nameOverride": "spell_listtype_passivedamage"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "ActiveBaseDamage",
 							"nameOverride": "spell_listtype_activedamage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "ActiveSlowPercentage",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
@@ -158,7 +158,16 @@
 					"dataValues": {
 						"PassiveADRatioTT": [0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4],
 						"PassiveADRatio": [60, 90, 120, 150, 180, 210, 240],
-						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"ActiveBaseDamage": [75, 75, 120, 165, 210, 255, 300],
+						"ActiveSlowPercentage": [20, 20, 25, 30, 35, 40, 45],
+						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
+						"PassiveDmgPerSoul": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"DmgPerSoul": [1.7, 1.7, 1.7, 1.7, 1.7, 1.7, 1.7],
+						"FullChargeDuration": [10, 10, 10, 10, 10, 10, 10],
+						"Icon1ThresholdPercentage": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"Icon2ThresholdPercentage": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"Icon3ThresholdPercentage": [0.975, 0.975, 0.975, 0.975, 0.975, 0.975, 0.975]
 					},
 					"spellCalculations": {
 						"PAttackDamageMin": {
@@ -191,8 +200,8 @@
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "ActiveBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mDataValue": "APRatio",
@@ -223,10 +232,10 @@
 					"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
 					"mana": [100, 100, 100, 100, 100, 0],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
-					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
+					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @SlowAmount@% for @SlowDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -234,15 +243,19 @@
 						"ThreshRCageRadius": [400, 400, 400, 400, 400, 400, 400],
 						"ThreshRWallThickness": [30, 30, 30, 30, 30, 30, 30],
 						"ThreshRWallLength": [470.228, 470.228, 470.228, 470.228, 470.228, 470.228, 470.228],
-						"APRatio": [1, 1, 1, 1, 1, 1, 1]
+						"APRatio": [1, 1, 1, 1, 1, 1, 1],
+						"Damage": [0, 250, 400, 550, 175, 175, 0],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SlowAmount": [99, 99, 99, 99, 99, 99, 99],
+						"WallDuration": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mDataValue": "APRatio",

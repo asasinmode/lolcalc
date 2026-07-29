@@ -115,7 +115,7 @@
 					"image": "assets/characters/shaco/hud/icons2d/jester_deathward.png",
 					"mana": [70, 65, 60, 55, 50, 50],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
-					"tooltip": "Shaco creates a trap that stealths itself after @Effect5Amount@ seconds and lasts for @TrapDuration@ seconds. It activates when an enemy comes near or when revealed, <status>Fearing</status> nearby enemy Champions for @FearDuration@ seconds, or @MinionFearDuration@ seconds for minions and jungle monsters.<br><br>Once activated, the trap fires at all nearby enemies for 5 seconds, dealing <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ damage</magicDamage> if focused on a single target.<br><br>Jack in the Box's attacks deal an additional <magicDamage>@MonsterBonusDamage@</magicDamage> damage to monsters.",
+					"tooltip": "Shaco creates a trap that stealths itself after @ArmTime@ seconds and lasts for @TrapDuration@ seconds. It activates when an enemy comes near or when revealed, <status>Fearing</status> nearby enemy Champions for @FearDuration@ seconds, or @MinionFearDuration@ seconds for minions and jungle monsters.<br><br>Once activated, the trap fires at all nearby enemies for 5 seconds, dealing <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ damage</magicDamage> if focused on a single target.<br><br>Jack in the Box's attacks deal an additional <magicDamage>@MonsterBonusDamage@</magicDamage> damage to monsters.",
 					"extendedVariables": [
 						{
 							"name": "STBaseDamage",
@@ -141,7 +141,9 @@
 						"MaxTraps": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
 						"FearDuration": [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75],
 						"WAoEAPRatio": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
-						"WSingleTargetAPRatio": [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18]
+						"WSingleTargetAPRatio": [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18],
+						"BoxDuration": [40, 40, 40, 40, 40, 40, 40],
+						"ArmTime": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"AoEDamage": {
@@ -171,8 +173,8 @@
 						"TrapDuration": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 4,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BoxDuration",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.1,

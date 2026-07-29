@@ -63,7 +63,8 @@
 						"HighDamage": [25, 90, 155, 220, 285, 350, 415],
 						"MinionRatio": [60, 60, 60, 60, 60, 60, 60],
 						"MonsterRatio": [165, 165, 165, 165, 165, 165, 165],
-						"BaseStunTime": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25]
+						"BaseStunTime": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"SlowAmount": [-0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8]
 					},
 					"spellCalculations": {
 						"MinDamageTotal": {
@@ -115,15 +116,15 @@
 					"image": "assets/characters/sion/hud/icons2d/sion_w1.png",
 					"mana": [65, 70, 75, 80, 85, 90],
 					"cooldownTime": [15, 15, 14, 13, 12, 11, 11],
-					"tooltip": "<spellPassive>Passive</spellPassive>: Sion gains <scaleHealth>@HPPerKill@ max Health</scaleHealth> when he kills a unit, or <scaleHealth>@HPPerChampKill@</scaleHealth> for champion takedowns, large minions and large monsters.<br><br><spellActive>Active</spellActive>: Sion gains <shield>@TotalShield@ Shield</shield> for 6 seconds. After @Effect7Amount@ seconds if the shield still holds, Sion can <recast>Recast</recast> to detonate the shield to deal <magicDamage>@TotalDamage@ plus @Effect4Amount@% max Health magic damage</magicDamage>.",
+					"tooltip": "<spellPassive>Passive</spellPassive>: Sion gains <scaleHealth>@HPPerKill@ max Health</scaleHealth> when he kills a unit, or <scaleHealth>@HPPerChampKill@</scaleHealth> for champion takedowns, large minions and large monsters.<br><br><spellActive>Active</spellActive>: Sion gains <shield>@TotalShield@ Shield</shield> for 6 seconds. After @DetonateRecastCooldown@ seconds if the shield still holds, Sion can <recast>Recast</recast> to detonate the shield to deal <magicDamage>@TotalDamage@ plus @MaxHPDamageRatio@% max Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_SionW_Tooltip}}<br><br>Current Bonus Health: <statTracking>@f1@</statTracking>",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -142,14 +143,19 @@
 						"HPPerKill": [4, 4, 4, 4, 4, 4, 4],
 						"HPPerLargeKill": [15, 15, 15, 15, 15, 15, 15],
 						"ShieldAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
-						"DamageAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"DamageAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"BaseShield": [60, 60, 75, 90, 105, 120, 120],
+						"BaseDamage": [15, 40, 65, 90, 115, 140, 165],
+						"MaxHPDamageRatio": [14, 14, 14, 14, 14, 14, 14],
+						"DetonateRecastCooldown": [3, 3, 3, 3, 3, 3, 3],
+						"ShieldDuration": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"spellCalculations": {
 						"TotalShield": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseShield",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mDataValue": "ShieldAPRatio",
@@ -165,8 +171,8 @@
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 2,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mDataValue": "DamageAPRatio",
@@ -202,7 +208,7 @@
 					"tooltip": "Sion fires a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @SlowAmount@% for @SlowDuration@ seconds and removing <scaleArmor>@ArmorShred@% Armor</scaleArmor> for @ArmorShredDuration@ seconds. Non-champions hit are <status>Knocked Back</status>. Enemies hit by a <status>Knocked Back</status> unit take the same damage and effects.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

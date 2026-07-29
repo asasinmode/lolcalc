@@ -61,8 +61,8 @@
 						"KnockbackDistance": [400, 400, 400, 400, 400, 400, 400],
 						"BasePercentHealth": [0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045],
 						"NonChampMax": [9999, 9999, 9999, 9999, 9999, 9999, 9999],
-						"BonusMonsterDamage": [130, 140, 150, 160, 170, 180, 190],
-						"APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"BonusMonsterDamage": [140, 150, 160, 170, 180, 190, 200],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

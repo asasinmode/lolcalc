@@ -89,17 +89,24 @@
 					"image": "assets/characters/karthus/hud/icons2d/karthus_w.png",
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
-					"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration.",
+					"tooltip": "Karthus creates a wall that lasts for @WallDuration@ seconds. Enemies that pass through lose <scaleMR>@MagicResistShred@% Magic Resist</scaleMR> for @DebuffDuration@ seconds and are <status>Slowed</status> by @SlowPercent@% decaying over the duration.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "TT_WallWidth",
 							"nameOverride": "spell_listtype_karthuswallwidth"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_movementspeedslow"
 						}
 					],
+					"dataValues": {
+						"MagicResistShred": [25, 25, 25, 25, 25, 25, 25],
+						"TT_WallWidth": [700, 800, 900, 1000, 1100, 1200, 1300],
+						"SlowPercent": [30, 40, 50, 60, 70, 80, 90],
+						"WallDuration": [5, 5, 5, 5, 5, 5, 5],
+						"DebuffDuration": [5, 5, 5, 5, 5, 5, 5]
+					},
 					"effectAmount": {
 						"0": [25, 25, 25, 25, 25, 25, 25],
 						"1": [700, 800, 900, 1000, 1100, 1200, 1300],
@@ -120,14 +127,14 @@
 					"image": "assets/characters/karthus/hud/icons2d/karthus_e.png",
 					"mana": [30, 42, 54, 66, 78, 90],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
+					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@ManaRestoreOnKill@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "DamagePerSecond",
 							"nameOverride": "spell_listtype_damagepersecond"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "ManaRestoreOnKill",
 							"nameOverride": "spell_listtype_manareturn"
 						},
 						{

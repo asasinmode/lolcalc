@@ -37,7 +37,7 @@
 					"image": "assets/characters/malphite/hud/icons2d/malphite_q.png",
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
-					"tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> them by @Effect2Amount@% for @SlowDuration@ seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for @SlowDuration@ seconds.",
+					"tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> them by @SpeedSteal@% for @SlowDuration@ seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -47,12 +47,12 @@
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "SpeedSteal",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
 					"dataValues": {
-						"SpeedSteal": [10, 15, 20, 25, 30, 35, 40],
+						"SpeedSteal": [20, 20, 25, 30, 35, 40, 45],
 						"SlowDuration": [3, 3, 3, 3, 3, 3, 3],
 						"BaseDamage": [20, 70, 120, 170, 220, 270, 320]
 					},
@@ -248,7 +248,7 @@
 					"tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for @KnockupDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

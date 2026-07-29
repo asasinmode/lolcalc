@@ -1,5 +1,5 @@
 {
-	"version": "16.14.1",
+	"version": "16.15.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -1763,12 +1763,14 @@
 							"icon": "assets/perks/styles/inspiration/jackofalltrades/jackofalltrades2.png",
 							"dataKey": "{f781f833}",
 							"effectAmount": {
-								"{1b48f5ea}": 10,
-								"{55d14eea}": 25,
 								"HasteperStack": 1,
 								"__renamedVariables": {
-									"HastePerStack": "HasteperStack"
-								}
+									"HastePerStack": "HasteperStack",
+									"{55d14eea}": "Adaptive10",
+									"{1b48f5ea}": "Adaptive5"
+								},
+								"Adaptive10": 20,
+								"Adaptive5": 8
 							}
 						}
 					}

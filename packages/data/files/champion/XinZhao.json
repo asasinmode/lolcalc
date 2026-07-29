@@ -419,7 +419,7 @@
 		}
 	},
 	"stringtable": {
-		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_bonusdamage": "Bonus Damage",
 		"spell_listtype_xinzhaowslashdamage": "Slash Damage",
 		"spell_listtype_xinzhaowthrustdamage": "Thrust Damage",
 		"spell_listtype_damage": "Damage",

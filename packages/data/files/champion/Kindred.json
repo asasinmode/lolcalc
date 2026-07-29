@@ -37,14 +37,14 @@
 					"image": "assets/characters/kindred/hud/icons2d/kindred_q.png",
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
-					"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @Effect8Amount@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @Effect4Amount@ seconds.",
+					"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @BaseASDuration@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @CDNewValue@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect4Amount",
+							"name": "CDNewValue",
 							"nameOverride": "spell_listtype_kindredqcooldowninw"
 						}
 					],
@@ -52,15 +52,17 @@
 						"DashSpeed": [500, 500, 500, 500, 500, 500, 500],
 						"DashSpeedScaling": [12, 12, 12, 12, 12, 12, 12],
 						"BaseASDuration": [4, 4, 4, 4, 4, 4, 4],
-						"CDNewValue": [4.5, 4, 3.5, 3, 2.5, 2, 1.5]
+						"CDNewValue": [4.5, 4, 3.5, 3, 2.5, 2, 1.5],
+						"BaseDamage": [15, 40, 65, 90, 115, 140, 165],
+						"BaseBonusAS": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
 					},
 					"spellCalculations": {
 						"TotalQAttackSpeed": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 7,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseBonusAS",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mBuffName": "{64290302}",
@@ -74,8 +76,8 @@
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -111,7 +113,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>@AttackHeal@ Health</healing> based on their missing Health.<br><br><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>@BaseWolfDamage@</magicDamage> plus <magicDamage>@PercentWolfDamage@ current Health magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect5Amount",
+							"name": "CloneDamageFlat",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -122,7 +124,11 @@
 						"CloneBasePercentDamage": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
 						"CloneDamageFlat": [20, 25, 30, 35, 40, 45, 50],
 						"CloneADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
-						"ClonePercentDamagePerBounty": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+						"ClonePercentDamagePerBounty": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"BaseCurrentHealthDamage": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"ZoneDuration": [8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5],
+						"MonsterBonusDmg": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MonsterSlowAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"AttackHeal": {
@@ -153,7 +159,6 @@
 							]
 						},
 						"PercentWolfDamage": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mDataValue": "CloneBasePercentDamage",
@@ -168,6 +173,17 @@
 							],
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
+						},
+						"{fe248f68}": {
+							"mMultiplier": {
+								"{a8cb9c14}": true,
+								"mStat": 13,
+								"mSubpart": {
+									"mNumber": 1
+								}
+							},
+							"{72c5c2a8}": 1,
+							"mModifiedGameCalculation": "PercentWolfDamage"
 						}
 					},
 					"effectAmount": {
@@ -331,10 +347,10 @@
 					"image": "assets/characters/kindred/hud/icons2d/kindred_r.png",
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
-					"tooltip": "Kindred blesses the ground for @Effect2Amount@ seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br><br>When the blessing ends, all units inside heal for <healing>@Effect1Amount@ Health</healing>.",
+					"tooltip": "Kindred blesses the ground for @BuffDuration@ seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br><br>When the blessing ends, all units inside heal for <healing>@HealFlat@ Health</healing>.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "HealFlat",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
@@ -361,10 +377,16 @@
 					"dataKey": "Characters/Kindred/Spells/KindredPassiveManagerAbility/KindredPassiveManager",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_passive.png",
 					"tooltip": "{{Spell_KindredPassiveManager_Tooltip}}",
-					"tooltipExtended": "{{Spell_KindredPassiveManager_Tooltip}}<br><br>Currently granting <statTracking>@f3@ Attack Range</statTracking>.<br><br><rules>The hunted jungle monsters change as Kindred gains <keywordMajor>Marks</keywordMajor>, moving further into the enemy jungle, eventually hunting epic monsters.</rules>",
+					"tooltipExtended": "{{Spell_KindredPassiveManager_Tooltip}}<br><br>Currently granting <statTracking>@f1@ Attack Range</statTracking>.<br><br><rules>The hunted jungle monsters change as Kindred gains <keywordMajor>Marks</keywordMajor>, moving further into the enemy jungle, eventually hunting epic monsters.</rules>",
 					"dataValues": {
 						"BaseHealAmount": [45, 45, 45, 45, 45, 45, 45],
-						"HealAmountPerLevel": [2, 2, 2, 2, 2, 2, 2]
+						"HealAmountPerLevel": [2, 2, 2, 2, 2, 2, 2],
+						"InitialMarkThreshold": [4, 4, 4, 4, 4, 4, 4],
+						"RangeIncrease": [25, 25, 25, 25, 25, 25, 25],
+						"FirstTierMultiplier": [3, 3, 3, 3, 3, 3, 3],
+						"ASPerMark": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"EDamagePerMark": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"AdditionalMarkThreshold": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"QMarkBonus": {
@@ -400,6 +422,17 @@
 								}
 							],
 							"mDisplayAsPercent": true
+						},
+						"{d34fc902}": {
+							"mMultiplier": {
+								"mDataValue": "FirstTierMultiplier"
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "RangeIncrease",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
 						}
 					},
 					"effectAmount": {
@@ -422,6 +455,6 @@
 		"spell_kindredq_name": "Dance of Arrows",
 		"spell_kindredw_name": "Wolf's Frenzy",
 		"spell_kindredewrapper_name": "Mounting Dread",
-		"spell_kindredpassivemanager_tooltip": "Kindred can designate a champion to hunt by clicking their portrait above their inventory. They also designate certain jungle monsters to hunt with an icon on the minimap automatically.<br><br>Getting a takedown on a hunted target grants Kindred a <keywordMajor>Mark</keywordMajor>, empowering them. After @f2@ <keywordMajor>Marks</keywordMajor>, Kindred gains @f8@ Attack Range. Every @f7@ <keywordMajor>Marks</keywordMajor> after the fourth grants a further @f9@ Attack Range.<br><br><keywordMajor>Marks</keywordMajor> empower Kindred's basic Abilities:<li><spellName>{{Spell_KindredQ_Name}}</spellName> grants an additional <attackSpeed>@QMarkBonus@ Attack Speed</attackSpeed><li><spellName>{{Spell_KindredW_Name}}</spellName> deal an additional <magicDamage>@WMarkBonus@ current Health damage</magicDamage>.<li><spellName>{{Spell_KindredEWrapper_Name}}</spellName> deal an additional <physicalDamage>@EMarkBonus@ missing Health damage</physicalDamage>."
+		"spell_kindredpassivemanager_tooltip": "Kindred can designate a champion to hunt by clicking their portrait above their inventory. They also designate certain jungle monsters to hunt with an icon on the minimap automatically.<br><br>Getting a takedown on a hunted target grants Kindred a <keywordMajor>Mark</keywordMajor>, empowering them. After @InitialMarkThreshold@ <keywordMajor>Marks</keywordMajor>, Kindred gains @FirstTierRangeIncreaseTT@ Attack Range. Every @AdditionalMarkThreshold@ <keywordMajor>Marks</keywordMajor> after the fourth grants a further @RangeIncrease@ Attack Range.<br><br><keywordMajor>Marks</keywordMajor> empower Kindred's basic Abilities:<li><spellName>{{Spell_KindredQ_Name}}</spellName> grants an additional <attackSpeed>@QMarkBonus@ Attack Speed</attackSpeed><li><spellName>{{Spell_KindredW_Name}}</spellName> deal an additional <magicDamage>@WMarkBonus@ current Health damage</magicDamage>.<li><spellName>{{Spell_KindredEWrapper_Name}}</spellName> deal an additional <physicalDamage>@EMarkBonus@ missing Health damage</physicalDamage>."
 	}
 }

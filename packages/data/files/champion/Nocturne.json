@@ -236,28 +236,33 @@
 						"Cooldown": [12, 12, 12, 12, 12, 12, 12],
 						"Radius": [360, 360, 360, 360, 360, 360, 360],
 						"DamageMinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"HealMinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+						"HealMinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"HealingAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"HealLevel1Value": [13, 13, 13, 13, 13, 13, 13],
+						"HealLevel18Value": [32, 32, 32, 32, 32, 32, 32],
+						"TotalDamageNoCritADRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+						"TotalDamageCritADRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1]
 					},
 					"spellCalculations": {
 						"TotalDamageNoCrit": {
 							"mFormulaParts": [
 								{
 									"mStat": 2,
-									"mCoefficient": 1.2,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "TotalDamageNoCritADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
 						"TotalHealing": {
 							"mFormulaParts": [
 								{
-									"mStartValue": 13,
-									"mEndValue": 30,
-									"__type": "ByCharLevelInterpolationCalculationPart"
+									"{0589a59c}": "HealLevel1Value",
+									"{0b65bc23}": "HealLevel18Value",
+									"__type": "{ee18a47b}"
 								},
 								{
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "HealingAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
@@ -265,8 +270,8 @@
 							"mFormulaParts": [
 								{
 									"mStat": 2,
-									"mCoefficient": 1.1,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "TotalDamageCritADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						}

@@ -364,7 +364,7 @@
 	},
 	"stringtable": {
 		"spell_listtype_evelynnqdamage": "Lasher and Spike Damage",
-		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_bonusdamage": "Bonus Damage",
 		"spell_listtype_charmduration": "Charm Duration",
 		"spell_evelynnw_monstercharm_levelup": "Monster Charm Duration",
 		"spell_listtype_magicresistshred": "Magic Resist Shred",

@@ -40,7 +40,7 @@
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						}
 					],
@@ -48,15 +48,20 @@
 						"SlayerBaseMaxHPDamage": [6, 6, 6, 6, 6, 6, 6],
 						"SlayerMaxHPPer100BAD": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 						"SlayerMaxHPPer100BADTOOLTIPONLY": [0.035, 0.035, 0.035, 0.035, 0.035, 0.035, 0.035],
-						"BonusADRatio": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]
+						"BonusADRatio": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85],
+						"BaseDamage": [75, 75, 105, 135, 165, 195, 195],
+						"SlayTADRatio": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"MaxDmgToMonsters": [175, 200, 250, 300, 350, 400, 0],
+						"FlatBonusDmgToMonsters": [40, 40, 40, 40, 40, 40, 40],
+						"AoERadius": [300, 300, 300, 300, 300, 300, 300]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -122,20 +127,28 @@
 					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
 							"name": "Cost"
 						}
 					],
+					"dataValues": {
+						"BaseDamage": [85, 85, 130, 175, 220, 265, 265],
+						"KnockupDuration": [1, 1, 1, 1, 1, 1, 1],
+						"SlowIntensity": [-0.9, -0.9, -0.9, -0.9, -0.9, -0.9, -0.9],
+						"BoxWidth": [160, 160, 160, 160, 160, 160, 160],
+						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"AssRange": [900, 900, 900, 900, 900, 900, 900]
+					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -171,25 +184,32 @@
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "WallWalkDuration",
 							"nameOverride": "spell_listtype_duration"
 						},
 						{
-							"name": "Effect7Amount",
+							"name": "HealAmount",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
 					"dataValues": {
 						"AssassinCDReduction": [10, 10, 10, 10, 10, 10, 10],
-						"AssMS": [70, 70, 70, 70, 70, 70, 70]
+						"AssMS": [70, 70, 70, 70, 70, 70, 70],
+						"MS": [40, 40, 40, 40, 40, 40, 40],
+						"WallWalkDuration": [7, 7, 7.5, 8, 8.5, 9, 9.5],
+						"LingerTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"WarningParticleRange": [1250, 1250, 1250, 1250, 1250, 1250, 1250],
+						"MaxInCombatTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"HealAmount": [80, 90, 100, 110, 120, 130, 140],
+						"HealBADRatio": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45]
 					},
 					"spellCalculations": {
 						"TotalHealing": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 7,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "HealAmount",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 2,
@@ -240,7 +260,8 @@
 						"SlayerHealPercent": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"AssassinCastRange": [750, 750, 750, 750, 750, 750, 750],
 						"BaseCastRange": [550, 550, 550, 550, 550, 550, 550],
-						"AssassinJumpOutDistance": [500, 500, 500, 500, 500, 500, 500]
+						"AssassinJumpOutDistance": [500, 500, 500, 500, 500, 500, 500],
+						"AssCastRange": [750, 750, 750, 750, 750, 750, 750]
 					},
 					"spellCalculations": {
 						"Damage": {

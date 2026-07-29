@@ -725,7 +725,7 @@
 				"footerLeft": "Champion Damage Blocked: <attention>@f1@</attention>"
 			},
 			"3083": {
-				"subtitleLeft": "Health Regen",
+				"subtitleLeft": "Stacking Health",
 				"tooltipShop": [
 					[
 						"<passive>Warmog's Heart</passive>",
@@ -2414,7 +2414,7 @@
 				"JackOfAllTrades": {
 					"name": "Jack Of All Trades",
 					"tooltipShort": "For each different stat gained from items, gain one Jack stack. Each stack grants you <speed>@HasteperStack@ Ability Haste</speed>.<br><br>Gain bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>Adaptive Force</lol-uikit-tooltipped-keyword> at 5 and 10 stacks.",
-					"tooltipLong": "For each different stat gained from items, gain one Jack stack. Each stack grants you <speed>@HasteperStack@ Ability Haste</speed>.<br><br>Gain 10 or 25 bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>Adaptive Force</lol-uikit-tooltipped-keyword> at 5 and 10 stacks, respectively.",
+					"tooltipLong": "For each different stat gained from items, gain one Jack stack. Each stack grants you <speed>@HasteperStack@ Ability Haste</speed>.<br><br>Gain @Adaptive5@ or @Adaptive10@ bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>Adaptive Force</lol-uikit-tooltipped-keyword> at 5 and 10 stacks, respectively.",
 					"tooltipStats": "{{perk_long_desc_MinionDematerializer}}<br><hr><br>Different Stats: @f1@<br>Bonus Adaptive Force: +@f2@"
 				}
 			},

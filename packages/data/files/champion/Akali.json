@@ -321,7 +321,9 @@
 					"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>",
 					"dataValues": {
 						"PassiveAPRatio": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
-						"PassiveBADRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
+						"PassiveBADRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"Level1MS": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"MSAdditionalBonusAtThreshold": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"spellCalculations": {
 						"EnergyRestore": {
@@ -374,22 +376,26 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 0.3,
-									"mBreakpoints": [
+									"{91d404a5}": "Level1MS",
+									"{bbd778a2}": "MSBonusPerLevelAtAndAfter",
+									"{9823b29a}": [
 										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.1
+											"level": 6,
+											"{ae9b464d}": "MSAdditionalBonusAtThreshold",
+											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter"
 										},
 										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.1
+											"level": 11,
+											"{ae9b464d}": "MSAdditionalBonusAtThreshold",
+											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter"
 										},
 										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.1
+											"level": 16,
+											"{ae9b464d}": "MSAdditionalBonusAtThreshold",
+											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter"
 										}
 									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
+									"__type": "{4ce08984}"
 								}
 							],
 							"mDisplayAsPercent": true

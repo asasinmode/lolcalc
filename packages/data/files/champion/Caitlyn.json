@@ -140,8 +140,7 @@
 						}
 					},
 					"effectAmount": {
-						"0": [2, 2, 2, 2, 2, 2, 2],
-						"6": [30, 30, 30, 30, 30, 30, 30]
+						"0": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"isImmobilizing": true
 				}
@@ -157,15 +156,17 @@
 					"image": "assets/characters/caitlyn/hud/icons2d/caitlyne.png",
 					"mana": [75, 75, 75, 75, 75, 75],
 					"cooldownTime": [18, 16, 14, 12, 10, 8, 6],
-					"tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by @Effect3Amount@% for @Effect2Amount@ second and deals <magicDamage>@NetDamage@ magic damage</magicDamage>.",
+					"tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by @SlowAmount@% for @SlowDuration@ second and deals <magicDamage>@NetDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
 					"dataValues": {
-						"Damage": [30, 80, 130, 180, 230, 280, 330]
+						"Damage": [30, 80, 130, 180, 230, 280, 330],
+						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
+						"SlowAmount": [50, 50, 50, 50, 50, 50, 50]
 					},
 					"spellCalculations": {
 						"NetDamage": {
@@ -182,7 +183,6 @@
 						}
 					},
 					"effectAmount": {
-						"0": [40, 80, 130, 180, 230, 280, 310],
 						"1": [1, 1, 1, 1, 1, 1, 1],
 						"2": [50, 50, 50, 50, 50, 50, 50]
 					}

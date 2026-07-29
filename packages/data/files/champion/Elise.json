@@ -261,7 +261,7 @@
 					"dataValues": {
 						"BaseStunDuration": [1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6],
 						"VisionRadius": [250, 250, 250, 250, 250, 250, 250],
-						"RappelCooldown": [22, 22, 21, 20, 19, 18, 18],
+						"RappelCooldown": [22, 22, 21, 20, 19, 18, 17],
 						"RappelDamageAmp": [25, 40, 55, 70, 85, 100, 115]
 					},
 					"spellCalculations": {

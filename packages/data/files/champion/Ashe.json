@@ -37,10 +37,10 @@
 					"image": "assets/characters/ashe/hud/icons2d/ashe_q.png",
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
-					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
+					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @StackDuration@ seconds. At @MaxStacks@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@BonusAS@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @BuffDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect4Amount",
+							"name": "BonusAS",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
@@ -50,7 +50,13 @@
 					],
 					"dataValues": {
 						"DamagePerStrike": [1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35],
-						"ShotsPerStrike": [5, 5, 5, 5, 5, 5, 5]
+						"ShotsPerStrike": [5, 5, 5, 5, 5, 5, 5],
+						"StackDuration": [4, 4, 4, 4, 4, 4, 4],
+						"MaxStacks": [4, 4, 4, 4, 4, 4, 4],
+						"BuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"BonusAS": [20, 20, 30, 40, 50, 60, 60],
+						"TimerDuration": [1, 1, 1, 1, 1, 1, 1],
+						"StackFalloffDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"EmpoweredDamage": {
@@ -144,7 +150,8 @@
 						}
 					],
 					"dataValues": {
-						"BaseCooldown": [100, 90, 80, 70, 60, 50, 40]
+						"BaseCooldown": [100, 90, 80, 70, 60, 50, 40],
+						"VisionDuration": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"spellCalculations": {
 						"ChargeCooldown": {

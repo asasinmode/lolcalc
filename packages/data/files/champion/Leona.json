@@ -37,23 +37,27 @@
 					"image": "assets/characters/leona/hud/icons2d/leonaq.png",
 					"mana": [30, 35, 40, 45, 50, 55],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
-					"tooltip": "Leona's next Attack <status>Stuns</status> for @Effect1Amount@ seconds and deals an additional <magicDamage>@TotalDamageTooltip@</magicDamage> magic damage.",
+					"tooltip": "Leona's next Attack <status>Stuns</status> for @StunDuration@ seconds and deals an additional <magicDamage>@TotalDamageTooltip@</magicDamage> magic damage.",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
 							"name": "Cost"
 						}
 					],
+					"dataValues": {
+						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
+						"BaseDamage": [10, 10, 35, 60, 85, 110, 135]
+					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 2,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.3,
@@ -80,14 +84,14 @@
 					"image": "assets/characters/leona/hud/icons2d/leonaw.png",
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 9],
-					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @Effect3Amount@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @Effect3Amount@ seconds.",
+					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @ArmorMRDuration@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @ArmorMRDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "ExplosionBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect4Amount",
+							"name": "ArmorBaseBonus",
 							"nameOverride": "spell_listtype_armorandmagicresist"
 						},
 						{
@@ -98,15 +102,19 @@
 					"dataValues": {
 						"FlatDamageReduction": [4, 8, 12, 16, 20, 24, 28],
 						"FlatDamageReductionMax": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+						"APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"ExplosionBaseDamage": [25, 55, 85, 115, 145, 175, 205],
+						"MRBaseBonus": [12.5, 20, 27.5, 35, 42.5, 50, 57.5],
+						"ArmorBaseBonus": [12.5, 20, 27.5, 35, 42.5, 50, 57.5],
+						"ArmorMRDuration": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"BonusArmorTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 4,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "ArmorBaseBonus",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 1,
@@ -120,8 +128,8 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 4,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "ArmorBaseBonus",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 6,
@@ -135,8 +143,8 @@
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "ExplosionBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mDataValue": "APRatio",
@@ -164,23 +172,27 @@
 					"image": "assets/characters/leona/hud/icons2d/leonae.png",
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [13, 12, 10.5, 9, 7.5, 6, 6],
-					"tooltip": "Leona thrusts with a sword of light, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>. The last champion struck will be <status>Rooted</status> for @Effect2Amount@ seconds and Leona will dash to them.",
+					"tooltip": "Leona thrusts with a sword of light, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>. The last champion struck will be <status>Rooted</status> for @RootDuration@ seconds and Leona will dash to them.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
 							"name": "Cost"
 						}
 					],
+					"dataValues": {
+						"BaseDamage": [10, 50, 90, 130, 170, 210, 250],
+						"RootDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.4,

@@ -37,14 +37,14 @@
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
 					"mana": [55, 60, 65, 70, 75, 80],
 					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
-					"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them.",
+					"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @SlowPercentage*-100@% for @SlowDuration@ seconds, and also damaging and slowing the enemies behind them.",
 					"extendedVariables": [
 						{
 							"name": "damage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "SlowPercentage",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
@@ -54,7 +54,9 @@
 					"dataValues": {
 						"damage": [45, 80, 115, 150, 185, 220, 255],
 						"slowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"slowPercentage": [-0.16, -0.2, -0.24, -0.28, -0.32, -0.36, -0.4]
+						"slowPercentage": [-0.16, -0.2, -0.24, -0.28, -0.32, -0.36, -0.4],
+						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"SlowPercentage": [-0.16, -0.2, -0.24, -0.28, -0.32, -0.36, -0.4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -87,23 +89,29 @@
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
-					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @SnareDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "SnareDuration",
 							"nameOverride": "spell_listtype_rootduration"
 						}
 					],
+					"dataValues": {
+						"BaseDamage": [30, 70, 105, 140, 175, 210, 245],
+						"SnareDuration": [1.25, 1.25, 1.35, 1.45, 1.55, 1.65, 1.65],
+						"TargetsToHit": [3, 3, 3, 3, 3, 3, 3],
+						"FreeCastCD": [8, 8, 8, 8, 8, 8, 8]
+					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.7,
@@ -135,19 +143,22 @@
 					"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
 							"name": "Cost"
 						}
 					],
+					"dataValues": {
+						"BaseDamage": [25, 70, 105, 140, 175, 210, 245]
+					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.6,

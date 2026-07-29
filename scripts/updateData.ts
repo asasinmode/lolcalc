@@ -202,6 +202,7 @@ if (!championData || championData?.version !== latestVersion) {
 			} satisfies IListedChampion,
 		}, Object.fromEntries(
 			await Promise.all((Object.entries(data) as [IChampionId, (IChampion & { image: string })][])
+				.filter(([championId]) => !championId.startsWith('Jade_'))
 				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
 				.map(async ([championId, championData]) => {
 					const { id, key, name, image, partype, stats } = championData;

@@ -439,7 +439,7 @@
 		}
 	},
 	"stringtable": {
-		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_bonusdamage": "Bonus Damage",
 		"spell_listtype_healing": "Healing",
 		"spell_listtype_yorickhealth": "Health",
 		"spell_listtype_armorreductionpercent": "Armor Reduction %",

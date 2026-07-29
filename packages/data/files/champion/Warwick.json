@@ -37,10 +37,10 @@
 					"image": "assets/characters/warwick/hud/icons2d/warwickq.png",
 					"mana": [80, 85, 90, 95, 100, 100],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
-					"tooltip": "<tap>Tap:</tap> Warwick lunges forward and bites, dealing <magicDamage>@BaseBiteDamage@ plus @TargetPercentHPDamage@% max Health magic damage</magicDamage> and <healing>healing for @Effect3Amount@% of the damage dealt</healing>.<br><br><hold>Hold:</hold> Warwick lunges and clamps his jaws on the target, leaping behind them. While clamped, Warwick follows all movement of the target. After releasing his hold, he does the same damage and healing.",
+					"tooltip": "<tap>Tap:</tap> Warwick lunges forward and bites, dealing <magicDamage>@BaseBiteDamage@ plus @TargetPercentHPDamage@% max Health magic damage</magicDamage> and <healing>healing for @LifestealPercent@% of the damage dealt</healing>.<br><br><hold>Hold:</hold> Warwick lunges and clamps his jaws on the target, leaping behind them. While clamped, Warwick follows all movement of the target. After releasing his hold, he does the same damage and healing.",
 					"extendedVariables": [
 						{
-							"name": "Effect3Amount",
+							"name": "LifestealPercent",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
@@ -53,7 +53,14 @@
 					],
 					"dataValues": {
 						"TargetPercentHPDamage": [5, 6, 7, 8, 9, 10, 11],
-						"ADRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2]
+						"ADRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+						"BiteZoneLength": [450, 450, 450, 450, 450, 450, 450],
+						"HPDamageCap": [135, 150, 165, 180, 195, 210, 225],
+						"APRatio": [1, 1, 1, 1, 1, 1, 1],
+						"LifestealPercent": [12.5, 25, 37.5, 50, 62.5, 75, 87.5],
+						"CheatLength": [200, 200, 200, 200, 200, 200, 200],
+						"CheatLengthMoveBlock": [300, 300, 300, 300, 300, 300, 300],
+						"QCastRangeOverride": [425, 425, 425, 425, 425, 425, 425]
 					},
 					"spellCalculations": {
 						"BaseBiteDamage": {
@@ -70,15 +77,6 @@
 								}
 							]
 						}
-					},
-					"effectAmount": {
-						"1": [50, 100, 150, 200, 250, 300, 350],
-						"2": [25, 25, 37.5, 50, 62.5, 75, 75],
-						"3": [135, 150, 165, 180, 195, 210, 225],
-						"4": [450, 450, 450, 450, 450, 450, 450],
-						"5": [200, 200, 200, 200, 200, 200, 200],
-						"6": [300, 300, 300, 300, 300, 300, 300],
-						"7": [425, 425, 425, 425, 425, 425, 425]
 					}
 				}
 			]
@@ -112,15 +110,9 @@
 						"NoTargetCDReduction": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"PassiveASDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
 						"FirstHPThreshold": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"SecondHPThreshold": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
-					},
-					"effectAmount": {
-						"0": [27.5, 35, 42.5, 50, 57.5, 65, 72.5],
-						"1": [35, 70, 80, 90, 100, 110, 125],
-						"2": [5, 10, 15, 20, 25, 30, 35],
-						"3": [70, 80, 90, 100, 110, 120, 130],
-						"4": [30, 30, 30, 30, 30, 30, 30],
-						"5": [8, 8, 8, 8, 8, 8, 8]
+						"SecondHPThreshold": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MSBonus": [27.5, 35, 42.5, 50, 57.5, 65, 72.5],
+						"ASBonus": [60, 70, 80, 90, 100, 110, 120]
 					}
 				}
 			]
@@ -135,23 +127,19 @@
 					"image": "assets/characters/warwick/hud/icons2d/warwicke.png",
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
-					"tooltip": "Warwick gains @Effect1Amount@% damage reduction for 2.5 seconds. After it ends, Warwick howls, <status>Fearing</status> nearby enemies for @Effect3Amount@ second. Warwick can <recast>Recast</recast> to end the Ability early.",
+					"tooltip": "Warwick gains @DRAmount@% damage reduction for @DRDuration@ seconds. After it ends, Warwick howls, <status>Fearing</status> nearby enemies for @FearDuration@ second. Warwick can <recast>Recast</recast> to end the Ability early.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "DRAmount",
 							"nameOverride": "spell_listtype_damagereduction"
 						}
 					],
 					"dataValues": {
-						"CherryNegaHaste": [-20, -20, -20, -20, -20, -20, -20]
-					},
-					"effectAmount": {
-						"0": [30, 35, 40, 45, 50, 55, 60],
-						"1": [2.75, 2.75, 2.75, 2.75, 2.75, 2.75, 2.75],
-						"2": [1, 1, 1, 1, 1, 1, 1],
-						"3": [1, 1, 1, 1, 1, 1, 1],
-						"4": [800, 800, 800, 800, 800, 800, 800],
-						"5": [400, 400, 400, 400, 400, 400, 400]
+						"DRAmount": [30, 35, 40, 45, 50, 55, 60],
+						"DRDuration": [2.75, 2.75, 2.75, 2.75, 2.75, 2.75, 2.75],
+						"RecastDelay": [1, 1, 1, 1, 1, 1, 1],
+						"FearDuration": [1, 1, 1, 1, 1, 1, 1],
+						"DRDurationTooltipOnly": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
 					"isImmobilizing": true
 				}

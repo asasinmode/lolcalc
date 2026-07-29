@@ -37,7 +37,7 @@
 					"image": "assets/characters/ekko/hud/icons2d/ekko_q.png",
 					"mana": [50, 60, 70, 80, 90, 100],
 					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
-					"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @Effect2Amount*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>.",
+					"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @SlowPercent*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -47,7 +47,7 @@
 							"nameOverride": "spell_listtype_outgoingdamage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
@@ -57,7 +57,10 @@
 					],
 					"dataValues": {
 						"OutgoingDamage": [65, 80, 95, 110, 125, 140, 155],
-						"ReturnDamage": [15, 40, 65, 90, 115, 140, 165]
+						"ReturnDamage": [15, 40, 65, 90, 115, 140, 165],
+						"SlowPercent": [-0.25, -0.4, -0.45, -0.5, -0.55, -0.6, -0.67],
+						"SlowZoneRadius": [165, 165, 165, 165, 165, 165, 165],
+						"ExpandDuration": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75]
 					},
 					"spellCalculations": {
 						"InitialDamage": {
@@ -108,10 +111,10 @@
 					"image": "assets/characters/ekko/hud/icons2d/ekko_w.png",
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below @BelowHealthThreshold*100@% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting @SlowZoneDuration@ seconds after a delay that <status>Slows</status> enemies inside by @SlowPercent@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @StunDuration@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
 					"extendedVariables": [
 						{
-							"name": "Effect4Amount",
+							"name": "ShieldBase",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
@@ -122,14 +125,20 @@
 						"BaseOnHitDamage": [3, 3, 3, 3, 3, 3, 3],
 						"BelowHealthThreshold": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"OnHitMinMinionDamage": [15, 15, 15, 15, 15, 15, 15],
-						"OnHitMaxMinionDamage": [150, 150, 150, 150, 150, 150, 150]
+						"OnHitMaxMinionDamage": [150, 150, 150, 150, 150, 150, 150],
+						"AoERadius": [375, 375, 375, 375, 375, 375, 375],
+						"StunDuration": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],
+						"ShieldBase": [80, 100, 120, 140, 160, 180, 200],
+						"SlowZoneDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"DelayBeforeDetonation": [3, 3, 3, 3, 3, 3, 3],
+						"DelayBeforeEnemyCanSee": [2, 2, 2, 2, 2, 2, 2],
+						"SlowPercent": [40, 40, 40, 40, 40, 40, 40]
 					},
 					"spellCalculations": {
 						"MissingHealthPercent": {
 							"mMultiplier": {
 								"mNumber": 0.01
 							},
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mDataValue": "BaseOnHitDamage",
@@ -143,11 +152,10 @@
 							"mDisplayAsPercent": true
 						},
 						"TotalShield": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 4,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "ShieldBase",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 1.5,
@@ -194,20 +202,26 @@
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
 							"name": "Cost"
 						}
 					],
+					"dataValues": {
+						"BaseDamage": [25, 50, 75, 100, 125, 150, 175],
+						"DashDistance": [350, 350, 350, 350, 350, 350, 350],
+						"BuffDuration": [3, 3, 3, 3, 3, 3, 3],
+						"AttackRangeIncrease": [300, 300, 300, 300, 300, 300, 300]
+					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.4,
@@ -292,11 +306,12 @@
 					"tooltip": "{{Spell_EkkoPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>",
 					"dataValues": {
-						"ModesMultiplier": [1, 1, 1, 1, 1, 1, 1]
+						"ModesMultiplier": [1, 1, 1, 1, 1, 1, 1],
+						"MonsterMod": [2.7, 2.7, 2.7, 2.7, 2.7, 2.7, 2.7],
+						"LockoutTime": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"BonusMS": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mLevel1Value": 0.5,
@@ -323,7 +338,6 @@
 							"mMultiplier": {
 								"mDataValue": "ModesMultiplier"
 							},
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mLevel1Value": 30,
@@ -376,6 +390,6 @@
 		"spell_listtype_shieldamount": "Shield Amount",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_healing": "Healing",
-		"spell_ekkopassive_tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 4 seconds."
+		"spell_ekkopassive_tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every @LockoutTime@ seconds."
 	}
 }

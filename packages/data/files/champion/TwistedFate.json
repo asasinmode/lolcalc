@@ -399,7 +399,7 @@
 		"spell_listtype_twistedfatewredslow": "Red Card Slow %",
 		"spell_listtype_twistedfatewgolddamage": "Gold Card Damage",
 		"spell_listtype_twistedfatewgoldstun": "Gold Card Stun Duration",
-		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_bonusdamage": "Bonus Damage",
 		"spell_listtype_attackspeed": "Attack Speed",
 		"spell_listtype_duration": "Duration",
 		"spell_secondsight_tooltip_1": "Upon killing a unit, Twisted Fate rolls his 'lucky' dice receiving 1 to 6 bonus gold.",

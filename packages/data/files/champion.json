@@ -1,5 +1,5 @@
 {
-	"version": "16.14.1",
+	"version": "16.15.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -38,8 +38,8 @@
 			"name": "Akali",
 			"image": "Akali.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Akshan": {
@@ -447,8 +447,8 @@
 			"name": "Irelia",
 			"image": "Irelia.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Ivern": {
@@ -693,7 +693,6 @@
 			"image": "Locke.png",
 			"roles": {
 				"jungle": true,
-				"top": true,
 				"mid": true
 			}
 		},
@@ -768,8 +767,8 @@
 			"image": "Mel.png",
 			"roles": {
 				"support": true,
-				"bot": true,
-				"mid": true
+				"mid": true,
+				"bot": true
 			}
 		},
 		"Milio": {
@@ -1217,7 +1216,8 @@
 			"name": "Syndra",
 			"image": "Syndra.png",
 			"roles": {
-				"mid": true
+				"mid": true,
+				"bot": true
 			}
 		},
 		"TahmKench": {
@@ -1354,8 +1354,8 @@
 			"name": "Vayne",
 			"image": "Vayne.png",
 			"roles": {
-				"bot": true,
-				"top": true
+				"top": true,
+				"bot": true
 			}
 		},
 		"Veigar": {
@@ -1464,7 +1464,8 @@
 			"image": "Xerath.png",
 			"roles": {
 				"support": true,
-				"mid": true
+				"mid": true,
+				"bot": true
 			}
 		},
 		"XinZhao": {
@@ -1482,8 +1483,8 @@
 			"name": "Yasuo",
 			"image": "Yasuo.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Yone": {
@@ -1492,8 +1493,8 @@
 			"name": "Yone",
 			"image": "Yone.png",
 			"roles": {
-				"top": true,
-				"mid": true
+				"mid": true,
+				"top": true
 			}
 		},
 		"Yorick": {
