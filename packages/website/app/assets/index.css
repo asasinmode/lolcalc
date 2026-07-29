@@ -132,7 +132,7 @@
 		}
 
 		&:has(> .icon) {
-			> span:first-of-type {
+			> span:first-of-type:not(.icon) {
 				--at-apply: 'sr-only';
 			}
 		}

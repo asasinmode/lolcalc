@@ -908,6 +908,39 @@ onBeforeUnmount(() => {
 	abilityResourceBarCleanup();
 });
 
+const canMoveUp = computed(() => props.index !== 0);
+const canChangeGroup = computed(() => props.canRemove || props.value.anythingFilled.value)
+
+function moveUp() {
+	emit('move', props.index + (globalKeyModifiers.value.alt ? 0 : -1), globalKeyModifiers.value.alt);
+}
+
+function moveDown() {
+	emit('move', props.index + 1, globalKeyModifiers.value.alt);
+}
+
+function changeGroup(){
+	emit('changeGroup', globalKeyModifiers.value.alt)
+}
+
+const manipulateOptions = {
+	moveUp: {
+		text: 'move up',
+		isEnabled: canMoveUp,
+		action: moveUp,
+	},
+	moveDown: {
+		text: 'move down',
+		isEnabled: props.canMoveDown,
+		action: moveDown,
+	},
+};
+const manipulateValue = ref<string>();
+
+function manipulateFromSelect(manipulateOption: string | undefined) {
+	console.log('doing', manipulateOption);
+}
+
 defineExpose({ el });
 </script>
 
@@ -929,10 +962,10 @@ defineExpose({ el });
 		</h3>
 		<button
 			:title="`${iconButtonsShowText ? '' : 'move up, '}alt+click to duplicate above`"
-			class="pretend-ui-btn"
-			:disabled="index === 0"
+			class="pretend-ui-btn move-up"
+			:disabled="!canMoveUp"
 			draggable="true"
-			@click="$emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+			@click="moveUp"
 			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 		>
 			<span>move up <span>(alt+click to duplicate above)</span></span>
@@ -940,10 +973,10 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="`${iconButtonsShowText ? '' : 'move down, '}alt+click to duplicate below`"
-			class="pretend-ui-btn"
+			class="pretend-ui-btn move-down"
 			:disabled="!canMoveDown"
 			draggable="true"
-			@click="$emit('move', index + 1, globalKeyModifiers.alt)"
+			@click="moveDown"
 			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 		>
 			<span>move down <span>(alt+click to duplicate below)</span></span>
@@ -951,10 +984,10 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="`${iconButtonsShowText ? '' : `move to ${otherGroup}, `}alt+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
-			class="pretend-ui-btn"
+			class="pretend-ui-btn move-group"
 			draggable="true"
-			:disabled="!canRemove && !value.anythingFilled.value"
-			@click="$emit('changeGroup', globalKeyModifiers.alt)"
+			:disabled="!canChangeGroup"
+			@click="changeGroup"
 			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 		>
 			<span>move {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }} <span>(alt+click to duplicate {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }})</span></span>
@@ -962,7 +995,7 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="`${iconButtonsShowText ? '' : 'duplicate, '}shift+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
-			class="pretend-ui-btn"
+			class="pretend-ui-btn duplicate"
 			:disabled="!canRemove && !value.anythingFilled.value"
 			draggable="true"
 			@click="$emit('duplicate', globalKeyModifiers.shift)"
@@ -1112,7 +1145,7 @@ defineExpose({ el });
 				hover-tooltip
 			/>
 		</article>
-		<button ref="undoRemoveButton" style="display: none" @click="undoRemove">
+		<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">
 			restore
 		</button>
 		<button
@@ -1124,9 +1157,21 @@ defineExpose({ el });
 			<span>{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }})</span></span>
 			<Icon class="i-ph:trash size-5" />
 		</button>
+		<VSelect
+			:id="`${idPrefix}-manipulate`"
+			:model-value="manipulateValue"
+			:options="Object.entries(manipulateOptions).map(([optionKey, { text }]) => [optionKey, text])"
+			class="manipulate"
+			label="manipulate"
+			@update:model-value="manipulateFromSelect"
+		>
+			<span class="pretend-ui-btn" title="manipulate">
+				<Icon class="i-ph:dots-three-bold" />
+			</span>
+		</VSelect>
 		<button
 			:title="iconButtonsShowText ? undefined : (isExpanded ? 'collapse' : 'expand')"
-			class="pretend-ui-btn"
+			class="pretend-ui-btn expand-collapse"
 			:aria-controls="`${idPrefix}-details`"
 			:aria-expanded="isExpanded"
 			@click="toggleExpanded"
@@ -1388,7 +1433,7 @@ defineExpose({ el });
 					<VSelect
 						:id="`${idPrefix}-role-quest`"
 						:model-value="value.roleQuest.value"
-						:options="Object.keys(TEXT.roleQuests).map(role => [role, role]) as [IChampionRole, string][]"
+						:options="Object.keys(TEXT.roleQuests).map(role => [role, role] as [IChampionRole, string])"
 						label="role quest"
 						clearable
 						@update:model-value="updateRoleQuest"
@@ -1545,7 +1590,7 @@ defineExpose({ el });
 		--item-pe: calc(0.5 * var(--spacing));
 
 		grid-template-areas:
-			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
+			'move-up		move-group	select-champion	select-runes	select-items	items			clear'
 			'move-down	duplicate		select-champion	select-runes	select-items	items			expand'
 			'expanded		expanded		expanded				expanded			expanded			expanded	expanded';
 		grid-template-columns: repeat(5, max-content) 1fr max-content;
@@ -1562,6 +1607,16 @@ defineExpose({ el });
 		@media (width < 1606px) {
 			& {
 				--at-apply: 'inline-max';
+			}
+		}
+
+		@media (width < 1192px) {
+			& {
+				grid-template-areas:
+					'select-champion	select-runes	select-items	items			manipulate'
+					'select-champion	select-runes	select-items	items			expand'
+					'expanded					expanded			expanded			expanded	expanded';
+				grid-template-columns: repeat(3, max-content) 1fr max-content;
 			}
 		}
 
@@ -1591,73 +1646,102 @@ defineExpose({ el });
 			--at-apply: 'sr-only';
 		}
 
-		> button {
-			&:nth-of-type(1) {
-				grid-area: move-up;
+		.move-up {
+			grid-area: move-up;
+		}
+
+		.move-down {
+			grid-area: move-down;
+		}
+
+		.move-group {
+			grid-area: move-group;
+		}
+
+		.duplicate {
+			grid-area: duplicate;
+		}
+
+		.move-up,
+		.move-group,
+		.remove,
+		.manipulate {
+			--at-apply: '-mb-[0.5px] self-end';
+		}
+
+		.move-down,
+		.duplicate,
+		.expand-collapse {
+			--at-apply: '-mt-[0.5px] self-start z-1';
+		}
+
+		.move-group,
+		.duplicate {
+			--at-apply: '-ms-px z-2';
+		}
+
+		.restore {
+			--at-apply: 'absolute inset-0 grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
+			-webkit-text-stroke: black 0.15em;
+			paint-order: stroke fill;
+
+			&::before {
+				--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
+			}
+		}
+
+		.remove {
+			grid-area: clear;
+		}
+
+		.expand-collapse {
+			grid-area: expand;
+		}
+
+		.move-up,
+		.move-down,
+		.move-group,
+		.duplicate,
+		.remove,
+		.expand-collapse,
+		.manipulate .pretend-ui-btn {
+			--at-apply: 'size-6 grid-center';
+
+			[data-icon-btns-show-text] & {
+				--at-apply: 'w-auto px-1.5';
 			}
 
-			&:nth-of-type(2) {
-				grid-area: move-down;
+			.icon {
+				--at-apply: 'size-5';
+			}
+		}
+
+		[data-icon-btns-show-text] :is(.remove, .expand-collapse) {
+			--at-apply: 'min-w-19';
+		}
+
+		@media (width < 1192px) {
+			.move-up,
+			.move-down,
+			.move-group,
+			.duplicate,
+			.remove {
+				--at-apply: 'hidden';
+			}
+		}
+
+		.manipulate {
+			--at-apply: 'size-6';
+			grid-area: manipulate;
+
+			select:is(:hover, :focus-visible) + label > .pretend-ui-btn {
+				--at-apply: 'bg-cyan-900';
 			}
 
-			&:nth-of-type(3) {
-				grid-area: move-column;
-			}
-
-			&:nth-of-type(4) {
-				grid-area: duplicate;
-			}
-
-			&:nth-of-type(1),
-			&:nth-of-type(3),
-			&:nth-last-of-type(2) {
-				--at-apply: '-mb-[0.5px] self-end';
-			}
-
-			&:nth-of-type(2),
-			&:nth-of-type(4),
-			&:nth-last-of-type(1) {
-				--at-apply: '-mt-[0.5px] self-start z-1';
-			}
-
-			&:nth-of-type(3),
-			&:nth-of-type(4) {
-				--at-apply: '-ms-px z-2';
-			}
-
-			&:nth-last-of-type(3) {
-				--at-apply: 'absolute inset-0 grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
-				-webkit-text-stroke: black 0.15em;
-				paint-order: stroke fill;
-
-				&::before {
-					--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
+			@media (width >= 1192px) {
+				& {
+					--at-apply: 'hidden';
 				}
-			}
-
-			&:nth-last-of-type(2) {
-				grid-area: clear;
-			}
-
-			&:nth-last-of-type(1) {
-				grid-area: expand;
-			}
-
-			&:nth-of-type(-n + 4),
-			&:nth-last-of-type(-n + 2) {
-				--at-apply: 'size-6 grid-center';
-
-				[data-icon-btns-show-text] & {
-					--at-apply: 'w-auto px-1.5';
-				}
-
-				.icon {
-					--at-apply: 'size-5';
-				}
-			}
-
-			[data-icon-btns-show-text] &:nth-last-of-type(-n + 2) {
-				--at-apply: 'min-w-19';
 			}
 		}
 
@@ -2634,15 +2718,13 @@ defineExpose({ el });
 	[data-mirrored] [data-scoreboard-item][data-group='sources'] {
 		grid-template-columns: max-content 1fr repeat(5, max-content);
 		grid-template-areas:
-			'clear			items				select-items		select-runes	select-champion move-column move-up'
+			'clear			items				select-items		select-runes	select-champion move-group	move-up'
 			'expand			items				select-items		select-runes	select-champion	duplicate		move-down'
 			'expanded		expanded		expanded				expanded			expanded				expanded		expanded';
 
-		> button {
-			&:nth-of-type(3),
-			&:nth-of-type(4) {
-				--at-apply: '-me-px ms-0 z-1';
-			}
+		.move-group,
+		.duplicate {
+			--at-apply: '-me-px ms-0 z-1';
 		}
 
 		> .select-champion {
