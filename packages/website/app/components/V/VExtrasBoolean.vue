@@ -73,7 +73,7 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 <style>
 @layer components {
 	.v-extras-boolean {
-		--at-apply: 'grid grid-cols-[auto_max-content_1fr] grid-rows-1 items-center relative';
+		--at-apply: 'grid grid-cols-[max-content_auto_minmax(0,1fr)] grid-rows-1 items-center relative';
 
 		> input {
 			--at-apply: 'mt-px';

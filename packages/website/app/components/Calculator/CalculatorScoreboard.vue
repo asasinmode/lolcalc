@@ -456,13 +456,16 @@ function setLocalMirrorLayout() {
 	#scoreboard {
 		--at-apply: 'b-b b-neutral-500 mt-5 relative mx-auto';
 		--extras-gap: calc(2 * var(--spacing));
-		/* this and `--scoreboard-item-max-w` should ensure that there are 3 extra columns starting from `1606px` (2 cols at 1605) that go up to 256px */
+		/* this and `--scoreboard-item-max-w` should ensure that there are 3 extra columns starting from `1680px` that go up to 256px */
 		--extra-item-min-w: calc(60 * var(--spacing));
 		--extra-item-max-w: calc(64 * var(--spacing));
-		--scoreboard-item-px: calc(4 * var(--spacing));
+		--extra-cols: 3;
+		--scoreboard-item-pe: calc(4 * var(--spacing));
+		--scoreboard-item-ps: calc(4 * var(--spacing));
 		--scoreboard-item-b-w: 0.25rem;
 		--scoreboard-item-max-w: calc(
-			2 * var(--scoreboard-item-px) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) + var(--scoreboard-item-b-w)
+			var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) +
+				var(--scoreboard-item-b-w)
 		);
 
 		> h2 {
@@ -480,9 +483,22 @@ function setLocalMirrorLayout() {
 		> div {
 			--at-apply: 'mx-auto gap-x-10 max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
 
-			@media (width < 1606px) {
+			@media (width < 1680px) {
 				& {
-					--at-apply: 'inline-fit grid-cols-[repeat(2,max-content)]';
+					--extra-cols: 2;
+					grid-template-columns: repeat(
+						2,
+						minmax(
+							calc(
+								var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
+									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
+							),
+							calc(
+								var(--extra-cols) * var(--extra-item-max-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
+									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
+							)
+						)
+					);
 				}
 			}
 
@@ -507,12 +523,6 @@ function setLocalMirrorLayout() {
 
 				&:last-of-type {
 					--at-apply: 'justify-self-start';
-				}
-
-				@media (width < 1606px) {
-					& {
-						--at-apply: 'inline-auto';
-					}
 				}
 
 				> li:last-child {

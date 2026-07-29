@@ -909,7 +909,7 @@ onBeforeUnmount(() => {
 });
 
 const canMoveUp = computed(() => props.index !== 0);
-const canChangeGroup = computed(() => props.canRemove || props.value.anythingFilled.value)
+const canChangeGroup = computed(() => props.canRemove || props.value.anythingFilled.value);
 
 function moveUp() {
 	emit('move', props.index + (globalKeyModifiers.value.alt ? 0 : -1), globalKeyModifiers.value.alt);
@@ -919,8 +919,8 @@ function moveDown() {
 	emit('move', props.index + 1, globalKeyModifiers.value.alt);
 }
 
-function changeGroup(){
-	emit('changeGroup', globalKeyModifiers.value.alt)
+function changeGroup() {
+	emit('changeGroup', globalKeyModifiers.value.alt);
 }
 
 const manipulateOptions = {
@@ -1557,7 +1557,7 @@ defineExpose({ el });
 	}
 
 	[data-scoreboard-item] {
-		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-[--scoreboard-item-px] box-content';
+		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps] box-content';
 
 		--py: calc(3 * var(--spacing));
 		--select-champion-size: calc(var(--spacing) * 14);
@@ -1603,12 +1603,6 @@ defineExpose({ el });
 			oklch(from var(--damage-source-clr) l c h / 0.1),
 			oklch(from var(--damage-source-clr) l c h / 0.1)
 		);
-
-		@media (width < 1606px) {
-			& {
-				--at-apply: 'inline-max';
-			}
-		}
 
 		@media (width < 1192px) {
 			& {
@@ -1830,7 +1824,7 @@ defineExpose({ el });
 			--computed-me: var(--me);
 			--ms: calc(5 * var(--spacing));
 
-			@media (width < 1606px) {
+			@media (width < 1680px) {
 				& {
 					--me: calc(2 * var(--spacing) - 1px);
 					--ms: calc(2.5 * var(--spacing));
@@ -1994,13 +1988,18 @@ defineExpose({ el });
 					'runes stats role-quest-dragons';
 			}
 
-			@media (width < 1606px) {
+			@media (width < 1680px) {
 				& {
 					--at-apply: 'mx-auto';
+					inline-size: clamp(
+						calc(2 * var(--extra-item-min-w) + var(--extras-gap)),
+						100%,
+						calc(2 * var(--extra-item-max-w) + var(--extras-gap))
+					);
 				}
 
 				&::details-content {
-					--at-apply: 'grid-cols-2 grid-rows-none auto-rows-max inline-max justify-items-end';
+					--at-apply: 'grid-cols-2 grid-rows-none auto-rows-max justify-items-end';
 
 					grid-template-areas:
 						'abilities abilities'
@@ -2008,6 +2007,12 @@ defineExpose({ el });
 						'effects stats'
 						'runes stats'
 						'role-quest-dragons role-quest-dragons';
+				}
+			}
+
+			@media (width < 1192px) {
+				& {
+					--at-apply: 'max-inline-full';
 				}
 			}
 
@@ -2043,7 +2048,7 @@ defineExpose({ el });
 			.stats {
 				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid inline-min';
 
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'grid-cols-[max-content]';
 					}
@@ -2186,7 +2191,7 @@ defineExpose({ el });
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
 
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'block-max';
 					}
@@ -2289,7 +2294,7 @@ defineExpose({ el });
 				width: var(--abilities-width);
 				height: var(--abilities-height);
 
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'mx-0';
 					}
@@ -2365,7 +2370,7 @@ defineExpose({ el });
 				--at-apply: 'pbs-1.5 pbe-2 grid grid-rows-subgrid grid-cols-1 gap-y-px ms-[--gap-x] translate-y-[0.5px] -mbs-px';
 				grid-area: resources;
 
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'grid-rows-2 mx-0 inline-[calc(2*var(--runes-stats-section-w)+1px)] pbe-2.75 justify-self-center';
 					}
@@ -2454,7 +2459,7 @@ defineExpose({ el });
 				--at-apply: 'flex justify-between gap-[--gap-x] ps-[--gap-x]';
 				grid-area: role-quest-dragons;
 
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'px-0 pbs-3 inline-max justify-self-center';
 					}
@@ -2593,17 +2598,11 @@ defineExpose({ el });
 			}
 
 			.extras {
-				--at-apply: 'col-span-full grid grid-cols-[repeat(3,minmax(var(--extra-item-min-w),var(--extra-item-max-w)))] auto-rows-min gap-[--extras-gap] pt-3';
+				--at-apply: 'col-span-full grid grid-cols-[repeat(var(--extra-cols),minmax(0,1fr))] auto-rows-min gap-x-[--extras-gap] gap-y-[calc(var(--extras-gap)-0.5*var(--spacing))] pt-3 inline-full';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
 					--at-apply: 'hidden';
-				}
-
-				@media (width < 1606px) {
-					& {
-						--at-apply: 'grid-cols-[repeat(2,minmax(var(--extra-item-min-w),var(--extra-item-max-w)))]';
-					}
 				}
 			}
 		}
@@ -2617,12 +2616,6 @@ defineExpose({ el });
 			}
 		}
 	}
-
-	/* [data-scoreboard-item][data-group='targets'] { */
-	/* 	@media (width < 1606px) { */
-	/* 		. */
-	/* 	} */
-	/* } */
 
 	[data-scoreboard-item] > details[open]:not(:has(> .extras:not(:empty))) {
 		--at-apply: 'pb-1.5';
@@ -2787,7 +2780,7 @@ defineExpose({ el });
 					'role-quest-dragons stats runes';
 			}
 
-			@media (width < 1606px) {
+			@media (width < 1680px) {
 				&::details-content {
 					--at-apply: 'grid-cols-2';
 					grid-template-areas:
@@ -2800,7 +2793,7 @@ defineExpose({ el });
 			}
 
 			.stats {
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'justify-self-end';
 					}
@@ -2808,7 +2801,7 @@ defineExpose({ el });
 			}
 
 			.effects {
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'ms-0 me-auto';
 					}
@@ -2826,7 +2819,7 @@ defineExpose({ el });
 			}
 
 			.runes {
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'justify-self-start';
 					}
@@ -2843,7 +2836,7 @@ defineExpose({ el });
 			.health-ability-resource {
 				--at-apply: 'ms-0 me-[--gap-x]';
 
-				@media (width < 1606px) {
+				@media (width < 1680px) {
 					& {
 						--at-apply: 'me-0';
 					}

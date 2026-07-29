@@ -62,7 +62,7 @@ const value = defineModel<number>({ required: true });
 <style>
 @layer components {
 	.v-extras-number {
-		--at-apply: 'grid grid-cols-[auto_auto_1fr_min-content] grid-rows-2 relative';
+		--at-apply: 'grid grid-cols-[max-content_auto_minmax(0,1fr)_min-content] grid-rows-2 relative';
 
 		> label {
 			--at-apply: 'col-span-3 self-center of-hidden leading-[1] pb-[0.2em] -mb-[0.2em]';
