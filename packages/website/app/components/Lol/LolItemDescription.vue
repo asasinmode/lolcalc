@@ -520,6 +520,15 @@ defineExpose({ header });
 			--at-apply: 'text-orange-400';
 		}
 
+		spellname,
+		unique {
+			--at-apply: 'text-white';
+		}
+
+		danger {
+			--at-apply: 'text-[#f00]';
+		}
+
 		recast {
 			/* kind of like a dirty salmon? Based on from Rammus W */
 			--at-apply: 'text-[oklch(0.6814_0.1413_36.07)]';

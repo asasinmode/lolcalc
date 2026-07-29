@@ -36,10 +36,16 @@ export const KNOWN_GAME_DESCRIPTION_TAGS: string[] = [
 	'lol-uikit-tooltipped-keyword', // in many runes
 	'scalelevel', // long first strike, guardian, shield bash
 	'statgood', // long precision legends
+	'spellname', // aatrox passive, ahri R
+	'unique', // pyke passive
+	'recast', // ahri R, rammus W
+	'level', // anivia passive, no styles
+	'danger', // pyke R
 	'font',
 	'b',
 	'i',
 	'hr',
+	'ul', // kayle passive
 	'li',
 	'titleleft', // dragon stack descriptions
 	'maintext', // dragon stack descriptions
