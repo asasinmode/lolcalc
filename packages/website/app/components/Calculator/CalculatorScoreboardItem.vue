@@ -1604,7 +1604,7 @@ defineExpose({ el });
 			oklch(from var(--damage-source-clr) l c h / 0.1)
 		);
 
-		@media (width < 1192px) {
+		@media (width < 1194px) {
 			& {
 				grid-template-areas:
 					'select-champion	select-runes	select-items	items			manipulate'
@@ -1714,7 +1714,7 @@ defineExpose({ el });
 			--at-apply: 'min-w-19';
 		}
 
-		@media (width < 1192px) {
+		@media (width < 1194px) {
 			.move-up,
 			.move-down,
 			.move-group,
@@ -1732,7 +1732,7 @@ defineExpose({ el });
 				--at-apply: 'bg-cyan-900';
 			}
 
-			@media (width >= 1192px) {
+			@media (width >= 1194px) {
 				& {
 					--at-apply: 'hidden';
 				}
@@ -1744,6 +1744,12 @@ defineExpose({ el });
 			--ms: calc(3 * var(--spacing));
 			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
+
+			@media (width < 1194px) {
+				& {
+					--at-apply: 'ms-0';
+				}
+			}
 
 			> button {
 				--at-apply: 'group b b-2 b-[--ui-btn-border-clr] rounded-full size-full of-hidden';
@@ -2007,12 +2013,6 @@ defineExpose({ el });
 						'effects stats'
 						'runes stats'
 						'role-quest-dragons role-quest-dragons';
-				}
-			}
-
-			@media (width < 1192px) {
-				& {
-					--at-apply: 'max-inline-full';
 				}
 			}
 
@@ -2715,6 +2715,16 @@ defineExpose({ el });
 			'expand			items				select-items		select-runes	select-champion	duplicate		move-down'
 			'expanded		expanded		expanded				expanded			expanded				expanded		expanded';
 
+		@media (width < 1194px) {
+			& {
+				grid-template-areas:
+					'manipulate items			select-items	select-runes	select-champion'
+					'expand			items			select-items	select-runes	select-champion'
+					'expanded		expanded	expanded			expanded			expanded';
+				grid-template-columns: max-content 1fr repeat(3, max-content);
+			}
+		}
+
 		.move-group,
 		.duplicate {
 			--at-apply: '-me-px ms-0 z-1';
@@ -2722,6 +2732,12 @@ defineExpose({ el });
 
 		> .select-champion {
 			--at-apply: 'ms-[--me] me-[--ms]';
+
+			@media (width < 1194px) {
+				& {
+					--at-apply: 'me-0 ms-[--me]';
+				}
+			}
 
 			> .select-champion-level {
 				--at-apply: 'end-auto start-[--inset-end]';
