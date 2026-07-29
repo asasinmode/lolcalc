@@ -3,7 +3,7 @@
  * they should have appropriate styles (like font color) set in `ItemDescription.vue`
  */
 export const KNOWN_GAME_DESCRIPTION_TAGS: string[] = [
-	'passive',	// heading
+	'passive',	// item heading
 	'scalead', // bloodmail, sterak
 	'scaleap',	// rabadon, riftmaker
 	'scalehealth', // roa, heartsteel
@@ -37,10 +37,15 @@ export const KNOWN_GAME_DESCRIPTION_TAGS: string[] = [
 	'scalelevel', // long first strike, guardian, shield bash
 	'statgood', // long precision legends
 	'spellname', // aatrox passive, ahri R
+	'spellpassive', // aatrox E, ashe Q
+	'spellactive', // aatrox E, ashe Q
 	'unique', // pyke passive
 	'recast', // ahri R, rammus W
 	'level', // anivia passive, no styles
-	'danger', // pyke R
+	'danger', // pyke R, syndra R
+	'evolve', // syndra Q, yunara Q
+	'onlyshowingame', // yasuo/yone passive, no styles but block (new line)
+	'heal', // yuumi passive, no styles
 	'font',
 	'b',
 	'i',

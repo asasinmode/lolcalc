@@ -465,7 +465,7 @@ defineExpose({ header });
 
 		lifesteal,
 		omnivamp {
-			--at-apply: 'text-red-700';
+			--at-apply: 'text-red-600';
 		}
 
 		speed {
@@ -521,6 +521,8 @@ defineExpose({ header });
 		}
 
 		spellname,
+		spellpassive,
+		spellactive,
 		unique {
 			--at-apply: 'text-white';
 		}
@@ -532,6 +534,15 @@ defineExpose({ header });
 		recast {
 			/* kind of like a dirty salmon? Based on from Rammus W */
 			--at-apply: 'text-[oklch(0.6814_0.1413_36.07)]';
+		}
+
+		evolve {
+			/* taken from wiki */
+			--at-apply: 'text-[#d929d9]';
+		}
+
+		onlyshowingame {
+			--at-apply: 'block';
 		}
 	}
 
