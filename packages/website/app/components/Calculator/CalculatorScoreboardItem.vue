@@ -853,6 +853,7 @@ function showDragonTooltip(event: MouseEvent, dragonName: IDragonName, subtype: 
 function hideDragonTooltip() {
 	dragonHoverTooltipEl.value?.el?.hidePopover();
 	dragonTooltipAnchor?.removeEventListener('mouseleave', hideDragonTooltip);
+	el.value!.removeAttribute('data-dragon-tooltip-extras');
 	dragonTooltipAnchor = undefined;
 }
 
@@ -1634,7 +1635,7 @@ defineExpose({ el });
 				'move-down	duplicate		select-champion	select-runes	select-items	items			expand';
 			grid-template-columns: repeat(5, max-content) 1fr max-content;
 
-			@media (width < 1194px) {
+			@media (width < 1194px) and (width >= 1079px) {
 				& {
 					grid-template-areas:
 						'select-champion	select-runes	select-items	items			manipulate'
@@ -1739,7 +1740,7 @@ defineExpose({ el });
 			--at-apply: 'min-w-19';
 		}
 
-		@media (width < 1194px) {
+		@media (width < 1194px) and (width >= 1079px) {
 			.move-up,
 			.move-down,
 			.move-group,
@@ -1757,7 +1758,7 @@ defineExpose({ el });
 				--at-apply: 'bg-cyan-900';
 			}
 
-			@media (width >= 1194px) {
+			@media (width >= 1194px) or (width < 1079px) {
 				& {
 					--at-apply: 'hidden';
 				}
@@ -1770,7 +1771,7 @@ defineExpose({ el });
 			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
 
-			@media (width < 1194px) {
+			@media (width < 1194px) and (width >= 1079px) {
 				& {
 					--at-apply: 'ms-0';
 				}
@@ -1978,18 +1979,6 @@ defineExpose({ el });
 			inset-block-start: calc(anchor(end) + 4 * var(--spacing));
 		}
 
-		&[data-item-tooltip-extras] > .hover-tooltip.champion-item {
-			position-anchor: --scoreboard-item-extras;
-			inset-block-start: auto;
-			inset-block-end: calc(anchor(top));
-		}
-
-		&[data-dragon-tooltip-extras] > details .dragons > .hover-tooltip.dragon {
-			position-anchor: --scoreboard-item-extras;
-			inset-block-start: auto;
-			inset-block-end: calc(anchor(top));
-		}
-
 		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */
 		/* > ::details-content { */
 		/* 	--at-apply: '-mt-6'; */
@@ -2006,7 +1995,7 @@ defineExpose({ el });
 		/* 	height: auto; */
 		/* } */
 
-		> details {
+		> :where(details) {
 			--at-apply: 'relative ps-[--scoreboard-item-ps] pe-[--scoreboard-item-pe] pbe-0 transition-padding';
 			transition-duration: var(--transition-duration);
 			transition-timing-function: ease-in-out;
@@ -2026,7 +2015,7 @@ defineExpose({ el });
 					'runes stats role-quest-dragons';
 			}
 
-			@media (width < 1680px) {
+			@media (width < 1680px) and (width >= 1079px) {
 				& {
 					--at-apply: 'mx-auto';
 					inline-size: clamp(
@@ -2630,7 +2619,7 @@ defineExpose({ el });
 			}
 
 			.extras {
-				--at-apply: 'col-span-full grid grid-cols-[repeat(auto-fit,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-x-[--extras-gap] gap-y-[calc(var(--extras-gap)-0.5*var(--spacing))] pt-3 inline-full';
+				--at-apply: 'col-span-full grid grid-cols-[repeat(auto-fill,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-x-[--extras-gap] gap-y-[calc(var(--extras-gap)-0.5*var(--spacing))] pt-3 inline-full';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
@@ -2658,6 +2647,18 @@ defineExpose({ el });
 			[data-icon-btns-show-text] & > button:nth-last-of-type(1) {
 				--at-apply: 'rotate-0';
 			}
+		}
+
+		&[data-item-tooltip-extras] .hover-tooltip.champion-item {
+			position-anchor: --scoreboard-item-extras;
+			inset-block-start: auto;
+			inset-block-end: calc(anchor(top));
+		}
+
+		&[data-dragon-tooltip-extras] .hover-tooltip.dragon {
+			position-anchor: --scoreboard-item-extras;
+			inset-block-start: auto;
+			inset-block-end: calc(anchor(top));
 		}
 	}
 
@@ -2759,7 +2760,7 @@ defineExpose({ el });
 				'clear			items				select-items		select-runes	select-champion move-group	move-up'
 				'expand			items				select-items		select-runes	select-champion	duplicate		move-down';
 
-			@media (width < 1194px) {
+			@media (width < 1194px) and (width >= 1079px) {
 				& {
 					grid-template-areas:
 						'manipulate items			select-items	select-runes	select-champion'
@@ -2777,7 +2778,7 @@ defineExpose({ el });
 		.select-champion {
 			--at-apply: 'ms-[--me] me-[--ms]';
 
-			@media (width < 1194px) {
+			@media (width < 1194px) and (width >= 1079px) {
 				& {
 					--at-apply: 'me-0 ms-[--me]';
 				}
