@@ -27,7 +27,10 @@ function saveStateOnVisibilitychange() {
 
 onMounted(() => {
 	document.addEventListener('visibilitychange', saveStateOnVisibilitychange);
-	restoreState(resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
+
+	callOnce(() => {
+		restoreState(resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
+	});
 });
 
 onBeforeUnmount(() => {

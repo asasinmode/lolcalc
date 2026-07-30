@@ -2681,7 +2681,7 @@ defineExpose({ el });
 		}
 	}
 
-	[data-scoreboard-item] > details[open]:not(:has(> .extras:not(:empty))) {
+	[data-scoreboard-item] > :where(details[open]:not(:has(> .extras:not(:empty)))) {
 		--at-apply: 'pb-1.5';
 	}
 
@@ -2838,7 +2838,7 @@ defineExpose({ el });
 			}
 		}
 
-		> details {
+		> :where(details) {
 			> .extras {
 				direction: rtl;
 
@@ -2850,7 +2850,7 @@ defineExpose({ el });
 	}
 
 	.mirrored [data-scoreboard-item][data-group='targets'] {
-		> details {
+		> :where(details) {
 			&::details-content {
 				--at-apply: 'grid-cols-[1fr_min-content_min-content]';
 				grid-template-areas:
