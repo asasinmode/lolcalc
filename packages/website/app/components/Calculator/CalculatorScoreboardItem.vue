@@ -2001,9 +2001,7 @@ defineExpose({ el });
 			transition-timing-function: ease-in-out;
 
 			&[open] {
-				& {
-					--at-apply: 'pbe-[--py]';
-				}
+				--at-apply: 'pbe-[--py]';
 			}
 
 			&::details-content {
@@ -2681,8 +2679,8 @@ defineExpose({ el });
 		}
 	}
 
-	[data-scoreboard-item] > :where(details[open]:not(:has(> .extras:not(:empty)))) {
-		--at-apply: 'pb-1.5';
+	[data-scoreboard-item] > details[open]:not(:has(> .extras:empty)) {
+		--at-apply: 'pb-2';
 	}
 
 	[data-scoreboard-item] .abilities > :is([data-ability]:not([data-ability='passive'])),
