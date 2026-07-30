@@ -2315,7 +2315,7 @@ defineExpose({ el });
 				width: var(--abilities-width);
 				height: var(--abilities-height);
 
-				@media (width < 1680px) {
+				@media (width < 1680px) and (width >= 1079px) {
 					& {
 						--at-apply: 'mx-0';
 					}
@@ -2388,12 +2388,18 @@ defineExpose({ el });
 			}
 
 			.health-ability-resource {
-				--at-apply: 'pbs-1.5 pbe-2 grid grid-rows-subgrid grid-cols-1 gap-y-px ms-[--gap-x] translate-y-[0.5px] -mbs-px';
+				--at-apply: 'pbs-1.5 pbe-2 ms-[--gap-x] grid grid-rows-subgrid grid-cols-1 gap-y-px translate-y-[0.5px] -mbs-px box-content';
 				grid-area: resources;
 
 				@media (width < 1680px) {
 					& {
-						--at-apply: 'grid-rows-2 mx-0 inline-[calc(2*var(--runes-stats-section-w)+1px)] pbe-2.75 justify-self-center';
+						--at-apply: 'grid-rows-2 ms-0 inline-full max-inline-[calc(2*var(--runes-stats-section-w)+1px)] pbe-2.75 justify-self-center';
+					}
+				}
+
+				@media (width < 1079px) {
+					& {
+						--at-apply: 'ms-[--gap-x]';
 					}
 				}
 
@@ -2482,7 +2488,13 @@ defineExpose({ el });
 
 				@media (width < 1680px) {
 					& {
-						--at-apply: 'px-0 pbs-3 inline-max justify-self-center';
+						--at-apply: 'inline-max justify-self-center';
+					}
+				}
+
+				@media (width < 1680px) and (width >= 1079px) {
+					& {
+						--at-apply: 'px-0 pbs-3';
 					}
 				}
 			}
@@ -2841,7 +2853,7 @@ defineExpose({ el });
 					'role-quest-dragons stats runes';
 			}
 
-			@media (width < 1680px) {
+			@media (width < 1680px) and (width > 1079px) {
 				&::details-content {
 					--at-apply: 'grid-cols-2';
 					grid-template-areas:
@@ -2851,23 +2863,26 @@ defineExpose({ el });
 						'stats runes'
 						'role-quest-dragons role-quest-dragons';
 				}
-			}
 
-			.stats {
-				@media (width < 1680px) {
-					& {
-						--at-apply: 'justify-self-end';
-					}
+				.stats {
+					--at-apply: 'justify-self-end';
+				}
+
+				.effects {
+					--at-apply: 'ms-0 me-auto';
+				}
+
+				.runes {
+					--at-apply: 'justify-self-start';
+				}
+
+				.abilities,
+				.health-ability-resource {
+					--at-apply: 'me-0';
 				}
 			}
 
 			.effects {
-				@media (width < 1680px) {
-					& {
-						--at-apply: 'ms-0 me-auto';
-					}
-				}
-
 				> ul {
 					direction: ltr;
 				}
@@ -2880,12 +2895,6 @@ defineExpose({ el });
 			}
 
 			.runes {
-				@media (width < 1680px) {
-					& {
-						--at-apply: 'justify-self-start';
-					}
-				}
-
 				> dl {
 					&:nth-of-type(1) {
 						--at-apply: 'b-e b-s-0';
@@ -2896,12 +2905,6 @@ defineExpose({ el });
 			.abilities,
 			.health-ability-resource {
 				--at-apply: 'ms-0 me-[--gap-x]';
-
-				@media (width < 1680px) {
-					& {
-						--at-apply: 'me-0';
-					}
-				}
 			}
 
 			.role-quest-dragons {
