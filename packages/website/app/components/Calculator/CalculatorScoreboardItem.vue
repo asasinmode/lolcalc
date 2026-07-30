@@ -1590,6 +1590,7 @@ defineExpose({ el });
 
 		--py: calc(3 * var(--spacing));
 		--select-champion-size: calc(14 * var(--spacing));
+		--header-box-h: var(--select-champion-size);
 		--header-h: calc(var(--select-champion-size) + 2 * var(--py));
 		--select-runes-size: calc(8 * var(--spacing));
 		--select-items-effects-size: calc(8 * var(--spacing));
@@ -1601,14 +1602,8 @@ defineExpose({ el });
 			oklch(from var(--damage-source-clr) l c h / 0.1)
 		);
 
-		--runes-stats-img-w: calc(5 * var(--spacing));
-		--runes-stats-text-w: calc(20 * var(--spacing));
-		--runes-stats-px: calc(0.5 * var(--spacing));
-		--runes-stats-py: calc(0.5 * var(--spacing));
-		--runes-stats-section-w: calc(
-			2 * var(--runes-stats-px) + 2 * (var(--runes-stats-img-w) + var(--runes-stats-text-w)) + 1px /* 1px is border */
-		);
 		--runes-stats-rows: 4;
+		--runes-stats-py: calc(0.5 * var(--spacing));
 		--runes-stats-row-h: calc(6 * var(--spacing));
 		--runes-stats-section-h: calc(var(--runes-stats-rows) * var(--runes-stats-row-h) + 2 * var(--runes-stats-py));
 
@@ -1633,7 +1628,7 @@ defineExpose({ el });
 		background: var(--scoreboard-item-bg);
 
 		.header {
-			--at-apply: 'grid grid-rows-[repeat(2,calc(var(--select-champion-size)/2))] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps]';
+			--at-apply: 'grid grid-rows-[repeat(2,calc(var(--header-box-h)/2))] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps]';
 			grid-template-areas:
 				'move-up		move-group	select-champion	select-runes	select-items	items			clear'
 				'move-down	duplicate		select-champion	select-runes	select-items	items			expand';

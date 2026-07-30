@@ -124,7 +124,6 @@ function closeMenu() {
 		</div>
 	</header>
 	<NuxtPage />
-	<ReportIssueDialog />
 	<footer>
 		<h2>contact</h2>
 		<ul>
@@ -162,6 +161,7 @@ function closeMenu() {
 		</label>
 	</footer>
 	<ClientOnly>
+		<ReportIssueDialog />
 		<ChampSelect />
 		<ItemShop />
 		<RuneSelect />

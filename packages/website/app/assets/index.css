@@ -56,6 +56,7 @@
 
 	:root {
 		color-scheme: dark;
+		block-size: 100%;
 		--size-page-max-w: 120rem;
 		--size-page-px: var(--fluid-8-24);
 		--size-page-computed-px: calc(
@@ -68,7 +69,7 @@
 
 	body {
 		font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
-		min-height: 100vh;
+		min-block-size: 100%;
 		background-color: var(--mauve-bg);
 
 		@supports (font-variation-settings: 'wdth' 800) {
@@ -77,14 +78,14 @@
 	}
 
 	#__nuxt {
-		min-height: 100vh;
+		min-block-size: 100%;
 		display: grid;
 		grid-template-columns:
 			[page-start] minmax(var(--size-page-px), 1fr)
-			[content-start] minmax(min(calc(100vw - 2 * var(--size-page-px)), var(--size-page-max-w)), 1fr)
+			[content-start] minmax(min(calc(100% - 2 * var(--size-page-px)), var(--size-page-max-w)), 1fr)
 			[content-end] minmax(var(--size-page-px), 1fr)
 			[page-end];
-		grid-template-rows: auto max-content 1fr;
+		grid-template-rows: auto max-content minmax(0, 1fr);
 
 		> main {
 			grid-column: content;

@@ -467,6 +467,12 @@ function setLocalMirrorLayout() {
 			var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) +
 				var(--scoreboard-item-b-w)
 		);
+		--runes-stats-img-w: calc(5 * var(--spacing));
+		--runes-stats-text-w: calc(20 * var(--spacing));
+		--runes-stats-px: calc(0.5 * var(--spacing));
+		--runes-stats-section-w: calc(
+			2 * var(--runes-stats-px) + 2 * (var(--runes-stats-img-w) + var(--runes-stats-text-w)) + 1px /* 1px is border */
+		);
 
 		> h2 {
 			--at-apply: 'mb-3';
