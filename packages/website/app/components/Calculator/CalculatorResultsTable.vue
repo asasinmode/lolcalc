@@ -9,7 +9,7 @@ import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
 import type { IChampion, IDragonName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import type { UnwrapRef, WatchHandle } from 'vue';
-import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { computeAbilityDescription, computeDragonAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage, simpleDescriptionFormatting } from '@lolcalc/core/misc';
@@ -23,19 +23,12 @@ import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, imgUrl, INTERESTING_SOULS_DRAGONS,
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundVariable } from '@lolcalc/shared/utils';
 
-const props = defineProps<{
-	damageSources: DamageSource[];
-	damageTargets: DamageSource[];
+defineProps<{
 	showResults: boolean;
 }>();
 
-const emit = defineEmits<{
-	configurationChanged: [];
-}>();
-
-const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
-const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
-
+const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, customTotalRowIds, computedCustomTotalRows } = useCalculatorState();
+const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const iconButtonsShowText = useIconButtonsShowText();
@@ -44,32 +37,29 @@ const highlightedDamageSources = useHighlightedDamageSources();
 const { showTooltip: showRowTooltip, hideTooltip: hideRowTooltip } = useInfoTooltip();
 const { vMinor } = PATCH_VERSION;
 
-const STATS_SECTION_ID = 'a-stats';
-const CUSTOM_TOTAL_SECTION_ID = 'a-cTtl';
-
-const flipResults = ref(false);
+const flipResults = useState<boolean>('resultsTableFlip', () => false);
 
 const highlightedColumnId = ref<string>();
 
 function columnOptions(from: DamageSource[]): [string, string][] {
 	return from.map((source, i) => [source.id, `(${i + 1}) ${source.listedChampion.value?.name || '<empty>'}`]);
 }
-const sourceOptions = computed(() => columnOptions(props.damageSources));
-const targetOptions = computed(() => columnOptions(props.damageTargets));
+const sourceOptions = computed(() => columnOptions(damageSources.value));
+const targetOptions = computed(() => columnOptions(damageTargets.value));
 
-function setColumnChampion(column: IDamageResultTableColumn, damageSources: DamageSource[], damageSourceId?: string) {
-	const oldDamageSourceId = column[damageSources === props.damageSources ? 'source' : 'target']?.id;
+function setColumnChampion(column: IDamageResultTableColumn, sources: DamageSource[], damageSourceId?: string) {
+	const oldDamageSourceId = column[sources === damageSources.value ? 'source' : 'target']?.id;
 	oldDamageSourceId && highlightedDamageSources.remove(oldDamageSourceId);
 
-	const property = damageSources === props.damageSources ? 'source' : 'target';
+	const property = sources === damageSources.value ? 'source' : 'target';
 
 	column[property] = damageSourceId
-		? damageSources.find(damageSource => damageSource.id === damageSourceId)
+		? sources.find(damageSource => damageSource.id === damageSourceId)
 		: undefined;
 	recalculateColumn(column);
 
 	column[property] && highlightedDamageSources.add(column[property].id);
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 interface IDamageSectionOption {
@@ -87,8 +77,8 @@ interface IDamageSectionOption {
 const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || !(section.abilityId.type === 'champion' && section.abilityId.abilityKey !== 'passive')));
 
 const uniqueDamageSourceChampions = computed<Set<IChampion>>(() => new Set(
-	props.damageSources
-		.concat(props.damageTargets)
+	damageSources.value
+		.concat(damageTargets.value)
 		.filter(source =>
 			source.champion.value && (source.listedChampion.value?.id === source.champion.value.id) && source.champion.value.id !== 'TargetDummy',
 		)
@@ -133,8 +123,8 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 	.toArray());
 
 const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
-	const itemIds = new Set(props.damageSources
-		.concat(props.damageTargets)
+	const itemIds = new Set(damageSources.value
+		.concat(damageTargets.value)
 		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
 			item?.hasAnyInterestingVariables || item?.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
 		))
@@ -151,13 +141,13 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 
 const damageSectionDragonAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
 	const dragons: IDragonName[] = [];
-	for (const damageSource of props.damageSources) {
+	for (const damageSource of damageSources.value) {
 		const { value } = damageSource.dragonSoul;
 		if (value && INTERESTING_SOULS_DRAGONS.includes(value) && !dragons.includes(value)) {
 			dragons.push(value);
 		}
 	}
-	for (const damageSource of props.damageTargets) {
+	for (const damageSource of damageTargets.value) {
 		const { value } = damageSource.dragonSoul;
 		if (value && INTERESTING_SOULS_DRAGONS.includes(value) && !dragons.includes(value)) {
 			dragons.push(value);
@@ -173,12 +163,12 @@ const damageSectionDragonAbilities = computed<IDamageSectionOption['abilities']>
 });
 
 const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
-	const effectObjectNames = new Set(props.damageSources
+	const effectObjectNames = new Set(damageSources.value
 		.flatMap(damageSource =>
 			damageSource.computed.effects.value
 				.map(effect => effect.resultVariables && effect.abilityId.id)
 				.concat(damageSource.effectsAppliedToTarget.value.map(([effectAbilityId, effectSpecific]) => effectSpecific.variables && effectAbilityId.id)))
-		.concat(props.damageTargets.flatMap(damageSource => damageSource.computed.effects.value.map(effect =>
+		.concat(damageTargets.value.flatMap(damageSource => damageSource.computed.effects.value.map(effect =>
 			effect.resultVariables && effect.abilityId.id)))
 		.filter(Boolean));
 
@@ -254,7 +244,6 @@ interface IComputedSectionRowColumn {
 	comparisonMap: Record<string, number>;
 }
 
-const customTotalRows = ref<string[]>([]);
 const customTotalSection = resultSections.value.find(section => section.isCustomTotal)!;
 const customTotalSectionTotalRow = customTotalSection.rows[0]!;
 
@@ -263,28 +252,8 @@ const computedResults = ref(new Map<string, IComputedSection>(
 		.concat(resultSections.value.map(section => [section.id, computeSection(section)] as [string, IComputedSection])),
 ));
 
-const customTotalComputedSection = computedResults.value.get(CUSTOM_TOTAL_SECTION_ID)!;
+const customTotalComputedSection = computedResults.value.get(ResultSectionId.CustomTotal)!;
 const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('cTtl-total')!;
-
-const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
-	/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
-	const rows: ICustomTotalSectionRow[] = (customTotalSection.rows as ICustomTotalSectionRow[]).concat(customTotalRows.value.map((combinedId) => {
-		const [sectionId, rowId] = combinedId.split('_');
-
-		const section = resultSections.value.find(section => section.id === sectionId)!;
-		const rowIndex = section.rows.findIndex(row => row.id === rowId)!;
-		const row = section.rows[rowIndex]!;
-
-		return {
-			...row,
-			sectionId: section.id,
-			rowIndex,
-			image: section.image,
-		};
-	}));
-
-	return rows;
-});
 
 function addComputedSection(sectionId: string) {
 	const section = computeSection(resultSections.value.find(section => section.id === sectionId)!);
@@ -330,9 +299,9 @@ function computeSectionRowColumn(
 		|| (section.id === 'aa' && source.champion.value?.id === 'Zeri')
 	) {
 		rv.value = 'n/a';
-	} else if (section.id === CUSTOM_TOTAL_SECTION_ID) {
+	} else if (section.id === ResultSectionId.CustomTotal) {
 		/* this branch is expected to happen only for the total row, other custom total rows use computedCustomTotalRows */
-		if (!customTotalRows.value.length) {
+		if (!customTotalRowIds.value.length) {
 			return rv;
 		}
 
@@ -373,7 +342,7 @@ function addResultsColumn() {
 	};
 	resultColumns.value.push(column);
 	addComputedColumn(column);
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 function addComputedColumn(column: IDamageResultTableColumn) {
@@ -428,10 +397,8 @@ function removeResultsColumn(index: number) {
 			row.columns.delete(column!.id);
 		}
 	}
-	emit('configurationChanged');
+	debouncedSaveState();
 }
-
-const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== STATS_SECTION_ID).map(section => section.id));
 
 function toggleResultsSection(sectionId: string) {
 	const index = expandedSections.value.indexOf(sectionId);
@@ -440,7 +407,7 @@ function toggleResultsSection(sectionId: string) {
 	} else {
 		expandedSections.value.push(sectionId);
 	}
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 function preventDoubleClickSelect(event: MouseEvent) {
@@ -520,7 +487,7 @@ function submitResultsSection(event: SubmitEvent) {
 	(event.target as HTMLFormElement).reset();
 	const ability = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!.abilities[Number.parseInt(rawAbilityIndex!)]!;
 	addResultsSection(ability.id, ability.name);
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 /** to be used for removing a section that was eagerly added but during full resolve turned out to be incorrect */
@@ -644,37 +611,37 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 function removeResultsSection(index: number) {
 	const section = resultSections.value[index];
 	if (section!.isCustomTotal) {
-		customTotalRows.value.length = 0;
+		customTotalRowIds.value.length = 0;
 	} else {
 		const [section] = resultSections.value.splice(index, 1);
-		for (let i = customTotalRows.value.length - 1; i >= 0; i--) {
-			if (customTotalRows.value[i]!.startsWith(section!.id)) {
-				customTotalRows.value.splice(i, 1);
+		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
+			if (customTotalRowIds.value[i]!.startsWith(section!.id)) {
+				customTotalRowIds.value.splice(i, 1);
 			}
 		}
 		computedResults.value.delete(section!.id);
 	}
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 const damageSourceWatchers = new Map<string, WatchHandle>();
 
 watch(
-	() => props.damageSources.map(source => source.id),
-	(newV, oldV) => handleSourceUpdate(props.damageSources, newV, oldV),
+	() => damageSources.value.map(source => source.id),
+	(newV, oldV) => handleSourceUpdate(damageSources.value, newV, oldV),
 	{ immediate: true },
 );
 watch(
-	() => props.damageTargets.map(source => source.id),
-	(newV, oldV) => handleSourceUpdate(props.damageTargets, newV, oldV),
+	() => damageTargets.value.map(source => source.id),
+	(newV, oldV) => handleSourceUpdate(damageTargets.value, newV, oldV),
 	{ immediate: true },
 );
 
 function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: string[] = []) {
-	emit('configurationChanged');
+	debouncedSaveState();
 	const addedIds = currIds.filter(id => !prevIds.includes(id));
 	const removedIds = prevIds.filter(id => !currIds.includes(id));
-	const columnProperty = target === props.damageSources ? 'source' : 'target';
+	const columnProperty = target === damageSources.value ? 'source' : 'target';
 
 	for (const id of removedIds) {
 		damageSourceWatchers.get(id)?.();
@@ -692,7 +659,7 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 	for (const id of addedIds) {
 		const source = (target.find(damageSource => damageSource.id === id))!;
 		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
-			emit('configurationChanged');
+			debouncedSaveState();
 			const columns = resultColumns.value.filter(column => column.source?.id === source.id || column.target?.id === source.id);
 			for (const column of columns) {
 				recalculateColumn(column);
@@ -732,7 +699,7 @@ const columnDamageSourceColors = computed(() => resultColumns.value.map(column =
 
 function recalculateAllColumns() {
 	/* for now it's only called when `flipResults` is flipped */
-	emit('configurationChanged');
+	debouncedSaveState();
 	for (const column of resultColumns.value) {
 		for (const section of resultSections.value) {
 			for (const row of section.rows) {
@@ -867,10 +834,10 @@ function cleanupUnused() {
 		computedResults.value.delete(section.id);
 		resultSections.value.splice(sectionIndex, 1);
 
-		for (let i = customTotalRows.value.length - 1; i >= 0; i--) {
-			const [sectionId] = customTotalRows.value[i]!.split('_');
+		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
+			const [sectionId] = customTotalRowIds.value[i]!.split('_');
 			if (sectionId === section.id) {
-				customTotalRows.value.splice(i, 1);
+				customTotalRowIds.value.splice(i, 1);
 			}
 		}
 	}
@@ -911,7 +878,7 @@ function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
 
 	resultColumns.value.splice(toIndex, 0, column);
 	copy && addComputedColumn(column);
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 const columnDragDropIndex = ref<number>();
@@ -975,7 +942,7 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
 
 	resultColumns.value.splice(adjustedIndex, 0, column!);
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 function endResultColumnDrag() {
@@ -1015,7 +982,7 @@ function getDropTargetIndex(
 function moveResultSection(fromIndex: number, toIndex: number) {
 	const [section] = resultSections.value.splice(fromIndex, 1);
 	resultSections.value.splice(toIndex, 0, section!);
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 const sectionDragDropIndex = ref<number>();
@@ -1069,7 +1036,7 @@ function onResultSectionDrop(event: DragEvent, index: number, isHeader?: boolean
 	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
 
 	resultSections.value.splice(adjustedIndex, 0, section!);
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 function endResultSectionDrag() {
@@ -1171,7 +1138,7 @@ async function addColumnAbilities(columnIndex: number) {
 			addResultsSection(option.abilities[i]!.id, option.abilities[i]!.name);
 		}
 	}
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 function addColumnItems(columnIndex: number) {
@@ -1188,22 +1155,15 @@ function addColumnItems(columnIndex: number) {
 			addResultsSection(ability.id, ability.name);
 		}
 	}
-	emit('configurationChanged');
-}
-
-type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
-interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
-	sectionId: string;
-	/** the index the target row is at in its section */
-	rowIndex: number;
+	debouncedSaveState();
 }
 
 function onCustomTotalRowsChange() {
 	recomputeCustomTotalRow();
-	if (!expandedSections.value.includes(customTotalSection.id) && customTotalRows.value.length) {
+	if (!expandedSections.value.includes(customTotalSection.id) && customTotalRowIds.value.length) {
 		expandedSections.value.push(customTotalSection.id);
 	}
-	emit('configurationChanged');
+	debouncedSaveState();
 }
 
 function recomputeCustomTotalRow() {
@@ -1213,7 +1173,7 @@ function recomputeCustomTotalRow() {
 			computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow, column),
 		);
 	}
-	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, CUSTOM_TOTAL_SECTION_ID);
+	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
 }
 
 const colW = computed(() => {
@@ -1236,16 +1196,9 @@ const colW = computed(() => {
 });
 
 defineExpose({
-	resultColumns,
-	resultSections,
-	flipResults,
 	addResultsColumn,
 	addComputedColumnSources,
 	addResultsSection,
-	expandedSections,
-	customTotalRows,
-	computedCustomTotalRows,
-	recomputeCustomTotalRow,
 });
 </script>
 
@@ -1531,7 +1484,7 @@ defineExpose({
 							<button
 								class="pretend-ui-btn remove"
 								:title="section.isCustomTotal ? 'clear' : 'remove'"
-								:disabled="section.isCustomTotal ? !customTotalRows.length : section.isPermanent"
+								:disabled="section.isCustomTotal ? !customTotalRowIds.length : section.isPermanent"
 								@dblclick.stop=""
 								@click.stop="removeResultsSection(index)"
 							>
@@ -1634,11 +1587,11 @@ defineExpose({
 						:key="`${section.id}_${row.id}`"
 						:class="{ unknown: row.isUnknown }"
 					>
-						<td v-if="!section.isCustomTotal && section.id !== STATS_SECTION_ID">
+						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
 							<label>
 								<span>include in custom total</span>
 								<input
-									v-model="customTotalRows"
+									v-model="customTotalRowIds"
 									type="checkbox"
 									:value="`${section.id}_${row.id}`"
 									@update:model-value="onCustomTotalRowsChange"
@@ -1647,7 +1600,7 @@ defineExpose({
 						</td>
 						<th
 							scope="row"
-							:colspan="section.isCustomTotal || section.id === STATS_SECTION_ID ? 2 : undefined"
+							:colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined"
 							headers="results-table-header-damage-type"
 						>
 							<img

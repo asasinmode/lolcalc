@@ -15,8 +15,7 @@ const el = useTemplateRef('el');
 
 const { vMinor } = PATCH_VERSION;
 
-const damageSources = inject<Ref<DamageSource[]>>('damageSources')!;
-const damageTargets = inject<Ref<DamageSource[]>>('damageTargets')!;
+const { damageSources, damageTargets } = useCalculatorState();
 
 const MODIFIABLE_CHAMPION_STATS = Object.fromEntries(ALL_CHAMPION_STATS_ENTRIES.filter(([statName]) =>
 	statName !== 'ultimateHaste' && statName !== 'basicHaste' && statName !== 'immobilizingHaste'),

@@ -1,29 +1,197 @@
+import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IDragonName } from '@lolcalc/data/types';
-import type { IEffectObjectName } from '@lolcalc/shared';
+import type { IChampionStatName, IEffectObjectName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { CalculatorResultsTable } from '#components';
-import type { IDamageResultTableColumn } from '~/utils/types';
+import type { ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { CHAMPION_KEY_TO_ID } from '@lolcalc/data';
-import { AbilityType } from '@lolcalc/shared';
+import { CHAMPION_KEY_TO_ID, ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 
+const { vMinor } = PATCH_VERSION;
+
+export const ResultSectionId = {
+	Stats: 'a-stats',
+	BasicAttack: 'a-ba',
+	CustomTotal: 'a-cTtl',
+} as const;
 export const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';
 
-export function useCalculatorState(
-	damageSources: ShallowRef<DamageSource[]>,
-	damageTargets: ShallowRef<DamageSource[]>,
-	resultsTable: ShallowRef<InstanceType<typeof CalculatorResultsTable> | undefined>,
-) {
+export interface ICalculatorState {
+	damageSources: ShallowRef<DamageSource[]>;
+	damageTargets: ShallowRef<DamageSource[]>;
+	resultColumns: ShallowRef<IDamageResultTableColumn[]>;
+	resultSections: ShallowRef<IDamageResultTableSection[]>;
+	resultsTableFlip: Ref<boolean>;
+	expandedSections: Ref<string[]>;
+	/** custom total row ids formatted like `${sectionId}_${rowId}` */
+	customTotalRowIds: Ref<string[]>;
+	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
+}
+
+export function initCalculatorState(): ICalculatorState {
+	/* expected to have DamageSources added in `restoreState`, shallowRefs because otherwise ref properties inside of classes get messed up */
+	const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
+	const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
+	const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+	const resultSections = ref<IDamageResultTableSection[]>([
+		{
+			id: ResultSectionId.Stats,
+			abilityId: { type: 'all', id: 'stats' },
+			name: 'stats',
+			isPermanent: true,
+			image: [`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32],
+			rows: markRaw(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
+				const icon = STAT_ICON[statName as IChampionStatName];
+				const image: IGameImageData = typeof icon === 'string'
+					? [
+							`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
+							20,
+						]
+					:	icon;
+
+				return {
+					id: statName as string,
+					name: statMeta.name,
+					image,
+				};
+			}).concat([
+				{
+					id: 'eqValue',
+					name: 'Inventory Value',
+					image: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height] as Extract<IGameImageData, any[]>,
+				},
+			])),
+			getCellValue(_section, rowId, source, _target) {
+				if (!source) {
+					return;
+				}
+
+				if (rowId === 'eqValue') {
+					const numberValue = source.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0);
+					return { numberValue, value: numberValue };
+				}
+
+				return {
+					numberValue: source.stats.value.total[rowId as IChampionStatName],
+					value: `${source.computed.formattedStatTotals.value[rowId as IChampionStatName]}${CHAMPION_STAT_META[rowId as IChampionStatName].isPercentage ? '%' : ''}`,
+				};
+			},
+		},
+		{
+			id: ResultSectionId.BasicAttack,
+			abilityId: { type: 'all', id: 'basicAttack' },
+			name: 'basic attack',
+			isPermanent: true,
+			image: [imgUrl('game/assets/ux/deathrecap/autoattack.png'), 32],
+			rows: markRaw([
+				{
+					name: 'total',
+					id: 'total',
+				},
+				{
+					name: 'physical damage',
+					id: 'physicalDamage',
+				},
+				{
+					name: 'magic damage',
+					id: 'magicDamage',
+				},
+				{
+					name: 'true damage',
+					id: 'trueDamage',
+				},
+				{
+					name: 'DPS',
+					id: 'dps',
+				},
+			]),
+			// TODO
+			getCellValue() {
+				const value = Math.round(Math.random() * 500);
+				const numberValue = value;
+
+				return { value, numberValue };
+			},
+			selectValue: 'normal',
+			selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
+			selectLabel: 'attack type',
+		},
+		{
+			id: ResultSectionId.CustomTotal,
+			abilityId: { type: 'all', id: 'customTotal' },
+			name: 'custom total',
+			isPermanent: true,
+			isCustomTotal: true,
+			image: [imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32],
+			rows: markRaw([
+				{
+					id: 'cTtl-total',
+					name: 'total',
+				},
+			]),
+			getCellValue() {
+				console.warn('results section custom total \'getCellValue\' called, should be handled manually');
+				return { value: 0, numberValue: 0 };
+			},
+		},
+	]) as unknown as ShallowRef<IDamageResultTableSection[]>;
+
+	const customTotalSection = resultSections.value.find(section => section.isCustomTotal)!;
+	const customTotalRowIds = ref<string[]>([]);
+
+	const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
+	/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
+		const rows: ICustomTotalSectionRow[] = (customTotalSection.rows as ICustomTotalSectionRow[]).concat(customTotalRowIds.value.map((combinedId) => {
+			const [sectionId, rowId] = combinedId.split('_');
+
+			const section = resultSections.value.find(section => section.id === sectionId)!;
+			const rowIndex = section.rows.findIndex(row => row.id === rowId)!;
+			const row = section.rows[rowIndex]!;
+
+			return {
+				...row,
+				sectionId: section.id,
+				rowIndex,
+				image: section.image,
+			};
+		}));
+
+		return rows;
+	});
+
+	const state: ICalculatorState = {
+		damageSources,
+		damageTargets,
+		resultColumns,
+		resultSections,
+		resultsTableFlip: ref(false),
+		expandedSections: ref<string[]>(resultSections.value.filter(section => section.id !== ResultSectionId.Stats).map(section => section.id)),
+		customTotalRowIds,
+		computedCustomTotalRows,
+	};
+
+	provide('calculatorState', state);
+
+	return state;
+}
+
+export function useCalculatorState(): ICalculatorState {
+	return inject<ICalculatorState>('calculatorState')!;
+}
+
+export function useManageCalculatorState(state = useCalculatorState()) {
+	const { damageSources, damageTargets, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows } = state;
 	const isStateTooLargeForQuery = ref(false);
-	let saveStateDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
+	const debounceTimeout = useState<ReturnType<typeof setTimeout> | undefined>('saveStateDebounce');
 
 	function saveState() {
-		if (saveStateDebounceTimeout) {
-			clearTimeout(saveStateDebounceTimeout);
-			saveStateDebounceTimeout = undefined;
+		if (debounceTimeout.value) {
+			clearTimeout(debounceTimeout.value);
+			debounceTimeout.value = undefined;
 		}
 		const data = calculatorStateString();
 		window?.sessionStorage.setItem(STATE_SESSION_STORAGE_KEY, data[0]);
@@ -32,11 +200,13 @@ export function useCalculatorState(
 	}
 
 	function debouncedSaveState() {
-		if (saveStateDebounceTimeout) {
-			clearTimeout(saveStateDebounceTimeout);
-			saveStateDebounceTimeout = undefined;
+		if (debounceTimeout.value) {
+			clearTimeout(debounceTimeout.value);
+			debounceTimeout.value = undefined;
 		}
-		saveStateDebounceTimeout = setTimeout(saveState, 500);
+		if (import.meta.client) {
+			debounceTimeout.value = setTimeout(saveState, 500);
+		}
 	}
 
 	const damageSourcesState = computed<[state: string, sourceIndex: number][]>(() => {
@@ -87,7 +257,7 @@ export function useCalculatorState(
 			queryState += `&${str}`;
 		}
 
-		const tableResultsStr = resultsTable.value?.flipResults ? `&flpTbl=` : '';
+		const tableResultsStr = resultsTableFlip.value ? `&flpTbl=` : '';
 		wholeState += tableResultsStr;
 		if (queryState.length + tableResultsStr.length <= MAX_QUERY_STATE_STRING_LENGTH) {
 			queryState += tableResultsStr;
@@ -129,12 +299,13 @@ export function useCalculatorState(
 			return [columnSourceIndex, columnTargetIndex];
 		}
 
-		if (resultsTable.value && (
-			resultsTable.value.resultColumns.slice(1).some(col => col.source || col.target)
+		if (
+			resultColumns.value.slice(1).some(col => col.source || col.target)
 			|| damageSources.value.length > 1 || damageTargets.value.length > 1
-			|| resultsTable.value.resultColumns[0]!.source !== damageSources.value[0]
-			|| resultsTable.value.resultColumns[0]!.target !== damageTargets.value[0])) {
-			for (const column of resultsTable.value?.resultColumns || []) {
+			|| resultColumns.value[0]!.source !== damageSources.value[0]
+			|| resultColumns.value[0]!.target !== damageTargets.value[0]
+		) {
+			for (const column of resultColumns.value || []) {
 				const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
 
 				const params = new URLSearchParams();
@@ -146,11 +317,9 @@ export function useCalculatorState(
 				}
 				queryState += `&${str}`;
 			}
-		} else if (resultsTable.value) {
-			savedUsedResultColumnIds(resultsTable.value.resultColumns[0]!);
 		}
 
-		const keptSections = resultsTable.value?.resultSections.filter(section => section.abilityId.type === 'all'
+		const keptSections = resultSections.value.filter(section => section.abilityId.type === 'all'
 			|| (section.abilityId.type === AbilityType.item
 				? savedItemIds.has(section.abilityId.id)
 				: section.abilityId.type === AbilityType.champion
@@ -158,21 +327,20 @@ export function useCalculatorState(
 					: section.abilityId.type === AbilityType.effect
 						? savedEffectObjectNames.has(section.abilityId.id)
 						: savedDragonsSoulAbilities.has(section.abilityId.id))) ?? [];
-		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
 		const savedSectionIds: string[] = [];
 		const isSectionsChanged = keptSections?.[0] && (keptSections.length > 3
 			/* check if default order was changed */
-			|| (keptSections[0]!.id !== 'a-stats'
-				|| keptSections[1]!.id !== 'a-aa'
-				|| keptSections.at(-1)!.id !== 'a-cTtl'));
+			|| (keptSections[0]!.id !== ResultSectionId.Stats
+				|| keptSections[1]!.id !== ResultSectionId.BasicAttack
+				|| keptSections.at(-1)!.id !== ResultSectionId.CustomTotal));
 
-		if (computedCustomTotalRows?.length || isSectionsChanged) {
+		if (computedCustomTotalRows.value?.length || isSectionsChanged) {
 			for (const section of keptSections) {
 				savedSectionIds.push(section.id);
 
 				if (isSectionsChanged) {
 					const params = new URLSearchParams();
-					params.append('tblSct', `${section.id}_${resultsTable.value!.expandedSections.includes(section.id) ? 1 : ''}`);
+					params.append('tblSct', `${section.id}_${expandedSections.value.includes(section.id) ? 1 : ''}`);
 					const str = params.toString();
 					wholeState += `&${str}`;
 					if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
@@ -182,14 +350,15 @@ export function useCalculatorState(
 				}
 			}
 
-			if (computedCustomTotalRows?.length) {
+			if (computedCustomTotalRows.value?.length) {
 				const params = new URLSearchParams();
 
 				const value: string[] = [];
-				for (const row of computedCustomTotalRows) {
-					const savedSectionIndex = savedSectionIds.indexOf(row.sectionId);
+				for (const row of computedCustomTotalRows.value) {
+					const { sectionId, rowIndex } = row;
+					const savedSectionIndex = savedSectionIds.indexOf(sectionId!);
 					if (~savedSectionIndex) {
-						value.push(`${savedSectionIndex}-${row.rowIndex}`);
+						value.push(`${savedSectionIndex}-${rowIndex}`);
 					}
 				}
 
@@ -207,7 +376,7 @@ export function useCalculatorState(
 		return wholeState.length === 3 ? ['', ''] : [wholeState, queryState];
 	}
 
-	function restoreState() {
+	function restoreState(resultsTable: Ref<InstanceType<typeof CalculatorResultsTable>>) {
 		if (!import.meta.client) {
 			return;
 		}
@@ -219,10 +388,8 @@ export function useCalculatorState(
 		if (version !== STATE_VERSION) {
 			damageSources.value.push(new DamageSource());
 			damageTargets.value.push(new DamageSource());
-			if (resultsTable.value) {
-				resultsTable.value.resultColumns[0]!.source = damageSources.value[0];
-				resultsTable.value.resultColumns[0]!.target = damageTargets.value[0];
-			}
+			resultColumns.value[0]!.source = damageSources.value[0];
+			resultColumns.value[0]!.target = damageTargets.value[0];
 			return;
 		}
 
@@ -244,13 +411,9 @@ export function useCalculatorState(
 			damageTargets.value.push(new DamageSource());
 		}
 
-		if (!resultsTable.value) {
-			return;
-		}
-
 		const flipResults = params.has('flpTbl');
 		if (flipResults) {
-			resultsTable.value.flipResults = true;
+			resultsTableFlip.value = true;
 		}
 
 		let noColumnsRestored = true;
@@ -278,7 +441,7 @@ export function useCalculatorState(
 			if (source || target) {
 				noColumnsRestored = false;
 				i && resultsTable.value.addResultsColumn();
-				const column = resultsTable.value.resultColumns.at(-1)!;
+				const column = resultColumns.value.at(-1)!;
 				column.source = source;
 				column.target = target;
 				resultsTable.value.addComputedColumnSources(column);
@@ -286,9 +449,9 @@ export function useCalculatorState(
 		}
 
 		if (noColumnsRestored && damageSources.value.length === 1 && damageTargets.value.length === 1) {
-			resultsTable.value.resultColumns[0]!.source = damageSources.value[0];
-			resultsTable.value.resultColumns[0]!.target = damageTargets.value[0];
-			resultsTable.value.addComputedColumnSources(resultsTable.value.resultColumns[0]!);
+			resultColumns.value[0]!.source = damageSources.value[0];
+			resultColumns.value[0]!.target = damageTargets.value[0];
+			resultsTable.value.addComputedColumnSources(resultColumns.value[0]!);
 		}
 
 		const savedSections = params.getAll('tblSct');
@@ -301,16 +464,16 @@ export function useCalculatorState(
 
 			/* `all` (permanent) sections start with 'a-' */
 			if (id.startsWith('a-')) {
-				const sectionIndex = resultsTable.value.resultSections.findIndex(section => section.id === id);
+				const sectionIndex = resultSections.value.findIndex(section => section.id === id);
 				if (~sectionIndex) {
 					if (sectionIndex !== currentSectionIndex) {
-						resultsTable.value.resultSections.splice(currentSectionIndex, 0, resultsTable.value.resultSections.splice(sectionIndex, 1)[0]!);
+						resultSections.value.splice(currentSectionIndex, 0, resultSections.value.splice(sectionIndex, 1)[0]!);
 					}
-					const expandedIndex = resultsTable.value.expandedSections.indexOf(id);
+					const expandedIndex = expandedSections.value.indexOf(id);
 					if (isExpanded) {
-						expandedIndex === -1 && resultsTable.value.expandedSections.push(id);
+						expandedIndex === -1 && expandedSections.value.push(id);
 					} else {
-						~expandedIndex && resultsTable.value.expandedSections.splice(expandedIndex, 1);
+						~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
 					}
 				}
 				currentSectionIndex += 1;
@@ -324,6 +487,8 @@ export function useCalculatorState(
 			}
 		}
 
+		expandedSections.value = resultSections.value.filter(section => section.id !== ResultSectionId.Stats).map(section => section.id);
+
 		const savedCustomTotalRows = params.get('tblCTtl');
 		if (savedCustomTotalRows?.length) {
 			for (const totalRow of savedCustomTotalRows.split('_')) {
@@ -331,10 +496,10 @@ export function useCalculatorState(
 				const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
 				const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
 				if (sectionIndex !== undefined && !Number.isNaN(sectionIndex) && rowIndex !== undefined && !Number.isNaN(rawRowIndex)) {
-					const section = resultsTable.value.resultSections[sectionIndex];
+					const section = resultSections.value[sectionIndex];
 					const row = section?.rows[rowIndex];
 					if (section && row && section.id !== 'a-cTtl') {
-						resultsTable.value.customTotalRows.push(`${section.id}_${row.id}`);
+						customTotalRowIds.value.push(`${section.id}_${row.id}`);
 					}
 				}
 			}

@@ -2,6 +2,7 @@
 import { PATCH_VERSION } from '@lolcalc/data';
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
+const { saveState, isStateTooLargeForQuery } = useManageCalculatorState(initCalculatorState());
 const { vSemver, vMinor } = PATCH_VERSION;
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { reportAnIssue } = useReportIssueDialog();
@@ -129,8 +130,7 @@ function hideSharePopover() {
 					share
 					<div ref="shareTextPopover" popover="manual">
 						{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
-						<!-- <p v-show="isStateTooLargeForQuery" class="alert warning"> -->
-						<p class="alert warning">
+						<p v-show="isStateTooLargeForQuery" class="alert warning">
 							configuration too large for url, some data will be trimmed
 							<Icon class="i-ph:warning-light" />
 						</p>

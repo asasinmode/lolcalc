@@ -59,6 +59,13 @@ export interface IDamageResultTableColumn {
 	_computedSource?: DamageSource;
 }
 
+type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
+export interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
+	sectionId: string;
+	/** the index the target row is at in its section */
+	rowIndex: number;
+}
+
 export interface IChampionAbilityHoverTooltipProps {
 	/** used for target dummy's abilities */
 	group?: 'sources' | 'targets';

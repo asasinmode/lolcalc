@@ -9,8 +9,7 @@ const { vMinor, vSemver } = PATCH_VERSION;
 const globalKeyModifiers = useGlobalKeyModifiers();
 const { championImage, championImageSize } = CHAMPION_IMAGES;
 
-const damageSources = defineModel<DamageSource[]>('sources', { required: true });
-const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
+const { damageSources, damageTargets } = useCalculatorState();
 
 const isSourcesMounted = ref(false);
 const isTargetsMounted = ref(false);
