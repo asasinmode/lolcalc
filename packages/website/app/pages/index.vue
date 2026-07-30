@@ -127,7 +127,6 @@ const {
 	saveState,
 	restoreState,
 	debouncedSaveState,
-	isStateTooLargeForQuery,
 } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
 const showResults = ref(damageSources.value.some(source => source.anythingFilled.value));
@@ -138,24 +137,6 @@ if (!showResults.value) {
 			showResults.value = true;
 		}
 	}, { immediate: true });
-}
-
-const hasCopiedShareLink = ref(false);
-const shareTextPopover = useTemplateRef('shareTextPopover');
-
-function copyShareLink() {
-	hasCopiedShareLink.value = true;
-	saveState();
-	navigator.clipboard.writeText(location.href);
-}
-
-function showSharePopover() {
-	shareTextPopover.value?.showPopover();
-}
-
-function hideSharePopover() {
-	hasCopiedShareLink.value = false;
-	shareTextPopover.value?.hidePopover();
 }
 
 function saveStateOnVisibilitychange() {
@@ -174,24 +155,6 @@ onBeforeUnmount(() => {
 
 <template>
 	<main id="index">
-		<button
-			id="share-configuration"
-			class="pretend-ui-btn"
-			@click="copyShareLink"
-			@mouseenter="showSharePopover"
-			@focus="showSharePopover"
-			@mouseleave="hideSharePopover"
-			@blur="hideSharePopover"
-		>
-			share
-			<div ref="shareTextPopover" popover="manual">
-				{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
-				<p v-show="isStateTooLargeForQuery" class="alert warning">
-					configuration too large for url, some will data will be trimmed
-					<Icon class="i-ph:warning-light" />
-				</p>
-			</div>
-		</button>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
 		<section id="results">
 			<h2 id="results-header">
@@ -218,26 +181,6 @@ onBeforeUnmount(() => {
 	#__nuxt {
 		> main#index {
 			--at-apply: 'relative';
-
-			> #share-configuration {
-				--at-apply: 'px-2 py-0.5 absolute end-0 top-4.5';
-				anchor-name: --share-configuration;
-
-				> [popover] {
-					--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-btn-border-clr]';
-					position-anchor: --share-configuration;
-					inset-block-start: calc(anchor(end) + 0.25rem);
-					inset-inline-end: calc(anchor(end));
-
-					> .alert {
-						--at-apply: 'py-1 text-sm mb-1';
-
-						&::after {
-							--at-apply: '-mt-1';
-						}
-					}
-				}
-			}
 
 			> label {
 				--at-apply: 'absolute';

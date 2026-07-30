@@ -70,6 +70,24 @@ function closeMenu() {
 		menuCloseBtn.value?.removeAttribute('data-open');
 	}, { once: true });
 }
+
+const hasCopiedShareLink = ref(false);
+const shareTextPopover = useTemplateRef('shareTextPopover');
+
+function copyShareLink() {
+	hasCopiedShareLink.value = true;
+	saveState();
+	navigator.clipboard.writeText(location.href);
+}
+
+function showSharePopover() {
+	shareTextPopover.value?.showPopover();
+}
+
+function hideSharePopover() {
+	hasCopiedShareLink.value = false;
+	shareTextPopover.value?.hidePopover();
+}
 </script>
 
 <template>
@@ -97,6 +115,26 @@ function closeMenu() {
 				<button id="menu-close-btn" ref="menuCloseBtn" title="zamknij menu" @click="closeMenu">
 					<span>zamknij menu</span>
 					<Icon class="i-ph:x-bold" />
+				</button>
+				<button
+					v-show="$route.name === 'index'"
+					id="share-configuration"
+					class="pretend-ui-btn"
+					@click="copyShareLink"
+					@mouseenter="showSharePopover"
+					@focus="showSharePopover"
+					@mouseleave="hideSharePopover"
+					@blur="hideSharePopover"
+				>
+					share
+					<div ref="shareTextPopover" popover="manual">
+						{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
+						<!-- <p v-show="isStateTooLargeForQuery" class="alert warning"> -->
+						<p class="alert warning">
+							configuration too large for url, some data will be trimmed
+							<Icon class="i-ph:warning-light" />
+						</p>
+					</div>
 				</button>
 				<ul>
 					<li>
@@ -211,6 +249,22 @@ function closeMenu() {
 			}
 		}
 
+		#share-configuration {
+			--at-apply: 'px-2 py-0.5';
+			anchor-name: --share-configuration;
+
+			> [popover] {
+				--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-btn-border-clr]';
+				position-anchor: --share-configuration;
+				justify-self: anchor-center;
+				inset-block-start: calc(anchor(end) + 0.25rem);
+
+				> .alert {
+					--at-apply: 'py-1 text-sm mb-1';
+				}
+			}
+		}
+
 		> header {
 			--at-apply: 'flex b-b b-neutral-500 grid grid-cols-subgrid py-[--header-py]';
 			grid-column: page;
@@ -220,7 +274,7 @@ function closeMenu() {
 				grid-column: content-start / content-end;
 
 				> nav {
-					--at-apply: 'fixed of-x-hidden of-y-auto inset-y-0 inset-e-0 z-10 flex grow translate-x-full flex-col items-end bg-(--mauve-bg) transition-[translate,box-shadow] max-inline-[80vw] min-inline-60 lg:static lg:translate-x-0 lg:py-0 lg:pe-0 lg:shadow-none lg:transition-shadow';
+					--at-apply: 'fixed of-x-hidden of-y-auto inset-y-0 inset-e-0 z-10 flex grow translate-x-full flex-col items-end bg-(--mauve-bg) transition-[translate,box-shadow] max-inline-[80vw] min-inline-60 lg:static lg:translate-x-0 lg:py-0 lg:pe-0 lg:shadow-none lg:transition-shadow lg:flex-row lg:justify-end lg:items-center gap-3';
 
 					> ul {
 						--at-apply: 'flex gap-5 font-500';

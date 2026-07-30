@@ -486,7 +486,7 @@ const isDisplayingTargets = ref(false);
 		}
 
 		.switch-group {
-			--at-apply: 'hidden absolute -translate-y-1/2 top-3.5 start-0';
+			--at-apply: 'hidden absolute -translate-y-1/2 top-3.5 start-0 px-2 py-0.5';
 
 			@media (width < 1079px) {
 				& {
