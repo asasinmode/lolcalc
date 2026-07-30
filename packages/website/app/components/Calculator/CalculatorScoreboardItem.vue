@@ -196,6 +196,7 @@ onMounted(() => {
 	emit('mounted');
 });
 
+const headerEl = useTemplateRef('header');
 const effectsEl = useTemplateRef('effects');
 const effectsListEl = useTemplateRef('effectsList');
 const abiltiesEl = useTemplateRef('abilities');
@@ -207,6 +208,7 @@ const extrasEl = useTemplateRef('extras');
 function doubleClickToggle(event: MouseEvent) {
 	if ([
 		event.currentTarget,
+		headerEl.value,
 		detailsContainer.value,
 		effectsEl.value,
 		effectsListEl.value,
@@ -984,225 +986,228 @@ defineExpose({ el });
 		<h3>
 			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}
 		</h3>
-		<button
-			:title="`${iconButtonsShowText ? '' : 'move up, '}alt+click to duplicate above`"
-			class="pretend-ui-btn move-up"
-			:disabled="moveUpDisabled"
-			draggable="true"
-			@click="moveUp"
-			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
-		>
-			<span>move up <span>(alt+click to duplicate above)</span></span>
-			<Icon class="i-ph:arrow-up" />
-		</button>
-		<button
-			:title="`${iconButtonsShowText ? '' : 'move down, '}alt+click to duplicate below`"
-			class="pretend-ui-btn move-down"
-			:disabled="!canMoveDown"
-			draggable="true"
-			@click="moveDown"
-			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
-		>
-			<span>move down <span>(alt+click to duplicate below)</span></span>
-			<Icon class="i-ph:arrow-down" />
-		</button>
-		<button
-			:title="`${iconButtonsShowText ? '' : `move to ${otherGroup}, `}alt+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
-			class="pretend-ui-btn move-group"
-			draggable="true"
-			:disabled="changeGroupDisabled"
-			@click="changeGroup"
-			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
-		>
-			<span>move {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }} <span>(alt+click to duplicate {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }})</span></span>
-			<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
-		</button>
-		<button
-			:title="`${iconButtonsShowText ? '' : 'duplicate, '}shift+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
-			class="pretend-ui-btn duplicate"
-			:disabled="changeGroupDisabled"
-			draggable="true"
-			@click="duplicate"
-			@dragstart="$emit('dragstart', $event, true)"
-		>
-			<span>duplicate<span>(shift+click to duplicate {{ iconButtonsShowText ? otherGroup : `into ${otherGroup}` }})</span></span>
-			<Icon class="i-ph:copy" />
-		</button>
-		<div class="select-champion">
+		<div ref="header" class="header">
 			<button
-				title="select champion"
-				@click="selectChampion(value.listedChampion)"
+				:title="`${iconButtonsShowText ? '' : 'move up, '}alt+click to duplicate above`"
+				class="pretend-ui-btn move-up"
+				:disabled="moveUpDisabled"
+				draggable="true"
+				@click="moveUp"
 				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 			>
-				<span>
-					{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
-				</span>
-				<img
-					v-if="value.listedChampion.value"
-					:src="championImage(value.listedChampion.value.image, value.listedChampion.value.id)"
-					loading="lazy"
-					:width="imageSizes.champion"
-					:height="imageSizes.champion"
-					style="--focus-brightness: 1.2"
+				<span>move up <span>(alt+click to duplicate above)</span></span>
+				<Icon class="i-ph:arrow-up" />
+			</button>
+			<button
+				:title="`${iconButtonsShowText ? '' : 'move down, '}alt+click to duplicate below`"
+				class="pretend-ui-btn move-down"
+				:disabled="!canMoveDown"
+				draggable="true"
+				@click="moveDown"
+				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
+			>
+				<span>move down <span>(alt+click to duplicate below)</span></span>
+				<Icon class="i-ph:arrow-down" />
+			</button>
+			<button
+				:title="`${iconButtonsShowText ? '' : `move to ${otherGroup}, `}alt+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
+				class="pretend-ui-btn move-group"
+				draggable="true"
+				:disabled="changeGroupDisabled"
+				@click="changeGroup"
+				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
+			>
+				<span>move {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }} <span>(alt+click to duplicate {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }})</span></span>
+				<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
+			</button>
+			<button
+				:title="`${iconButtonsShowText ? '' : 'duplicate, '}shift+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
+				class="pretend-ui-btn duplicate"
+				:disabled="changeGroupDisabled"
+				draggable="true"
+				@click="duplicate"
+				@dragstart="$emit('dragstart', $event, true)"
+			>
+				<span>duplicate<span>(shift+click to duplicate {{ iconButtonsShowText ? otherGroup : `into ${otherGroup}` }})</span></span>
+				<Icon class="i-ph:copy" />
+			</button>
+			<div class="select-champion">
+				<button
+					title="select champion"
+					@click="selectChampion(value.listedChampion)"
+					@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 				>
+					<span>
+						{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
+					</span>
+					<img
+						v-if="value.listedChampion.value"
+						:src="championImage(value.listedChampion.value.image, value.listedChampion.value.id)"
+						loading="lazy"
+						:width="imageSizes.champion"
+						:height="imageSizes.champion"
+						style="--focus-brightness: 1.2"
+					>
+					<img
+						v-else
+						:src="imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')"
+						width="256"
+						height="256"
+						style="--focus-brightness: 1.5"
+					>
+				</button>
+				<VSelect
+					:id="`${idPrefix}-level-select`"
+					label="level"
+					:model-value="value.level.value as unknown as string"
+					class="select-champion-level"
+					:options="Array.from({ length: value.maxLevel.value }, (_, i) => [i + 1, `&nbsp;${i + 1}&nbsp;`])"
+					@update:model-value="value.level.value = Number.parseInt($event!)"
+				>
+					<span>{{ value.level.value }}</span>
+				</VSelect>
+			</div>
+			<button
+				:title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'"
+				class="select-runes other-ui-btn"
+				@click="selectRunes(value.runes)"
+			>
+				<span>{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
+				<span
+					v-show="value.runesInvalid.value"
+					class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5"
+				>
+					<span class="sr-only">(invalid)</span>
+					<Icon class="i-ph:exclamation-mark-bold size-2.5" />
+				</span>
+				<template v-if="runePathPrimary">
+					<span class="sr-only">
+						primary: {{ runePathPrimary.pathName }} - {{ runePathPrimary.name }}
+					</span>
+					<img
+						:src="runePathPrimary.icon"
+						aria-hidden="true"
+						width="32"
+						height="32"
+						loading="lazy"
+					>
+				</template>
 				<img
 					v-else
-					:src="imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')"
-					width="256"
-					height="256"
-					style="--focus-brightness: 1.5"
-				>
-			</button>
-			<VSelect
-				:id="`${idPrefix}-level-select`"
-				label="level"
-				:model-value="value.level.value as unknown as string"
-				class="select-champion-level"
-				:options="Array.from({ length: value.maxLevel.value }, (_, i) => [i + 1, `&nbsp;${i + 1}&nbsp;`])"
-				@update:model-value="value.level.value = Number.parseInt($event!)"
-			>
-				<span>{{ value.level.value }}</span>
-			</VSelect>
-		</div>
-		<button
-			:title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'"
-			class="select-runes other-ui-btn"
-			@click="selectRunes(value.runes)"
-		>
-			<span>{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
-			<span
-				v-show="value.runesInvalid.value"
-				class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5"
-			>
-				<span class="sr-only">(invalid)</span>
-				<Icon class="i-ph:exclamation-mark-bold size-2.5" />
-			</span>
-			<template v-if="runePathPrimary">
-				<span class="sr-only">
-					primary: {{ runePathPrimary.pathName }} - {{ runePathPrimary.name }}
-				</span>
-				<img
-					:src="runePathPrimary.icon"
+					:src="ICON_RUNE_SRC"
 					aria-hidden="true"
 					width="32"
 					height="32"
 					loading="lazy"
 				>
-			</template>
-			<img
-				v-else
-				:src="ICON_RUNE_SRC"
-				aria-hidden="true"
-				width="32"
-				height="32"
-				loading="lazy"
-			>
-			<template v-if="runePathSecondary">
-				<span class="sr-only">
-					secondary: {{ runePathSecondary.name }}
-				</span>
-				<span
-					:style="`background-color: ${runePathSecondary.iconColor}; mask: url(${runePathSecondary.icon}) no-repeat center;`"
-					aria-hidden="true"
-					class="secondary-path-icon"
-				/>
-			</template>
-		</button>
-		<button class="select-items other-ui-btn" @click="selectItems(value)">
-			items
-			<img
-				v-bind="ICON_GOLD"
-				aria-hidden="true"
-				loading="lazy"
-			>
-		</button>
-		<ul
-			:data-role-quest="value.roleQuest.value"
-			@click="selectItems(value)"
-			@dragenter="$emit('itemListDragenter', $event)"
-			@dragover="$emit('itemListDragover', $event)"
-			@dragleave="$emit('itemListDragleave', $event)"
-			@drop="$emit('itemListDrop', $event, undefined)"
-		>
-			<li
-				v-for="i in 7"
-				:key="i"
-				@drop.stop="$emit('itemListDrop', $event, i - 1)"
-			>
-				<component
-					:is="value.items.value[i - 1] ? 'button' : 'div'"
-					:draggable="value.items.value[i - 1] ? 'true' : undefined"
-					:class="{
-						active: value.coComputed.itemImage.value[i - 1]?.isActive,
-						masterwork: isMasterworkSlot(value, i - 1),
-					}"
-					:data-active="typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object'
-						? (0
-							^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0)
-							^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 2 : 0)
-						)
-						: undefined"
-					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
-					@click.right="removeItem($event, i - 1)"
-					@dragstart="startItemDrag($event, i - 1)"
-				>
-					<span>{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
-					<img
-						v-if="value.items.value[i - 1]"
-						:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${value.items.value[i - 1]!.image}`"
-						width="64"
-						height="64"
-						loading="lazy"
-					>
-					<span v-if="value.coComputed.itemImage.value[i - 1]?.text">
-						<span>{{ value.computed.itemSpecifics.value[i - 1]!.specific.imgTextLabel }}:</span>
-						{{ value.coComputed.itemImage.value[i - 1]!.text }}
+				<template v-if="runePathSecondary">
+					<span class="sr-only">
+						secondary: {{ runePathSecondary.name }}
 					</span>
-				</component>
-			</li>
-		</ul>
-		<article ref="itemHoverTooltip" popover="manual" class="hover-tooltip champion-item">
-			<LolItemDescription
-				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
-				source="Inventory"
-				show-masterwork
-				hover-tooltip
-			/>
-		</article>
-		<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">
-			restore
-		</button>
-		<button
-			:title="`${iconButtonsShowText ? '' : `${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}`}${removeButtonAttrs.subtext ?? ''}`"
-			class="pretend-ui-btn remove"
-			:disabled="removeButtonAttrs.disabled"
-			@click="removeButtonAttrs.emit"
-		>
-			<span>{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }})</span></span>
-			<Icon class="i-ph:trash size-5" />
-		</button>
-		<VSelect
-			:id="`${idPrefix}-manipulate`"
-			:model-value="manipulateValue"
-			:options="Object.entries(manipulateOptions).map(([optionKey, { text, isDisabled }]) => [optionKey, text, toValue(isDisabled)])"
-			class="manipulate"
-			label="manipulate"
-			@update:model-value="manipulateFromSelect"
-		>
-			<span class="pretend-ui-btn" title="manipulate">
-				<Icon class="i-ph:dots-three-bold" />
-			</span>
-		</VSelect>
-		<button
-			:title="iconButtonsShowText ? undefined : (isExpanded ? 'collapse' : 'expand')"
-			class="pretend-ui-btn expand-collapse"
-			:aria-controls="`${idPrefix}-details`"
-			:aria-expanded="isExpanded"
-			@click="toggleExpanded"
-		>
-			<span>{{ isExpanded ? 'collapse' : 'expand' }}</span>
-			<Icon class="i-ph:caret-down size-5" />
-		</button>
+					<span
+						:style="`background-color: ${runePathSecondary.iconColor}; mask: url(${runePathSecondary.icon}) no-repeat center;`"
+						aria-hidden="true"
+						class="secondary-path-icon"
+					/>
+				</template>
+			</button>
+			<button class="select-items other-ui-btn" @click="selectItems(value)">
+				items
+				<img
+					v-bind="ICON_GOLD"
+					aria-hidden="true"
+					loading="lazy"
+				>
+			</button>
+			<ul
+				:data-role-quest="value.roleQuest.value"
+				class="items"
+				@click="selectItems(value)"
+				@dragenter="$emit('itemListDragenter', $event)"
+				@dragover="$emit('itemListDragover', $event)"
+				@dragleave="$emit('itemListDragleave', $event)"
+				@drop="$emit('itemListDrop', $event, undefined)"
+			>
+				<li
+					v-for="i in 7"
+					:key="i"
+					@drop.stop="$emit('itemListDrop', $event, i - 1)"
+				>
+					<component
+						:is="value.items.value[i - 1] ? 'button' : 'div'"
+						:draggable="value.items.value[i - 1] ? 'true' : undefined"
+						:class="{
+							active: value.coComputed.itemImage.value[i - 1]?.isActive,
+							masterwork: isMasterworkSlot(value, i - 1),
+						}"
+						:data-active="typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object'
+							? (0
+								^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0)
+								^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 2 : 0)
+							)
+							: undefined"
+						@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
+						@click.right="removeItem($event, i - 1)"
+						@dragstart="startItemDrag($event, i - 1)"
+					>
+						<span>{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
+						<img
+							v-if="value.items.value[i - 1]"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${value.items.value[i - 1]!.image}`"
+							width="64"
+							height="64"
+							loading="lazy"
+						>
+						<span v-if="value.coComputed.itemImage.value[i - 1]?.text">
+							<span>{{ value.computed.itemSpecifics.value[i - 1]!.specific.imgTextLabel }}:</span>
+							{{ value.coComputed.itemImage.value[i - 1]!.text }}
+						</span>
+					</component>
+				</li>
+			</ul>
+			<article ref="itemHoverTooltip" popover="manual" class="hover-tooltip champion-item">
+				<LolItemDescription
+					:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
+					source="Inventory"
+					show-masterwork
+					hover-tooltip
+				/>
+			</article>
+			<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">
+				restore
+			</button>
+			<button
+				:title="`${iconButtonsShowText ? '' : `${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}`}${removeButtonAttrs.subtext ?? ''}`"
+				class="pretend-ui-btn remove"
+				:disabled="removeButtonAttrs.disabled"
+				@click="removeButtonAttrs.emit"
+			>
+				<span>{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }})</span></span>
+				<Icon class="i-ph:trash size-5" />
+			</button>
+			<VSelect
+				:id="`${idPrefix}-manipulate`"
+				:model-value="manipulateValue"
+				:options="Object.entries(manipulateOptions).map(([optionKey, { text, isDisabled }]) => [optionKey, text, toValue(isDisabled)])"
+				class="manipulate"
+				label="manipulate"
+				@update:model-value="manipulateFromSelect"
+			>
+				<span class="pretend-ui-btn" title="manipulate">
+					<Icon class="i-ph:dots-three-bold" />
+				</span>
+			</VSelect>
+			<button
+				:title="iconButtonsShowText ? undefined : (isExpanded ? 'collapse' : 'expand')"
+				class="pretend-ui-btn expand-collapse"
+				:aria-controls="`${idPrefix}-details`"
+				:aria-expanded="isExpanded"
+				@click="toggleExpanded"
+			>
+				<span>{{ isExpanded ? 'collapse' : 'expand' }}</span>
+				<Icon class="i-ph:caret-down size-5" />
+			</button>
+		</div>
 		<details
 			:id="`${idPrefix}-details`"
 			ref="details"
@@ -1581,14 +1586,14 @@ defineExpose({ el });
 	}
 
 	[data-scoreboard-item] {
-		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps] box-content';
+		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--header-h)_minmax(0,0fr)]';
 
 		--py: calc(3 * var(--spacing));
 		--select-champion-size: calc(14 * var(--spacing));
+		--header-h: calc(var(--select-champion-size) + 2 * var(--py));
 		--select-runes-size: calc(8 * var(--spacing));
 		--select-items-effects-size: calc(8 * var(--spacing));
 		--manipulate-btn-size: calc(6 * var(--spacing));
-		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
 		--scoreboard-item-bg: linear-gradient(
 			var(--bg-direction, 90deg),
@@ -1621,26 +1626,36 @@ defineExpose({ el });
 		--gap-x: calc(4 * var(--spacing));
 		--item-pe: calc(0.5 * var(--spacing));
 
-		grid-template-areas:
-			'move-up		move-group	select-champion	select-runes	select-items	items			clear'
-			'move-down	duplicate		select-champion	select-runes	select-items	items			expand'
-			'expanded		expanded		expanded				expanded			expanded			expanded	expanded';
-		grid-template-columns: repeat(5, max-content) 1fr max-content;
 		transition-duration: var(--transition-duration);
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
 		anchor-scope: all;
 		background: var(--scoreboard-item-bg);
 
-		@media (width < 1194px) {
-			& {
-				grid-template-areas:
-					'select-champion	select-runes	select-items	items			manipulate'
-					'select-champion	select-runes	select-items	items			expand'
-					'expanded					expanded			expanded			expanded	expanded';
-				grid-template-columns: repeat(3, max-content) 1fr max-content;
+		.header {
+			--at-apply: 'grid grid-rows-[repeat(2,calc(var(--select-champion-size)/2))] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps]';
+			grid-template-areas:
+				'move-up		move-group	select-champion	select-runes	select-items	items			clear'
+				'move-down	duplicate		select-champion	select-runes	select-items	items			expand';
+			grid-template-columns: repeat(5, max-content) 1fr max-content;
+
+			@media (width < 1194px) {
+				& {
+					grid-template-areas:
+						'select-champion	select-runes	select-items	items			manipulate'
+						'select-champion	select-runes	select-items	items			expand';
+					grid-template-columns: repeat(3, max-content) 1fr max-content;
+				}
 			}
 		}
+
+		/* @media (width < 1680px) and (height < 660px) { */
+		/* 	&::before { */
+		/* 		--at-apply: 'content-empty sticky top-0 inset-x-0 col-span-full row-start-1 row-span-2 -ms-[--scoreboard-item-ps] -me-[--scoreboard-item-pe] -mbs-[--py] pointer-events-none z-9'; */
+		/* 		background: var(--scoreboard-item-bg), var(--mauve-bg); */
+		/* 		block-size: calc(2 * var(--py) + var(--select-champion-size)); */
+		/* 	} */
+		/* } */
 
 		&.highlighted {
 			--scoreboard-item-bg: linear-gradient(
@@ -1837,7 +1852,7 @@ defineExpose({ el });
 			}
 		}
 
-		> ul {
+		.items {
 			--at-apply: 'flex h-[--item-size] self-center relative me-[--computed-me] ms-[--ms] w-min';
 			grid-area: items;
 			anchor-name: --scoreboard-item-items;
@@ -1998,8 +2013,15 @@ defineExpose({ el });
 		/* } */
 
 		> details {
-			--at-apply: 'relative';
-			grid-area: expanded;
+			--at-apply: 'relative ps-[--scoreboard-item-ps] pe-[--scoreboard-item-pe] pbe-0 transition-padding';
+			transition-duration: var(--transition-duration);
+			transition-timing-function: ease-in-out;
+
+			&[open] {
+				& {
+					--at-apply: 'pbe-[--py]';
+				}
+			}
 
 			&::details-content {
 				--at-apply: 'pt-4 -mt-6 grid grid-cols-[min-content_min-content_1fr] grid-rows-[auto_min-content_min-content_1fr] auto-rows-min';
@@ -2633,9 +2655,9 @@ defineExpose({ el });
 		}
 
 		&:has(> details[open]) {
-			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
+			--at-apply: 'grid-rows-[var(--header-h)_minmax(0,_1fr)]';
 
-			> button:nth-last-of-type(1) {
+			.expand-collapse {
 				--at-apply: 'rotate-180';
 			}
 
@@ -2737,19 +2759,19 @@ defineExpose({ el });
 	}
 
 	[data-mirrored] [data-scoreboard-item][data-group='sources'] {
-		grid-template-columns: max-content 1fr repeat(5, max-content);
-		grid-template-areas:
-			'clear			items				select-items		select-runes	select-champion move-group	move-up'
-			'expand			items				select-items		select-runes	select-champion	duplicate		move-down'
-			'expanded		expanded		expanded				expanded			expanded				expanded		expanded';
+		.header {
+			grid-template-columns: max-content 1fr repeat(5, max-content);
+			grid-template-areas:
+				'clear			items				select-items		select-runes	select-champion move-group	move-up'
+				'expand			items				select-items		select-runes	select-champion	duplicate		move-down';
 
-		@media (width < 1194px) {
-			& {
-				grid-template-areas:
-					'manipulate items			select-items	select-runes	select-champion'
-					'expand			items			select-items	select-runes	select-champion'
-					'expanded		expanded	expanded			expanded			expanded';
-				grid-template-columns: max-content 1fr repeat(3, max-content);
+			@media (width < 1194px) {
+				& {
+					grid-template-areas:
+						'manipulate items			select-items	select-runes	select-champion'
+						'expand			items			select-items	select-runes	select-champion';
+					grid-template-columns: max-content 1fr repeat(3, max-content);
+				}
 			}
 		}
 
@@ -2758,7 +2780,7 @@ defineExpose({ el });
 			--at-apply: '-me-px ms-0 z-1';
 		}
 
-		> .select-champion {
+		.select-champion {
 			--at-apply: 'ms-[--me] me-[--ms]';
 
 			@media (width < 1194px) {
@@ -2772,7 +2794,7 @@ defineExpose({ el });
 			}
 		}
 
-		> .select-runes {
+		.select-runes {
 			.secondary-path-icon {
 				--at-apply: 'end-auto start-[--secondary-path-inset-end]';
 			}
@@ -2782,11 +2804,11 @@ defineExpose({ el });
 			}
 		}
 
-		> .select-items {
+		.select-items {
 			--at-apply: 'me-[--ms] ms-0';
 		}
 
-		> ul {
+		.items {
 			--at-apply: 'ms-[--computed-me] me-[--ms] justify-self-end flex-row-reverse';
 
 			> li {
