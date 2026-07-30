@@ -460,8 +460,8 @@ function setLocalMirrorLayout() {
 		--extra-item-min-w: calc(60 * var(--spacing));
 		--extra-item-max-w: calc(64 * var(--spacing));
 		--extra-cols: 3;
-		--scoreboard-item-pe: calc(4 * var(--spacing));
-		--scoreboard-item-ps: calc(4 * var(--spacing));
+		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
+		--scoreboard-item-ps: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-b-w: 0.25rem;
 		--scoreboard-item-max-w: calc(
 			var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) +
@@ -481,7 +481,7 @@ function setLocalMirrorLayout() {
 		}
 
 		> div {
-			--at-apply: 'mx-auto gap-x-10 max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
+			--at-apply: 'mx-auto gap-x-[--fluid-f1092-18-40-t1114] max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
 
 			@media (width < 1680px) {
 				& {

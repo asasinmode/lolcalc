@@ -1581,12 +1581,20 @@ defineExpose({ el });
 	}
 
 	[data-scoreboard-item] {
-		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps] box-content';
+		--at-apply: 'relative grid grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps] box-content';
 
 		--py: calc(3 * var(--spacing));
-		--select-champion-size: calc(var(--spacing) * 14);
+		--select-champion-size: calc(14 * var(--spacing));
+		--select-runes-size: calc(8 * var(--spacing));
+		--select-items-effects-size: calc(8 * var(--spacing));
+		--manipulate-btn-size: calc(6 * var(--spacing));
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
+		--scoreboard-item-bg: linear-gradient(
+			var(--bg-direction, 90deg),
+			oklch(from var(--damage-source-clr) l c h / 0.1),
+			oklch(from var(--damage-source-clr) l c h / 0.1)
+		);
 
 		--runes-stats-img-w: calc(5 * var(--spacing));
 		--runes-stats-text-w: calc(20 * var(--spacing));
@@ -1622,11 +1630,7 @@ defineExpose({ el });
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
 		anchor-scope: all;
-		background-image: linear-gradient(
-			var(--bg-direction, 90deg),
-			oklch(from var(--damage-source-clr) l c h / 0.1),
-			oklch(from var(--damage-source-clr) l c h / 0.1)
-		);
+		background: var(--scoreboard-item-bg);
 
 		@media (width < 1194px) {
 			& {
@@ -1639,25 +1643,13 @@ defineExpose({ el });
 		}
 
 		&.highlighted {
-			background-image: linear-gradient(
+			--scoreboard-item-bg: linear-gradient(
 				var(--bg-direction, 90deg),
 				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.35) 0%,
 				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.25) 12.5%,
 				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.2) 20%,
 				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.15) 100%
 			);
-		}
-
-		&:has(> details[open]) {
-			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
-
-			> button:nth-last-of-type(1) {
-				--at-apply: 'rotate-180';
-			}
-
-			[data-icon-btns-show-text] & > button:nth-last-of-type(1) {
-				--at-apply: 'rotate-0';
-			}
 		}
 
 		> h3 {
@@ -1723,7 +1715,7 @@ defineExpose({ el });
 		.remove,
 		.expand-collapse,
 		.manipulate .pretend-ui-btn {
-			--at-apply: 'size-6 grid-center';
+			--at-apply: 'size-[--manipulate-btn-size] grid-center';
 
 			[data-icon-btns-show-text] & {
 				--at-apply: 'w-auto px-1.5';
@@ -1813,7 +1805,7 @@ defineExpose({ el });
 		}
 
 		.select-runes {
-			--at-apply: 'rounded-full grid-center size-8 relative self-center';
+			--at-apply: 'rounded-full grid-center size-[--select-runes-size] relative self-center';
 			--secondary-path-icon-size: calc(3 * var(--spacing));
 			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
 			grid-area: select-runes;
@@ -2633,10 +2625,22 @@ defineExpose({ el });
 
 		.select-items,
 		.effects > button {
-			--at-apply: 'rounded-full h-8 ps-2.5 pe-2 w-max whitespace-nowrap';
+			--at-apply: 'rounded-full h-[--select-items-effects-size] ps-2.5 pe-2 w-max whitespace-nowrap';
 
 			img {
 				--at-apply: 'inline-block align-middle -mt-0.5';
+			}
+		}
+
+		&:has(> details[open]) {
+			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
+
+			> button:nth-last-of-type(1) {
+				--at-apply: 'rotate-180';
+			}
+
+			[data-icon-btns-show-text] & > button:nth-last-of-type(1) {
+				--at-apply: 'rotate-0';
 			}
 		}
 	}
