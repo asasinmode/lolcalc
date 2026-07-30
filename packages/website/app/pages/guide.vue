@@ -19,6 +19,14 @@
 		</dl>
 		<p>Check out the TODO tutorial library and read on for some of the features described in-depth</p>
 
+		<h2>
+			faq
+		</h2>
+		<dl>
+			<dt>how can I save multiple configurations?</dt>
+			<dd>At the moment the recommended way is to, after setting it up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a></dd>
+		</dl>
+
 		<h2 id="guide-examples">
 			examples
 		</h2>
