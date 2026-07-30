@@ -149,6 +149,9 @@ function undoRemove() {
 }
 
 function removeAndFocusNext() {
+	if (!el.value) {
+		return;
+	}
 	const nextElement = el.value!.nextElementSibling;
 	if (isFirstAndOnly.value) {
 		emit('clear');
