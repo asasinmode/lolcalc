@@ -1856,7 +1856,7 @@ defineExpose({ el });
 			--computed-me: var(--me);
 			--ms: calc(5 * var(--spacing));
 
-			@media (width < 1680px) {
+			@media (width < 1680px) and (width >= 1079px) {
 				& {
 					--me: calc(2 * var(--spacing) - 1px);
 					--ms: calc(2.5 * var(--spacing));
@@ -2069,7 +2069,7 @@ defineExpose({ el });
 			.stats {
 				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid inline-min';
 
-				@media (width < 1680px) {
+				@media (width < 1680px) and (width >= 1079px) {
 					& {
 						--at-apply: 'grid-cols-[max-content]';
 					}
@@ -2212,7 +2212,7 @@ defineExpose({ el });
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
 
-				@media (width < 1680px) {
+				@media (width < 1680px) and (width >= 1079px) {
 					& {
 						--at-apply: 'block-max';
 					}
@@ -2388,18 +2388,24 @@ defineExpose({ el });
 			}
 
 			.health-ability-resource {
-				--at-apply: 'pbs-1.5 pbe-2 ms-[--gap-x] grid grid-rows-subgrid grid-cols-1 gap-y-px translate-y-[0.5px] -mbs-px box-content';
+				--at-apply: 'ms-[--gap-x] grid grid-rows-subgrid grid-cols-1 gap-y-px translate-y-[0.5px] -mbs-px box-content';
 				grid-area: resources;
 
 				@media (width < 1680px) {
 					& {
-						--at-apply: 'grid-rows-2 ms-0 inline-full max-inline-[calc(2*var(--runes-stats-section-w)+1px)] pbe-2.75 justify-self-center';
+						--at-apply: 'grid-rows-2 ms-0 inline-full max-inline-[calc(2*var(--runes-stats-section-w)+1px)] justify-self-center';
+					}
+				}
+
+				@media (width < 1680px) and (width >= 1079px) {
+					& {
+						--at-apply: 'pbs-1.5 pbe-2.75';
 					}
 				}
 
 				@media (width < 1079px) {
 					& {
-						--at-apply: 'ms-[--gap-x]';
+						--at-apply: 'grid-rows-subgrid ms-[--gap-x]';
 					}
 				}
 
@@ -2434,6 +2440,7 @@ defineExpose({ el });
 				}
 
 				.current-health {
+					--at-apply: 'self-end';
 					--fill-bg: theme('colors.green.500');
 				}
 
@@ -2483,7 +2490,7 @@ defineExpose({ el });
 			}
 
 			.role-quest-dragons {
-				--at-apply: 'flex justify-between gap-[--gap-x] ps-[--gap-x]';
+				--at-apply: 'flex justify-between gap-[--gap-x] ps-[--gap-x] pbs-2';
 				grid-area: role-quest-dragons;
 
 				@media (width < 1680px) {
