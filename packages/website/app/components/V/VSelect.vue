@@ -2,7 +2,7 @@
 const props = defineProps<{
 	id: string;
 	label: string;
-	options: [value: T | number, text: string | number][];
+	options: [value: T | number, text: MaybeRef<string | number>, isDisabled?: boolean][];
 	name?: string;
 	clearable?: boolean;
 	required?: boolean;
@@ -36,7 +36,7 @@ function clear(event: MouseEvent) {
 			<option v-if="clearable" value="">
 				&lt;none&gt;
 			</option>
-			<option v-for="[optionValue, text] in options" :key="text" :value="optionValue">
+			<option v-for="[optionValue, text, isDisabled] in options" :key="optionValue" :value="optionValue" :disabled="isDisabled">
 				{{ text }}
 			</option>
 		</select>

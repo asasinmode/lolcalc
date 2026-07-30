@@ -16,6 +16,7 @@ import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable
 import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { toValue } from 'vue';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
@@ -908,8 +909,8 @@ onBeforeUnmount(() => {
 	abilityResourceBarCleanup();
 });
 
-const canMoveUp = computed(() => props.index !== 0);
-const canChangeGroup = computed(() => props.canRemove || props.value.anythingFilled.value);
+const moveUpDisabled = computed(() => props.index === 0);
+const changeGroupDisabled = computed(() => !props.canRemove && !props.value.anythingFilled.value);
 
 function moveUp() {
 	emit('move', props.index + (globalKeyModifiers.value.alt ? 0 : -1), globalKeyModifiers.value.alt);
@@ -923,22 +924,42 @@ function changeGroup() {
 	emit('changeGroup', globalKeyModifiers.value.alt);
 }
 
+function duplicate() {
+	emit('duplicate', globalKeyModifiers.value.shift);
+}
+
 const manipulateOptions = {
 	moveUp: {
 		text: 'move up',
-		isEnabled: canMoveUp,
+		isDisabled: moveUpDisabled,
 		action: moveUp,
 	},
 	moveDown: {
 		text: 'move down',
-		isEnabled: props.canMoveDown,
+		isDisabled: computed(() => !props.canMoveDown),
 		action: moveDown,
+	},
+	changeGroup: {
+		text: computed(() => `move to ${otherGroup.value}`),
+		isDisabled: changeGroupDisabled,
+		action: changeGroup,
+	},
+	duplicate: {
+		text: 'duplicate',
+		isDisabled: changeGroupDisabled,
+		action: duplicate,
+	},
+	remove: {
+		text: removeButtonAttrs.value.title,
+		isDisabled: computed(() => removeButtonAttrs.value.disabled),
+		action: removeButtonAttrs.value.emit,
 	},
 };
 const manipulateValue = ref<string>();
 
 function manipulateFromSelect(manipulateOption: string | undefined) {
-	console.log('doing', manipulateOption);
+	manipulateOptions[manipulateOption as keyof typeof manipulateOptions].action();
+	nextTick(() => manipulateValue.value = undefined);
 }
 
 defineExpose({ el });
@@ -963,7 +984,7 @@ defineExpose({ el });
 		<button
 			:title="`${iconButtonsShowText ? '' : 'move up, '}alt+click to duplicate above`"
 			class="pretend-ui-btn move-up"
-			:disabled="!canMoveUp"
+			:disabled="moveUpDisabled"
 			draggable="true"
 			@click="moveUp"
 			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
@@ -986,7 +1007,7 @@ defineExpose({ el });
 			:title="`${iconButtonsShowText ? '' : `move to ${otherGroup}, `}alt+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
 			class="pretend-ui-btn move-group"
 			draggable="true"
-			:disabled="!canChangeGroup"
+			:disabled="changeGroupDisabled"
 			@click="changeGroup"
 			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 		>
@@ -996,9 +1017,9 @@ defineExpose({ el });
 		<button
 			:title="`${iconButtonsShowText ? '' : 'duplicate, '}shift+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
 			class="pretend-ui-btn duplicate"
-			:disabled="!canRemove && !value.anythingFilled.value"
+			:disabled="changeGroupDisabled"
 			draggable="true"
-			@click="$emit('duplicate', globalKeyModifiers.shift)"
+			@click="duplicate"
 			@dragstart="$emit('dragstart', $event, true)"
 		>
 			<span>duplicate<span>(shift+click to duplicate {{ iconButtonsShowText ? otherGroup : `into ${otherGroup}` }})</span></span>
@@ -1160,7 +1181,7 @@ defineExpose({ el });
 		<VSelect
 			:id="`${idPrefix}-manipulate`"
 			:model-value="manipulateValue"
-			:options="Object.entries(manipulateOptions).map(([optionKey, { text }]) => [optionKey, text])"
+			:options="Object.entries(manipulateOptions).map(([optionKey, { text, isDisabled }]) => [optionKey, text, toValue(isDisabled)])"
 			class="manipulate"
 			label="manipulate"
 			@update:model-value="manipulateFromSelect"
