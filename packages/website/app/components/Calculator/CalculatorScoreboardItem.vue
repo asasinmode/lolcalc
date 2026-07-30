@@ -1649,13 +1649,12 @@ defineExpose({ el });
 			}
 		}
 
-		/* @media (width < 1680px) and (height < 660px) { */
-		/* 	&::before { */
-		/* 		--at-apply: 'content-empty sticky top-0 inset-x-0 col-span-full row-start-1 row-span-2 -ms-[--scoreboard-item-ps] -me-[--scoreboard-item-pe] -mbs-[--py] pointer-events-none z-9'; */
-		/* 		background: var(--scoreboard-item-bg), var(--mauve-bg); */
-		/* 		block-size: calc(2 * var(--py) + var(--select-champion-size)); */
-		/* 	} */
-		/* } */
+		@media (width < 1680px) and (height < 660px) and (height >= 280px) {
+			.header {
+				--at-apply: 'sticky inset-bs-0 z-10';
+				background: var(--scoreboard-item-bg), var(--mauve-bg);
+			}
+		}
 
 		&.highlighted {
 			--scoreboard-item-bg: linear-gradient(
