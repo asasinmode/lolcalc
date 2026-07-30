@@ -2635,7 +2635,7 @@ defineExpose({ el });
 			}
 
 			.extras {
-				--at-apply: 'col-span-full grid grid-cols-[repeat(var(--extra-cols),minmax(0,1fr))] auto-rows-min gap-x-[--extras-gap] gap-y-[calc(var(--extras-gap)-0.5*var(--spacing))] pt-3 inline-full';
+				--at-apply: 'col-span-full grid grid-cols-[repeat(auto-fit,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-x-[--extras-gap] gap-y-[calc(var(--extras-gap)-0.5*var(--spacing))] pt-3 inline-full';
 				anchor-name: --scoreboard-item-extras;
 
 				&:empty {
