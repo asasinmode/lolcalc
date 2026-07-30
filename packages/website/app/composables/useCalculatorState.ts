@@ -487,8 +487,6 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			}
 		}
 
-		expandedSections.value = resultSections.value.filter(section => section.id !== ResultSectionId.Stats).map(section => section.id);
-
 		const savedCustomTotalRows = params.get('tblCTtl');
 		if (savedCustomTotalRows?.length) {
 			for (const totalRow of savedCustomTotalRows.split('_')) {
