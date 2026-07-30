@@ -326,13 +326,12 @@ onMounted(() => {
 function setLocalMirrorLayout() {
 	localStorage.setItem('lolcalc-mirror-scoreboard-layout', mirrorLayout.value.toString());
 }
+
+const isDisplayingTargets = ref(false);
 </script>
 
 <template>
-	<section
-		id="scoreboard"
-		:data-mirrored="mirrorLayout || undefined"
-	>
+	<section id="scoreboard" :class="{ mirrored: mirrorLayout }">
 		<h2>
 			configuration scoreboard
 		</h2>
@@ -340,7 +339,10 @@ function setLocalMirrorLayout() {
 			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout">
 			mirror layout
 		</label>
-		<div>
+		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">
+			swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}
+		</button>
+		<div :class="{ 'displaying-targets': isDisplayingTargets }">
 			<h3>
 				damage sources
 			</h3>
@@ -460,6 +462,7 @@ function setLocalMirrorLayout() {
 		--extra-item-min-w: calc(60 * var(--spacing));
 		--extra-item-max-w: calc(64 * var(--spacing));
 		--extra-cols: 3;
+		--scoreboard-gap-x: var(--fluid-f1092-18-40-t1114);
 		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-ps: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-b-w: 0.25rem;
@@ -479,34 +482,21 @@ function setLocalMirrorLayout() {
 		}
 
 		> label {
-			--at-apply: 'whitespace-nowrap absolute top-0.5';
+			--at-apply: 'whitespace-nowrap absolute end-0 top-3.5 -translate-y-1/2';
+		}
 
-			&:nth-of-type(1) {
-				--at-apply: 'end-0';
+		.switch-group {
+			--at-apply: 'hidden absolute -translate-y-1/2 top-3.5 start-0';
+
+			@media (width < 1079px) {
+				& {
+					--at-apply: 'block';
+				}
 			}
 		}
 
 		> div {
-			--at-apply: 'mx-auto gap-x-[--fluid-f1092-18-40-t1114] max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
-
-			@media (width < 1680px) {
-				& {
-					--extra-cols: 2;
-					grid-template-columns: repeat(
-						2,
-						minmax(
-							calc(
-								var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
-									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
-							),
-							calc(
-								var(--extra-cols) * var(--extra-item-max-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
-									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
-							)
-						)
-					);
-				}
-			}
+			--at-apply: 'mx-auto gap-x-[--scoreboard-gap-x] max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
 
 			&::after {
 				--at-apply: 'bg-neutral-500 w-px content-empty start-1/2 top-2 bottom-0 absolute -translate-x-1/2';
@@ -620,6 +610,55 @@ function setLocalMirrorLayout() {
 
 				&:nth-last-child(2)::before {
 					--b-w: 1px;
+				}
+			}
+
+			@media (width < 1680px) {
+				& {
+					--extra-cols: 2;
+					grid-template-columns: repeat(
+						2,
+						minmax(
+							calc(
+								var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
+									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
+							),
+							calc(
+								var(--extra-cols) * var(--extra-item-max-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
+									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
+							)
+						)
+					);
+				}
+			}
+
+			@media (width < 1079px) {
+				& {
+					--at-apply: 'of-hidden inline-[200%] max-inline-full grid-cols-[repeat(2,100%)]';
+					--scoreboard-item-pe: calc(4 * var(--spacing));
+					--scoreboard-item-ps: calc(4 * var(--spacing));
+
+					> * {
+						--at-apply: 'translate-x-[calc(50%+0.5*var(--scoreboard-gap-x))]';
+					}
+
+					> ul:first-of-type {
+						--scoreboard-item-pe: calc(4 * var(--spacing) + var(--scoreboard-item-b-w));
+					}
+
+					> ul:last-of-type {
+						--scoreboard-item-ps: calc(4 * var(--spacing) + var(--scoreboard-item-b-w));
+					}
+
+					&.displaying-targets {
+						> * {
+							--at-apply: 'translate-x-[calc(-50%-0.5*var(--scoreboard-gap-x))]';
+						}
+					}
+				}
+
+				&::after {
+					--at-apply: 'hidden';
 				}
 			}
 		}

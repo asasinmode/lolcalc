@@ -2752,7 +2752,7 @@ defineExpose({ el });
 		}
 	}
 
-	[data-mirrored] [data-scoreboard-item][data-group='sources'] {
+	.mirrored [data-scoreboard-item][data-group='sources'] {
 		.header {
 			grid-template-columns: max-content 1fr repeat(5, max-content);
 			grid-template-areas:
@@ -2829,7 +2829,7 @@ defineExpose({ el });
 		}
 	}
 
-	[data-mirrored] [data-scoreboard-item][data-group='targets'] {
+	.mirrored [data-scoreboard-item][data-group='targets'] {
 		> details {
 			&::details-content {
 				--at-apply: 'grid-cols-[1fr_min-content_min-content]';
