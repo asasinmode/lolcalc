@@ -99,6 +99,7 @@ defineExpose({ el });
 			<div
 				v-if="computedDescription?.tooltipExtendedBelowLine"
 				v-show="globalKeyModifiers.shift"
+				class="game-description"
 				v-html="computedDescription.tooltipExtendedBelowLine"
 			/>
 			<dl v-show="globalKeyModifiers.shift && computedDescription?.extendedVariables">
@@ -155,15 +156,15 @@ defineExpose({ el });
 		}
 
 		> :where(:is(div, p).game-description) {
-			--at-apply: 'mt-0.5 b-t b-[--ui-btn-border-clr] pt-[--description-pt] leading-tight';
+			--at-apply: 'mbs-0.5 b-t b-[--ui-btn-border-clr] pt-[--description-pt] leading-tight';
 		}
 
 		> p.alert {
-			--at-apply: 'mt-[--unknown-alert-mt]';
+			--at-apply: 'mbs-[--unknown-alert-mt]';
 		}
 
 		> footer {
-			--at-apply: 'b-t b-[--ui-btn-border-clr] mt-[--footer-mt] pt-[--footer-pt]';
+			--at-apply: 'b-t b-[--ui-btn-border-clr] mbs-[--footer-mt] pt-[--footer-pt]';
 		}
 	}
 
@@ -181,7 +182,7 @@ defineExpose({ el });
 	}
 
 	.hover-tooltip.champion-ability {
-		--at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min gap-x-[--gap-x]';
+		--at-apply: 'max-w-164 relative grid-cols-[auto_1fr_auto] auto-rows-min gap-x-[--gap-x]';
 		justify-self: anchor-center;
 		position-try: flip-block;
 		inset-block-start: calc(anchor(end) - 1px);
@@ -211,7 +212,7 @@ defineExpose({ el });
 		}
 
 		> div {
-			--at-apply: 'col-span-full mt-[--description-mt]';
+			--at-apply: 'col-span-full mbs-[--description-mt]';
 
 			rules {
 				--at-apply: 'italic';
@@ -247,7 +248,7 @@ defineExpose({ el });
 				--at-apply: 'grid grid-cols-[1fr_auto] leading-5';
 
 				&:not(:first-child) {
-					--at-apply: 'mt-1.5';
+					--at-apply: 'mbs-1.5';
 				}
 
 				> dd {

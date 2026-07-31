@@ -376,7 +376,7 @@ defineExpose({ header });
 			}
 
 			& + rules {
-				--at-apply: 'mt-[1em] block';
+				--at-apply: 'mbs-[1em] block';
 			}
 		}
 
@@ -554,6 +554,16 @@ defineExpose({ header });
 
 				&:not(:last-child) {
 					--at-apply: 'mbe-[1em]';
+				}
+			}
+		}
+	}
+
+	.hover-tooltip.champion-ability {
+		> footer {
+			.game-description {
+				> rules {
+					--at-apply: 'mbs-0';
 				}
 			}
 		}
