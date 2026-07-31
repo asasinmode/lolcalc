@@ -1591,10 +1591,14 @@ defineExpose({ el });
 
 		--py: calc(3 * var(--spacing));
 		--select-champion-size: calc(14 * var(--spacing));
+		--header-gap-y: 0px;
 		--header-box-h: var(--select-champion-size);
-		--header-h: calc(var(--select-champion-size) + 2 * var(--py));
+		--header-h: calc(var(--select-champion-size) + 2 * var(--py) + var(--header-gap-y));
 		--select-runes-size: calc(8 * var(--spacing));
 		--select-items-effects-size: calc(8 * var(--spacing));
+		--select-level-size: calc(6 * var(--spacing));
+		--select-items-runes-gap: calc(2 * var(--spacing));
+		--item-size: calc(8 * var(--spacing));
 		--manipulate-btn-size: calc(6 * var(--spacing));
 		--transition-duration: 150ms;
 		--scoreboard-item-bg: linear-gradient(
@@ -1626,27 +1630,47 @@ defineExpose({ el });
 		anchor-scope: all;
 		background: var(--scoreboard-item-bg);
 
+		@media (width < 512px) {
+			& {
+				--select-champion-size: calc(2 * var(--item-size));
+				--select-level-size: calc(6.5 * var(--spacing));
+				--manipulate-btn-size: calc(7 * var(--spacing));
+				--header-box-h: calc(2 * var(--item-size));
+				--header-gap-y: calc(1.5 * var(--spacing));
+				--select-runes-items-translate: calc(
+					0.5 * (var(--select-runes-size) + var(--item-size)) + 1.5 * var(--select-items-runes-gap)
+				);
+			}
+		}
+
 		.header {
-			--at-apply: 'grid grid-rows-[repeat(2,calc(var(--header-box-h)/2))] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps]';
+			--at-apply: 'grid grid-rows-[repeat(2,calc(var(--header-box-h)/2))] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps] gap-y-[--header-gap-y,0px]';
 			grid-template-areas:
 				'move-up		move-group	select-champion	select-runes	select-items	items			clear'
 				'move-down	duplicate		select-champion	select-runes	select-items	items			expand';
-			grid-template-columns: repeat(5, max-content) 1fr max-content;
+			grid-template-columns: repeat(5, max-content) minmax(0, 1fr) max-content;
 
 			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 				& {
 					grid-template-areas:
 						'select-champion	select-runes	select-items	items			manipulate'
 						'select-champion	select-runes	select-items	items			expand';
-					grid-template-columns: repeat(3, max-content) 1fr max-content;
+					grid-template-columns: repeat(3, max-content) minmax(0, 1fr) max-content;
 				}
 			}
-		}
 
-		@media (((width < 1680px) and (width >= 1079px)) or (width < 840px)) and ((height < 660px) and (height >= 280px)) {
-			.header {
-				--at-apply: 'sticky inset-bs-0 z-10';
-				background: var(--scoreboard-item-bg), var(--mauve-bg);
+			@media (((width < 1680px) and (width >= 1079px)) or (width < 840px)) and ((height < 660px) and (height >= 280px)) {
+				& {
+					--at-apply: 'sticky inset-bs-0 z-10';
+					background: var(--scoreboard-item-bg), var(--mauve-bg);
+				}
+			}
+
+			@media (width < 512px) {
+				grid-template-areas:
+					'select-champion select-runes select-items	manipulate'
+					'select-champion items				items					expand';
+				grid-template-columns: max-content minmax(0, 1fr) minmax(0, 1fr) max-content;
 			}
 		}
 
@@ -1684,13 +1708,13 @@ defineExpose({ el });
 		.move-group,
 		.clear-remove,
 		.manipulate {
-			--at-apply: '-mb-[0.5px] self-end';
+			--at-apply: '-mbe-[calc(0.5px+0.5*var(--header-gap-y))] self-end';
 		}
 
 		.move-down,
 		.duplicate,
 		.expand-collapse {
-			--at-apply: '-mt-[0.5px] self-start z-1';
+			--at-apply: '-mbs-[calc(0.5px+0.5*var(--header-gap-y))] self-start z-1';
 		}
 
 		.move-group,
@@ -1749,7 +1773,7 @@ defineExpose({ el });
 		}
 
 		.manipulate {
-			--at-apply: 'size-6 hidden';
+			--at-apply: 'size-[--manipulate-btn-size] hidden';
 			grid-area: manipulate;
 
 			select:is(:hover, :focus-visible) + label > .pretend-ui-btn {
@@ -1764,7 +1788,7 @@ defineExpose({ el });
 		}
 
 		.select-champion {
-			--at-apply: 'size-[--select-champion-size] ms-[--ms] me-[--me] relative';
+			--at-apply: 'size-[--select-champion-size] ms-[--ms] me-[--me] relative self-center';
 			--ms: calc(3 * var(--spacing));
 			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
@@ -1772,6 +1796,12 @@ defineExpose({ el });
 			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 				& {
 					--at-apply: 'ms-0';
+				}
+			}
+
+			@media (width < 512px) {
+				& {
+					--me: calc(4 * var(--spacing));
 				}
 			}
 
@@ -1795,15 +1825,21 @@ defineExpose({ el });
 			}
 
 			.select-champion-level {
-				--at-apply: 'absolute -bottom-0.5 end-[--inset-end]';
-				--inset-end: calc(-0.5 * var(--spacing));
+				--at-apply: 'absolute bottom-[--inset] end-[--inset]';
+				--inset: calc(-0.75 * var(--spacing));
 
 				> select {
 					--at-apply: 'rounded-full';
 				}
 
 				> label > span:last-child {
-					--at-apply: 'size-5 bg-black text-white b b-[--ui-btn-border-clr] text-center text-sm/4 rounded-full grid-center';
+					--at-apply: 'size-[--select-level-size] bg-black text-white b b-[--ui-btn-border-clr] text-center text-[length:15px]/4 rounded-full grid-center';
+
+					@media (width < 512px) {
+						& {
+							--at-apply: 'text-lg/5';
+						}
+					}
 				}
 
 				> :is(select:hover, select:focus-visible) + label > span:last-child {
@@ -1817,6 +1853,12 @@ defineExpose({ el });
 			--secondary-path-icon-size: calc(3 * var(--spacing));
 			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
 			grid-area: select-runes;
+
+			@media (width < 512px) {
+				& {
+					--at-apply: 'justify-self-end -translate-x-[--select-runes-items-translate]';
+				}
+			}
 
 			> span:first-of-type {
 				--at-apply: 'sr-only';
@@ -1836,9 +1878,14 @@ defineExpose({ el });
 		}
 
 		.select-items {
-			--at-apply: 'self-center relative ms-[--ms]';
-			--ms: calc(2 * var(--spacing));
+			--at-apply: 'self-center relative ms-[--select-items-runes-gap]';
 			grid-area: select-items;
+
+			@media (width < 512px) {
+				& {
+					--at-apply: '-translate-x-[--select-runes-items-translate]';
+				}
+			}
 
 			> img {
 				--at-apply: 'w-4';
@@ -1849,7 +1896,6 @@ defineExpose({ el });
 			--at-apply: 'flex h-[--item-size] self-center relative me-[--computed-me] ms-[--ms] w-min';
 			grid-area: items;
 			anchor-name: --scoreboard-item-items;
-			--item-size: calc(8 * var(--spacing));
 			--me: calc(3 * var(--spacing));
 			--computed-me: var(--me);
 			--ms: calc(5 * var(--spacing));
@@ -1858,6 +1904,14 @@ defineExpose({ el });
 				& {
 					--me: var(--fluid-f540-7-12-t600);
 					--ms: var(--fluid-f540-10-20-t600);
+				}
+			}
+
+			@media (width < 512px) {
+				& {
+					--at-apply: 'justify-self-center';
+					--ms: 0px;
+					--me: 0px;
 				}
 			}
 
@@ -2780,6 +2834,13 @@ defineExpose({ el });
 					grid-template-columns: max-content 1fr repeat(3, max-content);
 				}
 			}
+
+			@media (width < 512px) {
+				grid-template-areas:
+					'manipulate select-items	select-runes	select-champion'
+					'expand			items					items					select-champion';
+				grid-template-columns: max-content minmax(0, 1fr) minmax(0, 1fr) max-content;
+			}
 		}
 
 		.move-group,
@@ -2796,12 +2857,18 @@ defineExpose({ el });
 				}
 			}
 
-			> .select-champion-level {
-				--at-apply: 'end-auto start-[--inset-end]';
+			.select-champion-level {
+				--at-apply: 'end-auto start-[--inset]';
 			}
 		}
 
 		.select-runes {
+			@media (width < 512px) {
+				& {
+					--at-apply: 'justify-self-start translate-x-[--select-runes-items-translate]';
+				}
+			}
+
 			.secondary-path-icon {
 				--at-apply: 'end-auto start-[--secondary-path-inset-end]';
 			}
@@ -2812,11 +2879,23 @@ defineExpose({ el });
 		}
 
 		.select-items {
-			--at-apply: 'me-[--ms] ms-0';
+			--at-apply: 'me-[--select-items-runes-gap] ms-0';
+
+			@media (width < 512px) {
+				& {
+					--at-apply: 'justify-self-end translate-x-[--select-runes-items-translate]';
+				}
+			}
 		}
 
 		.items {
 			--at-apply: 'ms-[--computed-me] me-[--ms] justify-self-end flex-row-reverse';
+
+			@media (width < 512px) {
+				& {
+					--at-apply: 'justify-self-center';
+				}
+			}
 
 			> li {
 				--at-apply: 'ps-[--item-pe] pe-0';
