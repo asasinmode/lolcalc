@@ -51,6 +51,13 @@ function closeCleanup() {
 
 const longestName = ALL_CHAMPIONS.reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
 
+function selectFirstChamp() {
+	if (computedChampions.value[0]) {
+		(selectedChampion.value = computedChampions.value[0]);
+		vDialog.value?.close();
+	}
+}
+
 defineExpose({
 	open: () => {
 		vDialog.value?.open();
@@ -100,6 +107,7 @@ defineExpose({
 					type="text"
 					:data-empty="!search"
 					@update:model-value="selectedRole = undefined"
+					@keydown.enter.prevent="selectFirstChamp"
 				>
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
@@ -129,7 +137,7 @@ defineExpose({
 			>
 				<button
 					class="leading-tight text-center min-w-0 block hyphens-auto"
-					@click="(selectedChampion = champion) && vDialog?.el?.close()"
+					@click="(selectedChampion = champion) && vDialog?.close()"
 				>
 					<img
 						:title="champion.name"
