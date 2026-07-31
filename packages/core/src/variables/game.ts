@@ -1154,6 +1154,19 @@ export const VARIABLE_CALCULATION_FNS = {
 			}],
 		};
 	},
+	ByCharLevelFormulaCalculationPart(variable: IGameVariablesByType['ByCharLevelFormulaCalculationPart'], _whole, meta) {
+		const { values } = variable;
+		if (values) {
+			const value = values[(meta.variableValueParams.damageSource?.level.value ?? 1)]!;
+			return {
+				value,
+				calculatesFrom: [{
+					stat: 'const',
+					value,
+				}],
+			};
+		}
+	},
 	mModifiedGameCalculation(variable: { mModifiedGameCalculation: string; mMultiplier?: any }, whole, meta) {
 		if (!variable.mModifiedGameCalculation) {
 			return;
@@ -1366,6 +1379,10 @@ interface IGameVariablesByType {
 	ByCharLevelInterpolationCalculationPart: {
 		mStartValue: number;
 		mEndValue: number;
+		__type: string;
+	};
+	ByCharLevelFormulaCalculationPart: {
+		values: number[];
 		__type: string;
 	};
 	StatBySubPartCalculationPart: {
