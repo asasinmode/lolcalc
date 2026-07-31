@@ -634,19 +634,20 @@ const isDisplayingTargets = ref(false);
 			@media (width < 1079px) {
 				& {
 					--at-apply: 'of-clip inline-[200%] max-inline-full grid-cols-[repeat(2,100%)]';
-					--scoreboard-item-pe: calc(4 * var(--spacing));
-					--scoreboard-item-ps: calc(4 * var(--spacing));
+					--scoreboard-item-base-px: calc(4 * var(--spacing));
+					--scoreboard-item-pe: var(--scoreboard-item-base-px);
+					--scoreboard-item-ps: var(--scoreboard-item-base-px);
 
 					> * {
 						--at-apply: 'translate-x-[calc(50%+0.5*var(--scoreboard-gap-x)+1px)]';
 					}
 
 					> ul:first-of-type {
-						--scoreboard-item-pe: calc(4 * var(--spacing) + var(--scoreboard-item-b-w));
+						--scoreboard-item-pe: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w) + 1px);
 					}
 
 					> ul:last-of-type {
-						--scoreboard-item-ps: calc(4 * var(--spacing) + var(--scoreboard-item-b-w));
+						--scoreboard-item-ps: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w) + 1px);
 					}
 
 					&.displaying-targets {
@@ -658,6 +659,18 @@ const isDisplayingTargets = ref(false);
 
 				&::after {
 					--at-apply: 'hidden';
+				}
+			}
+
+			@media (width < 600px) {
+				& {
+					> ul:first-of-type {
+						--scoreboard-item-pe: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
+					}
+
+					> ul:last-of-type {
+						--scoreboard-item-ps: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
+					}
 				}
 			}
 		}

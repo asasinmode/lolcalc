@@ -1635,7 +1635,7 @@ defineExpose({ el });
 				'move-down	duplicate		select-champion	select-runes	select-items	items			expand';
 			grid-template-columns: repeat(5, max-content) 1fr max-content;
 
-			@media (width < 1194px) and (width >= 1079px) {
+			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 				& {
 					grid-template-areas:
 						'select-champion	select-runes	select-items	items			manipulate'
@@ -1740,7 +1740,7 @@ defineExpose({ el });
 			--at-apply: 'min-w-19';
 		}
 
-		@media (width < 1194px) and (width >= 1079px) {
+		@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 			.move-up,
 			.move-down,
 			.move-group,
@@ -1751,16 +1751,16 @@ defineExpose({ el });
 		}
 
 		.manipulate {
-			--at-apply: 'size-6';
+			--at-apply: 'size-6 hidden';
 			grid-area: manipulate;
 
 			select:is(:hover, :focus-visible) + label > .pretend-ui-btn {
 				--at-apply: 'bg-cyan-900';
 			}
 
-			@media (width >= 1194px) or (width < 1079px) {
+			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 				& {
-					--at-apply: 'hidden';
+					--at-apply: 'grid';
 				}
 			}
 		}
@@ -1771,7 +1771,7 @@ defineExpose({ el });
 			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
 
-			@media (width < 1194px) and (width >= 1079px) {
+			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 				& {
 					--at-apply: 'ms-0';
 				}
