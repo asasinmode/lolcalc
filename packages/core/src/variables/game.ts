@@ -351,8 +351,6 @@ export function championAbilityVariableValue(
 				rv.value = abilityVariant.effectAmount[index - 1];
 			}
 		}
-	} else if (abilityVariant.dataValues?.[variableName]) {
-		rv.value = abilityVariant.dataValues[variableName];
 	} else if (abilityVariant.effectAmount?.[variableName]) {
 		rv.value = abilityVariant.effectAmount[variableName];
 		for (const path in dotPath) {
@@ -373,6 +371,20 @@ export function championAbilityVariableValue(
 					addCalculatesFrom(rv.calculatesFrom, value.calculatesFrom!);
 				} else if (key !== 'meta') {
 					(rv as any)[key] = value[key as keyof typeof value];
+				}
+			}
+		}
+	}
+
+	if (rv.value === undefined && abilityVariant.dataValues) {
+		if (abilityVariant.dataValues?.[variableName]) {
+			rv.value = abilityVariant.dataValues[variableName];
+		} else {
+			const dataValueKeys = Object.keys(abilityVariant.dataValues);
+			for (const key of dataValueKeys) {
+				if (key.toLowerCase() === variableName.toLowerCase()) {
+					rv.value = abilityVariant.dataValues[key];
+					break;
 				}
 			}
 		}
