@@ -824,7 +824,7 @@ export function calculatesFromPartExtendedEquals(
 function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, stat: ICalculatesFromPart['stat'], isPercentage?: boolean): string {
 	let multiplier = 1;
 	let valueSuffix = '';
-	let roundTo = stat === 'const' || stat === 'level' ? 2 : 0;
+	let roundTo = stat === 'const' ? 2 : 0;
 
 	if (isPercentage) {
 		multiplier = stat === 'critChance' ? 1 : 100;
