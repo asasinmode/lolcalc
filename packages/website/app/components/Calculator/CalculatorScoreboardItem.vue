@@ -2005,7 +2005,7 @@ defineExpose({ el });
 			}
 
 			&::details-content {
-				--at-apply: 'pt-4 -mt-6 grid grid-cols-[min-content_min-content_1fr] grid-rows-[auto_min-content_min-content_1fr] auto-rows-min';
+				--at-apply: 'pt-4 -mt-6 grid grid-cols-[var(--runes-stats-section-w)_calc(var(--runes-stats-section-w)+1px)_minmax(0,1fr)] grid-rows-[auto_min-content_min-content_1fr] auto-rows-min';
 				grid-template-areas:
 					'effects stats abilities'
 					'effects stats resources'
@@ -2391,19 +2391,19 @@ defineExpose({ el });
 
 				@media (width < 1680px) {
 					& {
-						--at-apply: 'grid-rows-2 ms-0 inline-full max-inline-[calc(2*var(--runes-stats-section-w)+1px)] justify-self-center';
+						--at-apply: 'grid-rows-2 inline-full max-inline-[calc(2*var(--runes-stats-section-w)+1px)] justify-self-center';
 					}
 				}
 
 				@media (width < 1680px) and (width >= 1079px) {
 					& {
-						--at-apply: 'pbs-1.5 pbe-2.75';
+						--at-apply: 'pbs-1.5 pbe-2.75 ms-0';
 					}
 				}
 
 				@media (width < 1079px) {
 					& {
-						--at-apply: 'grid-rows-subgrid ms-[--gap-x]';
+						--at-apply: 'grid-rows-subgrid';
 					}
 				}
 
@@ -2850,41 +2850,12 @@ defineExpose({ el });
 	.mirrored [data-scoreboard-item][data-group='targets'] {
 		> :where(details) {
 			&::details-content {
-				--at-apply: 'grid-cols-[1fr_min-content_min-content]';
+				--at-apply: 'grid-cols-[minmax(0,1fr)_var(--runes-stats-section-w)_calc(var(--runes-stats-section-w)+1px)]';
 				grid-template-areas:
 					'abilities stats effects'
 					'resources stats effects'
 					'resources stats runes'
 					'role-quest-dragons stats runes';
-			}
-
-			@media (width < 1680px) and (width > 1079px) {
-				&::details-content {
-					--at-apply: 'grid-cols-2';
-					grid-template-areas:
-						'abilities abilities'
-						'resources resources'
-						'stats effects'
-						'stats runes'
-						'role-quest-dragons role-quest-dragons';
-				}
-
-				.stats {
-					--at-apply: 'justify-self-end';
-				}
-
-				.effects {
-					--at-apply: 'ms-0 me-auto';
-				}
-
-				.runes {
-					--at-apply: 'justify-self-start';
-				}
-
-				.abilities,
-				.health-ability-resource {
-					--at-apply: 'me-0';
-				}
 			}
 
 			.effects {
@@ -2948,6 +2919,39 @@ defineExpose({ el });
 					&::before {
 						--at-apply: 'start-[--end] end-[--start]';
 					}
+				}
+			}
+
+			@media (width < 1680px) and (width > 1079px) {
+				&::details-content {
+					--at-apply: 'grid-cols-2';
+					grid-template-areas:
+						'abilities abilities'
+						'resources resources'
+						'stats effects'
+						'stats runes'
+						'role-quest-dragons role-quest-dragons';
+				}
+
+				.stats {
+					--at-apply: 'justify-self-end';
+				}
+
+				.effects {
+					--at-apply: 'ms-0 me-auto';
+				}
+
+				.runes {
+					--at-apply: 'justify-self-start';
+				}
+
+				.abilities,
+				.health-ability-resource {
+					--at-apply: 'me-0';
+				}
+
+				.role-quest-dragons {
+					--at-apply: 'pe-0';
 				}
 			}
 		}
