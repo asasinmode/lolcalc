@@ -1577,7 +1577,7 @@ defineExpose({ el });
 
 <style>
 /* mobile breakpoints to check when changing */
-/* 1679/1680 | 1193/1194 | 1078/1079 | 839/840 | 599/600 | 538/539 | 511/512 | 459/460 */
+/* 1679/1680 | 1193/1194 | 1078/1079 | 839/840 | 599/600 | 538/539 | 511/512 | 459/460 | 380/400 */
 @layer components {
 	[data-scoreboard-item][data-group='sources'] {
 		border-inline-start: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
@@ -1634,7 +1634,7 @@ defineExpose({ el });
 
 		@media (width < 512px) {
 			& {
-				--select-champion-size: calc(2 * var(--item-size));
+				--select-champion-size: var(--fluid-f380-56-64-t400);
 				--select-level-size: calc(6.5 * var(--spacing));
 				--manipulate-btn-size: calc(7 * var(--spacing));
 				--header-box-h: calc(2 * var(--item-size));
@@ -1803,7 +1803,7 @@ defineExpose({ el });
 
 			@media (width < 512px) {
 				& {
-					--me: calc(4 * var(--spacing));
+					--me: var(--fluid-f380-0-16-t400);
 				}
 			}
 
@@ -2415,6 +2415,12 @@ defineExpose({ el });
 				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
 						--at-apply: 'mx-0';
+					}
+				}
+
+				@media (width < 400px) {
+					&:has(> .shapeshift) {
+						--at-apply: '-translate-x-[--fluid-f380-18-0-t400]';
 					}
 				}
 

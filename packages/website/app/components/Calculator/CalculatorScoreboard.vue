@@ -460,8 +460,8 @@ const isDisplayingTargets = ref(false);
 		--extra-cols: 3;
 		--scoreboard-gap-x: var(--fluid-f1092-18-40-t1114);
 		--scoreboard-item-base-px: var(--fluid-f540-10-16-t600);
-		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-ps: var(--fluid-f1126-10-16-t1194);
+		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-b-w: 0.25rem;
 		/* 3 extras columns starting from `1680px` that go up to 256px */
 		--scoreboard-item-max-w: calc(
@@ -629,8 +629,8 @@ const isDisplayingTargets = ref(false);
 			@media (width < 1079px) {
 				& {
 					--at-apply: 'of-clip inline-[200%] max-inline-full grid-cols-[repeat(2,100%)]';
-					--scoreboard-item-pe: var(--scoreboard-item-base-px);
 					--scoreboard-item-ps: var(--scoreboard-item-base-px);
+					--scoreboard-item-pe: var(--scoreboard-item-base-px);
 
 					> * {
 						--at-apply: 'translate-x-[calc(50%+0.5*var(--scoreboard-gap-x)+1px)]';
@@ -664,6 +664,21 @@ const isDisplayingTargets = ref(false);
 
 					> ul:last-of-type {
 						--scoreboard-item-ps: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
+					}
+				}
+			}
+
+			@media (width < 400px) {
+				& {
+					--scoreboard-item-ps: var(--fluid-f380-4-10-t400);
+					--scoreboard-item-pe: var(--fluid-f380-4-10-t400);
+
+					> ul:first-of-type {
+						--scoreboard-item-pe: calc(var(--fluid-f380-5-11-t400) + var(--scoreboard-item-b-w));
+					}
+
+					> ul:last-of-type {
+						--scoreboard-item-ps: calc(var(--fluid-f380-5-11-t400) + var(--scoreboard-item-b-w));
 					}
 				}
 			}

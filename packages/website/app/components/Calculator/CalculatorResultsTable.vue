@@ -1813,6 +1813,15 @@ defineExpose({
 
 <style>
 @layer components {
+	#results {
+		/* TODO mobile version, work out sticky */
+		@media (width < 540px) {
+			& {
+				--at-apply: 'of-x-auto';
+			}
+		}
+	}
+
 	#results-table {
 		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr] mb-10 h-px';
 		--b-clr: theme('colors.neutral.600');
