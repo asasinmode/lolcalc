@@ -62,7 +62,7 @@ const value = defineModel<number>({ required: true });
 <style>
 @layer components {
 	.v-extras-number {
-		--at-apply: 'grid grid-cols-[max-content_auto_minmax(0,1fr)_min-content] grid-rows-2 relative';
+		--at-apply: 'grid grid-cols-[max-content_minmax(0,1fr)_auto_min-content] grid-rows-2 relative';
 
 		> label {
 			--at-apply: 'col-span-3 self-center of-hidden leading-[1] pb-[0.2em] -mb-[0.2em]';
@@ -73,7 +73,7 @@ const value = defineModel<number>({ required: true });
 		}
 
 		> input {
-			--at-apply: 'box-content h-min w-[--venmbr-input-w] px-[--venmbr-input-px] py-[--venmbr-input-py] bg-white text-black me-[--venmbr-gap-x]';
+			--at-apply: 'box-content block-min px-[--venmbr-input-px] py-[--venmbr-input-py] bg-white text-black me-[--venmbr-gap-x]';
 
 			&:disabled {
 				--at-apply: 'bg-neutral-200 text-neutral-600';
