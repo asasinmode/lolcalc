@@ -166,6 +166,15 @@ function replaceMainWithNext(event: MouseEvent) {
 		/* radius of the image inside of the funny border, its overflow is not clipped in any way so it needs to be the smallest it can be to still not go outside of the border around it */
 		--image-funny-rounded: 17.5% / 50%;
 		--funny-ability-w: calc(var(--ability-size) * 10 / 9);
+		--q-ability-size: calc(var(--ability-size) + 1.5 * var(--spacing));
+
+		@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
+			& {
+				margin-block-end: calc(
+					var(--ability-level-buttons-size) - (var(--q-ability-size) - var(--ability-size)) / 2 - 1px
+				);
+			}
+		}
 
 		> [data-ability='passive'] {
 			--at-apply: 'b-none size-auto pe-2';
@@ -240,7 +249,7 @@ function replaceMainWithNext(event: MouseEvent) {
 
 			> img {
 				&:nth-of-type(1) {
-					--at-apply: 'b-2 b-[--aphelios-ui-clr] size-[calc(var(--ability-size)+1.5*var(--spacing))] -my-0.75 rounded-1/2 z-2 -me-3.5';
+					--at-apply: 'b-2 b-[--aphelios-ui-clr] size-[--q-ability-size] -my-0.75 rounded-1/2 z-2 -me-3.5';
 				}
 
 				&:nth-of-type(2) {

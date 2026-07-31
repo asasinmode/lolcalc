@@ -2333,7 +2333,7 @@ defineExpose({ el });
 				[data-ability='w'],
 				[data-ability='e'],
 				[data-ability='r'] {
-					--at-apply: 'mbe-[calc(var(--ability-level-btn-indicator-size)+2*var(--ability-level-btn-py))]';
+					--at-apply: 'mbe-[--ability-level-buttons-size]';
 
 					&[data-level='0'],
 					&:not([data-level]) {
