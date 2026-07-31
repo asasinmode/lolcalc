@@ -113,6 +113,18 @@ function submitIssue(_event: SubmitEvent) {
 		> form {
 			--at-apply: 'pbs-3 grid grid-cols-3 auto-rows-auto gap-x-5 text-lg gap-y-2.5';
 
+			@media (width < 640px) {
+				& {
+					--at-apply: 'grid-cols-2';
+				}
+			}
+
+			@media (width < 540px) {
+				& {
+					--at-apply: 'grid-cols-1';
+				}
+			}
+
 			> * {
 				--at-apply: 'col-span-full';
 
@@ -138,6 +150,12 @@ function submitIssue(_event: SubmitEvent) {
 			> div {
 				&:nth-child(1) {
 					--at-apply: 'col-span-2';
+
+					@media (width < 640px) {
+						& {
+							--at-apply: 'col-span-1';
+						}
+					}
 				}
 
 				&:nth-child(2) {
