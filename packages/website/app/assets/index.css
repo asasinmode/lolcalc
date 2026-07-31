@@ -112,6 +112,9 @@
 		--venmbr-input-px: calc(1 * var(--spacing));
 		--venmbr-gap-x: calc(2 * var(--spacing));
 		--venmbr-btn-w: calc(10 * var(--spacing));
+
+		--extra-item-min-w: calc(60 * var(--spacing));
+		--extra-item-max-w: calc(64 * var(--spacing));
 	}
 
 	.pretend-ui-btn {

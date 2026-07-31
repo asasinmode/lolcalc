@@ -457,14 +457,12 @@ const isDisplayingTargets = ref(false);
 	#scoreboard {
 		--at-apply: 'b-b b-neutral-500 mt-5 relative mx-auto';
 		--extras-gap: calc(2 * var(--spacing));
-		/* this and `--scoreboard-item-max-w` should ensure that there are 3 extra columns starting from `1680px` that go up to 256px */
-		--extra-item-min-w: calc(60 * var(--spacing));
-		--extra-item-max-w: calc(64 * var(--spacing));
 		--extra-cols: 3;
 		--scoreboard-gap-x: var(--fluid-f1092-18-40-t1114);
 		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-ps: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-b-w: 0.25rem;
+		/* 3 extras columns starting from `1680px` that go up to 256px */
 		--scoreboard-item-max-w: calc(
 			var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) +
 				var(--scoreboard-item-b-w)
