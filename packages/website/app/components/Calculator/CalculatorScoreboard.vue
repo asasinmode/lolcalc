@@ -656,7 +656,7 @@ const isDisplayingTargets = ref(false);
 				}
 			}
 
-			@media (width < 600px) and (width >= 380px) {
+			@media (width < 600px) and (width >= 375px) {
 				& {
 					> ul:first-of-type {
 						--scoreboard-item-pe: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
@@ -668,17 +668,17 @@ const isDisplayingTargets = ref(false);
 				}
 			}
 
-			@media (width < 400px) and (width >= 380px) {
+			@media (width < 400px) and (width >= 375px) {
 				& {
-					--scoreboard-item-ps: var(--fluid-f380-4-10-t400);
-					--scoreboard-item-pe: var(--fluid-f380-4-10-t400);
+					--scoreboard-item-ps: var(--fluid-f375-4-10-t400);
+					--scoreboard-item-pe: var(--fluid-f375-4-10-t400);
 
 					> ul:first-of-type {
-						--scoreboard-item-pe: calc(var(--fluid-f380-5-11-t400) + var(--scoreboard-item-b-w));
+						--scoreboard-item-pe: calc(var(--fluid-f375-5-11-t400) + var(--scoreboard-item-b-w));
 					}
 
 					> ul:last-of-type {
-						--scoreboard-item-ps: calc(var(--fluid-f380-5-11-t400) + var(--scoreboard-item-b-w));
+						--scoreboard-item-ps: calc(var(--fluid-f375-5-11-t400) + var(--scoreboard-item-b-w));
 					}
 				}
 			}

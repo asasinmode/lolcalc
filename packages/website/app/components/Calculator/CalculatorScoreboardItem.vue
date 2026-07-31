@@ -1577,7 +1577,7 @@ defineExpose({ el });
 
 <style>
 /* mobile breakpoints to check when changing */
-/* 1679/1680 | 1193/1194 | 1078/1079 | 839/840 | 599/600 | 538/539 | 511/512 | 459/460 | 380/400 */
+/* 1679/1680 | 1193/1194 | 1078/1079 | 839/840 | 599/600 | 538/539 | 511/512 | 459/460 | 399/400 | 320-374/375 */
 @layer components {
 	[data-scoreboard-item][data-group='sources'] {
 		border-inline-start: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
@@ -1634,7 +1634,7 @@ defineExpose({ el });
 
 		@media (width < 512px) {
 			& {
-				--select-champion-size: var(--fluid-f380-56-64-t400);
+				--select-champion-size: var(--fluid-f375-56-64-t400);
 				--select-level-size: calc(6.5 * var(--spacing));
 				--manipulate-btn-size: calc(7 * var(--spacing));
 				--header-box-h: calc(2 * var(--item-size));
@@ -1645,9 +1645,9 @@ defineExpose({ el });
 			}
 		}
 
-		@media (width < 380px) {
+		@media (width < 375px) {
 			& {
-				--select-champion-size: var(--select-runes-size);
+				--select-champion-size: calc(var(--select-runes-size) + 2px);
 				--select-runes-items-translate: calc(0.5 * (var(--item-size) + var(--select-items-runes-gap)));
 			}
 		}
@@ -1682,7 +1682,7 @@ defineExpose({ el });
 				grid-template-columns: max-content minmax(0, 1fr) minmax(0, 1fr) max-content;
 			}
 
-			@media (width < 380px) {
+			@media (width < 375px) {
 				grid-template-areas:
 					'select-champion select-runes select-items	manipulate'
 					'items						items				items					expand';
@@ -1817,20 +1817,20 @@ defineExpose({ el });
 
 			@media (width < 512px) {
 				& {
-					--me: var(--fluid-f380-0-16-t400);
+					--me: var(--fluid-f375-0-16-t400);
 				}
 			}
 
-			@media (width < 380px) {
+			@media (width < 375px) {
 				& {
-					--at-apply: 'flex gap-[--select-items-runes-gap] justify-self-end me-[--select-items-runes-gap] -translate-x-[--select-runes-items-translate]';
+					--at-apply: 'flex items-center gap-[--select-items-runes-gap] justify-self-end me-[--select-items-runes-gap] -translate-x-[--select-runes-items-translate]';
 				}
 			}
 
 			> button {
 				--at-apply: 'group b b-2 b-[--ui-btn-border-clr] rounded-full size-[--select-champion-size] of-hidden';
 
-				@media (width < 380px) {
+				@media (width < 375px) {
 					& {
 						--at-apply: 'b';
 					}
@@ -1856,9 +1856,9 @@ defineExpose({ el });
 				--at-apply: 'absolute inset-be-[--inset] inset-e-[--inset]';
 				--inset: calc(-0.75 * var(--spacing));
 
-				@media (width < 380px) {
+				@media (width < 375px) {
 					& {
-						--at-apply: 'relative inset-auto';
+						--at-apply: 'relative inset-auto size-[--select-items-effects-size]';
 					}
 				}
 
@@ -1875,9 +1875,9 @@ defineExpose({ el });
 						}
 					}
 
-					@media (width < 380px) {
+					@media (width < 375px) {
 						& {
-							--at-apply: 'size-[var(--select-items-effects-size)]';
+							--at-apply: 'size-[--select-items-effects-size]';
 						}
 					}
 				}
@@ -2456,15 +2456,15 @@ defineExpose({ el });
 					}
 				}
 
-				@media (width < 400px) and (width >= 380px) {
+				@media (width < 400px) and (width >= 375px) {
 					&:has(> .shapeshift) {
-						--at-apply: '-translate-x-[--fluid-f380-18-0-t400]';
+						--at-apply: '-translate-x-[--fluid-f375-18-0-t400]';
 					}
 				}
 
-				@media (width < 380px) {
-					--ability-size: var(--fluid-44-56-t380);
-					--ability-size-passive: var(--fluid-36-40-t380);
+				@media (width < 375px) {
+					--ability-size: var(--fluid-44-56-t375);
+					--ability-size-passive: var(--fluid-36-40-t375);
 				}
 
 				[data-ability] {
@@ -2513,7 +2513,7 @@ defineExpose({ el });
 				.shapeshift {
 					--at-apply: 'z-1 absolute -end-[--abilities-gap] translate-x-full size-[--shapeshift-btn-size] grid-center rounded-full mbs-[calc(0.5*(var(--ability-size)-var(--shapeshift-btn-size)))]';
 
-					@media (width < 380px) {
+					@media (width < 375px) {
 						& {
 							--at-apply: 'static translate-0';
 						}
@@ -2659,7 +2659,7 @@ defineExpose({ el });
 
 				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
-						--at-apply: 'px-0 pbs-[--fluid-20-12-t380]';
+						--at-apply: 'px-0 pbs-[--fluid-20-12-t375]';
 					}
 				}
 
@@ -2965,7 +2965,7 @@ defineExpose({ el });
 				grid-template-columns: max-content minmax(0, 1fr) minmax(0, 1fr) max-content;
 			}
 
-			@media (width < 380px) {
+			@media (width < 375px) {
 				grid-template-areas:
 					'manipulate select-items	select-runes	select-champion'
 					'expand			items					items					items';
@@ -2987,7 +2987,7 @@ defineExpose({ el });
 				}
 			}
 
-			@media (width < 380px) {
+			@media (width < 375px) {
 				& {
 					--at-apply: 'justify-self-start translate-x-[--select-runes-items-translate] ms-[--select-items-runes-gap]';
 				}
@@ -2996,7 +2996,7 @@ defineExpose({ el });
 			.select-champion-level {
 				--at-apply: 'inset-e-auto inset-s-[--inset]';
 
-				@media (width < 380px) {
+				@media (width < 375px) {
 					& {
 						--at-apply: 'inset-auto';
 					}
