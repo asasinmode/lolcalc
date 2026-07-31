@@ -38,6 +38,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 4.5],
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <physicalDamage>@FlatBonusDmgToMonsters@ physical damage</physicalDamage> to minions and jungle monsters (max: @MaxDmgToMonsters@).</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -182,6 +183,7 @@
 					"mana": [90, 90, 90, 90, 90, 90],
 					"cooldownTime": [21, 21, 19, 17, 15, 13, 11],
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}<br>Maximum duration in combat with enemy champions is @MaxInCombatTime@ seconds.<br></rules>",
 					"extendedVariables": [
 						{
 							"name": "WallWalkDuration",
@@ -244,6 +246,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [120, 120, 100, 80, 0, 0, 0],
 					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -376,8 +379,10 @@
 	"stringtable": {
 		"spell_listtype_basedamage": "Base Damage",
 		"spell_listtype_damage": "Damage",
+		"reminder_ghosted": "Ghosted units can pass through other units.",
 		"spell_listtype_duration": "Duration",
 		"spell_listtype_healing": "Healing",
+		"reminder_untargetable": "Untargetable units won't be affected by enemy Attacks or Abilities unless they've already been hit by them.",
 		"game_spell_kayn_p_main_0": "Kayn the <keywordMajor>Shadow Assassin</keywordMajor> fights Rhaast the <keywordMajor>Darkin Slayer</keywordMajor> for control. One will win, the other will die.<br><br>Damaging ranged champions charges the <keywordMajor>Shadow Assassin</keywordMajor>, and damaging melee champions charges the <keywordMajor>Darkin Slayer</keywordMajor>. At full charge, Kayn can permanently transform at his fountain.<br><br><keywordMajor>Shadow Assassin:</keywordMajor> After entering combat Kayn's Attacks and Abilities deal an additional <magicDamage>@KaynAssBonusDamage@ damage dealt magic damage</magicDamage> for @PAmpDurationAss@ seconds. This only occurs if Kayn has been out of combat for @PAmpCooldownAss@ seconds or used <spellName>Umbral Trespass</spellName>.<br><br><keywordMajor>Darkin Slayer:</keywordMajor> Kayn heals for @KaynSlayerHealing@ of physical damage dealt to champions.",
 		"game_spell_kayn_p_main_1": "The <keywordMajor>Shadow Assassin</keywordMajor> has won.<br><br><keywordMajor>Shadow Assassin:</keywordMajor> After entering combat Kayn's Attacks and Abilities deal an additional <magicDamage>@KaynAssBonusDamage@ damage dealt magic damage</magicDamage> for @PAmpDurationAss@ seconds. This only occurs if Kayn has been out of combat for @PAmpCooldownAss@ seconds or used <spellName>Umbral Trespass</spellName>.",
 		"game_spell_kayn_p_main_2": "The <keywordMajor>Darkin Slayer</keywordMajor> has won.<br><br><keywordMajor>Darkin Slayer:</keywordMajor> Kayn heals for @KaynSlayerHealing@ of physical damage dealt to champions.",

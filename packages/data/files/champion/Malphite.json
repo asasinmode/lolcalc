@@ -90,6 +90,7 @@
 					"mana": [30, 35, 40, 45, 50, 55],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>@BonusArmorPassive*100@% Armor (%i:scaleArmor%@f1@)</scaleArmor>. This effect is increased to <scaleArmor>@BonusArmorPassive*300@% (%i:scaleArmor%@f2@)</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br><br><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>@TotalBonusDamage@ physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>@ThunderclapSplash@ physical damage</physicalDamage> %i:OnHit% <OnHit>On-Hit</OnHit> in their direction. His Attacks continue to create aftershocks %i:OnHit% <OnHit>On-Hit</OnHit> for the next @ThunderclapBuffDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterDamageMod*100@% damage to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost",

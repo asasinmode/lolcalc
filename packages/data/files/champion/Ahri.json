@@ -79,6 +79,7 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [9, 9, 8, 7, 6, 5, 4],
 					"tooltip": "Ahri releases 3 fox-fires that seek nearby enemies and deal <magicDamage>@SingleFireDamage@ magic damage</magicDamage>, reduced to <magicDamage>@MultiFireDamage@ damage</magicDamage> beyond the first. She also gains <speed>@MovementSpeed*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Fox-fires prioritize champions hit by <spellName>{{Spell_AhriSeduce_Name}}</spellName>, enemies Ahri has attacked, then other champions. Minions below @MinionBonusDamageThreshold*100@% Health take @MinionBonusDamageMultiplier*100@% damage.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -136,6 +137,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Ahri blows a kiss that <status>Charms</status> the first enemy hit for @CharmDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -266,6 +268,7 @@
 	},
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
+		"spell_ahriseduce_name": "Charm",
 		"spell_listtype_duration": "Duration"
 	}
 }

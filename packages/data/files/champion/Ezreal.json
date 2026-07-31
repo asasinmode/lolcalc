@@ -38,6 +38,7 @@
 					"mana": [28, 31, 34, 37, 40, 43],
 					"cooldownTime": [5.75, 5.5, 5.25, 5, 4.75, 4.5, 3.5],
 					"tooltip": "Ezreal fires a bolt of energy, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit and reducing his Ability Cooldowns by @CDRefund@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies {{ Item_Keyword_OnHit }} effects.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -262,6 +263,7 @@
 		}
 	},
 	"stringtable": {
+		"item_keyword_onhit": "%i:OnHit% <OnHit>On-Hit</OnHit>",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_nonchampiondamage": "Non Champion Damage"
 	}

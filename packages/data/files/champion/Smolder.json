@@ -38,6 +38,7 @@
 					"mana": [25, 25, 25, 25, 25, 25],
 					"cooldownTime": [5.5, 5.5, 5, 4.5, 4, 3.5, 3.5],
 					"tooltip": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds <scaleMana>@ManaRestore@ Mana</scaleMana>, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.",
+					"tooltipExtendedBelowLine": "<rules><spellName>{{Spell_SmolderQ_Name}}</spellName> is considered a basic Attack, applies On-Hit effects, and applies Life Steal at @LifestealMod*100@% effectiveness.<br>Damage is increased by %i:scaleCrit% Critical Strike Chance and %i:scaleCritMult% Critical Strike Damage at @CritRatio*100@% effectiveness.<br>This Ability can only damage each target one time per cast.<br></rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -166,6 +167,7 @@
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Each consecutive explosion does @ExplosionDamageMultihitPenalty*100@% damage.<br>Smolder can only gain one <spellName>Dragon Practice</spellName> stack per champion hit.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -238,6 +240,7 @@
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [24, 24, 22, 20, 18, 16, 16],
 					"tooltip": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit.",
+					"tooltipExtendedBelowLine": "<rules>This Ability prioritizes champions.<br>While flying, Smolder gains expanded vision.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -297,6 +300,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
 					"tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.",
+					"tooltipExtendedBelowLine": "<rules>Deals @MinionMod*100@% damage to minions and monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -501,11 +505,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_smolderq_name": "Super Scorcher Breath",
 		"spell_listtype_basedamage": "Base Damage",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_explosiondamage": "Explosion Damage",
 		"spell_smolderr_momheal": "Heal",
-		"spell_smolderq_name": "Super Scorcher Breath",
 		"spell_smolderp_name": "Dragon Practice",
 		"spell_smolderw_name": "Achooo!",
 		"spell_smoldere_name": "Flap, Flap, Flap"

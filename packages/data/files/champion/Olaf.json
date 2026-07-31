@@ -38,6 +38,7 @@
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"tooltip": "Olaf throws an axe, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for up to @MaxSlowDuration@ seconds (based on distance travelled). Champions hit lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @DebuffDuration@ seconds.<br><br>If Olaf picks up the axe, this Ability's Cooldown is reduced to @TooltipCDRefund@ seconds, or fully refunded if @TooltipCDRefund@ seconds has elapsed.",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterDamage@ bonus damage to monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -194,6 +195,7 @@
 					"image": "assets/characters/olaf/hud/icons2d/olafe.png",
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
 					"tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>@TotalDamage@ true damage</trueDamage>. If the enemy dies, the cost is refunded.<br><br>Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.",
+					"tooltipExtendedBelowLine": "<rules>Cast time scales based on bonus Attack Speed.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Effect1Amount",

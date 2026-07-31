@@ -38,6 +38,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 8],
 					"tooltip": "Rell thrusts her lance, <status>Stunning</status> targets for @StunDuration@ seconds, destroying all <shield>Shields</shield>, and dealing <magicDamage>@Damage@ magic damage.</magicDamage>",
+					"tooltipExtendedBelowLine": "<rules>Does not break Shields on monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -182,6 +183,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Rell and an ally charge, gaining <speed>@MinMS*100@% Move Speed</speed>, increased to <speed>@MaxMS*100@%</speed> when facing enemy champions or each other for @Duration@ seconds. Rell's next Attack or <spellName>{{Spell_RellQ_Name}}</spellName> explodes in an area for <magicDamage>@MaxHealthDamageCalc@ max Health magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Damage capped at @PercentHealthDamageCap@ against jungle monsters and structures.</rules>",
 					"extendedVariables": [
 						{
 							"name": "PercentHealthDamage",

@@ -37,6 +37,7 @@
 					"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
 					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
+					"tooltipExtendedBelowLine": "<rules>Only the last use of this Ability can cross terrain.<br>Riven targets the unit your cursor is on, or dashes forward if there is no target.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -135,6 +136,7 @@
 					"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
+					"tooltipExtendedBelowLine": "<rules>This dash cannot go over terrain.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ShieldAmount",
@@ -182,6 +184,7 @@
 					"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
 					"cooldownTime": [10, 120, 90, 60, 60, 10, 10],
 					"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health.",
+					"tooltipExtendedBelowLine": "<rules>Gains @TooltipAttackRange@ Attack Range</rules> ",
 					"extendedVariables": [
 						{
 							"name": "MinBase",

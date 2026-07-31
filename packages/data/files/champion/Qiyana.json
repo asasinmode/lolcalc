@@ -38,6 +38,7 @@
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "If Qiyana does not have an <keywordMajor>Enchantment</keywordMajor>, she slashes, dealing <physicalDamage>@VanillaDamage@ physical damage</physicalDamage> to enemies in a small area. If she does, this Ability gains extra range and an additional effect based on the type of <keywordMajor>Enchantment</keywordMajor>:<li><keywordMajor>Ice Enchantment</keywordMajor>: Briefly <status>Roots</status>, then <status>Slows</status> by @SlowPotency*-100@% for @SlowDuration@ second.<li><keywordMajor>Rock Enchantment</keywordMajor>: Deals an additional <physicalDamage>@TremorDamage@ physical damage</physicalDamage> to units below @CritThreshold*100@% Health.<li><keywordMajor>Wild Enchantment</keywordMajor>: Leaves a trail that turns Qiyana <keywordStealth>Invisible</keywordStealth> and grants <speed>@Haste*100@% Move Speed</speed>.</li>",
+					"tooltipExtendedBelowLine": "<rules>Enemies beyond the first take <physicalDamage>@FalloffDamage@ physical damage</physicalDamage> instead.<br>This Ability deals @JungleDamageAmp*100@% damage to jungle monsters.<br>{{Reminder_Invisibility}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "VanillaBase",
@@ -239,6 +240,7 @@
 					"mana": [40, 45, 50, 55, 60, 60],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Qiyana dashes through an enemy and deals <physicalDamage>@Damage@ physical damage</physicalDamage> to them.",
+					"tooltipExtendedBelowLine": "<rules>If <spellName>{{Spell_QiyanaQv2_Name}}</spellName> is cast while this Ability is targeting a champion, Qiyana will automatically aim it at her target.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -433,10 +435,12 @@
 		}
 	},
 	"stringtable": {
+		"reminder_invisibility": "<keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or <font color='#ee91d7'>True Sight</font color>.",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_onhitdamage": "On-Hit Damage",
 		"spell_listtype_movementspeed": "Move Speed",
 		"spell_listtype_statbonusattackspeed": "Bonus Attack Speed",
+		"spell_qiyanaqv2_name": "Elemental Wrath / Edge of Ixtal",
 		"spell_listtype_basedamage": "Base Damage",
 		"spell_listtype_manacost": "Mana Cost",
 		"spell_listtype_initialdamage": "Initial Damage",

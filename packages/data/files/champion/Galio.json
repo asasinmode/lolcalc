@@ -38,6 +38,7 @@
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Percent Health damage deals a max of <magicDamage>@SuperQMonsterMaxDamageTotal@ damage</magicDamage> to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

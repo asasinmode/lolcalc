@@ -38,6 +38,7 @@
 					"mana": [25, 25, 25, 25, 25, 25],
 					"cooldownTime": [11, 11, 10.25, 9.5, 8.75, 8, 8],
 					"tooltip": "<font color='#FF8C00'>Tap:</font> Pantheon thrusts his spear, dealing <physicalDamage>@TapDamageCalc@ physical damage</physicalDamage> to enemies hit. Refunds @TapCooldownRefund*100@% of this Ability's Cooldown.<br><br><font color='#FF8C00'>Hold:</font> Pantheon hurls his spear, dealing <physicalDamage>@HoldDamageCalc@ physical damage</physicalDamage> to the first enemy hit and @DamageFalloff*100@% less to further targets. <br><br>This Ability is enhanced against enemies below @CritHealthThreshold*100@% Health to deal <physicalDamage>@ExecuteDamageCalcModified@ physical damage</physicalDamage> instead.<br><br><font color='#EDDA74'>Mortal Will Bonus:</font> Deals an additional <physicalDamage>@EmpoweredDamageCalc@ physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterDamageMod*100@% damage to monsters.</rules><br><rules>Deals @MinionDamageMod*100@% damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "TapDamage",
@@ -160,6 +161,7 @@
 					"mana": [55, 55, 55, 55, 55, 55],
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"tooltip": "Pantheon leaps on his target, <status>Stunning</status> for @StunDuration@ second and dealing <physicalDamage>@MaxHealthDamageCalc@ max Health physical damage</physicalDamage>.<br><br><keywordMajor>Mortal Will Bonus:</keywordMajor> Pantheon's next Attack strikes @EmpoweredNumHits@ times, dealing a total of <physicalDamage>@EmpoweredDamageMultCalcModified@ physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of @MonsterDamageMin@ and a maximum of @MonsterDamageCap@ damage to Minions and Monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "MaxHealthDamage",
@@ -243,6 +245,7 @@
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for @ShieldDuration@ seconds, becoming immune to non-tower damage from that direction and dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> over the duration. After channeling Pantheon slams with his shield, dealing <physicalDamage>@ShieldDamageCalc@ physical damage</physicalDamage>.<br><br><font color='#EDDA74'>Mortal Will Bonus:</font> When Pantheon slams his shield he gains <scaleArmor>@ResistsCalc@ Armor</scaleArmor> and <scaleMR>@ResistsCalc@ Magic Resist</scaleMR> for @ResistsDuration@ seconds, and <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules><recast>Recast</recast> to end early (Pantheon still slams with his shield as the last hit). <br>Damage to minions is reduced by @MinionDamageReduction*100@%.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ShieldBaseDamage",

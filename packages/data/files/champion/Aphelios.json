@@ -988,6 +988,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
 					"tooltip": "Aphelios fires a concentrated blast of moonlight that explodes when it hits a champion, dealing <physicalDamage>@MaxDamage@ physical damage</physicalDamage> to surrounding enemies.<br><br>Then, Aphelios attacks all champions hit with his main-hand weapon. {{ Spell_ApheliosR_WeaponMod_@f1@ }}",
+					"tooltipExtendedBelowLine": "<rules>The Attacks apply on-hits. Critical strikes deal @CritDamageModCalc@ of normal damage instead.</rules>",
 					"extendedVariables": [
 						{
 							"name": "RBaseDamage",

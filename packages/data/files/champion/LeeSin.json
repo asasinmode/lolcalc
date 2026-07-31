@@ -208,6 +208,7 @@
 					"image": "assets/characters/leesin/hud/icons2d/leesinr.png",
 					"cooldownTime": [100, 110, 85, 60, 60, 60, 60],
 					"tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>@Damage@ plus @PercentHPCarryThrough@% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>The target is <status>Rooted</status> during the cast time.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

@@ -38,6 +38,7 @@
 					"mana": [30, 35, 40, 45, 50, 55],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Leona's next Attack <status>Stuns</status> for @StunDuration@ seconds and deals an additional <magicDamage>@TotalDamageTooltip@</magicDamage> magic damage.",
+					"tooltipExtendedBelowLine": "<rules>The Attack must be used within 6 seconds or it is lost.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -85,6 +86,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @ArmorMRDuration@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @ArmorMRDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Damage reduction effect can't reduce the damage below @FlatDamageReductionMax*100@%.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ExplosionBaseDamage",

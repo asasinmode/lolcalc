@@ -38,6 +38,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 6.5],
 					"tooltip": "Fire cursed energy in a direction, dealing <magicDamage>@damage@ magic damage</magicDamage> to enemies and cursing them for @MarkDuration@ seconds.<br><br><recast>Recast:</recast> End the curse, drawing back part of the enemy's spirit to Aurora, dealing up to <magicDamage>@Q2DamageMax@ magic damage</magicDamage> to enemies passed through based on their missing Health. Damage beyond the first hit is reduced to 20%.<br><br>If the duration runs out, Aurora will automatically <recast>Recast</recast> the Ability.",
+					"tooltipExtendedBelowLine": "<rules>Recast deals @Q2MinionMod*100@% damage to minions and monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

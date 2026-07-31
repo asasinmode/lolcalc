@@ -101,6 +101,7 @@
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>If cast without a target, this Ability will heal the most wounded ally in range.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Heal",
@@ -159,6 +160,7 @@
 					"image": "assets/characters/kayle/hud/icons2d/kayle_e.png",
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 8],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies on-hit and spell effects. Max @MaxExecuteVsMonsters@ bonus damage vs. jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "PassiveDamage",

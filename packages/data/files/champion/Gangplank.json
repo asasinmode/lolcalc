@@ -39,6 +39,7 @@
 					"cooldownTime": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
 					"tooltip": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}",
 					"tooltipExtended": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}<br><br>Total Gold plundered: <statTracking>@f1@ Gold</statTracking><br>Total SS plundered: <statTracking>@f3@ Silver Serpents</statTracking>",
+					"tooltipExtendedBelowLine": "<rules>The shot applies On-Hit effects (other than <spellName>{{Spell_GangplankPassive_Name}}</spellName>) and can critically strike for <physicalDamage>@ShotCrit@ physical damage</physicalDamage>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "SpellDamage",
@@ -178,6 +179,7 @@
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @BarrelDuration@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @DebuffDuration@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @BarrelArmorPenetration@% Armor. Champions take an additional <physicalDamage>@BonusDamageToChampions@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
+					"tooltipExtendedBelowLine": "<rules>Keg decay rate increases at level 7 and 13.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BonusDamageToChampions",
@@ -375,6 +377,7 @@
 		}
 	},
 	"stringtable": {
+		"spell_gangplankpassive_name": "Trial by Fire",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_gangplankqplundergold": "Plunder Gold",
 		"spell_listtype_gangplankqplundersilverserpents": "Plunder Silver Serpents",

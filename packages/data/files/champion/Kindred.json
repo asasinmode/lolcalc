@@ -38,6 +38,7 @@
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @BaseASDuration@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @CDNewValue@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Attack Speed scales with <keywordMajor>Marks</keywordMajor> taken.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -111,6 +112,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [19, 18, 17, 16, 15, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>@AttackHeal@ Health</healing> based on their missing Health.<br><br><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>@BaseWolfDamage@</magicDamage> plus <magicDamage>@PercentWolfDamage@ current Health magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Wolf strikes faster based on Kindred's <attackSpeed>Attack Speed</attackSpeed>. Against jungle monsters, Wolf deals @MonsterBonusDmg*100@% increased damage and <status>Slows</status> them by @MonsterSlowAmount*100@% for 2 seconds.</rules>",
 					"extendedVariables": [
 						{
 							"name": "CloneDamageFlat",
@@ -209,6 +211,7 @@
 					"image": "assets/characters/kindred/hud/icons2d/kindred_e.png",
 					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
 					"tooltip": "Kindred weakens an enemy, <status>Slowing</status> them by @TotalSlow@% for @SlowDuration@ second.<br><br>Kindred's third Attack against the target within @TotalDuration@ seconds of each other directs Wolf to pounce on the enemy, dealing an additional <physicalDamage>@BaseBiteDamage@</physicalDamage> plus <physicalDamage>@PercentBiteDamage@ missing Health physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Damage is increased by Critical Strike Chance and Damage at @CritMod*100@% effectiveness.<br>Missing health damage is capped at @MonsterCap@ against jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

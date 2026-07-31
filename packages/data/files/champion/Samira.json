@@ -38,6 +38,7 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [6, 6, 5, 4, 3, 2, 2],
 					"tooltip": "Samira fires a shot, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to the first enemy hit.<br><br>If this Ability is cast towards an enemy in melee range, Samira will instead slash with her sword, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage>. ",
+					"tooltipExtendedBelowLine": "<rules>Either hit can critically strike for <physicalDamage>@CriticalDamageCalc@</physicalDamage> damage and applies Life Steal at @LifestealMod*100@% effectiveness. </rules><br><rules>If cast during <spellName>Wild Rush</spellName>, Samira will strike all enemies in her path upon completion. </rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -192,6 +193,7 @@
 					"image": "assets/characters/samira/hud/icons2d/samirar1.png",
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Samira can only use this Ability if her current <keywordMajor>Style</keywordMajor> rating is S. Using this Ability consumes all <keywordMajor>Style</keywordMajor> rating.<br><br>Samira unleashes a torrent of shots from her weapons, wildly shooting all enemies surrounding her 10 times over 2 seconds, each shot dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> and applying Life Steal at @LifestealMod*100@% effectiveness. Each shot can also critically strike.",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals @MinionDamageMod*100@% damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

@@ -130,6 +130,7 @@
 					"image": "assets/characters/yuumi/hud/icons2d/yuumiw.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> While on her <keywordMajor>Best Friend</keywordMajor>, Yuumi gains an additional <keywordMajor>@HealAndShieldPower*100@% Heal & Shield Power</keywordMajor> and her ally also restores <healing>@HealthOnHit@ health</healing> <OnHit>On-Hit %i:OnHit%</OnHit>.<br><br><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <keywordMajor>Attaches</keywordMajor> to them. While Yuumi is <keywordMajor>Attached</keywordMajor>, she follows her partner's movement and is Untargetable except from towers.<br><br><status>Immobilizing</status> effects on Yuumi place this Ability on a @CCAttachLockout@ second Cooldown.",
+					"tooltipExtendedBelowLine": "<rules>This Ability has a @spell.YuumiW:AttachCooldown@ second Cooldown, but Yuumi can cast it anytime she is already <keywordMajor>Attached</keywordMajor> to switch between friends or <keywordMajor>Unattach</keywordMajor>.<br><br>Yuumi's Abilities will use her <keywordMajor>Attached</keywordMajor> ally's position instead of hers.<br><br>Yuumi will <keywordMajor>Unattach</keywordMajor> if her ally uses Summoner Teleport.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseHealthOnHit",
@@ -272,6 +273,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
 					"tooltip": "Yuumi channels for @UltDuration@ seconds, launching @NumberOfWaves@ magical waves affecting both teams. If initially cast while <keywordMajor>Attached</keywordMajor>, Yuumi can steer the waves to follow her mouse.<br><br>Enemies struck are dealt <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and <status>Slowed</status> by @BaseSlow*-100@% for @CCDuration@ seconds, increased by @BonusSlowPerWave*-100@% per wave hit.<br><br>Ally champions are healed for <healing>@TotalHealPerWave@ health</healing> per wave. Excess healing is converted to a <shield>Shield</shield> instead.<br><br><keywordMajor>Best Friend Bonus:</keywordMajor> For her <keywordMajor>Best Friend</keywordMajor>, the heal is increased to <healing>@EnhancedHealPerWave@ health</healing>.<br><br><rules>Casting <spellName>You and Me!</spellName> will locks the waves in the current direction.<br>Yuumi can move and cast <spellName>Zoomies</spellName> while channeling.</rules>",
+					"tooltipExtendedBelowLine": "<rules>Missiles after the first deal <magicDamage>@MultiMissileTotal@ magic damage</magicDamage>. Max possible damage to a single enemy is <magicDamage>@TotalSingleTargetDamage@ magic damage</magicDamage>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseMissileDamage",

@@ -143,6 +143,7 @@
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
 					"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Can also be used on Daisy.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseShield",
@@ -206,6 +207,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [150, 140, 130, 120, 110, 100, 90],
 					"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move.",
+					"tooltipExtendedBelowLine": "<rules>Daisy has:<br><healing>@TotalDaisyHP@ Health</healing><br><scaleArmor>@TotalBonusResists@ Armor</scaleArmor><br><scaleMR>@TotalBonusResists@ Magic Resist</scaleMR><br><scaleAD>@TotalDaisyAD@ Attack Damage</scaleAD></rules>",
 					"extendedVariables": [
 						{
 							"name": "DaisyAD",

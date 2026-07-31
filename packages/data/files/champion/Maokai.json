@@ -38,6 +38,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
 					"tooltip": "Maokai smashes his fist into the ground, dealing <magicDamage>@TotalDamage@ plus @BasePercentHealth*100@% max Health magic damage</magicDamage> and briefly <status>Slowing</status>. Nearby enemies are also <status>Knocked Back</status>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals an additional <magicDamage>@BonusMonsterDamage@ magic damage</magicDamage> to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -154,6 +155,7 @@
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"tooltip": "Maokai flings a sapling, which stands watch for @SaplingDuration@ seconds. Saplings chase nearby enemies, detonating on arrival to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slow</status> surrounding enemies by @SlowAmount*100@% for @SlowDuration@ seconds. <keywordMajor>Sap Magic's</keywordMajor> Cooldown is reduced by an additional 4 seconds if the sapling hits an enemy champion or epic monster.<br><br>If placed in brush, Saplings instead last for @EmpoweredSaplingDuration@ seconds and cause a larger explosion, dealing <magicDamage>@TotalEmpoweredDamage@ magic damage</magicDamage> over @EmpoweredDoTDuration@ seconds and <status>Slowing</status> enemies by @EmpoweredSlowAmount@.",
+					"tooltipExtendedBelowLine": "<rules>Saplings run at @SaplingMoveSpeed@ Move Speed. Brush saplings do not deal the increased damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

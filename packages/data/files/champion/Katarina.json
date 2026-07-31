@@ -103,6 +103,7 @@
 					"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target.",
+					"tooltipExtendedBelowLine": "<rules>The strike Applies On-Hit Effects.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -209,6 +210,7 @@
 					"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
 					"cooldownTime": [75, 75, 60, 45, 0, 0, 0],
 					"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies %i:OnHit% <OnHit>On-Hit and On-Attack</OnHit> effects at @OnHitRatio*100@% damage, and does not Critically Strike or apply Life Steal.<br>The <physicalDamage>physical damage</physicalDamage> additionally increases with <attackSpeed>Attack Speed</attackSpeed>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "DamagePerTick",

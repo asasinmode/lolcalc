@@ -139,6 +139,7 @@
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [20, 20, 18.5, 17, 15.5, 14, 14],
 					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @StunDuration@ seconds. The cage lasts for 3 seconds.",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>",
 					"extendedVariables": [
 						{
 							"name": "StunDuration",

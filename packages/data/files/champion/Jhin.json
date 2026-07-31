@@ -107,6 +107,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Jhin fires a long range shot dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first champion hit and other enemies along the way.<br><br>If this skill strikes a champion that has been damaged by an allied champion within the last @SpottingDuration@ seconds, it will <status>Root</status> them for @RootDuration@ seconds and grant Jhin <spellName>Whisper</spellName>'s Move Speed.",
+					"tooltipExtendedBelowLine": "<rules>This ability deals @MinionMod*100@% damage to minions.<br>Champions that step on a trap from <spellName>Captive Audience</spellName> can also be rooted.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -157,6 +158,7 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"tooltip": "<passive>Passive:</passive> Champions Jhin kills will create and detonate a Lotus Trap at their location.<br><br><active>Active:</active> Jhin places an invisible Lotus Trap for @TrapDuration@ minutes that creates a zone that <status>Slows</status> by @TrapSlowAmount*100@% when stepped on by an enemy. After @TrapDetonationTime@ seconds, the trap detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This ability has 2 charges (@AmmoRechargeRateTooltip@ second refresh).",
+					"tooltipExtendedBelowLine": "<rules>Lotus Trap hits deal @ReducedDamagePercent*100@% damage to minions, and enemies recently hit by another Lotus Trap.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

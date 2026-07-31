@@ -39,6 +39,7 @@
 					"cooldownTime": [18, 16, 14, 12, 10, 8, 6],
 					"tooltip": "<keywordMajor>Mercury Hammer:</keywordMajor> Jayce leaps to an enemy, dealing <physicalDamage>@spell.JayceToTheSkies:Damage@ physical damage</physicalDamage> to surrounding enemies and <status>Slowing</status> them by @spell.JayceToTheSkies:Slow*-100@% for @spell.JayceToTheSkies:SlowDuration@ seconds.",
 					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonusDamage@ bonus damage to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -81,6 +82,7 @@
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "<keywordMajor>Mercury Cannon</keywordMajor>: Jayce fires an orb of electricity, dealing <physicalDamage>@spell.JayceShockBlast:Damage@ physical damage</physicalDamage> to the first enemy hit and all surrounding enemies. Firing this orb through <spellName>{{Spell_JayceAccelerationGate_Name}}</spellName> increases the range, speed and raises the damage to <physicalDamage>@spell.JayceShockBlast:EmpoweredDamage@</physicalDamage>.",
 					"tooltipExtended": "{{Spell_JayceShockBlast_Tooltip}}<br><br>{{Spell_JayceToTheSkies_Tooltip}}",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonusDamage@ bonus damage to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -219,6 +221,7 @@
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 10],
 					"tooltip": "<keywordMajor>Hammer Form</keywordMajor>: Jayce swings his hammer, <status>Knocking Back</status> his target and dealing <magicDamage>@spell.JayceThunderingBlow:FlatDamage@ plus @spell.JayceThunderingBlow:PercHPDamage*100@% max Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_JayceThunderingBlow_Tooltip}}<br><br>{{Spell_JayceAccelerationGate_Tooltip}}",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Hammer</keywordMajor> swing does a max of <magicDamage>@MonsterCap@ magic damage</magicDamage> against jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "PercHPDamage",

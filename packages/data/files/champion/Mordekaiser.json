@@ -107,6 +107,7 @@
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png",
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>",
+					"tooltipExtendedBelowLine": "<rules>Shield decays over time.<br>Damage stored from non-champion sources reduced by 75%.</rules>",
 					"extendedVariables": [
 						{
 							"name": "HealingPercent",
@@ -216,6 +217,7 @@
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png",
 					"cooldownTime": [140, 140, 120, 100, 90, 80, 8],
 					"tooltip": "Mordekaiser banishes a champion to the Death Realm with him for @SpiritRealmDuration@s, stealing @StatStealPercentScalar*100@% of their core stats for the duration.<br><br>If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns.",
+					"tooltipExtendedBelowLine": "<rules>Core stats stolen include: <scaleAP>Ability Power</scaleAP>, <scaleAD>Attack Damage</scaleAD>, <attackSpeed>Attack Speed</attackSpeed>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, and <scaleHealth>Maximum Health</scaleHealth>.</rules>",
 					"extendedVariables": [],
 					"dataValues": {
 						"SpiritRealmDuration": [7, 7, 7, 7, 7, 7, 7],

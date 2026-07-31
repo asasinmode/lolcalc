@@ -38,6 +38,7 @@
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [6, 6, 5.75, 5.5, 5.25, 5, 5],
 					"tooltip": "Twisted Fate throws three cards that deal <magicDamage>@TotalDamage@ magic damage</magicDamage> each.",
+					"tooltipExtendedBelowLine": "<rules>Enemies can only be damaged by one of the cards.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -302,6 +303,7 @@
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_rapidtoss.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Twisted Fate gains <attackSpeed>@AttackSpeedBonus@% Attack Speed</attackSpeed> and every 4th Attack deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>@TowerEffectiveness*100@% effective against structures.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Damage",
@@ -356,6 +358,7 @@
 					"mana": [100, 100, 100, 115, 130, 0],
 					"cooldownTime": [170, 170, 140, 110, 110, 110, 110],
 					"tooltip": "Twisted Fate focuses on his cards, granting <keywordStealth>True Sight</keywordStealth> of all enemy champions on the map for @Effect1Amount@ seconds and allowing him to <recast>Recast</recast>.<br><br><recast>Recast</recast>: Twisted Fate teleports up to @Effect4Amount@ units away.",
+					"tooltipExtendedBelowLine": "<rules><status>Disabling</status> effects will interrupt the teleport.</rules>",
 					"extendedVariables": [
 						{
 							"name": "RecastDuration",

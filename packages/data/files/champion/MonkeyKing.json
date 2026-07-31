@@ -107,6 +107,7 @@
 					"mana": [60, 55, 50, 45, 40, 40],
 					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"tooltip": "Wukong dashes and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ second, leaving behind a stationary <keywordMajor>Clone</keywordMajor> for @CloneDuration@ seconds.<br><br>The <keywordMajor>Clone</keywordMajor> Attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, each dealing @CloneDamageMod*100@% of normal damage.",
+					"tooltipExtendedBelowLine": "<rules><keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or true sight.</rules>",
 					"extendedVariables": [
 						{
 							"name": "CloneDamageMod",
@@ -196,6 +197,7 @@
 					"mana": [100, 100, 100, 100, 100, 0],
 					"cooldownTime": [10, 130, 110, 90, 90, 90, 10],
 					"tooltip": "Wukong gains <speed>@MoveSpeed*100@% Move Speed</speed> and spins his staff, <status>Knocking Up</status> nearby enemies for @KnockupDuration@ seconds and take <physicalDamage>@TotalDamageTT@ plus @PercentHPDamageTT@ max Health physical damage</physicalDamage> over @SpinDuration@ seconds.<br><br>This Ability can be cast a second time within @RecastWindow@ seconds before going on cooldown.",
+					"tooltipExtendedBelowLine": "<rules>Damage to jungle monsters is capped at <physicalDamage>@MonsterCapTT@ damage</physicalDamage> over @SpinDuration@ seconds.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BasePercentMaxHPDmgPerSec",

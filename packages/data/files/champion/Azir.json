@@ -38,6 +38,7 @@
 					"mana": [70, 80, 90, 100, 110, 110],
 					"cooldownTime": [14, 14, 12, 10, 8, 6, 6],
 					"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @SlowAmount*-100@% for 1 second.",
+					"tooltipExtendedBelowLine": "<rules>Enemies hit by multiple <keywordMajor>Sand Soldiers</keywordMajor> will not take additional damage.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -90,6 +91,7 @@
 					"mana": [40, 35, 30, 25, 20, 20],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"tooltip": "Azir summons a <keywordMajor>Sand Soldier</keywordMajor> for @Effect1Amount@ seconds. When Azir Attacks an enemy near a <keywordMajor>Sand Soldier</keywordMajor>, he instead orders the soldiers to stab, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> in their direction.<br><br>This Ability has @MaxAmmo@ charges.",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Sand Soldiers</keywordMajor> apply On-hits at @OnHitMultiplier*100@% damage once per attack to Azir's primary target.<br><keywordMajor>Sand Soldiers</keywordMajor> that strike the same targets deal @Effect9Amount@% damage after the first.<br><keywordMajor>Sand Soldiers</keywordMajor> deal @SecondaryTargetDamageMod@% damage to enemies that are not Azir's Attack target.<br><keywordMajor>Sand Soldiers</keywordMajor> expire twice as fast when near an enemy turret.<br></rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

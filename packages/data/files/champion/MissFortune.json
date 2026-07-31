@@ -38,6 +38,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
+					"tooltipExtendedBelowLine": "<rules>Both strikes apply on-hit effects.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

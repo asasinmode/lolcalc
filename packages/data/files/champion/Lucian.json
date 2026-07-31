@@ -38,6 +38,7 @@
 					"mana": [48, 56, 64, 72, 80, 90],
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability's cast time decreases with Lucian's level.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -145,6 +146,7 @@
 					"mana": [32, 24, 16, 8, 0, 0],
 					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @CDRefundBase@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@CDRefundChampion@ seconds for champions). ",
+					"tooltipExtendedBelowLine": "<rules>Lucian can use other Abilities while dashing.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -178,6 +180,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 110, 100, 90, 10, 10, 10],
 					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage>",
+					"tooltipExtendedBelowLine": "<rules>Number of shots scales with Lucian's Critical Strike chance and Critical Strike damage at @CritValueMod*100@% effectiveness.<br>Deals @PercentDamageAmpToMinions@% damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

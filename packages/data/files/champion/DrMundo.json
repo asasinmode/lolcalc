@@ -37,6 +37,7 @@
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_q.png",
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "Dr. Mundo hurls his bonesaw, dealing <magicDamage>@CurrentHealthDamage*100@% current Health magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the bonesaw hits a champion or monster, Dr. Mundo restores <healing>@HealthRestoreOnHitChampionMonster@ Health</healing>. If it hits a non-champion or non-monster, Dr. Mundo instead restores <healing>@HealthRestoreOnHitMinion@ Health</healing>.",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of <magicDamage>@MinimumDamage@ magic damage</magicDamage>, and a maximum of <magicDamage>@MaximumMonsterDamage@ magic damage</magicDamage> to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "CurrentHealthDamage",
@@ -171,6 +172,7 @@
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_e.png",
 					"cooldownTime": [9, 9, 8.25, 7.5, 6.75, 6, 6],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Dr Mundo gains <physicalDamage>@PassiveBonusAD@ Attack Damage</physicalDamage>.<br><br><spellActive>Active:</spellActive> Dr Mundo violently swings his \"medical\" bag, causing his next Attack to deal an additional <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage>, increased by up to @MaxDamageAmpTooltip@ based on his missing Health. If the enemy is killed, Mundo swats them away, dealing <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> to enemies they pass through.",
+					"tooltipExtendedBelowLine": "<rules>The bonuses from the passive reach their maximum at @MaxMissingHealthThreshold*100@% missing Health.<br>Deals @MinionMod*100@% damage to minions. Deals @MonsterMod*100@% damage to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

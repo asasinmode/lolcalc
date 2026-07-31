@@ -179,6 +179,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [4, 4, 3, 2, 2, 2, 2],
 					"tooltip": "<toggle>Toggle:</toggle> Anivia calls forth a driving rain of ice and hail that <status>Slows</status> enemies by @SlowAmount@% and deals <magicDamage>@TotalDamagePerSecond@ magic damage per second</magicDamage>. The storm increases in size over @GrowthTime@ seconds.<br><br>When the storm is fully formed, it <keywordMajor>Chills</keywordMajor>, <status>Slows</status> by @SlowPercentEmpoweredTT@%, and does <magicDamage>@EmpoweredDamagePerSecondTooltipOnly@ magic damage per second</magicDamage> instead.",
+					"tooltipExtendedBelowLine": "<rules>The storm ends if Anivia is too far away.</rules>",
 					"extendedVariables": [
 						{
 							"name": "DamagePerSecond",

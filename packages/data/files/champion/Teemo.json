@@ -38,6 +38,7 @@
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Minions and jungle monsters are <status>Blinded</status> for @MinionMonsterDurationMod*100@% longer.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -126,6 +127,7 @@
 					"image": "assets/characters/teemo/hud/icons2d/teemoe.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison %i:OnHit% <OnHit>On-Hit</OnHit>, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>This poison deals @MonsterMod*100@% damage to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ImpactBaseDamage",

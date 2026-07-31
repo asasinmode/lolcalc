@@ -112,6 +112,7 @@
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below @BelowHealthThreshold*100@% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting @SlowZoneDuration@ seconds after a delay that <status>Slows</status> enemies inside by @SlowPercent@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @StunDuration@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
+					"tooltipExtendedBelowLine": "<rules>Bonus Attack damage deals a min of <magicDamage>@OnHitMinMinionDamage@</magicDamage> and a max of <magicDamage>@OnHitMaxMinionDamage@ damage</magicDamage> against minions and monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ShieldBase",
@@ -200,6 +201,7 @@
 					"mana": [40, 45, 50, 55, 60, 60],
 					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Ekko can use any of his other Abilities during the dash.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -250,6 +252,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [110, 110, 80, 50, 50, 50, 50],
 					"tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>@TotalBaseHeal@ Health</healing>, increased by @PercentHealAmpPerPercentMissingHealth@% for each 1% Health he lost in last 4 seconds.",
+					"tooltipExtendedBelowLine": "<rules>Will detonate the chronosphere from {{ Spell_EkkoW_Name }} [@spell.EkkoW:HotKey@] if Ekko passed through it.</rules><br><rules>Units in Stasis cannot move or act, and are Invulnerable and Untargetable.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Damage",
@@ -389,6 +392,7 @@
 		"spell_listtype_returndamage": "Return Damage",
 		"spell_listtype_shieldamount": "Shield Amount",
 		"spell_listtype_damage": "Damage",
+		"spell_ekkow_name": "Parallel Convergence",
 		"spell_listtype_healing": "Healing",
 		"spell_ekkopassive_tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every @LockoutTime@ seconds."
 	}

@@ -38,6 +38,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "Nocturne throws a shadow blade, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and leaving a dusk trail for @TrailDuration@ seconds. Enemy champions hit also leave a trail. <br><br>While on the trail, Nocturne is Ghosted and gains <speed>@MoveSpeed@% Move Speed</speed> and <physicalDamage>@BonusTrailAD@ Attack Damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -97,6 +98,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <attackSpeed>@ActiveAS@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Nocturne creates a shadow barrier for 1.5 seconds that blocks the next enemy Ability. If an Ability is blocked, this Ability's passive effect is increased to <attackSpeed>@ActiveAS*2@% Attack Speed</attackSpeed> for @DoubleASDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>This Ability will remain active during <spellName>Paranoia's</spellName> flight.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ActiveAS",
@@ -281,6 +283,7 @@
 		}
 	},
 	"stringtable": {
+		"reminder_ghosted": "Ghosted units can pass through other units.",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_movementspeed": "Move Speed",
 		"spell_listtype_statbonusad": "Bonus Attack Damage",

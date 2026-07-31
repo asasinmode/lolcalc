@@ -79,6 +79,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [13, 13, 11.25, 9.5, 7.75, 6, 6],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage> %i:OnHit% <OnHit>On-Hit</OnHit>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.",
+					"tooltipExtendedBelowLine": "<rules>The passive also applies <spellName>Mark of the Storm</spellName> and can critically strike for @TotalDamagePassiveCrit@ instead.<br>Attacking structures will stack the passive, but not expend it. The active automatically hits enemies inside of <spellName>Slicing Maelstrom</spellName>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "bADRatio",
@@ -169,6 +170,7 @@
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Kennen turns into a ball of lightning, gaining <speed>@MovementSpeed*100@% Move Speed</speed>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through, and becoming Ghosted for @DurationAsBall@ seconds. If Kennen damages at least one enemy, he gains @EnergyRefund@ Energy. <br><br>After this ability ends, Kennen gains <attackSpeed>@TotalAS*100@% Attack Speed</attackSpeed> for @DurationAfterBall@ seconds. Critical Strikes extend this duration by @CritDurationBonus@ second(s). Kennen can <recast>Recast</recast> to end this Ability early.",
+					"tooltipExtendedBelowLine": "<rules>Ghosted units can pass through other units.<br>Deals @DamageToMinions*100@% damage to minions and jungle monsters.<br>Duration cannot be extended beyond its initial value.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -228,6 +230,7 @@
 					"image": "assets/characters/kennen/hud/icons2d/kennen_r.png",
 					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>@PerTickDamageCalculated@ magic damage</magicDamage> to all nearby enemies every @KennenRTickRate@ seconds, and gaining <scaleArmor>@KennenRDefenses@ Armor</scaleArmor> and <scaleMR>@KennenRDefenses@ Magic Resist</scaleMR> for @KennenRDuration@ seconds. Successive hits deal @DamageAmp*100@% increased damage for each hit the enemy has already suffered.",
+					"tooltipExtendedBelowLine": "<rules>Enemies can only receive 3 stacks of <spellName>Mark of the Storm</spellName> from this ability.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

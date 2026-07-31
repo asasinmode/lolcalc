@@ -271,6 +271,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"tooltip": "Sona strikes an irresistible chord, <status>Stunning</status> enemy for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "Enemies that know how to dance, will dance during the stun.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

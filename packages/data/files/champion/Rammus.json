@@ -286,6 +286,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 105, 90, 90, 90, 90],
 					"tooltip": "Rammus hops into the air and slams down in an area, dealing <magicDamage>@InitialDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds. If used during <spellName>Powerball</spellName>, enemies in the center take an additional <magicDamage>@spell.PowerBall:PowerBallDamage@ magic damage</magicDamage> and are <status>Knocked Up</status> for @KnockupDuration@ seconds.<br><br>Rammus then creates @NumberOfPulses@ aftershocks in the area over @BuffDuration@ seconds, repeating the <status>Slow</status>.<br><br>The range of this Ability is increased by Rammus's <speed>Move Speed</speed>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals @TurretDamageModifier*100@% damage to turrets.</rules>",
 					"extendedVariables": [
 						{
 							"name": "InitialDamage",

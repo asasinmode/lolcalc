@@ -215,6 +215,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_RyzeQWrapper_Name}}</spellName> damage bonus against targets with <keywordMajor>Flux</keywordMajor> increased to @OverloadDamageBonus@%.<br><br><spellActive>Active:</spellActive> Ryze opens a portal to another location. After @ChargeTimeTooltip@ seconds, all allies near the portal are teleported to that location.",
+					"tooltipExtendedBelowLine": "<rules>If Ryze becomes <status>Immobilized</status> or <status>Disabled</status>, the portal is cancelled.</rules>",
 					"extendedVariables": [
 						{
 							"name": "OverloadDamageBonus",

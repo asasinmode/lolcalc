@@ -37,6 +37,7 @@
 					"image": "assets/characters/aatrox/hud/icons2d/aatrox_q.png",
 					"cooldownTime": [14, 14, 12, 10, 8, 6, 4],
 					"tooltip": "Aatrox slams his greatsword, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>. If they are hit on the edge, they are briefly <status>Knocked Up</status> and they take <physicalDamage>@QEdgeDamage@</physicalDamage> instead. This Ability can be <recast>Recast</recast> twice, each one changing shape and dealing 25% more damage than the previous one.",
+					"tooltipExtendedBelowLine": "<rules>Deals @QMinionDamage@ damage to minions.<br><status>Knock Up</status> duration against monsters is doubled and it deals @QMonsterBonus@ bonus damage.</rules>",
 					"extendedVariables": [
 						{
 							"name": "QBaseDamage",
@@ -132,6 +133,7 @@
 					"image": "assets/characters/aatrox/hud/icons2d/aatrox_w.png",
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"tooltip": "Aatrox fires a chain, <status>Slowing</status> the first enemy hit by @WSlowPercentage*-100@% for @WSlowDuration@ seconds and dealing <physicalDamage>@WDamage@ physical damage</physicalDamage>. Champions and large jungle monsters have @WSlowDuration@ seconds to leave the impact area or be <status>Pulled</status> back to the center and damaged again for the same amount.",
+					"tooltipExtendedBelowLine": "<rules>Deals double damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "WBaseDamage",
@@ -225,6 +227,7 @@
 					"image": "assets/characters/aatrox/hud/icons2d/aatrox_r.png",
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Aatrox reveals his true demonic form, <status>Fearing</status> nearby minions for @RMinionFearDuration@ seconds and gaining <speed>@RMovementSpeedBonus*100@% Move Speed</speed> decaying over @RDuration@ seconds. He also gains <scaleAD>@RTotalADAmp*100@% Attack Damage</scaleAD> and increases <healing>self-healing by @RHealingAmp*100@%</healing> for the duration.<br><br>Champion takedowns extend the duration of this effect by @RExtension@ seconds and refresh the <speed>Move Speed</speed> effect.",
+					"tooltipExtendedBelowLine": "<rules>Duration cannot be increased past @RDuration@ seconds.</rules>",
 					"extendedVariables": [
 						{
 							"name": "RTotalADAmp",

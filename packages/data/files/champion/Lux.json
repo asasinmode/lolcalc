@@ -81,6 +81,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 9.5],
 					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @ShieldDuration@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
+					"tooltipExtendedBelowLine": "<rules>Both instances of Shield can stack.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseShieldAmount",

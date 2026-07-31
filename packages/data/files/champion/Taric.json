@@ -124,6 +124,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Taric gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and forms a tether between him and the ally bound by this Ability. As long as they are near each other, the ally gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and Taric casts all his Abilities from both himself and his linked ally.<br><br><spellPassive>Active: </spellPassive>Taric binds to an ally champion, granting a <shield>@Effect2Amount@% max Health Shield</shield> for @Effect3Amount@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Mimicked spell effects do not stack.</rules><br><rules>Only one ally can be bound at a time. </rules>",
 					"extendedVariables": [
 						{
 							"name": "ArmorBonusPercentage",

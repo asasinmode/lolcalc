@@ -37,6 +37,7 @@
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_q.png",
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining up to <scaleAD>@MaximumBonusAD@ Attack Damage</scaleAD> based on his missing Health.<br><br><spellActive>Active:</spellActive> Tryndamere consumes his <keywordMajor>Fury</keywordMajor>, restoring <healing>@BaseHeal@ plus @HealPerFury@ Health per Fury (max: @MaximumHeal@)</healing>. ",
+					"tooltipExtendedBelowLine": "<rules>Maximum Attack Damage gained at @RemainingHealthThreshold*100@% remaining Health.</rules>",
 					"extendedVariables": [
 						{
 							"name": "MaximumBonusAD",
@@ -208,6 +209,7 @@
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_r.png",
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Tryndamere becomes completely immune to death for @TryndRDuration@ seconds, refusing to be reduced below @TryndRMinHealth@ Health, and instantly gains <keywordMajor>@TryndRFuryGain@ Fury</keywordMajor>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability can be used while <status>Disabled</status>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "TryndRMinHealth",

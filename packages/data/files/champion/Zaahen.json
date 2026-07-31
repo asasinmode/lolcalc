@@ -38,6 +38,7 @@
 					"mana": [25, 25, 25, 25, 25, 25],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 5],
 					"tooltip": "Zaahen slashes twice on his next Attack, dealing <physicalDamage>@InitialDamage@ bonus physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of his max Health</healing>.<br><br><recast>Recast:</recast> Zaahen's next Attack deals <physicalDamage>@SecondHitDamage@ bonus physical damage</physicalDamage> and <status>Knocks</status> the target Up for @KnockUpDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Healing reduced to @MinionHealPercent*100@% against non-champions.</rules><br><rules>Deals an additional @MonsterDamagePercent*100@% bonus damage to monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Q1BaseDamage",
@@ -173,6 +174,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Zaahen dashes then slices around himself, dealing <physicalDamage>@BaseDamageCalc@ physical damage</physicalDamage> to nearby enemies.<br><br>Enemies at the edge of the slice take <physicalDamage>@BonusDamageCalc@ physical damage</physicalDamage> <magicDamage>+@PercentHPDamage*100@% of their maximum Health as magic damage</magicDamage> instead.",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <physicalDamage>@MonsterDamageBonus@ bonus physical damage</physicalDamage> to monsters.</rules><br><rules>Additional Maximum Health damage capped to @MonsterDamageCap@ against monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Damage_Base",

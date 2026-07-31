@@ -87,6 +87,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [21, 21, 20, 19, 18, 17, 16],
 					"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it.",
+					"tooltipExtendedBelowLine": "<rules>The <shield>Shield</shield> scales with number of <keywordMajor>Souls</keywordMajor> collected. Thresh can use his lantern to pick up <keywordMajor>Souls</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseShieldValue",
@@ -138,6 +139,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [13, 13, 12.25, 11.5, 10.75, 10, 9.25],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @ActiveSlowPercentage@% for @SlowDuration@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Passive damage scales with number of <keywordMajor>Souls</keywordMajor> collected.</rules>",
 					"extendedVariables": [
 						{
 							"name": "PassiveADRatio",

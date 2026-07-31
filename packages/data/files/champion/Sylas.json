@@ -38,6 +38,7 @@
 					"mana": [55, 55, 55, 55, 55, 55],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Sylas lashes his chains out, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmountCalc@ for @SlowDuration@ seconds. The place where the chains intersect explodes, dealing a further <magicDamage>@ExplosionDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>The explosion deals @MinionMod*100@% damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -227,6 +228,7 @@
 					"mana": [75, 75, 75, 75, 75, 75],
 					"cooldownTime": [80, 80, 55, 30, 10, 10, 10],
 					"tooltip": "Sylas hijacks an enemy champion, allowing him to cast a copy of their ultimate Ability, based on his Ultimate level and using his stats.<br><br>Hijacking an enemy places a Cooldown on them for @PerTargetCooldown@% (modified by Sylas' Ability Haste) of the enemy's ultimate's Cooldown, with a minimum of @MinimumEnemyCooldown@ seconds, during which time Sylas cannot hijack them again.",
+					"tooltipExtendedBelowLine": "<rules>Sylas converts non-hybrid AD ratios into AP ratios, granting him .4 AP: 1 Bonus AD and .6 AP: 1 Total AD respectively.</rules>",
 					"extendedVariables": [],
 					"dataValues": {
 						"EnemyCooldownPercent": [2, 2, 2, 2, 2, 2, 2],

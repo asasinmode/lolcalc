@@ -120,6 +120,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [18, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
+					"tooltipExtendedBelowLine": "<rules>Lillia does not dash over terrain with this ability.</rules><br><rules>Deals 50% less damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "FlatDamageBase",
@@ -232,6 +233,7 @@
 					"cooldownTime": [150, 150, 130, 110, 110, 110, 110],
 					"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Drowsy units are slowed over the duration, and fall Asleep afterwards.<br>Asleep units can't move or act until damaged by an enemy with non-periodic damage.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BreakDamageBase",

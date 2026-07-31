@@ -140,6 +140,7 @@
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [18, 17, 16, 15, 14, 13, 13],
 					"tooltip": "Viktor deploys a gravitational imprisonment device for @FieldDuration@ seconds, <status>Slowing</status> enemies inside it by @SlowPotency*-1@%. Enemies who remain within its radius for 1.25 seconds are <status>Stunned</status> for @StunDuration@ seconds.<br><br><keywordMajor>Upgraded Passive:</keywordMajor> Viktor's Abilities <status>Slow</status> by @AugmentSlow@% for 1 second.",
+					"tooltipExtendedBelowLine": "<rules>Enemies that are <status>Stunned</status> by this Ability are also <status>Knocked Down</status>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "SlowPotency",
@@ -253,6 +254,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [0, 120, 100, 80, 0, 0, 0],
 					"tooltip": "Viktor conjures an Arcane Storm in an area for @StormDuration@ seconds, which instantly deals <magicDamage>@InitialBurstDamage@ magic damage</magicDamage> followed by <magicDamage>@SubsequentBurstDamage@ magic damage</magicDamage> per second to surrounding enemies. The storm automatically follows champions it has recently damaged.<br><br><recast>Recast:</recast> Viktor can manually move the storm.<br><br><keywordMajor>Upgraded:</keywordMajor> The storm moves @AugmentBoost*100@% faster. If a champion that the storm has damaged dies, the storm increases its size and its duration by @Tooltip_DurationExtension@ seconds (up to @MaxGrowths@ times).",
+					"tooltipExtendedBelowLine": "<rules>When the storm appears it interrupts channeled Abilities.<br>The farther the storm is from Viktor, the slower it moves.</rules>",
 					"extendedVariables": [
 						{
 							"name": "InitialBurstBaseDamage",

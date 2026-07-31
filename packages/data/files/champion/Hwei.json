@@ -356,6 +356,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Hwei launches a vision of pure despair that sticks to an enemy champion for @Duration@ seconds. The vision expands over time applying a <status>Slow</status> to enemies for @SlowPercentPerStack@% stacking every 0.25 seconds, and dealing <magicDamage>@DamageOverTime@ magic damage per second</magicDamage>.<br><br>Upon completion, the vision shatters, dealing <magicDamage>@Damage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Maximum damage possible is <magicDamage>@TotalMaxDamage@ magic damage</magicDamage>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "RBaseDamage",

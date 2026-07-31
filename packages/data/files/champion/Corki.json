@@ -156,6 +156,7 @@
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Corki fires a gatling gun in front of him, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> over @SprayDuration@ seconds and shredding up to <scaleArmor>@ShredMax*-1@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.",
+					"tooltipExtendedBelowLine": "<rules>The shred lingers for @ShredDuration@ seconds after being hit.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

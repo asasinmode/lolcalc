@@ -90,6 +90,7 @@
 					"mana": [40, 45, 50, 55, 60, 60],
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit.",
+					"tooltipExtendedBelowLine": "<rules>Voidlings deal @LaneMinionMod*100@% damage to lane minions affected by <spellName>Malefic Visions</spellName>.<br>Voidlings deal @EpicMonsterMod*100@% damage to epic monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "VoidlingBaseDamage",
@@ -240,6 +241,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [140, 140, 110, 80, 80, 80, 80],
 					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @CCDuration@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @PoolDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BeamDamage",

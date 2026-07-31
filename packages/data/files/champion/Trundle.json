@@ -38,6 +38,7 @@
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"tooltip": "Trundle's next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @SlowAmount*100@%, then Trundle gains <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> for @SapDebuffDuration@ seconds and the enemy loses <physicalDamage>@SappedAD*-1@ Attack Damage</physicalDamage> for the same duration.",
+					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>Trundle gains @BonusRange@ attack range for this attack.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BonusDamage",
@@ -175,6 +176,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Trundle drains the lifeforce of an enemy champion, dealing <magicDamage>@TotalPercentHPDamage@ max Health magic damage</magicDamage> and stealing <scaleArmor>@ArmorMRShred*100@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> over @ActualDurationOfDrainBuff@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Half of the damage and shred happen immediately and the other half happens over the duration.<br>The shred lasts for @DurationOfDrainForTooltip@ seconds after the drain ends.</rules>",
 					"extendedVariables": [
 						{
 							"name": "PercentHPDamage",
@@ -237,6 +239,7 @@
 		}
 	},
 	"stringtable": {
+		"buff_desc_spelleffects": "This Ability triggers spell effects upon dealing damage.",
 		"spell_listtype_damage": "Damage",
 		"spelllisttype_attackdamageratio": "Attack Damage Ratio",
 		"spell_listtype_attackdamagebonus": "Attack Damage",

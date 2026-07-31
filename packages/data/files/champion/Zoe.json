@@ -100,6 +100,7 @@
 					"image": "assets/characters/zoe/hud/icons2d/zoe_w.png",
 					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Enemies drop spell shards when casting a Summoner Spell or using an Active Item. Specific minions also drop a spell shard when Zoe or a nearby ally kills them. Zoe can pick up this shard to cast that ability once.<br><br><spellPassive>Passive:</spellPassive> When Zoe casts this Ability or any Summoner Spell, she gains <speed>@MovementSpeed*100@% Move Speed</speed> for @MSDuration@ seconds and tosses 3 missiles at the target she Attacked most recently. These missiles deal <magicDamage>@MissileDamageTooltip@ magic damage</magicDamage> each.<br><br><spellActive>Active:</spellActive> Cast the Ability from a spell shard Zoe has picked up.",
+					"tooltipExtendedBelowLine": "<rules>Spell shards last on the ground for 40 seconds.<br>Each missile can apply <spellName>More Sparkles!</spellName></rules>",
 					"extendedVariables": [
 						{
 							"name": "TotalBaseDamage",
@@ -161,6 +162,7 @@
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"tooltip": "Zoe dropkicks a bubble that deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, lingering as a trap if it hits nothing. The bubble's range is extended when flying over terrain.<br><br>If either the bubble or trap hits an enemy champion she refreshes @CooldownRefresh*100@% of her cooldown.<br><br>After a delay, the victim falls <status>Asleep</status> and have their <scaleMR>Magic Resist</scaleMR> reduced by @PercentPen*100@% for 2 seconds. Attacks and Ability hits wake them up but deal double damage, up to <trueDamage>@BreakDamageTooltip@ true damage</trueDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Before the target falls <status>Asleep</status>, they are <status>Drowsy</status>, becoming increasingly <status>Slowed</status> (up to @DrowsySlow*100@%).</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -238,6 +240,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [11, 11, 8, 5, 0, 0, 0],
 					"tooltip": "Zoe teleports to a nearby position for 1 second. Afterwards, she teleports back. Zoe can use Abilities and Attack, but can't move during this time.",
+					"tooltipExtendedBelowLine": "<rules>Zoe can also see over walls during the teleport.</rules>",
 					"extendedVariables": [],
 					"effectAmount": {
 						"0": [-0.3, -0.3, -0.4, -0.5, -0.6, -0.7, -0.7],

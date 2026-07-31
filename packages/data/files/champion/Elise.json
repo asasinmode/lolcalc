@@ -39,6 +39,7 @@
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise injects neurotoxin, dealing <magicDamage>@BaseDamage@ plus @HumanPercentHealth@ current Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_EliseHumanQ_Tooltip}}<br><br>{{Spell_EliseSpiderQ_Tooltip}}",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor> percent Health damage is capped at @MonsterDamageCapCalc@ against monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -104,7 +105,8 @@
 					"image": "assets/characters/elise/hud/icons2d/elisespiderq.png",
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "<keywordMajor>Spider Form:</keywordMajor> Elise lunges with a poisonous bite, dealing <magicDamage>@Spell.EliseSpiderQCast:BaseDamage@ plus @Spell.EliseSpiderQCast:MissingHPDamage@ missing Health magic damage</magicDamage>.",
-					"tooltipExtended": "{{Spell_EliseSpiderQ_Tooltip}}<br><br>{{Spell_EliseHumanQ_Tooltip}}"
+					"tooltipExtended": "{{Spell_EliseSpiderQ_Tooltip}}<br><br>{{Spell_EliseHumanQ_Tooltip}}",
+					"tooltipExtendedBelowLine": "<rules>Venomous Bite will apply on-hit effects once to the target</rules>"
 				},
 				{
 					"name": "Venomous Bite / Neurotoxin",

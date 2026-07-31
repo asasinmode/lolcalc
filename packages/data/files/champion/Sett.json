@@ -37,6 +37,7 @@
 					"image": "assets/characters/sett/hud/icons2d/sett_q.png",
 					"cooldownTime": [9, 9, 8, 7, 6, 5, 9],
 					"tooltip": "Sett itches for a fight, gaining <speed>@MSAmount*100@% Move Speed</speed> towards enemy champions for @MSDuration@ seconds.<br><br>Additionally Sett's next two Attacks deal an additional <physicalDamage>@BaseDamage@ plus @MaxHealthDamageCalc@ max Health physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>The Attacks are always a left and right punch. Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to monsters per punch.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -199,6 +200,7 @@
 					"image": "assets/characters/sett/hud/icons2d/sett_e.png",
 					"cooldownTime": [18, 16, 14.5, 13, 11.5, 10, 10],
 					"tooltip": "Sett smashes enemies on either side of him into each other, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If Sett grabbed at least one enemy on each side, all enemies are <status>Stunned</status> for @StunDuration@ second.",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonus@ bonus damage against monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

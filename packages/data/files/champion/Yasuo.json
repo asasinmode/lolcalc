@@ -37,6 +37,7 @@
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png",
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "Yasuo thrusts, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If he hits, he gains a stack for @GatheringStormDuration@ seconds. While he has 2 stacks, his next use of this Ability fires a whirlwind from range, dealing the same damage and <status>Knocking Up</status> for @KnockUpDurationTOOLTIPONLY@ second.<br><br>If used while dashing, this Ability strikes in a circle rather than a stab.",
+					"tooltipExtendedBelowLine": "<rules>This Ability acts like an Attack: it can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>, it applies %i:OnHit% <OnHit>On-hit</OnHit> effects and lifesteal to the first enemy struck, is interruptible by crowd control, and its cooldown and cast time are reduced with <attackSpeed>Attack Speed</attackSpeed>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -99,6 +100,7 @@
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png",
 					"cooldownTime": [27, 25, 23, 21, 19, 17, 15],
 					"tooltip": "Yasuo creates a drifting wall of wind that blocks all enemy projectiles for 4 seconds.",
+					"tooltipExtendedBelowLine": "<rules>Tower shots and beams are not blocked.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Effect5Amount",

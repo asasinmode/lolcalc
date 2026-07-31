@@ -38,6 +38,7 @@
 					"mana": [50, 60, 70, 80, 90, 90],
 					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 7],
 					"tooltip": "Naafiri hurls Darkin-tainted blades, dealing <physicalDamage>@spell.NaafiriQ:TotalDamageFirstCast@ physical damage</physicalDamage> and inflicting a bleed, dealing <physicalDamage>@spell.NaafiriQ:TotalBleedDamage@ physical damage</physicalDamage> over @spell.NaafiriQ:BleedDuration@ seconds.<br><br>Naafiri can <recast>Recast</recast> this Ability. If enemies hit are already bleeding from this Ability, it instead deals the remaining bleed damage plus between <physicalDamage>@spell.NaafiriQ:TotalMinDamageSecondCast@</physicalDamage> and <physicalDamage>@spell.NaafiriQ:TotalMaxDamageSecondCast@ physical damage</physicalDamage>, based on their missing Health. If that target was a champion or large monster, Naafiri restores <healing>@spell.NaafiriQ:TotalHealSecondCast@ Health</healing>.<br><br><keywordMajor>Packmates</keywordMajor> will leap at the first champion or monster hit and attack them for @spell.NaafiriP:PackmateTauntDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Executes lane minions and non-epic monsters below @MinionExecuteThreshold@ health.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamageFirstCast",
@@ -284,6 +285,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 95, 80, 80, 80, 80],
 					"tooltip": "Naafiri dashes at an enemy champion, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slowing</status> them. <keywordMajor>Packmates</keywordMajor> become Untargetable and dash alongside Naafiri, dealing <physicalDamage>@PackmateDamage@ physical damage</physicalDamage> per <keywordMajor>Packmate</keywordMajor>.<br><br>If Naafiri scores a Takedown within @TakedownWindow@ seconds she reveals nearby enemies and can recast this Ability once. The second cast grants <shield>@ShieldTotal@ Shield</shield> for @ShieldDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Briefly extends<keywordMajor> The Call of the Pack</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

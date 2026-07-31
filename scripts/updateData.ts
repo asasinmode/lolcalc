@@ -2047,10 +2047,7 @@ function championAbilityVariant(
 	if (saveTooltips) {
 		variant.tooltip = mLocKeys.keyTooltip;
 		variant.tooltipExtended = mLocKeys.keyTooltipExtended;
-		// TODO should be done for all abilities
-		if (abilityKey === 'passive') {
-			variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
-		}
+		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
 	}
 
 	return [variant, maxLevel];
@@ -2157,14 +2154,11 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				abilityKey === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` } : `${variant.dataKey} tooltip extended`,
 			);
 			variant.tooltipExtended &&= transformAbilityText(variant.tooltipExtended);
-			// TODO TMP some abilities have it but found in stringtable and probably hashed so uncomment it when hashed stringtable keys are tried and resolved
-			if (abilityKey === 'passive') {
-				variant.tooltipExtendedBelowLine = variant.tooltipExtendedBelowLine && getStringtableValue(
-					variant.tooltipExtendedBelowLine,
-					{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
-				);
-				variant.tooltipExtendedBelowLine &&= transformAbilityText(variant.tooltipExtendedBelowLine);
-			}
+			variant.tooltipExtendedBelowLine = variant.tooltipExtendedBelowLine && getStringtableValue(
+				variant.tooltipExtendedBelowLine,
+				{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
+			);
+			variant.tooltipExtendedBelowLine &&= transformAbilityText(variant.tooltipExtendedBelowLine);
 
 			for (const extendedVariable of variant.extendedVariables || []) {
 				if (extendedVariable.nameOverride) {

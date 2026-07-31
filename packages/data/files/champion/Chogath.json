@@ -130,6 +130,7 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules><spellName>Feast</spellName> stacks increase the width of the spikes and the max Health damage by @FeastStackMultiplier@% per stack.<br>Percent Health damage against monsters is replaced with @ModifiedMonsterCap@.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -208,6 +209,7 @@
 					"mana": [100, 100, 100, 60, 60, 0],
 					"cooldownTime": [70, 80, 70, 60, 10, 10, 70],
 					"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. ",
+					"tooltipExtendedBelowLine": "<rules>Current minion and non-epic jungle monster stacks:</rules> <statTracking>@f3@/@RMinionMaxStacks@</statTracking><br><rules>Cho'Gath gains bonus attack and <spellName>Feast</spellName> cast range based upon his stacks:<br>@AttackRangePerStack@ Attack Range per stack (max @MaxBonusAttackRange@).<br>@CastRangePerStack@ Cast Range per stack (max @MaxBonusCastRange@).</rules>",
 					"extendedVariables": [
 						{
 							"name": "RBaseDamage",

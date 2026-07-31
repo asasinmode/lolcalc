@@ -86,6 +86,7 @@
 					"mana": [40, 30, 20, 10, 0, 0],
 					"cooldownTime": [12, 12, 9, 6, 3, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @WAttacksPerSecond@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @SlowResistance@% <status>Slow</status> resistance, but loses <speed>@MoveSpeedMod@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
+					"tooltipExtendedBelowLine": "<rules>The shots apply On-Hit effects at @OnHitDamageReduction*100@% damage. They cannot critically strike.<br>Shots deal a minimum of @MinionMinimumDamage@ damage to minions and jungle monsters.<br>Urgot can move through minions and non-epic jungle monsters while firing.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ADRatioTT",
@@ -161,6 +162,7 @@
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Cannot cross terrain.</rules>",
 					"extendedVariables": [
 						{
 							"name": "EBaseDamage",
@@ -237,6 +239,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>This Ability will automatically <recast>Recast</recast> at the end of the duration if the victim is under the execution threshold.</rules>",
 					"extendedVariables": [
 						{
 							"name": "RBaseDamage",

@@ -38,6 +38,7 @@
 					"mana": [90, 95, 100, 105, 110, 110],
 					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early.",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <magicDamage>@ExtraDamagePerSecondCharged@ magic damage</magicDamage>, <status>Knocks Up</status> for an additional @ChargeKnockup@ seconds, and travels @ChargeDistancePercent@% farther for each second it grew, and always reaches its destination in @MissileTravelTime@ seconds.</rules>",
 					"extendedVariables": [
 						{
 							"name": "MinDamage",
@@ -155,6 +156,7 @@
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Ghosted units ignore collision with other units.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -303,6 +305,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [130, 130, 115, 100, 100, 100, 100],
 					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
+					"tooltipExtendedBelowLine": "<rules>The <status>Knock Back</status> cannot push enemies over walls.</rules>",
 					"extendedVariables": [
 						{
 							"name": "HealBasePerSecond",

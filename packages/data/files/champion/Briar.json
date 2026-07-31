@@ -37,6 +37,7 @@
 					"image": "assets/characters/briar/hud/icons2d/briarq.png",
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 8],
 					"tooltip": "Briar leaps to a target, <status>Stunning</status> it for @StunDuration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and reducing @ShredPercent*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.<br><br><rules>Briar will stop prioritizing champions if she casts this Ability on a minion or monster during <keywordMajor>Blood Frenzy</keywordMajor>.</rules>",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies {{ Item_Keyword_OnHit }} effects.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -89,6 +90,7 @@
 					"image": "assets/characters/briar/hud/icons2d/briarw.png",
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Briar leaps and enters a <keywordMajor>Blood Frenzy</keywordMajor>, self-taunting to the nearest enemy for @BerserkDuration@ seconds, prioritizing Champions. While in <keywordMajor>Blood Frenzy</keywordMajor> she gains <attackSpeed>@BerserkAS*100@% Attack Speed</attackSpeed> and <speed>@BerserkMS*100@% Move Speed</speed>, and her Attacks deal <physicalDamage>@TotalAoEDamage@ physical damage</physicalDamage> to enemies surrounding her target.<br><br>Briar can <recast>Recast</recast> this Ability to empower her next Attack. It deals <physicalDamage>@TotalAttackBonusDamage@ + @TotalAttackPercentMissingHealth@% missing Health physical damage</physicalDamage> and <healing>heals Briar for @AttackMaxHPHeal@ + @AttackHealPercent*100@% of the damage dealt</healing>.",
+					"tooltipExtendedBelowLine": "<rules>The bite deals @MonsterAndMinionPercentMod*100@% increased damage to minions and monsters (Max @MaxMonsterDamage@ missing health damage).<br>This ability does not remove or replace <spellName>{{Spell_BriarR_Name}}'s</spellName> empowered <keywordMajor>Blood Frenzy</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BerserkAS",
@@ -281,6 +283,7 @@
 					"image": "assets/characters/briar/hud/icons2d/briarr.png",
 					"cooldownTime": [120, 120, 100, 80, 70, 70, 70],
 					"tooltip": "Briar kicks her pillory's hemolith gemstone and flies to the location of the first champion it hits, marking them as her prey. On landing, she deals <magicDamage>@Damage@ magic damage</magicDamage> to everything nearby and causes enemies who are not her prey to <status>Flee</status> for @FearDuration@ seconds. She then enters an empowered <keywordMajor>Blood Frenzy</keywordMajor> and will pursue her prey until death. During this time, she gains @TotalResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @LifeStealPercent*100@% Lifesteal, and an additional <speed>@ExtraMoveSpeedPercent*100@% Move Speed</speed>.",
+					"tooltipExtendedBelowLine": "<rules>When the hemolith hits it interrupts channeled Abilities. Briar has <font color='#ee91d7'>True Sight</font color> of her prey.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -424,8 +427,10 @@
 		}
 	},
 	"stringtable": {
+		"item_keyword_onhit": "%i:OnHit% <OnHit>On-Hit</OnHit>",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_armorandmagicresistshred": "Armor and Magic Resist Shred",
+		"spell_briarr_name": "Certain Death",
 		"spell_listtype_attackspeed": "Attack Speed",
 		"spell_listtype_movementspeed": "Move Speed",
 		"spell_briarw_areadamage": "Area Damage AD Ratio",

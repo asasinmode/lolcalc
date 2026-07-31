@@ -216,6 +216,7 @@
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Nunu throws three snowballs, dealing <magicDamage>@TotalSnowballDamage@ magic damage</magicDamage> per snowball and <status>Slowing</status> enemies hit by all three by @SlowAmount*-100@% for @SlowDuration@ second. Nunu can <recast>Recast</recast> this up to twice more.<br><br>After @TotalSpellDuration@ seconds, Nunu <status>Roots</status> all nearby enemies that had been <status>Slowed</status> by the snowballs for @RootDuration@ seconds and deals an additional <magicDamage>@TotalRootDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Nunu can only <status>Slow</status> each enemy once with this Ability.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

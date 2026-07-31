@@ -205,6 +205,7 @@
 					"image": "assets/characters/rengar/hud/icons2d/rengar_w.png",
 					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Rengar roars, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and restoring <healing>@DamagePercentageHealed@%</healing> of the damage taken in the last @HealingWindow@ seconds as Health.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <magicDamage>@TotalDamageEmpowered@ magic damage</magicDamage> and additionally cleanses Rengar of crowd control.",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <magicDamage>@BonusMonsterDamage@ magic damage</magicDamage> to jungle monsters. Restores <healing>@MonsterHealingMod@%</healing> of damage taken from jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -272,6 +273,7 @@
 					"image": "assets/characters/rengar/hud/icons2d/rengar_e.png",
 					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Rengar throws a bola, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, revealing and <status>Slowing</status> them by @SlowAmount@% for @CCDuration@ seconds.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <physicalDamage>@TotalEmpoweredDamage@ physical damage</physicalDamage> and <status>Roots</status> for @CCDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Reveals enemies for @RevealDuration@ seconds.</rules><br><rules><spellName>Bola Strike</spellName> has no cast time when leaping.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -333,6 +335,7 @@
 					"image": "assets/characters/rengar/hud/icons2d/rengar_r.png",
 					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Rengar will also leap Attack when <keywordStealth>Camouflaged</keywordStealth>.<br><br><spellActive>Active:</spellActive> Rengar gains <speed>@StealthMS@% Move Speed</speed> and <keywordStealth>True Sight</keywordStealth> in a small area around the nearest enemy champion for @StealthDuration@ seconds.<br><br>After @FadeTime@ seconds, Rengar becomes <keywordStealth>Camouflaged</keywordStealth> and can leap without being in Brush. Leaping to the nearest champion deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage>, shreds <scaleArmor>@ArmorShred@ Armor</scaleArmor> for @ArmorShredDuration@ seconds, and ends this Ability.",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "ArmorShred",
@@ -432,6 +435,7 @@
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_cooldown": "Cooldown",
 		"spell_listtype_slow": "Slow",
+		"reminder_camouflage": "<keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.",
 		"spell_listtype_armorreduction": "Armor Reduction",
 		"spell_listtype_duration": "Duration",
 		"spell_listtype_movementspeed": "Move Speed",

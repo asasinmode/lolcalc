@@ -38,6 +38,7 @@
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [9, 9, 8, 7, 6, 5, 5],
 					"tooltip": "Akshan throws a boomerang that deals <physicalDamage>@FinalDamage@ physical damage</physicalDamage>, extending the range each time an enemy is hit.<br><br>Champion hits grant Akshan <speed>@TotalHaste@ Move Speed</speed> decaying over @HasteDuration@ second.",
+					"tooltipExtendedBelowLine": "<rules>Deals @SecondaryTargetDamage*100@% damage to non-champions. Enemies hit are briefly revealed.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -104,6 +105,7 @@
 					"mana": [40, 30, 20, 10, 0, 30],
 					"cooldownTime": [10, 18, 14, 10, 6, 2, 10],
 					"tooltip": "{{ Spell_AkshanW_Tooltip_@GameModeInteger@ }}",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}<br>While active, Akshan also sees trails leading to <keywordMajor>Scoundrels</keywordMajor>.<br>Akshan can only claim Scoundrels when he is alive.<br>Total gold earned: @f2@</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -154,6 +156,7 @@
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [8, 18, 16.5, 15, 13.5, 12, 8],
 					"tooltip": "<spellActive>First Cast:</spellActive> Akshan fires a grappling hook, attaching to the first terrain hit.<br><br><spellActive>Second Cast:</spellActive> Akshan swings around the terrain, repeatedly firing at the nearest enemy for <physicalDamage>@DamageToDeal@ physical damage</physicalDamage> per shot.<br><br><spellActive>Third Cast:</spellActive> Akshan dives off the rope, firing a final shot.<br><br>Colliding with an enemy Champion or terrain ends the swing early.<br><br>Champion takedowns refresh this Ability's Cooldown.",
+					"tooltipExtendedBelowLine": "<rules>Akshan prioritizes shooting champions marked by <spellName>Dirty Fighting</spellName>.<br>On-hits while swinging are @OnHitDamageReduction*100@% effective.<br>Damage is increased by <attackSpeed>@AttackSpeedCoefficient*100@% of bonus Attack Speed</attackSpeed>.<br>Attacks can critically strike for <physicalDamage>@CriticalCalc@ physical damage</physicalDamage>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -252,6 +255,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"tooltip": "Akshan locks onto a champion and begins overcharging his gun for up to @ChannelDuration@ seconds, storing up to @NumberOfBullets@ bullets.<br><br><recast>Recast:</recast> Akshan unleashes the stored bullets, each dealing at least <physicalDamage>@DamagePerBulletWithCrit@ physical damage</physicalDamage> to the first enemy or structure hit, increased up to <physicalDamage>@MaxDamagePerBullet@ physical damage</physicalDamage> based on missing Health.",
+					"tooltipExtendedBelowLine": "<rules>Bullets execute minions and apply Lifesteal.<br>Bullet damage scales with Critical Strike Chance and Critical Strike Damage at @CritDamageMod*100@% effectiveness.</rules>",
 					"extendedVariables": [
 						{
 							"name": "NumberOfBullets",
@@ -474,6 +478,7 @@
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
 		"spell_akshanq_miniondamagemod": "Minion Damage %",
+		"reminder_camouflage": "<keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.",
 		"spell_listtype_movementspeed": "Move Speed",
 		"spell_akshanr_numberofbullets": "Maximum Bullets",
 		"spell_akshanpassive_tooltip": "After launching an Attack, Akshan will fire an additional shot for <physicalDamage>@SecondAutoDamage@ physical damage</physicalDamage>. He can cancel this shot to instead gain <speed>@ASModdedMS@ Move Speed</speed> decaying over @HasteDuration@ second.<br><br>Every three hits from Attacks or Abilities deals an additional <magicDamage>@PassiveProcDamage@ magic damage</magicDamage>. Against champions, Akshan also gains <shield>@TotalShieldAmount@ Shield</shield> for @ShieldDuration@ seconds (@PassiveCooldown@ second Cooldown)."

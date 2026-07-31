@@ -38,6 +38,7 @@
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [16, 15, 14.5, 14, 13.5, 13, 12.5],
 					"tooltip": "<spellPassive>Passive:</spellPassive> While unseen and out of combat or impersonating an <keywordMajor>Effigy</keywordMajor>, damaging an enemy with an ability <status>Fears</status> them for @FearDuration@ second(s).<br><br><spellActive>Active:</spellActive> <status>Fear</status> an enemy for @FearDuration@ second(s) and deal <magicDamage>@TotalPercentHealthDamage@ current Health magic damage</magicDamage>. If the target has recently been <status>Feared</status> by Fiddlesticks, instead deal <magicDamage>@TotalPercentHealthDamageFeared@ current Health magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of <magicDamage>@MinimumDamage@ magic damage</magicDamage>, or <magicDamage>@MinimumDamage*2@ magic damage</magicDamage> if the target has been recently <status>Feared</status> by Fiddlesticks.</rules><br><rules>Deals a maximum of <magicDamage>400 magic damage</magicDamage> to minions and jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "FearDuration",
@@ -90,6 +91,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Fiddlesticks channels and drains the souls of nearby enemies, dealing <magicDamage>@DrainDamageCalc@ magic damage</magicDamage> per second for 2 seconds, plus <magicDamage>@PercentForTooltip@% missing Health magic damage</magicDamage> at the end. Fiddlesticks restores <healing>@VampPercentage@% of damage as Health</healing>.<br><br>If Fiddlesticks ends the channel without interruption, the remaining Cooldown is reduced by 60%.",
+					"tooltipExtendedBelowLine": "<rules>Healing based on pre-mitigation damage.<br>Against monsters, this Ability deals @MonsterDamageMod*100@% damage and <healing>heals @MonsterHealingMod*100@%</healing> of damage done.<br>Against minions, this Ability deals @MinionDamageMod*100@% damage and <healing>heals @MinionHealingMod@%</healing> of damage done.</rules>",
 					"extendedVariables": [
 						{
 							"name": "DamagePerSecond",

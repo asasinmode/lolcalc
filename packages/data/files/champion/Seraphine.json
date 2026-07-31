@@ -90,6 +90,7 @@
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [22, 22, 22, 22, 22, 22, 22],
 					"tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>@HasteValueAllies@ Move Speed</speed>, herself <speed>@WMSBonusTotal@ decaying Move Speed</speed> and both <shield>@ShieldValueSeraphine@ Shield</shield> for @ShieldDuration@ seconds.<br><br>If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>@WMissingHPHeal@% missing Health</healing> to them after a @WHealSplitDelay@ second delay.",
+					"tooltipExtendedBelowLine": "<rules>This Ability only heals once, even if cast twice.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ShieldStrength",
@@ -180,6 +181,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
 					"tooltip": "Seraphine unleashes a heavy soundwave, dealing <magicDamage>@FinalDamage@ magic damage</magicDamage> to enemies in a line and <status>Slowing</status> them by @SlowValue@% for @SlowDuration@ seconds.<br><br>Enemies that are already <status>Slowed</status> are <status>Rooted</status> instead, and <status>Immobilized</status> enemies are <status>Stunned</status>.",
+					"tooltipExtendedBelowLine": "<rules>Deals @MinionDamageMod*100@% damage against minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

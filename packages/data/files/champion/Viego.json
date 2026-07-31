@@ -37,6 +37,7 @@
 					"image": "assets/characters/viego/hud/icons2d/viego_q.png",
 					"cooldownTime": [5, 5, 4.5, 4, 3.5, 3, 3],
 					"tooltip": " <spellPassive>Passive:</spellPassive> Viego's Attacks deal an additional <physicalDamage>@TotalPercentHealthOnHit@ current Health physical damage</physicalDamage>. His first Attack against an enemy he has recently damaged with an Ability hits a second time, dealing <physicalDamage>@SecondAttackDamage@ physical damage</physicalDamage> and restoring <healing>@HealModVsChamps*100@% of damage dealt as Health</healing>. These bonuses are kept during <keywordMajor>Possession</keywordMajor>.<br><br><spellActive>Active: </spellActive>Viego stabs forward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>The second strike can Critically Strike and applies %i:OnHit% <OnHit>On-Hit</OnHit> effects while not <keywordMajor>Possessing</keywordMajor> an enemy. Its healing is decreased to @HealModVsMonsters*100@% vs. jungle monsters and @HealModVsMinions*100@% vs. minions. <br>The bonus %i:OnHit% <OnHit>On-Hit</OnHit> damage can critically strike for <physicalDamage>@HealthCritDamage@ current Health</physicalDamage> and deals a minimum of <physicalDamage>@MinDamageOnHit@ damage</physicalDamage>. It deals a max of <physicalDamage>@MonsterCapOnHit@ damage</physicalDamage> vs. jungle monsters.<br>This Ability's cast time is reduced with Attack Speed. Its damage scales with Critical Strike Chance and Damage at @ActiveCritMod*100@% effectiveness.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Damage",
@@ -181,6 +182,7 @@
 					"image": "assets/characters/viego/hud/icons2d/viego_w.png",
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "<charge>Begin Charging:</charge> Viego begins gathering Mist, <status>Slowing</status> himself by @SelfSlowPercent*100@%.<br><br><release>Release:</release> Viego dashes forward and hurls the gathered Mist. Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stuns</status> the first enemy hit for @Stunduration@ to @MaxStunTT@ seconds based on charge time.",
+					"tooltipExtendedBelowLine": "<rules>This Ability's Cooldown is set to @CDWheninterrupted@ seconds when interrupted.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Damage",
@@ -229,6 +231,7 @@
 					"image": "assets/characters/viego/hud/icons2d/viego_e.png",
 					"cooldownTime": [14, 14, 12, 10, 8, 6, 6],
 					"tooltip": "Viego sends forth a spectre to haunt the first terrain hit, surrounding it with Mist for @MistDuration@ seconds. Viego gains <keywordStealth>Camouflage</keywordStealth>, <speed>@TotalMoveSpeed@ Move Speed</speed>, and <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> while inside the Mist.",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}<br>Viego reveals himself for @RestealthTime@ seconds whenever he attacks or uses an Ability.</rules>",
 					"extendedVariables": [
 						{
 							"name": "MoveSpeed",
@@ -276,6 +279,7 @@
 					"image": "assets/characters/viego/hud/icons2d/viego_r.png",
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Viego discards any souls he is currently <keywordMajor>Possessing</keywordMajor> and teleports. On arrival he Attacks the champion with the lowest percent Health, briefly <status>Slowing</status> them by @SlowPercent*100@% and dealing <physicalDamage>@TotalDamage@ + @TotalPercentHealth@% missing Health physical damage</physicalDamage>. Other nearby enemies are <status>Knocked Back</status> and take <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies on-hit effects to the primary target and spell effects to everything else.<br>Damage scales with Critical Strike Chance and Damage at @CritMod*100@% effectiveness.</rules>",
 					"extendedVariables": [
 						{
 							"name": "MaxHealthDamage",
@@ -399,6 +403,7 @@
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_currenthealthdamage": "Current Health %",
 		"spell_viegoq_listtype_mincurrenthealthdamage": "Minimum Current Health Damage",
+		"reminder_camouflage": "<keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.",
 		"spell_listtype_movementspeed": "Move Speed",
 		"spell_listtype_attackspeed": "Attack Speed",
 		"spell_listtype_missinghealthdamage": "Missing Health Damage",

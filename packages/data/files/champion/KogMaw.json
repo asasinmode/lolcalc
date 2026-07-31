@@ -92,6 +92,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
 					"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> %i:OnHit% <OnHit>On-Hit</OnHit> for @Duration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Deals a maximum of <magicDamage>@MonsterDamageCap@ magic damage</magicDamage> to Monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Range",

@@ -77,6 +77,7 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>Deals @StructureMod*100@% damage to structures.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Damage",
@@ -199,6 +200,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 100, 90, 8, 7, 7],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack within @PassiveFallOffTime@ seconds deals an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Jax slams his lantern down, dealing <magicDamage>@SwingDamageTotal@ magic damage</magicDamage> to nearby enemies. If he hits a champion he gains <scaleArmor>@BaseArmor@ Armor</scaleArmor> and <scaleMR>@BaseMR@ Magic Resist</scaleMR> plus <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR> per additional champion hit for @Duration@ seconds. During this time every second Attack deals additional <magicDamage>magic damage</magicDamage> instead of every third.",
+					"tooltipExtendedBelowLine": "<rules>Deals @StructureMod*100@% damage to structures.</rules>",
 					"extendedVariables": [
 						{
 							"name": "PassiveBaseDamage",
@@ -403,6 +405,7 @@
 	},
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
+		"buff_desc_spelleffects": "This Ability triggers spell effects upon dealing damage.",
 		"spell_listtype_passivedamage": "Passive Damage",
 		"spell_listtype_activedamage": "Active Damage",
 		"spell_jaxrapexform_basearmor": "Base Armor",

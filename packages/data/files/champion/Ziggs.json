@@ -152,6 +152,7 @@
 					"mana": [70, 80, 90, 100, 110, 120],
 					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds. Mines last @MineDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Mines beyond the first deal <magicDamage>@ReducedDamage@ damage</magicDamage>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "DamagePerMine",

@@ -38,6 +38,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"tooltip": "Talon leaps to a target and deals <physicalDamage>@LeapDamage@ physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.<br><br>If this Ability kills the target, Talon restores <healing>@TotalHealing@ Health</healing> and refunds @CooldownRefund*100@% of its Cooldown.",
+					"tooltipExtendedBelowLine": "<rules>Melee damage is affected by Critical Strike Damage increase.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -206,6 +207,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"tooltip": "Talon disperses a ring of blades that deal <physicalDamage>@Damage@ physical damage</physicalDamage>, gains <speed>@MoveSpeed*100@% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for @Duration@ seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> again.<br><br>If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>{{Spell_TalonQ_Name}}</spellName>, the blades return to the target instead.",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Invisibility}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -288,6 +290,7 @@
 		"spell_listtype_returndamage": "Return Damage",
 		"spell_listtype_slow": "Slow",
 		"spell_talone_wallcooldown": "Terrain Cooldown",
+		"reminder_invisibility": "<keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or <font color='#ee91d7'>True Sight</font color>.",
 		"spell_listtype_movementspeed": "Move Speed",
 		"game_buff_tooltip_talonpassive": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds."
 	}

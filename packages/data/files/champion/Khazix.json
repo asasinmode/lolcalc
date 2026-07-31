@@ -278,6 +278,7 @@
 					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"tooltip": "{{Spell_KhazixR_Tooltip_@IsEvolved@}}<br><br>{{Spell_KhazixR_Tooltip_P}}",
 					"tooltipExtended": "{{Spell_KhazixR_Tooltip_P}}<br><br>{{Spell_KhazixR_Tooltip_0}}<br><br>{{Spell_KhazixR_Tooltip_1}}",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Invisibility}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "EvolutionsAvailable",
@@ -361,6 +362,7 @@
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_healing": "Healing",
+		"reminder_invisibility": "<keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or <font color='#ee91d7'>True Sight</font color>.",
 		"spell_listtype_khazixrevolutionsavailable": "Evolutions Available"
 	}
 }

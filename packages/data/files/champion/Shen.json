@@ -38,6 +38,7 @@
 					"mana": [140, 130, 120, 110, 100, 90],
 					"cooldownTime": [8.75, 8, 7.25, 6.5, 5.75, 5, 5],
 					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @SlowPercent@% while moving away from Shen for the next @SlowDuration@ seconds.<br><br>Additionally, Shen's next @NumEnhancedAttacks@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@SteroidAS@% Attack Speed</attackSpeed> for those Attacks.",
+					"tooltipExtendedBelowLine": "<rules>Each Attack deals @MonsterAmp*100@% increased damage to jungle monsters (max <magicDamage>@MinionDamageCap@ damage</magicDamage>).<br>Attacks against structures deal @TowerDamageCalc@ damage.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BasePercentDamage",

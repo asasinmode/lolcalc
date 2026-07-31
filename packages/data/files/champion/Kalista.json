@@ -121,6 +121,7 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals @EpicMonsterDamageMod*100@% damage to epic jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

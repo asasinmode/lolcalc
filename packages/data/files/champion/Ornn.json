@@ -38,6 +38,7 @@
 					"mana": [45, 45, 45, 45, 45, 45],
 					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 6.5],
 					"tooltip": "Ornn slams the ground, creating a fissure dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount@% for @SlowDuration@ seconds. A pillar of rock forms at the fissure's end for @PillarDuration@ seconds. ",
+					"tooltipExtendedBelowLine": "<rules>The fissure stops shortly after hitting an enemy champion. </rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -86,6 +87,7 @@
 					"mana": [45, 50, 55, 60, 65, 70],
 					"cooldownTime": [12.5, 12, 11.5, 11, 10.5, 10, 9.5],
 					"tooltip": "Ornn stomps forward Unstoppably while breathing fire, dealing <magicDamage>@MaxPercentHPPerTickTooltip@% max Health magic damage</magicDamage> over @BreathDuration@ seconds. Enemies hit by the final bout of flame become <keywordMajor>Brittle</keywordMajor> for @BrittleDuration@ seconds.<br><br><status>Immobilizing</status> effects on <keywordMajor>Brittle</keywordMajor> targets have their duration increased by 30% and deal an additional <magicDamage>@BrittlePercentMaxHPCalc@ max Health magic damage</magicDamage>. Ornn's Attacks against <keywordMajor>Brittle</keywordMajor> targets <status>Knock</status> them <status>Back</status>, dealing the additional damage.",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of <magicDamage>@TotalMinimumDamage@ magic damage</magicDamage> to champions and minions, and a max of <magicDamage>@TotalMonsterDamageCap@ magic damage</magicDamage> to jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "MaxPercentHPPerTickTooltip",

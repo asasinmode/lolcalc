@@ -38,6 +38,7 @@
 					"mana": [45, 45, 45, 45, 45, 45],
 					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"tooltip": "<charge>Begin Charging</charge>: Sion charges a heavy blow for up to 2 seconds.<br><br><release>Release</release>: Sion slams his axe down, briefly <status>Slowing</status> and dealing between <physicalDamage>@MinDamageTotal@ and @MaxDamageTotal@ physical damage</physicalDamage> based on charge time. If Sion charged for at least 1 second, enemies are <status>Knocked Up</status> and <status>Stunned</status> for between @BaseStunTime@ and 2.25 seconds based on charge time.",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterRatio@% damage to jungle monsters and @MinionRatio@% damage to minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "LowDamage",
@@ -118,6 +119,7 @@
 					"cooldownTime": [15, 15, 14, 13, 12, 11, 11],
 					"tooltip": "<spellPassive>Passive</spellPassive>: Sion gains <scaleHealth>@HPPerKill@ max Health</scaleHealth> when he kills a unit, or <scaleHealth>@HPPerChampKill@</scaleHealth> for champion takedowns, large minions and large monsters.<br><br><spellActive>Active</spellActive>: Sion gains <shield>@TotalShield@ Shield</shield> for 6 seconds. After @DetonateRecastCooldown@ seconds if the shield still holds, Sion can <recast>Recast</recast> to detonate the shield to deal <magicDamage>@TotalDamage@ plus @MaxHPDamageRatio@% max Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_SionW_Tooltip}}<br><br>Current Bonus Health: <statTracking>@f1@</statTracking>",
+					"tooltipExtendedBelowLine": "<rules>Max 400 bonus damage to minions and monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseShield",

@@ -38,6 +38,7 @@
 					"mana": [45, 45, 45, 45, 45, 45],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once.",
+					"tooltipExtendedBelowLine": "<rules>Draven will drop any <keywordMajor>Spinning Axes</keywordMajor> if he does not attack for @DurationTOOLTIP@ seconds. Attacking a turret or structure will not cause Draven's <keywordMajor>Spinning Axes</keywordMajor> to richochet.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -89,6 +90,7 @@
 					"mana": [40, 35, 30, 25, 20, 15],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Draven becomes Ghosted, gains <speed>@Temp_MSMod@% Move Speed</speed> decaying over @Temp_MSDuration@ seconds and <attackSpeed>@Temp_AS@% Attack Speed</attackSpeed> for @Temp_ASDuration@ seconds.<br><br>When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's Cooldown is refreshed.",
+					"tooltipExtendedBelowLine": "<rules>Ghosted units can pass through other units.</rules>",
 					"extendedVariables": [
 						{
 							"name": "MoveSpeed",
@@ -188,6 +190,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 90, 80, 0, 0, 0],
 					"tooltip": "Draven hurls two massive axes that deal <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal @RDamageReductionPerHit*100@% less damage for each enemy hit, down to a minimum of @RMinDamagePercent@%.<br><br>If <keywordMajor>{{ Spell_DravenRCast_Name }}</keywordMajor> would leave an enemy champion with less health than @RPassiveStacksCoefficient*100@% of Draven's current <keywordMajor>{{Spell_DravenPassive_Name}}</keywordMajor> stacks (@RPassiveTrueDamage@), he will execute them.",
+					"tooltipExtendedBelowLine": "<rules>Damage falloff resets after reversing direction.<br>Whirling Executes from League of Draven: @f1@</rules>",
 					"extendedVariables": [
 						{
 							"name": "RBaseDamage",

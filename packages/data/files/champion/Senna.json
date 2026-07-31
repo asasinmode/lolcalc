@@ -38,6 +38,7 @@
 					"mana": [70, 80, 90, 100, 110, 110],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second.",
+					"tooltipExtendedBelowLine": "<rules>This Ability's cast range matches Senna's attack range and its cast time is improved with Attack Speed. It can target anything and applies on-hit effects to enemy champions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -186,6 +187,7 @@
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [26, 26, 24.5, 23, 21.5, 20, 20],
 					"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby.",
+					"tooltipExtendedBelowLine": "<rules>Enemies can see where Wraiths are, but not who they are. They are otherwise treated as being <keywordStealth>Camouflaged</keywordStealth>.<br>{{Reminder_Camouflage}}<br>Unselectable units cannot be targeted by Attacks or Abilities that require a target.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BuffDuration",
@@ -233,6 +235,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>The shield's power scales with the amount of <keywordMajor>Mist</keywordMajor> Senna has collected.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Damage",
@@ -420,6 +423,7 @@
 		"spell_listtype_healing": "Healing",
 		"spell_listtype_slowduration": "Slow Duration",
 		"spell_listtype_rootduration": "Root Duration",
+		"reminder_camouflage": "<keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.",
 		"spell_listtype_duration": "Duration",
 		"spell_listtype_shield": "Shield Amount",
 		"spell_sennapassive_tooltip": "Senna can attack souls that spawn from dead enemies to absorb their <keywordMajor>Mist</keywordMajor>. She can also siphon <keywordMajor>Mist</keywordMajor> from enemy champions she hits with Attacks or Abilities twice, dealing an additional <physicalDamage>@BonusCurentHealthDamage@% current Health physical damage</physicalDamage>.<br><br>Each stack of <keywordMajor>Mist</keywordMajor> grants <physicalDamage>@ADPerStack@ Attack Damage</physicalDamage>. Every @StacksForBonus@ stacks grant @BonusRange@ Attack Range and @BonusCritChance@% Critical Strike Chance but she only has @CriticalDamage@ Critical Strike Damage. @CritToLifestealConversionPercent*100@% of excess Critical Strike Chance is converted into Lifesteal.<br><br>Senna's Attacks take extra time to fire, deal an additional <physicalDamage>@BonusOnHitDamage@ physical damage</physicalDamage>, and briefly grant her <speed>@MSSteal@ of the target's Move Speed</speed>."

@@ -38,6 +38,7 @@
 					"mana": [50, 60, 70, 80, 90, 85],
 					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 7],
 					"tooltip": "Neeko throws a seed that blooms to deal <magicDamage>@ExplosionDamage@ magic damage</magicDamage>. If it kills a unit or hits a champion or large monster, it will bloom again, dealing <magicDamage>@SecondDamage@ magic damage</magicDamage>. Max 2 extra blooms.",
+					"tooltipExtendedBelowLine": "<rules>Each bloom deals an additional <magicDamage>@MonsterBonus@ magic damage</magicDamage> to monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "ZoneDamage",
@@ -102,6 +103,7 @@
 					"image": "assets/characters/neeko/hud/icons2d/neeko_w.png",
 					"cooldownTime": [16, 16, 15, 14, 13, 12, 12],
 					"tooltip": "<passive>Passive:</passive> Every 3rd Attack deals an additional <magicDamage>@PassiveBonusDamageCalc@ bonus magic damage</magicDamage> and increases Neeko's <speed>Move Speed by @PassiveHaste@%</speed> for @PassiveHasteDuration@ second.<br><br><active>Active:</active> Neeko becomes <keywordStealth>invisible</keywordStealth> for @StealthDuration@ seconds and projects a clone that lasts @CloneDuration@ seconds. Neeko and the clone gain <speed>@Haste@% Move Speed</speed> for @HasteDuration@ seconds. <br><br><rules>The clone can be controlled using the Move Pet Click hotkey or by <recast>Recasting</recast> this Ability.<br>The clone mirrors her spellcasts, emotes, and recall.</rules>",
+					"tooltipExtendedBelowLine": "<rules>The clone is untargetable while stealthed.<br>Empowered Attacks deal <magicDamage>@MonsterBonus@ bonus magic damage</magicDamage> to monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "PassiveDamage",

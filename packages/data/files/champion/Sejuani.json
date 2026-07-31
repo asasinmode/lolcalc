@@ -162,6 +162,7 @@
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nearby melee allied champions' Attacks apply a stack to champions and jungle monsters.<br><br><spellPassive>Active:</spellPassive> Sejuani deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to target enemy with 4 stacks and <status>Stuns</status> them for @CCDuration@ second. ",
+					"tooltipExtendedBelowLine": "<rules>Champions <status>Stunned</status> by Sejuani can't gain stacks for @PerChampionCD@ seconds.<br>Enemies <status>Stunned</status> by this Ability are slightly <status>Knocked Back</status>.<br>Permafrost will target the closest valid enemy to your cursor (prioritizing champions).<br>This Ability <status>Knocks Down</status> enemies.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -213,6 +214,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 105, 90, 90, 90, 90],
 					"tooltip": "Sejuani throws her True Ice bola, <status>Stunning</status> and revealing the first enemy champion hit for @BaseStunDuration@ second and dealing <magicDamage>@MinorDamageTooltip@ magic damage</magicDamage>.<br><br>If the bola travels at least 25% of its range, it <status>Stuns</status> and reveals for @EmpoweredStunDuration@ seconds instead. It then also creates an ice storm that <status>Slows</status> surrounding enemies by @ExplosionSlowAmount@% for @ZoneDuration@ seconds. All affected enemies take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>The <status>Stunned</status> enemy takes damage immediately, while enemies inside the storm take damage after it ends. Enemies in the storm are also <status>Slowed</status> for an additional 1 second.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

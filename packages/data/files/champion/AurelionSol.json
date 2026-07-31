@@ -38,6 +38,7 @@
 					"mana": [35, 40, 45, 50, 55, 60],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "Aurelion Sol breathes starfire for up to @MaxChannelDuration@ seconds, dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second to the first enemy hit and @AOEModifier*100@% of the damage to surrounding enemies.<br><br>Each full second of breath on the same enemy deals a burst of <magicDamage>@BurstDamage@ magic damage</magicDamage> plus <magicDamage>@BurstBonusTrueDamageToChamps@ max Health magic damage</magicDamage> and absorbs <font color='#3458eb'>@QMassStolen@ Stardust</font> if they are a champion.",
+					"tooltipExtendedBelowLine": "<rules>This Ability's range is @LevelBasedRangeScaling@.<br>Canceling this Ability within 0.25 seconds of casting it will lock the Ability for 1 second.<br>Minimum mana cost of @ManaCostPerSecond@ per cast.<br>Percent damage deals a max of <magicDamage>@MonsterDamageCap@ magic damage</magicDamage> against jungle monsters.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -134,6 +135,7 @@
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [23.5, 22, 20.5, 19, 17.5, 16, 14.5],
 					"tooltip": "Aurelion Sol flies in a direction. While flying, <spellName>{{Spell_AurelionSolQ_Name}}</spellName> has no Cooldown, no max channel duration, and its flat damage is increased by @TrueDamageBonus*100@%.<br><br>Takedowns on champions within @ResetWindow@ seconds of damaging them refunds @TooltipTakedownCooldownMultiplier@% of this Ability's Cooldown.<br><br><recast>Recast:</recast> End flight early.",
+					"tooltipExtendedBelowLine": "<rules>Casting <spellName>{{Spell_AurelionSolQ_Name}}</spellName> while flying reduces flight speed by 50%.<br>Flight speed is @DashSpeed@.</rules>",
 					"extendedVariables": [
 						{
 							"name": "TrueDamageBonus",
@@ -213,6 +215,7 @@
 					"mana": [90, 90, 90, 90, 90, 90],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Aurelion Sol summons a black hole, dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second and <status>Dragging</status> enemies towards the center for @Duration@ seconds. Enemies in the center below <scaleHealth>@CurrentExecutionThreshold@% max Health</scaleHealth> die instantly.<br><br>The black hole absorbs <font color='#3458eb'>Stardust</font> when enemies die within it and each second an enemy champion is inside.",
+					"tooltipExtendedBelowLine": "<rules>This Ability's cast range is @LevelBasedRangeScaling@.<br>Lane minions and jungle monsters inside have <speed>0 Movement Speed</speed>.<br>Epic monsters cannot be executed.<br>Absorbs <font color='#3458eb'>@ChampionMassPerSecond@ Stardust</font> per second from Champions.<br>Absorbs <font color='#3458eb'>Stardust</font> from units that die in the black hole:<li>Champions: <font color='#3458eb'>@ChampionCountBonus@ Stardust</font></li><li>Epic monsters: <font color='#3458eb'>@EpicMonsterCountBonus@ Stardust</font></li><li>Large monsters: <font color='#3458eb'>@LargeMonsterCountBonus@ Stardust</font></li><li>Siege minions: <font color='#3458eb'>@LargeMinionCountBonus@ Stardust</font></li><li>Minions and small monsters: <font color='#3458eb'>@MinionMassDeath@ Stardust</font></li></rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamagePerSecond",
@@ -375,6 +378,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
 					"tooltip": "Aurelion Sol plucks a star from the heavens and crashes it into the earth, dealing <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage>, <status>Stunning</status> enemies @StunDuration@ second, and absorbing <font color='#3458eb'>@MassStolen@ Stardust</font> for each champion hit.<br><br>Gathering <font color='#3458eb'>@CalamityStacks@ Stardust</font> transforms the next <spellName>{{Spell_AurelionSolR1_Name}}</spellName> into <spellName>{{Spell_AurelionSolR2_Name}}</spellName>.<br><br><spellName>{{Spell_AurelionSolR2_Name}}</spellName>: Aurelion Sol drags a constellation's worth of fury down from the cosmos, dealing <magicDamage>@R2Damage@ magic damage</magicDamage> in a larger area, <status>Knocking Up</status> enemies hit for @StunDuration@ second, and unleashing a massive shockwave that deals <magicDamage>@ShockwaveDamage@ magic damage</magicDamage> to champions and Epic Monsters and <status>Slows</status> all enemies hit by @ShockwaveSlow*100@% for 1 second.",
+					"tooltipExtendedBelowLine": "<rules><font color='#3458eb'>Stardust</font> collected towards <spellName>{{Spell_AurelionSolR2_Name}}</spellName>: <font color='#3458eb'>@f1@/@CalamityStacks@.</font></rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -511,14 +515,14 @@
 		"spell_listtype_damagepersecond": "Damage Per Second",
 		"spell_listtype_aurelionsol_burstdamage": "Burst Damage",
 		"spell_aurelionsolq_maxchannelduration": "Maximum Channel Duration",
+		"spell_aurelionsolq_name": "Breath of Light",
 		"spell_aurelionsolw_truedamagebonus": "Percent Bonus Magic Damage",
+		"spell_aurelionsolr2_name": "The Skies Descend",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_empowereddamage": "Empowered Damage",
 		"spell_aurelionsolr_shockwavedamage": "Shockwave Damage",
-		"spell_aurelionsolq_name": "Breath of Light",
 		"spell_aurelionsolw_name": "Astral Flight",
 		"spell_aurelionsole_name": "Singularity",
-		"spell_aurelionsolr1_name": "Falling Star",
-		"spell_aurelionsolr2_name": "The Skies Descend"
+		"spell_aurelionsolr1_name": "Falling Star"
 	}
 }

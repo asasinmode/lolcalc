@@ -38,6 +38,7 @@
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [8.5, 7.5, 6.5, 5.5, 4.5, 3.5, 2.5],
 					"tooltip": "Nasus' next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Killing an enemy with this Attack permanently increases its damage by @BasicStacks@, increased to @BigStacks@ against champions, large minions and large jungle monsters.",
+					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>This Ability can critically strike for <physicalDamage>@CritDamage@ physical damage</physicalDamage>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BonusDamage",
@@ -219,6 +220,7 @@
 					"mana": [100, 100, 100, 100, 100, 0],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <healing>maximum Health by @BonusHealth@</healing> and <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR> by @InitialResistGain@.<br><br>While the storm rages, nearby enemies take <magicDamage>@DamageCalc@ of their maximum Health as magic damage</magicDamage> each second and <spellName>Siphoning Strike</spellName> has a @QCDR*100@% reduced Cooldown.",
+					"tooltipExtendedBelowLine": "<rules>The storm deals a max of @MaxDamageCap@ damage per second.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BonusHealth",
@@ -298,6 +300,7 @@
 		}
 	},
 	"stringtable": {
+		"buff_desc_spelleffects": "This Ability triggers spell effects upon dealing damage.",
 		"spell_listtype_basedamage": "Base Damage",
 		"spell_listtype_maxslow": "Max Slow",
 		"spell_listtype_initialdamage": "Initial Damage",

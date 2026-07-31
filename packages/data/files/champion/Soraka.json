@@ -105,6 +105,7 @@
 					"mana": [40, 45, 50, 55, 60, 60],
 					"cooldownTime": [6, 6, 5, 4, 3, 2, 2],
 					"tooltip": "Soraka restores <healing>@TotalHeal@ Health</healing> to another allied champion.<br><br>If Soraka is affected by <keywordMajor>Rejuvenation</keywordMajor>, the Health cost will be reduced by @PercentHealthCostRefund*100@%, and the target will gain <keywordMajor>Rejuvenation</keywordMajor> for @Spell.SorakaQ:HoTDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>This Ability cannot be used if Soraka is below @MinimumHealth@ Health .</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseHeal",

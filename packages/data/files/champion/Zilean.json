@@ -38,6 +38,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @FuseDuration@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @StunDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>The bomb will prioritize attaching to champions and units that already have a bomb.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"
@@ -150,6 +151,7 @@
 					"mana": [125, 150, 175, 0, 0, 0],
 					"cooldownTime": [10, 120, 90, 60, 0, 0, 10],
 					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
+					"tooltipExtendedBelowLine": "<rules>Units in Stasis cannot move or act, and are invulnerable and Untargetable.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"

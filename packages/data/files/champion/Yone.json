@@ -37,6 +37,7 @@
 					"image": "assets/characters/yone/hud/icons2d/yoneq.png",
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "Yone thrusts forward, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>.<br><br>On hit, grants a stack for @BuffDuration@ seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for @Q3KnockupDuration@ seconds and deals <physicalDamage>@QDamage@ physical damage</physicalDamage>. ",
+					"tooltipExtendedBelowLine": "<rules>This Ability acts like an Attack: it can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>, it applies %i:OnHit% <OnHit>On-hit</OnHit> effects and lifesteal to the first enemy struck, is interruptible by crowd control, and its cooldown and cast time are reduced with <attackSpeed>Attack Speed</attackSpeed>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -104,6 +105,7 @@
 					"image": "assets/characters/yone/hud/icons2d/yonew.png",
 					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"tooltip": "Yone cleaves forward, dealing <physicalDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health physical damage</physicalDamage> and <magicDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health magic damage</magicDamage>.<br><br>If Yone hits, he gains <shield>@WShield@ Shield</shield> for @ShieldDuration@ seconds. The amount of <shield>Shield</shield> increases for each champion struck. ",
+					"tooltipExtendedBelowLine": "<rules>Shield increased by @FirstChampShieldMultiplier*100@% for the first champion hit and @SecondChampShieldMultiplier*100@% for all subsequent champions.<br>This abilities cooldown and cast time are reduced by Attack Speed.<br>Minimum <scaleLevel>@MinimumDamageMinions@</scaleLevel> total damage against minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -219,6 +221,7 @@
 					"image": "assets/characters/yone/hud/icons2d/yonee.png",
 					"cooldownTime": [22, 22, 19, 16, 13, 10, 10],
 					"tooltip": "Yone enters a spirit form for @ReturnTimer@ seconds, leaving his body behind for the duration and gaining <speed>@StartingMS*100@%</speed> to <speed>@MovementSpeed*100@% ramping Move Speed</speed>. <br><br>When the spirit form ends, Yone snaps back to his body and repeats @DeathmarkPercent*100@% of all Attack and Ability damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br><br><recast>Recast: </recast>End spirit form early.",
+					"tooltipExtendedBelowLine": "<rules>Yone cannot snap back while affected by hard crowd control.</rules>",
 					"extendedVariables": [
 						{
 							"name": "DeathmarkPercent",
@@ -265,6 +268,7 @@
 					"image": "assets/characters/yone/hud/icons2d/yoner.png",
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Yone strikes all enemies along a path for <physicalDamage>@TooltipDamage@ physical damage</physicalDamage> and <magicDamage>@TooltipDamage@ magic damage</magicDamage>, teleporting behind the last champion hit and <status>Knocking Up</status> victims towards Yone.",
+					"tooltipExtendedBelowLine": "<rules>If no enemy champion is struck, Yone will instead blink to maximum range.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

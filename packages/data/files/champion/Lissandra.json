@@ -187,6 +187,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 120, 100, 80, 10, 10, 10],
 					"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%.",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Stasis}}<br>This Ability <status>Knocks Down</status> enemies.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -288,6 +289,7 @@
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_slow": "Slow",
 		"spell_listtype_rootduration": "Root Duration",
+		"reminder_stasis": "Units in Stasis cannot move or act, and are invulnerable and Untargetable.",
 		"spell_listtype_healing": "Healing"
 	}
 }

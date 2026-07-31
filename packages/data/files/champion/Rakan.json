@@ -150,6 +150,7 @@
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Duration@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @RecastWindow@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Cast range is increased when cast on Xayah.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseShield",

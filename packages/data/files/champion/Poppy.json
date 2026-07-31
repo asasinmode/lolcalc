@@ -38,6 +38,7 @@
 					"mana": [35, 40, 45, 50, 55, 60],
 					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Slow_@% and erupts after @DelayBetweenTwoHits@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
+					"tooltipExtendedBelowLine": "<rules>Percent Health damage deals a max of @MaxHealthDamageToNonHeroes@ damage to minions and jungle monsters per hit.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamageValue",
@@ -232,6 +233,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 140, 120, 100, 10, 10, 10],
 					"tooltip": "<charge>Begin Casting:</charge> Poppy begins charging her hammer for up to @ChannelMaxDuration@ seconds, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Poppy smashes the ground, creating a shockwave that deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first champion hit and surrounding enemies, <status>Knocks</status> them <status>Back</status> towards their Nexus, and makes them Untargetable while they fly. The range and <status>Knock Back</status> distance increase with charge duration.<br><br>An uncharged swing deals <physicalDamage>@HalfDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> for @KnockupDurationSnap@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -346,6 +348,7 @@
 		"spell_poppyq_monstercap": "Monster Cap",
 		"spell_listtype_initialdamage": "Initial Damage",
 		"spell_listtype_poppyewalldamage": "Wall Damage",
-		"spell_listtype_stunduration": "Stun Duration:"
+		"spell_listtype_stunduration": "Stun Duration:",
+		"reminder_untargetable": "Untargetable units won't be affected by enemy Attacks or Abilities unless they've already been hit by them."
 	}
 }

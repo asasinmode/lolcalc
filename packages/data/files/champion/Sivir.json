@@ -38,6 +38,7 @@
 					"mana": [55, 60, 65, 70, 75, 70],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Sivir hurls her crossblade like a boomerang, dealing <physicalDamage>@TotalDamage@</physicalDamage> to all enemies it cuts through. Hitting non-champions reduces the damage to subsequent targets, down to a minimum of @FallOffMinimum*100@%.",
+					"tooltipExtendedBelowLine": "<rules>The damage falloff resets upon beginning its return.<br>Damage scales with Critical Strike Chance and Critical Strike Damage at @CritRatio*100@% effectiveness.<br>Cast time scales down with Attack Speed</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -146,6 +147,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "For the next @BuffDuration@ seconds, Sivir gains <attackSpeed>@RicochetAttackSpeed*100@% Attack Speed</attackSpeed> and her auto attacks are empowered to bounce to additional surrounding enemies dealing <physicalDamage>@BounceDamage@ physical damage</physicalDamage> each bounce for up to @MaxBounces@ bounces.<br><br>These bounces critically strike if the attack generating them does.",
+					"tooltipExtendedBelowLine": "<rules>Bounces will prioritize new targets before returning to targets that have already been struck. Can only hit each target a maximum of two times.<br>Bounces deal @MinionDamageMod*100@% damage to minions.</rules><br><rules>This ability executes low Health minions.</rules>",
 					"extendedVariables": [
 						{
 							"name": "RicochetAttackSpeed",
@@ -219,6 +221,7 @@
 					"image": "assets/characters/sivir/hud/icons2d/sivir_e.png",
 					"cooldownTime": [25, 24, 22.5, 21, 19.5, 18, 10],
 					"tooltip": "Sivir creates a magical barrier for @SpellShieldDuration@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot.",
+					"tooltipExtendedBelowLine": "<rules>This shield blocks both champion and item Abilities.</rules>",
 					"extendedVariables": [
 						{
 							"name": "HealRatio",

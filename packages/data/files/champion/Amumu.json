@@ -146,6 +146,7 @@
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 4],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @CDROnHit@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies.",
+					"tooltipExtendedBelowLine": "<rules>Damage reduction effect can't reduce the damage below @FlatDamageReductionMax*100@%.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamageReduction",
@@ -218,6 +219,7 @@
 					"mana": [100, 150, 200, 80, 80, 0],
 					"cooldownTime": [150, 150, 125, 100, 100, 100, 100],
 					"tooltip": "Amumu flares out his bandages, <status>Stunning</status> for @RDuration@ seconds, dealing <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> and applying <keywordMajor>Curse</keywordMajor>.",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>",
 					"extendedVariables": [
 						{
 							"name": "Cost"

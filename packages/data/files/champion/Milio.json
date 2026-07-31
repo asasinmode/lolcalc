@@ -37,6 +37,7 @@
 					"image": "assets/characters/milio/hud/icons2d/milio_q.png",
 					"mana": [50, 55, 60, 65, 70, 75],
 					"tooltip": "Milio kicks a fireball, <status>Knocking Back</status> the first enemy hit. If it hits, the ball bounces past them and explodes, dealing <magicDamage>@Damage@ magic damage</magicDamage> to surrounding enemies and <status>Slowing</status> them by @SlowAmountPercent@ for @SlowDuration@ seconds.<br><br>Hitting at least one enemy champion with <spellName>{{Spell_MilioKickballQ_Name}}</spellName> refunds @RefundRatio*100@% of it's Mana cost.",
+					"tooltipExtendedBelowLine": "<rules>Minions and monsters are knocked further and create a larger explosion.</rules>",
 					"extendedVariables": [
 						{
 							"name": "FallDamage",
@@ -220,6 +221,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [160, 160, 145, 130, 70, 40, 10],
 					"tooltip": "Milio unleashes a wave of soothing flames on nearby ally champions, cleansing <status>Disabling</status> and <status>Immobilizing</status> effects, restoring <healing>@HealCalc@ Health</healing>, and granting @TenacityAmount*100@% Tenacity for @TenacityDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Does not cleanse <status>Airborne</status>.</rules>",
 					"extendedVariables": [
 						{
 							"name": "HealBase",
