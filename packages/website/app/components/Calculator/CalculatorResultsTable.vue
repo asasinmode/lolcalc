@@ -27,7 +27,7 @@ defineProps<{
 	showResults: boolean;
 }>();
 
-const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, customTotalRowIds, computedCustomTotalRows } = useCalculatorState();
+const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows } = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const enableUnimplementedUi = useEnableUnimplementedUi();
@@ -36,8 +36,6 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { showTooltip: showRowTooltip, hideTooltip: hideRowTooltip } = useInfoTooltip();
 const { vMinor } = PATCH_VERSION;
-
-const flipResults = useState<boolean>('resultsTableFlip', () => false);
 
 const highlightedColumnId = ref<string>();
 
