@@ -46,7 +46,8 @@ function submitIssue(_event: SubmitEvent) {
 					<option selected>
 						calculations wrong
 					</option>
-					<option>ui</option>
+					<option>ui broken/bad</option>
+					<option>feature suggestion</option>
 					<option>something else</option>
 				</select>
 			</div>

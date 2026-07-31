@@ -1576,6 +1576,8 @@ defineExpose({ el });
 </template>
 
 <style>
+/* mobile breakpoints to check when changing */
+/* 1679/1680 | 1193/1194 | 1078/1079 | 839/840 | 599/600 | 538/539 | 511/512 */
 @layer components {
 	[data-scoreboard-item][data-group='sources'] {
 		border-inline-start: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
