@@ -1179,7 +1179,7 @@ defineExpose({ el });
 			</button>
 			<button
 				:title="`${iconButtonsShowText ? '' : `${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}`}${removeButtonAttrs.subtext ?? ''}`"
-				class="pretend-ui-btn remove"
+				class="pretend-ui-btn clear-remove"
 				:disabled="removeButtonAttrs.disabled"
 				@click="removeButtonAttrs.emit"
 			>
@@ -1684,7 +1684,7 @@ defineExpose({ el });
 
 		.move-up,
 		.move-group,
-		.remove,
+		.clear-remove,
 		.manipulate {
 			--at-apply: '-mb-[0.5px] self-end';
 		}
@@ -1710,7 +1710,7 @@ defineExpose({ el });
 			}
 		}
 
-		.remove {
+		.clear-remove {
 			grid-area: clear;
 		}
 
@@ -1722,7 +1722,7 @@ defineExpose({ el });
 		.move-down,
 		.move-group,
 		.duplicate,
-		.remove,
+		.clear-remove,
 		.expand-collapse,
 		.manipulate .pretend-ui-btn {
 			--at-apply: 'size-[--manipulate-btn-size] grid-center';
@@ -1736,7 +1736,7 @@ defineExpose({ el });
 			}
 		}
 
-		[data-icon-btns-show-text] :is(.remove, .expand-collapse) {
+		[data-icon-btns-show-text] :is(.clear-remove, .expand-collapse) {
 			--at-apply: 'min-w-19';
 		}
 
@@ -1745,7 +1745,7 @@ defineExpose({ el });
 			.move-down,
 			.move-group,
 			.duplicate,
-			.remove {
+			.clear-remove {
 				--at-apply: 'hidden';
 			}
 		}
