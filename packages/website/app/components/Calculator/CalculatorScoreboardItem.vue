@@ -1645,6 +1645,13 @@ defineExpose({ el });
 			}
 		}
 
+		@media (width < 380px) {
+			& {
+				--select-champion-size: var(--select-runes-size);
+				--select-runes-items-translate: calc(0.5 * (var(--item-size) + var(--select-items-runes-gap)));
+			}
+		}
+
 		.header {
 			--at-apply: 'grid grid-rows-[repeat(2,calc(var(--header-box-h)/2))] py-[--py] pe-[--scoreboard-item-pe] ps-[--scoreboard-item-ps] gap-y-[--header-gap-y,0px]';
 			grid-template-areas:
@@ -1673,6 +1680,13 @@ defineExpose({ el });
 					'select-champion select-runes select-items	manipulate'
 					'select-champion items				items					expand';
 				grid-template-columns: max-content minmax(0, 1fr) minmax(0, 1fr) max-content;
+			}
+
+			@media (width < 380px) {
+				grid-template-areas:
+					'select-champion select-runes select-items	manipulate'
+					'items						items				items					expand';
+				grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr) max-content;
 			}
 		}
 
@@ -1790,7 +1804,7 @@ defineExpose({ el });
 		}
 
 		.select-champion {
-			--at-apply: 'size-[--select-champion-size] ms-[--ms] me-[--me] relative self-center';
+			--at-apply: 'ms-[--ms] me-[--me] relative self-center';
 			--ms: calc(3 * var(--spacing));
 			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
@@ -1807,8 +1821,20 @@ defineExpose({ el });
 				}
 			}
 
+			@media (width < 380px) {
+				& {
+					--at-apply: 'flex gap-[--select-items-runes-gap] justify-self-end me-[--select-items-runes-gap] -translate-x-[--select-runes-items-translate]';
+				}
+			}
+
 			> button {
-				--at-apply: 'group b b-2 b-[--ui-btn-border-clr] rounded-full size-full of-hidden';
+				--at-apply: 'group b b-2 b-[--ui-btn-border-clr] rounded-full size-[--select-champion-size] of-hidden';
+
+				@media (width < 380px) {
+					& {
+						--at-apply: 'b';
+					}
+				}
 
 				> span {
 					--at-apply: 'sr-only';
@@ -1827,8 +1853,14 @@ defineExpose({ el });
 			}
 
 			.select-champion-level {
-				--at-apply: 'absolute bottom-[--inset] end-[--inset]';
+				--at-apply: 'absolute inset-be-[--inset] inset-e-[--inset]';
 				--inset: calc(-0.75 * var(--spacing));
+
+				@media (width < 380px) {
+					& {
+						--at-apply: 'relative inset-auto';
+					}
+				}
 
 				> select {
 					--at-apply: 'rounded-full';
@@ -1840,6 +1872,12 @@ defineExpose({ el });
 					@media (width < 512px) {
 						& {
 							--at-apply: 'text-lg/5';
+						}
+					}
+
+					@media (width < 380px) {
+						& {
+							--at-apply: 'size-[var(--select-items-effects-size)]';
 						}
 					}
 				}
@@ -2418,10 +2456,15 @@ defineExpose({ el });
 					}
 				}
 
-				@media (width < 400px) {
+				@media (width < 400px) and (width >= 380px) {
 					&:has(> .shapeshift) {
 						--at-apply: '-translate-x-[--fluid-f380-18-0-t400]';
 					}
+				}
+
+				@media (width < 380px) {
+					--ability-size: var(--fluid-44-56-t380);
+					--ability-size-passive: var(--fluid-36-40-t380);
 				}
 
 				[data-ability] {
@@ -2469,6 +2512,12 @@ defineExpose({ el });
 
 				.shapeshift {
 					--at-apply: 'z-1 absolute -end-[--abilities-gap] translate-x-full size-[--shapeshift-btn-size] grid-center rounded-full mbs-[calc(0.5*(var(--ability-size)-var(--shapeshift-btn-size)))]';
+
+					@media (width < 380px) {
+						& {
+							--at-apply: 'static translate-0';
+						}
+					}
 
 					> span:first-child {
 						--at-apply: 'sr-only';
@@ -2599,7 +2648,7 @@ defineExpose({ el });
 			}
 
 			.role-quest-dragons {
-				--at-apply: 'flex justify-between gap-[--gap-x] ps-[--gap-x] pbs-2';
+				--at-apply: 'flex justify-between gap-x-[--gap-x] ps-[--gap-x] pbs-2';
 				grid-area: role-quest-dragons;
 
 				@media (width < 1680px) {
@@ -2610,7 +2659,13 @@ defineExpose({ el });
 
 				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
-						--at-apply: 'px-0 pbs-3';
+						--at-apply: 'px-0 pbs-[--fluid-20-12-t380]';
+					}
+				}
+
+				@media (width < 360px) {
+					& {
+						--at-apply: 'flex-col inline-max mx-auto justify-start';
 					}
 				}
 			}
@@ -2618,6 +2673,12 @@ defineExpose({ el });
 			.role-quest,
 			.dragons {
 				--at-apply: 'self-center';
+
+				@media (width < 360px) {
+					& {
+						--at-apply: 'self-start';
+					}
+				}
 
 				> h4 {
 					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3 whitespace-nowrap';
@@ -2903,6 +2964,13 @@ defineExpose({ el });
 					'expand			items					items					select-champion';
 				grid-template-columns: max-content minmax(0, 1fr) minmax(0, 1fr) max-content;
 			}
+
+			@media (width < 380px) {
+				grid-template-areas:
+					'manipulate select-items	select-runes	select-champion'
+					'expand			items					items					items';
+				grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr);
+			}
 		}
 
 		.move-group,
@@ -2919,8 +2987,20 @@ defineExpose({ el });
 				}
 			}
 
+			@media (width < 380px) {
+				& {
+					--at-apply: 'justify-self-start translate-x-[--select-runes-items-translate] ms-[--select-items-runes-gap]';
+				}
+			}
+
 			.select-champion-level {
-				--at-apply: 'end-auto start-[--inset]';
+				--at-apply: 'inset-e-auto inset-s-[--inset]';
+
+				@media (width < 380px) {
+					& {
+						--at-apply: 'inset-auto';
+					}
+				}
 			}
 		}
 
@@ -3035,21 +3115,31 @@ defineExpose({ el });
 			.role-quest-dragons {
 				--at-apply: 'ps-0 pe-[--gap-x] flex-row-reverse';
 
+				@media (width < 360px) {
+					& {
+						--at-apply: 'flex-col';
+					}
+				}
+
 				.role-quest,
 				.dragons {
 					> h4 {
-						--at-apply: 'start-auto end-0';
+						--at-apply: 'inset-s-auto inset-e-0';
 					}
 				}
 
 				.role-quest {
-					--at-apply: 'justify-self-end';
+					@media (width < 360px) {
+						& {
+							--at-apply: 'self-end';
+						}
+					}
 
 					> .v-select {
 						--at-apply: 'ms-auto';
 
 						> select {
-							--at-apply: 'start-auto end-0';
+							--at-apply: 'inset-s-auto inset-e-0';
 						}
 
 						> label {

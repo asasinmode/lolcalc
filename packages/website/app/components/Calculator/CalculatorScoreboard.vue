@@ -656,7 +656,7 @@ const isDisplayingTargets = ref(false);
 				}
 			}
 
-			@media (width < 600px) {
+			@media (width < 600px) and (width >= 380px) {
 				& {
 					> ul:first-of-type {
 						--scoreboard-item-pe: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
@@ -668,7 +668,7 @@ const isDisplayingTargets = ref(false);
 				}
 			}
 
-			@media (width < 400px) {
+			@media (width < 400px) and (width >= 380px) {
 				& {
 					--scoreboard-item-ps: var(--fluid-f380-4-10-t400);
 					--scoreboard-item-pe: var(--fluid-f380-4-10-t400);
