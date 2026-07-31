@@ -1595,7 +1595,7 @@ defineExpose({ el });
 		--select-champion-size: calc(14 * var(--spacing));
 		--header-gap-y: 0px;
 		--header-box-h: var(--select-champion-size);
-		--header-h: calc(var(--select-champion-size) + 2 * var(--py) + var(--header-gap-y));
+		--header-h: calc(var(--header-box-h) + 2 * var(--py) + var(--header-gap-y));
 		--select-runes-size: calc(8 * var(--spacing));
 		--select-items-effects-size: calc(8 * var(--spacing));
 		--select-level-size: calc(6 * var(--spacing));
