@@ -1398,7 +1398,7 @@ defineExpose({ el });
 				</template>
 				<button
 					v-if="value.champion.value && SHAPESHIFTING_CHAMPION_IDS.includes(value.champion.value.id)"
-					class="other-ui-btn"
+					class="other-ui-btn shapeshift"
 					title="shapeshift"
 					@click="value.shapeshift"
 				>
@@ -1614,8 +1614,6 @@ defineExpose({ el });
 		--ability-level-btn-py: calc(1 * var(--spacing));
 		--ability-level-buttons-size: calc(var(--ability-level-btn-indicator-size) + 2 * var(--ability-level-btn-py));
 		--abilities-gap: calc(var(--spacing) * 2);
-		--abilities-width: calc(4 * var(--ability-size) + var(--ability-size-passive) + 4 * var(--abilities-gap));
-		--abilities-height: calc(var(--ability-size) + var(--ability-level-buttons-size));
 		--soul-size: calc(10 * var(--spacing));
 		--stack-size: calc(8 * var(--spacing));
 		--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
@@ -1645,7 +1643,7 @@ defineExpose({ el });
 			}
 		}
 
-		@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) and (height < 660px) and (height >= 280px) {
+		@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) and (height < 660px) and (height >= 280px) {
 			.header {
 				--at-apply: 'sticky inset-bs-0 z-10';
 				background: var(--scoreboard-item-bg), var(--mauve-bg);
@@ -1856,10 +1854,10 @@ defineExpose({ el });
 			--computed-me: var(--me);
 			--ms: calc(5 * var(--spacing));
 
-			@media (width < 1680px) and (width >= 1079px) {
+			@media (width < 1680px) and ((width >= 1079px) or (width < 600px)) {
 				& {
-					--me: calc(2 * var(--spacing) - 1px);
-					--ms: calc(2.5 * var(--spacing));
+					--me: var(--fluid-f540-7-12-t600);
+					--ms: var(--fluid-f540-10-20-t600);
 				}
 			}
 
@@ -2013,7 +2011,7 @@ defineExpose({ el });
 					'runes stats role-quest-dragons';
 			}
 
-			@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
+			@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 				&::details-content {
 					--at-apply: 'grid-cols-2 grid-rows-none auto-rows-max justify-items-end';
 
@@ -2058,7 +2056,7 @@ defineExpose({ el });
 			.stats {
 				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid inline-min';
 
-				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
 						--at-apply: 'grid-cols-[max-content]';
 					}
@@ -2201,7 +2199,7 @@ defineExpose({ el });
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
 
-				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
 						--at-apply: 'block-max';
 					}
@@ -2298,13 +2296,19 @@ defineExpose({ el });
 			}
 
 			.abilities {
-				--at-apply: 'relative gap-x-[--abilities-gap] flex justify-self-center ms-[--gap-x]';
+				--at-apply: 'relative gap-x-[--abilities-gap] flex justify-self-center ms-[--abilities-gap-offset]';
+				--shapeshift-btn-size: calc(7 * var(--spacing));
+				--abilities-gap-offset: var(--gap-x);
 				grid-area: abilities;
 				anchor-name: --scoreboard-item-abilities;
-				width: var(--abilities-width);
-				height: var(--abilities-height);
 
-				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
+				@media (width >= 1680px) {
+					&:has(> .shapeshift) {
+						--at-apply: '-translate-x-[--fluid-f1680-12-0-t1728]';
+					}
+				}
+
+				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
 						--at-apply: 'mx-0';
 					}
@@ -2353,8 +2357,8 @@ defineExpose({ el });
 					}
 				}
 
-				> button {
-					--at-apply: 'absolute -end-[--abilities-gap] top-[calc(0.5*var(--ability-size))] -translate-y-1/2 translate-x-full z-1 size-7 grid-center rounded-full';
+				.shapeshift {
+					--at-apply: 'z-1 absolute -end-[--abilities-gap] translate-x-full size-[--shapeshift-btn-size] grid-center rounded-full mbs-[calc(0.5*(var(--ability-size)-var(--shapeshift-btn-size)))]';
 
 					> span:first-child {
 						--at-apply: 'sr-only';
@@ -2386,13 +2390,13 @@ defineExpose({ el });
 					}
 				}
 
-				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
 						--at-apply: 'pbs-1.5 pbe-2.75 ms-0 inline-full';
 					}
 				}
 
-				@media (width < 1079px) and (width >= 800px) {
+				@media (width < 1079px) and (width >= 840px) {
 					& {
 						--at-apply: 'grid-rows-subgrid';
 					}
@@ -2488,7 +2492,7 @@ defineExpose({ el });
 					}
 				}
 
-				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
 						--at-apply: 'px-0 pbs-3';
 					}
@@ -2768,7 +2772,7 @@ defineExpose({ el });
 				'clear			items				select-items		select-runes	select-champion move-group	move-up'
 				'expand			items				select-items		select-runes	select-champion	duplicate		move-down';
 
-			@media (width < 1194px) and (width >= 1079px) {
+			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 				& {
 					grid-template-areas:
 						'manipulate items			select-items	select-runes	select-champion'
@@ -2786,9 +2790,9 @@ defineExpose({ el });
 		.select-champion {
 			--at-apply: 'ms-[--me] me-[--ms]';
 
-			@media (width < 1194px) and ((width >= 1079px) or (width < 800px)) {
+			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
 				& {
-					--at-apply: 'me-0 ms-[--me]';
+					--at-apply: 'me-0';
 				}
 			}
 
@@ -2849,6 +2853,12 @@ defineExpose({ el });
 					'role-quest-dragons stats runes';
 			}
 
+			@media (width < 1194px) and ((width >= 1079px) or (width < 840px)) {
+				.select-champion {
+					--at-apply: 'ms-0 me-[--me]';
+				}
+			}
+
 			.effects {
 				> ul {
 					direction: ltr;
@@ -2869,7 +2879,10 @@ defineExpose({ el });
 				}
 			}
 
-			.abilities,
+			.abilities {
+				--at-apply: 'ms-0 me-[--abilities-gap-offset]';
+			}
+
 			.health-ability-resource {
 				--at-apply: 'ms-0 me-[--gap-x]';
 			}
@@ -2913,7 +2926,7 @@ defineExpose({ el });
 				}
 			}
 
-			@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
+			@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 				&::details-content {
 					--at-apply: 'grid-cols-2';
 					grid-template-areas:
