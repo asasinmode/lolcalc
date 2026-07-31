@@ -1645,7 +1645,7 @@ defineExpose({ el });
 			}
 		}
 
-		@media (width < 1680px) and (height < 660px) and (height >= 280px) {
+		@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) and (height < 660px) and (height >= 280px) {
 			.header {
 				--at-apply: 'sticky inset-bs-0 z-10';
 				background: var(--scoreboard-item-bg), var(--mauve-bg);
@@ -2013,16 +2013,7 @@ defineExpose({ el });
 					'runes stats role-quest-dragons';
 			}
 
-			@media (width < 1680px) and (width >= 1079px) {
-				& {
-					--at-apply: 'mx-auto';
-					inline-size: clamp(
-						calc(2 * var(--extra-item-min-w) + var(--extras-gap)),
-						100%,
-						calc(2 * var(--extra-item-max-w) + var(--extras-gap))
-					);
-				}
-
+			@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
 				&::details-content {
 					--at-apply: 'grid-cols-2 grid-rows-none auto-rows-max justify-items-end';
 
@@ -2067,7 +2058,7 @@ defineExpose({ el });
 			.stats {
 				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid inline-min';
 
-				@media (width < 1680px) and (width >= 1079px) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
 					& {
 						--at-apply: 'grid-cols-[max-content]';
 					}
@@ -2210,7 +2201,7 @@ defineExpose({ el });
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
 
-				@media (width < 1680px) and (width >= 1079px) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
 					& {
 						--at-apply: 'block-max';
 					}
@@ -2313,7 +2304,7 @@ defineExpose({ el });
 				width: var(--abilities-width);
 				height: var(--abilities-height);
 
-				@media (width < 1680px) and (width >= 1079px) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
 					& {
 						--at-apply: 'mx-0';
 					}
@@ -2391,17 +2382,17 @@ defineExpose({ el });
 
 				@media (width < 1680px) {
 					& {
-						--at-apply: 'grid-rows-2 inline-full max-inline-[calc(2*var(--runes-stats-section-w)+1px)] justify-self-center';
+						--at-apply: 'grid-rows-2 inline-[calc(100%-var(--gap-x))] max-inline-[calc(2*var(--runes-stats-section-w)+1px)] justify-self-center';
 					}
 				}
 
-				@media (width < 1680px) and (width >= 1079px) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
 					& {
-						--at-apply: 'pbs-1.5 pbe-2.75 ms-0';
+						--at-apply: 'pbs-1.5 pbe-2.75 ms-0 inline-full';
 					}
 				}
 
-				@media (width < 1079px) {
+				@media (width < 1079px) and (width >= 800px) {
 					& {
 						--at-apply: 'grid-rows-subgrid';
 					}
@@ -2497,7 +2488,7 @@ defineExpose({ el });
 					}
 				}
 
-				@media (width < 1680px) and (width >= 1079px) {
+				@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
 					& {
 						--at-apply: 'px-0 pbs-3';
 					}
@@ -2795,7 +2786,7 @@ defineExpose({ el });
 		.select-champion {
 			--at-apply: 'ms-[--me] me-[--ms]';
 
-			@media (width < 1194px) and (width >= 1079px) {
+			@media (width < 1194px) and ((width >= 1079px) or (width < 800px)) {
 				& {
 					--at-apply: 'me-0 ms-[--me]';
 				}
@@ -2922,7 +2913,7 @@ defineExpose({ el });
 				}
 			}
 
-			@media (width < 1680px) and (width > 1079px) {
+			@media (width < 1680px) and ((width >= 1079px) or (width < 800px)) {
 				&::details-content {
 					--at-apply: 'grid-cols-2';
 					grid-template-areas:

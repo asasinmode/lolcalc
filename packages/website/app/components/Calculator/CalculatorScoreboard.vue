@@ -633,12 +633,12 @@ const isDisplayingTargets = ref(false);
 
 			@media (width < 1079px) {
 				& {
-					--at-apply: 'of-hidden inline-[200%] max-inline-full grid-cols-[repeat(2,100%)]';
+					--at-apply: 'of-clip inline-[200%] max-inline-full grid-cols-[repeat(2,100%)]';
 					--scoreboard-item-pe: calc(4 * var(--spacing));
 					--scoreboard-item-ps: calc(4 * var(--spacing));
 
 					> * {
-						--at-apply: 'translate-x-[calc(50%+0.5*var(--scoreboard-gap-x))]';
+						--at-apply: 'translate-x-[calc(50%+0.5*var(--scoreboard-gap-x)+1px)]';
 					}
 
 					> ul:first-of-type {
