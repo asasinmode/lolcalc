@@ -334,13 +334,13 @@ const isDisplayingTargets = ref(false);
 		<h2>
 			configuration scoreboard
 		</h2>
+		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">
+			swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}
+		</button>
 		<label for="scoreboard-mirror-layout">
 			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout">
 			mirror layout
 		</label>
-		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">
-			swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}
-		</button>
 		<div :class="{ 'displaying-targets': isDisplayingTargets }">
 			<h3>
 				damage sources
@@ -459,6 +459,7 @@ const isDisplayingTargets = ref(false);
 		--extras-gap: calc(2 * var(--spacing));
 		--extra-cols: 3;
 		--scoreboard-gap-x: var(--fluid-f1092-18-40-t1114);
+		--scoreboard-item-base-px: var(--fluid-f540-10-16-t600);
 		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-ps: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-b-w: 0.25rem;
@@ -474,16 +475,12 @@ const isDisplayingTargets = ref(false);
 			2 * var(--runes-stats-px) + 2 * (var(--runes-stats-img-w) + var(--runes-stats-text-w)) + 1px /* 1px is border */
 		);
 
-		> h2 {
-			--at-apply: 'mb-3';
-		}
-
 		> label {
 			--at-apply: 'whitespace-nowrap absolute end-0 top-3.5 -translate-y-1/2';
 		}
 
 		.switch-group {
-			--at-apply: 'hidden absolute -translate-y-1/2 top-3.5 start-0 px-2 py-0.5';
+			--at-apply: 'hidden absolute -translate-y-1/2 top-3.5 start-0 px-2 py-0.5 inline-max';
 
 			@media (width < 1079px) {
 				& {
@@ -493,7 +490,7 @@ const isDisplayingTargets = ref(false);
 		}
 
 		> div {
-			--at-apply: 'mx-auto gap-x-[--scoreboard-gap-x] max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
+			--at-apply: 'mbs-3 mx-auto gap-x-[--scoreboard-gap-x] max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
 
 			&::after {
 				--at-apply: 'bg-neutral-500 w-px content-empty start-1/2 top-2 bottom-0 absolute -translate-x-1/2';
@@ -632,7 +629,6 @@ const isDisplayingTargets = ref(false);
 			@media (width < 1079px) {
 				& {
 					--at-apply: 'of-clip inline-[200%] max-inline-full grid-cols-[repeat(2,100%)]';
-					--scoreboard-item-base-px: calc(4 * var(--spacing));
 					--scoreboard-item-pe: var(--scoreboard-item-base-px);
 					--scoreboard-item-ps: var(--scoreboard-item-base-px);
 
@@ -670,6 +666,29 @@ const isDisplayingTargets = ref(false);
 						--scoreboard-item-ps: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
 					}
 				}
+			}
+		}
+
+		@media (width < 539px) {
+			& {
+				--at-apply: 'grid grid-cols-2';
+			}
+
+			> h2 {
+				--at-apply: 'col-span-full mbe-1';
+			}
+
+			> label,
+			.switch-group {
+				--at-apply: 'static translate-0';
+			}
+
+			> label {
+				--at-apply: 'justify-self-end self-center';
+			}
+
+			> div {
+				--at-apply: 'col-span-full mbs-2';
 			}
 		}
 	}

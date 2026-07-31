@@ -1643,7 +1643,7 @@ defineExpose({ el });
 			}
 		}
 
-		@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) and (height < 660px) and (height >= 280px) {
+		@media (((width < 1680px) and (width >= 1079px)) or (width < 840px)) and ((height < 660px) and (height >= 280px)) {
 			.header {
 				--at-apply: 'sticky inset-bs-0 z-10';
 				background: var(--scoreboard-item-bg), var(--mauve-bg);
