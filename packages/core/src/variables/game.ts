@@ -951,14 +951,19 @@ export const VARIABLE_CALCULATION_FNS = {
 			return undefined;
 		});
 
+		const hasMMultiplier = ('mMultiplier' in variable);
+		const hasMRangedMultiplier = ('mRangedMultiplier' in variable);
+
 		if (variable.mDisplayAsPercent) {
 			rv.isPercentage = true;
 			rv.multiplier = 100;
 			rv.roundReplaced = true;
+			if (!hasMMultiplier) {
+				for (const part of rv.calculatesFrom!) {
+					part.stat === 'const' && !part.isPercentage && multiplyCalculatePartValues(part, 100);
+				}
+			}
 		}
-
-		const hasMMultiplier = ('mMultiplier' in variable);
-		const hasMRangedMultiplier = ('mRangedMultiplier' in variable);
 
 		if (values.length === 1) {
 			if (rv.calculatesFrom![0] && variable.mDisplayAsPercent) {

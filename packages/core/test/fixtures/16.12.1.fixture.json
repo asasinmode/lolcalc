@@ -230,6 +230,124 @@
 				"spell_kaylepassive_tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>"
 			}
 		},
+		"KSante": {
+			"stats": {
+				"hp": 625,
+				"hpperlevel": 120,
+				"mp": 320,
+				"mpperlevel": 60,
+				"movespeed": 330,
+				"armor": 36,
+				"armorperlevel": 5.2,
+				"spellblock": 30,
+				"spellblockperlevel": 2.1,
+				"attackrange": 150,
+				"hpregen": 9.5,
+				"hpregenperlevel": 1,
+				"mpregen": 7,
+				"mpregenperlevel": 1,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 64,
+				"attackdamageperlevel": 3.5,
+				"attackspeedperlevel": 2.5,
+				"attackspeed": 0.688,
+				"attackspeedratio": 0.625
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Dauntless Instinct",
+							"objectName": "KSanteP",
+							"dataKey": "Characters/KSante/Spells/KSantePAbility/KSanteP",
+							"image": "assets/characters/ksante/hud/icons2d/icons_ksante_p.png",
+							"tooltip": "{{Spell_KSanteP_Tooltip}}",
+							"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules>",
+							"dataValues": {
+								"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
+								"RecoveryPercent": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+								"ArmorMRMultiplier": [0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002],
+								"PassiveStartingDamage": [0.0035, 0.0035, 0.0035, 0.0035, 0.0035, 0.0035, 0.0035],
+								"MaxHealthDamagePercentBase": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+								"MaxHealthDamageResistRatio": [0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001],
+								"FlatDamage": [12, 12, 12, 12, 12, 12, 12],
+								"MarkDamagePercentMin": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+								"MarkDamagePercentMax": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02]
+							},
+							"spellCalculations": {
+								"{281dd874}": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 0.1,
+											"mBreakpoints": [
+												{
+													"mLevel": 6,
+													"mAdditionalBonusAtThisLevel": 0.03
+												},
+												{
+													"mLevel": 11,
+													"mAdditionalBonusAtThisLevel": 0.03
+												},
+												{
+													"mLevel": 16,
+													"mAdditionalBonusAtThisLevel": 0.03
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": -1
+								},
+								"PercentHealthDamage": {
+									"mFormulaParts": [
+										{
+											"{0589a59c}": "MarkDamagePercentMin",
+											"{0b65bc23}": "MarkDamagePercentMax",
+											"__type": "{ee18a47b}"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": -1
+								},
+								"MaxHealthDamagePercent": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "MaxHealthDamagePercentBase",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mStatFormula": 2,
+											"mDataValue": "MaxHealthDamageResistRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mStatFormula": 2,
+											"mDataValue": "MaxHealthDamageResistRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 2
+								}
+							}
+						}
+					]
+				}
+			},
+			"stringtable": {
+				"spell_ksanteq_flatdamage": "Damage",
+				"spell_listtype_damage": "Damage",
+				"spell_ksantee_shield": "Shield",
+				"spell_ksanter_wall_damage": "Follow-Up Damage",
+				"spell_listtype_attackspeed": "Attack Speed",
+				"spell_ksantep_tooltip": "K'Sante's damaging Abilities mark enemies hit. Attacking a marked enemy deals <physicalDamage>@FlatDamage@ plus @PercentHealthDamage@ max Health physical damage</physicalDamage> and consumes the mark.<br><br><keywordMajor>All Out</keywordMajor>: K'Sante's Attacks, Abilities and Passive deal an additional @MaxHealthDamagePercent@ max Health physical damage."
+			}
+		},
 		"Jax": {
 			"stats": {
 				"hp": 670,

@@ -174,7 +174,7 @@ test('extended equals', async (t) => {
 });
 
 function assertMetaSuffix(variableName: string, expected: string, replaceResult: IReplaceGameVariablesRV) {
-	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`);
+	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`, variableName);
 }
 
 function extendedChampionAbilityDescription(damageSource: DamageSource, tooltipKey: 'tooltip', abilityKey: IChampionAbilityKey, abilityVariant = 0): IReplaceGameVariablesRV {
