@@ -169,6 +169,8 @@ function submitIssue(_event: SubmitEvent) {
 
 			> div > label,
 			> label {
+				--at-apply: 'text-neutral-200';
+
 				> span {
 					--at-apply: 'text-red-500';
 				}
