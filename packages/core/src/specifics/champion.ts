@@ -11,6 +11,7 @@ import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
 import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
 import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
+import type IKSante from '@lolcalc/data/files/champion/KSante.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
@@ -548,6 +549,35 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	KSante: {
+		passive: {
+			variables: defineChampionVariables<'KSante', typeof IKSante, 'passive'>({
+				known: {
+					CalculatedMarkDamage: [],
+					CalculatedAllOutDamage: [],
+				},
+				calculate() {
+					return {
+						CalculatedMarkDamage: {
+							value: 'TODO',
+						},
+						CalculatedAllOutDamage: {
+							value: 'TODO',
+						},
+					};
+				},
+				meta: {
+					CalculatedMarkDamage: {
+						isCustom: true,
+						type: VariableType.physical,
+					},
+					CalculatedAllOutDamage: {
+						isCustom: true,
+						type: VariableType.physical,
+					},
+				},
+				uninteresting: ['FlatDamage'],
+			}),
+		},
 		q: {
 			dataOverrides: {
 				isImmobilizing: false,

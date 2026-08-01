@@ -647,7 +647,7 @@ export function replaceGameVariables(
 	const customVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isCustom);
 	if (customVariables?.length) {
 		for (const [variableName, meta] of customVariables) {
-			let dynamicVariable = dynamicVariables!.values?.[variableName];
+			const dynamicVariable = dynamicVariables!.values?.[variableName];
 			if (dynamicVariable !== undefined) {
 				const dynamicValue = Array.isArray(dynamicVariable) ? [(dynamicVariable as IVariableValueResult[])[0]!.value, (dynamicVariable as IVariableValueResult[])[1]!.value] : dynamicVariable.value;
 				let value: IVariableValueResult['value'] = Number.NaN;
@@ -669,7 +669,7 @@ export function replaceGameVariables(
 						value = roundVariable(dynamicValue);
 						baseValue = dynamicValue;
 					} else {
-						console.warn('[replaceGameVariables] custom NOT ARRAY got non-number values', variableName, dynamicVariable, variableValueFunctionParams);
+						value = dynamicValue;
 					}
 				}
 
@@ -683,12 +683,12 @@ export function replaceGameVariables(
 					if (Array.isArray(value)) {
 						(value as number[])[0] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[0]!));
 						(value as number[])[1] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[1]!));
-					} else {
-						(dynamicVariable as number) = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, dynamicVariable as number));
+					} else if (typeof value === 'number') {
+						value = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value as number));
 					}
 				}
 
-				variables.set(variableName, { baseValue, value: value as number | [number, number], meta, isPercentage: meta?.isPercentage });
+				variables.set(variableName, { baseValue, value: value!, meta, isPercentage: meta?.isPercentage });
 			}
 		}
 	}
