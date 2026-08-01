@@ -957,7 +957,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (variable.mDisplayAsPercent) {
 			rv.isPercentage = true;
 			rv.multiplier = 100;
-			rv.roundReplaced = true;
+			rv.roundReplaced = 2;
 			if (!hasMMultiplier) {
 				for (const part of rv.calculatesFrom!) {
 					part.stat === 'const' && !part.isPercentage && multiplyCalculatePartValues(part, 100);
@@ -1171,6 +1171,30 @@ export const VARIABLE_CALCULATION_FNS = {
 			}],
 		};
 	},
+	/** same as `ByCharLevelInterpolationCalculationPart` but with the keys hashed and variables needing resolving, not being directly in `mStartValue` and `mEndValue` */
+	'{ee18a47b}': function (variable: IGameVariablesByType['{ee18a47b}'], whole, meta) {
+		meta.variableValueParams.accessedVariables ??= new Map();
+		meta.accessedVariables?.add(variable['{0589a59c}']);
+		const minResult = meta.variableValueFn(variable['{0589a59c}'], meta.variableValueParams);
+		meta.accessedVariables?.add(variable['{0b65bc23}']);
+		const maxResult = meta.variableValueFn(variable['{0b65bc23}'], meta.variableValueParams);
+
+		const mStartValue = minResult.value;
+		const mEndValue = maxResult.value;
+		if (typeof mStartValue !== 'number' || typeof mEndValue !== 'number') {
+			console.warn('[VARIABLE_CALCULATION_FNS {ee18a47b}] resolved variables not numbers', minResult, maxResult, variable);
+			return;
+		}
+
+		const syntheticVariable: IGameVariablesByType['ByCharLevelInterpolationCalculationPart'] = {
+			mStartValue,
+			mEndValue,
+			__type: 'ByCharLevelInterpolationCalculationPart',
+		};
+
+		const rv: IVariableValueResult = VARIABLE_CALCULATION_FNS.ByCharLevelInterpolationCalculationPart!(syntheticVariable, whole, meta);
+		return rv;
+	},
 	ByCharLevelFormulaCalculationPart(variable: IGameVariablesByType['ByCharLevelFormulaCalculationPart'], _whole, meta) {
 		const { values } = variable;
 		if (values) {
@@ -1363,7 +1387,7 @@ type IHypotheticalVariableCalculationFns = Record<
 >;
 
 interface IGameVariablesByType {
-	ByCharLevelBreakpointsCalculationPart: {
+	'ByCharLevelBreakpointsCalculationPart': {
 		mLevel1Value?: number;
 		mInitialBonusPerLevel?: number;
 		mBreakpoints?: {
@@ -1373,47 +1397,52 @@ interface IGameVariablesByType {
 		}[];
 		__type: string;
 	};
-	NumberCalculationPart: {
+	'NumberCalculationPart': {
 		mNumber: number;
 		__type: string;
 	};
-	NamedDataValueCalculationPart: {
+	'NamedDataValueCalculationPart': {
 		mDataValue: string;
 		__type: string;
 	};
-	StatByCoefficientCalculationPart: IStatWithFormula & {
+	'StatByCoefficientCalculationPart': IStatWithFormula & {
 		mCoefficient: number;
 		__type: string;
 	};
-	StatByNamedDataValueCalculationPart: IStatWithFormula & {
+	'StatByNamedDataValueCalculationPart': IStatWithFormula & {
 		mDataValue: string;
 		__type: string;
 	};
-	AbilityResourceByCoefficientCalculationPart: IStatWithFormula & {
+	'AbilityResourceByCoefficientCalculationPart': IStatWithFormula & {
 		mCoefficient?: number;
 		__type: string;
 	};
-	ByCharLevelInterpolationCalculationPart: {
+	'ByCharLevelInterpolationCalculationPart': {
 		mStartValue: number;
 		mEndValue: number;
 		__type: string;
 	};
-	ByCharLevelFormulaCalculationPart: {
+	'{ee18a47b}': {
+		'{0589a59c}': string;
+		'{0b65bc23}': string;
+		'__type': string;
+	};
+	'ByCharLevelFormulaCalculationPart': {
 		values: number[];
 		__type: string;
 	};
-	StatBySubPartCalculationPart: {
+	'StatBySubPartCalculationPart': {
 		mStat: number;
 		mSubpart: {
 			mNumber: number;
 		} | IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'];
 		__type: string;
 	};
-	SumOfSubPartsCalculationPart: {
+	'SumOfSubPartsCalculationPart': {
 		mSubparts: IGameVariablesByType[keyof IGameVariablesByType][];
 		__type: string;
 	};
-	ProductOfSubPartsCalculationPart: {
+	'ProductOfSubPartsCalculationPart': {
 		mPart1: IGameVariablesByType[keyof IGameVariablesByType];
 		mPart2: IGameVariablesByType[keyof IGameVariablesByType];
 		__type: string;
