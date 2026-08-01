@@ -169,7 +169,7 @@ test('extended equals', async (t) => {
 
 		const kSante = await setupDamageSource(fixture, 'KSante');
 		const kSantePassive = extendedChampionAbilityDescription(kSante, 'tooltip', 'passive');
-		assertMetaSuffix('MaxHealthDamagePercent', '<const>1.25</const> <scaleap>+ 0.5%</scaleap>%i:scaleap%', kSantePassive);
+		assertMetaSuffix('MaxHealthDamagePercent', '<const>1</const> <scalearmor>+ 0.01% bonus %i:scalearmor%</scalearmor> <scalemr>+ 0.01% bonus %i:scalemr%</scalemr>', kSantePassive);
 	});
 });
 
