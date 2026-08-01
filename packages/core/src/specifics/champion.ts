@@ -30,6 +30,7 @@ import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
+import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { ISpecificVariables, IVariableValueResult } from './index';
 import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
@@ -555,13 +556,24 @@ export const CHAMPION_SPECIFICS = {
 					CalculatedMarkDamage: [],
 					CalculatedAllOutDamage: [],
 				},
-				calculate() {
+				calculate(self, target) {
+					const passiveParams: IGameVariableValueParameters['championAbility'] = {
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: self,
+					};
+					const markFlatVar = championAbilityVariableValue('FlatDamage', passiveParams);
+					const markDamagePercentVar = championAbilityVariableValue('PercentHealthDamage', passiveParams);
+					const allOutDamagePercentVar = championAbilityVariableValue('MaxHealthDamagePercent', passiveParams);
+
+					const targetTotalHp = (target?.stats.value.total.hp ?? 0);
+
 					return {
 						CalculatedMarkDamage: {
-							value: 'TODO',
+							value: (markFlatVar.value as number) + targetTotalHp * (markDamagePercentVar.value as number),
 						},
 						CalculatedAllOutDamage: {
-							value: 'TODO',
+							value: targetTotalHp * (allOutDamagePercentVar.value as number),
 						},
 					};
 				},
