@@ -1,19 +1,17 @@
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game.ts';
 import type { TText } from '@lolcalc/data';
+import type { IChampionAbilityKey } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { specificKnownVariables } from '@lolcalc/core/specifics/index.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
+import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
 import { ITEMS_BY_NAME, TEXT } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture } from '../utils.ts';
-
-function assertMetaSuffix(variableName: string, expected: string, replaceResult: IReplaceGameVariablesRV) {
-	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`);
-}
 
 test.before(() => {
 	setupPatchFixture(fixture);
@@ -157,16 +155,34 @@ test('extended equals', async (t) => {
 		const protoplasmHarness = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.protoplasmHarness].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.protoplasmHarness, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('TotalHealthRegen', '<scalelevel>200 - 400%i:scalelevel%</scalelevel> <scalearmor>+ 175% bonus %i:scalearmor%</scalearmor> <scalemr>+ 175% bonus %i:scalemr%</scalemr>', protoplasmHarness);
 
-		const kaylePassive = replaceGameVariables(kayle.champion.value!.stringtable.spell_kaylepassive_tooltip!, 'championAbility', { abilityVariant: kayle.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: kayle.allAbilityVariants.value }, undefined, { isExtended: true });
+		const kaylePassive = extendedChampionAbilityDescription(kayle, 'tooltip', 'passive');
 		assertMetaSuffix('PassiveWaveDamage', '<scalelevel>20 - 41%i:scalelevel%</scalelevel> <scaleap>+ 25%%i:scaleap%</scaleap> <scalead>+ 10% bonus %i:scalead%</scalead>', kaylePassive);
 
 		const jax = await setupDamageSource(fixture, 'Jax', { level: 4 });
-		const jaxPassive = replaceGameVariables(jax.champion.value!.abilities.passive.variants[0]!.tooltip!, 'championAbility', { abilityVariant: jax.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: jax.allAbilityVariants.value, damageSource: jax }, undefined, { isExtended: true });
+		const jaxPassive = extendedChampionAbilityDescription(jax, 'tooltip', 'passive');
 		assert.strictEqual(jaxPassive.anyExtendedVariables, true);
 		assertMetaSuffix('MaxBonusAttackSpeed', '<scalelevel>40% - 100%</scalelevel>%i:scalelevel%', jaxPassive);
 
 		const amumu = await setupDamageSource(fixture, 'Amumu', { abilityLevels: { w: 2 } });
-		const amumuW = replaceGameVariables(amumu.champion.value!.abilities.w.variants[0]!.tooltip!, 'championAbility', { abilityVariant: amumu.champion.value!.abilities.w.variants[0]!, allAbilitiesVariants: amumu.allAbilityVariants.value, damageSource: amumu, abilityLevel: amumu.abilityLevels.value.w }, undefined, { isExtended: true });
+		const amumuW = extendedChampionAbilityDescription(amumu, 'tooltip', 'w');
 		assertMetaSuffix('TotalHealthDamage', '<const>1.25</const> <scaleap>+ 0.5%</scaleap>%i:scaleap%', amumuW);
+
+		const kSante = await setupDamageSource(fixture, 'KSante');
+		const kSantePassive = extendedChampionAbilityDescription(kSante, 'tooltip', 'passive');
+		assertMetaSuffix('MaxHealthDamagePercent', '<const>1.25</const> <scaleap>+ 0.5%</scaleap>%i:scaleap%', kSantePassive);
 	});
 });
+
+function assertMetaSuffix(variableName: string, expected: string, replaceResult: IReplaceGameVariablesRV) {
+	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`);
+}
+
+function extendedChampionAbilityDescription(damageSource: DamageSource, tooltipKey: 'tooltip', abilityKey: IChampionAbilityKey, abilityVariant = 0): IReplaceGameVariablesRV {
+	const stringtabled = replaceStringtableVariables(damageSource.champion.value!.abilities[abilityKey].variants[abilityVariant]![tooltipKey]!, damageSource.champion.value!.stringtable);
+	return replaceGameVariables(stringtabled.replaced, 'championAbility', {
+		abilityVariant: damageSource.champion.value!.abilities[abilityKey].variants[abilityVariant]!,
+		allAbilitiesVariants: damageSource.allAbilityVariants.value,
+		abilityLevel: abilityKey === 'passive' ? undefined : damageSource.abilityLevels.value[abilityKey],
+		damageSource,
+	}, undefined, { isExtended: true });
+}
