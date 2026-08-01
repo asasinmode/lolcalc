@@ -89,14 +89,13 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] wider columns initially, shrink slightly as more are added
   - [x] move add section to the top
   - [x] effect sections with actual calculated values
-  - [?] add option to remove stats/basic attack sections if more feedback
-  - [?] custom value section
+  - [ ] add option to remove stats/basic attack sections if more feedback
+  - [ ] custom value section, choose type, input any value
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
-  - [ ] custom value row, choose type input own value
   - [x] stats inventory value row
   - [x] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
-  - [ ] basic attack section normal/crit/average
+  - [x] basic attack section normal/crit/average
   - [ ] basic attack hover tooltip, note that it already includes everything and might not make sense in custom total
   - [ ] source indicator, similar to the drag one in scoreboard, when hovering over column
   - [x] friendlier variable names?
@@ -134,7 +133,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] other effects options ui, like slow, stun, grievous wounds
   - [x] hover tooltips
   - [x] show source ability tooltip on shift
-  - [ ] choose a source for the effect, like existing configured ashe for passive application
+  - [ ] choose a source for the effect, like existing configured ashe for passive application. Use drag indicator to show the Ashe used
 - [x] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
 - [x] close dialogs on click outside
 - [x] target dummy damage source
@@ -148,19 +147,23 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
   - [x] items passives
-  - [ ] heal and shield power affecting known shields & heals
-    - [ ] `applyHSMult` spirit visage immortal path actualizer
-  - [ ] cap attack speed
+  - [x] cap attack speed
+  - [?] basic attack damage
+    - [ ] related items/passives/effects
+  - [?] apply resists to known type variables. Save pre-mitigation value on variable?
   - [?] item effects & their result sections like frozen heart or zeke's convergence
-  - [?] resolved item passives values for target like randuin/tabi
+  - [?] resolved item passives values for target like randuin/tabi, percent health damages
+  - [?] calculate static % values like liandry burn or GA health to?
   - [x] hook priorities in one file for easier precedence management
-  - [ ] grievous wounds affecting all heal type things
   - [x] dragons/souls
   - [ ] champion passives
     - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
   - [ ] champion effects
-  - [ ] other effects
-  - [ ] basic attack damage
+  - [ ] grievous wounds affecting all heal type things
+  - [ ] heal and shield power affecting known shields & heals
+    - [ ] `applyHSMult` spirit visage immortal path actualizer
+  - [ ] effects
+    - [x] add all that will be present in alpha
   - [ ] damage multipliers (immortal path, haunting guise items, chemtech soul - try to merge vars)
   - [x] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
   - [x] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
@@ -170,23 +173,17 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] maybe dynamic variables can be cached on damage source under a key then reused
   - [x] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [x] check redemption and other level calculations if they keep scaling past lvl 18 for toplaners
-  - [ ] check if can always lowercase match variables. Probably can, not sure if worth it because it would have to navigate whole object instead of trying to dot access? If implemented, check renaming variables resolved with different case like cosmic drive `MoveSpeedAmount`
   - [x] check if can save only gold cost, not whole object
-  - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)` / note in help page the discrepancy
+  - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)`
   - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?
-  - [ ] calculate static % values like liandry burn or GA health to?
-  - [ ] exhaust effect
 - [x] update hover tooltips with more calculation info (`= X - Y`) when holding shift
-- [ ] defineSpecific functions for better types
-  - [x] effects
-  - [ ] champions
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
   - [ ] dragons
 - [x] disclaimer not endorsed by riot
 - [ ] alerts and info texts for stuff not implemented yet
-- [ ] tutorial popups with helpful info
+- [ ] tutorial popups
   - [ ] dragging scoreboard elements
   - [ ] dragging items
   - [ ] right click to sell items
@@ -213,16 +210,14 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] go server
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
-- [ ] cleanup code
-  - [ ] try not to use global/composables in calculations related stuff (`onHitIcon`)
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
-- [ ] future features in github project page thingy?
+- [ ] future features/roadmap
 - [ ] rewrite css classes to selectors with `@apply`
 - [ ] try to generate specific components from data in specific, like effect are?
-- [x] consider used images "locally" / service worker for caching stuff
+- [x] service worker for caching stuff
 - [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold
-- [ ] automatically generate extended equals, ideally on ITEM_SPECIFICS so it doesn't have to do it on every replace, based on itemCalculations/stringCalculations r smth
+- [x] automatically generate extended equals, ideally on ITEM_SPECIFICS so it doesn't have to do it on every replace, based on itemCalculations/stringCalculations r smth
 - [ ] kind of a code documentation where yap about
   - [ ] how to use game texture `textureBgImageAttrs`
 - [ ] configuration "profiles" in local storage (multiple saved configurations), when loading new shared config, put it in new profile? maybe future feature
@@ -241,7 +236,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] extendedVariable values, resolve cooldown & cost
   - [ ] result row variable values
   - [ ] result variant sections
-  - [ ] abilities that give effects like attack speed and scale with champion stats - add possibility to link a source to use for stats
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
 - [ ] [item haste](https://wiki.leagueoflegends.com/en-us/Haste#Item_haste) & affect displayed item cooldowns
