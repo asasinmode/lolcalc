@@ -14,6 +14,7 @@ import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import type IKSante from '@lolcalc/data/files/champion/KSante.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
+import type INasus from '@lolcalc/data/files/champion/Nasus.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
 import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
@@ -654,6 +655,45 @@ export const CHAMPION_SPECIFICS = {
 					}
 				},
 			},
+		},
+		w: {
+			variables: defineChampionVariables<'Nasus', typeof INasus, 'w'>({
+				known: {
+					AttackSpeedSlow: [],
+				},
+				calculate(self) {
+					const wParams: IGameVariableValueParameters['championAbility'] = {
+						abilityVariant: self.champion.value!.abilities.w.variants[0]!,
+						abilityLevel: self.abilityLevels.value.w,
+						damageSource: self,
+					};
+					const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', wParams);
+					const maxMSSlow = championAbilityVariableValue('MaxSlowTooltipOnly', wParams);
+
+					if (typeof msToASSlowRatio.value === 'number' && typeof maxMSSlow.value === 'number') {
+						return {
+							AttackSpeedSlow: {
+								value: maxMSSlow.value * msToASSlowRatio.value,
+							},
+						};
+					}
+
+					console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate W ms/as slow values', msToASSlowRatio, maxMSSlow);
+					return {
+						AttackSpeedSlow: { value: Number.NaN },
+					};
+				},
+				meta: {
+					AttackSpeedSlow: {
+						isCustom: true,
+						resultsIsPercentage: true,
+					},
+					Duration: {
+						affectedByTenacity: true,
+					},
+				},
+				uninteresting: ['SlowBase', 'AttackSpeedSlowMult'],
+			}),
 		},
 	},
 	Nidalee: {

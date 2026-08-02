@@ -77,6 +77,7 @@ export interface IVariableMeta<T = any> {
 	type?: IVariableType;
 	/** whether the variable is a custom one, not found in description but computed by lolcalc and wanted in results */
 	isCustom?: boolean;
+	affectedByTenacity?: boolean;
 }
 
 /**
