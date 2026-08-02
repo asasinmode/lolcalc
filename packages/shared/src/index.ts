@@ -652,6 +652,7 @@ export const VariableType = {
 	magic: 'magic',
 	true: 'true',
 	adaptive: 'adaptive',
+	affectedByTenacity: 'affectedByTenacity',
 } as const;
 
 export type IVariableType = typeof VariableType[keyof typeof VariableType];

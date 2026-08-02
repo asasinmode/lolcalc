@@ -1198,7 +1198,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		/*
 		 * if this is not a results copy, the variables will be used in displayed descriptions for items/abilities and they shouldn't be modified by any effects
 		 * `isResultsCopy` being true means that this damage source was cloned so that the effects/calculationDamageTarget can be set on it without modifying the original one. Then the variable values are displayed in the table and should be affected by effects
-		 * this is probably a dirty way of doing so and ideally original damage sources could be used (no cloning) with external `calculateVariables(source, target)` stored in results but atm this stays, there's a TODO about it
+		 * this might not be probably the cleanest way of doing so and ideally original damage sources could be used (no cloning) with external `calculateVariables(source, target)` stored in results but atm this stays, there's a TODO about it
 		 */
 		if (!this.isResultsCopy) {
 			return rv;

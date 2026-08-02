@@ -1,5 +1,5 @@
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
-import type { IChampionStatName, TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, IVariableType, TItemNameToId } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game.ts';
@@ -10,7 +10,7 @@ import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import type { ITEM_SPECIFICS } from './item.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 
 export const HOOK_PRIORITIES = {
 	preItemTotal: {
@@ -122,7 +122,7 @@ export interface ICalculatesFromPart {
 	isPercentage?: boolean;
 }
 
-export interface IVariableValueResult<T = string | number | [number | string | undefined, number | string | undefined]> {
+export interface IVariableValueResult<T = IConcreteVariableValue | [IConcreteVariableValue | undefined, IConcreteVariableValue | undefined]> {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
 	value?: T;
 	/**
@@ -149,6 +149,8 @@ export interface IVariableValueResult<T = string | number | [number | string | u
 	calculatesFrom?: ICalculatesFromPart[];
 	isDynamic?: boolean;
 }
+
+export type IConcreteVariableValue = string | number;
 
 /** the related calculations and meta of a game specific's (item/champion/rune/...) variables */
 export interface ISpecificVariables<
@@ -243,3 +245,10 @@ export function specificKnownVariables(config?: ISpecificVariables<any, any, any
 		uninteresting: config.uninteresting,
 	};
 }
+
+export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, (value: IConcreteVariableValue, self: DamageSource) => IConcreteVariableValue>> = {
+	[VariableType.affectedByTenacity](value, self) {
+		console.log('affecting', value, 'by', self.calculationDamageTarget.value, 's tenacity');
+		return value;
+	},
+};

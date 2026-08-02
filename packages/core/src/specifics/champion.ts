@@ -689,7 +689,7 @@ export const CHAMPION_SPECIFICS = {
 						resultsIsPercentage: true,
 					},
 					Duration: {
-						affectedByTenacity: true,
+						type: VariableType.affectedByTenacity,
 					},
 				},
 				uninteresting: ['SlowBase', 'AttackSpeedSlowMult'],

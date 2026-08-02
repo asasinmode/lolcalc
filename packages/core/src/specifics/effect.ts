@@ -4,7 +4,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageS
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IReplacedGameVariable } from '../variables/game.ts';
-import type { IInternalItemDataOf, IVariableValueResult } from './index.ts';
+import type { IConcreteVariableValue, IInternalItemDataOf } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
@@ -774,9 +774,7 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 	};
 }
 
-export type IEffectModifyVariableFunctions = Partial<Record<IVariableType, NonNullable<IEffectSpecific['modifyVariable']>['handler'][]>>;
-
-export type IEffectModifyVariableFunction<T extends [number] = [number]> = (value: Exclude<IVariableValueResult['value'], any[]>, effectData: T) => Exclude<IVariableValueResult['value'], any[]>;
+type IEffectModifyVariableFunction<T extends [number] = [number]> = (value: IConcreteVariableValue, effectData: T) => IConcreteVariableValue;
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 
