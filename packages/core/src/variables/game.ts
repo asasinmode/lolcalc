@@ -289,7 +289,8 @@ export function championAbilityVariableValue(
 		abilityVariant,
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityLevel = 1,
-		allAbilitiesVariants = [],
+		/* optional `allAbilitiesVariants` chain here because calculate hooks often pass partial damage source with only what's needed so there wouldn't be allAbilitiesVariants */
+		allAbilitiesVariants = params.damageSource?.allAbilityVariants?.value ?? [],
 		damageSource,
 		isRanged,
 		returnActualName,

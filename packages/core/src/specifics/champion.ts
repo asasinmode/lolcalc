@@ -638,6 +638,24 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Nasus: {
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const lifeSteal = championAbilityVariableValue('LifestealTooltip', {
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						damageSource: { level: { value: self.level.value } } as DamageSource,
+					});
+
+					if (typeof lifeSteal.value === 'number') {
+						championPassiveStats.lifeSteal = lifeSteal.value / 100;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate passive life steal', lifeSteal);
+					}
+				},
+			},
+		},
+	},
 	Nidalee: {
 		PASSIVE_OPTIONS: {
 			none: 0,
