@@ -246,9 +246,15 @@ export function specificKnownVariables(config?: ISpecificVariables<any, any, any
 	};
 }
 
-export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, (value: IConcreteVariableValue, self: DamageSource) => IConcreteVariableValue>> = {
+interface IGlobalModifyVariableFunction {
+	(value: number, self: DamageSource): number;
+}
+
+const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVariableFunction>> = {
 	[VariableType.affectedByTenacity](value, self) {
-		console.log('affecting', value, 'by', self.calculationDamageTarget.value, 's tenacity');
+		console.log('affecting', value, 'by', self.calculationDamageTarget.value?.stats.value.total.tenacity);
 		return value;
 	},
 };
+
+export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [IVariableType, IGlobalModifyVariableFunction][];

@@ -25,7 +25,7 @@ import { gameAbilityImage } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { DRAGON_SPECIFICS } from './specifics/dragon.ts';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } from './specifics/effect.ts';
-import { calculateDynamicVariables } from './specifics/index.ts';
+import { calculateDynamicVariables, GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
 import { championAbilityVariableValue, itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
@@ -1202,6 +1202,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		 */
 		if (!this.isResultsCopy) {
 			return rv;
+		}
+
+		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
+			rv[modifyVariableType] ??= [];
+			rv[modifyVariableType].push(value => modifyVariableFn(value, this));
 		}
 
 		for (const effect of this.appliedEffects.value) {

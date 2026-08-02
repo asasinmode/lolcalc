@@ -774,7 +774,7 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 	};
 }
 
-type IEffectModifyVariableFunction<T extends [number] = [number]> = (value: IConcreteVariableValue, effectData: T) => IConcreteVariableValue;
+type IEffectModifyVariableFunction<T extends [number] = [number]> = (value: number, effectData: T) => number;
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 

@@ -447,7 +447,7 @@ export interface IReplaceGameVariablesOptions {
 	isExtended?: boolean;
 }
 
-export type IModifyVariableFunction = (value: Exclude<IVariableValueResult['value'], any[]>) => Exclude<IVariableValueResult['value'], any[]>;
+export type IModifyVariableFunction = (value: number) => number;
 export type IModifyVariableFunctions = Partial<Record<IVariableType, IModifyVariableFunction[]>>;
 
 export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: IItemVariableParams, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
@@ -573,12 +573,12 @@ export function replaceGameVariables(
 
 			if (meta?.type && modifyVariableFunctions[meta.type]) {
 				if (isV1Number) {
-					variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[0]!);
+					variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc as number) as number, variable[0]!);
 				} else {
 					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[0]);
 				}
 				if (isV2Number) {
-					variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable[1]!);
+					variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc as number) as number, variable[1]!);
 				} else {
 					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[1]);
 				}
