@@ -38,13 +38,17 @@ export function combineRecursive(current: number, value: number) {
 
 /** soft cap according to wiki https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps */
 export function calculateMSCapPenalty(moveSpeed: number) {
-	let penalty = 0;
-	if (moveSpeed > 415) {
-		if (moveSpeed > 490) {
-			penalty = moveSpeed * 0.5 - 230;
-		} else {
-			penalty = moveSpeed * 0.2 - 83;
-		}
+	let finalMS = moveSpeed;
+
+	if (moveSpeed > 490) {
+		finalMS = moveSpeed * 0.5 + 230;
+	} else if (moveSpeed > 415) {
+		finalMS = moveSpeed * 0.8 + 83;
+	} else if (moveSpeed < 220) {
+		finalMS = 110 + moveSpeed * 0.5;
+	} else if (moveSpeed < 0) {
+		finalMS = 110 + moveSpeed * 0.01;
 	}
-	return penalty;
+
+	return moveSpeed - finalMS;
 }
