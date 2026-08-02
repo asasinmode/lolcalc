@@ -299,15 +299,14 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			return [columnSourceIndex, columnTargetIndex];
 		}
 
-		if (
-			resultColumns.value.slice(1).some(col => col.source || col.target)
+		const saveColumnsToQuery = resultColumns.value.slice(1).some(col => col.source || col.target)
 			|| damageSources.value.length > 1 || damageTargets.value.length > 1
 			|| resultColumns.value[0]!.source !== damageSources.value[0]
-			|| resultColumns.value[0]!.target !== damageTargets.value[0]
-		) {
-			for (const column of resultColumns.value || []) {
-				const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
+			|| resultColumns.value[0]!.target !== damageTargets.value[0];
+		for (const column of resultColumns.value) {
+			const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
 
+			if (saveColumnsToQuery) {
 				const params = new URLSearchParams();
 				params.append('tblCol', `${~columnSourceIndex ? columnSourceIndex : ''}-${~columnTargetIndex ? columnTargetIndex : ''}`);
 				const str = params.toString();
