@@ -761,7 +761,7 @@ function multiplyCalculatePartValues(part: ICalculatesFromPart, multiplier: numb
 	} else {
 		if (typeof part.value === 'number') {
 			part.value *= multiplier;
-		} else {
+		} else if (part.value) {
 			part.value.min *= multiplier;
 			part.value.max *= multiplier;
 		}
