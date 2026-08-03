@@ -200,7 +200,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			--at-apply: 'relative h-[--ability-size]';
 
 			> h5 {
-				--at-apply: 'absolute start-0 bottom-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none z-2';
+				--at-apply: 'absolute start-0 bottom-0 leading-none -translate-x-1/2 translate-y-1/3 pointer-events-none z-2';
 
 				-webkit-text-stroke: black 0.1em;
 				paint-order: stroke fill;

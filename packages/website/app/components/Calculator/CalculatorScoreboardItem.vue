@@ -2018,7 +2018,7 @@ defineExpose({ el });
 					}
 
 					> span:last-child {
-						--at-apply: 'absolute text-xs bottom-0.5 end-0.25 leading-[1] pointer-events-none z-2';
+						--at-apply: 'absolute text-xs bottom-0.5 end-0.25 leading-none pointer-events-none z-2';
 						paint-order: stroke fill;
 						-webkit-text-stroke: black 0.2em;
 
@@ -2422,7 +2422,7 @@ defineExpose({ el });
 							}
 
 							> img + span {
-								--at-apply: 'absolute bottom-0.25 end-0.25 leading-[1] text-xs z-1';
+								--at-apply: 'absolute bottom-0.25 end-0.25 leading-none text-xs z-1';
 								-webkit-text-stroke: black 0.2em;
 								paint-order: stroke fill;
 							}
@@ -2471,7 +2471,7 @@ defineExpose({ el });
 					--at-apply: 'relative size-[--ability-size] b b-[--ui-btn-border-clr]';
 
 					> h5 {
-						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none z-1';
+						--at-apply: 'absolute bottom-0 start-0 leading-none -translate-x-1/2 translate-y-1/3 pointer-events-none z-1';
 
 						-webkit-text-stroke: black 0.1em;
 						paint-order: stroke fill;
@@ -2585,7 +2585,7 @@ defineExpose({ el });
 
 					/* TODO add field-sizing: content; once firefox has it */
 					> input {
-						--at-apply: 'z-1 w-12 bg-white text-black text-center leading-[1] px-1';
+						--at-apply: 'z-1 w-12 bg-white text-black text-center leading-none px-1';
 						-webkit-appearance: textfield;
 						-moz-appearance: textfield;
 						appearance: textfield;

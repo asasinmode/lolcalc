@@ -57,7 +57,7 @@ function updateValue(event: Event) {
 		--at-apply: 'grid grid-cols-[max-content_auto_minmax(0,1fr)_min-content] grid-rows-2 relative';
 
 		> label {
-			--at-apply: 'col-span-3 self-center of-hidden leading-[1]';
+			--at-apply: 'col-span-3 self-center of-hidden leading-none';
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2;

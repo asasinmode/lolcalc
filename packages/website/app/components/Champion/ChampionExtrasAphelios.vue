@@ -67,7 +67,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 			--at-apply: 'grid grid-flow-col grid-cols-[2rem] grid-rows-1 justify-start items-center h-min';
 
 			&::before {
-				--at-apply: 'block uppercase leading-[1]';
+				--at-apply: 'block uppercase leading-none';
 				content: '"' attr(data-ability-key) '": ';
 				paint-order: stroke fill;
 				-webkit-text-stroke: black 0.15em;

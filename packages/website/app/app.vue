@@ -306,7 +306,7 @@ function hideSharePopover() {
 				}
 
 				> h1 {
-					--at-apply: 'text-3xl leading-[1] font-700 tracking-wide';
+					--at-apply: 'text-3xl leading-none font-700 tracking-wide';
 
 					> a {
 						> img {

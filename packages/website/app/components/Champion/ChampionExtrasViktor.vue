@@ -74,7 +74,7 @@ function toggle(abilityIndex: number) {
 		}
 
 		> label {
-			--at-apply: 'leading-[1]';
+			--at-apply: 'leading-none';
 
 			&:has(> input:disabled) {
 				--at-apply: 'text-neutral-400';
