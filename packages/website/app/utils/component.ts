@@ -7,7 +7,7 @@ import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
-import { VExtrasBoolean, VExtrasEnum, VExtrasNumber } from '#components';
+import { VExtrasBoolean, VExtrasEnum, VExtrasNumber, VExtrasProgress } from '#components';
 
 export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
@@ -54,6 +54,28 @@ export async function numberExtra<T extends IGameAbilityId>(
 				localStep === undefined || Number.isInteger(toValue(localStep)),
 				localMax,
 			),
+			onImgMouseenter(event) {
+				ctx.emit('imgMouseenter', event, abilityId);
+			},
+			'onUpdate:modelValue': updateValue,
+		}, ctx.slots);
+	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
+}
+
+export async function progressExtra<T extends IGameAbilityId>(
+	abilityId: T,
+	property: DataKeys<IGameAbilityData<T>>,
+	label: string,
+) {
+	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
+		const imgSrc = await gameAbilityImage(abilityId);
+		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
+
+		return () => h(VExtrasProgress, {
+			'modelValue': modelValue.value,
+			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
+			imgSrc,
+			label,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
 			},

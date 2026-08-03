@@ -640,6 +640,11 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Nasus: {
+		setupData(self): { wProgress: number } {
+			return {
+				wProgress: clamp(0, Math.round(self.internalData.value.wProgress ?? 0), 100),
+			};
+		},
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {

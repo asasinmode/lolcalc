@@ -94,6 +94,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Naafiri: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Naafiri', 'passive', 0), 'passiveStacks', 'Packmates', 0, CHAMPION_SPECIFICS.Naafiri.MAX_PASSIVE_STACKS),
 	},
+	Nasus: {
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'Wither progress'),
+	},
 	Nidalee: {
 		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', {
 			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.none]: 'none',
