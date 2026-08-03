@@ -48,7 +48,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
 		totalMultiplicativeMoveSpeed: 0,
-		totalCrippledAttackSpeed: 0,
 		movespeedSoftCapPenalty: 0,
 		attackSpeedCap: CONSTS.baseAttackSpeedCap,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
@@ -61,6 +60,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 	const debuffs: IStatsCalculationDebuffs = {
 		cripple: 1,
+		totalCrippledAttackSpeed: 0,
 		percentageMSSlow: [],
 	};
 	const miscDebug: IStatsCalculationMiscDebug = {
@@ -272,8 +272,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	// eslint-disable-next-line no-lone-blocks
 	{ /* attack speed cripple */
 		debuffs.cripple = 1 - debuffs.cripple;
-		calculatedVariables.totalCrippledAttackSpeed = totalPreMultipliersStats.attackSpeed * debuffs.cripple;
-		totalPreMultipliersStats.attackSpeed -= calculatedVariables.totalCrippledAttackSpeed;
+		debuffs.totalCrippledAttackSpeed = totalPreMultipliersStats.attackSpeed * debuffs.cripple;
+		totalPreMultipliersStats.attackSpeed -= debuffs.totalCrippledAttackSpeed;
 	}
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;

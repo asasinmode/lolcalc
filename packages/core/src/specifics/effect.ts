@@ -312,8 +312,8 @@ export const EFFECT_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(_self, _stats, { calculatedVariables, miscDebug }) {
-					calculatedVariables.frozenHeartCaress = calculatedVariables.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress! / (miscDebug.totalAdditiveCripple || 1);
+				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
+					calculatedVariables.frozenHeartCaress = debuffs.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress! / (miscDebug.totalAdditiveCripple || 1);
 				},
 			},
 		},

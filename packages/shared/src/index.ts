@@ -91,8 +91,6 @@ export interface IStatsCalculationVariables {
 	/** penalty from move speed soft cap */
 	movespeedSoftCapPenalty: number;
 	attackSpeedCap: number;
-	/** attack speed value reduced from cripple sources */
-	totalCrippledAttackSpeed: number;
 	/** https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking */
 	tenacityBucketB: number;
 	/**
@@ -234,6 +232,8 @@ export interface IStatsCalculationVariables {
 export interface IStatsCalculationDebuffs {
 	/** attack speed slow, stacks multiplicatively */
 	cripple: number;
+	/** attack speed value reduced from cripple sources */
+	totalCrippledAttackSpeed: number;
 	/** list of all slows applied onto target, at the end the highest one is applied */
 	percentageMSSlow: number[];
 }
