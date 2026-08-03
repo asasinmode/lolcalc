@@ -1386,8 +1386,10 @@ function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
 	}
 }
 
-function allChampionAbilitiesVariants(champion?: IChampion): IChampionAbilityVariant[] {
-	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
+function allChampionAbilitiesVariants(champion?: IChampion): [IChampionAbilityVariant, IChampionAbilityKey][] {
+	return champion
+		? Object.entries(champion.abilities).flatMap(([abilityKey, ability]) => ability.variants.map(variant => [variant, abilityKey] as [IChampionAbilityVariant, IChampionAbilityKey]))
+		: [];
 }
 
 export function computeAbilityDescription(
@@ -1534,7 +1536,7 @@ export function computeAbilityDescription(
 }
 
 function abilityVariantText(
-	allAbilitiesVariants: IChampionAbilityVariant[],
+	allAbilitiesVariants: UnwrapRef<DamageSource['allAbilityVariants']>,
 	value: string,
 	abilityVariant: IChampionAbilityVariant,
 	dynamicVariables?: IDynamicVariables,
@@ -1775,13 +1777,14 @@ export function computeDragonAbilityDescription(
 	const ability = MISC.dragons[dragon][type];
 	const string = TEXT.dragons[dragon][type];
 	const isStack = type === 'stack';
+	const allAbilitiesVariants = [[MISC.dragons[dragon].stack, 'passive'], [MISC.dragons[dragon].soul, 'passive']] as UnwrapRef<DamageSource['allAbilityVariants']>;
 
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
 
 	const { replaced, variables, unknownVariables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
+		{ abilityVariant: ability, allAbilitiesVariants, isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
 		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,
 	);
@@ -1804,7 +1807,7 @@ export function computeDragonAbilityDescription(
 		({ replaced: extendedReplaced } = replaceGameVariables(
 			stringtableReplaced,
 			'championAbility',
-			{ abilityVariant: ability, allAbilitiesVariants: [MISC.dragons[dragon].stack, MISC.dragons[dragon].soul], isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
+			{ abilityVariant: ability, allAbilitiesVariants, isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
 			damageSource?.modifyVariableFunctions.value,
 			{ ...replaceOptions, isExtended: true },
 		));

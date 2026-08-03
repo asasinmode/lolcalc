@@ -1,5 +1,5 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
-import type { IChampionStatName, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStatName, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } from '../specifics/index';
 
@@ -276,7 +276,7 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	dynamicVariables?: IDynamicVariables;
 	abilityLevel?: number;
 	/** ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive */
-	allAbilitiesVariants?: IChampionAbilityVariableVariant[];
+	allAbilitiesVariants?: [IChampionAbilityVariableVariant, IChampionAbilityKey][];
 	/** used for returning the name of the variable when it's taken from another spell, like `Spell.SRX_DragonSoulBuffMountain:TotalShield` should be `TotalShield` */
 	returnActualName?: boolean;
 }
@@ -311,13 +311,12 @@ export function championAbilityVariableValue(
 			};
 		}
 
-		// TODO maybe can keep object names in lowercase, same as variable names
-		const otherAbilityVariant = allAbilitiesVariants.find(variant => variant.objectName === variantObjectName || variant.objectName.toLowerCase() === variantObjectName?.toLowerCase());
+		const otherAbilityVariant = allAbilitiesVariants.find(([variant]) => variant.objectName === variantObjectName || variant.objectName.toLowerCase() === variantObjectName?.toLowerCase());
 		if (otherAbilityVariant) {
 			return championAbilityVariableValue(variantVariableName!, {
-				abilityVariant: otherAbilityVariant,
+				abilityVariant: otherAbilityVariant[0],
 				dynamicVariables,
-				abilityLevel,
+				abilityLevel: otherAbilityVariant[1] !== 'passive' ? damageSource?.abilityLevels.value[otherAbilityVariant[1]] : undefined,
 				allAbilitiesVariants,
 				damageSource,
 				returnActualName: true,

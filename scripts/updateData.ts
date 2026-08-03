@@ -746,7 +746,7 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 
 		const stackAbility = miscData!.data.dragons[name as IDragonName].stack;
 		const soulAbility = miscData!.data.dragons[name as IDragonName].soul;
-		const allSpells = [stackAbility, soulAbility];
+		const allSpells = [[stackAbility, 'passive'], [soulAbility, 'passive']] as [IChampionAbilityVariant, IChampionAbilityKey][];
 
 		const { mBuff: { mDescription: stackDescriptionKey } } = stackData;
 		const { mBuff: { mTooltipData: { mLocKeys: { keyTooltip: soulTooltipKey } } } } = soulData;
@@ -2113,7 +2113,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 	const abilitiesWithVariants = filteredAbilitiesWithVariants.map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [IChampionAbilityKey, IChampionAbility['variants']][];
 
-	const allVariants = abilitiesWithVariants.flatMap(([, variants]) => variants);
+	const allVariants = abilitiesWithVariants.flatMap(([abilityKey, variants]) => variants.map(variant => [variant, abilityKey] as [IChampionAbilityVariant, IChampionAbilityKey]));
 
 	for (const [abilityKey, variants] of abilitiesWithVariants) {
 		for (let i = 0; i < variants.length; i++) {
