@@ -1,6 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import type { IChampionId, IItem } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationDebuffs, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { CONSTS, MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
@@ -48,8 +48,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
 		totalMultiplicativeMoveSpeed: 0,
+		totalCrippledAttackSpeed: 0,
 		movespeedSoftCapPenalty: 0,
-		attackSpeedCap: 3.003,
+		attackSpeedCap: CONSTS.baseAttackSpeedCap,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
 		bloodmailRetributionExcludedAd: 0,
 		healMult: 1,
@@ -58,7 +59,13 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		lifeStealOmnivampMult: 0,
 		tenacityBucketB: 1,
 	};
-	const miscDebug: IStatsCalculationMiscDebug = {};
+	const debuffs: IStatsCalculationDebuffs = {
+		cripple: 1,
+		percentageMSSlow: [],
+	};
+	const miscDebug: IStatsCalculationMiscDebug = {
+		totalAdditiveCripple: 0,
+	};
 
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
@@ -69,7 +76,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postInit) {
 		for (const hook of source.calculateStatsHooks.all.value.postInit) {
-			hook(source, { baseStats, bonusStats, effectStats, championPassiveStats }, { calculatedVariables, miscDebug });
+			hook(source, { baseStats, bonusStats, effectStats, championPassiveStats }, { calculatedVariables, debuffs, miscDebug });
 		}
 	}
 
@@ -149,7 +156,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
-			hook(source, { isRanged, itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, effectStats, dragonStatMultipliers, dragonStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, effectStats, dragonStatMultipliers, dragonStats }, { calculatedVariables, debuffs, miscDebug });
 		}
 	}
 	itemPassivesStats.attackSpeed = itemPassivesStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
@@ -182,7 +189,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 	if (source.calculateStatsHooks.all.value.onRuneShards) {
 		for (const hook of source.calculateStatsHooks.all.value.onRuneShards) {
-			hook(source, { isRanged, runeShardStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, runeShardStats, baseStats, adaptiveForceMeta }, { calculatedVariables, debuffs, miscDebug });
 		}
 	}
 	runeShardStats.tenacity = 1 - runeShardStats.tenacity;
@@ -191,14 +198,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.onChampionPassive) {
 		for (const hook of source.calculateStatsHooks.all.value.onChampionPassive) {
-			hook(source, { isRanged, championPassiveStats, baseStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, championPassiveStats, baseStats }, { calculatedVariables, debuffs, miscDebug });
 		}
 	}
 	championPassiveStats.attackSpeed = (championPassiveStats.bonusAttackSpeedPercent ?? 0) * baseOnLevelStats.attackSpeedRatio;
 
 	if (source.calculateStatsHooks.all.value.preBonus) {
 		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
-			hook(source, { isRanged, runeShardStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, runeShardStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, debuffs, miscDebug });
 		}
 	}
 
@@ -262,11 +269,18 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats.moveSpeed = rawTotalMS - baseStats.moveSpeed - penalty;
 	}
 
+	// eslint-disable-next-line no-lone-blocks
+	{ /* attack speed cripple */
+		debuffs.cripple = 1 - debuffs.cripple;
+		calculatedVariables.totalCrippledAttackSpeed = totalPreMultipliersStats.attackSpeed * debuffs.cripple;
+		totalPreMultipliersStats.attackSpeed -= calculatedVariables.totalCrippledAttackSpeed;
+	}
+
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
 
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
-			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, baseStats, adaptiveForceMeta }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, baseStats, adaptiveForceMeta }, { calculatedVariables, debuffs, miscDebug });
 		}
 	}
 
@@ -303,7 +317,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStats, baseOnLevelStats, championPassiveStats, totalPreMultipliersStats }, { calculatedVariables, miscDebug });
+			hook(source, { isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStats, baseOnLevelStats, championPassiveStats, totalPreMultipliersStats }, { calculatedVariables, debuffs, miscDebug });
 		}
 	}
 
@@ -351,6 +365,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonus: bonusStats,
 		total: totalStats,
 		variables: calculatedVariables,
+		debuffs,
 		miscDebug,
 	};
 }

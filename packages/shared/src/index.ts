@@ -77,6 +77,8 @@ export interface IStatsCalculationResult {
 	variables: IStatsCalculationVariables;
 	/** see the type definition for info */
 	miscDebug: IStatsCalculationMiscDebug;
+	/** see the type definition for info */
+	debuffs: IStatsCalculationDebuffs;
 }
 
 /** the variables calculated by various things, like riftmaker's void infusion */
@@ -89,6 +91,8 @@ export interface IStatsCalculationVariables {
 	/** penalty from move speed soft cap */
 	movespeedSoftCapPenalty: number;
 	attackSpeedCap: number;
+	/** attack speed value reduced from cripple sources */
+	totalCrippledAttackSpeed: number;
 	/** https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking */
 	tenacityBucketB: number;
 	/**
@@ -158,6 +162,8 @@ export interface IStatsCalculationVariables {
 	whisperingDiademAwe?: number;
 	/** attack speed value reduced by frozen heart's passive */
 	frozenHeartCaress?: number;
+	/** attack speed value reduced by nasus' wither */
+	nasusWitheredAS?: number;
 	/** ad gained from overlord's bloodmail bonus hp to ad passive */
 	bloodmailTyranny?: number;
 	/** ad gained from overlord's bloodmail missing hp ad increase passive */
@@ -224,8 +230,17 @@ export interface IStatsCalculationVariables {
 	cassiopeiaPassiveMSMultiplier?: number;
 }
 
+/** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
+export interface IStatsCalculationDebuffs {
+	/** attack speed slow, stacks multiplicatively */
+	cripple: number;
+	/** list of all slows applied onto target, at the end the highest one is applied */
+	percentageMSSlow: number[];
+}
+
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
+	totalAdditiveCripple: number;
 	/** bonus hp riftmaker's passive is based on */
 	riftmakerBonusHp?: number;
 	/** bonus hp overlord's bloodmail's passive is based on */

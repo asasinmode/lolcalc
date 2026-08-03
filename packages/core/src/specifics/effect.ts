@@ -303,24 +303,27 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 		calculateHooks: {
-			onTotalPreMultipliers: {
-				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, effectStats }, { calculatedVariables }) {
-					const value = totalPreMultipliersStats.attackSpeed * ITEMS_BY_NAME.frozenHeart?.dataValues.ASPDSlow;
-					effectStats.attackSpeed = (effectStats.attackSpeed ?? 0) + value;
-					totalMultipliersStats.attackSpeed += value;
-					calculatedVariables.frozenHeartCaress = value;
+			preItemTotal: {
+				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
+					/* set here to multiplier, then in postTotal calculated into actual attack speed reduction */
+					calculatedVariables.frozenHeartCaress = -1 * ITEMS_BY_NAME.frozenHeart?.dataValues.ASPDSlow;
+					debuffs.cripple = addMultiplicative(debuffs.cripple, calculatedVariables.frozenHeartCaress);
+					miscDebug.totalAdditiveCripple += calculatedVariables.frozenHeartCaress;
+				},
+			},
+			postTotal: {
+				handler(_self, _stats, { calculatedVariables, miscDebug }) {
+					calculatedVariables.frozenHeartCaress = calculatedVariables.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress! / (miscDebug.totalAdditiveCripple || 1);
 				},
 			},
 		},
 		variables: defineEffectSpecificVariables(
-			['attack speed reduction', 'attack speed % reduction'],
+			['AttackSpeedReduction'],
 			(damageSource) => {
 				if (damageSource.stats.value.variables.frozenHeartCaress !== undefined) {
-					const value = -damageSource.stats.value.variables.frozenHeartCaress;
-					const percentValue = value / (damageSource.stats.value.base.attackSpeedRatio || 1) * 100;
+					const value = damageSource.stats.value.variables.frozenHeartCaress;
 					return new Map([
-						['attack speed reduction', { baseValue: value, value }],
-						['attack speed % reduction', { baseValue: percentValue, value: percentValue, meta: { resultsIsPercentage: true } }],
+						['AttackSpeedReduction', { baseValue: value, value }],
 					]);
 				}
 			},

@@ -1,6 +1,6 @@
 import type { ITextData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -2111,6 +2111,8 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 	handler: (self: Parameters<T>[0], args: Parameters<T>[1], meta: {
 		/** see the type definition for info */
 		calculatedVariables: IStatsCalculationVariables;
+		/** see the type definition for info */
+		debuffs: IStatsCalculationDebuffs;
 		/** see the type definition for info */
 		miscDebug: IStatsCalculationMiscDebug;
 	}) => void;
