@@ -288,6 +288,37 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 	},
+	Fiora: {
+		PASSIVE_BONUS_MS: (progress: number, self: DamageSource): number => {
+			const bonusMS = championAbilityVariableValue('PercentMS', {
+				abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+				abilityLevel: self.abilityLevels.value.r,
+				damageSource: self,
+			});
+
+			if (typeof bonusMS.value === 'number') {
+				return bonusMS.value * progress;
+			}
+
+			console.warn('[CHAMPION_SPECIFICS fiora] failed to calculate passive bonus MS', bonusMS);
+			return Number.NaN;
+		},
+		setupData(self): { passiveMSProgress: number } {
+			return {
+				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
+			};
+		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, _stats, { calculatedVariables }) {
+					const bonusMS = CHAMPION_SPECIFICS.Fiora.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, self);
+					if (!Number.isNaN(bonusMS)) {
+						calculatedVariables.totalBonusPercentMoveSpeed += bonusMS / 100;
+					}
+				},
+			},
+		},
+	},
 	Garen: {
 		setupData(self): { isPassiveActive: number } {
 			return {
