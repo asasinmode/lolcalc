@@ -5,6 +5,7 @@ import type IBriar from '@lolcalc/data/files/champion/Briar.json';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
+import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
 import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
@@ -307,6 +308,38 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Fiora', typeof IFiora, 'passive'>({
+				known: {
+					VitalDamage: [],
+				},
+				calculate(self, target) {
+					const vitalDamagePercent = championAbilityVariableValue('PassiveDamageTotal', {
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						damageSource: self,
+					});
+
+					return {
+						VitalDamage: {
+							value: (vitalDamagePercent.value as number) * (target?.stats.value.total.hp ?? 0),
+						},
+					};
+				},
+				meta: {
+					VitalDamage: {
+						isCustom: true,
+						type: VariableType.true,
+					},
+					PercentMS: {
+						displayedName: 'MaxBonusMS',
+					},
+					PassiveHealAmount: {
+						type: VariableType.heal,
+					},
+				},
+				uninteresting: ['MovementSpeedDuration'],
+			}),
 		},
 		calculateHooks: {
 			onChampionPassive: {
