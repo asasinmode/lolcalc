@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import type { IGameImageData } from '@lolcalc/core/misc';
+import { roundVariable } from '@lolcalc/shared/utils';
 
-withDefaults(defineProps<{
+defineProps<{
 	idPrefix: string;
 	imgSrc: IGameImageData;
 	label: string;
-	// usedNumberInput: ReturnType<typeof useNumberInput>;
-	min?: number;
-	max?: number;
-	step?: number;
-	disabled?: boolean;
-}>(), {
-	min: 0,
-});
+	derivedValue: number;
+}>();
 
 defineEmits<{
 	imgMouseenter: [event: MouseEvent];
@@ -39,16 +34,19 @@ const value = defineModel<number>({ required: true });
 			min="0"
 			max="100"
 		>
+		<output :for="`veprgr-${idPrefix}`" aria-live="off">
+			{{ roundVariable(derivedValue, 1) }}%
+		</output>
 	</article>
 </template>
 
 <style>
 @layer components {
 	.v-extras-progress {
-		--at-apply: 'grid grid-cols-[max-content_minmax(0,1fr)] grid-rows-2 relative';
+		--at-apply: 'grid grid-cols-[max-content_minmax(0,1fr)_5ch] grid-rows-2 relative';
 
 		> label {
-			--at-apply: 'self-center of-hidden leading-none pb-[0.2em] -mb-[0.2em]';
+			--at-apply: 'col-span-2 self-center of-hidden leading-none pb-[0.2em] -mb-[0.2em]';
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2;
@@ -57,6 +55,10 @@ const value = defineModel<number>({ required: true });
 
 		> input {
 			--at-apply: '';
+		}
+
+		> output {
+			--at-apply: 'self-center text-end leading-none';
 		}
 	}
 }
