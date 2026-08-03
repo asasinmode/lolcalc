@@ -707,7 +707,7 @@ export const CHAMPION_SPECIFICS = {
 		WITHER_MS_SLOW: (progress: number, self: DamageSource): number => {
 			const wParams: IGameVariableValueParameters['championAbility'] = {
 				abilityVariant: self.champion.value!.abilities.w.variants[0]!,
-				abilityLevel: self.abilityLevels.value.w,
+				abilityLevel: self.abilityLevels.value.w || 1,
 				damageSource: self,
 			};
 			const minMSSlow = championAbilityVariableValue('SlowBase', wParams);
