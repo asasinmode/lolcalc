@@ -19,10 +19,6 @@ defineEmits<{
 }>();
 
 const value = defineModel<number>({ required: true });
-
-function onInput(event: Event){
-	console.log('input', event.target?.value, event);
-}
 </script>
 
 <template>
@@ -38,11 +34,10 @@ function onInput(event: Event){
 		<slot />
 		<input
 			:id="`veprgr-${idPrefix}`"
-			:value="value"
+			v-model.number="value"
 			type="range"
 			min="0"
 			max="100"
-			@input="onInput"
 		>
 	</article>
 </template>
@@ -53,7 +48,7 @@ function onInput(event: Event){
 		--at-apply: 'grid grid-cols-[max-content_minmax(0,1fr)] grid-rows-2 relative';
 
 		> label {
-			--at-apply: 'col-span-3 self-center of-hidden leading-none pb-[0.2em] -mb-[0.2em]';
+			--at-apply: 'self-center of-hidden leading-none pb-[0.2em] -mb-[0.2em]';
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2;
@@ -61,7 +56,7 @@ function onInput(event: Event){
 		}
 
 		> input {
-			--at-apply: 'box-content bg-white text-black';
+			--at-apply: '';
 		}
 	}
 }
