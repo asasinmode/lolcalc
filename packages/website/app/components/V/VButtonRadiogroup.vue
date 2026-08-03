@@ -6,6 +6,7 @@ const props = defineProps<{
 	valueKey: ValueKey;
 	titleKey?: keyof T | '';
 	required?: boolean;
+	clearValue?: T[ValueKey];
 }>();
 
 defineEmits<{
@@ -49,7 +50,7 @@ function onKeydown(e: KeyboardEvent) {
 }
 
 function selectOption(tab: T[ValueKey]) {
-	value.value = !props.required && value.value === tab ? undefined : tab;
+	value.value = !props.required && value.value === tab ? props.clearValue : tab;
 }
 </script>
 
