@@ -9,7 +9,7 @@ import type { TDragonSpecifics } from './dragon.ts';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import type { ITEM_SPECIFICS } from './item.ts';
-import { ITEMS_BY_NAME } from '@lolcalc/data';
+import { CONSTS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 
 export const HOOK_PRIORITIES = {
@@ -252,8 +252,7 @@ interface IGlobalModifyVariableFunction {
 
 const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVariableFunction>> = {
 	[VariableType.affectedByTenacity](value, self) {
-		console.log('affecting', value, 'by', self.calculationDamageTarget.value?.stats.value.total.tenacity);
-		return value;
+		return Math.max(CONSTS.minCCDuration, value * (1 - (self.calculationDamageTarget.value?.stats.value.total.tenacity ?? 0)));
 	},
 };
 

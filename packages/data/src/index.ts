@@ -23,6 +23,8 @@ export const PATCH_VERSION = {
 export const CONSTS = {
 	/** something mathy related to asymptotes that I don't quite understand */
 	moveSpeedMultFactorDenominator: 2.5,
+	/** the value below which tenacity cannot reduce the duration of a cc, according to [the wiki](https://wiki.leagueoflegends.com/en-us/Tenacity) */
+	minCCDuration: 0.3,
 };
 
 export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListedChampion> as IChampionData;
