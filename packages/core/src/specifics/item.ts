@@ -3608,6 +3608,28 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.solsticeSleigh]: {
+		PASSIVE_BONUS_MS: (progress: number): number => {
+			const bonusMS = itemVariableValue('MoveSpeedBuff', {
+				item: ITEMS_BY_NAME.solsticeSleigh,
+			});
+
+			if (typeof bonusMS.value === 'number') {
+				return bonusMS.value * progress;
+			}
+
+			console.warn('[ITEM_SPECIFICS solstice sleigh] failed to calculate bonus MS', bonusMS);
+			return Number.NaN;
+		},
+		internalDataProperties: ['sledding'],
+		setupData(self) {
+			self.internalItemData.value.sledding = clamp(0, self.internalItemData.value.sledding ?? 0, 100);
+			return {
+				sledding: 0,
+			};
+		},
+		imgActive(internalData: { sledding: number }) {
+			return internalData.sledding;
+		},
 		variables: defineVariables({
 			known: {
 				f3: [],
@@ -3628,6 +3650,13 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f3', 'f5', 'f6', 'StealthWardCap', 'BuffDuration', 'MoveSpeedBuff'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _stats, { calculatedVariables }) {
+					calculatedVariables.totalBonusPercentMoveSpeed += ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS((self.internalItemData.value as IInternalItemDataOf<'solsticeSleigh'>).sledding) / 100;
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.scoutsSlingshot]: {
 		variables: defineVariables({

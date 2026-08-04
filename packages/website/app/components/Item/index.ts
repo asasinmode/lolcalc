@@ -262,6 +262,9 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.spiritVisage]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.spiritVisage), 'applyHSMult', passiveMultiplierToTooltip.label, undefined, undefined, passiveMultiplierToTooltip.tooltip),
 	},
+	[ITEM_NAME_TO_ID.solsticeSleigh]: {
+		extras: await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.solsticeSleigh), 'sledding', 'Going Sledding bonus move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
