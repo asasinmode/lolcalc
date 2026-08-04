@@ -18,8 +18,8 @@ const { vMinor } = PATCH_VERSION;
 const { damageSources, damageTargets } = useCalculatorState();
 
 const MODIFIABLE_CHAMPION_STATS = Object.fromEntries(ALL_CHAMPION_STATS_ENTRIES.filter(([statName]) =>
-	statName !== 'ultimateHaste' && statName !== 'basicHaste' && statName !== 'immobilizingHaste'),
-) as unknown as typeof ALL_CHAMPION_STATS;
+	!(['summonerHaste', 'ultimateHaste', 'basicHaste', 'immobilizingHaste'] as IChampionStatName[]).includes(statName),
+)) as unknown as typeof ALL_CHAMPION_STATS;
 const ALL_MODFIABLE_CHAMPION_STATS = Object.keys(MODIFIABLE_CHAMPION_STATS);
 const MODIFIABLE_CHAMPION_STAT_ENTRIES = Object.entries(MODIFIABLE_CHAMPION_STATS) as unknown as typeof ALL_CHAMPION_STATS_ENTRIES;
 

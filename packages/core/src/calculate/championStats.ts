@@ -37,6 +37,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		critDamageMultiplier: 2,
 		moveSpeed: champion?.stats.movespeed ?? 0,
 		slowResist: 0,
+		summonerHaste: 0,
 		ultimateHaste: 0,
 		basicHaste: 0,
 		immobilizingHaste: 0,
@@ -380,6 +381,9 @@ function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
 			] as [IChampionStatName, number];
 		});
 
+	if (item.dataValues?.SummonerHaste) {
+		rv.push(['summonerHaste', item.dataValues.SummonerHaste]);
+	}
 	if (item.dataValues?.UltimateHaste) {
 		rv.push(['ultimateHaste', item.dataValues.UltimateHaste]);
 	}

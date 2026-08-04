@@ -280,6 +280,7 @@ export const STAT_ICON: Record<
 	adaptiveForce: 'adaptiveforce',
 	AbilityHasteMod: 'scaleah',
 	abilityHaste: 'scaleah',
+	summonerHaste: 'scaleah',
 	ultimateHaste: 'scaleah',
 	immobilizingHaste: 'scaleah',
 	basicHaste: 'scaleah',
