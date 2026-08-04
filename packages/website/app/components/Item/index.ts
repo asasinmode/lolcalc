@@ -7,7 +7,7 @@ import { ItemExtraTearItem } from '#components';
 
 const passiveMultiplierToTooltip = {
 	label: 'passive multiplier to tooltip values',
-	tooltip: 'this item\'s passive affects heals and shields. When this is toggled, the multiplier will be applied to the values displayed in tooltips and results',
+	tooltip: 'this item\'s passive affects heals and shields. When this is toggled, the multiplier will be applied to the values displayed in the <b>results table</b> (tooltips in the scoreboard stay unaffected)',
 };
 
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
