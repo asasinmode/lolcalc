@@ -5,7 +5,7 @@ import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IGameImageData } from './misc.ts';
-import type { IHypotheticalChampionSpecifics } from './specifics/champion';
+import type { IChampionInternalDataMap, IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IHypotheticalDragonSpecifics } from './specifics/dragon';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
 import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
@@ -149,8 +149,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 *   3. data is restored, `const rawValues = rawInternalData.split('|')`, then every value is converted into a number or set undefined if invalid
 	 *   4. champion watch handles parsing back to object
 	 */
-	internalData: Ref<Id extends IInternalDataSetupChampions
-		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupData']>
+	internalData: Ref<Id extends keyof IChampionInternalDataMap
+		? IDamageSourceInternalDataBase & IChampionInternalDataMap[Id]
 		: IDamageSourceInternalDataBase>;
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
@@ -267,7 +267,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								));
 							}
 
-							this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) ?? {};
+							this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any) as any) ?? {};
 
 							const internalDataKeys = Object.keys(this.internalData.value).filter(key => !key.startsWith('_'));
 							if (internalDataKeys.length && this.fromStringifiedInternalData.length) {
@@ -280,7 +280,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								for (const unwatch of this.internalData.value?._watchHandles || []) {
 									unwatch();
 								}
-								this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any)) || {};
+								this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any) as any) || {};
 								this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 							}
 
@@ -312,7 +312,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 							}
 						}
 
-						this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any)) ?? {};
+						this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupData?.(this as any) as any) ?? {};
 						this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 					}, { flush: 'sync' }),
 
@@ -1860,23 +1860,17 @@ export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, w
 	return specific;
 }
 
-type IInternalDataSetupChampions = {
-	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
-		? K
-		: never;
-}[keyof typeof CHAMPION_SPECIFICS];
-
 export interface IDamageSourceInternalDataBase {
 	_watchHandles?: WatchHandle[];
 }
 
-export interface IDamageSourceInternalDataProvider<Id extends IChampionId | undefined = undefined> {
+export interface IDamageSourceInternalDataProvider<Id extends IChampionId | undefined = undefined, RV = any> {
 	/**
 	 * returns the `internalData.value` for specific `DamageSource`'s champion
 	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
 	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
 	 */
-	setupData?: (self: DamageSource<Id>) => any;
+	setupData?: (self: DamageSource<Id>) => RV;
 }
 
 export interface IDamageSourceInternalItemDataProvider {
@@ -1896,7 +1890,7 @@ export type IProviderGroupInternalItemData = {
 	internalDataProperties?: never;
 } | IDamageSourceInternalItemDataProvider;
 
-export type IProviderGroupDataSetup<Id extends IChampionId | undefined = undefined> = { setupData?: never } | IDamageSourceInternalDataProvider<Id>;
+export type IProviderGroupDataSetup<Id extends IChampionId | undefined = undefined, RV = any> = { setupData?: never } | IDamageSourceInternalDataProvider<Id, RV>;
 
 export interface IDamageSourceInternalDragonDataProvider {
 	/**

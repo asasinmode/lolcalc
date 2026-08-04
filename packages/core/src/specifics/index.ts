@@ -3,8 +3,7 @@ import type { IChampionStatName, IVariableType, TItemNameToId } from '@lolcalc/s
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game.ts';
-import type { TChampionSpecifics } from './champion';
-import type { CHAMPION_SPECIFICS } from './champion.ts';
+import type { IChampionInternalDataMap, TChampionSpecifics } from './champion';
 import type { TDragonSpecifics } from './dragon.ts';
 import type { TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
@@ -99,7 +98,7 @@ export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySp
 
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
-export type IInternalDataOf<Champion extends keyof TChampionSpecifics> = IGameAbilityData<any, (typeof CHAMPION_SPECIFICS)[Champion]>;
+export type IInternalDataOf<Id extends keyof TChampionSpecifics> = Id extends keyof IChampionInternalDataMap ? IChampionInternalDataMap[Id] : never;
 
 export type IInternalItemDataOf<K extends keyof TItemNameToId>
 	= K extends any
@@ -155,7 +154,7 @@ export type IConcreteVariableValue = string | number;
 /** the related calculations and meta of a game specific's (item/champion/rune/...) variables */
 export interface ISpecificVariables<
 	DetectedVariables extends string = string,
-	T extends string = string,
+	T extends string = any,
 	Id extends IChampionId | undefined = IChampionId,
 	VariableType extends IGameVariableType = IGameVariableType,
 > {
@@ -246,7 +245,7 @@ export function defineVariables<
 	});
 }
 
-export function calculateDynamicVariables(self: DamageSource, damageTarget?: DamageSource, config?: ISpecificVariables<string, string, IChampionId, any>): IDynamicVariables | undefined {
+export function calculateDynamicVariables(self: DamageSource, damageTarget?: DamageSource, config?: ISpecificVariables<any, any, any, any>): IDynamicVariables | undefined {
 	return config && {
 		values: config.calculate?.(self, damageTarget),
 		meta: config.meta,

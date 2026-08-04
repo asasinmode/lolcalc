@@ -141,7 +141,7 @@ export interface IHypotheticalRuneSpecifics {
 };
 
 export interface IRuneSpecific {
-	variables?: ISpecificVariables<any>;
+	variables?: ISpecificVariables;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	[key: string]: any;
 }
