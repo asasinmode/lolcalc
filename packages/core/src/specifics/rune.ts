@@ -21,7 +21,10 @@ export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {
 			variables: defineVariables({
-				known: { f1: [0, 1], f2: [] },
+				known: {
+					f1: [0, 1],
+					f2: [],
+				},
 				calculate(self) {
 					const { adaptiveForceStatVariable } = self.stats.value.meta;
 					return {

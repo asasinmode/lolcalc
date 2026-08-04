@@ -155,7 +155,7 @@ export type IConcreteVariableValue = string | number;
 /** the related calculations and meta of a game specific's (item/champion/rune/...) variables */
 export interface ISpecificVariables<
 	DetectedVariables extends string = string,
-	T extends string = DetectedVariables,
+	T extends string = string,
 	Id extends IChampionId | undefined = IChampionId,
 	VariableType extends IGameVariableType = IGameVariableType,
 > {
@@ -211,13 +211,30 @@ export interface ISpecificVariables<
 	uninteresting?: NoInfer<(DetectedVariables | T | 'Cooldown')>[];
 }
 
+export interface IDefineVariablesConfig<
+	Id extends IChampionId | undefined,
+	U extends IGameVariableType,
+> {
+	known?: Record<string, (number | string | undefined)[]>;
+	calculate?: (self: DamageSource<Id>, damageTarget?: DamageSource) => Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>;
+	meta?: Record<string, IVariableMeta<IGameVariableValueParameters[U]>>;
+	uninteresting?: string[];
+}
+
+export type IExtractExtraVariables<Config, DetectedVariables extends string> = Exclude<
+    (Config extends { known?: infer K } ? keyof NonNullable<K> : never)
+    | (Config extends { calculate?: (...args: any[]) => infer R } ? keyof NonNullable<R> : never),
+    DetectedVariables
+> & string;
+
 export function defineVariables<
 	DetectedVariables extends string = string,
-	T extends string = string,
 	Id extends IChampionId | undefined = IChampionId,
 	U extends IGameVariableType = IGameVariableType,
+	Config extends IDefineVariablesConfig<Id, U> = IDefineVariablesConfig<Id, U>,
+	T extends string = IExtractExtraVariables<Config, DetectedVariables>,
 >(
-	config: Omit<ISpecificVariables<DetectedVariables, T, Id, U>, 'default'>,
+	config: Config & Omit<ISpecificVariables<DetectedVariables, T, Id, U>, 'default'>,
 ): ISpecificVariables<DetectedVariables, T, Id, U> {
 	return Object.assign(config, {
 		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => {

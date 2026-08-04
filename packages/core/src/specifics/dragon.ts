@@ -176,5 +176,5 @@ type DetectDragonVariables<T>
 
 export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>, 'lolcalcChampRange'>;
+	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>, any>;
 };

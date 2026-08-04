@@ -33,7 +33,7 @@ import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
-import type { ISpecificVariables, IVariableValueResult } from './index';
+import type { IDefineVariablesConfig, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
 import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -104,9 +104,9 @@ export const CHAMPION_SPECIFICS = {
 		WEAPON_VARIANT_INDEX_TO_NAME: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[],
 		/** stringtable indexes are different from the actual weapon order - `apheliosgun_name_1` is for calibrum and so */
 		WEAPON_NAME_TO_STRINGTABLE_INDEX: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
-		variables: defineChampionVariables<'Aphelios', typeof IAphelios>({
+		variables: defineChampionVariables<'Aphelios', typeof IAphelios>()({
 			known: {
-			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
+				/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
 				f1: [1, 2, 3, 4, 5],
 				f2: [],
 				f3: [],
@@ -146,7 +146,7 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		e: {
-			variables: defineChampionVariables<'Aphelios', typeof IAphelios>({
+			variables: defineChampionVariables<'Aphelios', typeof IAphelios, 'e'>()({
 				known: {
 					f1: [1, 2, 3],
 				},
@@ -207,7 +207,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 		passive: {
-			variables: defineChampionVariables<'Briar', typeof IBriar, 'passive'>({
+			variables: defineChampionVariables<'Briar', typeof IBriar, 'passive'>()({
 				uninteresting: ['BleedDuration', 'MaxBleedStacks', 'HealPercent', 'CurrentHealthPercentCost', 'PercentOfBleedHealedOnKill'],
 			}),
 		},
@@ -227,7 +227,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 		passive: {
-			variables: defineChampionVariables<'Cassiopeia', typeof ICassiopeia, 'passive'>({
+			variables: defineChampionVariables<'Cassiopeia', typeof ICassiopeia, 'passive'>()({
 				meta: {
 					PercentHasteMod: {
 						displayedName: 'MoveSpeedPercent',
@@ -266,7 +266,7 @@ export const CHAMPION_SPECIFICS = {
 	},
 	Evelynn: {
 		passive: {
-			variables: defineChampionVariables<'Evelynn', typeof IEvelynn, 'passive'>({
+			variables: defineChampionVariables<'Evelynn', typeof IEvelynn, 'passive'>()({
 				uninteresting: ['DemonShadeTimer', 'StealthDropTimer'],
 			}),
 		},
@@ -310,7 +310,7 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		passive: {
-			variables: defineChampionVariables<'Fiora', typeof IFiora, 'passive'>({
+			variables: defineChampionVariables<'Fiora', typeof IFiora, 'passive'>()({
 				known: {
 					VitalDamage: [],
 				},
@@ -459,7 +459,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 		passive: {
-			variables: defineChampionVariables<'Jax', typeof IJax, 'passive'>({
+			variables: defineChampionVariables<'Jax', typeof IJax, 'passive'>()({
 				known: {
 					AttackSpeedPercent: [],
 				},
@@ -504,7 +504,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Kalista: {
-		variables: defineChampionVariables<'Kalista', typeof IKalista>({
+		variables: defineChampionVariables<'Kalista', typeof IKalista>()({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -525,7 +525,7 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		passive: {
-			variables: defineChampionVariables<'Kayle', typeof IKayle, 'passive'>({
+			variables: defineChampionVariables<'Kayle', typeof IKayle, 'passive'>()({
 				known: {
 					AttackSpeedPercent: [],
 				},
@@ -589,7 +589,7 @@ export const CHAMPION_SPECIFICS = {
 				form: clamp(0, Math.round(self.internalData.value.form ?? 0), CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.rhaast),
 			};
 		},
-		variables: defineChampionVariables<'Kayn', typeof IKayn>({
+		variables: defineChampionVariables<'Kayn', typeof IKayn>()({
 			known: {
 				f1: [0, 1, 2],
 			},
@@ -616,7 +616,7 @@ export const CHAMPION_SPECIFICS = {
 	},
 	KSante: {
 		passive: {
-			variables: defineChampionVariables<'KSante', typeof IKSante, 'passive'>({
+			variables: defineChampionVariables<'KSante', typeof IKSante, 'passive'>()({
 				known: {
 					CalculatedMarkDamage: [],
 					CalculatedAllOutDamage: [],
@@ -746,7 +746,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 		w: {
-			variables: defineChampionVariables<'Nasus', typeof INasus, 'w'>({
+			variables: defineChampionVariables<'Nasus', typeof INasus, 'w'>()({
 				known: {
 					AttackSpeedSlow: [],
 					MoveSpeedSlow: [],
@@ -841,7 +841,7 @@ export const CHAMPION_SPECIFICS = {
 				})],
 			};
 		},
-		variables: defineChampionVariables<'Ornn', typeof IOrnn>({
+		variables: defineChampionVariables<'Ornn', typeof IOrnn>()({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -939,7 +939,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 		w: {
-			variables: defineChampionVariables<'Rammus', typeof IRammus, 'w'>({
+			variables: defineChampionVariables<'Rammus', typeof IRammus, 'w'>()({
 				meta: {
 					ReturnDamageCalc: {
 						type: VariableType.magic,
@@ -1114,7 +1114,7 @@ export const CHAMPION_SPECIFICS = {
 				priority: HOOK_PRIORITIES.postTotal.Ryze,
 			},
 		},
-		variables: defineChampionVariables<'Ryze', typeof IRyze>({
+		variables: defineChampionVariables<'Ryze', typeof IRyze>()({
 			known: {
 				PassiveManaCalcTooltip: [],
 				PassiveMana: [],
@@ -1291,7 +1291,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	TwistedFate: {
-		variables: defineChampionVariables<'TwistedFate', typeof ITwistedFate>({
+		variables: defineChampionVariables<'TwistedFate', typeof ITwistedFate>()({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -1408,7 +1408,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Zilean: {
-		variables: defineChampionVariables<'Zilean', typeof IZilean>({
+		variables: defineChampionVariables<'Zilean', typeof IZilean>()({
 			known: {
 				GameModeInteger: [1],
 			},
@@ -1433,13 +1433,13 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		& {
 			[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific<Id>;
 		} & {
-			variables?: ISpecificVariables<string, string, Id, 'championAbility'>;
+			variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
 			[key: string]: any;
 		};
 
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
-	variables?: ISpecificVariables<string, string, Id, 'championAbility'>;
+	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	/**
 	 * ability's variant specific
@@ -1462,8 +1462,13 @@ export function defineChampionVariables<
 	T = never,
 	AbilityKey extends IChampionAbilityKey = IChampionAbilityKey,
 	DetectedVariables extends string = DetectChampionVariables<T, AbilityKey>,
->(
-	config: Omit<ISpecificVariables<DetectedVariables, string, Id, 'championAbility'>, 'default'>,
-): ISpecificVariables<DetectedVariables, string, Id, 'championAbility'> {
-	return defineVariables(config);
+>() {
+	return function <
+		Config extends IDefineVariablesConfig<Id, 'championAbility'> = IDefineVariablesConfig<Id, 'championAbility'>,
+		ExtraVars extends string = IExtractExtraVariables<Config, DetectedVariables>,
+	>(
+		config: Config & Omit<ISpecificVariables<DetectedVariables, ExtraVars, Id, 'championAbility'>, 'default'>,
+	): ISpecificVariables<DetectedVariables, ExtraVars, Id, 'championAbility'> {
+		return defineVariables<DetectedVariables, Id, 'championAbility', Config, ExtraVars>(config as any);
+	};
 }
