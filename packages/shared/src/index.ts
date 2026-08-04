@@ -226,6 +226,8 @@ export interface IStatsCalculationVariables {
 	deadMansMoveSpeed?: number;
 	/** movement speed multiplier from cassiopeia's passive */
 	cassiopeiaPassiveMSMultiplier?: number;
+	/** bonus ms % from stridebreaker's passive */
+	stridebreakerBonusMS?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */

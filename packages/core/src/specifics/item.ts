@@ -3256,6 +3256,7 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				lolcalcChampRange: [],
+				TotalBonusMoveSpeed: [],
 			},
 			calculate(self) {
 				const melee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: false });
@@ -3263,12 +3264,20 @@ export const ITEM_SPECIFICS = {
 
 				return {
 					lolcalcChampRange: [melee, ranged],
+					TotalBonusMoveSpeed: {
+						value: self.stats.value.variables.stridebreakerBonusMS ?? 0,
+					},
 				};
 			},
 			meta: {
 				lolcalcChampRange: {
 					type: VariableType.physical,
 					displayedName: 'CleaveDamage',
+				},
+				TotalBonusMoveSpeed: {
+					isCustom: true,
+					resultsMultiplier: 100,
+					resultsIsPercentage: true,
 				},
 				SlashDamage: {
 					type: VariableType.physical,
@@ -3282,7 +3291,8 @@ export const ITEM_SPECIFICS = {
 					const { sBShockwaveHits, sBShockwave } = self.internalItemData.value as IInternalItemDataOf<'stridebreaker'>;
 					const bonusMoveSpeed = ITEM_SPECIFICS[ITEM_NAME_TO_ID.stridebreaker].PASSIVE_BONUS_MS(sBShockwave);
 					if (!Number.isNaN(bonusMoveSpeed)) {
-						calculatedVariables.totalBonusPercentMoveSpeed += bonusMoveSpeed / 100 * sBShockwaveHits;
+						calculatedVariables.stridebreakerBonusMS = bonusMoveSpeed / 100 * sBShockwaveHits;
+						calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.stridebreakerBonusMS;
 					}
 				},
 			},
