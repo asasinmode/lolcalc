@@ -148,6 +148,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] stats from rune shards
   - [x] items passives
   - [x] cap attack speed
+  - [?] decaying movement speed stuff like fiora/nami/sivir passive/stridebreaker/solstice sleigh active /hextech dragon slow. Theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
   - [?] basic attack damage
     - [ ] related items/passives/effects
   - [?] apply resists to known type variables. Save pre-mitigation value on variable?

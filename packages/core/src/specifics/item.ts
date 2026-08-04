@@ -1247,7 +1247,6 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ManaCalc: {
 					isPercentage: true,
-					roundReplaced: 1,
 				},
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],
@@ -3226,17 +3225,33 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.stridebreaker]: {
-		internalDataProperties: ['tBShockwave'],
+		PASSIVE_BONUS_MS: (progress: number): number => {
+			const bonusMS = itemVariableValue('ActiveMS', {
+				item: ITEMS_BY_NAME.stridebreaker,
+			});
+
+			if (typeof bonusMS.value === 'number') {
+				return bonusMS.value * progress;
+			}
+
+			console.warn('[ITEM_SPECIFICS stridebreaker] failed to calculate bonus MS', bonusMS);
+			return Number.NaN;
+		},
+		internalDataProperties: ['sBShockwaveHits', 'sBShockwave', 'tBShockwave'],
 		setupData(self) {
+			self.internalItemData.value.sBShockwaveHits = Math.max(0, self.internalItemData.value.sBShockwaveHits ?? 0);
+			self.internalItemData.value.sBShockwave = clamp(0, self.internalItemData.value.sBShockwave ?? 0, 100);
 			self.internalItemData.value.tBShockwave = clamp(0, self.internalItemData.value.tBShockwave ?? 0, 1);
 			return {
-				/** _target_ breaking shockwave, since there's also "self" breaking shockwave giving move speed, not implemented atm */
+				sBShockwaveHits: 0,
+				/** decaying move speed gained from shockwave */
+				sBShockwave: 0,
 				tBShockwave: 0,
 			};
 		},
 		/* should be 2 part, same as youmuu, when the 2nd part of the passive that applies the move speed bonus on self is implemented */
-		imgActive(internalData: { tBShockwave: number }) {
-			return internalData.tBShockwave;
+		imgActive(internalData: { sBShockwave: number; tBShockwave: number }) {
+			return [internalData.sBShockwave, internalData.tBShockwave];
 		},
 		variables: defineVariables({
 			known: {
@@ -3261,6 +3276,17 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['MSSlow', 'ActiveMS', 'Duration'],
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(self, _stats, { calculatedVariables }) {
+					const { sBShockwaveHits, sBShockwave } = self.internalItemData.value as IInternalItemDataOf<'stridebreaker'>;
+					const bonusMoveSpeed = ITEM_SPECIFICS[ITEM_NAME_TO_ID.stridebreaker].PASSIVE_BONUS_MS(sBShockwave);
+					if (!Number.isNaN(bonusMoveSpeed)) {
+						calculatedVariables.totalBonusPercentMoveSpeed += bonusMoveSpeed / 100 * sBShockwaveHits;
+					}
+				},
+			},
+		},
 	},
 	[ITEM_NAME_TO_ID.ludensEcho]: {
 		variables: defineVariables({

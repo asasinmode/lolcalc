@@ -226,7 +226,11 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.imperialMandate), 'command', 'Command', true, true),
 	},
 	[ITEM_NAME_TO_ID.stridebreaker]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'tBShockwave', 'Breaking Shockwave', true, true),
+		extras: [
+			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'sBShockwaveHits', 'Breaking Shockwave champions hit (for ms)'),
+			await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'sBShockwave', 'Breaking Shockwave bonus move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.stridebreaker].PASSIVE_BONUS_MS),
+			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'tBShockwave', 'Breaking Shockwave', true, true),
+		],
 	},
 	[ITEM_NAME_TO_ID.icebornGauntlet]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet), 'frostField', 'Frost Field', true, true),
