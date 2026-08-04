@@ -374,6 +374,10 @@ export function championAbilityVariableValue(
 					(rv as any)[key] = value[key as keyof typeof value];
 				}
 			}
+
+			if (abilityVariant.spellCalculations[variableName].mPrecision > 0) {
+				rv.roundReplaced ??= abilityVariant.spellCalculations[variableName].mPrecision;
+			}
 		}
 	}
 
@@ -522,7 +526,7 @@ export function replaceGameVariables(
 				: undefined;
 		}
 
-		const metaSuffix = variableExtendedEquals(variableValueFunctionParams, options, isMeleeRanged, calculatesFrom, meta, varIcon);
+		const metaSuffix = variableExtendedEquals(variableValueFunctionParams, options, isMeleeRanged, calculatesFrom, meta, typeof roundReplaced === 'number' ? roundReplaced : undefined, varIcon);
 		anyExtendedVariables ||= Boolean(metaSuffix);
 
 		if (meta?.multiplier) {
@@ -811,6 +815,7 @@ export function calculatesFromPartExtendedEquals(
 	insertIcon = false,
 	preferRangedValue = false,
 	prependPlus = false,
+	roundReplaced?: number,
 ): string {
 	const tag = part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
 	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
@@ -821,6 +826,7 @@ export function calculatesFromPartExtendedEquals(
 			: part.value,
 		part.stat,
 		part.isPercentage,
+		roundReplaced,
 	);
 
 	return `${
@@ -834,10 +840,14 @@ export function calculatesFromPartExtendedEquals(
 	}`;
 }
 
-function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, stat: ICalculatesFromPart['stat'], isPercentage?: boolean): string {
+function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value'], any[]>, stat: ICalculatesFromPart['stat'], isPercentage?: boolean, roundReplaced?: number): string {
 	let multiplier = 1;
 	let valueSuffix = '';
 	let roundTo = stat === 'const' ? 2 : 0;
+
+	if (roundReplaced) {
+		roundTo = roundReplaced;
+	}
 
 	if (isPercentage) {
 		multiplier = stat === 'critChance' ? 1 : 100;
@@ -856,6 +866,7 @@ function variableExtendedEquals(
 	isMeleeRanged: IVariableValueResult['isMeleeRanged'],
 	calculatesFrom: IVariableValueResult['calculatesFrom'],
 	meta: IVariableMeta | undefined,
+	roundReplaced?: number,
 	varIcon?: string,
 ): string {
 	if (meta?.calculatesFrom) {
@@ -886,13 +897,13 @@ function variableExtendedEquals(
 		const defaultEEPreferRangedValue = isMeleeRanged === 1;
 		generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
 		const rawGeneratedEE: [string, string] = [
-			calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, defaultEEPreferRangedValue),
-			isEqualsMeleeRanged ? calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, true) : '',
+			calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, defaultEEPreferRangedValue, undefined, roundReplaced),
+			isEqualsMeleeRanged ? calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, true, undefined, roundReplaced) : '',
 		];
 		for (const part of calculatesFrom.slice(1)) {
-			rawGeneratedEE[0] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, defaultEEPreferRangedValue, true)}`;
+			rawGeneratedEE[0] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, defaultEEPreferRangedValue, true, roundReplaced)}`;
 			if (isEqualsMeleeRanged) {
-				rawGeneratedEE[1] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, true, true)}`;
+				rawGeneratedEE[1] += ` ${calculatesFromPartExtendedEquals(part, insertIcon, true, true, roundReplaced)}`;
 			}
 			if (part.stat && part.stat !== 'const') {
 				generatedStatIcon ??= [];

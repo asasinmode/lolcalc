@@ -170,6 +170,10 @@ test('extended equals', async (t) => {
 		const kSante = await setupDamageSource(fixture, 'KSante');
 		const kSantePassive = extendedChampionAbilityDescription(kSante, 'tooltip', 'passive');
 		assertMetaSuffix('MaxHealthDamagePercent', '<const>1</const> <scalearmor>+ 0.01% bonus %i:scalearmor%</scalearmor> <scalemr>+ 0.01% bonus %i:scalemr%</scalemr>', kSantePassive);
+
+		const rell = await setupDamageSource(fixture, 'Rell');
+		const rellPassive = extendedChampionAbilityDescription(rell, 'tooltipExtended', 'passive');
+		assertMetaSuffix('StealFloor', '<scalelevel>1.5 - 3</scalelevel>%i:scalelevel%', rellPassive);
 	});
 });
 
@@ -177,7 +181,7 @@ function assertMetaSuffix(variableName: string, expected: string, replaceResult:
 	return assert.strictEqual(replaceResult.variables.get(variableName)?.metaSuffix, ` = (${expected})`, variableName);
 }
 
-function extendedChampionAbilityDescription(damageSource: DamageSource, tooltipKey: 'tooltip', abilityKey: IChampionAbilityKey, abilityVariant = 0): IReplaceGameVariablesRV {
+function extendedChampionAbilityDescription(damageSource: DamageSource, tooltipKey: 'tooltip' | 'tooltipExtended', abilityKey: IChampionAbilityKey, abilityVariant = 0): IReplaceGameVariablesRV {
 	const stringtabled = replaceStringtableVariables(damageSource.champion.value!.abilities[abilityKey].variants[abilityVariant]![tooltipKey]!, damageSource.champion.value!.stringtable);
 	return replaceGameVariables(stringtabled.replaced, 'championAbility', {
 		abilityVariant: damageSource.champion.value!.abilities[abilityKey].variants[abilityVariant]!,
