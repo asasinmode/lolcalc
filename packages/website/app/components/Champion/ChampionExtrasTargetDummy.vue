@@ -226,20 +226,26 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 <style>
 @layer overrides {
 	[data-scoreboard-item='TargetDummy'] .extras-target-dummy-stats {
-		--at-apply: 'col-span-full max-inline-none grid grid-cols-5 auto-rows-min gap-x-3.5 gap-y-2.5 py-[--p]';
+		--at-apply: 'col-span-full max-inline-none grid grid-cols-[repeat(auto-fill,minmax(135px,1fr))] auto-rows-min gap-x-3.5 gap-y-2.5 py-[--p]';
 
 		> header {
 			--at-apply: 'col-span-full flex';
 
 			button {
 				--at-apply: 'px-1.5';
+
+				@media (width < 512px) {
+					& {
+						--at-apply: 'self-start';
+					}
+				}
 			}
 
 			> form {
-				--at-apply: 'me-auto';
+				--at-apply: 'me-auto text-neutral-200';
 
 				> select {
-					--at-apply: 'bg-white text-black w-40 py-[--venmbr-input-py] px-[--venmbr-input-px] me-[--venmbr-gap-x]';
+					--at-apply: 'bg-white text-black inline-40 py-[--venmbr-input-py] px-[--venmbr-input-px] me-[--venmbr-gap-x]';
 					color-scheme: light;
 
 					&:disabled {
@@ -252,6 +258,41 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 						--at-apply: 'b-e-0';
 					}
 				}
+
+				@media (width < 512px) {
+					& {
+						--at-apply: 'grid grid-cols-[auto_max-content] grid-rows-2 grid-flow-col';
+					}
+
+					> button {
+						&:nth-of-type(1) {
+							--at-apply: 'b-e';
+						}
+					}
+				}
+
+				@media (width < 360px) {
+					& {
+						--at-apply: 'grid grid-cols-[auto_1fr] gap-x-1.5 auto-rows-auto grid-rows-none grid-flow-row';
+					}
+
+					> label,
+					> select {
+						--at-apply: 'col-span-full';
+					}
+
+					> select {
+						--at-apply: 'mbe-1.5';
+					}
+
+					> button {
+						--at-apply: 'px-2.5';
+
+						&:nth-of-type(2) {
+							--at-apply: 'inline-max';
+						}
+					}
+				}
 			}
 		}
 
@@ -259,7 +300,7 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 			--at-apply: 'grid grid-rows-[max-content_1fr] grid-cols-[1fr_auto] gap-x-[--venmbr-gap-x] gap-y-1 relative';
 
 			> label {
-				--at-apply: 'flex items-center text-sm col-span-full gap-x-[0.5ch]';
+				--at-apply: 'flex items-center text-sm col-span-full gap-x-[0.5ch] text-neutral-200';
 
 				> img {
 					--at-apply: 'size-4';
