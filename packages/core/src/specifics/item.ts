@@ -3240,7 +3240,7 @@ export const ITEM_SPECIFICS = {
 		internalDataProperties: ['sBShockwaveHits', 'sBShockwave', 'tBShockwave'],
 		setupData(self) {
 			self.internalItemData.value.sBShockwaveHits = Math.max(0, self.internalItemData.value.sBShockwaveHits ?? 0);
-			self.internalItemData.value.sBShockwave = clamp(0, self.internalItemData.value.sBShockwave ?? 0, 100);
+			self.internalItemData.value.sBShockwave = clamp(0, self.internalItemData.value.sBShockwave ?? 100, 100);
 			self.internalItemData.value.tBShockwave = clamp(0, self.internalItemData.value.tBShockwave ?? 0, 1);
 			return {
 				sBShockwaveHits: 0,
@@ -3250,8 +3250,8 @@ export const ITEM_SPECIFICS = {
 			};
 		},
 		/* should be 2 part, same as youmuu, when the 2nd part of the passive that applies the move speed bonus on self is implemented */
-		imgActive(internalData: { sBShockwave: number; tBShockwave: number }) {
-			return [internalData.sBShockwave, internalData.tBShockwave];
+		imgActive(internalData: { sBShockwaveHits: number; sBShockwave: number; tBShockwave: number }) {
+			return [internalData.sBShockwaveHits && internalData.sBShockwave, internalData.tBShockwave];
 		},
 		variables: defineVariables({
 			known: {
