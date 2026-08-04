@@ -2682,7 +2682,7 @@ defineExpose({ el });
 				}
 
 				> h4 {
-					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3 whitespace-nowrap';
+					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-200 leading-3 whitespace-nowrap';
 				}
 			}
 
@@ -2903,6 +2903,10 @@ defineExpose({ el });
 
 			> img {
 				--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
+			}
+
+			> label {
+				--at-apply: 'text-neutral-200';
 			}
 
 			> label + button {
