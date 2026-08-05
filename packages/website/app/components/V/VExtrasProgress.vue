@@ -7,6 +7,7 @@ defineProps<{
 	imgSrc: IGameImageData;
 	label: string;
 	derivedValue: number;
+	derivedSymbolSuffix?: string;
 }>();
 
 defineEmits<{
@@ -35,7 +36,7 @@ const value = defineModel<number>({ required: true });
 			max="100"
 		>
 		<output :for="`veprgr-${idPrefix}`" aria-live="off">
-			{{ roundVariable(derivedValue, 1) }}%
+			{{ roundVariable(derivedValue, 1) }}{{ derivedSymbolSuffix }}
 		</output>
 	</article>
 </template>

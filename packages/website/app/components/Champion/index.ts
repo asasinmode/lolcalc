@@ -151,6 +151,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Singed: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.MAX_PASSIVE_STACKS),
 	},
+	Sivir: {
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Sivir', 'passive', 0), 'passiveMSProgress', 'Fleet of Foot move speed', CHAMPION_SPECIFICS.Sivir.PASSIVE_BONUS_MS, ''),
+	},
 	Smolder: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Smolder', 'passive', 0), 'passiveStacks', 'Dragon Practice stacks'),
 	},

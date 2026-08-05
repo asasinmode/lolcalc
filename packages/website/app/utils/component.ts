@@ -67,6 +67,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	getDerivedValue: (progress: number, self: DamageSource) => number,
+	derivedSymbolSuffix = '%',
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
@@ -78,6 +79,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			imgSrc,
 			label,
 			'derivedValue': getDerivedValue(modelValue.value, props.damageSource),
+			derivedSymbolSuffix,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
 			},

@@ -22,6 +22,7 @@ import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
 import type IRell from '@lolcalc/data/files/champion/Rell.json';
 import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
 import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
+import type ISivir from '@lolcalc/data/files/champion/Sivir.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
@@ -1229,6 +1230,41 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 	},
+	Sivir: {
+		PASSIVE_BONUS_MS: ((progress, self) => {
+			const bonusMS = championAbilityVariableValue('FlatMS', {
+				abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+				damageSource: self,
+			});
+
+			if (typeof bonusMS.value === 'number') {
+				return bonusMS.value * progress / 100;
+			}
+
+			console.warn('[CHAMPION_SPECIFICS sivir] failed to calculate passive bonus MS', bonusMS);
+			return Number.NaN;
+		}) satisfies IDeriveProgressFn,
+		setupData(self) {
+			return {
+				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
+			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Sivir', typeof ISivir, 'passive'>()({
+				uninteresting: ['HasteDuration'],
+			}),
+		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const bonusMS = CHAMPION_SPECIFICS.Sivir.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, self);
+					if (!Number.isNaN(bonusMS)) {
+						championPassiveStats.moveSpeed = bonusMS;
+					}
+				},
+			},
+		},
+	},
 	Smolder: {
 		setupData(self) {
 			return {
@@ -1522,6 +1558,7 @@ export interface IChampionInternalDataMap {
 	Seraphine: { passiveStacks: number };
 	Shyvana: { passiveStacks: number };
 	Singed: { passiveStacks: number };
+	Sivir: { passiveMSProgress: number };
 	Smolder: { passiveStacks: number };
 	Sona: { passiveStacks: number };
 	Soraka: { isPassiveMSActive: number };
