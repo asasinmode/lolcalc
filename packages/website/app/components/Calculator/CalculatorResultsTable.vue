@@ -729,6 +729,8 @@ function addComputedColumnSources(column: IDamageResultTableColumn) {
 	if (column.source) {
 		column._computedSource = column.source.clone({}, true);
 		column._computedSource.champion.value = column.source.champion.value;
+	} else {
+		column._computedSource = undefined;
 	}
 
 	if (column.target) {
@@ -739,6 +741,8 @@ function addComputedColumnSources(column: IDamageResultTableColumn) {
 			column._computedTarget.calculationDamageTarget.value = column.source;
 			column._computedSource!.calculationDamageTarget.value = column._computedTarget;
 		}
+	} else {
+		column._computedTarget = undefined;
 	}
 }
 
@@ -1603,7 +1607,7 @@ defineExpose({
 						>
 							<img
 								v-if="row.image"
-								v-bind="gameImageAttrs(row.image)"
+								v-bind="gameImageAttrs(row.image, 24)"
 								aria-hidden="true"
 							>
 							<span v-if="row.isUnknown">unknown</span>
