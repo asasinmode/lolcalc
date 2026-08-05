@@ -661,6 +661,7 @@ export const EFFECT_OBJECT_NAME = {
 	stun: 'lolcalcStun',
 	slowFlat: 'lolcalcSlowFlat',
 	slowPercent: 'lolcalcSlowPercent',
+	hextechSoulSlow: 'SRX_DragonSoulBuffHextech_Slow',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

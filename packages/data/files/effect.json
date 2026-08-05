@@ -137,6 +137,12 @@
 			"dataKey": "lolcalcSlowPercent",
 			"description": "This unit is <keyword>slowed</keyword> by a percentage amount."
 		},
+		"SRX_DragonSoulBuffHextech_Slow": {
+			"dataKey": "SRX_DragonSoulBuffHextech_Slow",
+			"sharedSpellObjectKey": "Shared/Spells/SRX_DragonSoulBuffHextech_Slow",
+			"objectName": "SRX_DragonSoulBuffHextech_Slow",
+			"description": "This unit is slowed by Hextech soul's effect."
+		},
 		"2065ActiveMoveSpeed": {
 			"description": "This unit is moving faster.",
 			"dataKey": "Items/2065/Spells/2065ActiveMoveSpeed"

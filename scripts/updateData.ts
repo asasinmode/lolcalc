@@ -1116,7 +1116,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						}
 
 						for (const buffDescriptionSource of buffDescriptionSources) {
-							const buffDescription = getStringtableValue(buffDescriptionSource.mBuff.mDescription, `custom effect ${effectObjectName} ${buffDescriptionSource.ObjectName} description`)!;
+							const buffDescription = getStringtableValue(buffDescriptionSource.mBuff.mDescription, `custom effect ${effectObjectName} ${buffDescriptionSource.ObjectName} description`);
 
 							if (buffDescription) {
 								description += `${description ? ' ' : ''}${extractEffectDescription(buffDescription)}`;
@@ -1126,7 +1126,9 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						if (description) {
 							effectData.description = description;
 						}
-					} else if (!sourceSpell.mSpell) {
+					} else if (sourceSpell.mBuff?.mTooltipData?.mLocKeys?.keyTooltip) {
+						effectData.description = getStringtableValue(sourceSpell.mBuff.mTooltipData.mLocKeys.keyTooltip, `custom effect ${effectObjectName} ${sourceSpell.ObjectName} description`)!;
+					} else if ('sharedSpellEffectObjectKey' in customEffect && !sourceSpell.mSpell) {
 						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" mSpell not found in shared spell "${spellKey}" object`);
 					}
 

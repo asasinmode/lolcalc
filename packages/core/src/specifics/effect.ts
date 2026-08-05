@@ -183,6 +183,16 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	}),
+	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
+		label: 'Hextech Soul lightning slow',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 100)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+	}),
 	[EFFECT_OBJECT_NAME.shurelyaInspiringSpeech]: defineEffectSpecific<[isInspired: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.shurelya),
 		label: 'Inspiring speech',
@@ -862,6 +872,9 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	},
 	[EFFECT_OBJECT_NAME.slowPercent]: {
 		description: 'This unit is <keyword>slowed</keyword> by a percentage amount.',
+	},
+	[EFFECT_OBJECT_NAME.hextechSoulSlow]: {
+		sharedSpellObjectKey: 'Shared/Spells/SRX_DragonSoulBuffHextech_Slow',
 	},
 };
 
