@@ -228,7 +228,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.stridebreaker]: {
 		extras: [
 			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'sBShockwaveHits', 'Breaking Shockwave champions hit (for ms)'),
-			await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'sBShockwave', 'Breaking Shockwave bonus move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.stridebreaker].PASSIVE_BONUS_MS),
+			await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'sBShockwave', 'Breaking Shockwave move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.stridebreaker].PASSIVE_BONUS_MS),
 			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker), 'tBShockwave', 'Breaking Shockwave', true, true),
 		],
 	},
@@ -263,7 +263,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.spiritVisage), 'applyHSMult', passiveMultiplierToTooltip.label, undefined, undefined, passiveMultiplierToTooltip.tooltip),
 	},
 	[ITEM_NAME_TO_ID.solsticeSleigh]: {
-		extras: await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.solsticeSleigh), 'sledding', 'Going Sledding bonus move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS),
+		extras: await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.solsticeSleigh), 'sledding', 'Going Sledding move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS),
 	},
 };
 

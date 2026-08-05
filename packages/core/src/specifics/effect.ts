@@ -102,7 +102,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
-		label: 'Hextech Soul',
+		label: 'Hextech Soul lightning slow',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
