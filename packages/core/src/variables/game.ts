@@ -998,7 +998,10 @@ export const VARIABLE_CALCULATION_FNS = {
 			const multiplier = resolveMMultiplier(variable.mMultiplier as any, whole, meta) ?? 1;
 			rv.value *= multiplier;
 			for (const part of rv.calculatesFrom!) {
-				part.stat && multiplyCalculatePartValues(part, multiplier);
+				/* TODO not sure if that's right but at the moment this covers actualizer const not being affected by its mMultiplier but Sivir base damage being */
+				if (part.stat && (!variable.mDisplayAsPercent || part.stat !== 'const')) {
+					multiplyCalculatePartValues(part, multiplier);
+				}
 			}
 		} else if (hasMRangedMultiplier) {
 			rv.isMeleeRanged = true;

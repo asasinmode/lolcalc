@@ -174,6 +174,12 @@ test('extended equals', async (t) => {
 		const rell = await setupDamageSource(fixture, 'Rell');
 		const rellPassive = extendedChampionAbilityDescription(rell, 'tooltipExtended', 'passive');
 		assertMetaSuffix('StealFloor', '<scalelevel>1.5 - 3</scalelevel>%i:scalelevel%', rellPassive);
+
+		const sivir = await setupDamageSource(fixture, 'Sivir', {
+			items: [ITEMS_BY_NAME.cloakOfAgility, ITEMS_BY_NAME.infinityEdge],
+		});
+		const sivirQ = extendedChampionAbilityDescription(sivir, 'tooltip', 'q');
+		assertMetaSuffix('TotalDamage', '<const>42.28</const> <scalead>+ 84.56% bonus %i:scalead%</scalead> <scaleap>+ 72.48%%i:scaleap%</scaleap>', sivirQ);
 	});
 });
 
