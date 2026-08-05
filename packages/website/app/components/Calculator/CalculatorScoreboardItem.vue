@@ -1320,7 +1320,7 @@ defineExpose({ el });
 						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)">
 							<img
 								v-show="effect.imgData"
-								v-bind="gameImageAttrs(effect.imgData)"
+								v-bind="gameImageAttrs(effect.imgData, 22)"
 								loading="lazy"
 							>
 							<span v-if="effect.specific.imgText" v-show="effect.imgText">

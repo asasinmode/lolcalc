@@ -274,7 +274,7 @@ defineExpose({
 				</li>
 			</ul>
 		</template>
-		<!-- deliberately not passing damageSource here because these effects are applied by a different champion. Effects from own items are applied with item extras -->
+		<!-- deliberately not passing damageSource here because these effects are applied by a different champion. Effects from own items can be applied with item extras -->
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
 			:ability-id="hoveredEffectId"

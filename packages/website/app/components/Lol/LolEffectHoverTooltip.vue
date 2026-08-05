@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import type { IComputedAbilityDescription, IComputedEffectDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
+import type { IComputedAbilityDescription, IComputedDragonAbilityDescription, IComputedEffectDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
+import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
-import { computeAbilityDescription, computeEffectDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
+import { computeAbilityDescription, computeDragonAbilityDescription, computeEffectDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
+import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ITEMS, useChampion } from '@lolcalc/data';
@@ -56,7 +58,7 @@ const computedDescription = computed((): IComputedEffectDescription | undefined 
 	return undefined;
 });
 
-const sourceAbilityDescription = computed<IComputedAbilityDescription | IComputedItemDescription | undefined>(() => {
+const sourceAbilityDescription = computed<IComputedAbilityDescription | IComputedItemDescription | IComputedDragonAbilityDescription | undefined>(() => {
 	if (computedDescription.value?.championAbilityLikePrecomputedDescription) {
 		return computedDescription.value.championAbilityLikePrecomputedDescription;
 	}
@@ -73,6 +75,16 @@ const sourceAbilityDescription = computed<IComputedAbilityDescription | ICompute
 			sourceAbilityId.value,
 			undefined,
 			{ overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[id]?.variables) },
+		);
+	}
+
+	if (type === AbilityType.dragon) {
+		return computeDragonAbilityDescription(
+			id,
+			sourceAbilityId.value.subtype,
+			undefined,
+			false,
+			{ overrideVariables: specificKnownVariables((DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[id]?.[sourceAbilityId.value.subtype]?.variables) },
 		);
 	}
 
@@ -112,6 +124,11 @@ defineExpose({ el });
 				v-show="globalKeyModifiers.shift"
 				:precomputed-description="sourceAbilityDescription as IComputedAbilityDescription"
 			/>
+			<LolDragonHoverTooltip
+				v-else-if="sourceAbilityId?.type === AbilityType.dragon"
+				v-show="globalKeyModifiers.shift"
+				:precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription"
+			/>
 			<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
 				<LolItemDescription
 					:precomputed-description="sourceAbilityDescription as IComputedItemDescription"
@@ -149,8 +166,9 @@ defineExpose({ el });
 
 @layer overrides {
 	.effect-hover-tooltip-container {
-		> .champion-ability {
-			--at-apply: 'grid';
+		> .champion-ability,
+		> .dragon {
+			--at-apply: 'grid relative';
 		}
 	}
 }
