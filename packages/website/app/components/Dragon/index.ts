@@ -31,7 +31,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 					? await progressExtra(abilityId, 0, label, progressDerivedValue)
 					: maxValue !== 1
 						? await numberExtra(abilityId, 0, label, minValue, maxValue)
-						: await booleanExtra(abilityId, 0, label);
+						: await booleanExtra(abilityId, 0, label, false);
 	}
 }
 
