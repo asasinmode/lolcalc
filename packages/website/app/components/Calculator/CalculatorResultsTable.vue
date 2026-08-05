@@ -5,7 +5,7 @@ import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/cha
 import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
-import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
+import type { IReplacedGameVariable, IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
 import type { IChampion, IDragonName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import type { UnwrapRef, WatchHandle } from 'vue';
@@ -579,7 +579,19 @@ async function addResultsSection(
 
 		section.name ??= effectSpecific.label;
 		section.image = await gameAbilityImage(abilityId);
-		section.rows = await getAbilitySectionRows({ variables: effectSpecific.variables.known, unknownVariables: [] });
+		section.rows = await getAbilitySectionRows({
+			variables: new Map(Object.entries(effectSpecific.variables.known!).map(([variableName, variableValue]) => {
+				return [
+					variableName,
+				{
+					baseValue: variableValue[0]!,
+					value: variableValue[0]!,
+					meta: effectSpecific.variables!.meta?.[variableName],
+				} satisfies IReplacedGameVariable,
+				];
+			}) as [string, IReplacedGameVariable][]),
+			unknownVariables: [],
+		});
 		section.getCellValue = effectVariableCellValue;
 		section.hoverTooltipData = { abilityId };
 	}

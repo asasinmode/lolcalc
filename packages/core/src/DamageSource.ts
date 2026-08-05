@@ -11,7 +11,7 @@ import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/
 import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
-import type { IDynamicVariables, IModifyVariableFunction, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
+import type { IDynamicVariables, IModifyVariableFunction, IReplacedGameVariable, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
 
 import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, EFFECTS, EFFECTS_STRINGTABLE, ICON_COOLDOWN_IMG, ITEMS, MISC, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
@@ -1759,7 +1759,18 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 	}
 
 	if (specific.variables) {
-		rv.resultVariables = computed(() => specific.variables!.calculate(self));
+		rv.resultVariables = computed(() => {
+			const variables = calculateDynamicVariables(self, self.calculationDamageTarget.value, specific.variables);
+			// TODO value should be affected by variable modify fns?, like hextech soul slow by slow resist
+			return new Map(variables?.values
+				? Object.entries(variables.values).map(([variableName, value]) => {
+					return [
+						variableName,
+						Object.assign(value, { meta: specific.variables!.meta?.[variableName] }),
+					];
+				}) as [string, IReplacedGameVariable][]
+				: undefined);
+		});
 	}
 
 	gameAbilityImage(specific.sourceAbility).then(value => rv.imgData = value);
@@ -2000,7 +2011,7 @@ export interface IComputedAppliedEffect {
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
 	/** output of `IEffectSpecific.variables?.calculate()` */
-	resultVariables?: ComputedRef<ReturnType<NonNullable<IEffectSpecific['variables']>['calculate']>>;
+	resultVariables?: ComputedRef<IReplaceGameVariablesRV['variables']>;
 }
 
 interface IDamageSourceComputed {

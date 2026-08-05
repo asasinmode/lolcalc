@@ -1,11 +1,10 @@
-import type { IEffectData, TEffects } from '@lolcalc/data';
+import type { IEffectData, TEffects, TMiscData } from '@lolcalc/data';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IReplacedGameVariable } from '../variables/game.ts';
-import type { IInternalItemDataOf } from './index.ts';
-import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
+import type { IInternalItemDataOf, ISpecificVariables } from './index.ts';
+import { EFFECTS, ITEMS_BY_NAME, MISC, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -13,10 +12,8 @@ import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
-import { HOOK_PRIORITIES } from './index.ts';
+import { defineVariables, HOOK_PRIORITIES } from './index.ts';
 import { ITEM_SPECIFICS } from './item.ts';
-
-const PLACEHOLDER_REPLACED_GAME_VARIABLE: IReplacedGameVariable = { baseValue: 0, value: 0 };
 
 const MeleeRangedEnumOptions = {
 	none: 0,
@@ -109,13 +106,47 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
+		maxValue: 100,
 		isActive(data) {
 			return data[0];
 		},
-		progressDerivedValue: (value) => {
-			console.log('progress deriving', value);
-			return value;
+		imgText(data): string {
+			return `${Math.round(EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].progressDerivedValue!(data[0], {} as DamageSource))}%`;
 		},
+		progressDerivedValue: (value, _self) => {
+			const slowValue =	championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul });
+			// TODO melee/ranged championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
+			if (typeof slowValue.value === 'number') {
+				return slowValue.value * value;
+			} else {
+				console.warn('[EFFECT_SPECIFICS hextechSoulSlow] failed to calculate slow percentage', slowValue);
+				return Number.NaN;
+			}
+		},
+		variables: defineVariables({
+			known: {
+				SlowPercentage: [],
+			},
+			calculate(self) {
+				const effectData = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.hextechSoulSlow));
+
+				const value: number = effectData ? EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].progressDerivedValue!(effectData[0].data[0], {} as DamageSource) : 0;
+
+				return {
+					SlowPercentage: {
+						value,
+					},
+				};
+			},
+			meta: {
+				SlowPercentage: {
+					isCustom: true,
+					resultsIsPercentage: true,
+				},
+			},
+
+		}),
+		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.stun]: defineEffectSpecific<[isStunned: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.stun),
@@ -331,17 +362,23 @@ export const EFFECT_SPECIFICS = {
 				},
 			},
 		},
-		variables: defineEffectSpecificVariables(
-			['AttackSpeedReduction'],
-			(damageSource) => {
-				if (damageSource.stats.value.variables.frozenHeartCaress !== undefined) {
-					const value = damageSource.stats.value.variables.frozenHeartCaress;
-					return new Map([
-						['AttackSpeedReduction', { baseValue: value, value }],
-					]);
-				}
+		variables: defineVariables({
+			known: {
+				AttackSpeedReduction: [],
 			},
-		),
+			calculate(self) {
+				return {
+					AttackSpeedReduction: {
+						value: self.stats.value.variables.frozenHeartCaress ?? 0,
+					},
+				};
+			},
+			meta: {
+				AttackSpeedReduction: {
+					isCustom: true,
+				},
+			},
+		}),
 	}),
 	[EFFECT_OBJECT_NAME.serpentsFangVenom]: defineEffectSpecific<[shieldReavedBy: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
@@ -740,7 +777,7 @@ export const EFFECT_SPECIFICS = {
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;
 export type IHypotheticalEffectSpecifics = Record<string, IEffectSpecific>;
 
-export interface IEffectSpecific<T extends [number] = [number]> {
+export interface IEffectSpecific<T extends number[] = [number]> {
 	sourceAbility: IGameAbilityId;
 	/** used when an effect is applied by multiple items, overrides `sourceAbility` when creating EFFECTS_APPLIED_BY_ITEMS_TO_TARGET */
 	appliedByItems?: IGameAbilityId[];
@@ -785,15 +822,10 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 		handler: IEffectModifyVariableFunction<T>;
 	};
 	/** variables to be showned in results */
-	variables?: {
-		/** calculate any variables that are supposed to be shown in results for this effect. Result is converted to a map in `CalculatorResultsTable` to match `IReplaceGameVariablesRV['variables']` */
-		calculate: (damageSource: DamageSource) => (Map<string, IReplacedGameVariable> | undefined);
-		/** the variables that will be returned from `calculate` with any values. Used for getting the list of them to show as result section rows */
-		known: Map<string, IReplacedGameVariable>;
-	};
+	variables?: ISpecificVariables;
 }
 
-type IEffectModifyVariableFunction<T extends [number] = [number]> = (value: number, effectData: T) => number;
+type IEffectModifyVariableFunction<T extends number[] = [number]> = (value: number, effectData: T) => number;
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 
@@ -884,18 +916,8 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	},
 };
 
-function defineEffectSpecific<T extends [number]>(config: IEffectSpecific<T>): IEffectSpecific<T> {
+function defineEffectSpecific<T extends number[]>(config: IEffectSpecific<T>): IEffectSpecific<T> {
 	return config;
-}
-
-function defineEffectSpecificVariables<K extends string>(
-	keys: K[],
-	calculate: (damageSource: DamageSource) => (Map<K, IReplacedGameVariable> | undefined),
-): IEffectSpecific['variables'] {
-	return {
-		known: new Map(keys.map(k => [k, PLACEHOLDER_REPLACED_GAME_VARIABLE])),
-		calculate,
-	};
 }
 
 /** map (item id to effect) of all effects that can be applied by toggling item's extra `apply X to target` checkbox */
