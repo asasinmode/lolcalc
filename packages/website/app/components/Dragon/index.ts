@@ -1,6 +1,7 @@
 import type { IDragonName } from '@lolcalc/data/types';
 import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { AbilityType } from '@lolcalc/shared/index';
 
 export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificComponents; soul?: ISpecificComponents }>> = {
@@ -15,6 +16,24 @@ export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificC
 		},
 	},
 };
+
+for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
+	if (effectSpecific.sourceAbility.type === AbilityType.dragon) {
+		const abilityId = GameAbilityId.build(AbilityType.effect, effectObjectName);
+		const { label, minValue = 0, maxValue = 1, enumOptions, progressDerivedValue } = effectSpecific;
+
+		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
+		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype] ??= {};
+		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype]!.effects
+			??= enumOptions
+				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
+				: progressDerivedValue
+					? await progressExtra(abilityId, 0, label, progressDerivedValue)
+					: maxValue !== 1
+						? await numberExtra(abilityId, 0, label, minValue, maxValue)
+						: await booleanExtra(abilityId, 0, label);
+	}
+}
 
 for (const key in DRAGON_COMPONENTS) {
 	const { stack, soul } = DRAGON_COMPONENTS[key as keyof typeof DRAGON_COMPONENTS]!;

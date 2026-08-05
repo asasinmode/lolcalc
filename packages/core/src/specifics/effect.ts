@@ -103,42 +103,19 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	}),
-	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
-		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),
-		label: 'Grievous Wounds',
+	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
+		label: 'Hextech Soul lightning slow',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
 		isActive(data) {
 			return data[0];
 		},
-		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(AbilityType.item, itemId)),
-		setupDataFromSourceItem(damageSource) {
-			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
-				const item = damageSource.items.value.find(item => item && (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id));
-				const strength = item?.dataValues?.GrievousAmount;
-				if (!strength) {
-					console.warn('[EFFECT_SPECIFICS] detected a grievous wounds item but it has no GrievousAmount dataValue', item);
-				}
-				return [strength ? strength * 100 : 40];
-			}
+		progressDerivedValue: (value) => {
+			console.log('progress deriving', value);
+			return value;
 		},
-		// TODO calculate
-	}),
-	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: defineEffectSpecific<[gWounds: number]>({
-		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWoundsPercent),
-		label: 'Grievous Wounds (percent)',
-		setupData(data) {
-			return [clamp(0, data?.[0] ?? 0, 100)];
-		},
-		isActive(data) {
-			return data[0];
-		},
-		imgText(data) {
-			return `${data[0]}%`;
-		},
-		maxValue: 100,
-		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.stun]: defineEffectSpecific<[isStunned: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.stun),
@@ -183,15 +160,42 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	}),
-	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number]>({
-		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
-		label: 'Hextech Soul lightning slow',
+	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),
+		label: 'Grievous Wounds',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
 		isActive(data) {
 			return data[0];
 		},
+		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(AbilityType.item, itemId)),
+		setupDataFromSourceItem(damageSource) {
+			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
+				const item = damageSource.items.value.find(item => item && (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id));
+				const strength = item?.dataValues?.GrievousAmount;
+				if (!strength) {
+					console.warn('[EFFECT_SPECIFICS] detected a grievous wounds item but it has no GrievousAmount dataValue', item);
+				}
+				return [strength ? strength * 100 : 40];
+			}
+		},
+		// TODO calculate
+	}),
+	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: defineEffectSpecific<[gWounds: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWoundsPercent),
+		label: 'Grievous Wounds (percent)',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 100)];
+		},
+		isActive(data) {
+			return data[0];
+		},
+		imgText(data) {
+			return `${data[0]}%`;
+		},
+		maxValue: 100,
+		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.shurelyaInspiringSpeech]: defineEffectSpecific<[isInspired: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.shurelya),
@@ -772,6 +776,8 @@ export interface IEffectSpecific<T extends [number] = [number]> {
 	maxValue?: number | (() => Promise<number> | number);
 	/** if specified, the component for this effect will be `VExtraEnum` */
 	enumOptions?: Record<string, number>;
+	/** if `true`, component for this will be `VExtraProgress` */
+	progressDerivedValue?: (value: number, self: DamageSource) => number;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */
 	modifyVariable?: {

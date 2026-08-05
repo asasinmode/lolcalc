@@ -53,7 +53,7 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
 
 const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.effect)
+	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.effect || specific.sourceAbility.type === AbilityType.dragon)
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
 
@@ -66,9 +66,7 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 			name: effectSpecific.label,
 			searchString,
 		};
-	})
-	/* special case sort to have all 4 summoner spells together */
-	.sort((effectA, effectB) => effectA.name === 'Heal' && effectB.name.startsWith('Grievous') ? -1 : effectA.name.localeCompare(effectB.name));
+	});
 
 const championEffects = shallowRef<IEffectOptionGroup['options']>();
 
