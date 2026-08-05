@@ -77,7 +77,10 @@ export const DRAGON_SPECIFICS = {
 		soul: {
 			variables: defineVariables({
 				known: {
-					lolcalcChampRange: [],
+					lolcalcChampRange: [
+						championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
+						championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
+					],
 				},
 				calculate(self) {
 					return {
