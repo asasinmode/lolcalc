@@ -88,8 +88,9 @@ export const DRAGON_SPECIFICS = {
 					};
 				},
 				meta: {
-					/* dragon variables are prefixed with something like `Spell.SRX_DragonSoulBuffHextech:TotalDamage` so overwrite the name */
-					TotalDamage: { displayedName: 'TotalDamage' },
+					TotalDamage: {
+						type: VariableType.true,
+					},
 					lolcalcChampRange: {
 						displayedName: 'SlowAmount',
 						isPercentage: true,
