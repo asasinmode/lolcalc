@@ -998,9 +998,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			const multiplier = resolveMMultiplier(variable.mMultiplier as any, whole, meta) ?? 1;
 			rv.value *= multiplier;
 			for (const part of rv.calculatesFrom!) {
-				if (part.stat && part.stat !== 'const') {
-					multiplyCalculatePartValues(part, multiplier);
-				}
+				part.stat && multiplyCalculatePartValues(part, multiplier);
 			}
 		} else if (hasMRangedMultiplier) {
 			rv.isMeleeRanged = true;
@@ -1477,6 +1475,12 @@ export function variableResolveFn(variable: any): IHypotheticalVariableCalculati
 		return VARIABLE_CALCULATION_FNS.SumOfSubPartsCalculationPart;
 	} else if ('mPart1' in variable && 'mPart2' in variable) {
 		return VARIABLE_CALCULATION_FNS.ProductOfSubPartsCalculationPart;
+	} else if ('mStat' in variable) {
+		if ('mDataValue' in variable) {
+			return VARIABLE_CALCULATION_FNS.StatByNamedDataValueCalculationPart;
+		} else if ('mCoefficient' in variable) {
+			return VARIABLE_CALCULATION_FNS.StatByCoefficientCalculationPart;
+		}
 	}
 
 	const keys = Object.keys(variable);
@@ -1500,13 +1504,14 @@ interface IStatWithFormula {
 	mStatFormula?: number;
 }
 
-/** item variables sometimes have fields with `mStat: number`, which from what I can tell is supposed to be a champion's stat. This is a map of known numbers to their corresponding stats, supposed to be used with */
+/** calculations data sometimes has fields with `mStat: number`, which from what I can tell is supposed to be a champion's stat. This is a map of known numbers to their corresponding stats, supposed to be used with */
 const MSTAT_TO_NAMED_STAT = {
 	1: 'armor',
 	2: 'attackDamage',
 	6: 'magicResist',
 	7: 'moveSpeed',
 	8: 'critChance',
+	9: 'critDamageMultiplier',
 	12: 'hp',
 	29: 'lethality',
 } satisfies Record<number, IChampionStatName>;
@@ -1538,11 +1543,11 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 }
 
 function resolveMMultiplier(
-	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'] & IGameVariablesByType['ProductOfSubPartsCalculationPart'],
+	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'] & IGameVariablesByType['ProductOfSubPartsCalculationPart'] & IGameVariablesByType['SumOfSubPartsCalculationPart'],
 	whole: any,
 	meta: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[2],
 ): number | undefined {
-	const { mNumber, mDataValue, mPart1 } = variable;
+	const { mNumber, mDataValue, mPart1, mSubparts } = variable;
 	let rv: number | undefined;
 	if (mNumber) {
 		rv = mNumber;
@@ -1561,6 +1566,11 @@ function resolveMMultiplier(
 		}
 	} else if (mPart1) {
 		rv = VARIABLE_CALCULATION_FNS.ProductOfSubPartsCalculationPart(variable as IGameVariablesByType['ProductOfSubPartsCalculationPart'], whole, meta)?.value;
+	} else if (mSubparts) {
+		rv = VARIABLE_CALCULATION_FNS.SumOfSubPartsCalculationPart(variable as IGameVariablesByType['SumOfSubPartsCalculationPart'], whole, meta)?.value as number;
+		if (typeof rv !== 'number') {
+			console.warn('[variables/game resolveMMultiplier] recieved NaN from SumOfSubPartsCalculationPart', rv, variable);
+		}
 	} else {
 		console.warn('[variables/game resolveMMultiplier] unknown mMultiplier structure', variable);
 		rv = undefined;
