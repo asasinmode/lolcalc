@@ -5,7 +5,7 @@
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IStatsCalculationResult } from '@lolcalc/shared';
-import type { IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
+import type { IDeriveProgressFn, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
@@ -3225,7 +3225,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.stridebreaker]: {
-		PASSIVE_BONUS_MS: (progress: number): number => {
+		PASSIVE_BONUS_MS: ((progress) => {
 			const bonusMS = itemVariableValue('ActiveMS', {
 				item: ITEMS_BY_NAME.stridebreaker,
 			});
@@ -3236,7 +3236,7 @@ export const ITEM_SPECIFICS = {
 
 			console.warn('[ITEM_SPECIFICS stridebreaker] failed to calculate bonus MS', bonusMS);
 			return Number.NaN;
-		},
+		}) satisfies IDeriveProgressFn,
 		internalDataProperties: ['sBShockwaveHits', 'sBShockwave', 'tBShockwave'],
 		setupData(self) {
 			self.internalItemData.value.sBShockwaveHits = Math.max(0, self.internalItemData.value.sBShockwaveHits ?? 0);
@@ -3618,7 +3618,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.solsticeSleigh]: {
-		PASSIVE_BONUS_MS: (progress: number): number => {
+		PASSIVE_BONUS_MS: ((progress) => {
 			const bonusMS = itemVariableValue('MoveSpeedBuff', {
 				item: ITEMS_BY_NAME.solsticeSleigh,
 			});
@@ -3629,7 +3629,7 @@ export const ITEM_SPECIFICS = {
 
 			console.warn('[ITEM_SPECIFICS solstice sleigh] failed to calculate bonus MS', bonusMS);
 			return Number.NaN;
-		},
+		}) satisfies IDeriveProgressFn,
 		internalDataProperties: ['sledding'],
 		setupData(self) {
 			self.internalItemData.value.sledding = clamp(0, self.internalItemData.value.sledding ?? 0, 100);

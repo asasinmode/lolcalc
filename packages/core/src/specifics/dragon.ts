@@ -1,7 +1,7 @@
 import type { TMiscData } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
 import type { ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
-import type { IInternalDragonDataOf, ISpecificVariables } from './index.ts';
+import type { IDeriveProgressFn, IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -75,6 +75,20 @@ export const DRAGON_SPECIFICS = {
 			},
 		},
 		soul: {
+			LIGHTNING_SLOW: ((value, self) => {
+				const slowValue =	championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self });
+				if (typeof slowValue.value === 'number') {
+					return slowValue.value * value;
+				} else {
+					console.warn('[DRAGON_SPECIFICS hextech soul] failed to calculate slow percentage', slowValue);
+					return Number.NaN;
+				}
+			}) satisfies IDeriveProgressFn,
+			internalDataProperties: ['hextechTagged'],
+			setupData(self) {
+				self.internalDragonData.value.hextechTagged = clamp(0, self.internalDragonData.value.hextechTagged ?? 0, 100);
+				return { hextechTagged: 0 };
+			},
 			variables: defineVariables({
 				known: {
 					lolcalcChampRange: [
@@ -181,4 +195,5 @@ type DetectDragonVariables<T>
 export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>, any>;
+	[key: string]: any;
 };

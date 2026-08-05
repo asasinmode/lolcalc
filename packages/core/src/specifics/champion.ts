@@ -33,7 +33,7 @@ import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
-import type { IDefineVariablesConfig, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
+import type { IDefineVariablesConfig, IDeriveProgressFn, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
 import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -292,7 +292,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Fiora: {
-		PASSIVE_BONUS_MS: (progress: number, self: DamageSource): number => {
+		PASSIVE_BONUS_MS: ((progress, self) => {
 			const bonusMS = championAbilityVariableValue('PercentMS', {
 				abilityVariant: self.champion.value!.abilities.r.variants[0]!,
 				abilityLevel: self.abilityLevels.value.r,
@@ -305,7 +305,7 @@ export const CHAMPION_SPECIFICS = {
 
 			console.warn('[CHAMPION_SPECIFICS fiora] failed to calculate passive bonus MS', bonusMS);
 			return Number.NaN;
-		},
+		}) satisfies IDeriveProgressFn,
 		setupData(self) {
 			return {
 				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
@@ -712,7 +712,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Nasus: {
-		WITHER_MS_SLOW: (progress: number, self: DamageSource): number => {
+		WITHER_MS_SLOW: ((progress, self) => {
 			const wParams: IGameVariableValueParameters['championAbility'] = {
 				abilityVariant: self.champion.value!.abilities.w.variants[0]!,
 				abilityLevel: self.abilityLevels.value.w || 1,
@@ -731,7 +731,7 @@ export const CHAMPION_SPECIFICS = {
 
 			console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate W ms/as slow values', minMSSlow, maxMSSlow);
 			return Number.NaN;
-		},
+		}) satisfies IDeriveProgressFn,
 		setupData(self) {
 			return {
 				wProgress: clamp(0, Math.round(self.internalData.value.wProgress ?? 0), 100),

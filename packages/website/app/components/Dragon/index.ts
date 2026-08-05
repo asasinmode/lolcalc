@@ -1,6 +1,7 @@
 import type { IDragonName } from '@lolcalc/data/types';
 import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { AbilityType } from '@lolcalc/shared/index';
 
@@ -15,12 +16,17 @@ export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificC
 			],
 		},
 	},
+	Hextech: {
+		soul: {
+			extras: await progressExtra(GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'), 'hextechTagged', 'apply lightning slow on target', DRAGON_SPECIFICS.Hextech.soul.LIGHTNING_SLOW),
+		},
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === AbilityType.dragon) {
 		const abilityId = GameAbilityId.build(AbilityType.effect, effectObjectName);
-		const { label, minValue = 0, maxValue = 1, enumOptions, progressDerivedValue } = effectSpecific;
+		const { label, minValue = 0, maxValue = 1, enumOptions, deriveProgressValue: progressDerivedValue } = effectSpecific;
 
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype] ??= {};

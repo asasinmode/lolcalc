@@ -3,7 +3,7 @@ import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IInternalItemDataOf, ISpecificVariables } from './index.ts';
+import type { IDeriveProgressFn, IInternalItemDataOf, ISpecificVariables } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, MISC, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
@@ -111,9 +111,9 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 		imgText(data): string {
-			return `${Math.round(EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].progressDerivedValue!(data[0], {} as DamageSource))}%`;
+			return `${Math.round(EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(data[0], {} as DamageSource))}%`;
 		},
-		progressDerivedValue: (value, _self) => {
+		deriveProgressValue: (value, _self) => {
 			const slowValue =	championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul });
 			// TODO melee/ranged championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
 			if (typeof slowValue.value === 'number') {
@@ -130,7 +130,7 @@ export const EFFECT_SPECIFICS = {
 			calculate(self) {
 				const effectData = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.hextechSoulSlow));
 
-				const value: number = effectData ? EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].progressDerivedValue!(effectData[0].data[0], {} as DamageSource) : 0;
+				const value: number = effectData ? EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(effectData[0].data[0], {} as DamageSource) : 0;
 
 				return {
 					SlowPercentage: {
@@ -814,7 +814,7 @@ export interface IEffectSpecific<T extends number[] = [number]> {
 	/** if specified, the component for this effect will be `VExtraEnum` */
 	enumOptions?: Record<string, number>;
 	/** if `true`, component for this will be `VExtraProgress` */
-	progressDerivedValue?: (value: number, self: DamageSource) => number;
+	deriveProgressValue?: IDeriveProgressFn;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */
 	modifyVariable?: {
