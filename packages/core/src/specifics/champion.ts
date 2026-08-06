@@ -356,7 +356,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, _stats, { calculatedVariables }) {
-					const bonusMS = CHAMPION_SPECIFICS.Fiora.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, self);
+					const bonusMS = CHAMPION_SPECIFICS.Fiora.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, { champion: self.champion, abilityLevels: self.abilityLevels } as DamageSource);
 					if (!Number.isNaN(bonusMS)) {
 						calculatedVariables.fioraPassiveBonusMS = bonusMS;
 						calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.fioraPassiveBonusMS / 100;
@@ -1336,7 +1336,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
-					const bonusMS = CHAMPION_SPECIFICS.Sivir.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, self);
+					const bonusMS = CHAMPION_SPECIFICS.Sivir.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, { champion: self.champion, level: self.level } as DamageSource);
 					if (!Number.isNaN(bonusMS)) {
 						championPassiveStats.moveSpeed = bonusMS;
 					}
