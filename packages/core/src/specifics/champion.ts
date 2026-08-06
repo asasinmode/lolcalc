@@ -1527,13 +1527,13 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		& {
 			[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific<Id>;
 		} & {
-			variables?: ISpecificVariables<string, string, Id, 'championAbility'>;
+			variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
 			[key: string]: any;
 		};
 
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
-	variables?: ISpecificVariables<string, string, Id, 'championAbility'>;
+	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	/**
 	 * ability's variant specific
@@ -1624,11 +1624,10 @@ export function defineChampionVariables<
 	DetectedVariables extends string = DetectChampionVariables<T, AbilityKey>,
 >() {
 	return function <
-		Config extends IDefineVariablesConfig<Id, 'championAbility'> = IDefineVariablesConfig<Id, 'championAbility'>,
-		ExtraVars extends string = IExtractExtraVariables<Config, DetectedVariables>,
+		Config extends IDefineVariablesConfig<Id, 'championAbility', DetectedVariables> = IDefineVariablesConfig<Id, 'championAbility', DetectedVariables>,
 	>(
-		config: Config & Omit<ISpecificVariables<DetectedVariables, ExtraVars, Id, 'championAbility'>, 'default'>,
-	): ISpecificVariables<DetectedVariables, ExtraVars, Id, 'championAbility'> {
-		return defineVariables<DetectedVariables, Id, 'championAbility', Config, ExtraVars>(config as any);
+		config: Config & Omit<ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, 'championAbility'>, 'default'>,
+	): ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, 'championAbility'> {
+		return defineVariables<DetectedVariables, Id, 'championAbility', Config>(config as any);
 	};
 }

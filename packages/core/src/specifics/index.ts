@@ -211,13 +211,14 @@ export interface ISpecificVariables<
 }
 
 export interface IDefineVariablesConfig<
-	Id extends IChampionId | undefined,
-	U extends IGameVariableType,
+	Id extends IChampionId | undefined = IChampionId | undefined,
+	U extends IGameVariableType = IGameVariableType,
+	DetectedVariables extends string = string,
 > {
 	known?: Record<string, (number | string | undefined)[]>;
 	calculate?: (self: DamageSource<Id>, damageTarget?: DamageSource) => Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>;
 	meta?: Record<string, IVariableMeta<IGameVariableValueParameters[U]>>;
-	uninteresting?: string[];
+	uninteresting?: (DetectedVariables | 'Cooldown' | (string & {}))[];
 }
 
 export type IExtractExtraVariables<Config, DetectedVariables extends string> = Exclude<
@@ -230,18 +231,17 @@ export function defineVariables<
 	DetectedVariables extends string = string,
 	Id extends IChampionId | undefined = IChampionId,
 	U extends IGameVariableType = IGameVariableType,
-	Config extends IDefineVariablesConfig<Id, U> = IDefineVariablesConfig<Id, U>,
-	T extends string = IExtractExtraVariables<Config, DetectedVariables>,
+	Config extends IDefineVariablesConfig<Id, U, DetectedVariables> = IDefineVariablesConfig<Id, U, DetectedVariables>,
 >(
-	config: Config & Omit<ISpecificVariables<DetectedVariables, T, Id, U>, 'default'>,
-): ISpecificVariables<DetectedVariables, T, Id, U> {
+	config: Config & Omit<ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U>, 'default'>,
+): ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U> {
 	return Object.assign(config, {
 		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => {
 			return [key, { value: key === 'lolcalcChampRange'
 				? [(value as number[])[0] ?? 0, (value as number[])[1] ?? 0]
 				: ((value as (string | number)[])[0] ?? 0) }];
 		},
-		)) as ISpecificVariables<DetectedVariables, T, Id, U>['default'],
+		)) as ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U>['default'],
 	});
 }
 

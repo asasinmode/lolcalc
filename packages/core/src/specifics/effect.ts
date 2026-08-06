@@ -822,7 +822,7 @@ export interface IEffectSpecific<T extends number[] = [number]> {
 		handler: IEffectModifyVariableFunction<T>;
 	};
 	/** variables to be showned in results */
-	variables?: ISpecificVariables;
+	variables?: ISpecificVariables<never, any>;
 }
 
 type IEffectModifyVariableFunction<T extends number[] = [number]> = (value: number, effectData: T) => number;
