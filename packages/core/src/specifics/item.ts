@@ -3256,7 +3256,7 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				lolcalcChampRange: [],
-				TotalBonusMoveSpeed: [],
+				TotalBonusMS: [],
 			},
 			calculate(self) {
 				const melee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: false });
@@ -3264,7 +3264,7 @@ export const ITEM_SPECIFICS = {
 
 				return {
 					lolcalcChampRange: [melee, ranged],
-					TotalBonusMoveSpeed: {
+					TotalBonusMS: {
 						value: self.stats.value.variables.stridebreakerBonusMS ?? 0,
 					},
 				};
@@ -3274,7 +3274,7 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 					displayedName: 'CleaveDamage',
 				},
-				TotalBonusMoveSpeed: {
+				TotalBonusMS: {
 					isCustom: true,
 					resultsMultiplier: 100,
 					resultsIsPercentage: true,
@@ -3645,17 +3645,25 @@ export const ITEM_SPECIFICS = {
 				f3: [],
 				f5: [],
 				f6: [ITEMS_BY_NAME.solsticeSleigh?.dataValues.StealthWardCap],
+				BonusMS: [],
 			},
-			calculate() {
+			calculate(self) {
 				return {
 					f3: { value: 0 },
 					f5: { value: 0 },
 					f6: { value: ITEMS_BY_NAME.solsticeSleigh?.dataValues.StealthWardCap },
+					BonusMS: {
+						value: self.stats.value.variables.solsticeSleighBonusMS,
+					},
 				};
 			},
 			meta: {
 				BonusHealthBuff: {
 					type: VariableType.heal,
+				},
+				BonusMS: {
+					isCustom: true,
+					resultsIsPercentage: true,
 				},
 			},
 			uninteresting: ['f3', 'f5', 'f6', 'StealthWardCap', 'BuffDuration', 'MoveSpeedBuff'],
@@ -3663,7 +3671,8 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, _stats, { calculatedVariables }) {
-					calculatedVariables.totalBonusPercentMoveSpeed += ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS((self.internalItemData.value as IInternalItemDataOf<'solsticeSleigh'>).sledding) / 100;
+					calculatedVariables.solsticeSleighBonusMS = ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS((self.internalItemData.value as IInternalItemDataOf<'solsticeSleigh'>).sledding);
+					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.solsticeSleighBonusMS / 100;
 				},
 			},
 		},

@@ -310,13 +310,14 @@ export const CHAMPION_SPECIFICS = {
 		}) satisfies IDeriveProgressFn,
 		setupData(self) {
 			return {
-				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
+				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 100),
 			};
 		},
 		passive: {
 			variables: defineChampionVariables<'Fiora', typeof IFiora, 'passive'>()({
 				known: {
 					VitalDamage: [],
+					BonusMS: [],
 				},
 				calculate(self, target) {
 					const vitalDamagePercent = championAbilityVariableValue('PassiveDamageTotal', {
@@ -327,6 +328,9 @@ export const CHAMPION_SPECIFICS = {
 					return {
 						VitalDamage: {
 							value: (vitalDamagePercent.value as number) * (target?.stats.value.total.hp ?? 0),
+						},
+						BonusMS: {
+							value: self.stats.value.variables.fioraPassiveBonusMS,
 						},
 					};
 				},
@@ -341,6 +345,10 @@ export const CHAMPION_SPECIFICS = {
 					PassiveHealAmount: {
 						type: VariableType.heal,
 					},
+					BonusMS: {
+						isCustom: true,
+						resultsIsPercentage: true,
+					},
 				},
 				uninteresting: ['MovementSpeedDuration'],
 			}),
@@ -350,7 +358,8 @@ export const CHAMPION_SPECIFICS = {
 				handler(self, _stats, { calculatedVariables }) {
 					const bonusMS = CHAMPION_SPECIFICS.Fiora.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, self);
 					if (!Number.isNaN(bonusMS)) {
-						calculatedVariables.totalBonusPercentMoveSpeed += bonusMS / 100;
+						calculatedVariables.fioraPassiveBonusMS = bonusMS;
+						calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.fioraPassiveBonusMS / 100;
 					}
 				},
 			},
@@ -729,11 +738,27 @@ export const CHAMPION_SPECIFICS = {
 		}) satisfies IDeriveProgressFn,
 		setupData(self) {
 			return {
-				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
+				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 100),
 			};
 		},
 		passive: {
 			variables: defineChampionVariables<'Nami', typeof INami, 'passive'>()({
+				known: {
+					BonusMS: [],
+				},
+				calculate(self) {
+					// TODO is incorrect in results copy, also calc should be in postTotal
+					return {
+						BonusMS: {
+							value: self.stats.value.championPassive.moveSpeed,
+						},
+					};
+				},
+				meta: {
+					BonusMS: {
+						isCustom: true,
+					},
+				},
 				uninteresting: ['BuffDuration'],
 			}),
 		},
@@ -1282,11 +1307,29 @@ export const CHAMPION_SPECIFICS = {
 		}) satisfies IDeriveProgressFn,
 		setupData(self) {
 			return {
-				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
+				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 100),
 			};
 		},
 		passive: {
 			variables: defineChampionVariables<'Sivir', typeof ISivir, 'passive'>()({
+				known: {
+					BonusMS: [],
+				},
+				calculate(self) {
+					return {
+						BonusMS: {
+							value: self.stats.value.championPassive.moveSpeed,
+						},
+					};
+				},
+				meta: {
+					FlatMS: {
+						displayedName: 'MaxBonusMS',
+					},
+					BonusMS: {
+						isCustom: true,
+					},
+				},
 				uninteresting: ['HasteDuration'],
 			}),
 		},

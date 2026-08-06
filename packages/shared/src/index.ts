@@ -228,6 +228,10 @@ export interface IStatsCalculationVariables {
 	cassiopeiaPassiveMSMultiplier?: number;
 	/** bonus ms % from stridebreaker's passive */
 	stridebreakerBonusMS?: number;
+	/** bonus ms % from solstice sleigh's passive */
+	solsticeSleighBonusMS?: number;
+	/** bonus ms % from Fiora's passive */
+	fioraPassiveBonusMS?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
