@@ -15,6 +15,7 @@ import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import type IKSante from '@lolcalc/data/files/champion/KSante.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
+import type INami from '@lolcalc/data/files/champion/Nami.json';
 import type INasus from '@lolcalc/data/files/champion/Nasus.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
@@ -710,6 +711,41 @@ export const CHAMPION_SPECIFICS = {
 					self.internalData.value.passiveStacks = Math.min(self.internalData.value.passiveStacks, maxPassiveStacks.value);
 				})],
 			};
+		},
+	},
+	Nami: {
+		PASSIVE_BONUS_MS: ((progress, self) => {
+			const bonusMS = championAbilityVariableValue('TotalMSBonus', {
+				abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+				damageSource: self,
+			});
+
+			if (typeof bonusMS.value === 'number') {
+				return bonusMS.value * progress / 100;
+			}
+
+			console.warn('[CHAMPION_SPECIFICS namie] failed to calculate passive bonus MS', bonusMS);
+			return Number.NaN;
+		}) satisfies IDeriveProgressFn,
+		setupData(self) {
+			return {
+				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 1),
+			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Nami', typeof INami, 'passive'>()({
+				uninteresting: ['BuffDuration'],
+			}),
+		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const bonusMS = CHAMPION_SPECIFICS.Nami.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, self);
+					if (!Number.isNaN(bonusMS)) {
+						championPassiveStats.moveSpeed = bonusMS;
+					}
+				},
+			},
 		},
 	},
 	Nasus: {
@@ -1543,6 +1579,7 @@ export interface IChampionInternalDataMap {
 	LeeSin: { hasPassiveStack: number };
 	Mordekaiser: { isPassiveMSActive: number };
 	Naafiri: { passiveStacks: number } & IDamageSourceInternalDataBase;
+	Nami: { passiveMSProgress: number };
 	Nasus: { wProgress: number };
 	Nidalee: { passiveVariantActive: number };
 	Nunu: { isPassiveActive: number };
