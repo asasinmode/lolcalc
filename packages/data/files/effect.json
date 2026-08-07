@@ -259,6 +259,12 @@
 			"objectName": "NamiPassivett",
 			"description": "This unit has increased Move Speed for a short duration."
 		},
+		"NasusW": {
+			"dataKey": "NasusW",
+			"championSpellObjectKey": "Characters/Nasus/Spells/NasusWAbility/NasusW",
+			"objectName": "NasusW",
+			"description": "This unit's Move and Attack Speeds are becoming increasingly slowed over time."
+		},
 		"lolcalc6694BitterCold": {
 			"description": "This unit is slowed.",
 			"dataKey": "lolcalc6694BitterCold"

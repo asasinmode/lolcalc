@@ -1132,7 +1132,8 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" mSpell not found in shared spell "${spellKey}" object`);
 					}
 
-					if (sourceSpell.mSpell) {
+					/* used for summoner spells to extract spell data but not needed for champion spells since that data should already be saved on champion */
+					if (sourceSpell.mSpell && !('championSpellObjectKey' in customEffect)) {
 						const { mImgIconName, DataValues, mSpellCalculations, mClientData, cooldownTime } = sourceSpell.mSpell;
 
 						if (!mImgIconName?.[0]) {

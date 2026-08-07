@@ -657,6 +657,7 @@ export const EFFECT_OBJECT_NAME = {
 	ornnPLivingForge: 'lolcalcOrnnPassive',
 	rellPBreakMold: 'RellP_Debuff',
 	namiPSurgingTides: 'NamiPassiveTT',
+	nasusWWither: 'NasusW',
 	/* other */
 	ghost: 'summonerHaste',
 	cleanse: 'summonerCleanse',

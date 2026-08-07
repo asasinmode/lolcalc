@@ -671,6 +671,22 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calc
 	}),
+	[EFFECT_OBJECT_NAME.nasusWWither]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0),
+		label: 'Wither slow',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 100)];
+		},
+		maxValue: 100,
+		deriveProgressValue: (progress, _self) => {
+			// TODO
+			return progress;
+		},
+		imgText(data) {
+			return data[0];
+		},
+		// TODO calc
+	},
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;
@@ -781,6 +797,9 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	},
 	[EFFECT_OBJECT_NAME.namiPSurgingTides]: {
 		championSpellObjectKey: 'Characters/Nami/Spells/NamiPassiveAbility/NamiPassivett',
+	},
+	[EFFECT_OBJECT_NAME.nasusWWither]: {
+		championSpellObjectKey: 'Characters/Nasus/Spells/NasusWAbility/NasusW',
 	},
 	/* other */
 	[EFFECT_OBJECT_NAME.ghost]: {
