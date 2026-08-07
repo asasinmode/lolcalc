@@ -941,7 +941,12 @@ function variableExtendedEquals(
 
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
-	mFormulaParts(variable: { mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[]; mDisplayAsPercent?: boolean }, whole, meta) {
+	mFormulaParts(variable: {
+		mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[];
+		mDisplayAsPercent?: boolean;
+		mMultiplier?: IMMultiplier;
+		mRangedMultiplier?: IMMultiplier;
+	}, whole, meta) {
 		const rv: IVariableValueResult = {
 			calculatesFrom: [],
 		};
@@ -995,7 +1000,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)!;
 
 		if (hasMMultiplier) {
-			const multiplier = resolveMMultiplier(variable.mMultiplier as any, whole, meta);
+			const multiplier = resolveMMultiplier(variable.mMultiplier!, whole, meta);
 			if (multiplier === undefined) {
 				rv.value = undefined;
 			} else {
@@ -1009,7 +1014,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			}
 		} else if (hasMRangedMultiplier) {
 			rv.isMeleeRanged = true;
-			const multiplier = resolveMMultiplier(variable.mRangedMultiplier as any, whole, meta);
+			const multiplier = resolveMMultiplier(variable.mRangedMultiplier!, whole, meta);
 
 			if (multiplier === undefined) {
 				rv.value = undefined;
@@ -1231,7 +1236,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 		let multiplier = 1;
 		if ('mMultiplier' in variable) {
-			multiplier = resolveMMultiplier(variable.mMultiplier, whole, meta)!;
+			multiplier = resolveMMultiplier(variable.mMultiplier!, whole, meta)!;
 		}
 		meta.variableValueParams.accessedVariables ??= new Map();
 		const rv = meta.variableValueFn(variable.mModifiedGameCalculation, meta.variableValueParams);
@@ -1466,10 +1471,12 @@ interface IGameVariablesByType {
 	};
 	'GameCalculationModified': {
 		mModifiedGameCalculation: string;
-		mMultiplier?: any;
+		mMultiplier?: IMMultiplier;
 		__type: string;
 	};
 }
+
+type IMMultiplier = IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'] & IGameVariablesByType['ProductOfSubPartsCalculationPart'] & IGameVariablesByType['SumOfSubPartsCalculationPart'];
 
 export function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
 	if (!variable) {
@@ -1531,7 +1538,7 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 }
 
 function resolveMMultiplier(
-	variable: IGameVariablesByType['NumberCalculationPart'] & IGameVariablesByType['NamedDataValueCalculationPart'] & IGameVariablesByType['ProductOfSubPartsCalculationPart'] & IGameVariablesByType['SumOfSubPartsCalculationPart'],
+	variable: IMMultiplier,
 	whole: any,
 	meta: Parameters<IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns]>[2],
 ): number | undefined {
