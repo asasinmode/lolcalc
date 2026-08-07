@@ -1225,7 +1225,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			};
 		}
 	},
-	mModifiedGameCalculation(variable: { mModifiedGameCalculation: string; mMultiplier?: any }, whole, meta) {
+	GameCalculationModified(variable: IGameVariablesByType['GameCalculationModified'], whole, meta) {
 		if (!variable.mModifiedGameCalculation) {
 			return;
 		}
@@ -1464,6 +1464,11 @@ interface IGameVariablesByType {
 		mPart2: IGameVariablesByType[keyof IGameVariablesByType];
 		__type: string;
 	};
+	'GameCalculationModified': {
+		mModifiedGameCalculation: string;
+		mMultiplier?: any;
+		__type: string;
+	};
 }
 
 export function variableResolveFn(variable: any): IHypotheticalVariableCalculationFns[keyof IHypotheticalVariableCalculationFns] | undefined {
@@ -1476,30 +1481,6 @@ export function variableResolveFn(variable: any): IHypotheticalVariableCalculati
 		return VARIABLE_CALCULATION_FNS[variable.__type as keyof typeof VARIABLE_CALCULATION_FNS];
 	} else if ('mFormulaParts' in variable) {
 		return VARIABLE_CALCULATION_FNS.mFormulaParts;
-	} else if ('mModifiedGameCalculation' in variable) {
-		return VARIABLE_CALCULATION_FNS.mModifiedGameCalculation;
-	} else if ('mSubparts' in variable) {
-		return VARIABLE_CALCULATION_FNS.SumOfSubPartsCalculationPart;
-	} else if ('mPart1' in variable && 'mPart2' in variable) {
-		return VARIABLE_CALCULATION_FNS.ProductOfSubPartsCalculationPart;
-	} else if ('mStat' in variable) {
-		if ('mDataValue' in variable) {
-			return VARIABLE_CALCULATION_FNS.StatByNamedDataValueCalculationPart;
-		} else if ('mCoefficient' in variable) {
-			return VARIABLE_CALCULATION_FNS.StatByCoefficientCalculationPart;
-		}
-	}
-
-	const keys = Object.keys(variable);
-	if (keys.length === 1) {
-		const [key] = keys;
-		if (key === 'mNumber') {
-			return VARIABLE_CALCULATION_FNS.NumberCalculationPart;
-		} else if (key === 'mDataValue') {
-			return VARIABLE_CALCULATION_FNS.NamedDataValueCalculationPart;
-		} else if (key === 'mEndValue') {
-			return VARIABLE_CALCULATION_FNS.ByCharLevelInterpolationCalculationPart;
-		}
 	}
 
 	console.warn('[variableResolveFn] unknown variable type', variable);
