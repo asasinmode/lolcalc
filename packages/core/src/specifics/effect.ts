@@ -32,9 +32,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, _stats, { calculatedVariables }) {
@@ -54,9 +51,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		calculateHooks: {
 			postInit: {
 				handler(_self, _stats, { calculatedVariables }) {
@@ -75,9 +69,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, _stats, { calculatedVariables }) {
@@ -95,9 +86,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number]>({
@@ -107,9 +95,6 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
 		maxValue: 100,
-		isActive(data) {
-			return data[0];
-		},
 		imgText(data): string {
 			return `${Math.round(EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(data[0], {} as DamageSource))}%`;
 		},
@@ -154,9 +139,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.slowFlat]: defineEffectSpecific<[slowedByFlat: number]>({
@@ -166,9 +148,6 @@ export const EFFECT_SPECIFICS = {
 		maxValue: Number.POSITIVE_INFINITY,
 		setupData(data) {
 			return [Math.max(0, data?.[0] ?? 0)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		imgText(data) {
 			return data[0];
@@ -183,9 +162,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [Math.max(0, data?.[0] ?? 0)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		imgText(data) {
 			return `${data[0]}%`;
 		},
@@ -196,9 +172,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Grievous Wounds',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(AbilityType.item, itemId)),
 		setupDataFromSourceItem(damageSource) {
@@ -219,9 +192,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		imgText(data) {
 			return `${data[0]}%`;
 		},
@@ -233,9 +203,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Inspiring speech',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		calculateHooks: {
 			preItemTotal: {
@@ -256,9 +223,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }) {
@@ -275,9 +239,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
@@ -293,9 +254,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Fanfare',
 		setupData(data): [fanfare: number] {
 			return [clamp(0, data?.[0] ?? 0, MeleeRangedEnumOptions.ranged)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		imgText(data) {
 			return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
@@ -328,9 +286,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.frozenHeartWintersCaress]: defineEffectSpecific<[wCaressed: number]>({
@@ -338,9 +293,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Winter\'s Caress',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'frozenHeart'>).wCaress) {
@@ -386,9 +338,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data): [shieldReavedBy: number] {
 			return [clamp(0, data?.[0] ?? 0, MeleeRangedEnumOptions.ranged)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		imgText(data) {
 			return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
 		},
@@ -420,9 +369,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'rylaisScepter'>).rimefrost) {
 				return [1];
@@ -436,9 +382,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'abyssalMask'>).unmake) {
 				return [1];
@@ -451,9 +394,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Hypershot',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'horizonFocus'>).hypershot) {
@@ -472,9 +412,6 @@ export const EFFECT_SPECIFICS = {
 				];
 			},
 			imgText(data) {
-				return data[0];
-			},
-			isActive(data: [vDecay: number]) {
 				return data[0];
 			},
 		}),
@@ -498,9 +435,6 @@ export const EFFECT_SPECIFICS = {
 		imgText(data) {
 			return data[0];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve) {
 				return [(damageSource.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve];
@@ -513,9 +447,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Clawing Shadows',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'botrk'>).cShadows) {
@@ -530,9 +461,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'zekesConvergence'>).fTempest) {
 				return [1];
@@ -545,9 +473,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Mountain Blessing',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'celestialOpposition'>).mbSlow) {
@@ -562,9 +487,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'randuinsOmen'>).humility) {
 				return [1];
@@ -577,9 +499,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Hatefog',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'malignance'>).hatefog) {
@@ -594,9 +513,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'imperialMandate'>).command) {
 				return [1];
@@ -610,9 +526,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'stridebreaker'>).tBShockwave) {
 				return [1];
@@ -625,9 +538,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Frost Field',
 		setupData(data): [frostField: number] {
 			return [clamp(0, data?.[0] ?? 0, MeleeRangedEnumOptions.ranged)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		imgText(data) {
 			return data[0] === MeleeRangedEnumOptions.melee ? 'm' : data[0] === MeleeRangedEnumOptions.ranged ? 'r' : '';
@@ -647,9 +557,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'bloodsong'>).bloodsonged) {
 				return [1];
@@ -662,9 +569,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Bitter Cold',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'seryldasGrudge'>).bitterCold) {
@@ -679,9 +583,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'hextechGunblade'>).lBolt) {
 				return [1];
@@ -695,9 +596,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.jannaPTailwind]: defineEffectSpecific<[isTailwinded: number]>({
@@ -705,9 +603,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Tailwind',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		// TODO calculate
 	}),
@@ -717,9 +612,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		isActive(data) {
-			return data[0];
-		},
 		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: defineEffectSpecific<[isCalledByFreljord: number]>({
@@ -727,9 +619,6 @@ export const EFFECT_SPECIFICS = {
 		label: 'Call of the Freljord',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data) {
-			return data[0];
 		},
 		// TODO calculate
 	}),
@@ -739,9 +628,6 @@ export const EFFECT_SPECIFICS = {
 			label: 'Masterwork item slot',
 			setupData(data): [livingForgeItemSlot: number] {
 				return [clamp(this.minValue!, data?.[0] ?? 1, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.ornnPLivingForge].maxValue!)];
-			},
-			isActive(data) {
-				return data[0];
 			},
 			imgText(data) {
 				return data[0];
@@ -758,9 +644,6 @@ export const EFFECT_SPECIFICS = {
 			label: 'Break the Mold stacks',
 			async setupData(data): Promise<[breakTheMoldStacks: number]> {
 				return [clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.rellPBreakMold].maxValue())];
-			},
-			isActive(data) {
-				return data[0];
 			},
 			imgText(data) {
 				return data[0];
@@ -787,8 +670,8 @@ export interface IEffectSpecific<T extends number[] = [number]> {
 	 * @param data the existing effect's data for cloning
 	 */
 	setupData: (data?: T) => Promise<T> | T;
-	/** checks if effect's data is not the default value */
-	isActive: (data: T) => number | boolean;
+	/** checks if effect's data is not the default value, if not present, `defaultEffectIsActive` will be used */
+	isActive?: (data: T) => number | boolean;
 	imgText?: (data: T) => number | string;
 	/**
 	 * used for getting the `appliedEffect`'s data that's being added (`applyEffectsFromTo`) because a source has an item which applies its effect on target
@@ -943,4 +826,8 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 		effectData && target.addEffect(effectAbilityId, effectData as any, true);
 	}
 	return target;
+}
+
+export function defaultEffectIsActive(data: number[]): number | boolean {
+	return data[0]!;
 }

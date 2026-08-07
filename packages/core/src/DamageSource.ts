@@ -24,7 +24,7 @@ import { GameAbilityId } from './GameAbilityId.ts';
 import { gameAbilityImage } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { DRAGON_SPECIFICS } from './specifics/dragon.ts';
-import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } from './specifics/effect.ts';
+import { defaultEffectIsActive, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } from './specifics/effect.ts';
 import { calculateDynamicVariables, GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
@@ -1151,7 +1151,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				for (const effect of this.appliedEffects.value) {
 					const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
 					/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
-					specific?.isActive(effect.data) && groupCalculateStatsHooks(rv, specific);
+					(specific?.isActive ?? defaultEffectIsActive)(effect.data) && groupCalculateStatsHooks(rv, specific);
 				}
 			}
 			return rv;
@@ -1212,7 +1212,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		for (const effect of this.appliedEffects.value) {
 			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
 			/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
-			if (specific?.modifyVariable && specific.isActive(effect.data)) {
+			if (specific?.modifyVariable && (specific.isActive ?? defaultEffectIsActive)(effect.data)) {
 				rv[specific.modifyVariable.type] ??= [];
 				rv[specific.modifyVariable.type]!.push(value => specific.modifyVariable!.handler(value, effect.data));
 			}
@@ -1745,7 +1745,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		abilityId: effect.abilityId,
 		imgData: ['', 0],
 		imgText: computed((): string | number | undefined => specific.imgText?.(effect.data)),
-		isActive: computed((): number | boolean => specific.isActive(effect.data)),
+		isActive: computed((): number | boolean => (specific.isActive ?? defaultEffectIsActive)(effect.data)),
 		specific,
 		maxValue: undefined,
 	};
@@ -2006,7 +2006,7 @@ export interface IComputedAppliedEffect {
 	abilityId: IEffectAbilityId;
 	imgData: IGameImageData;
 	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
-	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
+	isActive: ComputedRef<ReturnType<typeof defaultEffectIsActive>>;
 	specific: IEffectSpecific;
 	/** the `maxValue` computed from the effect specific */
 	maxValue?: number;
