@@ -72,9 +72,11 @@
 					"spellCalculations": {
 						"{a7907b77}": {
 							"mMultiplier": {
-								"mSpellCalculationKey": "Calc_Damage_1_Min_Ratio"
+								"mSpellCalculationKey": "Calc_Damage_1_Min_Ratio",
+								"__type": "{f3cbe7b2}"
 							},
-							"mModifiedGameCalculation": "Calc_Damage_1_Max"
+							"mModifiedGameCalculation": "Calc_Damage_1_Max",
+							"__type": "GameCalculationModified"
 						},
 						"Calc_Damage_1_Max": {
 							"mFormulaParts": [
@@ -92,9 +94,11 @@
 						},
 						"{17768f39}": {
 							"mMultiplier": {
-								"mSpellCalculationKey": "Calc_Damage_1_Min_Ratio"
+								"mSpellCalculationKey": "Calc_Damage_1_Min_Ratio",
+								"__type": "{f3cbe7b2}"
 							},
-							"mModifiedGameCalculation": "Calc_Damage_1_Percent_Max"
+							"mModifiedGameCalculation": "Calc_Damage_1_Percent_Max",
+							"__type": "GameCalculationModified"
 						},
 						"Calc_Damage_1_Percent_Max": {
 							"mFormulaParts": [
@@ -114,9 +118,11 @@
 						},
 						"{3ce89b9e}": {
 							"mMultiplier": {
-								"mSpellCalculationKey": "Calc_Damage_2_Min_Ratio"
+								"mSpellCalculationKey": "Calc_Damage_2_Min_Ratio",
+								"__type": "{f3cbe7b2}"
 							},
-							"mModifiedGameCalculation": "Calc_Damage_2_Max"
+							"mModifiedGameCalculation": "Calc_Damage_2_Max",
+							"__type": "GameCalculationModified"
 						},
 						"Calc_Damage_2_Max": {
 							"mFormulaParts": [
@@ -134,9 +140,11 @@
 						},
 						"{1442dbe0}": {
 							"mMultiplier": {
-								"mSpellCalculationKey": "Calc_Damage_2_Min_Ratio"
+								"mSpellCalculationKey": "Calc_Damage_2_Min_Ratio",
+								"__type": "{f3cbe7b2}"
 							},
-							"mModifiedGameCalculation": "Calc_Damage_2_Percent_Max"
+							"mModifiedGameCalculation": "Calc_Damage_2_Percent_Max",
+							"__type": "GameCalculationModified"
 						},
 						"Calc_Damage_2_Percent_Max": {
 							"mFormulaParts": [
@@ -255,9 +263,11 @@
 						},
 						"Calc_Damage_High": {
 							"mMultiplier": {
-								"mDataValue": "HighDamageMultiplier"
+								"mDataValue": "HighDamageMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "Calc_Damage_Low"
+							"mModifiedGameCalculation": "Calc_Damage_Low",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -475,9 +485,11 @@
 						"{01a5d393}": {
 							"mMultiplier": {
 								"mStat": 9,
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "StatByCoefficientCalculationPart"
 							},
-							"mModifiedGameCalculation": "Calc_OnHit_Damage_Flat"
+							"mModifiedGameCalculation": "Calc_OnHit_Damage_Flat",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

@@ -376,29 +376,37 @@
 						},
 						"{f06e5a79}": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{15da76ad}"
+							"mModifiedGameCalculation": "{15da76ad}",
+							"__type": "GameCalculationModified"
 						},
 						"BleedDamageOverDurationTooltip": {
 							"mMultiplier": {
-								"mDataValue": "BleedDuration"
+								"mDataValue": "BleedDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{15da76ad}"
+							"mModifiedGameCalculation": "{15da76ad}",
+							"__type": "GameCalculationModified"
 						},
 						"BleedMaxDamageOverDurationTooltip": {
 							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "BleedDuration"
+									"mDataValue": "BleedDuration",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								"mPart2": {
-									"mNumber": 2
-								}
+									"mNumber": 2,
+									"__type": "NumberCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{15da76ad}"
+							"mModifiedGameCalculation": "{15da76ad}",
+							"__type": "GameCalculationModified"
 						},
 						"{b38f3487}": {
 							"mFormulaParts": [
@@ -416,10 +424,12 @@
 						},
 						"TotalHealPerMissingHPPercentTooltip": {
 							"mMultiplier": {
-								"mNumber": 100
+								"mNumber": 100,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{b38f3487}"
+							"mModifiedGameCalculation": "{b38f3487}",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

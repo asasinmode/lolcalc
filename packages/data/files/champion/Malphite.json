@@ -144,10 +144,12 @@
 						},
 						"{185669f9}": {
 							"mMultiplier": {
-								"mDataValue": "ThunderclapSlowDamage"
+								"mDataValue": "ThunderclapSlowDamage",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 0,
-							"mModifiedGameCalculation": "TotalBonusDamage"
+							"mModifiedGameCalculation": "TotalBonusDamage",
+							"__type": "GameCalculationModified"
 						},
 						"ThunderclapSplash": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -172,10 +174,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "BonusArmorPassive"
+										"mDataValue": "BonusArmorPassive",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "BonusArmorPassiveMultiplier"
+										"mDataValue": "BonusArmorPassiveMultiplier",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

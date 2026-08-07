@@ -151,22 +151,28 @@
 									"mStat": 8,
 									"mSubpart": {
 										"mPart1": {
-											"mDataValue": "BlueCritMultiplier"
+											"mDataValue": "BlueCritMultiplier",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
-													"mDataValue": "BlueBase"
+													"mDataValue": "BlueBase",
+													"__type": "NamedDataValueCalculationPart"
 												},
 												{
 													"mStat": 2,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -193,22 +199,28 @@
 									"mStat": 8,
 									"mSubpart": {
 										"mPart1": {
-											"mDataValue": "RedCritMultiplier"
+											"mDataValue": "RedCritMultiplier",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
-													"mDataValue": "RedBase"
+													"mDataValue": "RedBase",
+													"__type": "NamedDataValueCalculationPart"
 												},
 												{
 													"mStat": 2,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mCoefficient": 0.7
+													"mCoefficient": 0.7,
+													"__type": "StatByCoefficientCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -235,22 +247,28 @@
 									"mStat": 8,
 									"mSubpart": {
 										"mPart1": {
-											"mDataValue": "GoldCritMultiplier"
+											"mDataValue": "GoldCritMultiplier",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
-													"mDataValue": "GoldBase"
+													"mDataValue": "GoldBase",
+													"__type": "NamedDataValueCalculationPart"
 												},
 												{
 													"mStat": 2,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mCoefficient": 0.5
+													"mCoefficient": 0.5,
+													"__type": "StatByCoefficientCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -258,27 +276,33 @@
 						},
 						"ttBlueDamage": {
 							"mMultiplier": {
-								"mNumber": 1
+								"mNumber": 1,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "BlueDamage"
+							"mModifiedGameCalculation": "BlueDamage",
+							"__type": "GameCalculationModified"
 						},
 						"ttRedDamage": {
 							"mMultiplier": {
-								"mNumber": 1
+								"mNumber": 1,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "RedDamage"
+							"mModifiedGameCalculation": "RedDamage",
+							"__type": "GameCalculationModified"
 						},
 						"ttGoldDamage": {
 							"mMultiplier": {
-								"mNumber": 1
+								"mNumber": 1,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "GoldDamage"
+							"mModifiedGameCalculation": "GoldDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

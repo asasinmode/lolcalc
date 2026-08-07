@@ -200,15 +200,19 @@
 						},
 						"Calc_Damage_Per_Second": {
 							"mMultiplier": {
-								"mDataValue": "DPS_Modifier"
+								"mDataValue": "DPS_Modifier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "Calc_Damage_Initial"
+							"mModifiedGameCalculation": "Calc_Damage_Initial",
+							"__type": "GameCalculationModified"
 						},
 						"{669adf33}": {
 							"mMultiplier": {
-								"mSpellCalculationKey": "Calc_Minion_Damage_Mod"
+								"mSpellCalculationKey": "Calc_Minion_Damage_Mod",
+								"__type": "{f3cbe7b2}"
 							},
-							"mModifiedGameCalculation": "Calc_Damage_Initial"
+							"mModifiedGameCalculation": "Calc_Damage_Initial",
+							"__type": "GameCalculationModified"
 						},
 						"Calc_Slow": {
 							"mSimpleTooltipCalculationDisplay": 5,
@@ -285,11 +289,13 @@
 						},
 						"Calc_Move_Speed_Enhanced": {
 							"mMultiplier": {
-								"mDataValue": "Move_Speed_Modifier"
+								"mDataValue": "Move_Speed_Modifier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "Calc_Move_Speed"
+							"mModifiedGameCalculation": "Calc_Move_Speed",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

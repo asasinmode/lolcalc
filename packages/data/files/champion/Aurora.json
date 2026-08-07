@@ -82,7 +82,8 @@
 						},
 						"Q2DamageMax": {
 							"mMultiplier": {
-								"mNumber": 1.5
+								"mNumber": 1.5,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -331,7 +332,8 @@
 									"{a8cb9c14}": true,
 									"mStat": 12,
 									"mSubpart": {
-										"mSpellCalculationKey": "ProcDamage"
+										"mSpellCalculationKey": "ProcDamage",
+										"__type": "{f3cbe7b2}"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

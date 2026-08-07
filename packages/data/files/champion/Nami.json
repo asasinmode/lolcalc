@@ -134,7 +134,8 @@
 						},
 						"BounceScaling": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -212,7 +213,8 @@
 						},
 						"TotalSlow": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [

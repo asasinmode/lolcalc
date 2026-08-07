@@ -61,7 +61,8 @@
 					"spellCalculations": {
 						"EmpoweredQAS": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -114,11 +115,14 @@
 									"mSubparts": [
 										{
 											"mPart1": {
-												"mSpellCalculationKey": "QBonusDamage"
+												"mSpellCalculationKey": "QBonusDamage",
+												"__type": "{f3cbe7b2}"
 											},
 											"mPart2": {
-												"mDataValue": "TowerMod"
-											}
+												"mDataValue": "TowerMod",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -131,11 +135,14 @@
 									"mSubparts": [
 										{
 											"mPart1": {
-												"mSpellCalculationKey": "{d4a43abe}"
+												"mSpellCalculationKey": "{d4a43abe}",
+												"__type": "{f3cbe7b2}"
 											},
 											"mPart2": {
-												"mDataValue": "TowerMod"
-											}
+												"mDataValue": "TowerMod",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"

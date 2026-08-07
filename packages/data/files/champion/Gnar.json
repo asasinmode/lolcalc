@@ -88,9 +88,11 @@
 						},
 						"{4b371c72}": {
 							"mMultiplier": {
-								"mDataValue": "MiniSubsequentMult"
+								"mDataValue": "MiniSubsequentMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MiniTotalDamage"
+							"mModifiedGameCalculation": "MiniTotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"MegaTotalDamage": {
 							"mFormulaParts": [
@@ -303,14 +305,18 @@
 						"WallDamage": {
 							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "RWallHitDamageMultiplier"
+									"mDataValue": "RWallHitDamageMultiplier",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								"mPart2": {
-									"mNumber": 0.01
-								}
+									"mNumber": 0.01,
+									"__type": "NumberCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "Damage"
+							"mModifiedGameCalculation": "Damage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true

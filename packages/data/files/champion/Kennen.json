@@ -116,7 +116,8 @@
 									"mStat": 2,
 									"mStatFormula": 2,
 									"mSubpart": {
-										"mDataValue": "BADRatio"
+										"mDataValue": "BADRatio",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -139,16 +140,20 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1.4
+										"mNumber": 1.4,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mStat": 9,
 										"mStatFormula": 2,
-										"mCoefficient": 0.4
+										"mCoefficient": 0.4,
+										"__type": "StatByCoefficientCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamagePassive"
+							"mModifiedGameCalculation": "TotalDamagePassive",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

@@ -344,7 +344,8 @@
 												"mLevel": 15,
 												"mAdditionalBonusAtThisLevel": 0.12
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

@@ -69,11 +69,13 @@
 						},
 						"TotalEmpoweredDamage": {
 							"mMultiplier": {
-								"mNumber": 1.75
+								"mNumber": 1.75,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "ExplosionDamage"
+							"mModifiedGameCalculation": "ExplosionDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -153,18 +155,22 @@
 						},
 						"HasteValueAllies": {
 							"mMultiplier": {
-								"mDataValue": "HasteValueForAllies"
+								"mDataValue": "HasteValueForAllies",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "WMSBonusTotal"
+							"mModifiedGameCalculation": "WMSBonusTotal",
+							"__type": "GameCalculationModified"
 						},
 						"ShieldValueSeraphine": {
 							"mMultiplier": {
-								"mDataValue": "ShieldAmpForSeraphine"
+								"mDataValue": "ShieldAmpForSeraphine",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalShieldStrength"
+							"mModifiedGameCalculation": "TotalShieldStrength",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

@@ -115,10 +115,12 @@
 						},
 						"EmpoweredDamage": {
 							"mMultiplier": {
-								"mDataValue": "EmpowerMultiplier"
+								"mDataValue": "EmpowerMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "Damage"
+							"mModifiedGameCalculation": "Damage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

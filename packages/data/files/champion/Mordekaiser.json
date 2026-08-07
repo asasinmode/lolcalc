@@ -88,10 +88,12 @@
 						},
 						"EmpoweredDamageTooltip": {
 							"mMultiplier": {
-								"mDataValue": "IsolationScalar"
+								"mDataValue": "IsolationScalar",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "QDamage"
+							"mModifiedGameCalculation": "QDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

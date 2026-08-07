@@ -75,9 +75,11 @@
 						},
 						"HumanMaximumDamage": {
 							"mMultiplier": {
-								"mDataValue": "DamageMulti"
+								"mDataValue": "DamageMulti",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "HumanMinimumDamage"
+							"mModifiedGameCalculation": "HumanMinimumDamage",
+							"__type": "GameCalculationModified"
 						},
 						"{38f95809}": {
 							"tooltipOnly": true,
@@ -262,14 +264,18 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
-										"mDataValue": "MaxHealMult"
+										"mDataValue": "MaxHealMult",
+										"__type": "NamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalHealing"
+							"mModifiedGameCalculation": "TotalHealing",
+							"__type": "GameCalculationModified"
 						}
 					}
 				},

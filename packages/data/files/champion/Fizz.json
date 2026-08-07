@@ -276,15 +276,19 @@
 						},
 						"{262c3c02}": {
 							"mMultiplier": {
-								"mDataValue": "MidDamageMulti"
+								"mDataValue": "MidDamageMulti",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "SmallSharkDamage"
+							"mModifiedGameCalculation": "SmallSharkDamage",
+							"__type": "GameCalculationModified"
 						},
 						"BigSharkDamage": {
 							"mMultiplier": {
-								"mDataValue": "LargeDamageMulti"
+								"mDataValue": "LargeDamageMulti",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "SmallSharkDamage"
+							"mModifiedGameCalculation": "SmallSharkDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true

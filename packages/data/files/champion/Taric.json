@@ -83,7 +83,8 @@
 						},
 						"MaxStackHealing": {
 							"mMultiplier": {
-								"mEffectIndex": 6
+								"mEffectIndex": 6,
+								"__type": "EffectValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -244,10 +245,12 @@
 								{
 									"mPart1": {
 										"mStartValue": 25,
-										"mEndValue": 93
+										"mEndValue": 93,
+										"__type": "ByCharLevelInterpolationCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "BaseDamageMultiplierForModesBalance"
+										"mDataValue": "BaseDamageMultiplierForModesBalance",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},
@@ -265,19 +268,24 @@
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										},
 										{
 											"mSubparts": [
 												{
-													"mNumber": 1
+													"mNumber": 1,
+													"__type": "NumberCalculationPart"
 												},
 												{
 													"mPart2": {
-														"mNumber": -1
-													}
+														"mNumber": -1,
+														"__type": "NumberCalculationPart"
+													},
+													"__type": "ProductOfSubPartsCalculationPart"
 												}
-											]
+											],
+											"__type": "SumOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"

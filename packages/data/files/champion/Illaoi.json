@@ -59,12 +59,15 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
-										"mDataValue": "TentacleDamageAmp"
+										"mDataValue": "TentacleDamageAmp",
+										"__type": "NamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -85,7 +88,8 @@
 						},
 						"DamageIncreaseTooltip": {
 							"mMultiplier": {
-								"mDataValue": "TentacleDamageAmp"
+								"mDataValue": "TentacleDamageAmp",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -142,7 +146,8 @@
 					"spellCalculations": {
 						"HealthPercentTotal": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{

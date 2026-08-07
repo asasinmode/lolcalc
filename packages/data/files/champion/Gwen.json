@@ -96,28 +96,37 @@
 										{
 											"mSubparts": [
 												{
-													"mDataValue": "SwipeDamageBase"
+													"mDataValue": "SwipeDamageBase",
+													"__type": "NamedDataValueCalculationPart"
 												},
 												{
-													"mDataValue": "APRatio"
+													"mDataValue": "APRatio",
+													"__type": "StatByNamedDataValueCalculationPart"
 												}
-											]
+											],
+											"__type": "SumOfSubPartsCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mDataValue": "MiniSwipeAPRatio"
+												"mDataValue": "MiniSwipeAPRatio",
+												"__type": "StatByNamedDataValueCalculationPart"
 											},
 											"mPart2": {
-												"mNumber": 5
-											}
+												"mNumber": 5,
+												"__type": "NumberCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mDataValue": "MiniSwipeBaseDamage"
+												"mDataValue": "MiniSwipeBaseDamage",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"mPart2": {
-												"mNumber": 5
-											}
+												"mNumber": 5,
+												"__type": "NumberCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -208,7 +217,8 @@
 					"spellCalculations": {
 						"BonusAttackSpeed": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
@@ -281,21 +291,27 @@
 						},
 						"MaxDamage": {
 							"mMultiplier": {
-								"mNumber": 9
+								"mNumber": 9,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"TotalDamage3": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"TotalDamage5": {
 							"mMultiplier": {
-								"mNumber": 5
+								"mNumber": 5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -357,9 +373,11 @@
 						},
 						"PercentHealth1000Cuts": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{540bce84}"
+							"mModifiedGameCalculation": "{540bce84}",
+							"__type": "GameCalculationModified"
 						},
 						"MonsterDamageCap": {
 							"mFormulaParts": [
@@ -375,29 +393,37 @@
 						},
 						"PassiveMaxQTooltip": {
 							"mMultiplier": {
-								"mNumber": 0.06
+								"mNumber": 0.06,
+								"__type": "NumberCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "{540bce84}"
+							"mModifiedGameCalculation": "{540bce84}",
+							"__type": "GameCalculationModified"
 						},
 						"PassiveMaxRTooltip": {
 							"mMultiplier": {
-								"mNumber": 0.09
+								"mNumber": 0.09,
+								"__type": "NumberCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "{540bce84}"
+							"mModifiedGameCalculation": "{540bce84}",
+							"__type": "GameCalculationModified"
 						},
 						"{4197830d}": {
 							"mMultiplier": {
-								"mNumber": 0.03
+								"mNumber": 0.03,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{540bce84}"
+							"mModifiedGameCalculation": "{540bce84}",
+							"__type": "GameCalculationModified"
 						},
 						"{4097817a}": {
 							"mMultiplier": {
-								"mNumber": 0.05
+								"mNumber": 0.05,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{540bce84}"
+							"mModifiedGameCalculation": "{540bce84}",
+							"__type": "GameCalculationModified"
 						},
 						"{5bade13c}": {
 							"mFormulaParts": [

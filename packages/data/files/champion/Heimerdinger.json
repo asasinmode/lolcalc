@@ -63,7 +63,8 @@
 					"spellCalculations": {
 						"TurretHealth": {
 							"mMultiplier": {
-								"mDataValue": "TurretHealthMod"
+								"mDataValue": "TurretHealthMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -80,7 +81,8 @@
 												"mLevel": 10,
 												"mBonusPerLevelAtAndAfter": 0.04
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -252,9 +254,11 @@
 						},
 						"ExtraHitDamageMinions": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "ExtraHitDamage"
+							"mModifiedGameCalculation": "ExtraHitDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -429,9 +433,11 @@
 						},
 						"{f058914b}": {
 							"mMultiplier": {
-								"mNumber": 0.5
+								"mNumber": 0.5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{a8af07ef}"
+							"mModifiedGameCalculation": "{a8af07ef}",
+							"__type": "GameCalculationModified"
 						},
 						"WUltTotalDamage": {
 							"mFormulaParts": [
@@ -459,9 +465,11 @@
 						},
 						"{0df0e2e2}": {
 							"mMultiplier": {
-								"mNumber": 20
+								"mNumber": 20,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "WUltTotalDamage"
+							"mModifiedGameCalculation": "WUltTotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"RQTurretResists": {
 							"mFormulaParts": [

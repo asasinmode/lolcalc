@@ -79,7 +79,8 @@
 									"mStat": 2,
 									"mSubpart": {
 										"mStat": 9,
-										"mDataValue": "ADRatio"
+										"mDataValue": "ADRatio",
+										"__type": "StatByNamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -176,9 +177,11 @@
 						},
 						"BonusDamagePerStack": {
 							"mMultiplier": {
-								"mNumber": 0.25
+								"mNumber": 0.25,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

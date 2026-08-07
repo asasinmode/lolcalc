@@ -106,10 +106,12 @@
 						},
 						"Tooltip_QWBonusDamage": {
 							"mMultiplier": {
-								"mDataValue": "Tooltip_QWBonusDamageMult"
+								"mDataValue": "Tooltip_QWBonusDamageMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "Tooltip_QWDamage"
+							"mModifiedGameCalculation": "Tooltip_QWDamage",
+							"__type": "GameCalculationModified"
 						},
 						"Tooltip_QEDamage": {
 							"tooltipOnly": true,
@@ -189,7 +191,8 @@
 					"spellCalculations": {
 						"Tooltip_WQMoveSpeed": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
@@ -219,7 +222,8 @@
 						},
 						"Tooltip_WWStartShieldAmount": {
 							"mMultiplier": {
-								"mNumber": 0.5
+								"mNumber": 0.5,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
@@ -406,15 +410,19 @@
 								{
 									"mSubparts": [
 										{
-											"mDataValue": "RBaseDamage"
+											"mDataValue": "RBaseDamage",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mDataValue": "BaseDamageOverTime"
+												"mDataValue": "BaseDamageOverTime",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "Duration"
-											}
+												"mDataValue": "Duration",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"

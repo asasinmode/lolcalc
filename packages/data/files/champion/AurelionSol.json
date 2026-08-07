@@ -173,9 +173,11 @@
 						},
 						"{70212d39}": {
 							"mMultiplier": {
-								"mNumber": 0.5
+								"mNumber": 0.5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{ffd78035}"
+							"mModifiedGameCalculation": "{ffd78035}",
+							"__type": "GameCalculationModified"
 						},
 						"{ffd78035}": {
 							"mFormulaParts": [
@@ -332,20 +334,25 @@
 						"{5dfac189}": {
 							"ResultModifier": 1,
 							"mMultiplier": {
-								"mDataValue": "InversePI"
+								"mDataValue": "InversePI",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "StartingRadius"
+										"mDataValue": "StartingRadius",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
-											"mDataValue": "StartingRadius"
+											"mDataValue": "StartingRadius",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
-											"mDataValue": "PI"
-										}
+											"mDataValue": "PI",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},
@@ -359,9 +366,11 @@
 						},
 						"{94f76880}": {
 							"mMultiplier": {
-								"mNumber": 0.2
+								"mNumber": 0.2,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{5dfac189}"
+							"mModifiedGameCalculation": "{5dfac189}",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -424,33 +433,42 @@
 						},
 						"R2Damage": {
 							"mMultiplier": {
-								"mDataValue": "R2DamageRatio"
+								"mDataValue": "R2DamageRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MaxDamageTooltip"
+							"mModifiedGameCalculation": "MaxDamageTooltip",
+							"__type": "GameCalculationModified"
 						},
 						"ShockwaveDamage": {
 							"mMultiplier": {
-								"mDataValue": "ShockwaveDamageRatio"
+								"mDataValue": "ShockwaveDamageRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MaxDamageTooltip"
+							"mModifiedGameCalculation": "MaxDamageTooltip",
+							"__type": "GameCalculationModified"
 						},
 						"{1d7ce9ef}": {
 							"ResultModifier": 1,
 							"mMultiplier": {
-								"mDataValue": "InversePI"
+								"mDataValue": "InversePI",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "StartingRadius"
+										"mDataValue": "StartingRadius",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
-											"mDataValue": "StartingRadius"
+											"mDataValue": "StartingRadius",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
-											"mDataValue": "PI"
-										}
+											"mDataValue": "PI",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},

@@ -64,26 +64,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "ActiveCritScaling"
+											"mDataValue": "ActiveCritScaling",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -292,10 +299,12 @@
 						},
 						"DamagePerTickCalcTooltip": {
 							"mMultiplier": {
-								"mNumber": 4
+								"mNumber": 4,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DamagePerTickCalc"
+							"mModifiedGameCalculation": "DamagePerTickCalc",
+							"__type": "GameCalculationModified"
 						},
 						"ChampHealingPercent": {
 							"mFormulaParts": [

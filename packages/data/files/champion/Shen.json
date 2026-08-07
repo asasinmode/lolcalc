@@ -111,7 +111,8 @@
 						},
 						"BasePercentHealth": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
@@ -129,7 +130,8 @@
 						},
 						"EmpPercentHealth": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -146,9 +148,11 @@
 						},
 						"TowerDamageCalc": {
 							"mMultiplier": {
-								"mDataValue": "QTowerDamageModifier"
+								"mDataValue": "QTowerDamageModifier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BaseFlatDamage"
+							"mModifiedGameCalculation": "BaseFlatDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -306,9 +310,11 @@
 						},
 						"MaxShield": {
 							"mMultiplier": {
-								"mDataValue": "MaxShieldMult"
+								"mDataValue": "MaxShieldMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "Shield"
+							"mModifiedGameCalculation": "Shield",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -382,7 +388,8 @@
 						},
 						"{7e912bc4}": {
 							"mMultiplier": {
-								"mDataValue": "ShenZedQuestShieldMultiplier"
+								"mDataValue": "ShenZedQuestShieldMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -395,12 +402,15 @@
 							"mDefaultGameCalculation": "{58a09e24}",
 							"mConditionalGameCalculation": "{7e912bc4}",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{7dfdcd99}"
-							}
+								"mBuffName": "{7dfdcd99}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						},
 						"{a7305d7f}": {
 							"mMultiplier": {
-								"mDataValue": "ShenZedQuestShieldMultiplier"
+								"mDataValue": "ShenZedQuestShieldMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -413,8 +423,10 @@
 							"mDefaultGameCalculation": "{87290189}",
 							"mConditionalGameCalculation": "{a7305d7f}",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{7dfdcd99}"
-							}
+								"mBuffName": "{7dfdcd99}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						}
 					}
 				}

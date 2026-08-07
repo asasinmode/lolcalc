@@ -73,10 +73,12 @@
 						},
 						"MaxDamage": {
 							"mMultiplier": {
-								"mNumber": 1.5
+								"mNumber": 1.5,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "MinDamage"
+							"mModifiedGameCalculation": "MinDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -128,7 +130,8 @@
 					"spellCalculations": {
 						"DamageReduction": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{

@@ -103,9 +103,11 @@
 						},
 						"ChampionHealing": {
 							"mMultiplier": {
-								"mDataValue": "ChampionHealingScalar"
+								"mDataValue": "ChampionHealingScalar",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MonsterHealing"
+							"mModifiedGameCalculation": "MonsterHealing",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -182,9 +184,11 @@
 						},
 						"NoImpactSnowballDamage": {
 							"mMultiplier": {
-								"mDataValue": "NoImpactDamageScalar"
+								"mDataValue": "NoImpactDamageScalar",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MaximumSnowballDamage"
+							"mModifiedGameCalculation": "MaximumSnowballDamage",
+							"__type": "GameCalculationModified"
 						},
 						"MaximumStunDuration": {
 							"mSimpleTooltipCalculationDisplay": 5,
@@ -346,10 +350,12 @@
 						},
 						"MinDamage": {
 							"mMultiplier": {
-								"mNumber": 0.5
+								"mNumber": 0.5,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "MaximumDamage"
+							"mModifiedGameCalculation": "MaximumDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

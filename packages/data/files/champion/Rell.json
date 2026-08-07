@@ -160,7 +160,8 @@
 									"mSubparts": [
 										{
 											"buffName": "{5a8747c2}",
-											"Coefficient": 2
+											"Coefficient": 2,
+											"__type": "PercentageOfBuffNameElapsed"
 										}
 									],
 									"__type": "ClampSubPartsCalculationPart"
@@ -269,10 +270,12 @@
 						},
 						"TotalDamage": {
 							"mMultiplier": {
-								"mDataValue": "Duration"
+								"mDataValue": "Duration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DamagePerSecond"
+							"mModifiedGameCalculation": "DamagePerSecond",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true

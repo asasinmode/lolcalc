@@ -77,11 +77,13 @@
 						},
 						"MinionDamage": {
 							"mMultiplier": {
-								"mDataValue": "BonusDamageToMinions"
+								"mDataValue": "BonusDamageToMinions",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mOverrideSpellLevel": 5,
-							"mModifiedGameCalculation": "Damage"
+							"mModifiedGameCalculation": "Damage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -185,7 +187,8 @@
 					"spellCalculations": {
 						"E1Damage": {
 							"mMultiplier": {
-								"mDataValue": "E1PercentageOfTotal"
+								"mDataValue": "E1PercentageOfTotal",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
@@ -206,7 +209,8 @@
 						},
 						"E2DamageCalc": {
 							"mMultiplier": {
-								"mDataValue": "E2PercentageOfTotal"
+								"mDataValue": "E2PercentageOfTotal",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
@@ -299,10 +303,12 @@
 						},
 						"Cast2DamageMax": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "Cast2DamageMin"
+							"mModifiedGameCalculation": "Cast2DamageMin",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -384,17 +390,20 @@
 										{
 											"level": 6,
 											"{ae9b464d}": "MSAdditionalBonusAtThreshold",
-											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter"
+											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										},
 										{
 											"level": 11,
 											"{ae9b464d}": "MSAdditionalBonusAtThreshold",
-											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter"
+											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										},
 										{
 											"level": 16,
 											"{ae9b464d}": "MSAdditionalBonusAtThreshold",
-											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter"
+											"{b0d8b2ac}": "MSBonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										}
 									],
 									"__type": "{4ce08984}"

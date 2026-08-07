@@ -251,10 +251,12 @@
 						},
 						"AllyHeal": {
 							"mMultiplier": {
-								"mDataValue": "AlistarPassiveAllyHealRatio"
+								"mDataValue": "AlistarPassiveAllyHealRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "BaseHeal"
+							"mModifiedGameCalculation": "BaseHeal",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

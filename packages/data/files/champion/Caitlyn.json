@@ -66,7 +66,8 @@
 								{
 									"mStat": 2,
 									"mSubpart": {
-										"mDataValue": "tADRatio"
+										"mDataValue": "tADRatio",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -74,9 +75,11 @@
 						},
 						"SecondaryDamage": {
 							"mMultiplier": {
-								"mDataValue": "SecondaryMult"
+								"mDataValue": "SecondaryMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "InitialDamage"
+							"mModifiedGameCalculation": "InitialDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -216,26 +219,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "CriticalStrikeModifier"
+											"mDataValue": "CriticalStrikeModifier",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -288,26 +298,33 @@
 														"mLevel": 13,
 														"mAdditionalBonusAtThisLevel": 0.2
 													}
-												]
+												],
+												"__type": "ByCharLevelBreakpointsCalculationPart"
 											},
 											{
 												"mPart1": {
 													"mStat": 8,
-													"mDataValue": "CriticalStrikeScaling"
+													"mDataValue": "CriticalStrikeScaling",
+													"__type": "StatByNamedDataValueCalculationPart"
 												},
 												"mPart2": {
 													"mSubparts": [
 														{
 															"mStat": 9,
-															"mCoefficient": 1
+															"mCoefficient": 1,
+															"__type": "StatByCoefficientCalculationPart"
 														},
 														{
-															"mNumber": -1
+															"mNumber": -1,
+															"__type": "NumberCalculationPart"
 														}
-													]
-												}
+													],
+													"__type": "SumOfSubPartsCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -320,11 +337,13 @@
 									"mSubpart": {
 										"mSubparts": [
 											{
-												"mNumber": 1
+												"mNumber": 1,
+												"__type": "NumberCalculationPart"
 											},
 											{
 												"mPart1": {
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												},
 												"mPart2": {
 													"mLevel1Value": 0.5,
@@ -337,10 +356,13 @@
 															"mLevel": 13,
 															"mAdditionalBonusAtThisLevel": 0.2
 														}
-													]
-												}
+													],
+													"__type": "ByCharLevelBreakpointsCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -353,10 +375,12 @@
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										},
 										{
-											"mDataValue": "BrushStackBonus"
+											"mDataValue": "BrushStackBonus",
+											"__type": "NamedDataValueCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -378,10 +402,12 @@
 								{
 									"mSubparts": [
 										{
-											"mSpellCalculationKey": "HeadShotMinionBonusDamage"
+											"mSpellCalculationKey": "HeadShotMinionBonusDamage",
+											"__type": "{f3cbe7b2}"
 										},
 										{
-											"mSpellCalculationKey": "HeadShotBonusDamage"
+											"mSpellCalculationKey": "HeadShotBonusDamage",
+											"__type": "{f3cbe7b2}"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"

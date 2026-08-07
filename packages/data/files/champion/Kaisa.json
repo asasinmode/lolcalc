@@ -67,44 +67,57 @@
 												{
 													"mSubparts": [
 														{
-															"mDataValue": "BaseDamage"
+															"mDataValue": "BaseDamage",
+															"__type": "NamedDataValueCalculationPart"
 														},
 														{
 															"mStat": 2,
 															"mStatFormula": 2,
-															"mDataValue": "BonusADRatio"
+															"mDataValue": "BonusADRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														},
 														{
-															"mDataValue": "APRatio"
+															"mDataValue": "APRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														}
-													]
+													],
+													"__type": "SumOfSubPartsCalculationPart"
 												}
-											]
+											],
+											"__type": "SumOfSubPartsCalculationPart"
 										},
 										{
 											"mPart1": {
 												"mPart1": {
 													"mSubparts": [
 														{
-															"mDataValue": "BaseDamage"
+															"mDataValue": "BaseDamage",
+															"__type": "NamedDataValueCalculationPart"
 														},
 														{
 															"mStat": 2,
 															"mStatFormula": 2,
-															"mDataValue": "BonusADRatio"
+															"mDataValue": "BonusADRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														},
 														{
-															"mDataValue": "APRatio"
+															"mDataValue": "APRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														}
-													]
+													],
+													"__type": "SumOfSubPartsCalculationPart"
 												},
 												"mPart2": {
-													"mNumber": 5
-												}
+													"mNumber": 5,
+													"__type": "NumberCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "ExtraHitReduction"
-											}
+												"mDataValue": "ExtraHitReduction",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -120,44 +133,57 @@
 												{
 													"mSubparts": [
 														{
-															"mDataValue": "BaseDamage"
+															"mDataValue": "BaseDamage",
+															"__type": "NamedDataValueCalculationPart"
 														},
 														{
 															"mStat": 2,
 															"mStatFormula": 2,
-															"mDataValue": "BonusADRatio"
+															"mDataValue": "BonusADRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														},
 														{
-															"mDataValue": "APRatio"
+															"mDataValue": "APRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														}
-													]
+													],
+													"__type": "SumOfSubPartsCalculationPart"
 												}
-											]
+											],
+											"__type": "SumOfSubPartsCalculationPart"
 										},
 										{
 											"mPart1": {
 												"mPart1": {
 													"mSubparts": [
 														{
-															"mDataValue": "BaseDamage"
+															"mDataValue": "BaseDamage",
+															"__type": "NamedDataValueCalculationPart"
 														},
 														{
 															"mStat": 2,
 															"mStatFormula": 2,
-															"mDataValue": "BonusADRatio"
+															"mDataValue": "BonusADRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														},
 														{
-															"mDataValue": "APRatio"
+															"mDataValue": "APRatio",
+															"__type": "StatByNamedDataValueCalculationPart"
 														}
-													]
+													],
+													"__type": "SumOfSubPartsCalculationPart"
 												},
 												"mPart2": {
-													"mNumber": 11
-												}
+													"mNumber": 11,
+													"__type": "NumberCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "ExtraHitReduction"
-											}
+												"mDataValue": "ExtraHitReduction",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -170,8 +196,10 @@
 							"mDefaultGameCalculation": "MaxDamageTotal",
 							"mConditionalGameCalculation": "{b2bd0d2f}",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{89ae79fa}"
-							}
+								"mBuffName": "{89ae79fa}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						},
 						"TotalIndividualMissileDamage": {
 							"tooltipOnly": true,
@@ -282,7 +310,8 @@
 					"spellCalculations": {
 						"TotalMovespeed": {
 							"mMultiplier": {
-								"mEffectIndex": 1
+								"mEffectIndex": 1,
+								"__type": "EffectValueCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
@@ -293,10 +322,12 @@
 										{
 											"mStat": 4,
 											"mStatFormula": 2,
-											"mCoefficient": 1
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
 										},
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										}
 									],
 									"__type": "ClampSubPartsCalculationPart"
@@ -312,11 +343,13 @@
 									"mFloor": 0.6,
 									"mSubparts": [
 										{
-											"mEffectIndex": 3
+											"mEffectIndex": 3,
+											"__type": "EffectValueCalculationPart"
 										},
 										{
 											"mStat": 4,
-											"mCoefficient": -0.4
+											"mCoefficient": -0.4,
+											"__type": "StatByCoefficientCalculationPart"
 										}
 									],
 									"__type": "ClampSubPartsCalculationPart"
@@ -417,7 +450,8 @@
 					"spellCalculations": {
 						"PBaseDamage": {
 							"mMultiplier": {
-								"mDataValue": "PTotalDamageMultiplier_ForModesBalance"
+								"mDataValue": "PTotalDamageMultiplier_ForModesBalance",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"{72c5c2a8}": 1,
 							"mFormulaParts": [
@@ -434,7 +468,8 @@
 						},
 						"PCurrentPerStackDamage": {
 							"mMultiplier": {
-								"mDataValue": "PTotalDamageMultiplier_ForModesBalance"
+								"mDataValue": "PTotalDamageMultiplier_ForModesBalance",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{

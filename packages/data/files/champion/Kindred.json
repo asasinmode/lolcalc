@@ -181,11 +181,14 @@
 								"{a8cb9c14}": true,
 								"mStat": 13,
 								"mSubpart": {
-									"mNumber": 1
-								}
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								},
+								"__type": "StatBySubPartCalculationPart"
 							},
 							"{72c5c2a8}": 1,
-							"mModifiedGameCalculation": "PercentWolfDamage"
+							"mModifiedGameCalculation": "PercentWolfDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -235,26 +238,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "CritMod"
+											"mDataValue": "CritMod",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -273,26 +283,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "CritMod"
+											"mDataValue": "CritMod",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -313,16 +330,20 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1.5
+										"mNumber": 1.5,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mStat": 9,
 										"mStatFormula": 2,
-										"mCoefficient": 1
+										"mCoefficient": 1,
+										"__type": "StatByCoefficientCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "PercentBiteDamage"
+							"mModifiedGameCalculation": "PercentBiteDamage",
+							"__type": "GameCalculationModified"
 						},
 						"TotalSlow": {
 							"mFormulaParts": [
@@ -428,7 +449,8 @@
 						},
 						"{d34fc902}": {
 							"mMultiplier": {
-								"mDataValue": "FirstTierMultiplier"
+								"mDataValue": "FirstTierMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{

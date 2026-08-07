@@ -130,10 +130,12 @@
 								{
 									"mSubparts": [
 										{
-											"mDataValue": "HoldDamage"
+											"mDataValue": "HoldDamage",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
-											"mDataValue": "HoldExecuteDamage"
+											"mDataValue": "HoldExecuteDamage",
+											"__type": "NamedDataValueCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -198,7 +200,8 @@
 									"mStat": 2,
 									"mSubpart": {
 										"mStartValue": 0.4,
-										"mEndValue": 0.55
+										"mEndValue": 0.55,
+										"__type": "ByCharLevelInterpolationCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -206,9 +209,11 @@
 						},
 						"EmpoweredDamageMultCalcModified": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{1b016817}"
+							"mModifiedGameCalculation": "{1b016817}",
+							"__type": "GameCalculationModified"
 						},
 						"MaxHealthDamageCalc": {
 							"mFormulaParts": [
@@ -290,15 +295,19 @@
 						},
 						"{e62bc5e9}": {
 							"mMultiplier": {
-								"mNumber": 0.167
+								"mNumber": 0.167,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamageCalc"
+							"mModifiedGameCalculation": "DamageCalc",
+							"__type": "GameCalculationModified"
 						},
 						"EmpoweredDamageCalc": {
 							"mMultiplier": {
-								"mNumber": 1.67
+								"mNumber": 1.67,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamageCalc"
+							"mModifiedGameCalculation": "DamageCalc",
+							"__type": "GameCalculationModified"
 						},
 						"HealCalc": {
 							"mFormulaParts": [
@@ -391,10 +400,12 @@
 						},
 						"MinDamage": {
 							"mMultiplier": {
-								"mDataValue": "EdgeDamageReduction"
+								"mDataValue": "EdgeDamageReduction",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DamageCalc"
+							"mModifiedGameCalculation": "DamageCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

@@ -98,9 +98,11 @@
 									{
 										"mLevel": 11
 									}
-								]
+								],
+								"__type": "ByCharLevelBreakpointsCalculationPart"
 							},
-							"mModifiedGameCalculation": "EnchantedDamage"
+							"mModifiedGameCalculation": "EnchantedDamage",
+							"__type": "GameCalculationModified"
 						},
 						"{7dc40c72}": {
 							"mFormulaParts": [
@@ -129,17 +131,21 @@
 						},
 						"EnchantedFalloff": {
 							"mMultiplier": {
-								"mDataValue": "FalloffMod"
+								"mDataValue": "FalloffMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "EnchantedDamage"
+							"mModifiedGameCalculation": "EnchantedDamage",
+							"__type": "GameCalculationModified"
 						},
 						"VanillaFalloff": {
 							"mMultiplier": {
-								"mDataValue": "FalloffMod"
+								"mDataValue": "FalloffMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "VanillaDamage"
+							"mModifiedGameCalculation": "VanillaDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -203,9 +209,11 @@
 						},
 						"TremorDamage": {
 							"mMultiplier": {
-								"mDataValue": "TremorBonus"
+								"mDataValue": "TremorBonus",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "CleaveDamage"
+							"mModifiedGameCalculation": "CleaveDamage",
+							"__type": "GameCalculationModified"
 						},
 						"OnHitDamage": {
 							"mFormulaParts": [

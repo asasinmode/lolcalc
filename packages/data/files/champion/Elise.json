@@ -68,7 +68,8 @@
 					"spellCalculations": {
 						"HumanPercentHealth": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
@@ -124,7 +125,8 @@
 					"spellCalculations": {
 						"MissingHPDamage": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
@@ -419,29 +421,37 @@
 						"{84a53877}": {
 							"mConditionalGameCalculation": "{60195651}",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{93251bfb}"
-							}
+								"mBuffName": "{93251bfb}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						},
 						"{e5407a95}": {
 							"mMultiplier": {
 								"mSubparts": [
 									{
 										"SourceObject": "Characters/Elise/Spells/EliseSpiderEAbility/EliseSpiderEInitial",
-										"{137cf12a}": "PBonusIncrease"
+										"{137cf12a}": "PBonusIncrease",
+										"__type": "{9e9e2e5c}"
 									},
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "PassiveTotalDamage"
+							"mModifiedGameCalculation": "PassiveTotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"{60195651}": {
 							"mDefaultGameCalculation": "PassiveTotalDamage",
 							"mConditionalGameCalculation": "{e5407a95}",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{e6fdcc5d}"
-							}
+								"mBuffName": "{e6fdcc5d}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						}
 					},
 					"effectAmount": {

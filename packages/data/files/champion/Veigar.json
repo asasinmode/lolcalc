@@ -202,9 +202,11 @@
 						},
 						"MaxDamage": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "MinDamage"
+							"mModifiedGameCalculation": "MinDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

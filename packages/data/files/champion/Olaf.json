@@ -141,7 +141,8 @@
 									"mStat": 16,
 									"mSubpart": {
 										"mStat": 12,
-										"mDataValue": "ShieldPercMissingHP"
+										"mDataValue": "ShieldPercMissingHP",
+										"__type": "StatByNamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -159,23 +160,30 @@
 									"mStat": 12,
 									"mSubpart": {
 										"mPart1": {
-											"mDataValue": "ShieldPercMissingHP"
+											"mDataValue": "ShieldPercMissingHP",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
-													"mNumber": 1
+													"mNumber": 1,
+													"__type": "NumberCalculationPart"
 												},
 												{
 													"mPart1": {
-														"mNumber": -1
+														"mNumber": -1,
+														"__type": "NumberCalculationPart"
 													},
 													"mPart2": {
-														"mDataValue": "ThresholdForMax"
-													}
+														"mDataValue": "ThresholdForMax",
+														"__type": "NamedDataValueCalculationPart"
+													},
+													"__type": "ProductOfSubPartsCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -243,9 +251,11 @@
 						},
 						"HealthCostCalc": {
 							"mMultiplier": {
-								"mDataValue": "HealthCostPercent"
+								"mDataValue": "HealthCostPercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

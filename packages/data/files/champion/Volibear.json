@@ -190,16 +190,20 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mDataValue": "W2DamageMultiplier"
+										"mDataValue": "W2DamageMultiplier",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									{
 										"mStat": 2,
 										"mStatFormula": 2,
-										"mDataValue": "W2BonusADDamageMultiplier"
+										"mDataValue": "W2BonusADDamageMultiplier",
+										"__type": "StatByNamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"PercentMissingHealthHealingRatio": {
 							"mFormulaParts": [
@@ -257,7 +261,8 @@
 								{
 									"mStat": 12,
 									"mSubpart": {
-										"mDataValue": "ShieldAmount"
+										"mDataValue": "ShieldAmount",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},

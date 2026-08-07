@@ -201,10 +201,12 @@
 						},
 						"HealCalcMinion": {
 							"mMultiplier": {
-								"mDataValue": "MinionReductionModifier"
+								"mDataValue": "MinionReductionModifier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "HealCalc"
+							"mModifiedGameCalculation": "HealCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

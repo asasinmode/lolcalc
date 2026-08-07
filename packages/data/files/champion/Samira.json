@@ -70,27 +70,35 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
-											"mDataValue": "CritDamageMod"
+											"mDataValue": "CritDamageMod",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamageCalc"
+							"mModifiedGameCalculation": "DamageCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -224,9 +232,11 @@
 						"CriticalDamageCalc": {
 							"mMultiplier": {
 								"mStat": 9,
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "StatByCoefficientCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamageCalc"
+							"mModifiedGameCalculation": "DamageCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -285,7 +295,8 @@
 									"mStat": 2,
 									"mSubpart": {
 										"mStartValue": 0.035,
-										"mEndValue": 0.105
+										"mEndValue": 0.105,
+										"__type": "ByCharLevelInterpolationCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -293,9 +304,11 @@
 						},
 						"EmpoweredMeleeDamageTooltip": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "BonusMeleeDamage"
+							"mModifiedGameCalculation": "BonusMeleeDamage",
+							"__type": "GameCalculationModified"
 						},
 						"MSBonusNew": {
 							"mFormulaParts": [

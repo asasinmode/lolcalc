@@ -85,7 +85,8 @@
 									"mStat": 2,
 									"mSubpart": {
 										"mStat": 9,
-										"mDataValue": "ADRatio"
+										"mDataValue": "ADRatio",
+										"__type": "StatByNamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -151,7 +152,8 @@
 						"{8dfeb810}": {
 							"mMultiplier": {
 								"mStartValue": 0.2,
-								"mEndValue": 1
+								"mEndValue": 1,
+								"__type": "ByCharLevelInterpolationCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -302,9 +304,11 @@
 						},
 						"TooltipDamage": {
 							"mMultiplier": {
-								"mNumber": 0.5
+								"mNumber": 0.5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "Damage"
+							"mModifiedGameCalculation": "Damage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true

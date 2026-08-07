@@ -214,7 +214,8 @@
 					"spellCalculations": {
 						"PercentHealthBaseTOOLTIP": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mExpandedTooltipCalculationDisplay": 1,
@@ -232,7 +233,8 @@
 						},
 						"PercentHealthEmpoweredTOOLTIP": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mExpandedTooltipCalculationDisplay": 1,
@@ -303,9 +305,11 @@
 						},
 						"CritDamage": {
 							"mMultiplier": {
-								"mDataValue": "CritMultiplier"
+								"mDataValue": "CritMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "Damage"
+							"mModifiedGameCalculation": "Damage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

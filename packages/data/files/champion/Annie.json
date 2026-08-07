@@ -284,10 +284,12 @@
 												"mLevel": 16,
 												"mBonusPerLevelAtAndAfter": 300
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "TibbersModeSpecificHPMod"
+										"mDataValue": "TibbersModeSpecificHPMod",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},

@@ -157,7 +157,8 @@
 						},
 						"FlatDamageSweetSpot": {
 							"mMultiplier": {
-								"mDataValue": "SweetSpotBonus"
+								"mDataValue": "SweetSpotBonus",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
@@ -326,9 +327,11 @@
 						},
 						"{395ffd44}": {
 							"mMultiplier": {
-								"mDataValue": "SmallMonsterHealMod"
+								"mDataValue": "SmallMonsterHealMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "{b5d0316f}"
+							"mModifiedGameCalculation": "{b5d0316f}",
+							"__type": "GameCalculationModified"
 						},
 						"ChampionHeal": {
 							"mFormulaParts": [
@@ -346,36 +349,46 @@
 						},
 						"ChampionHealTT": {
 							"mMultiplier": {
-								"mDataValue": "DotTicks"
+								"mDataValue": "DotTicks",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "ChampionHeal"
+							"mModifiedGameCalculation": "ChampionHeal",
+							"__type": "GameCalculationModified"
 						},
 						"MonsterHealTT": {
 							"mMultiplier": {
-								"mDataValue": "DotTicks"
+								"mDataValue": "DotTicks",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{b5d0316f}"
+							"mModifiedGameCalculation": "{b5d0316f}",
+							"__type": "GameCalculationModified"
 						},
 						"{7969ffc2}": {
 							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "DotTicks"
+									"mDataValue": "DotTicks",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								"mPart2": {
-									"mDataValue": "SmallMonsterHealMod"
-								}
+									"mDataValue": "SmallMonsterHealMod",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{b5d0316f}"
+							"mModifiedGameCalculation": "{b5d0316f}",
+							"__type": "GameCalculationModified"
 						},
 						"DotPercentTooltip": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DotPercentTotal"
+							"mModifiedGameCalculation": "DotPercentTotal",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

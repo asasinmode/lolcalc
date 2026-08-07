@@ -65,14 +65,18 @@
 						"MinimumDamageTooltip": {
 							"mMultiplier": {
 								"mPart1": {
-									"mNumber": 0.01
+									"mNumber": 0.01,
+									"__type": "NumberCalculationPart"
 								},
 								"mPart2": {
-									"mDataValue": "MinimumDamagePercent"
-								}
+									"mDataValue": "MinimumDamagePercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamageTooltip"
+							"mModifiedGameCalculation": "TotalDamageTooltip",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -284,22 +288,28 @@
 						},
 						"StackDamage": {
 							"mMultiplier": {
-								"mDataValue": "StackMult"
+								"mDataValue": "StackMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"StackDamageMax": {
 							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "StackMult"
+									"mDataValue": "StackMult",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								"mPart2": {
-									"mNumber": 2
-								}
+									"mNumber": 2,
+									"__type": "NumberCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

@@ -70,11 +70,14 @@
 									"mStat": 2,
 									"mSubpart": {
 										"mPart1": {
-											"mDataValue": "TotalADRatio"
+											"mDataValue": "TotalADRatio",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
-											"mNumber": 0.01
-										}
+											"mNumber": 0.01,
+											"__type": "NumberCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -82,10 +85,12 @@
 						},
 						"HandleDamage": {
 							"mMultiplier": {
-								"mNumber": 0.35
+								"mNumber": 0.35,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "BladeDamage"
+							"mModifiedGameCalculation": "BladeDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -130,7 +135,8 @@
 								{
 									"mStat": 2,
 									"mSubpart": {
-										"mDataValue": "ADRatio"
+										"mDataValue": "ADRatio",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -219,10 +225,12 @@
 						},
 						"MaximumDamage": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "Damage"
+							"mModifiedGameCalculation": "Damage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

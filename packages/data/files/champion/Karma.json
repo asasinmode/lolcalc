@@ -74,8 +74,10 @@
 							"mDefaultGameCalculation": "{087bc3ca}",
 							"mConditionalGameCalculation": "{5d5198eb}",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{752d125a}"
-							}
+								"mBuffName": "{752d125a}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						},
 						"TotalDamage": {
 							"mFormulaParts": [
@@ -270,7 +272,8 @@
 						},
 						"RWHealAmount": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -286,9 +289,11 @@
 						},
 						"REBonusShieldArea": {
 							"mMultiplier": {
-								"mDataValue": "RESharedRatio"
+								"mDataValue": "RESharedRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "REBonusShield"
+							"mModifiedGameCalculation": "REBonusShield",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

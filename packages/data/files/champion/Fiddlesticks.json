@@ -71,9 +71,11 @@
 						},
 						"TotalPercentHealthDamageFeared": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalPercentHealthDamage"
+							"mModifiedGameCalculation": "TotalPercentHealthDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true
@@ -212,7 +214,8 @@
 					"spellCalculations": {
 						"DamageDone": {
 							"mMultiplier": {
-								"mNumber": 0.25
+								"mNumber": 0.25,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -227,14 +230,17 @@
 						},
 						"TotalDamage": {
 							"mMultiplier": {
-								"mDataValue": "Duration"
+								"mDataValue": "Duration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{d0d3db7f}"
+							"mModifiedGameCalculation": "{d0d3db7f}",
+							"__type": "GameCalculationModified"
 						},
 						"APRatioFullDuration": {
 							"mMultiplier": {
-								"mDataValue": "Duration"
+								"mDataValue": "Duration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{

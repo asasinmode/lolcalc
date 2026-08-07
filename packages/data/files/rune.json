@@ -43,14 +43,17 @@
 									"mMultiplier": {
 										"mSubparts": [
 											{
-												"mNumber": 1
+												"mNumber": 1,
+												"__type": "NumberCalculationPart"
 											},
 											{
 												"mStat": 4,
 												"mStatFormula": 2,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"mFormulaParts": [
 										{
@@ -61,7 +64,8 @@
 									],
 									"mPrecision": 1,
 									"mRangedMultiplier": {
-										"mNumber": 0.667
+										"mNumber": 0.667,
+										"__type": "NumberCalculationPart"
 									}
 								},
 								"ASPerStack": {
@@ -74,7 +78,8 @@
 									"mDisplayAsPercent": true,
 									"mPrecision": 1,
 									"mRangedMultiplier": {
-										"mNumber": 0.8
+										"mNumber": 0.8,
+										"__type": "NumberCalculationPart"
 									}
 								}
 							},
@@ -117,7 +122,8 @@
 										}
 									],
 									"mRangedMultiplier": {
-										"mDataValue": "RangedHealMod"
+										"mDataValue": "RangedHealMod",
+										"__type": "NamedDataValueCalculationPart"
 									}
 								},
 								"{ad820ad4}": {
@@ -139,7 +145,8 @@
 									],
 									"mDisplayAsPercent": true,
 									"mRangedMultiplier": {
-										"mDataValue": "RangedMSMod"
+										"mDataValue": "RangedMSMod",
+										"__type": "NamedDataValueCalculationPart"
 									}
 								}
 							},
@@ -431,7 +438,8 @@
 							"calculations": {
 								"MeleeItemCalcValue": {
 									"mMultiplier": {
-										"mNumber": 100
+										"mNumber": 100,
+										"__type": "NumberCalculationPart"
 									},
 									"mFormulaParts": [
 										{
@@ -442,7 +450,8 @@
 								},
 								"RangedItemCalcValue": {
 									"mMultiplier": {
-										"mNumber": 100
+										"mNumber": 100,
+										"__type": "NumberCalculationPart"
 									},
 									"mFormulaParts": [
 										{
@@ -453,7 +462,8 @@
 								},
 								"ChampRange": {
 									"mDefaultGameCalculation": "{792cf56b}",
-									"mConditionalGameCalculation": "{06387172}"
+									"mConditionalGameCalculation": "{06387172}",
+									"__type": "GameCalculationConditional"
 								},
 								"{792cf56b}": {
 									"mFormulaParts": [
@@ -601,7 +611,8 @@
 									"mSimpleTooltipCalculationDisplay": 5,
 									"mExpandedTooltipCalculationDisplay": 5,
 									"mDefaultGameCalculation": "{792cf56b}",
-									"mConditionalGameCalculation": "{06387172}"
+									"mConditionalGameCalculation": "{06387172}",
+									"__type": "GameCalculationConditional"
 								},
 								"{792cf56b}": {
 									"mFormulaParts": [
@@ -811,7 +822,8 @@
 											"mSubparts": [
 												{
 													"mStartValue": 20,
-													"mEndValue": 8
+													"mEndValue": 8,
+													"__type": "ByCharLevelInterpolationCalculationPart"
 												}
 											],
 											"__type": "ClampSubPartsCalculationPart"
@@ -860,7 +872,8 @@
 									],
 									"mDisplayAsPercent": true,
 									"mRangedMultiplier": {
-										"mDataValue": "RangedEffectiveness"
+										"mDataValue": "RangedEffectiveness",
+										"__type": "NamedDataValueCalculationPart"
 									}
 								}
 							},
@@ -1107,7 +1120,8 @@
 										}
 									],
 									"mRangedMultiplier": {
-										"mDataValue": "RangedPenaltyMod"
+										"mDataValue": "RangedPenaltyMod",
+										"__type": "NamedDataValueCalculationPart"
 									}
 								},
 								"HealCalc": {
@@ -1120,7 +1134,8 @@
 										}
 									],
 									"mRangedMultiplier": {
-										"mDataValue": "RangedPenaltyMod"
+										"mDataValue": "RangedPenaltyMod",
+										"__type": "NamedDataValueCalculationPart"
 									}
 								}
 							},
@@ -1284,7 +1299,8 @@
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mDefaultGameCalculation": "{4e3f20aa}",
-									"mConditionalGameCalculation": "{5fecac03}"
+									"mConditionalGameCalculation": "{5fecac03}",
+									"__type": "GameCalculationConditional"
 								},
 								"{4e3f20aa}": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -1343,7 +1359,8 @@
 										}
 									],
 									"mRangedMultiplier": {
-										"mDataValue": "RangedMod"
+										"mDataValue": "RangedMod",
+										"__type": "NamedDataValueCalculationPart"
 									}
 								}
 							},
@@ -1508,7 +1525,8 @@
 							"calculations": {
 								"SlowZoneCalc": {
 									"mMultiplier": {
-										"mNumber": 0.01
+										"mNumber": 0.01,
+										"__type": "NumberCalculationPart"
 									},
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
@@ -1582,10 +1600,12 @@
 											"mPart1": {
 												"mStartValue": 25,
 												"mEndValue": 15,
-												"mScalePastDefaultMaxLevel": false
+												"mScalePastDefaultMaxLevel": false,
+												"__type": "ByCharLevelInterpolationCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "ModesCooldownReduction"
+												"mDataValue": "ModesCooldownReduction",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"__type": "ProductOfSubPartsCalculationPart"
 										}
@@ -1595,7 +1615,8 @@
 									"mSimpleTooltipCalculationDisplay": 5,
 									"mExpandedTooltipCalculationDisplay": 5,
 									"mDefaultGameCalculation": "{792cf56b}",
-									"mConditionalGameCalculation": "{06387172}"
+									"mConditionalGameCalculation": "{06387172}",
+									"__type": "GameCalculationConditional"
 								},
 								"MeleeItemCalcValue": {
 									"mSimpleTooltipCalculationDisplay": 6,
@@ -1610,9 +1631,11 @@
 								},
 								"RangedItemCalcValue": {
 									"mMultiplier": {
-										"mDataValue": "{7563bf99}"
+										"mDataValue": "{7563bf99}",
+										"__type": "NamedDataValueCalculationPart"
 									},
-									"mModifiedGameCalculation": "MeleeItemCalcValue"
+									"mModifiedGameCalculation": "MeleeItemCalcValue",
+									"__type": "GameCalculationModified"
 								},
 								"{792cf56b}": {
 									"mFormulaParts": [

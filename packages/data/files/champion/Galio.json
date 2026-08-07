@@ -82,19 +82,23 @@
 						},
 						"PercentSuperQDamageTT": {
 							"mMultiplier": {
-								"mDataValue": "TornadoTicks"
+								"mDataValue": "TornadoTicks",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "{85f4c0e9}"
+							"mModifiedGameCalculation": "{85f4c0e9}",
+							"__type": "GameCalculationModified"
 						},
 						"SuperQMonsterMaxDamageTotal": {
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "SuperQMonsterMaxDamage"
+										"mDataValue": "SuperQMonsterMaxDamage",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "TornadoTicks"
+										"mDataValue": "TornadoTicks",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -160,7 +164,8 @@
 						},
 						"MagicDamageReduction": {
 							"mMultiplier": {
-								"mNumber": 1
+								"mNumber": 1,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -188,9 +193,11 @@
 						},
 						"PhysicalDamageReduction": {
 							"mMultiplier": {
-								"mDataValue": "PhysicalDRPercent"
+								"mDataValue": "PhysicalDRPercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MagicDamageReduction"
+							"mModifiedGameCalculation": "MagicDamageReduction",
+							"__type": "GameCalculationModified"
 						},
 						"MinTotalDamage": {
 							"mFormulaParts": [
@@ -206,9 +213,11 @@
 						},
 						"MaxTotalDamage": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "MinTotalDamage"
+							"mModifiedGameCalculation": "MinTotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"PassiveShieldOOCTimer": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -231,17 +240,21 @@
 						},
 						"{7a7521c1}": {
 							"mMultiplier": {
-								"mNumber": 100
+								"mNumber": 100,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "MagicDamageReduction"
+							"mModifiedGameCalculation": "MagicDamageReduction",
+							"__type": "GameCalculationModified"
 						},
 						"{c9a870dd}": {
 							"mMultiplier": {
-								"mNumber": 50
+								"mNumber": 50,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "MagicDamageReduction"
+							"mModifiedGameCalculation": "MagicDamageReduction",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true
@@ -285,9 +298,11 @@
 						},
 						"PVEDamage": {
 							"mMultiplier": {
-								"mNumber": 0.8
+								"mNumber": 0.8,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true
@@ -387,7 +402,8 @@
 							"mFormulaParts": [
 								{
 									"mPart2": {
-										"mDataValue": "PassiveCooldown"
+										"mDataValue": "PassiveCooldown",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

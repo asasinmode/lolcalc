@@ -75,7 +75,8 @@
 						},
 						"MinimumMoveSpeed": {
 							"mMultiplier": {
-								"mDataValue": "MSMultiplier"
+								"mDataValue": "MSMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -88,9 +89,11 @@
 						},
 						"MaximumMoveSpeed": {
 							"mMultiplier": {
-								"mDataValue": "RollDuration"
+								"mDataValue": "RollDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MinimumMoveSpeed"
+							"mModifiedGameCalculation": "MinimumMoveSpeed",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -162,17 +165,21 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "FlatBonusArmor"
+										"mDataValue": "FlatBonusArmor",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mNumber": 1
+												"mNumber": 1,
+												"__type": "NumberCalculationPart"
 											},
 											{
-												"mDataValue": "BonusArmorPercent"
+												"mDataValue": "BonusArmorPercent",
+												"__type": "NamedDataValueCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},
@@ -187,17 +194,21 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "FlatBonusMR"
+										"mDataValue": "FlatBonusMR",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mNumber": 1
+												"mNumber": 1,
+												"__type": "NumberCalculationPart"
 											},
 											{
-												"mDataValue": "BonusMRPercent"
+												"mDataValue": "BonusMRPercent",
+												"__type": "NamedDataValueCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},
@@ -344,12 +355,15 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mDataValue": "BonusDamageMultiplier"
+										"mDataValue": "BonusDamageMultiplier",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
@@ -365,16 +379,19 @@
 						},
 						"MaxSlow": {
 							"mMultiplier": {
-								"mDataValue": "NumberOfPulses"
+								"mDataValue": "NumberOfPulses",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "SlowAmount"
+										"mDataValue": "SlowAmount",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mNumber": 100
+										"mNumber": 100,
+										"__type": "NumberCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

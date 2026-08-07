@@ -113,7 +113,8 @@
 					"spellCalculations": {
 						"TotalHealthDamage": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -240,15 +241,19 @@
 						},
 						"MidDamageCalc": {
 							"mMultiplier": {
-								"mDataValue": "MidDamageMult"
+								"mDataValue": "MidDamageMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BaseDamageCalc"
+							"mModifiedGameCalculation": "BaseDamageCalc",
+							"__type": "GameCalculationModified"
 						},
 						"MaxDamageCalc": {
 							"mMultiplier": {
-								"mDataValue": "FinalDamageMult"
+								"mDataValue": "FinalDamageMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BaseDamageCalc"
+							"mModifiedGameCalculation": "BaseDamageCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

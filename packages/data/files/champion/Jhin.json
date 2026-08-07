@@ -82,10 +82,12 @@
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										},
 										{
-											"mNumber": 3
+											"mNumber": 3,
+											"__type": "NumberCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -204,16 +206,20 @@
 								{
 									"mSubparts": [
 										{
-											"mDataValue": "AmmoRechargeRateBaseTooltip"
+											"mDataValue": "AmmoRechargeRateBaseTooltip",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mPart1": {
 												"mStat": 10,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "AmmoRechargeRateBaseTooltip"
-											}
+												"mDataValue": "AmmoRechargeRateBaseTooltip",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -269,15 +275,19 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
-										"mDataValue": "PercentMissingAmp"
+										"mDataValue": "PercentMissingAmp",
+										"__type": "NamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "DamageCalc"
+							"mModifiedGameCalculation": "DamageCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

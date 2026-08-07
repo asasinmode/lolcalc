@@ -83,14 +83,18 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
-										"mDataValue": "BonusMonsterDmgMult"
+										"mDataValue": "BonusMonsterDmgMult",
+										"__type": "NamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -255,7 +259,8 @@
 					"spellCalculations": {
 						"BonusDamage": {
 							"mMultiplier": {
-								"mDataValue": "ModesPassiveDamageMultiplier"
+								"mDataValue": "ModesPassiveDamageMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{

@@ -167,10 +167,12 @@
 								},
 								{
 									"mPart1": {
-										"mDataValue": "MaxStacks"
+										"mDataValue": "MaxStacks",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "BasePhysicalDamagePerStack"
+										"mDataValue": "BasePhysicalDamagePerStack",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},
@@ -179,11 +181,14 @@
 									"mStatFormula": 2,
 									"mSubpart": {
 										"mPart1": {
-											"mDataValue": "bADRatioPerStack"
+											"mDataValue": "bADRatioPerStack",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
-											"mDataValue": "MaxStacks"
-										}
+											"mDataValue": "MaxStacks",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -191,9 +196,11 @@
 						},
 						"MaxMagicDamage": {
 							"mMultiplier": {
-								"mDataValue": "MaxStacks"
+								"mDataValue": "MaxStacks",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "MagicDamagePerStack"
+							"mModifiedGameCalculation": "MagicDamagePerStack",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -288,20 +295,26 @@
 						},
 						"DamagePerSecondMax": {
 							"mMultiplier": {
-								"mDataValue": "MaxStacks"
+								"mDataValue": "MaxStacks",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamagePerSecond"
+							"mModifiedGameCalculation": "DamagePerSecond",
+							"__type": "GameCalculationModified"
 						},
 						"DamageMaxTotal": {
 							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "Duration"
+									"mDataValue": "Duration",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								"mPart2": {
-									"mDataValue": "MaxStacks"
-								}
+									"mDataValue": "MaxStacks",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamagePerSecond"
+							"mModifiedGameCalculation": "DamagePerSecond",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

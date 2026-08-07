@@ -85,9 +85,11 @@
 						},
 						"EmpoweredBonusDamage": {
 							"mMultiplier": {
-								"mDataValue": "QEmpoweredAmp"
+								"mDataValue": "QEmpoweredAmp",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BonusDamage"
+							"mModifiedGameCalculation": "BonusDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

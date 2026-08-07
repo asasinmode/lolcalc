@@ -106,17 +106,21 @@
 								},
 								{
 									"mPart1": {
-										"mDataValue": "MaxDuration"
+										"mDataValue": "MaxDuration",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mDataValue": "BonusDamage"
+												"mDataValue": "BonusDamage",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
-												"mDataValue": "BonusRatio"
+												"mDataValue": "BonusRatio",
+												"__type": "StatByNamedDataValueCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -130,10 +134,12 @@
 								},
 								{
 									"mPart1": {
-										"mDataValue": "MaxDuration"
+										"mDataValue": "MaxDuration",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "ChargeKnockup"
+										"mDataValue": "ChargeKnockup",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -212,7 +218,8 @@
 						},
 						"TotalSlow": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -331,10 +338,12 @@
 						},
 						"TotalHeal": {
 							"mMultiplier": {
-								"mEffectIndex": 3
+								"mEffectIndex": 3,
+								"__type": "EffectValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "HealPerSecond"
+							"mModifiedGameCalculation": "HealPerSecond",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

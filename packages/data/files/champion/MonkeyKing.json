@@ -178,9 +178,11 @@
 						},
 						"TotalDamageMonsters": {
 							"mMultiplier": {
-								"mDataValue": "MonsterDamageRatio"
+								"mDataValue": "MonsterDamageRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -255,27 +257,33 @@
 						},
 						"TotalDamageTT": {
 							"mMultiplier": {
-								"mDataValue": "SpinDuration"
+								"mDataValue": "SpinDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DamagePerSecondTotal"
+							"mModifiedGameCalculation": "DamagePerSecondTotal",
+							"__type": "GameCalculationModified"
 						},
 						"PercentHPDamageTT": {
 							"mMultiplier": {
-								"mDataValue": "SpinDuration"
+								"mDataValue": "SpinDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{26c20668}"
+							"mModifiedGameCalculation": "{26c20668}",
+							"__type": "GameCalculationModified"
 						},
 						"MonsterCapTT": {
 							"mMultiplier": {
-								"mDataValue": "SpinDuration"
+								"mDataValue": "SpinDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "MonsterCap"
+							"mModifiedGameCalculation": "MonsterCap",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true
@@ -314,9 +322,11 @@
 						},
 						"TooltipMaxArmor": {
 							"mMultiplier": {
-								"mDataValue": "TooltipMult"
+								"mDataValue": "TooltipMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BonusArmor"
+							"mModifiedGameCalculation": "BonusArmor",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

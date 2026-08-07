@@ -74,7 +74,8 @@
 						},
 						"DarkinPercentDamage": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
@@ -298,9 +299,11 @@
 						},
 						"HealValue": {
 							"mMultiplier": {
-								"mDataValue": "SlayerHealPercent"
+								"mDataValue": "SlayerHealPercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "SlayerDamage"
+							"mModifiedGameCalculation": "SlayerDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

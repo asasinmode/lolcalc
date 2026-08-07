@@ -640,7 +640,7 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 						id: mPerkId,
 						icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
 						dataKey: perkKey,
-						effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount),
+						effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount, true),
 					} as any;
 
 					const perkName: string = mPerkName.toLowerCase();
@@ -1500,7 +1500,7 @@ function createRuneSlotData(dataKey: string, data: any) {
 		icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
 		dataKey,
 		calculations: cleanupObject(mSpellScriptData.mCalculations),
-		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
+		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount, true),
 	};
 
 	const variableDebug = {
@@ -2029,7 +2029,7 @@ function championAbilityVariant(
 				))
 			: undefined,
 		spellCalculations: cleanupObject(mSpellCalculations),
-		effectAmount: cleanupObject(mEffectAmount),
+		effectAmount: cleanupObject(mEffectAmount, true),
 		isImmobilizing: undefined,
 	} as IChampionAbilityVariant;
 
@@ -2216,7 +2216,7 @@ function formatNumber(n: number): number {
 	return Number(n.toPrecision(7));
 }
 
-function cleanupObject(obj?: object, removeType = true): any {
+function cleanupObject(obj?: object, removeType = false): any {
 	const type = typeof obj;
 	if (!obj || type !== 'object') {
 		return type === 'number' ? formatNumber(obj as unknown as number) : obj;
@@ -2225,6 +2225,13 @@ function cleanupObject(obj?: object, removeType = true): any {
 	let entries = Object.entries(obj).filter(([, value]) => !isEmptyObject(value));
 	if (removeType) {
 		entries = entries.filter(([key]) => key !== '__type');
+	} else {
+		entries = entries.filter(([key, value]) => key !== '__type' || ![
+			'GameCalculation',
+			'Breakpoint',
+			'{e9a3c91d}', /* ranged multiplier */
+			'{4750ceb6}', /* melee ranged result */
+		].includes(value));
 	}
 
 	if (entries.length === 1 && entries[0]![0] === 'value') {
@@ -2234,8 +2241,8 @@ function cleanupObject(obj?: object, removeType = true): any {
 	return Object.fromEntries(entries.map(([key, value]) =>
 		[key, typeof value === 'object'
 			? Array.isArray(value)
-				? value.map(v => cleanupObject(v, key !== 'mFormulaParts'))
-				: cleanupObject(value)
+				? value.map(v => cleanupObject(v, removeType))
+				: cleanupObject(value, removeType)
 			: typeof value === 'number'
 				? formatNumber(value)
 				: value],

@@ -320,7 +320,8 @@
 					"spellCalculations": {
 						"HarvestDuration": {
 							"mMultiplier": {
-								"mDataValue": "ModeSpeedOverride"
+								"mDataValue": "ModeSpeedOverride",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -369,16 +370,20 @@
 							"mMultiplier": {
 								"mStat": 12,
 								"mStatFormula": 1,
-								"mCoefficient": 0.01
+								"mCoefficient": 0.01,
+								"__type": "StatByCoefficientCalculationPart"
 							},
-							"mModifiedGameCalculation": "HealthCostPercent"
+							"mModifiedGameCalculation": "HealthCostPercent",
+							"__type": "GameCalculationModified"
 						},
 						"ManaTooltip": {
 							"mMultiplier": {
 								"mCoefficient": 0.01,
-								"mStatFormula": 1
+								"mStatFormula": 1,
+								"__type": "AbilityResourceByCoefficientCalculationPart"
 							},
-							"mModifiedGameCalculation": "{c6433908}"
+							"mModifiedGameCalculation": "{c6433908}",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

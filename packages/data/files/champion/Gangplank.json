@@ -85,27 +85,35 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
-											"mDataValue": "CritDamageMod"
+											"mDataValue": "CritDamageMod",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "ShotDamage"
+							"mModifiedGameCalculation": "ShotDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -312,9 +320,11 @@
 						},
 						"TotalDamageTooltip": {
 							"mMultiplier": {
-								"mDataValue": "TotalWavesTooltip"
+								"mDataValue": "TotalWavesTooltip",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "OneWaveDamage"
+							"mModifiedGameCalculation": "OneWaveDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

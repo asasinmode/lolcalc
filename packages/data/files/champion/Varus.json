@@ -63,9 +63,11 @@
 					"spellCalculations": {
 						"{b3ef3984}": {
 							"mMultiplier": {
-								"mDataValue": "ChargeMultiplierInverse"
+								"mDataValue": "ChargeMultiplierInverse",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamageMax"
+							"mModifiedGameCalculation": "TotalDamageMax",
+							"__type": "GameCalculationModified"
 						},
 						"TotalDamageMax": {
 							"mFormulaParts": [
@@ -83,9 +85,11 @@
 						},
 						"TotalDamageMinTooltip": {
 							"mMultiplier": {
-								"mDataValue": "ChargeMultiplierInverse"
+								"mDataValue": "ChargeMultiplierInverse",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamageMax"
+							"mModifiedGameCalculation": "TotalDamageMax",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -149,11 +153,14 @@
 								{
 									"mSubpart": {
 										"mPart1": {
-											"mNumber": 0.01
+											"mNumber": 0.01,
+											"__type": "NumberCalculationPart"
 										},
 										"mPart2": {
-											"mNumber": 0.013
-										}
+											"mNumber": 0.013,
+											"__type": "NumberCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -191,16 +198,20 @@
 						},
 						"MaxPercentHPPerStack": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "PercentHPPerStack"
+							"mModifiedGameCalculation": "PercentHPPerStack",
+							"__type": "GameCalculationModified"
 						},
 						"MaxQEmpowerPercentHP": {
 							"mMultiplier": {
-								"mDataValue": "VarusWMaxChargeHPDamage"
+								"mDataValue": "VarusWMaxChargeHPDamage",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "QEmpowerPercentHP"
+							"mModifiedGameCalculation": "QEmpowerPercentHP",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

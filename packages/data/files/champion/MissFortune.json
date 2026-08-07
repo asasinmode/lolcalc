@@ -74,27 +74,35 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
-											"mDataValue": "BounceCriticalMod"
+											"mDataValue": "BounceCriticalMod",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamageTooltip"
+							"mModifiedGameCalculation": "TotalDamageTooltip",
+							"__type": "GameCalculationModified"
 						},
 						"{5a1fd353}": {
 							"mFormulaParts": [
@@ -220,9 +228,11 @@
 						},
 						"TotalDamage": {
 							"mMultiplier": {
-								"mDataValue": "BaseDuration"
+								"mDataValue": "BaseDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamagePerSecond"
+							"mModifiedGameCalculation": "TotalDamagePerSecond",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -276,34 +286,44 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
-											"mDataValue": "CritDamageMultiplier"
+											"mDataValue": "CritDamageMultiplier",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "PhysicalDamagePerWave"
+							"mModifiedGameCalculation": "PhysicalDamagePerWave",
+							"__type": "GameCalculationModified"
 						},
 						"TotalPhysicalDamage": {
 							"mMultiplier": {
-								"mDataValue": "BaseWaves"
+								"mDataValue": "BaseWaves",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "PhysicalDamagePerWave"
+							"mModifiedGameCalculation": "PhysicalDamagePerWave",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -361,7 +381,8 @@
 												"mLevel": 30,
 												"mAdditionalBonusAtThisLevel": 0.1
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -369,9 +390,11 @@
 						},
 						"MinionDamage": {
 							"mMultiplier": {
-								"mNumber": 0.5
+								"mNumber": 0.5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

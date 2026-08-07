@@ -65,7 +65,8 @@
 									"mStat": 2,
 									"mStatFormula": 2,
 									"mSubpart": {
-										"mDataValue": "BADRatio"
+										"mDataValue": "BADRatio",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -245,10 +246,12 @@
 						},
 						"RDamageTotal": {
 							"mMultiplier": {
-								"mNumber": 4
+								"mNumber": 4,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "PassiveDamageTotal"
+							"mModifiedGameCalculation": "PassiveDamageTotal",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

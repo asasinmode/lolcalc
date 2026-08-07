@@ -136,9 +136,11 @@
 						},
 						"TotalMaxDamage": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -252,10 +254,12 @@
 						},
 						"MaxDamage": {
 							"mMultiplier": {
-								"mNumber": 5
+								"mNumber": 5,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "RMultiHitAmplification"
+							"mModifiedGameCalculation": "RMultiHitAmplification",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -327,10 +331,12 @@
 						},
 						"EmpoweredAS": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "BonusAS"
+							"mModifiedGameCalculation": "BonusAS",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

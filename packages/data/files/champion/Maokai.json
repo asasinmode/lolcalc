@@ -249,11 +249,14 @@
 									"mStatFormula": 2,
 									"mSubpart": {
 										"mPart1": {
-											"mNumber": 0.01
+											"mNumber": 0.01,
+											"__type": "NumberCalculationPart"
 										},
 										"mPart2": {
-											"mNumber": 0.01
-										}
+											"mNumber": 0.01,
+											"__type": "NumberCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -366,7 +369,8 @@
 												"mLevel": 7,
 												"mBonusPerLevelAtAndAfter": 0.0065
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

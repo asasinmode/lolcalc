@@ -327,10 +327,12 @@
 						},
 						"ReducedDamageFinal": {
 							"mMultiplier": {
-								"mDataValue": "ReducedDamage"
+								"mDataValue": "ReducedDamage",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "RDamage"
+							"mModifiedGameCalculation": "RDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

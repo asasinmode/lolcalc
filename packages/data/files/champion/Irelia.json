@@ -187,9 +187,11 @@
 						},
 						"FinalMagicDR": {
 							"mMultiplier": {
-								"mDataValue": "MRReductionAmount"
+								"mDataValue": "MRReductionAmount",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "FinalPhysicalDR"
+							"mModifiedGameCalculation": "FinalPhysicalDR",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

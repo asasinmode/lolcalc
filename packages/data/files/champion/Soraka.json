@@ -236,14 +236,18 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
-										"mDataValue": "HealingAmpForLowHealthAllies"
+										"mDataValue": "HealingAmpForLowHealthAllies",
+										"__type": "NamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "HealingCalc"
+							"mModifiedGameCalculation": "HealingCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

@@ -293,10 +293,12 @@
 						},
 						"OnHitDamage": {
 							"mMultiplier": {
-								"mDataValue": "AlreadyStunnedDamageAmp"
+								"mDataValue": "AlreadyStunnedDamageAmp",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"StunCD": {
 							"mFormulaParts": [

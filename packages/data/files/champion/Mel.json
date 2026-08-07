@@ -87,17 +87,21 @@
 								},
 								{
 									"mPart1": {
-										"mSpellCalculationKey": "TotalExplosionDamage"
+										"mSpellCalculationKey": "TotalExplosionDamage",
+										"__type": "{f3cbe7b2}"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mDataValue": "ExplosionCount"
+												"mDataValue": "ExplosionCount",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -111,15 +115,19 @@
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "MinionMod"
-											}
+												"mDataValue": "MinionMod",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -280,15 +288,19 @@
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "MinionMod"
-											}
+												"mDataValue": "MinionMod",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -395,15 +407,19 @@
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "MinionMod"
-											}
+												"mDataValue": "MinionMod",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"

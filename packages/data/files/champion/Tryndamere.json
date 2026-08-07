@@ -101,17 +101,21 @@
 								{
 									"mPart1": {
 										"mCoefficient": 1,
-										"mAbilityResource": 4
+										"mAbilityResource": 4,
+										"__type": "AbilityResourceByCoefficientCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mDataValue": "BonusHealPerFury"
+												"mDataValue": "BonusHealPerFury",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
-												"mDataValue": "APRatioPerFury"
+												"mDataValue": "APRatioPerFury",
+												"__type": "StatByNamedDataValueCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -258,7 +262,8 @@
 						},
 						"{dc63b617}": {
 							"mMultiplier": {
-								"mNumber": 0.1
+								"mNumber": 0.1,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{

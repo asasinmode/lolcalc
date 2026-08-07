@@ -138,7 +138,8 @@
 					"spellCalculations": {
 						"MissingHealthPercent": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -168,10 +169,12 @@
 							"mMultiplier": {
 								"{a8cb9c14}": true,
 								"mStat": 15,
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "StatByCoefficientCalculationPart"
 							},
 							"{72c5c2a8}": 1,
-							"mModifiedGameCalculation": "MissingHealthPercent"
+							"mModifiedGameCalculation": "MissingHealthPercent",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -339,7 +342,8 @@
 						},
 						"ThreeHitDamage": {
 							"mMultiplier": {
-								"mDataValue": "ModesMultiplier"
+								"mDataValue": "ModesMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{

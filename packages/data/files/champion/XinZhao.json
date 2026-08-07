@@ -120,13 +120,16 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mStat": 8,
-										"mDataValue": "CritChanceAmp"
+										"mDataValue": "CritChanceAmp",
+										"__type": "StatByNamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -327,7 +330,8 @@
 												"mLevel": 26,
 												"mAdditionalBonusAtThisLevel": 0.15
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
@@ -355,7 +359,8 @@
 												"mLevel": 26,
 												"mAdditionalBonusAtThisLevel": 0.05
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -367,13 +372,15 @@
 								{
 									"mStat": 12,
 									"mSubpart": {
-										"mSpellCalculationKey": "HealHPRatio"
+										"mSpellCalculationKey": "HealHPRatio",
+										"__type": "{f3cbe7b2}"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
 								{
 									"mSubpart": {
-										"mSpellCalculationKey": "HealAPRatio"
+										"mSpellCalculationKey": "HealAPRatio",
+										"__type": "{f3cbe7b2}"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

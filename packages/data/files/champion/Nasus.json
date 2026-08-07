@@ -79,18 +79,22 @@
 								{
 									"mPart1": {
 										"mStat": 9,
-										"mCoefficient": 1
+										"mCoefficient": 1,
+										"__type": "StatByCoefficientCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mDataValue": "BonusDamage"
+												"mDataValue": "BonusDamage",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
 												"mStat": 2,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								},
@@ -170,7 +174,8 @@
 					"spellCalculations": {
 						"TotalDotDamage": {
 							"mMultiplier": {
-								"mDataValue": "Duration"
+								"mDataValue": "Duration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,

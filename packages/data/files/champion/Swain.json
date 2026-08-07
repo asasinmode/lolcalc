@@ -69,15 +69,19 @@
 						},
 						"ExtraBoltDamage": {
 							"mMultiplier": {
-								"mDataValue": "ExtraBoltRatio"
+								"mDataValue": "ExtraBoltRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "InitialDamage"
+							"mModifiedGameCalculation": "InitialDamage",
+							"__type": "GameCalculationModified"
 						},
 						"MaxDamage": {
 							"mMultiplier": {
-								"mDataValue": "MaxDamageMultiTOOLTIP"
+								"mDataValue": "MaxDamageMultiTOOLTIP",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "InitialDamage"
+							"mModifiedGameCalculation": "InitialDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -133,9 +137,11 @@
 						},
 						"MinionDamage": {
 							"mMultiplier": {
-								"mDataValue": "MinionMod"
+								"mDataValue": "MinionMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -280,9 +286,11 @@
 						},
 						"MinionMonsterHeal": {
 							"mMultiplier": {
-								"mDataValue": "MinionMonsterHealReduction"
+								"mDataValue": "MinionMonsterHealReduction",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "HealingCalc"
+							"mModifiedGameCalculation": "HealingCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -316,9 +324,11 @@
 						"PassiveHealCalculated": {
 							"mMultiplier": {
 								"mStat": 12,
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "StatByCoefficientCalculationPart"
 							},
-							"mModifiedGameCalculation": "PassiveHealPercent"
+							"mModifiedGameCalculation": "PassiveHealPercent",
+							"__type": "GameCalculationModified"
 						},
 						"MaxHealthGained": {
 							"mExpandedTooltipCalculationDisplay": 5,

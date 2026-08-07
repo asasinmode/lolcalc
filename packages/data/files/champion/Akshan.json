@@ -184,14 +184,17 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mStat": 4,
 										"mStatFormula": 2,
-										"mDataValue": "AttackSpeedCoefficient"
+										"mDataValue": "AttackSpeedCoefficient",
+										"__type": "StatByNamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -209,27 +212,35 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
-											"mDataValue": "CritDamageMod"
+											"mDataValue": "CritDamageMod",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamageToDeal"
+							"mModifiedGameCalculation": "DamageToDeal",
+							"__type": "GameCalculationModified"
 						},
 						"{36ebd3cf}": {
 							"mFormulaParts": [
@@ -280,34 +291,43 @@
 					"spellCalculations": {
 						"MaxDamagePerBullet": {
 							"mMultiplier": {
-								"mDataValue": "MaxIncrease"
+								"mDataValue": "MaxIncrease",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamagePerBulletWithCrit"
+							"mModifiedGameCalculation": "DamagePerBulletWithCrit",
+							"__type": "GameCalculationModified"
 						},
 						"DamagePerBulletWithCrit": {
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "CritDamageMod"
+											"mDataValue": "CritDamageMod",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -433,42 +453,54 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mStat": 4,
 										"mStatFormula": 2,
-										"mCoefficient": 1
+										"mCoefficient": 1,
+										"__type": "StatByCoefficientCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "MS"
+							"mModifiedGameCalculation": "MS",
+							"__type": "GameCalculationModified"
 						},
 						"{82593567}": {
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
-											"mDataValue": "SecondAutoCritRatio"
+											"mDataValue": "SecondAutoCritRatio",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "SecondAutoDamage"
+							"mModifiedGameCalculation": "SecondAutoDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

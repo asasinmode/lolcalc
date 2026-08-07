@@ -69,10 +69,12 @@
 						},
 						"ApproximateTotalDamageTooltip": {
 							"mMultiplier": {
-								"mNumber": 4.75
+								"mNumber": 4.75,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DamagePerSecond"
+							"mModifiedGameCalculation": "DamagePerSecond",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

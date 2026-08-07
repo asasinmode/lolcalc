@@ -82,10 +82,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mSpellCalculationKey": "TotalDamage"
+										"mSpellCalculationKey": "TotalDamage",
+										"__type": "{f3cbe7b2}"
 									},
 									"mPart2": {
-										"mNumber": 2
+										"mNumber": 2,
+										"__type": "NumberCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -97,17 +99,21 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "HPCost"
+										"mDataValue": "HPCost",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
 											"mStat": 12,
-											"mCoefficient": 1
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
 										},
 										"mPart2": {
 											"mStat": 14,
-											"mCoefficient": 1
-										}
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -163,7 +169,8 @@
 					"spellCalculations": {
 						"DisplayPercentDamage": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mFormulaParts": [
@@ -185,17 +192,21 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "HPCost"
+										"mDataValue": "HPCost",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
 											"mStat": 12,
-											"mCoefficient": 1
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
 										},
 										"mPart2": {
 											"mStat": 14,
-											"mCoefficient": 1
-										}
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -251,10 +262,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "MinimumStun"
+										"mDataValue": "MinimumStun",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mNumber": 2
+										"mNumber": 2,
+										"__type": "NumberCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -278,17 +291,21 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "HPCost"
+										"mDataValue": "HPCost",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
 											"mStat": 12,
-											"mCoefficient": 1
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
 										},
 										"mPart2": {
 											"mStat": 14,
-											"mCoefficient": 1
-										}
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -357,9 +374,11 @@
 						},
 						"DamagePerSubsequentBounce": {
 							"mMultiplier": {
-								"mDataValue": "DamageReductionBounce"
+								"mDataValue": "DamageReductionBounce",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamagePerBounce"
+							"mModifiedGameCalculation": "DamagePerBounce",
+							"__type": "GameCalculationModified"
 						},
 						"DurationTooltip": {
 							"mSimpleTooltipCalculationDisplay": 5,
@@ -367,17 +386,21 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "TimeBetweenBounces"
+										"mDataValue": "TimeBetweenBounces",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mDataValue": "Bounces"
+												"mDataValue": "Bounces",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -400,26 +423,34 @@
 										"mPart1": {
 											"mSubparts": [
 												{
-													"mDataValue": "BaseDamageBounce"
+													"mDataValue": "BaseDamageBounce",
+													"__type": "NamedDataValueCalculationPart"
 												},
 												{
-													"mDataValue": "BounceAPRatioTooltip"
+													"mDataValue": "BounceAPRatioTooltip",
+													"__type": "StatByNamedDataValueCalculationPart"
 												}
-											]
+											],
+											"__type": "SumOfSubPartsCalculationPart"
 										},
 										"mPart2": {
-											"mDataValue": "DamageReductionBounce"
-										}
+											"mDataValue": "DamageReductionBounce",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mDataValue": "Bounces"
+												"mDataValue": "Bounces",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -485,9 +516,11 @@
 						"TotalHeal": {
 							"mMultiplier": {
 								"mStat": 12,
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "StatByCoefficientCalculationPart"
 							},
-							"mModifiedGameCalculation": "HealPercent"
+							"mModifiedGameCalculation": "HealPercent",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

@@ -196,11 +196,13 @@
 						},
 						"ReducedDamage": {
 							"mMultiplier": {
-								"mDataValue": "SubsequentMineDamageMod"
+								"mDataValue": "SubsequentMineDamageMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -256,9 +258,11 @@
 						},
 						"BlastDamage": {
 							"mMultiplier": {
-								"mDataValue": "OuterRingModifier"
+								"mDataValue": "OuterRingModifier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "EmpoweredDamage"
+							"mModifiedGameCalculation": "EmpoweredDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -324,10 +328,12 @@
 						},
 						"StructureDamage": {
 							"mMultiplier": {
-								"mDataValue": "StructureDamageRatio"
+								"mDataValue": "StructureDamageRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

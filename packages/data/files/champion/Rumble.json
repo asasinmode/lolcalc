@@ -75,20 +75,25 @@
 						},
 						"MinionDamage": {
 							"mMultiplier": {
-								"mDataValue": "MinionMod"
+								"mDataValue": "MinionMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "FlatDamage"
+							"mModifiedGameCalculation": "FlatDamage",
+							"__type": "GameCalculationModified"
 						},
 						"EmpoweredDamage": {
 							"mMultiplier": {
-								"mDataValue": "OverheatMulti"
+								"mDataValue": "OverheatMulti",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "FlatDamage"
+							"mModifiedGameCalculation": "FlatDamage",
+							"__type": "GameCalculationModified"
 						},
 						"EmpoweredHealth": {
 							"mMultiplier": {
-								"mDataValue": "OverheatMulti"
+								"mDataValue": "OverheatMulti",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
@@ -163,14 +168,17 @@
 						},
 						"EmpoweredShield": {
 							"mMultiplier": {
-								"mNumber": 1.5
+								"mNumber": 1.5,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "TotalShield"
+							"mModifiedGameCalculation": "TotalShield",
+							"__type": "GameCalculationModified"
 						},
 						"EmpoweredMS": {
 							"mMultiplier": {
-								"mNumber": 1.5
+								"mNumber": 1.5,
+								"__type": "NumberCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"tooltipOnly": true,
@@ -242,9 +250,11 @@
 						},
 						"EmpDamage": {
 							"mMultiplier": {
-								"mNumber": 1.5
+								"mNumber": 1.5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -290,10 +300,12 @@
 						},
 						"TotalDamage": {
 							"mMultiplier": {
-								"mDataValue": "TrailDuration"
+								"mDataValue": "TrailDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DamagePerSecond"
+							"mModifiedGameCalculation": "DamagePerSecond",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

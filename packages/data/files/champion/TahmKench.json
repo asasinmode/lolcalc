@@ -265,7 +265,8 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "DataCooldown"
+										"mDataValue": "DataCooldown",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -319,11 +320,14 @@
 										"mPart1": {
 											"mStat": 12,
 											"mStatFormula": 2,
-											"mDataValue": "APRatioPer100BonusHP"
+											"mDataValue": "APRatioPer100BonusHP",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
-											"mNumber": 0.01
-										}
+											"mNumber": 0.01,
+											"__type": "NumberCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

@@ -107,16 +107,20 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
-										"mDataValue": "QSweetSpotBonus"
+										"mDataValue": "QSweetSpotBonus",
+										"__type": "NamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "QDamage"
+							"mModifiedGameCalculation": "QDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true
@@ -196,7 +200,8 @@
 					"spellCalculations": {
 						"TotalEVamp": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{

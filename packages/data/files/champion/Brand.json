@@ -109,10 +109,12 @@
 						},
 						"EmpoweredDamage": {
 							"mMultiplier": {
-								"mNumber": 1.25
+								"mNumber": 1.25,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -260,7 +262,8 @@
 						},
 						"ExplosionDamage": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -280,10 +283,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "EpicMonsterDPSCap"
+										"mDataValue": "EpicMonsterDPSCap",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mNumber": 0.25
+										"mNumber": 0.25,
+										"__type": "NumberCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -293,10 +298,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "JungleMonsterDPSCap"
+										"mDataValue": "JungleMonsterDPSCap",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mNumber": 0.25
+										"mNumber": 0.25,
+										"__type": "NumberCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

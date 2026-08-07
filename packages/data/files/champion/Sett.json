@@ -85,10 +85,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "MaxHealthTADRatio"
+										"mDataValue": "MaxHealthTADRatio",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mNumber": 100
+										"mNumber": 100,
+										"__type": "NumberCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -175,16 +177,20 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mDataValue": "DamageConversionBase"
+										"mDataValue": "DamageConversionBase",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									{
 										"mStat": 2,
 										"mStatFormula": 2,
-										"mCoefficient": 0.1
+										"mCoefficient": 0.1,
+										"__type": "StatByCoefficientCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "MaxGrit"
+							"mModifiedGameCalculation": "MaxGrit",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -385,7 +391,8 @@
 						},
 						"{7733e08c}": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 4,
 							"mExpandedTooltipCalculationDisplay": 4,
@@ -440,10 +447,12 @@
 						},
 						"tooltipregenpermissinghealthcalc": {
 							"mMultiplier": {
-								"mNumber": 5
+								"mNumber": 5,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{7733e08c}"
+							"mModifiedGameCalculation": "{7733e08c}",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

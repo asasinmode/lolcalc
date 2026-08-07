@@ -159,10 +159,12 @@
 						},
 						"EmpoweredDamage": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -233,14 +235,18 @@
 									{
 										"mSubparts": [
 											{
-												"mDataValue": "AdditionalSlowPercentAtMax"
+												"mDataValue": "AdditionalSlowPercentAtMax",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
-												"mNumber": 1
+												"mNumber": 1,
+												"__type": "NumberCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
@@ -252,11 +258,13 @@
 						},
 						"EmpoweredDamagePerSecondTooltipOnly": {
 							"mMultiplier": {
-								"mNumber": 3
+								"mNumber": 3,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "TotalDamagePerSecond"
+							"mModifiedGameCalculation": "TotalDamagePerSecond",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -304,11 +312,13 @@
 						},
 						"BonusResistsTooltip": {
 							"mMultiplier": {
-								"mNumber": -1
+								"mNumber": -1,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mExpandedTooltipCalculationDisplay": 1,
-							"mModifiedGameCalculation": "BonusResists"
+							"mModifiedGameCalculation": "BonusResists",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

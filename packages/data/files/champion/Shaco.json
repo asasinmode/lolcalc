@@ -78,23 +78,29 @@
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mDataValue": "NonCritBackstabMod"
+												"mDataValue": "NonCritBackstabMod",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"mPart2": {
 												"mSubparts": [
 													{
 														"mStat": 9,
-														"mCoefficient": 1
+														"mCoefficient": 1,
+														"__type": "StatByCoefficientCalculationPart"
 													},
 													{
-														"mNumber": -1
+														"mNumber": -1,
+														"__type": "NumberCalculationPart"
 													}
-												]
-											}
+												],
+												"__type": "SumOfSubPartsCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
@@ -247,9 +253,11 @@
 						},
 						"TotalExecuteDamage": {
 							"mMultiplier": {
-								"mDataValue": "ExecuteDamagePercent"
+								"mDataValue": "ExecuteDamagePercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -362,14 +370,17 @@
 									"mSubpart": {
 										"mSubparts": [
 											{
-												"mDataValue": "MonsterCritMod"
+												"mDataValue": "MonsterCritMod",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											{
 												"mStat": 9,
 												"mStatFormula": 2,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
@@ -409,9 +420,11 @@
 						},
 						"ShivDamageExecute": {
 							"mMultiplier": {
-								"mDataValue": "ShivExecuteDamagePercent"
+								"mDataValue": "ShivExecuteDamagePercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "ShivDamage"
+							"mModifiedGameCalculation": "ShivDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

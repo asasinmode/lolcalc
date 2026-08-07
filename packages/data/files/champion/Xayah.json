@@ -72,9 +72,11 @@
 						},
 						"MultiHitDamage": {
 							"mMultiplier": {
-								"mDataValue": "MultiHitRatio"
+								"mDataValue": "MultiHitRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -160,26 +162,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "CritRatio"
+											"mDataValue": "CritRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -196,9 +205,11 @@
 						},
 						"MinionDamage": {
 							"mMultiplier": {
-								"mDataValue": "MinionMultiplier"
+								"mDataValue": "MinionMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "FeatherDamage"
+							"mModifiedGameCalculation": "FeatherDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true

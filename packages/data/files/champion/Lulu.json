@@ -72,7 +72,8 @@
 						},
 						"BonusMissileDamage": {
 							"mMultiplier": {
-								"mDataValue": "DoubleHitBonus"
+								"mDataValue": "DoubleHitBonus",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -286,9 +287,11 @@
 						},
 						"CombinedDamage": {
 							"mMultiplier": {
-								"mDataValue": "NumberOfBolts"
+								"mDataValue": "NumberOfBolts",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

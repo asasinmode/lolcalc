@@ -268,7 +268,8 @@
 					"spellCalculations": {
 						"ZoneDamageTooltip": {
 							"mMultiplier": {
-								"mNumber": 0.05
+								"mNumber": 0.05,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"mFormulaParts": [

@@ -74,7 +74,8 @@
 						},
 						"{0f87e4ba}": {
 							"mMultiplier": {
-								"mDataValue": "MinionMonsterDurationMod"
+								"mDataValue": "MinionMonsterDurationMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -189,22 +190,28 @@
 						},
 						"TotalDotDamage": {
 							"mMultiplier": {
-								"mDataValue": "PoisonDuration"
+								"mDataValue": "PoisonDuration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "TickCalculatedDamage"
+							"mModifiedGameCalculation": "TickCalculatedDamage",
+							"__type": "GameCalculationModified"
 						},
 						"{8b70cfd6}": {
 							"mMultiplier": {
-								"mDataValue": "monstermod"
+								"mDataValue": "monstermod",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "ImpactCalculatedDamage"
+							"mModifiedGameCalculation": "ImpactCalculatedDamage",
+							"__type": "GameCalculationModified"
 						},
 						"{938cba49}": {
 							"mMultiplier": {
-								"mDataValue": "monstermod"
+								"mDataValue": "monstermod",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TickCalculatedDamage"
+							"mModifiedGameCalculation": "TickCalculatedDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

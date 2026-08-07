@@ -67,10 +67,12 @@
 						},
 						"QSingleTargetDamage": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "QDamage"
+							"mModifiedGameCalculation": "QDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -161,9 +163,11 @@
 						},
 						"{57456bbc}": {
 							"mMultiplier": {
-								"mNumber": 0.25
+								"mNumber": 0.25,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDPS"
+							"mModifiedGameCalculation": "TotalDPS",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {

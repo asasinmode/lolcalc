@@ -273,7 +273,8 @@
 									"mStat": 2,
 									"mSubpart": {
 										"mStartValue": 0.3,
-										"mEndValue": 0.45
+										"mEndValue": 0.45,
+										"__type": "ByCharLevelInterpolationCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

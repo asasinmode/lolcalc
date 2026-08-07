@@ -150,7 +150,8 @@
 						},
 						"TotalMaxDamageSecondCast": {
 							"mMultiplier": {
-								"mDataValue": "ExecuteMultiplier"
+								"mDataValue": "ExecuteMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -330,9 +331,11 @@
 						},
 						"PackmateDamage": {
 							"mMultiplier": {
-								"mDataValue": "PackmateModifier"
+								"mDataValue": "PackmateModifier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"ArmorShred": {
 							"mFormulaParts": [
@@ -476,9 +479,11 @@
 						},
 						"FrenzyDamageTooltipOnly": {
 							"mMultiplier": {
-								"mDataValue": "PackmateFrenzyDamageMult"
+								"mDataValue": "PackmateFrenzyDamageMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "PackmateTotalDamage"
+							"mModifiedGameCalculation": "PackmateTotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"AOEDamageModifier": {
 							"mFormulaParts": [

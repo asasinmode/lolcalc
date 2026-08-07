@@ -95,11 +95,13 @@
 						},
 						"EmpoweredDamage": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "RecastDamage"
+							"mModifiedGameCalculation": "RecastDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -280,10 +282,12 @@
 						},
 						"TTFirstHitEnergy": {
 							"mMultiplier": {
-								"mDataValue": "FirstHitEnergyMult"
+								"mDataValue": "FirstHitEnergyMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "EnergyReturn"
+							"mModifiedGameCalculation": "EnergyReturn",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

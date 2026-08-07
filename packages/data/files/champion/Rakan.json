@@ -81,7 +81,8 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "BaseCDActual"
+										"mDataValue": "BaseCDActual",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

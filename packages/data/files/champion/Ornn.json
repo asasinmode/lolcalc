@@ -136,10 +136,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "MinimumDamagePerTick"
+										"mDataValue": "MinimumDamagePerTick",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "NumberOfTicks"
+										"mDataValue": "NumberOfTicks",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -147,7 +149,8 @@
 						},
 						"TotalMonsterDamageCap": {
 							"mMultiplier": {
-								"mDataValue": "NumberOfTicks"
+								"mDataValue": "NumberOfTicks",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
@@ -270,10 +273,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "RStunDuration"
+										"mDataValue": "RStunDuration",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "RStunReduction"
+										"mDataValue": "RStunReduction",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

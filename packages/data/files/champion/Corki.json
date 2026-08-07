@@ -242,13 +242,16 @@
 						},
 						"RBigMissileDamage": {
 							"mMultiplier": {
-								"mDataValue": "RBigOneMultiplier"
+								"mDataValue": "RBigOneMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "RSmallMissileDamage"
+							"mModifiedGameCalculation": "RSmallMissileDamage",
+							"__type": "GameCalculationModified"
 						},
 						"AttackRefund": {
 							"mMultiplier": {
-								"mDataValue": "CDReductionOnHit"
+								"mDataValue": "CDReductionOnHit",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -297,9 +300,11 @@
 						"CriticalStrikeTOOLTIP": {
 							"mMultiplier": {
 								"mStat": 9,
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "StatByCoefficientCalculationPart"
 							},
-							"mModifiedGameCalculation": "BasicAttackTOOLTIP"
+							"mModifiedGameCalculation": "BasicAttackTOOLTIP",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

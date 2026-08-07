@@ -65,26 +65,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "CritRatio"
+											"mDataValue": "CritRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -191,16 +198,20 @@
 									"mSubparts": [
 										{
 											"mStat": 2,
-											"mCoefficient": 1
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mDataValue": "MaxBounces"
+												"mDataValue": "MaxBounces",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"mPart2": {
 												"mStat": 2,
-												"mDataValue": "BounceADRatio"
-											}
+												"mDataValue": "BounceADRatio",
+												"__type": "StatByNamedDataValueCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"

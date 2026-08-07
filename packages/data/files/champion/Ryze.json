@@ -263,7 +263,8 @@
 						},
 						"PassiveManaCalcTooltip": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{

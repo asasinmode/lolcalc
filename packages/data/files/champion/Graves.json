@@ -170,7 +170,8 @@
 					"spellCalculations": {
 						"MRGrant": {
 							"mMultiplier": {
-								"mDataValue": "MRGrantPercent"
+								"mDataValue": "MRGrantPercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
@@ -277,7 +278,8 @@
 								{
 									"mStat": 2,
 									"mSubpart": {
-										"values": [0, 0.7000018, 0.7112978, 0.723388, 0.7362725, 0.7499512, 0.7644243, 0.7796915, 0.795753, 0.8126088, 0.8302587, 0.848703, 0.8679415, 0.8879743, 0.9088013, 0.9304225, 0.952838, 0.9760478, 1.000052, 1.02485, 1.050442, 1.076829, 1.10401, 1.131986, 1.160755, 1.190319, 1.220677, 1.251829, 1.283775, 1.316516, 1.350051]
+										"values": [0, 0.7000018, 0.7112978, 0.723388, 0.7362725, 0.7499512, 0.7644243, 0.7796915, 0.795753, 0.8126088, 0.8302587, 0.848703, 0.8679415, 0.8879743, 0.9088013, 0.9304225, 0.952838, 0.9760478, 1.000052, 1.02485, 1.050442, 1.076829, 1.10401, 1.131986, 1.160755, 1.190319, 1.220677, 1.251829, 1.283775, 1.316516, 1.350051],
+										"__type": "ByCharLevelFormulaCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -285,27 +287,33 @@
 						},
 						"MultiBulletDamage": {
 							"mMultiplier": {
-								"mNumber": 0.333
+								"mNumber": 0.333,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "SingleBulletDamage"
+							"mModifiedGameCalculation": "SingleBulletDamage",
+							"__type": "GameCalculationModified"
 						},
 						"CritDamageMult": {
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "CritDamageRatio"
+										"mDataValue": "CritDamageRatio",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											},
 											{
 												"mStat": 9,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

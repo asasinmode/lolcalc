@@ -262,7 +262,8 @@
 					"spellCalculations": {
 						"MoveSpeedMultiplier": {
 							"mMultiplier": {
-								"mNumber": 0.001
+								"mNumber": 0.001,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -278,7 +279,8 @@
 						},
 						"{c3169619}": {
 							"mMultiplier": {
-								"mDataValue": "DashSpeedDivisor"
+								"mDataValue": "DashSpeedDivisor",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -304,22 +306,27 @@
 						},
 						"{5728f7e1}": {
 							"mMultiplier": {
-								"mDataValue": "ModesAStoADRatio"
+								"mDataValue": "ModesAStoADRatio",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
 									"mSubparts": [
 										{
 											"mPart1": {
-												"mDataValue": "ModesASCap"
+												"mDataValue": "ModesASCap",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"mPart2": {
-												"mNumber": -1
-											}
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										},
 										{
 											"mStat": 4,
-											"mCoefficient": 1
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
 										}
 									],
 									"__type": "ClampSubPartsCalculationPart"

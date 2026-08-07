@@ -318,33 +318,43 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mSubparts": [
 												{
-													"mDataValue": "NumberOfWaves"
+													"mDataValue": "NumberOfWaves",
+													"__type": "NamedDataValueCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
+											],
+											"__type": "SumOfSubPartsCalculationPart"
 										},
 										"mPart2": {
-											"mDataValue": "MultiMissileReduction"
-										}
+											"mDataValue": "MultiMissileReduction",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalMissileDamage"
+							"mModifiedGameCalculation": "TotalMissileDamage",
+							"__type": "GameCalculationModified"
 						},
 						"MultiMissileTotal": {
 							"mMultiplier": {
-								"mDataValue": "MultiMissileReduction"
+								"mDataValue": "MultiMissileReduction",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalMissileDamage"
+							"mModifiedGameCalculation": "TotalMissileDamage",
+							"__type": "GameCalculationModified"
 						},
 						"TotalHealPerWave": {
 							"mFormulaParts": [
@@ -360,9 +370,11 @@
 						},
 						"EnhancedHealPerWave": {
 							"mMultiplier": {
-								"mSpellCalculationKey": "AllyHealingPerc"
+								"mSpellCalculationKey": "AllyHealingPerc",
+								"__type": "{f3cbe7b2}"
 							},
-							"mModifiedGameCalculation": "TotalHealPerWave"
+							"mModifiedGameCalculation": "TotalHealPerWave",
+							"__type": "GameCalculationModified"
 						},
 						"AllyHealingPerc": {
 							"mFormulaParts": [

@@ -123,7 +123,8 @@
 												"mLevel": 13,
 												"mAdditionalBonusAtThisLevel": 0.03
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
@@ -180,9 +181,11 @@
 						},
 						"{ee06b7fb}": {
 							"mMultiplier": {
-								"mNumber": 0.4
+								"mNumber": 0.4,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "BonusDamagePerMark"
+							"mModifiedGameCalculation": "BonusDamagePerMark",
+							"__type": "GameCalculationModified"
 						}
 					}
 				},
@@ -203,7 +206,8 @@
 					"spellCalculations": {
 						"NumAttacks": {
 							"mMultiplier": {
-								"mDataValue": "StartingAttacks"
+								"mDataValue": "StartingAttacks",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 0,
 							"mFormulaParts": [
@@ -250,7 +254,8 @@
 												"mLevel": 13,
 												"mAdditionalBonusAtThisLevel": 0.035
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -286,11 +291,14 @@
 											"mLevel": 13,
 											"mAdditionalBonusAtThisLevel": 0.035
 										}
-									]
-								}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								"__type": "StatBySubPartCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 0,
-							"mModifiedGameCalculation": "NumAttacks"
+							"mModifiedGameCalculation": "NumAttacks",
+							"__type": "GameCalculationModified"
 						},
 						"Haste": {
 							"mFormulaParts": [
@@ -424,9 +432,11 @@
 						},
 						"HealAmountSpell": {
 							"mMultiplier": {
-								"mNumber": 2.5
+								"mNumber": 2.5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "HealAmount"
+							"mModifiedGameCalculation": "HealAmount",
+							"__type": "GameCalculationModified"
 						}
 					}
 				},
@@ -533,7 +543,8 @@
 												"mLevel": 13,
 												"mAdditionalBonusAtThisLevel": 0.03
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
@@ -691,7 +702,8 @@
 												"mLevel": 13,
 												"mAdditionalBonusAtThisLevel": 0.01
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
@@ -703,7 +715,8 @@
 						},
 						"AttackDamage": {
 							"mMultiplier": {
-								"mDataValue": "InfernumDamageMultiplier"
+								"mDataValue": "InfernumDamageMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -739,11 +752,13 @@
 						},
 						"SecondaryMinionPenalty": {
 							"mMultiplier": {
-								"mDataValue": "MinionPenaltyBase"
+								"mDataValue": "MinionPenaltyBase",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "SecondaryTargetPenalty"
+							"mModifiedGameCalculation": "SecondaryTargetPenalty",
+							"__type": "GameCalculationModified"
 						}
 					}
 				},
@@ -864,7 +879,8 @@
 												"mLevel": 13,
 												"mAdditionalBonusAtThisLevel": 0.03
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								},
@@ -1070,24 +1086,30 @@
 								},
 								{
 									"mPart1": {
-										"mDataValue": "CritDamageMod"
+										"mDataValue": "CritDamageMod",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
 											"mStat": 8,
-											"mCoefficient": 1
+											"mCoefficient": 1,
+											"__type": "StatByCoefficientCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -1152,10 +1174,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "MaxRanksPerStat"
+										"mDataValue": "MaxRanksPerStat",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "ASPerRank"
+										"mDataValue": "ASPerRank",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -1177,10 +1201,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "MaxRanksPerStat"
+										"mDataValue": "MaxRanksPerStat",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "ADPerRank"
+										"mDataValue": "ADPerRank",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -1202,10 +1228,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "MaxRanksPerStat"
+										"mDataValue": "MaxRanksPerStat",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "APPerRank"
+										"mDataValue": "APPerRank",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

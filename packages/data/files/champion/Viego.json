@@ -73,26 +73,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "ActiveCritMod"
+											"mDataValue": "ActiveCritMod",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -121,7 +128,8 @@
 						},
 						"TotalPercentHealthOnHit": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
@@ -135,11 +143,14 @@
 						"HealthCritDamage": {
 							"mMultiplier": {
 								"mPart1": {
-									"mNumber": 0.01
+									"mNumber": 0.01,
+									"__type": "NumberCalculationPart"
 								},
 								"mPart2": {
-									"mDataValue": "PercentHealthOnHit"
-								}
+									"mDataValue": "PercentHealthOnHit",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
@@ -149,18 +160,22 @@
 								},
 								{
 									"mPart1": {
-										"mDataValue": "HealthCritMod"
+										"mDataValue": "HealthCritMod",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
 										"mSubparts": [
 											{
 												"mStat": 9,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											},
 											{
-												"mNumber": -1
+												"mNumber": -1,
+												"__type": "NumberCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -302,26 +317,33 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "CritMod"
+											"mDataValue": "CritMod",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										"mPart2": {
 											"mSubparts": [
 												{
 													"mStat": 9,
-													"mCoefficient": 1
+													"mCoefficient": 1,
+													"__type": "StatByCoefficientCalculationPart"
 												},
 												{
-													"mNumber": -1
+													"mNumber": -1,
+													"__type": "NumberCalculationPart"
 												}
-											]
-										}
+											],
+											"__type": "SumOfSubPartsCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
 							"mFormulaParts": [
 								{

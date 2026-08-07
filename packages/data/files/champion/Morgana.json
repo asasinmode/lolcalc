@@ -121,14 +121,18 @@
 							"mMultiplier": {
 								"mSubparts": [
 									{
-										"mNumber": 1
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
 									},
 									{
-										"mDataValue": "MissingHealthAmpPercent"
+										"mDataValue": "MissingHealthAmpPercent",
+										"__type": "NamedDataValueCalculationPart"
 									}
-								]
+								],
+								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalMinDamage"
+							"mModifiedGameCalculation": "TotalMinDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

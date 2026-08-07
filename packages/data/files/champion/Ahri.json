@@ -117,10 +117,12 @@
 						},
 						"MultiFireDamage": {
 							"mMultiplier": {
-								"mDataValue": "RepeatDamageMod"
+								"mDataValue": "RepeatDamageMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "SingleFireDamage"
+							"mModifiedGameCalculation": "SingleFireDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

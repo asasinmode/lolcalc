@@ -103,7 +103,8 @@
 					"spellCalculations": {
 						"{c8e45bc3}": {
 							"mMultiplier": {
-								"mNumber": 0.5
+								"mNumber": 0.5,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -127,9 +128,11 @@
 						},
 						"{8a96509c}": {
 							"mMultiplier": {
-								"mNumber": 0.005
+								"mNumber": 0.005,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalHealthDamage"
+							"mModifiedGameCalculation": "TotalHealthDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

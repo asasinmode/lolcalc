@@ -247,9 +247,11 @@
 						},
 						"XPPer5": {
 							"mMultiplier": {
-								"mNumber": 2.5
+								"mNumber": 2.5,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{e359ec0d}"
+							"mModifiedGameCalculation": "{e359ec0d}",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

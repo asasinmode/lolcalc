@@ -137,10 +137,13 @@
 						"DaggerCooldownReduction": {
 							"mMultiplier": {
 								"mPart2": {
-									"mDataValue": "DataCooldown"
-								}
+									"mDataValue": "DataCooldown",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "{016cd4b3}"
+							"mModifiedGameCalculation": "{016cd4b3}",
+							"__type": "GameCalculationModified"
 						},
 						"{016cd4b3}": {
 							"mFormulaParts": [
@@ -246,13 +249,17 @@
 						"TotalDamageCalc": {
 							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "TicksPerSecond"
+									"mDataValue": "TicksPerSecond",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								"mPart2": {
-									"mDataValue": "Duration"
-								}
+									"mDataValue": "Duration",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "DamageCalc"
+							"mModifiedGameCalculation": "DamageCalc",
+							"__type": "GameCalculationModified"
 						},
 						"ADDamageCalc": {
 							"mFormulaParts": [
@@ -263,22 +270,28 @@
 										"mSubparts": [
 											{
 												"mPart1": {
-													"mNumber": 0.16
+													"mNumber": 0.16,
+													"__type": "NumberCalculationPart"
 												},
 												"mPart2": {
 													"mSubparts": [
 														{
-															"mNumber": 1
+															"mNumber": 1,
+															"__type": "NumberCalculationPart"
 														},
 														{
 															"mStat": 4,
 															"mStatFormula": 2,
-															"mCoefficient": 3.125
+															"mCoefficient": 3.125,
+															"__type": "StatByCoefficientCalculationPart"
 														}
-													]
-												}
+													],
+													"__type": "SumOfSubPartsCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -287,13 +300,17 @@
 						"TotalADDamageCalc": {
 							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "TicksPerSecond"
+									"mDataValue": "TicksPerSecond",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								"mPart2": {
-									"mDataValue": "Duration"
-								}
+									"mDataValue": "Duration",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								"__type": "ProductOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "ADDamageCalc"
+							"mModifiedGameCalculation": "ADDamageCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -345,7 +362,8 @@
 												"mLevel": 16,
 												"mAdditionalBonusAtThisLevel": 0.1
 											}
-										]
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}

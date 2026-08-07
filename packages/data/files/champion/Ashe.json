@@ -163,7 +163,8 @@
 							"mFormulaParts": [
 								{
 									"mPart2": {
-										"mDataValue": "BaseCooldown"
+										"mDataValue": "BaseCooldown",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -220,9 +221,11 @@
 						},
 						"{6b932875}": {
 							"mMultiplier": {
-								"mDataValue": "AoeCoefficient"
+								"mDataValue": "AoeCoefficient",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "RMainDamage"
+							"mModifiedGameCalculation": "RMainDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true
@@ -277,14 +280,17 @@
 									"mSubpart": {
 										"mSubparts": [
 											{
-												"mNumber": 1
+												"mNumber": 1,
+												"__type": "NumberCalculationPart"
 											},
 											{
 												"mStat": 9,
 												"mStatFormula": 2,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"__type": "StatBySubPartCalculationPart"
 								}
@@ -294,10 +300,12 @@
 						"{da9201cc}": {
 							"mMultiplier": {
 								"mStat": 2,
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "StatByCoefficientCalculationPart"
 							},
 							"{72c5c2a8}": 0,
-							"mModifiedGameCalculation": "DamageBonus"
+							"mModifiedGameCalculation": "DamageBonus",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

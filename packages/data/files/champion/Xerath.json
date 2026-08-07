@@ -139,9 +139,11 @@
 						},
 						"SweetSpotTotalDamage": {
 							"mMultiplier": {
-								"mDataValue": "SweetSpotMultiplier"
+								"mDataValue": "SweetSpotMultiplier",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -316,9 +318,11 @@
 						},
 						"ChampionManaRestoreTT": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "MinionManaRestoreTT"
+							"mModifiedGameCalculation": "MinionManaRestoreTT",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

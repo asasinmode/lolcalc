@@ -73,10 +73,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "HealthRefundOnHitChampionMonsterPercent"
+										"mDataValue": "HealthRefundOnHitChampionMonsterPercent",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "HealthCost"
+										"mDataValue": "HealthCost",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -88,10 +90,12 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mDataValue": "HealthRefundOnHitMinionPercent"
+										"mDataValue": "HealthRefundOnHitMinionPercent",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"mPart2": {
-										"mDataValue": "HealthCost"
+										"mDataValue": "HealthCost",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -231,7 +235,8 @@
 						},
 						"PassiveBonusAD": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{

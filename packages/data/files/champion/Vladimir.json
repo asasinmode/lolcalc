@@ -78,15 +78,19 @@
 						},
 						"EmpoweredDamageTooltip": {
 							"mMultiplier": {
-								"mNumber": 1.85
+								"mNumber": 1.85,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "BaseDamageTooltip"
+							"mModifiedGameCalculation": "BaseDamageTooltip",
+							"__type": "GameCalculationModified"
 						},
 						"EmpoweredHealPercentTooltip": {
 							"mMultiplier": {
-								"mNumber": 1
+								"mNumber": 1,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "EmpoweredHealPercent"
+							"mModifiedGameCalculation": "EmpoweredHealPercent",
+							"__type": "GameCalculationModified"
 						},
 						"{097cda4f}": {
 							"mFormulaParts": [
@@ -99,13 +103,16 @@
 						},
 						"EmpoweredHealTooltip": {
 							"mMultiplier": {
-								"mNumber": 1
+								"mNumber": 1,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "{097cda4f}"
+							"mModifiedGameCalculation": "{097cda4f}",
+							"__type": "GameCalculationModified"
 						},
 						"EmpoweredHealPercent": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -206,9 +213,11 @@
 						},
 						"TotalHeal": {
 							"mMultiplier": {
-								"mDataValue": "VampPercent"
+								"mDataValue": "VampPercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -332,9 +341,11 @@
 						},
 						"SecondaryHealingTooltip": {
 							"mMultiplier": {
-								"mNumber": 0.4
+								"mNumber": 0.4,
+								"__type": "NumberCalculationPart"
 							},
-							"mModifiedGameCalculation": "Damage"
+							"mModifiedGameCalculation": "Damage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"effectAmount": {
@@ -360,7 +371,8 @@
 					"spellCalculations": {
 						"ApproximateAPBonusAvoidingRecursion": {
 							"mMultiplier": {
-								"mNumber": 1.06
+								"mNumber": 1.06,
+								"__type": "NumberCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
@@ -371,25 +383,33 @@
 											{
 												"mStat": 12,
 												"mStatFormula": 2,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											},
 											{
 												"mPart1": {
-													"mEffectIndex": 2
+													"mEffectIndex": 2,
+													"__type": "EffectValueCalculationPart"
 												},
 												"mPart2": {
-													"mCoefficient": -1
-												}
+													"mCoefficient": -1,
+													"__type": "StatByCoefficientCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
-											"mNumber": 0.01
+											"mNumber": 0.01,
+											"__type": "NumberCalculationPart"
 										},
 										"mPart2": {
-											"mNumber": 3.333
-										}
+											"mNumber": 3.333,
+											"__type": "NumberCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}
@@ -404,32 +424,42 @@
 										"mSubparts": [
 											{
 												"mStatFormula": 2,
-												"mCoefficient": 1
+												"mCoefficient": 1,
+												"__type": "StatByCoefficientCalculationPart"
 											},
 											{
 												"mPart1": {
 													"mPart1": {
-														"mNumber": 0.01
+														"mNumber": 0.01,
+														"__type": "NumberCalculationPart"
 													},
 													"mPart2": {
-														"mNumber": 3.333
-													}
+														"mNumber": 3.333,
+														"__type": "NumberCalculationPart"
+													},
+													"__type": "ProductOfSubPartsCalculationPart"
 												},
 												"mPart2": {
 													"mStat": 12,
 													"mStatFormula": 2,
-													"mCoefficient": -1
-												}
+													"mCoefficient": -1,
+													"__type": "StatByCoefficientCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"mPart2": {
 										"mPart1": {
-											"mNumber": 1.06
+											"mNumber": 1.06,
+											"__type": "NumberCalculationPart"
 										},
 										"mPart2": {
-											"mEffectIndex": 2
-										}
+											"mEffectIndex": 2,
+											"__type": "EffectValueCalculationPart"
+										},
+										"__type": "ProductOfSubPartsCalculationPart"
 									},
 									"__type": "ProductOfSubPartsCalculationPart"
 								}

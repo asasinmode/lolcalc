@@ -104,8 +104,10 @@
 						"FinalDamage": {
 							"mConditionalGameCalculation": "TotalDamage",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{12395d09}"
-							}
+								"mBuffName": "{12395d09}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						}
 					}
 				}
@@ -157,14 +159,17 @@
 						},
 						"MaxDamage": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						},
 						"MaxPercentHealthDamage": {
 							"mMultiplier": {
-								"mNumber": 2
+								"mNumber": 2,
+								"__type": "NumberCalculationPart"
 							},
 							"mExpandedTooltipCalculationDisplay": 5,
 							"tooltipOnly": true,
@@ -294,21 +299,27 @@
 						},
 						"BaseMR": {
 							"mMultiplier": {
-								"mDataValue": "MRMult"
+								"mDataValue": "MRMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BaseArmor"
+							"mModifiedGameCalculation": "BaseArmor",
+							"__type": "GameCalculationModified"
 						},
 						"BonusMR": {
 							"mMultiplier": {
-								"mDataValue": "MRMult"
+								"mDataValue": "MRMult",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BonusArmor"
+							"mModifiedGameCalculation": "BonusArmor",
+							"__type": "GameCalculationModified"
 						},
 						"FinalDamage": {
 							"mConditionalGameCalculation": "OnHitDamage",
 							"mConditionalCalculationRequirements": {
-								"mBuffName": "{1e75ffdf}"
-							}
+								"mBuffName": "{1e75ffdf}",
+								"__type": "HasBuffCastRequirement"
+							},
+							"__type": "GameCalculationConditional"
 						}
 					}
 				}
@@ -368,10 +379,12 @@
 						},
 						"MaxBonusAttackSpeed": {
 							"mMultiplier": {
-								"mDataValue": "MaxStacks"
+								"mDataValue": "MaxStacks",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
-							"mModifiedGameCalculation": "AttackSpeedPerStack"
+							"mModifiedGameCalculation": "AttackSpeedPerStack",
+							"__type": "GameCalculationModified"
 						},
 						"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
 							"mFormulaParts": [
@@ -392,11 +405,13 @@
 						"BelvethVsJaxQuestRewardAttackSpeed": {
 							"mMultiplier": {
 								"mBuffName": "{a8a3dd7a}",
-								"mCoefficient": 1
+								"mCoefficient": 1,
+								"__type": "BuffCounterByCoefficientCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 5,
 							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack"
+							"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}

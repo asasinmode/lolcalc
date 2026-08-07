@@ -152,9 +152,11 @@
 						},
 						"EmpoweredDamageTT": {
 							"mMultiplier": {
-								"mDataValue": "StunDamage"
+								"mDataValue": "StunDamage",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "TotalDamage"
+							"mModifiedGameCalculation": "TotalDamage",
+							"__type": "GameCalculationModified"
 						}
 					},
 					"isImmobilizing": true

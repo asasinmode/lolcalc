@@ -218,9 +218,11 @@
 						},
 						"BonusDamageCalc": {
 							"mMultiplier": {
-								"mDataValue": "SweetSpotDamageMod"
+								"mDataValue": "SweetSpotDamageMod",
+								"__type": "NamedDataValueCalculationPart"
 							},
-							"mModifiedGameCalculation": "BaseDamageCalc"
+							"mModifiedGameCalculation": "BaseDamageCalc",
+							"__type": "GameCalculationModified"
 						}
 					}
 				}
@@ -333,17 +335,20 @@
 										{
 											"level": 6,
 											"{ae9b464d}": "ReviveAdditionalBonusAtThisLevel",
-											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter"
+											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										},
 										{
 											"level": 11,
 											"{ae9b464d}": "ReviveAdditionalBonusAtThisLevel",
-											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter"
+											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										},
 										{
 											"level": 16,
 											"{ae9b464d}": "ReviveAdditionalBonusAtThisLevel",
-											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter"
+											"{b0d8b2ac}": "ReviveBonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										}
 									],
 									"__type": "{4ce08984}"

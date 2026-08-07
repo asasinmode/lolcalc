@@ -106,7 +106,8 @@
 					"spellCalculations": {
 						"ASCalc": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -122,7 +123,8 @@
 						},
 						"MSCalc": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -138,7 +140,8 @@
 						},
 						"{85d7d7f0}": {
 							"mMultiplier": {
-								"mNumber": 0.25
+								"mNumber": 0.25,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -149,7 +152,8 @@
 						},
 						"FinalASCalc": {
 							"mMultiplier": {
-								"mNumber": 0.02
+								"mNumber": 0.02,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -165,7 +169,8 @@
 						},
 						"FinalMSCalc": {
 							"mMultiplier": {
-								"mNumber": 0.02
+								"mNumber": 0.02,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
@@ -233,7 +238,8 @@
 						},
 						"{fe737c05}": {
 							"mMultiplier": {
-								"mNumber": 0.01
+								"mNumber": 0.01,
+								"__type": "NumberCalculationPart"
 							},
 							"mFormulaParts": [
 								{
