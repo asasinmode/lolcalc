@@ -53,7 +53,8 @@
 							"spellCalculations": {
 								"{c8e45bc3}": {
 									"mMultiplier": {
-										"mNumber": 0.5
+										"mNumber": 0.5,
+										"__type": "NumberCalculationPart"
 									},
 									"mFormulaParts": [
 										{
@@ -77,9 +78,11 @@
 								},
 								"{8a96509c}": {
 									"mMultiplier": {
-										"mNumber": 0.005
+										"mNumber": 0.005,
+										"__type": "NumberCalculationPart"
 									},
-									"mModifiedGameCalculation": "TotalHealthDamage"
+									"mModifiedGameCalculation": "TotalHealthDamage",
+									"__type": "GameCalculationModified"
 								}
 							}
 						}
@@ -170,9 +173,9 @@
 							"objectName": "KaylePassive",
 							"dataKey": "Characters/Kayle/Spells/KaylePassiveAbility/KaylePassive",
 							"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
+							"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 							"tooltip": "{{Spell_KaylePassive_Tooltip}}",
 							"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
-							"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 							"dataValues": {
 								"LevelForPassiveRank0": [1, 1, 1, 1, 1, 1, 1],
 								"LevelForPassiveRank1": [6, 6, 6, 6, 6, 6, 6],
@@ -427,16 +430,18 @@
 								},
 								"MaxBonusAttackSpeed": {
 									"mMultiplier": {
-										"mDataValue": "MaxStacks"
+										"mDataValue": "MaxStacks",
+										"__type": "NamedDataValueCalculationPart"
 									},
 									"tooltipOnly": true,
-									"mModifiedGameCalculation": "AttackSpeedPerStack"
+									"mModifiedGameCalculation": "AttackSpeedPerStack",
+									"__type": "GameCalculationModified"
 								},
 								"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
 									"mFormulaParts": [
 										{
-											"mLevel1Value": 0.003,
-											"mInitialBonusPerLevel": 0.001,
+											"mLevel1Value": 0.0028,
+											"mInitialBonusPerLevel": 0.0006,
 											"mBreakpoints": [
 												{
 													"mLevel": 14
@@ -451,19 +456,18 @@
 								"BelvethVsJaxQuestRewardAttackSpeed": {
 									"mMultiplier": {
 										"mBuffName": "{a8a3dd7a}",
-										"mCoefficient": 1
+										"mCoefficient": 1,
+										"__type": "BuffCounterByCoefficientCalculationPart"
 									},
 									"mSimpleTooltipCalculationDisplay": 5,
 									"mExpandedTooltipCalculationDisplay": 5,
-									"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack"
+									"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack",
+									"__type": "GameCalculationModified"
 								}
 							}
 						}
 					]
 				}
-			},
-			"stringtable": {
-				"spell_kaylepassive_tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>"
 			}
 		},
 		"Rammus": {
@@ -499,6 +503,8 @@
 							"objectName": "DefensiveBallCurl",
 							"dataKey": "Characters/Rammus/Spells/DefensiveBallCurlAbility/DefensiveBallCurl",
 							"image": "assets/characters/rammus/hud/icons2d/armordillo_shellbash.png",
+							"mana": [40, 40, 40, 40, 40, 40],
+							"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 							"tooltip": "Rammus enters a defensive formation for @BuffDuration@ seconds, gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> and dealing <magicDamage>@ReturnDamageCalc@ magic damage</magicDamage> to enemies that Attack him.<br><br><recast>Recast</recast>: Rammus ends this Ability early.",
 							"extendedVariables": [
 								{
@@ -518,8 +524,6 @@
 									"nameOverride": "spell_listtype_percentmagicresistbonus"
 								}
 							],
-							"mana": [40, 40, 40, 40, 40, 40],
-							"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 							"dataValues": {
 								"BonusArmorPercent": [0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675],
 								"BonusMRPercent": [0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675],
@@ -553,17 +557,21 @@
 									"mFormulaParts": [
 										{
 											"mPart1": {
-												"mDataValue": "FlatBonusArmor"
+												"mDataValue": "FlatBonusArmor",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"mPart2": {
 												"mSubparts": [
 													{
-														"mNumber": 1
+														"mNumber": 1,
+														"__type": "NumberCalculationPart"
 													},
 													{
-														"mDataValue": "BonusArmorPercent"
+														"mDataValue": "BonusArmorPercent",
+														"__type": "NamedDataValueCalculationPart"
 													}
-												]
+												],
+												"__type": "SumOfSubPartsCalculationPart"
 											},
 											"__type": "ProductOfSubPartsCalculationPart"
 										},
@@ -578,17 +586,21 @@
 									"mFormulaParts": [
 										{
 											"mPart1": {
-												"mDataValue": "FlatBonusMR"
+												"mDataValue": "FlatBonusMR",
+												"__type": "NamedDataValueCalculationPart"
 											},
 											"mPart2": {
 												"mSubparts": [
 													{
-														"mNumber": 1
+														"mNumber": 1,
+														"__type": "NumberCalculationPart"
 													},
 													{
-														"mDataValue": "BonusMRPercent"
+														"mDataValue": "BonusMRPercent",
+														"__type": "NamedDataValueCalculationPart"
 													}
-												]
+												],
+												"__type": "SumOfSubPartsCalculationPart"
 											},
 											"__type": "ProductOfSubPartsCalculationPart"
 										},
@@ -755,7 +767,6 @@
 				"attackspeed": 0.625,
 				"attackspeedratio": 0.625
 			},
-
 			"abilities": {
 				"q": {
 					"maxLevel": 5,
@@ -795,26 +806,33 @@
 									"mMultiplier": {
 										"mSubparts": [
 											{
-												"mNumber": 1
+												"mNumber": 1,
+												"__type": "NumberCalculationPart"
 											},
 											{
 												"mPart1": {
 													"mStat": 8,
-													"mDataValue": "CritRatio"
+													"mDataValue": "CritRatio",
+													"__type": "StatByNamedDataValueCalculationPart"
 												},
 												"mPart2": {
 													"mSubparts": [
 														{
 															"mStat": 9,
-															"mCoefficient": 1
+															"mCoefficient": 1,
+															"__type": "StatByCoefficientCalculationPart"
 														},
 														{
-															"mNumber": -1
+															"mNumber": -1,
+															"__type": "NumberCalculationPart"
 														}
-													]
-												}
+													],
+													"__type": "SumOfSubPartsCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
 											}
-										]
+										],
+										"__type": "SumOfSubPartsCalculationPart"
 									},
 									"mFormulaParts": [
 										{
@@ -890,7 +908,8 @@
 			"itemCalculations": {
 				"RemainingHealthThreshold": {
 					"mMultiplier": {
-						"mNumber": -1
+						"mNumber": -1,
+						"__type": "NumberCalculationPart"
 					},
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
@@ -933,7 +952,8 @@
 				},
 				"HealCalc": {
 					"mMultiplier": {
-						"mDataValue": "HealMultiplier"
+						"mDataValue": "HealMultiplier",
+						"__type": "NamedDataValueCalculationPart"
 					},
 					"mFormulaParts": [
 						{
@@ -1134,7 +1154,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangeModifier"
+						"mDataValue": "RangeModifier",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"AbilityDamageCalc": {
@@ -1150,7 +1171,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "AbilityDamageRangeMod"
+						"mDataValue": "AbilityDamageRangeMod",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				}
 			},
@@ -1177,7 +1199,8 @@
 			"itemCalculations": {
 				"ManaCalc": {
 					"mMultiplier": {
-						"mNumber": 0.01
+						"mNumber": 0.01,
+						"__type": "NumberCalculationPart"
 					},
 					"mFormulaParts": [
 						{
@@ -1221,7 +1244,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				},
 				"AuraAttackSpeed": {
@@ -1233,7 +1257,8 @@
 					],
 					"mDisplayAsPercent": true,
 					"mRangedMultiplier": {
-						"mDataValue": "RangedAttackSpeedMultiplier"
+						"mDataValue": "RangedAttackSpeedMultiplier",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				}
 			},
@@ -1390,9 +1415,11 @@
 				"BonusShield": {
 					"mMultiplier": {
 						"mBuffName": "{6faa06b7}",
-						"mCoefficient": 1
+						"mCoefficient": 1,
+						"__type": "BuffCounterByCoefficientCalculationPart"
 					},
-					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+					"mModifiedGameCalculation": "MeleeItemCalcValueB",
+					"__type": "GameCalculationModified"
 				},
 				"MeleeItemCalcValueB": {
 					"mFormulaParts": [
@@ -1406,11 +1433,13 @@
 				},
 				"RangedItemCalcValueB": {
 					"mMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					},
 					"mSimpleTooltipCalculationDisplay": 6,
 					"mExpandedTooltipCalculationDisplay": 6,
-					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+					"mModifiedGameCalculation": "MeleeItemCalcValueB",
+					"__type": "GameCalculationModified"
 				},
 				"ChampRange": {
 					"mSimpleTooltipCalculationDisplay": 5,
@@ -1425,8 +1454,10 @@
 									"mStat": 31,
 									"mStatFormula": 1,
 									"mSubpart": {
-										"mNumber": 0.01
-									}
+										"mNumber": 0.01,
+										"__type": "NumberCalculationPart"
+									},
+									"__type": "StatBySubPartCalculationPart"
 								}
 							],
 							"__type": "ClampSubPartsCalculationPart"
@@ -1435,9 +1466,11 @@
 				},
 				"RangedItemCalcValue": {
 					"mMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					},
-					"mModifiedGameCalculation": "MeleeItemCalcValue"
+					"mModifiedGameCalculation": "MeleeItemCalcValue",
+					"__type": "GameCalculationModified"
 				},
 				"ShieldSize": {
 					"mFormulaParts": [
@@ -1496,15 +1529,19 @@
 				},
 				"DPS": {
 					"mMultiplier": {
-						"mDataValue": "TicksPerSecond"
+						"mDataValue": "TicksPerSecond",
+						"__type": "NamedDataValueCalculationPart"
 					},
-					"mModifiedGameCalculation": "DamagePerTick"
+					"mModifiedGameCalculation": "DamagePerTick",
+					"__type": "GameCalculationModified"
 				},
 				"{049cea52}": {
 					"mMultiplier": {
-						"mNumber": 1
+						"mNumber": 1,
+						"__type": "NumberCalculationPart"
 					},
-					"mModifiedGameCalculation": "DPS"
+					"mModifiedGameCalculation": "DPS",
+					"__type": "GameCalculationModified"
 				}
 			}
 		},
@@ -1628,7 +1665,8 @@
 						{
 							"mStat": 2,
 							"mSubpart": {
-								"mNumber": 0.55
+								"mNumber": 0.55,
+								"__type": "NumberCalculationPart"
 							},
 							"__type": "StatBySubPartCalculationPart"
 						}
@@ -1825,7 +1863,8 @@
 				},
 				"MeleeItemCalcValueB": {
 					"mMultiplier": {
-						"mNumber": -1
+						"mNumber": -1,
+						"__type": "NumberCalculationPart"
 					},
 					"mFormulaParts": [
 						{
@@ -1837,7 +1876,8 @@
 				},
 				"RangedItemCalcValueB": {
 					"mMultiplier": {
-						"mNumber": -1
+						"mNumber": -1,
+						"__type": "NumberCalculationPart"
 					},
 					"mFormulaParts": [
 						{
@@ -1865,11 +1905,13 @@
 				},
 				"{79b6144b}": {
 					"mDefaultGameCalculation": "{d96e60e3}",
-					"mConditionalGameCalculation": "{42565e68}"
+					"mConditionalGameCalculation": "{42565e68}",
+					"__type": "GameCalculationConditional"
 				},
 				"{405deeb1}": {
 					"mMultiplier": {
-						"mSpellCalculationKey": "{79b6144b}"
+						"mSpellCalculationKey": "{79b6144b}",
+						"__type": "{f3cbe7b2}"
 					},
 					"{72c5c2a8}": 0,
 					"mFormulaParts": [
@@ -1906,9 +1948,11 @@
 				},
 				"RangedItemCalcValue": {
 					"mMultiplier": {
-						"mNumber": 0.75
+						"mNumber": 0.75,
+						"__type": "NumberCalculationPart"
 					},
-					"mModifiedGameCalculation": "MeleeItemCalcValue"
+					"mModifiedGameCalculation": "MeleeItemCalcValue",
+					"__type": "GameCalculationModified"
 				}
 			},
 			"stringCalculations": {
@@ -1994,7 +2038,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.7
+						"mNumber": 0.7,
+						"__type": "NumberCalculationPart"
 					}
 				},
 				"MaxStackDamageVSStructures": {
@@ -2012,7 +2057,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.7
+						"mNumber": 0.7,
+						"__type": "NumberCalculationPart"
 					}
 				},
 				"BonusMinionResists": {
@@ -2029,7 +2075,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				}
 			},
@@ -2119,16 +2166,36 @@
 				},
 				"ARMRMaxScaling": {
 					"mMultiplier": {
-						"mNumber": 3
+						"mNumber": 3,
+						"__type": "NumberCalculationPart"
 					},
-					"mModifiedGameCalculation": "ARMRPerHitScaling"
+					"mModifiedGameCalculation": "ARMRPerHitScaling",
+					"__type": "GameCalculationModified"
 				},
 				"{592c02e8}": {
 					"{72c5c2a8}": 1,
 					"mFormulaParts": [
 						{
-							"mDataValue": "OnHitDamage",
-							"__type": "NamedDataValueCalculationPart"
+							"mSpellCalculationKey": "OnHitDamage",
+							"__type": "{f3cbe7b2}"
+						}
+					]
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mNumber": 30,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -2152,10 +2219,12 @@
 			"itemCalculations": {
 				"TotalManaRefund": {
 					"mMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					},
 					"mExpandedTooltipCalculationDisplay": 0,
-					"mModifiedGameCalculation": "SpellbladeDamage"
+					"mModifiedGameCalculation": "SpellbladeDamage",
+					"__type": "GameCalculationModified"
 				},
 				"SpellbladeDamage": {
 					"mExpandedTooltipCalculationDisplay": 0,
@@ -2201,10 +2270,12 @@
 						},
 						{
 							"mPart1": {
-								"mDataValue": "BonusDamagePerStack"
+								"mDataValue": "BonusDamagePerStack",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mPart2": {
-								"mNumber": 100
+								"mNumber": 100,
+								"__type": "NumberCalculationPart"
 							},
 							"__type": "ProductOfSubPartsCalculationPart"
 						}
@@ -2238,7 +2309,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"CalcValue": {
@@ -2251,7 +2323,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"CalcValueC": {
@@ -2264,7 +2337,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"CalcValueD": {
@@ -2277,7 +2351,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"OnHitDamageCalc": {
@@ -2289,7 +2364,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				},
 				"ConeDamageCalc": {
@@ -2301,7 +2377,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				}
 			}
@@ -2352,9 +2429,6 @@
 							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
-				},
-				"__renamedVariables": {
-					"{05809103}": "ProcDmg"
 				}
 			},
 			"effectAmount": [9]
@@ -2517,9 +2591,11 @@
 				},
 				"RangedItemCalcValue": {
 					"mMultiplier": {
-						"mDataValue": "RangedProcDamageMod"
+						"mDataValue": "RangedProcDamageMod",
+						"__type": "NamedDataValueCalculationPart"
 					},
-					"mModifiedGameCalculation": "MeleeItemCalcValue"
+					"mModifiedGameCalculation": "MeleeItemCalcValue",
+					"__type": "GameCalculationModified"
 				},
 				"SquallDamage": {
 					"mFormulaParts": [
@@ -2680,14 +2756,17 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedDamageMultiplier"
+						"mDataValue": "RangedDamageMultiplier",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"MaximumDamage": {
 					"mMultiplier": {
-						"mDataValue": "MaxAmpNumber"
+						"mDataValue": "MaxAmpNumber",
+						"__type": "NamedDataValueCalculationPart"
 					},
-					"mModifiedGameCalculation": "DamageAmount"
+					"mModifiedGameCalculation": "DamageAmount",
+					"__type": "GameCalculationModified"
 				}
 			}
 		},
@@ -2718,7 +2797,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.8
+						"mNumber": 0.8,
+						"__type": "NumberCalculationPart"
 					}
 				}
 			}
@@ -2786,7 +2866,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.667
+						"mNumber": 0.667,
+						"__type": "NumberCalculationPart"
 					}
 				}
 			},
@@ -2887,7 +2968,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				}
 			}

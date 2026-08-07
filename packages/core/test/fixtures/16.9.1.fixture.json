@@ -94,7 +94,8 @@
 			"itemCalculations": {
 				"RemainingHealthThreshold": {
 					"mMultiplier": {
-						"mNumber": -1
+						"mNumber": -1,
+						"__type": "NumberCalculationPart"
 					},
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
@@ -129,6 +130,44 @@
 				"MinionAP": 0.02,
 				"MonsterDPS": 40,
 				"MonsterAP": 0.02
+			},
+			"itemCalculations": {
+				"BurnDamagePerSecondCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BurnFlatDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinionDPS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MinionAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MonsterBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterDPS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MonsterAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
 			}
 		},
 		"2510": {
@@ -429,6 +468,17 @@
 				"GloryLossOnDeath": 10,
 				"GloryThreshold": 10,
 				"MoveSpeedMod": 0.1
+			},
+			"itemCalculations": {
+				"CurrentGloryAP": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{22eeba1f}",
+							"mDataValue": "APPerGlory",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				}
 			}
 		},
 		"3042": {
@@ -569,6 +619,60 @@
 				"AttackSpeedPerStack": 0.08,
 				"MaxStacks": 4,
 				"BuffDuration": 3
+			},
+			"itemCalculations": {
+				"MaxAttackSpeedCalc": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "AttackSpeedPerStack",
+								"__type": "NamedDataValueCalculationPart"
+							},
+							"mPart2": {
+								"mDataValue": "MaxStacks",
+								"__type": "NamedDataValueCalculationPart"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalMagicPen": {
+					"mMultiplier": {
+						"mDataValue": "MythicMagicPen",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mFormulaParts": [
+						{
+							"epicness": 5,
+							"__type": "ByItemEpicnessCountCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalArmorPen": {
+					"mMultiplier": {
+						"mDataValue": "MythicArmorPen",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mFormulaParts": [
+						{
+							"epicness": 5,
+							"__type": "ByItemEpicnessCountCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{592c02e8}": {
+					"{72c5c2a8}": 1,
+					"mFormulaParts": [
+						{
+							"mDataValue": "OnHitDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
 			}
 		},
 		"3170": {
@@ -667,6 +771,36 @@
 				"MaxAPMultiplier": 0.05,
 				"VampAmountMelee": 0.1,
 				"VampAmountRanged": 0.06
+			},
+			"itemCalculations": {
+				"{1247259a}": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthToAPConversionPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountMelee",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountRanged",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
 			}
 		}
 	},

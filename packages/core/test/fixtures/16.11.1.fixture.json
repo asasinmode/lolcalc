@@ -172,7 +172,8 @@
 					],
 					"mPrecision": 1,
 					"mRangedMultiplier": {
-						"mDataValue": "StackRangedMultiplier"
+						"mDataValue": "StackRangedMultiplier",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				}
 			}
@@ -213,9 +214,11 @@
 				"BonusShield": {
 					"mMultiplier": {
 						"mBuffName": "{6faa06b7}",
-						"mCoefficient": 1
+						"mCoefficient": 1,
+						"__type": "BuffCounterByCoefficientCalculationPart"
 					},
-					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+					"mModifiedGameCalculation": "MeleeItemCalcValueB",
+					"__type": "GameCalculationModified"
 				},
 				"MeleeItemCalcValueB": {
 					"mFormulaParts": [
@@ -229,11 +232,13 @@
 				},
 				"RangedItemCalcValueB": {
 					"mMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					},
 					"mSimpleTooltipCalculationDisplay": 6,
 					"mExpandedTooltipCalculationDisplay": 6,
-					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+					"mModifiedGameCalculation": "MeleeItemCalcValueB",
+					"__type": "GameCalculationModified"
 				},
 				"ChampRange": {
 					"mSimpleTooltipCalculationDisplay": 5,
@@ -248,8 +253,10 @@
 									"mStat": 31,
 									"mStatFormula": 1,
 									"mSubpart": {
-										"mNumber": 0.01
-									}
+										"mNumber": 0.01,
+										"__type": "NumberCalculationPart"
+									},
+									"__type": "StatBySubPartCalculationPart"
 								}
 							],
 							"__type": "ClampSubPartsCalculationPart"
@@ -258,9 +265,11 @@
 				},
 				"RangedItemCalcValue": {
 					"mMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					},
-					"mModifiedGameCalculation": "MeleeItemCalcValue"
+					"mModifiedGameCalculation": "MeleeItemCalcValue",
+					"__type": "GameCalculationModified"
 				},
 				"ShieldSize": {
 					"mFormulaParts": [
@@ -445,10 +454,12 @@
 					"mFormulaParts": [
 						{
 							"mPart1": {
-								"mDataValue": "AttackSpeedPerStack"
+								"mDataValue": "AttackSpeedPerStack",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mPart2": {
-								"mDataValue": "MaxStacks"
+								"mDataValue": "MaxStacks",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"__type": "ProductOfSubPartsCalculationPart"
 						}
@@ -457,7 +468,8 @@
 				},
 				"TotalMagicPen": {
 					"mMultiplier": {
-						"mDataValue": "MythicMagicPen"
+						"mDataValue": "MythicMagicPen",
+						"__type": "NamedDataValueCalculationPart"
 					},
 					"mFormulaParts": [
 						{
@@ -469,7 +481,8 @@
 				},
 				"TotalArmorPen": {
 					"mMultiplier": {
-						"mDataValue": "MythicArmorPen"
+						"mDataValue": "MythicArmorPen",
+						"__type": "NamedDataValueCalculationPart"
 					},
 					"mFormulaParts": [
 						{
@@ -530,7 +543,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"CalcValue": {
@@ -543,7 +557,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"CalcValueC": {
@@ -556,7 +571,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"CalcValueD": {
@@ -569,7 +585,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedEffectiveness"
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				},
 				"OnHitDamageCalc": {
@@ -581,7 +598,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				},
 				"ConeDamageCalc": {
@@ -593,7 +611,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				}
 			}

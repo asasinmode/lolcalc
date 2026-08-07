@@ -132,7 +132,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "RangedMod"
+						"mDataValue": "RangedMod",
+						"__type": "NamedDataValueCalculationPart"
 					}
 				}
 			},
@@ -261,7 +262,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.667
+						"mNumber": 0.667,
+						"__type": "NumberCalculationPart"
 					}
 				},
 				"OOCMS": {
@@ -272,7 +274,8 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.5
+						"mNumber": 0.5,
+						"__type": "NumberCalculationPart"
 					}
 				}
 			},
