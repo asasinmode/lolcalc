@@ -95,8 +95,8 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
 		maxValue: 100,
-		imgText(data): string {
-			return `${Math.round(EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(data[0], {} as DamageSource))}%`;
+		imgText(data): number {
+			return Math.round(EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(data[0], {} as DamageSource));
 		},
 		deriveProgressValue: (value, _self) => {
 			const slowValue =	championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul });
