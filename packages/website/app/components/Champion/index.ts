@@ -216,16 +216,18 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === AbilityType.champion) {
 		const abilityId = GameAbilityId.build(AbilityType.effect, effectObjectName);
-		const { label, minValue = 0, maxValue = 1, enumOptions } = effectSpecific;
+		const { label, minValue = 0, maxValue = 1, enumOptions, deriveProgressValue } = effectSpecific;
 
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with , it works only on first value
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
 			??= enumOptions
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
-				: maxValue !== 1
-					? await numberExtra(abilityId, 0, label, minValue, maxValue)
-					: await booleanExtra(abilityId, 0, label, false);
+				: deriveProgressValue
+					? await progressExtra(abilityId, 0, label, deriveProgressValue)
+					: maxValue !== 1
+						? await numberExtra(abilityId, 0, label, minValue, maxValue)
+						: await booleanExtra(abilityId, 0, label, false);
 	}
 }
 

@@ -26,15 +26,15 @@ export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificC
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === AbilityType.dragon) {
 		const abilityId = GameAbilityId.build(AbilityType.effect, effectObjectName);
-		const { label, minValue = 0, maxValue = 1, enumOptions, deriveProgressValue: progressDerivedValue } = effectSpecific;
+		const { label, minValue = 0, maxValue = 1, enumOptions, deriveProgressValue } = effectSpecific;
 
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype] ??= {};
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype]!.effects
 			??= enumOptions
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
-				: progressDerivedValue
-					? await progressExtra(abilityId, 0, label, progressDerivedValue)
+				: deriveProgressValue
+					? await progressExtra(abilityId, 0, label, deriveProgressValue)
 					: maxValue !== 1
 						? await numberExtra(abilityId, 0, label, minValue, maxValue)
 						: await booleanExtra(abilityId, 0, label, false);

@@ -655,6 +655,22 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	},
+	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number]>({
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0),
+		label: 'Surging Tides',
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 100)];
+		},
+		maxValue: 100,
+		deriveProgressValue: (progress, _self) => {
+			// TODO
+			return progress;
+		},
+		imgText(data) {
+			return data[0];
+		},
+		// TODO calc
+	}),
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;
@@ -762,6 +778,9 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
 		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
+	},
+	[EFFECT_OBJECT_NAME.namiPSurgingTides]: {
+		championSpellObjectKey: 'Characters/Nami/Spells/NamiPassiveAbility/NamiPassivett',
 	},
 	/* other */
 	[EFFECT_OBJECT_NAME.ghost]: {

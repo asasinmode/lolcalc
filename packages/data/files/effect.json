@@ -113,17 +113,11 @@
 			"cooldownTime": [240, 240, 240, 240, 240, 240, 240],
 			"tooltip": "<keyword>Slows</keyword> target enemy champion by @Slow@% and reduces their damage dealt by @DamageReduction@% for @DebuffDuration@ seconds."
 		},
-		"lolcalcGrievousWounds": {
-			"dataKey": "lolcalcGrievousWounds",
-			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
-			"objectName": "GrievousWound",
-			"description": "This unit receives reduced healing."
-		},
-		"lolcalcGrievousWoundsPercent": {
-			"dataKey": "lolcalcGrievousWoundsPercent",
-			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
-			"objectName": "GrievousWound",
-			"description": "This unit receives reduced healing."
+		"SRX_DragonSoulBuffHextech_Slow": {
+			"dataKey": "SRX_DragonSoulBuffHextech_Slow",
+			"sharedSpellObjectKey": "Shared/Spells/SRX_DragonSoulBuffHextech_Slow",
+			"objectName": "SRX_DragonSoulBuffHextech_Slow",
+			"description": "This unit is slowed by Hextech soul's effect."
 		},
 		"lolcalcStun": {
 			"dataKey": "lolcalcStun",
@@ -137,11 +131,17 @@
 			"dataKey": "lolcalcSlowPercent",
 			"description": "This unit is <keyword>slowed</keyword> by a percentage amount."
 		},
-		"SRX_DragonSoulBuffHextech_Slow": {
-			"dataKey": "SRX_DragonSoulBuffHextech_Slow",
-			"sharedSpellObjectKey": "Shared/Spells/SRX_DragonSoulBuffHextech_Slow",
-			"objectName": "SRX_DragonSoulBuffHextech_Slow",
-			"description": "This unit is slowed by Hextech soul's effect."
+		"lolcalcGrievousWounds": {
+			"dataKey": "lolcalcGrievousWounds",
+			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
+			"objectName": "GrievousWound",
+			"description": "This unit receives reduced healing."
+		},
+		"lolcalcGrievousWoundsPercent": {
+			"dataKey": "lolcalcGrievousWoundsPercent",
+			"sharedSpellObjectKey": "Shared/Spells/GrievousWound",
+			"objectName": "GrievousWound",
+			"description": "This unit receives reduced healing."
 		},
 		"2065ActiveMoveSpeed": {
 			"description": "This unit is moving faster.",
@@ -235,8 +235,8 @@
 			"description": "Moving faster toward Janna.",
 			"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/Tailwind"
 		},
-		"AshePFrostShot": {
-			"dataKey": "AshePFrostShot",
+		"AshePassiveSlow": {
+			"dataKey": "AshePassiveSlow",
 			"championSpellObjectKey": "Characters/Ashe/Spells/AshePassiveAbility/AshePassiveSlow",
 			"objectName": "AshePassiveSlow",
 			"description": "This unit is slowed."
@@ -252,6 +252,12 @@
 		"RellP_Debuff": {
 			"description": "Rell has stolen Armor and Magic Resist from this unit.",
 			"dataKey": "Characters/Rell/Spells/RellPAbility/RellP_Debuff"
+		},
+		"NamiPassiveTT": {
+			"dataKey": "NamiPassiveTT",
+			"championSpellObjectKey": "Characters/Nami/Spells/NamiPassiveAbility/NamiPassivett",
+			"objectName": "NamiPassivett",
+			"description": "This unit has increased Move Speed for a short duration."
 		},
 		"lolcalc6694BitterCold": {
 			"description": "This unit is slowed.",
