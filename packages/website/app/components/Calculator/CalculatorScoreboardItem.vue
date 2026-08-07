@@ -2531,10 +2531,11 @@ defineExpose({ el });
 
 				.hover-tooltip.champion-ability {
 					position-anchor: --scoreboard-item-abilities;
+					inset-block-start: calc(anchor(end));
 				}
 			}
 
-			&[data-ability-tooltip-extras] > .abilities > .hover-tooltip.champion-ability {
+			&[data-ability-tooltip-extras] .hover-tooltip.champion-ability {
 				position-anchor: --scoreboard-item-extras;
 				inset-block-start: auto;
 				inset-block-end: calc(anchor(top));
