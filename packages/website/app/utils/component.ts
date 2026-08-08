@@ -75,6 +75,8 @@ export async function progressExtra<T extends IGameAbilityId>(
 		const imgSrc = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
+		const effectControlModel = effectControlsProps?.model(props.damageSource);
+
 		return () => h(VExtrasProgress, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
@@ -87,7 +89,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			},
 			'onUpdate:modelValue': updateValue,
 		}, effectControlsProps
-			? createEffectControls(props, effectControlsProps, ctx.slots)
+			? { default: () => createEffectControls(props, effectControlsProps.refresh, effectControlModel!, ctx.slots) }
 			: ctx.slots);
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
@@ -192,17 +194,17 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 
 function createEffectControls(
 	props: IExtraComponentProps,
-	effectControlsProps: IControlEffectProps,
+	refresh: IControlEffectProps['refresh'],
+	model: ReturnType<IControlEffectProps['model']>,
 	slots: SlotsType,
 ) {
-	const isActive = effectControlsProps.isActive(props.damageSource);
-	return () => h(
+	return h(
 		CalculatorEffectControls,
 		{
-			'idPrefix': props.idPrefix,
-			'modelValue': isActive.get(),
-			'onRefresh': () => effectControlsProps.applyRecalculate(props.damageSource, 'refresh'),
-			'onUpdate:modelValue': isActive.set,
+			'idPrefix': `${props.idPrefix}-effect-ctl`,
+			'modelValue': model.value,
+			'onUpdate:modelValue': val => model.value = val,
+			'onRefresh': () => refresh(props.damageSource),
 		},
 		slots,
 	);

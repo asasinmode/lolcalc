@@ -731,10 +731,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		passive: {
 			effectControls: {
-				applyRecalculate(self, type) {
-					console.log('snapshotting', type, self.stats.value.total.abilityPower, self.internalData.value);
-				},
-				isActive: (self: DamageSource<'Nami'>) => ({
+				model: self => computed({
 					get() {
 						return self.internalData.value.passiveMSTotalAp !== undefined;
 					},
@@ -743,6 +740,9 @@ export const CHAMPION_SPECIFICS = {
 						console.log('set', value, self.internalData.value);
 					},
 				}),
+				refresh(self) {
+					console.log('refreshing', self.stats.value.total.abilityPower, self.internalData.value);
+				},
 			},
 			calculateBonusMS: ((progress, self) => {
 				const bonusMS = championAbilityVariableValue('TotalMSBonus', {
