@@ -1392,6 +1392,19 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
+	EffectValueCalculationPart(variable: IGameVariablesByType['EffectValueCalculationPart'], whole, meta) {
+		const rv: IVariableValueResult = {
+			calculatesFrom: [],
+			value: whole.effectAmount?.[variable.mEffectIndex],
+		};
+
+		if (Array.isArray(rv.value)) {
+			rv.allValues = rv.value as number[];
+			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+		}
+
+		return rv;
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 type IHypotheticalVariableCalculationFns = Record<
@@ -1472,6 +1485,10 @@ interface IGameVariablesByType {
 	'GameCalculationModified': {
 		mModifiedGameCalculation: string;
 		mMultiplier?: IMMultiplier;
+		__type: string;
+	};
+	'EffectValueCalculationPart': {
+		mEffectIndex: number;
 		__type: string;
 	};
 }
