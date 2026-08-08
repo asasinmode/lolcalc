@@ -6,7 +6,7 @@ defineProps<{
 	idPrefix: string;
 	imgSrc: IGameImageData;
 	label: string;
-	derivedValue: number;
+	derivedValue?: number;
 	derivedSymbolSuffix?: string;
 }>();
 
@@ -14,7 +14,7 @@ defineEmits<{
 	imgMouseenter: [event: MouseEvent];
 }>();
 
-const value = defineModel<number>({ required: true });
+const value = defineModel<number>();
 </script>
 
 <template>
@@ -30,13 +30,13 @@ const value = defineModel<number>({ required: true });
 		<slot />
 		<input
 			:id="`veprgr-${idPrefix}`"
-			v-model.number="value"
+			:value="value ?? 0"
 			type="range"
 			min="0"
 			max="100"
 		>
 		<output :for="`veprgr-${idPrefix}`" aria-live="off">
-			{{ roundVariable(derivedValue, 1) }}{{ derivedSymbolSuffix }}
+			{{ derivedValue !== undefined ? roundVariable(derivedValue, 1) : 0 }}{{ derivedSymbolSuffix }}
 		</output>
 	</article>
 </template>

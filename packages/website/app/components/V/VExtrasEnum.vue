@@ -21,7 +21,7 @@ defineEmits<{
 	imgMouseenter: [event: MouseEvent];
 }>();
 
-const value = defineModel<number>({ required: true });
+const value = defineModel<number>();
 
 function updateValue(event: Event) {
 	value.value = Number.parseInt((event.target as HTMLSelectElement).value);
@@ -41,7 +41,7 @@ function updateValue(event: Event) {
 		<slot />
 		<select
 			:id="`veenum-${idPrefix}`"
-			:value="value"
+			:value="value ?? 0"
 			@change="updateValue"
 		>
 			<option v-for="(optionLabel, optionValue) in options" :key="optionValue" :value="optionValue">

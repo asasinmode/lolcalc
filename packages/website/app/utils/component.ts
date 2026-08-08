@@ -175,7 +175,7 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 		computed(() =>
 			isEffect
-				? appliedEffect?.data[property as number] ?? 0
+				? appliedEffect?.data[property as number]
 				: damageSource[dataProperty].value?.[property as string]),
 		function updateValue(value: any) {
 			if (isEffect) {

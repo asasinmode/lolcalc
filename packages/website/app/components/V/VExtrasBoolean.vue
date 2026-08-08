@@ -14,7 +14,7 @@ defineEmits<{
 	imgMouseenter: [event: MouseEvent];
 }>();
 
-const value = defineModel<number>({ required: true });
+const value = defineModel<number>();
 
 const computedTooltip = ref<string>();
 if (props.tooltip) {

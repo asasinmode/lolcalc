@@ -18,7 +18,7 @@ defineEmits<{
 	imgMouseenter: [event: MouseEvent];
 }>();
 
-const value = defineModel<number>({ required: true });
+const value = defineModel<number>();
 </script>
 
 <template>
@@ -34,7 +34,7 @@ const value = defineModel<number>({ required: true });
 		<slot />
 		<input
 			:id="`venmbr-${idPrefix}`"
-			:value="value"
+			:value="value ?? 0"
 			type="number"
 			:min
 			:max
