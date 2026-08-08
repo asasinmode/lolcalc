@@ -145,7 +145,7 @@ defineExpose({ el });
 	.hover-tooltip.role-quest,
 	.hover-tooltip.custom,
 	.hover-tooltip.effect {
-		--at-apply: 'p-2';
+		--at-apply: 'p-[--default-hover-tooltip-p]';
 		--description-pt: calc(2 * var(--spacing));
 		--description-mt: calc(2 * var(--spacing));
 		--footer-mt: calc(2 * var(--spacing));
@@ -169,7 +169,7 @@ defineExpose({ el });
 	}
 
 	.hover-tooltip.champion-item {
-		--at-apply: 'p-2';
+		--at-apply: 'p-[--default-hover-tooltip-p]';
 	}
 
 	.hover-tooltip.champion-ability,

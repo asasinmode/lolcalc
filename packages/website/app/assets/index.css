@@ -107,6 +107,7 @@
 		--ui-btn-border-clr: hsl(40 59% 61%);
 		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
 		--unknown-alert-mt: calc(3 * var(--spacing));
+		--default-hover-tooltip-p: calc(2 * var(--spacing));
 
 		--venmbr-input-py: calc(0.5 * var(--spacing));
 		--venmbr-input-px: calc(1 * var(--spacing));
@@ -265,7 +266,7 @@
 	}
 
 	.info-tooltip-trigger + [popover] {
-		--at-apply: 'max-inline-120 inline-fit p-2 text-white pointer-events-auto select-text cursor-auto';
+		--at-apply: 'max-inline-120 inline-fit p-[--default-hover-tooltip-p] text-white pointer-events-auto select-text cursor-auto';
 		--popover-offset-y: var(--spacing) * 1.75;
 		inset-block-end: calc(anchor(top) + var(--popover-offset-y));
 		position-anchor: --parent;

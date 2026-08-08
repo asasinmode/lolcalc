@@ -1485,7 +1485,7 @@ defineExpose({
 		}
 
 		#item-shop-hover-tooltip {
-			--at-apply: 'w-(--width) fixed p-2';
+			--at-apply: 'w-(--width) fixed p-[--default-hover-tooltip-p]';
 			--width: 40rem;
 			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
