@@ -57,6 +57,16 @@ const value = defineModel<number>({ required: true });
 		> output {
 			--at-apply: 'self-center text-end leading-none';
 		}
+
+		&[data-inactive] {
+			> output {
+				--at-apply: 'text-neutral-400';
+			}
+
+			> input {
+				--at-apply: 'brightness-50';
+			}
+		}
 	}
 }
 </style>

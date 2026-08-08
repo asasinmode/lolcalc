@@ -2934,6 +2934,12 @@ defineExpose({ el });
 			> label:has(+ .effect-ctl) {
 				--at-apply: 'me-11';
 			}
+
+			&[data-inactive] {
+				> img {
+					--at-apply: 'saturate-0';
+				}
+			}
 		}
 	}
 }

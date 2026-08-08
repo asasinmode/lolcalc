@@ -88,6 +88,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
+			'data-inactive': effectControlsProps && !effectControlModel?.value ? '' : undefined,
 		}, effectControlsProps
 			? { default: () => createEffectControls(props, effectControlsProps.refresh, effectControlModel!, ctx.slots) }
 			: ctx.slots);
