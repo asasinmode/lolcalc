@@ -1,5 +1,6 @@
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
 import type { IChampionStatName, IVariableType, TItemNameToId } from '@lolcalc/shared';
+import type { WritableComputedOptions } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game.ts';
@@ -273,6 +274,11 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVar
 };
 
 export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [IVariableType, IGlobalModifyVariableFunction][];
+
+export interface IControlEffectProps<T extends IChampionId | undefined = undefined> {
+	applyRecalculate: (self: DamageSource<T>, value: true | false | 'refresh') => void;
+	isActive: (self: DamageSource<T>) => WritableComputedOptions<boolean | undefined>;
+}
 
 export interface IDeriveProgressFn {
 	(value: number, self: DamageSource): number;

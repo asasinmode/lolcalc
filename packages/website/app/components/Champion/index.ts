@@ -98,7 +98,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Naafiri', 'passive', 0), 'passiveStacks', 'Packmates', 0, CHAMPION_SPECIFICS.Naafiri.MAX_PASSIVE_STACKS),
 	},
 	Nami: {
-		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.calculateBonusMS, '', CHAMPION_SPECIFICS.Nami.passive.snapshotAndApplyPassive),
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.calculateBonusMS, '', CHAMPION_SPECIFICS.Nami.passive.effectControls),
 	},
 	Nasus: {
 		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither slow on target', CHAMPION_SPECIFICS.Nasus.WITHER_MS_SLOW),

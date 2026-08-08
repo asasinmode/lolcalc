@@ -1,13 +1,14 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IGameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IGameAbilityData } from '@lolcalc/core/specifics';
+import type { IControlEffectProps, IGameAbilityData } from '@lolcalc/core/specifics';
+import type { SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
-import { VExtrasBoolean, VExtrasEnum, VExtrasNumber, VExtrasProgress } from '#components';
+import { CalculatorEffectControls, VExtrasBoolean, VExtrasEnum, VExtrasNumber, VExtrasProgress } from '#components';
 
 export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
@@ -68,7 +69,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 	label: string,
 	getDerivedValue: (progress: number, self: DamageSource) => number,
 	derivedSymbolSuffix = '%',
-	recalculate?: (self: DamageSource) => void
+	effectControlsProps?: IControlEffectProps<any>,
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
@@ -85,7 +86,9 @@ export async function progressExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
-		}, ctx.slots);
+		}, effectControlsProps
+			? createEffectControls(props, effectControlsProps, ctx.slots)
+			: ctx.slots);
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
 
@@ -185,6 +188,24 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 		},
 		appliedEffect,
 	];
+}
+
+function createEffectControls(
+	props: IExtraComponentProps,
+	effectControlsProps: IControlEffectProps,
+	slots: SlotsType,
+) {
+	const isActive = effectControlsProps.isActive(props.damageSource);
+	return () => h(
+		CalculatorEffectControls,
+		{
+			'idPrefix': props.idPrefix,
+			'modelValue': isActive.get(),
+			'onRefresh': () => effectControlsProps.applyRecalculate(props.damageSource, 'refresh'),
+			'onUpdate:modelValue': isActive.set,
+		},
+		slots,
+	);
 }
 
 type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;

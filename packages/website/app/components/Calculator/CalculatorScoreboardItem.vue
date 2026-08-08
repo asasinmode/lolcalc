@@ -2906,24 +2906,31 @@ defineExpose({ el });
 				--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
 			}
 
-			> label {
+			label {
 				--at-apply: 'text-neutral-200';
 			}
 
-			> label + button {
-				--at-apply: 'absolute end-[--p] top-[--p] grid-center size-5.5 z-1';
+			label + button,
+			label + .effect-ctl {
+				--at-apply: 'absolute end-[--p] inset-bs-[--p] z-1';
+			}
 
-				> span:first-child {
-					--at-apply: 'sr-only';
-				}
+			label + button,
+			.effect-ctl > button,
+			.effect-ctl > label {
+				--at-apply: 'grid-center size-5.5';
 
-				> span.icon {
+				> .icon {
 					--at-apply: 'size-4';
 				}
 			}
 
-			> label:has(+ button) {
+			label:has(+ button) {
 				--at-apply: 'pe-6';
+			}
+
+			label:has(+ .effect-ctl) {
+				--at-apply: 'pe-11';
 			}
 		}
 	}
