@@ -3,11 +3,17 @@ import type { IExtraComponentProps } from '~/utils/types';
 
 defineProps<Pick<IExtraComponentProps, 'idPrefix'>>();
 
-defineEmits<{
+const emit = defineEmits<{
 	refresh: [];
 }>();
 
 const value = defineModel<boolean>({ required: false });
+const clicks = ref(0);
+
+function refresh() {
+	clicks.value += 1;
+	emit('refresh');
+}
 
 function showControlsTooltip(event: Event) {
 	const popover = (event.currentTarget as HTMLElement).lastElementChild as HTMLElement | null;
@@ -28,9 +34,9 @@ function hideControlsTooltip(event: Event) {
 		@mouseleave="hideControlsTooltip"
 		@focusout="hideControlsTooltip"
 	>
-		<button class="pretend-ui-btn" @click="$emit('refresh')">
+		<button class="pretend-ui-btn" @click="refresh">
 			<span>refresh</span>
-			<Icon class="i-ph:arrow-clockwise-bold" />
+			<Icon class="i-ph:arrow-clockwise-bold" :style="`--clicks: ${clicks}`" />
 		</button>
 		<slot>
 			<label :for="`${idPrefix}-effect-ctl-tgl`" class="pretend-ui-btn">
@@ -38,7 +44,7 @@ function hideControlsTooltip(event: Event) {
 				<span>apply</span>
 			</label>
 		</slot>
-		<p popover="hint" class="hover-tooltip">
+		<p popover="manual" class="hover-tooltip">
 			applying this effects uses the stats at the moment of application<br>
 			to recalculate the effect (like applying it again with the stats gained from it), use the <span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span> button
 		</p>
@@ -49,11 +55,14 @@ function hideControlsTooltip(event: Event) {
 @layer components {
 	.effect-ctl {
 		--at-apply: 'flex';
-		anchor-scope: all;
-		anchor-name: --extra-controls;
 
 		> button:first-of-type {
 			--at-apply: '-me-px';
+
+			.icon {
+				--at-apply: 'transition-[rotate] duration-[--transition-duration]';
+				rotate: z calc(360deg * var(--clicks));
+			}
 		}
 
 		> label {
@@ -75,9 +84,9 @@ function hideControlsTooltip(event: Event) {
 
 		[popover] {
 			--at-apply: 'p-[--default-hover-tooltip-p] text-white';
-			position-anchor: --extra-controls;
+			position-anchor: --extra-container;
 			justify-self: anchor-center;
-			inset-block-end: calc(anchor(start) + var(--p));
+			inset-block-start: calc(anchor(end) - 1px);
 
 			> .pretend-ui-btn {
 				--at-apply: 'size-5 inline-grid align-middle place-items-center';

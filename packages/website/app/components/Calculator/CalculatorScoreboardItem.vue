@@ -2901,6 +2901,8 @@ defineExpose({ el });
 		> article {
 			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
 			--p: calc(2 * var(--spacing));
+			anchor-scope: --extra-container;
+			anchor-name: --extra-container;
 
 			> img {
 				--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
