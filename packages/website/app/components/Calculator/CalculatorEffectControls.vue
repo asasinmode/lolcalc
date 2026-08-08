@@ -56,6 +56,23 @@ function hideControlsTooltip(event: Event) {
 			--at-apply: '-me-px';
 		}
 
+		> label {
+			--at-apply: 'cursor-pointer';
+
+			&::before {
+				--at-apply: 'content-empty size-4 bg-[--ui-pretend-button-icon-clr]';
+				mask: icon('i-ph:check-fat') center / 100% 100% no-repeat;
+			}
+
+			&:has(> input:checked)::before {
+				mask: icon('i-ph:check-fat-fill') center / 100% 100% no-repeat;
+			}
+
+			> * {
+				--at-apply: 'sr-only';
+			}
+		}
+
 		[popover] {
 			--at-apply: 'p-[--default-hover-tooltip-p] text-white';
 			position-anchor: --extra-controls;
