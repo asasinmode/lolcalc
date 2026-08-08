@@ -574,7 +574,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
-			.map(([, value]) => value)
+			.map(([, value]) => value && roundVariable(value, 7))
 			.join('\'');
 
 		const runePathKeys = Object.keys(RUNES.paths);
