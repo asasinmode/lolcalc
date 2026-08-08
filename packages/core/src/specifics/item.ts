@@ -3653,7 +3653,7 @@ export const ITEM_SPECIFICS = {
 					f5: { value: 0 },
 					f6: { value: ITEMS_BY_NAME.solsticeSleigh?.dataValues.StealthWardCap },
 					BonusMS: {
-						value: self.stats.value.variables.solsticeSleighBonusMS,
+						value: self.stats.value.variables.solsticeSleighBonusMS ?? 0,
 					},
 				};
 			},
