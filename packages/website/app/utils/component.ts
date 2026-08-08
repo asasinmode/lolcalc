@@ -68,6 +68,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 	label: string,
 	getDerivedValue: (progress: number, self: DamageSource) => number,
 	derivedSymbolSuffix = '%',
+	recalculate?: (self: DamageSource) => void
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);

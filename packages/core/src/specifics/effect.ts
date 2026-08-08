@@ -657,7 +657,7 @@ export const EFFECT_SPECIFICS = {
 	},
 	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0),
-		label: 'Surging Tides',
+		label: 'Surging Tides move speed',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},

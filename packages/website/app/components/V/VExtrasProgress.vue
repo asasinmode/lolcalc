@@ -54,10 +54,6 @@ const value = defineModel<number>({ required: true });
 			line-clamp: 2;
 		}
 
-		> input {
-			--at-apply: '';
-		}
-
 		> output {
 			--at-apply: 'self-center text-end leading-none';
 		}

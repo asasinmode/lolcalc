@@ -723,25 +723,31 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Nami: {
-		PASSIVE_BONUS_MS: ((progress, self) => {
-			const bonusMS = championAbilityVariableValue('TotalMSBonus', {
-				abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
-				damageSource: self,
-			});
-
-			if (typeof bonusMS.value === 'number') {
-				return bonusMS.value * progress / 100;
-			}
-
-			console.warn('[CHAMPION_SPECIFICS namie] failed to calculate passive bonus MS', bonusMS);
-			return Number.NaN;
-		}) satisfies IDeriveProgressFn,
 		setupData(self) {
 			return {
 				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 100),
+				passiveMSTotalAp: Math.max(0, Math.round(self.internalData.value.passiveMSTotalAp ?? 0)),
 			};
 		},
 		passive: {
+			snapshotAndApplyPassive(self: DamageSource){
+				console.log('snapshotting and applying', self.stats.value.total.abilityPower)
+			},
+			calculateBonusMS: ((progress, self) => {
+				const bonusMS = championAbilityVariableValue('TotalMSBonus', {
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				});
+				console.log('calcaulting bonus ms with', {progress, ap: self.stats.value.total.abilityPower}, bonusMS);
+
+				// if (typeof bonusMS.value === 'number') {
+				// 	return bonusMS.value * progress / 100;
+				// }
+
+				// console.warn('[CHAMPION_SPECIFICS namie] failed to calculate passive bonus MS', bonusMS);
+				// return Number.NaN;
+				return 42;
+			}) satisfies IDeriveProgressFn,
 			variables: defineChampionVariables<'Nami', typeof INami, 'passive'>()({
 				known: {
 					BonusMS: [],
@@ -765,10 +771,12 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
-					const bonusMS = CHAMPION_SPECIFICS.Nami.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, self);
-					if (!Number.isNaN(bonusMS)) {
-						championPassiveStats.moveSpeed = bonusMS;
-					}
+					console.log('namiying', {...self.internalData.value });
+					// const bonusMS = CHAMPION_SPECIFICS.Nami.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, { champion: self.champion, stats: { value: { total: { abilityPower: 18 } } } } as DamageSource);
+					// if (!Number.isNaN(bonusMS)) {
+					// 	championPassiveStats.moveSpeed = bonusMS;
+					// }
+					championPassiveStats.moveSpeed = 0;
 				},
 			},
 		},
@@ -1578,6 +1586,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
+	[key: string]: any;
 	/**
 	 * ability's variant specific
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
@@ -1622,7 +1631,14 @@ export interface IChampionInternalDataMap {
 	LeeSin: { hasPassiveStack: number };
 	Mordekaiser: { isPassiveMSActive: number };
 	Naafiri: { passiveStacks: number } & IDamageSourceInternalDataBase;
-	Nami: { passiveMSProgress: number };
+	Nami: {
+		passiveMSProgress: number;
+		/**
+		 * passive MS needs total AP. Snapshot it on extra component `calculate/recalculate` press, then use it in calculation
+		 * basically lets you do something like: apply passive -> you gain stats -> apply passive again with the stats you have from the previous application
+		 */
+		passiveMSTotalAp: number;
+	};
 	Nasus: { wProgress: number };
 	Nidalee: { passiveVariantActive: number };
 	Nunu: { isPassiveActive: number };
