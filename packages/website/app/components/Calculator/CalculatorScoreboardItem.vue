@@ -2926,11 +2926,11 @@ defineExpose({ el });
 			}
 
 			label:has(+ button) {
-				--at-apply: 'pe-6';
+				--at-apply: 'me-6';
 			}
 
 			label:has(+ .effect-ctl) {
-				--at-apply: 'pe-11';
+				--at-apply: 'me-11';
 			}
 		}
 	}

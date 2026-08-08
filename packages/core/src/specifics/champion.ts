@@ -29,7 +29,7 @@ import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
-import type { IChampionId } from '@lolcalc/data/types';
+import type { IChampion, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
@@ -737,37 +737,36 @@ export const CHAMPION_SPECIFICS = {
 					},
 					set(value) {
 						self.internalData.value.passiveMSTotalAp = value ? self.stats.value.total.abilityPower : undefined;
-						console.log('set', value, self.internalData.value);
 					},
 				}),
 				refresh(self) {
-					console.log('refreshing', self.stats.value.total.abilityPower, self.internalData.value);
+					self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
 				},
 			},
-			calculateBonusMS: ((progress, self) => {
-				const bonusMS = championAbilityVariableValue('TotalMSBonus', {
-					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
-					damageSource: self,
-				});
-				console.log('calcaulting bonus ms with', { progress, ap: self.stats.value.total.abilityPower }, bonusMS);
-
-				// if (typeof bonusMS.value === 'number') {
-				// 	return bonusMS.value * progress / 100;
-				// }
-
-				// console.warn('[CHAMPION_SPECIFICS namie] failed to calculate passive bonus MS', bonusMS);
-				// return Number.NaN;
-				return 42;
+			derivedMS: ((progress, self): number => {
+				return self.stats.value.championPassive.moveSpeed ?? CHAMPION_SPECIFICS.Nami.passive.calculateMS(self.champion.value!, progress, self.stats.value.total);
 			}) satisfies IDeriveProgressFn,
+			calculateMS: (champion: IChampion, progress: number, totalStats: Pick<IChampionStats, 'abilityPower'>) => {
+				const bonusMS = championAbilityVariableValue('TotalMSBonus', {
+					abilityVariant: champion.abilities.passive.variants[0]!,
+					damageSource: { stats: { value: { total: totalStats } } } as DamageSource,
+				});
+
+				if (typeof bonusMS.value === 'number') {
+					return bonusMS.value * progress / 100;
+				}
+
+				console.warn('[CHAMPION_SPECIFICS nami] failed to calculate passive bonus MS', bonusMS);
+				return Number.NaN;
+			},
 			variables: defineChampionVariables<'Nami', typeof INami, 'passive'>()({
 				known: {
 					BonusMS: [],
 				},
 				calculate(self) {
-					// TODO is incorrect in results copy, also calc should be in postTotal
 					return {
 						BonusMS: {
-							value: self.stats.value.championPassive.moveSpeed,
+							value: self.stats.value.championPassive.moveSpeed ?? 0,
 						},
 					};
 				},
@@ -782,12 +781,16 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
-					console.log('namiying', { ...self.internalData.value });
-					// const bonusMS = CHAMPION_SPECIFICS.Nami.PASSIVE_BONUS_MS(self.internalData.value.passiveMSProgress, { champion: self.champion, stats: { value: { total: { abilityPower: 18 } } } } as DamageSource);
-					// if (!Number.isNaN(bonusMS)) {
-					// 	championPassiveStats.moveSpeed = bonusMS;
-					// }
-					championPassiveStats.moveSpeed = 0;
+					const { passiveMSProgress, passiveMSTotalAp } = self.internalData.value;
+					if (passiveMSTotalAp === undefined) {
+						return;
+					}
+
+					const bonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(self.champion.value!, passiveMSProgress, { abilityPower: passiveMSTotalAp });
+
+					if (!Number.isNaN(bonusMS)) {
+						championPassiveStats.moveSpeed = bonusMS;
+					}
 				},
 			},
 		},
