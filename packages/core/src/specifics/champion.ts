@@ -726,7 +726,7 @@ export const CHAMPION_SPECIFICS = {
 		setupData(self) {
 			return {
 				passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 100),
-				passiveMSTotalAp: Math.max(0, Math.round(self.internalData.value.passiveMSTotalAp ?? 0)),
+				passiveMSTotalAp: self.internalData.value.passiveMSTotalAp !== undefined ? Math.max(0, Math.round(self.internalData.value.passiveMSTotalAp)) : undefined,
 			};
 		},
 		passive: {
