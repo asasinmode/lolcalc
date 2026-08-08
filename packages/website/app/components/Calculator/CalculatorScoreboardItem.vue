@@ -2908,16 +2908,16 @@ defineExpose({ el });
 				--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
 			}
 
-			label {
+			> label {
 				--at-apply: 'text-neutral-200';
 			}
 
-			label + button,
-			label + .effect-ctl {
+			> label + button,
+			> label + .effect-ctl {
 				--at-apply: 'absolute end-[--p] inset-bs-[--p] z-1';
 			}
 
-			label + button,
+			> label + button,
 			.effect-ctl > button,
 			.effect-ctl > label {
 				--at-apply: 'grid-center size-5.5';
@@ -2927,11 +2927,11 @@ defineExpose({ el });
 				}
 			}
 
-			label:has(+ button) {
+			> label:has(+ button) {
 				--at-apply: 'me-6';
 			}
 
-			label:has(+ .effect-ctl) {
+			> label:has(+ .effect-ctl) {
 				--at-apply: 'me-11';
 			}
 		}

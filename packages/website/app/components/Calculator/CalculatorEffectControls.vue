@@ -83,7 +83,7 @@ function hideControlsTooltip(event: Event) {
 		}
 
 		[popover] {
-			--at-apply: 'p-[--default-hover-tooltip-p] text-white';
+			--at-apply: 'p-[--default-hover-tooltip-p]';
 			position-anchor: --extra-container;
 			justify-self: anchor-center;
 			inset-block-start: calc(anchor(end) - 1px);
