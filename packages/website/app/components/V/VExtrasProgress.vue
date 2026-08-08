@@ -2,11 +2,11 @@
 import type { IGameImageData } from '@lolcalc/core/misc';
 import { roundVariable } from '@lolcalc/shared/utils';
 
-defineProps<{
+const props = defineProps<{
 	idPrefix: string;
 	imgSrc: IGameImageData;
 	label: string;
-	derivedValue?: number;
+	deriveValue: (value: number) => number | undefined;
 	derivedSymbolSuffix?: string;
 }>();
 
@@ -15,6 +15,30 @@ defineEmits<{
 }>();
 
 const value = defineModel<number>();
+const localValue = ref(value.value);
+
+let isMouseDown: boolean = false;
+
+function updateModelValue(event: Event) {
+	const newValue = Number.parseInt((event.target as HTMLInputElement).value);
+	if (value.value === undefined && isMouseDown) {
+		localValue.value = newValue;
+	} else {
+		value.value = newValue;
+	}
+}
+
+function updateMousedown(newValue: boolean) {
+	isMouseDown = newValue;
+	if (!newValue && value.value === undefined && localValue.value) {
+		value.value = localValue.value;
+	}
+}
+
+const derivedValue = computed(() => {
+	const rv = value.value ?? localValue.value;
+	return rv && props.deriveValue(rv);
+});
 </script>
 
 <template>
@@ -30,10 +54,13 @@ const value = defineModel<number>();
 		<slot />
 		<input
 			:id="`veprgr-${idPrefix}`"
-			:value="value ?? 0"
+			:value="value ?? localValue ?? 0"
 			type="range"
 			min="0"
 			max="100"
+			@mousedown="updateMousedown(true)"
+			@mouseup="updateMousedown(false)"
+			@input="updateModelValue"
 		>
 		<output :for="`veprgr-${idPrefix}`" aria-live="off">
 			{{ derivedValue !== undefined ? roundVariable(derivedValue, 1) : 0 }}{{ derivedSymbolSuffix }}
