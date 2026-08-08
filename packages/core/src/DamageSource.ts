@@ -145,8 +145,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 * turns into `0|0` which when restoring is parsed into array `[0, 0]`
 	 * then when creating, the `this.champion` watch checks if `this.fromStringifiedData` is `true` and if so, it will run the `setupData` function with no values, then extract the keys of the returned object, set the properties one by one taking them from the array and setting their values then run the setup function again to validate/clamp the values restored from original array
 	 *   1. champion is selected, `this.internalData.value = championSpecific?.setupData(this)`
-	 *   2. data is stringified, `Object.values(this.internalData.value).join('|')`
-	 *   3. data is restored, `const rawValues = rawInternalData.split('|')`, then every value is converted into a number or set undefined if invalid
+	 *   2. data is stringified, `Object.values(this.internalData.value).join('\'')`
+	 *   3. data is restored, `const rawValues = rawInternalData.split('\'')`, then every value is converted into a number or set undefined if invalid
 	 *   4. champion watch handles parsing back to object
 	 */
 	internalData: Ref<Id extends keyof IChampionInternalDataMap
@@ -575,7 +575,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
 			.map(([, value]) => value)
-			.join('.');
+			.join('\'');
 
 		const runePathKeys = Object.keys(RUNES.paths);
 		const roleQuestKeys = Object.keys(TEXT.roleQuests);
@@ -595,12 +595,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
-			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('-'),
-			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('-'),
+			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
+			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
-				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}-${effect.data.join('-')}`)
-				.join('.'),
+				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}'${effect.data.join('\'')}`)
+				.join('~'),
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
@@ -647,7 +647,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawInternalItemData?.length) {
-			for (const keyValue of rawInternalItemData.split('-')) {
+			for (const keyValue of rawInternalItemData.split('\'')) {
 				const [key, rawValue] = keyValue.split('~');
 				if (key && rawValue) {
 					const value = Number.parseFloat(rawValue);
@@ -659,7 +659,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawInternalDragonData?.length) {
-			for (const keyValue of rawInternalDragonData.split('-')) {
+			for (const keyValue of rawInternalDragonData.split('\'')) {
 				const [key, rawValue] = keyValue.split('~');
 				if (key && rawValue) {
 					const value = Number.parseFloat(rawValue);
@@ -805,15 +805,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		const fromStringifiedInternalData: (number | undefined)[] = [];
 		if (rawInternalData?.length) {
-			for (const rawValue of rawInternalData.split('.')) {
+			for (const rawValue of rawInternalData.split('\'')) {
 				const value = Number.parseFloat(rawValue);
 				fromStringifiedInternalData.push(Number.isNaN(value) ? undefined : value);
 			}
 		}
 
 		if (rawEffectsData?.length) {
-			for (const rawEffect of rawEffectsData.split('.')) {
-				const [effectObjectNameIndex, ...rawData] = rawEffect.split('-');
+			for (const rawEffect of rawEffectsData.split('~')) {
+				const [effectObjectNameIndex, ...rawData] = rawEffect.split('\'');
 				const effectSpecificEntry = effectObjectNameIndex && EFFECT_SPECIFICS_OBJECT_ENTRIES[Number.parseInt(effectObjectNameIndex)];
 				if (effectSpecificEntry) {
 					const data = rawData.map((rawValue) => {
