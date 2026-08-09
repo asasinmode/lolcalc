@@ -223,7 +223,7 @@
 	}
 
 	.hover-tooltip {
-		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-btn-border-clr] text-neutral-200';
+		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-btn-border-clr] text-neutral-200 shadow-lg';
 		--footer-pt: calc(1 * var(--spacing));
 		--footer-mt: calc(2 * var(--spacing));
 	}
@@ -249,7 +249,7 @@
 		anchor-name: --parent;
 
 		&:before {
-			--at-apply: 'absolute content-empty -inset-x-1 block-2 inset-bs-px -translate-y-full';
+			--at-apply: 'absolute content-empty -inset-x-1 block-2.25 inset-bs-px -translate-y-full';
 		}
 
 		> span:first-child {
