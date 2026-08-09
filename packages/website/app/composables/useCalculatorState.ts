@@ -109,12 +109,8 @@ export function initCalculatorState(): ICalculatorState {
 					id: 'dps',
 				},
 			]),
-			// TODO
 			getCellValue() {
-				const value = Math.round(Math.random() * 500);
-				const numberValue = value;
-
-				return { value, numberValue };
+				return { value: 'TODO' };
 			},
 			selectValue: 'normal',
 			selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
