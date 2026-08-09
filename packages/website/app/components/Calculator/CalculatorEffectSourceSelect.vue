@@ -23,12 +23,12 @@ function showTooltip(event: MouseEvent) {
 	const { target } = event as unknown as { target: HTMLElement };
 	hoverTooltipEl.value?.showPopover();
 	tooltipAnchor = target;
-	tooltipAnchor?.addEventListener('mouseleave', hideTooltiop, { passive: true, once: true });
+	tooltipAnchor?.addEventListener('mouseleave', hideTooltip, { passive: true, once: true });
 }
 
-function hideTooltiop() {
+function hideTooltip() {
 	hoverTooltipEl.value?.hidePopover();
-	tooltipAnchor?.removeEventListener('mouseleave', hideTooltiop);
+	tooltipAnchor?.removeEventListener('mouseleave', hideTooltip);
 	tooltipAnchor = undefined;
 }
 
@@ -56,6 +56,11 @@ const selectedText = computed(() => {
 	}
 	return undefined;
 });
+
+function updateThumbnailHideTooltip() {
+	selectedSource.value && updateThumbnail(selectedSource.value);
+	hideTooltip();
+}
 </script>
 
 <template>
@@ -74,7 +79,7 @@ const selectedText = computed(() => {
 		}"
 		:style="selectedSource?.listedChampion.value ? `--selected-src-img: url(${championImage(selectedSource.listedChampion.value.image, selectedSource.listedChampion.value.id)})` : undefined"
 		@label-mouseenter="showTooltip"
-		@update:model-value="selectedSource && updateThumbnail(selectedSource)"
+		@update:model-value="updateThumbnailHideTooltip"
 	>
 		<template #post>
 			<div v-show="showInvalid" class="invalid-indicator">
