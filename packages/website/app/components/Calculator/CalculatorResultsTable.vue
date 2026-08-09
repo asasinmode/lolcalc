@@ -1082,7 +1082,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
 function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSection) {
-	return implementedDamageSectionsMap.value[sectionIndex] && (section.hoverTooltipData || section.id === 'a-aa');
+	return implementedDamageSectionsMap.value[sectionIndex] && (section.hoverTooltipData || section.id === ResultSectionId.BasicAttack);
 }
 
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
@@ -1546,7 +1546,7 @@ defineExpose({
 										v-else-if="section.abilityId.type === AbilityType.dragon"
 										v-bind="section.hoverTooltipData as any"
 									/>
-									<article v-else-if="section.id === 'a-aa'" popover="hint" class="hover-tooltip custom">
+									<article v-else-if="section.id === ResultSectionId.BasicAttack" popover="hint" class="hover-tooltip custom">
 										TODO aa hover tooltip
 									</article>
 								</template>
