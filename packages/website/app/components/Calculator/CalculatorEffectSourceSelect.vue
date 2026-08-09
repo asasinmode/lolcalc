@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import type { DamageSource } from '@lolcalc/core/DamageSource';
+
 const props = defineProps<{
 	idSuffix: string;
 	invalidMessage?: string;
 }>();
+
+const { damageSources, damageTargets } = useCalculatorState();
+
+function formatSourceOptions(sources: DamageSource[]): [string, string][] {
+	return sources.map((source, index) => [source.id, `(${index + 1}) ${source.listedChampion.value?.name ?? '<empty>'}`]);
+}
 
 const value = defineModel<string>();
 
@@ -35,7 +43,10 @@ const showInvalid = computed(() => value.value && props.invalidMessage);
 		clearable
 		:data-empty="value ? undefined : ''"
 		:aria-errormessage="showInvalid ? `effect-src-select-err-${idSuffix}` : undefined"
-		:options="[['a', 'option 1'], ['b', 'option 2'], ['c', 'option 3']]"
+		:options="{
+			sources: formatSourceOptions(damageSources),
+			targets: formatSourceOptions(damageTargets),
+		}"
 		@label-mouseenter="showTooltip"
 	>
 		<template #post>

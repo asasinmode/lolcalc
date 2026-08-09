@@ -1,8 +1,10 @@
 <script setup lang="ts" generic="T extends string">
+type IOption = [value: T | number, text: MaybeRef<string | number>, isDisabled?: boolean];
+
 const props = defineProps<{
 	id: string;
 	label: string;
-	options: [value: T | number, text: MaybeRef<string | number>, isDisabled?: boolean][];
+	options: IOption[] | Record<string, IOption[]>;
 	name?: string;
 	clearable?: boolean;
 	required?: boolean;
@@ -39,9 +41,18 @@ function clear(event: MouseEvent) {
 			<option v-if="clearable" value="">
 				&lt;none&gt;
 			</option>
-			<option v-for="[optionValue, text, isDisabled] in options" :key="optionValue" :value="optionValue" :disabled="isDisabled">
-				{{ text }}
-			</option>
+			<template v-if="Array.isArray(options)">
+				<option v-for="[optionValue, text, isDisabled] in options" :key="optionValue" :value="optionValue" :disabled="isDisabled">
+					{{ text }}
+				</option>
+			</template>
+			<template v-else>
+				<optgroup v-for="(optionsList, groupLabel, index) in options" :key="index" :label="groupLabel">
+					<option v-for="[optionValue, text, isDisabled] in optionsList" :key="`${index}-${optionValue}`" :value="optionValue" :disabled="isDisabled">
+						{{ text }}
+					</option>
+				</optgroup>
+			</template>
 		</select>
 		<label :for="id">
 			<span>{{ label }}</span>
