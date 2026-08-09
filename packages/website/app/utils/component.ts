@@ -83,6 +83,13 @@ export async function progressExtra<T extends IGameAbilityId>(
 		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
 		const effectControlModel = effectControlsProps?.model(props.damageSource);
+		function effectControlUpdateValue(val?: boolean) {
+			effectControlModel!.value = val;
+		}
+		function effectControlRefresh() {
+			effectControlsProps!.refresh(props.damageSource);
+		}
+
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => selectEffectSourceProps.invalidMessage(props.damageSource));
 
 		return () => h(CalculatorExtraProgress, {
@@ -99,7 +106,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			'data-inactive': effectControlsProps && !effectControlModel?.value ? '' : undefined,
 		}, effectControlsProps
 			? { default: () => [
-					createEffectControls(props, effectControlsProps.refresh, effectControlModel!, ctx.slots),
+					createEffectControls(props, effectControlModel!, effectControlUpdateValue, effectControlRefresh, ctx.slots),
 					selectEffectSourceInvalidMessage && createSelectEffectSource(props, selectEffectSourceInvalidMessage),
 				] }
 			: { default: () => {
@@ -212,8 +219,9 @@ appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 
 function createEffectControls(
 	props: IExtraComponentProps,
-	refresh: IEffectControlsProps['refresh'],
 	model: ReturnType<IEffectControlsProps['model']>,
+	updateValue: (value: boolean | undefined) => void,
+	refresh: () => void,
 	slots: SlotsType,
 ) {
 	return h(
@@ -221,8 +229,8 @@ function createEffectControls(
 		{
 			'idSuffix': props.idSuffix,
 			'modelValue': model.value,
-			'onUpdate:modelValue': val => model.value = val,
-			'onRefresh': () => refresh(props.damageSource),
+			'onUpdate:modelValue': updateValue,
+			'onRefresh': refresh,
 		},
 		slots,
 	);
