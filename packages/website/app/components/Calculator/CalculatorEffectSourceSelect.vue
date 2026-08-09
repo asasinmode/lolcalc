@@ -37,6 +37,9 @@ const showInvalid = computed(() => value.value && props.invalidMessage);
 // TODO use one from props/value/applied effect
 const selectedSource = computed(() => value.value ? damageSources.value.find(source => source.id === value.value) ?? damageTargets.value.find(source => source.id === value.value) : undefined);
 
+const thumbnail = useTemplateRef('thumbnail');
+const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail(thumbnail);
+
 const selectedText = computed(() => {
 	if (selectedSource.value && !selectedSource.value?.listedChampion.value) {
 		let index = damageSources.value.indexOf(selectedSource.value);
@@ -61,7 +64,6 @@ const selectedText = computed(() => {
 		v-model="value"
 		class="effect-src-select"
 		label="effect source"
-		:title="showInvalid ? undefined : 'effect source'"
 		clearable
 		:class="{ empty: !value }"
 		:aria-errormessage="showInvalid ? `effect-src-select-err-${idSuffix}` : undefined"
@@ -72,18 +74,21 @@ const selectedText = computed(() => {
 		}"
 		:style="selectedSource?.listedChampion.value ? `--selected-src-img: url(${championImage(selectedSource.listedChampion.value.image, selectedSource.listedChampion.value.id)})` : undefined"
 		@label-mouseenter="showTooltip"
+		@update:model-value="selectedSource && updateThumbnail(selectedSource)"
 	>
 		<template #post>
 			<div v-show="showInvalid" class="invalid-indicator">
 				<span>(issue)</span>
 				<Icon class="i-ph:exclamation-mark-bold" />
 			</div>
-			<div ref="hoverTooltip" popover="hint">
+			<div ref="hoverTooltip" popover="hint" class="hover-tooltip">
+				<span v-show="!selectedSource">effect source</span>
 				<p v-show="showInvalid" :id="`effect-src-select-err-${idSuffix}`" class="alert warning">
 					effect may not be applied properly<br>
 					{{ invalidMessage }}
 					<Icon class="i-ph:warning-light" />
 				</p>
+				<DamageSourceThumbnail v-show="selectedSource" ref="thumbnail" />
 			</div>
 		</template>
 	</VSelect>
@@ -141,6 +146,21 @@ const selectedText = computed(() => {
 			position-anchor: --effect-src-select;
 			inset-block-start: calc(anchor(end) - 1px);
 			justify-self: anchor-center;
+
+			> span,
+			.alert {
+				--at-apply: 'm-[--default-hover-tooltip-p]';
+			}
+
+			.damage-source-thumbnail {
+				--at-apply: 'b-0';
+			}
+		}
+
+		> [aria-errormessage] ~ [popover] {
+			.damage-source-thumbnail {
+				--at-apply: 'mx-auto b mbe-[--default-hover-tooltip-p]';
+			}
 		}
 	}
 }
