@@ -6,6 +6,7 @@ const props = defineProps<{
 	name?: string;
 	clearable?: boolean;
 	required?: boolean;
+	ariaErrormessage?: string;
 }>();
 
 defineEmits<{
@@ -29,6 +30,8 @@ function clear(event: MouseEvent) {
 			:value
 			:required
 			:name
+			:aria-errormessage
+			:aria-invalid="ariaErrormessage ? true : undefined"
 			@change="value = ($event.target as HTMLSelectElement).value as T || undefined"
 			@click.right="clear"
 			@mouseenter="$emit('labelMouseenter', $event)"

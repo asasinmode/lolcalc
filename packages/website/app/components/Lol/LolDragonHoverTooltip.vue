@@ -23,7 +23,7 @@ defineExpose({ el });
 		<h5>{{ computedDescription?.title }}</h5>
 		<p class="game-description" v-html="computedDescription?.[globalKeyModifiers.shift ? 'textExtended' : 'text'] ?? computedDescription?.text" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
-		<p v-if="checkIfValid" v-show="computedDescription?.invalidMessage" class="alert error">
+		<p v-if="checkIfValid" v-show="computedDescription?.invalidMessage" :id="`dragon-tooltip-error-${idSuffix ?? ''}`" class="alert error">
 			{{ computedDescription?.invalidMessage }}
 			<Icon class="i-ph:warning-circle-light" />
 		</p>

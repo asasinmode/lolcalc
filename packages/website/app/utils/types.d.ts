@@ -83,6 +83,7 @@ export interface IEffectHoverTooltipProps {
 }
 
 export interface IDragonHoverTooltipProps {
+	idSuffix?: string;
 	/** either this and `type` or `precomputedDescription` should be provided */
 	dragon?: IDragonName;
 	/** either this and `dragon` or `precomputedDescription` should be provided */

@@ -1496,13 +1496,14 @@ defineExpose({ el });
 					<h4>dragons</h4>
 					<VSelect
 						v-for="i in 4"
-						:id="`${idSuffix}-dragon-stack-${i}`"
+						:id="`dragon-stack-${i}-${idSuffix}`"
 						:key="i"
 						:model-value="value.dragonStacks.value[i - 1]"
 						:options="dragonOptions"
-						label="soul"
+						:label="`stack ${i}`"
 						class="dragon-stack"
 						clearable
+						:aria-errormessage="`dragon-tooltip-error-${idSuffix}`"
 						@update:model-value="updateDragonThing($event, 'stack', i - 1)"
 						@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, value.dragonStacks.value[i - 1]!, 'stack')"
 					>
@@ -1515,12 +1516,13 @@ defineExpose({ el });
 						</template>
 					</VSelect>
 					<VSelect
-						:id="`${idSuffix}-dragon-soul`"
+						:id="`dragon-soul-${idSuffix}`"
 						:model-value="value.dragonSoul.value"
 						:options="dragonOptions"
 						class="dragon-soul"
 						label="soul"
 						clearable
+						:aria-errormessage="`dragon-tooltip-error-${idSuffix}`"
 						@update:model-value="updateDragonThing($event, 'soul')"
 						@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, value.dragonSoul.value, 'soul')"
 					>
@@ -1535,6 +1537,7 @@ defineExpose({ el });
 					<LolDragonHoverTooltip
 						ref="dragonHoverTooltip"
 						check-if-valid
+						:id-suffix
 						:precomputed-description="hoveredDragonThing?.[1] === 'soul' ? value.computed.dragonSoulAbility.value : undefined"
 						:dragon="hoveredDragonThing?.[0]"
 						:type="hoveredDragonThing?.[1]"
