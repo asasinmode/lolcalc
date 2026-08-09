@@ -115,7 +115,7 @@ defineExpose({ el });
 			/>
 			<div class="game-description" v-html="computedDescription?.description" />
 			<footer v-if="sourceAbilityDescription" v-show="!globalKeyModifiers.shift">
-				Hold <kbd>[Shift]</kbd> to show source
+				Hold <kbd>[Shift]</kbd> to show source ability
 			</footer>
 		</article>
 		<template v-if="sourceAbilityDescription">

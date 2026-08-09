@@ -100,7 +100,6 @@ export const EFFECT_SPECIFICS = {
 		},
 		deriveProgressValue: (value, _self) => {
 			const slowValue =	championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul });
-			// TODO melee/ranged championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
 			if (typeof slowValue.value === 'number') {
 				return slowValue.value * value;
 			} else {
@@ -110,7 +109,7 @@ export const EFFECT_SPECIFICS = {
 		},
 		variables: defineVariables({
 			known: {
-				SlowPercentage: [],
+				Slow: [],
 			},
 			calculate(self) {
 				const effectData = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.hextechSoulSlow));
@@ -118,13 +117,13 @@ export const EFFECT_SPECIFICS = {
 				const value: number = effectData ? EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(effectData[0].data[0], {} as DamageSource) : 0;
 
 				return {
-					SlowPercentage: {
+					Slow: {
 						value,
 					},
 				};
 			},
 			meta: {
-				SlowPercentage: {
+				Slow: {
 					isCustom: true,
 					resultsIsPercentage: true,
 				},
