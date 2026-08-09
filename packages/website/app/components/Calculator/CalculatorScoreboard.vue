@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import type { IItem } from '@lolcalc/data/types';
-import { DamageSource, isMasterworkSlot } from '@lolcalc/core/DamageSource';
+import { DamageSource } from '@lolcalc/core/DamageSource';
 import { itemBuyability } from '@lolcalc/core/specifics/item';
-import { CHAMPION_IMAGES, imgUrl, PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
-
-const { vMinor, vSemver } = PATCH_VERSION;
 
 const globalKeyModifiers = useGlobalKeyModifiers();
-const { championImage, championImageSize } = CHAMPION_IMAGES;
 
 const { damageSources, damageTargets } = useCalculatorState();
 
@@ -23,76 +19,11 @@ const dragging = shallowRef<{
 	source: DamageSource[];
 }>();
 
+const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail(dragPreview);
+
 function onDragstart(event: DragEvent, index: number, source: DamageSource[], isDuplicate: boolean) {
-	const damageSource = source[index]!;
-
-	const [champImgContainer, lvlSpan, runeContainer, itemList] = dragPreview.value!.children as unknown as [HTMLSpanElement, HTMLSpanElement, HTMLDivElement, HTMLUListElement];
-	const champImg = champImgContainer.firstElementChild as HTMLImageElement;
-	const [runePrimary, runeSecondary] = runeContainer.children as unknown as [HTMLImageElement, HTMLSpanElement];
-
-	const champ = damageSource.listedChampion.value;
-	if (champ) {
-		champImg.src = championImage(champ.image, champ.id);
-		const size = championImageSize(champ.id);
-		champImg.width = size;
-		champImg.height = size;
-	} else {
-		champImg.src = imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png');
-		champImg.width = 256;
-		champImg.height = 256;
-	}
-
-	lvlSpan.textContent = damageSource.level.value.toString();
-
-	const { primary, primarySlots, secondary } = damageSource.runes.value.paths;
-	if (primary && primarySlots[0]) {
-		const { icon } = RUNES.paths[primary].slots[0]![primarySlots[0]]!;
-		runePrimary.src = imgUrl(`/game/${icon}`);
-		runePrimary.width = 256;
-		runePrimary.height = 256;
-	} else {
-		runePrimary.src = imgUrl('plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png');
-		runePrimary.width = 80;
-		runePrimary.height = 80;
-	}
-
-	if (secondary) {
-		const { iconColor } = RUNES.paths[secondary]!;
-		const { name } = TEXT.runes.paths[secondary]!;
-		runeSecondary.style.display = '';
-		runeSecondary.style.backgroundColor = iconColor;
-		runeSecondary.style.mask = `url(${imgUrl(`plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`)}) no-repeat center`;
-	} else {
-		runeSecondary.style.display = 'none';
-	}
-
-	for (let i = 0; i < 7; i++) {
-		const li = itemList.children.item(i) as HTMLLIElement;
-		const img = li.firstElementChild as HTMLImageElement;
-		const item = damageSource.items.value[i];
-
-		if (isMasterworkSlot(damageSource, i)) {
-			li.classList.add('data-masterwork', '');
-		} else {
-			li.classList.remove('data-masterwork');
-		}
-
-		if (item) {
-			img.src = imgUrl(`img/item/${item.image}`, true);
-			img.style.display = '';
-		} else {
-			img.style.display = 'none';
-		}
-	}
-
-	const lastLi = itemList.lastElementChild as HTMLLIElement;
-	if (damageSource.roleQuest.value === 'bot') {
-		lastLi.style.display = '';
-		itemList.style.paddingInlineEnd = `calc(6 * var(--spacing))`;
-	} else {
-		lastLi.style.display = 'none';
-		itemList.style.paddingInlineEnd = '';
-	}
+	// TODO maybe update the source-thumbnail on drag button mousedown so it's always ready when the drag starts?
+	updateThumbnail(source[index]!);
 
 	dragging.value = { index, source, isDuplicate };
 	event.stopPropagation();
@@ -206,6 +137,7 @@ function getListDropTargetIndex(target: DamageSource[], fromIndex: number, sourc
 
 function remove(index: number, target: DamageSource[]) {
 	const [damageSource] = target.splice(index, 1);
+	// TODO remove existing effect references
 	for (const unwatch of damageSource!.watchHandles) {
 		unwatch();
 	}
@@ -435,19 +367,7 @@ const isDisplayingTargets = ref(false);
 					</button>
 				</li>
 			</ul>
-			<div ref="dragPreview" class="source-thumbnail" inert aria-hidden="true">
-				<span><img></span>
-				<span />
-				<div>
-					<img class="primary-path-keystone">
-					<span class="secondary-path" />
-				</div>
-				<ul>
-					<li v-for="i in 7" :key="i" :style="i === 7 ? 'display: none;' : undefined">
-						<img>
-					</li>
-				</ul>
-			</div>
+			<DamageSourceThumbnail ref="dragPreview" />
 		</div>
 	</section>
 </template>
@@ -524,7 +444,7 @@ const isDisplayingTargets = ref(false);
 				}
 			}
 
-			> .source-thumbnail {
+			> .damage-source-thumbnail {
 				--at-apply: 'absolute -z-1 -start-[9999px] -top-[9999px]';
 			}
 
@@ -672,7 +592,7 @@ const isDisplayingTargets = ref(false);
 		}
 	}
 
-	.source-thumbnail {
+	.damage-source-thumbnail {
 		--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 flex inline-max relative';
 
 		> :nth-child(1) {
