@@ -7,14 +7,14 @@ const props = defineProps<{
 	invalidMessage?: string;
 }>();
 
+const value = defineModel<DamageSource>();
+
 const { damageSources, damageTargets } = useCalculatorState();
 const { championImage } = CHAMPION_IMAGES;
 
 function formatSourceOptions(sources: DamageSource[]): [string, string][] {
 	return sources.map((source, index) => [source.id, `(${index + 1}) ${source.listedChampion.value?.name ?? '<empty>'}`]);
 }
-
-const value = defineModel<string>();
 
 let tooltipAnchor: HTMLElement | undefined;
 const hoverTooltipEl = useTemplateRef('hoverTooltip');
@@ -34,39 +34,47 @@ function hideTooltip() {
 
 const showInvalid = computed(() => value.value && props.invalidMessage);
 
-// TODO use one from props/value/applied effect
-const selectedSource = computed(() => value.value ? damageSources.value.find(source => source.id === value.value) ?? damageTargets.value.find(source => source.id === value.value) : undefined);
-
 const thumbnail = useTemplateRef('thumbnail');
 const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail(thumbnail);
 
 const selectedText = computed(() => {
-	if (selectedSource.value && !selectedSource.value?.listedChampion.value) {
-		let index = damageSources.value.indexOf(selectedSource.value);
+	if (value.value && !value.value?.listedChampion.value) {
+		let index = damageSources.value.indexOf(value.value);
 		if (~index) {
 			return `s${index + 1}`;
 		}
 
-		index = damageTargets.value.indexOf(selectedSource.value);
+		index = damageTargets.value.indexOf(value.value);
 		if (~index) {
 			return `t${index + 1}`;
 		}
 
-		console.warn('[CalculatorEffectSourceSelect] could not find selected source in sources/targets', selectedSource.value);
+		console.warn('[CalculatorEffectSourceSelect] could not find selected source in sources/targets', value.value);
 	}
 	return undefined;
 });
 
-function updateThumbnailHideTooltip() {
-	selectedSource.value && updateThumbnail(selectedSource.value);
+function updateThumbnailHideTooltip(id?: string) {
+	const damageSource = id
+		? (damageSources.value.find(source => source.id === id) ?? damageTargets.value.find(target => target.id === id))
+		: undefined;
+	if (id && !damageSource) {
+		console.warn('[CalculatorEffectSourceSelect] failed to update model value, unknown damage source id', id, damageSources.value.map(s => s.id), damageTargets.value.map(t => t.id), value.value);
+	}
+	value.value = damageSource;
+	damageSource && updateThumbnail(damageSource);
 	hideTooltip();
 }
+
+onMounted(() => {
+	value.value && updateThumbnail(value.value);
+});
 </script>
 
 <template>
 	<VSelect
 		:id="`effect-src-select-${idSuffix}`"
-		v-model="value"
+		:model-value="value?.id"
 		class="effect-src-select"
 		label="effect source"
 		clearable
@@ -77,7 +85,7 @@ function updateThumbnailHideTooltip() {
 			sources: formatSourceOptions(damageSources),
 			targets: formatSourceOptions(damageTargets),
 		}"
-		:style="selectedSource?.listedChampion.value ? `--selected-src-img: url(${championImage(selectedSource.listedChampion.value.image, selectedSource.listedChampion.value.id)})` : undefined"
+		:style="value?.listedChampion.value ? `--selected-src-img: url(${championImage(value?.listedChampion.value.image, value?.listedChampion.value.id)})` : undefined"
 		@label-mouseenter="showTooltip"
 		@update:model-value="updateThumbnailHideTooltip"
 	>
@@ -87,13 +95,13 @@ function updateThumbnailHideTooltip() {
 				<Icon class="i-ph:exclamation-mark-bold" />
 			</div>
 			<div ref="hoverTooltip" popover="hint" class="hover-tooltip">
-				<span v-show="!selectedSource">effect source</span>
+				<span v-show="!value">effect source</span>
 				<p v-show="showInvalid" :id="`effect-src-select-err-${idSuffix}`" class="alert warning">
 					effect may not be applied properly<br>
 					{{ invalidMessage }}
 					<Icon class="i-ph:warning-light" />
 				</p>
-				<DamageSourceThumbnail v-show="selectedSource" ref="thumbnail" />
+				<DamageSourceThumbnail v-show="value" ref="thumbnail" />
 			</div>
 		</template>
 	</VSelect>
@@ -147,7 +155,7 @@ function updateThumbnailHideTooltip() {
 		}
 
 		> [popover] {
-			--at-apply: 'pointer-events-none';
+			--at-apply: 'pointer-events-none shadow-lg';
 			position-anchor: --effect-src-select;
 			inset-block-start: calc(anchor(end) - 1px);
 			justify-self: anchor-center;
@@ -164,7 +172,7 @@ function updateThumbnailHideTooltip() {
 
 		> [aria-errormessage] ~ [popover] {
 			.damage-source-thumbnail {
-				--at-apply: 'mx-auto b mbe-[--default-hover-tooltip-p]';
+				--at-apply: 'mx-auto b mbe-[--default-hover-tooltip-p] shadow-none';
 			}
 		}
 	}

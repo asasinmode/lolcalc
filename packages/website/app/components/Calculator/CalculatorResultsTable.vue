@@ -571,7 +571,7 @@ async function addResultsSection(
 		section.getCellValue = dragonVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
 	} else {
-		const effectSpecific = EFFECT_SPECIFICS[abilityId.id]!;
+		const effectSpecific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[abilityId.id]!;
 		if (!effectSpecific.variables) {
 			removeBeingAddedSection(section);
 			return;

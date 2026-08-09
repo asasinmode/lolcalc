@@ -228,7 +228,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
 			const effect = overrides.appliedEffects![i]!;
-			this.addEffect(effect.abilityId, effect.data);
+			this.addEffect(effect.abilityId, effect.data.value);
 		}
 
 		/** used in maxHealth/abilityResource watcher to ensure overrides are used only once */
@@ -549,7 +549,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
 			() => Object.values(this.internalDragonData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}-${effect.data.join('-')}`).join('|'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}-${effect.data.value.join('-')}`).join('|'),
 		];
 	}
 
@@ -599,7 +599,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
-				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}'${effect.data.join('\'')}`)
+				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}'${effect.data.value.join('\'')}`)
 				.join('~'),
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
@@ -941,7 +941,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	addEffect<T extends IEffectAbilityId>(
 		abilityId: T,
-		data?: IDamageSourceEffect<T>['data'],
+		data?: UnwrapRef<IDamageSourceEffect<T>['data']>,
 		/** when data is already expected to be "safe", not in need of `setupData`, like from `EFFECT_SPECIFICS.itemAppliedOnTargetEffectData` */
 		trustData = false,
 	): IDamageSourceEffect<T> {
@@ -952,31 +952,32 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			console.warn('[DamageSource addEffect] adding existing effect', abilityId);
 
 			if (data && trustData) {
-				this.appliedEffects.value[existingEffectIndex]!.data = data;
+				this.appliedEffects.value[existingEffectIndex]!.data.value = data;
 			} else {
 				const newData = specific.setupData(data);
 				if ('then' in newData) {
-					newData.then(value => this.appliedEffects.value[existingEffectIndex]!.data = value);
+					newData.then(value => this.appliedEffects.value[existingEffectIndex]!.data.value = value);
 				} else {
-					this.appliedEffects.value[existingEffectIndex]!.data = newData;
+					this.appliedEffects.value[existingEffectIndex]!.data.value = newData;
 				}
 			}
 
 			return this.appliedEffects.value[existingEffectIndex] as unknown as IDamageSourceEffect<T>;
 		} else {
-			const rv: IDamageSourceEffect<any> = {
+			const rv: IDamageSourceEffect<any> = markRaw({
 				abilityId,
-				data: [],
-			};
+				data: ref([]),
+				source: shallowRef(),
+			});
 
 			if (data && trustData) {
-				rv.data = data;
+				rv.data.value = data;
 			} else {
 				const newData = specific.setupData(data);
 				if ('then' in newData) {
-					newData.then(value => rv.data = value);
+					newData.then(value => rv.data.value = value);
 				} else {
-					rv.data = newData;
+					rv.data.value = newData;
 				}
 			}
 
@@ -1046,7 +1047,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				const effect = this.getEffect(effectAbilityId);
 
 				if (effect) {
-					index = (effect[0].data as IGameAbilityData<typeof effectAbilityId>)[0] - 1;
+					index = (effect[0].data.value as IGameAbilityData<typeof effectAbilityId>)[0] - 1;
 				}
 			}
 
@@ -1151,7 +1152,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				for (const effect of this.appliedEffects.value) {
 					const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
 					/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
-					(specific?.isActive ?? defaultEffectIsActive)(effect.data) && groupCalculateStatsHooks(rv, specific);
+					(specific?.isActive ?? defaultEffectIsActive)(effect.data.value) && groupCalculateStatsHooks(rv, specific);
 				}
 			}
 			return rv;
@@ -1212,9 +1213,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		for (const effect of this.appliedEffects.value) {
 			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
 			/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
-			if (specific?.modifyVariable && (specific.isActive ?? defaultEffectIsActive)(effect.data)) {
+			if (specific?.modifyVariable && (specific.isActive ?? defaultEffectIsActive)(effect.data.value)) {
 				rv[specific.modifyVariable.type] ??= [];
-				rv[specific.modifyVariable.type]!.push(value => specific.modifyVariable!.handler(value, effect.data));
+				rv[specific.modifyVariable.type]!.push(value => specific.modifyVariable!.handler(value, effect.data.value));
 			}
 		}
 
@@ -1740,12 +1741,12 @@ function formatItemDescriptionText(
 }
 
 function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
-	const specific = EFFECT_SPECIFICS[effect.abilityId.id];
+	const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id]!;
 	const rv: IComputedAppliedEffect = {
 		abilityId: effect.abilityId,
 		imgData: ['', 0],
-		imgText: computed((): string | number | undefined => specific.imgText?.(effect.data)),
-		isActive: computed((): number | boolean => (specific.isActive ?? defaultEffectIsActive)(effect.data)),
+		imgText: computed((): string | number | undefined => specific.imgText?.(effect.data.value)),
+		isActive: computed((): number | boolean => (specific.isActive ?? defaultEffectIsActive)(effect.data.value)),
 		specific,
 		maxValue: undefined,
 	};
@@ -1934,7 +1935,9 @@ export type IProviderGroupImageText = {
 export interface IDamageSourceEffect<T extends IEffectAbilityId = IEffectAbilityId> {
 	abilityId: T;
 	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
-	data: IGameAbilityData<T>;
+	data: Ref<IGameAbilityData<T>>;
+	/** the source that's applying the effect */
+	source: ShallowRef<DamageSource | undefined>;
 }
 
 export interface IComputedAbilityDescription {

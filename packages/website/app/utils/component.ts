@@ -43,7 +43,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			'usedNumberInput': useNumberInput(
 				abilityId.type === AbilityType.effect
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
-					? () => [appliedEffect?.value?.data ?? props.damageSource.addEffect(abilityId).data, property as number]
+					? () => [appliedEffect?.value?.data.value ?? props.damageSource.addEffect(abilityId).data.value, property as number]
 					: [
 							props.damageSource[abilityId.type === AbilityType.champion
 								? 'internalData'
@@ -80,7 +80,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
 
 		const effectControlModel = effectControlsProps?.model(props.damageSource);
 		function effectControlUpdateValue(val?: boolean) {
@@ -90,7 +90,12 @@ export async function progressExtra<T extends IGameAbilityId>(
 			effectControlsProps!.refresh(props.damageSource);
 		}
 
-		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => selectEffectSourceProps.invalidMessage(props.damageSource));
+		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
+		function updateEffectSource(value?: DamageSource) {
+			if (appliedEffect?.value) {
+				appliedEffect.value.source.value = value;
+			}
+		}
 
 		return () => h(CalculatorExtraProgress, {
 			'modelValue': modelValue.value,
@@ -106,14 +111,14 @@ export async function progressExtra<T extends IGameAbilityId>(
 			'data-inactive': effectControlsProps && !effectControlModel?.value ? '' : undefined,
 		}, effectControlsProps
 			? { default: () => [
-					createEffectControls(props, effectControlModel!, effectControlUpdateValue, effectControlRefresh, ctx.slots),
-					selectEffectSourceInvalidMessage && createSelectEffectSource(props, selectEffectSourceInvalidMessage),
+					createEffectControls(props.idSuffix, effectControlModel!.value, effectControlUpdateValue, effectControlRefresh, ctx.slots),
+					selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 				] }
 			: { default: () => {
 					const defaultSlots = ctx.slots.default?.();
 					return [
 						...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
-						selectEffectSourceInvalidMessage && createSelectEffectSource(props, selectEffectSourceInvalidMessage),
+						selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 					];
 				} });
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
@@ -198,13 +203,13 @@ appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 	return [
 		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
 		computed(() => isEffect
-			? (appliedEffect?.value?.data[property as number] ?? 0)
+			? (appliedEffect?.value?.data.value[property as number] ?? 0)
 			: damageSource[dataProperty].value?.[property as string],
 		),
 		function updateValue(value: any) {
 			if (isEffect) {
 				if (appliedEffect?.value) {
-					appliedEffect.value.data[property as number] = value;
+					appliedEffect.value.data.value[property as number] = value;
 				} else {
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
 					damageSource.addEffect(abilityId, [value]);
@@ -218,8 +223,8 @@ appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 }
 
 function createEffectControls(
-	props: IExtraComponentProps,
-	model: ReturnType<IEffectControlsProps['model']>,
+	idSuffix: string,
+	modelValue: boolean | undefined,
 	updateValue: (value: boolean | undefined) => void,
 	refresh: () => void,
 	slots: SlotsType,
@@ -227,8 +232,8 @@ function createEffectControls(
 	return h(
 		CalculatorEffectControls,
 		{
-			'idSuffix': props.idSuffix,
-			'modelValue': model.value,
+			idSuffix,
+			modelValue,
 			'onUpdate:modelValue': updateValue,
 			'onRefresh': refresh,
 		},
@@ -237,12 +242,16 @@ function createEffectControls(
 }
 
 function createSelectEffectSource(
-	props: IExtraComponentProps,
+	idSuffix: string,
+	modelValue: DamageSource | undefined,
+	updateValue: (value: DamageSource | undefined) => void,
 	invalidMessage: ComputedRef<ReturnType<ISelectEffectSourceProps['invalidMessage']>>,
 ) {
 	return h(CalculatorEffectSourceSelect, {
-		idSuffix: props.idSuffix,
-		invalidMessage: invalidMessage.value,
+		idSuffix,
+		modelValue,
+		'onUpdate:modelValue': updateValue,
+		'invalidMessage': invalidMessage.value,
 	});
 }
 
