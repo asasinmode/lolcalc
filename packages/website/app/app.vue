@@ -129,7 +129,7 @@ function hideSharePopover() {
 				>
 					share
 					<div ref="shareTextPopover" popover="manual">
-						{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
+						{{ hasCopiedShareLink ? 'copied' : 'copy link to the current configuration' }}
 						<p v-show="isStateTooLargeForQuery" class="alert warning">
 							configuration too large for url, some data will be trimmed
 							<Icon class="i-ph:warning-light" />
