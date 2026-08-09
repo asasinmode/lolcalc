@@ -137,7 +137,20 @@ function getListDropTargetIndex(target: DamageSource[], fromIndex: number, sourc
 
 function remove(index: number, target: DamageSource[]) {
 	const [damageSource] = target.splice(index, 1);
-	// TODO remove existing effect references
+	for (const source of damageSources.value) {
+		for (const effect of source.appliedEffects.value) {
+			if (effect.source.value === damageSource) {
+				effect.source.value = undefined;
+			}
+		}
+	}
+	for (const source of damageTargets.value) {
+		for (const effect of source.appliedEffects.value) {
+			if (effect.source.value === damageSource) {
+				effect.source.value = undefined;
+			}
+		}
+	}
 	for (const unwatch of damageSource!.watchHandles) {
 		unwatch();
 	}
