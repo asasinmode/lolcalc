@@ -42,7 +42,7 @@ const derivedValue = computed(() => {
 </script>
 
 <template>
-	<article class="v-extras-progress">
+	<article class="calc-extra-progress">
 		<img
 			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
@@ -70,7 +70,7 @@ const derivedValue = computed(() => {
 
 <style>
 @layer components {
-	.v-extras-progress {
+	.calc-extra-progress {
 		--at-apply: 'grid grid-cols-[max-content_minmax(0,1fr)_5ch] grid-rows-2 relative';
 
 		> label {

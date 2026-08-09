@@ -25,7 +25,7 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 </script>
 
 <template>
-	<article class="v-extras-boolean">
+	<article class="calc-extra-boolean">
 		<img
 			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
@@ -72,7 +72,7 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 
 <style>
 @layer components {
-	.v-extras-boolean {
+	.calc-extra-boolean {
 		--at-apply: 'grid grid-cols-[max-content_auto_minmax(0,1fr)] grid-rows-1 items-center relative';
 
 		> input {

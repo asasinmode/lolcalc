@@ -8,7 +8,7 @@ import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
-import { CalculatorEffectControls, VExtrasBoolean, VExtrasEnum, VExtrasNumber, VExtrasProgress } from '#components';
+import { CalculatorEffectControls, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
 
 export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
@@ -32,7 +32,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			localStep = localStep(props.damageSource);
 		}
 
-		return () => h(VExtrasNumber, {
+		return () => h(CalculatorExtraNumber, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
@@ -77,7 +77,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 
 		const effectControlModel = effectControlsProps?.model(props.damageSource);
 
-		return () => h(VExtrasProgress, {
+		return () => h(CalculatorExtraProgress, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
@@ -107,7 +107,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 		const imgSrc = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
-		return () => h(VExtrasBoolean, {
+		return () => h(CalculatorExtraBoolean, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
@@ -140,7 +140,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 		const imgSrc = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
-		return () => h(VExtrasEnum, {
+		return () => h(CalculatorExtraEnum, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,

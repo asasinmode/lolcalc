@@ -29,7 +29,7 @@ function updateValue(event: Event) {
 </script>
 
 <template>
-	<article class="v-extras-enum">
+	<article class="calc-extra-enum">
 		<img
 			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
@@ -53,7 +53,7 @@ function updateValue(event: Event) {
 
 <style>
 @layer components {
-	.v-extras-enum {
+	.calc-extra-enum {
 		--at-apply: 'grid grid-cols-[max-content_auto_minmax(0,1fr)_min-content] grid-rows-2 relative';
 
 		> label {

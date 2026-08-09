@@ -22,7 +22,7 @@ const value = defineModel<number>();
 </script>
 
 <template>
-	<article class="v-extras-number">
+	<article class="calc-extra-number">
 		<img
 			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
@@ -61,7 +61,7 @@ const value = defineModel<number>();
 
 <style>
 @layer components {
-	.v-extras-number {
+	.calc-extra-number {
 		--at-apply: 'grid grid-cols-[max-content_minmax(0,1fr)_auto_min-content] grid-rows-2 relative';
 
 		> label {

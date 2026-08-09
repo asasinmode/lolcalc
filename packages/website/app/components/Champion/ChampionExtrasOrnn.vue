@@ -32,7 +32,7 @@ const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalDat
 
 <style>
 @layer overrides {
-	[data-scoreboard-item='Ornn'] .v-extras-number {
+	[data-scoreboard-item='Ornn'] .calc-extra-number {
 		&:nth-of-type(-n + 2) {
 			> p {
 				--at-apply: 'col-start-2 row-start-2 col-span-3 z-1 relative text-center h-9 grid-center -mt-1 whitespace-nowrap bg-black/20 backdrop-blur-2 -mx-1 font-500';

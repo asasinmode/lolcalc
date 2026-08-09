@@ -8,7 +8,7 @@ import { resolveAbilitySpecific } from '@lolcalc/core/DamageSource';
 import { imgUrl, ITEMS } from '@lolcalc/data';
 
 import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
-import { VExtrasNumber } from '#components';
+import { CalculatorExtraNumber } from '#components';
 
 const props = defineProps<IExtraComponentProps & {
 	abilityId: IItemAbilityId;
@@ -42,9 +42,9 @@ function transform() {
 	}
 }
 
-function updateValue(value: number) {
+function updateValue(value: number | undefined) {
 	if (!isTransformed.value) {
-		(props.damageSource.internalItemData.value as IData).manaflow = value;
+		(props.damageSource.internalItemData.value as IData).manaflow = value!;
 	}
 }
 
@@ -53,7 +53,7 @@ const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRA
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-	<VExtrasNumber
+	<CalculatorExtraNumber
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
 		:img-src="[imgUrl(`img/item/${abilityId.id}.png`, true), 64]"
 		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.imgText?.(damageSource, abilityId)"
@@ -70,5 +70,5 @@ const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRA
 			<span> transform </span>
 			<Icon class="i-ph:arrows-clockwise-bold" />
 		</button>
-	</VExtrasNumber>
+	</CalculatorExtraNumber>
 </template>

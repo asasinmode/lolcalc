@@ -208,11 +208,9 @@ export const EFFECT_SPECIFICS = {
 			preItemTotal: {
 				handler(self, _args, { calculatedVariables }) {
 					/* checked and it doesn't stack */
-					if ((self.internalItemData.value as IInternalItemDataOf<'shurelya'>).iSpeech) {
-						return;
+					if (!(self.internalItemData.value as IInternalItemDataOf<'shurelya'>).iSpeech) {
+						calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.shurelya?.dataValues.ActiveMoveSpeed;
 					}
-
-					calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.shurelya?.dataValues.ActiveMoveSpeed;
 				},
 			},
 		},
