@@ -36,6 +36,23 @@ const showInvalid = computed(() => value.value && props.invalidMessage);
 
 // TODO use one from props/value/applied effect
 const selectedSource = computed(() => value.value ? damageSources.value.find(source => source.id === value.value) ?? damageTargets.value.find(source => source.id === value.value) : undefined);
+
+const selectedText = computed(() => {
+	if (selectedSource.value && !selectedSource.value?.listedChampion.value) {
+		let index = damageSources.value.indexOf(selectedSource.value);
+		if (~index) {
+			return `s${index + 1}`;
+		}
+
+		index = damageTargets.value.indexOf(selectedSource.value);
+		if (~index) {
+			return `t${index + 1}`;
+		}
+
+		console.warn('[CalculatorEffectSourceSelect] could not find selected source in sources/targets', selectedSource.value);
+	}
+	return undefined;
+});
 </script>
 
 <template>
@@ -46,8 +63,9 @@ const selectedSource = computed(() => value.value ? damageSources.value.find(sou
 		label="effect source"
 		title="effect source"
 		clearable
-		:data-empty="value ? undefined : ''"
+		:class="{ empty: !value }"
 		:aria-errormessage="showInvalid ? `effect-src-select-err-${idSuffix}` : undefined"
+		:data-selected-text="selectedText"
 		:options="{
 			sources: formatSourceOptions(damageSources),
 			targets: formatSourceOptions(damageTargets),
@@ -76,20 +94,25 @@ const selectedSource = computed(() => value.value ? damageSources.value.find(sou
 	.effect-src-select {
 		--at-apply: 'absolute start-[--p] inset-bs-[--p] z-1 size-5.5 b b-[--ui-btn-border-clr]';
 		--hover-brightness: var(--champion-hover-brightness);
+		--bg-size: 100%;
 		anchor-scope: --effect-src-select;
 		anchor-name: --effect-src-select;
 
-		&[data-empty] {
+		&.empty,
+		&:not([style]),
+		&[style=''] {
 			--hover-brightness: var(--empty-champion-hover-brightness);
+			--bg-size: 120%;
+		}
+
+		&[data-selected-text]::before {
+			--at-apply: 'absolute z-2 bg-[--placeholder-champion-bg-clr] leading-none size-full text-center text-xs grid place-items-center of-hidden';
+			content: attr(data-selected-text);
 		}
 
 		> label {
 			--at-apply: 'size-full';
-			background: var(--empty-champion-url) no-repeat center / 120%;
-		}
-
-		&[style] > label {
-			background: var(--selected-src-img) no-repeat center / 100%;
+			background: var(--selected-src-img, var(--empty-champion-url)) no-repeat center / var(--bg-size);
 		}
 
 		&:hover,
@@ -100,7 +123,7 @@ const selectedSource = computed(() => value.value ? damageSources.value.find(sou
 		}
 
 		.invalid-indicator {
-			--at-apply: 'absolute text-white outline-2 outline-amber-600 outline-offset-1 rounded-full bg-amber-600 grid-center absolute end-0 inset-bs-0 z-1 -translate-y-1/3 translate-x-1/3';
+			--at-apply: 'absolute text-white outline-2 outline-amber-600 outline-offset-1 rounded-full bg-amber-600 grid-center absolute end-0 inset-bs-0 z-3 -translate-y-1/3 translate-x-1/3';
 
 			> span {
 				&:nth-child(1) {
