@@ -35,12 +35,12 @@ function updateValue(event: Event) {
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<label :for="`veenum-${idPrefix}`">
+		<label :for="`xtrenum-${idPrefix}`">
 			{{ label }}
 		</label>
 		<slot />
 		<select
-			:id="`veenum-${idPrefix}`"
+			:id="`xtrenum-${idPrefix}`"
 			:value="value ?? 0"
 			@change="updateValue"
 		>

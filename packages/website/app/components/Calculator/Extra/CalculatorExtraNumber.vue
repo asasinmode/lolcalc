@@ -28,12 +28,12 @@ const value = defineModel<number>();
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<label :for="`venmbr-${idPrefix}`">
+		<label :for="`xtrnmbr-${idPrefix}`">
 			{{ label }}
 		</label>
 		<slot />
 		<input
-			:id="`venmbr-${idPrefix}`"
+			:id="`xtrnmbr-${idPrefix}`"
 			:value="value ?? 0"
 			type="number"
 			:min

@@ -48,12 +48,12 @@ const derivedValue = computed(() => {
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<label :for="`veprgr-${idPrefix}`">
+		<label :for="`xtrprgr-${idPrefix}`">
 			{{ label }}
 		</label>
 		<slot />
 		<input
-			:id="`veprgr-${idPrefix}`"
+			:id="`xtrprgr-${idPrefix}`"
 			:value="value ?? localValue ?? 0"
 			type="range"
 			min="0"

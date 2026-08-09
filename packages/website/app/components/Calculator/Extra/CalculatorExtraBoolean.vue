@@ -32,13 +32,13 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
 		<input
-			:id="`vebln-${idPrefix}`"
+			:id="`xtrbln-${idPrefix}`"
 			v-model="value"
 			type="checkbox"
 			:true-value="1"
 			:false-value="0"
 		>
-		<label :for="`vebln-${idPrefix}`">
+		<label :for="`xtrbln-${idPrefix}`">
 			{{ labelPrefixApply ? 'apply ' : '' }}{{ label }}
 			<template v-if="tooltip">
 				<span
