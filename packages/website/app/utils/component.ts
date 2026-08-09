@@ -34,7 +34,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 
 		return () => h(CalculatorExtraNumber, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
+			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
 			min,
@@ -79,7 +79,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 
 		return () => h(CalculatorExtraProgress, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
+			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
 			'deriveValue': (progress: number) => getDerivedValue(progress, props.damageSource),
@@ -109,7 +109,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 
 		return () => h(CalculatorExtraBoolean, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
+			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			labelPrefixApply,
 			tooltip,
@@ -142,7 +142,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 
 		return () => h(CalculatorExtraEnum, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property as string}`,
+			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
 			options,
@@ -202,7 +202,7 @@ function createEffectControls(
 	return h(
 		CalculatorEffectControls,
 		{
-			'idPrefix': `${props.idPrefix}-effect-ctl`,
+			'idSuffix': `${props.idSuffix}-effect-ctl`,
 			'modelValue': model.value,
 			'onUpdate:modelValue': val => model.value = val,
 			'onRefresh': () => refresh(props.damageSource),

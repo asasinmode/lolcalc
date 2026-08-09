@@ -71,7 +71,7 @@ const otherGroup = computed(() => props.isRight
 );
 const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
 
-const idPrefix = computed(() => `${group.value}-${props.index}`);
+const idSuffix = computed(() => `${group.value}-${props.index}`);
 
 const imageSizes = computed(() => {
 	let champion = 128;
@@ -1058,7 +1058,7 @@ defineExpose({ el });
 					>
 				</button>
 				<VSelect
-					:id="`${idPrefix}-level-select`"
+					:id="`${idSuffix}-level-select`"
 					label="level"
 					:model-value="value.level.value as unknown as string"
 					class="select-champion-level"
@@ -1187,7 +1187,7 @@ defineExpose({ el });
 				<Icon class="i-ph:trash size-5" />
 			</button>
 			<VSelect
-				:id="`${idPrefix}-manipulate`"
+				:id="`${idSuffix}-manipulate`"
 				:model-value="manipulateValue"
 				:options="Object.entries(manipulateOptions).map(([optionKey, { text, isDisabled }]) => [optionKey, text, toValue(isDisabled)])"
 				class="manipulate"
@@ -1201,7 +1201,7 @@ defineExpose({ el });
 			<button
 				:title="iconButtonsShowText ? undefined : (isExpanded ? 'collapse' : 'expand')"
 				class="pretend-ui-btn expand-collapse"
-				:aria-controls="`${idPrefix}-details`"
+				:aria-controls="`${idSuffix}-details`"
 				:aria-expanded="isExpanded"
 				@click="toggleExpanded"
 			>
@@ -1210,7 +1210,7 @@ defineExpose({ el });
 			</button>
 		</div>
 		<details
-			:id="`${idPrefix}-details`"
+			:id="`${idSuffix}-details`"
 			ref="details"
 			:class="{ empty: !value.champion.value }"
 			:aria-busy="isLoading"
@@ -1339,7 +1339,7 @@ defineExpose({ el });
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
-					:id-prefix
+					:id-suffix
 					:value
 					:is-loading
 					@ability-hover="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('', ...args)"
@@ -1383,7 +1383,7 @@ defineExpose({ el });
 						>
 						<VButtonRadiogroup
 							v-if="value.champion.value"
-							:id="`${idPrefix}-ability-${abilityKey}`"
+							:id="`ability-${abilityKey}-${idSuffix}`"
 							v-model="value.abilityLevels.value[abilityKey]"
 							:label="`${abilityKey} level`"
 							:options="Array.from({ length: value.maxAbilityLevels.value[abilityKey] }, (_, index) => ({ level: index + 1 }))"
@@ -1421,11 +1421,11 @@ defineExpose({ el });
 					@mousedown="startHealthBarDrag"
 				>
 					<template v-if="value.anythingFilled.value && value.maxHealth.value !== 0">
-						<label :for="`${idPrefix}-current-ability-health`">
+						<label :for="`${idSuffix}-current-ability-health`">
 							health
 						</label>
 						<input
-							:id="`${idPrefix}-current-ability-health`"
+							:id="`${idSuffix}-current-ability-health`"
 							:value="Math.round(healthDragValueRef)"
 							min="0"
 							:max="value.maxHealth.value"
@@ -1443,11 +1443,11 @@ defineExpose({ el });
 					@mousedown="startAbilityResourceBarDrag"
 				>
 					<template v-if="value.maxAbilityResource.value">
-						<label :for="`${idPrefix}-current-ability-resource`">
+						<label :for="`${idSuffix}-current-ability-resource`">
 							{{ value.abilityResourceName.value }}
 						</label>
 						<input
-							:id="`${idPrefix}-current-ability-resource`"
+							:id="`${idSuffix}-current-ability-resource`"
 							:value="Math.round(abilityResourceDragValueRef)"
 							min="0"
 							:max="value.maxAbilityResource.value"
@@ -1462,7 +1462,7 @@ defineExpose({ el });
 				<section ref="roleQuest" class="role-quest" data-text="role quest">
 					<h4>role quest</h4>
 					<VSelect
-						:id="`${idPrefix}-role-quest`"
+						:id="`${idSuffix}-role-quest`"
 						:model-value="value.roleQuest.value"
 						:options="Object.keys(TEXT.roleQuests).map(role => [role, role] as [IChampionRole, string])"
 						label="role quest"
@@ -1498,7 +1498,7 @@ defineExpose({ el });
 					<h4>dragons</h4>
 					<VSelect
 						v-for="i in 4"
-						:id="`${idPrefix}-dragon-stack-${i}`"
+						:id="`${idSuffix}-dragon-stack-${i}`"
 						:key="i"
 						:model-value="value.dragonStacks.value[i - 1]"
 						:options="dragonOptions"
@@ -1517,7 +1517,7 @@ defineExpose({ el });
 						</template>
 					</VSelect>
 					<VSelect
-						:id="`${idPrefix}-dragon-soul`"
+						:id="`${idSuffix}-dragon-soul`"
 						:model-value="value.dragonSoul.value"
 						:options="dragonOptions"
 						class="dragon-soul"
@@ -1549,7 +1549,7 @@ defineExpose({ el });
 					:is
 					v-for="(is, componentIndex) in championExtra"
 					:key="`${value.champion.value?.id ?? ''}-${componentIndex}`"
-					:id-prefix
+					:id-suffix
 					:damage-source="value"
 					@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
 				/>
@@ -1557,7 +1557,7 @@ defineExpose({ el });
 					:is
 					v-for="[is, abilityId, componentIndex] in dragonExtras"
 					:key="`${abilityId.id}-${abilityId.subtype}-${componentIndex}`"
-					:id-prefix
+					:id-suffix
 					:damage-source="value"
 					:ability-id
 					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showDragonTooltip(mouseEvent, abilityId.id, abilityId.subtype, true)"
@@ -1566,7 +1566,7 @@ defineExpose({ el });
 					:is
 					v-for="[is, itemId, itemIndex, componentIndex] in itemExtras"
 					:key="`${itemId}-${componentIndex}`"
-					:id-prefix
+					:id-suffix
 					:damage-source="value"
 					:ability-id="GameAbilityId.build(AbilityType.item, itemId)"
 					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showItemHoverTooltip(mouseEvent, itemIndex, true)"

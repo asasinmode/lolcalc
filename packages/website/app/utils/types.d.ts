@@ -111,7 +111,7 @@ export interface IItemDescriptionProps {
 
 export interface IExtraComponentProps {
 	damageSource: DamageSource;
-	idPrefix: string;
+	idSuffix: string;
 	/** it's not consistently provided and shouldn't really be relied upon. It's mostly declared so that there's no `ability-id="[Object object]"` in the dom. Used by tear item extra, provided in scoreboard item */
 	abilityId?: IGameAbilityId;
 	/*

@@ -3,7 +3,7 @@ import type { IGameImageData } from '@lolcalc/core/misc';
 import { roundVariable } from '@lolcalc/shared/utils';
 
 const props = defineProps<{
-	idPrefix: string;
+	idSuffix: string;
 	imgSrc: IGameImageData;
 	label: string;
 	deriveValue: (value: number) => number | undefined;
@@ -48,12 +48,12 @@ const derivedValue = computed(() => {
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<label :for="`xtrprgr-${idPrefix}`">
+		<label :for="`xtrprgr-${idSuffix}`">
 			{{ label }}
 		</label>
 		<slot />
 		<input
-			:id="`xtrprgr-${idPrefix}`"
+			:id="`xtrprgr-${idSuffix}`"
 			:value="value ?? localValue ?? 0"
 			type="range"
 			min="0"
@@ -62,7 +62,7 @@ const derivedValue = computed(() => {
 			@mouseup="updateMousedown(false)"
 			@input="updateModelValue"
 		>
-		<output :for="`veprgr-${idPrefix}`" aria-live="off">
+		<output :for="`xtrprgr-${idSuffix}`" aria-live="off">
 			{{ derivedValue !== undefined ? roundVariable(derivedValue, 1) : 0 }}{{ derivedSymbolSuffix }}
 		</output>
 	</article>

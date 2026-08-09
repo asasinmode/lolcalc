@@ -3,7 +3,7 @@ import type { IGameImageData } from '@lolcalc/core/misc';
 import { simpleDescriptionFormatting } from '@lolcalc/core/misc';
 
 const props = defineProps<{
-	idPrefix: string;
+	idSuffix: string;
 	imgSrc: IGameImageData;
 	label: string;
 	labelPrefixApply?: boolean;
@@ -32,17 +32,17 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
 		<input
-			:id="`xtrbln-${idPrefix}`"
+			:id="`xtrbln-${idSuffix}`"
 			v-model="value"
 			type="checkbox"
 			:true-value="1"
 			:false-value="0"
 		>
-		<label :for="`xtrbln-${idPrefix}`">
+		<label :for="`xtrbln-${idSuffix}`">
 			{{ labelPrefixApply ? 'apply ' : '' }}{{ label }}
 			<template v-if="tooltip">
 				<span
-					:aria-describedby="`vebln-${idPrefix}-tooltip`"
+					:aria-describedby="`xtrbln-tooltip-${idSuffix}`"
 					class="info-tooltip-trigger"
 					tabindex="0"
 					@focus="showTooltip($event, true)"
@@ -54,7 +54,7 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 					<Icon class="i-ph:info-fill" />
 				</span>
 				<p
-					:id="`vebln-${idPrefix}-tooltip`"
+					:id="`xtrbln-tooltip-${idSuffix}`"
 					popover="hint"
 					class="hover-tooltip"
 					@focus="showTooltip($event, false)"

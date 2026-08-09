@@ -2,7 +2,7 @@
 import type { IGameImageData } from '@lolcalc/core/misc';
 
 defineProps<{
-	idPrefix: string;
+	idSuffix: string;
 	imgSrc: IGameImageData;
 	label: string;
 	/**
@@ -35,12 +35,12 @@ function updateValue(event: Event) {
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<label :for="`xtrenum-${idPrefix}`">
+		<label :for="`xtrenum-${idSuffix}`">
 			{{ label }}
 		</label>
 		<slot />
 		<select
-			:id="`xtrenum-${idPrefix}`"
+			:id="`xtrenum-${idSuffix}`"
 			:value="value ?? 0"
 			@change="updateValue"
 		>

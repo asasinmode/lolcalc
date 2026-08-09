@@ -58,7 +58,7 @@ onMounted(() => {
 		updateStat(
 			undefined,
 			props.damageSource.internalData.value[statName],
-			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
+			el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement,
 		);
 	}
 });
@@ -76,7 +76,7 @@ function resetAll() {
 		updateStat(
 			statName as IChampionStatName,
 			props.damageSource.stats.value.initial[statName as IChampionStatName] * (statMeta.isPercentage ? 100 : 1),
-			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
+			el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement,
 		);
 	}
 }
@@ -120,7 +120,7 @@ function copyFrom(event: SubmitEvent) {
 		updateStat(
 			statName as IChampionStatName,
 			formatChampionStatValue(statName, source.stats.value[stats][statName]),
-			el.value?.querySelector(`#${props.idPrefix}-${statName}`) as HTMLInputElement,
+			el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement,
 		);
 	}
 }
@@ -140,11 +140,11 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 	<article ref="el" class="extras-target-dummy-stats">
 		<header>
 			<form @submit.prevent="copyFrom">
-				<label :for="`${idPrefix}-copy-from`">
+				<label :for="`copy-from-${idSuffix}`">
 					copy from
 				</label>
 				<select
-					:id="`${idPrefix}-copy-from`"
+					:id="`copy-from-${idSuffix}`"
 					v-model="copyStatsFrom"
 					name="fromId"
 					:disabled="!(sourceOptions.length || targetOptions.length)"
@@ -201,7 +201,7 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 			v-for="([statName, statMeta], statIndex) in MODIFIABLE_CHAMPION_STAT_ENTRIES"
 			:key="statName"
 		>
-			<label :for="`${idPrefix}-${statName}`" :title="`${statInputs[statIndex]!.name}${statInputs[statIndex]!.label}`">
+			<label :for="`${statName}-${idSuffix}`" :title="`${statInputs[statIndex]!.name}${statInputs[statIndex]!.label}`">
 				<img
 					v-bind="statImage(statName)"
 					loading="lazy"
@@ -210,7 +210,7 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 				{{ statInputs[statIndex]!.label }}
 			</label>
 			<input
-				:id="`${idPrefix}-${statName}`"
+				:id="`${statName}-${idSuffix}`"
 				type="number"
 				min="0"
 				:step="statMeta.decimal && !statMeta.isPercentage ? 0.01 : 1"

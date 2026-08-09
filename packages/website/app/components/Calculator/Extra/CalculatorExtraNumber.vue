@@ -2,7 +2,7 @@
 import type { IGameImageData } from '@lolcalc/core/misc';
 
 withDefaults(defineProps<{
-	idPrefix: string;
+	idSuffix: string;
 	imgSrc: IGameImageData;
 	label: string;
 	usedNumberInput: ReturnType<typeof useNumberInput>;
@@ -28,12 +28,12 @@ const value = defineModel<number>();
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<label :for="`xtrnmbr-${idPrefix}`">
+		<label :for="`xtrnmbr-${idSuffix}`">
 			{{ label }}
 		</label>
 		<slot />
 		<input
-			:id="`xtrnmbr-${idPrefix}`"
+			:id="`xtrnmbr-${idSuffix}`"
 			:value="value ?? 0"
 			type="number"
 			:min

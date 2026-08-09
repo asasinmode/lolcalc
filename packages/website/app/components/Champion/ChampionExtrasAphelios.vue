@@ -33,7 +33,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup
 			v-for="abilityKey in ['q', 'w', 'e'] satisfies IChampionAbilityKey[]"
-			:id="`${idPrefix}-ability-${abilityKey}`"
+			:id="`ability-${abilityKey}-${idSuffix}`"
 			:key="abilityKey"
 			v-model="damageSource.abilityLevels.value[abilityKey]"
 			:label="`&quot;${abilityKey}&quot; level`"

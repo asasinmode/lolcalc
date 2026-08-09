@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { IExtraComponentProps } from '~/utils/types';
 
-defineProps<Pick<IExtraComponentProps, 'idPrefix'>>();
+defineProps<Pick<IExtraComponentProps, 'idSuffix'>>();
 
 const emit = defineEmits<{
 	refresh: [];
@@ -39,8 +39,8 @@ function hideControlsTooltip(event: Event) {
 			<Icon class="i-ph:arrow-clockwise-bold" :style="`--clicks: ${clicks}`" />
 		</button>
 		<slot>
-			<label :for="`${idPrefix}-effect-ctl-tgl`" class="pretend-ui-btn">
-				<input :id="`${idPrefix}-effect-ctl-tgl`" v-model="value" type="checkbox">
+			<label :for="`effect-ctl-tgl-${idSuffix}`" class="pretend-ui-btn">
+				<input :id="`effect-ctl-tgl-${idSuffix}`" v-model="value" type="checkbox">
 				<span>apply</span>
 			</label>
 		</slot>

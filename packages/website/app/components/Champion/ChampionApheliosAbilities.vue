@@ -12,7 +12,7 @@ type IAphelios = typeof Aphelios;
 const props = defineProps<{
 	value: DamageSource<'Aphelios'>;
 	isLoading: boolean;
-	idPrefix: string;
+	idSuffix: string;
 }>();
 
 const emit = defineEmits<{

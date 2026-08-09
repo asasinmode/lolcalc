@@ -61,7 +61,7 @@ const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRA
 		:used-number-input="useNumberInput([damageSource.internalItemData as Ref<IData>, 'manaflow'])"
 		:max="360"
 		:step
-		:id-prefix="`${idPrefix}-${abilityId.id}`"
+		:id-suffix="`${abilityId.id}-${idSuffix}`"
 		:disabled="isTransformed"
 		@update:model-value="updateValue"
 		@img-mouseenter="$emit('imgMouseenter', $event, props.abilityId)"
