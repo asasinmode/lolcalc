@@ -2,7 +2,7 @@
 import type { IItem } from '@lolcalc/data/types';
 import { DamageSource, isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { itemBuyability } from '@lolcalc/core/specifics/item';
-import { CHAMPION_IMAGES, PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
+import { CHAMPION_IMAGES, imgUrl, PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
 
 const { vMinor, vSemver } = PATCH_VERSION;
 
@@ -37,7 +37,7 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 		champImg.width = size;
 		champImg.height = size;
 	} else {
-		champImg.src = `https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`;
+		champImg.src = imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png');
 		champImg.width = 256;
 		champImg.height = 256;
 	}
@@ -435,7 +435,7 @@ const isDisplayingTargets = ref(false);
 					</button>
 				</li>
 			</ul>
-			<div ref="dragPreview" class="drag-preview" inert aria-hidden="true">
+			<div ref="dragPreview" class="source-thumbnail" inert aria-hidden="true">
 				<span><img></span>
 				<span />
 				<div>
@@ -524,44 +524,8 @@ const isDisplayingTargets = ref(false);
 				}
 			}
 
-			> .drag-preview {
-				--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 absolute flex -z-1 -start-[9999px] -top-[9999px]';
-
-				> :nth-child(1) {
-					--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-btn-border-clr]';
-
-					> img {
-						--at-apply: 'size-14 -ms-1 -mt-1 max-w-none';
-					}
-				}
-
-				> :nth-child(2) {
-					--at-apply: 'absolute bg-black rounded-full top-11 start-11.5 translate-center text-xs/3 size-5 text-center grid-center b b-[--ui-btn-border-clr]';
-				}
-
-				> :nth-child(3) {
-					--at-apply: 'flex flex-col items-center self-center gap-1';
-
-					> :first-child {
-						--at-apply: 'size-5';
-					}
-
-					> :last-child {
-						--at-apply: 'size-4';
-					}
-				}
-
-				> :nth-child(4) {
-					--at-apply: 'grid grid-cols-3 grid-rows-2 gap-0.5 relative';
-
-					> li {
-						--at-apply: 'size-5.5 bg-black';
-
-						&:nth-of-type(7) {
-							--at-apply: 'rounded-full absolute end-0 top-1/2 -translate-y-1/2';
-						}
-					}
-				}
+			> .source-thumbnail {
+				--at-apply: 'absolute -z-1 -start-[9999px] -top-[9999px]';
 			}
 
 			[data-drop-direction] {
@@ -704,6 +668,46 @@ const isDisplayingTargets = ref(false);
 
 			> div {
 				--at-apply: 'col-span-full mbs-2';
+			}
+		}
+	}
+
+	.source-thumbnail {
+		--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 flex';
+
+		> :nth-child(1) {
+			--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-btn-border-clr]';
+
+			> img {
+				--at-apply: 'size-14 -ms-1 -mt-1 max-w-none';
+			}
+		}
+
+		> :nth-child(2) {
+			--at-apply: 'absolute bg-black rounded-full top-11 start-11.5 translate-center text-xs/3 size-5 text-center grid-center b b-[--ui-btn-border-clr]';
+		}
+
+		> :nth-child(3) {
+			--at-apply: 'flex flex-col items-center self-center gap-1';
+
+			> :first-child {
+				--at-apply: 'size-5';
+			}
+
+			> :last-child {
+				--at-apply: 'size-4';
+			}
+		}
+
+		> :nth-child(4) {
+			--at-apply: 'grid grid-cols-3 grid-rows-2 gap-0.5 relative';
+
+			> li {
+				--at-apply: 'size-5.5 bg-black';
+
+				&:nth-of-type(7) {
+					--at-apply: 'rounded-full absolute end-0 top-1/2 -translate-y-1/2';
+				}
 			}
 		}
 	}
