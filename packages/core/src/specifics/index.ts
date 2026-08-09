@@ -284,6 +284,6 @@ export interface ISelectEffectSourceProps {
 	invalidMessage: (source: DamageSource) => string | undefined;
 }
 
-export interface IDeriveProgressFn {
-	(value: number, self: DamageSource): number;
+export interface IDeriveProgressFn<Maybe extends boolean = false> {
+	(value: number, self: Maybe extends false ? DamageSource : (DamageSource | undefined)): number;
 }

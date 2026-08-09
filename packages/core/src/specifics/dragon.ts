@@ -76,14 +76,14 @@ export const DRAGON_SPECIFICS = {
 		},
 		soul: {
 			LIGHTNING_SLOW: ((value, self) => {
-				const slowValue =	championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self });
+				const slowValue =	championAbilityVariableValue(self?.stats.value.isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self });
 				if (typeof slowValue.value === 'number') {
 					return slowValue.value * value;
 				} else {
 					console.warn('[DRAGON_SPECIFICS hextech soul] failed to calculate slow percentage', slowValue);
 					return Number.NaN;
 				}
-			}) satisfies IDeriveProgressFn,
+			}) satisfies IDeriveProgressFn<true>,
 			internalDataProperties: ['hextechTagged'],
 			setupData(self) {
 				self.internalDragonData.value.hextechTagged = clamp(0, self.internalDragonData.value.hextechTagged ?? 0, 100);
@@ -113,7 +113,7 @@ export const DRAGON_SPECIFICS = {
 						isPercentage: true,
 						multiplier: 100,
 						/* since I'm overriding the builtin total slows with this one, use overwritten variables' calculatesFrom */
-						calculatesFrom: addCalculatesFrom([], championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? [], championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? []),
+						calculatesFrom: addCalculatesFrom([], championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? [], championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? []),
 					},
 				},
 				uninteresting: ['SlowDuration', 'BaseUnitsToHit'],
