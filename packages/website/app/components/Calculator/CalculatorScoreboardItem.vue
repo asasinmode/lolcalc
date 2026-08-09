@@ -863,11 +863,11 @@ const activeEffects = computed<[IComputedAppliedEffect, number][]>(() =>
 		.filter(([effect]) => effect.isActive),
 );
 
-const hoveredEffectId = shallowRef<IEffectAbilityId>();
+const hoveredEffect = shallowRef<IComputedAppliedEffect>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
 function showEffectTooltip(event: MouseEvent, effect: IComputedAppliedEffect) {
-	hoveredEffectId.value = effect.abilityId;
+	hoveredEffect.value = effect;
 	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
 	effect.specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
 	effectHoverTooltipEl.value?.el?.showPopover();
@@ -887,24 +887,24 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 
 	if (globalKeyModifiers.value.ctrl) {
 		if (globalKeyModifiers.value.shift) {
-			effect.data[0] = by < 0
+			effect.data.value[0] = by < 0
 				/* this branch doesn't happen, right click + ctrl + shift is hijacked by the browser and the event doesn't fire, potential TODO */
 				? min
 				: max === undefined
-					? effect.data[0] + 100
+					? effect.data.value[0] + 100
 					: max;
 		} else {
-			effect.data[0] = by < 0
-				? computedEffect.specific.minValue === 0 || computedEffect.maxValue !== undefined ? Math.max(min, effect.data[0] - 10) : min
+			effect.data.value[0] = by < 0
+				? computedEffect.specific.minValue === 0 || computedEffect.maxValue !== undefined ? Math.max(min, effect.data.value[0] - 10) : min
 				: max === undefined
-					? effect.data[0] + 10
-					: Math.min(max, effect.data[0] + 10);
+					? effect.data.value[0] + 10
+					: Math.min(max, effect.data.value[0] + 10);
 		}
 	} else {
-		effect.data[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data[0] + by) : (effect.data[0] + by));
+		effect.data.value[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data.value[0] + by) : (effect.data.value[0] + by));
 	}
 	nextTick(() => {
-		if (!effect.data[0] && hoveredEffectId.value === effect.abilityId) {
+		if (!effect.data.value[0] && hoveredEffect.value?.abilityId.id === effect.abilityId.id) {
 			hideEffectTooltip();
 		}
 	});
@@ -1329,8 +1329,8 @@ defineExpose({ el });
 				</ul>
 				<LolEffectHoverTooltip
 					ref="effectHoverTooltip"
-					:ability-id="hoveredEffectId"
-					:damage-source="value"
+					:ability-id="hoveredEffect?.abilityId"
+					:damage-source="hoveredEffect?.source as unknown as DamageSource"
 				/>
 			</section>
 			<section ref="abilities" class="abilities" :inert="isLoading">

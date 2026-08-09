@@ -51,12 +51,7 @@ watch(sourceAbilityId, async (abilityId) => {
 	}
 }, { immediate: true });
 
-const computedDescription = computed((): IComputedEffectDescription | undefined => {
-	if (props.abilityId) {
-		return computeEffectDescription(props.abilityId.id, props.damageSource);
-	}
-	return undefined;
-});
+const computedDescription = computed<IComputedEffectDescription | undefined>(() => props.abilityId && computeEffectDescription(props.abilityId.id, props.damageSource));
 
 const sourceAbilityDescription = computed<IComputedAbilityDescription | IComputedItemDescription | IComputedDragonAbilityDescription | undefined>(() => {
 	if (computedDescription.value?.championAbilityLikePrecomputedDescription) {
@@ -73,7 +68,7 @@ const sourceAbilityDescription = computed<IComputedAbilityDescription | ICompute
 		return computeAbilityDescription(
 			champion.value,
 			sourceAbilityId.value,
-			undefined,
+			props.damageSource,
 			{ overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[id]?.variables) },
 		);
 	}
@@ -82,7 +77,7 @@ const sourceAbilityDescription = computed<IComputedAbilityDescription | ICompute
 		return computeDragonAbilityDescription(
 			id,
 			sourceAbilityId.value.subtype,
-			undefined,
+			props.damageSource,
 			false,
 			{ overrideVariables: specificKnownVariables((DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[id]?.[sourceAbilityId.value.subtype]?.variables) },
 		);
@@ -91,7 +86,7 @@ const sourceAbilityDescription = computed<IComputedAbilityDescription | ICompute
 	const item = ITEMS[id]!;
 	return computeItemDescription(
 		item,
-		undefined,
+		props.damageSource,
 		{ overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables) },
 	);
 });

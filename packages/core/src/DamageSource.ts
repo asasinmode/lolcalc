@@ -1749,6 +1749,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		isActive: computed((): number | boolean => (specific.isActive ?? defaultEffectIsActive)(effect.data.value)),
 		specific,
 		maxValue: undefined,
+		source: effect.source,
 	};
 
 	const maxValue = typeof specific.maxValue === 'function' ? specific.maxValue() : specific.maxValue;
@@ -2015,6 +2016,7 @@ export interface IComputedAppliedEffect {
 	maxValue?: number;
 	/** output of `IEffectSpecific.variables?.calculate()` */
 	resultVariables?: ComputedRef<IReplaceGameVariablesRV['variables']>;
+	source: IDamageSourceEffect['source'];
 }
 
 interface IDamageSourceComputed {

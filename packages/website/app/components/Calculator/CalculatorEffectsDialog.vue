@@ -143,12 +143,14 @@ function effectComponent(effectId: IEffectAbilityId): Component | undefined {
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 const hoveredEffectId = shallowRef<IEffectAbilityId>();
+const hoveredAppliedEffect = shallowRef<IDamageSourceEffect>();
 const hoveringApplied = ref(false);
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId, isApplied: boolean) {
+function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId, isApplied: boolean, appliedEffect?: IDamageSourceEffect) {
 	hoveredEffectId.value = effectId;
 	hoveringApplied.value = isApplied;
+	hoveredAppliedEffect.value = appliedEffect ?? damageSource.value?.getEffect(effectId)?.[0];
 	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
 	EFFECT_SPECIFICS[effectId.id].sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
 	effectHoverTooltipEl.value?.el?.showPopover();
@@ -239,7 +241,7 @@ defineExpose({
 					:ability-id="effect.abilityId"
 					:damage-source
 					id-suffix="effects-dialog-applied"
-					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true)"
+					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true, effect)"
 				>
 					<button
 						class="pretend-ui-btn remove"
@@ -270,10 +272,10 @@ defineExpose({
 				</li>
 			</ul>
 		</template>
-		<!-- deliberately not passing damageSource here because these effects are applied by a different champion. Effects from own items can be applied with item extras -->
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
 			:ability-id="hoveredEffectId"
+			:damage-source="hoveredAppliedEffect?.source.value"
 			:style="hoveredEffectId && `position-anchor: --effect-${hoveredEffectId.id}-${hoveringApplied ? 'applied' : 'all'}`"
 		/>
 	</VDialog>
