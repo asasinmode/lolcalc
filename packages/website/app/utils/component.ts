@@ -60,7 +60,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			},
 			'onUpdate:modelValue': updateValue,
 		}, ctx.slots);
-	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
 export async function progressExtra<T extends IGameAbilityId>(
@@ -92,7 +92,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 		}, effectControlsProps
 			? { default: () => createEffectControls(props, effectControlsProps.refresh, effectControlModel!, ctx.slots) }
 			: ctx.slots);
-	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
 export async function booleanExtra<T extends IGameAbilityId>(
@@ -119,7 +119,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 			},
 			'onUpdate:modelValue': updateValue,
 		}, ctx.slots);
-	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
 export async function enumExtra<T extends IGameAbilityId>(
@@ -151,7 +151,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 			},
 			'onUpdate:modelValue': updateValue,
 		}, ctx.slots);
-	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
 function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource): [
