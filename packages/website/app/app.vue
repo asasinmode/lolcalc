@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PATCH_VERSION } from '@lolcalc/data';
+import { imgUrl, PATCH_VERSION } from '@lolcalc/data';
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
 const { saveState, isStateTooLargeForQuery } = useManageCalculatorState(initCalculatorState());
@@ -21,7 +21,8 @@ useHead({
 	style: [
 		{
 			textContent: `:root {
-	--masterwork-border-url: url(https://raw.communitydragon.org/${vMinor}/game/assets/items/itemmodifiers/bordertreatmentornn.png)
+	--masterwork-border-url: url(${imgUrl('game/assets/items/itemmodifiers/bordertreatmentornn.png')});
+	--empty-champion-url: url(${imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')})
 }`,
 		},
 	],

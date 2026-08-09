@@ -2946,6 +2946,10 @@ defineExpose({ el });
 				> img {
 					--at-apply: 'saturate-0';
 				}
+
+				> .effect-src-select {
+					--at-apply: 'saturate-0';
+				}
 			}
 		}
 	}
