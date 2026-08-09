@@ -725,7 +725,7 @@ export interface IEffectSpecific<T extends number[] = [number]> {
 	maxValue?: number | (() => Promise<number> | number);
 	/** if specified, the component for this effect will be `VExtraEnum` */
 	enumOptions?: Record<string, number>;
-	/** if `true`, component for this will be `VExtraProgress` */
+	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */

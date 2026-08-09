@@ -1,6 +1,6 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IGameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IControlEffectProps, IGameAbilityData } from '@lolcalc/core/specifics';
+import type { IEffectControlsProps, IGameAbilityData } from '@lolcalc/core/specifics';
 import type { ComputedRef, SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
@@ -69,7 +69,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 	label: string,
 	getDerivedValue: (progress: number, self: DamageSource) => number,
 	derivedSymbolSuffix = '%',
-	effectControlsProps?: IControlEffectProps<any>,
+	effectControlsProps?: IEffectControlsProps<any>,
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
@@ -195,8 +195,8 @@ appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 
 function createEffectControls(
 	props: IExtraComponentProps,
-	refresh: IControlEffectProps['refresh'],
-	model: ReturnType<IControlEffectProps['model']>,
+	refresh: IEffectControlsProps['refresh'],
+	model: ReturnType<IEffectControlsProps['model']>,
 	slots: SlotsType,
 ) {
 	return h(

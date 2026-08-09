@@ -35,7 +35,7 @@ import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
-import type { IControlEffectProps, IDefineVariablesConfig, IDeriveProgressFn, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
+import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
 import { MISC } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -1600,7 +1600,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
-	effectControls?: IControlEffectProps<Id>;
+	effectControls?: IEffectControlsProps<Id>;
 	[key: string]: any;
 	/**
 	 * ability's variant specific
