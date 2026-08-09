@@ -1047,14 +1047,12 @@ defineExpose({ el });
 						loading="lazy"
 						:width="imageSizes.champion"
 						:height="imageSizes.champion"
-						style="--focus-brightness: 1.2"
 					>
 					<img
 						v-else
 						:src="imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')"
 						width="256"
 						height="256"
-						style="--focus-brightness: 1.5"
 					>
 				</button>
 				<VSelect
@@ -1580,6 +1578,11 @@ defineExpose({ el });
 /* mobile breakpoints to check when changing */
 /* 1679/1680 | 1193/1194 | 1078/1079 | 839/840 | 599/600 | 538/539 | 511/512 | 459/460 | 399/400 | 320-374/375 */
 @layer components {
+	:root {
+		--champion-hover-brightness: 1.2;
+		--empty-champion-hover-brightness: 1.5;
+	}
+
 	[data-scoreboard-item][data-group='sources'] {
 		border-inline-start: var(--scoreboard-item-b-w) solid var(--damage-source-clr);
 	}
@@ -1848,7 +1851,11 @@ defineExpose({ el });
 				&:hover,
 				&:focus-visible {
 					img {
-						--at-apply: 'brightness-[--focus-brightness]';
+						--at-apply: 'brightness-[--empty-champion-hover-brightness]';
+
+						&[loading='lazy'] {
+							--at-apply: 'brightness-[--champion-hover-brightness]';
+						}
 					}
 				}
 			}
