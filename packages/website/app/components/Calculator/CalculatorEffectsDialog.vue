@@ -77,23 +77,17 @@ const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 		{
 			type: AbilityType.item,
 			label: 'items',
-			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
-			)),
+			options: itemEffects,
 		},
 		{
 			type: AbilityType.champion,
 			label: 'champions',
-			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
-			)),
+			options: (championEffects.value ?? []),
 		},
 		{
 			type: AbilityType.effect,
 			label: 'other',
-			options: otherEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
-			)),
+			options: otherEffects,
 		},
 	];
 
@@ -242,7 +236,7 @@ defineExpose({
 					:is="effectComponent(effect.abilityId) ?? UnknownComponent"
 					:ability-id="effect.abilityId"
 					:damage-source
-					id-prefix="effects-dialog"
+					id-prefix="effects-dialog-applied"
 					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId)"
 				>
 					<button
@@ -268,7 +262,7 @@ defineExpose({
 						:is="effectComponent(effect.abilityId) ?? UnknownComponent"
 						:ability-id="effect.abilityId"
 						:damage-source
-						id-prefix="effects-dialog"
+						id-prefix="effects-dialog-all"
 						@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId)"
 					/>
 				</li>

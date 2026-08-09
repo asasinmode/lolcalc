@@ -217,6 +217,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] rewrite css classes to selectors with `@apply`
 - [ ] try to generate specific components from data in specific, like effect are?
 - [x] service worker for caching stuff
+  - [ ] cache lolcalc files too
 - [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold
 - [x] automatically generate extended equals, ideally on ITEM_SPECIFICS so it doesn't have to do it on every replace, based on itemCalculations/stringCalculations r smth
 - [ ] kind of a code documentation where yap about

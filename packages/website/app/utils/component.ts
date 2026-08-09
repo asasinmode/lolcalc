@@ -1,7 +1,7 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IControlEffectProps, IGameAbilityData } from '@lolcalc/core/specifics';
-import type { SlotsType } from 'vue';
+import type { ComputedRef, SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage } from '@lolcalc/core/misc';
@@ -20,7 +20,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
-		let [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
 
 		let localMax = max;
 		if (typeof localMax === 'function') {
@@ -43,7 +43,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			'usedNumberInput': useNumberInput(
 				abilityId.type === AbilityType.effect
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
-					? () => [(appliedEffect ??= props.damageSource.addEffect(abilityId)).data, property as number]
+					? () => [appliedEffect?.value?.data ?? props.damageSource.addEffect(abilityId).data, property as number]
 					: [
 							props.damageSource[abilityId.type === AbilityType.champion
 								? 'internalData'
@@ -158,11 +158,11 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 	stringifiedAbilityId: string,
 	value: ComputedRef<any>,
 	updateValue: (value: any) => void,
-	appliedEffect: IDamageSourceEffect | undefined,
+appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 ] {
 	const isEffect = abilityId.type === AbilityType.effect;
-	let appliedEffect = isEffect
-		? damageSource.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id)
+	const appliedEffect = isEffect
+		? computed<IDamageSourceEffect | undefined>(() => damageSource.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id))
 		: undefined;
 
 	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion
@@ -173,17 +173,17 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 
 	return [
 		GameAbilityId.stringify(abilityId, CHAMPION_ID_TO_KEY, EFFECT_SPECIFICS_OBJECT_ENTRIES),
-		computed(() =>
-			isEffect
-				? appliedEffect?.data[property as number]
-				: damageSource[dataProperty].value?.[property as string]),
+		computed(() => isEffect
+			? (appliedEffect?.value?.data[property as number] ?? 0)
+			: damageSource[dataProperty].value?.[property as string],
+		),
 		function updateValue(value: any) {
 			if (isEffect) {
-				if (appliedEffect) {
-					appliedEffect.data[property as number] = value;
+				if (appliedEffect?.value) {
+					appliedEffect.value.data[property as number] = value;
 				} else {
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
-					appliedEffect = damageSource.addEffect(abilityId, [value]);
+					damageSource.addEffect(abilityId, [value]);
 				}
 			} else {
 				damageSource[dataProperty].value[property] = value;
