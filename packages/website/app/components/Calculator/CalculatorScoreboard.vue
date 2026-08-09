@@ -47,11 +47,11 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 	const { primary, primarySlots, secondary } = damageSource.runes.value.paths;
 	if (primary && primarySlots[0]) {
 		const { icon } = RUNES.paths[primary].slots[0]![primarySlots[0]]!;
-		runePrimary.src = `https://raw.communitydragon.org/${vMinor}/game/${icon}`;
+		runePrimary.src = imgUrl(`/game/${icon}`);
 		runePrimary.width = 256;
 		runePrimary.height = 256;
 	} else {
-		runePrimary.src = `https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
+		runePrimary.src = imgUrl('plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png');
 		runePrimary.width = 80;
 		runePrimary.height = 80;
 	}
@@ -61,7 +61,7 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 		const { name } = TEXT.runes.paths[secondary]!;
 		runeSecondary.style.display = '';
 		runeSecondary.style.backgroundColor = iconColor;
-		runeSecondary.style.mask = `url(https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg) no-repeat center`;
+		runeSecondary.style.mask = `url(${imgUrl(`plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`)}) no-repeat center`;
 	} else {
 		runeSecondary.style.display = 'none';
 	}
@@ -78,7 +78,7 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 		}
 
 		if (item) {
-			img.src = `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${item.image}`;
+			img.src = imgUrl(`img/item/${item.image}`, true);
 			img.style.display = '';
 		} else {
 			img.style.display = 'none';
@@ -673,7 +673,7 @@ const isDisplayingTargets = ref(false);
 	}
 
 	.source-thumbnail {
-		--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 flex';
+		--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 flex inline-max relative';
 
 		> :nth-child(1) {
 			--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-btn-border-clr]';
