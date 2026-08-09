@@ -3,7 +3,7 @@ import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IDeriveProgressFn, IInternalItemDataOf, ISpecificVariables } from './index.ts';
+import type { IDeriveProgressFn, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, MISC, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
@@ -106,6 +106,13 @@ export const EFFECT_SPECIFICS = {
 				console.warn('[EFFECT_SPECIFICS hextechSoulSlow] failed to calculate slow percentage', slowValue);
 				return Number.NaN;
 			}
+		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.dragonSoul.value !== 'Hextech') {
+					return 'hextech soul not set';
+				}
+			},
 		},
 		variables: defineVariables({
 			known: {
@@ -727,6 +734,7 @@ export interface IEffectSpecific<T extends number[] = [number]> {
 	enumOptions?: Record<string, number>;
 	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn;
+	sourceControls?: ISelectEffectSourceProps;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */
 	modifyVariable?: {

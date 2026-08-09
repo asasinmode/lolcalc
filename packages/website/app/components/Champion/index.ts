@@ -98,7 +98,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Naafiri', 'passive', 0), 'passiveStacks', 'Packmates', 0, CHAMPION_SPECIFICS.Naafiri.MAX_PASSIVE_STACKS),
 	},
 	Nami: {
-		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.derivedMS, '', CHAMPION_SPECIFICS.Nami.passive.effectControls),
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.derivedMS, { effectControlsProps: CHAMPION_SPECIFICS.Nami.passive.effectControls, derivedSymbolSuffix: '' }),
 	},
 	Nasus: {
 		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither slow on target', CHAMPION_SPECIFICS.Nasus.WITHER_MS_SLOW),
@@ -155,7 +155,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.MAX_PASSIVE_STACKS),
 	},
 	Sivir: {
-		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Sivir', 'passive', 0), 'passiveMSProgress', 'Fleet of Foot move speed', CHAMPION_SPECIFICS.Sivir.PASSIVE_BONUS_MS, ''),
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Sivir', 'passive', 0), 'passiveMSProgress', 'Fleet of Foot move speed', CHAMPION_SPECIFICS.Sivir.PASSIVE_BONUS_MS, { derivedSymbolSuffix: '' }),
 	},
 	Smolder: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Smolder', 'passive', 0), 'passiveStacks', 'Dragon Practice stacks'),
@@ -224,7 +224,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 			??= enumOptions
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
 				: deriveProgressValue
-					? await progressExtra(abilityId, 0, label, deriveProgressValue)
+					? await progressExtra(abilityId, 0, label, deriveProgressValue, { selectEffectSourceProps: effectSpecific.sourceControls })
 					: maxValue !== 1
 						? await numberExtra(abilityId, 0, label, minValue, maxValue)
 						: await booleanExtra(abilityId, 0, label, false);

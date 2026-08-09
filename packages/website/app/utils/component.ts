@@ -1,6 +1,6 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IGameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IEffectControlsProps, IGameAbilityData } from '@lolcalc/core/specifics';
+import type { IEffectControlsProps, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import type { ComputedRef, SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
@@ -8,7 +8,7 @@ import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
-import { CalculatorEffectControls, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
+import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
 
 export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
@@ -68,14 +68,22 @@ export async function progressExtra<T extends IGameAbilityId>(
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	getDerivedValue: (progress: number, self: DamageSource) => number,
-	derivedSymbolSuffix = '%',
-	effectControlsProps?: IEffectControlsProps<any>,
+	{
+		effectControlsProps,
+		selectEffectSourceProps,
+		derivedSymbolSuffix = '%',
+	}: {
+		effectControlsProps?: IEffectControlsProps<any>;
+		selectEffectSourceProps?: ISelectEffectSourceProps;
+		derivedSymbolSuffix?: string;
+	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
 
 		const effectControlModel = effectControlsProps?.model(props.damageSource);
+		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => selectEffectSourceProps.invalidMessage(props.damageSource));
 
 		return () => h(CalculatorExtraProgress, {
 			'modelValue': modelValue.value,
@@ -90,8 +98,17 @@ export async function progressExtra<T extends IGameAbilityId>(
 			'onUpdate:modelValue': updateValue,
 			'data-inactive': effectControlsProps && !effectControlModel?.value ? '' : undefined,
 		}, effectControlsProps
-			? { default: () => createEffectControls(props, effectControlsProps.refresh, effectControlModel!, ctx.slots) }
-			: ctx.slots);
+			? { default: () => [
+					createEffectControls(props, effectControlsProps.refresh, effectControlModel!, ctx.slots),
+					selectEffectSourceInvalidMessage && createSelectEffectSource(props, selectEffectSourceInvalidMessage),
+				] }
+			: { default: () => {
+					const defaultSlots = ctx.slots.default?.();
+					return [
+						...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
+						selectEffectSourceInvalidMessage && createSelectEffectSource(props, selectEffectSourceInvalidMessage),
+					];
+				} });
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
@@ -202,13 +219,23 @@ function createEffectControls(
 	return h(
 		CalculatorEffectControls,
 		{
-			'idSuffix': `${props.idSuffix}-effect-ctl`,
+			'idSuffix': props.idSuffix,
 			'modelValue': model.value,
 			'onUpdate:modelValue': val => model.value = val,
 			'onRefresh': () => refresh(props.damageSource),
 		},
 		slots,
 	);
+}
+
+function createSelectEffectSource(
+	props: IExtraComponentProps,
+	invalidMessage: ComputedRef<ReturnType<ISelectEffectSourceProps['invalidMessage']>>,
+) {
+	return h(CalculatorEffectSourceSelect, {
+		idSuffix: props.idSuffix,
+		invalidMessage: invalidMessage.value,
+	});
 }
 
 type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;

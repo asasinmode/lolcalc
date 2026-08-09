@@ -280,6 +280,10 @@ export interface IEffectControlsProps<T extends IChampionId | undefined = undefi
 	refresh: (self: DamageSource<T>) => void;
 }
 
+export interface ISelectEffectSourceProps {
+	invalidMessage: (source: DamageSource) => string | undefined;
+}
+
 export interface IDeriveProgressFn {
 	(value: number, self: DamageSource): number;
 }

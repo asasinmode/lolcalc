@@ -238,7 +238,7 @@ defineExpose({
 					:is="effectComponent(effect.abilityId) ?? UnknownComponent"
 					:ability-id="effect.abilityId"
 					:damage-source
-					id-prefix="effects-dialog-applied"
+					id-suffix="effects-dialog-applied"
 					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true)"
 				>
 					<button
@@ -264,7 +264,7 @@ defineExpose({
 						:is="effectComponent(effect.abilityId) ?? UnknownComponent"
 						:ability-id="effect.abilityId"
 						:damage-source
-						id-prefix="effects-dialog-all"
+						id-suffix="effects-dialog-all"
 						@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId, false)"
 					/>
 				</li>
