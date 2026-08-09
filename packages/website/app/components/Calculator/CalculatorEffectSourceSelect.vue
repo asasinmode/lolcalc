@@ -61,7 +61,7 @@ const selectedText = computed(() => {
 		v-model="value"
 		class="effect-src-select"
 		label="effect source"
-		title="effect source"
+		:title="showInvalid ? undefined : 'effect source'"
 		clearable
 		:class="{ empty: !value }"
 		:aria-errormessage="showInvalid ? `effect-src-select-err-${idSuffix}` : undefined"
