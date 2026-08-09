@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
+import { CHAMPION_IMAGES } from '@lolcalc/data';
 
 const props = defineProps<{
 	idSuffix: string;
@@ -7,6 +8,7 @@ const props = defineProps<{
 }>();
 
 const { damageSources, damageTargets } = useCalculatorState();
+const { championImage } = CHAMPION_IMAGES;
 
 function formatSourceOptions(sources: DamageSource[]): [string, string][] {
 	return sources.map((source, index) => [source.id, `(${index + 1}) ${source.listedChampion.value?.name ?? '<empty>'}`]);
@@ -31,6 +33,9 @@ function hideTooltiop() {
 }
 
 const showInvalid = computed(() => value.value && props.invalidMessage);
+
+// TODO use one from props/value/applied effect
+const selectedSource = computed(() => value.value ? damageSources.value.find(source => source.id === value.value) ?? damageTargets.value.find(source => source.id === value.value) : undefined);
 </script>
 
 <template>
@@ -47,6 +52,7 @@ const showInvalid = computed(() => value.value && props.invalidMessage);
 			sources: formatSourceOptions(damageSources),
 			targets: formatSourceOptions(damageTargets),
 		}"
+		:style="selectedSource?.listedChampion.value ? `--selected-src-img: url(${championImage(selectedSource.listedChampion.value.image, selectedSource.listedChampion.value.id)})` : undefined"
 		@label-mouseenter="showTooltip"
 	>
 		<template #post>
@@ -80,6 +86,10 @@ const showInvalid = computed(() => value.value && props.invalidMessage);
 		> label {
 			--at-apply: 'size-full';
 			background: var(--empty-champion-url) no-repeat center / 120%;
+		}
+
+		&[style] > label {
+			background: var(--selected-src-img) no-repeat center / 100%;
 		}
 
 		&:hover,
