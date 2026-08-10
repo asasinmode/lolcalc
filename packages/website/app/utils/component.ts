@@ -1,5 +1,5 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
-import type { IGameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IEffectControlsProps, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import type { ComputedRef, SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
@@ -79,10 +79,11 @@ export async function progressExtra<T extends IGameAbilityId>(
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
+		const isEffect = abilityId.type === AbilityType.effect;
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect);
 
-		const effectControlModel = effectControlsProps?.model(props.damageSource);
+		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
 		function effectControlUpdateValue(val?: boolean) {
 			effectControlModel!.value = val;
 		}
@@ -111,10 +112,10 @@ export async function progressExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
-			'data-inactive': effectControlsProps && !effectControlModel?.value ? '' : undefined,
+			'data-inactive': !isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined,
 		}, effectControlsProps
 			? { default: () => [
-					createEffectControls(props.idSuffix, effectControlModel!.value, effectControlUpdateValue, effectControlRefresh, ctx.slots),
+					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, true),
 					selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 				] }
 			: { default: () => {
@@ -186,15 +187,14 @@ export async function enumExtra<T extends IGameAbilityId>(
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
-function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource): [
+function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource, isEffect = abilityId.type === AbilityType.effect): [
 	stringifiedAbilityId: string,
 	value: ComputedRef<any>,
 	updateValue: (value: any) => void,
 appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 ] {
-	const isEffect = abilityId.type === AbilityType.effect;
 	const appliedEffect = isEffect
-		? computed<IDamageSourceEffect | undefined>(() => damageSource.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id))
+		? computed<IDamageSourceEffect | undefined>(() => damageSource?.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id))
 		: undefined;
 
 	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion
@@ -215,7 +215,7 @@ appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 					appliedEffect.value.data.value[property as number] = value;
 				} else {
 					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
-					damageSource.addEffect(abilityId, [value]);
+					damageSource.addEffect(abilityId as IEffectAbilityId, [value]);
 				}
 			} else {
 				damageSource[dataProperty].value[property] = value;
@@ -231,12 +231,14 @@ function createEffectControls(
 	updateValue: (value: boolean | undefined) => void,
 	refresh: () => void,
 	slots: SlotsType,
+	noApply?: boolean,
 ) {
 	return h(
 		CalculatorEffectControls,
 		{
 			idSuffix,
 			modelValue,
+			noApply,
 			'onUpdate:modelValue': updateValue,
 			'onRefresh': refresh,
 		},

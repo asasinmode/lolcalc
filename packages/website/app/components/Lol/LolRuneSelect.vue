@@ -668,7 +668,6 @@ defineExpose({
 	#rune-select-primary,
 	#rune-select-secondary,
 	#rune-select-shards {
-		--transition-duration: 150ms;
 		--transition-timing-function: ease-in-out;
 		--path-button-size: calc(var(--spacing) * 13);
 		--path-options-width: calc(var(--path-button-size) * var(--path-options-length));

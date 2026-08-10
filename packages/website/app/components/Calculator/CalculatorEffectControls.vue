@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { IExtraComponentProps } from '~/utils/types';
 
-defineProps<Pick<IExtraComponentProps, 'idSuffix'>>();
+defineProps<Pick<IExtraComponentProps, 'idSuffix'> & { noApply?: boolean }>();
 
 const emit = defineEmits<{
 	refresh: [];
@@ -39,7 +39,7 @@ function hideControlsTooltip(event: Event) {
 			<Icon class="i-ph:arrow-clockwise-bold" :style="`--clicks: ${clicks}`" />
 		</button>
 		<slot>
-			<label :for="`effect-ctl-tgl-${idSuffix}`" class="pretend-ui-btn">
+			<label v-if="!noApply" :for="`effect-ctl-tgl-${idSuffix}`" class="pretend-ui-btn">
 				<input :id="`effect-ctl-tgl-${idSuffix}`" v-model="value" type="checkbox">
 				<span>apply</span>
 			</label>
@@ -57,7 +57,9 @@ function hideControlsTooltip(event: Event) {
 		--at-apply: 'flex';
 
 		> button:first-of-type {
-			--at-apply: '-me-px';
+			&:has(+ button) {
+				--at-apply: '-me-px';
+			}
 
 			.icon {
 				--at-apply: 'transition-[rotate] duration-[--transition-duration]';

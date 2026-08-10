@@ -276,7 +276,8 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVar
 export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [IVariableType, IGlobalModifyVariableFunction][];
 
 export interface IEffectControlsProps<T extends IChampionId | undefined = undefined> {
-	model: (self: DamageSource<T>) => WritableComputedRef<boolean | undefined>;
+	/** if not present, will always be treated as true */
+	model?: (self: DamageSource<T>) => WritableComputedRef<boolean | undefined>;
 	refresh: (self: DamageSource<T>) => void;
 }
 

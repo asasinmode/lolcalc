@@ -116,6 +116,8 @@
 
 		--extra-item-min-w: calc(60 * var(--spacing));
 		--extra-item-max-w: calc(64 * var(--spacing));
+
+		--transition-duration: 150ms;
 	}
 
 	.pretend-ui-btn {
