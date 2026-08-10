@@ -139,7 +139,6 @@ export const DRAGON_SPECIFICS = {
 				return DRAGON_SPECIFICS.Hextech.soul.calculateSlow(value, self?.stats.value.isRanged, bonus?.attackDamage, total?.abilityPower, bonus?.hp);
 			}) satisfies IDeriveProgressFn<true>,
 			damageVars(self, vars) {
-				console.log('damage varing');
 				const { isRanged, total, bonus } = self.stats.value;
 				vars.hextechSoulSlow = DRAGON_SPECIFICS.Hextech.soul.calculateSlow((self.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>).hextechTagged, isRanged, bonus.attackDamage, total.abilityPower, bonus.hp);
 			},

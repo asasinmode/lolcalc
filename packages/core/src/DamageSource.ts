@@ -935,8 +935,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		handleRoleQuestItems(this.items.value, this.roleQuest.value);
 	}
 
-	getEffect(abilityId: IGameAbilityId): [IDamageSourceEffect, index: number] | undefined {
-		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === abilityId.id);
+	getEffect(effectObjectName: IEffectObjectName): [IDamageSourceEffect, index: number] | undefined {
+		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === effectObjectName);
 
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
@@ -1045,11 +1045,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
 				}
 			} else {
-				const effectAbilityId = GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ornnPLivingForge);
-				const effect = this.getEffect(effectAbilityId);
-
+				const effect = this.getEffect(EFFECT_OBJECT_NAME.ornnPLivingForge);
 				if (effect) {
-					index = (effect[0].data.value as IGameAbilityData<typeof effectAbilityId>)[0] - 1;
+					index = (effect[0].data.value)[0] - 1;
 				}
 			}
 

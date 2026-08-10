@@ -150,7 +150,7 @@ const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId, isApplied: boolean, appliedEffect?: IDamageSourceEffect) {
 	hoveredEffectId.value = effectId;
 	hoveringApplied.value = isApplied;
-	hoveredAppliedEffect.value = appliedEffect ?? damageSource.value?.getEffect(effectId)?.[0];
+	hoveredAppliedEffect.value = appliedEffect ?? damageSource.value?.getEffect(effectId.id)?.[0];
 	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
 	EFFECT_SPECIFICS[effectId.id].sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
 	effectHoverTooltipEl.value?.el?.showPopover();

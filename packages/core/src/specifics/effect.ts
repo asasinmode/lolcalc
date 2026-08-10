@@ -119,7 +119,7 @@ export const EFFECT_SPECIFICS = {
 				Slow: [],
 			},
 			calculate(self) {
-				const effectData = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.hextechSoulSlow));
+				const effectData = self.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow);
 
 				const value: number = effectData ? EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(effectData[0].data.value[0], {} as DamageSource) : 0;
 
@@ -270,7 +270,7 @@ export const EFFECT_SPECIFICS = {
 						return;
 					}
 
-					const effect = self.getEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.bandlepipesFanfare));
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.bandlepipesFanfare);
 					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: effect?.[0].data.value[0] === MeleeRangedEnumOptions.ranged });
 					if (typeof attackSpeed.value === 'number') {
 						itemPassivesStats.bonusAttackSpeedPercent += attackSpeed.value;
