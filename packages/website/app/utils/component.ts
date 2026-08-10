@@ -92,8 +92,11 @@ export async function progressExtra<T extends IGameAbilityId>(
 
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 		function updateEffectSource(value?: DamageSource) {
-			if (appliedEffect?.value) {
-				appliedEffect.value.source.value = value;
+			if (appliedEffect) {
+				!appliedEffect.value && updateValue(0);
+				appliedEffect.value!.source.value = value;
+			} else {
+				console.error('[utils/component progress] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
 			}
 		}
 
