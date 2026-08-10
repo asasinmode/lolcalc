@@ -1,6 +1,7 @@
 import type { TMiscData } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
-import type { ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
+import type { IDamageVars } from '@lolcalc/shared';
+import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
 import type { IDeriveProgressFn, IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
 import { VariableType } from '@lolcalc/shared';
@@ -75,15 +76,6 @@ export const DRAGON_SPECIFICS = {
 			},
 		},
 		soul: {
-			LIGHTNING_SLOW: ((value, self) => {
-				const slowValue =	championAbilityVariableValue(self?.stats.value.isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self });
-				if (typeof slowValue.value === 'number') {
-					return slowValue.value * value;
-				} else {
-					console.warn('[DRAGON_SPECIFICS hextech soul] failed to calculate slow percentage', slowValue);
-					return Number.NaN;
-				}
-			}) satisfies IDeriveProgressFn<true>,
 			internalDataProperties: ['hextechTagged'],
 			setupData(self) {
 				self.internalDragonData.value.hextechTagged = clamp(0, self.internalDragonData.value.hextechTagged ?? 0, 100);
@@ -95,6 +87,7 @@ export const DRAGON_SPECIFICS = {
 						championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
 						championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
 					],
+					Slow: [],
 				},
 				calculate(self) {
 					return {
@@ -102,6 +95,9 @@ export const DRAGON_SPECIFICS = {
 							championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
 							championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
 						],
+						Slow: {
+							value: self.damageVars.value.hextechSoulSlow ?? 0,
+						},
 					};
 				},
 				meta: {
@@ -109,15 +105,44 @@ export const DRAGON_SPECIFICS = {
 						type: VariableType.true,
 					},
 					lolcalcChampRange: {
-						displayedName: 'SlowAmount',
+						type: VariableType.affectedBySlowResist,
+						displayedName: 'MaxSlowAmount',
 						isPercentage: true,
 						multiplier: 100,
 						/* since I'm overriding the builtin total slows with this one, use overwritten variables' calculatesFrom */
 						calculatesFrom: addCalculatesFrom([], championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? [], championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? []),
 					},
+					Slow: {
+						isCustom: true,
+						type: VariableType.affectedBySlowResist,
+						resultsIsPercentage: true,
+					},
 				},
 				uninteresting: ['SlowDuration', 'BaseUnitsToHit'],
 			}),
+			calculateSlow: (progress: number, isRanged: boolean | undefined, bonusAD?: number, totalAP?: number, bonusHP?: number): number => {
+				const slowValue =	championAbilityVariableValue(isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: {
+					stats: { value: { bonus: { attackDamage: bonusAD ?? 0, hp: bonusHP ?? 0 }, total: { abilityPower: totalAP ?? 0 } } },
+				} as DamageSource });
+				if (typeof slowValue.value === 'number') {
+					return slowValue.value * progress;
+				} else {
+					console.warn('[DRAGON_SPECIFICS hextech soul] failed to calculate slow percentage', slowValue);
+					return Number.NaN;
+				}
+			},
+			extraDerivedValue: ((value, self): number => {
+				if (self?.damageVars.value.hextechSoulSlow !== undefined) {
+					return self.damageVars.value.hextechSoulSlow;
+				}
+				const { bonus, total } = self?.stats.value ?? {};
+				return DRAGON_SPECIFICS.Hextech.soul.calculateSlow(value, self?.stats.value.isRanged, bonus?.attackDamage, total?.abilityPower, bonus?.hp);
+			}) satisfies IDeriveProgressFn<true>,
+			damageVars(self, vars) {
+				console.log('damage varing');
+				const { isRanged, total, bonus } = self.stats.value;
+				vars.hextechSoulSlow = DRAGON_SPECIFICS.Hextech.soul.calculateSlow((self.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>).hextechTagged, isRanged, bonus.attackDamage, total.abilityPower, bonus.hp);
+			},
 		},
 	},
 	Infernal: {
@@ -194,6 +219,7 @@ type DetectDragonVariables<T>
 
 export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
+	damageVars?: (self: DamageSource, vars: IDamageVars) => void;
 	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>, any>;
 	[key: string]: any;
 };

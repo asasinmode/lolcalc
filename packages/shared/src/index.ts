@@ -267,6 +267,11 @@ export interface IStatsCalculationMiscDebug {
 	ryzePMana?: number;
 }
 
+export interface IDamageVars {
+	/** slow % applied on target from the source's hextech soul */
+	hextechSoulSlow?: number;
+}
+
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
 
 export type IAdaptiveForceStatRv = [IAdaptiveForceStat, adaptiveForceVariable: 0 | 1, multiplier: number];
@@ -681,6 +686,8 @@ export const VariableType = {
 	true: 'true',
 	adaptive: 'adaptive',
 	affectedByTenacity: 'affectedByTenacity',
+	// TODO calc
+	affectedBySlowResist: 'affectedBySlowResist',
 } as const;
 
 export type IVariableType = typeof VariableType[keyof typeof VariableType];

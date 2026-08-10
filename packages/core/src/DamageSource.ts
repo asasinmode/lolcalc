@@ -1,6 +1,6 @@
 import type { ITextData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IDamageVars, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -20,6 +20,7 @@ import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_ST
 import { roundVariable } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
+import { calculateDamageVars } from './calculate/damageVars.ts';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { gameAbilityImage } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
@@ -65,6 +66,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	maxLevel = computed((): number => this.roleQuest.value === 'top' ? 20 : 18);
 
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
+	damageVars = computed((): IDamageVars => calculateDamageVars(this));
 
 	runes: Ref<IChampionRunes>;
 	runePathsEmpty = computed((): boolean => runesEmpty(this.runes.value));

@@ -18,7 +18,7 @@ export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificC
 	},
 	Hextech: {
 		soul: {
-			extras: await progressExtra(GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'), 'hextechTagged', 'apply lightning slow on target', DRAGON_SPECIFICS.Hextech.soul.LIGHTNING_SLOW),
+			extras: await progressExtra(GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'), 'hextechTagged', 'apply lightning slow on target', DRAGON_SPECIFICS.Hextech.soul.extraDerivedValue),
 		},
 	},
 };
