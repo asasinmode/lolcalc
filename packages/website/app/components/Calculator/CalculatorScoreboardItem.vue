@@ -910,6 +910,11 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	});
 }
 
+function recalculateEffect(effectIndex: number) {
+	const computedEffect = props.value.computed.effects.value[effectIndex]!;
+	computedEffect.specific.effectControls?.refresh?.(props.value);
+}
+
 onBeforeUnmount(() => {
 	healthBarCleanup();
 	abilityResourceBarCleanup();
@@ -1315,7 +1320,11 @@ defineExpose({ el });
 						@mouseenter="showEffectTooltip($event, effect)"
 					>
 						<span>{{ effect.specific.label }}</span>
-						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)">
+						<button
+							@click="modifyEffectValue(effectIndex, 1)"
+							@click.right.prevent="modifyEffectValue(effectIndex, -1)"
+							@click.middle.prevent="recalculateEffect(effectIndex)"
+						>
 							<img
 								v-show="effect.imgData"
 								v-bind="gameImageAttrs(effect.imgData, 22)"
