@@ -88,7 +88,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			effectControlModel!.value = val;
 		}
 		function effectControlRefresh() {
-			(!appliedEffect || modelValue.value) && effectControlsProps?.refresh(props.damageSource);
+			effectControlsProps?.refresh(props.damageSource);
 		}
 
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
@@ -96,7 +96,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			if (appliedEffect) {
 				!appliedEffect.value && updateValue(0);
 				appliedEffect.value!.source.value = value;
-				modelValue.value && effectControlRefresh();
+				effectControlRefresh();
 			} else {
 				console.error('[utils/component progress] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
 			}

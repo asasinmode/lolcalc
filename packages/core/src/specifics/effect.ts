@@ -88,11 +88,16 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	}),
-	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number]>({
+	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number, bonusAD?: number, totalAP?: number, bonusHP?: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
 		label: 'Hextech Soul lightning slow',
 		setupData(data) {
-			return [clamp(0, data?.[0] ?? 0, 100)];
+			return [
+				clamp(0, data?.[0] ?? 0, 100),
+				Math.max(0, data?.[1] ?? 0),
+				Math.max(0, data?.[2] ?? 0),
+				Math.max(0, data?.[3] ?? 0),
+			];
 		},
 		maxValue: 100,
 		imgText(data): number {
@@ -115,8 +120,22 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 		effectControls: {
-			refresh(self) {
-				console.log('refreshing soul', self.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow));
+			refresh(source) {
+				const effect = source.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow)?.[0];
+				if (!effect) {
+					console.warn('[EFFECT_SPECIFICS hextech soul slow] tried to refresh effect but not found it in source', source);
+					return;
+				} else if (!effect.source.value) {
+					effect.data.value[1] = 0;
+					effect.data.value[2] = 0;
+					effect.data.value[3] = 0;
+					return;
+				}
+				const { bonus: { attackDamage, hp }, total: { abilityPower } } = effect.source.value.stats.value;
+				effect.data.value[1] = attackDamage;
+				effect.data.value[2] = abilityPower;
+				effect.data.value[3] = hp;
+				console.log('refreshing soul', effect?.source?.value?.listedChampion.value?.name, effect);
 			},
 		},
 		variables: defineVariables({
@@ -699,9 +718,9 @@ export const EFFECT_SPECIFICS = {
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;
-export type IHypotheticalEffectSpecifics = Record<string, IEffectSpecific>;
+export type IHypotheticalEffectSpecifics = Record<string, IEffectSpecific<any>>;
 
-export interface IEffectSpecific<T extends number[] = [number]> {
+export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	sourceAbility: IGameAbilityId;
 	/** used when an effect is applied by multiple items, overrides `sourceAbility` when creating EFFECTS_APPLIED_BY_ITEMS_TO_TARGET */
 	appliedByItems?: IGameAbilityId[];
@@ -848,7 +867,7 @@ export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[
 	},
 };
 
-function defineEffectSpecific<T extends number[]>(config: IEffectSpecific<T>): IEffectSpecific<T> {
+function defineEffectSpecific<T extends (number | undefined)[]>(config: IEffectSpecific<T>): IEffectSpecific<T> {
 	return config;
 }
 

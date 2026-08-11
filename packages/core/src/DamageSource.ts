@@ -935,10 +935,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		handleRoleQuestItems(this.items.value, this.roleQuest.value);
 	}
 
-	getEffect(effectObjectName: IEffectObjectName): [IDamageSourceEffect, index: number] | undefined {
+	getEffect<T extends IEffectObjectName>(effectObjectName: T): [IDamageSourceEffect<IEffectAbilityId<T>>, index: number] | undefined {
 		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === effectObjectName);
 
-		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
+		return ~index ? [this.appliedEffects.value[index]! as unknown as IDamageSourceEffect<IEffectAbilityId<T>>, index] : undefined;
 	}
 
 	addEffect<T extends IEffectAbilityId>(
