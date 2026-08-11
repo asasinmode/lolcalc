@@ -190,7 +190,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] right click to sell items
   - [ ] right click to clear ability level/soul/role quest/others
   - [ ] difference between "internal effects" (item extras) and "applied effects" (effects dialog)
-  - [ ] in/decrement effects in scoreboard item
+  - [ ] in/decrement effects in scoreboard item, refresh effects middle mouse click
   - [ ] "tutorial library" to review info
   - [ ] item/passive extra popped up, look here it is, use it
   - [ ] double click to select & close champ select

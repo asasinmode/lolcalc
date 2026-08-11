@@ -574,9 +574,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			: [];
 		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, RUNES.shards[key as IRuneShardSlotName]));
 
+		const ROUNDING_PRECISION = 7;
+
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
-			.map(([, value]) => value && roundVariable(value, 7))
+			.map(([, value]) => value && roundVariable(value, ROUNDING_PRECISION))
 			.join('\'');
 
 		const runePathKeys = Object.keys(RUNES.paths);
@@ -601,7 +603,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
-				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}'${effect.data.value.join('\'')}`)
+				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}'${effect.data.value.map(v => v === undefined ? '' : roundVariable(v, ROUNDING_PRECISION)).join('\'')}`)
 				.join('~'),
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
