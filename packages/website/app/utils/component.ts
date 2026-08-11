@@ -102,12 +102,16 @@ export async function progressExtra<T extends IGameAbilityId>(
 			}
 		}
 
+		function deriveValue(progress: number) {
+			return getDerivedValue(progress, props.damageSource);
+		}
+
 		return () => h(CalculatorExtraProgress, {
 			'modelValue': modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
-			'deriveValue': (progress: number) => getDerivedValue(progress, props.damageSource),
+			deriveValue,
 			derivedSymbolSuffix,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
