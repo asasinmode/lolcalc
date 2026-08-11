@@ -732,7 +732,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	setupData: (data?: T) => Promise<T> | T;
 	/** checks if effect's data is not the default value, if not present, `defaultEffectIsActive` will be used */
 	isActive?: (data: T) => number | boolean;
-	imgText?: (data: T) => number | string;
+	imgText?: (data: T, self: DamageSource) => number | string;
 	/**
 	 * used for getting the `appliedEffect`'s data that's being added (`applyEffectsFromTo`) because a source has an item which applies its effect on target
 	 * for example, if `damageSource` has Serpent's Fang, there's a checkbox for applying it's effect, Shield Reave, to all targets used in calculations. This sets `internalItemData.sVenom` to `1`. Based on that, this function (which is expected to be found on all effect specifics that can be applied by items found on source to target) creates the data for appliedEffect of `EFFECT_OBJECT_NAME.serpentsFangVenom`
@@ -770,7 +770,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	variables?: ISpecificVariables<never, any>;
 }
 
-type IEffectModifyVariableFunction<T extends number[] = [number]> = (value: number, effectData: T) => number;
+type IEffectModifyVariableFunction<T extends (number | undefined)[] = [number]> = (value: number, effectData: T) => number;
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 
@@ -896,6 +896,6 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 	return target;
 }
 
-export function defaultEffectIsActive(data: number[]): number | boolean {
-	return data[0]!;
+export function defaultEffectIsActive(data: (number | undefined)[]): number | boolean | undefined {
+	return data[0];
 }

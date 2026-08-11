@@ -1,6 +1,6 @@
 import type { ITextData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IDamageVars, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IDamageVars, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -1745,8 +1745,8 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 	const rv: IComputedAppliedEffect = {
 		abilityId: effect.abilityId,
 		imgData: ['', 0],
-		imgText: computed((): string | number | undefined => specific.imgText?.(effect.data.value)),
-		isActive: computed((): number | boolean => (specific.isActive ?? defaultEffectIsActive)(effect.data.value)),
+		imgText: computed<string | number | undefined>(() => specific.imgText?.(effect.data.value, self)),
+		isActive: computed<number | boolean | undefined>(() => (specific.isActive ?? defaultEffectIsActive)(effect.data.value)),
 		specific,
 		maxValue: undefined,
 		source: effect.source,
@@ -2128,6 +2128,8 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 		debuffs: IStatsCalculationDebuffs;
 		/** see the type definition for info */
 		miscDebug: IStatsCalculationMiscDebug;
+		/** see the type definition for info */
+		effectVars: IStatsCalculationEffectVars;
 	}) => void;
 	/** the higher the, the **later** it will run */
 	priority?: number;

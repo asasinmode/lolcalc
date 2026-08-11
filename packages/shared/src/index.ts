@@ -79,6 +79,8 @@ export interface IStatsCalculationResult {
 	miscDebug: IStatsCalculationMiscDebug;
 	/** see the type definition for info */
 	debuffs: IStatsCalculationDebuffs;
+	/** see the type definition for info */
+	effectVars: IStatsCalculationEffectVars;
 }
 
 /** the variables calculated by various things, like riftmaker's void infusion */
@@ -269,6 +271,12 @@ export interface IStatsCalculationMiscDebug {
 
 export interface IDamageVars {
 	/** slow % applied on target from the source's hextech soul */
+	hextechSoulSlow?: number;
+}
+
+/** all of the variables from applied effects */
+export interface IStatsCalculationEffectVars {
+	/** slow % from hextech soul slow effect */
 	hextechSoulSlow?: number;
 }
 

@@ -125,21 +125,22 @@ async function loadChampionEffects() {
 
 const UnknownComponent = () => h('article', { class: 'unknown' }, ['UNKNOWN']);
 
-function effectComponent(effectId: IEffectAbilityId): Component | undefined {
-	const effectSpecific = EFFECT_SPECIFICS[effectId.id];
-	if (!effectSpecific) {
-		console.warn(`[CalculatorEffectsDialog effectComponent] failed to find specific for`, effectId);
-		return;
+const effectComponents = computed(() => {
+	const rv = new Map<IEffectObjectName, Component | Component[]>();
+
+	for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
+		const component = effectSpecific.sourceAbility.type === AbilityType.item
+			? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+			: effectSpecific.sourceAbility.type === AbilityType.champion
+				? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+				: effectSpecific.sourceAbility.type === AbilityType.dragon
+					? DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]?.[effectSpecific.sourceAbility.subtype]?.effects
+					: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
+		component && rv.set(effectObjectName, component);
 	}
 
-	return effectSpecific.sourceAbility.type === AbilityType.item
-		? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-		: effectSpecific.sourceAbility.type === AbilityType.champion
-			? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-			: effectSpecific.sourceAbility.type === AbilityType.dragon
-				? DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]?.[effectSpecific.sourceAbility.subtype]?.effects
-				: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
-}
+	return rv;
+});
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 const hoveredEffectId = shallowRef<IEffectAbilityId>();
@@ -237,7 +238,7 @@ defineExpose({
 				:style="`anchor-name: --effect-${effect.abilityId.id}-applied`"
 			>
 				<component
-					:is="effectComponent(effect.abilityId) ?? UnknownComponent"
+					:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
 					:ability-id="effect.abilityId"
 					:damage-source
 					id-suffix="effects-dialog-applied"
@@ -263,7 +264,7 @@ defineExpose({
 					:style="`anchor-name: --effect-${effect.abilityId.id}-all`"
 				>
 					<component
-						:is="effectComponent(effect.abilityId) ?? UnknownComponent"
+						:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
 						:ability-id="effect.abilityId"
 						:damage-source
 						id-suffix="effects-dialog-all"
