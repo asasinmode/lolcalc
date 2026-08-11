@@ -90,8 +90,9 @@ const gluttonousGreavesSpecific = {
 
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
-					itemStatIncreases[bootsId] ??= {};
-					itemStatIncreases[bootsId]!.PercentOmnivampMod = calculatedVariables.gluttonousImmortalOmnivamp;
+					itemStatIncreases[bootsId] = {
+						PercentOmnivampMod: calculatedVariables.gluttonousImmortalOmnivamp
+					};
 				}
 			},
 		},
@@ -233,12 +234,18 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
-					const { eternity } = self.internalItemData.value;
+				handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
+					const { eternity = 0 } = self.internalItemData.value;
 					const { APPerStack, HealthPerStack, ManaPerStack } = ITEMS_BY_NAME.roa?.dataValues;
 					itemPassivesStats.abilityPower += (calculatedVariables.roaAp = eternity * APPerStack);
 					itemPassivesStats.hp += (calculatedVariables.roaHp = eternity * HealthPerStack);
 					itemPassivesStats.mana += (calculatedVariables.roaMana = eternity * ManaPerStack);
+
+					itemStatIncreases[ITEM_NAME_TO_ID.roa] = {
+						FlatMagicDamageMod: calculatedVariables.roaAp,
+						FlatHPPoolMod: calculatedVariables.roaHp,
+						FlatMPPoolMod: calculatedVariables.roaMana,
+					};
 				},
 			},
 		},
