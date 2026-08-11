@@ -820,7 +820,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (effectSpecificEntry) {
 					const data = rawData.map((rawValue) => {
 						const value = rawValue ? Number.parseInt(rawValue) : undefined;
-						if (value && !Number.isNaN(value)) {
+						if (!Number.isNaN(value)) {
 							return value;
 						}
 						return undefined;

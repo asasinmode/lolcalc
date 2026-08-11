@@ -1,10 +1,10 @@
-import type { IEffectData, TEffects, TMiscData } from '@lolcalc/data';
+import type { IEffectData, TEffects } from '@lolcalc/data';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
-import { EFFECTS, ITEMS_BY_NAME, MISC, useChampion } from '@lolcalc/data';
+import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -12,6 +12,7 @@ import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
+import { DRAGON_SPECIFICS } from './dragon.ts';
 import { defineVariables, HOOK_PRIORITIES } from './index.ts';
 import { ITEM_SPECIFICS } from './item.ts';
 
@@ -88,29 +89,43 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	}),
-	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number, bonusAD?: number, totalAP?: number, bonusHP?: number]>({
+	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number, isRanged?: number, bonusAD?: number, totalAP?: number, bonusHP?: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
 		label: 'Hextech Soul lightning slow',
 		setupData(data) {
 			return [
 				clamp(0, data?.[0] ?? 0, 100),
-				Math.max(0, data?.[1] ?? 0),
+				data?.[1] !== undefined ? Math.max(0, data[1]) : undefined,
 				Math.max(0, data?.[2] ?? 0),
 				Math.max(0, data?.[3] ?? 0),
+				Math.max(0, data?.[4] ?? 0),
 			];
 		},
 		maxValue: 100,
-		imgText(data): number {
-			return Math.round(EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(data[0], {} as DamageSource));
+		imgText(_data, self): number {
+			return Math.round(self.stats.value.effectVars.hextechSoulSlow ?? 0);
 		},
-		deriveProgressValue: (value, _self) => {
-			const slowValue =	championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul });
-			if (typeof slowValue.value === 'number') {
-				return slowValue.value * value;
-			} else {
-				console.warn('[EFFECT_SPECIFICS hextechSoulSlow] failed to calculate slow percentage', slowValue);
-				return Number.NaN;
-			}
+		variables: defineVariables({
+			known: {
+				Slow: [],
+			},
+			calculate(self) {
+				return {
+					Slow: {
+						value: self.stats.value.effectVars.hextechSoulSlow,
+					},
+				};
+			},
+			meta: {
+				Slow: {
+					isCustom: true,
+					resultsIsPercentage: true,
+				},
+			},
+
+		}),
+		deriveProgressValue: (_value, self) => {
+			return self?.stats.value.effectVars.hextechSoulSlow ?? 0;
 		},
 		sourceControls: {
 			invalidMessage: (source) => {
@@ -126,42 +141,31 @@ export const EFFECT_SPECIFICS = {
 					console.warn('[EFFECT_SPECIFICS hextech soul slow] tried to refresh effect but not found it in source', source);
 					return;
 				} else if (!effect.source.value) {
-					effect.data.value[1] = 0;
+					effect.data.value[1] = undefined;
 					effect.data.value[2] = 0;
 					effect.data.value[3] = 0;
+					effect.data.value[4] = 0;
 					return;
 				}
-				const { bonus: { attackDamage, hp }, total: { abilityPower } } = effect.source.value.stats.value;
-				effect.data.value[1] = attackDamage;
-				effect.data.value[2] = abilityPower;
-				effect.data.value[3] = hp;
-				console.log('refreshing soul', effect?.source?.value?.listedChampion.value?.name, effect);
+				const { isRanged, bonus: { attackDamage, hp }, total: { abilityPower } } = effect.source.value.stats.value;
+				effect.data.value[1] = isRanged ? 1 : isRanged === false ? 0 : undefined;
+				effect.data.value[2] = attackDamage;
+				effect.data.value[3] = abilityPower;
+				effect.data.value[4] = hp;
 			},
 		},
-		variables: defineVariables({
-			known: {
-				Slow: [],
-			},
-			calculate(self) {
-				const effectData = self.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow);
-
-				const value: number = effectData ? EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.hextechSoulSlow].deriveProgressValue!(effectData[0].data.value[0], {} as DamageSource) : 0;
-
-				return {
-					Slow: {
-						value,
-					},
-				};
-			},
-			meta: {
-				Slow: {
-					isCustom: true,
-					resultsIsPercentage: true,
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs, effectVars }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow)?.[0];
+					if (effect) {
+						const [progress, isRanged, bonusAD, totalAP, bonusHP] = effect.data.value;
+						effectVars.hextechSoulSlow = DRAGON_SPECIFICS.Hextech.soul.calculateSlow(progress, isRanged === 1, bonusAD, totalAP, bonusHP);
+						debuffs.percentageMSSlow.push(effectVars.hextechSoulSlow);
+					}
 				},
 			},
-
-		}),
-		// TODO calculate
+		},
 	}),
 	[EFFECT_OBJECT_NAME.stun]: defineEffectSpecific<[isStunned: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.stun),
