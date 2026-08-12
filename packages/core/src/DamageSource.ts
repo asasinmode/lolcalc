@@ -174,6 +174,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 * one time use when restoring with `fromStringifiedData`, without it the maxHealth/abilityResource watcher will run and override the restored values after loading the champion
 	 */
 	hpAbilityResourceOverridesOnFirstChampLoad?: { hp?: number; abilityResource?: number };
+	/** one time use when restoring with `fromStringifiedData`. Contains stringified applied effect sources (`[s|t]${number}`) for usage after all sources/targets have been restored to set appliedEffects sources. Consumed (after restoring damage sources) in `useCalculatorState().restoreState` */
+	fromStringifiedEffectSources?: string[];
 
 	/** for stringifying effect's source inside of the app */
 	sourcesTargetsRef?: [sources: ComputedRef<string[]>, targets: ComputedRef<string[]>];
@@ -846,11 +848,19 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawEffectsData?.length) {
+			rv.fromStringifiedEffectSources = [];
 			for (const rawEffect of rawEffectsData.split('~')) {
 				const [effectObjectNameIndex, ...rawData] = rawEffect.split('\'');
 				const effectSpecificEntry = effectObjectNameIndex && EFFECT_SPECIFICS_OBJECT_ENTRIES[Number.parseInt(effectObjectNameIndex)];
 				if (effectSpecificEntry) {
-					const data = rawData.map((rawValue) => {
+					const data = rawData.map((rawValue, index) => {
+						if (index === rawData.length - 1) {
+							const [actualRawValue, maybeEffectSource] = rawValue.split('!');
+							rawValue = actualRawValue!;
+							if (maybeEffectSource) {
+								rv.fromStringifiedEffectSources!.push(maybeEffectSource);
+							}
+						}
 						const value = rawValue ? Number.parseInt(rawValue) : undefined;
 						if (!Number.isNaN(value)) {
 							return value;

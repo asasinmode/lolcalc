@@ -412,6 +412,37 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 		}
 
+		for (const source of damageSources.value) {
+			if (source.fromStringifiedEffectSources?.length) {
+				for (let i = 0; i < source.appliedEffects.value.length; i++) {
+					const stringifiedEffectSource = source.fromStringifiedEffectSources[i];
+					if (stringifiedEffectSource) {
+						const group = stringifiedEffectSource[0] === 's' ? damageSources : damageTargets;
+						const index = Number.parseInt(stringifiedEffectSource.slice(1));
+						if (!Number.isNaN(index)) {
+							source.appliedEffects.value[i]!.source.value = group.value[index];
+						}
+					}
+				}
+				source.fromStringifiedEffectSources = undefined;
+			}
+		}
+		for (const target of damageTargets.value) {
+			if (target.fromStringifiedEffectSources?.length) {
+				for (let i = 0; i < target.appliedEffects.value.length; i++) {
+					const stringifiedEffectSource = target.fromStringifiedEffectSources[i];
+					if (stringifiedEffectSource) {
+						const group = stringifiedEffectSource[0] === 's' ? damageSources : damageTargets;
+						const index = Number.parseInt(stringifiedEffectSource.slice(1));
+						if (!Number.isNaN(index)) {
+							target.appliedEffects.value[i]!.source.value = group.value[index];
+						}
+					}
+				}
+				target.fromStringifiedEffectSources = undefined;
+			}
+		}
+
 		const flipResults = params.has('flpTbl');
 		if (flipResults) {
 			resultsTableFlip.value = true;
