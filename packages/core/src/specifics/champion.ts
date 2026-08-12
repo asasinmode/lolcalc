@@ -744,12 +744,12 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			derivedMS: ((progress, self): number => {
-				return self?.stats.value.championPassive.moveSpeed ?? CHAMPION_SPECIFICS.Nami.passive.calculateMS(self.champion.value!, progress, self.stats.value.total);
+				return self?.stats.value.championPassive.moveSpeed ?? CHAMPION_SPECIFICS.Nami.passive.calculateMS(self.champion.value!, progress, self.stats.value.total.abilityPower);
 			}) satisfies IDeriveProgressFn,
-			calculateMS: (champion: IChampion, progress: number, stats: IChampionStats) => {
+			calculateMS: (champion: IChampion, progress: number, totalAP: number) => {
 				const bonusMS = championAbilityVariableValue('TotalMSBonus', {
 					abilityVariant: champion.abilities.passive.variants[0]!,
-					damageSource: { stats: { value: { total: stats } } } as DamageSource,
+					damageSource: { stats: { value: { total: { abilityPower: totalAP } } } } as DamageSource,
 				});
 
 				if (typeof bonusMS.value === 'number') {
@@ -786,7 +786,7 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					const bonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(self.champion.value!, passiveMSProgress, { abilityPower: passiveMSTotalAp } as IChampionStats);
+					const bonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(self.champion.value!, passiveMSProgress, passiveMSTotalAp);
 
 					if (!Number.isNaN(bonusMS)) {
 						championPassiveStats.moveSpeed = bonusMS;

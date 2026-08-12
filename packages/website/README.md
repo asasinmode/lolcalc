@@ -205,6 +205,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (and test it)
     - [ ] describe item description inventory/shop view, possibly add it for runes too
     - [ ] serpent's fang displayed values don't match up, probably test more (was tested on shieldbow, assumedly shieldbow "puts back" hp to the threshold then gives shield and that shield is then reduced)
+    - [ ] if I'm slow to update something or something is broken, remember it's Riot Games game and I'm just a person trying my best to provide a useful tool
     - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
   - [ ] github readme
 - [ ] submit feedback on page / report issues
