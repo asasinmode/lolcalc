@@ -23,6 +23,8 @@ const STATE_VERSION = '1';
 export interface ICalculatorState {
 	damageSources: ShallowRef<DamageSource[]>;
 	damageTargets: ShallowRef<DamageSource[]>;
+	/** map of **filled** sources/targets ids for restoring/saving DamageSource.appliedEffects state */
+	sourcesTargetsRef: [sources: ComputedRef<string[]>, targets: ComputedRef<string[]>];
 	resultColumns: ShallowRef<IDamageResultTableColumn[]>;
 	resultSections: ShallowRef<IDamageResultTableSection[]>;
 	resultsTableFlip: Ref<boolean>;
@@ -162,6 +164,10 @@ export function initCalculatorState(): ICalculatorState {
 	const state: ICalculatorState = {
 		damageSources,
 		damageTargets,
+		sourcesTargetsRef: [
+			computed(() => damageSources.value.filter(source => source.anythingFilled.value).map(source => source.id)),
+			computed(() => damageTargets.value.filter(target => target.anythingFilled.value).map(target => target.id)),
+		],
 		resultColumns,
 		resultSections,
 		resultsTableFlip: ref(false),
@@ -180,7 +186,7 @@ export function useCalculatorState(): ICalculatorState {
 }
 
 export function useManageCalculatorState(state = useCalculatorState()) {
-	const { damageSources, damageTargets, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows } = state;
+	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows } = state;
 	const isStateTooLargeForQuery = ref(false);
 	const debounceTimeout = useState<ReturnType<typeof setTimeout> | undefined>('saveStateDebounce');
 
@@ -381,8 +387,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 		const version = params.get('v');
 		if (version !== STATE_VERSION) {
-			damageSources.value.push(new DamageSource());
-			damageTargets.value.push(new DamageSource());
+			damageSources.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
+			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 			resultColumns.value[0]!.source = damageSources.value[0];
 			resultColumns.value[0]!.target = damageTargets.value[0];
 			return;
@@ -391,19 +397,19 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		const savedSources = params.getAll('src');
 		if (savedSources.length) {
 			for (const data of savedSources) {
-				damageSources.value.push(DamageSource.fromStringifiedData(data));
+				damageSources.value.push(DamageSource.fromStringifiedData(data, sourcesTargetsRef));
 			}
 		} else {
-			damageSources.value.push(new DamageSource());
+			damageSources.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 		}
 
 		const savedTargets = params.getAll('tgt');
 		if (savedTargets.length) {
 			for (const data of savedTargets) {
-				damageTargets.value.push(DamageSource.fromStringifiedData(data));
+				damageTargets.value.push(DamageSource.fromStringifiedData(data, sourcesTargetsRef));
 			}
 		} else {
-			damageTargets.value.push(new DamageSource());
+			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 		}
 
 		const flipResults = params.has('flpTbl');

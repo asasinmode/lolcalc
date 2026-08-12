@@ -5,7 +5,7 @@ import { itemBuyability } from '@lolcalc/core/specifics/item';
 
 const globalKeyModifiers = useGlobalKeyModifiers();
 
-const { damageSources, damageTargets } = useCalculatorState();
+const { damageSources, damageTargets, sourcesTargetsRef } = useCalculatorState();
 
 const isSourcesMounted = ref(false);
 const isTargetsMounted = ref(false);
@@ -160,7 +160,7 @@ function remove(index: number, target: DamageSource[]) {
 }
 
 function add(target: DamageSource[]) {
-	target.push(new DamageSource());
+	target.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 }
 
 function duplicate(index: number, target: DamageSource[], shift: boolean) {
@@ -184,7 +184,7 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 		newItem = target[index]!.clone();
 	} else {
 		newItem = target.splice(index, 1)[0]!;
-		!target.length && target.push(new DamageSource());
+		!target.length && target.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 	}
 	if (into.length > 1 || into[0]?.anythingFilled.value) {
 		into.push(newItem);

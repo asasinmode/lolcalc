@@ -175,6 +175,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 */
 	hpAbilityResourceOverridesOnFirstChampLoad?: { hp?: number; abilityResource?: number };
 
+	/** for stringifying effect's source inside of the app */
+	sourcesTargetsRef?: [sources: ComputedRef<string[]>, targets: ComputedRef<string[]>];
+
 	constructor(
 		overrides: (Omit<IOverrides<Id>, 'champion'> & {
 			champion?: { id: Id } & IListedChampion;
@@ -185,10 +188,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		 * note that `this.champion.value` will be empty without it and needs to be set manually after cloning/creating with this set to `true`
 		 */
 		isResultsCopy = false,
+		sourcesTargetsRef?: [ComputedRef<string[]>, ComputedRef<string[]>],
 	) {
 		const hue = ((isResultsCopy ? hueIncrement : hueIncrement++) * 137.508) % 360;
 		this.isResultsCopy = isResultsCopy;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
+
+		this.sourcesTargetsRef = sourcesTargetsRef;
 
 		damageSourcesCount += 1;
 		this.id = damageSourcesCount.toString();
@@ -494,7 +500,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			/* not cloned, same as `internalData` */
 			appliedEffects: this.appliedEffects.value,
 			...overrides,
-		}, true, noWatch);
+		}, true, noWatch, this.sourcesTargetsRef);
 	}
 
 	clear(): void {
@@ -551,7 +557,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
 			() => Object.values(this.internalDragonData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}-${effect.data.value.join('-')}`).join('|'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}`).join('~'),
 		];
 	}
 
@@ -581,6 +587,33 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			.map(([, value]) => value && roundVariable(value, ROUNDING_PRECISION))
 			.join('\'');
 
+		const effectsData: string[] = [];
+		for (let i = 0; i < this.appliedEffects.value.length; i++) {
+			const effect = this.appliedEffects.value[i]!;
+			const computedEffect = this.computed.effects.value[i];
+			/* `isActive` is a computed so technically should be `.value` but for some reason it's already unrefed here */
+			if (!computedEffect?.isActive) {
+				continue;
+			}
+			const index = EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id);
+			const data = effect.data.value.map(v => v === undefined ? '' : roundVariable(v, ROUNDING_PRECISION)).join('\'');
+			let sourceData: string | undefined;
+			if (this.sourcesTargetsRef && effect.source.value) {
+				let index = this.sourcesTargetsRef[0].value.indexOf(effect.source.value.id);
+				if (~index) {
+					sourceData = `s${index}`;
+				} else {
+					index = this.sourcesTargetsRef[1].value.indexOf(effect.source.value.id);
+					if (~index) {
+						sourceData = `t${index}`;
+					} else if (effect.source.value.anythingFilled.value) {
+						console.warn('[DamageSource stringifiedData] effect source not found in sourcesTargetsRef', effect, this.sourcesTargetsRef);
+					}
+				}
+			}
+			effectsData.push(`${index}'${data}${sourceData ? `!${sourceData}` : ''}`);
+		}
+
 		const runePathKeys = Object.keys(RUNES.paths);
 		const roleQuestKeys = Object.keys(TEXT.roleQuests);
 		const dragonKeys = Object.keys(TEXT.dragons);
@@ -601,18 +634,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			internalData?.length ? internalData : undefined,
 			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
 			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
-			this.appliedEffects.value
-				.filter((_, index) => this.computed.effects.value[index]?.isActive)
-				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}'${effect.data.value.map(v => v === undefined ? '' : roundVariable(v, ROUNDING_PRECISION)).join('\'')}`)
-				.join('~'),
+			effectsData?.length ? effectsData.join('~') : undefined,
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
 		return data.join('_');
 	});
 
-	static fromStringifiedData(data: string): DamageSource {
-		const rv = new DamageSource();
+	static fromStringifiedData(data: string, sourcesTargetsRef?: InstanceType<typeof DamageSource>['sourcesTargetsRef']): DamageSource {
+		const rv = new DamageSource(undefined, undefined, undefined, sourcesTargetsRef);
 
 		const [
 			championKey,
