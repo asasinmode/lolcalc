@@ -13,7 +13,6 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue, maxValue, enumOptions } = effectSpecific;
 
 		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with `DamageSource.computeAppliedEffect`, it works only on first value
 		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
 			??= enumOptions
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
