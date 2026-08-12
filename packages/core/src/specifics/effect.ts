@@ -1,12 +1,13 @@
 import type { IEffectData, TEffects } from '@lolcalc/data';
+import type { IChampionId } from '@lolcalc/data/types.js';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IDeriveProgressFn, IEffectControlsProps, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
-import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
+import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
@@ -151,7 +152,7 @@ export const EFFECT_SPECIFICS = {
 			refresh(source) {
 				const effect = source.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow)?.[0];
 				if (!effect) {
-					console.warn('[EFFECT_SPECIFICS hextech soul slow] tried to refresh effect but not found it in source', source);
+					console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.hextechSoulSlow}] tried to refresh effect but not found it in source`, source);
 					return;
 				} else if (!effect.source.value) {
 					effect.data.value[1] = undefined;
@@ -700,21 +701,53 @@ export const EFFECT_SPECIFICS = {
 		},
 		// TODO calculate
 	},
-	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number]>({
+	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0),
 		label: 'Surging Tides move speed',
 		setupData(data) {
-			return [clamp(0, data?.[0] ?? 0, 100)];
+			return [clamp(0, data?.[0] ?? 0, 100), Math.max(0, data?.[1] ?? 0)];
 		},
 		maxValue: 100,
-		deriveProgressValue: (progress, _self) => {
-			// TODO
-			return progress;
-		},
 		imgText(data) {
 			return data[0];
 		},
-		// TODO calc
+		deriveProgressValue: (_value, self) => {
+			return self?.stats.value.effectVars.namiPassiveBonusMS ?? 0;
+		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== 'Nami' satisfies IChampionId) {
+					return 'it\'s not Nami';
+				}
+			},
+		},
+		effectControls: {
+			refresh(source) {
+				const effect = source.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0];
+				if (!effect) {
+					console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.namiPSurgingTides}] tried to refresh effect but not found it in source`, source);
+					return;
+				} else if (!effect.source.value) {
+					effect.data.value[1] = 0;
+					return;
+				}
+				effect.data.value[1] = effect.source.value.stats.value.total.abilityPower;
+			},
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { bonusStats }, { effectVars }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0];
+					if (effect) {
+						const [progress, totalAP] = effect.data.value;
+						console.log('nami passive effect', { progress, totalAP }, bonusStats.moveSpeed, effectVars);
+						// TODO figure out where to get Nami champion from
+						// effectVars.namiPassiveBonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(champion?, progress, totalAP);
+						// bonusStats.moveSpeed += effectVars.namiPassiveBonusMS;
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.nasusWWither]: {
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0),

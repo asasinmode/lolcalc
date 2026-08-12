@@ -276,6 +276,8 @@ export interface IDamageVars {
 
 /** all of the variables from applied effects */
 export interface IStatsCalculationEffectVars {
+	/** bonus flat MS from nami passive */
+	namiPassiveBonusMS?: number;
 	/** slow % from hextech soul slow effect */
 	hextechSoulSlow?: number;
 }
