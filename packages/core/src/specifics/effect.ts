@@ -3,7 +3,7 @@ import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
+import type { IDeriveProgressFn, IEffectControlsProps, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 
@@ -124,6 +124,19 @@ export const EFFECT_SPECIFICS = {
 			},
 
 		}),
+		setupDataFromDragonData(damageSource) {
+			const { hextechTagged } = damageSource.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>;
+			if (hextechTagged) {
+				const { isRanged, total, bonus } = damageSource.stats.value;
+				return [
+					hextechTagged,
+					isRanged ? 1 : 0,
+					bonus.attackDamage,
+					total.abilityPower,
+					bonus.hp,
+				];
+			}
+		},
 		deriveProgressValue: (_value, self) => {
 			return self?.stats.value.effectVars.hextechSoulSlow ?? 0;
 		},
@@ -746,6 +759,8 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	 *	- `2` when `internalItemData.sVenom` is `1` **AND** `damageSource.isRanged` is `true`
 	 */
 	setupDataFromSourceItem?: (damageSource: DamageSource) => T | undefined;
+	/** same as setupDataFromSourceItem but for dragon effects */
+	setupDataFromDragonData?: (damageSource: DamageSource) => T | undefined;
 	/**
 	 * based on this and `maxValue` VExtra components are created.
 	 * - both `undefined` = `VExtraBoolean`
@@ -875,26 +890,52 @@ function defineEffectSpecific<T extends (number | undefined)[]>(config: IEffectS
 	return config;
 }
 
+type IApplicableEffect = [IEffectAbilityId, IEffectSpecific<any>];
+
 /** map (item id to effect) of all effects that can be applied by toggling item's extra `apply X to target` checkbox */
-export const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPECIFICS_OBJECT_ENTRIES
+const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPECIFICS_OBJECT_ENTRIES
 	.filter(([, effectSpecific]) => effectSpecific.setupDataFromSourceItem)
-	.flatMap(([effectObjectName, effectSpecific]): [string, [IEffectAbilityId, IEffectSpecific]][] => {
-		const value: [IEffectAbilityId, IEffectSpecific] = [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific];
+	.flatMap(([effectObjectName, effectSpecific]): [string, IApplicableEffect][] => {
+		const value: IApplicableEffect = [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific];
 		return effectSpecific.appliedByItems
 			? effectSpecific.appliedByItems.map(itemAbilityId => [itemAbilityId.id, value])
 			: [[effectSpecific.sourceAbility.id, value]];
-	})) as Record<string, [IEffectAbilityId, IEffectSpecific]>;
+	})) as Record<string, IApplicableEffect>;
+
+const DRAGON_EFFECTS_APPLICABLE_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES
+	.filter(([, effectSpecific]) => effectSpecific.setupDataFromDragonData)
+	.map(([effectObjectName, effectSpecific]) => [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific] as IApplicableEffect);
 
 /** get all effects a damage source applies to its target */
-export function effectsAppliedBy(source: DamageSource): [effectAbilityId: IEffectAbilityId, effectSpecific: IEffectSpecific][] {
-	const itemEffects = source.items.value.map(item => item && EFFECTS_APPLIED_BY_ITEMS_TO_TARGET[item.id]).filter(Boolean) as (typeof EFFECTS_APPLIED_BY_ITEMS_TO_TARGET)[string][];
+export function effectsAppliedBy(source: DamageSource): IApplicableEffect[] {
+	const rv: IApplicableEffect[] = [];
 
-	return itemEffects;
+	for (const item of source.items.value) {
+		if (item) {
+			const itemEffect = EFFECTS_APPLIED_BY_ITEMS_TO_TARGET[item.id];
+			itemEffect && rv.push(itemEffect);
+		}
+	}
+
+	for (const dragonApplicableEffect of DRAGON_EFFECTS_APPLICABLE_TO_TARGET) {
+		if (source.dragonSoul.value === dragonApplicableEffect[1].sourceAbility.id) {
+			rv.push(dragonApplicableEffect);
+		}
+	}
+
+	return rv;
 }
 
 export function applyEffectsFromTo(source: DamageSource, target: DamageSource): DamageSource {
 	for (const [effectAbilityId, effectSpecific] of source.effectsAppliedToTarget.value) {
-		const effectData = effectSpecific.setupDataFromSourceItem!(source);
+		let effectData;
+
+		if (effectSpecific.sourceAbility.type === AbilityType.item) {
+			effectData = effectSpecific.setupDataFromSourceItem!(source);
+		} else if (effectSpecific.sourceAbility.type === AbilityType.dragon) {
+			effectData = effectSpecific.setupDataFromDragonData!(source);
+		}
+
 		effectData && target.addEffect(effectAbilityId, effectData as any, true);
 	}
 	return target;
