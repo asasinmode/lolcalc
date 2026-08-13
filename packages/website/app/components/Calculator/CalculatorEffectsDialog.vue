@@ -123,7 +123,10 @@ async function loadChampionEffects() {
 	isLoading.value = false;
 }
 
-const UnknownComponent = () => h('article', { class: 'unknown' }, ['UNKNOWN']);
+const UnknownComponent = defineComponent((props, ctx) => {
+	return () => h('article', { class: 'unknown' }, [h('span', 'unknown'), h('span', props.abilityId.id)]);
+}, { props: ['abilityId'] });
+
 
 const effectComponents = computed(() => {
 	const rv = new Map<IEffectObjectName, Component | Component[]>();
@@ -358,6 +361,23 @@ defineExpose({
 
 			> li {
 				--at-apply: 'w-full';
+			}
+
+			.unknown,
+			.loading {
+				--at-apply: 'min-block-[calc(var(--ability-size)+2*var(--p)+2px)] flex-center flex-col';
+			}
+
+			.unknown {
+				> span {
+					&:first-child {
+						--at-apply: 'uppercase text-[--unknown-clr] font-500';
+					}
+
+					&:last-child {
+						--at-apply: 'text-sm leading-none text-neutral-300 break-all text-center';
+					}
+				}
 			}
 		}
 
