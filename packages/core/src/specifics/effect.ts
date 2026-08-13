@@ -106,25 +106,25 @@ export const EFFECT_SPECIFICS = {
 		imgText(_data, self): number {
 			return Math.round(self.stats.value.effectVars.hextechSoulSlow ?? 0);
 		},
-		variables: defineVariables({
-			known: {
-				Slow: [],
-			},
-			calculate(self) {
-				return {
-					Slow: {
-						value: self.stats.value.effectVars.hextechSoulSlow,
-					},
-				};
-			},
-			meta: {
-				Slow: {
-					isCustom: true,
-					resultsIsPercentage: true,
-				},
-			},
-
-		}),
+		// TODO not sure it makes sense to have variables for it
+		// variables: defineVariables({
+		// 	known: {
+		// 		Slow: [],
+		// 	},
+		// 	calculate(self) {
+		// 		return {
+		// 			Slow: {
+		// 				value: self.stats.value.effectVars.hextechSoulSlow,
+		// 			},
+		// 		};
+		// 	},
+		// 	meta: {
+		// 		Slow: {
+		// 			isCustom: true,
+		// 			resultsIsPercentage: true,
+		// 		},
+		// 	},
+		// }),
 		setupDataFromDragonData(damageSource) {
 			const { hextechTagged } = damageSource.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>;
 			if (hextechTagged) {
