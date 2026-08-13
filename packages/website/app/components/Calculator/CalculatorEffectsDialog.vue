@@ -123,7 +123,8 @@ async function loadChampionEffects() {
 	isLoading.value = false;
 }
 
-const UnknownComponent = defineComponent((props, ctx) => {
+const UnknownComponent = defineComponent((props, _ctx) => {
+	console.warn('[CalculatorEffectsDialog] unknown effect component', props.abilityId);
 	return () => h('article', { class: 'unknown' }, [h('span', 'unknown'), h('span', props.abilityId.id)]);
 }, { props: ['abilityId'] });
 
