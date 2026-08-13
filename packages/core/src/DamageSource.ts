@@ -566,7 +566,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
 			() => Object.values(this.internalDragonData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}'${(effect.champion.value as any)?.id ?? ''}`).join('~'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}'${effect.champion.value?.id ?? ''}`).join('~'),
 		];
 	}
 
@@ -1994,8 +1994,11 @@ export interface IDamageSourceEffect<T extends IEffectAbilityId = IEffectAbility
 	data: Ref<IGameAbilityData<T>>;
 	/** the source that's applying the effect */
 	source: ShallowRef<DamageSource | undefined>;
-	/** the champion to be used in effect's calculations - expected to be set in DamageSource.addEffect when effect's source ability is a champion one */
-	champion: ShallowRef<IChampion | Promise<IChampion> | undefined>;
+	/**
+	 * the champion to be used in effect's calculations - expected to be set in DamageSource.addEffect when effect's source ability is a champion one
+	 * promise is typed with `{ id?: string }` to not have to cast it as any in places where it's just checking for champion
+	 */
+	champion: ShallowRef<IChampion | (Promise<IChampion> & { id?: IChampionId }) | undefined>;
 }
 
 export interface IComputedAbilityDescription {
