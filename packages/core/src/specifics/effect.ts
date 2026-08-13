@@ -4,7 +4,7 @@ import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IDeriveProgressFn, IEffectControlsProps, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
+import type { IDeriveProgressFn, IEffectControlsProps, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
@@ -306,7 +306,7 @@ export const EFFECT_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats, effectStats }) {
+				handler(self, { effectStats }) {
 					/* checked and it doesn't stack */
 					if ((self.internalItemData.value as IInternalItemDataOf<'bandlepipes'>).fanfare) {
 						return;
@@ -718,6 +718,8 @@ export const EFFECT_SPECIFICS = {
 			invalidMessage: (source) => {
 				if (source.listedChampion.value?.id !== 'Nami' satisfies IChampionId) {
 					return 'it\'s not Nami';
+				} else if ((source.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAp !== undefined) {
+					return 'Nami is already applying it herself';
 				}
 			},
 		},
@@ -741,7 +743,10 @@ export const EFFECT_SPECIFICS = {
 					if (effect?.champion.value?.id === 'Nami') {
 						const [progress, totalAP] = effect.data.value;
 						effectVars.namiPassiveBonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(effect.champion.value as IChampion, progress, totalAP ?? 0);
-						effectStats.moveSpeed += effectVars.namiPassiveBonusMS;
+						const { passiveMSTotalAp } = self.internalData.value as IInternalDataOf<'Nami'>;
+						if (passiveMSTotalAp === undefined) {
+							effectStats.moveSpeed += effectVars.namiPassiveBonusMS;
+						}
 					}
 				},
 			},
