@@ -1554,14 +1554,19 @@ defineExpose({ el });
 				</section>
 			</div>
 			<section ref="extras" class="extras">
-				<component
-					:is
-					v-for="(is, componentIndex) in championExtra"
-					:key="`${value.champion.value?.id ?? ''}-${componentIndex}`"
-					:id-suffix
-					:damage-source="value"
-					@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
-				/>
+				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
+					<component
+						:is
+						:id-suffix
+						:damage-source="value"
+						@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
+					/>
+					<template #fallback>
+						<article aria-busy="true" class="loading">
+							loading...
+						</article>
+					</template>
+				</Suspense>
 				<component
 					:is
 					v-for="[is, abilityId, componentIndex] in dragonExtras"
@@ -2921,6 +2926,27 @@ defineExpose({ el });
 			--p: calc(2 * var(--spacing));
 			anchor-scope: --extra-container;
 			anchor-name: --extra-container;
+
+			&.unknown,
+			&.loading {
+				--at-apply: 'min-block-[calc(var(--ability-size)+2*var(--p)+2px)] flex-center flex-col';
+			}
+
+			&.unknown {
+				> span {
+					&:first-child {
+						--at-apply: 'uppercase text-[--unknown-clr] font-500';
+					}
+
+					&:last-child {
+						--at-apply: 'text-sm leading-none text-neutral-300 break-all text-center';
+					}
+				}
+			}
+
+			&.loading {
+				--at-apply: 'text-lg font-600 text-neutral-400';
+			}
 
 			> img {
 				--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';

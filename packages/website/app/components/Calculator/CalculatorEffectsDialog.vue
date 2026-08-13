@@ -383,27 +383,6 @@ defineExpose({
 			> li {
 				--at-apply: 'w-full';
 			}
-
-			.unknown,
-			.loading {
-				--at-apply: 'min-block-[calc(var(--ability-size)+2*var(--p)+2px)] flex-center flex-col';
-			}
-
-			.unknown {
-				> span {
-					&:first-child {
-						--at-apply: 'uppercase text-[--unknown-clr] font-500';
-					}
-
-					&:last-child {
-						--at-apply: 'text-sm leading-none text-neutral-300 break-all text-center';
-					}
-				}
-			}
-
-			.loading {
-				--at-apply: 'text-lg font-600 text-neutral-400';
-			}
 		}
 
 		> ul[inert],
