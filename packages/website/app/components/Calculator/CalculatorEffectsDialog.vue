@@ -68,7 +68,21 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 		};
 	});
 
-const championEffects = shallowRef<IEffectOptionGroup['options']>();
+const championEffects = shallowRef<IEffectOptionGroup['options']>(EFFECT_SPECIFICS_OBJECT_ENTRIES
+	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.champion)
+	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
+		const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
+
+		const searchString = createSearchString(effectSpecific.label);
+		effectSearchStrings.set(effectObjectName, searchString);
+
+		return {
+			abilityId: GameAbilityId.build(AbilityType.effect, effectObjectName),
+			sourceAbilityId,
+			name: 'loading...',
+			searchString,
+		};
+	}));
 
 const isLoading = ref(false);
 
@@ -127,7 +141,6 @@ const UnknownComponent = defineComponent((props, _ctx) => {
 	console.warn('[CalculatorEffectsDialog] unknown effect component', props.abilityId);
 	return () => h('article', { class: 'unknown' }, [h('span', 'unknown'), h('span', props.abilityId.id)]);
 }, { props: ['abilityId'] });
-
 
 const effectComponents = computed(() => {
 	const rv = new Map<IEffectObjectName, Component | Component[]>();
@@ -267,13 +280,20 @@ defineExpose({
 					:key="`${group.type}-${effect.abilityId.id}`"
 					:style="`anchor-name: --effect-${effect.abilityId.id}-all`"
 				>
-					<component
-						:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
-						:ability-id="effect.abilityId"
-						:damage-source
-						id-suffix="effects-dialog-all"
-						@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId, false)"
-					/>
+					<Suspense>
+						<component
+							:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
+							:ability-id="effect.abilityId"
+							:damage-source
+							id-suffix="effects-dialog-all"
+							@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId, false)"
+						/>
+						<template #fallback>
+							<article aria-busy="true" class="loading">
+								loading...
+							</article>
+						</template>
+					</Suspense>
 				</li>
 			</ul>
 		</template>
@@ -379,6 +399,10 @@ defineExpose({
 						--at-apply: 'text-sm leading-none text-neutral-300 break-all text-center';
 					}
 				}
+			}
+
+			.loading {
+				--at-apply: 'text-lg font-600 text-neutral-400';
 			}
 		}
 
