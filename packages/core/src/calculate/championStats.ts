@@ -72,9 +72,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const baseStats = structuredClone(initialStats);
 	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	const championPassiveStats: Partial<IChampionStats> = {};
-
-	// these are not automatically added to total, used for tracking
-	const effectStats: Partial<IChampionStats> = {};
+	const effectStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
 	if (source.calculateStatsHooks.all.value.postInit) {
 		for (const hook of source.calculateStatsHooks.all.value.postInit) {
@@ -211,35 +209,33 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
+	effectStats.attackSpeed += effectStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
 	/* attack speed from level counts towards bonus */
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
 		if (MULTIPLICATIVE_CHAMPION_STATS.includes(stat as IChampionStatName)) {
-			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(1, bonusStats[stat as IMultiplicativeChampionStatName], runeShardStats[stat as IMultiplicativeChampionStatName], dragonStats[stat as IMultiplicativeChampionStatName], itemTotalStats[stat as IMultiplicativeChampionStatName], championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0);
+			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(
+				1,
+				bonusStats[stat as IMultiplicativeChampionStatName],
+				runeShardStats[stat as IMultiplicativeChampionStatName] ?? 0,
+				dragonStats[stat as IMultiplicativeChampionStatName] ?? 0,
+				itemTotalStats[stat as IMultiplicativeChampionStatName],
+				championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0,
+			);
 		} else {
 			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
 				+ (dragonStats[stat as IChampionStatName] ?? 0)
 				+ itemTotalStats[stat as IChampionStatName]
-				+ (championPassiveStats[stat as IChampionStatName] ?? 0);
+				+ (championPassiveStats[stat as IChampionStatName] ?? 0)
+				+ effectStats[stat as IChampionStatName];
 		}
 	}
 
 	calculatedVariables.tenacityBucketB = 1 - calculatedVariables.tenacityBucketB;
 	bonusStats.tenacity += calculatedVariables.tenacityBucketB;
 
-	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
-		([statName, statValue]) => [
-			statName,
-			statValue + (runeShardStats[statName as IChampionStatName] ?? 0),
-		],
-	)) as IChampionStats;
-	levelAndRunesStats.tenacity = 1 - addMultiplicative(1, baseOnLevelStats.tenacity, runeShardStats.tenacity);
-
-	const totalPreMultipliersStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
-		([statName, statValue]) => [statName, statValue
-		+ (championPassiveStats[statName as IChampionStatName] ?? 0)
-		+ (dragonStats[statName as IChampionStatName] ?? 0)
-		+ itemTotalStats[statName as IChampionStatName]],
+	const totalPreMultipliersStats = Object.fromEntries(Object.entries(bonusStats).map(
+		([statName, statValue]) => [statName, statValue + baseOnLevelStats[statName as IChampionStatName]],
 	)) as IChampionStats;
 	/* maybe should not be done like that but that's what it is at this point */
 	totalPreMultipliersStats.tenacity = bonusStats.tenacity;

@@ -67,7 +67,7 @@ export interface IStatsCalculationResult {
 	totalPreMultipliers: IChampionStats;
 	dragonStatMultipliers: Pick<IChampionStats, 'attackDamage' | 'abilityPower' | 'armor' | 'magicResist'>;
 	bonus: IChampionStats;
-	effect: Partial<IChampionStats>;
+	effect: IChampionStats;
 	total: IChampionStats;
 	meta: {
 		hasMana: boolean;

@@ -315,8 +315,7 @@ export const EFFECT_SPECIFICS = {
 					const effect = self.getEffect(EFFECT_OBJECT_NAME.bandlepipesFanfare);
 					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: effect?.[0].data.value[0] === MeleeRangedEnumOptions.ranged });
 					if (typeof attackSpeed.value === 'number') {
-						itemPassivesStats.bonusAttackSpeedPercent += attackSpeed.value;
-						effectStats.bonusAttackSpeedPercent = (effectStats.bonusAttackSpeedPercent ?? 0) + attackSpeed.value;
+						effectStats.bonusAttackSpeedPercent += attackSpeed.value;
 					} else {
 						console.warn('[EFFECT_SPECIFICS Bandlepipes] failed to calculate bonus attack speed');
 					}
@@ -737,12 +736,12 @@ export const EFFECT_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { bonusStats }, { effectVars }) {
+				handler(self, { effectStats }, { effectVars }) {
 					const effect = self.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0];
 					if (effect?.champion.value?.id === 'Nami') {
 						const [progress, totalAP] = effect.data.value;
 						effectVars.namiPassiveBonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(effect.champion.value as IChampion, progress, totalAP ?? 0);
-						bonusStats.moveSpeed += effectVars.namiPassiveBonusMS;
+						effectStats.moveSpeed += effectVars.namiPassiveBonusMS;
 					}
 				},
 			},
