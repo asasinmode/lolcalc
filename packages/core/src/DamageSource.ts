@@ -139,6 +139,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value || this.computed.effects.value.some(effect => effect.isActive));
 	});
 
+	isLoading = computed((): boolean => {
+		if (this.listedChampion.value && this.champion.value?.id !== this.listedChampion.value.id) {
+			return true;
+		}
+
+		return false;
+	});
+
 	/**
 	 * any data the champion needs for their abilities, keys prefixed with `_` will not be stringified
 	 *

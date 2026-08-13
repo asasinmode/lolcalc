@@ -69,7 +69,6 @@ const otherGroup = computed(() => props.isRight
 	? iconButtonsShowText.value ? 'left' : 'sources'
 	: iconButtonsShowText.value ? 'right' : 'targets',
 );
-const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
 
 const idSuffix = computed(() => `${group.value}-${props.index}`);
 
@@ -1216,7 +1215,7 @@ defineExpose({ el });
 			:id="`${idSuffix}-details`"
 			ref="details"
 			:class="{ empty: !value.champion.value }"
-			:aria-busy="isLoading"
+			:aria-busy="value.isLoading.value"
 			@toggle="isExpanded = $event.newState === 'open'"
 		>
 			<summary>
@@ -1225,7 +1224,7 @@ defineExpose({ el });
 			<h4 class="loading-header">
 				loading...
 			</h4>
-			<section class="runes" :inert="isLoading" @click="selectRunes(value.runes)">
+			<section class="runes" :inert="value.isLoading.value" @click="selectRunes(value.runes)">
 				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
@@ -1259,7 +1258,7 @@ defineExpose({ el });
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</article>
 			</section>
-			<section class="stats" :inert="isLoading" @dblclick.ctrl="openDebugDialog(value)">
+			<section class="stats" :inert="value.isLoading.value" @dblclick.ctrl="openDebugDialog(value)">
 				<h4>stats</h4>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
@@ -1305,7 +1304,7 @@ defineExpose({ el });
 			<section
 				ref="effects"
 				class="effects"
-				:inert="isLoading"
+				:inert="value.isLoading.value"
 				:style="`--effects-number: ${value.computed.effects.value.filter(effect => effect.isActive).length}`"
 			>
 				<h4>effects</h4>
@@ -1342,20 +1341,20 @@ defineExpose({ el });
 					:damage-source="hoveredEffect?.source as unknown as DamageSource"
 				/>
 			</section>
-			<section ref="abilities" class="abilities" :inert="isLoading">
+			<section ref="abilities" class="abilities" :inert="value.isLoading.value">
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
 					:id-suffix
 					:value
-					:is-loading
+					:is-loading="value.isLoading.value"
 					@ability-hover="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('', ...args)"
 				/>
 				<template v-else>
 					<div data-ability="passive">
 						<h5>passive</h5>
 						<img
-							v-show="!isLoading && value.champion.value"
+							v-show="!value.isLoading.value && value.champion.value"
 							:src="value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariantsIndexes.value.passive]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
@@ -1381,7 +1380,7 @@ defineExpose({ el });
 					>
 						<h5>{{ abilityKey.toUpperCase() }}</h5>
 						<img
-							v-show="!isLoading && value.champion.value"
+							v-show="!value.isLoading.value && value.champion.value"
 							:src="value.champion.value ? abilityImage(value.champion.value.abilities[abilityKey].variants[value.abilityVariantsIndexes.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
