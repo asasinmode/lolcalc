@@ -223,7 +223,11 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 			??= enumOptions
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
 				: deriveProgressValue
-					? await progressExtra(abilityId, 0, label, deriveProgressValue, { selectEffectSourceProps: effectSpecific.sourceControls, effectControlsProps: effectSpecific.effectControls })
+					? await progressExtra(abilityId, 0, label, deriveProgressValue, {
+							selectEffectSourceProps: effectSpecific.sourceControls,
+							effectControlsProps: effectSpecific.effectControls,
+							derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
+						})
 					: maxValue !== 1
 						? await numberExtra(abilityId, 0, label, minValue, maxValue)
 						: await booleanExtra(abilityId, 0, label, false);

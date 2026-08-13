@@ -1,5 +1,5 @@
 import type { IEffectData, TEffects } from '@lolcalc/data';
-import type { IChampionId } from '@lolcalc/data/types.js';
+import type { IChampion, IChampionId } from '@lolcalc/data/types.js';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
@@ -708,12 +708,13 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 100), Math.max(0, data?.[1] ?? 0)];
 		},
 		maxValue: 100,
-		imgText(data) {
-			return data[0];
+		imgText(_data, self) {
+			return Math.round(self.stats.value.effectVars.namiPassiveBonusMS ?? 0);
 		},
 		deriveProgressValue: (_value, self) => {
 			return self?.stats.value.effectVars.namiPassiveBonusMS ?? 0;
 		},
+		progressComponentSymbol: '',
 		sourceControls: {
 			invalidMessage: (source) => {
 				if (source.listedChampion.value?.id !== 'Nami' satisfies IChampionId) {
@@ -738,12 +739,10 @@ export const EFFECT_SPECIFICS = {
 			postInit: {
 				handler(self, { bonusStats }, { effectVars }) {
 					const effect = self.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0];
-					if (effect) {
+					if (effect?.champion.value?.id === 'Nami') {
 						const [progress, totalAP] = effect.data.value;
-						console.log('nami passive effect', { progress, totalAP }, bonusStats.moveSpeed, effectVars);
-						// TODO figure out where to get Nami champion from
-						// effectVars.namiPassiveBonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(champion?, progress, totalAP);
-						// bonusStats.moveSpeed += effectVars.namiPassiveBonusMS;
+						effectVars.namiPassiveBonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(effect.champion.value as IChampion, progress, totalAP ?? 0);
+						bonusStats.moveSpeed += effectVars.namiPassiveBonusMS;
 					}
 				},
 			},
@@ -810,6 +809,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	enumOptions?: Record<string, number>;
 	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn<true>;
+	progressComponentSymbol?: string;
 	sourceControls?: ISelectEffectSourceProps;
 	effectControls?: IEffectControlsProps;
 	calculateHooks?: ICalculateChampionStatsHookSource;
