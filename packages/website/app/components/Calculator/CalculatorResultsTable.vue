@@ -290,7 +290,7 @@ function computeSectionRowColumn(
 
 	if (!source || (!source.listedChampion.value && section.abilityId.type === AbilityType.champion)) {
 		rv.value = '-';
-	} else if (source.listedChampion.value && source.listedChampion.value.id !== source.champion.value?.id) {
+	} else if (source.isLoading.value) {
 		rv.value = 'loading...';
 	} else if (
 		(section.abilityId.type === 'champion' && source.champion.value?.id !== section.abilityId.id)
