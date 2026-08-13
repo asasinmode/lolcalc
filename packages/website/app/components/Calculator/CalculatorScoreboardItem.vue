@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
-import type { IDragonAbilityId, IEffectAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';
 import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
@@ -20,6 +20,7 @@ import { toValue } from 'vue';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
+import { ExtraLoading } from '~/utils/component';
 
 type IShowTooltipEventArgs = IExtraComponentEmits['imgMouseenter'];
 
@@ -1562,9 +1563,7 @@ defineExpose({ el });
 						@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
 					/>
 					<template #fallback>
-						<article aria-busy="true" class="loading">
-							loading...
-						</article>
+						<ExtraLoading />
 					</template>
 				</Suspense>
 				<component

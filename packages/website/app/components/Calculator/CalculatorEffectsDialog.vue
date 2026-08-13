@@ -11,6 +11,7 @@ import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
+import { ExtraLoading } from '~/utils/component';
 
 const damageSource = defineModel<DamageSource>();
 
@@ -254,22 +255,27 @@ defineExpose({
 				:key="effect.abilityId.id"
 				:style="`anchor-name: --effect-${effect.abilityId.id}-applied`"
 			>
-				<component
-					:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
-					:ability-id="effect.abilityId"
-					:damage-source
-					id-suffix="effects-dialog-applied"
-					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true, effect)"
-				>
-					<button
-						class="pretend-ui-btn remove"
-						title="remove"
-						@click="damageSource?.removeEffect(effect.abilityId)"
+				<Suspense>
+					<component
+						:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
+						:ability-id="effect.abilityId"
+						:damage-source
+						id-suffix="effects-dialog-applied"
+						@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true, effect)"
 					>
-						<span>remove</span>
-						<Icon class="i-ph:trash" />
-					</button>
-				</component>
+						<button
+							class="pretend-ui-btn remove"
+							title="remove"
+							@click="damageSource?.removeEffect(effect.abilityId)"
+						>
+							<span>remove</span>
+							<Icon class="i-ph:trash" />
+						</button>
+					</component>
+					<template #fallback>
+						<ExtraLoading />
+					</template>
+				</Suspense>
 			</li>
 		</ul>
 		<template v-for="group in effectOptionGroups" :key="group.type">
@@ -289,9 +295,7 @@ defineExpose({
 							@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId, false)"
 						/>
 						<template #fallback>
-							<article aria-busy="true" class="loading">
-								loading...
-							</article>
+							<ExtraLoading />
 						</template>
 					</Suspense>
 				</li>

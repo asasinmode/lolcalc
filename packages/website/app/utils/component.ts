@@ -273,3 +273,7 @@ type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
 type IDefineExtraComponentEmits = {
 	imgMouseenter: (...args: IExtraComponentEmits['imgMouseenter']) => void;
 };
+
+export function ExtraLoading() {
+	return h('article', { 'class': 'loading', 'aria-busy': 'true' }, 'loading...');
+};
