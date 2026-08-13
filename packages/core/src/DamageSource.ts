@@ -143,8 +143,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		if (this.listedChampion.value && this.champion.value?.id !== this.listedChampion.value.id) {
 			return true;
 		}
-
-		return false;
+		return this.appliedEffects.value.some(effect => effect.champion.value instanceof Promise);
 	});
 
 	/**
@@ -246,7 +245,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
 			const effect = overrides.appliedEffects![i]!;
-			this.addEffect(effect.abilityId, effect.data.value);
+			this.addEffect(effect.abilityId, effect.data.value, isResultsCopy, effect.champion.value);
 		}
 
 		/** used in maxHealth/abilityResource watcher to ensure overrides are used only once */
@@ -567,7 +566,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
 			() => Object.values(this.internalDragonData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}`).join('~'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}'${(effect.champion.value as any)?.id ?? ''}`).join('~'),
 		];
 	}
 
@@ -996,6 +995,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		data?: UnwrapRef<IDamageSourceEffect<T>['data']>,
 		/** when data is already expected to be "safe", not in need of `setupData`, like from `EFFECT_SPECIFICS.itemAppliedOnTargetEffectData` */
 		trustData = false,
+		champion?: UnwrapRef<IDamageSourceEffect<T>['champion']>,
 	): IDamageSourceEffect<T> {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
@@ -1020,6 +1020,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				abilityId,
 				data: ref([]),
 				source: shallowRef(),
+				champion: shallowRef(champion),
 			});
 
 			if (data && trustData) {
@@ -1031,6 +1032,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				} else {
 					rv.data.value = newData;
 				}
+			}
+
+			if (!this.isResultsCopy && specific.sourceAbility.type === AbilityType.champion) {
+				rv.champion.value = useChampion(specific.sourceAbility.id).then(champion => rv.champion.value = champion);
 			}
 
 			this.appliedEffects.value.push(rv);
@@ -1989,6 +1994,8 @@ export interface IDamageSourceEffect<T extends IEffectAbilityId = IEffectAbility
 	data: Ref<IGameAbilityData<T>>;
 	/** the source that's applying the effect */
 	source: ShallowRef<DamageSource | undefined>;
+	/** the champion to be used in effect's calculations - expected to be set in DamageSource.addEffect when effect's source ability is a champion one */
+	champion: ShallowRef<IChampion | Promise<IChampion> | undefined>;
 }
 
 export interface IComputedAbilityDescription {
