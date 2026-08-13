@@ -245,7 +245,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
 			const effect = overrides.appliedEffects![i]!;
-			this.addEffect(effect.abilityId, effect.data.value, isResultsCopy, effect.champion.value);
+			this.addEffect(effect.abilityId, effect.data.value, isResultsCopy, effect.source.value, effect.champion.value);
 		}
 
 		/** used in maxHealth/abilityResource watcher to ensure overrides are used only once */
@@ -995,6 +995,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		data?: UnwrapRef<IDamageSourceEffect<T>['data']>,
 		/** when data is already expected to be "safe", not in need of `setupData`, like from `EFFECT_SPECIFICS.itemAppliedOnTargetEffectData` */
 		trustData = false,
+		source?: UnwrapRef<IDamageSourceEffect<T>['source']>,
 		champion?: UnwrapRef<IDamageSourceEffect<T>['champion']>,
 	): IDamageSourceEffect<T> {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
@@ -1019,7 +1020,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const rv: IDamageSourceEffect<any> = markRaw({
 				abilityId,
 				data: ref([]),
-				source: shallowRef(),
+				source: shallowRef(source),
 				champion: shallowRef(champion),
 			});
 
