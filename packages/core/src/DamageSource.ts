@@ -49,7 +49,7 @@ export interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	internalData?: UnwrapRef<IDamageSource<Id>['internalData']>;
 	internalItemData?: UnwrapRef<IDamageSource<Id>['internalItemData']>;
 	internalDragonData?: UnwrapRef<IDamageSource<Id>['internalDragonData']>;
-	appliedEffects?: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
+	appliedEffects?: IDamageSourceEffect<IEffectAbilityId<any>>[];
 }
 
 let damageSourcesCount = 0;

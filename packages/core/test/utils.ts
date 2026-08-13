@@ -1,9 +1,12 @@
-import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IDamageSourceEffect, IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IEffectAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IEffectDataOf } from '@lolcalc/core/specifics';
 import type { IEffectData, IMiscData } from '@lolcalc/data';
 import type { IChampion, IChampionId, IDragonName, IItem } from '@lolcalc/data/types';
 import assert from 'node:assert';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { CHAMPIONS, EFFECTS, ITEMS, MISC } from '@lolcalc/data';
+import { ref, shallowRef } from 'vue';
 
 interface IPatchOverridesFixture {
 	version: string;
@@ -55,4 +58,13 @@ export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, 
 		damageSource && console.error(`failing${message ? ` ${message}` : ''} source: http://localhost:3000/?v=1&src=${damageSource.stringifiedData.value}`);
 		throw e;
 	}
+}
+
+export function overridesAppliedEffect<T extends IEffectAbilityId>(abilityId: T, data: IEffectDataOf<T['id']>): IDamageSourceEffect<IEffectAbilityId<T['id']>> {
+	return {
+		abilityId,
+		data: ref(data as any),
+		source: shallowRef(),
+		champion: shallowRef(),
+	};
 }

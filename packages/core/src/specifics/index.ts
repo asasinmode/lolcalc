@@ -1,12 +1,12 @@
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
-import type { IChampionStatName, IVariableType, TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, IEffectObjectName, IVariableType, TItemNameToId } from '@lolcalc/shared';
 import type { WritableComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game.ts';
 import type { IChampionInternalDataMap, TChampionSpecifics } from './champion';
 import type { TDragonSpecifics } from './dragon.ts';
-import type { TEffectSpecifics } from './effect';
+import type { EFFECT_SPECIFICS, IEffectSpecific, TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import type { ITEM_SPECIFICS } from './item.ts';
 import { CONSTS, ITEMS_BY_NAME } from '@lolcalc/data';
@@ -105,6 +105,10 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 	= K extends any
 		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>
 		: never;
+
+export type IEffectDataOf<T extends IEffectObjectName> = T extends keyof typeof EFFECT_SPECIFICS
+	? typeof EFFECT_SPECIFICS[T] extends IEffectSpecific<infer U> ? U : never
+	: never;
 
 export type IInternalDragonDataOf<Dragon extends IDragonName, Subtype extends 'stack' | 'soul'>
 	= Dragon extends keyof TDragonSpecifics

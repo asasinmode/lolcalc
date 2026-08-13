@@ -6,7 +6,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.14.1.fixture.json' with { type: 'json' };
-import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
+import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
 test.before(() => {
 	setupPatchFixture(fixture);
@@ -247,7 +247,7 @@ test('Hecarim', async (t) => {
 	await t.test('ghost', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
 			...sourceCommon,
-			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1])],
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -277,7 +277,7 @@ test('Hecarim', async (t) => {
 			level: 6,
 			items: msItems,
 			internalItemData: { shipwrecker: 100, haunt: 0, wStep: 1, fanfare: 1, overdrive: 1, carve: 0, fervor: 1 } satisfies IInternalItemDataOf<'youmuu' | 'deadMansPlate' | 'experimentalHexplate' | 'bandlepipes' | 'blackCleaver'>,
-			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1])],
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -330,7 +330,7 @@ test('Hecarim', async (t) => {
 		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
 			...bloodmailCommon,
 			internalItemData: { noxianHaste: 1, haunt: 0, wStep: 1 } satisfies IInternalItemDataOf<'crimsonLucidity' | 'youmuu'>,
-			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1])],
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -345,7 +345,7 @@ test('Hecarim', async (t) => {
 			...bloodmailCommon,
 			currentHealth: 375,
 			internalItemData: { noxianHaste: 1, haunt: 0, wStep: 1 } satisfies IInternalItemDataOf<'crimsonLucidity' | 'youmuu'>,
-			appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: [1] }],
+			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1])],
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
