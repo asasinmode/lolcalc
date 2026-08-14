@@ -702,7 +702,7 @@ export const EFFECT_SPECIFICS = {
 	},
 	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0),
-		label: 'Surging Tides move speed',
+		label: 'Surging Tides',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100), Math.max(0, data?.[1] ?? 0)];
 		},
@@ -774,7 +774,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EFFECT_OBJECT_NAME.nasusWWither]: defineEffectSpecific<[witherProgress: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0),
-		label: 'Wither slow',
+		label: 'Wither',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},

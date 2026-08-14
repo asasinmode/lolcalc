@@ -101,7 +101,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.derivedMS, { effectControlsProps: CHAMPION_SPECIFICS.Nami.passive.effectControls, derivedSymbolSuffix: '' }),
 	},
 	Nasus: {
-		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither slow on target', CHAMPION_SPECIFICS.Nasus.w.derivedSlow),
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither on target', CHAMPION_SPECIFICS.Nasus.w.derivedSlow),
 	},
 	Nidalee: {
 		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', {
