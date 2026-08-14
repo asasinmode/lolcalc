@@ -702,7 +702,6 @@ export const VariableType = {
 	true: 'true',
 	adaptive: 'adaptive',
 	affectedByTenacity: 'affectedByTenacity',
-	// TODO calc
 	affectedBySlowResist: 'affectedBySlowResist',
 } as const;
 

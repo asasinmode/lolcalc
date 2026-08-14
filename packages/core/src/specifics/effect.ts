@@ -7,7 +7,7 @@ import type { DetectItemVariables } from '../types';
 import type { IDeriveProgressFn, IEffectControlsProps, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 
-import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
@@ -92,7 +92,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number, isRanged?: number, bonusAD?: number, totalAP?: number, bonusHP?: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
-		label: 'Hextech Soul lightning slow',
+		label: 'Hextech Soul slow',
 		setupData(data) {
 			return [
 				clamp(0, data?.[0] ?? 0, 100),
@@ -106,25 +106,25 @@ export const EFFECT_SPECIFICS = {
 		imgText(_data, self): number {
 			return Math.round(self.stats.value.effectVars.hextechSoulSlow ?? 0);
 		},
-		// TODO not sure it makes sense to have variables for it
-		// variables: defineVariables({
-		// 	known: {
-		// 		Slow: [],
-		// 	},
-		// 	calculate(self) {
-		// 		return {
-		// 			Slow: {
-		// 				value: self.stats.value.effectVars.hextechSoulSlow,
-		// 			},
-		// 		};
-		// 	},
-		// 	meta: {
-		// 		Slow: {
-		// 			isCustom: true,
-		// 			resultsIsPercentage: true,
-		// 		},
-		// 	},
-		// }),
+		variables: defineVariables({
+			known: {
+				Slow: [],
+			},
+			calculate(self) {
+				return {
+					Slow: {
+						value: self.stats.value.effectVars.hextechSoulSlow,
+					},
+				};
+			},
+			meta: {
+				Slow: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					type: VariableType.affectedBySlowResist,
+				},
+			},
+		}),
 		setupDataFromDragonData(damageSource) {
 			const { hextechTagged } = damageSource.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>;
 			if (hextechTagged) {
