@@ -1,7 +1,7 @@
 import type { IEffectData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionId } from '@lolcalc/data/types.js';
 import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
-import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
@@ -788,6 +788,9 @@ export const EFFECT_SPECIFICS = {
 				return [wProgress];
 			}
 		},
+		watch(effect) {
+			return effect.source.value?.abilityLevels.value.w;
+		},
 		variables: defineVariables({
 			known: {
 				AttackSpeedSlow: [],
@@ -892,6 +895,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	setupDataFromDragonData?: (damageSource: DamageSource) => T | undefined;
 	/** same as setupDataFromSourceItem but for champion effects */
 	setupDataFromInternalData?: (damageSource: DamageSource) => T | undefined;
+	watch?: IDamageSourceEffect['watch'];
 	/**
 	 * based on this and `maxValue` VExtra components are created.
 	 * - both `undefined` = `VExtraBoolean`
@@ -908,8 +912,9 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	enumOptions?: Record<string, number>;
 	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn<true>;
-	progressComponentSymbol?: string;
+	/** will be called when the value is updated through the extra component */
 	onValueUpdate?: IExtraOnValueUpdate;
+	progressComponentSymbol?: string;
 	sourceControls?: ISelectEffectSourceProps;
 	effectControls?: IEffectControlsProps;
 	calculateHooks?: ICalculateChampionStatsHookSource;
@@ -1086,6 +1091,7 @@ export function effectsAppliedBy(source: DamageSource): IApplicableEffect[] {
 export function applyEffectsFromTo(source: DamageSource, target: DamageSource): DamageSource {
 	for (const [effectAbilityId, effectSpecific] of source.effectsAppliedToTarget.value) {
 		let effectData;
+		let champion;
 
 		if (effectSpecific.sourceAbility.type === AbilityType.item) {
 			effectData = effectSpecific.setupDataFromSourceItem!(source);
@@ -1093,9 +1099,10 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 			effectData = effectSpecific.setupDataFromDragonData!(source);
 		} else if (effectSpecific.sourceAbility.type === AbilityType.champion) {
 			effectData = effectSpecific.setupDataFromInternalData!(source);
+			champion = source.champion.value;
 		}
 
-		effectData && target.addEffect(effectAbilityId, effectData as any, true);
+		effectData && target.addEffect(effectAbilityId, effectData as any, true, source, champion);
 	}
 	return target;
 }

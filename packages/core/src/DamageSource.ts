@@ -566,7 +566,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
 			() => Object.values(this.internalDragonData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}'${effect.champion.value?.id ?? ''}`).join('~'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}'${effect.champion.value?.id ?? ''}'${effect.watch?.(effect) ?? ''}`).join('~'),
 		];
 	}
 
@@ -1022,6 +1022,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				data: ref([]),
 				source: shallowRef(source),
 				champion: shallowRef(champion),
+				watch: specific.watch,
 			});
 
 			if (data && trustData) {
@@ -2002,6 +2003,8 @@ export interface IDamageSourceEffect<T extends IEffectAbilityId = IEffectAbility
 	 * promise is typed with `{ id?: string }` to not have to cast it as any in places where it's just checking for champion
 	 */
 	champion: ShallowRef<IChampion | (Promise<IChampion> & { id?: IChampionId }) | undefined>;
+	/** will be called in `DamageSource.getWatchable` applied effects callback. Use when the effect value changes based on something directly in its source */
+	watch?: (effect: IDamageSourceEffect) => string | number | undefined;
 }
 
 export interface IComputedAbilityDescription {
