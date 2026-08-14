@@ -434,8 +434,12 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 };
 
 const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	/* unwrapped computed here because it's passed from template and is already `toValued` */
-	const rv = gameVariablesCellValue(rowId, source?.computed.effects.value.find(effect => effect.abilityId.id === section.abilityId.id)?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
+	/* accessing refs here directly because they have already been `toValue`d somewhere, not sure when */
+	const computedEffect = source?.computed.effects.value.find(effect => effect.abilityId.id === section.abilityId.id);
+	if (computedEffect && !computedEffect.isActive) {
+		return;
+	}
+	const rv = gameVariablesCellValue(rowId, computedEffect?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
 	/* other variable's values are rounded by `replaceGameVariables` but these are gotten raw from IEffectSpecifics.variables.calulate() so round them here */
 	if (typeof rv?.numberValue === 'number') {
 		rv.value = `${roundVariable(rv.numberValue * (rv.meta?.resultsMultiplier ?? 1))}${rv.meta?.resultsIsPercentage ? '%' : ''}`;
