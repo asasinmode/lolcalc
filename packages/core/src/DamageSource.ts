@@ -5,7 +5,7 @@ import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import type { IGameImageData } from './misc.ts';
-import type { IChampionInternalDataMap, IHypotheticalChampionSpecifics } from './specifics/champion';
+import type { IChampionInternalDataMap, IChampionSpecific, IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IHypotheticalDragonSpecifics } from './specifics/dragon';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
 import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
@@ -1065,6 +1065,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 		}
 	}
+
+	championSpecific = computed(() => this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id] as any) as ComputedRef<IChampionSpecific>;
 
 	computed: IDamageSourceComputed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */

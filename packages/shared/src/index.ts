@@ -272,6 +272,10 @@ export interface IStatsCalculationMiscDebug {
 export interface IDamageVars {
 	/** slow % applied on target from the source's hextech soul */
 	hextechSoulSlow?: number;
+	/** ms slow % applied on target from Nasus' w */
+	nasusWSlow?: number;
+	/** as slow % applied on target from Nasus' w */
+	nasusWCripple?: number;
 }
 
 /** all of the variables from applied effects */
@@ -280,6 +284,8 @@ export interface IStatsCalculationEffectVars {
 	namiPassiveBonusMS?: number;
 	/** slow % from hextech soul slow effect */
 	hextechSoulSlow?: number;
+	/** move speed slow from nasus W */
+	nasusWMSSlow?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

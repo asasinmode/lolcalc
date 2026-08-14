@@ -30,7 +30,7 @@ import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
 import type { IChampion, IChampionId } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStats, IDamageVars } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
@@ -796,30 +796,65 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Nasus: {
-		WITHER_MS_SLOW: ((progress, self) => {
-			const wParams: IGameVariableValueParameters['championAbility'] = {
-				abilityVariant: self.champion.value!.abilities.w.variants[0]!,
-				abilityLevel: self.abilityLevels.value.w || 1,
-				damageSource: self,
-			};
-			const minMSSlow = championAbilityVariableValue('SlowBase', wParams);
-			const maxMSSlow = championAbilityVariableValue('MaxSlowTooltipOnly', wParams);
-
-			if (typeof minMSSlow.value === 'number' && typeof maxMSSlow.value === 'number') {
-				return progress === 1
-					? minMSSlow.value
-					: progress
-						? (minMSSlow.value + (maxMSSlow.value - minMSSlow.value) * progress / 100)
-						: 0;
-			}
-
-			console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate W ms/as slow values', minMSSlow, maxMSSlow);
-			return Number.NaN;
-		}) satisfies IDeriveProgressFn,
 		setupData(self) {
 			return {
 				wProgress: clamp(0, Math.round(self.internalData.value.wProgress ?? 0), 100),
 			};
+		},
+		w: {
+			derivedSlow: ((progress, self): number => {
+				return self?.damageVars.value.nasusWSlow ?? CHAMPION_SPECIFICS.Nasus.w.calculateSlow(self.champion.value!, progress, self.abilityLevels.value.w);
+			}) satisfies IDeriveProgressFn,
+			calculateSlow: (champion: IChampion, progress: number, wLevel: number) => {
+				const wParams: IGameVariableValueParameters['championAbility'] = {
+					abilityVariant: champion.abilities.w.variants[0]!,
+					abilityLevel: wLevel || 1,
+				};
+				const minMSSlow = championAbilityVariableValue('SlowBase', wParams);
+				const maxMSSlow = championAbilityVariableValue('MaxSlowTooltipOnly', wParams);
+
+				if (typeof minMSSlow.value === 'number' && typeof maxMSSlow.value === 'number') {
+					return progress === 1
+						? minMSSlow.value
+						: progress
+							? (minMSSlow.value + (maxMSSlow.value - minMSSlow.value) * progress / 100)
+							: 0;
+				}
+
+				console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate W ms/as slow values', minMSSlow, maxMSSlow);
+				return Number.NaN;
+			},
+			variables: defineChampionVariables<'Nasus', typeof INasus, 'w'>()({
+				known: {
+					AttackSpeedSlow: [],
+					MoveSpeedSlow: [],
+				},
+				calculate(self) {
+					return {
+						MoveSpeedSlow: {
+							value: self.damageVars.value.nasusWSlow ?? 0,
+						},
+						AttackSpeedSlow: {
+							value: self.damageVars.value.nasusWCripple ?? 0,
+						},
+					};
+				},
+				meta: {
+					AttackSpeedSlow: {
+						isCustom: true,
+						resultsIsPercentage: true,
+					},
+					MoveSpeedSlow: {
+						isCustom: true,
+						resultsIsPercentage: true,
+						type: VariableType.affectedBySlowResist,
+					},
+					Duration: {
+						type: VariableType.affectedByTenacity,
+					},
+				},
+				uninteresting: ['SlowBase', 'AttackSpeedSlowMult'],
+			}),
 		},
 		calculateHooks: {
 			onChampionPassive: {
@@ -837,54 +872,17 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 		},
-		w: {
-			variables: defineChampionVariables<'Nasus', typeof INasus, 'w'>()({
-				known: {
-					AttackSpeedSlow: [],
-					MoveSpeedSlow: [],
-				},
-				calculate(self) {
-					const msSlow: number = CHAMPION_SPECIFICS.Nasus.WITHER_MS_SLOW(self.internalData.value.wProgress, self);
-					const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', {
-						abilityVariant: self.champion.value!.abilities.w.variants[0]!,
-						abilityLevel: self.abilityLevels.value.w,
-						damageSource: self,
-					});
-
-					if (typeof msToASSlowRatio.value === 'number') {
-						return {
-							MoveSpeedSlow: {
-								value: msSlow,
-							},
-							AttackSpeedSlow: {
-								value: msSlow * msToASSlowRatio.value,
-							},
-						};
-					}
-
-					console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate W ms to as slow ratio', msToASSlowRatio);
-					return {
-						MoveSpeedSlow: {
-							value: msSlow,
-						},
-						AttackSpeedSlow: { value: Number.NaN },
-					};
-				},
-				meta: {
-					AttackSpeedSlow: {
-						isCustom: true,
-						resultsIsPercentage: true,
-					},
-					MoveSpeedSlow: {
-						isCustom: true,
-						resultsIsPercentage: true,
-					},
-					Duration: {
-						type: VariableType.affectedByTenacity,
-					},
-				},
-				uninteresting: ['SlowBase', 'AttackSpeedSlowMult'],
-			}),
+		damageVars(self, vars) {
+			vars.nasusWSlow = CHAMPION_SPECIFICS.Nasus.w.calculateSlow(self.champion.value!, self.internalData.value.wProgress, self.abilityLevels.value.w);
+			const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', {
+				abilityVariant: self.champion.value!.abilities.w.variants[0]!,
+				abilityLevel: self.abilityLevels.value.w,
+			});
+			if (typeof msToASSlowRatio.value === 'number') {
+				vars.nasusWCripple = vars.nasusWSlow * msToASSlowRatio.value;
+			} else {
+				console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate W ms to as slow ratio', msToASSlowRatio);
+			}
 		},
 	},
 	Nidalee: {
@@ -1594,6 +1592,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		} & {
 			variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
+			damageVars?: (self: DamageSource<Id>, vars: IDamageVars) => void;
 			[key: string]: any;
 		};
 
