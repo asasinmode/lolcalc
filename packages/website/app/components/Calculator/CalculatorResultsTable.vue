@@ -1213,6 +1213,21 @@ const colW = computed(() => {
 	};
 });
 
+const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail();
+
+function showColumnSourceThumbnail(event: Event, damageSource: DamageSource | undefined) {
+	if (damageSource) {
+		(event.currentTarget as HTMLElement).addEventListener('mouseleave', hideColumnSourceThumbnail, { passive: true, once: true });
+		const popoverEl = (event.currentTarget as HTMLElement).nextElementSibling?.nextElementSibling as HTMLElement | undefined;
+		popoverEl?.showPopover();
+		popoverEl?.firstElementChild && updateThumbnail(popoverEl.firstElementChild as HTMLElement, damageSource);
+	}
+}
+
+function hideColumnSourceThumbnail(event: Event) {
+	((event.currentTarget as HTMLElement).nextElementSibling?.nextElementSibling as HTMLElement | undefined)?.hidePopover();
+}
+
 defineExpose({
 	addResultsColumn,
 	addComputedColumnSources,
@@ -1334,6 +1349,7 @@ defineExpose({
 								:options="sourceOptions"
 								clearable
 								@update:model-value="setColumnChampion(column, damageSources, $event)"
+								@label-mouseenter="showColumnSourceThumbnail($event, resultColumns[index]!.source)"
 							>
 								<img
 									v-if="column.source?.listedChampion.value"
@@ -1352,6 +1368,11 @@ defineExpose({
 									style="--focus-brightness: 1.5"
 									aria-hidden="true"
 								>
+								<template #post>
+									<div popover="hint">
+										<DamageSourceThumbnail />
+									</div>
+								</template>
 							</VSelect>
 							<span>vs</span>
 							<VSelect
@@ -1361,6 +1382,7 @@ defineExpose({
 								:options="targetOptions"
 								clearable
 								@update:model-value="setColumnChampion(column, damageTargets, $event)"
+								@label-mouseenter="showColumnSourceThumbnail($event, resultColumns[index]!.target)"
 							>
 								<img
 									v-if="column.target?.listedChampion.value"
@@ -1379,6 +1401,11 @@ defineExpose({
 									style="--focus-brightness: 1.5"
 									aria-hidden="true"
 								>
+								<template #post>
+									<div popover="hint">
+										<DamageSourceThumbnail />
+									</div>
+								</template>
 							</VSelect>
 							<button v-if="index === resultColumns.length - 1" class="pretend-ui-btn" @click="addResultsColumn()">
 								add column
@@ -1967,6 +1994,8 @@ defineExpose({
 					> .v-select {
 						--at-apply: 'size-[--header-champion-select-size] my-[--header-row-gap-y]';
 						--b-width: 2px;
+						anchor-name: --select;
+						anchor-scope: --select;
 
 						&:has(> select[value]) {
 							--b-width: 2.5px;
@@ -2004,6 +2033,18 @@ defineExpose({
 
 						&:nth-of-type(2) > label {
 							border-color: var(--col-damage-target-clr, var(--ui-btn-border-clr));
+						}
+
+						> [popover] {
+							--at-apply: 'shadow';
+							position-anchor: --select;
+							inset-block-start: calc(anchor(end));
+							justify-self: anchor-center;
+
+							> .damage-source-thumbnail {
+								/* default py is 1 but add 1px to make it align it with the bottom of manipulate buttons */
+								--at-apply: 'py-1.25';
+							}
 						}
 					}
 
