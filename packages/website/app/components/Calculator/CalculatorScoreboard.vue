@@ -19,11 +19,11 @@ const dragging = shallowRef<{
 	source: DamageSource[];
 }>();
 
-const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail(dragPreview);
+const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail();
 
 function onDragstart(event: DragEvent, index: number, source: DamageSource[], isDuplicate: boolean) {
 	// TODO maybe update the source-thumbnail on drag button mousedown so it's always ready when the drag starts?
-	updateThumbnail(source[index]!);
+	updateThumbnail(dragPreview.value, source[index]!);
 
 	dragging.value = { index, source, isDuplicate };
 	event.stopPropagation();

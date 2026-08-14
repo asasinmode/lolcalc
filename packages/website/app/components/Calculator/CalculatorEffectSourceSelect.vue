@@ -35,7 +35,7 @@ function hideTooltip() {
 const showInvalid = computed(() => value.value && props.invalidMessage);
 
 const thumbnail = useTemplateRef('thumbnail');
-const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail(thumbnail);
+const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail();
 
 const selectedText = computed(() => {
 	if (value.value && !value.value?.listedChampion.value) {
@@ -62,12 +62,12 @@ function updateThumbnailHideTooltip(id?: string) {
 		console.warn('[CalculatorEffectSourceSelect] failed to update model value, unknown damage source id', id, damageSources.value.map(s => s.id), damageTargets.value.map(t => t.id), value.value);
 	}
 	value.value = damageSource;
-	damageSource && updateThumbnail(damageSource);
+	damageSource && updateThumbnail(thumbnail.value, damageSource);
 	hideTooltip();
 }
 
 onMounted(() => {
-	value.value && updateThumbnail(value.value);
+	value.value && updateThumbnail(thumbnail.value, value.value);
 });
 </script>
 
@@ -172,7 +172,7 @@ onMounted(() => {
 
 		> [aria-errormessage] ~ [popover] {
 			.damage-source-thumbnail {
-				--at-apply: 'mx-auto b mbe-[--default-hover-tooltip-p] shadow-none';
+				--at-apply: 'mx-auto b mbe-[--default-hover-tooltip-p]';
 			}
 		}
 	}

@@ -1,5 +1,4 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type { ShallowRef } from 'vue';
 import { isMasterworkSlot } from '@lolcalc/core/DamageSource';
 import { CHAMPION_IMAGES, imgUrl, RUNES, TEXT } from '@lolcalc/data';
 
@@ -23,15 +22,15 @@ function DamageSourceThumbnail() {
 	]);
 }
 
-export function useDamageSourceThumbnail(ref: ShallowRef<HTMLElement | null>) {
+export function useDamageSourceThumbnail() {
 	const { championImage, championImageSize } = CHAMPION_IMAGES;
 	return {
-		updateThumbnail(damageSource: DamageSource) {
-			if (!ref.value) {
+		updateThumbnail(el: HTMLElement | null, damageSource: DamageSource) {
+			if (!el) {
 				return;
 			}
 
-			const [champImgContainer, lvlSpan, runeContainer, itemList] = ref.value.children as unknown as [HTMLSpanElement, HTMLSpanElement, HTMLDivElement, HTMLUListElement];
+			const [champImgContainer, lvlSpan, runeContainer, itemList] = el.children as unknown as [HTMLSpanElement, HTMLSpanElement, HTMLDivElement, HTMLUListElement];
 			const champImg = champImgContainer.firstElementChild as HTMLImageElement;
 			const [runePrimary, runeSecondary] = runeContainer.children as unknown as [HTMLImageElement, HTMLSpanElement];
 
