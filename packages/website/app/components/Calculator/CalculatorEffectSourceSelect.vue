@@ -16,20 +16,15 @@ function formatSourceOptions(sources: DamageSource[]): [string, string][] {
 	return sources.map((source, index) => [source.id, `(${index + 1}) ${source.listedChampion.value?.name ?? '<empty>'}`]);
 }
 
-let tooltipAnchor: HTMLElement | undefined;
 const hoverTooltipEl = useTemplateRef('hoverTooltip');
 
 function showTooltip(event: MouseEvent) {
-	const { target } = event as unknown as { target: HTMLElement };
 	hoverTooltipEl.value?.showPopover();
-	tooltipAnchor = target;
-	tooltipAnchor?.addEventListener('mouseleave', hideTooltip, { passive: true, once: true });
+	(event.target as HTMLElement)?.addEventListener('mouseleave', hideTooltip, { passive: true, once: true });
 }
 
 function hideTooltip() {
 	hoverTooltipEl.value?.hidePopover();
-	tooltipAnchor?.removeEventListener('mouseleave', hideTooltip);
-	tooltipAnchor = undefined;
 }
 
 const showInvalid = computed(() => value.value && props.invalidMessage);
