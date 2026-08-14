@@ -459,8 +459,8 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 		const multiplier = rv.meta?.resultsMultiplier;
 
 		const value = variable?.value;
-		if (value === undefined) {
-			rv.numberValue = 0;
+		if (value === undefined || Number.isNaN(value)) {
+			rv.numberValue = (value as number) ?? 0;
 			rv.value = '?';
 			rv.isUnknown = true;
 		} else if (Array.isArray(value)) {
