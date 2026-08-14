@@ -848,14 +848,14 @@ export const CHAMPION_SPECIFICS = {
 					};
 				},
 				meta: {
-					AttackSpeedSlow: {
-						isCustom: true,
-						resultsIsPercentage: true,
-					},
 					MoveSpeedSlow: {
 						isCustom: true,
 						resultsIsPercentage: true,
 						type: VariableType.affectedBySlowResist,
+					},
+					AttackSpeedSlow: {
+						isCustom: true,
+						resultsIsPercentage: true,
 					},
 					Duration: {
 						type: VariableType.affectedByTenacity,

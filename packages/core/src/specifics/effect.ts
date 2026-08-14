@@ -344,21 +344,6 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		calculateHooks: {
-			preItemTotal: {
-				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
-					/* set here to multiplier, then in postTotal calculated into actual attack speed reduction */
-					calculatedVariables.frozenHeartCaress = -1 * ITEMS_BY_NAME.frozenHeart?.dataValues.ASPDSlow;
-					debuffs.cripple = addMultiplicative(debuffs.cripple, calculatedVariables.frozenHeartCaress);
-					miscDebug.totalAdditiveCripple += calculatedVariables.frozenHeartCaress;
-				},
-			},
-			postTotal: {
-				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
-					calculatedVariables.frozenHeartCaress = debuffs.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress! / (miscDebug.totalAdditiveCripple || 1);
-				},
-			},
-		},
 		variables: defineVariables({
 			known: {
 				AttackSpeedReduction: [],
@@ -376,6 +361,21 @@ export const EFFECT_SPECIFICS = {
 				},
 			},
 		}),
+		calculateHooks: {
+			preItemTotal: {
+				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
+					/* set here to multiplier, then in postTotal calculated into actual attack speed reduction */
+					calculatedVariables.frozenHeartCaress = -1 * ITEMS_BY_NAME.frozenHeart?.dataValues.ASPDSlow;
+					debuffs.cripple = addMultiplicative(debuffs.cripple, calculatedVariables.frozenHeartCaress);
+					miscDebug.totalAdditiveCripple += calculatedVariables.frozenHeartCaress;
+				},
+			},
+			postTotal: {
+				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
+					calculatedVariables.frozenHeartCaress = debuffs.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress! / (miscDebug.totalAdditiveCripple || 1);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.serpentsFangVenom]: defineEffectSpecific<[shieldReavedBy: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
@@ -782,6 +782,45 @@ export const EFFECT_SPECIFICS = {
 		imgText(_data, self) {
 			return Math.round(self.stats.value.effectVars.nasusWSlow ?? 0);
 		},
+		setupDataFromInternalData(damageSource) {
+			const { wProgress } = damageSource.internalData.value as IInternalDataOf<'Nasus'>;
+			if (wProgress) {
+				return [wProgress];
+			}
+		},
+		variables: defineVariables({
+			known: {
+				AttackSpeedSlow: [],
+				MoveSpeedSlow: [],
+				AttackSpeedReduction: [],
+			},
+			calculate(self) {
+				return {
+					MoveSpeedSlow: {
+						value: self.stats.value.effectVars.nasusWSlow ?? 0,
+					},
+					AttackSpeedSlow: {
+						value: self.stats.value.effectVars.nasusWCripple ?? 0,
+					},
+					AttackSpeedReduction: {
+						value: self.stats.value.effectVars.nasusWASReduced ?? 0,
+					},
+				};
+			},
+			meta: {
+				MoveSpeedSlow: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					type: VariableType.affectedBySlowResist,
+				},
+				AttackSpeedSlow: {
+					isCustom: true,
+				},
+				AttackSpeedReduction: {
+					isCustom: true,
+				},
+			},
+		}),
 		deriveProgressValue: (_value, self) => {
 			return self?.stats.value.effectVars.nasusWSlow ?? 0;
 		},
@@ -851,6 +890,8 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	setupDataFromSourceItem?: (damageSource: DamageSource) => T | undefined;
 	/** same as setupDataFromSourceItem but for dragon effects */
 	setupDataFromDragonData?: (damageSource: DamageSource) => T | undefined;
+	/** same as setupDataFromSourceItem but for champion effects */
+	setupDataFromInternalData?: (damageSource: DamageSource) => T | undefined;
 	/**
 	 * based on this and `maxValue` VExtra components are created.
 	 * - both `undefined` = `VExtraBoolean`
@@ -998,6 +1039,23 @@ const DRAGON_EFFECTS_APPLICABLE_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES
 	.filter(([, effectSpecific]) => effectSpecific.setupDataFromDragonData)
 	.map(([effectObjectName, effectSpecific]) => [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific] as IApplicableEffect);
 
+const EFFECTS_APPLIED_BY_CHAMPIONS_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES
+	.filter(([, effectSpecific]) => effectSpecific.setupDataFromInternalData)
+	.reduce((acc, [effectObjectName, effectSpecific]) => {
+		if (effectSpecific.sourceAbility.type !== AbilityType.champion) {
+			console.error('[specifics/effect] setupDataFromInternalData found on non-champion effect', effectObjectName, effectSpecific);
+			return acc;
+		}
+
+		const value: IApplicableEffect = [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific];
+		if (acc[effectSpecific.sourceAbility.id]) {
+			acc[effectSpecific.sourceAbility.id]!.push(value);
+		} else {
+			acc[effectSpecific.sourceAbility.id] = [value];
+		}
+		return acc;
+	}, {} as Partial<Record<IChampionId, IApplicableEffect[]>>);
+
 /** get all effects a damage source applies to its target */
 export function effectsAppliedBy(source: DamageSource): IApplicableEffect[] {
 	const rv: IApplicableEffect[] = [];
@@ -1015,6 +1073,13 @@ export function effectsAppliedBy(source: DamageSource): IApplicableEffect[] {
 		}
 	}
 
+	const championApplicableEffects = source.champion.value?.id && EFFECTS_APPLIED_BY_CHAMPIONS_TO_TARGET[source.champion.value.id];
+	if (championApplicableEffects) {
+		for (const championEffect of championApplicableEffects) {
+			rv.push(championEffect);
+		}
+	}
+
 	return rv;
 }
 
@@ -1026,6 +1091,8 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 			effectData = effectSpecific.setupDataFromSourceItem!(source);
 		} else if (effectSpecific.sourceAbility.type === AbilityType.dragon) {
 			effectData = effectSpecific.setupDataFromDragonData!(source);
+		} else if (effectSpecific.sourceAbility.type === AbilityType.champion) {
+			effectData = effectSpecific.setupDataFromInternalData!(source);
 		}
 
 		effectData && target.addEffect(effectAbilityId, effectData as any, true);
