@@ -818,6 +818,8 @@ export const EFFECT_SPECIFICS = {
 				},
 				AttackSpeedSlow: {
 					isCustom: true,
+					resultsMultiplier: 100,
+					resultsIsPercentage: true,
 				},
 				AttackSpeedReduction: {
 					isCustom: true,

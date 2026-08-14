@@ -442,7 +442,7 @@ const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (sect
 	const rv = gameVariablesCellValue(rowId, computedEffect?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
 	/* other variable's values are rounded by `replaceGameVariables` but these are gotten raw from IEffectSpecifics.variables.calulate() so round them here */
 	if (typeof rv?.numberValue === 'number') {
-		rv.value = `${roundVariable(rv.numberValue * (rv.meta?.resultsMultiplier ?? 1))}${rv.meta?.resultsIsPercentage ? '%' : ''}`;
+		rv.value = `${roundVariable(rv.numberValue)}${rv.meta?.resultsIsPercentage ? '%' : ''}`;
 	}
 	return rv;
 };
