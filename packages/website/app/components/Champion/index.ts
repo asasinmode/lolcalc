@@ -227,6 +227,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 							selectEffectSourceProps: effectSpecific.sourceControls,
 							effectControlsProps: effectSpecific.effectControls,
 							derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
+							onUpdate: effectSpecific.onValueUpdate,
 						})
 					: maxValue !== 1
 						? await numberExtra(abilityId, 0, label, minValue, maxValue)

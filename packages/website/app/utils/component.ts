@@ -1,6 +1,6 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IEffectControlsProps, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
+import type { IEffectControlsProps, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import type { ComputedRef, SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
@@ -72,16 +72,18 @@ export async function progressExtra<T extends IGameAbilityId>(
 		effectControlsProps,
 		selectEffectSourceProps,
 		derivedSymbolSuffix = '%',
+		onUpdate,
 	}: {
 		effectControlsProps?: IEffectControlsProps<any>;
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 		derivedSymbolSuffix?: string;
+		onUpdate?: IExtraOnValueUpdate;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const isEffect = abilityId.type === AbilityType.effect;
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
 
 		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
 		function effectControlUpdateValue(val?: boolean) {
@@ -192,7 +194,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
-function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource, isEffect = abilityId.type === AbilityType.effect): [
+function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource, isEffect = abilityId.type === AbilityType.effect, onUpdate?: IExtraOnValueUpdate): [
 	stringifiedAbilityId: string,
 	value: ComputedRef<any>,
 	updateValue: (value: any) => void,
@@ -225,6 +227,7 @@ appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 			} else {
 				damageSource[dataProperty].value[property] = value;
 			}
+			onUpdate?.(value, damageSource);
 		},
 		appliedEffect,
 	];

@@ -4,7 +4,7 @@ import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IDeriveProgressFn, IEffectControlsProps, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
+import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
@@ -730,6 +730,11 @@ export const EFFECT_SPECIFICS = {
 		deriveProgressValue: (_value, self) => {
 			return self?.stats.value.effectVars.namiPassiveBonusMS ?? 0;
 		},
+		onValueUpdate(value, self) {
+			if (value && (self.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAp !== undefined) {
+				(self.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAp = undefined;
+			}
+		},
 		progressComponentSymbol: '',
 		sourceControls: {
 			invalidMessage: (source) => {
@@ -863,6 +868,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn<true>;
 	progressComponentSymbol?: string;
+	onValueUpdate?: IExtraOnValueUpdate;
 	sourceControls?: ISelectEffectSourceProps;
 	effectControls?: IEffectControlsProps;
 	calculateHooks?: ICalculateChampionStatsHookSource;
