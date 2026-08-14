@@ -710,6 +710,23 @@ export const EFFECT_SPECIFICS = {
 		imgText(_data, self) {
 			return Math.round(self.stats.value.effectVars.namiPassiveBonusMS ?? 0);
 		},
+		variables: defineVariables({
+			known: {
+				BonusMS: [],
+			},
+			calculate(self) {
+				return {
+					BonusMS: {
+						value: self.stats.value.effectVars.namiPassiveBonusMS,
+					},
+				};
+			},
+			meta: {
+				BonusMS: {
+					isCustom: true,
+				},
+			},
+		}),
 		deriveProgressValue: (_value, self) => {
 			return self?.stats.value.effectVars.namiPassiveBonusMS ?? 0;
 		},
@@ -718,8 +735,6 @@ export const EFFECT_SPECIFICS = {
 			invalidMessage: (source) => {
 				if (source.listedChampion.value?.id !== 'Nami' satisfies IChampionId) {
 					return 'it\'s not Nami';
-				} else if ((source.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAp !== undefined) {
-					return 'Nami is already applying it herself';
 				}
 			},
 		},

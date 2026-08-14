@@ -1007,7 +1007,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			if (data && trustData) {
 				this.appliedEffects.value[existingEffectIndex]!.data.value = data;
 			} else {
-				const newData = specific.setupData(data);
+				const newData = specific.setupData(data as any);
 				if ('then' in newData) {
 					newData.then(value => this.appliedEffects.value[existingEffectIndex]!.data.value = value);
 				} else {
@@ -1027,7 +1027,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			if (data && trustData) {
 				rv.data.value = data;
 			} else {
-				const newData = specific.setupData(data);
+				const newData = specific.setupData(data as any);
 				if ('then' in newData) {
 					newData.then(value => rv.data.value = value);
 				} else {
@@ -1045,8 +1045,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	removeEffect(abilityId: IEffectAbilityId): void {
-		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === abilityId.id);
+	removeEffect(effectObjectName: IEffectObjectName): void {
+		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === effectObjectName);
 		if (~index) {
 			this.appliedEffects.value.splice(index, 1);
 			this.computed.effects.value.splice(index, 1);

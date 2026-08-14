@@ -266,7 +266,7 @@ defineExpose({
 						<button
 							class="pretend-ui-btn remove"
 							title="remove"
-							@click="damageSource?.removeEffect(effect.abilityId)"
+							@click="damageSource?.removeEffect(effect.abilityId.id)"
 						>
 							<span>remove</span>
 							<Icon class="i-ph:trash" />

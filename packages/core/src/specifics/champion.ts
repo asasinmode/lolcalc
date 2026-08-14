@@ -37,7 +37,7 @@ import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
 import { MISC } from '@lolcalc/data';
-import { ALL_CHAMPION_STATS_ENTRIES, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
+import { ALL_CHAMPION_STATS_ENTRIES, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { combineCompounding } from '../calculate/util.ts';
@@ -736,7 +736,15 @@ export const CHAMPION_SPECIFICS = {
 						return self.internalData.value.passiveMSTotalAp !== undefined;
 					},
 					set(value) {
-						self.internalData.value.passiveMSTotalAp = value ? self.stats.value.total.abilityPower : undefined;
+						if (value) {
+							self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
+							const effect = self.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0];
+							if (effect) {
+								effect.data.value[0] = 0;
+							}
+						} else {
+							self.internalData.value.passiveMSTotalAp = undefined;
+						}
 					},
 				}),
 				refresh(self) {
