@@ -752,22 +752,56 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
-	[EFFECT_OBJECT_NAME.nasusWWither]: {
+	[EFFECT_OBJECT_NAME.nasusWWither]: defineEffectSpecific<[witherProgress: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0),
 		label: 'Wither slow',
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100)];
 		},
 		maxValue: 100,
-		deriveProgressValue: (progress, _self) => {
-			// TODO
-			return progress;
+		imgText(_data, self) {
+			return Math.round(self.stats.value.effectVars.nasusWSlow ?? 0);
 		},
-		imgText(data) {
-			return data[0];
+		deriveProgressValue: (_value, self) => {
+			return self?.stats.value.effectVars.nasusWSlow ?? 0;
 		},
-		// TODO calc
-	},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== 'Nasus' satisfies IChampionId) {
+					return 'it\'s not Nasus';
+				}
+			},
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { miscDebug, effectVars, debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.nasusWWither)?.[0];
+					if (effect?.champion.value?.id === 'Nasus') {
+						const wLevel = effect.source.value?.abilityLevels.value.w ?? 1;
+						effectVars.nasusWSlow = CHAMPION_SPECIFICS.Nasus.w.calculateSlow(effect.champion.value as IChampion, effect.data.value[0], wLevel);
+						debuffs.percentageMSSlow.push(effectVars.nasusWSlow);
+
+						const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', {
+							abilityVariant: (effect.champion.value as IChampion)!.abilities.w.variants[0]!,
+							abilityLevel: wLevel,
+						});
+						if (typeof msToASSlowRatio.value === 'number') {
+							effectVars.nasusWCripple = effectVars.nasusWSlow * msToASSlowRatio.value / 100;
+							debuffs.cripple = addMultiplicative(debuffs.cripple, effectVars.nasusWCripple);
+							miscDebug.totalAdditiveCripple += effectVars.nasusWCripple;
+						} else {
+							console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.nasusWWither}] failed to calculate ms to as slow ratio`, msToASSlowRatio);
+						}
+					}
+				},
+			},
+			postTotal: {
+				handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
+					effectVars.nasusWASReduced = debuffs.totalCrippledAttackSpeed * effectVars.nasusWCripple! / (miscDebug.totalAdditiveCripple || 1);
+				},
+			},
+		},
+	}),
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;

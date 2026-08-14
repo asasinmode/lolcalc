@@ -279,13 +279,13 @@ export interface IDamageVars {
 }
 
 /** all of the variables from applied effects */
-export interface IStatsCalculationEffectVars {
+export interface IStatsCalculationEffectVars extends Pick<IDamageVars, 'nasusWSlow' | 'nasusWCripple'> {
 	/** bonus flat MS from nami passive */
 	namiPassiveBonusMS?: number;
 	/** slow % from hextech soul slow effect */
 	hextechSoulSlow?: number;
-	/** move speed slow from nasus W */
-	nasusWMSSlow?: number;
+	/** attack speed value reduced by nasus' passive */
+	nasusWASReduced?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
