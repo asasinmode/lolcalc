@@ -117,8 +117,11 @@ export const DRAGON_SPECIFICS = {
 						type: VariableType.affectedBySlowResist,
 						resultsIsPercentage: true,
 					},
+					SlowDuration: {
+						type: VariableType.affectedByTenacity,
+					},
 				},
-				uninteresting: ['SlowDuration', 'BaseUnitsToHit'],
+				uninteresting: ['BaseUnitsToHit'],
 			}),
 			calculateSlow: (progress: number, isRanged: boolean | undefined, bonusAD?: number, totalAP?: number, bonusHP?: number): number => {
 				const slowValue =	championAbilityVariableValue(isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: {
