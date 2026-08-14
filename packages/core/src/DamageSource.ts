@@ -997,12 +997,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		trustData = false,
 		source?: UnwrapRef<IDamageSourceEffect<T>['source']>,
 		champion?: UnwrapRef<IDamageSourceEffect<T>['champion']>,
+		intendedOverride = false,
 	): IDamageSourceEffect<T> {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
 		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
 		if (~existingEffectIndex) {
-			console.warn('[DamageSource addEffect] adding existing effect', abilityId);
+			!intendedOverride && console.warn('[DamageSource addEffect] adding existing effect', abilityId);
 
 			if (data && trustData) {
 				this.appliedEffects.value[existingEffectIndex]!.data.value = data;
@@ -1014,6 +1015,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					this.appliedEffects.value[existingEffectIndex]!.data.value = newData;
 				}
 			}
+
+			this.appliedEffects.value[existingEffectIndex]!.source.value = source;
+			this.appliedEffects.value[existingEffectIndex]!.champion.value = champion;
 
 			return this.appliedEffects.value[existingEffectIndex] as unknown as IDamageSourceEffect<T>;
 		} else {
