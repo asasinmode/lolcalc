@@ -320,7 +320,7 @@ function computeSectionRowColumn(
 
 		rv.isIrrelevant = false;
 		rv.numberValue = sum;
-		rv.value = sum;
+		rv.value = roundVariable(sum);
 	} else {
 		const cellValue = section.getCellValue?.(section, row.id, source, target);
 		if (cellValue) {
