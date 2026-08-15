@@ -1,4 +1,18 @@
-import type { IChampionStats } from '@lolcalc/shared';
+import type { IChampionStats, IEffectOntoTargetVars } from '@lolcalc/shared';
+import type { DamageSource } from '../DamageSource';
+import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
+import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';
+
+export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoTargetVars {
+	const rv: IEffectOntoTargetVars = {};
+
+	self.championSpecific.value?.effectOntoTargetVars?.(self, rv);
+	if (self.dragonSoul.value) {
+		(DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[self.dragonSoul.value]?.soul?.effectOntoTargetVars?.(self, rv);
+	}
+
+	return rv;
+}
 
 /** TODO intended to be a computed with everything related to source (and maybe takes in the target too, or that might be another separate thing) damage dealing */
 export function championDamage() {

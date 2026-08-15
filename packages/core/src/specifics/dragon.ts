@@ -1,7 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
-import type { IDamageVars } from '@lolcalc/shared';
-import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupInternalDragonData } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVars, IProviderGroupInternalDragonData } from '../DamageSource';
 import type { IDeriveProgressFn, IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
 import { VariableType } from '@lolcalc/shared';
@@ -96,7 +95,7 @@ export const DRAGON_SPECIFICS = {
 							championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
 						],
 						Slow: {
-							value: self.damageVars.value.hextechSoulSlow ?? 0,
+							value: self.effectsOntoTargetVars.value.hextechSoulSlow ?? 0,
 						},
 					};
 				},
@@ -135,13 +134,13 @@ export const DRAGON_SPECIFICS = {
 				}
 			},
 			extraDerivedValue: ((value, self): number => {
-				if (self?.damageVars.value.hextechSoulSlow !== undefined) {
-					return self.damageVars.value.hextechSoulSlow;
+				if (self?.effectsOntoTargetVars.value.hextechSoulSlow !== undefined) {
+					return self.effectsOntoTargetVars.value.hextechSoulSlow;
 				}
 				const { bonus, total } = self?.stats.value ?? {};
 				return DRAGON_SPECIFICS.Hextech.soul.calculateSlow(value, self?.stats.value.isRanged, bonus?.attackDamage, total?.abilityPower, bonus?.hp);
 			}) satisfies IDeriveProgressFn<true>,
-			damageVars(self, vars) {
+			effectOntoTargetVars(self, vars) {
 				const { isRanged, total, bonus } = self.stats.value;
 				vars.hextechSoulSlow = DRAGON_SPECIFICS.Hextech.soul.calculateSlow((self.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>).hextechTagged, isRanged, bonus.attackDamage, total.abilityPower, bonus.hp);
 			},
@@ -221,7 +220,7 @@ type DetectDragonVariables<T>
 
 export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	damageVars?: (self: DamageSource, vars: IDamageVars) => void;
+	effectOntoTargetVars?: IEffectOntoTargetVars;
 	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>, any>;
 	[key: string]: any;
 };

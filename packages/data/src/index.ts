@@ -1,4 +1,4 @@
-import type { IChampionStatName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, IEffectObjectName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
 import type { IItemShopStatFilter } from './meta';
@@ -105,7 +105,7 @@ export type TEffects = typeof effectData['data'];
 
 export const EFFECTS_STRINGTABLE = effectData.stringtable as Record<string, string>;
 
-export interface IEffectData extends Record<string, ({
+export interface IEffectData extends Record<IEffectObjectName, ({
 	dataKey: string;
 	description: string;
 } | {

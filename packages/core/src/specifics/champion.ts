@@ -30,9 +30,9 @@ import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
 import type { IChampion, IChampionId } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStats, IDamageVars } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
-import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IEffectOntoTargetVars, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
@@ -811,7 +811,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		w: {
 			derivedSlow: ((progress, self): number => {
-				return self?.damageVars.value.nasusWSlow ?? CHAMPION_SPECIFICS.Nasus.w.calculateSlow(self.champion.value!, progress, self.abilityLevels.value.w);
+				return self?.effectsOntoTargetVars.value.nasusWSlow ?? CHAMPION_SPECIFICS.Nasus.w.calculateSlow(self.champion.value!, progress, self.abilityLevels.value.w);
 			}) satisfies IDeriveProgressFn,
 			calculateSlow: (champion: IChampion, progress: number, wLevel: number) => {
 				const wParams: IGameVariableValueParameters['championAbility'] = {
@@ -840,10 +840,10 @@ export const CHAMPION_SPECIFICS = {
 				calculate(self) {
 					return {
 						MoveSpeedSlow: {
-							value: self.damageVars.value.nasusWSlow ?? 0,
+							value: self.effectsOntoTargetVars.value.nasusWSlow ?? 0,
 						},
 						AttackSpeedSlow: {
-							value: self.damageVars.value.nasusWCripple ?? 0,
+							value: self.effectsOntoTargetVars.value.nasusWCripple ?? 0,
 						},
 					};
 				},
@@ -883,7 +883,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 		},
-		damageVars(self, vars) {
+		effectOntoTargetVars(self, vars) {
 			vars.nasusWSlow = CHAMPION_SPECIFICS.Nasus.w.calculateSlow(self.champion.value!, self.internalData.value.wProgress, self.abilityLevels.value.w);
 			const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', {
 				abilityVariant: self.champion.value!.abilities.w.variants[0]!,
@@ -1603,7 +1603,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		} & {
 			variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
-			damageVars?: (self: DamageSource<Id>, vars: IDamageVars) => void;
+			effectOntoTargetVars?: IEffectOntoTargetVars;
 			[key: string]: any;
 		};
 

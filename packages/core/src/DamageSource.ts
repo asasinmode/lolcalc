@@ -1,6 +1,6 @@
 import type { ITextData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IDamageVars, IEffectObjectName, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, IEffectOntoTargetVars, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -8,7 +8,7 @@ import type { IGameImageData } from './misc.ts';
 import type { IChampionInternalDataMap, IChampionSpecific, IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IHypotheticalDragonSpecifics } from './specifics/dragon';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
-import type { IConcreteVariableValue, IGameAbilityData, IGameAbilitySpecific, IVariableValueResult } from './specifics/index';
+import type { IGameAbilityData, IGameAbilitySpecific, IVariableValueResult } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IDynamicVariables, IModifyVariableFunction, IReplacedGameVariable, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
@@ -20,7 +20,7 @@ import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_ST
 import { roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
-import { calculateDamageVars } from './calculate/damageVars.ts';
+import { calculateEffectsOntoTargetVars } from './calculate/damage.ts';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { gameAbilityImage } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
@@ -66,7 +66,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	maxLevel = computed((): number => this.roleQuest.value === 'top' ? 20 : 18);
 
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
-	damageVars = computed((): IDamageVars => calculateDamageVars(this));
+	/** variables of effects applied onto the damage target, like slow applied onto target from this damage source's hextech soul */
+	effectsOntoTargetVars = computed((): IEffectOntoTargetVars => calculateEffectsOntoTargetVars(this));
 
 	runes: Ref<IChampionRunes>;
 	runePathsEmpty = computed((): boolean => runesEmpty(this.runes.value));
@@ -2265,6 +2266,10 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 	}) => void;
 	/** the higher the, the **later** it will run */
 	priority?: number;
+}
+
+export interface IEffectOntoTargetVars<Id extends IChampionId = any> {
+	(self: DamageSource<Id>, vars: IEffectOntoTargetVars): void;
 }
 
 export type IDamageSourceModifyVariableFunctions = Partial<Record<IVariableType, IModifyVariableFunction[]>>;

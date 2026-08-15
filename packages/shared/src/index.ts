@@ -270,7 +270,8 @@ export interface IStatsCalculationMiscDebug {
 	ryzePMana?: number;
 }
 
-export interface IDamageVars {
+/** variables of effects applied onto the damage target */
+export interface IEffectOntoTargetVars {
 	/** slow % applied on target from the source's hextech soul */
 	hextechSoulSlow?: number;
 	/** ms slow % applied on target from Nasus' w */
@@ -279,12 +280,10 @@ export interface IDamageVars {
 	nasusWCripple?: number;
 }
 
-/** all of the variables from applied effects */
-export interface IStatsCalculationEffectVars extends Pick<IDamageVars, 'nasusWSlow' | 'nasusWCripple'> {
+/** all of the variables from currently applied effects */
+export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple'> {
 	/** bonus flat MS from nami passive */
 	namiPassiveBonusMS?: number;
-	/** slow % from hextech soul slow effect */
-	hextechSoulSlow?: number;
 	/** attack speed value reduced by nasus' passive */
 	nasusWASReduced?: number;
 	/** slow % from rylai's passive */

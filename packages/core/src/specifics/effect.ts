@@ -88,7 +88,39 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		// TODO calculate
+		variables: defineVariables({
+			known: {
+				Slow: [],
+				SlowDuration: [],
+			},
+			calculate() {
+				return {
+					Slow: {
+						value: (EFFECTS as TEffects).summonerExhaust.dataValues.Slow[1],
+					},
+					SlowDuration: {
+						value: (EFFECTS as TEffects).summonerExhaust.dataValues.DebuffDuration[1]!,
+					},
+				};
+			},
+			meta: {
+				Slow: {
+					type: VariableType.affectedBySlowResist,
+					resultsIsPercentage: true,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+			},
+		}),
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					const slow = (EFFECTS as TEffects).summonerExhaust.dataValues.Slow[1]! / 100;
+					debuffs.percentageMSSlow.push(slow);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number, isRanged?: number, bonusAD?: number, totalAP?: number, bonusHP?: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'),
@@ -975,7 +1007,7 @@ const slowEffectDescriptionObj = {
 };
 
 /** `effect.json` values for purely custom effects - if an effectObjectName has this specified, it will be put in `effect.json` during `scripts/updateData` */
-export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[string], 'dataKey'>
+export const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData[IEffectObjectName], 'dataKey'>
 	| { objectName: string }
 	| {
 		/* effect sources like summoner spells can have their effect description in a separate object from the spell description, like Cleanse's summoner spell is in shared/SummonerBoost but the effect "this unit has increased tenacity" is in shared/Cleanse, so specify the effect object key if needed, otherwise will use just the main spell object */
