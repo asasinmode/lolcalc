@@ -286,6 +286,8 @@ export interface IStatsCalculationEffectVars extends Pick<IDamageVars, 'nasusWSl
 	hextechSoulSlow?: number;
 	/** attack speed value reduced by nasus' passive */
 	nasusWASReduced?: number;
+	/** slow % from rylai's passive */
+	rylaiSlow?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

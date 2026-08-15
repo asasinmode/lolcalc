@@ -175,7 +175,7 @@ export const EFFECT_SPECIFICS = {
 					if (effect) {
 						const [progress, isRanged, bonusAD, totalAP, bonusHP] = effect.data.value;
 						effectVars.hextechSoulSlow = DRAGON_SPECIFICS.Hextech.soul.calculateSlow(progress, isRanged === 1, bonusAD, totalAP, bonusHP);
-						debuffs.percentageMSSlow.push(effectVars.hextechSoulSlow);
+						debuffs.percentageMSSlow.push(effectVars.hextechSoulSlow / 100);
 					}
 				},
 			},
@@ -419,7 +419,34 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		variables: defineVariables({
+			known: {
+				Slow: [],
+			},
+			calculate(self) {
+				return {
+					Slow: {
+						value: self.stats.value.effectVars.rylaiSlow ?? 0,
+					},
+				};
+			},
+			meta: {
+				Slow: {
+					type: VariableType.affectedBySlowResist,
+					isCustom: true,
+					resultsMultiplier: 100,
+					resultsIsPercentage: true,
+				},
+			},
+		}),
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.rylaiSlow = ITEMS_BY_NAME.rylaisScepter?.dataValues.SlowAmount;
+					debuffs.percentageMSSlow.push(effectVars.rylaiSlow);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.abyssalMaskUnmake]: defineEffectSpecific<[isUnmade: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.abyssalMask),
@@ -843,7 +870,7 @@ export const EFFECT_SPECIFICS = {
 					if (effect?.champion.value?.id === 'Nasus') {
 						const wLevel = effect.source.value?.abilityLevels.value.w ?? 1;
 						effectVars.nasusWSlow = CHAMPION_SPECIFICS.Nasus.w.calculateSlow(effect.champion.value as IChampion, effect.data.value[0], wLevel);
-						debuffs.percentageMSSlow.push(effectVars.nasusWSlow);
+						debuffs.percentageMSSlow.push(effectVars.nasusWSlow / 100);
 
 						const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', {
 							abilityVariant: (effect.champion.value as IChampion)!.abilities.w.variants[0]!,

@@ -1193,6 +1193,16 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { rimefrost: number }) {
 			return internalData.rimefrost;
 		},
+		variables: defineVariables({
+			meta: {
+				SlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+			},
+		}),
 	},
 	[ITEM_NAME_TO_ID.fiendhunterBolts]: {
 		internalDataProperties: ['oBarrage'],
