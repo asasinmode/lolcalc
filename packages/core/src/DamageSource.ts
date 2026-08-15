@@ -2254,7 +2254,7 @@ type ICalculateStatsGroupedHooks = {
 };
 
 interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) => void> {
-	handler: (self: Parameters<T>[0], args: Parameters<T>[1], meta: {
+	handler: (self: Parameters<T>[0], stats: Parameters<T>[1], meta: {
 		/** see the type definition for info */
 		calculatedVariables: IStatsCalculationVariables;
 		/** see the type definition for info */

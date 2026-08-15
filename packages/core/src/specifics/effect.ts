@@ -219,7 +219,7 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		// TODO calculate
+		// TODO unused for now, only rune unflinching will need it?
 	}),
 	[EFFECT_OBJECT_NAME.slowFlat]: defineEffectSpecific<[slowedByFlat: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.slowFlat),
@@ -232,7 +232,16 @@ export const EFFECT_SPECIFICS = {
 		imgText(data) {
 			return data[0];
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.slowFlat)?.[0];
+					if (effect?.data.value[0]) {
+						debuffs.flatMSSlow.push(effect.data.value[0]);
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.slowPercent]: defineEffectSpecific<[slowedByPercent: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.slowPercent),
@@ -245,7 +254,16 @@ export const EFFECT_SPECIFICS = {
 		imgText(data) {
 			return `${data[0]}%`;
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.slowPercent)?.[0];
+					if (effect?.data.value[0]) {
+						debuffs.percentageMSSlow.push(effect.data.value[0] / 100);
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.grievousWounds]: defineEffectSpecific<[gWounds: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),

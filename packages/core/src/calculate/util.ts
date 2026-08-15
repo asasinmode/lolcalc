@@ -47,10 +47,10 @@ export function calculateMSCapPenalty(moveSpeed: number, applyBottomCaps = true)
 	} else if (moveSpeed > CONSTS.moveSpeed.firstTopSoftCapThreshold) {
 		finalMS = moveSpeed * 0.8 + 83;
 	} else if (applyBottomCaps) {
-		if (moveSpeed < CONSTS.moveSpeed.firstBottomSoftCapThreshold) {
-			finalMS = 110 + moveSpeed * 0.5;
-		} else if (moveSpeed < 0) {
+		if (moveSpeed < 0) {
 			finalMS = 110 + moveSpeed * 0.01;
+		} else if (moveSpeed < CONSTS.moveSpeed.firstBottomSoftCapThreshold) {
+			finalMS = 110 + moveSpeed * 0.5;
 		}
 	}
 

@@ -18,6 +18,7 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 export function championDamage() {
 	// total damage multipliers. known multiplicative - haunting guise and items it builds into. immortal path somewhere
 	// actualizer
+	// exhaust effect
 	// knight's vow damage reduction
 	// vulnerable effect damage taken increase effect
 	// randuin's omen

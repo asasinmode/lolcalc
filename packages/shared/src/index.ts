@@ -243,8 +243,11 @@ export interface IStatsCalculationDebuffs {
 	/** attack speed value reduced from cripple sources */
 	totalCrippledAttackSpeed: number;
 	appliedSlow: number;
+	appliedFlatSlow: number;
 	/** list of all slows applied onto target, at the end the highest one is applied */
 	percentageMSSlow: number[];
+	/** list of all flat slows applied onto target. In classic SR there is only 1 - Lulu W, but lolcalc also has a custom flat slow effect so sum these then apply them */
+	flatMSSlow: number[];
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

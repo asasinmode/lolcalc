@@ -63,7 +63,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		cripple: 1,
 		totalCrippledAttackSpeed: 0,
 		percentageMSSlow: [],
+		flatMSSlow: [],
 		appliedSlow: 0,
+		appliedFlatSlow: 0,
 	};
 	const effectVars: IStatsCalculationEffectVars = {};
 	const miscDebug: IStatsCalculationMiscDebug = {
@@ -243,14 +245,18 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
 	{ /* ms calc */
+		debuffs.appliedSlow = Math.min(1, Math.max(0, ...debuffs.percentageMSSlow) * Math.max(0, 1 - totalPreMultipliersStats.slowResist));
+		debuffs.appliedFlatSlow = debuffs.flatMSSlow.reduce((acc, curr) => acc + curr, 0);
+
 		const percentMSMultiplier = calculatedVariables.totalBonusPercentMoveSpeed;
 		const multiplicativeMSMultiplier = calculatedVariables.totalMultiplicativeMoveSpeed;
 		const cassioPMult = calculatedVariables.cassiopeiaPassiveMSMultiplier ?? 0;
 
 		const bonusFlatMS = totalPreMultipliersStats.moveSpeed - baseStats.moveSpeed;
 
-		const effectiveFlatMS = bonusFlatMS * (1 + cassioPMult);
+		const effectiveFlatMS = (bonusFlatMS - debuffs.appliedFlatSlow) * (1 + cassioPMult);
 		const effectivePercentMS = percentMSMultiplier * (1 + cassioPMult);
+
 		const baseRawMS = (baseStats.moveSpeed + effectiveFlatMS) * (1 + effectivePercentMS);
 
 		const multFactor = 1 + combineCompounding(
@@ -259,11 +265,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeed.multFactorDenominator - multiplicativeMSMultiplier)),
 		);
 
-		debuffs.appliedSlow = Math.max(0, ...debuffs.percentageMSSlow) * (1 - totalPreMultipliersStats.slowResist);
+		const rawTotalMS = baseRawMS > 0
+			? baseRawMS * multFactor * (1 - debuffs.appliedSlow)
+			: baseRawMS;
 
-		const rawTotalMS = baseRawMS * multFactor * (1 - debuffs.appliedSlow);
-
-		const penalty = calculateMSCapPenalty(rawTotalMS, initialStats.moveSpeed >= CONSTS.moveSpeed.firstBottomSoftCapThreshold || debuffs.appliedSlow !== 0);
+		const penalty = calculateMSCapPenalty(rawTotalMS, initialStats.moveSpeed >= CONSTS.moveSpeed.firstBottomSoftCapThreshold || debuffs.appliedSlow !== 0 || debuffs.appliedFlatSlow !== 0);
 		calculatedVariables.movespeedSoftCapPenalty = penalty;
 
 		totalPreMultipliersStats.moveSpeed = rawTotalMS - penalty;
