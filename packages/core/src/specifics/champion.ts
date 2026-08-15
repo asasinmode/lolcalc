@@ -848,6 +848,9 @@ export const CHAMPION_SPECIFICS = {
 					};
 				},
 				meta: {
+					MaxSlowTooltipOnly: {
+						type: VariableType.affectedBySlowResist,
+					},
 					MoveSpeedSlow: {
 						isCustom: true,
 						resultsIsPercentage: true,

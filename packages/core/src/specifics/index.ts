@@ -278,6 +278,9 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVar
 	[VariableType.affectedByTenacity](value, self) {
 		return Math.max(CONSTS.minCCDuration, value * (1 - (self.calculationDamageTarget.value?.stats.value.total.tenacity ?? 0)));
 	},
+	[VariableType.affectedBySlowResist](value, self) {
+		return value * (1 - (self.calculationDamageTarget.value?.stats.value.total.slowResist ?? 0));
+	},
 };
 
 export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [IVariableType, IGlobalModifyVariableFunction][];
@@ -293,7 +296,7 @@ export interface ISelectEffectSourceProps {
 }
 
 export interface IExtraOnValueUpdate {
-	(value?: number, self: DamageSource): void;
+	(value: number | undefined, self: DamageSource): void;
 }
 
 export interface IDeriveProgressFn<Maybe extends boolean = false> {
