@@ -2254,6 +2254,11 @@ defineExpose({
 							inset-block-end: calc(
 								anchor(end) + var(--section-header-row-pb) + 2 * var(--section-row-btn-size) - 0.5px
 							);
+							justify-self: anchor-center;
+
+							.hover-tooltip.effect {
+								--at-apply: 'self-center';
+							}
 						}
 
 						> .hover-tooltip.custom {
