@@ -552,6 +552,7 @@ export function replaceGameVariables(
 		}
 
 		const varValueSuffix = isPercentage ? '%' : (optionalPercent ?? '');
+		const modifyVariableFns = meta?.type && modifyVariableFunctions[meta.type];
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
@@ -574,14 +575,14 @@ export function replaceGameVariables(
 				isV2Number ? roundNumber(variable[1] as number * multiplier) : variable[1],
 			] as [string | number, string | number];
 
-			if (meta?.type && modifyVariableFunctions[meta.type]) {
+			if (modifyVariableFns) {
 				if (isV1Number) {
-					variable[0] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc as number) as number, variable[0]!);
+					variable[0] = modifyVariableFns.reduce((acc, modify) => modify(acc as number) as number, variable[0]!);
 				} else {
 					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[0]);
 				}
 				if (isV2Number) {
-					variable[1] = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc as number) as number, variable[1]!);
+					variable[1] = modifyVariableFns.reduce((acc, modify) => modify(acc as number) as number, variable[1]!);
 				} else {
 					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[1]);
 				}
@@ -625,8 +626,8 @@ export function replaceGameVariables(
 
 		const baseValue = roundNumber(variable * multiplier);
 
-		if (meta?.type && modifyVariableFunctions[meta.type]) {
-			variable = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable);
+		if (modifyVariableFns) {
+			variable = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, variable);
 		}
 
 		variable = roundNumber(variable * multiplier);
@@ -684,12 +685,13 @@ export function replaceGameVariables(
 						: (value as number[])[0];
 				}
 
-				if (meta?.type && modifyVariableFunctions[meta.type]) {
+				const modifyVariableFns = meta?.type && modifyVariableFunctions[meta.type];
+				if (modifyVariableFns) {
 					if (Array.isArray(value)) {
-						(value as number[])[0] = roundNumber(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[0]!));
-						(value as number[])[1] = roundNumber(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[1]!));
+						value[0] = roundNumber(modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[0] as number));
+						value[1] = roundNumber(modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[1] as number));
 					} else if (typeof value === 'number') {
-						value = roundNumber(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value as number));
+						value = roundNumber(modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value as number));
 					}
 				}
 

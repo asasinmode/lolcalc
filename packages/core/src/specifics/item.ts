@@ -2136,6 +2136,9 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.bootsOfSwiftness]: {
+		variables: defineVariables({
+			uninteresting: ['SlowResistTooltip'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemPassivesStats }) {

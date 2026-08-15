@@ -8,7 +8,7 @@ import type { IGameImageData } from './misc.ts';
 import type { IChampionInternalDataMap, IChampionSpecific, IHypotheticalChampionSpecifics } from './specifics/champion';
 import type { IHypotheticalDragonSpecifics } from './specifics/dragon';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
-import type { IGameAbilityData, IGameAbilitySpecific } from './specifics/index';
+import type { IConcreteVariableValue, IGameAbilityData, IGameAbilitySpecific, IVariableValueResult } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
 import type { IDynamicVariables, IModifyVariableFunction, IReplacedGameVariable, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
@@ -1256,6 +1256,29 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}),
 	};
 
+	appliedEffectsModifyVariableFunctions = computed((): [IVariableType, IModifyVariableFunction[]][] => {
+		const rv: [IVariableType, IModifyVariableFunction[]][] = [];
+
+		if (!this.isResultsCopy) {
+			return rv;
+		}
+
+		for (const effect of this.appliedEffects.value) {
+			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
+			/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
+			if (specific?.modifyVariable && (specific.isActive ?? defaultEffectIsActive)(effect.data.value)) {
+				const target = rv.find(group => group[0] === specific.modifyVariable!.type);
+				if (target) {
+					target[1].push(value => specific.modifyVariable!.handler(value, effect.data.value));
+				} else {
+					rv.push([specific.modifyVariable.type, [value => specific.modifyVariable!.handler(value, effect.data.value)]]);
+				}
+			}
+		}
+
+		return rv;
+	});
+
 	modifyVariableFunctions = computed((): IDamageSourceModifyVariableFunctions => {
 		const rv: IDamageSourceModifyVariableFunctions = {};
 
@@ -1270,16 +1293,33 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
 			rv[modifyVariableType] ??= [];
+			rv[modifyVariableType].push(value => modifyVariableFn(value, this.calculationDamageTarget.value));
+		}
+
+		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
+			rv[entry[0]] ??= [];
+			rv[entry[0]]!.push(...entry[1]);
+		}
+
+		return rv;
+	});
+
+	/** same as `DamageSource.modifyVariableFunctions` but for use for effect variables. Main difference is `GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES` being passed `this` instead of `this.calculationDamageTarget`, since effect variables are strictly only for `this`, while other variables (like item ones) should use calculateionDamageTarget's stats */
+	effectVariablesModifyFunctions = computed((): IDamageSourceModifyVariableFunctions => {
+		const rv: IDamageSourceModifyVariableFunctions = {};
+
+		if (!this.isResultsCopy) {
+			return rv;
+		}
+
+		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
+			rv[modifyVariableType] ??= [];
 			rv[modifyVariableType].push(value => modifyVariableFn(value, this));
 		}
 
-		for (const effect of this.appliedEffects.value) {
-			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
-			/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
-			if (specific?.modifyVariable && (specific.isActive ?? defaultEffectIsActive)(effect.data.value)) {
-				rv[specific.modifyVariable.type] ??= [];
-				rv[specific.modifyVariable.type]!.push(value => specific.modifyVariable!.handler(value, effect.data.value));
-			}
+		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
+			rv[entry[0]] ??= [];
+			rv[entry[0]]!.push(...entry[1]);
 		}
 
 		return rv;
@@ -1825,13 +1865,35 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 
 	if (specific.variables) {
 		rv.resultVariables = computed(() => {
-			const variables = calculateDynamicVariables(self, self.calculationDamageTarget.value, specific.variables);
-			// TODO value should be affected by variable modify fns?, like hextech soul slow by slow resist
-			return new Map(variables?.values
-				? Object.entries(variables.values).map(([variableName, value]) => {
+			const vars = calculateDynamicVariables(self, self.calculationDamageTarget.value, specific.variables);
+			return new Map(vars?.values
+				? Object.entries(vars.values).map(([variableName, value]) => {
+					let baseValue: IVariableValueResult['value'];
+					const modifyVariableFunctions = specific.variables!.meta?.[variableName]?.type && self.effectVariablesModifyFunctions.value[specific.variables!.meta?.[variableName]?.type];
+
+					if (Array.isArray(value)) {
+						console.error('[DamageSource computeAppliedEffect] unexpected computed variable array value', effect.abilityId.id, variableName, value);
+					} else if (modifyVariableFunctions) {
+						if (Array.isArray(value.value)) {
+							baseValue = [value.value?.[0], value.value?.[1]];
+							if (typeof value.value?.[0] === 'number') {
+								value.value[0] = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number) as number, value.value[0]!);
+							}
+							if (typeof value.value?.[1] === 'number') {
+								value.value[1] = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number) as number, value.value[1]!);
+							}
+						} else {
+							baseValue = value.value;
+							value.value = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number) as number, value.value);
+						}
+					}
+
 					return [
 						variableName,
-						Object.assign(value, { meta: specific.variables!.meta?.[variableName] }),
+						Object.assign(value, {
+							meta: specific.variables!.meta?.[variableName],
+							baseValue,
+						} satisfies Partial<IReplacedGameVariable>),
 					];
 				}) as [string, IReplacedGameVariable][]
 				: undefined);
