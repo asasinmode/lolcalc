@@ -63,6 +63,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		cripple: 1,
 		totalCrippledAttackSpeed: 0,
 		percentageMSSlow: [],
+		appliedSlow: 0,
 	};
 	const effectVars: IStatsCalculationEffectVars = {};
 	const miscDebug: IStatsCalculationMiscDebug = {
@@ -242,7 +243,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
 	{ /* ms calc */
-		// TODO slow, slow resist
 		const percentMSMultiplier = calculatedVariables.totalBonusPercentMoveSpeed;
 		const multiplicativeMSMultiplier = calculatedVariables.totalMultiplicativeMoveSpeed;
 		const cassioPMult = calculatedVariables.cassiopeiaPassiveMSMultiplier ?? 0;
@@ -259,10 +259,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeed.multFactorDenominator - multiplicativeMSMultiplier)),
 		);
 
-		const rawTotalMS = baseRawMS * multFactor;
+		debuffs.appliedSlow = Math.max(0, ...debuffs.percentageMSSlow) * (1 - totalPreMultipliersStats.slowResist);
 
-		// TODO or applied slow?
-		const penalty = calculateMSCapPenalty(rawTotalMS, initialStats.moveSpeed >= CONSTS.moveSpeed.firstBottomSoftCapThreshold);
+		const rawTotalMS = baseRawMS * multFactor * (1 - debuffs.appliedSlow);
+
+		const penalty = calculateMSCapPenalty(rawTotalMS, initialStats.moveSpeed >= CONSTS.moveSpeed.firstBottomSoftCapThreshold || debuffs.appliedSlow !== 0);
 		calculatedVariables.movespeedSoftCapPenalty = penalty;
 
 		totalPreMultipliersStats.moveSpeed = rawTotalMS - penalty;

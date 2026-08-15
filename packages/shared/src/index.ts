@@ -242,6 +242,7 @@ export interface IStatsCalculationDebuffs {
 	cripple: number;
 	/** attack speed value reduced from cripple sources */
 	totalCrippledAttackSpeed: number;
+	appliedSlow: number;
 	/** list of all slows applied onto target, at the end the highest one is applied */
 	percentageMSSlow: number[];
 }
