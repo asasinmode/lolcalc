@@ -255,13 +255,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 		const multFactor = 1 + combineCompounding(
 			multiplicativeMSMultiplier,
-			/* something mathy going on that I don't quite understand, to do with rational curves */
-			cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeedMultFactorDenominator - multiplicativeMSMultiplier)),
+			/* something mathy going on to do with rational curves */
+			cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeed.multFactorDenominator - multiplicativeMSMultiplier)),
 		);
 
 		const rawTotalMS = baseRawMS * multFactor;
 
-		const penalty = calculateMSCapPenalty(rawTotalMS);
+		// TODO or applied slow?
+		const penalty = calculateMSCapPenalty(rawTotalMS, initialStats.moveSpeed >= CONSTS.moveSpeed.firstBottomSoftCapThreshold);
 		calculatedVariables.movespeedSoftCapPenalty = penalty;
 
 		totalPreMultipliersStats.moveSpeed = rawTotalMS - penalty;

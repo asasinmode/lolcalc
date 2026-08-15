@@ -1,3 +1,5 @@
+import { CONSTS } from '@lolcalc/data';
+
 /**
 	* multiplicative scaling according to [wiki](https://wiki.leagueoflegends.com/en-us/Stacking#Stacks_multiplicatively)
 	* note that the `currentValue` should start at `1` then after all multiplicative things are added, the final value should be `1 - [summed multiplicative things]`
@@ -37,17 +39,19 @@ export function combineRecursive(current: number, value: number) {
 }
 
 /** soft cap according to wiki https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps */
-export function calculateMSCapPenalty(moveSpeed: number) {
+export function calculateMSCapPenalty(moveSpeed: number, applyBottomCaps = true) {
 	let finalMS = moveSpeed;
 
-	if (moveSpeed > 490) {
+	if (moveSpeed > CONSTS.moveSpeed.secondTopSoftCapThreshold) {
 		finalMS = moveSpeed * 0.5 + 230;
-	} else if (moveSpeed > 415) {
+	} else if (moveSpeed > CONSTS.moveSpeed.firstTopSoftCapThreshold) {
 		finalMS = moveSpeed * 0.8 + 83;
-	} else if (moveSpeed < 220) {
-		finalMS = 110 + moveSpeed * 0.5;
-	} else if (moveSpeed < 0) {
-		finalMS = 110 + moveSpeed * 0.01;
+	} else if (applyBottomCaps) {
+		if (moveSpeed < CONSTS.moveSpeed.firstBottomSoftCapThreshold) {
+			finalMS = 110 + moveSpeed * 0.5;
+		} else if (moveSpeed < 0) {
+			finalMS = 110 + moveSpeed * 0.01;
+		}
 	}
 
 	return moveSpeed - finalMS;

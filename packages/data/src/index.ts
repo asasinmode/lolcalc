@@ -22,8 +22,13 @@ export const PATCH_VERSION = {
 
 export const CONSTS = {
 	baseAttackSpeedCap: 3.003,
-	/** something mathy related to asymptotes that I don't quite understand */
-	moveSpeedMultFactorDenominator: 2.5,
+	moveSpeed: {
+		/** something mathy related to asymptotes/rational curves */
+		multFactorDenominator: 2.5,
+		firstTopSoftCapThreshold: 415,
+		secondTopSoftCapThreshold: 490,
+		firstBottomSoftCapThreshold: 220,
+	},
 	/** the value below which tenacity cannot reduce the duration of a cc, according to [the wiki](https://wiki.leagueoflegends.com/en-us/Tenacity) */
 	minCCDuration: 0.3,
 };
