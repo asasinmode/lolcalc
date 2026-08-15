@@ -74,7 +74,7 @@ const championEffects = shallowRef<IEffectOptionGroup['options']>(EFFECT_SPECIFI
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
 
-		const searchString = createSearchString(effectSpecific.label);
+		const searchString = createSearchString(`${effectSpecific.label};${computeEffectDescription(effectObjectName).description};${sourceAbilityId.id}`);
 		effectSearchStrings.set(effectObjectName, searchString);
 
 		return {
@@ -195,12 +195,36 @@ const appliedEffectsWithSearchStrings = computed((): IAppliedEffectWithSearchStr
 	})),
 );
 
-function searchFilteredEffects<T extends { searchString?: string }>(options?: T[]): T[] | undefined {
+function searchFilterEffects<T extends { searchString?: string }>(options?: T[]): T[] | undefined {
 	if (search.value) {
 		return options?.filter(option =>
 			splitSearch.value.every(word => !option.searchString || option.searchString.includes(word)));
 	}
 	return options;
+}
+
+const searchFilteredAppliedEffects = computed(() => searchFilterEffects(appliedEffectsWithSearchStrings.value));
+const searchFilteredEffects = computed(() => {
+	const rv: Partial<Record<TAbilityType, IEffectOptionGroup['options']>> = {};
+
+	for (const group of effectOptionGroups.value) {
+		rv[group.type] = searchFilterEffects(group.options);
+	}
+
+	return rv;
+});
+
+async function activateFirstSearchEffect() {
+	if (search.value) {
+		const firstEffect = Object.values(searchFilteredEffects.value)?.find(effects => effects.length)?.[0];
+		if (damageSource.value && firstEffect) {
+			const specific = EFFECT_SPECIFICS[firstEffect.abilityId.id];
+			const max = typeof specific.maxValue === 'function' ? (await specific.maxValue()) : specific.maxValue;
+			if (!damageSource.value.getEffect(firstEffect.abilityId.id)) {
+				damageSource.value.addEffect(firstEffect.abilityId, [Math.min(max ?? 1, 100)]);
+			}
+		}
+	}
 }
 
 defineExpose({
@@ -227,6 +251,7 @@ defineExpose({
 					autofocus
 					type="text"
 					:data-empty="!search"
+					@keydown.enter="activateFirstSearchEffect"
 				>
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
@@ -251,7 +276,7 @@ defineExpose({
 		</header>
 		<ul :inert="isLoading">
 			<li
-				v-for="{ effect } in searchFilteredEffects(appliedEffectsWithSearchStrings)"
+				v-for="{ effect } in searchFilteredAppliedEffects"
 				:key="effect.abilityId.id"
 				:style="`anchor-name: --effect-${effect.abilityId.id}-applied`"
 			>
@@ -282,7 +307,7 @@ defineExpose({
 			<h2>{{ group.label }}</h2>
 			<ul :inert="isLoading">
 				<li
-					v-for="effect in damageSource && searchFilteredEffects(group.options)"
+					v-for="effect in damageSource && searchFilteredEffects[group.type]"
 					:key="`${group.type}-${effect.abilityId.id}`"
 					:style="`anchor-name: --effect-${effect.abilityId.id}-all`"
 				>
