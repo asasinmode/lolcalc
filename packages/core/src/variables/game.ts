@@ -5,7 +5,7 @@ import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } fr
 
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { CHAMPION_LEVEL } from '@lolcalc/shared';
-import { roundVariable } from '@lolcalc/shared/utils.ts';
+import { roundNumber } from '@lolcalc/shared/utils.ts';
 
 export interface IReplacedGameVariable {
 	baseValue: NonNullable<IVariableValueResult['value']>;
@@ -509,7 +509,7 @@ export function replaceGameVariables(
 
 		if (allValues) {
 			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
-				let parsedValue: string | number = roundVariable(value * multiplier);
+				let parsedValue: string | number = roundNumber(value * multiplier);
 				if (multiplier !== 1) {
 					parsedValue = `${parsedValue}%`;
 				}
@@ -570,8 +570,8 @@ export function replaceGameVariables(
 			const isV2Number = typeof variable[1] === 'number';
 
 			const baseValue = [
-				isV1Number ? roundVariable(variable[0] as number * multiplier) : variable[0],
-				isV2Number ? roundVariable(variable[1] as number * multiplier) : variable[1],
+				isV1Number ? roundNumber(variable[0] as number * multiplier) : variable[0],
+				isV2Number ? roundNumber(variable[1] as number * multiplier) : variable[1],
 			] as [string | number, string | number];
 
 			if (meta?.type && modifyVariableFunctions[meta.type]) {
@@ -588,10 +588,10 @@ export function replaceGameVariables(
 			}
 
 			if (isV1Number) {
-				variable[0] = roundVariable(variable[0] as number * multiplier);
+				variable[0] = roundNumber(variable[0] as number * multiplier);
 			}
 			if (isV2Number) {
-				variable[1] = roundVariable(variable[1] as number * multiplier);
+				variable[1] = roundNumber(variable[1] as number * multiplier);
 			}
 
 			variables.set(variableName, {
@@ -609,27 +609,27 @@ export function replaceGameVariables(
 				: `%i:meleeactive% ${tagWrapStart}${
 					isV1Number
 						? (typeof roundReplaced === 'number'
-								? roundVariable(variable[0] as number, roundReplaced)
+								? roundNumber(variable[0] as number, roundReplaced)
 								: roundReplaced
 									? Math.round(variable[0] as number)
 									: variable[0])
 						: variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
 					isV2Number
 						? (typeof roundReplaced === 'number'
-								? roundVariable(variable[1] as number, roundReplaced)
+								? roundNumber(variable[1] as number, roundReplaced)
 								: roundReplaced
 									? Math.round(variable[1] as number)
 									: variable[1])
 						: variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 		}
 
-		const baseValue = roundVariable(variable * multiplier);
+		const baseValue = roundNumber(variable * multiplier);
 
 		if (meta?.type && modifyVariableFunctions[meta.type]) {
 			variable = modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, variable);
 		}
 
-		variable = roundVariable(variable * multiplier);
+		variable = roundNumber(variable * multiplier);
 		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage, metaSuffix, actualName: actualVariableName });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
@@ -642,7 +642,7 @@ export function replaceGameVariables(
 		return `${iconPrefix}${tagWrapStart}${replaceWithName
 			? nameReplacement
 			: (typeof roundReplaced === 'number'
-					? roundVariable(variable, roundReplaced)
+					? roundNumber(variable, roundReplaced)
 					: roundReplaced
 						? Math.round(variable)
 						: variable)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
@@ -662,7 +662,7 @@ export function replaceGameVariables(
 					console.warn('[replaceGameVariables] custom got undefined dynamic value', variableName, dynamicVariable, variableValueFunctionParams);
 				} else if (Array.isArray(dynamicValue)) {
 					if (typeof dynamicValue[0] === 'number' && typeof dynamicValue[1] === 'number') {
-						value = [roundVariable(dynamicValue[0]), roundVariable(dynamicValue[1])];
+						value = [roundNumber(dynamicValue[0]), roundNumber(dynamicValue[1])];
 						baseValue = [dynamicValue[0], dynamicValue[1]];
 					} else if (Array.isArray(dynamicValue[0]) || Array.isArray(dynamicValue[1])) {
 						console.warn('[replaceGameVariables] custom got nested melee/ranged values', variableName, dynamicVariable, variableValueFunctionParams);
@@ -671,7 +671,7 @@ export function replaceGameVariables(
 					}
 				} else {
 					if (typeof dynamicValue === 'number') {
-						value = roundVariable(dynamicValue);
+						value = roundNumber(dynamicValue);
 						baseValue = dynamicValue;
 					} else {
 						value = dynamicValue;
@@ -686,10 +686,10 @@ export function replaceGameVariables(
 
 				if (meta?.type && modifyVariableFunctions[meta.type]) {
 					if (Array.isArray(value)) {
-						(value as number[])[0] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[0]!));
-						(value as number[])[1] = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[1]!));
+						(value as number[])[0] = roundNumber(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[0]!));
+						(value as number[])[1] = roundNumber(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, (value as number[])[1]!));
 					} else if (typeof value === 'number') {
-						value = roundVariable(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value as number));
+						value = roundNumber(modifyVariableFunctions[meta.type]!.reduce((acc, modify) => modify(acc) as number, value as number));
 					}
 				}
 
@@ -856,8 +856,8 @@ function formatCalculatesFromPartValue(value: Exclude<ICalculatesFromPart['value
 	}
 
 	return typeof value === 'number'
-		? `${isPercentage ? roundVariable(value * multiplier, roundTo) : roundVariable(value * multiplier, roundTo)}${valueSuffix}`
-		: `${isPercentage ? roundVariable(value.min * multiplier, roundTo) : roundVariable(value.min * multiplier, roundTo)}${valueSuffix} - ${isPercentage ? roundVariable(value.max * multiplier, roundTo) : roundVariable(value.max * multiplier, roundTo)}${valueSuffix}`;
+		? `${isPercentage ? roundNumber(value * multiplier, roundTo) : roundNumber(value * multiplier, roundTo)}${valueSuffix}`
+		: `${isPercentage ? roundNumber(value.min * multiplier, roundTo) : roundNumber(value.min * multiplier, roundTo)}${valueSuffix} - ${isPercentage ? roundNumber(value.max * multiplier, roundTo) : roundNumber(value.max * multiplier, roundTo)}${valueSuffix}`;
 }
 
 function variableExtendedEquals(

@@ -242,6 +242,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
 	{ /* ms calc */
+		// TODO slow, slow resist
 		const percentMSMultiplier = calculatedVariables.totalBonusPercentMoveSpeed;
 		const multiplicativeMSMultiplier = calculatedVariables.totalMultiplicativeMoveSpeed;
 		const cassioPMult = calculatedVariables.cassiopeiaPassiveMSMultiplier ?? 0;
@@ -254,7 +255,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 		const multFactor = 1 + combineCompounding(
 			multiplicativeMSMultiplier,
-			/* something mathy going on that I don't quite understand */
+			/* something mathy going on that I don't quite understand, to do with rational curves */
 			cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeedMultFactorDenominator - multiplicativeMSMultiplier)),
 		);
 

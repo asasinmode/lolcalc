@@ -10,7 +10,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupIma
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
-import { clamp, roundVariable } from '@lolcalc/shared/utils.ts';
+import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
@@ -91,7 +91,7 @@ const gluttonousGreavesSpecific = {
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
 					itemStatIncreases[bootsId] = {
-						PercentOmnivampMod: calculatedVariables.gluttonousImmortalOmnivamp
+						PercentOmnivampMod: calculatedVariables.gluttonousImmortalOmnivamp,
 					};
 				}
 			},
@@ -428,7 +428,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
 					const { practice = 0 } = self.internalItemData.value as IInternalItemDataOf<'yunTal'>;
-					calculatedVariables.yuntalCritChance = roundVariable(practice / 100, 2);
+					calculatedVariables.yuntalCritChance = roundNumber(practice / 100, 2);
 					itemPassivesStats.critChance += calculatedVariables.yuntalCritChance;
 					itemStatIncreases[ITEM_NAME_TO_ID.yunTal] = {
 						FlatCritChanceMod: practice,
@@ -1287,7 +1287,7 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			const { magnification } = self.internalItemData.value as { magnification: number };
 			const { dataValues: { MaxRange, MaxDamageAmp } } = ITEMS_BY_NAME.hexoptics;
-			return magnification && `${roundVariable(Math.round((magnification / MaxRange * 100 * MaxDamageAmp) * 10) / 10)}%`;
+			return magnification && `${roundNumber(Math.round((magnification / MaxRange * 100 * MaxDamageAmp) * 10) / 10)}%`;
 		},
 		calculateHooks: {
 			preItemTotal: {

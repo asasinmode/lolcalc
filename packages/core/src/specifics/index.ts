@@ -271,6 +271,9 @@ interface IGlobalModifyVariableFunction {
 	(value: number, self: DamageSource): number;
 }
 
+// TODO
+// modify effect variables
+// slow resist
 const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVariableFunction>> = {
 	[VariableType.affectedByTenacity](value, self) {
 		return Math.max(CONSTS.minCCDuration, value * (1 - (self.calculationDamageTarget.value?.stats.value.total.tenacity ?? 0)));

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IGameImageData } from '@lolcalc/core/misc';
-import { roundVariable } from '@lolcalc/shared/utils';
+import { roundNumber } from '@lolcalc/shared/utils';
 
 const props = defineProps<{
 	idSuffix: string;
@@ -63,7 +63,7 @@ const derivedValue = computed(() => {
 			@input="updateModelValue"
 		>
 		<output :for="`xtrprgr-${idSuffix}`" aria-live="off">
-			{{ derivedValue !== undefined ? roundVariable(derivedValue, 1) : 0 }}{{ derivedSymbolSuffix }}
+			{{ derivedValue !== undefined ? roundNumber(derivedValue, 1) : 0 }}{{ derivedSymbolSuffix }}
 		</output>
 	</article>
 </template>

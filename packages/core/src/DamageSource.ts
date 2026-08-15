@@ -17,7 +17,7 @@ import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts'
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, EFFECTS, EFFECTS_STRINGTABLE, ICON_COOLDOWN_IMG, ITEMS, MISC, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
-import { roundVariable } from '@lolcalc/shared/utils.ts';
+import { roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
 import { calculateDamageVars } from './calculate/damageVars.ts';
@@ -593,7 +593,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
-			.map(([, value]) => value && roundVariable(value, ROUNDING_PRECISION))
+			.map(([, value]) => value && roundNumber(value, ROUNDING_PRECISION))
 			.join('\'');
 
 		const effectsData: string[] = [];
@@ -605,7 +605,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				continue;
 			}
 			const index = EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id);
-			const data = effect.data.value.map(v => v === undefined ? '' : roundVariable(v, ROUNDING_PRECISION)).join('\'');
+			const data = effect.data.value.map(v => v === undefined ? '' : roundNumber(v, ROUNDING_PRECISION)).join('\'');
 			let sourceData: string | undefined;
 			if (this.sourcesTargetsRef && effect.source.value) {
 				let index = this.sourcesTargetsRef[0].value.indexOf(effect.source.value.id);
@@ -634,8 +634,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			`${runePathKeys.indexOf(this.runes.value.paths.primary)}${primarySlots.join('')}`,
 			`${this.runes.value.paths.secondary ? runePathKeys.indexOf(this.runes.value.paths.secondary) : ''}${secondarySlots.join('')}`,
 			shards.join(''),
-			roundVariable(this.currentHealth.value, 3),
-			roundVariable(this.currentAbilityResource.value, 3),
+			roundNumber(this.currentHealth.value, 3),
+			roundNumber(this.currentAbilityResource.value, 3),
 			Object.values(this.abilityLevels.value).map(level => level ?? 0).join(''),
 			Object.values(this.abilityVariantsIndexes.value).join(''),
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
@@ -1311,9 +1311,9 @@ export function formatChampionStatValue(statName: IChampionStatName, value: numb
 	const meta = CHAMPION_STAT_META[statName];
 	const multiplier = meta.isPercentage ? 100 : 1;
 	return meta.decimal
-		? roundVariable(value * multiplier, meta.decimal)
+		? roundNumber(value * multiplier, meta.decimal)
 		/* round variable here before rounding to try and get rid of small floating artifacts like `348.499999994` not being `349` */
-		: Math.round(roundVariable(value, 3) * multiplier);
+		: Math.round(roundNumber(value, 3) * multiplier);
 }
 
 export function computeItemDescription(
@@ -1348,7 +1348,7 @@ export function computeItemDescription(
 				icon: STAT_ICON[statName as IItemStat],
 				statName: statName as IItemStat,
 				baseValue,
-				totalValue: baseValue + roundVariable(increasedBy ?? 0),
+				totalValue: baseValue + roundNumber(increasedBy ?? 0),
 				increasedBy,
 			};
 		});

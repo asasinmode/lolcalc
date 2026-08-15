@@ -1,3 +1,5 @@
+// todo 16.17 update needs https://github.com/CommunityDragon/CDTB/pull/120 ?
+// not present on newest version https://raw.communitydragon.org/16.15/game/clientstates/gameplay/ux/lol/playerstats.cdtb.json
 import type { ISpecificVariables } from '@lolcalc/core/specifics';
 import type { IChampionAbilitySpecific, IChampionAbilityVariantSpecific, IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
 import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';

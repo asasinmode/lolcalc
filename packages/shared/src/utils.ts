@@ -1,4 +1,4 @@
-export function roundVariable(value: number, precision = 2, epsilon = 1e-9): number {
+export function roundNumber(value: number, precision = 2, epsilon = 1e-9): number {
 	const int = Math.round(value);
 	if (Math.abs(value - int) < epsilon) {
 		return int;

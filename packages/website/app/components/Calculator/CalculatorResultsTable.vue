@@ -21,7 +21,7 @@ import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_ID_TO_KEY, CHAMPION_IMAGES, imgUrl, INTERESTING_SOULS_DRAGONS, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
-import { roundVariable } from '@lolcalc/shared/utils';
+import { roundNumber } from '@lolcalc/shared/utils';
 
 defineProps<{
 	showResults: boolean;
@@ -320,7 +320,7 @@ function computeSectionRowColumn(
 
 		rv.isIrrelevant = false;
 		rv.numberValue = sum;
-		rv.value = roundVariable(sum);
+		rv.value = roundNumber(sum);
 	} else {
 		const cellValue = section.getCellValue?.(section, row.id, source, target);
 		if (cellValue) {
@@ -442,7 +442,7 @@ const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (sect
 	const rv = gameVariablesCellValue(rowId, computedEffect?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
 	/* other variable's values are rounded by `replaceGameVariables` but these are gotten raw from IEffectSpecifics.variables.calulate() so round them here */
 	if (typeof rv?.numberValue === 'number') {
-		rv.value = `${roundVariable(rv.numberValue)}${rv.meta?.resultsIsPercentage ? '%' : ''}`;
+		rv.value = `${roundNumber(rv.numberValue)}${rv.meta?.resultsIsPercentage ? '%' : ''}`;
 	}
 	return rv;
 };
@@ -464,10 +464,10 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 			rv.value = '?';
 			rv.isUnknown = true;
 		} else if (Array.isArray(value)) {
-			rv.value = `${typeof value[0] === 'number' && multiplier ? roundVariable(value[0] * multiplier) : value[0]}${suffix} | ${typeof value[1] === 'number' && multiplier ? roundVariable(value[1] * multiplier) : value[1]}${suffix}`;
+			rv.value = `${typeof value[0] === 'number' && multiplier ? roundNumber(value[0] * multiplier) : value[0]}${suffix} | ${typeof value[1] === 'number' && multiplier ? roundNumber(value[1] * multiplier) : value[1]}${suffix}`;
 		} else {
 			if (typeof value === 'number') {
-				const totalValue = multiplier ? roundVariable(value * multiplier) : value;
+				const totalValue = multiplier ? roundNumber(value * multiplier) : value;
 				rv.value = `${totalValue}${suffix}`;
 				rv.numberValue = totalValue;
 			} else {
@@ -789,7 +789,7 @@ function calculateComputedRowComparisonMap(row: IComputedSectionRow, sectionId: 
 			const b = colB.numberValue;
 			if (a !== undefined && b !== undefined) {
 				const meta = sectionId === 'a-stats' ? CHAMPION_STAT_META[row.rowId as IChampionStatName] : undefined;
-				map[idB] = roundVariable((a - b) * (meta?.isPercentage ? 100 : 1));
+				map[idB] = roundNumber((a - b) * (meta?.isPercentage ? 100 : 1));
 			}
 		}
 
