@@ -267,7 +267,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		calculatedVariables.movespeedSoftCapPenalty = penalty;
 
 		totalPreMultipliersStats.moveSpeed = rawTotalMS - penalty;
-		bonusStats.moveSpeed = rawTotalMS - baseStats.moveSpeed - penalty;
+		bonusStats.moveSpeed = Math.max(0, rawTotalMS - baseStats.moveSpeed - penalty);
 	}
 
 	// eslint-disable-next-line no-lone-blocks
