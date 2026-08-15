@@ -1087,7 +1087,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${spellKey}" not found in target data`);
 					}
 
-					const effectData: Extract<IEffectData[string], { sharedSpellObjectKey: string }> | Extract<IEffectData[string], { championSpellObjectKey: string }> = {
+					const effectData: Extract<IEffectData[keyof IEffectData], { sharedSpellObjectKey: string }> | Extract<IEffectData[keyof IEffectData], { championSpellObjectKey: string }> = {
 						dataKey: effectObjectName,
 						sharedSpellObjectKey: (customEffect as any).sharedSpellObjectKey,
 						sharedSpellEffectObjectKey: (customEffect as any).sharedSpellEffectObjectKey,
@@ -1107,7 +1107,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						/* currently only exhaust applies 2 effects, 1 for slow and 1 for damage reduction, so support extracting multiple descriptions and combine them into 1 */
 						const buffDescriptionSources = [sourceSpell];
 
-						type ICustomEffectSharedKey = Extract<IEffectData[string], { sharedSpellObjectKey: string }>;
+						type ICustomEffectSharedKey = Extract<IEffectData[keyof IEffectData], { sharedSpellObjectKey: string }>;
 
 						if ((customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey) {
 							if (typeof (customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey === 'string') {

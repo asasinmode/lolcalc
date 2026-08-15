@@ -32,7 +32,7 @@ import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
 import type { IChampion, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
-import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IEffectOntoTargetVars, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
@@ -1603,7 +1603,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		} & {
 			variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
-			effectOntoTargetVars?: IEffectOntoTargetVars;
+			effectOntoTargetVars?: IEffectOntoTargetVarsHook;
 			[key: string]: any;
 		};
 

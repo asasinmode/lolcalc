@@ -1,6 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
-import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVars, IProviderGroupInternalDragonData } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupInternalDragonData } from '../DamageSource';
 import type { IDeriveProgressFn, IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
 import { VariableType } from '@lolcalc/shared';
@@ -220,7 +220,7 @@ type DetectDragonVariables<T>
 
 export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;
-	effectOntoTargetVars?: IEffectOntoTargetVars;
+	effectOntoTargetVars?: IEffectOntoTargetVarsHook;
 	variables?: ISpecificVariables<DetectDragonVariables<TMiscData['dragons'][Name][Type]>, any>;
 	[key: string]: any;
 };
