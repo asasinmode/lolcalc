@@ -227,6 +227,21 @@ async function activateFirstSearchEffect() {
 	}
 }
 
+function hideEffectTooltipIfNotSearched() {
+	if (!hoveredEffectId.value) {
+		return;
+	}
+	let visible: boolean | undefined = true;
+	if (hoveringApplied.value) {
+		visible = searchFilteredAppliedEffects.value?.some(effect => effect.effect.abilityId.id === hoveredEffectId.value!.id);
+	} else {
+		visible = Object.values(searchFilteredEffects.value)?.some(effects => effects.some(effect => effect.abilityId.id === hoveredEffectId.value!.id));
+	}
+	if (!visible) {
+		hideEffectTooltip();
+	}
+}
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -252,6 +267,7 @@ defineExpose({
 					type="text"
 					:data-empty="!search"
 					@keydown.enter="activateFirstSearchEffect"
+					@update:model-value="hideEffectTooltipIfNotSearched"
 				>
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
