@@ -17,8 +17,8 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 			??= enumOptions
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
 				: minValue !== undefined || maxValue !== undefined
-					? await numberExtra(abilityId, 0, label, minValue, maxValue)
-					: await booleanExtra(abilityId, 0, label, false);
+					? await numberExtra(abilityId, 0, label, minValue, maxValue, undefined, { onUpdate: effectSpecific.onValueUpdate })
+					: await booleanExtra(abilityId, 0, label, false, undefined, undefined, { onUpdate: effectSpecific.onValueUpdate });
 	}
 }
 

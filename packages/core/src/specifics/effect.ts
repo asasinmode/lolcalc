@@ -282,6 +282,14 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		onValueUpdate(value, self) {
+			if (value) {
+				const effect = self.getEffect(EFFECT_OBJECT_NAME.grievousWoundsPercent)?.[0];
+				if (effect) {
+					effect.data.value[0] = 0;
+				}
+			}
+		},
 		modifyVariable: {
 			type: VariableType.heal,
 			handler(value) {
@@ -299,6 +307,14 @@ export const EFFECT_SPECIFICS = {
 			return `${data[0]}%`;
 		},
 		maxValue: 100,
+		onValueUpdate(value, self) {
+			if (value) {
+				const effect = self.getEffect(EFFECT_OBJECT_NAME.grievousWounds)?.[0];
+				if (effect) {
+					effect.data.value[0] = 0;
+				}
+			}
+		},
 		modifyVariable: {
 			type: VariableType.heal,
 			handler(value, effectData) {
@@ -453,7 +469,7 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 		modifyVariable: {
-			type: 'shield',
+			type: VariableType.shield,
 			handler(value, effectData) {
 				if (typeof value === 'number') {
 					const reducePercentage = itemVariableValue(

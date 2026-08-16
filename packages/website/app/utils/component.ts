@@ -17,10 +17,13 @@ export async function numberExtra<T extends IGameAbilityId>(
 	min?: number,
 	max?: MaybeRef<number> | ((self: DamageSource) => Promise<MaybeRef<number>> | MaybeRef<number>),
 	step?: MaybeRef<number> | ((self: DamageSource) => MaybeRef<number>),
+	{ onUpdate }: {
+		onUpdate?: IExtraOnValueUpdate;
+	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
 
 		let localMax = max;
 		if (typeof localMax === 'function') {
@@ -32,6 +35,26 @@ export async function numberExtra<T extends IGameAbilityId>(
 			localStep = localStep(props.damageSource);
 		}
 
+		const _usedNumberInput = useNumberInput(
+			abilityId.type === AbilityType.effect
+				/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
+				? () => [appliedEffect?.value?.data.value ?? props.damageSource.addEffect(abilityId).data.value, property as number]
+				: [
+						props.damageSource[abilityId.type === AbilityType.champion
+							? 'internalData'
+							: abilityId.type === AbilityType.dragon
+								? 'internalDragonData'
+								: 'internalItemData'],
+						property as string,
+					],
+			localStep === undefined || Number.isInteger(toValue(localStep)),
+			localMax,
+		);
+		const usedNumberInput = function (event: Event) {
+			_usedNumberInput(event);
+			onUpdate?.(modelValue.value, props.damageSource);
+		};
+
 		return () => h(CalculatorExtraNumber, {
 			'modelValue': modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -40,21 +63,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			min,
 			'max': toValue(localMax),
 			'step': toValue(localStep),
-			'usedNumberInput': useNumberInput(
-				abilityId.type === AbilityType.effect
-					/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
-					? () => [appliedEffect?.value?.data.value ?? props.damageSource.addEffect(abilityId).data.value, property as number]
-					: [
-							props.damageSource[abilityId.type === AbilityType.champion
-								? 'internalData'
-								: abilityId.type === AbilityType.dragon
-									? 'internalDragonData'
-									: 'internalItemData'],
-							property as string,
-						],
-				localStep === undefined || Number.isInteger(toValue(localStep)),
-				localMax,
-			),
+			usedNumberInput,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
@@ -142,10 +151,13 @@ export async function booleanExtra<T extends IGameAbilityId>(
 	labelPrefixApply = true,
 	labelAppendOnTarget = false,
 	tooltip?: string,
+	{ onUpdate }: {
+		onUpdate?: IExtraOnValueUpdate;
+	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
 
 		return () => h(CalculatorExtraBoolean, {
 			'modelValue': modelValue.value,
@@ -198,7 +210,7 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 	stringifiedAbilityId: string,
 	value: ComputedRef<any>,
 	updateValue: (value: any) => void,
-appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
+	appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
 ] {
 	const appliedEffect = isEffect
 		? computed<IDamageSourceEffect | undefined>(() => damageSource?.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id))
