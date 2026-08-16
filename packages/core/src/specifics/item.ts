@@ -1821,14 +1821,6 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.gluttonousGreaves]: gluttonousGreavesSpecific,
 	[ITEM_NAME_TO_ID.immortalPath]: {
 		...gluttonousGreavesSpecific,
-		internalDataProperties: gluttonousGreavesSpecific.internalDataProperties.concat('applyHSMult'),
-		setupData(self) {
-			self.internalItemData.value.applyHSMult = clamp(0, self.internalItemData.value.applyHSMult ?? 0, 1);
-			return { ...gluttonousGreavesSpecific.setupData(self), applyHSMult: 0 };
-		},
-		imgActive(internalData) {
-			return internalData.applyHSMult;
-		},
 		calculateHooks: {
 			preItemTotal: gluttonousGreavesSpecific.calculateHooks.preItemTotal,
 			postTotal: {
@@ -2345,14 +2337,6 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
-		internalDataProperties: ['applyHSMult'],
-		setupData(self) {
-			self.internalItemData.value.applyHSMult = clamp(0, self.internalItemData.value.applyHSMult ?? 0, 1);
-			return { applyHSMult: 0 };
-		},
-		imgActive(internalData) {
-			return internalData.applyHSMult;
-		},
 		variables: defineVariables({
 			known: {
 				f1: [],

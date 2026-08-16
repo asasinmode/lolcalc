@@ -14,7 +14,7 @@ test.before(() => {
 
 test('Spirit Visage/Immortal Path heal stats', async (t) => {
 	const lotsOfLifestealItems = [ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.spiritVisage, ITEMS_BY_NAME.mercurialScimitar, ITEMS_BY_NAME.botrk, ITEMS_BY_NAME.hextechGunblade, ITEMS_BY_NAME.immortalPath];
-	const lotsOfLifestealItemsData = { slay: 10, applyHSMult: 0 } satisfies IInternalItemDataOf<'immortalPath'>;
+	const lotsOfLifestealItemsData = { slay: 10 } satisfies IInternalItemDataOf<'immortalPath'>;
 
 	await t.test('Briar', async (t) => {
 		const baseCommon: IOverrides<'Briar'> = {

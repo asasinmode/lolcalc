@@ -189,7 +189,6 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.immortalPath]: {
 		extras: [
 			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.immortalPath].MAX_STACKS),
-			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'applyHSMult', passiveMultiplierToTooltip.label, undefined, undefined, passiveMultiplierToTooltip.tooltip),
 		],
 	},
 	[ITEM_NAME_TO_ID.lichBane]: {
@@ -258,9 +257,6 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.mercurialScimitar]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.mercurialScimitar), 'quicksilver', 'Quicksilver'),
-	},
-	[ITEM_NAME_TO_ID.spiritVisage]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.spiritVisage), 'applyHSMult', passiveMultiplierToTooltip.label, undefined, undefined, passiveMultiplierToTooltip.tooltip),
 	},
 	[ITEM_NAME_TO_ID.solsticeSleigh]: {
 		extras: await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.solsticeSleigh), 'sledding', 'Going Sledding move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS),

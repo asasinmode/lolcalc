@@ -160,9 +160,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champion passives
     - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
   - [ ] champion effects
-  - [ ] grievous wounds affecting all heal type things
-  - [ ] heal and shield power affecting known shields & heals
-    - [ ] `applyHSMult` spirit visage immortal path actualizer
+  - [x] grievous wounds affecting all heal type things
+  - [x] heal and shield power affecting known shields & heals
+    - [x] spirit visage immortal path
+    - [ ] heal & shield mult actualizer - will need outgoing/incoming heal & shield distinction?
   - [ ] effects
     - [x] add all that will be present in alpha
   - [ ] damage multipliers (immortal path, haunting guise items, chemtech soul - try to merge vars)
