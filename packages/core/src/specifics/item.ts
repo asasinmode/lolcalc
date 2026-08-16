@@ -2669,7 +2669,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.redemption]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.topQuestMax);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? self.level.value, CHAMPION_LEVEL.topQuestMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2947,7 +2947,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.solariLocket]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.topQuestMax);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? self.level.value, CHAMPION_LEVEL.topQuestMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2979,7 +2979,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.mikaelsBlessing]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.topQuestMax);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? self.level.value, CHAMPION_LEVEL.topQuestMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -3183,7 +3183,6 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				MaxCharges: {
-					// TODO check if affected by grievous, wording bit weird "restore as Health"
 					type: VariableType.heal,
 				},
 			},
