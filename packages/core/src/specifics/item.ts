@@ -1835,10 +1835,10 @@ export const ITEM_SPECIFICS = {
 				handler(self, { totalStats }, { calculatedVariables }) {
 					if (self.currentHealth.value < Math.ceil(totalStats.hp / 2)) {
 						const value = ITEMS_BY_NAME.immortalPath?.dataValues.HealingMod;
+						calculatedVariables.hpRegenMult += value;
 						calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, value);
 						calculatedVariables.healMult = combineCompounding(calculatedVariables.healMult, value);
 						calculatedVariables.shieldMult = combineCompounding(calculatedVariables.shieldMult, value);
-						calculatedVariables.hpRegenMult += value;
 					} else {
 						calculatedVariables.immortalPathBonusDamagePercent = ITEMS_BY_NAME.immortalPath?.dataValues.DamageMod;
 					}
@@ -2372,8 +2372,8 @@ export const ITEM_SPECIFICS = {
 					const { HealingIncrease, ShieldIncrease } = ITEMS_BY_NAME.spiritVisage?.dataValues ?? {};
 					calculatedVariables.hpRegenMult += HealingIncrease;
 					calculatedVariables.lifeStealOmnivampMult = combineRecursive(calculatedVariables.lifeStealOmnivampMult, HealingIncrease);
-					calculatedVariables.healMult = combineCompounding(calculatedVariables.healMult, HealingIncrease);
-					calculatedVariables.shieldMult = combineCompounding(calculatedVariables.shieldMult, ShieldIncrease);
+					calculatedVariables.healMultAdditive += HealingIncrease;
+					calculatedVariables.shieldMultAdditive += ShieldIncrease;
 				},
 			},
 		},

@@ -36,7 +36,7 @@ export const HOOK_PRIORITIES = {
 		Volibear: 1,
 		/** needs total hp, must be before immortal path */
 		DrMundo: 1,
-		/** must be last, needs bonus hp */
+		/** needs bonus hp */
 		Briar: 100,
 		/** must be after champion passives that affect AD like Rammus/Hecarim */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,

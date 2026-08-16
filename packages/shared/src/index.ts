@@ -106,10 +106,14 @@ export interface IStatsCalculationVariables {
 	 * TODO include revitalize
 	 */
 	healMult: number;
+	/** heal multiplier from spirit visage & briar passive. Combined into `healMult` which itself combines compundingly */
+	healMultAdditive: number;
 	/**
 	 * same as `healMult` but for shields from things like spirit visage/actualizer/immortal path passive
 	 */
 	shieldMult: number;
+	/** same as `additiveHealMult` but for `shieldMult` */
+	shieldMultAdditive: number;
 	/** same as `healShieldMult` but just for regen. Note that it starts at 0 */
 	hpRegenMult: number;
 	/** same as `healShieldMult` but for life steal/omnivamp. Note that it starts at 0 */

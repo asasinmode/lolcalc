@@ -90,7 +90,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] move add section to the top
   - [x] effect sections with actual calculated values
   - [ ] add option to remove stats/basic attack sections if more feedback
-  - [ ] custom value section, choose type, input any value
+  - [ ] custom value section, choose type, input any value. Useful for something like redemption from another character on briar
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
   - [x] stats inventory value row

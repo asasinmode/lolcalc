@@ -227,7 +227,7 @@ export const CHAMPION_SPECIFICS = {
 					calculatedVariables.briarHealingMult = calculatesFrom[0].value * missingHealthPercent / 10_000 + (bonusStats.hp / 100) * missingHealthPercent * calculatesFrom[1].value / 100;
 
 					calculatedVariables.hpRegenMult = combineCompounding(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
-					calculatedVariables.healMult = combineCompounding(calculatedVariables.healMult, calculatedVariables.briarHealingMult);
+					calculatedVariables.healMultAdditive += calculatedVariables.briarHealingMult;
 				},
 				priority: HOOK_PRIORITIES.postTotal.Briar,
 			},
