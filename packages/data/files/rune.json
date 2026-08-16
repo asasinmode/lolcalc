@@ -1,5 +1,5 @@
 {
-	"version": "16.15.1",
+	"version": "16.16.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -105,8 +105,8 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mStartValue": 10,
-											"mEndValue": 130,
+											"mStartValue": 15,
+											"mEndValue": 160,
 											"mScaleByStatProgressionMultiplier": true,
 											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
@@ -504,13 +504,13 @@
 							"effectAmount": {
 								"NumHits": 3,
 								"Duration": 3,
-								"ASBoost": 1.2,
+								"ASBoost": 0.9,
 								"Cooldown": 10,
 								"ASBoostRanged": 0.6,
-								"BonusDamageMin": 4,
+								"BonusDamageMin": 2,
 								"BonusDamageMax": 20,
-								"BonusADRatio": 0.08,
-								"APRatio": 0.06,
+								"BonusADRatio": 0.12,
+								"APRatio": 0.1,
 								"MaxBonusHits": 2
 							}
 						}

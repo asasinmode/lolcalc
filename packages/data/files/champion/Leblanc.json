@@ -86,11 +86,6 @@
 								{
 									"mLevel1Value": 10,
 									"mInitialBonusPerLevel": 8,
-									"mBreakpoints": [
-										{
-											"mLevel": 19
-										}
-									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							]
@@ -327,7 +322,8 @@
 					"tooltip": "{{game_character_passiveTooltip_LeBlanc}}",
 					"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
 					"dataValues": {
-						"TooltipCooldown": [60, 60, 60, 60, 60, 60, 60]
+						"TooltipCooldown": [60, 60, 60, 60, 60, 60, 60],
+						"Cooldown": [60, 60, 60, 60, 60, 60, 60]
 					}
 				}
 			]

@@ -216,7 +216,9 @@
 						"MegaRange": [675, 675, 675, 675, 675, 675, 675],
 						"MegaSlowAoE": [200, 200, 200, 200, 200, 200, 200],
 						"MegaDamageAoE": [375, 375, 375, 375, 375, 375, 375],
-						"TravelTime": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
+						"TravelTime": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"MiniTotalDamageHPRatio": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06],
+						"MegaTotalDamageHPRatio": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
 					},
 					"spellCalculations": {
 						"MiniTotalDamage": {
@@ -227,8 +229,8 @@
 								},
 								{
 									"mStat": 12,
-									"mCoefficient": 0.06,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "MiniTotalDamageHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
@@ -240,8 +242,8 @@
 								},
 								{
 									"mStat": 12,
-									"mCoefficient": 0.06,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "MegaTotalDamageHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						}
@@ -333,6 +335,11 @@
 					"image": "assets/characters/gnar/hud/icons2d/gnar_passive.png",
 					"tooltip": "{{Spell_GnarPassive_Tooltip}}",
 					"tooltipExtended": "{{spell_GnarPassive_Tooltip}}<br><br><rules>At max <keywordMajor>Rage</keywordMajor>, Gnar will automatically transform after 4 seconds if he does not use an Ability.<br><keywordMajor>Rage</keywordMajor> decays after 13 seconds if Gnar has not dealt or received damage.<br><keywordMajor>Rage</keywordMajor> gain is greater when dealing damage to champions.</rules>",
+					"dataValues": {
+						"MegaHealthStartingValue": [100, 100, 100, 100, 100, 100, 100],
+						"MegaHealthEndingValue": [831, 831, 831, 831, 831, 831, 831],
+						"TiredDuration": [15, 15, 15, 15, 15, 15, 15]
+					},
 					"spellCalculations": {
 						"TotalAttackRange": {
 							"tooltipOnly": true,
@@ -375,10 +382,9 @@
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mStartValue": 100,
-									"mEndValue": 831,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
+									"{0589a59c}": "MegaHealthStartingValue",
+									"{0b65bc23}": "MegaHealthEndingValue",
+									"__type": "{ee18a47b}"
 								}
 							]
 						},

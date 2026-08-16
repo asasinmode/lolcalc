@@ -6,7 +6,7 @@
 	"stats": {
 		"hp": 650,
 		"hpperlevel": 99,
-		"mp": 339,
+		"mp": 375,
 		"mpperlevel": 52,
 		"movespeed": 340,
 		"armor": 35,
@@ -126,7 +126,7 @@
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
 						"ChargeDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"SlowPercentage": [80, 80, 80, 80, 80, 80, 80],
-						"OuterConeMaxHPDamage": [0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.085],
+						"OuterConeMaxHPDamage": [0.065, 0.07, 0.075, 0.08, 0.085, 0.09, 0.095],
 						"ADRequiredFor1PercentDamage": [40, 40, 40, 40, 40, 40, 40],
 						"ADRequiredTooltipOnly": [0.00025, 0.00025, 0.00025, 0.00025, 0.00025, 0.00025, 0.00025],
 						"MonsterDamageReduction": [50, 50, 50, 50, 50, 50, 50],
@@ -272,26 +272,21 @@
 					"image": "assets/characters/camille/hud/icons2d/camille_passive.png",
 					"tooltip": "Camille's Attacks on champions grant <shield>@ShieldAmount@ Shield</shield> against their damage type (<physicalDamage>Physical</physicalDamage> or <magicDamage>Magic</magicDamage>) for @ShieldDuration@ seconds. This effect has a @PassiveCooldown@ second Cooldown.",
 					"dataValues": {
-						"MaxHPCoefficient": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"ShieldDuration": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"PassiveCooldown": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 18,
+									"mLevel1Value": 14,
 									"mBreakpoints": [
 										{
 											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -4
+											"mAdditionalBonusAtThisLevel": -3
 										},
 										{
 											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -4
-										},
-										{
-											"mLevel": 19,
-											"mAdditionalBonusAtThisLevel": -4
+											"mAdditionalBonusAtThisLevel": -3
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -303,8 +298,25 @@
 							"mFormulaParts": [
 								{
 									"mStat": 12,
-									"mDataValue": "MaxHPCoefficient",
-									"__type": "StatByNamedDataValueCalculationPart"
+									"mSubpart": {
+										"mLevel1Value": 0.1,
+										"mBreakpoints": [
+											{
+												"mLevel": 7,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 13,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 19,
+												"mAdditionalBonusAtThisLevel": 0.05
+											}
+										],
+										"__type": "ByCharLevelBreakpointsCalculationPart"
+									},
+									"__type": "StatBySubPartCalculationPart"
 								}
 							]
 						}

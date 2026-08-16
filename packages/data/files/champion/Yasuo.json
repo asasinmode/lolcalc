@@ -104,7 +104,7 @@
 					"tooltipExtendedBelowLine": "<rules>Tower shots and beams are not blocked.</rules>",
 					"extendedVariables": [
 						{
-							"name": "Effect5Amount",
+							"name": "Width",
 							"nameOverride": "spell_listtype_width"
 						}
 					],
@@ -134,19 +134,15 @@
 					"dataKey": "Characters/Yasuo/Spells/YasuoEAbility/YasuoE",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png",
 					"cooldownTime": [0.5, 0.5, 0.4, 0.3, 0.2, 0.1, 0.1],
-					"tooltip": "Yasuo dashes through a target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Each use of this Ability grants <magicDamage>@BonusDamagePerStack@</magicDamage> bonus damage to subsequent uses for @StackDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>This Ability has a @Effect2Amount@ second per-target Cooldown.",
+					"tooltip": "Yasuo dashes through a target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Each use of this Ability grants <magicDamage>@BonusDamagePerStack@</magicDamage> bonus damage to subsequent uses for @StackDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>This Ability has a @PerTargetCooldown@ second per-target Cooldown.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect2Amount",
+							"name": "PerTargetCooldown",
 							"nameOverride": "spell_listtype_perunitcooldown"
-						},
-						{
-							"name": "Effect3Amount",
-							"nameOverride": "spell_listtype_cooldown"
 						}
 					],
 					"dataValues": {
@@ -154,7 +150,9 @@
 						"StackDuration": [5, 5, 5, 5, 5, 5, 5],
 						"BaseDamage": [55, 70, 85, 100, 115, 130, 145],
 						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
-						"ADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+						"ADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"PerTargetCooldown": [11, 10, 9, 8, 7, 6, 6],
+						"BaseDashSpeed": [750, 750, 750, 750, 750, 750, 750]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -308,7 +306,6 @@
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_width": "Width",
 		"spell_listtype_perunitcooldown": "Per Unit Cooldown",
-		"spell_listtype_cooldown": "Cooldown",
 		"spell_yasuopassive_tooltip": "<spellPassive>Resolve:</spellPassive> Moving grants <keywordMajor>Flow</keywordMajor>, which is tracked on Yasuo's resource bar. Moving faster grants more <keywordMajor>Flow</keywordMajor>. At maximum <keywordMajor>Flow</keywordMajor>, damage from a champion or monster briefly grants <shield>@ShieldValue@ Shield</shield>.<br><br><spellPassive>Intent:</spellPassive> Yasuo's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YasuoCritToAD*.01@ Bonus Attack Damage</physicalDamage> for every 1% Critical Strike Chance above 100%."
 	}
 }

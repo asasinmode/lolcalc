@@ -118,7 +118,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"tooltip": "Locke ignites his own soul, gaining <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and <speed>@MoveSpeed@ Move Speed</speed> that decays over @DecayTimeHelper@ seconds.<br><br>For @BaseDuration@ seconds, he suffers <trueDamage>@HealthCost*100@% current Health true damage</trueDamage> per second but <healing>Heals</healing> back the last <healing>@DamageRestoreAmount@</healing> damage taken, and an additional <healing>@AdditionalHeal@ Health</healing> based on missing Health and time passed, up to a maximum of <healing>@MaxHealingThreshold@ Health remaining</healing>.<br><br>Can be <recast>Recast</recast> to end early.",
-					"tooltipExtendedBelowLine": "<rules>This Ability can be used while <status>Disabled</status>.</rules>",
+					"tooltipExtendedBelowLine": "<rules>This Ability can be used while <status>Disabled</status>.</rules><br><rules>Locke is <keyword>Ghosted</keyword> for the duration. {{Reminder_Ghosted}}</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamageRestoreAmount",
@@ -301,8 +301,8 @@
 					"image": "assets/characters/locke/hud/icons2d/locke_r.png",
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
-					"tooltip": "Locke throws a binding artifact to a location, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies in the area by @SlowAmount*100@%, decaying over @SlowDuration@ seconds. The artifact marks enemies hit for @Duration@ seconds, sealing away marked enemy champions brought below @ExecutionThreshold*100@%, and resetting the duration of the mark on other affected champions.<br><br>After the duration ends, if at least one champion was sealed, the artifact lands on the ground. Locke can pick up the artifact to permanently increase its execution threshold by @ExecuteThresholdPerStack*100@%, and refund @CooldownReduction@% of his current Cooldown, for each champion sealed.",
-					"tooltipExtendedBelowLine": "<rules>The artifact will linger on the ground for this Ability's current Cooldown at the time of sealing. <br>Locke has gained @ExecuteBonusCalc@ bonus execute threshold.</rules>",
+					"tooltip": "Locke throws a binding artifact to a location, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies in the area by @SlowAmount*100@%, decaying over @SlowDuration@ seconds. The artifact marks enemies hit for @Duration@ seconds, sealing away marked enemy champions brought below <spellName>@ExecuteTooltipCalc@</spellName>, and resetting the duration of the mark on other affected champions.<br><br>After the duration ends, if at least one champion was sealed, the artifact lands on the ground. Locke can pick up the artifact to permanently increase its execution threshold by @ExecuteThresholdPerStack*100@%, and refund @CooldownReduction@% of his total Cooldown, for each champion sealed.",
+					"tooltipExtendedBelowLine": "<rules>The artifact will linger on the ground for this Ability's current Cooldown at the time of sealing.</rules>",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -339,12 +339,10 @@
 							]
 						},
 						"ExecuteBonusCalc": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
 								{
 									"mBuffName": "{b5c3348f}",
-									"mIconKey": "%i:LockeR%",
+									"mIconKey": "%i:LockeStackIcon%",
 									"mScalingTagKey": "font color='#0bf7de'",
 									"mDataValue": "ExecuteThresholdPerStack",
 									"__type": "BuffCounterByNamedDataValueCalculationPart"
@@ -354,7 +352,6 @@
 							"mPrecision": 1
 						},
 						"{6c540a3a}": {
-							"mSimpleTooltipCalculationDisplay": 5,
 							"mFormulaParts": [
 								{
 									"mDataValue": "ExecutionThreshold",
@@ -362,7 +359,7 @@
 								},
 								{
 									"mBuffName": "{b5c3348f}",
-									"mIconKey": "%i:LockeR%",
+									"mIconKey": "%i:LockeStackIcon%",
 									"mScalingTagKey": "font color='#0bf7de'",
 									"mDataValue": "ExecuteThresholdPerStack",
 									"__type": "BuffCounterByNamedDataValueCalculationPart"
@@ -427,6 +424,7 @@
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_damageperstack": "Damage per Stack",
+		"reminder_ghosted": "Ghosted units can pass through other units.",
 		"spell_listtype_damagerestored": "Damage Restored",
 		"spell_listtype_cost": "@AbilityResourceName@ Cost",
 		"spell_listtype_blinkdamage": "Teleport Damage",

@@ -59,7 +59,8 @@
 						"HateSpikeBaseDamage": [20, 25, 30, 35, 40, 45, 50],
 						"BonusDamageAPRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"HateSpikeAPRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
-						"QStackCount": [3, 3, 3, 3, 3, 3, 3]
+						"QStackCount": [3, 3, 3, 3, 3, 3, 3],
+						"FakeCD": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"MissileDamage": {
@@ -115,7 +116,7 @@
 					"tooltipExtendedBelowLine": "<rules>Using this Ability does not remove Evelynn from <keywordMajor>Demon Shade</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
-							"name": "Effect2Amount",
+							"name": "CharmDuration",
 							"nameOverride": "spell_listtype_charmduration"
 						},
 						{
@@ -123,11 +124,11 @@
 							"nameOverride": "spell_evelynnw_monstercharm_levelup"
 						},
 						{
-							"name": "Effect9Amount",
+							"name": "MRShred",
 							"nameOverride": "spell_listtype_magicresistshred"
 						},
 						{
-							"name": "Effect7Amount",
+							"name": "MonsterDamage",
 							"nameOverride": "spell_listtype_monsterdamage"
 						},
 						{
@@ -141,7 +142,12 @@
 						"ShredDuration": [4, 4, 4, 4, 4, 4, 4],
 						"MonsterDamage": [200, 250, 300, 350, 400, 450, 500],
 						"SlowAmount": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45],
-						"SlowDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
+						"SlowDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"MonsterExtraCharm": [2, 2, 2, 2, 2, 2, 2],
+						"SlowDuringCharm": [-0.45, -0.45, -0.45, -0.45, -0.45, -0.45, -0.45],
+						"ActualCD": [16, 15, 14, 13, 12, 11, 10],
+						"BuffDuration": [5, 5, 5, 5, 5, 5, 5],
+						"NonCharmSlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
 					"spellCalculations": {
 						"MonsterDamageTotalTOOLTIP": {
@@ -209,7 +215,10 @@
 						"EmpoweredPercentHealth": [4, 4, 4, 4, 4, 4, 4],
 						"MonsterCap": [450, 450, 450, 450, 450, 450, 450],
 						"SpeedAmount": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
-						"SpeedDuration": [2, 2, 2, 2, 2, 2, 2]
+						"SpeedDuration": [2, 2, 2, 2, 2, 2, 2],
+						"MoveSpeed": [0.3, 0.3, 0.35, 0.4, 0.45, 0.5, 0.5],
+						"MSDuration": [2, 2, 2, 2, 2, 2, 2],
+						"MonsterDamageCamp": [450, 450, 450, 450, 450, 450, 450]
 					},
 					"spellCalculations": {
 						"PercentHealthBaseTOOLTIP": {
@@ -217,8 +226,6 @@
 								"mNumber": 0.01,
 								"__type": "NumberCalculationPart"
 							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mExpandedTooltipCalculationDisplay": 1,
 							"mFormulaParts": [
 								{
 									"mDataValue": "BasePercentHealth",
@@ -229,15 +236,14 @@
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
-							"mDisplayAsPercent": true
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
 						"PercentHealthEmpoweredTOOLTIP": {
 							"mMultiplier": {
 								"mNumber": 0.01,
 								"__type": "NumberCalculationPart"
 							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mExpandedTooltipCalculationDisplay": 1,
 							"mFormulaParts": [
 								{
 									"mDataValue": "EmpoweredPercentHealth",
@@ -248,7 +254,8 @@
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
-							"mDisplayAsPercent": true
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						}
 					},
 					"effectAmount": {
@@ -278,24 +285,27 @@
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_evelynnempowereddamage"
 						}
 					],
 					"dataValues": {
 						"CritMultiplier": [2.4, 2.4, 2.4, 2.4, 2.4, 2.4, 2.4],
-						"PassiveReset": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25]
+						"PassiveReset": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"BaseDamage": [0, 125, 250, 375, 500, 650, 775],
+						"CritBonus": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
+						"CritTreshold": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
 					},
 					"spellCalculations": {
 						"Damage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.75,

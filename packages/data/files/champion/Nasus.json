@@ -48,8 +48,8 @@
 					"dataValues": {
 						"BonusRange": [50, 50, 50, 50, 50, 50, 50],
 						"BonusDamage": [20, 40, 60, 80, 100, 120, 140],
-						"BasicStacks": [3, 3, 3, 3, 3, 3, 3],
-						"BigStacks": [12, 12, 12, 12, 12, 12, 12],
+						"BasicStacks": [4, 4, 4, 4, 4, 4, 4],
+						"BigStacks": [10, 10, 10, 10, 10, 10, 10],
 						"BuffDuration": [10, 10, 10, 10, 10, 10, 10]
 					},
 					"spellCalculations": {

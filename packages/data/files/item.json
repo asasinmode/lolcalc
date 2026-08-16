@@ -1,5 +1,5 @@
 {
-	"version": "16.15.1",
+	"version": "16.16.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -209,7 +209,6 @@
 				"3801",
 				"3803",
 				"4401",
-				"6610",
 				"6660",
 				"6662"
 			],
@@ -2035,7 +2034,7 @@
 			},
 			"stats": {
 				"FlatMovementSpeedMod": 45,
-				"PercentAttackSpeedMod": 0.25
+				"PercentAttackSpeedMod": 0.3
 			},
 			"dataValues": {
 				"FeatsAS": 0.05
@@ -2753,7 +2752,7 @@
 				"ReductionAmount": 0.5,
 				"BaseShieldRatio": 0.6,
 				"HealDuration": 5,
-				"ADtoAD": 0.45,
+				"ADtoAD": 0.5,
 				"TimeBeforeDecay": 0.75,
 				"TenacityDuration": 8,
 				"SizeIncrease": 0.1,
@@ -3012,8 +3011,8 @@
 			"searchString": "sunfireaegis;sunfire;sunborn;burn;health;armor;aura;abilityhaste",
 			"epicness": 5,
 			"gold": {
-				"total": 2700,
-				"sell": 1890
+				"total": 2800,
+				"sell": 1960
 			},
 			"image": "3068.png",
 			"from": [
@@ -3035,14 +3034,13 @@
 			},
 			"dataValues": {
 				"Range": 325,
-				"MinionMod": 0.6,
+				"MinionMod": 0.5,
 				"MaxStacks": 1,
-				"StackDuration": 1,
-				"MonsterMod": 1,
+				"MonsterMod": 0.8,
 				"AuraDuration": 3,
 				"TicksPerSecond": 1,
 				"BaseDamagePerTickTOOLTIPONLY": 20,
-				"HPRatioPerTickTOOLTIPONLY": 1
+				"HPRatioPerTickTOOLTIPONLY": 1.5
 			},
 			"itemCalculations": {
 				"DamagePerTick": {
@@ -3054,7 +3052,7 @@
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mCoefficient": 0.01,
+							"mCoefficient": 0.015,
 							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
@@ -3152,7 +3150,7 @@
 			},
 			"stats": {
 				"FlatHPPoolMod": 400,
-				"FlatPhysicalDamageMod": 40,
+				"FlatPhysicalDamageMod": 45,
 				"AbilityHasteMod": 20
 			},
 			"dataValues": {
@@ -3161,7 +3159,23 @@
 				"MoveSpeedDuration": 2,
 				"InternalCD": 0.01,
 				"MaxStacks": 5,
-				"ShredPerStack": 0.06
+				"ShredPerStack": 0.06,
+				"RangedMod": 0.5
+			},
+			"itemCalculations": {
+				"MSBonusSplit": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedBonus",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedMod",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				}
 			}
 		},
 		"3072": {
@@ -3449,7 +3463,7 @@
 				"assassin": true
 			},
 			"stats": {
-				"FlatPhysicalDamageMod": 20
+				"FlatPhysicalDamageMod": 25
 			},
 			"dataValues": {
 				"CleaveRadius": 350,
@@ -3746,7 +3760,7 @@
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"PercentAttackSpeedMod": 0.4,
-				"PercentMovementSpeedMod": 0.04
+				"PercentMovementSpeedMod": 0.05
 			},
 			"dataValues": {
 				"BoltMinPercent": 40,
@@ -3759,7 +3773,7 @@
 						{
 							"mStat": 2,
 							"mSubpart": {
-								"mNumber": 0.55,
+								"mNumber": 0.65,
 								"__type": "NumberCalculationPart"
 							},
 							"__type": "StatBySubPartCalculationPart"
@@ -3769,7 +3783,7 @@
 				"{232dac8a}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 0.55,
+							"mNumber": 0.65,
 							"__type": "NumberCalculationPart"
 						}
 					]
@@ -5850,7 +5864,7 @@
 			],
 			"stats": {
 				"FlatMovementSpeedMod": 45,
-				"PercentAttackSpeedMod": 0.4,
+				"PercentAttackSpeedMod": 0.45,
 				"PercentLifeStealMod": 0.05
 			},
 			"dataValues": {
@@ -5903,7 +5917,7 @@
 				"Items/ItemGroups/Boots"
 			],
 			"stats": {
-				"FlatSpellBlockMod": 30,
+				"FlatSpellBlockMod": 25,
 				"FlatMovementSpeedMod": 45,
 				"PercentTenacityMod": 0.3
 			},
@@ -6024,7 +6038,7 @@
 			],
 			"stats": {
 				"FlatMovementSpeedMod": 45,
-				"FlatMagicPenetrationMod": 18,
+				"FlatMagicPenetrationMod": 20,
 				"PercentMagicPenetrationMod": 0.08
 			},
 			"itemCalculations": {
@@ -6931,9 +6945,9 @@
 				"ChargeCooldown": 20,
 				"MaxCharges": 3,
 				"AllyChampNearbyRadius": 2000,
-				"GoldOnHit": 20,
-				"GoldOnHitMelee": 22,
-				"ExecuteMinionGold": 15,
+				"GoldOnHit": 18,
+				"GoldOnHitMelee": 18,
+				"ExecuteMinionGold": 18,
 				"MeleeExecutePerc": 0.5,
 				"RangedExecutePerc": 0.333,
 				"ExecuteCannonGold": 20,
@@ -7086,9 +7100,9 @@
 				"ChargeCooldown": 20,
 				"MaxCharges": 3,
 				"AllyChampNearbyRadius": 2000,
-				"GoldOnHit": 22,
-				"GoldOnHitMelee": 24,
-				"ExecuteMinionGold": 20,
+				"GoldOnHit": 21,
+				"GoldOnHitMelee": 21,
+				"ExecuteMinionGold": 21,
 				"MeleeExecutePerc": 0.5,
 				"RangedExecutePerc": 0.333,
 				"ExecuteCannonGold": 28,
@@ -8070,8 +8084,7 @@
 			"image": "6610.png",
 			"from": [
 				"2021",
-				"3133",
-				"1028"
+				"3133"
 			],
 			"itemGroups": [
 				"{a7561e20}"
@@ -8080,46 +8093,34 @@
 				"fighter": true
 			},
 			"stats": {
-				"FlatHPPoolMod": 400,
+				"FlatHPPoolMod": 450,
 				"FlatPhysicalDamageMod": 45,
 				"AbilityHasteMod": 10
 			},
 			"dataValues": {
 				"CritModifier": 0.8,
-				"HealAmount": 0.2,
 				"Cooldown": 10,
-				"HealRatio": 1,
-				"MissingHealthHeal": 0.06,
+				"HealBaseADRatio": 0.9,
+				"MissingHealthHeal": 0.04,
 				"RangedHealMod": 0.5
 			},
 			"itemCalculations": {
-				"HealProc": {
+				"HealADSplit": {
 					"mFormulaParts": [
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "HealRatio",
+							"mDataValue": "HealBaseADRatio",
 							"__type": "StatByNamedDataValueCalculationPart"
 						}
-					]
-				},
-				"MeleeItemCalcValue": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mStatFormula": 1,
-							"mDataValue": "HealRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"RangedItemCalcValue": {
-					"mMultiplier": {
+					],
+					"mRangedMultiplier": {
 						"mDataValue": "RangedHealMod",
 						"__type": "NamedDataValueCalculationPart"
-					},
-					"mModifiedGameCalculation": "MeleeItemCalcValue",
-					"__type": "GameCalculationModified"
+					}
+				},
+				"__renamedVariables": {
+					"{01099b16}": "HealADSplit"
 				}
 			}
 		},
@@ -8977,17 +8978,29 @@
 			},
 			"dataValues": {
 				"WindowDuration": 2,
-				"MeleeItemCalcValueB": 6,
-				"RangedItemCalcValueB": 4,
+				"MeleePercMaxHP": 0.08,
+				"RangedPercMaxHPMult": 0.625,
 				"Cooldown": 6,
 				"ShieldDuration": 2,
-				"MeleeBaseShield": 160,
-				"RangedBaseShield": 80,
-				"MeleeShieldADRatio": 0.4,
-				"RangedShieldADRatio": 0.2
+				"MeleeBaseShield": 150,
+				"MeleeBonusADShieldRatio": 0.4,
+				"RangedShieldMult": 0.5
 			},
 			"itemCalculations": {
-				"MeleeItemCalcValue": {
+				"MaxHealthDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleePercMaxHP",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "{4b5548be}",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				},
+				"ShieldSplit": {
 					"mFormulaParts": [
 						{
 							"mDataValue": "MeleeBaseShield",
@@ -8996,44 +9009,21 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mDataValue": "MeleeShieldADRatio",
+							"mDataValue": "{e367e801}",
 							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"RangedItemCalcValue": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RangedBaseShield",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "RangedShieldADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MaxHealthDamageCalc": {
-					"mFormulaParts": [
-						{
-							"mNumber": 6,
-							"__type": "NumberCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.667,
-						"__type": "NumberCalculationPart"
+						"mDataValue": "{51df2a01}",
+						"__type": "NamedDataValueCalculationPart"
 					}
+				},
+				"__renamedVariables": {
+					"{d02ea590}": "ShieldSplit"
 				}
 			},
-			"stringCalculations": {
-				"{4217e5fd}": {
-					"MeleeResult": "@MaxHealthPercent@",
-					"RangedResult": "@RangedMaxHealthPercent@",
-					"DefaultResult": "@MaxHealthPercent@"
-				}
+			"__replacedVariables": {
+				"{b1f09313}": "MeleePercMaxHP"
 			}
 		},
 		"6694": {

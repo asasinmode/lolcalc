@@ -1,5 +1,5 @@
 {
-	"version": "16.15.1",
+	"version": "16.16.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -1364,7 +1364,8 @@
 			"name": "Veigar",
 			"image": "Veigar.png",
 			"roles": {
-				"mid": true
+				"mid": true,
+				"bot": true
 			}
 		},
 		"Velkoz": {
@@ -1409,7 +1410,8 @@
 			"name": "Viktor",
 			"image": "Viktor.png",
 			"roles": {
-				"mid": true
+				"mid": true,
+				"bot": true
 			}
 		},
 		"Vladimir": {
@@ -1484,7 +1486,8 @@
 			"image": "Yasuo.png",
 			"roles": {
 				"mid": true,
-				"top": true
+				"top": true,
+				"bot": true
 			}
 		},
 		"Yone": {

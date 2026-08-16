@@ -310,7 +310,7 @@
 					"dataKey": "Characters/Ekko/Spells/EkkoPassiveAbility/EkkoPassive",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_p.png",
 					"tooltip": "{{Spell_EkkoPassive_Tooltip}}",
-					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>",
+					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @MonsterMod*100@% damage to monsters.</rules>",
 					"dataValues": {
 						"ModesMultiplier": [1, 1, 1, 1, 1, 1, 1],
 						"MonsterMod": [2.7, 2.7, 2.7, 2.7, 2.7, 2.7, 2.7],

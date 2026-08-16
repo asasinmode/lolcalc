@@ -311,7 +311,7 @@
 					"image": "assets/characters/janna/hud/icons2d/jannar.png",
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [130, 130, 115, 100, 100, 100, 100],
-					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
+					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Duration@ seconds. Moving or using an Ability ends the monsoon early.",
 					"tooltipExtendedBelowLine": "<rules>The <status>Knock Back</status> cannot push enemies over walls.</rules>",
 					"extendedVariables": [
 						{
@@ -320,7 +320,14 @@
 						}
 					],
 					"dataValues": {
-						"HealBasePerSecond": [50, 100, 150, 200, 250, 300, 350]
+						"HealBasePerSecond": [50, 100, 150, 200, 250, 300, 350],
+						"Duration": [0, 3, 3, 3, 0, 0, 0],
+						"Range": [700, 700, 700, 700, 700, 700, 700],
+						"MaxKnockback": [875, 875, 875, 875, 875, 875, 875],
+						"KnockbackBaseRange": [875, 875, 875, 875, 875, 875, 875],
+						"KnockbackSpeed": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+						"KnockbackGravity": [10, 10, 10, 10, 10, 10, 10],
+						"KnockbackDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"HealPerSecond": {
@@ -338,8 +345,8 @@
 						},
 						"TotalHeal": {
 							"mMultiplier": {
-								"mEffectIndex": 3,
-								"__type": "EffectValueCalculationPart"
+								"mDataValue": "Duration",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"tooltipOnly": true,
 							"mModifiedGameCalculation": "HealPerSecond",

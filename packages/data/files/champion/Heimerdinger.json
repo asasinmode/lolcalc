@@ -354,7 +354,11 @@
 						"WUltBaseDamage": [90, 135, 180, 225, 270, 315, 360],
 						"WUltExtraHitBaseDamage": [19, 32, 45, 58, 71, 84, 97],
 						"WUltTotalBaseDamage": [0, 503, 697.5, 892, 1086.5, 1281, 1475.5],
-						"EUltBaseDamage": [0, 100, 200, 300, 400, 500, 600]
+						"EUltBaseDamage": [0, 100, 200, 300, 400, 500, 600],
+						"WUltSecondaryAPRatio": [0, 0.12, 0.12, 0.12, 0, 0, 0],
+						"WUltPrimaryAPRatio": [0, 0.45, 0.45, 0.45, 0, 0, 0],
+						"WUltPrimaryBaseDamage": [0, 135, 180, 225, 0, 0, 0],
+						"WUltSecondaryBaseDamage": [0, 28, 39, 49, 0, 0, 0]
 					},
 					"spellCalculations": {
 						"QUltTurretHealth": {

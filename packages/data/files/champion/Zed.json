@@ -88,11 +88,11 @@
 					"image": "assets/characters/zed/hud/icons2d/zedw.png",
 					"mana": [40, 35, 30, 25, 20, 15],
 					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Zed gains <keywordMajor>@Effect3Amount@ Energy</keywordMajor> whenever he and his <keywordMajor>Shadows</keywordMajor> strike an enemy with the same Ability.<br><br><spellActive>Active:</spellActive> Zed's <keywordMajor>Shadow</keywordMajor> dashes forward, remaining in place for @Effect5Amount@ seconds. <recast>Recasting</recast> this Ability will cause Zed to switch positions with this <keywordMajor>Shadow</keywordMajor>.",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Zed gains <keywordMajor>@EnergyRestoreDoubleHit@ Energy</keywordMajor> whenever he and his <keywordMajor>Shadows</keywordMajor> strike an enemy with the same Ability.<br><br><spellActive>Active:</spellActive> Zed's <keywordMajor>Shadow</keywordMajor> dashes forward, remaining in place for @ShadowDurationTooltip@ seconds. <recast>Recasting</recast> this Ability will cause Zed to switch positions with this <keywordMajor>Shadow</keywordMajor>.",
 					"tooltipExtendedBelowLine": "<rules><keywordMajor>Energy</keywordMajor> can only be gained once per Ability usage.</rules>",
 					"extendedVariables": [
 						{
-							"name": "Effect3Amount",
+							"name": "EnergyRestoreDoubleHit",
 							"nameOverride": "spell_zedw_energyreturn"
 						},
 						{
@@ -101,11 +101,14 @@
 					],
 					"dataValues": {
 						"RecastRange": [2000, 2000, 2000, 2000, 2000, 2000, 2000],
-						"MimickRange": [25000, 25000, 25000, 25000, 25000, 25000, 25000]
+						"MimickRange": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
+						"SwapTimeLimit": [5.25, 5.25, 5.25, 5.25, 5.25, 5.25, 5.25],
+						"EnergyRestoreDoubleHit": [25, 30, 35, 40, 45, 50, 55],
+						"ShadowDuration": [5.25, 5.25, 5.25, 5.25, 5.25, 5.25, 5.25],
+						"ShadowDurationTooltip": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"effectAmount": {
 						"0": [5.25, 5.25, 5.25, 5.25, 5.25, 5.25, 5.25],
-						"1": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"2": [25, 30, 35, 40, 45, 50, 55],
 						"3": [5.25, 5.25, 5.25, 5.25, 5.25, 5.25, 5.25],
 						"4": [5, 5, 5, 5, 5, 5, 5]

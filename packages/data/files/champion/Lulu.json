@@ -100,29 +100,37 @@
 					"image": "assets/characters/lulu/hud/icons2d/lulu_whimsy.png",
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [18, 18, 18, 18, 18, 18, 18],
-					"tooltip": "When used on an ally, Lulu grants <speed>@TotalMS@ Move Speed</speed> and <attackSpeed>@Effect7Amount*100@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When used on an enemy, Lulu <status>Polymorphs</status> them for @Effect3Amount@ seconds.",
-					"tooltipExtendedBelowLine": "<rules><status>Polymorphed</status> targets are <status>Silenced</status>, <status>Disarmed</status>, and <status>Slowed</status> by @Effect4Amount*-1@.</rules>",
+					"tooltip": "When used on an ally, Lulu grants <speed>@TotalMS@ Move Speed</speed> and <attackSpeed>@ASBonus*100@% Attack Speed</attackSpeed> for @MSDuration@ seconds.<br><br>When used on an enemy, Lulu <status>Polymorphs</status> them for @CCDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules><status>Polymorphed</status> targets are <status>Silenced</status>, <status>Disarmed</status>, and <status>Slowed</status> by @SlowAmount*-1@.</rules>",
 					"extendedVariables": [
 						{
-							"name": "Effect5Amount",
+							"name": "MSDuration",
 							"nameOverride": "spell_listtype_lulumovementandattackspeedduration"
 						},
 						{
-							"name": "Effect7Amount",
+							"name": "ASBonus",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"name": "Effect3Amount",
+							"name": "CCDuration",
 							"nameOverride": "spell_listtype_luluwpolymorphduration"
 						}
 					],
+					"dataValues": {
+						"BaseMS": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"CCDuration": [1, 1.2, 1.4, 1.6, 1.8, 2, 2.2],
+						"SlowAmount": [-60, -60, -60, -60, -60, -60, -60],
+						"MSDuration": [2.75, 3, 3.25, 3.5, 3.75, 4, 4.25],
+						"AmountToMultiplyCoefficient2ByForPurposesOfCalculatingMovementSpeed": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"ASBonus": [0.2, 0.2, 0.225, 0.25, 0.275, 0.3, 0.3]
+					},
 					"spellCalculations": {
 						"TotalMS": {
 							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseMS",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
 									"mCoefficient": 0.0005,
@@ -154,7 +162,7 @@
 					"image": "assets/characters/lulu/hud/icons2d/lulu_commandpix.png",
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 7.5],
-					"tooltip": "When used on an ally, Pix jumps to them and grants <spellName>Pix, Faerie Companion</spellName> for @Effect1Amount@ seconds. If the ally is a champion, Pix also grants <shield>@TotalShield@ Shield</shield> for @Effect7Amount@ seconds.<br><br>When used on an enemy champion, Pix hampers them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth> of them for @Effect6Amount@ seconds.",
+					"tooltip": "When used on an ally, Pix jumps to them and grants <spellName>Pix, Faerie Companion</spellName> for @PixOnAllyDuration@ seconds. If the ally is a champion, Pix also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.<br><br>When used on an enemy champion, Pix hampers them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth> of them for @PixOnEnemyDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"name": "BaseShield",
@@ -173,7 +181,9 @@
 						"DamageAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BaseShield": [30, 70, 110, 150, 190, 230, 270],
 						"ShieldAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
+						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"PixOnAllyDuration": [6, 6, 6, 6, 6, 6, 6],
+						"PixOnEnemyDuration": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

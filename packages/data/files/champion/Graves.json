@@ -11,8 +11,8 @@
 		"movespeed": 340,
 		"armor": 33,
 		"armorperlevel": 4.6,
-		"spellblock": 30,
-		"spellblockperlevel": 1.3,
+		"spellblock": 33,
+		"spellblockperlevel": 1.1,
 		"attackrange": 425,
 		"hpregen": 8,
 		"hpregenperlevel": 0.7,
@@ -102,10 +102,10 @@
 					"image": "assets/characters/graves/hud/icons2d/gravesw.png",
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [26, 26, 24, 22, 20, 18, 18],
-					"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @Effect2Amount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>.",
+					"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @SlowAmount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -113,7 +113,11 @@
 						}
 					],
 					"dataValues": {
-						"BaseDamage": [10, 60, 110, 160, 210, 260, 310]
+						"BaseDamage": [10, 60, 110, 160, 210, 260, 310],
+						"SlowAmount": [50, 50, 50, 50, 50, 50, 50],
+						"SmokeRadius": [200, 200, 200, 200, 200, 200, 200],
+						"SmokeDuration": [4, 4, 4, 4, 4, 4, 4],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"ImpactDamage": {
@@ -165,7 +169,11 @@
 						"MRGrantPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BuffDuration": [4, 4, 4, 4, 4, 4, 4],
 						"CooldownPerHit": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"MaxStacks": [8, 8, 8, 8, 8, 8, 8]
+						"MaxStacks": [8, 8, 8, 8, 8, 8, 8],
+						"DashSpeed": [750, 750, 750, 750, 750, 750, 750],
+						"DashMaxDistance": [375, 375, 375, 375, 375, 375, 375],
+						"DashMinDistance": [275, 275, 275, 275, 275, 275, 275],
+						"DashAngle": [60, 60, 60, 60, 60, 60, 60]
 					},
 					"spellCalculations": {
 						"MRGrant": {

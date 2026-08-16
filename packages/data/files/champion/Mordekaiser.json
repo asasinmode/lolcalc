@@ -171,7 +171,7 @@
 					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserEAbility/MordekaiserE",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
 					"cooldownTime": [18, 18, 16, 14, 12, 10, 10],
-					"tooltip": "<spellActive>Active:</spellActive> Pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains <magicPen>@MagicPen*100@% Magic Penetration</magicPen>.<br><br><spellActive>Active:</spellActive> Pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
 					"extendedVariables": [
 						{
 							"name": "MagicPen",
@@ -226,8 +226,7 @@
 						"StatStealPercentScalar": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"ZoneRadius": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
 						"GhostAPRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
-					},
-					"isImmobilizing": true
+					}
 				}
 			]
 		},

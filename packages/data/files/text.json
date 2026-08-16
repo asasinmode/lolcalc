@@ -621,7 +621,7 @@
 					],
 					[
 						"<passive>Fervor</passive>",
-						"Dealing <physicalDamage>physical damage</physicalDamage> grants <speed>@MoveSpeedBonus@ Move Speed</speed> for @MoveSpeedDuration@ seconds."
+						"Dealing <physicalDamage>physical damage</physicalDamage> grants <speed>@MSBonusSplit@ Move Speed</speed> for @MoveSpeedDuration@ seconds."
 					]
 				]
 			},
@@ -785,7 +785,8 @@
 						"Basic Attacks grant @BonusEnergizedStacks@ extra <keyword>Energized</keyword> stacks."
 					]
 				],
-				"footerLeft": "Extra Champions Zapped: <attention>@f2@</attention><br>Bonus Damage to Champions: <attention>@f1@</attention>"
+				"footerLeft": "Extra Champions Zapped: <attention>@f2@</attention><br>Bonus Damage to Champions: <attention>@f1@</attention>",
+				"keywordDefinitions": "{{ Item_KeywordDefinition_Energized }}"
 			},
 			"3089": {
 				"subtitleLeft": "Magic Amp",
@@ -1712,7 +1713,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Lightshield Strike</passive> {{ Item_Cooldown }} per target",
-						"Your first Attack against a champion <attention>Critically Strikes</attention> for @CritModifier*100@% of your normal Critical Strike damage and <healing>restores @lolcalcChampRange@ plus @MissingHealthHeal*100@%</healing> of missing Health."
+						"Your first Attack against a champion <attention>Critically Strikes</attention> for @CritModifier*100@% of your normal Critical Strike damage and <healing>restores @HealADSplit@ plus @MissingHealthHeal*100@%</healing> of missing Health."
 					]
 				],
 				"extended": "<rules>Excess healing is granted as temporary bonus Health.</rules>",
@@ -1915,13 +1916,13 @@
 				"tooltipShop": [
 					[
 						"<passive>Ever Rising Moon</passive> {{ Item_Cooldown }}",
-						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@% max health physical damage</physicalDamage> and grants you a <shield>@lolcalcChampRange@ Shield</shield> for @ShieldDuration@ seconds."
+						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@ max health physical damage</physicalDamage> and grants you a <shield>@ShieldSplit@ Shield</shield> for @ShieldDuration@ seconds."
 					]
 				],
 				"tooltipInventory": [
 					[
 						"<passive>Ever Rising Moon</passive> {{ Item_Cooldown }}",
-						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@% max health physical damage</physicalDamage> and grants you a <shield>@lolcalcChampRange@ Shield</shield> for @ShieldDuration@ seconds."
+						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@ max health physical damage</physicalDamage> and grants you a <shield>@ShieldSplit@ Shield</shield> for @ShieldDuration@ seconds."
 					],
 					[
 						"<rules>{{ Item_Melee_Ranged_Rules }}</rules>"

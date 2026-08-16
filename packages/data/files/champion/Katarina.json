@@ -79,13 +79,17 @@
 					"dataKey": "Characters/Katarina/Spells/KatarinaWAbility/KatarinaW",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
 					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
-					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds.",
+					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@MovespeedAmount@% Move Speed</speed> decaying over @MovespeedDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect4Amount",
+							"name": "MovespeedAmount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
+					"dataValues": {
+						"MovespeedDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"MovespeedAmount": [40, 50, 60, 70, 80, 90, 100]
+					},
 					"effectAmount": {
 						"1": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
 						"3": [40, 50, 60, 70, 80, 90, 100]

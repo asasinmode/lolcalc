@@ -40,7 +40,7 @@
 					"tooltip": "Brand launches a fireball that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"name": "Effect1Amount",
+							"name": "SpellBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -91,7 +91,8 @@
 					],
 					"dataValues": {
 						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
-						"BaseDamage": [30, 75, 120, 165, 210, 255, 300]
+						"BaseDamage": [30, 75, 120, 165, 210, 255, 300],
+						"PDamageBonus": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -223,7 +224,8 @@
 						"MonsterMod": [270, 270, 270, 270, 270, 270, 270],
 						"PercentHealthDamage": [2, 2, 2, 2, 2, 2, 2],
 						"EpicMonsterDPSCap": [80, 80, 80, 80, 80, 80, 80],
-						"JungleMonsterDPSCap": [50, 50, 50, 50, 50, 50, 50]
+						"JungleMonsterDPSCap": [50, 50, 50, 50, 50, 50, 50],
+						"ManaRestoration": [20, 20, 25, 30, 35, 40, 40]
 					},
 					"spellCalculations": {
 						"ManaRestore": {
