@@ -1217,11 +1217,11 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 		let effectData;
 		let champion;
 
-		if (effectSpecific.sourceAbility.type === AbilityType.item) {
+		if (effectSpecific.setupDataFromSourceItem) {
 			effectData = effectSpecific.setupDataFromSourceItem!(source);
-		} else if (effectSpecific.sourceAbility.type === AbilityType.dragon) {
+		} else if (effectSpecific.setupDataFromDragonData) {
 			effectData = effectSpecific.setupDataFromDragonData!(source);
-		} else if (effectSpecific.sourceAbility.type === AbilityType.champion) {
+		} else if (effectSpecific.setupDataFromInternalData) {
 			effectData = effectSpecific.setupDataFromInternalData!(source);
 			champion = source.champion.value;
 		}

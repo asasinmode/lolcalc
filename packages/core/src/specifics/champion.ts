@@ -256,6 +256,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 				meta: {
 					HealthRegen: {
+						type: VariableType.heal,
 						isCustom: true,
 					},
 				},
