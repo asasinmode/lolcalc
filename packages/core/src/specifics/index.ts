@@ -285,10 +285,10 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVar
 		return value * (1 - (damageTarget?.stats.value.total.slowResist ?? 0));
 	},
 	[VariableType.heal](value, self) {
-		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0));
+		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.healMult ?? 1);
 	},
 	[VariableType.shield](value, self) {
-		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0));
+		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.shieldMult ?? 1);
 	},
 };
 

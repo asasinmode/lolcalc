@@ -209,6 +209,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] results effects applied from target to source override the ones present on source (W from nasus applied to target overrides the Wither effect already present on target)
     - [ ] if I'm slow to update something or something is broken, remember it's Riot Games game and I'm just a person trying my best to provide a useful tool
     - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
+    - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
   - [ ] github readme
 - [ ] submit feedback on page / report issues
   - [ ] go server

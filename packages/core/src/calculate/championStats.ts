@@ -53,8 +53,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		attackSpeedCap: CONSTS.baseAttackSpeedCap,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
 		bloodmailRetributionExcludedAd: 0,
-		healMult: 1,
-		shieldMult: 1,
+		healMult: 0,
+		shieldMult: 0,
 		hpRegenMult: 0,
 		lifeStealOmnivampMult: 0,
 		tenacityBucketB: 1,
@@ -336,6 +336,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalStats.tenacity = Math.min(1, totalStats.tenacity);
 
 	{ /* stat related heal multipliers */
+		calculatedVariables.healMult += 1;
+		calculatedVariables.shieldMult += 1;
 		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
 		debuffs.totalGrievousedRegen = totalStats.hpRegen * debuffs.grievousWounds;
 		bonusStats.hpRegen = Math.max(0, bonusStats.hpRegen - debuffs.totalGrievousedRegen);

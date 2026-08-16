@@ -104,7 +104,6 @@ export interface IStatsCalculationVariables {
 	 * heal multiplier from things like spirit visage/actualizer/briar passive
 	 * [wiki of sources](https://wiki.leagueoflegends.com/en-us/Heal_and_shield_power#Notes)
 	 * TODO include revitalize
-	 * @note it starts from 1
 	 */
 	healMult: number;
 	/**
