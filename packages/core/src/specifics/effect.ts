@@ -291,7 +291,7 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 		modifyVariable: {
-			type: VariableType.heal,
+			type: [VariableType.heal, VariableType.hpRegen],
 			handler(value) {
 				return value * (typeof value === 'number' ? (1 - CONSTS.defaultGrievous) : 1);
 			},
@@ -323,7 +323,7 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 		modifyVariable: {
-			type: VariableType.heal,
+			type: [VariableType.heal, VariableType.hpRegen],
 			handler(value, effectData) {
 				return value * (typeof value === 'number' ? (1 - effectData[0] / 100) : 1);
 			},
@@ -486,7 +486,7 @@ export const EFFECT_SPECIFICS = {
 			}
 		},
 		modifyVariable: {
-			type: VariableType.shield,
+			type: [VariableType.shield],
 			handler(value, effectData) {
 				if (typeof value === 'number') {
 					const reducePercentage = itemVariableValue(
@@ -1044,7 +1044,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */
 	modifyVariable?: {
-		type: IVariableType;
+		type: IVariableType[];
 		handler: IEffectModifyVariableFunction<T>;
 	};
 	/** variables to be showned in results */

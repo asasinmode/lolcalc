@@ -706,6 +706,7 @@ export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OB
 export const VariableType = {
 	shield: 'shield',
 	heal: 'heal',
+	hpRegen: 'hpRegen',
 	physical: 'physical',
 	magic: 'magic',
 	true: 'true',

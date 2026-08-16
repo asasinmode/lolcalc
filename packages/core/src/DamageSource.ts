@@ -1268,11 +1268,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const specific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effect.abilityId.id];
 			/* deliberately not using the `computed.effects` because `modifyVariableFunctions` is used in game descriptions so I didn't want it to depend on that */
 			if (specific?.modifyVariable && (specific.isActive ?? defaultEffectIsActive)(effect.data.value)) {
-				const target = rv.find(group => group[0] === specific.modifyVariable!.type);
-				if (target) {
-					target[1].push(value => specific.modifyVariable!.handler(value, effect.data.value));
-				} else {
-					rv.push([specific.modifyVariable.type, [value => specific.modifyVariable!.handler(value, effect.data.value)]]);
+				for (const type of specific.modifyVariable.type) {
+					const target = rv.find(group => group[0] === type);
+					if (target) {
+						target[1].push(value => specific.modifyVariable!.handler(value, effect.data.value));
+					} else {
+						rv.push([type, [value => specific.modifyVariable!.handler(value, effect.data.value)]]);
+					}
 				}
 			}
 		}
