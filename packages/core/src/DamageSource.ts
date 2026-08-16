@@ -1294,7 +1294,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
 			rv[modifyVariableType] ??= [];
-			rv[modifyVariableType].push(value => modifyVariableFn(value, this.calculationDamageTarget.value));
+			rv[modifyVariableType].push(value => modifyVariableFn(value, this, this.calculationDamageTarget.value));
 		}
 
 		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
@@ -1315,7 +1315,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
 			rv[modifyVariableType] ??= [];
-			rv[modifyVariableType].push(value => modifyVariableFn(value, this));
+			rv[modifyVariableType].push(value => modifyVariableFn(value, this, this));
 		}
 
 		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
