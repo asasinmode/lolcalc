@@ -336,10 +336,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalStats.tenacity = Math.min(1, totalStats.tenacity);
 
 	{ /* stat related heal multipliers */
+		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
 		debuffs.totalGrievousedRegen = totalStats.hpRegen * debuffs.grievousWounds;
 		bonusStats.hpRegen = Math.max(0, bonusStats.hpRegen - debuffs.totalGrievousedRegen);
 		totalStats.hpRegen = Math.max(0, totalStats.hpRegen - debuffs.totalGrievousedRegen);
-		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
 		totalMultipliersStats.hpRegen += hpRegenMultValue;
 		bonusStats.hpRegen += hpRegenMultValue;
 		totalStats.hpRegen += hpRegenMultValue;
