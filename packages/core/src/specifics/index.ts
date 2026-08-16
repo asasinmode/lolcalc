@@ -32,16 +32,20 @@ export const HOOK_PRIORITIES = {
 		Ryze: 1,
 		Rammus: 1,
 		Hecarim: 1,
-		/* should be last, needs bonus hp */
+		/** needs total ap */
+		Volibear: 1,
+		/** should be last, needs bonus hp */
 		Briar: 100,
-		/* should be after champion passives that affect AD like Rammus/Hecarim */
+		/** should be after champion passives that affect AD like Rammus/Hecarim */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
-		/* should be after bloodmail */
+		/** should be after bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
-		/* should be after Ryze */
+		/** should be after Ryze */
 		[ITEM_NAME_TO_ID.actualizer]: 10,
-		/* should be last, needs final total hp */
+		/** should be last, needs final total hp */
 		[ITEM_NAME_TO_ID.immortalPath]: 100,
+		/** not used in calculations, just for keeping track of things to display them/use in other computeds */
+		recordKeeping: 999,
 	},
 } satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;
 

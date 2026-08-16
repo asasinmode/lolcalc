@@ -424,6 +424,7 @@ export const EFFECT_SPECIFICS = {
 				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
 					calculatedVariables.frozenHeartCaress = debuffs.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress! / (miscDebug.totalAdditiveCripple || 1);
 				},
+				priority: HOOK_PRIORITIES.postTotal.recordKeeping,
 			},
 		},
 	}),
@@ -940,6 +941,7 @@ export const EFFECT_SPECIFICS = {
 				handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
 					effectVars.nasusWASReduced = debuffs.totalCrippledAttackSpeed * effectVars.nasusWCripple! / (miscDebug.totalAdditiveCripple || 1);
 				},
+				priority: HOOK_PRIORITIES.postTotal.recordKeeping,
 			},
 		},
 	}),

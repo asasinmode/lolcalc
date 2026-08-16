@@ -27,6 +27,7 @@ import type ISivir from '@lolcalc/data/files/champion/Sivir.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
+import type IVolibear from '@lolcalc/data/files/champion/Volibear.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
 import type { IChampion, IChampionId } from '@lolcalc/data/types';
@@ -1567,12 +1568,62 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Volibear: {
-		MAX_PASSIVE_STACKS: 5,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Volibear'>): number => (self.champion.value! as typeof IVolibear).abilities.passive.variants[0]!.dataValues.BounceCounterMax[1]!,
 		setupData(self) {
-			const maxStacks: number = CHAMPION_SPECIFICS.Volibear.MAX_PASSIVE_STACKS;
+			const maxStacks: number = CHAMPION_SPECIFICS.Volibear.MAX_PASSIVE_STACKS(self);
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), maxStacks),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Volibear', typeof IVolibear, 'passive'>()({
+				known: {
+					AttackSpeedPercent: [],
+				},
+				calculate(self) {
+					return {
+						AttackSpeedPercent: {
+							value: self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0,
+						},
+					};
+				},
+				meta: {
+					ChainLightningDamage: {
+						type: VariableType.magic,
+					},
+					AttackSpeedPercent: {
+						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
+					},
+				},
+				uninteresting: ['BuffDuration'],
+			}),
+		},
+		calculateHooks: {
+			postTotal: {
+				handler(self, { baseOnLevelStats, championPassiveStats, bonusStats, totalPreMultipliersStats, totalStats }, { debuffs }) {
+					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedCalc', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: totalStats } } } as DamageSource });
+					if (typeof attackSpeedPerStack.value === 'number') {
+						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value;
+						championPassiveStats.attackSpeed = championPassiveStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
+						bonusStats.bonusAttackSpeedPercent += championPassiveStats.bonusAttackSpeedPercent;
+						bonusStats.attackSpeed += championPassiveStats.attackSpeed;
+						totalPreMultipliersStats.bonusAttackSpeedPercent += championPassiveStats.bonusAttackSpeedPercent;
+
+						const crippleValue = championPassiveStats.attackSpeed * debuffs.cripple;
+						const crippledAS = championPassiveStats.attackSpeed - crippleValue;
+						debuffs.totalCrippledAttackSpeed += crippleValue;
+						totalPreMultipliersStats.attackSpeed += crippledAS;
+
+						totalStats.bonusAttackSpeedPercent += championPassiveStats.bonusAttackSpeedPercent;
+						totalStats.attackSpeed += crippledAS;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS volibear] failed to calculate passive attack speed', attackSpeedPerStack);
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal.Volibear,
+			},
 		},
 	},
 	MonkeyKing: {
