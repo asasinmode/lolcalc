@@ -2669,7 +2669,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.redemption]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.max);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.topQuestMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({
@@ -2979,7 +2979,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.mikaelsBlessing]: {
 		internalDataProperties: ['aLevel'],
 		setupData(self) {
-			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.max);
+			self.internalItemData.value.aLevel = clamp(CHAMPION_LEVEL.min, self.internalItemData.value.aLevel ?? 1, CHAMPION_LEVEL.topQuestMax);
 			return { aLevel: 0 };
 		},
 		variables: defineVariables({

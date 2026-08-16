@@ -208,13 +208,13 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		},
 	]))),
 	[ITEM_NAME_TO_ID.redemption]: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.redemption), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.max),
+		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.redemption), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.topQuestMax),
 	},
 	[ITEM_NAME_TO_ID.solariLocket]: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.solariLocket), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.max),
+		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.solariLocket), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.topQuestMax),
 	},
 	[ITEM_NAME_TO_ID.mikaelsBlessing]: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.mikaelsBlessing), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.max),
+		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.mikaelsBlessing), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.topQuestMax),
 	},
 	[ITEM_NAME_TO_ID.malignance]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.malignance), 'hatefog', 'Hatefog', true, true),
