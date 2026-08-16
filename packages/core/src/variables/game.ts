@@ -1219,6 +1219,34 @@ export const VARIABLE_CALCULATION_FNS = {
 		const rv: IVariableValueResult = VARIABLE_CALCULATION_FNS.ByCharLevelInterpolationCalculationPart!(syntheticVariable, whole, meta);
 		return rv;
 	},
+	/** base + per level value but with the keys hashed and variables needing resolving */
+	'{b22609db}': function (variable: IGameVariablesByType['{b22609db}'], _whole, meta) {
+		const {
+			'{91d404a5}': baseValueVariable,
+			'{b2cd0eb0}': perLevelValueVariable,
+		} = variable;
+
+		meta.variableValueParams.accessedVariables ??= new Map();
+		meta.accessedVariables?.add(baseValueVariable);
+		const baseValue = meta.variableValueFn(baseValueVariable, meta.variableValueParams);
+		meta.accessedVariables?.add(perLevelValueVariable);
+		const perLevelValue = meta.variableValueFn(perLevelValueVariable, meta.variableValueParams);
+
+		if (typeof baseValue.value === 'number' && typeof perLevelValue.value === 'number') {
+			const fromLevelValue = ((meta.variableValueParams.damageSource?.level.value ?? 1) - 1) * perLevelValue.value;
+
+			return {
+				value: baseValue.value + fromLevelValue,
+				calculatesFrom: [{
+					stat: 'level',
+					value: {
+						min: baseValue.value,
+						max: baseValue.value + (CHAMPION_LEVEL.max - 1) * perLevelValue.value,
+					},
+				}],
+			};
+		}
+	},
 	ByCharLevelFormulaCalculationPart(variable: IGameVariablesByType['ByCharLevelFormulaCalculationPart'], _whole, meta) {
 		const { values } = variable;
 		if (values) {
@@ -1492,6 +1520,12 @@ interface IGameVariablesByType {
 	'EffectValueCalculationPart': {
 		mEffectIndex: number;
 		__type: string;
+	};
+	/** base value + X per level, where the values point to `dataValues`. Irelia passive */
+	'{b22609db}': {
+		'{91d404a5}': string;
+		'{b2cd0eb0}': string;
+		'__type': string;
 	};
 }
 
