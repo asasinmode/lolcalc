@@ -31,6 +31,7 @@ export const CONSTS = {
 	},
 	/** the value below which tenacity cannot reduce the duration of a cc, according to [the wiki](https://wiki.leagueoflegends.com/en-us/Tenacity) */
 	minCCDuration: 0.3,
+	defaultGrievous: 0.4,
 };
 
 export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListedChampion> as IChampionData;

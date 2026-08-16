@@ -5,7 +5,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffe
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
-import { EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
+import { CONSTS, EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -269,17 +269,17 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWounds),
 		label: 'Grievous Wounds',
 		setupData(data) {
-			return [clamp(0, data?.[0] ?? 0, 100)];
+			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(AbilityType.item, itemId)),
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
 				const item = damageSource.items.value.find(item => item && (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id));
 				const strength = item?.dataValues?.GrievousAmount;
-				if (!strength) {
-					console.warn('[EFFECT_SPECIFICS] detected a grievous wounds item but it has no GrievousAmount dataValue', item);
+				if (strength !== CONSTS.defaultGrievous) {
+					console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.grievousWounds}] grievous wounds item gives a different than default grievous value`, item);
 				}
-				return [strength ? strength * 100 : 40];
+				return [1];
 			}
 		},
 		// TODO calculate
