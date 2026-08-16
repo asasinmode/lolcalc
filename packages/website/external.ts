@@ -55,4 +55,7 @@ export const KNOWN_GAME_DESCRIPTION_TAGS: string[] = [
 	'titleleft', // dragon stack descriptions
 	'maintext', // dragon stack descriptions
 	'stattracking', // veigar passive, draven passive
+	'release', // irelia W, no styles
+	'charge', // irelia W, no styles
+	'activerank', // volibear E rules text
 ];

@@ -539,6 +539,10 @@ defineExpose({ header });
 			--at-apply: 'text-[#d929d9]';
 		}
 
+		activerank {
+			--at-apply: 'text-white';
+		}
+
 		onlyshowingame {
 			--at-apply: 'block';
 		}
