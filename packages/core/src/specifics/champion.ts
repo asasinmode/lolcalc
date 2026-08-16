@@ -246,17 +246,33 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'DrMundo', typeof IDrMundo, 'passive'>()({
 				known: {
 					HealthRegen: [],
+					CannisterHpRestore: [],
 				},
 				calculate(self) {
+					const cannisterPercentRestore = championAbilityVariableValue('MaxHealthGain', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value });
+					let hpRestore = 0;
+					if (typeof cannisterPercentRestore.value === 'number') {
+						hpRestore = (cannisterPercentRestore.value as number) * self.stats.value.total.hp;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS mundo] failed to calculate passive cannister hp restore percent', cannisterPercentRestore);
+					}
+
 					return {
 						HealthRegen: {
 							value: self.stats.value.championPassive.hpRegen ?? 0,
+						},
+						CannisterHpRestore: {
+							value: hpRestore,
 						},
 					};
 				},
 				meta: {
 					HealthRegen: {
 						type: VariableType.hpRegen,
+						isCustom: true,
+					},
+					CannisterHpRestore: {
+						type: VariableType.heal,
 						isCustom: true,
 					},
 				},
