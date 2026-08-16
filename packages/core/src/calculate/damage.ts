@@ -26,6 +26,7 @@ export function championDamage() {
 	// steelcaps/armored advance
 	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// ldr
+	// champion passives - irelia, warwick
 }
 
 /** TODO basic aa calc? not sure about the interface yet */

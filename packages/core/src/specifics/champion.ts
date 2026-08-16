@@ -445,6 +445,28 @@ export const CHAMPION_SPECIFICS = {
 				isImmobilizing: false,
 			},
 		},
+		passive: {
+			variables: defineChampionVariables<'Irelia', typeof IIrelia, 'passive'>()({
+				meta: {
+					OnHitBonus: {
+						type: VariableType.magic,
+					},
+				},
+				uninteresting: ['BuffDuration', 'MaxStacks', 'OnHitStructureMod'],
+			}),
+		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const attackSpeedPerStack = championAbilityVariableValue('SingleStackAS', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof attackSpeedPerStack.value === 'number') {
+						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value / 100;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS irelia] failed to calculate passive attack speed', attackSpeedPerStack);
+					}
+				},
+			},
+		},
 	},
 	JarvanIV: {
 		r: {
@@ -460,18 +482,6 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), maxStacks),
 			};
-		},
-		calculateHooks: {
-			onChampionPassive: {
-				handler(self, { championPassiveStats }) {
-					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
-					if (typeof attackSpeedPerStack.value === 'number') {
-						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value;
-					} else {
-						console.warn('[CHAMPION_SPECIFICS jax] failed to calculate passive attack speed');
-					}
-				},
-			},
 		},
 		passive: {
 			variables: defineChampionVariables<'Jax', typeof IJax, 'passive'>()({
@@ -493,6 +503,18 @@ export const CHAMPION_SPECIFICS = {
 					},
 				},
 			}),
+		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof attackSpeedPerStack.value === 'number') {
+						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS jax] failed to calculate passive attack speed', attackSpeedPerStack);
+					}
+				},
+			},
 		},
 	},
 	Jhin: {
