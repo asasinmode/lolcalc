@@ -108,10 +108,7 @@ export interface IStatsCalculationVariables {
 	 */
 	healMult: number;
 	/**
-	 * shield multiplier from things like spirit visage/actualizer/immortal path passive
-	 * [wiki of sources](https://wiki.leagueoflegends.com/en-us/Heal_and_shield_power#Notes)
-	 * TODO include revitalize
-	 * @note it starts from 1
+	 * same as `healMult` but for shields from things like spirit visage/actualizer/immortal path passive
 	 */
 	shieldMult: number;
 	/** same as `healShieldMult` but just for regen. Note that it starts at 0 */

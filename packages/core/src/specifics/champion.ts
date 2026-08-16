@@ -187,6 +187,28 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Briar: {
+		passive: {
+			variables: defineChampionVariables<'Briar', typeof IBriar, 'passive'>()({
+				known: {
+					HealIncrease: [],
+				},
+				calculate(self) {
+					return {
+						HealIncrease: {
+							value: self.stats.value.variables.briarHealingMult ?? 0,
+						},
+					};
+				},
+				meta: {
+					HealIncrease: {
+						isCustom: true,
+						resultsMultiplier: 100,
+						resultsIsPercentage: true,
+					},
+				},
+				uninteresting: ['BleedDuration', 'MaxBleedStacks', 'HealPercent', 'CurrentHealthPercentCost', 'PercentOfBleedHealedOnKill'],
+			}),
+		},
 		calculateHooks: {
 			postTotal: {
 				handler(self, { bonusStats, totalStats }, { calculatedVariables }) {
@@ -205,16 +227,10 @@ export const CHAMPION_SPECIFICS = {
 					calculatedVariables.briarHealingMult = calculatesFrom[0].value * missingHealthPercent / 10_000 + (bonusStats.hp / 100) * missingHealthPercent * calculatesFrom[1].value / 100;
 
 					calculatedVariables.hpRegenMult = combineCompounding(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
-					/* TODO not sure if that's the appropriate scaling for it test what heals Briar receives in game */
 					calculatedVariables.healMult = combineCompounding(calculatedVariables.healMult, calculatedVariables.briarHealingMult);
 				},
 				priority: HOOK_PRIORITIES.postTotal.Briar,
 			},
-		},
-		passive: {
-			variables: defineChampionVariables<'Briar', typeof IBriar, 'passive'>()({
-				uninteresting: ['BleedDuration', 'MaxBleedStacks', 'HealPercent', 'CurrentHealthPercentCost', 'PercentOfBleedHealedOnKill'],
-			}),
 		},
 	},
 	Cassiopeia: {
