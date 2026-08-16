@@ -3,6 +3,7 @@ import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
+import type IDrMundo from '@lolcalc/data/files/champion/DrMundo.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
@@ -238,6 +239,43 @@ export const CHAMPION_SPECIFICS = {
 					},
 				},
 			}),
+		},
+	},
+	DrMundo: {
+		passive: {
+			variables: defineChampionVariables<'DrMundo', typeof IDrMundo, 'passive'>()({
+				known: {
+					HealthRegen: [],
+				},
+				calculate(self) {
+					return {
+						HealthRegen: {
+							value: self.stats.value.championPassive.hpRegen ?? 0,
+						},
+					};
+				},
+				meta: {
+					HealthRegen: {
+						isCustom: true,
+					},
+				},
+				uninteresting: ['CurrentHealthLoss', 'CannisterGroundDuration', 'PassiveCooldownRefund', 'MaxHealthGain'],
+			}),
+		},
+		calculateHooks: {
+			postTotal: {
+				handler(self, { totalStats, bonusStats, championPassiveStats }) {
+					const maxHealthRegenPercent = championAbilityVariableValue('MaxHealthRegen', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof maxHealthRegenPercent.value === 'number') {
+						championPassiveStats.hpRegen = maxHealthRegenPercent.value * totalStats.hp;
+						bonusStats.hpRegen += championPassiveStats.hpRegen;
+						totalStats.hpRegen += championPassiveStats.hpRegen;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS mundo] failed to calculate passive max health regen percent', maxHealthRegenPercent);
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal.DrMundo,
+			},
 		},
 	},
 	Darius: {

@@ -23,7 +23,7 @@ export const HOOK_PRIORITIES = {
 	},
 	onTotalPreMultipliers: {
 		cleanse: -1,
-		/** should be before rabadon and blackfire torch */
+		/** must be before rabadon and blackfire torch */
 		[ITEM_NAME_TO_ID.swiftmarch]: 10,
 		[ITEM_NAME_TO_ID.rabadon]: 20,
 		[ITEM_NAME_TO_ID.blackfireTorch]: 20,
@@ -34,15 +34,17 @@ export const HOOK_PRIORITIES = {
 		Hecarim: 1,
 		/** needs total ap */
 		Volibear: 1,
-		/** should be last, needs bonus hp */
+		/** needs total hp, must be before immortal path */
+		DrMundo: 1,
+		/** must be last, needs bonus hp */
 		Briar: 100,
-		/** should be after champion passives that affect AD like Rammus/Hecarim */
+		/** must be after champion passives that affect AD like Rammus/Hecarim */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
-		/** should be after bloodmail */
+		/** must be after bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
-		/** should be after Ryze */
+		/** must be after Ryze */
 		[ITEM_NAME_TO_ID.actualizer]: 10,
-		/** should be last, needs final total hp */
+		/** must be last, needs final total hp */
 		[ITEM_NAME_TO_ID.immortalPath]: 100,
 		/** not used in calculations, just for keeping track of things to display them/use in other computeds */
 		recordKeeping: 999,
