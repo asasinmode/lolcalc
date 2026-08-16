@@ -282,7 +282,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		modifyVariable: {
+			type: VariableType.heal,
+			handler(value) {
+				return value * (typeof value === 'number' ? (1 - CONSTS.defaultGrievous) : 1);
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: defineEffectSpecific<[gWounds: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWoundsPercent),
@@ -294,7 +299,12 @@ export const EFFECT_SPECIFICS = {
 			return `${data[0]}%`;
 		},
 		maxValue: 100,
-		// TODO calculate
+		modifyVariable: {
+			type: VariableType.heal,
+			handler(value, effectData) {
+				return value * (typeof value === 'number' ? (1 - effectData[0] / 100) : 1);
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.shurelyaInspiringSpeech]: defineEffectSpecific<[isInspired: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.shurelya),
