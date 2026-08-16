@@ -238,6 +238,10 @@ export interface IStatsCalculationVariables {
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
 export interface IStatsCalculationDebuffs {
+	/** if applied, `0.4` or the one from percent grievous effect */
+	grievousWounds: number;
+	/** hp regen value reduced by grievous wounds */
+	totalGrievousedRegen: number;
 	/** attack speed slow, stacks multiplicatively */
 	cripple: number;
 	/** attack speed value reduced from cripple sources */

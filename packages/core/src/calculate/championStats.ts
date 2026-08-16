@@ -60,6 +60,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		tenacityBucketB: 1,
 	};
 	const debuffs: IStatsCalculationDebuffs = {
+		grievousWounds: 0,
+		totalGrievousedRegen: 0,
 		cripple: 1,
 		totalCrippledAttackSpeed: 0,
 		percentageMSSlow: [],
@@ -334,6 +336,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalStats.tenacity = Math.min(1, totalStats.tenacity);
 
 	{ /* stat related heal multipliers */
+		debuffs.totalGrievousedRegen = totalStats.hpRegen * debuffs.grievousWounds;
+		bonusStats.hpRegen = Math.max(0, bonusStats.hpRegen - debuffs.totalGrievousedRegen);
+		totalStats.hpRegen = Math.max(0, totalStats.hpRegen - debuffs.totalGrievousedRegen);
 		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
 		totalMultipliersStats.hpRegen += hpRegenMultValue;
 		bonusStats.hpRegen += hpRegenMultValue;

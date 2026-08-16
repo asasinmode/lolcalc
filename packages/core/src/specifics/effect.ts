@@ -296,6 +296,13 @@ export const EFFECT_SPECIFICS = {
 				return value * (typeof value === 'number' ? (1 - CONSTS.defaultGrievous) : 1);
 			},
 		},
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.grievousWounds = CONSTS.defaultGrievous;
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: defineEffectSpecific<[gWounds: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.grievousWoundsPercent),
@@ -319,6 +326,16 @@ export const EFFECT_SPECIFICS = {
 			type: VariableType.heal,
 			handler(value, effectData) {
 				return value * (typeof value === 'number' ? (1 - effectData[0] / 100) : 1);
+			},
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.grievousWoundsPercent)?.[0];
+					if (effect) {
+						debuffs.grievousWounds = effect.data.value[0] / 100;
+					}
+				},
 			},
 		},
 	}),
