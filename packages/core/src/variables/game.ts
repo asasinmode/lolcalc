@@ -663,7 +663,7 @@ export function replaceGameVariables(
 					console.warn('[replaceGameVariables] custom got undefined dynamic value', variableName, dynamicVariable, variableValueFunctionParams);
 				} else if (Array.isArray(dynamicValue)) {
 					if (typeof dynamicValue[0] === 'number' && typeof dynamicValue[1] === 'number') {
-						value = [roundNumber(dynamicValue[0]), roundNumber(dynamicValue[1])];
+						value = [dynamicValue[0], dynamicValue[1]];
 						baseValue = [dynamicValue[0], dynamicValue[1]];
 					} else if (Array.isArray(dynamicValue[0]) || Array.isArray(dynamicValue[1])) {
 						console.warn('[replaceGameVariables] custom got nested melee/ranged values', variableName, dynamicVariable, variableValueFunctionParams);
@@ -672,7 +672,7 @@ export function replaceGameVariables(
 					}
 				} else {
 					if (typeof dynamicValue === 'number') {
-						value = roundNumber(dynamicValue);
+						value = dynamicValue;
 						baseValue = dynamicValue;
 					} else {
 						value = dynamicValue;
@@ -688,10 +688,10 @@ export function replaceGameVariables(
 				const modifyVariableFns = meta?.type && modifyVariableFunctions[meta.type];
 				if (modifyVariableFns) {
 					if (Array.isArray(value)) {
-						value[0] = roundNumber(modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[0] as number));
-						value[1] = roundNumber(modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[1] as number));
+						value[0] = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[0] as number);
+						value[1] = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[1] as number);
 					} else if (typeof value === 'number') {
-						value = roundNumber(modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value as number));
+						value = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value as number);
 					}
 				}
 

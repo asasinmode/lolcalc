@@ -447,9 +447,24 @@ export const CHAMPION_SPECIFICS = {
 		},
 		passive: {
 			variables: defineChampionVariables<'Irelia', typeof IIrelia, 'passive'>()({
+				known: {
+					AttackSpeedPercent: [],
+				},
+				calculate(self) {
+					return {
+						AttackSpeedPercent: {
+							value: self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0,
+						},
+					};
+				},
 				meta: {
 					OnHitBonus: {
 						type: VariableType.magic,
+					},
+					AttackSpeedPercent: {
+						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
 					},
 				},
 				uninteresting: ['BuffDuration', 'MaxStacks', 'OnHitStructureMod'],
