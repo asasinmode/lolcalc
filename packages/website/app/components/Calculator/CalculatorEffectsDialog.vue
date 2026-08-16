@@ -254,6 +254,7 @@ defineExpose({
 		:aria-busy="isLoading"
 		:data-is-searched="search ? '' : undefined"
 		@open="loadChampionEffects"
+		@close="search = ''"
 	>
 		<header>
 			<h1>
