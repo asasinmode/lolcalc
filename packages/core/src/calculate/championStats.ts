@@ -240,6 +240,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const totalPreMultipliersStats = Object.fromEntries(Object.entries(bonusStats).map(
 		([statName, statValue]) => [statName, statValue + baseOnLevelStats[statName as IChampionStatName]],
 	)) as IChampionStats;
+	bonusStats.attackSpeed += baseOnLevelStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
 	/* maybe should not be done like that but that's what it is at this point */
 	totalPreMultipliersStats.tenacity = bonusStats.tenacity;
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
@@ -281,6 +282,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		debuffs.cripple = 1 - debuffs.cripple;
 		debuffs.totalCrippledAttackSpeed = totalPreMultipliersStats.attackSpeed * debuffs.cripple;
 		totalPreMultipliersStats.attackSpeed -= debuffs.totalCrippledAttackSpeed;
+		bonusStats.attackSpeed = Math.max(0, bonusStats.attackSpeed - debuffs.totalCrippledAttackSpeed);
 	}
 
 	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;

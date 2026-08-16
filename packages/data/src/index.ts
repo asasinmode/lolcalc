@@ -212,6 +212,8 @@ export interface IMiscData {
 
 export const UI: IUiData = uiData.data;
 
+export type TUi = typeof uiData.data;
+
 interface IUiData {
 	shop: {
 		categories: Record<IItemCategory | 'all', ITexture>;

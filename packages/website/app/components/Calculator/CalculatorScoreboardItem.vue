@@ -2,6 +2,7 @@
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';
+import type { TUi } from '@lolcalc/data';
 import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
@@ -417,7 +418,7 @@ function hideStatTooltip() {
 
 interface IChampionStat {
 	name: string;
-	iconTextureKey: keyof (typeof UI)['playerStats'];
+	iconTextureKey: keyof TUi['playerStats'];
 	description: string;
 	values: {
 		stat: IChampionStatName;
@@ -428,6 +429,7 @@ interface IChampionStat {
 		valueSuffix?: string;
 	}[];
 	displayedValue: string;
+	hasBonus: number | boolean;
 	bottomText?: string;
 }
 
@@ -660,6 +662,7 @@ function updateComputedStats(stats: IChampionStat[]) {
 			}
 		}
 
+		championStat.hasBonus = championStat.iconTextureKey === 'attackSpeed' ? championStat.values[1]!.bonus : championStat.values.some(statValue => statValue.bonus);
 		championStat.displayedValue ||= displayedValue.join(' | ');
 	}
 }
@@ -1271,7 +1274,7 @@ defineExpose({ el });
 							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)">
 						</dt>
 						<dd
-							:class="{ 'has-bonus': stat.values.some(statValue => statValue.bonus) }"
+							:class="{ 'has-bonus': stat.hasBonus }"
 							@mouseenter="showStatTooltip($event, stat)"
 							@mouseleave="hideStatTooltip"
 						>
