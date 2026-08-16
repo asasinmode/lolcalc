@@ -499,7 +499,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 		},
 		{
 			name: CHAMPION_STAT_META.omnivamp.name,
-			description: 'Returns a portion of all damage you deal as <scalehealth>Health</scalehealth>.<br><br><br>Reduced to 20% effectiveness when dealing damage to minions or monsters.',
+			description: 'Returns a portion of all damage you deal as <scalehealth>Health</scalehealth>.<br><br>Reduced to 20% effectiveness when dealing damage to minions or monsters.',
 			iconTextureKey: 'omnivamp',
 			values: [
 				{
@@ -539,7 +539,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 	const majorStats = [
 		{
 			name: CHAMPION_STAT_META.attackDamage.name,
-			description: 'The amount of <physicaldamage>physical damage</physicaldamage> your Attack deal.<br><br><br>Also increases the amount of damage you deal with certain Abilities.',
+			description: 'The amount of <physicaldamage>physical damage</physicaldamage> your Attack deal.<br><br>Also increases the amount of damage you deal with certain Abilities.',
 			iconTextureKey: 'attackDamage',
 			values: [
 				{
@@ -581,7 +581,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 		},
 		{
 			name: CHAMPION_STAT_META.attackSpeed.name,
-			description: 'Increases the rate at which you can Attack.<br><br><br>Ratio determines the effectiveness of bonus Attack Speed.',
+			description: 'Increases the rate at which you can Attack.<br><br>Ratio determines the effectiveness of bonus Attack Speed.',
 			iconTextureKey: 'attackSpeed',
 			values: [
 				{
