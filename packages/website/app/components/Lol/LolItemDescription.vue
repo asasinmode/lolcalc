@@ -364,9 +364,8 @@ defineExpose({ header });
 			}
 		}
 
-		/* trouble makers to check when changing this: kassadin passive, jhin passive, nidalee passive, viktor passive */
-		> li + br,
-		> br + br + br {
+		/* trouble makers to check when changing this: kayle/kassadin/jhin/nidalee/irelia/viktor passive */
+		> li + br {
 			--at-apply: 'hidden';
 		}
 
