@@ -934,13 +934,13 @@ export const ITEM_SPECIFICS = {
 				Shred: [],
 				ArmorShredded: [],
 			},
-			calculate(self, target) {
+			calculate(self, target): { Shred: IVariableValueResult; ArmorShredded: IVariableValueResult } {
 				return {
 					Shred: {
 						value: self.effectsOntoTargetVars.value.blackCleaverCarveShred ?? 0,
 					},
 					ArmorShredded: {
-						value: target?.stats.value.debuffs.shreddedArmor ?? 0,
+						value: ((self.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve && target?.stats.value.debuffs.shreddedArmor) ?? 0,
 					},
 				};
 			},
@@ -1495,13 +1495,13 @@ export const ITEM_SPECIFICS = {
 				Shred: [],
 				MagicResistShredded: [],
 			},
-			calculate(self, target) {
+			calculate(self, target): { Shred: IVariableValueResult; MagicResistShredded: IVariableValueResult } {
 				return {
 					Shred: {
 						value: self.effectsOntoTargetVars.value.bloodlettersVDecayShred ?? 0,
 					},
 					MagicResistShredded: {
-						value: target?.stats.value.debuffs.shreddedMR ?? 0,
+						value: ((self.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay && target?.stats.value.debuffs.shreddedMR) ?? 0,
 					},
 				};
 			},
