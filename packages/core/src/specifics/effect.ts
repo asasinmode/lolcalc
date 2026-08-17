@@ -584,6 +584,32 @@ export const EFFECT_SPECIFICS = {
 				return [(damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay];
 			}
 		},
+		variables: defineVariables({
+			known: {
+				Shred: [],
+				MagicResistShredded: [],
+			},
+			calculate(self) {
+				return {
+					Shred: {
+						value: self.stats.value.debuffs.percentageMRShred ?? 0,
+					},
+					MagicResistShredded: {
+						value: self.stats.value.debuffs.shreddedMR ?? 0,
+					},
+				};
+			},
+			meta: {
+				Shred: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+				MagicResistShredded: {
+					isCustom: true,
+				},
+			},
+		}),
 		calculateHooks: {
 			postInit: {
 				handler(self, _stats, { debuffs }) {
