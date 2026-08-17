@@ -283,12 +283,14 @@ export interface IStatsCalculationMiscDebug {
 
 /** variables of effects applied onto the damage target */
 export interface IEffectOntoTargetVars {
-	/** slow % applied on target from the source's hextech soul */
+	/** slow % from the source's hextech soul */
 	hextechSoulSlow?: number;
-	/** ms slow % applied on target from Nasus' w */
+	/** ms slow % from Nasus' w */
 	nasusWSlow?: number;
-	/** as slow % applied on target from Nasus' w */
+	/** as slow % from Nasus' w */
 	nasusWCripple?: number;
+	/** mr shred % from bloodletter's vile decay */
+	bloodlettersVDecayShred?: number;
 }
 
 /** all of the variables from currently applied effects */

@@ -1,7 +1,9 @@
 import type { IChampionStats, IEffectOntoTargetVars } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
+import type { IItemSpecific } from '../specifics/item.ts';
 import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';
+import { ITEM_SPECIFICS } from '../specifics/item.ts';
 
 export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoTargetVars {
 	const rv: IEffectOntoTargetVars = {};
@@ -9,6 +11,9 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 	self.championSpecific.value?.effectOntoTargetVars?.(self, rv);
 	if (self.dragonSoul.value) {
 		(DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[self.dragonSoul.value]?.soul?.effectOntoTargetVars?.(self, rv);
+	}
+	for (const item of self.items.value) {
+		item && (ITEM_SPECIFICS as Record<string, IItemSpecific>)[item.id]?.effectOntoTargetVars?.(self, rv);
 	}
 
 	return rv;

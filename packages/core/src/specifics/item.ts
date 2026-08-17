@@ -6,7 +6,7 @@ import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IStatsCalculationResult } from '@lolcalc/shared';
 import type { IDeriveProgressFn, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
-import type { DamageSource, ICalculateChampionStatsHookSource, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
@@ -1459,6 +1459,36 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Vile Decay stacks',
 		imgText(self) {
 			return self.internalItemData.value.vDecay;
+		},
+		variables: defineVariables({
+			known: {
+				Shred: [],
+				MagicResistShredded: [],
+			},
+			calculate(self, target) {
+				return {
+					Shred: {
+						value: self.effectsOntoTargetVars.value.bloodlettersVDecayShred ?? 0,
+					},
+					MagicResistShredded: {
+						value: target?.stats.value.debuffs.shreddedMR ?? 0,
+					},
+				};
+			},
+			meta: {
+				Shred: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+				MagicResistShredded: {
+					isCustom: true,
+				},
+			},
+			uninteresting: ['InternalCD', 'DebuffDuration', 'ShredPerStack', 'MaxStacks'],
+		}),
+		effectOntoTargetVars(self, vars) {
+			vars.bloodlettersVDecayShred = (self.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
 		},
 	},
 	[ITEM_NAME_TO_ID.experimentalHexplate]: {
@@ -3909,6 +3939,7 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, any, IChampionId, 'item'>;
+	effectOntoTargetVars?: IEffectOntoTargetVarsHook;
 	/**
 	 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)
 	 * ATM done only for textShop and textInventory, used for redemption, which by default shows `\@HealMin\@ - \@HealMax\@` that depends on ally level. Calculator gives an option to set ally's level to a concrete value so we should display the heal for selected ally level
