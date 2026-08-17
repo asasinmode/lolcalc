@@ -73,6 +73,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		percentageArmorShred: 0,
 		shreddedArmor: 0,
 		percentageMRShred: 0,
+		flatMRShred: 0,
 		shreddedMR: 0,
 	};
 	const effectVars: IStatsCalculationEffectVars = {};
@@ -323,21 +324,21 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	bonusStats.attackDamage += adMultipliersBonus;
 	totalMultipliersStats.attackDamage += adMultipliersBonus;
 
-	{ /* shred calc */
-		const totalMultipliersMRShred = (totalPreMultipliersStats.magicResist + totalMultipliersStats.magicResist) * debuffs.percentageMRShred;
-		debuffs.shreddedMR = totalMultipliersMRShred;
-		totalMultipliersStats.magicResist -= totalMultipliersMRShred;
-		bonusStats.magicResist = bonusStats.magicResist * (1 - debuffs.percentageMRShred);
-
-		const totalMultipliersArmorShred = (totalPreMultipliersStats.armor + totalMultipliersStats.armor) * debuffs.percentageArmorShred;
-		debuffs.shreddedArmor = totalMultipliersArmorShred;
-		totalMultipliersStats.armor -= totalMultipliersArmorShred;
-		bonusStats.armor = bonusStats.armor * (1 - debuffs.percentageArmorShred);
-	}
-
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
 		([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]],
 	)) as IChampionStats;
+
+	{ /* shred calc */
+		const totalMultipliersMRShred = (totalStats.magicResist - debuffs.flatMRShred) * debuffs.percentageMRShred;
+		debuffs.shreddedMR = totalMultipliersMRShred;
+		totalStats.magicResist = Math.max(0, totalStats.magicResist - totalMultipliersMRShred - debuffs.flatMRShred);
+		bonusStats.magicResist = Math.max(0, (bonusStats.magicResist - debuffs.flatMRShred) * (1 - debuffs.percentageMRShred));
+
+		const totalMultipliersArmorShred = totalStats.magicResist * debuffs.percentageArmorShred;
+		debuffs.shreddedArmor = totalMultipliersArmorShred;
+		totalStats.armor = Math.max(0, totalStats.armor - totalMultipliersArmorShred);
+		bonusStats.armor = bonusStats.armor * (1 - debuffs.percentageArmorShred);
+	}
 
 	// TODO figure out if its ok to do it, also handle other non mana champions not gaining mana
 	if (!source.hasMana.value) {

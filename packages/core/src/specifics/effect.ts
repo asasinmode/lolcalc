@@ -762,7 +762,18 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					const mrReduction = itemVariableValue('MagicResistanceShred', { item: ITEMS_BY_NAME.malignance });
+					if (typeof mrReduction.value === 'number') {
+						debuffs.flatMRShred += mrReduction.value;
+					} else {
+						console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.malignanceHatefog}] failed to calculate flat mr reduction`, mrReduction);
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.imperialMandateCommand]: defineEffectSpecific<[commanded: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.imperialMandate),

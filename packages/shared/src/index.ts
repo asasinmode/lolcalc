@@ -255,6 +255,7 @@ export interface IStatsCalculationDebuffs {
 	percentageArmorShred: number;
 	shreddedArmor: number;
 	percentageMRShred: number;
+	flatMRShred: number;
 	shreddedMR: number;
 }
 
