@@ -424,7 +424,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.frozenHeartWintersCaress]: defineEffectSpecific<[wCaressed: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart),
@@ -553,7 +552,6 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.horizonFocusHypershot]: defineEffectSpecific<[isHypershot: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.horizonFocus),
@@ -566,7 +564,6 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.bloodletterVileDecay]: {
 		...defineEffectSpecific<[vileDecayStacks: number]>({
@@ -587,7 +584,16 @@ export const EFFECT_SPECIFICS = {
 				return [(damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.bloodletterVileDecay)?.[0];
+					if (effect) {
+						debuffs.percentageMRShred += effect.data.value[0] * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
+					}
+				},
+			},
+		},
 	},
 	[EFFECT_OBJECT_NAME.blackCleaverCarve]: defineEffectSpecific<[carveStacks: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.blackCleaver),

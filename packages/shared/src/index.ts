@@ -252,6 +252,10 @@ export interface IStatsCalculationDebuffs {
 	percentageMSSlow: number[];
 	/** list of all flat slows applied onto target. In classic SR there is only 1 - Lulu W, but lolcalc also has a custom flat slow effect so sum these then apply them */
 	flatMSSlow: number[];
+	percentageArmorShred: number;
+	shreddedArmor: number;
+	percentageMRShred: number;
+	shreddedMR: number;
 }
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */

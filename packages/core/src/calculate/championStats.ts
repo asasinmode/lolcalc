@@ -70,6 +70,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		flatMSSlow: [],
 		appliedSlow: 0,
 		appliedFlatSlow: 0,
+		percentageArmorShred: 0,
+		shreddedArmor: 0,
+		percentageMRShred: 0,
+		shreddedMR: 0,
 	};
 	const effectVars: IStatsCalculationEffectVars = {};
 	const miscDebug: IStatsCalculationMiscDebug = {
@@ -318,6 +322,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const adMultipliersBonus = dragonStats.attackDamage + calculatedVariables.midQuestAd;
 	bonusStats.attackDamage += adMultipliersBonus;
 	totalMultipliersStats.attackDamage += adMultipliersBonus;
+
+	{ /* shred calc */
+		const totalMultipliersMRShred = totalPreMultipliersStats.magicResist * debuffs.percentageMRShred;
+		const bonusMRShred = bonusStats.magicResist * debuffs.percentageMRShred;
+		debuffs.shreddedMR = totalMultipliersMRShred + bonusMRShred;
+		totalMultipliersStats.magicResist -= totalMultipliersMRShred;
+		bonusStats.magicResist -= bonusMRShred;
+	}
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
 		([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]],

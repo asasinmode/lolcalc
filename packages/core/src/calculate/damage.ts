@@ -20,12 +20,11 @@ export function championDamage() {
 	// actualizer
 	// exhaust effect
 	// knight's vow damage reduction
-	// vulnerable effect damage taken increase effect
-	// randuin's omen
-	// warden's mail
-	// steelcaps/armored advance
+	// abyssal mask dmg amp
+	// horizon focus dmg amp
+	// imperial mandate dmg amp
 	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
-	// ldr
+	// ldr & custom variable from it
 	// champion passives - irelia, warwick, volibear
 }
 
@@ -34,6 +33,9 @@ export function basicAttack() {
 	// stuff from championDamage
 	// kraken slayer
 	// check tiamat items damage
+	// randuin's omen
+	// warden's mail
+	// steelcaps/armored advance
 }
 
 export function calculateDamage(
