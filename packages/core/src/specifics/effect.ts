@@ -638,7 +638,42 @@ export const EFFECT_SPECIFICS = {
 				return [(damageSource.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve];
 			}
 		},
-		// TODO calculate
+		variables: defineVariables({
+			known: {
+				Shred: [],
+				ArmorShredded: [],
+			},
+			calculate(self) {
+				return {
+					Shred: {
+						value: self.stats.value.debuffs.percentageArmorShred ?? 0,
+					},
+					ArmorShredded: {
+						value: self.stats.value.debuffs.shreddedArmor ?? 0,
+					},
+				};
+			},
+			meta: {
+				Shred: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+				ArmorShredded: {
+					isCustom: true,
+				},
+			},
+		}),
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.blackCleaverCarve)?.[0];
+					if (effect) {
+						debuffs.percentageArmorShred += effect.data.value[0] * ITEMS_BY_NAME.blackCleaver?.dataValues.ShredPerStack;
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.botrkClawingShadows]: defineEffectSpecific<[isClawed: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.botrk),

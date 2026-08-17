@@ -328,6 +328,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		debuffs.shreddedMR = totalMultipliersMRShred;
 		totalMultipliersStats.magicResist -= totalMultipliersMRShred;
 		bonusStats.magicResist = bonusStats.magicResist * (1 - debuffs.percentageMRShred);
+
+		const totalMultipliersArmorShred = (totalPreMultipliersStats.armor + totalMultipliersStats.armor) * debuffs.percentageArmorShred;
+		debuffs.shreddedArmor = totalMultipliersArmorShred;
+		totalMultipliersStats.armor -= totalMultipliersArmorShred;
+		bonusStats.armor = bonusStats.armor * (1 - debuffs.percentageArmorShred);
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(

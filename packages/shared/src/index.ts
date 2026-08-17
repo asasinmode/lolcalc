@@ -291,6 +291,8 @@ export interface IEffectOntoTargetVars {
 	nasusWCripple?: number;
 	/** mr shred % from bloodletter's vile decay */
 	bloodlettersVDecayShred?: number;
+	/** armor shred % from black cleaver's carve */
+	blackCleaverCarveShred?: number;
 }
 
 /** all of the variables from currently applied effects */

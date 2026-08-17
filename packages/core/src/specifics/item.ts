@@ -929,6 +929,36 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			return self.internalItemData.value.carve;
 		},
+		variables: defineVariables({
+			known: {
+				Shred: [],
+				ArmorShredded: [],
+			},
+			calculate(self, target) {
+				return {
+					Shred: {
+						value: self.effectsOntoTargetVars.value.blackCleaverCarveShred ?? 0,
+					},
+					ArmorShredded: {
+						value: target?.stats.value.debuffs.shreddedArmor ?? 0,
+					},
+				};
+			},
+			meta: {
+				Shred: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+				ArmorShredded: {
+					isCustom: true,
+				},
+			},
+			uninteresting: ['ShredPerStack', 'DebuffDuration', 'MaxStacks', 'MoveSpeedDuration'],
+		}),
+		effectOntoTargetVars(self, vars) {
+			vars.bloodlettersVDecayShred = (self.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
+		},
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
