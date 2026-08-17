@@ -686,7 +686,13 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.botrk?.dataValues.MoveSpeedMod * -1);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.zekesConvergenceFrostfireTempest]: defineEffectSpecific<[fTempested: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.zekesConvergence),
@@ -699,7 +705,13 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.zekesConvergence?.dataValues.SlowAmount);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.celestialOppositionBlessingShattered]: defineEffectSpecific<[mBlessingShattered: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.celestialOpposition),
@@ -712,7 +724,13 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.celestialOpposition?.dataValues.SlowAmount);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.randuinsHumility]: defineEffectSpecific<[humiliated: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.randuinsOmen),
@@ -725,7 +743,13 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.randuinsOmen?.dataValues.SlowAmount);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.malignanceHatefog]: defineEffectSpecific<[hatefogged: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.malignance),
@@ -751,7 +775,6 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.stridebreakerBShockwaveSlow]: defineEffectSpecific<[bShockwaved: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.stridebreaker),

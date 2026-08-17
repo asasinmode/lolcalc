@@ -25,6 +25,7 @@ export function championDamage() {
 	// actualizer
 	// exhaust effect
 	// knight's vow damage reduction
+	// blessing of the mountain damage reduction
 	// abyssal mask dmg amp
 	// horizon focus dmg amp
 	// imperial mandate dmg amp
