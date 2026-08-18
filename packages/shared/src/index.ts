@@ -284,26 +284,28 @@ export interface IStatsCalculationMiscDebug {
 
 /** variables of effects applied onto the damage target */
 export interface IEffectOntoTargetVars {
+	/** mr shred % from bloodletter's vile decay */
+	bloodlettersVDecayShred?: number;
+	/** armor shred % from black cleaver's carve */
+	blackCleaverCarveShred?: number;
 	/** slow % from the source's hextech soul */
 	hextechSoulSlow?: number;
 	/** ms slow % from Nasus' w */
 	nasusWSlow?: number;
 	/** as slow % from Nasus' w */
 	nasusWCripple?: number;
-	/** mr shred % from bloodletter's vile decay */
-	bloodlettersVDecayShred?: number;
-	/** armor shred % from black cleaver's carve */
-	blackCleaverCarveShred?: number;
+	/** ms slow % from Ashe passive */
+	ashePSlow?: number;
 }
 
 /** all of the variables from currently applied effects */
-export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple'> {
+export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow'> {
+	/** slow % from rylai's passive */
+	rylaiSlow?: number;
 	/** bonus flat MS from nami passive */
 	namiPassiveBonusMS?: number;
 	/** attack speed value reduced by nasus' passive */
 	nasusWASReduced?: number;
-	/** slow % from rylai's passive */
-	rylaiSlow?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

@@ -32,7 +32,7 @@ export function championDamage() {
 	// bloodsong dmg amp
 	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// ldr & custom variable from it
-	// champion passives - irelia, warwick, volibear
+	// champion passives - irelia, warwick, volibear, ashe
 	// amumu passive
 }
 

@@ -1,5 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
+import type IAshe from '@lolcalc/data/files/champion/Ashe.json';
 import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
@@ -157,6 +158,38 @@ export const CHAMPION_SPECIFICS = {
 				calculate() {
 					// TODO
 					return {} as any;
+				},
+			}),
+		},
+	},
+	Ashe: {
+		PASSIVE_OPTIONS: {
+			none: 0,
+			normal: 1,
+			crit: 2,
+		},
+		setupData(self) {
+			const maxPassive: number = CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.crit;
+			return {
+				frostShot: clamp(0, Math.round(self.internalData.value.frostShot ?? 0), maxPassive),
+			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Ashe', typeof IAshe, 'passive'>()({
+				meta: {
+					SlowDuration: {
+						type: VariableType.affectedByTenacity,
+					},
+					SlowAmount: {
+						type: VariableType.affectedBySlowResist,
+					},
+					EmpoweredSlowAmount: {
+						type: VariableType.affectedBySlowResist,
+						displayedName: 'MaxCritSlowAmount',
+					},
+					DamageBonus: {
+						type: VariableType.physical,
+					},
 				},
 			}),
 		},
@@ -1793,6 +1826,7 @@ export interface IChampionInternalDataMap {
 	Anivia: { isEgg: number };
 	Aphelios: IDamageSourceInternalDataBase;
 	AurelionSol: { passiveStacks: number };
+	Ashe: { frostShot: number };
 	Bard: { passiveStacks: number; chimeMoveSpeed: number };
 	Belveth: { passiveStacks: number; hasPassiveStack: number };
 	Darius: { isChampionAtMaxBleed: number };

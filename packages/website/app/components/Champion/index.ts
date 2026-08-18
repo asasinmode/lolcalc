@@ -22,6 +22,13 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Aphelios: {
 		extras: ChampionExtrasAphelios,
 	},
+	Ashe: {
+		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0), 'frostShot', 'apply Frost Shot on target', {
+			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.none]: 'none',
+			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.normal]: 'normal attack',
+			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.crit]: 'critical strike',
+		}),
+	},
 	AurelionSol: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'AurelionSol', 'passive', 0), 'passiveStacks', 'Cosmic Creator stacks'),
 	},
