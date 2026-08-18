@@ -1672,7 +1672,7 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 					const hashedSourceKeys: [string, string][] = Object.keys(variableSource[sourceKey]).filter(key => !key.startsWith('{')).map(key => [key, hashFnv1a(key)]);
 					const matchingKey = hashedSourceKeys.find(key => key[1] === variableName);
 					if (matchingKey) {
-						unknownChanged = objectReplaceAllEncounteredValues(variableSource, variableSourceKeys, variableName, matchingKey[0]);
+						unknownChanged ||= objectReplaceAllEncounteredValues(variableSource, variableSourceKeys, variableName, matchingKey[0]);
 						if (unknownChanged) {
 							unknownVariables.splice(i, 1);
 							(variableSource as any).__replacedVariables ||= {};
@@ -1703,8 +1703,11 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 				}
 			}
 		}
+
 		if (unknownVariables.length) {
 			debug[category].variables.set(key, unknownVariables.map(v => v[0]));
+		} else {
+			debug[category].variables.delete(key);
 		}
 
 		// TODO probably shouldn't do that, it's expected to happen when some unknown variables were resolved using their hashes. Rerun debug then to see if the newly resolved variables are actually known or also unknown but at least without a hash

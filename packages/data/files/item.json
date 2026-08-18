@@ -8996,7 +8996,7 @@
 					],
 					"mDisplayAsPercent": true,
 					"mRangedMultiplier": {
-						"mDataValue": "{4b5548be}",
+						"mDataValue": "RangedPercMaxHPMult",
 						"__type": "NamedDataValueCalculationPart"
 					}
 				},
@@ -9009,12 +9009,12 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mDataValue": "{e367e801}",
+							"mDataValue": "MeleeBonusADShieldRatio",
 							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
-						"mDataValue": "{51df2a01}",
+						"mDataValue": "RangedShieldMult",
 						"__type": "NamedDataValueCalculationPart"
 					}
 				},
@@ -9023,7 +9023,10 @@
 				}
 			},
 			"__replacedVariables": {
-				"{b1f09313}": "MeleePercMaxHP"
+				"{b1f09313}": "MeleePercMaxHP",
+				"{e367e801}": "MeleeBonusADShieldRatio",
+				"{51df2a01}": "RangedShieldMult",
+				"{4b5548be}": "RangedPercMaxHPMult"
 			}
 		},
 		"6694": {
