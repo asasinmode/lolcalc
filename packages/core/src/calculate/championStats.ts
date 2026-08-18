@@ -353,6 +353,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	totalStats.attackSpeed = Math.min(totalStats.attackSpeed, calculatedVariables.attackSpeedCap);
 	totalStats.tenacity = Math.min(1, totalStats.tenacity);
+	totalStats.critChance = Math.min(1, totalStats.critChance);
 
 	{ /* stat related heal multipliers */
 		calculatedVariables.healMult = 1 + combineCompounding(calculatedVariables.healMult, calculatedVariables.healMultAdditive);

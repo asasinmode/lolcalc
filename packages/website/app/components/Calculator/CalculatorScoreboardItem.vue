@@ -646,14 +646,9 @@ function updateComputedStats(stats: IChampionStat[]) {
 
 		for (let i = 0; i <= championStat.values.length - 1; i++) {
 			const value = championStat.values[i]!;
-			let formattedTotal = props.value.computed.formattedStatTotals.value[value.stat];
-
-			if (CHAMPION_STAT_META[value.stat].maxDisplayed) {
-				formattedTotal = Math.min(CHAMPION_STAT_META[value.stat].maxDisplayed!, formattedTotal);
-			}
+			const formattedTotal = props.value.computed.formattedStatTotals.value[value.stat];
 
 			displayedValue.push(`${formattedTotal}${CHAMPION_STAT_META[value.stat].isPercentage ? '%' : ''}`);
-
 			value.bonus = formatChampionStatValue(value.stat, props.value.stats.value.bonus[value.stat]);
 
 			const baseValue = props.value.stats.value[value.stat === 'bonusAttackSpeedPercent' ? 'base' : 'baseOnLevel'][value.stat];

@@ -350,7 +350,6 @@ export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = 
 	critChance: {
 		name: 'Critical Strike Chance',
 		isPercentage: true,
-		maxDisplayed: 100,
 	},
 	critDamageMultiplier: {
 		name: 'Critical Strike Damage',
@@ -422,8 +421,6 @@ export interface IChampionStatMeta {
 	name: string;
 	decimal?: number;
 	isPercentage?: boolean;
-	/** the max value displayed in stats panel, like crit chance only goes up to 100 */
-	maxDisplayed?: number;
 };
 
 export const ALL_CHAMPION_STATS = Object.keys(CHAMPION_STAT_META) as IChampionStatName[];
