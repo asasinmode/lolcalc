@@ -1292,21 +1292,17 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	StatBySubPartCalculationPart(variable: IGameVariablesByType['StatBySubPartCalculationPart'], whole, meta) {
 		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
-
-		let multiplier;
-		if ('mBreakpoints' in variable.mSubpart) {
-			multiplier = VARIABLE_CALCULATION_FNS.ByCharLevelBreakpointsCalculationPart(variable.mSubpart, whole, meta).value as number;
-		} else if ('mNumber' in variable.mSubpart) {
-			multiplier = variable.mSubpart.mNumber;
-		}
+		const subpart = variableResolveFn(variable.mSubpart)?.(variable.mSubpart, whole, meta);
+		const multiplier = subpart?.value;
 
 		if (typeof multiplier === 'number') {
 			if (statValue !== undefined) {
+				// TODO not sure if that's a good approach, it's to exclude crit damage from adding onto calculatesFrom multiplier. For now only Ashe passive - in game it shows `100% + 100% %i:crit%` and multiplier here is `1.3`, which is correct for calculations, but not for what the game shows, since the `0.3` is from the crit damage multiplier and takes effect only when infinity edge is present. When other crit scaling variables are calculated, check if all works
 				return {
 					value: statValue.value * multiplier,
 					roundReplaced: true,
 					calculatesFrom: [{
-						value: multiplier,
+						value: multiplier * (statValue.stat === 'critChance' ? 100 : 1),
 						isPercentage: true,
 						stat: statValue.stat as ICalculatesFromPart['stat'],
 						type: statValue.type,
@@ -1317,16 +1313,6 @@ export const VARIABLE_CALCULATION_FNS = {
 					value: multiplier,
 				};
 			}
-		} else if (statValue !== undefined) {
-			return {
-				value: statValue.value,
-				calculatesFrom: [{
-					value: 1 * 100,
-					isPercentage: true,
-					stat: statValue.stat as ICalculatesFromPart['stat'],
-					type: statValue.type,
-				}],
-			};
 		}
 	},
 	SumOfSubPartsCalculationPart(variable: IGameVariablesByType['SumOfSubPartsCalculationPart'], whole, meta) {

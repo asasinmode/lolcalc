@@ -90,6 +90,96 @@
 				}
 			}
 		},
+		"Ashe": {
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Frost Shot",
+							"objectName": "AshePassive",
+							"dataKey": "Characters/Ashe/Spells/AshePassiveAbility/AshePassive",
+							"image": "assets/characters/ashe/hud/icons2d/ashe_p.png",
+							"tooltip": "{{Spell_AshePassive_Tooltip}}",
+							"tooltipExtended": "{{Spell_AshePassive_Tooltip}}<br><br><rules>The bonus damage scales with Critical Strike Chance and Critical Strike Damage bonus.</rules>",
+							"dataValues": {
+								"SlowDuration": [2, 2, 2, 2, 2, 2, 2]
+							},
+							"spellCalculations": {
+								"SlowAmount": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mStartValue": 0.2,
+											"mEndValue": 0.3,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"EmpoweredSlowAmount": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mStartValue": 0.4,
+											"mEndValue": 0.6,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"DamageBonus": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
+										},
+										{
+											"mStat": 8,
+											"mSubpart": {
+												"mSubparts": [
+													{
+														"mNumber": 1,
+														"__type": "NumberCalculationPart"
+													},
+													{
+														"mStat": 9,
+														"mStatFormula": 2,
+														"mCoefficient": 1,
+														"__type": "StatByCoefficientCalculationPart"
+													}
+												],
+												"__type": "SumOfSubPartsCalculationPart"
+											},
+											"__type": "StatBySubPartCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"{da9201cc}": {
+									"mMultiplier": {
+										"mStat": 2,
+										"mCoefficient": 1,
+										"__type": "StatByCoefficientCalculationPart"
+									},
+									"{72c5c2a8}": 0,
+									"mModifiedGameCalculation": "DamageBonus",
+									"__type": "GameCalculationModified"
+								}
+							}
+						}
+					]
+				}
+			},
+			"stringtable": {
+				"spell_listtype_attackspeed": "Attack Speed",
+				"spell_listtype_asheflurryattackdamageratio": "Flurry Attack Damage ratio",
+				"spell_volley_arrows": "Arrows Fired",
+				"spell_listtype_damage": "Damage",
+				"spell_ashepassive_tooltip": "Ashe's Attacks and Abilities <status>Slow</status> by @SlowAmount@ for @SlowDuration@ seconds. Attacks deal @DamageBonus@ damage.<br><br>Ashe's critical strikes deal no extra damage, instead increasing the <status>Slow</status> to @EmpoweredSlowAmount@ decaying."
+			}
+		},
 		"Briar": {
 			"stats": {
 				"hp": 625,

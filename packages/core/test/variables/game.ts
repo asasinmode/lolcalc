@@ -179,6 +179,13 @@ test('extended equals', async (t) => {
 		});
 		const sivirQ = extendedChampionAbilityDescription(sivir, 'tooltip', 'q');
 		assertMetaSuffix('TotalDamage', '<const>42.28</const> <scalead>+ 84.56% bonus %i:scalead%</scalead> <scaleap>+ 72.48%%i:scaleap%</scaleap>', sivirQ);
+
+		const ashe = await setupDamageSource(fixture, 'Ashe');
+		const ashePassive = extendedChampionAbilityDescription(ashe, 'tooltip', 'passive');
+		assertMetaSuffix('DamageBonus', '<const>100</const> + 100%%i:scalecrit%', ashePassive);
+		ashe.addItem(ITEMS_BY_NAME.infinityEdge);
+		const ashePassiveIE = extendedChampionAbilityDescription(ashe, 'tooltip', 'passive');
+		assertMetaSuffix('DamageBonus', '<const>100</const> + 130%%i:scalecrit%', ashePassiveIE);
 	});
 });
 

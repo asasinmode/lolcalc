@@ -1335,7 +1335,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					DamageAmp: {
-						value: self.stats.value.variables.hexopticsBonusDamagePercent,
+						value: self.stats.value.variables.hexopticsBonusDamagePercent ?? 0,
 					},
 				};
 			},
