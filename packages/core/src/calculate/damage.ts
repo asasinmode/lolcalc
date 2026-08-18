@@ -33,6 +33,7 @@ export function championDamage() {
 	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// ldr & custom variable from it
 	// champion passives - irelia, warwick, volibear
+	// amumu passive
 }
 
 /** TODO basic aa calc? not sure about the interface yet */

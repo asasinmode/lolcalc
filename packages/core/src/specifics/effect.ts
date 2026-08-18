@@ -859,7 +859,13 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.seryldasGrudge?.dataValues.SlowAmount);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.gunbladeLightningBolt]: defineEffectSpecific<[lightningBolt: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hextechGunblade),
@@ -872,7 +878,13 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.hextechGunblade?.dataValues.SlowAmount);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: defineEffectSpecific<[isCursed: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Amumu', 'passive', 0),
@@ -880,7 +892,6 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.jannaPTailwind]: defineEffectSpecific<[isTailwinded: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Janna', 'passive', 0),
@@ -888,7 +899,21 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { calculatedVariables }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.jannaPTailwind)?.[0];
+					if (effect?.champion.value?.id === 'Janna') {
+						const bonusMS = championAbilityVariableValue('MSPercentAlly', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
+						if (typeof bonusMS.value === 'number') {
+							calculatedVariables.totalBonusPercentMoveSpeed += bonusMS.value;
+						} else {
+							console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.jannaPTailwind}] failed to calculate passive ms`, bonusMS);
+						}
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.ashePFrostShot]: defineEffectSpecific<[frostShot: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0),
