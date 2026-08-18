@@ -29,6 +29,7 @@ export function championDamage() {
 	// abyssal mask dmg amp
 	// horizon focus dmg amp
 	// imperial mandate dmg amp
+	// bloodsong dmg amp
 	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// ldr & custom variable from it
 	// champion passives - irelia, warwick, volibear

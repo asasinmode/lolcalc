@@ -798,7 +798,13 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.stridebreaker?.dataValues.MSSlow * -1);
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.icebornGauntletFrostField]: defineEffectSpecific<[frostField: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet),
@@ -816,7 +822,19 @@ export const EFFECT_SPECIFICS = {
 		},
 		enumOptions: MeleeRangedEnumOptions,
 		maxValue: MeleeRangedEnumOptions.ranged,
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.icebornGauntletFrostField)?.[0];
+					const slow = itemVariableValue('SlowAmountMeleeRangedSplit', { item: ITEMS_BY_NAME.icebornGauntlet, isRanged: effect?.data.value[0] === MeleeRangedEnumOptions.ranged });
+					if (typeof slow.value === 'number') {
+						debuffs.percentageMSSlow.push(slow.value);
+					} else {
+						console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.icebornGauntletFrostField}] failed to calculate slow`, slow);
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.bloodsongSpellbladed]: defineEffectSpecific<[bloodsonged: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bloodsong),
@@ -829,7 +847,6 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		// TODO calculate
 	}),
 	[EFFECT_OBJECT_NAME.seryldaBitterCold]: defineEffectSpecific<[bitterCold: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge),
