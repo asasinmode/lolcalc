@@ -918,10 +918,41 @@ export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.ashePFrostShot]: defineEffectSpecific<[frostShot: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0),
 		label: 'Frost Shot',
-		setupData(data) {
-			return [clamp(0, data?.[0] ?? 0, 1)];
+		enumOptions: {
+			'none': 0,
+			'normal attack': 1,
+			'critical strike': 2,
 		},
-		// TODO calculate
+		maxValue: 2,
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 2)];
+		},
+		imgText(_data, self) {
+			return Math.round(self.stats.value.effectVars.ashePSlow ?? 0);
+		},
+		setupDataFromInternalData(damageSource) {
+			return [(damageSource.internalData.value as IInternalDataOf<'Ashe'>).frostShot];
+		},
+		watch(effect) {
+			return effect.source.value?.level.value;
+		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== 'Ashe' satisfies IChampionId) {
+					return 'it\'s not Ashe';
+				}
+			},
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.ashePFrostShot)?.[0];
+					if (effect?.champion.value?.id === 'Ashe') {
+						console.log('apply', effect.source.value?.level.value ?? 1);
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: defineEffectSpecific<[isCalledByFreljord: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0),
@@ -974,23 +1005,6 @@ export const EFFECT_SPECIFICS = {
 		imgText(_data, self) {
 			return Math.round(self.stats.value.effectVars.namiPassiveBonusMS ?? 0);
 		},
-		variables: defineVariables({
-			known: {
-				BonusMS: [],
-			},
-			calculate(self) {
-				return {
-					BonusMS: {
-						value: self.stats.value.effectVars.namiPassiveBonusMS,
-					},
-				};
-			},
-			meta: {
-				BonusMS: {
-					isCustom: true,
-				},
-			},
-		}),
 		deriveProgressValue: (_value, self) => {
 			return self?.stats.value.effectVars.namiPassiveBonusMS ?? 0;
 		},
@@ -1020,6 +1034,23 @@ export const EFFECT_SPECIFICS = {
 				effect.data.value[1] = effect.source.value.stats.value.total.abilityPower;
 			},
 		},
+		variables: defineVariables({
+			known: {
+				BonusMS: [],
+			},
+			calculate(self) {
+				return {
+					BonusMS: {
+						value: self.stats.value.effectVars.namiPassiveBonusMS,
+					},
+				};
+			},
+			meta: {
+				BonusMS: {
+					isCustom: true,
+				},
+			},
+		}),
 		calculateHooks: {
 			postInit: {
 				handler(self, { effectStats }, { effectVars }) {
@@ -1054,6 +1085,16 @@ export const EFFECT_SPECIFICS = {
 		},
 		watch(effect) {
 			return effect.source.value?.abilityLevels.value.w;
+		},
+		deriveProgressValue: (_value, self) => {
+			return self?.stats.value.effectVars.nasusWSlow ?? 0;
+		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== 'Nasus' satisfies IChampionId) {
+					return 'it\'s not Nasus';
+				}
+			},
 		},
 		variables: defineVariables({
 			known: {
@@ -1090,16 +1131,6 @@ export const EFFECT_SPECIFICS = {
 				},
 			},
 		}),
-		deriveProgressValue: (_value, self) => {
-			return self?.stats.value.effectVars.nasusWSlow ?? 0;
-		},
-		sourceControls: {
-			invalidMessage: (source) => {
-				if (source.listedChampion.value?.id !== 'Nasus' satisfies IChampionId) {
-					return 'it\'s not Nasus';
-				}
-			},
-		},
 		calculateHooks: {
 			postInit: {
 				handler(self, _stats, { miscDebug, effectVars, debuffs }) {

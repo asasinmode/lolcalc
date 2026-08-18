@@ -228,7 +228,9 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
 			??= enumOptions
-				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
+				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])), {
+						selectEffectSourceProps: effectSpecific.sourceControls,
+					})
 				: deriveProgressValue
 					? await progressExtra(abilityId, 0, label, deriveProgressValue, {
 							selectEffectSourceProps: effectSpecific.sourceControls,

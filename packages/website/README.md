@@ -200,6 +200,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
     - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling (actually might not have to be 1 diff, but probably add disclaimer and settle on acceptable margin of error)
+    - [ ] ashe passive not decaying because I couldn't come up with a design I'm happy with
     - [ ] screenshots showing it accurately calculating things
     - [ ] decaying move speed bonuses
     - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields

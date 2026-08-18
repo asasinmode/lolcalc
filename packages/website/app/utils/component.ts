@@ -187,10 +187,25 @@ export async function enumExtra<T extends IGameAbilityId>(
 	 * ```
 	 */
 	options: Record<number, string>,
+	{
+		selectEffectSourceProps,
+	}: {
+		selectEffectSourceProps?: ISelectEffectSourceProps;
+	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
+
+		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
+		function updateEffectSource(value?: DamageSource) {
+			if (appliedEffect) {
+				!appliedEffect.value && updateValue(0);
+				appliedEffect.value!.source.value = value;
+			} else {
+				console.error('[utils/component number] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
+			}
+		}
 
 		return () => h(CalculatorExtraEnum, {
 			'modelValue': modelValue.value,
@@ -202,7 +217,13 @@ export async function enumExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
-		}, ctx.slots);
+		}, { default: () => {
+			const defaultSlots = ctx.slots.default?.();
+			return [
+				...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
+				selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+			];
+		} });
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
