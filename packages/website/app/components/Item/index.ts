@@ -5,11 +5,6 @@ import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { ItemExtraTearItem } from '#components';
 
-const passiveMultiplierToTooltip = {
-	label: 'passive multiplier to tooltip values',
-	tooltip: 'this item\'s passive affects heals and shields. When this is toggled, the multiplier will be applied to the values displayed in the <b>results table</b> (tooltips in the scoreboard stay unaffected)',
-};
-
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.hubris]: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hubris), 'eminence', 'Eminence stacks'),
@@ -137,7 +132,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
 		extras: [
-			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hexoptics), 'magnification', 'Distance between target', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_STACKS),
+			await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hexoptics), 'magnification', 'Distance between target', progress => progress, { max: ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_RANGE, derivedSymbolSuffix: '' }),
 			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hexoptics), 'arcaneAim', 'Arcane Aim'),
 		],
 	},

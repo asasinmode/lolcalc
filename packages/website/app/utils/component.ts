@@ -82,10 +82,12 @@ export async function progressExtra<T extends IGameAbilityId>(
 		selectEffectSourceProps,
 		derivedSymbolSuffix = '%',
 		onUpdate,
+		max,
 	}: {
 		effectControlsProps?: IEffectControlsProps<any>;
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 		derivedSymbolSuffix?: string;
+		max?: number;
 		onUpdate?: IExtraOnValueUpdate;
 	} = {},
 ) {
@@ -122,6 +124,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
+			max,
 			deriveValue,
 			derivedSymbolSuffix,
 			onImgMouseenter(event) {

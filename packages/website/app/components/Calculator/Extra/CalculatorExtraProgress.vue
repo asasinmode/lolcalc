@@ -2,13 +2,16 @@
 import type { IGameImageData } from '@lolcalc/core/misc';
 import { roundNumber } from '@lolcalc/shared/utils';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	idSuffix: string;
 	imgSrc: IGameImageData;
 	label: string;
 	deriveValue: (value: number) => number | undefined;
 	derivedSymbolSuffix?: string;
-}>();
+	max?: number;
+}>(), {
+	max: 100,
+});
 
 defineEmits<{
 	imgMouseenter: [event: MouseEvent];
@@ -57,7 +60,7 @@ const derivedValue = computed(() => {
 			:value="value ?? localValue ?? 0"
 			type="range"
 			min="0"
-			max="100"
+			:max
 			@mousedown="updateMousedown(true)"
 			@mouseup="updateMousedown(false)"
 			@input="updateModelValue"

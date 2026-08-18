@@ -1316,10 +1316,10 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
-		MAX_STACKS: ITEMS_BY_NAME.hexoptics?.dataValues.MaxRange,
+		MAX_RANGE: ITEMS_BY_NAME.hexoptics?.dataValues.MaxRange,
 		internalDataProperties: ['magnification', 'arcaneAim'],
 		setupData(self) {
-			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_STACKS);
+			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_RANGE);
 			self.internalItemData.value.arcaneAim = clamp(0, self.internalItemData.value.arcaneAim ?? 0, 1);
 			return { magnification: 0, arcaneAim: 0 };
 		},
