@@ -1294,7 +1294,6 @@ export const VARIABLE_CALCULATION_FNS = {
 		const statValue = resolveMStatWithFormula(variable, meta.variableValueParams.damageSource?.stats.value);
 
 		let multiplier;
-
 		if ('mBreakpoints' in variable.mSubpart) {
 			multiplier = VARIABLE_CALCULATION_FNS.ByCharLevelBreakpointsCalculationPart(variable.mSubpart, whole, meta).value as number;
 		} else if ('mNumber' in variable.mSubpart) {
@@ -1318,6 +1317,16 @@ export const VARIABLE_CALCULATION_FNS = {
 					value: multiplier,
 				};
 			}
+		} else if (statValue !== undefined) {
+			return {
+				value: statValue.value,
+				calculatesFrom: [{
+					value: 1 * 100,
+					isPercentage: true,
+					stat: statValue.stat as ICalculatesFromPart['stat'],
+					type: statValue.type,
+				}],
+			};
 		}
 	},
 	SumOfSubPartsCalculationPart(variable: IGameVariablesByType['SumOfSubPartsCalculationPart'], whole, meta) {
