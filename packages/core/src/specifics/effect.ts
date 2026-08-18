@@ -928,7 +928,7 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 2)];
 		},
 		imgText(_data, self) {
-			return Math.round(self.stats.value.effectVars.ashePSlow ?? 0);
+			return `${Math.round((self.stats.value.effectVars.ashePSlow ?? 0) * 100)}%`;
 		},
 		setupDataFromInternalData(damageSource) {
 			return [(damageSource.internalData.value as IInternalDataOf<'Ashe'>).frostShot];
@@ -945,10 +945,16 @@ export const EFFECT_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, _stats, { debuffs }) {
+				handler(self, _stats, { effectVars, debuffs }) {
 					const effect = self.getEffect(EFFECT_OBJECT_NAME.ashePFrostShot)?.[0];
 					if (effect?.champion.value?.id === 'Ashe') {
-						console.log('apply', effect.source.value?.level.value ?? 1);
+						const slow = championAbilityVariableValue(effect.data.value?.[0] === 2 ? 'EmpoweredSlowAmount' : 'SlowAmount', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!, damageSource: { level: { value: effect.source.value?.level.value ?? 1 } } as DamageSource });
+						if (typeof slow.value === 'number') {
+							effectVars.ashePSlow = slow.value;
+							debuffs.percentageMSSlow.push(slow.value);
+						} else {
+							console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.ashePFrostShot}] failed to calculate passive slow`, slow);
+						}
 					}
 				},
 			},

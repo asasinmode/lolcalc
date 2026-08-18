@@ -185,7 +185,6 @@ export const CHAMPION_SPECIFICS = {
 					},
 					EmpoweredSlowAmount: {
 						type: VariableType.affectedBySlowResist,
-						displayedName: 'MaxCritSlowAmount',
 					},
 					DamageBonus: {
 						type: VariableType.physical,
