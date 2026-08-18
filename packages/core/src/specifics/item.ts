@@ -3562,31 +3562,22 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			known: {
 				f3: [],
-				lolcalcChampRange: [],
 				MaxHealthDamage: [],
 			},
-			calculate(self, target) {
+			calculate(_self, target) {
 				const meleeHpPercent = itemVariableValue('MaxHealthDamageCalc', { item: ITEMS_BY_NAME.eclipse, isRanged: false }).value as number;
 				const rangedHpPercent = itemVariableValue('MaxHealthDamageCalc', { item: ITEMS_BY_NAME.eclipse, isRanged: true }).value as number;
 
 				return {
 					f3: { value: 0 },
-					lolcalcChampRange: [
-						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: false }),
-						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.eclipse, damageSource: self, isRanged: true }),
-					],
 					MaxHealthDamage: {
-						value: [meleeHpPercent / 100 * (target?.stats.value.total.hp ?? 0), rangedHpPercent / 100 * (target?.stats.value.total.hp ?? 0)],
+						value: [meleeHpPercent * (target?.stats.value.total.hp ?? 0), rangedHpPercent * (target?.stats.value.total.hp ?? 0)],
 					},
 				};
 			},
 			meta: {
 				MaxHealthDamageCalc: {
 					type: VariableType.physical,
-				},
-				lolcalcChampRange: {
-					displayedName: 'Shield',
-					type: VariableType.shield,
 				},
 				MaxHealthDamage: {
 					isCustom: true,

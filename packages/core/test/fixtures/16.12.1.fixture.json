@@ -2818,19 +2818,35 @@
 		},
 		"6692": {
 			"name": "Eclipse",
+			"stats": {
+				"FlatPhysicalDamageMod": 60,
+				"AbilityHasteMod": 15
+			},
 			"dataValues": {
 				"WindowDuration": 2,
-				"MeleeItemCalcValueB": 6,
-				"RangedItemCalcValueB": 4,
+				"MeleePercMaxHP": 0.08,
+				"RangedPercMaxHPMult": 0.625,
 				"Cooldown": 6,
 				"ShieldDuration": 2,
 				"MeleeBaseShield": 160,
-				"RangedBaseShield": 80,
-				"MeleeShieldADRatio": 0.4,
-				"RangedShieldADRatio": 0.2
+				"MeleeBonusADShieldRatio": 0.4,
+				"RangedShieldMult": 0.5
 			},
 			"itemCalculations": {
-				"MeleeItemCalcValue": {
+				"MaxHealthDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleePercMaxHP",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "RangedPercMaxHPMult",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				},
+				"ShieldSplit": {
 					"mFormulaParts": [
 						{
 							"mDataValue": "MeleeBaseShield",
@@ -2839,44 +2855,24 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mDataValue": "MeleeShieldADRatio",
+							"mDataValue": "MeleeBonusADShieldRatio",
 							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"RangedItemCalcValue": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RangedBaseShield",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "RangedShieldADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MaxHealthDamageCalc": {
-					"mFormulaParts": [
-						{
-							"mNumber": 6,
-							"__type": "NumberCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.667,
-						"__type": "NumberCalculationPart"
+						"mDataValue": "RangedShieldMult",
+						"__type": "NamedDataValueCalculationPart"
 					}
+				},
+				"__renamedVariables": {
+					"{d02ea590}": "ShieldSplit"
 				}
 			},
-			"stringCalculations": {
-				"{4217e5fd}": {
-					"MeleeResult": "@MaxHealthPercent@",
-					"RangedResult": "@RangedMaxHealthPercent@",
-					"DefaultResult": "@MaxHealthPercent@"
-				}
+			"__replacedVariables": {
+				"{b1f09313}": "MeleePercMaxHP",
+				"{e367e801}": "MeleeBonusADShieldRatio",
+				"{51df2a01}": "RangedShieldMult",
+				"{4b5548be}": "RangedPercMaxHPMult"
 			}
 		},
 		"6696": {

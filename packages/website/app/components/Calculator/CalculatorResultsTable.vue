@@ -458,19 +458,26 @@ function gameVariablesCellValue(variableName: string, variables?: IReplaceGameVa
 		const suffix = variable?.isPercentage || rv.meta?.resultsIsPercentage ? '%' : '';
 		const multiplier = rv.meta?.resultsMultiplier;
 
+		let precision = rv.meta?.roundReplaced ?? (rv.meta?.isCustom ? 2 : undefined);
+		if (typeof precision === 'boolean') {
+			precision = 0;
+		}
+
 		const value = variable?.value;
 		if (value === undefined || Number.isNaN(value)) {
 			rv.numberValue = (value as number) ?? 0;
 			rv.value = '?';
 			rv.isUnknown = true;
 		} else if (Array.isArray(value)) {
-			rv.value = `${typeof value[0] === 'number' && multiplier ? roundNumber(value[0] * multiplier) : value[0]}${suffix} | ${typeof value[1] === 'number' && multiplier ? roundNumber(value[1] * multiplier) : value[1]}${suffix}`;
+			const v1 = typeof value[0] === 'number'
+				? multiplier ? roundNumber(value[0] * multiplier, precision) : roundNumber(value[0], precision)
+				: value[0];
+			const v2 = typeof value[1] === 'number'
+				? multiplier ? roundNumber(value[1] * multiplier, precision) : roundNumber(value[1], precision)
+				: value[1];
+			rv.value = `${v1}${suffix} | ${v2}${suffix}`;
 		} else {
 			if (typeof value === 'number') {
-				let precision = rv.meta?.roundReplaced ?? (rv.meta?.isCustom ? 2 : undefined);
-				if (typeof precision === 'boolean') {
-					precision = 0;
-				}
 				const totalValue = multiplier ? roundNumber(value * multiplier, precision) : roundNumber(value, precision);
 				rv.value = `${totalValue}${suffix}`;
 				rv.numberValue = totalValue;

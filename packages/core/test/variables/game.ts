@@ -1,9 +1,9 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IReplaceGameVariablesRV } from '@lolcalc/core/variables/game.ts';
 import type { TText } from '@lolcalc/data';
 import type { IChampionAbilityKey } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
-import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { specificKnownVariables } from '@lolcalc/core/specifics/index.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
@@ -24,7 +24,6 @@ test('extended equals', async (t) => {
 	const rangedDamageSource = await setupDamageSource(fixture, 'Ahri', {
 		items: [ITEMS_BY_NAME.eclipse, ITEMS_BY_NAME.stridebreaker],
 	});
-	const championlessDamageSource = new DamageSource({ items: [ITEMS_BY_NAME.eclipse] });
 
 	t.test('single stat scaling', () => {
 		const runaan = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.runaan].tooltipShop[0]![2]!, 'item', { item: ITEMS_BY_NAME.runaan }, undefined, { isExtended: true });
@@ -115,7 +114,7 @@ test('extended equals', async (t) => {
 		assertMetaSuffix('CleaveDamage', '<scalead>20%</scalead>%i:scalead%', profaneHydra);
 
 		const eclipse = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.eclipse].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.eclipse, isRanged: true, dynamicVariables: rangedDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.eclipse] }, undefined, { isExtended: true });
-		assertMetaSuffix('lolcalcChampRange', '<const>80</const> <scalead>+ 20% bonus</scalead> %i:scalead%', eclipse);
+		assertMetaSuffix('ShieldSplit', '<const>80</const> <scalead>+ 20% bonus %i:scalead%</scalead>', eclipse);
 
 		const hullbreaker1 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker, isRanged: true }, undefined, { isExtended: true });
 		assertMetaSuffix('MaxStackDamage', '<scalead>84% base %i:scalead%</scalead> <scalehealth>+ 3.5%%i:scalehealth%</scalehealth>', hullbreaker1);
@@ -139,8 +138,8 @@ test('extended equals', async (t) => {
 		const krakenSlayer = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.krakenSlayer].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.krakenSlayer }, undefined, { isExtended: true });
 		assertMetaSuffix('MaximumDamage', '<scalelevel>263 - 350</scalelevel> <const>|</const> <scalelevel>210 - 280</scalelevel>%i:scalelevel%', krakenSlayer);
 
-		const eclipse = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.eclipse].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.eclipse, dynamicVariables: championlessDamageSource.computed.variables.value.items[ITEM_NAME_TO_ID.eclipse] }, undefined, { isExtended: true });
-		assertMetaSuffix('lolcalcChampRange', '<const>160</const> <scalead>+ 40% bonus %i:scalead%</scalead> <const>|</const> <const>80</const> <scalead>+ 20% bonus %i:scalead%</scalead>', eclipse);
+		const eclipse = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.eclipse].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.eclipse }, undefined, { isExtended: true });
+		assertMetaSuffix('ShieldSplit', '<const>160</const> <scalead>+ 40% bonus %i:scalead%</scalead> <const>|</const> <const>80</const> <scalead>+ 20% bonus %i:scalead%</scalead>', eclipse);
 
 		const hullbreaker1 = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.hullbreaker].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.hullbreaker }, undefined, { isExtended: true });
 		assertMetaSuffix('MaxStackDamageVSStructures', '<scalead>300% base %i:scalead%</scalead> <scalehealth>+ 10%%i:scalehealth%</scalehealth> <const>|</const> <scalead>210% base %i:scalead%</scalead> <scalehealth>+ 7%%i:scalehealth%</scalehealth>', hullbreaker1);
