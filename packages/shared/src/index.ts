@@ -123,6 +123,7 @@ export interface IStatsCalculationVariables {
 	/** ap gained from completed mid quest */
 	midQuestAp?: number;
 	// TODO if all bonus damage percents are treated the same, store them under the same variable
+	// TODO move these to damage calc computed
 	/** bonus damage % gained from liandry's passive stacks, doesn't affect stats but is kept here */
 	liandryBonusDamagePercent?: number;
 	/** bonus damage % gained from haunting guise's passive stacks, doesn't affect stats but is kept here */
@@ -135,6 +136,8 @@ export interface IStatsCalculationVariables {
 	actualizerBuffPercent?: number;
 	/** bonus damage % gained from shojin's passive stacks, doesn't affect stats but is kept here */
 	shojinBonusDamagePercent?: number;
+	/** bonus damage % from hexoptics, doesn't affect stats but is kept here */
+	hexopticsBonusDamagePercent?: number;
 	/** ap gained from blackfire torch's passive */
 	blackfireTorchBBlazeAP?: number;
 	/** multiplier value from blackfire torch's passive */

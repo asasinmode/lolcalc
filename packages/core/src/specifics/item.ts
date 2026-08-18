@@ -1325,14 +1325,36 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Magnification % damage increase',
 		imgText(self) {
-			const { magnification } = self.internalItemData.value as { magnification: number };
-			const { dataValues: { MaxRange, MaxDamageAmp } } = ITEMS_BY_NAME.hexoptics;
-			return magnification && `${roundNumber(Math.round((magnification / MaxRange * 100 * MaxDamageAmp) * 10) / 10)}%`;
+			const { hexopticsBonusDamagePercent } = self.stats.value.variables;
+			return hexopticsBonusDamagePercent && `${roundNumber(hexopticsBonusDamagePercent * 100, 1)}%`;
 		},
+		variables: defineVariables({
+			known: {
+				DamageAmp: [],
+			},
+			calculate(self) {
+				return {
+					DamageAmp: {
+						value: self.stats.value.variables.hexopticsBonusDamagePercent,
+					},
+				};
+			},
+			meta: {
+				DamageAmp: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+			},
+			uninteresting: ['MaxDamageAmp', 'MaxRange', 'TakedownWindow', 'ExtraRange', 'Duration'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }) {
-					if ((self.internalItemData.value as IInternalItemDataOf<'hexoptics'>).arcaneAim) {
+				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+					const { dataValues: { MaxRange, MaxDamageAmp } } = ITEMS_BY_NAME.hexoptics ?? {};
+					const { arcaneAim, magnification } = self.internalItemData.value as IInternalItemDataOf<'hexoptics'>;
+					calculatedVariables.hexopticsBonusDamagePercent = magnification / MaxRange * MaxDamageAmp;
+					if (arcaneAim) {
 						itemPassivesStats.attackRange += ITEMS_BY_NAME.hexoptics?.dataValues.ExtraRange;
 					}
 				},
