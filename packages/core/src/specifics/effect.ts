@@ -182,22 +182,20 @@ export const EFFECT_SPECIFICS = {
 		},
 		effectControls: {
 			refresh(source) {
-				const effect = source.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow)?.[0];
-				if (!effect) {
-					console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.hextechSoulSlow}] tried to refresh effect but not found it in source`, source);
-					return;
-				} else if (!effect.source.value) {
+				const effect = source.getEffect(EFFECT_OBJECT_NAME.hextechSoulSlow)?.[0] ?? source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.hextechSoulSlow), [100]);
+
+				if (effect.source.value) {
+					const { isRanged, bonus: { attackDamage, hp }, total: { abilityPower } } = effect.source.value.stats.value;
+					effect.data.value[1] = isRanged ? 1 : isRanged === false ? 0 : undefined;
+					effect.data.value[2] = attackDamage;
+					effect.data.value[3] = abilityPower;
+					effect.data.value[4] = hp;
+				} else {
 					effect.data.value[1] = undefined;
 					effect.data.value[2] = 0;
 					effect.data.value[3] = 0;
 					effect.data.value[4] = 0;
-					return;
 				}
-				const { isRanged, bonus: { attackDamage, hp }, total: { abilityPower } } = effect.source.value.stats.value;
-				effect.data.value[1] = isRanged ? 1 : isRanged === false ? 0 : undefined;
-				effect.data.value[2] = attackDamage;
-				effect.data.value[3] = abilityPower;
-				effect.data.value[4] = hp;
 			},
 		},
 		calculateHooks: {
@@ -1043,15 +1041,8 @@ export const EFFECT_SPECIFICS = {
 		},
 		effectControls: {
 			refresh(source) {
-				const effect = source.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0];
-				if (!effect) {
-					console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.namiPSurgingTides}] tried to refresh effect but not found it in source`, source);
-					return;
-				} else if (!effect.source.value) {
-					effect.data.value[1] = 0;
-					return;
-				}
-				effect.data.value[1] = effect.source.value.stats.value.total.abilityPower;
+				const effect = source.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0] ?? source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.namiPSurgingTides), [100]);
+				effect.data.value[1] = effect.source.value?.stats.value.total.abilityPower ?? 0;
 			},
 		},
 		variables: defineVariables({

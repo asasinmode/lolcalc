@@ -1253,11 +1253,19 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Rell', typeof IRell, 'passive'>()({
 				known: {
 					ResistsStealPercent: [],
+					ArmorStolen: [],
+					MagicResistStolen: [],
 				},
 				calculate(self) {
 					return {
 						ResistsStealPercent: {
 							value: self.effectsOntoTargetVars.value.rellPResistsStealPercent ?? 0,
+						},
+						ArmorStolen: {
+							value: 'TODO',
+						},
+						MagicResistStolen: {
+							value: 'TODO',
 						},
 					};
 				},
@@ -1269,6 +1277,12 @@ export const CHAMPION_SPECIFICS = {
 						isCustom: true,
 						resultsIsPercentage: true,
 						resultsMultiplier: 100,
+					},
+					ArmorStolen: {
+						isCustom: true,
+					},
+					MagicResistStolen: {
+						isCustom: true,
 					},
 				},
 				uninteresting: ['StealPercent', 'ShredDuration', 'MaxPercentTooltipOnly'],
