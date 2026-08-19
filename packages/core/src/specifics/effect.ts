@@ -966,7 +966,22 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(self, { effectStats }, { calculatedVariables }) {
+					if ((self.internalData.value as IInternalDataOf<'Nunu'>).isPassiveActive) {
+						return;
+					}
+
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.nunuPCallOfFreljord)?.[0];
+					if (effect?.champion.value?.id === 'Nunu') {
+						const { bonusASPercent, bonusMSPercent } = CHAMPION_SPECIFICS.Nunu.passive.passiveBuffs(effect.champion.value as IChampion);
+						effectStats.bonusAttackSpeedPercent += bonusASPercent;
+						calculatedVariables.totalBonusPercentMoveSpeed += bonusMSPercent;
+					}
+				},
+			},
+		},
 	}),
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
 		...defineEffectSpecific<[livingForgeItemSlot: number]>({
