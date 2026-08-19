@@ -316,7 +316,7 @@ export function championAbilityVariableValue(
 			return championAbilityVariableValue(variantVariableName!, {
 				abilityVariant: otherAbilityVariant[0],
 				dynamicVariables,
-				abilityLevel: otherAbilityVariant[1] !== 'passive' ? damageSource?.abilityLevels.value[otherAbilityVariant[1]] : undefined,
+				abilityLevel: (otherAbilityVariant[1] !== 'passive' ? damageSource?.abilityLevels.value[otherAbilityVariant[1]] : undefined) || 1,
 				allAbilitiesVariants,
 				damageSource,
 				returnActualName: true,
@@ -1062,7 +1062,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			if (value.length === 2) {
 				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', whole, meta);
 			}
-			value = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+			value = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
 		}
 
 		return {
@@ -1110,7 +1110,7 @@ export const VARIABLE_CALCULATION_FNS = {
 				if (dataValue.length === 2) {
 					console.warn('[StatByNamedDataValueCalculationPart] suspiciously melee/ranged looking value having abilityLevel applied to it', { dataValue, statValue }, variable);
 				}
-				dataValue = dataValue[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+				dataValue = dataValue[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
 			}
 
 			if (statValue !== undefined) {
@@ -1425,7 +1425,7 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		if (Array.isArray(rv.value)) {
 			rv.allValues = rv.value as number[];
-			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
 		}
 
 		return rv;
@@ -1603,7 +1603,7 @@ function resolveMMultiplier(
 			if (value.length === 2) {
 				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', { mNumber, mDataValue }, variable);
 			}
-			rv = value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+			rv = value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
 		} else {
 			rv = value;
 		}
