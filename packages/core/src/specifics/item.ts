@@ -957,7 +957,7 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['ShredPerStack', 'DebuffDuration', 'MaxStacks', 'MoveSpeedDuration'],
 		}),
 		effectOntoTargetVars(self, vars) {
-			vars.bloodlettersVDecayShred = (self.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
+			vars.blackCleaverCarveShred = (self.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve * ITEMS_BY_NAME.blackCleaver?.dataValues.ShredPerStack;
 		},
 		calculateHooks: {
 			preItemTotal: {

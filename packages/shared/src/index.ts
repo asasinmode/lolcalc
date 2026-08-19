@@ -300,7 +300,7 @@ export interface IEffectOntoTargetVars {
 	/** ms slow % from Ashe passive */
 	ashePSlow?: number;
 	/** percent of armor/mr stolen by Rell passive */
-	rellPResistStealPercent?: number;
+	rellPResistsStealPercent?: number;
 }
 
 /** all of the variables from currently applied effects */
