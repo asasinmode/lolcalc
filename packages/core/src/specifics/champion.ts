@@ -1144,6 +1144,7 @@ export const CHAMPION_SPECIFICS = {
 				isImmobilizing: true,
 			},
 		},
+		// TODO calculate masterwork items
 	},
 	Rammus: {
 		// TODO get w cancel variant spell_defensiveballcurlcancel_tooltip
@@ -1247,6 +1248,40 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), maxStacks),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Rell', typeof IRell, 'passive'>()({
+				known: {
+					ResistsStealPercent: [],
+				},
+				calculate(self) {
+					return {
+						ResistsStealPercent: {
+							value: self.effectsOntoTargetVars.value.rellPResistsStealPercent ?? 0,
+						},
+					};
+				},
+				meta: {
+					OnHitDamage: {
+						type: VariableType.magic,
+					},
+					ResistsStealPercent: {
+						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
+					},
+				},
+				uninteresting: ['StealPercent', 'ShredDuration', 'MaxPercentTooltipOnly'],
+			}),
+		},
+		effectOntoTargetVars(self, vars) {
+			const { passiveStacksOnTarget } = self.internalData.value;
+			const stealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
+			if (typeof stealPercent.value === 'number') {
+				vars.rellPResistsStealPercent = passiveStacksOnTarget * stealPercent.value;
+			} else {
+				console.warn('[CHAMPION_SPECIFICS rell] failed to calculate passive resists steal percent', stealPercent);
+			}
 		},
 	},
 	Rengar: {
@@ -1830,7 +1865,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 		} & {
 			variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
-			effectOntoTargetVars?: IEffectOntoTargetVarsHook;
+			effectOntoTargetVars?: IEffectOntoTargetVarsHook<Id>;
 			[key: string]: any;
 		};
 

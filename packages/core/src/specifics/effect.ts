@@ -997,7 +997,6 @@ export const EFFECT_SPECIFICS = {
 		/** this goes from <0,6> as opposed to ornn passive's <1,6> so it can be toggled "off" when decreased to 0 */
 		minValue: 0,
 		maxValue: 6,
-		// TODO calculate
 	},
 	[EFFECT_OBJECT_NAME.rellPBreakMold]: {
 		...defineEffectSpecific<[breakTheMoldStacks: number]>({
