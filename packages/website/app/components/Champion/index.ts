@@ -48,7 +48,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Darius', 'passive', 0), 'isChampionAtMaxBleed', 'is champion at max bleed stacks', false),
 	},
 	Diana: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Diana', 'passive', 0), 'isPassiveEmpowered', 'is passive empowered (from using ability)', false),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Diana', 'passive', 0), 'isPassiveEmpowered', 'empowered Moonsilver Blade', true),
 	},
 	Draven: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Draven', 'passive', 0), 'passiveStacks', 'League of Draven stacks'),
@@ -118,7 +118,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		}),
 	},
 	Nunu: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0), 'isPassiveActive', 'is passive active (hit champion/structure/monster)', false),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0), 'isPassiveActive', 'Call of the Freljord', true),
 	},
 	Orianna: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'passive', 0), 'passiveStacksOnTarget', 'Windup stacks on target', 0, CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS),

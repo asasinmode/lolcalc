@@ -19,6 +19,7 @@ import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type INami from '@lolcalc/data/files/champion/Nami.json';
 import type INasus from '@lolcalc/data/files/champion/Nasus.json';
+import type INunu from '@lolcalc/data/files/champion/Nunu.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
 import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
@@ -1055,6 +1056,41 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				isPassiveActive: clamp(0, Math.round(self.internalData.value.isPassiveActive ?? 0), 1),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Nunu', typeof INunu, 'passive'>()({
+				meta: {
+					CleaveDamage: {
+						type: VariableType.physical,
+					},
+				},
+			}),
+			passiveBuffs(champion: IChampion) {
+				const moveSpeed = championAbilityVariableValue('MSIncrease', { abilityVariant: champion.abilities.passive.variants[0]! });
+				const attackSpeed = championAbilityVariableValue('ASIncrease', { abilityVariant: champion.abilities.passive.variants[0]! });
+
+				if (typeof moveSpeed.value === 'number' && typeof attackSpeed.value === 'number') {
+					return {
+						bonusMSPercent: moveSpeed.value,
+						bonusASPercent: attackSpeed.value,
+					};
+				}
+
+				console.warn('[CHAMPION_SPECIFICS nunu] failed to calculate passive move/attack speed', moveSpeed, attackSpeed);
+
+				return { bonusMSPercent: Number.NaN, bonusASPercent: Number.NaN };
+			},
+		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }, { calculatedVariables }) {
+					if (self.internalData.value.isPassiveActive) {
+						const { bonusMSPercent, bonusASPercent } = CHAMPION_SPECIFICS.Nunu.passive.passiveBuffs(self.champion.value!);
+						championPassiveStats.bonusAttackSpeedPercent = bonusASPercent;
+						calculatedVariables.totalBonusPercentMoveSpeed += bonusMSPercent;
+					}
+				},
+			},
 		},
 	},
 	Orianna: {
