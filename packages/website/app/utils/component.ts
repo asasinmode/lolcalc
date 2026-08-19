@@ -38,7 +38,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 		const _usedNumberInput = useNumberInput(
 			abilityId.type === AbilityType.effect
 				/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
-				? () => [appliedEffect?.value?.data.value ?? props.damageSource.addEffect(abilityId).data.value, property as number]
+				? () => [appliedEffect?.value?.data ?? props.damageSource.addEffect(abilityId).data, property as number]
 				: [
 						props.damageSource[abilityId.type === AbilityType.champion
 							? 'internalData'

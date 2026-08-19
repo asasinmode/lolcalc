@@ -5,19 +5,16 @@ type NumberKey<T> = {
 }[keyof T];
 
 export function useNumberInput<T extends Ref>(
-	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: any[], targetIndex: number] | (() => [targetObject: any[], targetIndex: number]),
+	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: MaybeRef<any[]>, targetIndex: number] | (() => [targetObject: MaybeRef<any[]>, targetIndex: number]),
 	isInt = true,
 	max?: MaybeRef<number>,
 ): (event: Event) => void {
 	return function onInput(event: Event) {
+		const computedRef = typeof targetRef === 'function' ? targetRef() : targetRef;
 		const rawValue = (event.target as HTMLInputElement).value;
 		if (!isInt && !rawValue) {
 			(event.target as HTMLInputElement).value = '0';
 			return;
-		}
-
-		if (typeof targetRef === 'function') {
-			targetRef = targetRef();
 		}
 
 		let value = Number(rawValue.replace(',', '.'));
@@ -39,14 +36,14 @@ export function useNumberInput<T extends Ref>(
 			(event.target as HTMLInputElement).value = value.toString();
 		}
 
-		if (Array.isArray(targetRef)) {
-			if (isRef(targetRef[0])) {
-				(targetRef[0].value[targetRef[1]] as number) = value;
+		if (Array.isArray(computedRef)) {
+			if (isRef(computedRef[0])) {
+				(computedRef[0].value[computedRef[1]] as number) = value;
 			} else {
-				(targetRef[0] as any[])[targetRef[1] as number] = value;
+				(computedRef[0] as any[])[computedRef[1] as number] = value;
 			}
 		} else {
-			targetRef.value = value;
+			computedRef.value = value;
 		}
 	};
 }
