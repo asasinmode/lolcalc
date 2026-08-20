@@ -538,6 +538,8 @@ const minorStats = computed<IChampionStat[]>(() => {
 });
 
 const majorStats = computed<IChampionStat[]>(() => {
+	const armorDmgReduction = calculateResistPercentageReduction(props.value.stats.value.total.armor) * 100;
+	const mrDmgReduction = calculateResistPercentageReduction(props.value.stats.value.total.magicResist) * 100;
 	const majorStats = [
 		{
 			name: CHAMPION_STAT_META.attackDamage.name,
@@ -568,7 +570,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 					stat: 'armor',
 				},
 			],
-			bottomText: `You take <span class="total">${Math.round(calculateResistPercentageReduction(props.value.stats.value.total.armor) * 100)}</span>% reduced physical damage.`,
+			bottomText: `You take <span class="${armorDmgReduction > 0 ? 'total' : 'base'}">${Math.round(armorDmgReduction)}</span>% reduced physical damage.`,
 		},
 		{
 			name: CHAMPION_STAT_META.magicResist.name,
@@ -579,7 +581,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 					stat: 'magicResist',
 				},
 			],
-			bottomText: `You take <span class="total">${Math.round(calculateResistPercentageReduction(props.value.stats.value.total.magicResist) * 100)}</span>% reduced magic damage.`,
+			bottomText: `You take <span class="${mrDmgReduction > 0 ? 'total' : 'base'}">${Math.round(mrDmgReduction)}</span>% reduced magic damage.`,
 		},
 		{
 			name: CHAMPION_STAT_META.attackSpeed.name,
@@ -652,7 +654,7 @@ function updateComputedStats(stats: IChampionStat[]) {
 			value.bonus = formatChampionStatValue(value.stat, props.value.stats.value.bonus[value.stat]);
 
 			const baseValue = props.value.stats.value[value.stat === 'bonusAttackSpeedPercent' ? 'base' : 'baseOnLevel'][value.stat];
-			if (baseValue) {
+			if (championStat.iconTextureKey === 'armor' || championStat.iconTextureKey === 'magicResist' || baseValue) {
 				value.base = formatChampionStatValue(value.stat, baseValue);
 			}
 		}

@@ -237,6 +237,10 @@ export interface IStatsCalculationVariables {
 	solsticeSleighBonusMS?: number;
 	/** bonus ms % from Fiora's passive */
 	fioraPassiveBonusMS?: number;
+	/** armor stolen from rell passive effect */
+	rellPArmorStolen?: number;
+	/** magic resist stolen from rell passive effect */
+	rellPMRStolen?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
@@ -256,6 +260,7 @@ export interface IStatsCalculationDebuffs {
 	/** list of all flat slows applied onto target. In classic SR there is only 1 - Lulu W, but lolcalc also has a custom flat slow effect so sum these then apply them */
 	flatMSSlow: number[];
 	percentageArmorShred: number;
+	flatArmorShred: number;
 	shreddedArmor: number;
 	percentageMRShred: number;
 	flatMRShred: number;

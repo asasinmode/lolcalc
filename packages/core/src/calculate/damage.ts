@@ -70,10 +70,6 @@ export function calculateDamage(
 }
 
 export function calculateResistPercentageReduction(resists: number): number {
-	if (resists <= 0) {
-		return 0;
-	}
-
 	return resists / (resists + 100);
 }
 

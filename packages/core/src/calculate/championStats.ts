@@ -71,6 +71,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		appliedSlow: 0,
 		appliedFlatSlow: 0,
 		percentageArmorShred: 0,
+		flatArmorShred: 0,
 		shreddedArmor: 0,
 		percentageMRShred: 0,
 		flatMRShred: 0,
@@ -331,13 +332,13 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	{ /* shred calc */
 		const totalMultipliersMRShred = (totalStats.magicResist - debuffs.flatMRShred) * debuffs.percentageMRShred;
 		debuffs.shreddedMR = totalMultipliersMRShred;
-		totalStats.magicResist = Math.max(0, totalStats.magicResist - totalMultipliersMRShred - debuffs.flatMRShred);
+		totalStats.magicResist = totalStats.magicResist - totalMultipliersMRShred - debuffs.flatMRShred;
 		bonusStats.magicResist = Math.max(0, (bonusStats.magicResist - debuffs.flatMRShred) * (1 - debuffs.percentageMRShred));
 
 		const totalMultipliersArmorShred = totalStats.magicResist * debuffs.percentageArmorShred;
 		debuffs.shreddedArmor = totalMultipliersArmorShred;
-		totalStats.armor = Math.max(0, totalStats.armor - totalMultipliersArmorShred);
-		bonusStats.armor = bonusStats.armor * (1 - debuffs.percentageArmorShred);
+		totalStats.armor = totalStats.armor - totalMultipliersArmorShred;
+		bonusStats.armor = Math.max(0, bonusStats.armor * (1 - debuffs.percentageArmorShred));
 	}
 
 	// TODO figure out if its ok to do it, also handle other non mana champions not gaining mana
