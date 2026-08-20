@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { IExtraComponentProps } from '~/utils/types';
 
-defineProps<Pick<IExtraComponentProps, 'idSuffix'> & { noApply?: boolean }>();
+defineProps<Pick<IExtraComponentProps, 'idSuffix'> & { noApply?: boolean; snapshotText?: string }>();
 
 const emit = defineEmits<{
 	refresh: [];
@@ -46,7 +46,8 @@ function hideControlsTooltip(event: Event) {
 		</slot>
 		<p popover="manual" class="hover-tooltip">
 			applying this effects uses the stats at the moment of application<br>
-			to recalculate the effect (like applying it again with the stats gained from it), use the <span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span> button
+			to recalculate the effect (like applying it again with the stats gained from it), use the <span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span> button<br>
+			currently snapshot: <span class="snapshot" v-html="snapshotText" />
 		</p>
 	</div>
 </template>
@@ -95,6 +96,12 @@ function hideControlsTooltip(event: Event) {
 
 				.icon {
 					--at-apply: 'size-3.5';
+				}
+			}
+
+			.snapshot {
+				img {
+					--at-apply: 'inline-block size-4 align-[-3.5px] me-[0.5ch]';
 				}
 			}
 		}

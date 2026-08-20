@@ -6,6 +6,7 @@ import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
+import { replaceGameIcons } from '@lolcalc/core/variables/game';
 import { CHAMPION_ID_TO_KEY } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
@@ -69,6 +70,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 		function effectControlRefresh() {
 			effectControlsProps?.refresh(props.damageSource);
 		}
+		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value) ?? ''));
 
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 		function updateEffectSource(value?: DamageSource) {
@@ -96,7 +98,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			'onUpdate:modelValue': updateValue,
 		}, effectControlsProps
 			? { default: () => [
-					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect),
+					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect, effectControlSnapshot.value),
 					selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 				] }
 			: { default: () => {
@@ -313,6 +315,7 @@ function createEffectControls(
 	refresh: () => void,
 	slots: SlotsType,
 	noApply?: boolean,
+	snapshotText?: string,
 ) {
 	return h(
 		CalculatorEffectControls,
@@ -320,6 +323,7 @@ function createEffectControls(
 			idSuffix,
 			modelValue,
 			noApply,
+			snapshotText,
 			'onUpdate:modelValue': updateValue,
 			'onRefresh': refresh,
 		},

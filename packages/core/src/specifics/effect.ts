@@ -5,7 +5,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffe
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
-import { CONSTS, EFFECTS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
+import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
 
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -197,6 +197,7 @@ export const EFFECT_SPECIFICS = {
 					effect.data.value[4] = 0;
 				}
 			},
+			currentlySnapshot: () => '',
 		},
 		calculateHooks: {
 			postInit: {
@@ -1032,8 +1033,8 @@ export const EFFECT_SPECIFICS = {
 					effect.data.value[1] = armor;
 					effect.data.value[2] = magicResist;
 				},
-				currentlySnapshot(value) {
-					return '';
+				currentlySnapshot(data) {
+					return `%i:${STAT_ICON.armor}%${data?.[1] ?? 0} | %i:${STAT_ICON.magicResist}%${data?.[2] ?? 0}`;
 				},
 			},
 			sourceControls: {
@@ -1135,6 +1136,9 @@ export const EFFECT_SPECIFICS = {
 			refresh(source) {
 				const effect = source.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0] ?? source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.namiPSurgingTides), [100]);
 				effect.data.value[1] = effect.source.value?.stats.value.total.abilityPower ?? 0;
+			},
+			currentlySnapshot(data) {
+				return '';
 			},
 		},
 		variables: defineVariables({
