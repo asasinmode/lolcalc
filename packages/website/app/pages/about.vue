@@ -52,6 +52,11 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 			To verify the calculator results in game, make sure there isn't anything the calculator doesn't implement yet. The following rune page is recommended because it doesn't have any runes impacting stats/damage.
 		</p>
 		<p>TODO image</p>
+
+		<h2>acknowledgements</h2>
+		<p>This project would not exist without <a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.</p>
+		<p>This project was made using LLMs. I'd estimate LLM generated code to be less than 10% of the code base, however I do want to say that it would've taken a few more months without them. The ability to paste them the stats/variables and have them produce a formula for what Riot is doing under the hood was very helpful.</p>
+		<p>Thanks to all of my friends who helped me test both the website and the various champion configurations in game.</p>
 	</main>
 </template>
 
