@@ -1010,95 +1010,99 @@ export const EFFECT_SPECIFICS = {
 			imgText(data) {
 				return data[0];
 			},
+			setupDataFromInternalData(damageSource, self): [number, number | undefined, number | undefined] | undefined {
+				const { passiveStacksOnTarget } = damageSource.internalData.value as IInternalDataOf<'Rell'>;
+				if (passiveStacksOnTarget) {
+					const selfEffect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+					const snapshotSource = selfEffect?.data.value[0] ? selfEffect?.data.value : [];
+					return [passiveStacksOnTarget, snapshotSource?.[1] ?? self.stats.value.total.armor, snapshotSource?.[2] ?? self.stats.value.total.magicResist] as [number, number, number];
+				}
+			},
+			effectControls: {
+				refresh(source) {
+					let effect = source.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+					if (!effect) {
+						effect = source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.rellPBreakMold));
+						effect.newDataPromise?.then((effect) => {
+							effect!.data.value[0] = CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: effect!.champion.value as IChampion } } as DamageSource);
+						});
+					};
+
+					const { total: { armor, magicResist } } = source.stats.value;
+					effect.data.value[1] = armor;
+					effect.data.value[2] = magicResist;
+				},
+				currentlySnapshot(value) {
+					return '';
+				},
+			},
+			sourceControls: {
+				invalidMessage: (source) => {
+					if (source.listedChampion.value?.id !== 'Rell' satisfies IChampionId) {
+						return 'it\'s not Rell';
+					}
+				},
+			},
+			variables: defineVariables({
+				known: {
+					ResistStealPercent: [],
+					StolenArmor: [],
+					StolenMagicResist: [],
+				},
+				calculate(self) {
+					return {
+						ResistStealPercent: {
+							value: self.stats.value.effectVars.rellPResistsStealPercent ?? 0,
+						},
+						StolenArmor: {
+							value: self.stats.value.effectVars.rellPArmorStolen ?? 0,
+						},
+						StolenMagicResist: {
+							value: self.stats.value.effectVars.rellPMRStolen ?? 0,
+						},
+					};
+				},
+				meta: {
+					ResistStealPercent: {
+						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
+					},
+					StolenArmor: {
+						isCustom: true,
+					},
+					StolenMagicResist: {
+						isCustom: true,
+					},
+				},
+			}),
+			calculateHooks: {
+				postInit: {
+					handler(self, { bonusStats }, { effectVars }) {
+						const effect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+						if (!effect || effect.champion.value?.id !== 'Rell') {
+							return;
+						}
+						const minResistsSteal = championAbilityVariableValue('StealFloor', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!, damageSource: { level: { value: effect.source.value?.level.value } } as DamageSource });
+						const stackStealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
+						if (typeof minResistsSteal.value === 'number' && typeof stackStealPercent.value === 'number') {
+							const [stacks, stealArmorBase = 0, stealMRBase = 0] = effect.data.value;
+							const minSteal = stacks * minResistsSteal.value;
+							effectVars.rellPResistsStealPercent = stacks * stackStealPercent.value;
+							effectVars.rellPArmorStolen = Math.max(minSteal, stealArmorBase * effectVars.rellPResistsStealPercent);
+							effectVars.rellPMRStolen = Math.max(minSteal, stealMRBase * effectVars.rellPResistsStealPercent);
+							bonusStats.armor -= effectVars.rellPArmorStolen;
+							bonusStats.magicResist -= effectVars.rellPMRStolen;
+						} else {
+							console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.rellPBreakMold}] failed to calculate min resists steal or steal percent`, minResistsSteal, stackStealPercent);
+						}
+					},
+				},
+			},
 		}),
 		maxValue: async (): Promise<number> => {
 			const rell = await useChampion('Rell');
 			return CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: rell } } as DamageSource);
-		},
-		setupDataFromInternalData(damageSource, self) {
-			const { passiveStacksOnTarget } = damageSource.internalData.value as IInternalDataOf<'Rell'>;
-			if (passiveStacksOnTarget) {
-				const selfEffect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
-				return [passiveStacksOnTarget, ...(selfEffect?.data.value.slice(1) ?? [])];
-			}
-		},
-		effectControls: {
-			refresh(source) {
-				let effect = source.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
-				if (!effect) {
-					effect = source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.rellPBreakMold));
-					effect.newDataPromise?.then((effect) => {
-						effect!.data.value[0] = CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: effect!.champion.value as IChampion } } as DamageSource);
-					});
-				};
-
-				const { total: { armor, magicResist } } = source.stats.value;
-				effect.data.value[1] = armor;
-				effect.data.value[2] = magicResist;
-			},
-		},
-		sourceControls: {
-			invalidMessage: (source) => {
-				if (source.listedChampion.value?.id !== 'Rell' satisfies IChampionId) {
-					return 'it\'s not Rell';
-				}
-			},
-		},
-		variables: defineVariables({
-			known: {
-				ResistStealPercent: [],
-				StolenArmor: [],
-				StolenMagicResist: [],
-			},
-			calculate(self) {
-				return {
-					ResistStealPercent: {
-						value: self.stats.value.effectVars.rellPResistsStealPercent ?? 0,
-					},
-					StolenArmor: {
-						value: self.stats.value.effectVars.rellPArmorStolen ?? 0,
-					},
-					StolenMagicResist: {
-						value: self.stats.value.effectVars.rellPMRStolen ?? 0,
-					},
-				};
-			},
-			meta: {
-				ResistStealPercent: {
-					isCustom: true,
-					resultsIsPercentage: true,
-					resultsMultiplier: 100,
-				},
-				StolenArmor: {
-					isCustom: true,
-				},
-				StolenMagicResist: {
-					isCustom: true,
-				},
-			},
-		}),
-		calculateHooks: {
-			postInit: {
-				handler(self, { bonusStats }, { effectVars }) {
-					const effect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
-					if (!effect || effect.champion.value?.id !== 'Rell') {
-						return;
-					}
-					const minResistsSteal = championAbilityVariableValue('StealFloor', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!, damageSource: { level: { value: effect.source.value?.level.value } } as DamageSource });
-					const stackStealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
-					if (typeof minResistsSteal.value === 'number' && typeof stackStealPercent.value === 'number') {
-						const [stacks, stealArmorBase = 0, stealMRBase = 0] = effect.data.value;
-						const minSteal = stacks * minResistsSteal.value;
-						effectVars.rellPResistsStealPercent = stacks * stackStealPercent.value;
-						effectVars.rellPArmorStolen = Math.max(minSteal, stealArmorBase * effectVars.rellPResistsStealPercent);
-						effectVars.rellPMRStolen = Math.max(minSteal, stealMRBase * effectVars.rellPResistsStealPercent);
-						bonusStats.armor -= effectVars.rellPArmorStolen;
-						bonusStats.magicResist -= effectVars.rellPMRStolen;
-					} else {
-						console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.rellPBreakMold}] failed to calculate min resists steal or steal percent`, minResistsSteal, stackStealPercent);
-					}
-				},
-			},
 		},
 	},
 	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
@@ -1277,8 +1281,8 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	 */
 	setupData: (data: T | undefined, self: DamageSource) => Promise<T> | T;
 	/** checks if effect's data is not the default value, if not present, `defaultEffectIsActive` will be used */
-	isActive?: (data: T) => number | boolean;
-	imgText?: (data: T, self: DamageSource) => number | string;
+	isActive?: (data: NoInfer<T>) => number | boolean;
+	imgText?: (data: NoInfer<T>, self: DamageSource) => number | string;
 	/**
 	 * used for getting the `appliedEffect`'s data that's being added (`applyEffectsFromTo`) because a source has an item which applies its effect on target
 	 * for example, if `damageSource` has Serpent's Fang, there's a checkbox for applying it's effect, Shield Reave, to all targets used in calculations. This sets `internalItemData.sVenom` to `1`. Based on that, this function (which is expected to be found on all effect specifics that can be applied by items found on source to target) creates the data for appliedEffect of `EFFECT_OBJECT_NAME.serpentsFangVenom`
@@ -1287,11 +1291,11 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	 *	- `1` when `internalItemData.sVenom` is `1` **AND** `damageSource.isRanged` is `false`
 	 *	- `2` when `internalItemData.sVenom` is `1` **AND** `damageSource.isRanged` is `true`
 	 */
-	setupDataFromSourceItem?: (damageSource: DamageSource, self: DamageSource) => T | undefined;
+	setupDataFromSourceItem?: (damageSource: DamageSource, self: DamageSource) => NoInfer<T> | undefined;
 	/** same as setupDataFromSourceItem but for dragon effects */
-	setupDataFromDragonData?: (damageSource: DamageSource, self: DamageSource) => T | undefined;
+	setupDataFromDragonData?: (damageSource: DamageSource, self: DamageSource) => NoInfer<T> | undefined;
 	/** same as setupDataFromSourceItem but for champion effects */
-	setupDataFromInternalData?: (damageSource: DamageSource, self: DamageSource) => T | undefined;
+	setupDataFromInternalData?: (damageSource: DamageSource, self: DamageSource) => NoInfer<T> | undefined;
 	watch?: IDamageSourceEffect['watch'];
 	/**
 	 * based on this and `maxValue` VExtra components are created.
@@ -1313,7 +1317,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	onValueUpdate?: IExtraOnValueUpdate;
 	progressComponentSymbol?: string;
 	sourceControls?: ISelectEffectSourceProps;
-	effectControls?: IEffectControlsProps;
+	effectControls?: IEffectControlsProps<T>;
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */
 	modifyVariable?: {
