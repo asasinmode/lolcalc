@@ -997,7 +997,7 @@ export const EFFECT_SPECIFICS = {
 		maxValue: 6,
 	},
 	[EFFECT_OBJECT_NAME.rellPBreakMold]: {
-		...defineEffectSpecific<[breakTheMoldStacks: number]>({
+		...defineEffectSpecific<[breakTheMoldStacks: number, totalArmor?: number, totalMR?: number]>({
 			sourceAbility: GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0),
 			label: 'Break the Mold stacks',
 			async setupData(data): Promise<[breakTheMoldStacks: number]> {
@@ -1010,6 +1010,21 @@ export const EFFECT_SPECIFICS = {
 		maxValue: async (): Promise<number> => {
 			const rell = await useChampion('Rell');
 			return CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: rell } } as DamageSource);
+		},
+		effectControls: {
+			refresh(source) {
+				let effect = source.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+				if (!effect) {
+					effect = source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.rellPBreakMold));
+					effect.newDataPromise?.then((effect) => {
+						effect!.data.value[0] = CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: effect!.champion.value as IChampion } } as DamageSource);
+					});
+				};
+
+				const { total: { armor, magicResist } } = source.stats.value;
+				effect.data.value[1] = armor;
+				effect.data.value[2] = magicResist;
+			},
 		},
 		// TODO calculate
 	},

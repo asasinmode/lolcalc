@@ -17,13 +17,18 @@ export async function numberExtra<T extends IGameAbilityId>(
 	min?: number,
 	max?: MaybeRef<number> | ((self: DamageSource) => Promise<MaybeRef<number>> | MaybeRef<number>),
 	step?: MaybeRef<number> | ((self: DamageSource) => MaybeRef<number>),
-	{ onUpdate }: {
+	{
+		onUpdate,
+		effectControlsProps,
+	}: {
 		onUpdate?: IExtraOnValueUpdate;
+		effectControlsProps?: IEffectControlsProps<any>;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
+		const isEffect = abilityId.type === AbilityType.effect;
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
 
 		let localMax = max;
 		if (typeof localMax === 'function') {
@@ -55,6 +60,14 @@ export async function numberExtra<T extends IGameAbilityId>(
 			onUpdate?.(modelValue.value, props.damageSource);
 		};
 
+		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
+		function effectControlUpdateValue(val?: boolean) {
+			effectControlModel!.value = val;
+		}
+		function effectControlRefresh() {
+			effectControlsProps?.refresh(props.damageSource);
+		}
+
 		return () => h(CalculatorExtraNumber, {
 			'modelValue': modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -68,7 +81,10 @@ export async function numberExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
-		}, ctx.slots);
+		}, effectControlsProps
+			? { default: () =>
+					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect) }
+			: ctx.slots);
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 

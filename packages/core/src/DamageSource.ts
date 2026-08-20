@@ -1009,9 +1009,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			if (data && trustData) {
 				this.appliedEffects.value[existingEffectIndex]!.data.value = data;
 			} else {
+				const existingEffect = this.appliedEffects.value[existingEffectIndex]!;
 				const newData = specific.setupData(data as any);
 				if ('then' in newData) {
-					newData.then(value => this.appliedEffects.value[existingEffectIndex]!.data.value = value);
+					existingEffect.newDataPromise = newData.then((value) => {
+						existingEffect.data.value = value;
+						existingEffect.newDataPromise = undefined;
+						return existingEffect;
+					})
+					;
 				} else {
 					this.appliedEffects.value[existingEffectIndex]!.data.value = newData;
 				}
@@ -1035,7 +1041,16 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			} else {
 				const newData = specific.setupData(data as any);
 				if ('then' in newData) {
-					newData.then(value => rv.data.value = value);
+					rv.newDataPromise = newData.then((value) => {
+						/* override only undefined values, which the effect is created with, so that any set before the setupData promise resolves are untouched */
+						for (let i = 0; i < value.length; i++) {
+							if (rv.data.value[i] === undefined) {
+								rv.data.value[i] = value[i];
+							}
+						}
+						rv.newDataPromise = undefined;
+						return rv;
+					});
 				} else {
 					rv.data.value = newData;
 				}
@@ -2074,6 +2089,8 @@ export interface IDamageSourceEffect<T extends IEffectAbilityId = IEffectAbility
 	champion: ShallowRef<IChampion | (Promise<IChampion> & { id?: IChampionId }) | undefined>;
 	/** will be called in `DamageSource.getWatchable` applied effects callback. Use when the effect value changes based on something directly in its source */
 	watch?: (effect: IDamageSourceEffect) => string | number | undefined;
+	/** promise for updating the effect's data when the `setupData` function returns a promise itself, useful for `.then`ing into it when the set up data needs to be manipulated based on some async data too, like Rell passive effect refresh */
+	newDataPromise?: Promise<IDamageSourceEffect<T>>;
 }
 
 export interface IComputedAbilityDescription {
