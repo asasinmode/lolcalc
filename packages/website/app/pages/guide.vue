@@ -24,7 +24,7 @@
 		</h2>
 		<dl>
 			<dt>how can I save multiple configurations?</dt>
-			<dd>At the moment the recommended way is to, after setting it up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a></dd>
+			<dd>At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a></dd>
 		</dl>
 
 		<h2 id="guide-examples">
@@ -75,6 +75,12 @@
 			<summary><h3>applying external effects</h3></summary>
 			<p>
 				Effects can be applied using the <button>effects</button> button
+			</p>
+		</details>
+		<details>
+			<summary><h3>Rell passive resist drain</h3></summary>
+			<p>
+				It's complicated
 			</p>
 		</details>
 	</main>

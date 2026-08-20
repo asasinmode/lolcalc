@@ -48,10 +48,6 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 			non-passive abilities (like <a href="https://wiki.leagueoflegends.com/en-us/Ambessa#Public_Execution" target="_blank"><img v-bind="ambessaRImg" alt="Ambessa R icon"> Ambessa R passive</a> or <a href="https://wiki.leagueoflegends.com/en-us/Nocturne#Shroud_of_Darkness" target="_blank"><img v-bind="nocturneWImg" alt="Nocturne W icon"> Nocturne W passive</a>) and <a href="https://wiki.leagueoflegends.com/en-us/Rune#Rune_paths" target="_blank">rune paths</a> <strong>are not implemented</strong> <i>(yet)</i> in the calculations. See the <NuxtLink to="/guide#test-setup">champion/item/rune setup</NuxtLink> recommended for verifying the calculations yourself
 		</p>
 		<p>for when these and other features will be implemented, see the <a href="#TODO">roadmap</a></p>
-		<p>
-			To verify the calculator results in game, make sure there isn't anything the calculator doesn't implement yet. The following rune page is recommended because it doesn't have any runes impacting stats/damage.
-		</p>
-		<p>TODO image</p>
 
 		<h2>acknowledgements</h2>
 		<p>This project would not exist without <a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.</p>
