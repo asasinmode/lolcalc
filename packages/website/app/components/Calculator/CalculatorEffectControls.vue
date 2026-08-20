@@ -45,7 +45,7 @@ function hideControlsTooltip(event: Event) {
 			</label>
 		</slot>
 		<div popover="manual" class="hover-tooltip">
-			<p class="snapshot" v-html="snapshotText" />
+			<p class="snapshot game-description" v-html="snapshotText" />
 			<p>
 				applying this effects uses the stats at the moment of application<br>
 				to recalculate the effect (like applying it again with the stats gained from it), use the <span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span> button<br>
@@ -107,7 +107,7 @@ function hideControlsTooltip(event: Event) {
 
 			.snapshot {
 				img {
-					--at-apply: 'inline-block size-4 align-[-3.5px] me-[0.5ch]';
+					--at-apply: 'inline-block size-4 align-[-3.5px]';
 				}
 			}
 		}

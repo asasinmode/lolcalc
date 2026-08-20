@@ -8,7 +8,7 @@ import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInt
 import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
 
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
-import { clamp } from '@lolcalc/shared/utils.ts';
+import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
@@ -197,7 +197,9 @@ export const EFFECT_SPECIFICS = {
 					effect.data.value[4] = 0;
 				}
 			},
-			currentlySnapshot: () => '',
+			currentlySnapshot(data) {
+				return `calculating using: <scalehealth>${roundNumber(data?.[4] ?? 0, 3)} bonus %i:${STAT_ICON.hp}%</scalehealth> | <scaleap>${roundNumber(data?.[3] ?? 0, 3)} %i:${STAT_ICON.abilityPower}%</scaleap> | <scalead>${roundNumber(data?.[2] ?? 0, 3)} bonus %i:${STAT_ICON.attackDamage}%</scalead>`;
+			},
 		},
 		calculateHooks: {
 			postInit: {
@@ -1034,7 +1036,7 @@ export const EFFECT_SPECIFICS = {
 					effect.data.value[2] = magicResist;
 				},
 				currentlySnapshot(data) {
-					return `%i:${STAT_ICON.armor}%${data?.[1] ?? 0} | %i:${STAT_ICON.magicResist}%${data?.[2] ?? 0}`;
+					return `stealing from: <scalearmor>%i:${STAT_ICON.armor}% ${roundNumber(data?.[1] ?? 0, 3)}</scalearmor> | <scalemr>%i:${STAT_ICON.magicResist}% ${roundNumber(data?.[2] ?? 0, 3)}</scalemr>`;
 				},
 			},
 			sourceControls: {
@@ -1138,7 +1140,7 @@ export const EFFECT_SPECIFICS = {
 				effect.data.value[1] = effect.source.value?.stats.value.total.abilityPower ?? 0;
 			},
 			currentlySnapshot(data) {
-				return '';
+				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${roundNumber(data?.[1] ?? 0, 3)}</scaleap>`;
 			},
 		},
 		variables: defineVariables({
