@@ -1256,16 +1256,16 @@ export const CHAMPION_SPECIFICS = {
 					ArmorStolen: [],
 					MagicResistStolen: [],
 				},
-				calculate(self) {
+				calculate(self, target) {
 					return {
 						ResistsStealPercent: {
 							value: self.effectsOntoTargetVars.value.rellPResistsStealPercent ?? 0,
 						},
 						ArmorStolen: {
-							value: 'TODO',
+							value: (self.internalData.value.passiveStacksOnTarget && target?.stats.value.effectVars.rellPArmorStolen) ?? 0,
 						},
 						MagicResistStolen: {
-							value: 'TODO',
+							value: (self.internalData.value.passiveStacksOnTarget && target?.stats.value.effectVars.rellPMRStolen) ?? 0,
 						},
 					};
 				},

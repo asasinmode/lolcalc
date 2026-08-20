@@ -1015,6 +1015,13 @@ export const EFFECT_SPECIFICS = {
 			const rell = await useChampion('Rell');
 			return CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: rell } } as DamageSource);
 		},
+		setupDataFromInternalData(damageSource, self) {
+			const { passiveStacksOnTarget } = damageSource.internalData.value as IInternalDataOf<'Rell'>;
+			if (passiveStacksOnTarget) {
+				const selfEffect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+				return [passiveStacksOnTarget, ...(selfEffect?.data.value.slice(1) ?? [])];
+			}
+		},
 		effectControls: {
 			refresh(source) {
 				let effect = source.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
@@ -1280,11 +1287,11 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	 *	- `1` when `internalItemData.sVenom` is `1` **AND** `damageSource.isRanged` is `false`
 	 *	- `2` when `internalItemData.sVenom` is `1` **AND** `damageSource.isRanged` is `true`
 	 */
-	setupDataFromSourceItem?: (damageSource: DamageSource) => T | undefined;
+	setupDataFromSourceItem?: (damageSource: DamageSource, self: DamageSource) => T | undefined;
 	/** same as setupDataFromSourceItem but for dragon effects */
-	setupDataFromDragonData?: (damageSource: DamageSource) => T | undefined;
+	setupDataFromDragonData?: (damageSource: DamageSource, self: DamageSource) => T | undefined;
 	/** same as setupDataFromSourceItem but for champion effects */
-	setupDataFromInternalData?: (damageSource: DamageSource) => T | undefined;
+	setupDataFromInternalData?: (damageSource: DamageSource, self: DamageSource) => T | undefined;
 	watch?: IDamageSourceEffect['watch'];
 	/**
 	 * based on this and `maxValue` VExtra components are created.
@@ -1484,11 +1491,11 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 		let champion;
 
 		if (effectSpecific.setupDataFromSourceItem) {
-			effectData = effectSpecific.setupDataFromSourceItem!(source);
+			effectData = effectSpecific.setupDataFromSourceItem!(source, target);
 		} else if (effectSpecific.setupDataFromDragonData) {
-			effectData = effectSpecific.setupDataFromDragonData!(source);
+			effectData = effectSpecific.setupDataFromDragonData!(source, target);
 		} else if (effectSpecific.setupDataFromInternalData) {
-			effectData = effectSpecific.setupDataFromInternalData!(source);
+			effectData = effectSpecific.setupDataFromInternalData!(source, target);
 			champion = source.champion.value;
 		}
 
