@@ -1250,6 +1250,26 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		passive: {
+			stolenResists([stacks, totalArmor = 0, totalMR = 0]: [stacks: number, totalArmor?: number, totalMR?: number], champion: IChampion, level = 1) {
+				const minResistsSteal = championAbilityVariableValue('StealFloor', { abilityVariant: champion.abilities.passive.variants[0]!, damageSource: { level: { value: level } } as DamageSource });
+				const stackStealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: champion.abilities.passive.variants[0]! });
+				if (typeof minResistsSteal.value === 'number' && typeof stackStealPercent.value === 'number') {
+					const minSteal = stacks * minResistsSteal.value;
+					const stealPercent = stacks * stackStealPercent.value;
+					return {
+						stealPercent,
+						stolenArmor: Math.max(minSteal, totalArmor * stealPercent),
+						stolenMR: Math.max(minSteal, totalMR * stealPercent),
+					};
+				} else {
+					console.warn('[CHAMPION_SPECIFICS rell] failed to calculate passive steal variables', minResistsSteal, stackStealPercent);
+					return {
+						stealPercent: Number.NaN,
+						stolenArmor: Number.NaN,
+						stolenMR: Number.NaN,
+					};
+				}
+			},
 			variables: defineChampionVariables<'Rell', typeof IRell, 'passive'>()({
 				known: {
 					ResistsStealPercent: [],

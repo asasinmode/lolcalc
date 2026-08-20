@@ -1086,19 +1086,13 @@ export const EFFECT_SPECIFICS = {
 						if (!effect || effect.champion.value?.id !== 'Rell') {
 							return;
 						}
-						const minResistsSteal = championAbilityVariableValue('StealFloor', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!, damageSource: { level: { value: effect.source.value?.level.value } } as DamageSource });
-						const stackStealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
-						if (typeof minResistsSteal.value === 'number' && typeof stackStealPercent.value === 'number') {
-							const [stacks, stealArmorBase = 0, stealMRBase = 0] = effect.data.value;
-							const minSteal = stacks * minResistsSteal.value;
-							effectVars.rellPResistsStealPercent = stacks * stackStealPercent.value;
-							effectVars.rellPArmorStolen = Math.max(minSteal, stealArmorBase * effectVars.rellPResistsStealPercent);
-							effectVars.rellPMRStolen = Math.max(minSteal, stealMRBase * effectVars.rellPResistsStealPercent);
-							bonusStats.armor -= effectVars.rellPArmorStolen;
-							bonusStats.magicResist -= effectVars.rellPMRStolen;
-						} else {
-							console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.rellPBreakMold}] failed to calculate min resists steal or steal percent`, minResistsSteal, stackStealPercent);
-						}
+
+						const { stealPercent, stolenArmor, stolenMR } = CHAMPION_SPECIFICS.Rell.passive.stolenResists(effect.data.value, effect.champion.value as IChampion, effect.source.value?.level.value);
+						effectVars.rellPResistsStealPercent = stealPercent;
+						effectVars.rellPArmorStolen = stolenArmor;
+						effectVars.rellPMRStolen = stolenMR;
+						bonusStats.armor -= effectVars.rellPArmorStolen;
+						bonusStats.magicResist -= effectVars.rellPMRStolen;
 					},
 				},
 			},
