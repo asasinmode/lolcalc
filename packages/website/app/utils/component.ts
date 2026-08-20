@@ -70,7 +70,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 		function effectControlRefresh() {
 			effectControlsProps?.refresh(props.damageSource);
 		}
-		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value) ?? ''));
+		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value) ?? '', undefined, true));
 
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 		function updateEffectSource(value?: DamageSource) {
@@ -142,6 +142,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 		function effectControlRefresh() {
 			effectControlsProps?.refresh(props.damageSource);
 		}
+		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value) ?? '', undefined, true));
 
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 		function updateEffectSource(value?: DamageSource) {
@@ -173,7 +174,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			'data-inactive': !isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined,
 		}, effectControlsProps
 			? { default: () => [
-					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect),
+					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect, effectControlSnapshot.value),
 					selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 				] }
 			: { default: () => {

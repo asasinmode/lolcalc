@@ -44,11 +44,13 @@ function hideControlsTooltip(event: Event) {
 				<span>apply</span>
 			</label>
 		</slot>
-		<p popover="manual" class="hover-tooltip">
-			applying this effects uses the stats at the moment of application<br>
-			to recalculate the effect (like applying it again with the stats gained from it), use the <span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span> button<br>
-			currently snapshot: <span class="snapshot" v-html="snapshotText" />
-		</p>
+		<div popover="manual" class="hover-tooltip">
+			<p class="snapshot" v-html="snapshotText" />
+			<p>
+				applying this effects uses the stats at the moment of application<br>
+				to recalculate the effect (like applying it again with the stats gained from it), use the <span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span> button<br>
+			</p>
+		</div>
 	</div>
 </template>
 
@@ -91,12 +93,16 @@ function hideControlsTooltip(event: Event) {
 			justify-self: anchor-center;
 			inset-block-start: calc(anchor(end) - 1px);
 
-			> .pretend-ui-btn {
+			.pretend-ui-btn {
 				--at-apply: 'size-5 inline-grid align-middle place-items-center';
 
 				.icon {
 					--at-apply: 'size-3.5';
 				}
+			}
+
+			p:first-child {
+				--at-apply: 'b-b b-[--ui-btn-border-clr] pbe-0.5 mbe-0.5';
 			}
 
 			.snapshot {

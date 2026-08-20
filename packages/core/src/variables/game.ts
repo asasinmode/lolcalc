@@ -4,7 +4,8 @@ import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } from '../specifics/index';
 
 import { ICON_ON_HIT_IMG, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
-import { CHAMPION_LEVEL } from '@lolcalc/shared';
+import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
+import { CHAMPION_LEVEL, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
 
 export interface IReplacedGameVariable {
@@ -716,7 +717,9 @@ const championGameIcons = [
 	'threshscalingicon',
 ];
 
-export function replaceGameIcons(text: string, subpath?: string): string {
+const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map(([key, value]) => [value, key])) as Record<string, any>;
+
+export function replaceGameIcons(text: string, subpath?: string, addAlt = false): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
@@ -726,10 +729,17 @@ export function replaceGameIcons(text: string, subpath?: string): string {
 				name = 'shyvana.shyvana_rework';
 			}
 
+			let altSource;
+			if (addAlt) {
+				const stat = STAT_ICON_VALUE_TO_STAT[name];
+				// @ts-expect-error accessing is chill
+				altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat]);
+			}
+
 			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name)
 				? 'statsicon'
 				: subpath ?? (isChampionIcon ? 'champion' : 'gameplay')
-			}/${name}.png" width="20" height="20" aria-hidden="true">`;
+			}/${name}.png" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
 }
