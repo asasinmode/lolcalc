@@ -237,10 +237,6 @@ export interface IStatsCalculationVariables {
 	solsticeSleighBonusMS?: number;
 	/** bonus ms % from Fiora's passive */
 	fioraPassiveBonusMS?: number;
-	/** armor stolen from rell passive effect */
-	rellPArmorStolen?: number;
-	/** magic resist stolen from rell passive effect */
-	rellPMRStolen?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
@@ -306,16 +302,24 @@ export interface IEffectOntoTargetVars {
 	ashePSlow?: number;
 	/** percent of armor/mr stolen by Rell passive */
 	rellPResistsStealPercent?: number;
+	/** armor stolen from rell passive effect */
+	rellPArmorStolen?: number;
+	/** magic resist stolen from rell passive effect */
+	rellPMRStolen?: number;
 }
 
 /** all of the variables from currently applied effects */
-export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow'> {
+export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent'> {
 	/** slow % from rylai's passive */
 	rylaiSlow?: number;
 	/** bonus flat MS from nami passive */
 	namiPassiveBonusMS?: number;
 	/** attack speed value reduced by nasus' passive */
 	nasusWASReduced?: number;
+	/** armor stolen from rell passive effect */
+	rellPArmorStolen?: number;
+	/** magic resist stolen from rell passive effect */
+	rellPMRStolen?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

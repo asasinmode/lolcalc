@@ -1003,8 +1003,8 @@ export const EFFECT_SPECIFICS = {
 			async setupData(data, self): Promise<[number, number | undefined, number | undefined]> {
 				return [
 					clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.rellPBreakMold].maxValue()),
-					Math.max(0, data?.[1] ?? self.stats.value.total.armor),
-					Math.max(0, data?.[2] ?? self.stats.value.total.magicResist),
+					data?.[1] ?? self.stats.value.total.armor,
+					data?.[2] ?? self.stats.value.total.magicResist,
 				];
 			},
 			imgText(data) {
@@ -1037,9 +1037,42 @@ export const EFFECT_SPECIFICS = {
 				}
 			},
 		},
+		variables: defineVariables({
+			known: {
+				ResistStealPercent: [],
+				StolenArmor: [],
+				StolenMagicResist: [],
+			},
+			calculate(self) {
+				return {
+					ResistStealPercent: {
+						value: self.stats.value.effectVars.rellPResistsStealPercent ?? 0,
+					},
+					StolenArmor: {
+						value: self.stats.value.effectVars.rellPArmorStolen ?? 0,
+					},
+					StolenMagicResist: {
+						value: self.stats.value.effectVars.rellPMRStolen ?? 0,
+					},
+				};
+			},
+			meta: {
+				ResistStealPercent: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+				StolenArmor: {
+					isCustom: true,
+				},
+				StolenMagicResist: {
+					isCustom: true,
+				},
+			},
+		}),
 		calculateHooks: {
 			postInit: {
-				handler(self, { bonusStats }, { debuffs, calculatedVariables }) {
+				handler(self, { bonusStats }, { effectVars }) {
 					const effect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
 					if (!effect || effect.champion.value?.id !== 'Rell') {
 						return;
@@ -1048,12 +1081,12 @@ export const EFFECT_SPECIFICS = {
 					const stackStealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
 					if (typeof minResistsSteal.value === 'number' && typeof stackStealPercent.value === 'number') {
 						const [stacks, stealArmorBase = 0, stealMRBase = 0] = effect.data.value;
-						const stealPercent = stacks * stackStealPercent.value;
 						const minSteal = stacks * minResistsSteal.value;
-						calculatedVariables.rellPArmorStolen = Math.max(minSteal, stealArmorBase * stealPercent);
-						calculatedVariables.rellPMRStolen = Math.max(minSteal, stealMRBase * stealPercent);
-						bonusStats.armor -= calculatedVariables.rellPArmorStolen;
-						bonusStats.magicResist -= calculatedVariables.rellPMRStolen;
+						effectVars.rellPResistsStealPercent = stacks * stackStealPercent.value;
+						effectVars.rellPArmorStolen = Math.max(minSteal, stealArmorBase * effectVars.rellPResistsStealPercent);
+						effectVars.rellPMRStolen = Math.max(minSteal, stealMRBase * effectVars.rellPResistsStealPercent);
+						bonusStats.armor -= effectVars.rellPArmorStolen;
+						bonusStats.magicResist -= effectVars.rellPMRStolen;
 					} else {
 						console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.rellPBreakMold}] failed to calculate min resists steal or steal percent`, minResistsSteal, stackStealPercent);
 					}
