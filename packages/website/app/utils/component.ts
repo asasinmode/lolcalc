@@ -20,9 +20,11 @@ export async function numberExtra<T extends IGameAbilityId>(
 	{
 		onUpdate,
 		effectControlsProps,
+		selectEffectSourceProps,
 	}: {
 		onUpdate?: IExtraOnValueUpdate;
 		effectControlsProps?: IEffectControlsProps<any>;
+		selectEffectSourceProps?: ISelectEffectSourceProps;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
@@ -68,6 +70,17 @@ export async function numberExtra<T extends IGameAbilityId>(
 			effectControlsProps?.refresh(props.damageSource);
 		}
 
+		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
+		function updateEffectSource(value?: DamageSource) {
+			if (appliedEffect) {
+				!appliedEffect.value && updateValue(0);
+				appliedEffect.value!.source.value = value;
+				effectControlRefresh();
+			} else {
+				console.error('[utils/component number] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
+			}
+		}
+
 		return () => h(CalculatorExtraNumber, {
 			'modelValue': modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -82,9 +95,17 @@ export async function numberExtra<T extends IGameAbilityId>(
 			},
 			'onUpdate:modelValue': updateValue,
 		}, effectControlsProps
-			? { default: () =>
-					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect) }
-			: ctx.slots);
+			? { default: () => [
+					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect),
+					selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+				] }
+			: { default: () => {
+					const defaultSlots = ctx.slots.default?.();
+					return [
+						...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
+						selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+					];
+				} });
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 

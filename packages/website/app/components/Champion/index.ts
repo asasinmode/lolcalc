@@ -130,6 +130,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rammus', 'w', 0), 'defensiveCurl', 'Defensive Curl'),
 	},
 	Rell: {
+		// TODO add tooltip about in results using total resists
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS),
 	},
 	Rengar: {
@@ -239,7 +240,10 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 							onUpdate: effectSpecific.onValueUpdate,
 						})
 					: maxValue !== 1
-						? await numberExtra(abilityId, 0, label, minValue, maxValue, undefined, { effectControlsProps: effectSpecific.effectControls })
+						? await numberExtra(abilityId, 0, label, minValue, maxValue, undefined, {
+								effectControlsProps: effectSpecific.effectControls,
+								selectEffectSourceProps: effectSpecific.sourceControls,
+							})
 						: await booleanExtra(abilityId, 0, label, false);
 	}
 }

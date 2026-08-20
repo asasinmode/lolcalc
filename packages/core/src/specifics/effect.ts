@@ -1026,6 +1026,13 @@ export const EFFECT_SPECIFICS = {
 				effect.data.value[2] = magicResist;
 			},
 		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== 'Rell' satisfies IChampionId) {
+					return 'it\'s not Rell';
+				}
+			},
+		},
 		// TODO calculate
 	},
 	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
