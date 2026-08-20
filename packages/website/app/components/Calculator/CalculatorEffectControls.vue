@@ -102,7 +102,7 @@ function hideControlsTooltip(event: Event) {
 			}
 
 			p:first-child {
-				--at-apply: 'b-b b-[--ui-btn-border-clr] pbe-0.5 mbe-0.5';
+				--at-apply: 'b-b b-[--ui-btn-border-clr] pbe-1.25 mbe-1';
 			}
 
 			.snapshot {
