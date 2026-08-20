@@ -1000,8 +1000,12 @@ export const EFFECT_SPECIFICS = {
 		...defineEffectSpecific<[breakTheMoldStacks: number, totalArmor?: number, totalMR?: number]>({
 			sourceAbility: GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0),
 			label: 'Break the Mold stacks',
-			async setupData(data): Promise<[breakTheMoldStacks: number]> {
-				return [clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.rellPBreakMold].maxValue())];
+			async setupData(data, self): Promise<[number, number | undefined, number | undefined]> {
+				return [
+					clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.rellPBreakMold].maxValue()),
+					Math.max(0, data?.[1] ?? self.stats.value.total.armor),
+					Math.max(0, data?.[2] ?? self.stats.value.total.magicResist),
+				];
 			},
 			imgText(data) {
 				return data[0];
@@ -1033,7 +1037,23 @@ export const EFFECT_SPECIFICS = {
 				}
 			},
 		},
-		// TODO calculate
+		calculateHooks: {
+			postInit: {
+				handler(self, { bonusStats }, { debuffs }) {
+					const effect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+					if (!effect || effect.champion.value?.id !== 'Rell') {
+						return;
+					}
+					const minResistsSteal = championAbilityVariableValue('StealFloor', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!, damageSource: { level: { value: effect.source.value?.level.value } } as DamageSource });
+					if (typeof minResistsSteal.value === 'number') {
+						const [stacks, stealArmorBase = 0, stealMRBase = 0] = effect.data.value;
+						console.log('min stealing', { stacks, stealArmorBase, stealMRBase }, minResistsSteal.value);
+					} else {
+						console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.rellPBreakMold}] failed to calculate min resists steal`, minResistsSteal);
+					}
+				},
+			},
+		},
 	},
 	[EFFECT_OBJECT_NAME.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0),
@@ -1209,7 +1229,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.appliedEffects[number].data`
 	 * @param data the existing effect's data for cloning
 	 */
-	setupData: (data?: T) => Promise<T> | T;
+	setupData: (data: T | undefined, self: DamageSource) => Promise<T> | T;
 	/** checks if effect's data is not the default value, if not present, `defaultEffectIsActive` will be used */
 	isActive?: (data: T) => number | boolean;
 	imgText?: (data: T, self: DamageSource) => number | string;

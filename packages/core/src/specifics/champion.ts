@@ -1242,7 +1242,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Rell: {
-		MAX_PASSIVE_STACKS: (self: DamageSource<'Rell'>): number => (self.champion.value! as typeof IRell).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!,
+		MAX_PASSIVE_STACKS: (self: DamageSource<'Rell'>): number => (self.champion.value as typeof IRell)?.abilities?.passive.variants[0]!.dataValues.MaxStacks[1] ?? 5,
 		setupData(self) {
 			const maxStacks: number = CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS(self);
 			return {

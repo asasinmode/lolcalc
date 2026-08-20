@@ -1010,7 +1010,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				this.appliedEffects.value[existingEffectIndex]!.data.value = data;
 			} else {
 				const existingEffect = this.appliedEffects.value[existingEffectIndex]!;
-				const newData = specific.setupData(data as any);
+				const newData = specific.setupData(data as any, this);
 				if ('then' in newData) {
 					existingEffect.newDataPromise = newData.then((value) => {
 						existingEffect.data.value = value;
@@ -1039,7 +1039,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			if (data && trustData) {
 				rv.data.value = data;
 			} else {
-				const newData = specific.setupData(data as any);
+				const newData = specific.setupData(data as any, this);
 				if ('then' in newData) {
 					rv.newDataPromise = newData.then((value) => {
 						/* override only undefined values, which the effect is created with, so that any set before the setupData promise resolves are untouched */
