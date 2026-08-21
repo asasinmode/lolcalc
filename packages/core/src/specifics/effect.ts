@@ -578,49 +578,49 @@ export const EFFECT_SPECIFICS = {
 			imgText(data) {
 				return data[0];
 			},
-		}),
-		maxValue: () => ITEM_SPECIFICS[ITEM_NAME_TO_ID.bloodlettersCurse].MAX_STACKS,
-		setupDataFromSourceItem(damageSource) {
-			if ((damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay) {
-				return [(damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay];
-			}
-		},
-		variables: defineVariables({
-			known: {
-				Shred: [],
-				MagicResistShredded: [],
+			setupDataFromSourceItem(damageSource) {
+				if ((damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay) {
+					return [(damageSource.internalItemData.value as IInternalItemDataOf<'bloodlettersCurse'>).vDecay];
+				}
 			},
-			calculate(self) {
-				return {
+			variables: defineVariables({
+				known: {
+					Shred: [],
+					MagicResistShredded: [],
+				},
+				calculate(self) {
+					return {
+						Shred: {
+							value: self.stats.value.debuffs.percentageMRShred ?? 0,
+						},
+						MagicResistShredded: {
+							value: self.stats.value.debuffs.shreddedMR ?? 0,
+						},
+					};
+				},
+				meta: {
 					Shred: {
-						value: self.stats.value.debuffs.percentageMRShred ?? 0,
+						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
 					},
 					MagicResistShredded: {
-						value: self.stats.value.debuffs.shreddedMR ?? 0,
+						isCustom: true,
 					},
-				};
-			},
-			meta: {
-				Shred: {
-					isCustom: true,
-					resultsIsPercentage: true,
-					resultsMultiplier: 100,
 				},
-				MagicResistShredded: {
-					isCustom: true,
+			}),
+			calculateHooks: {
+				postInit: {
+					handler(self, _stats, { debuffs }) {
+						const effect = self.getEffect(EFFECT_OBJECT_NAME.bloodletterVileDecay)?.[0];
+						if (effect) {
+							debuffs.percentageMRShred += effect.data.value[0] * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
+						}
+					},
 				},
 			},
 		}),
-		calculateHooks: {
-			postInit: {
-				handler(self, _stats, { debuffs }) {
-					const effect = self.getEffect(EFFECT_OBJECT_NAME.bloodletterVileDecay)?.[0];
-					if (effect) {
-						debuffs.percentageMRShred += effect.data.value[0] * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
-					}
-				},
-			},
-		},
+		maxValue: () => ITEM_SPECIFICS[ITEM_NAME_TO_ID.bloodlettersCurse].MAX_STACKS,
 	},
 	[EFFECT_OBJECT_NAME.blackCleaverCarve]: defineEffectSpecific<[carveStacks: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.blackCleaver),

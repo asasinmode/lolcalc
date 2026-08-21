@@ -1,0 +1,335 @@
+{
+	"version": "16.14.1",
+	"champions": {
+		"Rell": {
+			"stats": {
+				"hp": 620,
+				"hpperlevel": 104,
+				"mp": 320,
+				"mpperlevel": 40,
+				"movespeed": 315,
+				"armor": 30,
+				"armorperlevel": 4,
+				"spellblock": 28,
+				"spellblockperlevel": 1.8,
+				"attackrange": 175,
+				"hpregen": 7.5,
+				"hpregenperlevel": 0.85,
+				"mpregen": 7,
+				"mpregenperlevel": 0.7,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 55,
+				"attackdamageperlevel": 3,
+				"attackspeedperlevel": 2,
+				"attackspeed": 0.625,
+				"attackspeedratio": 0.625
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Break the Mold",
+							"objectName": "RellP",
+							"dataKey": "Characters/Rell/Spells/RellPAbility/RellP",
+							"image": "assets/characters/rell/hud/icons2d/rellp.png",
+							"tooltip": "{{Spell_RellP_Tooltip}}",
+							"tooltipExtended": "{{Spell_RellP_Tooltip}}<br><br><rules>Always steals at least @StealFloor@. Does not steal from minions or Epic jungle monsters.</rules>",
+							"dataValues": {
+								"RefreshDuration": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+								"StealPercent": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
+								"ShredDuration": [5, 5, 5, 5, 5, 5, 5],
+								"MaxStacks": [5, 5, 5, 5, 5, 5, 5],
+								"MaxPercentTooltipOnly": [15, 15, 15, 15, 15, 15, 15]
+							},
+							"spellCalculations": {
+								"StealFloor": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 1.5,
+											"mEndValue": 3,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									],
+									"mPrecision": 1
+								},
+								"OnHitDamage": {
+									"{72c5c2a8}": 1,
+									"mFormulaParts": [
+										{
+											"mStat": 1,
+											"mCoefficient": 0.05,
+											"__type": "StatByCoefficientCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mCoefficient": 0.05,
+											"__type": "StatByCoefficientCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+		"Rammus": {
+			"stats": {
+				"hp": 645,
+				"hpperlevel": 100,
+				"mp": 310,
+				"mpperlevel": 33,
+				"movespeed": 335,
+				"armor": 35,
+				"armorperlevel": 4.5,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 8,
+				"hpregenperlevel": 0.55,
+				"mpregen": 7.85,
+				"mpregenperlevel": 0.5,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 65,
+				"attackdamageperlevel": 2.75,
+				"attackspeedperlevel": 2.215,
+				"attackspeed": 0.7,
+				"attackspeedratio": 0.625
+			},
+			"abilities": {
+				"w": {
+					"maxLevel": 5,
+					"variants": [
+						{
+							"name": "Defensive Ball Curl",
+							"objectName": "DefensiveBallCurl",
+							"dataKey": "Characters/Rammus/Spells/DefensiveBallCurlAbility/DefensiveBallCurl",
+							"image": "assets/characters/rammus/hud/icons2d/armordillo_shellbash.png",
+							"mana": [40, 40, 40, 40, 40, 40],
+							"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
+							"tooltip": "Rammus enters a defensive formation for @BuffDuration@ seconds, gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> and dealing <magicDamage>@ReturnDamageCalc@ magic damage</magicDamage> to enemies that Attack him.<br><br><recast>Recast</recast>: Rammus ends this Ability early.",
+							"extendedVariables": [
+								{
+									"name": "FlatBonusArmor",
+									"nameOverride": "spell_listtype_armorbonus"
+								},
+								{
+									"name": "FlatBonusMR",
+									"nameOverride": "spell_listtype_magicresistbonus"
+								},
+								{
+									"name": "BonusArmorPercent",
+									"nameOverride": "spell_listtype_percentarmorbonus"
+								},
+								{
+									"name": "BonusMRPercent",
+									"nameOverride": "spell_listtype_percentmagicresistbonus"
+								}
+							],
+							"dataValues": {
+								"BonusArmorPercent": [0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675],
+								"BonusMRPercent": [0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675],
+								"FlatBonusArmor": [22, 27, 32, 37, 42, 47, 52],
+								"FlatBonusMR": [15, 20, 25, 30, 35, 40, 45],
+								"BuffDuration": [7, 7, 7, 7, 7, 7, 7],
+								"DamageArmorRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+								"DamageMRRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+								"FlatDamageReturn": [15, 15, 15, 15, 15, 15, 15]
+							},
+							"spellCalculations": {
+								"ReturnDamageCalc": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatDamageReturn",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "DamageArmorRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "DamageMRRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"BonusArmorTooltip": {
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mDataValue": "FlatBonusArmor",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"mPart2": {
+												"mSubparts": [
+													{
+														"mNumber": 1,
+														"__type": "NumberCalculationPart"
+													},
+													{
+														"mDataValue": "BonusArmorPercent",
+														"__type": "NamedDataValueCalculationPart"
+													}
+												],
+												"__type": "SumOfSubPartsCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "BonusArmorPercent",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"BonusMRTooltip": {
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mDataValue": "FlatBonusMR",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											"mPart2": {
+												"mSubparts": [
+													{
+														"mNumber": 1,
+														"__type": "NumberCalculationPart"
+													},
+													{
+														"mDataValue": "BonusMRPercent",
+														"__type": "NamedDataValueCalculationPart"
+													}
+												],
+												"__type": "SumOfSubPartsCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "BonusMRPercent",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"RecastDamageTooltip": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatDamageReturn",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "DamageArmorRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "DamageMRRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Spiked Shell",
+							"objectName": "RammusP",
+							"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP",
+							"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
+							"tooltip": "Rammus's gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
+							"dataValues": {
+								"ArmorRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+								"MagicResistRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+								"BaseDamage": [10, 10, 10, 10, 10, 10, 10]
+							},
+							"spellCalculations": {
+								"TotalDamage": {
+									"mFormulaParts": [
+										{
+											"mStat": 1,
+											"mDataValue": "ArmorRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "MagicResistRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			}
+		}
+	},
+	"items": {
+		"3071": {
+			"name": "Black Cleaver",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatPhysicalDamageMod": 45,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"DebuffDuration": 6,
+				"MoveSpeedBonus": 20,
+				"MoveSpeedDuration": 2,
+				"InternalCD": 0.01,
+				"MaxStacks": 5,
+				"ShredPerStack": 0.06,
+				"RangedMod": 0.5
+			},
+			"itemCalculations": {
+				"MSBonusSplit": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedBonus",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedMod",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				}
+			}
+		},
+		"8010": {
+			"name": "Bloodletter's Curse",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatMagicDamageMod": 65,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"ShredPerStack": 0.075,
+				"DebuffDuration": 6,
+				"InternalCD": 0.3,
+				"MaxStacks": 4
+			}
+		}
+	},
+	"misc": {
+		"roleQuests": {
+			"mid": {
+				"dataValues": {
+					"BonusADAP": 0.08
+				}
+			}
+		}
+	}
+}
