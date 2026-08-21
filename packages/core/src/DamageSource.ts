@@ -874,7 +874,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								rv.fromStringifiedEffectSources!.push(maybeEffectSource);
 							}
 						}
-						const value = rawValue ? Number.parseInt(rawValue) : undefined;
+						const value = rawValue ? Number.parseFloat(rawValue) : undefined;
 						if (!Number.isNaN(value)) {
 							return value;
 						}
