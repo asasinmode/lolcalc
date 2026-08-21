@@ -197,8 +197,8 @@ export const EFFECT_SPECIFICS = {
 					effect.data.value[4] = 0;
 				}
 			},
-			currentlySnapshot(data) {
-				return `calculating using: <scalehealth>${roundNumber(data?.[4] ?? 0, 3)} bonus %i:${STAT_ICON.hp}%</scalehealth> | <scaleap>${roundNumber(data?.[3] ?? 0, 3)} %i:${STAT_ICON.abilityPower}%</scaleap> | <scalead>${roundNumber(data?.[2] ?? 0, 3)} bonus %i:${STAT_ICON.attackDamage}%</scalead>`;
+			currentlySnapshot(effectData) {
+				return `calculating using: <scalehealth>${roundNumber(effectData?.[4] ?? 0, 3)} bonus %i:${STAT_ICON.hp}%</scalehealth> | <scaleap>${roundNumber(effectData?.[3] ?? 0, 3)} %i:${STAT_ICON.abilityPower}%</scaleap> | <scalead>${roundNumber(effectData?.[2] ?? 0, 3)} bonus %i:${STAT_ICON.attackDamage}%</scalead>`;
 			},
 		},
 		calculateHooks: {
@@ -1018,7 +1018,7 @@ export const EFFECT_SPECIFICS = {
 				const { passiveStacksOnTarget } = damageSource.internalData.value as IInternalDataOf<'Rell'>;
 				if (passiveStacksOnTarget) {
 					const selfEffect = self.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
-					const snapshotSource = selfEffect?.data.value[0] ? selfEffect?.data.value : [];
+					const snapshotSource = selfEffect?.data.value ?? [];
 					return [passiveStacksOnTarget, snapshotSource?.[1] ?? self.stats.value.total.armor, snapshotSource?.[2] ?? self.stats.value.total.magicResist] as [number, number, number];
 				}
 			},
@@ -1036,8 +1036,8 @@ export const EFFECT_SPECIFICS = {
 					effect.data.value[1] = armor;
 					effect.data.value[2] = magicResist;
 				},
-				currentlySnapshot(data) {
-					return `stealing from: <scalearmor>%i:${STAT_ICON.armor}% ${roundNumber(data?.[1] ?? 0, 3)}</scalearmor> | <scalemr>%i:${STAT_ICON.magicResist}% ${roundNumber(data?.[2] ?? 0, 3)}</scalemr>`;
+				currentlySnapshot(effectData) {
+					return `stealing from: <scalearmor>%i:${STAT_ICON.armor}% ${roundNumber(effectData?.[1] ?? 0, 3)}</scalearmor> | <scalemr>%i:${STAT_ICON.magicResist}% ${roundNumber(effectData?.[2] ?? 0, 3)}</scalemr>`;
 				},
 			},
 			sourceControls: {
@@ -1134,8 +1134,8 @@ export const EFFECT_SPECIFICS = {
 				const effect = source.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0] ?? source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.namiPSurgingTides), [100]);
 				effect.data.value[1] = effect.source.value?.stats.value.total.abilityPower ?? 0;
 			},
-			currentlySnapshot(data) {
-				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${roundNumber(data?.[1] ?? 0, 3)}</scaleap>`;
+			currentlySnapshot(effectData) {
+				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${roundNumber(effectData?.[1] ?? 0, 3)}</scaleap>`;
 			},
 		},
 		variables: defineVariables({
