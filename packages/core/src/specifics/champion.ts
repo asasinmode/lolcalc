@@ -1159,7 +1159,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables }): void {
+				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables, debuffs }): void {
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
@@ -1184,8 +1184,16 @@ export const CHAMPION_SPECIFICS = {
 						const preDragonArmor = totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0);
 						const preDragonMr = totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0);
 
-						wBonusArmor = ((preDragonArmor + wConstArmorBonus * jakShoMultiplier) * wArmorMultiplier + wConstArmorBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.armor);
-						wBonusMr = ((preDragonMr + wConstMrBonus * jakShoMultiplier) * wMrMultiplier + wConstMrBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.magicResist);
+						const rawArmorBonus = ((preDragonArmor + wConstArmorBonus * jakShoMultiplier) * wArmorMultiplier + wConstArmorBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.armor);
+						const rawMRBonus = ((preDragonMr + wConstMrBonus * jakShoMultiplier) * wMrMultiplier + wConstMrBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.magicResist);
+
+						const armorShredMultiplier = (1 - debuffs.percentageArmorShred);
+						const mrShredMultiplier = (1 - debuffs.percentageMRShred);
+						wBonusArmor = rawArmorBonus * armorShredMultiplier;
+						wBonusMr = rawMRBonus * mrShredMultiplier;
+
+						debuffs.shreddedArmor += rawArmorBonus * debuffs.percentageArmorShred;
+						debuffs.shreddedMR += rawMRBonus * debuffs.percentageMRShred;
 					}
 
 					totalPreMultipliersStats.armor += wBonusArmor;
@@ -1326,13 +1334,12 @@ export const CHAMPION_SPECIFICS = {
 					if (!self.internalData.value.passiveStacksOnTarget) {
 						return;
 					}
-
 					const targetEffect = self.calculationDamageTarget.value?.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
 					if (!targetEffect) {
 						return;
 					}
-					const { stolenArmor, stolenMR } = CHAMPION_SPECIFICS.Rell.passive.stolenResists(targetEffect.data.value, self.champion.value!, self.level.value);
 
+					const { stolenArmor, stolenMR } = CHAMPION_SPECIFICS.Rell.passive.stolenResists(targetEffect.data.value, self.champion.value!, self.level.value);
 					championPassiveStats.armor = stolenArmor;
 					championPassiveStats.magicResist = stolenMR;
 				},

@@ -2,7 +2,7 @@ import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
-import fixture from '../fixtures/16.14.1.fixture.json' with { type: 'json' };
+import fixture from '../fixtures/16.16.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
 test.before(() => {
@@ -42,13 +42,21 @@ test('16.16 Rammus', async (t) => {
 			const blackCleaverEffect = damageSource.getEffect(EFFECT_OBJECT_NAME.blackCleaverCarve)?.[0]!;
 			const bloodletterEffect = damageSource.getEffect(EFFECT_OBJECT_NAME.bloodletterVileDecay)?.[0]!;
 			blackCleaverEffect.data.value[0] = 5;
-			bloodletterEffect.data.value[0] = 5;
+			bloodletterEffect.data.value[0] = 4;
 			rellPEffect.data.value[0] = 5;
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				attackDamage: 71,
 				armor: 16,
 				magicResist: 13,
+			});
+
+			damageSource.internalData.value.defensiveCurl = 1;
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 79,
+				armor: 46,
+				magicResist: 35,
 			});
 		});
 	});
