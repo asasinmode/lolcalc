@@ -1023,8 +1023,9 @@ export const EFFECT_SPECIFICS = {
 				}
 			},
 			effectControls: {
-				refresh(source) {
+				refresh(source, isSourceChange) {
 					let effect = source.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+					const addedEffect = !effect;
 					if (!effect) {
 						effect = source.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.rellPBreakMold));
 						effect.newDataPromise?.then((effect) => {
@@ -1032,9 +1033,11 @@ export const EFFECT_SPECIFICS = {
 						});
 					};
 
-					const { total: { armor, magicResist } } = source.stats.value;
-					effect.data.value[1] = armor;
-					effect.data.value[2] = magicResist;
+					if (addedEffect || !isSourceChange || effect.data.value[1] === undefined || effect.data.value[2] === undefined) {
+						const { total: { armor, magicResist } } = source.stats.value;
+						effect.data.value[1] = armor;
+						effect.data.value[2] = magicResist;
+					}
 				},
 				currentlySnapshot(effectData) {
 					return `stealing from: <scalearmor>%i:${STAT_ICON.armor}% ${roundNumber(effectData?.[1] ?? 0, 3)}</scalearmor> | <scalemr>%i:${STAT_ICON.magicResist}% ${roundNumber(effectData?.[2] ?? 0, 3)}</scalemr>`;

@@ -67,8 +67,8 @@ export async function numberExtra<T extends IGameAbilityId>(
 		function effectControlUpdateValue(val?: boolean) {
 			effectControlModel!.value = val;
 		}
-		function effectControlRefresh() {
-			effectControlsProps?.refresh(props.damageSource);
+		function effectControlRefresh(isSourceChange = false) {
+			effectControlsProps?.refresh(props.damageSource, isSourceChange);
 		}
 		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
@@ -77,7 +77,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			if (appliedEffect) {
 				!appliedEffect.value && updateValue(0);
 				appliedEffect.value!.source.value = value;
-				effectControlRefresh();
+				effectControlRefresh(true);
 			} else {
 				console.error('[utils/component number] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
 			}
@@ -139,8 +139,8 @@ export async function progressExtra<T extends IGameAbilityId>(
 		function effectControlUpdateValue(val?: boolean) {
 			effectControlModel!.value = val;
 		}
-		function effectControlRefresh() {
-			effectControlsProps?.refresh(props.damageSource);
+		function effectControlRefresh(isSourceChange = false) {
+			effectControlsProps?.refresh(props.damageSource, isSourceChange);
 		}
 		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
@@ -149,7 +149,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 			if (appliedEffect) {
 				!appliedEffect.value && updateValue(0);
 				appliedEffect.value!.source.value = value;
-				effectControlRefresh();
+				effectControlRefresh(true);
 			} else {
 				console.error('[utils/component progress] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
 			}

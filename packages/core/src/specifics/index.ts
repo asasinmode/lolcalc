@@ -297,7 +297,9 @@ export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_V
 export interface IEffectControlsProps<Data extends (number | undefined)[] = [number], T extends IChampionId | undefined = any> {
 	/** if not present, will always be treated as true */
 	model?: (self: DamageSource<T>) => WritableComputedRef<boolean | undefined>;
-	refresh: (self: DamageSource<T>) => void;
+	// eslint-disable-next-line jsdoc/check-param-names
+	/** @param isSourceChange {bool} indicates whether the refresh was triggered by the source change or refresh button */
+	refresh: (self: DamageSource<T>, isSourceChange: boolean) => void;
 	currentlySnapshot: (effectData: Data | undefined, self: DamageSource<T>) => string | undefined;
 }
 
