@@ -40,9 +40,9 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInte
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
-import { MISC } from '@lolcalc/data';
+import { MISC, STAT_ICON } from '@lolcalc/data';
 import { ALL_CHAMPION_STATS_ENTRIES, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
-import { clamp } from '@lolcalc/shared/utils.ts';
+import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { combineCompounding } from '../calculate/util.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
@@ -891,6 +891,9 @@ export const CHAMPION_SPECIFICS = {
 				}),
 				refresh(self) {
 					self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
+				},
+				currentlySnapshot(_effectData, self) {
+					return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${roundNumber(self.internalData.value.passiveMSTotalAp ?? 0, 3)}</scaleap>`;
 				},
 			},
 			derivedMS: ((progress, self): number => {
@@ -1924,7 +1927,7 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
-	effectControls?: IEffectControlsProps<Id>;
+	effectControls?: IEffectControlsProps<any, Id>;
 	[key: string]: any;
 	/**
 	 * ability's variant specific

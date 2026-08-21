@@ -1,6 +1,6 @@
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
 import type { IChampionStatName, IEffectObjectName, IVariableType, TItemNameToId } from '@lolcalc/shared';
-import type { ComputedRef, WritableComputedRef } from 'vue';
+import type { WritableComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta } from '../variables/game.ts';
@@ -294,11 +294,11 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVar
 
 export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [IVariableType, IGlobalModifyVariableFunction][];
 
-export interface IEffectControlsProps<Data extends (number | undefined)[] = [number], T extends IChampionId | undefined = undefined> {
+export interface IEffectControlsProps<Data extends (number | undefined)[] = [number], T extends IChampionId | undefined = any> {
 	/** if not present, will always be treated as true */
 	model?: (self: DamageSource<T>) => WritableComputedRef<boolean | undefined>;
 	refresh: (self: DamageSource<T>) => void;
-	currentlySnapshot: (effectData?: Data) => string | undefined;
+	currentlySnapshot: (effectData: Data | undefined, self: DamageSource<T>) => string | undefined;
 }
 
 export interface ISelectEffectSourceProps {

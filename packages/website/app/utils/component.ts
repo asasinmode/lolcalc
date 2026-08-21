@@ -70,7 +70,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 		function effectControlRefresh() {
 			effectControlsProps?.refresh(props.damageSource);
 		}
-		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value) ?? '', undefined, true));
+		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 		function updateEffectSource(value?: DamageSource) {
@@ -142,7 +142,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 		function effectControlRefresh() {
 			effectControlsProps?.refresh(props.damageSource);
 		}
-		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value) ?? '', undefined, true));
+		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
 		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 		function updateEffectSource(value?: DamageSource) {

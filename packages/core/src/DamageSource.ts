@@ -2291,7 +2291,7 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 	priority?: number;
 }
 
-export interface IEffectOntoTargetVarsHook<Id extends IChampionId = any> {
+export interface IEffectOntoTargetVarsHook<Id extends IChampionId | undefined = any> {
 	(self: DamageSource<Id>, vars: IEffectOntoTargetVars): void;
 }
 
