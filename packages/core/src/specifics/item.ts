@@ -1175,6 +1175,13 @@ export const ITEM_SPECIFICS = {
 						const { MSAmount, TenacityAmount } = ITEMS_BY_NAME.protoplasmHarness?.dataValues ?? {};
 						itemPassivesStats.tenacity = addMultiplicative(itemPassivesStats.tenacity, TenacityAmount);
 						calculatedVariables.totalBonusPercentMoveSpeed += MSAmount;
+
+						const maxHp = itemVariableValue('MaxHealthGain', { item: ITEMS_BY_NAME.protoplasmHarness, damageSource: { level: { value: self.level.value } } as DamageSource });
+						if (typeof maxHp.value === 'number') {
+							itemPassivesStats.hp += maxHp.value;
+						} else {
+							console.warn('[ITEM_SPECIFICS protoplasm harness] failed to calculate max hp gain', maxHp);
+						}
 					}
 				},
 			},
