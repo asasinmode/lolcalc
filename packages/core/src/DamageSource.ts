@@ -371,6 +371,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						hpAbilityResourceWatchUsedOverrides ||= markOverridesUsed;
 						if (useFirstChampionLoadOverride) {
 							this.hpAbilityResourceOverridesOnFirstChampLoad = undefined;
+							hpAbilityResourceWatchUsedOverrides = true;
 						}
 					}, { immediate: true }),
 
