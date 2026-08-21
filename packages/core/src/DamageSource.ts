@@ -206,8 +206,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		this.sourcesTargetsRef = sourcesTargetsRef;
 
-		damageSourcesCount += 1;
-		this.id = damageSourcesCount.toString();
+		if (!isResultsCopy) {
+			damageSourcesCount += 1;
+			this.id = damageSourcesCount.toString();
+		} else {
+			this.id = 'results-copy';
+		}
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
