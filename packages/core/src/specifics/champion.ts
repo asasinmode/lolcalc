@@ -1317,6 +1317,24 @@ export const CHAMPION_SPECIFICS = {
 				console.warn('[CHAMPION_SPECIFICS rell] failed to calculate passive resists steal percent', stealPercent);
 			}
 		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { championPassiveStats }) {
+					if (!self.internalData.value.passiveStacksOnTarget) {
+						return;
+					}
+
+					const targetEffect = self.calculationDamageTarget.value?.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+					if (!targetEffect) {
+						return;
+					}
+					const { stolenArmor, stolenMR } = CHAMPION_SPECIFICS.Rell.passive.stolenResists(targetEffect.data.value, self.champion.value!, self.level.value);
+
+					championPassiveStats.armor = stolenArmor;
+					championPassiveStats.magicResist = stolenMR;
+				},
+			},
+		},
 	},
 	Rengar: {
 		MAX_PASSIVE_STACKS: 5,
