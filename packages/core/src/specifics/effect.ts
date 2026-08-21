@@ -1004,10 +1004,11 @@ export const EFFECT_SPECIFICS = {
 			sourceAbility: GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0),
 			label: 'Break the Mold stacks',
 			async setupData(data, self): Promise<[number, number | undefined, number | undefined]> {
+				const { armor, magicResist } = self.stats.value.total;
 				return [
 					clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.rellPBreakMold].maxValue()),
-					data?.[1] ?? self.stats.value.total.armor,
-					data?.[2] ?? self.stats.value.total.magicResist,
+					data?.[1] ?? armor,
+					data?.[2] ?? magicResist,
 				];
 			},
 			imgText(data) {
