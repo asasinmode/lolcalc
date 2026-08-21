@@ -606,7 +606,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const effect = this.appliedEffects.value[i]!;
 			const computedEffect = this.computed.effects.value[i];
 			/* `isActive` is a computed so technically should be `.value` but for some reason it's already unrefed here */
-			if (!computedEffect?.isActive) {
+			if (!computedEffect?.isActive && !effect.data.value.slice(1).some(Boolean)) {
 				continue;
 			}
 			const index = EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id);
