@@ -320,8 +320,16 @@ export interface IEffectOntoTargetVars {
 
 /** all of the variables from currently applied effects */
 export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent'> {
-	/** slow % from rylai's passive */
+	lolcalcPercentSlow?: number;
+	botrkSlow?: number;
 	rylaiSlow?: number;
+	zekesConvergenceSlow?: number;
+	celestialOppositionSlow?: number;
+	randuinSlow?: number;
+	stridebreakerSlow?: number;
+	icebornGauntletSlow?: number;
+	seryldaSlow?: number;
+	hextechGunbladeSlow?: number;
 	/** bonus flat MS from nami passive */
 	namiPassiveBonusMS?: number;
 	/** attack speed value reduced by nasus' passive */

@@ -1,6 +1,6 @@
 import type { IEffectData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionId } from '@lolcalc/data/types.js';
-import type { IEffectObjectName } from '@lolcalc/shared';
+import type { IEffectObjectName, IStatsCalculationEffectVars } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
@@ -139,25 +139,7 @@ export const EFFECT_SPECIFICS = {
 		imgText(_data, self): number {
 			return Math.round(self.stats.value.effectVars.hextechSoulSlow ?? 0);
 		},
-		variables: defineVariables({
-			known: {
-				Slow: [],
-			},
-			calculate(self) {
-				return {
-					Slow: {
-						value: self.stats.value.effectVars.hextechSoulSlow,
-					},
-				};
-			},
-			meta: {
-				Slow: {
-					isCustom: true,
-					resultsIsPercentage: true,
-					type: VariableType.affectedBySlowResist,
-				},
-			},
-		}),
+		variables: simpleSlowEffectVariables('hextechSoulSlow'),
 		setupDataFromDragonData(damageSource) {
 			const { hextechTagged } = damageSource.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>;
 			if (hextechTagged) {
@@ -256,12 +238,14 @@ export const EFFECT_SPECIFICS = {
 		imgText(data) {
 			return `${data[0]}%`;
 		},
+		variables: simpleSlowEffectVariables('lolcalcPercentSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(self, _stats, { debuffs }) {
+				handler(self, _stats, { debuffs, effectVars }) {
 					const effect = self.getEffect(EFFECT_OBJECT_NAME.slowPercent)?.[0];
 					if (effect?.data.value[0]) {
-						debuffs.percentageMSSlow.push(effect.data.value[0] / 100);
+						effectVars.lolcalcPercentSlow = effect.data.value[0] / 100;
+						debuffs.percentageMSSlow.push(effectVars.lolcalcPercentSlow);
 					}
 				},
 			},
@@ -514,26 +498,7 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		variables: defineVariables({
-			known: {
-				Slow: [],
-			},
-			calculate(self) {
-				return {
-					Slow: {
-						value: self.stats.value.effectVars.rylaiSlow ?? 0,
-					},
-				};
-			},
-			meta: {
-				Slow: {
-					type: VariableType.affectedBySlowResist,
-					isCustom: true,
-					resultsMultiplier: 100,
-					resultsIsPercentage: true,
-				},
-			},
-		}),
+		variables: simpleSlowEffectVariables('rylaiSlow'),
 		calculateHooks: {
 			postInit: {
 				handler(_self, _stats, { debuffs, effectVars }) {
@@ -688,10 +653,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		variables: simpleSlowEffectVariables('botrkSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(_self, _stats, { debuffs }) {
-					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.botrk?.dataValues.MoveSpeedMod * -1);
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.botrkSlow = ITEMS_BY_NAME.botrk?.dataValues.MoveSpeedMod * -1;
+					debuffs.percentageMSSlow.push(effectVars.botrkSlow);
 				},
 			},
 		},
@@ -707,10 +674,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		variables: simpleSlowEffectVariables('zekesConvergenceSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(_self, _stats, { debuffs }) {
-					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.zekesConvergence?.dataValues.SlowAmount);
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.zekesConvergenceSlow = ITEMS_BY_NAME.zekesConvergence?.dataValues.SlowAmount;
+					debuffs.percentageMSSlow.push(effectVars.zekesConvergenceSlow);
 				},
 			},
 		},
@@ -726,10 +695,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		variables: simpleSlowEffectVariables('celestialOppositionSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(_self, _stats, { debuffs }) {
-					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.celestialOpposition?.dataValues.SlowAmount);
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.celestialOppositionSlow = ITEMS_BY_NAME.celestialOpposition?.dataValues.SlowAmount;
+					debuffs.percentageMSSlow.push(effectVars.celestialOppositionSlow);
 				},
 			},
 		},
@@ -745,10 +716,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		variables: simpleSlowEffectVariables('randuinSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(_self, _stats, { debuffs }) {
-					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.randuinsOmen?.dataValues.SlowAmount);
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.randuinSlow = ITEMS_BY_NAME.randuinsOmen?.dataValues.SlowAmount;
+					debuffs.percentageMSSlow.push(effectVars.randuinSlow);
 				},
 			},
 		},
@@ -800,10 +773,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		variables: simpleSlowEffectVariables('stridebreakerSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(_self, _stats, { debuffs }) {
-					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.stridebreaker?.dataValues.MSSlow * -1);
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.stridebreakerSlow = ITEMS_BY_NAME.stridebreaker?.dataValues.MSSlow * -1;
+					debuffs.percentageMSSlow.push(effectVars.stridebreakerSlow);
 				},
 			},
 		},
@@ -824,13 +799,15 @@ export const EFFECT_SPECIFICS = {
 		},
 		enumOptions: MeleeRangedEnumOptions,
 		maxValue: MeleeRangedEnumOptions.ranged,
+		variables: simpleSlowEffectVariables('icebornGauntletSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(self, _stats, { debuffs }) {
+				handler(self, _stats, { debuffs, effectVars }) {
 					const effect = self.getEffect(EFFECT_OBJECT_NAME.icebornGauntletFrostField)?.[0];
 					const slow = itemVariableValue('SlowAmountMeleeRangedSplit', { item: ITEMS_BY_NAME.icebornGauntlet, isRanged: effect?.data.value[0] === MeleeRangedEnumOptions.ranged });
 					if (typeof slow.value === 'number') {
-						debuffs.percentageMSSlow.push(slow.value);
+						effectVars.icebornGauntletSlow = slow.value;
+						debuffs.percentageMSSlow.push(effectVars.icebornGauntletSlow);
 					} else {
 						console.warn(`[EFFECT_SPECIFICS ${EFFECT_OBJECT_NAME.icebornGauntletFrostField}] failed to calculate slow`, slow);
 					}
@@ -861,10 +838,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		variables: simpleSlowEffectVariables('seryldaSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(_self, _stats, { debuffs }) {
-					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.seryldasGrudge?.dataValues.SlowAmount);
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.seryldaSlow = ITEMS_BY_NAME.seryldasGrudge?.dataValues.SlowAmount;
+					debuffs.percentageMSSlow.push(effectVars.seryldaSlow);
 				},
 			},
 		},
@@ -880,10 +859,12 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		variables: simpleSlowEffectVariables('hextechGunbladeSlow'),
 		calculateHooks: {
 			postInit: {
-				handler(_self, _stats, { debuffs }) {
-					debuffs.percentageMSSlow.push(ITEMS_BY_NAME.hextechGunblade?.dataValues.SlowAmount);
+				handler(_self, _stats, { debuffs, effectVars }) {
+					effectVars.hextechGunbladeSlow = ITEMS_BY_NAME.hextechGunblade?.dataValues.SlowAmount;
+					debuffs.percentageMSSlow.push(effectVars.hextechGunbladeSlow);
 				},
 			},
 		},
@@ -945,6 +926,7 @@ export const EFFECT_SPECIFICS = {
 				}
 			},
 		},
+		variables: simpleSlowEffectVariables('ashePSlow'),
 		calculateHooks: {
 			postInit: {
 				handler(self, _stats, { effectVars, debuffs }) {
@@ -1515,4 +1497,27 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 
 export function defaultEffectIsActive(data: (number | undefined)[]): number | boolean | undefined {
 	return data[0];
+}
+
+function simpleSlowEffectVariables(effectVarsKey: keyof IStatsCalculationEffectVars): ISpecificVariables<never, any> {
+	return defineVariables<never, any>({
+		known: {
+			Slow: [],
+		},
+		calculate(self) {
+			return {
+				Slow: {
+					value: self.stats.value.effectVars[effectVarsKey] ?? 0,
+				},
+			};
+		},
+		meta: {
+			Slow: {
+				type: VariableType.affectedBySlowResist,
+				isCustom: true,
+				resultsMultiplier: 100,
+				resultsIsPercentage: true,
+			},
+		},
+	});
 }
