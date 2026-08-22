@@ -32,6 +32,7 @@ export const HOOK_PRIORITIES = {
 		Ryze: 1,
 		Rammus: 1,
 		Hecarim: 1,
+		Vladimir: 1,
 		/** needs total ap */
 		Volibear: 1,
 		/** needs total hp, must be before immortal path */

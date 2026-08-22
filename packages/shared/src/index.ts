@@ -288,6 +288,10 @@ export interface IStatsCalculationMiscDebug {
 	ryzePassiveManaBase?: number;
 	/** mana gained from ryze's passive */
 	ryzePMana?: number;
+	/** bonus hp vladimir passive starts the ap calculations off of */
+	vladimirPassiveAPHPBase?: number;
+	/** total ap vladimir passive starts hp calculations off of */
+	vladimirPassiveHPAPBase?: number;
 }
 
 /** variables of effects applied onto the damage target */

@@ -1375,14 +1375,10 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postTotal: {
 				handler(self, { totalStats, bonusStats, totalMultipliersStats, championPassiveStats }, { calculatedVariables, miscDebug }) {
-					if (!self.champion.value) {
-						return;
-					}
-
 					const apMultiplier = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
-								abilityVariant: self.champion.value.abilities.passive.variants[0]!,
+								abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 								allAbilitiesVariants: self.allAbilityVariants.value,
 								damageSource: self,
 							},
@@ -1807,12 +1803,22 @@ export const CHAMPION_SPECIFICS = {
 	Vladimir: {
 		passive: {
 			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'passive'>()({
+				meta: {
+					ApproximateAPBonusAvoidingRecursion: {
+						/* not displayed in game */
+						calculatesFrom: [],
+					},
+					ApproximateHPBonusAvoidingRecursion: {
+						/* not displayed in game */
+						calculatesFrom: [],
+					},
+				},
 				uninteresting: ['HPforAP', 'APRatioBonusHP'],
 			}),
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats }, { calculatedVariables }) {
+				handler(self, { totalStats, bonusStats, runeShardStats, championPassiveStats }, { calculatedVariables, miscDebug }) {
 					const hpToAp = championAbilityVariableValue('HPforAP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
 					const apToHp = championAbilityVariableValue('APRatioBonusHP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
 
@@ -1821,11 +1827,24 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					console.log({ hpToAp: hpToAp.value, apToHp: apToHp.value });
+					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
+					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower - (runeShardStats.abilityPower ?? 0);
 
-					calculatedVariables.vladimirPassiveAp = 0;
-					calculatedVariables.vladimirPassiveHp = 0;
+					const passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value;
+					const passiveHp = miscDebug.vladimirPassiveHPAPBase * apToHp.value;
+
+					calculatedVariables.vladimirPassiveAp = passiveAp;
+					calculatedVariables.vladimirPassiveHp = passiveHp;
+
+					totalStats.abilityPower += passiveAp;
+					bonusStats.abilityPower += passiveAp;
+					championPassiveStats.abilityPower = passiveAp;
+
+					totalStats.hp += passiveHp;
+					bonusStats.hp += passiveHp;
+					championPassiveStats.hp = passiveHp;
 				},
+				priority: HOOK_PRIORITIES.postTotal.Vladimir,
 			},
 		},
 	},

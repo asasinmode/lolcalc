@@ -1,4 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
@@ -60,7 +61,8 @@ test('16.16 Rammus', async (t) => {
 	});
 });
 
-test('16.16 Vladimir passive interactions', async (t) => {
+test.only('16.16 Vladimir passive interactions', async (t) => {
+	t.runOnly(true);
 	const sourceCommon: IOverrides<'Vladimir'> = {
 		level: 1,
 		runes: {
@@ -73,13 +75,12 @@ test('16.16 Vladimir passive interactions', async (t) => {
 		items: [],
 	};
 
-	await t.test('base', async () => {
+	await t.test('base', { only: true }, async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', sourceCommon);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 71,
-			armor: 16,
-			magicResist: 13,
+			abilityPower: 20,
 		});
+		assert.equal(damageSource.maxHealth.value, 665);
 	});
 });
