@@ -1801,6 +1801,85 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Vladimir: {
+		q: {
+			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'q'>()({
+				known: {
+					EmpoweredHeal: [],
+				},
+				calculate(self) {
+					const baseHeal = championAbilityVariableValue('EmpoweredHealTooltip', { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.q, damageSource: self });
+					const percentMissing = championAbilityVariableValue('EmpoweredHealPercentTooltip', { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.q, damageSource: self });
+					const missingHealth = self.stats.value.total.hp - self.currentHealth.value;
+					let EmpoweredHeal = 0;
+					if (typeof baseHeal.value === 'number' && typeof percentMissing.value === 'number') {
+						EmpoweredHeal = baseHeal.value + missingHealth * percentMissing.value;
+					}
+					return {
+						EmpoweredHeal: {
+							value: EmpoweredHeal,
+						},
+					};
+				},
+				meta: {
+					EmpoweredHeal: {
+						type: VariableType.heal,
+						isCustom: true,
+					},
+					BaseDamageTooltip: {
+						type: VariableType.magic,
+					},
+					BaseHeal: {
+						type: VariableType.heal,
+					},
+					EmpoweredDamageTooltip: {
+						type: VariableType.magic,
+					},
+					EmpoweredHealTooltip: {
+						type: VariableType.heal,
+					},
+				},
+				uninteresting: ['FrenzyDuration'],
+			}),
+		},
+		w: {
+			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'w'>()({
+				meta: {
+					TotalDamage: {
+						type: VariableType.magic,
+					},
+					TotalHeal: {
+						type: VariableType.heal,
+					},
+				},
+				uninteresting: ['HasteBoost', 'HasteDuration', 'MoveSpeedMod', 'MinionHealingMod'],
+			}),
+		},
+		e: {
+			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'e'>()({
+				meta: {
+					MinDamageTooltip: {
+						type: VariableType.magic,
+					},
+					MaxDamageTooltip: {
+						type: VariableType.magic,
+					},
+				},
+				uninteresting: ['MaxChannelTime'],
+			}),
+		},
+		r: {
+			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'r'>()({
+				meta: {
+					Damage: {
+						type: VariableType.magic,
+					},
+					SecondaryHealingTooltip: {
+						type: VariableType.heal,
+					},
+				},
+				uninteresting: ['DamageAmp', 'Duration'],
+			}),
+		},
 		passive: {
 			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'passive'>()({
 				known: {
