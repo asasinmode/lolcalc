@@ -100,6 +100,9 @@ async function applyChampion(fixture: IFixtureShape, raw: string): Promise<void>
 }
 
 function findItem(search: string) {
+	if (ITEMS[search]) {
+		return ITEMS[search];
+	}
 	const words = search.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(Boolean);
 	return Object.values(ITEMS).find(item => words.every(word => item.searchString.includes(word)));
 }

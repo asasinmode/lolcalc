@@ -450,6 +450,32 @@
 				}
 			}
 		},
+		"3003": {
+			"searchString": "archangelsstaff;aa;seraphsembrace;tear;spelldamage;mana;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 25
+			},
+			"dataValues": {
+				"ManaPerCharge": 5,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 5,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5,
+				"APFromMana": 0.01
+			}
+		},
+		"3009": {
+			"searchString": "bootsofswiftness;swifties;boots;movespeed",
+			"stats": {
+				"FlatMovementSpeedMod": 55
+			},
+			"dataValues": {
+				"SlowResistTooltip": 25,
+				"FeatsMS": 5
+			}
+		},
 		"3071": {
 			"name": "Black Cleaver",
 			"stats": {
@@ -479,6 +505,78 @@
 						"mDataValue": "RangedMod",
 						"__type": "NamedDataValueCalculationPart"
 					}
+				}
+			}
+		},
+		"3084": {
+			"searchString": "heartsteel;quest;steal;boyband;health;healthregen",
+			"stats": {
+				"FlatHPPoolMod": 900,
+				"PercentBaseHPRegenMod": 1
+			},
+			"dataValues": {
+				"PerTargetCooldown": 30,
+				"BaseDamage": 70,
+				"HPRatio": 0.06,
+				"DamageToMaxHealthRatio": 0.1,
+				"DistanceToChampion": 700,
+				"NumTicksToTrigger": 6,
+				"RangeTrackingBuffDuration": 5,
+				"TrackerTickRate": 0.5,
+				"MaxHPRatio": 0.06,
+				"HealthSizeThreshold": 1000,
+				"SizeAmount": 0.03,
+				"SizeCap": 0.3,
+				"Cooldown": 30
+			},
+			"itemCalculations": {
+				"DamageProcCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "HPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ProcHealthGain": {
+					"mMultiplier": {
+						"mDataValue": "DamageToMaxHealthRatio",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mModifiedGameCalculation": "DamageProcCalc",
+					"__type": "GameCalculationModified"
+				},
+				"TotalDemolishTime": {
+					"mMultiplier": {
+						"mDataValue": "NumTicksToTrigger",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "TrackerTickRate",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "MaxHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
 				}
 			}
 		},
@@ -536,6 +634,44 @@
 						}
 					],
 					"mDisplayAsPercent": true
+				}
+			}
+		},
+		"6655": {
+			"searchString": "ludensecho;spelldamage;mana;cooldownreduction;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 100,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"Cooldown": 12,
+				"BaseDamage": 75,
+				"APRatio": 0.05,
+				"MaxCharges": 6,
+				"RepeatDamageReduction": 0.2,
+				"MissileRange": 650
+			},
+			"itemCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"SingleTargetMax": {
+					"mMultiplier": {
+						"mNumber": 2,
+						"__type": "NumberCalculationPart"
+					},
+					"mModifiedGameCalculation": "Damage",
+					"__type": "GameCalculationModified"
 				}
 			}
 		},

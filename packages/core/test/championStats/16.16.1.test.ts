@@ -2,6 +2,7 @@ import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
+import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.16.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
@@ -75,12 +76,24 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 		items: [],
 	};
 
-	await t.test('base', { only: true }, async () => {
+	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', sourceCommon);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 20,
 		});
 		assert.equal(damageSource.maxHealth.value, 665);
+	});
+
+	await t.test('flat item increases', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.ludensEcho, ITEMS_BY_NAME.heartsteel, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.archangelsStaff],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 220,
+		});
+		assert.equal(damageSource.maxHealth.value, 1837);
 	});
 });
