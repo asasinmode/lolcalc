@@ -1351,30 +1351,19 @@ export const VARIABLE_CALCULATION_FNS = {
 
 			if (resolved.calculatesFrom?.length) {
 				addCalculatesFrom(rv.calculatesFrom, resolved.calculatesFrom);
-				/* try my best to collapse multiple calculatesFrom parts into a single, non const one if detected. Based on Mikael's AmountToHeal */
-				const nonConstParts = rv.calculatesFrom!.filter(part => part.stat && part.stat !== 'const');
-				if (nonConstParts.length === 1) {
-					const [nonConstPart] = nonConstParts;
-					const constValue = rv.calculatesFrom!.reduce((acc, part) => (part === nonConstPart ? 0 : (part.value as number)) + acc, 0);
-					if (Number.isNaN(constValue)) {
-						console.warn('[SumOfSubPartsCalculationPart] const part value not a number', rv.calculatesFrom);
-					} else {
-						addToCalculatePartValues(nonConstPart!, constValue);
-						for (let i = rv.calculatesFrom!.length - 1; i >= 0; i--) {
-							if (rv.calculatesFrom![i] !== nonConstPart) {
-								rv.calculatesFrom!.splice(i, 1);
-							}
-						}
-					}
-				} else if (nonConstParts.length) {
-					console.warn('[SumOfSubPartsCalculationPart] should somehow handle multiple non const calculatesFrom', rv.calculatesFrom);
-				}
 			} else {
 				calculatesFromConstOffset.push(resolved.value);
 			}
 		};
 
 		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)!;
+
+		if (rv.calculatesFrom!.length) {
+			const constValue = sumAndRemoveConstCalculateFromParts(rv.calculatesFrom!);
+			for (const part of rv.calculatesFrom!) {
+				addToCalculatePartValues(part, constValue);
+			}
+		}
 
 		const totalCalculatesFromConst = calculatesFromConstOffset.reduce((acc, curr) => acc + curr, 0);
 		if (totalCalculatesFromConst) {
@@ -1410,18 +1399,11 @@ export const VARIABLE_CALCULATION_FNS = {
 				multiplyCalculatePartValues(part, left.value);
 			}
 		} else if (leftHasCalcFrom && rightHasCalcFrom) {
-			/* try my best to collapse multiple calculatesFrom parts into a single, non const one if detected. Based on Mikael's AmountToHeal */
 			const [nonConstPart, constPart] = right.calculatesFrom![0]!.stat === 'const' ? [left.calculatesFrom!, right.calculatesFrom!] : [right.calculatesFrom!, left.calculatesFrom!];
-			if (nonConstPart.length === 1) {
-				rv.calculatesFrom = nonConstPart;
-				const constValue = constPart.reduce((acc, part) => (part.value as number) + acc, 0);
-				if (Number.isNaN(constValue)) {
-					console.warn('[ProductOfSubPartsCalculationPart] const part value not a number', left, right);
-				} else {
-					multiplyCalculatePartValues(rv.calculatesFrom[0]!, constValue);
-				}
-			} else {
-				console.warn('[ProductOfSubPartsCalculationPart] should somehow handle multiple non const calculatesFrom', left, right);
+			rv.calculatesFrom = nonConstPart;
+			const constValue = sumAndRemoveConstCalculateFromParts(constPart);
+			for (const part of rv.calculatesFrom) {
+				multiplyCalculatePartValues(part, constValue);
 			}
 		}
 
@@ -1630,6 +1612,24 @@ function resolveMMultiplier(
 	}
 	/* there could be a better way */
 	return rv === 0.66667 ? (2 / 3) : rv === 0.33334 ? (1 / 3) : rv;
+}
+
+/* try my best to collapse multiple calculatesFrom parts into a single, non const one if detected. Based on Mikael's AmountToHeal and Vladimir's variables */
+function sumAndRemoveConstCalculateFromParts(calculatesFrom: ICalculatesFromPart[]): number {
+	let constValue = 0;
+	for (let i = calculatesFrom.length - 1; i >= 0; i--) {
+		const part = calculatesFrom[i]!;
+		if (part.stat !== 'const') {
+			continue;
+		}
+		if (typeof part.value === 'number') {
+			constValue += part.value;
+		} else {
+			console.warn('[sumAndRemoveConstCalculateFromParts] const part value not a number', part);
+		}
+		calculatesFrom.splice(i, 1);
+	}
+	return constValue;
 }
 
 function resolveDynamicValue(
