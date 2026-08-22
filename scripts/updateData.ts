@@ -30,6 +30,7 @@ import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import { xxh3 } from '@node-rs/xxhash';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
+import { stringifyObject } from './index.ts';
 
 let latestVersion = process.argv[2];
 
@@ -2298,16 +2299,6 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 	}
 	cacheHits[filename] = data;
 	return data;
-}
-
-/** like JSON.stringify but formats `number[]` into single line */
-function stringifyObject(obj: object) {
-	const json = JSON.stringify(obj, (_k, v) =>
-		Array.isArray(v) && v.every(item => typeof item === 'number')
-			? `__ARRAY__[${v.join(', ')}]__ARRAY__`
-			: v, '\t');
-
-	return json.replace(/"__ARRAY__(.*?)__ARRAY__"/g, '$1');
 }
 
 /** goes through all of the `properties` in the given object deeply, then replaces any values matching `searchValue` with `replaceValue` */
