@@ -2085,8 +2085,14 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 					isCustom: true,
 				},
+				MoveSpeedMod: {
+					type: VariableType.affectedBySlowResist,
+				},
+				MoveSpeedDuration: {
+					type: VariableType.affectedByTenacity,
+				},
 			},
-			uninteresting: ['f4', 'MoveSpeedMod', 'MoveSpeedDuration'],
+			uninteresting: ['f4'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
@@ -2462,8 +2468,11 @@ export const ITEM_SPECIFICS = {
 				DamagePerSecond: {
 					type: VariableType.magic,
 				},
+				SlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
 			},
-			uninteresting: ['f1', 'UltimateHaste', 'Duration', 'ReadyDuration', 'SlowAmount'],
+			uninteresting: ['f1', 'UltimateHaste', 'Duration', 'ReadyDuration'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.spiritVisage]: {
@@ -3419,8 +3428,11 @@ export const ITEM_SPECIFICS = {
 				SlashDamage: {
 					type: VariableType.physical,
 				},
+				MSSlow: {
+					type: VariableType.affectedBySlowResist,
+				},
 			},
-			uninteresting: ['MSSlow', 'ActiveMS', 'Duration'],
+			uninteresting: ['ActiveMS', 'Duration'],
 		}),
 		calculateHooks: {
 			preItemTotal: {
@@ -3521,6 +3533,7 @@ export const ITEM_SPECIFICS = {
 					type: VariableType.physical,
 				},
 				SlowAmountMeleeRangedSplit: {
+					type: VariableType.affectedBySlowResist,
 					isPercentage: true,
 					multiplier: 100,
 				},
@@ -3648,6 +3661,17 @@ export const ITEM_SPECIFICS = {
 		imgActive(internalData: { bitterCold: number }) {
 			return internalData.bitterCold;
 		},
+		variables: defineVariables({
+			meta: {
+				SlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+			},
+			uninteresting: ['SlowThreshold'],
+		}),
 	},
 	[ITEM_NAME_TO_ID.bloodsong]: {
 		internalDataProperties: ['bloodsonged'],
@@ -3908,8 +3932,13 @@ export const ITEM_SPECIFICS = {
 				ActiveDamage: {
 					type: VariableType.magic,
 				},
+				SlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
 			},
-			uninteresting: ['SlowAmount', 'SlowDuration'],
 		}),
 	},
 	[ITEM_NAME_TO_ID.stormrazor]: {
