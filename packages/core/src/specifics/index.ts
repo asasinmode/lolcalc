@@ -293,6 +293,20 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVar
 	[VariableType.shield](value, self) {
 		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.shieldMult ?? 1);
 	},
+	[VariableType.magic](value, self, damageTarget) {
+		const { percentMagicPen, flatMagicPen } = self.stats.value.total;
+		const magicResist = damageTarget?.stats.value.total.magicResist ?? 0;
+
+		const effectiveResists = Math.max(0, (magicResist * (1 - percentMagicPen)) - flatMagicPen);
+		return value / (1 + effectiveResists / 100);
+	},
+	[VariableType.physical](value, self, damageTarget) {
+		const { percentArmorPen, lethality } = self.stats.value.total;
+		const armor = damageTarget?.stats.value.total.armor ?? 0;
+
+		const effectiveResists = Math.max(0, (armor * (1 - percentArmorPen)) - lethality);
+		return value / (1 + effectiveResists / 100);
+	},
 };
 
 export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [IVariableType, IGlobalModifyVariableFunction][];
