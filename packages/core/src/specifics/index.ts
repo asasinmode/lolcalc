@@ -1,5 +1,5 @@
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
-import type { IChampionStatName, IEffectObjectName, IVariableType, TItemNameToId } from '@lolcalc/shared';
+import type { IChampionStatName, IEffectObjectName, TItemNameToId } from '@lolcalc/shared';
 import type { WritableComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
@@ -280,7 +280,7 @@ interface IGlobalModifyVariableFunction {
 	(value: number, self: DamageSource, damageTarget?: DamageSource): number;
 }
 
-const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVariableFunction>> = {
+const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVariableFunction>> = {
 	[VariableType.affectedByTenacity](value, _self, damageTarget) {
 		return Math.max(CONSTS.minCCDuration, value * (1 - (damageTarget?.stats.value.total.tenacity ?? 0)));
 	},
@@ -309,7 +309,7 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<IVariableType, IGlobalModifyVar
 	},
 };
 
-export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [IVariableType, IGlobalModifyVariableFunction][];
+export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [VariableType, IGlobalModifyVariableFunction][];
 
 export interface IEffectControlsProps<Data extends (number | undefined)[] = [number], T extends IChampionId | undefined = any> {
 	/** if not present, will always be treated as true */

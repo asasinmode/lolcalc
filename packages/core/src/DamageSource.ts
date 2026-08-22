@@ -1,6 +1,6 @@
 import type { ITextData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, IEffectOntoTargetVars, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, IVariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, IEffectOntoTargetVars, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, VariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -1277,8 +1277,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}),
 	};
 
-	appliedEffectsModifyVariableFunctions = computed((): [IVariableType, IModifyVariableFunction[]][] => {
-		const rv: [IVariableType, IModifyVariableFunction[]][] = [];
+	appliedEffectsModifyVariableFunctions = computed((): [VariableType, IModifyVariableFunction[]][] => {
+		const rv: [VariableType, IModifyVariableFunction[]][] = [];
 
 		if (!this.isResultsCopy) {
 			return rv;
@@ -2297,4 +2297,4 @@ export interface IEffectOntoTargetVarsHook<Id extends IChampionId | undefined = 
 	(self: DamageSource<Id>, vars: IEffectOntoTargetVars): void;
 }
 
-export type IDamageSourceModifyVariableFunctions = Partial<Record<IVariableType, IModifyVariableFunction[]>>;
+export type IDamageSourceModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;

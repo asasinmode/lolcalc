@@ -1,6 +1,6 @@
 import type { IEffectData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionId } from '@lolcalc/data/types.js';
-import type { IEffectObjectName, IVariableType } from '@lolcalc/shared';
+import type { IEffectObjectName } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
@@ -1325,7 +1325,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	/** function that will be called on a resolved `gameVariable` with a matching type, for example Serpent's Fang passive shield reave effect will reduce all `VARIABLE_TYPE.shield` */
 	modifyVariable?: {
-		type: IVariableType[];
+		type: VariableType[];
 		handler: IEffectModifyVariableFunction<T>;
 	};
 	/** variables to be showned in results */

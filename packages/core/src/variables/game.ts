@@ -1,5 +1,5 @@
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, IStatsCalculationResult, IVariableType } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStatName, IStatsCalculationResult, VariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } from '../specifics/index';
 
@@ -75,7 +75,7 @@ export interface IVariableMeta<T = any> {
 	resultsMultiplier?: number;
 	/** if present, a tooltip will be added to results with the value shown inside it */
 	additionalInfo?: string;
-	type?: IVariableType;
+	type?: VariableType;
 	/** whether the variable is a custom one, not found in description but computed by lolcalc and wanted in results */
 	isCustom?: boolean;
 	affectedByTenacity?: boolean;
@@ -452,7 +452,7 @@ export interface IReplaceGameVariablesOptions {
 }
 
 export type IModifyVariableFunction = (value: number) => number;
-export type IModifyVariableFunctions = Partial<Record<IVariableType, IModifyVariableFunction[]>>;
+export type IModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;
 
 export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: IItemVariableParams, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
 export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: IRuneVariableParams, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;

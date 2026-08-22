@@ -747,7 +747,8 @@ export const VariableType = {
 	affectedBySlowResist: 'affectedBySlowResist',
 } as const;
 
-export type IVariableType = typeof VariableType[keyof typeof VariableType];
+// eslint-disable-next-line ts/no-redeclare
+export type VariableType = typeof VariableType[keyof typeof VariableType];
 
 export const CHAMPION_LEVEL = {
 	min: 1,
