@@ -30,6 +30,7 @@ import type ISivir from '@lolcalc/data/files/champion/Sivir.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
+import type IVladimir from '@lolcalc/data/files/champion/Vladimir.json';
 import type IVolibear from '@lolcalc/data/files/champion/Volibear.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
@@ -1801,6 +1802,31 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveAbilityUpgradesMask,
 			};
+		},
+	},
+	Vladimir: {
+		passive: {
+			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'passive'>()({
+				uninteresting: ['HPforAP', 'APRatioBonusHP'],
+			}),
+		},
+		calculateHooks: {
+			postTotal: {
+				handler(self, { totalStats }, { calculatedVariables }) {
+					const hpToAp = championAbilityVariableValue('HPforAP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
+					const apToHp = championAbilityVariableValue('APRatioBonusHP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
+
+					if (typeof hpToAp.value !== 'number' || typeof apToHp.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS vladimir] failed to calculate passive ratios', hpToAp, apToHp);
+						return;
+					}
+
+					console.log({ hpToAp: hpToAp.value, apToHp: apToHp.value });
+
+					calculatedVariables.vladimirPassiveAp = 0;
+					calculatedVariables.vladimirPassiveHp = 0;
+				},
+			},
 		},
 	},
 	Volibear: {

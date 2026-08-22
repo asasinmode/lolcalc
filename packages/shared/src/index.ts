@@ -237,6 +237,10 @@ export interface IStatsCalculationVariables {
 	solsticeSleighBonusMS?: number;
 	/** bonus ms % from Fiora's passive */
 	fioraPassiveBonusMS?: number;
+	/** ap gained from Vladimir's passive */
+	vladimirPassiveAp?: number;
+	/** hp gained from Vladimir's passive */
+	vladimirPassiveHp?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
