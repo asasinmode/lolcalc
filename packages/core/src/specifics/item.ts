@@ -15,7 +15,7 @@ import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
-import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
+import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED, MODIFY_VARIABLE_PRIORITIES } from './index.ts';
 
 const actualGWoundsItems = Object.values(ITEMS).filter(item => item.dataValues?.GrievousAmount);
 if (!actualGWoundsItems.every(item => (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id))) {
@@ -2923,6 +2923,17 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
 		}),
+		modifyVariable: {
+			type: [VariableType.magic, VariableType.physical],
+			handler(value, meta) {
+				if (meta.isCrit) {
+					return value * (1 - ITEMS_BY_NAME.randuinsOmen.dataValues?.PercentCritDamageReduction);
+				}
+				return value;
+			},
+			priority: MODIFY_VARIABLE_PRIORITIES.items[ITEM_NAME_TO_ID.randuinsOmen],
+			isTargetItem: true,
+		},
 	},
 	[ITEM_NAME_TO_ID.rocketbelt]: {
 		variables: defineVariables({
@@ -4049,6 +4060,9 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	modifyVariable?: {
 		type: VariableType[];
 		handler: IItemModifyVariableFunction;
+		priority?: number;
+		/** if true, this modify variable function will be applied when the item is present on the `DamageSource.damageCalculationTarget` */
+		isTargetItem?: boolean;
 	};
 	/**
 	 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)

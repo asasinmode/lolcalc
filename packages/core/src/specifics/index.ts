@@ -54,6 +54,14 @@ export const HOOK_PRIORITIES = {
 	},
 } satisfies Partial<Record<keyof ICalculateChampionStatsHookSource, Partial<Record<IChampionId | (string & {}), number>>>>;
 
+export const MODIFY_VARIABLE_PRIORITIES = {
+	items: {
+		[ITEM_NAME_TO_ID.randuinsOmen]: 1,
+	},
+} satisfies {
+	items: Record<string, number>;
+};
+
 export const ITEM_SPECIFICS_SHARED = {
 	[ITEM_NAME_TO_ID.archangelsStaff]: {
 		AP_FROM_MANA: ITEMS_BY_NAME.archangelsStaff?.dataValues.APFromMana,

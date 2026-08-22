@@ -11,7 +11,7 @@ import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/
 import type { IGameAbilityData, IGameAbilitySpecific, IVariableValueResult } from './specifics/index';
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
-import type { IDynamicVariables, IModifyVariableFunction, IReplacedGameVariable, IReplaceGameVariablesOptions, IReplaceGameVariablesRV } from './variables/game.ts';
+import type { IDynamicVariables, IModifyVariableFunction, IReplacedGameVariable, IReplaceGameVariablesOptions, IReplaceGameVariablesRV, IVariableModifyMeta } from './variables/game.ts';
 
 import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, EFFECTS, EFFECTS_STRINGTABLE, ICON_COOLDOWN_IMG, ITEMS, MISC, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
@@ -1277,8 +1277,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}),
 	};
 
-	appliedEffectsModifyVariableFunctions = computed((): [VariableType, IModifyVariableFunction[]][] => {
-		const rv: [VariableType, IModifyVariableFunction[]][] = [];
+	appliedEffectsModifyVariableFunctions = computed((): [VariableType, [ IModifyVariableFunction, priority: number ][]][] => {
+		const rv: [VariableType, [ IModifyVariableFunction, priority: number ][]][] = [];
 
 		if (!this.isResultsCopy) {
 			return rv;
@@ -1291,9 +1291,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				for (const type of specific.modifyVariable.type) {
 					const target = rv.find(group => group[0] === type);
 					if (target) {
-						target[1].push((value, meta) => specific.modifyVariable!.handler(value, meta, effect.data.value));
+						target[1].push([(value, meta) => specific.modifyVariable!.handler(value, meta, effect.data.value), 0]);
 					} else {
-						rv.push([type, [(value, meta) => specific.modifyVariable!.handler(value, meta, effect.data.value)]]);
+						rv.push([type, [[(value, meta) => specific.modifyVariable!.handler(value, meta, effect.data.value), 0]]]);
 					}
 				}
 			}
@@ -1301,18 +1301,33 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		return rv;
 	});
-	itemModifyVariableFunctions = computed((): [VariableType, IModifyVariableFunction[]][] => {
-		const rv: [VariableType, IModifyVariableFunction[]][] = [];
+	itemModifyVariableFunctions = computed((): [VariableType, [ IModifyVariableFunction, priority: number ][]][] => {
+		const rv: [VariableType, [IModifyVariableFunction, priority: number][]][] = [];
 
 		for (const item of this.items.value) {
 			const specific = item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics];
-			if (specific?.modifyVariable) {
+			if (specific?.modifyVariable && !specific.modifyVariable.isTargetItem) {
 				for (const type of specific.modifyVariable.type) {
 					const target = rv.find(group => group[0] === type);
 					if (target) {
-						target[1].push((value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value));
+						target[1].push([(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]);
 					} else {
-						rv.push([type, [(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value)]]);
+						rv.push([type, [[(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]]]);
+					}
+				}
+			}
+		}
+		if (this.calculationDamageTarget.value) {
+			for (const item of this.calculationDamageTarget.value.items.value) {
+				const specific = item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics];
+				if (specific?.modifyVariable?.isTargetItem) {
+					for (const type of specific.modifyVariable.type) {
+						const target = rv.find(group => group[0] === type);
+						if (target) {
+							target[1].push([(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]);
+						} else {
+							rv.push([type, [[(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]]]);
+						}
 					}
 				}
 			}
@@ -1322,52 +1337,63 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	});
 
 	modifyVariableFunctions = computed((): IDamageSourceModifyVariableFunctions => {
-		const rv: IDamageSourceModifyVariableFunctions = {};
-
 		/*
 		 * if this is not a results copy, the variables will be used in displayed descriptions for items/abilities and they shouldn't be modified by any effects
 		 * `isResultsCopy` being true means that this damage source was cloned so that the effects/calculationDamageTarget can be set on it without modifying the original one. Then the variable values are displayed in the table and should be affected by effects
 		 * this might not be probably the cleanest way of doing so and ideally original damage sources could be used (no cloning) with external `calculateVariables(source, target)` stored in results but atm this stays, there's a TODO about it
 		 */
 		if (!this.isResultsCopy) {
-			return rv;
+			return {};
 		}
+
+		const withPriority: Partial<Record<VariableType, [IModifyVariableFunction, number][]>> = {};
 
 		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
-			rv[modifyVariableType] ??= [];
-			rv[modifyVariableType].push((value, meta) => modifyVariableFn(value, meta, this, this.calculationDamageTarget.value));
+			addModifyVariableFnWithPriority(withPriority, modifyVariableType, (value, meta) => modifyVariableFn(value, meta, this, this.calculationDamageTarget.value), 0);
 		}
 		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
-			rv[entry[0]] ??= [];
-			rv[entry[0]]!.push(...entry[1]);
+			for (const [fn, priority] of entry[1]) {
+				addModifyVariableFnWithPriority(withPriority, entry[0], fn, priority);
+			}
 		}
 		for (const entry of this.itemModifyVariableFunctions.value) {
-			rv[entry[0]] ??= [];
-			rv[entry[0]]!.push(...entry[1]);
+			for (const [fn, priority] of entry[1]) {
+				addModifyVariableFnWithPriority(withPriority, entry[0], fn, priority);
+			}
 		}
 
-		return rv;
+		return Object.fromEntries(Object.entries(withPriority).map(([variableType, fnsWithPriorities]) => [
+			variableType as VariableType,
+			fnsWithPriorities.sort((a, b) => a[1] - b[1]).map(v => v[0]),
+		] satisfies [VariableType, IModifyVariableFunction[]]));
 	});
 
 	/** same as `DamageSource.modifyVariableFunctions` but for use for effect variables. Main difference is `GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES` being passed `this` instead of `this.calculationDamageTarget`, since effect variables are strictly only for `this`, while other variables (like item ones) should use calculateionDamageTarget's stats */
 	effectVariablesModifyFunctions = computed((): IDamageSourceModifyVariableFunctions => {
-		const rv: IDamageSourceModifyVariableFunctions = {};
-
 		if (!this.isResultsCopy) {
-			return rv;
+			return {};
 		}
+
+		const withPriority: Partial<Record<VariableType, [IModifyVariableFunction, number][]>> = {};
 
 		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
-			rv[modifyVariableType] ??= [];
-			rv[modifyVariableType].push((value, meta) => modifyVariableFn(value, meta, this, this));
+			addModifyVariableFnWithPriority(withPriority, modifyVariableType, (value, meta) => modifyVariableFn(value, meta, this, this), 0);
 		}
-
 		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
-			rv[entry[0]] ??= [];
-			rv[entry[0]]!.push(...entry[1]);
+			for (const [fn, priority] of entry[1]) {
+				addModifyVariableFnWithPriority(withPriority, entry[0], fn, priority);
+			}
+		}
+		for (const entry of this.itemModifyVariableFunctions.value) {
+			for (const [fn, priority] of entry[1]) {
+				addModifyVariableFnWithPriority(withPriority, entry[0], fn, priority);
+			}
 		}
 
-		return rv;
+		return Object.fromEntries(Object.entries(withPriority).map(([variableType, fnsWithPriorities]) => [
+			variableType as VariableType,
+			fnsWithPriorities.sort((a, b) => a[1] - b[1]).map(v => v[0]),
+		] satisfies [VariableType, IModifyVariableFunction[]]));
 	});
 }
 
@@ -1914,6 +1940,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 			return new Map(vars?.values
 				? Object.entries(vars.values).map(([variableName, value]) => {
 					let baseValue: IVariableValueResult['value'];
+					const modifyMeta: IVariableModifyMeta = {};
 					const modifyVariableFunctions = specific.variables!.meta?.[variableName]?.type && self.effectVariablesModifyFunctions.value[specific.variables!.meta?.[variableName]?.type];
 
 					if (Array.isArray(value)) {
@@ -1922,14 +1949,14 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 						if (Array.isArray(value.value)) {
 							baseValue = [value.value?.[0], value.value?.[1]];
 							if (typeof value.value?.[0] === 'number') {
-								value.value[0] = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number) as number, value.value[0]!);
+								value.value[0] = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, value.value[0]!);
 							}
 							if (typeof value.value?.[1] === 'number') {
-								value.value[1] = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number) as number, value.value[1]!);
+								value.value[1] = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, value.value[1]!);
 							}
 						} else {
 							baseValue = value.value;
-							value.value = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number) as number, value.value);
+							value.value = modifyVariableFunctions.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, value.value);
 						}
 					}
 
@@ -1937,6 +1964,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 						variableName,
 						Object.assign(value, {
 							meta: specific.variables!.meta?.[variableName],
+							modifyMeta,
 							baseValue,
 						} satisfies Partial<IReplacedGameVariable>),
 					];
@@ -2320,3 +2348,10 @@ export interface IEffectOntoTargetVarsHook<Id extends IChampionId | undefined = 
 }
 
 export type IDamageSourceModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;
+
+type IDamageSourceModifyVariableFunctionsWithPriority = Partial<Record<VariableType, [IModifyVariableFunction, number][]>>;
+
+function addModifyVariableFnWithPriority(target: IDamageSourceModifyVariableFunctionsWithPriority, type: VariableType, fn: IModifyVariableFunction, priority: number) {
+	target[type] ??= [];
+	target[type]!.push([fn, priority]);
+}
