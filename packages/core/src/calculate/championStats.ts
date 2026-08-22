@@ -167,6 +167,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemPassivesStats[stat] = 1;
 	}
 
+	if (!source.hasMana.value) {
+		itemBaseStats.mana = 0;
+	}
+
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
 			hook(source, { isRanged, itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, effectStats, dragonStatMultipliers, dragonStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
@@ -193,6 +197,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotalStats[stat] = 1 - itemTotalStats[stat];
 	}
 	calculatedVariables.apMultipliersBase += itemTotalStats.abilityPower;
+
+	if (!source.hasMana.value) {
+		itemTotalStats.mana = 0;
+	}
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
 
@@ -339,11 +347,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		debuffs.shreddedMR = totalMultipliersMRShred;
 		totalStats.magicResist = totalStats.magicResist - totalMultipliersMRShred - debuffs.flatMRShred;
 		bonusStats.magicResist = Math.max(0, (bonusStats.magicResist - debuffs.flatMRShred) * (1 - debuffs.percentageMRShred));
-	}
-
-	// TODO figure out if its ok to do it, also handle other non mana champions not gaining mana
-	if (!source.hasMana.value) {
-		totalStats.mana = baseStats.mana;
 	}
 
 	if (source.calculateStatsHooks.all.value.postTotal) {

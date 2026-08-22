@@ -157,8 +157,12 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }) {
-					itemPassivesStats.abilityPower += self.internalItemData.value.glory * ITEMS_BY_NAME.darkSeal?.dataValues.APPerGlory;
+				handler(self, { itemPassivesStats, itemStatIncreases }) {
+					const value = self.internalItemData.value.glory * ITEMS_BY_NAME.darkSeal?.dataValues.APPerGlory;
+					itemStatIncreases[ITEM_NAME_TO_ID.darkSeal] = {
+						FlatMagicDamageMod: value,
+					};
+					itemPassivesStats.abilityPower += value;
 				},
 			},
 		},
@@ -176,9 +180,13 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+				handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
 					const { glory } = self.internalItemData.value as IInternalItemDataOf<'mejai'>;
-					itemPassivesStats.abilityPower += glory * ITEMS_BY_NAME.mejai?.dataValues.APPerGlory;
+					const value = glory * ITEMS_BY_NAME.mejai?.dataValues.APPerGlory;
+					itemStatIncreases[ITEM_NAME_TO_ID.mejai] = {
+						FlatMagicDamageMod: value,
+					};
+					itemPassivesStats.abilityPower += value;
 					if (glory >= ITEMS_BY_NAME.mejai?.dataValues.GloryThreshold) {
 						calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.mejai?.dataValues.MoveSpeedMod;
 					}
