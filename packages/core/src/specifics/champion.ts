@@ -15,6 +15,7 @@ import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
 import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import type IKSante from '@lolcalc/data/files/champion/KSante.json';
+import type ILocke from '@lolcalc/data/files/champion/Locke.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type INami from '@lolcalc/data/files/champion/Nami.json';
@@ -828,6 +829,46 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				hasPassiveStack: clamp(0, Math.round(self.internalData.value.hasPassiveStack ?? 0), 1),
 			};
+		},
+	},
+	Locke: {
+		passive: {
+			variables: defineChampionVariables<'Locke', typeof ILocke, 'passive'>()({
+				known: {
+					OnHitDamage: [],
+				},
+				calculate(self, target) {
+					const minDamage = championAbilityVariableValue('MinOnHitDamage', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+					const maxDamage = championAbilityVariableValue('MaxOnHitDamage', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+					let OnHitDamage = 0;
+
+					if (typeof minDamage.value === 'number' && typeof maxDamage.value === 'number') {
+						/** not saved in an actual variable? */
+						const maxThreshold = 0.3;
+						const targetPercentHealth = (target?.currentHealth.value ?? 0) / (target?.stats.value.total.hp || 1);
+						const damagePercent = Math.max(0, Math.min(1, (1 - targetPercentHealth) / (1 - maxThreshold)));
+						OnHitDamage = minDamage.value + (maxDamage.value - minDamage.value) * damagePercent;
+					}
+
+					return {
+						OnHitDamage: {
+							value: OnHitDamage,
+						},
+					};
+				},
+				meta: {
+					MinOnHitDamage: {
+						type: VariableType.magic,
+					},
+					MaxOnHitDamage: {
+						type: VariableType.magic,
+					},
+					OnHitDamage: {
+						type: VariableType.magic,
+						isCustom: true,
+					},
+				},
+			}),
 		},
 	},
 	Mordekaiser: {

@@ -765,7 +765,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.muramana]: {
 		calculateHooks: {
 			preBonus: {
-				handler(self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables }) {
 					if (!self.hasMana.value) {
 						return;
 					}
