@@ -1840,7 +1840,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, runeShardStats, championPassiveStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, runeShardStats, dragonStatMultipliers, championPassiveStats }, { calculatedVariables, miscDebug }) {
 					const hpToAp = championAbilityVariableValue('HPforAP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
 					const apToHp = championAbilityVariableValue('APRatioBonusHP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
 
@@ -1851,13 +1851,13 @@ export const CHAMPION_SPECIFICS = {
 
 					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
 					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower
-						- ((runeShardStats.abilityPower ?? 0) + (calculatedVariables.riftmakerVoidInfusion ?? 0)) * calculatedVariables.totalItemApMultipliers;
+						- ((runeShardStats.abilityPower ?? 0) + (calculatedVariables.riftmakerVoidInfusion ?? 0)) * (calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower);
 
 					const passiveHp = miscDebug.vladimirPassiveHPAPBase * apToHp.value;
 					let passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value + passiveHp * (calculatedVariables.riftmakerBonusHPToAP ?? 0);
 
 					calculatedVariables.apMultipliersBase += passiveAp;
-					passiveAp *= calculatedVariables.totalItemApMultipliers;
+					passiveAp *= (calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower);
 
 					calculatedVariables.vladimirPassiveAp = passiveAp;
 					calculatedVariables.vladimirPassiveHp = passiveHp;

@@ -751,6 +751,15 @@
 	},
 	"misc": {
 		"dragons": {
+			"Mountain": {
+				"stack": {
+					"objectName": "SRX_DragonBuffMountain",
+					"dataKey": "Shared/Spells/SRX_DragonBuffMountain",
+					"dataValues": {
+						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				}
+			},
 			"Infernal": {
 				"stack": {
 					"objectName": "SRX_DragonBuffInfernal",

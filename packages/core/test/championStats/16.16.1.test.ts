@@ -1,5 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IItem } from '@lolcalc/data/types.js';
+import type { IDragonName, IItem } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
@@ -136,12 +136,12 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 		assert.equal(damageSource.maxHealth.value, 2685);
 	});
 
-	const bloodmailFlatItems: IItem[] = [ITEMS_BY_NAME.ludensEcho, ITEMS_BY_NAME.heartsteel, ITEMS_BY_NAME.bootsOfSwiftness];
+	const bloodmailDragonFlatItems: IItem[] = [ITEMS_BY_NAME.ludensEcho, ITEMS_BY_NAME.heartsteel, ITEMS_BY_NAME.bootsOfSwiftness];
 
-	await t.test('bloodmail', { only: true }, async () => {
+	await t.test('bloodmail', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
 			...sourceCommon,
-			items: bloodmailFlatItems.concat(ITEMS_BY_NAME.overlordsBloodmail),
+			items: bloodmailDragonFlatItems.concat(ITEMS_BY_NAME.overlordsBloodmail),
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -149,5 +149,21 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 			abilityPower: 169,
 		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 2275);
+	});
+
+	const dragonStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Mountain'];
+
+	await t.test('dragons flat items', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: bloodmailDragonFlatItems,
+			dragonStacks,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 60,
+			abilityPower: 164,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 1740);
 	});
 });
