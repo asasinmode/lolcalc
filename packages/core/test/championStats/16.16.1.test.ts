@@ -153,7 +153,7 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 
 	const dragonStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Mountain'];
 
-	await t.test('dragons flat items', { only: true }, async () => {
+	await t.test('dragons | flat items', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
 			...sourceCommon,
 			items: bloodmailDragonFlatItems,
@@ -165,5 +165,33 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 			abilityPower: 164,
 		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 1740);
+	});
+
+	await t.test('dragons | rabadon, riftmaker', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: bloodmailDragonFlatItems.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker),
+			dragonStacks,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 558,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 2583);
+	});
+
+	await t.test('dragons | rabadon, riftmaker, bloodmail', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: bloodmailDragonFlatItems.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.overlordsBloodmail),
+			dragonStacks,
+			currentHealth: 1244,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 177,
+			abilityPower: 599,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 3133);
 	});
 });

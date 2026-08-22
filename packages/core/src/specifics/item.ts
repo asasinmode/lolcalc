@@ -2177,11 +2177,16 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 			postTotal: {
-				handler(self, { totalStats, bonusStats, championPassiveStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, dragonStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, championPassiveStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, dragonStats, dragonStatMultipliers }, { calculatedVariables, miscDebug }) {
 					if (championPassiveStats.hp) {
-						const value = championPassiveStats.hp * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
+						let value = championPassiveStats.hp * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
 						miscDebug.bloodmailBonusHp! += championPassiveStats.hp;
 						calculatedVariables.bloodmailTyranny! += value;
+						if (dragonStatMultipliers.attackDamage) {
+							const dragonMultiplierValue = value * dragonStatMultipliers.attackDamage;
+							dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + dragonMultiplierValue;
+							value += dragonMultiplierValue;
+						}
 						itemPassivesStats.attackDamage += value;
 						itemTotalStats.attackDamage += value;
 						totalStats.attackDamage += value;
