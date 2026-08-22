@@ -1,4 +1,4 @@
-import type { IChampion, IDragonName } from '@lolcalc/data/types.js';
+import type { IChampion } from '@lolcalc/data/types.js';
 import type { IChampionAbilityKey, IEffectObjectName } from '@lolcalc/shared';
 import fs from 'node:fs/promises';
 import nodePath from 'node:path';
@@ -142,21 +142,22 @@ function applyEffect(fixture: IFixtureShape, search: string): void {
 }
 
 function applyDragon(fixture: IFixtureShape, raw: string): void {
-	const [dragonName, type] = raw.split('-');
+	const [rawDragonName, type] = raw.split('-');
 
-	if (!dragonName || !(type === 'soul' || type === 'stack')) {
+	if (!rawDragonName || !(type === 'soul' || type === 'stack')) {
 		console.warn(`[applyDragon] dragon arg "${raw}" must be of format 'IDragonName-[soul|stack]'`);
 		return;
 	}
 
-	const dragon = MISC.dragons[dragonName as IDragonName];
+	const [dragonName, dragon] = Object.entries(MISC.dragons).find(([key]) => key.toLowerCase() === rawDragonName.toLowerCase()) ?? [];
 	if (!dragon) {
-		console.warn(`[applyDragon] invalid dragon name`, dragonName);
+		console.warn(`[applyDragon] invalid dragon name`, rawDragonName);
 		return;
 	}
 
 	fixture.misc ??= {};
-	fixture.misc[dragonName] = Object.assign((fixture.misc[dragonName] as Record<string, unknown>) ?? {}, {
+	fixture.misc.dragons ??= {};
+	(fixture.misc.dragons as any)[dragonName!] = Object.assign(((fixture.misc.dragons as any)[dragonName!] as Record<string, unknown>) ?? {}, {
 		[type]: dragon[type],
 	});
 }
