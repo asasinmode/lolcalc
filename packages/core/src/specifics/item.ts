@@ -2917,8 +2917,10 @@ export const ITEM_SPECIFICS = {
 			type: [VariableType.magic, VariableType.physical],
 			handler(value, meta) {
 				if (meta.critAdditionalDamage) {
+					const baseValue = (value - meta.critAdditionalDamage);
 					meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 - ITEMS_BY_NAME.randuinsOmen.dataValues?.PercentCritDamageReduction);
-					return (value - meta.critAdditionalDamage) * (1 + meta.critMultiplier);
+					meta.critAdditionalDamage = baseValue * meta.critMultiplier;
+					return baseValue + meta.critAdditionalDamage;
 				}
 				return value;
 			},
@@ -4037,9 +4039,13 @@ export const ITEM_SPECIFICS = {
 		modifyVariable: {
 			type: [VariableType.magic, VariableType.physical],
 			handler(value, meta, self) {
+				// TODO probably should be done always, not just when IE is present but atm it's only for cinderbloom crit magic damage
 				if (meta.critAdditionalDamage) {
-					console.log('infinity edging', meta.critAdditionalDamage, self.stats.value.total.critDamageMultiplier);
-					return value;
+					const statsCritMultiplier = (self.stats.value.total.critDamageMultiplier - self.stats.value.base.critDamageMultiplier);
+					meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 + statsCritMultiplier);
+					const additionalDamage = meta.critAdditionalDamage * statsCritMultiplier;
+					meta.critAdditionalDamage += additionalDamage;
+					return value + additionalDamage;
 				}
 				return value;
 			},
