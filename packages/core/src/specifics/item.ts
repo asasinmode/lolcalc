@@ -608,8 +608,11 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.diademOfSongs]: {
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, { itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					const bonusHSP = (miscDebug.tearItemBonusMana ?? 0) * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient / 100;
+				handler(self, { itemPassivesStats, itemBaseStats }, { calculatedVariables }) {
+					if (!self.hasMana.value) {
+						return;
+					}
+					const bonusHSP = (itemPassivesStats.mana + itemBaseStats.mana) * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient / 100;
 					itemPassivesStats.healShieldPower += bonusHSP;
 					calculatedVariables.whisperingDiademAwe = bonusHSP;
 				},
@@ -680,8 +683,11 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
 		calculateHooks: {
 			preBonus: {
-				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
-					calculatedVariables.archangelSeraphAwe = (miscDebug.tearItemBonusMana ?? 0) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA;
+				handler(self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					if (!self.hasMana.value) {
+						return;
+					}
+					calculatedVariables.archangelSeraphAwe = itemTotalStats.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA;
 					calculatedVariables.apMultipliersBase += calculatedVariables.archangelSeraphAwe;
 					itemPassivesStats.abilityPower += calculatedVariables.archangelSeraphAwe;
 					itemTotalStats.abilityPower += calculatedVariables.archangelSeraphAwe;
@@ -763,7 +769,7 @@ export const ITEM_SPECIFICS = {
 						return;
 					}
 
-					calculatedVariables.manaMuraAwe = ((miscDebug.tearItemBonusMana ?? 0) + baseOnLevelStats.mana) * ITEMS_BY_NAME.muramana?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
+					calculatedVariables.manaMuraAwe = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEMS_BY_NAME.muramana?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					itemPassivesStats.attackDamage += calculatedVariables.manaMuraAwe;
 					itemTotalStats.attackDamage += calculatedVariables.manaMuraAwe;
 				},
@@ -845,8 +851,11 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, { itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					const bonusHP = (miscDebug.tearItemBonusMana ?? 0) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA;
+				handler(self, { itemPassivesStats, itemBaseStats }, { calculatedVariables }) {
+					if (!self.hasMana.value) {
+						return;
+					}
+					const bonusHP = (itemBaseStats.mana + itemPassivesStats.mana) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA;
 					itemPassivesStats.hp += bonusHP;
 					calculatedVariables.approachFimbulAwe = bonusHP;
 				},

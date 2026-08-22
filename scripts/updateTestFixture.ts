@@ -78,6 +78,7 @@ async function applyChampion(fixture: IFixtureShape, raw: string): Promise<void>
 	const existing = fixture.champions[name] ?? {};
 
 	existing.stats = champion.stats;
+	existing.partype = champion.partype;
 
 	if (abilityListRaw) {
 		const existingAbilities = (existing.abilities as Record<string, unknown>) ?? {};

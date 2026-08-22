@@ -43,7 +43,7 @@ test('Ahri misc ap passives items', async (t) => {
 			attackSpeed: 1.327,
 			abilityHaste: 35,
 			moveSpeed: 413,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 2873);
 	});
 
@@ -60,7 +60,7 @@ test('Ahri misc ap passives items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 549,
 			abilityHaste: 60,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxAbilityResource.value, 2053);
 	});
 
@@ -76,7 +76,7 @@ test('Ahri misc ap passives items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 575,
 			abilityHaste: 60,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxAbilityResource.value, 2443);
 	});
 });
@@ -110,7 +110,7 @@ test('Ezreal tear items', async (t) => {
 			abilityPower: 85,
 			attackSpeed: 0.938,
 			abilityHaste: 25,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 675);
 		assert.equal(damageSource.maxAbilityResource.value, 995);
 	});
@@ -129,7 +129,7 @@ test('Ezreal tear items', async (t) => {
 			attackDamage: 133,
 			abilityPower: 109,
 			abilityHaste: 40,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxAbilityResource.value, 1875);
 	});
 
@@ -153,7 +153,7 @@ test('Ezreal tear items', async (t) => {
 			abilityHaste: 55,
 			moveSpeed: 370,
 			omnivamp: 4,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 2597);
 		assert.equal(damageSource.maxAbilityResource.value, 3501);
 	});
@@ -175,7 +175,7 @@ test('Ezreal tear items', async (t) => {
 			healShieldPower: 25,
 			manaRegen: 30,
 			omnivamp: 5,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 2916);
 		assert.equal(damageSource.maxAbilityResource.value, 4293);
 	});
@@ -192,7 +192,7 @@ test('Ezreal tear items', async (t) => {
 			abilityPower: 150,
 			healShieldPower: 28,
 			manaRegen: 35,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 3571);
 		assert.equal(damageSource.maxAbilityResource.value, 4989);
 	});
@@ -224,7 +224,7 @@ test('Ezreal tear items', async (t) => {
 			healShieldPower: 28,
 			omnivamp: 28,
 			tenacity: 20,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 4479);
 		assert.equal(damageSource.maxAbilityResource.value, 5565);
 	});
@@ -254,7 +254,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 0.526,
-		});
+		}, damageSource);
 	});
 
 	await t.test('dagger, dagger', async () => {
@@ -265,7 +265,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 0.783,
-		});
+		}, damageSource);
 	});
 
 	await t.test('dagger, dagger | wCaressed', async () => {
@@ -277,7 +277,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackSpeed: 0.626,
-		});
+		}, damageSource);
 	});
 
 	await t.test('lvl 1 | frozen heart, swiftmarch', async () => {
@@ -293,7 +293,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 			abilityHaste: 28,
 			moveSpeed: 415,
 			tenacity: 15,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxAbilityResource.value, 715);
 	});
 
@@ -306,7 +306,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 108,
 			abilityHaste: 53,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxAbilityResource.value, 1440);
 	});
 
@@ -320,7 +320,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 			abilityPower: 208,
 			abilityHaste: 78,
 			moveSpeed: 428,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxAbilityResource.value, 2054);
 	});
 
@@ -336,7 +336,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 222,
 			abilityHaste: 93,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 1906);
 		assert.equal(damageSource.maxAbilityResource.value, 2701);
 	});
@@ -352,7 +352,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 			abilityPower: 303,
 			abilityHaste: 113,
 			attackSpeed: 0.626,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 2328);
 		assert.equal(damageSource.maxAbilityResource.value, 3517);
 	});
@@ -368,7 +368,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 			abilityPower: 427,
 			abilityHaste: 108,
 			attackSpeed: 1.007,
-		});
+		}, damageSource);
 		/* game shows 4839, see help page for known discrepancies */
 		assert.equal(damageSource.maxHealth.value, 4840);
 		/* game shows 4980, see help page for known discrepancies */
@@ -385,7 +385,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 542,
 			abilityHaste: 63,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 4237);
 		assert.equal(damageSource.maxAbilityResource.value, 5380);
 	});
@@ -402,7 +402,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 			magicResist: 109,
 			abilityHaste: 63,
 			moveSpeed: 428,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 4644);
 		assert.equal(damageSource.maxAbilityResource.value, 5426);
 	});
@@ -421,7 +421,7 @@ test.skip('Ryze tear/ad items', async (t) => {
 			abilityPower: 661,
 			abilityHaste: 88,
 			moveSpeed: 445,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 4649);
 		assert.equal(damageSource.maxAbilityResource.value, 5797);
 	});

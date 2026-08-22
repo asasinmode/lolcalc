@@ -2,6 +2,7 @@
 	"version": "16.9.1",
 	"champions": {
 		"Ahri": {
+			"partype": "Mana",
 			"stats": {
 				"hp": 590,
 				"hpperlevel": 104,
@@ -27,6 +28,7 @@
 			}
 		},
 		"Ezreal": {
+			"partype": "Mana",
 			"stats": {
 				"hp": 600,
 				"hpperlevel": 102,
