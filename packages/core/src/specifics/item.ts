@@ -1958,6 +1958,7 @@ export const ITEM_SPECIFICS = {
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;
 				},
+				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.rabadon],
 			},
 			onTotalPreMultipliers: {
 				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
