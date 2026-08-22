@@ -2177,7 +2177,17 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
 			postTotal: {
-				handler(self, { totalStats, bonusStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, dragonStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, championPassiveStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, dragonStats }, { calculatedVariables, miscDebug }) {
+					if (championPassiveStats.hp) {
+						const value = championPassiveStats.hp * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
+						miscDebug.bloodmailBonusHp! += championPassiveStats.hp;
+						calculatedVariables.bloodmailTyranny! += value;
+						itemPassivesStats.attackDamage += value;
+						itemTotalStats.attackDamage += value;
+						totalStats.attackDamage += value;
+						bonusStats.attackDamage += value;
+					}
+
 					const retributionBaseTotal = totalStats.attackDamage - (dragonStats.attackDamage ?? 0) - calculatedVariables.bloodmailRetributionExcludedAd;
 
 					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
