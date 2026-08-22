@@ -1828,14 +1828,16 @@ export const CHAMPION_SPECIFICS = {
 					}
 
 					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
-					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower - (runeShardStats.abilityPower ?? 0);
+					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower - (runeShardStats.abilityPower ?? 0) * calculatedVariables.totalItemApMultipliers;
 
-					const passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value;
+					let passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value;
 					const passiveHp = miscDebug.vladimirPassiveHPAPBase * apToHp.value;
 
 					calculatedVariables.vladimirPassiveAp = passiveAp;
 					calculatedVariables.vladimirPassiveHp = passiveHp;
 
+					calculatedVariables.apMultipliersBase += passiveAp;
+					passiveAp *= calculatedVariables.totalItemApMultipliers;
 					totalStats.abilityPower += passiveAp;
 					bonusStats.abilityPower += passiveAp;
 					championPassiveStats.abilityPower = passiveAp;

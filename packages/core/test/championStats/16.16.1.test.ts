@@ -1,4 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IItem } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
@@ -50,7 +51,7 @@ test('16.16 Rammus', async (t) => {
 			attackDamage: 71,
 			armor: 16,
 			magicResist: 13,
-		});
+		}, damageSource);
 
 		damageSource.internalData.value.defensiveCurl = 1;
 
@@ -58,7 +59,7 @@ test('16.16 Rammus', async (t) => {
 			attackDamage: 79,
 			armor: 46,
 			magicResist: 35,
-		});
+		}, damageSource);
 	});
 });
 
@@ -81,19 +82,33 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 20,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 665);
 	});
 
-	await t.test('flat item increases', { only: true }, async () => {
+	const flatItems: IItem[] = [ITEMS_BY_NAME.ludensEcho, ITEMS_BY_NAME.heartsteel, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.archangelsStaff];
+
+	await t.test('flat item increases', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
 			...sourceCommon,
-			items: [ITEMS_BY_NAME.ludensEcho, ITEMS_BY_NAME.heartsteel, ITEMS_BY_NAME.bootsOfSwiftness, ITEMS_BY_NAME.archangelsStaff],
+			items: flatItems,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			abilityPower: 220,
-		});
+		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 1837);
+	});
+
+	await t.test('rabadon', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: flatItems.concat(ITEMS_BY_NAME.rabadon),
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 455,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 2189);
 	});
 });
