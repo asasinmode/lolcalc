@@ -12,6 +12,7 @@ export interface IReplacedGameVariable {
 	baseValue: NonNullable<IVariableValueResult['value']>;
 	value: NonNullable<IVariableValueResult['value']>;
 	meta?: IVariableMeta;
+	modifyMeta: IVariableModifyMeta;
 	/** `%` will be suffixed to the formatted value in replaced description */
 	isPercentage?: boolean;
 	isUninteresting?: boolean;
@@ -79,6 +80,10 @@ export interface IVariableMeta<T = any> {
 	/** whether the variable is a custom one, not found in description but computed by lolcalc and wanted in results */
 	isCustom?: boolean;
 	affectedByTenacity?: boolean;
+}
+
+export interface IVariableModifyMeta {
+	isCrit?: boolean;
 }
 
 /**
@@ -451,7 +456,7 @@ export interface IReplaceGameVariablesOptions {
 	isExtended?: boolean;
 }
 
-export type IModifyVariableFunction = (value: number) => number;
+export type IModifyVariableFunction = (value: number, meta: IVariableModifyMeta) => number;
 export type IModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;
 
 export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: IItemVariableParams, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
@@ -554,6 +559,7 @@ export function replaceGameVariables(
 
 		const varValueSuffix = isPercentage ? '%' : (optionalPercent ?? '');
 		const modifyVariableFns = meta?.type && modifyVariableFunctions[meta.type];
+		const modifyMeta: IVariableModifyMeta = {};
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
@@ -578,12 +584,12 @@ export function replaceGameVariables(
 
 			if (modifyVariableFns) {
 				if (isV1Number) {
-					variable[0] = modifyVariableFns.reduce((acc, modify) => modify(acc as number) as number, variable[0]!);
+					variable[0] = modifyVariableFns.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, variable[0]!);
 				} else {
 					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[0]);
 				}
 				if (isV2Number) {
-					variable[1] = modifyVariableFns.reduce((acc, modify) => modify(acc as number) as number, variable[1]!);
+					variable[1] = modifyVariableFns.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, variable[1]!);
 				} else {
 					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[1]);
 				}
@@ -600,6 +606,7 @@ export function replaceGameVariables(
 				baseValue,
 				value: variable as [string | number, string | number],
 				meta,
+				modifyMeta,
 				isPercentage,
 				isUninteresting,
 				metaSuffix,
@@ -628,11 +635,11 @@ export function replaceGameVariables(
 		const baseValue = roundNumber(variable * multiplier);
 
 		if (modifyVariableFns) {
-			variable = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, variable);
+			variable = modifyVariableFns.reduce((acc, modify) => modify(acc, modifyMeta) as number, variable);
 		}
 
 		variable = roundNumber(variable * multiplier);
-		variables.set(variableName, { baseValue, value: variable, meta, isUninteresting, isPercentage, metaSuffix, actualName: actualVariableName });
+		variables.set(variableName, { baseValue, value: variable, meta, modifyMeta, isUninteresting, isPercentage, metaSuffix, actualName: actualVariableName });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
 			? 'melee'
@@ -686,17 +693,18 @@ export function replaceGameVariables(
 						: (value as number[])[0];
 				}
 
+				const modifyMeta: IVariableModifyMeta = {};
 				const modifyVariableFns = meta?.type && modifyVariableFunctions[meta.type];
 				if (modifyVariableFns) {
 					if (Array.isArray(value)) {
-						value[0] = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[0] as number);
-						value[1] = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value[1] as number);
+						value[0] = modifyVariableFns.reduce((acc, modify) => modify(acc, modifyMeta) as number, value[0] as number);
+						value[1] = modifyVariableFns.reduce((acc, modify) => modify(acc, modifyMeta) as number, value[1] as number);
 					} else if (typeof value === 'number') {
-						value = modifyVariableFns.reduce((acc, modify) => modify(acc) as number, value as number);
+						value = modifyVariableFns.reduce((acc, modify) => modify(acc, modifyMeta) as number, value as number);
 					}
 				}
 
-				variables.set(variableName, { baseValue, value: value!, meta, isPercentage: meta?.isPercentage });
+				variables.set(variableName, { baseValue, value: value!, meta, modifyMeta, isPercentage: meta?.isPercentage });
 			}
 		}
 	}

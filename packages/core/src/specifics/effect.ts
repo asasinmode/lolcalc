@@ -4,9 +4,10 @@ import type { IEffectObjectName } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
+import type { IVariableModifyMeta } from '../variables/game.ts';
 import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
-import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
 
+import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
@@ -325,7 +326,7 @@ export const EFFECT_SPECIFICS = {
 		},
 		modifyVariable: {
 			type: [VariableType.heal, VariableType.hpRegen],
-			handler(value, effectData) {
+			handler(value, _meta, effectData) {
 				return value * (typeof value === 'number' ? (1 - effectData[0] / 100) : 1);
 			},
 		},
@@ -487,7 +488,7 @@ export const EFFECT_SPECIFICS = {
 		},
 		modifyVariable: {
 			type: [VariableType.shield],
-			handler(value, effectData) {
+			handler(value, _meta, effectData) {
 				if (typeof value === 'number') {
 					const reducePercentage = itemVariableValue(
 							'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
@@ -1332,7 +1333,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	variables?: ISpecificVariables<never, any>;
 }
 
-type IEffectModifyVariableFunction<T extends (number | undefined)[] = [number]> = (value: number, effectData: T) => number;
+type IEffectModifyVariableFunction<T extends (number | undefined)[] = [number]> = (value: number, meta: IVariableModifyMeta, effectData: T) => number;
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 

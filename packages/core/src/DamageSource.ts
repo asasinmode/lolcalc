@@ -1291,9 +1291,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				for (const type of specific.modifyVariable.type) {
 					const target = rv.find(group => group[0] === type);
 					if (target) {
-						target[1].push(value => specific.modifyVariable!.handler(value, effect.data.value));
+						target[1].push((value, meta) => specific.modifyVariable!.handler(value, meta, effect.data.value));
 					} else {
-						rv.push([type, [value => specific.modifyVariable!.handler(value, effect.data.value)]]);
+						rv.push([type, [(value, meta) => specific.modifyVariable!.handler(value, meta, effect.data.value)]]);
 					}
 				}
 			}
@@ -1310,9 +1310,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				for (const type of specific.modifyVariable.type) {
 					const target = rv.find(group => group[0] === type);
 					if (target) {
-						target[1].push(value => specific.modifyVariable!.handler(value, this, this.calculationDamageTarget.value));
+						target[1].push((value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value));
 					} else {
-						rv.push([type, [value => specific.modifyVariable!.handler(value, this, this.calculationDamageTarget.value)]]);
+						rv.push([type, [(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value)]]);
 					}
 				}
 			}
@@ -1335,7 +1335,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
 			rv[modifyVariableType] ??= [];
-			rv[modifyVariableType].push(value => modifyVariableFn(value, this, this.calculationDamageTarget.value));
+			rv[modifyVariableType].push((value, meta) => modifyVariableFn(value, meta, this, this.calculationDamageTarget.value));
 		}
 		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
 			rv[entry[0]] ??= [];
@@ -1359,7 +1359,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (const [modifyVariableType, modifyVariableFn] of GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES) {
 			rv[modifyVariableType] ??= [];
-			rv[modifyVariableType].push(value => modifyVariableFn(value, this, this));
+			rv[modifyVariableType].push((value, meta) => modifyVariableFn(value, meta, this, this));
 		}
 
 		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {

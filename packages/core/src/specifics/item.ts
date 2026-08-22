@@ -8,6 +8,7 @@ import type { IStatsCalculationResult } from '@lolcalc/shared';
 import type { IDeriveProgressFn, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
+import type { IVariableModifyMeta } from '../variables/game.ts';
 import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
@@ -4020,10 +4021,11 @@ export const ITEM_SPECIFICS = {
 		}),
 		modifyVariable: {
 			type: [VariableType.magic],
-			handler(value, _self, damageTarget) {
+			handler(value, meta, _self, damageTarget) {
 				if (!damageTarget || (damageTarget.currentHealth.value / (damageTarget.stats.value.total.hp ?? 1)) >= 0.4) {
 					return value;
 				}
+				meta.isCrit = true;
 				return value * (1 + ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp);
 			},
 		},
@@ -4057,7 +4059,7 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 };
 
 export interface IItemModifyVariableFunction {
-	(value: number, self: DamageSource, damageTarget?: DamageSource): number;
+	(value: number, meta: IVariableModifyMeta, self: DamageSource, damageTarget?: DamageSource): number;
 }
 
 export function calculateItemDiscount(
