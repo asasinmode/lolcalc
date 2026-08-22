@@ -230,7 +230,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet), 'frostField', 'Frost Field', true, true),
 	},
 	[ITEM_NAME_TO_ID.seryldasGrudge]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge), 'bitterCold', 'Bitter Cold', true, true),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge), 'bitterCold', 'Bitter Cold', true, true, 'This effect slows always, regardless of the target\'s current hp'),
 	},
 	[ITEM_NAME_TO_ID.bloodsong]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bloodsong), 'bloodsonged', 'Spellblade damage increase', true, true),
@@ -269,7 +269,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
 				: maxValue !== 1
 					? await numberExtra(abilityId, 0, label, minValue, maxValue)
-					: await booleanExtra(abilityId, 0, label, false);
+					: await booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip);
 	}
 }
 

@@ -838,6 +838,7 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
+		componentTooltip: 'This effect slows always, regardless of the target\'s current hp',
 		variables: simpleSlowEffectVariables('seryldaSlow'),
 		calculateHooks: {
 			postInit: {
@@ -1302,6 +1303,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	deriveProgressValue?: IDeriveProgressFn<true>;
 	/** will be called when the value is updated through the extra component */
 	onValueUpdate?: IExtraOnValueUpdate;
+	componentTooltip?: string;
 	progressComponentSymbol?: string;
 	sourceControls?: ISelectEffectSourceProps;
 	effectControls?: IEffectControlsProps<T>;
