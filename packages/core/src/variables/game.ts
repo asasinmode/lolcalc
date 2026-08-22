@@ -83,7 +83,9 @@ export interface IVariableMeta<T = any> {
 }
 
 export interface IVariableModifyMeta {
-	isCrit?: boolean;
+	critMultiplier?: number;
+	/** additional damage from base value from crit multiplier */
+	critAdditionalDamage?: number;
 }
 
 /**

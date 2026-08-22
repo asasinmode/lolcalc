@@ -2904,30 +2904,21 @@ export const ITEM_SPECIFICS = {
 		},
 		variables: defineVariables({
 			known: {
-				'f2': [],
-				'damage reduced from crit': [],
+				f2: [],
 			},
 			calculate() {
 				return {
-					'f2': { value: 0 },
-					// TODO
-					'damage reduced from crit': {
-						value: 123,
-					},
+					f2: { value: 0 },
 				};
-			},
-			meta: {
-				'damage reduced from crit': {
-					isCustom: true,
-				},
 			},
 			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
 		}),
 		modifyVariable: {
 			type: [VariableType.magic, VariableType.physical],
 			handler(value, meta) {
-				if (meta.isCrit) {
-					return value * (1 - ITEMS_BY_NAME.randuinsOmen.dataValues?.PercentCritDamageReduction);
+				if (meta.critAdditionalDamage) {
+					meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 - ITEMS_BY_NAME.randuinsOmen.dataValues?.PercentCritDamageReduction);
+					return (value - meta.critAdditionalDamage) * (1 + meta.critMultiplier);
 				}
 				return value;
 			},
@@ -4031,13 +4022,26 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['HealthThreshold', 'SpellItemDamageAmp'],
 		}),
 		modifyVariable: {
-			type: [VariableType.magic],
+			type: [VariableType.magic, VariableType.true],
 			handler(value, meta, _self, damageTarget) {
 				if (!damageTarget || (damageTarget.currentHealth.value / (damageTarget.stats.value.total.hp ?? 1)) >= 0.4) {
 					return value;
 				}
-				meta.isCrit = true;
-				return value * (1 + ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp);
+				meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
+				meta.critAdditionalDamage = value * ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
+				return value + meta.critAdditionalDamage;
+			},
+		},
+	},
+	[ITEM_NAME_TO_ID.infinityEdge]: {
+		modifyVariable: {
+			type: [VariableType.magic, VariableType.physical],
+			handler(value, meta, self) {
+				if (meta.critAdditionalDamage) {
+					console.log('infinity edging', meta.critAdditionalDamage, self.stats.value.total.critDamageMultiplier);
+					return value;
+				}
+				return value;
 			},
 		},
 	},
