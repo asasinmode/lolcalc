@@ -1820,9 +1820,11 @@ export const CHAMPION_SPECIFICS = {
 				meta: {
 					BonusAP: {
 						isCustom: true,
+						additionalInfo: 'This is the actual AP that Vladimir\'s passive grants. The <var>ApproximateAPBonusAvoidingRecursion</var>, as the name suggests, is just the approximate value the game shows in the description and is, in most cases, incorrect',
 					},
 					BonusHP: {
 						isCustom: true,
+						additionalInfo: 'This is the actual HP that Vladimir\'s passive grants. The <var>ApproximateHPBonusAvoidingRecursion</var>, as the name suggests, is just the approximate value the game shows in the description and is, in most cases, incorrect',
 					},
 					ApproximateAPBonusAvoidingRecursion: {
 						/* not displayed in game */

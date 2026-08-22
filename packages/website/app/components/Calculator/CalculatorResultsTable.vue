@@ -1710,7 +1710,7 @@ defineExpose({
 							<p
 								:id="`${section.id}-${row.id}-tooltip-info`"
 								popover="hint"
-								class="hover-tooltip"
+								class="hover-tooltip game-description"
 								@focus="showRowTooltip($event, false)"
 								@mouseenter="showRowTooltip($event, false)"
 								@mouseleave="hideRowTooltip($event, false)"
