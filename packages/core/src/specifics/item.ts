@@ -2187,6 +2187,11 @@ export const ITEM_SPECIFICS = {
 							dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + dragonMultiplierValue;
 							value += dragonMultiplierValue;
 						}
+						if (calculatedVariables.midQuestMultiplier) {
+							const midQuestValue = value * calculatedVariables.midQuestMultiplier;
+							calculatedVariables.midQuestAd = (calculatedVariables.midQuestAd ?? 0) + midQuestValue;
+							value += midQuestValue;
+						}
 						itemPassivesStats.attackDamage += value;
 						itemTotalStats.attackDamage += value;
 						totalStats.attackDamage += value;

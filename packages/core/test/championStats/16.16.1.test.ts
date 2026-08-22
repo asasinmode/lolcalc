@@ -63,8 +63,7 @@ test('16.16 Rammus', async (t) => {
 	});
 });
 
-test.only('16.16 Vladimir passive interactions', async (t) => {
-	t.runOnly(true);
+test('16.16 Vladimir passive interactions', async (t) => {
 	const sourceCommon: IOverrides<'Vladimir'> = {
 		level: 1,
 		runes: {
@@ -195,7 +194,7 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 		assert.equal(damageSource.maxHealth.value, 3133);
 	});
 
-	await t.test('dragons | mid quest', { only: true }, async () => {
+	await t.test('dragons | mid quest', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
 			...sourceCommon,
 			items: bloodmailDragonFlatItems,
@@ -208,5 +207,21 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 			abilityPower: 199,
 		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 1753);
+	});
+
+	await t.test('dragons | mid quest | all items', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: bloodmailDragonFlatItems.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.overlordsBloodmail),
+			dragonStacks,
+			roleQuest: 'mid',
+			currentHealth: 1247,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 187,
+			abilityPower: 663,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 3171);
 	});
 });
