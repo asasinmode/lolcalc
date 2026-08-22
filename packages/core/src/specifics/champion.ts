@@ -1849,15 +1849,21 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
+					const totalApMultiplier = calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower + calculatedVariables.midQuestMultiplier;
+
+					const excludedHPBaseAP = (runeShardStats.abilityPower ?? 0)
+						+ (calculatedVariables.swiftmarchAdaptive ?? 0)
+						+ (calculatedVariables.riftmakerVoidInfusion ?? 0);
+
 					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
 					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower
-						- ((runeShardStats.abilityPower ?? 0) + (calculatedVariables.riftmakerVoidInfusion ?? 0)) * (calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower);
+						- excludedHPBaseAP * totalApMultiplier;
 
 					const passiveHp = miscDebug.vladimirPassiveHPAPBase * apToHp.value;
 					let passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value + passiveHp * (calculatedVariables.riftmakerBonusHPToAP ?? 0);
 
 					calculatedVariables.apMultipliersBase += passiveAp;
-					passiveAp *= (calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower);
+					passiveAp *= totalApMultiplier;
 
 					calculatedVariables.vladimirPassiveAp = passiveAp;
 					calculatedVariables.vladimirPassiveHp = passiveHp;

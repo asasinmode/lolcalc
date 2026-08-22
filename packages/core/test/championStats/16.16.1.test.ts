@@ -180,7 +180,7 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 		assert.equal(damageSource.maxHealth.value, 2583);
 	});
 
-	await t.test('dragons | rabadon, riftmaker, bloodmail', { only: true }, async () => {
+	await t.test('dragons | rabadon, riftmaker, bloodmail', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
 			...sourceCommon,
 			items: bloodmailDragonFlatItems.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.overlordsBloodmail),
@@ -193,5 +193,20 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 			abilityPower: 599,
 		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 3133);
+	});
+
+	await t.test('dragons | mid quest', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: bloodmailDragonFlatItems,
+			dragonStacks,
+			roleQuest: 'mid',
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 60,
+			abilityPower: 199,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 1753);
 	});
 });
