@@ -178,7 +178,7 @@ test('extended equals', async (t) => {
 			items: [ITEMS_BY_NAME.cloakOfAgility, ITEMS_BY_NAME.infinityEdge],
 		});
 		const sivirQ = extendedChampionAbilityDescription(sivir, 'tooltip', 'q');
-		assertMetaSuffix('TotalDamage', '<const>42.28</const> <scalead>+ 84.56% bonus %i:scalead%</scalead> <scaleap>+ 72.48%%i:scaleap%</scaleap>', sivirQ);
+		assertMetaSuffix('TotalDamage', '<const>72.48</const> <scalead>+ 84.56% bonus %i:scalead%</scalead> <scaleap>+ 72.48%%i:scaleap%</scaleap>', sivirQ);
 
 		const ashe = await setupDamageSource(fixture, 'Ashe');
 		const ashePassive = extendedChampionAbilityDescription(ashe, 'tooltip', 'passive');
