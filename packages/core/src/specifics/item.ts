@@ -4014,6 +4014,20 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['ExecuteThreshold', 'GoldAmount'],
 		}),
 	},
+	[ITEM_NAME_TO_ID.shadowflame]: {
+		variables: defineVariables({
+			uninteresting: ['HealthThreshold', 'SpellItemDamageAmp'],
+		}),
+		modifyVariable: {
+			type: [VariableType.magic],
+			handler(value, _self, damageTarget) {
+				if (!damageTarget || (damageTarget.currentHealth.value / (damageTarget.stats.value.total.hp ?? 1)) >= 0.4) {
+					return value;
+				}
+				return value * (1 + ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp);
+			},
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
@@ -4030,6 +4044,10 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	calculateHooks?: ICalculateChampionStatsHookSource;
 	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, any, IChampionId, 'item'>;
 	effectOntoTargetVars?: IEffectOntoTargetVarsHook;
+	modifyVariable?: {
+		type: VariableType[];
+		handler: IItemModifyVariableFunction;
+	};
 	/**
 	 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)
 	 * ATM done only for textShop and textInventory, used for redemption, which by default shows `\@HealMin\@ - \@HealMax\@` that depends on ally level. Calculator gives an option to set ally's level to a concrete value so we should display the heal for selected ally level
@@ -4037,6 +4055,10 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 	preplaceTextInventory?: (value: string) => string;
 	[key: string]: any;
 };
+
+export interface IItemModifyVariableFunction {
+	(value: number, self: DamageSource, damageTarget?: DamageSource): number;
+}
 
 export function calculateItemDiscount(
 	itemId: string,

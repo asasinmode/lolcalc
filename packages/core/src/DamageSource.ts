@@ -1301,6 +1301,25 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		return rv;
 	});
+	itemModifyVariableFunctions = computed((): [VariableType, IModifyVariableFunction[]][] => {
+		const rv: [VariableType, IModifyVariableFunction[]][] = [];
+
+		for (const item of this.items.value) {
+			const specific = item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics];
+			if (specific?.modifyVariable) {
+				for (const type of specific.modifyVariable.type) {
+					const target = rv.find(group => group[0] === type);
+					if (target) {
+						target[1].push(value => specific.modifyVariable!.handler(value, this, this.calculationDamageTarget.value));
+					} else {
+						rv.push([type, [value => specific.modifyVariable!.handler(value, this, this.calculationDamageTarget.value)]]);
+					}
+				}
+			}
+		}
+
+		return rv;
+	});
 
 	modifyVariableFunctions = computed((): IDamageSourceModifyVariableFunctions => {
 		const rv: IDamageSourceModifyVariableFunctions = {};
@@ -1318,8 +1337,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			rv[modifyVariableType] ??= [];
 			rv[modifyVariableType].push(value => modifyVariableFn(value, this, this.calculationDamageTarget.value));
 		}
-
 		for (const entry of this.appliedEffectsModifyVariableFunctions.value) {
+			rv[entry[0]] ??= [];
+			rv[entry[0]]!.push(...entry[1]);
+		}
+		for (const entry of this.itemModifyVariableFunctions.value) {
 			rv[entry[0]] ??= [];
 			rv[entry[0]]!.push(...entry[1]);
 		}
