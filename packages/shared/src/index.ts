@@ -144,6 +144,8 @@ export interface IStatsCalculationVariables {
 	blackfireTorchBBlazeMultiplier?: number;
 	/** ap gained from riftmaker's passive */
 	riftmakerVoidInfusion?: number;
+	/** if riftmaker is present - the multiplier, otherwise 0 */
+	riftmakerBonusHPToAP?: number;
 	/**
 	 * ap value affected by multipliers like rabadon & blackfire torch passives
 	 * from my understanding it's all "flat" ap bonuses, multipliers add, so rabadon's 30% and 1 blackfire burning champion's 4% would be 34% bonus ap

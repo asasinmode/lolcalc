@@ -545,7 +545,8 @@ export const ITEM_SPECIFICS = {
 					calculatedVariables.riftmakerBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'riftmaker'>).corruption ?? 0) * ITEMS_BY_NAME.riftmaker?.dataValues.EternityDamageIncreasePerSecond;
 
 					const bonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
-					calculatedVariables.riftmakerVoidInfusion = bonusHp * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
+					calculatedVariables.riftmakerBonusHPToAP = ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
+					calculatedVariables.riftmakerVoidInfusion = bonusHp * calculatedVariables.riftmakerBonusHPToAP;
 					itemPassivesStats.abilityPower += calculatedVariables.riftmakerVoidInfusion;
 					miscDebug.riftmakerBonusHp = bonusHp;
 
