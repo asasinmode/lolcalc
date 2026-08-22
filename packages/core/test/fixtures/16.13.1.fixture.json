@@ -341,6 +341,65 @@
 			}
 		}
 	},
+	"runes": {
+		"shards": {
+			"offensive": {
+				"adaptive": {
+					"effectAmount": {
+						"StatGain2": 12,
+						"StatGain1": 5.4
+					}
+				},
+				"attackspeed": {
+					"effectAmount": {
+						"StatGain": 10
+					}
+				},
+				"cdrscaling": {
+					"effectAmount": {
+						"HasteGain": 8
+					}
+				}
+			},
+			"flex": {
+				"adaptive": {
+					"effectAmount": {
+						"StatGain2": 9,
+						"StatGain1": 5.4
+					}
+				},
+				"movementspeed": {
+					"effectAmount": {
+						"StatGain1": 2.5
+					}
+				},
+				"healthscaling": {
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
+			},
+			"defensive": {
+				"health": {
+					"effectAmount": {
+						"StatGain": 65
+					}
+				},
+				"tenacity": {
+					"effectAmount": {
+						"StatGain": 15
+					}
+				},
+				"healthscaling": {
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
+			}
+		}
+	},
 	"misc": {
 		"roleQuests": {
 			"mid": {

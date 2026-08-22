@@ -2,10 +2,10 @@ import type { IDamageSourceEffect, IOverrides } from '@lolcalc/core/DamageSource
 import type { IEffectAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IEffectDataOf } from '@lolcalc/core/specifics';
 import type { IEffectData, IMiscData } from '@lolcalc/data';
-import type { IChampion, IChampionId, IDragonName, IItem } from '@lolcalc/data/types';
+import type { IChampion, IChampionId, IDragonName, IItem, IRunePath, IRunePathName, IRuneShard, IRuneShardSlotName, IRuneShardSlotValue } from '@lolcalc/data/types';
 import assert from 'node:assert';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import { CHAMPIONS, EFFECTS, ITEMS, MISC } from '@lolcalc/data';
+import { CHAMPIONS, EFFECTS, ITEMS, MISC, RUNES } from '@lolcalc/data';
 import { ref, shallowRef } from 'vue';
 
 interface IPatchOverridesFixture {
@@ -15,6 +15,11 @@ interface IPatchOverridesFixture {
 	effects?: Partial<IEffectData>;
 	/** dragon fixture's type allows partial but the test will crash if it's trying to use a dragon that's not fixtured. It's intended */
 	misc?: { roleQuests: Partial<IMiscData['roleQuests']> } & Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>>;
+	runes?: {
+		paths?: Partial<Record<IRunePathName, Pick<IRunePath, 'slots'>>>;
+		/* no point in typing it atm */
+		shards?: Partial<Record<IRuneShardSlotName, Partial<Record<IRuneShardSlotValue, Pick<IRuneShard, 'effectAmount'>>>>>;
+	};
 }
 
 const overriden: {
@@ -49,6 +54,17 @@ export function setupPatchFixture(fixture: IPatchOverridesFixture) {
 	}
 	fixture.misc && Object.assign(MISC, fixture.misc);
 	fixture.effects && Object.assign(EFFECTS, fixture.effects);
+
+	if (fixture.runes?.paths) {
+		for (const [path, pathValue] of Object.entries(fixture.runes.paths)) {
+			Object.assign(RUNES.paths[path as IRunePathName], { slots: pathValue.slots });
+		}
+	}
+	if (fixture.runes?.shards) {
+		for (const [slotName, slotValue] of Object.entries(fixture.runes.shards)) {
+			Object.assign(RUNES.shards[slotName as IRuneShardSlotName], slotValue);
+		}
+	}
 }
 
 export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, damageSource?: DamageSource, message: string = '') {
