@@ -36,6 +36,10 @@ const tearItem = {
 	} satisfies IItemSpecific,
 	calculateHookPreItemTotal: {
 		handler(self, { itemBaseStats, itemPassivesStats, itemStatIncreases }, { miscDebug }) {
+			if (!self.hasMana.value) {
+				return;
+			}
+
 			const { manaflow = 0 } = self.internalItemData.value as IInternalItemDataOf<'tear'>;
 			itemPassivesStats.mana += manaflow;
 			miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
@@ -667,8 +671,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
-					miscDebug.tearItemBonusMana = itemTotalStats.mana;
-					calculatedVariables.archangelSeraphAwe = miscDebug.tearItemBonusMana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA;
+					calculatedVariables.archangelSeraphAwe = (miscDebug.tearItemBonusMana ?? 0) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA;
 					calculatedVariables.apMultipliersBase += calculatedVariables.archangelSeraphAwe;
 					itemPassivesStats.abilityPower += calculatedVariables.archangelSeraphAwe;
 					itemTotalStats.abilityPower += calculatedVariables.archangelSeraphAwe;
@@ -710,8 +713,12 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: tearItem.calculateHookPreItemTotal,
 			preBonus: {
-				handler(_self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables }) {
-					const bonusAD = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
+				handler(self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug }) {
+					if (!self.hasMana.value) {
+						return;
+					}
+
+					const bonusAD = ((miscDebug.tearItemBonusMana ?? 0) + baseOnLevelStats.mana) * ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					itemPassivesStats.attackDamage += bonusAD;
 					itemTotalStats.attackDamage += bonusAD;
 					calculatedVariables.manaMuraAwe = bonusAD;
@@ -741,8 +748,12 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.muramana]: {
 		calculateHooks: {
 			preBonus: {
-				handler(_self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables }) {
-					calculatedVariables.manaMuraAwe = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEMS_BY_NAME.muramana?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
+				handler(self, { itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, miscDebug }) {
+					if (!self.hasMana.value) {
+						return;
+					}
+
+					calculatedVariables.manaMuraAwe = ((miscDebug.tearItemBonusMana ?? 0) + baseOnLevelStats.mana) * ITEMS_BY_NAME.muramana?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					itemPassivesStats.attackDamage += calculatedVariables.manaMuraAwe;
 					itemTotalStats.attackDamage += calculatedVariables.manaMuraAwe;
 				},
@@ -824,9 +835,8 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					miscDebug.tearItemBonusMana = itemBaseStats.mana;
-					const bonusHP = miscDebug.tearItemBonusMana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA;
+				handler(_self, { itemPassivesStats }, { calculatedVariables, miscDebug }) {
+					const bonusHP = (miscDebug.tearItemBonusMana ?? 0) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA;
 					itemPassivesStats.hp += bonusHP;
 					calculatedVariables.approachFimbulAwe = bonusHP;
 				},
