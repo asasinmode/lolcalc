@@ -870,6 +870,35 @@ export const CHAMPION_SPECIFICS = {
 				},
 			}),
 		},
+		q: {
+			variables: defineChampionVariables<'Locke', typeof ILocke, 'q'>()({
+				meta: {
+					MissileDamage: {
+						type: VariableType.magic,
+					},
+					NailDamage: {
+						type: VariableType.magic,
+					},
+				},
+				uninteresting: ['SlowAmount1', 'SlowAmount2', 'SlowAmount3', 'SlowDuration1', 'SlowDuration2', 'SlowDuration3', 'TwoMarkBonusPercent', 'ThreeMarkBonusPercent'],
+			}),
+		},
+		w: {
+			variables: defineChampionVariables<'Locke', typeof ILocke, 'w'>()({
+				meta: {
+					DamageRestoreAmount: {
+						type: VariableType.heal,
+					},
+					AdditionalHeal: {
+						type: VariableType.heal,
+					},
+					MaxHealingThreshold: {
+						type: VariableType.heal,
+					},
+				},
+				uninteresting: ['DecayTimeHelper', 'BaseDuration', 'HealthCost'],
+			}),
+		},
 	},
 	Mordekaiser: {
 		setupData(self) {
