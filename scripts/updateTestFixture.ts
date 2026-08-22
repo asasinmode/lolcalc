@@ -18,7 +18,10 @@ interface IFixtureShape {
 	champions: Record<string, Record<string, unknown>>;
 	items: Record<string, unknown>;
 	effects?: Record<string, unknown>;
-	misc?: Record<string, unknown>;
+	misc?: {
+		roleQuests?: any;
+		dragons?: any;
+	};
 }
 
 function normalizeSemver(version: string): string {
@@ -90,6 +93,7 @@ async function applyChampion(fixture: IFixtureShape, raw: string): Promise<void>
 		}
 
 		existing.abilities = existingAbilities;
+		existing.abilities = reorderKeys(existing.abilities as any, ALL_CHAMPION_ABILITY_KEYS);
 	}
 
 	fixture.champions[name] = existing;
@@ -157,9 +161,27 @@ function applyDragon(fixture: IFixtureShape, raw: string): void {
 
 	fixture.misc ??= {};
 	fixture.misc.dragons ??= {};
-	(fixture.misc.dragons as any)[dragonName!] = Object.assign(((fixture.misc.dragons as any)[dragonName!] as Record<string, unknown>) ?? {}, {
+	fixture.misc.dragons[dragonName!] = Object.assign((fixture.misc.dragons[dragonName!]) ?? {}, {
 		[type]: dragon[type],
 	});
+}
+
+function reorderKeys<T extends Record<string, unknown>>(target: T, referenceOrder: string[] | readonly string[]): T {
+	const ordered: Record<string, unknown> = {};
+
+	for (const key of referenceOrder) {
+		if (key in target) {
+			ordered[key] = target[key];
+		}
+	}
+
+	for (const key of Object.keys(target)) {
+		if (!(key in ordered)) {
+			ordered[key] = target[key];
+		}
+	}
+
+	return ordered as T;
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -191,6 +213,18 @@ for (const raw of args.effects) {
 }
 for (const raw of args.dragons) {
 	applyDragon(fixture, raw);
+}
+
+fixture.champions = reorderKeys(fixture.champions, Object.keys(CHAMPIONS));
+fixture.items = reorderKeys(fixture.items, Object.keys(ITEMS));
+if (fixture.effects) {
+	fixture.effects = reorderKeys(fixture.effects, Object.keys(EFFECTS));
+}
+if (fixture.misc) {
+	fixture.misc = reorderKeys(fixture.misc, Object.keys(MISC));
+	if (fixture.misc.dragons) {
+		fixture.misc.dragons = reorderKeys(fixture.misc.dragons as any, Object.keys(MISC.dragons));
+	}
 }
 
 await fs.mkdir(nodePath.dirname(fixturePath), { recursive: true });
