@@ -51,6 +51,7 @@ const tearItem = {
 				itemStatIncreases[tearItemId]!.FlatMPPoolMod = manaflow;
 			}
 		},
+		priority: -1,
 	} satisfies ICalculateChampionStatsHookSource['preItemTotal'],
 	uninterestingVariables: ['ManaPerCharge', 'ManaChargeAmmoCD', 'ManaChargeMaxAmmo', 'ManaPerCharge', 'MaxMana', 'BonusMinionDamage'] satisfies (DetectItemVariables<TItems[typeof ITEM_NAME_TO_ID['tear']]>)[] as any[],
 };
