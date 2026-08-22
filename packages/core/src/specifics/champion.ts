@@ -1803,7 +1803,27 @@ export const CHAMPION_SPECIFICS = {
 	Vladimir: {
 		passive: {
 			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'passive'>()({
+				known: {
+					BonusAP: [],
+					BonusHP: [],
+				},
+				calculate(self) {
+					return {
+						BonusAP: {
+							value: self.stats.value.variables.vladimirPassiveAp ?? 0,
+						},
+						BonusHP: {
+							value: self.stats.value.variables.vladimirPassiveHp ?? 0,
+						},
+					};
+				},
 				meta: {
+					BonusAP: {
+						isCustom: true,
+					},
+					BonusHP: {
+						isCustom: true,
+					},
 					ApproximateAPBonusAvoidingRecursion: {
 						/* not displayed in game */
 						calculatesFrom: [],
@@ -1828,16 +1848,18 @@ export const CHAMPION_SPECIFICS = {
 					}
 
 					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
-					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower - (runeShardStats.abilityPower ?? 0) * calculatedVariables.totalItemApMultipliers - (calculatedVariables.riftmakerVoidInfusion ?? 0);
+					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower
+						- ((runeShardStats.abilityPower ?? 0) + (calculatedVariables.riftmakerVoidInfusion ?? 0)) * calculatedVariables.totalItemApMultipliers;
 
 					const passiveHp = miscDebug.vladimirPassiveHPAPBase * apToHp.value;
-					let passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value + passiveHp * (calculatedVariables.riftmakerBonusHPToAP ?? 1);
+					let passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value + passiveHp * (calculatedVariables.riftmakerBonusHPToAP ?? 0);
+
+					calculatedVariables.apMultipliersBase += passiveAp;
+					passiveAp *= calculatedVariables.totalItemApMultipliers;
 
 					calculatedVariables.vladimirPassiveAp = passiveAp;
 					calculatedVariables.vladimirPassiveHp = passiveHp;
 
-					calculatedVariables.apMultipliersBase += passiveAp;
-					passiveAp *= calculatedVariables.totalItemApMultipliers;
 					totalStats.abilityPower += passiveAp;
 					bonusStats.abilityPower += passiveAp;
 					championPassiveStats.abilityPower = passiveAp;

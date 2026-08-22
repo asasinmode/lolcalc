@@ -112,7 +112,7 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 		assert.equal(damageSource.maxHealth.value, 2189);
 	});
 
-	await t.test('riftmaker', { only: true }, async () => {
+	await t.test('riftmaker', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
 			...sourceCommon,
 			items: flatItems.concat(ITEMS_BY_NAME.riftmaker),
@@ -122,5 +122,17 @@ test.only('16.16 Vladimir passive interactions', async (t) => {
 			abilityPower: 336,
 		}, damageSource);
 		assert.equal(damageSource.maxHealth.value, 2299);
+	});
+
+	await t.test('rabadon, riftmaker', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: flatItems.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker),
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 616,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 2685);
 	});
 });
