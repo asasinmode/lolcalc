@@ -58,8 +58,9 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 </template>
 
 <style>
-@layer components {
-	#about {
+@layer page {
+	#about,
+	#guide {
 		--at-apply: 'text-lg';
 
 		.code-like {
