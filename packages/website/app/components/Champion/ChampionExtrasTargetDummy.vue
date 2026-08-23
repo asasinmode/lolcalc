@@ -87,7 +87,7 @@ function transformToOptions(from: DamageSource[]): ICopyFromOption[] {
 	return from
 		.map((source, index) => [source, index] as [DamageSource, number])
 		.filter(([source]) => source.anythingFilled.value && source.id !== props.damageSource.id)
-		.map(([source, index]) => [source.id, index, source.champion.value?.name] as ICopyFromOption);
+		.map(([source, index]) => [source.id, index, source.listedChampion.value?.name ?? '<empty>'] as ICopyFromOption);
 }
 
 const copyStatsFrom = ref('');
