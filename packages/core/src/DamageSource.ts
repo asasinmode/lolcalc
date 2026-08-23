@@ -572,7 +572,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
 			() => Object.values(this.internalDragonData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('*')}'${effect.source.value?.id ?? ''}'${effect.champion.value?.id ?? ''}'${effect.watch?.(effect) ?? ''}`).join('~'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('*')}'${effect.source.value?.id ?? ''}'${effect.champion.value?.id ?? ''}'${effect.watch?.(effect) ?? ''}`).join('l'),
 		];
 	}
 
@@ -626,7 +626,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					}
 				}
 			}
-			effectsData.push(`${index}*${data}${sourceData ? `!${sourceData}` : ''}`);
+			effectsData.push(`${index}*${data}${sourceData ? `o${sourceData}` : ''}`);
 		}
 
 		const runePathKeys = Object.keys(RUNES.paths);
@@ -647,9 +647,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
-			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('*'),
-			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('*'),
-			effectsData?.length ? effectsData.join('~') : undefined,
+			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}-${value}`).join('*'),
+			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}-${value}`).join('*'),
+			effectsData?.length ? effectsData.join('l') : undefined,
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
@@ -697,7 +697,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (rawInternalItemData?.length) {
 			for (const keyValue of rawInternalItemData.split('*')) {
-				const [key, rawValue] = keyValue.split('~');
+				const [key, rawValue] = keyValue.split('-');
 				if (key && rawValue) {
 					const value = Number.parseFloat(rawValue);
 					if (!Number.isNaN(value)) {
@@ -709,7 +709,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (rawInternalDragonData?.length) {
 			for (const keyValue of rawInternalDragonData.split('*')) {
-				const [key, rawValue] = keyValue.split('~');
+				const [key, rawValue] = keyValue.split('-');
 				if (key && rawValue) {
 					const value = Number.parseFloat(rawValue);
 					if (!Number.isNaN(value)) {
@@ -862,17 +862,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (rawEffectsData?.length) {
 			rv.fromStringifiedEffectSources = [];
-			for (const rawEffect of rawEffectsData.split('~')) {
+			for (const rawEffect of rawEffectsData.split('l')) {
 				const [effectObjectNameIndex, ...rawData] = rawEffect.split('*');
 				const effectSpecificEntry = effectObjectNameIndex && EFFECT_SPECIFICS_OBJECT_ENTRIES[Number.parseInt(effectObjectNameIndex)];
 				if (effectSpecificEntry) {
 					const data = rawData.map((rawValue, index) => {
 						if (index === rawData.length - 1) {
-							const [actualRawValue, maybeEffectSource] = rawValue.split('!');
+							const [actualRawValue, maybeEffectSource] = rawValue.split('o');
 							rawValue = actualRawValue!;
-							if (maybeEffectSource) {
-								rv.fromStringifiedEffectSources!.push(maybeEffectSource);
-							}
+							rv.fromStringifiedEffectSources!.push(maybeEffectSource);
 						}
 						const value = rawValue ? Number.parseFloat(rawValue) : undefined;
 						if (!Number.isNaN(value)) {
