@@ -17,3 +17,25 @@ Monorepository for everything related to [lolcalc.app](https://lolcalc.app) - da
 
 - [ ] CONTRIBUTING.md
 - [ ] specific packages' readme, describe core tests
+
+## scripts
+
+### updateTestFixture
+
+Used for updating game data test fixtues with specific properties
+
+```sh
+node .\scripts\updateTestFixture.ts [patch] -i [item id or search query] -c [champion id];[ability keys separated by commas] -d [dragon name]-[stack|soul] -e [effect object name]
+
+# add vladimir and his Q and passive
+node .\scripts\updateTestFixture.ts 16.16 -c Vladimir;passive,q
+
+# add shadowflame and randuin
+node .\scripts\updateTestFixture.ts 16.16 -i shadowflame -i 3143
+
+# add infernal stack & mountain soul
+node .\scripts\updateTestFixture.ts 16.16 -d infernal-stack -d mountain-stack
+
+# add ghost and botrk slow effects
+node .\scripts\updateTestFixture.ts 16.16 -e SummonerHaste -e 3153
+```
