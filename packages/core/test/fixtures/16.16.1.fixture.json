@@ -651,6 +651,14 @@
 				"FeatsMS": 5
 			}
 		},
+		"3031": {
+			"searchString": "infinityedge;ie;banana;criticalstrike;damage;criticalstrikechance;attackdamage",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 75,
+				"FlatCritDamageMod": 0.3
+			}
+		},
 		"3071": {
 			"name": "Black Cleaver",
 			"stats": {
@@ -762,6 +770,20 @@
 			},
 			"dataValues": {
 				"APAmp": 0.3
+			}
+		},
+		"3143": {
+			"searchString": "randuinsomen;health;armor;active;slow",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 75
+			},
+			"dataValues": {
+				"PercentCritDamageReduction": 0.3,
+				"SlowAmount": 0.7,
+				"SlowDuration": 2,
+				"Radius": 500,
+				"Cooldown": 90
 			}
 		},
 		"3170": {
