@@ -372,12 +372,23 @@ export const ITEM_SPECIFICS = {
 			known: {
 				f2: [],
 				BonusDamage: [],
+				PerSecondBurn: [],
 			},
-			calculate(self) {
+			calculate(self, target) {
+				const burnPercent = itemVariableValue('BurnPercentHealthDamage', { item: ITEMS_BY_NAME.liandry });
+				let PerSecondBurn = Number.NaN;
+				if (typeof burnPercent.value === 'number') {
+					PerSecondBurn = burnPercent.value * (target?.stats.value.total.hp ?? 0);
+				}
+
 				return {
+					/** damage dealt to champions */
 					f2: { value: 0 },
 					BonusDamage: {
 						value: self.stats.value.variables.liandryBonusDamagePercent ?? 0,
+					},
+					PerSecondBurn: {
+						value: PerSecondBurn,
 					},
 				};
 			},
@@ -386,6 +397,10 @@ export const ITEM_SPECIFICS = {
 					isCustom: true,
 					resultsIsPercentage: true,
 					resultsMultiplier: 100,
+				},
+				PerSecondBurn: {
+					type: VariableType.magic,
+					isCustom: true,
 				},
 			},
 			uninteresting: ['f2', 'BurnPercentHealthDamage', 'BurnDuration', 'DamageIncreasePerSecond', 'DamageIncreaseMax'],
