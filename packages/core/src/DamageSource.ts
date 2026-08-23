@@ -155,8 +155,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 * turns into `0|0` which when restoring is parsed into array `[0, 0]`
 	 * then when creating, the `this.champion` watch checks if `this.fromStringifiedData` is `true` and if so, it will run the `setupData` function with no values, then extract the keys of the returned object, set the properties one by one taking them from the array and setting their values then run the setup function again to validate/clamp the values restored from original array
 	 *   1. champion is selected, `this.internalData.value = championSpecific?.setupData(this)`
-	 *   2. data is stringified, `Object.values(this.internalData.value).join('\'')`
-	 *   3. data is restored, `const rawValues = rawInternalData.split('\'')`, then every value is converted into a number or set undefined if invalid
+	 *   2. data is stringified, `Object.values(this.internalData.value).join('*')`
+	 *   3. data is restored, `const rawValues = rawInternalData.split('*')`, then every value is converted into a number or set undefined if invalid
 	 *   4. champion watch handles parsing back to object
 	 */
 	internalData: Ref<Id extends keyof IChampionInternalDataMap
@@ -183,7 +183,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 */
 	hpAbilityResourceOverridesOnFirstChampLoad?: { hp?: number; abilityResource?: number };
 	/** one time use when restoring with `fromStringifiedData`. Contains stringified applied effect sources (`[s|t]${number}`) for usage after all sources/targets have been restored to set appliedEffects sources. Consumed (after restoring damage sources) in `useCalculatorState().restoreState` */
-	fromStringifiedEffectSources?: string[];
+	fromStringifiedEffectSources?: (string | undefined)[];
 
 	/** for stringifying effect's source inside of the app */
 	sourcesTargetsRef?: [sources: ComputedRef<string[]>, targets: ComputedRef<string[]>];
@@ -572,7 +572,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
 			() => Object.values(this.internalDragonData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('\'')}'${effect.source.value?.id ?? ''}'${effect.champion.value?.id ?? ''}'${effect.watch?.(effect) ?? ''}`).join('~'),
+			() => this.appliedEffects.value.map(effect => `${effect.abilityId.id}'${effect.data.value.join('*')}'${effect.source.value?.id ?? ''}'${effect.champion.value?.id ?? ''}'${effect.watch?.(effect) ?? ''}`).join('~'),
 		];
 	}
 
@@ -600,7 +600,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		const internalData = this.internalData.value && Object.entries(this.internalData.value)
 			.filter(([key]) => !key.startsWith('_'))
 			.map(([, value]) => value && roundNumber(value, ROUNDING_PRECISION))
-			.join('\'');
+			.join('*');
 
 		const effectsData: string[] = [];
 		for (let i = 0; i < this.appliedEffects.value.length; i++) {
@@ -611,7 +611,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				continue;
 			}
 			const index = EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id);
-			const data = effect.data.value.map(v => v === undefined ? '' : roundNumber(v, ROUNDING_PRECISION)).join('\'');
+			const data = effect.data.value.map(v => v === undefined ? '' : roundNumber(v, ROUNDING_PRECISION)).join('*');
 			let sourceData: string | undefined;
 			if (this.sourcesTargetsRef && effect.source.value) {
 				let index = this.sourcesTargetsRef[0].value.indexOf(effect.source.value.id);
@@ -626,7 +626,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					}
 				}
 			}
-			effectsData.push(`${index}'${data}${sourceData ? `!${sourceData}` : ''}`);
+			effectsData.push(`${index}*${data}${sourceData ? `!${sourceData}` : ''}`);
 		}
 
 		const runePathKeys = Object.keys(RUNES.paths);
@@ -647,8 +647,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join(''),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			internalData?.length ? internalData : undefined,
-			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
-			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('\''),
+			Object.entries(this.internalItemData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('*'),
+			Object.entries(this.internalDragonData.value).filter(([key, value]) => !key.startsWith('_') && value).map(([key, value]) => `${key}~${value}`).join('*'),
 			effectsData?.length ? effectsData.join('~') : undefined,
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
@@ -696,7 +696,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawInternalItemData?.length) {
-			for (const keyValue of rawInternalItemData.split('\'')) {
+			for (const keyValue of rawInternalItemData.split('*')) {
 				const [key, rawValue] = keyValue.split('~');
 				if (key && rawValue) {
 					const value = Number.parseFloat(rawValue);
@@ -708,7 +708,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawInternalDragonData?.length) {
-			for (const keyValue of rawInternalDragonData.split('\'')) {
+			for (const keyValue of rawInternalDragonData.split('*')) {
 				const [key, rawValue] = keyValue.split('~');
 				if (key && rawValue) {
 					const value = Number.parseFloat(rawValue);
@@ -854,7 +854,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		const fromStringifiedInternalData: (number | undefined)[] = [];
 		if (rawInternalData?.length) {
-			for (const rawValue of rawInternalData.split('\'')) {
+			for (const rawValue of rawInternalData.split('*')) {
 				const value = Number.parseFloat(rawValue);
 				fromStringifiedInternalData.push(Number.isNaN(value) ? undefined : value);
 			}
@@ -863,7 +863,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		if (rawEffectsData?.length) {
 			rv.fromStringifiedEffectSources = [];
 			for (const rawEffect of rawEffectsData.split('~')) {
-				const [effectObjectNameIndex, ...rawData] = rawEffect.split('\'');
+				const [effectObjectNameIndex, ...rawData] = rawEffect.split('*');
 				const effectSpecificEntry = effectObjectNameIndex && EFFECT_SPECIFICS_OBJECT_ENTRIES[Number.parseInt(effectObjectNameIndex)];
 				if (effectSpecificEntry) {
 					const data = rawData.map((rawValue, index) => {
