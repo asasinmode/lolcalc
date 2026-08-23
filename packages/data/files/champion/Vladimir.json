@@ -336,6 +336,10 @@
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "BaseDamage",
+							"nameOverride": "spell_listtype_healing"
 						}
 					],
 					"dataValues": {

@@ -35,7 +35,7 @@ import type IVladimir from '@lolcalc/data/files/champion/Vladimir.json';
 import type IVolibear from '@lolcalc/data/files/champion/Volibear.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
-import type { IChampion, IChampionId } from '@lolcalc/data/types';
+import type { IChampion, IChampionAbilityVariant, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
@@ -1942,6 +1942,17 @@ export const CHAMPION_SPECIFICS = {
 			preplaceTooltipText(value) {
 				return value.replace('<healing>@Damage@', '<healing>@Heal@');
 			},
+			modifyExtendedVariables(extendedVariables) {
+				const damageVariable = extendedVariables[0];
+				if (damageVariable?.name !== 'BaseDamage') {
+					console.warn('[CHAMPION_SPECIFICS vladimir r] failed to modify extended variables, no base damage variable', extendedVariables);
+					return;
+				}
+				extendedVariables.push({
+					name: damageVariable.name,
+					nameOverride: 'spell_listtype_healing',
+				});
+			},
 			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'r'>()({
 				known: {
 					Heal: [],
@@ -2176,10 +2187,13 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	effectControls?: IEffectControlsProps<any, Id>;
-	/**
-	 * called in `scripts/updateData`, if present the tooltip text will be replaced with the value returned from this function. It's passed the original text
-	 */
+	/** called in `scripts/updateData`, if present the tooltip text will be replaced with the value returned from this function. It's passed the original text */
 	preplaceTooltipText?: (value: string) => string;
+	/**
+	 * called in `scripts/updateData` after ability variant's extended variables are parsed, meant for modifying them
+	 * @note it's called for every variant of the ability, currently only Vladimir needs it but might need updating
+	 */
+	modifyExtendedVariables?: (extendedVariables: NonNullable<IChampionAbilityVariant['extendedVariables']>) => void;
 	[key: string]: any;
 	/**
 	 * ability's variant specific

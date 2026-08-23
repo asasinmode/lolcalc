@@ -243,6 +243,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] extendedVariable values, resolve cooldown & cost
   - [ ] result row variable values
   - [ ] result variant sections
+  - [ ] `modifyExtendedVariables`, not sure if it's something I should do - add missing variables/custom ones
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
 - [ ] [item haste](https://wiki.leagueoflegends.com/en-us/Haste#Item_haste) & affect displayed item cooldowns
