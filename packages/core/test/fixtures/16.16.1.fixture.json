@@ -1,6 +1,32 @@
 {
 	"version": "16.16.1",
 	"champions": {
+		"TargetDummy": {
+			"stats": {
+				"hp": 1000,
+				"hpperlevel": 0,
+				"mp": 500,
+				"mpperlevel": 0,
+				"movespeed": 0,
+				"armor": 0,
+				"armorperlevel": 0,
+				"spellblock": 0,
+				"spellblockperlevel": 0,
+				"attackrange": 0,
+				"hpregen": 0,
+				"hpregenperlevel": 0,
+				"mpregen": 0,
+				"mpregenperlevel": 0,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 0,
+				"attackdamageperlevel": 0,
+				"attackspeedperlevel": 0,
+				"attackspeed": 0,
+				"attackspeedratio": 0
+			},
+			"partype": "Mana"
+		},
 		"Rammus": {
 			"stats": {
 				"hp": 645,
@@ -275,6 +301,30 @@
 			}
 		},
 		"Vladimir": {
+			"partype": "Crimson Rush",
+			"stats": {
+				"hp": 600,
+				"hpperlevel": 110,
+				"mp": 2,
+				"mpperlevel": 0,
+				"movespeed": 330,
+				"armor": 24,
+				"armorperlevel": 4.5,
+				"spellblock": 30,
+				"spellblockperlevel": 1.3,
+				"attackrange": 450,
+				"hpregen": 7,
+				"hpregenperlevel": 0.6,
+				"mpregen": 0,
+				"mpregenperlevel": 0,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 55,
+				"attackdamageperlevel": 3,
+				"attackspeedperlevel": 2,
+				"attackspeed": 0.658,
+				"attackspeedratio": 0.658
+			},
 			"abilities": {
 				"passive": {
 					"maxLevel": 0,
@@ -394,30 +444,155 @@
 							}
 						}
 					]
+				},
+				"q": {
+					"maxLevel": 5,
+					"variants": [
+						{
+							"name": "Transfusion",
+							"objectName": "VladimirQ",
+							"dataKey": "Characters/Vladimir/Spells/VladimirQAbility/VladimirQ",
+							"image": "assets/characters/vladimir/hud/icons2d/vladimirq.png",
+							"cooldownTime": [10.1, 9, 7.9, 6.8, 5.7, 4.6, 3.5],
+							"tooltip": "Vladimir drains his target's lifeforce, dealing <magicDamage>@BaseDamageTooltip@ magic damage</magicDamage> and restoring <healing>@BaseHealTooltip@ Health</healing>. After using this Ability twice, Vladimir gains <speed>@MovementSpeedOnQ2@% Move Speed</speed> for 0.5 seconds and empowers the next use of this Ability for @FrenzyDuration@ seconds.<br><br>The empowered version of this Ability deals <magicDamage>@EmpoweredDamageTooltip@ magic damage</magicDamage> instead and restores an additional <healing>@EmpoweredHealTooltip@ plus @EmpoweredHealPercentTooltip@ missing Health</healing>.",
+							"tooltipExtendedBelowLine": "<rules>Empowered healing reduced to 30% against minions.</rules>",
+							"extendedVariables": [
+								{
+									"name": "BaseDamage",
+									"nameOverride": "spell_listtype_damage"
+								},
+								{
+									"name": "BaseHeal",
+									"nameOverride": "spell_listtype_healing"
+								}
+							],
+							"dataValues": {
+								"HealAPRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+								"BaseDamage": [60, 80, 100, 120, 140, 160, 180],
+								"BaseHeal": [15, 20, 25, 30, 35, 40, 45],
+								"Empowered___HealPer100AP_0_1_": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+								"DamagePercentAmp": [85, 85, 85, 85, 85, 85, 85],
+								"FrenzyDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+								"MinionHealPercent": [35, 35, 35, 35, 35, 35, 35]
+							},
+							"spellCalculations": {
+								"BaseDamageTooltip": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamage",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mCoefficient": 0.6,
+											"__type": "StatByCoefficientCalculationPart"
+										}
+									]
+								},
+								"BaseHealTooltip": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseHeal",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mDataValue": "HealAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"EmpoweredDamageTooltip": {
+									"mMultiplier": {
+										"mNumber": 1.85,
+										"__type": "NumberCalculationPart"
+									},
+									"mModifiedGameCalculation": "BaseDamageTooltip",
+									"__type": "GameCalculationModified"
+								},
+								"EmpoweredHealPercentTooltip": {
+									"mMultiplier": {
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
+									},
+									"mModifiedGameCalculation": "EmpoweredHealPercent",
+									"__type": "GameCalculationModified"
+								},
+								"{097cda4f}": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 200,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"EmpoweredHealTooltip": {
+									"mMultiplier": {
+										"mNumber": 1,
+										"__type": "NumberCalculationPart"
+									},
+									"mModifiedGameCalculation": "{097cda4f}",
+									"__type": "GameCalculationModified"
+								},
+								"EmpoweredHealPercent": {
+									"mMultiplier": {
+										"mNumber": 0.01,
+										"__type": "NumberCalculationPart"
+									},
+									"mFormulaParts": [
+										{
+											"mNumber": 5,
+											"__type": "NumberCalculationPart"
+										},
+										{
+											"mCoefficient": 0.04,
+											"__type": "StatByCoefficientCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"MovementSpeedOnQ2": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 10,
+											"mBreakpoints": [
+												{
+													"mLevel": 6,
+													"mAdditionalBonusAtThisLevel": 10
+												},
+												{
+													"mLevel": 11,
+													"mAdditionalBonusAtThisLevel": 10
+												},
+												{
+													"mLevel": 16,
+													"mAdditionalBonusAtThisLevel": 10
+												},
+												{
+													"mLevel": 21,
+													"mAdditionalBonusAtThisLevel": 10
+												},
+												{
+													"mLevel": 26,
+													"mAdditionalBonusAtThisLevel": 10
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"0": [60, 80, 100, 120, 140, 160, 180],
+								"1": [15, 20, 25, 30, 35, 40, 45],
+								"4": [5, 5, 5, 5, 5, 5, 5],
+								"5": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+								"6": [85, 85, 85, 85, 85, 85, 85],
+								"7": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+								"8": [35, 35, 35, 35, 35, 35, 35]
+							}
+						}
+					]
 				}
-			},
-			"stats": {
-				"hp": 600,
-				"hpperlevel": 110,
-				"mp": 2,
-				"mpperlevel": 0,
-				"movespeed": 330,
-				"armor": 24,
-				"armorperlevel": 4.5,
-				"spellblock": 30,
-				"spellblockperlevel": 1.3,
-				"attackrange": 450,
-				"hpregen": 7,
-				"hpregenperlevel": 0.6,
-				"mpregen": 0,
-				"mpregenperlevel": 0,
-				"crit": 0,
-				"critperlevel": 0,
-				"attackdamage": 55,
-				"attackdamageperlevel": 3,
-				"attackspeedperlevel": 2,
-				"attackspeed": 0.658,
-				"attackspeedratio": 0.658
 			}
 		}
 	},
@@ -666,6 +841,18 @@
 					],
 					"mDisplayAsPercent": true
 				}
+			}
+		},
+		"4645": {
+			"searchString": "shadowflame;spelldamage;magicpenetration;abilitypower",
+			"stats": {
+				"FlatMagicDamageMod": 110,
+				"FlatMagicPenetrationMod": 15
+			},
+			"dataValues": {
+				"HealthThreshold": 0.4,
+				"SpellItemDamageAmp": 0.2,
+				"DamageOverTimeAmp": 0.2
 			}
 		},
 		"6655": {

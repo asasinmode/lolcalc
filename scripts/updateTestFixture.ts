@@ -97,7 +97,7 @@ async function applyChampion(fixture: IFixtureShape, raw: string): Promise<void>
 		existing.abilities = reorderKeys(existing.abilities as any, ALL_CHAMPION_ABILITY_KEYS);
 	}
 
-	fixture.champions[name] = existing;
+	fixture.champions[name] = reorderKeys(existing, Object.keys(champion));
 }
 
 function findItem(search: string) {
