@@ -331,7 +331,7 @@
 					"dataKey": "Characters/Vladimir/Spells/VladimirHemoplagueAbility/VladimirHemoplague",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirr.png",
 					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
-					"tooltip": "Vladimir creates a virulent plague, causing its victims to take @DamageAmp@% increased damage from all sources for @Duration@ seconds. After it expires, Vladimir deals <magicDamage>@Damage@ magic damage</magicDamage> to all infected targets. Vladimir restores <healing>@Damage@ Health</healing> if he hits a champion, and restores an additional <healing>@SecondaryHealingTooltip@ Health</healing> for each champion beyond the first.",
+					"tooltip": "Vladimir creates a virulent plague, causing its victims to take @DamageAmp@% increased damage from all sources for @Duration@ seconds. After it expires, Vladimir deals <magicDamage>@Damage@ magic damage</magicDamage> to all infected targets. Vladimir restores <healing>@Heal@ Health</healing> if he hits a champion, and restores an additional <healing>@SecondaryHealingTooltip@ Health</healing> for each champion beyond the first.",
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

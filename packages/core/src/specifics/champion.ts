@@ -1938,10 +1938,25 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 		r: {
+			/** Vladimir's ult uses the same `@Damage@` for both ult's damage and heal (and they are the same value) but in the calculator they need to be 2 separate variables, one being magic damage, the other heal */
+			preplaceTooltipText(value) {
+				return value.replace('<healing>@Damage@', '<healing>@Heal@');
+			},
 			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'r'>()({
+				known: {
+					Heal: [],
+				},
+				calculate(self) {
+					return {
+						Heal: championAbilityVariableValue('Damage', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self, abilityLevel: self.abilityLevels.value.r }),
+					};
+				},
 				meta: {
 					Damage: {
 						type: VariableType.magic,
+					},
+					Heal: {
+						type: VariableType.heal,
 					},
 					SecondaryHealingTooltip: {
 						type: VariableType.heal,
@@ -2161,6 +2176,10 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	effectControls?: IEffectControlsProps<any, Id>;
+	/**
+	 * called in `scripts/updateData`, if present the tooltip text will be replaced with the value returned from this function. It's passed the original text
+	 */
+	preplaceTooltipText?: (value: string) => string;
 	[key: string]: any;
 	/**
 	 * ability's variant specific

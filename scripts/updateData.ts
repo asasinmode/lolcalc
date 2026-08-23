@@ -2147,7 +2147,6 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` })!;
 			variant.name = transformAbilityText(variant.name);
-			// TODO debug tooltips for all abilities, not just passive
 			variant.tooltip = variant.tooltip && getStringtableValue(
 				variant.tooltip,
 				abilityKey === 'passive'
@@ -2157,7 +2156,13 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 						}
 					: `${variant.dataKey} tooltip`,
 			);
-			variant.tooltip &&= transformAbilityText(variant.tooltip);
+			if (variant.tooltip) {
+				const preplace = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[abilityKey]?.preplaceTooltipText;
+				if (preplace) {
+					variant.tooltip = preplace(variant.tooltip);
+				}
+				variant.tooltip &&= transformAbilityText(variant.tooltip);
+			}
 			variant.tooltipExtended = variant.tooltipExtended && getStringtableValue(
 				variant.tooltipExtended,
 				abilityKey === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` } : `${variant.dataKey} tooltip extended`,
