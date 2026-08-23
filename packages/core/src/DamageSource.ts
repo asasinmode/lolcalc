@@ -1679,11 +1679,18 @@ export function computeAbilityDescription(
 	});
 
 	if (champion.id !== 'TargetDummy' && cooldown && gameAbilityId.abilityKey !== 'passive') {
-		extendedVariables ||= [];
-		extendedVariables.push({
-			name: 'Cooldown',
-			values: variant.cooldownTime!.slice(1, lastExtendedVariableIndex),
-		});
+		const firstCd = variant.cooldownTime![1]!;
+		let cooldownVaries = false;
+		for (let i = 2; i < lastExtendedVariableIndex; i++) {
+			cooldownVaries ||= firstCd !== variant.cooldownTime![i];
+		}
+		if (cooldownVaries) {
+			extendedVariables ||= [];
+			extendedVariables.push({
+				name: 'Cooldown',
+				values: variant.cooldownTime!.slice(1, lastExtendedVariableIndex),
+			});
+		}
 	}
 
 	// TODO detect unknown cost/cooldown
