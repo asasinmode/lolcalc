@@ -167,13 +167,13 @@ function hideSharePopover() {
 		<h2>contact</h2>
 		<ul>
 			<li>
-				<a href="https://github.com/asasinmode/lolcalc" target="_blank">
-					<Icon class="i-logos:github-icon" /> lolcalc
+				<a ref="emailLink" target="_blank">
+					<Icon class="i-logos:google-gmail" />
 				</a>
 			</li>
 			<li>
-				<a ref="emailLink" target="_blank">
-					<Icon class="i-logos:google-gmail" />
+				<a href="https://www.reddit.com/user/asasinmode/" target="_blank">
+					<Icon class="i-logos:reddit-icon" /> asasinmode
 				</a>
 			</li>
 			<li>
@@ -184,6 +184,11 @@ function hideSharePopover() {
 			<li>
 				<a href="https://x.com/asasinmode" target="_blank">
 					<Icon class="i-logos:x" /> asasinmode
+				</a>
+			</li>
+			<li>
+				<a href="https://github.com/asasinmode/lolcalc" target="_blank">
+					<Icon class="i-logos:github-icon" /> lolcalc
 				</a>
 			</li>
 		</ul>
