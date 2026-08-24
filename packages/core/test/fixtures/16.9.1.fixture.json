@@ -52,40 +52,9 @@
 				"attackspeed": 0.625,
 				"attackspeedratio": 0.625
 			}
-		},
-		"Ryze": {
-			"stats": {
-				"hp": 645,
-				"hpperlevel": 124,
-				"mp": 300,
-				"mpperlevel": 70,
-				"movespeed": 340,
-				"armor": 22,
-				"armorperlevel": 4.2,
-				"spellblock": 32,
-				"spellblockperlevel": 1.3,
-				"attackrange": 550,
-				"hpregen": 8,
-				"hpregenperlevel": 0.8,
-				"mpregen": 8,
-				"mpregenperlevel": 1,
-				"crit": 0,
-				"critperlevel": 0,
-				"attackdamage": 58,
-				"attackdamageperlevel": 3,
-				"attackspeedperlevel": 2.11,
-				"attackspeed": 0.658,
-				"attackspeedratio": 0.625
-			}
 		}
 	},
 	"items": {
-		"1042": {
-			"name": "Dagger",
-			"stats": {
-				"PercentAttackSpeedMod": 0.1
-			}
-		},
 		"2501": {
 			"name": "Overlord's Bloodmail",
 			"dataValues": {
@@ -167,49 +136,6 @@
 						{
 							"mDataValue": "MonsterAP",
 							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			}
-		},
-		"2510": {
-			"id": "2510",
-			"stats": {
-				"FlatHPPoolMod": 300,
-				"FlatMagicDamageMod": 60,
-				"PercentAttackSpeedMod": 0.2,
-				"AbilityHasteMod": 20
-			},
-			"dataValues": {
-				"SpellbladeCooldown": 1.5,
-				"Cooldown": 1.5
-			},
-			"itemCalculations": {
-				"SpellbladeDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mStatFormula": 1,
-							"mCoefficient": 0.75,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"SpellbladeHealing": {
-					"mFormulaParts": [
-						{
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mCoefficient": 0.03,
-							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -542,14 +468,6 @@
 				"APAmp": 0.3
 			}
 		},
-		"3110": {
-			"name": "Frozen Heart",
-			"stats": {
-				"FlatMPPoolMod": 400,
-				"FlatArmorMod": 75,
-				"AbilityHasteMod": 20
-			}
-		},
 		"3119": {
 			"name": "Winter's Approach",
 			"stats": {
@@ -674,86 +592,6 @@
 							"__type": "NamedDataValueCalculationPart"
 						}
 					]
-				}
-			}
-		},
-		"3170": {
-			"name": "Swiftmarch",
-			"stats": {
-				"FlatMovementSpeedMod": 65
-			},
-			"dataValues": {
-				"MoveSpeedMultiplier": 0.04,
-				"SlowResistTooltip": 0.4,
-				"MSAdaptiveRatio": 0.05
-			},
-			"itemCalculations": {
-				"{5e4a31e2}": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1,
-							"__type": "BuffCounterByCoefficientCalculationPart"
-						}
-					]
-				},
-				"MSToAdaptiveCalc": {
-					"mFormulaParts": [
-						{
-							"mStat": 7,
-							"mDataValue": "MSAdaptiveRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			}
-		},
-		"4401": {
-			"name": "Force of Nature",
-			"stats": {
-				"FlatSpellBlockMod": 55,
-				"FlatHPPoolMod": 400,
-				"PercentMovementSpeedMod": 0.04
-			},
-			"dataValues": {
-				"BuffDuration": 7,
-				"MoveSpeed": 0.06,
-				"MaxStacks": 8,
-				"ImmobilizeStacks": 2,
-				"StackRefreshTimer": 1,
-				"BonusMagicResist": 70
-			}
-		},
-		"4629": {
-			"name": "Cosmic Drive",
-			"stats": {
-				"FlatHPPoolMod": 350,
-				"FlatMagicDamageMod": 70,
-				"PercentMovementSpeedMod": 0.04,
-				"AbilityHasteMod": 25
-			},
-			"gold": {
-				"total": 3000,
-				"sell": 2100
-			},
-			"dataValues": {
-				"StackDuration": 4,
-				"MaxStacks": 3,
-				"MovespeedToGrant": 40,
-				"MaxMovespeedTooltip": 0.15,
-				"ItemCooldown": 10
-			},
-			"itemCalculations": {
-				"MovespeedAmount": {
-					"mFormulaParts": [
-						{
-							"mNumber": 20,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"__renamedVariables": {
-					"MoveSpeedAmount": "MovespeedAmount"
 				}
 			}
 		},
