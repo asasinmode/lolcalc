@@ -200,7 +200,7 @@
 		}
 
 		> input {
-			--at-apply: 'w-full pe-[--px] py-[--py] ps-[calc(var(--icon-size)+var(--px)+var(--gap))] b b-[--ui-btn-border-clr] bg-black bg-neutral-950';
+			--at-apply: 'inline-full min-inline-0 pe-[--px] py-[--py] ps-[calc(var(--icon-size)+var(--px)+var(--gap))] b b-[--ui-btn-border-clr] bg-black bg-neutral-950';
 		}
 
 		> input:is(:focus, :focus-visible, :not([data-empty='true'])) + label {

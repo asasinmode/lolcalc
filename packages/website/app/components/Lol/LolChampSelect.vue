@@ -156,7 +156,7 @@ defineExpose({
 @layer components {
 	#dialog-champ-select {
 		--at-apply: 'bg-[--cyan-bg] b b-[--ui-btn-border-clr] grid-rows-[auto_1fr] h-200 shadow-lg of-visible';
-		--px: var(--fluid-8-32-t800);
+		--px: var(--fluid-8-32-t820);
 
 		@media (width <= 820px) {
 			& {
@@ -169,15 +169,23 @@ defineExpose({
 		}
 
 		> header {
-			--at-apply: 'bg-inherit flex col-span-full items-end b-b b-[--ui-btn-border-clr] mx-[--px] mt-[--mt] relative';
+			--at-apply: 'bg-inherit gap-x-3 gap-y-1 flex justify-between items-end b-b b-[--ui-btn-border-clr] mx-[--px] mt-[--mt] relative';
 			--mt: calc(4 * var(--spacing));
+			--close-btn-translate: var(--fluid-40-0-t820);
+
+			@media (width < 500px) {
+				& {
+					--at-apply: 'flex-col-reverse items-start';
+				}
+			}
 
 			> h1 {
 				--at-apply: 'sr-only';
 			}
 
 			> form {
-				--at-apply: 'end-0 -top-0.5 absolute translate-x-full';
+				/* that translate var bit iffy but makes it look more aligned between the breakpoints */
+				--at-apply: 'end-0 -top-0.5 absolute translate-x-[calc(100%-var(--close-btn-translate)+var(--px)-var(--fluid-f360-0-32-t820))]';
 
 				> button {
 					--at-apply: 'p-1 text-neutral-200 block-8 hoverable:text-white';
@@ -193,6 +201,7 @@ defineExpose({
 			}
 
 			#champ-select-role {
+				--at-apply: 'shrink-0';
 				block-size: calc(var(--btn-size) + var(--btn-pb) + var(--btn-b-b));
 				--btn-size: calc(7 * var(--spacing));
 				--btn-pb: calc(0.25 * var(--spacing));
@@ -224,15 +233,25 @@ defineExpose({
 			}
 
 			> .inline-search-label {
-				--at-apply: 'ms-auto mb-1';
+				--at-apply: 'mbe-1 me-[--close-btn-translate]';
 				--py: calc(0.25 * var(--spacing));
+
+				input {
+					--at-apply: 'min-inline-0';
+				}
+
+				@media (width < 500px) {
+					& {
+						--at-apply: 'mbe-0';
+					}
+				}
 			}
 		}
 
 		> ul {
-			--at-apply: 'grid grid-cols-[repeat(6,minmax(max-content,1fr))] auto-rows-min of-y-auto py-3 px-[--px] gap-x-[--fluid-4-8-t800] gap-y-[--fluid-6-12-t800] text-[length:--fluid-14-16-t800]';
-			--img-size: var(--fluid-60-80-t800);
-			--img-mx: var(--fluid-0-12-t800);
+			--at-apply: 'grid grid-cols-[repeat(6,minmax(max-content,1fr))] auto-rows-min of-y-auto py-3 px-[--px] gap-x-[--fluid-4-8-t820] gap-y-[--fluid-6-12-t820] text-[length:--fluid-14-16-t820]';
+			--img-size: var(--fluid-60-80-t820);
+			--img-mx: var(--fluid-0-12-t820);
 			--gap-y: calc(3 * var(--spacing));
 
 			> li {
