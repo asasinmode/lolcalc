@@ -225,3 +225,34 @@ test('16.16 Vladimir passive interactions', async (t) => {
 		assert.equal(damageSource.maxHealth.value, 3171);
 	});
 });
+
+test.only('16.16 Ryze passive interactions', async (t) => {
+	t.runOnly(true);
+	const sourceCommon: IOverrides<'Ryze'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [],
+	};
+
+	await t.test('base', { only: true }, async (t) => {
+		t.runOnly(true);
+
+		await t.test('blackfire torch', { only: true }, async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.blackfireTorch],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 98,
+			}, damageSource);
+			assert.equal(damageSource.maxAbilityResource.value, 988);
+		});
+	});
+});

@@ -1442,125 +1442,6 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ryze: {
-		calculateHooks: {
-			postTotal: {
-				handler(self, { totalStats, bonusStats, totalMultipliersStats, championPassiveStats }, { calculatedVariables, miscDebug }) {
-					const apMultiplier = championAbilityVariableValue(
-							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
-							{
-								abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
-								allAbilitiesVariants: self.allAbilityVariants.value,
-								damageSource: self,
-							},
-					);
-
-					if (typeof apMultiplier.value !== 'number') {
-						console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apMultiplier);
-						return;
-					}
-
-					const apTearItemId = [ITEM_NAME_TO_ID.archangelsStaff, ITEM_NAME_TO_ID.seraphsEmbrace]
-						.find(id => self.items.value.some(item => item && item.id === id));
-					const hpTearItemId = [ITEM_NAME_TO_ID.wintersApproach, ITEM_NAME_TO_ID.fimbulwinter]
-						.find(id => self.items.value.some(item => item && item.id === id));
-
-					const apToManaPercentIncreaseRatio = apMultiplier.value / 10_000;
-					const tearItemAPRatio = apTearItemId ? ITEM_SPECIFICS_SHARED[apTearItemId].AP_FROM_MANA : 0;
-					const tearItemHPRatio = hpTearItemId ? ITEM_SPECIFICS_SHARED[hpTearItemId].HP_FROM_MANA : 0;
-					const riftmakerHpToApRatio = self.items.value.some(item => item && item.id === ITEM_NAME_TO_ID.riftmaker) ? ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP : 0;
-
-					miscDebug.ryzePassiveAPBase = totalStats.abilityPower;
-					miscDebug.ryzePassiveManaBase = totalStats.mana;
-
-					// eslint-disable-next-line no-console
-					console.log('INPUT', {
-						apToManaPercentIncreaseRatio,
-						tearItemAPRatio,
-						tearItemHPRatio,
-						riftmakerHpToApRatio,
-						ryzePassiveAPBase: totalStats.abilityPower,
-						ryzePassiveManaBase: totalStats.mana,
-						questStatMultiplier: (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP,
-						totalStats: {
-							abilityPower: totalStats.abilityPower,
-							hp: totalStats.hp,
-							mana: totalStats.mana,
-						},
-						calculatedVariables: {
-							totalItemApMultipliers: calculatedVariables.totalItemApMultipliers,
-							archangelSeraphAwe: calculatedVariables.archangelSeraphAwe,
-							approachFimbulAwe: calculatedVariables.approachFimbulAwe,
-							riftmakerVoidInfusion: calculatedVariables.riftmakerVoidInfusion,
-							rabadonMagicalOpus: calculatedVariables.rabadonMagicalOpus,
-						},
-					});
-
-					const effectiveAddedAPRatio = tearItemAPRatio * (1 + (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP);
-					const effectiveAddedHPRatio = tearItemHPRatio * (riftmakerHpToApRatio ? (1 + (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP) : 1);
-
-					const totalAddedAP = effectiveAddedAPRatio + (riftmakerHpToApRatio * effectiveAddedHPRatio);
-
-					const numerator = miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * miscDebug.ryzePassiveAPBase;
-					const denominator = 1 - (miscDebug.ryzePassiveManaBase * apToManaPercentIncreaseRatio * totalAddedAP);
-					miscDebug.ryzePMana = (totalAddedAP === 0 || denominator <= 0) ? numerator : numerator / denominator;
-
-					const tearItemBaseAddedAP = tearItemAPRatio * miscDebug.ryzePMana;
-					const tearItemFromQuestAddedAP = tearItemBaseAddedAP * (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP;
-					const tearItemTotalAp = tearItemBaseAddedAP + tearItemFromQuestAddedAP;
-
-					const addedHP = effectiveAddedHPRatio * miscDebug.ryzePMana;
-					const riftmakerAddedAP = riftmakerHpToApRatio * addedHP;
-					const addedAP = tearItemTotalAp + riftmakerAddedAP;
-
-					totalStats.mana += miscDebug.ryzePMana;
-					bonusStats.mana += miscDebug.ryzePMana;
-					championPassiveStats.mana = miscDebug.ryzePMana;
-
-					totalStats.abilityPower += addedAP;
-					totalMultipliersStats.abilityPower += tearItemFromQuestAddedAP;
-					bonusStats.abilityPower += addedAP;
-
-					totalStats.hp += addedHP;
-					bonusStats.hp += addedHP;
-
-					miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
-					calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
-
-					miscDebug.tearItemBonusMana = (miscDebug.tearItemBonusMana ?? 0) + miscDebug.ryzePMana;
-					calculatedVariables.ryzePassivePercentManaIncrease = miscDebug.ryzePMana / miscDebug.ryzePassiveManaBase;
-
-					if (calculatedVariables.archangelSeraphAwe !== undefined) {
-						calculatedVariables.archangelSeraphAwe += tearItemBaseAddedAP;
-					}
-					if (calculatedVariables.approachFimbulAwe !== undefined) {
-						calculatedVariables.approachFimbulAwe += addedHP;
-					}
-					if (calculatedVariables.midQuestAp !== undefined) {
-						calculatedVariables.midQuestAp += tearItemFromQuestAddedAP;
-					}
-					if (calculatedVariables.riftmakerVoidInfusion !== undefined) {
-						calculatedVariables.riftmakerVoidInfusion += riftmakerAddedAP;
-					}
-
-					// eslint-disable-next-line no-console
-					console.log('OUTPUT', {
-						totalStats: {
-							abilityPower: totalStats.abilityPower,
-							hp: totalStats.hp,
-							mana: totalStats.mana,
-						},
-						calculatedVariables: {
-							archangelSeraphAwe: calculatedVariables.archangelSeraphAwe,
-							approachFimbulAwe: calculatedVariables.approachFimbulAwe,
-							riftmakerVoidInfusion: calculatedVariables.riftmakerVoidInfusion,
-							ryzePassivePercentManaIncrease: calculatedVariables.ryzePassivePercentManaIncrease,
-							rabadonMagicalOpus: calculatedVariables.rabadonMagicalOpus,
-						},
-					});
-				},
-				priority: HOOK_PRIORITIES.postTotal.Ryze,
-			},
-		},
 		variables: defineChampionVariables<'Ryze', typeof IRyze>()({
 			known: {
 				PassiveManaCalcTooltip: [],
@@ -1596,6 +1477,28 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 		}),
+		calculateHooks: {
+			postTotal: {
+				handler(self, { totalStats, bonusStats, totalMultipliersStats, championPassiveStats }, { calculatedVariables, miscDebug }) {
+					const apToMana = championAbilityVariableValue(
+							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
+							{
+								abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+								allAbilitiesVariants: self.allAbilityVariants.value,
+								damageSource: self,
+							},
+					);
+
+					if (typeof apToMana.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apToMana);
+						return;
+					}
+
+					console.log('ryzing', apToMana.value);
+				},
+				priority: HOOK_PRIORITIES.postTotal.Ryze,
+			},
+		},
 	},
 	Samira: {
 		PASSIVE_OPTIONS: {
