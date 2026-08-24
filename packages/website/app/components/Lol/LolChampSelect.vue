@@ -135,10 +135,7 @@ defineExpose({
 				:key="champion.id"
 				:class="{ selected: selectedChampion === champion }"
 			>
-				<button
-					class="leading-tight text-center min-w-0 block hyphens-auto"
-					@click="(selectedChampion = champion) && vDialog?.close()"
-				>
+				<button @click="(selectedChampion = champion) && vDialog?.close()">
 					<img
 						:title="champion.name"
 						:src="championImage(champion.image, champion.id)"
@@ -159,7 +156,13 @@ defineExpose({
 @layer components {
 	#dialog-champ-select {
 		--at-apply: 'bg-[--cyan-bg] b b-[--ui-btn-border-clr] grid-rows-[auto_1fr] h-200 shadow-lg of-visible';
-		--px: calc(8 * var(--spacing));
+		--px: var(--fluid-8-32-t800);
+
+		@media (width <= 820px) {
+			& {
+				--at-apply: 'inline-full';
+			}
+		}
 
 		&[open] {
 			--at-apply: 'grid';
@@ -190,7 +193,7 @@ defineExpose({
 			}
 
 			#champ-select-role {
-				height: calc(var(--btn-size) + var(--btn-pb) + var(--btn-b-b));
+				block-size: calc(var(--btn-size) + var(--btn-pb) + var(--btn-b-b));
 				--btn-size: calc(7 * var(--spacing));
 				--btn-pb: calc(0.25 * var(--spacing));
 				--btn-b-b: 3px;
@@ -227,18 +230,23 @@ defineExpose({
 		}
 
 		> ul {
-			--at-apply: 'grid grid-cols-[repeat(6,minmax(max-content,1fr))] auto-rows-min of-y-auto py-3 px-[--px] gap-x-2 gap-y-[--gap-y] w-max min-w-full';
-			--img-size: calc(20 * var(--spacing));
+			--at-apply: 'grid grid-cols-[repeat(6,minmax(max-content,1fr))] auto-rows-min of-y-auto py-3 px-[--px] gap-x-[--fluid-4-8-t800] gap-y-[--fluid-6-12-t800] text-[length:--fluid-14-16-t800]';
+			--img-size: var(--fluid-60-80-t800);
+			--img-mx: var(--fluid-0-12-t800);
 			--gap-y: calc(3 * var(--spacing));
 
 			> li {
-				--at-apply: 'flex justify-center h-min';
-
 				> button {
-					--at-apply: 'whitespace-nowrap flex flex-col items-center text-neutral-200 text-center h-min relative';
+					--at-apply: 'whitespace-nowrap flex flex-col justify-center items-center text-neutral-200 inline-full block-min text-center relative leading-tight hyphens-auto';
+
+					@media (width < 600px) {
+						& {
+							--at-apply: 'whitespace-normal';
+						}
+					}
 
 					> img {
-						--at-apply: 'b b-neutral-600 aspect-1 size-[--img-size] mx-3 mb-1';
+						--at-apply: 'b b-neutral-600 aspect-1 size-[--img-size] mx-[--img-mx] mb-1';
 						object-fit: none;
 						object-position: 100px 100px;
 						background-repeat: no-repeat;
@@ -292,6 +300,12 @@ defineExpose({
 			&::after {
 				--at-apply: 'invisible whitespace-nowrap h-0 select-none';
 				content: attr(data-longest-name);
+			}
+
+			@media (width <= 820px) {
+				& {
+					--at-apply: 'grid-cols-[repeat(auto-fit,minmax(calc(var(--img-size)+2*var(--img-mx)),1fr))]';
+				}
 			}
 		}
 	}
