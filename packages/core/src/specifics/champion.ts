@@ -1933,6 +1933,9 @@ export const CHAMPION_SPECIFICS = {
 					MaxDamageTooltip: {
 						type: VariableType.magic,
 					},
+					SlowPercent: {
+						type: VariableType.affectedBySlowResist,
+					},
 				},
 				uninteresting: ['MaxChannelTime'],
 			}),
