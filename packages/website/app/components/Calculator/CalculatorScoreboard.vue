@@ -388,7 +388,7 @@ const isDisplayingTargets = ref(false);
 <style>
 @layer components {
 	#scoreboard {
-		--at-apply: 'b-b b-neutral-500 mt-5 relative mx-auto';
+		--at-apply: 'b-b b-neutral-500 mbs-[--fluid-8-20-t768] relative mx-auto';
 		--extras-gap: calc(2 * var(--spacing));
 		--extra-cols: 3;
 		--scoreboard-gap-x: var(--fluid-f1092-18-40-t1114);
@@ -409,11 +409,11 @@ const isDisplayingTargets = ref(false);
 		);
 
 		> label {
-			--at-apply: 'whitespace-nowrap absolute end-0 top-3.5 -translate-y-1/2';
+			--at-apply: 'whitespace-nowrap absolute end-0 top-3.5 -translate-y-1/2 leading-none';
 		}
 
 		.switch-group {
-			--at-apply: 'hidden absolute -translate-y-1/2 top-3.5 start-0 px-2 py-0.5 inline-max';
+			--at-apply: 'hidden absolute -translate-y-1/2 top-3.5 start-0 px-2 pbe-0.75 pbs-0.25 inline-max';
 
 			@media (width < 1079px) {
 				& {
@@ -587,7 +587,7 @@ const isDisplayingTargets = ref(false);
 			}
 
 			> h2 {
-				--at-apply: 'col-span-full mbe-1';
+				--at-apply: 'col-span-full mbe-[--fluid-8-12-t540]';
 			}
 
 			> label,

@@ -340,7 +340,7 @@ function hideSharePopover() {
 		}
 
 		> footer {
-			--at-apply: 'pt-3 pb-3 text-neutral-400 grid grid-cols-[subgrid] mt-auto text-center b-t b-neutral-500 relative';
+			--at-apply: 'pbs-3 pbe-3 text-neutral-400 grid grid-cols-[subgrid] mbs-auto text-center b-bs b-neutral-500 relative';
 			grid-column: page;
 
 			> * {
