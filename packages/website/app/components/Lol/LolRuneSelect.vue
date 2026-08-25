@@ -917,7 +917,8 @@ defineExpose({
 				var(--left),
 				calc(100vw - min(100vw, var(--width) / 2))
 			);
-			inset-block-start: clamp(var(--height), var(--top), 100vh);
+			/* not sure why whole 4 * spacing is needed to make sure it doesn't go off screen */
+			inset-block-start: clamp(calc(var(--height) + 4 * var(--spacing)), var(--top), calc(100vh - var(--height)));
 
 			h4 {
 				--at-apply: 'font-600 text-white uppercase mb-1 tracking-wide';
