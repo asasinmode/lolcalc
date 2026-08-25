@@ -528,11 +528,12 @@ defineExpose({
 		#rune-select-primary,
 		#rune-select-secondary,
 		#rune-select-shards {
+			--selected-indicator-width: var(--selected-slot-width);
+			--selected-slot-checked-width: calc(var(--spacing) * 2);
+
 			:where([role='radiogroup']),
 			:where([data-placeholder-secondary-slot-row]) {
 				--at-apply: 'flex items-center relative';
-				--selected-indicator-width: var(--selected-slot-width);
-				--selected-slot-checked-width: calc(var(--spacing) * 2);
 
 				&[data-path] {
 					--at-apply: 'py-[--path-row-py] mb-[--path-row-mb] gap-x-[--path-options-gap-x]';
@@ -691,8 +692,7 @@ defineExpose({
 			--selected-path-to-options-gap: var(--fluid-f760-16-24-t768);
 			--selected-keystone-width: calc(var(--spacing) * 5.5);
 			--selected-slot-width: calc(var(--spacing) * 4.5);
-			--keystone-row-py: calc(var(--spacing) * 9.5);
-			--keystone-row-py: var(--fluid-20-38-t760);
+			--keystone-row-py: var(--fluid-20-33-t760);
 			--keystone-row-button-size: calc(var(--spacing) * 12);
 			--keystone-row-height: calc(var(--keystone-row-button-size) + 2 * var(--keystone-row-py));
 			--slot-bg: theme('colors.neutral.900');
@@ -701,14 +701,15 @@ defineExpose({
 			--slot-row-height: calc(var(--slot-row-button-size) + 2 * var(--slot-row-py));
 
 			--primary-slot-row-button-size: calc(var(--spacing) * 11);
-			--primary-path-row-mb: calc(12 * var(--spacing));
-			--primary-slot-row-py: var(--fluid-14-24-t760);
+			--primary-path-row-mb: calc(7 * var(--spacing));
+			--primary-slot-row-py: var(--fluid-14-30-t760);
 			--primary-slot-row-height: calc(var(--primary-slot-row-button-size) + 2 * var(--primary-slot-row-py));
 
 			--secondary-slot-row-button-size: calc(var(--spacing) * 11);
-			--secondary-path-row-mb: calc(var(--spacing) * 8.5);
+			--secondary-path-row-mb: calc(var(--spacing) * 5);
 			/* possibly has to be 4 smaller than `--primary-slot-row-py` not sure */
-			--secondary-slot-row-py: var(--fluid-10-20-t760);
+			--secondary-slot-row-py: var(--fluid-10-19-t760);
+			--secondary-middle-row-py-diff: calc(1 * var(--spacing));
 			--secondary-slot-row-height: calc(var(--secondary-slot-row-button-size) + 2 * var(--secondary-slot-row-py));
 
 			--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
@@ -762,11 +763,17 @@ defineExpose({
 			--at-apply: 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
 			--path-row-mb: var(--secondary-path-row-mb);
 			--slot-row-py: var(--secondary-slot-row-py);
-			--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb));
+			--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb) + 1px);
 			--path-icon-clr: var(--slot-border-clr);
 
 			&:before {
-				--at-apply: 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
+				--at-apply: 'inset-be-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
+			}
+
+			@media (width < 760px) {
+				&::before {
+					--at-apply: 'inset-be-[calc(var(--slot-row-height))]';
+				}
 			}
 
 			[role='radiogroup'],
@@ -813,6 +820,10 @@ defineExpose({
 				&:nth-of-type(n + 2):after {
 					--at-apply: 'hidden';
 				}
+			}
+
+			> [role='radiogroup']:nth-of-type(3) {
+				/* --at-apply: 'py-[calc(var(--secondary-slot-row-py)+var(--secondary-middle-row-py-diff))]'; */
 			}
 
 			&[data-slots-filled='1'],
@@ -876,7 +887,7 @@ defineExpose({
 		}
 
 		#rune-select-shards {
-			--at-apply: 'mt-auto mbe-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
+			--at-apply: 'mbs-[calc(0.5*var(--selected-indicator-width)-1px)]';
 			--button-size-share: 0.6;
 			--padding-size-share: 0.4;
 			--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
