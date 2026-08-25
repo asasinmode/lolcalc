@@ -621,7 +621,7 @@ defineExpose({
 						--at-apply: 'size-[--keystone-row-button-size]';
 
 						> img {
-							--at-apply: 'size-21 pointer-events-none';
+							--at-apply: 'size-[var(--fluid-64-84-t420)] pointer-events-none';
 						}
 					}
 
@@ -641,7 +641,7 @@ defineExpose({
 			}
 
 			&:after {
-				--at-apply: 'content-empty start-8 translate-center size-9 shadow-none';
+				--at-apply: 'content-empty -translate-x-[calc(50%-var(--spacing))] -translate-y-1/2 size-[--fluid-32-36-t420] shadow-none';
 				background-color: var(--path-icon-clr);
 				mask: var(--path-icon, linear-gradient(transparent 0 0)) no-repeat center;
 			}
@@ -658,7 +658,7 @@ defineExpose({
 				}
 
 				span {
-					--at-apply: 'brightness-80 block size-7';
+					--at-apply: 'brightness-80 block size-[--fluid-24-28-t420]';
 				}
 
 				&:hover,
@@ -684,11 +684,11 @@ defineExpose({
 		#rune-select-secondary,
 		#rune-select-shards {
 			--transition-timing-function: ease-in-out;
-			--path-button-size: calc(var(--spacing) * 13);
+			--path-button-size: var(--fluid-40-52-t420);
 			--path-options-width: calc(var(--path-button-size) * var(--path-options-length));
 			--path-row-py: var(--fluid-f420-0-8-t760);
-			--path-options-gap-x: calc(var(--spacing) * 1);
-			--selected-path-width: calc(var(--spacing) * 16);
+			--path-options-gap-x: var(--fluid-f400-0-4-t420);
+			--selected-path-width: var(--fluid-56-64-t420);
 			--selected-path-to-options-gap: var(--fluid-f760-16-24-t768);
 			--selected-keystone-width: calc(var(--spacing) * 5.5);
 			--selected-slot-width: calc(var(--spacing) * 4.5);
@@ -723,6 +723,7 @@ defineExpose({
 			@media (width < 760px) {
 				--primary-path-row-mb: var(--fluid-20-32-t760);
 				--secondary-path-row-mb: var(--spacing);
+				--selected-path-to-options-gap: var(--fluid-0-16-t420);
 			}
 
 			&::before {
@@ -829,10 +830,6 @@ defineExpose({
 				}
 			}
 
-			> [role='radiogroup']:nth-of-type(3) {
-				/* --at-apply: 'py-[calc(var(--secondary-slot-row-py)+var(--secondary-middle-row-py-diff))]'; */
-			}
-
 			&[data-slots-filled='1'],
 			&[data-slots-filled='2'] {
 				[role='radiogroup']:nth-of-type(2):after {
@@ -884,12 +881,12 @@ defineExpose({
 			}
 		}
 
-		#rune-select-primary,
-		#rune-select-secondary {
-			@media (width < 760px) {
-				& {
-					--at-apply: 'mbe-2';
-				}
+		@media (width < 760px) {
+			#rune-select-primary {
+				--at-apply: 'mbe-[--fluid-12-8-t420]';
+			}
+			#rune-select-secondary {
+				--at-apply: 'mbe-[--fluid-16-12-t420]';
 			}
 		}
 
@@ -915,7 +912,11 @@ defineExpose({
 		#rune-select-dialog-hover-tooltip {
 			--at-apply: 'b-2 inline-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-[--fluid-8-28-t810] leading-5.5';
 			--width: 21.5rem;
-			inset-inline-start: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
+			inset-inline-start: clamp(
+				min(100vw / 2, calc(var(--width) / 2)),
+				var(--left),
+				calc(100vw - min(100vw, var(--width) / 2))
+			);
 			inset-block-start: clamp(var(--height), var(--top), 100vh);
 
 			h4 {
