@@ -290,7 +290,6 @@ defineExpose({
 						aria-hidden="true"
 						width="32"
 						height="32"
-						class="size-7 block"
 					/>
 					<span class="sr-only">{{ title }}</span>
 				</template>
@@ -343,7 +342,6 @@ defineExpose({
 						aria-hidden="true"
 						width="32"
 						height="32"
-						class="size-7 block"
 					/>
 					<span class="sr-only">{{ title }}</span>
 				</template>
@@ -422,18 +420,30 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-rune-select {
-		--at-apply: 'px-5 pbe-3 bg-[--cyan-bg] gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg b b-[--ui-btn-border-clr]';
+		--at-apply: 'px-[--fluid-8-20-t810] pbe-3 bg-[--cyan-bg] grid-cols-[auto_minmax(calc(3*var(--spacing)),calc(12*var(--spacing)))_auto] grid-rows-[auto_max-content_1fr] shadow-lg b b-[--ui-btn-border-clr]';
 		grid-template-areas:
-			'header header'
-			'primary secondary'
-			'primary shards';
+			'header header header'
+			'primary gap secondary'
+			'primary gap shards';
+
+		@media (width < 760px) {
+			& {
+				--at-apply: 'flex-col pbe-5';
+			}
+		}
 
 		&[open] {
 			--at-apply: 'grid';
+
+			@media (width < 760px) {
+				& {
+					--at-apply: 'flex';
+				}
+			}
 		}
 
 		> header {
-			--at-apply: 'pbe-2 pbs-[--fluid-12-20-t810] pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20';
+			--at-apply: 'pbe-[--fluid-f420-12-8-t760] pbs-[--fluid-8-20-t810] pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20 inline-full';
 			grid-area: header;
 
 			> h1 {
@@ -647,7 +657,7 @@ defineExpose({
 				}
 
 				span {
-					--at-apply: 'brightness-80';
+					--at-apply: 'brightness-80 block size-7';
 				}
 
 				&:hover,
@@ -675,13 +685,14 @@ defineExpose({
 			--transition-timing-function: ease-in-out;
 			--path-button-size: calc(var(--spacing) * 13);
 			--path-options-width: calc(var(--path-button-size) * var(--path-options-length));
-			--path-row-py: calc(var(--spacing) * 2);
+			--path-row-py: var(--fluid-f420-0-8-t760);
 			--path-options-gap-x: calc(var(--spacing) * 1);
 			--selected-path-width: calc(var(--spacing) * 16);
-			--selected-path-to-options-gap: calc(var(--spacing) * 6);
+			--selected-path-to-options-gap: var(--fluid-f760-16-24-t768);
 			--selected-keystone-width: calc(var(--spacing) * 5.5);
 			--selected-slot-width: calc(var(--spacing) * 4.5);
 			--keystone-row-py: calc(var(--spacing) * 9.5);
+			--keystone-row-py: var(--fluid-20-38-t760);
 			--keystone-row-button-size: calc(var(--spacing) * 12);
 			--keystone-row-height: calc(var(--keystone-row-button-size) + 2 * var(--keystone-row-py));
 			--slot-bg: theme('colors.neutral.900');
@@ -690,13 +701,14 @@ defineExpose({
 			--slot-row-height: calc(var(--slot-row-button-size) + 2 * var(--slot-row-py));
 
 			--primary-slot-row-button-size: calc(var(--spacing) * 11);
-			--primary-path-row-mb: calc(var(--spacing) * 12);
-			--primary-slot-row-py: calc(var(--spacing) * 6);
+			--primary-path-row-mb: calc(12 * var(--spacing));
+			--primary-slot-row-py: var(--fluid-14-24-t760);
 			--primary-slot-row-height: calc(var(--primary-slot-row-button-size) + 2 * var(--primary-slot-row-py));
 
 			--secondary-slot-row-button-size: calc(var(--spacing) * 11);
 			--secondary-path-row-mb: calc(var(--spacing) * 8.5);
-			--secondary-slot-row-py: calc(var(--spacing) * 5);
+			/* possibly has to be 4 smaller than `--primary-slot-row-py` not sure */
+			--secondary-slot-row-py: var(--fluid-10-20-t760);
 			--secondary-slot-row-height: calc(var(--secondary-slot-row-button-size) + 2 * var(--secondary-slot-row-py));
 
 			--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
@@ -706,6 +718,11 @@ defineExpose({
 			);
 
 			--at-apply: 'relative h-max';
+
+			@media (width < 760px) {
+				--primary-path-row-mb: var(--fluid-20-32-t760);
+				--secondary-path-row-mb: var(--spacing);
+			}
 
 			&::before {
 				--at-apply: 'absolute content-empty start-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
@@ -742,17 +759,15 @@ defineExpose({
 		}
 
 		#rune-select-secondary {
+			--at-apply: 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
 			--path-row-mb: var(--secondary-path-row-mb);
 			--slot-row-py: var(--secondary-slot-row-py);
 			--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb));
-
-			--at-apply: 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
+			--path-icon-clr: var(--slot-border-clr);
 
 			&:before {
 				--at-apply: 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
 			}
-
-			--path-icon-clr: var(--slot-border-clr);
 
 			[role='radiogroup'],
 			[data-placeholder-secondary-slot-row] {
@@ -851,13 +866,28 @@ defineExpose({
 			}
 		}
 
+		#rune-select-primary,
+		#rune-select-secondary {
+			@media (width < 760px) {
+				& {
+					--at-apply: 'mbe-2';
+				}
+			}
+		}
+
 		#rune-select-shards {
+			--at-apply: 'mt-auto mbe-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
 			--button-size-share: 0.6;
 			--padding-size-share: 0.4;
 			--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
 			--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
 
-			--at-apply: 'mt-auto mb-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
+			@media (width < 760px) {
+				& {
+					--at-apply: 'my-0';
+					--slot-row-button-size: calc(7.5 * var(--spacing));
+				}
+			}
 
 			&:before {
 				--at-apply: 'top-[calc(var(--slot-row-height)_/_2)]';
@@ -865,11 +895,10 @@ defineExpose({
 		}
 
 		#rune-select-dialog-hover-tooltip {
-			--at-apply: 'b-2 inline-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
+			--at-apply: 'b-2 inline-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-[--fluid-8-28-t810] leading-5.5';
 			--width: 21.5rem;
 			inset-inline-start: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
 			inset-block-start: clamp(var(--height), var(--top), 100vh);
-			position-try: flip-block;
 
 			h4 {
 				--at-apply: 'font-600 text-white uppercase mb-1 tracking-wide';
