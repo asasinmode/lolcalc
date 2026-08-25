@@ -250,7 +250,7 @@ defineExpose({
 
 <template>
 	<VDialog id="dialog-rune-select" ref="vDialog" :data-invalid="configurationInvalid ? '' : undefined">
-		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20">
+		<header>
 			<h1>runes</h1>
 			<p aria-live="polite">
 				{{ configurationInvalid ? 'configuration invalid' : '' }}
@@ -269,7 +269,7 @@ defineExpose({
 		</header>
 		<ComingSoonCover style="grid-area: primary" feature="Primary path" />
 		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableUnimplementedUi">
-			<h2 class="sr-only">
+			<h2>
 				Primary
 			</h2>
 			<VButtonRadiogroup
@@ -322,7 +322,7 @@ defineExpose({
 		</section>
 		<ComingSoonCover style="grid-area: secondary" feature="Secondary path" />
 		<section id="rune-select-secondary" :style="secondaryRunePathStyle" :data-slots-filled="value?.paths.secondarySlots.length" :inert="!enableUnimplementedUi">
-			<h2 class="sr-only">
+			<h2>
 				Secondary
 			</h2>
 			<VButtonRadiogroup
@@ -379,7 +379,7 @@ defineExpose({
 			</VButtonRadiogroup>
 		</section>
 		<section id="rune-select-shards" :style="`--path-icon-clr: hsl(from ${RUNES.paths.Precision.iconColor} h calc(s * 1.3) l); --path-options-length: ${secondaryPathOptions.length}`">
-			<h2 class="sr-only">
+			<h2>
 				Shards
 			</h2>
 			<VButtonRadiogroup
@@ -422,7 +422,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-rune-select {
-		--at-apply: 'px-5 py-3 bg-[--cyan-bg] gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg b b-[--ui-btn-border-clr]';
+		--at-apply: 'px-5 pbe-3 bg-[--cyan-bg] gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg b b-[--ui-btn-border-clr]';
 		grid-template-areas:
 			'header header'
 			'primary secondary'
@@ -433,6 +433,7 @@ defineExpose({
 		}
 
 		> header {
+			--at-apply: 'pbe-2 pbs-[--fluid-12-20-t810] pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20';
 			grid-area: header;
 
 			> h1 {
@@ -450,7 +451,7 @@ defineExpose({
 					--at-apply: 'grid place-items-center h-7';
 
 					&:first-child {
-						--at-apply: 'px-2 relative';
+						--at-apply: 'px-2 relative pbe-0.25';
 
 						&::before,
 						&::after {
@@ -490,410 +491,415 @@ defineExpose({
 				}
 			}
 		}
-	}
 
-	#rune-select-primary {
-		grid-area: primary;
-	}
-
-	#rune-select-secondary {
-		grid-area: secondary;
-	}
-
-	#rune-select-primary,
-	#rune-select-secondary {
-		&[inert] {
-			--at-apply: 'op-50';
+		h2 {
+			--at-apply: 'sr-only';
 		}
-	}
 
-	#rune-select-shards {
-		grid-area: shards;
-	}
+		#rune-select-primary {
+			grid-area: primary;
+		}
 
-	#rune-select-primary,
-	#rune-select-secondary,
-	#rune-select-shards {
-		:where([role='radiogroup']),
-		:where([data-placeholder-secondary-slot-row]) {
-			--at-apply: 'flex items-center relative';
-			--selected-indicator-width: var(--selected-slot-width);
-			--selected-slot-checked-width: calc(var(--spacing) * 2);
+		#rune-select-secondary {
+			grid-area: secondary;
+		}
 
-			&[data-path] {
-				--at-apply: 'py-[--path-row-py] mb-[--path-row-mb] gap-x-[--path-options-gap-x]';
+		#rune-select-primary,
+		#rune-select-secondary {
+			&[inert] {
+				--at-apply: 'op-50';
 			}
+		}
 
-			> button {
-				--at-apply: 'mx-auto';
-			}
+		#rune-select-shards {
+			grid-area: shards;
+		}
 
-			&:before {
-				--at-apply: 'content-empty z-10 bg-[--slot-bg] block size-[--selected-slot-width] b b-2 rounded-full ms-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2)] me-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2_+_var(--selected-path-to-options-gap))]';
-				border-color: var(--path-icon-clr, var(--slot-border-clr));
-			}
+		#rune-select-primary,
+		#rune-select-secondary,
+		#rune-select-shards {
+			:where([role='radiogroup']),
+			:where([data-placeholder-secondary-slot-row]) {
+				--at-apply: 'flex items-center relative';
+				--selected-indicator-width: var(--selected-slot-width);
+				--selected-slot-checked-width: calc(var(--spacing) * 2);
 
-			&:after {
-				--at-apply: 'absolute z-10 block size-[--selected-slot-checked-width] rounded-full top-1/2 -translate-y-1/2 start-[calc((var(--selected-path-width)_-_var(--selected-slot-checked-width))_/_2)] bg-[--path-icon-clr]';
-				box-shadow:
-					0 0 6px 1px hsl(0 100% 100% / 0.8),
-					inset 2px 3px 5px hsl(0 100% 100% / 0.6),
-					inset -2px 3px 5px hsl(0 100% 100% / 0.6);
-			}
-
-			&:not([data-path]):not([data-keystone]) > button > img,
-			&[data-keystone] > button {
-				--at-apply: 'b b-[--path-icon-clr] b-2 rounded-full';
-			}
-
-			&:not([data-path]) {
-				--at-apply: 'py-[--slot-row-py]';
+				&[data-path] {
+					--at-apply: 'py-[--path-row-py] mb-[--path-row-mb] gap-x-[--path-options-gap-x]';
+				}
 
 				> button {
-					--at-apply: 'bg-[--slot-bg] rounded-full outline-3 outline-offset-8';
-					--outline-op: 0;
-					outline-color: hsl(from var(--path-icon-clr) h s l / var(--outline-op));
-					transition-property: outline-offset, outline-color, border-color;
-					transition-duration: var(--transition-duration);
-					transition-timing-function: var(--transition-timing-function);
-
-					&:hover,
-					&:focus-visible {
-						--at-apply: 'outline-offset-5';
-						--outline-op: 0.5;
-					}
-
-					> img {
-						--at-apply: 'block size-[--slot-row-button-size] max-w-unset';
-						transition: filter var(--transition-duration) var(--transition-timing-function);
-					}
-				}
-
-				&:has(button[aria-checked='true']) {
-					&[data-keystone] > button[aria-checked='false']:not(:hover) {
-						--at-apply: 'b-[--slot-border-clr]';
-					}
-
-					> button[aria-checked='false']:not(:hover) > img {
-						--at-apply: 'grayscale';
-					}
-
-					&:after {
-						--at-apply: 'content-empty';
-					}
-				}
-			}
-
-			&[data-keystone] > button {
-				--at-apply: 'relative';
-
-				> img {
-					--at-apply: 'absolute translate-center start-1/2 top-1/2';
-				}
-			}
-
-			&:nth-last-of-type(-n + 2) {
-				> button:last-child:after {
-					--at-apply: 'absolute pointer-events-none content-empty h-px start-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] end-0 top-0 -translate-y-1/2 bg-yellow-800/60';
-				}
-			}
-
-			&[data-keystone] {
-				--selected-indicator-width: var(--selected-keystone-width);
-				--selected-slot-checked-width: calc(var(--spacing) * 2.5);
-
-				> button {
-					--at-apply: 'size-[--keystone-row-button-size]';
-
-					> img {
-						--at-apply: 'size-21 pointer-events-none';
-					}
+					--at-apply: 'mx-auto';
 				}
 
 				&:before {
-					--at-apply: 'size-[--selected-keystone-width]';
+					--at-apply: 'content-empty z-10 bg-[--slot-bg] block size-[--selected-slot-width] b b-2 rounded-full ms-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2)] me-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2_+_var(--selected-path-to-options-gap))]';
+					border-color: var(--path-icon-clr, var(--slot-border-clr));
+				}
+
+				&:after {
+					--at-apply: 'absolute z-10 block size-[--selected-slot-checked-width] rounded-full top-1/2 -translate-y-1/2 start-[calc((var(--selected-path-width)_-_var(--selected-slot-checked-width))_/_2)] bg-[--path-icon-clr]';
+					box-shadow:
+						0 0 6px 1px hsl(0 100% 100% / 0.8),
+						inset 2px 3px 5px hsl(0 100% 100% / 0.6),
+						inset -2px 3px 5px hsl(0 100% 100% / 0.6);
+				}
+
+				&:not([data-path]):not([data-keystone]) > button > img,
+				&[data-keystone] > button {
+					--at-apply: 'b b-[--path-icon-clr] b-2 rounded-full';
+				}
+
+				&:not([data-path]) {
+					--at-apply: 'py-[--slot-row-py]';
+
+					> button {
+						--at-apply: 'bg-[--slot-bg] rounded-full outline-3 outline-offset-8';
+						--outline-op: 0;
+						outline-color: hsl(from var(--path-icon-clr) h s l / var(--outline-op));
+						transition-property: outline-offset, outline-color, border-color;
+						transition-duration: var(--transition-duration);
+						transition-timing-function: var(--transition-timing-function);
+
+						&:hover,
+						&:focus-visible {
+							--at-apply: 'outline-offset-5';
+							--outline-op: 0.5;
+						}
+
+						> img {
+							--at-apply: 'block size-[--slot-row-button-size] max-w-unset';
+							transition: filter var(--transition-duration) var(--transition-timing-function);
+						}
+					}
+
+					&:has(button[aria-checked='true']) {
+						&[data-keystone] > button[aria-checked='false']:not(:hover) {
+							--at-apply: 'b-[--slot-border-clr]';
+						}
+
+						> button[aria-checked='false']:not(:hover) > img {
+							--at-apply: 'grayscale';
+						}
+
+						&:after {
+							--at-apply: 'content-empty';
+						}
+					}
+				}
+
+				&[data-keystone] > button {
+					--at-apply: 'relative';
+
+					> img {
+						--at-apply: 'absolute translate-center start-1/2 top-1/2';
+					}
+				}
+
+				&:nth-last-of-type(-n + 2) {
+					> button:last-child:after {
+						--at-apply: 'absolute pointer-events-none content-empty h-px start-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] end-0 top-0 -translate-y-1/2 bg-yellow-800/60';
+					}
+				}
+
+				&[data-keystone] {
+					--selected-indicator-width: var(--selected-keystone-width);
+					--selected-slot-checked-width: calc(var(--spacing) * 2.5);
+
+					> button {
+						--at-apply: 'size-[--keystone-row-button-size]';
+
+						> img {
+							--at-apply: 'size-21 pointer-events-none';
+						}
+					}
+
+					&:before {
+						--at-apply: 'size-[--selected-keystone-width]';
+					}
 				}
 			}
 		}
-	}
 
-	#rune-select-primary-path,
-	#rune-select-secondary-path {
-		--selected-slot-width: var(--selected-path-width);
-
-		&:before {
-			--at-apply: 'me-[calc(var(--selected-path-to-options-gap)_-_var(--path-options-gap-x))] ms-0 bg-transparent';
-		}
-
-		&:after {
-			--at-apply: 'content-empty start-8 translate-center size-9 shadow-none';
-			background-color: var(--path-icon-clr);
-			mask: var(--path-icon, linear-gradient(transparent 0 0)) no-repeat center;
-		}
-
-		button {
-			--at-apply: 'rounded-full b-2 b-transparent grid-center size-[--path-button-size] relative';
+		#rune-select-primary-path,
+		#rune-select-secondary-path {
+			--selected-slot-width: var(--selected-path-width);
 
 			&:before {
-				--at-apply: 'absolute content-empty rounded-full inset-0 outline-2 outline-offset-1 op-0';
-				outline-color: theme('colors.yellow.600');
-				transition-property: outline-offset, opacity;
-				transition-duration: var(--transition-duration);
-				transition-timing-function: var(--transition-timing-function);
+				--at-apply: 'me-[calc(var(--selected-path-to-options-gap)_-_var(--path-options-gap-x))] ms-0 bg-transparent';
 			}
 
-			span {
-				--at-apply: 'brightness-80';
+			&:after {
+				--at-apply: 'content-empty start-8 translate-center size-9 shadow-none';
+				background-color: var(--path-icon-clr);
+				mask: var(--path-icon, linear-gradient(transparent 0 0)) no-repeat center;
 			}
 
-			&:hover,
-			&:focus-visible {
+			button {
+				--at-apply: 'rounded-full b-2 b-transparent grid-center size-[--path-button-size] relative';
+
+				&:before {
+					--at-apply: 'absolute content-empty rounded-full inset-0 outline-2 outline-offset-1 op-0';
+					outline-color: theme('colors.yellow.600');
+					transition-property: outline-offset, opacity;
+					transition-duration: var(--transition-duration);
+					transition-timing-function: var(--transition-timing-function);
+				}
+
+				span {
+					--at-apply: 'brightness-80';
+				}
+
+				&:hover,
+				&:focus-visible {
+					span {
+						--at-apply: 'brightness-100';
+					}
+				}
+			}
+
+			button[aria-checked='true'] {
+				&:before {
+					--at-apply: 'op-60 -outline-offset-2';
+				}
+
 				span {
 					--at-apply: 'brightness-100';
 				}
 			}
 		}
 
-		button[aria-checked='true'] {
-			&:before {
-				--at-apply: 'op-60 -outline-offset-2';
-			}
+		#rune-select-primary,
+		#rune-select-secondary,
+		#rune-select-shards {
+			--transition-timing-function: ease-in-out;
+			--path-button-size: calc(var(--spacing) * 13);
+			--path-options-width: calc(var(--path-button-size) * var(--path-options-length));
+			--path-row-py: calc(var(--spacing) * 2);
+			--path-options-gap-x: calc(var(--spacing) * 1);
+			--selected-path-width: calc(var(--spacing) * 16);
+			--selected-path-to-options-gap: calc(var(--spacing) * 6);
+			--selected-keystone-width: calc(var(--spacing) * 5.5);
+			--selected-slot-width: calc(var(--spacing) * 4.5);
+			--keystone-row-py: calc(var(--spacing) * 9.5);
+			--keystone-row-button-size: calc(var(--spacing) * 12);
+			--keystone-row-height: calc(var(--keystone-row-button-size) + 2 * var(--keystone-row-py));
+			--slot-bg: theme('colors.neutral.900');
+			--slot-border-clr: theme('colors.neutral.500');
+			--slot-row-button-size: calc(var(--spacing) * 11);
+			--slot-row-height: calc(var(--slot-row-button-size) + 2 * var(--slot-row-py));
 
-			span {
-				--at-apply: 'brightness-100';
-			}
-		}
-	}
+			--primary-slot-row-button-size: calc(var(--spacing) * 11);
+			--primary-path-row-mb: calc(var(--spacing) * 12);
+			--primary-slot-row-py: calc(var(--spacing) * 6);
+			--primary-slot-row-height: calc(var(--primary-slot-row-button-size) + 2 * var(--primary-slot-row-py));
 
-	#rune-select-primary,
-	#rune-select-secondary,
-	#rune-select-shards {
-		--transition-timing-function: ease-in-out;
-		--path-button-size: calc(var(--spacing) * 13);
-		--path-options-width: calc(var(--path-button-size) * var(--path-options-length));
-		--path-row-py: calc(var(--spacing) * 2);
-		--path-options-gap-x: calc(var(--spacing) * 1);
-		--selected-path-width: calc(var(--spacing) * 16);
-		--selected-path-to-options-gap: calc(var(--spacing) * 6);
-		--selected-keystone-width: calc(var(--spacing) * 5.5);
-		--selected-slot-width: calc(var(--spacing) * 4.5);
-		--keystone-row-py: calc(var(--spacing) * 9.5);
-		--keystone-row-button-size: calc(var(--spacing) * 12);
-		--keystone-row-height: calc(var(--keystone-row-button-size) + 2 * var(--keystone-row-py));
-		--slot-bg: theme('colors.neutral.900');
-		--slot-border-clr: theme('colors.neutral.500');
-		--slot-row-button-size: calc(var(--spacing) * 11);
-		--slot-row-height: calc(var(--slot-row-button-size) + 2 * var(--slot-row-py));
+			--secondary-slot-row-button-size: calc(var(--spacing) * 11);
+			--secondary-path-row-mb: calc(var(--spacing) * 8.5);
+			--secondary-slot-row-py: calc(var(--spacing) * 5);
+			--secondary-slot-row-height: calc(var(--secondary-slot-row-button-size) + 2 * var(--secondary-slot-row-py));
 
-		--primary-slot-row-button-size: calc(var(--spacing) * 11);
-		--primary-path-row-mb: calc(var(--spacing) * 12);
-		--primary-slot-row-py: calc(var(--spacing) * 6);
-		--primary-slot-row-height: calc(var(--primary-slot-row-button-size) + 2 * var(--primary-slot-row-py));
-
-		--secondary-slot-row-button-size: calc(var(--spacing) * 11);
-		--secondary-path-row-mb: calc(var(--spacing) * 8.5);
-		--secondary-slot-row-py: calc(var(--spacing) * 5);
-		--secondary-slot-row-height: calc(var(--secondary-slot-row-button-size) + 2 * var(--secondary-slot-row-py));
-
-		--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
-		--selected-dots-column-lining-clr: hsl(0 100% 100% / 0.6);
-		--selected-dots-column-lining-clr: hsl(
-			from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
-		);
-
-		--at-apply: 'relative h-max';
-
-		&::before {
-			--at-apply: 'absolute content-empty start-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
-			box-shadow:
-				0 0 6px 0 var(--path-icon-clr),
-				inset 1px 0 0 var(--selected-dots-column-lining-clr),
-				inset -1px 0 0 var(--selected-dots-column-lining-clr);
-		}
-
-		:where([role='radiogroup']),
-		:where([data-placeholder-secondary-slot-row]) {
-			&[data-keystone] {
-				--at-apply: 'py-[--keystone-row-py] b-y b-[--path-icon-clr]';
-				border-image: linear-gradient(
-						90deg,
-						transparent 0%,
-						var(--path-icon-clr) 20%,
-						var(--path-icon-clr) 80%,
-						transparent 100%
-					)
-					1;
-
-				> span {
-					--at-apply: 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] start-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] -top-1 -translate-y-full';
-					clip: unset;
-				}
-			}
-		}
-	}
-
-	#rune-select-primary {
-		--path-row-mb: var(--primary-path-row-mb);
-		--slot-row-py: var(--primary-slot-row-py);
-	}
-
-	#rune-select-secondary {
-		--path-row-mb: var(--secondary-path-row-mb);
-		--slot-row-py: var(--secondary-slot-row-py);
-		--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb));
-
-		--at-apply: 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
-
-		&:before {
-			--at-apply: 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
-		}
-
-		--path-icon-clr: var(--slot-border-clr);
-
-		[role='radiogroup'],
-		[data-placeholder-secondary-slot-row] {
-			&:nth-of-type(4) {
-				&:before,
-				&:after {
-					--at-apply: 'op-0';
-				}
-			}
-			--secondary-slot-first-dot-translate-y: calc(
-				(var(--keystone-row-height) - var(--slot-row-height)) / 2 + var(--selected-dot-mt-translate)
-			);
-			--secondary-slot-second-dot-translate-y: calc(
-				var(--keystone-row-height) - var(--secondary-slot-row-height) +
-					(var(--primary-slot-row-height) - var(--secondary-slot-row-height)) / 2 + var(--selected-dot-mt-translate) +
-					1px
+			--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
+			--selected-dots-column-lining-clr: hsl(0 100% 100% / 0.6);
+			--selected-dots-column-lining-clr: hsl(
+				from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
 			);
 
-			&:nth-of-type(n + 2) {
-				--selected-dot-translate-y: var(--secondary-slot-first-dot-translate-y);
+			--at-apply: 'relative h-max';
 
-				&:before {
-					--at-apply: 'translate-y-[--selected-dot-translate-y]';
-				}
-
-				&:after {
-					--at-apply: 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
-				}
+			&::before {
+				--at-apply: 'absolute content-empty start-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
+				box-shadow:
+					0 0 6px 0 var(--path-icon-clr),
+					inset 1px 0 0 var(--selected-dots-column-lining-clr),
+					inset -1px 0 0 var(--selected-dots-column-lining-clr);
 			}
 
-			&:nth-of-type(3) {
-				--selected-dot-translate-y: var(--secondary-slot-second-dot-translate-y);
+			:where([role='radiogroup']),
+			:where([data-placeholder-secondary-slot-row]) {
+				&[data-keystone] {
+					--at-apply: 'py-[--keystone-row-py] b-y b-[--path-icon-clr]';
+					border-image: linear-gradient(
+							90deg,
+							transparent 0%,
+							var(--path-icon-clr) 20%,
+							var(--path-icon-clr) 80%,
+							transparent 100%
+						)
+						1;
 
-				&:before {
-					--at-apply: 'translate-y-[--selected-dot-translate-y]';
-				}
-
-				&:after {
-					--at-apply: 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
-				}
-			}
-
-			&:nth-of-type(n + 2):after {
-				--at-apply: 'hidden';
-			}
-		}
-
-		&[data-slots-filled='1'],
-		&[data-slots-filled='2'] {
-			[role='radiogroup']:nth-of-type(2):after {
-				--at-apply: 'content-empty block';
-			}
-		}
-
-		&[data-slots-filled='2'] {
-			[role='radiogroup'] {
-				&:nth-of-type(3):after {
-					--at-apply: 'content-empty block';
-				}
-
-				&:nth-of-type(n + 2):not(:has(button[aria-checked='true'])) {
-					> button:not(:hover):not(:focus-visible) {
-						--at-apply: 'b-[--slot-border-clr]';
-
-						img {
-							--at-apply: 'grayscale';
-						}
+					> span {
+						--at-apply: 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] start-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] -top-1 -translate-y-full';
+						clip: unset;
 					}
 				}
 			}
 		}
 
-		[data-placeholder-secondary-slot-row] {
-			--at-apply: 'box-content h-[calc(var(--secondary-slot-row-button-size)_+_2_*_var(--slot-row-py))] py-0 grid grid-cols-[auto_1fr] grid-rows-[auto_auto]';
+		#rune-select-primary {
+			--path-row-mb: var(--primary-path-row-mb);
+			--slot-row-py: var(--primary-slot-row-py);
+		}
 
-			&:nth-of-type(2) {
-				--at-apply: 'pt-[--selected-dot-translate-y]';
-			}
+		#rune-select-secondary {
+			--path-row-mb: var(--secondary-path-row-mb);
+			--slot-row-py: var(--secondary-slot-row-py);
+			--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb));
 
-			&:nth-of-type(3) {
-				--at-apply: 'pt-[calc(var(--secondary-slot-second-dot-translate-y)_-_var(--secondary-slot-first-dot-translate-y))]';
-			}
+			--at-apply: 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
 
 			&:before {
-				--at-apply: 'row-span-full';
-				--selected-dot-translate-y: 0px;
+				--at-apply: 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
 			}
 
-			h3 {
-				--at-apply: 'uppercase tracking-wider self-end text-sm';
+			--path-icon-clr: var(--slot-border-clr);
+
+			[role='radiogroup'],
+			[data-placeholder-secondary-slot-row] {
+				&:nth-of-type(4) {
+					&:before,
+					&:after {
+						--at-apply: 'op-0';
+					}
+				}
+				--secondary-slot-first-dot-translate-y: calc(
+					(var(--keystone-row-height) - var(--slot-row-height)) / 2 + var(--selected-dot-mt-translate)
+				);
+				--secondary-slot-second-dot-translate-y: calc(
+					var(--keystone-row-height) - var(--secondary-slot-row-height) +
+						(var(--primary-slot-row-height) - var(--secondary-slot-row-height)) / 2 + var(--selected-dot-mt-translate) +
+						1px
+				);
+
+				&:nth-of-type(n + 2) {
+					--selected-dot-translate-y: var(--secondary-slot-first-dot-translate-y);
+
+					&:before {
+						--at-apply: 'translate-y-[--selected-dot-translate-y]';
+					}
+
+					&:after {
+						--at-apply: 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
+					}
+				}
+
+				&:nth-of-type(3) {
+					--selected-dot-translate-y: var(--secondary-slot-second-dot-translate-y);
+
+					&:before {
+						--at-apply: 'translate-y-[--selected-dot-translate-y]';
+					}
+
+					&:after {
+						--at-apply: 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
+					}
+				}
+
+				&:nth-of-type(n + 2):after {
+					--at-apply: 'hidden';
+				}
 			}
 
-			p {
-				--at-apply: 'text-neutral-400 text-xs max-w-[--path-options-width] leading-4.25 self-start';
-			}
-		}
-	}
-
-	#rune-select-shards {
-		--button-size-share: 0.6;
-		--padding-size-share: 0.4;
-		--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
-		--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
-
-		--at-apply: 'mt-auto mb-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
-
-		&:before {
-			--at-apply: 'top-[calc(var(--slot-row-height)_/_2)]';
-		}
-	}
-
-	#rune-select-dialog-hover-tooltip {
-		--at-apply: 'b-2 w-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
-		--width: 21.5rem;
-		inset-inline-start: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
-		top: clamp(var(--height), var(--top), 100vh);
-
-		h4 {
-			--at-apply: 'font-600 text-white uppercase mb-1 tracking-wide';
-		}
-
-		> div {
-			--at-apply: 'text-neutral-300';
-
-			lol-uikit-tooltipped-keyword,
-			lol-uikit-tooltipped-keyword font {
-				--at-apply: 'text-white';
+			&[data-slots-filled='1'],
+			&[data-slots-filled='2'] {
+				[role='radiogroup']:nth-of-type(2):after {
+					--at-apply: 'content-empty block';
+				}
 			}
 
-			rules {
-				color: inherit;
+			&[data-slots-filled='2'] {
+				[role='radiogroup'] {
+					&:nth-of-type(3):after {
+						--at-apply: 'content-empty block';
+					}
+
+					&:nth-of-type(n + 2):not(:has(button[aria-checked='true'])) {
+						> button:not(:hover):not(:focus-visible) {
+							--at-apply: 'b-[--slot-border-clr]';
+
+							img {
+								--at-apply: 'grayscale';
+							}
+						}
+					}
+				}
 			}
 
-			li {
-				--at-apply: 'ms-5';
+			[data-placeholder-secondary-slot-row] {
+				--at-apply: 'box-content h-[calc(var(--secondary-slot-row-button-size)_+_2_*_var(--slot-row-py))] py-0 grid grid-cols-[auto_1fr] grid-rows-[auto_auto]';
 
-				/* WORKAROUND for grasp of undying that has nested <rules>, maybe need to parse it properly if more things do it */
-				rules {
-					--at-apply: '-ms-5 block';
+				&:nth-of-type(2) {
+					--at-apply: 'pt-[--selected-dot-translate-y]';
+				}
+
+				&:nth-of-type(3) {
+					--at-apply: 'pt-[calc(var(--secondary-slot-second-dot-translate-y)_-_var(--secondary-slot-first-dot-translate-y))]';
+				}
+
+				&:before {
+					--at-apply: 'row-span-full';
+					--selected-dot-translate-y: 0px;
+				}
+
+				h3 {
+					--at-apply: 'uppercase tracking-wider self-end text-sm';
+				}
+
+				p {
+					--at-apply: 'text-neutral-400 text-xs max-w-[--path-options-width] leading-4.25 self-start';
 				}
 			}
 		}
 
-		> p.alert {
-			--at-apply: 'mt-[--unknown-alert-mt]';
+		#rune-select-shards {
+			--button-size-share: 0.6;
+			--padding-size-share: 0.4;
+			--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
+			--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
+
+			--at-apply: 'mt-auto mb-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
+
+			&:before {
+				--at-apply: 'top-[calc(var(--slot-row-height)_/_2)]';
+			}
+		}
+
+		#rune-select-dialog-hover-tooltip {
+			--at-apply: 'b-2 inline-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
+			--width: 21.5rem;
+			inset-inline-start: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
+			inset-block-start: clamp(var(--height), var(--top), 100vh);
+			position-try: flip-block;
+
+			h4 {
+				--at-apply: 'font-600 text-white uppercase mb-1 tracking-wide';
+			}
+
+			> div {
+				--at-apply: 'text-neutral-300';
+
+				lol-uikit-tooltipped-keyword,
+				lol-uikit-tooltipped-keyword font {
+					--at-apply: 'text-white';
+				}
+
+				rules {
+					color: inherit;
+				}
+
+				li {
+					--at-apply: 'ms-5';
+
+					/* WORKAROUND for grasp of undying that has nested <rules>, maybe need to parse it properly if more things do it */
+					rules {
+						--at-apply: '-ms-5 block';
+					}
+				}
+			}
+
+			> p.alert {
+				--at-apply: 'mt-[--unknown-alert-mt]';
+			}
 		}
 	}
 }
