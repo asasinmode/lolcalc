@@ -793,6 +793,13 @@ defineExpose({
 						1px
 				);
 
+				@media (width < 760px) {
+					& {
+						--secondary-slot-first-dot-translate-y: calc(var(--slot-row-height) / 2);
+						--secondary-slot-second-dot-translate-y: calc(var(--slot-row-height) / 2);
+					}
+				}
+
 				&:nth-of-type(n + 2) {
 					--selected-dot-translate-y: var(--secondary-slot-first-dot-translate-y);
 
