@@ -754,6 +754,7 @@ export const ITEM_SPECIFICS = {
 						return;
 					}
 
+					calculatedVariables.manaMuraManaToAd = ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					const bonusAD = ((miscDebug.tearItemBonusMana ?? 0) + baseOnLevelStats.mana) * ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					itemPassivesStats.attackDamage += bonusAD;
 					itemTotalStats.attackDamage += bonusAD;
@@ -789,6 +790,7 @@ export const ITEM_SPECIFICS = {
 						return;
 					}
 
+					calculatedVariables.manaMuraManaToAd = ITEMS_BY_NAME.muramana?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					calculatedVariables.manaMuraAwe = (itemTotalStats.mana + baseOnLevelStats.mana) * ITEMS_BY_NAME.muramana?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient;
 					itemPassivesStats.attackDamage += calculatedVariables.manaMuraAwe;
 					itemTotalStats.attackDamage += calculatedVariables.manaMuraAwe;
@@ -834,6 +836,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, args, meta) {
+					meta.calculatedVariables.approachFimbulManaToHp = ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA;
 					tearItem.calculateHookPreItemTotal.handler(self, args, meta);
 					const bonusHP = (meta.miscDebug.tearItemBonusMana ?? 0) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.wintersApproach].HP_FROM_MANA;
 					args.itemPassivesStats.hp += bonusHP;
@@ -875,6 +878,8 @@ export const ITEM_SPECIFICS = {
 					if (!self.hasMana.value) {
 						return;
 					}
+
+					calculatedVariables.approachFimbulManaToHp = ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA;
 					const bonusHP = (itemBaseStats.mana + itemPassivesStats.mana) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.fimbulwinter].HP_FROM_MANA;
 					itemPassivesStats.hp += bonusHP;
 					calculatedVariables.approachFimbulAwe = bonusHP;
@@ -2194,7 +2199,8 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
-					const value = (itemBaseStats.hp + itemPassivesStats.hp) * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
+					calculatedVariables.bloodmailTyrannyBonusHpToAd = ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
+					const value = (itemBaseStats.hp + itemPassivesStats.hp) * calculatedVariables.bloodmailTyrannyBonusHpToAd;
 					miscDebug.bloodmailBonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
 					calculatedVariables.bloodmailTyranny = value;
 					itemPassivesStats.attackDamage += value;
@@ -2237,8 +2243,8 @@ export const ITEM_SPECIFICS = {
 
 					const retributionBaseTotal = totalStats.attackDamage - (dragonStats.attackDamage ?? 0) - calculatedVariables.bloodmailRetributionExcludedAd;
 
-					miscDebug.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
-					calculatedVariables.bloodmailRetribution = retributionBaseTotal * miscDebug.bloodmailRetributionPercentage;
+					calculatedVariables.bloodmailRetributionPercentage = ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].BONUS_AD_PERCENTAGE(self, totalStats.hp);
+					calculatedVariables.bloodmailRetribution = retributionBaseTotal * calculatedVariables.bloodmailRetributionPercentage;
 
 					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;
 					itemTotalStats.attackDamage += calculatedVariables.bloodmailRetribution;

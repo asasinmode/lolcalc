@@ -1479,7 +1479,7 @@ export const CHAMPION_SPECIFICS = {
 		}),
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStatMultipliers }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStatMultipliers }, { calculatedVariables }) {
 					const apToMana = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
@@ -1499,14 +1499,28 @@ export const CHAMPION_SPECIFICS = {
 					console.log({
 						apToManaRatio,
 						itemTotalAp: itemTotalStats.abilityPower,
+						itemTotalAd: itemTotalStats.attackDamage,
+						itemTotalHp: itemTotalStats.hp,
 						itemTotalMana: itemTotalStats.mana,
 						bonusAp: bonusStats.abilityPower,
+						bonusAd: bonusStats.attackDamage,
+						bonusHp: bonusStats.hp,
 						bonusMana: bonusStats.mana,
 						totalAp: totalStats.abilityPower,
+						totalAd: totalStats.attackDamage,
+						totalHp: totalStats.hp,
 						totalMana: totalStats.mana,
+						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
+						dragonApMultiplier: dragonStatMultipliers.abilityPower,
+						dragonAdMultiplier: dragonStatMultipliers.attackDamage,
 						seraphManaToAp: calculatedVariables.archangelSeraphManaToAp,
 						rabadonApMultiplier: calculatedVariables.rabadonApMultiplier,
 						totalItemApMultipliers: calculatedVariables.totalItemApMultipliers,
+						muramanaManaToAd: calculatedVariables.manaMuraManaToAd,
+						approachFimbulManaToHp: calculatedVariables.approachFimbulManaToHp,
+						riftmakerBonusHPToAP: calculatedVariables.riftmakerBonusHPToAP,
+						bloodmailTyrannyBonusHpToAd: calculatedVariables.bloodmailTyrannyBonusHpToAd,
+						bloodmailRetributionPercentage: calculatedVariables.bloodmailRetributionPercentage,
 					});
 
 					const seraphManaToAp = calculatedVariables.archangelSeraphManaToAp ?? 0;
@@ -1527,6 +1541,20 @@ export const CHAMPION_SPECIFICS = {
 					totalStats.mana += passiveMana;
 					bonusStats.mana += passiveMana;
 					championPassiveStats.mana = passiveMana;
+
+					if (calculatedVariables.manaMuraManaToAd) {
+						const passiveAd = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
+						totalStats.attackDamage += passiveAd;
+						bonusStats.attackDamage += passiveAd;
+						calculatedVariables.manaMuraAwe! += passiveAd;
+					}
+
+					if (calculatedVariables.approachFimbulManaToHp) {
+						const passiveHp = passiveMana * (calculatedVariables.approachFimbulManaToHp ?? 0);
+						totalStats.hp += passiveHp;
+						bonusStats.hp += passiveHp;
+						calculatedVariables.approachFimbulAwe! += passiveHp;
+					}
 
 					if (passiveAp > 0) {
 						const basePassiveAp = passiveAp / totalApMultiplier;

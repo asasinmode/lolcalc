@@ -165,8 +165,12 @@ export interface IStatsCalculationVariables {
 	archangelSeraphManaToAp?: number;
 	/** ad gained from manamune/muramana's passive */
 	manaMuraAwe?: number;
+	/** mana to ad % from manamune/muramana's passive */
+	manaMuraManaToAd?: number;
 	/** hp gained from winter's approach/fimbulwinter's passive */
 	approachFimbulAwe?: number;
+	/** mana to hp % from winter's approach/fimbulwinter's passive */
+	approachFimbulManaToHp?: number;
 	/** heal shield power gained from whispering circlet's/diadem of songs passive */
 	whisperingDiademAwe?: number;
 	/** attack speed value reduced by frozen heart's passive */
@@ -175,8 +179,12 @@ export interface IStatsCalculationVariables {
 	nasusWitheredAS?: number;
 	/** ad gained from overlord's bloodmail bonus hp to ad passive */
 	bloodmailTyranny?: number;
+	/** bonus hp to ad from overlord's bloodmail passive */
+	bloodmailTyrannyBonusHpToAd?: number;
 	/** ad gained from overlord's bloodmail missing hp ad increase passive */
 	bloodmailRetribution?: number;
+	/** % ad gained from bloodmail's retribution passive */
+	bloodmailRetributionPercentage?: number;
 	/** omnivamp gained from endless hunger's feast passive */
 	endlessOmnivamp?: number;
 	/** ability haste gained from endless hunger's famine passive */
@@ -280,8 +288,6 @@ export interface IStatsCalculationMiscDebug {
 	riftmakerBonusHp?: number;
 	/** bonus hp overlord's bloodmail's passive is based on */
 	bloodmailBonusHp?: number;
-	/** % ad gained from bloodmail's retribution passive */
-	bloodmailRetributionPercentage?: number;
 	/** bonus mana tear items' passives calculations are based on */
 	tearItemBonusMana?: number;
 	/** bonus hp endless hunger's famine passive is based on */

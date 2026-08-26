@@ -292,7 +292,7 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 			assert.equal(damageSource.maxAbilityResource.value, 2757);
 		});
 
-		await t.test('blackfire torch+, seraph, rabadon', { only: true }, async () => {
+		await t.test('blackfire torch+, seraph, rabadon', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Ryze', {
 				...sourceCommon,
 				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.rabadon],
@@ -303,6 +303,35 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 				abilityPower: 466,
 			}, damageSource);
 			assert.equal(damageSource.maxAbilityResource.value, 2785);
+		});
+
+		await t.test('seraph, muramana, fimbulwinter', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 166,
+				abilityPower: 158,
+			}, damageSource);
+			assert.equal(damageSource.maxHealth.value, 1764);
+			assert.equal(damageSource.maxAbilityResource.value, 3822);
+		});
+
+		await t.test('seraph, muramana, bloodmail', { only: true }, async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.overlordsBloodmail],
+				currentHealth: 373,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 221,
+				abilityPower: 115,
+			}, damageSource);
+			assert.equal(damageSource.maxHealth.value, 1235);
+			assert.equal(damageSource.maxAbilityResource.value, 2565);
 		});
 	});
 });
