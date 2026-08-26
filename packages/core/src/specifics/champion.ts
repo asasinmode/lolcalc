@@ -1,4 +1,3 @@
-import type { TMiscData } from '@lolcalc/data';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type IAshe from '@lolcalc/data/files/champion/Ashe.json';
 import type IBard from '@lolcalc/data/files/champion/Bard.json';
@@ -1535,6 +1534,7 @@ export const CHAMPION_SPECIFICS = {
 
 					const passiveManaMultiplier = finalAp * apToManaRatio;
 					const passiveMana = totalStats.mana * passiveManaMultiplier;
+					let passiveAd, passiveHp;
 
 					calculatedVariables.ryzePassivePercentManaIncrease = passiveManaMultiplier;
 
@@ -1543,18 +1543,20 @@ export const CHAMPION_SPECIFICS = {
 					championPassiveStats.mana = passiveMana;
 
 					if (calculatedVariables.manaMuraManaToAd) {
-						const passiveAd = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
+						passiveAd = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
 						totalStats.attackDamage += passiveAd;
 						bonusStats.attackDamage += passiveAd;
 						calculatedVariables.manaMuraAwe! += passiveAd;
 					}
 
 					if (calculatedVariables.approachFimbulManaToHp) {
-						const passiveHp = passiveMana * (calculatedVariables.approachFimbulManaToHp ?? 0);
+						passiveHp = passiveMana * (calculatedVariables.approachFimbulManaToHp ?? 0);
 						totalStats.hp += passiveHp;
 						bonusStats.hp += passiveHp;
 						calculatedVariables.approachFimbulAwe! += passiveHp;
 					}
+
+					console.log({ passiveMana, passiveAd, passiveHp });
 
 					if (passiveAp > 0) {
 						const basePassiveAp = passiveAp / totalApMultiplier;

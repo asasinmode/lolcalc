@@ -986,6 +986,39 @@
 				"APAmp": 0.3
 			}
 		},
+		"3121": {
+			"searchString": "fimbulwinter;health;mana;abilityhaste",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatHPPoolMod": 550,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"Cooldown": 8,
+				"ShieldDuration": 3,
+				"CurrentManaShieldRatio": 0.045,
+				"Multiplier": 0.8
+			},
+			"itemCalculations": {
+				"BonusHPFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.15,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ShieldBase": {
+					"mFormulaParts": [
+						{
+							"mNumber": 100,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3143": {
 			"searchString": "randuinsomen;health;armor;active;slow",
 			"stats": {
