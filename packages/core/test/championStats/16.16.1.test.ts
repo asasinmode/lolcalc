@@ -1,4 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import type { IDragonName, IItem } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
@@ -243,7 +244,7 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 	await t.test('base', { only: true }, async (t) => {
 		t.runOnly(true);
 
-		await t.test('blackfire torch', { only: true }, async () => {
+		await t.test('blackfire torch', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Ryze', {
 				...sourceCommon,
 				items: [ITEMS_BY_NAME.blackfireTorch],
@@ -253,6 +254,55 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 				abilityPower: 98,
 			}, damageSource);
 			assert.equal(damageSource.maxAbilityResource.value, 988);
+		});
+
+		await t.test('blackfire torch, rabadon', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.rabadon],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 296,
+			}, damageSource);
+			assert.equal(damageSource.maxAbilityResource.value, 1166);
+		});
+
+		await t.test('blackfire torch, seraph', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.seraphsEmbrace],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 208,
+			}, damageSource);
+			assert.equal(damageSource.maxAbilityResource.value, 2295);
+		});
+
+		await t.test('blackfire torch, seraph, rabadon', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.rabadon],
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 451,
+			}, damageSource);
+			assert.equal(damageSource.maxAbilityResource.value, 2757);
+		});
+
+		await t.test('blackfire torch+, seraph, rabadon', { only: true }, async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.rabadon],
+				internalItemData: { bBlaze: 1 } satisfies IInternalItemDataOf<'blackfireTorch'>,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				abilityPower: 466,
+			}, damageSource);
+			assert.equal(damageSource.maxAbilityResource.value, 2785);
 		});
 	});
 });

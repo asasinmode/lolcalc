@@ -1479,7 +1479,7 @@ export const CHAMPION_SPECIFICS = {
 		}),
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, totalMultipliersStats, championPassiveStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, totalMultipliersStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStatMultipliers }, { calculatedVariables, miscDebug }) {
 					const apToMana = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
@@ -1496,14 +1496,60 @@ export const CHAMPION_SPECIFICS = {
 
 					const apToManaRatio = apToMana.value / 10_000;
 
-					const passiveManaMultiplier = totalStats.abilityPower * apToManaRatio;
+					console.log({
+						apToManaRatio,
+						itemTotalAp: itemTotalStats.abilityPower,
+						itemTotalMana: itemTotalStats.mana,
+						bonusAp: bonusStats.abilityPower,
+						bonusMana: bonusStats.mana,
+						totalAp: totalStats.abilityPower,
+						totalMana: totalStats.mana,
+						seraphManaToAp: calculatedVariables.archangelSeraphManaToAp,
+						rabadonApMultiplier: calculatedVariables.rabadonApMultiplier,
+						totalItemApMultipliers: calculatedVariables.totalItemApMultipliers,
+					});
+
+					const seraphManaToAp = calculatedVariables.archangelSeraphManaToAp ?? 0;
+
+					const totalApMultiplier = (calculatedVariables.totalItemApMultipliers ?? 1)
+						+ (dragonStatMultipliers?.abilityPower ?? 0)
+						+ (calculatedVariables.midQuestMultiplier ?? 0);
+
+					const loopDenominator = 1 - (totalStats.mana * apToManaRatio * seraphManaToAp * totalApMultiplier);
+					const finalAp = totalStats.abilityPower / loopDenominator;
+					const passiveAp = finalAp - totalStats.abilityPower;
+
+					const passiveManaMultiplier = finalAp * apToManaRatio;
 					const passiveMana = totalStats.mana * passiveManaMultiplier;
 
-					calculatedVariables.ryzePassiveMana = passiveMana;
+					calculatedVariables.ryzePassivePercentManaIncrease = passiveManaMultiplier;
 
-					championPassiveStats.mana = passiveMana;
 					totalStats.mana += passiveMana;
 					bonusStats.mana += passiveMana;
+					championPassiveStats.mana = passiveMana;
+
+					if (passiveAp > 0) {
+						const basePassiveAp = passiveAp / totalApMultiplier;
+						calculatedVariables.apMultipliersBase += basePassiveAp;
+
+						totalStats.abilityPower += passiveAp;
+						bonusStats.abilityPower += passiveAp;
+						championPassiveStats.abilityPower = passiveAp;
+
+						if (calculatedVariables.rabadonApMultiplier) {
+							const rabadonBonusAp = basePassiveAp * calculatedVariables.rabadonApMultiplier;
+							calculatedVariables.rabadonMagicalOpus! += rabadonBonusAp;
+							itemPassivesStats.abilityPower += rabadonBonusAp;
+							itemTotalStats.abilityPower += rabadonBonusAp;
+						}
+
+						if (calculatedVariables.blackfireTorchBBlazeMultiplier) {
+							const bBlazeBonusAp = basePassiveAp * calculatedVariables.blackfireTorchBBlazeMultiplier;
+							calculatedVariables.blackfireTorchBBlazeAP! += bBlazeBonusAp;
+							itemPassivesStats.abilityPower += bBlazeBonusAp;
+							itemTotalStats.abilityPower += bBlazeBonusAp;
+						}
+					}
 				},
 				priority: HOOK_PRIORITIES.postTotal.Ryze,
 			},
