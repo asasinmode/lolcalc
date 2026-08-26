@@ -634,17 +634,17 @@ defineExpose({
 					</ul>
 				</div>
 			</section>
-			<h2 class="sr-only" aria-live="polite">
+			<h2 aria-live="polite">
 				{{ selectedCategory }} items
 			</h2>
 			<template
 				v-for="[epicness, epicnessName] in computedEpicnesses"
 				:key="epicness"
 			>
-				<h3 class="font-700 mb-1 uppercase">
+				<h3>
 					{{ epicnessName }}
 				</h3>
-				<ul class="mb-5 gap-3 grid grid-cols-10 last:mb-0">
+				<ul>
 					<li v-for="shopItem in groupedByEpicness[epicness]" :key="shopItem.item.id">
 						<button
 							class="item-shop-item-btn"
@@ -974,12 +974,6 @@ defineExpose({
 
 		@media (height <= 524px) {
 			& {
-				grid-template-areas:
-					'header header builds-into'
-					'aside boots builds-into'
-					'aside items builds-into'
-					'footer footer builds-into';
-				grid-template-rows: auto auto 1fr auto;
 			}
 		}
 
@@ -1396,6 +1390,16 @@ defineExpose({
 			}
 		}
 
+		#item-shop-panel-boots {
+			> h2 {
+				@media (height <= 524px) {
+					& {
+						--at-apply: 'not-sr-only';
+					}
+				}
+			}
+		}
+
 		.item-shop-item-btn {
 			--at-apply: 'p-[--p] -m-1';
 			--p: calc(1 * var(--spacing));
@@ -1606,6 +1610,18 @@ defineExpose({
 			&:nth-of-type(1) {
 				--at-apply: 'b-t b-[--ui-btn-border-clr] px-3 py-2 overflow-y-auto';
 				grid-area: items;
+
+				> h2 {
+					--at-apply: 'sr-only';
+				}
+
+				> h3 {
+					--at-apply: 'font-700 mb-1 uppercase';
+				}
+
+				> ul {
+					--at-apply: 'mb-5 gap-3 grid grid-cols-10 last:mb-0';
+				}
 			}
 
 			&:nth-of-type(2) {
@@ -1718,12 +1734,16 @@ defineExpose({
 					--at-apply: 'hidden';
 				}
 
+				> h2 {
+					--at-apply: 'font-700 mb-1 uppercase';
+				}
+
 				> div {
 					--at-apply: 'block-auto';
 				}
 
 				ul {
-					--at-apply: 'p-0 flex flex-wrap';
+					--at-apply: 'p-0 flex flex-wrap mb-5 gap-3';
 					direction: ltr;
 				}
 			}
