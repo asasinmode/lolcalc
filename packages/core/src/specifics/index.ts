@@ -20,8 +20,10 @@ export const HOOK_PRIORITIES = {
 	},
 	preBonus: {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 10,
-		/** must be after riftmaker, which will be the default `0` */
+		/** must be after riftmaker and archangel/seraph, which will be the default `0` */
 		[ITEM_NAME_TO_ID.rabadon]: 1,
+		/** must be after riftmaker and archangel/seraph, which will be the default `0` */
+		[ITEM_NAME_TO_ID.blackfireTorch]: 1,
 	},
 	onTotalPreMultipliers: {
 		cleanse: -1,

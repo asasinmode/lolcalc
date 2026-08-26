@@ -323,6 +323,7 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 					itemTotalStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 				},
+				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 			onTotalPreMultipliers: {
 				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
@@ -662,6 +663,7 @@ export const ITEM_SPECIFICS = {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					const bonusAP = (miscDebug.tearItemBonusMana ?? 0) * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.archangelsStaff].AP_FROM_MANA;
+					calculatedVariables.archangelSeraphManaToAp = ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.archangelsStaff].AP_FROM_MANA;
 					calculatedVariables.apMultipliersBase += bonusAP;
 					itemPassivesStats.abilityPower += bonusAP;
 					itemTotalStats.abilityPower += bonusAP;
@@ -704,6 +706,7 @@ export const ITEM_SPECIFICS = {
 						return;
 					}
 					calculatedVariables.archangelSeraphAwe = itemTotalStats.mana * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA;
+					calculatedVariables.archangelSeraphManaToAp = ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.seraphsEmbrace].AP_FROM_MANA;
 					calculatedVariables.apMultipliersBase += calculatedVariables.archangelSeraphAwe;
 					itemPassivesStats.abilityPower += calculatedVariables.archangelSeraphAwe;
 					itemTotalStats.abilityPower += calculatedVariables.archangelSeraphAwe;
@@ -735,6 +738,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ShieldValue: {
 					type: VariableType.shield,
+					roundReplaced: 0,
 				},
 			},
 			uninteresting: ['f5', 'ShieldDuration', 'HealthThreshold'],
@@ -1979,6 +1983,7 @@ export const ITEM_SPECIFICS = {
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 					const value = calculatedVariables.apMultipliersBase * ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER;
+					calculatedVariables.rabadonApMultiplier = ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER;
 					calculatedVariables.totalItemApMultipliers += ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER;
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;

@@ -156,9 +156,13 @@ export interface IStatsCalculationVariables {
 	/** mana regen % gained from items (`1` = 100%, `1.5` would be 150%) */
 	baseItemManaRegenPercent: number;
 	/** ap gained from rabadon's passive */
+	rabadonApMultiplier?: number;
+	/** ap multiplier of rabadon's passive */
 	rabadonMagicalOpus?: number;
 	/** ap gained from archangel/seraph's passive */
 	archangelSeraphAwe?: number;
+	/** mana to ap % from archangel/seraph's passive */
+	archangelSeraphManaToAp?: number;
 	/** ad gained from manamune/muramana's passive */
 	manaMuraAwe?: number;
 	/** hp gained from winter's approach/fimbulwinter's passive */
