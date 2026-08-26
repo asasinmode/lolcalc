@@ -960,6 +960,11 @@ defineExpose({
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
 		--header-px: calc(3 * var(--spacing));
+		/* is texture button and it's width is set in the textureBgImageAttrs call */
+		--clear-filters-btn-w: calc(7 * var(--spacing));
+		--items-px: calc(3 * var(--spacing));
+		--items-gap: calc(3 * var(--spacing));
+		--items-max-cols: 10;
 
 		&[open] {
 			--at-apply: 'grid';
@@ -970,7 +975,13 @@ defineExpose({
 			'aside items builds-into'
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
-		grid-template-columns: auto 1fr 32rem;
+		grid-template-columns:
+			max-content
+			calc(
+				var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
+					var(--items-px)
+			)
+			32rem;
 
 		@media (height <= 524px) {
 			& {
@@ -1608,7 +1619,7 @@ defineExpose({
 
 		> section {
 			&:nth-of-type(1) {
-				--at-apply: 'b-t b-[--ui-btn-border-clr] px-3 py-2 overflow-y-auto';
+				--at-apply: 'b-t b-[--ui-btn-border-clr] px-[--items-px] py-2 overflow-y-auto';
 				grid-area: items;
 
 				> h2 {
@@ -1620,7 +1631,7 @@ defineExpose({
 				}
 
 				> ul {
-					--at-apply: 'mb-5 gap-3 grid grid-cols-10 last:mb-0';
+					--at-apply: 'mb-5 gap-[--items-gap] grid grid-cols-[repeat(auto-fit,calc(var(--item-img-size)))] last:mb-0';
 				}
 			}
 
