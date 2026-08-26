@@ -591,49 +591,49 @@ defineExpose({
 				</template>
 			</fieldset>
 		</aside>
-		<section id="item-shop-panel-boots" :data-pinned="bootsPanelPinned || undefined">
-			<h2>boots</h2>
-			<button
-				class="pin-button"
-				@click="bootsPanelPinned = !bootsPanelPinned"
-			>
-				<span>Pin boots panel</span>
-				<img
-					v-bind="textureBgImageAttrs(UI.shop.pin.default, 28)"
-					:style="`--txt-hover-uv-start-x: -${UI.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${UI.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${UI.shop.pin.slcHover.uv[1]}px`"
+		<section>
+			<section id="item-shop-panel-boots" :data-pinned="bootsPanelPinned || undefined">
+				<h2>boots</h2>
+				<button
+					class="pin-button"
+					@click="bootsPanelPinned = !bootsPanelPinned"
 				>
-			</button>
-			<Icon class="i-ph:caret-left-bold caret" />
-			<div>
-				<ul>
-					<li v-for="shopItem in bootItems" :key="shopItem.item.id">
-						<button
-							class="item-shop-item-btn"
-							:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
-							:data-buyability="shopItem.buyability"
-							:data-bought="shopItem.isBought ? '' : undefined"
-							@mouseenter="enterTooltipableElement($event, shopItem)"
-							@click="selectItem(shopItem, true)"
-							@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
-							@dblclick="buyItem(shopItem.item, shopItem.buyability)"
-						>
-							<span>{{ shopItem.item.name }}</span>
-							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
-								:alt="shopItem.item.name"
-								width="64"
-								height="64"
-								aria-hidden="true"
-								loading="lazy"
+					<span>Pin boots panel</span>
+					<img
+						v-bind="textureBgImageAttrs(UI.shop.pin.default, 28)"
+						:style="`--txt-hover-uv-start-x: -${UI.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${UI.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${UI.shop.pin.slcHover.uv[1]}px`"
+					>
+				</button>
+				<Icon class="i-ph:caret-left-bold caret" />
+				<div>
+					<ul>
+						<li v-for="shopItem in bootItems" :key="shopItem.item.id">
+							<button
+								class="item-shop-item-btn"
+								:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
+								:data-buyability="shopItem.buyability"
+								:data-bought="shopItem.isBought ? '' : undefined"
+								@mouseenter="enterTooltipableElement($event, shopItem)"
+								@click="selectItem(shopItem, true)"
+								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
+								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 							>
-							<span class="sr-status">{{ shopItem.srStatus }}</span>
-							<span>{{ shopItem.calculatedPrice }}</span>
-						</button>
-					</li>
-				</ul>
-			</div>
-		</section>
-		<section style="grid-area: items;" class="px-3 py-2 overflow-y-auto">
+								<span>{{ shopItem.item.name }}</span>
+								<img
+									:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
+									:alt="shopItem.item.name"
+									width="64"
+									height="64"
+									aria-hidden="true"
+									loading="lazy"
+								>
+								<span class="sr-status">{{ shopItem.srStatus }}</span>
+								<span>{{ shopItem.calculatedPrice }}</span>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</section>
 			<h2 class="sr-only" aria-live="polite">
 				{{ selectedCategory }} items
 			</h2>
@@ -971,6 +971,17 @@ defineExpose({
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns: auto 1fr 32rem;
+
+		@media (height <= 524px) {
+			& {
+				grid-template-areas:
+					'header header builds-into'
+					'aside boots builds-into'
+					'aside items builds-into'
+					'footer footer builds-into';
+				grid-template-rows: auto auto 1fr auto;
+			}
+		}
 
 		:where(
 			#item-shop-search-listbox > li,
@@ -1592,11 +1603,12 @@ defineExpose({
 		}
 
 		> section {
-			&:nth-of-type(2) {
-				--at-apply: 'b-t b-[--ui-btn-border-clr]';
+			&:nth-of-type(1) {
+				--at-apply: 'b-t b-[--ui-btn-border-clr] px-3 py-2 overflow-y-auto';
+				grid-area: items;
 			}
 
-			&:nth-of-type(3) {
+			&:nth-of-type(2) {
 				--at-apply: 'flex flex-col p-3 pt-4 of-y-auto b-s b-[--ui-btn-border-clr]';
 				grid-area: builds-into;
 
@@ -1690,6 +1702,30 @@ defineExpose({
 		> footer > button {
 			&:disabled {
 				--at-apply: 'b-neutral-500 text-neutral-400 bg-neutral-800 hoverable:bg-neutral-800';
+			}
+		}
+	}
+}
+
+@layer overrides {
+	#dialog-item-shop {
+		@media (height <= 524px) {
+			#item-shop-panel-boots {
+				--at-apply: 'static p-0 translate-0 z-auto b-0';
+				grid-area: boots;
+
+				.pin-button {
+					--at-apply: 'hidden';
+				}
+
+				> div {
+					--at-apply: 'block-auto';
+				}
+
+				ul {
+					--at-apply: 'p-0 flex flex-wrap';
+					direction: ltr;
+				}
 			}
 		}
 	}
