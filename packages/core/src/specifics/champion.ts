@@ -1494,7 +1494,16 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					console.log('ryzing', apToMana.value);
+					const apToManaRatio = apToMana.value / 10_000;
+
+					const passiveManaMultiplier = totalStats.abilityPower * apToManaRatio;
+					const passiveMana = totalStats.mana * passiveManaMultiplier;
+
+					calculatedVariables.ryzePassiveMana = passiveMana;
+
+					championPassiveStats.mana = passiveMana;
+					totalStats.mana += passiveMana;
+					bonusStats.mana += passiveMana;
 				},
 				priority: HOOK_PRIORITIES.postTotal.Ryze,
 			},
