@@ -824,6 +824,55 @@
 				}
 			}
 		},
+		"3042": {
+			"searchString": "muramana;damage;mana;cooldownreduction;onhit;armorpenetration;attackdamage",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatPhysicalDamageMod": 35,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"BonusADManaRatioTOOLTIPONLY": 0.02,
+				"OnHitManaRatioTOOLTIPONLY": 0.012,
+				"AbilityManaRatioRangedTOOLTIPONLY": 0.03,
+				"PerCastIDLockout": 6.5,
+				"AbilityManaRatioMeleeTOOLTIPONLY": 0.04
+			},
+			"itemCalculations": {
+				"BonusADFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.012,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.04,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.03,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3071": {
 			"name": "Black Cleaver",
 			"stats": {
