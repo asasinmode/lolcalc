@@ -1534,7 +1534,6 @@ export const CHAMPION_SPECIFICS = {
 
 					const passiveManaMultiplier = finalAp * apToManaRatio;
 					const passiveMana = totalStats.mana * passiveManaMultiplier;
-					let passiveAd, passiveHp;
 
 					calculatedVariables.ryzePassivePercentManaIncrease = passiveManaMultiplier;
 
@@ -1543,20 +1542,20 @@ export const CHAMPION_SPECIFICS = {
 					championPassiveStats.mana = passiveMana;
 
 					if (calculatedVariables.manaMuraManaToAd) {
-						passiveAd = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
-						totalStats.attackDamage += passiveAd;
-						bonusStats.attackDamage += passiveAd;
-						calculatedVariables.manaMuraAwe! += passiveAd;
+						championPassiveStats.attackDamage = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
+						totalStats.attackDamage += championPassiveStats.attackDamage;
+						bonusStats.attackDamage += championPassiveStats.attackDamage;
+						calculatedVariables.manaMuraAwe! += championPassiveStats.attackDamage;
 					}
 
 					if (calculatedVariables.approachFimbulManaToHp) {
-						passiveHp = passiveMana * (calculatedVariables.approachFimbulManaToHp ?? 0);
-						totalStats.hp += passiveHp;
-						bonusStats.hp += passiveHp;
-						calculatedVariables.approachFimbulAwe! += passiveHp;
+						championPassiveStats.hp = passiveMana * (calculatedVariables.approachFimbulManaToHp ?? 0);
+						totalStats.hp += championPassiveStats.hp;
+						bonusStats.hp += championPassiveStats.hp;
+						calculatedVariables.approachFimbulAwe! += championPassiveStats.hp;
 					}
 
-					console.log({ passiveMana, passiveAd, passiveHp });
+					console.log({ passiveMana, passiveAd: championPassiveStats.ad, passiveHp: championPassiveStats.hp });
 
 					if (passiveAp > 0) {
 						const basePassiveAp = passiveAp / totalApMultiplier;
