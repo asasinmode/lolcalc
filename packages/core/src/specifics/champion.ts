@@ -1479,33 +1479,6 @@ export const CHAMPION_SPECIFICS = {
 
 					const apToManaRatio = apToMana.value / 10_000;
 
-					console.log({
-						apToManaRatio,
-						itemTotalAp: itemTotalStats.abilityPower,
-						itemTotalAd: itemTotalStats.attackDamage,
-						itemTotalHp: itemTotalStats.hp,
-						itemTotalMana: itemTotalStats.mana,
-						bonusAp: bonusStats.abilityPower,
-						bonusAd: bonusStats.attackDamage,
-						bonusHp: bonusStats.hp,
-						bonusMana: bonusStats.mana,
-						totalAp: totalStats.abilityPower,
-						totalAd: totalStats.attackDamage,
-						totalHp: totalStats.hp,
-						totalMana: totalStats.mana,
-						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
-						dragonApMultiplier: dragonStatMultipliers.abilityPower,
-						dragonAdMultiplier: dragonStatMultipliers.attackDamage,
-						seraphManaToAp: calculatedVariables.archangelSeraphManaToAp,
-						rabadonApMultiplier: calculatedVariables.rabadonApMultiplier,
-						totalItemApMultipliers: calculatedVariables.totalItemApMultipliers,
-						muramanaManaToAd: calculatedVariables.manaMuraManaToAd,
-						approachFimbulManaToHp: calculatedVariables.approachFimbulManaToHp,
-						riftmakerBonusHPToAP: calculatedVariables.riftmakerBonusHPToAP,
-						bloodmailTyrannyBonusHpToAd: calculatedVariables.bloodmailTyrannyBonusHpToAd,
-						bloodmailRetributionPercentage: calculatedVariables.bloodmailRetributionPercentage,
-					});
-
 					const seraphManaToAp = calculatedVariables.archangelSeraphManaToAp ?? 0;
 					const muramanaManaToAd = calculatedVariables.manaMuraManaToAd ?? 0;
 					const approachFimbulManaToHp = calculatedVariables.approachFimbulManaToHp ?? 0;
