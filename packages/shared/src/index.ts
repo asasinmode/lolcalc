@@ -70,7 +70,6 @@ export interface IStatsCalculationResult {
 	effect: IChampionStats;
 	total: IChampionStats;
 	meta: {
-		hasMana: boolean;
 		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
 	};
 	/** see the type definition for info */

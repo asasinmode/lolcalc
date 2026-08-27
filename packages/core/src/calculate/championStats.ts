@@ -383,7 +383,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	return {
 		meta: {
-			hasMana: !champion || champion.partype === 'mana',
 			adaptiveForceStatVariable: adaptiveForceMeta[1],
 		},
 		isRanged,
