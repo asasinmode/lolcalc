@@ -395,6 +395,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	return {
 		meta: {
+			adaptiveForceStat: adaptiveForceMeta[0],
 			adaptiveForceStatVariable: adaptiveForceMeta[1],
 		},
 		isRanged,
