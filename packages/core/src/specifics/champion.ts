@@ -1462,7 +1462,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStatMultipliers }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStats, dragonStatMultipliers }, { calculatedVariables, miscDebug }) {
 					const apToMana = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
@@ -1527,7 +1527,7 @@ export const CHAMPION_SPECIFICS = {
 
 					const passiveHp = passiveMana * approachFimbulManaToHp;
 					const basePassiveAp = (passiveMana * seraphManaToAp) + (passiveHp * riftmakerBonusHPToAP);
-					const basePassiveAd = passiveMana * muramanaManaToAd;
+					let basePassiveAd = passiveMana * muramanaManaToAd;
 
 					totalStats.mana += passiveMana;
 					bonusStats.mana += passiveMana;
@@ -1542,6 +1542,10 @@ export const CHAMPION_SPECIFICS = {
 					}
 
 					if (basePassiveAd > 0) {
+						const dragonAd = basePassiveAd * dragonStatMultipliers.attackDamage;
+						dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + dragonAd;
+
+						basePassiveAd += dragonAd;
 						championPassiveStats.attackDamage = basePassiveAd;
 						totalStats.attackDamage += basePassiveAd;
 						bonusStats.attackDamage += basePassiveAd;
