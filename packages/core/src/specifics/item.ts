@@ -316,7 +316,7 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preBonus: {
 				handler(self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const multiplier = self.internalItemData.value.bBlaze * ITEMS_BY_NAME.blackfireTorch?.dataValues.APPerStack;
+					const multiplier = (self.internalItemData.value.bBlaze ?? 0) * ITEMS_BY_NAME.blackfireTorch?.dataValues.APPerStack;
 					calculatedVariables.blackfireTorchBBlazeMultiplier = multiplier;
 					calculatedVariables.blackfireTorchBBlazeAP = calculatedVariables.apMultipliersBase * multiplier;
 					calculatedVariables.totalItemApMultipliers += multiplier;
