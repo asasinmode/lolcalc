@@ -385,6 +385,12 @@ export function championAbilityVariableValue(
 
 			if (abilityVariant.spellCalculations[variableName].mPrecision > 0) {
 				rv.roundReplaced ??= abilityVariant.spellCalculations[variableName].mPrecision;
+			} else if (abilityVariant.spellCalculations[variableName].mPrecision === -1) {
+				if (rv.roundReplaced === true) {
+					rv.roundReplaced = 2;
+				} else {
+					rv.roundReplaced ??= 2;
+				}
 			}
 		}
 	}
