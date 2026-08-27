@@ -326,14 +326,16 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 			onTotalPreMultipliers: {
-				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
-					if (calculatedVariables.swiftmarchAdaptive && adaptiveForceMeta[0] === 'abilityPower') {
-						const value = calculatedVariables.swiftmarchAdaptive * calculatedVariables.blackfireTorchBBlazeMultiplier!;
-						calculatedVariables.blackfireTorchBBlazeAP! += value;
-						itemPassivesStats.abilityPower += value;
-						totalMultipliersStats.abilityPower += value;
-						itemTotalStats.abilityPower += value;
+				handler(_self, { adaptiveForceMeta, runeShardStats, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
+					let ap = calculatedVariables.riftmakerRuneShardInfusion ?? 0;
+					if (adaptiveForceMeta[0] === 'abilityPower') {
+						ap += (runeShardStats.abilityPower ?? 0) + (calculatedVariables.swiftmarchAdaptive ?? 0);
 					}
+					const value = ap * calculatedVariables.blackfireTorchBBlazeMultiplier!;
+					calculatedVariables.blackfireTorchBBlazeAP! += value;
+					itemPassivesStats.abilityPower += value;
+					totalMultipliersStats.abilityPower += value;
+					itemTotalStats.abilityPower += value;
 				},
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.blackfireTorch],
 			},
@@ -577,13 +579,16 @@ export const ITEM_SPECIFICS = {
 				},
 				priority: HOOK_PRIORITIES.preItemTotal[ITEM_NAME_TO_ID.riftmaker],
 			},
-			preBonus: {
-				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+			onTotalPreMultipliers: {
+				handler(_self, { runeShardStats, totalPreMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					if (runeShardStats.hp) {
 						const value = runeShardStats.hp * ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
 						calculatedVariables.riftmakerVoidInfusion! += value;
+						calculatedVariables.riftmakerRuneShardInfusion = value;
 						itemPassivesStats.abilityPower += value;
 						itemTotalStats.abilityPower += value;
+						bonusStats.abilityPower += value;
+						totalPreMultipliersStats.abilityPower += value;
 
 						calculatedVariables.apMultipliersBase += value;
 						miscDebug.riftmakerBonusHp! += runeShardStats.hp;
@@ -1997,14 +2002,16 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.rabadon],
 			},
 			onTotalPreMultipliers: {
-				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
-					if (calculatedVariables.swiftmarchAdaptive && adaptiveForceMeta[0] === 'abilityPower') {
-						const value = calculatedVariables.swiftmarchAdaptive * ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER!;
-						calculatedVariables.rabadonMagicalOpus! += value;
-						itemPassivesStats.abilityPower += value;
-						totalMultipliersStats.abilityPower += value;
-						itemTotalStats.abilityPower += value;
+				handler(_self, { adaptiveForceMeta, runeShardStats, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
+					let ap = calculatedVariables.riftmakerRuneShardInfusion ?? 0;
+					if (adaptiveForceMeta[0] === 'abilityPower') {
+						ap += (runeShardStats.abilityPower ?? 0) + (calculatedVariables.swiftmarchAdaptive ?? 0);
 					}
+					const value = ap * calculatedVariables.rabadonApMultiplier!;
+					calculatedVariables.rabadonMagicalOpus! += value;
+					itemPassivesStats.abilityPower += value;
+					totalMultipliersStats.abilityPower += value;
+					itemTotalStats.abilityPower += value;
 				},
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.rabadon],
 			},
@@ -2207,12 +2214,14 @@ export const ITEM_SPECIFICS = {
 				},
 				priority: HOOK_PRIORITIES.preItemTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},
-			preBonus: {
-				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
+			onTotalPreMultipliers: {
+				handler(_self, { runeShardStats, bonusStats, totalPreMultipliersStats, itemPassivesStats, itemTotalStats }, { calculatedVariables, miscDebug }) {
 					if (runeShardStats.hp) {
 						const value = runeShardStats.hp * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
 						miscDebug.bloodmailBonusHp! += runeShardStats.hp;
 						calculatedVariables.bloodmailTyranny! += value;
+						bonusStats.attackDamage += value;
+						totalPreMultipliersStats.attackDamage += value;
 						itemPassivesStats.attackDamage += value;
 						itemTotalStats.attackDamage += value;
 					}

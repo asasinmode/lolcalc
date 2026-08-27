@@ -143,6 +143,8 @@ export interface IStatsCalculationVariables {
 	blackfireTorchBBlazeMultiplier?: number;
 	/** ap gained from riftmaker's passive */
 	riftmakerVoidInfusion?: number;
+	/** ap gained specifically from riftmaker's passive on rune shard stats hp - needed for rabadon/blackfire torch calc */
+	riftmakerRuneShardInfusion?: number;
 	/** if riftmaker is present - the multiplier, otherwise 0 */
 	riftmakerBonusHPToAP?: number;
 	/**
