@@ -319,7 +319,7 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 			assert.equal(damageSource.maxAbilityResource.value, 4604);
 		});
 
-		await t.test('seraph, muramana, fimbulwinter, bloodmail', { only: true }, async () => {
+		await t.test('seraph, muramana, fimbulwinter, bloodmail', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Ryze', {
 				...sourceCommon,
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.overlordsBloodmail],
@@ -356,10 +356,10 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				attackDamage: 174,
-				abilityPower: 265,
+				abilityPower: 267,
 			}, damageSource);
-			assert.equal(damageSource.maxHealth.value, 2114);
-			assert.equal(damageSource.maxAbilityResource.value, 4175);
+			assert.equal(damageSource.maxHealth.value, 2167);
+			assert.equal(damageSource.maxAbilityResource.value, 4179);
 		});
 	});
 });

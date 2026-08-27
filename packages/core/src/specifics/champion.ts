@@ -1523,58 +1523,84 @@ export const CHAMPION_SPECIFICS = {
 					});
 
 					const seraphManaToAp = calculatedVariables.archangelSeraphManaToAp ?? 0;
+					const muramanaManaToAd = calculatedVariables.manaMuraManaToAd ?? 0;
+					const approachFimbulManaToHp = calculatedVariables.approachFimbulManaToHp ?? 0;
+					const riftmakerBonusHPToAP = calculatedVariables.riftmakerBonusHPToAP ?? 0;
+					const bloodmailTyrannyBonusHpToAd = calculatedVariables.bloodmailTyrannyBonusHpToAd ?? 0;
 
 					const totalApMultiplier = (calculatedVariables.totalItemApMultipliers ?? 1)
 						+ (dragonStatMultipliers?.abilityPower ?? 0)
 						+ (calculatedVariables.midQuestMultiplier ?? 0);
 
-					const loopDenominator = 1 - (totalStats.mana * apToManaRatio * seraphManaToAp * totalApMultiplier);
-					const finalAp = totalStats.abilityPower / loopDenominator;
-					const passiveAp = finalAp - totalStats.abilityPower;
+					const effectiveManaToAp = seraphManaToAp + (approachFimbulManaToHp * riftmakerBonusHPToAP);
 
-					const passiveManaMultiplier = finalAp * apToManaRatio;
-					const passiveMana = totalStats.mana * passiveManaMultiplier;
+					const loopDivisor = 1 - (totalStats.mana * apToManaRatio * effectiveManaToAp * totalApMultiplier);
+					const finalAp = totalStats.abilityPower / loopDivisor;
 
-					calculatedVariables.ryzePassivePercentManaIncrease = passiveManaMultiplier;
+					const passiveMana = apToManaRatio ? (totalStats.mana * finalAp * apToManaRatio) : 0;
+
+					const passiveHp = passiveMana * approachFimbulManaToHp;
+					const basePassiveAp = (passiveMana * seraphManaToAp) + (passiveHp * riftmakerBonusHPToAP);
+					const basePassiveAd = passiveMana * muramanaManaToAd;
 
 					totalStats.mana += passiveMana;
 					bonusStats.mana += passiveMana;
 					championPassiveStats.mana = passiveMana;
 
-					if (calculatedVariables.manaMuraManaToAd) {
-						championPassiveStats.attackDamage = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
-						totalStats.attackDamage += championPassiveStats.attackDamage;
-						bonusStats.attackDamage += championPassiveStats.attackDamage;
-						calculatedVariables.manaMuraAwe! += championPassiveStats.attackDamage;
+					if (passiveHp > 0) {
+						championPassiveStats.hp = passiveHp;
+						totalStats.hp += passiveHp;
+						bonusStats.hp += passiveHp;
+
+						calculatedVariables.approachFimbulAwe = (calculatedVariables.approachFimbulAwe ?? 0) + passiveHp;
 					}
 
-					if (calculatedVariables.approachFimbulManaToHp) {
-						championPassiveStats.hp = passiveMana * (calculatedVariables.approachFimbulManaToHp ?? 0);
-						totalStats.hp += championPassiveStats.hp;
-						bonusStats.hp += championPassiveStats.hp;
-						calculatedVariables.approachFimbulAwe! += championPassiveStats.hp;
+					if (basePassiveAd > 0) {
+						championPassiveStats.attackDamage = basePassiveAd;
+						totalStats.attackDamage += basePassiveAd;
+						bonusStats.attackDamage += basePassiveAd;
+
+						if (muramanaManaToAd > 0) {
+							calculatedVariables.manaMuraAwe = (calculatedVariables.manaMuraAwe ?? 0) + (passiveMana * muramanaManaToAd);
+						}
+						if (bloodmailTyrannyBonusHpToAd > 0) {
+							calculatedVariables.bloodmailTyranny = (calculatedVariables.bloodmailTyranny ?? 0) + (passiveHp * bloodmailTyrannyBonusHpToAd);
+						}
 					}
 
-					console.log({ passiveMana, passiveAd: championPassiveStats.ad, passiveHp: championPassiveStats.hp });
+					if (basePassiveAp > 0) {
+						const multipliedPassiveAp = basePassiveAp * totalApMultiplier;
 
-					if (passiveAp > 0) {
-						const basePassiveAp = passiveAp / totalApMultiplier;
+						totalStats.abilityPower += multipliedPassiveAp;
+						bonusStats.abilityPower += multipliedPassiveAp;
+						championPassiveStats.abilityPower = multipliedPassiveAp;
+
 						calculatedVariables.apMultipliersBase += basePassiveAp;
 
-						totalStats.abilityPower += passiveAp;
-						bonusStats.abilityPower += passiveAp;
-						championPassiveStats.abilityPower = passiveAp;
+						if (seraphManaToAp > 0) {
+							const seraphBaseAp = passiveMana * seraphManaToAp;
+							calculatedVariables.archangelSeraphAwe = (calculatedVariables.archangelSeraphAwe ?? 0) + seraphBaseAp;
+							itemPassivesStats.abilityPower += seraphBaseAp;
+							itemTotalStats.abilityPower += seraphBaseAp;
+						}
+
+						if (riftmakerBonusHPToAP > 0) {
+							const riftmakerBaseAp = passiveHp * riftmakerBonusHPToAP;
+							calculatedVariables.riftmakerVoidInfusion = (calculatedVariables.riftmakerVoidInfusion ?? 0) + riftmakerBaseAp;
+							itemPassivesStats.abilityPower += riftmakerBaseAp;
+							itemTotalStats.abilityPower += riftmakerBaseAp;
+						}
 
 						if (calculatedVariables.rabadonApMultiplier) {
 							const rabadonBonusAp = basePassiveAp * calculatedVariables.rabadonApMultiplier;
-							calculatedVariables.rabadonMagicalOpus! += rabadonBonusAp;
+							calculatedVariables.rabadonMagicalOpus = (calculatedVariables.rabadonMagicalOpus ?? 0) + rabadonBonusAp;
 							itemPassivesStats.abilityPower += rabadonBonusAp;
 							itemTotalStats.abilityPower += rabadonBonusAp;
 						}
 
 						if (calculatedVariables.blackfireTorchBBlazeMultiplier) {
 							const bBlazeBonusAp = basePassiveAp * calculatedVariables.blackfireTorchBBlazeMultiplier;
-							calculatedVariables.blackfireTorchBBlazeAP! += bBlazeBonusAp;
+							calculatedVariables.blackfireTorchBBlazeAP = (calculatedVariables.blackfireTorchBBlazeAP ?? 0) + bBlazeBonusAp;
 							itemPassivesStats.abilityPower += bBlazeBonusAp;
 							itemTotalStats.abilityPower += bBlazeBonusAp;
 						}
