@@ -1441,44 +1441,28 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ryze: {
-		variables: defineChampionVariables<'Ryze', typeof IRyze>()({
-			known: {
-				PassiveManaCalcTooltip: [],
-				PassiveMana: [],
-			},
-			calculate(self) {
-				return {
-					PassiveManaCalcTooltip: {
-						value: self.stats.value.variables.ryzePassivePercentManaIncrease ?? 0,
-					},
+		passive: {
+			variables: defineChampionVariables<'Ryze', typeof IRyze, 'passive'>()({
+				known: {
+					PassiveMana: [],
+				},
+				calculate(self) {
+					return {
+						PassiveMana: {
+							value: self.stats.value.miscDebug.ryzePMana ?? 0,
+						},
+					};
+				},
+				meta: {
 					PassiveMana: {
-						value: self.stats.value.miscDebug.ryzePMana ?? 0,
-					},
-				};
-			},
-			meta: {
-				PassiveManaCalcTooltip: {
-					scalesWithStatIcon: 'abilityPower',
-					multiplier: 100,
-					roundReplaced: 2,
-					resultsIsPercentage: true,
-					extendedEquals(params, dynamicVariables) {
-						const apMultiplier = championAbilityVariableValue(
-							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
-							params,
-							dynamicVariables,
-						);
-						return `<scaleap>${apMultiplier.value}%</scaleap>`;
+						isCustom: true,
 					},
 				},
-				PassiveMana: {
-					isCustom: true,
-				},
-			},
-		}),
+			}),
+		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStatMultipliers }, { calculatedVariables }) {
+				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStatMultipliers }, { calculatedVariables, miscDebug }) {
 					const apToMana = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
@@ -1537,7 +1521,9 @@ export const CHAMPION_SPECIFICS = {
 					const loopDivisor = 1 - (totalStats.mana * apToManaRatio * effectiveManaToAp * totalApMultiplier);
 					const finalAp = totalStats.abilityPower / loopDivisor;
 
-					const passiveMana = apToManaRatio ? (totalStats.mana * finalAp * apToManaRatio) : 0;
+					calculatedVariables.ryzePassivePercentManaIncrease = finalAp * apToManaRatio;
+					const passiveMana = totalStats.mana * calculatedVariables.ryzePassivePercentManaIncrease;
+					miscDebug.ryzePMana = passiveMana;
 
 					const passiveHp = passiveMana * approachFimbulManaToHp;
 					const basePassiveAp = (passiveMana * seraphManaToAp) + (passiveHp * riftmakerBonusHPToAP);
