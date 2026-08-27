@@ -238,12 +238,9 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 				defensive: 'health',
 			},
 		},
-		items: [],
 	};
 
-	await t.test('base', { only: true }, async (t) => {
-		t.runOnly(true);
-
+	await t.test('base', async (t) => {
 		await t.test('blackfire torch', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Ryze', {
 				...sourceCommon,
@@ -360,6 +357,21 @@ test.only('16.16 Ryze passive interactions', async (t) => {
 			}, damageSource);
 			assert.equal(damageSource.maxHealth.value, 2167);
 			assert.equal(damageSource.maxAbilityResource.value, 4179);
+		});
+
+		await t.test('seraph, muramana, fimbulwinter, rabadon, bloodmail, riftmaker', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Ryze', {
+				...sourceCommon,
+				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker],
+				currentHealth: 1232,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 306,
+				abilityPower: 559,
+			}, damageSource);
+			assert.equal(damageSource.maxHealth.value, 2862);
+			assert.equal(damageSource.maxAbilityResource.value, 5143);
 		});
 	});
 });
