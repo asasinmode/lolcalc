@@ -1545,6 +1545,12 @@ export const CHAMPION_SPECIFICS = {
 						const dragonAd = basePassiveAd * dragonStatMultipliers.attackDamage;
 						dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + dragonAd;
 
+						if (calculatedVariables.midQuestMultiplier) {
+							const midQuestAd = basePassiveAd * calculatedVariables.midQuestMultiplier;
+							calculatedVariables.midQuestAd! += midQuestAd;
+							basePassiveAd += midQuestAd;
+						}
+
 						basePassiveAd += dragonAd;
 						championPassiveStats.attackDamage = basePassiveAd;
 						totalStats.attackDamage += basePassiveAd;
@@ -1593,6 +1599,10 @@ export const CHAMPION_SPECIFICS = {
 							calculatedVariables.blackfireTorchBBlazeAP = (calculatedVariables.blackfireTorchBBlazeAP ?? 0) + bBlazeBonusAp;
 							itemPassivesStats.abilityPower += bBlazeBonusAp;
 							itemTotalStats.abilityPower += bBlazeBonusAp;
+						}
+
+						if (calculatedVariables.midQuestMultiplier) {
+							calculatedVariables.midQuestAp! += basePassiveAd * calculatedVariables.midQuestMultiplier;
 						}
 					}
 				},
