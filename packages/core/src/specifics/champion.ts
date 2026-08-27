@@ -1527,7 +1527,7 @@ export const CHAMPION_SPECIFICS = {
 
 					const passiveHp = passiveMana * approachFimbulManaToHp;
 					const basePassiveAp = (passiveMana * seraphManaToAp) + (passiveHp * riftmakerBonusHPToAP);
-					let basePassiveAd = passiveMana * muramanaManaToAd;
+					const basePassiveAd = passiveMana * muramanaManaToAd;
 
 					totalStats.mana += passiveMana;
 					bonusStats.mana += passiveMana;
@@ -1545,16 +1545,17 @@ export const CHAMPION_SPECIFICS = {
 						const dragonAd = basePassiveAd * dragonStatMultipliers.attackDamage;
 						dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + dragonAd;
 
+						let passiveAd = basePassiveAd + dragonAd;
+
 						if (calculatedVariables.midQuestMultiplier) {
-							const midQuestAd = basePassiveAd * calculatedVariables.midQuestMultiplier;
+							const midQuestAd = passiveAd * calculatedVariables.midQuestMultiplier;
 							calculatedVariables.midQuestAd! += midQuestAd;
-							basePassiveAd += midQuestAd;
+							passiveAd += midQuestAd;
 						}
 
-						basePassiveAd += dragonAd;
-						championPassiveStats.attackDamage = basePassiveAd;
-						totalStats.attackDamage += basePassiveAd;
-						bonusStats.attackDamage += basePassiveAd;
+						championPassiveStats.attackDamage = passiveAd;
+						totalStats.attackDamage += passiveAd;
+						bonusStats.attackDamage += passiveAd;
 
 						if (muramanaManaToAd > 0) {
 							calculatedVariables.manaMuraAwe = (calculatedVariables.manaMuraAwe ?? 0) + (passiveMana * muramanaManaToAd);
