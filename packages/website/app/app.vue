@@ -3,7 +3,7 @@ import { imgUrl, PATCH_VERSION } from '@lolcalc/data';
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
 const { saveState, isStateTooLargeForQuery } = useManageCalculatorState(initCalculatorState());
-const { vSemver, vMinor } = PATCH_VERSION;
+const { vSemver } = PATCH_VERSION;
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { reportAnIssue } = useReportIssueDialog();
 const { _component: ChampSelect } = useChampSelect();

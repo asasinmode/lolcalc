@@ -1765,8 +1765,8 @@ defineExpose({
 				> button {
 					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-btn-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300 mx-[--builds-into-p]';
 
-					&:disabled {
-						--at-apply: 'hoverable:bg-cyan-900';
+					&:disabled:is(:hover, :focus-visible) {
+						--at-apply: 'bg-cyan-900';
 					}
 				}
 
