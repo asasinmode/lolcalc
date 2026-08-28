@@ -1018,7 +1018,8 @@ defineExpose({
 		--translate-x: calc(0.5 * var(--fluid-f1720-236-54-t1960));
 
 		--builds-into-p: calc(3 * var(--spacing));
-		--builds-into-pbs: calc(4 * var(--spacing));
+		--vfluid-f524-6-0-t540: clamp(0rem, 12.6563rem + -37.5vh, 0.375rem);
+		--builds-into-pbs: calc(4 * var(--spacing) - var(--vfluid-f524-6-0-t540));
 		--builds-into-gap: calc(3 * var(--spacing));
 		--builds-into-w: calc(
 			2 * var(--builds-into-p) + var(--builds-into-btns, 7) * var(--item-img-size) + (var(--builds-into-btns, 7) - 1) *
@@ -1088,7 +1089,7 @@ defineExpose({
 				'categories order';
 
 			> h1 {
-				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-[--header-px] pbe-2 mb-5 text-center b-b-2 b-cyan-400/70';
+				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-[--header-px] pbe-2 mbe-[calc(5*var(--spacing)-var(--vfluid-f524-6-0-t540))] text-center b-b-2 b-cyan-400/70';
 				grid-area: header;
 
 				border-image: linear-gradient(
@@ -1235,7 +1236,7 @@ defineExpose({
 				}
 			}
 
-			@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
+			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or ((width < 970px) and (width >= 940px)) {
 				& {
 					--at-apply: 'grid-rows-[repeat(2,auto)]';
 					grid-template-areas:
@@ -1551,7 +1552,7 @@ defineExpose({
 		#item-shop-builds-into-list {
 			--at-apply: 'flex gap-[--builds-into-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--builds-into-header-h)+var(--builds-into-header-pbe)+var(--builds-into-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
 
-			@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
+			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or ((width < 970px) and (width >= 940px)) {
 				& {
 					--at-apply: 'pbe-1';
 				}
@@ -1751,7 +1752,7 @@ defineExpose({
 					}
 				}
 
-				@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
+				@media (height < 460px) or ((width < 1224px) and (height < 480px)) or ((width < 970px) and (width >= 940px)) {
 					--builds-into-header-h: 1em;
 					--builds-into-pbs: var(--header-pbs);
 
@@ -1825,6 +1826,16 @@ defineExpose({
 				}
 			}
 
+			@media (width < 970px) {
+				& {
+					--at-apply: 'grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_min-content_auto]';
+					grid-template-areas:
+						'eq eq eq'
+						'value value value'
+						'sell undo sell-all';
+				}
+			}
+
 			> button {
 				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-[--btn-w] whitespace-nowrap';
 
@@ -1856,8 +1867,14 @@ defineExpose({
 			}
 
 			> p {
-				--at-apply: 'text-neutral-400 font-500 flex items-center whitespace-nowrap';
+				--at-apply: 'text-neutral-400 font-500 flex items-center whitespace-nowrap leading-none';
 				grid-area: value;
+
+				@media (width < 1224px) {
+					& {
+						--at-apply: 'whitespace-normal';
+					}
+				}
 
 				> img {
 					--at-apply: 'inline-block h-3.5 w-auto';
