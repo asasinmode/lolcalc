@@ -1067,6 +1067,16 @@ defineExpose({
 				var(--builds-into-w);
 		}
 
+		@media (width < 940px) {
+			& {
+				--at-apply: 'of-hidden grid-cols-[max-content_minmax(0,1fr)] inline-full';
+				grid-template-areas:
+					'header header'
+					'aside items'
+					'footer footer';
+			}
+		}
+
 		:where(
 			#item-shop-search-listbox > li,
 			#builds-into-more-list > li > button,
@@ -1104,7 +1114,13 @@ defineExpose({
 			}
 
 			> form {
-				--at-apply: 'end-0 inset-bs-0 absolute z-100';
+				--at-apply: 'end-0 inset-bs-0 absolute z-100 size-8';
+
+				@media (width < 940px) {
+					& {
+						--at-apply: 'inset-bs-[--header-pbs] end-[calc(0.5*var(--header-px))]';
+					}
+				}
 
 				> button {
 					--at-apply: 'p-1 text-neutral-200 block-8 hoverable:text-white';
@@ -1123,8 +1139,14 @@ defineExpose({
 				--at-apply: 'mx-[--header-px]';
 				grid-area: search;
 
+				@media (width < 940px) {
+					& {
+						--at-apply: 'me-[calc(8*var(--spacing)+var(--header-px))]';
+					}
+				}
+
 				> div {
-					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0 shadow-xl';
+					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] block-[clamp(20rem,50vh,80vh)] inline-full translate-y-full start-0 -bottom-px absolute z-30 b b-[--ui-btn-border-clr] b shadow-xl min-inline-[min(44rem,80vw)]';
 					--px: calc(3 * var(--spacing));
 					--hover-bg: theme('colors.cyan.400/0.2');
 
@@ -1231,12 +1253,18 @@ defineExpose({
 				--at-apply: 'self-center me-[--header-px]';
 				grid-area: order;
 
+				@media (width < 940px) {
+					& {
+						--at-apply: 'me-[calc(0.5*var(--header-px))]';
+					}
+				}
+
 				> span {
 					--at-apply: 'sr-only';
 				}
 			}
 
-			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or ((width < 970px) and (width >= 940px)) {
+			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or (width < 970px) {
 				& {
 					--at-apply: 'grid-rows-[repeat(2,auto)]';
 					grid-template-areas:
@@ -1553,7 +1581,7 @@ defineExpose({
 			--at-apply: 'flex gap-[--builds-into-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--builds-into-header-h)+var(--builds-into-header-pbe)+var(--builds-into-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
 			--builds-into-list-btn-size: var(--item-img-size);
 
-			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or ((width < 970px) and (width >= 940px)) {
+			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or (width < 970px) {
 				& {
 					--at-apply: 'pbe-1';
 				}
@@ -1753,12 +1781,18 @@ defineExpose({
 					}
 				}
 
-				@media (height < 460px) or ((width < 1224px) and (height < 480px)) or ((width < 970px) and (width >= 940px)) {
+				@media (height < 460px) or ((width < 1224px) and (height < 480px)) or (width < 970px) {
 					--builds-into-header-h: 1em;
 					--builds-into-pbs: var(--header-pbs);
 
 					> h3 {
 						--at-apply: 'leading-none text-base';
+					}
+				}
+
+				@media (width < 940px) {
+					& {
+						--at-apply: 'absolute bg-[--bg-clr] end-0 inset-y-0 z-10 translate-x-full';
 					}
 				}
 
@@ -1827,7 +1861,7 @@ defineExpose({
 				}
 			}
 
-			@media (width < 970px) {
+			@media (width < 970px) and (width >= 940px) {
 				& {
 					--at-apply: 'grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_min-content_auto]';
 					grid-template-areas:
