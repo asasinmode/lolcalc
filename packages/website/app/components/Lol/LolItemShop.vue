@@ -1075,7 +1075,7 @@ defineExpose({
 			--at-apply: 'relative';
 
 			> .sr-status {
-				--at-apply: 'block text-transparent tracking-[-1em] absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
+				--at-apply: 'block text-transparent tracking-[-1em] absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] inset-bs-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
 			}
 		}
 
@@ -1103,7 +1103,7 @@ defineExpose({
 			}
 
 			> form {
-				--at-apply: 'end-0 top-0 absolute z-100';
+				--at-apply: 'end-0 inset-bs-0 absolute z-100';
 
 				> button {
 					--at-apply: 'p-1 text-neutral-200 block-8 hoverable:text-white';
@@ -1360,7 +1360,7 @@ defineExpose({
 				--at-apply: 'relative w-(--side-panel-w) h-(--side-panel-h) box-content of-hidden';
 
 				> ul {
-					--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-[--side-panel-boots-gap] p-1.25';
+					--at-apply: 'absolute start-0 inset-bs-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-[--side-panel-boots-gap] p-1.25';
 
 					direction: rtl;
 				}
@@ -1375,7 +1375,7 @@ defineExpose({
 				--at-apply: 'relative pe-[calc(var(--side-panel-w)-var(--side-panel-inner-p)-var(--item-button-img-b-w))] h-(--side-panel-eq-h) box-content of-hidden';
 
 				> ul {
-					--at-apply: 'absolute ps-[calc(var(--side-panel-inner-p)+var(--item-button-img-b-w))] end-[--side-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--side-panel-eq-gap] z-0';
+					--at-apply: 'absolute ps-[calc(var(--side-panel-inner-p)+var(--item-button-img-b-w))] end-[--side-panel-w] inset-bs-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--side-panel-eq-gap] z-0';
 
 					> li {
 						--at-apply: 'size-[--side-panel-eq-button-size]';
@@ -1389,7 +1389,7 @@ defineExpose({
 						}
 
 						&:nth-child(7) {
-							--at-apply: 'absolute end-[--side-panel-inner-p] top-1/2 -translate-y-[calc(50%-var(--item-button-img-b-w))]';
+							--at-apply: 'absolute end-[--side-panel-inner-p] inset-bs-1/2 -translate-y-[calc(50%-var(--item-button-img-b-w))]';
 
 							> * {
 								--at-apply: 'rounded-1/2';
@@ -1403,11 +1403,11 @@ defineExpose({
 				}
 
 				> img {
-					--at-apply: 'absolute size-[--side-panel-eq-button-size] top-1/2 -translate-y-1/2 end-[--side-panel-inner-p]';
+					--at-apply: 'absolute size-[--side-panel-eq-button-size] inset-bs-1/2 -translate-y-1/2 end-[--side-panel-inner-p]';
 				}
 
 				> div {
-					--at-apply: 'hidden absolute end-[--side-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)] bg-black cursor-not-allowed';
+					--at-apply: 'hidden absolute end-[--side-panel-inner-p] inset-bs-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)] bg-black cursor-not-allowed';
 
 					> span {
 						--at-apply: 'sr-only';
@@ -1445,7 +1445,7 @@ defineExpose({
 			}
 
 			> .pin-button {
-				--at-apply: 'op-0 start-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5';
+				--at-apply: 'op-0 start-0 inset-bs-0 absolute z-10 -translate-x-1/2 -translate-y-1/5';
 
 				&:hover img,
 				&:focus-visible img {
@@ -1459,7 +1459,7 @@ defineExpose({
 			}
 
 			> .icon.caret {
-				--at-apply: 'size-5 bg-cyan-400 start-1 top-1/2 absolute -translate-y-1/2';
+				--at-apply: 'size-5 bg-cyan-400 start-1 inset-bs-1/2 absolute -translate-y-1/2';
 			}
 
 			&[data-pinned],
@@ -1733,7 +1733,7 @@ defineExpose({
 			}
 
 			&:nth-of-type(2) {
-				--at-apply: 'flex flex-col pbe-[--builds-into-p] of-y-auto b-s b-[--ui-btn-border-clr]';
+				--at-apply: 'flex flex-col of-y-auto b-s b-[--ui-btn-border-clr] pbe-3';
 				grid-area: builds-into;
 				--build-path-py: calc(3 * var(--spacing));
 				--builds-into-header-h: var(--text-lg-lineHeight);
@@ -1744,7 +1744,7 @@ defineExpose({
 				}
 
 				> h3 {
-					--at-apply: 'pbe-[--builds-into-header-pbe] pbs-[--builds-into-pbs] order-1 sticky top-0 bg-[--bg-clr] z-20 font-700 text-lg uppercase text-neutral-200';
+					--at-apply: 'pbe-[--builds-into-header-pbe] pbs-[--builds-into-pbs] order-1 sticky inset-bs-0 bg-[--bg-clr] z-20 font-700 text-lg uppercase text-neutral-200';
 
 					&:nth-of-type(2) {
 						--at-apply: 'sr-only';
@@ -1761,7 +1761,11 @@ defineExpose({
 				}
 
 				> button {
-					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-btn-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300';
+					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-btn-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300 mx-[--builds-into-p]';
+
+					&:disabled {
+						--at-apply: 'hoverable:bg-cyan-900';
+					}
 				}
 
 				> .item-description-header {
@@ -1775,13 +1779,21 @@ defineExpose({
 
 				#item-shop-build-path {
 					--at-apply: 'box-content py-[--build-path-py] text-center flex flex-col items-center justify-center order-3 shrink-0';
-					min-height: calc(
+					min-block-size: calc(
 						4 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 3 *
 							var(--item-mt) + 5 * var(--spacing)
 							/* not sure why 5 spacing is needed here, turned up when adding 4th row for tear items */
 					);
 					--item-mb: calc(1.5 * var(--spacing));
 					--item-mt: calc(4 * var(--spacing));
+
+					@media (height < 540px) {
+						block-size: max-content;
+						min-block-size: calc(
+							2 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 1 *
+								var(--item-mt)
+						);
+					}
 				}
 
 				> .item-description-header,
