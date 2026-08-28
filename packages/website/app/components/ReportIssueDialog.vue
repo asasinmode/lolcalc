@@ -27,7 +27,7 @@ function submitIssue(_event: SubmitEvent) {
 		<header>
 			<h1>report an issue</h1>
 			<form method="dialog">
-				<button value="cancel" title="close" class="other-ui-btn">
+				<button value="cancel" title="close" class="other-ui-btn" autofocus>
 					<span>
 						close
 					</span>
@@ -38,7 +38,7 @@ function submitIssue(_event: SubmitEvent) {
 		<form @submit.prevent="submitIssue">
 			<div>
 				<label for="issue-title">title<span>*</span></label>
-				<input id="issue-title" placeholder="Cassiopeia swiftmarch" autofocus required>
+				<input id="issue-title" placeholder="Cassiopeia swiftmarch" required>
 			</div>
 			<div>
 				<label for="issue-category">category<span>*</span></label>

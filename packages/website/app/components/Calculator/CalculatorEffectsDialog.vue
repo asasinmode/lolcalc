@@ -260,11 +260,18 @@ defineExpose({
 			<h1>
 				effects
 			</h1>
+			<form method="dialog">
+				<button value="cancel" title="close" class="other-ui-btn" autofocus>
+					<span>
+						close
+					</span>
+					<Icon class="i-ph:x-bold" />
+				</button>
+			</form>
 			<div class="inline-search-label">
 				<input
 					id="champ-select-search"
 					v-model="search"
-					autofocus
 					type="text"
 					:data-empty="!search"
 					@keydown.enter="activateFirstSearchEffect"
@@ -281,14 +288,6 @@ defineExpose({
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</div>
-			<form method="dialog">
-				<button value="cancel" title="close" class="other-ui-btn">
-					<span>
-						close
-					</span>
-					<Icon class="i-ph:x-bold" />
-				</button>
-			</form>
 			<h2>loading...</h2>
 		</header>
 		<ul :inert="isLoading">
@@ -369,14 +368,16 @@ defineExpose({
 			--at-apply: 'pt-[--pt] flex items-center pb-2 sticky top-0 gap-3 z-2 bg-inherit b-b b-[--ui-btn-border-clr]';
 
 			> h1 {
-				--at-apply: 'leading-7 text-neutral-200 font-700 uppercase text-lg';
+				--at-apply: 'leading-7 text-neutral-200 font-700 uppercase text-lg order-1';
 			}
 
 			> div {
-				--at-apply: 'ms-auto';
+				--at-apply: 'ms-auto order-2';
 			}
 
 			> form {
+				--at-apply: 'order-3';
+
 				> button {
 					--at-apply: 'grid place-items-center size-7 rounded-1/2';
 

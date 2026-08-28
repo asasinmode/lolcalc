@@ -1551,6 +1551,7 @@ defineExpose({
 
 		#item-shop-builds-into-list {
 			--at-apply: 'flex gap-[--builds-into-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--builds-into-header-h)+var(--builds-into-header-pbe)+var(--builds-into-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
+			--builds-into-list-btn-size: var(--item-img-size);
 
 			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or ((width < 970px) and (width >= 940px)) {
 				& {
@@ -1559,14 +1560,14 @@ defineExpose({
 			}
 
 			> li {
-				--at-apply: 'bg-black size-(--item-img-size)';
+				--at-apply: 'bg-black block-[--builds-into-list-btn-size]';
 
 				> button {
-					--at-apply: 'size-full';
+					--at-apply: 'size-[--builds-into-list-btn-size]';
 
 					&:disabled,
 					&[popovertarget] {
-						--at-apply: 'm-[--item-button-img-b-w] size-(--item-img-borderless-size)';
+						--at-apply: 'm-[--item-button-img-b-w] size-[--item-img-borderless-size]';
 						box-shadow:
 							0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
 							0 0 0 var(--item-button-img-b-w) black;

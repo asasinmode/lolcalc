@@ -82,6 +82,34 @@ defineExpose({
 			<h1>
 				champ select
 			</h1>
+			<form method="dialog">
+				<button value="cancel" title="close" autofocus>
+					<Icon class="i-ph:x-bold" />
+					<span>
+						close
+					</span>
+				</button>
+			</form>
+			<div class="inline-search-label">
+				<input
+					id="champ-select-search"
+					v-model="search"
+					type="text"
+					:data-empty="!search"
+					@update:model-value="selectedRole = undefined"
+					@keydown.enter.prevent="selectFirstChamp"
+				>
+				<label for="item-shop-search">
+					<Icon class="i-ph:magnifying-glass-bold" />
+					Search
+				</label>
+				<button title="clear" @mousedown.prevent="search = ''">
+					<span>
+						clear
+					</span>
+					<Icon class="i-ph:x-bold" />
+				</button>
+			</div>
 			<VButtonRadiogroup
 				id="champ-select-role"
 				v-model="selectedRole"
@@ -99,35 +127,6 @@ defineExpose({
 					<span>{{ role }}</span>
 				</template>
 			</VButtonRadiogroup>
-			<div class="inline-search-label">
-				<input
-					id="champ-select-search"
-					v-model="search"
-					autofocus
-					type="text"
-					:data-empty="!search"
-					@update:model-value="selectedRole = undefined"
-					@keydown.enter.prevent="selectFirstChamp"
-				>
-				<label for="item-shop-search">
-					<Icon class="i-ph:magnifying-glass-bold" />
-					Search
-				</label>
-				<button title="clear" @mousedown.prevent="search = ''">
-					<span>
-						clear
-					</span>
-					<Icon class="i-ph:x-bold" />
-				</button>
-			</div>
-			<form method="dialog">
-				<button value="cancel" title="close" autofocus>
-					<Icon class="i-ph:x-bold" />
-					<span>
-						close
-					</span>
-				</button>
-			</form>
 		</header>
 		<ul :data-longest-name="longestName">
 			<li
@@ -201,7 +200,7 @@ defineExpose({
 			}
 
 			#champ-select-role {
-				--at-apply: 'shrink-0';
+				--at-apply: 'shrink-0 order-1';
 				block-size: calc(var(--btn-size) + var(--btn-pb) + var(--btn-b-b));
 				--btn-size: calc(7 * var(--spacing));
 				--btn-pb: calc(0.25 * var(--spacing));
@@ -233,7 +232,7 @@ defineExpose({
 			}
 
 			> .inline-search-label {
-				--at-apply: 'mbe-1 me-[--close-btn-translate]';
+				--at-apply: 'mbe-1 me-[--close-btn-translate] order-2';
 				--py: calc(0.25 * var(--spacing));
 
 				input {
