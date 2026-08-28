@@ -955,7 +955,7 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
-		--at-apply: 'bg-[--bg-clr] h-216 max-w-[90vw] of-visible b b-[--ui-btn-border-clr]';
+		--at-apply: 'bg-[--bg-clr] h-216 max-w-[90vw] of-visible b b-[--ui-btn-border-clr] translate-x-[calc(0.5*var(--translate-x))]';
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
@@ -965,6 +965,37 @@ defineExpose({
 		--items-px: calc(3 * var(--spacing));
 		--items-gap: calc(3 * var(--spacing));
 		--items-max-cols: 10;
+
+		--side-panel-gap: calc(2 * var(--spacing));
+		--side-panel-py: calc(4 * var(--spacing));
+		--side-panel-gap: calc(var(--spacing) * 3);
+		--side-panel-row-h: calc(var(--item-img-size) + 1.5rem);
+		--side-panel-p: calc(var(--spacing) * 4);
+		--side-panel-collapsed-p: calc(6 * var(--spacing));
+		--side-panel-inner-p: calc(var(--spacing) * 1.25);
+		--side-panel-w: calc(var(--item-img-size) + 2 * var(--side-panel-inner-p));
+
+		--side-panel-boots-gap: calc(3 * var(--spacing));
+		--side-panel-eq-gap: calc(1 * var(--spacing));
+		--side-panel-eq-button-size: calc(
+			(var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-gap)) / 3
+		);
+		--side-panel-eq-h: calc(var(--side-panel-eq-button-size) * 2 + var(--side-panel-eq-gap));
+
+		--side-panel-total-w: calc(
+			2 * (var(--side-panel-p) + var(--side-panel-inner-p)) + 3 * var(--item-img-size) + 2 *
+				var(--side-panel-boots-gap) + 1px
+		);
+		/* value to translate the dialog by horizontally, so that it can keep the same width by shifting more to the right, by the width of the --side-panel-total-w
+			keep some translate x on the largest screens too (half of the collapsed boots panel width) since the dialog doesn't have clearly defined center that would seem off and I think it makes it feel better */
+		--translate-x: var(--fluid-f1720-236-54-t1960);
+
+		--builds-into-p: calc(3 * var(--spacing));
+		--builds-into-gap: calc(3 * var(--spacing));
+		--builds-into-w: calc(
+			2 * var(--builds-into-p) + var(--builds-into-btns, 7) * var(--item-img-size) + (var(--builds-into-btns, 7) - 1) *
+				var(--builds-into-gap)
+		);
 
 		&[open] {
 			--at-apply: 'grid';
@@ -978,13 +1009,16 @@ defineExpose({
 		grid-template-columns:
 			calc(var(--clear-filters-btn-w) + 2 * var(--header-px) + 1px)
 			minmax(
-				0px,
-				calc(
-					var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
-						var(--items-px)
+				0,
+				min(
+					46vw,
+					calc(
+						var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
+							var(--items-px)
+					)
 				)
 			)
-			32rem;
+			var(--builds-into-w);
 
 		:where(
 			#item-shop-search-listbox > li,
@@ -1239,21 +1273,7 @@ defineExpose({
 
 		#item-shop-panel-boots,
 		#item-shop-panel-eq {
-			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr]';
-
-			--side-panel-gap: calc(2 * var(--spacing));
-			--side-panel-py: calc(4 * var(--spacing));
-			--side-panel-gap: calc(var(--spacing) * 3);
-			--side-panel-row-h: calc(var(--item-img-size) + 1.5rem);
-			--side-panel-p: calc(var(--spacing) * 4);
-			--side-panel-inner-p: calc(var(--spacing) * 1.25);
-			--side-panel-w: calc(var(--item-img-size) + 2 * var(--side-panel-inner-p));
-
-			--side-panel-eq-gap: calc(1 * var(--spacing));
-			--side-panel-eq-button-size: calc(
-				(var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-gap)) / 3
-			);
-			--side-panel-eq-h: calc(var(--side-panel-eq-button-size) * 2 + var(--side-panel-eq-gap));
+			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr] p-[--side-panel-p] ps-[--side-panel-collapsed-p] start-0 absolute z-10 -translate-x-full';
 
 			:where(&[data-pinned]) {
 				> .pin-button img {
@@ -1264,14 +1284,14 @@ defineExpose({
 		}
 
 		#item-shop-panel-boots {
-			--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-[calc(var(--side-panel-eq-h)+2*var(--side-panel-p)+14*var(--spacing))] absolute z-10 -translate-x-full';
+			--at-apply: 'bottom-[calc(var(--side-panel-eq-h)+2*var(--side-panel-p)+14*var(--spacing))]';
 			--side-panel-h: calc(var(--side-panel-row-h) * 3 + 2 * var(--side-panel-gap) + 2 * var(--side-panel-inner-p));
 
 			> div {
 				--at-apply: 'relative w-(--side-panel-w) h-(--side-panel-h) box-content of-hidden';
 
 				> ul {
-					--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
+					--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-[--side-panel-boots-gap] p-1.25';
 
 					direction: rtl;
 				}
@@ -1279,7 +1299,7 @@ defineExpose({
 		}
 
 		#item-shop-panel-eq {
-			--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-8 absolute z-10 -translate-x-full';
+			--at-apply: 'bottom-8';
 
 			> div {
 				--at-apply: 'relative pe-[calc(var(--side-panel-w)-var(--side-panel-inner-p)-var(--item-button-img-b-w))] h-(--side-panel-eq-h) box-content of-hidden';
@@ -1383,7 +1403,7 @@ defineExpose({
 			&[data-pinned],
 			&:hover,
 			&:has(li > button:focus-visible) {
-				--at-apply: 'ps-4';
+				--at-apply: 'ps-[--side-panel-p]';
 
 				> .icon.caret {
 					--at-apply: 'hidden';
@@ -1458,6 +1478,8 @@ defineExpose({
 		}
 
 		#item-shop-builds-into-list {
+			--at-apply: 'flex gap-[--builds-into-gap] min-h-(--item-img-size) justify-around order-2 relative *:shrink-0';
+
 			> li {
 				--at-apply: 'bg-black size-(--item-img-size)';
 
@@ -1634,7 +1656,7 @@ defineExpose({
 			}
 
 			&:nth-of-type(2) {
-				--at-apply: 'flex flex-col p-3 pt-4 of-y-auto b-s b-[--ui-btn-border-clr]';
+				--at-apply: 'flex flex-col p-[--builds-into-p] pt-4 of-y-auto b-s b-[--ui-btn-border-clr]';
 				grid-area: builds-into;
 
 				> h3 {
@@ -1656,10 +1678,6 @@ defineExpose({
 
 				> .item-description {
 					--at-apply: 'order-6';
-				}
-
-				#item-shop-builds-into-list {
-					--at-apply: 'flex gap-3 min-h-(--item-img-size) justify-around order-2 relative *:shrink-0';
 				}
 
 				#item-shop-build-path {
