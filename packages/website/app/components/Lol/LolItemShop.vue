@@ -955,7 +955,7 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
-		--at-apply: 'bg-[--bg-clr] h-216 max-w-[90vw] of-visible b b-[--ui-btn-border-clr] translate-x-[calc(0.5*var(--translate-x))]';
+		--at-apply: 'bg-[--bg-clr] h-216 max-w-[90vw] of-visible b b-[--ui-btn-border-clr] translate-x-[--translate-x]';
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
@@ -988,7 +988,7 @@ defineExpose({
 		);
 		/* value to translate the dialog by horizontally, so that it can keep the same width by shifting more to the right, by the width of the --side-panel-total-w
 			keep some translate x on the largest screens too (half of the collapsed boots panel width) since the dialog doesn't have clearly defined center that would seem off and I think it makes it feel better */
-		--translate-x: var(--fluid-f1720-236-54-t1960);
+		--translate-x: calc(0.5 * var(--fluid-f1720-236-54-t1960));
 
 		--builds-into-p: calc(3 * var(--spacing));
 		--builds-into-gap: calc(3 * var(--spacing));
@@ -1511,10 +1511,10 @@ defineExpose({
 		}
 
 		#builds-into-more-list {
-			--at-apply: 'h-max max-h-[max(calc(60*var(--spacing)),60vh)] max-w-screen w-66 of-y-auto z-10 py-1 b b-[--ui-btn-border-clr] bg-[--bg-clr] shadow-lg';
+			--at-apply: 'block-max max-block-[max(calc(60*var(--spacing)),60vh)] max-inline-screen inline-66 of-y-auto z-10 py-1 b b-[--ui-btn-border-clr] bg-[--bg-clr] shadow-lg translate-x-[--translate-x]';
 			position-anchor: --last-builds-into-button;
-			inset-block-start: calc(anchor(bottom) + 2px);
-			inset-inline-end: anchor(right);
+			inset-block-start: calc(anchor(end) + 2px);
+			inset-inline-end: anchor(end);
 
 			> li {
 				> button {
