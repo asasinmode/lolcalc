@@ -1273,7 +1273,9 @@ defineExpose({
 
 		#item-shop-panel-boots,
 		#item-shop-panel-eq {
-			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr] p-[--side-panel-p] ps-[--side-panel-collapsed-p] start-0 absolute z-10 -translate-x-full';
+			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr] p-[--side-panel-p] ps-[--side-panel-collapsed-p] start-0 absolute z-10 -translate-x-full translate-y-[--v-fluid-f485-40-0-t525]';
+			/* move both panels vertically when screen is shorter to delay moving the boots panel to the rest of the items */
+			--v-fluid-f485-40-0-t525: clamp(0rem, 32.8125rem + -100vh, 2.5rem);
 
 			:where(&[data-pinned]) {
 				> .pin-button img {
@@ -1421,7 +1423,8 @@ defineExpose({
 
 		#item-shop-panel-boots {
 			> h2 {
-				@media (height <= 524px) {
+				/* breakpoint related to --v-fluid-f485-40-0-t525 */
+				@media (height < 492px) {
 					& {
 						--at-apply: 'not-sr-only';
 					}
@@ -1752,7 +1755,8 @@ defineExpose({
 
 @layer overrides {
 	#dialog-item-shop {
-		@media (height <= 524px) {
+		/* breakpoint related to --v-fluid-f485-40-0-t525 */
+		@media (height < 492px) {
 			#item-shop-panel-boots {
 				--at-apply: 'static p-0 translate-0 z-auto b-0';
 				grid-area: boots;
@@ -1773,6 +1777,10 @@ defineExpose({
 					--at-apply: 'p-0 flex flex-wrap mb-5 gap-3';
 					direction: ltr;
 				}
+			}
+
+			#item-shop-panel-eq {
+				--at-apply: 'translate-y-0';
 			}
 		}
 	}
