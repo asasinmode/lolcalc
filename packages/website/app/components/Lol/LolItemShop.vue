@@ -955,7 +955,7 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
-		--at-apply: 'bg-[--bg-clr] h-216 max-w-[90vw] of-visible b b-[--ui-btn-border-clr] translate-x-[--translate-x]';
+		--at-apply: 'bg-[--bg-clr] block-216 of-visible b b-[--ui-btn-border-clr] translate-x-[--translate-x]';
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
@@ -1015,7 +1015,8 @@ defineExpose({
 			minmax(
 				0,
 				min(
-					46vw,
+					/* 2em 6px is default max width limit for dialog in chrome/firefox, 1 var(--spacing) is so to make the pin buttons not clip */
+						calc(100vw - 4em - 12px - var(--spacing) - var(--builds-into-w) - var(--side-panel-total-w)),
 					calc(
 						var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
 							var(--items-px)
