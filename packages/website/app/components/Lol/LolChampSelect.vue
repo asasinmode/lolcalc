@@ -322,7 +322,7 @@ defineExpose({
 
 			@media (width <= 820px) {
 				& {
-					--at-apply: 'grid-cols-[repeat(auto-fit,minmax(calc(var(--img-size)+2*var(--img-mx)),1fr))]';
+					--at-apply: 'grid-cols-[repeat(auto-fill,minmax(calc(var(--img-size)+2*var(--img-mx)),1fr))]';
 				}
 			}
 		}
