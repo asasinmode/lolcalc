@@ -368,8 +368,7 @@ onBeforeUnmount(() => {
 
 function updateBuildsIntoButtonsNumber() {
 	if (window.innerWidth < 1224) {
-		// TODO
-		buildsIntoListButtons.value = 6;
+		buildsIntoListButtons.value = 7;
 	} else if (window.innerWidth < 1292) {
 		buildsIntoListButtons.value = 6;
 	} else {
@@ -1047,6 +1046,23 @@ defineExpose({
 			)
 			var(--builds-into-w);
 
+		@media (width < 1224px) {
+			--translate-x: 0px;
+			grid-template-columns:
+				calc(var(--clear-filters-btn-w) + 2 * var(--header-px) + 1px)
+				minmax(
+					0,
+					min(
+						calc(100vw - 4em - 12px - var(--spacing) - var(--builds-into-w)),
+						calc(
+							var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
+								var(--items-px)
+						)
+					)
+				)
+				var(--builds-into-w);
+		}
+
 		:where(
 			#item-shop-search-listbox > li,
 			#builds-into-more-list > li > button,
@@ -1216,7 +1232,7 @@ defineExpose({
 				}
 			}
 
-			@media (height < 460px) {
+			@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
 				& {
 					--at-apply: 'grid-rows-[repeat(2,auto)]';
 					grid-template-areas:
@@ -1350,6 +1366,7 @@ defineExpose({
 
 		#item-shop-panel-eq {
 			--at-apply: 'bottom-8';
+			grid-area: eq;
 
 			> div {
 				--at-apply: 'relative pe-[calc(var(--side-panel-w)-var(--side-panel-inner-p)-var(--item-button-img-b-w))] h-(--side-panel-eq-h) box-content of-hidden';
@@ -1710,7 +1727,7 @@ defineExpose({
 				--at-apply: 'flex flex-col p-[--builds-into-p] pbs-[--builds-into-pbs] of-y-auto b-s b-[--ui-btn-border-clr]';
 				grid-area: builds-into;
 
-				@media (height < 460px) {
+				@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
 					& {
 						--at-apply: 'pbs-[--header-pbs]';
 					}
@@ -1751,7 +1768,7 @@ defineExpose({
 					--item-mb: calc(1.5 * var(--spacing));
 					--item-mt: calc(4 * var(--spacing));
 
-					@media (height < 460px) {
+					@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
 						& {
 							--at-apply: 'mbs-1';
 						}
@@ -1775,28 +1792,51 @@ defineExpose({
 
 		> footer {
 			--at-apply: 'flex items-center py-2.5 px-3 b-t b-[--ui-btn-border-clr]';
+			--btn-w: calc(24 * var(--spacing));
 			grid-area: footer;
 
+			@media (width < 1224px) {
+				& {
+					--at-apply: 'grid grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_auto] py-1.5 gap-y-1 gap-x-[--fluid-8-12-t1224]';
+					grid-template-areas:
+						'eq eq value'
+						'sell undo sell-all';
+				}
+			}
+
 			> button {
-				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-24 whitespace-nowrap';
+				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-[--btn-w] whitespace-nowrap';
 
 				&:nth-of-type(1) {
 					--at-apply: 'bg-yellow-950 hoverable:bg-yellow-900';
+					grid-area: sell;
 				}
 
 				&:nth-of-type(2),
 				&:nth-of-type(3) {
 					/* me shrink on buildsIntoListButtons change */
 					--at-apply: 'bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800 ms-2.5 me-[--fluid-f1224-12-20-t1292]';
+
+					@media (width < 1224px) {
+						& {
+							--at-apply: 'm-0';
+						}
+					}
+				}
+
+				&:nth-of-type(2) {
+					grid-area: undo;
 				}
 
 				&:nth-of-type(3) {
 					--at-apply: 'ms-auto me-0 hoverable:bg-red-500 hoverable:text-black';
+					grid-area: sell-all;
 				}
 			}
 
 			> p {
 				--at-apply: 'text-neutral-400 font-500 flex items-center whitespace-nowrap';
+				grid-area: value;
 
 				> img {
 					--at-apply: 'inline-block h-3.5 w-auto';
@@ -1846,6 +1886,36 @@ defineExpose({
 
 			#item-shop-panel-eq {
 				--at-apply: 'translate-y-0';
+			}
+		}
+
+		@media (width < 1224px) {
+			#item-shop-panel-eq {
+				--at-apply: 'static p-0 translate-0 z-auto b-0';
+
+				.pin-button {
+					--at-apply: 'hidden';
+				}
+
+				> div {
+					--at-apply: 'p-0 block-auto flex gap-[--side-panel-eq-gap]';
+
+					> div {
+						--at-apply: 'static translate-0';
+					}
+				}
+
+				ul {
+					--at-apply: 'p-0 flex';
+
+					> li:nth-child(7) {
+						--at-apply: 'static translate-0 flex';
+
+						> * {
+							--at-apply: 'size-7 m-auto';
+						}
+					}
+				}
 			}
 		}
 	}
