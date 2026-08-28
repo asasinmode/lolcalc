@@ -41,13 +41,13 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInte
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
-import { MISC, STAT_ICON } from '@lolcalc/data';
-import { ALL_CHAMPION_STATS_ENTRIES, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
+import { STAT_ICON } from '@lolcalc/data';
+import { ALL_CHAMPION_STATS_ENTRIES, EFFECT_OBJECT_NAME, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { combineCompounding } from '../calculate/util.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
-import { defineVariables, HOOK_PRIORITIES, ITEM_SPECIFICS_SHARED } from './index.ts';
+import { defineVariables, HOOK_PRIORITIES } from './index.ts';
 
 export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
@@ -1477,13 +1477,9 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					const apToManaRatio = apToMana.value / 10_000;
-
 					const seraphManaToAp = calculatedVariables.archangelSeraphManaToAp ?? 0;
-					const muramanaManaToAd = calculatedVariables.manaMuraManaToAd ?? 0;
 					const approachFimbulManaToHp = calculatedVariables.approachFimbulManaToHp ?? 0;
 					const riftmakerBonusHPToAP = calculatedVariables.riftmakerBonusHPToAP ?? 0;
-					const bloodmailTyrannyBonusHpToAd = calculatedVariables.bloodmailTyrannyBonusHpToAd ?? 0;
 
 					const totalApMultiplier = (calculatedVariables.totalItemApMultipliers ?? 1)
 						+ (dragonStatMultipliers?.abilityPower ?? 0)
@@ -1491,16 +1487,16 @@ export const CHAMPION_SPECIFICS = {
 
 					const effectiveManaToAp = seraphManaToAp + (approachFimbulManaToHp * riftmakerBonusHPToAP);
 
+					const apToManaRatio = apToMana.value / 10_000;
 					const loopDivisor = 1 - (totalStats.mana * apToManaRatio * effectiveManaToAp * totalApMultiplier);
-					const finalAp = totalStats.abilityPower / loopDivisor;
 
-					calculatedVariables.ryzePassivePercentManaIncrease = finalAp * apToManaRatio;
+					calculatedVariables.ryzePassivePercentManaIncrease = totalStats.abilityPower / loopDivisor * apToManaRatio;
 					const passiveMana = totalStats.mana * calculatedVariables.ryzePassivePercentManaIncrease;
 					miscDebug.ryzePMana = passiveMana;
 
 					const passiveHp = passiveMana * approachFimbulManaToHp;
 					const basePassiveAp = (passiveMana * seraphManaToAp) + (passiveHp * riftmakerBonusHPToAP);
-					const basePassiveAd = passiveMana * muramanaManaToAd;
+					let passiveAd = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
 
 					totalStats.mana += passiveMana;
 					bonusStats.mana += passiveMana;
@@ -1514,11 +1510,10 @@ export const CHAMPION_SPECIFICS = {
 						calculatedVariables.approachFimbulAwe = (calculatedVariables.approachFimbulAwe ?? 0) + passiveHp;
 					}
 
-					if (basePassiveAd > 0) {
-						const dragonAd = basePassiveAd * dragonStatMultipliers.attackDamage;
+					if (passiveAd) {
+						const dragonAd = passiveAd * dragonStatMultipliers.attackDamage;
 						dragonStats.attackDamage = (dragonStats.attackDamage ?? 0) + dragonAd;
-
-						let passiveAd = basePassiveAd + dragonAd;
+						passiveAd += dragonAd;
 
 						if (calculatedVariables.midQuestMultiplier) {
 							const midQuestAd = passiveAd * calculatedVariables.midQuestMultiplier;
@@ -1530,11 +1525,11 @@ export const CHAMPION_SPECIFICS = {
 						totalStats.attackDamage += passiveAd;
 						bonusStats.attackDamage += passiveAd;
 
-						if (muramanaManaToAd > 0) {
-							calculatedVariables.manaMuraAwe = (calculatedVariables.manaMuraAwe ?? 0) + (passiveMana * muramanaManaToAd);
+						if (calculatedVariables.manaMuraManaToAd) {
+							calculatedVariables.manaMuraAwe! += passiveMana * calculatedVariables.manaMuraManaToAd;
 						}
-						if (bloodmailTyrannyBonusHpToAd > 0) {
-							calculatedVariables.bloodmailTyranny = (calculatedVariables.bloodmailTyranny ?? 0) + (passiveHp * bloodmailTyrannyBonusHpToAd);
+						if (calculatedVariables.bloodmailTyrannyBonusHpToAd) {
+							calculatedVariables.bloodmailTyranny! += passiveHp * calculatedVariables.bloodmailTyrannyBonusHpToAd;
 						}
 					}
 
@@ -1574,9 +1569,8 @@ export const CHAMPION_SPECIFICS = {
 							itemPassivesStats.abilityPower += bBlazeBonusAp;
 							itemTotalStats.abilityPower += bBlazeBonusAp;
 						}
-
 						if (calculatedVariables.midQuestMultiplier) {
-							calculatedVariables.midQuestAp! += basePassiveAd * calculatedVariables.midQuestMultiplier;
+							calculatedVariables.midQuestAp! += basePassiveAp * calculatedVariables.midQuestMultiplier;
 						}
 					}
 				},

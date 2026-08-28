@@ -976,17 +976,15 @@ defineExpose({
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns:
-			max-content
-			calc(
-				var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
-					var(--items-px)
+			calc(var(--clear-filters-btn-w) + 2 * var(--header-px) + 1px)
+			minmax(
+				0px,
+				calc(
+					var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
+						var(--items-px)
+				)
 			)
 			32rem;
-
-		@media (height <= 524px) {
-			& {
-			}
-		}
 
 		:where(
 			#item-shop-search-listbox > li,
