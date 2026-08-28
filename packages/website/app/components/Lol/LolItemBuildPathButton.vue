@@ -41,7 +41,7 @@ const { vSemver } = PATCH_VERSION;
 		--at-apply: 'mb-[--item-mb] relative';
 
 		&:before {
-			--at-apply: 'pointer-events-none content-empty block absolute w-px h-1.25 -bottom-0.5 z-100 translate-y-full -translate-x-1/2 start-1/2 bg-[var(--build-path-clr)]';
+			--at-apply: 'pointer-events-none content-empty block absolute w-px h-1.25 -bottom-0.5 z-10 translate-y-full -translate-x-1/2 start-1/2 bg-[var(--build-path-clr)]';
 		}
 	}
 

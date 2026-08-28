@@ -366,8 +366,11 @@ onBeforeUnmount(() => {
 	window.removeEventListener('resize', updateBuildsIntoButtonsNumber);
 });
 
+/* build path needs at least 6 buttons' worth of width to fit */
 function updateBuildsIntoButtonsNumber() {
-	if (window.innerWidth < 1224) {
+	if (window.innerWidth < 1070) {
+		buildsIntoListButtons.value = 6;
+	} else if (window.innerWidth < 1224) {
 		buildsIntoListButtons.value = 7;
 	} else if (window.innerWidth < 1292) {
 		buildsIntoListButtons.value = 6;
@@ -709,7 +712,7 @@ defineExpose({
 			>
 				{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
 			</button>
-			<h3 class="order-1">
+			<h3>
 				Builds into
 			</h3>
 			<ul id="item-shop-builds-into-list">
@@ -772,7 +775,7 @@ defineExpose({
 						popover
 						@focusout="closeBuildsIntoMoreListIfOutside"
 					>
-						<li v-for="shopItem in buildsIntoItems.slice(6)" :key="shopItem.item.id">
+						<li v-for="shopItem in buildsIntoItems.slice(buildsIntoListButtons - 1)" :key="shopItem.item.id">
 							<button
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
@@ -1100,7 +1103,7 @@ defineExpose({
 			}
 
 			> form {
-				--at-apply: 'end-0 top-0 absolute z-10';
+				--at-apply: 'end-0 top-0 absolute z-100';
 
 				> button {
 					--at-apply: 'p-1 text-neutral-200 block-8 hoverable:text-white';
@@ -1546,7 +1549,13 @@ defineExpose({
 		}
 
 		#item-shop-builds-into-list {
-			--at-apply: 'flex gap-[--builds-into-gap] min-h-(--item-img-size) justify-around order-2 relative *:shrink-0';
+			--at-apply: 'flex gap-[--builds-into-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--builds-into-header-h)+var(--builds-into-header-pbe)+var(--builds-into-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
+
+			@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
+				& {
+					--at-apply: 'pbe-1';
+				}
+			}
 
 			> li {
 				--at-apply: 'bg-black size-(--item-img-size)';
@@ -1724,24 +1733,30 @@ defineExpose({
 			}
 
 			&:nth-of-type(2) {
-				--at-apply: 'flex flex-col p-[--builds-into-p] pbs-[--builds-into-pbs] of-y-auto b-s b-[--ui-btn-border-clr]';
+				--at-apply: 'flex flex-col pbe-[--builds-into-p] of-y-auto b-s b-[--ui-btn-border-clr]';
 				grid-area: builds-into;
+				--build-path-py: calc(3 * var(--spacing));
+				--builds-into-header-h: var(--text-lg-lineHeight);
+				--builds-into-header-pbe: calc(1 * var(--spacing));
 
-				@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
-					& {
-						--at-apply: 'pbs-[--header-pbs]';
-					}
-
-					> h3:first-of-type {
-						--at-apply: 'leading-none text-base';
-					}
+				> * {
+					--at-apply: 'px-[--builds-into-p]';
 				}
 
 				> h3 {
-					--at-apply: 'font-700 text-lg uppercase mb-1 text-neutral-200';
+					--at-apply: 'pbe-[--builds-into-header-pbe] pbs-[--builds-into-pbs] order-1 sticky top-0 bg-[--bg-clr] z-20 font-700 text-lg uppercase text-neutral-200';
 
 					&:nth-of-type(2) {
 						--at-apply: 'sr-only';
+					}
+				}
+
+				@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
+					--builds-into-header-h: 1em;
+					--builds-into-pbs: var(--header-pbs);
+
+					> h3 {
+						--at-apply: 'leading-none text-base';
 					}
 				}
 
@@ -1759,7 +1774,7 @@ defineExpose({
 				}
 
 				#item-shop-build-path {
-					--at-apply: 'b-bs box-content py-3 mbs-3 text-center flex flex-col items-center justify-center order-3 shrink-0';
+					--at-apply: 'box-content py-[--build-path-py] text-center flex flex-col items-center justify-center order-3 shrink-0';
 					min-height: calc(
 						4 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 3 *
 							var(--item-mt) + 5 * var(--spacing)
@@ -1767,17 +1782,11 @@ defineExpose({
 					);
 					--item-mb: calc(1.5 * var(--spacing));
 					--item-mt: calc(4 * var(--spacing));
-
-					@media (height < 460px) or ((width < 1224px) and (height < 480px)) {
-						& {
-							--at-apply: 'mbs-1';
-						}
-					}
 				}
 
 				> .item-description-header,
 				> .item-description > :first-child,
-				> #item-shop-build-path {
+				> #item-shop-builds-into-list {
 					border-image: linear-gradient(
 							90deg,
 							transparent 10%,
