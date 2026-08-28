@@ -355,6 +355,28 @@ function closeBuildsIntoMoreListIfOutside(event: FocusEvent) {
 	}
 }
 
+const buildsIntoListButtons = ref(7);
+
+onMounted(() => {
+	window.addEventListener('resize', updateBuildsIntoButtonsNumber, { passive: true });
+	updateBuildsIntoButtonsNumber();
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updateBuildsIntoButtonsNumber);
+});
+
+function updateBuildsIntoButtonsNumber() {
+	if (window.innerWidth < 1224) {
+		// TODO
+		buildsIntoListButtons.value = 6;
+	} else if (window.innerWidth < 1292) {
+		buildsIntoListButtons.value = 6;
+	} else {
+		buildsIntoListButtons.value = 7;
+	}
+}
+
 function selectBuildsIntoMoreItem(item: IShopItem) {
 	selectItem(item, true);
 	leaveTooltipableElement();
@@ -427,7 +449,7 @@ defineExpose({
 	<VDialog
 		id="dialog-item-shop"
 		ref="vDialog"
-		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg)`"
+		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg); --builds-into-btns: ${buildsIntoListButtons}`"
 		@close="closeSearch"
 	>
 		<header>
@@ -692,7 +714,7 @@ defineExpose({
 				Builds into
 			</h3>
 			<ul id="item-shop-builds-into-list">
-				<li v-for="i in 6" :key="i">
+				<li v-for="i in buildsIntoListButtons - 1" :key="i">
 					<button
 						:disabled="!buildsIntoItems[i - 1]"
 						:data-buyability="buildsIntoItems[i - 1]?.buyability"
@@ -743,7 +765,7 @@ defineExpose({
 						<span class="sr-status">{{ buildsIntoItems[6]?.srStatus }}</span>
 					</button>
 					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside">
-						+{{ buildsIntoItems.length - 6 }}
+						+{{ buildsIntoItems.length - buildsIntoListButtons + 1 }}
 					</button>
 					<ul
 						id="builds-into-more-list"
@@ -1449,8 +1471,8 @@ defineExpose({
 
 		#item-shop-panel-boots {
 			> h2 {
-				/* breakpoint related to --v-fluid-f485-40-0-t525 */
-				@media (height < 492px) {
+				/* vertical breakpoint related to --v-fluid-f485-40-0-t525 */
+				@media (height < 492px) or (width < 1224px) {
 					& {
 						--at-apply: 'not-sr-only';
 					}
@@ -1756,7 +1778,7 @@ defineExpose({
 			grid-area: footer;
 
 			> button {
-				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-24';
+				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-24 whitespace-nowrap';
 
 				&:nth-of-type(1) {
 					--at-apply: 'bg-yellow-950 hoverable:bg-yellow-900';
@@ -1764,7 +1786,8 @@ defineExpose({
 
 				&:nth-of-type(2),
 				&:nth-of-type(3) {
-					--at-apply: 'bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800 ms-2.5 me-5';
+					/* me shrink on buildsIntoListButtons change */
+					--at-apply: 'bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800 ms-2.5 me-[--fluid-f1224-12-20-t1292]';
 				}
 
 				&:nth-of-type(3) {
@@ -1773,7 +1796,7 @@ defineExpose({
 			}
 
 			> p {
-				--at-apply: 'text-neutral-400 font-500 flex items-center';
+				--at-apply: 'text-neutral-400 font-500 flex items-center whitespace-nowrap';
 
 				> img {
 					--at-apply: 'inline-block h-3.5 w-auto';
@@ -1797,8 +1820,8 @@ defineExpose({
 
 @layer overrides {
 	#dialog-item-shop {
-		/* breakpoint related to --v-fluid-f485-40-0-t525 */
-		@media (height < 492px) {
+		/* vertical breakpoint related to --v-fluid-f485-40-0-t525 */
+		@media (height < 492px) or (width < 1224px) {
 			#item-shop-panel-boots {
 				--at-apply: 'static p-0 translate-0 z-auto b-0';
 				grid-area: boots;
