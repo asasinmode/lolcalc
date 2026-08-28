@@ -368,7 +368,9 @@ onBeforeUnmount(() => {
 
 /* build path needs at least 6 buttons' worth of width to fit */
 function updateBuildsIntoButtonsNumber() {
-	if (window.innerWidth < 1070) {
+	if (window.innerWidth < 940) {
+		buildsIntoListButtons.value = 7;
+	} else if (window.innerWidth < 1070) {
 		buildsIntoListButtons.value = 6;
 	} else if (window.innerWidth < 1224) {
 		buildsIntoListButtons.value = 7;
@@ -442,6 +444,52 @@ function onItemDrop(slotIndex: number) {
 	itemDragData = undefined;
 }
 
+const isShowingDetailsPanel = ref(false);
+let previousWindowWidth = 0;
+
+function toggleDetailsPanel() {
+	isShowingDetailsPanel.value = !isShowingDetailsPanel.value;
+}
+
+onMounted(() => {
+	window.addEventListener('resize', updateIsShowingDetailsPanel, { passive: true });
+	previousWindowWidth = window.innerWidth;
+	updateIsShowingDetailsPanel();
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updateIsShowingDetailsPanel);
+});
+
+function updateIsShowingDetailsPanel() {
+	if (window.innerWidth >= 940) {
+		isShowingDetailsPanel.value = true;
+	} else if (previousWindowWidth >= 940) {
+		isShowingDetailsPanel.value = false;
+	}
+	previousWindowWidth = window.innerWidth;
+}
+
+const detailsToggle = useTemplateRef('detailsToggle');
+
+function collapseDetailsFocusToggle() {
+	isShowingDetailsPanel.value = false;
+	detailsToggle.value?.focus();
+}
+
+function closeDetailsPanel() {
+	if (window.innerWidth < 940) {
+		isShowingDetailsPanel.value = false;
+	}
+}
+
+function closeCleanup() {
+	closeSearch();
+	if (window.innerWidth < 940) {
+		isShowingDetailsPanel.value = false;
+	}
+}
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -451,8 +499,9 @@ defineExpose({
 	<VDialog
 		id="dialog-item-shop"
 		ref="vDialog"
-		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg); --builds-into-btns: ${buildsIntoListButtons}`"
-		@close="closeSearch"
+		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg); --details-btns: ${buildsIntoListButtons}`"
+		:data-showing-details="isShowingDetailsPanel ? '' : undefined"
+		@close="closeCleanup"
 	>
 		<header>
 			<h1>
@@ -478,7 +527,7 @@ defineExpose({
 					aria-controls="item-shop-search-listbox"
 					:aria-activedescendant="searchCursoredOverIndex !== undefined ? `item-shop-search-result-${searchCursoredOverIndex}` : undefined"
 					:data-empty="!search"
-					@focus="searchExpanded = true"
+					@focus="(searchExpanded = true) && closeDetailsPanel()"
 					@update:model-value="searchCursorOver(searchResults.length ? 0 : undefined)"
 					@keydown="onSearchKeydown"
 				>
@@ -698,7 +747,17 @@ defineExpose({
 				</ul>
 			</template>
 		</section>
-		<section>
+		<button
+			id="toggle-details"
+			ref="detailsToggle"
+			class="other-ui-btn"
+			:aria-expanded="isShowingDetailsPanel"
+			aria-controls="item-shop-details"
+			@click="toggleDetailsPanel"
+		>
+			{{ isShowingDetailsPanel ? 'hide' : 'show' }} details
+		</button>
+		<section id="item-shop-details" :hidden="!isShowingDetailsPanel" @keydown.esc.prevent="collapseDetailsFocusToggle">
 			<LolItemDescription
 				:item="selectedItem?.item"
 				:gold="selectedItem?.calculatedPrice"
@@ -983,6 +1042,8 @@ defineExpose({
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
+		--close-btn-size: calc(8 * var(--spacing));
+		--toggle-details-btn-w: calc(28 * var(--spacing));
 		--header-px: calc(3 * var(--spacing));
 		--header-pbs: calc(3 * var(--spacing));
 		/* is texture button and it's width is set in the textureBgImageAttrs call */
@@ -1017,13 +1078,13 @@ defineExpose({
 			keep some translate x on the largest screens too (half of the collapsed boots panel width) since the dialog doesn't have clearly defined center that would seem off and I think it makes it feel better */
 		--translate-x: calc(0.5 * var(--fluid-f1720-236-54-t1960));
 
-		--builds-into-p: calc(3 * var(--spacing));
+		--details-p: calc(3 * var(--spacing));
 		--vfluid-f524-6-0-t540: clamp(0rem, 12.6563rem + -37.5vh, 0.375rem);
-		--builds-into-pbs: calc(4 * var(--spacing) - var(--vfluid-f524-6-0-t540));
-		--builds-into-gap: calc(3 * var(--spacing));
-		--builds-into-w: calc(
-			2 * var(--builds-into-p) + var(--builds-into-btns, 7) * var(--item-img-size) + (var(--builds-into-btns, 7) - 1) *
-				var(--builds-into-gap)
+		--details-pbs: calc(4 * var(--spacing) - var(--vfluid-f524-6-0-t540));
+		--details-gap: calc(3 * var(--spacing));
+		--details-w: calc(
+			2 * var(--details-p) + var(--details-btns, 7) * var(--item-img-size) + (var(--details-btns, 7) - 1) *
+				var(--details-gap)
 		);
 
 		&[open] {
@@ -1041,14 +1102,14 @@ defineExpose({
 				0,
 				min(
 					/* 2em 6px is default max width limit for dialog in chrome/firefox, 1 var(--spacing) is so to make the pin buttons not clip */
-						calc(100vw - 4em - 12px - var(--spacing) - var(--builds-into-w) - var(--side-panel-total-w)),
+						calc(100vw - 4em - 12px - var(--spacing) - var(--details-w) - var(--side-panel-total-w)),
 					calc(
 						var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
 							var(--items-px)
 					)
 				)
 			)
-			var(--builds-into-w);
+			var(--details-w);
 
 		@media (width < 1224px) {
 			--translate-x: 0px;
@@ -1057,14 +1118,14 @@ defineExpose({
 				minmax(
 					0,
 					min(
-						calc(100vw - 4em - 12px - var(--spacing) - var(--builds-into-w)),
+						calc(100vw - 4em - 12px - var(--spacing) - var(--details-w)),
 						calc(
 							var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
 								var(--items-px)
 						)
 					)
 				)
-				var(--builds-into-w);
+				var(--details-w);
 		}
 
 		@media (width < 940px) {
@@ -1114,7 +1175,7 @@ defineExpose({
 			}
 
 			> form {
-				--at-apply: 'end-0 inset-bs-0 absolute z-100 size-8';
+				--at-apply: 'end-0 inset-bs-0 absolute z-100 size-[--close-btn-size]';
 
 				@media (width < 940px) {
 					& {
@@ -1141,7 +1202,7 @@ defineExpose({
 
 				@media (width < 940px) {
 					& {
-						--at-apply: 'me-[calc(8*var(--spacing)+var(--header-px))]';
+						--at-apply: 'me-[calc(var(--close-btn-size)+var(--toggle-details-btn-w)+2*var(--header-px))]';
 					}
 				}
 
@@ -1149,6 +1210,12 @@ defineExpose({
 					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] block-[clamp(20rem,50vh,80vh)] inline-full translate-y-full start-0 -bottom-px absolute z-30 b b-[--ui-btn-border-clr] b shadow-xl min-inline-[min(44rem,80vw)]';
 					--px: calc(3 * var(--spacing));
 					--hover-bg: theme('colors.cyan.400/0.2');
+
+					@media (width < 940px) {
+						& {
+							--at-apply: 'inline-[calc(100%+var(--close-btn-size)+1.5*var(--header-px)+var(--toggle-details-btn-w))]';
+						}
+					}
 
 					> p {
 						--at-apply: 'uppercase px-[--px] font-700 text-neutral-200 py-2';
@@ -1578,8 +1645,8 @@ defineExpose({
 		}
 
 		#item-shop-builds-into-list {
-			--at-apply: 'flex gap-[--builds-into-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--builds-into-header-h)+var(--builds-into-header-pbe)+var(--builds-into-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
-			--builds-into-list-btn-size: var(--item-img-size);
+			--at-apply: 'flex gap-[--details-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--details-header-h)+var(--details-header-pbe)+var(--details-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
+			--details-list-btn-size: var(--item-img-size);
 
 			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or (width < 970px) {
 				& {
@@ -1588,10 +1655,10 @@ defineExpose({
 			}
 
 			> li {
-				--at-apply: 'bg-black block-[--builds-into-list-btn-size]';
+				--at-apply: 'bg-black block-[--details-list-btn-size]';
 
 				> button {
-					--at-apply: 'size-[--builds-into-list-btn-size]';
+					--at-apply: 'size-[--details-list-btn-size]';
 
 					&:disabled,
 					&[popovertarget] {
@@ -1766,15 +1833,15 @@ defineExpose({
 				--at-apply: 'flex flex-col of-y-auto b-s b-[--ui-btn-border-clr] pbe-3';
 				grid-area: builds-into;
 				--build-path-py: calc(3 * var(--spacing));
-				--builds-into-header-h: var(--text-lg-lineHeight);
-				--builds-into-header-pbe: calc(1 * var(--spacing));
+				--details-header-h: var(--text-lg-lineHeight);
+				--details-header-pbe: calc(1 * var(--spacing));
 
 				> * {
-					--at-apply: 'px-[--builds-into-p]';
+					--at-apply: 'px-[--details-p]';
 				}
 
 				> h3 {
-					--at-apply: 'pbe-[--builds-into-header-pbe] pbs-[--builds-into-pbs] order-1 sticky inset-bs-0 bg-[--bg-clr] z-20 font-700 text-lg uppercase text-neutral-200';
+					--at-apply: 'pbe-[--details-header-pbe] pbs-[--details-pbs] order-1 sticky inset-bs-0 bg-[--bg-clr] z-20 font-700 text-lg uppercase text-neutral-200';
 
 					&:nth-of-type(2) {
 						--at-apply: 'sr-only';
@@ -1782,8 +1849,8 @@ defineExpose({
 				}
 
 				@media (height < 460px) or ((width < 1224px) and (height < 480px)) or (width < 970px) {
-					--builds-into-header-h: 1em;
-					--builds-into-pbs: var(--header-pbs);
+					--details-header-h: 1em;
+					--details-pbs: var(--header-pbs);
 
 					> h3 {
 						--at-apply: 'leading-none text-base';
@@ -1792,12 +1859,17 @@ defineExpose({
 
 				@media (width < 940px) {
 					& {
-						--at-apply: 'absolute bg-[--bg-clr] end-0 inset-y-0 z-10 translate-x-full';
+						--details-header-h: var(--close-btn-size);
+						--at-apply: 'absolute bg-[--bg-clr] end-0 inset-y-0 inline-[--details-w] max-inline-[calc(100%+1px)] z-10 translate-x-full';
+					}
+
+					> h3 {
+						--at-apply: 'block-[--close-btn-size] flex items-center box-content shrink-0';
 					}
 				}
 
 				> button {
-					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-btn-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300 mx-[--builds-into-p]';
+					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-btn-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300 mx-[--details-p]';
 
 					&:disabled:is(:hover, :focus-visible) {
 						--at-apply: 'bg-cyan-900';
@@ -1847,6 +1919,16 @@ defineExpose({
 			}
 		}
 
+		#toggle-details {
+			--at-apply: 'absolute inset-bs-[--header-pbs] end-[calc(var(--close-btn-size)+var(--header-px))] inline-[--toggle-details-btn-w] block-[--close-btn-size] rounded-full text-center z-30';
+
+			@media not (width < 940px) {
+				& {
+					--at-apply: 'hidden';
+				}
+			}
+		}
+
 		> footer {
 			--at-apply: 'flex items-center py-2.5 px-3 b-t b-[--ui-btn-border-clr]';
 			--btn-w: calc(24 * var(--spacing));
@@ -1861,7 +1943,7 @@ defineExpose({
 				}
 			}
 
-			@media (width < 970px) and (width >= 940px) {
+			@media ((width < 970px) and (width >= 940px)) or (width < 548px) {
 				& {
 					--at-apply: 'grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_min-content_auto]';
 					grid-template-areas:
@@ -1987,6 +2069,16 @@ defineExpose({
 						> * {
 							--at-apply: 'size-7 m-auto';
 						}
+					}
+				}
+			}
+		}
+
+		@media (width < 940px) {
+			&[data-showing-details] {
+				> section {
+					&:nth-of-type(2) {
+						--at-apply: 'translate-x-0';
 					}
 				}
 			}
