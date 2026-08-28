@@ -960,11 +960,14 @@ defineExpose({
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
 		--header-px: calc(3 * var(--spacing));
+		--header-pbs: calc(3 * var(--spacing));
 		/* is texture button and it's width is set in the textureBgImageAttrs call */
 		--clear-filters-btn-w: calc(7 * var(--spacing));
 		--items-px: calc(3 * var(--spacing));
 		--items-gap: calc(3 * var(--spacing));
 		--items-max-cols: 10;
+		/* vertical f460-12-20-t492 */
+		--item-sections-mbe: clamp(0.75rem, -6.4375rem + 25vh, 1.25rem);
 
 		--side-panel-gap: calc(2 * var(--spacing));
 		--side-panel-py: calc(4 * var(--spacing));
@@ -991,6 +994,7 @@ defineExpose({
 		--translate-x: calc(0.5 * var(--fluid-f1720-236-54-t1960));
 
 		--builds-into-p: calc(3 * var(--spacing));
+		--builds-into-pbs: calc(4 * var(--spacing));
 		--builds-into-gap: calc(3 * var(--spacing));
 		--builds-into-w: calc(
 			2 * var(--builds-into-p) + var(--builds-into-btns, 7) * var(--item-img-size) + (var(--builds-into-btns, 7) - 1) *
@@ -1034,11 +1038,16 @@ defineExpose({
 		}
 
 		> header {
-			--at-apply: 'grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center';
+			--at-apply: 'grid col-span-2 grid-rows-[repeat(3,auto)] grid-cols-[1fr_auto] items-center pbs-[--header-pbs]';
 			grid-area: header;
+			grid-template-areas:
+				'header header'
+				'search search'
+				'categories order';
 
 			> h1 {
-				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-[--header-px] pt-3 pb-2 mb-5 text-center b-b-2 b-cyan-400/70';
+				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-[--header-px] pbe-2 mb-5 text-center b-b-2 b-cyan-400/70';
+				grid-area: header;
 
 				border-image: linear-gradient(
 						90deg,
@@ -1068,7 +1077,8 @@ defineExpose({
 			}
 
 			> div.inline-search-label {
-				--at-apply: 'col-span-full mx-[--header-px]';
+				--at-apply: 'mx-[--header-px]';
+				grid-area: search;
 
 				> div {
 					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0 shadow-xl';
@@ -1135,8 +1145,9 @@ defineExpose({
 				}
 			}
 
-			> #item-shop-category-filter {
-				--at-apply: 'row-start-3 h-12 flex items-start';
+			#item-shop-category-filter {
+				--at-apply: 'block-12 flex items-start';
+				grid-area: categories;
 
 				> button {
 					--at-apply: 'h-12 w-10 grid-center relative';
@@ -1173,11 +1184,25 @@ defineExpose({
 				}
 			}
 
-			> #item-shop-swap-sort-order {
+			#item-shop-swap-sort-order {
 				--at-apply: 'self-center me-[--header-px]';
+				grid-area: order;
 
 				> span {
 					--at-apply: 'sr-only';
+				}
+			}
+
+			@media (height < 460px) {
+				& {
+					--at-apply: 'grid-rows-[repeat(2,auto)]';
+					grid-template-areas:
+						'search search'
+						'categories order';
+				}
+
+				> h1 {
+					--at-apply: 'sr-only p-0 m-0';
 				}
 			}
 		}
@@ -1654,13 +1679,23 @@ defineExpose({
 				}
 
 				> ul {
-					--at-apply: 'mb-5 gap-[--items-gap] grid grid-cols-[repeat(auto-fit,calc(var(--item-img-size)))] last:mb-0';
+					--at-apply: 'mbe-[--item-sections-mbe] gap-[--items-gap] grid grid-cols-[repeat(auto-fit,calc(var(--item-img-size)))] last:mb-0';
 				}
 			}
 
 			&:nth-of-type(2) {
-				--at-apply: 'flex flex-col p-[--builds-into-p] pt-4 of-y-auto b-s b-[--ui-btn-border-clr]';
+				--at-apply: 'flex flex-col p-[--builds-into-p] pbs-[--builds-into-pbs] of-y-auto b-s b-[--ui-btn-border-clr]';
 				grid-area: builds-into;
+
+				@media (height < 460px) {
+					& {
+						--at-apply: 'pbs-[--header-pbs]';
+					}
+
+					> h3:first-of-type {
+						--at-apply: 'leading-none text-base';
+					}
+				}
 
 				> h3 {
 					--at-apply: 'font-700 text-lg uppercase mb-1 text-neutral-200';
@@ -1684,7 +1719,7 @@ defineExpose({
 				}
 
 				#item-shop-build-path {
-					--at-apply: 'b-t box-content py-3 mt-3 text-center flex flex-col items-center justify-center order-3 shrink-0';
+					--at-apply: 'b-bs box-content py-3 mbs-3 text-center flex flex-col items-center justify-center order-3 shrink-0';
 					min-height: calc(
 						4 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 3 *
 							var(--item-mt) + 5 * var(--spacing)
@@ -1692,6 +1727,12 @@ defineExpose({
 					);
 					--item-mb: calc(1.5 * var(--spacing));
 					--item-mt: calc(4 * var(--spacing));
+
+					@media (height < 460px) {
+						& {
+							--at-apply: 'mbs-1';
+						}
+					}
 				}
 
 				> .item-description-header,
@@ -1774,7 +1815,7 @@ defineExpose({
 				}
 
 				ul {
-					--at-apply: 'p-0 flex flex-wrap mb-5 gap-3';
+					--at-apply: 'p-0 flex flex-wrap mbe-[--item-sections-mbe] gap-3';
 					direction: ltr;
 				}
 			}
