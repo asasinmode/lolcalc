@@ -105,7 +105,7 @@ onMounted(() => {
 <style>
 @layer components {
 	.effect-src-select {
-		--at-apply: 'absolute start-[--p] inset-bs-[--p] z-1 size-5.5 b b-[--ui-btn-border-clr]';
+		--at-apply: 'absolute start-[--p] inset-bs-[--p] z-1 size-[--fluid-28-22-t600] b b-[--ui-btn-border-clr]';
 		--hover-brightness: var(--champion-hover-brightness);
 		--bg-size: 100%;
 		anchor-scope: --effect-src-select;

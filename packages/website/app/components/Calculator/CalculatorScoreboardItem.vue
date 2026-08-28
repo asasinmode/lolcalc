@@ -2930,6 +2930,7 @@ defineExpose({ el });
 			--p: calc(2 * var(--spacing));
 			anchor-scope: --extra-container;
 			anchor-name: --extra-container;
+			--ctl-btn-size: var(--fluid-28-22-t600);
 
 			&.unknown,
 			&.loading {
@@ -2968,19 +2969,19 @@ defineExpose({ el });
 			> label + button,
 			.effect-ctl > button,
 			.effect-ctl > label {
-				--at-apply: 'grid-center size-5.5';
+				--at-apply: 'grid-center size-[--ctl-btn-size]';
 
 				> .icon {
-					--at-apply: 'size-4';
+					--at-apply: 'size-[calc(100%*16/22)]';
 				}
 			}
 
 			> label:has(+ button) {
-				--at-apply: 'me-6';
+				--at-apply: 'me-[--ctl-btn-size]';
 			}
 
 			> label:has(+ .effect-ctl) {
-				--at-apply: 'me-11';
+				--at-apply: 'me-[calc(2*var(--ctl-btn-size))]';
 			}
 
 			&[data-inactive] {

@@ -57,10 +57,11 @@ function hideControlsTooltip(event: Event) {
 <style>
 @layer components {
 	.effect-ctl {
-		--at-apply: 'flex';
+		/* translate by half the size buttons go between mobile and 600px w */
+		--at-apply: 'flex -translate-y-[--fluid-3-0-t600]';
 
 		> button:first-of-type {
-			&:has(+ button) {
+			&:has(+ button, + label) {
 				--at-apply: '-me-px';
 			}
 
