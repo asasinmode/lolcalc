@@ -238,7 +238,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] graph results in style of post game ones, table data but graph?
 - [ ] detect invalid ability levels
 - [ ] champion abilities
-  - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`?
+  - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`? Maybe passives can have cd? Check gragas
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
   - [ ] extendedVariable values, resolve cooldown & cost
   - [ ] result row variable values

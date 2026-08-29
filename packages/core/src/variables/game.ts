@@ -967,6 +967,109 @@ function variableExtendedEquals(
 	return metaSuffix;
 }
 
+interface NormalizedBreakpoint {
+	level: number;
+	additionalBonusAtThisLevel?: number;
+	bonusPerLevelAtAndAfter?: number;
+};
+
+function resolveByCharLevelBreakpoint(
+	breakpoint: NonNullable<IGameVariablesByType['ByCharLevelBreakpointsCalculationPart']['mBreakpoints']>[number] | IGameVariablesByType['{0333530c}'],
+	meta: IVariableCalculationFnMeta,
+): NormalizedBreakpoint {
+	if ('mLevel' in breakpoint) {
+		return {
+			level: breakpoint.mLevel,
+			additionalBonusAtThisLevel: breakpoint.mAdditionalBonusAtThisLevel,
+			bonusPerLevelAtAndAfter: breakpoint.mBonusPerLevelAtAndAfter,
+		};
+	}
+
+	let additionalBonusAtThisLevel: number | undefined;
+	if (breakpoint['{ae9b464d}'] !== undefined) {
+		meta.accessedVariables?.add(breakpoint['{ae9b464d}']);
+		const resolved = meta.variableValueFn(breakpoint['{ae9b464d}'], meta.variableValueParams);
+		additionalBonusAtThisLevel = resolved?.value as number | undefined;
+	}
+
+	let bonusPerLevelAtAndAfter: number | undefined;
+	if (breakpoint['{b0d8b2ac}'] !== undefined) {
+		meta.accessedVariables?.add(breakpoint['{b0d8b2ac}']);
+		const resolved = meta.variableValueFn(breakpoint['{b0d8b2ac}'], meta.variableValueParams);
+		bonusPerLevelAtAndAfter = resolved?.value as number | undefined;
+	}
+
+	return {
+		level: breakpoint.level,
+		additionalBonusAtThisLevel,
+		bonusPerLevelAtAndAfter,
+	};
+}
+
+function calculateByCharLevelBreakpoints(
+	mLevel1Value: number | undefined,
+	mInitialBonusPerLevel: number | undefined,
+	breakpoints: NormalizedBreakpoint[] | undefined,
+	sourceLevel: number,
+	warnContext: string,
+): IVariableValueResult {
+	const rv: IVariableValueResult = {
+		value: mLevel1Value ?? 0,
+		calculatesFrom: [],
+	};
+	const min = rv.value as number;
+	let max = min;
+
+	if (mInitialBonusPerLevel) {
+		let maxInitialBonusLevel = Number.POSITIVE_INFINITY;
+		if (breakpoints?.[0]?.level) {
+			maxInitialBonusLevel = breakpoints[0].level - 1;
+		}
+
+		max = min + (mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, CHAMPION_LEVEL.max) - 1));
+		rv.calculatesFrom![0] = {
+			value: { min, max },
+			stat: 'level',
+		};
+
+		(rv.value as number) += mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, sourceLevel) - 1);
+	}
+
+	if (breakpoints) {
+		for (let i = 0; i < breakpoints.length; i++) {
+			const { additionalBonusAtThisLevel, bonusPerLevelAtAndAfter, level } = breakpoints[i]!;
+			const nextLevel = breakpoints[i + 1]?.level;
+
+			if (sourceLevel >= level) {
+				if (bonusPerLevelAtAndAfter !== undefined || additionalBonusAtThisLevel !== undefined) {
+					if (bonusPerLevelAtAndAfter === undefined) {
+						(rv.value as number) += additionalBonusAtThisLevel!;
+					} else {
+						const effectiveEnd = nextLevel ? Math.min(sourceLevel, nextLevel - 1) : sourceLevel;
+						(rv.value as number) += bonusPerLevelAtAndAfter * (effectiveEnd + 1 - level);
+					}
+				} else {
+					console.warn(`[variables/game fn ${warnContext}] unknown mBreakpoints structure`, breakpoints);
+					rv.value = undefined;
+				}
+			}
+
+			if (CHAMPION_LEVEL.max >= level) {
+				const effectiveMaxEnd = nextLevel ? Math.min(CHAMPION_LEVEL.max, nextLevel - 1) : CHAMPION_LEVEL.max;
+				max += bonusPerLevelAtAndAfter === undefined
+					? additionalBonusAtThisLevel!
+					: (bonusPerLevelAtAndAfter * (effectiveMaxEnd + 1 - level));
+			}
+		}
+		rv.calculatesFrom![0] = {
+			value: { min, max },
+			stat: 'level',
+		};
+	}
+
+	return rv;
+}
+
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
 	mFormulaParts(variable: {
@@ -1158,54 +1261,33 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 	},
 	ByCharLevelBreakpointsCalculationPart(variable: IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'], _whole, meta) {
-		const rv: IVariableValueResult = {
-			value: variable.mLevel1Value ?? 0,
-			calculatesFrom: [],
-		};
-		const min = rv.value as number;
-		let max = min;
-		const level = meta.variableValueParams.damageSource?.level.value ?? 1;
+		return calculateByCharLevelBreakpoints(
+			variable.mLevel1Value,
+			variable.mInitialBonusPerLevel,
+			variable.mBreakpoints?.map(bp => resolveByCharLevelBreakpoint(bp, meta)),
+			meta.variableValueParams.damageSource?.level.value ?? 1,
+			'ByCharLevelBreakpointsCalculationPart',
+		);
+	},
+	/** hashed `ByCharLevelBreakpointsCalculationPart` */
+	'{4ce08984}': function (variable: IGameVariablesByType['{4ce08984}'], _whole, meta) {
+		meta.accessedVariables?.add(variable['{91d404a5}']);
+		const level1ValueResult = variable['{91d404a5}'] !== undefined
+			? meta.variableValueFn(variable['{91d404a5}'], meta.variableValueParams)
+			: undefined;
 
-		if (variable.mInitialBonusPerLevel) {
-			let maxInitialBonusLevel = Number.POSITIVE_INFINITY;
-			if (variable.mBreakpoints?.[0]?.mLevel) {
-				maxInitialBonusLevel = variable.mBreakpoints[0].mLevel - 1;
-			}
+		meta.accessedVariables?.add(variable['{bbd778a2}']);
+		const initialBonusPerLevelResult = variable['{bbd778a2}'] !== undefined
+			? meta.variableValueFn(variable['{bbd778a2}'], meta.variableValueParams)
+			: undefined;
 
-			max = min + (variable.mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, CHAMPION_LEVEL.max) - 1));
-			rv.calculatesFrom![0] = {
-				value: { min, max },
-				stat: 'level',
-			};
-
-			(rv.value as number) += variable.mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, level) - 1);
-		}
-
-		if (variable.mBreakpoints) {
-			for (const { mAdditionalBonusAtThisLevel, mBonusPerLevelAtAndAfter, mLevel } of variable.mBreakpoints) {
-				if (level >= mLevel) {
-					if (mBonusPerLevelAtAndAfter || mAdditionalBonusAtThisLevel) {
-						(rv.value as number) += mBonusPerLevelAtAndAfter === undefined
-							? mAdditionalBonusAtThisLevel!
-							: (mBonusPerLevelAtAndAfter * (level + 1 - mLevel));
-					} else {
-						console.warn(`[variables/game fn ByCharLevelBreakpointsCalculationPart] unknown mBreakpoints structure`, variable);
-						rv.value = undefined;
-					}
-				}
-
-				if (CHAMPION_LEVEL.max >= mLevel) {
-					max += mBonusPerLevelAtAndAfter === undefined
-						? mAdditionalBonusAtThisLevel!
-						: (mBonusPerLevelAtAndAfter * (CHAMPION_LEVEL.max + 1 - mLevel));
-				}
-			}
-			rv.calculatesFrom![0] = {
-				value: { min, max },
-				stat: 'level',
-			};
-		}
-		return rv;
+		return calculateByCharLevelBreakpoints(
+			level1ValueResult?.value as number | undefined,
+			initialBonusPerLevelResult?.value as number | undefined,
+			variable['{9823b29a}']?.map(bp => resolveByCharLevelBreakpoint(bp, meta)),
+			meta.variableValueParams.damageSource?.level.value ?? 1,
+			'{4ce08984}',
+		);
 	},
 	/** calculates the value between `mStartValue` and `mEndValue` based on damage source's level. Formula taken from [Protoplasm Harness' wiki](https://wiki.leagueoflegends.com/en-us/Protoplasm_Harness) */
 	ByCharLevelInterpolationCalculationPart(variable: IGameVariablesByType['ByCharLevelInterpolationCalculationPart'], _whole, meta) {
@@ -1223,7 +1305,6 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	/** same as `ByCharLevelInterpolationCalculationPart` but with the keys hashed and variables needing resolving, not being directly in `mStartValue` and `mEndValue` */
 	'{ee18a47b}': function (variable: IGameVariablesByType['{ee18a47b}'], whole, meta) {
-		meta.variableValueParams.accessedVariables ??= new Map();
 		meta.accessedVariables?.add(variable['{0589a59c}']);
 		const minResult = meta.variableValueFn(variable['{0589a59c}'], meta.variableValueParams);
 		meta.accessedVariables?.add(variable['{0b65bc23}']);
@@ -1252,7 +1333,6 @@ export const VARIABLE_CALCULATION_FNS = {
 			'{b2cd0eb0}': perLevelValueVariable,
 		} = variable;
 
-		meta.variableValueParams.accessedVariables ??= new Map();
 		meta.accessedVariables?.add(baseValueVariable);
 		const baseValue = meta.variableValueFn(baseValueVariable, meta.variableValueParams);
 		meta.accessedVariables?.add(perLevelValueVariable);
@@ -1294,7 +1374,6 @@ export const VARIABLE_CALCULATION_FNS = {
 		if ('mMultiplier' in variable) {
 			multiplier = resolveMMultiplier(variable.mMultiplier!, whole, meta)!;
 		}
-		meta.variableValueParams.accessedVariables ??= new Map();
 		const rv = meta.variableValueFn(variable.mModifiedGameCalculation, meta.variableValueParams);
 
 		if (typeof rv.value === 'number') {
@@ -1440,17 +1519,19 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 } satisfies IHypotheticalVariableCalculationFns;
 
+interface IVariableCalculationFnMeta {
+	variableValueFn: (variable: string, params: any) => IVariableValueResult;
+	variableValueParams: IItemVariableParams | IRuneVariableParams | IChampionAbilityVariableParams;
+	isRanged?: boolean;
+	accessedVariables?: Set<string>;
+}
+
 type IHypotheticalVariableCalculationFns = Record<
 	string,
 	(
 		variable: any,
 		whole: any,
-		meta: {
-			variableValueFn: (variable: string, params: any) => IVariableValueResult;
-			variableValueParams: IItemVariableParams | IRuneVariableParams | IChampionAbilityVariableParams;
-			isRanged?: boolean;
-			accessedVariables?: Set<string>;
-		},
+		meta: IVariableCalculationFnMeta,
 	) => IVariableValueResult | undefined
 >;
 
@@ -1464,6 +1545,23 @@ interface IGameVariablesByType {
 			mBonusPerLevelAtAndAfter?: number;
 		}[];
 		__type: string;
+	};
+	/** hashed `ByCharLevelBreakpointsCalculationPart` */
+	'{4ce08984}': {
+		/** mLevel1Value */
+		'{91d404a5}': string;
+		/** mInitialBonusPerLevel */
+		'{bbd778a2}': string;
+		/** hashed mBreakpoints */
+		'{9823b29a}'?: IGameVariablesByType['{0333530c}'][];
+	};
+	/** hashed `ByCharLevelBreakpointsCalculationPart`.mBreakpoints[number] */
+	'{0333530c}': {
+		'level': number;
+		/** mAdditionalBonusAtThisLevel */
+		'{ae9b464d}': string;
+		/** mBonusPerLevelAtAndAfter */
+		'{b0d8b2ac}': string;
 	};
 	'NumberCalculationPart': {
 		mNumber: number;
@@ -1490,6 +1588,7 @@ interface IGameVariablesByType {
 		mEndValue: number;
 		__type: string;
 	};
+	/** hashed `ByCharLevelInterpolationCalculationPart` */
 	'{ee18a47b}': {
 		'{0589a59c}': string;
 		'{0b65bc23}': string;
