@@ -759,6 +759,13 @@ defineExpose({
 			@click="toggleDetailsPanel"
 		>
 			{{ isShowingDetailsPanel ? 'hide' : 'show' }} details
+			<img
+				v-show="selectedItem"
+				:src="selectedItem ? `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${selectedItem.item.image}` : ''"
+				width="64"
+				height="64"
+				:alt="selectedItem?.item.name"
+			>
 		</button>
 		<section id="item-shop-details" :hidden="!isShowingDetailsPanel" @keydown.esc.prevent="collapseDetailsFocusToggle">
 			<LolItemDescription
@@ -1050,7 +1057,7 @@ defineExpose({
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
 		--item-shop-btn-p: var(--fluid-2-4-t500);
 		--close-btn-size: calc(8 * var(--spacing));
-		--toggle-details-btn-w: calc(28 * var(--spacing));
+		--toggle-details-btn-w: var(--fluid-124-128-t340);
 		--header-px: var(--fluid-8-12-t400);
 		--header-pbs: calc(3 * var(--spacing));
 		/* is texture button and it's width is set in the textureBgImageAttrs call */
@@ -1101,7 +1108,7 @@ defineExpose({
 			'header header builds-into'
 			'aside items builds-into'
 			'footer footer builds-into';
-		grid-template-rows: auto 1fr auto;
+		grid-template-rows: auto 1fr min-content;
 		grid-template-columns:
 			calc(var(--clear-filters-btn-w) + 2 * var(--header-px) + 1px)
 			minmax(
@@ -2033,7 +2040,15 @@ defineExpose({
 		}
 
 		#toggle-details {
-			--at-apply: 'absolute inset-bs-[--header-pbs] end-[calc(var(--close-btn-size)+var(--header-px))] inline-[--toggle-details-btn-w] block-[--close-btn-size] rounded-full text-center z-30';
+			--at-apply: 'absolute inset-bs-[--header-pbs] end-[calc(var(--close-btn-size)+var(--header-px))] inline-[--toggle-details-btn-w] block-[--close-btn-size] rounded-full text-center z-30 whitespace-nowrap of-clip grid grid-cols-[1fr_max-content] px-2 grid-rows-1 items-center';
+
+			&::before {
+				--at-apply: 'bg-black size-4.5 content-empty block rounded-1/2 row-start-1 col-start-1 self-center';
+			}
+
+			> img {
+				--at-apply: 'order-1 size-4.5 row-start-1 col-start-1 self-center rounded-1/2';
+			}
 
 			@media not (width < 940px) {
 				& {
@@ -2049,7 +2064,7 @@ defineExpose({
 
 			@media (width < 1224px) {
 				& {
-					--at-apply: 'grid grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_auto] py-1.5 gap-y-1 gap-x-[--fluid-8-12-t1224]';
+					--at-apply: 'grid grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_min-content] py-1.5 gap-y-1 gap-x-[--fluid-8-12-t1224]';
 					grid-template-areas:
 						'eq eq value'
 						'sell undo sell-all';
@@ -2058,7 +2073,7 @@ defineExpose({
 
 			@media ((width < 970px) and (width >= 940px)) or (width < 548px) {
 				& {
-					--at-apply: 'grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_min-content_auto]';
+					--at-apply: 'grid-cols-[var(--btn-w)_auto_minmax(0,1fr)] grid-rows-[auto_min-content_min-content]';
 					grid-template-areas:
 						'eq eq eq'
 						'value value value'
