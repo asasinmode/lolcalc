@@ -1272,7 +1272,7 @@ defineExpose({
 					}
 
 					> ul {
-						--at-apply: 'h-full of-y-auto';
+						--at-apply: 'h-full of-y-auto overscroll-x-none';
 
 						> li {
 							--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-2 ps-[--px] pe-1 py-[--results-item-py] hover:bg-[--hover-bg] gap-x-2 mbe-[min(var(--vfluid-f490-0-4-t540),var(--fluid-0-4-t400))] last:mbe-0';
