@@ -17,7 +17,7 @@ jobs:
           cache: true
           package_json_file: package.json
           cache_dependency_path: pnpm-lock.yaml
-      - run: pnpm i --frozen-lockfile
+      - run: pnpm ci --frozen-lockfile
       - run: NUXT_APP_BASE_URL=/lolcalc/ pnpx nuxt build --preset github_pages
         working-directory: packages/website
       - name: Upload artifact
