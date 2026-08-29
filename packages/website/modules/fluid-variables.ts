@@ -3,15 +3,25 @@ import { addTemplate, defineNuxtModule, resolveFiles, updateTemplates } from '@n
 
 interface IFluidVariablesConfig {
 	/**
-	 * default min viewport in px
-	 * @default 380
+	 * default min _horizontal_ viewport in px
+	 * @default 320
 	 */
 	minViewport?: number;
 	/**
-	 * default max viewport in px
-	 * @default 1280
+	 * default max _horizontal_ viewport in px
+	 * @default 1440
 	 */
 	maxViewport?: number;
+	/**
+	 * default min _vertical_ viewport in px
+	 * @default 320
+	 */
+	minVerticalViewport?: number;
+	/**
+	 * default max _vertical_ viewport in px
+	 * @default 720
+	 */
+	maxVerticalViewport?: number;
 	/**
 	 * should be the same as page's `:root { font-size }` property
 	 * note that it **doesn't apply to breakpoints**, just values, so with root's `font-size: 14px` `--fluid-f768-16-32-t1024` would mean at `768px` the value is `14px` and at `1024px` it grows to `28px`
@@ -24,11 +34,18 @@ interface IFluidVariablesConfig {
 	 */
 	variablePrefix?: string;
 	/**
+	 * same as `variablePrefix` but vertical
+	 * @default --vfluid
+	 */
+	verticalVariablePrefix?: string;
+	/**
 	 * created based on the `variablePrefix` option, this overrides it
 	 * the regexp should return 4 matches where `[minViewport, sizeFrom, sizeTo, maxViewport]`
 	 * @default --fluid-(?:f(\\d+)-)?(\\d+)-(\\d+)(?:-t(\\d+))?
 	 */
 	variableRegexp?: RegExp;
+	/** same as `variableRegexp` but vertical */
+	verticalVariableRegexp?: RegExp;
 }
 
 export default defineNuxtModule<IFluidVariablesConfig>({
@@ -39,11 +56,15 @@ export default defineNuxtModule<IFluidVariablesConfig>({
 	async setup(options, nuxt) {
 		options.minViewport ??= 320;
 		options.maxViewport ??= 1440;
+		options.minVerticalViewport ??= 320;
+		options.maxVerticalViewport ??= 720;
 		options.remInPx ??= 16;
 		options.variablePrefix ??= '--fluid';
+		options.verticalVariablePrefix ??= '--vfluid';
 		options.variableRegexp ??= new RegExp(`${options.variablePrefix}-(?:f(\\d+)-)?(\\d+)-(\\d+)(?:-t(\\d+))?`, 'g');
+		options.verticalVariableRegexp ??= new RegExp(`${options.verticalVariablePrefix}-(?:f(\\d+)-)?(\\d+)-(\\d+)(?:-t(\\d+))?`, 'g');
 
-		const variablesByFile: Map<string, IFileVariables> = new Map();
+		const variablesByFile: Map<string, [IFileVariables, IFileVariables]> = new Map();
 		let generatedCss = '';
 
 		const files = await resolveFiles(nuxt.options.srcDir, ['**/*.css', '**/*.vue'], {
@@ -93,6 +114,7 @@ function generateClamp(
 	minScreenWidth: number,
 	maxScreenWidth: number,
 	remInPx: number,
+	viewportUnit: 'w' | 'h',
 ): string {
 	const slope = (sizeTo - sizeFrom) / (maxScreenWidth - minScreenWidth);
 	const yAxisIntersection = -minScreenWidth * slope + sizeFrom;
@@ -100,18 +122,26 @@ function generateClamp(
 	const minSize = Math.min(sizeFrom, sizeTo);
 	const maxSize = Math.max(sizeFrom, sizeTo);
 
-	return `clamp(${formatNumber(minSize / defaultRemInPx)}rem, ${formatNumber(yAxisIntersection / remInPx)}rem + ${formatNumber(slope * 100)}vw, ${formatNumber(maxSize / defaultRemInPx)}rem)`;
+	return `clamp(${formatNumber(minSize / defaultRemInPx)}rem, ${formatNumber(yAxisIntersection / remInPx)}rem + ${formatNumber(slope * 100)}v${viewportUnit}, ${formatNumber(maxSize / defaultRemInPx)}rem)`;
 }
 
 function formatNumber(number: number) {
 	return Number.parseFloat(number.toFixed(4));
 }
 
-async function extractFluidVariables(filePath: string, config: IFluidVariablesConfig): Promise<IFileVariables> {
-	const variables: IFileVariables = new Map();
+async function extractFluidVariables(filePath: string, config: IFluidVariablesConfig): Promise<[ horizontal: IFileVariables, vertical: IFileVariables ]> {
+	const hVars: IFileVariables = new Map();
+	const vVars: IFileVariables = new Map();
 	const content = await fs.readFile(filePath, 'utf-8');
 
-	for (const match of content.matchAll(config.variableRegexp!)) {
+	setMatchedVariables(hVars, content, config.variableRegexp!);
+	setMatchedVariables(vVars, content, config.verticalVariableRegexp!);
+
+	return [hVars, vVars];
+}
+
+function setMatchedVariables(variables: IFileVariables, content: string, regex: RegExp) {
+	for (const match of content.matchAll(regex)) {
 		const fromViewport = match[1] ? Number(match[1]) : undefined;
 		const sizeFrom = Number(match[2]);
 		const sizeTo = Number(match[3]);
@@ -133,25 +163,32 @@ async function extractFluidVariables(filePath: string, config: IFluidVariablesCo
 			});
 		}
 	}
-
-	return variables;
 }
 
-function generateCss(variablesByFile: Map<string, IFileVariables>, config: IFluidVariablesConfig) {
-	const wantedVariables: IFileVariables = new Map();
+function generateCss(variablesByFile: Map<string, [horizontal: IFileVariables, vertical: IFileVariables]>, config: IFluidVariablesConfig) {
+	const wantedHVariables: IFileVariables = new Map();
+	const wantedVVariables: IFileVariables = new Map();
 
-	for (const fileVariables of variablesByFile.values()) {
-		for (const [key, variable] of fileVariables.entries()) {
-			if (!wantedVariables.has(key)) {
-				wantedVariables.set(key, variable);
+	for (const [horizontalVars, verticalVars] of variablesByFile.values()) {
+		for (const [key, variable] of horizontalVars.entries()) {
+			if (!wantedHVariables.has(key)) {
+				wantedHVariables.set(key, variable);
+			}
+		}
+		for (const [key, variable] of verticalVars.entries()) {
+			if (!wantedVVariables.has(key)) {
+				wantedVVariables.set(key, variable);
 			}
 		}
 	}
 
 	let css = ':root {\n';
 
-	for (const [key, { sizeFrom, sizeTo, fromViewport, toViewport }] of wantedVariables.entries()) {
-		css += `    ${config.variablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minViewport!, toViewport || config.maxViewport!, config.remInPx!)};\n`;
+	for (const [key, { sizeFrom, sizeTo, fromViewport, toViewport }] of wantedHVariables.entries()) {
+		css += `\t${config.variablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minViewport!, toViewport || config.maxViewport!, config.remInPx!, 'w')};\n`;
+	}
+	for (const [key, { sizeFrom, sizeTo, fromViewport, toViewport }] of wantedVVariables.entries()) {
+		css += `\t${config.verticalVariablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minViewport!, toViewport || config.maxViewport!, config.remInPx!, 'h')};\n`;
 	}
 
 	css += '}';
