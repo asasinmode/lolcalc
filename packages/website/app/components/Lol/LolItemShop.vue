@@ -368,7 +368,9 @@ onBeforeUnmount(() => {
 
 /* build path needs at least 6 buttons' worth of width to fit */
 function updateBuildsIntoButtonsNumber() {
-	if (window.innerWidth < 940) {
+	if (window.innerWidth < 528) {
+		buildsIntoListButtons.value = 6;
+	} else if (window.innerWidth < 940) {
 		buildsIntoListButtons.value = 7;
 	} else if (window.innerWidth < 1070) {
 		buildsIntoListButtons.value = 6;
@@ -863,69 +865,71 @@ defineExpose({
 			<h3 v-show="displayedItem">
 				{{ displayedItem?.item.name }} build path
 			</h3>
-			<div id="item-shop-build-path">
-				<LolItemBuildPathButton
-					v-if="displayedItem"
-					:shop-item="displayedItem"
-					:data-legendary="displayedItem.isLegendary ? '' : undefined"
-					:class="{ selected: selectedItem?.item.id === displayedItem.item.id }"
-					@mouseenter="enterTooltipableElement($event, displayedItem)"
-					@click="selectItem(displayedItem, false)"
-					@click.right.prevent="buyItem(displayedItem.item, displayedItem.buyability)"
-					@dblclick="buyItem(displayedItem.item, displayedItem.buyability)"
-				/>
-				<ul
-					v-if="displayedItemBuildsFrom?.length"
-					class="grid grid-flow-col w-full"
-					:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
-				>
-					<li
-						v-for="(secondLevelBuildsFromItem, secondLevelIndex) in displayedItemBuildsFrom"
-						:key="secondLevelIndex"
+			<div id="item-shop-build-path-wrapper">
+				<div id="item-shop-build-path">
+					<LolItemBuildPathButton
+						v-if="displayedItem"
+						:shop-item="displayedItem"
+						:data-legendary="displayedItem.isLegendary ? '' : undefined"
+						:class="{ selected: selectedItem?.item.id === displayedItem.item.id }"
+						@mouseenter="enterTooltipableElement($event, displayedItem)"
+						@click="selectItem(displayedItem, false)"
+						@click.right.prevent="buyItem(displayedItem.item, displayedItem.buyability)"
+						@dblclick="buyItem(displayedItem.item, displayedItem.buyability)"
+					/>
+					<ul
+						v-if="displayedItemBuildsFrom?.length"
+						class="grid grid-flow-col w-full"
+						:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
 					>
-						<LolItemBuildPathButton
-							component
-							:shop-item="secondLevelBuildsFromItem"
-							:class="{ selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id }"
-							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
-							@click="selectItem(secondLevelBuildsFromItem, false)"
-							@click.right.prevent="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
-							@dblclick="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
-						/>
-						<ul v-if="secondLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
-							<li
-								v-for="(thirdLevelBuildsFromItem, thirdLevelIndex) in secondLevelBuildsFromItem.from"
-								:key="`${secondLevelIndex}-${thirdLevelIndex}`"
-							>
-								<LolItemBuildPathButton
-									component
-									:shop-item="thirdLevelBuildsFromItem"
-									:class="{ selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id }"
-									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
-									@click="selectItem(thirdLevelBuildsFromItem, false)"
-									@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
-									@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
-								/>
-								<ul v-if="thirdLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
-									<li
-										v-for="(fourthLevelBuildsFromItem, fourthLevelIndex) in thirdLevelBuildsFromItem.from"
-										:key="`${secondLevelIndex}-${thirdLevelIndex}-${fourthLevelIndex}`"
-									>
-										<LolItemBuildPathButton
-											component
-											:shop-item="fourthLevelBuildsFromItem"
-											:class="{ selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id }"
-											@mouseenter="enterTooltipableElement($event, fourthLevelBuildsFromItem)"
-											@click="selectItem(fourthLevelBuildsFromItem, false)"
-											@click.right.prevent="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
-											@dblclick="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
-										/>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
+						<li
+							v-for="(secondLevelBuildsFromItem, secondLevelIndex) in displayedItemBuildsFrom"
+							:key="secondLevelIndex"
+						>
+							<LolItemBuildPathButton
+								component
+								:shop-item="secondLevelBuildsFromItem"
+								:class="{ selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id }"
+								@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
+								@click="selectItem(secondLevelBuildsFromItem, false)"
+								@click.right.prevent="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
+								@dblclick="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
+							/>
+							<ul v-if="secondLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
+								<li
+									v-for="(thirdLevelBuildsFromItem, thirdLevelIndex) in secondLevelBuildsFromItem.from"
+									:key="`${secondLevelIndex}-${thirdLevelIndex}`"
+								>
+									<LolItemBuildPathButton
+										component
+										:shop-item="thirdLevelBuildsFromItem"
+										:class="{ selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id }"
+										@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
+										@click="selectItem(thirdLevelBuildsFromItem, false)"
+										@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
+										@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
+									/>
+									<ul v-if="thirdLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
+										<li
+											v-for="(fourthLevelBuildsFromItem, fourthLevelIndex) in thirdLevelBuildsFromItem.from"
+											:key="`${secondLevelIndex}-${thirdLevelIndex}-${fourthLevelIndex}`"
+										>
+											<LolItemBuildPathButton
+												component
+												:shop-item="fourthLevelBuildsFromItem"
+												:class="{ selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id }"
+												@mouseenter="enterTooltipableElement($event, fourthLevelBuildsFromItem)"
+												@click="selectItem(fourthLevelBuildsFromItem, false)"
+												@click.right.prevent="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
+												@dblclick="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
+											/>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</section>
 		<footer>
@@ -1042,14 +1046,16 @@ defineExpose({
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
+		--item-shop-btn-p: calc(1 * var(--spacing));
 		--close-btn-size: calc(8 * var(--spacing));
 		--toggle-details-btn-w: calc(28 * var(--spacing));
-		--header-px: calc(3 * var(--spacing));
+		--header-px: var(--fluid-8-12-t400);
 		--header-pbs: calc(3 * var(--spacing));
 		/* is texture button and it's width is set in the textureBgImageAttrs call */
 		--clear-filters-btn-w: calc(7 * var(--spacing));
 		--items-px: calc(3 * var(--spacing));
-		--items-gap: calc(3 * var(--spacing));
+		--items-gap-x: calc(3 * var(--item-shop-btn-p));
+		--items-gap-y: var(--fluid-6-12-t400);
 		--items-max-cols: 10;
 		/* vertical f460-12-20-t492 */
 		--item-sections-mbe: clamp(0.75rem, -6.4375rem + 25vh, 1.25rem);
@@ -1081,10 +1087,10 @@ defineExpose({
 		--details-p: calc(3 * var(--spacing));
 		--vfluid-f524-6-0-t540: clamp(0rem, 12.6563rem + -37.5vh, 0.375rem);
 		--details-pbs: calc(4 * var(--spacing) - var(--vfluid-f524-6-0-t540));
-		--details-gap: calc(3 * var(--spacing));
+		--builds-into-list-gap: var(--fluid-f440-6-12-t460);
 		--details-w: calc(
 			2 * var(--details-p) + var(--details-btns, 7) * var(--item-img-size) + (var(--details-btns, 7) - 1) *
-				var(--details-gap)
+				var(--builds-into-list-gap)
 		);
 
 		&[open] {
@@ -1104,7 +1110,7 @@ defineExpose({
 					/* 2em 6px is default max width limit for dialog in chrome/firefox, 1 var(--spacing) is so to make the pin buttons not clip */
 						calc(100vw - 4em - 12px - var(--spacing) - var(--details-w) - var(--side-panel-total-w)),
 					calc(
-						var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
+						var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap-x) + 2 *
 							var(--items-px)
 					)
 				)
@@ -1120,7 +1126,7 @@ defineExpose({
 					min(
 						calc(100vw - 4em - 12px - var(--spacing) - var(--details-w)),
 						calc(
-							var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap) + 2 *
+							var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap-x) + 2 *
 								var(--items-px)
 						)
 					)
@@ -1278,18 +1284,23 @@ defineExpose({
 			}
 
 			#item-shop-category-filter {
-				--at-apply: 'block-12 flex items-start';
+				--at-apply: 'flex block-12 items-start';
+				--vfluid-f490-40-48-t540: clamp(2.5rem, -2.4rem + 16vh, 3rem);
 				grid-area: categories;
 
+				@media (width < 970px) or (height < 480px) {
+					block-size: min(var(--vfluid-f490-40-48-t540), var(--fluid-40-48-t400));
+				}
+
 				> button {
-					--at-apply: 'h-12 w-10 grid-center relative';
+					--at-apply: 'block-full inline-[--fluid-32-40-t400] grid-center relative';
 
 					&::after {
 						--at-apply: 'absolute bottom-0 h-1 bg-amber-300 inset-x-1.75';
 					}
 
 					&:first-of-type {
-						--at-apply: 'mx-1.5';
+						--at-apply: 'mx-[--fluid-7-6-t400]';
 					}
 
 					&[aria-checked='true'] {
@@ -1597,8 +1608,7 @@ defineExpose({
 		}
 
 		.item-shop-item-btn {
-			--at-apply: 'p-[--p] -m-1';
-			--p: calc(1 * var(--spacing));
+			--at-apply: 'p-[--item-shop-btn-p] -m-[--item-shop-btn-p]';
 			direction: ltr;
 
 			> span:first-child {
@@ -1645,7 +1655,7 @@ defineExpose({
 		}
 
 		#item-shop-builds-into-list {
-			--at-apply: 'flex gap-[--details-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--details-header-h)+var(--details-header-pbe)+var(--details-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
+			--at-apply: 'flex gap-[--builds-into-list-gap] box-content min-block-(--item-img-size) justify-around order-2 relative *:shrink-0 sticky inset-bs-[calc(var(--details-header-h)+var(--details-header-pbe)+var(--details-pbs))] bg-[--bg-clr] pbe-[--build-path-py] b-be z-20';
 			--details-list-btn-size: var(--item-img-size);
 
 			@media (height < 460px) or ((width < 1224px) and (height < 480px)) or (width < 970px) {
@@ -1741,6 +1751,10 @@ defineExpose({
 		.item-shop-item-btn {
 			--check-icon-start: var(--p);
 			--check-icon-top: var(--p);
+
+			&.selected {
+				--at-apply: 'z-1';
+			}
 		}
 
 		#builds-into-more-list > li > button {
@@ -1825,7 +1839,7 @@ defineExpose({
 				}
 
 				> ul {
-					--at-apply: 'mbe-[--item-sections-mbe] gap-[--items-gap] grid grid-cols-[repeat(auto-fit,calc(var(--item-img-size)))] last:mb-0';
+					--at-apply: 'mbe-[--item-sections-mbe] gap-x-[--items-gap-x] gap-y-[--items-gap-y] grid grid-cols-[repeat(auto-fit,calc(var(--item-img-size)))] last:mb-0';
 				}
 			}
 
@@ -1855,16 +1869,26 @@ defineExpose({
 					> h3 {
 						--at-apply: 'leading-none text-base';
 					}
+
+					> .item-description {
+						--at-apply: 'pbe-5';
+					}
 				}
 
 				@media (width < 940px) {
 					& {
 						--details-header-h: var(--close-btn-size);
-						--at-apply: 'absolute bg-[--bg-clr] end-0 inset-y-0 inline-[--details-w] max-inline-[calc(100%+1px)] z-10 translate-x-full';
+						--at-apply: 'absolute bg-[--bg-clr] end-0 inset-y-0 inline-[--details-w] max-inline-[calc(100%+1px)] z-10 translate-x-full of-x-clip';
 					}
 
 					> h3 {
 						--at-apply: 'block-[--close-btn-size] flex items-center box-content shrink-0';
+					}
+				}
+
+				@media (width < 528px) {
+					& {
+						--at-apply: 'inline-[calc(100%+1px)]';
 					}
 				}
 
@@ -1885,8 +1909,12 @@ defineExpose({
 					--at-apply: 'order-6';
 				}
 
+				#item-shop-build-path-wrapper {
+					--at-apply: 'box-content py-[--build-path-py] order-3 shrink-0 of-x-auto';
+				}
+
 				#item-shop-build-path {
-					--at-apply: 'box-content py-[--build-path-py] text-center flex flex-col items-center justify-center order-3 shrink-0';
+					--at-apply: 'text-center flex flex-col items-center justify-center';
 					min-block-size: calc(
 						4 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 3 *
 							var(--item-mt) + 5 * var(--spacing)
@@ -1901,6 +1929,7 @@ defineExpose({
 							2 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 1 *
 								var(--item-mt)
 						);
+						max-inline-size: calc(7 * var(--item-img-size));
 					}
 				}
 
@@ -1930,7 +1959,7 @@ defineExpose({
 		}
 
 		> footer {
-			--at-apply: 'flex items-center py-2.5 px-3 b-t b-[--ui-btn-border-clr]';
+			--at-apply: 'flex items-center py-2.5 px-[--header-px] b-t b-[--ui-btn-border-clr]';
 			--btn-w: calc(24 * var(--spacing));
 			grid-area: footer;
 
@@ -2034,7 +2063,7 @@ defineExpose({
 				}
 
 				ul {
-					--at-apply: 'p-0 flex flex-wrap mbe-[--item-sections-mbe] gap-3';
+					--at-apply: 'p-0 flex flex-wrap mbe-[--item-sections-mbe] gap-x-[--items-gap-x] gap-y-[--items-gap-y]';
 					direction: ltr;
 				}
 			}
@@ -2056,7 +2085,7 @@ defineExpose({
 					--at-apply: 'p-0 block-auto flex gap-[--side-panel-eq-gap]';
 
 					> div {
-						--at-apply: 'static translate-0';
+						--at-apply: 'static translate-0 shrink-0';
 					}
 				}
 

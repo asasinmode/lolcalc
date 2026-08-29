@@ -195,7 +195,7 @@
 			--at-apply: 'absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis color-neutral-400 px-[--px] b b-transparent';
 
 			> .icon {
-				--at-apply: 'me-[--gap] size-4 text-neutral-300';
+				--at-apply: 'me-[--gap] size-4 text-neutral-300 shrink-0';
 			}
 		}
 
