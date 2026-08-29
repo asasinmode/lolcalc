@@ -368,7 +368,9 @@ onBeforeUnmount(() => {
 
 /* build path needs at least 6 buttons' worth of width to fit */
 function updateBuildsIntoButtonsNumber() {
-	if (window.innerWidth < 528) {
+	if (window.innerWidth < 400) {
+		buildsIntoListButtons.value = 5;
+	} else if (window.innerWidth < 528) {
 		buildsIntoListButtons.value = 6;
 	} else if (window.innerWidth < 940) {
 		buildsIntoListButtons.value = 7;
@@ -1767,14 +1769,14 @@ defineExpose({
 			}
 
 			> li {
-				--at-apply: 'bg-black block-[--details-list-btn-size]';
+				--at-apply: 'bg-black block-[--details-list-btn-size] aspect-1';
 
 				> button {
-					--at-apply: 'size-[--details-list-btn-size]';
+					--at-apply: 'size-full';
 
 					&:disabled,
 					&[popovertarget] {
-						--at-apply: 'm-[--item-button-img-b-w] size-[--item-img-borderless-size]';
+						--at-apply: 'm-[--item-button-img-b-w] size-[calc(100%-2*var(--item-button-img-b-w))]';
 						box-shadow:
 							0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
 							0 0 0 var(--item-button-img-b-w) black;
@@ -1802,8 +1804,8 @@ defineExpose({
 			> li {
 				> button {
 					--at-apply: 'text-start flex w-full items-center py-[--py] px-[--px] gap-2 hoverable:bg-white/10';
-					--px: calc(var(--spacing) * 5);
-					--py: calc(var(--spacing) * 2);
+					--px: var(--fluid-8-20);
+					--py: min(var(--vfluid-f460-4-8-t540), var(--fluid-4-8-t400));
 
 					&[data-bought] {
 						--at-apply: 'bg-black/20';
