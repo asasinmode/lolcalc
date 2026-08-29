@@ -535,7 +535,8 @@ defineExpose({
 				>
 				<label id="item-shop-search-lbl" for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
-					Click Here to Search
+					<span>Click Here to Search</span>
+					<span>Search</span>
 				</label>
 				<button title="clear" @mousedown.prevent="clearSearch">
 					<span>
@@ -1057,8 +1058,7 @@ defineExpose({
 		--items-gap-x: calc(3 * var(--item-shop-btn-p));
 		--items-gap-y: var(--fluid-6-12-t400);
 		--items-max-cols: 10;
-		/* vertical f460-12-20-t492 */
-		--item-sections-mbe: clamp(0.75rem, -6.4375rem + 25vh, 1.25rem);
+		--item-sections-mbe: var(--vfluid-f460-12-20-t492);
 
 		--side-panel-gap: calc(2 * var(--spacing));
 		--side-panel-py: calc(4 * var(--spacing));
@@ -1085,7 +1085,6 @@ defineExpose({
 		--translate-x: calc(0.5 * var(--fluid-f1720-236-54-t1960));
 
 		--details-p: calc(3 * var(--spacing));
-		--vfluid-f524-6-0-t540: clamp(0rem, 12.6563rem + -37.5vh, 0.375rem);
 		--details-pbs: calc(4 * var(--spacing) - var(--vfluid-f524-6-0-t540));
 		--builds-into-list-gap: var(--fluid-f440-6-12-t460);
 		--details-w: calc(
@@ -1212,9 +1211,27 @@ defineExpose({
 					}
 				}
 
+				#item-shop-search-lbl {
+					span:nth-of-type(2) {
+						--at-apply: 'hidden';
+					}
+				}
+
+				@media (width >= 410px) {
+					#item-shop-search-lbl {
+						span:nth-of-type(2) {
+							--at-apply: 'inline';
+						}
+
+						span:nth-of-type(3) {
+							--at-apply: 'hidden';
+						}
+					}
+				}
+
 				> div {
 					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] block-[clamp(20rem,50vh,80vh)] inline-full translate-y-full start-0 -bottom-px absolute z-30 b b-[--ui-btn-border-clr] b shadow-xl min-inline-[min(44rem,80vw)]';
-					--px: calc(3 * var(--spacing));
+					--px: var(--header-px);
 					--hover-bg: theme('colors.cyan.400/0.2');
 
 					@media (width < 940px) {
@@ -1223,8 +1240,16 @@ defineExpose({
 						}
 					}
 
+					@media (width < 500px) {
+						& {
+							--at-apply: 'grid-cols-1';
+						}
+					}
+
 					> p {
-						--at-apply: 'uppercase px-[--px] font-700 text-neutral-200 py-2';
+						--at-apply: 'uppercase px-[--px] text-[length:--fluid-14-16-t400] font-700 text-neutral-200';
+						padding-block-start: min(var(--vfluid-f490-4-8-t540), var(--fluid-4-8-t400));
+						padding-block-end: min(var(--vfluid-f490-0-8-t540), var(--fluid-0-8-t400));
 					}
 
 					> ul {
@@ -1261,6 +1286,12 @@ defineExpose({
 					> section {
 						--at-apply: 'row-span-full px-3 py-2 b-s b-neutral-400 of-y-auto';
 
+						@media (width < 500px) {
+							& {
+								--at-apply: 'hidden';
+							}
+						}
+
 						> .item-description-header {
 							--at-apply: 'hoverable:bg-[--hover-bg] py-2';
 						}
@@ -1285,7 +1316,6 @@ defineExpose({
 
 			#item-shop-category-filter {
 				--at-apply: 'flex block-12 items-start';
-				--vfluid-f490-40-48-t540: clamp(2.5rem, -2.4rem + 16vh, 3rem);
 				grid-area: categories;
 
 				@media (width < 970px) or (height < 480px) {
@@ -1447,9 +1477,8 @@ defineExpose({
 
 		#item-shop-panel-boots,
 		#item-shop-panel-eq {
-			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr] p-[--side-panel-p] ps-[--side-panel-collapsed-p] start-0 absolute z-10 -translate-x-full translate-y-[--v-fluid-f485-40-0-t525]';
-			/* move both panels vertically when screen is shorter to delay moving the boots panel to the rest of the items */
-			--v-fluid-f485-40-0-t525: clamp(0rem, 32.8125rem + -100vh, 2.5rem);
+			/* y translate to move both panels vertically when screen is shorter to delay moving the boots panel to the rest of the items */
+			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr] p-[--side-panel-p] ps-[--side-panel-collapsed-p] start-0 absolute z-10 -translate-x-full translate-y-[--vfluid-f485-40-0-t525]';
 
 			:where(&[data-pinned]) {
 				> .pin-button img {
