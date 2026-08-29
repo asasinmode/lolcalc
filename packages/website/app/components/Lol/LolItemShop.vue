@@ -1057,9 +1057,9 @@ defineExpose({
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
 		--item-shop-btn-p: var(--fluid-2-4-t500);
 		--close-btn-size: calc(8 * var(--spacing));
-		--toggle-details-btn-w: var(--fluid-124-128-t340);
+		--toggle-details-btn-w: var(--fluid-124-128-t324);
 		--header-px: var(--fluid-8-12-t400);
-		--header-pbs: calc(3 * var(--spacing));
+		--header-pbs: var(--fluid-8-12-t400);
 		/* is texture button and it's width is set in the textureBgImageAttrs call */
 		--clear-filters-btn-w: calc(7 * var(--spacing));
 		--items-px: calc(3 * var(--spacing));
@@ -1078,7 +1078,7 @@ defineExpose({
 		--side-panel-w: calc(var(--item-img-size) + 2 * var(--side-panel-inner-p));
 
 		--side-panel-boots-gap: calc(3 * var(--spacing));
-		--side-panel-eq-gap: calc(1 * var(--spacing));
+		--side-panel-eq-gap: var(--fluid-0-4-t360);
 		--side-panel-eq-button-size: calc(
 			(var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-gap)) / 3
 		);
@@ -2082,7 +2082,13 @@ defineExpose({
 			}
 
 			> button {
-				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-[--btn-w] whitespace-nowrap';
+				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center inline-[--btn-w] whitespace-nowrap';
+
+				@media (width < 370px) {
+					& {
+						--at-apply: 'inline-auto';
+					}
+				}
 
 				&:nth-of-type(1) {
 					--at-apply: 'bg-yellow-950 hoverable:bg-yellow-900';
