@@ -1044,11 +1044,11 @@ defineExpose({
 
 	#dialog-item-shop {
 		--at-apply: 'bg-[--bg-clr] block-216 of-visible b b-[--ui-btn-border-clr] translate-x-[--translate-x]';
-		--item-img-size: var(--fluid-48-56-t400);
+		--item-img-size: var(--fluid-48-56-t500);
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
-		--item-shop-btn-p: calc(1 * var(--spacing));
+		--item-shop-btn-p: var(--fluid-2-4-t500);
 		--close-btn-size: calc(8 * var(--spacing));
 		--toggle-details-btn-w: calc(28 * var(--spacing));
 		--header-px: var(--fluid-8-12-t400);
@@ -1059,7 +1059,7 @@ defineExpose({
 		--items-gap-x: calc(3 * var(--item-shop-btn-p));
 		--items-gap-y: var(--fluid-6-12-t400);
 		--items-max-cols: 10;
-		--item-sections-mbe: var(--vfluid-f460-12-20-t492);
+		--item-sections-mbe: min(var(--vfluid-f460-12-20-t492), var(--fluid-12-20-t500));
 
 		--side-panel-gap: calc(2 * var(--spacing));
 		--side-panel-py: calc(4 * var(--spacing));
