@@ -443,7 +443,7 @@
 				{
 					"name": "Signature of the Visionary",
 					"objectName": "HweiPassive",
-					"dataKey": "{1f86669b}",
+					"dataKey": "Characters/Hwei/Spells/HweiPassiveAbility/HweiPassive",
 					"image": "assets/characters/hwei/hud/icons2d/hweipassive.png",
 					"tooltip": "{{Spell_HweiPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_HweiPassive_Tooltip}}<br><br><rules>Each Ability can only trigger this effect once per target.<br>Slows from Hwei's abilities stack with each other at a diminishing rate (but not items or other sources)</rules>",

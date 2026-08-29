@@ -292,7 +292,7 @@
 				{
 					"name": "Guerrilla Warfare",
 					"objectName": "TeemoPassive",
-					"dataKey": "{5a629d30}",
+					"dataKey": "Characters/Teemo/Spells/TeemoPassiveAbility/TeemoPassive",
 					"image": "assets/characters/teemo/hud/icons2d/teemopassive.png",
 					"tooltip": "{{Buff_TeemoPassive_Tooltip}}",
 					"tooltipExtended": "{{Buff_TeemoPassive_Tooltip}}<br><br><rules>{{Reminder_Invisibility}}</rules>",

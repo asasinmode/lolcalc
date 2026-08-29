@@ -392,7 +392,7 @@
 				{
 					"name": "Vow of the First Lands",
 					"objectName": "YunaraPassive",
-					"dataKey": "{171bcf58}",
+					"dataKey": "Characters/Yunara/Spells/YunaraPassiveAbility/YunaraPassive",
 					"image": "assets/characters/yunara/hud/icons2d/yunara_passive.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_YunaraP_Tooltip}}",

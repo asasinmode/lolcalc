@@ -284,15 +284,15 @@
 						"LifestealTooltip": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 12,
+									"mLevel1Value": 10,
 									"mBreakpoints": [
 										{
 											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 6
+											"mAdditionalBonusAtThisLevel": 5
 										},
 										{
 											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 6
+											"mAdditionalBonusAtThisLevel": 5
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"

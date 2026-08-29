@@ -612,7 +612,7 @@ export const ITEM_NAME_TO_ID = {
 	rfc: '3094',
 	kaenicRookern: '2504',
 	hextechGunblade: '3146',
-	stormrazor: '3097',
+	stormrazor: '3095',
 	mercurialScimitar: '3139',
 	titanicHydra: '3748',
 	bloodthirster: '3072',

@@ -61,7 +61,7 @@
 						"BeamWidth": [140, 140, 140, 140, 140, 140, 140],
 						"MaxChannelDuration": [3.25, 3.25, 3.25, 3.25, 3.25, 9999, 9999],
 						"BurstAfter": [1, 1, 1, 1, 1, 1, 1],
-						"ManaCostPerSecond": [30, 35, 40, 45, 50, 55, 60],
+						"ManaCostPerSecond": [25, 30, 35, 40, 45, 50, 55],
 						"RankDamagePerSecond": [30, 45, 60, 75, 90, 105, 120],
 						"APPerSecond": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
 						"RankBurstDamage": [50, 60, 70, 80, 90, 100, 110],
@@ -523,6 +523,42 @@
 								}
 							],
 							"mPrecision": 1
+						},
+						"ExecuteHealthThreshold": {
+							"mFormulaParts": [
+								{
+									"{a8cb9c14}": true,
+									"mStat": 12,
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mPart1": {
+													"mDataValue": "BaseExecutionThreshold",
+													"__type": "NamedDataValueCalculationPart"
+												},
+												"mPart2": {
+													"mNumber": 0.01,
+													"__type": "NumberCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
+											},
+											{
+												"mPart1": {
+													"mSpellCalculationKey": "EPassiveScalingExecute",
+													"__type": "{f3cbe7b2}"
+												},
+												"mPart2": {
+													"mNumber": 0.01,
+													"__type": "NumberCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
+											}
+										],
+										"__type": "SumOfSubPartsCalculationPart"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
 						}
 					}
 				}

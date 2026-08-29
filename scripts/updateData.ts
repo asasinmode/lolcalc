@@ -328,7 +328,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		'6032',	// stat bonus
 		'2421', // shattered armguard
 		'3039',	// atma's reckoning
-		'3095', // stormrazor, there are 2 for some reason
+		'3097', // stormrazor, there are 2 for some reason
 		'2051', // guardian's horn
 		'3112', // guardian's orb
 		'3177', // guardian's blade

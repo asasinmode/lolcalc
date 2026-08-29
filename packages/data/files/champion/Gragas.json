@@ -257,8 +257,9 @@
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. ",
 					"dataValues": {
-						"ArenaCooldownMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"HealRatio": [0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055]
+						"HealRatio": [0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055],
+						"Level1Value": [12, 12, 12, 12, 12, 12, 12],
+						"AdditionalBonusAtThisLevel": [-2, -2, -2, -2, -2, -2, -2]
 					},
 					"spellCalculations": {
 						"HealAmount": {
@@ -273,22 +274,29 @@
 						"HealCooldown": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 12,
-									"mBreakpoints": [
+									"{91d404a5}": "Level1Value",
+									"{bbd778a2}": "BonusPerLevelAtAndAfter",
+									"{9823b29a}": [
 										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -2
+											"level": 6,
+											"{ae9b464d}": "AdditionalBonusAtThisLevel",
+											"{b0d8b2ac}": "BonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										},
 										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -2
+											"level": 11,
+											"{ae9b464d}": "AdditionalBonusAtThisLevel",
+											"{b0d8b2ac}": "BonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										},
 										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -2
+											"level": 16,
+											"{ae9b464d}": "AdditionalBonusAtThisLevel",
+											"{b0d8b2ac}": "BonusPerLevelAtAndAfter",
+											"__type": "{0333530c}"
 										}
 									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
+									"__type": "{4ce08984}"
 								}
 							]
 						}

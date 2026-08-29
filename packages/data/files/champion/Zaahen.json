@@ -285,7 +285,7 @@
 				{
 					"name": "Cultivation of War",
 					"objectName": "ZaahenPassive",
-					"dataKey": "{4c6e6c43}",
+					"dataKey": "Characters/Zaahen/Spells/ZaahenPassiveAbility/ZaahenPassive",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenp.png",
 					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
 					"tooltip": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.",

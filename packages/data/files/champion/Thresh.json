@@ -160,8 +160,8 @@
 					"dataValues": {
 						"PassiveADRatioTT": [0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4],
 						"PassiveADRatio": [60, 90, 120, 150, 180, 210, 240],
-						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
-						"ActiveBaseDamage": [75, 75, 120, 165, 210, 255, 300],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"ActiveBaseDamage": [20, 65, 110, 155, 200, 245, 290],
 						"ActiveSlowPercentage": [20, 20, 25, 30, 35, 40, 45],
 						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
 						"PassiveDmgPerSoul": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],

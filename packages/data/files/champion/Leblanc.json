@@ -22,9 +22,9 @@
 		"critperlevel": 0,
 		"attackdamage": 55,
 		"attackdamageperlevel": 2.2,
-		"attackspeedperlevel": 2.35,
+		"attackspeedperlevel": 1.5,
 		"attackspeed": 0.658,
-		"attackspeedratio": 0.4
+		"attackspeedratio": 0.625
 	},
 	"abilities": {
 		"q": {
@@ -115,7 +115,7 @@
 						}
 					],
 					"dataValues": {
-						"WAPRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"WAPRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
 						"BaseDamage": [35, 75, 115, 155, 195, 235, 275],
 						"SnapbackTimeAllowed": [4, 4, 4, 4, 4, 4, 4],
 						"SnapbackDelay": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
@@ -277,7 +277,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.8,
+									"mCoefficient": 0.9,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

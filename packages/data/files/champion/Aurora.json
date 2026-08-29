@@ -231,7 +231,7 @@
 				{
 					"name": "Spirit Abjuration",
 					"objectName": "AuroraPassive",
-					"dataKey": "{55fe4142}",
+					"dataKey": "Characters/Aurora/Spells/AuroraPassiveAbility/AuroraPassive",
 					"image": "assets/characters/aurora/hud/icons2d/aurorapassive.png",
 					"tooltip": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.",
 					"tooltipExtended": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.<br><br><rules>Max health magic damage is capped at 100-270 against Monsters, based on Aurora's level.</rules>",

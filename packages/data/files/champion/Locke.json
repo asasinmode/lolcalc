@@ -378,7 +378,7 @@
 				{
 					"name": "Silver Stake",
 					"objectName": "LockePassive",
-					"dataKey": "{7531bb00}",
+					"dataKey": "Characters/Locke/Spells/LockePassiveAbility/LockePassive",
 					"image": "assets/characters/locke/hud/icons2d/locke_passive.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Locke's Attacks deal an additional <magicDamage>@MinOnHitDamage@ magic damage</magicDamage> on-hit, increased up to <magicDamage>@MaxOnHitDamage@ magic damage</magicDamage> based on the target's missing Health.",

@@ -1,5 +1,5 @@
 {
-	"version": "16.16.1",
+	"version": "16.17.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -121,7 +121,7 @@
 				"6670",
 				"3033",
 				"3508",
-				"3097",
+				"3095",
 				"6676"
 			],
 			"categories": {
@@ -196,13 +196,13 @@
 				"3068",
 				"2021",
 				"3147",
+				"3067",
 				"3211",
 				"2502",
 				"2526",
 				"3044",
 				"3053",
 				"3066",
-				"3067",
 				"3075",
 				"3152",
 				"3161",
@@ -411,7 +411,7 @@
 				"3026",
 				"3032",
 				"3072",
-				"3097"
+				"3095"
 			],
 			"categories": {
 				"fighter": true,
@@ -963,8 +963,8 @@
 				"3024",
 				"3133",
 				"3802",
-				"3057",
 				"3067",
+				"3057",
 				"3108",
 				"3158",
 				"4642",
@@ -3291,7 +3291,8 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"{cf1a44c0}",
+				"{3541a6d4}"
 			],
 			"categories": {
 				"fighter": true
@@ -3455,7 +3456,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true,
@@ -3983,8 +3984,8 @@
 				"BonusDamage": 40
 			}
 		},
-		"3097": {
-			"id": "3097",
+		"3095": {
+			"id": "3095",
 			"name": "Stormrazor",
 			"searchString": "stormrazor;energized;energised;damage;criticalstrike;attackspeed;movement;criticalstrikechance;attackdamage",
 			"epicness": 5,
@@ -3992,7 +3993,7 @@
 				"total": 3200,
 				"sell": 2240
 			},
-			"image": "3097.png",
+			"image": "3095.png",
 			"from": [
 				"1038",
 				"1018",
@@ -4007,7 +4008,7 @@
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 50,
-				"PercentAttackSpeedMod": 0.2
+				"PercentAttackSpeedMod": 0.25
 			},
 			"dataValues": {
 				"BuffStrength": 0.45,
@@ -5091,7 +5092,7 @@
 				"3087",
 				"3032",
 				"3085",
-				"3097"
+				"3095"
 			],
 			"from": [
 				"1042",
@@ -5768,7 +5769,7 @@
 			},
 			"dataValues": {
 				"MoveSpeedMultiplier": 0.04,
-				"SlowResistTooltip": 0.4,
+				"SlowResistTooltip": 0.25,
 				"MSAdaptiveRatio": 0.05
 			},
 			"itemCalculations": {
@@ -6676,7 +6677,8 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"{cf1a44c0}",
+				"{3541a6d4}"
 			],
 			"categories": {
 				"fighter": true,
@@ -8093,8 +8095,8 @@
 				"fighter": true
 			},
 			"stats": {
-				"FlatHPPoolMod": 450,
-				"FlatPhysicalDamageMod": 45,
+				"FlatHPPoolMod": 400,
+				"FlatPhysicalDamageMod": 40,
 				"AbilityHasteMod": 10
 			},
 			"dataValues": {
@@ -8281,7 +8283,7 @@
 			],
 			"itemGroups": [
 				"{b45aafc5}",
-				"Items/ItemGroups/LegendaryClearingItems"
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true
@@ -9229,7 +9231,8 @@
 				"2020"
 			],
 			"itemGroups": [
-				"Items/ItemGroups/LegendaryClearingItems"
+				"{cf1a44c0}",
+				"{3541a6d4}"
 			],
 			"categories": {
 				"assassin": true

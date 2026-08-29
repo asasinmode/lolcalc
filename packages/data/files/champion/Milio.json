@@ -257,7 +257,7 @@
 				{
 					"name": "Fired Up!",
 					"objectName": "MilioPassive",
-					"dataKey": "{3e27cfac}",
+					"dataKey": "Characters/Milio/Spells/MilioPassiveAbility/MilioPassive",
 					"image": "assets/characters/milio/hud/icons2d/milio_p.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_MilioPassive_Tooltip}}",

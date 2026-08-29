@@ -391,7 +391,7 @@
 				{
 					"name": "Drakehound's Step",
 					"objectName": "AmbessaPassive",
-					"dataKey": "{3f70c67a}",
+					"dataKey": "Characters/Ambessa/Spells/AmbessaPassiveAbility/AmbessaPassive",
 					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "{{Spell_AmbessaP_Tooltip}}",

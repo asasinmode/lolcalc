@@ -948,7 +948,7 @@
 				{
 					"name": "{{ Spell_ApheliosE_Location_@f1@ }} - {{ ApheliosGun_Name_@f3@ }}",
 					"objectName": "ApheliosE",
-					"dataKey": "{21df6123}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosEAbility/ApheliosE",
 					"image": "assets/characters/aphelios/hud/icons2d/calibrum_l.png",
 					"imageAlt": "assets/characters/aphelios/hud/icons2d/calibrum_m.png",
 					"tooltip": "{{Spell_ApheliosE_@f2@}}",
@@ -957,7 +957,7 @@
 				{
 					"name": "{{ Spell_ApheliosE_Location_@f1@ }} - {{ ApheliosGun_Name_@f3@ }}",
 					"objectName": "ApheliosE",
-					"dataKey": "{21df6123}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosEAbility/ApheliosE",
 					"image": "assets/characters/aphelios/hud/icons2d/severum_l.png",
 					"imageAlt": "assets/characters/aphelios/hud/icons2d/severum_m.png",
 					"tooltip": "{{Spell_ApheliosE_@f2@}}",
@@ -966,7 +966,7 @@
 				{
 					"name": "{{ Spell_ApheliosE_Location_@f1@ }} - {{ ApheliosGun_Name_@f3@ }}",
 					"objectName": "ApheliosE",
-					"dataKey": "{21df6123}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosEAbility/ApheliosE",
 					"image": "assets/characters/aphelios/hud/icons2d/gravitum_l.png",
 					"imageAlt": "assets/characters/aphelios/hud/icons2d/gravitum_m.png",
 					"tooltip": "{{Spell_ApheliosE_@f2@}}",
@@ -975,7 +975,7 @@
 				{
 					"name": "{{ Spell_ApheliosE_Location_@f1@ }} - {{ ApheliosGun_Name_@f3@ }}",
 					"objectName": "ApheliosE",
-					"dataKey": "{21df6123}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosEAbility/ApheliosE",
 					"image": "assets/characters/aphelios/hud/icons2d/infernum_l.png",
 					"imageAlt": "assets/characters/aphelios/hud/icons2d/infernum_m.png",
 					"tooltip": "{{Spell_ApheliosE_@f2@}}",
@@ -984,14 +984,14 @@
 				{
 					"name": "{{ Spell_ApheliosE_Location_@f1@ }} - {{ ApheliosGun_Name_@f3@ }}",
 					"objectName": "ApheliosE",
-					"dataKey": "{21df6123}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosEAbility/ApheliosE",
 					"image": "assets/characters/aphelios/hud/icons2d/crescendum_l.png",
 					"imageAlt": "assets/characters/aphelios/hud/icons2d/crescendum_m.png",
 					"tooltip": "{{Spell_ApheliosE_@f2@}}",
 					"tooltipExtended": "{{Spell_ApheliosE_TooltipExtended_@f1@}}"
 				}
 			],
-			"dataKey": "{21df6123}"
+			"dataKey": "Characters/Aphelios/Spells/ApheliosEAbility/ApheliosE"
 		},
 		"r": {
 			"maxLevel": 3,

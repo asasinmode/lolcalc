@@ -46,8 +46,8 @@
 						}
 					],
 					"dataValues": {
-						"VanillaBase": [40, 70, 100, 130, 160, 190, 220],
-						"BaseDamage": [40, 70, 100, 130, 160, 190, 220],
+						"VanillaBase": [50, 80, 110, 140, 170, 200, 230],
+						"BaseDamage": [50, 80, 110, 140, 170, 200, 230],
 						"StealthDuration": [3, 3, 3, 3, 3, 3, 3],
 						"TremorBonus": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"Haste": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
@@ -57,7 +57,7 @@
 						"SlowPotency": [-0.2, -0.2, -0.2, -0.2, -0.2, -0.2, -0.2],
 						"CritThreshold": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"FalloffMod": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
-						"JungleDamageAmp": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75]
+						"JungleDamageAmp": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6]
 					},
 					"spellCalculations": {
 						"EnchantedDamage": {
@@ -69,7 +69,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.85,
+									"mCoefficient": 0.9,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -83,7 +83,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.85,
+									"mCoefficient": 0.9,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

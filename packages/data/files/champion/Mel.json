@@ -437,7 +437,7 @@
 				{
 					"name": "Searing Brilliance",
 					"objectName": "MelPassive",
-					"dataKey": "{64e86cf4}",
+					"dataKey": "Characters/Mel/Spells/MelPassiveAbility/MelPassive",
 					"image": "assets/characters/mel/hud/icons2d/mel_passive.png",
 					"tooltip": "{{Spell_MelPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MelPassive_Tooltip}}<br><br><rules><keywordMajor>Overwhelm</keywordMajor> deals @spell.MelR:MinionModTooltip@ reduced damage with the first stack when used against minions.</rules>",

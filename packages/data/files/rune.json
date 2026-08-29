@@ -1,5 +1,5 @@
 {
-	"version": "16.16.1",
+	"version": "16.17.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -153,8 +153,8 @@
 							"effectAmount": {
 								"HealBonusADRatio": 0.1,
 								"HealAPRatio": 0.05,
-								"HealBase": 10,
-								"HealMax": 130,
+								"HealBase": 15,
+								"HealMax": 160,
 								"MSBuff": 0.2,
 								"MSDuration": 1,
 								"RangedMSMod": 0.75,

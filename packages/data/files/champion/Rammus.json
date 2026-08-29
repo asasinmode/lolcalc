@@ -410,7 +410,7 @@
 					"objectName": "RammusP",
 					"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP",
 					"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
-					"tooltip": "Rammus's gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
+					"tooltip": "Rammus gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
 					"dataValues": {
 						"ArmorRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
 						"MagicResistRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],

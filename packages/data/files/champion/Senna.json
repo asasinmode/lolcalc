@@ -69,7 +69,8 @@
 						"MaxTargetingRange": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
 						"BaseSlow": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
 						"SlowDuration": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25],
-						"SlowAPRatio": [0.0007, 0.0007, 0.0007, 0.0007, 0.0007, 0.0007, 0.0007]
+						"SlowAPRatio": [0.0007, 0.0007, 0.0007, 0.0007, 0.0007, 0.0007, 0.0007],
+						"BADDamageRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -81,8 +82,8 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.6,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "BADDamageRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},

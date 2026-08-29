@@ -64,7 +64,7 @@
 								},
 								{
 									"mStat": 2,
-									"mCoefficient": 0.7,
+									"mCoefficient": 0.8,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -83,7 +83,7 @@
 								},
 								{
 									"mStat": 2,
-									"mCoefficient": 0.7,
+									"mCoefficient": 0.8,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -143,7 +143,7 @@
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{
-									"mCoefficient": 0.07,
+									"mCoefficient": 0.08,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -275,7 +275,7 @@
 						"MarkDuration": [0, 5, 5, 5, 5, 5, 5],
 						"ZoneDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"CooldownAmount": [0, 0.5, 1, 1.5, 2, 2.5, 3],
-						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+						"APRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"MissileDamage": {
