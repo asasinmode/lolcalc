@@ -457,7 +457,11 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			}
 			if ('mMaxGroupOwnable' in groupObject) {
 				if (groupObject.mMaxGroupOwnable !== 1) {
-					console.warn('[itemData item groups] detected a group with mMaxGroupOwnable not 1', { id: item.id, name: item.name, group }, groupObject);
+					/* possibly should do something else about it, but it appeared only in patch 26.17, I'm guessing due to aram mayhem getting an augment that lets you builds 3 hydras */
+					if(group !== '{3541a6d4}'){
+						console.warn('[itemData item groups] detected a group with mMaxGroupOwnable not 1', { id: item.id, name: item.name, group }, groupObject);
+					}
+					return false;
 				}
 				return true;
 			}

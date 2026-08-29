@@ -3291,8 +3291,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"{cf1a44c0}",
-				"{3541a6d4}"
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true
@@ -6677,8 +6676,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"{cf1a44c0}",
-				"{3541a6d4}"
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"fighter": true,
@@ -9231,8 +9229,7 @@
 				"2020"
 			],
 			"itemGroups": [
-				"{cf1a44c0}",
-				"{3541a6d4}"
+				"{cf1a44c0}"
 			],
 			"categories": {
 				"assassin": true
