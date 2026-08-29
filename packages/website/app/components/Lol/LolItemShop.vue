@@ -2014,7 +2014,7 @@ defineExpose({
 				}
 
 				#item-shop-build-path-wrapper {
-					--at-apply: 'box-content py-[--build-path-py] order-3 shrink-0 of-x-auto';
+					--at-apply: 'box-content py-[--build-path-py] order-3 shrink-0 of-x-auto overscroll-x-none';
 				}
 
 				#item-shop-build-path {
