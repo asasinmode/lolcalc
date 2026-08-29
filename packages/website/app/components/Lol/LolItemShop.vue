@@ -2054,7 +2054,7 @@ defineExpose({
 			--at-apply: 'absolute inset-bs-[--header-pbs] end-[calc(var(--close-btn-size)+var(--header-px))] inline-[--toggle-details-btn-w] block-[--close-btn-size] rounded-full text-center z-30 whitespace-nowrap of-clip grid grid-cols-[1fr_max-content] px-2 grid-rows-1 items-center';
 
 			&::before {
-				--at-apply: 'bg-black size-4.5 content-empty block rounded-1/2 row-start-1 col-start-1 self-center';
+				--at-apply: 'bg-black b b-neutral-600 size-4.5 content-empty block rounded-1/2 row-start-1 col-start-1 self-center';
 			}
 
 			> img {
@@ -2089,6 +2089,10 @@ defineExpose({
 						'eq eq eq'
 						'value value value'
 						'sell undo sell-all';
+				}
+
+				> p {
+					--at-apply: 'pbe-0.5';
 				}
 			}
 
@@ -2145,12 +2149,12 @@ defineExpose({
 				}
 
 				> img {
-					--at-apply: 'inline-block h-3.5 w-auto';
+					--at-apply: 'inline-block block-3.5 inline-auto';
 					vertical-align: -0.0625em;
 				}
 
 				> span {
-					--at-apply: 'text-amber-200 font-500 text-lg mx-1.5';
+					--at-apply: 'text-amber-200 font-500 text-[length:--fluid-16-18-t400] leading-none mx-1.5';
 				}
 			}
 		}
