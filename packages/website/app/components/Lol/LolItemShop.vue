@@ -1044,6 +1044,7 @@ defineExpose({
 
 	#dialog-item-shop {
 		--at-apply: 'bg-[--bg-clr] block-216 of-visible b b-[--ui-btn-border-clr] translate-x-[--translate-x]';
+		--item-img-size: var(--fluid-48-56-t400);
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
@@ -1232,7 +1233,15 @@ defineExpose({
 				> div {
 					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] block-[clamp(20rem,50vh,80vh)] inline-full translate-y-full start-0 -bottom-px absolute z-30 b b-[--ui-btn-border-clr] b shadow-xl min-inline-[min(44rem,80vw)]';
 					--px: var(--header-px);
+					--results-header-pbs: min(var(--vfluid-f490-4-8-t540), var(--fluid-4-8-t400));
+					--results-item-py: min(var(--vfluid-f490-4-8-t540), var(--fluid-4-8-t400));
 					--hover-bg: theme('colors.cyan.400/0.2');
+
+					@media (width >= 500px) {
+						--px: var(--fluid-f700-8-12-t800);
+						--results-header-pbs: min(var(--vfluid-f490-4-8-t540), var(--fluid-f700-4-8-t800));
+						--results-item-py: min(var(--vfluid-f490-4-8-t540), var(--fluid-f700-2-8-t800));
+					}
 
 					@media (width < 940px) {
 						& {
@@ -1246,32 +1255,60 @@ defineExpose({
 						}
 					}
 
+					@media (width >= 500px) {
+						--item-img-size: var(--fluid-f700-48-56-t800);
+					}
+
 					> p {
 						--at-apply: 'uppercase px-[--px] text-[length:--fluid-14-16-t400] font-700 text-neutral-200';
-						padding-block-start: min(var(--vfluid-f490-4-8-t540), var(--fluid-4-8-t400));
+						padding-block-start: var(--results-header-pbs);
 						padding-block-end: min(var(--vfluid-f490-0-8-t540), var(--fluid-0-8-t400));
+
+						@media (width >= 500px) {
+							& {
+								--at-apply: 'text-[length:--fluid-f700-14-16-t800]';
+							}
+						}
 					}
 
 					> ul {
 						--at-apply: 'h-full of-y-auto';
 
 						> li {
-							--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-2 ps-[--px] pe-1 py-2 hover:bg-[--hover-bg] gap-x-2 mb-1 last:mb-0';
+							--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-2 ps-[--px] pe-1 py-[--results-item-py] hover:bg-[--hover-bg] gap-x-2 mbe-[min(var(--vfluid-f490-0-4-t540),var(--fluid-0-4-t400))] last:mbe-0';
+
+							@media (width >= 500px) {
+								& {
+									--at-apply: 'mbe-[min(var(--vfluid-f490-0-4-t540),var(--fluid-f700-0-4-t800))]';
+								}
+							}
 
 							&.selected {
 								--at-apply: 'bg-[--hover-bg]';
 							}
 
 							> img {
-								--at-apply: 'row-span-full';
+								--at-apply: 'row-span-full self-center';
 							}
 
 							> span:first-of-type {
-								--at-apply: 'w-full block truncate text-ellipsis font-500 text-lg';
+								--at-apply: 'w-full block truncate text-ellipsis font-500 text-[length:--fluid-16-18-t400] self-end';
+
+								@media (width >= 500px) {
+									& {
+										--at-apply: 'text-[length:--fluid-f700-16-18-t800]';
+									}
+								}
 							}
 
 							> span:last-of-type {
-								--at-apply: 'text-neutral-300 font-500';
+								--at-apply: 'text-neutral-300 font-500 text-[length:--fluid-14-16-t400]';
+
+								@media (width >= 500px) {
+									& {
+										--at-apply: 'text-[length:--fluid-f700-14-16-t800]';
+									}
+								}
 							}
 
 							> .sr-status {
@@ -1284,7 +1321,7 @@ defineExpose({
 					}
 
 					> section {
-						--at-apply: 'row-span-full px-3 py-2 b-s b-neutral-400 of-y-auto';
+						--at-apply: 'row-span-full px-[--px] py-[--results-header-pbs] b-s b-neutral-400 of-y-auto';
 
 						@media (width < 500px) {
 							& {
@@ -1293,7 +1330,25 @@ defineExpose({
 						}
 
 						> .item-description-header {
-							--at-apply: 'hoverable:bg-[--hover-bg] py-2';
+							--at-apply: 'hoverable:bg-[--hover-bg] py-[--results-item-py]';
+
+							> img {
+								--at-apply: 'self-center';
+
+								@media (width > 700px) {
+									& {
+										--at-apply: 'self-start';
+									}
+								}
+							}
+
+							> span:nth-of-type(1) {
+								--at-apply: 'text-[length:--fluid-f700-18-20-t800]';
+							}
+
+							> span:nth-of-type(2) {
+								--at-apply: 'text-[length:--fluid-f700-16-18-t800]';
+							}
 						}
 
 						> .item-description > :first-child {

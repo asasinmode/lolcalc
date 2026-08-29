@@ -182,7 +182,7 @@ defineExpose({ header });
 		}
 
 		> span:first-of-type {
-			--at-apply: 'text-xl text-white';
+			--at-apply: 'text-xl leading-none text-white';
 		}
 
 		> span:nth-of-type(2) {
