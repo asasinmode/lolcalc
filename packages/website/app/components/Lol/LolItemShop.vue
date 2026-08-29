@@ -551,6 +551,7 @@ defineExpose({
 				>
 					<p id="item-shop-results-lbl">
 						Results
+						<button class="other-ui-btn" @click="closeSearch">hide</button>
 					</p>
 					<ul
 						id="item-shop-search-listbox"
@@ -1267,13 +1268,23 @@ defineExpose({
 					}
 
 					> p {
-						--at-apply: 'uppercase px-[--px] text-[length:--fluid-14-16-t400] font-700 text-neutral-200';
+						--at-apply: 'uppercase px-[--px] text-[length:--fluid-14-16-t400] font-700 text-neutral-200 flex justify-between';
 						padding-block-start: var(--results-header-pbs);
 						padding-block-end: min(var(--vfluid-f490-0-8-t540), var(--fluid-0-8-t400));
 
 						@media (width >= 500px) {
 							& {
 								--at-apply: 'text-[length:--fluid-f700-14-16-t800]';
+							}
+						}
+
+						> button {
+							--at-apply: 'px-1.5';
+
+							@media (pointer: fine) {
+								& {
+									--at-apply: 'hidden';
+								}
 							}
 						}
 					}
