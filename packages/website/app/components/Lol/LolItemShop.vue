@@ -2092,6 +2092,12 @@ defineExpose({
 				}
 			}
 
+			@media (width < 370px) {
+				& {
+					--at-apply: 'grid-cols-[1fr_1fr_max-content]';
+				}
+			}
+
 			> button {
 				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center inline-[--btn-w] whitespace-nowrap';
 
