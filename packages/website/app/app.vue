@@ -324,10 +324,6 @@ function hideSharePopover() {
 					--at-apply: 'fixed of-x-hidden of-y-auto z-10 grow flex-col items-end inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
 					--nav-px: calc(var(--size-page-px) + 2 * var(--spacing));
 
-					&:popover-open {
-						--at-apply: 'grid grid-cols-[1fr_auto] grid-rows-[auto_max-content_1fr]';
-					}
-
 					@media (width >= 680px) {
 						& {
 							--at-apply: 'flex static py-0 pe-0 bg-transparent flex-row justify-end items-center';
@@ -338,9 +334,11 @@ function hideSharePopover() {
 						& {
 							--at-apply: 'bg-[--mauve-bg] block-screen shadow-xl shadow-black pbs-[--menu-btn-bs] pbe-[calc(var(--menu-btn-bs)+2*var(--spacing))] ps-[--nav-px]';
 						}
-					}
 
-					&:popover-open {
+						&:popover-open {
+							--at-apply: 'grid grid-cols-[1fr_auto] grid-rows-[auto_max-content_1fr]';
+						}
+
 						&::backdrop {
 							--at-apply: 'bg-black/30';
 						}
