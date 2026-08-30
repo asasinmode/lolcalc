@@ -188,7 +188,7 @@ function generateCss(variablesByFile: Map<string, [horizontal: IFileVariables, v
 		css += `\t${config.variablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minViewport!, toViewport || config.maxViewport!, config.remInPx!, 'w')};\n`;
 	}
 	for (const [key, { sizeFrom, sizeTo, fromViewport, toViewport }] of wantedVVariables.entries()) {
-		css += `\t${config.verticalVariablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minViewport!, toViewport || config.maxViewport!, config.remInPx!, 'h')};\n`;
+		css += `\t${config.verticalVariablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minVerticalViewport!, toViewport || config.maxVerticalViewport!, config.remInPx!, 'h')};\n`;
 	}
 
 	css += '}';
