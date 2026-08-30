@@ -60,6 +60,10 @@ function closeMenuIfOutside(event: FocusEvent) {
 	}
 }
 
+function closeNav() {
+	document.getElementById('page-nav')?.hidePopover();
+}
+
 const hasCopiedShareLink = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
 
@@ -126,17 +130,17 @@ function hideSharePopover() {
 				</button>
 				<ul>
 					<li>
-						<NuxtLink to="/">
+						<NuxtLink to="/" @click="closeNav">
 							calculator
 						</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink to="/guide">
+						<NuxtLink to="/guide" @click="closeNav">
 							guide
 						</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink to="/about">
+						<NuxtLink to="/about" @click="closeNav">
 							about
 						</NuxtLink>
 					</li>
@@ -228,7 +232,7 @@ function hideSharePopover() {
 		}
 
 		#menu-close-btn {
-			--at-apply: 'me-(--size-page-px) p-2';
+			--at-apply: 'me-(--size-page-px) p-2 col-start-2 row-start-1';
 
 			@media (width >= 680px) {
 				& {
@@ -253,7 +257,7 @@ function hideSharePopover() {
 		}
 
 		#share-configuration {
-			--at-apply: 'px-2 py-0.5';
+			--at-apply: 'px-2 py-0.5 col-start-1 inline-max self-center row-start-1';
 			anchor-name: --share-configuration;
 
 			@media (width >= 680px) {
@@ -284,10 +288,11 @@ function hideSharePopover() {
 
 				> nav {
 					--at-apply: 'fixed of-x-hidden of-y-auto z-10 grow flex-col items-end bg-(--mauve-bg) block-screen inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
+					--nav-px: calc(var(--size-page-px) + 2 * var(--spacing));
 
 					&:popover-open {
 						& {
-							--at-apply: 'flex';
+							--at-apply: 'grid grid-cols-[1fr_auto] auto-rows-min';
 						}
 					}
 
@@ -299,7 +304,7 @@ function hideSharePopover() {
 
 					@media (width < 680px) {
 						& {
-							--at-apply: 'bg-[--mauve-bg] shadow-lg pbs-[--menu-btn-bs]';
+							--at-apply: 'bg-[--mauve-bg] shadow-xl shadow-black pbs-[--menu-btn-bs] ps-[--nav-px]';
 						}
 					}
 
@@ -310,15 +315,24 @@ function hideSharePopover() {
 					}
 
 					> ul {
-						--at-apply: 'flex font-500 flex-col';
+						--at-apply: 'flex font-500 flex-col col-span-full text-end gap-y-2 py-5';
 
 						@media (width >= 680px) {
 							& {
-								--at-apply: 'flex-row gap-5';
+								--at-apply: 'flex-row gap-5 py-0';
 							}
 						}
 
 						> li {
+							> * {
+								--at-apply: 'px-[--nav-px] py-2 block float-end leading-none text-xl';
+
+								@media (width >= 680px) {
+									& {
+										--at-apply: 'px-0 py-0';
+									}
+								}
+							}
 							> *:hover,
 							> *:focus-visible,
 							> .router-link-active {
