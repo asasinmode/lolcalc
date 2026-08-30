@@ -54,23 +54,10 @@ onMounted(() => {
 	emailEl.value?.setAttribute('href', `mailto:${email}`);
 });
 
-const header = useTemplateRef('header');
-const menuCloseBtn = useTemplateRef('menuCloseBtn');
-
-function openMenu() {
-	header.value?.setAttribute('data-open', '');
-	menuCloseBtn.value?.setAttribute('data-open', '');
-	setTimeout(() => {
-		menuCloseBtn.value?.style.setProperty('--menu-backdrop-bg-opacity', '1');
-	});
-}
-
-function closeMenu() {
-	header.value?.removeAttribute('data-open');
-	menuCloseBtn.value?.style.setProperty('--menu-backdrop-bg-opacity', '0');
-	header.value?.addEventListener('transitionend', () => {
-		menuCloseBtn.value?.removeAttribute('data-open');
-	}, { once: true });
+function closeMenuIfOutside(event: FocusEvent) {
+	if (!event.relatedTarget || !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)) {
+		(event.currentTarget as HTMLElement).hidePopover();
+	}
 }
 
 const hasCopiedShareLink = ref(false);
@@ -93,11 +80,11 @@ function hideSharePopover() {
 </script>
 
 <template>
-	<button id="menu-btn" title="menu" @click="openMenu">
+	<button id="menu-btn" title="menu" popovertarget="page-nav">
 		<span>menu</span>
 		<Icon class="i-ph:list-bold" />
 	</button>
-	<header ref="header">
+	<header>
 		<div>
 			<h1>
 				<a :href="$config.app.baseURL">
@@ -113,8 +100,8 @@ function hideSharePopover() {
 			<span>
 				26{{ vSemver.slice(vSemver.indexOf('.')) }}
 			</span>
-			<nav>
-				<button id="menu-close-btn" ref="menuCloseBtn" title="zamknij menu" @click="closeMenu">
+			<nav id="page-nav" popover @focusout="closeMenuIfOutside">
+				<button id="menu-close-btn" title="zamknij menu" popovertargetaction="hide" popovertarget="page-nav">
 					<span>zamknij menu</span>
 					<Icon class="i-ph:x-bold" />
 				</button>
@@ -160,6 +147,7 @@ function hideSharePopover() {
 					</li>
 				</ul>
 			</nav>
+			<span />
 		</div>
 	</header>
 	<NuxtPage />
@@ -221,23 +209,32 @@ function hideSharePopover() {
 		--placeholder-champion-bg-clr: #020a13;
 		--header-logo-size: calc(10 * var(--spacing));
 		--header-py: calc(2.5 * var(--spacing));
+		--menu-btn-bs: calc(2.75 * var(--spacing));
 	}
 
 	#__nuxt {
 		#menu-btn {
-			--at-apply: 'fixed inset-e-0 inset-bs-2.75 z-11 ms-auto -translate-x-(--size-page-computed-px) translate-y-[calc(0.5*var(--header-logo-size)-50%)] rounded-[50%] b b-transparent bg-(--mauve-bg) transition-[box-shadow,border] lg:hidden';
+			--at-apply: 'fixed inset-e-0 inset-bs-[--menu-btn-bs] z-11 ms-auto -translate-x-(--size-page-computed-px) translate-y-[calc(0.5*var(--header-logo-size)-50%)] rounded-[50%] b b-transparent bg-(--mauve-bg) transition-[box-shadow,border]';
 
-			&:has(+ [data-stuck]) {
-				--at-apply: 'b-neutral-400 shadow';
+			> span:nth-child(2) {
+				--at-apply: '-ms-px -mbs-px';
 			}
 
-			&:has(+ [data-open]) {
-				--at-apply: 'z-9';
+			@media (width >= 680px) {
+				& {
+					--at-apply: 'hidden';
+				}
 			}
 		}
 
 		#menu-close-btn {
-			--at-apply: 'before:transition-[--menu-backdrop-bg-opacity] data-open:before:block lg:hidden me-(--min-container-px) p-2 before:bg-black/20 before:opacity-(--menu-backdrop-bg-opacity) before:inline-screen before:hidden before:inset-y-0 before:inset-s-0 before:fixed before:-translate-x-full';
+			--at-apply: 'me-(--size-page-px) p-2';
+
+			@media (width >= 680px) {
+				& {
+					--at-apply: 'hidden';
+				}
+			}
 		}
 
 		#menu-btn,
@@ -258,6 +255,12 @@ function hideSharePopover() {
 		#share-configuration {
 			--at-apply: 'px-2 py-0.5';
 			anchor-name: --share-configuration;
+
+			@media (width >= 680px) {
+				& {
+					--at-apply: 'me-1.5';
+				}
+			}
 
 			> [popover] {
 				--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-btn-border-clr]';
@@ -280,10 +283,40 @@ function hideSharePopover() {
 				grid-column: content-start / content-end;
 
 				> nav {
-					--at-apply: 'fixed of-x-hidden of-y-auto inset-y-0 inset-e-0 z-10 flex grow translate-x-full flex-col items-end bg-(--mauve-bg) transition-[translate,box-shadow] max-inline-[80vw] min-inline-60 lg:static lg:translate-x-0 lg:py-0 lg:pe-0 lg:shadow-none lg:transition-shadow lg:flex-row lg:justify-end lg:items-center gap-3';
+					--at-apply: 'fixed of-x-hidden of-y-auto z-10 grow flex-col items-end bg-(--mauve-bg) block-screen inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
+
+					&:popover-open {
+						& {
+							--at-apply: 'flex';
+						}
+					}
+
+					@media (width >= 680px) {
+						& {
+							--at-apply: 'flex static translate-x-0 py-0 pe-0 shadow-none transition-shadow flex-row justify-end items-center';
+						}
+					}
+
+					@media (width < 680px) {
+						& {
+							--at-apply: 'bg-[--mauve-bg] shadow-lg pbs-[--menu-btn-bs]';
+						}
+					}
+
+					&:popover-open {
+						&::backdrop {
+							--at-apply: 'bg-black/30';
+						}
+					}
 
 					> ul {
-						--at-apply: 'flex gap-5 font-500';
+						--at-apply: 'flex font-500 flex-col';
+
+						@media (width >= 680px) {
+							& {
+								--at-apply: 'flex-row gap-5';
+							}
+						}
 
 						> li {
 							> *:hover,
@@ -311,6 +344,17 @@ function hideSharePopover() {
 					}
 				}
 
+				/* for eating clicks on nav backdrop */
+				> nav:popover-open + span {
+					--at-apply: 'fixed inset-0 z-1000';
+				}
+
+				@media (width >= 680px) {
+					> nav + span {
+						--at-apply: 'hidden';
+					}
+				}
+
 				> h1 {
 					--at-apply: 'text-3xl leading-none font-700 tracking-wide';
 
@@ -327,14 +371,6 @@ function hideSharePopover() {
 
 				> span {
 					--at-apply: 'absolute text-xs text-neutral-400 font-600 font-mono start-[calc(var(--header-logo-size)+0.6rem)] -bottom-0.5';
-				}
-			}
-
-			&[data-open] {
-				> div {
-					> nav {
-						--at-apply: 'translate-x-0 shadow-lg';
-					}
 				}
 			}
 		}
