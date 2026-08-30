@@ -47,11 +47,14 @@ _setupGlobalKeyModifiers();
 
 const cipheredEmail = [115, 117, 112, 111, 114, 116, 109, 111, 100, 101, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
 const emailEl = useTemplateRef('emailLink');
+const navEmailEl = useTemplateRef('emailLinkNav');
 
 onMounted(() => {
 	const email = cipheredEmail.map(n => String.fromCharCode(n)).join('');
 	emailEl.value?.append(email);
 	emailEl.value?.setAttribute('href', `mailto:${email}`);
+	navEmailEl.value?.append(email);
+	navEmailEl.value?.parentElement?.setAttribute('href', `mailto:${email}`);
 });
 
 function closeMenuIfOutside(event: FocusEvent) {
@@ -148,6 +151,38 @@ function hideSharePopover() {
 						<button @click="reportAnIssue">
 							report an issue
 						</button>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<a target="_blank">
+							<span ref="emailLinkNav" />
+							<Icon class="i-logos:google-gmail" />
+						</a>
+					</li>
+					<li>
+						<a href="https://www.reddit.com/user/asasinmode/" target="_blank">
+							<span>asasinmode</span>
+							<Icon class="i-logos:reddit-icon" />
+						</a>
+					</li>
+					<li>
+						<a href="https://discord.com/channels/@me" target="_blank">
+							<span>asasinmode</span>
+							<Icon class="i-logos:discord-icon" />
+						</a>
+					</li>
+					<li>
+						<a href="https://x.com/asasinmode" target="_blank">
+							<span>asasinmode</span>
+							<Icon class="i-logos:x" />
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/asasinmode/lolcalc" target="_blank">
+							<span>lolcalc</span>
+							<Icon class="i-logos:github-icon" />
+						</a>
 					</li>
 				</ul>
 			</nav>
@@ -291,9 +326,7 @@ function hideSharePopover() {
 					--nav-px: calc(var(--size-page-px) + 2 * var(--spacing));
 
 					&:popover-open {
-						& {
-							--at-apply: 'grid grid-cols-[1fr_auto] auto-rows-min';
-						}
+						--at-apply: 'grid grid-cols-[1fr_auto] grid-rows-[auto_max-content_1fr]';
 					}
 
 					@media (width >= 680px) {
@@ -304,7 +337,7 @@ function hideSharePopover() {
 
 					@media (width < 680px) {
 						& {
-							--at-apply: 'bg-[--mauve-bg] shadow-xl shadow-black pbs-[--menu-btn-bs] ps-[--nav-px]';
+							--at-apply: 'bg-[--mauve-bg] shadow-xl shadow-black pbs-[--menu-btn-bs] pbe-[calc(var(--menu-btn-bs)+2*var(--spacing))] ps-[--nav-px]';
 						}
 					}
 
@@ -314,7 +347,7 @@ function hideSharePopover() {
 						}
 					}
 
-					> ul {
+					> ul:first-of-type {
 						--at-apply: 'flex font-500 flex-col col-span-full text-end gap-y-2 py-5';
 
 						@media (width >= 680px) {
@@ -353,6 +386,46 @@ function hideSharePopover() {
 
 							&:nth-child(4) {
 								--accent: theme('colors.red.400');
+							}
+						}
+					}
+
+					> ul:last-of-type {
+						--at-apply: 'flex gap-1 mbs-auto inline-4/5 mx-auto col-span-full';
+
+						> * {
+							--at-apply: 'flex-1 aspect-1';
+
+							&:nth-last-child(1),
+							&:nth-last-child(2) {
+								span {
+									--at-apply: 'invert';
+								}
+							}
+
+							&:nth-child(2),
+							&:nth-last-child(1) {
+								span:last-child {
+									--at-apply: 'inline-[65%]';
+								}
+							}
+						}
+
+						a {
+							--at-apply: 'size-full block relative';
+
+							> span:first-child {
+								--at-apply: 'sr-only';
+							}
+
+							> span:last-child {
+								--at-apply: 'block-full absolute translate-center start-1/2 inset-bs-1/2';
+							}
+						}
+
+						@media (width >= 680px) {
+							& {
+								--at-apply: 'hidden';
 							}
 						}
 					}
@@ -413,8 +486,12 @@ function hideSharePopover() {
 						}
 					}
 
-					&:is(:first-child, :last-child) > a > .icon {
+					&:is(:nth-last-child(1), :nth-last-child(2)) > a > .icon {
 						--at-apply: 'invert';
+					}
+
+					&:is(:nth-child(2), :nth-child(3), :nth-last-child(1)) > a > .icon {
+						--at-apply: 'size-4.5';
 					}
 				}
 			}
