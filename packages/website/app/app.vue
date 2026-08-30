@@ -322,7 +322,7 @@ function hideSharePopover() {
 				grid-column: content-start / content-end;
 
 				> nav {
-					--at-apply: 'fixed of-x-hidden of-y-auto z-10 grow flex-col items-end bg-(--mauve-bg) block-screen inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
+					--at-apply: 'fixed of-x-hidden of-y-auto z-10 grow flex-col items-end inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
 					--nav-px: calc(var(--size-page-px) + 2 * var(--spacing));
 
 					&:popover-open {
@@ -331,13 +331,13 @@ function hideSharePopover() {
 
 					@media (width >= 680px) {
 						& {
-							--at-apply: 'flex static translate-x-0 py-0 pe-0 shadow-none transition-shadow flex-row justify-end items-center';
+							--at-apply: 'flex static py-0 pe-0 bg-transparent flex-row justify-end items-center';
 						}
 					}
 
 					@media (width < 680px) {
 						& {
-							--at-apply: 'bg-[--mauve-bg] shadow-xl shadow-black pbs-[--menu-btn-bs] pbe-[calc(var(--menu-btn-bs)+2*var(--spacing))] ps-[--nav-px]';
+							--at-apply: 'bg-[--mauve-bg] block-screen shadow-xl shadow-black pbs-[--menu-btn-bs] pbe-[calc(var(--menu-btn-bs)+2*var(--spacing))] ps-[--nav-px]';
 						}
 					}
 
@@ -362,7 +362,7 @@ function hideSharePopover() {
 
 								@media (width >= 680px) {
 									& {
-										--at-apply: 'px-0 py-0';
+										--at-apply: 'px-0 py-0 text-base';
 									}
 								}
 							}
