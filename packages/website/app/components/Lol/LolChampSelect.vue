@@ -94,10 +94,12 @@ defineExpose({
 				<input
 					id="champ-select-search"
 					v-model="search"
+					autocomplete="off"
 					type="text"
 					:data-empty="!search"
 					@update:model-value="selectedRole = undefined"
 					@keydown.enter.prevent="selectFirstChamp"
+					@input="($event.target as any).composing = false"
 				>
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />

@@ -532,6 +532,7 @@ defineExpose({
 					:aria-activedescendant="searchCursoredOverIndex !== undefined ? `item-shop-search-result-${searchCursoredOverIndex}` : undefined"
 					:data-empty="!search"
 					@focus="(searchExpanded = true) && closeDetailsPanel()"
+					@input="($event.target as any).composing = false"
 					@update:model-value="searchCursorOver(searchResults.length ? 0 : undefined)"
 					@keydown="onSearchKeydown"
 				>
