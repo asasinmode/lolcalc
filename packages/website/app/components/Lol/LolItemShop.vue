@@ -2266,6 +2266,44 @@ defineExpose({
 				}
 			}
 		}
+
+		@media (not (pointer: fine)) and (width < 940px) {
+			#item-shop-builds-into-list {
+				--at-apply: 'of-x-auto of-y-clip overscroll-y-contain';
+
+				> li:last-child {
+					> button:not(:disabled) {
+						--at-apply: 'hidden';
+					}
+				}
+			}
+
+			#builds-into-more-list {
+				--at-apply: 'flex static b-0 p-0 block-full inline-max of-visible gap-[--builds-into-list-gap]';
+
+				> li {
+					--at-apply: 'block-[--details-list-btn-size] aspect-1';
+
+					> button {
+						--at-apply: 'py-0';
+						--px: 0px;
+
+						> span:last-of-type {
+							--at-apply: 'sr-only';
+						}
+
+						&::before,
+						&::after {
+							--at-apply: 'hidden';
+						}
+					}
+
+					&:last-child {
+						--at-apply: 'pe-[--details-p]';
+					}
+				}
+			}
+		}
 	}
 }
 </style>
