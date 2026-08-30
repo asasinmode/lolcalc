@@ -191,7 +191,6 @@ function hideSharePopover() {
 	</header>
 	<NuxtPage />
 	<footer>
-		<h2>contact</h2>
 		<ul>
 			<li>
 				<a ref="emailLink" target="_blank">
@@ -463,15 +462,11 @@ function hideSharePopover() {
 		}
 
 		> footer {
-			--at-apply: 'pbs-3 pbe-3 text-neutral-400 grid grid-cols-[subgrid] mbs-auto text-center b-bs b-neutral-500 relative';
+			--at-apply: 'pbs-[--vfluid-12-28] pbe-3 text-neutral-400 grid grid-cols-[subgrid] mbs-auto text-center b-bs b-neutral-500 relative';
 			grid-column: page;
 
 			> * {
 				grid-column: content;
-			}
-
-			> h2 {
-				--at-apply: 'text-lg font-700 text-neutral-300 mb-0.5';
 			}
 
 			> ul {
