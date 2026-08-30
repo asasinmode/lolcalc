@@ -4125,6 +4125,26 @@ export const ITEM_SPECIFICS = {
 			},
 		},
 	},
+	[ITEM_NAME_TO_ID.ga]: {
+		variables: defineVariables({
+			known: {
+				Health: [],
+			},
+			calculate(self) {
+				return {
+					Health: {
+						value: self.stats.value.baseOnLevel.hp * ITEMS_BY_NAME.ga.effectAmount[0]!,
+					},
+				};
+			},
+			meta: {
+				Health: {
+					isCustom: true,
+				},
+			},
+			uninteresting: ['Effect1Amount', 'Effect2Amount', 'Effect4Amount'] as any[],
+		}),
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

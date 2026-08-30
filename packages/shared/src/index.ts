@@ -623,6 +623,7 @@ export const ITEM_NAME_TO_ID = {
 	shadowflame: '4645',
 	infinityEdge: '3031',
 	collector: '6676',
+	ga: '3026',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

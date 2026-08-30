@@ -60,7 +60,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [x] shapeshifting champions
     - [x] aphelios q rotating
-    - [ ] extras shared component like is out combat (youmuu, cloud stack isooc) try to scan internal properties then if detected override component, ideally list the things affected
   - [x] mirror layout
   - [x] expand scoreboard item double click to expand/collapse
   - [x] drag with champion icon?
@@ -101,7 +100,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] friendlier variable names?
   - [x] try to filter out simple variables like 5 more dmg to minions?
   - [x] whether/what to round in results like manamune awe ad
-- [ ] rune dialog
+- [x] rune dialog
   - [x] layout
   - [x] secondary path unset layout
   - [x] hover tooltips
@@ -109,8 +108,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] save button? Changes are saved instantly so it doesn't really make sense
   - [x] alert that configuration is incorrect
   - [x] maybe open dialog on panel click
-- [ ] champ select dialog
-- [ ] item shop dialog
+- [x] champ select dialog
+- [x] item shop dialog
   - [x] sorting
   - [x] searching
   - [x] stat filters
@@ -125,7 +124,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] ctrl toggle between shop/inventory extras & sell value
   - [x] extended item hover tooltips, like swiftmarch showing adaptive force gained (\<rules\>)
   - [x] item hover tooltip sell value when inventory
-- [ ] effects
+- [x] effects
   - [x] dialog
   - [x] apply effects like black cleaver, abyssal mask, amumu passive
   - [x] item effects options ui
@@ -133,7 +132,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] other effects options ui, like slow, stun, grievous wounds
   - [x] hover tooltips
   - [x] show source ability tooltip on shift
-  - [ ] choose a source for the effect, like existing configured ashe for passive application. Use drag indicator to show the Ashe used
+  - [x] choose a source for the effect, like existing configured ashe for passive application. Use drag indicator to show the Ashe used
 - [x] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
 - [x] close dialogs on click outside
 - [x] target dummy damage source
@@ -143,29 +142,29 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
 - [ ] mobile version and make look better
   - [ ] results sticky horizontal headers, probably unwanted on mobile, headers might be unwanted too with `@media (height < ...)`
+  - [ ] tooltips
 - [ ] calculations
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
   - [x] items passives
   - [x] cap attack speed
-  - [?] decaying movement speed stuff like fiora/nami/sivir passive/stridebreaker/solstice sleigh active /hextech dragon slow. Theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
-  - [?] basic attack damage
+  - [x] decaying movement speed stuff like fiora/nami/sivir passive/stridebreaker/solstice sleigh active /hextech dragon slow. Theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
+  - [ ] basic attack damage
     - [ ] related items/passives/effects
-  - [?] apply resists to known type variables. Save pre-mitigation value on variable?
-  - [?] item effects & their result sections like frozen heart or zeke's convergence
-  - [?] resolved item passives values for target like randuin/tabi, percent health damages
-  - [?] calculate static % values like liandry burn or GA health to?
+  - [x] apply resists to known type variables. Save pre-mitigation value on variable?
+  - [x] item effects & their result sections like frozen heart or zeke's convergence
+  - [x] calculate static % values like liandry burn or GA health to?
   - [x] hook priorities in one file for easier precedence management
   - [x] dragons/souls
   - [ ] champion passives
     - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
-  - [ ] champion effects
   - [x] grievous wounds affecting all heal type things
   - [x] heal and shield power affecting known shields & heals
     - [x] spirit visage immortal path
     - [ ] heal & shield mult actualizer - will need outgoing/incoming heal & shield distinction?
-  - [ ] effects
+  - [x] effects
     - [x] add all that will be present in alpha
+    - [x] champion effects
   - [ ] damage multipliers (immortal path, haunting guise items, chemtech soul - try to merge vars)
   - [x] level breakpoint calculations (in some passives make sure it works, like xin zhao heal)
   - [x] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
