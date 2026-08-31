@@ -51,6 +51,16 @@ test('16.17 adaptive force', async (t) => {
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
+	await t.test('dark seal', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.hearthboundAxe],
+			internalItemData: { glory: 10 } satisfies IInternalItemDataOf<'darkSeal'>,
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
 	await t.test('mejai', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Amumu', {
 			...sourceCommon,
