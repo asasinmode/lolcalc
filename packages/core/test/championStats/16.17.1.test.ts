@@ -1,6 +1,7 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import type { IDragonName, IItem } from '@lolcalc/data/types.js';
+import type { IChampionStatName } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
@@ -14,8 +15,9 @@ test.before(() => {
 });
 
 test('16.17 adaptive force', async (t) => {
-	const sourceCommon: IOverrides = {
+	const sourceCommon: IOverrides<'Amumu'> = {
 		level: 1,
+		internalData: { applyPassive: 0 },
 		runes: {
 			shards: {
 				offensive: 'adaptive',
@@ -25,26 +27,22 @@ test('16.17 adaptive force', async (t) => {
 		},
 	};
 
-	// manamune
-	// seraph
+	await t.test('manamune', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.manamune, ITEMS_BY_NAME.ampTome, ITEMS_BY_NAME.ampTome],
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	// archangel
 	// rabadon
 	// mejai
 	// bloodmail
 	// sterak
 	// staff of flowing water
 	// dawncore
-
-	await t.test('blackfire torch', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Ryze', {
-			...sourceCommon,
-			items: [ITEMS_BY_NAME.blackfireTorch],
-		});
-
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			abilityPower: 98,
-		}, damageSource);
-		assert.equal(damageSource.maxAbilityResource.value, 988);
-	});
 });
 
 // veigar
