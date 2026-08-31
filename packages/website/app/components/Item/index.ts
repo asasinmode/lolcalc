@@ -258,7 +258,10 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.solsticeSleigh), 'sledding', 'Going Sledding move speed', ITEM_SPECIFICS[ITEM_NAME_TO_ID.solsticeSleigh].PASSIVE_BONUS_MS),
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.overlordsBloodmail), 'obAdaptive', 'count passives towards adaptive force', false, undefined, 'Unless your build is mixed <scalead>AD</scalead>/<scaleap>AP</scaleap> and the values are close, you shouldn\'t need to check this<br><br> <rules><scalead>Attack damage</scalead> gained from both Tyranny and Retribution passives counts towards choosing which stat adaptive force grants (<scalead>AD</scalead>/<scaleap>AP</scaleap>).<br> If you need them to be properly factored in, you can check this but you will have to use the refresh button to manually update the stats whenever something changes</rules>', {}),
+		/* 'tyranny' passed here won't actually be updated by boolean extra, because this component controls 2 variables through `extraControls`. For now only this component uses boolean extra's effect controls and it's special cased to do so */
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.overlordsBloodmail), 'tyranny', 'count passives towards adaptive force', false, undefined, 'Unless your build is mixed <scalead>AD</scalead>/<scaleap>AP</scaleap> and the values are close, you shouldn\'t need to check this<br><br> <rules><scalead>Attack damage</scalead> gained from both Tyranny and Retribution passives counts towards choosing which stat adaptive force grants (<scalead>AD</scalead>/<scaleap>AP</scaleap>).<br> If you need them to be properly factored in, you can check this but you will have to use the refresh button to manually update the stats whenever something changes</rules>', {
+			effectControlsProps: ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].extraControls,
+		}),
 	},
 };
 

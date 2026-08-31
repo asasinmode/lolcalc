@@ -7,7 +7,7 @@ const emit = defineEmits<{
 	refresh: [];
 }>();
 
-const value = defineModel<boolean>({ required: false });
+const value = defineModel<boolean | number>({ required: false });
 const clicks = ref(0);
 
 function refresh() {

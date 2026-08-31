@@ -194,16 +194,24 @@ export async function booleanExtra<T extends IGameAbilityId>(
 	labelPrefixApply = true,
 	labelAppendOnTarget = false,
 	tooltip?: string,
-	{ onUpdate }: {
+	{
+		onUpdate,
+		effectControlsProps,
+	}: {
 		onUpdate?: IExtraOnValueUpdate;
+		effectControlsProps?: IEffectControlsProps<any>;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
+		const [stringifiedAbilityId, modelValue, extraUpdateValue] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
+
+		/* kind of unusual thing for bloodmail extra which is the only thing using effectControlsProps in boolean extra atm */
+		const controlsPropsModel = effectControlsProps?.model?.(props.damageSource);
+		const updateValue = controlsPropsModel ? (value: boolean) => controlsPropsModel.value = value : extraUpdateValue;
 
 		return () => h(CalculatorExtraBoolean, {
-			'modelValue': modelValue.value,
+			'modelValue': controlsPropsModel?.value ?? modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			labelPrefixApply,
@@ -311,8 +319,8 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 
 function createEffectControls(
 	idSuffix: string,
-	modelValue: boolean | undefined,
-	updateValue: (value: boolean | undefined) => void,
+	modelValue: number | boolean | undefined,
+	updateValue: (value: number | boolean | undefined) => void,
 	refresh: () => void,
 	slots: SlotsType,
 	noApply?: boolean,

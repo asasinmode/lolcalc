@@ -5,13 +5,14 @@
 import type { TItems } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IStatsCalculationResult } from '@lolcalc/shared';
-import type { IDeriveProgressFn, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
+import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import type { DetectItemVariables } from '../types';
 import type { IVariableModifyMeta } from '../variables/game.ts';
-import { ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
+import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
+import { computed } from 'vue';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
@@ -2133,11 +2134,37 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
-		internalDataProperties: ['obAdaptive'],
+		internalDataProperties: ['retribution', 'tyranny'],
 		setupData(self) {
-			self.internalItemData.value.obAdaptive = clamp(0, self.internalItemData.value.obAdaptive ?? 0, 1);
-			return { obAdaptive: 0 };
+			self.internalItemData.value.retribution = self.internalItemData.value.retribution ? Math.max(0, self.internalItemData.value.retribution) : undefined;
+			self.internalItemData.value.tyranny = self.internalItemData.value.retribution ? Math.max(0, self.internalItemData.value.tyranny) : undefined;
+			return {
+				retribution: 0 as number | undefined,
+				tyranny: 0 as number | undefined,
+			};
 		},
+		extraControls: {
+			model: self => computed({
+				get() {
+					return self.internalItemData.value.retribution === undefined ? 0 : 1;
+				},
+				set(value) {
+					if (value) {
+						self.internalItemData.value.retribution = self.stats.value.variables.bloodmailRetribution;
+						self.internalItemData.value.tyranny = self.stats.value.variables.bloodmailTyranny;
+					} else {
+						self.internalItemData.value.retribution = undefined;
+						self.internalItemData.value.tyranny = undefined;
+					}
+				},
+			}),
+			refresh(self: DamageSource) {
+				console.log('refresh', self.internalItemData.value, 'to', self.stats.value.variables.bloodmailRetribution, self.stats.value.variables.bloodmailTyranny);
+			},
+			currentlySnapshot(_effectData, self) {
+				return `Tyranny <scalead>%i:${STAT_ICON.attackDamage}% ${Math.round(self.internalItemData.value.retribution ?? 0)}</scalead> | Retribution <scalead>%i:${STAT_ICON.attackDamage}% ${Math.round(self.internalItemData.value.retribution ?? 0)}</scalead>`;
+			},
+		} satisfies IEffectControlsProps<any>,
 		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {
 			const maxValueAt = variableResolveFn(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold)?.(
 				ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold,
