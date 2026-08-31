@@ -490,6 +490,8 @@ export const ITEM_NAME_TO_ID = {
 	seraphsEmbrace: '3040',
 	manamune: '3004',
 	muramana: '3042',
+	aetherWisp: '3113',
+	hearthboundAxe: '3051',
 	wintersApproach: '3119',
 	fimbulwinter: '3121',
 	hubris: '6697',

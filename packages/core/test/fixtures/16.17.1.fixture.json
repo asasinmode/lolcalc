@@ -116,22 +116,6 @@
 				}
 			}
 		},
-		"3003": {
-			"searchString": "archangelsstaff;aa;seraphsembrace;tear;spelldamage;mana;abilityhaste;abilitypower",
-			"stats": {
-				"FlatMPPoolMod": 600,
-				"FlatMagicDamageMod": 70,
-				"AbilityHasteMod": 25
-			},
-			"dataValues": {
-				"ManaPerCharge": 5,
-				"ManaChargeAmmoCD": 8,
-				"ManaChargeMaxAmmo": 5,
-				"MaxMana": 360,
-				"InternalCDPerCastID": 6.5,
-				"APFromMana": 0.01
-			}
-		},
 		"3004": {
 			"searchString": "manamune;muramana;tear;damage;mana;cooldownreduction;onhit;abilityhaste;attackdamage",
 			"stats": {
@@ -151,6 +135,41 @@
 					"mFormulaParts": [
 						{
 							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3040": {
+			"searchString": "seraphsembrace;spelldamage;mana;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 25
+			},
+			"dataValues": {
+				"APFromMana": 0.02,
+				"HealthThreshold": 0.3,
+				"ShieldDuration": 3,
+				"LifelineCooldown": 90,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"ShieldValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.18,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusAPCalc": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02,
+							"mStatFormula": 2,
 							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
@@ -182,6 +201,13 @@
 						}
 					]
 				}
+			}
+		},
+		"3051": {
+			"searchString": "hearthboundaxe;bluearrow;damage;attackspeed;attackdamage",
+			"stats": {
+				"FlatPhysicalDamageMod": 20,
+				"PercentAttackSpeedMod": 0.2
 			}
 		},
 		"3053": {
@@ -306,6 +332,13 @@
 			},
 			"dataValues": {
 				"APAmp": 0.3
+			}
+		},
+		"3113": {
+			"searchString": "aetherwisp;spookyghost;movement;spelldamage;abilitypower;movespeed",
+			"stats": {
+				"FlatMagicDamageMod": 30,
+				"PercentMovementSpeedMod": 0.04
 			}
 		},
 		"6616": {

@@ -3,11 +3,9 @@ import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import type { IChampionStatName } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
-import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.17.1.fixture.json' with { type: 'json' };
-import { overridesAppliedEffect, setupDamageSource, setupPatchFixture } from '../utils.ts';
+import { setupDamageSource, setupPatchFixture } from '../utils.ts';
 
 test.before(() => {
 	setupPatchFixture(fixture);
@@ -35,11 +33,10 @@ test('16.17 adaptive force', async (t) => {
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
-	await t.test('archangel', async () => {
+	await t.test('seraph', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Amumu', {
 			...sourceCommon,
-			items: [ITEMS_BY_NAME.archangelsStaff, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.longSword],
-			internalItemData: { manaflow: 360 } satisfies IInternalItemDataOf<'archangelsStaff'>,
+			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.longSword],
 		});
 
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
@@ -70,14 +67,14 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.ampTome],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
 	});
 
 	await t.test('bloodmail retribution', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Amumu', {
 			...sourceCommon,
-			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.ampTome],
-			currentHealth: 300,
+			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.aetherWisp, ITEMS_BY_NAME.ampTome],
+			currentHealth: 470,
 		});
 
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
@@ -95,10 +92,8 @@ test('16.17 adaptive force', async (t) => {
 	await t.test('staff of flowing water', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Amumu', {
 			...sourceCommon,
-			items: [ITEMS_BY_NAME.longSword],
-			appliedEffects: [
-				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.flowingWaterRapids), [1]),
-			],
+			items: [ITEMS_BY_NAME.staffOfFlowingWater, ITEMS_BY_NAME.hearthboundAxe, ITEMS_BY_NAME.hearthboundAxe],
+			internalItemData: { rapids: 1 } satisfies IInternalItemDataOf<'staffOfFlowingWater'>,
 		});
 
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
@@ -111,7 +106,7 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { eternity: 10 } satisfies IInternalItemDataOf<'roa'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
 	await t.test('dawncore', async () => {
@@ -120,7 +115,7 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.dawncore, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.pickaxe],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 });
 
