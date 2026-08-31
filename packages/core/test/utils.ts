@@ -5,7 +5,9 @@ import type { IEffectData, IMiscData } from '@lolcalc/data';
 import type { IChampion, IChampionId, IDragonName, IItem, IRunePath, IRunePathName, IRuneShard, IRuneShardSlotName, IRuneShardSlotValue } from '@lolcalc/data/types';
 import assert from 'node:assert';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
+import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect.ts';
 import { CHAMPIONS, EFFECTS, ITEMS, MISC, RUNES } from '@lolcalc/data';
+import { AbilityType } from '@lolcalc/shared';
 import { ref, shallowRef } from 'vue';
 
 interface IPatchOverridesFixture {
@@ -14,17 +16,13 @@ interface IPatchOverridesFixture {
 	items: Record<string, Partial<IItem>>;
 	effects?: Partial<IEffectData>;
 	/** dragon fixture's type allows partial but the test will crash if it's trying to use a dragon that's not fixtured. It's intended */
-	misc?: { roleQuests: Partial<IMiscData['roleQuests']> } & Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>>;
+	misc?: { roleQuests: Partial<IMiscData['roleQuests']>; dragons?: Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>> };
 	runes?: {
 		paths?: Partial<Record<IRunePathName, Pick<IRunePath, 'slots'>>>;
 		/* no point in typing it atm */
 		shards?: Partial<Record<IRuneShardSlotName, Partial<Record<IRuneShardSlotValue, Pick<IRuneShard, 'effectAmount'>>>>>;
 	};
 }
-
-const overriden: {
-	items: string[];
-} = { items: [] };
 
 export async function setupDamageSource<T extends IChampionId>(fixture: IPatchOverridesFixture, championId: T, overrides: IOverrides<T> = {}): Promise<DamageSource<T>> {
 	const rv = await new DamageSource({ champion: CHAMPIONS[championId], ...overrides }).await();
@@ -35,8 +33,41 @@ export async function setupDamageSource<T extends IChampionId>(fixture: IPatchOv
 	}
 
 	for (const item of rv.items.value) {
-		if (item && !overriden.items.includes(item.id)) {
+		if (item && !(item.id in fixture)) {
 			console.warn('[setupDamageSource] using item not present in the fixture', fixture.version, item.id, item.name);
+		}
+	}
+
+	for (const effect of rv.appliedEffects.value) {
+		const { sourceAbility } = EFFECT_SPECIFICS[effect.abilityId.id];
+		switch (sourceAbility.type) {
+			case AbilityType.item: {
+				if (!(sourceAbility.id in fixture.items)) {
+					console.warn('[setupDamageSource] using item effect not present in the fixture', fixture.version, sourceAbility.id, ITEMS[sourceAbility.id]?.name);
+				}
+				break;
+			}
+			case AbilityType.champion: {
+				if (!fixture.champions[sourceAbility.id]?.abilities?.[sourceAbility.abilityKey]?.variants?.[sourceAbility.abilityVariantIndex]) {
+					console.warn('[setupDamageSource] using champion effect not present in the fixture', fixture.version, sourceAbility.id, sourceAbility.abilityKey, sourceAbility.abilityVariantIndex);
+				}
+				break;
+			}
+			case AbilityType.dragon: {
+				if (!fixture.misc?.dragons?.[sourceAbility.id]?.[sourceAbility.subtype]) {
+					console.warn('[setupDamageSource] using dragon effect not present in the fixture', fixture.version, sourceAbility.id, sourceAbility.id, sourceAbility.subtype);
+				}
+				break;
+			}
+			case AbilityType.effect: {
+				if (!fixture.effects?.[sourceAbility.id]) {
+					console.warn('[setupDamageSource] using effect not present in the fixture', fixture.version, sourceAbility.id, sourceAbility.id);
+				}
+				break;
+			}
+			default: {
+				return sourceAbility satisfies never;
+			}
 		}
 	}
 
@@ -47,7 +78,6 @@ export function setupPatchFixture(fixture: IPatchOverridesFixture) {
 	for (const item in fixture.items) {
 		if (ITEMS[item]) {
 			Object.assign(ITEMS[item], fixture.items[item]);
-			overriden.items.push(item);
 		} else {
 			console.warn('[setupItems] unknown item specified in fixture', item, fixture.version);
 		}
@@ -76,7 +106,10 @@ export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, 
 	}
 }
 
-export function overridesAppliedEffect<T extends IEffectAbilityId>(abilityId: T, data: IEffectDataOf<T['id']>): IDamageSourceEffect<IEffectAbilityId<T['id']>> {
+export function overridesAppliedEffect<T extends IEffectAbilityId>(
+	abilityId: T,
+	data: IEffectDataOf<T['id']>,
+): IDamageSourceEffect<IEffectAbilityId<T['id']>> {
 	return {
 		abilityId,
 		data: ref(data as any),
