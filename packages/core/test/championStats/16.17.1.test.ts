@@ -1,6 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
-import type { IDragonName, IItem } from '@lolcalc/data/types.js';
 import type { IChampionStatName } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
@@ -8,7 +7,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.17.1.fixture.json' with { type: 'json' };
-import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
+import { overridesAppliedEffect, setupDamageSource, setupPatchFixture } from '../utils.ts';
 
 test.before(() => {
 	setupPatchFixture(fixture);
@@ -36,15 +35,96 @@ test('16.17 adaptive force', async (t) => {
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
-	// archangel
-	// rabadon
-	// mejai
-	// bloodmail
-	// sterak
-	// staff of flowing water
-	// dawncore
+	await t.test('archangel', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.archangelsStaff, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.longSword],
+			internalItemData: { manaflow: 360 } satisfies IInternalItemDataOf<'archangelsStaff'>,
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	await t.test('rabadon', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.longSword, ITEMS_BY_NAME.longSword],
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+	});
+
+	await t.test('mejai', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.mejai, ITEMS_BY_NAME.bfSword],
+			internalItemData: { glory: 25 } satisfies IInternalItemDataOf<'mejai'>,
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	await t.test('bloodmail tyranny', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.ampTome],
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+	});
+
+	await t.test('bloodmail retribution', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.ampTome],
+			currentHealth: 300,
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	await t.test('sterak', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.ampTome],
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	await t.test('staff of flowing water', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.longSword],
+			appliedEffects: [
+				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.flowingWaterRapids), [1]),
+			],
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	await t.test('roa', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.roa, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.pickaxe],
+			internalItemData: { eternity: 10 } satisfies IInternalItemDataOf<'roa'>,
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	await t.test('dawncore', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.dawncore, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.pickaxe],
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
 });
 
+// aphelios
 // veigar
 // darius
 // jhin

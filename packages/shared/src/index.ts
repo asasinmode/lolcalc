@@ -471,11 +471,14 @@ export const ALL_CHAMPION_STATS_ENTRIES = Object.entries(CHAMPION_STAT_META) as 
 
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {
+	faerieCharm: '1004',
 	rejuvenationBead: '1006',
 	cloakOfAgility: '1018',
 	sapphireCrystal: '1027',
 	rubyCrystal: '1028',
 	longSword: '1036',
+	pickaxe: '1037',
+	bfSword: '1038',
 	dagger: '1042',
 	ampTome: '1052',
 	doransShield: '1054',
