@@ -2928,7 +2928,7 @@ defineExpose({ el });
 		> article {
 			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
 			--p: calc(2 * var(--spacing));
-			anchor-scope: --extra-container;
+			anchor-scope: --extra-container, --parent;
 			anchor-name: --extra-container;
 			--ctl-btn-size: var(--fluid-28-22-t600);
 

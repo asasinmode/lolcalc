@@ -838,7 +838,7 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		componentTooltip: 'This effect slows always, regardless of the target\'s current hp',
+		componentTooltip: 'The slow will be applied regardless of the target\'s current hp',
 		variables: simpleSlowEffectVariables('seryldaSlow'),
 		calculateHooks: {
 			postInit: {

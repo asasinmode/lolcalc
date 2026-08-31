@@ -231,7 +231,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet), 'frostField', 'Frost Field', true, true),
 	},
 	[ITEM_NAME_TO_ID.seryldasGrudge]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge), 'bitterCold', 'Bitter Cold', true, true, 'This effect slows always, regardless of the target\'s current hp'),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge), 'bitterCold', 'Bitter Cold', true, true, 'The slow will be applied regardless of the target\'s current hp'),
 	},
 	[ITEM_NAME_TO_ID.bloodsong]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bloodsong), 'bloodsonged', 'Spellblade damage increase', true, true),
