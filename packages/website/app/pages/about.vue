@@ -41,8 +41,8 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 			</button>
 		</p>
 		<p class="alert info">
-			for now only champions, their passives, items (with passives), and rune shards are expected to calculate properly!
-			TODO icon
+			for now only champions <strong>passive</strong> abilities (not QWER), items, and rune shards (not paths) calculate properly
+			<Icon class="i-ph:info" />
 		</p>
 		<p>
 			non-passive abilities (like <a href="https://wiki.leagueoflegends.com/en-us/Ambessa#Public_Execution" target="_blank"><img v-bind="ambessaRImg" alt="Ambessa R icon"> Ambessa R passive</a> or <a href="https://wiki.leagueoflegends.com/en-us/Nocturne#Shroud_of_Darkness" target="_blank"><img v-bind="nocturneWImg" alt="Nocturne W icon"> Nocturne W passive</a>) and <a href="https://wiki.leagueoflegends.com/en-us/Rune#Rune_paths" target="_blank">rune paths</a> <strong>are not implemented</strong> <i>(yet)</i> in the calculations. See the <NuxtLink to="/guide#test-setup">champion/item/rune setup</NuxtLink> recommended for verifying the calculations yourself

@@ -51,7 +51,7 @@
 		}
 
 		&.info {
-			--at-apply: 'b-blue-600 bg-blue-900/10 text-blue-400';
+			--at-apply: 'b-blue-600 bg-blue-950 text-blue-300';
 
 			&::after {
 				--at-apply: 'bg-blue-400';

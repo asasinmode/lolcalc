@@ -13,6 +13,8 @@ function onClose() {
 	composableClose();
 }
 
+const category = ref('calculations');
+
 function submitIssue(_event: SubmitEvent) {
 	console.log('submitting', window.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY));
 }
@@ -42,15 +44,19 @@ function submitIssue(_event: SubmitEvent) {
 			</div>
 			<div>
 				<label for="issue-category">category<span>*</span></label>
-				<select id="issue-category" required>
-					<option selected>
+				<select id="issue-category" v-model="category" required>
+					<option selected value="calculations">
 						calculations wrong
 					</option>
-					<option>ui broken/bad</option>
-					<option>feature suggestion</option>
-					<option>something else</option>
+					<option value="ui">ui broken/bad</option>
+					<option value="feature">feature suggestion</option>
+					<option value="other">something else</option>
 				</select>
 			</div>
+			<p v-show="category === 'calculations'" class="alert info">
+				calculation issues without an image/video showcasing the incorrect setup in game will be ignored. Learn how to attach images by reading the checkbox at the end of this form
+				<Icon class="i-ph:info" />
+			</p>
 			<div>
 				<label for="issue-message">message<span>*</span></label>
 				<textarea id="issue-message" placeholder="level 5 Cassiopeia with swiftmarch, movement speed rune shard and cloud dragon shows wrong movement speed. Game shows 420, the linked configuration 415" rows="8" required />
@@ -112,6 +118,10 @@ function submitIssue(_event: SubmitEvent) {
 
 		> form {
 			--at-apply: 'pbs-3 grid grid-cols-3 auto-rows-auto gap-x-5 text-lg gap-y-2.5';
+
+			.alert {
+				--at-apply: 'bg-blue-950 text-blue-300';
+			}
 
 			@media (width < 640px) {
 				& {
