@@ -29,16 +29,107 @@
 		}
 	},
 	"items": {
+		"1004": {
+			"searchString": "faeriecharm;manaregen",
+			"stats": {
+				"PercentBaseMPRegenMod": 0.5
+			}
+		},
 		"1036": {
 			"searchString": "longsword;damage;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 10
 			}
 		},
+		"1037": {
+			"searchString": "pickaxe;damage;attackdamage",
+			"stats": {
+				"FlatPhysicalDamageMod": 25
+			}
+		},
+		"1038": {
+			"searchString": "bfsword;bf;damage;attackdamage",
+			"stats": {
+				"FlatPhysicalDamageMod": 40
+			}
+		},
 		"1052": {
 			"searchString": "amplifyingtome;amptome;book;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 20
+			}
+		},
+		"1082": {
+			"searchString": "darkseal;health;spelldamage;abilitypower",
+			"stats": {
+				"FlatHPPoolMod": 50,
+				"FlatMagicDamageMod": 15
+			},
+			"dataValues": {
+				"MaxGloryStacks": 10,
+				"APPerGlory": 4,
+				"GloryOnKill": 2,
+				"GloryOnAssist": 1,
+				"GloryLossOnDeath": 5
+			},
+			"itemCalculations": {
+				"CurrentGloryAP": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{22eeba1f}",
+							"mDataValue": "APPerGlory",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"2501": {
+			"searchString": "overlordsbloodmail;health;damage;attackdamage",
+			"stats": {
+				"FlatHPPoolMod": 550,
+				"FlatPhysicalDamageMod": 30
+			},
+			"dataValues": {
+				"HPToADPercentage": 0.025,
+				"MissingHealthAD": 0.12,
+				"MissingHealthThreshold": 0.7
+			},
+			"itemCalculations": {
+				"RemainingHealthThreshold": {
+					"mMultiplier": {
+						"mNumber": -1,
+						"__type": "NumberCalculationPart"
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": -1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mDataValue": "MissingHealthThreshold",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
+		},
+		"3003": {
+			"searchString": "archangelsstaff;aa;seraphsembrace;tear;spelldamage;mana;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 25
+			},
+			"dataValues": {
+				"ManaPerCharge": 5,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 5,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5,
+				"APFromMana": 0.01
 			}
 		},
 		"3004": {
@@ -64,6 +155,202 @@
 						}
 					]
 				}
+			}
+		},
+		"3041": {
+			"searchString": "mejaissoulstealer;book;health;spelldamage;movement;abilitypower",
+			"stats": {
+				"FlatHPPoolMod": 100,
+				"FlatMagicDamageMod": 20
+			},
+			"dataValues": {
+				"MaxGloryStacks": 25,
+				"APPerGlory": 5,
+				"GloryOnKill": 4,
+				"GloryOnAssist": 2,
+				"GloryLossOnDeath": 10,
+				"GloryThreshold": 10,
+				"MoveSpeedMod": 0.1
+			},
+			"itemCalculations": {
+				"CurrentGloryAP": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{22eeba1f}",
+							"mDataValue": "APPerGlory",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3053": {
+			"searchString": "steraksgage;shield;sterakscage;health;damage;tenacity",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"PercentTenacityMod": 0.2
+			},
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"ShieldDuration": 4.5,
+				"HealthPercent": 0.1,
+				"HealPercent": 0.02,
+				"RangedEffectiveness": 0.6,
+				"ReductionAmount": 0.5,
+				"BaseShieldRatio": 0.6,
+				"HealDuration": 5,
+				"ADtoAD": 0.5,
+				"TimeBeforeDecay": 0.75,
+				"TenacityDuration": 8,
+				"SizeIncrease": 0.1,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "HealPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusShield": {
+					"mMultiplier": {
+						"mBuffName": "{6faa06b7}",
+						"mCoefficient": 1,
+						"__type": "BuffCounterByCoefficientCalculationPart"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValueB",
+					"__type": "GameCalculationModified"
+				},
+				"MeleeItemCalcValueB": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValueB": {
+					"mMultiplier": {
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "MeleeItemCalcValueB",
+					"__type": "GameCalculationModified"
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mCeiling": 3,
+							"mFloor": 2,
+							"mSubparts": [
+								{
+									"mStat": 31,
+									"mStatFormula": 1,
+									"mSubpart": {
+										"mNumber": 0.01,
+										"__type": "NumberCalculationPart"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							],
+							"__type": "ClampSubPartsCalculationPart"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedEffectiveness",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue",
+					"__type": "GameCalculationModified"
+				},
+				"ShieldSize": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "BaseShieldRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "ADtoAD",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3089": {
+			"searchString": "rabadonsdeathcap;dc;dcap;hat;banksys;wooglets;witchcap;spelldamage;abilitypower",
+			"stats": {
+				"FlatMagicDamageMod": 130
+			},
+			"dataValues": {
+				"APAmp": 0.3
+			}
+		},
+		"6616": {
+			"searchString": "staffofflowingwater;nami;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMagicDamageMod": 35,
+				"AbilityHasteMod": 10,
+				"PercentBaseMPRegenMod": 1.25,
+				"PercentHealingAmountMod": 0.1
+			},
+			"dataValues": {
+				"BuffDuration": 6,
+				"APMod": 40,
+				"AHMod": 15
+			}
+		},
+		"6621": {
+			"searchString": "dawncore;spelldamage;manaregen;abilitypower",
+			"stats": {
+				"FlatMagicDamageMod": 45,
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.16
+			},
+			"dataValues": {
+				"APPerManaRegen": 10,
+				"HSPowerPerManaRegen": 0.02
+			}
+		},
+		"6657": {
+			"searchString": "rodofages;roa;health;healthregen;spelldamage;mana;manaregen;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 500,
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 45
+			},
+			"dataValues": {
+				"HealthPerStack": 10,
+				"ManaPerStack": 30,
+				"APPerStack": 3,
+				"MaxStacks": 10,
+				"EternityManaRestore": 0.1,
+				"EternityHealthRestore": 0.25,
+				"EternityMaxHealPerCast": 20,
+				"EternityCDPerCast": 1,
+				"SecondsPerStack": 60
 			}
 		}
 	},

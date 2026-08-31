@@ -33,7 +33,7 @@ export async function setupDamageSource<T extends IChampionId>(fixture: IPatchOv
 	}
 
 	for (const item of rv.items.value) {
-		if (item && !(item.id in fixture)) {
+		if (item && !(item.id in fixture.items)) {
 			console.warn('[setupDamageSource] using item not present in the fixture', fixture.version, item.id, item.name);
 		}
 	}
