@@ -1,0 +1,15 @@
+{
+	"version": "16.16.1",
+	"champions": {},
+	"items": {
+	},
+	"misc": {
+		"roleQuests": {
+			"mid": {
+				"dataValues": {
+					"BonusADAP": 0.08
+				}
+			}
+		}
+	}
+}
