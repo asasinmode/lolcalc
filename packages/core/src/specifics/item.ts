@@ -2133,6 +2133,11 @@ export const ITEM_SPECIFICS = {
 		}),
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
+		internalDataProperties: ['obAdaptive'],
+		setupData(self) {
+			self.internalItemData.value.obAdaptive = clamp(0, self.internalItemData.value.obAdaptive ?? 0, 1);
+			return { obAdaptive: 0 };
+		},
 		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {
 			const maxValueAt = variableResolveFn(ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold)?.(
 				ITEMS_BY_NAME.overlordsBloodmail?.itemCalculations.RemainingHealthThreshold,

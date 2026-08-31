@@ -56,7 +56,7 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 				<p
 					:id="`xtrbln-tooltip-${idSuffix}`"
 					popover="hint"
-					class="hover-tooltip"
+					class="hover-tooltip game-description"
 					@focus="showTooltip($event, false)"
 					@mouseenter="showTooltip($event, false)"
 					@mouseleave="hideTooltip($event, false)"
