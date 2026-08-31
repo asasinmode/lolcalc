@@ -202,45 +202,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotalStats.mana = 0;
 	}
 
-	if (source.calculateStatsHooks.all.value.onChampionPassive) {
-		for (const hook of source.calculateStatsHooks.all.value.onChampionPassive) {
-			hook(source, { isRanged, championPassiveStats, baseStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
-		}
-	}
-	championPassiveStats.attackSpeed = (championPassiveStats.bonusAttackSpeedPercent ?? 0) * baseOnLevelStats.attackSpeedRatio;
+	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
 
-	if (source.calculateStatsHooks.all.value.preBonus) {
-		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
-			hook(source, { isRanged, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
-		}
-	}
-
-	effectStats.attackSpeed += effectStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
-	/* attack speed from level counts towards bonus */
-	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
-	for (const stat in bonusStats) {
-		if (MULTIPLICATIVE_CHAMPION_STATS.includes(stat as IChampionStatName)) {
-			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(
-				1,
-				bonusStats[stat as IMultiplicativeChampionStatName],
-				dragonStats[stat as IMultiplicativeChampionStatName] ?? 0,
-				itemTotalStats[stat as IMultiplicativeChampionStatName],
-				championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0,
-			);
-		} else {
-			bonusStats[stat as IChampionStatName]!
-				+= (dragonStats[stat as IChampionStatName] ?? 0)
-					+ itemTotalStats[stat as IChampionStatName]
-					+ (championPassiveStats[stat as IChampionStatName] ?? 0)
-					+ effectStats[stat as IChampionStatName];
-		}
-	}
-
-	const totalPreMultipliersStats = Object.fromEntries(Object.entries(bonusStats).map(
-		([statName, statValue]) => [statName, statValue + baseOnLevelStats[statName as IChampionStatName]],
-	)) as IChampionStats;
-
-	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, bonusStats.attackDamage, bonusStats.abilityPower);
 	const runeShardStats: IStatsCalculationResult['runeShards'] = {
 		tenacity: 1,
 		slowResist: 1,
@@ -254,21 +217,47 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	runeShardStats.slowResist = 1 - runeShardStats.slowResist;
 	calculatedVariables.apMultipliersBase += runeShardStats.abilityPower ?? 0;
 
-	for (const stat in runeShardStats) {
+	if (source.calculateStatsHooks.all.value.onChampionPassive) {
+		for (const hook of source.calculateStatsHooks.all.value.onChampionPassive) {
+			hook(source, { isRanged, championPassiveStats, baseStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+		}
+	}
+	championPassiveStats.attackSpeed = (championPassiveStats.bonusAttackSpeedPercent ?? 0) * baseOnLevelStats.attackSpeedRatio;
+
+	if (source.calculateStatsHooks.all.value.preBonus) {
+		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
+			hook(source, { isRanged, runeShardStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+		}
+	}
+
+	effectStats.attackSpeed += effectStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
+	/* attack speed from level counts towards bonus */
+	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
+	for (const stat in bonusStats) {
 		if (MULTIPLICATIVE_CHAMPION_STATS.includes(stat as IChampionStatName)) {
 			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(
 				1,
 				bonusStats[stat as IMultiplicativeChampionStatName],
-				runeShardStats[stat as IMultiplicativeChampionStatName],
+				runeShardStats[stat as IMultiplicativeChampionStatName] ?? 0,
+				dragonStats[stat as IMultiplicativeChampionStatName] ?? 0,
+				itemTotalStats[stat as IMultiplicativeChampionStatName],
+				championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0,
 			);
 		} else {
-			bonusStats[stat as IChampionStatName] += runeShardStats[stat as IChampionStatName] ?? 0;
-			totalPreMultipliersStats[stat as IChampionStatName] += runeShardStats[stat as IChampionStatName] ?? 0;
+			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
+				+ (dragonStats[stat as IChampionStatName] ?? 0)
+				+ itemTotalStats[stat as IChampionStatName]
+				+ (championPassiveStats[stat as IChampionStatName] ?? 0)
+				+ effectStats[stat as IChampionStatName];
 		}
 	}
 
 	calculatedVariables.tenacityBucketB = 1 - calculatedVariables.tenacityBucketB;
 	bonusStats.tenacity += calculatedVariables.tenacityBucketB;
+
+	const totalPreMultipliersStats = Object.fromEntries(Object.entries(bonusStats).map(
+		([statName, statValue]) => [statName, statValue + baseOnLevelStats[statName as IChampionStatName]],
+	)) as IChampionStats;
 
 	bonusStats.attackSpeed += baseOnLevelStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
 	/* maybe should not be done like that but that's what it is at this point */
@@ -319,7 +308,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
-			hook(source, { isRanged, totalPreMultipliersStats, runeShardStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, baseStats, adaptiveForceMeta }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, baseStats, adaptiveForceMeta }, { calculatedVariables, debuffs, effectVars, miscDebug });
 		}
 	}
 

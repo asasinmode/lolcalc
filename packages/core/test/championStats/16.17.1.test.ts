@@ -33,7 +33,7 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.manamune, ITEMS_BY_NAME.ampTome, ITEMS_BY_NAME.ampTome],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
 	// archangel

@@ -2291,6 +2291,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	/** runs before totalling all stats to total bonus */
 	preBonus?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
+		runeShardStats: IStatsCalculationResult['runeShards'];
 		itemBaseStats: IStatsCalculationResult['itemBase'];
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
@@ -2303,7 +2304,6 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	onTotalPreMultipliers?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
-		runeShardStats: IStatsCalculationResult['runeShards'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
 		bonusStats: IStatsCalculationResult['bonus'];
 		baseStats: IStatsCalculationResult['base'];
