@@ -318,6 +318,80 @@ export const CHAMPION_SPECIFICS = {
 				},
 			}),
 		},
+		q: {
+			variables: defineChampionVariables<'Chogath', typeof IChogath, 'q'>()({
+				meta: {
+					TotalDamageTooltip: {
+						type: VariableType.magic,
+					},
+					Effect2Amount: {
+						type: VariableType.affectedBySlowResist,
+						displayedName: 'SlowAmount',
+					},
+					Effect3Amount: {
+						type: VariableType.affectedByTenacity,
+						displayedName: 'SlowDuration',
+					},
+				},
+				uninteresting: ['Effect5Amount'],
+			}),
+		},
+		w: {
+			variables: defineChampionVariables<'Chogath', typeof IChogath, 'w'>()({
+				meta: {
+					Effect2Amount: {
+						type: VariableType.affectedByTenacity,
+						displayedName: 'SilenceDuration',
+					},
+					TotalDamageTooltip: {
+						type: VariableType.magic,
+					},
+				},
+			}),
+		},
+		e: {
+			variables: defineChampionVariables<'Chogath', typeof IChogath, 'e'>()({
+				meta: {
+					FlatDamageCalc: {
+						type: VariableType.magic,
+					},
+					SlowAmountPercentage: {
+						type: VariableType.affectedBySlowResist,
+					},
+					SlowDuration: {
+						type: VariableType.affectedByTenacity,
+					},
+					MaxHealthPercentCalc: {
+						type: VariableType.magic,
+					},
+					ModifiedMonsterCap: {
+						type: VariableType.magic,
+					},
+				},
+				uninteresting: ['FeastStackMultiplier'],
+			}),
+		},
+		r: {
+			variables: defineChampionVariables<'Chogath', typeof IChogath, 'r'>()({
+				known: {
+					f3: [],
+				},
+				calculate() {
+					return {
+						f3: { value: 0 },
+					};
+				},
+				meta: {
+					RDamage: {
+						type: VariableType.true,
+					},
+					RMonsterDamage: {
+						type: VariableType.true,
+					},
+				},
+				uninteresting: ['f3', 'AttackRangePerStack', 'CastRangePerStack', 'MaxBonusAttackRange', 'MaxBonusCastRange', 'RMinionMaxStacks'],
+			}),
+		},
 	},
 	DrMundo: {
 		passive: {
