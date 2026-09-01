@@ -1517,6 +1517,34 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
+	BuffCounterByNamedDataValueCalculationPart(variable: IGameVariablesByType['BuffCounterByNamedDataValueCalculationPart'], whole, meta) {
+		const { mBuffName, mDataValue } = variable;
+		const rv: IVariableValueResult = {
+			value: whole.dataValues?.[mDataValue],
+		};
+
+		meta.accessedVariables?.add(mDataValue);
+		meta.accessedVariables?.add(mBuffName);
+
+		if (Array.isArray(rv.value)) {
+			if (rv.value.length === 2) {
+				console.warn('[BuffCounterByNamedDataValueCalculationPart] suspiciously melee/ranged looking value having abilityLevel applied to it', { dataValue: whole.dataValues?.[mDataValue] }, variable);
+			}
+			rv.allValues = rv.value as number[];
+			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
+		}
+
+		const buff = meta.variableValueFn(mBuffName, meta.variableValueParams);
+		if (typeof buff.value === 'number') {
+			if (typeof rv.value === 'number') {
+				rv.value *= buff.value;
+			} else if (rv.value) {
+				rv.value = (rv.value as unknown as number[]).map(v => v * (buff.value as number)) as unknown as number;
+			}
+		}
+
+		return rv;
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 interface IVariableCalculationFnMeta {
@@ -1628,6 +1656,12 @@ interface IGameVariablesByType {
 		'{91d404a5}': string;
 		'{b2cd0eb0}': string;
 		'__type': string;
+	};
+	/** for stacks related thing, like Cho'Gath R but also Aphelios passive (qwe bonus stats) */
+	'BuffCounterByNamedDataValueCalculationPart': {
+		/** ability variable's `calculate` should return a variable with the name of the value in this property */
+		mBuffName: string;
+		mDataValue: string;
 	};
 }
 

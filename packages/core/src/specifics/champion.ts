@@ -293,8 +293,8 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Chogath: {
-		setupData() {
-			return { passiveStacks: 0 };
+		setupData(self) {
+			return { passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0) };
 		},
 		calculateHooks: {
 			postInit: {
@@ -351,6 +351,16 @@ export const CHAMPION_SPECIFICS = {
 		},
 		e: {
 			variables: defineChampionVariables<'Chogath', typeof IChogath, 'e'>()({
+				known: {
+					'{8682fc00}': [],
+				},
+				calculate(self) {
+					return {
+						'{8682fc00}': {
+							value: self.internalData.value.passiveStacks,
+						},
+					};
+				},
 				meta: {
 					FlatDamageCalc: {
 						type: VariableType.magic,
