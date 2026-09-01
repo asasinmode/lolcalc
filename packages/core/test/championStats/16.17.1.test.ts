@@ -58,7 +58,7 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { glory: 10 } satisfies IInternalItemDataOf<'darkSeal'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
 	await t.test('mejai', async () => {
@@ -68,7 +68,7 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { glory: 25 } satisfies IInternalItemDataOf<'mejai'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
 	await t.test('bloodmail tyranny', async () => {
@@ -100,13 +100,23 @@ test('16.17 adaptive force', async (t) => {
 	});
 
 	await t.test('staff of flowing water', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Amumu', {
+		const damageSource = await setupDamageSource(fixture, 'Lulu', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.staffOfFlowingWater, ITEMS_BY_NAME.hearthboundAxe, ITEMS_BY_NAME.hearthboundAxe],
 			internalItemData: { rapids: 1 } satisfies IInternalItemDataOf<'staffOfFlowingWater'>,
 		});
 
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+	});
+
+	await t.test('staff of flowing water, rabadon', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Lulu', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.staffOfFlowingWater, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.trinity, ITEMS_BY_NAME.deathsDance, ITEMS_BY_NAME.experimentalHexplate],
+			internalItemData: { rapids: 1 } satisfies IInternalItemDataOf<'staffOfFlowingWater'>,
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
 	await t.test('roa', async () => {

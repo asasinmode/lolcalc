@@ -368,7 +368,7 @@ export const EFFECT_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { effectStats }, { calculatedVariables }) {
 					if (!(self.internalItemData.value as IInternalItemDataOf<'staffOfFlowingWater'>).rapids) {
-						ITEM_SPECIFICS[ITEM_NAME_TO_ID.staffOfFlowingWater].calculatePassive(effectStats, calculatedVariables, true);
+						ITEM_SPECIFICS[ITEM_NAME_TO_ID.staffOfFlowingWater].calculatePassive(effectStats, calculatedVariables);
 					}
 				},
 			},

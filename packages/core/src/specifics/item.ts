@@ -1161,20 +1161,18 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+				handler(self, { effectStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'staffOfFlowingWater'>).rapids) {
-						ITEM_SPECIFICS[ITEM_NAME_TO_ID.staffOfFlowingWater].calculatePassive(itemPassivesStats, calculatedVariables, false);
+						ITEM_SPECIFICS[ITEM_NAME_TO_ID.staffOfFlowingWater].calculatePassive(effectStats, calculatedVariables);
 					}
 				},
 			},
 		},
-		calculatePassive(itemPassivesStats: IStatsCalculationResult['effect'] | IStatsCalculationResult['itemPassive'], calculatedVariables: IStatsCalculationResult['variables'], addToAPMultipliersBase: boolean) {
+		calculatePassive(effectStats: IStatsCalculationResult['effect'], calculatedVariables: IStatsCalculationResult['variables']) {
 			const { AHMod, APMod } = ITEMS_BY_NAME.staffOfFlowingWater?.dataValues ?? {};
-			itemPassivesStats.abilityHaste += AHMod;
-			itemPassivesStats.abilityPower += APMod;
-			if (addToAPMultipliersBase) {
-				calculatedVariables.apMultipliersBase += APMod;
-			}
+			effectStats.abilityHaste += AHMod;
+			effectStats.abilityPower += APMod;
+			calculatedVariables.apMultipliersBase += APMod;
 		},
 	},
 	[ITEM_NAME_TO_ID.bandlepipes]: {
