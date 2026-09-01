@@ -353,11 +353,27 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Chogath', typeof IChogath, 'e'>()({
 				known: {
 					'{8682fc00}': [],
+					'TotalDamage': [],
 				},
-				calculate(self) {
+				calculate(self, target) {
+					const variableParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: self, dynamicVariables: { values: { '{8682fc00}': { value: self.internalData.value.passiveStacks } } } };
+					const flat = championAbilityVariableValue('FlatDamageCalc', variableParams);
+					const percent = championAbilityVariableValue('MaxHealthPercentCalc', variableParams);
+
+					let TotalDamage = Number.NaN;
+
+					if (typeof flat.value === 'number' && typeof percent.value === 'number') {
+						TotalDamage = flat.value + (target?.currentHealth.value ?? 0) * percent.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate E damage variables', flat, percent);
+					}
+
 					return {
 						'{8682fc00}': {
 							value: self.internalData.value.passiveStacks,
+						},
+						'TotalDamage': {
+							value: TotalDamage,
 						},
 					};
 				},
@@ -377,6 +393,10 @@ export const CHAMPION_SPECIFICS = {
 					ModifiedMonsterCap: {
 						type: VariableType.magic,
 					},
+					TotalDamage: {
+						type: VariableType.magic,
+						isCustom: true,
+					},
 				},
 				uninteresting: ['FeastStackMultiplier'],
 			}),
@@ -385,10 +405,14 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Chogath', typeof IChogath, 'r'>()({
 				known: {
 					f3: [],
+					HealthFromStacks: [],
 				},
-				calculate() {
+				calculate(self) {
 					return {
 						f3: { value: 0 },
+						HealthFromStacks: {
+							value: self.stats.value.championPassive.hp ?? 0,
+						},
 					};
 				},
 				meta: {
@@ -397,6 +421,9 @@ export const CHAMPION_SPECIFICS = {
 					},
 					RMonsterDamage: {
 						type: VariableType.true,
+					},
+					HealthFromStacks: {
+						isCustom: true,
 					},
 				},
 				uninteresting: ['f3', 'AttackRangePerStack', 'CastRangePerStack', 'MaxBonusAttackRange', 'MaxBonusCastRange', 'RMinionMaxStacks'],
