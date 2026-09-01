@@ -109,6 +109,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] alert that configuration is incorrect
   - [x] maybe open dialog on panel click
 - [x] champ select dialog
+  - [ ] champion specific `isImplemented`, add small check to the champion icon?
 - [x] item shop dialog
   - [x] sorting
   - [x] searching
