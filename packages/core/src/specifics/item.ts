@@ -325,6 +325,16 @@ export const ITEM_SPECIFICS = {
 					itemTotalStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 				},
 			},
+			preBonus: {
+				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					const value = (runeShardStats.abilityPower ?? 0) * calculatedVariables.blackfireTorchBBlazeMultiplier!;
+					if (value) {
+						calculatedVariables.blackfireTorchBBlazeAP! += value;
+						itemPassivesStats.abilityPower += value;
+						itemTotalStats.abilityPower += value;
+					}
+				},
+			},
 			onTotalPreMultipliers: {
 				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
 					if (calculatedVariables.swiftmarchAdaptive && adaptiveForceMeta[0] === 'abilityPower') {
@@ -1995,6 +2005,16 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.abilityPower += value;
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;
+				},
+			},
+			preBonus: {
+				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					const value = (runeShardStats.abilityPower ?? 0) * calculatedVariables.rabadonApMultiplier!;
+					if (value) {
+						calculatedVariables.rabadonMagicalOpus! += value;
+						itemPassivesStats.abilityPower += value;
+						itemTotalStats.abilityPower += value;
+					}
 				},
 			},
 			onTotalPreMultipliers: {
