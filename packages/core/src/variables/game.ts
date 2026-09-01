@@ -431,7 +431,7 @@ export function championAbilityVariableValue(
 
 	if (resolveArrayValueToAbilityLevel && Array.isArray(rv.value)) {
 		rv.allValues = rv.value as number[];
-		rv.value = rv.value[abilityLevel];
+		rv.value = rv.value[abilityLevel || 1];
 	}
 
 	if (typeof rv.value === 'number') {
