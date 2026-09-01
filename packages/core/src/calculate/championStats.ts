@@ -181,7 +181,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemPassivesStats[stat] = 1 - itemPassivesStats[stat];
 	}
 
-	/* non multiplier dragon stacks are done preItemTotal so adjust those early calculated stats here */
+	/* non multiplier dragon stacks are done preItemTotal so adjust those stats here */
 	dragonStats.attackSpeed = (dragonStats.bonusAttackSpeedPercent ?? 0) * baseStats.attackSpeedRatio;
 	dragonStats.tenacity = 1 - dragonStats.tenacity;
 	dragonStats.slowResist = 1 - dragonStats.slowResist;
@@ -200,6 +200,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (!source.hasMana.value) {
 		itemTotalStats.mana = 0;
+	}
+
+	if (source.calculateStatsHooks.all.value.postItemTotal) {
+		for (const hook of source.calculateStatsHooks.all.value.postItemTotal) {
+			hook(source, { itemPassivesStats, itemTotalStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+		}
 	}
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);

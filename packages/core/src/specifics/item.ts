@@ -315,7 +315,7 @@ export const ITEM_SPECIFICS = {
 			return bBlaze && `${Math.round(bBlaze * ITEMS_BY_NAME.blackfireTorch?.dataValues.APPerStack * 100)}%`;
 		},
 		calculateHooks: {
-			preBonus: {
+			postItemTotal: {
 				handler(self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 					const multiplier = (self.internalItemData.value.bBlaze ?? 0) * ITEMS_BY_NAME.blackfireTorch?.dataValues.APPerStack;
 					calculatedVariables.blackfireTorchBBlazeMultiplier = multiplier;
@@ -324,7 +324,6 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 					itemTotalStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 				},
-				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 			onTotalPreMultipliers: {
 				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
@@ -1988,7 +1987,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.rabadon]: {
 		AP_MULTIPLIER: ITEMS_BY_NAME.rabadon?.dataValues.APAmp,
 		calculateHooks: {
-			preBonus: {
+			postItemTotal: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 					const value = calculatedVariables.apMultipliersBase * ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER;
 					calculatedVariables.rabadonApMultiplier = ITEM_SPECIFICS[ITEM_NAME_TO_ID.rabadon].AP_MULTIPLIER;
@@ -1997,7 +1996,6 @@ export const ITEM_SPECIFICS = {
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;
 				},
-				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.rabadon],
 			},
 			onTotalPreMultipliers: {
 				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {

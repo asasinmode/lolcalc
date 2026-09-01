@@ -2275,6 +2275,11 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		dragonStats: IStatsCalculationResult['dragon'];
 		dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
 	}) => void>;
+	/** after item total stats have been summed up, before rune shard stats */
+	postItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
+		itemPassivesStats: IStatsCalculationResult['itemPassive'];
+		itemTotalStats: IStatsCalculationResult['itemTotal'];
+	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
@@ -2282,7 +2287,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		runeShardStats: IStatsCalculationResult['runeShards'];
 		adaptiveForceMeta: IAdaptiveForceStatRv;
 	}) => void>;
-	/** runs after creating empty `championPassiveStats` */
+	/** runs after rune shards */
 	onChampionPassive?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
 		baseStats: IStatsCalculationResult['base'];
