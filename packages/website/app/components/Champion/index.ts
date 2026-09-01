@@ -44,6 +44,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Belveth', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 		],
 	},
+	Chogath: {
+		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Chogath', 'r', 0), 'passiveStacks', 'Feast stacks'),
+	},
 	Darius: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Darius', 'passive', 0), 'isChampionAtMaxBleed', 'is champion at max bleed stacks', false),
 	},

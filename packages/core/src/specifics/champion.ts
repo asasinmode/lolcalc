@@ -3,6 +3,7 @@ import type IAshe from '@lolcalc/data/files/champion/Ashe.json';
 import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
+import type IChogath from '@lolcalc/data/files/champion/Chogath.json';
 import type IDrMundo from '@lolcalc/data/files/champion/DrMundo.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
@@ -286,6 +287,33 @@ export const CHAMPION_SPECIFICS = {
 				meta: {
 					PercentHasteMod: {
 						displayedName: 'MoveSpeedPercent',
+					},
+				},
+			}),
+		},
+	},
+	Chogath: {
+		setupData() {
+			return { passiveStacks: 0 };
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { championPassiveStats }, { calculatedVariables }) {
+					const hpPerStack = championAbilityVariableValue('RHealthPerStack', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
+					if (typeof hpPerStack.value === 'number') {
+						const hp = hpPerStack.value * self.internalData.value.passiveStacks;
+						championPassiveStats.hp = hp;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate hp per ult stack', hpPerStack);
+					}
+				},
+			},
+		},
+		passive: {
+			variables: defineChampionVariables<'Chogath', typeof IChogath, 'passive'>()({
+				meta: {
+					ChogathCarnivoreHeal: {
+						type: VariableType.heal,
 					},
 				},
 			}),
@@ -2204,6 +2232,7 @@ export interface IChampionInternalDataMap {
 	Ashe: { frostShot: number };
 	Bard: { passiveStacks: number; chimeMoveSpeed: number };
 	Belveth: { passiveStacks: number; hasPassiveStack: number };
+	Chogath: { passiveStacks: number };
 	Darius: { isChampionAtMaxBleed: number };
 	Diana: { isPassiveEmpowered: number };
 	Draven: { passiveStacks: number };
