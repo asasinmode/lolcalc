@@ -77,6 +77,9 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.ampTome],
 		});
 
+		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
+
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
 	});
 
@@ -86,6 +89,9 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.aetherWisp, ITEMS_BY_NAME.ampTome],
 			currentHealth: 470,
 		});
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
 
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
 	});

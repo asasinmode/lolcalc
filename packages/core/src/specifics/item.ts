@@ -2249,12 +2249,18 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
 					calculatedVariables.bloodmailTyrannyBonusHpToAd = ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
 					const value = (itemBaseStats.hp + itemPassivesStats.hp) * calculatedVariables.bloodmailTyrannyBonusHpToAd;
 					miscDebug.bloodmailBonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
 					calculatedVariables.bloodmailTyranny = value;
 					itemPassivesStats.attackDamage += value;
+
+					const { tyranny, retribution } = self.internalItemData.value as (IInternalItemDataOf<'overlordsBloodmail'>);
+					calculatedVariables.additionalAdaptiveForceCheckAd += (tyranny ?? 0) + (retribution ?? 0);
+					if (tyranny !== undefined) {
+						calculatedVariables.additionalAdaptiveForceCheckAd -= calculatedVariables.bloodmailTyranny;
+					}
 				},
 				priority: HOOK_PRIORITIES.preItemTotal[ITEM_NAME_TO_ID.overlordsBloodmail],
 			},

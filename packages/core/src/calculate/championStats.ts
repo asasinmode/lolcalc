@@ -60,6 +60,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		hpRegenMult: 0,
 		lifeStealOmnivampMult: 0,
 		tenacityBucketB: 1,
+		additionalAdaptiveForceCheckAd: 0,
+		additionalAdaptiveForceCheckAp: 0,
 	};
 	const debuffs: IStatsCalculationDebuffs = {
 		grievousWounds: 0,
@@ -208,7 +210,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
-	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage, itemTotalStats.abilityPower);
+	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage + calculatedVariables.additionalAdaptiveForceCheckAd, itemTotalStats.abilityPower + calculatedVariables.additionalAdaptiveForceCheckAp,
+	);
 
 	const runeShardStats: IStatsCalculationResult['runeShards'] = {
 		tenacity: 1,

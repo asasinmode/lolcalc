@@ -122,6 +122,10 @@ export interface IStatsCalculationVariables {
 	midQuestAd?: number;
 	/** ap gained from completed mid quest */
 	midQuestAp?: number;
+	/** additional ad for choosing which stat adaptive force should count towards, for now only used by blodomail */
+	additionalAdaptiveForceCheckAd: number;
+	/** same as `additionalAdaptiveForceCheckAd`, for now unused */
+	additionalAdaptiveForceCheckAp: number;
 	// TODO if all bonus damage percents are treated the same, store them under the same variable
 	// TODO move these to damage calc computed
 	/** bonus damage % gained from liandry's passive stacks, doesn't affect stats but is kept here */
