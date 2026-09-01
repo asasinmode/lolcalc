@@ -2175,10 +2175,11 @@ export const ITEM_SPECIFICS = {
 				},
 			}),
 			refresh(self: DamageSource) {
-				console.log('refresh', self.internalItemData.value, 'to', self.stats.value.variables.bloodmailRetribution, self.stats.value.variables.bloodmailTyranny);
+				self.internalItemData.value.retribution = self.stats.value.variables.bloodmailRetribution;
+				self.internalItemData.value.tyranny = self.stats.value.variables.bloodmailTyranny;
 			},
 			currentlySnapshot(_effectData, self) {
-				return `Tyranny <scalead>%i:${STAT_ICON.attackDamage}% ${Math.round(self.internalItemData.value.retribution ?? 0)}</scalead> | Retribution <scalead>%i:${STAT_ICON.attackDamage}% ${Math.round(self.internalItemData.value.retribution ?? 0)}</scalead>`;
+				return `Tyranny <scalead>%i:${STAT_ICON.attackDamage}% ${Math.round(self.internalItemData.value.tyranny ?? 0)}</scalead> | Retribution <scalead>%i:${STAT_ICON.attackDamage}% ${Math.round(self.internalItemData.value.retribution ?? 0)}</scalead>`;
 			},
 		} satisfies IEffectControlsProps<any>,
 		BONUS_AD_PERCENTAGE: (damageSource: DamageSource, maxHpOverride?: number) => {

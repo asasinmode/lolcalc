@@ -64,7 +64,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 		};
 
 		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
-		function effectControlUpdateValue(val?: boolean) {
+		function effectControlUpdateValue(val?: boolean | number) {
 			effectControlModel!.value = val;
 		}
 		function effectControlRefresh(isSourceChange = false) {
@@ -214,8 +214,10 @@ export async function booleanExtra<T extends IGameAbilityId>(
 		}
 		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
+		const computedValue = computed(() => effectControlModel?.value ?? modelValue.value);
+
 		return () => h(CalculatorExtraBoolean, {
-			'modelValue': effectControlModel?.value ?? modelValue.value,
+			'modelValue': computedValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			labelPrefixApply,
@@ -227,7 +229,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 			'onUpdate:modelValue': updateValue,
 		}, effectControlsProps
 			? {
-					default: () => createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, false, effectControlSnapshot.value),
+					default: () => createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, true, effectControlSnapshot.value),
 				}
 			: ctx.slots);
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
