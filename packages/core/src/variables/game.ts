@@ -1507,7 +1507,7 @@ export const VARIABLE_CALCULATION_FNS = {
 	EffectValueCalculationPart(variable: IGameVariablesByType['EffectValueCalculationPart'], whole, meta) {
 		const rv: IVariableValueResult = {
 			calculatesFrom: [],
-			value: whole.effectAmount?.[variable.mEffectIndex],
+			value: whole.effectAmount?.[variable.mEffectIndex - 1],
 		};
 
 		if (Array.isArray(rv.value)) {
