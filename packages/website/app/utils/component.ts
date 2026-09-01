@@ -136,7 +136,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
 
 		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
-		function effectControlUpdateValue(val?: boolean) {
+		function effectControlUpdateValue(val?: boolean | number) {
 			effectControlModel!.value = val;
 		}
 		function effectControlRefresh(isSourceChange = false) {
@@ -204,14 +204,18 @@ export async function booleanExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, extraUpdateValue] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
+		const [stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
 
 		/* kind of unusual thing for bloodmail extra which is the only thing using effectControlsProps in boolean extra atm */
-		const controlsPropsModel = effectControlsProps?.model?.(props.damageSource);
-		const updateValue = controlsPropsModel ? (value: boolean) => controlsPropsModel.value = value : extraUpdateValue;
+		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
+		const updateValue = effectControlModel ? (value?: boolean | number) => effectControlModel.value = value : extraUpdateValue;
+		function effectControlRefresh(isSourceChange = false) {
+			effectControlsProps?.refresh(props.damageSource, isSourceChange);
+		}
+		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
 		return () => h(CalculatorExtraBoolean, {
-			'modelValue': controlsPropsModel?.value ?? modelValue.value,
+			'modelValue': effectControlModel?.value ?? modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			labelPrefixApply,
@@ -221,7 +225,11 @@ export async function booleanExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
-		}, ctx.slots);
+		}, effectControlsProps
+			? {
+					default: () => createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, false, effectControlSnapshot.value),
+				}
+			: ctx.slots);
 	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
 }
 
