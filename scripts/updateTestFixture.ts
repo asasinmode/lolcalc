@@ -68,7 +68,7 @@ function parseArgs(argv: string[]): IParsedArgs {
 }
 
 async function applyChampion(fixture: IFixtureShape, raw: string): Promise<void> {
-	const [name, abilityListRaw] = raw.split(';');
+	const [name, abilityListRaw] = raw.split(':');
 	if (!name || !(name in CHAMPIONS)) {
 		console.warn(`[applyChampion] unknown champion "${name}", skipping`);
 		return;
