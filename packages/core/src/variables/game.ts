@@ -1555,6 +1555,8 @@ export const VARIABLE_CALCULATION_FNS = {
 			} else if (rv.value) {
 				rv.value = (rv.value as unknown as number[]).map(v => v * (buff.value as number)) as unknown as number;
 			}
+		} else {
+			rv.value = 0;
 		}
 
 		return rv;

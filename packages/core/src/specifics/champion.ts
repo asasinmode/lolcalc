@@ -28,6 +28,7 @@ import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
 import type IRell from '@lolcalc/data/files/champion/Rell.json';
 import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
 import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
+import type IShyvana from '@lolcalc/data/files/champion/Shyvana.json';
 import type ISivir from '@lolcalc/data/files/champion/Sivir.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
@@ -1807,6 +1808,37 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Shyvana', typeof IShyvana, 'passive'>()({
+				known: {
+					'{bba88b2a}': [0],
+				},
+				calculate(self) {
+					return {
+						'{bba88b2a}': {
+							value: self.internalData.value.passiveStacks,
+						},
+					};
+				},
+				uninteresting: ['BonusArmor', 'BonusMagicResist', 'Stacks_Per_Large_Monster', 'Stacks_Per_Epic_Monster'],
+			}),
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { championPassiveStats }) {
+					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const bonusArmor = championAbilityVariableValue('BonusArmor', params);
+					const bonusMr = championAbilityVariableValue('BonusMagicResist', params);
+
+					if (typeof bonusArmor.value === 'number' && typeof bonusMr.value === 'number') {
+						championPassiveStats.armor = bonusArmor.value * self.internalData.value.passiveStacks;
+						championPassiveStats.magicResist = bonusMr.value * self.internalData.value.passiveStacks;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS shyvana] failed to calculate passive resists', bonusArmor, bonusMr);
+					}
+				},
+			},
 		},
 	},
 	Singed: {
