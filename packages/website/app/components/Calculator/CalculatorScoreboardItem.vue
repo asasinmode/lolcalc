@@ -425,6 +425,7 @@ interface IChampionStat {
 		/** if not present, `CHAMPION_STAT_META[stat].name` will be used */
 		name?: string;
 		base?: number;
+		rawBonus: number;
 		bonus: number;
 		valueSuffix?: string;
 	}[];
@@ -649,6 +650,7 @@ function updateComputedStats(stats: IChampionStat[]) {
 			const formattedTotal = props.value.computed.formattedStatTotals.value[value.stat];
 
 			displayedValue.push(`${formattedTotal}${CHAMPION_STAT_META[value.stat].isPercentage ? '%' : ''}`);
+			value.rawBonus = props.value.stats.value.bonus[value.stat];
 			value.bonus = formatChampionStatValue(value.stat, props.value.stats.value.bonus[value.stat]);
 
 			const baseValue = props.value.stats.value[value.stat === 'bonusAttackSpeedPercent' ? 'base' : 'baseOnLevel'][value.stat];
@@ -657,7 +659,7 @@ function updateComputedStats(stats: IChampionStat[]) {
 			}
 		}
 
-		championStat.hasBonus = championStat.iconTextureKey === 'attackSpeed' ? championStat.values[1]!.bonus : championStat.values.some(statValue => statValue.bonus);
+		championStat.hasBonus = championStat.iconTextureKey === 'attackSpeed' ? championStat.values[1]!.bonus : championStat.values.some(statValue => statValue.rawBonus);
 		/*
 		 * disable hasBonus styling when the total value has been reduced below base on level, even if it has total
 		 * necessary for armor & mr because their bonus values are multiplied by the shred and shown reduced in the tooltip, instead of being subtracted from like move speed/attack speed
