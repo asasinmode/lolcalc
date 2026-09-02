@@ -31,6 +31,7 @@ import type ISivir from '@lolcalc/data/files/champion/Sivir.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
+import type IVeigar from '@lolcalc/data/files/champion/Veigar.json';
 import type IVladimir from '@lolcalc/data/files/champion/Vladimir.json';
 import type IVolibear from '@lolcalc/data/files/champion/Volibear.json';
 import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
@@ -1970,6 +1971,21 @@ export const CHAMPION_SPECIFICS = {
 					calculatedVariables.apMultipliersBase += self.internalData.value.passiveStacks;
 				},
 			},
+		},
+		passive: {
+			variables: defineChampionVariables<'Veigar', typeof IVeigar, 'passive'>()({
+				known: {
+					f1: [],
+				},
+				calculate(self) {
+					return {
+						f1: {
+							value: self.internalData.value.passiveStacks,
+						},
+					};
+				},
+				uninteresting: ['dAbilityStacks', 'dTakedownStacks', 'APPerStack'],
+			}),
 		},
 	},
 	Viego: {

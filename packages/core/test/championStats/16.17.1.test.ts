@@ -144,6 +144,7 @@ test('16.17 adaptive force', async (t) => {
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
 
+	/* passive doesn't count but rabadon passive from it does */
 	await t.test('veigar', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Veigar', {
 			...sourceCommon,
@@ -156,7 +157,6 @@ test('16.17 adaptive force', async (t) => {
 });
 
 // aphelios
-// veigar
 // darius
 // jhin
 // hecarim
