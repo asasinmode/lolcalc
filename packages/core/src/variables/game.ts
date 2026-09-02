@@ -735,15 +735,29 @@ const championGameIcons = [
 
 const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map(([key, value]) => [value, key])) as Record<string, any>;
 
+/** singular `replaceGameIcons` */
+export function gameIconImgAttrs(icon: typeof STAT_ICON[keyof typeof STAT_ICON], subpath?: string, isChampionIcon = false): { src: string; width: number; height: number } {
+	return typeof icon === 'string'
+		? {
+				src: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(icon)
+					? 'statsicon'
+					: subpath ?? (isChampionIcon ? 'champion' : 'gameplay')
+				}/${icon}.png`,
+				width: 20,
+				height: 20,
+			}
+		: {
+				src: icon[0],
+				width: icon[1],
+				height: icon[2] ?? icon[1],
+			};
+}
+
 export function replaceGameIcons(text: string, subpath?: string, addAlt = false): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
 			const isChampionIcon = championGameIcons.includes(name);
-			if (isChampionIcon && name === 'shyvana') {
-				/* at least on current version `16.13.1` the icon on cdragon is actually named that while in the description it's just `%i:shyvana%` so try to handle it */
-				name = 'shyvana.shyvana_rework';
-			}
 
 			let altSource;
 			if (addAlt) {

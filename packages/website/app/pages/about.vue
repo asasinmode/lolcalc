@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImgAttrs } from '@lolcalc/core/misc';
-import { AbilityType } from '@lolcalc/shared/index';
+import { gameIconImgAttrs } from '@lolcalc/core/variables/game';
+import { STAT_ICON } from '@lolcalc/data/index';
+import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared/index';
 
 const { reportAnIssue } = useReportIssueDialog();
 
 const ambessaRImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.champion, 'Ambessa', 'r', 0));
 const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.champion, 'Nocturne', 'w', 0));
+const rfcImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rfc));
 </script>
 
 <template>
@@ -26,7 +29,10 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 		<p>*with known discrepancies being</p>
 		<ul>
 			<li>
-				max health and mana/ability resource have a margin of error of <strong>1</strong>. Most of the differences should be coming from floating point arithmetic and the in game ui rounding the displayed value up. This means that the game displays something like <span class="code-like">2773.0000001</span> as <span class="code-like">2774</span>, even though it's effectively <span class="code-like">2773</span> (<a href="#TODO">example config</a>)
+				max <img v-bind="gameIconImgAttrs(STAT_ICON.hp)">health and <img v-bind="gameIconImgAttrs(STAT_ICON.mana)">mana/ability resource have a margin of error of <strong>1</strong>. Most of the differences should be coming from floating point arithmetic and the in game ui rounding the displayed value up. This means that the game displays something like <span class="code-like">2773.0000001</span> as <span class="code-like">2774</span>, even though it's effectively <span class="code-like">2773</span> (<a href="#TODO">example config</a>)
+			</li>
+			<li>
+				<img v-bind="gameIconImgAttrs(STAT_ICON.attackRange)">attack range with <a href="https://wiki.leagueoflegends.com/en-us/Rapid_Firecannon" target="_blank"><img v-bind="rfcImg" alt="Rapid Firecannon icon">Rapid Firecannon</a>'s passive active has a margin of error of <strong>1</strong>. I don't know why (<a href="#TODO">config with chogath with R 6 stacks/rakan from test</a>)
 			</li>
 		</ul>
 
@@ -45,13 +51,13 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 			<Icon class="i-ph:info" />
 		</p>
 		<p>
-			non-passive abilities (like <a href="https://wiki.leagueoflegends.com/en-us/Ambessa#Public_Execution" target="_blank"><img v-bind="ambessaRImg" alt="Ambessa R icon"> Ambessa R passive</a> or <a href="https://wiki.leagueoflegends.com/en-us/Nocturne#Shroud_of_Darkness" target="_blank"><img v-bind="nocturneWImg" alt="Nocturne W icon"> Nocturne W passive</a>) and <a href="https://wiki.leagueoflegends.com/en-us/Rune#Rune_paths" target="_blank">rune paths</a> <strong>are not implemented</strong> <i>(yet)</i> in the calculations. See the <NuxtLink to="/guide#test-setup">champion/item/rune setup</NuxtLink> recommended for verifying the calculations yourself
+			non-passive abilities (like <a href="https://wiki.leagueoflegends.com/en-us/Ambessa#Public_Execution" target="_blank"><img v-bind="ambessaRImg" alt="Ambessa R icon">Ambessa R passive</a> or <a href="https://wiki.leagueoflegends.com/en-us/Nocturne#Shroud_of_Darkness" target="_blank"><img v-bind="nocturneWImg" alt="Nocturne W icon">Nocturne W passive</a>) and <a href="https://wiki.leagueoflegends.com/en-us/Rune#Rune_paths" target="_blank">rune paths</a> <strong>are not implemented</strong> <i>(yet)</i> in the calculations. See the <NuxtLink to="/guide#test-setup">champion/item/rune setup</NuxtLink> recommended for verifying the calculations yourself
 		</p>
 		<p>for when these and other features will be implemented, see the <a href="#TODO">roadmap</a></p>
 
 		<h2>acknowledgements</h2>
 		<p>This project would not exist without <a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.</p>
-		<p>Some of the <strong>code</strong> in this project was made with the help of LLMs. The <strong>text</strong> on the website is all me, though. Pinky promise. I'd estimate LLM generated code to be less than 10% of the code base, however I do want to say that it would've taken me a few more months to get to where it is without them. The ability to paste it the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful.</p>
+		<p>Some of the <strong>code</strong> in this project was written using LLMs. I'd estimate LLM generated code to be less than 10% of the code base, however I do want to say that it would've taken me a few more months to get to where it is without them. The ability to paste it the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful.</p>
 		<p>Thanks to all of my friends who helped me test both the website and the various champion configurations in game.</p>
 		<p>Thanks to Riot Games for not chronobreaking this project 🤞</p>
 	</main>
@@ -77,7 +83,7 @@ const nocturneWImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.c
 		}
 
 		img {
-			--at-apply: 'inline-block size-5 -translate-y-px';
+			--at-apply: 'inline-block size-5 me-[0.5ch] -translate-y-px';
 		}
 	}
 }
