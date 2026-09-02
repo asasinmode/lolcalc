@@ -5,7 +5,7 @@ import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import fixture from '../fixtures/16.17.1.fixture.json' with { type: 'json' };
-import { setupDamageSource, setupPatchFixture } from '../utils.ts';
+import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
 test.before(() => {
 	setupPatchFixture(fixture);
@@ -153,11 +153,28 @@ test('16.17 adaptive force', async (t) => {
 		});
 
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 227,
+			abilityPower: 257,
+		}, damageSource);
+	});
+
+	await t.test('darius', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Darius', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.ampTome],
+			internalData: { isChampionAtMaxBleed: 1 },
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 94,
+			abilityPower: 38,
+		}, damageSource);
 	});
 });
 
 // aphelios
-// darius
 // jhin
 // hecarim
 // pyke

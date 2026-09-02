@@ -4,6 +4,7 @@ import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
 import type IChogath from '@lolcalc/data/files/champion/Chogath.json';
+import type IDarius from '@lolcalc/data/files/champion/Darius.json';
 import type IDrMundo from '@lolcalc/data/files/champion/DrMundo.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
@@ -299,7 +300,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { championPassiveStats }, { calculatedVariables }) {
+				handler(self, { championPassiveStats }) {
 					const hpPerStack = championAbilityVariableValue('RHealthPerStack', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
 					if (typeof hpPerStack.value === 'number') {
 						const hp = hpPerStack.value * self.internalData.value.passiveStacks;
@@ -490,6 +491,35 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				isChampionAtMaxBleed: clamp(0, Math.round(self.internalData.value.isChampionAtMaxBleed ?? 0), 1),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Darius', typeof IDarius, 'passive'>()({
+				meta: {
+					BleedDamagePerStack: {
+						type: VariableType.physical,
+					},
+				},
+				uninteresting: ['BleedDuration', 'MaxStacks', 'MonsterMod'],
+			}),
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { championPassiveStats }, { calculatedVariables }) {
+					if (!self.internalData.value.isChampionAtMaxBleed) {
+						return;
+					}
+
+					const passiveAd = championAbilityVariableValue('NoxianMightBonusAD', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+					if (typeof passiveAd.value === 'number') {
+						championPassiveStats.attackDamage = passiveAd.value;
+						if (calculatedVariables.midQuestMultiplier) {
+							calculatedVariables.midQuestAd = (calculatedVariables.midQuestAd ?? 0) + championPassiveStats.attackDamage * calculatedVariables.midQuestMultiplier;
+						}
+					} else {
+						console.warn('[CHAMPION_SPECIFICS darius] failed to calculate passive ad');
+					}
+				},
+			},
 		},
 	},
 	Diana: {
