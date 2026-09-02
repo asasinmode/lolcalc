@@ -206,6 +206,43 @@ test('16.17 adaptive force', async (t) => {
 	});
 });
 
+test('16.17 Jhin', async (t) => {
+	const sourceCommon: IOverrides<'Jhin'> = {
+		level: 18,
+		runes: {
+			shards: {
+				offensive: 'attackspeed',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [],
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jhin', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 147,
+			attackSpeed: 0.63,
+		}, damageSource);
+	});
+
+	await t.test('withered', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jhin', {
+			...sourceCommon,
+			appliedEffects: [
+				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.nasusWWither), [1]),
+			],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 147,
+			attackSpeed: 0.63,
+		}, damageSource);
+	});
+});
+
 // aphelios
 // jhin
 // pyke
