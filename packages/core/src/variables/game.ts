@@ -1449,7 +1449,7 @@ export const VARIABLE_CALCULATION_FNS = {
 
 			const resolved = resolveFn(part, whole, meta);
 			if (typeof resolved?.value !== 'number') {
-				console.warn('[SumOfSubPartsCalculationPart] resolved subpart value not a number', resolved, variable, whole, meta);
+				console.warn('[SumOfSubPartsCalculationPart] resolved subpart value not a number', resolved, part, variable, whole, meta);
 				return undefined;
 			}
 
@@ -1712,6 +1712,7 @@ const MSTAT_TO_NAMED_STAT = {
 	7: 'moveSpeed',
 	8: 'critChance',
 	9: 'critDamageMultiplier',
+	10: 'abilityHaste',
 	12: 'hp',
 	29: 'lethality',
 } satisfies Record<number, IChampionStatName>;
