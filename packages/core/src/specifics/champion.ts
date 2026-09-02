@@ -1963,6 +1963,14 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 			};
 		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { championPassiveStats }, { calculatedVariables }) {
+					championPassiveStats.abilityPower = self.internalData.value.passiveStacks;
+					calculatedVariables.apMultipliersBase += self.internalData.value.passiveStacks;
+				},
+			},
+		},
 	},
 	Viego: {
 		calculateHooks: {

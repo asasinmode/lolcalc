@@ -143,6 +143,16 @@ test('16.17 adaptive force', async (t) => {
 
 		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
 	});
+
+	await t.test('veigar', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Veigar', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.executionersCalling],
+			internalData: { passiveStacks: 50 },
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+	});
 });
 
 // aphelios
