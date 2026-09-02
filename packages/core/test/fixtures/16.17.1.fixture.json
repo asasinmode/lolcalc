@@ -110,6 +110,88 @@
 				}
 			}
 		},
+		"Hecarim": {
+			"partype": "Mana",
+			"stats": {
+				"hp": 625,
+				"hpperlevel": 106,
+				"mp": 280,
+				"mpperlevel": 40,
+				"movespeed": 345,
+				"armor": 32,
+				"armorperlevel": 5.45,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 175,
+				"hpregen": 7,
+				"hpregenperlevel": 0.75,
+				"mpregen": 7,
+				"mpregenperlevel": 0.8,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 66,
+				"attackdamageperlevel": 3.7,
+				"attackspeedperlevel": 2.5,
+				"attackspeed": 0.67,
+				"attackspeedratio": 0.67
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Warpath",
+							"objectName": "HecarimPassive",
+							"dataKey": "Characters/Hecarim/Spells/HecarimPassiveAbility/HecarimPassive",
+							"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png",
+							"tooltip": "{{Spell_HecarimPassive_Tooltip}}",
+							"tooltipExtended": "{{Spell_HecarimPassive_Tooltip}}<br><br><rules>Attack Damage scales with bonus Move speed.</rules>",
+							"spellCalculations": {
+								"BonusAD": {
+									"mFormulaParts": [
+										{
+											"mStat": 7,
+											"mStatFormula": 2,
+											"mSubpart": {
+												"mLevel1Value": 0.12,
+												"mBreakpoints": [
+													{
+														"mLevel": 3,
+														"mAdditionalBonusAtThisLevel": 0.02
+													},
+													{
+														"mLevel": 6,
+														"mAdditionalBonusAtThisLevel": 0.02
+													},
+													{
+														"mLevel": 9,
+														"mAdditionalBonusAtThisLevel": 0.02
+													},
+													{
+														"mLevel": 12,
+														"mAdditionalBonusAtThisLevel": 0.02
+													},
+													{
+														"mLevel": 15,
+														"mAdditionalBonusAtThisLevel": 0.02
+													},
+													{
+														"mLevel": 18,
+														"mAdditionalBonusAtThisLevel": 0.02
+													}
+												],
+												"__type": "ByCharLevelBreakpointsCalculationPart"
+											},
+											"__type": "StatBySubPartCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			}
+		},
 		"Lulu": {
 			"partype": "Mana",
 			"stats": {
@@ -307,6 +389,16 @@
 						}
 					]
 				}
+			}
+		},
+		"3009": {
+			"searchString": "bootsofswiftness;swifties;boots;movespeed",
+			"stats": {
+				"FlatMovementSpeedMod": 55
+			},
+			"dataValues": {
+				"SlowResistTooltip": 25,
+				"FeatsMS": 5
 			}
 		},
 		"3040": {
@@ -712,6 +804,47 @@
 					"BonusADAP": 0.08
 				}
 			}
+		}
+	},
+	"effects": {
+		"summonerHaste": {
+			"dataKey": "summonerHaste",
+			"sharedSpellObjectKey": "Shared/Spells/SummonerHaste",
+			"sharedSpellEffectObjectKey": "Shared/Spells/Haste",
+			"objectName": "SummonerHaste",
+			"name": "Ghost",
+			"description": "This unit's Move Speed is increased.",
+			"image": "assets/spells/icons2d/summoner_haste.png",
+			"dataValues": {
+				"Duration": [10, 10, 10, 10, 10, 10, 10]
+			},
+			"spellCalculations": {
+				"{7bcbbf47}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 4,
+							"mEndValue": 7,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				},
+				"MovespeedMod": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.24,
+							"mEndValue": 0.48,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"__renamedVariables": {
+					"MoveSpeedMod": "MovespeedMod"
+				}
+			},
+			"cooldownTime": [240, 240, 240, 240, 240, 240, 240],
+			"tooltip": "Gain <speed>@MovespeedMod@ Move Speed</speed> and become <keyword>Ghosted</keyword> for @Duration@ seconds.<br><br>{{ Item_KeywordDefinition_Ghost }}"
 		}
 	}
 }

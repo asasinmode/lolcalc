@@ -3,9 +3,11 @@ import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import type { IChampionStatName } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
 import fixture from '../fixtures/16.17.1.fixture.json' with { type: 'json' };
-import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
+import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
 test.before(() => {
 	setupPatchFixture(fixture);
@@ -172,11 +174,26 @@ test('16.17 adaptive force', async (t) => {
 			abilityPower: 38,
 		}, damageSource);
 	});
+
+	await t.test('hecarim', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.bootsOfSwiftness],
+			appliedEffects: [
+				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
+			],
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 82,
+			abilityPower: 33,
+		}, damageSource);
+	});
 });
 
 // aphelios
 // jhin
-// hecarim
 // pyke
 // rammus
 // rengar
