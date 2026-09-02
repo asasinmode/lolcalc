@@ -218,6 +218,67 @@
 				"attackspeedratio": 0.625
 			}
 		},
+		"Rammus": {
+			"partype": "Mana",
+			"stats": {
+				"hp": 645,
+				"hpperlevel": 100,
+				"mp": 310,
+				"mpperlevel": 33,
+				"movespeed": 335,
+				"armor": 35,
+				"armorperlevel": 4.5,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 8,
+				"hpregenperlevel": 0.55,
+				"mpregen": 7.85,
+				"mpregenperlevel": 0.5,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 65,
+				"attackdamageperlevel": 2.75,
+				"attackspeedperlevel": 2.215,
+				"attackspeed": 0.7,
+				"attackspeedratio": 0.625
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Spiked Shell",
+							"objectName": "RammusP",
+							"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP",
+							"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
+							"tooltip": "Rammus gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
+							"dataValues": {
+								"ArmorRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+								"MagicResistRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+								"BaseDamage": [10, 10, 10, 10, 10, 10, 10]
+							},
+							"spellCalculations": {
+								"TotalDamage": {
+									"mFormulaParts": [
+										{
+											"mStat": 1,
+											"mDataValue": "ArmorRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "MagicResistRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			}
+		},
 		"Veigar": {
 			"partype": "Mana",
 			"stats": {

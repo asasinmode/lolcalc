@@ -190,12 +190,25 @@ test('16.17 adaptive force', async (t) => {
 			abilityPower: 33,
 		}, damageSource);
 	});
+
+	await t.test('rammus', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Rammus', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.ampTome],
+			internalData: { defensiveCurl: 1 },
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 87,
+			abilityPower: 38,
+		}, damageSource);
+	});
 });
 
 // aphelios
 // jhin
 // pyke
-// rammus
 // rengar
 // senna
 // varus
