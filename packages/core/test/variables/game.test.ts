@@ -85,7 +85,7 @@ test('extended equals', async (t) => {
 		assertMetaSuffix('SpellbladeHealing', '<scaleap>10%%i:scaleap%</scaleap> <scalehealth>+ 3% bonus %i:scalehealth%</scalehealth>', duskAndDawn);
 
 		const essenceReaver = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.essenceReaver].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.essenceReaver, dynamicVariables: specificKnownVariables(ITEM_SPECIFICS[ITEM_NAME_TO_ID.essenceReaver].variables) }, undefined, { isExtended: true });
-		assertMetaSuffix('SpellbladeDamage', '<scalead>125% base %i:scalead%</scalead> + 50%%i:scalecrit%', essenceReaver);
+		assertMetaSuffix('SpellbladeDamage', '<scalead>125% base %i:scalead%</scalead> <scalecrit>+ 50%%i:scalecrit%</scalecrit>', essenceReaver);
 		assertMetaSuffix('TotalManaRefund', '50% <var>Spellblade damage</var>', essenceReaver);
 
 		const lichBane = replaceGameVariables((TEXT as unknown as TText).items[ITEM_NAME_TO_ID.lichBane].tooltipShop[0]![1]!, 'item', { item: ITEMS_BY_NAME.lichBane }, undefined, { isExtended: true });
@@ -182,10 +182,10 @@ test('extended equals', async (t) => {
 
 		const ashe = await setupDamageSource(fixture, 'Ashe');
 		const ashePassive = extendedChampionAbilityDescription(ashe, 'tooltip', 'passive');
-		assertMetaSuffix('DamageBonus', '<const>100</const> + 100%%i:scalecrit%', ashePassive);
+		assertMetaSuffix('DamageBonus', '<const>100</const> <scalecrit>+ 100%</scalecrit>%i:scalecrit%', ashePassive);
 		ashe.addItem(ITEMS_BY_NAME.infinityEdge);
 		const ashePassiveIE = extendedChampionAbilityDescription(ashe, 'tooltip', 'passive');
-		assertMetaSuffix('DamageBonus', '<const>100</const> + 130%%i:scalecrit%', ashePassiveIE);
+		assertMetaSuffix('DamageBonus', '<const>100</const> <scalecrit>+ 130%</scalecrit>%i:scalecrit%', ashePassiveIE);
 	});
 });
 
