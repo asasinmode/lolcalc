@@ -1221,12 +1221,14 @@ export const VARIABLE_CALCULATION_FNS = {
 			return {
 				value: statValue.value * variable.mCoefficient,
 				roundReplaced: true,
-				calculatesFrom: [{
-					value: variable.mCoefficient,
-					isPercentage: true,
-					stat: statValue.stat as ICalculatesFromPart['stat'],
-					type: statValue.type,
-				}],
+				calculatesFrom: statValue.stat === 'abilityHaste'
+					? []
+					: [{
+							value: variable.mCoefficient,
+							isPercentage: true,
+							stat: statValue.stat as ICalculatesFromPart['stat'],
+							type: statValue.type,
+						}],
 			};
 		}
 	},
