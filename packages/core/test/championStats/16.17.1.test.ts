@@ -1,5 +1,6 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IItem } from '@lolcalc/data/types.js';
 import type { IChampionStatName } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
@@ -234,26 +235,36 @@ test('16.17 Jhin', async (t) => {
 		items: [],
 	};
 
+	const vanillaBuildItems: IItem[] = [ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.ldr, ITEMS_BY_NAME.phantomDancer, ITEMS_BY_NAME.hubris];
+
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', sourceCommon);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 211,
-			attackSpeed: 0.63,
+			attackSpeed: 0.944,
 		}, damageSource);
 	});
 
-	await t.test('withered', { skip: true }, async () => {
+	await t.test('withered', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', {
-			...sourceCommon,
+			level: 18,
+			runes: {
+				shards: {
+					offensive: 'attackspeed',
+					flex: 'adaptive',
+					defensive: 'health',
+				},
+			},
+			items: vanillaBuildItems,
 			appliedEffects: [
-				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.nasusWWither), [1]),
+				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.frozenHeartWintersCaress), [1]),
 			],
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 147,
-			attackSpeed: 0.63,
+			attackDamage: 590,
+			attackSpeed: 0.944,
 		}, damageSource);
 	});
 });

@@ -846,6 +846,11 @@ export const CHAMPION_SPECIFICS = {
 					bonusStats.attackSpeed += bonusASPercent * baseStats.attackSpeed;
 				},
 			},
+			preBonus: {
+				handler(_self, _stats, { debuffs }) {
+					debuffs.cripple = 1;
+				},
+			},
 			postTotal: {
 				handler(self, { totalStats, championPassiveStats, baseOnLevelStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats, dragonStatMultipliers }, { calculatedVariables }) {
 					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: (totalStats.bonusAttackSpeedPercent - championPassiveStats.bonusAttackSpeedPercent!) } } } } as DamageSource });

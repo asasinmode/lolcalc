@@ -635,6 +635,7 @@ export const ITEM_NAME_TO_ID = {
 	infinityEdge: '3031',
 	collector: '6676',
 	ga: '3026',
+	phantomDancer: '3046',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

@@ -584,6 +584,26 @@
 				"FeatsMS": 5
 			}
 		},
+		"3031": {
+			"searchString": "infinityedge;ie;banana;criticalstrike;damage;criticalstrikechance;attackdamage",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 75,
+				"FlatCritDamageMod": 0.3
+			}
+		},
+		"3036": {
+			"searchString": "lorddominiksregards;lw;ldr;doms;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 35,
+				"PercentArmorPenetrationMod": 0.35
+			},
+			"dataValues": {
+				"MaxBonusDamagePercent": 0.15,
+				"MaxBonusHealth": 1500
+			}
+		},
 		"3040": {
 			"searchString": "seraphsembrace;spelldamage;mana;abilityhaste;abilitypower",
 			"stats": {
@@ -644,6 +664,14 @@
 						}
 					]
 				}
+			}
+		},
+		"3046": {
+			"searchString": "phantomdancer;pd;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.65,
+				"PercentMovementSpeedMod": 0.1
 			}
 		},
 		"3051": {
@@ -871,6 +899,18 @@
 				"APAmp": 0.3
 			}
 		},
+		"3110": {
+			"searchString": "frozenheart;armor;mana;aura;cooldownreduction;abilityhaste",
+			"stats": {
+				"FlatMPPoolMod": 400,
+				"FlatArmorMod": 75,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"ASPDSlow": -0.2,
+				"AuraRadius": 700
+			}
+		},
 		"3113": {
 			"searchString": "aetherwisp;spookyghost;movement;spelldamage;abilitypower;movespeed",
 			"stats": {
@@ -977,6 +1017,36 @@
 				"EternityMaxHealPerCast": 20,
 				"EternityCDPerCast": 1,
 				"SecondsPerStack": 60
+			}
+		},
+		"6697": {
+			"searchString": "hubris;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 10,
+				"PhysicalLethality": 18
+			},
+			"dataValues": {
+				"LethalityAmount": 18,
+				"MSDuration": 3,
+				"MinHealthThreshold": 0.3,
+				"TakedownWindow": 3,
+				"SpeedAmount": 0.3,
+				"BonusLethality": 15,
+				"ADPerStatue": 3,
+				"BuffDuration": 90,
+				"BaseADBonus": 12
+			},
+			"itemCalculations": {
+				"{5974e68a}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{10f4da91}",
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				}
 			}
 		}
 	},
