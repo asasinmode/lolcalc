@@ -1857,9 +1857,12 @@ function resolveDynamicValue(
 			rv.value = dynamicValue.value[0];
 		}
 	} else {
-		rv.value = dynamicValue.value;
-		if (dynamicValue.calculatesFrom?.length) {
-			addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom);
+		for (const key in dynamicValue) {
+			if (key === 'calculatesFrom') {
+				addCalculatesFrom(rv.calculatesFrom, dynamicValue.calculatesFrom!);
+			} else if (key !== 'meta') {
+				(rv as any)[key] = dynamicValue[key as keyof typeof dynamicValue];
+			}
 		}
 	}
 }

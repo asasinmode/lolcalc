@@ -825,19 +825,34 @@ export const CHAMPION_SPECIFICS = {
 				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
 		},
+		passive: {
+			variables: defineChampionVariables()({
+				known: {
+					TotalADPercent: [],
+				},
+				calculate(self) {
+					const { total, championPassive } = self.stats.value;
+					return {
+						TotalADPercent: championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: total.attackDamage, critChance: total.critChance }, bonus: { bonusAttackSpeedPercent: (total.bonusAttackSpeedPercent - championPassive.bonusAttackSpeedPercent!) } } } } as DamageSource }),
+					};
+				},
+			}),
+		},
 		calculateHooks: {
-			preBonus: {
-				handler(self, { baseOnLevelStats, bonusStats }) {
-					baseOnLevelStats.bonusAttackSpeedPercent = (self.champion.value as typeof IJhin).abilities.passive.variants[0]!.dataValues.PercentAttackSpeedPerLevel[1]! * (self.level.value - 1);
-					bonusStats.attackSpeed += baseOnLevelStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeed;
+			postInit: {
+				handler(self, { bonusStats, baseStats, championPassiveStats }) {
+					const bonusASPercent = (self.champion.value as typeof IJhin).abilities.passive.variants[0]!.dataValues.PercentAttackSpeedPerLevel[1]! * (self.level.value - 1);
+					championPassiveStats.bonusAttackSpeedPercent = bonusASPercent;
+					bonusStats.attackSpeed += bonusASPercent * baseStats.attackSpeed;
 				},
 			},
 			postTotal: {
-				handler(self, { totalStats, championPassiveStats, totalMultipliersStats, totalPreMultipliersStats, dragonStatMultipliers }, { calculatedVariables }) {
-					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: totalStats.bonusAttackSpeedPercent } } } } as DamageSource });
+				handler(self, { totalStats, championPassiveStats, baseOnLevelStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats, dragonStatMultipliers }, { calculatedVariables }) {
+					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: (totalStats.bonusAttackSpeedPercent - championPassiveStats.bonusAttackSpeedPercent!) } } } } as DamageSource });
 
 					if (typeof adPercent.value !== 'number') {
 						console.warn('[CHAMPION_SPECIFICS jhin] failed to calculate passive total ad percent', adPercent);
+						return;
 					}
 
 					console.log('jhin', {
@@ -848,7 +863,12 @@ export const CHAMPION_SPECIFICS = {
 						dragonAdMultiplier: dragonStatMultipliers.attackDamage,
 						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
 					});
-					// work here
+
+					const passiveAd = totalStats.attackDamage * adPercent.value;
+
+					championPassiveStats.attackDamage = (championPassiveStats.attackDamage ?? 0) + passiveAd;
+					totalStats.attackDamage += passiveAd;
+					bonusStats.attackDamage += passiveAd;
 				},
 			},
 		},
