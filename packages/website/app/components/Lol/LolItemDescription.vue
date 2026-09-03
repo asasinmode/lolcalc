@@ -433,6 +433,11 @@ defineExpose({ header });
 			--at-apply: 'text-red';
 		}
 
+		/* not actually in game data but jhin's and ashe's passive seem to have it white */
+		scalecrit {
+			--at-apply: 'text-white';
+		}
+
 		attackspeed {
 			--at-apply: 'text-yellow-200';
 		}

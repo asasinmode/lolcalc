@@ -211,7 +211,7 @@ test('16.17 Jhin', async (t) => {
 		level: 18,
 		runes: {
 			shards: {
-				offensive: 'attackspeed',
+				offensive: 'adaptive',
 				flex: 'adaptive',
 				defensive: 'health',
 			},
@@ -223,7 +223,7 @@ test('16.17 Jhin', async (t) => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', sourceCommon);
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 147,
+			attackDamage: 211,
 			attackSpeed: 0.63,
 		}, damageSource);
 	});

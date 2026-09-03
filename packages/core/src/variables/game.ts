@@ -850,6 +850,8 @@ export const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon,
 	mana: 'scalemana',
 	manaRegen: 'scalemana',
 	level: 'scalelevel',
+	bonusAttackSpeedPercent: 'attackspeed',
+	critChance: 'scalecrit',
 };
 
 export function calculatesFromPartExtendedEquals(
@@ -1708,6 +1710,7 @@ interface IStatWithFormula {
 const MSTAT_TO_NAMED_STAT = {
 	1: 'armor',
 	2: 'attackDamage',
+	4: 'bonusAttackSpeedPercent',
 	6: 'magicResist',
 	7: 'moveSpeed',
 	8: 'critChance',
