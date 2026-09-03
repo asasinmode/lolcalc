@@ -1124,7 +1124,10 @@ export const VARIABLE_CALCULATION_FNS = {
 			rv.roundReplaced = 2;
 			if (!hasMMultiplier) {
 				for (const part of rv.calculatesFrom!) {
-					part.stat === 'const' && !part.isPercentage && multiplyCalculatePartValues(part, 100);
+					(part.stat === 'const') && !part.isPercentage && multiplyCalculatePartValues(part, 100);
+					if (part.stat === 'level') {
+						part.isPercentage ??= true;
+					}
 				}
 			}
 		}
@@ -1224,7 +1227,7 @@ export const VARIABLE_CALCULATION_FNS = {
 				calculatesFrom: statValue.stat === 'abilityHaste'
 					? []
 					: [{
-							value: variable.mCoefficient,
+							value: variable.mCoefficient * (statValue.stat === 'critChance' ? 100 : 1),
 							isPercentage: true,
 							stat: statValue.stat as ICalculatesFromPart['stat'],
 							type: statValue.type,

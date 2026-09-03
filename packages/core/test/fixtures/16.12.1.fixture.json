@@ -230,7 +230,7 @@
 				"attackspeedratio": 0.667
 			}
 		},
-		"Kayle": {
+		"Jax": {
 			"stats": {
 				"hp": 670,
 				"hpperlevel": 92,
@@ -259,60 +259,188 @@
 					"maxLevel": 0,
 					"variants": [
 						{
-							"name": "Divine Ascent",
-							"objectName": "KaylePassive",
-							"dataKey": "Characters/Kayle/Spells/KaylePassiveAbility/KaylePassive",
-							"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
-							"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
-							"tooltip": "{{Spell_KaylePassive_Tooltip}}",
-							"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
+							"name": "Relentless Assault",
+							"objectName": "JaxPassive",
+							"dataKey": "Characters/Jax/Spells/JaxPassiveAbility/JaxPassive",
+							"image": "assets/characters/jax/hud/icons2d/jaxp.png",
+							"tooltip": "Jax's Attacks grant a stack for 2.5 seconds that gives him <attackSpeed>@AttackSpeedPerStack@ Attack Speed</attackSpeed> (max <attackSpeed>@MaxBonusAttackSpeed@ Attack Speed</attackSpeed>).",
 							"dataValues": {
-								"LevelForPassiveRank0": [1, 1, 1, 1, 1, 1, 1],
-								"LevelForPassiveRank1": [6, 6, 6, 6, 6, 6, 6],
-								"LevelForPassiveRank2": [11, 11, 11, 11, 11, 11, 11],
-								"LevelForPassiveRank3": [16, 16, 16, 16, 16, 16, 16],
-								"UpgradedAttackRange": [525, 525, 525, 525, 525, 525, 525],
-								"FinalAttackRange": [625, 625, 625, 625, 625, 625, 625],
-								"MSTowardsEnemy": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
-								"MSTowardsEnemyRadius": [2000, 2000, 2000, 2000, 2000, 2000, 2000],
-								"EnrageMaxStacks": [5, 5, 5, 5, 5, 5, 5],
-								"EnrageDuration": [5, 5, 5, 5, 5, 5, 5],
-								"EnrageASPerStack": [6, 6, 6, 6, 6, 6, 6],
-								"PassiveWaveAPRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
-								"PassiveWaveBonusADRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+								"BuffDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+								"MaxStacks": [8, 8, 8, 8, 8, 8, 8],
+								"FallOffRate": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+								"BelvethVsJaxQuestRewardStacks": [5, 5, 5, 5, 5, 5, 5]
 							},
 							"spellCalculations": {
-								"EnrageTotalASPerStack": {
+								"AttackSpeedPerStack": {
 									"mFormulaParts": [
 										{
-											"mDataValue": "EnrageASPerStack",
-											"__type": "NamedDataValueCalculationPart"
-										}
-									]
-								},
-								"PassiveWaveDamage": {
-									"mFormulaParts": [
-										{
-											"mLevel1Value": 20,
+											"mLevel1Value": 0.05,
 											"mBreakpoints": [
 												{
+													"mLevel": 4,
+													"mAdditionalBonusAtThisLevel": 0.015
+												},
+												{
+													"mLevel": 7,
+													"mAdditionalBonusAtThisLevel": 0.015
+												},
+												{
+													"mLevel": 10,
+													"mAdditionalBonusAtThisLevel": 0.015
+												},
+												{
+													"mLevel": 13,
+													"mAdditionalBonusAtThisLevel": 0.015
+												},
+												{
+													"mLevel": 16,
+													"mAdditionalBonusAtThisLevel": 0.015
+												},
+												{
+													"mLevel": 19,
+													"mAdditionalBonusAtThisLevel": 0.015
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 1
+								},
+								"MaxBonusAttackSpeed": {
+									"mMultiplier": {
+										"mDataValue": "MaxStacks",
+										"__type": "NamedDataValueCalculationPart"
+									},
+									"tooltipOnly": true,
+									"mModifiedGameCalculation": "AttackSpeedPerStack",
+									"__type": "GameCalculationModified"
+								},
+								"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 0.0028,
+											"mInitialBonusPerLevel": 0.0006,
+											"mBreakpoints": [
+												{
+													"mLevel": 14
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 2
+								},
+								"BelvethVsJaxQuestRewardAttackSpeed": {
+									"mMultiplier": {
+										"mBuffName": "{a8a3dd7a}",
+										"mCoefficient": 1,
+										"__type": "BuffCounterByCoefficientCalculationPart"
+									},
+									"mSimpleTooltipCalculationDisplay": 5,
+									"mExpandedTooltipCalculationDisplay": 5,
+									"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack",
+									"__type": "GameCalculationModified"
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+		"Jhin": {
+			"partype": "Mana",
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Whisper",
+							"objectName": "JhinPassive",
+							"dataKey": "Characters/Jhin/Spells/JhinPassiveAbility/JhinPassive",
+							"image": "assets/characters/jhin/hud/icons2d/jhin_p.png",
+							"tooltip": "{{Spell_JhinPassive_Tooltip}}",
+							"tooltipExtended": "{{Spell_JhinPassive_Tooltip}}<br><rules>Attack Damage scales with Critical Strike Chance and bonus Attack Speed.<br>Move Speed scales with bonus Attack Speed.<br>Missing health damage is capped at 800 against monsters.</rules>",
+							"dataValues": {
+								"MaxAmmo": [4, 4, 4, 4, 4, 4, 4],
+								"ReloadTime": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+								"HasteDuration": [2, 2, 2, 2, 2, 2, 2],
+								"OutOfCombatTimeBeforeReload": [8, 8, 8, 8, 8, 8, 8],
+								"FourthShotDamageMult": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+								"CritReductionPercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+								"BaseAttackSpeed": [0.625, 0.625, 0.625, 0.625, 0.625, 0.625, 0.625],
+								"PercentAttackSpeedPerLevel": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
+								"CritMoveSpeedPercentASRatio": [0.44, 0.44, 0.44, 0.44, 0.44, 0.44, 0.44]
+							},
+							"spellCalculations": {
+								"FourthShotExecutePercent": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 0.15,
+											"mBreakpoints": [
+												{
+													"mLevel": 6,
+													"mAdditionalBonusAtThisLevel": 0.05
+												},
+												{
+													"mLevel": 11,
+													"mAdditionalBonusAtThisLevel": 0.05
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"TotalADPercent": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 0.04,
+											"mInitialBonusPerLevel": 0.01,
+											"mBreakpoints": [
+												{
+													"mLevel": 10,
+													"mBonusPerLevelAtAndAfter": 0.02
+												},
+												{
 													"mLevel": 12,
-													"mBonusPerLevelAtAndAfter": 3
+													"mBonusPerLevelAtAndAfter": 0.04
 												}
 											],
 											"__type": "ByCharLevelBreakpointsCalculationPart"
 										},
 										{
-											"mDataValue": "PassiveWaveAPRatio",
-											"__type": "StatByNamedDataValueCalculationPart"
+											"mStat": 8,
+											"mCoefficient": 0.35,
+											"__type": "StatByCoefficientCalculationPart"
 										},
 										{
-											"mStat": 2,
+											"mStat": 4,
 											"mStatFormula": 2,
-											"mDataValue": "PassiveWaveBonusADRatio",
+											"mCoefficient": 0.3,
+											"__type": "StatByCoefficientCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"CritMoveSpeedPercent": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mNumber": 0.14,
+											"__type": "NumberCalculationPart"
+										},
+										{
+											"mStat": 4,
+											"mStatFormula": 2,
+											"mDataValue": "CritMoveSpeedPercentASRatio",
 											"__type": "StatByNamedDataValueCalculationPart"
 										}
-									]
+									],
+									"mDisplayAsPercent": true
 								}
 							}
 						}
@@ -320,7 +448,7 @@
 				}
 			},
 			"stringtable": {
-				"spell_kaylepassive_tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>"
+				"spell_jhinpassive_tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.</li>"
 			}
 		},
 		"KSante": {
@@ -441,7 +569,7 @@
 				"spell_ksantep_tooltip": "K'Sante's damaging Abilities mark enemies hit. Attacking a marked enemy deals <physicalDamage>@FlatDamage@ plus @PercentHealthDamage@ max Health physical damage</physicalDamage> and consumes the mark.<br><br><keywordMajor>All Out</keywordMajor>: K'Sante's Attacks, Abilities and Passive deal an additional @MaxHealthDamagePercent@ max Health physical damage."
 			}
 		},
-		"Jax": {
+		"Kayle": {
 			"stats": {
 				"hp": 670,
 				"hpperlevel": 92,
@@ -470,94 +598,68 @@
 					"maxLevel": 0,
 					"variants": [
 						{
-							"name": "Relentless Assault",
-							"objectName": "JaxPassive",
-							"dataKey": "Characters/Jax/Spells/JaxPassiveAbility/JaxPassive",
-							"image": "assets/characters/jax/hud/icons2d/jaxp.png",
-							"tooltip": "Jax's Attacks grant a stack for 2.5 seconds that gives him <attackSpeed>@AttackSpeedPerStack@ Attack Speed</attackSpeed> (max <attackSpeed>@MaxBonusAttackSpeed@ Attack Speed</attackSpeed>).",
+							"name": "Divine Ascent",
+							"objectName": "KaylePassive",
+							"dataKey": "Characters/Kayle/Spells/KaylePassiveAbility/KaylePassive",
+							"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
+							"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+							"tooltip": "{{Spell_KaylePassive_Tooltip}}",
+							"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
 							"dataValues": {
-								"BuffDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
-								"MaxStacks": [8, 8, 8, 8, 8, 8, 8],
-								"FallOffRate": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
-								"BelvethVsJaxQuestRewardStacks": [5, 5, 5, 5, 5, 5, 5]
+								"LevelForPassiveRank0": [1, 1, 1, 1, 1, 1, 1],
+								"LevelForPassiveRank1": [6, 6, 6, 6, 6, 6, 6],
+								"LevelForPassiveRank2": [11, 11, 11, 11, 11, 11, 11],
+								"LevelForPassiveRank3": [16, 16, 16, 16, 16, 16, 16],
+								"UpgradedAttackRange": [525, 525, 525, 525, 525, 525, 525],
+								"FinalAttackRange": [625, 625, 625, 625, 625, 625, 625],
+								"MSTowardsEnemy": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+								"MSTowardsEnemyRadius": [2000, 2000, 2000, 2000, 2000, 2000, 2000],
+								"EnrageMaxStacks": [5, 5, 5, 5, 5, 5, 5],
+								"EnrageDuration": [5, 5, 5, 5, 5, 5, 5],
+								"EnrageASPerStack": [6, 6, 6, 6, 6, 6, 6],
+								"PassiveWaveAPRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+								"PassiveWaveBonusADRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 							},
 							"spellCalculations": {
-								"AttackSpeedPerStack": {
+								"EnrageTotalASPerStack": {
 									"mFormulaParts": [
 										{
-											"mLevel1Value": 0.05,
+											"mDataValue": "EnrageASPerStack",
+											"__type": "NamedDataValueCalculationPart"
+										}
+									]
+								},
+								"PassiveWaveDamage": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 20,
 											"mBreakpoints": [
 												{
-													"mLevel": 4,
-													"mAdditionalBonusAtThisLevel": 0.015
-												},
-												{
-													"mLevel": 7,
-													"mAdditionalBonusAtThisLevel": 0.015
-												},
-												{
-													"mLevel": 10,
-													"mAdditionalBonusAtThisLevel": 0.015
-												},
-												{
-													"mLevel": 13,
-													"mAdditionalBonusAtThisLevel": 0.015
-												},
-												{
-													"mLevel": 16,
-													"mAdditionalBonusAtThisLevel": 0.015
-												},
-												{
-													"mLevel": 19,
-													"mAdditionalBonusAtThisLevel": 0.015
+													"mLevel": 12,
+													"mBonusPerLevelAtAndAfter": 3
 												}
 											],
 											"__type": "ByCharLevelBreakpointsCalculationPart"
-										}
-									],
-									"mDisplayAsPercent": true,
-									"mPrecision": 1
-								},
-								"MaxBonusAttackSpeed": {
-									"mMultiplier": {
-										"mDataValue": "MaxStacks",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									"tooltipOnly": true,
-									"mModifiedGameCalculation": "AttackSpeedPerStack",
-									"__type": "GameCalculationModified"
-								},
-								"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
-									"mFormulaParts": [
+										},
 										{
-											"mLevel1Value": 0.0028,
-											"mInitialBonusPerLevel": 0.0006,
-											"mBreakpoints": [
-												{
-													"mLevel": 14
-												}
-											],
-											"__type": "ByCharLevelBreakpointsCalculationPart"
+											"mDataValue": "PassiveWaveAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "PassiveWaveBonusADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
-									],
-									"mDisplayAsPercent": true,
-									"mPrecision": 2
-								},
-								"BelvethVsJaxQuestRewardAttackSpeed": {
-									"mMultiplier": {
-										"mBuffName": "{a8a3dd7a}",
-										"mCoefficient": 1,
-										"__type": "BuffCounterByCoefficientCalculationPart"
-									},
-									"mSimpleTooltipCalculationDisplay": 5,
-									"mExpandedTooltipCalculationDisplay": 5,
-									"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack",
-									"__type": "GameCalculationModified"
+									]
 								}
 							}
 						}
 					]
 				}
+			},
+			"stringtable": {
+				"spell_kaylepassive_tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>"
 			}
 		},
 		"Rammus": {
@@ -3121,25 +3223,7 @@
 		}
 	},
 	"misc": {
-		"roleQuests": {
-			"mid": {
-				"dataValues": {
-					"BonusADAP": 0.08
-				}
-			}
-		},
 		"dragons": {
-			"Chemtech": {
-				"name": "Chemtech",
-				"stack": {
-					"objectName": "SRX_DragonBuffChemTech",
-					"dataKey": "Shared/Spells/SRX_DragonBuffChemTech",
-					"dataValues": {
-						"TenacityPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06],
-						"HealShieldPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
-					}
-				}
-			},
 			"Cloud": {
 				"name": "Cloud",
 				"stack": {
@@ -3159,13 +3243,12 @@
 					}
 				}
 			},
-			"Hextech": {
-				"name": "Hextech",
+			"Mountain": {
+				"name": "Mountain",
 				"stack": {
-					"objectName": "SRX_DragonBuffHextech",
+					"objectName": "SRX_DragonBuffMountain",
 					"dataValues": {
-						"AbilityHaste": [5, 5, 5, 5, 5, 5, 5],
-						"AttackSpeed": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 					}
 				}
 			},
@@ -3179,13 +3262,32 @@
 					}
 				}
 			},
-			"Mountain": {
-				"name": "Mountain",
+			"Chemtech": {
+				"name": "Chemtech",
 				"stack": {
-					"objectName": "SRX_DragonBuffMountain",
+					"objectName": "SRX_DragonBuffChemTech",
+					"dataKey": "Shared/Spells/SRX_DragonBuffChemTech",
 					"dataValues": {
-						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+						"TenacityPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06],
+						"HealShieldPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
 					}
+				}
+			},
+			"Hextech": {
+				"name": "Hextech",
+				"stack": {
+					"objectName": "SRX_DragonBuffHextech",
+					"dataValues": {
+						"AbilityHaste": [5, 5, 5, 5, 5, 5, 5],
+						"AttackSpeed": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				}
+			}
+		},
+		"roleQuests": {
+			"mid": {
+				"dataValues": {
+					"BonusADAP": 0.08
 				}
 			}
 		}

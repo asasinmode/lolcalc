@@ -10,15 +10,22 @@ export const EFFECT_COMPONENTS: Partial<Record<IEffectObjectName, ISpecificCompo
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === AbilityType.effect) {
 		const abilityId = GameAbilityId.build(AbilityType.effect, effectObjectName);
-		const { label, minValue, maxValue, enumOptions } = effectSpecific;
+		const { label, minValue, maxValue, enumOptions, deriveProgressValue } = effectSpecific;
 
 		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
 			??= enumOptions
 				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
-				: minValue !== undefined || maxValue !== undefined
-					? await numberExtra(abilityId, 0, label, minValue, maxValue, undefined, { onUpdate: effectSpecific.onValueUpdate, effectControlsProps: effectSpecific.effectControls })
-					: await booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate });
+				: deriveProgressValue
+					? await progressExtra(abilityId, 0, label, deriveProgressValue, {
+							selectEffectSourceProps: effectSpecific.sourceControls,
+							effectControlsProps: effectSpecific.effectControls,
+							derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
+							onUpdate: effectSpecific.onValueUpdate,
+						})
+					: minValue !== undefined || maxValue !== undefined
+						? await numberExtra(abilityId, 0, label, minValue, maxValue, undefined, { onUpdate: effectSpecific.onValueUpdate, effectControlsProps: effectSpecific.effectControls })
+						: await booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate });
 	}
 }
 

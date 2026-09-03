@@ -186,6 +186,10 @@ test('extended equals', async (t) => {
 		ashe.addItem(ITEMS_BY_NAME.infinityEdge);
 		const ashePassiveIE = extendedChampionAbilityDescription(ashe, 'tooltip', 'passive');
 		assertMetaSuffix('DamageBonus', '<const>100</const> <scalecrit>+ 130%</scalecrit>%i:scalecrit%', ashePassiveIE);
+
+		const jhin = await setupDamageSource(fixture, 'Jhin');
+		const jhinPassive = extendedChampionAbilityDescription(jhin, 'tooltip', 'passive');
+		assertMetaSuffix('TotalADPercent', '<scalelevel>4% - 44%%i:scalelevel%</scalelevel> <scalecrit>+ 35%%i:scalecrit%</scalecrit> <attackspeed>+ 30% bonus %i:scaleas%</attackspeed>', jhinPassive);
 	});
 });
 
