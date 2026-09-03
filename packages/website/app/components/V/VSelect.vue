@@ -34,7 +34,7 @@ function clear(event: MouseEvent) {
 			:name
 			:aria-errormessage
 			:aria-invalid="ariaErrormessage ? true : undefined"
-			@change="value = ($event.target as HTMLSelectElement).value as T || undefined"
+			@input="value = ($event.target as HTMLSelectElement).value as T || undefined"
 			@click.right="clear"
 			@mouseenter="$emit('labelMouseenter', $event)"
 		>
