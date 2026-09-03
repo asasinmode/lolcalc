@@ -45,6 +45,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const calculatedVariables: IStatsCalculationVariables = {
 		apMultipliersBase: 0,
+		postItemTotalApMultipliersBase: 0,
 		baseItemManaRegenPercent: 0,
 		totalItemApMultipliers: 1,
 		totalBonusPercentMoveSpeed: 0,
@@ -209,6 +210,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			hook(source, { itemPassivesStats, itemTotalStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
 		}
 	}
+	calculatedVariables.postItemTotalApMultipliersBase = calculatedVariables.apMultipliersBase;
 
 	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage + calculatedVariables.additionalAdaptiveForceCheckAd, itemTotalStats.abilityPower + calculatedVariables.additionalAdaptiveForceCheckAp,
 	);

@@ -326,14 +326,15 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			preBonus: {
-				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const value = (runeShardStats.abilityPower ?? 0) * calculatedVariables.blackfireTorchBBlazeMultiplier!;
+				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					const value = (calculatedVariables.apMultipliersBase - calculatedVariables.postItemTotalApMultipliersBase) * calculatedVariables.blackfireTorchBBlazeMultiplier!;
 					if (value) {
 						calculatedVariables.blackfireTorchBBlazeAP! += value;
 						itemPassivesStats.abilityPower += value;
 						itemTotalStats.abilityPower += value;
 					}
 				},
+				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 			onTotalPreMultipliers: {
 				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
@@ -2006,14 +2007,15 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			preBonus: {
-				handler(_self, { runeShardStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
-					const value = (runeShardStats.abilityPower ?? 0) * calculatedVariables.rabadonApMultiplier!;
+				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
+					const value = (calculatedVariables.apMultipliersBase - calculatedVariables.postItemTotalApMultipliersBase) * calculatedVariables.rabadonApMultiplier!;
 					if (value) {
 						calculatedVariables.rabadonMagicalOpus! += value;
 						itemPassivesStats.abilityPower += value;
 						itemTotalStats.abilityPower += value;
 					}
 				},
+				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.rabadon],
 			},
 			onTotalPreMultipliers: {
 				handler(_self, { adaptiveForceMeta, itemPassivesStats, totalMultipliersStats, itemTotalStats }, { calculatedVariables }) {
