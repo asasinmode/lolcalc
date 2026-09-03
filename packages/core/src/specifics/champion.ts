@@ -11,6 +11,7 @@ import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
+import type IJhin from '@lolcalc/data/files/champion/Jhin.json';
 import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
 import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
 import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
@@ -823,6 +824,33 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
+		},
+		calculateHooks: {
+			preBonus: {
+				handler(self, { baseOnLevelStats, bonusStats }) {
+					baseOnLevelStats.bonusAttackSpeedPercent = (self.champion.value as typeof IJhin).abilities.passive.variants[0]!.dataValues.PercentAttackSpeedPerLevel[1]! * (self.level.value - 1);
+					bonusStats.attackSpeed += baseOnLevelStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeed;
+				},
+			},
+			postTotal: {
+				handler(self, { totalStats, championPassiveStats, totalMultipliersStats, totalPreMultipliersStats, dragonStatMultipliers }, { calculatedVariables }) {
+					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: totalStats.bonusAttackSpeedPercent } } } } as DamageSource });
+
+					if (typeof adPercent.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS jhin] failed to calculate passive total ad percent', adPercent);
+					}
+
+					console.log('jhin', {
+						totalAd: totalStats.attackDamage,
+						totalBonusAS: totalStats.bonusAttackSpeedPercent,
+						totalCritChance: totalStats.critChance,
+						adPercent: adPercent.value,
+						dragonAdMultiplier: dragonStatMultipliers.attackDamage,
+						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
+					});
+					// work here
+				},
+			},
 		},
 	},
 	Jinx: {

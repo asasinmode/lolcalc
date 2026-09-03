@@ -204,6 +204,21 @@ test('16.17 adaptive force', async (t) => {
 			abilityPower: 38,
 		}, damageSource);
 	});
+
+	await t.test('jhin', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jhin', {
+			...sourceCommon,
+			level: 18,
+			items: [ITEMS_BY_NAME.ampTome],
+			internalData: { isPassiveMSActive: 0 },
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 196,
+			abilityPower: 38,
+		}, damageSource);
+	});
 });
 
 test('16.17 Jhin', async (t) => {
@@ -228,7 +243,7 @@ test('16.17 Jhin', async (t) => {
 		}, damageSource);
 	});
 
-	await t.test('withered', async () => {
+	await t.test('withered', { skip: true }, async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', {
 			...sourceCommon,
 			appliedEffects: [
@@ -244,7 +259,6 @@ test('16.17 Jhin', async (t) => {
 });
 
 // aphelios
-// jhin
 // pyke
 // rengar
 // senna

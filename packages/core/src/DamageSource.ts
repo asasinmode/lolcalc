@@ -2301,6 +2301,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
+		bonusStats: IStatsCalculationResult['bonus'];
 	}) => void>;
 	/**
 	 * runs when total stats have been calculated but before any total multipliers like mid quest or dragons
