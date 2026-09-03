@@ -230,14 +230,13 @@ export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.slowPercent]: defineEffectSpecific<[slowedByPercent: number]>({
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.slowPercent),
 		label: 'Slow (percent)',
-		minValue: 0,
-		maxValue: Number.POSITIVE_INFINITY,
 		setupData(data) {
 			return [Math.max(0, data?.[0] ?? 0)];
 		},
 		imgText(data) {
 			return `${data[0]}%`;
 		},
+		deriveProgressValue: value => value,
 		variables: simpleSlowEffectVariables('lolcalcPercentSlow'),
 		calculateHooks: {
 			postInit: {
@@ -299,7 +298,7 @@ export const EFFECT_SPECIFICS = {
 		imgText(data) {
 			return `${data[0]}%`;
 		},
-		maxValue: 100,
+		deriveProgressValue: value => value,
 		onValueUpdate(value, self) {
 			if (value) {
 				const effect = self.getEffect(EFFECT_OBJECT_NAME.grievousWounds)?.[0];
