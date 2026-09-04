@@ -893,6 +893,8 @@ export const CHAMPION_SPECIFICS = {
 					championPassiveStats.attackDamage = (championPassiveStats.attackDamage ?? 0) + passiveAd;
 					totalStats.attackDamage += passiveAd;
 					bonusStats.attackDamage += passiveAd;
+
+					calculatedVariables.bloodmailRetributionExcludedAd += passiveAd;
 				},
 			},
 		},
