@@ -20,7 +20,7 @@
 		<p>Check out the TODO tutorial library and read on for some of the features described in-depth</p>
 
 		<h2>
-			faq
+			q&a
 		</h2>
 		<dl>
 			<dt>how can I save multiple configurations?</dt>

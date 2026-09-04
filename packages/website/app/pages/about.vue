@@ -55,11 +55,22 @@ const rfcImg = await gameAbilityImgAttrs(GameAbilityId.build(AbilityType.item, I
 		</p>
 		<p>for when these and other features will be implemented, see the <a href="#TODO">roadmap</a></p>
 
+		<h2 id="support">support</h2>
+		<p>TODO</p>
+
 		<h2>acknowledgements</h2>
 		<p>This project would not exist without <a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.</p>
 		<p>Some of the <strong>code</strong> in this project was written using LLMs. I'd estimate LLM generated code to be less than 10% of the code base, however I do want to say that it would've taken me a few more months to get to where it is without them. The ability to paste it the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful.</p>
 		<p>Thanks to all of my friends who helped me test both the website and the various champion configurations in game.</p>
 		<p>Thanks to Riot Games for not chronobreaking this project 🤞</p>
+
+		<h2>
+			q&a
+		</h2>
+		<dl>
+			<dt>ads and paywalling</dt>
+			<dd>I will try my best to keep the calculator and all of its features free (+ it's <a href="https://github.com/asasinmode/lolcalc" target="_blank">open source</a>). That said, hosting costs money and maintaining it takes a lot of my time and effort. Please consider <a href="#support">supporting the project</a></dd>
+		</dl>
 	</main>
 </template>
 
