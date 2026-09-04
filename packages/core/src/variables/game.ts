@@ -1056,7 +1056,7 @@ function calculateByCharLevelBreakpoints(
 						(rv.value as number) += bonusPerLevelAtAndAfter * (effectiveEnd + 1 - level);
 					}
 				} else {
-					console.warn(`[variables/game fn ${warnContext}] unknown mBreakpoints structure`, breakpoints);
+					console.warn(`[variables/game ${warnContext}] unknown mBreakpoints structure`, breakpoints);
 					rv.value = undefined;
 				}
 			}
@@ -1064,7 +1064,7 @@ function calculateByCharLevelBreakpoints(
 			if (CHAMPION_LEVEL.max >= level) {
 				const effectiveMaxEnd = nextLevel ? Math.min(CHAMPION_LEVEL.max, nextLevel - 1) : CHAMPION_LEVEL.max;
 				max += bonusPerLevelAtAndAfter === undefined
-					? additionalBonusAtThisLevel!
+					? (additionalBonusAtThisLevel ?? 0)
 					: (bonusPerLevelAtAndAfter * (effectiveMaxEnd + 1 - level));
 			}
 		}

@@ -1879,9 +1879,9 @@ export const CHAMPION_SPECIFICS = {
 					'{e88568f8}': [0],
 					'SiphonCurrentHealthDamage': [],
 					'MoveSpeedFromTarget': [],
-					'BonusAD': [],
-					'BonusRange': [],
-					'BonusLifeSteal': [],
+					'SoulsAD': [],
+					'SoulsRange': [],
+					'SoulsLifesteal': [],
 				},
 				calculate(self, target) {
 					return {
@@ -1894,13 +1894,13 @@ export const CHAMPION_SPECIFICS = {
 						'MoveSpeedFromTarget': {
 							value: 'TODO',
 						},
-						'BonusAD': {
+						'SoulsAD': {
 							value: 'TODO',
 						},
-						'BonusRange': {
+						'SoulsRange': {
 							value: 'TODO',
 						},
-						'BonusLifeSteal': {
+						'SoulsLifesteal': {
 							value: 'TODO',
 						},
 					};
@@ -1913,13 +1913,13 @@ export const CHAMPION_SPECIFICS = {
 					MoveSpeedFromTarget: {
 						isCustom: true,
 					},
-					BonusAD: {
+					SoulsAD: {
 						isCustom: true,
 					},
-					BonusRange: {
+					SoulsRange: {
 						isCustom: true,
 					},
-					BonusLifeSteal: {
+					SoulsLifesteal: {
 						isCustom: true,
 					},
 					BonusOnHitDamage: {
