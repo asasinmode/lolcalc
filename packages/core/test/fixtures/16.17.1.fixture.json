@@ -549,6 +549,60 @@
 				}
 			}
 		},
+		"2517": {
+			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste;attackdamage",
+			"stats": {
+				"FlatPhysicalDamageMod": 65,
+				"PercentOmnivampMod": 0.05,
+				"PercentTenacityMod": 0.2
+			},
+			"dataValues": {
+				"OmnivampOnTakedown": 0.15,
+				"OmnivampDuration": 8,
+				"TakedownWindow": 3
+			},
+			"stringCalculations": {
+				"HasteFromAD": {
+					"MeleeResult": "@HasteFromADMelee@",
+					"RangedResult": "@HasteFromADRanged@",
+					"DefaultResult": "@HasteFromADMelee@"
+				}
+			},
+			"itemCalculations": {
+				"HasteFromADRanged": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"__renamedVariables": {
+					"{87892572}": "HasteFromADRanged",
+					"{e4d9f16b}": "HasteFromADMelee"
+				},
+				"HasteFromADMelee": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.13,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3004": {
 			"searchString": "manamune;muramana;tear;damage;mana;cooldownreduction;onhit;abilityhaste;attackdamage",
 			"stats": {

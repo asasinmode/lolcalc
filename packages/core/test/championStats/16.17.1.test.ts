@@ -267,6 +267,46 @@ test('16.17 Jhin', async (t) => {
 			attackSpeed: 0.944,
 		}, damageSource);
 	});
+
+	await t.test('vanilla', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jhin', {
+			...sourceCommon,
+			items: vanillaBuildItems,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 591,
+		}, damageSource);
+	});
+
+	await t.test('bloodmail', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jhin', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.overlordsBloodmail],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 276,
+		}, damageSource, 'full hp');
+
+		damageSource.currentHealth.value = 805;
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 299,
+		}, damageSource, 'partial hp');
+	});
+
+	await t.test('bloodmail+, endless hunger, sterak', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jhin', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.steraksGage],
+			currentHealth: 1059,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 522,
+		}, damageSource);
+	});
 });
 
 // aphelios
