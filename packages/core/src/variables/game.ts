@@ -1090,6 +1090,9 @@ export const VARIABLE_CALCULATION_FNS = {
 				if (resolved?.calculatesFrom) {
 					addCalculatesFrom(rv.calculatesFrom, resolved.calculatesFrom);
 				}
+				if (resolved?.roundReplaced) {
+					rv.roundReplaced ??= resolved.roundReplaced;
+				}
 				if (resolved?.isPercentage) {
 					rv.isPercentage ||= resolved.isPercentage;
 				}
