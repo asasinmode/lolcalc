@@ -2325,6 +2325,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	}) => void>;
 	postTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		isRanged: IStatsCalculationResult['isRanged'];
+		adaptiveForceMeta: IAdaptiveForceStatRv;
 		totalStats: IStatsCalculationResult['total'];
 		runeShardStats: IStatsCalculationResult['runeShards'];
 		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];

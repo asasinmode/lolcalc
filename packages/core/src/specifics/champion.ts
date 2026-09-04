@@ -860,7 +860,7 @@ export const CHAMPION_SPECIFICS = {
 			postBonus: {
 				handler(self, { bonusStats }, { calculatedVariables }) {
 					if (self.internalData.value.isPassiveMSActive) {
-						const msPercent = championAbilityVariableValue('CritMoveSpeedPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { bonusAttackSpeedPercent: bonusStats.moveSpeed } } } } as DamageSource });
+						const msPercent = championAbilityVariableValue('CritMoveSpeedPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
 
 						if (typeof msPercent.value === 'number') {
 							calculatedVariables.totalBonusPercentMoveSpeed += msPercent.value;
@@ -871,7 +871,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { totalStats, championPassiveStats, dragonStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats, dragonStatMultipliers }, { calculatedVariables }) {
+				handler(self, { adaptiveForceMeta, totalStats, championPassiveStats, dragonStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats }, { calculatedVariables }) {
 					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
 
 					if (typeof adPercent.value !== 'number') {
@@ -879,29 +879,12 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					console.log('jhin', {
-						totalAd: totalStats.attackDamage,
-						totalBonusAS: totalStats.bonusAttackSpeedPercent,
-						totalCritChance: totalStats.critChance,
-						adPercent: adPercent.value,
-						dragonAdMultiplier: dragonStatMultipliers.attackDamage,
-						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
-					});
-
-					console.log('jhin mid quest debug', {
-						totalPreMultipliersAd: totalPreMultipliersStats.attackDamage,
-						bonusAd: bonusStats.attackDamage,
-						midQuestAd: calculatedVariables.midQuestAd,
-						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
-						dragonAdMultiplier: dragonStatMultipliers.attackDamage,
-					});
-
-					const passiveAd = totalPreMultipliersStats.attackDamage * adPercent.value;
+					/* need to add swiftmarch adaptive since it's not in `totalPreMultipliersStats` - it's added to `totalMultipliersStats` */
+					const passiveAd = (totalPreMultipliersStats.attackDamage + (calculatedVariables.swiftmarchAdaptive ?? 0) * adaptiveForceMeta[2]) * adPercent.value;
 
 					if (calculatedVariables.midQuestMultiplier) {
 						const preMultiplierBonusAd = bonusStats.attackDamage - (dragonStats.attackDamage ?? 0) - (calculatedVariables.midQuestAd ?? 0);
 						const midQuestAd = preMultiplierBonusAd * calculatedVariables.midQuestMultiplier * adPercent.value;
-						console.log('jhin midquestmultiplier if', { preMultiplierBonusAd, midQuestAd });
 
 						calculatedVariables.midQuestAd = (calculatedVariables.midQuestAd ?? 0) + midQuestAd;
 						totalMultipliersStats.attackDamage += midQuestAd;

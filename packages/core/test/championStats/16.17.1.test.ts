@@ -285,8 +285,7 @@ test('16.17 Jhin', async (t) => {
 		}, damageSource, 'partial hp');
 	});
 
-	await t.test('bloodmail+, endless hunger, sterak', { only: true }, async (t) => {
-		t.runOnly(true);
+	await t.test('bloodmail+, endless hunger, sterak', async (t) => {
 		const items: IItem[] = [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.steraksGage];
 		const damageSource = await setupDamageSource(fixture, 'Jhin', {
 			...sourceCommon,
@@ -311,13 +310,13 @@ test('16.17 Jhin', async (t) => {
 			}, damageSource);
 		});
 
-		await t.test('dragons, mid quest', { only: true }, async () => {
+		await t.test('dragons, mid quest', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Jhin', {
 				...sourceCommon,
 				items,
 				dragonStacks,
 				roleQuest: 'mid',
-				currentHealth: 1050,
+				currentHealth: 1060,
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -358,6 +357,21 @@ test('16.17 Jhin', async (t) => {
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				attackDamage: 657,
+			}, damageSource);
+		});
+
+		await t.test('dragons, mid quest, swiftmarch', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Jhin', {
+				...sourceCommon,
+				internalData: { isPassiveMSActive: 1 },
+				items: vanillaBuildItems.concat([ITEMS_BY_NAME.swiftmarch]),
+				dragonStacks,
+				roleQuest: 'mid',
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 692,
+				moveSpeed: 531,
 			}, damageSource);
 		});
 	});
