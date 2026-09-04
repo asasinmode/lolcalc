@@ -391,6 +391,8 @@ export function championAbilityVariableValue(
 				} else {
 					rv.roundReplaced ??= 2;
 				}
+			} else {
+				rv.roundReplaced ??= true;
 			}
 		}
 	}
