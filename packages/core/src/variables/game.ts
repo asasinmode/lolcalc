@@ -913,11 +913,13 @@ function variableExtendedEquals(
 				: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
 			}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
-	let statIconKey = meta?.scalesWithStatIcon;
+	let statIconKey: string | string[] | undefined = typeof meta?.scalesWithStatIcon === 'string'
+		? `%i:${STAT_ICON[meta.scalesWithStatIcon]}%`
+		: meta?.scalesWithStatIcon?.map(statIcon => `%i:${STAT_ICON[statIcon]}%`);
 
 	if (calculatesFrom?.length && calculatesFrom.some(part => part.stat !== 'const' || part.type)) {
 		calculatesFrom.sort((partA, partB) => (partB.stat === 'const' ? 1 : 0) - (partA.stat === 'const' ? 1 : 0));
-		let generatedStatIcon: IVariableMetaStatIcon[] | IVariableMetaStatIcon | undefined;
+		let generatedStatIcon: string | string[] | undefined;
 
 		const hasMeleeRangedValue = calculatesFrom.some(part => Array.isArray(part.value));
 		const isEqualsMeleeRanged = isMeleeRanged === true && hasMeleeRangedValue;
@@ -925,7 +927,9 @@ function variableExtendedEquals(
 		const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1 || (calculatesFrom.length > 1 && (hasMeleeRangedValue || (lastPart && lastPart.stat === 'const')));
 
 		const defaultEEPreferRangedValue = isMeleeRanged === 1;
-		generatedStatIcon = (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [calculatesFrom[0]!.stat] : undefined;
+		generatedStatIcon = calculatesFrom[0]!.iconKey
+			? [calculatesFrom[0]!.iconKey]
+			: (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [`%i:${STAT_ICON[calculatesFrom[0]!.stat]}%`] : undefined;
 		const rawGeneratedEE: [string, string] = [
 			calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, defaultEEPreferRangedValue, undefined, roundReplaced),
 			isEqualsMeleeRanged ? calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, true, undefined, roundReplaced) : '',
@@ -937,7 +941,10 @@ function variableExtendedEquals(
 			}
 			if (part.stat && part.stat !== 'const') {
 				generatedStatIcon ??= [];
-				generatedStatIcon.push(part.stat);
+				generatedStatIcon.push(`%i:${STAT_ICON[part.stat]}%`);
+			} else if (part.iconKey) {
+				generatedStatIcon ??= [];
+				generatedStatIcon.push(part.iconKey);
 			}
 		}
 
@@ -956,8 +963,8 @@ function variableExtendedEquals(
 
 	if (statIconKey || varIcon) {
 		const iconStr = (typeof statIconKey === 'string'
-			? statIconKey ? `%i:${STAT_ICON[statIconKey]}%` : ''
-			: options.isExtended ? '' : statIconKey?.map(icon => `%i:${STAT_ICON[icon]}%`).join('')) || varIcon || '';
+			? statIconKey
+			: options.isExtended ? '' : statIconKey?.join('')) || varIcon || '';
 
 		(extendedEquals && options.isExtended)
 			? metaSuffix = ` = (${extendedEquals}${iconStr})`
