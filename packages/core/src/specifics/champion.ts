@@ -907,6 +907,7 @@ export const CHAMPION_SPECIFICS = {
 						totalMultipliersStats.attackDamage += midQuestAd;
 						totalStats.attackDamage += midQuestAd;
 						bonusStats.attackDamage += midQuestAd;
+						calculatedVariables.bloodmailRetributionExcludedAd += midQuestAd;
 					}
 
 					championPassiveStats.attackDamage = passiveAd;

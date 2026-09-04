@@ -588,8 +588,8 @@ export function replaceGameVariables(
 			const isV2Number = typeof variable[1] === 'number';
 
 			const baseValue = [
-				isV1Number ? roundNumber(variable[0] as number * multiplier, roundReplaced) : variable[0],
-				isV2Number ? roundNumber(variable[1] as number * multiplier, roundReplaced) : variable[1],
+				isV1Number ? roundNumber(variable[0] as number * multiplier) : variable[0],
+				isV2Number ? roundNumber(variable[1] as number * multiplier) : variable[1],
 			] as [string | number, string | number];
 
 			if (modifyVariableFns) {
@@ -606,10 +606,10 @@ export function replaceGameVariables(
 			}
 
 			if (isV1Number) {
-				variable[0] = roundNumber(variable[0] as number * multiplier, roundReplaced);
+				variable[0] = roundNumber(variable[0] as number * multiplier);
 			}
 			if (isV2Number) {
-				variable[1] = roundNumber(variable[1] as number * multiplier, roundReplaced);
+				variable[1] = roundNumber(variable[1] as number * multiplier);
 			}
 
 			variables.set(variableName, {
@@ -626,17 +626,17 @@ export function replaceGameVariables(
 			return replaceWithName
 				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${nameReplacement}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
-					variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
-					variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
+					isV1Number ? roundNumber(variable[0] as number) : variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
+					isV2Number ? roundNumber(variable[1] as number) : variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 		}
 
-		const baseValue = roundNumber(variable * multiplier, roundReplaced);
+		const baseValue = roundNumber(variable * multiplier);
 
 		if (modifyVariableFns) {
 			variable = modifyVariableFns.reduce((acc, modify) => modify(acc, modifyMeta) as number, variable);
 		}
 
-		variable = roundNumber(variable * multiplier, roundReplaced);
+		variable = roundNumber(variable * multiplier);
 		variables.set(variableName, { baseValue, value: variable, meta, modifyMeta, isUninteresting, isPercentage, metaSuffix, actualName: actualVariableName });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
@@ -648,7 +648,7 @@ export function replaceGameVariables(
 
 		return `${iconPrefix}${tagWrapStart}${replaceWithName
 			? nameReplacement
-			: variable}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
+			: roundNumber(variable, roundReplaced)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 	});
 
 	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionParams.dynamicVariables);
