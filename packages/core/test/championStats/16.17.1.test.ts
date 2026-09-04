@@ -220,6 +220,21 @@ test('16.17 adaptive force', async (t) => {
 			abilityPower: 38,
 		}, damageSource);
 	});
+
+	await t.test('senna', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Senna', {
+			...sourceCommon,
+			level: 1,
+			items: [ITEMS_BY_NAME.ampTome],
+			internalData: { passiveStacks: 40, passiveStealTargetMS: 0 },
+		});
+
+		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 80,
+			abilityPower: 38,
+		}, damageSource);
+	});
 });
 
 test('16.17 Jhin', async (t) => {
