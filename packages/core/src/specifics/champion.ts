@@ -871,7 +871,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { totalStats, championPassiveStats, baseOnLevelStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats, dragonStatMultipliers }, { calculatedVariables }) {
+				handler(self, { totalStats, championPassiveStats, dragonStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats, dragonStatMultipliers }, { calculatedVariables }) {
 					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
 
 					if (typeof adPercent.value !== 'number') {
@@ -888,9 +888,29 @@ export const CHAMPION_SPECIFICS = {
 						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
 					});
 
+					console.log('jhin mid quest debug', {
+						totalPreMultipliersAd: totalPreMultipliersStats.attackDamage,
+						bonusAd: bonusStats.attackDamage,
+						midQuestAd: calculatedVariables.midQuestAd,
+						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
+						dragonAdMultiplier: dragonStatMultipliers.attackDamage,
+					});
+
 					const passiveAd = totalPreMultipliersStats.attackDamage * adPercent.value;
 
-					championPassiveStats.attackDamage = (championPassiveStats.attackDamage ?? 0) + passiveAd;
+					if (calculatedVariables.midQuestMultiplier) {
+						const preMultiplierBonusAd = bonusStats.attackDamage - (dragonStats.attackDamage ?? 0) - (calculatedVariables.midQuestAd ?? 0);
+						const midQuestAd = preMultiplierBonusAd * calculatedVariables.midQuestMultiplier * adPercent.value;
+						console.log('jhin midquestmultiplier if', { preMultiplierBonusAd, midQuestAd });
+
+						calculatedVariables.midQuestAd = (calculatedVariables.midQuestAd ?? 0) + midQuestAd;
+						totalMultipliersStats.attackDamage += midQuestAd;
+						totalStats.attackDamage += midQuestAd;
+						bonusStats.attackDamage += midQuestAd;
+					}
+
+					championPassiveStats.attackDamage = passiveAd;
+					totalMultipliersStats.attackDamage += passiveAd;
 					totalStats.attackDamage += passiveAd;
 					bonusStats.attackDamage += passiveAd;
 

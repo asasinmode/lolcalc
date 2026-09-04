@@ -234,8 +234,8 @@ test('16.17 Jhin', async (t) => {
 		},
 		items: [],
 	};
-
 	const vanillaBuildItems: IItem[] = [ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.ldr, ITEMS_BY_NAME.phantomDancer, ITEMS_BY_NAME.hubris];
+	const dragonStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Infernal'];
 
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', sourceCommon);
@@ -285,21 +285,48 @@ test('16.17 Jhin', async (t) => {
 		}, damageSource, 'partial hp');
 	});
 
-	await t.test('bloodmail+, endless hunger, sterak', { only: true }, async () => {
+	await t.test('bloodmail+, endless hunger, sterak', { only: true }, async (t) => {
+		t.runOnly(true);
+		const items: IItem[] = [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.steraksGage];
 		const damageSource = await setupDamageSource(fixture, 'Jhin', {
 			...sourceCommon,
-			items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.steraksGage],
+			items,
 			currentHealth: 1059,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 522,
 		}, damageSource);
+
+		await t.test('dragons', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Jhin', {
+				...sourceCommon,
+				items,
+				dragonStacks,
+				currentHealth: 1050,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 563,
+			}, damageSource);
+		});
+
+		await t.test('dragons, mid quest', { only: true }, async () => {
+			const damageSource = await setupDamageSource(fixture, 'Jhin', {
+				...sourceCommon,
+				items,
+				dragonStacks,
+				roleQuest: 'mid',
+				currentHealth: 1050,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 589,
+			}, damageSource);
+		});
 	});
 
-	const infernalStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Infernal'];
-
-	await t.test('vanilla', { only: true }, async (t) => {
+	await t.test('vanilla', async (t) => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', {
 			...sourceCommon,
 			items: vanillaBuildItems,
@@ -313,11 +340,24 @@ test('16.17 Jhin', async (t) => {
 			const damageSource = await setupDamageSource(fixture, 'Jhin', {
 				...sourceCommon,
 				items: vanillaBuildItems,
-				dragonStacks: infernalStacks,
+				dragonStacks,
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 				attackDamage: 629,
+			}, damageSource);
+		});
+
+		await t.test('dragons, mid quest', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Jhin', {
+				...sourceCommon,
+				items: vanillaBuildItems,
+				dragonStacks,
+				roleQuest: 'mid',
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 657,
 			}, damageSource);
 		});
 	});
