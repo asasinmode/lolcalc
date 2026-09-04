@@ -935,6 +935,106 @@
 				}
 			}
 		},
+		"Senna": {
+			"partype": "Mana",
+			"stats": {
+				"hp": 530,
+				"hpperlevel": 89,
+				"mp": 350,
+				"mpperlevel": 45,
+				"movespeed": 330,
+				"armor": 25,
+				"armorperlevel": 4,
+				"spellblock": 33,
+				"spellblockperlevel": 1.1,
+				"attackrange": 600,
+				"hpregen": 3.5,
+				"hpregenperlevel": 0.55,
+				"mpregen": 11.5,
+				"mpregenperlevel": 0.7,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 50,
+				"attackdamageperlevel": 0,
+				"attackspeedperlevel": 2.6,
+				"attackspeed": 0.625,
+				"attackspeedratio": 0.4
+			},
+			"abilities": {
+				"r": {
+					"maxLevel": 3,
+					"variants": [
+						{
+							"name": "Dawning Shadow",
+							"objectName": "SennaR",
+							"dataKey": "Characters/Senna/Spells/SennaRAbility/SennaR",
+							"image": "assets/characters/senna/hud/icons2d/senna_r.png",
+							"mana": [100, 100, 100, 100, 100, 100],
+							"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
+							"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.",
+							"tooltipExtendedBelowLine": "<rules>The shield's power scales with the amount of <keywordMajor>Mist</keywordMajor> Senna has collected.</rules>",
+							"extendedVariables": [
+								{
+									"name": "Damage",
+									"nameOverride": "spell_listtype_damage"
+								},
+								{
+									"name": "Shield",
+									"nameOverride": "spell_listtype_shield"
+								}
+							],
+							"dataValues": {
+								"Damage": [100, 250, 400, 550, 700, 850, 1000],
+								"Shield": [80, 120, 160, 200, 240, 280, 320],
+								"ShieldDuration": [3, 3, 3, 3, 3, 3, 3],
+								"PostCastAnimLock": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+								"DamageAPRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+								"ShieldAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+							},
+							"spellCalculations": {
+								"TotalDamage": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "Damage",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mDataValue": "DamageAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mCoefficient": 1.15,
+											"__type": "StatByCoefficientCalculationPart"
+										}
+									]
+								},
+								"TotalShield": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "Shield",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mDataValue": "ShieldAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										},
+										{
+											"mBuffName": "{e88568f8}",
+											"mIconKey": "%i:sennaScalingIcon%",
+											"mScalingTagKey": "font color='#0bf7de'",
+											"mCoefficient": 1.5,
+											"__type": "BuffCounterByCoefficientCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			}
+		},
 		"Sivir": {
 			"stats": {
 				"hp": 600,

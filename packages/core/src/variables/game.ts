@@ -768,9 +768,7 @@ export function addCalculatesFrom(
 ): ICalculatesFromPart[] | undefined {
 	for (let i = 0; i < source1.length; i++) {
 		to?.push({
-			stat: source1[i]!.stat,
-			type: source1[i]!.type,
-			isPercentage: source1[i]!.isPercentage,
+			...source1[i]!,
 			value: source2 ? [source1[i]!.value as number, source2[i]!.value as number] : source1[i]!.value,
 		});
 	}
@@ -847,8 +845,8 @@ export function calculatesFromPartExtendedEquals(
 	prependPlus = false,
 	roundReplaced?: number,
 ): string {
-	const tag = part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
-	const icon = part.iconKey ?? (insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '');
+	const tag = part.scalingTagAttrs ? 'span' : part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
+	const icon = insertIcon && (part.iconKey ?? (part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : ''));
 	const type = part.type === 'baseOnLevel' || part.type === 'base' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
 	const formattedValue = formatCalculatesFromPartValue(
 		Array.isArray(part.value)
@@ -860,11 +858,11 @@ export function calculatesFromPartExtendedEquals(
 	);
 
 	return `${
-		tag ? `<${tag}>` : ''
+		tag ? `<${tag}${part.scalingTagAttrs ? ` ${part.scalingTagAttrs}` : ''}>` : ''
 	}${
 		prependPlus ? '+ ' : ''
 	}${formattedValue}${type}${
-		icon ? `${type ? ' ' : ''}%i:${icon}%` : ''
+		icon ? `${type ? ' ' : ''}${part.iconKey ?? `%i:${icon}%`}` : ''
 	}${
 		tag ? `</${tag}>` : ''
 	}`;
@@ -924,7 +922,7 @@ function variableExtendedEquals(
 		const hasMeleeRangedValue = calculatesFrom.some(part => Array.isArray(part.value));
 		const isEqualsMeleeRanged = isMeleeRanged === true && hasMeleeRangedValue;
 		const lastPart = calculatesFrom.at(-1);
-		const insertIcon = calculatesFrom.filter(part => part.stat && part.stat !== 'const').length > 1 || (calculatesFrom.length > 1 && (hasMeleeRangedValue || (lastPart && lastPart.stat === 'const')));
+		const insertIcon = calculatesFrom.filter(part => (part.stat && part.stat !== 'const') || part.iconKey).length > 1 || (calculatesFrom.length > 1 && (hasMeleeRangedValue || (lastPart && lastPart.stat === 'const')));
 
 		const defaultEEPreferRangedValue = isMeleeRanged === 1;
 		generatedStatIcon = calculatesFrom[0]!.iconKey

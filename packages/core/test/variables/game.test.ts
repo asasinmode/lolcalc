@@ -190,6 +190,10 @@ test('extended equals', async (t) => {
 		const jhin = await setupDamageSource(fixture, 'Jhin');
 		const jhinPassive = extendedChampionAbilityDescription(jhin, 'tooltip', 'passive');
 		assertMetaSuffix('TotalADPercent', '<scalelevel>4% - 44%%i:scalelevel%</scalelevel> <scalecrit>+ 35%%i:scalecrit%</scalecrit> <attackspeed>+ 30% bonus %i:scaleas%</attackspeed>', jhinPassive);
+
+		const senna = await setupDamageSource(fixture, 'Senna');
+		const sennaPassive = extendedChampionAbilityDescription(senna, 'tooltip', 'r');
+		assertMetaSuffix('TotalShield', '<const>120</const> <scaleap>+ 50%%i:scaleap%</scaleap> <span font color=\'#0bf7de\'>+ 150%%i:sennaScalingIcon%</span>', sennaPassive);
 	});
 });
 
