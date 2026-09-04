@@ -888,7 +888,7 @@ export const CHAMPION_SPECIFICS = {
 						midQuestMultiplier: calculatedVariables.midQuestMultiplier,
 					});
 
-					const passiveAd = totalStats.attackDamage * adPercent.value;
+					const passiveAd = totalPreMultipliersStats.attackDamage * adPercent.value;
 
 					championPassiveStats.attackDamage = (championPassiveStats.attackDamage ?? 0) + passiveAd;
 					totalStats.attackDamage += passiveAd;

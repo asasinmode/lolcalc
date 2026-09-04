@@ -1,6 +1,6 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
-import type { IItem } from '@lolcalc/data/types.js';
+import type { IDragonName, IItem } from '@lolcalc/data/types.js';
 import type { IChampionStatName } from '@lolcalc/shared';
 import assert from 'node:assert';
 import test from 'node:test';
@@ -268,17 +268,6 @@ test('16.17 Jhin', async (t) => {
 		}, damageSource);
 	});
 
-	await t.test('vanilla', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Jhin', {
-			...sourceCommon,
-			items: vanillaBuildItems,
-		});
-
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 591,
-		}, damageSource);
-	});
-
 	await t.test('bloodmail', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', {
 			...sourceCommon,
@@ -306,6 +295,31 @@ test('16.17 Jhin', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 522,
 		}, damageSource);
+	});
+
+	const infernalStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Infernal'];
+
+	await t.test('vanilla', { only: true }, async (t) => {
+		const damageSource = await setupDamageSource(fixture, 'Jhin', {
+			...sourceCommon,
+			items: vanillaBuildItems,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 591,
+		}, damageSource);
+
+		await t.test('dragons', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Jhin', {
+				...sourceCommon,
+				items: vanillaBuildItems,
+				dragonStacks: infernalStacks,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 629,
+			}, damageSource);
+		});
 	});
 });
 
