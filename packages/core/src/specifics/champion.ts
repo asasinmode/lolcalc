@@ -1869,6 +1869,7 @@ export const CHAMPION_SPECIFICS = {
 		setupData(self) {
 			return {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
+				passiveStealTargetMS: clamp(0, self.internalData.value.passiveStealTargetMS ?? 0, 1),
 			};
 		},
 	},
@@ -2556,7 +2557,7 @@ export interface IChampionInternalDataMap {
 	Rumble: { isOverheated: number };
 	Samira: { passiveStacks: number };
 	Sejuani: { isPassiveActive: number };
-	Senna: { passiveStacks: number };
+	Senna: { passiveStacks: number; passiveStealTargetMS: number };
 	Seraphine: { passiveStacks: number };
 	Shyvana: { passiveStacks: number };
 	Singed: { passiveStacks: number };

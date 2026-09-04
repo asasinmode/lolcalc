@@ -133,8 +133,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rammus', 'w', 0), 'defensiveCurl', 'Defensive Curl'),
 	},
 	Rell: {
-		// TODO add tooltip about in results using total resists
-		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS),
+		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS, undefined, {
+			tooltip: 'the stolen stats will be shown in the results table (needs target)',
+		}),
 	},
 	Rengar: {
 		extras: [
@@ -154,7 +155,10 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Sejuani', 'passive', 0), 'isPassiveActive', 'is Fury of the North active', false),
 	},
 	Senna: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStacks', 'Absolution stacks'),
+		extras: [
+			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStacks', 'Absolution stacks'),
+			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStealTargetMS', 'attack grant target\'s move speed', false, undefined, 'the move speed will be shown in the results table (needs target)'),
+		],
 	},
 	Seraphine: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Seraphine', 'passive', 0), 'passiveStacks', 'Notes collected', 0, CHAMPION_SPECIFICS.Seraphine.MAX_PASSIVE_STACKS),

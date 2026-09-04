@@ -34,6 +34,8 @@ export function championDamage() {
 	// ldr & custom variable from it
 	// champion passives - irelia, warwick, volibear, ashe
 	// amumu passive
+	// jhin passive
+	// senna passive
 }
 
 /** TODO basic aa calc? not sure about the interface yet */

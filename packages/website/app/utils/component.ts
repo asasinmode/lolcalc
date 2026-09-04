@@ -22,10 +22,12 @@ export async function numberExtra<T extends IGameAbilityId>(
 		onUpdate,
 		effectControlsProps,
 		selectEffectSourceProps,
+		tooltip,
 	}: {
 		onUpdate?: IExtraOnValueUpdate;
 		effectControlsProps?: IEffectControlsProps<any>;
 		selectEffectSourceProps?: ISelectEffectSourceProps;
+		tooltip?: string;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
@@ -91,6 +93,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			min,
 			'max': toValue(localMax),
 			'step': toValue(localStep),
+			tooltip,
 			usedNumberInput,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
