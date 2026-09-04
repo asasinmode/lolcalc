@@ -848,7 +848,7 @@ export function calculatesFromPartExtendedEquals(
 	roundReplaced?: number,
 ): string {
 	const tag = part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
-	const icon = insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '';
+	const icon = part.iconKey ?? (insertIcon && part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : '');
 	const type = part.type === 'baseOnLevel' || part.type === 'base' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
 	const formattedValue = formatCalculatesFromPartValue(
 		Array.isArray(part.value)
@@ -1554,6 +1554,30 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
+	BuffCounterByCoefficientCalculationPart(variable: IGameVariablesByType['BuffCounterByCoefficientCalculationPart'], _whole, meta) {
+		const { mBuffName, mCoefficient } = variable;
+		const rv: IVariableValueResult = {
+			calculatesFrom: [],
+		};
+
+		meta.accessedVariables?.add(mBuffName);
+
+		const buff = meta.variableValueFn(mBuffName, meta.variableValueParams);
+		if (typeof buff.value === 'number') {
+			rv.value = buff.value * mCoefficient;
+		} else {
+			rv.value = 0;
+		}
+
+		rv.calculatesFrom!.push({
+			value: mCoefficient,
+			isPercentage: true,
+			iconKey: variable.mIconKey,
+			scalingTagAttrs: variable.mScalingTagKey,
+		});
+
+		return rv;
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 interface IVariableCalculationFnMeta {
@@ -1671,6 +1695,16 @@ interface IGameVariablesByType {
 		/** ability variable's `calculate` should return a variable with the name of the value in this property */
 		mBuffName: string;
 		mDataValue: string;
+	};
+	/** same as `BuffCounterByNamedDataValueCalculationPart` but by coefficient */
+	'BuffCounterByCoefficientCalculationPart': {
+		/** ability variable's `calculate` should return a variable with the name of the value in this property */
+		mBuffName: string;
+		mCoefficient: number;
+		/** icon like `%i:sennaScalingIcon%` */
+		mIconKey?: string;
+		/** seems to be custom styles applied to the calculates from part, like `font color='#0bf7de'` */
+		mScalingTagKey?: string;
 	};
 }
 

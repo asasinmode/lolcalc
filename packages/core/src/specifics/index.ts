@@ -143,6 +143,10 @@ export interface ICalculatesFromPart {
 	/** when array, expected to be for melee/ranged values */
 	value: number | { min: number; max: number } | [number, number] | [{ min: number; max: number }, { min: number; max: number }];
 	isPercentage?: boolean;
+	/** custom icon to be used instead of the `stat` one */
+	iconKey?: string;
+	/** html attributes to be applied to the part's tag */
+	scalingTagAttrs?: string;
 }
 
 export interface IVariableValueResult<T = IConcreteVariableValue | [IConcreteVariableValue | undefined, IConcreteVariableValue | undefined]> {
