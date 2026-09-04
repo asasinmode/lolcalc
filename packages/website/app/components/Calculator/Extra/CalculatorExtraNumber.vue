@@ -10,6 +10,7 @@ withDefaults(defineProps<{
 	max?: number;
 	step?: number;
 	disabled?: boolean;
+	tooltip?: string;
 }>(), {
 	min: 0,
 });
@@ -30,6 +31,7 @@ const value = defineModel<number>();
 		>
 		<label :for="`xtrnmbr-${idSuffix}`">
 			{{ label }}
+			<InfoTooltip id-prefix="xtrnmbr" :id-suffix :tooltip />
 		</label>
 		<slot />
 		<input
