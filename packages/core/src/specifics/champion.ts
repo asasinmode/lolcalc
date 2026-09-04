@@ -826,16 +826,26 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		passive: {
-			variables: defineChampionVariables()({
+			variables: defineChampionVariables<'Jhin', typeof IJhin, 'passive'>()({
 				known: {
 					TotalADPercent: [],
+					BonusAD: [],
 				},
 				calculate(self) {
 					const { total, championPassive } = self.stats.value;
 					return {
 						TotalADPercent: championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: total.attackDamage, critChance: total.critChance }, bonus: { bonusAttackSpeedPercent: (total.bonusAttackSpeedPercent - championPassive.bonusAttackSpeedPercent!) } } } } as DamageSource }),
+						BonusAD: {
+							value: championPassive.attackDamage,
+						},
 					};
 				},
+				meta: {
+					BonusAD: {
+						isCustom: true,
+					},
+				},
+				uninteresting: ['MaxAmmo', 'CritReductionPercent', 'HasteDuration'],
 			}),
 		},
 		calculateHooks: {
