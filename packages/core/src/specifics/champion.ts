@@ -28,6 +28,7 @@ import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
 import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
 import type IRell from '@lolcalc/data/files/champion/Rell.json';
 import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
+import type ISenna from '@lolcalc/data/files/champion/Senna.json';
 import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
 import type IShyvana from '@lolcalc/data/files/champion/Shyvana.json';
 import type ISivir from '@lolcalc/data/files/champion/Sivir.json';
@@ -1871,6 +1872,65 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: Math.max(0, Math.round(self.internalData.value.passiveStacks ?? 0)),
 				passiveStealTargetMS: clamp(0, self.internalData.value.passiveStealTargetMS ?? 0, 1),
 			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Senna', typeof ISenna, 'passive'>()({
+				known: {
+					'{e88568f8}': [0],
+					'CurrentHealthDamage': [],
+					'MoveSpeedFromTarget': [],
+					'BonusAD': [],
+					'BonusRange': [],
+					'BonusLifeSteal': [],
+				},
+				calculate(self) {
+					return {
+						'{e88568f8}': {
+							value: self.internalData.value.passiveStacks,
+						},
+						'CurrentHealthDamage': {
+							value: 'TODO',
+						},
+						'MoveSpeedFromTarget': {
+							value: 'TODO',
+						},
+						'BonusAD': {
+							value: 'TODO',
+						},
+						'BonusRange': {
+							value: 'TODO',
+						},
+						'BonusLifeSteal': {
+							value: 'TODO',
+						},
+					};
+				},
+				meta: {
+					CurrentHealthDamage: {
+						type: VariableType.physical,
+						isCustom: true,
+					},
+					MoveSpeedFromTarget: {
+						isCustom: true,
+					},
+					BonusAD: {
+						isCustom: true,
+					},
+					BonusRange: {
+						isCustom: true,
+					},
+					BonusLifeSteal: {
+						isCustom: true,
+					},
+					BonusOnHitDamage: {
+						type: VariableType.physical,
+					},
+				},
+				uninteresting: ['ADPerStack', 'StacksForBonus', 'BonusRange', 'BonusCritChance', 'CritToLifestealConversionPercent'],
+			}),
+		},
+		calculateHooks: {
+
 		},
 	},
 	Seraphine: {
