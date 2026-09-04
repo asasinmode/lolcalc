@@ -384,7 +384,7 @@ export function championAbilityVariableValue(
 			}
 
 			if (abilityVariant.spellCalculations[variableName].mPrecision > 0) {
-				rv.roundReplaced ??= abilityVariant.spellCalculations[variableName].mPrecision;
+				rv.roundReplaced = abilityVariant.spellCalculations[variableName].mPrecision;
 			} else if (abilityVariant.spellCalculations[variableName].mPrecision === -1) {
 				if (rv.roundReplaced === true) {
 					rv.roundReplaced = 2;
@@ -549,6 +549,8 @@ export function replaceGameVariables(
 			multiplier = variableMultiplier;
 		}
 
+		roundReplaced = typeof roundReplaced === 'number' ? roundReplaced : roundReplaced ? 0 : undefined;
+
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
 			const accessedVariables = variableValueFunctionParams.accessedVariables?.get(variableName);
@@ -586,8 +588,8 @@ export function replaceGameVariables(
 			const isV2Number = typeof variable[1] === 'number';
 
 			const baseValue = [
-				isV1Number ? roundNumber(variable[0] as number * multiplier) : variable[0],
-				isV2Number ? roundNumber(variable[1] as number * multiplier) : variable[1],
+				isV1Number ? roundNumber(variable[0] as number * multiplier, roundReplaced) : variable[0],
+				isV2Number ? roundNumber(variable[1] as number * multiplier, roundReplaced) : variable[1],
 			] as [string | number, string | number];
 
 			if (modifyVariableFns) {
@@ -604,10 +606,10 @@ export function replaceGameVariables(
 			}
 
 			if (isV1Number) {
-				variable[0] = roundNumber(variable[0] as number * multiplier);
+				variable[0] = roundNumber(variable[0] as number * multiplier, roundReplaced);
 			}
 			if (isV2Number) {
-				variable[1] = roundNumber(variable[1] as number * multiplier);
+				variable[1] = roundNumber(variable[1] as number * multiplier, roundReplaced);
 			}
 
 			variables.set(variableName, {
@@ -624,29 +626,17 @@ export function replaceGameVariables(
 			return replaceWithName
 				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${nameReplacement}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
 				: `%i:meleeactive% ${tagWrapStart}${
-					isV1Number
-						? (typeof roundReplaced === 'number'
-								? roundNumber(variable[0] as number, roundReplaced)
-								: roundReplaced
-									? Math.round(variable[0] as number)
-									: variable[0])
-						: variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
-					isV2Number
-						? (typeof roundReplaced === 'number'
-								? roundNumber(variable[1] as number, roundReplaced)
-								: roundReplaced
-									? Math.round(variable[1] as number)
-									: variable[1])
-						: variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
+					variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
+					variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 		}
 
-		const baseValue = roundNumber(variable * multiplier);
+		const baseValue = roundNumber(variable * multiplier, roundReplaced);
 
 		if (modifyVariableFns) {
 			variable = modifyVariableFns.reduce((acc, modify) => modify(acc, modifyMeta) as number, variable);
 		}
 
-		variable = roundNumber(variable * multiplier);
+		variable = roundNumber(variable * multiplier, roundReplaced);
 		variables.set(variableName, { baseValue, value: variable, meta, modifyMeta, isUninteresting, isPercentage, metaSuffix, actualName: actualVariableName });
 
 		const meleeRangedIconPath = isMeleeRanged === 0
@@ -658,11 +648,7 @@ export function replaceGameVariables(
 
 		return `${iconPrefix}${tagWrapStart}${replaceWithName
 			? nameReplacement
-			: (typeof roundReplaced === 'number'
-					? roundNumber(variable, roundReplaced)
-					: roundReplaced
-						? Math.round(variable)
-						: variable)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
+			: variable}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 	});
 
 	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionParams.dynamicVariables);
@@ -1101,9 +1087,6 @@ export const VARIABLE_CALCULATION_FNS = {
 			const resolveFn = variableResolveFn(part);
 			if (resolveFn) {
 				const resolved = resolveFn(part, whole, meta);
-				if (resolved?.roundReplaced) {
-					rv.roundReplaced = resolved.roundReplaced;
-				}
 				if (resolved?.calculatesFrom) {
 					addCalculatesFrom(rv.calculatesFrom, resolved.calculatesFrom);
 				}
@@ -1121,7 +1104,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (variable.mDisplayAsPercent) {
 			rv.isPercentage = true;
 			rv.multiplier = 100;
-			rv.roundReplaced = 2;
+			rv.roundReplaced = true;
 			if (!hasMMultiplier) {
 				for (const part of rv.calculatesFrom!) {
 					(part.stat === 'const') && !part.isPercentage && multiplyCalculatePartValues(part, 100);
@@ -1156,7 +1139,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			} else {
 				rv.value *= multiplier;
 				for (const part of rv.calculatesFrom!) {
-				/* TODO not sure if that's right but at the moment this covers actualizer const not being affected by its mMultiplier but Sivir base damage being */
+					/* TODO not sure if that's right but at the moment this covers actualizer const not being affected by its mMultiplier but Sivir base damage being */
 					if (part.stat && (!variable.mDisplayAsPercent || part.stat !== 'const')) {
 						multiplyCalculatePartValues(part, multiplier);
 					}
