@@ -1613,18 +1613,18 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Rell', typeof IRell, 'passive'>()({
 				known: {
 					ResistsStealPercent: [],
-					ArmorStolen: [],
-					MagicResistStolen: [],
+					StolenArmor: [],
+					StolenMagicResist: [],
 				},
 				calculate(self, target) {
 					return {
 						ResistsStealPercent: {
 							value: self.effectsOntoTargetVars.value.rellPResistsStealPercent ?? 0,
 						},
-						ArmorStolen: {
+						StolenArmor: {
 							value: (self.internalData.value.passiveStacksOnTarget && target?.stats.value.effectVars.rellPArmorStolen) ?? 0,
 						},
-						MagicResistStolen: {
+						StolenMagicResist: {
 							value: (self.internalData.value.passiveStacksOnTarget && target?.stats.value.effectVars.rellPMRStolen) ?? 0,
 						},
 					};
@@ -1638,10 +1638,10 @@ export const CHAMPION_SPECIFICS = {
 						resultsIsPercentage: true,
 						resultsMultiplier: 100,
 					},
-					ArmorStolen: {
+					StolenArmor: {
 						isCustom: true,
 					},
-					MagicResistStolen: {
+					StolenMagicResist: {
 						isCustom: true,
 					},
 				},
