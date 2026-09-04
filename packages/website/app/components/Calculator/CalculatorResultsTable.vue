@@ -616,7 +616,7 @@ async function addResultsSection(
 }
 
 async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): Promise<IDamageResultTableSection['rows']> {
-	const rows: IDamageResultTableSection['rows'] = await Promise.all(variables
+	let rows: IDamageResultTableSection['rows'] = await Promise.all(variables
 		.entries()
 		.filter(entry => !entry[1].isUninteresting)
 		.map(async (entry): Promise<IDamageResultTableSection['rows'][number]> => ({
@@ -626,11 +626,15 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 			additionalInfo: entry[1].meta?.additionalInfo && await simpleDescriptionFormatting(entry[1].meta?.additionalInfo),
 		})));
 
-	return markRaw(rows.concat(unknownVariables.map(([rawName]) => ({
+	rows = rows.concat(unknownVariables.map(([rawName]) => ({
 		id: rawName,
 		name: rawName,
 		isUnknown: true,
-	}))));
+	})));
+
+	rows.sort((a, _b) => a.isCustom ? 1 : 0);
+
+	return markRaw(rows);
 }
 
 function removeResultsSection(index: number) {

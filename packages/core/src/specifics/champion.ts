@@ -1877,18 +1877,18 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Senna', typeof ISenna, 'passive'>()({
 				known: {
 					'{e88568f8}': [0],
-					'CurrentHealthDamage': [],
+					'SiphonCurrentHealthDamage': [],
 					'MoveSpeedFromTarget': [],
 					'BonusAD': [],
 					'BonusRange': [],
 					'BonusLifeSteal': [],
 				},
-				calculate(self) {
+				calculate(self, target) {
 					return {
 						'{e88568f8}': {
 							value: self.internalData.value.passiveStacks,
 						},
-						'CurrentHealthDamage': {
+						'SiphonCurrentHealthDamage': {
 							value: 'TODO',
 						},
 						'MoveSpeedFromTarget': {
@@ -1906,7 +1906,7 @@ export const CHAMPION_SPECIFICS = {
 					};
 				},
 				meta: {
-					CurrentHealthDamage: {
+					SiphonCurrentHealthDamage: {
 						type: VariableType.physical,
 						isCustom: true,
 					},
