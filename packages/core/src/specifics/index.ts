@@ -317,6 +317,14 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVari
 		const effectiveResists = Math.max(Math.min(armor, 0), (armor * (1 - percentArmorPen)) - lethality);
 		return value / (1 + effectiveResists / 100);
 	},
+	[VariableType.adaptive](value, meta, self, damageTarget) {
+		const { attackDamage, abilityPower } = self.stats.value.bonus;
+		return (GLOBAL_MODIFY_VARIABLE_FNS[
+			attackDamage === abilityPower
+				? self.stats.value.meta.adaptiveForceStat === 'attackDamage' ? 'physical' : 'magic'
+				: attackDamage > abilityPower ? 'physical' : 'magic'
+		])!(value, meta, self, damageTarget);
+	},
 };
 
 export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [VariableType, IGlobalModifyVariableFunction][];

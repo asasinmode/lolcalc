@@ -251,6 +251,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] explicit calculation formulas you can look at
 - [ ] [rune paths](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
   - [ ] choose shield source to get shield bash value for
+  - [ ] comet & electrocute [adaptive damage](https://wiki.leagueoflegends.com/en-us/Adaptive_force#Adaptive_damage)
   - [ ] components for stuff like manaflow band or precision legends for setting values
   - [ ] results section, hover tooltip, extract variables
 - [ ] overriding stats like target dummy
