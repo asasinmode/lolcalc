@@ -275,6 +275,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalPreMultipliersStats.tenacity = bonusStats.tenacity;
 	totalPreMultipliersStats.slowResist = bonusStats.slowResist;
 
+	if (source.calculateStatsHooks.all.value.postBonus) {
+		for (const hook of source.calculateStatsHooks.all.value.postBonus) {
+			hook(source, { bonusStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+		}
+	}
+
 	{ /* ms calc */
 		debuffs.appliedSlow = Math.min(1, Math.max(0, ...debuffs.percentageMSSlow) * Math.max(0, 1 - totalPreMultipliersStats.slowResist));
 		debuffs.appliedFlatSlow = debuffs.flatMSSlow.reduce((acc, curr) => acc + curr, 0);
