@@ -157,7 +157,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Senna: {
 		extras: [
 			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStacks', 'Absolution stacks'),
-			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStealTargetMS', 'attack grant target\'s move speed', false, undefined, 'the move speed will be shown in the results table (needs target)'),
+			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStealTargetMS', 'grant % of attacked target\'s move speed', false, undefined, 'the move speed will be shown in the results table (needs target)'),
 		],
 	},
 	Seraphine: {

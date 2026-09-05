@@ -1915,7 +1915,7 @@ export const CHAMPION_SPECIFICS = {
 							value: SiphonCurrentHealthDamage,
 						},
 						'MoveSpeedFromTarget': {
-							value: 'TODO',
+							value: self.stats.value.championPassive.moveSpeed ?? 0,
 						},
 						'SoulsAD': {
 							value: 'TODO',
@@ -1965,6 +1965,7 @@ export const CHAMPION_SPECIFICS = {
 
 					const critDamageMod = championAbilityVariableValue('CritDamageMod', params);
 					if (typeof critDamageMod.value === 'number') {
+						// TODO on patch 16.17 seems to actually be 0.75, revisit when calculating aa dmg
 						calculatedVariables.critMultiplierMod = critDamageMod.value;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate crit damage multiplier', critDamageMod);
@@ -1998,6 +1999,15 @@ export const CHAMPION_SPECIFICS = {
 						championPassiveStats.attackDamage = adPerStack.value * self.internalData.value.passiveStacks;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive ad per stack', adPerStack);
+					}
+
+					if (self.internalData.value.passiveStealTargetMS && self.calculationDamageTarget.value) {
+						const msSteal = championAbilityVariableValue('MSSteal', params);
+						if (typeof msSteal.value === 'number') {
+							championPassiveStats.moveSpeed = msSteal.value * self.calculationDamageTarget.value.stats.value.total.moveSpeed;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive ms steal', msSteal);
+						}
 					}
 				},
 			},
