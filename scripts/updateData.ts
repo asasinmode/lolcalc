@@ -1,5 +1,3 @@
-// todo 16.17 update needs https://github.com/CommunityDragon/CDTB/pull/120 ?
-// not present on newest version https://raw.communitydragon.org/16.15/game/clientstates/gameplay/ux/lol/playerstats.cdtb.json
 import type { ISpecificVariables } from '@lolcalc/core/specifics';
 import type { IChampionAbilitySpecific, IChampionAbilityVariantSpecific, IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
 import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
@@ -106,7 +104,7 @@ if (!championData || championData?.version !== latestVersion) {
 			hpperlevel: 0,
 			mp: 500,
 			mpperlevel: 0,
-			movespeed: 0,
+			movespeed: 370,
 			armor: 0,
 			armorperlevel: 0,
 			spellblock: 0,
@@ -121,8 +119,8 @@ if (!championData || championData?.version !== latestVersion) {
 			attackdamage: 0,
 			attackdamageperlevel: 0,
 			attackspeedperlevel: 0,
-			attackspeed: 0,
-			attackspeedratio: 0,
+			attackspeed: 0.658,
+			attackspeedratio: 0.658,
 		},
 		abilities: {
 			q: {
@@ -458,7 +456,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			if ('mMaxGroupOwnable' in groupObject) {
 				if (groupObject.mMaxGroupOwnable !== 1) {
 					/* possibly should do something else about it, but it appeared only in patch 26.17, I'm guessing due to aram mayhem getting an augment that lets you builds 3 hydras */
-					if(group !== '{3541a6d4}'){
+					if (group !== '{3541a6d4}') {
 						console.warn('[itemData item groups] detected a group with mMaxGroupOwnable not 1', { id: item.id, name: item.name, group }, groupObject);
 					}
 					return false;

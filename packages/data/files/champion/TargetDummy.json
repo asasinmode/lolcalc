@@ -8,7 +8,7 @@
 		"hpperlevel": 0,
 		"mp": 500,
 		"mpperlevel": 0,
-		"movespeed": 0,
+		"movespeed": 370,
 		"armor": 0,
 		"armorperlevel": 0,
 		"spellblock": 0,
@@ -23,8 +23,8 @@
 		"attackdamage": 0,
 		"attackdamageperlevel": 0,
 		"attackspeedperlevel": 0,
-		"attackspeed": 0,
-		"attackspeedratio": 0
+		"attackspeed": 0.658,
+		"attackspeedratio": 0.658
 	},
 	"abilities": {
 		"q": {
