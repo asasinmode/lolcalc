@@ -1983,6 +1983,20 @@ export const CHAMPION_SPECIFICS = {
 					}
 				},
 			},
+			onTotalPreMultipliers: {
+				handler(self, { bonusStats, totalPreMultipliersStats, championPassiveStats }, { calculatedVariables }) {
+					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+
+					const excessCritToLifesteal = championAbilityVariableValue('CritToLifestealConversionPercent', params);
+					if (typeof excessCritToLifesteal.value === 'number') {
+						championPassiveStats.lifeSteal = excessCritToLifesteal.value * Math.max(0, bonusStats.critChance - 1);
+						bonusStats.lifeSteal += championPassiveStats.lifeSteal;
+						totalPreMultipliersStats.lifeSteal += championPassiveStats.lifeSteal;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive ad per stack', excessCritToLifesteal);
+					}
+				},
+			},
 		},
 	},
 	Seraphine: {

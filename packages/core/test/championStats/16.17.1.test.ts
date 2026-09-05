@@ -451,6 +451,20 @@ test('16.17 Senna', async (t) => {
 			attackRange: 640,
 		}, damageSource);
 	});
+
+	await t.test('ie, ldr, collector, hexoptics', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Senna', {
+			...sourceCommon,
+			items,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 306,
+			critChance: 100,
+			attackRange: 640,
+			lifeSteal: 7,
+		}, damageSource);
+	});
 });
 
 // aphelios

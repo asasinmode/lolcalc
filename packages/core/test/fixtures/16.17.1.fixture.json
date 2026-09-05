@@ -752,6 +752,20 @@
 				}
 			}
 		},
+		"2523": {
+			"searchString": "hexopticsc;snowbow;damage;criticalstrike;criticalstrikechance;attackdamage",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 55
+			},
+			"dataValues": {
+				"ExtraRange": 100,
+				"TakedownWindow": 3,
+				"Duration": 8,
+				"MaxRange": 500,
+				"MaxDamageAmp": 0.1
+			}
+		},
 		"3004": {
 			"searchString": "manamune;muramana;tear;damage;mana;cooldownreduction;onhit;abilityhaste;attackdamage",
 			"stats": {
@@ -1251,6 +1265,19 @@
 				"EternityMaxHealPerCast": 20,
 				"EternityCDPerCast": 1,
 				"SecondsPerStack": 60
+			}
+		},
+		"6676": {
+			"searchString": "thecollector;deathblade;lethality;gun;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50,
+				"PhysicalLethality": 10
+			},
+			"dataValues": {
+				"LethalityAmount": 10,
+				"ExecuteThreshold": 0.05,
+				"GoldAmount": 25
 			}
 		},
 		"6697": {
