@@ -310,6 +310,8 @@ export interface IStatsCalculationMiscDebug {
 	vladimirPassiveAPHPBase?: number;
 	/** total ap vladimir passive starts hp calculations off of */
 	vladimirPassiveHPAPBase?: number;
+	/** Math.floor(stacks / stacksForBonus) */
+	sennaPassiveStacksStep?: number;
 }
 
 /** variables of effects applied onto the damage target */

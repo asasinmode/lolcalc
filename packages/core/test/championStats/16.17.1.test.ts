@@ -33,7 +33,9 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.manamune, ITEMS_BY_NAME.ampTome, ITEMS_BY_NAME.ampTome],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 	});
 
 	await t.test('seraph', async () => {
@@ -42,7 +44,9 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.longSword],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
 	});
 
 	await t.test('rabadon', async () => {
@@ -51,7 +55,9 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.longSword, ITEMS_BY_NAME.longSword],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 	});
 
 	await t.test('dark seal', async () => {
@@ -61,7 +67,9 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { glory: 10 } satisfies IInternalItemDataOf<'darkSeal'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 	});
 
 	await t.test('mejai', async () => {
@@ -71,7 +79,9 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { glory: 25 } satisfies IInternalItemDataOf<'mejai'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 	});
 
 	await t.test('bloodmail tyranny', async () => {
@@ -83,7 +93,9 @@ test('16.17 adaptive force', async (t) => {
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
 	});
 
 	await t.test('bloodmail retribution', async () => {
@@ -96,7 +108,9 @@ test('16.17 adaptive force', async (t) => {
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
 	});
 
 	await t.test('sterak', async () => {
@@ -105,7 +119,9 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.ampTome],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
 	});
 
 	await t.test('staff of flowing water', async () => {
@@ -115,9 +131,12 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { rapids: 1 } satisfies IInternalItemDataOf<'staffOfFlowingWater'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'attackDamage' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
 	});
 
+	/* passive doesn't count but rabadon passive from it does */
 	await t.test('staff of flowing water, rabadon', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Lulu', {
 			...sourceCommon,
@@ -125,7 +144,9 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { rapids: 1 } satisfies IInternalItemDataOf<'staffOfFlowingWater'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 	});
 
 	await t.test('roa', async () => {
@@ -135,7 +156,9 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { eternity: 10 } satisfies IInternalItemDataOf<'roa'>,
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 	});
 
 	await t.test('dawncore', async () => {
@@ -144,7 +167,9 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.dawncore, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.pickaxe],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 	});
 
 	/* passive doesn't count but rabadon passive from it does */
@@ -155,7 +180,9 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { passiveStacks: 50 },
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 227,
 			abilityPower: 257,
@@ -169,7 +196,9 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { isChampionAtMaxBleed: 1 },
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 94,
 			abilityPower: 38,
@@ -185,7 +214,9 @@ test('16.17 adaptive force', async (t) => {
 			],
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 82,
 			abilityPower: 33,
@@ -199,7 +230,9 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { defensiveCurl: 1 },
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 87,
 			abilityPower: 38,
@@ -214,7 +247,9 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { isPassiveMSActive: 0 },
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 196,
 			abilityPower: 38,
@@ -229,7 +264,9 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { passiveStacks: 40, passiveStealTargetMS: 0 },
 		});
 
-		assert.equal(damageSource.stats.value.meta.adaptiveForceStat, 'abilityPower' satisfies IChampionStatName);
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 80,
 			abilityPower: 38,
