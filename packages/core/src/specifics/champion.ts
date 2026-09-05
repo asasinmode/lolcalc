@@ -1997,6 +1997,14 @@ export const CHAMPION_SPECIFICS = {
 					}
 				},
 			},
+			postTotal: {
+				handler(_self, { championPassiveStats }, { calculatedVariables }) {
+					if (calculatedVariables.midQuestMultiplier) {
+						const passiveMidQuestAd = championPassiveStats.attackDamage! * calculatedVariables.midQuestMultiplier;
+						calculatedVariables.bloodmailRetributionExcludedAd += passiveMidQuestAd;
+					}
+				},
+			},
 		},
 	},
 	Seraphine: {

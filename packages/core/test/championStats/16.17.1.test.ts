@@ -490,6 +490,25 @@ test('16.17 Senna', async (t) => {
 			attackDamage: 365,
 		}, damageSource);
 	});
+
+	await t.test('4 infernals, mid quest, bloodmail+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Senna', {
+			...sourceCommon,
+			items: items.concat([ITEMS_BY_NAME.overlordsBloodmail]),
+			dragonStacks: ['Infernal', 'Infernal', 'Infernal', 'Infernal'],
+			roleQuest: 'mid',
+			currentHealth: 502,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 456,
+		}, damageSource);
+
+		damageSource.currentHealth.value = 318;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 465,
+		}, damageSource);
+	});
 });
 
 // aphelios
