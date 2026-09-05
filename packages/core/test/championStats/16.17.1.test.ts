@@ -170,6 +170,51 @@ test('16.17 adaptive force', async (t) => {
 		}, damageSource);
 	});
 
+	await t.test('riftmaker', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Aatrox', {
+			...sourceCommon,
+			runes: {
+				shards: {
+					offensive: 'adaptive',
+					flex: 'movementspeed',
+					defensive: 'tenacity',
+				},
+			},
+			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.longSword, ITEMS_BY_NAME.giantsBelt],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 140,
+			abilityPower: 84,
+		}, damageSource);
+	});
+
+	/* passive doesn't count but rabadon passive from it does */
+	await t.test('riftmaker, rabadon', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Aatrox', {
+			...sourceCommon,
+			runes: {
+				shards: {
+					offensive: 'adaptive',
+					flex: 'movementspeed',
+					defensive: 'tenacity',
+				},
+			},
+			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.bfSword],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 320,
+			abilityPower: 281,
+		}, damageSource);
+	});
+
 	/* passive doesn't count but rabadon passive from it does */
 	await t.test('veigar', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Veigar', {

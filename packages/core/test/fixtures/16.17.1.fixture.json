@@ -1,6 +1,32 @@
 {
 	"version": "16.17.1",
 	"champions": {
+		"Aatrox": {
+			"partype": "Blood Well",
+			"stats": {
+				"hp": 650,
+				"hpperlevel": 114,
+				"mp": 0,
+				"mpperlevel": 0,
+				"movespeed": 345,
+				"armor": 38,
+				"armorperlevel": 4.8,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 175,
+				"hpregen": 3,
+				"hpregenperlevel": 0.5,
+				"mpregen": 0,
+				"mpregenperlevel": 0,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 60,
+				"attackdamageperlevel": 5,
+				"attackspeedperlevel": 2.5,
+				"attackspeed": 0.651,
+				"attackspeedratio": 0.651
+			}
+		},
 		"Amumu": {
 			"partype": "Mana",
 			"stats": {
@@ -617,6 +643,12 @@
 				"PercentBaseMPRegenMod": 0.5
 			}
 		},
+		"1011": {
+			"searchString": "giantsbelt;health",
+			"stats": {
+				"FlatHPPoolMod": 350
+			}
+		},
 		"1036": {
 			"searchString": "longsword;damage;attackdamage",
 			"stats": {
@@ -1174,6 +1206,54 @@
 							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
+				}
+			}
+		},
+		"4633": {
+			"searchString": "riftmaker;velkoz;health;spelldamage;cooldownreduction;spellvamp;abilitypower",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"SecondsInCombat": 4,
+				"EternityDamageIncreasePerSecond": 0.02,
+				"EternityDamageIncreaseMax": 0.08,
+				"BuffCounterDuration": 4,
+				"HealthToAPConversionPercent": 0.02,
+				"MaxAPMultiplier": 0.05,
+				"VampAmountMelee": 0.1,
+				"VampAmountRanged": 0.06
+			},
+			"itemCalculations": {
+				"{1247259a}": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthToAPConversionPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountMelee",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountRanged",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
 				}
 			}
 		},

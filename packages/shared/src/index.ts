@@ -122,9 +122,9 @@ export interface IStatsCalculationVariables {
 	midQuestAd?: number;
 	/** ap gained from completed mid quest */
 	midQuestAp?: number;
-	/** additional ad for choosing which stat adaptive force should count towards, for now only used by blodomail */
+	/** additional ad for choosing which stat adaptive force should count towards, for now only used by bloodmail */
 	additionalAdaptiveForceCheckAd: number;
-	/** same as `additionalAdaptiveForceCheckAd`, for now unused */
+	/** same as `additionalAdaptiveForceCheckAd`, for now used by riftmaker (which subtracts its passive's ap from it) */
 	additionalAdaptiveForceCheckAp: number;
 	/** for champion passives that reduce champion's critical strike damage, like Jhin or Senna */
 	critMultiplierMod: number;
@@ -483,6 +483,7 @@ export const ALL_CHAMPION_STATS_ENTRIES = Object.entries(CHAMPION_STAT_META) as 
 export const ITEM_NAME_TO_ID = {
 	faerieCharm: '1004',
 	rejuvenationBead: '1006',
+	giantsBelt: '1011',
 	cloakOfAgility: '1018',
 	sapphireCrystal: '1027',
 	rubyCrystal: '1028',

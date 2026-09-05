@@ -577,6 +577,7 @@ export const ITEM_SPECIFICS = {
 					calculatedVariables.riftmakerBonusHPToAP = ITEM_SPECIFICS_SHARED[ITEM_NAME_TO_ID.riftmaker].HP_TO_AP;
 					calculatedVariables.riftmakerVoidInfusion = bonusHp * calculatedVariables.riftmakerBonusHPToAP;
 					itemPassivesStats.abilityPower += calculatedVariables.riftmakerVoidInfusion;
+					calculatedVariables.additionalAdaptiveForceCheckAp -= calculatedVariables.riftmakerVoidInfusion;
 					miscDebug.riftmakerBonusHp = bonusHp;
 
 					const { corruption } = self.internalItemData.value as IInternalItemDataOf<'riftmaker'>;
