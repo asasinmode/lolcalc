@@ -41,7 +41,7 @@
 		<details>
 			<summary><h3>"apply X on target" items</h3></summary>
 			<p>
-				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i> the <i>source</i>. These effects are then applied to the values shown in the <i>results</i>. Since the results allow you to toggle between displaying values for <i>source</i> or <i>target</i>, it's important to note that <strong>items applying an effect work only in one direction</strong>.
+				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i> the <i>source</i>. These effects are then applied to the values shown in the <i>results</i>. Since the results allow you to toggle between displaying values for <i>source</i> or <i>target</i>, it's important to note that <strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>damage target</i>, won't apply that effect onto the source, regardless of if the results are flipped. TODO check/document if the same makes sense for resists (don't set calculationTarget on computedTarget in results)
 			</p>
 			<p>
 				For example, both <b>Serpent's Fang</b> and <b>Frozen Heart</b> allow for applying its effect to the target. If you were to

@@ -1877,16 +1877,28 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Senna', typeof ISenna, 'passive'>()({
 				known: {
 					'{e88568f8}': [0],
+					'CriticalDamage': [],
 					'SiphonCurrentHealthDamage': [],
 					'MoveSpeedFromTarget': [],
 					'SoulsAD': [],
 					'SoulsRange': [],
 					'SoulsLifesteal': [],
+					'TotalBasicAttackDamage': [],
 				},
 				calculate(self, target) {
+					const passiveVarParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+
 					return {
 						'{e88568f8}': {
 							value: self.internalData.value.passiveStacks,
+						},
+						/**
+						 * it's present in `spellCalculations` but, at least on patch 16.17, the value seems incorrect as the `spellCalculations` just multipliers critDamage by `1`, when instead it should do so by `CritDamageMod` (?)
+						 * TODO 16.17 not sure why but the game shows `183%` (and is actually `182.5%` = 0.75x) with IE, when `(2 + 0.3) * 0.8 = 1.84`. For now just keep it wrong, maybe it fixes itself
+						 */
+						'CriticalDamage': {
+							...championAbilityVariableValue('CriticalDamage', passiveVarParams),
+							value: self.stats.value.total.critDamageMultiplier * ((self.champion.value as typeof ISenna).abilities.passive.variants[0]!).dataValues.CritDamageMod[1]!,
 						},
 						'SiphonCurrentHealthDamage': {
 							value: 'TODO',
@@ -1901,6 +1913,9 @@ export const CHAMPION_SPECIFICS = {
 							value: self.stats.value.championPassive.attackRange ?? 0,
 						},
 						'SoulsLifesteal': {
+							value: 'TODO',
+						},
+						'TotalBasicAttackDamage': {
 							value: 'TODO',
 						},
 					};
@@ -1922,6 +1937,9 @@ export const CHAMPION_SPECIFICS = {
 					SoulsLifesteal: {
 						isCustom: true,
 					},
+					TotalBasicAttackDamage: {
+						isCustom: true,
+					},
 					BonusOnHitDamage: {
 						type: VariableType.physical,
 					},
@@ -1933,8 +1951,8 @@ export const CHAMPION_SPECIFICS = {
 			postInit: {
 				handler(self, { championPassiveStats }, { miscDebug }) {
 					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
-					const stacksStep = championAbilityVariableValue('StacksForBonus', params);
 
+					const stacksStep = championAbilityVariableValue('StacksForBonus', params);
 					if (typeof stacksStep.value !== 'number') {
 						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive stacks step', stacksStep);
 						miscDebug.sennaPassiveStacksStep = 0;
@@ -1943,12 +1961,25 @@ export const CHAMPION_SPECIFICS = {
 
 					miscDebug.sennaPassiveStacksStep = Math.floor(self.internalData.value.passiveStacks / stacksStep.value);
 
-					const rangePerStack = championAbilityVariableValue('BonusRange', params);
-
-					if (typeof rangePerStack.value === 'number') {
-						championPassiveStats.attackRange = rangePerStack.value * miscDebug.sennaPassiveStacksStep;
+					const rangePerStep = championAbilityVariableValue('BonusRange', params);
+					if (typeof rangePerStep.value === 'number') {
+						championPassiveStats.attackRange = rangePerStep.value * miscDebug.sennaPassiveStacksStep;
 					} else {
-						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive range per stack', rangePerStack);
+						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive range per step', rangePerStep);
+					}
+
+					const critPerStep = championAbilityVariableValue('BonusCritChance', params);
+					if (typeof critPerStep.value === 'number') {
+						championPassiveStats.critChance = critPerStep.value * miscDebug.sennaPassiveStacksStep / 100;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive crit per step', critPerStep);
+					}
+
+					const adPerStack = championAbilityVariableValue('ADPerStack', params);
+					if (typeof adPerStack.value === 'number') {
+						championPassiveStats.attackDamage = adPerStack.value * self.internalData.value.passiveStacks;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive ad per stack', adPerStack);
 					}
 				},
 			},

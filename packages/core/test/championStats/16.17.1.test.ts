@@ -1,8 +1,6 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import type { IDragonName, IItem } from '@lolcalc/data/types.js';
-import type { IChampionStatName } from '@lolcalc/shared';
-import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
@@ -429,10 +427,35 @@ test('16.17 Jhin', async (t) => {
 	});
 });
 
+test('16.17 Senna', async (t) => {
+	const sourceCommon: IOverrides<'Senna'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [],
+		internalData: { passiveStacks: 40, passiveStealTargetMS: 0 },
+	};
+	const items: IItem[] = [ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.ldr, ITEMS_BY_NAME.collector, ITEMS_BY_NAME.hexoptics];
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Senna', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 91,
+			critChance: 20,
+			attackRange: 640,
+		}, damageSource);
+	});
+});
+
 // aphelios
 // pyke
 // rengar
-// senna
 // varus
 // yasuo, yone
 // zaahen
