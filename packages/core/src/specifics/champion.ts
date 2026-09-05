@@ -301,28 +301,6 @@ export const CHAMPION_SPECIFICS = {
 		setupData(self) {
 			return { passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0) };
 		},
-		calculateHooks: {
-			postInit: {
-				handler(self, { championPassiveStats }) {
-					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self };
-					const hpPerStack = championAbilityVariableValue('RHealthPerStack', params);
-
-					if (typeof hpPerStack.value === 'number') {
-						const hp = hpPerStack.value * self.internalData.value.passiveStacks;
-						championPassiveStats.hp = hp;
-					} else {
-						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate hp per ult stack', hpPerStack);
-					}
-
-					const rangePerStack = championAbilityVariableValue('AttackRangePerStack', params);
-					if (typeof rangePerStack.value === 'number') {
-						championPassiveStats.attackRange = rangePerStack.value * self.internalData.value.passiveStacks;
-					} else {
-						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate range per ult stack', rangePerStack);
-					}
-				},
-			},
-		},
 		passive: {
 			variables: defineChampionVariables<'Chogath', typeof IChogath, 'passive'>()({
 				meta: {
@@ -442,6 +420,28 @@ export const CHAMPION_SPECIFICS = {
 				},
 				uninteresting: ['f3', 'AttackRangePerStack', 'CastRangePerStack', 'MaxBonusAttackRange', 'MaxBonusCastRange', 'RMinionMaxStacks'],
 			}),
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { championPassiveStats }) {
+					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self };
+					const hpPerStack = championAbilityVariableValue('RHealthPerStack', params);
+
+					if (typeof hpPerStack.value === 'number') {
+						const hp = hpPerStack.value * self.internalData.value.passiveStacks;
+						championPassiveStats.hp = hp;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate hp per ult stack', hpPerStack);
+					}
+
+					const rangePerStack = championAbilityVariableValue('AttackRangePerStack', params);
+					if (typeof rangePerStack.value === 'number') {
+						championPassiveStats.attackRange = rangePerStack.value * self.internalData.value.passiveStacks;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate range per ult stack', rangePerStack);
+					}
+				},
+			},
 		},
 	},
 	DrMundo: {
@@ -1898,7 +1898,7 @@ export const CHAMPION_SPECIFICS = {
 							value: 'TODO',
 						},
 						'SoulsRange': {
-							value: 'TODO',
+							value: self.stats.value.championPassive.attackRange ?? 0,
 						},
 						'SoulsLifesteal': {
 							value: 'TODO',
@@ -1930,7 +1930,28 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 		calculateHooks: {
+			postInit: {
+				handler(self, { championPassiveStats }, { miscDebug }) {
+					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const stacksStep = championAbilityVariableValue('StacksForBonus', params);
 
+					if (typeof stacksStep.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive stacks step', stacksStep);
+						miscDebug.sennaPassiveStacksStep = 0;
+						return;
+					}
+
+					miscDebug.sennaPassiveStacksStep = Math.floor(self.internalData.value.passiveStacks / stacksStep.value);
+
+					const rangePerStack = championAbilityVariableValue('BonusRange', params);
+
+					if (typeof rangePerStack.value === 'number') {
+						championPassiveStats.attackRange = rangePerStack.value * miscDebug.sennaPassiveStacksStep;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive range per stack', rangePerStack);
+					}
+				},
+			},
 		},
 	},
 	Seraphine: {
