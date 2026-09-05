@@ -63,6 +63,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		tenacityBucketB: 1,
 		additionalAdaptiveForceCheckAd: 0,
 		additionalAdaptiveForceCheckAp: 0,
+		critMultiplierMod: 1,
 	};
 	const debuffs: IStatsCalculationDebuffs = {
 		grievousWounds: 0,
@@ -376,6 +377,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalStats.attackSpeed = Math.min(totalStats.attackSpeed, calculatedVariables.attackSpeedCap);
 	totalStats.tenacity = Math.min(1, totalStats.tenacity);
 	totalStats.critChance = Math.min(1, totalStats.critChance);
+	totalStats.critDamageMultiplier *= calculatedVariables.critMultiplierMod;
 
 	{ /* stat related heal multipliers */
 		calculatedVariables.healMult = 1 + combineCompounding(calculatedVariables.healMult, calculatedVariables.healMultAdditive);

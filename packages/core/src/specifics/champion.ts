@@ -848,9 +848,23 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { bonusStats, baseStats }) {
-					const bonusASPercent = (self.champion.value as typeof IJhin).abilities.passive.variants[0]!.dataValues.PercentAttackSpeedPerLevel[1]! * (self.level.value - 1);
-					bonusStats.attackSpeed += bonusASPercent * baseStats.attackSpeed;
+				handler(self, { bonusStats, baseStats }, { calculatedVariables }) {
+					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const asPerLevel = championAbilityVariableValue('PercentAttackSpeedPerLevel', params);
+
+					if (typeof asPerLevel.value === 'number') {
+						const bonusASPercent = asPerLevel.value * (self.level.value - 1);
+						bonusStats.attackSpeed += bonusASPercent * baseStats.attackSpeed;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS jhin] failed to calculate passive attack speed per level', asPerLevel);
+					}
+
+					const critDamageReduction = championAbilityVariableValue('CritReductionPercent', params);
+					if (typeof critDamageReduction.value === 'number') {
+						calculatedVariables.critMultiplierMod = 1 - critDamageReduction.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS jhin] failed to calculate passive attack speed per level', critDamageReduction);
+					}
 				},
 			},
 			preBonus: {
@@ -1877,7 +1891,6 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Senna', typeof ISenna, 'passive'>()({
 				known: {
 					'{e88568f8}': [0],
-					'CriticalDamage': [],
 					'SiphonCurrentHealthDamage': [],
 					'MoveSpeedFromTarget': [],
 					'SoulsAD': [],
@@ -1888,20 +1901,18 @@ export const CHAMPION_SPECIFICS = {
 				calculate(self, target) {
 					const passiveVarParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
 
+					const siphonHpPercent = championAbilityVariableValue('BonusCurentHealthDamage', passiveVarParams);
+					let SiphonCurrentHealthDamage = Number.NaN;
+					if (typeof siphonHpPercent.value === 'number') {
+						SiphonCurrentHealthDamage = siphonHpPercent.value / 100 * (target?.stats.value.total.hp ?? 0);
+					}
+
 					return {
 						'{e88568f8}': {
 							value: self.internalData.value.passiveStacks,
 						},
-						/**
-						 * it's present in `spellCalculations` but, at least on patch 16.17, the value seems incorrect as the `spellCalculations` just multipliers critDamage by `1`, when instead it should do so by `CritDamageMod` (?)
-						 * TODO 16.17 not sure why but the game shows `183%` (and is actually `182.5%` = 0.75x) with IE, when `(2 + 0.3) * 0.8 = 1.84`. For now just keep it wrong, maybe it fixes itself
-						 */
-						'CriticalDamage': {
-							...championAbilityVariableValue('CriticalDamage', passiveVarParams),
-							value: self.stats.value.total.critDamageMultiplier * ((self.champion.value as typeof ISenna).abilities.passive.variants[0]!).dataValues.CritDamageMod[1]!,
-						},
 						'SiphonCurrentHealthDamage': {
-							value: 'TODO',
+							value: SiphonCurrentHealthDamage,
 						},
 						'MoveSpeedFromTarget': {
 							value: 'TODO',
@@ -1949,8 +1960,15 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { championPassiveStats }, { miscDebug }) {
+				handler(self, { championPassiveStats }, { calculatedVariables, miscDebug }) {
 					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+
+					const critDamageMod = championAbilityVariableValue('CritDamageMod', params);
+					if (typeof critDamageMod.value === 'number') {
+						calculatedVariables.critMultiplierMod = critDamageMod.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate crit damage multiplier', critDamageMod);
+					}
 
 					const stacksStep = championAbilityVariableValue('StacksForBonus', params);
 					if (typeof stacksStep.value !== 'number') {
@@ -1984,7 +2002,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			onTotalPreMultipliers: {
-				handler(self, { bonusStats, totalPreMultipliersStats, championPassiveStats }, { calculatedVariables }) {
+				handler(self, { bonusStats, totalPreMultipliersStats, championPassiveStats }) {
 					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
 
 					const excessCritToLifesteal = championAbilityVariableValue('CritToLifestealConversionPercent', params);

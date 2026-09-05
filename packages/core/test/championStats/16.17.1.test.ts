@@ -293,6 +293,7 @@ test('16.17 Jhin', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 211,
 			attackSpeed: 0.944,
+			critDamageMultiplier: 150,
 		}, damageSource);
 	});
 
@@ -383,6 +384,7 @@ test('16.17 Jhin', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 591,
+			critDamageMultiplier: 173,
 		}, damageSource);
 
 		await t.test('dragons', async () => {
@@ -449,6 +451,7 @@ test('16.17 Senna', async (t) => {
 			attackDamage: 91,
 			critChance: 20,
 			attackRange: 640,
+			critDamageMultiplier: 160,
 		}, damageSource);
 	});
 
@@ -463,6 +466,7 @@ test('16.17 Senna', async (t) => {
 			critChance: 100,
 			attackRange: 640,
 			lifeSteal: 7,
+			critDamageMultiplier: 184,
 		}, damageSource);
 	});
 

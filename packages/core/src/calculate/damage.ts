@@ -36,6 +36,7 @@ export function championDamage() {
 	// amumu passive
 	// jhin passive
 	// senna passive
+	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
 }
 
 /** TODO basic aa calc? not sure about the interface yet */
