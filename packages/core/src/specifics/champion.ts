@@ -1896,7 +1896,6 @@ export const CHAMPION_SPECIFICS = {
 					'SoulsAD': [],
 					'SoulsRange': [],
 					'SoulsLifesteal': [],
-					'TotalBasicAttackDamage': [],
 				},
 				calculate(self, target) {
 					const passiveVarParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
@@ -1918,16 +1917,13 @@ export const CHAMPION_SPECIFICS = {
 							value: self.stats.value.championPassive.moveSpeed ?? 0,
 						},
 						'SoulsAD': {
-							value: 'TODO',
+							value: self.stats.value.championPassive.attackDamage ?? 0,
 						},
 						'SoulsRange': {
 							value: self.stats.value.championPassive.attackRange ?? 0,
 						},
 						'SoulsLifesteal': {
-							value: 'TODO',
-						},
-						'TotalBasicAttackDamage': {
-							value: 'TODO',
+							value: self.stats.value.championPassive.lifeSteal ?? 0,
 						},
 					};
 				},
@@ -1947,9 +1943,8 @@ export const CHAMPION_SPECIFICS = {
 					},
 					SoulsLifesteal: {
 						isCustom: true,
-					},
-					TotalBasicAttackDamage: {
-						isCustom: true,
+						resultsIsPercentage: true,
+						resultsMultiplier: 100,
 					},
 					BonusOnHitDamage: {
 						type: VariableType.physical,
