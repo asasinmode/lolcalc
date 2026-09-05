@@ -465,6 +465,31 @@ test('16.17 Senna', async (t) => {
 			lifeSteal: 7,
 		}, damageSource);
 	});
+
+	await t.test('4 infernals', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Senna', {
+			...sourceCommon,
+			items,
+			dragonStacks: ['Infernal', 'Infernal', 'Infernal', 'Infernal'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 342,
+		}, damageSource);
+	});
+
+	await t.test('4 infernals, mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Senna', {
+			...sourceCommon,
+			items,
+			dragonStacks: ['Infernal', 'Infernal', 'Infernal', 'Infernal'],
+			roleQuest: 'mid',
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 365,
+		}, damageSource);
+	});
 });
 
 // aphelios
