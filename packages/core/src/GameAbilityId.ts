@@ -1,5 +1,5 @@
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IEffectObjectName, TAbilityType } from '@lolcalc/shared';
+import type { EffectObjectName, IChampionAbilityKey, TAbilityType } from '@lolcalc/shared';
 import { ALL_DRAGON_NAMES, CHAMPION_ID_TO_KEY, CHAMPION_KEY_TO_ID, CHAMPIONS, ITEMS } from '@lolcalc/data';
 import { AbilityType, ALL_ABILITY_TYPES, ALL_CHAMPION_ABILITY_KEYS, EFFECT_OBJECT_NAME_ENTRIES } from '@lolcalc/shared';
 import { markRaw } from 'vue';
@@ -21,7 +21,7 @@ export interface IItemAbilityId<Id extends string = string> {
 	id: Id;
 }
 
-export interface IEffectAbilityId<Id extends IEffectObjectName = IEffectObjectName> {
+export interface IEffectAbilityId<Id extends EffectObjectName = EffectObjectName> {
 	type: typeof AbilityType['effect'];
 	id: Id;
 }
@@ -51,7 +51,7 @@ export class GameAbilityId {
 	static build<Id extends string>(
 		type: 'item',
 		id: Id): IItemAbilityId<Id>;
-	static build<Id extends IEffectObjectName>(
+	static build<Id extends EffectObjectName>(
 		type: 'effect',
 		id: Id): IEffectAbilityId<Id>;
 	static build<Id extends IDragonName, Subtype extends 'stack' | 'soul'>(
@@ -75,7 +75,7 @@ export class GameAbilityId {
 		}
 
 		if (type === AbilityType.effect) {
-			return markRaw({ type, id: id as IEffectObjectName });
+			return markRaw({ type, id: id as EffectObjectName });
 		}
 
 		if (type === AbilityType.dragon) {

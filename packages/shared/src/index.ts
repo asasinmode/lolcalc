@@ -748,7 +748,7 @@ export const GRIEVOUS_WOUND_ITEMS = [
 	*		3. that seems like the likely candidate, check the stringtable - it resolves to `This unit`s Armor is reduced...'
 	*		4. this is the description we are looking for, use the `Items/3071/Spells/3071BlackCleaverShred.ObjectName` of `3071BlackCleaverShred`
 	*/
-export const EFFECT_OBJECT_NAME = {
+export const EffectObjectName = {
 	/* items */
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
@@ -795,18 +795,19 @@ export const EFFECT_OBJECT_NAME = {
 	hextechSoulSlow: 'SRX_DragonSoulBuffHextech_Slow',
 } as const;
 
-export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
+// eslint-disable-next-line ts/no-redeclare
+export type EffectObjectName = typeof EffectObjectName[keyof typeof EffectObjectName];
 
-export const EFFECT_OBJECT_NAME_ENTRIES = Object.entries(EFFECT_OBJECT_NAME) as [string, IEffectObjectName][];
+export const EFFECT_OBJECT_NAME_ENTRIES = Object.entries(EffectObjectName) as [string, EffectObjectName][];
 
-export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: string, imgSize: number]>> = {
-	[EFFECT_OBJECT_NAME.cleanse]: ['game/assets/spells/icons2d/summoner_boost.png', 64],
-	[EFFECT_OBJECT_NAME.heal]: ['game/assets/spells/icons2d/summoner_heal.png', 64],
-	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
-	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
-	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
-	[EFFECT_OBJECT_NAME.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
-	[EFFECT_OBJECT_NAME.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
+export const CUSTOM_EFFECT_IMAGES: Partial<Record<EffectObjectName, [path: string, imgSize: number]>> = {
+	[EffectObjectName.cleanse]: ['game/assets/spells/icons2d/summoner_boost.png', 64],
+	[EffectObjectName.heal]: ['game/assets/spells/icons2d/summoner_heal.png', 64],
+	[EffectObjectName.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
+	[EffectObjectName.grievousWoundsPercent]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
+	[EffectObjectName.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
+	[EffectObjectName.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
+	[EffectObjectName.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
 };
 
 export const VariableType = {

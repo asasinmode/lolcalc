@@ -3,7 +3,7 @@ import type { IInternalDragonDataOf, IInternalItemDataOf } from '@lolcalc/core/s
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
+import { AbilityType, EffectObjectName } from '@lolcalc/shared';
 import { ref, shallowRef } from 'vue';
 import fixture from '../fixtures/16.13.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
@@ -170,7 +170,7 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 			const damageSource = await setupDamageSource(fixture, 'Amumu', {
 				...sourceCommon,
 				internalData: { applyPassive: 0 },
-				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), data: ref([1]), source: shallowRef(), champion: shallowRef() }],
+				appliedEffects: [{ abilityId: GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), data: ref([1]), source: shallowRef(), champion: shallowRef() }],
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -183,7 +183,7 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 			const damageSource = await setupDamageSource(fixture, 'Amumu', {
 				...sourceCommon,
 				internalData: { applyPassive: 0 },
-				appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), [1])],
+				appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.heal), [1])],
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -210,8 +210,8 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 				...sourceCommon,
 				internalData: { applyPassive: 0 },
 				appliedEffects: [
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.heal), [1]),
 				],
 			});
 
@@ -226,7 +226,7 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 				...sourceCommon,
 				internalData: { applyPassive: 0 },
 				appliedEffects: [
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
 				],
 				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
 			});
@@ -242,8 +242,8 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 				...sourceCommon,
 				internalData: { applyPassive: 0 },
 				appliedEffects: [
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.heal), [1]),
 				],
 				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
 			});
@@ -272,7 +272,7 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
 				...sourceCommon,
 				level: 18,
-				appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1])],
+				appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1])],
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -285,7 +285,7 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 			const damageSource = await setupDamageSource(fixture, 'Cassiopeia', {
 				...sourceCommon,
 				level: 18,
-				appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), [1])],
+				appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.heal), [1])],
 			});
 
 			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -312,8 +312,8 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 				...sourceCommon,
 				level: 18,
 				appliedEffects: [
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.heal), [1]),
 				],
 			});
 
@@ -328,7 +328,7 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 				...sourceCommon,
 				level: 18,
 				appliedEffects: [
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
 				],
 				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
 			});
@@ -344,8 +344,8 @@ test('Heal, ghost, swiftmarch, scimitar', async (t) => {
 				...sourceCommon,
 				level: 18,
 				appliedEffects: [
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
-					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.heal), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
+					overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.heal), [1]),
 				],
 				internalItemData: { quicksilver: 1 } satisfies IInternalItemDataOf<'mercurialScimitar'>,
 			});

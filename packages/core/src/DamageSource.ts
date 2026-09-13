@@ -1,6 +1,6 @@
 import type { ITextData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionAbilityVariant, IChampionId, IChampionRunes, IDragonName, IItem, IItemStat, IListedChampion, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectObjectName, IEffectOntoTargetVars, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, VariableType } from '@lolcalc/shared';
+import type { IAdaptiveForceStatRv, IChampionAbilityKey, IChampionStatName, IEffectOntoTargetVars, INonPassiveAbilityKey, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables, VariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
@@ -16,7 +16,7 @@ import type { IDynamicVariables, IModifyVariableFunction, IReplacedGameVariable,
 import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
 import { CHAMPION_KEY_TO_ID, CHAMPIONS, EFFECTS, EFFECTS_STRINGTABLE, ICON_COOLDOWN_IMG, ITEMS, MISC, RUNE_SLOT_NAME_TO_NUMBER, RUNES, STAT_ICON, TEXT, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
-import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EFFECT_OBJECT_NAME, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
+import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EffectObjectName, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
@@ -988,7 +988,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		handleRoleQuestItems(this.items.value, this.roleQuest.value);
 	}
 
-	getEffect<T extends IEffectObjectName>(effectObjectName: T): [IDamageSourceEffect<IEffectAbilityId<T>>, index: number] | undefined {
+	getEffect<T extends EffectObjectName>(effectObjectName: T): [IDamageSourceEffect<IEffectAbilityId<T>>, index: number] | undefined {
 		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === effectObjectName);
 
 		return ~index ? [this.appliedEffects.value[index]! as unknown as IDamageSourceEffect<IEffectAbilityId<T>>, index] : undefined;
@@ -1069,7 +1069,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	removeEffect(effectObjectName: IEffectObjectName): void {
+	removeEffect(effectObjectName: EffectObjectName): void {
 		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === effectObjectName);
 		if (~index) {
 			this.appliedEffects.value.splice(index, 1);
@@ -1127,7 +1127,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
 				}
 			} else {
-				const effect = this.getEffect(EFFECT_OBJECT_NAME.ornnPLivingForge);
+				const effect = this.getEffect(EffectObjectName.ornnPLivingForge);
 				if (effect) {
 					index = (effect[0].data.value)[0] - 1;
 				}
@@ -1765,7 +1765,7 @@ export interface IComputedEffectDescription {
 }
 
 export function computeEffectDescription(
-	effectObjectName: IEffectObjectName,
+	effectObjectName: EffectObjectName,
 	damageSource?: DamageSource,
 	replaceOptions?: IReplaceGameVariablesOptions,
 ): IComputedEffectDescription {

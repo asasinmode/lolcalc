@@ -57,7 +57,7 @@ import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
 import { STAT_ICON } from '@lolcalc/data';
-import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
+import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, EffectObjectName, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { combineCompounding } from '../calculate/util.ts';
@@ -1788,7 +1788,7 @@ export const CHAMPION_SPECIFICS = {
 					set(value) {
 						if (value) {
 							self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
-							const effect = self.getEffect(EFFECT_OBJECT_NAME.namiPSurgingTides)?.[0];
+							const effect = self.getEffect(EffectObjectName.namiPSurgingTides)?.[0];
 							if (effect) {
 								effect.data.value[0] = 0;
 							}
@@ -2315,7 +2315,7 @@ export const CHAMPION_SPECIFICS = {
 					if (!self.internalData.value.passiveStacksOnTarget) {
 						return;
 					}
-					const targetEffect = self.calculationDamageTarget.value?.getEffect(EFFECT_OBJECT_NAME.rellPBreakMold)?.[0];
+					const targetEffect = self.calculationDamageTarget.value?.getEffect(EffectObjectName.rellPBreakMold)?.[0];
 					if (!targetEffect) {
 						return;
 					}

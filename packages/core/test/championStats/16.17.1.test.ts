@@ -6,7 +6,7 @@ import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
+import { AbilityType, EffectObjectName } from '@lolcalc/shared';
 import fixture from '../fixtures/16.17.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -257,7 +257,7 @@ test('16.17 adaptive force', async (t) => {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.bootsOfSwiftness],
 			appliedEffects: [
-				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.ghost), [1]),
+				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
 			],
 		});
 
@@ -471,7 +471,7 @@ test('16.17 Jhin', async (t) => {
 			},
 			items: vanillaBuildItems,
 			appliedEffects: [
-				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.frozenHeartWintersCaress), [1]),
+				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.frozenHeartWintersCaress), [1]),
 			],
 		});
 

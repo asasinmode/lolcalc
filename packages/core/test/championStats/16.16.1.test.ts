@@ -5,7 +5,7 @@ import assert from 'node:assert';
 import test from 'node:test';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-import { AbilityType, EFFECT_OBJECT_NAME } from '@lolcalc/shared';
+import { AbilityType, EffectObjectName } from '@lolcalc/shared';
 import fixture from '../fixtures/16.16.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -33,16 +33,16 @@ test('16.16 Rammus W when shredded', async () => {
 	const damageSource = await setupDamageSource(fixture, 'Rammus', {
 		...sourceCommon,
 		appliedEffects: [
-			overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.blackCleaverCarve), [1]),
-			overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.bloodletterVileDecay), [1]),
+			overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.blackCleaverCarve), [1]),
+			overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.bloodletterVileDecay), [1]),
 		],
 	});
 
-	const rellPEffect = damageSource.addEffect(GameAbilityId.build(AbilityType.effect, EFFECT_OBJECT_NAME.rellPBreakMold), undefined, undefined, rell, rell.champion.value!);
+	const rellPEffect = damageSource.addEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.rellPBreakMold), undefined, undefined, rell, rell.champion.value!);
 	await rellPEffect.newDataPromise;
 
-	const blackCleaverEffect = damageSource.getEffect(EFFECT_OBJECT_NAME.blackCleaverCarve)?.[0]!;
-	const bloodletterEffect = damageSource.getEffect(EFFECT_OBJECT_NAME.bloodletterVileDecay)?.[0]!;
+	const blackCleaverEffect = damageSource.getEffect(EffectObjectName.blackCleaverCarve)?.[0]!;
+	const bloodletterEffect = damageSource.getEffect(EffectObjectName.bloodletterVileDecay)?.[0]!;
 	blackCleaverEffect.data.value[0] = 5;
 	bloodletterEffect.data.value[0] = 4;
 	rellPEffect.data.value[0] = 5;
