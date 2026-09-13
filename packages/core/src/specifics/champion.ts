@@ -51,20 +51,23 @@ import type IZeri from '@lolcalc/data/files/champion/Zeri.json';
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
 import type { IChampion, IChampionAbilityVariant, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
+import type { IChampionRole } from '@lolcalc/shared/types.js';
 import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
-import { STAT_ICON } from '@lolcalc/data';
+import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, EffectObjectName, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { combineCompounding } from '../calculate/util.ts';
+import { GameAbilityId } from '../GameAbilityId.ts';
+import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES } from './index.ts';
-// import { GameAbilityId } from '../GameAbilityId.ts';
-// import { simpleFormattingGameAbilityImage } from '../misc.ts';
+
+const { vMinor } = PATCH_VERSION;
 
 export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
@@ -613,7 +616,7 @@ export const CHAMPION_SPECIFICS = {
 					ComputedMaxHealthDevour: {
 						isCustom: true,
 						displayedName: 'MaxHealthOnDevour',
-						// additionalInfo: `While saying it does and showing the value as if it was, Belveth's ult doesn't actually factor in <scalead>attack damage</scalead> and <scaleap>ability power</scaleap> from [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.riftmaker))}Riftmaker's](https://wiki.leagueoflegends.com/en-us/Overlord's_Bloodmail) [Void Infusion](https://wiki.leagueoflegends.com/en-us/Named_item_effect#Void_Infusion), [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.dragon, 'Infernal', 'stack'))}Infernal Might](https://wiki.leagueoflegends.com/en-us/Dragon_Slayer) and ${''}`
+						additionalInfo: `The in game tooltip <var>TooltipMaxHealthOnDevour</var> shows an incorrect value. <scalehealth>HP</scalehealth> from Belveth's true form doesn't actually scale with <scalead>attack damage</scalead> and <scaleap>ability power</scaleap> from [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.riftmaker))} Riftmaker's](https://wiki.leagueoflegends.com/en-us/Overlord's_Bloodmail) [Void Infusion](https://wiki.leagueoflegends.com/en-us/Named_item_effect#Void_Infusion), [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.dragon, 'Infernal', 'stack'))} Infernal Might](https://wiki.leagueoflegends.com/en-us/Dragon_Slayer) and [<img src="https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${'mid' satisfies IChampionRole}_complete.png" width="64" height="64" alt="mid quest completed icon"> mid quest's](https://wiki.leagueoflegends.com/en-us/Role_Quests#Quests) multipliers<br> <unknown>TODO bloodmail retribution scaling, currently unimplemented</unknown>`,
 					},
 				},
 				uninteresting: ['PassiveStacksOnDevour', 'MissingHealthDamage', 'SteroidDuration', 'SteroidDurationUpgrade', 'StackThresholdForUpgrade', 'StackThresholdForPermanent', 'TotalASMod', 'VoidlingHPScale', 'VoidlingADScale'],
