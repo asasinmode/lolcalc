@@ -671,27 +671,86 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { adaptiveForceMeta, totalStats, bonusStats, championPassiveStats }, { calculatedVariables }) {
+				// TODO bloodmail retribution calc
+				handler(self, { itemPassivesStats, itemTotalStats, dragonStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, bonusStats, championPassiveStats }, { calculatedVariables }) {
 					if (!self.currentAbilityResource.value) {
 						return;
 					}
 
-					let bonusAD = bonusStats.attackDamage;
-					if (adaptiveForceMeta[0] === 'attackDamage') {
-						bonusAD -= calculatedVariables.totalAdaptiveForce;
+					/* the actual values used in belveth's true form hp scaling - some values are ignored */
+					const ultUsedBonusAD = bonusStats.attackDamage
+						- totalMultipliersStats.attackDamage; /* infernal & mid quest */
+					const ultUsedTotalAP = totalStats.abilityPower
+						- totalMultipliersStats.abilityPower /* infernal & mid quest */
+						- (calculatedVariables.riftmakerVoidInfusion ?? 0) * calculatedVariables.totalItemApMultipliers; /* all of riftmaker */
+
+					const maxHP = championAbilityVariableValue('MaxHealthOnDevour', {
+						abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						abilityLevel: self.abilityLevels.value.r,
+						damageSource: {
+							stats: {
+								value: {
+									total: { abilityPower: ultUsedTotalAP },
+									bonus: { attackDamage: ultUsedBonusAD },
+								},
+							},
+						} as DamageSource,
+					});
+
+					if (typeof maxHP.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate true form max hp', maxHP);
+						return;
 					}
 
-					const maxHP = championAbilityVariableValue('MaxHealthOnDevour', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: { stats: { value: { total: { abilityPower: totalStats.abilityPower }, bonus: { attackDamage: bonusAD } } } } as DamageSource });
-					if (typeof maxHP.value === 'number') {
-						console.log('belvething', maxHP.value);
-						// championPassiveStats.hp = maxHP.value;
-					} else {
-						console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate true form max hp', maxHP);
+					// const baseHPValue = maxHP.calculatesFrom?.[0]?.value as number ?? 0;
+					// const hpADScaling = maxHP.calculatesFrom?.[1]?.value as number ?? 0;
+					// const hpAPScaling = maxHP.calculatesFrom?.[2]?.value as number ?? 0;
+
+					championPassiveStats.hp = maxHP.value;
+					totalStats.hp += maxHP.value;
+					bonusStats.hp += maxHP.value;
+
+					if (calculatedVariables.riftmakerBonusHPToAP) {
+						let infusion = championPassiveStats.hp * calculatedVariables.riftmakerBonusHPToAP;
+
+						totalPreMultipliersStats.abilityPower += infusion;
+						calculatedVariables.riftmakerVoidInfusion! += infusion;
+						if (calculatedVariables.apMultipliersBase) {
+							calculatedVariables.apMultipliersBase += infusion;
+						}
+
+						let multValue = 0;
+						if (calculatedVariables.rabadonApMultiplier) {
+							const value = infusion * calculatedVariables.rabadonApMultiplier;
+							calculatedVariables.rabadonMagicalOpus! += value;
+							multValue += value;
+						}
+						if (calculatedVariables.blackfireTorchBBlazeMultiplier) {
+							const value = infusion * calculatedVariables.blackfireTorchBBlazeMultiplier;
+							calculatedVariables.blackfireTorchBBlazeAP! += value;
+							multValue += value;
+						}
+						if (dragonStatMultipliers.abilityPower) {
+							const value = infusion * dragonStatMultipliers.abilityPower;
+							dragonStats.abilityPower! += value;
+							multValue += value;
+						}
+						if (calculatedVariables.midQuestMultiplier) {
+							const value = infusion * calculatedVariables.midQuestMultiplier;
+							calculatedVariables.midQuestAp! += value;
+							multValue += value;
+						}
+						infusion += multValue;
+
+						itemPassivesStats.abilityPower += infusion;
+						itemTotalStats.abilityPower += infusion;
+						totalStats.abilityPower += infusion;
+						bonusStats.abilityPower += infusion;
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal.Belveth,
 			},
-
 		},
 	},
 	Briar: {
@@ -3744,10 +3803,11 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	 * ability's variant specific
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
 	 */
-	[key: number]: IChampionAbilityVariantSpecific;
+	[key: number]: IChampionAbilityVariantSpecific<Id>;
 };
 
-export type IChampionAbilityVariantSpecific = IProviderGroupImageText & {
+export type IChampionAbilityVariantSpecific<Id extends IChampionId | undefined = undefined> = IProviderGroupImageText & {
+	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
 };
 

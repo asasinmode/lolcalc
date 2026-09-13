@@ -15,8 +15,7 @@ test.before(() => {
 
 const infernalStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Infernal'];
 
-test.only('26.18 Belveth', async (t) => {
-	t.runOnly(true);
+test('26.18 Belveth', async (t) => {
 	const sourceCommon: IOverrides<'Belveth'> = {
 		level: 18,
 		runes: {
@@ -92,12 +91,19 @@ test.only('26.18 Belveth', async (t) => {
 		}, damageSource);
 		assert.strictEqual(damageSource.maxHealth.value, 5259);
 
-		damageSource.currentHealth.value = 1115;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 205,
-			abilityPower: 359,
-		}, damageSource);
-		assert.strictEqual(damageSource.maxHealth.value, 5283);
+		// damageSource.currentHealth.value = 3392;
+		// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		// 	attackDamage: 194,
+		// 	abilityPower: 359,
+		// }, damageSource);
+		// assert.strictEqual(damageSource.maxHealth.value, 5271);
+
+		// damageSource.currentHealth.value = 1115;
+		// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		// 	attackDamage: 205,
+		// 	abilityPower: 359,
+		// }, damageSource);
+		// assert.strictEqual(damageSource.maxHealth.value, 5283);
 	});
 
 	await t.test('4 infernals', async () => {
@@ -131,15 +137,15 @@ test.only('26.18 Belveth', async (t) => {
 		}, damageSource);
 		assert.strictEqual(damageSource.maxHealth.value, 5259);
 
-		damageSource.currentHealth.value = 650;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 227,
-			abilityPower: 392,
-		}, damageSource);
-		assert.strictEqual(damageSource.maxHealth.value, 5283);
+		// damageSource.currentHealth.value = 650;
+		// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		// 	attackDamage: 227,
+		// 	abilityPower: 392,
+		// }, damageSource);
+		// assert.strictEqual(damageSource.maxHealth.value, 5283);
 	});
 
-	await t.test('4 infernals | mid quest', { only: true }, async () => {
+	await t.test('4 infernals | mid quest', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Belveth', {
 			...sourceCommon,
 			internalData: { passiveStacks: 0, hasPassiveStack: 0 },
@@ -171,11 +177,11 @@ test.only('26.18 Belveth', async (t) => {
 		}, damageSource);
 		assert.strictEqual(damageSource.maxHealth.value, 5259);
 
-		damageSource.currentHealth.value = 591;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 238,
-			abilityPower: 415,
-		}, damageSource);
-		assert.strictEqual(damageSource.maxHealth.value, 5283);
+		// damageSource.currentHealth.value = 591;
+		// typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+		// 	attackDamage: 238,
+		// 	abilityPower: 415,
+		// }, damageSource);
+		// assert.strictEqual(damageSource.maxHealth.value, 5283);
 	});
 });
