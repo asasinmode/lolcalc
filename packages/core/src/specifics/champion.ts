@@ -57,12 +57,14 @@ import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
 import { STAT_ICON } from '@lolcalc/data';
-import { ALL_CHAMPION_STATS_ENTRIES, EFFECT_OBJECT_NAME, VariableType } from '@lolcalc/shared';
+import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
 import { combineCompounding } from '../calculate/util.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES } from './index.ts';
+// import { GameAbilityId } from '../GameAbilityId.ts';
+// import { simpleFormattingGameAbilityImage } from '../misc.ts';
 
 export function cooldownReductionPercentageFromHaste(haste: number): number {
 	return haste / (haste + 100) * 100;
@@ -563,6 +565,7 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Belveth', typeof IBelveth, 'r'>()({
 				known: {
 					TotalComputedExplosionDamage: [],
+					ComputedMaxHealthDevour: [],
 				},
 				calculate(self, target) {
 					let TotalComputedExplosionDamage = Number.NaN;
@@ -579,6 +582,9 @@ export const CHAMPION_SPECIFICS = {
 					return {
 						TotalComputedExplosionDamage: {
 							value: TotalComputedExplosionDamage,
+						},
+						ComputedMaxHealthDevour: {
+							value: self.stats.value.variables.belvethDevourBonusHP ?? 0,
 						},
 					};
 				},
@@ -600,6 +606,14 @@ export const CHAMPION_SPECIFICS = {
 					},
 					BaseMaxHealth: {
 						type: VariableType.heal,
+					},
+					MaxHealthOnDevour: {
+						displayedName: 'TooltipMaxHealthOnDevour',
+					},
+					ComputedMaxHealthDevour: {
+						isCustom: true,
+						displayedName: 'MaxHealthOnDevour',
+						// additionalInfo: `While saying it does and showing the value as if it was, Belveth's ult doesn't actually factor in <scalead>attack damage</scalead> and <scaleap>ability power</scaleap> from [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.riftmaker))}Riftmaker's](https://wiki.leagueoflegends.com/en-us/Overlord's_Bloodmail) [Void Infusion](https://wiki.leagueoflegends.com/en-us/Named_item_effect#Void_Infusion), [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.dragon, 'Infernal', 'stack'))}Infernal Might](https://wiki.leagueoflegends.com/en-us/Dragon_Slayer) and ${''}`
 					},
 				},
 				uninteresting: ['PassiveStacksOnDevour', 'MissingHealthDamage', 'SteroidDuration', 'SteroidDurationUpgrade', 'StackThresholdForUpgrade', 'StackThresholdForPermanent', 'TotalASMod', 'VoidlingHPScale', 'VoidlingADScale'],
@@ -673,10 +687,6 @@ export const CHAMPION_SPECIFICS = {
 			postTotal: {
 				// TODO bloodmail retribution calc
 				handler(self, { itemPassivesStats, itemTotalStats, dragonStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, bonusStats, championPassiveStats }, { calculatedVariables }) {
-					if (!self.currentAbilityResource.value) {
-						return;
-					}
-
 					/* the actual values used in belveth's true form hp scaling - some values are ignored */
 					const ultUsedBonusAD = bonusStats.attackDamage
 						- totalMultipliersStats.attackDamage; /* infernal & mid quest */
@@ -700,6 +710,12 @@ export const CHAMPION_SPECIFICS = {
 
 					if (typeof maxHP.value !== 'number') {
 						console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate true form max hp', maxHP);
+						return;
+					}
+
+					calculatedVariables.belvethDevourBonusHP = maxHP.value;
+
+					if (!self.currentAbilityResource.value) {
 						return;
 					}
 

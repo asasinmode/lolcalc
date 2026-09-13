@@ -16,6 +16,7 @@ test.before(() => {
 
 const infernalStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Infernal'];
 
+// TODO possibly belveth ult form hp -> riftmaker -> rabadon, would need same treatment as bloodmail
 test('16.17 adaptive force', async (t) => {
 	const sourceCommon: IOverrides<'Amumu'> = {
 		internalData: { applyPassive: 0 },
