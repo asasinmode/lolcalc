@@ -799,6 +799,16 @@ export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OB
 
 export const EFFECT_OBJECT_NAME_ENTRIES = Object.entries(EFFECT_OBJECT_NAME) as [string, IEffectObjectName][];
 
+export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: string, imgSize: number]>> = {
+	[EFFECT_OBJECT_NAME.cleanse]: ['game/assets/spells/icons2d/summoner_boost.png', 64],
+	[EFFECT_OBJECT_NAME.heal]: ['game/assets/spells/icons2d/summoner_heal.png', 64],
+	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
+	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
+	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
+	[EFFECT_OBJECT_NAME.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
+	[EFFECT_OBJECT_NAME.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
+};
+
 export const VariableType = {
 	shield: 'shield',
 	heal: 'heal',

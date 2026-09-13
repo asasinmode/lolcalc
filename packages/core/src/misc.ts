@@ -2,9 +2,9 @@ import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
 import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
-import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES } from '@lolcalc/shared';
 import { GameAbilityId } from './GameAbilityId.ts';
-import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
+import { EFFECT_SPECIFICS } from './specifics/effect.ts';
 
 const statIconNameValues = Object.values(STAT_ICON);
 

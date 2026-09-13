@@ -1320,16 +1320,6 @@ type IEffectModifyVariableFunction<T extends (number | undefined)[] = [number]> 
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 
-export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [path: string, imgSize: number]>> = {
-	[EFFECT_OBJECT_NAME.cleanse]: ['game/assets/spells/icons2d/summoner_boost.png', 64],
-	[EFFECT_OBJECT_NAME.heal]: ['game/assets/spells/icons2d/summoner_heal.png', 64],
-	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
-	[EFFECT_OBJECT_NAME.grievousWoundsPercent]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
-	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
-	[EFFECT_OBJECT_NAME.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
-	[EFFECT_OBJECT_NAME.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
-};
-
 const slowEffectDescriptionObj = {
 	stringtable: 'game_buff_tooltip_slow',
 };
