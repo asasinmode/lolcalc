@@ -1,10 +1,64 @@
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
-import { CHAMPION_IMAGES, EFFECTS, imgUrl, ITEMS, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
-import { AbilityType } from '@lolcalc/shared';
+import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
+import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
+import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { CUSTOM_EFFECT_IMAGES, EFFECT_SPECIFICS } from './specifics/effect.ts';
-import { replaceGameIcons } from './variables/game.ts';
+
+const statIconNameValues = Object.values(STAT_ICON);
+
+/** images found in [assets/ux/fonts/texticons/lol/champion](https://raw.communitydragon.org/16.13/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/champion) that are also encountered in some champion ability descriptions without the extension like `%i:asolstackicon%` or `%i:kindredpassiveicon%` */
+const championGameIcons = [
+	'asolstackicon',
+	'kindredpassiveicon',
+	'nasusstackicon',
+	'sennascalingicon',
+	'shyvana',
+	'smolder',
+	'threshscalingicon',
+];
+
+const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map(([key, value]) => [value, key])) as Record<string, any>;
+
+/** singular `replaceGameIcons` */
+export function gameIconImgAttrs(icon: typeof STAT_ICON[keyof typeof STAT_ICON], subpath?: string, isChampionIcon = false): { src: string; width: number; height: number } {
+	return typeof icon === 'string'
+		? {
+				src: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(icon)
+					? 'statsicon'
+					: subpath ?? (isChampionIcon ? 'champion' : 'gameplay')
+				}/${icon}.png`,
+				width: 20,
+				height: 20,
+			}
+		: {
+				src: icon[0],
+				width: icon[1],
+				height: icon[2] ?? icon[1],
+			};
+}
+
+export function replaceGameIcons(text: string, subpath?: string, addAlt = false): string {
+	return text
+		.replace(/%i:(\w+)%/g, (_, name: string) => {
+			name = name.toLocaleLowerCase();
+			const isChampionIcon = championGameIcons.includes(name);
+
+			let altSource;
+			if (addAlt) {
+				const stat = STAT_ICON_VALUE_TO_STAT[name];
+				// @ts-expect-error accessing is chill
+				altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat]);
+			}
+
+			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name)
+				? 'statsicon'
+				: subpath ?? (isChampionIcon ? 'champion' : 'gameplay')
+			}/${name}.png" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
+		})
+		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
+}
 
 export type IGameImageData = [src: string, width: number, height?: number, abilityName?: string] | (ITexture & { abilityName?: string });
 

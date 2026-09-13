@@ -4,8 +4,7 @@ import type { IEffectControlsProps, IExtraOnValueUpdate, IGameAbilityData, ISele
 import type { ComputedRef, SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
-import { gameAbilityImage } from '@lolcalc/core/misc';
-import { replaceGameIcons } from '@lolcalc/core/variables/game';
+import { gameAbilityImage, replaceGameIcons } from '@lolcalc/core/misc';
 import { AbilityType } from '@lolcalc/shared';
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
 

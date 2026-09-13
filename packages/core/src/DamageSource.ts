@@ -22,14 +22,14 @@ import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
 import { calculateChampionStats } from './calculate/championStats.ts';
 import { calculateEffectsOntoTargetVars } from './calculate/damage.ts';
 import { GameAbilityId } from './GameAbilityId.ts';
-import { gameAbilityImage } from './misc.ts';
+import { gameAbilityImage, replaceGameIcons } from './misc.ts';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
 import { DRAGON_SPECIFICS } from './specifics/dragon.ts';
 import { defaultEffectIsActive, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES, effectsAppliedBy } from './specifics/effect.ts';
 import { calculateDynamicVariables, GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES } from './specifics/index.ts';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
-import { championAbilityVariableValue, itemVariableValue, replaceGameIcons, replaceGameVariables } from './variables/game.ts';
+import { championAbilityVariableValue, itemVariableValue, replaceGameVariables } from './variables/game.ts';
 import { replaceStringtableVariables } from './variables/stringtable.ts';
 
 export type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
