@@ -4,7 +4,7 @@ import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION
 import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
 import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES } from '@lolcalc/shared';
 import { GameAbilityId } from './GameAbilityId.ts';
-import { EFFECT_SPECIFICS } from './specifics/effect.ts';
+import { EFFECTS_META } from './specifics/effectsMeta.ts';
 
 const statIconNameValues = Object.values(STAT_ICON);
 
@@ -64,7 +64,7 @@ export type IGameImageData = [src: string, width: number, height?: number, abili
 
 export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGameImageData> {
 	const imageAbilityId = abilityId.type === AbilityType.effect
-		? EFFECT_SPECIFICS[abilityId.id].sourceAbility
+		? EFFECTS_META[abilityId.id].sourceAbility
 		: abilityId;
 
 	if (!imageAbilityId) {
@@ -86,7 +86,7 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 				imgUrl(`game/${effectData.image}`),
 				64,
 				undefined,
-				EFFECT_SPECIFICS[imageAbilityId.id].label,
+				EFFECTS_META[imageAbilityId.id].label,
 			];
 		}
 		if (!CUSTOM_EFFECT_IMAGES[imageAbilityId.id]) {
@@ -97,7 +97,7 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 			imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0]),
 			CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
 			undefined,
-			EFFECT_SPECIFICS[imageAbilityId.id].label,
+			EFFECTS_META[imageAbilityId.id].label,
 		];
 	} else if (imageAbilityId.type === AbilityType.dragon) {
 		return { ...UI.dragons[imageAbilityId.id][imageAbilityId.subtype === 'stack' ? 'stack' : 'soulActive'], abilityName: `${imageAbilityId.id} ${imageAbilityId.subtype}` };
