@@ -57,7 +57,7 @@ import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
-import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, ISpecificVariables, IVariableValueResult } from './index';
+import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, IExtraInactiveFn, ISpecificVariables, IVariableValueResult } from './index';
 import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, EffectObjectName, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
@@ -1617,9 +1617,12 @@ export const CHAMPION_SPECIFICS = {
 				enemiesNearby: Math.max(0, Math.round(self.internalData.value.enemiesNearby ?? 0)),
 			};
 		},
+		dismountedComponentsInactive: (self => !self.stats.value.variables.kledIsDismounted) satisfies IExtraInactiveFn,
 		calculateHooks: {
 			postTotal: {
 				handler(self, { bonusStats, baseOnLevelStats, totalStats, totalPreMultipliersStats, championPassiveStats }, { calculatedVariables }) {
+					calculatedVariables.kledIsDismounted = self.currentHealth.value < baseOnLevelStats.hp;
+
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
 
 					const skaarlBaseHP = championAbilityVariableValue('SkaarlHealth', passiveParams);
@@ -1633,8 +1636,7 @@ export const CHAMPION_SPECIFICS = {
 					bonusStats.hp += skaarlBaseHP.value;
 					totalPreMultipliersStats.hp += skaarlBaseHP.value;
 
-					const isDismounted = self.currentHealth.value < baseOnLevelStats.hp;
-					if (!isDismounted) {
+					if (!calculatedVariables.kledIsDismounted) {
 						return;
 					}
 

@@ -1,6 +1,6 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IEffectControlsProps, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
+import type { IEffectControlsProps, IExtraInactiveFn, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import type { ComputedRef, SlotsType } from 'vue';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
@@ -20,11 +20,13 @@ export async function numberExtra<T extends IGameAbilityId>(
 		effectControlsProps,
 		selectEffectSourceProps,
 		tooltip,
+		inactive,
 	}: {
 		onUpdate?: IExtraOnValueUpdate;
 		effectControlsProps?: IEffectControlsProps<any>;
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 		tooltip?: string;
+		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
@@ -82,6 +84,8 @@ export async function numberExtra<T extends IGameAbilityId>(
 			}
 		}
 
+		const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
+
 		return () => h(CalculatorExtraNumber, {
 			'modelValue': modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -91,6 +95,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			'max': toValue(localMax),
 			'step': toValue(localStep),
 			tooltip,
+			'inactive': isInactive && isInactive.value,
 			usedNumberInput,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
@@ -197,14 +202,18 @@ export async function booleanExtra<T extends IGameAbilityId>(
 	{
 		onUpdate,
 		effectControlsProps,
+		inactive,
 	}: {
 		onUpdate?: IExtraOnValueUpdate;
 		effectControlsProps?: IEffectControlsProps<any>;
+		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const imgSrc = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
+
+		const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
 
 		/* kind of unusual thing for bloodmail extra which is the only thing using effectControlsProps in boolean extra atm */
 		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
@@ -222,6 +231,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 			imgSrc,
 			labelPrefixApply,
 			tooltip,
+			'inactive': isInactive && isInactive.value,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);

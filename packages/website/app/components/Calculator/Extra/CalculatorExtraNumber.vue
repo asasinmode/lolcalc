@@ -10,6 +10,8 @@ withDefaults(defineProps<{
 	max?: number;
 	step?: number;
 	disabled?: boolean;
+	/** disabled but only visually */
+	inactive?: boolean;
 	tooltip?: string;
 }>(), {
 	min: 0,
@@ -23,7 +25,7 @@ const value = defineModel<number>();
 </script>
 
 <template>
-	<article class="calc-extra-number">
+	<article class="calc-extra-number" :data-inactive="inactive || undefined">
 		<img
 			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
@@ -92,6 +94,23 @@ const value = defineModel<number>();
 			&:nth-last-of-type(2) {
 				--at-apply: 'justify-self-end -me-px';
 			}
+		}
+	}
+}
+
+@layer overrides {
+	.calc-extra-number[data-inactive='true'] {
+		> label {
+			--at-apply: 'text-neutral-400';
+		}
+
+		> input,
+		> button {
+			--at-apply: 'brightness-90';
+		}
+
+		> button:disabled {
+			--at-apply: 'brightness-50';
 		}
 	}
 }

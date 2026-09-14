@@ -100,8 +100,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	},
 	Kled: {
 		extras: [
-			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'runningTowardsEnemy', 'running towards enemy (dismounted)', false),
-			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'enemiesNearby', 'enemies nearby (dismounted)', 0, 5),
+			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'runningTowardsEnemy', 'running towards enemy (dismounted)', false, undefined, undefined, {
+				inactive: CHAMPION_SPECIFICS.Kled.dismountedComponentsInactive,
+			}),
+			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'enemiesNearby', 'enemies nearby (dismounted)', 0, 5, undefined, {
+				inactive: CHAMPION_SPECIFICS.Kled.dismountedComponentsInactive,
+			}),
 		],
 	},
 	LeeSin: {

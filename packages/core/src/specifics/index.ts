@@ -352,3 +352,7 @@ export interface IExtraOnValueUpdate {
 export interface IDeriveProgressFn<Maybe extends boolean = false> {
 	(value: number, self: Maybe extends false ? DamageSource : (DamageSource | undefined)): number;
 }
+
+export interface IExtraInactiveFn {
+	(self: DamageSource): boolean | undefined;
+}

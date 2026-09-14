@@ -7,6 +7,7 @@ defineProps<{
 	label: string;
 	labelPrefixApply?: boolean;
 	tooltip?: string;
+	inactive?: boolean;
 }>();
 
 defineEmits<{
@@ -17,7 +18,7 @@ const value = defineModel<number>();
 </script>
 
 <template>
-	<article class="calc-extra-boolean">
+	<article class="calc-extra-boolean" :data-inactive="inactive || undefined">
 		<img
 			v-bind="gameImageAttrs(imgSrc, 56)"
 			aria-hidden="true"
@@ -50,6 +51,12 @@ const value = defineModel<number>();
 		> label {
 			--at-apply: 'ps-[0.5ch] leading-[1.1]';
 		}
+	}
+}
+
+@layer overrides {
+	.calc-extra-boolean[data-inactive='true'] > label {
+		--at-apply: 'text-neutral-400';
 	}
 }
 </style>

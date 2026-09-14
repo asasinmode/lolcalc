@@ -277,6 +277,7 @@ export interface IStatsCalculationVariables {
 	belvethPostAbilityBonusAS?: number;
 	/** actual bonus hp from belveth's R true form, stored here in addition to `championPassive.hp` because it needs to be available for display in the results always but calculated only when form is active */
 	belvethDevourBonusHP?: number;
+	kledIsDismounted?: boolean;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
