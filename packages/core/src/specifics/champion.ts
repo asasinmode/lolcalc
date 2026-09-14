@@ -1613,10 +1613,15 @@ export const CHAMPION_SPECIFICS = {
 	Kled: {
 		setupData(self) {
 			return {
-				kledCurrentHP: Math.max(0, Math.round(self.internalData.value.kledCurrentHP ?? self.stats.value.baseOnLevel.hp)),
-				skaarlCurrentHP: Math.max(0, Math.round(self.internalData.value.skaarlCurrentHP ?? self.stats.value.bonus.hp)),
+				kledCurrentHP: clamp(0, Math.round(self.internalData.value.kledCurrentHP ?? self.stats.value.baseOnLevel.hp), self.stats.value.baseOnLevel.hp),
+				skaarlCurrentHP: clamp(0, Math.round(self.internalData.value.skaarlCurrentHP ?? self.stats.value.bonus.hp), self.stats.value.bonus.hp),
 				runningTowardsEnemy: clamp(0, Math.round(self.internalData.value.runningTowardsEnemy ?? 0), 1),
 				enemiesNearby: Math.max(0, Math.round(self.internalData.value.enemiesNearby ?? 0)),
+				_watchHandles: [
+					watch(() => self.internalData.value.kledCurrentHP + self.internalData.value.skaarlCurrentHP, (value) => {
+						self.currentHealth.value = Math.min(value, self.stats.value.total.hp);
+					}, { immediate: true }),
+				],
 			};
 		},
 		dismountedComponentsInactive: (self => !self.stats.value.variables.kledIsDismounted) satisfies IExtraInactiveFn,
@@ -3908,7 +3913,7 @@ export interface IChampionInternalDataMap {
 	Ambessa: { hasPassiveStack: number };
 	Amumu: { applyPassive: number };
 	Anivia: { isEgg: number };
-	Aphelios: { lastRotatedVariantIndex: number } & IDamageSourceInternalDataBase;
+	Aphelios: { lastRotatedVariantIndex: number };
 	AurelionSol: { passiveStacks: number };
 	Ashe: { frostShot: number };
 	Bard: { passiveStacks: number; chimeMoveSpeed: number };
@@ -3938,7 +3943,7 @@ export interface IChampionInternalDataMap {
 	};
 	LeeSin: { hasPassiveStack: number };
 	Mordekaiser: { isPassiveMSActive: number };
-	Naafiri: { passiveStacks: number } & IDamageSourceInternalDataBase;
+	Naafiri: { passiveStacks: number };
 	Nami: {
 		passiveMSProgress: number;
 		/**
@@ -3951,7 +3956,7 @@ export interface IChampionInternalDataMap {
 	Nidalee: { passiveVariantActive: number };
 	Nunu: { isPassiveActive: number };
 	Orianna: { passiveStacksOnTarget: number };
-	Ornn: { _masterworkLevel: number; masterworkItemSlot: number; passiveUpgradedAllies: number } & IDamageSourceInternalDataBase;
+	Ornn: { _masterworkLevel: number; masterworkItemSlot: number; passiveUpgradedAllies: number };
 	Rammus: { defensiveCurl: number };
 	Rell: { passiveStacksOnTarget: number };
 	Rengar: { passiveStacks: number; isPassiveMSActive: number };

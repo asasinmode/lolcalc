@@ -101,6 +101,8 @@ onBeforeUnmount(() => {
 			--at-apply: 'gap-x-0';
 
 			> div {
+				--at-apply: 'gap-x-1.25';
+
 				&:first-child {
 					--at-apply: 'basis-[--kled-bar-w-percent] b-e b-[0.5px] b-neutral-400';
 				}
