@@ -18,11 +18,11 @@ export default defineNuxtConfig({
 		css: {
 			transformer: 'lightningcss',
 			lightningcss: {
-				/* most advanced used feature [anchor-name](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/anchor-name#browser_compatibility) */
+				/* most advanced used feature [field-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/field-sizing#specifications) */
 				targets: {
 					chrome: 125,
 					edge: 125,
-					firefox: 147,
+					firefox: 152,
 					opera: 111,
 					safari: 26,
 					android: 125,

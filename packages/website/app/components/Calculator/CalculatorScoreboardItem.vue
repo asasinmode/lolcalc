@@ -688,9 +688,9 @@ const {
 	dragValueRef: abilityResourceDragValueRef,
 } = healthResourceSliderEvents(props.value.currentAbilityResource, props.value.maxAbilityResource, resourceBarEl);
 
-function healthResourceSliderEvents(target: Ref<number>, max: Ref<number>, element: Ref<HTMLElement | null>) {
+function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<number>, element: Ref<HTMLElement | null>) {
 	function onMousedown(event: MouseEvent) {
-		if (!max.value || event.button !== 0 || event.target !== element.value) {
+		if (!toValue(max) || event.button !== 0 || event.target !== element.value) {
 			return;
 		}
 		document.addEventListener('mousemove', onMousemove);
@@ -724,7 +724,7 @@ function healthResourceSliderEvents(target: Ref<number>, max: Ref<number>, eleme
 		const { left, right } = element.value!.getBoundingClientRect();
 		mousePosition = Math.max(left, Math.min(right, mousePosition));
 		const fillPercentage = (mousePosition - left) / (right - left);
-		const value = Math.max(0, Math.min(max.value, Math.round(fillPercentage * max.value)));
+		const value = Math.max(0, Math.min(toValue(max), Math.round(fillPercentage * toValue(max))));
 		dragValueRef.value = value;
 
 		debounceTimeout = setTimeout(() => {
@@ -2598,6 +2598,8 @@ defineExpose({ el });
 				}
 
 				.current-health,
+				/* target direct child div for ChampionKledHpBar */
+				.current-health > div,
 				.current-ability-resource {
 					--at-apply: 'relative col-span-full bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
 
@@ -2613,12 +2615,12 @@ defineExpose({ el });
 						--at-apply: 'z-1 pointer-events-none select-none';
 					}
 
-					/* TODO add field-sizing: content; once firefox has it */
 					> input {
-						--at-apply: 'z-1 w-12 bg-white text-black text-center leading-none px-1';
+						--at-apply: 'z-1 min-inline-12 bg-white text-black text-center leading-none px-1 max-inline-[30vw]';
 						-webkit-appearance: textfield;
 						-moz-appearance: textfield;
 						appearance: textfield;
+						field-sizing: content;
 
 						&::-webkit-outer-spin-button,
 						&::-webkit-inner-spin-button {

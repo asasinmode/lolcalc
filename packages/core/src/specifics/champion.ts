@@ -1620,7 +1620,7 @@ export const CHAMPION_SPECIFICS = {
 		dismountedComponentsInactive: (self => !self.stats.value.variables.kledIsDismounted) satisfies IExtraInactiveFn,
 		calculateHooks: {
 			postTotal: {
-				handler(self, { bonusStats, baseOnLevelStats, totalStats, totalPreMultipliersStats, championPassiveStats }, { calculatedVariables }) {
+				handler(self, { bonusStats, baseOnLevelStats, totalStats, totalPreMultipliersStats }, { calculatedVariables }) {
 					calculatedVariables.kledIsDismounted = self.currentHealth.value < baseOnLevelStats.hp;
 
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
@@ -1631,7 +1631,6 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					championPassiveStats.hp = skaarlBaseHP.value;
 					totalStats.hp += skaarlBaseHP.value;
 					bonusStats.hp += skaarlBaseHP.value;
 					totalPreMultipliersStats.hp += skaarlBaseHP.value;
