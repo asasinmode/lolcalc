@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<div class="current-health">
+	<div class="current-health" :style="`--kled-bar-w-percent: ${(kledMaxHP / value.stats.value.total.hp * 100).toFixed(4)}%;`">
 		<div
 			ref="kledBar"
 			:style="`--fill-percentage: ${Math.min(kledDragValueRef / kledMaxHP, 1)}`"
@@ -96,10 +96,19 @@ onBeforeUnmount(() => {
 
 <style>
 @layer overrides {
-	[data-scoreboard-item] {
+	[data-scoreboard-item='Kled'] {
 		.current-health {
-			label {
-				--at-apply: 'sr-only';
+			--at-apply: 'gap-x-0';
+
+			> div {
+				&:first-child {
+					--at-apply: 'basis-[--kled-bar-w-percent] b-e b-[0.5px] b-neutral-400';
+				}
+
+				&:last-child {
+					--at-apply: 'flex-1 b-s b-[0.5px] b-neutral-400';
+					--fill-bg: theme('colors.amber.600');
+				}
 			}
 		}
 	}
