@@ -2087,7 +2087,7 @@ export interface IDamageSourceInternalDataProvider<Id extends IChampionId | unde
 	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
 	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed (but not validated/clamped, that's done by the `setupData`)
 	 */
-	setupData?: (self: DamageSource<Id>) => RV;
+	setupData?: (self: DamageSource<Id>) => RV & IDamageSourceInternalDataBase;
 }
 
 export interface IDamageSourceInternalItemDataProvider {
