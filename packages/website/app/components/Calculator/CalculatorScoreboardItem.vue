@@ -920,7 +920,7 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 
 function recalculateEffect(effectIndex: number) {
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
-	computedEffect.specific.effectControls?.refresh?.(props.value);
+	computedEffect.specific.effectControls?.refresh?.(props.value, false);
 }
 
 onBeforeUnmount(() => {
@@ -1294,11 +1294,7 @@ defineExpose({ el });
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 							<dt>{{ statValue.name ?? CHAMPION_STAT_META[statValue.stat].name }}:</dt>
 							<dd :class="{ 'has-bonus': statValue.bonus }">
-								<span class="total">{{
-									CHAMPION_STAT_META[statValue.stat].maxDisplayed
-										? Math.min(CHAMPION_STAT_META[statValue.stat].maxDisplayed!, value.computed.formattedStatTotals.value[statValue.stat])
-										: value.computed.formattedStatTotals.value[statValue.stat]
-								}}</span>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
+								<span class="total">{{ value.computed.formattedStatTotals.value[statValue.stat] }}</span>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
 								<template v-if="'base' in statValue && !(statValue.stat === 'attackSpeed' || statValue.stat === 'attackSpeedRatio')">
 									(<span class="base">{{ statValue.base }}</span> base + <span class="bonus">{{ statValue.bonus }}</span> bonus)
 								</template>
@@ -1430,6 +1426,7 @@ defineExpose({ el });
 			<section ref="healthAbilityResource" class="health-ability-resource">
 				<h4>health and ability resource</h4>
 				<div
+					v-if="value.listedChampion.value?.id !== 'Kled'"
 					ref="healthBar"
 					class="current-health"
 					:style="`--fill-percentage: ${!value.anythingFilled.value || value.maxHealth.value === 0 ? 1 : Math.min(healthDragValueRef / value.maxHealth.value, 1)}`"
@@ -1450,6 +1447,7 @@ defineExpose({ el });
 						<span>/ {{ value.maxHealth.value }}</span>
 					</template>
 				</div>
+				<ChampionKledHpBar v-else :value :id-suffix :update-champion-health :health-resource-slider-events />
 				<div
 					ref="resourceBar"
 					class="current-ability-resource"
