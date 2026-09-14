@@ -19,6 +19,7 @@ import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
 import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
 import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
+import type IKled from '@lolcalc/data/files/champion/Kled.json';
 import type IKSante from '@lolcalc/data/files/champion/KSante.json';
 import type ILocke from '@lolcalc/data/files/champion/Locke.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
@@ -688,9 +689,8 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				// TODO bloodmail retribution calc
 				handler(self, { itemPassivesStats, itemTotalStats, dragonStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, bonusStats, championPassiveStats }, { calculatedVariables }) {
-					/* the actual values used in belveth's true form hp scaling - some values are ignored */
+					/* the actual values used in belveth's true form hp scaling - stats from some sources are ignored */
 					const ultUsedBonusAD = bonusStats.attackDamage
 						- totalMultipliersStats.attackDamage; /* infernal & mid quest */
 					const ultUsedTotalAP = totalStats.abilityPower
@@ -722,6 +722,7 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
+					// TODO maybe will be useful for bloodmail retribution calc
 					// const baseHPValue = maxHP.calculatesFrom?.[0]?.value as number ?? 0;
 					// const hpADScaling = maxHP.calculatesFrom?.[1]?.value as number ?? 0;
 					// const hpAPScaling = maxHP.calculatesFrom?.[2]?.value as number ?? 0;
@@ -1612,9 +1613,35 @@ export const CHAMPION_SPECIFICS = {
 	Kled: {
 		setupData(self) {
 			return {
-				// TODO skaarl hp, Q variant, disabled E & R when dismounted
-				isDismounted: clamp(0, Math.round(self.internalData.value.isDismounted ?? 0), 1),
+				runningTowardsEnemy: clamp(0, Math.round(self.internalData.value.runningTowardsEnemy ?? 0), 1),
+				enemiesNearby: Math.max(0, Math.round(self.internalData.value.enemiesNearby ?? 0)),
 			};
+		},
+		calculateHooks: {
+			postTotal: {
+				handler(self, { bonusStats, baseOnLevelStats, totalStats, totalPreMultipliersStats, championPassiveStats }, { calculatedVariables }) {
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+
+					const skaarlBaseHP = championAbilityVariableValue('SkaarlHealth', passiveParams);
+					if (typeof skaarlBaseHP.value !== 'number') {
+						console.warn('[CHAMPION_SPECIFICS kled] failed to calculate passive skaarl base hp', skaarlBaseHP);
+						return;
+					}
+
+					championPassiveStats.hp = skaarlBaseHP.value;
+					totalStats.hp += skaarlBaseHP.value;
+					bonusStats.hp += skaarlBaseHP.value;
+					totalPreMultipliersStats.hp += skaarlBaseHP.value;
+
+					const isDismounted = self.currentHealth.value < baseOnLevelStats.hp;
+					if (!isDismounted) {
+						return;
+					}
+
+					console.log('dismounted');
+				},
+				priority: HOOK_PRIORITIES.postTotal.Kled,
+			},
 		},
 	},
 	KSante: {
@@ -3900,7 +3927,7 @@ export interface IChampionInternalDataMap {
 	Kayle: { passiveStacks: number };
 	Kayn: { form: number };
 	Kindred: { passiveStacks: number };
-	Kled: { isDismounted: number };
+	Kled: { runningTowardsEnemy: number; enemiesNearby: number };
 	LeeSin: { hasPassiveStack: number };
 	Mordekaiser: { isPassiveMSActive: number };
 	Naafiri: { passiveStacks: number } & IDamageSourceInternalDataBase;

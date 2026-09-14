@@ -47,6 +47,8 @@ export const HOOK_PRIORITIES = {
 		Vladimir: 1,
 		Jhin: 1,
 		Zaahen: 1,
+		/** needs total hp */
+		Kled: 1,
 		/** needs total ap */
 		Volibear: 1,
 		/** needs total hp, must be before immortal path */

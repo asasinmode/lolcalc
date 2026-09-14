@@ -99,7 +99,10 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
 	},
 	Kled: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'isDismounted', 'is dismounted', false),
+		extras: [
+			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'runningTowardsEnemy', 'running towards enemy (dismounted)', false),
+			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'enemiesNearby', 'enemies nearby (dismounted)', 0, 5),
+		],
 	},
 	LeeSin: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'LeeSin', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
