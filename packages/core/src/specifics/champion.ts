@@ -1613,6 +1613,8 @@ export const CHAMPION_SPECIFICS = {
 	Kled: {
 		setupData(self) {
 			return {
+				kledCurrentHP: Math.max(0, Math.round(self.internalData.value.kledCurrentHP ?? self.stats.value.baseOnLevel.hp)),
+				skaarlCurrentHP: Math.max(0, Math.round(self.internalData.value.skaarlCurrentHP ?? self.stats.value.bonus.hp)),
 				runningTowardsEnemy: clamp(0, Math.round(self.internalData.value.runningTowardsEnemy ?? 0), 1),
 				enemiesNearby: Math.max(0, Math.round(self.internalData.value.enemiesNearby ?? 0)),
 			};
@@ -3928,7 +3930,12 @@ export interface IChampionInternalDataMap {
 	Kayle: { passiveStacks: number };
 	Kayn: { form: number };
 	Kindred: { passiveStacks: number };
-	Kled: { runningTowardsEnemy: number; enemiesNearby: number };
+	Kled: {
+		kledCurrentHP: number;
+		skaarlCurrentHP: number;
+		runningTowardsEnemy: number;
+		enemiesNearby: number;
+	};
 	LeeSin: { hasPassiveStack: number };
 	Mordekaiser: { isPassiveMSActive: number };
 	Naafiri: { passiveStacks: number } & IDamageSourceInternalDataBase;

@@ -1,9 +1,10 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 
 const props = defineProps<{
 	idSuffix: string;
-	value: DamageSource;
+	value: DamageSource<'Kled'>;
 	healthResourceSliderEvents: (target: Ref<number>, max: Ref<number>, element: Ref<HTMLElement | null>) => {
 		onMousedown: (e: MouseEvent) => void;
 		cleanup: () => void;
@@ -13,38 +14,94 @@ const props = defineProps<{
 	updateChampionHealth: (e: Event) => void;
 }>();
 
-const healthBarEl = useTemplateRef('healthBar');
+const kledMaxHP = computed(() => props.value.stats.value.baseOnLevel.hp);
+const skaarlMaxHP = computed(() => props.value.stats.value.bonus.hp);
+
+const kledCurrentHp = computed<number>({
+	get() {
+		return props.value.internalData.value.kledCurrentHP;
+	},
+	set(value) {
+		props.value.internalData.value.kledCurrentHP = value;
+	},
+});
+const skaarlCurrentHp = computed<number>({
+	get() {
+		return props.value.internalData.value.skaarlCurrentHP;
+	},
+	set(value) {
+		props.value.internalData.value.skaarlCurrentHP = value;
+	},
+});
+
+const kledBarEl = useTemplateRef('kledBar');
 const {
-	cleanup,
-	onMousedown,
-	dragValueRef,
-} = props.healthResourceSliderEvents(props.value.currentHealth, props.value.maxHealth, healthBarEl);
+	cleanup: kledCleanup,
+	onMousedown: kledOnMousedown,
+	dragValueRef: kledDragValueRef,
+} = props.healthResourceSliderEvents(kledCurrentHp, kledMaxHP, kledBarEl);
+const skaarlBarEl = useTemplateRef('skaarlBar');
+const {
+	cleanup: skaarlCleanup,
+	onMousedown: skaarlOnMousedown,
+	dragValueRef: skaarlDragValueRef,
+} = props.healthResourceSliderEvents(skaarlCurrentHp, skaarlMaxHP, skaarlBarEl);
 
 onBeforeUnmount(() => {
-	cleanup();
+	kledCleanup();
+	skaarlCleanup();
 });
 </script>
 
 <template>
-	<div
-		ref="healthBar"
-		class="current-health"
-		:style="`--fill-percentage: ${!value.anythingFilled.value || value.maxHealth.value === 0 ? 1 : Math.min(dragValueRef / value.maxHealth.value, 1)}`"
-		@mousedown="onMousedown"
-	>
-		<template v-if="value.anythingFilled.value && value.maxHealth.value !== 0">
-			<label :for="`${idSuffix}-current-ability-health`">
-				health
+	<div class="current-health">
+		<div
+			ref="kledBar"
+			:style="`--fill-percentage: ${Math.min(kledDragValueRef / kledMaxHP, 1)}`"
+			@mousedown="kledOnMousedown"
+		>
+			<label :for="`${idSuffix}-current-ability-health-kled`">
+				Kled health
 			</label>
 			<input
 				:id="`${idSuffix}-current-ability-health`"
-				:value="Math.round(dragValueRef)"
+				:value="Math.round(kledDragValueRef)"
 				min="0"
 				:max="value.maxHealth.value"
 				type="number"
 				@input="updateChampionHealth"
 			>
-			<span>/ {{ value.maxHealth.value }}</span>
-		</template>
+			<span>/ {{ kledMaxHP }}</span>
+		</div>
+		<div
+			ref="skaarlBar"
+			:style="`--fill-percentage: ${Math.min(skaarlDragValueRef / skaarlMaxHP, 1)}`"
+			@mousedown="skaarlOnMousedown"
+		>
+			<label :for="`${idSuffix}-current-ability-health-skaarl`">
+				Skaarl health
+			</label>
+			<input
+				:id="`${idSuffix}-current-ability-health-skaarl`"
+				:value="Math.round(skaarlDragValueRef)"
+				min="0"
+				:max="value.maxHealth.value"
+				type="number"
+				@input="updateChampionHealth"
+			>
+			<span>/ {{ skaarlMaxHP }}</span>
+		</div>
 	</div>
 </template>
+
+<style>
+@layer overrides {
+	[data-scoreboard-item] {
+		.current-health {
+			label {
+				--at-apply: 'sr-only';
+			}
+		}
+	}
+}
+</style>
