@@ -31,11 +31,11 @@ function onKeydown(e: KeyboardEvent) {
 	const tabLength = tabButtons!.length;
 	let newIndex = 0;
 	switch (e.key) {
-		case 'ArrowDown':
+		case 'ArrowUp':
 		case 'ArrowRight':
 			newIndex = (currentIndex + 1) % tabLength;
 			break;
-		case 'ArrowUp':
+		case 'ArrowDown':
 		case 'ArrowLeft':
 			newIndex = (currentIndex - 1 + tabLength) % tabLength;
 			break;
