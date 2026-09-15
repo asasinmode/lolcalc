@@ -1621,6 +1621,13 @@ export const CHAMPION_SPECIFICS = {
 					watch(() => self.internalData.value.kledCurrentHP + self.internalData.value.skaarlCurrentHP, (value) => {
 						self.currentHealth.value = Math.min(value, self.stats.value.total.hp);
 					}, { immediate: true }),
+					watch(self.maxHealth, (_value, previousValue) => {
+						if (self.currentHealth.value === previousValue) {
+							self.internalData.value.skaarlCurrentHP = self.stats.value.bonus.hp;
+						} else {
+							self.internalData.value.skaarlCurrentHP = Math.min(self.stats.value.bonus.hp, self.internalData.value.skaarlCurrentHP);
+						}
+					}, { immediate: true }),
 				],
 			};
 		},
