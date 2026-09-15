@@ -9,7 +9,7 @@ export function bloodmailRetributionBonusAD(damageSource: DamageSource, maxHpOve
 		return Number.NaN;
 	}
 
-	const currentHealthP = Math.min(damageSource.currentHealth.value / (maxHpOverride ?? Math.max(damageSource.stats.value.total.hp, 1)), 1);
+	const currentHealthP = Math.min(1, damageSource.currentHealth.value / (maxHpOverride ?? Math.max(damageSource.stats.value.total.hp, 1)));
 	const missingHealthP = 1 - currentHealthP;
 	const maxMissingHealthP = 1 - maxValueAt.value;
 	return ITEMS_BY_NAME.overlordsBloodmail?.dataValues.MissingHealthAD * Math.min(1, missingHealthP / maxMissingHealthP);

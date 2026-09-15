@@ -799,7 +799,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postTotal: {
 				handler(self, { bonusStats, totalStats }, { calculatedVariables }) {
-					const currentHpPercent = self.currentHealth.value / totalStats.hp;
+					const currentHpPercent = Math.min(self.currentHealth.value, totalStats.hp) / totalStats.hp;
 					const missingHealthPercent = (1 - currentHpPercent) * 100;
 
 					const healingMultVar = championAbilityVariableValue('TotalHealPerMissingHPPercentTooltip', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
@@ -902,7 +902,7 @@ export const CHAMPION_SPECIFICS = {
 					let TotalDamage = Number.NaN;
 
 					if (typeof flat.value === 'number' && typeof percent.value === 'number') {
-						TotalDamage = flat.value + (target?.currentHealth.value ?? 0) * percent.value;
+						TotalDamage = flat.value + (target ? Math.min(target.currentHealth.value, target.stats.value.total.hp) : 0) * percent.value;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate E damage variables', flat, percent);
 					}
@@ -1728,7 +1728,7 @@ export const CHAMPION_SPECIFICS = {
 					if (typeof minDamage.value === 'number' && typeof maxDamage.value === 'number') {
 						/** not saved in an actual variable? */
 						const maxThreshold = 0.3;
-						const targetPercentHealth = (target?.currentHealth.value ?? 0) / (target?.stats.value.total.hp || 1);
+						const targetPercentHealth = target ? (Math.min(target.currentHealth.value, target.stats.value.total.hp) / target.stats.value.total.hp || 1) : 0;
 						const damagePercent = Math.max(0, Math.min(1, (1 - targetPercentHealth) / (1 - maxThreshold)));
 						OnHitDamage = minDamage.value + (maxDamage.value - minDamage.value) * damagePercent;
 					}
@@ -3211,7 +3211,7 @@ export const CHAMPION_SPECIFICS = {
 				calculate(self) {
 					const baseHeal = championAbilityVariableValue('EmpoweredHealTooltip', { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.q, damageSource: self });
 					const percentMissing = championAbilityVariableValue('EmpoweredHealPercentTooltip', { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.q, damageSource: self });
-					const missingHealth = self.stats.value.total.hp - self.currentHealth.value;
+					const missingHealth = Math.max(0, self.stats.value.total.hp - self.currentHealth.value);
 					let EmpoweredHeal = 0;
 					if (typeof baseHeal.value === 'number' && typeof percentMissing.value === 'number') {
 						EmpoweredHeal = baseHeal.value + missingHealth * percentMissing.value;

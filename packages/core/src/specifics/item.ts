@@ -2123,7 +2123,7 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(_self, target) {
 				const { MeleeValue, RangedValue } = ITEMS_BY_NAME.botrk?.dataValues ?? {};
-				const targetHealth = target?.currentHealth.value ?? 0;
+				const targetHealth = target ? Math.min(target.currentHealth.value, target.stats.value.total.hp) : 0;
 
 				return {
 					f4: { value: 0 },
@@ -3328,7 +3328,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				const baseMelee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: false });
 				const baseRanged = itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: true });
-				const missingHp = self.stats.value.total.hp - self.currentHealth.value;
+				const missingHp = Math.max(0, self.stats.value.total.hp - self.currentHealth.value);
 				const missingHpHeal = missingHp * ITEMS_BY_NAME.sunderedSky?.dataValues.MissingHealthHeal;
 
 				return {
@@ -3643,7 +3643,7 @@ export const ITEM_SPECIFICS = {
 				const damage = itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: self, isRanged: self.stats.value.isRanged });
 				const maxMultiplier = (ITEMS_BY_NAME.krakenSlayer?.dataValues as any)[ITEMS_BY_NAME.krakenSlayer?.itemCalculations.MaximumDamage.mMultiplier.mDataValue!] ?? 1;
 				const targetMissingHpPercent = target
-					? target.currentHealth.value ? (target.stats.value.total.hp - target.currentHealth.value) / Math.max(target.stats.value.total.hp, 1) : 1
+					? target.currentHealth.value ? Math.max(0, target.stats.value.total.hp - target.currentHealth.value) / Math.max(target.stats.value.total.hp, 1) : 1
 					: 1;
 				const damageMultiplier = 1 + (maxMultiplier - 1) * targetMissingHpPercent;
 
@@ -3807,7 +3807,7 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(_self, target) {
 				const { PercentCurrentHPMelee, PercentCurrentHPRanged } = ITEMS_BY_NAME.voltaicCyclosword?.dataValues ?? {};
-				const currentHealth = target?.currentHealth.value ?? 0;
+				const currentHealth = target ? Math.min(target.currentHealth.value, target.stats.value.total.hp) : 0;
 				return {
 					f1: { value: 0 },
 					PercentHPDamage: {
@@ -4124,7 +4124,7 @@ export const ITEM_SPECIFICS = {
 		modifyVariable: {
 			type: [VariableType.magic, VariableType.true],
 			handler(value, meta, _self, damageTarget) {
-				if (!damageTarget || (damageTarget.currentHealth.value / (damageTarget.stats.value.total.hp ?? 1)) >= 0.4) {
+				if (!damageTarget || (Math.min(damageTarget.currentHealth.value, damageTarget.stats.value.total.hp) / (damageTarget.stats.value.total.hp || 1)) >= ITEMS_BY_NAME.shadowflame?.dataValues.HealthThreshold) {
 					return value;
 				}
 				meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
