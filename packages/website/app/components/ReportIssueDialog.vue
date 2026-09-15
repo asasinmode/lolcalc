@@ -62,7 +62,7 @@ function submitIssue(_event: SubmitEvent) {
 				<textarea id="issue-message" placeholder="level 5 Cassiopeia with swiftmarch, movement speed rune shard and cloud dragon shows wrong movement speed. Game shows 420, the linked configuration 415" rows="8" required />
 			</div>
 			<div>
-				<label for="issue-contact">where can I contact you?</label>
+				<label for="issue-contact">where can I contact you? <span>(will be publicly visible on <a href="https://github.com/asasinmode/lolcalc" target="_blank">github</a>)</span></label>
 				<input id="issue-contact" placeholder="discord: username, email: example@email.com">
 			</div>
 			<label for="issue-configuration">
