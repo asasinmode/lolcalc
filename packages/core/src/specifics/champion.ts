@@ -1627,6 +1627,7 @@ export const CHAMPION_SPECIFICS = {
 						} else {
 							self.internalData.value.skaarlCurrentHP = Math.min(self.stats.value.bonus.hp, self.internalData.value.skaarlCurrentHP);
 						}
+						self.internalData.value.kledCurrentHP = Math.min(self.stats.value.baseOnLevel.hp, self.internalData.value.kledCurrentHP);
 					}, { immediate: true }),
 				],
 			};

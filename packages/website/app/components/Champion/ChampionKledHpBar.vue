@@ -14,8 +14,8 @@ const props = defineProps<{
 	updateChampionHealth: (e: Event) => void;
 }>();
 
-const kledMaxHP = computed(() => props.value.stats.value.baseOnLevel.hp);
-const skaarlMaxHP = computed(() => props.value.stats.value.bonus.hp);
+const kledMaxHP = computed(() => Math.ceil(props.value.stats.value.baseOnLevel.hp));
+const skaarlMaxHP = computed(() => Math.floor(props.value.stats.value.bonus.hp));
 
 const kledCurrentHp = computed<number>({
 	get() {
