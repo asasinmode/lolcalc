@@ -225,6 +225,160 @@
 					]
 				}
 			}
+		},
+		"Kled": {
+			"partype": "Courage",
+			"stats": {
+				"hp": 410,
+				"hpperlevel": 84,
+				"mp": 100,
+				"mpperlevel": 0,
+				"movespeed": 345,
+				"armor": 35,
+				"armorperlevel": 5.2,
+				"spellblock": 28,
+				"spellblockperlevel": 2.05,
+				"attackrange": 125,
+				"hpregen": 6,
+				"hpregenperlevel": 0.75,
+				"mpregen": 0,
+				"mpregenperlevel": 0,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 65,
+				"attackdamageperlevel": 3.5,
+				"attackspeedperlevel": 3.5,
+				"attackspeed": 0.625,
+				"attackspeedratio": 0.625
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Skaarl, the Cowardly Lizard",
+							"objectName": "KledPassive",
+							"dataKey": "Characters/Kled/Spells/KledPassiveAbility/KledPassive",
+							"image": "assets/characters/kled/hud/icons2d/kled_p.png",
+							"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
+							"tooltip": "{{Spell_KledPassive_Tooltip}}",
+							"tooltipExtended": "{{Spell_KledPassive_Tooltip}}<br><br><rules>Skaarl has <healing>@SkaarlHealth@ Health plus 100% of Kled's bonus Health</healing>.<br>When Kled dismounts, he cleanses all crowd control and becomes briefly untargetable.</rules>",
+							"dataValues": {
+								"CourageVsChamps": [15, 15, 15, 15, 15, 15, 15],
+								"CourageVsOther": [5, 5, 5, 5, 5, 5, 5],
+								"CourageLastHit": [5, 5, 5, 5, 5, 5, 5],
+								"DismountedResistRatio": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+								"DismountedMSPenalty": [40, 40, 40, 40, 40, 40, 40],
+								"RemountDashDuration": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+								"MountReturnTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+								"DismountInvulnWindow": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+								"DismountDistanceBase": [200, 200, 200, 200, 200, 200, 200],
+								"DismountSpeedRadius": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+								"ResistBonusPerEnemy": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+								"ResistBonusRange": [1400, 1400, 1400, 1400, 1400, 1400, 1400],
+								"MountCD": [30, 30, 30, 30, 30, 30, 30]
+							},
+							"spellCalculations": {
+								"DismountedMS": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 70,
+											"mInitialBonusPerLevel": 5,
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									]
+								},
+								"SkaarlHealth": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 400,
+											"mEndValue": 1400,
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"SkaarlRemountHealth": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 0.4,
+											"mBreakpoints": [
+												{
+													"mLevel": 6,
+													"mAdditionalBonusAtThisLevel": 0.1
+												},
+												{
+													"mLevel": 11,
+													"mAdditionalBonusAtThisLevel": 0.1
+												},
+												{
+													"mLevel": 16,
+													"mAdditionalBonusAtThisLevel": 0.1
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"DismountedResistBonus": {
+									"mFormulaParts": [
+										{
+											"mNumber": 4,
+											"__type": "NumberCalculationPart"
+										},
+										{
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mDataValue": "DismountedResistRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"MountCooldown": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "MountCD",
+											"__type": "NamedDataValueCalculationPart"
+										}
+									]
+								},
+								"DismountedResistBonusMax": {
+									"mMultiplier": {
+										"mNumber": 2.5,
+										"__type": "NumberCalculationPart"
+									},
+									"mModifiedGameCalculation": "DismountedResistBonus",
+									"__type": "GameCalculationModified"
+								},
+								"DismountedAttackPenalty": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 0.15,
+											"mBreakpoints": [
+												{
+													"mLevel": 6,
+													"mAdditionalBonusAtThisLevel": -0.05
+												},
+												{
+													"mLevel": 11,
+													"mAdditionalBonusAtThisLevel": -0.05
+												},
+												{
+													"mLevel": 16,
+													"mAdditionalBonusAtThisLevel": -0.05
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true
+								}
+							}
+						}
+					]
+				}
+			}
 		}
 	},
 	"items": {

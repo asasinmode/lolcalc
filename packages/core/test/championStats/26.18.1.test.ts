@@ -1,4 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IInternalDataOf } from '@lolcalc/core/specifics/index.ts';
 import type { IDragonName } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
@@ -183,5 +184,43 @@ test('26.18 Belveth', async (t) => {
 		// 	abilityPower: 415,
 		// }, damageSource);
 		// assert.strictEqual(damageSource.maxHealth.value, 5283);
+	});
+});
+
+test('26.18 Kled', async (t) => {
+	const sourceCommon: IOverrides<'Kled'> = {
+		level: 18,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'tenacity',
+			},
+		},
+		items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon],
+	};
+	const internalData = {} as IInternalDataOf<'Kled'>;
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kled', {
+			...sourceCommon,
+			runes: {
+				shards: {
+					offensive: 'adaptive',
+					flex: 'adaptive',
+					defensive: 'health',
+				},
+			},
+			internalData,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 179,
+			abilityPower: 308,
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.internalData.value, {
+			kledCurrentHP: 1838,
+			skaarlCurrentHP: 2365,
+		}, damageSource);
 	});
 });
