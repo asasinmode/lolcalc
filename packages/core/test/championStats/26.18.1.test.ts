@@ -225,12 +225,15 @@ test('26.18 Kled', async (t) => {
 
 		damageSource.internalData.value.skaarlCurrentHP = 0;
 		damageSource.internalData.value.runningTowardsEnemy = 1;
+		damageSource.internalData.value.enemiesNearby = 4;
 		await nextTick();
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 196,
 			abilityPower: 308,
 			moveSpeed: 451,
+			armor: 137,
+			magicResist: 77,
 		}, damageSource);
 	});
 });

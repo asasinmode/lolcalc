@@ -1614,7 +1614,7 @@ export const CHAMPION_SPECIFICS = {
 		setupData(self) {
 			return {
 				kledCurrentHP: clamp(0, Math.round(self.internalData.value.kledCurrentHP ?? self.stats.value.baseOnLevel.hp), self.stats.value.baseOnLevel.hp),
-				skaarlCurrentHP: clamp(0, Math.round(self.internalData.value.skaarlCurrentHP ?? self.stats.value.bonus.hp), self.stats.value.bonus.hp),
+				skaarlCurrentHP: clamp(0, Math.round(self.internalData.value.skaarlCurrentHP ?? self.stats.value.bonus.hp), self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0)),
 				runningTowardsEnemy: clamp(0, Math.round(self.internalData.value.runningTowardsEnemy ?? 0), 1),
 				enemiesNearby: Math.max(0, Math.round(self.internalData.value.enemiesNearby ?? 0)),
 				_watchHandles: [
@@ -1623,9 +1623,9 @@ export const CHAMPION_SPECIFICS = {
 					}, { immediate: true }),
 					watch(self.maxHealth, (_value, previousValue) => {
 						if (self.currentHealth.value === previousValue) {
-							self.internalData.value.skaarlCurrentHP = self.stats.value.bonus.hp;
+							self.internalData.value.skaarlCurrentHP = self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0);
 						} else {
-							self.internalData.value.skaarlCurrentHP = Math.min(self.stats.value.bonus.hp, self.internalData.value.skaarlCurrentHP);
+							self.internalData.value.skaarlCurrentHP = Math.min(self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0), self.internalData.value.skaarlCurrentHP);
 						}
 						self.internalData.value.kledCurrentHP = Math.min(self.stats.value.baseOnLevel.hp, self.internalData.value.kledCurrentHP);
 					}, { immediate: true }),
@@ -1662,8 +1662,8 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { bonusStats, totalStats, totalPreMultipliersStats }, { calculatedVariables }) {
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+				handler(self, { totalStats, bonusStats, championPassiveStats, totalPreMultipliersStats, totalMultipliersStats }, { calculatedVariables }) {
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { hp: bonusStats.hp } } } } as DamageSource };
 
 					const skaarlBaseHP = championAbilityVariableValue('SkaarlHealth', passiveParams);
 					if (typeof skaarlBaseHP.value !== 'number') {
@@ -1671,15 +1671,41 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
+					calculatedVariables.kledSkaarlHP = skaarlBaseHP.value;
 					totalStats.hp += skaarlBaseHP.value;
-					bonusStats.hp += skaarlBaseHP.value;
 					totalPreMultipliersStats.hp += skaarlBaseHP.value;
 
 					if (!calculatedVariables.kledIsDismounted) {
 						return;
 					}
 
-					console.log('dismounted');
+					let resists = 0;
+
+					const bonusResist = championAbilityVariableValue('DismountedResistBonus', passiveParams);
+					if (typeof bonusResist.value === 'number') {
+						resists = bonusResist.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS kled] failed to calculate dismounted bonus resist', bonusResist);
+					}
+
+					if (self.internalData.value.enemiesNearby) {
+						const bonusResistPerEnemy = championAbilityVariableValue('ResistBonusPerEnemy', passiveParams);
+						const maxBonusResist = championAbilityVariableValue('DismountedResistBonusMax', passiveParams);
+						if (typeof maxBonusResist.value === 'number' && typeof bonusResistPerEnemy.value === 'number') {
+							resists = Math.min(maxBonusResist.value, resists * (1 + self.internalData.value.enemiesNearby * bonusResistPerEnemy.value));
+						} else {
+							console.warn('[CHAMPION_SPECIFICS kled] failed to calculate dismounted bonus resist per enemy', bonusResistPerEnemy, maxBonusResist);
+						}
+					}
+
+					championPassiveStats.armor = resists;
+					bonusStats.armor += resists;
+					totalPreMultipliersStats.armor += resists;
+					totalStats.armor += resists;
+					championPassiveStats.magicResist = resists;
+					bonusStats.magicResist += resists;
+					totalPreMultipliersStats.magicResist += resists;
+					totalStats.magicResist += resists;
 				},
 				priority: HOOK_PRIORITIES.postTotal.Kled,
 			},

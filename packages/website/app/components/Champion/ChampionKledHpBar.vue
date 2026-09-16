@@ -15,7 +15,7 @@ const props = defineProps<{
 }>();
 
 const kledMaxHP = computed(() => Math.ceil(props.value.stats.value.baseOnLevel.hp));
-const skaarlMaxHP = computed(() => Math.floor(props.value.stats.value.bonus.hp));
+const skaarlMaxHP = computed(() => Math.floor(props.value.stats.value.bonus.hp + (props.value.stats.value.variables.kledSkaarlHP ?? 0)));
 
 const kledCurrentHp = computed<number>({
 	get() {
