@@ -239,7 +239,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.dragonStacks = ref(overrides.dragonStacks ?? Array.from({ length: 4 }));
 		this.dragonSoul = ref(overrides.dragonSoul);
 		this.roleQuest = ref(overrides.roleQuest);
-		/* expected to be overriden by freshly setup data in `this.champion` watch below */
+		/* expected to be overriden by freshly setup data in `this.champion` watch below. Immediate watchers must be careful not to update the internalData as that might happen before it's replaced. This would result in modifying the overrides' object instead. Could be guarded against by `{...shallow copy}` here but for now, just make watchers that dont do it lol */
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
 		this.internalDragonData = ref(overrides.internalDragonData ?? {});
@@ -270,7 +270,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					}, { immediate: true }),
 
 					watch(this.champion, (c) => {
-						for (const unwatch of this.internalData.value?._watchHandles || []) {
+						for (const unwatch of this.internalData.value?._watchHandles ?? []) {
 							unwatch();
 						}
 
@@ -291,6 +291,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 							this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any) as any) ?? {};
 
+							/* if there's any stringified internal data, go through the keys of normally created internalData above, and for each stringified value, assign it to the key with corresponding index. Then unwatch the watchHandles potentially created above and run `setupData` again, this time with stringified data set. All of that is necessary because only stringified data's values are stored, so need to do a dry run to know which value is for which key */
 							const internalDataKeys = Object.keys(this.internalData.value).filter(key => !key.startsWith('_'));
 							if (internalDataKeys.length && this.fromStringifiedInternalData.length) {
 								for (let i = 0; i < internalDataKeys.length; i++) {
@@ -299,12 +300,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 										this.internalData.value[key as keyof typeof this.internalData['value']] = this.fromStringifiedInternalData[i];
 									}
 								}
-								for (const unwatch of this.internalData.value?._watchHandles || []) {
+								for (const unwatch of this.internalData.value?._watchHandles ?? []) {
 									unwatch();
 								}
 								this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this as any) as any) || {};
-								this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 							}
+							this.internalData.value._watchHandles && markRaw(this.internalData.value._watchHandles);
 
 							this.fromStringifiedInternalData = undefined;
 							return;

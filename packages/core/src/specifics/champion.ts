@@ -1612,23 +1612,35 @@ export const CHAMPION_SPECIFICS = {
 	},
 	Kled: {
 		setupData(self) {
+			const initSkaarlMaxHP = self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0);
 			return {
 				kledCurrentHP: clamp(0, Math.round(self.internalData.value.kledCurrentHP ?? self.stats.value.baseOnLevel.hp), self.stats.value.baseOnLevel.hp),
-				skaarlCurrentHP: clamp(0, Math.round(self.internalData.value.skaarlCurrentHP ?? self.stats.value.bonus.hp), self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0)),
+				skaarlCurrentHP: clamp(0, Math.round(self.internalData.value.skaarlCurrentHP ?? initSkaarlMaxHP), initSkaarlMaxHP),
 				runningTowardsEnemy: clamp(0, Math.round(self.internalData.value.runningTowardsEnemy ?? 0), 1),
 				enemiesNearby: Math.max(0, Math.round(self.internalData.value.enemiesNearby ?? 0)),
 				_watchHandles: [
 					watch(() => self.internalData.value.kledCurrentHP + self.internalData.value.skaarlCurrentHP, (value) => {
 						self.currentHealth.value = Math.min(value, self.stats.value.total.hp);
-					}, { immediate: true }),
-					watch(self.maxHealth, (_value, previousValue) => {
-						if (self.currentHealth.value === previousValue) {
+					}),
+					watch(() => `${Math.ceil(self.stats.value.baseOnLevel.hp)}:${Math.floor((self.stats.value.variables.kledSkaarlHP ?? 0) + self.stats.value.bonus.hp)}:${self.maxHealth.value}`, (_value, previousValue) => {
+						const [rawPreviousMaxKledHP, rawPreviousMaxSkaarlHP] = previousValue?.split(':');
+						const previousMaxKledHP = rawPreviousMaxKledHP ? Number.parseFloat(rawPreviousMaxKledHP) : undefined;
+						const previousMaxSkaarlHP = rawPreviousMaxSkaarlHP ? Number.parseFloat(rawPreviousMaxSkaarlHP) : undefined;
+
+						if (previousMaxKledHP !== undefined && self.internalData.value.kledCurrentHP === Math.ceil(previousMaxKledHP)) {
+							self.internalData.value.kledCurrentHP = self.stats.value.baseOnLevel.hp;
+						} else {
+							self.internalData.value.kledCurrentHP = Math.min(self.stats.value.baseOnLevel.hp, self.internalData.value.kledCurrentHP ?? 0);
+						}
+						self.internalData.value.kledCurrentHP = Math.ceil(self.internalData.value.kledCurrentHP);
+
+						if (self.internalData.value.skaarlCurrentHP === previousMaxSkaarlHP) {
 							self.internalData.value.skaarlCurrentHP = self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0);
 						} else {
-							self.internalData.value.skaarlCurrentHP = Math.min(self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0), self.internalData.value.skaarlCurrentHP);
+							self.internalData.value.skaarlCurrentHP = Math.min(self.stats.value.bonus.hp + (self.stats.value.variables.kledSkaarlHP ?? 0), self.internalData.value.skaarlCurrentHP ?? 0);
 						}
-						self.internalData.value.kledCurrentHP = Math.min(self.stats.value.baseOnLevel.hp, self.internalData.value.kledCurrentHP);
-					}, { immediate: true }),
+						self.internalData.value.skaarlCurrentHP = Math.floor(self.internalData.value.skaarlCurrentHP);
+					}),
 				],
 			};
 		},

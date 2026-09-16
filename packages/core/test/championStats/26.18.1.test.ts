@@ -201,35 +201,76 @@ test('26.18 Kled', async (t) => {
 	};
 	const internalData = {} as IInternalDataOf<'Kled'>;
 
-	await t.test('general', async (t) => {
-		await t.test('base', async () => {
-			const damageSource = await setupDamageSource(fixture, 'Kled', {
-				...sourceCommon,
-				internalData,
-			});
-
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 179,
-				abilityPower: 308,
-			}, damageSource);
-			typedPartialDeepStrictEqual(damageSource.internalData.value, {
-				kledCurrentHP: 1838,
-				skaarlCurrentHP: 2365,
-			}, damageSource);
-
-			damageSource.internalData.value.skaarlCurrentHP = 0;
-			damageSource.internalData.value.runningTowardsEnemy = 1;
-			damageSource.internalData.value.enemiesNearby = 4;
-			await nextTick();
-
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 196,
-				abilityPower: 308,
-				moveSpeed: 451,
-				armor: 137,
-				magicResist: 77,
-			}, damageSource);
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kled', {
+			...sourceCommon,
+			internalData,
 		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 179,
+			abilityPower: 308,
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.internalData.value, {
+			kledCurrentHP: 1838,
+			skaarlCurrentHP: 2365,
+		}, damageSource);
+
+		damageSource.internalData.value.skaarlCurrentHP = 0;
+		damageSource.internalData.value.runningTowardsEnemy = 1;
+		damageSource.internalData.value.enemiesNearby = 4;
+		await nextTick();
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 196,
+			abilityPower: 308,
+			moveSpeed: 451,
+			armor: 153,
+			magicResist: 93,
+		}, damageSource);
+	});
+
+	await t.test('4 infernals', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kled', {
+			...sourceCommon,
+			internalData,
+			dragonStacks: infernalStacks,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 200,
+			abilityPower: 337,
+		}, damageSource);
+
+		damageSource.internalData.value.skaarlCurrentHP = 0;
+		await nextTick();
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 217,
+			abilityPower: 337,
+		}, damageSource);
+	});
+
+	await t.test('4 infernals | mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kled', {
+			...sourceCommon,
+			internalData,
+			dragonStacks: infernalStacks,
+			roleQuest: 'mid',
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 205,
+			abilityPower: 356,
+		}, damageSource);
+
+		damageSource.internalData.value.skaarlCurrentHP = 0;
+		await nextTick();
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 223,
+			abilityPower: 356,
+		}, damageSource);
 	});
 
 	await t.test('jak\'sho+', async () => {
