@@ -274,6 +274,16 @@ if (!championData || championData?.version !== latestVersion) {
 
 					if (championId === 'Aphelios') {
 						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
+					} else {
+						const savedVariantDataKeys = new Set(Object.values(dedicatedChampionFileData.abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey)));
+						const mAbilitiesObjectNames: { mAbility: string; mRootSpell: string }[] = additionalData[characterRootKey].mAbilities?.map((mAbility: string) => {
+							const abilityData = additionalData?.[mAbility];
+							return { mAbility, mRootSpell: abilityData?.mRootSpell };
+						});
+						const potentiallyMissedAbilities = mAbilitiesObjectNames?.filter(({ mRootSpell }) => !savedVariantDataKeys.has(mRootSpell));
+						if (potentiallyMissedAbilities?.length) {
+							console.warn(`potentially missed ${championId} champion ability variant`, potentiallyMissedAbilities);
+						}
 					}
 
 					setChampionAbilityVariantsText(dedicatedChampionFileData);
