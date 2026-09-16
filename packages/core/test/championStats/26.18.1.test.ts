@@ -222,5 +222,15 @@ test('26.18 Kled', async (t) => {
 			kledCurrentHP: 1838,
 			skaarlCurrentHP: 2365,
 		}, damageSource);
+
+		damageSource.internalData.value.skaarlCurrentHP = 0;
+		damageSource.internalData.value.runningTowardsEnemy = 1;
+		await nextTick();
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 196,
+			abilityPower: 308,
+			moveSpeed: 451,
+		}, damageSource);
 	});
 });

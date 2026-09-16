@@ -1634,10 +1634,35 @@ export const CHAMPION_SPECIFICS = {
 		},
 		dismountedComponentsInactive: (self => !self.stats.value.variables.kledIsDismounted) satisfies IExtraInactiveFn,
 		calculateHooks: {
-			postTotal: {
-				handler(self, { bonusStats, totalStats, totalPreMultipliersStats }, { calculatedVariables }) {
+			postInit: {
+				handler(self, { baseStats, championPassiveStats }, { calculatedVariables }) {
 					calculatedVariables.kledIsDismounted = self.internalData.value.skaarlCurrentHP === 0;
 
+					if (!calculatedVariables.kledIsDismounted) {
+						return;
+					}
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+
+					const msPenalty = championAbilityVariableValue('DismountedMSPenalty', passiveParams);
+
+					if (typeof msPenalty.value === 'number') {
+						baseStats.moveSpeed -= msPenalty.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS kled] failed to calculate dismounted ms penalty', msPenalty);
+					}
+
+					if (self.internalData.value.runningTowardsEnemy) {
+						const msTowardsEnemy = championAbilityVariableValue('DismountedMS', passiveParams);
+						if (typeof msTowardsEnemy.value === 'number') {
+							championPassiveStats.moveSpeed = msTowardsEnemy.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS kled] failed to calculate dismounted ms towards enemies', msTowardsEnemy);
+						}
+					}
+				},
+			},
+			postTotal: {
+				handler(self, { bonusStats, totalStats, totalPreMultipliersStats }, { calculatedVariables }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
 
 					const skaarlBaseHP = championAbilityVariableValue('SkaarlHealth', passiveParams);
