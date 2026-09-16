@@ -54,7 +54,7 @@ import type { IChampion, IChampionAbilityVariant, IChampionId } from '@lolcalc/d
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types.js';
 import type { ComputedRef } from 'vue';
-import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceInternalDataBase, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, IExtraInactiveFn, ISpecificVariables, IVariableValueResult } from './index';
@@ -1645,6 +1645,11 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		dismountedComponentsInactive: (self => !self.stats.value.variables.kledIsDismounted) satisfies IExtraInactiveFn,
+		passive: {
+			variables: defineChampionVariables<'Kled', typeof IKled, 'passive'>()({
+				uninteresting: ['ResistBonusPerEnemy', 'CourageVsChamps', 'CourageVsOther', 'CourageLastHit', 'MountCooldown'],
+			}),
+		},
 		calculateHooks: {
 			postInit: {
 				handler(self, { baseStats, championPassiveStats }, { calculatedVariables }) {
