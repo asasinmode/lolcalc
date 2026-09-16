@@ -260,10 +260,6 @@ if (!championData || championData?.version !== latestVersion) {
 								characterRootKey,
 							);
 
-							if (variants.length > 1) {
-								potentialShapeshifters.add(championId);
-							}
-
 							return [abilityKey, {
 								maxLevel,
 								variants,
@@ -271,6 +267,10 @@ if (!championData || championData?.version !== latestVersion) {
 						})) as IChampion['abilities'],
 						stringtable: championFileDataStringtable,
 					};
+
+					if (dedicatedChampionFileData.abilities.q.variants.length > 1 && dedicatedChampionFileData.abilities.w.variants.length > 1 && dedicatedChampionFileData.abilities.e.variants.length > 1) {
+						potentialShapeshifters.add(championId);
+					}
 
 					if (championId === 'Aphelios') {
 						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
@@ -1779,9 +1779,10 @@ function championAbilityData(
 	const { mCharacterPassiveSpell, spells, '{1abb82c0}': spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityInfo[1] === 4 ? mCharacterPassiveSpell : spells[abilityInfo[1]];
 
+	let championDataEntries: [string, any][] | undefined;
 	const variantKeys = [abilityDataKey];
 	if (abilityInfo[1] !== 4 && characterToolData?.alternateForms?.length) {
-		const championDataEntries = Object.entries(championData);
+		championDataEntries = Object.entries(championData);
 		for (const form of characterToolData.alternateForms) {
 			if (form.spells) {
 				const maybeKey = championDataEntries.find(([, value]: any[]) => value.ObjectName === form.spells[abilityInfo[1]])?.[0];
@@ -1791,6 +1792,15 @@ function championAbilityData(
 					console.warn(`${championId} ${abilityInfo[0]} key with ObjectName of alternate form "${form.spells[abilityInfo[1]]}" not found`);
 				}
 			}
+		}
+	}
+
+	const specific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[championId]?.[abilityInfo[0]];
+	if (specific?.additionalVariantsObjectNames) {
+		championDataEntries ??= Object.entries(championData);
+		for (const additionalObjectName of specific?.additionalVariantsObjectNames) {
+			const entry = championDataEntries.find(([, value]) => value.ObjectName === additionalObjectName);
+			entry && variantKeys.push(entry[0]);
 		}
 	}
 

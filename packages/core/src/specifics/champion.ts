@@ -1641,6 +1641,9 @@ export const CHAMPION_SPECIFICS = {
 						}
 						self.internalData.value.skaarlCurrentHP = Math.floor(self.internalData.value.skaarlCurrentHP);
 					}),
+					watch(() => self.stats.value.variables.kledIsDismounted, (value) => {
+						self.abilityVariantsIndexes.value.q = value ? 1 : 0;
+					}, { immediate: true }),
 				],
 			};
 		},
@@ -1649,6 +1652,9 @@ export const CHAMPION_SPECIFICS = {
 			variables: defineChampionVariables<'Kled', typeof IKled, 'passive'>()({
 				uninteresting: ['ResistBonusPerEnemy', 'CourageVsChamps', 'CourageVsOther', 'CourageLastHit', 'MountCooldown'],
 			}),
+		},
+		q: {
+			additionalVariantsObjectNames: ['KledRiderQ'],
 		},
 		e: {
 			isDisabled: self => self.stats.value.variables.kledIsDismounted,
@@ -3943,10 +3949,12 @@ export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
 
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
-	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	effectControls?: IEffectControlsProps<any, Id>;
 	/** ability will be styled as disabled (grayscale), for example Kled dismounted E & R */
 	isDisabled?: (self: DamageSource) => boolean | number | undefined;
+	// TODO probably need to be per variant for gnar?
+	/** overrides for every ability's variant data */
+	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	/** called in `scripts/updateData`, if present the tooltip text will be replaced with the value returned from this function. It's passed the original text */
 	preplaceTooltipText?: (value: string) => string;
 	/**
@@ -3954,6 +3962,11 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	 * @note it's called for every variant of the ability, currently only Vladimir needs it but might need updating
 	 */
 	modifyExtendedVariables?: (extendedVariables: NonNullable<IChampionAbilityVariant['extendedVariables']>) => void;
+	/**
+	 * object names of additional ability variants to be extracted during `updateData`
+	 * maybe there's a way not to have to declare these manually but in the ability's data I don't see anything that would point an ability's object to what it belongs to (QWER). `updateData` script warns about potential detected but missed ability variants
+	 */
+	additionalVariantsObjectNames?: string[];
 	[key: string]: any;
 	/**
 	 * ability's variant specific

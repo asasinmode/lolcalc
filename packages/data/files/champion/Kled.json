@@ -106,6 +106,74 @@
 						}
 					},
 					"isImmobilizing": true
+				},
+				{
+					"name": "Pocket Pistol",
+					"objectName": "KledRiderQ",
+					"dataKey": "Characters/Kled/Spells/KledRiderQAbility/KledRiderQ",
+					"image": "assets/characters/kled/hud/icons2d/kled_q2.png",
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
+					"tooltip": "{{Spell_KledRiderQ_Tooltip}}",
+					"tooltipExtended": "{{spell_KledRiderQ_Tooltip}}<br><br><keywordMajor>Mounted:</keywordMajor> Kled throws a bear trap that deals <physicalDamage>@MountedQCalc@ physical damage</physicalDamage> and hooks onto the first enemy champion or large jungle monster hit.<br><br>If Kled stays near a hooked enemy for @spell.KledQ:TetherPopTime@ seconds, he yanks out the trap, dealing <physicalDamage>@spell.KledQ:TotalYankDamage@ physical damage</physicalDamage>, <status>Pulling</status> them and <status>Slowing</status> by @spell.KledQ:SlowAmount*-100@% for @spell.KledQ:SlowDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>Restore @CouragePerPellet@ <keywordMajor>Courage</keywordMajor> per hit against champions, and @CouragePerPellet*0.5@ against epic monsters.<br>Deals @FalloffPerMissile*100@% damage per hit beyond the first.</rules>",
+					"extendedVariables": [
+						{
+							"name": "DismountedBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"name": "RechargeTime",
+							"nameOverride": "spell_listtype_ammorecharge"
+						}
+					],
+					"dataValues": {
+						"CouragePerPellet": [5, 5, 5, 5, 5, 5, 5],
+						"MountedBaseDamage": [5, 30, 55, 80, 105, 130, 155],
+						"DismountedBaseDamage": [20, 35, 50, 65, 80, 95, 110],
+						"RechargeTime": [20, 18, 16, 14, 12, 10, 8],
+						"FalloffPerMissile": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"KnockbackDistance": [300, 300, 300, 300, 300, 300, 300],
+						"MissileSpawnCheckRadius": [55, 55, 55, 55, 55, 55, 55]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "DismountedBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MountedQCalc": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "MountedBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TOOLTIPAmmoRecharge": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RechargeTime",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						}
+					}
 				}
 			]
 		},
@@ -467,9 +535,11 @@
 		"spell_listtype_kledqthrowdamage": "Throw Damage",
 		"spell_listtype_kledqripdamage": "Rip Damage",
 		"spell_listtype_slow": "Slow",
+		"spell_kledriderq_tooltip": "<keywordMajor>Dismounted:</keywordMajor> Kled fires a shotgun, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and blasting Kled backward. Pellets beyond the first deal reduced damage.<br><br>Each pellet that hits an enemy champion or epic monster restores <keywordMajor>Courage</keywordMajor>.",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_ammorecharge": "Ammo Recharge",
 		"spell_listtype_flatdamage": "Flat Damage",
 		"spell_listtype_percentagedamage": "Percentage Damage",
-		"spell_listtype_damage": "Damage",
 		"spell_listtype_maximumdamage": "Maximum Damage",
 		"spell_listtype_maximumshield": "Maximum Shield Health",
 		"spell_listtype_range": "Range",
