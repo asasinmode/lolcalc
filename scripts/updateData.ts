@@ -8,7 +8,7 @@ import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters
 import type { IEffectData, ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IEffectObjectName, IItemCategory } from '@lolcalc/shared';
+import type { EffectObjectName, IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
@@ -92,7 +92,10 @@ if (!championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
 
 	await loadStringTable();
-	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, 'ddragon/champion.json');
+	const [{ version, data }, championsBinJson] = await Promise.all([
+		fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, 'ddragon/champion.json'),
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/global/champions/champions.bin.json`, 'game/global/champions/champions.bin.json'),
+	]);
 
 	const TargetDummy: IChampion = {
 		id: 'TargetDummy',
@@ -208,9 +211,24 @@ if (!championData || championData?.version !== latestVersion) {
 				.map(async ([championId, championData]) => {
 					const { id, key, name, image, partype, stats } = championData;
 
-					const additionalData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`);
+					const charactersKey = `Characters/${id === 'Fiddlesticks' ? 'FiddleSticks' : id}`;
 
-					const characterRootKey = `Characters/${id === 'Fiddlesticks' ? 'FiddleSticks' : id}/CharacterRecords/Root`;
+					const [additionalData, ...additionalCharactersData] = await Promise.all([
+						fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`),
+						...(championsBinJson[charactersKey]?.additionalCharacters?.map((characterKey: string) => {
+							const characterName = characterKey.slice(characterKey.lastIndexOf('/') + 1).toLowerCase();
+							return fetchCached(
+								`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${characterName}/${characterName}.bin.json`,
+								`game/data/characters/${characterName}/${characterName}.bin.json`,
+							);
+						}) ?? []),
+					]);
+
+					for (const data of additionalCharactersData) {
+						Object.assign(additionalData, data);
+					}
+
+					const characterRootKey = `${charactersKey}/CharacterRecords/Root`;
 					const rootData = additionalData[characterRootKey];
 					if (!rootData) {
 						console.log(Object.keys(additionalData));
@@ -1036,7 +1054,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 	]);
 
 	const effectDataStringtable = { stringtable: {} as Record<string, string> };
-	const referenceEffectObjectNames: IEffectObjectName[] = [];
+	const referenceEffectObjectNames: EffectObjectName[] = [];
 
 	effectData = {
 		version: latestVersion,
@@ -1255,7 +1273,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 
 	for (const effectObjectName of referenceEffectObjectNames) {
 		const customEffect = CUSTOM_EFFECTS[effectObjectName];
-		const referencedText = (effectData.data as IEffectData)[(customEffect as Extract<NonNullable<typeof CUSTOM_EFFECTS[IEffectObjectName]>, { objectName: string }>).objectName as keyof IEffectData];
+		const referencedText = (effectData.data as IEffectData)[(customEffect as Extract<NonNullable<typeof CUSTOM_EFFECTS[EffectObjectName]>, { objectName: string }>).objectName as keyof IEffectData];
 		if (!referencedText) {
 			throw new Error(`[effectData] unresolved custom effect referenced objectName ${effectObjectName} ${JSON.stringify(customEffect, null, 2)}`);
 		}
