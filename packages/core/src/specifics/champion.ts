@@ -1662,7 +1662,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { totalStats, bonusStats, championPassiveStats, totalPreMultipliersStats, totalMultipliersStats }, { calculatedVariables }) {
+				handler(self, { totalStats, bonusStats, championPassiveStats, totalPreMultipliersStats, dragonStatMultipliers, dragonStats, totalMultipliersStats }, { calculatedVariables }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { hp: bonusStats.hp } } } } as DamageSource };
 
 					const skaarlBaseHP = championAbilityVariableValue('SkaarlHealth', passiveParams);
@@ -1680,7 +1680,6 @@ export const CHAMPION_SPECIFICS = {
 					}
 
 					let resists = 0;
-
 					const bonusResist = championAbilityVariableValue('DismountedResistBonus', passiveParams);
 					if (typeof bonusResist.value === 'number') {
 						resists = bonusResist.value;
@@ -1698,13 +1697,32 @@ export const CHAMPION_SPECIFICS = {
 						}
 					}
 
-					championPassiveStats.armor = resists;
-					bonusStats.armor += resists;
 					totalPreMultipliersStats.armor += resists;
-					totalStats.armor += resists;
-					championPassiveStats.magicResist = resists;
-					bonusStats.magicResist += resists;
 					totalPreMultipliersStats.magicResist += resists;
+					championPassiveStats.armor = resists;
+					championPassiveStats.magicResist = resists;
+
+					if (calculatedVariables.jakShoBonusResistMultiplier) {
+						const value = resists * calculatedVariables.jakShoBonusResistMultiplier;
+						resists += value;
+						totalMultipliersStats.armor += value;
+						totalMultipliersStats.magicResist += value;
+						calculatedVariables.jakShoArmor! += value;
+						calculatedVariables.jakShoMagicResist! += value;
+					}
+
+					if (dragonStatMultipliers.armor) {
+						const value = resists * dragonStatMultipliers.armor;
+						resists += value;
+						totalMultipliersStats.armor += value;
+						totalMultipliersStats.magicResist += value;
+						dragonStats.armor! += value;
+						dragonStats.magicResist! += value;
+					}
+
+					bonusStats.armor += resists;
+					totalStats.armor += resists;
+					bonusStats.magicResist += resists;
 					totalStats.magicResist += resists;
 				},
 				priority: HOOK_PRIORITIES.postTotal.Kled,

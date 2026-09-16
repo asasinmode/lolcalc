@@ -1,5 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import type { IDragonName } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
@@ -194,46 +194,100 @@ test('26.18 Kled', async (t) => {
 			shards: {
 				offensive: 'adaptive',
 				flex: 'adaptive',
-				defensive: 'tenacity',
+				defensive: 'health',
 			},
 		},
 		items: [ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon],
 	};
 	const internalData = {} as IInternalDataOf<'Kled'>;
 
-	await t.test('base', async () => {
+	await t.test('general', async (t) => {
+		await t.test('base', async () => {
+			const damageSource = await setupDamageSource(fixture, 'Kled', {
+				...sourceCommon,
+				internalData,
+			});
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 179,
+				abilityPower: 308,
+			}, damageSource);
+			typedPartialDeepStrictEqual(damageSource.internalData.value, {
+				kledCurrentHP: 1838,
+				skaarlCurrentHP: 2365,
+			}, damageSource);
+
+			damageSource.internalData.value.skaarlCurrentHP = 0;
+			damageSource.internalData.value.runningTowardsEnemy = 1;
+			damageSource.internalData.value.enemiesNearby = 4;
+			await nextTick();
+
+			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+				attackDamage: 196,
+				abilityPower: 308,
+				moveSpeed: 451,
+				armor: 137,
+				magicResist: 77,
+			}, damageSource);
+		});
+	});
+
+	await t.test('jak\'sho+', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Kled', {
 			...sourceCommon,
-			runes: {
-				shards: {
-					offensive: 'adaptive',
-					flex: 'adaptive',
-					defensive: 'health',
-				},
-			},
+			items: [ITEMS_BY_NAME.jakSho],
 			internalData,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 179,
-			abilityPower: 308,
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.internalData.value, {
-			kledCurrentHP: 1838,
-			skaarlCurrentHP: 2365,
+			armor: 168,
+			magicResist: 108,
 		}, damageSource);
 
 		damageSource.internalData.value.skaarlCurrentHP = 0;
-		damageSource.internalData.value.runningTowardsEnemy = 1;
-		damageSource.internalData.value.enemiesNearby = 4;
 		await nextTick();
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 196,
-			abilityPower: 308,
-			moveSpeed: 451,
-			armor: 137,
-			magicResist: 77,
+			armor: 177,
+			magicResist: 116,
+		}, damageSource);
+
+		damageSource.internalData.value.enemiesNearby = 1;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 196,
+			magicResist: 135,
+		}, damageSource);
+	});
+
+	await t.test('jak\'sho+ | 4 mountains', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Kled', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.jakSho],
+			dragonStacks: ['Mountain', 'Mountain', 'Mountain', 'Mountain'],
+			internalData,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 202,
+			magicResist: 129,
+		}, damageSource);
+
+		damageSource.internalData.value.enemiesNearby = 1;
+		damageSource.internalData.value.skaarlCurrentHP = 0;
+		await nextTick();
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 215,
+			magicResist: 142,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 235,
+			magicResist: 162,
 		}, damageSource);
 	});
 });

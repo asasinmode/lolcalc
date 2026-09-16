@@ -631,6 +631,18 @@
 				}
 			}
 		},
+		"6665": {
+			"searchString": "jakshotheprotean;health;magicresist;armor",
+			"stats": {
+				"FlatSpellBlockMod": 45,
+				"FlatHPPoolMod": 350,
+				"FlatArmorMod": 45
+			},
+			"dataValues": {
+				"BonusResistPercentage": 0.3,
+				"MaxStacks": 5
+			}
+		},
 		"6672": {
 			"searchString": "krakenslayer;damage;attackspeed;onhit;movement;attackdamage;movespeed",
 			"stats": {
@@ -748,6 +760,15 @@
 	},
 	"misc": {
 		"dragons": {
+			"Mountain": {
+				"stack": {
+					"objectName": "SRX_DragonBuffMountain",
+					"dataKey": "Shared/Spells/SRX_DragonBuffMountain",
+					"dataValues": {
+						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+					}
+				}
+			},
 			"Infernal": {
 				"stack": {
 					"objectName": "SRX_DragonBuffInfernal",
