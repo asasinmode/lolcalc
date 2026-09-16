@@ -1381,6 +1381,7 @@ defineExpose({ el });
 						:key="abilityKey"
 						:data-ability="abilityKey"
 						:data-level="value.abilityLevels.value[abilityKey]"
+						:class="{ disabled: value.computed.abilities.value[abilityKey][0]?.isDisabled }"
 						:inert="!enableUnimplementedUi"
 					>
 						<h5>{{ abilityKey.toUpperCase() }}</h5>
@@ -2518,11 +2519,18 @@ defineExpose({ el });
 					--at-apply: 'mbe-[--ability-level-buttons-size]';
 
 					&[data-level='0'],
-					&:not([data-level]) {
+					&:not([data-level]),
+					&.disabled {
 						--at-apply: 'b-neutral-400';
 
 						img {
 							--at-apply: 'grayscale-70 brightness-80';
+						}
+					}
+
+					&.disabled {
+						img {
+							--at-apply: 'grayscale-100';
 						}
 					}
 				}

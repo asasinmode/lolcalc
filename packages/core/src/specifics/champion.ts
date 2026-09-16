@@ -1650,6 +1650,12 @@ export const CHAMPION_SPECIFICS = {
 				uninteresting: ['ResistBonusPerEnemy', 'CourageVsChamps', 'CourageVsOther', 'CourageLastHit', 'MountCooldown'],
 			}),
 		},
+		e: {
+			isDisabled: self => self.stats.value.variables.kledIsDismounted,
+		},
+		r: {
+			isDisabled: self => self.stats.value.variables.kledIsDismounted,
+		},
 		calculateHooks: {
 			postInit: {
 				handler(self, { baseStats, championPassiveStats }, { calculatedVariables }) {
@@ -3939,6 +3945,8 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	effectControls?: IEffectControlsProps<any, Id>;
+	/** ability will be styled as disabled (grayscale), for example Kled dismounted E & R */
+	isDisabled?: (self: DamageSource) => boolean | number | undefined;
 	/** called in `scripts/updateData`, if present the tooltip text will be replaced with the value returned from this function. It's passed the original text */
 	preplaceTooltipText?: (value: string) => string;
 	/**

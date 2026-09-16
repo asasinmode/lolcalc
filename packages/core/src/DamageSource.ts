@@ -1698,6 +1698,12 @@ export function computeAbilityDescription(
 	// TODO detect unknown cost/cooldown
 	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBLUnknownSV.size || tooltipExtendedBLUnknownV.length;
 
+	const abilitySpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[gameAbilityId.abilityKey];
+	let isDisabled: boolean | number | undefined;
+	if (damageSource && abilitySpecific?.isDisabled) {
+		isDisabled = abilitySpecific.isDisabled(damageSource);
+	}
+
 	return {
 		gameAbilityId,
 		name: nameReplaced,
@@ -1714,6 +1720,7 @@ export function computeAbilityDescription(
 		unknownVariables,
 		variant,
 		anyExtendedVariableInfo: tooltipAnyExtendedVariables || tooltipExtendedAnyExtendedVariables || tooltipExtendedBLAnyExtendedVariables,
+		isDisabled,
 	};
 }
 
@@ -2177,6 +2184,7 @@ export interface IComputedAbilityDescription {
 	variant: IChampionAbilityVariant;
 	/** see original type's docs */
 	anyExtendedVariableInfo: IReplaceGameVariablesRV['anyExtendedVariables'];
+	isDisabled?: boolean | number;
 }
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {

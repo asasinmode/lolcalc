@@ -59,7 +59,7 @@ defineExpose({ el });
 </script>
 
 <template>
-	<article ref="el" popover="manual" class="hover-tooltip champion-ability">
+	<article ref="el" popover="manual" class="hover-tooltip champion-ability" :class="{ disabled: computedDescription?.isDisabled }">
 		<img
 			v-show="!isLoading"
 			:src="!isLoading && computedDescription ? abilityImage(computedDescription.variant.image, computedDescription.gameAbilityId.id, group) : undefined"
@@ -193,6 +193,10 @@ defineExpose({ el });
 
 		> img {
 			--at-apply: 'row-span-2 size-[--item-img-size]';
+		}
+
+		&.disabled > img {
+			--at-apply: 'grayscale-100';
 		}
 
 		> h5 {
