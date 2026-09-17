@@ -16,6 +16,64 @@ test.before(() => {
 
 const infernalStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Infernal'];
 
+test('adaptive', async (t) => {
+	const sourceCommon: IOverrides = {
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+	};
+
+	await t.test('chogath', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Chogath', {
+			...sourceCommon,
+			level: 18,
+			internalData: { ultStacks: 0 },
+			abilityLevels: { r: 3 },
+			runes: {
+				shards: {
+					offensive: 'adaptive',
+					flex: 'adaptive',
+					defensive: 'tenacity',
+				},
+			},
+			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.ravenousHydra, ITEMS_BY_NAME.axiomArc],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 416,
+			abilityPower: 269,
+		}, damageSource);
+
+		/* test on 1 stack to make sure it's properly excluded from adaptive force check */
+		damageSource.internalData.value.ultStacks = 1;
+
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 416,
+			abilityPower: 273,
+		}, damageSource);
+
+		damageSource.internalData.value.ultStacks = 6;
+
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 405,
+			abilityPower: 317,
+		}, damageSource);
+	});
+});
+
 test('26.18 Belveth', async (t) => {
 	const sourceCommon: IOverrides<'Belveth'> = {
 		level: 18,

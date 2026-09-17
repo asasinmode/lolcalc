@@ -991,6 +991,7 @@ export const CHAMPION_SPECIFICS = {
 							itemPassivesStats.abilityPower += ap;
 							calculatedVariables.riftmakerVoidInfusion! += ap;
 							calculatedVariables.apMultipliersBase += ap;
+							calculatedVariables.additionalAdaptiveForceCheckAp -= ap;
 						}
 					} else {
 						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate hp per ult stack', hpPerStack);

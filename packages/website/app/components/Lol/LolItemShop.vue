@@ -3,7 +3,7 @@ import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IItem, IShopItem } from '@lolcalc/data/types';
 import type { IItemCategory } from '@lolcalc/shared';
-import { isMasterworkSlot } from '@lolcalc/core/DamageSource';
+import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import { calculateItemDiscount, itemBuyability } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, ITEMS, PATCH_VERSION, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { ITEM_SHOP_STAT_FILTERS } from '@lolcalc/data/meta';

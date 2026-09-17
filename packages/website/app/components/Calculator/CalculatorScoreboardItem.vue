@@ -7,8 +7,9 @@ import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import type { IExtraComponentEmits } from '~/utils/types';
+import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
-import { formatChampionStatValue, isMasterworkSlot } from '@lolcalc/core/DamageSource';
+import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { replaceGameIcons } from '@lolcalc/core/misc';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion';

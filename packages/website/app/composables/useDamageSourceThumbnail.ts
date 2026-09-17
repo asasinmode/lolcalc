@@ -1,5 +1,5 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import { isMasterworkSlot } from '@lolcalc/core/DamageSource';
+import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import { CHAMPION_IMAGES, imgUrl, RUNES, TEXT } from '@lolcalc/data';
 
 function DamageSourceThumbnail() {
