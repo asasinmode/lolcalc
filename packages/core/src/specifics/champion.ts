@@ -2156,6 +2156,15 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 		},
+		r: {
+			variables: defineChampionVariables<'Nunu', typeof INunu, 'r'>()({
+				meta: {
+					MaximumDamage: {
+						type: VariableType.magic,
+					},
+				},
+			}),
+		},
 	},
 	Orianna: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Orianna'>): number => (self.champion.value! as typeof IOrianna).abilities.passive.variants[0]!.dataValues.StackCount[1]!,
@@ -2201,16 +2210,16 @@ export const CHAMPION_SPECIFICS = {
 							value: 1,
 						},
 						f1: {
-							value: self.stats.value.variables.ornnPassiveStatAmp?.percent ?? 0,
+							value: self.stats.value.variables.ornnPassiveStatAmp ?? 0,
 						},
 						f2: {
-							value: self.stats.value.variables.ornnPassiveStatAmp?.armor ?? 0,
+							value: self.stats.value.championPassive.armor ?? 0,
 						},
 						f3: {
-							value: self.stats.value.variables.ornnPassiveStatAmp?.magicResist ?? 0,
+							value: self.stats.value.championPassive.magicResist ?? 0,
 						},
 						f4: {
-							value: self.stats.value.variables.ornnPassiveStatAmp?.hp ?? 0,
+							value: self.stats.value.championPassive.hp ?? 0,
 						},
 					};
 				},
@@ -2244,21 +2253,38 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 		calculateHooks: {
-			onChampionPassive: {
-				handler(self, { championPassiveStats }, { calculatedVariables }) {
+			onTotalPreMultipliers: {
+				handler(self, { championPassiveStats, itemPassivesStats, itemTotalStats, bonusStats, totalPreMultipliersStats, totalMultipliersStats }, { calculatedVariables }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
 					const baseStatAmp = championAbilityVariableValue('BaseStatAmp', passiveParams);
 					const additionalStatAmp = championAbilityVariableValue('AdditionalMythicStatAmp', passiveParams);
 
 					if (typeof baseStatAmp.value === 'number' && typeof additionalStatAmp.value === 'number') {
-						calculatedVariables.ornnPassiveStatAmp = {
-							percent: baseStatAmp.value + additionalStatAmp.value * self.internalData.value.passiveUpgradedAllies,
-							hp: 0,
-							armor: 0,
-							magicResist: 0,
-						};
+						calculatedVariables.ornnPassiveStatAmp = baseStatAmp.value + additionalStatAmp.value * (self.internalData.value.passiveUpgradedAllies + (calculatedVariables.hasMasterworkItem ? 1 : 0));
 					} else {
 						console.warn('[CHAMPION_SPECIFICS ornn] failed to calculate passive stat amps', baseStatAmp, additionalStatAmp);
+					}
+
+					if (!calculatedVariables.ornnPassiveStatAmp) {
+						return;
+					}
+
+					championPassiveStats.hp = bonusStats.hp * calculatedVariables.ornnPassiveStatAmp;
+					totalMultipliersStats.hp += championPassiveStats.hp;
+
+					championPassiveStats.armor = bonusStats.armor * calculatedVariables.ornnPassiveStatAmp;
+					totalMultipliersStats.armor += championPassiveStats.armor;
+
+					championPassiveStats.magicResist = bonusStats.magicResist * calculatedVariables.ornnPassiveStatAmp;
+					totalMultipliersStats.magicResist += championPassiveStats.magicResist;
+
+					if (championPassiveStats.hp && calculatedVariables.riftmakerBonusHPToAP) {
+						const ap = championPassiveStats.hp * calculatedVariables.riftmakerBonusHPToAP;
+						calculatedVariables.apMultipliersBase += ap;
+						bonusStats.abilityPower += ap;
+						itemPassivesStats.abilityPower += ap;
+						itemTotalStats.abilityPower += ap;
+						totalPreMultipliersStats.abilityPower += ap;
 					}
 				},
 			},
@@ -3334,6 +3360,18 @@ export const CHAMPION_SPECIFICS = {
 					};
 				},
 				uninteresting: ['dAbilityStacks', 'dTakedownStacks', 'APPerStack'],
+			}),
+		},
+		r: {
+			variables: defineChampionVariables<'Veigar', typeof IVeigar, 'passive'>()({
+				meta: {
+					MinDamage: {
+						type: VariableType.magic,
+					},
+					MaxDamage: {
+						type: VariableType.magic,
+					},
+				},
 			}),
 		},
 	},

@@ -281,12 +281,7 @@ export interface IStatsCalculationVariables {
 	kledIsDismounted?: boolean;
 	kledSkaarlHP?: number;
 	/** percent amp and mr/armor/hp from ornn's passive */
-	ornnPassiveStatAmp?: {
-		percent: number;
-		hp: number;
-		armor: number;
-		magicResist: number;
-	};
+	ornnPassiveStatAmp?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */

@@ -31,8 +31,6 @@ export const HOOK_PRIORITIES = {
 	preBonus: {
 		/** before riftmaker & bloodmail */
 		Pyke: 1,
-		/** before riftmaker & bloodmail */
-		Ornn: 1,
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 20,
 		/** must be after riftmaker and archangel/seraph, which will be the default `0` */
 		[ITEM_NAME_TO_ID.rabadon]: 10,

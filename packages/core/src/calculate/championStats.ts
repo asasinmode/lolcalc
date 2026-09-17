@@ -450,11 +450,12 @@ function itemToChampionStats(
 	itemStatIncreases: IStatsCalculationResult['itemStatIncreases'],
 	isMasterwork: boolean,
 ): [IChampionStatName, number][] {
-	const statIncreases: Partial<Record<IItemStat, number>> = {};
+	let statIncreases: Partial<Record<IItemStat, number>> | undefined;
 
 	if (isMasterwork) {
 		const upgradeableStats: IItemStat[] = [];
 		let nonHPUpgradeableStats = 0;
+		statIncreases = {};
 
 		for (const stat in item.stats) {
 			if (stat in CONSTS.ornnUpgradeableStatGoldValues || stat === 'FlatHPPoolMod') {
@@ -473,7 +474,8 @@ function itemToChampionStats(
 					statIncreases[statName] = (statIncreases[statName] ?? 0) + hpBonus;
 				} else {
 					const goldValuePerUnit = CONSTS.ornnUpgradeableStatGoldValues[statName]!;
-					const statBonus = goldPerStat / goldValuePerUnit;
+					/* checked to be floored, bit weird but idk */
+					const statBonus = Math.floor(goldPerStat / goldValuePerUnit);
 					statIncreases[statName] = (statIncreases[statName] ?? 0) + statBonus;
 				}
 			}
@@ -493,7 +495,7 @@ function itemToChampionStats(
 		.map(([itemStatName, itemStatValue]) => {
 			return [
 				ITEM_TO_CHAMPION_STATS[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS],
-				itemStatValue + (statIncreases[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS] ?? 0),
+				itemStatValue + (statIncreases?.[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS] ?? 0) * (itemStatName === 'PercentAttackSpeedMod' ? 0.01 : 1),
 			] as [IChampionStatName, number];
 		});
 

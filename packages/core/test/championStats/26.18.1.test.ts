@@ -390,3 +390,34 @@ test('26.18 Kled', async (t) => {
 		}, damageSource);
 	});
 });
+
+test.only('26.18 Ornn', async (t) => {
+	t.runOnly(true);
+	const sourceCommon: IOverrides<'Ornn'> = {
+		level: 18,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		internalData: { masterworkItemSlot: 1, passiveUpgradedAllies: 4, _masterworkLevel: 13 },
+		items: [ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker],
+	};
+
+	await t.test('base', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ornn', sourceCommon);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 216,
+			abilityPower: 107,
+			armor: 201,
+			magicResist: 149,
+		}, damageSource);
+		assert.strictEqual(damageSource.maxHealth.value, 4385);
+	});
+});
