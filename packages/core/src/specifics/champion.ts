@@ -976,14 +976,22 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 		calculateHooks: {
-			postInit: {
-				handler(self, { championPassiveStats }) {
+			postItemTotal: {
+				handler(self, { championPassiveStats, itemTotalStats, itemPassivesStats }, { calculatedVariables }) {
 					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self };
 					const hpPerStack = championAbilityVariableValue('RHealthPerStack', params);
 
 					if (typeof hpPerStack.value === 'number') {
 						const hp = hpPerStack.value * self.internalData.value.ultStacks;
 						championPassiveStats.hp = hp;
+
+						if (calculatedVariables.riftmakerBonusHPToAP) {
+							const ap = hp * calculatedVariables.riftmakerBonusHPToAP;
+							itemTotalStats.abilityPower += ap;
+							itemPassivesStats.abilityPower += ap;
+							calculatedVariables.riftmakerVoidInfusion! += ap;
+							calculatedVariables.apMultipliersBase += ap;
+						}
 					} else {
 						console.warn('[CHAMPION_SPECIFICS chogath] failed to calculate hp per ult stack', hpPerStack);
 					}

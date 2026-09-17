@@ -1,5 +1,5 @@
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
-import type { IChampionStatName, IEffectObjectName, TItemNameToId } from '@lolcalc/shared';
+import type { EffectObjectName, IChampionStatName, TItemNameToId } from '@lolcalc/shared';
 import type { WritableComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
@@ -22,15 +22,23 @@ export const HOOK_PRIORITIES = {
 		/** after pyke */
 		[ITEM_NAME_TO_ID.riftmaker]: 20,
 	},
+	postItemTotal: {
+		/** before rabadon & blackfire torch */
+		Chogath: 1,
+		[ITEM_NAME_TO_ID.rabadon]: 10,
+		[ITEM_NAME_TO_ID.blackfireTorch]: 10,
+	},
 	preBonus: {
 		/** before riftmaker & bloodmail */
-		Pyke: 5,
+		Pyke: 1,
+		/** before riftmaker & bloodmail */
+		Ornn: 1,
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 20,
 		/** must be after riftmaker and archangel/seraph, which will be the default `0` */
 		[ITEM_NAME_TO_ID.rabadon]: 10,
 		/** must be after riftmaker and archangel/seraph, which will be the default `0` */
 		[ITEM_NAME_TO_ID.blackfireTorch]: 10,
-		/** before rabadon & blackfire torch, after pyke */
+		/** before rabadon & blackfire torch, after pyke/ornn */
 		[ITEM_NAME_TO_ID.riftmaker]: 8,
 	},
 	onTotalPreMultipliers: {
@@ -124,7 +132,7 @@ export type IInternalItemDataOf<K extends keyof TItemNameToId>
 		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>
 		: never;
 
-export type IEffectDataOf<T extends IEffectObjectName> = T extends keyof typeof EFFECT_SPECIFICS
+export type IEffectDataOf<T extends EffectObjectName> = T extends keyof typeof EFFECT_SPECIFICS
 	? typeof EFFECT_SPECIFICS[T] extends IEffectSpecific<infer U> ? U : never
 	: never;
 

@@ -4,7 +4,6 @@ import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultipli
 import type { DamageSource } from '../DamageSource';
 import { CONSTS, MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
-import { isMasterworkSlot } from '../DamageSource';
 import { cooldownReductionPercentageFromHaste } from '../specifics/champion.ts';
 import { addMultiplicative, calculateMSCapPenalty, combineCompounding } from './util.ts';
 
@@ -219,7 +218,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postItemTotal) {
-			hook(source, { itemPassivesStats, itemTotalStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(source, { itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
 		}
 	}
 	calculatedVariables.postItemTotalApMultipliersBase = calculatedVariables.apMultipliersBase;
@@ -506,6 +505,11 @@ function itemToChampionStats(
 	}
 
 	return rv;
+}
+
+export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean {
+	const item = self.items.value[itemIndex];
+	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.epicness === 5);
 }
 
 // TODO maybe a better way exists

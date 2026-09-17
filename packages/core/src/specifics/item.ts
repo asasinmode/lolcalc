@@ -322,6 +322,7 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 					itemTotalStats.abilityPower += calculatedVariables.blackfireTorchBBlazeAP;
 				},
+				priority: HOOK_PRIORITIES.postItemTotal[ITEM_NAME_TO_ID.blackfireTorch],
 			},
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
@@ -1693,7 +1694,7 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.hp += cConsumption ?? 0;
 
 					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel] ??= {};
-					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod = (itemStatIncreases[ITEM_NAME_TO_ID.mejai]!.FlatHPPoolMod ?? 0) + cConsumption;
+					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod = (itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod ?? 0) + cConsumption;
 				},
 			},
 		},
@@ -2005,6 +2006,7 @@ export const ITEM_SPECIFICS = {
 					itemTotalStats.abilityPower += value;
 					calculatedVariables.rabadonMagicalOpus = value;
 				},
+				priority: HOOK_PRIORITIES.postItemTotal[ITEM_NAME_TO_ID.rabadon],
 			},
 			preBonus: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {

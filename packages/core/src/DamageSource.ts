@@ -19,7 +19,7 @@ import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.t
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EffectObjectName, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
-import { calculateChampionStats } from './calculate/championStats.ts';
+import { calculateChampionStats, isMasterworkSlot } from './calculate/championStats.ts';
 import { calculateEffectsOntoTargetVars } from './calculate/damage.ts';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { gameAbilityImage, replaceGameIcons } from './misc.ts';
@@ -2052,11 +2052,6 @@ export function computeDragonAbilityDescription(
 	};
 }
 
-export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean {
-	const item = self.items.value[itemIndex];
-	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.epicness === 5);
-}
-
 function groupCalculateStatsHooks(target: ICalculateStatsGroupedHooks, hookSource?: { calculateHooks?: ICalculateChampionStatsHookSource }): ICalculateStatsGroupedHooks {
 	if (hookSource?.calculateHooks) {
 		for (const hook in hookSource.calculateHooks) {
@@ -2290,6 +2285,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	postItemTotal?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
+		championPassiveStats: IStatsCalculationResult['championPassive'];
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
