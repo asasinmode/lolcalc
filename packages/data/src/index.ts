@@ -1,4 +1,4 @@
-import type { IChampionStatName, IEffectObjectName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
+import type { EffectObjectName, IChampionStatName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
 import type { IItemShopStatFilter } from './meta';
@@ -36,6 +36,16 @@ export const CONSTS = {
 	statGfm(level: number) {
 		return 0.7025 + 0.0175 * (level - 1);
 	},
+	ornnUpgradeableStatGoldValues: {
+		AbilityHasteMod: 31.25,
+		FlatMagicDamageMod: 20,
+		FlatPhysicalDamageMod: 35,
+		PercentAttackSpeedMod: 30,
+		FlatArmorMod: 20,
+		FlatSpellBlockMod: 18,
+	} as Partial<Record<IItemStat, number>>,
+	/** ornn passive hp bonuses based on how many other upgradeable stats the item has */
+	ornnHpBonuses: [375, 185, 125, 90],
 };
 
 export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListedChampion> as IChampionData;
@@ -110,7 +120,7 @@ export type TEffects = typeof effectData['data'];
 
 export const EFFECTS_STRINGTABLE = effectData.stringtable as Record<string, string>;
 
-export interface IEffectData extends Record<IEffectObjectName, ({
+export interface IEffectData extends Record<EffectObjectName, ({
 	dataKey: string;
 	description: string;
 } | {

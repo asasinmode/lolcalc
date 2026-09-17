@@ -5,7 +5,7 @@ import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
 import { calculateDynamicVariables, specificKnownVariables } from '@lolcalc/core/specifics';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
+import { CONSTS, ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta';
 import { UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared/index';
 
@@ -134,7 +134,11 @@ defineExpose({ header });
 					aria-hidden="true"
 				>
 				<span :data-increased="hoverTooltip && isInventoryView && increasedBy ? '' : undefined">
-					{{ hoverTooltip && isInventoryView ? totalValue : baseValue }}
+					{{
+						hoverTooltip && isInventoryView
+							? ITEM_STAT_META[statName].isPercentage && !(statName in CONSTS.ornnUpgradeableStatGoldValues) ? totalValue : Math.floor(totalValue)
+							: baseValue
+					}}
 				</span>{{ ITEM_STAT_META[statName].isPercentage ? '%' : '' }}
 				<span>{{ ITEM_STAT_META[statName].name }}</span>
 			</li>

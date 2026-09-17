@@ -51,7 +51,7 @@ const tearItem = {
 			const tearItemId = self.items.value.find(item => item && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))?.id;
 			if (tearItemId) {
 				itemStatIncreases[tearItemId] ??= {};
-				itemStatIncreases[tearItemId]!.FlatMPPoolMod = manaflow;
+				itemStatIncreases[tearItemId]!.FlatMPPoolMod = (itemStatIncreases[tearItemId]!.FlatMPPoolMod ?? 0) + manaflow;
 			}
 		},
 		priority: -1,
@@ -99,9 +99,8 @@ const gluttonousGreavesSpecific = {
 
 				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
-					itemStatIncreases[bootsId] = {
-						PercentOmnivampMod: calculatedVariables.gluttonousImmortalOmnivamp,
-					};
+					itemStatIncreases[bootsId] ??= {};
+					itemStatIncreases[bootsId]!.PercentOmnivampMod = (itemStatIncreases[bootsId]!.PercentOmnivampMod ?? 0) + calculatedVariables.gluttonousImmortalOmnivamp;
 				}
 			},
 		},
@@ -164,9 +163,8 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats, itemStatIncreases }) {
 					const value = self.internalItemData.value.glory * ITEMS_BY_NAME.darkSeal?.dataValues.APPerGlory;
-					itemStatIncreases[ITEM_NAME_TO_ID.darkSeal] = {
-						FlatMagicDamageMod: value,
-					};
+					itemStatIncreases[ITEM_NAME_TO_ID.darkSeal] ??= {};
+					itemStatIncreases[ITEM_NAME_TO_ID.darkSeal]!.FlatMagicDamageMod = (itemStatIncreases[ITEM_NAME_TO_ID.darkSeal]!.FlatMagicDamageMod ?? 0) + value;
 					itemPassivesStats.abilityPower += value;
 				},
 			},
@@ -188,9 +186,8 @@ export const ITEM_SPECIFICS = {
 				handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
 					const { glory } = self.internalItemData.value as IInternalItemDataOf<'mejai'>;
 					const value = glory * ITEMS_BY_NAME.mejai?.dataValues.APPerGlory;
-					itemStatIncreases[ITEM_NAME_TO_ID.mejai] = {
-						FlatMagicDamageMod: value,
-					};
+					itemStatIncreases[ITEM_NAME_TO_ID.mejai] ??= {};
+					itemStatIncreases[ITEM_NAME_TO_ID.mejai]!.FlatMagicDamageMod = (itemStatIncreases[ITEM_NAME_TO_ID.mejai]!.FlatMagicDamageMod ?? 0) + value;
 					itemPassivesStats.abilityPower += value;
 					if (glory >= ITEMS_BY_NAME.mejai?.dataValues.GloryThreshold) {
 						calculatedVariables.totalBonusPercentMoveSpeed += ITEMS_BY_NAME.mejai?.dataValues.MoveSpeedMod;
@@ -258,11 +255,10 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.hp += (calculatedVariables.roaHp = eternity * HealthPerStack);
 					itemPassivesStats.mana += (calculatedVariables.roaMana = eternity * ManaPerStack);
 
-					itemStatIncreases[ITEM_NAME_TO_ID.roa] = {
-						FlatMagicDamageMod: calculatedVariables.roaAp,
-						FlatHPPoolMod: calculatedVariables.roaHp,
-						FlatMPPoolMod: calculatedVariables.roaMana,
-					};
+					itemStatIncreases[ITEM_NAME_TO_ID.roa] ??= {};
+					itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatMagicDamageMod = (itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatMagicDamageMod ?? 0) + calculatedVariables.roaAp;
+					itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatHPPoolMod = (itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatHPPoolMod ?? 0) + calculatedVariables.roaHp;
+					itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatMPPoolMod = (itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatMPPoolMod ?? 0) + calculatedVariables.roaMana;
 				},
 			},
 		},
@@ -473,9 +469,8 @@ export const ITEM_SPECIFICS = {
 					const { practice = 0 } = self.internalItemData.value as IInternalItemDataOf<'yunTal'>;
 					calculatedVariables.yuntalCritChance = roundNumber(practice / 100, 2);
 					itemPassivesStats.critChance += calculatedVariables.yuntalCritChance;
-					itemStatIncreases[ITEM_NAME_TO_ID.yunTal] = {
-						FlatCritChanceMod: practice,
-					};
+					itemStatIncreases[ITEM_NAME_TO_ID.yunTal] ??= {};
+					itemStatIncreases[ITEM_NAME_TO_ID.yunTal]!.FlatCritChanceMod = (itemStatIncreases[ITEM_NAME_TO_ID.yunTal]!.FlatCritChanceMod ?? 0) + practice;
 					if ((self.internalItemData.value as IInternalItemDataOf<'yunTal'>).flurry) {
 						calculatedVariables.yuntalAttackSpeed = ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].FLURRY_ATTACK_SPEED;
 						itemPassivesStats.bonusAttackSpeedPercent += calculatedVariables.yuntalAttackSpeed;
@@ -1698,7 +1693,7 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.hp += cConsumption ?? 0;
 
 					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel] ??= {};
-					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod = cConsumption;
+					itemStatIncreases[ITEM_NAME_TO_ID.heartsteel]!.FlatHPPoolMod = (itemStatIncreases[ITEM_NAME_TO_ID.mejai]!.FlatHPPoolMod ?? 0) + cConsumption;
 				},
 			},
 		},

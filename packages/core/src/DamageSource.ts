@@ -2192,9 +2192,9 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	stats: {
 		icon: typeof STAT_ICON[keyof typeof STAT_ICON];
 		statName: IItemStat;
-		baseValue: string | number;
+		baseValue: number;
 		/** base value modified by `increasedBy` */
-		totalValue: string | number;
+		totalValue: number;
 		/** set in items like tear or gluttonous greaves which passives' modify the displayed number */
 		increasedBy?: number;
 	}[];

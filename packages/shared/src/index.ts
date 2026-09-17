@@ -134,6 +134,7 @@ export interface IStatsCalculationVariables {
 	additionalAdaptiveForceCheckAp: number;
 	/** for champion passives that reduce champion's critical strike damage, like Jhin or Senna */
 	critMultiplierMod: number;
+	hasMasterworkItem?: boolean;
 	// TODO if all bonus damage percents are treated the same, store them under the same variable
 	// TODO move these to damage calc computed
 	/** bonus damage % gained from liandry's passive stacks, doesn't affect stats but is kept here */

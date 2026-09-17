@@ -1,9 +1,10 @@
 import type { TMiscData } from '@lolcalc/data';
-import type { IChampionId, IItem } from '@lolcalc/data/types';
+import type { IChampionId, IItem, IItemStat } from '@lolcalc/data/types';
 import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { CONSTS, MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
+import { isMasterworkSlot } from '../DamageSource';
 import { cooldownReductionPercentageFromHaste } from '../specifics/champion.ts';
 import { addMultiplicative, calculateMSCapPenalty, combineCompounding } from './util.ts';
 
@@ -136,13 +137,22 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		magicResist: 0,
 	};
 
+	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
 	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
 		itemBaseStats[stat] = 1;
 	}
 
-	for (const item of items.filter(Boolean)) {
-		for (const [statName, statValue] of itemToChampionStats(item!)) {
+	for (let i = 0; i < items.length; i++) {
+		const item = items[i];
+		if (!item) {
+			continue;
+		}
+		const isMasterwork = isMasterworkSlot(source, i);
+		if (isMasterwork) {
+			calculatedVariables.hasMasterworkItem = true;
+		}
+		for (const [statName, statValue] of itemToChampionStats(item, itemStatIncreases, isMasterwork)) {
 			if (MULTIPLICATIVE_CHAMPION_STATS.includes(statName)) {
 				itemBaseStats[statName] = addMultiplicative(itemBaseStats[statName], statValue);
 			} else {
@@ -167,7 +177,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemBaseStats[stat] = 1 - itemBaseStats[stat];
 	}
 
-	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
 	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
 		itemPassivesStats[stat] = 1;
@@ -437,13 +446,55 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 }
 
-function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
+function itemToChampionStats(
+	item: IItem,
+	itemStatIncreases: IStatsCalculationResult['itemStatIncreases'],
+	isMasterwork: boolean,
+): [IChampionStatName, number][] {
+	const statIncreases: Partial<Record<IItemStat, number>> = {};
+
+	if (isMasterwork) {
+		const upgradeableStats: IItemStat[] = [];
+		let nonHPUpgradeableStats = 0;
+
+		for (const stat in item.stats) {
+			if (stat in CONSTS.ornnUpgradeableStatGoldValues || stat === 'FlatHPPoolMod') {
+				upgradeableStats.push(stat as IItemStat);
+				if (stat !== 'FlatHPPoolMod') {
+					nonHPUpgradeableStats += 1;
+				}
+			}
+		}
+
+		if (upgradeableStats.length) {
+			const goldPerStat = 1000 / upgradeableStats.length;
+			for (const statName of upgradeableStats) {
+				if (statName === 'FlatHPPoolMod') {
+					const hpBonus = CONSTS.ornnHpBonuses[nonHPUpgradeableStats] ?? CONSTS.ornnHpBonuses.at(-1)!;
+					statIncreases[statName] = (statIncreases[statName] ?? 0) + hpBonus;
+				} else {
+					const goldValuePerUnit = CONSTS.ornnUpgradeableStatGoldValues[statName]!;
+					const statBonus = goldPerStat / goldValuePerUnit;
+					statIncreases[statName] = (statIncreases[statName] ?? 0) + statBonus;
+				}
+			}
+		} else {
+			statIncreases.FlatHPPoolMod = (statIncreases.FlatHPPoolMod ?? 0) + CONSTS.ornnHpBonuses[0]!;
+		}
+
+		itemStatIncreases[item.id] ??= {};
+		for (const stat in statIncreases) {
+			// @ts-expect-error typeof stat is fine
+			itemStatIncreases[item.id]![stat] = (itemStatIncreases[item.id]![stat] ?? 0) + statIncreases[stat];
+		}
+	}
+
 	const rv = Object.entries(item.stats)
 		.filter(([itemStatName]) => itemStatName in ITEM_TO_CHAMPION_STATS)
 		.map(([itemStatName, itemStatValue]) => {
 			return [
 				ITEM_TO_CHAMPION_STATS[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS],
-				itemStatValue,
+				itemStatValue + (statIncreases[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS] ?? 0),
 			] as [IChampionStatName, number];
 		});
 
