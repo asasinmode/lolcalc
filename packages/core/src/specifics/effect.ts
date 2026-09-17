@@ -910,6 +910,7 @@ export const EFFECT_SPECIFICS = {
 			5: 5,
 			6: 6,
 		},
+		maxValue: 6,
 	}),
 	[EffectObjectName.rellPBreakMold]: {
 		...defineEffectSpecific<[breakTheMoldStacks: number, totalArmor?: number, totalMR?: number]>({
