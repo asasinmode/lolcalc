@@ -2158,6 +2158,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ornn: {
+		// TODO
 		MASTERWORK_LEVEL: (self: DamageSource<'Ornn'>): number => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
 		MAX_UPGRADED_ALLIES: 4,
 		calcMaxUpgradedAllies(self: DamageSource<'Ornn'>): number {
@@ -2275,12 +2276,22 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Rammus: {
-		// TODO get w cancel variant spell_defensiveballcurlcancel_tooltip
-		// rammusdbc https://raw.communitydragon.org/latest/game/global/champions/champions.bin.json
 		setupData(self) {
 			return {
 				defensiveCurl: clamp(0, self.internalData.value.defensiveCurl ?? 0, 1),
 			};
+		},
+		w: {
+			// TODO not sure if actually desired, looks weird without styling the W as active (the border animation) and only clutters results, skip for now
+			// additionalVariantsObjectNames: ['DefensiveBallCurlCancel'],
+			variables: defineChampionVariables<'Rammus', typeof IRammus, 'w'>()({
+				meta: {
+					ReturnDamageCalc: {
+						type: VariableType.magic,
+					},
+				},
+				uninteresting: ['BuffDuration'],
+			}),
 		},
 		calculateHooks: {
 			postTotal: {
@@ -2355,16 +2366,6 @@ export const CHAMPION_SPECIFICS = {
 				},
 				priority: HOOK_PRIORITIES.postTotal.Rammus,
 			},
-		},
-		w: {
-			variables: defineChampionVariables<'Rammus', typeof IRammus, 'w'>()({
-				meta: {
-					ReturnDamageCalc: {
-						type: VariableType.magic,
-					},
-				},
-				uninteresting: ['BuffDuration'],
-			}),
 		},
 	},
 	RekSai: {
