@@ -2158,7 +2158,6 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ornn: {
-		// TODO
 		MASTERWORK_LEVEL: (self: DamageSource<'Ornn'>): number => (self.champion.value! as typeof IOrnn).abilities.passive.variants[0]!.dataValues.MasterworkLevel[1]!,
 		MAX_UPGRADED_ALLIES: 4,
 		calcMaxUpgradedAllies(self: DamageSource<'Ornn'>): number {
@@ -2178,18 +2177,53 @@ export const CHAMPION_SPECIFICS = {
 				})],
 			};
 		},
-		variables: defineChampionVariables<'Ornn', typeof IOrnn>()({
-			known: {
-				GameModeInteger: [1],
-			},
-			calculate() {
-				return {
-					GameModeInteger: {
-						value: 1,
+		passive: {
+			variables: defineChampionVariables<'Ornn', typeof IOrnn, 'passive'>()({
+				known: {
+					f1: [],
+					f2: [],
+					f3: [],
+					f4: [],
+					GameModeInteger: [1],
+				},
+				calculate(self) {
+					return {
+						GameModeInteger: {
+							value: 1,
+						},
+						f1: {
+							value: self.stats.value.variables.ornnPassiveStatAmp?.percent ?? 0,
+						},
+						f2: {
+							value: self.stats.value.variables.ornnPassiveStatAmp?.armor ?? 0,
+						},
+						f3: {
+							value: self.stats.value.variables.ornnPassiveStatAmp?.magicResist ?? 0,
+						},
+						f4: {
+							value: self.stats.value.variables.ornnPassiveStatAmp?.hp ?? 0,
+						},
+					};
+				},
+				meta: {
+					f1: {
+						displayedName: 'AmpPercent',
+						isPercentage: true,
+						multiplier: 100,
 					},
-				};
-			},
-		}),
+					f2: {
+						displayedName: 'BonusArmor',
+					},
+					f3: {
+						displayedName: 'BonusMagicResist',
+					},
+					f4: {
+						displayedName: 'BonusHP',
+					},
+				},
+				uninteresting: ['MasterworkLevel', 'BaseStatAmp', 'AdditionalMythicStatAmp'],
+			}),
+		},
 		q: {
 			dataOverrides: {
 				isImmobilizing: false,
@@ -2200,7 +2234,26 @@ export const CHAMPION_SPECIFICS = {
 				isImmobilizing: true,
 			},
 		},
-		// TODO calculate masterwork items
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }, { calculatedVariables }) {
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const baseStatAmp = championAbilityVariableValue('BaseStatAmp', passiveParams);
+					const additionalStatAmp = championAbilityVariableValue('AdditionalMythicStatAmp', passiveParams);
+
+					if (typeof baseStatAmp.value === 'number' && typeof additionalStatAmp.value === 'number') {
+						calculatedVariables.ornnPassiveStatAmp = {
+							percent: baseStatAmp.value + additionalStatAmp.value * self.internalData.value.passiveUpgradedAllies,
+							hp: 0,
+							armor: 0,
+							magicResist: 0,
+						};
+					} else {
+						console.warn('[CHAMPION_SPECIFICS ornn] failed to calculate passive stat amps', baseStatAmp, additionalStatAmp);
+					}
+				},
+			},
+		},
 	},
 	Pyke: {
 		passive: {
