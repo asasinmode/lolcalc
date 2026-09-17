@@ -257,7 +257,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 	 * }
 	 * ```
 	 */
-	options: Record<number, string>,
+	options: MaybeRef<Record<number, string | number>>,
 	{
 		selectEffectSourceProps,
 	}: {
@@ -283,7 +283,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 			imgSrc,
 			label,
-			options,
+			'options': toValue(options),
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
 			},

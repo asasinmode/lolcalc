@@ -14,7 +14,8 @@ defineProps<{
 	 * }
 	 * ```
 	 */
-	options: Record<number, string>;
+	options: Record<number, string | number>;
+	disabled?: boolean;
 }>();
 
 defineEmits<{
@@ -42,6 +43,7 @@ function updateValue(event: Event) {
 		<select
 			:id="`xtrenum-${idSuffix}`"
 			:value="value ?? 0"
+			:disabled
 			@change="updateValue"
 		>
 			<option v-for="(optionLabel, optionValue) in options" :key="optionValue" :value="optionValue">

@@ -11,8 +11,23 @@ defineEmits<IExtraComponentEmits>();
 
 const maxUpgradedAllies = computed(() => CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(props.damageSource));
 
-const SlotIndexComponent = await numberExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', 1, 6);
-const UpgradedAlliesComponent = await numberExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'passiveUpgradedAllies', 'Allies with masterwork item', 0, maxUpgradedAllies);
+const SlotIndexComponent = await enumExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', {
+	1: 1,
+	2: 2,
+	3: 3,
+	4: 4,
+	5: 5,
+	6: 6,
+});
+const UpgradedAlliesComponent = await enumExtra(
+	GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0),
+	'passiveUpgradedAllies',
+	'Allies with masterwork item',
+	computed(() => Array.from({ length: maxUpgradedAllies.value + 1 }, (_, i) => i).reduce((acc, curr) => ({
+		...acc,
+		[curr]: curr,
+	}), {})),
+);
 
 const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalData.value._masterworkLevel;
 </script>
@@ -32,31 +47,19 @@ const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalDat
 
 <style>
 @layer overrides {
-	[data-scoreboard-item='Ornn'] .calc-extra-number {
-		&:nth-of-type(-n + 2) {
-			> p {
-				--at-apply: 'col-start-2 row-start-2 col-span-3 z-1 relative text-center h-9 grid-center -mt-1 whitespace-nowrap bg-black/20 backdrop-blur-2 -mx-1 font-500';
-				paint-order: stroke fill;
-				-webkit-text-stroke: 0.15em black;
-			}
+	[data-scoreboard-item='Ornn'] .extras > :nth-child(-n + 2) {
+		> p {
+			--at-apply: 'col-start-2 row-start-2 col-span-3 z-1 relative text-center h-9 grid-center -mt-1 whitespace-nowrap bg-black/20 backdrop-blur-2 -mx-1 font-500';
+			paint-order: stroke fill;
+			-webkit-text-stroke: 0.15em black;
+		}
 
-			&:not(:has(> input:disabled)) > p {
-				--at-apply: 'hidden';
-			}
+		&:not(:has(> input:disabled), :has(> select:disabled)) > p {
+			--at-apply: 'hidden';
+		}
 
-			> input {
-				--at-apply: 'col-start-2 row-start-2';
-			}
-
-			> button {
-				&:nth-of-type(1) {
-					--at-apply: 'col-start-3 row-start-2';
-				}
-
-				&:nth-of-type(2) {
-					--at-apply: 'col-start-4 row-start-2';
-				}
-			}
+		> select {
+			--at-apply: 'col-start-2 row-start-2';
 		}
 	}
 }

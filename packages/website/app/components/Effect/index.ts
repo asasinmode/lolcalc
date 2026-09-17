@@ -1,10 +1,10 @@
-import type { IEffectObjectName } from '@lolcalc/shared';
+import type { EffectObjectName } from '@lolcalc/shared';
 import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { AbilityType } from '@lolcalc/shared';
 
-export const EFFECT_COMPONENTS: Partial<Record<IEffectObjectName, ISpecificComponents>> = {
+export const EFFECT_COMPONENTS: Partial<Record<EffectObjectName, ISpecificComponents>> = {
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {

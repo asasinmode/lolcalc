@@ -894,19 +894,23 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
-	[EffectObjectName.ornnPLivingForge]: {
-		...defineEffectSpecific<[livingForgeItemSlot: number]>({
-			setupData(data): [livingForgeItemSlot: number] {
-				return [clamp(this.minValue!, data?.[0] ?? 1, EFFECT_SPECIFICS[EffectObjectName.ornnPLivingForge].maxValue!)];
-			},
-			imgText(data) {
-				return data[0];
-			},
-		}),
-		/** this goes from <0,6> as opposed to ornn passive's <1,6> so it can be toggled "off" when decreased to 0 */
-		minValue: 0,
-		maxValue: 6,
-	},
+	[EffectObjectName.ornnPLivingForge]: defineEffectSpecific<[livingForgeItemSlot: number]>({
+		setupData(data): [livingForgeItemSlot: number] {
+			return [clamp(0, data?.[0] ?? 1, 6)];
+		},
+		imgText(data) {
+			return data[0];
+		},
+		enumOptions: {
+			none: 0,
+			1: 1,
+			2: 2,
+			3: 3,
+			4: 4,
+			5: 5,
+			6: 6,
+		},
+	}),
 	[EffectObjectName.rellPBreakMold]: {
 		...defineEffectSpecific<[breakTheMoldStacks: number, totalArmor?: number, totalMR?: number]>({
 			async setupData(data, self): Promise<[number, number | undefined, number | undefined]> {
@@ -1220,7 +1224,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	 */
 	maxValue?: number | (() => Promise<number> | number);
 	/** if specified, the component for this effect will be `VExtraEnum` */
-	enumOptions?: Record<string, number>;
+	enumOptions?: Record<string, number | string>;
 	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn<true>;
 	/** will be called when the value is updated through the extra component */
