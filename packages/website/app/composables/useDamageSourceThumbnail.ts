@@ -76,9 +76,9 @@ export function useDamageSourceThumbnail() {
 				const item = damageSource.items.value[i];
 
 				if (isMasterworkSlot(damageSource, i)) {
-					li.classList.add('data-masterwork', '');
+					li.classList.add('masterwork');
 				} else {
-					li.classList.remove('data-masterwork');
+					li.classList.remove('masterwork');
 				}
 
 				if (item) {
