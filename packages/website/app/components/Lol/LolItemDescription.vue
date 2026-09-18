@@ -134,11 +134,7 @@ defineExpose({ header });
 					aria-hidden="true"
 				>
 				<span :data-increased="hoverTooltip && isInventoryView && increasedBy ? '' : undefined">
-					{{
-						hoverTooltip && isInventoryView
-							? ITEM_STAT_META[statName].isPercentage && !(statName in CONSTS.ornnUpgradeableStatGoldValues) ? totalValue : Math.floor(totalValue)
-							: baseValue
-					}}
+					{{ hoverTooltip && isInventoryView ? totalValue : baseValue }}
 				</span>{{ ITEM_STAT_META[statName].isPercentage ? '%' : '' }}
 				<span>{{ ITEM_STAT_META[statName].name }}</span>
 			</li>

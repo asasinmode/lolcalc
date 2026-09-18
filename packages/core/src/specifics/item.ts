@@ -2157,7 +2157,7 @@ export const ITEM_SPECIFICS = {
 		internalDataProperties: ['retribution', 'tyranny'],
 		setupData(self) {
 			self.internalItemData.value.retribution = self.internalItemData.value.retribution ? Math.max(0, self.internalItemData.value.retribution) : undefined;
-			self.internalItemData.value.tyranny = self.internalItemData.value.retribution ? Math.max(0, self.internalItemData.value.tyranny) : undefined;
+			self.internalItemData.value.tyranny = self.internalItemData.value.tyranny ? Math.max(0, self.internalItemData.value.tyranny) : undefined;
 			return {
 				retribution: 0 as number | undefined,
 				tyranny: 0 as number | undefined,
@@ -2166,7 +2166,7 @@ export const ITEM_SPECIFICS = {
 		extraControls: {
 			model: self => computed({
 				get() {
-					return self.internalItemData.value.retribution === undefined ? 0 : 1;
+					return (self.internalItemData.value.retribution || self.internalItemData.value.tyranny) ? 1 : 0;
 				},
 				set(value) {
 					if (value) {
