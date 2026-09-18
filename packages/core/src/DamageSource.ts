@@ -2286,6 +2286,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		itemPassivesStats: IStatsCalculationResult['itemPassive'];
 		itemTotalStats: IStatsCalculationResult['itemTotal'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];
+		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
 	}) => void>;
 	/** runs after creating empty `runeShardStats`, before adding them up to `levelAndRunesStats` */
 	onRuneShards?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
@@ -2323,6 +2324,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 		isRanged: IStatsCalculationResult['isRanged'];
 		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
 		totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+		runeShardStats: IStatsCalculationResult['runeShards'];
 		bonusStats: IStatsCalculationResult['bonus'];
 		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 		baseStats: IStatsCalculationResult['base'];

@@ -216,9 +216,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotalStats.mana = 0;
 	}
 
+	const totalMultipliersStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+
 	if (source.calculateStatsHooks.all.value.postItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postItemTotal) {
-			hook(source, { itemPassivesStats, itemTotalStats, championPassiveStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(source, { itemPassivesStats, itemTotalStats, championPassiveStats, totalMultipliersStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
 		}
 	}
 	calculatedVariables.postItemTotalApMultipliersBase = calculatedVariables.apMultipliersBase;
@@ -331,11 +333,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats.attackSpeed = Math.max(0, bonusStats.attackSpeed - debuffs.totalCrippledAttackSpeed);
 	}
 
-	const totalMultipliersStats = Object.fromEntries(Object.keys(totalPreMultipliersStats).map(key => [key, 0])) as IChampionStats;
-
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
-			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, baseStats, baseOnLevelStats, adaptiveForceMeta }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, runeShardStats, baseStats, baseOnLevelStats, adaptiveForceMeta }, { calculatedVariables, debuffs, effectVars, miscDebug });
 		}
 	}
 

@@ -2253,8 +2253,8 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 		calculateHooks: {
-			onTotalPreMultipliers: {
-				handler(self, { championPassiveStats, itemPassivesStats, itemTotalStats, bonusStats, totalPreMultipliersStats, totalMultipliersStats }, { calculatedVariables }) {
+			postItemTotal: {
+				handler(self, { championPassiveStats, itemPassivesStats, itemTotalStats, totalMultipliersStats }, { calculatedVariables }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
 					const baseStatAmp = championAbilityVariableValue('BaseStatAmp', passiveParams);
 					const additionalStatAmp = championAbilityVariableValue('AdditionalMythicStatAmp', passiveParams);
@@ -2269,25 +2269,68 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					championPassiveStats.hp = bonusStats.hp * calculatedVariables.ornnPassiveStatAmp;
+					championPassiveStats.hp = itemTotalStats.hp * calculatedVariables.ornnPassiveStatAmp;
 					totalMultipliersStats.hp += championPassiveStats.hp;
+
+					if (championPassiveStats.hp && calculatedVariables.riftmakerBonusHPToAP) {
+						const ap = championPassiveStats.hp * calculatedVariables.riftmakerBonusHPToAP;
+						calculatedVariables.riftmakerVoidInfusion! += ap;
+						calculatedVariables.apMultipliersBase += ap;
+						calculatedVariables.additionalAdaptiveForceCheckAp -= ap;
+						itemPassivesStats.abilityPower += ap;
+						itemTotalStats.abilityPower += ap;
+					}
+				},
+				priority: HOOK_PRIORITIES.postItemTotal.Ornn,
+			},
+			onTotalPreMultipliers: {
+				handler(_self, { championPassiveStats, bonusStats, runeShardStats, itemPassivesStats, itemTotalStats, totalMultipliersStats, totalPreMultipliersStats }, { calculatedVariables }) {
+					if (!calculatedVariables.ornnPassiveStatAmp) {
+						return;
+					}
+
+					/* this hp was already added to bonus from `championPassiveStats.hp` set in `preItemTotal` hook. Remove it so it's not doubled */
+					bonusStats.hp -= championPassiveStats.hp!;
+					totalPreMultipliersStats.hp -= championPassiveStats.hp!;
+
+					const hp = (runeShardStats.hp ?? 0) * calculatedVariables.ornnPassiveStatAmp;
+					championPassiveStats.hp! += hp;
+					totalMultipliersStats.hp += hp;
+
+					if (hp && calculatedVariables.riftmakerBonusHPToAP) {
+						const ap = hp * calculatedVariables.riftmakerBonusHPToAP;
+						calculatedVariables.riftmakerVoidInfusion! += ap;
+						calculatedVariables.apMultipliersBase += ap;
+						itemPassivesStats.abilityPower += ap;
+						itemTotalStats.abilityPower += ap;
+						bonusStats.abilityPower += ap;
+
+						if (calculatedVariables.rabadonApMultiplier) {
+							const value = ap * calculatedVariables.rabadonApMultiplier;
+							calculatedVariables.rabadonMagicalOpus! += value;
+							itemPassivesStats.abilityPower += value;
+							itemTotalStats.abilityPower += value;
+							bonusStats.abilityPower += value;
+							totalPreMultipliersStats.abilityPower += value;
+						}
+
+						if (calculatedVariables.blackfireTorchBBlazeMultiplier) {
+							const value = ap * calculatedVariables.blackfireTorchBBlazeMultiplier;
+							calculatedVariables.blackfireTorchBBlazeAP! += value;
+							itemPassivesStats.abilityPower += value;
+							itemTotalStats.abilityPower += value;
+							bonusStats.abilityPower += value;
+							totalPreMultipliersStats.abilityPower += value;
+						}
+					}
 
 					championPassiveStats.armor = bonusStats.armor * calculatedVariables.ornnPassiveStatAmp;
 					totalMultipliersStats.armor += championPassiveStats.armor;
 
 					championPassiveStats.magicResist = bonusStats.magicResist * calculatedVariables.ornnPassiveStatAmp;
 					totalMultipliersStats.magicResist += championPassiveStats.magicResist;
-
-					if (championPassiveStats.hp && calculatedVariables.riftmakerBonusHPToAP) {
-						const ap = championPassiveStats.hp * calculatedVariables.riftmakerBonusHPToAP;
-						calculatedVariables.riftmakerVoidInfusion! += ap;
-						calculatedVariables.apMultipliersBase += ap;
-						bonusStats.abilityPower += ap;
-						itemPassivesStats.abilityPower += ap;
-						itemTotalStats.abilityPower += ap;
-						totalPreMultipliersStats.abilityPower += ap;
-					}
 				},
+				priority: 1,
 			},
 		},
 	},

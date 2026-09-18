@@ -625,6 +625,64 @@
 				}
 			}
 		},
+		"2503": {
+			"searchString": "blackfiretorch;spelldamage;mana;cooldownreduction;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 80,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"BurnFlatDamagePerSecond": 20,
+				"APRatio": 0.02,
+				"BurnDuration": 3,
+				"MonsterDamageBonus": 20,
+				"TickFrequency": 0.5,
+				"APPerStack": 0.04,
+				"MinionDPS": 20,
+				"MinionAP": 0.02,
+				"MonsterDPS": 40,
+				"MonsterAP": 0.02
+			},
+			"itemCalculations": {
+				"BurnDamagePerSecondCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BurnFlatDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinionDPS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MinionAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MonsterBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterDPS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MonsterAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"2517": {
 			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste;attackdamage",
 			"stats": {
@@ -697,6 +755,38 @@
 			"dataValues": {
 				"MaxBonusDamagePercent": 0.15,
 				"MaxBonusHealth": 1500
+			}
+		},
+		"3071": {
+			"searchString": "blackcleaver;bc;health;damage;cooldownreduction;onhit;movement;armorpenetration;abilityhaste;attackdamage",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatPhysicalDamageMod": 45,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"DebuffDuration": 6,
+				"MoveSpeedBonus": 20,
+				"MoveSpeedDuration": 2,
+				"InternalCD": 0.01,
+				"MaxStacks": 5,
+				"ShredPerStack": 0.06,
+				"RangedMod": 0.5
+			},
+			"itemCalculations": {
+				"MSBonusSplit": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedBonus",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedMod",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				}
 			}
 		},
 		"3072": {
@@ -883,6 +973,20 @@
 			},
 			"effectAmount": [0.08, 2.5, 2.5, 4, 4, 0.1, 0.1, 15, 1, 3, 0, 0, 3]
 		},
+		"3139": {
+			"searchString": "mercurialscimitar;mercscim;quicksilversash;qss;silvermeredawn;magicresist;damage;lifesteal;active;movement;tenacity;attackdamage",
+			"stats": {
+				"FlatSpellBlockMod": 35,
+				"FlatPhysicalDamageMod": 50,
+				"PercentLifeStealMod": 0.1
+			},
+			"dataValues": {
+				"Cooldown": 90,
+				"MSDuration": 2,
+				"MoveSpeed": 0.5
+			},
+			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0]
+		},
 		"3170": {
 			"searchString": "swiftmarch;boots;movespeed",
 			"stats": {
@@ -959,6 +1063,52 @@
 						}
 					],
 					"mDisplayAsPercent": true
+				}
+			}
+		},
+		"6609": {
+			"searchString": "chempunkchainsword;grievouswounds;health;damage;cooldownreduction;abilityhaste;attackdamage",
+			"stats": {
+				"FlatHPPoolMod": 450,
+				"FlatPhysicalDamageMod": 45,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3
+			}
+		},
+		"6610": {
+			"searchString": "sunderedsky;health;damage;cooldownreduction;abilityhaste;attackdamage",
+			"stats": {
+				"FlatHPPoolMod": 400,
+				"FlatPhysicalDamageMod": 40,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"CritModifier": 0.8,
+				"Cooldown": 10,
+				"HealBaseADRatio": 0.9,
+				"MissingHealthHeal": 0.04,
+				"RangedHealMod": 0.5
+			},
+			"itemCalculations": {
+				"HealADSplit": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "HealBaseADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedHealMod",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				},
+				"__renamedVariables": {
+					"{01099b16}": "HealADSplit"
 				}
 			}
 		},

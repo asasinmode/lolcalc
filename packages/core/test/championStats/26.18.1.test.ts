@@ -72,6 +72,37 @@ test('adaptive', async (t) => {
 			abilityPower: 317,
 		}, damageSource);
 	});
+
+	/**
+	 * hp stat increase from passive is done before adaptive force check
+	 * calculate hp -> amp it by ornn -> do riftmaker -> calculate blackfire torch -> blackfire torch ap counts towards adaptive force check -> ornn gains ap
+	 */
+	await t.test('ornn', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ornn', {
+			...sourceCommon,
+			level: 18,
+			internalData: { masterworkItemSlot: 0, passiveUpgradedAllies: 4, _masterworkLevel: 13 },
+			items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.sunderedSky, ITEMS_BY_NAME.blackCleaver, ITEMS_BY_NAME.chempunkChainsword, ITEMS_BY_NAME.mercurialScimitar],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'attackDamage',
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 319,
+			abilityPower: 193,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'blackfireTorch'>).bBlaze = 4;
+
+		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
+			adaptiveForceStat: 'abilityPower',
+		}, damageSource);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 309,
+			abilityPower: 245,
+		}, damageSource);
+	});
 });
 
 test('26.18 Belveth', async (t) => {

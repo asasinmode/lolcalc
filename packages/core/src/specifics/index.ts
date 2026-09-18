@@ -25,6 +25,8 @@ export const HOOK_PRIORITIES = {
 	postItemTotal: {
 		/** before rabadon & blackfire torch */
 		Chogath: 1,
+		/** before rabadon & blackfire torch */
+		Ornn: 1,
 		[ITEM_NAME_TO_ID.rabadon]: 10,
 		[ITEM_NAME_TO_ID.blackfireTorch]: 10,
 	},
@@ -41,6 +43,8 @@ export const HOOK_PRIORITIES = {
 	},
 	onTotalPreMultipliers: {
 		cleanse: -1,
+		/** before rabadon & blackfire torch */
+		Ornn: 1,
 		/** must be before rabadon and blackfire torch */
 		[ITEM_NAME_TO_ID.swiftmarch]: 10,
 		[ITEM_NAME_TO_ID.rabadon]: 20,
