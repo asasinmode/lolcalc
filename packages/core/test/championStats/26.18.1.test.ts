@@ -15,6 +15,7 @@ test.before(() => {
 });
 
 const infernalStacks: IDragonName[] = ['Infernal', 'Infernal', 'Infernal', 'Infernal'];
+const mountainStacks: IDragonName[] = ['Mountain', 'Mountain', 'Mountain', 'Mountain'];
 
 test('adaptive', async (t) => {
 	const sourceCommon: IOverrides = {
@@ -395,7 +396,7 @@ test('26.18 Kled', async (t) => {
 		const damageSource = await setupDamageSource(fixture, 'Kled', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.jakSho],
-			dragonStacks: ['Mountain', 'Mountain', 'Mountain', 'Mountain'],
+			dragonStacks: mountainStacks,
 			internalData,
 		});
 
@@ -422,8 +423,7 @@ test('26.18 Kled', async (t) => {
 	});
 });
 
-test.only('26.18 Ornn', async (t) => {
-	t.runOnly(true);
+test('26.18 Ornn', async (t) => {
 	const sourceCommon: IOverrides<'Ornn'> = {
 		level: 18,
 		runes: {
@@ -437,7 +437,7 @@ test.only('26.18 Ornn', async (t) => {
 		items: [ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker],
 	};
 
-	await t.test('base', { only: true }, async () => {
+	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ornn', sourceCommon);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
@@ -450,5 +450,52 @@ test.only('26.18 Ornn', async (t) => {
 			magicResist: 149,
 		}, damageSource);
 		assert.strictEqual(damageSource.maxHealth.value, 4385);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 219,
+			magicResist: 168,
+		}, damageSource);
+	});
+
+	await t.test('4 mountains | mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ornn', {
+			...sourceCommon,
+			dragonStacks: mountainStacks,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 241,
+			magicResist: 179,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 263,
+			magicResist: 201,
+		}, damageSource);
+	});
+
+	await t.test('4 mountains | mid quest | protoplasm+', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Ornn', {
+			...sourceCommon,
+			items: sourceCommon.items!.concat([ITEMS_BY_NAME.protoplasmHarness]),
+			dragonStacks: mountainStacks,
+			roleQuest: 'mid',
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 244,
+			abilityPower: 133,
+		}, damageSource);
+		assert.strictEqual(damageSource.maxHealth.value, 5165);
+
+		damageSource.currentHealth.value = 1069;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'protoplasmHarness'>).pHLifeline = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 285,
+			abilityPower: 141,
+		}, damageSource);
+		assert.strictEqual(damageSource.maxHealth.value, 5555);
 	});
 });

@@ -345,9 +345,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	dragonStats.abilityPower = calculatedVariables.apMultipliersBase * dragonStatMultipliers.abilityPower;
 	totalMultipliersStats.abilityPower += dragonStats.abilityPower;
-	dragonStats.armor = (totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0)) * dragonStatMultipliers.armor;
+	dragonStats.armor = (totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0) + (championPassiveStats.armor ?? 0)) * dragonStatMultipliers.armor;
 	totalMultipliersStats.armor += dragonStats.armor;
-	dragonStats.magicResist = (totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0)) * dragonStatMultipliers.magicResist;
+	dragonStats.magicResist = (totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0) + (championPassiveStats.magicResist ?? 0)) * dragonStatMultipliers.magicResist;
 	totalMultipliersStats.magicResist += dragonStats.magicResist;
 
 	for (const [statName, value] of Object.entries(totalMultipliersStats)) {

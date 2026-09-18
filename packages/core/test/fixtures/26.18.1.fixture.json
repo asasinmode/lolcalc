@@ -737,6 +737,53 @@
 				}
 			}
 		},
+		"2525": {
+			"searchString": "protoplasmharness;health;movement;tenacity;abilityhaste",
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"AbilityHasteMod": 20
+			},
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"Duration": 5,
+				"MSAmount": 0.1,
+				"TenacityAmount": 0.25,
+				"Cooldown": 90,
+				"SizeIncrease": 0.15
+			},
+			"itemCalculations": {
+				"TotalHealthRegen": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 400,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxHealthGain": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 300,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"3031": {
 			"searchString": "infinityedge;ie;banana;criticalstrike;damage;criticalstrikechance;attackdamage",
 			"stats": {

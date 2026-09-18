@@ -2304,6 +2304,7 @@ export const CHAMPION_SPECIFICS = {
 						itemPassivesStats.abilityPower += ap;
 						itemTotalStats.abilityPower += ap;
 						bonusStats.abilityPower += ap;
+						totalPreMultipliersStats.abilityPower += ap;
 
 						if (calculatedVariables.rabadonApMultiplier) {
 							const value = ap * calculatedVariables.rabadonApMultiplier;

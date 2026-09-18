@@ -43,7 +43,7 @@ export const HOOK_PRIORITIES = {
 	},
 	onTotalPreMultipliers: {
 		cleanse: -1,
-		/** before rabadon & blackfire torch */
+		/** after jak'sho (default 0) and before rabadon & blackfire torch */
 		Ornn: 1,
 		/** must be before rabadon and blackfire torch */
 		[ITEM_NAME_TO_ID.swiftmarch]: 10,
