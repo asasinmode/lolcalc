@@ -2186,7 +2186,7 @@ export const CHAMPION_SPECIFICS = {
 			const maxUpgradedAllies: number = CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(self);
 			return {
 				masterworkItemSlot: self.level.value >= _masterworkLevel
-					? clamp(1, Math.round(self.internalData.value.masterworkItemSlot ?? 1), 6)
+					? clamp(-1, Math.round(self.internalData.value.masterworkItemSlot ?? 1), 6)
 					: 1,
 				passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), maxUpgradedAllies),
 				_masterworkLevel,
@@ -2260,7 +2260,7 @@ export const CHAMPION_SPECIFICS = {
 					const additionalStatAmp = championAbilityVariableValue('AdditionalMythicStatAmp', passiveParams);
 
 					if (typeof baseStatAmp.value === 'number' && typeof additionalStatAmp.value === 'number') {
-						calculatedVariables.ornnPassiveStatAmp = baseStatAmp.value + additionalStatAmp.value * (self.internalData.value.passiveUpgradedAllies + (calculatedVariables.hasMasterworkItem ? 1 : 0));
+						calculatedVariables.ornnPassiveStatAmp = baseStatAmp.value + additionalStatAmp.value * (self.internalData.value.passiveUpgradedAllies + (~self.internalData.value.masterworkItemSlot ? 1 : 0));
 					} else {
 						console.warn('[CHAMPION_SPECIFICS ornn] failed to calculate passive stat amps', baseStatAmp, additionalStatAmp);
 					}
@@ -2280,6 +2280,7 @@ export const CHAMPION_SPECIFICS = {
 
 					if (championPassiveStats.hp && calculatedVariables.riftmakerBonusHPToAP) {
 						const ap = championPassiveStats.hp * calculatedVariables.riftmakerBonusHPToAP;
+						calculatedVariables.riftmakerVoidInfusion! += ap;
 						calculatedVariables.apMultipliersBase += ap;
 						bonusStats.abilityPower += ap;
 						itemPassivesStats.abilityPower += ap;
