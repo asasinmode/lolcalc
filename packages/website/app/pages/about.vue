@@ -25,7 +25,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 
 		<h2>what is it?</h2>
 		<p>
-			<strong>lolcalc</strong> is intended to be a fully fledged, all-included <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> damage calculator (WIP). The goal is to show the same numbers the game does for any champion/item/rune/buff/debuff combination.
+			<strong>lolcalc</strong> is intended to be a fully fledged, all-included <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> damage calculator (WIP). The goal is to show the same stats and damage numbers the game does for any champion/item/rune/buff/debuff combination.
 		</p>
 
 		<h2 id="does-it-work">
@@ -75,18 +75,18 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 @layer page {
 	#about,
 	#guide {
-		--at-apply: 'text-lg max-inline-216 mx-auto pbs-[--fluid-12-32]';
+		--at-apply: 'text-lg leading-8 max-inline-216 mx-auto pbs-[--fluid-12-32] text-neutral-200';
 
 		> h1 {
-			--at-apply: 'text-[length:--fluid-24-32] font-700 mbe-[0.25em]';
+			--at-apply: 'text-[length:--fluid-24-32] font-700 mbe-[0.75em] text-center text-white';
 		}
 
 		> h2 {
-			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[0.75em] mbe-[0.5em]';
+			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[1em] mbe-[0.66em] text-white';
 		}
 
 		.code-like {
-			--at-apply: 'font-mono bg-slate-900 px-1 py-0.5 -mx-0.5 -my-0.5 rounded-sm';
+			--at-apply: 'font-mono text-white bg-slate-900 px-1 py-0.5 -mx-0.5 -my-0.5 rounded-sm';
 		}
 
 		a,
