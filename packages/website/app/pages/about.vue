@@ -75,7 +75,15 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 @layer page {
 	#about,
 	#guide {
-		--at-apply: 'text-lg';
+		--at-apply: 'text-lg max-inline-216 mx-auto pbs-[--fluid-12-32]';
+
+		> h1 {
+			--at-apply: 'text-[length:--fluid-24-32] font-700 mbe-[0.25em]';
+		}
+
+		> h2 {
+			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[0.75em] mbe-[0.5em]';
+		}
 
 		.code-like {
 			--at-apply: 'font-mono bg-slate-900 px-1 py-0.5 -mx-0.5 -my-0.5 rounded-sm';
