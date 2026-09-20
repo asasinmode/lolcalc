@@ -154,6 +154,16 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 			}
 		}
 
+		> dl {
+			> dt {
+				--at-apply: 'text-[length:--fluid-19-22] font-600 text-white mbs-[1em] mbe-[0.33em]';
+
+				&:first-child {
+					--at-apply: 'mbs-0';
+				}
+			}
+		}
+
 		.alert {
 			--at-apply: 'my-6';
 		}
