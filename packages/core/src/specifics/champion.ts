@@ -26,6 +26,7 @@ import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type INami from '@lolcalc/data/files/champion/Nami.json';
 import type INasus from '@lolcalc/data/files/champion/Nasus.json';
+import type INidalee from '@lolcalc/data/files/champion/Nidalee.json';
 import type INunu from '@lolcalc/data/files/champion/Nunu.json';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
@@ -2114,6 +2115,25 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveVariantActive: clamp(0, Math.round(self.internalData.value.passiveVariantActive ?? 0), maxPassive),
 			};
+		},
+		passive: {
+			preplaceTooltipText(value) {
+				/** use a custom var for hunting ms, otherwise it's displayed as `30%` always and in places where the tooltip shows `10%` */
+				return value.replaceAll('spell.AspectOfTheCougar:PassivePercentMS*3', 'HuntingPercentMS');
+			},
+			variables: defineChampionVariables<'Nidalee', typeof INidalee, 'passive'>()({
+				known: {
+					HuntingPercentMS: [],
+				},
+				calculate(self) {
+					const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
+					(msVariable.value as number) *= 3;
+
+					return {
+						HuntingPercentMS: msVariable,
+					};
+				},
+			}),
 		},
 		calculateHooks: {
 			postInit: {
