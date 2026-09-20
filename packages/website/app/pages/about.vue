@@ -23,8 +23,9 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 			</NuxtLink>
 		</p>
 
-		<h2>
+		<h2 id="what-is-it">
 			what is it?
+			<a href="#what-is-it"><span aria-hidden="true">#</span><span>link to the "what is it?" section</span></a>
 		</h2>
 		<p>
 			<strong>lolcalc</strong> is intended to be a fully fledged, all-included <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> damage calculator (WIP). The goal is to show the same stats and damage numbers the game does for any champion/item/rune/buff/debuff combination.
@@ -32,6 +33,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 
 		<h2 id="does-it-work">
 			does it work?
+			<a href="#does-it-work"><span aria-hidden="true">#</span><span>link to the "does it work?" section</span></a>
 		</h2>
 		<p>
 			While it's impossible for me to check all 172+ champions with every item/rune/dragon/quest/buff/debuff combination, I tried my best to make it work and <NuxtLink to="/guide#guide-examples"> here are some examples of it </NuxtLink>. If you encounter a configuration that's not calculated correctly (<a href="#known-discrepancies">known discrepancies</a>), please <button class="link-like" @click="reportAnIssue">report it</button>
@@ -43,23 +45,35 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 		<p class="game-description" v-html="nonPassiveAbilitiesDisclaimer" />
 		<p>For when these and other features will be implemented, check <a href="#TODO">the roadmap</a>.</p>
 
-		<h2 id="known-discrepancies">currently known calculation discrepancies</h2>
+		<h2 id="known-discrepancies">
+			currently known calculation discrepancies
+			<a href="#known-discrepancies"><span aria-hidden="true">#</span><span>link to the "known discrepancies" section</span></a>
+		</h2>
 		<ul>
 			<li class="game-description" v-html="discrepancyMaxHealthMana" />
 			<li class="game-description" v-html="discrepancyAttackRangeRfc" />
 			<li class="game-description" v-html="discrepancyBloodmailRetribution" />
 		</ul>
 
-		<h2 id="support">support</h2>
+		<h2 id="support">
+			support
+			<a href="#support"><span aria-hidden="true">#</span><span>link to the "support" section</span></a>
+		</h2>
 		<p>TODO</p>
 
-		<h2>acknowledgements</h2>
+		<h2 id="acknowledgements">
+			acknowledgements
+			<a href="#acknowledgements"><span aria-hidden="true">#</span><span>link to the "acknowledgements" section</span></a>
+		</h2>
 		<p>This project would not exist without <a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.</p>
 		<p>Some of the <strong>code</strong> in this project was written using LLMs. I'd estimate LLM generated code to be less than 10% of the code base, however I do want to say that it would've taken me a few more months to get to where it is without them. The ability to paste it the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful.</p>
 		<p>Thanks to my homies who helped me test both the website and the various champion configurations in game.</p>
 		<p>Thanks to Riot Games for not chronobreaking this project 🤞</p>
 
-		<h2>misc</h2>
+		<h2 id="misc">
+			misc
+			<a href="#misc"><span aria-hidden="true">#</span><span>link to the "misc" section</span></a>
+		</h2>
 		<dl>
 			<dt>alpha/beta/release versions</dt>
 			<dd>
@@ -84,7 +98,31 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 		}
 
 		> h2 {
-			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[1em] mbe-[0.5em] text-white';
+			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[1em] mbe-[0.5em] text-white relative scroll-m-bs-5';
+
+			> a {
+				--at-apply: 'op-0 inline-block px-1';
+
+				> span:last-child {
+					--at-apply: 'sr-only';
+				}
+			}
+
+			@media (width >= 920px) {
+				&::before {
+					--at-apply: 'absolute -inset-y-0.25 inset-s-0 translate-y-0.5 -translate-x-full op-0 z-0 px-1 block';
+					content: '#';
+				}
+
+				> a {
+					--at-apply: 'absolute -inset-s-0 inset-bs-0.5 -translate-x-full z-1';
+				}
+			}
+		}
+
+		> h2 > a:focus-visible,
+		> h2:hover > a {
+			--at-apply: 'op-100';
 		}
 
 		.code-like {
@@ -111,7 +149,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 		.link-like {
 			--at-apply: 'text-blue-400';
 
-			&:hover {
+			&:not(h2 > a):hover {
 				--at-apply: 'underline';
 			}
 		}
