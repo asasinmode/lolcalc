@@ -83,16 +83,16 @@ export const DRAGON_SPECIFICS = {
 			variables: defineVariables({
 				known: {
 					lolcalcChampRange: [
-						championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
-						championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
+						championAbilityVariableValue('TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
+						championAbilityVariableValue('TotalSlowAmountRanged', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).value as number,
 					],
 					Slow: [],
 				},
 				calculate(self) {
 					return {
 						lolcalcChampRange: [
-							championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
-							championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
+							championAbilityVariableValue('TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
+							championAbilityVariableValue('TotalSlowAmountRanged', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: self }),
 						],
 						Slow: {
 							value: self.effectsOntoTargetVars.value.hextechSoulSlow ?? 0,
@@ -109,7 +109,7 @@ export const DRAGON_SPECIFICS = {
 						isPercentage: true,
 						multiplier: 100,
 						/* since I'm overriding the builtin total slows with this one, use overwritten variables' calculatesFrom */
-						calculatesFrom: addCalculatesFrom([], championAbilityVariableValue('TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? [], championAbilityVariableValue('TotalSlowAmountRanged', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? []),
+						calculatesFrom: addCalculatesFrom([], championAbilityVariableValue('TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? [], championAbilityVariableValue('TotalSlowAmountRanged', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul }).calculatesFrom ?? []),
 					},
 					Slow: {
 						isCustom: true,
@@ -123,7 +123,7 @@ export const DRAGON_SPECIFICS = {
 				uninteresting: ['BaseUnitsToHit'],
 			}),
 			calculateSlow: (progress: number, isRanged: boolean | undefined, bonusAD?: number, totalAP?: number, bonusHP?: number): number => {
-				const slowValue =	championAbilityVariableValue(isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', { abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: {
+				const slowValue =	championAbilityVariableValue(isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul, damageSource: {
 					stats: { value: { bonus: { attackDamage: bonusAD ?? 0, hp: bonusHP ?? 0 }, total: { abilityPower: totalAP ?? 0 } } },
 				} as DamageSource });
 				if (typeof slowValue.value === 'number') {

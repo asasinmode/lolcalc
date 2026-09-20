@@ -1600,6 +1600,7 @@ export function computeAbilityDescription(
 	} = abilityVariantText(
 		allVariants,
 		variant.tooltip || '<unknown>UNKNOWN</unknown>',
+		gameAbilityId.abilityKey,
 		variant,
 		dynamicVariables,
 		abilityLevel,
@@ -1617,6 +1618,7 @@ export function computeAbilityDescription(
 	} = abilityVariantText(
 		allVariants,
 		variant.tooltipExtended ?? (tooltipAnyExtendedVariables ? variant.tooltip : '') ?? '',
+		gameAbilityId.abilityKey,
 		variant,
 		dynamicVariables,
 		abilityLevel,
@@ -1633,6 +1635,7 @@ export function computeAbilityDescription(
 	} = abilityVariantText(
 		allVariants,
 		variant.tooltipExtendedBelowLine || '',
+		gameAbilityId.abilityKey,
 		variant,
 		dynamicVariables,
 		abilityLevel,
@@ -1673,6 +1676,7 @@ export function computeAbilityDescription(
 			values: (tooltipVariablesAV.get(name) ?? tooltipExtendedVariablesAV.get(name) ?? championAbilityVariableValue(variable.name, {
 				abilityVariant: variant,
 				allAbilitiesVariants: damageSource?.allAbilityVariants.value,
+				abilityKey: gameAbilityId.abilityKey,
 				abilityLevel,
 				damageSource,
 			}, replaceOptions?.overrideVariables).allValues)?.slice(1, lastExtendedVariableIndex),
@@ -1727,6 +1731,7 @@ export function computeAbilityDescription(
 function abilityVariantText(
 	allAbilitiesVariants: UnwrapRef<DamageSource['allAbilityVariants']>,
 	value: string,
+	abilityKey: IChampionAbilityKey,
 	abilityVariant: IChampionAbilityVariant,
 	dynamicVariables?: IDynamicVariables,
 	abilityLevel?: number,
@@ -1751,7 +1756,7 @@ function abilityVariantText(
 	const { replaced, unknownVariables, variablesAllValues, variables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		{ abilityVariant, dynamicVariables, abilityLevel, allAbilitiesVariants, damageSource },
+		{ abilityKey, abilityVariant, dynamicVariables, abilityLevel, allAbilitiesVariants, damageSource },
 		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,
 	);
@@ -1789,6 +1794,7 @@ export function computeEffectDescription(
 			const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(source.tooltip, EFFECTS_STRINGTABLE);
 
 			const tooltip = replaceGameVariables(stringtableReplaced, 'championAbility', {
+				abilityKey: 'passive',
 				abilityVariant: source,
 				damageSource,
 				isRanged: damageSource?.stats.value.isRanged,
@@ -1796,6 +1802,7 @@ export function computeEffectDescription(
 
 			const tooltipExtended = tooltip.anyExtendedVariables
 				? replaceGameVariables(stringtableReplaced, 'championAbility', {
+						abilityKey: 'passive',
 						abilityVariant: source,
 						damageSource,
 						isRanged: damageSource?.stats.value.isRanged,
@@ -2009,7 +2016,7 @@ export function computeDragonAbilityDescription(
 	const { replaced, variables, unknownVariables, anyExtendedVariables } = replaceGameVariables(
 		stringtableReplaced,
 		'championAbility',
-		{ abilityVariant: ability, allAbilitiesVariants, isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
+		{ abilityKey: 'passive', abilityVariant: ability, allAbilitiesVariants, isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
 		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,
 	);
@@ -2032,7 +2039,7 @@ export function computeDragonAbilityDescription(
 		({ replaced: extendedReplaced } = replaceGameVariables(
 			stringtableReplaced,
 			'championAbility',
-			{ abilityVariant: ability, allAbilitiesVariants, isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
+			{ abilityKey: 'passive', abilityVariant: ability, allAbilitiesVariants, isRanged: damageSource?.stats.value.isRanged, damageSource, dynamicVariables: damageSource?.computed.variables.value.dragonSoulAbility },
 			damageSource?.modifyVariableFunctions.value,
 			{ ...replaceOptions, isExtended: true },
 		));

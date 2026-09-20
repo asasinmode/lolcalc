@@ -123,7 +123,7 @@ export const CHAMPION_SPECIFICS = {
 			onChampionPassive: {
 				handler(self, _stats, { calculatedVariables }) {
 					if (self.internalData.value.isPassiveMSActive) {
-						const bonusMSPercent = championAbilityVariableValue('PassiveSpeedBonus', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+						const bonusMSPercent = championAbilityVariableValue('PassiveSpeedBonus', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
 						if (typeof bonusMSPercent.value === 'number') {
 							calculatedVariables.totalBonusPercentMoveSpeed += bonusMSPercent.value;
 						} else {
@@ -357,7 +357,7 @@ export const CHAMPION_SPECIFICS = {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
 					const { q, w, e } = self.abilityLevels.value;
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, abilityKey: 'passive', damageSource: self };
 
 					const adPerRank = championAbilityVariableValue('ADPerRank', passiveParams);
 					if (typeof adPerRank.value === 'number') {
@@ -381,7 +381,7 @@ export const CHAMPION_SPECIFICS = {
 					}
 
 					if (self.abilityVariantsIndexes.value.q === CHAMPION_SPECIFICS.Aphelios.WEAPON_VARIANT_INDEX_TO_NAME.indexOf('calibrum')) {
-						const bonusRange = championAbilityVariableValue('BonusRange', { abilityVariant: self.champion.value!.abilities.q.variants[CHAMPION_SPECIFICS.Aphelios.WEAPON_VARIANT_INDEX_TO_NAME.indexOf('calibrum')]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+						const bonusRange = championAbilityVariableValue('BonusRange', { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[CHAMPION_SPECIFICS.Aphelios.WEAPON_VARIANT_INDEX_TO_NAME.indexOf('calibrum')]!, damageSource: self });
 						if (typeof bonusRange.value === 'number') {
 							championPassiveStats.attackRange = bonusRange.value;
 						} else {
@@ -481,7 +481,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 				calculate(self) {
 					let f1 = Number.NaN;
-					const qParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self, abilityLevel: self.abilityLevels.value.q };
+					const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
 					const perSideCD = championAbilityVariableValue('PerSideCooldown', qParams);
 
 					if (typeof perSideCD.value === 'number') {
@@ -548,7 +548,7 @@ export const CHAMPION_SPECIFICS = {
 				calculate(self) {
 					return {
 						'f2.0': {
-							value: championAbilityVariableValue('TotalStrikes', { abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: self }).value,
+							value: championAbilityVariableValue('TotalStrikes', { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, damageSource: self }).value,
 						},
 					};
 				},
@@ -575,7 +575,7 @@ export const CHAMPION_SPECIFICS = {
 				calculate(self, target) {
 					let TotalComputedExplosionDamage = Number.NaN;
 
-					const ultParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self };
+					const ultParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self };
 					const baseDamage = championAbilityVariableValue('TotalExplosionDamage', ultParams);
 					const missingHealthPercent = championAbilityVariableValue('MissingHealthDamage', ultParams);
 					if (typeof baseDamage.value === 'number' && typeof missingHealthPercent.value === 'number') {
@@ -629,7 +629,7 @@ export const CHAMPION_SPECIFICS = {
 				handler(self, { baseStats, championPassiveStats }, { calculatedVariables }) {
 					calculatedVariables.attackSpeedCap = Number.POSITIVE_INFINITY;
 
-					const rParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self };
+					const rParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self };
 					const firstDurationIncreaseThreshold = championAbilityVariableValue('StackThresholdForUpgrade', rParams);
 					const firstDurationIncrease = championAbilityVariableValue('SteroidDurationUpgrade', rParams);
 					const secondDurationIncreaseThreshold = championAbilityVariableValue('StackThresholdForPermanent', rParams);
@@ -658,7 +658,7 @@ export const CHAMPION_SPECIFICS = {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }, { calculatedVariables }) {
 					const { passiveStacks, hasPassiveStack } = self.internalData.value;
-					const passiveParams = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					championPassiveStats.bonusAttackSpeedPercent = 0;
 
@@ -680,7 +680,7 @@ export const CHAMPION_SPECIFICS = {
 					}
 
 					if (self.currentAbilityResource.value) {
-						const totalASMult = championAbilityVariableValue('TotalASMod', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
+						const totalASMult = championAbilityVariableValue('TotalASMod', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self });
 						if (typeof totalASMult.value === 'number') {
 							calculatedVariables.totalAttackSpeedMult = totalASMult.value;
 						} else {
@@ -699,6 +699,7 @@ export const CHAMPION_SPECIFICS = {
 						- (calculatedVariables.riftmakerVoidInfusion ?? 0) * calculatedVariables.totalItemApMultipliers; /* all of riftmaker */
 
 					const maxHP = championAbilityVariableValue('MaxHealthOnDevour', {
+						abilityKey: 'r',
 						abilityVariant: self.champion.value!.abilities.r.variants[0]!,
 						allAbilitiesVariants: self.allAbilityVariants.value,
 						abilityLevel: self.abilityLevels.value.r,
@@ -803,7 +804,7 @@ export const CHAMPION_SPECIFICS = {
 					const currentHpPercent = Math.min(self.currentHealth.value, totalStats.hp) / totalStats.hp;
 					const missingHealthPercent = (1 - currentHpPercent) * 100;
 
-					const healingMultVar = championAbilityVariableValue('TotalHealPerMissingHPPercentTooltip', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
+					const healingMultVar = championAbilityVariableValue('TotalHealPerMissingHPPercentTooltip', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
 					const { calculatesFrom } = healingMultVar;
 
 					if (typeof calculatesFrom?.[0]?.value !== 'number' || typeof calculatesFrom?.[1]?.value !== 'number') {
@@ -825,7 +826,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(self, _stats, { calculatedVariables }) {
-					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityVariant: (self.champion.value as typeof ICassiopeia).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const msMultiplier = championAbilityVariableValue('PercentHasteMod', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 
 					if (typeof msMultiplier.value === 'number') {
 						calculatedVariables.cassiopeiaPassiveMSMultiplier = msMultiplier.value;
@@ -896,7 +897,7 @@ export const CHAMPION_SPECIFICS = {
 					'TotalDamage': [],
 				},
 				calculate(self, target) {
-					const variableParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: self, dynamicVariables: { values: { '{8682fc00}': { value: self.internalData.value.ultStacks } } } };
+					const variableParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, damageSource: self, dynamicVariables: { values: { '{8682fc00}': { value: self.internalData.value.ultStacks } } } };
 					const flat = championAbilityVariableValue('FlatDamageCalc', variableParams);
 					const percent = championAbilityVariableValue('MaxHealthPercentCalc', variableParams);
 
@@ -979,7 +980,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postItemTotal: {
 				handler(self, { championPassiveStats, itemTotalStats, itemPassivesStats }, { calculatedVariables }) {
-					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self };
+					const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self };
 					const hpPerStack = championAbilityVariableValue('RHealthPerStack', params);
 
 					if (typeof hpPerStack.value === 'number') {
@@ -1016,7 +1017,7 @@ export const CHAMPION_SPECIFICS = {
 					CannisterHpRestore: [],
 				},
 				calculate(self) {
-					const cannisterPercentRestore = championAbilityVariableValue('MaxHealthGain', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value });
+					const cannisterPercentRestore = championAbilityVariableValue('MaxHealthGain', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value });
 					let hpRestore = 0;
 					if (typeof cannisterPercentRestore.value === 'number') {
 						hpRestore = (cannisterPercentRestore.value as number) * self.stats.value.total.hp;
@@ -1049,7 +1050,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postTotal: {
 				handler(self, { totalStats, bonusStats, championPassiveStats }) {
-					const maxHealthRegenPercent = championAbilityVariableValue('MaxHealthRegen', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const maxHealthRegenPercent = championAbilityVariableValue('MaxHealthRegen', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof maxHealthRegenPercent.value === 'number') {
 						championPassiveStats.hpRegen = maxHealthRegenPercent.value * totalStats.hp;
 						bonusStats.hpRegen += championPassiveStats.hpRegen;
@@ -1085,7 +1086,7 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					const passiveAd = championAbilityVariableValue('NoxianMightBonusAD', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+					const passiveAd = championAbilityVariableValue('NoxianMightBonusAD', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
 					if (typeof passiveAd.value === 'number') {
 						championPassiveStats.attackDamage = passiveAd.value;
 						if (calculatedVariables.midQuestMultiplier) {
@@ -1162,8 +1163,8 @@ export const CHAMPION_SPECIFICS = {
 	Fiora: {
 		PASSIVE_BONUS_MS: ((progress, self) => {
 			const bonusMS = championAbilityVariableValue('PercentMS', {
+				abilityKey: 'r',
 				abilityVariant: self.champion.value!.abilities.r.variants[0]!,
-				abilityLevel: self.abilityLevels.value.r,
 				damageSource: self,
 			});
 
@@ -1187,6 +1188,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 				calculate(self, target) {
 					const vitalDamagePercent = championAbilityVariableValue('PassiveDamageTotal', {
+						abilityKey: 'passive',
 						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 						damageSource: self,
 					});
@@ -1244,7 +1246,7 @@ export const CHAMPION_SPECIFICS = {
 			postInit: {
 				handler(self, { bonusStats, championPassiveStats }) {
 					/* the passive states it grants 0%-99% attack speed but all of it except for the lvl 1 bonus is handled by attack speed per level, so add only the missing lvl 1 value */
-					const attackSpeed = championAbilityVariableValue('TotalAS', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
+					const attackSpeed = championAbilityVariableValue('TotalAS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
 					if (typeof attackSpeed.value === 'number') {
 						bonusStats.bonusAttackSpeedPercent += attackSpeed.value;
 						championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
@@ -1252,7 +1254,7 @@ export const CHAMPION_SPECIFICS = {
 						console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive attack speed', attackSpeed);
 					}
 
-					const moveSpeed = championAbilityVariableValue('TotalMS', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const moveSpeed = championAbilityVariableValue('TotalMS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof moveSpeed.value === 'number') {
 						championPassiveStats.moveSpeed = moveSpeed.value;
 					} else {
@@ -1266,7 +1268,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postTotal: {
 				handler(self, { bonusStats, championPassiveStats, totalStats, totalMultipliersStats }, { calculatedVariables }) {
-					const bonusAd = championAbilityVariableValue('BonusAD', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: bonusStats } } } as DamageSource });
+					const bonusAd = championAbilityVariableValue('BonusAD', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: bonusStats } } } as DamageSource });
 
 					if (typeof bonusAd.value === 'number') {
 						championPassiveStats.attackDamage = bonusAd.value;
@@ -1339,7 +1341,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
-					const attackSpeedPerStack = championAbilityVariableValue('SingleStackAS', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const attackSpeedPerStack = championAbilityVariableValue('SingleStackAS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof attackSpeedPerStack.value === 'number') {
 						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value / 100;
 					} else {
@@ -1388,7 +1390,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
-					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedPerStack', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedPerStack', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof attackSpeedPerStack.value === 'number') {
 						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value;
 					} else {
@@ -1427,7 +1429,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(self, { bonusStats, baseStats }, { calculatedVariables }) {
-					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 					const asPerLevel = championAbilityVariableValue('PercentAttackSpeedPerLevel', params);
 
 					if (typeof asPerLevel.value === 'number') {
@@ -1453,7 +1455,7 @@ export const CHAMPION_SPECIFICS = {
 			postBonus: {
 				handler(self, { bonusStats }, { calculatedVariables }) {
 					if (self.internalData.value.isPassiveMSActive) {
-						const msPercent = championAbilityVariableValue('CritMoveSpeedPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
+						const msPercent = championAbilityVariableValue('CritMoveSpeedPercent', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
 
 						if (typeof msPercent.value === 'number') {
 							calculatedVariables.totalBonusPercentMoveSpeed += msPercent.value;
@@ -1465,7 +1467,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 			postTotal: {
 				handler(self, { adaptiveForceMeta, totalStats, championPassiveStats, dragonStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats }, { calculatedVariables }) {
-					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
+					const adPercent = championAbilityVariableValue('TotalADPercent', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
 
 					if (typeof adPercent.value !== 'number') {
 						console.warn('[CHAMPION_SPECIFICS jhin] failed to calculate passive total ad percent', adPercent);
@@ -1576,7 +1578,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 			onChampionPassive: {
 				handler(self, { championPassiveStats }, { calculatedVariables }) {
-					const attackSpeedPerStack = championAbilityVariableValue('EnrageTotalASPerStack', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const attackSpeedPerStack = championAbilityVariableValue('EnrageTotalASPerStack', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof attackSpeedPerStack.value === 'number') {
 						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value / 100;
 					} else {
@@ -1680,7 +1682,7 @@ export const CHAMPION_SPECIFICS = {
 					if (!calculatedVariables.kledIsDismounted) {
 						return;
 					}
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					const msPenalty = championAbilityVariableValue('DismountedMSPenalty', passiveParams);
 
@@ -1702,7 +1704,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 			postTotal: {
 				handler(self, { totalStats, bonusStats, championPassiveStats, totalPreMultipliersStats, dragonStatMultipliers, dragonStats, totalMultipliersStats }, { calculatedVariables }) {
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { hp: bonusStats.hp } } } } as DamageSource };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { hp: bonusStats.hp } } } } as DamageSource };
 
 					const skaarlBaseHP = championAbilityVariableValue('SkaarlHealth', passiveParams);
 					if (typeof skaarlBaseHP.value !== 'number') {
@@ -1777,6 +1779,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 				calculate(self, target) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = {
+						abilityKey: 'passive',
 						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 						allAbilitiesVariants: self.allAbilityVariants.value,
 						damageSource: self,
@@ -1829,8 +1832,9 @@ export const CHAMPION_SPECIFICS = {
 					OnHitDamage: [],
 				},
 				calculate(self, target) {
-					const minDamage = championAbilityVariableValue('MinOnHitDamage', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
-					const maxDamage = championAbilityVariableValue('MaxOnHitDamage', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+					const minDamage = championAbilityVariableValue('MinOnHitDamage', passiveParams);
+					const maxDamage = championAbilityVariableValue('MaxOnHitDamage', passiveParams);
 					let OnHitDamage = 0;
 
 					if (typeof minDamage.value === 'number' && typeof maxDamage.value === 'number') {
@@ -1907,6 +1911,7 @@ export const CHAMPION_SPECIFICS = {
 						{
 							variableValueFn: championAbilityVariableValue,
 							variableValueParams: {
+								abilityKey: 'passive',
 								abilityVariant: (self.champion.value as typeof INaafiri).abilities.passive.variants[0]!,
 								allAbilitiesVariants: self.allAbilityVariants.value,
 								damageSource: self,
@@ -1963,6 +1968,7 @@ export const CHAMPION_SPECIFICS = {
 			}) satisfies IDeriveProgressFn,
 			calculateMS: (champion: IChampion, progress: number, totalAP: number) => {
 				const bonusMS = championAbilityVariableValue('TotalMSBonus', {
+					abilityKey: 'passive',
 					abilityVariant: champion.abilities.passive.variants[0]!,
 					damageSource: { stats: { value: { total: { abilityPower: totalAP } } } } as DamageSource,
 				});
@@ -2022,8 +2028,9 @@ export const CHAMPION_SPECIFICS = {
 			}) satisfies IDeriveProgressFn,
 			calculateSlow: (champion: IChampion, progress: number, wLevel: number) => {
 				const wParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'w',
 					abilityVariant: champion.abilities.w.variants[0]!,
-					abilityLevel: wLevel || 1,
+					abilityLevel: wLevel,
 				};
 				const minMSSlow = championAbilityVariableValue('SlowBase', wParams);
 				const maxMSSlow = championAbilityVariableValue('MaxSlowTooltipOnly', wParams);
@@ -2078,6 +2085,7 @@ export const CHAMPION_SPECIFICS = {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
 					const lifeSteal = championAbilityVariableValue('LifestealTooltip', {
+						abilityKey: 'passive',
 						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 						damageSource: { level: { value: self.level.value } } as DamageSource,
 					});
@@ -2093,6 +2101,7 @@ export const CHAMPION_SPECIFICS = {
 		effectOntoTargetVars(self, vars) {
 			vars.nasusWSlow = CHAMPION_SPECIFICS.Nasus.w.calculateSlow(self.champion.value!, self.internalData.value.wProgress, self.abilityLevels.value.w);
 			const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', {
+				abilityKey: 'w',
 				abilityVariant: self.champion.value!.abilities.w.variants[0]!,
 				abilityLevel: self.abilityLevels.value.w,
 			});
@@ -2130,7 +2139,7 @@ export const CHAMPION_SPECIFICS = {
 					HuntingPercentMS: [],
 				},
 				calculate(self) {
-					const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
+					const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
 					(msVariable.value as number) *= 3;
 
 					return {
@@ -2165,7 +2174,7 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
+					const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
 					let bonusMS = 0;
 
 					if (typeof msVariable.value === 'number') {
@@ -2198,8 +2207,8 @@ export const CHAMPION_SPECIFICS = {
 				},
 			}),
 			passiveBuffs(champion: IChampion) {
-				const moveSpeed = championAbilityVariableValue('MSIncrease', { abilityVariant: champion.abilities.passive.variants[0]! });
-				const attackSpeed = championAbilityVariableValue('ASIncrease', { abilityVariant: champion.abilities.passive.variants[0]! });
+				const moveSpeed = championAbilityVariableValue('MSIncrease', { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]! });
+				const attackSpeed = championAbilityVariableValue('ASIncrease', { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]! });
 
 				if (typeof moveSpeed.value === 'number' && typeof attackSpeed.value === 'number') {
 					return {
@@ -2323,7 +2332,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postItemTotal: {
 				handler(self, { championPassiveStats, itemPassivesStats, itemTotalStats, totalMultipliersStats }, { calculatedVariables }) {
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
 					const baseStatAmp = championAbilityVariableValue('BaseStatAmp', passiveParams);
 					const additionalStatAmp = championAbilityVariableValue('AdditionalMythicStatAmp', passiveParams);
 
@@ -2449,7 +2458,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { championPassiveStats, itemPassivesStats, itemBaseStats }, { miscDebug }) {
-					const hpToAd = championAbilityVariableValue('HPPerBAD', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+					const hpToAd = championAbilityVariableValue('HPPerBAD', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
 
 					if (typeof hpToAd.value === 'number') {
 						miscDebug.pykePassiveHpToAd = hpToAd.value;
@@ -2500,12 +2509,13 @@ export const CHAMPION_SPECIFICS = {
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
+						const wParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'w', abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource };
 						/* rammus W bonus resists consist of a base value + a % of total armor, however this % also applies to base
 						 * i.e base 20 + 50% armor = (20 * 1.5) + armor * 0.5
 						 * so get that base & multiplier from tooltip variables' calculatesFrom
 						 */
-						const { calculatesFrom: armorCalculatesFrom } = championAbilityVariableValue('BonusArmorTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
-						const { calculatesFrom: mrCalculatesFrom } = championAbilityVariableValue('BonusMRTooltip', { abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
+						const { calculatesFrom: armorCalculatesFrom } = championAbilityVariableValue('BonusArmorTooltip', wParams);
+						const { calculatesFrom: mrCalculatesFrom } = championAbilityVariableValue('BonusMRTooltip', wParams);
 
 						if (!armorCalculatesFrom || !mrCalculatesFrom) {
 							console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve W bonus resists', armorCalculatesFrom, mrCalculatesFrom);
@@ -2542,7 +2552,7 @@ export const CHAMPION_SPECIFICS = {
 					totalStats.armor += wBonusArmor;
 					totalStats.magicResist += wBonusMr;
 
-					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
+					const bonusAd = championAbilityVariableValue('TotalDamage', { abilityKey: 'passive', abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
 
 					if (typeof bonusAd.value !== 'number') {
 						console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad', bonusAd);
@@ -2589,8 +2599,9 @@ export const CHAMPION_SPECIFICS = {
 		},
 		passive: {
 			stolenResists([stacks, totalArmor = 0, totalMR = 0]: [stacks: number, totalArmor?: number, totalMR?: number], champion: IChampion, level = 1) {
-				const minResistsSteal = championAbilityVariableValue('StealFloor', { abilityVariant: champion.abilities.passive.variants[0]!, damageSource: { level: { value: level } } as DamageSource });
-				const stackStealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: champion.abilities.passive.variants[0]! });
+				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]!, damageSource: { level: { value: level } } as DamageSource };
+				const minResistsSteal = championAbilityVariableValue('StealFloor', passiveParams);
+				const stackStealPercent = championAbilityVariableValue('StealPercent', passiveParams);
 				if (typeof minResistsSteal.value === 'number' && typeof stackStealPercent.value === 'number') {
 					const minSteal = stacks * minResistsSteal.value;
 					const stealPercent = stacks * stackStealPercent.value;
@@ -2648,7 +2659,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		effectOntoTargetVars(self, vars) {
 			const { passiveStacksOnTarget } = self.internalData.value;
-			const stealPercent = championAbilityVariableValue('StealPercent', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
+			const stealPercent = championAbilityVariableValue('StealPercent', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
 			if (typeof stealPercent.value === 'number') {
 				vars.rellPResistsStealPercent = passiveStacksOnTarget * stealPercent.value;
 			} else {
@@ -2712,10 +2723,8 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, _stats, { calculatedVariables }) {
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
-
 					if (self.internalData.value.isPassiveMSActive) {
-						const bonusMS = championAbilityVariableValue('EmpoweredMS', passiveParams);
+						const bonusMS = championAbilityVariableValue('EmpoweredMS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
 						if (typeof bonusMS.value === 'number') {
 							calculatedVariables.totalBonusPercentMoveSpeed += bonusMS.value;
 						} else {
@@ -2818,6 +2827,7 @@ export const CHAMPION_SPECIFICS = {
 					const apToMana = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
+								abilityKey: 'passive',
 								abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 								allAbilitiesVariants: self.allAbilityVariants.value,
 								damageSource: self,
@@ -2977,7 +2987,7 @@ export const CHAMPION_SPECIFICS = {
 					'SoulsLifesteal': [],
 				},
 				calculate(self, target) {
-					const passiveVarParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveVarParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					const siphonHpPercent = championAbilityVariableValue('BonusCurentHealthDamage', passiveVarParams);
 					let SiphonCurrentHealthDamage = Number.NaN;
@@ -3039,7 +3049,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(self, { championPassiveStats }, { calculatedVariables, miscDebug }) {
-					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					const critDamageMod = championAbilityVariableValue('CritDamageMod', params);
 					if (typeof critDamageMod.value === 'number') {
@@ -3091,7 +3101,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 			onTotalPreMultipliers: {
 				handler(self, { bonusStats, totalPreMultipliersStats, championPassiveStats }) {
-					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					const excessCritToLifesteal = championAbilityVariableValue('CritToLifestealConversionPercent', params);
 					if (typeof excessCritToLifesteal.value === 'number') {
@@ -3152,7 +3162,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(self, { championPassiveStats }) {
-					const params: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 					const bonusArmor = championAbilityVariableValue('BonusArmor', params);
 					const bonusMr = championAbilityVariableValue('BonusMagicResist', params);
 
@@ -3183,6 +3193,7 @@ export const CHAMPION_SPECIFICS = {
 	Sivir: {
 		PASSIVE_BONUS_MS: ((progress, self) => {
 			const bonusMS = championAbilityVariableValue('FlatMS', {
+				abilityKey: 'passive',
 				abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 				damageSource: self,
 			});
@@ -3355,7 +3366,7 @@ export const CHAMPION_SPECIFICS = {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }, { calculatedVariables }) {
 					const { passiveVariantActive } = self.internalData.value;
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					let bonusAS: IVariableValueResult | undefined;
 
@@ -3384,7 +3395,7 @@ export const CHAMPION_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(self, { bonusStats, totalPreMultipliersStats, championPassiveStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 					const { passiveVariantActive } = self.internalData.value;
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					let asToAD: IVariableValueResult | undefined;
 					let asToAP: IVariableValueResult | undefined;
@@ -3521,8 +3532,9 @@ export const CHAMPION_SPECIFICS = {
 					EmpoweredHeal: [],
 				},
 				calculate(self) {
-					const baseHeal = championAbilityVariableValue('EmpoweredHealTooltip', { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.q, damageSource: self });
-					const percentMissing = championAbilityVariableValue('EmpoweredHealPercentTooltip', { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.q, damageSource: self });
+					const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
+					const baseHeal = championAbilityVariableValue('EmpoweredHealTooltip', qParams);
+					const percentMissing = championAbilityVariableValue('EmpoweredHealPercentTooltip', qParams);
 					const missingHealth = Math.max(0, self.stats.value.total.hp - self.currentHealth.value);
 					let EmpoweredHeal = 0;
 					if (typeof baseHeal.value === 'number' && typeof percentMissing.value === 'number') {
@@ -3608,7 +3620,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 				calculate(self) {
 					return {
-						Heal: championAbilityVariableValue('Damage', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self, abilityLevel: self.abilityLevels.value.r }),
+						Heal: championAbilityVariableValue('Damage', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self }),
 					};
 				},
 				meta: {
@@ -3665,8 +3677,9 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postTotal: {
 				handler(self, { adaptiveForceMeta, totalStats, bonusStats, dragonStatMultipliers, championPassiveStats }, { calculatedVariables, miscDebug }) {
-					const hpToAp = championAbilityVariableValue('HPforAP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
-					const apToHp = championAbilityVariableValue('APRatioBonusHP', { abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
+					const hpToAp = championAbilityVariableValue('HPforAP', passiveParams);
+					const apToHp = championAbilityVariableValue('APRatioBonusHP', passiveParams);
 
 					if (typeof hpToAp.value !== 'number' || typeof apToHp.value !== 'number') {
 						console.warn('[CHAMPION_SPECIFICS vladimir] failed to calculate passive ratios', hpToAp, apToHp);
@@ -3739,7 +3752,7 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			postTotal: {
 				handler(self, { baseOnLevelStats, championPassiveStats, bonusStats, totalPreMultipliersStats, totalStats }, { debuffs }) {
-					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedCalc', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: totalStats } } } as DamageSource });
+					const attackSpeedPerStack = championAbilityVariableValue('AttackSpeedCalc', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: totalStats } } } as DamageSource });
 					if (typeof attackSpeedPerStack.value === 'number') {
 						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value;
 						championPassiveStats.attackSpeed = championPassiveStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
@@ -3898,7 +3911,7 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 					const adPercentPerStack = championAbilityVariableValue('PercentBonusADCalc', passiveParams);
 					const maxStacksMult = championAbilityVariableValue('MaxStacksMultiplier', passiveParams);
 					if (typeof adPercentPerStack.value !== 'number' || typeof maxStacksMult.value !== 'number') {
@@ -3949,7 +3962,7 @@ export const CHAMPION_SPECIFICS = {
 				calculate(self, target) {
 					let TotalFullChargeDamage = Number.NaN;
 
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
 					const baseDamage = championAbilityVariableValue('PassiveMaxDamage', passiveParams);
 					const percentHPDmg = championAbilityVariableValue('PassiveMaxChargePercentHealth', passiveParams);
 
@@ -4065,7 +4078,7 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					const rParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value?.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self, abilityLevel: self.abilityLevels.value.r };
+					const rParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value?.abilities.r.variants[0]!, damageSource: self };
 
 					const ultBonusMS = championAbilityVariableValue('BaseBonusMS', rParams);
 					if (typeof ultBonusMS.value === 'number') {
@@ -4086,7 +4099,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 			onTotalPreMultipliers: {
 				handler(self, { totalPreMultipliersStats, baseStats, championPassiveStats, bonusStats }, { calculatedVariables, miscDebug }) {
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.q.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
 
 					miscDebug.zeriExcessAS = 0;
 
@@ -4115,7 +4128,7 @@ export const CHAMPION_SPECIFICS = {
 						return;
 					}
 
-					const ultASPercent = championAbilityVariableValue('BaseASPercent', { abilityVariant: self.champion.value?.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self, abilityLevel: self.abilityLevels.value.r });
+					const ultASPercent = championAbilityVariableValue('BaseASPercent', { abilityKey: 'r', abilityVariant: self.champion.value?.abilities.r.variants[0]!, damageSource: self });
 					if (typeof ultASPercent.value === 'number') {
 						calculatedVariables.attackSpeedCap += ultASPercent.value * baseStats.attackSpeedRatio;
 						championPassiveStats.bonusAttackSpeedPercent = ultASPercent.value;
@@ -4205,7 +4218,7 @@ function windBrotherCalculateHooks(id: 'Yasuo' | 'Yone'): ICalculateChampionStat
 	return {
 		postInit: {
 			handler(self, _stats, { calculatedVariables }) {
-				const critDamageMod = championAbilityVariableValue('CritDamageMod', { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+				const critDamageMod = championAbilityVariableValue('CritDamageMod', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
 				if (typeof critDamageMod.value === 'number') {
 					calculatedVariables.critMultiplierMod = critDamageMod.value;
 				} else {
@@ -4215,7 +4228,7 @@ function windBrotherCalculateHooks(id: 'Yasuo' | 'Yone'): ICalculateChampionStat
 		},
 		onTotalPreMultipliers: {
 			handler(self, { bonusStats, championPassiveStats, totalPreMultipliersStats }) {
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 				const critMultiplier = championAbilityVariableValue('CritChanceMultiplier', passiveParams);
 				if (typeof critMultiplier.value === 'number') {

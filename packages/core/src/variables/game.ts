@@ -280,9 +280,14 @@ interface IChampionAbilityVariableVariant {
 
 interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityVariant: IChampionAbilityVariableVariant;
+	abilityKey: IChampionAbilityKey;
 	dynamicVariables?: IDynamicVariables;
+	/** will be `|| 1` (0 is ignored), if `damageSource` is passed, will use `.abilityLevels.value[abilityKey]` */
 	abilityLevel?: number;
-	/** ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive */
+	/**
+	 * ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive
+	 * if `damageSource` is passed, will use `.allAbilityVariants.value`
+	 */
 	allAbilitiesVariants?: [IChampionAbilityVariableVariant, IChampionAbilityKey][];
 	/** used for returning the name of the variable when it's taken from another spell, like `Spell.SRX_DragonSoulBuffMountain:TotalShield` should be `TotalShield` */
 	returnActualName?: boolean;
@@ -296,7 +301,8 @@ export function championAbilityVariableValue(
 	const {
 		abilityVariant,
 		dynamicVariables = overrideDynamicVariables ?? {},
-		abilityLevel = 1,
+		abilityKey,
+		abilityLevel = (params.abilityLevel ?? (params.abilityKey === 'passive' ? 1 : params.damageSource?.abilityLevels?.value[params.abilityKey])) || 1,
 		/* optional `allAbilitiesVariants` chain here because calculate hooks often pass partial damage source with only what's needed so there wouldn't be allAbilitiesVariants */
 		allAbilitiesVariants = params.damageSource?.allAbilityVariants?.value ?? [],
 		damageSource,
@@ -324,6 +330,7 @@ export function championAbilityVariableValue(
 			return championAbilityVariableValue(variantVariableName!, {
 				abilityVariant: otherAbilityVariant[0],
 				dynamicVariables,
+				abilityKey,
 				abilityLevel: (otherAbilityVariant[1] !== 'passive' ? damageSource?.abilityLevels.value[otherAbilityVariant[1]] : undefined) || 1,
 				allAbilitiesVariants,
 				damageSource,

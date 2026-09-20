@@ -37,7 +37,7 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, _stats, { calculatedVariables }) {
-					const bonusMs = championAbilityVariableValue('MovespeedMod', { abilityVariant: (EFFECTS as TEffects)[EffectObjectName.ghost], allAbilitiesVariants: [], damageSource: { level: { value: self.level.value } } as DamageSource });
+					const bonusMs = championAbilityVariableValue('MovespeedMod', { abilityKey: 'passive', abilityVariant: (EFFECTS as TEffects)[EffectObjectName.ghost], allAbilitiesVariants: [], damageSource: { level: { value: self.level.value } } as DamageSource });
 					if (typeof bonusMs.value === 'number') {
 						calculatedVariables.totalBonusPercentMoveSpeed += bonusMs.value;
 					} else {
@@ -818,7 +818,7 @@ export const EFFECT_SPECIFICS = {
 				handler(self, _stats, { calculatedVariables }) {
 					const effect = self.getEffect(EffectObjectName.jannaPTailwind)?.[0];
 					if (effect?.champion.value?.id === 'Janna') {
-						const bonusMS = championAbilityVariableValue('MSPercentAlly', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
+						const bonusMS = championAbilityVariableValue('MSPercentAlly', { abilityKey: 'passive', abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
 						if (typeof bonusMS.value === 'number') {
 							calculatedVariables.totalBonusPercentMoveSpeed += bonusMS.value;
 						} else {
@@ -861,7 +861,7 @@ export const EFFECT_SPECIFICS = {
 				handler(self, _stats, { effectVars, debuffs }) {
 					const effect = self.getEffect(EffectObjectName.ashePFrostShot)?.[0];
 					if (effect?.champion.value?.id === 'Ashe') {
-						const slow = championAbilityVariableValue(effect.data.value?.[0] === 2 ? 'EmpoweredSlowAmount' : 'SlowAmount', { abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!, damageSource: { level: { value: effect.source.value?.level.value ?? 1 } } as DamageSource });
+						const slow = championAbilityVariableValue(effect.data.value?.[0] === 2 ? 'EmpoweredSlowAmount' : 'SlowAmount', { abilityKey: 'passive', abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!, damageSource: { level: { value: effect.source.value?.level.value ?? 1 } } as DamageSource });
 						if (typeof slow.value === 'number') {
 							effectVars.ashePSlow = slow.value;
 							debuffs.percentageMSSlow.push(slow.value);
@@ -1155,6 +1155,7 @@ export const EFFECT_SPECIFICS = {
 						debuffs.percentageMSSlow.push(effectVars.nasusWSlow / 100);
 
 						const msToASSlowRatio = championAbilityVariableValue('AttackSpeedSlowMult', {
+							abilityKey: 'w',
 							abilityVariant: (effect.champion.value as IChampion)!.abilities.w.variants[0]!,
 							abilityLevel: wLevel,
 						});
