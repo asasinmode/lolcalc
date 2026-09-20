@@ -125,9 +125,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	},
 	Nidalee: {
 		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', {
-			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.none]: 'none',
-			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.justBush]: 'in bush',
-			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.towardsChampion]: 'towards champions',
+			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.none]: 'none',
+			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.justBush]: 'in bush',
+			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.towardsChampion]: 'towards champions',
 		}),
 	},
 	Nunu: {
