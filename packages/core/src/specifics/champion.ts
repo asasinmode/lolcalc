@@ -2116,16 +2116,23 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 		calculateHooks: {
+			postInit: {
+				handler(self, { baseStats }) {
+					const { q, w, e } = self.abilityVariantsIndexes.value;
+
+					if (q & w & e) {
+						/* doesn't seem to be in a variable */
+						baseStats.attackRange = 125;
+					}
+				},
+			},
 			onChampionPassive: {
 				handler(self, _stats, { calculatedVariables }) {
-					const { PassiveOptions } = CHAMPION_SPECIFICS.Nidalee;
-					const rParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self };
-
 					if (!self.internalData.value.passiveVariantActive) {
 						return;
 					}
 
-					const msVariable = championAbilityVariableValue('PassivePercentMS', rParams);
+					const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
 					let bonusMS = 0;
 
 					if (typeof msVariable.value === 'number') {
@@ -2134,7 +2141,7 @@ export const CHAMPION_SPECIFICS = {
 						console.warn('[CHAMPION_SPECIFICS nidalee] failed to calculate passive move speed');
 					}
 
-					if (self.internalData.value.passiveVariantActive === PassiveOptions.towardsChampion) {
+					if (self.internalData.value.passiveVariantActive === CHAMPION_SPECIFICS.Nidalee.PassiveOptions.towardsChampion) {
 						bonusMS *= 3;
 					}
 
