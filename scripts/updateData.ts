@@ -2085,10 +2085,6 @@ function championAbilityVariant(
 		abilityOrVariantSpecific = (abilityOrVariantSpecific as IChampionAbilitySpecific)[variantIndex];
 	}
 
-	if (variant.extendedVariables && (abilityOrVariantSpecific as IChampionAbilitySpecific)?.modifyExtendedVariables) {
-		(abilityOrVariantSpecific as IChampionAbilitySpecific)!.modifyExtendedVariables!(variant.extendedVariables);
-	}
-
 	if (abilityOrVariantSpecific?.dataOverrides?.isImmobilizing) {
 		variant.isImmobilizing = true;
 	} else if (abilityOrVariantSpecific?.dataOverrides?.isImmobilizing === undefined && isImmobilizingAbilityVariant(abilityKey, variant.dataValues, mSpellTags, variantData.BotData)) {
@@ -2101,6 +2097,10 @@ function championAbilityVariant(
 		variant.tooltip = mLocKeys.keyTooltip;
 		variant.tooltipExtended = mLocKeys.keyTooltipExtended;
 		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
+	}
+
+	if ((abilityOrVariantSpecific as IChampionAbilitySpecific)?.modifyVariantData) {
+		(abilityOrVariantSpecific as IChampionAbilitySpecific)!.modifyVariantData!(variant);
 	}
 
 	return [variant, maxLevel];

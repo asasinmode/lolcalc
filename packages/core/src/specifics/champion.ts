@@ -2135,6 +2135,15 @@ export const CHAMPION_SPECIFICS = {
 				},
 			}),
 		},
+		w: {
+			0: {
+				/* add a variable used in MaxTraps formula but not saved in the data because the original value is empty and is override only for arena */
+				modifyVariantData(abilityVariant) {
+					abilityVariant.dataValues ??= {};
+					abilityVariant.dataValues.ModesBonusMaxTraps = Array.from({ length: 7 }).fill(0);
+				},
+			},
+		},
 		calculateHooks: {
 			postInit: {
 				handler(self, { baseStats }) {
@@ -3576,16 +3585,18 @@ export const CHAMPION_SPECIFICS = {
 			preplaceTooltipText(value) {
 				return value.replace('<healing>@Damage@', '<healing>@Heal@');
 			},
-			modifyExtendedVariables(extendedVariables) {
-				const damageVariable = extendedVariables[0];
-				if (damageVariable?.name !== 'BaseDamage') {
-					console.warn('[CHAMPION_SPECIFICS vladimir r] failed to modify extended variables, no base damage variable', extendedVariables);
-					return;
+			modifyVariantData(abilityVariant) {
+				if (abilityVariant.extendedVariables) {
+					const damageVariable = abilityVariant.extendedVariables[0];
+					if (damageVariable?.name !== 'BaseDamage') {
+						console.warn('[CHAMPION_SPECIFICS vladimir r] failed to modify extended variables, no base damage variable', abilityVariant.extendedVariables);
+						return;
+					}
+					abilityVariant.extendedVariables.push({
+						name: damageVariable.name,
+						nameOverride: 'spell_listtype_healing',
+					});
 				}
-				extendedVariables.push({
-					name: damageVariable.name,
-					nameOverride: 'spell_listtype_healing',
-				});
 			},
 			variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'r'>()({
 				known: {
@@ -4159,10 +4170,10 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	/** called in `scripts/updateData`, if present the tooltip text will be replaced with the value returned from this function. It's passed the original text */
 	preplaceTooltipText?: (value: string) => string;
 	/**
-	 * called in `scripts/updateData` after ability variant's extended variables are parsed, meant for modifying them
-	 * @note it's called for every variant of the ability, currently only Vladimir needs it but might need updating
+	 * called in `scripts/updateData` after ability variant's data is extracted (before resolving tooltip stringtable values)
+	 * @note it's called for every variant of the ability, put it under variant index to run it only for that one
 	 */
-	modifyExtendedVariables?: (extendedVariables: NonNullable<IChampionAbilityVariant['extendedVariables']>) => void;
+	modifyVariantData?: (abilityVariant: IChampionAbilityVariant) => void;
 	/**
 	 * object names of additional ability variants to be extracted during `updateData`
 	 * maybe there's a way not to have to declare these manually but in the ability's data I don't see anything that would point an ability's object to what it belongs to (QWER). `updateData` script warns about potential detected but missed ability variants
@@ -4179,6 +4190,7 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 export type IChampionAbilityVariantSpecific<Id extends IChampionId | undefined = undefined> = IProviderGroupImageText & {
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
+	modifyVariantData?: (abilityVariant: IChampionAbilityVariant) => void;
 };
 
 interface IChampionAbilityVariantDataOverrides {
