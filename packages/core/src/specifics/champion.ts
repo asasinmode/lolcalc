@@ -2121,6 +2121,10 @@ export const CHAMPION_SPECIFICS = {
 				/** use a custom var for hunting ms, otherwise it's displayed as `30%` always and in places where the tooltip shows `10%` */
 				return value.replaceAll('spell.AspectOfTheCougar:PassivePercentMS*3', 'HuntingPercentMS');
 			},
+			modifyVariantData(abilityVariant) {
+				/* game doesn't show it, maybe a leftover from some previous patch */
+				abilityVariant.tooltipExtended = undefined;
+			},
 			variables: defineChampionVariables<'Nidalee', typeof INidalee, 'passive'>()({
 				known: {
 					HuntingPercentMS: [],
