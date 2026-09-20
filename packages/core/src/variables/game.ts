@@ -270,6 +270,7 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 	return rv;
 }
 
+/** `IChampionAbilityVariant` but with minimal keys */
 interface IChampionAbilityVariableVariant {
 	objectName: IChampionAbilityVariant['objectName'];
 	spellCalculations?: IChampionAbilityVariant['spellCalculations'];
@@ -291,6 +292,8 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	allAbilitiesVariants?: [IChampionAbilityVariableVariant, IChampionAbilityKey][];
 	/** used for returning the name of the variable when it's taken from another spell, like `Spell.SRX_DragonSoulBuffMountain:TotalShield` should be `TotalShield` */
 	returnActualName?: boolean;
+	/** for when an ability variant tries to resolve an unknown variable by using other, same ability (like q[0], q[1]) variant to avoid rechecking visited variants/infinitely looping if a variable was unknown in all variants */
+	checkedVariablesVariants?: Map<string, IChampionAbilityVariableVariant[]>;
 }
 
 export function championAbilityVariableValue(
@@ -302,8 +305,9 @@ export function championAbilityVariableValue(
 		abilityVariant,
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityKey,
+		/* optional damageSource properties chains here because calculate hooks often pass partial damage source with only what's needed for calculation */
 		abilityLevel = (params.abilityLevel ?? (params.abilityKey === 'passive' ? 1 : params.damageSource?.abilityLevels?.value[params.abilityKey])) || 1,
-		/* optional `allAbilitiesVariants` chain here because calculate hooks often pass partial damage source with only what's needed so there wouldn't be allAbilitiesVariants */
+		/* optional damageSource properties chains here because calculate hooks often pass partial damage source with only what's needed for calculation */
 		allAbilitiesVariants = params.damageSource?.allAbilityVariants?.value ?? [],
 		damageSource,
 		isRanged,
@@ -435,6 +439,35 @@ export function championAbilityVariableValue(
 				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
 			});
 			Object.assign(rv, formulaValue);
+		}
+	}
+
+	if (rv.value === undefined) {
+		const alreadyCheckedVariants = params.checkedVariablesVariants?.get(variable);
+		if (!alreadyCheckedVariants?.includes(abilityVariant)) {
+			const otherSameAbilityVariant = allAbilitiesVariants.filter(variant => variant[1] === abilityKey)[0];
+
+			if (otherSameAbilityVariant) {
+				params.checkedVariablesVariants ??= new Map();
+				if (alreadyCheckedVariants) {
+					alreadyCheckedVariants.push(abilityVariant);
+				} else {
+					params.checkedVariablesVariants.set(variable, [abilityVariant]);
+				}
+
+				return championAbilityVariableValue(variable, {
+					abilityVariant: otherSameAbilityVariant[0],
+					dynamicVariables,
+					abilityKey,
+					abilityLevel,
+					allAbilitiesVariants,
+					damageSource,
+					checkedVariablesVariants: params.checkedVariablesVariants,
+					accessedVariables: params.accessedVariables,
+					isRanged: params.isRanged,
+					returnActualName: params.returnActualName,
+				});
+			}
 		}
 	}
 
