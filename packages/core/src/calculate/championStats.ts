@@ -94,14 +94,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const championPassiveStats: Partial<IChampionStats> = {};
 	const effectStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
 
-	if (source.calculateStatsHooks.all.value.postInit) {
-		for (const hook of source.calculateStatsHooks.all.value.postInit) {
-			hook(source, { baseStats, bonusStats, effectStats, championPassiveStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
-		}
-	}
-
-	const isRanged: IStatsCalculationResult['isRanged'] = champion && ((baseStats.attackRange ?? 0) + (championPassiveStats.attackRange ?? 0) > 325);
-
 	const levelStats: Partial<IChampionStats> = {
 		hp: champion?.stats.hpperlevel ?? 0,
 		hpRegen: champion?.stats.hpregenperlevel ?? 0,
@@ -114,6 +106,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusAttackSpeedPercent: (champion?.stats.attackspeedperlevel ?? 0) / 100 + baseStats.bonusAttackSpeedPercent,
 		critChance: champion?.stats.critperlevel ?? 0,
 	};
+
+	if (source.calculateStatsHooks.all.value.postInit) {
+		for (const hook of source.calculateStatsHooks.all.value.postInit) {
+			hook(source, { baseStats, levelStats, bonusStats, effectStats, championPassiveStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+		}
+	}
+
+	const isRanged: IStatsCalculationResult['isRanged'] = champion && ((baseStats.attackRange ?? 0) + (championPassiveStats.attackRange ?? 0) > 325);
 
 	const gfm = CONSTS.statGfm(level);
 	for (const stat in levelStats) {

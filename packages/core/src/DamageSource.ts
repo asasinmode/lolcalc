@@ -2271,6 +2271,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	/** runs after resolving the champion in `calculateChampionStats` */
 	postInit?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		baseStats: IStatsCalculationResult['base'];
+		levelStats: IStatsCalculationResult['level'];
 		bonusStats: IStatsCalculationResult['bonus'];
 		effectStats: IStatsCalculationResult['effect'];
 		championPassiveStats: IStatsCalculationResult['championPassive'];

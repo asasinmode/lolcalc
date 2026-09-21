@@ -13,6 +13,7 @@ import type IElise from '@lolcalc/data/files/champion/Elise.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
+import type IGnar from '@lolcalc/data/files/champion/Gnar.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
 import type IJayce from '@lolcalc/data/files/champion/Jayce.json';
@@ -1305,7 +1306,7 @@ export const CHAMPION_SPECIFICS = {
 
 				for (const stat in megaStats) {
 					// @ts-expect-error keys are fine
-					megaStats[stat] = roundNumber(megaStats[stat]);
+					megaStats[stat] = roundNumber(megaStats[stat], 4);
 				}
 
 				(abilityVariant as any).megaStats = megaStats;
@@ -1322,38 +1323,26 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { baseStats, bonusStats, championPassiveStats }) {
+				handler(self, { baseStats, levelStats, bonusStats, championPassiveStats }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
 
 					const { q, w, e } = self.abilityVariantsIndexes.value;
 					if (q & w & e) {
-						const ad = championAbilityVariableValue('TotalMegaGnarAD', passiveParams);
-						if (typeof ad.value === 'number') {
-							baseStats.attackDamage += ad.value;
-						} else {
-							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega ad', ad);
-						}
-
-						const armor = championAbilityVariableValue('TotalMegaGnarArmor', passiveParams);
-						if (typeof armor.value === 'number') {
-							baseStats.armor += armor.value;
-						} else {
-							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega armor', armor);
-						}
-
-						const mr = championAbilityVariableValue('TotalMegaGnarMR', passiveParams);
-						if (typeof mr.value === 'number') {
-							baseStats.magicResist += mr.value;
-						} else {
-							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega mr', mr);
-						}
-
-						const hp = championAbilityVariableValue('TotalMegaGnarHealth', passiveParams);
-						if (typeof hp.value === 'number') {
-							baseStats.hp += hp.value;
-						} else {
-							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega hp', mr);
-						}
+						const { attackdamage, attackdamageperlevel, armor, armorperlevel, spellblock, spellblockperlevel, hp, hpperlevel, hpregen, hpregenperlevel, attackspeed, attackspeedratio, attackspeedperlevel } = ((self.champion.value! as typeof IGnar).abilities.passive.variants[0]!.megaStats);
+						baseStats.attackDamage = attackdamage;
+						levelStats.attackDamage = attackdamageperlevel;
+						baseStats.armor = armor;
+						levelStats.armor = armorperlevel;
+						baseStats.magicResist = spellblock;
+						levelStats.magicResist = spellblockperlevel;
+						baseStats.hp = hp;
+						levelStats.hp = hpperlevel;
+						baseStats.hpRegen = hpregen;
+						levelStats.hpRegen = hpregenperlevel;
+						baseStats.attackSpeed = attackspeed;
+						baseStats.attackSpeedRatio = attackspeedratio;
+						levelStats.attackSpeed = attackspeedperlevel * 0.01 * attackspeedratio;
+						levelStats.bonusAttackSpeedPercent = (attackspeedperlevel ?? 0) / 100 + baseStats.bonusAttackSpeedPercent;
 					} else {
 						championPassiveStats.attackRange = 225;
 
@@ -1367,15 +1356,6 @@ export const CHAMPION_SPECIFICS = {
 						}
 					}
 				},
-			},
-			preItemTotal: {
-				handler(self, { baseOnLevelStats }) {
-					if (self.internalData.value.isMega) {
-						baseOnLevelStats.armor = Math.ceil(baseOnLevelStats.armor);
-						baseOnLevelStats.magicResist = Math.floor(baseOnLevelStats.magicResist);
-					}
-				},
-				priority: HOOK_PRIORITIES.preItemTotal.Gnar,
 			},
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {

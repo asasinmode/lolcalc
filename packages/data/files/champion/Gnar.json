@@ -485,8 +485,8 @@
 						"armorperlevel": 6.7,
 						"spellblock": 33,
 						"spellblockperlevel": 4.8,
-						"attackspeed": 0.63,
-						"attackspeedratio": 0.63,
+						"attackspeed": 0.625,
+						"attackspeedratio": 0.625,
 						"attackspeedperlevel": 0.5
 					}
 				}
