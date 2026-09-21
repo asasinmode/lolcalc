@@ -1280,6 +1280,37 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Gnar: {
+		passive: {
+			modifyVariantData(abilityVariant, binData) {
+				const rootData = binData['Characters/GnarBig/CharacterRecords/Root'];
+				if (!rootData) {
+					throw new Error('no mega gnar character root data');
+				}
+
+				const megaStats: Partial<IChampion['stats']> = {
+					hp: rootData.baseHPModifiable.baseValue,
+					hpperlevel: rootData.hpPerLevelModifiable.baseValue,
+					hpregen: rootData.baseStaticHPRegenModifiable.baseValue,
+					hpregenperlevel: rootData.hpRegenPerLevelModifiable.baseValue,
+					attackdamage: rootData.baseDamageModifiable.baseValue,
+					attackdamageperlevel: rootData.damagePerLevelModifiable.baseValue,
+					armor: rootData.baseArmorModifiable.baseValue,
+					armorperlevel: rootData.armorPerLevelModifiable.baseValue,
+					spellblock: rootData.baseMR.baseValue,
+					spellblockperlevel: rootData.mrPerLevel.baseValue,
+					attackspeed: rootData.attackSpeedModifiable.baseValue,
+					attackspeedratio: rootData.attackSpeedRatioModifiable.baseValue,
+					attackspeedperlevel: rootData.attackSpeedPerLevelModifiable.baseValue,
+				};
+
+				for (const stat in megaStats) {
+					// @ts-expect-error keys are fine
+					megaStats[stat] = roundNumber(megaStats[stat]);
+				}
+
+				(abilityVariant as any).megaStats = megaStats;
+			},
+		},
 		q: {
 			additionalVariantsObjectNames: ['GnarBigQ'],
 		},
@@ -4325,7 +4356,11 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	 * called in `scripts/updateData` after ability variant's data is extracted (before resolving tooltip stringtable values)
 	 * @note it's called for every variant of the ability, put it under variant index to run it only for that one
 	 */
-	modifyVariantData?: (abilityVariant: IChampionAbilityVariant) => void;
+	modifyVariantData?: (
+		abilityVariant: IChampionAbilityVariant,
+		/** is the champion.bin.json file, merged with any additional characters */
+		binData: any,
+	) => void;
 	/**
 	 * object names of additional ability variants to be extracted during `updateData`
 	 * maybe there's a way not to have to declare these manually but in the ability's data I don't see anything that would point an ability's object to what it belongs to (QWER). `updateData` script warns about potential detected but missed ability variants

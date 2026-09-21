@@ -2101,7 +2101,7 @@ function championAbilityVariant(
 	}
 
 	if ((abilityOrVariantSpecific as IChampionAbilitySpecific)?.modifyVariantData) {
-		(abilityOrVariantSpecific as IChampionAbilitySpecific)!.modifyVariantData!(variant);
+		(abilityOrVariantSpecific as IChampionAbilitySpecific)!.modifyVariantData!(variant, championData);
 	}
 
 	return [variant, maxLevel];
