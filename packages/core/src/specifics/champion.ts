@@ -1280,24 +1280,50 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Gnar: {
-		// TODO shapeshift
+		setupData(self) {
+			return {
+				isMega: clamp(0, Math.round(self.internalData.value.isMega ?? 0), 1),
+			};
+		},
 		calculateHooks: {
 			postInit: {
 				handler(self, { bonusStats, championPassiveStats }) {
-					/* the passive states it grants 0%-99% attack speed but all of it except for the lvl 1 bonus is handled by attack speed per level, so add only the missing lvl 1 value */
-					const attackSpeed = championAbilityVariableValue('TotalAS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
-					if (typeof attackSpeed.value === 'number') {
-						bonusStats.bonusAttackSpeedPercent += attackSpeed.value;
-						championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
-					} else {
-						console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive attack speed', attackSpeed);
-					}
+					if (self.internalData.value.isMega) {
 
-					const moveSpeed = championAbilityVariableValue('TotalMS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
-					if (typeof moveSpeed.value === 'number') {
-						championPassiveStats.moveSpeed = moveSpeed.value;
 					} else {
-						console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive move speed', moveSpeed);
+						championPassiveStats.attackRange = 225;
+
+						/* the passive states it grants 0%-99% attack speed but all of it except for the lvl 1 bonus is handled by attack speed per level, so add only the missing lvl 1 value */
+						const attackSpeed = championAbilityVariableValue('TotalAS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
+						if (typeof attackSpeed.value === 'number') {
+							bonusStats.bonusAttackSpeedPercent += attackSpeed.value;
+							championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive attack speed', attackSpeed);
+						}
+					}
+				},
+			},
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
+
+					if (self.internalData.value.isMega) {
+
+					} else {
+						const moveSpeed = championAbilityVariableValue('TotalMS', passiveParams);
+						if (typeof moveSpeed.value === 'number') {
+							championPassiveStats.moveSpeed = moveSpeed.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive move speed', moveSpeed);
+						}
+
+						const attackRange = championAbilityVariableValue('TotalAttackRange', passiveParams);
+						if (typeof attackRange.value === 'number') {
+							championPassiveStats.attackRange = (championPassiveStats.attackRange ?? 0) + attackRange.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive attack range', attackRange);
+						}
 					}
 				},
 			},
@@ -4248,7 +4274,6 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	effectControls?: IEffectControlsProps<any, Id>;
 	/** ability will be styled as disabled (grayscale), for example Kled dismounted E & R */
 	isDisabled?: (self: DamageSource) => boolean | number | undefined;
-	// TODO probably need to be per variant for gnar?
 	/** overrides for every ability's variant data */
 	dataOverrides?: IChampionAbilityVariantDataOverrides;
 	/** called in `scripts/updateData`, if present the tooltip text will be replaced with the value returned from this function. It's passed the original text */
@@ -4338,6 +4363,7 @@ export interface IChampionInternalDataMap {
 	Ezreal: { passiveStacks: number };
 	Fiora: { passiveMSProgress: number };
 	Garen: { isPassiveActive: number };
+	Gnar: { isMega: number };
 	Heimerdinger: { isPassiveMSActive: number };
 	Irelia: { passiveStacks: number };
 	Jax: { passiveStacks: number };

@@ -71,6 +71,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Garen: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Garen', 'passive', 0), 'isPassiveActive', 'is passive active (not hit recently)', false),
 	},
+	Gnar: {
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Gnar', 'passive', 0), 'isMega', 'is mega', false),
+	},
 	Heimerdinger: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Heimerdinger', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (close to turret)', false),
 	},
