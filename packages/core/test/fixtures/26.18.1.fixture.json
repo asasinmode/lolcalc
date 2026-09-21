@@ -352,6 +352,134 @@
 				}
 			}
 		},
+		"Gnar": {
+			"partype": "Rage",
+			"stats": {
+				"hp": 540,
+				"hpperlevel": 79,
+				"mp": 100,
+				"mpperlevel": 0,
+				"movespeed": 335,
+				"armor": 32,
+				"armorperlevel": 3.7,
+				"spellblock": 30,
+				"spellblockperlevel": 1.3,
+				"attackrange": 175,
+				"hpregen": 4.5,
+				"hpregenperlevel": 1.25,
+				"mpregen": 0,
+				"mpregenperlevel": 0,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 60,
+				"attackdamageperlevel": 3.2,
+				"attackspeedperlevel": 6,
+				"attackspeed": 0.625,
+				"attackspeedratio": 0.625
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Rage Gene",
+							"objectName": "GnarPassive",
+							"dataKey": "Characters/Gnar/Spells/GnarPassiveAbility/GnarPassive",
+							"image": "assets/characters/gnar/hud/icons2d/gnar_passive.png",
+							"tooltip": "{{Spell_GnarPassive_Tooltip}}",
+							"tooltipExtended": "{{spell_GnarPassive_Tooltip}}<br><br><rules>At max <keywordMajor>Rage</keywordMajor>, Gnar will automatically transform after 4 seconds if he does not use an Ability.<br><keywordMajor>Rage</keywordMajor> decays after 13 seconds if Gnar has not dealt or received damage.<br><keywordMajor>Rage</keywordMajor> gain is greater when dealing damage to champions.</rules>",
+							"dataValues": {
+								"MegaHealthStartingValue": [100, 100, 100, 100, 100, 100, 100],
+								"MegaHealthEndingValue": [831, 831, 831, 831, 831, 831, 831],
+								"TiredDuration": [15, 15, 15, 15, 15, 15, 15]
+							},
+							"spellCalculations": {
+								"TotalAttackRange": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mEndValue": 100,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"TotalMS": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mInitialBonusPerLevel": 1,
+											"mBreakpoints": [
+												{
+													"mLevel": 16,
+													"mBonusPerLevelAtAndAfter": 2
+												}
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
+										}
+									]
+								},
+								"TotalAS": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mStartValue": 0.055,
+											"mEndValue": 0.99,
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 1
+								},
+								"TotalMegaGnarHealth": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"{0589a59c}": "MegaHealthStartingValue",
+											"{0b65bc23}": "MegaHealthEndingValue",
+											"__type": "{ee18a47b}"
+										}
+									]
+								},
+								"TotalMegaGnarArmor": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mStartValue": 3.5,
+											"mEndValue": 54.5,
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"TotalMegaGnarMR": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mStartValue": 3.5,
+											"mEndValue": 63,
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								},
+								"TotalMegaGnarAD": {
+									"tooltipOnly": true,
+									"mFormulaParts": [
+										{
+											"mStartValue": 6,
+											"mEndValue": 48.5,
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			}
+		},
 		"Kled": {
 			"partype": "Courage",
 			"stats": {
@@ -915,6 +1043,19 @@
 			},
 			"dataValues": {
 				"APAmp": 0.3
+			}
+		},
+		"3094": {
+			"searchString": "rapidfirecannon;rfc;rapidfire;canon;gun;energized;energised;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.35,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"dataValues": {
+				"RangePercentIncrease": 0.35,
+				"MaxRangeIncrease": 150,
+				"BonusDamage": 40
 			}
 		},
 		"3095": {

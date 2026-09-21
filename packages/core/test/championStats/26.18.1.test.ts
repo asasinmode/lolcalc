@@ -499,3 +499,44 @@ test('26.18 Ornn', async (t) => {
 		assert.strictEqual(damageSource.maxHealth.value, 5555);
 	});
 });
+
+test('26.18 Gnar', async (t) => {
+	const sourceCommon: IOverrides<'Gnar'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		internalData: { isMega: 0 },
+		items: [ITEMS_BY_NAME.rfc],
+	};
+
+	await t.test('attack range', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Gnar', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackRange: 400,
+		}, damageSource);
+		assert.strictEqual(damageSource.stats.value.bonus.attackRange, 225);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'rfc'>).sharpshooter = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			/* game shows 539, see about page known discrepancies */
+			attackRange: 540,
+		}, damageSource);
+
+		damageSource.internalData.value.isMega = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackRange: 236,
+		}, damageSource);
+
+		damageSource.level.value = 18;
+		damageSource.internalData.value.isMega = 0;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackRange: 650,
+		}, damageSource);
+	});
+});
