@@ -564,7 +564,7 @@ test('26.18 Gnar', async (t) => {
 			moveSpeed: 335,
 		}, damageSource);
 
-		damageSource.internalData.value.isMega = 1;
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 77,
 			attackSpeed: 0.625,
@@ -574,21 +574,20 @@ test('26.18 Gnar', async (t) => {
 		assert.strictEqual(damageSource.maxHealth.value, 705);
 
 		damageSource.level.value = 11;
-		damageSource.internalData.value.isMega = 0;
+		forceShapeshift(damageSource, 0);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 99,
 			attackSpeed: 0.988,
 			moveSpeed: 345,
 		}, damageSource);
 
-		damageSource.internalData.value.isMega = 1;
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 77,
-			attackSpeed: 0.65,
+			attackDamage: 125,
+			attackSpeed: 0.652,
 			armor: 95,
 			magicResist: 75,
 			moveSpeed: 335,
-			attackSpeedRatio: 0.659,
 		}, damageSource);
 		assert.strictEqual(damageSource.maxHealth.value, 1776);
 	});
@@ -606,7 +605,8 @@ test('26.18 Gnar', async (t) => {
 			magicResist: 86,
 		}, damageSource);
 
-		damageSource.internalData.value.isMega = 1;
+		forceShapeshift(damageSource, 1);
+		damageSource.currentHealth.value = Math.ceil(damageSource.stats.value.total.hp);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 244,
 			armor: 140,
@@ -615,19 +615,29 @@ test('26.18 Gnar', async (t) => {
 		assert.strictEqual(damageSource.maxHealth.value, 2676);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
-		damageSource.currentHealth.value = 50;
+		damageSource.currentHealth.value = 493;
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 273,
-			attackSpeed: 0.65,
 			armor: 153,
 			magicResist: 134,
 		}, damageSource);
 
-		damageSource.internalData.value.isMega = 0;
+		forceShapeshift(damageSource, 0);
+		damageSource.currentHealth.value = 125;
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackDamage: 244,
 			armor: 123,
 			magicResist: 100,
+		}, damageSource);
+
+		damageSource.roleQuest.value = 'top';
+		damageSource.level.value = 20;
+		forceShapeshift(damageSource, 1);
+		damageSource.currentHealth.value = 595;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 341,
+			armor: 226,
+			magicResist: 186,
 		}, damageSource);
 	});
 });
