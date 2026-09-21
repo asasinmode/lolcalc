@@ -9,6 +9,7 @@ import type IChogath from '@lolcalc/data/files/champion/Chogath.json';
 import type IDarius from '@lolcalc/data/files/champion/Darius.json';
 import type IDraven from '@lolcalc/data/files/champion/Draven.json';
 import type IDrMundo from '@lolcalc/data/files/champion/DrMundo.json';
+import type IElise from '@lolcalc/data/files/champion/Elise.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
@@ -1132,6 +1133,43 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			};
+		},
+	},
+	Elise: {
+		setupData(self) {
+			self.abilityLevels.value.r ||= 1;
+			return {} as never;
+		},
+		passive: {
+			variables: defineChampionVariables<'Elise', typeof IElise, 'passive'>()({
+				meta: {
+					PassiveTotalDamage: {
+						type: VariableType.magic,
+					},
+					PassiveTotalHealing: {
+						type: VariableType.heal,
+					},
+				},
+				/* is an R variable */
+				uninteresting: ['BaseSpiderlingsStored' as any],
+			}),
+		},
+		r: {
+			variables: defineChampionVariables<'Elise', typeof IElise, 'r'>()({
+				uninteresting: ['BaseSpiderlingsStored'],
+			}),
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { baseStats }) {
+					const { q, w, e } = self.abilityVariantsIndexes.value;
+
+					if (q & w & e) {
+						/* doesn't seem to be in a variable */
+						baseStats.attackRange = 125;
+					}
+				},
+			},
 		},
 	},
 	Evelynn: {
