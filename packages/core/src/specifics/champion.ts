@@ -15,6 +15,7 @@ import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
+import type IJayce from '@lolcalc/data/files/champion/Jayce.json';
 import type IJhin from '@lolcalc/data/files/champion/Jhin.json';
 import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
 import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
@@ -1433,6 +1434,34 @@ export const CHAMPION_SPECIFICS = {
 						championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS jax] failed to calculate passive attack speed', attackSpeedPerStack);
+					}
+				},
+			},
+		},
+	},
+	Jayce: {
+		setupData(self) {
+			self.abilityLevels.value.r = 1;
+			return {
+				isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
+			};
+		},
+		passive: {
+			variables: defineChampionVariables<'Jayce', typeof IJayce, 'passive'>()({
+				uninteresting: ['FlatMovementSpeed', 'MovementSpeedDuration'],
+			}),
+		},
+		calculateHooks: {
+			onChampionPassive: {
+				handler(self, { championPassiveStats }) {
+					if (self.internalData.value.isPassiveMSActive) {
+						const ms = championAbilityVariableValue('FlatMovementSpeed', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
+
+						if (typeof ms.value === 'number') {
+							championPassiveStats.moveSpeed = ms.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS jayce] failed to calculate passive move speed', ms);
+						}
 					}
 				},
 			},
@@ -4312,6 +4341,7 @@ export interface IChampionInternalDataMap {
 	Heimerdinger: { isPassiveMSActive: number };
 	Irelia: { passiveStacks: number };
 	Jax: { passiveStacks: number };
+	Jayce: { isPassiveMSActive: number };
 	Jhin: { isPassiveMSActive: number };
 	Jinx: { passiveStacks: number };
 	Kaisa: { passiveStacksOnTarget: number };

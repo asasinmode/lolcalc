@@ -80,6 +80,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Jax: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Jax', 'passive', 0), 'passiveStacks', 'Relentless Assault stacks', 0, CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS),
 	},
+	Jayce: {
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jayce', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after form swap)', false),
+	},
 	Jhin: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jhin', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after crit)', false),
 	},
