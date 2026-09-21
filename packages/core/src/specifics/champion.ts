@@ -1530,6 +1530,16 @@ export const CHAMPION_SPECIFICS = {
 		calculateHooks: {
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {
+					const { q, w, e } = self.abilityVariantsIndexes.value;
+					if (!(q & w & e)) {
+						const bonusRange = championAbilityVariableValue('RangedFormRangeIncrease', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]! });
+						if (typeof bonusRange.value === 'number') {
+							championPassiveStats.attackRange = bonusRange.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS jayce] failed to calculate cannon range', bonusRange);
+						}
+					}
+
 					if (self.internalData.value.isPassiveMSActive) {
 						const ms = championAbilityVariableValue('FlatMovementSpeed', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
 
