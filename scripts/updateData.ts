@@ -790,7 +790,7 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 			variables: {
 				variableSourceKeys: ['DataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: { abilityVariant: stackAbility, allAbilitiesVariants: allSpells },
+				variableValueParameters: { abilityKey: 'passive', abilityVariant: stackAbility, allAbilitiesVariants: allSpells },
 			},
 		});
 		/* hextech soul has text only for both melee | ranged split but everywhere else I try to display appropriate melee/ranged/both so alter it to make that possible */
@@ -801,7 +801,7 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 			variables: {
 				variableSourceKeys: ['dataValues'],
 				variableType: 'championAbility',
-				variableValueParameters: { abilityVariant: soulAbility, allAbilitiesVariants: allSpells, dynamicVariables: (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[name]?.soul?.variables },
+				variableValueParameters: { abilityKey: 'passive', abilityVariant: soulAbility, allAbilitiesVariants: allSpells, dynamicVariables: (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[name]?.soul?.variables },
 			},
 		});
 
@@ -1193,6 +1193,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 							const variables: IBaseStringtableVariableDebug<'championAbility'>['variables'] = {
 								variableType: 'championAbility',
 								variableValueParameters: {
+									abilityKey: 'passive',
 									abilityVariant: effectData,
 									allAbilitiesVariants: [],
 								},

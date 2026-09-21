@@ -1280,17 +1280,22 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Gnar: {
-		setupData(self) {
-			return {
-				isMega: clamp(0, Math.round(self.internalData.value.isMega ?? 0), 1),
-			};
+		q: {
+			additionalVariantsObjectNames: ['GnarBigQ'],
+		},
+		w: {
+			additionalVariantsObjectNames: ['GnarBigW'],
+		},
+		e: {
+			additionalVariantsObjectNames: ['GnarBigE'],
 		},
 		calculateHooks: {
 			postInit: {
 				handler(self, { baseStats, bonusStats, championPassiveStats }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
 
-					if (self.internalData.value.isMega) {
+					const { q, w, e } = self.abilityVariantsIndexes.value;
+					if (q & w & e) {
 						const ad = championAbilityVariableValue('TotalMegaGnarAD', passiveParams);
 						if (typeof ad.value === 'number') {
 							baseStats.attackDamage += ad.value;
@@ -1345,7 +1350,8 @@ export const CHAMPION_SPECIFICS = {
 				handler(self, { championPassiveStats }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
 
-					if (self.internalData.value.isMega) {
+					const { q, w, e } = self.abilityVariantsIndexes.value;
+					if (q & w & e) {
 
 					} else {
 						const moveSpeed = championAbilityVariableValue('TotalMS', passiveParams);
@@ -4400,7 +4406,6 @@ export interface IChampionInternalDataMap {
 	Ezreal: { passiveStacks: number };
 	Fiora: { passiveMSProgress: number };
 	Garen: { isPassiveActive: number };
-	Gnar: { isMega: number };
 	Heimerdinger: { isPassiveMSActive: number };
 	Irelia: { passiveStacks: number };
 	Jax: { passiveStacks: number };

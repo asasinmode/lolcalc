@@ -108,6 +108,39 @@
 							]
 						}
 					}
+				},
+				{
+					"name": "Boulder Toss / Boomerang Throw",
+					"objectName": "GnarBigQ",
+					"dataKey": "Characters/Gnar/Spells/GnarBigQAbility/GnarBigQ",
+					"image": "assets/characters/gnar/hud/icons2d/gnarbig_q.png",
+					"cooldownTime": [17.5, 16, 14.5, 13, 11.5, 10, 10],
+					"tooltip": "{{Spell_GnarBigQ_Tooltip}}",
+					"tooltipExtended": "{{spell_GnarBigQ_Tooltip}}<br><br>{{spell_GnarQ_Tooltip}}",
+					"dataValues": {
+						"MegaBaseDamage": [0, 45, 90, 135, 180, 225, 270],
+						"MegaPickupAndLolipopRadius": [200, 200, 200, 200, 200, 200, 200],
+						"MegaBoulderLifetime": [6, 6, 6, 6, 6, 6, 6],
+						"MegaCDRefund": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"MegaAoERadius": [280, 280, 280, 280, 280, 280, 280],
+						"MegaSlowAmount": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2]
+					},
+					"spellCalculations": {
+						"MegaTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MegaBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 1.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					}
 				}
 			]
 		},
@@ -176,6 +209,16 @@
 							]
 						}
 					}
+				},
+				{
+					"name": "Wallop / Hyper",
+					"objectName": "GnarBigW",
+					"dataKey": "Characters/Gnar/Spells/GnarBigWAbility/GnarBigW",
+					"image": "assets/characters/gnar/hud/icons2d/gnarbig_w.png",
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
+					"tooltip": "{{Spell_GnarBigW_Tooltip}}",
+					"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}",
+					"isImmobilizing": true
 				}
 			]
 		},
@@ -248,6 +291,15 @@
 							]
 						}
 					}
+				},
+				{
+					"name": "Crunch / Hop",
+					"objectName": "GnarBigE",
+					"dataKey": "Characters/Gnar/Spells/GnarBigEAbility/GnarBigE",
+					"image": "assets/characters/gnar/hud/icons2d/gnarbig_e.png",
+					"cooldownTime": [24.5, 22, 19.5, 17, 14.5, 12, 12],
+					"tooltip": "{{Spell_GnarBigE_Tooltip}}",
+					"tooltipExtended": "{{spell_GnarBigE_Tooltip}}<br><br>{{spell_GnarE_Tooltip}}"
 				}
 			]
 		},

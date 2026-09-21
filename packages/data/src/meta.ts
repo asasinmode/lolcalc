@@ -3,7 +3,7 @@
 import type { IChampionStatName } from '@lolcalc/shared';
 import type { IChampionId, IItem, IItemStat } from './types';
 
-export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee'];
+export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee', 'Gnar'];
 
 export const ITEM_STAT_META: Record<IItemStat, {
 	name: string;
