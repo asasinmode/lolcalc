@@ -8,7 +8,7 @@ import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, EffectObjectName } from '@lolcalc/shared';
 import { nextTick } from 'vue';
 import fixture from '../fixtures/26.18.1.fixture.json' with { type: 'json' };
-import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
+import { forceShapeshift, overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
 test.before(() => {
 	setupPatchFixture(fixture);
@@ -510,11 +510,10 @@ test('26.18 Gnar', async (t) => {
 				defensive: 'health',
 			},
 		},
-		internalData: { isMega: 0 },
 		items: [ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.jakSho],
 	};
 
-	await t.test('attack range', async () => {
+	await t.test('attack range/speed', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Gnar', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.rfc],
@@ -522,6 +521,7 @@ test('26.18 Gnar', async (t) => {
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackRange: 400,
+			attackSpeed: 0.878,
 		}, damageSource);
 		assert.strictEqual(damageSource.stats.value.bonus.attackRange, 225);
 
@@ -531,17 +531,19 @@ test('26.18 Gnar', async (t) => {
 			attackRange: 540,
 		}, damageSource);
 
-		damageSource.internalData.value.isMega = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackRange: 236,
-		}, damageSource);
-
 		damageSource.level.value = 18;
-		damageSource.internalData.value.isMega = 0;
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackRange: 650,
+			attackSpeed: 1.516,
 		}, damageSource);
 
+		forceShapeshift(damageSource, 1);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackRange: 236,
+			attackSpeed: 0.897,
+		}, damageSource);
+
+		forceShapeshift(damageSource, 0);
 		damageSource.roleQuest.value = 'top';
 		damageSource.level.value = 20;
 		(damageSource.internalItemData.value as IInternalItemDataOf<'rfc'>).sharpshooter = 0;

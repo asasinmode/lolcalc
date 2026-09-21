@@ -474,6 +474,21 @@
 										}
 									]
 								}
+							},
+							"megaStats": {
+								"hp": 640,
+								"hpperlevel": 122,
+								"hpregen": 0.9,
+								"hpregenperlevel": 0.25,
+								"attackdamage": 66,
+								"attackdamageperlevel": 5.5,
+								"armor": 36,
+								"armorperlevel": 6.7,
+								"spellblock": 33,
+								"spellblockperlevel": 4.8,
+								"attackspeed": 0.625,
+								"attackspeedratio": 0.625,
+								"attackspeedperlevel": 0.5
 							}
 						}
 					]

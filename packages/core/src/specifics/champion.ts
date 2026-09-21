@@ -1323,9 +1323,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { baseStats, levelStats, bonusStats, championPassiveStats }) {
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
-
+				handler(self, { baseStats, levelStats, championPassiveStats }) {
 					const { q, w, e } = self.abilityVariantsIndexes.value;
 					if (q & w & e) {
 						const { attackdamage, attackdamageperlevel, armor, armorperlevel, spellblock, spellblockperlevel, hp, hpperlevel, hpregen, hpregenperlevel, attackspeed, attackspeedratio, attackspeedperlevel } = ((self.champion.value! as typeof IGnar).abilities.passive.variants[0]!.megaStats);
@@ -1345,15 +1343,6 @@ export const CHAMPION_SPECIFICS = {
 						levelStats.bonusAttackSpeedPercent = (attackspeedperlevel ?? 0) / 100 + baseStats.bonusAttackSpeedPercent;
 					} else {
 						championPassiveStats.attackRange = 225;
-
-						/* the passive states it grants 0%-99% attack speed but all of it except for the lvl 1 bonus is handled by attack speed per level, so add only the missing lvl 1 value */
-						const attackSpeed = championAbilityVariableValue('TotalAS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
-						if (typeof attackSpeed.value === 'number') {
-							bonusStats.bonusAttackSpeedPercent += attackSpeed.value;
-							championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
-						} else {
-							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive attack speed', attackSpeed);
-						}
 					}
 				},
 			},
@@ -1362,9 +1351,16 @@ export const CHAMPION_SPECIFICS = {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
 
 					const { q, w, e } = self.abilityVariantsIndexes.value;
-					if (q & w & e) {
 
-					} else {
+					if (!(q & w & e)) {
+						/* the passive states it grants 0%-99% attack speed but all of it except for the lvl 1 bonus is handled by attack speed per level, so add only the missing lvl 1 value */
+						const attackSpeed = championAbilityVariableValue('TotalAS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
+						if (typeof attackSpeed.value === 'number') {
+							championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate passive attack speed', attackSpeed);
+						}
+
 						const moveSpeed = championAbilityVariableValue('TotalMS', passiveParams);
 						if (typeof moveSpeed.value === 'number') {
 							championPassiveStats.moveSpeed = moveSpeed.value;

@@ -117,3 +117,10 @@ export function overridesAppliedEffect<T extends IEffectAbilityId>(
 		champion: shallowRef(),
 	};
 }
+
+/** use instead of `damageSource.shapeshift` because fixture data might not include all abilities/variants and shapeshift works only if there are 2 variants */
+export function forceShapeshift(damageSource: DamageSource, value: number) {
+	damageSource.abilityVariantsIndexes.value.q = value;
+	damageSource.abilityVariantsIndexes.value.w = value;
+	damageSource.abilityVariantsIndexes.value.e = value;
+}
