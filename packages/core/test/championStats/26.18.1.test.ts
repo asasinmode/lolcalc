@@ -641,3 +641,32 @@ test('26.18 Gnar', async (t) => {
 		}, damageSource);
 	});
 });
+
+test('26.18 Jayce', async (t) => {
+	const sourceCommon: IOverrides<'Jayce'> = {
+		level: 18,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.overlordsBloodmail],
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jayce', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 152,
+			magicResist: 97,
+		}, damageSource);
+
+		forceShapeshift(damageSource, 1);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 182,
+			magicResist: 127,
+		}, damageSource);
+	});
+});

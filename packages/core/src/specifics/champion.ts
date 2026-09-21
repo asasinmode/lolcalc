@@ -1541,6 +1541,33 @@ export const CHAMPION_SPECIFICS = {
 					}
 				},
 			},
+			postTotal: {
+				handler(self, { championPassiveStats, bonusStats, adaptiveForceMeta, totalStats, totalMultipliersStats, totalPreMultipliersStats }, { calculatedVariables }) {
+					const { q, w, e } = self.abilityVariantsIndexes.value;
+					if (q & w & e) {
+						const bonusAD = bonusStats.attackDamage
+							- (adaptiveForceMeta[1] ? 0 : (calculatedVariables.totalAdaptiveForce * adaptiveForceMeta[2]))
+							- (calculatedVariables.midQuestAd ?? 0);
+
+						const rawResists = championAbilityVariableValue('Resists', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { attackDamage: bonusAD } } } } as DamageSource });
+
+						if (typeof rawResists.value === 'number') {
+							let resists = rawResists.value;
+							championPassiveStats.armor = resists;
+							championPassiveStats.magicResist = resists;
+							totalPreMultipliersStats.armor += championPassiveStats.armor;
+							totalPreMultipliersStats.magicResist += championPassiveStats.magicResist;
+
+							bonusStats.armor += resists;
+							bonusStats.magicResist += resists;
+							totalStats.armor += resists;
+							totalStats.magicResist += resists;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS jayce] failed to calculate r resists', rawResists);
+						}
+					}
+				},
+			},
 		},
 	},
 	Jhin: {
