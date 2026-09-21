@@ -61,7 +61,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTarget
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, IExtraInactiveFn, ISpecificVariables, IVariableValueResult } from './index';
-import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+import { CONSTS, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, EffectObjectName, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
@@ -1287,9 +1287,37 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { bonusStats, championPassiveStats }) {
-					if (self.internalData.value.isMega) {
+				handler(self, { baseStats, bonusStats, championPassiveStats }) {
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
 
+					if (self.internalData.value.isMega) {
+						const ad = championAbilityVariableValue('TotalMegaGnarAD', passiveParams);
+						if (typeof ad.value === 'number') {
+							baseStats.attackDamage += ad.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega ad', ad);
+						}
+
+						const armor = championAbilityVariableValue('TotalMegaGnarArmor', passiveParams);
+						if (typeof armor.value === 'number') {
+							baseStats.armor += armor.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega armor', armor);
+						}
+
+						const mr = championAbilityVariableValue('TotalMegaGnarMR', passiveParams);
+						if (typeof mr.value === 'number') {
+							baseStats.magicResist += mr.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega mr', mr);
+						}
+
+						const hp = championAbilityVariableValue('TotalMegaGnarHealth', passiveParams);
+						if (typeof hp.value === 'number') {
+							baseStats.hp += hp.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS gnar] failed to calculate mega hp', mr);
+						}
 					} else {
 						championPassiveStats.attackRange = 225;
 
@@ -1303,6 +1331,15 @@ export const CHAMPION_SPECIFICS = {
 						}
 					}
 				},
+			},
+			preItemTotal: {
+				handler(self, { baseOnLevelStats }) {
+					if (self.internalData.value.isMega) {
+						baseOnLevelStats.armor = Math.ceil(baseOnLevelStats.armor);
+						baseOnLevelStats.magicResist = Math.floor(baseOnLevelStats.magicResist);
+					}
+				},
+				priority: HOOK_PRIORITIES.preItemTotal.Gnar,
 			},
 			onChampionPassive: {
 				handler(self, { championPassiveStats }) {

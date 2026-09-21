@@ -511,11 +511,14 @@ test('26.18 Gnar', async (t) => {
 			},
 		},
 		internalData: { isMega: 0 },
-		items: [ITEMS_BY_NAME.rfc],
+		items: [ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.jakSho],
 	};
 
 	await t.test('attack range', async () => {
-		const damageSource = await setupDamageSource(fixture, 'Gnar', sourceCommon);
+		const damageSource = await setupDamageSource(fixture, 'Gnar', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.rfc],
+		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackRange: 400,
@@ -537,6 +540,92 @@ test('26.18 Gnar', async (t) => {
 		damageSource.internalData.value.isMega = 0;
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			attackRange: 650,
+		}, damageSource);
+
+		damageSource.roleQuest.value = 'top';
+		damageSource.level.value = 20;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'rfc'>).sharpshooter = 0;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackRange: 512,
+		}, damageSource);
+	});
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Gnar', {
+			...sourceCommon,
+			items: [],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 71,
+			attackSpeed: 0.659,
+			moveSpeed: 335,
+		}, damageSource);
+
+		damageSource.internalData.value.isMega = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 77,
+			attackSpeed: 0.625,
+			armor: 36,
+			magicResist: 33,
+		}, damageSource);
+		assert.strictEqual(damageSource.maxHealth.value, 705);
+
+		damageSource.level.value = 11;
+		damageSource.internalData.value.isMega = 0;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 99,
+			attackSpeed: 0.988,
+			moveSpeed: 345,
+		}, damageSource);
+
+		damageSource.internalData.value.isMega = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 77,
+			attackSpeed: 0.65,
+			armor: 95,
+			magicResist: 75,
+			moveSpeed: 335,
+			attackSpeedRatio: 0.659,
+		}, damageSource);
+		assert.strictEqual(damageSource.maxHealth.value, 1776);
+	});
+
+	await t.test('items', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Gnar', {
+			...sourceCommon,
+			level: 11,
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 218,
+			attackSpeed: 0.988,
+			armor: 109,
+			magicResist: 86,
+		}, damageSource);
+
+		damageSource.internalData.value.isMega = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 244,
+			armor: 140,
+			magicResist: 120,
+		}, damageSource);
+		assert.strictEqual(damageSource.maxHealth.value, 2676);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		damageSource.currentHealth.value = 50;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 273,
+			attackSpeed: 0.65,
+			armor: 153,
+			magicResist: 134,
+		}, damageSource);
+
+		damageSource.internalData.value.isMega = 0;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 244,
+			armor: 123,
+			magicResist: 100,
 		}, damageSource);
 	});
 });

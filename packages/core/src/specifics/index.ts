@@ -14,6 +14,8 @@ import { ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 
 export const HOOK_PRIORITIES = {
 	preItemTotal: {
+		/** kinda weird, run before all because it rounds baseOnLevel stats when mega */
+		Gnar: -1,
 		/** before riftmaker & bloodmail */
 		Pyke: 5,
 		[ITEM_NAME_TO_ID.guinsoo]: 10,
