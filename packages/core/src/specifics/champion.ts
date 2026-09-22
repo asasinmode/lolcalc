@@ -1555,9 +1555,13 @@ export const CHAMPION_SPECIFICS = {
 				handler(self, { championPassiveStats, bonusStats, adaptiveForceMeta, totalStats, totalMultipliersStats, totalPreMultipliersStats }, { calculatedVariables }) {
 					const { q, w, e } = self.abilityVariantsIndexes.value;
 					if (q & w & e) {
+						const baseAD = totalStats.attackDamage - bonusStats.attackDamage;
+						const bloodmailBaseAdRetribution = baseAD * (calculatedVariables.bloodmailRetributionPercentage ?? 0);
+
 						const bonusAD = bonusStats.attackDamage
 							- (adaptiveForceMeta[1] ? 0 : (calculatedVariables.totalAdaptiveForce * adaptiveForceMeta[2]))
-							- (calculatedVariables.midQuestAd ?? 0);
+							- (calculatedVariables.midQuestAd ?? 0)
+							- bloodmailBaseAdRetribution;
 
 						const rawResists = championAbilityVariableValue('Resists', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { attackDamage: bonusAD } } } } as DamageSource });
 
@@ -1590,6 +1594,7 @@ export const CHAMPION_SPECIFICS = {
 						}
 					}
 				},
+				priority: HOOK_PRIORITIES.postTotal.Jayce,
 			},
 		},
 	},

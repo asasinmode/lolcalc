@@ -71,6 +71,8 @@ export const HOOK_PRIORITIES = {
 		Briar: 100,
 		/** before bloodmail, needs ap & ad */
 		Belveth: 14,
+		/** after bloodmail, needs bonus ad */
+		Jayce: 16,
 		/** must be after champion passives that affect AD like Rammus/Hecarim */
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
 		/** must be after bloodmail */
