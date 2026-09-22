@@ -94,6 +94,7 @@ export interface IStatsCalculationVariables {
 	totalMultiplicativeMoveSpeed: number;
 	/** penalty from move speed soft cap */
 	movespeedSoftCapPenalty: number;
+	/** stores the total of the adaptive force stat (so already ad/ap from all adaptive force) */
 	totalAdaptiveForce: number;
 	attackSpeedCap: number;
 	/** https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking */

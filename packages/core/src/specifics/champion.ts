@@ -1552,43 +1552,62 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { championPassiveStats, bonusStats, adaptiveForceMeta, totalStats, totalMultipliersStats, totalPreMultipliersStats }, { calculatedVariables }) {
+				handler(self, { championPassiveStats, bonusStats, adaptiveForceMeta, totalStats, totalMultipliersStats, totalPreMultipliersStats, dragonStats, dragonStatMultipliers, itemTotalStats, itemPassivesStats, baseOnLevelStats }, { calculatedVariables }) {
 					const { q, w, e } = self.abilityVariantsIndexes.value;
 					if (q & w & e) {
+						const totalAD = totalStats.attackDamage;
 						const baseAD = totalStats.attackDamage - bonusStats.attackDamage;
-						const bloodmailBaseAdRetribution = baseAD * (calculatedVariables.bloodmailRetributionPercentage ?? 0);
+						const baseAdRatio = totalAD > 0 ? baseAD / totalAD : 0;
+
+						const bloodmailExcludedAd = (calculatedVariables.bloodmailRetribution ?? 0) * baseAdRatio;
+						const dragonExcludedAd = (dragonStats.attackDamage ?? 0) * baseAdRatio;
+						const adaptiveForceAD = adaptiveForceMeta[1] ? 0 : calculatedVariables.totalAdaptiveForce;
 
 						const bonusAD = bonusStats.attackDamage
-							- (adaptiveForceMeta[1] ? 0 : (calculatedVariables.totalAdaptiveForce * adaptiveForceMeta[2]))
+							- adaptiveForceAD
 							- (calculatedVariables.midQuestAd ?? 0)
-							- bloodmailBaseAdRetribution;
+							- bloodmailExcludedAd
+							- dragonExcludedAd;
 
 						const rawResists = championAbilityVariableValue('Resists', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { attackDamage: bonusAD } } } } as DamageSource });
 
 						if (typeof rawResists.value === 'number') {
-							let resists = rawResists.value;
+							const resists = rawResists.value;
 							championPassiveStats.armor = resists;
 							championPassiveStats.magicResist = resists;
-							totalPreMultipliersStats.armor += championPassiveStats.armor;
-							totalPreMultipliersStats.magicResist += championPassiveStats.magicResist;
+							totalPreMultipliersStats.armor += resists;
+							totalPreMultipliersStats.magicResist += resists;
 
-							let totalMultsValue = 0;
-
+							let jakShoResists = 0;
 							if (calculatedVariables.jakShoBonusResistMultiplier) {
-								const value = resists * calculatedVariables.jakShoBonusResistMultiplier;
-								calculatedVariables.jakShoArmor! += value;
-								calculatedVariables.jakShoMagicResist! += value;
-								totalMultsValue += value;
+								jakShoResists = resists * calculatedVariables.jakShoBonusResistMultiplier;
+								calculatedVariables.jakShoArmor! += jakShoResists;
+								calculatedVariables.jakShoMagicResist! += jakShoResists;
 							}
 
-							totalMultipliersStats.armor += totalMultsValue;
-							totalMultipliersStats.magicResist += totalMultsValue;
-							resists += totalMultsValue;
+							let multArmor = jakShoResists;
+							let multMR = jakShoResists;
 
-							bonusStats.armor += resists;
-							bonusStats.magicResist += resists;
-							totalStats.armor += resists;
-							totalStats.magicResist += resists;
+							if (dragonStatMultipliers.armor) {
+								const value = (resists + jakShoResists) * dragonStatMultipliers.armor;
+								dragonStats.armor! += value;
+								multArmor += value;
+							}
+							if (dragonStatMultipliers.magicResist) {
+								const value = (resists + jakShoResists) * dragonStatMultipliers.magicResist;
+								dragonStats.magicResist! += value;
+								multMR += value;
+							}
+
+							totalMultipliersStats.armor += multArmor;
+							totalMultipliersStats.magicResist += multMR;
+
+							const totalAddedArmor = resists + multArmor;
+							const totalAddedMR = resists + multMR;
+							bonusStats.armor += totalAddedArmor;
+							bonusStats.magicResist += totalAddedMR;
+							totalStats.armor += totalAddedArmor;
+							totalStats.magicResist += totalAddedMR;
 						} else {
 							console.warn('[CHAMPION_SPECIFICS jayce] failed to calculate r resists', rawResists);
 						}

@@ -684,6 +684,8 @@ test('26.18 Jayce', async (t) => {
 		forceShapeshift(damageSource, 1);
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
 		damageSource.currentHealth.value = 550;
+		await nextTick();
+
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 183,
 			magicResist: 128,
@@ -691,9 +693,61 @@ test('26.18 Jayce', async (t) => {
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
 		damageSource.currentHealth.value = 562;
+		await nextTick();
+
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 206,
 			magicResist: 151,
+		}, damageSource);
+	});
+
+	await t.test('2 infernals 2 mountains', { only: true }, async () => {
+		const damageSource = await setupDamageSource(fixture, 'Jayce', {
+			...sourceCommon,
+			dragonStacks: ['Infernal', 'Infernal', 'Mountain', 'Mountain'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 167,
+			magicResist: 107,
+		}, damageSource);
+
+		forceShapeshift(damageSource, 1);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 201,
+			magicResist: 140,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		forceShapeshift(damageSource, 0);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 182,
+			magicResist: 122,
+		}, damageSource);
+
+		forceShapeshift(damageSource, 1);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 226,
+			magicResist: 165,
+		}, damageSource);
+
+		forceShapeshift(damageSource, 1);
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
+		damageSource.currentHealth.value = 575;
+		await nextTick();
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 201,
+			magicResist: 141,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		damageSource.currentHealth.value = 595;
+		await nextTick();
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 227,
+			magicResist: 166,
 		}, damageSource);
 	});
 });
