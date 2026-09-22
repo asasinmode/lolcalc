@@ -62,7 +62,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTarget
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
 import type { IDefineVariablesConfig, IDeriveProgressFn, IEffectControlsProps, IExtractExtraVariables, IExtraInactiveFn, ISpecificVariables, IVariableValueResult } from './index';
-import { CONSTS, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, EffectObjectName, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed, watch } from 'vue';
@@ -1567,6 +1567,19 @@ export const CHAMPION_SPECIFICS = {
 							championPassiveStats.magicResist = resists;
 							totalPreMultipliersStats.armor += championPassiveStats.armor;
 							totalPreMultipliersStats.magicResist += championPassiveStats.magicResist;
+
+							let totalMultsValue = 0;
+
+							if (calculatedVariables.jakShoBonusResistMultiplier) {
+								const value = resists * calculatedVariables.jakShoBonusResistMultiplier;
+								calculatedVariables.jakShoArmor! += value;
+								calculatedVariables.jakShoMagicResist! += value;
+								totalMultsValue += value;
+							}
+
+							totalMultipliersStats.armor += totalMultsValue;
+							totalMultipliersStats.magicResist += totalMultsValue;
+							resists += totalMultsValue;
 
 							bonusStats.armor += resists;
 							bonusStats.magicResist += resists;

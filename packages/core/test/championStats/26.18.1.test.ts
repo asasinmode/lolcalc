@@ -668,5 +668,32 @@ test('26.18 Jayce', async (t) => {
 			armor: 182,
 			magicResist: 127,
 		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 205,
+			magicResist: 150,
+		}, damageSource);
+
+		forceShapeshift(damageSource, 0);
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 166,
+			magicResist: 111,
+		}, damageSource);
+
+		forceShapeshift(damageSource, 1);
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
+		damageSource.currentHealth.value = 550;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 183,
+			magicResist: 128,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		damageSource.currentHealth.value = 562;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 206,
+			magicResist: 151,
+		}, damageSource);
 	});
 });
