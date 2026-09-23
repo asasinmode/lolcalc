@@ -1570,7 +1570,7 @@ export const CHAMPION_SPECIFICS = {
 							- (adaptiveForceMeta[1] ? 0 : calculatedVariables.totalAdaptiveForce)
 							- (baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage);
 
-						const rawResists = championAbilityVariableValue('Resists', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { attackDamage: bonusAD } } } } as DamageSource });
+						const rawResists = championAbilityVariableValue('Resists', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { attackDamage: Math.max(0, bonusAD) } } } } as DamageSource });
 
 						if (typeof rawResists.value === 'number') {
 							const resists = rawResists.value;
