@@ -172,6 +172,29 @@
 				}
 			}
 		},
+		"2504": {
+			"searchString": "kaenicrookern;health;magicresist;healthregen",
+			"stats": {
+				"FlatSpellBlockMod": 80,
+				"FlatHPPoolMod": 400,
+				"PercentBaseHPRegenMod": 1
+			},
+			"dataValues": {
+				"ShieldAmount": 0.15,
+				"OutOfCombatDuration": 15
+			},
+			"itemCalculations": {
+				"ShieldCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ShieldAmount",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
 		"2517": {
 			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste;attackdamage",
 			"stats": {
@@ -281,22 +304,6 @@
 						}
 					]
 				}
-			}
-		},
-		"4401": {
-			"searchString": "forceofnature;fon;health;magicresist;movement;movespeed",
-			"stats": {
-				"FlatSpellBlockMod": 55,
-				"FlatHPPoolMod": 400,
-				"PercentMovementSpeedMod": 0.04
-			},
-			"dataValues": {
-				"BuffDuration": 7,
-				"MoveSpeed": 0.06,
-				"MaxStacks": 8,
-				"ImmobilizeStacks": 2,
-				"StackRefreshTimer": 1,
-				"BonusMagicResist": 70
 			}
 		},
 		"6665": {
