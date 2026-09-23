@@ -544,10 +544,16 @@ async function addResultsSection(
 			return;
 		}
 
+		const championVariables = specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.variables);
+		const abilityVariables = specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.[abilityId.abilityKey]?.variables);
+
 		const precomputedDescription = computeAbilityDescription(champion, abilityId, undefined, {
 			replaceWithName: true,
-			overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[abilityId.id]?.[abilityId.abilityKey]?.variables,
-			),
+			overrideVariables: {
+				values: Object.assign(championVariables?.values ?? {}, abilityVariables?.values),
+				meta: Object.assign(championVariables?.meta ?? {}, abilityVariables?.meta),
+				uninteresting: (championVariables?.uninteresting ?? []).concat(abilityVariables?.uninteresting),
+			},
 		});
 
 		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);

@@ -1827,11 +1827,19 @@ export const CHAMPION_SPECIFICS = {
 			known: {
 				f1: [0, 1, 2],
 			},
-			calculate() {
-				// TODO
-				return {} as any;
+			calculate(self) {
+				return {
+					f1: {
+						value: self.internalData.value.form,
+					},
+				};
 			},
 		}),
+		passive: {
+			variables: defineChampionVariables<'Kayn', typeof IKayn>()({
+				uninteresting: ['PassiveSecondFormDelayTooltip', 'PAmpDurationAss', 'PAmpCooldownAss'],
+			}),
+		},
 	},
 	Kindred: {
 		setupData(self) {

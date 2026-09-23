@@ -36,6 +36,7 @@ export function championDamage() {
 	// amumu passive
 	// jhin passive
 	// senna passive
+	// kayn passive assassin at the start of combat
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
 }
 
