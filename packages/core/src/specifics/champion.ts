@@ -1528,7 +1528,8 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 		calculateHooks: {
-			onChampionPassive: {
+			/* additionally there are 2 checks for if champion is jayce in `itemBuyability` and Damage source's `this.stats.value.isRanged` watch to allow him to buy and keep ranged items */
+			postInit: {
 				handler(self, { championPassiveStats }) {
 					const { q, w, e } = self.abilityVariantsIndexes.value;
 					if (!(q & w & e)) {

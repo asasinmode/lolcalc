@@ -400,7 +400,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					}, { immediate: true }),
 
 					watch(() => this.stats.value.isRanged, (value) => {
-						if (!value) {
+						if (!value && this.champion.value?.id !== 'Jayce') {
 							for (let i = 0; i < this.items.value.length; i++) {
 								const item = this.items.value[i];
 								if (item && (RANGED_ONLY_ITEMS as string[]).includes(item.id)) {
