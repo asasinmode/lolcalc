@@ -1,9 +1,9 @@
-import type { IChampion } from '@lolcalc/data/types.js';
-import type { IChampionAbilityKey, IEffectObjectName } from '@lolcalc/shared';
+import type { IChampion, IRuneShardSlotName } from '@lolcalc/data/types.js';
+import type { EffectObjectName, IChampionAbilityKey } from '@lolcalc/shared';
 import fs from 'node:fs/promises';
 import nodePath from 'node:path';
 import process from 'node:process';
-import { CHAMPIONS, EFFECTS, ITEMS, MISC, useChampion } from '@lolcalc/data';
+import { CHAMPIONS, EFFECTS, ITEMS, MISC, RUNES, useChampion } from '@lolcalc/data';
 import { ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
 import { stringifyObject } from './index.ts';
 
@@ -18,6 +18,9 @@ interface IFixtureShape {
 	champions: Record<string, Record<string, unknown>>;
 	items: Record<string, unknown>;
 	effects?: Record<string, unknown>;
+	runes?: {
+		shards: Record<string, any>;
+	};
 	misc?: {
 		roleQuests?: any;
 		dragons?: any;
@@ -125,7 +128,7 @@ function applyItem(fixture: IFixtureShape, search: string): void {
 	}
 }
 
-function findEffectKey(search: string): IEffectObjectName | undefined {
+function findEffectKey(search: string): EffectObjectName | undefined {
 	search = search.toLocaleLowerCase();
 	return Object.entries(EFFECTS).find(([key, effect]) => {
 		const searchStrings = [
@@ -135,7 +138,7 @@ function findEffectKey(search: string): IEffectObjectName | undefined {
 			(effect as { sharedSpellObjectKey?: string }).sharedSpellObjectKey,
 		];
 		return searchStrings.some(candidate => candidate?.toLocaleLowerCase().includes(search));
-	})?.[0] as IEffectObjectName;
+	})?.[0] as EffectObjectName;
 }
 
 function applyEffect(fixture: IFixtureShape, search: string): void {
@@ -228,6 +231,18 @@ if (fixture.misc) {
 	fixture.misc = reorderKeys(fixture.misc, Object.keys(MISC));
 	if (fixture.misc.dragons) {
 		fixture.misc.dragons = reorderKeys(fixture.misc.dragons as any, Object.keys(MISC.dragons));
+	}
+}
+fixture.runes ??= { shards: {} };
+for (const shardCategory in RUNES.shards) {
+	fixture.runes.shards[shardCategory] = {};
+	for (const slotName in RUNES.shards[shardCategory as IRuneShardSlotName]) {
+		fixture.runes.shards[shardCategory][slotName] = {
+			// @ts-expect-error key types are fine
+			id: RUNES.shards[shardCategory][slotName].id,
+			// @ts-expect-error key types are fine
+			effectAmount: RUNES.shards[shardCategory][slotName].effectAmount,
+		};
 	}
 }
 
