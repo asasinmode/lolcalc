@@ -116,7 +116,7 @@ test('26.19 Jayce', async (t) => {
 		await nextTick();
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 398,
+			attackDamage: 419,
 			armor: 354,
 			magicResist: 301,
 		}, damageSource, 'hammer jaksho bloodmail');

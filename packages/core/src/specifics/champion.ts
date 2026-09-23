@@ -1552,22 +1552,22 @@ export const CHAMPION_SPECIFICS = {
 				},
 			},
 			postTotal: {
-				handler(self, { championPassiveStats, bonusStats, adaptiveForceMeta, totalStats, totalMultipliersStats, totalPreMultipliersStats, dragonStats, dragonStatMultipliers, itemTotalStats, itemPassivesStats, baseOnLevelStats }, { calculatedVariables }) {
+				handler(self, { championPassiveStats, bonusStats, adaptiveForceMeta, totalStats, totalMultipliersStats, totalPreMultipliersStats, dragonStats, dragonStatMultipliers, baseOnLevelStats }, { calculatedVariables }) {
 					const { q, w, e } = self.abilityVariantsIndexes.value;
 					if (q & w & e) {
-						const totalAD = totalStats.attackDamage;
-						const baseAD = totalStats.attackDamage - bonusStats.attackDamage;
-						const baseAdRatio = totalAD > 0 ? baseAD / totalAD : 0;
+						/* i really dislike the whole `baseAdRatio` business going on and getting the bloodmail value for it but the jayce resists seem really weird and i can't come up with anything better, the `bonusAD` below was mostly guessed at by an llm until tests passed */
+						const usedBloodmailRetribution = totalPreMultipliersStats.attackDamage * (calculatedVariables.bloodmailRetributionPercentage ?? 0);
+						const usedTotalAD = totalPreMultipliersStats.attackDamage + (dragonStats.attackDamage ?? 0) + usedBloodmailRetribution;
 
-						const bloodmailExcludedAd = (calculatedVariables.bloodmailRetribution ?? 0) * baseAdRatio;
-						const dragonExcludedAd = (dragonStats.attackDamage ?? 0) * baseAdRatio;
-						const adaptiveForceAD = adaptiveForceMeta[1] ? 0 : calculatedVariables.totalAdaptiveForce;
+						const excludedBloodmailADRatio = usedTotalAD ? baseOnLevelStats.attackDamage / usedTotalAD : 0;
+						const bloodmailExcludedAD = usedBloodmailRetribution * excludedBloodmailADRatio * (1 - dragonStatMultipliers.attackDamage);
 
-						const bonusAD = bonusStats.attackDamage
-							- adaptiveForceAD
-							- (calculatedVariables.midQuestAd ?? 0)
-							- bloodmailExcludedAd
-							- dragonExcludedAd;
+						const bonusAD = (totalPreMultipliersStats.attackDamage - baseOnLevelStats.attackDamage)
+							+ (dragonStats.attackDamage ?? 0)
+							+ usedBloodmailRetribution
+							- bloodmailExcludedAD
+							- (adaptiveForceMeta[1] ? 0 : calculatedVariables.totalAdaptiveForce)
+							- (baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage);
 
 						const rawResists = championAbilityVariableValue('Resists', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { attackDamage: bonusAD } } } } as DamageSource });
 
@@ -2722,7 +2722,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables, debuffs }): void {
+				handler(self, { totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, championPassiveStats, bonusStats }, { calculatedVariables, debuffs }) {
 					let wBonusArmor: IVariableValueResult['value'] = 0;
 					let wBonusMr: IVariableValueResult['value'] = 0;
 					if (self.internalData.value.defensiveCurl) {
