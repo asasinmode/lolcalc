@@ -1,5 +1,5 @@
 {
-	"version": "16.18.1",
+	"version": "16.19.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -229,6 +229,7 @@
 			"name": "Cho'Gath",
 			"image": "Chogath.png",
 			"roles": {
+				"jungle": true,
 				"top": true
 			}
 		},
@@ -484,7 +485,6 @@
 			"name": "Jax",
 			"image": "Jax.png",
 			"roles": {
-				"jungle": true,
 				"top": true
 			}
 		},
@@ -719,8 +719,8 @@
 			"name": "Lux",
 			"image": "Lux.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"Malphite": {
@@ -765,8 +765,7 @@
 			"name": "Mel",
 			"image": "Mel.png",
 			"roles": {
-				"mid": true,
-				"bot": true
+				"mid": true
 			}
 		},
 		"Milio": {
@@ -1084,8 +1083,7 @@
 			"name": "Seraphine",
 			"image": "Seraphine.png",
 			"roles": {
-				"support": true,
-				"bot": true
+				"support": true
 			}
 		},
 		"Sett": {
@@ -1212,8 +1210,7 @@
 			"name": "Syndra",
 			"image": "Syndra.png",
 			"roles": {
-				"mid": true,
-				"bot": true
+				"mid": true
 			}
 		},
 		"TahmKench": {
@@ -1460,8 +1457,8 @@
 			"name": "Xerath",
 			"image": "Xerath.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"XinZhao": {

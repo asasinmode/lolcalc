@@ -186,7 +186,7 @@
 								},
 								"__type": "StatBySubPartCalculationPart"
 							},
-							"{72c5c2a8}": 1,
+							"DamageType": 1,
 							"mModifiedGameCalculation": "PercentWolfDamage",
 							"__type": "GameCalculationModified"
 						}

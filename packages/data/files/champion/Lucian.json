@@ -49,7 +49,7 @@
 						}
 					],
 					"dataValues": {
-						"BaseDamage": [45, 80, 115, 150, 185, 220, 255],
+						"BaseDamage": [50, 90, 130, 170, 210, 250, 290],
 						"BonusADRatio": [1, 1, 1, 1, 1, 1, 1],
 						"Range": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
 						"Width": [100, 100, 100, 100, 100, 100, 100]
@@ -298,7 +298,7 @@
 					"tooltipExtended": "{{ Spell_LucianPassive_Tooltip }}<br><rules>Vigilance can store up to @MaxAutos@ empowered basic attacks.</rules>",
 					"dataValues": {
 						"PassiveDuration": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
-						"PassiveDamageBase": [15, 15, 15, 15, 15, 15, 15],
+						"PassiveDamageBase": [5, 5, 5, 5, 5, 5, 5],
 						"OnhitPassiveDuration": [6, 6, 6, 6, 6, 6, 6],
 						"NumAuto": [2, 2, 2, 2, 2, 2, 2],
 						"MaxAutos": [4, 4, 4, 4, 4, 4, 4],
@@ -390,7 +390,7 @@
 								},
 								{
 									"mStat": 2,
-									"mCoefficient": 0.2,
+									"mCoefficient": 0.15,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

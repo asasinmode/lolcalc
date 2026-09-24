@@ -346,7 +346,7 @@
 							"mDisplayAsPercent": true
 						},
 						"{540bce84}": {
-							"{72c5c2a8}": 1,
+							"DamageType": 1,
 							"mFormulaParts": [
 								{
 									"mNumber": 1,
@@ -437,7 +437,7 @@
 							]
 						},
 						"ExecuteDamage": {
-							"{72c5c2a8}": 1,
+							"DamageType": 1,
 							"mFormulaParts": [
 								{
 									"mStartValue": 8,

@@ -453,7 +453,7 @@
 								"mDataValue": "PTotalDamageMultiplier_ForModesBalance",
 								"__type": "NamedDataValueCalculationPart"
 							},
-							"{72c5c2a8}": 1,
+							"DamageType": 1,
 							"mFormulaParts": [
 								{
 									"mStartValue": 4,

@@ -66,7 +66,7 @@
 						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BaseMoveSpeedMod": [0.17, 0.2, 0.23, 0.26, 0.29, 0.32, 0.35],
 						"DelayBetweenTwoHits": [1, 1, 1, 1, 1, 1, 1],
-						"MaxHealthDamageToNonHeroes": [50, 85, 120, 155, 190, 225, 260]
+						"MaxHealthDamageToNonHeroes": [35, 70, 105, 140, 175, 210, 245]
 					},
 					"spellCalculations": {
 						"BaseDamage": {

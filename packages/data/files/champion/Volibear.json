@@ -498,6 +498,12 @@
 								{
 									"mDataValue": "APRatio",
 									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
 						},
@@ -509,21 +515,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.0003,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{ebe98aa3}": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mDataValue": "PAttackSpeed",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0.04,
+									"mCoefficient": 0.0004,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],

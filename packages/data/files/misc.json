@@ -1,5 +1,5 @@
 {
-	"version": "16.18.1",
+	"version": "16.19.1",
 	"data": {
 		"dragons": {
 			"Cloud": {
@@ -301,7 +301,7 @@
 				"dataValues": {
 					"ChannelDuration": 8,
 					"UpgradeTimeMins": 15,
-					"Cooldown": 420,
+					"Cooldown": 390,
 					"XPMultTT": 0.11,
 					"XPBonusTakedownTT": 80,
 					"LevelCapTT": 2,

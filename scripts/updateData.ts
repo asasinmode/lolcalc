@@ -1809,13 +1809,11 @@ function championAbilityData(
 
 	if ((championId === 'Jayce' && abilityInfo[1] === 3)
 		|| (championId === 'Aphelios' && abilityInfo[1] < 3)) {
-		/* level up info used to be under `spellLevelUpInfo.mRequirements`, it's moved under this hash now (and `spellLevelUpInfo` was also changed to a hash) */
-		const levelUpInfoProperty = '{0cfb5881}';
-		if (!spellLevelUpInfo?.[levelUpInfoProperty]) {
+		if (!spellLevelUpInfo?.List) {
 			console.error(spellLevelUpInfo);
 			throw new Error(`[championAbilityData] can't resolve spellLevelUpInfo maxLevel for ${championId} in ${characterRootKey}`);
 		}
-		maxLevel = spellLevelUpInfo[levelUpInfoProperty][abilityInfo[1]].mRequirements.length;
+		maxLevel = spellLevelUpInfo.List[abilityInfo[1]].mRequirements.length;
 	}
 
 	if (maxLevel === undefined) {

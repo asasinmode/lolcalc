@@ -9,7 +9,7 @@
 		"mp": 410,
 		"mpperlevel": 50,
 		"movespeed": 330,
-		"armor": 22,
+		"armor": 24,
 		"armorperlevel": 4.5,
 		"spellblock": 32,
 		"spellblockperlevel": 1.55,
@@ -243,7 +243,7 @@
 					],
 					"dataValues": {
 						"DrowsyDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"SleepDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SleepDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"ImpactDamage": [25, 25, 25, 25, 25, 25, 25],
 						"BreakDamageBase": [50, 100, 150, 200, 250, 300, 350],
 						"InitialSlow": [-0.1, -0.1, -0.1, -0.1, -0.1, -0.1, -0.1]

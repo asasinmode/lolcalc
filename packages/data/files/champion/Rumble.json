@@ -348,8 +348,8 @@
 						"OverheatAS": {
 							"mFormulaParts": [
 								{
-									"mStartValue": 0.5,
-									"mEndValue": 1.3,
+									"mStartValue": 0.3,
+									"mEndValue": 1,
 									"mScaleByStatProgressionMultiplier": true,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								}
@@ -359,8 +359,8 @@
 						"MonsterCapScaling": {
 							"mFormulaParts": [
 								{
-									"mStartValue": 65,
-									"mEndValue": 150,
+									"mStartValue": 90,
+									"mEndValue": 175,
 									"mScaleByStatProgressionMultiplier": true,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								}

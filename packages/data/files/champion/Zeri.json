@@ -124,7 +124,7 @@
 							"mDisplayAsPercent": true
 						},
 						"PassiveExecuteThreshold": {
-							"{72c5c2a8}": 2,
+							"DamageType": 2,
 							"mFormulaParts": [
 								{
 									"mStartValue": 70,

@@ -5,7 +5,7 @@
 	"partype": "Mana",
 	"stats": {
 		"hp": 620,
-		"hpperlevel": 99,
+		"hpperlevel": 105,
 		"mp": 300,
 		"mpperlevel": 60,
 		"movespeed": 345,
@@ -183,10 +183,10 @@
 						"PercentMS": [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
 						"MSRingRadius": [500, 500, 500, 500, 500, 500, 500],
 						"HealDuration": [5, 5, 5, 5, 5, 5, 5],
-						"HealPerSecond": [50, 75, 100, 125, 150, 175, 200],
-						"HealRingRadius": [550, 550, 550, 550, 550, 550, 550],
+						"HealPerSecond": [55, 80, 105, 130, 155, 180, 205],
+						"HealRingRadius": [600, 600, 600, 600, 600, 600, 600],
 						"HealDurationExtension": [1, 1, 1, 1, 1, 1, 1],
-						"Ratio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
+						"Ratio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
 						"HealPerSecondCalc": {
@@ -198,7 +198,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 0.6,
+									"mCoefficient": 0.7,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

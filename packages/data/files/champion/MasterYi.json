@@ -58,7 +58,7 @@
 						"BonusMonsterDamage": [35, 60, 85, 110, 135, 160, 185],
 						"AttackDamageRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"BonusCritDamageRatio": [1, 1, 1, 1, 1, 1, 1],
-						"BaseBasicAttackCDR": [1, 1, 1, 1, 1, 1, 1],
+						"BasicAttackCDR": [1, 1, 1, 1, 1, 1, 1],
 						"AlphaStrikeBounces": [4, 4, 4, 4, 4, 4, 4],
 						"BaseOnHitMultiplier": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
@@ -148,17 +148,6 @@
 							},
 							"mModifiedGameCalculation": "SubesquentDamage",
 							"__type": "GameCalculationModified"
-						},
-						"BasicAttackCDR": {
-							"mFormulaParts": [
-								{
-									"mPart2": {
-										"mDataValue": "BaseBasicAttackCDR",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									"__type": "ProductOfSubPartsCalculationPart"
-								}
-							]
 						},
 						"SingleTotalDamage": {
 							"mMultiplier": {
