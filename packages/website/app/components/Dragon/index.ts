@@ -32,7 +32,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype] ??= {};
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype]!.effects
 			??= enumOptions
-				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
+				? await enumExtra(abilityId, 0, label, Object.entries(enumOptions).map(([key, value]) => [value, key]))
 				: deriveProgressValue
 					? await progressExtra(abilityId, 0, label, deriveProgressValue, {
 							selectEffectSourceProps: effectSpecific.sourceControls,

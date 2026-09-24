@@ -26,11 +26,11 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: ChampionExtrasAphelios,
 	},
 	Ashe: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0), 'frostShot', 'apply Frost Shot on target', {
-			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.none]: 'none',
-			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.normal]: 'normal attack',
-			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.crit]: 'critical strike',
-		}),
+		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0), 'frostShot', 'apply Frost Shot on target', [
+			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.none, 'none'],
+			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.normal, 'normal attack'],
+			[CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.crit, 'critical strike'],
+		]),
 	},
 	AurelionSol: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'AurelionSol', 'passive', 0), 'passiveStacks', 'Cosmic Creator stacks'),
@@ -96,7 +96,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS),
 	},
 	Kayn: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0), 'form', 'Form', Object.fromEntries(Object.entries(CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS).map(([key, value]) => [value, key]))),
+		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0), 'form', 'Form', Object.entries(CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS).map(([key, value]) => [value, key])),
 	},
 	Kindred: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
@@ -127,11 +127,11 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither on target', CHAMPION_SPECIFICS.Nasus.w.derivedSlow),
 	},
 	Nidalee: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', {
-			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.none]: 'none',
-			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.justBush]: 'in bush',
-			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.towardsChampion]: 'towards champions',
-		}),
+		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', [
+			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.none, 'none'],
+			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.justBush, 'in bush'],
+			[CHAMPION_SPECIFICS.Nidalee.PassiveOptions.towardsChampion, 'towards champions'],
+		]),
 	},
 	Nunu: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0), 'isPassiveActive', 'Call of the Freljord', true),
@@ -160,9 +160,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rumble', 'passive', 0), 'isOverheated', 'is overheated', false),
 	},
 	Samira: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Samira', 'passive', 0), 'passiveStacks', 'Grade', Object.fromEntries(
-			Object.entries(CHAMPION_SPECIFICS.Samira.PASSIVE_OPTIONS).map(([grade, value]) => [value, value ? grade.toUpperCase() : grade]),
-		)),
+		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Samira', 'passive', 0), 'passiveStacks', 'Grade', Object.entries(CHAMPION_SPECIFICS.Samira.PASSIVE_OPTIONS).map(([grade, value]) => [value, value ? grade.toUpperCase() : grade])),
 	},
 	Sejuani: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Sejuani', 'passive', 0), 'isPassiveActive', 'is Fury of the North active', false),
@@ -219,7 +217,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Udyr', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},
 	Varus: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Varus', 'passive', 0), 'passiveVariantActive', 'passive buff from enemy', Object.fromEntries(Object.entries(CHAMPION_SPECIFICS.Varus.PASSIVE_OPTIONS).map(([key, value]) => [value, key]))),
+		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Varus', 'passive', 0), 'passiveVariantActive', 'passive buff from enemy', Object.entries(CHAMPION_SPECIFICS.Varus.PASSIVE_OPTIONS).map(([key, value]) => [value, key])),
 	},
 	Vayne: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Vayne', 'passive', 0), 'isPassiveMSActive', 'is moving towards enemy', false),
@@ -255,7 +253,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
 			??= enumOptions
-				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])), {
+				? await enumExtra(abilityId, 0, label, Object.entries(enumOptions).map(([key, value]) => [value, key]), {
 						selectEffectSourceProps: effectSpecific.sourceControls,
 					})
 				: deriveProgressValue

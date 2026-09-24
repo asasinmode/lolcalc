@@ -5,16 +5,7 @@ defineProps<{
 	idSuffix: string;
 	imgSrc: IGameImageData;
 	label: string;
-	/**
-	 * values have to be numbers
-	 * ```ts
-	 * {
-	 *   [value1]: 'option 1 label',
-	 *   [value2]: 'option 2 label',
-	 * }
-	 * ```
-	 */
-	options: Record<number, string | number>;
+	options: [value: number, label: string | number][];
 	disabled?: boolean;
 }>();
 
@@ -46,7 +37,7 @@ function updateValue(event: Event) {
 			:disabled
 			@change="updateValue"
 		>
-			<option v-for="(optionLabel, optionValue) in options" :key="optionValue" :value="optionValue">
+			<option v-for="[optionValue, optionLabel] in options" :key="optionValue" :value="optionValue">
 				{{ optionLabel }}
 			</option>
 		</select>

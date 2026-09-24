@@ -249,15 +249,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
-	/**
-	 * ```ts
-	 * {
-	 *   [value1]: 'option 1 label',
-	 *   [value2]: 'option 2 label',
-	 * }
-	 * ```
-	 */
-	options: MaybeRef<Record<number, string | number>>,
+	options: MaybeRef<[value: number, label: string | number][]>,
 	{
 		selectEffectSourceProps,
 	}: {

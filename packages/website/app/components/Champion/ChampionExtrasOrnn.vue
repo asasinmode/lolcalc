@@ -11,24 +11,21 @@ defineEmits<IExtraComponentEmits>();
 
 const maxUpgradedAllies = computed(() => CHAMPION_SPECIFICS.Ornn.calcMaxUpgradedAllies(props.damageSource));
 
-const SlotIndexComponent = await enumExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', {
-	[-1]: '-1 (no amp, no masterwork item)',
-	0: '0 (+amp but no masterwork item)',
-	1: 1,
-	2: 2,
-	3: 3,
-	4: 4,
-	5: 5,
-	6: 6,
-});
+const SlotIndexComponent = await enumExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', [
+	[-1, '-1 (no amp, no masterwork item)'],
+	[0, '0 (+amp but no masterwork item)'],
+	[1, '1'],
+	[2, '2'],
+	[3, '3'],
+	[4, '4'],
+	[5, '5'],
+	[6, '6'],
+]);
 const UpgradedAlliesComponent = await enumExtra(
 	GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0),
 	'passiveUpgradedAllies',
 	'Allies with masterwork item',
-	computed(() => Array.from({ length: maxUpgradedAllies.value + 1 }, (_, i) => i).reduce((acc, curr) => ({
-		...acc,
-		[curr]: curr,
-	}), {})),
+	computed(() => Array.from({ length: maxUpgradedAllies.value + 1 }, (_, i) => [i, i])),
 );
 
 const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalData.value._masterworkLevel;

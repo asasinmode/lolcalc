@@ -1226,7 +1226,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	 */
 	maxValue?: number | (() => Promise<number> | number);
 	/** if specified, the component for this effect will be `VExtraEnum` */
-	enumOptions?: Record<string, number | string>;
+	enumOptions?: Record<string, number>;
 	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn<true>;
 	/** will be called when the value is updated through the extra component */

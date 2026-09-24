@@ -272,7 +272,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		ITEM_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
 			??= enumOptions
-				? await enumExtra(abilityId, 0, label, Object.fromEntries(Object.entries(enumOptions).map(([key, value]) => [value, key])))
+				? await enumExtra(abilityId, 0, label, Object.entries(enumOptions).map(([key, value]) => [value, key]))
 				: maxValue !== 1
 					? await numberExtra(abilityId, 0, label, minValue, maxValue)
 					: await booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip);
