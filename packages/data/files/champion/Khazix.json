@@ -378,13 +378,13 @@
 		"spell_listtype_healing": "Healing",
 		"spell_khazixe_tooltip_0": "Kha'Zix leaps, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> upon landing.",
 		"spell_khazixe_tooltip_1": "<evolve>Evolved Ability:</evolve> Kha'Zix leaps a further distance, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> upon landing. This Ability's Cooldown is refreshed on champion takedown.",
+		"spell_khazixr_tooltip_0": "<spellActive>Active:</spellActive> Kha'Zix becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ seconds and gains <speed>@BonusMovementSpeedPercent*100@% Move Speed</speed>. Kha'zix may <recast>Recast</recast> this Ability once within @RecastWindow@ seconds.",
+		"spell_khazixr_tooltip_1": "<evolve>Evolved Ability:</evolve> Kha'Zix becomes <keywordStealth>Invisible</keywordStealth> for an improved @EvolvedStealthDuration@ seconds and gains <speed>@BonusMovementSpeedPercent*100@% Move Speed</speed>. Kha'zix may <recast>Recast</recast> this Ability twice within 10 seconds.",
 		"spell_khazixq_name": "Taste Their Fear",
 		"spell_khazixw_name": "Void Spike",
 		"spell_khazixe_name": "Leap",
 		"spell_khazixr_name": "Void Assault",
 		"spell_khazixr_tooltip_p": "<spellPassive>Passive:</spellPassive> Leveling up this Ability allows Kha'zix to <evolve>Evolve</evolve> one of his Abilities, granting it additional effects.<li><spellName>Taste Their Fear:</spellName> Gain Ability range, Attack range, and lowers Cooldown by @spell.KhazixQ:Effect4Amount@% against <keywordMajor>Isolated</keywordMajor> targets.<li><spellName>Void Spike:</spellName> Fires 3 spikes and <status>Slows</status> by @spell.KhazixW:Effect3Amount@%, increased against <keywordMajor>Isolated</keywordMajor> targets.<li><spellName>Leap:</spellName> Increased range and refreshes Cooldown on champion takedown.<li><spellName>Void Assault:</spellName> <keywordStealth>Invisibility</keywordStealth> duration lasts @EvolvedStealthDuration@ seconds and gains second <recast>Recast</recast>.",
-		"spell_khazixr_tooltip_0": "<spellActive>Active:</spellActive> Kha'Zix becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ seconds and gains <speed>@BonusMovementSpeedPercent*100@% Move Speed</speed>. Kha'zix may <recast>Recast</recast> this Ability once within @RecastWindow@ seconds.",
-		"spell_khazixr_tooltip_1": "<evolve>Evolved Ability:</evolve> Kha'Zix becomes <keywordStealth>Invisible</keywordStealth> for an improved @EvolvedStealthDuration@ seconds and gains <speed>@BonusMovementSpeedPercent*100@% Move Speed</speed>. Kha'zix may <recast>Recast</recast> this Ability twice within 10 seconds.",
 		"reminder_invisibility": "<keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or <font color='#ee91d7'>True Sight</font color>.",
 		"spell_listtype_khazixrevolutionsavailable": "Evolutions Available"
 	}

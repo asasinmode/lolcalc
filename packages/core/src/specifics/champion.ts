@@ -22,6 +22,7 @@ import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
 import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
 import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
+import type IKhazix from '@lolcalc/data/files/champion/Khazix.json';
 import type IKled from '@lolcalc/data/files/champion/Kled.json';
 import type IKSante from '@lolcalc/data/files/champion/KSante.json';
 import type ILocke from '@lolcalc/data/files/champion/Locke.json';
@@ -1836,8 +1837,74 @@ export const CHAMPION_SPECIFICS = {
 			},
 		}),
 		passive: {
-			variables: defineChampionVariables<'Kayn', typeof IKayn>()({
+			variables: defineChampionVariables<'Kayn', typeof IKayn, 'passive'>()({
 				uninteresting: ['PassiveSecondFormDelayTooltip', 'PAmpDurationAss', 'PAmpCooldownAss'],
+			}),
+		},
+	},
+	Khazix: {
+		MAX_PASSIVE_UPGRADES_MASK: 2 ** 4,
+		setupData(self) {
+			const rEvolvesMask: number = clamp(0, Math.round(self.internalData.value.rEvolvesMask ?? 0), CHAMPION_SPECIFICS.Khazix.MAX_PASSIVE_UPGRADES_MASK);
+
+			return {
+				rEvolvesMask,
+			};
+		},
+		q: {
+			variables: defineChampionVariables<'Khazix', typeof IKhazix, 'passive'>()({
+				known: {
+					IsEvolved: [0, 1],
+				},
+				calculate(self) {
+					return {
+						IsEvolved: {
+							value: self.internalData.value.rEvolvesMask ^ 0,
+						},
+					};
+				},
+			}),
+		},
+		w: {
+			variables: defineChampionVariables<'Khazix', typeof IKhazix, 'passive'>()({
+				known: {
+					IsEvolved: [0, 1],
+				},
+				calculate(self) {
+					return {
+						IsEvolved: {
+							value: self.internalData.value.rEvolvesMask ^ 0,
+						},
+					};
+				},
+			}),
+		},
+		e: {
+			variables: defineChampionVariables<'Khazix', typeof IKhazix, 'passive'>()({
+				known: {
+					IsEvolved: [0, 1],
+				},
+				calculate(self) {
+					return {
+						IsEvolved: {
+							value: self.internalData.value.rEvolvesMask ^ 0,
+						},
+					};
+				},
+			}),
+		},
+		r: {
+			variables: defineChampionVariables<'Khazix', typeof IKhazix, 'passive'>()({
+				known: {
+					IsEvolved: [0, 1],
+				},
+				calculate(self) {
+					return {
+						IsEvolved: {
+							value: self.internalData.value.rEvolvesMask ^ 0,
+						},
+					};
+				},
 			}),
 		},
 	},
@@ -4512,6 +4579,7 @@ export interface IChampionInternalDataMap {
 	Kayle: { passiveStacks: number };
 	Kayn: { form: number };
 	Kindred: { passiveStacks: number };
+	Khazix: { rEvolvesMask: number };
 	Kled: {
 		kledCurrentHP: number;
 		skaarlCurrentHP: number;

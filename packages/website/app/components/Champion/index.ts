@@ -4,7 +4,7 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { AbilityType } from '@lolcalc/shared';
-import { ChampionExtrasAphelios, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
+import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	TargetDummy: {
@@ -100,6 +100,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	},
 	Kindred: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
+	},
+	Khazix: {
+		extras: ChampionExtrasKhaZix,
 	},
 	Kled: {
 		extras: [
