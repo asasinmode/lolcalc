@@ -2563,7 +2563,9 @@ export const CHAMPION_SPECIFICS = {
 					const additionalStatAmp = championAbilityVariableValue('AdditionalMythicStatAmp', passiveParams);
 
 					if (typeof baseStatAmp.value === 'number' && typeof additionalStatAmp.value === 'number') {
-						calculatedVariables.ornnPassiveStatAmp = baseStatAmp.value + additionalStatAmp.value * (self.internalData.value.passiveUpgradedAllies + (~self.internalData.value.masterworkItemSlot ? 1 : 0));
+						calculatedVariables.ornnPassiveStatAmp = baseStatAmp.value
+							+ additionalStatAmp.value * (self.internalData.value.passiveUpgradedAllies
+								+ (~self.internalData.value.masterworkItemSlot && (self.level.value >= CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL(self)) ? 1 : 0));
 					} else {
 						console.warn('[CHAMPION_SPECIFICS ornn] failed to calculate passive stat amps', baseStatAmp, additionalStatAmp);
 					}
