@@ -1884,7 +1884,7 @@ defineExpose({
 @layer components {
 	#results {
 		/* TODO mobile version, work out sticky */
-		@media (width < 540px) {
+		@media (width < 640px) {
 			& {
 				--at-apply: 'of-x-auto';
 			}
@@ -1892,7 +1892,7 @@ defineExpose({
 	}
 
 	#results-table {
-		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr] mb-10 h-px';
+		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr] mb-10 h-px inline-max';
 		--b-clr: theme('colors.neutral.600');
 		--bg-clr: theme('colors.slate.950');
 		--table-ps: calc(3 * var(--spacing));

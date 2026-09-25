@@ -1831,7 +1831,7 @@ defineExpose({ el });
 		}
 
 		.select-champion {
-			--at-apply: 'ms-[--ms] me-[--me] relative self-center';
+			--at-apply: 'grid-center ms-[--ms] me-[--me] relative self-center';
 			--ms: calc(3 * var(--spacing));
 			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
