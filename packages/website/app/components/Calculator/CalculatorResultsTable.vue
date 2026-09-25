@@ -1215,12 +1215,29 @@ function recomputeCustomTotalRow() {
 	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
 }
 
+const controlButtonSize = ref(28);
+
+function updateControlBtnSize() {
+	/* any element that uses --manipulate-btn-size var */
+	controlButtonSize.value = document.getElementById('results-remove-unused')?.getBoundingClientRect().height ?? 28;
+}
+
+onMounted(() => {
+	window.addEventListener('resize', updateControlBtnSize, { passive: true });
+	updateControlBtnSize();
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updateControlBtnSize);
+});
+
 const colW = computed(() => {
 	const growUpToCols = 4;
 	const n = growUpToCols - Math.min(resultColumns.value.length, growUpToCols);
 
 	return {
-		controls: 60,
+		/* + padding left */
+		controls: 2 * controlButtonSize.value + 12,
 		header: Math.round(280 + 140 * n / (growUpToCols + 1)),
 		result: Math.round(120 + 90 * n / (growUpToCols + 1)),
 	};
@@ -1296,6 +1313,7 @@ defineExpose({
 								flip results (target vs source)
 							</label>
 							<button
+								id="results-remove-unused"
 								class="pretend-ui-btn"
 								:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
 								title="remove empty columns and sections without corresponding damage source"
@@ -1637,6 +1655,7 @@ defineExpose({
 								<input
 									v-model="customTotalRowIds"
 									type="checkbox"
+									title="include in custom total"
 									:value="`${section.id}_${row.id}`"
 									@update:model-value="onCustomTotalRowsChange"
 								>
@@ -1929,7 +1948,7 @@ defineExpose({
 
 					> label {
 						> input {
-							--at-apply: 'size-4.5 align-[-3px] me-[0.25ch]';
+							--at-apply: 'size-[--fluid-20-18-t640] align-[-3px] me-[0.25ch]';
 						}
 					}
 
@@ -2064,7 +2083,7 @@ defineExpose({
 							--at-apply: 'size-[--manipulate-btn-size]';
 
 							> .icon {
-								--at-apply: 'size-5';
+								--at-apply: 'size-5.5';
 							}
 						}
 
@@ -2098,7 +2117,7 @@ defineExpose({
 				&:last-child > div {
 					> button {
 						&:nth-of-type(1) {
-							--at-apply: 'w-auto px-1 justify-self-center h-[--manipulate-btn-size]';
+							--at-apply: 'w-auto px-2 justify-self-center h-[--manipulate-btn-size]';
 							grid-area: 1 / 1 / 2 / 4;
 						}
 					}
@@ -2122,7 +2141,7 @@ defineExpose({
 							--at-apply: 'size-(--manipulate-btn-size) grid place-items-center';
 
 							> .icon {
-								--at-apply: 'size-5';
+								--at-apply: 'size-5.5';
 							}
 
 							&[aria-expanded='true'] > span {
@@ -2160,7 +2179,7 @@ defineExpose({
 						}
 
 						> img {
-							--at-apply: 'size-6 ms-3 me-1.5 inline-block';
+							--at-apply: 'size-7 ms-3 me-1.5 inline-block';
 						}
 
 						> [popover] {
@@ -2274,6 +2293,10 @@ defineExpose({
 
 								> span {
 									--at-apply: 'sr-only';
+								}
+
+								> input {
+									--at-apply: 'size-[--fluid-20-18-t640]';
 								}
 							}
 						}
