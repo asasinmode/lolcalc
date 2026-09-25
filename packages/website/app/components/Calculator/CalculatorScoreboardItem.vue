@@ -66,12 +66,10 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 
 const el = useTemplateRef('el');
 
-const iconButtonsShowText = useIconButtonsShowText();
-
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight
-	? iconButtonsShowText.value ? 'left' : 'sources'
-	: iconButtonsShowText.value ? 'right' : 'targets',
+	? 'sources'
+	: 'targets',
 );
 
 const idSuffix = computed(() => `${group.value}-${props.index}`);
@@ -1003,7 +1001,7 @@ defineExpose({ el });
 		</h3>
 		<div ref="header" class="header">
 			<button
-				:title="`${iconButtonsShowText ? '' : 'move up, '}alt+click to duplicate above`"
+				title="move up, alt+click to duplicate above"
 				class="pretend-ui-btn move-up"
 				:disabled="moveUpDisabled"
 				draggable="true"
@@ -1014,7 +1012,7 @@ defineExpose({ el });
 				<Icon class="i-ph:arrow-up" />
 			</button>
 			<button
-				:title="`${iconButtonsShowText ? '' : 'move down, '}alt+click to duplicate below`"
+				title="move down, alt+click to duplicate below"
 				class="pretend-ui-btn move-down"
 				:disabled="!canMoveDown"
 				draggable="true"
@@ -1025,25 +1023,25 @@ defineExpose({ el });
 				<Icon class="i-ph:arrow-down" />
 			</button>
 			<button
-				:title="`${iconButtonsShowText ? '' : `move to ${otherGroup}, `}alt+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
+				:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
 				class="pretend-ui-btn move-group"
 				draggable="true"
 				:disabled="changeGroupDisabled"
 				@click="changeGroup"
 				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 			>
-				<span>move {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }} <span>(alt+click to duplicate {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }})</span></span>
+				<span>move to {{ otherGroup }} <span>(alt+click to duplicate to {{ otherGroup }})</span></span>
 				<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
 			</button>
 			<button
-				:title="`${iconButtonsShowText ? '' : 'duplicate, '}shift+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
+				:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
 				class="pretend-ui-btn duplicate"
 				:disabled="changeGroupDisabled"
 				draggable="true"
 				@click="duplicate"
 				@dragstart="$emit('dragstart', $event, true)"
 			>
-				<span>duplicate<span>(shift+click to duplicate {{ iconButtonsShowText ? otherGroup : `into ${otherGroup}` }})</span></span>
+				<span>duplicate<span>(shift+click to duplicate into {{ otherGroup }})</span></span>
 				<Icon class="i-ph:copy" />
 			</button>
 			<div class="select-champion">
@@ -1190,7 +1188,7 @@ defineExpose({ el });
 				restore
 			</button>
 			<button
-				:title="`${iconButtonsShowText ? '' : `${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}`}${removeButtonAttrs.subtext ?? ''}`"
+				:title="`${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}${removeButtonAttrs.subtext ?? ''}`"
 				class="pretend-ui-btn clear-remove"
 				:disabled="removeButtonAttrs.disabled"
 				@click="removeButtonAttrs.emit"
@@ -1211,7 +1209,7 @@ defineExpose({ el });
 				</span>
 			</VSelect>
 			<button
-				:title="iconButtonsShowText ? undefined : (isExpanded ? 'collapse' : 'expand')"
+				:title="isExpanded ? 'collapse' : 'expand'"
 				class="pretend-ui-btn expand-collapse"
 				:aria-controls="`${idSuffix}-details`"
 				:aria-expanded="isExpanded"
@@ -1628,7 +1626,6 @@ defineExpose({ el });
 		--select-level-size: calc(6 * var(--spacing));
 		--select-items-runes-gap: calc(2 * var(--spacing));
 		--item-size: calc(8 * var(--spacing));
-		--manipulate-btn-size: var(--fluid-32-28-t512);
 		--transition-duration: 150ms;
 		--scoreboard-item-bg: linear-gradient(
 			var(--bg-direction, 90deg),
@@ -1793,17 +1790,9 @@ defineExpose({ el });
 		.manipulate .pretend-ui-btn {
 			--at-apply: 'size-[--manipulate-btn-size] grid-center';
 
-			[data-icon-btns-show-text] & {
-				--at-apply: 'w-auto px-1.5';
-			}
-
 			.icon {
 				--at-apply: 'size-5.5';
 			}
-		}
-
-		[data-icon-btns-show-text] :is(.clear-remove, .expand-collapse) {
-			--at-apply: 'min-w-19';
 		}
 
 		@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
@@ -2873,10 +2862,6 @@ defineExpose({ el });
 
 			.expand-collapse {
 				--at-apply: 'rotate-180';
-			}
-
-			[data-icon-btns-show-text] & > button:nth-last-of-type(1) {
-				--at-apply: 'rotate-0';
 			}
 		}
 

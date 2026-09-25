@@ -31,7 +31,6 @@ const { damageSources, damageTargets, resultSections, resultColumns, expandedSec
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const enableUnimplementedUi = useEnableUnimplementedUi();
-const iconButtonsShowText = useIconButtonsShowText();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { showTooltip: showRowTooltip, hideTooltip: hideRowTooltip } = useInfoTooltip();
@@ -355,7 +354,7 @@ function addComputedColumn(column: IDamageResultTableColumn) {
 
 function startRemovingColumn(event: MouseEvent, index: number) {
 	const removeButton = (event.target as HTMLElement).closest('button');
-	const undoRemoveButton = (iconButtonsShowText.value && (index === resultColumns.value.length - 1) ? removeButton?.nextElementSibling : removeButton?.nextElementSibling?.nextElementSibling) as HTMLButtonElement | undefined;
+	const undoRemoveButton = removeButton?.nextElementSibling?.nextElementSibling as HTMLButtonElement | undefined;
 	if (!undoRemoveButton || !(resultColumns.value[index]?.source || resultColumns.value[index]?.target)) {
 		removeResultsColumn(index);
 		return;
@@ -1217,14 +1216,6 @@ function recomputeCustomTotalRow() {
 }
 
 const colW = computed(() => {
-	if (iconButtonsShowText.value) {
-		return {
-			controls: 160,
-			header: 280,
-			result: 172,
-		};
-	}
-
 	const growUpToCols = 4;
 	const n = growUpToCols - Math.min(resultColumns.value.length, growUpToCols);
 
@@ -1432,23 +1423,9 @@ defineExpose({
 							<button v-if="index === resultColumns.length - 1" class="pretend-ui-btn" @click="addResultsColumn()">
 								add column
 							</button>
-							<template v-if="index === resultColumns.length - 1 && iconButtonsShowText">
+							<template v-if="index !== resultColumns.length - 1">
 								<button
-									title="remove"
-									class="pretend-ui-btn remove"
-									:disabled="resultColumns.length === 1"
-									@click="startRemovingColumn($event, index)"
-								>
-									<span>remove</span>
-									<Icon class="i-ph:trash" />
-								</button>
-								<button style="display: none">
-									restore
-								</button>
-							</template>
-							<template v-else-if="index !== resultColumns.length - 1">
-								<button
-									:title="`${iconButtonsShowText ? '' : 'move left, '}alt+click to duplicate to the left`"
+									title="move left, alt+click to duplicate to the left"
 									class="pretend-ui-btn"
 									:disabled="index === 0"
 									draggable="true"
@@ -1468,7 +1445,7 @@ defineExpose({
 									<Icon class="i-ph:trash" />
 								</button>
 								<button
-									:title="`${iconButtonsShowText ? '' : 'move right, '}alt+click to duplicate to the right`"
+									title="move right, alt+click to duplicate to the right"
 									class="pretend-ui-btn"
 									draggable="true"
 									@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
@@ -1896,26 +1873,17 @@ defineExpose({
 		--b-clr: theme('colors.neutral.600');
 		--bg-clr: theme('colors.slate.950');
 		--table-ps: calc(3 * var(--spacing));
-		--control-btn-size: calc(6 * var(--spacing));
 		--header-row-gap-y: calc(3 * var(--spacing));
 		--header-champion-select-size: calc(10 * var(--spacing));
 		--header-row-pb: calc(3 * var(--spacing));
 		--header-row-pt: calc(2 * var(--spacing));
 		--header-h: calc(
 			var(--header-row-pt) + var(--header-row-pb) + var(--header-champion-select-size) + 2 * var(--header-row-gap-y) +
-				3 * var(--control-btn-size) - 1px
+				3 * var(--manipulate-btn-size) - 1px
 		); /* offset by 1 px to undouble button borders */
 		--section-header-row-pt: calc(2 * var(--spacing));
 		--section-header-row-pb: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
-		--section-row-btn-size: calc(6 * var(--spacing));
-
-		[data-icon-btns-show-text] & {
-			--header-h: calc(
-				var(--header-row-pt) + var(--header-row-pb) + var(--header-champion-select-size) + 2 * var(--header-row-gap-y) +
-					4 * var(--control-btn-size) - 2px
-			);
-		}
 
 		&[inert],
 		&[inert] > caption {
@@ -1952,10 +1920,16 @@ defineExpose({
 					--at-apply: 'flex flex-col items-start h-full';
 
 					> button {
-						--at-apply: 'px-1 leading-5 h-[--control-btn-size] text-base mb-auto mt-2';
+						--at-apply: 'px-2 leading-5 h-[--manipulate-btn-size] text-base mb-auto mt-2';
 
 						> span {
 							--at-apply: 'sr-only';
+						}
+					}
+
+					> label {
+						> input {
+							--at-apply: 'size-4.5 align-[-3px] me-[0.25ch]';
 						}
 					}
 
@@ -1976,7 +1950,7 @@ defineExpose({
 						}
 
 						> button {
-							--at-apply: 'w-fit px-2 h-[--control-btn-size]';
+							--at-apply: 'w-fit px-2 h-[--manipulate-btn-size]';
 						}
 					}
 				}
@@ -1986,7 +1960,7 @@ defineExpose({
 				--at-apply: 'pb-[--header-row-pb] bg-[--bg-clr] align-top';
 
 				&[data-drop-direction]::after {
-					--at-apply: 'content-empty absolute z-3 start-0.25 top-0 translate-y-[--control-btn-size] size-4 rotate-270 bg-neutral-300';
+					--at-apply: 'content-empty absolute z-3 start-0.25 top-0 translate-y-[--manipulate-btn-size] size-4 rotate-270 bg-neutral-300';
 					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 				}
 
@@ -1995,23 +1969,12 @@ defineExpose({
 				}
 
 				> div {
-					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--control-btn-size)_1fr]';
+					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--manipulate-btn-size)_1fr]';
 					grid-template-areas:
 						'move-left remove move-right'
 						'source vs target'
 						'add-abilities add-abilities add-abilities'
 						'add-items add-items add-items';
-
-					[data-icon-btns-show-text] & {
-						--at-apply: 'grid-rows-[auto_auto_1fr] grid-cols-[1fr_auto_auto_1fr] px-2';
-						--btn-w: calc(26 * var(--spacing));
-						grid-template-areas:
-							'move-left move-left move-right move-right'
-							'remove remove remove remove'
-							'source vs vs target'
-							'add-abilities add-abilities add-abilities add-abilities'
-							'add-items add-items add-items add-items';
-					}
 
 					> .v-select {
 						--at-apply: 'size-[--header-champion-select-size] my-[--header-row-gap-y]';
@@ -2075,10 +2038,6 @@ defineExpose({
 						-webkit-text-stroke: black 0.15em;
 						paint-order: stroke fill;
 						grid-area: vs;
-
-						[data-icon-btns-show-text] & {
-							--at-apply: 'px-0.75';
-						}
 					}
 
 					> button {
@@ -2092,15 +2051,7 @@ defineExpose({
 						}
 
 						&:nth-last-of-type(-n + 2) {
-							--at-apply: 'mx-2 h-[--control-btn-size] leading-5';
-
-							[data-icon-btns-show-text] & {
-								--at-apply: 'mx-auto w-26';
-							}
-						}
-
-						[data-icon-btns-show-text] & {
-							--at-apply: 'text-sm';
+							--at-apply: 'mx-2 h-[--manipulate-btn-size] leading-5';
 						}
 					}
 				}
@@ -2110,46 +2061,26 @@ defineExpose({
 						--at-apply: 'grid place-items-center self-center';
 
 						&:nth-of-type(-n + 3):not(:last-child) {
-							--at-apply: 'size-[--control-btn-size]';
+							--at-apply: 'size-[--manipulate-btn-size]';
 
 							> .icon {
 								--at-apply: 'size-5';
-							}
-
-							[data-icon-btns-show-text] & {
-								--at-apply: 'px-1.5';
-
-								> span {
-									--at-apply: 'whitespace-nowrap';
-								}
 							}
 						}
 
 						&:nth-of-type(1) {
 							--at-apply: 'justify-self-end -me-px';
 							grid-area: move-left;
-
-							[data-icon-btns-show-text] & {
-								--at-apply: '-me-[0.5px] w-full';
-							}
 						}
 
 						&:nth-of-type(2) {
 							--at-apply: 'z-1';
 							grid-area: remove;
-
-							[data-icon-btns-show-text] & {
-								--at-apply: 'mx-auto w-[--btn-w] -mt-px z-1';
-							}
 						}
 
 						&:nth-of-type(3) {
 							--at-apply: 'justify-self-start -ms-px z-1';
 							grid-area: move-right;
-
-							[data-icon-btns-show-text] & {
-								--at-apply: '-ms-[0.5px] w-full';
-							}
 						}
 
 						&:nth-of-type(4) {
@@ -2167,30 +2098,8 @@ defineExpose({
 				&:last-child > div {
 					> button {
 						&:nth-of-type(1) {
-							--at-apply: 'w-auto px-1 justify-self-center h-[--control-btn-size]';
+							--at-apply: 'w-auto px-1 justify-self-center h-[--manipulate-btn-size]';
 							grid-area: 1 / 1 / 2 / 4;
-
-							[data-icon-btns-show-text] & {
-								grid-area: 1 / 1 / 2 / 5;
-							}
-						}
-
-						[data-icon-btns-show-text] & {
-							--at-apply: 'w-[--btn-w] mx-auto';
-
-							&:nth-of-type(2) {
-								--at-apply: 'mx-auto -mt-px z-1 col-span-full h-[--control-btn-size]';
-							}
-
-							&:nth-of-type(3):not(:nth-last-of-type(2)) {
-								--at-apply: 'absolute inset-0 h-full grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
-								-webkit-text-stroke: black 0.15em;
-								paint-order: stroke fill;
-
-								&::before {
-									--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
-								}
-							}
 						}
 					}
 				}
@@ -2209,12 +2118,8 @@ defineExpose({
 					> td {
 						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2 ps-[--table-ps]';
 
-						[data-icon-btns-show-text] & {
-							--at-apply: 'grid-cols-[1fr_calc(16*var(--spacing))]';
-						}
-
 						> button {
-							--at-apply: 'size-(--section-row-btn-size) grid place-items-center';
+							--at-apply: 'size-(--manipulate-btn-size) grid place-items-center';
 
 							> .icon {
 								--at-apply: 'size-5';
@@ -2222,10 +2127,6 @@ defineExpose({
 
 							&[aria-expanded='true'] > span {
 								--at-apply: 'rotate-180';
-							}
-
-							[data-icon-btns-show-text] &[aria-expanded='true'] > span {
-								--at-apply: 'rotate-0';
 							}
 
 							&:nth-of-type(2),
@@ -2236,14 +2137,6 @@ defineExpose({
 							&:nth-of-type(3),
 							&:nth-of-type(4) {
 								--at-apply: '-ms-px z-2';
-							}
-
-							[data-icon-btns-show-text] & {
-								--at-apply: 'w-auto px-1.5 text-center';
-
-								> span {
-									--at-apply: 'whitespace-nowrap';
-								}
 							}
 						}
 					}
@@ -2274,7 +2167,7 @@ defineExpose({
 							position-anchor: --section-header-row;
 							inset-block-start: auto;
 							inset-block-end: calc(
-								anchor(end) + var(--section-header-row-pb) + 2 * var(--section-row-btn-size) - 0.5px
+								anchor(end) + var(--section-header-row-pb) + 2 * var(--manipulate-btn-size) - 0.5px
 							);
 							justify-self: anchor-center;
 
@@ -2354,7 +2247,7 @@ defineExpose({
 
 					> th {
 						--at-apply: 'hyphens-auto wrap-anywhere';
-						--ps: calc(2 * var(--control-btn-size));
+						--ps: calc(2 * var(--manipulate-btn-size));
 						anchor-scope: --parent;
 
 						&[colspan] {
@@ -2381,10 +2274,6 @@ defineExpose({
 
 								> span {
 									--at-apply: 'sr-only';
-								}
-
-								[data-icon-btns-show-text] & {
-									--at-apply: 'justify-items-end pe-6';
 								}
 							}
 						}

@@ -112,6 +112,8 @@
 		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
 		--unknown-alert-mt: calc(3 * var(--spacing));
 		--default-hover-tooltip-p: calc(2 * var(--spacing));
+		/* for scoreboard items and results table, the pretend buttons for moving and such */
+		--manipulate-btn-size: var(--fluid-32-28-t512);
 
 		--venmbr-input-py: calc(0.5 * var(--spacing));
 		--venmbr-input-px: calc(1 * var(--spacing));
@@ -157,22 +159,6 @@
 						--at-apply: 'text-white';
 					}
 				}
-			}
-		}
-	}
-
-	[data-icon-btns-show-text] {
-		.pretend-ui-btn {
-			> span:first-of-type {
-				--at-apply: 'not-sr-only';
-			}
-
-			> .icon {
-				--at-apply: 'hidden';
-			}
-
-			&:has(> .icon) {
-				--at-apply: 'text-sm';
 			}
 		}
 	}

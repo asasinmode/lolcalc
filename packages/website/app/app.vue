@@ -32,17 +32,6 @@ useSeoMeta({
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
 
-const iconButtonsShowText = useIconButtonsShowText();
-if (import.meta.client) {
-	watch(iconButtonsShowText, (value) => {
-		if (value) {
-			document.body.dataset.iconBtnsShowText = '';
-		} else {
-			document.body.removeAttribute('data-icon-btns-show-text');
-		}
-	}, { immediate: true });
-}
-
 _setupGlobalKeyModifiers();
 
 const cipheredEmail = [115, 117, 112, 111, 114, 116, 109, 111, 100, 101, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
@@ -224,10 +213,6 @@ function hideSharePopover() {
 		<label for="scoreboard-enable-unimplemented-ui">
 			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
 			enable unimplemented ui
-		</label>
-		<label for="TMP-toggle-button-style">
-			<input id="TMP-toggle-button-style" v-model="iconButtonsShowText" type="checkbox">
-			TMP icon buttons show text
 		</label>
 	</footer>
 	<ClientOnly>
