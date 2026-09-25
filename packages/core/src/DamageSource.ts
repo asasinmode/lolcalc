@@ -202,7 +202,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	) {
 		const hue = ((isResultsCopy ? hueIncrement : hueIncrement++) * 137.508) % 360;
 		this.isResultsCopy = isResultsCopy;
-		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
+		this.color = hueIncrement === 1 ? 'oklch(0.7677 0.1407 234.19)' : hueIncrement === 2 ? 'oklch(0.6489 0.237 26.97)' : `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
 		this.sourcesTargetsRef = sourcesTargetsRef;
 
