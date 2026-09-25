@@ -1623,12 +1623,12 @@ defineExpose({ el });
 		--header-gap-y: 0px;
 		--header-box-h: var(--select-champion-size);
 		--header-h: calc(var(--header-box-h) + 2 * var(--py) + var(--header-gap-y));
-		--select-runes-size: calc(8 * var(--spacing));
-		--select-items-effects-size: calc(8 * var(--spacing));
+		--select-runes-size: var(--fluid-38-32-t512);
+		--select-items-effects-size: var(--fluid-38-32-t512);
 		--select-level-size: calc(6 * var(--spacing));
 		--select-items-runes-gap: calc(2 * var(--spacing));
 		--item-size: calc(8 * var(--spacing));
-		--manipulate-btn-size: calc(6 * var(--spacing));
+		--manipulate-btn-size: var(--fluid-32-28-t512);
 		--transition-duration: 150ms;
 		--scoreboard-item-bg: linear-gradient(
 			var(--bg-direction, 90deg),
@@ -1663,7 +1663,6 @@ defineExpose({ el });
 			& {
 				--select-champion-size: var(--fluid-f375-56-64-t400);
 				--select-level-size: calc(6.5 * var(--spacing));
-				--manipulate-btn-size: calc(7 * var(--spacing));
 				--header-box-h: calc(2 * var(--item-size));
 				--header-gap-y: calc(1.5 * var(--spacing));
 				--select-runes-items-translate: calc(
@@ -1675,7 +1674,9 @@ defineExpose({ el });
 		@media (width < 375px) {
 			& {
 				--select-champion-size: calc(var(--select-runes-size) + 2px);
-				--select-runes-items-translate: calc(0.5 * (var(--item-size) + var(--select-items-runes-gap)));
+				--select-runes-items-translate: calc(
+					0.5 * (var(--item-size) + var(--select-items-runes-gap)) - 2 * var(--spacing)
+				);
 			}
 		}
 
@@ -1797,7 +1798,7 @@ defineExpose({ el });
 			}
 
 			.icon {
-				--at-apply: 'size-5';
+				--at-apply: 'size-5.5';
 			}
 		}
 
@@ -3060,6 +3061,10 @@ defineExpose({ el });
 					'manipulate select-items	select-runes	select-champion'
 					'expand			items					items					items';
 				grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr);
+
+				.select-champion {
+					--at-apply: 'flex-row-reverse';
+				}
 			}
 		}
 
