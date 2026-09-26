@@ -24,6 +24,12 @@ export function replaceStringtableVariables(
 			const subVariablePrefix = variableName.slice(0, subVariableStartIndex);
 			let subVariableName = variableName.slice(subVariableStartIndex + 1);
 			subVariableName = subVariableName.slice(0, subVariableName.indexOf('@'));
+			/* possibly should do it a different way, but for now it's sufficient
+			 * it's to strip something like `spell.karmaq:isempowered` to `isempowered` */
+			const colonIndex = subVariableName.indexOf(':');
+			if (~colonIndex) {
+				subVariableName = subVariableName.slice(colonIndex + 1);
+			}
 
 			const subVariableValue = dynamicVariables.values
 				? subVariableName in dynamicVariables.values

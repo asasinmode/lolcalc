@@ -22,6 +22,7 @@ import type IJayce from '@lolcalc/data/files/champion/Jayce.json';
 import type IJhin from '@lolcalc/data/files/champion/Jhin.json';
 import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
 import type IKalista from '@lolcalc/data/files/champion/Kalista.json';
+import type IKarma from '@lolcalc/data/files/champion/Karma.json';
 import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import type IKhazix from '@lolcalc/data/files/champion/Khazix.json';
@@ -1783,6 +1784,24 @@ export const CHAMPION_SPECIFICS = {
 				return {
 					GameModeInteger: {
 						value: 1,
+					},
+				};
+			},
+		}),
+	},
+	Karma: {
+		setupData(self) {
+			self.abilityLevels.value.r ||= 1;
+			return {} as never;
+		},
+		variables: defineChampionVariables<'Karma', typeof IKarma>()({
+			known: {
+				IsEmpowered: [0, 1],
+			},
+			calculate() {
+				return {
+					IsEmpowered: {
+						value: 0,
 					},
 				};
 			},
