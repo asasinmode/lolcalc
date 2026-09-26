@@ -510,6 +510,7 @@
 	"stringtable": {
 		"spell_listtype_damage": "Damage",
 		"spell_akshanq_miniondamagemod": "Minion Damage %",
+		"spell_akshanw_tooltip_1": "<spellPassive>Passive</spellPassive>: Enemy champions that kill Akshan's allies become <keywordMajor>Scoundrels</keywordMajor> for @VengeanceDuration@ seconds. Takedowns on a <keywordMajor>Scoundrel</keywordMajor> within @RecentlyDamagedWindow@ seconds of being damaged by Akshan grant him @GoldReward@ Gold, resurrects the slain allies, and removes all other <keywordMajor>Scoundrels</keywordMajor>.<br><br><spellActive>Active</spellActive>: Akshan becomes <keywordStealth>Camouflaged</keywordStealth> for @WallGracePeriod@ seconds or indefinitely while he is near a wall or in brush. While <keywordStealth>Camouflaged</keywordStealth> in this way, Akshan also gains <speed>@MSValue@ Move Speed</speed> and <scaleMana>@MissingManaRegen*100@% missing Mana regen</scaleMana> while moving towards <keywordMajor>Scoundrels</keywordMajor>.",
 		"reminder_camouflage": "<keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.",
 		"spell_listtype_movementspeed": "Move Speed",
 		"spell_akshanr_numberofbullets": "Maximum Bullets",

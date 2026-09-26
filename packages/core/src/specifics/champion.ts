@@ -1,7 +1,7 @@
 import type IAkali from '@lolcalc/data/files/champion/Akali.json';
+import type IAkshan from '@lolcalc/data/files/champion/Akshan.json';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type IAshe from '@lolcalc/data/files/champion/Ashe.json';
-import type IGangplank from '@lolcalc/data/files/champion/Gangplank.json';
 import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import type IBelveth from '@lolcalc/data/files/champion/Belveth.json';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
@@ -14,6 +14,7 @@ import type IElise from '@lolcalc/data/files/champion/Elise.json';
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
+import type IGangplank from '@lolcalc/data/files/champion/Gangplank.json';
 import type IGnar from '@lolcalc/data/files/champion/Gnar.json';
 import type IIrelia from '@lolcalc/data/files/champion/Irelia.json';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
@@ -137,6 +138,23 @@ export const CHAMPION_SPECIFICS = {
 					}
 				},
 			},
+		},
+	},
+	Akshan: {
+		w: {
+			variables: defineChampionVariables<'Akshan', typeof IAkshan, 'w'>()({
+				known: {
+					/* it's present in the ability variables but needs to be here to be used in extracting a stringtable variable */
+					GameModeInteger: [1],
+					f2: [],
+				},
+				calculate() {
+					return {
+						GameModeInteger: { value: 1 },
+						f2: { value: 0 },
+					};
+				},
+			}),
 		},
 	},
 	Ambessa: {
@@ -1286,6 +1304,7 @@ export const CHAMPION_SPECIFICS = {
 		q: {
 			variables: defineChampionVariables<'Gangplank', typeof IGangplank, 'q'>()({
 				known: {
+					/* it's present in the ability variables but needs to be here to be used in extracting a stringtable variable */
 					GameModeInteger: [1],
 					f1: [],
 					f3: [],
