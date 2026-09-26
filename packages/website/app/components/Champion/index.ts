@@ -202,7 +202,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Sylas', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},
 	Syndra: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Syndra', 'passive', 0), 'passiveStacks', 'Splinters collected', 0, CHAMPION_SPECIFICS.Sona.MAX_PASSIVE_STACKS),
+		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Syndra', 'passive', 0), 'passiveStacks', 'Splinters collected', 0, CHAMPION_SPECIFICS.Syndra.MAX_PASSIVE_STACKS),
 	},
 	Taliyah: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Taliyah', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (next to wall ooc)', false),

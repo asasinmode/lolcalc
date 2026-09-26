@@ -3589,6 +3589,25 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), maxStacks),
 			};
 		},
+		w: {
+			variables: defineChampionVariables<'Syndra', typeof ISyndra, 'w'>()({
+				known: {
+					f2: [],
+				},
+				calculate(self) {
+					return {
+						f2: championAbilityVariableValue('SlowDuration', { abilityKey: 'w', abilityVariant: self.champion.value!.abilities.w.variants[0]!, damageSource: self }),
+					};
+				},
+				meta: {
+					f2: {
+						displayedName: 'SlowDuration',
+						type: VariableType.affectedByTenacity,
+						roundReplaced: 2,
+					},
+				},
+			}),
+		},
 	},
 	Taliyah: {
 		setupData(self) {
