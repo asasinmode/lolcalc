@@ -387,6 +387,8 @@
 		}
 	},
 	"stringtable": {
+		"spell_gangplankr_name": "Cannon Barrage",
+		"spell_gangplankqwrapper_tooltip_1": "Gangplank fires a bullet dealing <physicalDamage>@ShotDamage@ physical damage</physicalDamage>. If this kills the target, Gangplank gains an additional @Effect2Amount@ Gold and @Effect5Amount@ Silver Serpents.<br><br>Gangplank can spend Silver Serpents in the shop to upgrade <spellName>Cannon Barrage</spellName>.",
 		"spell_gangplankpassive_name": "Trial by Fire",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_gangplankqplundergold": "Plunder Gold",

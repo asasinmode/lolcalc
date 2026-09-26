@@ -1,6 +1,7 @@
 import type IAkali from '@lolcalc/data/files/champion/Akali.json';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type IAshe from '@lolcalc/data/files/champion/Ashe.json';
+import type IGangplank from '@lolcalc/data/files/champion/Gangplank.json';
 import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import type IBelveth from '@lolcalc/data/files/champion/Belveth.json';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
@@ -1279,6 +1280,24 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				isPassiveActive: clamp(0, Math.round(self.internalData.value.isPassiveActive ?? 0), 1),
 			};
+		},
+	},
+	Gangplank: {
+		q: {
+			variables: defineChampionVariables<'Gangplank', typeof IGangplank, 'q'>()({
+				known: {
+					GameModeInteger: [1],
+					f1: [],
+					f3: [],
+				},
+				calculate() {
+					return {
+						GameModeInteger: { value: 1 },
+						f1: { value: 0 },
+						f3: { value: 0 },
+					};
+				},
+			}),
 		},
 	},
 	Gnar: {
