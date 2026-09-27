@@ -355,6 +355,11 @@ export function championAbilityVariableValue(
 		rv.meta = dynamicVariables.meta[variable];
 	}
 
+	if (variableName === 'AbilityResourceName') {
+		rv.value = damageSource?.champion.value?.partype ?? 'Mana';
+		return rv;
+	}
+
 	let resolveArrayValueToAbilityLevel = true;
 
 	if (dynamicVariables.values?.[variable] !== undefined) {

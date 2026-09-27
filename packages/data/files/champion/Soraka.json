@@ -57,13 +57,16 @@
 					],
 					"dataValues": {
 						"BaseDamage": [50, 85, 120, 155, 190, 225, 260],
-						"BaseHoT": [45, 60, 75, 90, 105, 120, 135],
 						"HotDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"MoveSpeedSlow": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"MoveSpeedHaste": [0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325],
 						"MoveSpeedDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
-						"HealAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
+						"HealAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"BaseHot": [45, 60, 75, 90, 105, 120, 135],
+						"__renamedVariables": {
+							"BaseHoT": "BaseHot"
+						}
 					},
 					"spellCalculations": {
 						"TotalDamage": {

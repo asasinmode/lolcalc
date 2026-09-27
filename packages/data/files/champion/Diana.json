@@ -225,7 +225,10 @@
 						"SlowPotency": [-0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9],
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
 						"SlowTooltip": [30, 40, 50, 60, 70, 80, 90],
-						"MultihitAmp": [10, 35, 60, 85, 110, 135, 160]
+						"MultiHitAmp": [10, 35, 60, 85, 110, 135, 160],
+						"__renamedVariables": {
+							"MultihitAmp": "MultiHitAmp"
+						}
 					},
 					"spellCalculations": {
 						"RExplosionDamage": {
