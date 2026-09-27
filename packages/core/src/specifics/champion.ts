@@ -3638,7 +3638,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 	},
-		Syndra: {
+	Syndra: {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Syndra'>): number => (self.champion.value! as typeof ISyndra).abilities.passive.variants[0]!.dataValues.MaxStackAmount[1]!,
 		setupData(self) {
 			const maxStacks: number = CHAMPION_SPECIFICS.Syndra.MAX_PASSIVE_STACKS(self);
