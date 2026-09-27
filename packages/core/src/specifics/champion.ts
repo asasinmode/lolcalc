@@ -44,6 +44,7 @@ import type IRengar from '@lolcalc/data/files/champion/Rengar.json';
 import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
 import type ISenna from '@lolcalc/data/files/champion/Senna.json';
 import type ISeraphine from '@lolcalc/data/files/champion/Seraphine.json';
+import type IShen from '@lolcalc/data/files/champion/Shen.json';
 import type IShyvana from '@lolcalc/data/files/champion/Shyvana.json';
 import type ISivir from '@lolcalc/data/files/champion/Sivir.json';
 import type ISona from '@lolcalc/data/files/champion/Sona.json';
@@ -3482,6 +3483,29 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveStacks: clamp(0, Math.round(self.internalData.value.passiveStacks ?? 0), maxStacks),
 			};
+		},
+	},
+	Shen: {
+		passive: {
+			variables: defineChampionVariables<'Shen', typeof IShen, 'passive'>()({
+				known: {
+					'{7dfdcd99}': [],
+				},
+				calculate() {
+					return {
+						/* originally a buff indicating shen has won his nemesis quest vs zed */
+						'{7dfdcd99}': {
+							value: 0,
+						},
+					};
+				},
+				meta: {
+					ShieldValue: {
+						type: VariableType.shield,
+					},
+				},
+				uninteresting: ['ShieldDuration', 'ShieldCooldown'],
+			}),
 		},
 	},
 	Shyvana: {
