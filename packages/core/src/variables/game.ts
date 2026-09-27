@@ -1576,6 +1576,21 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
+	GameCalculationConditional(variable: IGameVariablesByType['GameCalculationConditional'], whole, meta) {
+		const conditional = variableResolveFn(variable.mConditionalCalculationRequirements)?.(variable.mConditionalCalculationRequirements, whole, meta);
+
+		if (conditional?.value) {
+			meta.accessedVariables?.add(variable.mConditionalGameCalculation);
+			return meta.variableValueFn(variable.mConditionalGameCalculation, meta.variableValueParams);
+		} else {
+			meta.accessedVariables?.add(variable.mDefaultGameCalculation);
+			return meta.variableValueFn(variable.mDefaultGameCalculation, meta.variableValueParams);
+		}
+	},
+	HasBuffCastRequirement(variable: IGameVariablesByType['HasBuffCastRequirement'], _whole, meta) {
+		meta.accessedVariables?.add(variable.mBuffName);
+		return meta.variableValueFn(variable.mBuffName, meta.variableValueParams);
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 interface IVariableCalculationFnMeta {
@@ -1603,7 +1618,6 @@ interface IGameVariablesByType {
 			mAdditionalBonusAtThisLevel?: number;
 			mBonusPerLevelAtAndAfter?: number;
 		}[];
-		__type: string;
 	};
 	/** hashed `ByCharLevelBreakpointsCalculationPart` */
 	'{4ce08984}': {
@@ -1624,23 +1638,18 @@ interface IGameVariablesByType {
 	};
 	'NumberCalculationPart': {
 		mNumber: number;
-		__type: string;
 	};
 	'NamedDataValueCalculationPart': {
 		mDataValue: string;
-		__type: string;
 	};
 	'StatByCoefficientCalculationPart': IStatWithFormula & {
 		mCoefficient: number;
-		__type: string;
 	};
 	'StatByNamedDataValueCalculationPart': IStatWithFormula & {
 		mDataValue: string;
-		__type: string;
 	};
 	'AbilityResourceByCoefficientCalculationPart': IStatWithFormula & {
 		mCoefficient?: number;
-		__type: string;
 	};
 	'ByCharLevelInterpolationCalculationPart': {
 		mStartValue: number;
@@ -1653,42 +1662,34 @@ interface IGameVariablesByType {
 	'{ee18a47b}': {
 		'{0589a59c}': string;
 		'{0b65bc23}': string;
-		'__type': string;
 	};
 	'ByCharLevelFormulaCalculationPart': {
 		values: number[];
-		__type: string;
 	};
 	'StatBySubPartCalculationPart': {
 		mStat: number;
 		mSubpart: {
 			mNumber: number;
 		} | IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'];
-		__type: string;
 	};
 	'SumOfSubPartsCalculationPart': {
 		mSubparts: IGameVariablesByType[keyof IGameVariablesByType][];
-		__type: string;
 	};
 	'ProductOfSubPartsCalculationPart': {
 		mPart1: IGameVariablesByType[keyof IGameVariablesByType];
 		mPart2: IGameVariablesByType[keyof IGameVariablesByType];
-		__type: string;
 	};
 	'GameCalculationModified': {
 		mModifiedGameCalculation: string;
 		mMultiplier?: IMMultiplier;
-		__type: string;
 	};
 	'EffectValueCalculationPart': {
 		mEffectIndex: number;
-		__type: string;
 	};
 	/** base value + X per level, where the values point to `dataValues`. Irelia passive */
 	'{b22609db}': {
 		'{91d404a5}': string;
 		'{b2cd0eb0}': string;
-		'__type': string;
 	};
 	/** for stacks related thing, like Cho'Gath R but also Aphelios passive (qwe bonus stats) */
 	'BuffCounterByNamedDataValueCalculationPart': {
@@ -1705,6 +1706,14 @@ interface IGameVariablesByType {
 		mIconKey?: string;
 		/** seems to be custom styles applied to the calculates from part, like `font color='#0bf7de'` */
 		mScalingTagKey?: string;
+	};
+	'GameCalculationConditional': {
+		mDefaultGameCalculation: string;
+		mConditionalGameCalculation: string;
+		mConditionalCalculationRequirements: IGameVariablesByType['HasBuffCastRequirement'];
+	};
+	'HasBuffCastRequirement': {
+		mBuffName: string;
 	};
 }
 
