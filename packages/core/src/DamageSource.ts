@@ -1670,6 +1670,7 @@ export function computeAbilityDescription(
 			}
 		}
 		name ??= variable.name;
+		name = replaceGameVariables(name, 'championAbility', { abilityKey: gameAbilityId.abilityKey, abilityVariant: variant, allAbilitiesVariants: allVariants, damageSource, dynamicVariables }).replaced;
 
 		return {
 			name,
