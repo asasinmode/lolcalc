@@ -1607,6 +1607,10 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
+	'{f3cbe7b2}': function (variable: IGameVariablesByType['{f3cbe7b2}'], _whole, meta) {
+		meta.accessedVariables?.add(variable.mSpellCalculationKey);
+		return meta.variableValueFn(variable.mSpellCalculationKey, meta.variableValueParams);
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 interface IVariableCalculationFnMeta {
@@ -1735,6 +1739,10 @@ interface IGameVariablesByType {
 		mCeiling?: number;
 		mFloor?: number;
 		mSubparts: IGameVariablesByType['SumOfSubPartsCalculationPart']['mSubparts'];
+	};
+	/** seems to be just a reference to another variable */
+	'{f3cbe7b2}': {
+		mSpellCalculationKey: string;
 	};
 }
 
