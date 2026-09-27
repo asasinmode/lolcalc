@@ -349,6 +349,8 @@
 	"stringtable": {
 		"spell_syndraq_damage_0": "<magicDamage>@TotalDamage@ magic damage</magicDamage>",
 		"spell_listtype_damage": "Damage",
+		"spell_syndraw_damage0": "<magicDamage>@ThrowDamage@ magic damage</magicDamage>",
+		"spell_syndraw_damage1": "<magicDamage>@ThrowDamage@ magic damage</magicDamage> plus <trueDamage>@PassiveBonusDamage@ true damage</trueDamage>.",
 		"spell_syndrar_qhaste": "Dark Sphere Ability Haste"
 	}
 }
