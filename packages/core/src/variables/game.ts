@@ -376,34 +376,45 @@ export function championAbilityVariableValue(
 		for (const path in dotPath) {
 			rv.value = (rv.value as any)[path];
 		}
-	} else if (abilityVariant.spellCalculations?.[variableName]) {
-		const value = variableResolveFn(
-			abilityVariant.spellCalculations[variableName],
-		)?.(abilityVariant.spellCalculations[variableName], abilityVariant, {
-			variableValueFn: championAbilityVariableValue,
-			variableValueParams: params,
-			accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
-		});
-
-		if (value) {
-			for (const key in value) {
-				if (key === 'calculatesFrom') {
-					addCalculatesFrom(rv.calculatesFrom, value.calculatesFrom!);
-				} else if (key !== 'meta') {
-					(rv as any)[key] = value[key as keyof typeof value];
+	} else if (abilityVariant.spellCalculations) {
+		let target = abilityVariant.spellCalculations[variableName];
+		if (!target) {
+			const keys = Object.keys(abilityVariant.spellCalculations);
+			for (const key of keys) {
+				if (key.toLowerCase() === variableName.toLowerCase()) {
+					target = abilityVariant.spellCalculations[key];
+					break;
 				}
 			}
+		}
 
-			if (abilityVariant.spellCalculations[variableName].mPrecision > 0) {
-				rv.roundReplaced = abilityVariant.spellCalculations[variableName].mPrecision;
-			} else if (abilityVariant.spellCalculations[variableName].mPrecision === -1) {
-				if (rv.roundReplaced === true) {
-					rv.roundReplaced = 2;
-				} else {
-					rv.roundReplaced ??= 2;
+		if (target) {
+			const value = variableResolveFn(target)?.(target, abilityVariant, {
+				variableValueFn: championAbilityVariableValue,
+				variableValueParams: params,
+				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
+			});
+
+			if (value) {
+				for (const key in value) {
+					if (key === 'calculatesFrom') {
+						addCalculatesFrom(rv.calculatesFrom, value.calculatesFrom!);
+					} else if (key !== 'meta') {
+						(rv as any)[key] = value[key as keyof typeof value];
+					}
 				}
-			} else {
-				rv.roundReplaced ??= true;
+
+				if (target.mPrecision > 0) {
+					rv.roundReplaced = target.mPrecision;
+				} else if (target.mPrecision === -1) {
+					if (rv.roundReplaced === true) {
+						rv.roundReplaced = 2;
+					} else {
+						rv.roundReplaced ??= 2;
+					}
+				} else {
+					rv.roundReplaced ??= true;
+				}
 			}
 		}
 	}
