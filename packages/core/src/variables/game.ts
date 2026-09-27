@@ -1591,6 +1591,22 @@ export const VARIABLE_CALCULATION_FNS = {
 		meta.accessedVariables?.add(variable.mBuffName);
 		return meta.variableValueFn(variable.mBuffName, meta.variableValueParams);
 	},
+	ClampSubPartsCalculationPart(variable: IGameVariablesByType['ClampSubPartsCalculationPart'], whole, meta) {
+		const { mCeiling, mFloor } = variable;
+
+		const rv = VARIABLE_CALCULATION_FNS.SumOfSubPartsCalculationPart(variable, whole, meta) as IVariableValueResult | undefined;
+
+		if (typeof rv?.value === 'number') {
+			if (mCeiling !== undefined) {
+				rv.value = Math.min(mCeiling, rv.value);
+			}
+			if (mFloor !== undefined) {
+				rv.value = Math.max(mFloor, rv.value);
+			}
+		}
+
+		return rv;
+	},
 } satisfies IHypotheticalVariableCalculationFns;
 
 interface IVariableCalculationFnMeta {
@@ -1714,6 +1730,11 @@ interface IGameVariablesByType {
 	};
 	'HasBuffCastRequirement': {
 		mBuffName: string;
+	};
+	'ClampSubPartsCalculationPart': {
+		mCeiling?: number;
+		mFloor?: number;
+		mSubparts: IGameVariablesByType['SumOfSubPartsCalculationPart']['mSubparts'];
 	};
 }
 
