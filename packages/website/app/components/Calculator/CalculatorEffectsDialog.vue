@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { EffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription, computeEffectDescription, DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';

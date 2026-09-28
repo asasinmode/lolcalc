@@ -1951,6 +1951,17 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		source: effect.source,
 	};
 
+	if (specific.damageSourceOverrides) {
+		rv.source.value = rv.source.value?.clone(specific.damageSourceOverrides, true) ?? new DamageSource(specific.damageSourceOverrides, true, true);
+		if (effect.champion.value) {
+			if ('then' in effect.champion.value) {
+				effect.champion.value.then(value => rv.source.value && (rv.source.value.champion.value = value));
+			} else {
+				rv.source.value.champion.value = effect.champion.value;
+			}
+		}
+	}
+
 	const maxValue = typeof specific.maxValue === 'function' ? specific.maxValue() : specific.maxValue;
 
 	if (typeof maxValue === 'number') {
