@@ -354,6 +354,8 @@ export interface IEffectOntoTargetVars {
 	nasusWCripple?: number;
 	/** ms slow % from Ashe passive */
 	ashePSlow?: number;
+	/** ms slow % from Aphelios gravitum */
+	apheliosGravitumSlow?: number;
 	/** percent of armor/mr stolen by Rell passive */
 	rellPResistsStealPercent?: number;
 	/** armor stolen from rell passive effect */
@@ -363,7 +365,7 @@ export interface IEffectOntoTargetVars {
 }
 
 /** all of the variables from currently applied effects */
-export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent'> {
+export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent' | 'apheliosGravitumSlow'> {
 	lolcalcPercentSlow?: number;
 	botrkSlow?: number;
 	rylaiSlow?: number;
@@ -780,6 +782,7 @@ export const EffectObjectName = {
 	seryldaBitterCold: 'lolcalc6694BitterCold',
 	gunbladeLightningBolt: 'lolcalc3146LightningBolt',
 	/* champion passives */
+	apheliosGravitumSlow: 'ApheliosGravitumDebuff',
 	ashePFrostShot: 'AshePassiveSlow',
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

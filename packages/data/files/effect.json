@@ -13,17 +13,7 @@
 				"Duration": [10, 10, 10, 10, 10, 10, 10]
 			},
 			"spellCalculations": {
-				"{7bcbbf47}": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 4,
-							"mEndValue": 7,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					],
-					"mPrecision": 1
-				},
-				"MovespeedMod": {
+				"MoveSpeedMod": {
 					"mFormulaParts": [
 						{
 							"mStartValue": 0.24,
@@ -33,8 +23,15 @@
 					],
 					"mDisplayAsPercent": true
 				},
-				"__renamedVariables": {
-					"MoveSpeedMod": "MovespeedMod"
+				"{7bcbbf47}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 4,
+							"mEndValue": 7,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mPrecision": 1
 				}
 			},
 			"cooldownTime": [240, 240, 240, 240, 240, 240, 240],
@@ -234,6 +231,12 @@
 		"Tailwind": {
 			"description": "Moving faster toward Janna.",
 			"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/Tailwind"
+		},
+		"ApheliosGravitumDebuff": {
+			"dataKey": "ApheliosGravitumDebuff",
+			"championSpellObjectKey": "{0b58a71c}",
+			"objectName": "ApheliosGravitumDebuff",
+			"description": "Aphelios has slowed this unit with Gravitum and can root them."
 		},
 		"AshePassiveSlow": {
 			"dataKey": "AshePassiveSlow",

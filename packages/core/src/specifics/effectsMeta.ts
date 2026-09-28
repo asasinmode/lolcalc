@@ -146,6 +146,10 @@ export const EFFECTS_META: Record<EffectObjectName, {
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Janna', 'passive', 0),
 		label: 'Tailwind',
 	},
+	[EffectObjectName.apheliosGravitumSlow]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Aphelios', 'q', 2),
+		label: 'Gravitum',
+	},
 	[EffectObjectName.ashePFrostShot]: {
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0),
 		label: 'Frost Shot',

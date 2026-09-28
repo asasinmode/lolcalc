@@ -4,7 +4,7 @@ import type { IStatsCalculationEffectVars } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IVariableModifyMeta } from '../variables/game.ts';
+import type { IGameVariableValueParameters, IVariableModifyMeta } from '../variables/game.ts';
 import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 
 import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
@@ -829,6 +829,43 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
+	[EffectObjectName.apheliosGravitumSlow]: defineEffectSpecific<[gravitumed: number]>({
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 100)];
+		},
+		maxValue: 100,
+		imgText(_data, self) {
+			return Math.round(self.stats.value.effectVars.apheliosGravitumSlow ?? 0);
+		},
+		setupDataFromInternalData(damageSource) {
+			const { wProgress } = damageSource.internalData.value as IInternalDataOf<'Nasus'>;
+			if (wProgress) {
+				return [wProgress];
+			}
+		},
+		deriveProgressValue: (_value, self) => {
+			return self?.stats.value.effectVars.apheliosGravitumSlow ?? 0;
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { effectVars, debuffs }) {
+					const effect = self.getEffect(EffectObjectName.apheliosGravitumSlow)?.[0];
+					if (effect?.champion.value?.id === 'Aphelios' && effect.data.value[0]) {
+						const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: (effect.champion.value as IChampion).abilities.q.variants[CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX.gravitum]! };
+						const slow = championAbilityVariableValue('SlowAmountInitial', qParams);
+						const minSlow = championAbilityVariableValue('{dec81e53}', qParams);
+						if (typeof slow.value === 'number' && typeof minSlow.value === 'number') {
+							const value = minSlow.value * 100 + (slow.value - minSlow.value) * (effect.data.value[0] === 1 ? 0 : effect.data.value[0]);
+							effectVars.apheliosGravitumSlow = value;
+							debuffs.percentageMSSlow.push(value / 100);
+						} else {
+							console.warn(`[EFFECT_SPECIFICS ${EffectObjectName.apheliosGravitumSlow}] failed to calculate gravitum slow`, slow, minSlow);
+						}
+					}
+				},
+			},
+		},
+	}),
 	[EffectObjectName.ashePFrostShot]: defineEffectSpecific<[frostShot: number]>({
 		enumOptions: {
 			'none': 0,
@@ -1285,6 +1322,9 @@ export const CUSTOM_EFFECTS: Partial<Record<EffectObjectName, Omit<IEffectData[E
 	/* champion passives */
 	[EffectObjectName.ashePFrostShot]: {
 		championSpellObjectKey: 'Characters/Ashe/Spells/AshePassiveAbility/AshePassiveSlow',
+	},
+	[EffectObjectName.apheliosGravitumSlow]: {
+		championSpellObjectKey: '{0b58a71c}',
 	},
 	[EffectObjectName.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EffectObjectName.ornnPLivingForge]: {
