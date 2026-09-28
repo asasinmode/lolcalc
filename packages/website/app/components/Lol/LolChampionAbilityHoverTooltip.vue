@@ -7,9 +7,7 @@ import { CHAMPION_IMAGES, PATCH_VERSION, useChampion } from '@lolcalc/data';
 
 const props = withDefaults(
 	defineProps<IChampionAbilityHoverTooltipProps>(),
-	{
-		group: 'sources',
-	},
+	{ group: 'sources' },
 );
 
 const { vMinor } = PATCH_VERSION;
@@ -34,7 +32,7 @@ watch(() => props.gameAbilityId, async (abilityId) => {
 }, { immediate: true });
 
 const computedDescription = computed<IComputedAbilityDescription | undefined>(() =>
-	props.precomputedDescription || (champion.value && props.gameAbilityId
+	props.precomputedDescription ?? (champion.value && props.gameAbilityId
 		? computeAbilityDescription(
 				champion.value!,
 				props.gameAbilityId,
@@ -55,27 +53,29 @@ const anyExtendedInfo = computed(() => computedDescription.value?.tooltipExtende
 	|| computedDescription.value?.extendedVariables?.length
 	|| computedDescription.value?.anyExtendedVariableInfo);
 
+const computedIsLoading = computed(() => isLoading.value || !computedDescription.value);
+
 defineExpose({ el });
 </script>
 
 <template>
 	<article ref="el" popover="manual" class="hover-tooltip champion-ability" :class="{ disabled: computedDescription?.isDisabled }">
 		<img
-			v-show="!isLoading"
-			:src="!isLoading && computedDescription ? abilityImage(computedDescription.variant.image, computedDescription.gameAbilityId.id, group) : undefined"
+			v-show="!computedIsLoading"
+			:src="!computedIsLoading && computedDescription ? abilityImage(computedDescription.variant.image, computedDescription.gameAbilityId.id, group) : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
 		>
 		<h5
 			class="game-description"
-			v-html="isLoading
+			v-html="computedIsLoading
 				? 'loading...'
 				: `${
-					!computedDescription || abilityKey === 'passive' || (computedDescription.gameAbilityId.id === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey?.toUpperCase()}] `
+					abilityKey === 'passive' || (computedDescription!.gameAbilityId.id === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey?.toUpperCase()}] `
 				} ${computedDescription?.name}`"
 		/>
-		<span v-show="!isLoading" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">
+		<span v-show="!computedIsLoading" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">
 			<template v-if="abilityKey !== 'passive'">
 				{{ computedDescription?.cooldown ? `${computedDescription.cooldown}s` : 'unknown' }}
 				<img
@@ -86,10 +86,10 @@ defineExpose({ el });
 				>
 			</template>
 		</span>
-		<span v-show="!isLoading">
+		<span v-show="!computedIsLoading">
 			{{ abilityKey === 'passive' ? '' : computedDescription?.cost ? `${computedDescription.cost} ${computedDescription.partype}` : 'No Cost' }}
 		</span>
-		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && computedDescription?.tooltipExtended || computedDescription?.tooltip" />
+		<div v-show="!computedIsLoading" class="game-description" v-html="globalKeyModifiers.shift && computedDescription?.tooltipExtended || computedDescription?.tooltip" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
 		<footer
 			v-if="(computedDescription?.tooltipExtended && computedDescription.tooltipExtended !== computedDescription.tooltip)

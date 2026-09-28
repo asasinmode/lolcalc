@@ -113,25 +113,23 @@ defineExpose({ el });
 				Hold <kbd>[Shift]</kbd> to show source ability
 			</footer>
 		</article>
-		<template v-if="sourceAbilityDescription">
-			<LolChampionAbilityHoverTooltip
-				v-if="sourceAbilityId?.type === AbilityType.champion || computedDescription?.championAbilityLikePrecomputedDescription"
-				v-show="globalKeyModifiers.shift"
-				:precomputed-description="sourceAbilityDescription as IComputedAbilityDescription"
+		<LolChampionAbilityHoverTooltip
+			v-if="sourceAbilityId?.type === AbilityType.champion || computedDescription?.championAbilityLikePrecomputedDescription"
+			v-show="globalKeyModifiers.shift"
+			:precomputed-description="sourceAbilityDescription as IComputedAbilityDescription"
+		/>
+		<LolDragonHoverTooltip
+			v-else-if="sourceAbilityId?.type === AbilityType.dragon"
+			v-show="globalKeyModifiers.shift"
+			:precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription"
+		/>
+		<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
+			<LolItemDescription
+				:precomputed-description="sourceAbilityDescription as IComputedItemDescription"
+				source="Inventory"
+				hover-tooltip
 			/>
-			<LolDragonHoverTooltip
-				v-else-if="sourceAbilityId?.type === AbilityType.dragon"
-				v-show="globalKeyModifiers.shift"
-				:precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription"
-			/>
-			<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
-				<LolItemDescription
-					:precomputed-description="sourceAbilityDescription as IComputedItemDescription"
-					source="Inventory"
-					hover-tooltip
-				/>
-			</article>
-		</template>
+		</article>
 	</div>
 </template>
 
