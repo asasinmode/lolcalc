@@ -62,7 +62,7 @@ import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
 import type { IChampion, IChampionAbilityVariant, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types.js';
-import type { ComputedRef } from 'vue';
+import type { ComputedRef, UnwrapRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { DetectChampionVariables } from '../types';
 import type { IGameVariableValueParameters } from '../variables/game.ts';
@@ -231,6 +231,7 @@ export const CHAMPION_SPECIFICS = {
 
 			return {
 				lastRotatedVariantIndex,
+				gravitumSlowProgress: clamp(0, Math.round(self.internalData.value.gravitumSlowProgress ?? 0), 100),
 				_watchHandles: [watch(self.level, () => {
 					self.abilityLevels.value.r = Math.floor((self.level.value - 1) / 5);
 				}, { immediate: true })],
@@ -317,6 +318,24 @@ export const CHAMPION_SPECIFICS = {
 					};
 				},
 			}),
+			derivedGravitumSlow: ((progress, self): number => {
+				return self?.effectsOntoTargetVars.value.apheliosGravitumSlow ?? CHAMPION_SPECIFICS.Aphelios.q.calculateGravitumSlow(self.champion.value!, progress);
+			}) satisfies IDeriveProgressFn,
+			calculateGravitumSlow: (champion: IChampion, progress: number) => {
+				const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: champion.abilities.q.variants[CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX.gravitum]! };
+				const slow = championAbilityVariableValue('SlowAmountInitial', qParams);
+				const minSlow = championAbilityVariableValue('{dec81e53}', qParams);
+				if (typeof slow.value === 'number' && typeof minSlow.value === 'number') {
+					return progress === 1
+						? minSlow.value * 100
+						: minSlow.value * 100 + (slow.value - minSlow.value) * progress;
+				}
+
+				console.warn('[CHAMPION_SPECIFICS aphelios] failed to calculate gravitum slow vars', slow, minSlow);
+				return Number.NaN;
+			},
+			gravitumSlowApplicable: (variantIndexes: UnwrapRef<DamageSource['abilityVariantsIndexes']>): boolean =>
+				variantIndexes.q === CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX.gravitum || variantIndexes.w === CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX.gravitum,
 		},
 		e: {
 			variables: defineChampionVariables<'Aphelios', typeof IAphelios, 'e'>()({
@@ -415,6 +434,11 @@ export const CHAMPION_SPECIFICS = {
 					}
 				},
 			},
+		},
+		effectOntoTargetVars(self, vars) {
+			if (CHAMPION_SPECIFICS.Aphelios.q.gravitumSlowApplicable(self.abilityVariantsIndexes.value)) {
+				vars.apheliosGravitumSlow = CHAMPION_SPECIFICS.Aphelios.q.calculateGravitumSlow(self.champion.value!, self.internalData.value.gravitumSlowProgress);
+			}
 		},
 	},
 	Ashe: {
@@ -4669,7 +4693,7 @@ export interface IChampionInternalDataMap {
 	Ambessa: { hasPassiveStack: number };
 	Amumu: { applyPassive: number };
 	Anivia: { isEgg: number };
-	Aphelios: { lastRotatedVariantIndex: number };
+	Aphelios: { lastRotatedVariantIndex: number; gravitumSlowProgress: number };
 	AurelionSol: { passiveStacks: number };
 	Ashe: { frostShot: number };
 	Bard: { passiveStacks: number; chimeMoveSpeed: number };

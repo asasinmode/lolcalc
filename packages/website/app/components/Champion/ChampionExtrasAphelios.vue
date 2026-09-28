@@ -2,6 +2,7 @@
 import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
 
@@ -18,6 +19,11 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 	// eslint-disable-next-line vue/no-mutating-props
 	props.damageSource.abilityLevels.value[ability] = 0;
 }
+
+const { gravitum: gravitumVariantIndex } = CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX;
+const showGravitumComponent = computed(() => props.damageSource.abilityVariantsIndexes.value.q === gravitumVariantIndex || props.damageSource.abilityVariantsIndexes.value.w === gravitumVariantIndex);
+
+const GravitumSlowComponent = await progressExtra(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'q', gravitumVariantIndex), 'gravitumSlowProgress', 'apply Gravitum slow on target', CHAMPION_SPECIFICS.Aphelios.q.derivedGravitumSlow);
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
@@ -49,6 +55,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 			</template>
 		</VButtonRadiogroup>
 	</article>
+	<GravitumSlowComponent v-show="showGravitumComponent" v-bind="$props" />
 </template>
 
 <style>

@@ -4,7 +4,7 @@ import type { IStatsCalculationEffectVars } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
-import type { IGameVariableValueParameters, IVariableModifyMeta } from '../variables/game.ts';
+import type { IVariableModifyMeta } from '../variables/game.ts';
 import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 
 import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
@@ -838,9 +838,9 @@ export const EFFECT_SPECIFICS = {
 			return Math.round(self.stats.value.effectVars.apheliosGravitumSlow ?? 0);
 		},
 		setupDataFromInternalData(damageSource) {
-			const { wProgress } = damageSource.internalData.value as IInternalDataOf<'Nasus'>;
-			if (wProgress) {
-				return [wProgress];
+			const { gravitumSlowProgress } = damageSource.internalData.value as IInternalDataOf<'Aphelios'>;
+			if (CHAMPION_SPECIFICS.Aphelios.q.gravitumSlowApplicable(damageSource.abilityVariantsIndexes.value) && gravitumSlowProgress) {
+				return [gravitumSlowProgress];
 			}
 		},
 		deriveProgressValue: (_value, self) => {
@@ -851,16 +851,8 @@ export const EFFECT_SPECIFICS = {
 				handler(self, _stats, { effectVars, debuffs }) {
 					const effect = self.getEffect(EffectObjectName.apheliosGravitumSlow)?.[0];
 					if (effect?.champion.value?.id === 'Aphelios' && effect.data.value[0]) {
-						const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: (effect.champion.value as IChampion).abilities.q.variants[CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX.gravitum]! };
-						const slow = championAbilityVariableValue('SlowAmountInitial', qParams);
-						const minSlow = championAbilityVariableValue('{dec81e53}', qParams);
-						if (typeof slow.value === 'number' && typeof minSlow.value === 'number') {
-							const value = minSlow.value * 100 + (slow.value - minSlow.value) * (effect.data.value[0] === 1 ? 0 : effect.data.value[0]);
-							effectVars.apheliosGravitumSlow = value;
-							debuffs.percentageMSSlow.push(value / 100);
-						} else {
-							console.warn(`[EFFECT_SPECIFICS ${EffectObjectName.apheliosGravitumSlow}] failed to calculate gravitum slow`, slow, minSlow);
-						}
+						effectVars.apheliosGravitumSlow = CHAMPION_SPECIFICS.Aphelios.q.calculateGravitumSlow(effect.champion.value as IChampion, effect.data.value[0]);
+						debuffs.percentageMSSlow.push(effectVars.apheliosGravitumSlow / 100);
 					}
 				},
 			},
