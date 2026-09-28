@@ -188,6 +188,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	/** for stringifying effect's source inside of the app */
 	sourcesTargetsRef?: [sources: ComputedRef<string[]>, targets: ComputedRef<string[]>];
 
+	/** for now set when a damage source is duplicated and has to have some parts overriden, like Aphelios gravitum slow component (check his extras) */
+	abilityDynamicVariablesOverride?: Partial<Record<IChampionAbilityKey, NonNullable<IDynamicVariables['values']>>>;
+
 	constructor(
 		overrides: (Omit<IOverrides<Id>, 'champion'> & {
 			champion?: { id: Id } & IListedChampion;
@@ -1176,7 +1179,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 									const specificDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.[variantIndex]?.variables);
 
 									return {
-										values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values, specificDynamicVariables?.values),
+										values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values, specificDynamicVariables?.values, this.abilityDynamicVariablesOverride?.[abilityKey]),
 										meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.meta, specificDynamicVariables?.meta),
 									};
 								})

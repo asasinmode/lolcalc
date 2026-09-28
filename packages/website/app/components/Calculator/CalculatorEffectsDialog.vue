@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IEffectObjectName, TAbilityType } from '@lolcalc/shared';
+import type { EffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription, computeEffectDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
@@ -29,7 +29,7 @@ interface IEffectOptionGroup {
 	}[];
 }
 
-const effectSearchStrings = new Map<IEffectObjectName, string>();
+const effectSearchStrings = new Map<EffectObjectName, string>();
 
 function createSearchString(value?: string) {
 	return (value ?? '').toLocaleLowerCase().replaceAll(/[^a-z;]/g, '');
@@ -144,7 +144,7 @@ const UnknownComponent = defineComponent((props, _ctx) => {
 }, { props: ['abilityId'] });
 
 const effectComponents = computed(() => {
-	const rv = new Map<IEffectObjectName, Component | Component[]>();
+	const rv = new Map<EffectObjectName, Component | Component[]>();
 
 	for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 		const component = effectSpecific.sourceAbility.type === AbilityType.item
@@ -301,6 +301,7 @@ defineExpose({
 						:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
 						:ability-id="effect.abilityId"
 						:damage-source
+						:data-ability-id="effect.abilityId.id"
 						id-suffix="effects-dialog-applied"
 						@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true, effect)"
 					>
@@ -333,6 +334,7 @@ defineExpose({
 							:ability-id="effect.abilityId"
 							:damage-source
 							id-suffix="effects-dialog-all"
+							:data-ability-id="effect.abilityId.id"
 							@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId, false)"
 						/>
 						<template #fallback>
@@ -429,6 +431,12 @@ defineExpose({
 
 			> li {
 				--at-apply: 'w-full';
+
+				> [data-ability-id='ApheliosGravitumDebuff'] {
+					> img {
+						--at-apply: 'rounded-full';
+					}
+				}
 			}
 		}
 

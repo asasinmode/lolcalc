@@ -782,7 +782,7 @@ export const EffectObjectName = {
 	seryldaBitterCold: 'lolcalc6694BitterCold',
 	gunbladeLightningBolt: 'lolcalc3146LightningBolt',
 	/* champion passives */
-	apheliosGravitumSlow: 'ApheliosGravitumDebuff',
+	apheliosGravitumSlow: 'ApheliosGravitumDebuff', /* effects dialog targets its element to round the img borders based on this value, update if it changes */
 	ashePFrostShot: 'AshePassiveSlow',
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',

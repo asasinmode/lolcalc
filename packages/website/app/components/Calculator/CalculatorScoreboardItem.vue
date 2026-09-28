@@ -753,9 +753,9 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 
 type ITooltipSource = '' | 'extras' | 'effects';
 
-function showGameAbilityTooltip(source: ITooltipSource, ...[event, abilityId]: IShowTooltipEventArgs) {
+function showGameAbilityTooltip(source: ITooltipSource, ...[event, abilityId, damageSource]: IShowTooltipEventArgs) {
 	if (abilityId.type === 'champion') {
-		showAbilityTooltip(event, abilityId.abilityKey, abilityId.abilityVariantIndex, source === 'extras');
+		showAbilityTooltip(event, abilityId.abilityKey, abilityId.abilityVariantIndex, source === 'extras', damageSource);
 	} else {
 		console.warn('[showGameAbilityTooltip] did not expect it to be used for item?');
 	}
@@ -763,6 +763,7 @@ function showGameAbilityTooltip(source: ITooltipSource, ...[event, abilityId]: I
 
 const hoveredAbilityKey = ref<IChampionAbilityKey>();
 const hoveredAbilityVariantIndex = ref<number>();
+const hoveredAbilityDamageSource = shallowRef<DamageSource>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 
 function showAbilityTooltip(
@@ -770,8 +771,10 @@ function showAbilityTooltip(
 	key: IChampionAbilityKey,
 	variantIndex?: number,
 	fromExtras = false,
+	damageSource?: DamageSource,
 ) {
 	hoveredAbilityKey.value = key;
+	hoveredAbilityDamageSource.value = damageSource;
 	hoveredAbilityVariantIndex.value = variantIndex ?? props.value.abilityVariantsIndexes.value[key];
 	event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
 
@@ -1420,7 +1423,7 @@ defineExpose({ el });
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
 					:group
-					:precomputed-description="hoveredAbilityKey && value.computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
+					:precomputed-description="hoveredAbilityKey && (hoveredAbilityDamageSource ?? value).computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
 			<section ref="healthAbilityResource" class="health-ability-resource">

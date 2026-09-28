@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
@@ -23,7 +24,18 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 const { gravitum: gravitumVariantIndex } = CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX;
 const showGravitumComponent = computed(() => props.damageSource.abilityVariantsIndexes.value.q === gravitumVariantIndex || props.damageSource.abilityVariantsIndexes.value.w === gravitumVariantIndex);
 
-const GravitumSlowComponent = await progressExtra(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'q', gravitumVariantIndex), 'gravitumSlowProgress', 'apply Gravitum slow on target', CHAMPION_SPECIFICS.Aphelios.q.derivedGravitumSlow);
+const GravitumSlowComponent = await progressExtra(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'e', gravitumVariantIndex), 'gravitumSlowProgress', 'apply Gravitum slow on target', CHAMPION_SPECIFICS.Aphelios.q.derivedGravitumSlow);
+
+const gravitumDamageSource = shallowRef<DamageSource>(props.damageSource);
+
+watch(props.damageSource.getWatchable(), () => {
+	gravitumDamageSource.value = props.damageSource.clone({
+		abilityVariants: {
+			q: gravitumVariantIndex,
+		},
+	}, true);
+	gravitumDamageSource.value.champion.value = props.damageSource.champion.value;
+}, { immediate: true });
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
@@ -55,34 +67,43 @@ const GravitumSlowComponent = await progressExtra(GameAbilityId.build(AbilityTyp
 			</template>
 		</VButtonRadiogroup>
 	</article>
-	<GravitumSlowComponent v-show="showGravitumComponent" v-bind="$props" />
+	<GravitumSlowComponent v-show="showGravitumComponent" v-bind="$props" :override-damage-source="gravitumDamageSource" class="extras-aphelios-gravitum-slow" />
+	{{ gravitumDamageSource.abilityDynamicVariablesOverride }}
 </template>
 
 <style>
 @layer overrides {
-	[data-scoreboard-item='Aphelios'] .extras-aphelios-ability-levels {
-		--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-[1fr_auto_1fr] gap-y-0.75';
+	[data-scoreboard-item='Aphelios'] {
+		.extras-aphelios-ability-levels {
+			--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-[1fr_auto_1fr] gap-y-0.75';
 
-		> img {
-			--at-apply: 'b-2 b-[--aphelios-ui-clr] rounded-1/2';
-		}
-
-		> h5 {
-			--at-apply: 'sr-only';
-		}
-
-		> [role='radiogroup'] {
-			--at-apply: 'grid grid-flow-col grid-cols-[2rem] grid-rows-1 justify-start items-center h-min';
-
-			&::before {
-				--at-apply: 'block uppercase leading-none';
-				content: '"' attr(data-ability-key) '": ';
-				paint-order: stroke fill;
-				-webkit-text-stroke: black 0.15em;
+			> img {
+				--at-apply: 'b-2 b-[--aphelios-ui-clr] rounded-1/2';
 			}
 
-			&:nth-of-type(1) {
-				--at-apply: 'self-end';
+			> h5 {
+				--at-apply: 'sr-only';
+			}
+
+			> [role='radiogroup'] {
+				--at-apply: 'grid grid-flow-col grid-cols-[2rem] grid-rows-1 justify-start items-center h-min';
+
+				&::before {
+					--at-apply: 'block uppercase leading-none';
+					content: '"' attr(data-ability-key) '": ';
+					paint-order: stroke fill;
+					-webkit-text-stroke: black 0.15em;
+				}
+
+				&:nth-of-type(1) {
+					--at-apply: 'self-end';
+				}
+			}
+		}
+
+		.extras-aphelios-gravitum-slow {
+			> img {
+				--at-apply: 'rounded-full';
 			}
 		}
 	}

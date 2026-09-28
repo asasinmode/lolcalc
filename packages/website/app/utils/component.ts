@@ -164,6 +164,12 @@ export async function progressExtra<T extends IGameAbilityId>(
 			return getDerivedValue(progress, props.damageSource);
 		}
 
+		function onImgMouseenter(event: MouseEvent) {
+			ctx.emit('imgMouseenter', event, abilityId, props.overrideDamageSource);
+		}
+
+		const isInactive = computed(() => !isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined);
+
 		return () => h(CalculatorExtraProgress, {
 			'modelValue': modelValue.value,
 			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -172,11 +178,9 @@ export async function progressExtra<T extends IGameAbilityId>(
 			max,
 			deriveValue,
 			derivedSymbolSuffix,
-			onImgMouseenter(event) {
-				ctx.emit('imgMouseenter', event, abilityId);
-			},
+			onImgMouseenter,
 			'onUpdate:modelValue': updateValue,
-			'data-inactive': !isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined,
+			'data-inactive': isInactive.value,
 		}, effectControlsProps
 			? { default: () => [
 					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect, effectControlSnapshot.value),
@@ -189,7 +193,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 						selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 					];
 				} });
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
 }
 
 export async function booleanExtra<T extends IGameAbilityId>(

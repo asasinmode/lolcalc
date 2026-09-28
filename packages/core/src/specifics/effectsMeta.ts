@@ -147,7 +147,8 @@ export const EFFECTS_META: Record<EffectObjectName, {
 		label: 'Tailwind',
 	},
 	[EffectObjectName.apheliosGravitumSlow]: {
-		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Aphelios', 'q', 2),
+		/* 2 is the gravitum variant index */
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Aphelios', 'e', 2),
 		label: 'Gravitum',
 	},
 	[EffectObjectName.ashePFrostShot]: {

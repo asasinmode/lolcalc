@@ -186,6 +186,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Aphelios: {
+		/* `effectsMeta` has hardcoded gravitum index as 2, update if it changes */
 		WEAPON_NAME_TO_VARIANT_INDEX: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>,
 		WEAPON_VARIANT_INDEX_TO_NAME: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[],
 		/** stringtable indexes are different from the actual weapon order - `apheliosgun_name_1` is for calibrum and so */
