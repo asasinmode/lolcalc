@@ -113,7 +113,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 						selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 					];
 				} });
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
 }
 
 export async function progressExtra<T extends IGameAbilityId>(
@@ -246,7 +246,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 					default: () => createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, true, effectControlSnapshot.value),
 				}
 			: ctx.slots);
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
 }
 
 export async function enumExtra<T extends IGameAbilityId>(
@@ -291,7 +291,7 @@ export async function enumExtra<T extends IGameAbilityId>(
 				selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
 			];
 		} });
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter'] });
+	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
 }
 
 function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource, isEffect = abilityId.type === AbilityType.effect, onUpdate?: IExtraOnValueUpdate): [

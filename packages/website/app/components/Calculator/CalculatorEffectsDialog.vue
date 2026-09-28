@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { DamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
+import type { IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { EffectObjectName, TAbilityType } from '@lolcalc/shared';
-import { computeAbilityDescription, computeEffectDescription } from '@lolcalc/core/DamageSource';
+import { computeAbilityDescription, computeEffectDescription, DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEMS, useChampion } from '@lolcalc/data';
@@ -164,14 +165,28 @@ const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemH
 const hoveredEffectId = shallowRef<IEffectAbilityId>();
 const hoveredAppliedEffect = shallowRef<IDamageSourceEffect>();
 const hoveringApplied = ref(false);
+const hoveredEffectTooltipOverrideDamageSource = shallowRef<DamageSource>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
 function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId, isApplied: boolean, appliedEffect?: IDamageSourceEffect) {
+	const specific = EFFECT_SPECIFICS[effectId.id];
+
 	hoveredEffectId.value = effectId;
 	hoveringApplied.value = isApplied;
 	hoveredAppliedEffect.value = appliedEffect ?? damageSource.value?.getEffect(effectId.id)?.[0];
+
+	if (specific?.damageSourceOverrides) {
+		hoveredEffectTooltipOverrideDamageSource.value = hoveredAppliedEffect.value?.source.value?.clone(specific.damageSourceOverrides, true)
+			?? new DamageSource(specific.damageSourceOverrides, true, true);
+		if (specific.sourceAbility.type === AbilityType.champion) {
+			useChampion(specific.sourceAbility.id).then(champion => hoveredEffectTooltipOverrideDamageSource.value && (hoveredEffectTooltipOverrideDamageSource.value.champion.value = champion));
+		}
+	} else {
+		hoveredEffectTooltipOverrideDamageSource.value = undefined;
+	}
+
 	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
-	EFFECT_SPECIFICS[effectId.id].sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
+	specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
 	effectHoverTooltipEl.value?.el?.showPopover();
 }
 
@@ -347,7 +362,7 @@ defineExpose({
 		<LolEffectHoverTooltip
 			ref="effectHoverTooltip"
 			:ability-id="hoveredEffectId"
-			:damage-source="hoveredAppliedEffect?.source.value"
+			:damage-source="hoveredEffectTooltipOverrideDamageSource ?? hoveredAppliedEffect?.source.value"
 			:style="hoveredEffectId && `position-anchor: --effect-${hoveredEffectId.id}-${hoveringApplied ? 'applied' : 'all'}`"
 		/>
 	</VDialog>

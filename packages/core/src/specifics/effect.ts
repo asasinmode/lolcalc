@@ -1,13 +1,13 @@
 import type { IEffectData, TEffects } from '@lolcalc/data';
 import type { IChampion, IChampionId } from '@lolcalc/data/types.js';
 import type { IStatsCalculationEffectVars } from '@lolcalc/shared';
-import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect } from '../DamageSource.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect, IOverrides } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import type { DetectItemVariables } from '../types';
 import type { IVariableModifyMeta } from '../variables/game.ts';
 import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
-
 import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
+
 import { AbilityType, EffectObjectName, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
@@ -846,6 +846,11 @@ export const EFFECT_SPECIFICS = {
 		deriveProgressValue: (_value, self) => {
 			return self?.stats.value.effectVars.apheliosGravitumSlow ?? 0;
 		},
+		damageSourceOverrides: {
+			abilityVariants: {
+				q: CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX.gravitum,
+			},
+		},
 		calculateHooks: {
 			postInit: {
 				handler(self, _stats, { effectVars, debuffs }) {
@@ -1272,6 +1277,8 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	};
 	/** variables to be showned in results */
 	variables?: ISpecificVariables<never, any>;
+	/** for component extra `overrideDamageSource`, check its jsdoc for more info */
+	damageSourceOverrides?: IOverrides;
 }
 
 type IEffectModifyVariableFunction<T extends (number | undefined)[] = [number]> = (value: number, meta: IVariableModifyMeta, effectData: T) => number;

@@ -80,6 +80,7 @@ export interface IChampionAbilityHoverTooltipProps {
 export interface IEffectHoverTooltipProps {
 	abilityId?: IEffectAbilityId;
 	damageSource?: DamageSource;
+	overrideDamageSource?: DamageSource;
 }
 
 export interface IDragonHoverTooltipProps {
