@@ -141,6 +141,12 @@ function hideSharePopover() {
 							report an issue
 						</button>
 					</li>
+					<li id="by-asasinmode">
+						<a href="https://asasinmode.com" target="_blank">
+							<span>by asasinmode</span>
+							<img src="/asasinmode.webp" width="200" height="200">
+						</a>
+					</li>
 				</ul>
 				<ul>
 					<li>
@@ -332,7 +338,7 @@ function hideSharePopover() {
 
 						@media (width >= 680px) {
 							& {
-								--at-apply: 'flex-row gap-5 py-0';
+								--at-apply: 'flex-row items-center gap-5 py-0';
 							}
 						}
 
@@ -346,6 +352,7 @@ function hideSharePopover() {
 									}
 								}
 							}
+
 							> *:hover,
 							> *:focus-visible,
 							> .router-link-active {
@@ -366,6 +373,18 @@ function hideSharePopover() {
 
 							&:nth-child(4) {
 								--accent: theme('colors.red.400');
+							}
+
+							&:last-child {
+								--at-apply: '-ms-2';
+
+								span {
+									--at-apply: 'sr-only';
+								}
+
+								img {
+									--at-apply: 'block rounded-full size-8';
+								}
 							}
 						}
 					}
