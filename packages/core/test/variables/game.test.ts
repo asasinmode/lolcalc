@@ -204,9 +204,8 @@ function assertMetaSuffix(variableName: string, expected: string, replaceResult:
 function extendedChampionAbilityDescription(damageSource: DamageSource, tooltipKey: 'tooltip' | 'tooltipExtended', abilityKey: IChampionAbilityKey, abilityVariant = 0): IReplaceGameVariablesRV {
 	const stringtabled = replaceStringtableVariables(damageSource.champion.value!.abilities[abilityKey].variants[abilityVariant]![tooltipKey]!, damageSource.champion.value!.stringtable);
 	return replaceGameVariables(stringtabled.replaced, 'championAbility', {
+		abilityKey,
 		abilityVariant: damageSource.champion.value!.abilities[abilityKey].variants[abilityVariant]!,
-		allAbilitiesVariants: damageSource.allAbilityVariants.value,
-		abilityLevel: abilityKey === 'passive' ? undefined : damageSource.abilityLevels.value[abilityKey],
 		damageSource,
 	}, undefined, { isExtended: true });
 }

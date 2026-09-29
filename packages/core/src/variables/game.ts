@@ -283,7 +283,10 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityVariant: IChampionAbilityVariableVariant;
 	abilityKey: IChampionAbilityKey;
 	dynamicVariables?: IDynamicVariables;
-	/** will be `|| 1` (0 is ignored), if `damageSource` is passed, will use `.abilityLevels.value[abilityKey]` */
+	/**
+	 * will be `?? 1`, if `damageSource` is passed, will use `.abilityLevels.value[abilityKey]`
+	 * @note passive that uses other ability's variable passes `0` as ability level
+	 */
 	abilityLevel?: number;
 	/**
 	 * ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive
@@ -306,13 +309,13 @@ export function championAbilityVariableValue(
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityKey,
 		/* optional damageSource properties chains here because calculate hooks often pass partial damage source with only what's needed for calculation */
-		abilityLevel = (params.abilityLevel ?? (params.abilityKey === 'passive' ? 1 : params.damageSource?.abilityLevels?.value[params.abilityKey])) || 1,
 		/* optional damageSource properties chains here because calculate hooks often pass partial damage source with only what's needed for calculation */
 		allAbilitiesVariants = params.damageSource?.allAbilityVariants?.value ?? [],
 		damageSource,
 		isRanged,
 		returnActualName,
 	} = params;
+	const abilityLevel = (params.abilityKey === 'passive' ? 1 : (params.abilityLevel ?? params.damageSource?.abilityLevels?.value[params.abilityKey])) || 1;
 	const rv: IVariableValueResult = {
 		calculatesFrom: [],
 	};
@@ -335,7 +338,9 @@ export function championAbilityVariableValue(
 				abilityVariant: otherAbilityVariant[0],
 				dynamicVariables,
 				abilityKey,
-				abilityLevel: (otherAbilityVariant[1] !== 'passive' ? damageSource?.abilityLevels.value[otherAbilityVariant[1]] : undefined) || 1,
+				abilityLevel: abilityKey === 'passive' || otherAbilityVariant[1] === 'passive'
+					? 0
+					: (damageSource?.abilityLevels.value[otherAbilityVariant[1]] || 1),
 				allAbilitiesVariants,
 				damageSource,
 				returnActualName: true,
@@ -396,7 +401,7 @@ export function championAbilityVariableValue(
 		if (target) {
 			const value = variableResolveFn(target)?.(target, abilityVariant, {
 				variableValueFn: championAbilityVariableValue,
-				variableValueParams: params,
+				variableValueParams: { ...params, abilityLevel },
 				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
 			});
 
@@ -443,7 +448,10 @@ export function championAbilityVariableValue(
 		if ('mMultiplier' in rv.value) {
 			multiplier = resolveMMultiplier(rv.value.mMultiplier as any, abilityVariant, {
 				variableValueFn: championAbilityVariableValue,
-				variableValueParams: params,
+				variableValueParams: {
+					...params,
+					abilityLevel,
+				},
 				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
 			})!;
 		}
@@ -451,7 +459,10 @@ export function championAbilityVariableValue(
 			// eslint-disable-next-line ts/no-use-before-define
 			const formulaValue = VARIABLE_CALCULATION_FNS.mFormulaParts(rv.value as any, abilityVariant, {
 				variableValueFn: championAbilityVariableValue,
-				variableValueParams: params,
+				variableValueParams: {
+					...params,
+					abilityLevel,
+				},
 				accessedVariables: params.accessedVariables?.getOrInsert(variable, new Set()),
 			});
 			Object.assign(rv, formulaValue);
@@ -489,7 +500,7 @@ export function championAbilityVariableValue(
 
 	if (resolveArrayValueToAbilityLevel && Array.isArray(rv.value)) {
 		rv.allValues = rv.value as number[];
-		rv.value = rv.value[abilityLevel || 1];
+		rv.value = rv.value[abilityLevel ?? 1];
 	}
 
 	if (typeof rv.value === 'number') {
@@ -1207,7 +1218,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			if (value.length === 2) {
 				console.warn('[resolveMMultiplier] suspiciously melee/ranged looking value having abilityLevel applied to it', whole, meta);
 			}
-			value = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
+			value = value[(meta?.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 		}
 
 		return {
@@ -1535,7 +1546,7 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		if (Array.isArray(rv.value)) {
 			rv.allValues = rv.value as number[];
-			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
+			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 		}
 
 		return rv;
@@ -1554,7 +1565,7 @@ export const VARIABLE_CALCULATION_FNS = {
 				console.warn('[BuffCounterByNamedDataValueCalculationPart] suspiciously melee/ranged looking value having abilityLevel applied to it', { dataValue: whole.dataValues?.[mDataValue] }, variable);
 			}
 			rv.allValues = rv.value as number[];
-			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
+			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 		}
 
 		const buff = meta.variableValueFn(mBuffName, meta.variableValueParams);

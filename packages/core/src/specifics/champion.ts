@@ -29,6 +29,7 @@ import type IKhazix from '@lolcalc/data/files/champion/Khazix.json';
 import type IKled from '@lolcalc/data/files/champion/Kled.json';
 import type IKSante from '@lolcalc/data/files/champion/KSante.json';
 import type ILocke from '@lolcalc/data/files/champion/Locke.json';
+import type IMel from '@lolcalc/data/files/champion/Mel.json';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import type INami from '@lolcalc/data/files/champion/Nami.json';
@@ -2452,6 +2453,42 @@ export const CHAMPION_SPECIFICS = {
 					},
 				},
 				uninteresting: ['DecayTimeHelper', 'BaseDuration', 'HealthCost'],
+			}),
+		},
+	},
+	Mel: {
+		passive: {
+			variables: defineChampionVariables<'Mel', typeof IMel, 'passive'>()({
+				meta: {
+					PassiveFlatDamage: {
+						type: VariableType.magic,
+					},
+					PassiveStackDamage: {
+						type: VariableType.magic,
+					},
+					PassiveBonusMissileDamage: {
+						type: VariableType.magic,
+					},
+				},
+				/* minion mod is from R */
+				uninteresting: ['MinionModTooltip' as any, 'PassiveBonusMissiles', 'MaxPassiveBonusMissiles', 'OverwhelmDuration'],
+			}),
+		},
+		q: {
+			variables: defineChampionVariables<'Mel', typeof IMel, 'q'>()({
+				meta: {
+					InitialExplosionDamage: {
+						type: VariableType.magic,
+					},
+					TotalExplosionDamage: {
+						type: VariableType.magic,
+					},
+					AllDamageHit: {
+						type: VariableType.magic,
+						scalesWithStatIcon: undefined,
+					},
+				},
+				uninteresting: ['ExplosionCount'],
 			}),
 		},
 	},
