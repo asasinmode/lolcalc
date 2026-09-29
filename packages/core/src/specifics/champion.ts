@@ -1800,6 +1800,117 @@ export const CHAMPION_SPECIFICS = {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), maxStacks),
 			};
 		},
+		passive: {
+			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'passive'>()({
+				known: {
+					'f1.1': [0],
+					'f2.1': [0],
+					'f3.1': [0],
+					'TotalStackDamage': [],
+					'MaxStacksConsumeDamage': [],
+				},
+				calculate(self, _target) {
+					let TotalStackDamage = Number.NaN;
+					// let MaxStacksConsumeDamage = Number.NaN;
+
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+					const stackBaseDmg = championAbilityVariableValue('PBaseDamage', passiveParams);
+					const perStackDmg = championAbilityVariableValue('PCurrentPerStackDamage', passiveParams);
+					if (typeof stackBaseDmg.value === 'number' && typeof perStackDmg.value === 'number') {
+						TotalStackDamage = stackBaseDmg.value + perStackDmg.value * self.internalData.value.passiveStacksOnTarget;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS kaisa] failed to calculate passive stack damage vars', stackBaseDmg, perStackDmg);
+					}
+
+					// const consumeHPPercent = championAbilityVariableValue('PExecutePercentage', passiveParams);
+					// if (typeof consumeHPPercent.value === 'number') {
+					// 	const targetMissingHP = target
+					// 		? Math.max(target.stats.value.total.hp - target.currentHealth.value, 0)
+					// 		: 0;
+					// 	MaxStacksConsumeDamage = targetMissingHP * consumeHPPercent.value;
+					// } else {
+					// 	console.warn('[CHAMPION_SPECIFICS kaisa] failed to calculate passive consume var', consumeHPPercent);
+					// }
+
+					return {
+						'f1.1': {
+							value: self.stats.value.bonus.attackDamage,
+						},
+						'f2.1': {
+							value: self.stats.value.total.abilityPower,
+						},
+						'f3.1': {
+							value: self.stats.value.bonus.bonusAttackSpeedPercent,
+						},
+						'TotalStackDamage': {
+							value: TotalStackDamage,
+						},
+						'MaxStacksConsumeDamage': {
+							value: 'TODO',
+						},
+					};
+				},
+				meta: {
+					'f1.1': {
+						displayedName: 'EvolveAttackDamage',
+					},
+					'f2.1': {
+						displayedName: 'EvolveAbilityPower',
+					},
+					'f3.1': {
+						displayedName: 'EvolveAttackSpeed',
+						multiplier: 100,
+						roundReplaced: 1,
+					},
+					'PBaseDamage': {
+						type: VariableType.magic,
+					},
+					'PCurrentPerStackDamage': {
+						type: VariableType.magic,
+					},
+					'TotalStackDamage': {
+						isCustom: true,
+						type: VariableType.magic,
+					},
+					'MaxStacksConsumeDamage': {
+						isCustom: true,
+						type: VariableType.magic,
+					},
+				},
+				/* effect 2 and 6 amounts come from other spells */
+				uninteresting: ['PDuration', 'PDamageCap', 'PMaxStacks', 'PAllyStacks', 'Effect2Amount' as any, 'Effect6Amount' as any],
+			}),
+		},
+		q: {
+			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'q'>()({}),
+		},
+		w: {
+			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'w'>()({
+				known: {
+					'f2.1': [0],
+				},
+				calculate(self) {
+					return {
+						'f2.1': {
+							value: self.stats.value.total.abilityPower,
+						},
+					};
+				},
+				meta: {
+					'f2.1': {
+						displayedName: 'EvolveAbilityPower',
+					},
+					'TotalDamage': {
+						type: VariableType.magic,
+					},
+				},
+				/* `PDuration` comes from passive */
+				uninteresting: ['Effect2Amount', 'Effect4Amount', 'Effect3Amount', 'Effect5Amount', 'PDuration' as any],
+			}),
+		},
+		e: {
+			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'e'>()({}),
+		},
 	},
 	Kalista: {
 		variables: defineChampionVariables<'Kalista', typeof IKalista>()({

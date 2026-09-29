@@ -1699,7 +1699,7 @@ defineExpose({
 								@mouseleave="hideRowTooltip($event, false)"
 								@focusout="hideRowTooltip($event, false)"
 							>
-								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existent one
+								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existing one
 							</p>
 							<span
 								v-if="row.additionalInfo"
