@@ -906,8 +906,10 @@ function variableExtendedEquals(
 	}
 
 	let metaSuffix = '';
-	let extendedEquals = typeof meta?.extendedEquals === 'function'
-		? meta.extendedEquals(variableValueFunctionParams)
+	const isMetaFn = typeof meta?.extendedEquals === 'function';
+
+	let extendedEquals = isMetaFn
+		? (meta.extendedEquals as any)(variableValueFunctionParams)
 		: typeof meta?.extendedEquals !== 'object'
 			? meta?.extendedEquals as string
 			: `${meta.extendedEquals.prefix}${isMeleeRanged === true
@@ -950,7 +952,7 @@ function variableExtendedEquals(
 			}
 		}
 
-		if (!(meta && 'scalesWithStatIcon' in meta)) {
+		if ((!options.isExtended || !isMetaFn) && !(meta && 'scalesWithStatIcon' in meta)) {
 			if (!insertIcon && Array.isArray(generatedStatIcon) && generatedStatIcon?.length === 1) {
 				generatedStatIcon = generatedStatIcon[0];
 			}
