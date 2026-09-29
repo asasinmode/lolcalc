@@ -315,7 +315,7 @@ export function championAbilityVariableValue(
 		isRanged,
 		returnActualName,
 	} = params;
-	const abilityLevel = (params.abilityKey === 'passive' ? 1 : (params.abilityLevel ?? params.damageSource?.abilityLevels?.value[params.abilityKey])) || 1;
+	const abilityLevel = params.abilityKey === 'passive' ? 1 : ((params.abilityLevel ?? params.damageSource?.abilityLevels?.value[params.abilityKey]) || 1);
 	const rv: IVariableValueResult = {
 		calculatesFrom: [],
 	};
