@@ -1882,7 +1882,30 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 		q: {
-			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'q'>()({}),
+			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'q'>()({
+				known: {
+					'f11.1': [0],
+				},
+				calculate(self) {
+					return {
+						'f11.1': {
+							value: self.stats.value.bonus.attackDamage,
+						},
+					};
+				},
+				meta: {
+					'f11.1': {
+						displayedName: 'EvolveAttackDamage',
+					},
+					'TotalIndividualMissileDamage': {
+						type: VariableType.physical,
+					},
+					'MaxDamageDisplay': {
+						type: VariableType.physical,
+					},
+				},
+				uninteresting: ['Effect2Amount', 'Effect4Amount', 'Effect5Amount', 'Effect6Amount', 'Effect7Amount', 'ExtraHitReduction'],
+			}),
 		},
 		w: {
 			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'w'>()({
@@ -1909,7 +1932,36 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 		e: {
-			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'e'>()({}),
+			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'e'>()({
+				known: {
+					'f10.1': [0],
+				},
+				calculate(self) {
+					return {
+						'f10.1': {
+							value: self.stats.value.bonus.bonusAttackSpeedPercent,
+						},
+					};
+				},
+				meta: {
+					'f10.1': {
+						displayedName: 'EvolveAttackSpeed',
+						multiplier: 100,
+						roundReplaced: 1,
+					},
+				},
+				uninteresting: ['Effect2Amount', 'Effect4Amount', 'Effect5Amount', 'Effect6Amount', 'Effect7Amount'],
+			}),
+		},
+		r: {
+			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'r'>()({
+				meta: {
+					RCalculatedShieldValue: {
+						type: VariableType.shield,
+					},
+				},
+				uninteresting: ['RShieldDuration'],
+			}),
 		},
 	},
 	Kalista: {
