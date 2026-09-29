@@ -30,6 +30,7 @@ export type IMultiplicativeChampionStatName = 'tenacity' | 'slowResist';
 
 export type IChampionStats = Record<IChampionStatName, number>;
 
+/** the name of the stats doesn't mean they are a snapshot of from a point in time where the hook runs, often a later hook modifies previous stats. It's more stats grouped by source/kind */
 export interface IStatsCalculationResult {
 	isRanged?: boolean;
 	/** cooldown reduction % from ability haste */
