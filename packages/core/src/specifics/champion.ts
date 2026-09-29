@@ -74,7 +74,7 @@ import { computed, watch } from 'vue';
 import { combineCompounding } from '../calculate/util.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
-import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
+import { calculatesFromPartExtendedEquals, championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES } from './index.ts';
 
 const { vMinor } = PATCH_VERSION;
@@ -1902,6 +1902,7 @@ export const CHAMPION_SPECIFICS = {
 					},
 					'MaxDamageDisplay': {
 						type: VariableType.physical,
+						calculatesFrom: [],
 					},
 				},
 				uninteresting: ['Effect2Amount', 'Effect4Amount', 'Effect5Amount', 'Effect6Amount', 'Effect7Amount', 'ExtraHitReduction'],
@@ -1944,6 +1945,26 @@ export const CHAMPION_SPECIFICS = {
 					};
 				},
 				meta: {
+					'TotalMoveSpeed': {
+						extendedEquals(variableValueParams) {
+							const mult = championAbilityVariableValue('Effect1Amount', variableValueParams);
+							if (typeof mult.value === 'number') {
+								const asPart = calculatesFromPartExtendedEquals({
+									value: mult.value,
+									stat: 'bonusAttackSpeedPercent',
+									type: 'bonus',
+									isPercentage: true,
+								}, true);
+								const constPart = calculatesFromPartExtendedEquals({
+									value: mult.value,
+									stat: 'const',
+									isPercentage: true,
+								}, true);
+								return `${asPart} + ${constPart}`;
+							}
+							return '';
+						},
+					},
 					'f10.1': {
 						displayedName: 'EvolveAttackSpeed',
 						multiplier: 100,
