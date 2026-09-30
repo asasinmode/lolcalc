@@ -93,7 +93,15 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kayle', 'passive', 0), 'passiveStacks', 'Divine Ascent stacks', 0, CHAMPION_SPECIFICS.Kayle.MAX_PASSIVE_STACKS),
 	},
 	Kaisa: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS),
+		extras: [
+			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS),
+			await enumExtra(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'e', 0), 'eBuff', 'Supercharge buff', [
+				[CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.none, 'none'],
+				[CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.attackSpeed, 'attack speed'],
+				[CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.moveSpeed, 'move speed'],
+				[CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.both, 'move and attack speed'],
+			]),
+		],
 	},
 	Kayn: {
 		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0), 'form', 'Form', Object.entries(CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS).map(([key, value]) => [value, key])),

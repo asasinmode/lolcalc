@@ -1797,8 +1797,10 @@ export const CHAMPION_SPECIFICS = {
 		MAX_PASSIVE_STACKS: (self: DamageSource<'Kaisa'>): number => (self.champion.value! as typeof IKaisa).abilities.passive.variants[0]!.dataValues.PMaxStacks[1]!,
 		setupData(self) {
 			const maxStacks: number = CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS(self);
+			const maxEBuff: number = CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.both;
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), maxStacks),
+				eBuff: clamp(0, Math.round(self.internalData.value.superchargeBuff ?? 0), maxEBuff),
 			};
 		},
 		passive: {
@@ -1934,6 +1936,12 @@ export const CHAMPION_SPECIFICS = {
 			}),
 		},
 		e: {
+			BUFF_OPTIONS: {
+				none: 0,
+				attackSpeed: 1,
+				moveSpeed: 2,
+				both: 3,
+			},
 			variables: defineChampionVariables<'Kaisa', typeof IKaisa, 'e'>()({
 				known: {
 					'f10.1': [0],
@@ -1942,7 +1950,7 @@ export const CHAMPION_SPECIFICS = {
 					return {
 						'TotalCastTime': championAbilityVariableValue('TotalCastTime', { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: { stats: { value: { total: { bonusAttackSpeedPercent: self.stats.value.total.attackSpeed } } } } as DamageSource }),
 						'f10.1': {
-							value: self.stats.value.bonus.bonusAttackSpeedPercent,
+							value: self.stats.value.bonus.bonusAttackSpeedPercent - (self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0),
 						},
 					};
 				},
@@ -1976,8 +1984,11 @@ export const CHAMPION_SPECIFICS = {
 						scalesWithStatIcon: undefined,
 						extendedEquals: undefined,
 					},
+					'Effect5Amount': {
+						displayedName: 'ChargedAttackSpeed',
+					},
 				},
-				uninteresting: ['Effect2Amount', 'Effect4Amount', 'Effect5Amount', 'Effect6Amount', 'Effect7Amount'],
+				uninteresting: ['Effect2Amount', 'Effect4Amount', 'Effect6Amount', 'Effect7Amount'],
 			}),
 		},
 		r: {
@@ -1989,6 +2000,37 @@ export const CHAMPION_SPECIFICS = {
 				},
 				uninteresting: ['RShieldDuration'],
 			}),
+		},
+		calculateHooks: {
+			postBonus: {
+				handler(self, { baseOnLevelStats, championPassiveStats, totalPreMultipliersStats, bonusStats }, { calculatedVariables }) {
+					const eParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource };
+
+					if (self.internalData.value.eBuff & CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.moveSpeed) {
+						const msPercent = championAbilityVariableValue('TotalMoveSpeed', eParams);
+						if (typeof msPercent.value === 'number') {
+							calculatedVariables.totalBonusPercentMoveSpeed += msPercent.value;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS kaisa] failed to calculate E bonus ms', msPercent);
+						}
+					}
+
+					if (self.internalData.value.eBuff & CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.attackSpeed) {
+						const asPercent = championAbilityVariableValue('Effect5Amount', eParams);
+						if (typeof asPercent.value === 'number') {
+							championPassiveStats.bonusAttackSpeedPercent = asPercent.value;
+							bonusStats.bonusAttackSpeedPercent += asPercent.value;
+							totalPreMultipliersStats.bonusAttackSpeedPercent += asPercent.value;
+
+							championPassiveStats.attackSpeed = championPassiveStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
+							bonusStats.attackSpeed += championPassiveStats.attackSpeed;
+							totalPreMultipliersStats.attackSpeed += championPassiveStats.attackSpeed;
+						} else {
+							console.warn('[CHAMPION_SPECIFICS kaisa] failed to calculate E bonus as', asPercent);
+						}
+					}
+				},
+			},
 		},
 	},
 	Kalista: {
@@ -4951,7 +4993,7 @@ export interface IChampionInternalDataMap {
 	Jayce: { isPassiveMSActive: number };
 	Jhin: { isPassiveMSActive: number };
 	Jinx: { passiveStacks: number };
-	Kaisa: { passiveStacksOnTarget: number };
+	Kaisa: { passiveStacksOnTarget: number; eBuff: number };
 	Kayle: { passiveStacks: number };
 	Kayn: { form: number };
 	Kindred: { passiveStacks: number };

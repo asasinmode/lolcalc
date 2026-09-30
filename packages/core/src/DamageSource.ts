@@ -2338,6 +2338,9 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 	/** runs after bonus stats have been summed up, before move speed calc */
 	postBonus?: ICalculateChampionStatsHook<(self: DamageSource<Id>, args: {
 		bonusStats: IStatsCalculationResult['bonus'];
+		championPassiveStats: IStatsCalculationResult['championPassive'];
+		totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
+		baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
 	}) => void>;
 	/**
 	 * runs when total stats have been calculated but before any total multipliers like mid quest or dragons
