@@ -23,10 +23,12 @@
 			q&a
 		</h2>
 		<dl>
-			<dt>how can I save multiple configurations?</dt>
+			<dt>How can I save multiple configurations?</dt>
 			<dd>At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a></dd>
-			<dt>how can I delete the last results column?</dt>
-			<dd>it's a puzzle</dd>
+			<dt>How can I delete the last results column?</dt>
+			<dd>It's a puzzle</dd>
+			<dt>Why are there stun/slow duration and values in the results table? They don't change</dt>
+			<dd>They are affected by target's tenacity and slow resists</dd>
 		</dl>
 
 		<h2 id="guide-examples">
