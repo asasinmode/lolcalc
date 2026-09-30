@@ -1,5 +1,6 @@
 import type IAkali from '@lolcalc/data/files/champion/Akali.json';
 import type IAkshan from '@lolcalc/data/files/champion/Akshan.json';
+import type IAmumu from '@lolcalc/data/files/champion/Amumu.json';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type IAshe from '@lolcalc/data/files/champion/Ashe.json';
 import type IBard from '@lolcalc/data/files/champion/Bard.json';
@@ -172,6 +173,18 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				applyPassive: clamp(0, Math.round(self.internalData.value.applyPassive ?? 0), 1),
 			};
+		},
+		r: {
+			variables: defineChampionVariables<'Amumu', typeof IAmumu, 'r'>()({
+				meta: {
+					RCalculatedDamage: {
+						type: VariableType.magic,
+					},
+					RDuration: {
+						type: VariableType.affectedByTenacity,
+					},
+				},
+			}),
 		},
 	},
 	Anivia: {
