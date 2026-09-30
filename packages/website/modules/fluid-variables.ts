@@ -114,7 +114,7 @@ function generateClamp(
 	minScreenWidth: number,
 	maxScreenWidth: number,
 	remInPx: number,
-	viewportUnit: 'w' | 'h',
+	viewportUnit: 'i' | 'b',
 ): string {
 	const slope = (sizeTo - sizeFrom) / (maxScreenWidth - minScreenWidth);
 	const yAxisIntersection = -minScreenWidth * slope + sizeFrom;
@@ -185,10 +185,10 @@ function generateCss(variablesByFile: Map<string, [horizontal: IFileVariables, v
 	let css = ':root {\n';
 
 	for (const [key, { sizeFrom, sizeTo, fromViewport, toViewport }] of wantedHVariables.entries()) {
-		css += `\t${config.variablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minViewport!, toViewport || config.maxViewport!, config.remInPx!, 'w')};\n`;
+		css += `\t${config.variablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minViewport!, toViewport || config.maxViewport!, config.remInPx!, 'i')};\n`;
 	}
 	for (const [key, { sizeFrom, sizeTo, fromViewport, toViewport }] of wantedVVariables.entries()) {
-		css += `\t${config.verticalVariablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minVerticalViewport!, toViewport || config.maxVerticalViewport!, config.remInPx!, 'h')};\n`;
+		css += `\t${config.verticalVariablePrefix!}-${key}: ${generateClamp(sizeFrom, sizeTo, fromViewport || config.minVerticalViewport!, toViewport || config.maxVerticalViewport!, config.remInPx!, 'b')};\n`;
 	}
 
 	css += '}';
