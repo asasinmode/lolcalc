@@ -2486,6 +2486,18 @@ export const CHAMPION_SPECIFICS = {
 					AllDamageHit: {
 						type: VariableType.magic,
 						scalesWithStatIcon: undefined,
+						/* on patch 26.19 different from what the game shows `= (60 const + (0.55 %i:ap%) + 29.5 const)` but I think it's better */
+						extendedEquals(variableValueParams) {
+							const projectiles = championAbilityVariableValue('ExplosionCount', variableValueParams);
+							const base = championAbilityVariableValue('InitialExplosionDamage', variableValueParams);
+							const followup = championAbilityVariableValue('TotalExplosionDamage', variableValueParams);
+							const projectilesCount = (projectiles.value as number) - 1;
+
+							const constPart = (base.calculatesFrom?.[0]?.value as number) + (followup.calculatesFrom?.[0]?.value as number) * projectilesCount;
+							const apPart = (base.calculatesFrom?.[1]?.value as number) + (followup.calculatesFrom?.[1]?.value as number) * projectilesCount;
+
+							return `${calculatesFromPartExtendedEquals({ value: constPart, stat: 'const' })} + ${calculatesFromPartExtendedEquals({ value: apPart, stat: 'abilityPower', isPercentage: true })}`;
+						},
 					},
 				},
 				uninteresting: ['ExplosionCount'],
