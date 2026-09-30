@@ -1878,18 +1878,20 @@ defineExpose({
 
 <style>
 @layer components {
-	#results {
-		/* TODO mobile version, work out sticky */
-		@media (width < 640px) {
+	#results-table-scroll-wrapper {
+		--at-apply: 'of-auto max-block-[calc(100vh-var(--mbe)-var(--section-header-my)-var(--text-xl-fontSize))] min-block-100 mbe-10 inline-min max-inline-full mx-auto b b-[--b-clr]';
+		--mbe: calc(10 * var(--spacing));
+		--b-clr: theme('colors.neutral.600');
+
+		@media (pointer: fine) and (width >= 1024px) {
 			& {
-				--at-apply: 'of-x-auto';
+				--at-apply: 'overscroll-contain';
 			}
 		}
 	}
 
 	#results-table {
-		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr] mb-10 h-px inline-max';
-		--b-clr: theme('colors.neutral.600');
+		--at-apply: 'border-separate border-spacing-0 bg-[--bg-clr] block-px inline-max';
 		--bg-clr: theme('colors.slate.950');
 		--table-ps: calc(3 * var(--spacing));
 		--header-row-gap-y: calc(3 * var(--spacing));
@@ -1918,7 +1920,7 @@ defineExpose({
 		}
 
 		> thead {
-			--at-apply: 'sticky top-0 z-5';
+			--at-apply: 'sticky inset-bs-0 z-5';
 
 			> tr:nth-child(1) > th > * {
 				--at-apply: 'sr-only';
@@ -1960,7 +1962,7 @@ defineExpose({
 						}
 
 						> select {
-							--at-apply: 'w-64 px-1.5 bg-white text-black';
+							--at-apply: 'inline-[--fluid-164-256-t640] px-1.5 bg-white text-black';
 							color-scheme: light;
 
 							&:disabled {
@@ -2129,7 +2131,7 @@ defineExpose({
 			anchor-scope: all;
 
 			&:not([aria-labelledby]) {
-				--at-apply: 'sticky top-[--header-h] z-4 bg-[--bg-clr]';
+				--at-apply: 'sticky inset-bs-[--header-h] z-4 bg-[--bg-clr]';
 
 				> tr {
 					anchor-name: --section-header-row;

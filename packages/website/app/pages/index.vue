@@ -48,7 +48,9 @@ onBeforeUnmount(() => {
 			<p v-show="!showResults">
 				configure a damage source to view results
 			</p>
-			<CalculatorResultsTable ref="resultsTable" :show-results />
+			<div id="results-table-scroll-wrapper">
+				<CalculatorResultsTable ref="resultsTable" :show-results />
+			</div>
 		</section>
 	</main>
 </template>
@@ -68,10 +70,12 @@ onBeforeUnmount(() => {
 			}
 
 			#results {
-				--at-apply: 'mx-auto text-center relative';
+				--at-apply: 'mx-auto text-center';
+				/* h2 mbs + mbe */
+				--section-header-my: calc(8 * var(--spacing));
 
 				> h2 {
-					--at-apply: 'mb-3 mt-5';
+					--at-apply: 'mbs-5 mbe-3';
 				}
 
 				> p {
