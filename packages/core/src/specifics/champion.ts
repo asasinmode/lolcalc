@@ -1940,6 +1940,7 @@ export const CHAMPION_SPECIFICS = {
 				},
 				calculate(self) {
 					return {
+						'TotalCastTime': championAbilityVariableValue('TotalCastTime', { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: { stats: { value: { total: { bonusAttackSpeedPercent: self.stats.value.total.attackSpeed } } } } as DamageSource }),
 						'f10.1': {
 							value: self.stats.value.bonus.bonusAttackSpeedPercent,
 						},
@@ -1970,6 +1971,10 @@ export const CHAMPION_SPECIFICS = {
 						displayedName: 'EvolveAttackSpeed',
 						multiplier: 100,
 						roundReplaced: 1,
+					},
+					'TotalCastTime': {
+						scalesWithStatIcon: undefined,
+						extendedEquals: undefined,
 					},
 				},
 				uninteresting: ['Effect2Amount', 'Effect4Amount', 'Effect5Amount', 'Effect6Amount', 'Effect7Amount'],
