@@ -1144,7 +1144,6 @@ const columnAddableSourceOptions = computed<IColumnAddableOption[]>(() =>
 const columnAddableTargetOptions = computed<IColumnAddableOption[]>(() =>
 	resultColumns.value.map(column => columnAddableOption(column.target)),
 );
-const columnAddableOptions = computed(() => flipResults.value ? columnAddableTargetOptions.value : columnAddableSourceOptions.value);
 
 function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption {
 	const rv: IColumnAddableOption = {
@@ -1169,8 +1168,8 @@ function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption 
 	return rv;
 }
 
-async function addColumnAbilities(columnIndex: number) {
-	const { championOptionIndex } = columnAddableOptions.value[columnIndex]!;
+async function addColumnAbilities(columnIndex: number, isSource: boolean) {
+	const { championOptionIndex } = (isSource ? columnAddableSourceOptions : columnAddableTargetOptions).value[columnIndex]!;
 	const option = damageSectionOptions.value[championOptionIndex!];
 	if (option) {
 		for (let i = option.abilities.length - 1; i >= 0; i--) {
@@ -1180,8 +1179,8 @@ async function addColumnAbilities(columnIndex: number) {
 	debouncedSaveState();
 }
 
-function addColumnItems(columnIndex: number) {
-	const { itemOptionsIndexes } = columnAddableOptions.value[columnIndex]!;
+function addColumnItems(columnIndex: number, isSource: boolean) {
+	const { itemOptionsIndexes } = (isSource ? columnAddableSourceOptions : columnAddableTargetOptions).value[columnIndex]!;
 	const option = damageSectionOptions.value.findLast(option => option.type === 'item');
 	if (option) {
 		/* `addResultsSection` causes the underlying ability to disappear, which would make indexes not match so first collect the relevant abilities then add them */
@@ -1312,7 +1311,7 @@ defineExpose({
 									type="checkbox"
 									@update:model-value="recalculateAllColumns"
 								>
-								flip results (target vs source)
+								flip target vs source
 							</label>
 							<button
 								id="results-remove-unused"
@@ -1321,8 +1320,8 @@ defineExpose({
 								title="remove empty columns and sections without a corresponding damage source"
 								@click="cleanupUnused"
 							>
-								remove unused
-								<span>(empty columns and sections without corresponding damage source)</span>
+								<span>remove empty columns and sections without a corresponding damage source</span>
+								<Icon class="i-ph:eraser" />
 							</button>
 							<form @submit.prevent="submitResultsSection">
 								<label for="results-table-row-new-section-ability">add section</label>
@@ -1456,6 +1455,19 @@ defineExpose({
 									<span>move left <span>(alt+click to duplicate to the left)</span></span>
 									<Icon class="i-ph:arrow-left" />
 								</button>
+								<VMenu
+									:id="`results-col-${index}`" :label="`column ${index + 1} actions`" :items="[
+										['add source abilities', () => addColumnAbilities(index, true), columnAddableSourceOptions[index]?.championOptionIndex === undefined],
+										['add source items', () => addColumnItems(index, true), !columnAddableSourceOptions[index]?.itemOptionsIndexes.length],
+										['add target abilities', () => addColumnAbilities(index, false), columnAddableTargetOptions[index]?.championOptionIndex === undefined],
+										['add target items', () => addColumnItems(index, false), !columnAddableTargetOptions[index]?.itemOptionsIndexes.length],
+									]"
+									title="column actions"
+									class="pretend-ui-btn"
+								>
+									<span>actions</span>
+									<Icon class="i-ph:dots-three-bold" />
+								</VMenu>
 								<button
 									title="remove"
 									class="pretend-ui-btn remove"
@@ -1479,20 +1491,20 @@ defineExpose({
 									restore
 								</button>
 							</template>
-							<button
-								class="pretend-ui-btn"
-								:disabled="columnAddableOptions[index]?.championOptionIndex === undefined"
-								@click="addColumnAbilities(index)"
-							>
-								add abilities
-							</button>
-							<button
-								class="pretend-ui-btn"
-								:disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length"
-								@click="addColumnItems(index)"
-							>
-								add items
-							</button>
+							<!-- <button -->
+							<!-- 	class="pretend-ui-btn" -->
+							<!-- 	:disabled="columnAddableOptions[index]?.championOptionIndex === undefined" -->
+							<!-- 	@click="addColumnAbilities(index)" -->
+							<!-- > -->
+							<!-- 	add abilities -->
+							<!-- </button> -->
+							<!-- <button -->
+							<!-- 	class="pretend-ui-btn" -->
+							<!-- 	:disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length" -->
+							<!-- 	@click="addColumnItems(index)" -->
+							<!-- > -->
+							<!-- 	add items -->
+							<!-- </button> -->
 						</div>
 					</td>
 				<!-- TODO figure out where to put these -->
@@ -1901,12 +1913,13 @@ defineExpose({
 		--header-row-pb: calc(3 * var(--spacing));
 		--header-row-pt: calc(2 * var(--spacing));
 		--header-h: calc(
-			var(--header-row-pt) + var(--header-row-pb) + var(--header-champion-select-size) + 2 * var(--header-row-gap-y) +
-				3 * var(--manipulate-btn-size) - 1px
+			var(--header-row-pt) + var(--header-row-pb) + var(--header-champion-select-size) + var(--header-row-gap-y) +
+				var(--manipulate-btn-size) + 1px
 		); /* offset by 1 px to undouble button borders */
 		--section-header-row-pt: calc(2 * var(--spacing));
 		--section-header-row-pb: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
+		--manipulate-icon-size: calc(5.5 * var(--spacing));
 
 		&[inert],
 		&[inert] > caption {
@@ -1937,30 +1950,32 @@ defineExpose({
 			}
 
 			> tr:nth-child(2) > td:first-child {
-				--at-apply: 'ps-[--table-ps] pb-[--header-row-pb] bg-[--bg-clr] min-h-px h-inherit text-start align-top';
+				--at-apply: 'ps-[--table-ps] pb-[--header-row-pb] bg-[--bg-clr] min-block-px block-inherit text-start align-top';
 
 				> div {
-					--at-apply: 'flex flex-col items-start h-full';
+					--at-apply: 'grid grid-cols-[auto_max-content] grid-rows-[auto_1fr] inline-min block-full';
 
 					> button {
-						--at-apply: 'px-2 leading-5 h-[--manipulate-btn-size] text-base mb-auto mt-2';
+						--at-apply: 'size-[--manipulate-btn-size] grid-center justify-self-end';
 
-						> span {
-							--at-apply: 'sr-only';
+						.icon {
+							--at-apply: 'size-[--manipulate-icon-size]';
 						}
 					}
 
 					> label {
+						--at-apply: 'self-center inline-max';
+
 						> input {
-							--at-apply: 'size-[--fluid-20-18-t640] align-[-3px] me-[0.25ch]';
+							--at-apply: 'size-[--fluid-20-18-t640] align-[-3.5px] me-[0.25ch]';
 						}
 					}
 
 					> form {
-						--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
+						--at-apply: 'col-span-full grid grid-cols-subgrid rows-1 gap-x-2 self-end';
 
 						> label {
-							--at-apply: 'col-span-full text-start';
+							--at-apply: 'sr-only';
 						}
 
 						> select {
@@ -1993,15 +2008,13 @@ defineExpose({
 				}
 
 				> div {
-					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--manipulate-btn-size)_1fr]';
+					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_auto_min-content_min-content_auto_1fr] gap-y-[--header-row-gap-y]';
 					grid-template-areas:
-						'move-left remove move-right'
-						'source vs target'
-						'add-abilities add-abilities add-abilities'
-						'add-items add-items add-items';
+						'move-left manipulate manipulate remove remove move-right'
+						'source source vs vs target target';
 
 					> .v-select {
-						--at-apply: 'size-[--header-champion-select-size] my-[--header-row-gap-y]';
+						--at-apply: 'size-[--header-champion-select-size]';
 						--b-width: 2px;
 						anchor-name: --select;
 						anchor-scope: --select;
@@ -2063,51 +2076,41 @@ defineExpose({
 						paint-order: stroke fill;
 						grid-area: vs;
 					}
-
-					> button {
-						&:nth-last-of-type(2) {
-							grid-area: add-abilities;
-						}
-
-						&:nth-last-of-type(1) {
-							--at-apply: '-mt-px z-1';
-							grid-area: add-items;
-						}
-
-						&:nth-last-of-type(-n + 2) {
-							--at-apply: 'mx-2 h-[--manipulate-btn-size] leading-5';
-						}
-					}
 				}
 
 				&:not(:last-child) > div {
 					> button {
 						--at-apply: 'grid place-items-center self-center';
 
-						&:nth-of-type(-n + 3):not(:last-child) {
+						&:not(:last-child) {
 							--at-apply: 'size-[--manipulate-btn-size]';
 
 							> .icon {
-								--at-apply: 'size-5.5';
+								--at-apply: 'size-[--manipulate-icon-size]';
 							}
 						}
 
 						&:nth-of-type(1) {
-							--at-apply: 'justify-self-end -me-px';
+							--at-apply: 'justify-self-end -me-[1.5px]';
 							grid-area: move-left;
 						}
 
 						&:nth-of-type(2) {
-							--at-apply: 'z-1';
-							grid-area: remove;
+							--at-apply: 'justify-self-end -me-[0.5px] z-1';
+							grid-area: manipulate;
 						}
 
 						&:nth-of-type(3) {
-							--at-apply: 'justify-self-start -ms-px z-1';
-							grid-area: move-right;
+							--at-apply: 'z-1 -ms-[0.5px] z-1';
+							grid-area: remove;
 						}
 
 						&:nth-of-type(4) {
+							--at-apply: 'justify-self-start -ms-[1.5px]';
+							grid-area: move-right;
+						}
+
+						&:nth-of-type(5) {
 							--at-apply: 'absolute inset-0 -top-[--header-row-pt] h-[calc(100%+2*var(--header-row-pt))] grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
 							-webkit-text-stroke: black 0.15em;
 							paint-order: stroke fill;
@@ -2122,8 +2125,8 @@ defineExpose({
 				&:last-child > div {
 					> button {
 						&:nth-of-type(1) {
-							--at-apply: 'w-auto px-2 justify-self-center h-[--manipulate-btn-size]';
-							grid-area: 1 / 1 / 2 / 4;
+							--at-apply: 'inline-auto block-[--manipulate-btn-size] px-2 justify-self-center';
+							grid-area: 1 / 1 / 2 / 7;
 						}
 					}
 				}
@@ -2143,10 +2146,10 @@ defineExpose({
 						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2 ps-[--table-ps]';
 
 						> button {
-							--at-apply: 'size-(--manipulate-btn-size) grid place-items-center';
+							--at-apply: 'size-(--manipulate-btn-size) grid-center';
 
 							> .icon {
-								--at-apply: 'size-5.5';
+								--at-apply: 'size-[--manipulate-icon-size]';
 							}
 
 							&[aria-expanded='true'] > span {
@@ -2328,7 +2331,6 @@ defineExpose({
 					}
 
 					&:nth-child(even) {
-						/* --at-apply: 'bg-white/05'; */
 						background-color: color-mix(in srgb, white 5%, var(--bg-clr));
 					}
 				}
