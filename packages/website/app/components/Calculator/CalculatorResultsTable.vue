@@ -2169,50 +2169,52 @@ defineExpose({
 						--at-apply: 'pt-[--section-header-row-pt] pb-[--section-header-row-pb]';
 					}
 
-					> th > div {
-						--at-apply: 'w-max';
+					> th {
+						> div {
+							--at-apply: 'w-max sticky inset-s-0';
 
-						> span,
-						> select {
-							--at-apply: 'text-lg font-500 whitespace-nowrap';
-						}
-
-						> span {
-							> unknown {
-								color: var(--unknown-clr);
+							> span,
+							> select {
+								--at-apply: 'text-lg font-500 whitespace-nowrap';
 							}
-						}
 
-						> img {
-							--at-apply: 'size-7 ms-3 me-1.5 inline-block';
-						}
-
-						> [popover] {
-							position-anchor: --section-header-row;
-							inset-block-start: auto;
-							inset-block-end: calc(
-								anchor(end) + var(--section-header-row-pb) + 2 * var(--manipulate-btn-size) - 0.5px
-							);
-							justify-self: anchor-center;
-
-							.hover-tooltip.effect {
-								--at-apply: 'self-center';
+							> span {
+								> unknown {
+									color: var(--unknown-clr);
+								}
 							}
-						}
 
-						> .hover-tooltip.custom {
-							--at-apply: 'max-inline-160';
+							> img {
+								--at-apply: 'size-7 ms-3 me-1.5 inline-block';
+							}
 
-							justify-self: anchor-center;
-							position-try: flip-block;
-						}
+							> [popover] {
+								position-anchor: --section-header-row;
+								inset-block-start: auto;
+								inset-block-end: calc(
+									anchor(end) + var(--section-header-row-pb) + 2 * var(--manipulate-btn-size) - 0.5px
+								);
+								justify-self: anchor-center;
 
-						> label {
-							--at-apply: 'sr-only';
-						}
+								.hover-tooltip.effect {
+									--at-apply: 'self-center';
+								}
+							}
 
-						> select {
-							--at-apply: 'px-1 ms-[0.5ch]';
+							> .hover-tooltip.custom {
+								--at-apply: 'max-inline-160';
+
+								justify-self: anchor-center;
+								position-try: flip-block;
+							}
+
+							> label {
+								--at-apply: 'sr-only';
+							}
+
+							> select {
+								--at-apply: 'px-1 ms-[0.5ch]';
+							}
 						}
 					}
 				}
@@ -2231,6 +2233,8 @@ defineExpose({
 				--at-apply: 'text-neutral-200';
 
 				> tr {
+					--at-apply: 'bg-[--bg-clr]';
+
 					&.info-row {
 						--at-apply: 'text-neutral-400 font-600';
 					}
@@ -2270,7 +2274,7 @@ defineExpose({
 					}
 
 					> th {
-						--at-apply: 'hyphens-auto wrap-anywhere sticky inset-s-0 z-2';
+						--at-apply: 'hyphens-auto wrap-anywhere sticky inset-s-0 ps-1 z-2 bg-inherit';
 						--ps: calc(2 * var(--manipulate-btn-size));
 						anchor-scope: --parent;
 
@@ -2324,7 +2328,8 @@ defineExpose({
 					}
 
 					&:nth-child(even) {
-						--at-apply: 'bg-white/05';
+						/* --at-apply: 'bg-white/05'; */
+						background-color: color-mix(in srgb, white 5%, var(--bg-clr));
 					}
 				}
 			}
