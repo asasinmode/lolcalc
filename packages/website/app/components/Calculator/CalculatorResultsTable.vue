@@ -1318,7 +1318,7 @@ defineExpose({
 								id="results-remove-unused"
 								class="pretend-ui-btn"
 								:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
-								title="remove empty columns and sections without corresponding damage source"
+								title="remove empty columns and sections without a corresponding damage source"
 								@click="cleanupUnused"
 							>
 								remove unused
@@ -2266,7 +2266,7 @@ defineExpose({
 					}
 
 					&.unknown {
-						--at-apply: 'text-[#f0f]';
+						--at-apply: 'text-[--unknown-clr]';
 					}
 
 					> * {
@@ -2315,7 +2315,7 @@ defineExpose({
 						}
 
 						&.unknown {
-							--at-apply: 'text-[#f0f]';
+							--at-apply: 'text-[--unknown-clr]';
 						}
 
 						&:not(.irrelevant) > span {
