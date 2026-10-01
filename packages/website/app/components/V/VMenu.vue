@@ -13,87 +13,113 @@ defineProps<{
 	][];
 }>();
 
-function onColumnMenuToggle(event: ToggleEvent) {
-	if (event.newState !== 'open') {
-		return;
-	}
+const trigger = useTemplateRef('trigger');
+const menu = useTemplateRef('menu');
 
-	nextTick(() => {
-		for (const child of (event.currentTarget as HTMLElement).children) {
-			if (child.getAttribute('disabled') !== 'true') {
-				(child as HTMLElement).focus();
-			}
-		}
-	});
+let pendingFocus: 'first' | 'last' = 'first';
+
+function getEnabledItems(menu: HTMLElement) {
+	return [...menu.querySelectorAll<HTMLButtonElement>('[role="menuitem"]:not(:disabled)')];
 }
 
-function onColumnMenuKeydown(event: KeyboardEvent) {
-	const menu = event.currentTarget as HTMLElement;
-	const items = [...menu.querySelectorAll<HTMLButtonElement>(':not(:disabled)')];
-	if (!items.length) {
+function focusItem(menu: HTMLElement, which: 'first' | 'last') {
+	const items = getEnabledItems(menu);
+	(which === 'first' ? items[0] : items.at(-1))?.focus();
+}
+
+function onMenuToggle(event: ToggleEvent) {
+	if (event.newState === 'open') {
+		focusItem(event.target as HTMLElement, pendingFocus);
+		pendingFocus = 'first';
+	}
+}
+
+function onTriggerKeydown(event: KeyboardEvent) {
+	if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') {
 		return;
 	}
 
+	event.preventDefault();
+	const el = menu.value!;
+	const which = event.key === 'ArrowUp' ? 'last' : 'first';
+
+	if (el.matches(':popover-open')) {
+		focusItem(el, which);
+	} else {
+		pendingFocus = which;
+		el.showPopover();
+	}
+}
+
+function onMenuKeydown(event: KeyboardEvent) {
+	const items = getEnabledItems(event.currentTarget as HTMLElement);
 	const index = items.indexOf(document.activeElement as HTMLButtonElement);
-	if (!~index) {
+	if (index === -1) {
 		return;
 	}
 
-	console.log('keying');
 	switch (event.key) {
-		case 'ArrowDown': {
+		case 'ArrowDown':
 			event.preventDefault();
 			items[(index + 1) % items.length]!.focus();
 			break;
-		}
-		case 'ArrowUp': {
+		case 'ArrowUp':
 			event.preventDefault();
 			items[(index - 1 + items.length) % items.length]!.focus();
 			break;
-		}
-		case 'Home': {
+		case 'Home':
 			event.preventDefault();
 			items[0]!.focus();
 			break;
-		}
-		case 'End': {
+		case 'End':
 			event.preventDefault();
-			items[items.length - 1]!.focus();
+			items.at(-1)!.focus();
 			break;
-		}
+	}
+}
+
+function onMenuFocusout(event: FocusEvent) {
+	const menuEl = event.currentTarget as HTMLElement;
+	if (event.target !== trigger.value && !menuEl.contains(event.relatedTarget as Node | null)) {
+		menuEl.hidePopover();
 	}
 }
 
 function selectOption(event: MouseEvent, callback: () => unknown) {
 	callback();
-	((event.currentTarget as HTMLElement)?.closest('[popover]') as HTMLElement)?.hidePopover();
+	(event.currentTarget as HTMLElement).closest<HTMLElement>('[popover]')?.hidePopover();
 }
 </script>
 
 <template>
 	<button
 		v-bind="$attrs"
+		ref="trigger"
 		class="v-menu-trigger"
 		aria-haspopup="menu"
 		:aria-controls="`menu-${id}`"
 		:popovertarget="`menu-${id}`"
+		@keydown="onTriggerKeydown"
 	>
 		<slot />
 	</button>
 	<div
 		:id="`menu-${id}`"
+		ref="menu"
 		class="v-menu"
 		popover="auto"
 		role="menu"
 		:aria-label="label"
-		@toggle="onColumnMenuToggle($event)"
-		@keydown="onColumnMenuKeydown($event)"
+		@toggle="onMenuToggle"
+		@keydown="onMenuKeydown"
+		@focusout="onMenuFocusout"
 	>
 		<button
 			v-for="(item, index) in items"
 			:key="index"
 			role="menuitem"
-			:disabled="toValue(item[2])"
+			tabindex="-1"
+			:disabled="item[2]"
 			@click="selectOption($event, item[1])"
 		>
 			{{ item[0] }}
@@ -114,6 +140,24 @@ function selectOption(event: MouseEvent, callback: () => unknown) {
 
 		&:popover-open {
 			--at-apply: 'flex';
+		}
+
+		> * {
+			--at-apply: 'py-1 px-2 text-neutral-200';
+
+			&:hover,
+			&:focus-visible {
+				--at-apply: 'bg-white/10';
+			}
+
+			&:disabled {
+				--at-apply: 'text-neutral-500';
+
+				&:hover,
+				&:focus-visible {
+					--at-apply: 'bg-transparent';
+				}
+			}
 		}
 	}
 }

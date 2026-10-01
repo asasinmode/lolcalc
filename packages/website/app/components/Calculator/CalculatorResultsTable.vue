@@ -2123,8 +2123,9 @@ defineExpose({
 						}
 					}
 
-					> [role='menu'] {
-						--at-apply: '';
+					> .v-menu {
+						inset-block-start: calc(anchor(end) - 1px);
+						justify-self: anchor-center;
 					}
 				}
 

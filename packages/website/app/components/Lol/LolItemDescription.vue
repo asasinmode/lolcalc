@@ -5,7 +5,7 @@ import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
 import { calculateDynamicVariables, specificKnownVariables } from '@lolcalc/core/specifics';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
-import { CONSTS, ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
+import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta';
 import { UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared/index';
 
