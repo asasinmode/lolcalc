@@ -1216,19 +1216,21 @@ function recomputeCustomTotalRow() {
 }
 
 const controlButtonSize = ref(28);
+const baseHeaderColWidth = ref(280);
 
-function updateControlBtnSize() {
+function updateColWidth() {
 	/* any element that uses --manipulate-btn-size var */
 	controlButtonSize.value = document.getElementById('results-remove-unused')?.getBoundingClientRect().height ?? 28;
+	baseHeaderColWidth.value = Math.max(160, Math.min(280, Math.round(window.innerWidth * 0.3)));
 }
 
 onMounted(() => {
-	window.addEventListener('resize', updateControlBtnSize, { passive: true });
-	updateControlBtnSize();
+	window.addEventListener('resize', updateColWidth, { passive: true });
+	updateColWidth();
 });
 
 onBeforeUnmount(() => {
-	window.removeEventListener('resize', updateControlBtnSize);
+	window.removeEventListener('resize', updateColWidth);
 });
 
 const colW = computed(() => {
@@ -1238,7 +1240,7 @@ const colW = computed(() => {
 	return {
 		/* + padding left */
 		controls: 2 * controlButtonSize.value + 12,
-		header: Math.round(280 + 140 * n / (growUpToCols + 1)),
+		header: Math.round(baseHeaderColWidth.value + 140 * n / (growUpToCols + 1)),
 		result: Math.round(120 + 90 * n / (growUpToCols + 1)),
 	};
 });
@@ -1962,7 +1964,8 @@ defineExpose({
 						}
 
 						> select {
-							--at-apply: 'inline-[--fluid-164-256-t640] px-1.5 bg-white text-black';
+							/* make sure to more or less sync `t940` with `baseHeaderColWidth` */
+							--at-apply: 'inline-[--fluid-164-256-t940] px-1.5 bg-white text-black';
 							color-scheme: light;
 
 							&:disabled {
@@ -2267,7 +2270,7 @@ defineExpose({
 					}
 
 					> th {
-						--at-apply: 'hyphens-auto wrap-anywhere';
+						--at-apply: 'hyphens-auto wrap-anywhere sticky inset-s-0 z-2';
 						--ps: calc(2 * var(--manipulate-btn-size));
 						anchor-scope: --parent;
 
