@@ -142,7 +142,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] header, footer, contact info
 - [x] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
 - [ ] mobile version and make look better
-  - [ ] results sticky horizontal headers, probably unwanted on mobile, headers might be unwanted too with `@media (height < ...)`
+  - [x] results sticky horizontal headers, probably unwanted on mobile, headers might be unwanted too with `@media (height < ...)`
   - [ ] tooltips
 - [ ] calculations
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
@@ -199,17 +199,14 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
-    - [ ] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling (actually might not have to be 1 diff, but probably add disclaimer and settle on acceptable margin of error)
-    - [ ] ashe passive not decaying because I couldn't come up with a design I'm happy with
+    - [x] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling (actually might not have to be 1 diff, but probably add disclaimer and settle on acceptable margin of error)
     - [ ] screenshots showing it accurately calculating things
-    - [ ] decaying move speed bonuses
     - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
-    - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (and test it)
+    - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (tested)
     - [ ] describe item description inventory/shop view, possibly add it for runes too
     - [ ] serpent's fang displayed values don't match up, probably test more (was tested on shieldbow, assumedly shieldbow "puts back" hp to the threshold then gives shield and that shield is then reduced)
     - [ ] effect from champion overrides external one (also tries to remove it if present, like Nami)
     - [ ] results effects applied from target to source override the ones present on source (W from nasus applied to target overrides the Wither effect already present on target)
-    - [ ] if I'm slow to update something or something is broken, remember it's Riot Games game and I'm just a person trying my best to provide a useful tool
     - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
     - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
   - [ ] github readme

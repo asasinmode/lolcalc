@@ -73,12 +73,16 @@ function selectOption(event: MouseEvent, callback: () => unknown) {
 <template>
 	<button
 		v-bind="$attrs"
-		aria-haspopup="menu" :aria-controls="`menu-${id}`" :popovertarget="`menu-${id}`"
+		class="v-menu-trigger"
+		aria-haspopup="menu"
+		:aria-controls="`menu-${id}`"
+		:popovertarget="`menu-${id}`"
 	>
 		<slot />
 	</button>
 	<div
 		:id="`menu-${id}`"
+		class="v-menu"
 		popover="auto"
 		role="menu"
 		:aria-label="label"
@@ -99,5 +103,18 @@ function selectOption(event: MouseEvent, callback: () => unknown) {
 
 <style>
 @layer components {
+	.v-menu-trigger {
+		--at-apply: '';
+		anchor-name: --v-menu-trigger;
+	}
+
+	.v-menu {
+		--at-apply: 'bg-[--placeholder-champion-bg-clr] b b-[--ui-btn-border-clr] flex-col';
+		position-anchor: --v-menu-trigger;
+
+		&:popover-open {
+			--at-apply: 'flex';
+		}
+	}
 }
 </style>

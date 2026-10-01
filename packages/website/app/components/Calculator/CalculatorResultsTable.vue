@@ -2079,6 +2079,8 @@ defineExpose({
 				}
 
 				&:not(:last-child) > div {
+					anchor-scope: --v-menu-trigger;
+
 					> button {
 						--at-apply: 'grid place-items-center self-center';
 
@@ -2119,6 +2121,10 @@ defineExpose({
 								--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
 							}
 						}
+					}
+
+					> [role='menu'] {
+						--at-apply: '';
 					}
 				}
 
