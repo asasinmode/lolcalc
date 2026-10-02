@@ -1996,6 +1996,20 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.rabadon]: {
 		AP_MULTIPLIER: ITEMS_BY_NAME.rabadon?.dataValues.APAmp,
+		variables: defineVariables({
+			known: {
+				f1: [],
+			},
+			calculate(self) {
+				return {
+					/** ap gained from passive */
+					f1: {
+						value: self.stats.value.variables.rabadonMagicalOpus
+							?? (self.stats.value.variables.apMultipliersBase * ITEMS_BY_NAME.rabadon?.dataValues.APAmp),
+					},
+				};
+			},
+		}),
 		calculateHooks: {
 			postItemTotal: {
 				handler(_self, { itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
@@ -2032,20 +2046,6 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers[ITEM_NAME_TO_ID.rabadon],
 			},
 		},
-		variables: defineVariables({
-			known: {
-				f1: [],
-			},
-			calculate(self) {
-				return {
-					/** ap gained from passive */
-					f1: {
-						value: self.stats.value.variables.rabadonMagicalOpus
-							?? (self.stats.value.variables.apMultipliersBase * ITEMS_BY_NAME.rabadon?.dataValues.APAmp),
-					},
-				};
-			},
-		}),
 	},
 	[ITEM_NAME_TO_ID.knightsVow]: {
 		variables: defineVariables({

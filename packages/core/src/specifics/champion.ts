@@ -4415,7 +4415,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { adaptiveForceMeta, totalStats, bonusStats, dragonStatMultipliers, championPassiveStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, dragonStatMultipliers, championPassiveStats, itemPassivesStats, itemTotalStats, totalMultipliersStats, dragonStats }, { calculatedVariables, miscDebug }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
 					const hpToAp = championAbilityVariableValue('HPforAP', passiveParams);
 					const apToHp = championAbilityVariableValue('APRatioBonusHP', passiveParams);
@@ -4427,28 +4427,86 @@ export const CHAMPION_SPECIFICS = {
 
 					const totalApMultiplier = calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower + calculatedVariables.midQuestMultiplier;
 
-					const excludedHPBaseAP = (calculatedVariables.riftmakerVoidInfusion ?? 0);
-
 					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
-					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower
-						- excludedHPBaseAP * totalApMultiplier;
+					const baseAP = miscDebug.vladimirPassiveAPHPBase / hpToAp.value;
+					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower + baseAP * (totalApMultiplier - 1);
 
-					const passiveHp = miscDebug.vladimirPassiveHPAPBase * apToHp.value;
-					let passiveAp = miscDebug.vladimirPassiveAPHPBase / hpToAp.value + passiveHp * (calculatedVariables.riftmakerBonusHPToAP ?? 0);
+					const riftmakerBonusHpToAp = calculatedVariables.riftmakerBonusHPToAP ?? 0;
+					const passiveHp = (miscDebug.vladimirPassiveHPAPBase * apToHp.value) / (1 - riftmakerBonusHpToAp * totalApMultiplier * apToHp.value);
 
-					calculatedVariables.apMultipliersBase += passiveAp;
-					passiveAp *= totalApMultiplier;
-
-					calculatedVariables.vladimirPassiveAp = passiveAp;
+					/* not tracking stats to `totalPreMultipliersStats`, which maybe should be done but don't really know if anything else I'm trying to track below makes sense. Revisit if there are any issues */
 					calculatedVariables.vladimirPassiveHp = passiveHp;
-
-					totalStats.abilityPower += passiveAp;
-					bonusStats.abilityPower += passiveAp;
-					championPassiveStats.abilityPower = passiveAp;
-
+					calculatedVariables.apMultipliersBase += baseAP;
+					championPassiveStats.hp = passiveHp;
 					totalStats.hp += passiveHp;
 					bonusStats.hp += passiveHp;
-					championPassiveStats.hp = passiveHp;
+
+					let totalAP = baseAP;
+					if (calculatedVariables.rabadonApMultiplier) {
+						const value = baseAP * calculatedVariables.rabadonApMultiplier;
+						calculatedVariables.rabadonMagicalOpus! += value;
+						totalAP += value;
+						itemPassivesStats.abilityPower += value;
+						itemTotalStats.abilityPower += value;
+					}
+					if (calculatedVariables.blackfireTorchBBlazeMultiplier) {
+						const value = baseAP * calculatedVariables.blackfireTorchBBlazeMultiplier;
+						calculatedVariables.blackfireTorchBBlazeAP! += value;
+						totalAP += value;
+						itemPassivesStats.abilityPower += value;
+						itemTotalStats.abilityPower += value;
+					}
+					if (dragonStatMultipliers.abilityPower) {
+						const value = baseAP * dragonStatMultipliers.abilityPower;
+						totalAP += value;
+						dragonStats.abilityPower! += value;
+						totalMultipliersStats.abilityPower += value;
+					}
+					if (calculatedVariables.midQuestMultiplier) {
+						const value = baseAP * calculatedVariables.midQuestMultiplier;
+						totalAP += value;
+						calculatedVariables.midQuestAp! += value;
+						totalMultipliersStats.abilityPower += value;
+					}
+
+					calculatedVariables.vladimirPassiveAp = totalAP;
+					championPassiveStats.abilityPower = totalAP;
+					totalStats.abilityPower += totalAP;
+					bonusStats.abilityPower += totalAP;
+
+					if (riftmakerBonusHpToAp) {
+						const passiveHPInfusion = passiveHp * riftmakerBonusHpToAp;
+						calculatedVariables.riftmakerVoidInfusion! += passiveHPInfusion;
+
+						let riftmakerTotalAp = passiveHPInfusion;
+						if (calculatedVariables.rabadonApMultiplier) {
+							const value = passiveHPInfusion * calculatedVariables.rabadonApMultiplier;
+							calculatedVariables.rabadonMagicalOpus! += value;
+							riftmakerTotalAp += value;
+						}
+						if (calculatedVariables.blackfireTorchBBlazeMultiplier) {
+							const value = passiveHPInfusion * calculatedVariables.blackfireTorchBBlazeMultiplier;
+							calculatedVariables.blackfireTorchBBlazeAP! += value;
+							riftmakerTotalAp += value;
+						}
+						if (dragonStatMultipliers.abilityPower) {
+							const value = passiveHPInfusion * dragonStatMultipliers.abilityPower;
+							riftmakerTotalAp += value;
+							dragonStats.abilityPower! += value;
+							totalMultipliersStats.abilityPower += value;
+						}
+						if (calculatedVariables.midQuestMultiplier) {
+							const value = passiveHPInfusion * calculatedVariables.midQuestMultiplier;
+							riftmakerTotalAp += value;
+							calculatedVariables.midQuestAp! += value;
+							totalMultipliersStats.abilityPower += value;
+						}
+
+						itemPassivesStats.abilityPower += riftmakerTotalAp;
+						itemTotalStats.abilityPower += riftmakerTotalAp;
+						totalStats.abilityPower += riftmakerTotalAp;
+						bonusStats.abilityPower += riftmakerTotalAp;
+					}
 				},
 				priority: HOOK_PRIORITIES.postTotal.Vladimir,
 			},

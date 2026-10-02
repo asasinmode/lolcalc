@@ -1,6 +1,5 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
-import type { IDragonName, IItem } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
