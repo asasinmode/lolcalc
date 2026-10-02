@@ -73,14 +73,29 @@ function hideSharePopover() {
 	hasCopiedShareLink.value = false;
 	shareTextPopover.value?.hidePopover();
 }
+
+const header = useTemplateRef('header');
+const menuBtn = useTemplateRef('menuBtn');
+
+onMounted(() => {
+	const observer = new IntersectionObserver(([entry]) => {
+		if (entry!.isIntersecting) {
+			menuBtn.value?.removeAttribute('data-stuck');
+		} else {
+			menuBtn.value?.setAttribute('data-stuck', '');
+		}
+	}, { threshold: 1 });
+
+	header.value && observer.observe(header.value);
+});
 </script>
 
 <template>
-	<button id="menu-btn" title="menu" popovertarget="page-nav">
+	<button id="menu-btn" ref="menuBtn" title="menu" popovertarget="page-nav">
 		<span>menu</span>
 		<Icon class="i-ph:list-bold" />
 	</button>
-	<header>
+	<header ref="header">
 		<div>
 			<h1>
 				<a :href="$config.app.baseURL">
@@ -241,7 +256,11 @@ function hideSharePopover() {
 
 	#__nuxt {
 		#menu-btn {
-			--at-apply: 'fixed inset-e-0 inset-bs-[--menu-btn-bs] z-11 ms-auto -translate-x-(--size-page-computed-px) translate-y-[calc(0.5*var(--header-logo-size)-50%)] rounded-[50%] b b-transparent bg-(--mauve-bg) transition-[box-shadow,border]';
+			--at-apply: 'fixed inset-e-0 inset-bs-[--menu-btn-bs] z-11 ms-auto -translate-x-[--size-page-computed-px] translate-y-[calc(0.5*var(--header-logo-size)-50%)] rounded-[50%] b b-transparent bg-[--mauve-bg] transition-[box-shadow,border]';
+
+			&[data-stuck] {
+				--at-apply: 'b-neutral-500 shadow';
+			}
 
 			> span:nth-child(2) {
 				--at-apply: '-ms-px -mbs-px';
