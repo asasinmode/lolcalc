@@ -1,5 +1,7 @@
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
+import type { IDragonName, IItem } from '@lolcalc/data/types.js';
+import assert from 'node:assert';
 import test from 'node:test';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { nextTick } from 'vue';
@@ -173,5 +175,127 @@ test('26.19 Jayce', async (t) => {
 			armor: 354,
 			magicResist: 301,
 		}, damageSource, 'hammer jaksho bloodmail');
+	});
+});
+
+test('26.19 Vladimir passive interactions', async (t) => {
+	const sourceCommon: IOverrides<'Vladimir'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [ITEMS_BY_NAME.ludensEcho, ITEMS_BY_NAME.heartsteel, ITEMS_BY_NAME.bootsOfSwiftness],
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 150,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 1754);
+	});
+
+	await t.test('rabadon', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: sourceCommon.items!.concat(ITEMS_BY_NAME.rabadon),
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 364,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 2097);
+	});
+
+	await t.test('riftmaker', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: sourceCommon.items!.concat(ITEMS_BY_NAME.riftmaker),
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			abilityPower: 265,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 2270);
+	});
+
+	await t.test('bloodmail', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: sourceCommon.items!.concat(ITEMS_BY_NAME.overlordsBloodmail),
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 128,
+			abilityPower: 169,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 2304);
+
+		damageSource.currentHealth.value = 343;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 143,
+		}, damageSource);
+	});
+
+	await t.test('rabadon, riftmaker, bloodmail', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: sourceCommon.items!.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.overlordsBloodmail),
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 152,
+			abilityPower: 564,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 3268);
+
+		damageSource.currentHealth.value = 740;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 170,
+		}, damageSource);
+	});
+
+	await t.test('rabadon, riftmaker, bloodmail | 4 infernals', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: sourceCommon.items!.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.overlordsBloodmail),
+			dragonStacks: ['Infernal', 'Infernal', 'Infernal', 'Infernal'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 172,
+			abilityPower: 618,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 3355);
+
+		damageSource.currentHealth.value = 400;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 191,
+		}, damageSource);
+	});
+
+	await t.test('rabadon, riftmaker, bloodmail | 4 infernals | mid quest', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Vladimir', {
+			...sourceCommon,
+			items: sourceCommon.items!.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.overlordsBloodmail),
+			dragonStacks: ['Infernal', 'Infernal', 'Infernal', 'Infernal'],
+			roleQuest: 'mid',
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 184,
+			abilityPower: 686,
+		}, damageSource);
+		assert.equal(damageSource.maxHealth.value, 3463);
+
+		damageSource.currentHealth.value = 480;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			attackDamage: 204,
+		}, damageSource);
 	});
 });

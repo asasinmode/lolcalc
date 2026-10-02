@@ -137,6 +137,153 @@
 					]
 				}
 			}
+		},
+		"Vladimir": {
+			"partype": "Crimson Rush",
+			"stats": {
+				"hp": 600,
+				"hpperlevel": 110,
+				"mp": 2,
+				"mpperlevel": 0,
+				"movespeed": 330,
+				"armor": 24,
+				"armorperlevel": 4.5,
+				"spellblock": 30,
+				"spellblockperlevel": 1.3,
+				"attackrange": 450,
+				"hpregen": 7,
+				"hpregenperlevel": 0.6,
+				"mpregen": 0,
+				"mpregenperlevel": 0,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 55,
+				"attackdamageperlevel": 3,
+				"attackspeedperlevel": 2,
+				"attackspeed": 0.658,
+				"attackspeedratio": 0.658
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Crimson Pact",
+							"objectName": "VladimirBloodGorged",
+							"dataKey": "Characters/Vladimir/Spells/VladimirBloodGorgedAbility/VladimirBloodGorged",
+							"image": "assets/characters/vladimir/hud/icons2d/vladimirp.png",
+							"tooltip": "{{Spell_VladimirP_Tooltip}}",
+							"tooltipExtended": "{{Spell_VladimirP_Tooltip}}<br><br><rules>These bonuses don't count for each other.</rules>",
+							"dataValues": {
+								"HPforAP": [30, 30, 30, 30, 30, 30, 30],
+								"APRatioBonusHP": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6]
+							},
+							"spellCalculations": {
+								"ApproximateAPBonusAvoidingRecursion": {
+									"mMultiplier": {
+										"mNumber": 1.06,
+										"__type": "NumberCalculationPart"
+									},
+									"mSimpleTooltipCalculationDisplay": 5,
+									"mExpandedTooltipCalculationDisplay": 5,
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mSubparts": [
+													{
+														"mStat": 12,
+														"mStatFormula": 2,
+														"mCoefficient": 1,
+														"__type": "StatByCoefficientCalculationPart"
+													},
+													{
+														"mPart1": {
+															"mDataValue": "APRatioBonusHP",
+															"__type": "NamedDataValueCalculationPart"
+														},
+														"mPart2": {
+															"mCoefficient": -1,
+															"__type": "StatByCoefficientCalculationPart"
+														},
+														"__type": "ProductOfSubPartsCalculationPart"
+													}
+												],
+												"__type": "SumOfSubPartsCalculationPart"
+											},
+											"mPart2": {
+												"mPart1": {
+													"mNumber": 0.01,
+													"__type": "NumberCalculationPart"
+												},
+												"mPart2": {
+													"mNumber": 3.333,
+													"__type": "NumberCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
+										}
+									]
+								},
+								"ApproximateHPBonusAvoidingRecursion": {
+									"mSimpleTooltipCalculationDisplay": 5,
+									"mExpandedTooltipCalculationDisplay": 5,
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mSubparts": [
+													{
+														"mStatFormula": 2,
+														"mCoefficient": 1,
+														"__type": "StatByCoefficientCalculationPart"
+													},
+													{
+														"mPart1": {
+															"mPart1": {
+																"mNumber": 0.01,
+																"__type": "NumberCalculationPart"
+															},
+															"mPart2": {
+																"mNumber": 3.333,
+																"__type": "NumberCalculationPart"
+															},
+															"__type": "ProductOfSubPartsCalculationPart"
+														},
+														"mPart2": {
+															"mStat": 12,
+															"mStatFormula": 2,
+															"mCoefficient": -1,
+															"__type": "StatByCoefficientCalculationPart"
+														},
+														"__type": "ProductOfSubPartsCalculationPart"
+													}
+												],
+												"__type": "SumOfSubPartsCalculationPart"
+											},
+											"mPart2": {
+												"mPart1": {
+													"mNumber": 1.06,
+													"__type": "NumberCalculationPart"
+												},
+												"mPart2": {
+													"mDataValue": "APRatioBonusHP",
+													"__type": "NamedDataValueCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"0": [30, 30, 30, 30, 30, 30, 30],
+								"1": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6]
+							}
+						}
+					]
+				}
+			}
 		}
 	},
 	"items": {
@@ -249,6 +396,16 @@
 				}
 			}
 		},
+		"3009": {
+			"searchString": "bootsofswiftness;swifties;boots;movespeed",
+			"stats": {
+				"FlatMovementSpeedMod": 55
+			},
+			"dataValues": {
+				"SlowResistTooltip": 25,
+				"FeatsMS": 5
+			}
+		},
 		"3072": {
 			"searchString": "bloodthirster;bt;healsword;damage;lifesteal;attackdamage",
 			"stats": {
@@ -303,6 +460,204 @@
 							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
+				}
+			}
+		},
+		"3084": {
+			"searchString": "heartsteel;quest;steal;boyband;health;healthregen",
+			"stats": {
+				"FlatHPPoolMod": 900,
+				"PercentBaseHPRegenMod": 1
+			},
+			"dataValues": {
+				"PerTargetCooldown": 30,
+				"BaseDamage": 70,
+				"HPRatio": 0.06,
+				"DamageToMaxHealthRatio": 0.1,
+				"DistanceToChampion": 700,
+				"NumTicksToTrigger": 6,
+				"RangeTrackingBuffDuration": 5,
+				"TrackerTickRate": 0.5,
+				"MaxHPRatio": 0.06,
+				"HealthSizeThreshold": 1000,
+				"SizeAmount": 0.03,
+				"SizeCap": 0.3,
+				"Cooldown": 30
+			},
+			"itemCalculations": {
+				"DamageProcCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "HPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ProcHealthGain": {
+					"mMultiplier": {
+						"mDataValue": "DamageToMaxHealthRatio",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mModifiedGameCalculation": "DamageProcCalc",
+					"__type": "GameCalculationModified"
+				},
+				"TotalDemolishTime": {
+					"mMultiplier": {
+						"mDataValue": "NumTicksToTrigger",
+						"__type": "NamedDataValueCalculationPart"
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "TrackerTickRate",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "MaxHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"3089": {
+			"searchString": "rabadonsdeathcap;dc;dcap;hat;banksys;wooglets;witchcap;spelldamage;abilitypower",
+			"stats": {
+				"FlatMagicDamageMod": 130
+			},
+			"dataValues": {
+				"APAmp": 0.3
+			}
+		},
+		"3170": {
+			"searchString": "swiftmarch;boots;movespeed",
+			"stats": {
+				"FlatMovementSpeedMod": 65
+			},
+			"dataValues": {
+				"MoveSpeedMultiplier": 0.04,
+				"SlowResistTooltip": 0.25,
+				"MSAdaptiveRatio": 0.05
+			},
+			"itemCalculations": {
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MSToAdaptiveCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 7,
+							"mDataValue": "MSAdaptiveRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
+		},
+		"4633": {
+			"searchString": "riftmaker;velkoz;health;spelldamage;cooldownreduction;spellvamp;abilitypower",
+			"stats": {
+				"FlatHPPoolMod": 350,
+				"FlatMagicDamageMod": 70,
+				"AbilityHasteMod": 15
+			},
+			"dataValues": {
+				"SecondsInCombat": 4,
+				"EternityDamageIncreasePerSecond": 0.02,
+				"EternityDamageIncreaseMax": 0.08,
+				"BuffCounterDuration": 4,
+				"HealthToAPConversionPercent": 0.02,
+				"MaxAPMultiplier": 0.05,
+				"VampAmountMelee": 0.1,
+				"VampAmountRanged": 0.06
+			},
+			"itemCalculations": {
+				"{1247259a}": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthToAPConversionPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountMelee",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountRanged",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
+		},
+		"6655": {
+			"searchString": "ludensecho;spelldamage;mana;cooldownreduction;abilityhaste;abilitypower",
+			"stats": {
+				"FlatMPPoolMod": 600,
+				"FlatMagicDamageMod": 100,
+				"AbilityHasteMod": 10
+			},
+			"dataValues": {
+				"Cooldown": 12,
+				"BaseDamage": 75,
+				"APRatio": 0.05,
+				"MaxCharges": 6,
+				"RepeatDamageReduction": 0.2,
+				"MissileRange": 650
+			},
+			"itemCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"SingleTargetMax": {
+					"mMultiplier": {
+						"mNumber": 2,
+						"__type": "NumberCalculationPart"
+					},
+					"mModifiedGameCalculation": "Damage",
+					"__type": "GameCalculationModified"
 				}
 			}
 		},

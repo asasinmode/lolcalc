@@ -4427,8 +4427,7 @@ export const CHAMPION_SPECIFICS = {
 
 					const totalApMultiplier = calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower + calculatedVariables.midQuestMultiplier;
 
-					const excludedHPBaseAP = (adaptiveForceMeta[1] === 1 ? calculatedVariables.totalAdaptiveForce : 0)
-						+ (calculatedVariables.riftmakerVoidInfusion ?? 0);
+					const excludedHPBaseAP = (calculatedVariables.riftmakerVoidInfusion ?? 0);
 
 					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
 					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower
