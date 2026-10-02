@@ -284,6 +284,10 @@ export interface IStatsCalculationVariables {
 	kledSkaarlHP?: number;
 	/** percent amp and mr/armor/hp from ornn's passive */
 	ornnPassiveStatAmp?: number;
+	/** mana gained from ryze's passive */
+	ryzePMana?: number;
+	/** pyke's passive variable ratio */
+	pykePassiveHpToAd?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
@@ -323,20 +327,6 @@ export interface IStatsCalculationMiscDebug {
 	endlessBonusAd?: number;
 	/** total movespeed swiftmarch's passive is based on */
 	swiftmarchTotalMs?: number;
-	/** total ap ryze passive is based on */
-	ryzePassiveAPBase?: number;
-	/** mana value ryze's passive is applied onto */
-	ryzePassiveManaBase?: number;
-	/** mana gained from ryze's passive */
-	ryzePMana?: number;
-	/** bonus hp vladimir passive starts the ap calculations off of */
-	vladimirPassiveAPHPBase?: number;
-	/** total ap vladimir passive starts hp calculations off of */
-	vladimirPassiveHPAPBase?: number;
-	/** Math.floor(stacks / stacksForBonus) */
-	sennaPassiveStacksStep?: number;
-	/** pyke's passive variable ratio */
-	pykePassiveHpToAd?: number;
 	zeriExcessAS?: number;
 	zeriExcessASPercent?: number;
 }

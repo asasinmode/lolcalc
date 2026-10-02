@@ -3141,27 +3141,27 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { championPassiveStats, itemPassivesStats, itemBaseStats }, { miscDebug }) {
+				handler(self, { championPassiveStats, itemPassivesStats, itemBaseStats }, { calculatedVariables }) {
 					const hpToAd = championAbilityVariableValue('HPPerBAD', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
 
 					if (typeof hpToAd.value === 'number') {
-						miscDebug.pykePassiveHpToAd = hpToAd.value;
+						calculatedVariables.pykePassiveHpToAd = hpToAd.value;
 						const bonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
-						championPassiveStats.attackDamage = bonusHp / miscDebug.pykePassiveHpToAd;
+						championPassiveStats.attackDamage = bonusHp / calculatedVariables.pykePassiveHpToAd;
 
 						itemBaseStats.hp = 0;
 						itemPassivesStats.hp = 0;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS pyke] failed to calculate passive hp to ad', hpToAd);
-						miscDebug.pykePassiveHpToAd = 0;
+						calculatedVariables.pykePassiveHpToAd = 0;
 					}
 				},
 				priority: HOOK_PRIORITIES.preItemTotal.Pyke,
 			},
 			preBonus: {
-				handler(_self, { runeShardStats, championPassiveStats }, { miscDebug }) {
+				handler(_self, { runeShardStats, championPassiveStats }, { calculatedVariables }) {
 					if (runeShardStats.hp) {
-						championPassiveStats.attackDamage! += runeShardStats.hp / miscDebug.pykePassiveHpToAd!;
+						championPassiveStats.attackDamage! += runeShardStats.hp / calculatedVariables.pykePassiveHpToAd!;
 						runeShardStats.hp = 0;
 					}
 				},
@@ -3494,7 +3494,7 @@ export const CHAMPION_SPECIFICS = {
 				calculate(self) {
 					return {
 						PassiveMana: {
-							value: self.stats.value.miscDebug.ryzePMana ?? 0,
+							value: self.stats.value.variables.ryzePMana ?? 0,
 						},
 					};
 				},
@@ -3507,7 +3507,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStats, dragonStatMultipliers }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStats, dragonStatMultipliers }, { calculatedVariables }) {
 					const apToMana = championAbilityVariableValue(
 							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
 							{
@@ -3538,7 +3538,7 @@ export const CHAMPION_SPECIFICS = {
 
 					calculatedVariables.ryzePassivePercentManaIncrease = totalStats.abilityPower / loopDivisor * apToManaRatio;
 					const passiveMana = totalStats.mana * calculatedVariables.ryzePassivePercentManaIncrease;
-					miscDebug.ryzePMana = passiveMana;
+					calculatedVariables.ryzePMana = passiveMana;
 
 					const passiveHp = passiveMana * approachFimbulManaToHp;
 					const basePassiveAp = (passiveMana * seraphManaToAp) + (passiveHp * riftmakerBonusHPToAP);
@@ -3732,7 +3732,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postInit: {
-				handler(self, { championPassiveStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { championPassiveStats }, { calculatedVariables }) {
 					const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
 
 					const critDamageMod = championAbilityVariableValue('CritDamageMod', params);
@@ -3746,22 +3746,21 @@ export const CHAMPION_SPECIFICS = {
 					const stacksStep = championAbilityVariableValue('StacksForBonus', params);
 					if (typeof stacksStep.value !== 'number') {
 						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive stacks step', stacksStep);
-						miscDebug.sennaPassiveStacksStep = 0;
 						return;
 					}
 
-					miscDebug.sennaPassiveStacksStep = Math.floor(self.internalData.value.passiveStacks / stacksStep.value);
+					const sennaPassiveStacksStep = Math.floor(self.internalData.value.passiveStacks / stacksStep.value);
 
 					const rangePerStep = championAbilityVariableValue('BonusRange', params);
 					if (typeof rangePerStep.value === 'number') {
-						championPassiveStats.attackRange = rangePerStep.value * miscDebug.sennaPassiveStacksStep;
+						championPassiveStats.attackRange = rangePerStep.value * sennaPassiveStacksStep;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive range per step', rangePerStep);
 					}
 
 					const critPerStep = championAbilityVariableValue('BonusCritChance', params);
 					if (typeof critPerStep.value === 'number') {
-						championPassiveStats.critChance = critPerStep.value * miscDebug.sennaPassiveStacksStep / 100;
+						championPassiveStats.critChance = critPerStep.value * sennaPassiveStacksStep / 100;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive crit per step', critPerStep);
 					}
@@ -4415,7 +4414,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		calculateHooks: {
 			postTotal: {
-				handler(self, { totalStats, bonusStats, dragonStatMultipliers, championPassiveStats, itemPassivesStats, itemTotalStats, totalMultipliersStats, dragonStats }, { calculatedVariables, miscDebug }) {
+				handler(self, { totalStats, bonusStats, dragonStatMultipliers, championPassiveStats, itemPassivesStats, itemTotalStats, totalMultipliersStats, dragonStats }, { calculatedVariables }) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
 					const hpToAp = championAbilityVariableValue('HPforAP', passiveParams);
 					const apToHp = championAbilityVariableValue('APRatioBonusHP', passiveParams);
@@ -4427,55 +4426,54 @@ export const CHAMPION_SPECIFICS = {
 
 					const totalApMultiplier = calculatedVariables.totalItemApMultipliers + dragonStatMultipliers.abilityPower + calculatedVariables.midQuestMultiplier;
 
-					miscDebug.vladimirPassiveAPHPBase = bonusStats.hp;
-					const baseAP = miscDebug.vladimirPassiveAPHPBase / hpToAp.value;
-					miscDebug.vladimirPassiveHPAPBase = totalStats.abilityPower + baseAP * (totalApMultiplier - 1);
-
+					const baseAP = bonusStats.hp / hpToAp.value;
 					const riftmakerBonusHpToAp = calculatedVariables.riftmakerBonusHPToAP ?? 0;
-					const passiveHp = (miscDebug.vladimirPassiveHPAPBase * apToHp.value) / (1 - riftmakerBonusHpToAp * totalApMultiplier * apToHp.value);
+					const hpAPBase = totalStats.abilityPower + baseAP * (totalApMultiplier - 1);
+					const passiveHP = (hpAPBase * apToHp.value) / (1 - riftmakerBonusHpToAp * totalApMultiplier * apToHp.value);
 
 					/* not tracking stats to `totalPreMultipliersStats`, which maybe should be done but don't really know if anything else I'm trying to track below makes sense. Revisit if there are any issues */
-					calculatedVariables.vladimirPassiveHp = passiveHp;
+					calculatedVariables.vladimirPassiveHp = passiveHP;
 					calculatedVariables.apMultipliersBase += baseAP;
-					championPassiveStats.hp = passiveHp;
-					totalStats.hp += passiveHp;
-					bonusStats.hp += passiveHp;
+					championPassiveStats.hp = passiveHP;
+					totalStats.hp += passiveHP;
+					bonusStats.hp += passiveHP;
 
-					let totalAP = baseAP;
+					let passiveAP = baseAP;
+					championPassiveStats.abilityPower = passiveAP;
+					calculatedVariables.vladimirPassiveAp = passiveAP;
+
 					if (calculatedVariables.rabadonApMultiplier) {
 						const value = baseAP * calculatedVariables.rabadonApMultiplier;
 						calculatedVariables.rabadonMagicalOpus! += value;
-						totalAP += value;
+						passiveAP += value;
 						itemPassivesStats.abilityPower += value;
 						itemTotalStats.abilityPower += value;
 					}
 					if (calculatedVariables.blackfireTorchBBlazeMultiplier) {
 						const value = baseAP * calculatedVariables.blackfireTorchBBlazeMultiplier;
 						calculatedVariables.blackfireTorchBBlazeAP! += value;
-						totalAP += value;
+						passiveAP += value;
 						itemPassivesStats.abilityPower += value;
 						itemTotalStats.abilityPower += value;
 					}
 					if (dragonStatMultipliers.abilityPower) {
 						const value = baseAP * dragonStatMultipliers.abilityPower;
-						totalAP += value;
+						passiveAP += value;
 						dragonStats.abilityPower! += value;
 						totalMultipliersStats.abilityPower += value;
 					}
 					if (calculatedVariables.midQuestMultiplier) {
 						const value = baseAP * calculatedVariables.midQuestMultiplier;
-						totalAP += value;
+						passiveAP += value;
 						calculatedVariables.midQuestAp! += value;
 						totalMultipliersStats.abilityPower += value;
 					}
 
-					calculatedVariables.vladimirPassiveAp = totalAP;
-					championPassiveStats.abilityPower = totalAP;
-					totalStats.abilityPower += totalAP;
-					bonusStats.abilityPower += totalAP;
+					totalStats.abilityPower += passiveAP;
+					bonusStats.abilityPower += passiveAP;
 
 					if (riftmakerBonusHpToAp) {
-						const passiveHPInfusion = passiveHp * riftmakerBonusHpToAp;
+						const passiveHPInfusion = passiveHP * riftmakerBonusHpToAp;
 						calculatedVariables.riftmakerVoidInfusion! += passiveHPInfusion;
 
 						let riftmakerTotalAp = passiveHPInfusion;
