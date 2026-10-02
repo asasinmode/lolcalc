@@ -1625,7 +1625,7 @@ export const CHAMPION_SPECIFICS = {
 			postInit: {
 				handler(self, { championPassiveStats }) {
 					const { q, w, e } = self.abilityVariantsIndexes.value;
-					if (!(q & w & e)) {
+					if (q & w & e) {
 						const bonusRange = championAbilityVariableValue('RangedFormRangeIncrease', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]! });
 						if (typeof bonusRange.value === 'number') {
 							championPassiveStats.attackRange = bonusRange.value;
@@ -1648,7 +1648,7 @@ export const CHAMPION_SPECIFICS = {
 			postTotal: {
 				handler(self, { championPassiveStats, bonusStats, adaptiveForceMeta, totalStats, totalMultipliersStats, totalPreMultipliersStats, dragonStats, dragonStatMultipliers, baseOnLevelStats }, { calculatedVariables }) {
 					const { q, w, e } = self.abilityVariantsIndexes.value;
-					if (q & w & e) {
+					if (!(q & w & e)) {
 						/* i really dislike the whole `baseAdRatio` business going on and getting the bloodmail value for it but the jayce resists seem really weird and i can't come up with anything better, the `bonusAD` below was mostly guessed at by an llm until tests passed */
 						const usedBloodmailRetribution = totalPreMultipliersStats.attackDamage * (calculatedVariables.bloodmailRetributionPercentage ?? 0);
 						const usedTotalAD = totalPreMultipliersStats.attackDamage + (dragonStats.attackDamage ?? 0) + usedBloodmailRetribution;

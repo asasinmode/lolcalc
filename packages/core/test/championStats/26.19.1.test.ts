@@ -27,12 +27,13 @@ test('26.19 Jayce', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jayce', sourceCommon);
 
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 227,
 			magicResist: 177,
 		}, damageSource, 'cannon');
 
-		forceShapeshift(damageSource, 1);
+		forceShapeshift(damageSource, 0);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 269,
 			magicResist: 219,
@@ -44,13 +45,13 @@ test('26.19 Jayce', async (t) => {
 			magicResist: 269,
 		}, damageSource, 'hammer jaksho');
 
-		forceShapeshift(damageSource, 0);
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 263,
 			magicResist: 215,
 		}, damageSource, 'cannon jaksho');
 
-		forceShapeshift(damageSource, 1);
+		forceShapeshift(damageSource, 0);
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
 		damageSource.currentHealth.value = 490;
 		await nextTick();
@@ -78,12 +79,13 @@ test('26.19 Jayce', async (t) => {
 			dragonStacks: ['Infernal', 'Infernal', 'Mountain', 'Mountain'],
 		});
 
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 250,
 			magicResist: 195,
 		}, damageSource, 'cannon');
 
-		forceShapeshift(damageSource, 1);
+		forceShapeshift(damageSource, 0);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 297,
 			magicResist: 242,
@@ -95,13 +97,13 @@ test('26.19 Jayce', async (t) => {
 			magicResist: 298,
 		}, damageSource, 'hammer jaksho');
 
-		forceShapeshift(damageSource, 0);
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 289,
 			magicResist: 236,
 		}, damageSource, 'cannon jaksho');
 
-		forceShapeshift(damageSource, 1);
+		forceShapeshift(damageSource, 0);
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
 		damageSource.currentHealth.value = 218;
 		await nextTick();
@@ -131,12 +133,13 @@ test('26.19 Jayce', async (t) => {
 			roleQuest: 'mid',
 		});
 
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 250,
 			magicResist: 195,
 		}, damageSource, 'cannon');
 
-		forceShapeshift(damageSource, 1);
+		forceShapeshift(damageSource, 0);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 297,
 			magicResist: 242,
@@ -148,13 +151,13 @@ test('26.19 Jayce', async (t) => {
 			magicResist: 298,
 		}, damageSource, 'hammer jaksho');
 
-		forceShapeshift(damageSource, 0);
+		forceShapeshift(damageSource, 1);
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
 			armor: 289,
 			magicResist: 236,
 		}, damageSource, 'cannon jaksho');
 
-		forceShapeshift(damageSource, 1);
+		forceShapeshift(damageSource, 0);
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
 		damageSource.currentHealth.value = 228;
 		await nextTick();
