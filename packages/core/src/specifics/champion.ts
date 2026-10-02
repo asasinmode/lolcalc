@@ -457,18 +457,31 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ashe: {
-		PASSIVE_OPTIONS: {
-			none: 0,
-			normal: 1,
-			crit: 2,
-		},
 		setupData(self) {
-			const maxPassive: number = CHAMPION_SPECIFICS.Ashe.PASSIVE_OPTIONS.crit;
 			return {
-				frostShot: clamp(0, Math.round(self.internalData.value.frostShot ?? 0), maxPassive),
+				frostShot: clamp(0, Math.round(self.internalData.value.frostShot ?? 0), 100),
 			};
 		},
 		passive: {
+			derivedSlow: ((progress, self): number => {
+				return (self?.effectsOntoTargetVars.value.ashePSlow ?? CHAMPION_SPECIFICS.Ashe.passive.calculateSlow(self.champion.value!, progress, self.level.value)) * 100;
+			}) satisfies IDeriveProgressFn,
+			calculateSlow: (champion: IChampion, progress: number, level: number) => {
+				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]!, damageSource: { level: { value: level } } as DamageSource };
+				const minSlow = championAbilityVariableValue('SlowAmount', passiveParams);
+				const maxSlow = championAbilityVariableValue('EmpoweredSlowAmount', passiveParams);
+
+				if (typeof minSlow.value === 'number' && typeof maxSlow.value === 'number') {
+					return progress === 1
+						? minSlow.value
+						: progress
+							? (minSlow.value + (maxSlow.value - minSlow.value) * progress / 100)
+							: 0;
+				}
+
+				console.warn('[CHAMPION_SPECIFICS ashe] failed to calculate passive slow vars', minSlow, maxSlow);
+				return Number.NaN;
+			},
 			variables: defineChampionVariables<'Ashe', typeof IAshe, 'passive'>()({
 				meta: {
 					SlowDuration: {
@@ -1813,7 +1826,7 @@ export const CHAMPION_SPECIFICS = {
 			const maxEBuff: number = CHAMPION_SPECIFICS.Kaisa.e.BUFF_OPTIONS.both;
 			return {
 				passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), maxStacks),
-				eBuff: clamp(0, Math.round(self.internalData.value.superchargeBuff ?? 0), maxEBuff),
+				eBuff: clamp(0, Math.round(self.internalData.value.eBuff ?? 0), maxEBuff),
 			};
 		},
 		passive: {

@@ -2071,7 +2071,7 @@ defineExpose({
 					}
 
 					> span {
-						--at-apply: 'pointer-events-none text-center self-center text-lg font-600 z-1';
+						--at-apply: 'pointer-events-none text-center self-center text-lg font-600 z-1 px-[0.33ch]';
 						-webkit-text-stroke: black 0.15em;
 						paint-order: stroke fill;
 						grid-area: vs;
