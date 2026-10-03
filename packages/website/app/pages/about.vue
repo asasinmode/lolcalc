@@ -59,8 +59,9 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 			support
 			<a href="#support"><span aria-hidden="true">#</span><span>link to the "support" section</span></a>
 		</h2>
-		<p>The best way to support the project is to give me money, which you can do through X, Y or Z. I'd love to work on it full time but I've been working a dead-end j*b and spent most of my free time throughout 2026 trying to make <strong>lolcalc</strong> work and it's been very draining. After the <i>beta</i> version is released I will probably have to take a break from development and try and find a new j*b. I'm open to any League/programming related offers and would appreciate recommendations.</p>
-		<p>The second best way is to contribute, which you can start with by reading the <a href="https://github.com/asasinmode/lolcalc/tree/feat/v2?tab=contributing-ov-file" target="_blank">CONTRIBUTING.md</a> file. If you have any questions unanswered by it or the <a href="https://github.com/asasinmode/lolcalc/" target="_blank">README.md</a>, feel free to DM me (contact info at the bottom of the page).</p>
+		<p>The best way to support the project is to give me money, which you can do through X, Y or Z. I'd love to be able to work on it full time and I'm thankful for any support. I'm also open to any League/programming related job offers and would appreciate recommendations.</p>
+		<p>The second best way is to contribute to the codebase, which you can start with by reading the <a href="https://github.com/asasinmode/lolcalc/tree/feat/v2?tab=contributing-ov-file" target="_blank">CONTRIBUTING</a> and <a href="https://github.com/asasinmode/lolcalc/" target="_blank">README</a> files.</p>
+		<p>If you have any questions, feel free to contact me through the platforms listed at the bottom of this page.</p>
 
 		<h2 id="acknowledgements">
 			acknowledgements
