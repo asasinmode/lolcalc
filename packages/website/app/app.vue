@@ -98,18 +98,23 @@ onMounted(() => {
 	<header ref="header">
 		<div>
 			<h1>
-				<a :href="$config.app.baseURL">
-					<img
-						src="/logo_dark.webp"
-						width="192"
-						height="192"
-					>
-					lolcalc
-				</a>
-				<span>alpha</span>
+				<span>lolcalc</span>
+				<a :href="$config.app.baseURL"> <span>link to the lolcalc home page</span> </a>
+				<img
+					src="/logo_dark.webp"
+					width="192"
+					height="192"
+					alt="lolcalc logo - the letter L with a calculator icon next to it"
+				>
 			</h1>
 			<span>
 				26{{ vSemver.slice(vSemver.indexOf('.')) }}
+			</span>
+			<span id="by-asasinmode">
+				by
+				<a href="https://asasinmode.com" target="_blank" title="asasinmode">
+					<img src="/asasinmode.webp" width="200" height="200" alt="asasinmode avatar - a white outline of a cupcake with a smily face on a background looking like a galaxy">
+				</a>
 			</span>
 			<nav id="page-nav" popover @focusout="closeMenuIfOutside">
 				<button id="menu-close-btn" title="zamknij menu" popovertargetaction="hide" popovertarget="page-nav">
@@ -155,12 +160,6 @@ onMounted(() => {
 						<button @click="reportAnIssue">
 							report an issue
 						</button>
-					</li>
-					<li id="by-asasinmode">
-						<a href="https://asasinmode.com" target="_blank">
-							<span>by asasinmode</span>
-							<img src="/asasinmode.webp" width="200" height="200">
-						</a>
 					</li>
 				</ul>
 				<ul>
@@ -231,6 +230,7 @@ onMounted(() => {
 		<p>
 			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 		</p>
+		<p>v1.0-alpha</p>
 		<label for="scoreboard-enable-unimplemented-ui">
 			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
 			enable unimplemented ui
@@ -325,8 +325,12 @@ onMounted(() => {
 			grid-column: page;
 
 			> div {
-				--at-apply: 'flex items-center justify-between relative';
+				--at-apply: 'flex items-center relative';
 				grid-column: content-start / content-end;
+
+				@media (width >= 680px) {
+					--at-apply: 'justify-between';
+				}
 
 				> nav {
 					--at-apply: 'fixed of-x-hidden of-y-auto z-10 grow flex-col items-end inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
@@ -334,7 +338,7 @@ onMounted(() => {
 
 					@media (width >= 680px) {
 						& {
-							--at-apply: 'flex static py-0 pe-0 bg-transparent flex-row justify-end items-center';
+							--at-apply: 'flex static py-0 pe-0 bg-transparent flex-row justify-end items-center ms-auto';
 						}
 					}
 
@@ -393,18 +397,6 @@ onMounted(() => {
 							&:nth-child(4) {
 								--accent: theme('colors.red.400');
 							}
-
-							&:last-child {
-								--at-apply: '-ms-2';
-
-								span {
-									--at-apply: 'sr-only';
-								}
-
-								img {
-									--at-apply: 'block rounded-full size-8';
-								}
-							}
 						}
 					}
 
@@ -461,21 +453,35 @@ onMounted(() => {
 				}
 
 				> h1 {
-					--at-apply: 'text-3xl leading-none font-700 tracking-wide';
+					--at-apply: 'relative flex';
+
+					> span:first-child {
+						--at-apply: 'order-2 text-3xl leading-none font-700 tracking-wide ms-[0.6rem]';
+					}
 
 					> a {
-						> img {
-							--at-apply: 'inline-block size-[--header-logo-size]';
+						--at-apply: 'absolute inset-0';
+
+						> span {
+							--at-apply: 'sr-only';
 						}
 					}
 
-					> span {
-						--at-apply: 'font-mono text-xs align-top -ms-1.5 text-neutral-300';
+					> img {
+						--at-apply: 'inline-block size-[--header-logo-size] order-1';
 					}
 				}
 
-				> span {
+				> h1 + span {
 					--at-apply: 'absolute text-xs text-neutral-400 font-600 font-mono start-[calc(var(--header-logo-size)+0.6rem)] -bottom-0.5';
+				}
+
+				#by-asasinmode {
+					--at-apply: 'flex text-neutral-400 leading-[--text-3xl-fontSize] align-bottom me-2 ms-[0.75ch] items-center gap-[0.5ch]';
+
+					img {
+						--at-apply: 'inline-block rounded-full size-8';
+					}
 				}
 			}
 		}
@@ -521,7 +527,7 @@ onMounted(() => {
 			}
 
 			> label {
-				--at-apply: 'absolute end-0 bottom-0 text-neutral-700';
+				--at-apply: 'absolute end-0 inset-be-5 text-neutral-700';
 
 				&:nth-of-type(1) {
 					--at-apply: 'bottom-5';
@@ -530,6 +536,10 @@ onMounted(() => {
 				> input:not(:checked) {
 					--at-apply: 'op-40';
 				}
+			}
+
+			> p:last-of-type {
+				--at-apply: 'absolute end-0 inset-be-0 font-mono text-sm font-600 text-neutral-700';
 			}
 		}
 	}

@@ -83,7 +83,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 			</dd>
 			<dt>ads and paywalling</dt>
 			<dd>
-				I will try my best to keep the calculator and all of its features free (+ it's <a href="https://github.com/asasinmode/lolcalc" target="_blank">open source</a>). That said, hosting costs money and maintaining it requires a lot of my time and effort. Please consider <a href="#support">supporting the project</a>
+				I will try my best to keep the calculator and all of its features free (+ it's <a href="https://github.com/asasinmode/lolcalc" target="_blank">open source</a>). That said, hosting costs money and maintaining it takes a lot of my time and effort. Please consider <a href="#support">supporting the project</a>
 			</dd>
 		</dl>
 	</main>
@@ -100,7 +100,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 		}
 
 		> h2 {
-			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[1em] mbe-[0.5em] text-white relative scroll-m-bs-5';
+			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[--fluid-22-48] mbe-[0.5em] text-white relative scroll-m-bs-5';
 
 			> a {
 				--at-apply: 'op-0 inline-block px-1';
