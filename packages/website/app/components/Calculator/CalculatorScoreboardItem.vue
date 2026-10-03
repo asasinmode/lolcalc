@@ -134,7 +134,10 @@ const undoRemoveButton = useTemplateRef('undoRemoveButton');
 function secondStepRemove() {
 	if (props.value.anythingFilled.value) {
 		undoRemoveButton.value!.style.display = 'grid';
+		(undoRemoveButton.value!.nextElementSibling as HTMLElement).style.display = 'block';
+		const currentScroll = document.documentElement.scrollTop;
 		undoRemoveButton.value!.focus();
+		document.documentElement.scrollTop = currentScroll;
 		undoRemoveButton.value!.addEventListener('focusout', removeAndFocusNext);
 		el.value!.addEventListener('mouseleave', removeAndFocusNext);
 	} else {
@@ -146,6 +149,7 @@ function undoRemove() {
 	el.value!.removeEventListener('mouseleave', removeAndFocusNext);
 	undoRemoveButton.value!.removeEventListener('focusout', removeAndFocusNext);
 	undoRemoveButton.value!.style.display = 'none';
+	(undoRemoveButton.value!.nextElementSibling as HTMLElement).style.display = 'none';
 	(undoRemoveButton.value!.nextElementSibling as HTMLButtonElement)?.focus();
 }
 
@@ -157,6 +161,7 @@ function removeAndFocusNext() {
 	if (isFirstAndOnly.value) {
 		emit('clear');
 		undoRemoveButton.value!.style.display = 'none';
+		(undoRemoveButton.value!.nextElementSibling as HTMLElement).style.display = 'none';
 		el.value!.removeEventListener('mouseleave', removeAndFocusNext);
 		undoRemoveButton.value!.removeEventListener('focusout', removeAndFocusNext);
 	} else {
@@ -1188,8 +1193,9 @@ defineExpose({ el });
 				/>
 			</article>
 			<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">
-				restore
+				<span>restore</span>
 			</button>
+			<span class="restore-text" style="display: none" aria-hidden="true">restore</span>
 			<button
 				:title="`${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}${removeButtonAttrs.subtext ?? ''}`"
 				class="pretend-ui-btn clear-remove"
@@ -1657,6 +1663,7 @@ defineExpose({ el });
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
 		anchor-scope: all;
+		anchor-name: --scoreboard-item;
 		background: var(--scoreboard-item-bg);
 
 		@media (width < 512px) {
@@ -1767,13 +1774,20 @@ defineExpose({ el });
 		}
 
 		.restore {
-			--at-apply: 'absolute inset-0 grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
+			--at-apply: 'fixed inset-x-0 backdrop-blur-2 z-10 focus-visible:outline-none bg-black/20';
+			position-anchor: --scoreboard-item;
+			inset-block-end: calc(anchor(end));
+			inset-block-start: calc(anchor(start));
 			-webkit-text-stroke: black 0.15em;
 			paint-order: stroke fill;
 
-			&::before {
-				--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
+			> span {
+				--at-apply: 'sr-only';
 			}
+		}
+
+		.restore-text {
+			--at-apply: 'absolute pointer-events-none translate-center inset-bs-1/2 inset-s-1/2 outline-auto px-2 py-1 text-xl font-600 text-center tracking-wide z-11';
 		}
 
 		.clear-remove {
