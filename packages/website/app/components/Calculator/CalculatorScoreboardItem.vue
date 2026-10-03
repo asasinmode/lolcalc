@@ -1432,7 +1432,7 @@ defineExpose({ el });
 					:precomputed-description="hoveredAbilityKey && (hoveredAbilityDamageSource ?? value).computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
-			<section ref="healthAbilityResource" class="health-ability-resource">
+			<section ref="healthAbilityResource" class="health-ability-resource" :inert="value.isLoading.value">
 				<h4>health and ability resource</h4>
 				<div
 					v-if="value.listedChampion.value?.id !== 'Kled'"
@@ -1480,7 +1480,7 @@ defineExpose({ el });
 					</template>
 				</div>
 			</section>
-			<div class="role-quest-dragons">
+			<div class="role-quest-dragons" :inert="value.isLoading.value">
 				<section ref="roleQuest" class="role-quest" data-text="role quest">
 					<h4>role quest</h4>
 					<VSelect
@@ -1569,7 +1569,7 @@ defineExpose({ el });
 					/>
 				</section>
 			</div>
-			<section ref="extras" class="extras">
+			<section ref="extras" class="extras" :inert="value.isLoading.value">
 				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
 					<component
 						:is
