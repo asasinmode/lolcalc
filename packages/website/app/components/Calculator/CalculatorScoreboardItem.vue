@@ -1774,10 +1774,9 @@ defineExpose({ el });
 		}
 
 		.restore {
-			--at-apply: 'fixed inset-x-0 backdrop-blur-2 z-10 focus-visible:outline-none bg-black/20';
+			--at-apply: 'fixed backdrop-blur-2 z-10 focus-visible:outline-none bg-black/20';
 			position-anchor: --scoreboard-item;
-			inset-block-end: calc(anchor(end));
-			inset-block-start: calc(anchor(start));
+			inset: anchor(start) anchor(end) anchor(end) anchor(start);
 			-webkit-text-stroke: black 0.15em;
 			paint-order: stroke fill;
 
