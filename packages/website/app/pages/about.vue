@@ -68,9 +68,9 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription('about-non-passive-ab
 			<a href="#acknowledgements"><span aria-hidden="true">#</span><span>link to the "acknowledgements" section</span></a>
 		</h2>
 		<p>This project would not exist without <a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.</p>
-		<p>Some of the <strong>code</strong> in this project was written using LLMs. I'd estimate LLM generated code to be less than 10% of the code base, however I do want to say that it would've taken me a few more months to get to where it is without them. The ability to paste it the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful.</p>
-		<p>Thanks to my homies who helped me test both the website and the various champion configurations in game.</p>
-		<p>Thanks to Riot Games for not chronobreaking this project 🤞</p>
+		<p>Some of the <u>code</u> in this project was written using LLMs. I'd estimate it to make up less than 10% of the codebase. That said, it would've taken me a few more months to get to where it is without them. The ability to paste into one the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful. Also I used only what's available for free.</p>
+		<p>Thanks to my homies who helped me test the website and verify the results in game.</p>
+		<p>Thanks to Riot Games for not chronobreaking this project (🤞) and for their policy that allowed me to make it.</p>
 
 		<h2 id="misc">
 			misc
