@@ -45,10 +45,10 @@ onBeforeUnmount(() => {
 			<h2 id="results-header">
 				results
 			</h2>
-			<p v-show="!showResults">
-				configure a damage source to view results
-			</p>
 			<div id="results-table-scroll-wrapper">
+				<p v-show="!showResults">
+					configure a damage source to view results
+				</p>
 				<CalculatorResultsTable ref="resultsTable" :show-results />
 			</div>
 		</section>
@@ -78,13 +78,19 @@ onBeforeUnmount(() => {
 					--at-apply: 'mbs-5 mbe-3';
 				}
 
-				> p {
-					--at-apply: 'absolute z-10 top-16 py-2 start-1/2 -translate-x-1/2 text-center text-xl font-500';
+				#results-table-scroll-wrapper > p {
+					--at-apply: 'absolute z-10 py-2 start-1/2 inset-bs-1/2 translate-center text-center text-xl font-500';
 					-webkit-text-stroke: black 0.2em;
 					paint-order: stroke fill;
 				}
 			}
 		}
+	}
+}
+
+@layer overrides {
+	#results-table-scroll-wrapper:has(> table[inert]) {
+		--at-apply: 'of-clip';
 	}
 }
 </style>
