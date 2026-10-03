@@ -143,7 +143,13 @@ function selectOption(event: MouseEvent, callback: () => unknown) {
 		}
 
 		> * {
-			--at-apply: 'py-1 px-2 text-neutral-200';
+			--at-apply: 'py-2.5 px-3 text-neutral-200';
+
+			@media (pointer: fine) {
+				& {
+					--at-apply: 'py-1.5 px-2.5';
+				}
+			}
 
 			&:hover,
 			&:focus-visible {
