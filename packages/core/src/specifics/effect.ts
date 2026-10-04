@@ -918,7 +918,7 @@ export const EFFECT_SPECIFICS = {
 
 					const effect = self.getEffect(EffectObjectName.nunuPCallOfFreljord)?.[0];
 					if (effect?.champion.value?.id === 'Nunu') {
-						const { bonusASPercent, bonusMSPercent } = CHAMPION_SPECIFICS.Nunu.passive.passiveBuffs(effect.champion.value as IChampion);
+						const { bonusASPercent, bonusMSPercent } = CHAMPION_SPECIFICS.Nunu.passive.calculateBuffs(effect.champion.value as IChampion);
 						effectStats.bonusAttackSpeedPercent += bonusASPercent;
 						calculatedVariables.totalBonusPercentMoveSpeed += bonusMSPercent;
 					}
@@ -972,7 +972,7 @@ export const EFFECT_SPECIFICS = {
 					if (!effect) {
 						effect = source.addEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.rellPBreakMold));
 						effect.newDataPromise?.then((effect) => {
-							effect!.data.value[0] = CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: effect!.champion.value as IChampion } } as DamageSource);
+							effect!.data.value[0] = CHAMPION_SPECIFICS.Rell.passive.maxStacks({ champion: { value: effect!.champion.value as IChampion } } as DamageSource);
 						});
 					};
 
@@ -1046,7 +1046,7 @@ export const EFFECT_SPECIFICS = {
 		}),
 		maxValue: async (): Promise<number> => {
 			const rell = await useChampion('Rell');
-			return CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS({ champion: { value: rell } } as DamageSource);
+			return CHAMPION_SPECIFICS.Rell.passive.maxStacks({ champion: { value: rell } } as DamageSource);
 		},
 	},
 	[EffectObjectName.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({

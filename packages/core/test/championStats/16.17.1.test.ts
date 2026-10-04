@@ -340,7 +340,7 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.ampTome],
 			level: 18,
 			abilityLevels: { q: 6 },
-			internalData: { lastRotatedVariantIndex: 0 },
+			internalData: { lastRotatedVariantIndex: 0, gravitumSlowProgress: 0 },
 		});
 
 		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
@@ -373,7 +373,7 @@ test('16.17 adaptive force', async (t) => {
 		const damageSource = await setupDamageSource(fixture, 'Varus', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.ampTome, ITEMS_BY_NAME.phantomDancer, ITEMS_BY_NAME.fiendhunterBolts, ITEMS_BY_NAME.navoriFlickerblade],
-			internalData: { passiveVariantActive: CHAMPION_SPECIFICS.Varus.PASSIVE_OPTIONS.generic },
+			internalData: { passiveVariantActive: CHAMPION_SPECIFICS.Varus.passive.options.generic },
 		});
 
 		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
