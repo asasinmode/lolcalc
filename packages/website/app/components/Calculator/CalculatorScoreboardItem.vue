@@ -682,13 +682,13 @@ const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityR
 const healthBarEl = useTemplateRef('healthBar');
 const {
 	onMousedown: startHealthBarDrag,
-	onTouchdown: startTouchHealthBarDrag,
+	onTouchstart: startTouchHealthBarDrag,
 	dragValueRef: healthDragValueRef,
 } = healthResourceSliderEvents(props.value.currentHealth, props.value.maxHealth, healthBarEl);
 const resourceBarEl = useTemplateRef('resourceBar');
 const {
 	onMousedown: startAbilityResourceBarDrag,
-	onTouchdown: startTouchResourceBarDrag,
+	onTouchstart: startTouchResourceBarDrag,
 	dragValueRef: abilityResourceDragValueRef,
 } = healthResourceSliderEvents(props.value.currentAbilityResource, props.value.maxAbilityResource, resourceBarEl);
 
@@ -703,7 +703,7 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 		event.preventDefault();
 	}
 
-	function onTouchdown(event: TouchEvent) {
+	function onTouchstart(event: TouchEvent) {
 		if (!toValue(max) || !event.touches[0] || event.target !== element.value) {
 			return;
 		}
@@ -727,7 +727,7 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 	}
 
 	function onTouchend(event: TouchEvent) {
-		updateValue(event.touches[0]!.clientX);
+		event.touches[0] && updateValue(event.touches[0].clientX);
 		cleanup();
 	}
 
@@ -771,7 +771,7 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 		cleanup();
 	});
 
-	return { onMousedown, onTouchdown, dragValueRef };
+	return { onMousedown, onTouchstart, dragValueRef };
 }
 
 function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
@@ -1459,7 +1459,7 @@ defineExpose({ el });
 					class="current-health"
 					:style="`--fill-percentage: ${!value.anythingFilled.value || value.maxHealth.value === 0 ? 1 : Math.min(healthDragValueRef / value.maxHealth.value, 1)}`"
 					@mousedown="startHealthBarDrag"
-					@touchdown="startTouchHealthBarDrag"
+					@touchstart="startTouchHealthBarDrag"
 				>
 					<template v-if="value.anythingFilled.value && value.maxHealth.value !== 0">
 						<label :for="`${idSuffix}-current-ability-health`">
@@ -1483,7 +1483,7 @@ defineExpose({ el });
 					:data-partype="value.champion.value ? value.champion.value?.partype?.toLowerCase() : 'mana'"
 					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(abilityResourceDragValueRef / value.maxAbilityResource.value, 1)}` : undefined"
 					@mousedown="startAbilityResourceBarDrag"
-					@touchdown="startTouchResourceBarDrag"
+					@touchstart="startTouchResourceBarDrag"
 				>
 					<template v-if="value.maxAbilityResource.value">
 						<label :for="`${idSuffix}-current-ability-resource`">
