@@ -1979,8 +1979,8 @@ defineExpose({
 						}
 
 						> select {
-							/* make sure to more or less sync `t940` with `baseHeaderColWidth` */
-							--at-apply: 'inline-[--fluid-164-256-t940] px-1.5 bg-white text-black';
+							/* make sure to more or less sync `t940` with `baseHeaderColWidth`. Also to `254` so that it aligns with the scoreboard middle divider. Not really necessary, just happened to be close */
+							--at-apply: 'inline-[--fluid-164-254-t940] px-1.5 bg-white text-black';
 							color-scheme: light;
 
 							&:disabled {

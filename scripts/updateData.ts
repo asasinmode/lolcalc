@@ -2176,6 +2176,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				variables: {
 					variableType: 'championAbility',
 					variableValueParameters: {
+						abilityKey,
 						abilityVariant: variant,
 						allAbilitiesVariants: allVariants,
 						dynamicVariables: championAbilityDynamicVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id], abilityKey),
