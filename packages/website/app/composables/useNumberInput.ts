@@ -7,6 +7,7 @@ type NumberKey<T> = {
 export function useNumberInput<T extends Ref>(
 	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: MaybeRef<any[]>, targetIndex: number] | (() => [targetObject: MaybeRef<any[]>, targetIndex: number]),
 	isInt = true,
+	max?: MaybeRef<number>,
 	setComposing = false,
 ): (event: Event) => void {
 	return function onInput(event: Event) {
