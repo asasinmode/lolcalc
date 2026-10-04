@@ -18,7 +18,6 @@ import { GameAbilityId } from '../GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, MODIFY_VARIABLE_PRIORITIES } from './index.ts';
-import { bloodmailRetributionBonusAD } from './shared.ts';
 
 const actualGWoundsItems = Object.values(ITEMS).filter(item => item.dataValues?.GrievousAmount);
 if (!actualGWoundsItems.every(item => (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id))) {
@@ -2282,7 +2281,15 @@ export const ITEM_SPECIFICS = {
 
 					const retributionBaseTotal = totalStats.attackDamage - (dragonStats.attackDamage ?? 0) - calculatedVariables.bloodmailRetributionExcludedAd;
 
-					calculatedVariables.bloodmailRetributionPercentage = bloodmailRetributionBonusAD(self, totalStats.hp);
+					const maxValueAt = itemVariableValue('RemainingHealthThreshold', { item: ITEMS_BY_NAME.overlordsBloodmail, damageSource: {} as DamageSource });
+					if (typeof maxValueAt?.value !== 'number') {
+						console.error('[ITEM_SPECIFICS bloodmail] failed to calculate remaining health threshold', maxValueAt);
+						return Number.NaN;
+					}
+
+					const currentHealthP = Math.min(1, self.currentHealth.value / (Math.max(totalStats.hp, 1)));
+
+					calculatedVariables.bloodmailRetributionPercentage = ITEMS_BY_NAME.overlordsBloodmail?.dataValues.MissingHealthAD * Math.min(1, (1 - currentHealthP) / (1 - maxValueAt.value));
 					calculatedVariables.bloodmailRetribution = retributionBaseTotal * calculatedVariables.bloodmailRetributionPercentage;
 
 					itemPassivesStats.attackDamage += calculatedVariables.bloodmailRetribution;

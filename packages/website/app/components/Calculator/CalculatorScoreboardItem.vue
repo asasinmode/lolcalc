@@ -12,7 +12,7 @@ import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/dama
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { replaceGameIcons } from '@lolcalc/core/misc';
-import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion';
+import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion/shared';
 import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
 import { replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';

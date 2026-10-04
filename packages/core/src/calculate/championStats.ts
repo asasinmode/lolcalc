@@ -4,7 +4,7 @@ import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultipli
 import type { DamageSource } from '../DamageSource';
 import { CONSTS, MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
-import { cooldownReductionPercentageFromHaste } from '../specifics/champion.ts';
+import { cooldownReductionPercentageFromHaste } from '../specifics/champion/shared.ts';
 import { addMultiplicative, calculateMSCapPenalty, combineCompounding } from './util.ts';
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
