@@ -682,13 +682,13 @@ const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityR
 const healthBarEl = useTemplateRef('healthBar');
 const {
 	onMousedown: startHealthBarDrag,
-	cleanup: healthBarCleanup,
+	onTouchdown: startTouchHealthBarDrag,
 	dragValueRef: healthDragValueRef,
 } = healthResourceSliderEvents(props.value.currentHealth, props.value.maxHealth, healthBarEl);
 const resourceBarEl = useTemplateRef('resourceBar');
 const {
 	onMousedown: startAbilityResourceBarDrag,
-	cleanup: abilityResourceBarCleanup,
+	onTouchdown: startTouchResourceBarDrag,
 	dragValueRef: abilityResourceDragValueRef,
 } = healthResourceSliderEvents(props.value.currentAbilityResource, props.value.maxAbilityResource, resourceBarEl);
 
@@ -703,6 +703,16 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 		event.preventDefault();
 	}
 
+	function onTouchdown(event: TouchEvent) {
+		if (!toValue(max) || !event.touches[0] || event.target !== element.value) {
+			return;
+		}
+		document.addEventListener('touchmove', onTouchmove);
+		document.addEventListener('touchend', onTouchend);
+		updateValue(event.touches[0].clientX);
+		event.preventDefault();
+	}
+
 	function onMousemove(event: MouseEvent) {
 		updateValue(event.clientX);
 	}
@@ -712,9 +722,20 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 		cleanup();
 	}
 
+	function onTouchmove(event: TouchEvent) {
+		updateValue(event.touches[0]!.clientX);
+	}
+
+	function onTouchend(event: TouchEvent) {
+		updateValue(event.touches[0]!.clientX);
+		cleanup();
+	}
+
 	function cleanup() {
 		document.removeEventListener('mousemove', onMousemove);
 		document.removeEventListener('mouseup', onMouseup);
+		document.removeEventListener('touchmove', onTouchmove);
+		document.removeEventListener('touchend', onTouchend);
 	}
 
 	const dragValueRef = ref(target.value);
@@ -745,9 +766,12 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 		dragValueRef.value = value;
 	});
 
-	onBeforeUnmount(() => watchHandle());
+	onBeforeUnmount(() => {
+		watchHandle();
+		cleanup();
+	});
 
-	return { onMousedown, cleanup, dragValueRef };
+	return { onMousedown, onTouchdown, dragValueRef };
 }
 
 function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
@@ -929,11 +953,6 @@ function recalculateEffect(effectIndex: number) {
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
 	computedEffect.specific.effectControls?.refresh?.(props.value, false);
 }
-
-onBeforeUnmount(() => {
-	healthBarCleanup();
-	abilityResourceBarCleanup();
-});
 
 const moveUpDisabled = computed(() => props.index === 0);
 const changeGroupDisabled = computed(() => !props.canRemove && !props.value.anythingFilled.value);
@@ -1440,6 +1459,7 @@ defineExpose({ el });
 					class="current-health"
 					:style="`--fill-percentage: ${!value.anythingFilled.value || value.maxHealth.value === 0 ? 1 : Math.min(healthDragValueRef / value.maxHealth.value, 1)}`"
 					@mousedown="startHealthBarDrag"
+					@touchdown="startTouchHealthBarDrag"
 				>
 					<template v-if="value.anythingFilled.value && value.maxHealth.value !== 0">
 						<label :for="`${idSuffix}-current-ability-health`">
@@ -1463,6 +1483,7 @@ defineExpose({ el });
 					:data-partype="value.champion.value ? value.champion.value?.partype?.toLowerCase() : 'mana'"
 					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(abilityResourceDragValueRef / value.maxAbilityResource.value, 1)}` : undefined"
 					@mousedown="startAbilityResourceBarDrag"
+					@touchdown="startTouchResourceBarDrag"
 				>
 					<template v-if="value.maxAbilityResource.value">
 						<label :for="`${idSuffix}-current-ability-resource`">

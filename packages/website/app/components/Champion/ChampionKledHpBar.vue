@@ -7,7 +7,7 @@ const props = defineProps<{
 	value: DamageSource<'Kled'>;
 	healthResourceSliderEvents: (target: Ref<number>, max: Ref<number>, element: Ref<HTMLElement | null>) => {
 		onMousedown: (e: MouseEvent) => void;
-		cleanup: () => void;
+		onTouchdown: (e: TouchEvent) => void;
 		dragValueRef: Ref<number>;
 	};
 	/* from `useNumberInput` */
@@ -36,21 +36,16 @@ const skaarlCurrentHp = computed<number>({
 
 const kledBarEl = useTemplateRef('kledBar');
 const {
-	cleanup: kledCleanup,
 	onMousedown: kledOnMousedown,
+	onTouchdown: kledOnTouchdown,
 	dragValueRef: kledDragValueRef,
 } = props.healthResourceSliderEvents(kledCurrentHp, kledMaxHP, kledBarEl);
 const skaarlBarEl = useTemplateRef('skaarlBar');
 const {
-	cleanup: skaarlCleanup,
 	onMousedown: skaarlOnMousedown,
+	onTouchdown: skaarlOnTouchdown,
 	dragValueRef: skaarlDragValueRef,
 } = props.healthResourceSliderEvents(skaarlCurrentHp, skaarlMaxHP, skaarlBarEl);
-
-onBeforeUnmount(() => {
-	kledCleanup();
-	skaarlCleanup();
-});
 </script>
 
 <template>
@@ -59,6 +54,7 @@ onBeforeUnmount(() => {
 			ref="kledBar"
 			:style="`--fill-percentage: ${Math.min(kledDragValueRef / kledMaxHP, 1)}`"
 			@mousedown="kledOnMousedown"
+			@touchdown="kledOnTouchdown"
 		>
 			<label :for="`${idSuffix}-current-ability-health-kled`">
 				Kled health
@@ -77,6 +73,7 @@ onBeforeUnmount(() => {
 			ref="skaarlBar"
 			:style="`--fill-percentage: ${Math.min(skaarlDragValueRef / skaarlMaxHP, 1)}`"
 			@mousedown="skaarlOnMousedown"
+			@touchdown="skaarlOnTouchdown"
 		>
 			<label :for="`${idSuffix}-current-ability-health-skaarl`">
 				Skaarl health
