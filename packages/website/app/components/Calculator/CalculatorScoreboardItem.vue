@@ -676,8 +676,8 @@ function updateComputedStats(stats: IChampionStat[]) {
 	}
 }
 
-const updateChampionHealth = useNumberInput(props.value.currentHealth, true, props.value.maxHealth);
-const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource);
+const updateChampionHealth = useNumberInput(props.value.currentHealth, true, props.value.maxHealth, true);
+const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource, true);
 
 const healthBarEl = useTemplateRef('healthBar');
 const {

@@ -7,9 +7,13 @@ type NumberKey<T> = {
 export function useNumberInput<T extends Ref>(
 	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: MaybeRef<any[]>, targetIndex: number] | (() => [targetObject: MaybeRef<any[]>, targetIndex: number]),
 	isInt = true,
-	max?: MaybeRef<number>,
+	setComposing = false,
 ): (event: Event) => void {
 	return function onInput(event: Event) {
+		if (setComposing) {
+			(event as any).composing = false;
+		}
+
 		const computedRef = typeof targetRef === 'function' ? targetRef() : targetRef;
 		const rawValue = (event.target as HTMLInputElement).value;
 		if (!isInt && !rawValue) {
