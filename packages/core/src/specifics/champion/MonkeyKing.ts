@@ -3,6 +3,7 @@ import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
@@ -21,17 +22,29 @@ export default {
 		variables: defineChampionVariables<'MonkeyKing', typeof IMonkeyKing, 'passive'>()({
 			known: {
 				CalculatedBonusArmor: [],
+				HPRegenPer5: [],
 			},
 			calculate(self) {
 				return {
 					CalculatedBonusArmor: {
 						value: self.stats.value.championPassive.armor ?? 0,
 					},
+					HPRegenPer5: {
+						value: self.stats.value.championPassive.hpRegen ?? 0,
+					},
 				};
 			},
 			meta: {
 				CalculatedBonusArmor: {
 					isCustom: true,
+					displayedName: 'Armor',
+				},
+				BonusArmor: {
+					displayedName: 'ArmorPerStack',
+				},
+				HPRegenPer5: {
+					isCustom: true,
+					type: VariableType.hpRegen,
 				},
 			},
 			uninteresting: ['StackMultiplier', 'StackDuration', 'MaxStacks', 'HealthPercentPer5'],
