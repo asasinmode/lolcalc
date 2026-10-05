@@ -30,7 +30,7 @@ export default {
 					if (typeof attackRange.value === 'number') {
 						championPassiveStats.attackRange = attackRange.value;
 					} else {
-						console.warn('[CHAMPION_SPECIFICS ambessa] failed to calculate passive attack speed', attackRange);
+						console.warn('[CHAMPION_SPECIFICS ambessa] failed to calculate passive attack range', attackRange);
 					}
 				}
 			},
