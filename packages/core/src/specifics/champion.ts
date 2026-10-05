@@ -3,6 +3,7 @@ import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import type { IEffectControlsProps, ISpecificVariables } from './index';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
+import Aatrox from './champion/Aatrox.ts';
 import Akali from './champion/Akali.ts';
 import Akshan from './champion/Akshan.ts';
 import Ambessa from './champion/Ambessa.ts';
@@ -126,6 +127,7 @@ export const CHAMPION_SPECIFICS = {
 			},
 		},
 	},
+	Aatrox,
 	Akali,
 	Akshan,
 	Ambessa,
