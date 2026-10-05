@@ -219,7 +219,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 
 		const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
 
-		/* kind of unusual thing for bloodmail extra which is the only thing using effectControlsProps in boolean extra atm */
+		/* kind of unusual but works for the things that use it atm (bloodmail, akali) */
 		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
 		const updateValue = effectControlModel ? (value?: boolean | number) => effectControlModel.value = value : extraUpdateValue;
 		function effectControlRefresh(isSourceChange = false) {

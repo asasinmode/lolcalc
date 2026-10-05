@@ -286,7 +286,7 @@ interface IChampionAbilityVariantDataOverrides {
 
 export interface IChampionInternalDataMap {
 	TargetDummy: IChampionStats;
-	Akali: { isPassiveMSActive: number };
+	Akali: { isPassiveMSActive: number; passiveRangeSnapshot?: number };
 	Ambessa: { hasPassiveStack: number };
 	Amumu: { applyPassive: number };
 	Anivia: { isEgg: number };

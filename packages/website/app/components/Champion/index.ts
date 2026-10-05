@@ -1,9 +1,11 @@
 import type { IChampionId } from '@lolcalc/data/types';
 import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
-import { AbilityType } from '@lolcalc/shared';
+import { ITEMS_BY_NAME } from '@lolcalc/data/index';
+import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
@@ -11,7 +13,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: ChampionExtrasTargetDummy,
 	},
 	Akali: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (towards/after crossing the ring)', false),
+		extras: [
+			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (towards/after crossing the ring)', false),
+			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'passiveRangeSnapshot', 'is passive range active (after crossing the ring)', false, undefined, `Under the hood Akali\'s passive snapshots the attack range at the moment of crossing the ring, then grants it as bonus (which for example makes ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rfc))} ${ITEMS_BY_NAME.rfc?.name}'s Sharpshooter apply twice).<br><br> If you are calculating range, remember to refresh it when the range changes.`, {
+				effectControlsProps: CHAMPION_SPECIFICS.Akali.passive.extraControls,
+			}),
+		],
 	},
 	Ambessa: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),

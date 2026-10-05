@@ -267,6 +267,7 @@ export interface IStatsCalculationVariables {
 	stridebreakerBonusMS?: number;
 	/** bonus ms % from solstice sleigh's passive */
 	solsticeSleighBonusMS?: number;
+	rfcBonusRange?: number;
 	/** bonus ms % from Fiora's passive */
 	fioraPassiveBonusMS?: number;
 	/** ap gained from Vladimir's passive */

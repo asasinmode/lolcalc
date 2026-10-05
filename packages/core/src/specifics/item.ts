@@ -2177,7 +2177,7 @@ export const ITEM_SPECIFICS = {
 					}
 				},
 			}),
-			refresh(self: DamageSource) {
+			refresh(self) {
 				self.internalItemData.value.retribution = self.stats.value.variables.bloodmailRetribution;
 				self.internalItemData.value.tyranny = self.stats.value.variables.bloodmailTyranny;
 			},
@@ -3981,8 +3981,8 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'rfc'>).sharpshooter) {
-						/* not sure about the floor here, it fixes some results but not all */
-						totalMultipliersStats.attackRange = Math.min(ITEMS_BY_NAME.rfc.dataValues.MaxRangeIncrease, Math.floor(totalPreMultipliersStats.attackRange * ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease));
+						/* not sure about the floor here, it fixes some results but not all. Also Akali passive reimplements this logic, make sure to update it if there are any changes */
+						totalMultipliersStats.attackRange = Math.min(ITEMS_BY_NAME.rfc?.dataValues.MaxRangeIncrease, Math.floor(totalPreMultipliersStats.attackRange * ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease));
 						itemPassivesStats.attackRange ??= 0;
 						itemPassivesStats.attackRange += totalMultipliersStats.attackRange;
 					}

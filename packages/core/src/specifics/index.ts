@@ -349,8 +349,8 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVari
 export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_VARIABLE_FNS) as [VariableType, IGlobalModifyVariableFunction][];
 
 export interface IEffectControlsProps<Data extends (number | undefined)[] = [number], T extends IChampionId | undefined = any> {
-	/** if not present, will always be treated as true */
-	model?: (self: DamageSource<T>) => WritableComputedRef<boolean | number | undefined>;
+	/** if not present, will always be treated as true. Must return `1` or `0`, otherwise boolean extra doesn't properly update */
+	model?: (self: DamageSource<T>) => WritableComputedRef<number | undefined>;
 	// eslint-disable-next-line jsdoc/check-param-names
 	/** @param isSourceChange {bool} indicates whether the refresh was triggered by the source change or refresh button */
 	refresh: (self: DamageSource<T>, isSourceChange: boolean) => void;
