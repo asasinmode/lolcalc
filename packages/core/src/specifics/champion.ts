@@ -7,6 +7,7 @@ import Aatrox from './champion/Aatrox.ts';
 import Ahri from './champion/Ahri.ts';
 import Akali from './champion/Akali.ts';
 import Akshan from './champion/Akshan.ts';
+import Alistar from './champion/Alistar.ts';
 import Ambessa from './champion/Ambessa.ts';
 import Amumu from './champion/Amumu.ts';
 import Anivia from './champion/Anivia.ts';
@@ -132,6 +133,7 @@ export const CHAMPION_SPECIFICS = {
 	Ahri,
 	Akali,
 	Akshan,
+	Alistar,
 	Ambessa,
 	Amumu,
 	Anivia,
@@ -143,17 +145,17 @@ export const CHAMPION_SPECIFICS = {
 	Briar,
 	Cassiopeia,
 	Chogath,
-	DrMundo,
 	Darius,
 	Diana,
+	DrMundo,
 	Draven,
 	Ekko,
 	Elise,
 	Evelynn,
 	Ezreal,
 	Fiora,
-	Garen,
 	Gangplank,
+	Garen,
 	Gnar,
 	Hecarim,
 	Heimerdinger,
@@ -164,6 +166,7 @@ export const CHAMPION_SPECIFICS = {
 	Jayce,
 	Jhin,
 	Jinx,
+	KSante,
 	Kaisa,
 	Kalista,
 	Karma,
@@ -172,10 +175,10 @@ export const CHAMPION_SPECIFICS = {
 	Khazix,
 	Kindred,
 	Kled,
-	KSante,
 	LeeSin,
 	Locke,
 	Mel,
+	MonkeyKing,
 	Mordekaiser,
 	Naafiri,
 	Nami,
@@ -219,7 +222,6 @@ export const CHAMPION_SPECIFICS = {
 	Viktor,
 	Vladimir,
 	Volibear,
-	MonkeyKing,
 	Yasuo,
 	Yone,
 	Zaahen,
@@ -287,13 +289,13 @@ interface IChampionAbilityVariantDataOverrides {
 export interface IChampionInternalDataMap {
 	TargetDummy: IChampionStats;
 	Akali: { isPassiveMSActive: number; passiveRangeSnapshot?: number };
+	Akshan: { passiveMSProgress: number };
 	Ambessa: { hasPassiveStack: number };
 	Amumu: { applyPassive: number };
 	Anivia: { isEgg: number };
 	Aphelios: { lastRotatedVariantIndex: number; gravitumSlowProgress: number };
-	AurelionSol: { passiveStacks: number };
 	Ashe: { frostShot: number };
-	Akshan: { passiveMSProgress: number };
+	AurelionSol: { passiveStacks: number };
 	Bard: { passiveStacks: number; chimeMoveSpeed: number };
 	Belveth: { passiveStacks: number; hasPassiveStack: number };
 	Chogath: { ultStacks: number };
@@ -313,8 +315,8 @@ export interface IChampionInternalDataMap {
 	Kaisa: { passiveStacksOnTarget: number; eBuff: number };
 	Kayle: { passiveStacks: number };
 	Kayn: { form: number };
-	Kindred: { passiveStacks: number };
 	Khazix: { rEvolvesMask: number };
+	Kindred: { passiveStacks: number };
 	Kled: {
 		kledCurrentHP: number;
 		skaarlCurrentHP: number;
@@ -332,6 +334,7 @@ export interface IChampionInternalDataMap {
 		 */
 		passiveMSTotalAp?: number;
 	};
+	MonkeyKing: { passiveStacks: number };
 	Nasus: { wProgress: number };
 	Nidalee: { passiveVariantActive: number };
 	Nunu: { isPassiveActive: number };
@@ -364,7 +367,6 @@ export interface IChampionInternalDataMap {
 	Veigar: { passiveStacks: number };
 	Viktor: { passiveAbilityUpgradesMask: number };
 	Volibear: { passiveStacks: number };
-	MonkeyKing: { passiveStacks: number };
-	Zeri: { rActive: number; rStacks: number };
 	Zaahen: { passiveStacks: number };
+	Zeri: { rActive: number; rStacks: number };
 }
