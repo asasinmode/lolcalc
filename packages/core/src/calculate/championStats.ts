@@ -148,9 +148,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			continue;
 		}
 		const isMasterwork = isMasterworkSlot(source, i);
-		if (isMasterwork) {
-			calculatedVariables.hasMasterworkItem = true;
-		}
 		for (const [statName, statValue] of itemToChampionStats(item, itemStatIncreases, isMasterwork)) {
 			if (MULTIPLICATIVE_CHAMPION_STATS.includes(statName)) {
 				itemBaseStats[statName] = addMultiplicative(itemBaseStats[statName], statValue);

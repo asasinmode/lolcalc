@@ -3981,7 +3981,8 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(self, { totalPreMultipliersStats, totalMultipliersStats, itemPassivesStats }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'rfc'>).sharpshooter) {
-						totalMultipliersStats.attackRange = Math.min(ITEMS_BY_NAME.rfc.dataValues.MaxRangeIncrease, totalPreMultipliersStats.attackRange * ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease);
+						/* not sure about the floor here, it fixes some results but not all */
+						totalMultipliersStats.attackRange = Math.min(ITEMS_BY_NAME.rfc.dataValues.MaxRangeIncrease, Math.floor(totalPreMultipliersStats.attackRange * ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease));
 						itemPassivesStats.attackRange ??= 0;
 						itemPassivesStats.attackRange += totalMultipliersStats.attackRange;
 					}

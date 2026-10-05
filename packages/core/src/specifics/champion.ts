@@ -4,6 +4,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTarget
 import type { IEffectControlsProps, ISpecificVariables } from './index';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
 import Aatrox from './champion/Aatrox.ts';
+import Ahri from './champion/Ahri.ts';
 import Akali from './champion/Akali.ts';
 import Akshan from './champion/Akshan.ts';
 import Ambessa from './champion/Ambessa.ts';
@@ -128,6 +129,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Aatrox,
+	Ahri,
 	Akali,
 	Akshan,
 	Ambessa,
