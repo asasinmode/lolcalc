@@ -60,6 +60,8 @@ export const HOOK_PRIORITIES = {
 		Jhin: 1,
 		Zaahen: 1,
 		/** needs total hp */
+		MonkeyKing: 1,
+		/** needs total hp */
 		Kled: 1,
 		/** needs total ap */
 		Volibear: 1,
