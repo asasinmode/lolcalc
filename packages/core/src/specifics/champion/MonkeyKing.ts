@@ -1,5 +1,4 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
