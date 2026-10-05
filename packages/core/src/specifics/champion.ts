@@ -293,6 +293,7 @@ export interface IChampionInternalDataMap {
 	Aphelios: { lastRotatedVariantIndex: number; gravitumSlowProgress: number };
 	AurelionSol: { passiveStacks: number };
 	Ashe: { frostShot: number };
+	Akshan: { passiveMSProgress: number };
 	Bard: { passiveStacks: number; chimeMoveSpeed: number };
 	Belveth: { passiveStacks: number; hasPassiveStack: number };
 	Chogath: { ultStacks: number };

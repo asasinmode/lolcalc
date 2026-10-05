@@ -68,11 +68,11 @@ export default {
 		onChampionPassive: {
 			handler(self, _stats, { calculatedVariables }) {
 				if (self.internalData.value.isPassiveMSActive) {
-					const bonusMSPercent = championAbilityVariableValue('PassiveSpeedBonus', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
-					if (typeof bonusMSPercent.value === 'number') {
-						calculatedVariables.totalBonusPercentMoveSpeed += bonusMSPercent.value;
+					const msPercent = championAbilityVariableValue('PassiveSpeedBonus', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof msPercent.value === 'number') {
+						calculatedVariables.totalBonusPercentMoveSpeed += msPercent.value;
 					} else {
-						console.warn('[CHAMPION_SPECIFICS akali] failed to calculate passive bonus ms', bonusMSPercent);
+						console.warn('[CHAMPION_SPECIFICS akali] failed to calculate passive ms', msPercent);
 					}
 				}
 			},
