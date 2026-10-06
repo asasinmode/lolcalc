@@ -160,7 +160,7 @@ export interface ICalculatesFromPart {
 	isPercentage?: boolean;
 	/** custom icon to be used instead of the `stat` one */
 	iconKey?: string;
-	/** html attributes to be applied to the part's tag */
+	/** html tag and  attributes to be used instead of a tag, like `font color="#ff00ff"` */
 	scalingTagAttrs?: string;
 }
 

@@ -1745,6 +1745,10 @@ interface IGameVariablesByType {
 		/** ability variable's `calculate` should return a variable with the name of the value in this property */
 		mBuffName: string;
 		mDataValue: string;
+		/** icon like `%i:asolStackIcon%` */
+		mIconKey?: string;
+		/** same as `BuffCounterByCoefficientCalculationPart.mScalingTagKey` */
+		mScalingTagKey?: string;
 	};
 	/** same as `BuffCounterByNamedDataValueCalculationPart` but by coefficient */
 	'BuffCounterByCoefficientCalculationPart': {
