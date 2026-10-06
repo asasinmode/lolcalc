@@ -11,6 +11,7 @@ import Alistar from './champion/Alistar.ts';
 import Ambessa from './champion/Ambessa.ts';
 import Amumu from './champion/Amumu.ts';
 import Anivia from './champion/Anivia.ts';
+import Annie from './champion/Annie.ts';
 import Aphelios from './champion/Aphelios.ts';
 import Ashe from './champion/Ashe.ts';
 import AurelionSol from './champion/AurelionSol.ts';
@@ -137,6 +138,7 @@ export const CHAMPION_SPECIFICS = {
 	Ambessa,
 	Amumu,
 	Anivia,
+	Annie,
 	Aphelios,
 	Ashe,
 	AurelionSol,

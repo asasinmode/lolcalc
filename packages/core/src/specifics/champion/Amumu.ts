@@ -10,6 +10,11 @@ export default {
 			applyPassive: clamp(0, Math.round(self.internalData.value.applyPassive ?? 0), 1),
 		};
 	},
+	passive: {
+		variables: defineChampionVariables<'Amumu', typeof IAmumu, 'passive'>()({
+			uninteresting: ['DebuffDuration', 'DamageAmp'],
+		}),
+	},
 	r: {
 		variables: defineChampionVariables<'Amumu', typeof IAmumu, 'r'>()({
 			meta: {

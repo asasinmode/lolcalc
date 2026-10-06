@@ -1,5 +1,7 @@
+import type IAnivia from '@lolcalc/data/files/champion/Anivia.json';
 import type { IChampionSpecific } from '../champion.ts';
 import { clamp } from '@lolcalc/shared/utils.ts';
+import { defineChampionVariables } from './shared.ts';
 
 export default {
 	setupData(self) {
@@ -11,5 +13,8 @@ export default {
 		dataOverrides: {
 			isImmobilizing: true,
 		},
+		variables: defineChampionVariables<'Anivia', typeof IAnivia, 'w'>()({
+			uninteresting: ['WallDuration'],
+		}),
 	},
 } satisfies IChampionSpecific<'Anivia'>;
