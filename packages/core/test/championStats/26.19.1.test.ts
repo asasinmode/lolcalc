@@ -301,3 +301,95 @@ test('26.19 Vladimir passive interactions', async (t) => {
 		}, damageSource);
 	});
 });
+
+test('26.19 Anivia passive', async (t) => {
+	const sourceCommon: IOverrides<'Anivia'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [],
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Anivia', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 19,
+			magicResist: 30,
+		}, damageSource);
+
+		damageSource.internalData.value.isEgg = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: -21,
+			magicResist: -10,
+		}, damageSource);
+	});
+
+	await t.test('jak\'sho', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Anivia', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.jakSho],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 64,
+			magicResist: 75,
+		}, damageSource);
+
+		damageSource.internalData.value.isEgg = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 24,
+			magicResist: 35,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		damageSource.internalData.value.isEgg = 0;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 78,
+			magicResist: 89,
+		}, damageSource);
+
+		damageSource.internalData.value.isEgg = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 26,
+			magicResist: 37,
+		}, damageSource);
+	});
+
+	await t.test('jak\'sho | mountains', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Anivia', {
+			...sourceCommon,
+			items: [ITEMS_BY_NAME.jakSho],
+			dragonStacks: ['Mountain', 'Mountain'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 70,
+			magicResist: 83,
+		}, damageSource);
+
+		damageSource.internalData.value.isEgg = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 26,
+			magicResist: 39,
+		}, damageSource);
+
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		damageSource.internalData.value.isEgg = 0;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 85,
+			magicResist: 97,
+		}, damageSource);
+
+		damageSource.internalData.value.isEgg = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
+			armor: 28,
+			magicResist: 40,
+		}, damageSource);
+	});
+});
