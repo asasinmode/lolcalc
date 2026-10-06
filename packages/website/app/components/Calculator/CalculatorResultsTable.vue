@@ -1896,12 +1896,6 @@ defineExpose({
 		--at-apply: 'of-auto max-block-[calc(100svb-var(--mbe)-var(--section-header-my)-var(--text-xl-fontSize))] min-block-100 mbe-10 inline-min max-inline-full mx-auto b b-[--b-clr] relative';
 		--mbe: calc(10 * var(--spacing));
 		--b-clr: theme('colors.neutral.600');
-
-		@media (pointer: fine) and (width >= 1024px) {
-			& {
-				--at-apply: 'overscroll-contain';
-			}
-		}
 	}
 
 	#results-table {
