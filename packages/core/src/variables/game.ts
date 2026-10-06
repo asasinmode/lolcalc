@@ -860,7 +860,7 @@ export function calculatesFromPartExtendedEquals(
 	prependPlus = false,
 	roundReplaced?: number,
 ): string {
-	const tag = part.scalingTagAttrs ? 'span' : part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
+	const tag = part.scalingTagAttrs ? '' : part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
 	const icon = insertIcon && (part.iconKey ?? (part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : ''));
 	const type = part.type === 'baseOnLevel' || part.type === 'base' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
 	const formattedValue = formatCalculatesFromPartValue(
@@ -873,13 +873,13 @@ export function calculatesFromPartExtendedEquals(
 	);
 
 	return `${
-		tag ? `<${tag}${part.scalingTagAttrs ? ` ${part.scalingTagAttrs}` : ''}>` : ''
+		tag || part.scalingTagAttrs ? `<${tag}${part.scalingTagAttrs ?? ''}>` : ''
 	}${
 		prependPlus ? '+ ' : ''
 	}${formattedValue}${type}${
 		icon ? `${type ? ' ' : ''}${part.iconKey ?? `%i:${icon}%`}` : ''
 	}${
-		tag ? `</${tag}>` : ''
+		tag || part.scalingTagAttrs ? `</${tag}${part.scalingTagAttrs ? part.scalingTagAttrs.slice(0, part.scalingTagAttrs.indexOf(' ')) : ''}>` : ''
 	}`;
 }
 
