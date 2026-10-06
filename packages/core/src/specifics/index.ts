@@ -160,8 +160,8 @@ export interface ICalculatesFromPart {
 	isPercentage?: boolean;
 	/** custom icon to be used instead of the `stat` one */
 	iconKey?: string;
-	/** html tag and  attributes to be used instead of a tag, like `font color="#ff00ff"` */
-	scalingTagAttrs?: string;
+	/** html tag and attributes to be used instead of a tag, like `font color="#ff00ff"` */
+	overrideTag?: string;
 }
 
 export interface IVariableValueResult<T = IConcreteVariableValue | [IConcreteVariableValue | undefined, IConcreteVariableValue | undefined]> {

@@ -860,7 +860,7 @@ export function calculatesFromPartExtendedEquals(
 	prependPlus = false,
 	roundReplaced?: number,
 ): string {
-	const tag = part.scalingTagAttrs ? '' : part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
+	const tag = part.overrideTag ? '' : part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
 	const icon = insertIcon && (part.iconKey ?? (part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : ''));
 	const type = part.type === 'baseOnLevel' || part.type === 'base' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
 	const formattedValue = formatCalculatesFromPartValue(
@@ -873,13 +873,13 @@ export function calculatesFromPartExtendedEquals(
 	);
 
 	return `${
-		tag || part.scalingTagAttrs ? `<${tag}${part.scalingTagAttrs ?? ''}>` : ''
+		tag || part.overrideTag ? `<${tag}${part.overrideTag ?? ''}>` : ''
 	}${
 		prependPlus ? '+ ' : ''
 	}${formattedValue}${type}${
 		icon ? `${type ? ' ' : ''}${part.iconKey ?? `%i:${icon}%`}` : ''
 	}${
-		tag || part.scalingTagAttrs ? `</${tag}${part.scalingTagAttrs ? part.scalingTagAttrs.slice(0, part.scalingTagAttrs.indexOf(' ')) : ''}>` : ''
+		tag || part.overrideTag ? `</${tag}${part.overrideTag ? part.overrideTag.slice(0, part.overrideTag.indexOf(' ')) : ''}>` : ''
 	}`;
 }
 
@@ -1555,6 +1555,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		const { mBuffName, mDataValue } = variable;
 		const rv: IVariableValueResult = {
 			value: whole.dataValues?.[mDataValue],
+			calculatesFrom: [],
 		};
 
 		meta.accessedVariables?.add(mDataValue);
@@ -1566,6 +1567,16 @@ export const VARIABLE_CALCULATION_FNS = {
 			}
 			rv.allValues = rv.value as number[];
 			rv.value = rv.value[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
+		}
+
+		if (typeof rv.value === 'number' && variable.mIconKey) {
+			rv.calculatesFrom!.push({
+				value: rv.value,
+				isPercentage: true,
+				iconKey: variable.mIconKey,
+				/* fallback based on asol passive */
+				overrideTag: variable.mScalingTagKey ?? 'font color=\'#ffffff\'',
+			});
 		}
 
 		const buff = meta.variableValueFn(mBuffName, meta.variableValueParams);
@@ -1600,7 +1611,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			value: mCoefficient,
 			isPercentage: true,
 			iconKey: variable.mIconKey,
-			scalingTagAttrs: variable.mScalingTagKey,
+			overrideTag: variable.mScalingTagKey,
 		});
 
 		return rv;
