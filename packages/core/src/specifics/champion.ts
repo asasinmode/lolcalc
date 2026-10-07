@@ -15,6 +15,8 @@ import Annie from './champion/Annie.ts';
 import Aphelios from './champion/Aphelios.ts';
 import Ashe from './champion/Ashe.ts';
 import AurelionSol from './champion/AurelionSol.ts';
+import Aurora from './champion/Aurora.ts';
+import Azir from './champion/Azir.ts';
 import Bard from './champion/Bard.ts';
 import Belveth from './champion/Belveth.ts';
 import Briar from './champion/Briar.ts';
@@ -142,6 +144,8 @@ export const CHAMPION_SPECIFICS = {
 	Aphelios,
 	Ashe,
 	AurelionSol,
+	Aurora,
+	Azir,
 	Bard,
 	Belveth,
 	Briar,
