@@ -161,6 +161,7 @@
 					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"tooltip": "<passive>Passive:</passive> Champions Jhin kills will create and detonate a Lotus Trap at their location.<br><br><active>Active:</active> Jhin places an invisible Lotus Trap for @TrapDuration@ minutes that creates a zone that <status>Slows</status> by @TrapSlowAmount*100@% when stepped on by an enemy. After @TrapDetonationTime@ seconds, the trap detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This ability has 2 charges (@AmmoRechargeRateTooltip@ second refresh).",
 					"tooltipExtendedBelowLine": "<rules>Lotus Trap hits deal @ReducedDamagePercent*100@% damage to minions, and enemies recently hit by another Lotus Trap.</rules>",
+					"ammoRechargeTime": [28, 24, 21.5, 19, 16.5, 14, 13],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

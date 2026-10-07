@@ -95,7 +95,6 @@ export interface IChampionAbilityVariant {
 	dataKey: string;
 	objectName: string;
 	cooldownTime?: number[];
-	ammoRechargeTime?: number[];
 	tooltip?: string;
 	/** tooltip shown when holding shift */
 	tooltipExtended?: string;
@@ -113,6 +112,7 @@ export interface IChampionAbilityVariant {
 	dataValues?: any;
 	spellCalculations?: any;
 	effectAmount?: any;
+	ammoRechargeTime?: number[];
 	isImmobilizing?: boolean;
 }
 

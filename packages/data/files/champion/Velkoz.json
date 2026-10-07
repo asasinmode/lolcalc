@@ -88,6 +88,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"tooltip": "Vel'Koz opens a rift to the void, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. The rift then erupts, dealing <magicDamage>@SecondaryDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
+					"ammoRechargeTime": [19, 18, 17, 16, 15, 14, 14],
 					"extendedVariables": [
 						{
 							"name": "BaseInitialDamage",

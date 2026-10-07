@@ -206,6 +206,7 @@
 					"image": "assets/characters/yuumi/hud/icons2d/yuumip.png",
 					"mana": [80, 90, 100, 110, 120, 130],
 					"tooltip": "Yuumi shields herself, blocking <shield>@TotalShielding@ damage</shield> and gains <attackSpeed>@TotalAttackSpeed@% Attack Speed</attackSpeed> for @MSDuration@ seconds. While the shield persists, the target also gains <speed>@MSAmount@% Move Speed</speed>.<br><br>If Yuumi is <keywordMajor>Attached</keywordMajor>, this Ability affects her ally instead and also restores <magicDamage>@ManaRestore@ Mana</magicDamage> to them, increased by up to @MaxManaPercIncrease*100@% based on the target's missing Mana.",
+					"ammoRechargeTime": [19, 18, 17, 16, 15, 14, 13],
 					"extendedVariables": [
 						{
 							"name": "BaseShielding",

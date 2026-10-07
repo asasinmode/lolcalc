@@ -271,11 +271,7 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 }
 
 /** `IChampionAbilityVariant` but with minimal keys */
-interface IChampionAbilityVariableVariant {
-	objectName: IChampionAbilityVariant['objectName'];
-	spellCalculations?: IChampionAbilityVariant['spellCalculations'];
-	dataValues?: IChampionAbilityVariant['dataValues'];
-	effectAmount?: IChampionAbilityVariant['effectAmount'];
+interface IChampionAbilityVariableVariant extends Pick<IChampionAbilityVariant, 'objectName' | 'effectAmount' | 'spellCalculations' | 'dataValues' | 'ammoRechargeTime'> {
 	[key: string]: any;
 }
 
@@ -363,6 +359,13 @@ export function championAbilityVariableValue(
 	if (variableName === 'AbilityResourceName') {
 		rv.value = damageSource?.champion.value?.partype ?? 'Mana';
 		return rv;
+	} else if (variableName === 'AmmoRechargeTime') {
+		// TODO apply cdr
+		rv.value = abilityVariant.ammoRechargeTime?.[abilityLevel ?? 1];
+		if (rv.value) {
+			rv.allValues = abilityVariant.ammoRechargeTime;
+			return rv;
+		}
 	}
 
 	let resolveArrayValueToAbilityLevel = true;

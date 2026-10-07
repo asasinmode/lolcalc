@@ -39,6 +39,7 @@
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged.",
 					"tooltipExtendedBelowLine": "<rules>If Xerath does not release the beam, half the cost is refunded.</rules>",
+					"ammoRechargeTime": [10, 9, 8, 7, 6, 5, 5],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

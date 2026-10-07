@@ -94,6 +94,7 @@
 					"cooldownTime": [80, 80, 70, 60, 50, 40, 40],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Warwick can sense champions below 50% Health, gaining <speed>@PassiveMSBonus@% Move Speed</speed> towards them. Spells and attacks against enemies below 50% Health grant <speed>@PassiveASBonus@% Attack Speed</speed>. These effects are increased by 200% against enemies below 25% Health. <br><br><spellActive>Active:</spellActive> Warwick can briefly sense all enemies, and gains this Ability's passive effect against the closest champion for 8 seconds, regardless of Health. If no champions are found, this Ability's cooldown is reduced by 30%.",
 					"tooltipExtendedBelowLine": "<rules>Warwick can only passively sense enemies who were brought below 50% Health by allies.</rules>",
+					"ammoRechargeTime": [3, 3, 3, 3, 3, 3, 3],
 					"extendedVariables": [
 						{
 							"name": "PassiveMSBonus",

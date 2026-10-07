@@ -152,6 +152,7 @@
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Duration@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @RecastWindow@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Cast range is increased when cast on Xayah.</rules>",
+					"ammoRechargeTime": [22, 20, 18, 16, 14, 12, 12],
 					"extendedVariables": [
 						{
 							"name": "BaseShield",

@@ -257,6 +257,7 @@
 					"cooldownTime": [125, 125, 105, 85, 0, 0, 0],
 					"tooltip": "Irelia launches a barrage of blades, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> and making champions and large jungle monsters <keywordMajor>Unsteady</keywordMajor> for @MarkDuration@ seconds. The barrage explodes into a cage around the first champion hit for @ZoneDuration@ seconds. The cage deals <magicDamage>@ZoneDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount@% for @CCDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>When the barrage explodes, surrounding enemies are also hit. </rules>",
+					"ammoRechargeTime": [-1, -1, -1, -1, -1, -1, -1],
 					"extendedVariables": [
 						{
 							"name": "BaseMissileDamage",

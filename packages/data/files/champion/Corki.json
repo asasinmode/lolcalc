@@ -209,6 +209,7 @@
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"tooltip": "Corki fires a missile that explodes on the first enemy hit, dealing <physicalDamage>@RSmallMissileDamage@ physical damage</physicalDamage> to surrounding enemies. Every third missile instead deals <physicalDamage>@RBigMissileDamage@ physical damage</physicalDamage>.<br><br>This Ability has up to @MaxAmmoTOOLTIP@ charges. Basic attacks against champions reduce the time between charges by <attention>@AttackRefund@</attention> seconds on hit.",
+					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

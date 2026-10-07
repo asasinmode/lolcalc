@@ -248,6 +248,7 @@
 					"cooldownTime": [120, 120, 100, 80, 0, 0, 0],
 					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>",
+					"ammoRechargeTime": [12, 12, 11, 10, 9, 8, 1],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",

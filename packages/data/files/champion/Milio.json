@@ -170,6 +170,7 @@
 					"mana": [50, 60, 70, 80, 90, 100],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "Milio wraps an ally champion in protective flames, granting <shield>@ShieldCalc@ Shield</shield> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>This ability has 2 charges and the effects stack on repeat targets.",
+					"ammoRechargeTime": [17, 17, 16, 15, 14, 13, 12],
 					"extendedVariables": [
 						{
 							"name": "ShieldBase",

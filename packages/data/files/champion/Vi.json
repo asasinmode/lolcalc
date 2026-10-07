@@ -166,6 +166,7 @@
 					"mana": [26, 32, 38, 44, 50, 50],
 					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"tooltip": "Vi's next Attack deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to the target and enemies behind them.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
+					"ammoRechargeTime": [12, 12, 11, 10, 9, 8, 8],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
