@@ -19,7 +19,11 @@ import Aurora from './champion/Aurora.ts';
 import Azir from './champion/Azir.ts';
 import Bard from './champion/Bard.ts';
 import Belveth from './champion/Belveth.ts';
+import Blitzcrank from './champion/Blitzcrank.ts';
+import Brand from './champion/Brand.ts';
+import Braum from './champion/Braum.ts';
 import Briar from './champion/Briar.ts';
+import Caitlyn from './champion/Caitlyn.ts';
 import Cassiopeia from './champion/Cassiopeia.ts';
 import Chogath from './champion/Chogath.ts';
 import Darius from './champion/Darius.ts';
@@ -148,7 +152,11 @@ export const CHAMPION_SPECIFICS = {
 	Azir,
 	Bard,
 	Belveth,
+	Blitzcrank,
+	Brand,
+	Braum,
 	Briar,
+	Caitlyn,
 	Cassiopeia,
 	Chogath,
 	Darius,

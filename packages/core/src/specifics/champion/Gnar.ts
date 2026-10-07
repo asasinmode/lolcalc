@@ -4,6 +4,7 @@ import type IGnar from '@lolcalc/data/files/champion/Gnar.json';
 import type { IChampion } from '@lolcalc/data/types.js';
 import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { roundNumber } from '@lolcalc/shared/utils.ts';
 
 export default {
 	passive: {

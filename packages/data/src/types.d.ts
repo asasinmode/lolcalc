@@ -95,13 +95,10 @@ export interface IChampionAbilityVariant {
 	dataKey: string;
 	objectName: string;
 	cooldownTime?: number[];
-	// TODO not sure if still needed, Aphelios variants use it maybe?
-	// /** if present, means the variant uses the tooltip of another variant at the specified index */
-	// tooltipVariantIndex?: number;
+	ammoRechargeTime?: number[];
 	tooltip?: string;
 	/** tooltip shown when holding shift */
 	tooltipExtended?: string;
-	// TODO unused at the moment? dont remember what it was for, maybe for when all abilities' (not just passive) are fully resolved
 	tooltipExtendedBelowLine?: string;
 	/** the variables shown below the description when holding shift. Cooldown excluded, it's added manually */
 	extendedVariables?: {
