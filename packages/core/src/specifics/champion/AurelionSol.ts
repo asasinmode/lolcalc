@@ -117,4 +117,16 @@ export default {
 			uninteresting: [],
 		}),
 	},
+	r: {
+		variables: defineChampionVariables<'AurelionSol', typeof IAurelionSol, 'r'>()({
+			known: {
+				f1: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+				};
+			},
+		}),
+	},
 } satisfies IChampionSpecific<'AurelionSol'>;
