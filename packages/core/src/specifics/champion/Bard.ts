@@ -30,6 +30,7 @@ export default {
 				f5: [],
 			},
 			calculate(self) {
+				const { passiveStacks } = self.internalData.value;
 				let MeepDamage = Number.NaN;
 
 				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
@@ -37,9 +38,54 @@ export default {
 				const checkpointDmg = championAbilityVariableValue('DamagePerCheckpoint', passiveParams);
 				const chimesPerCheckpoint = championAbilityVariableValue('TooltipChimeDamageCheckpoint', passiveParams);
 				if (typeof baseMeepDmg.value === 'number' && typeof checkpointDmg.value === 'number' && typeof chimesPerCheckpoint.value === 'number') {
-					MeepDamage = baseMeepDmg.value + Math.floor(self.internalData.value.passiveStacks / chimesPerCheckpoint.value) * checkpointDmg.value;
+					MeepDamage = baseMeepDmg.value + Math.floor(passiveStacks / chimesPerCheckpoint.value) * checkpointDmg.value;
 				} else {
 					console.warn('[CHAMPION_SPECIFICS bard] failed to calculate chime damage vars', baseMeepDmg, checkpointDmg, chimesPerCheckpoint);
+				}
+
+				let MeepRechargeCD = 8;
+				if (passiveStacks >= 70) {
+					MeepRechargeCD = 4;
+				} else if (passiveStacks >= 55) {
+					MeepRechargeCD = 5;
+				} else if (passiveStacks >= 40) {
+					MeepRechargeCD = 6;
+				} else if (passiveStacks >= 20) {
+					MeepRechargeCD = 7;
+				}
+
+				let MeepCap = 1;
+				if (passiveStacks >= 100) {
+					MeepCap = 9;
+				} else if (passiveStacks >= 95) {
+					MeepCap = 8;
+				} else if (passiveStacks >= 90) {
+					MeepCap = 7;
+				} else if (passiveStacks >= 80) {
+					MeepCap = 6;
+				} else if (passiveStacks >= 65) {
+					MeepCap = 5;
+				} else if (passiveStacks >= 50) {
+					MeepCap = 4;
+				} else if (passiveStacks >= 30) {
+					MeepCap = 3;
+				} else if (passiveStacks >= 10) {
+					MeepCap = 2;
+				}
+
+				let SplashSlow = 0;
+				if (passiveStacks >= 85) {
+					SplashSlow = 75;
+				} else if (passiveStacks >= 75) {
+					SplashSlow = 65;
+				} else if (passiveStacks >= 60) {
+					SplashSlow = 55;
+				} else if (passiveStacks >= 45) {
+					SplashSlow = 45;
+				} else if (passiveStacks >= 25) {
+					SplashSlow = 35;
+				} else if (passiveStacks >= 5) {
+					SplashSlow = 25;
 				}
 
 				return {
@@ -47,16 +93,17 @@ export default {
 						value: MeepDamage,
 					},
 					f1: {
-						value: 0,
+						/* doesn't seem to be in a var */
+						value: 20,
 					},
 					f2: {
-						value: 0,
+						value: SplashSlow,
 					},
 					f4: {
-						value: 0,
+						value: MeepCap,
 					},
 					f5: {
-						value: 0,
+						value: MeepRechargeCD,
 					},
 				};
 			},
@@ -73,6 +120,23 @@ export default {
 				},
 				SlowDuration: {
 					type: VariableType.affectedByTenacity,
+				},
+				f1: {
+					displayedName: 'ChimeExperience',
+					additionalInfo: 'Not accurate 100%. It starts at <const>20</const> but scales with game time',
+				},
+				f5: {
+					displayedName: 'MeepRechargeCD',
+					additionalInfo: 'Based on information from the wiki',
+				},
+				f4: {
+					displayedName: 'MeepCap',
+					additionalInfo: 'Based on information from the wiki',
+				},
+				f2: {
+					displayedName: 'SplashSlow',
+					type: VariableType.affectedBySlowResist,
+					additionalInfo: 'Based on information from the wiki',
 				},
 			},
 			uninteresting: ['TooltipMSPerStack', 'MaxSpeedStacks', 'SpeedStackDuration', 'TooltipManaRestore', 'TooltipChimeDamageCheckpoint', 'ChimesForSlowUpgrade', 'ChimesForSplashDamageUpgrade', 'ChimesForSplashAreaUpgrade', 'TooltipMSMax'],
@@ -128,5 +192,26 @@ export default {
 		variables: defineChampionVariables<'Bard', typeof IBard, 'r'>()({
 			uninteresting: ['RStasisDuration'],
 		}),
+	},
+	calculateHooks: {
+		onChampionPassive: {
+			handler(self, _stats, { calculatedVariables }) {
+				if (!self.internalData.value.chimeMoveSpeed) {
+					return;
+				}
+
+				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
+
+				const msPerChime = championAbilityVariableValue('TooltipMSPerStack', passiveParams);
+				const maxMS = championAbilityVariableValue('TooltipMSMax', passiveParams);
+				const maxStacks = championAbilityVariableValue('MaxSpeedStacks', passiveParams);
+				if (typeof msPerChime.value === 'number' && typeof maxMS.value === 'number' && typeof maxStacks.value === 'number') {
+					const perStackAfterFirst = (maxMS.value - msPerChime.value) / (maxStacks.value - 1);
+					calculatedVariables.totalBonusPercentMoveSpeed += (msPerChime.value + (self.internalData.value.chimeMoveSpeed - 1) * perStackAfterFirst) / 100;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS bard] failed to calculate chime move speed', msPerChime, maxMS, maxStacks);
+				}
+			},
+		},
 	},
 } satisfies IChampionSpecific<'Bard'>;
