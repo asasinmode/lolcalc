@@ -116,7 +116,6 @@
 					"tooltip": "{{Spell_KledRiderQ_Tooltip}}",
 					"tooltipExtended": "{{spell_KledRiderQ_Tooltip}}<br><br><keywordMajor>Mounted:</keywordMajor> Kled throws a bear trap that deals <physicalDamage>@MountedQCalc@ physical damage</physicalDamage> and hooks onto the first enemy champion or large jungle monster hit.<br><br>If Kled stays near a hooked enemy for @spell.KledQ:TetherPopTime@ seconds, he yanks out the trap, dealing <physicalDamage>@spell.KledQ:TotalYankDamage@ physical damage</physicalDamage>, <status>Pulling</status> them and <status>Slowing</status> by @spell.KledQ:SlowAmount*-100@% for @spell.KledQ:SlowDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Restore @CouragePerPellet@ <keywordMajor>Courage</keywordMajor> per hit against champions, and @CouragePerPellet*0.5@ against epic monsters.<br>Deals @FalloffPerMissile*100@% damage per hit beyond the first.</rules>",
-					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20],
 					"extendedVariables": [
 						{
 							"name": "DismountedBaseDamage",
@@ -174,7 +173,8 @@
 								}
 							]
 						}
-					}
+					},
+					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},

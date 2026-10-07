@@ -228,7 +228,6 @@
 					"mana": [75, 55, 35, 35, 35, 35],
 					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).",
-					"ammoRechargeTime": [0, 35, 30, 25, 0, 0, 0],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -283,7 +282,8 @@
 								}
 							]
 						}
-					}
+					},
+					"ammoRechargeTime": [0, 35, 30, 25, 0, 0, 0]
 				}
 			]
 		},

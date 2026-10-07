@@ -83,7 +83,6 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds.",
-					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -129,7 +128,8 @@
 								}
 							]
 						}
-					}
+					},
+					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},

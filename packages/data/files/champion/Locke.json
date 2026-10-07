@@ -119,7 +119,6 @@
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"tooltip": "Locke ignites his own soul, gaining <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and <speed>@MoveSpeed@ Move Speed</speed> that decays over @DecayTimeHelper@ seconds.<br><br>For @BaseDuration@ seconds, he suffers <trueDamage>@HealthCost*100@% current Health true damage</trueDamage> per second but <healing>Heals</healing> back the last <healing>@DamageRestoreAmount@</healing> damage taken, and an additional <healing>@AdditionalHeal@ Health</healing> based on missing Health and time passed, up to a maximum of <healing>@MaxHealingThreshold@ Health remaining</healing>.<br><br>Can be <recast>Recast</recast> to end early.",
 					"tooltipExtendedBelowLine": "<rules>This Ability can be used while <status>Disabled</status>.</rules><br><rules>Locke is <keyword>Ghosted</keyword> for the duration. {{Reminder_Ghosted}}</rules>",
-					"ammoRechargeTime": [0, 10, 9, 8, 7, 6, 6],
 					"extendedVariables": [
 						{
 							"name": "BaseDamageRestoreAmount",
@@ -226,7 +225,8 @@
 								}
 							]
 						}
-					}
+					},
+					"ammoRechargeTime": [0, 10, 9, 8, 7, 6, 6]
 				}
 			]
 		},

@@ -146,7 +146,6 @@
 					"image": "assets/characters/ashe/hud/icons2d/ashe_e.png",
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br><br>This Ability has 2 charges (@ChargeCooldown@ second recharge).",
-					"ammoRechargeTime": [100, 90, 80, 70, 60, 50, 50],
 					"extendedVariables": [
 						{
 							"name": "AmmoRechargeTime"
@@ -177,7 +176,8 @@
 						"1": [10, 50, 90, 130, 170, 210, 250],
 						"2": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
 						"3": [5, 5, 5, 5, 5, 5, 5]
-					}
+					},
+					"ammoRechargeTime": [100, 90, 80, 70, 60, 50, 50]
 				}
 			]
 		},

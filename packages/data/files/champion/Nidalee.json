@@ -137,7 +137,6 @@
 					"cooldownTime": [14, 13, 12, 11, 10, 9, 9],
 					"tooltip": "{{Spell_Bushwhack_Tooltip}}",
 					"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}",
-					"ammoRechargeTime": [-1, -1, -1, -1, -1, -1, -1],
 					"extendedVariables": [
 						{
 							"name": "TotalFlatDamage",
@@ -203,7 +202,8 @@
 						"4": [0, 10, 20, 30, 40, 50, 60],
 						"5": [120, 120, 120, 120, 120, 120, 120],
 						"6": [0, 40, 80, 120, 160, 200, 240]
-					}
+					},
+					"ammoRechargeTime": [-1, -1, -1, -1, -1, -1, -1]
 				},
 				{
 					"name": "Pounce / Bushwhack",

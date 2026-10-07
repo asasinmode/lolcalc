@@ -38,7 +38,6 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @StunDuration@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges.",
-					"ammoRechargeTime": [16, 16, 15, 14, 13, 12, 12],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -75,6 +74,7 @@
 						"1": [1, 1, 1, 1, 1, 1, 1],
 						"2": [1800, 1800, 1800, 1800, 1800, 1800, 1800]
 					},
+					"ammoRechargeTime": [16, 16, 15, 14, 13, 12, 12],
 					"isImmobilizing": true
 				}
 			]

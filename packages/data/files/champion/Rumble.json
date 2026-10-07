@@ -211,7 +211,6 @@
 					"image": "assets/characters/rumble/hud/icons2d/rumble_electroharpoon.png",
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "Rumble launches an electrified harpoon, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @BaseSlowAmount@% for @SlowDuration@ seconds, and reducing the enemy's <scaleMR>Magic Resist</scaleMR> by @PercMagicPen*100@% for @ShredDuration@ seconds.<br><br>Hitting an enemy who's already <status>Slowed</status> by this Ability increases the <status>Slow</status> to @EmpoweredSlowAmount@% and reduces the enemy's <scaleMR>Magic Resist</scaleMR> by @EnhancedMagicPen*100@%<br><br><keywordMajor>Danger Zone:</keywordMajor> The harpoon deals <magicDamage>@EmpDamage@ magic damage</magicDamage> instead and the <status>Slow</status> and reduced <scaleMR>Magic Resist</scaleMR> are increased by 50%.",
-					"ammoRechargeTime": [6, 6, 6, 6, 6, 6, 6],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -257,7 +256,8 @@
 							"mModifiedGameCalculation": "TotalDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"ammoRechargeTime": [6, 6, 6, 6, 6, 6, 6]
 				}
 			]
 		},

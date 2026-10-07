@@ -79,7 +79,6 @@
 					"image": "assets/characters/zyra/hud/icons2d/zyraw.png",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Zyra plants a <keywordMajor>Seed</keywordMajor> that lasts @SeedDuration@ seconds. These <keywordMajor>Seeds</keywordMajor> grant <keywordStealth>True Sight</keywordStealth> of enemy champions that step on them for @VisionGranted@ seconds, but are still destroyed.<br><br>This Ability has 2 charges with a @AmmoRechargeTime@ second recharge time. Killing an enemy minion or monster reduces the recharge time by @KillAmmoRefundMinion*100@%. Champion takedowns reduce the recharge time by @KillAmmoRefundChamp*100@% instead.",
-					"ammoRechargeTime": [18, 18, 16, 14, 12, 10, 8],
 					"extendedVariables": [
 						{
 							"name": "AmmoRechargeTime",
@@ -99,7 +98,8 @@
 						"5": [60, 60, 60, 60, 60, 60, 60],
 						"7": [0, 10, 20, 30, 40, 50, 60],
 						"8": [0, 0.4, 0.8, 1.2, 1.6, 2, 2.4]
-					}
+					},
+					"ammoRechargeTime": [18, 18, 16, 14, 12, 10, 8]
 				}
 			]
 		},

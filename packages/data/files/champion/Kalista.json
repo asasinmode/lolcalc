@@ -79,7 +79,6 @@
 					"image": "assets/characters/kalista/hud/icons2d/kalista_w.png",
 					"cooldownTime": [30, 30, 30, 30, 30, 30, 30],
 					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
-					"ammoRechargeTime": [100, 90, 80, 70, 60, 50, 50],
 					"extendedVariables": [
 						{
 							"name": "MaxHealthDamage",
@@ -107,7 +106,8 @@
 						"3": [100, 90, 80, 70, 60, 50, 40],
 						"5": [50, 75, 100, 125, 150, 175, 200],
 						"6": [10, 10, 10, 10, 10, 10, 10]
-					}
+					},
+					"ammoRechargeTime": [100, 90, 80, 70, 60, 50, 50]
 				}
 			]
 		},

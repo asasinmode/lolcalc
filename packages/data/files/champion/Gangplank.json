@@ -188,7 +188,6 @@
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @BarrelDuration@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @DebuffDuration@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @BarrelArmorPenetration@% Armor. Champions take an additional <physicalDamage>@BonusDamageToChampions@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
 					"tooltipExtendedBelowLine": "<rules>Keg decay rate increases at level 7 and 13.</rules>",
-					"ammoRechargeTime": [17, 17, 16, 15, 14, 13, 12],
 					"extendedVariables": [
 						{
 							"name": "BonusDamageToChampions",
@@ -259,7 +258,8 @@
 						"7": [100, 100, 100, 100, 100, 100, 100],
 						"8": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"9": [40, 40, 40, 40, 40, 40, 40]
-					}
+					},
+					"ammoRechargeTime": [17, 17, 16, 15, 14, 13, 12]
 				}
 			]
 		},

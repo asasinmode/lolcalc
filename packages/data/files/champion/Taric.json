@@ -38,7 +38,6 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @MaxCharges@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @MaxCharges@ stacks).",
-					"ammoRechargeTime": [15, 15, 15, 15, 15, 15, 15],
 					"extendedVariables": [
 						{
 							"name": "MaxCharges",
@@ -113,7 +112,8 @@
 						"3": [0.75, 0.75, 1.5, 2.25, 3, 3.75, 6],
 						"4": [25, 25, 50, 75, 100, 125, 125],
 						"5": [1, 1, 2, 3, 4, 5, 6]
-					}
+					},
+					"ammoRechargeTime": [15, 15, 15, 15, 15, 15, 15]
 				}
 			]
 		},

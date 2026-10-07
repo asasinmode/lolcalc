@@ -38,7 +38,6 @@
 					"mana": [20, 25, 30, 35, 40, 45],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>.",
-					"ammoRechargeTime": [1, 1, 1, 1, 1, 1, 1],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -78,7 +77,8 @@
 					},
 					"effectAmount": {
 						"0": [45, 45, 65, 85, 105, 125, 145]
-					}
+					},
+					"ammoRechargeTime": [1, 1, 1, 1, 1, 1, 1]
 				}
 			]
 		},

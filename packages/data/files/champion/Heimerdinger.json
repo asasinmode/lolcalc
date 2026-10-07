@@ -39,7 +39,6 @@
 					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"tooltip": "Heimerdinger constructs a <keywordMajor>Turret</keywordMajor> that attacks nearby enemies. Heimerdinger can have @MaxTurrets@ turrets active at once. <keywordMajor>Turrets</keywordMajor> slowly build up charge. At max charge, they fire a stronger attack.<br><br>If Heimerdinger gets too far away, his <keywordMajor>Turrets</keywordMajor> will deactivate after 8 seconds.<br><br>This Ability has @MaxKits@ charges.",
 					"tooltipExtendedBelowLine": "<rules>Turrets prioritize attacking enemies Heimerdinger has recently damaged and enemies attacking Heimerdinger.<br><br>Turret Stats:<br><healing>@TurretHealth@ Health</healing><br><magicDamage>@Damage@ magic damage</magicDamage> per regular shot<br><magicDamage>@DamageBeam@ magic damage</magicDamage> per charged shot</rules>",
-					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20],
 					"extendedVariables": [
 						{
 							"name": "BaseDamage",
@@ -184,7 +183,8 @@
 					},
 					"effectAmount": {
 						"4": [900, 900, 900, 900, 900, 900, 900]
-					}
+					},
+					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},
