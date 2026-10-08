@@ -2,6 +2,7 @@ import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
 import type { IChampionSpecific } from '../champion.ts';
 import { clamp } from '@lolcalc/shared/utils.ts';
+import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Ezreal'>): number {
 	return (self.champion.value! as typeof IEzreal).abilities.passive.variants[0]!.dataValues.MaxStacks[1]!;
@@ -26,5 +27,25 @@ export default {
 	},
 	passive: {
 		maxStacks: passiveMaxStacks,
+		variables: defineChampionVariables<'Ezreal', typeof IEzreal, 'passive'>()({
+			known: {
+				AttackSpeed: [],
+			},
+			calculate(self) {
+				return {
+					AttackSpeed: {
+						value: self.stats.value.championPassive.bonusAttackSpeedPercent,
+					},
+				};
+			},
+			meta: {
+				AttackSpeed: {
+					isCustom: true,
+					resultsIsPercentage: true,
+					resultsMultiplier: 100,
+				},
+			},
+			uninteresting: ['StackDuration', 'MaxStacks', 'AttackSpeedPerStack'],
+		}),
 	},
 } satisfies IChampionSpecific<'Ezreal'>;

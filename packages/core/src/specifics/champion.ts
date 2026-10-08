@@ -36,6 +36,7 @@ import Ekko from './champion/Ekko.ts';
 import Elise from './champion/Elise.ts';
 import Evelynn from './champion/Evelynn.ts';
 import Ezreal from './champion/Ezreal.ts';
+import Fiddlesticks from './champion/Fiddlesticks.ts';
 import Fiora from './champion/Fiora.ts';
 import Gangplank from './champion/Gangplank.ts';
 import Garen from './champion/Garen.ts';
@@ -171,6 +172,7 @@ export const CHAMPION_SPECIFICS = {
 	Elise,
 	Evelynn,
 	Ezreal,
+	Fiddlesticks,
 	Fiora,
 	Gangplank,
 	Garen,

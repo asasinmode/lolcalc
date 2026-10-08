@@ -1,5 +1,6 @@
 import type IDraven from '@lolcalc/data/files/champion/Draven.json';
 import type { IChampionSpecific } from '../champion.ts';
+import { VariableType } from '@lolcalc/shared';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -20,6 +21,27 @@ export default {
 					DravenPassiveHighestBounty: { value: 0 },
 				};
 			},
+			uninteresting: ['StackGain', 'PassiveGoldBase', 'PassiveGoldPerStack', 'PercentOfStacksLost', 'DravenPassiveGoldEarned', 'DravenPassiveHighestBounty'],
+		}),
+	},
+	r: {
+		variables: defineChampionVariables<'Draven', typeof IDraven, 'r'>()({
+			known: {
+				'f1': [],
+				'{577427b5}': [],
+			},
+			calculate(self) {
+				return {
+					'f1': { value: 0 },
+					'{577427b5}': { value: self.internalData.value.passiveStacks },
+				};
+			},
+			meta: {
+				RCalculatedDamage: {
+					type: VariableType.physical,
+				},
+			},
+			uninteresting: ['f1', 'RDamageReductionPerHit', 'RMinDamagePercent', 'RPassiveStacksCoefficient'],
 		}),
 	},
 } satisfies IChampionSpecific<'Draven'>;
