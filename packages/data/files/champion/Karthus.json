@@ -78,7 +78,8 @@
 					"effectAmount": {
 						"0": [45, 45, 65, 85, 105, 125, 145]
 					},
-					"ammoRechargeTime": [1, 1, 1, 1, 1, 1, 1]
+					"ammoRechargeTime": [1, 1, 1, 1, 1, 1, 1],
+					"maxAmmo": [2, 2, 2, 2, 2, 2, 2]
 				}
 			]
 		},

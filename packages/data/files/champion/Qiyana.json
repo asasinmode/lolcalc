@@ -147,7 +147,8 @@
 							"mModifiedGameCalculation": "VanillaDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"maxAmmo": [0, 0, 0, 0, 0, 0, 0]
 				}
 			]
 		},
@@ -233,7 +234,8 @@
 								}
 							]
 						}
-					}
+					},
+					"maxAmmo": [0, 0, 0, 0, 0, 0, 0]
 				}
 			]
 		},
@@ -280,7 +282,8 @@
 								}
 							]
 						}
-					}
+					},
+					"maxAmmo": [0, 0, 0, 0, 0, 0, 0]
 				}
 			]
 		},
@@ -353,6 +356,7 @@
 							]
 						}
 					},
+					"maxAmmo": [0, 0, 0, 0, 0, 0, 0],
 					"isImmobilizing": true
 				}
 			]

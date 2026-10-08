@@ -307,7 +307,8 @@
 							]
 						}
 					},
-					"ammoRechargeTime": [5, 5, 5, 5, 5, 5, 5]
+					"ammoRechargeTime": [5, 5, 5, 5, 5, 5, 5],
+					"maxAmmo": [2, 2, 2, 2, 2, 2, 2]
 				}
 			]
 		},

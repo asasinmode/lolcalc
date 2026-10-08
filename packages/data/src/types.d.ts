@@ -113,6 +113,7 @@ export interface IChampionAbilityVariant {
 	spellCalculations?: any;
 	effectAmount?: any;
 	ammoRechargeTime?: number[];
+	maxAmmo?: number[];
 	isImmobilizing?: boolean;
 }
 

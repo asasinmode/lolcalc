@@ -257,7 +257,8 @@
 							"__type": "GameCalculationModified"
 						}
 					},
-					"ammoRechargeTime": [6, 6, 6, 6, 6, 6, 6]
+					"ammoRechargeTime": [6, 6, 6, 6, 6, 6, 6],
+					"maxAmmo": [2, 2, 2, 2, 2, 2, 2]
 				}
 			]
 		},

@@ -2076,6 +2076,7 @@ function championAbilityVariant(
 		spellCalculations: cleanupObject(mSpellCalculations),
 		effectAmount: cleanupObject(mEffectAmount, true),
 		ammoRechargeTime: variantData.mSpell?.mAmmoRechargeTime,
+		maxAmmo: variantData.mSpell?.mMaxAmmo,
 		isImmobilizing: undefined,
 	} as IChampionAbilityVariant;
 

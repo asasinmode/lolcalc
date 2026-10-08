@@ -267,7 +267,8 @@
 							"mPrecision": 1
 						}
 					},
-					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20]
+					"ammoRechargeTime": [20, 20, 20, 20, 20, 20, 20],
+					"maxAmmo": [4, 4, 4, 4, 4, 4, 4]
 				}
 			]
 		},

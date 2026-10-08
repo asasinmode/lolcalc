@@ -271,7 +271,7 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 }
 
 /** `IChampionAbilityVariant` but with minimal keys */
-interface IChampionAbilityVariableVariant extends Pick<IChampionAbilityVariant, 'objectName' | 'effectAmount' | 'spellCalculations' | 'dataValues' | 'ammoRechargeTime'> {
+interface IChampionAbilityVariableVariant extends Pick<IChampionAbilityVariant, 'objectName' | 'effectAmount' | 'spellCalculations' | 'dataValues' | 'ammoRechargeTime' | 'maxAmmo'> {
 	[key: string]: any;
 }
 
@@ -362,6 +362,12 @@ export function championAbilityVariableValue(
 	} else if (variableName === 'AmmoRechargeTime') {
 		// TODO apply cdr
 		rv.value = abilityVariant.ammoRechargeTime?.[abilityLevel ?? 1];
+		if (rv.value) {
+			rv.allValues = abilityVariant.ammoRechargeTime;
+			return rv;
+		}
+	} else if (variableName === 'MaxAmmo') {
+		rv.value = abilityVariant.maxAmmo?.[abilityLevel ?? 1];
 		if (rv.value) {
 			rv.allValues = abilityVariant.ammoRechargeTime;
 			return rv;

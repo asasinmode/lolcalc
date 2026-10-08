@@ -355,7 +355,8 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					}
+					},
+					"maxAmmo": [75, 75, 75, 75, 75, 75, 75]
 				}
 			]
 		}
