@@ -4,7 +4,9 @@ import type IGnar from '@lolcalc/data/files/champion/Gnar.json';
 import type { IChampion } from '@lolcalc/data/types.js';
 import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { VariableType } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
+import { defineChampionVariables } from './shared.ts';
 
 export default {
 	passive: {
@@ -40,6 +42,29 @@ export default {
 	},
 	q: {
 		additionalVariantsObjectNames: ['GnarBigQ'],
+		variables: defineChampionVariables<'Gnar', typeof IGnar, 'q'>()({
+			meta: {
+				MiniTotalDamage: {
+					type: VariableType.physical,
+				},
+				SlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				MegaTotalDamage: {
+					type: VariableType.physical,
+				},
+				MegaSlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				MegaSlowDuration: {
+					type: VariableType.affectedBySlowResist,
+				},
+			},
+			uninteresting: ['MiniCDRefund', 'MiniSubsequentMult', 'MegaCDRefund'],
+		}),
 	},
 	w: {
 		additionalVariantsObjectNames: ['GnarBigW'],

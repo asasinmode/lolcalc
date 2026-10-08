@@ -43,6 +43,7 @@ import Galio from './champion/Galio.ts';
 import Gangplank from './champion/Gangplank.ts';
 import Garen from './champion/Garen.ts';
 import Gnar from './champion/Gnar.ts';
+import Graves from './champion/Graves.ts';
 import Hecarim from './champion/Hecarim.ts';
 import Heimerdinger from './champion/Heimerdinger.ts';
 import Hwei from './champion/Hwei.ts';
@@ -181,6 +182,7 @@ export const CHAMPION_SPECIFICS = {
 	Gangplank,
 	Garen,
 	Gnar,
+	Graves,
 	Hecarim,
 	Heimerdinger,
 	Hwei,
@@ -331,6 +333,7 @@ export interface IChampionInternalDataMap {
 	Fiora: { passiveMSProgress: number };
 	Gangplank: { isPassiveMSActive: number };
 	Garen: { isPassiveActive: number };
+	Graves: { eStacks: number };
 	Heimerdinger: { isPassiveMSActive: number };
 	Irelia: { passiveStacks: number };
 	Jax: { passiveStacks: number };

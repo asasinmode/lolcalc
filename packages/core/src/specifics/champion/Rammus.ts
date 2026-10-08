@@ -33,10 +33,11 @@ export default {
 				let wBonusMr = 0;
 				if (self.internalData.value.defensiveCurl) {
 					const wParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'w', abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource };
-					/* rammus W bonus resists consist of a base value + a % of total armor, however this % also applies to base
-						 * i.e base 20 + 50% armor = (20 * 1.5) + armor * 0.5
-						 * so get that base & multiplier from tooltip variables' calculatesFrom
-						 */
+					/*
+					 * rammus W bonus resists consist of a base value + a % of total armor, however this % also applies to base
+					 * i.e base 20 + 50% armor = (20 * 1.5) + armor * 0.5
+					 * so get that base & multiplier from tooltip variables' calculatesFrom
+					 */
 					const { calculatesFrom: armorCalculatesFrom } = championAbilityVariableValue('BonusArmorTooltip', wParams);
 					const { calculatesFrom: mrCalculatesFrom } = championAbilityVariableValue('BonusMRTooltip', wParams);
 

@@ -80,6 +80,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Garen: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Garen', 'passive', 0), 'isPassiveActive', 'is passive active (not hit recently)', false),
 	},
+	Graves: {
+		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Graves', 'e', 0), 'eStacks', 'True Grit stacks', 0, CHAMPION_SPECIFICS.Graves.e.maxStacks),
+	},
 	Heimerdinger: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Heimerdinger', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (close to turret)', false),
 	},
