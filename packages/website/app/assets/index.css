@@ -270,7 +270,7 @@
 		}
 
 		img {
-			--at-apply: 'inline-block size-4';
+			--at-apply: 'inline-block size-4.5';
 
 			&[data-sprite-image] {
 				--at-apply: '-translate-y-px';

@@ -24,6 +24,7 @@ import Brand from './champion/Brand.ts';
 import Braum from './champion/Braum.ts';
 import Briar from './champion/Briar.ts';
 import Caitlyn from './champion/Caitlyn.ts';
+import Camille from './champion/Camille.ts';
 import Cassiopeia from './champion/Cassiopeia.ts';
 import Chogath from './champion/Chogath.ts';
 import Darius from './champion/Darius.ts';
@@ -158,6 +159,7 @@ export const CHAMPION_SPECIFICS = {
 	Briar,
 	Caitlyn,
 	Cassiopeia,
+	Camille,
 	Chogath,
 	Darius,
 	Diana,

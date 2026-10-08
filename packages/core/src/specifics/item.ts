@@ -3690,7 +3690,7 @@ export const ITEM_SPECIFICS = {
 			meta: {
 				ShieldAmount: {
 					type: VariableType.shield,
-					additionalInfo: `while the calculated value is affected by [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang))} Serpent's Fang's](https://wiki.leagueoflegends.com/en-us/Serpent%27s_Fang) Shield Reave, the actual shield in game will probably be bigger because of how the Lifeline triggers. See the [${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalShieldbow))} Shieldbow's wiki notes](https://wiki.leagueoflegends.com/en-us/Immortal_Shieldbow#Notes)`,
+					additionalInfo: `while the calculated value is affected by ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang))} [Serpent's Fang's](https://wiki.leagueoflegends.com/en-us/Serpent%27s_Fang) Shield Reave, the actual shield in game will probably be bigger because of how the Lifeline triggers. See the ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalShieldbow))} [Shieldbow's wiki notes](https://wiki.leagueoflegends.com/en-us/Immortal_Shieldbow#Notes)`,
 				},
 			},
 			uninteresting: ['f3', 'HealthThreshold', 'ShieldDuration'],

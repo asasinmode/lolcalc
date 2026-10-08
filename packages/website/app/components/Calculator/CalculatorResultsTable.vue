@@ -629,7 +629,7 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 			id: entry[0],
 			name: entry[1].meta?.displayedName ?? entry[1].actualName ?? entry[0],
 			isCustom: entry[1].meta?.isCustom,
-			additionalInfo: entry[1].meta?.additionalInfo && await simpleDescriptionFormatting(entry[1].meta?.additionalInfo),
+			additionalInfo: entry[1].meta?.additionalInfo && await simpleDescriptionFormatting(entry[1].meta?.additionalInfo, true),
 		})));
 
 	rows = rows.concat(unknownVariables.map(([rawName]) => ({
