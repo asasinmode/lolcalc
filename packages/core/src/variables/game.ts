@@ -1848,11 +1848,15 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 	type: NonNullable<ICalculatesFromPart['type']>;
 } | undefined {
 	const statsKey = mStatFormulaStatKey(stat);
-	// TODO not sure if can just fall back to ap, at the moment dusk and dawn doesn't have `mStat` specified and seems to be using ap there
 	const targetStat = stat.mStat ? MSTAT_TO_NAMED_STAT[stat.mStat as keyof typeof MSTAT_TO_NAMED_STAT] : 'abilityPower';
-	/** resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
+	/* resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
 	if (statsKey && targetStat) {
-		return { value: stats ? stats[statsKey][targetStat] : 0, stat: targetStat, type: statsKey };
+		const value = stats ? stats[statsKey][targetStat] : 0;
+		/*
+		 * some vars use crit damage multiplier as a value multiplier which would make them show up as `0` in result tooltips, which do not pass a damage source = multiplier is 0
+		 * this does mean that the extended equals for a variable (what it scales with) will be different between scoreboard item hover and results hover but it shouldn't matter too much, as long as they shown value in column is correct
+		 */
+		return { value: targetStat === 'critDamageMultiplier' ? (value || 2) : value, stat: targetStat, type: statsKey };
 	}
 	return undefined;
 }

@@ -27,6 +27,7 @@ import Caitlyn from './champion/Caitlyn.ts';
 import Camille from './champion/Camille.ts';
 import Cassiopeia from './champion/Cassiopeia.ts';
 import Chogath from './champion/Chogath.ts';
+import Corki from './champion/Corki.ts';
 import Darius from './champion/Darius.ts';
 import Diana from './champion/Diana.ts';
 import Draven from './champion/Draven.ts';
@@ -158,9 +159,10 @@ export const CHAMPION_SPECIFICS = {
 	Braum,
 	Briar,
 	Caitlyn,
-	Cassiopeia,
 	Camille,
+	Cassiopeia,
 	Chogath,
+	Corki,
 	Darius,
 	Diana,
 	DrMundo,
