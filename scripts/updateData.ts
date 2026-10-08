@@ -777,8 +777,8 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 		const stackData = sharedData[`Shared/Spells/SRX_DragonBuff${spellKey || name}`];
 		const soulData = sharedData[`Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`];
 
-		const stackAbility = miscData!.data.dragons[name as IDragonName].stack;
-		const soulAbility = miscData!.data.dragons[name as IDragonName].soul;
+		const stackAbility = miscData!.data.dragons[name as IDragonName].stack as IChampionAbilityVariant;
+		const soulAbility = miscData!.data.dragons[name as IDragonName].soul as IChampionAbilityVariant;
 		const allSpells = [[stackAbility, 'passive'], [soulAbility, 'passive']] as [IChampionAbilityVariant, IChampionAbilityKey][];
 
 		const { mBuff: { mDescription: stackDescriptionKey } } = stackData;
@@ -1194,7 +1194,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 								variableType: 'championAbility',
 								variableValueParameters: {
 									abilityKey: 'passive',
-									abilityVariant: effectData,
+									abilityVariant: effectData as IChampionAbilityVariant,
 									allAbilitiesVariants: [],
 								},
 								variableSourceKeys: ['spellCalculations'],
@@ -1726,9 +1726,9 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 				if (rename) {
 					const [from, to] = rename;
 					variableSource[sourceKey][to] = variableSource[sourceKey][from];
-					variableSource[sourceKey].__renamedVariables ||= {};
-					variableSource[sourceKey].__renamedVariables[from] = to;
-					variableSource[sourceKey][from] = undefined;
+					(variableSource[sourceKey] as any).__renamedVariables ||= {};
+					(variableSource[sourceKey] as any).__renamedVariables[from] = to;
+					(variableSource[sourceKey] as any)[from] = undefined;
 					unknownVariables.splice(i, 1);
 					unknownChanged = true;
 					continue outer;

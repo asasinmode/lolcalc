@@ -2021,7 +2021,7 @@ export function computeDragonAbilityDescription(
 	checkIfValid = false,
 	replaceOptions?: IReplaceGameVariablesOptions,
 ): IComputedDragonAbilityDescription {
-	const ability = MISC.dragons[dragon][type];
+	const ability = MISC.dragons[dragon][type] as IChampionAbilityVariant;
 	const string = TEXT.dragons[dragon][type];
 	const isStack = type === 'stack';
 	const allAbilitiesVariants = [[MISC.dragons[dragon].stack, 'passive'], [MISC.dragons[dragon].soul, 'passive']] as UnwrapRef<DamageSource['allAbilityVariants']>;

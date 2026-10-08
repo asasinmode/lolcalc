@@ -270,13 +270,8 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 	return rv;
 }
 
-/** `IChampionAbilityVariant` but with minimal keys */
-interface IChampionAbilityVariableVariant extends Pick<IChampionAbilityVariant, 'objectName' | 'effectAmount' | 'spellCalculations' | 'dataValues' | 'ammoRechargeTime' | 'maxAmmo'> {
-	[key: string]: any;
-}
-
 interface IChampionAbilityVariableParams extends IBaseVariableParams {
-	abilityVariant: IChampionAbilityVariableVariant;
+	abilityVariant: IChampionAbilityVariant;
 	abilityKey: IChampionAbilityKey;
 	dynamicVariables?: IDynamicVariables;
 	/**
@@ -288,11 +283,11 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	 * ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive
 	 * if `damageSource` is passed, will use `.allAbilityVariants.value`
 	 */
-	allAbilitiesVariants?: [IChampionAbilityVariableVariant, IChampionAbilityKey][];
+	allAbilitiesVariants?: [IChampionAbilityVariant, IChampionAbilityKey][];
 	/** used for returning the name of the variable when it's taken from another spell, like `Spell.SRX_DragonSoulBuffMountain:TotalShield` should be `TotalShield` */
 	returnActualName?: boolean;
 	/** for when an ability variant tries to resolve an unknown variable by using other, same ability (like q[0], q[1]) variant to avoid rechecking visited variants/infinitely looping if a variable was unknown in all variants */
-	checkedVariablesVariants?: Map<string, IChampionAbilityVariableVariant[]>;
+	checkedVariablesVariants?: Map<string, IChampionAbilityVariant[]>;
 }
 
 export function championAbilityVariableValue(
@@ -358,20 +353,20 @@ export function championAbilityVariableValue(
 
 	if (variableName === 'AbilityResourceName') {
 		rv.value = damageSource?.champion.value?.partype ?? 'Mana';
-		return rv;
 	} else if (variableName === 'AmmoRechargeTime') {
 		// TODO apply cdr
 		rv.value = abilityVariant.ammoRechargeTime?.[abilityLevel ?? 1];
-		if (rv.value) {
-			rv.allValues = abilityVariant.ammoRechargeTime;
-			return rv;
-		}
+		rv.allValues = abilityVariant.ammoRechargeTime;
 	} else if (variableName === 'MaxAmmo') {
 		rv.value = abilityVariant.maxAmmo?.[abilityLevel ?? 1];
-		if (rv.value) {
-			rv.allValues = abilityVariant.ammoRechargeTime;
-			return rv;
-		}
+		rv.allValues = abilityVariant.maxAmmo;
+	} else if (variableName === 'Cost') {
+		rv.value = abilityVariant.mana?.[abilityLevel ?? 1];
+		rv.allValues = abilityVariant.mana;
+	}
+
+	if (rv.value) {
+		return rv;
 	}
 
 	let resolveArrayValueToAbilityLevel = true;
