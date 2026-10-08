@@ -1,8 +1,27 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type IGangplank from '@lolcalc/data/files/champion/Gangplank.json';
 import type { IChampionSpecific } from '../champion.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { VariableType } from '@lolcalc/shared';
+import { clamp } from '@lolcalc/shared/utils.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
+	setupData(self) {
+		return {
+			isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
+		};
+	},
+	passive: {
+		variables: defineChampionVariables<'Gangplank', typeof IGangplank, 'passive'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.true,
+				},
+			},
+			uninteresting: ['DoTDuration', 'MoveSpeedDuration', 'TurretDamageMult'],
+		}),
+	},
 	q: {
 		variables: defineChampionVariables<'Gangplank', typeof IGangplank, 'q'>()({
 			known: {
@@ -19,5 +38,19 @@ export default {
 				};
 			},
 		}),
+	},
+	calculateHooks: {
+		onChampionPassive: {
+			handler(self, _stats, { calculatedVariables }) {
+				if (self.internalData.value.isPassiveMSActive) {
+					const ms = championAbilityVariableValue('MoveSpeed', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					if (typeof ms.value === 'number') {
+						calculatedVariables.totalBonusPercentMoveSpeed += ms.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS gangplank] failed to calculate passive ms', ms);
+					}
+				}
+			},
+		},
 	},
 } satisfies IChampionSpecific<'Gangplank'>;

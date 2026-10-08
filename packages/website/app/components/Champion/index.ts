@@ -74,6 +74,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Fiora: {
 		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Fiora', 'passive', 0), 'passiveMSProgress', 'Duelist\'s Dance move speed', CHAMPION_SPECIFICS.Fiora.passive.bonusMS),
 	},
+	Gangplank: {
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Gangplank', 'passive', 0), 'isPassiveMSActive', 'is passive MS active', false),
+	},
 	Garen: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Garen', 'passive', 0), 'isPassiveActive', 'is passive active (not hit recently)', false),
 	},

@@ -38,6 +38,8 @@ import Evelynn from './champion/Evelynn.ts';
 import Ezreal from './champion/Ezreal.ts';
 import Fiddlesticks from './champion/Fiddlesticks.ts';
 import Fiora from './champion/Fiora.ts';
+import Fizz from './champion/Fizz.ts';
+import Galio from './champion/Galio.ts';
 import Gangplank from './champion/Gangplank.ts';
 import Garen from './champion/Garen.ts';
 import Gnar from './champion/Gnar.ts';
@@ -174,6 +176,8 @@ export const CHAMPION_SPECIFICS = {
 	Ezreal,
 	Fiddlesticks,
 	Fiora,
+	Fizz,
+	Galio,
 	Gangplank,
 	Garen,
 	Gnar,
@@ -325,6 +329,7 @@ export interface IChampionInternalDataMap {
 	Ekko: { isPassiveMSActive: number };
 	Ezreal: { passiveStacks: number };
 	Fiora: { passiveMSProgress: number };
+	Gangplank: { isPassiveMSActive: number };
 	Garen: { isPassiveActive: number };
 	Heimerdinger: { isPassiveMSActive: number };
 	Irelia: { passiveStacks: number };
