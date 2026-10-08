@@ -62,7 +62,7 @@ export interface IVariableMeta<T = any> {
 	 */
 	extendedEquals?: IVariableMetaExtendedEquals | ((variableValueParams: T) => IVariableMetaExtendedEquals);
 	/** will override variable's calculatesFrom */
-	calculatesFrom?: ICalculatesFromPart[];
+	calculatesFrom?: ICalculatesFromPart[] | ((variableValueParams: T) => ICalculatesFromPart[]);
 	/** displayed value multiplied by */
 	multiplier?: number;
 	/** same as `IVariableValueResult.roundReplaced` */
@@ -917,7 +917,7 @@ function variableExtendedEquals(
 	varIcon?: string,
 ): string {
 	if (meta?.calculatesFrom) {
-		calculatesFrom = meta.calculatesFrom;
+		calculatesFrom = typeof meta.calculatesFrom === 'function' ? meta.calculatesFrom(variableValueFunctionParams) : meta.calculatesFrom;
 	}
 
 	let metaSuffix = '';

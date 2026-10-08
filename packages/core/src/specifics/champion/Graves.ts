@@ -26,6 +26,24 @@ export default {
 				MultiBulletDamage: {
 					type: VariableType.physical,
 				},
+				CritDamageMult: {
+					/* game doesn't show anything there */
+					calculatesFrom({ abilityVariant, damageSource }) {
+						const critRatio = (abilityVariant as typeof IGraves['abilities']['passive']['variants'][0]).dataValues.CritDamageRatio[1]!;
+						return [
+							{
+								stat: 'const',
+								/* recreate CritDamageMult */
+								value: ((damageSource?.stats.value.baseOnLevel.critDamageMultiplier ?? 2) - 1) * critRatio * 100,
+							},
+							{
+								stat: 'critDamageMultiplier',
+								value: critRatio,
+								isPercentage: true,
+							},
+						];
+					},
+				},
 			},
 			uninteresting: ['StructureDamageReduction'],
 		}),
