@@ -1,9 +1,10 @@
 import type { IChampionRunes } from '@lolcalc/data/types';
+import type { ComponentExposed } from 'vue-component-type-helpers';
 import LolRuneSelect from '~/components/Lol/LolRuneSelect.vue';
 
 let resolve: (() => void) | undefined;
 const valueRef = shallowRef<Ref<IChampionRunes>>();
-const dialogRef = shallowRef<InstanceType<typeof LolRuneSelect>>();
+const dialogRef = shallowRef<ComponentExposed<typeof LolRuneSelect>>();
 
 function selectRunes(targetRef: Ref<IChampionRunes>): Promise<void> {
 	valueRef.value = targetRef;

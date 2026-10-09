@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { ComponentExposed } from 'vue-component-type-helpers';
 import CalculatorDamageSourceDebugDialog from '~/components/Calculator/CalculatorDamageSourceDebugDialog.vue';
 
 let resolve: (() => void) | undefined;
 const damageSourceRef = shallowRef<DamageSource>();
-const dialogRef = shallowRef<InstanceType<typeof CalculatorDamageSourceDebugDialog>>();
+const dialogRef = shallowRef<ComponentExposed<typeof CalculatorDamageSourceDebugDialog>>();
 
 function openDebugDialog(damageSource: DamageSource): Promise<void> {
 	damageSourceRef.value = damageSource;

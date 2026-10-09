@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
+import type { ComponentExposed } from 'vue-component-type-helpers';
 import LolItemShop from '~/components/Lol/LolItemShop.vue';
 
 let resolve: (() => void) | undefined;
 const damageSourceRef = shallowRef<DamageSource>();
-const dialogRef = shallowRef<InstanceType<typeof LolItemShop>>();
+const dialogRef = shallowRef<ComponentExposed<typeof LolItemShop>>();
 
 function selectItems(damageSource: DamageSource): Promise<void> {
 	damageSourceRef.value = damageSource;

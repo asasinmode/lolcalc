@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IListedChampion } from '@lolcalc/data/types';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import { CHAMPION_IMAGES, CHAMPIONS, PATCH_VERSION } from '@lolcalc/data';

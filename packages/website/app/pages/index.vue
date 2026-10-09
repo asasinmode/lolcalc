@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ShallowRef } from 'vue';
+import type { ComponentExposed } from 'vue-component-type-helpers';
 import type { CalculatorResultsTable } from '#components';
 
 const { damageSources } = useCalculatorState();
@@ -29,7 +30,7 @@ onMounted(() => {
 	document.addEventListener('visibilitychange', saveStateOnVisibilitychange);
 
 	callOnce(() => {
-		restoreState(resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
+		restoreState(resultsTable as ShallowRef<ComponentExposed<typeof CalculatorResultsTable>>);
 	});
 });
 

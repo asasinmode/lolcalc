@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IChampionRunes, IRune, IRuneShard, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { StyleValue, UnwrapRef } from 'vue';
 import { runesInvalid } from '@lolcalc/core/specifics/rune';
