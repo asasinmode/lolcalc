@@ -1,11 +1,11 @@
 <script setup vapor lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
-import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IReplacedGameVariable, IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
 import type { IChampion, IDragonName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';

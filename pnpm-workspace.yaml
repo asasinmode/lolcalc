@@ -1,8 +1,9 @@
 catalogMode: strict
-shamefullyHoist: true
-shellEmulator: true
+minimumReleaseAgeExcludePrune: true
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 1440
+shamefullyHoist: true
+shellEmulator: true
 
 packages:
   - packages/*
