@@ -2,7 +2,6 @@ import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IDrMundo from '@lolcalc/data/files/champion/DrMundo.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

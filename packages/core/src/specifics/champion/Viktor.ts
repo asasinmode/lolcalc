@@ -1,5 +1,4 @@
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 
 const passiveUpgradesMask = 2 ** 4;

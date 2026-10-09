@@ -4,7 +4,6 @@ import type { IChampion, IChampionId } from '@lolcalc/data/types.js';
 import type { IStatsCalculationEffectVars } from '@lolcalc/shared';
 import { AbilityType, EffectObjectName, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
-
 import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
 import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect, IOverrides } from '../DamageSource.ts';
 import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';

@@ -1,7 +1,6 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 
 function passiveMaxStacks(self: DamageSource<'Orianna'>): number {

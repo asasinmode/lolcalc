@@ -1,6 +1,5 @@
 import assert from 'node:assert';
 import test from 'node:test';
-
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { CHAMPIONS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { nextTick } from 'vue';

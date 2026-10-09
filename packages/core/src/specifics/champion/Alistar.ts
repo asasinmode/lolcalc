@@ -1,6 +1,5 @@
 import type IAlistar from '@lolcalc/data/files/champion/Alistar.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

@@ -5,7 +5,6 @@ import type IGnar from '@lolcalc/data/files/champion/Gnar.json';
 import type { IChampion } from '@lolcalc/data/types.js';
 import { VariableType } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

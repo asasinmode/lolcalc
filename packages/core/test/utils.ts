@@ -1,5 +1,4 @@
 import assert from 'node:assert';
-
 import type { IDamageSourceEffect, IOverrides } from '@lolcalc/core/DamageSource.ts';
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IEffectAbilityId } from '@lolcalc/core/GameAbilityId';

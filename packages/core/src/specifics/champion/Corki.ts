@@ -1,6 +1,5 @@
 import type ICorki from '@lolcalc/data/files/champion/Corki.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

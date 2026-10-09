@@ -2,7 +2,6 @@ import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IJax from '@lolcalc/data/files/champion/Jax.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

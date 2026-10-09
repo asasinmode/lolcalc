@@ -5,7 +5,6 @@ import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
-
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();

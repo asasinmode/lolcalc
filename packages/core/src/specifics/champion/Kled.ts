@@ -4,7 +4,6 @@ import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IKled from '@lolcalc/data/files/champion/Kled.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { watch } from 'vue';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IExtraInactiveFn } from '../index.ts';
 import { HOOK_PRIORITIES } from '../index.ts';

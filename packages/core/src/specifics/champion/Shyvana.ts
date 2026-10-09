@@ -1,7 +1,6 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IShyvana from '@lolcalc/data/files/champion/Shyvana.json';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

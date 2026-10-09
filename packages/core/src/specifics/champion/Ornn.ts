@@ -4,7 +4,6 @@ import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { watch } from 'vue';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

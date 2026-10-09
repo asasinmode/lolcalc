@@ -5,7 +5,6 @@ import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES } from '@lolcalc/
  * this file shouldn't import anything from specifics as it's used throughout, in order to avoid circular imports
  */
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
-
 import type { IGameAbilityId } from './GameAbilityId';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { EFFECTS_META } from './specifics/effectsMeta.ts';

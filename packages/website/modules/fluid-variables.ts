@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises';
-
 import { addTemplate, defineNuxtModule, resolveFiles, updateTemplates } from '@nuxt/kit';
 
 interface IFluidVariablesConfig {

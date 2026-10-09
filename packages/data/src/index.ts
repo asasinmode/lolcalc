@@ -3,7 +3,6 @@ import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
 import { markRaw } from 'vue';
-
 import championData from '../files/champion.json' with { type: 'json' };
 import effectData from '../files/effect.json' with { type: 'json' };
 import itemData from '../files/item.json' with { type: 'json' };

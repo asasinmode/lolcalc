@@ -9,7 +9,6 @@ import type { IStatsCalculationResult } from '@lolcalc/shared';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
-
 import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
 import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';

@@ -3,7 +3,6 @@ import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IMonkeyKing from '@lolcalc/data/files/champion/MonkeyKing.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

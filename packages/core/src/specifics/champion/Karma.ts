@@ -1,5 +1,4 @@
 import type IKarma from '@lolcalc/data/files/champion/Karma.json';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

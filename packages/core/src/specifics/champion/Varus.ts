@@ -2,7 +2,6 @@ import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IVarus from '@lolcalc/data/files/champion/Varus.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IVariableValueResult } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

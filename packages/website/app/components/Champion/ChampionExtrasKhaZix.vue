@@ -4,7 +4,6 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type { IChampionAbilityKey } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
-
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();

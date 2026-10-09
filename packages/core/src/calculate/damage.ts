@@ -1,5 +1,4 @@
 import type { IChampionStats, IEffectOntoTargetVars } from '@lolcalc/shared';
-
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
 import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';

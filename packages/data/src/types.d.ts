@@ -1,6 +1,5 @@
 import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import type { UnionKeys } from '@lolcalc/shared/types';
-
 import type IChampionData from '../files/champion.json';
 import type TExampleChampion from '../files/champion/Ahri.json';
 import type IItemData from '../files/item.json';

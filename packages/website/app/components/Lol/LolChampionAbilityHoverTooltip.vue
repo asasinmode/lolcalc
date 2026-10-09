@@ -3,7 +3,6 @@ import type { IComputedAbilityDescription } from '@lolcalc/core/DamageSource';
 import { computeAbilityDescription } from '@lolcalc/core/DamageSource';
 import { CHAMPION_IMAGES, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import type { IChampion } from '@lolcalc/data/types';
-
 import type { IChampionAbilityHoverTooltipProps } from '~/utils/types';
 
 const props = withDefaults(defineProps<IChampionAbilityHoverTooltipProps>(), { group: 'sources' });

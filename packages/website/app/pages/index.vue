@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { ShallowRef } from 'vue';
 import type { ComponentExposed } from 'vue-component-type-helpers';
-
 import type { CalculatorResultsTable } from '#components';
 
 const { damageSources } = useCalculatorState();

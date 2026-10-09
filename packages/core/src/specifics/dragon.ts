@@ -3,7 +3,6 @@ import { MISC } from '@lolcalc/data';
 import type { IChampionAbilityVariant, IDragonName } from '@lolcalc/data/types';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import { addMultiplicative } from '../calculate/util.ts';
 import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupInternalDragonData } from '../DamageSource';
 import { addCalculatesFrom, championAbilityVariableValue } from '../variables/game.ts';

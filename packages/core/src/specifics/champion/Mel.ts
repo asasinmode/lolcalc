@@ -1,7 +1,6 @@
 import { calculatesFromPartExtendedEquals, championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IMel from '@lolcalc/data/files/champion/Mel.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

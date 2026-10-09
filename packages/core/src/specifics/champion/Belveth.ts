@@ -8,7 +8,6 @@ import type IBelveth from '@lolcalc/data/files/champion/Belveth.json';
 import { AbilityType, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types.js';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { cooldownReductionPercentageFromHaste, defineChampionVariables } from './shared.ts';

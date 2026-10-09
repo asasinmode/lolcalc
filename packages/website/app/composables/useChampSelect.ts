@@ -1,6 +1,5 @@
 import type { IListedChampion } from '@lolcalc/data/types';
 import type { ComponentExposed } from 'vue-component-type-helpers';
-
 import LolChampSelect from '~/components/Lol/LolChampSelect.vue';
 
 let resolve: (() => void) | undefined;

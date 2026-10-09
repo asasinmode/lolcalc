@@ -1,6 +1,5 @@
 import type { IChampionRunes } from '@lolcalc/data/types';
 import type { ComponentExposed } from 'vue-component-type-helpers';
-
 import LolRuneSelect from '~/components/Lol/LolRuneSelect.vue';
 
 let resolve: (() => void) | undefined;

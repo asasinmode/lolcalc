@@ -1,5 +1,4 @@
 import { AbilityType, EffectObjectName, ITEM_NAME_TO_ID } from '@lolcalc/shared';
-
 import type { IGameAbilityId } from '../GameAbilityId';
 import { GameAbilityId } from '../GameAbilityId.ts';
 

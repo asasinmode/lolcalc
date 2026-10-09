@@ -3,7 +3,6 @@ import type { IChampionId, IDragonName } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionStatName, TItemNameToId } from '@lolcalc/shared';
 import { ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import type { WritableComputedRef } from 'vue';
-
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta, IVariableModifyMeta } from '../variables/game.ts';

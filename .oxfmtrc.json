@@ -5,5 +5,7 @@
 	"useTabs": true,
 	"trailingComma": "all",
 	"ignorePatterns": ["packages/data/files/**/*.json", "packages/core/test/fixtures/*.json"],
-	"sortImports": true
+	"sortImports": {
+		"newlinesBetween": false
+	}
 }

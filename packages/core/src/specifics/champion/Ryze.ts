@@ -1,7 +1,6 @@
 import type { DetectChampionVariables } from '@lolcalc/core/types.js';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

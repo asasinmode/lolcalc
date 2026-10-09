@@ -4,7 +4,6 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
-
 import type { IExtraComponentEmits } from '~/utils/types';
 
 type IAphelios = typeof Aphelios;

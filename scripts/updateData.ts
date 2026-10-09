@@ -2,7 +2,6 @@ import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-
 import type { ISpecificVariables } from '@lolcalc/core/specifics';
 import type { IChampionAbilitySpecific, IChampionAbilityVariantSpecific, IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
@@ -29,7 +28,6 @@ import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import { xxh3 } from '@node-rs/xxhash';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
-
 import { stringifyObject } from './index.ts';
 
 let latestVersion = process.argv[2];

@@ -1,12 +1,10 @@
 import fs from 'node:fs/promises';
 import nodePath from 'node:path';
 import process from 'node:process';
-
 import { CHAMPIONS, EFFECTS, ITEMS, MISC, RUNES, useChampion } from '@lolcalc/data';
 import type { IChampion, IRuneShardSlotName } from '@lolcalc/data/types.js';
 import type { EffectObjectName, IChampionAbilityKey } from '@lolcalc/shared';
 import { ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
-
 import { stringifyObject } from './index.ts';
 
 const TEST_ROOT = nodePath.join(import.meta.dirname, '../packages/core/test');

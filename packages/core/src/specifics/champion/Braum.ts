@@ -1,6 +1,5 @@
 import type IBraum from '@lolcalc/data/files/champion/Braum.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

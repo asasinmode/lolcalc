@@ -20,7 +20,6 @@ import type { IChampionRole } from '@lolcalc/shared/types';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import { computed, markRaw, ref, shallowRef, toRaw, triggerRef, watch } from 'vue';
-
 import { calculateChampionStats, isMasterworkSlot } from './calculate/championStats.ts';
 import { calculateEffectsOntoTargetVars } from './calculate/damage.ts';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';

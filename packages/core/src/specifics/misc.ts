@@ -1,7 +1,6 @@
 import type { TMiscData } from '@lolcalc/data';
 import { MISC } from '@lolcalc/data';
 import type { IChampionRole } from '@lolcalc/shared/types';
-
 import type { ISpecificVariables } from './index.ts';
 import { defineVariables } from './index.ts';
 

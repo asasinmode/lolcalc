@@ -6,7 +6,6 @@ import type { IChampion } from '@lolcalc/data/types.js';
 import { EffectObjectName } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

@@ -3,7 +3,6 @@ import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/
 import type { IChampionAbilityKey, IChampionStatName, IStatsCalculationResult, VariableType } from '@lolcalc/shared';
 import { CHAMPION_LEVEL } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
-
 import type { DamageSource } from '../DamageSource.ts';
 import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } from '../specifics/index';
 

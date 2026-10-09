@@ -1,10 +1,8 @@
 import assert from 'node:assert';
 import test from 'node:test';
-
 import type { IOverrides } from '@lolcalc/core/DamageSource';
 import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
-
 import fixture from '../fixtures/16.9.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 

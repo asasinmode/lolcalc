@@ -1,5 +1,4 @@
 import type ITwistedFate from '@lolcalc/data/files/champion/TwistedFate.json';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

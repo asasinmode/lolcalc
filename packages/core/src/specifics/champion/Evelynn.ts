@@ -1,6 +1,5 @@
 import type IEvelynn from '@lolcalc/data/files/champion/Evelynn.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

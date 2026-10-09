@@ -7,7 +7,6 @@ import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core
 import { ITEMS, useChampion } from '@lolcalc/data';
 import type { EffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
-
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { EFFECT_COMPONENTS } from '~/components/Effect';

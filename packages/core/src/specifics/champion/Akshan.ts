@@ -4,7 +4,6 @@ import type IAkshan from '@lolcalc/data/files/champion/Akshan.json';
 import type { IChampion } from '@lolcalc/data/types.js';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

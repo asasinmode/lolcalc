@@ -1,7 +1,6 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type ICassiopeia from '@lolcalc/data/files/champion/Cassiopeia.json';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

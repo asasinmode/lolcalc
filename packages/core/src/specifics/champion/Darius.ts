@@ -2,7 +2,6 @@ import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IDarius from '@lolcalc/data/files/champion/Darius.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

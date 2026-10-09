@@ -6,7 +6,6 @@ import type { IChampion } from '@lolcalc/data/types.js';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { UnwrapRef } from 'vue';
 import { watch } from 'vue';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

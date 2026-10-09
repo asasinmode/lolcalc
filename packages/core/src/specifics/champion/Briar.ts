@@ -2,7 +2,6 @@ import { combineCompounding } from '@lolcalc/core/calculate/util.ts';
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IBriar from '@lolcalc/data/files/champion/Briar.json';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

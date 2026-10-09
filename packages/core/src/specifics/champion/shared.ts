@@ -3,7 +3,6 @@ import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey } from '@lolcalc/shared';
-
 import type { DetectChampionVariables } from '../../types.ts';
 import type { IDefineVariablesConfig, IExtractExtraVariables, ISpecificVariables } from '../index.ts';
 import { defineVariables } from '../index.ts';

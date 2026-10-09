@@ -1,6 +1,5 @@
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

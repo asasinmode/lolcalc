@@ -2,7 +2,6 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '@lolcalc/core/misc.ts';
 import type ICamille from '@lolcalc/data/files/champion/Camille.json';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

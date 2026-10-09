@@ -19,7 +19,6 @@ import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } fr
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import { toValue } from 'vue';
-
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';

@@ -1,6 +1,5 @@
 import assert from 'node:assert';
 import test from 'node:test';
-
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { specificKnownVariables } from '@lolcalc/core/specifics/index.ts';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
@@ -11,7 +10,6 @@ import type { TText } from '@lolcalc/data';
 import { ITEMS_BY_NAME, TEXT } from '@lolcalc/data';
 import type { IChampionAbilityKey } from '@lolcalc/shared';
 import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
-
 import fixture from '../fixtures/16.12.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture } from '../utils.ts';
 

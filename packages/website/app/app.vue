@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { imgUrl, PATCH_VERSION } from '@lolcalc/data';
-
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
 const runtimeConfig = useRuntimeConfig();

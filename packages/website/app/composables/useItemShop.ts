@@ -1,6 +1,5 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { ComponentExposed } from 'vue-component-type-helpers';
-
 import LolItemShop from '~/components/Lol/LolItemShop.vue';
 
 let resolve: (() => void) | undefined;

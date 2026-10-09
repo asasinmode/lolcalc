@@ -1,7 +1,6 @@
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IRengar from '@lolcalc/data/files/champion/Rengar.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

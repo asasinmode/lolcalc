@@ -5,7 +5,6 @@ import type IAkali from '@lolcalc/data/files/champion/Akali.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IEffectControlsProps, IInternalItemDataOf } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

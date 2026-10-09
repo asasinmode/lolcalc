@@ -1,7 +1,6 @@
 import type { TRunes } from '@lolcalc/data';
 import { RUNES } from '@lolcalc/data';
 import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
-
 import type { ISpecificVariables, IVariableValueResult } from '.';
 import { addMultiplicative } from '../calculate/util.ts';
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';

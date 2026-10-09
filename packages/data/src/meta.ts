@@ -1,7 +1,6 @@
 /* supposed to be stuff that requires TYPES based on the data but not the actual data */
 
 import type { IChampionStatName } from '@lolcalc/shared';
-
 import type { IChampionId, IItem, IItemStat } from './types';
 
 export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee', 'Gnar'];

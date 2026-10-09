@@ -5,7 +5,6 @@ import type IRell from '@lolcalc/data/files/champion/Rell.json';
 import type { IChampion } from '@lolcalc/data/types.js';
 import { EffectObjectName, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

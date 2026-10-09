@@ -5,7 +5,6 @@ import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect'
 import { ITEMS_BY_NAME } from '@lolcalc/data/index';
 import type { IChampionId } from '@lolcalc/data/types';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared';
-
 import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
 import type { ISpecificComponents } from '~/utils/types';
 

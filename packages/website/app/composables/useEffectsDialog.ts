@@ -1,6 +1,5 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { ComponentExposed } from 'vue-component-type-helpers';
-
 import CalculatorEffectsDialog from '~/components/Calculator/CalculatorEffectsDialog.vue';
 
 let resolve: (() => void) | undefined;

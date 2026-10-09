@@ -7,7 +7,6 @@ import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta';
 import { UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared/index';
-
 import type { IItemDescriptionProps } from '~/utils/types';
 
 const props = defineProps<IItemDescriptionProps>();

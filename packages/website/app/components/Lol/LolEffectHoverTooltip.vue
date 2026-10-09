@@ -15,7 +15,6 @@ import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ITEMS, useChampion } from '@lolcalc/data';
 import type { IChampion } from '@lolcalc/data/types';
 import { AbilityType } from '@lolcalc/shared';
-
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
 

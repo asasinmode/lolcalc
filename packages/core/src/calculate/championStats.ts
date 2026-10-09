@@ -13,7 +13,6 @@ import type {
 	IStatsCalculationResult,
 	IStatsCalculationVariables,
 } from '@lolcalc/shared';
-
 import type { DamageSource } from '../DamageSource';
 import { cooldownReductionPercentageFromHaste } from '../specifics/champion/shared.ts';
 import { addMultiplicative, calculateMSCapPenalty, combineCompounding } from './util.ts';

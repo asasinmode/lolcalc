@@ -3,7 +3,6 @@ import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import type { IDragonName } from '@lolcalc/data/types';
 import { AbilityType } from '@lolcalc/shared/index';
-
 import type { ISpecificComponents } from '~/utils/types';
 
 export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificComponents; soul?: ISpecificComponents }>> = {

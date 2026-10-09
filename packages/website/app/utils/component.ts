@@ -5,9 +5,7 @@ import { gameAbilityImage, replaceGameIcons } from '@lolcalc/core/misc';
 import type { IEffectControlsProps, IExtraInactiveFn, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import { AbilityType } from '@lolcalc/shared';
 import type { ComputedRef, SlotsType } from 'vue';
-
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
-
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 
 export async function numberExtra<T extends IGameAbilityId>(

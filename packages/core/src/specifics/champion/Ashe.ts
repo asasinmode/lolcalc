@@ -5,7 +5,6 @@ import type IAshe from '@lolcalc/data/files/champion/Ashe.json';
 import type { IChampion } from '@lolcalc/data/types.ts';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

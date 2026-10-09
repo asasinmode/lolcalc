@@ -1,7 +1,6 @@
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IPyke from '@lolcalc/data/files/champion/Pyke.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

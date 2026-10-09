@@ -1,6 +1,5 @@
 import type IElise from '@lolcalc/data/files/champion/Elise.json';
 import { VariableType } from '@lolcalc/shared';
-
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

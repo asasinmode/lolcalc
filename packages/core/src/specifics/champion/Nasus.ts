@@ -5,7 +5,6 @@ import type INasus from '@lolcalc/data/files/champion/Nasus.json';
 import type { IChampion } from '@lolcalc/data/types.js';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
-
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';

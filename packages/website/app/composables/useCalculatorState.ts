@@ -7,7 +7,6 @@ import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
 import type { ComponentExposed } from 'vue-component-type-helpers';
-
 import type { CalculatorResultsTable } from '#components';
 import type { ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 

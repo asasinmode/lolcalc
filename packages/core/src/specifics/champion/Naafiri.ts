@@ -4,7 +4,6 @@ import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { ComputedRef } from 'vue';
 import { computed, watch } from 'vue';
-
 import type { IChampionSpecific } from '../champion.ts';
 
 function passiveMaxStacks(self: DamageSource<'Naafiri'>): ComputedRef<number> {
