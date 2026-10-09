@@ -1,8 +1,9 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IJayce from '@lolcalc/data/files/champion/Jayce.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IJayce from '@lolcalc/data/files/champion/Jayce.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -24,7 +25,10 @@ export default {
 			handler(self, { championPassiveStats }) {
 				const { q, w, e } = self.abilityVariantsIndexes.value;
 				if (q & w & e) {
-					const bonusRange = championAbilityVariableValue('RangedFormRangeIncrease', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]! });
+					const bonusRange = championAbilityVariableValue('RangedFormRangeIncrease', {
+						abilityKey: 'r',
+						abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+					});
 					if (typeof bonusRange.value === 'number') {
 						championPassiveStats.attackRange = bonusRange.value;
 					} else {
@@ -33,7 +37,11 @@ export default {
 				}
 
 				if (self.internalData.value.isPassiveMSActive) {
-					const ms = championAbilityVariableValue('FlatMovementSpeed', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
+					const ms = championAbilityVariableValue('FlatMovementSpeed', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						damageSource: self,
+					});
 
 					if (typeof ms.value === 'number') {
 						championPassiveStats.moveSpeed = ms.value;
@@ -54,14 +62,23 @@ export default {
 					const excludedBloodmailADRatio = usedTotalAD ? baseOnLevelStats.attackDamage / usedTotalAD : 0;
 					const bloodmailExcludedAD = usedBloodmailRetribution * excludedBloodmailADRatio * (1 - dragonStatMultipliers.attackDamage);
 
-					const bonusAD = (totalPreMultipliersStats.attackDamage - baseOnLevelStats.attackDamage)
-						+ (dragonStats.attackDamage ?? 0)
-						+ usedBloodmailRetribution
-						- bloodmailExcludedAD
-						- (adaptiveForceMeta[1] ? 0 : calculatedVariables.totalAdaptiveForce)
-						- (baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage);
+					const bonusAD =
+						totalPreMultipliersStats.attackDamage -
+						baseOnLevelStats.attackDamage +
+						(dragonStats.attackDamage ?? 0) +
+						usedBloodmailRetribution -
+						bloodmailExcludedAD -
+						(adaptiveForceMeta[1] ? 0 : calculatedVariables.totalAdaptiveForce) -
+						baseOnLevelStats.attackDamage * dragonStatMultipliers.attackDamage;
 
-					const rawResists = championAbilityVariableValue('Resists', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { attackDamage: Math.max(0, bonusAD) } } } } as DamageSource });
+					const rawResists = championAbilityVariableValue('Resists', {
+						abilityKey: 'r',
+						abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+						damageSource: {
+							level: { value: self.level.value },
+							stats: { value: { bonus: { attackDamage: Math.max(0, bonusAD) } } },
+						} as DamageSource,
+					});
 
 					if (typeof rawResists.value === 'number') {
 						const resists = rawResists.value;

@@ -1,25 +1,27 @@
 <script setup lang="ts">
 import type { ShallowRef } from 'vue';
 import type { ComponentExposed } from 'vue-component-type-helpers';
+
 import type { CalculatorResultsTable } from '#components';
 
 const { damageSources } = useCalculatorState();
 
 const resultsTable = useTemplateRef('resultsTable');
 
-const {
-	saveState,
-	restoreState,
-} = useManageCalculatorState();
+const { saveState, restoreState } = useManageCalculatorState();
 
-const showResults = ref(damageSources.value.some(source => source.anythingFilled.value));
+const showResults = ref(damageSources.value.some((source) => source.anythingFilled.value));
 if (!showResults.value) {
-	const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
-		if (anythingFilled) {
-			unwatchShowResults();
-			showResults.value = true;
-		}
-	}, { immediate: true });
+	const unwatchShowResults = watch(
+		() => damageSources.value.some((source) => source.anythingFilled.value),
+		(anythingFilled) => {
+			if (anythingFilled) {
+				unwatchShowResults();
+				showResults.value = true;
+			}
+		},
+		{ immediate: true },
+	);
 }
 
 function saveStateOnVisibilitychange() {
@@ -43,13 +45,9 @@ onBeforeUnmount(() => {
 	<main id="index">
 		<CalculatorScoreboard />
 		<section id="results">
-			<h2 id="results-header">
-				results
-			</h2>
+			<h2 id="results-header">results</h2>
 			<div id="results-table-scroll-wrapper">
-				<p v-show="!showResults">
-					configure a damage source to view results
-				</p>
+				<p v-show="!showResults">configure a damage source to view results</p>
 				<CalculatorResultsTable ref="resultsTable" :show-results />
 			</div>
 		</section>

@@ -1,9 +1,10 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type ISenna from '@lolcalc/data/files/champion/Senna.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type ISenna from '@lolcalc/data/files/champion/Senna.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -17,62 +18,66 @@ export default {
 		variables: defineChampionVariables<'Senna', typeof ISenna, 'passive'>()({
 			known: {
 				'{e88568f8}': [0],
-				'SiphonCurrentHealthDamage': [],
-				'MoveSpeedFromTarget': [],
-				'SoulsAD': [],
-				'SoulsRange': [],
-				'SoulsLifesteal': [],
+				SiphonCurrentHealthDamage: [],
+				MoveSpeedFromTarget: [],
+				SoulsAD: [],
+				SoulsRange: [],
+				SoulsLifesteal: [],
 			},
 			calculate(self, target) {
-				const passiveVarParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveVarParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 
 				const siphonHpPercent = championAbilityVariableValue('BonusCurentHealthDamage', passiveVarParams);
 				let SiphonCurrentHealthDamage = Number.NaN;
 				if (typeof siphonHpPercent.value === 'number') {
-					SiphonCurrentHealthDamage = siphonHpPercent.value / 100 * (target?.stats.value.total.hp ?? 0);
+					SiphonCurrentHealthDamage = (siphonHpPercent.value / 100) * (target?.stats.value.total.hp ?? 0);
 				}
 
 				return {
 					'{e88568f8}': {
 						value: self.internalData.value.passiveStacks,
 					},
-					'SiphonCurrentHealthDamage': {
+					SiphonCurrentHealthDamage: {
 						value: SiphonCurrentHealthDamage,
 					},
-					'MoveSpeedFromTarget': {
+					MoveSpeedFromTarget: {
 						value: self.stats.value.championPassive.moveSpeed ?? 0,
 					},
-					'SoulsAD': {
+					SoulsAD: {
 						value: self.stats.value.championPassive.attackDamage ?? 0,
 					},
-					'SoulsRange': {
+					SoulsRange: {
 						value: self.stats.value.championPassive.attackRange ?? 0,
 					},
-					'SoulsLifesteal': {
+					SoulsLifesteal: {
 						value: self.stats.value.championPassive.lifeSteal ?? 0,
 					},
 				};
 			},
 			meta: {
-				'SiphonCurrentHealthDamage': {
+				SiphonCurrentHealthDamage: {
 					type: VariableType.physical,
 					isCustom: true,
 				},
-				'MoveSpeedFromTarget': {
+				MoveSpeedFromTarget: {
 					isCustom: true,
 				},
-				'SoulsAD': {
+				SoulsAD: {
 					isCustom: true,
 				},
-				'SoulsRange': {
+				SoulsRange: {
 					isCustom: true,
 				},
-				'SoulsLifesteal': {
+				SoulsLifesteal: {
 					isCustom: true,
 					resultsIsPercentage: true,
 					resultsMultiplier: 100,
 				},
-				'BonusOnHitDamage': {
+				BonusOnHitDamage: {
 					type: VariableType.physical,
 				},
 				'{e88568f8}': {
@@ -86,7 +91,11 @@ export default {
 	calculateHooks: {
 		postInit: {
 			handler(self, { championPassiveStats }, { calculatedVariables }) {
-				const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const params: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 
 				const critDamageMod = championAbilityVariableValue('CritDamageMod', params);
 				if (typeof critDamageMod.value === 'number') {
@@ -113,7 +122,7 @@ export default {
 
 				const critPerStep = championAbilityVariableValue('BonusCritChance', params);
 				if (typeof critPerStep.value === 'number') {
-					championPassiveStats.critChance = critPerStep.value * sennaPassiveStacksStep / 100;
+					championPassiveStats.critChance = (critPerStep.value * sennaPassiveStacksStep) / 100;
 				} else {
 					console.warn('[CHAMPION_SPECIFICS senna] failed to calculate passive crit per step', critPerStep);
 				}
@@ -137,7 +146,11 @@ export default {
 		},
 		onTotalPreMultipliers: {
 			handler(self, { bonusStats, totalPreMultipliersStats, championPassiveStats }) {
-				const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const params: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 
 				const excessCritToLifesteal = championAbilityVariableValue('CritToLifestealConversionPercent', params);
 				if (typeof excessCritToLifesteal.value === 'number') {

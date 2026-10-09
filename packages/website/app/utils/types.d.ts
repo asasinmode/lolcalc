@@ -16,14 +16,21 @@ export interface IDamageResultTableSection {
 	/** technically should always be present but it can be undefined while async stuff is resolving */
 	image: ShallowRef<IGameImageData | undefined>;
 	/** expected to be undefined only when loading */
-	getCellValue?: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
-		/** formatted `numberValue` */
-		value: string | number;
-		numberValue?: number;
-		isUnknown?: boolean;
-		isPercentage?: boolean;
-		meta?: IReplacedGameVariable['meta'];
-	} | undefined;
+	getCellValue?: (
+		section: IDamageResultTableSection,
+		rowId: string,
+		source?: DamageSource,
+		target?: DamageTarget,
+	) =>
+		| {
+				/** formatted `numberValue` */
+				value: string | number;
+				numberValue?: number;
+				isUnknown?: boolean;
+				isPercentage?: boolean;
+				meta?: IReplacedGameVariable['meta'];
+		  }
+		| undefined;
 	/** when present, the row will have a select to choose from provided options used for setting `selectValue` */
 	selectOptions?: Raw<[value: string, text: string][]>;
 	/** use with selectOptions */

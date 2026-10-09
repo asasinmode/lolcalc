@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IGaren from '@lolcalc/data/files/champion/Garen.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IGaren from '@lolcalc/data/files/champion/Garen.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -38,7 +39,12 @@ export default {
 		postTotal: {
 			handler(self, { totalStats, totalPreMultipliersStats, bonusStats, championPassiveStats }) {
 				if (self.internalData.value.isPassiveActive) {
-					const bonusHPRegen = championAbilityVariableValue('RegenCalc', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const bonusHPRegen = championAbilityVariableValue('RegenCalc', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: { level: { value: self.level.value } } as DamageSource,
+					});
 					if (typeof bonusHPRegen.value === 'number') {
 						const regenPer5 = totalStats.hp * bonusHPRegen.value;
 						championPassiveStats.hpRegen = regenPer5;

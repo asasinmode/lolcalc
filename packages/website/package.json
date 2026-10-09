@@ -1,11 +1,11 @@
 {
 	"name": "@lolcalc/website",
-	"type": "module",
 	"version": "0.0.1",
 	"private": true,
 	"description": "lolcalc.app website",
-	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"type": "module",
 	"exports": {
 		".": "./external.ts"
 	},

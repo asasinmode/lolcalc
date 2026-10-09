@@ -11,11 +11,10 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog
-		id="dialog-damage-source-debug"
-		ref="vDialog"
-	>
-		<h1>debug <span>{{ damageSource?.champion.value?.name }} ({{ damageSource?.id }})</span></h1>
+	<VDialog id="dialog-damage-source-debug" ref="vDialog">
+		<h1>
+			debug <span>{{ damageSource?.champion.value?.name }} ({{ damageSource?.id }})</span>
+		</h1>
 		<h2>stats</h2>
 		<div>
 			<details v-for="(stats, statGroup) in damageSource?.stats.value" :key="statGroup" open>

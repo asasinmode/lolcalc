@@ -1,10 +1,11 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
-import type { IChampionSpecific } from '../champion.ts';
-import type { IDeriveProgressFn } from '../index.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
+import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 const passiveBonusMS: IDeriveProgressFn = (progress, self) => {
@@ -73,7 +74,10 @@ export default {
 	calculateHooks: {
 		onChampionPassive: {
 			handler(self, _stats, { calculatedVariables }) {
-				const bonusMS = passiveBonusMS(self.internalData.value.passiveMSProgress, { champion: self.champion, abilityLevels: self.abilityLevels } as DamageSource);
+				const bonusMS = passiveBonusMS(self.internalData.value.passiveMSProgress, {
+					champion: self.champion,
+					abilityLevels: self.abilityLevels,
+				} as DamageSource);
 				if (!Number.isNaN(bonusMS)) {
 					calculatedVariables.fioraPassiveBonusMS = bonusMS;
 					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.fioraPassiveBonusMS / 100;

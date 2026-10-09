@@ -1,21 +1,21 @@
 import type { IEffectData, TEffects } from '@lolcalc/data';
+import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
 import type { IChampion, IChampionId } from '@lolcalc/data/types.js';
 import type { IStatsCalculationEffectVars } from '@lolcalc/shared';
-import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect, IOverrides } from '../DamageSource.ts';
-import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
-import type { DetectItemVariables } from '../types';
-import type { IVariableModifyMeta } from '../variables/game.ts';
-import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
-import { CONSTS, EFFECTS, ITEMS_BY_NAME, STAT_ICON, useChampion } from '@lolcalc/data';
-
 import { AbilityType, EffectObjectName, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
+
 import { addMultiplicative, combineCompounding } from '../calculate/util.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource, IDamageSourceEffect, IOverrides } from '../DamageSource.ts';
+import type { IEffectAbilityId, IGameAbilityId } from '../GameAbilityId.ts';
 import { GameAbilityId } from '../GameAbilityId.ts';
+import type { DetectItemVariables } from '../types';
+import type { IVariableModifyMeta } from '../variables/game.ts';
 import { championAbilityVariableValue, itemVariableValue } from '../variables/game.ts';
 import { CHAMPION_SPECIFICS } from './champion.ts';
 import { DRAGON_SPECIFICS } from './dragon.ts';
 import { EFFECTS_META } from './effectsMeta.ts';
+import type { IDeriveProgressFn, IEffectControlsProps, IExtraOnValueUpdate, IInternalDataOf, IInternalDragonDataOf, IInternalItemDataOf, ISelectEffectSourceProps, ISpecificVariables } from './index.ts';
 import { defineVariables, HOOK_PRIORITIES } from './index.ts';
 import { ITEM_SPECIFICS } from './item.ts';
 
@@ -37,7 +37,12 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, _stats, { calculatedVariables }) {
-					const bonusMs = championAbilityVariableValue('MovespeedMod', { abilityKey: 'passive', abilityVariant: (EFFECTS as TEffects)[EffectObjectName.ghost], allAbilitiesVariants: [], damageSource: { level: { value: self.level.value } } as DamageSource });
+					const bonusMs = championAbilityVariableValue('MovespeedMod', {
+						abilityKey: 'passive',
+						abilityVariant: (EFFECTS as TEffects)[EffectObjectName.ghost],
+						allAbilitiesVariants: [],
+						damageSource: { level: { value: self.level.value } } as DamageSource,
+					});
 					if (typeof bonusMs.value === 'number') {
 						calculatedVariables.totalBonusPercentMoveSpeed += bonusMs.value;
 					} else {
@@ -54,10 +59,7 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(_self, _stats, { calculatedVariables }) {
-					calculatedVariables.tenacityBucketB = addMultiplicative(
-						calculatedVariables.tenacityBucketB,
-						(EFFECTS as TEffects)[EffectObjectName.cleanse].dataValues.TenacityValue[1]!,
-					);
+					calculatedVariables.tenacityBucketB = addMultiplicative(calculatedVariables.tenacityBucketB, (EFFECTS as TEffects)[EffectObjectName.cleanse].dataValues.TenacityValue[1]!);
 				},
 				priority: HOOK_PRIORITIES.onTotalPreMultipliers.cleanse,
 			},
@@ -70,10 +72,7 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, _stats, { calculatedVariables }) {
-					calculatedVariables.totalMultiplicativeMoveSpeed = combineCompounding(
-						calculatedVariables.totalMultiplicativeMoveSpeed,
-						(EFFECTS as TEffects)[EffectObjectName.heal].dataValues.MoveSpeed[1]!,
-					);
+					calculatedVariables.totalMultiplicativeMoveSpeed = combineCompounding(calculatedVariables.totalMultiplicativeMoveSpeed, (EFFECTS as TEffects)[EffectObjectName.heal].dataValues.MoveSpeed[1]!);
 				},
 			},
 		},
@@ -118,13 +117,7 @@ export const EFFECT_SPECIFICS = {
 	}),
 	[EffectObjectName.hextechSoulSlow]: defineEffectSpecific<[taggedByLightning: number, isRanged?: number, bonusAD?: number, totalAP?: number, bonusHP?: number]>({
 		setupData(data) {
-			return [
-				clamp(0, data?.[0] ?? 0, 100),
-				data?.[1] !== undefined ? Math.max(0, data[1]) : undefined,
-				Math.max(0, data?.[2] ?? 0),
-				Math.max(0, data?.[3] ?? 0),
-				Math.max(0, data?.[4] ?? 0),
-			];
+			return [clamp(0, data?.[0] ?? 0, 100), data?.[1] !== undefined ? Math.max(0, data[1]) : undefined, Math.max(0, data?.[2] ?? 0), Math.max(0, data?.[3] ?? 0), Math.max(0, data?.[4] ?? 0)];
 		},
 		maxValue: 100,
 		imgText(_data, self): number {
@@ -135,13 +128,7 @@ export const EFFECT_SPECIFICS = {
 			const { hextechTagged } = damageSource.internalDragonData.value as IInternalDragonDataOf<'Hextech', 'soul'>;
 			if (hextechTagged) {
 				const { isRanged, total, bonus } = damageSource.stats.value;
-				return [
-					hextechTagged,
-					isRanged ? 1 : 0,
-					bonus.attackDamage,
-					total.abilityPower,
-					bonus.hp,
-				];
+				return [hextechTagged, isRanged ? 1 : 0, bonus.attackDamage, total.abilityPower, bonus.hp];
 			}
 		},
 		deriveProgressValue: (_value, self) => {
@@ -159,7 +146,11 @@ export const EFFECT_SPECIFICS = {
 				const effect = source.getEffect(EffectObjectName.hextechSoulSlow)?.[0] ?? source.addEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.hextechSoulSlow), [100]);
 
 				if (effect.source.value) {
-					const { isRanged, bonus: { attackDamage, hp }, total: { abilityPower } } = effect.source.value.stats.value;
+					const {
+						isRanged,
+						bonus: { attackDamage, hp },
+						total: { abilityPower },
+					} = effect.source.value.stats.value;
 					effect.data.value[1] = isRanged ? 1 : isRanged === false ? 0 : undefined;
 					effect.data.value[2] = attackDamage;
 					effect.data.value[3] = abilityPower;
@@ -221,7 +212,7 @@ export const EFFECT_SPECIFICS = {
 		imgText(data) {
 			return `${data[0]}%`;
 		},
-		deriveProgressValue: value => value,
+		deriveProgressValue: (value) => value,
 		variables: simpleSlowEffectVariables('lolcalcPercentSlow'),
 		calculateHooks: {
 			postInit: {
@@ -239,10 +230,10 @@ export const EFFECT_SPECIFICS = {
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
-		appliedByItems: GRIEVOUS_WOUND_ITEMS.map(itemId => GameAbilityId.build(AbilityType.item, itemId)),
+		appliedByItems: GRIEVOUS_WOUND_ITEMS.map((itemId) => GameAbilityId.build(AbilityType.item, itemId)),
 		setupDataFromSourceItem(damageSource) {
 			if ((damageSource.internalItemData.value as IInternalItemDataOf<'brambleVest'>).gWounds) {
-				const item = damageSource.items.value.find(item => item && (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id));
+				const item = damageSource.items.value.find((item) => item && (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id));
 				const strength = item?.dataValues?.GrievousAmount;
 				if (strength !== CONSTS.defaultGrievous) {
 					console.warn(`[EFFECT_SPECIFICS ${EffectObjectName.grievousWounds}] grievous wounds item gives a different than default grievous value`, item);
@@ -261,7 +252,7 @@ export const EFFECT_SPECIFICS = {
 		modifyVariable: {
 			type: [VariableType.heal, VariableType.hpRegen],
 			handler(value) {
-				return value * (typeof value === 'number' ? (1 - CONSTS.defaultGrievous) : 1);
+				return value * (typeof value === 'number' ? 1 - CONSTS.defaultGrievous : 1);
 			},
 		},
 		calculateHooks: {
@@ -279,7 +270,7 @@ export const EFFECT_SPECIFICS = {
 		imgText(data) {
 			return `${data[0]}%`;
 		},
-		deriveProgressValue: value => value,
+		deriveProgressValue: (value) => value,
 		onValueUpdate(value, self) {
 			if (value) {
 				const effect = self.getEffect(EffectObjectName.grievousWounds)?.[0];
@@ -291,7 +282,7 @@ export const EFFECT_SPECIFICS = {
 		modifyVariable: {
 			type: [VariableType.heal, VariableType.hpRegen],
 			handler(value, _meta, effectData) {
-				return value * (typeof value === 'number' ? (1 - effectData[0] / 100) : 1);
+				return value * (typeof value === 'number' ? 1 - effectData[0] / 100 : 1);
 			},
 		},
 		calculateHooks: {
@@ -364,7 +355,10 @@ export const EFFECT_SPECIFICS = {
 					}
 
 					const effect = self.getEffect(EffectObjectName.bandlepipesFanfare);
-					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: effect?.[0].data.value[0] === MeleeRangedEnumOptions.ranged });
+					const attackSpeed = itemVariableValue('AuraAttackSpeed', {
+						item: ITEMS_BY_NAME.bandlepipes,
+						isRanged: effect?.[0].data.value[0] === MeleeRangedEnumOptions.ranged,
+					});
 					if (typeof attackSpeed.value === 'number') {
 						effectStats.bonusAttackSpeedPercent += attackSpeed.value;
 					} else {
@@ -418,7 +412,7 @@ export const EFFECT_SPECIFICS = {
 			},
 			postTotal: {
 				handler(_self, _stats, { calculatedVariables, debuffs, miscDebug }) {
-					calculatedVariables.frozenHeartCaress = debuffs.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress! / (miscDebug.totalAdditiveCripple || 1);
+					calculatedVariables.frozenHeartCaress = (debuffs.totalCrippledAttackSpeed * calculatedVariables.frozenHeartCaress!) / (miscDebug.totalAdditiveCripple || 1);
 				},
 				priority: HOOK_PRIORITIES.postTotal.recordKeeping,
 			},
@@ -440,11 +434,11 @@ export const EFFECT_SPECIFICS = {
 			type: [VariableType.shield],
 			handler(value, _meta, effectData) {
 				if (typeof value === 'number') {
-					const reducePercentage = itemVariableValue(
-							'ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<typeof ITEMS_BY_NAME['serpentsFang']>,
-							{ item: ITEMS_BY_NAME.serpentsFang, isRanged: effectData[0] === MeleeRangedEnumOptions.ranged },
-					);
-					value *= 1 - (reducePercentage.value as number / 100);
+					const reducePercentage = itemVariableValue('ShieldWoundMeleeRangedSplit' satisfies DetectItemVariables<(typeof ITEMS_BY_NAME)['serpentsFang']>, {
+						item: ITEMS_BY_NAME.serpentsFang,
+						isRanged: effectData[0] === MeleeRangedEnumOptions.ranged,
+					});
+					value *= 1 - (reducePercentage.value as number) / 100;
 				}
 
 				return value;
@@ -495,9 +489,7 @@ export const EFFECT_SPECIFICS = {
 	[EffectObjectName.bloodletterVileDecay]: {
 		...defineEffectSpecific<[vileDecayStacks: number]>({
 			setupData(data): [vileDecayStacks: number] {
-				return [
-					clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EffectObjectName.bloodletterVileDecay].maxValue()),
-				];
+				return [clamp(0, data?.[0] ?? 0, EFFECT_SPECIFICS[EffectObjectName.bloodletterVileDecay].maxValue())];
 			},
 			imgText(data) {
 				return data[0];
@@ -549,9 +541,7 @@ export const EFFECT_SPECIFICS = {
 	[EffectObjectName.blackCleaverCarve]: defineEffectSpecific<[carveStacks: number]>({
 		maxValue: () => ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].MAX_STACKS,
 		setupData(data): [carveStacks: number] {
-			return [
-				clamp(0, data?.[0] ?? 0, (EFFECT_SPECIFICS[EffectObjectName.blackCleaverCarve].maxValue! as () => number)()),
-			];
+			return [clamp(0, data?.[0] ?? 0, (EFFECT_SPECIFICS[EffectObjectName.blackCleaverCarve].maxValue! as () => number)())];
 		},
 		imgText(data) {
 			return data[0];
@@ -686,7 +676,9 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(_self, _stats, { debuffs }) {
-					const mrReduction = itemVariableValue('MagicResistanceShred', { item: ITEMS_BY_NAME.malignance });
+					const mrReduction = itemVariableValue('MagicResistanceShred', {
+						item: ITEMS_BY_NAME.malignance,
+					});
 					if (typeof mrReduction.value === 'number') {
 						debuffs.flatMRShred += mrReduction.value;
 					} else {
@@ -744,7 +736,10 @@ export const EFFECT_SPECIFICS = {
 			postInit: {
 				handler(self, _stats, { debuffs, effectVars }) {
 					const effect = self.getEffect(EffectObjectName.icebornGauntletFrostField)?.[0];
-					const slow = itemVariableValue('SlowAmountMeleeRangedSplit', { item: ITEMS_BY_NAME.icebornGauntlet, isRanged: effect?.data.value[0] === MeleeRangedEnumOptions.ranged });
+					const slow = itemVariableValue('SlowAmountMeleeRangedSplit', {
+						item: ITEMS_BY_NAME.icebornGauntlet,
+						isRanged: effect?.data.value[0] === MeleeRangedEnumOptions.ranged,
+					});
 					if (typeof slow.value === 'number') {
 						effectVars.icebornGauntletSlow = slow.value;
 						debuffs.percentageMSSlow.push(effectVars.icebornGauntletSlow);
@@ -774,7 +769,7 @@ export const EFFECT_SPECIFICS = {
 				return [1];
 			}
 		},
-		componentTooltip: 'The slow will be applied regardless of the target\'s current hp',
+		componentTooltip: "The slow will be applied regardless of the target's current hp",
 		variables: simpleSlowEffectVariables('seryldaSlow'),
 		calculateHooks: {
 			postInit: {
@@ -818,7 +813,10 @@ export const EFFECT_SPECIFICS = {
 				handler(self, _stats, { calculatedVariables }) {
 					const effect = self.getEffect(EffectObjectName.jannaPTailwind)?.[0];
 					if (effect?.champion.value?.id === 'Janna') {
-						const bonusMS = championAbilityVariableValue('MSPercentAlly', { abilityKey: 'passive', abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]! });
+						const bonusMS = championAbilityVariableValue('MSPercentAlly', {
+							abilityKey: 'passive',
+							abilityVariant: (effect.champion.value as IChampion).abilities.passive.variants[0]!,
+						});
 						if (typeof bonusMS.value === 'number') {
 							calculatedVariables.totalBonusPercentMoveSpeed += bonusMS.value;
 						} else {
@@ -882,8 +880,8 @@ export const EFFECT_SPECIFICS = {
 		},
 		sourceControls: {
 			invalidMessage: (source) => {
-				if (source.listedChampion.value?.id !== 'Ashe' satisfies IChampionId) {
-					return 'it\'s not Ashe';
+				if (source.listedChampion.value?.id !== ('Ashe' satisfies IChampionId)) {
+					return "it's not Ashe";
 				}
 			},
 		},
@@ -948,11 +946,7 @@ export const EFFECT_SPECIFICS = {
 		...defineEffectSpecific<[breakTheMoldStacks: number, totalArmor?: number, totalMR?: number]>({
 			async setupData(data, self): Promise<[number, number | undefined, number | undefined]> {
 				const { armor, magicResist } = self.stats.value.total;
-				return [
-					clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EffectObjectName.rellPBreakMold].maxValue()),
-					data?.[1] ?? armor,
-					data?.[2] ?? magicResist,
-				];
+				return [clamp(0, data?.[0] ?? 0, await EFFECT_SPECIFICS[EffectObjectName.rellPBreakMold].maxValue()), data?.[1] ?? armor, data?.[2] ?? magicResist];
 			},
 			imgText(data) {
 				return data[0];
@@ -972,12 +966,16 @@ export const EFFECT_SPECIFICS = {
 					if (!effect) {
 						effect = source.addEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.rellPBreakMold));
 						effect.newDataPromise?.then((effect) => {
-							effect!.data.value[0] = CHAMPION_SPECIFICS.Rell.passive.maxStacks({ champion: { value: effect!.champion.value as IChampion } } as DamageSource);
+							effect!.data.value[0] = CHAMPION_SPECIFICS.Rell.passive.maxStacks({
+								champion: { value: effect!.champion.value as IChampion },
+							} as DamageSource);
 						});
-					};
+					}
 
 					if (addedEffect || !isSourceChange || effect.data.value[1] === undefined || effect.data.value[2] === undefined) {
-						const { total: { armor, magicResist } } = source.stats.value;
+						const {
+							total: { armor, magicResist },
+						} = source.stats.value;
 						effect.data.value[1] = armor;
 						effect.data.value[2] = magicResist;
 					}
@@ -988,8 +986,8 @@ export const EFFECT_SPECIFICS = {
 			},
 			sourceControls: {
 				invalidMessage: (source) => {
-					if (source.listedChampion.value?.id !== 'Rell' satisfies IChampionId) {
-						return 'it\'s not Rell';
+					if (source.listedChampion.value?.id !== ('Rell' satisfies IChampionId)) {
+						return "it's not Rell";
 					}
 				},
 			},
@@ -1046,7 +1044,9 @@ export const EFFECT_SPECIFICS = {
 		}),
 		maxValue: async (): Promise<number> => {
 			const rell = await useChampion('Rell');
-			return CHAMPION_SPECIFICS.Rell.passive.maxStacks({ champion: { value: rell } } as DamageSource);
+			return CHAMPION_SPECIFICS.Rell.passive.maxStacks({
+				champion: { value: rell },
+			} as DamageSource);
 		},
 	},
 	[EffectObjectName.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
@@ -1068,8 +1068,8 @@ export const EFFECT_SPECIFICS = {
 		progressComponentSymbol: '',
 		sourceControls: {
 			invalidMessage: (source) => {
-				if (source.listedChampion.value?.id !== 'Nami' satisfies IChampionId) {
-					return 'it\'s not Nami';
+				if (source.listedChampion.value?.id !== ('Nami' satisfies IChampionId)) {
+					return "it's not Nami";
 				}
 			},
 		},
@@ -1137,8 +1137,8 @@ export const EFFECT_SPECIFICS = {
 		},
 		sourceControls: {
 			invalidMessage: (source) => {
-				if (source.listedChampion.value?.id !== 'Nasus' satisfies IChampionId) {
-					return 'it\'s not Nasus';
+				if (source.listedChampion.value?.id !== ('Nasus' satisfies IChampionId)) {
+					return "it's not Nasus";
 				}
 			},
 		},
@@ -1192,7 +1192,7 @@ export const EFFECT_SPECIFICS = {
 							abilityLevel: wLevel,
 						});
 						if (typeof msToASSlowRatio.value === 'number') {
-							effectVars.nasusWCripple = effectVars.nasusWSlow * msToASSlowRatio.value / 100;
+							effectVars.nasusWCripple = (effectVars.nasusWSlow * msToASSlowRatio.value) / 100;
 							debuffs.cripple = addMultiplicative(debuffs.cripple, effectVars.nasusWCripple);
 							miscDebug.totalAdditiveCripple += effectVars.nasusWCripple;
 						} else {
@@ -1203,7 +1203,7 @@ export const EFFECT_SPECIFICS = {
 			},
 			postTotal: {
 				handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
-					effectVars.nasusWASReduced = debuffs.totalCrippledAttackSpeed * effectVars.nasusWCripple! / (miscDebug.totalAdditiveCripple || 1);
+					effectVars.nasusWASReduced = (debuffs.totalCrippledAttackSpeed * effectVars.nasusWCripple!) / (miscDebug.totalAdditiveCripple || 1);
 				},
 				priority: HOOK_PRIORITIES.postTotal.recordKeeping,
 			},
@@ -1288,18 +1288,23 @@ const slowEffectDescriptionObj = {
 };
 
 /** `effect.json` values for purely custom effects - if an effectObjectName has this specified, it will be put in `effect.json` during `scripts/updateData` */
-export const CUSTOM_EFFECTS: Partial<Record<EffectObjectName, Omit<IEffectData[EffectObjectName], 'dataKey'>
-	| { objectName: string }
-	| {
-		/* effect sources like summoner spells can have their effect description in a separate object from the spell description, like Cleanse's summoner spell is in shared/SummonerBoost but the effect "this unit has increased tenacity" is in shared/Cleanse, so specify the effect object key if needed, otherwise will use just the main spell object */
-		sharedSpellObjectKey: string;
-		sharedSpellEffectObjectKey?: string | string[];
-	}
-	| { championSpellObjectKey: string } | string>
+export const CUSTOM_EFFECTS: Partial<
+	Record<
+		EffectObjectName,
+		| Omit<IEffectData[EffectObjectName], 'dataKey'>
+		| { objectName: string }
+		| {
+				/* effect sources like summoner spells can have their effect description in a separate object from the spell description, like Cleanse's summoner spell is in shared/SummonerBoost but the effect "this unit has increased tenacity" is in shared/Cleanse, so specify the effect object key if needed, otherwise will use just the main spell object */
+				sharedSpellObjectKey: string;
+				sharedSpellEffectObjectKey?: string | string[];
+		  }
+		| { championSpellObjectKey: string }
+		| string
+	>
 > = {
 	/* items */
 	[EffectObjectName.knightsVowSacrifice]: {
-		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
+		description: "This unit takes reduced damage thanks to a nearby ally's sacrifice.",
 	},
 	[EffectObjectName.celestialOppositionBlessingShattered]: slowEffectDescriptionObj,
 	[EffectObjectName.randuinsHumility]: slowEffectDescriptionObj,
@@ -1325,7 +1330,7 @@ export const CUSTOM_EFFECTS: Partial<Record<EffectObjectName, Omit<IEffectData[E
 	},
 	[EffectObjectName.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EffectObjectName.ornnPLivingForge]: {
-		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
+		description: "This unit's item is upgraded thanks to ally Ornn.",
 	},
 	[EffectObjectName.namiPSurgingTides]: {
 		championSpellObjectKey: 'Characters/Nami/Spells/NamiPassiveAbility/NamiPassivett',
@@ -1376,22 +1381,19 @@ function defineEffectSpecific<T extends (number | undefined)[]>(config: Omit<IEf
 type IApplicableEffect = [IEffectAbilityId, IEffectSpecific<any>];
 
 /** map (item id to effect) of all effects that can be applied by toggling item's extra `apply X to target` checkbox */
-const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, effectSpecific]) => effectSpecific.setupDataFromSourceItem)
-	.flatMap(([effectObjectName, effectSpecific]): [string, IApplicableEffect][] => {
+const EFFECTS_APPLIED_BY_ITEMS_TO_TARGET = Object.fromEntries(
+	EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([, effectSpecific]) => effectSpecific.setupDataFromSourceItem).flatMap(([effectObjectName, effectSpecific]): [string, IApplicableEffect][] => {
 		const value: IApplicableEffect = [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific];
-		return effectSpecific.appliedByItems
-			? effectSpecific.appliedByItems.map(itemAbilityId => [itemAbilityId.id, value])
-			: [[effectSpecific.sourceAbility.id, value]];
-	})) as Record<string, IApplicableEffect>;
+		return effectSpecific.appliedByItems ? effectSpecific.appliedByItems.map((itemAbilityId) => [itemAbilityId.id, value]) : [[effectSpecific.sourceAbility.id, value]];
+	}),
+) as Record<string, IApplicableEffect>;
 
-const DRAGON_EFFECTS_APPLICABLE_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, effectSpecific]) => effectSpecific.setupDataFromDragonData)
-	.map(([effectObjectName, effectSpecific]) => [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific] as IApplicableEffect);
+const DRAGON_EFFECTS_APPLICABLE_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([, effectSpecific]) => effectSpecific.setupDataFromDragonData).map(
+	([effectObjectName, effectSpecific]) => [GameAbilityId.build(AbilityType.effect, effectObjectName), effectSpecific] as IApplicableEffect,
+);
 
-const EFFECTS_APPLIED_BY_CHAMPIONS_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, effectSpecific]) => effectSpecific.setupDataFromInternalData)
-	.reduce((acc, [effectObjectName, effectSpecific]) => {
+const EFFECTS_APPLIED_BY_CHAMPIONS_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([, effectSpecific]) => effectSpecific.setupDataFromInternalData).reduce(
+	(acc, [effectObjectName, effectSpecific]) => {
 		if (effectSpecific.sourceAbility.type !== AbilityType.champion) {
 			console.error('[specifics/effect] setupDataFromInternalData found on non-champion effect', effectObjectName, effectSpecific);
 			return acc;
@@ -1404,7 +1406,9 @@ const EFFECTS_APPLIED_BY_CHAMPIONS_TO_TARGET = EFFECT_SPECIFICS_OBJECT_ENTRIES
 			acc[effectSpecific.sourceAbility.id] = [value];
 		}
 		return acc;
-	}, {} as Partial<Record<IChampionId, IApplicableEffect[]>>);
+	},
+	{} as Partial<Record<IChampionId, IApplicableEffect[]>>,
+);
 
 /** get all effects a damage source applies to its target */
 export function effectsAppliedBy(source: DamageSource): IApplicableEffect[] {

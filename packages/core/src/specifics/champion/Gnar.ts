@@ -1,11 +1,12 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IGnar from '@lolcalc/data/files/champion/Gnar.json';
 import type { IChampion } from '@lolcalc/data/types.js';
-import type { IChampionSpecific } from '../champion.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { VariableType } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -77,7 +78,9 @@ export default {
 			handler(self, { baseStats, levelStats, championPassiveStats }) {
 				const { q, w, e } = self.abilityVariantsIndexes.value;
 				if (q & w & e) {
-					const { attackdamage, attackdamageperlevel, armor, armorperlevel, spellblock, spellblockperlevel, hp, hpperlevel, hpregen, hpregenperlevel, attackspeed, attackspeedratio, attackspeedperlevel } = ((self.champion.value! as typeof IGnar).abilities.passive.variants[0]!.megaStats);
+					const { attackdamage, attackdamageperlevel, armor, armorperlevel, spellblock, spellblockperlevel, hp, hpperlevel, hpregen, hpregenperlevel, attackspeed, attackspeedratio, attackspeedperlevel } = (
+						self.champion.value! as typeof IGnar
+					).abilities.passive.variants[0]!.megaStats;
 					baseStats.attackDamage = attackdamage;
 					levelStats.attackDamage = attackdamageperlevel;
 					baseStats.armor = armor;
@@ -99,13 +102,23 @@ export default {
 		},
 		onChampionPassive: {
 			handler(self, { championPassiveStats }) {
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: { level: { value: self.level.value } } as DamageSource,
+				};
 
 				const { q, w, e } = self.abilityVariantsIndexes.value;
 
 				if (!(q & w & e)) {
 					/* the passive states it grants 0%-99% attack speed but all of it except for the lvl 1 bonus is handled by attack speed per level, so add only the missing lvl 1 value */
-					const attackSpeed = championAbilityVariableValue('TotalAS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: 1 } } as DamageSource });
+					const attackSpeed = championAbilityVariableValue('TotalAS', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: { level: { value: 1 } } as DamageSource,
+					});
 					if (typeof attackSpeed.value === 'number') {
 						championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
 					} else {

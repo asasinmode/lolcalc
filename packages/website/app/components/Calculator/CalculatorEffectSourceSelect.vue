@@ -20,7 +20,10 @@ const hoverTooltipEl = useTemplateRef('hoverTooltip');
 
 function showTooltip(event: MouseEvent) {
 	hoverTooltipEl.value?.showPopover();
-	(event.target as HTMLElement)?.addEventListener('mouseleave', hideTooltip, { passive: true, once: true });
+	(event.target as HTMLElement)?.addEventListener('mouseleave', hideTooltip, {
+		passive: true,
+		once: true,
+	});
 }
 
 function hideTooltip() {
@@ -50,11 +53,15 @@ const selectedText = computed(() => {
 });
 
 function updateThumbnailHideTooltip(id?: string) {
-	const damageSource = id
-		? (damageSources.value.find(source => source.id === id) ?? damageTargets.value.find(target => target.id === id))
-		: undefined;
+	const damageSource = id ? (damageSources.value.find((source) => source.id === id) ?? damageTargets.value.find((target) => target.id === id)) : undefined;
 	if (id && !damageSource) {
-		console.warn('[CalculatorEffectSourceSelect] failed to update model value, unknown damage source id', id, damageSources.value.map(s => s.id), damageTargets.value.map(t => t.id), value.value);
+		console.warn(
+			'[CalculatorEffectSourceSelect] failed to update model value, unknown damage source id',
+			id,
+			damageSources.value.map((s) => s.id),
+			damageTargets.value.map((t) => t.id),
+			value.value,
+		);
 	}
 	value.value = damageSource;
 	damageSource && updateThumbnail(thumbnail.value, damageSource);
@@ -92,7 +99,7 @@ onMounted(() => {
 			<div ref="hoverTooltip" popover="hint" class="hover-tooltip">
 				<span v-show="!value">effect source</span>
 				<p v-show="showInvalid" :id="`effect-src-select-err-${idSuffix}`" class="alert warning">
-					effect may not be applied properly<br>
+					effect may not be applied properly<br />
 					{{ invalidMessage }}
 					<Icon class="i-ph:warning-light" />
 				</p>

@@ -1,10 +1,11 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IRammus from '@lolcalc/data/files/champion/Rammus.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -32,7 +33,13 @@ export default {
 				let wBonusArmor = 0;
 				let wBonusMr = 0;
 				if (self.internalData.value.defensiveCurl) {
-					const wParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'w', abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.w, damageSource: { stats: { value: { total: totalStats } } } as DamageSource };
+					const wParams: IGameVariableValueParameters['championAbility'] = {
+						abilityKey: 'w',
+						abilityVariant: (self.champion.value as typeof IRammus).abilities.w.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						abilityLevel: self.abilityLevels.value.w,
+						damageSource: { stats: { value: { total: totalStats } } } as DamageSource,
+					};
 					/*
 					 * rammus W bonus resists consist of a base value + a % of total armor, however this % also applies to base
 					 * i.e base 20 + 50% armor = (20 * 1.5) + armor * 0.5
@@ -58,8 +65,8 @@ export default {
 					const rawArmorBonus = ((preDragonArmor + wConstArmorBonus * jakShoMultiplier) * wArmorMultiplier + wConstArmorBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.armor);
 					const rawMRBonus = ((preDragonMr + wConstMrBonus * jakShoMultiplier) * wMrMultiplier + wConstMrBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.magicResist);
 
-					const armorShredMultiplier = (1 - debuffs.percentageArmorShred);
-					const mrShredMultiplier = (1 - debuffs.percentageMRShred);
+					const armorShredMultiplier = 1 - debuffs.percentageArmorShred;
+					const mrShredMultiplier = 1 - debuffs.percentageMRShred;
 					wBonusArmor = rawArmorBonus * armorShredMultiplier;
 					wBonusMr = rawMRBonus * mrShredMultiplier;
 
@@ -76,7 +83,12 @@ export default {
 				totalStats.armor += wBonusArmor;
 				totalStats.magicResist += wBonusMr;
 
-				const bonusAd = championAbilityVariableValue('TotalDamage', { abilityKey: 'passive', abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { total: totalStats } } } as DamageSource });
+				const bonusAd = championAbilityVariableValue('TotalDamage', {
+					abilityKey: 'passive',
+					abilityVariant: (self.champion.value as typeof IRammus).abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: { stats: { value: { total: totalStats } } } as DamageSource,
+				});
 
 				if (typeof bonusAd.value !== 'number') {
 					console.warn('[CHAMPION_SPECIFICS Rammus] failed to resolve passive bonus ad', bonusAd);

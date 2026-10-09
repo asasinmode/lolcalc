@@ -1,11 +1,11 @@
+import { CONSTS, STAT_ICON } from '@lolcalc/data';
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, IStatsCalculationResult, VariableType } from '@lolcalc/shared';
-import type { DamageSource } from '../DamageSource.ts';
-import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } from '../specifics/index';
-
-import { CONSTS, STAT_ICON } from '@lolcalc/data';
 import { CHAMPION_LEVEL } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
+
+import type { DamageSource } from '../DamageSource.ts';
+import type { ICalculatesFromPart, ISpecificVariables, IVariableValueResult } from '../specifics/index';
 
 export interface IReplacedGameVariable {
 	baseValue: NonNullable<IVariableValueResult['value']>;
@@ -30,13 +30,15 @@ export interface IReplaceGameVariablesRV {
 	anyExtendedVariables: boolean;
 }
 
-type IVariableMetaExtendedEquals = string | {
-	prefix: string;
-	meleeValue: string | number;
-	rangedValue: string | number;
-	valueSuffix?: string;
-	suffix: string;
-};
+type IVariableMetaExtendedEquals =
+	| string
+	| {
+			prefix: string;
+			meleeValue: string | number;
+			rangedValue: string | number;
+			valueSuffix?: string;
+			suffix: string;
+	  };
 
 type IVariableMetaStatIcon = Exclude<keyof typeof STAT_ICON, 'slowResist' | 'GP10'>;
 
@@ -121,11 +123,7 @@ export function itemVariableValue(
 	/** if subvariables are being resolved, like for melee/ranged values, track what they are being resolved from */
 	accessedFrom?: string,
 ): IVariableValueResult {
-	const {
-		item,
-		isRanged,
-		dynamicVariables = overrideDynamicVariables ?? {},
-	} = params;
+	const { item, isRanged, dynamicVariables = overrideDynamicVariables ?? {} } = params;
 
 	const rv: IVariableValueResult = {
 		isUninteresting: dynamicVariables.uninteresting?.includes(variable),
@@ -154,14 +152,24 @@ export function itemVariableValue(
 		if (!item.stringCalculations[variable].MeleeResult || !item.stringCalculations[variable].RangedResult) {
 			console.error('[itemVariableValue] item has stringCalculations but no expected MeleeResult/RangedResult keys under', item.name, variable, item.stringCalculations);
 		} else if (isRanged === undefined) {
-			const melee = itemVariableValue(item.stringCalculations[variable].MeleeResult.slice(1, -1), {
-				...params,
-				isRanged: false,
-			}, overrideDynamicVariables, variable);
-			const ranged = itemVariableValue(item.stringCalculations[variable].RangedResult.slice(1, -1), {
-				...params,
-				isRanged: true,
-			}, overrideDynamicVariables, variable);
+			const melee = itemVariableValue(
+				item.stringCalculations[variable].MeleeResult.slice(1, -1),
+				{
+					...params,
+					isRanged: false,
+				},
+				overrideDynamicVariables,
+				variable,
+			);
+			const ranged = itemVariableValue(
+				item.stringCalculations[variable].RangedResult.slice(1, -1),
+				{
+					...params,
+					isRanged: true,
+				},
+				overrideDynamicVariables,
+				variable,
+			);
 
 			rv.value = [melee.value as number | undefined, ranged.value as number | undefined];
 			rv.roundReplaced ||= melee?.roundReplaced || ranged?.roundReplaced;
@@ -187,9 +195,7 @@ export function itemVariableValue(
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	} else if (item.itemCalculations?.[variable]) {
-		const value = variableResolveFn(
-			item.itemCalculations?.[variable],
-		)?.(item.itemCalculations[variable], item, {
+		const value = variableResolveFn(item.itemCalculations?.[variable])?.(item.itemCalculations[variable], item, {
 			variableValueFn: itemVariableValue,
 			variableValueParams: params,
 			accessedVariables: params.accessedVariables?.getOrInsert(accessedFrom ?? variable, new Set()),
@@ -225,10 +231,7 @@ interface IRuneVariableParams extends IBaseVariableParams {
 }
 
 export function runeVariableValue(variable: string, params: IRuneVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
-	const {
-		rune,
-		dynamicVariables = overrideDynamicVariables ?? {},
-	} = params;
+	const { rune, dynamicVariables = overrideDynamicVariables ?? {} } = params;
 	const rv: IVariableValueResult = {};
 
 	const [variableName, ...dotPath] = variable.split('.');
@@ -290,11 +293,7 @@ interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	checkedVariablesVariants?: Map<string, IChampionAbilityVariant[]>;
 }
 
-export function championAbilityVariableValue(
-	variable: string,
-	params: IChampionAbilityVariableParams,
-	overrideDynamicVariables?: IDynamicVariables,
-): IVariableValueResult {
+export function championAbilityVariableValue(variable: string, params: IChampionAbilityVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
 	const {
 		abilityVariant,
 		dynamicVariables = overrideDynamicVariables ?? {},
@@ -306,7 +305,7 @@ export function championAbilityVariableValue(
 		isRanged,
 		returnActualName,
 	} = params;
-	const abilityLevel = params.abilityKey === 'passive' ? 1 : ((params.abilityLevel ?? params.damageSource?.abilityLevels?.value[params.abilityKey]) || 1);
+	const abilityLevel = params.abilityKey === 'passive' ? 1 : (params.abilityLevel ?? params.damageSource?.abilityLevels?.value[params.abilityKey]) || 1;
 	const rv: IVariableValueResult = {
 		calculatesFrom: [],
 	};
@@ -329,9 +328,7 @@ export function championAbilityVariableValue(
 				abilityVariant: otherAbilityVariant[0],
 				dynamicVariables,
 				abilityKey,
-				abilityLevel: abilityKey === 'passive' || otherAbilityVariant[1] === 'passive'
-					? 0
-					: (damageSource?.abilityLevels.value[otherAbilityVariant[1]] || 1),
+				abilityLevel: abilityKey === 'passive' || otherAbilityVariant[1] === 'passive' ? 0 : damageSource?.abilityLevels.value[otherAbilityVariant[1]] || 1,
 				allAbilitiesVariants,
 				damageSource,
 				returnActualName: true,
@@ -460,7 +457,6 @@ export function championAbilityVariableValue(
 			})!;
 		}
 		if ('mFormulaParts' in rv.value) {
-			// eslint-disable-next-line ts/no-use-before-define
 			const formulaValue = VARIABLE_CALCULATION_FNS.mFormulaParts(rv.value as any, abilityVariant, {
 				variableValueFn: championAbilityVariableValue,
 				variableValueParams: {
@@ -476,7 +472,7 @@ export function championAbilityVariableValue(
 	if (rv.value === undefined) {
 		const alreadyCheckedVariants = params.checkedVariablesVariants?.get(variable);
 		if (!alreadyCheckedVariants?.includes(abilityVariant)) {
-			const otherSameAbilityVariant = allAbilitiesVariants.filter(variant => variant[1] === abilityKey)[0];
+			const otherSameAbilityVariant = allAbilitiesVariants.filter((variant) => variant[1] === abilityKey)[0];
 
 			if (otherSameAbilityVariant) {
 				params.checkedVariablesVariants ??= new Map();
@@ -524,7 +520,7 @@ export interface IGameVariableValueParameters {
 	item: IItemVariableParams;
 	rune: IRuneVariableParams;
 	championAbility: IChampionAbilityVariableParams;
-};
+}
 
 export interface IReplaceGameVariablesOptions {
 	replaceWithName?: boolean;
@@ -540,9 +536,27 @@ export interface IReplaceGameVariablesOptions {
 export type IModifyVariableFunction = (value: number, meta: IVariableModifyMeta) => number;
 export type IModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;
 
-export function replaceGameVariables(text: string, variableType: 'item', variableValueFunctionArguments: IItemVariableParams, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
-export function replaceGameVariables(text: string, variableType: 'rune', variableValueFunctionArguments: IRuneVariableParams, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
-export function replaceGameVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: IChampionAbilityVariableParams, modifyVariableFunctions?: IModifyVariableFunctions, options?: IReplaceGameVariablesOptions): IReplaceGameVariablesRV;
+export function replaceGameVariables(
+	text: string,
+	variableType: 'item',
+	variableValueFunctionArguments: IItemVariableParams,
+	modifyVariableFunctions?: IModifyVariableFunctions,
+	options?: IReplaceGameVariablesOptions,
+): IReplaceGameVariablesRV;
+export function replaceGameVariables(
+	text: string,
+	variableType: 'rune',
+	variableValueFunctionArguments: IRuneVariableParams,
+	modifyVariableFunctions?: IModifyVariableFunctions,
+	options?: IReplaceGameVariablesOptions,
+): IReplaceGameVariablesRV;
+export function replaceGameVariables(
+	text: string,
+	variableType: 'championAbility',
+	variableValueFunctionArguments: IChampionAbilityVariableParams,
+	modifyVariableFunctions?: IModifyVariableFunctions,
+	options?: IReplaceGameVariablesOptions,
+): IReplaceGameVariablesRV;
 export function replaceGameVariables(
 	text: string,
 	variableType: IGameVariableType,
@@ -570,11 +584,18 @@ export function replaceGameVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName, allValues, roundReplaced, meta, isUninteresting, isPercentage, multiplier: variableMultiplier, calculatesFrom } = (variableType === 'item'
-			? itemVariableValue
-			: variableType === 'championAbility'
-				? championAbilityVariableValue
-				: runeVariableValue)(variableName, variableValueFunctionParams as any, options.overrideVariables);
+		let {
+			value: variable,
+			isMeleeRanged,
+			actualVariableName,
+			allValues,
+			roundReplaced,
+			meta,
+			isUninteresting,
+			isPercentage,
+			multiplier: variableMultiplier,
+			calculatesFrom,
+		} = (variableType === 'item' ? itemVariableValue : variableType === 'championAbility' ? championAbilityVariableValue : runeVariableValue)(variableName, variableValueFunctionParams as any, options.overrideVariables);
 
 		if (meta?.roundReplaced !== undefined) {
 			roundReplaced = meta.roundReplaced;
@@ -595,22 +616,20 @@ export function replaceGameVariables(
 		const nameReplacement = meta?.displayedName ?? actualVariableName ?? variableName;
 
 		if (allValues) {
-			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
-				let parsedValue: string | number = roundNumber(value * multiplier);
-				if (multiplier !== 1) {
-					parsedValue = `${parsedValue}%`;
-				}
-				return parsedValue;
-			}));
+			variablesAllValues.set(
+				actualVariableName || variableName,
+				allValues.map((value) => {
+					let parsedValue: string | number = roundNumber(value * multiplier);
+					if (multiplier !== 1) {
+						parsedValue = `${parsedValue}%`;
+					}
+					return parsedValue;
+				}),
+			);
 		}
 
-		if (typeof variable !== 'string' && (
-			Array.isArray(variable)
-				? variable.some(v => typeof v !== 'number' || Number.isNaN(v))
-				: (typeof variable !== 'number' || Number.isNaN(variable)))) {
-			variable = Array.isArray(variable)
-				? variable.map(v => (typeof v !== 'number' || Number.isNaN(v)) ? undefined : v) as typeof variable
-				: undefined;
+		if (typeof variable !== 'string' && (Array.isArray(variable) ? variable.some((v) => typeof v !== 'number' || Number.isNaN(v)) : typeof variable !== 'number' || Number.isNaN(variable))) {
+			variable = Array.isArray(variable) ? (variable.map((v) => (typeof v !== 'number' || Number.isNaN(v) ? undefined : v)) as typeof variable) : undefined;
 		}
 
 		const metaSuffix = variableExtendedEquals(variableValueFunctionParams, options, isMeleeRanged, calculatesFrom, meta, typeof roundReplaced === 'number' ? roundReplaced : undefined, varIcon);
@@ -660,29 +679,26 @@ export function replaceGameVariables(
 			const isV1Number = typeof variable[0] === 'number';
 			const isV2Number = typeof variable[1] === 'number';
 
-			const baseValue = [
-				isV1Number ? roundNumber(variable[0] as number * multiplier) : variable[0],
-				isV2Number ? roundNumber(variable[1] as number * multiplier) : variable[1],
-			] as [string | number, string | number];
+			const baseValue = [isV1Number ? roundNumber((variable[0] as number) * multiplier) : variable[0], isV2Number ? roundNumber((variable[1] as number) * multiplier) : variable[1]] as [string | number, string | number];
 
 			if (modifyVariableFns) {
 				if (isV1Number) {
 					variable[0] = modifyVariableFns.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, variable[0]!);
 				} else {
-					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[0]);
+					console.warn("[replaceGameVariables] tried to apply modify function to variable but it's not a number", variableName, variable[0]);
 				}
 				if (isV2Number) {
 					variable[1] = modifyVariableFns.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, variable[1]!);
 				} else {
-					console.warn('[replaceGameVariables] tried to apply modify function to variable but it\'s not a number', variableName, variable[1]);
+					console.warn("[replaceGameVariables] tried to apply modify function to variable but it's not a number", variableName, variable[1]);
 				}
 			}
 
 			if (isV1Number) {
-				variable[0] = roundNumber(variable[0] as number * multiplier);
+				variable[0] = roundNumber((variable[0] as number) * multiplier);
 			}
 			if (isV2Number) {
-				variable[1] = roundNumber(variable[1] as number * multiplier);
+				variable[1] = roundNumber((variable[1] as number) * multiplier);
 			}
 
 			variables.set(variableName, {
@@ -698,9 +714,9 @@ export function replaceGameVariables(
 
 			return replaceWithName
 				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${nameReplacement}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
-				: `%i:meleeactive% ${tagWrapStart}${
-					isV1Number ? roundNumber(variable[0] as number) : variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
-					isV2Number ? roundNumber(variable[1] as number) : variable[1]}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
+				: `%i:meleeactive% ${tagWrapStart}${isV1Number ? roundNumber(variable[0] as number) : variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
+						isV2Number ? roundNumber(variable[1] as number) : variable[1]
+					}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 		}
 
 		const baseValue = roundNumber(variable * multiplier);
@@ -710,21 +726,24 @@ export function replaceGameVariables(
 		}
 
 		variable = roundNumber(variable * multiplier);
-		variables.set(variableName, { baseValue, value: variable, meta, modifyMeta, isUninteresting, isPercentage, metaSuffix, actualName: actualVariableName });
+		variables.set(variableName, {
+			baseValue,
+			value: variable,
+			meta,
+			modifyMeta,
+			isUninteresting,
+			isPercentage,
+			metaSuffix,
+			actualName: actualVariableName,
+		});
 
-		const meleeRangedIconPath = isMeleeRanged === 0
-			? 'melee'
-			: isMeleeRanged === 1
-				? 'ranged'
-				: undefined;
+		const meleeRangedIconPath = isMeleeRanged === 0 ? 'melee' : isMeleeRanged === 1 ? 'ranged' : undefined;
 		const iconPrefix = meleeRangedIconPath ? `%i:${meleeRangedIconPath}active% ` : '';
 
-		return `${iconPrefix}${tagWrapStart}${replaceWithName
-			? nameReplacement
-			: roundNumber(variable, roundReplaced)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
+		return `${iconPrefix}${tagWrapStart}${replaceWithName ? nameReplacement : roundNumber(variable, roundReplaced)}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 	});
 
-	const dynamicVariables = (options.overrideVariables ?? variableValueFunctionParams.dynamicVariables);
+	const dynamicVariables = options.overrideVariables ?? variableValueFunctionParams.dynamicVariables;
 	const customVariables = dynamicVariables?.meta && Object.entries(dynamicVariables.meta).filter(([, value]) => value?.isCustom);
 	if (customVariables?.length) {
 		for (const [variableName, meta] of customVariables) {
@@ -755,9 +774,7 @@ export function replaceGameVariables(
 				}
 
 				if (Array.isArray(value) && variableValueFunctionParams.isRanged !== undefined) {
-					value = variableValueFunctionParams.isRanged
-						? (value as number[])[1]
-						: (value as number[])[0];
+					value = variableValueFunctionParams.isRanged ? (value as number[])[1] : (value as number[])[0];
 				}
 
 				const modifyMeta: IVariableModifyMeta = {};
@@ -771,7 +788,13 @@ export function replaceGameVariables(
 					}
 				}
 
-				variables.set(variableName, { baseValue, value: value!, meta, modifyMeta, isPercentage: meta?.isPercentage });
+				variables.set(variableName, {
+					baseValue,
+					value: value!,
+					meta,
+					modifyMeta,
+					isPercentage: meta?.isPercentage,
+				});
 			}
 		}
 	}
@@ -857,32 +880,13 @@ export const CHAMPION_STAT_TO_SCALING_TAG: Partial<Record<IVariableMetaStatIcon,
 	critChance: 'scalecrit',
 };
 
-export function calculatesFromPartExtendedEquals(
-	part: ICalculatesFromPart,
-	insertIcon = false,
-	preferRangedValue = false,
-	prependPlus = false,
-	roundReplaced?: number,
-): string {
-	const tag = part.overrideTag ? '' : part.stat === 'const' ? 'const' : ((part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '');
+export function calculatesFromPartExtendedEquals(part: ICalculatesFromPart, insertIcon = false, preferRangedValue = false, prependPlus = false, roundReplaced?: number): string {
+	const tag = part.overrideTag ? '' : part.stat === 'const' ? 'const' : (part.stat && CHAMPION_STAT_TO_SCALING_TAG[part.stat]) || '';
 	const icon = insertIcon && (part.iconKey ?? (part.stat && part.stat !== 'const' ? STAT_ICON[part.stat] : ''));
 	const type = part.type === 'baseOnLevel' || part.type === 'base' ? ' base' : part.type === 'bonus' ? ' bonus' : '';
-	const formattedValue = formatCalculatesFromPartValue(
-		Array.isArray(part.value)
-			? part.value[preferRangedValue ? 1 : 0]!
-			: part.value,
-		part.stat,
-		part.isPercentage,
-		roundReplaced,
-	);
+	const formattedValue = formatCalculatesFromPartValue(Array.isArray(part.value) ? part.value[preferRangedValue ? 1 : 0]! : part.value, part.stat, part.isPercentage, roundReplaced);
 
-	return `${
-		tag || part.overrideTag ? `<${tag}${part.overrideTag ?? ''}>` : ''
-	}${
-		prependPlus ? '+ ' : ''
-	}${formattedValue}${type}${
-		icon ? `${type ? ' ' : ''}${part.iconKey ?? `%i:${icon}%`}` : ''
-	}${
+	return `${tag || part.overrideTag ? `<${tag}${part.overrideTag ?? ''}>` : ''}${prependPlus ? '+ ' : ''}${formattedValue}${type}${icon ? `${type ? ' ' : ''}${part.iconKey ?? `%i:${icon}%`}` : ''}${
 		tag || part.overrideTag ? `</${tag}${part.overrideTag ? part.overrideTag.slice(0, part.overrideTag.indexOf(' ')) : ''}>` : ''
 	}`;
 }
@@ -926,29 +930,26 @@ function variableExtendedEquals(
 	let extendedEquals = isMetaFn
 		? (meta.extendedEquals as any)(variableValueFunctionParams)
 		: typeof meta?.extendedEquals !== 'object'
-			? meta?.extendedEquals as string
-			: `${meta.extendedEquals.prefix}${isMeleeRanged === true
-				? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''} <const>|</const> ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
-				: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
-			}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
+			? (meta?.extendedEquals as string)
+			: `${meta.extendedEquals.prefix}${
+					isMeleeRanged === true
+						? `${meta.extendedEquals.meleeValue}${meta.extendedEquals.valueSuffix || ''} <const>|</const> ${meta.extendedEquals.prefix}${meta.extendedEquals.rangedValue}`
+						: meta.extendedEquals[isMeleeRanged === 0 ? 'meleeValue' : 'rangedValue']
+				}${meta.extendedEquals.valueSuffix || ''}${meta.extendedEquals.suffix}`;
 
-	let statIconKey: string | string[] | undefined = typeof meta?.scalesWithStatIcon === 'string'
-		? `%i:${STAT_ICON[meta.scalesWithStatIcon]}%`
-		: meta?.scalesWithStatIcon?.map(statIcon => `%i:${STAT_ICON[statIcon]}%`);
+	let statIconKey: string | string[] | undefined = typeof meta?.scalesWithStatIcon === 'string' ? `%i:${STAT_ICON[meta.scalesWithStatIcon]}%` : meta?.scalesWithStatIcon?.map((statIcon) => `%i:${STAT_ICON[statIcon]}%`);
 
-	if (calculatesFrom?.length && calculatesFrom.some(part => part.stat !== 'const' || part.type)) {
+	if (calculatesFrom?.length && calculatesFrom.some((part) => part.stat !== 'const' || part.type)) {
 		calculatesFrom.sort((partA, partB) => (partB.stat === 'const' ? 1 : 0) - (partA.stat === 'const' ? 1 : 0));
 		let generatedStatIcon: string | string[] | undefined;
 
-		const hasMeleeRangedValue = calculatesFrom.some(part => Array.isArray(part.value));
+		const hasMeleeRangedValue = calculatesFrom.some((part) => Array.isArray(part.value));
 		const isEqualsMeleeRanged = isMeleeRanged === true && hasMeleeRangedValue;
 		const lastPart = calculatesFrom.at(-1);
-		const insertIcon = calculatesFrom.filter(part => (part.stat && part.stat !== 'const') || part.iconKey).length > 1 || (calculatesFrom.length > 1 && (hasMeleeRangedValue || (lastPart && lastPart.stat === 'const')));
+		const insertIcon = calculatesFrom.filter((part) => (part.stat && part.stat !== 'const') || part.iconKey).length > 1 || (calculatesFrom.length > 1 && (hasMeleeRangedValue || (lastPart && lastPart.stat === 'const')));
 
 		const defaultEEPreferRangedValue = isMeleeRanged === 1;
-		generatedStatIcon = calculatesFrom[0]!.iconKey
-			? [calculatesFrom[0]!.iconKey]
-			: (calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const') ? [`%i:${STAT_ICON[calculatesFrom[0]!.stat]}%`] : undefined;
+		generatedStatIcon = calculatesFrom[0]!.iconKey ? [calculatesFrom[0]!.iconKey] : calculatesFrom[0]!.stat && calculatesFrom[0]!.stat !== 'const' ? [`%i:${STAT_ICON[calculatesFrom[0]!.stat]}%`] : undefined;
 		const rawGeneratedEE: [string, string] = [
 			calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, defaultEEPreferRangedValue, undefined, roundReplaced),
 			isEqualsMeleeRanged ? calculatesFromPartExtendedEquals(calculatesFrom[0]!, insertIcon, true, undefined, roundReplaced) : '',
@@ -976,18 +977,14 @@ function variableExtendedEquals(
 		}
 
 		if (!(meta && 'extendedEquals' in meta)) {
-			extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && (lastPart?.type && lastPart.type !== 'total') ? ' ' : ''}`;
+			extendedEquals = `${isEqualsMeleeRanged ? `${rawGeneratedEE[0]} <const>|</const> ${rawGeneratedEE[1]}` : rawGeneratedEE[0]}${typeof generatedStatIcon === 'string' && !insertIcon && lastPart?.type && lastPart.type !== 'total' ? ' ' : ''}`;
 		}
 	}
 
 	if (statIconKey || varIcon) {
-		const iconStr = (typeof statIconKey === 'string'
-			? statIconKey
-			: options.isExtended ? '' : statIconKey?.join('')) || varIcon || '';
+		const iconStr = (typeof statIconKey === 'string' ? statIconKey : options.isExtended ? '' : statIconKey?.join('')) || varIcon || '';
 
-		(extendedEquals && options.isExtended)
-			? metaSuffix = ` = (${extendedEquals}${iconStr})`
-			: metaSuffix = ` (${iconStr})`;
+		extendedEquals && options.isExtended ? (metaSuffix = ` = (${extendedEquals}${iconStr})`) : (metaSuffix = ` (${iconStr})`);
 	} else if (extendedEquals && options.isExtended) {
 		metaSuffix = ` = (${extendedEquals})`;
 	}
@@ -999,7 +996,7 @@ interface NormalizedBreakpoint {
 	level: number;
 	additionalBonusAtThisLevel?: number;
 	bonusPerLevelAtAndAfter?: number;
-};
+}
 
 function resolveByCharLevelBreakpoint(
 	breakpoint: NonNullable<IGameVariablesByType['ByCharLevelBreakpointsCalculationPart']['mBreakpoints']>[number] | IGameVariablesByType['{0333530c}'],
@@ -1034,13 +1031,7 @@ function resolveByCharLevelBreakpoint(
 	};
 }
 
-function calculateByCharLevelBreakpoints(
-	mLevel1Value: number | undefined,
-	mInitialBonusPerLevel: number | undefined,
-	breakpoints: NormalizedBreakpoint[] | undefined,
-	sourceLevel: number,
-	warnContext: string,
-): IVariableValueResult {
+function calculateByCharLevelBreakpoints(mLevel1Value: number | undefined, mInitialBonusPerLevel: number | undefined, breakpoints: NormalizedBreakpoint[] | undefined, sourceLevel: number, warnContext: string): IVariableValueResult {
 	const rv: IVariableValueResult = {
 		value: mLevel1Value ?? 0,
 		calculatesFrom: [],
@@ -1054,7 +1045,7 @@ function calculateByCharLevelBreakpoints(
 			maxInitialBonusLevel = breakpoints[0].level - 1;
 		}
 
-		max = min + (mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, CHAMPION_LEVEL.max) - 1));
+		max = min + mInitialBonusPerLevel * (Math.min(maxInitialBonusLevel, CHAMPION_LEVEL.max) - 1);
 		rv.calculatesFrom![0] = {
 			value: { min, max },
 			stat: 'level',
@@ -1084,9 +1075,7 @@ function calculateByCharLevelBreakpoints(
 
 			if (CHAMPION_LEVEL.max >= level) {
 				const effectiveMaxEnd = nextLevel ? Math.min(CHAMPION_LEVEL.max, nextLevel - 1) : CHAMPION_LEVEL.max;
-				max += bonusPerLevelAtAndAfter === undefined
-					? (additionalBonusAtThisLevel ?? 0)
-					: (bonusPerLevelAtAndAfter * (effectiveMaxEnd + 1 - level));
+				max += bonusPerLevelAtAndAfter === undefined ? (additionalBonusAtThisLevel ?? 0) : bonusPerLevelAtAndAfter * (effectiveMaxEnd + 1 - level);
 			}
 		}
 		rv.calculatesFrom![0] = {
@@ -1100,12 +1089,16 @@ function calculateByCharLevelBreakpoints(
 
 /** functions for resolving game variables named by their `__type` or other identifier */
 export const VARIABLE_CALCULATION_FNS = {
-	mFormulaParts(variable: {
-		mFormulaParts: (IGameVariablesByType[keyof IGameVariablesByType])[];
-		mDisplayAsPercent?: boolean;
-		mMultiplier?: IMMultiplier;
-		mRangedMultiplier?: IMMultiplier;
-	}, whole, meta) {
+	mFormulaParts(
+		variable: {
+			mFormulaParts: IGameVariablesByType[keyof IGameVariablesByType][];
+			mDisplayAsPercent?: boolean;
+			mMultiplier?: IMMultiplier;
+			mRangedMultiplier?: IMMultiplier;
+		},
+		whole,
+		meta,
+	) {
 		const rv: IVariableValueResult = {
 			calculatesFrom: [],
 		};
@@ -1127,8 +1120,8 @@ export const VARIABLE_CALCULATION_FNS = {
 			return undefined;
 		});
 
-		const hasMMultiplier = ('mMultiplier' in variable);
-		const hasMRangedMultiplier = ('mRangedMultiplier' in variable);
+		const hasMMultiplier = 'mMultiplier' in variable;
+		const hasMRangedMultiplier = 'mRangedMultiplier' in variable;
 
 		if (variable.mDisplayAsPercent) {
 			rv.isPercentage = true;
@@ -1136,7 +1129,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			rv.roundReplaced = true;
 			if (!hasMMultiplier) {
 				for (const part of rv.calculatesFrom!) {
-					(part.stat === 'const') && !part.isPercentage && multiplyCalculatePartValues(part, 100);
+					part.stat === 'const' && !part.isPercentage && multiplyCalculatePartValues(part, 100);
 					if (part.stat === 'level') {
 						part.isPercentage ??= true;
 					}
@@ -1155,7 +1148,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			}
 		}
 
-		if (values.some(v => typeof v !== 'number')) {
+		if (values.some((v) => typeof v !== 'number')) {
 			return undefined;
 		}
 
@@ -1208,10 +1201,12 @@ export const VARIABLE_CALCULATION_FNS = {
 	NumberCalculationPart(variable: IGameVariablesByType['NumberCalculationPart']) {
 		return {
 			value: variable.mNumber,
-			calculatesFrom: [{
-				value: variable.mNumber,
-				stat: 'const',
-			}],
+			calculatesFrom: [
+				{
+					value: variable.mNumber,
+					stat: 'const',
+				},
+			],
 		};
 	},
 	NamedDataValueCalculationPart(variable: IGameVariablesByType['NamedDataValueCalculationPart'], whole, meta) {
@@ -1236,14 +1231,17 @@ export const VARIABLE_CALCULATION_FNS = {
 			return {
 				value: statValue.value * variable.mCoefficient,
 				roundReplaced: true,
-				calculatesFrom: statValue.stat === 'abilityHaste'
-					? []
-					: [{
-							value: variable.mCoefficient * (statValue.stat === 'critChance' ? 100 : 1),
-							isPercentage: true,
-							stat: statValue.stat as ICalculatesFromPart['stat'],
-							type: statValue.type,
-						}],
+				calculatesFrom:
+					statValue.stat === 'abilityHaste'
+						? []
+						: [
+								{
+									value: variable.mCoefficient * (statValue.stat === 'critChance' ? 100 : 1),
+									isPercentage: true,
+									stat: statValue.stat as ICalculatesFromPart['stat'],
+									type: statValue.type,
+								},
+							],
 			};
 		}
 	},
@@ -1253,12 +1251,14 @@ export const VARIABLE_CALCULATION_FNS = {
 		if (statsKey) {
 			return {
 				value: meta.variableValueParams.damageSource?.stats.value ? meta.variableValueParams.damageSource.stats.value[statsKey].mana * (variable.mCoefficient ?? 1) : 0,
-				calculatesFrom: [{
-					value: (variable.mCoefficient ?? 1),
-					stat: 'mana',
-					isPercentage: true,
-					type: statsKey,
-				}],
+				calculatesFrom: [
+					{
+						value: variable.mCoefficient ?? 1,
+						stat: 'mana',
+						isPercentage: true,
+						type: statsKey,
+					},
+				],
 			};
 		}
 	},
@@ -1279,12 +1279,14 @@ export const VARIABLE_CALCULATION_FNS = {
 				return {
 					value: statValue.value * dataValue,
 					roundReplaced: true,
-					calculatesFrom: [{
-						value: dataValue,
-						isPercentage: true,
-						stat: statValue.stat as ICalculatesFromPart['stat'],
-						type: statValue.type,
-					}],
+					calculatesFrom: [
+						{
+							value: dataValue,
+							isPercentage: true,
+							stat: statValue.stat as ICalculatesFromPart['stat'],
+							type: statValue.type,
+						},
+					],
 				};
 			} else {
 				return {
@@ -1297,7 +1299,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		return calculateByCharLevelBreakpoints(
 			variable.mLevel1Value,
 			variable.mInitialBonusPerLevel,
-			variable.mBreakpoints?.map(bp => resolveByCharLevelBreakpoint(bp, meta)),
+			variable.mBreakpoints?.map((bp) => resolveByCharLevelBreakpoint(bp, meta)),
 			meta.variableValueParams.damageSource?.level.value ?? 1,
 			'ByCharLevelBreakpointsCalculationPart',
 		);
@@ -1305,19 +1307,15 @@ export const VARIABLE_CALCULATION_FNS = {
 	/** hashed `ByCharLevelBreakpointsCalculationPart` */
 	'{4ce08984}': function (variable: IGameVariablesByType['{4ce08984}'], _whole, meta) {
 		meta.accessedVariables?.add(variable['{91d404a5}']);
-		const level1ValueResult = variable['{91d404a5}'] !== undefined
-			? meta.variableValueFn(variable['{91d404a5}'], meta.variableValueParams)
-			: undefined;
+		const level1ValueResult = variable['{91d404a5}'] !== undefined ? meta.variableValueFn(variable['{91d404a5}'], meta.variableValueParams) : undefined;
 
 		meta.accessedVariables?.add(variable['{bbd778a2}']);
-		const initialBonusPerLevelResult = variable['{bbd778a2}'] !== undefined
-			? meta.variableValueFn(variable['{bbd778a2}'], meta.variableValueParams)
-			: undefined;
+		const initialBonusPerLevelResult = variable['{bbd778a2}'] !== undefined ? meta.variableValueFn(variable['{bbd778a2}'], meta.variableValueParams) : undefined;
 
 		return calculateByCharLevelBreakpoints(
 			level1ValueResult?.value as number | undefined,
 			initialBonusPerLevelResult?.value as number | undefined,
-			variable['{9823b29a}']?.map(bp => resolveByCharLevelBreakpoint(bp, meta)),
+			variable['{9823b29a}']?.map((bp) => resolveByCharLevelBreakpoint(bp, meta)),
 			meta.variableValueParams.damageSource?.level.value ?? 1,
 			'{4ce08984}',
 		);
@@ -1331,14 +1329,16 @@ export const VARIABLE_CALCULATION_FNS = {
 		}
 
 		return {
-			value: mStartValue + (mEndValue - mStartValue) / (CHAMPION_LEVEL.max - 1) * (level - 1) * (mScaleByStatProgressionMultiplier ? CONSTS.statGfm(level) : 1),
-			calculatesFrom: [{
-				stat: 'level',
-				value: {
-					min: mStartValue,
-					max: mEndValue,
+			value: mStartValue + ((mEndValue - mStartValue) / (CHAMPION_LEVEL.max - 1)) * (level - 1) * (mScaleByStatProgressionMultiplier ? CONSTS.statGfm(level) : 1),
+			calculatesFrom: [
+				{
+					stat: 'level',
+					value: {
+						min: mStartValue,
+						max: mEndValue,
+					},
 				},
-			}],
+			],
 		};
 	},
 	/** same as `ByCharLevelInterpolationCalculationPart` but with the keys hashed and variables needing resolving, not being directly in `mStartValue` and `mEndValue` */
@@ -1366,10 +1366,7 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	/** base + per level value but with the keys hashed and variables needing resolving */
 	'{b22609db}': function (variable: IGameVariablesByType['{b22609db}'], _whole, meta) {
-		const {
-			'{91d404a5}': baseValueVariable,
-			'{b2cd0eb0}': perLevelValueVariable,
-		} = variable;
+		const { '{91d404a5}': baseValueVariable, '{b2cd0eb0}': perLevelValueVariable } = variable;
 
 		meta.accessedVariables?.add(baseValueVariable);
 		const baseValue = meta.variableValueFn(baseValueVariable, meta.variableValueParams);
@@ -1381,26 +1378,30 @@ export const VARIABLE_CALCULATION_FNS = {
 
 			return {
 				value: baseValue.value + fromLevelValue,
-				calculatesFrom: [{
-					stat: 'level',
-					value: {
-						min: baseValue.value,
-						max: baseValue.value + (CHAMPION_LEVEL.max - 1) * perLevelValue.value,
+				calculatesFrom: [
+					{
+						stat: 'level',
+						value: {
+							min: baseValue.value,
+							max: baseValue.value + (CHAMPION_LEVEL.max - 1) * perLevelValue.value,
+						},
 					},
-				}],
+				],
 			};
 		}
 	},
 	ByCharLevelFormulaCalculationPart(variable: IGameVariablesByType['ByCharLevelFormulaCalculationPart'], _whole, meta) {
 		const { values } = variable;
 		if (values) {
-			const value = values[(meta.variableValueParams.damageSource?.level.value ?? 1)]!;
+			const value = values[meta.variableValueParams.damageSource?.level.value ?? 1]!;
 			return {
 				value,
-				calculatesFrom: [{
-					stat: 'const',
-					value,
-				}],
+				calculatesFrom: [
+					{
+						stat: 'const',
+						value,
+					},
+				],
 			};
 		}
 	},
@@ -1444,12 +1445,14 @@ export const VARIABLE_CALCULATION_FNS = {
 				return {
 					value: statValue.value * multiplier,
 					roundReplaced: true,
-					calculatesFrom: [{
-						value: multiplier * (statValue.stat === 'critChance' ? 100 : 1),
-						isPercentage: true,
-						stat: statValue.stat as ICalculatesFromPart['stat'],
-						type: statValue.type,
-					}],
+					calculatesFrom: [
+						{
+							value: multiplier * (statValue.stat === 'critChance' ? 100 : 1),
+							isPercentage: true,
+							stat: statValue.stat as ICalculatesFromPart['stat'],
+							type: statValue.type,
+						},
+					],
 				};
 			} else {
 				return {
@@ -1487,7 +1490,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			} else {
 				calculatesFromConstOffset.push(resolved.value);
 			}
-		};
+		}
 
 		rv.value = values.reduce((acc, curr) => curr! + acc!, 0)!;
 
@@ -1579,7 +1582,7 @@ export const VARIABLE_CALCULATION_FNS = {
 				isPercentage: true,
 				iconKey: variable.mIconKey,
 				/* fallback based on asol passive */
-				overrideTag: variable.mScalingTagKey ?? 'font color=\'#ffffff\'',
+				overrideTag: variable.mScalingTagKey ?? "font color='#ffffff'",
 			});
 		}
 
@@ -1588,7 +1591,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			if (typeof rv.value === 'number') {
 				rv.value *= buff.value;
 			} else if (rv.value) {
-				rv.value = (rv.value as unknown as number[]).map(v => v * (buff.value as number)) as unknown as number;
+				rv.value = (rv.value as unknown as number[]).map((v) => v * (buff.value as number)) as unknown as number;
 			}
 		} else {
 			rv.value = 0;
@@ -1664,17 +1667,10 @@ interface IVariableCalculationFnMeta {
 	accessedVariables?: Set<string>;
 }
 
-type IHypotheticalVariableCalculationFns = Record<
-	string,
-	(
-		variable: any,
-		whole: any,
-		meta: IVariableCalculationFnMeta,
-	) => IVariableValueResult | undefined
->;
+type IHypotheticalVariableCalculationFns = Record<string, (variable: any, whole: any, meta: IVariableCalculationFnMeta) => IVariableValueResult | undefined>;
 
 interface IGameVariablesByType {
-	'ByCharLevelBreakpointsCalculationPart': {
+	ByCharLevelBreakpointsCalculationPart: {
 		mLevel1Value?: number;
 		mInitialBonusPerLevel?: number;
 		mBreakpoints?: {
@@ -1694,28 +1690,28 @@ interface IGameVariablesByType {
 	};
 	/** hashed `ByCharLevelBreakpointsCalculationPart`.mBreakpoints[number] */
 	'{0333530c}': {
-		'level': number;
+		level: number;
 		/** mAdditionalBonusAtThisLevel */
 		'{ae9b464d}': string;
 		/** mBonusPerLevelAtAndAfter */
 		'{b0d8b2ac}': string;
 	};
-	'NumberCalculationPart': {
+	NumberCalculationPart: {
 		mNumber: number;
 	};
-	'NamedDataValueCalculationPart': {
+	NamedDataValueCalculationPart: {
 		mDataValue: string;
 	};
-	'StatByCoefficientCalculationPart': IStatWithFormula & {
+	StatByCoefficientCalculationPart: IStatWithFormula & {
 		mCoefficient: number;
 	};
-	'StatByNamedDataValueCalculationPart': IStatWithFormula & {
+	StatByNamedDataValueCalculationPart: IStatWithFormula & {
 		mDataValue: string;
 	};
-	'AbilityResourceByCoefficientCalculationPart': IStatWithFormula & {
+	AbilityResourceByCoefficientCalculationPart: IStatWithFormula & {
 		mCoefficient?: number;
 	};
-	'ByCharLevelInterpolationCalculationPart': {
+	ByCharLevelInterpolationCalculationPart: {
 		mStartValue: number;
 		mEndValue: number;
 		mScalePastDefaultMaxLevel?: boolean;
@@ -1727,27 +1723,29 @@ interface IGameVariablesByType {
 		'{0589a59c}': string;
 		'{0b65bc23}': string;
 	};
-	'ByCharLevelFormulaCalculationPart': {
+	ByCharLevelFormulaCalculationPart: {
 		values: number[];
 	};
-	'StatBySubPartCalculationPart': {
+	StatBySubPartCalculationPart: {
 		mStat: number;
-		mSubpart: {
-			mNumber: number;
-		} | IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'];
+		mSubpart:
+			| {
+					mNumber: number;
+			  }
+			| IGameVariablesByType['ByCharLevelBreakpointsCalculationPart'];
 	};
-	'SumOfSubPartsCalculationPart': {
+	SumOfSubPartsCalculationPart: {
 		mSubparts: IGameVariablesByType[keyof IGameVariablesByType][];
 	};
-	'ProductOfSubPartsCalculationPart': {
+	ProductOfSubPartsCalculationPart: {
 		mPart1: IGameVariablesByType[keyof IGameVariablesByType];
 		mPart2: IGameVariablesByType[keyof IGameVariablesByType];
 	};
-	'GameCalculationModified': {
+	GameCalculationModified: {
 		mModifiedGameCalculation: string;
 		mMultiplier?: IMMultiplier;
 	};
-	'EffectValueCalculationPart': {
+	EffectValueCalculationPart: {
 		mEffectIndex: number;
 	};
 	/** base value + X per level, where the values point to `dataValues`. Irelia passive */
@@ -1756,7 +1754,7 @@ interface IGameVariablesByType {
 		'{b2cd0eb0}': string;
 	};
 	/** for stacks related thing, like Cho'Gath R but also Aphelios passive (qwe bonus stats) */
-	'BuffCounterByNamedDataValueCalculationPart': {
+	BuffCounterByNamedDataValueCalculationPart: {
 		/** ability variable's `calculate` should return a variable with the name of the value in this property */
 		mBuffName: string;
 		mDataValue: string;
@@ -1766,7 +1764,7 @@ interface IGameVariablesByType {
 		mScalingTagKey?: string;
 	};
 	/** same as `BuffCounterByNamedDataValueCalculationPart` but by coefficient */
-	'BuffCounterByCoefficientCalculationPart': {
+	BuffCounterByCoefficientCalculationPart: {
 		/** ability variable's `calculate` should return a variable with the name of the value in this property */
 		mBuffName: string;
 		mCoefficient: number;
@@ -1775,15 +1773,15 @@ interface IGameVariablesByType {
 		/** seems to be custom styles applied to the calculates from part, like `font color='#0bf7de'` */
 		mScalingTagKey?: string;
 	};
-	'GameCalculationConditional': {
+	GameCalculationConditional: {
 		mDefaultGameCalculation: string;
 		mConditionalGameCalculation: string;
 		mConditionalCalculationRequirements: IGameVariablesByType['HasBuffCastRequirement'];
 	};
-	'HasBuffCastRequirement': {
+	HasBuffCastRequirement: {
 		mBuffName: string;
 	};
-	'ClampSubPartsCalculationPart': {
+	ClampSubPartsCalculationPart: {
 		mCeiling?: number;
 		mFloor?: number;
 		mSubparts: IGameVariablesByType['SumOfSubPartsCalculationPart']['mSubparts'];
@@ -1842,11 +1840,16 @@ function mStatFormulaStatKey(stat: IStatWithFormula): ICalculatesFromPart['type'
 }
 
 /** used for resolving variables of type `IStatWithFormula`, which basically are supposed to be various kinds (like base, bonus, total, determined by `mStatFormula`) of champion's stats (determined by `mStat`) */
-function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculationResult): {
-	value: number;
-	stat: IChampionStatName;
-	type: NonNullable<ICalculatesFromPart['type']>;
-} | undefined {
+function resolveMStatWithFormula(
+	stat: IStatWithFormula,
+	stats?: IStatsCalculationResult,
+):
+	| {
+			value: number;
+			stat: IChampionStatName;
+			type: NonNullable<ICalculatesFromPart['type']>;
+	  }
+	| undefined {
 	const statsKey = mStatFormulaStatKey(stat);
 	const targetStat = stat.mStat ? MSTAT_TO_NAMED_STAT[stat.mStat as keyof typeof MSTAT_TO_NAMED_STAT] : 'abilityPower';
 	/* resolved to 0 if `stats` are undefined because "known" (in this case ones with handled `mStatFormula` and which `mStat` is handled in `MSTAT_TO_NAMED_STAT`) variables must be resolved to something, even if to an incorrect/placeholder value, to not be marked as unknown in `updateData` */
@@ -1856,19 +1859,19 @@ function resolveMStatWithFormula(stat: IStatWithFormula, stats?: IStatsCalculati
 		 * some vars use crit damage multiplier as a value multiplier which would make them show up as `0` in result tooltips, which do not pass a damage source = multiplier is 0
 		 * this does mean that the extended equals for a variable (what it scales with) will be different between scoreboard item hover and results hover but it shouldn't matter too much, as long as they shown value in column is correct
 		 */
-		return { value: targetStat === 'critDamageMultiplier' ? (value || 2) : value, stat: targetStat, type: statsKey };
+		return {
+			value: targetStat === 'critDamageMultiplier' ? value || 2 : value,
+			stat: targetStat,
+			type: statsKey,
+		};
 	}
 	return undefined;
 }
 
-function resolveMMultiplier(
-	variable: IMMultiplier,
-	whole: any,
-	meta: IVariableCalculationFnMeta,
-): number | undefined {
+function resolveMMultiplier(variable: IMMultiplier, whole: any, meta: IVariableCalculationFnMeta): number | undefined {
 	const rv = variableResolveFn(variable)?.(variable, whole, meta)?.value as number;
 	/* there could be a better way */
-	return rv === 0.66667 ? (2 / 3) : rv === 0.33334 ? (1 / 3) : rv;
+	return rv === 0.66667 ? 2 / 3 : rv === 0.33334 ? 1 / 3 : rv;
 }
 
 /* try my best to collapse multiple calculatesFrom parts into a single, non const one if detected. Based on Mikael's AmountToHeal and Vladimir's variables */

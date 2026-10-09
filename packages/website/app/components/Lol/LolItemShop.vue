@@ -1,12 +1,12 @@
 <script setup vapor lang="ts">
-import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type { IItemShopStatFilter } from '@lolcalc/data/meta';
-import type { IItem, IShopItem } from '@lolcalc/data/types';
-import type { IItemCategory } from '@lolcalc/shared';
 import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
+import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { calculateItemDiscount, itemBuyability } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, ITEMS, PATCH_VERSION, textureBgImageAttrs, UI } from '@lolcalc/data';
+import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import { ITEM_SHOP_STAT_FILTERS } from '@lolcalc/data/meta';
+import type { IItem, IShopItem } from '@lolcalc/data/types';
+import type { IItemCategory } from '@lolcalc/shared';
 import { ALL_ITEM_CATEGORIES, ITEM_NAME_TO_ID, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 
 const damageSource = defineModel<DamageSource>();
@@ -20,9 +20,7 @@ const inventoryValue = computed(() => damageSource.value?.items.value.reduce((ac
 const vDialog = useTemplateRef('vDialog');
 const selectedCategory = ref<IAllItemCategory>('all');
 const sortOrderSwapped = ref(false);
-const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(
-	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([name]) => [name, false]),
-) as Record<IItemShopStatFilter, boolean>);
+const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([name]) => [name, false])) as Record<IItemShopStatFilter, boolean>);
 
 const ITEM_EPICNESS_LEGENDARY = 5;
 const ITEM_EPICNESSES: [number, string][] = [
@@ -34,91 +32,112 @@ const ITEM_EPICNESSES: [number, string][] = [
 ];
 
 const BOOT_ITEM_IDS: string[] = [
-	'1001', /* boots */
-	'3047', /* plated steelcaps */
-	'3111', /* mercury's treads */
-	'3006', /* berserker's greaves */
-	'3009',	/* boots of swiftness */
-	'3020', /* sorcerer's shoes */
-	'3158', /* ionian boots of lucidity */
-	'3008', /* gluttonous grieves */
+	'1001' /* boots */,
+	'3047' /* plated steelcaps */,
+	'3111' /* mercury's treads */,
+	'3006' /* berserker's greaves */,
+	'3009' /* boots of swiftness */,
+	'3020' /* sorcerer's shoes */,
+	'3158' /* ionian boots of lucidity */,
+	'3008' /* gluttonous grieves */,
 ];
 
-const sortedByPrice = computed(() => Object
-	.values(ITEMS)
-	.sort((a, b) => a.gold.total - b.gold.total));
+const sortedByPrice = computed(() => Object.values(ITEMS).sort((a, b) => a.gold.total - b.gold.total));
 
-const shopItems = computed<IShopItem[]>(() => sortedByPrice.value.map((item) => {
-	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value) : 0;
-	const buyability = itemBuyability(item, damageSource.value);
-	const isBought = damageSource.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id);
+const shopItems = computed<IShopItem[]>(() =>
+	sortedByPrice.value.map((item) => {
+		const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value) : 0;
+		const buyability = itemBuyability(item, damageSource.value);
+		const isBought = damageSource.value?.items.value.some((inventoryItem) => inventoryItem?.id === item.id);
 
-	const statuses: string[] = [];
-	if (isBought && item.epicness === ITEM_EPICNESS_LEGENDARY) {
-		statuses.push('bought');
-	}
-	if (buyability === -1) {
-		statuses.push('locked');
-	} else if (buyability === 0) {
-		statuses.push('unavailable');
-	}
+		const statuses: string[] = [];
+		if (isBought && item.epicness === ITEM_EPICNESS_LEGENDARY) {
+			statuses.push('bought');
+		}
+		if (buyability === -1) {
+			statuses.push('locked');
+		} else if (buyability === 0) {
+			statuses.push('unavailable');
+		}
 
-	return {
-		item,
-		buyability,
-		isBought,
-		srStatus: statuses.join(', '),
-		calculatedPrice: item.gold.total - discount,
-		isLegendary: item.epicness === ITEM_EPICNESS_LEGENDARY,
-	};
-}));
-const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v.item.id, v])));
+		return {
+			item,
+			buyability,
+			isBought,
+			srStatus: statuses.join(', '),
+			calculatedPrice: item.gold.total - discount,
+			isLegendary: item.epicness === ITEM_EPICNESS_LEGENDARY,
+		};
+	}),
+);
+const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map((v) => [v.item.id, v])));
 const filteredByCategory = computed(() =>
 	selectedCategory.value === 'all'
 		? shopItems.value.filter(({ item }) => !(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))
 		: shopItems.value.filter(({ item }) => !(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id) && item.categories?.[selectedCategory.value as IItemCategory]),
 );
 const filteredByStats = computed(() => {
-	const filterFunctions = Object.entries(appliedStatFilters.value).filter(([, isEnabled]) => isEnabled).map(([filter]) => ITEM_SHOP_STAT_FILTERS[filter as IItemShopStatFilter].filter);
+	const filterFunctions = Object.entries(appliedStatFilters.value)
+		.filter(([, isEnabled]) => isEnabled)
+		.map(([filter]) => ITEM_SHOP_STAT_FILTERS[filter as IItemShopStatFilter].filter);
 
-	return filterFunctions.length ? filteredByCategory.value.filter(({ item }) => filterFunctions.every(f => f(item))) : filteredByCategory.value;
+	return filterFunctions.length ? filteredByCategory.value.filter(({ item }) => filterFunctions.every((f) => f(item))) : filteredByCategory.value;
 });
-const groupedByEpicness = computed(() => filteredByStats.value.reduce((acc, itemWithBuyability) => {
-	const { epicness = 0 } = itemWithBuyability.item;
+const groupedByEpicness = computed(() =>
+	filteredByStats.value.reduce(
+		(acc, itemWithBuyability) => {
+			const { epicness = 0 } = itemWithBuyability.item;
 
-	if (itemWithBuyability.item.isBoots && epicness !== 7) {
-		return acc;
-	}
+			if (itemWithBuyability.item.isBoots && epicness !== 7) {
+				return acc;
+			}
 
-	if (acc[epicness]) {
-		acc[epicness].push(itemWithBuyability);
-		return acc;
-	}
+			if (acc[epicness]) {
+				acc[epicness].push(itemWithBuyability);
+				return acc;
+			}
 
-	return { ...acc, [epicness]: [itemWithBuyability] };
-}, {} as Record<number, IShopItem[]>));
+			return { ...acc, [epicness]: [itemWithBuyability] };
+		},
+		{} as Record<number, IShopItem[]>,
+	),
+);
 
-const availableStatFilters = computed(() => Object.fromEntries(
-	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [
-		filter,
-		appliedStatFilters.value[filter as IItemShopStatFilter] || filteredByStats.value.some(({ item }) => filterFunction(item)),
-	]),
-) as Record<IItemShopStatFilter, boolean>);
-const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
-	const texture = UI.shop.stats[filter as IItemShopStatFilter].default;
-	const [selectedUvStartX, selectedUvStartY] = UI.shop.stats[filter as IItemShopStatFilter]!.selected.uv;
+const availableStatFilters = computed(
+	() =>
+		Object.fromEntries(
+			Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [filter, appliedStatFilters.value[filter as IItemShopStatFilter] || filteredByStats.value.some(({ item }) => filterFunction(item))]),
+		) as Record<IItemShopStatFilter, boolean>,
+);
+const computedStatFilters = computed(
+	() =>
+		Object.fromEntries(
+			Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
+				const texture = UI.shop.stats[filter as IItemShopStatFilter].default;
+				const [selectedUvStartX, selectedUvStartY] = UI.shop.stats[filter as IItemShopStatFilter]!.selected.uv;
 
-	return [filter, {
-		name,
-		texture: textureBgImageAttrs(texture, 18),
-		selectedUvStartX,
-		selectedUvStartY,
-	}];
-})) as unknown as Record<IItemShopStatFilter, { name: string; texture: ReturnType<typeof textureBgImageAttrs>; selectedUvStartX: number; selectedUvStartY: number }>);
+				return [
+					filter,
+					{
+						name,
+						texture: textureBgImageAttrs(texture, 18),
+						selectedUvStartX,
+						selectedUvStartY,
+					},
+				];
+			}),
+		) as unknown as Record<
+			IItemShopStatFilter,
+			{
+				name: string;
+				texture: ReturnType<typeof textureBgImageAttrs>;
+				selectedUvStartX: number;
+				selectedUvStartY: number;
+			}
+		>,
+);
 
-const computedEpicnesses = computed(() => (sortOrderSwapped.value
-	? ITEM_EPICNESSES.toReversed()
-	: ITEM_EPICNESSES).filter(([epicness]) => groupedByEpicness.value[epicness]?.length));
+const computedEpicnesses = computed(() => (sortOrderSwapped.value ? ITEM_EPICNESSES.toReversed() : ITEM_EPICNESSES).filter(([epicness]) => groupedByEpicness.value[epicness]?.length));
 
 function clearStatFilters() {
 	for (const key in ITEM_SHOP_STAT_FILTERS) {
@@ -126,10 +145,8 @@ function clearStatFilters() {
 	}
 }
 
-const targetShopItems = computed<(IShopItem | undefined)[]>(() => Array.from(
-	{ length: damageSource.value?.items.value.length ?? 0 },
-	(_, i) => damageSource.value!.items.value[i] && shopItemsMap.value.get(damageSource.value!.items.value[i].id)!,
-),
+const targetShopItems = computed<(IShopItem | undefined)[]>(() =>
+	Array.from({ length: damageSource.value?.items.value.length ?? 0 }, (_, i) => damageSource.value!.items.value[i] && shopItemsMap.value.get(damageSource.value!.items.value[i].id)!),
 );
 
 function undo() {
@@ -141,8 +158,8 @@ function undo() {
 const selectedItemId = ref<string>();
 const selectedItemInventoryIndex = ref<number>();
 const displayedItemId = ref<string>();
-const selectedItem = computed(() => selectedItemId.value ? shopItemsMap.value.get(selectedItemId.value) : undefined);
-const displayedItem = computed(() => displayedItemId.value ? shopItemsMap.value.get(displayedItemId.value) : undefined);
+const selectedItem = computed(() => (selectedItemId.value ? shopItemsMap.value.get(selectedItemId.value) : undefined));
+const displayedItem = computed(() => (displayedItemId.value ? shopItemsMap.value.get(displayedItemId.value) : undefined));
 
 function selectItem(item: IShopItem, overwriteDisplayed: boolean, inventoryIndex?: number) {
 	selectedItemId.value = item.item.id;
@@ -188,7 +205,7 @@ const displayedItemBuildsFrom = computed<IShopItem[] | undefined>(() =>
 				const thirdLevelItem = shopItemsMap.value.get(thirdLevelItemId)!;
 				return {
 					...thirdLevelItem,
-					from: (thirdLevelItem.item.from ?? []).map(fourthLevelItemId => shopItemsMap.value.get(fourthLevelItemId)!),
+					from: (thirdLevelItem.item.from ?? []).map((fourthLevelItemId) => shopItemsMap.value.get(fourthLevelItemId)!),
 				};
 			}),
 		} satisfies IShopItem;
@@ -208,15 +225,15 @@ const searchResults = computed(() => {
 		return [];
 	}
 
-	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v);
-	return shopItems.value.filter(({ item }) =>
-		item.id !== ITEM_NAME_TO_ID.slightlyMagicalFootwear
-		&& !(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id)
-		&& splitSearch.every(word => item.searchString.includes(word)),
-	);
+	const splitSearch = search.value
+		.toLocaleLowerCase()
+		.replaceAll(/[^a-z ]/g, '')
+		.split(' ')
+		.filter((v) => v);
+	return shopItems.value.filter(({ item }) => item.id !== ITEM_NAME_TO_ID.slightlyMagicalFootwear && !(TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id) && splitSearch.every((word) => item.searchString.includes(word)));
 });
 
-const searchCursoredOverItem = computed(() => searchCursoredOverIndex.value !== undefined ? searchResults.value[searchCursoredOverIndex.value] : undefined);
+const searchCursoredOverItem = computed(() => (searchCursoredOverIndex.value !== undefined ? searchResults.value[searchCursoredOverIndex.value] : undefined));
 
 function closeSearch() {
 	searchExpanded.value = false;
@@ -254,7 +271,7 @@ function searchCursorOver(index?: number) {
 
 function closeSearchIfOutside(event: FocusEvent) {
 	const target = event.relatedTarget as HTMLElement | null;
-	if (!target || (target === searchItemDescription.value?.header) || !searchResultsContainer.value?.contains(target)) {
+	if (!target || target === searchItemDescription.value?.header || !searchResultsContainer.value?.contains(target)) {
 		closeSearch();
 	}
 }
@@ -284,9 +301,7 @@ function onSearchKeydown(event: KeyboardEvent) {
 		case 'ArrowDown': {
 			searchExpanded.value = true;
 			if (resultsLength) {
-				searchCursoredOverIndex.value = (
-					(searchCursoredOverIndex.value === undefined ? -1 : searchCursoredOverIndex.value) + 1
-				) % resultsLength;
+				searchCursoredOverIndex.value = ((searchCursoredOverIndex.value === undefined ? -1 : searchCursoredOverIndex.value) + 1) % resultsLength;
 				document.getElementById(`item-shop-search-result-${searchCursoredOverIndex.value}`)?.scrollIntoView({ block: 'nearest' });
 			}
 			break;
@@ -295,9 +310,7 @@ function onSearchKeydown(event: KeyboardEvent) {
 		case 'ArrowUp': {
 			searchExpanded.value = true;
 			if (resultsLength) {
-				searchCursoredOverIndex.value = (
-					(searchCursoredOverIndex.value === undefined ? (resultsLength + 1) : searchCursoredOverIndex.value) - 1 + resultsLength
-				) % resultsLength;
+				searchCursoredOverIndex.value = ((searchCursoredOverIndex.value === undefined ? resultsLength + 1 : searchCursoredOverIndex.value) - 1 + resultsLength) % resultsLength;
 				document.getElementById(`item-shop-search-result-${searchCursoredOverIndex.value}`)?.scrollIntoView({ block: 'nearest' });
 			}
 			break;
@@ -320,7 +333,10 @@ function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent
 	const { target } = eventLike as { target: HTMLElement };
 	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
-	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
+	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, {
+		passive: true,
+		once: true,
+	});
 	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
 	addItemTooltipViewListeners();
 	hoveredItem.value = item;
@@ -344,9 +360,7 @@ function updateTooltipPosition(event: MouseEvent) {
 
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
 
-const buildsIntoItems = computed(() => selectedItem.value?.item.into
-	?.map(id => shopItemsMap.value.get(id)!)
-	.sort((a, b) => a.item.gold.total - b.item.gold.total) || []);
+const buildsIntoItems = computed(() => selectedItem.value?.item.into?.map((id) => shopItemsMap.value.get(id)!).sort((a, b) => a.item.gold.total - b.item.gold.total) || []);
 
 function closeBuildsIntoMoreListIfOutside(event: FocusEvent) {
 	const target = event.relatedTarget as HTMLElement | null;
@@ -405,21 +419,25 @@ const displayedItemBuildPath3rdLevelHasTwo3Items = computed(() => {
 	return false;
 });
 
-const bootItems = computed<IShopItem[]>(() => BOOT_ITEM_IDS.map((id) => {
-	const item = shopItemsMap.value.get(id);
-	if (!item) {
-		console.warn(`boot item not found ${id}`);
-	}
-	return item!;
-}));
+const bootItems = computed<IShopItem[]>(() =>
+	BOOT_ITEM_IDS.map((id) => {
+		const item = shopItemsMap.value.get(id);
+		if (!item) {
+			console.warn(`boot item not found ${id}`);
+		}
+		return item!;
+	}),
+);
 
 const bootsPanelPinned = ref(true);
 const inventoryPanelPinned = ref(true);
 
-let itemDragData: {
-	item: IItem;
-	slotIndex: number;
-} | undefined;
+let itemDragData:
+	| {
+			item: IItem;
+			slotIndex: number;
+	  }
+	| undefined;
 
 function onItemDragstart(event: DragEvent, slotIndex: number) {
 	if (damageSource.value) {
@@ -438,12 +456,7 @@ function onItemDragover(event: DragEvent) {
 
 function onItemDrop(slotIndex: number) {
 	if (itemDragData && damageSource.value) {
-		damageSource.value.moveItem(
-			damageSource.value.removeItem(itemDragData.slotIndex)!,
-			slotIndex,
-			damageSource.value,
-			itemDragData.slotIndex,
-		);
+		damageSource.value.moveItem(damageSource.value.removeItem(itemDragData.slotIndex)!, slotIndex, damageSource.value, itemDragData.slotIndex);
 	}
 	itemDragData = undefined;
 }
@@ -508,15 +521,11 @@ defineExpose({
 		@close="closeCleanup"
 	>
 		<header>
-			<h1>
-				all items
-			</h1>
+			<h1>all items</h1>
 			<form method="dialog">
 				<button value="cancel" title="close" autofocus>
 					<Icon class="i-ph:x-bold" />
-					<span>
-						close
-					</span>
+					<span> close </span>
 				</button>
 			</form>
 			<div class="inline-search-label" @focusout="closeSearchIfOutside">
@@ -535,32 +544,22 @@ defineExpose({
 					@input="($event.target as any).composing = false"
 					@update:model-value="searchCursorOver(searchResults.length ? 0 : undefined)"
 					@keydown="onSearchKeydown"
-				>
+				/>
 				<label id="item-shop-search-lbl" for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
 					<span>Click Here to Search</span>
 					<span>Search</span>
 				</label>
 				<button title="clear" @mousedown.prevent="clearSearch">
-					<span>
-						clear
-					</span>
+					<span> clear </span>
 					<Icon class="i-ph:x-bold" />
 				</button>
-				<div
-					v-show="searchExpanded"
-					ref="searchResultsContainer"
-					@mousedown.prevent=""
-				>
+				<div v-show="searchExpanded" ref="searchResultsContainer" @mousedown.prevent="">
 					<p id="item-shop-results-lbl">
 						Results
 						<button class="other-ui-btn" @click="closeSearch">hide</button>
 					</p>
-					<ul
-						id="item-shop-search-listbox"
-						role="listbox"
-						aria-labelledby="item-shop-results-lbl"
-					>
+					<ul id="item-shop-search-listbox" role="listbox" aria-labelledby="item-shop-results-lbl">
 						<li
 							v-for="(shopItem, index) in searchResults"
 							:id="`item-shop-search-result-${index}`"
@@ -577,14 +576,7 @@ defineExpose({
 							@click.right.prevent="selectSearchResult(index, true)"
 							@dblclick="selectSearchResult(index, true)"
 						>
-							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
-								width="64"
-								height="64"
-								class="item-shop-item-img"
-								aria-hidden="true"
-								loading="lazy"
-							>
+							<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" width="64" height="64" class="item-shop-item-img" aria-hidden="true" loading="lazy" />
 							<span>{{ shopItem.item.name }}</span>
 							<span class="sr-status">{{ shopItem.srStatus }}</span>
 							<span>{{ shopItem.isBought && shopItem.buyability === -1 ? '' : shopItem.calculatedPrice }}</span>
@@ -609,12 +601,17 @@ defineExpose({
 				id="item-shop-category-filter"
 				v-model="selectedCategory"
 				label="Category"
-				:options="['all', ...ALL_ITEM_CATEGORIES].map((category) => ({ category: category as IAllItemCategory, texture: UI.shop.categories[category as IAllItemCategory] }))"
+				:options="
+					['all', ...ALL_ITEM_CATEGORIES].map((category) => ({
+						category: category as IAllItemCategory,
+						texture: UI.shop.categories[category as IAllItemCategory],
+					}))
+				"
 				value-key="category"
 				required
 			>
 				<template #default="{ option: { category, texture } }">
-					<img v-bind="textureBgImageAttrs(texture, 24)">
+					<img v-bind="textureBgImageAttrs(texture, 24)" />
 					<span class="sr-only">{{ category }}</span>
 				</template>
 			</VButtonRadiogroup>
@@ -640,49 +637,35 @@ defineExpose({
 			<!-- </VButtonRadiogroup> -->
 			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
 				<span>Swap item order</span>
-				<img
-					v-bind="textureBgImageAttrs(UI.shop.swapItemOrder.default, 32)"
-					:style="`--txt-hover-uv-start-x: -${UI.shop.swapItemOrder.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.swapItemOrder.hover.uv[1]}px`"
-				>
+				<img v-bind="textureBgImageAttrs(UI.shop.swapItemOrder.default, 32)" :style="`--txt-hover-uv-start-x: -${UI.shop.swapItemOrder.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.swapItemOrder.hover.uv[1]}px`" />
 			</button>
 		</header>
 		<aside>
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
 				<span>Clear stat filters</span>
-				<img
-					v-bind="textureBgImageAttrs(UI.shop.clearFilters.default, 28)"
-					:style="`--txt-hover-uv-start-x: -${UI.shop.clearFilters.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.clearFilters.hover.uv[1]}px`"
-				>
+				<img v-bind="textureBgImageAttrs(UI.shop.clearFilters.default, 28)" :style="`--txt-hover-uv-start-x: -${UI.shop.clearFilters.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.clearFilters.hover.uv[1]}px`" />
 			</button>
 			<fieldset id="item-shop-stat-filters">
-				<legend>
-					Stat filters
-				</legend>
+				<legend>Stat filters</legend>
 				<template v-for="({ name, texture, selectedUvStartX, selectedUvStartY }, filter, i) in computedStatFilters" :key="filter">
-					<input :id="`item-shop-stat-${filter}`" v-model="appliedStatFilters[filter]" type="checkbox" :disabled="!availableStatFilters[filter]">
+					<input :id="`item-shop-stat-${filter}`" v-model="appliedStatFilters[filter]" type="checkbox" :disabled="!availableStatFilters[filter]" />
 					<label :for="`item-shop-stat-${filter}`" :title="name">
 						<span>{{ name }}</span>
-						<img
-							v-bind="texture"
-							:style="`--txt-selected-uv-start-x: -${selectedUvStartX}px; --txt-selected-uv-start-y: -${selectedUvStartY}px`"
-						>
+						<img v-bind="texture" :style="`--txt-selected-uv-start-x: -${selectedUvStartX}px; --txt-selected-uv-start-y: -${selectedUvStartY}px`" />
 					</label>
-					<hr v-if="i === 4 || i === 7 || i === 10">
+					<hr v-if="i === 4 || i === 7 || i === 10" />
 				</template>
 			</fieldset>
 		</aside>
 		<section>
 			<section id="item-shop-panel-boots" :data-pinned="bootsPanelPinned || undefined">
 				<h2>boots</h2>
-				<button
-					class="pin-button"
-					@click="bootsPanelPinned = !bootsPanelPinned"
-				>
+				<button class="pin-button" @click="bootsPanelPinned = !bootsPanelPinned">
 					<span>Pin boots panel</span>
 					<img
 						v-bind="textureBgImageAttrs(UI.shop.pin.default, 28)"
 						:style="`--txt-hover-uv-start-x: -${UI.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${UI.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${UI.shop.pin.slcHover.uv[1]}px`"
-					>
+					/>
 				</button>
 				<Icon class="i-ph:caret-left-bold caret" />
 				<div>
@@ -699,14 +682,7 @@ defineExpose({
 								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 							>
 								<span>{{ shopItem.item.name }}</span>
-								<img
-									:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
-									:alt="shopItem.item.name"
-									width="64"
-									height="64"
-									aria-hidden="true"
-									loading="lazy"
-								>
+								<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" :alt="shopItem.item.name" width="64" height="64" aria-hidden="true" loading="lazy" />
 								<span class="sr-status">{{ shopItem.srStatus }}</span>
 								<span>{{ shopItem.calculatedPrice }}</span>
 							</button>
@@ -714,13 +690,8 @@ defineExpose({
 					</ul>
 				</div>
 			</section>
-			<h2 aria-live="polite">
-				{{ selectedCategory }} items
-			</h2>
-			<template
-				v-for="[epicness, epicnessName] in computedEpicnesses"
-				:key="epicness"
-			>
+			<h2 aria-live="polite">{{ selectedCategory }} items</h2>
+			<template v-for="[epicness, epicnessName] in computedEpicnesses" :key="epicness">
 				<h3>
 					{{ epicnessName }}
 				</h3>
@@ -740,13 +711,7 @@ defineExpose({
 							@keydown.enter.prevent="buyItem(shopItem.item, shopItem.buyability)"
 						>
 							<span>{{ shopItem.item.name }}</span>
-							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
-								width="64"
-								height="64"
-								aria-hidden="true"
-								loading="lazy"
-							>
+							<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" width="64" height="64" aria-hidden="true" loading="lazy" />
 							<span class="sr-status">{{ shopItem.srStatus }}</span>
 							<span>{{ shopItem.calculatedPrice }}</span>
 						</button>
@@ -754,40 +719,16 @@ defineExpose({
 				</ul>
 			</template>
 		</section>
-		<button
-			id="toggle-details"
-			ref="detailsToggle"
-			class="other-ui-btn"
-			:aria-expanded="isShowingDetailsPanel"
-			aria-controls="item-shop-details"
-			@click="toggleDetailsPanel"
-		>
+		<button id="toggle-details" ref="detailsToggle" class="other-ui-btn" :aria-expanded="isShowingDetailsPanel" aria-controls="item-shop-details" @click="toggleDetailsPanel">
 			{{ isShowingDetailsPanel ? 'hide' : 'show' }} details
-			<img
-				v-show="selectedItem"
-				:src="selectedItem ? `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${selectedItem.item.image}` : ''"
-				width="64"
-				height="64"
-				:alt="selectedItem?.item.name"
-			>
+			<img v-show="selectedItem" :src="selectedItem ? `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${selectedItem.item.image}` : ''" width="64" height="64" :alt="selectedItem?.item.name" />
 		</button>
 		<section id="item-shop-details" :hidden="!isShowingDetailsPanel" @keydown.esc.prevent="collapseDetailsFocusToggle">
-			<LolItemDescription
-				:item="selectedItem?.item"
-				:gold="selectedItem?.calculatedPrice"
-				:damage-source="damageSource"
-				header-tag="h2"
-				source="Shop"
-			/>
-			<button
-				:disabled="selectedItem?.buyability !== 1"
-				@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
-			>
+			<LolItemDescription :item="selectedItem?.item" :gold="selectedItem?.calculatedPrice" :damage-source="damageSource" header-tag="h2" source="Shop" />
+			<button :disabled="selectedItem?.buyability !== 1" @click="buyItem(selectedItem!.item, selectedItem!.buyability)">
 				{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
 			</button>
-			<h3>
-				Builds into
-			</h3>
+			<h3>Builds into</h3>
 			<ul id="item-shop-builds-into-list">
 				<li v-for="i in buildsIntoListButtons - 1" :key="i">
 					<button
@@ -810,7 +751,7 @@ defineExpose({
 							height="64"
 							aria-hidden="true"
 							loading="lazy"
-						>
+						/>
 						<span class="sr-status">{{ buildsIntoItems[i - 1]?.srStatus }}</span>
 					</button>
 				</li>
@@ -836,18 +777,11 @@ defineExpose({
 							height="64"
 							aria-hidden="true"
 							loading="lazy"
-						>
+						/>
 						<span class="sr-status">{{ buildsIntoItems[6]?.srStatus }}</span>
 					</button>
-					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside">
-						+{{ buildsIntoItems.length - buildsIntoListButtons + 1 }}
-					</button>
-					<ul
-						id="builds-into-more-list"
-						ref="buildsIntoMoreList"
-						popover
-						@focusout="closeBuildsIntoMoreListIfOutside"
-					>
+					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside">+{{ buildsIntoItems.length - buildsIntoListButtons + 1 }}</button>
+					<ul id="builds-into-more-list" ref="buildsIntoMoreList" popover @focusout="closeBuildsIntoMoreListIfOutside">
 						<li v-for="shopItem in buildsIntoItems.slice(buildsIntoListButtons - 1)" :key="shopItem.item.id">
 							<button
 								:data-buyability="shopItem.buyability"
@@ -858,15 +792,7 @@ defineExpose({
 								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
 								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 							>
-								<img
-									:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
-									:alt="shopItem.item.name"
-									class="item-shop-item-img"
-									width="64"
-									height="64"
-									aria-hidden="true"
-									loading="lazy"
-								>
+								<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" :alt="shopItem.item.name" class="item-shop-item-img" width="64" height="64" aria-hidden="true" loading="lazy" />
 								<span class="sr-status">{{ shopItem.srStatus }}</span>
 								<span>{{ shopItem.item.name }}</span>
 							</button>
@@ -874,9 +800,7 @@ defineExpose({
 					</ul>
 				</li>
 			</ul>
-			<h3 v-show="displayedItem">
-				{{ displayedItem?.item.name }} build path
-			</h3>
+			<h3 v-show="displayedItem">{{ displayedItem?.item.name }} build path</h3>
 			<div id="item-shop-build-path-wrapper">
 				<div id="item-shop-build-path">
 					<LolItemBuildPathButton
@@ -892,12 +816,11 @@ defineExpose({
 					<ul
 						v-if="displayedItemBuildsFrom?.length"
 						class="grid grid-flow-col w-full"
-						:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
+						:class="{
+							'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items),
+						}"
 					>
-						<li
-							v-for="(secondLevelBuildsFromItem, secondLevelIndex) in displayedItemBuildsFrom"
-							:key="secondLevelIndex"
-						>
+						<li v-for="(secondLevelBuildsFromItem, secondLevelIndex) in displayedItemBuildsFrom" :key="secondLevelIndex">
 							<LolItemBuildPathButton
 								component
 								:shop-item="secondLevelBuildsFromItem"
@@ -908,28 +831,26 @@ defineExpose({
 								@dblclick="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							/>
 							<ul v-if="secondLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
-								<li
-									v-for="(thirdLevelBuildsFromItem, thirdLevelIndex) in secondLevelBuildsFromItem.from"
-									:key="`${secondLevelIndex}-${thirdLevelIndex}`"
-								>
+								<li v-for="(thirdLevelBuildsFromItem, thirdLevelIndex) in secondLevelBuildsFromItem.from" :key="`${secondLevelIndex}-${thirdLevelIndex}`">
 									<LolItemBuildPathButton
 										component
 										:shop-item="thirdLevelBuildsFromItem"
-										:class="{ selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id }"
+										:class="{
+											selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id,
+										}"
 										@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
 										@click="selectItem(thirdLevelBuildsFromItem, false)"
 										@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 										@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									/>
 									<ul v-if="thirdLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
-										<li
-											v-for="(fourthLevelBuildsFromItem, fourthLevelIndex) in thirdLevelBuildsFromItem.from"
-											:key="`${secondLevelIndex}-${thirdLevelIndex}-${fourthLevelIndex}`"
-										>
+										<li v-for="(fourthLevelBuildsFromItem, fourthLevelIndex) in thirdLevelBuildsFromItem.from" :key="`${secondLevelIndex}-${thirdLevelIndex}-${fourthLevelIndex}`">
 											<LolItemBuildPathButton
 												component
 												:shop-item="fourthLevelBuildsFromItem"
-												:class="{ selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id }"
+												:class="{
+													selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id,
+												}"
 												@mouseenter="enterTooltipableElement($event, fourthLevelBuildsFromItem)"
 												@click="selectItem(fourthLevelBuildsFromItem, false)"
 												@click.right.prevent="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
@@ -945,40 +866,21 @@ defineExpose({
 			</div>
 		</section>
 		<footer>
-			<button
-				:disabled="selectedItemInventoryIndex === undefined"
-				@click="sellItem($event, selectedItemInventoryIndex!)"
-			>
-				sell
-			</button>
-			<button
-				:disabled="!damageSource?.itemsUndoSnapshots.value.length"
-				@click="undo"
-			>
-				undo
-			</button>
-			<section
-				id="item-shop-panel-eq"
-				:data-pinned="inventoryPanelPinned || undefined"
-				:style="`--inventory-ward-icon: url('https://raw.communitydragon.org/${vMinor}/game/assets/ux/minimap/pings/need_ward_gray.png')`"
-			>
+			<button :disabled="selectedItemInventoryIndex === undefined" @click="sellItem($event, selectedItemInventoryIndex!)">sell</button>
+			<button :disabled="!damageSource?.itemsUndoSnapshots.value.length" @click="undo">undo</button>
+			<section id="item-shop-panel-eq" :data-pinned="inventoryPanelPinned || undefined" :style="`--inventory-ward-icon: url('https://raw.communitydragon.org/${vMinor}/game/assets/ux/minimap/pings/need_ward_gray.png')`">
 				<h2>inventory</h2>
 				<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
 					<span>Pin inventory panel</span>
 					<img
 						v-bind="textureBgImageAttrs(UI.shop.pin.default, 28)"
 						:style="`--txt-hover-uv-start-x: -${UI.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${UI.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${UI.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${UI.shop.pin.slcHover.uv[1]}px`"
-					>
+					/>
 				</button>
 				<Icon class="i-ph:caret-left-bold caret" />
 				<div>
 					<ul>
-						<li
-							v-for="i in damageSource?.roleQuest.value === 'bot' ? 7 : 6"
-							:key="i"
-							@drop="onItemDrop(i - 1)"
-							@dragover="onItemDragover"
-						>
+						<li v-for="i in damageSource?.roleQuest.value === 'bot' ? 7 : 6" :key="i" @drop="onItemDrop(i - 1)" @dragover="onItemDragover">
 							<component
 								:is="targetShopItems[i - 1] ? 'button' : 'div'"
 								:class="{
@@ -992,50 +894,25 @@ defineExpose({
 								@dragstart="onItemDragstart($event, i - 1)"
 							>
 								<span>{{ targetShopItems[i - 1]?.item.name }}</span>
-								<img
-									v-if="targetShopItems[i - 1]"
-									:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${targetShopItems[i - 1]!.item.image}`"
-									width="64"
-									height="64"
-									aria-hidden="true"
-									loading="lazy"
-								>
+								<img v-if="targetShopItems[i - 1]" :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${targetShopItems[i - 1]!.item.image}`" width="64" height="64" aria-hidden="true" loading="lazy" />
 							</component>
 						</li>
 					</ul>
 					<div v-if="damageSource?.roleQuest.value !== 'bot'">
 						<span>ward slot (n/a)</span>
 					</div>
-					<img
-						:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
-						width="26"
-						height="24"
-						loading="lazy"
-					>
+					<img :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`" width="26" height="24" loading="lazy" />
 				</div>
 			</section>
 			<p>
-				<img
-					v-bind="ICON_GOLD"
-					alt="gold coins"
-					loading="lazy"
-				>
+				<img v-bind="ICON_GOLD" alt="gold coins" loading="lazy" />
 				<span> {{ inventoryValue }}</span>
 				inventory value
 			</p>
-			<button :disabled="!damageSource || !damageSource.items.value.some(Boolean)" @click="sellAll">
-				sell all
-			</button>
+			<button :disabled="!damageSource || !damageSource.items.value.some(Boolean)" @click="sellAll">sell all</button>
 		</footer>
 		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="manual" class="hover-tooltip">
-			<LolItemDescription
-				:item="hoveredItem?.item"
-				:damage-source="damageSource"
-				:show-masterwork="hoveredItemShowMasterwork"
-				header-subtitles
-				hover-tooltip
-				source="Shop"
-			/>
+			<LolItemDescription :item="hoveredItem?.item" :damage-source="damageSource" :show-masterwork="hoveredItemShowMasterwork" header-subtitles hover-tooltip source="Shop" />
 		</article>
 	</VDialog>
 </template>
@@ -1081,15 +958,10 @@ defineExpose({
 
 		--side-panel-boots-gap: calc(3 * var(--spacing));
 		--side-panel-eq-gap: var(--fluid-0-4-t360);
-		--side-panel-eq-button-size: calc(
-			(var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-boots-gap)) / 3
-		);
+		--side-panel-eq-button-size: calc((var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-boots-gap)) / 3);
 		--side-panel-eq-h: calc(var(--side-panel-eq-button-size) * 2 + var(--side-panel-eq-gap));
 
-		--side-panel-total-w: calc(
-			2 * (var(--side-panel-p) + var(--side-panel-inner-p)) + 3 * var(--item-img-size) + 2 *
-				var(--side-panel-boots-gap) + 1px
-		);
+		--side-panel-total-w: calc(2 * (var(--side-panel-p) + var(--side-panel-inner-p)) + 3 * var(--item-img-size) + 2 * var(--side-panel-boots-gap) + 1px);
 		/* value to translate the dialog by horizontally, so that it can keep the same width by shifting more to the right, by the width of the --side-panel-total-w
 			keep some translate x on the largest screens too (half of the collapsed boots panel width) since the dialog doesn't have clearly defined center that would seem off and I think it makes it feel better */
 		--translate-x: calc(0.5 * var(--fluid-f1720-236-54-t1960));
@@ -1097,10 +969,7 @@ defineExpose({
 		--details-p: calc(3 * var(--spacing));
 		--details-pbs: calc(4 * var(--spacing) - var(--vfluid-f524-6-0-t540));
 		--builds-into-list-gap: var(--fluid-f440-6-12-t460);
-		--details-w: calc(
-			2 * var(--details-p) + var(--details-btns, 7) * var(--item-img-size) + (var(--details-btns, 7) - 1) *
-				var(--builds-into-list-gap)
-		);
+		--details-w: calc(2 * var(--details-p) + var(--details-btns, 7) * var(--item-img-size) + (var(--details-btns, 7) - 1) * var(--builds-into-list-gap));
 
 		--footer-py: var(--fluid-f540-6-10-t1224);
 		--footer-gap-y: var(--spacing);
@@ -1108,19 +977,14 @@ defineExpose({
 		--footer-gold-text-size: var(--fluid-16-18-t400);
 		--footer-btn-h: calc(2 * var(--footer-btn-py) + 4px + 1.5rem); /* 4px is border, 1.5rem is line height */
 		--footer-gold-text-pbe: 0px;
-		--footer-h: calc(
-			2 * var(--footer-py) + var(--side-panel-eq-button-size) + 2 * var(--footer-gap-y) + var(--footer-btn-h) +
-				var(--footer-gold-text-size) + var(--footer-gold-text-pbe)
-		);
+		--footer-h: calc(2 * var(--footer-py) + var(--side-panel-eq-button-size) + 2 * var(--footer-gap-y) + var(--footer-btn-h) + var(--footer-gold-text-size) + var(--footer-gold-text-pbe));
 
 		@media ((width < 970px) and (width >= 940px)) or (width < 548px) {
 			--footer-gold-text-pbe: calc(0.5 * var(--spacing));
 		}
 
 		@media (width >= 548px) or ((width > 940px) and (width < 970px)) {
-			--footer-h: calc(
-				2 * var(--footer-py) + var(--side-panel-eq-button-size) + var(--footer-gap-y) + var(--footer-btn-h)
-			);
+			--footer-h: calc(2 * var(--footer-py) + var(--side-panel-eq-button-size) + var(--footer-gap-y) + var(--footer-btn-h));
 		}
 
 		&[open] {
@@ -1137,12 +1001,8 @@ defineExpose({
 			minmax(
 				0,
 				min(
-					/* 2em 6px is default max width limit for dialog in chrome/firefox, 1 var(--spacing) is so to make the pin buttons not clip */
-						calc(100vw - 4em - 12px - var(--spacing) - var(--details-w) - var(--side-panel-total-w)),
-					calc(
-						var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap-x) + 2 *
-							var(--items-px)
-					)
+					/* 2em 6px is default max width limit for dialog in chrome/firefox, 1 var(--spacing) is so to make the pin buttons not clip */ calc(100vw - 4em - 12px - var(--spacing) - var(--details-w) - var(--side-panel-total-w)),
+					calc(var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap-x) + 2 * var(--items-px))
 				)
 			)
 			var(--details-w);
@@ -1151,16 +1011,7 @@ defineExpose({
 			--translate-x: 0px;
 			grid-template-columns:
 				calc(var(--clear-filters-btn-w) + 2 * var(--header-px) + 1px)
-				minmax(
-					0,
-					min(
-						calc(100vw - 4em - 12px - var(--spacing) - var(--details-w)),
-						calc(
-							var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap-x) + 2 *
-								var(--items-px)
-						)
-					)
-				)
+				minmax(0, min(calc(100vw - 4em - 12px - var(--spacing) - var(--details-w)), calc(var(--items-max-cols) * var(--item-img-size) + (var(--items-max-cols) - 1) * var(--items-gap-x) + 2 * var(--items-px))))
 				var(--details-w);
 		}
 
@@ -1174,12 +1025,7 @@ defineExpose({
 			}
 		}
 
-		:where(
-			#item-shop-search-listbox > li,
-			#builds-into-more-list > li > button,
-			#item-shop-builds-into-list > li > button,
-			.item-shop-item-btn
-		) {
+		:where(#item-shop-search-listbox > li, #builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn) {
 			--at-apply: 'relative';
 
 			> .sr-status {
@@ -1199,15 +1045,7 @@ defineExpose({
 				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-[--header-px] pbe-2 mbe-[calc(5*var(--spacing)-var(--vfluid-f524-6-0-t540))] text-center b-b-2 b-cyan-400/70';
 				grid-area: header;
 
-				border-image: linear-gradient(
-						90deg,
-						transparent 0%,
-						theme('colors.cyan.400/0.7') 40%,
-						theme('colors.cyan.400') 50%,
-						theme('colors.cyan.400/0.7') 60%,
-						transparent 100%
-					)
-					1;
+				border-image: linear-gradient(90deg, transparent 0%, theme('colors.cyan.400/0.7') 40%, theme('colors.cyan.400') 50%, theme('colors.cyan.400/0.7') 60%, transparent 100%) 1;
 			}
 
 			> form {
@@ -1392,14 +1230,7 @@ defineExpose({
 						}
 
 						> .item-description > :first-child {
-							border-image: linear-gradient(
-									90deg,
-									transparent 0%,
-									var(--ui-btn-border-clr) 30%,
-									var(--ui-btn-border-clr) 70%,
-									transparent 100%
-								)
-								1;
+							border-image: linear-gradient(90deg, transparent 0%, var(--ui-btn-border-clr) 30%, var(--ui-btn-border-clr) 70%, transparent 100%) 1;
 						}
 
 						&[data-empty] > * {
@@ -1429,13 +1260,7 @@ defineExpose({
 					}
 
 					&[aria-checked='true'] {
-						background: linear-gradient(
-							180deg,
-							theme('colors.amber.100/0.02') 0%,
-							theme('colors.amber.100/0.1') 15%,
-							theme('colors.amber.100/0.1') 65%,
-							theme('colors.amber.100/0.3') 100%
-						);
+						background: linear-gradient(180deg, theme('colors.amber.100/0.02') 0%, theme('colors.amber.100/0.1') 15%, theme('colors.amber.100/0.1') 65%, theme('colors.amber.100/0.3') 100%);
 
 						&::after {
 							--at-apply: 'content-empty';
@@ -1546,12 +1371,7 @@ defineExpose({
 
 				> input:not(:disabled):is(:focus-visible, :checked) + label,
 				> input:not(:disabled) + label:hover {
-					background: linear-gradient(
-						90deg,
-						transparent 55%,
-						theme('colors.cyan.400/0.2') 80%,
-						theme('colors.cyan.400/0.7') 100%
-					);
+					background: linear-gradient(90deg, transparent 55%, theme('colors.cyan.400/0.2') 80%, theme('colors.cyan.400/0.7') 100%);
 
 					&::after {
 						--at-apply: 'content-empty';
@@ -1585,9 +1405,7 @@ defineExpose({
 
 		#item-shop-panel-boots {
 			--at-apply: 'bottom-[calc(var(--side-panel-eq-h)+2*var(--side-panel-p)+14*var(--spacing))]';
-			--side-panel-h: calc(
-				var(--side-panel-row-h) * 3 + 2 * var(--side-panel-boots-gap) + 2 * var(--side-panel-inner-p)
-			);
+			--side-panel-h: calc(var(--side-panel-row-h) * 3 + 2 * var(--side-panel-boots-gap) + 2 * var(--side-panel-inner-p));
 
 			> div {
 				--at-apply: 'relative w-(--side-panel-w) h-(--side-panel-h) box-content of-hidden';
@@ -1847,25 +1665,13 @@ defineExpose({
 			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 		}
 
-		:is(
-				#item-shop-search-listbox > li,
-				#builds-into-more-list > li > button,
-				#item-shop-builds-into-list > li > button,
-				.item-shop-item-btn
-			):where([data-bought], [data-buyability='0'], [data-buyability='-1'])
-			> img,
+		:is(#item-shop-search-listbox > li, #builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where([data-bought], [data-buyability='0'], [data-buyability='-1']) > img,
 		#item-shop-build-path ul .item-shop-item-btn[data-bought] > img,
 		#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > img {
 			--at-apply: 'brightness-60';
 		}
 
-		:is(
-				#item-shop-search-listbox > li,
-				#builds-into-more-list > li > button,
-				#item-shop-builds-into-list > li > button,
-				.item-shop-item-btn
-			)[data-bought][data-legendary]
-			> .sr-status,
+		:is(#item-shop-search-listbox > li, #builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn)[data-bought][data-legendary] > .sr-status,
 		#item-shop-build-path ul .item-shop-item-btn[data-bought] > .sr-status,
 		#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > .sr-status {
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3C!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --%3E%3Cg%3E%3Cpath fill='oklch(78.9%25 0.154 211.53)' d='m237.66 85.26l-128.4 128.4a8 8 0 0 1-11.32 0l-71.6-72a8 8 0 0 1 0-11.31l24-24a8 8 0 0 1 11.32 0L104 147.43l98.34-97.09a8 8 0 0 1 11.32 0l24 23.6a8 8 0 0 1 0 11.32'/%3E%3Cpath fill='%23000' d='m243.28 68.24l-24-23.56a16 16 0 0 0-22.59 0L104 136.23l-36.69-35.6a16 16 0 0 0-22.58.05l-24 24a16 16 0 0 0 0 22.61l71.62 72a16 16 0 0 0 22.63 0L243.33 90.91a16 16 0 0 0-.05-22.67M103.62 208L32 136l24-24a.6.6 0 0 1 .08.08l42.35 41.09a8 8 0 0 0 11.19 0L208.06 56L232 79.6Z'/%3E%3C/g%3E%3C/svg%3E"); /* cyan-400 fill */
@@ -1888,14 +1694,8 @@ defineExpose({
 			--check-icon-top: var(--py);
 		}
 
-		:is(#builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where(
-			&[data-bought],
-			&[data-buyability='0'],
-			&[data-buyability='-1']
-		),
-		#item-shop-search-listbox
-			> li:where([data-bought], [data-buyability='0'], [data-buyability='-1'])
-			> span:last-of-type {
+		:is(#builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where(&[data-bought], &[data-buyability='0'], &[data-buyability='-1']),
+		#item-shop-search-listbox > li:where([data-bought], [data-buyability='0'], [data-buyability='-1']) > span:last-of-type {
 			--at-apply: 'text-neutral-400';
 		}
 
@@ -2044,19 +1844,14 @@ defineExpose({
 				#item-shop-build-path {
 					--at-apply: 'text-center flex flex-col items-center justify-center mx-auto';
 					min-block-size: calc(
-						4 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 3 *
-							var(--item-mt) + 5 * var(--spacing)
-							/* not sure why 5 spacing is needed here, turned up when adding 4th row for tear items */
+						4 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 3 * var(--item-mt) + 5 * var(--spacing) /* not sure why 5 spacing is needed here, turned up when adding 4th row for tear items */
 					);
 					--item-mb: calc(1.5 * var(--spacing));
 					--item-mt: calc(4 * var(--spacing));
 
 					@media (height < 580px) {
 						block-size: max-content;
-						min-block-size: calc(
-							2 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 1 *
-								var(--item-mt)
-						);
+						min-block-size: calc(2 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 1 * var(--item-mt));
 						max-inline-size: calc(7 * var(--item-img-size));
 					}
 				}
@@ -2064,14 +1859,7 @@ defineExpose({
 				> .item-description-header,
 				> .item-description > :first-child,
 				> #item-shop-builds-into-list {
-					border-image: linear-gradient(
-							90deg,
-							transparent 10%,
-							theme('colors.cyan.400/0.7') 30%,
-							theme('colors.cyan.400/0.7') 70%,
-							transparent 90%
-						)
-						1;
+					border-image: linear-gradient(90deg, transparent 10%, theme('colors.cyan.400/0.7') 30%, theme('colors.cyan.400/0.7') 70%, transparent 90%) 1;
 				}
 			}
 		}

@@ -15,10 +15,7 @@ function closeDialog() {
 
 function closeOnClickOutside(event: MouseEvent) {
 	const rect = dialogEl.value!.getBoundingClientRect();
-	const clickedOutside = event.clientX < rect.left
-		|| event.clientX > rect.right
-		|| event.clientY < rect.top
-		|| event.clientY > rect.bottom;
+	const clickedOutside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
 
 	if (clickedOutside && event.target === dialogEl.value) {
 		dialogEl.value?.close();

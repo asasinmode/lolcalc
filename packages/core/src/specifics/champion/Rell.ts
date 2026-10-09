@@ -1,23 +1,32 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IRell from '@lolcalc/data/files/champion/Rell.json';
 import type { IChampion } from '@lolcalc/data/types.js';
-import type { IChampionSpecific } from '../champion.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { EffectObjectName, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Rell'>): number {
 	return (self.champion.value as typeof IRell)?.abilities?.passive.variants[0]!.dataValues.MaxStacks[1]!;
 }
 
-function passiveStolenResists([stacks, totalArmor = 0, totalMR = 0]: [stacks: number, totalArmor?: number, totalMR?: number], champion: IChampion, level = 1): {
+function passiveStolenResists(
+	[stacks, totalArmor = 0, totalMR = 0]: [stacks: number, totalArmor?: number, totalMR?: number],
+	champion: IChampion,
+	level = 1,
+): {
 	stealPercent: number;
 	stolenArmor: number;
 	stolenMR: number;
 } {
-	const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]!, damageSource: { level: { value: level } } as DamageSource };
+	const passiveParams: IGameVariableValueParameters['championAbility'] = {
+		abilityKey: 'passive',
+		abilityVariant: champion.abilities.passive.variants[0]!,
+		damageSource: { level: { value: level } } as DamageSource,
+	};
 	const minResistsSteal = championAbilityVariableValue('StealFloor', passiveParams);
 	const stackStealPercent = championAbilityVariableValue('StealPercent', passiveParams);
 	if (typeof minResistsSteal.value === 'number' && typeof stackStealPercent.value === 'number') {
@@ -87,7 +96,10 @@ export default {
 	},
 	effectOntoTargetVars(self, vars) {
 		const { passiveStacksOnTarget } = self.internalData.value;
-		const stealPercent = championAbilityVariableValue('StealPercent', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
+		const stealPercent = championAbilityVariableValue('StealPercent', {
+			abilityKey: 'passive',
+			abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+		});
 		if (typeof stealPercent.value === 'number') {
 			vars.rellPResistsStealPercent = passiveStacksOnTarget * stealPercent.value;
 		} else {

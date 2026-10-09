@@ -1,9 +1,11 @@
-import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import assert from 'node:assert';
 import test from 'node:test';
+
+import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { nextTick } from 'vue';
+
 import fixture from '../fixtures/26.19.1.fixture.json' with { type: 'json' };
 import { forceShapeshift, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -28,49 +30,79 @@ test('26.19 Jayce', async (t) => {
 		const damageSource = await setupDamageSource(fixture, 'Jayce', sourceCommon);
 
 		forceShapeshift(damageSource, 1);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 227,
-			magicResist: 177,
-		}, damageSource, 'cannon');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 227,
+				magicResist: 177,
+			},
+			damageSource,
+			'cannon',
+		);
 
 		forceShapeshift(damageSource, 0);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 269,
-			magicResist: 219,
-		}, damageSource, 'hammer');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 269,
+				magicResist: 219,
+			},
+			damageSource,
+			'hammer',
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 318,
-			magicResist: 269,
-		}, damageSource, 'hammer jaksho');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 318,
+				magicResist: 269,
+			},
+			damageSource,
+			'hammer jaksho',
+		);
 
 		forceShapeshift(damageSource, 1);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 263,
-			magicResist: 215,
-		}, damageSource, 'cannon jaksho');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 263,
+				magicResist: 215,
+			},
+			damageSource,
+			'cannon jaksho',
+		);
 
 		forceShapeshift(damageSource, 0);
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
 		damageSource.currentHealth.value = 490;
 		await nextTick();
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 398,
-			armor: 271,
-			magicResist: 221,
-		}, damageSource, 'hammer bloodmail');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 398,
+				armor: 271,
+				magicResist: 221,
+			},
+			damageSource,
+			'hammer bloodmail',
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
 		damageSource.currentHealth.value = 544;
 		await nextTick();
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 398,
-			armor: 320,
-			magicResist: 272,
-		}, damageSource, 'hammer jaksho bloodmail');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 398,
+				armor: 320,
+				magicResist: 272,
+			},
+			damageSource,
+			'hammer jaksho bloodmail',
+		);
 	});
 
 	await t.test('2 infernals 2 mountains', async () => {
@@ -80,49 +112,79 @@ test('26.19 Jayce', async (t) => {
 		});
 
 		forceShapeshift(damageSource, 1);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 250,
-			magicResist: 195,
-		}, damageSource, 'cannon');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 250,
+				magicResist: 195,
+			},
+			damageSource,
+			'cannon',
+		);
 
 		forceShapeshift(damageSource, 0);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 297,
-			magicResist: 242,
-		}, damageSource, 'hammer');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 297,
+				magicResist: 242,
+			},
+			damageSource,
+			'hammer',
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 351,
-			magicResist: 298,
-		}, damageSource, 'hammer jaksho');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 351,
+				magicResist: 298,
+			},
+			damageSource,
+			'hammer jaksho',
+		);
 
 		forceShapeshift(damageSource, 1);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 289,
-			magicResist: 236,
-		}, damageSource, 'cannon jaksho');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 289,
+				magicResist: 236,
+			},
+			damageSource,
+			'cannon jaksho',
+		);
 
 		forceShapeshift(damageSource, 0);
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
 		damageSource.currentHealth.value = 218;
 		await nextTick();
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 419,
-			armor: 299,
-			magicResist: 245,
-		}, damageSource, 'hammer bloodmail');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 419,
+				armor: 299,
+				magicResist: 245,
+			},
+			damageSource,
+			'hammer bloodmail',
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
 		damageSource.currentHealth.value = 544;
 		await nextTick();
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 419,
-			armor: 354,
-			magicResist: 301,
-		}, damageSource, 'hammer jaksho bloodmail');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 419,
+				armor: 354,
+				magicResist: 301,
+			},
+			damageSource,
+			'hammer jaksho bloodmail',
+		);
 	});
 
 	/* nothing other than AD changes, jayce's R doesn't factor in mid quest AD */
@@ -134,49 +196,79 @@ test('26.19 Jayce', async (t) => {
 		});
 
 		forceShapeshift(damageSource, 1);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 250,
-			magicResist: 195,
-		}, damageSource, 'cannon');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 250,
+				magicResist: 195,
+			},
+			damageSource,
+			'cannon',
+		);
 
 		forceShapeshift(damageSource, 0);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 297,
-			magicResist: 242,
-		}, damageSource, 'hammer');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 297,
+				magicResist: 242,
+			},
+			damageSource,
+			'hammer',
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 351,
-			magicResist: 298,
-		}, damageSource, 'hammer jaksho');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 351,
+				magicResist: 298,
+			},
+			damageSource,
+			'hammer jaksho',
+		);
 
 		forceShapeshift(damageSource, 1);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 289,
-			magicResist: 236,
-		}, damageSource, 'cannon jaksho');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 289,
+				magicResist: 236,
+			},
+			damageSource,
+			'cannon jaksho',
+		);
 
 		forceShapeshift(damageSource, 0);
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 0;
 		damageSource.currentHealth.value = 228;
 		await nextTick();
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 440,
-			armor: 299,
-			magicResist: 245,
-		}, damageSource, 'hammer bloodmail');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 440,
+				armor: 299,
+				magicResist: 245,
+			},
+			damageSource,
+			'hammer bloodmail',
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
 		damageSource.currentHealth.value = 481;
 		await nextTick();
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 440,
-			armor: 354,
-			magicResist: 301,
-		}, damageSource, 'hammer jaksho bloodmail');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 440,
+				armor: 354,
+				magicResist: 301,
+			},
+			damageSource,
+			'hammer jaksho bloodmail',
+		);
 	});
 });
 
@@ -196,9 +288,13 @@ test('26.19 Vladimir passive interactions', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Vladimir', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			abilityPower: 150,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				abilityPower: 150,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 1754);
 	});
 
@@ -208,9 +304,13 @@ test('26.19 Vladimir passive interactions', async (t) => {
 			items: sourceCommon.items!.concat(ITEMS_BY_NAME.rabadon),
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			abilityPower: 364,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				abilityPower: 364,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 2097);
 	});
 
@@ -220,9 +320,13 @@ test('26.19 Vladimir passive interactions', async (t) => {
 			items: sourceCommon.items!.concat(ITEMS_BY_NAME.riftmaker),
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			abilityPower: 265,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				abilityPower: 265,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 2270);
 	});
 
@@ -232,16 +336,24 @@ test('26.19 Vladimir passive interactions', async (t) => {
 			items: sourceCommon.items!.concat(ITEMS_BY_NAME.overlordsBloodmail),
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 128,
-			abilityPower: 169,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 128,
+				abilityPower: 169,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 2304);
 
 		damageSource.currentHealth.value = 343;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 143,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 143,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('rabadon, riftmaker, bloodmail', async () => {
@@ -250,16 +362,24 @@ test('26.19 Vladimir passive interactions', async (t) => {
 			items: sourceCommon.items!.concat(ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.overlordsBloodmail),
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 152,
-			abilityPower: 564,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 152,
+				abilityPower: 564,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 3268);
 
 		damageSource.currentHealth.value = 740;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 170,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 170,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('rabadon, riftmaker, bloodmail | 4 infernals', async () => {
@@ -269,16 +389,24 @@ test('26.19 Vladimir passive interactions', async (t) => {
 			dragonStacks: ['Infernal', 'Infernal', 'Infernal', 'Infernal'],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 172,
-			abilityPower: 618,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 172,
+				abilityPower: 618,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 3355);
 
 		damageSource.currentHealth.value = 400;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 191,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 191,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('rabadon, riftmaker, bloodmail | 4 infernals | mid quest', async () => {
@@ -289,16 +417,24 @@ test('26.19 Vladimir passive interactions', async (t) => {
 			roleQuest: 'mid',
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 184,
-			abilityPower: 686,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 184,
+				abilityPower: 686,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 3463);
 
 		damageSource.currentHealth.value = 480;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 204,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 204,
+			},
+			damageSource,
+		);
 	});
 });
 
@@ -318,78 +454,118 @@ test('26.19 Anivia passive', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Anivia', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 19,
-			magicResist: 30,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 19,
+				magicResist: 30,
+			},
+			damageSource,
+		);
 
 		damageSource.internalData.value.isEgg = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: -21,
-			magicResist: -10,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: -21,
+				magicResist: -10,
+			},
+			damageSource,
+		);
 	});
 
-	await t.test('jak\'sho', async () => {
+	await t.test("jak'sho", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Anivia', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.jakSho],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 64,
-			magicResist: 75,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 64,
+				magicResist: 75,
+			},
+			damageSource,
+		);
 
 		damageSource.internalData.value.isEgg = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 24,
-			magicResist: 35,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 24,
+				magicResist: 35,
+			},
+			damageSource,
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
 		damageSource.internalData.value.isEgg = 0;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 78,
-			magicResist: 89,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 78,
+				magicResist: 89,
+			},
+			damageSource,
+		);
 
 		damageSource.internalData.value.isEgg = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 26,
-			magicResist: 37,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 26,
+				magicResist: 37,
+			},
+			damageSource,
+		);
 	});
 
-	await t.test('jak\'sho | mountains', async () => {
+	await t.test("jak'sho | mountains", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Anivia', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.jakSho],
 			dragonStacks: ['Mountain', 'Mountain'],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 70,
-			magicResist: 83,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 70,
+				magicResist: 83,
+			},
+			damageSource,
+		);
 
 		damageSource.internalData.value.isEgg = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 26,
-			magicResist: 39,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 26,
+				magicResist: 39,
+			},
+			damageSource,
+		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
 		damageSource.internalData.value.isEgg = 0;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 85,
-			magicResist: 97,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 85,
+				magicResist: 97,
+			},
+			damageSource,
+		);
 
 		damageSource.internalData.value.isEgg = 1;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			armor: 28,
-			magicResist: 40,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 28,
+				magicResist: 40,
+			},
+			damageSource,
+		);
 	});
 });

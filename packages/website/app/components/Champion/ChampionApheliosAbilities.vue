@@ -1,11 +1,11 @@
-<!-- eslint-disable vue/no-mutating-props -->
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
-import type { IExtraComponentEmits } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
+import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
+
+import type { IExtraComponentEmits } from '~/utils/types';
 
 type IAphelios = typeof Aphelios;
 
@@ -75,15 +75,8 @@ function replaceMainWithNext(event: MouseEvent) {
 			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, passiveAbilityId)"
-		>
-		<a
-			v-show="value.champion.value"
-			class="wiki-link"
-			:href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`"
-			target="_blank"
-		>
-			wiki
-		</a>
+		/>
+		<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
 	</div>
 	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
 	<div class="aphelios-q" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
@@ -94,7 +87,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.q))"
-		>
+		/>
 		<h5>Q</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.q.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
@@ -102,37 +95,29 @@ function replaceMainWithNext(event: MouseEvent) {
 			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'q', value.abilityVariantsIndexes.value.q))"
-		>
+		/>
 	</div>
 	<div class="aphelios-w" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
 		<h5 v-html="`offhand weapon: ${weaponNames.offhand}`" />
-		<button
-			title="swap with main"
-			@click="swapMainOffhand"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.w))"
-		>
+		<button title="swap with main" @click="swapMainOffhand" @mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.w))">
 			<span>swap with main</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.w]!.imageAlt, 'Aphelios') : undefined"
 				:width="abilitySize"
 				:height="abilitySize"
 				aria-hidden="true"
-			>
+			/>
 		</button>
 		<h5 v-html="`next weapon: ${weaponNames.next}`" />
-		<button
-			title="replace offhand"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))"
-			@click="replaceMainWithNext"
-		>
+		<button title="replace offhand" @mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))" @click="replaceMainWithNext">
 			<span>replace offhand</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.e]!.imageAlt, 'Aphelios') : undefined"
 				:width="abilitySize"
 				:height="abilitySize"
 				aria-hidden="true"
-			>
+			/>
 		</button>
 	</div>
 	<div class="aphelios-r" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
@@ -143,7 +128,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, rAbilityId)"
-		>
+		/>
 		<div class="pretend-level-radiogroup">
 			<span>r level: {{ value.abilityLevels.value.r }}</span>
 			<div v-for="i in 3" :key="i" aria-hidden="true" :data-checked="i === value.abilityLevels.value.r" />
@@ -168,9 +153,7 @@ function replaceMainWithNext(event: MouseEvent) {
 
 		@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 			& {
-				margin-block-end: calc(
-					var(--ability-level-buttons-size) - (var(--q-ability-size) - var(--ability-size)) / 2 - 1px
-				);
+				margin-block-end: calc(var(--ability-level-buttons-size) - (var(--q-ability-size) - var(--ability-size)) / 2 - 1px);
 			}
 		}
 

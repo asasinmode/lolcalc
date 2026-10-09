@@ -1,8 +1,9 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IVladimir from '@lolcalc/data/files/champion/Vladimir.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IVladimir from '@lolcalc/data/files/champion/Vladimir.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -13,7 +14,11 @@ export default {
 				EmpoweredHeal: [],
 			},
 			calculate(self) {
-				const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
+				const qParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'q',
+					abilityVariant: self.champion.value!.abilities.q.variants[0]!,
+					damageSource: self,
+				};
 				const baseHeal = championAbilityVariableValue('EmpoweredHealTooltip', qParams);
 				const percentMissing = championAbilityVariableValue('EmpoweredHealPercentTooltip', qParams);
 				const missingHealth = Math.max(0, self.stats.value.total.hp - self.currentHealth.value);
@@ -101,7 +106,11 @@ export default {
 			},
 			calculate(self) {
 				return {
-					Heal: championAbilityVariableValue('Damage', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self }),
+					Heal: championAbilityVariableValue('Damage', {
+						abilityKey: 'r',
+						abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+						damageSource: self,
+					}),
 				};
 			},
 			meta: {
@@ -137,11 +146,13 @@ export default {
 			meta: {
 				BonusAP: {
 					isCustom: true,
-					additionalInfo: 'This is the actual AP that Vladimir\'s passive grants. The <var>ApproximateAPBonusAvoidingRecursion</var>, as the name suggests, is just the approximate value the game shows in the description and is, in most cases, incorrect',
+					additionalInfo:
+						"This is the actual AP that Vladimir's passive grants. The <var>ApproximateAPBonusAvoidingRecursion</var>, as the name suggests, is just the approximate value the game shows in the description and is, in most cases, incorrect",
 				},
 				BonusHP: {
 					isCustom: true,
-					additionalInfo: 'This is the actual HP that Vladimir\'s passive grants. The <var>ApproximateHPBonusAvoidingRecursion</var>, as the name suggests, is just the approximate value the game shows in the description and is, in most cases, incorrect',
+					additionalInfo:
+						"This is the actual HP that Vladimir's passive grants. The <var>ApproximateHPBonusAvoidingRecursion</var>, as the name suggests, is just the approximate value the game shows in the description and is, in most cases, incorrect",
 				},
 				ApproximateAPBonusAvoidingRecursion: {
 					/* not displayed in game */
@@ -158,7 +169,10 @@ export default {
 	calculateHooks: {
 		postTotal: {
 			handler(self, { totalStats, bonusStats, dragonStatMultipliers, championPassiveStats, itemPassivesStats, itemTotalStats, totalMultipliersStats, dragonStats }, { calculatedVariables }) {
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+				};
 				const hpToAp = championAbilityVariableValue('HPforAP', passiveParams);
 				const apToHp = championAbilityVariableValue('APRatioBonusHP', passiveParams);
 

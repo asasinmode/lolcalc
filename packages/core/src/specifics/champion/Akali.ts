@@ -1,12 +1,13 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IAkali from '@lolcalc/data/files/champion/Akali.json';
-import type { IChampionSpecific } from '../champion.ts';
-import type { IEffectControlsProps, IInternalItemDataOf } from '../index.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
+import type IAkali from '@lolcalc/data/files/champion/Akali.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
+
+import type { IChampionSpecific } from '../champion.ts';
+import type { IEffectControlsProps, IInternalItemDataOf } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passivePreSnapshotRange(self: DamageSource<'Akali'>): number {
@@ -14,10 +15,7 @@ function passivePreSnapshotRange(self: DamageSource<'Akali'>): number {
 
 	let rfcWithoutPassive = 0;
 	if ((self.internalItemData.value as IInternalItemDataOf<'rfc'>)?.sharpshooter) {
-		rfcWithoutPassive = Math.min(
-			ITEMS_BY_NAME.rfc?.dataValues.MaxRangeIncrease,
-			Math.floor(preMultipliersNoPassive * ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease),
-		);
+		rfcWithoutPassive = Math.min(ITEMS_BY_NAME.rfc?.dataValues.MaxRangeIncrease, Math.floor(preMultipliersNoPassive * ITEMS_BY_NAME.rfc?.dataValues.RangePercentIncrease));
 	}
 
 	return preMultipliersNoPassive + rfcWithoutPassive;
@@ -39,18 +37,19 @@ export default {
 			},
 		}),
 		extraControls: {
-			model: self => computed({
-				get() {
-					return self.internalData.value.passiveRangeSnapshot ? 1 : 0;
-				},
-				set(value) {
-					if (value) {
-						self.internalData.value.passiveRangeSnapshot = passivePreSnapshotRange(self);
-					} else {
-						self.internalData.value.passiveRangeSnapshot = undefined;
-					}
-				},
-			}),
+			model: (self) =>
+				computed({
+					get() {
+						return self.internalData.value.passiveRangeSnapshot ? 1 : 0;
+					},
+					set(value) {
+						if (value) {
+							self.internalData.value.passiveRangeSnapshot = passivePreSnapshotRange(self);
+						} else {
+							self.internalData.value.passiveRangeSnapshot = undefined;
+						}
+					},
+				}),
 			refresh(self) {
 				self.internalData.value.passiveRangeSnapshot = passivePreSnapshotRange(self);
 			},
@@ -68,7 +67,11 @@ export default {
 		onChampionPassive: {
 			handler(self, _stats, { calculatedVariables }) {
 				if (self.internalData.value.isPassiveMSActive) {
-					const msPercent = championAbilityVariableValue('PassiveSpeedBonus', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const msPercent = championAbilityVariableValue('PassiveSpeedBonus', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						damageSource: { level: { value: self.level.value } } as DamageSource,
+					});
 					if (typeof msPercent.value === 'number') {
 						calculatedVariables.totalBonusPercentMoveSpeed += msPercent.value;
 					} else {

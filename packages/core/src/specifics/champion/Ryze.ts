@@ -1,7 +1,8 @@
 import type { DetectChampionVariables } from '@lolcalc/core/types.js';
-import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IRyze from '@lolcalc/data/files/champion/Ryze.json';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -28,15 +29,12 @@ export default {
 	calculateHooks: {
 		postTotal: {
 			handler(self, { totalStats, bonusStats, itemPassivesStats, itemTotalStats, championPassiveStats, dragonStats, dragonStatMultipliers }, { calculatedVariables }) {
-				const apToMana = championAbilityVariableValue(
-							'PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>,
-							{
-								abilityKey: 'passive',
-								abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
-								allAbilitiesVariants: self.allAbilityVariants.value,
-								damageSource: self,
-							},
-				);
+				const apToMana = championAbilityVariableValue('PercentManaIncrease' satisfies DetectChampionVariables<typeof IRyze, 'passive'>, {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: self,
+				});
 
 				if (typeof apToMana.value !== 'number') {
 					console.warn('[CHAMPION_SPECIFICS ryze] failed to resolve PercentManaIncrease variable', apToMana);
@@ -47,21 +45,19 @@ export default {
 				const approachFimbulManaToHp = calculatedVariables.approachFimbulManaToHp ?? 0;
 				const riftmakerBonusHPToAP = calculatedVariables.riftmakerBonusHPToAP ?? 0;
 
-				const totalApMultiplier = (calculatedVariables.totalItemApMultipliers ?? 1)
-					+ (dragonStatMultipliers?.abilityPower ?? 0)
-					+ (calculatedVariables.midQuestMultiplier ?? 0);
+				const totalApMultiplier = (calculatedVariables.totalItemApMultipliers ?? 1) + (dragonStatMultipliers?.abilityPower ?? 0) + (calculatedVariables.midQuestMultiplier ?? 0);
 
-				const effectiveManaToAp = seraphManaToAp + (approachFimbulManaToHp * riftmakerBonusHPToAP);
+				const effectiveManaToAp = seraphManaToAp + approachFimbulManaToHp * riftmakerBonusHPToAP;
 
 				const apToManaRatio = apToMana.value / 10_000;
-				const loopDivisor = 1 - (totalStats.mana * apToManaRatio * effectiveManaToAp * totalApMultiplier);
+				const loopDivisor = 1 - totalStats.mana * apToManaRatio * effectiveManaToAp * totalApMultiplier;
 
-				calculatedVariables.ryzePassivePercentManaIncrease = totalStats.abilityPower / loopDivisor * apToManaRatio;
+				calculatedVariables.ryzePassivePercentManaIncrease = (totalStats.abilityPower / loopDivisor) * apToManaRatio;
 				const passiveMana = totalStats.mana * calculatedVariables.ryzePassivePercentManaIncrease;
 				calculatedVariables.ryzePMana = passiveMana;
 
 				const passiveHp = passiveMana * approachFimbulManaToHp;
-				const basePassiveAp = (passiveMana * seraphManaToAp) + (passiveHp * riftmakerBonusHPToAP);
+				const basePassiveAp = passiveMana * seraphManaToAp + passiveHp * riftmakerBonusHPToAP;
 				let passiveAd = passiveMana * (calculatedVariables.manaMuraManaToAd ?? 0);
 
 				totalStats.mana += passiveMana;

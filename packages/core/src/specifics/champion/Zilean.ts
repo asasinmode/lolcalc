@@ -1,4 +1,5 @@
 import type IZilean from '@lolcalc/data/files/champion/Zilean.json';
+
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 

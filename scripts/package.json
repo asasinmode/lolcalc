@@ -1,11 +1,11 @@
 {
 	"name": "@lolcalc/scripts",
-	"type": "module",
 	"version": "0.0.1",
 	"private": true,
 	"description": "scripts used by lolcalc",
-	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"type": "module",
 	"devDependencies": {
 		"@lolcalc/core": "workspace:",
 		"@lolcalc/data": "workspace:",

@@ -1,8 +1,8 @@
 import type { IChampionAbilityVariant, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
-import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
-import type { IEffectControlsProps, ISpecificVariables } from './index';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
+
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import Aatrox from './champion/Aatrox.ts';
 import Ahri from './champion/Ahri.ts';
 import Akali from './champion/Akali.ts';
@@ -114,19 +114,17 @@ import Yone from './champion/Yone.ts';
 import Zaahen from './champion/Zaahen.ts';
 import Zeri from './champion/Zeri.ts';
 import Zilean from './champion/Zilean.ts';
+import type { IEffectControlsProps, ISpecificVariables } from './index';
 
 /** specific champions' helpers, utils and calculations */
 export const CHAMPION_SPECIFICS = {
 	TargetDummy: {
 		setupData(self) {
-			return Object.fromEntries(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
-				return [
-					statName,
-					Math.max(0, (self.internalData.value)[statName]
-					?? (self.stats.value.initial[statName]) * (statMeta.isPercentage ? 100 : 1)),
-				];
-			},
-			)) as IChampionStats;
+			return Object.fromEntries(
+				ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
+					return [statName, Math.max(0, self.internalData.value[statName] ?? self.stats.value.initial[statName] * (statMeta.isPercentage ? 100 : 1))];
+				}),
+			) as IChampionStats;
 		},
 		calculateHooks: {
 			postInit: {
@@ -260,16 +258,14 @@ export type IHypotheticalChampionSpecifics = {
 	[Id in IChampionId]?: IChampionSpecific<Id>;
 };
 
-export type IChampionSpecific<Id extends IChampionId | undefined = undefined>
-	= IProviderGroupDataSetup<Id, Id extends keyof IChampionInternalDataMap ? IChampionInternalDataMap[Id] : never>
-		& {
-			[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific<Id>;
-		} & {
-			variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
-			calculateHooks?: ICalculateChampionStatsHookSource<Id>;
-			effectOntoTargetVars?: IEffectOntoTargetVarsHook<Id>;
-			[key: string]: any;
-		};
+export type IChampionSpecific<Id extends IChampionId | undefined = undefined> = IProviderGroupDataSetup<Id, Id extends keyof IChampionInternalDataMap ? IChampionInternalDataMap[Id] : never> & {
+	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific<Id>;
+} & {
+	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
+	calculateHooks?: ICalculateChampionStatsHookSource<Id>;
+	effectOntoTargetVars?: IEffectOntoTargetVarsHook<Id>;
+	[key: string]: any;
+};
 
 export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = undefined> {
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;
@@ -300,7 +296,7 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
 	 */
 	[key: number]: IChampionAbilityVariantSpecific<Id>;
-};
+}
 
 export type IChampionAbilityVariantSpecific<Id extends IChampionId | undefined = undefined> = IProviderGroupImageText & {
 	variables?: ISpecificVariables<any, any, Id, 'championAbility'>;

@@ -1,7 +1,7 @@
 <script setup vapor lang="ts">
-import type { IItem } from '@lolcalc/data/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { itemBuyability } from '@lolcalc/core/specifics/item';
+import type { IItem } from '@lolcalc/data/types';
 
 const globalKeyModifiers = useGlobalKeyModifiers();
 
@@ -34,18 +34,14 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 function onDragenter(event: DragEvent, index: number, target: DamageSource[], isList = false) {
 	if (dragging.value) {
 		dragDropTarget.value = target;
-		([dragDropIndex.value] = isList
-			? getListDropTargetIndex(target, dragging.value.index, dragging.value.source)
-			: getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
+		[dragDropIndex.value] = isList ? getListDropTargetIndex(target, dragging.value.index, dragging.value.source) : getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
 	}
 }
 
 function onDragover(event: DragEvent, index: number, target: DamageSource[], isList = false) {
 	if (dragging.value) {
 		dragDropTarget.value = target;
-		([dragDropIndex.value] = isList
-			? getListDropTargetIndex(target, dragging.value.index, dragging.value.source)
-			: getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
+		[dragDropIndex.value] = isList ? getListDropTargetIndex(target, dragging.value.index, dragging.value.source) : getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
 		if (dragDropIndex.value !== undefined) {
 			event.preventDefault();
 		}
@@ -54,10 +50,7 @@ function onDragover(event: DragEvent, index: number, target: DamageSource[], isL
 
 function onDragleave(event: DragEvent) {
 	if (dragging.value) {
-		if (
-			!event.currentTarget || !event.relatedTarget
-			|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
-		) {
+		if (!event.currentTarget || !event.relatedTarget || !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)) {
 			dragDropTarget.value = undefined;
 			dragDropIndex.value = undefined;
 		}
@@ -71,9 +64,7 @@ function onDrop(event: DragEvent, index: number, target: DamageSource[], isList 
 		return;
 	}
 
-	let [toIndex, fromIndex] = isList
-		? getListDropTargetIndex(target, dragging.value.index, dragging.value.source)
-		: getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
+	let [toIndex, fromIndex] = isList ? getListDropTargetIndex(target, dragging.value.index, dragging.value.source) : getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
 	if (toIndex === undefined || fromIndex === undefined) {
 		return;
 	}
@@ -99,13 +90,7 @@ function onDrop(event: DragEvent, index: number, target: DamageSource[], isList 
 	dragging.value = undefined;
 }
 
-function getDropTargetIndex(
-	event: DragEvent,
-	index: number,
-	target: DamageSource[],
-	fromIndex: number,
-	source: DamageSource[],
-): [toIndex: number | undefined, fromIndex: number | undefined] {
+function getDropTargetIndex(event: DragEvent, index: number, target: DamageSource[], fromIndex: number, source: DamageSource[]): [toIndex: number | undefined, fromIndex: number | undefined] {
 	if (fromIndex === index && source === target) {
 		return [undefined, undefined];
 	}
@@ -123,7 +108,7 @@ function getDropTargetIndex(
 		const rect = el.getBoundingClientRect();
 		const rectSize = rect.height;
 		const posInEl = event.clientY - rect.top;
-		const midpoint = (rectSize / 2);
+		const midpoint = rectSize / 2;
 
 		toIndex = posInEl < midpoint ? index : index + 1;
 	}
@@ -198,11 +183,13 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 	target.splice(toIndex, 0, newItem);
 }
 
-let itemDragData: {
-	source: DamageSource;
-	slotIndex: number;
-	item: IItem;
-} | undefined;
+let itemDragData:
+	| {
+			source: DamageSource;
+			slotIndex: number;
+			item: IItem;
+	  }
+	| undefined;
 
 function onItemDragstart(event: DragEvent, source: DamageSource, slotIndex: number) {
 	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
@@ -226,10 +213,7 @@ function onItemDragover(event: DragEvent, target: DamageSource) {
 }
 
 function onItemDragLeave(event: DragEvent) {
-	if (
-		!event.currentTarget || !event.relatedTarget
-		|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
-	) {
+	if (!event.currentTarget || !event.relatedTarget || !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)) {
 		(event.currentTarget as HTMLElement).removeAttribute('data-drop-buyability');
 	}
 }
@@ -243,11 +227,7 @@ function onItemDrop(event: DragEvent, target: DamageSource, slotIndex?: number) 
 		el.removeAttribute('data-drop-buyability');
 	}
 
-	if (
-		itemDragData
-		&& ((target === itemDragData.source && !globalKeyModifiers.value.alt)
-			|| itemBuyability(itemDragData.item, target, false, true, !globalKeyModifiers.value.alt) === 1)
-	) {
+	if (itemDragData && ((target === itemDragData.source && !globalKeyModifiers.value.alt) || itemBuyability(itemDragData.item, target, false, true, !globalKeyModifiers.value.alt) === 1)) {
 		const item = globalKeyModifiers.value.alt ? itemDragData.source.items.value[itemDragData.slotIndex]! : itemDragData.source.removeItem(itemDragData.slotIndex)!;
 		/* if no target slot or copying and there's already an item at the index */
 		if (slotIndex === undefined || (globalKeyModifiers.value.alt && target.items.value[slotIndex])) {
@@ -276,20 +256,14 @@ const isDisplayingTargets = ref(false);
 
 <template>
 	<section id="scoreboard" :class="{ mirrored: mirrorLayout }">
-		<h2>
-			configuration scoreboard
-		</h2>
-		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">
-			swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}
-		</button>
+		<h2>configuration scoreboard</h2>
+		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
 		<label for="scoreboard-mirror-layout">
-			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout">
+			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout" />
 			mirror layout
 		</label>
 		<div :class="{ 'displaying-targets': isDisplayingTargets }">
-			<h3>
-				damage sources
-			</h3>
+			<h3>damage sources</h3>
 			<ul
 				@dragenter="onDragenter($event, damageSources.length - 1, damageSources, true)"
 				@dragover="onDragover($event, damageSources.length - 1, damageSources, true)"
@@ -304,7 +278,7 @@ const isDisplayingTargets = ref(false);
 					:expand-on-mounted="expandOnMounted && !isSourcesMounted"
 					:can-remove="damageSources.length > 1"
 					:can-move-down="index !== damageSources.length - 1"
-					:data-drop-direction="dragDropTarget === damageSources ? dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined : undefined"
+					:data-drop-direction="dragDropTarget === damageSources ? (dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined) : undefined"
 					data-group="sources"
 					@mounted="isSourcesMounted = true"
 					@clear="value.clear()"
@@ -324,18 +298,10 @@ const isDisplayingTargets = ref(false);
 					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
 				/>
 				<li>
-					<button
-						class="pretend-ui-btn"
-						:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
-						@click="add(damageSources)"
-					>
-						add damage source
-					</button>
+					<button class="pretend-ui-btn" :disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value" @click="add(damageSources)">add damage source</button>
 				</li>
 			</ul>
-			<h3>
-				damage targets
-			</h3>
+			<h3>damage targets</h3>
 			<ul
 				@dragenter="onDragenter($event, damageTargets.length - 1, damageTargets, true)"
 				@dragover="onDragover($event, damageTargets.length - 1, damageTargets, true)"
@@ -350,7 +316,7 @@ const isDisplayingTargets = ref(false);
 					:expand-on-mounted="expandOnMounted && !isTargetsMounted"
 					:can-remove="damageTargets.length > 1"
 					:can-move-down="index !== damageTargets.length - 1"
-					:data-drop-direction="dragDropTarget === damageTargets ? dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined : undefined"
+					:data-drop-direction="dragDropTarget === damageTargets ? (dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined) : undefined"
 					data-group="targets"
 					is-right
 					@mounted="isTargetsMounted = true"
@@ -371,13 +337,7 @@ const isDisplayingTargets = ref(false);
 					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
 				/>
 				<li>
-					<button
-						class="pretend-ui-btn"
-						:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
-						@click="add(damageTargets)"
-					>
-						add damage target
-					</button>
+					<button class="pretend-ui-btn" :disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value" @click="add(damageTargets)">add damage target</button>
 				</li>
 			</ul>
 			<DamageSourceThumbnail ref="dragPreview" />
@@ -397,16 +357,11 @@ const isDisplayingTargets = ref(false);
 		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-b-w: 0.25rem;
 		/* 3 extras columns starting from `1680px` that go up to 256px */
-		--scoreboard-item-max-w: calc(
-			var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) +
-				var(--scoreboard-item-b-w)
-		);
+		--scoreboard-item-max-w: calc(var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) + var(--scoreboard-item-b-w));
 		--runes-stats-img-w: calc(5 * var(--spacing));
 		--runes-stats-text-w: calc(20 * var(--spacing));
 		--runes-stats-px: calc(0.5 * var(--spacing));
-		--runes-stats-section-w: calc(
-			2 * var(--runes-stats-px) + 2 * (var(--runes-stats-img-w) + var(--runes-stats-text-w)) + 1px /* 1px is border */
-		);
+		--runes-stats-section-w: calc(2 * var(--runes-stats-px) + 2 * (var(--runes-stats-img-w) + var(--runes-stats-text-w)) + 1px /* 1px is border */);
 
 		> label {
 			--at-apply: 'whitespace-nowrap absolute end-0 top-3.5 -translate-y-1/2 leading-none';
@@ -473,13 +428,7 @@ const isDisplayingTargets = ref(false);
 				&::before {
 					--at-apply: 'inset-0';
 					--b-w: 0.5px;
-					background-image: linear-gradient(
-						var(--drop-indicator-bg-direction),
-						hsl(0 100% 100%) 0px,
-						hsl(0 100% 100%) var(--b-w),
-						hsl(0 100% 100% / 0.2) var(--b-w),
-						transparent 1.5rem
-					);
+					background-image: linear-gradient(var(--drop-indicator-bg-direction), hsl(0 100% 100%) 0px, hsl(0 100% 100%) var(--b-w), hsl(0 100% 100% / 0.2) var(--b-w), transparent 1.5rem);
 				}
 
 				&::after {
@@ -510,14 +459,8 @@ const isDisplayingTargets = ref(false);
 					grid-template-columns: repeat(
 						2,
 						minmax(
-							calc(
-								var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
-									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
-							),
-							calc(
-								var(--extra-cols) * var(--extra-item-max-w) + var(--extras-gap) + var(--scoreboard-item-pe) +
-									var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)
-							)
+							calc(var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) + var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)),
+							calc(var(--extra-cols) * var(--extra-item-max-w) + var(--extras-gap) + var(--scoreboard-item-pe) + var(--scoreboard-item-ps) + var(--scoreboard-item-b-w))
 						)
 					);
 				}

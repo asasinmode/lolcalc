@@ -1,7 +1,8 @@
-import type IBrand from '@lolcalc/data/files/champion/Brand.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IBrand from '@lolcalc/data/files/champion/Brand.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -15,14 +16,22 @@ export default {
 				let HealthDamage = Number.NaN;
 				let CalculatedExplosionDamage = Number.NaN;
 
-				const burnPercent = championAbilityVariableValue('PercentHealthDamage', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
+				const burnPercent = championAbilityVariableValue('PercentHealthDamage', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				});
 				if (typeof burnPercent.value === 'number') {
-					HealthDamage = burnPercent.value * (target?.stats.value.total.hp ?? 0) / 100;
+					HealthDamage = (burnPercent.value * (target?.stats.value.total.hp ?? 0)) / 100;
 				} else {
 					console.warn('[CHAMPION_SPECIFICS aurora] failed to calculate pasive proc percent dmg', burnPercent);
 				}
 
-				const explosionPercent = championAbilityVariableValue('ExplosionDamage', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
+				const explosionPercent = championAbilityVariableValue('ExplosionDamage', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				});
 				if (typeof explosionPercent.value === 'number') {
 					CalculatedExplosionDamage = explosionPercent.value * (target?.stats.value.total.hp ?? 0);
 				} else {

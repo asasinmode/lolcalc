@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IZaahen from '@lolcalc/data/files/champion/Zaahen.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -54,7 +55,11 @@ export default {
 					return;
 				}
 
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 				const adPercentPerStack = championAbilityVariableValue('PercentBonusADCalc', passiveParams);
 				const maxStacksMult = championAbilityVariableValue('MaxStacksMultiplier', passiveParams);
 				if (typeof adPercentPerStack.value !== 'number' || typeof maxStacksMult.value !== 'number') {

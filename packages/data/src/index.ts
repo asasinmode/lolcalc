@@ -1,18 +1,18 @@
 import type { EffectObjectName, IChampionStatName, IItemCategory, TItemNameToId } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import type { ImgHTMLAttributes } from 'vue';
-import type { IItemShopStatFilter } from './meta';
-import type { IChampion, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IItemStat, IListedChampion, IRunes, IRuneSlotName } from './types';
-import { ITEM_NAME_TO_ID } from '@lolcalc/shared';
 import { markRaw } from 'vue';
+
 import championData from '../files/champion.json' with { type: 'json' };
 import effectData from '../files/effect.json' with { type: 'json' };
 import itemData from '../files/item.json' with { type: 'json' };
 import miscData from '../files/misc.json' with { type: 'json' };
 import runeData from '../files/rune.json' with { type: 'json' };
 import textData from '../files/text.json' with { type: 'json' };
-
 import uiData from '../files/ui.json' with { type: 'json' };
+import type { IItemShopStatFilter } from './meta';
+import type { IChampion, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IItemStat, IListedChampion, IRunes, IRuneSlotName } from './types';
 
 export const PATCH_VERSION = {
 	vSemver: championData.version as string,
@@ -52,13 +52,9 @@ export const CHAMPIONS = championData.data satisfies Record<IChampionId, IListed
 
 type IChampionData = { [Id in IChampionId]: IListedChampion<Id> };
 
-export const CHAMPION_KEY_TO_ID: Record<string, IChampionId> = Object.fromEntries(
-	Object.entries(championData.data).map(([id, { key }]) => [key, id as IChampionId]),
-);
+export const CHAMPION_KEY_TO_ID: Record<string, IChampionId> = Object.fromEntries(Object.entries(championData.data).map(([id, { key }]) => [key, id as IChampionId]));
 
-export const CHAMPION_ID_TO_KEY: Record<IChampionId, string> = Object.fromEntries(
-	Object.entries(CHAMPION_KEY_TO_ID).map(([key, id]) => [id as IChampionId, key]),
-) as Record<IChampionId, string>;
+export const CHAMPION_ID_TO_KEY: Record<IChampionId, string> = Object.fromEntries(Object.entries(CHAMPION_KEY_TO_ID).map(([key, id]) => [id as IChampionId, key])) as Record<IChampionId, string>;
 
 const championCache = new Map<IChampionId, Promise<IChampion>>();
 
@@ -71,7 +67,7 @@ export function useChampion(id: IChampionId | (string & {})): Promise<IChampion>
 	 * conditional parse because raw node imports it properly as json and nuxt imports a string
 	 * also there's a vite warning that this import cannot be analyzed propertly with suggestion to @vite-ignore it but it works without it and breaks when added
 	 */
-	const promise = import(`../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then(module => typeof module.default === 'string' ? JSON.parse(module.default) : module.default);
+	const promise = import(`../files/champion/${id}.json?raw`, { with: { type: 'json' } }).then((module) => (typeof module.default === 'string' ? JSON.parse(module.default) : module.default));
 	championCache.set(id as IChampionId, promise);
 	return promise;
 }
@@ -89,12 +85,10 @@ export const ITEMS = itemData.data satisfies Record<string, IItem> as Record<str
  * const maxDarkSealStacks = (ITEMS as TItems)[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks;
  * ```
  */
-export type TItems = typeof itemData['data'];
+export type TItems = (typeof itemData)['data'];
 
-export const ITEMS_BY_NAME = Object.fromEntries(
-	Object.entries(ITEM_NAME_TO_ID).map(([name, id]) => [name, ITEMS[id]]),
-) as {
-	[K in keyof TItemNameToId]: TItemNameToId[K] extends keyof TItems ? TItems[TItemNameToId[K]] : never
+export const ITEMS_BY_NAME = Object.fromEntries(Object.entries(ITEM_NAME_TO_ID).map(([name, id]) => [name, ITEMS[id]])) as {
+	[K in keyof TItemNameToId]: TItemNameToId[K] extends keyof TItems ? TItems[TItemNameToId[K]] : never;
 };
 
 export const RUNES = runeData.data as IRunes;
@@ -106,92 +100,112 @@ export const RUNES = runeData.data as IRunes;
  * const adaptiveForceAD = (RUNES as TRunes).shards.offensive.adaptive.effectAmount.StatGain1;
  * ```
  */
-export type TRunes = typeof runeData['data'];
+export type TRunes = (typeof runeData)['data'];
 
-export const RUNE_SLOT_NAME_TO_NUMBER = Object.fromEntries(Object.entries(runeData.data.paths)
-	.flatMap(([, { slots }]) =>
-		slots.flatMap((slot, slotIndex) => Object.keys(slot).map(slotName => [slotName, slotIndex])),
-	),
-) as Record<IRuneSlotName, number>;
+export const RUNE_SLOT_NAME_TO_NUMBER = Object.fromEntries(Object.entries(runeData.data.paths).flatMap(([, { slots }]) => slots.flatMap((slot, slotIndex) => Object.keys(slot).map((slotName) => [slotName, slotIndex])))) as Record<
+	IRuneSlotName,
+	number
+>;
 
 export const EFFECTS: IEffectData = effectData.data;
 
-export type TEffects = typeof effectData['data'];
+export type TEffects = (typeof effectData)['data'];
 
 export const EFFECTS_STRINGTABLE = effectData.stringtable as Record<string, string>;
 
-export interface IEffectData extends Record<EffectObjectName, ({
-	dataKey: string;
-	description: string;
-} | {
-	dataKey: string;
-	stringtable: string;
-} | {
-	dataKey: string;
-	championSpellObjectKey: string;
-	objectName: string;
-	description: string;
-} | ({
-	dataKey: string;
-	sharedSpellObjectKey: string;
-	sharedSpellEffectObjectKey?: string | string[];
-	objectName: string;
-	description: string;
-} & Pick<IChampionAbilityVariant, 'name' | 'image' | 'tooltip' | 'dataValues' | 'spellCalculations' | 'cooldownTime'>))> {};
+export interface IEffectData extends Record<
+	EffectObjectName,
+	| {
+			dataKey: string;
+			description: string;
+	  }
+	| {
+			dataKey: string;
+			stringtable: string;
+	  }
+	| {
+			dataKey: string;
+			championSpellObjectKey: string;
+			objectName: string;
+			description: string;
+	  }
+	| ({
+			dataKey: string;
+			sharedSpellObjectKey: string;
+			sharedSpellEffectObjectKey?: string | string[];
+			objectName: string;
+			description: string;
+	  } & Pick<IChampionAbilityVariant, 'name' | 'image' | 'tooltip' | 'dataValues' | 'spellCalculations' | 'cooldownTime'>)
+> {}
 
 export const TEXT = textData.data satisfies Omit<ITextData, 'stringtable'> as unknown as ITextData;
 
 export type TText = typeof textData.data;
 
 export interface ITextData {
-	items: Record<string, {
-		subtitleLeft?: string;
-		subtitleRight?: string;
-		/** the extra text that's below the stats when hovering item in shop */
-		tooltipShop?: string[][];
-		/**
-		 * same as `extrasShop` but in inventory
-		 * present if source has it and is different from the shop one
-		 * differs in for example using the computed variables for the champion like AD gained from Overlord's Bloodmail
-		 */
-		tooltipInventory?: string[][];
-		/** the additional, usually gray, text shown below the stats and any descripiton */
-		extended?: string;
-		/** text in the footer, same spot as `Press [Shift] to...`, usually showing the value of a dynamic variable like `Giant Slayer Bonus Damage: \@f1\@` */
-		footerLeft?: string;
-		/** keyword definition like `Wounds: Reduces the effectiveness...` */
-		keywordDefinitions?: string;
-	}>;
+	items: Record<
+		string,
+		{
+			subtitleLeft?: string;
+			subtitleRight?: string;
+			/** the extra text that's below the stats when hovering item in shop */
+			tooltipShop?: string[][];
+			/**
+			 * same as `extrasShop` but in inventory
+			 * present if source has it and is different from the shop one
+			 * differs in for example using the computed variables for the champion like AD gained from Overlord's Bloodmail
+			 */
+			tooltipInventory?: string[][];
+			/** the additional, usually gray, text shown below the stats and any descripiton */
+			extended?: string;
+			/** text in the footer, same spot as `Press [Shift] to...`, usually showing the value of a dynamic variable like `Giant Slayer Bonus Damage: \@f1\@` */
+			footerLeft?: string;
+			/** keyword definition like `Wounds: Reduces the effectiveness...` */
+			keywordDefinitions?: string;
+		}
+	>;
 	runes: {
 		paths: Record<string, { name: string; tooltip: string }>;
-		slots: Record<string, {
-			name: string;
-			/** champ select rune dialog hover */
-			tooltipShort: string;
-			/** champ select rune dialog hover + shift */
-			tooltipLong: string;
-			/** the tooltip displayed when hovering over the in game stats panel */
-			tooltipStats: string;
-		}>;
-		shards: {
-			slotNames: Record<string, { name: string }>;
-			slotValues: Record<string, {
+		slots: Record<
+			string,
+			{
 				name: string;
 				/** champ select rune dialog hover */
-				tooltip: string;
-				/** the tooltip displayed when hovering over in game stats panel */
+				tooltipShort: string;
+				/** champ select rune dialog hover + shift */
+				tooltipLong: string;
+				/** the tooltip displayed when hovering over the in game stats panel */
 				tooltipStats: string;
-			}>;
+			}
+		>;
+		shards: {
+			slotNames: Record<string, { name: string }>;
+			slotValues: Record<
+				string,
+				{
+					name: string;
+					/** champ select rune dialog hover */
+					tooltip: string;
+					/** the tooltip displayed when hovering over in game stats panel */
+					tooltipStats: string;
+				}
+			>;
 		};
 	};
-	dragons: Record<IDragonName, {
-		stack: string;
-		soul: string;
-	}>;
-	roleQuests: Record<IChampionRole, {
-		title: string;
-		description: string;
-	}>;
+	dragons: Record<
+		IDragonName,
+		{
+			stack: string;
+			soul: string;
+		}
+	>;
+	roleQuests: Record<
+		IChampionRole,
+		{
+			title: string;
+			description: string;
+		}
+	>;
 	stringtable: {
 		/* technically typescript ignores it but it's there so */
 		__resolvedHashes: Record<string, string>;
@@ -208,20 +222,26 @@ export const ALL_DRAGON_NAMES = Object.keys(MISC.dragons) as IDragonName[];
 export const INTERESTING_SOULS_DRAGONS: IDragonName[] = ['Mountain', 'Ocean', 'Hextech', 'Infernal'];
 
 export interface IMiscData {
-	dragons: Record<IDragonName, {
-		name: string;
-		stack: {
-			objectName: string;
-			dataValues: any;
-		};
-		soul: {
-			objectName: string;
-			dataValues: any;
-		};
-	}>;
-	roleQuests: Record<IChampionRole, {
-		dataValues?: Record<string, number>;
-	}>;
+	dragons: Record<
+		IDragonName,
+		{
+			name: string;
+			stack: {
+				objectName: string;
+				dataValues: any;
+			};
+			soul: {
+				objectName: string;
+				dataValues: any;
+			};
+		}
+	>;
+	roleQuests: Record<
+		IChampionRole,
+		{
+			dataValues?: Record<string, number>;
+		}
+	>;
 }
 
 export const UI: IUiData = uiData.data;
@@ -247,10 +267,13 @@ interface IUiData {
 		};
 	};
 	playerStats: Record<string, ITexture>;
-	dragons: Record<IDragonName, {
-		stack: ITexture;
-		soulActive: ITexture;
-	}>;
+	dragons: Record<
+		IDragonName,
+		{
+			stack: ITexture;
+			soulActive: ITexture;
+		}
+	>;
 	practiceTool: {
 		statusEffect: ITexture;
 	};
@@ -258,16 +281,10 @@ interface IUiData {
 
 export const CHAMPION_IMAGES = {
 	championImage(image: string, championId: IChampionId): string {
-		return championId === 'TargetDummy'
-			? `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/game/${image}`
-			: `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/img/champion/${image}`;
+		return championId === 'TargetDummy' ? `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/game/${image}` : `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/img/champion/${image}`;
 	},
 	abilityImage(path: string, championId: IChampionId, group: 'sources' | 'targets' = 'sources'): string {
-		path = championId === 'TargetDummy'
-			? path
-					.replace('%s1', group === 'sources' ? 'order' : 'chaos')
-					.replace('%s2', group === 'sources' ? 'blue' : 'red')
-			: path;
+		path = championId === 'TargetDummy' ? path.replace('%s1', group === 'sources' ? 'order' : 'chaos').replace('%s2', group === 'sources' ? 'blue' : 'red') : path;
 		return `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/game/${path}`;
 	},
 	championImageSize(championId: IChampionId): number {
@@ -292,10 +309,7 @@ export const ICON_GOLD = {
  * paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON}.png`
  * or full external ones if starting with `http`
  */
-export const STAT_ICON: Record<
-	IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
-	string | [url: string, size: number] | [url: string, width: number, height: number]
-> = {
+export const STAT_ICON: Record<IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown', string | [url: string, size: number] | [url: string, width: number, height: number]> = {
 	OnHit: 'onhit',
 	attackDamage: 'scalead',
 	FlatPhysicalDamageMod: 'scalead',
@@ -358,14 +372,13 @@ export const STAT_ICON: Record<
 export const ICON_ON_HIT_IMG: string = `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 export function imgUrl(url: string, isDDragon = false) {
-	return url.startsWith('http')
-		? url
-		: isDDragon
-			? `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/${url}`
-			: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/${url}`;
+	return url.startsWith('http') ? url : isDDragon ? `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/${url}` : `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/${url}`;
 }
 
-export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: number): ImgHTMLAttributes & {
+export function textureBgImageAttrs(
+	{ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture,
+	targetSize?: number,
+): ImgHTMLAttributes & {
 	['data-sprite-image']: string;
 } {
 	const width = endX! - startX!;
@@ -378,15 +391,15 @@ export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [sta
 
 	return {
 		src,
-		'loading': 'lazy',
+		loading: 'lazy',
 		'aria-hidden': true,
 		'data-sprite-image': '',
-		'style': {
+		style: {
 			'background-image': `url(${src})`,
 			'background-size': `calc(${resWidth}px * var(--txt-scale)) calc(${resHeight}px * var(--txt-scale))`,
 			'object-position': `calc(${width}px * var(--txt-scale)) calc(${height}px * var(--txt-scale))`,
 			'aspect-ratio': `${width} / ${height}`,
-			'width': `${width * scale}px`,
+			width: `${width * scale}px`,
 			'--txt-scale': `${scale}`,
 			'--txt-uv-start-x': `-${startX}px`,
 			'--txt-uv-start-y': `-${startY}px`,

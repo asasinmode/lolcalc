@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import test from 'node:test';
+
 import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { CHAMPIONS, ITEMS_BY_NAME, useChampion } from '@lolcalc/data';
 import { nextTick } from 'vue';
@@ -40,7 +41,11 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('no champion | items | current 0', async () => {
-		const damageSource = new DamageSource({ items: [hpItem, mpItem], currentHealth: 0, currentAbilityResource: 0 });
+		const damageSource = new DamageSource({
+			items: [hpItem, mpItem],
+			currentHealth: 0,
+			currentAbilityResource: 0,
+		});
 		await nextTick();
 
 		assert.equal(damageSource.maxHealth.value, itemHp);
@@ -140,7 +145,10 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('champion | items', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], items: [hpItem, mpItem] }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			items: [hpItem, mpItem],
+		}).await();
 		await nextTick();
 
 		assert.equal(damageSource.maxHealth.value, champion.stats.hp + itemHp);
@@ -150,7 +158,12 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('champion | items | current 0', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], items: [hpItem, mpItem], currentHealth: 0, currentAbilityResource: 0 }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			items: [hpItem, mpItem],
+			currentHealth: 0,
+			currentAbilityResource: 0,
+		}).await();
 		await nextTick();
 
 		assert.equal(damageSource.maxHealth.value, champion.stats.hp + itemHp);
@@ -160,7 +173,10 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('champion | item added | current full', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], items: [hpItem, mpItem] }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			items: [hpItem, mpItem],
+		}).await();
 		await nextTick();
 
 		damageSource.addItem(hpItem);
@@ -174,7 +190,10 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('champion | item added | current partial', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], items: [hpItem, mpItem] }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			items: [hpItem, mpItem],
+		}).await();
 		await nextTick();
 
 		damageSource.currentHealth.value = partialHp;
@@ -190,7 +209,10 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('champion | item removed | current full', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], items: [hpItem, hpItem, mpItem, mpItem] }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			items: [hpItem, hpItem, mpItem, mpItem],
+		}).await();
 		await nextTick();
 
 		damageSource.currentHealth.value = damageSource.maxHealth.value;
@@ -206,7 +228,10 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('champion | item removed | current partial, less than diff', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], items: [hpItem, hpItem, mpItem, mpItem] }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			items: [hpItem, hpItem, mpItem, mpItem],
+		}).await();
 		await nextTick();
 
 		damageSource.currentHealth.value = partialHp;
@@ -222,7 +247,10 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('champion | item removed | current partial, more than diff', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], items: [hpItem, hpItem, mpItem, mpItem] }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			items: [hpItem, hpItem, mpItem, mpItem],
+		}).await();
 		await nextTick();
 
 		damageSource.currentHealth.value = partialHp + itemHp + championHp;
@@ -238,7 +266,11 @@ test('maxHealth/maxAbilityResource watch', async (t) => {
 	});
 
 	await t.test('override, update then change max', async () => {
-		const damageSource = await new DamageSource({ champion: CHAMPIONS[champion.id], currentHealth: partialHp, currentAbilityResource: partialMp }).await();
+		const damageSource = await new DamageSource({
+			champion: CHAMPIONS[champion.id],
+			currentHealth: partialHp,
+			currentAbilityResource: partialMp,
+		}).await();
 		await nextTick();
 
 		damageSource.currentHealth.value += partialHp / 2;

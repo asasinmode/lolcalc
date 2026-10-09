@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+
 import { addTemplate, defineNuxtModule, resolveFiles, updateTemplates } from '@nuxt/kit';
 
 interface IFluidVariablesConfig {
@@ -71,7 +72,7 @@ export default defineNuxtModule<IFluidVariablesConfig>({
 			ignore: ['node_modules/**', '.nuxt/**', 'dist/**', '**/node_modules/**', '**/.git/**'],
 		});
 
-		await Promise.all(files.map(file => processFile(file)));
+		await Promise.all(files.map((file) => processFile(file)));
 
 		generatedCss = generateCss(variablesByFile, options);
 
@@ -91,7 +92,7 @@ export default defineNuxtModule<IFluidVariablesConfig>({
 			if (path.endsWith('.css') || path.endsWith('.vue')) {
 				await processFile(path);
 				generatedCss = generateCss(variablesByFile, options);
-				updateTemplates({ filter: t => t.filename === template });
+				updateTemplates({ filter: (t) => t.filename === template });
 			}
 		});
 	},
@@ -108,14 +109,7 @@ interface IFluidVariable {
 
 const defaultRemInPx = 16;
 
-function generateClamp(
-	sizeFrom: number,
-	sizeTo: number,
-	minScreenWidth: number,
-	maxScreenWidth: number,
-	remInPx: number,
-	viewportUnit: 'i' | 'b',
-): string {
+function generateClamp(sizeFrom: number, sizeTo: number, minScreenWidth: number, maxScreenWidth: number, remInPx: number, viewportUnit: 'i' | 'b'): string {
 	const slope = (sizeTo - sizeFrom) / (maxScreenWidth - minScreenWidth);
 	const yAxisIntersection = -minScreenWidth * slope + sizeFrom;
 
@@ -129,7 +123,7 @@ function formatNumber(number: number) {
 	return Number.parseFloat(number.toFixed(4));
 }
 
-async function extractFluidVariables(filePath: string, config: IFluidVariablesConfig): Promise<[ horizontal: IFileVariables, vertical: IFileVariables ]> {
+async function extractFluidVariables(filePath: string, config: IFluidVariablesConfig): Promise<[horizontal: IFileVariables, vertical: IFileVariables]> {
 	const hVars: IFileVariables = new Map();
 	const vVars: IFileVariables = new Map();
 	const content = await fs.readFile(filePath, 'utf-8');
@@ -150,11 +144,7 @@ function setMatchedVariables(variables: IFileVariables, content: string, regex: 
 		const prefix = fromViewport ? `f${fromViewport}-` : '';
 		const suffix = toViewport ? `-t${toViewport}` : '';
 
-		if (
-			!Number.isNaN(sizeFrom)
-			&& !Number.isNaN(sizeTo)
-			&& !variables.has(`${prefix}${sizeFrom}-${sizeTo}${suffix}`)
-		) {
+		if (!Number.isNaN(sizeFrom) && !Number.isNaN(sizeTo) && !variables.has(`${prefix}${sizeFrom}-${sizeTo}${suffix}`)) {
 			variables.set(`${prefix}${sizeFrom}-${sizeTo}${suffix}`, {
 				sizeFrom,
 				sizeTo,

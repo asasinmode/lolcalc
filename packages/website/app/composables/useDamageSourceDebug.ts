@@ -1,5 +1,6 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { ComponentExposed } from 'vue-component-type-helpers';
+
 import CalculatorDamageSourceDebugDialog from '~/components/Calculator/CalculatorDamageSourceDebugDialog.vue';
 
 let resolve: (() => void) | undefined;
@@ -17,14 +18,16 @@ function openDebugDialog(damageSource: DamageSource): Promise<void> {
 	});
 }
 
-const _component = defineComponent(() =>
-	() => h(CalculatorDamageSourceDebugDialog, {
-		ref: dialogRef,
-		modelValue: damageSourceRef.value,
-		onClose() {
-			resolve?.();
-		},
-	}));
+const _component = defineComponent(
+	() => () =>
+		h(CalculatorDamageSourceDebugDialog, {
+			ref: dialogRef,
+			modelValue: damageSourceRef.value,
+			onClose() {
+				resolve?.();
+			},
+		}),
+);
 
 export function useDamageSourceDebug() {
 	return {

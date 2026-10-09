@@ -1,6 +1,7 @@
 import type IVeigar from '@lolcalc/data/files/champion/Veigar.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {

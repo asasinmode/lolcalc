@@ -1,10 +1,12 @@
-import type { IChampion, IRuneShardSlotName } from '@lolcalc/data/types.js';
-import type { EffectObjectName, IChampionAbilityKey } from '@lolcalc/shared';
 import fs from 'node:fs/promises';
 import nodePath from 'node:path';
 import process from 'node:process';
+
 import { CHAMPIONS, EFFECTS, ITEMS, MISC, RUNES, useChampion } from '@lolcalc/data';
+import type { IChampion, IRuneShardSlotName } from '@lolcalc/data/types.js';
+import type { EffectObjectName, IChampionAbilityKey } from '@lolcalc/shared';
 import { ALL_CHAMPION_ABILITY_KEYS } from '@lolcalc/shared';
+
 import { stringifyObject } from './index.ts';
 
 const TEST_ROOT = nodePath.join(import.meta.dirname, '../packages/core/test');
@@ -86,7 +88,10 @@ async function applyChampion(fixture: IFixtureShape, raw: string): Promise<void>
 	if (abilityListRaw) {
 		const existingAbilities = (existing.abilities as Record<string, unknown>) ?? {};
 
-		for (const key of abilityListRaw.split(',').map(k => k.trim()).filter(Boolean)) {
+		for (const key of abilityListRaw
+			.split(',')
+			.map((k) => k.trim())
+			.filter(Boolean)) {
 			if (isAbilityKey(key)) {
 				existingAbilities[key] = champion.abilities[key];
 			} else if (key in champion) {
@@ -107,8 +112,12 @@ function findItem(search: string) {
 	if (ITEMS[search]) {
 		return ITEMS[search];
 	}
-	const words = search.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(Boolean);
-	return Object.values(ITEMS).find(item => words.every(word => item.searchString.includes(word)));
+	const words = search
+		.toLocaleLowerCase()
+		.replaceAll(/[^a-z ]/g, '')
+		.split(' ')
+		.filter(Boolean);
+	return Object.values(ITEMS).find((item) => words.every((word) => item.searchString.includes(word)));
 }
 
 function applyItem(fixture: IFixtureShape, search: string): void {
@@ -131,13 +140,8 @@ function applyItem(fixture: IFixtureShape, search: string): void {
 function findEffectKey(search: string): EffectObjectName | undefined {
 	search = search.toLocaleLowerCase();
 	return Object.entries(EFFECTS).find(([key, effect]) => {
-		const searchStrings = [
-			key,
-			(effect as { dataKey?: string }).dataKey,
-			(effect as { objectName?: string }).objectName,
-			(effect as { sharedSpellObjectKey?: string }).sharedSpellObjectKey,
-		];
-		return searchStrings.some(candidate => candidate?.toLocaleLowerCase().includes(search));
+		const searchStrings = [key, (effect as { dataKey?: string }).dataKey, (effect as { objectName?: string }).objectName, (effect as { sharedSpellObjectKey?: string }).sharedSpellObjectKey];
+		return searchStrings.some((candidate) => candidate?.toLocaleLowerCase().includes(search));
 	})?.[0] as EffectObjectName;
 }
 
@@ -168,7 +172,7 @@ function applyDragon(fixture: IFixtureShape, raw: string): void {
 
 	fixture.misc ??= {};
 	fixture.misc.dragons ??= {};
-	fixture.misc.dragons[dragonName!] = Object.assign((fixture.misc.dragons[dragonName!]) ?? {}, {
+	fixture.misc.dragons[dragonName!] = Object.assign(fixture.misc.dragons[dragonName!] ?? {}, {
 		[type]: dragon[type],
 	});
 }

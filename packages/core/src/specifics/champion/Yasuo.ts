@@ -1,6 +1,7 @@
 import type IYasuo from '@lolcalc/data/files/champion/Yasuo.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables, windBrotherCalculateHooks } from './shared.ts';
 
 export default {

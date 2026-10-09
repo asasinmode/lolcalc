@@ -1,7 +1,8 @@
 import type { TMiscData } from '@lolcalc/data';
-import type { IChampionRole } from '@lolcalc/shared/types';
-import type { ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
+import type { IChampionRole } from '@lolcalc/shared/types';
+
+import type { ISpecificVariables } from './index.ts';
 import { defineVariables } from './index.ts';
 
 export const MISC_SPECIFICS = {
@@ -37,12 +38,15 @@ export const MISC_SPECIFICS = {
 
 export interface IHypotheticalMiscSpecifics {
 	roleQuests: {
-		[K in IChampionRole]?: IRoleQuestSpecific<K>
+		[K in IChampionRole]?: IRoleQuestSpecific<K>;
 	};
 }
 
-type RoleQuestDataValues<T extends IChampionRole>
-	= TMiscData['roleQuests'][T] extends { dataValues: infer D } ? D : never;
+type RoleQuestDataValues<T extends IChampionRole> = TMiscData['roleQuests'][T] extends {
+	dataValues: infer D;
+}
+	? D
+	: never;
 
 interface IRoleQuestSpecific<T extends IChampionRole> {
 	variables?: ISpecificVariables<keyof RoleQuestDataValues<T> & string, string>;

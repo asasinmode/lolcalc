@@ -1,12 +1,14 @@
-import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
-import type { IDragonName, IItem } from '@lolcalc/data/types.js';
 import assert from 'node:assert';
 import test from 'node:test';
+
+import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+import type { IDragonName, IItem } from '@lolcalc/data/types.js';
 import { AbilityType, EffectObjectName } from '@lolcalc/shared';
+
 import fixture from '../fixtures/16.17.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -35,9 +37,13 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.manamune, ITEMS_BY_NAME.ampTome, ITEMS_BY_NAME.ampTome],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('seraph', async () => {
@@ -46,9 +52,13 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.longSword],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'attackDamage',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'attackDamage',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('rabadon', async () => {
@@ -57,9 +67,13 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.longSword, ITEMS_BY_NAME.longSword],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('dark seal', async () => {
@@ -69,9 +83,13 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { glory: 10 } satisfies IInternalItemDataOf<'darkSeal'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('mejai', async () => {
@@ -81,9 +99,13 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { glory: 25 } satisfies IInternalItemDataOf<'mejai'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('bloodmail tyranny', async () => {
@@ -95,9 +117,13 @@ test('16.17 adaptive force', async (t) => {
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'attackDamage',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'attackDamage',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('bloodmail retribution', async () => {
@@ -110,9 +136,13 @@ test('16.17 adaptive force', async (t) => {
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
 		(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'attackDamage',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'attackDamage',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('sterak', async () => {
@@ -121,9 +151,13 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.ampTome],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'attackDamage',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'attackDamage',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('staff of flowing water', async () => {
@@ -133,9 +167,13 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { rapids: 1 } satisfies IInternalItemDataOf<'staffOfFlowingWater'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'attackDamage',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'attackDamage',
+			},
+			damageSource,
+		);
 	});
 
 	/* passive doesn't count but rabadon passive from it does */
@@ -146,9 +184,13 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { rapids: 1 } satisfies IInternalItemDataOf<'staffOfFlowingWater'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('roa', async () => {
@@ -158,9 +200,13 @@ test('16.17 adaptive force', async (t) => {
 			internalItemData: { eternity: 10 } satisfies IInternalItemDataOf<'roa'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('dawncore', async () => {
@@ -169,9 +215,13 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.dawncore, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.faerieCharm, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.pickaxe],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('riftmaker', async () => {
@@ -187,13 +237,21 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.bfSword, ITEMS_BY_NAME.pickaxe, ITEMS_BY_NAME.longSword, ITEMS_BY_NAME.giantsBelt],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'attackDamage',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 140,
-			abilityPower: 84,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'attackDamage',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 140,
+				abilityPower: 84,
+			},
+			damageSource,
+		);
 	});
 
 	/* passive doesn't count but rabadon passive from it does */
@@ -210,13 +268,21 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.bfSword],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 320,
-			abilityPower: 281,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 320,
+				abilityPower: 281,
+			},
+			damageSource,
+		);
 	});
 
 	/* passive doesn't count but rabadon passive from it does */
@@ -227,13 +293,21 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { passiveStacks: 50 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 227,
-			abilityPower: 257,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 227,
+				abilityPower: 257,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('darius', async () => {
@@ -243,31 +317,45 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { isChampionAtMaxBleed: 1 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 94,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 94,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('hecarim', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Hecarim', {
 			...sourceCommon,
 			items: [ITEMS_BY_NAME.darkSeal, ITEMS_BY_NAME.bootsOfSwiftness],
-			appliedEffects: [
-				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1]),
-			],
+			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1])],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 82,
-			abilityPower: 33,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 82,
+				abilityPower: 33,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('rammus', async () => {
@@ -277,13 +365,21 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { defensiveCurl: 1 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 87,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 87,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('jhin', async () => {
@@ -294,13 +390,21 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { isPassiveMSActive: 0 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 196,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 196,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('senna', async () => {
@@ -310,13 +414,21 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { passiveStacks: 40, passiveStealTargetMS: 0 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 80,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 80,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('pyke', async () => {
@@ -325,13 +437,21 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.giantsBelt, ITEMS_BY_NAME.ampTome],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 92,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 92,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('aphelios', async () => {
@@ -343,13 +463,21 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { lastRotatedVariantIndex: 0, gravitumSlowProgress: 0 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 118,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 118,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('rengar', async () => {
@@ -360,13 +488,21 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { passiveStacks: 5, isPassiveMSActive: 0 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 120,
-			abilityPower: 63,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 120,
+				abilityPower: 63,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('varus', async () => {
@@ -376,13 +512,21 @@ test('16.17 adaptive force', async (t) => {
 			internalData: { passiveVariantActive: CHAMPION_SPECIFICS.Varus.passive.options.generic },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 76,
-			abilityPower: 55,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 76,
+				abilityPower: 55,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('yasuo & yone', async () => {
@@ -391,13 +535,21 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.ampTome, ITEMS_BY_NAME.phantomDancer, ITEMS_BY_NAME.fiendhunterBolts, ITEMS_BY_NAME.navoriFlickerblade, ITEMS_BY_NAME.rfc],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 110,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 110,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('zeri', async () => {
@@ -408,13 +560,21 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.ampTome, ITEMS_BY_NAME.phantomDancer, ITEMS_BY_NAME.fiendhunterBolts, ITEMS_BY_NAME.navoriFlickerblade],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 120,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 120,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('zaahen', async () => {
@@ -425,13 +585,21 @@ test('16.17 adaptive force', async (t) => {
 			items: [ITEMS_BY_NAME.ampTome],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.stats.value.meta, {
-			adaptiveForceStat: 'abilityPower',
-		}, damageSource);
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 219,
-			abilityPower: 38,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.stats.value.meta,
+			{
+				adaptiveForceStat: 'abilityPower',
+			},
+			damageSource,
+		);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 219,
+				abilityPower: 38,
+			},
+			damageSource,
+		);
 	});
 });
 
@@ -452,11 +620,15 @@ test('16.17 Jhin', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jhin', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 211,
-			attackSpeed: 0.944,
-			critDamageMultiplier: 150,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 211,
+				attackSpeed: 0.944,
+				critDamageMultiplier: 150,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('winter caressed', async () => {
@@ -470,15 +642,17 @@ test('16.17 Jhin', async (t) => {
 				},
 			},
 			items: vanillaBuildItems,
-			appliedEffects: [
-				overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.frozenHeartWintersCaress), [1]),
-			],
+			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.frozenHeartWintersCaress), [1])],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 590,
-			attackSpeed: 0.944,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 590,
+				attackSpeed: 0.944,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('bloodmail', async () => {
@@ -487,15 +661,25 @@ test('16.17 Jhin', async (t) => {
 			items: [ITEMS_BY_NAME.overlordsBloodmail],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 276,
-		}, damageSource, 'full hp');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 276,
+			},
+			damageSource,
+			'full hp',
+		);
 
 		damageSource.currentHealth.value = 805;
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 299,
-		}, damageSource, 'partial hp');
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 299,
+			},
+			damageSource,
+			'partial hp',
+		);
 	});
 
 	await t.test('bloodmail+, endless hunger, sterak', async (t) => {
@@ -506,9 +690,13 @@ test('16.17 Jhin', async (t) => {
 			currentHealth: 1059,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 522,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 522,
+			},
+			damageSource,
+		);
 
 		await t.test('dragons', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Jhin', {
@@ -518,9 +706,13 @@ test('16.17 Jhin', async (t) => {
 				currentHealth: 1050,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 563,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 563,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('dragons, mid quest', async () => {
@@ -532,9 +724,13 @@ test('16.17 Jhin', async (t) => {
 				currentHealth: 1060,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 589,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 589,
+				},
+				damageSource,
+			);
 		});
 	});
 
@@ -544,10 +740,14 @@ test('16.17 Jhin', async (t) => {
 			items: vanillaBuildItems,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 591,
-			critDamageMultiplier: 173,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 591,
+				critDamageMultiplier: 173,
+			},
+			damageSource,
+		);
 
 		await t.test('dragons', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Jhin', {
@@ -556,9 +756,13 @@ test('16.17 Jhin', async (t) => {
 				dragonStacks: infernalStacks,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 629,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 629,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('dragons, mid quest', async () => {
@@ -569,9 +773,13 @@ test('16.17 Jhin', async (t) => {
 				roleQuest: 'mid',
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 657,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 657,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('dragons, mid quest, swiftmarch', async () => {
@@ -583,10 +791,14 @@ test('16.17 Jhin', async (t) => {
 				roleQuest: 'mid',
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 692,
-				moveSpeed: 531,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 692,
+					moveSpeed: 531,
+				},
+				damageSource,
+			);
 		});
 	});
 });
@@ -609,12 +821,16 @@ test('16.17 Senna', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Senna', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 91,
-			critChance: 20,
-			attackRange: 640,
-			critDamageMultiplier: 160,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 91,
+				critChance: 20,
+				attackRange: 640,
+				critDamageMultiplier: 160,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('ie, ldr, collector, hexoptics', async () => {
@@ -623,13 +839,17 @@ test('16.17 Senna', async (t) => {
 			items,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 306,
-			critChance: 100,
-			attackRange: 640,
-			lifeSteal: 7,
-			critDamageMultiplier: 184,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 306,
+				critChance: 100,
+				attackRange: 640,
+				lifeSteal: 7,
+				critDamageMultiplier: 184,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('4 infernals', async () => {
@@ -639,9 +859,13 @@ test('16.17 Senna', async (t) => {
 			dragonStacks: infernalStacks,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 342,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 342,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('4 infernals, mid quest', async () => {
@@ -652,9 +876,13 @@ test('16.17 Senna', async (t) => {
 			roleQuest: 'mid',
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 365,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 365,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('4 infernals, mid quest, bloodmail+', async () => {
@@ -666,14 +894,22 @@ test('16.17 Senna', async (t) => {
 			currentHealth: 502,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 456,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 456,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 318;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 465,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 465,
+			},
+			damageSource,
+		);
 	});
 });
 
@@ -695,23 +931,31 @@ test('16.17 Pyke', async (t) => {
 			items: [],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 77,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 77,
+			},
+			damageSource,
+		);
 		assert.strictEqual(damageSource.maxHealth.value, 670);
 	});
 
-	await t.test('winters\'s approach, unending despair, bloodmail+, endless hunger, riftmaker', async () => {
+	await t.test("winters's approach, unending despair, bloodmail+, endless hunger, riftmaker", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Pyke', {
 			...sourceCommon,
 			currentHealth: 115,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 347,
-			abilityPower: 70,
-			abilityHaste: 87,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 347,
+				abilityPower: 70,
+				abilityHaste: 87,
+			},
+			damageSource,
+		);
 		assert.strictEqual(damageSource.maxHealth.value, 670);
 	});
 
@@ -722,11 +966,15 @@ test('16.17 Pyke', async (t) => {
 			currentHealth: 200,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 384,
-			abilityPower: 78,
-			abilityHaste: 92,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 384,
+				abilityPower: 78,
+				abilityHaste: 92,
+			},
+			damageSource,
+		);
 		assert.strictEqual(damageSource.maxHealth.value, 670);
 	});
 
@@ -738,11 +986,15 @@ test('16.17 Pyke', async (t) => {
 			currentHealth: 175,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 409,
-			abilityPower: 84,
-			abilityHaste: 95,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 409,
+				abilityPower: 84,
+				abilityHaste: 95,
+			},
+			damageSource,
+		);
 		assert.strictEqual(damageSource.maxHealth.value, 670);
 	});
 });
@@ -763,11 +1015,15 @@ test('16.17 Aphelios', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Aphelios', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 129,
-			lethality: 27,
-			attackSpeed: 1.255,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 129,
+				lethality: 27,
+				attackSpeed: 1.255,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('bloodmail+, endless hunger | 4 infernals | mid quest', async () => {
@@ -779,10 +1035,14 @@ test('16.17 Aphelios', async (t) => {
 			currentHealth: 730,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 311,
-			abilityHaste: 27,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 311,
+				abilityHaste: 27,
+			},
+			damageSource,
+		);
 	});
 });
 
@@ -802,10 +1062,14 @@ test('16.17 Rengar', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Rengar', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 233,
-			abilityHaste: 26,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 233,
+				abilityHaste: 26,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('5 stacks', async () => {
@@ -814,16 +1078,24 @@ test('16.17 Rengar', async (t) => {
 			internalData: { passiveStacks: 5, isPassiveMSActive: 0 },
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 274,
-			abilityHaste: 32,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 274,
+				abilityHaste: 32,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 485;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 317,
-			abilityHaste: 37,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 317,
+				abilityHaste: 37,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('5 stacks | 4 infernals', async () => {
@@ -833,16 +1105,24 @@ test('16.17 Rengar', async (t) => {
 			dragonStacks: infernalStacks,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 317,
-			abilityHaste: 37,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 317,
+				abilityHaste: 37,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 485;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 362,
-			abilityHaste: 43,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 362,
+				abilityHaste: 43,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('5 stacks | 4 infernals | mid quest', async () => {
@@ -853,16 +1133,24 @@ test('16.17 Rengar', async (t) => {
 			roleQuest: 'mid',
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 342,
-			abilityHaste: 41,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 342,
+				abilityHaste: 41,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 490;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 392,
-			abilityHaste: 47,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 392,
+				abilityHaste: 47,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('" | " | " | more ad', async () => {
@@ -875,16 +1163,24 @@ test('16.17 Rengar', async (t) => {
 			items: sourceCommon.items!.concat([ITEMS_BY_NAME.infinityEdge, ITEMS_BY_NAME.bloodthirster, ITEMS_BY_NAME.ravenousHydra]),
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 793,
-			abilityHaste: 108,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 793,
+				abilityHaste: 108,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 1020;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 909,
-			abilityHaste: 123,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 909,
+				abilityHaste: 123,
+			},
+			damageSource,
+		);
 	});
 });
 
@@ -909,17 +1205,25 @@ test('16.17 Zeri', async (t) => {
 			roleQuest: 'mid',
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 283,
-			abilityHaste: 24,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 283,
+				abilityHaste: 24,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 780;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 313,
-			abilityHaste: 27,
-			attackSpeed: 1.5,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 313,
+				abilityHaste: 27,
+				attackSpeed: 1.5,
+			},
+			damageSource,
+		);
 	});
 });
 
@@ -940,16 +1244,24 @@ test('16.17 Zaahen', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Zaahen', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 548,
-			abilityHaste: 59,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 548,
+				abilityHaste: 59,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 1085;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 587,
-			abilityHaste: 64,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 587,
+				abilityHaste: 64,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('4 infernals', async () => {
@@ -958,16 +1270,24 @@ test('16.17 Zaahen', async (t) => {
 			dragonStacks: infernalStacks,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 587,
-			abilityHaste: 64,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 587,
+				abilityHaste: 64,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 967;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 627,
-			abilityHaste: 69,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 627,
+				abilityHaste: 69,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('4 infernals | mid quest', async () => {
@@ -977,15 +1297,23 @@ test('16.17 Zaahen', async (t) => {
 			roleQuest: 'mid',
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 615,
-			abilityHaste: 68,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 615,
+				abilityHaste: 68,
+			},
+			damageSource,
+		);
 
 		damageSource.currentHealth.value = 880;
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 657,
-			abilityHaste: 73,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 657,
+				abilityHaste: 73,
+			},
+			damageSource,
+		);
 	});
 });

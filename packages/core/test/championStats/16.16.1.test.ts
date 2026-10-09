@@ -1,10 +1,12 @@
-import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import assert from 'node:assert';
 import test from 'node:test';
+
+import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
 import { AbilityType, EffectObjectName } from '@lolcalc/shared';
+
 import fixture from '../fixtures/16.16.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -31,10 +33,7 @@ test('16.16 Rammus W when shredded', async () => {
 
 	const damageSource = await setupDamageSource(fixture, 'Rammus', {
 		...sourceCommon,
-		appliedEffects: [
-			overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.blackCleaverCarve), [1]),
-			overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.bloodletterVileDecay), [1]),
-		],
+		appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.blackCleaverCarve), [1]), overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.bloodletterVileDecay), [1])],
 	});
 
 	const rellPEffect = damageSource.addEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.rellPBreakMold), undefined, undefined, rell, rell.champion.value!);
@@ -46,19 +45,27 @@ test('16.16 Rammus W when shredded', async () => {
 	bloodletterEffect.data.value[0] = 4;
 	rellPEffect.data.value[0] = 5;
 
-	typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-		attackDamage: 71,
-		armor: 16,
-		magicResist: 13,
-	}, damageSource);
+	typedPartialDeepStrictEqual(
+		damageSource.computed.formattedStatTotals.value,
+		{
+			attackDamage: 71,
+			armor: 16,
+			magicResist: 13,
+		},
+		damageSource,
+	);
 
 	damageSource.internalData.value.defensiveCurl = 1;
 
-	typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-		attackDamage: 79,
-		armor: 46,
-		magicResist: 35,
-	}, damageSource);
+	typedPartialDeepStrictEqual(
+		damageSource.computed.formattedStatTotals.value,
+		{
+			attackDamage: 79,
+			armor: 46,
+			magicResist: 35,
+		},
+		damageSource,
+	);
 });
 
 test('16.16 Ryze passive interactions', async (t) => {
@@ -80,9 +87,13 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.blackfireTorch],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 98,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					abilityPower: 98,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxAbilityResource.value, 988);
 		});
 
@@ -92,9 +103,13 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.rabadon],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 296,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					abilityPower: 296,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxAbilityResource.value, 1166);
 		});
 
@@ -104,9 +119,13 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.seraphsEmbrace],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 208,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					abilityPower: 208,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxAbilityResource.value, 2295);
 		});
 
@@ -116,9 +135,13 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.blackfireTorch, ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.rabadon],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 451,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					abilityPower: 451,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxAbilityResource.value, 2757);
 		});
 
@@ -129,9 +152,13 @@ test('16.16 Ryze passive interactions', async (t) => {
 				internalItemData: { bBlaze: 1 } satisfies IInternalItemDataOf<'blackfireTorch'>,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				abilityPower: 466,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					abilityPower: 466,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxAbilityResource.value, 2785);
 		});
 
@@ -141,10 +168,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.rabadon],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 182,
-				abilityPower: 395,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 182,
+					abilityPower: 395,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 1881);
 			assert.equal(damageSource.maxAbilityResource.value, 4604);
 		});
@@ -156,10 +187,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				currentHealth: 848,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 275,
-				abilityPower: 139,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 275,
+					abilityPower: 139,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2304);
 			assert.equal(damageSource.maxAbilityResource.value, 3759);
 		});
@@ -170,10 +205,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.overlordsBloodmail],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 257,
-				abilityPower: 395,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 257,
+					abilityPower: 395,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2431);
 			assert.equal(damageSource.maxAbilityResource.value, 4604);
 		});
@@ -184,10 +223,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.riftmaker],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 174,
-				abilityPower: 267,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 174,
+					abilityPower: 267,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2167);
 			assert.equal(damageSource.maxAbilityResource.value, 4179);
 		});
@@ -199,10 +242,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				currentHealth: 1232,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 306,
-				abilityPower: 559,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 306,
+					abilityPower: 559,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2862);
 			assert.equal(damageSource.maxAbilityResource.value, 5143);
 		});
@@ -220,10 +267,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 188,
-				abilityPower: 179,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 188,
+					abilityPower: 179,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 1774);
 			assert.equal(damageSource.maxAbilityResource.value, 3890);
 		});
@@ -234,10 +285,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.rabadon],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 207,
-				abilityPower: 436,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 207,
+					abilityPower: 436,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 1901);
 			assert.equal(damageSource.maxAbilityResource.value, 4737);
 		});
@@ -248,10 +303,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.riftmaker],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 197,
-				abilityPower: 301,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 197,
+					abilityPower: 301,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2185);
 			assert.equal(damageSource.maxAbilityResource.value, 4294);
 		});
@@ -263,10 +322,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				currentHealth: 712,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 309,
-				abilityPower: 157,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 309,
+					abilityPower: 157,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2313);
 			assert.equal(damageSource.maxAbilityResource.value, 3818);
 		});
@@ -278,10 +341,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				currentHealth: 870,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 351,
-				abilityPower: 616,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 351,
+					abilityPower: 616,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2891);
 			assert.equal(damageSource.maxAbilityResource.value, 5334);
 		});
@@ -299,10 +366,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 199,
-				abilityPower: 193,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 199,
+					abilityPower: 193,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 1781);
 			assert.equal(damageSource.maxAbilityResource.value, 3936);
 		});
@@ -313,10 +384,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.rabadon],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 221,
-				abilityPower: 463,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 221,
+					abilityPower: 463,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 1915);
 			assert.equal(damageSource.maxAbilityResource.value, 4827);
 		});
@@ -327,10 +402,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 235,
-				abilityPower: 637,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 235,
+					abilityPower: 637,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2351);
 			assert.equal(damageSource.maxAbilityResource.value, 5401);
 		});
@@ -342,10 +421,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				currentHealth: 717,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 330,
-				abilityPower: 169,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 330,
+					abilityPower: 169,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2319);
 			assert.equal(damageSource.maxAbilityResource.value, 3859);
 		});
@@ -357,10 +440,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				currentHealth: 1161,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 373,
-				abilityPower: 656,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 373,
+					abilityPower: 656,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2910);
 			assert.equal(damageSource.maxAbilityResource.value, 5463);
 		});
@@ -371,10 +458,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.rabadon, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.swiftmarch],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 237,
-				abilityPower: 671,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 237,
+					abilityPower: 671,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2368);
 			assert.equal(damageSource.maxAbilityResource.value, 5515);
 		});
@@ -385,10 +476,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 				items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.riftmaker, ITEMS_BY_NAME.swiftmarch],
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 314,
-				abilityPower: 366,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 314,
+					abilityPower: 366,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2767);
 			assert.equal(damageSource.maxAbilityResource.value, 4509);
 		});
@@ -402,10 +497,14 @@ test('16.16 Ryze passive interactions', async (t) => {
 			(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).retribution = damageSource.stats.value.variables.bloodmailRetribution;
 			(damageSource.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>).tyranny = damageSource.stats.value.variables.bloodmailTyranny;
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				attackDamage: 371,
-				abilityPower: 316,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					attackDamage: 371,
+					abilityPower: 316,
+				},
+				damageSource,
+			);
 			assert.equal(damageSource.maxHealth.value, 2742);
 			assert.equal(damageSource.maxAbilityResource.value, 4342);
 		});

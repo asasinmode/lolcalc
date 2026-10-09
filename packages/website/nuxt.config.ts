@@ -38,7 +38,7 @@ export default defineNuxtConfig({
 	vue: {
 		vapor: true,
 		compilerOptions: {
-			isCustomElement: tag => tag.toLowerCase() === 'unknown',
+			isCustomElement: (tag) => tag.toLowerCase() === 'unknown',
 		},
 	},
 	typescript: {

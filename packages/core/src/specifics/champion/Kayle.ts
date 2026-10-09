@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IKayle from '@lolcalc/data/files/champion/Kayle.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Kayle'>): number {
@@ -56,9 +57,14 @@ export default {
 		},
 		onChampionPassive: {
 			handler(self, { championPassiveStats }, { calculatedVariables }) {
-				const attackSpeedPerStack = championAbilityVariableValue('EnrageTotalASPerStack', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+				const attackSpeedPerStack = championAbilityVariableValue('EnrageTotalASPerStack', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: { level: { value: self.level.value } } as DamageSource,
+				});
 				if (typeof attackSpeedPerStack.value === 'number') {
-					championPassiveStats.bonusAttackSpeedPercent = self.internalData.value.passiveStacks * attackSpeedPerStack.value / 100;
+					championPassiveStats.bonusAttackSpeedPercent = (self.internalData.value.passiveStacks * attackSpeedPerStack.value) / 100;
 				} else {
 					console.warn('[CHAMPION_SPECIFICS kayle] failed to calculate passive attack speed');
 				}

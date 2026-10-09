@@ -1,40 +1,42 @@
-import type { ISpecificVariables } from '@lolcalc/core/specifics';
-import type { IChampionAbilitySpecific, IChampionAbilityVariantSpecific, IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
-import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
-import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
-import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc.ts';
-import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
-import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type { IEffectData, ITEMS } from '@lolcalc/data';
-import type { IItemShopStatFilter } from '@lolcalc/data/meta';
-import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
-import type { EffectObjectName, IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
-import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+
+import type { ISpecificVariables } from '@lolcalc/core/specifics';
+import type { IChampionAbilitySpecific, IChampionAbilityVariantSpecific, IChampionSpecific, IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion.ts';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion.ts';
+import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon.ts';
 import { CUSTOM_EFFECTS, EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect.ts';
+import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item.ts';
+import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc.ts';
 import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc.ts';
+import type { IHypotheticalRuneSpecifics } from '@lolcalc/core/specifics/rune';
 import { RUNE_SPECIFICS } from '@lolcalc/core/specifics/rune.ts';
+import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
+import type { IEffectData, ITEMS } from '@lolcalc/data';
+import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import { ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS, ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS, ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS, ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
+import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
+import type { EffectObjectName, IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import { AbilityType, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
+import type { IChampionRole, ITexture } from '@lolcalc/shared/types';
 import { KNOWN_GAME_DESCRIPTION_TAGS } from '@lolcalc/website';
 import { xxh3 } from '@node-rs/xxhash';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
+
 import { stringifyObject } from './index.ts';
 
 let latestVersion = process.argv[2];
 
 if (!latestVersion) {
-	const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
-	([latestVersion] = versions as [string]);
+	const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then((res) => res.json());
+	[latestVersion] = versions as [string];
 	console.log('latest version', latestVersion);
 } else {
 	console.log('using version override', latestVersion);
@@ -58,11 +60,31 @@ interface IDebugCategory {
 }
 
 const debug = {
-	item: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
-	rune: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
-	champion: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
-	effect: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
-	misc: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+	item: {
+		variables: new Map(),
+		stringtableVariables: new Map(),
+		tags: [[], new Set()],
+	} as IDebugCategory,
+	rune: {
+		variables: new Map(),
+		stringtableVariables: new Map(),
+		tags: [[], new Set()],
+	} as IDebugCategory,
+	champion: {
+		variables: new Map(),
+		stringtableVariables: new Map(),
+		tags: [[], new Set()],
+	} as IDebugCategory,
+	effect: {
+		variables: new Map(),
+		stringtableVariables: new Map(),
+		tags: [[], new Set()],
+	} as IDebugCategory,
+	misc: {
+		variables: new Map(),
+		stringtableVariables: new Map(),
+		tags: [[], new Set()],
+	} as IDebugCategory,
 };
 
 const textFilePath = path.join(import.meta.dirname, '../packages/data/files/text.json');
@@ -196,120 +218,128 @@ if (!championData || championData?.version !== latestVersion) {
 
 	championData = {
 		version,
-		data: Object.assign({
-			[TargetDummy.id]: {
-				id: TargetDummy.id,
-				key: TargetDummy.key,
-				name: TargetDummy.name,
-				image: 'assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png',
-				roles: { top: true, jungle: true, mid: true, bot: true, support: true },
-			} satisfies IListedChampion,
-		}, Object.fromEntries(
-			await Promise.all((Object.entries(data) as [IChampionId, (IChampion & { image: string })][])
-				.filter(([championId]) => !championId.startsWith('Jade_'))
-				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
-				.map(async ([championId, championData]) => {
-					const { id, key, name, image, partype, stats } = championData;
+		data: Object.assign(
+			{
+				[TargetDummy.id]: {
+					id: TargetDummy.id,
+					key: TargetDummy.key,
+					name: TargetDummy.name,
+					image: 'assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png',
+					roles: { top: true, jungle: true, mid: true, bot: true, support: true },
+				} satisfies IListedChampion,
+			},
+			Object.fromEntries(
+				await Promise.all(
+					(Object.entries(data) as [IChampionId, IChampion & { image: string }][])
+						.filter(([championId]) => !championId.startsWith('Jade_'))
+						.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
+						.map(async ([championId, championData]) => {
+							const { id, key, name, image, partype, stats } = championData;
 
-					const charactersKey = `Characters/${id === 'Fiddlesticks' ? 'FiddleSticks' : id}`;
+							const charactersKey = `Characters/${id === 'Fiddlesticks' ? 'FiddleSticks' : id}`;
 
-					const [additionalData, ...additionalCharactersData] = await Promise.all([
-						fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`),
-						...(championsBinJson[charactersKey]?.additionalCharacters?.map((characterKey: string) => {
-							const characterName = characterKey.slice(characterKey.lastIndexOf('/') + 1).toLowerCase();
-							return fetchCached(
-								`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${characterName}/${characterName}.bin.json`,
-								`game/data/characters/${characterName}/${characterName}.bin.json`,
-							);
-						}) ?? []),
-					]);
+							const [additionalData, ...additionalCharactersData] = await Promise.all([
+								fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`),
+								...(championsBinJson[charactersKey]?.additionalCharacters?.map((characterKey: string) => {
+									const characterName = characterKey.slice(characterKey.lastIndexOf('/') + 1).toLowerCase();
+									return fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${characterName}/${characterName}.bin.json`, `game/data/characters/${characterName}/${characterName}.bin.json`);
+								}) ?? []),
+							]);
 
-					for (const data of additionalCharactersData) {
-						Object.assign(additionalData, data);
-					}
+							for (const data of additionalCharactersData) {
+								Object.assign(additionalData, data);
+							}
 
-					const characterRootKey = `${charactersKey}/CharacterRecords/Root`;
-					const rootData = additionalData[characterRootKey];
-					if (!rootData) {
-						console.log(Object.keys(additionalData));
-						throw new Error(`no root character data for ${name}`);
-					}
+							const characterRootKey = `${charactersKey}/CharacterRecords/Root`;
+							const rootData = additionalData[characterRootKey];
+							if (!rootData) {
+								console.log(Object.keys(additionalData));
+								throw new Error(`no root character data for ${name}`);
+							}
 
-					const { attackSpeedRatioModifiable, damagePerLevelModifiable } = rootData;
+							const { attackSpeedRatioModifiable, damagePerLevelModifiable } = rootData;
 
-					stats.attackspeedratio = formatNumber(attackSpeedRatioModifiable.baseValue);
-					/* between patches `16.4` and `16.9` attackdamage in `champion.json` from ddragon was set to 0 on some champions, so take the one from additionalData until it hopefully comes back? */
-					if (damagePerLevelModifiable) {
-						stats.attackdamageperlevel = formatNumber(damagePerLevelModifiable.baseValue);
-					}
+							stats.attackspeedratio = formatNumber(attackSpeedRatioModifiable.baseValue);
+							/* between patches `16.4` and `16.9` attackdamage in `champion.json` from ddragon was set to 0 on some champions, so take the one from additionalData until it hopefully comes back? */
+							if (damagePerLevelModifiable) {
+								stats.attackdamageperlevel = formatNumber(damagePerLevelModifiable.baseValue);
+							}
 
-					const dedicatedChampionFilePath = path.join(import.meta.dirname, `../packages/data/files/champion/${id}.json`);
-					const championFileDataStringtable: IChampion['stringtable'] = {};
+							const dedicatedChampionFilePath = path.join(import.meta.dirname, `../packages/data/files/champion/${id}.json`);
+							const championFileDataStringtable: IChampion['stringtable'] = {};
 
-					const dedicatedChampionFileData: IChampion = {
-						id,
-						key,
-						name,
-						partype,
-						stats,
-						abilities: Object.fromEntries((['q', 'w', 'e', 'r', 'passive'] satisfies IChampionAbilityKey[]).map((abilityKey, index) => {
-							const { maxLevel, variants } = championAbilityData(
-								[abilityKey, index],
-								championId as IChampionId,
-								additionalData,
-								characterRootKey,
-							);
+							const dedicatedChampionFileData: IChampion = {
+								id,
+								key,
+								name,
+								partype,
+								stats,
+								abilities: Object.fromEntries(
+									(['q', 'w', 'e', 'r', 'passive'] satisfies IChampionAbilityKey[]).map((abilityKey, index) => {
+										const { maxLevel, variants } = championAbilityData([abilityKey, index], championId as IChampionId, additionalData, characterRootKey);
 
-							return [abilityKey, {
-								maxLevel,
-								variants,
-							} satisfies IChampionAbility];
-						})) as IChampion['abilities'],
-						stringtable: championFileDataStringtable,
-					};
+										return [
+											abilityKey,
+											{
+												maxLevel,
+												variants,
+											} satisfies IChampionAbility,
+										];
+									}),
+								) as IChampion['abilities'],
+								stringtable: championFileDataStringtable,
+							};
 
-					if (dedicatedChampionFileData.abilities.q.variants.length > 1 && dedicatedChampionFileData.abilities.w.variants.length > 1 && dedicatedChampionFileData.abilities.e.variants.length > 1) {
-						potentialShapeshifters.add(championId);
-					}
+							if (dedicatedChampionFileData.abilities.q.variants.length > 1 && dedicatedChampionFileData.abilities.w.variants.length > 1 && dedicatedChampionFileData.abilities.e.variants.length > 1) {
+								potentialShapeshifters.add(championId);
+							}
 
-					if (championId === 'Aphelios') {
-						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
-					} else {
-						const savedVariantDataKeys = new Set(Object.values(dedicatedChampionFileData.abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey)));
-						const mAbilitiesObjectNames: { mAbility: string; mRootSpell: string }[] = additionalData[characterRootKey].mAbilities?.map((mAbility: string) => {
-							const abilityData = additionalData?.[mAbility];
-							return { mAbility, mRootSpell: abilityData?.mRootSpell };
-						});
-						const potentiallyMissedAbilities = mAbilitiesObjectNames?.filter(({ mRootSpell }) => !savedVariantDataKeys.has(mRootSpell));
-						if (potentiallyMissedAbilities?.length) {
-							console.warn(`potentially missed ${championId} champion ability variant`, potentiallyMissedAbilities);
-						}
-					}
+							if (championId === 'Aphelios') {
+								Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
+							} else {
+								const savedVariantDataKeys = new Set(Object.values(dedicatedChampionFileData.abilities).flatMap((ability) => ability.variants.map((variant) => variant.dataKey)));
+								const mAbilitiesObjectNames: { mAbility: string; mRootSpell: string }[] = additionalData[characterRootKey].mAbilities?.map((mAbility: string) => {
+									const abilityData = additionalData?.[mAbility];
+									return { mAbility, mRootSpell: abilityData?.mRootSpell };
+								});
+								const potentiallyMissedAbilities = mAbilitiesObjectNames?.filter(({ mRootSpell }) => !savedVariantDataKeys.has(mRootSpell));
+								if (potentiallyMissedAbilities?.length) {
+									console.warn(`potentially missed ${championId} champion ability variant`, potentiallyMissedAbilities);
+								}
+							}
 
-					setChampionAbilityVariantsText(dedicatedChampionFileData);
+							setChampionAbilityVariantsText(dedicatedChampionFileData);
 
-					await fs.writeFile(dedicatedChampionFilePath, stringifyObject(dedicatedChampionFileData));
+							await fs.writeFile(dedicatedChampionFilePath, stringifyObject(dedicatedChampionFileData));
 
-					return [championId, {
-						id,
-						key,
-						name,
-						image: (image as unknown as { full: string }).full,
-						roles: {},
-					}];
-				}),
+							return [
+								championId,
+								{
+									id,
+									key,
+									name,
+									image: (image as unknown as { full: string }).full,
+									roles: {},
+								},
+							];
+						}),
+				),
 			),
-		)) as NonNullable<typeof championData>['data'],
+		) as NonNullable<typeof championData>['data'],
 	};
 
-	const roleScript = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`, 'plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js', 'text');
+	const roleScript = await fetchCached(
+		`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`,
+		'plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js',
+		'text',
+	);
 	const roleScriptData: Record<'TOP' | 'JUNGLE' | 'MIDDLE' | 'BOTTOM' | 'SUPPORT', Record<string, number>> = JSON.parse(roleScript.match(/JSON\.parse\('([^']+)'/)?.[1] || '{}');
 
 	const allChampions = Object.values(championData!.data);
 
 	for (const [role, playrates] of Object.entries(roleScriptData)) {
 		for (const championKey of Object.keys(playrates)) {
-			const champion = allChampions.find(champion => champion.key === championKey);
+			const champion = allChampions.find((champion) => champion.key === championKey);
 			(champion!.roles as Record<string, boolean>)[role === 'MIDDLE' ? 'mid' : role === 'BOTTOM' ? 'bot' : role.toLowerCase()] = true;
 		}
 	}
@@ -335,25 +365,25 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`, 'ddragon/item.json');
 
 	const UNINTERESTING_ITEMS = [
-		'3340',	// stealth ward
-		'3363',	// farsight alteration
-		'3364',	// oracle lens
-		'2003',	// health potion
-		'2055',	// control ward
-		'2031',	// refillable potion
-		'2141',	// cappa juice
-		'1101',	// scorchclaw pup
-		'1102',	// gustwalker hatchling
-		'1103',	// mosstomper seedling
-		'1105',	// mosstomper seedling
-		'1106',	// gustwalker hatchling
-		'1107',	// scorchclaw pup
-		'2138',	// elixir of iron
-		'2139',	// elixir of sorcery
-		'2140',	// elixir of wrath
-		'6032',	// stat bonus
+		'3340', // stealth ward
+		'3363', // farsight alteration
+		'3364', // oracle lens
+		'2003', // health potion
+		'2055', // control ward
+		'2031', // refillable potion
+		'2141', // cappa juice
+		'1101', // scorchclaw pup
+		'1102', // gustwalker hatchling
+		'1103', // mosstomper seedling
+		'1105', // mosstomper seedling
+		'1106', // gustwalker hatchling
+		'1107', // scorchclaw pup
+		'2138', // elixir of iron
+		'2139', // elixir of sorcery
+		'2140', // elixir of wrath
+		'6032', // stat bonus
 		'2421', // shattered armguard
-		'3039',	// atma's reckoning
+		'3039', // atma's reckoning
 		'3097', // stormrazor, there are 2 for some reason
 		'2051', // guardian's horn
 		'3112', // guardian's orb
@@ -361,22 +391,19 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		'3184', // guardian's hammer
 	];
 
-	const filteredItems = Object.entries(data)
-		.filter(([itemId, itemData]) => {
-			const { maps: { 11: sr }, requiredChampion, gold } = itemData as {
-				maps: Record<number, boolean>;
-				requiredChampion?: boolean;
-				gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
-			};
+	const filteredItems = Object.entries(data).filter(([itemId, itemData]) => {
+		const {
+			maps: { 11: sr },
+			requiredChampion,
+			gold,
+		} = itemData as {
+			maps: Record<number, boolean>;
+			requiredChampion?: boolean;
+			gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
+		};
 
-			return !UNINTERESTING_ITEMS.includes(itemId)
-				&& sr
-				&& itemId.length <= 4
-				&& gold.inStore !== false
-				&& gold.hideFromAll !== false
-				&& !requiredChampion
-				&& (gold.purchasable || (KEPT_UNPURCHASABLE_ITEMS as string[]).includes(itemId));
-		});
+		return !UNINTERESTING_ITEMS.includes(itemId) && sr && itemId.length <= 4 && gold.inStore !== false && gold.hideFromAll !== false && !requiredChampion && (gold.purchasable || (KEPT_UNPURCHASABLE_ITEMS as string[]).includes(itemId));
+	});
 
 	const filteredItemIds = filteredItems.map(([itemId]) => itemId);
 
@@ -387,41 +414,45 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				const { name, stats, gold, image, into: rawInto, from: rawFrom, tags } = itemData as any;
 
 				const searchTerms = Array.from(
-					new Set(`${name};${(stringtable[`generatedtip_item_${itemId}_colloquialism`] || ';')
-					};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')
-					};${Object.keys(stats).map(stat => ITEM_STAT_META[stat as keyof typeof ITEM_STAT_META]!.name).join(';')
-					}`
-						.toLocaleLowerCase()
-						.replaceAll(/[^a-z;]/g, '')
-						.split(';')
-						.filter(Boolean)),
+					new Set(
+						`${name};${stringtable[`generatedtip_item_${itemId}_colloquialism`] || ';'};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')};${Object.keys(stats)
+							.map((stat) => ITEM_STAT_META[stat as keyof typeof ITEM_STAT_META]!.name)
+							.join(';')}`
+							.toLocaleLowerCase()
+							.replaceAll(/[^a-z;]/g, '')
+							.split(';')
+							.filter(Boolean),
+					),
 				);
 
 				const into = rawInto?.filter((id: string) => filteredItemIds.includes(id));
 				const from = rawFrom?.filter((id: string) => filteredItemIds.includes(id));
 
-				return [itemId, {
-					id: itemId,
-					name,
-					searchString: searchTerms.join(';'),
-					epicness: undefined,
-					gold: {
-						total: gold.total,
-						sell: gold.sell,
+				return [
+					itemId,
+					{
+						id: itemId,
+						name,
+						searchString: searchTerms.join(';'),
+						epicness: undefined,
+						gold: {
+							total: gold.total,
+							sell: gold.sell,
+						},
+						image: image.full,
+						into: into?.length ? into : undefined,
+						from: from?.length ? from : undefined,
+						...(tags.includes('Boots') ? { isBoots: true } : undefined),
+						...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
+						itemGroups: undefined,
+						categories: undefined,
+						stats,
+						dataValues: undefined,
+						itemCalculations: undefined,
+						stringCalculations: undefined,
+						effectAmount: undefined,
 					},
-					image: image.full,
-					into: into?.length ? into : undefined,
-					from: from?.length ? from : undefined,
-					...(tags.includes('Boots') ? { isBoots: true } : undefined),
-					...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
-					itemGroups: undefined,
-					categories: undefined,
-					stats,
-					dataValues: undefined,
-					itemCalculations: undefined,
-					stringCalculations: undefined,
-					effectAmount: undefined,
-				}];
+				];
 			}),
 		) as unknown as NonNullable<typeof itemData>['data'],
 	};
@@ -452,11 +483,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			item.epicness = itemMoreData.epicness;
 		}
 
-		item.dataValues = itemMoreData.mDataValues?.length
-			? Object.fromEntries(itemMoreData.mDataValues.map(({ mName, mValue }: Record<string, number>) =>
-					[mName, mValue !== undefined ? formatNumber(mValue) : undefined],
-				))
-			: undefined;
+		item.dataValues = itemMoreData.mDataValues?.length ? Object.fromEntries(itemMoreData.mDataValues.map(({ mName, mValue }: Record<string, number>) => [mName, mValue !== undefined ? formatNumber(mValue) : undefined])) : undefined;
 		item.itemCalculations = cleanupObject(itemMoreData.mItemCalculations);
 		item.stringCalculations = cleanupObject(itemMoreData.StringCalculations);
 		item.gold.sellBackModifier = itemMoreData.sellBackModifier && formatNumber(itemMoreData.sellBackModifier);
@@ -479,7 +506,11 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			}
 			const groupObject = moreItemData[group];
 			if (!groupObject) {
-				console.error('[itemData item groups] no group object', { id: item.id, name: item.name, group });
+				console.error('[itemData item groups] no group object', {
+					id: item.id,
+					name: item.name,
+					group,
+				});
 			}
 			if ('mMaxGroupOwnable' in groupObject) {
 				if (groupObject.mMaxGroupOwnable !== 1) {
@@ -497,11 +528,11 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			item.itemGroups = itemGroups;
 			if (itemGroups.includes('Items/ItemGroups/Boots')) {
 				item.isBoots = true;
-			};
+			}
 		}
 
 		for (const value of itemMoreData.mDataValues || []) {
-			if (Object.keys(value).some(key => !['mName', 'mValue', '__type'].includes(key))) {
+			if (Object.keys(value).some((key) => !['mName', 'mValue', '__type'].includes(key))) {
 				console.log('unknown key in', itemId, itemMoreData.mDataValues);
 			}
 		}
@@ -539,10 +570,13 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		};
 
 		if (SPECIAL_CATEGORY_ITEMS[itemId]) {
-			item.categories = SPECIAL_CATEGORY_ITEMS[itemId].reduce((acc, curr) => ({
-				...acc,
-				[curr]: true,
-			}), {});
+			item.categories = SPECIAL_CATEGORY_ITEMS[itemId].reduce(
+				(acc, curr) => ({
+					...acc,
+					[curr]: true,
+				}),
+				{},
+			);
 			continue;
 		}
 
@@ -574,11 +608,13 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			32: 'support',
 		} as const;
 
-		item.categories = (itemMoreData.mItemAttributes as number[])
-			.reduce((acc, categoryNumber) => ({
+		item.categories = (itemMoreData.mItemAttributes as number[]).reduce(
+			(acc, categoryNumber) => ({
 				...acc,
 				[CATEGORY_NUMBER_TO_NAME[categoryNumber]!]: true,
-			}), {} as Partial<Record<IItemCategory, boolean>>);
+			}),
+			{} as Partial<Record<IItemCategory, boolean>>,
+		);
 	}
 
 	/* manually set some from/into observed in game */
@@ -633,86 +669,97 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 	runeData = {
 		version: latestVersion,
 		data: {
-			paths: Object.fromEntries(['Precision', 'Domination', 'Sorcery', 'Resolve', 'Inspiration'].map((path) => {
-				const dataKey = `Perks/Styles/${path}`;
-				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[dataKey];
+			paths: Object.fromEntries(
+				['Precision', 'Domination', 'Sorcery', 'Resolve', 'Inspiration'].map((path) => {
+					const dataKey = `Perks/Styles/${path}`;
+					const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[dataKey];
 
-				const cssSliceSelector = `.primary-perk-selector.keystone.${mPerkStyleName.toLowerCase()}`;
-				/** these selectors are expected to contain `{--middle-color:#dc4747}` hence the slice values */
-				const iconColorSliceStartIndex = pathStyleCssSlice.indexOf(cssSliceSelector) + cssSliceSelector.length + 16;
-				const iconColor = pathStyleCssSlice.slice(iconColorSliceStartIndex, iconColorSliceStartIndex + 7);
+					const cssSliceSelector = `.primary-perk-selector.keystone.${mPerkStyleName.toLowerCase()}`;
+					/** these selectors are expected to contain `{--middle-color:#dc4747}` hence the slice values */
+					const iconColorSliceStartIndex = pathStyleCssSlice.indexOf(cssSliceSelector) + cssSliceSelector.length + 16;
+					const iconColor = pathStyleCssSlice.slice(iconColorSliceStartIndex, iconColorSliceStartIndex + 7);
 
-				(textData.data.runes.paths as any)[path] = {
-					name: getStringtableValue(mDisplayNameLocalizationKey, 'rune paths'),
-					tooltip: getStringtableValue(mTooltipNameLocalizationKey, 'rune paths'),
-				};
-
-				return [path, {
-					id: mPerkStyleId,
-					name: mPerkStyleName,
-					icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
-					dataKey,
-					iconColor,
-					slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => Object.fromEntries(
-						mPerks.map(perk => createRuneSlotData(perk, data[perk])),
-					)),
-				}];
-			})),
-			shards: Object.fromEntries(['OffensiveStats', 'FlexStats', 'DefensiveStats'].map((slotKey) => {
-				const { mPerks, mSlotLabelKey } = data[`Perks/StatMods/Slots/${slotKey}`];
-				slotKey = slotKey.slice(0, -5).toLowerCase();
-
-				(textData.data.runes.shards.slotNames as any)[slotKey] = {
-					name: getStringtableValue(mSlotLabelKey, `rune shards ${slotKey} name`),
-				};
-
-				return [slotKey, Object.fromEntries(mPerks.map((perkKey: string) => {
-					const { mPerkId, mPerkName, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mTooltipNameLocalizationKey, mIconTextureName, mScript } = data[perkKey];
-
-					const slotValue = {
-						id: mPerkId,
-						icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
-						dataKey: perkKey,
-						effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount, true),
-					} as any;
-
-					const perkName: string = mPerkName.toLowerCase();
-
-					(textData.data.runes.shards.slotValues as any)[perkName] = {
-						name: getStringtableValue(mDisplayNameLocalizationKey, `rune shards ${slotKey} ${perkKey} name`),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `rune shards ${slotKey} ${perkKey} tooltip`, variables: { variableType: 'rune', variableValueParameters: { rune: slotValue }, variableSourceKeys: ['effectAmount'] } }),
-						tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, {
-							category: 'rune',
-							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
-							variables: {
-								variableType: 'rune',
-								variableValueParameters: {
-									rune: slotValue,
-									dynamicVariables: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.variables,
-								},
-								variableSourceKeys: ['effectAmount'],
-							},
-						}),
+					(textData.data.runes.paths as any)[path] = {
+						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune paths'),
+						tooltip: getStringtableValue(mTooltipNameLocalizationKey, 'rune paths'),
 					};
 
-					return [mPerkName.toLowerCase(), slotValue];
-				}))];
-			})),
-		} as unknown as NonNullable<(typeof runeData)>['data'],
+					return [
+						path,
+						{
+							id: mPerkStyleId,
+							name: mPerkStyleName,
+							icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
+							dataKey,
+							iconColor,
+							slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => Object.fromEntries(mPerks.map((perk) => createRuneSlotData(perk, data[perk])))),
+						},
+					];
+				}),
+			),
+			shards: Object.fromEntries(
+				['OffensiveStats', 'FlexStats', 'DefensiveStats'].map((slotKey) => {
+					const { mPerks, mSlotLabelKey } = data[`Perks/StatMods/Slots/${slotKey}`];
+					slotKey = slotKey.slice(0, -5).toLowerCase();
+
+					(textData.data.runes.shards.slotNames as any)[slotKey] = {
+						name: getStringtableValue(mSlotLabelKey, `rune shards ${slotKey} name`),
+					};
+
+					return [
+						slotKey,
+						Object.fromEntries(
+							mPerks.map((perkKey: string) => {
+								const { mPerkId, mPerkName, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mTooltipNameLocalizationKey, mIconTextureName, mScript } = data[perkKey];
+
+								const slotValue = {
+									id: mPerkId,
+									icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
+									dataKey: perkKey,
+									effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount, true),
+								} as any;
+
+								const perkName: string = mPerkName.toLowerCase();
+
+								(textData.data.runes.shards.slotValues as any)[perkName] = {
+									name: getStringtableValue(mDisplayNameLocalizationKey, `rune shards ${slotKey} ${perkKey} name`),
+									tooltip: getStringtableValue(mShortDescLocalizationKey, {
+										category: 'rune',
+										key: `rune shards ${slotKey} ${perkKey} tooltip`,
+										variables: {
+											variableType: 'rune',
+											variableValueParameters: { rune: slotValue },
+											variableSourceKeys: ['effectAmount'],
+										},
+									}),
+									tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, {
+										category: 'rune',
+										key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
+										variables: {
+											variableType: 'rune',
+											variableValueParameters: {
+												rune: slotValue,
+												dynamicVariables: (RUNE_SPECIFICS as IHypotheticalRuneSpecifics).shards[perkName as IRuneShardSlotValue]!.variables,
+											},
+											variableSourceKeys: ['effectAmount'],
+										},
+									}),
+								};
+
+								return [mPerkName.toLowerCase(), slotValue];
+							}),
+						),
+					];
+				}),
+			),
+		} as unknown as NonNullable<typeof runeData>['data'],
 	};
 
 	await fs.writeFile(runeFilePath, stringifyObject(runeData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const DRAGONS: ([name: IDragonName] | [name: IDragonName, spellDataKey: string])[] = [
-	['Cloud'],
-	['Mountain'],
-	['Infernal'],
-	['Ocean'],
-	['Chemtech', 'ChemTech'],
-	['Hextech'],
-];
+const DRAGONS: ([name: IDragonName] | [name: IDragonName, spellDataKey: string])[] = [['Cloud'], ['Mountain'], ['Infernal'], ['Ocean'], ['Chemtech', 'ChemTech'], ['Hextech']];
 const miscFilePath = path.join(import.meta.dirname, '../packages/data/files/misc.json');
 let miscData: typeof import('../packages/data/files/misc.json') | undefined;
 
@@ -730,148 +777,185 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 	miscData = {
 		version: latestVersion,
 		data: {
-			dragons: Object.fromEntries(await Promise.all(DRAGONS.map(async ([name, spellKey]) => {
-				const stackDataKey = `Shared/Spells/SRX_DragonBuff${spellKey || name}`;
-				const soulDataKey = `Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`;
-				const stackData = sharedData[stackDataKey];
-				const soulData = sharedData[soulDataKey];
+			dragons: Object.fromEntries(
+				await Promise.all(
+					DRAGONS.map(async ([name, spellKey]) => {
+						const stackDataKey = `Shared/Spells/SRX_DragonBuff${spellKey || name}`;
+						const soulDataKey = `Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`;
+						const stackData = sharedData[stackDataKey];
+						const soulData = sharedData[soulDataKey];
 
-				if (!stackData || !soulData) {
-					throw new Error(`Dragon ${name} stack (${!!stackData}) / soul (${!!soulData}) data not present`);
-				}
+						if (!stackData || !soulData) {
+							throw new Error(`Dragon ${name} stack (${!!stackData}) / soul (${!!soulData}) data not present`);
+						}
 
-				const { ObjectName: stackObjectName, mSpell: { DataValues: stackDataValues, mSpellCalculations: stackSpellCalculations } } = stackData;
-				const parsedStackDataValues = stackDataValues?.length
-					? Object.fromEntries(stackDataValues.map(({ name, values }: Record<string, number[]>) =>
-							[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
-						))
-					: undefined;
+						const {
+							ObjectName: stackObjectName,
+							mSpell: { DataValues: stackDataValues, mSpellCalculations: stackSpellCalculations },
+						} = stackData;
+						const parsedStackDataValues = stackDataValues?.length
+							? Object.fromEntries(stackDataValues.map(({ name, values }: Record<string, number[]>) => [name, values?.length ? values.map((value) => formatNumber(value)) : undefined]))
+							: undefined;
 
-				const { ObjectName: soulObjectName, mSpell: { DataValues: soulDataValues, mSpellCalculations: soulSpellCalculations } } = soulData;
-				const parsedSoulDataValues = soulDataValues?.length
-					? Object.fromEntries(soulDataValues.map(({ name, values }: Record<string, number[]>) =>
-							[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
-						))
-					: undefined;
+						const {
+							ObjectName: soulObjectName,
+							mSpell: { DataValues: soulDataValues, mSpellCalculations: soulSpellCalculations },
+						} = soulData;
+						const parsedSoulDataValues = soulDataValues?.length
+							? Object.fromEntries(soulDataValues.map(({ name, values }: Record<string, number[]>) => [name, values?.length ? values.map((value) => formatNumber(value)) : undefined]))
+							: undefined;
 
-				return [name, {
-					name,
-					stack: {
-						objectName: stackObjectName,
-						dataKey: stackDataKey,
-						dataValues: parsedStackDataValues,
-						spellCalculations: cleanupObject(stackSpellCalculations),
-					},
-					soul: {
-						objectName: soulObjectName,
-						dataKey: soulDataKey,
-						dataValues: parsedSoulDataValues,
-						spellCalculations: cleanupObject(soulSpellCalculations),
-					},
-				}];
-			}))),
-		} as unknown as NonNullable<(typeof miscData)>['data'],
+						return [
+							name,
+							{
+								name,
+								stack: {
+									objectName: stackObjectName,
+									dataKey: stackDataKey,
+									dataValues: parsedStackDataValues,
+									spellCalculations: cleanupObject(stackSpellCalculations),
+								},
+								soul: {
+									objectName: soulObjectName,
+									dataKey: soulDataKey,
+									dataValues: parsedSoulDataValues,
+									spellCalculations: cleanupObject(soulSpellCalculations),
+								},
+							},
+						];
+					}),
+				),
+			),
+		} as unknown as NonNullable<typeof miscData>['data'],
 	};
 
-	textData.data.dragons = Object.fromEntries(DRAGONS.map(([name, spellKey]) => {
-		const stackData = sharedData[`Shared/Spells/SRX_DragonBuff${spellKey || name}`];
-		const soulData = sharedData[`Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`];
+	textData.data.dragons = Object.fromEntries(
+		DRAGONS.map(([name, spellKey]) => {
+			const stackData = sharedData[`Shared/Spells/SRX_DragonBuff${spellKey || name}`];
+			const soulData = sharedData[`Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`];
 
-		const stackAbility = miscData!.data.dragons[name as IDragonName].stack as IChampionAbilityVariant;
-		const soulAbility = miscData!.data.dragons[name as IDragonName].soul as IChampionAbilityVariant;
-		const allSpells = [[stackAbility, 'passive'], [soulAbility, 'passive']] as [IChampionAbilityVariant, IChampionAbilityKey][];
+			const stackAbility = miscData!.data.dragons[name as IDragonName].stack as IChampionAbilityVariant;
+			const soulAbility = miscData!.data.dragons[name as IDragonName].soul as IChampionAbilityVariant;
+			const allSpells = [
+				[stackAbility, 'passive'],
+				[soulAbility, 'passive'],
+			] as [IChampionAbilityVariant, IChampionAbilityKey][];
 
-		const { mBuff: { mDescription: stackDescriptionKey } } = stackData;
-		const { mBuff: { mTooltipData: { mLocKeys: { keyTooltip: soulTooltipKey } } } } = soulData;
+			const {
+				mBuff: { mDescription: stackDescriptionKey },
+			} = stackData;
+			const {
+				mBuff: {
+					mTooltipData: {
+						mLocKeys: { keyTooltip: soulTooltipKey },
+					},
+				},
+			} = soulData;
 
-		let stack = getStringtableValue(stackDescriptionKey, {
-			category: 'misc',
-			key: `dragon stack ${name}`,
-			variables: {
-				variableSourceKeys: ['DataValues'],
-				variableType: 'championAbility',
-				variableValueParameters: { abilityKey: 'passive', abilityVariant: stackAbility, allAbilitiesVariants: allSpells },
-			},
-		});
-		/* hextech soul has text only for both melee | ranged split but everywhere else I try to display appropriate melee/ranged/both so alter it to make that possible */
-		const soul = getStringtableValue(soulTooltipKey, `dragon soul ${name}`)?.replace('(%i:meleeActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountMelee@% || %i:rangedActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountRanged@%)', '@lolcalcChampRange@')!;
-		debugStringVariables(soul, {
-			category: 'misc',
-			key: `dragon soul ${name}`,
-			variables: {
-				variableSourceKeys: ['dataValues'],
-				variableType: 'championAbility',
-				variableValueParameters: { abilityKey: 'passive', abilityVariant: soulAbility, allAbilitiesVariants: allSpells, dynamicVariables: (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[name]?.soul?.variables },
-			},
-		});
+			let stack = getStringtableValue(stackDescriptionKey, {
+				category: 'misc',
+				key: `dragon stack ${name}`,
+				variables: {
+					variableSourceKeys: ['DataValues'],
+					variableType: 'championAbility',
+					variableValueParameters: {
+						abilityKey: 'passive',
+						abilityVariant: stackAbility,
+						allAbilitiesVariants: allSpells,
+					},
+				},
+			});
+			/* hextech soul has text only for both melee | ranged split but everywhere else I try to display appropriate melee/ranged/both so alter it to make that possible */
+			const soul = getStringtableValue(soulTooltipKey, `dragon soul ${name}`)?.replace(
+				'(%i:meleeActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountMelee@% || %i:rangedActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountRanged@%)',
+				'@lolcalcChampRange@',
+			)!;
+			debugStringVariables(soul, {
+				category: 'misc',
+				key: `dragon soul ${name}`,
+				variables: {
+					variableSourceKeys: ['dataValues'],
+					variableType: 'championAbility',
+					variableValueParameters: {
+						abilityKey: 'passive',
+						abilityVariant: soulAbility,
+						allAbilitiesVariants: allSpells,
+						dynamicVariables: (DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[name]?.soul?.variables,
+					},
+				},
+			});
 
-		if (!stack) {
-			throw new Error(`[misc dragons] stack ${name} string not found`);
-		}
+			if (!stack) {
+				throw new Error(`[misc dragons] stack ${name} string not found`);
+			}
 
-		const stackTitleEndIndex = stack.indexOf('</titleLeft>');
-		if (~stackTitleEndIndex) {
-			stack = stack.slice(stackTitleEndIndex + 12);
-		}
-		stack = stack.replaceAll('<br>', '').replaceAll('<mainText>', '').replaceAll('</mainText>', '');
+			const stackTitleEndIndex = stack.indexOf('</titleLeft>');
+			if (~stackTitleEndIndex) {
+				stack = stack.slice(stackTitleEndIndex + 12);
+			}
+			stack = stack.replaceAll('<br>', '').replaceAll('<mainText>', '').replaceAll('</mainText>', '');
 
-		return [name, { stack, soul }];
-	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
+			return [name, { stack, soul }];
+		}),
+	) as unknown as NonNullable<typeof textData>['data']['dragons'];
 
 	/* role quest descriptions and values seem to be stored under items under item ids listed below */
 	const moreItemData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`, 'game/items.cdtb.bin.json');
 
 	textData.data.roleQuests = {} as any;
-	miscData.data.roleQuests = Object.fromEntries(([
-		['top', 1220],
-		['jungle', 1211],
-		['mid', 1206],
-		['bot', 1207],
-		['support', 1208],
-	] as [IChampionRole, number][]).map(([role, itemId]) => {
-		const itemMoreData = moreItemData[`Items/${itemId}`];
+	miscData.data.roleQuests = Object.fromEntries(
+		(
+			[
+				['top', 1220],
+				['jungle', 1211],
+				['mid', 1206],
+				['bot', 1207],
+				['support', 1208],
+			] as [IChampionRole, number][]
+		).map(([role, itemId]) => {
+			const itemMoreData = moreItemData[`Items/${itemId}`];
 
-		if (!itemMoreData) {
-			throw new Error(`[misc role quest] failed to get ${role} quest item data "Items/${itemId}"`);
-		}
+			if (!itemMoreData) {
+				throw new Error(`[misc role quest] failed to get ${role} quest item data "Items/${itemId}"`);
+			}
 
-		const tooltipData = itemMoreData.mItemDataClient?.mTooltipData?.mLocKeys;
+			const tooltipData = itemMoreData.mItemDataClient?.mTooltipData?.mLocKeys;
 
-		if (!(tooltipData?.keyName || tooltipData?.keyTooltip)) {
-			throw new Error(`[misc role quest] ${role} quest item doesn't have expected tooltip names`);
-		}
+			if (!(tooltipData?.keyName || tooltipData?.keyTooltip)) {
+				throw new Error(`[misc role quest] ${role} quest item doesn't have expected tooltip names`);
+			}
 
-		textData.data.roleQuests[role] = {
-			title: getStringtableValue(tooltipData.keyName, `role quest ${role}`)!,
-			description: getStringtableValue(tooltipData.keyTooltip, `role quest ${role}`)!,
-		};
+			textData.data.roleQuests[role] = {
+				title: getStringtableValue(tooltipData.keyName, `role quest ${role}`)!,
+				description: getStringtableValue(tooltipData.keyTooltip, `role quest ${role}`)!,
+			};
 
-		const value = {
-			dataValues: itemMoreData.mDataValues?.length
-				? Object.fromEntries(itemMoreData.mDataValues.map(({ mName, mValue }: Record<string, number>) =>
-						[mName, mValue !== undefined ? formatNumber(mValue) : undefined],
-					))
-				: undefined,
-		};
+			const value = {
+				dataValues: itemMoreData.mDataValues?.length ? Object.fromEntries(itemMoreData.mDataValues.map(({ mName, mValue }: Record<string, number>) => [mName, mValue !== undefined ? formatNumber(mValue) : undefined])) : undefined,
+			};
 
-		debugStringVariables(textData.data.roleQuests[role].description, {
-			key: `role-quest-${role}`,
-			category: 'misc',
-			variables: {
-				variableType: 'item',
-				variableSourceKeys: [],
-				variableValueParameters: {
-					item: value as IItem,
-					dynamicVariables: (MISC_SPECIFICS as IHypotheticalMiscSpecifics).roleQuests[role]?.variables,
+			debugStringVariables(textData.data.roleQuests[role].description, {
+				key: `role-quest-${role}`,
+				category: 'misc',
+				variables: {
+					variableType: 'item',
+					variableSourceKeys: [],
+					variableValueParameters: {
+						item: value as IItem,
+						dynamicVariables: (MISC_SPECIFICS as IHypotheticalMiscSpecifics).roleQuests[role]?.variables,
+					},
 				},
-			},
-		});
+			});
 
-		return [role, value];
-	})) as unknown as NonNullable<(typeof miscData)>['data']['roleQuests'];
+			return [role, value];
+		}),
+	) as unknown as NonNullable<typeof miscData>['data']['roleQuests'];
 
 	/* jungle technically has 3 different items, each for a different smite with different pet name so to make it cooler manually put all of them here */
-	textData.data.roleQuests.jungle.description = textData.data.roleQuests.jungle.description.replace('<font color = \'#800000\'>Scorchclaw</font>', '<font color = \'#800000\'>Scorchclaw</font> / <font color = \'#0B6623\'>Mosstomper</font> / <font color = \'#4682B4\'>Gustwalker</font>');
+	textData.data.roleQuests.jungle.description = textData.data.roleQuests.jungle.description.replace(
+		"<font color = '#800000'>Scorchclaw</font>",
+		"<font color = '#800000'>Scorchclaw</font> / <font color = '#0B6623'>Mosstomper</font> / <font color = '#4682B4'>Gustwalker</font>",
+	);
 
 	await fs.writeFile(miscFilePath, stringifyObject(miscData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));
@@ -886,10 +970,13 @@ try {
 } catch {}
 
 const uiAutoAtlasData: Record<string, any> = {};
-const autoAtlasImages: Record<string, {
-	width: number;
-	height: number;
-}> = {};
+const autoAtlasImages: Record<
+	string,
+	{
+		width: number;
+		height: number;
+	}
+> = {};
 
 if (!uiData || uiData?.version !== latestVersion) {
 	console.log('ui data not present or outdated, fetching...');
@@ -949,98 +1036,132 @@ if (!uiData || uiData?.version !== latestVersion) {
 		version: latestVersion,
 		data: {
 			shop: {
-				categories: Object.fromEntries(await Promise.all(([
-					['all', 'All', 'All'],
-					['fighter', 'Attack', 'Atk'],
-					['marksman', 'Marksman', 'Mark'],
-					['assassin', 'Assassin', 'Ass'],
-					['mage', 'Magic', 'Mag'],
-					['tank', 'Defense', 'Def'],
-					['support', 'Utility', 'Util'],
-				] satisfies ([IItemCategory | 'all', string, string])[]).map(
-					async ([itemCategory, dataPath1, dataPath2]) => {
-						return [
-							itemCategory,
-							await getTexture(itemshopUiBase[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/filter/ItemShop_${dataPath1}Button/ItemShop_${dataPath2}Btn_IconDefault`], `category | ${itemCategory} | ${dataPath1} | ${dataPath2}`),
-						];
-					},
-				))),
-				stats: Object.fromEntries(await Promise.all(Object.entries({
-					attackDamage: ['PhysicalDmg', 'PhysicalDamage'],
-					crit: ['CritStrike', 'CriticalStrike'],
-					attackSpeed: ['AttackSpeed'],
-					onHit: ['OnHit'],
-					armorPen: ['ArmorPenetration', 'ArmorPen'],
-					abilityPower: ['AbilityPower'],
-					mana: ['Mana'],
-					magicPen: ['MagicPenetration', 'MagicPen'],
-					health: ['Health'],
-					magicResist: ['MagicResist'],
-					armor: ['Armor'],
-					abilityHaste: ['AbilityHaste'],
-					movement: ['Movespeed'],
-					vamp: ['Vamp'],
-				} satisfies Record<IItemShopStatFilter, string[]>).map(
-					async ([itemCategory, [dataPath1, dataPath2]]) => {
-						const { uv: selectedUv } = await getTexture(itemshopUiBase[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Selected`], `stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1} selected`);
+				categories: Object.fromEntries(
+					await Promise.all(
+						(
+							[
+								['all', 'All', 'All'],
+								['fighter', 'Attack', 'Atk'],
+								['marksman', 'Marksman', 'Mark'],
+								['assassin', 'Assassin', 'Ass'],
+								['mage', 'Magic', 'Mag'],
+								['tank', 'Defense', 'Def'],
+								['support', 'Utility', 'Util'],
+							] satisfies [IItemCategory | 'all', string, string][]
+						).map(async ([itemCategory, dataPath1, dataPath2]) => {
+							return [
+								itemCategory,
+								await getTexture(
+									itemshopUiBase[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/filter/ItemShop_${dataPath1}Button/ItemShop_${dataPath2}Btn_IconDefault`],
+									`category | ${itemCategory} | ${dataPath1} | ${dataPath2}`,
+								),
+							];
+						}),
+					),
+				),
+				stats: Object.fromEntries(
+					await Promise.all(
+						Object.entries({
+							attackDamage: ['PhysicalDmg', 'PhysicalDamage'],
+							crit: ['CritStrike', 'CriticalStrike'],
+							attackSpeed: ['AttackSpeed'],
+							onHit: ['OnHit'],
+							armorPen: ['ArmorPenetration', 'ArmorPen'],
+							abilityPower: ['AbilityPower'],
+							mana: ['Mana'],
+							magicPen: ['MagicPenetration', 'MagicPen'],
+							health: ['Health'],
+							magicResist: ['MagicResist'],
+							armor: ['Armor'],
+							abilityHaste: ['AbilityHaste'],
+							movement: ['Movespeed'],
+							vamp: ['Vamp'],
+						} satisfies Record<IItemShopStatFilter, string[]>).map(async ([itemCategory, [dataPath1, dataPath2]]) => {
+							const { uv: selectedUv } = await getTexture(
+								itemshopUiBase[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Selected`],
+								`stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1} selected`,
+							);
 
-						return [
-							itemCategory,
-							{
-								default: await getTexture(itemshopUiBase[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Default`], `stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1} default`),
-								selected: { uv: selectedUv },
-							},
-						];
-					},
-				))),
+							return [
+								itemCategory,
+								{
+									default: await getTexture(
+										itemshopUiBase[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Default`],
+										`stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1} default`,
+									),
+									selected: { uv: selectedUv },
+								},
+							];
+						}),
+					),
+				),
 				clearFilters: {
 					default: await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/DisableBtn/Disable_Default'], 'default clear filters'),
-					hover: { uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/DisableBtn/Disable_Hover'], 'hover clear filters')).uv },
+					hover: {
+						uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/DisableBtn/Disable_Hover'], 'hover clear filters')).uv,
+					},
 				},
 				swapItemOrder: {
 					default: await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/filter/ItemShop_InvertButton/ItemShop_InvertButton_Default'], 'default swap sort order'),
-					hover: { uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/filter/ItemShop_InvertButton/ItemShop_InvertButton_Hover'], 'hover swap sort order')).uv },
+					hover: {
+						uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/filter/ItemShop_InvertButton/ItemShop_InvertButton_Hover'], 'hover swap sort order')).uv,
+					},
 				},
 				pin: {
 					default: await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_BootsPanel/ItemShop_BootsPanel_PinButton/BootsPanel_PinButton_Default'], 'default pin'),
-					hover: { uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_BootsPanel/ItemShop_BootsPanel_PinButton/BootsPanel_PinButton_Hover'], 'hover pin')).uv },
-					slcHover: { uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_BootsPanel/ItemShop_BootsPanel_PinButton/BootsPanel_PinButton_SlcHover'], 'slc hover pin')).uv },
+					hover: {
+						uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_BootsPanel/ItemShop_BootsPanel_PinButton/BootsPanel_PinButton_Hover'], 'hover pin')).uv,
+					},
+					slcHover: {
+						uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_BootsPanel/ItemShop_BootsPanel_PinButton/BootsPanel_PinButton_SlcHover'], 'slc hover pin')).uv,
+					},
 				},
 			},
-			playerStats: Object.fromEntries(await Promise.all([
-				['healthResourceRegen', 'Player_AdvancedStats/Stats_HPR_Icon'],
-				['healShieldPower', 'Player_AdvancedStats/Stats_HSP_Icon'],
-				['armorPen', 'Player_AdvancedStats/Stats_APen_Icon'],
-				['magicPen', 'Player_AdvancedStats/Stats_MPen_Icon'],
-				['lifeSteal', 'Player_AdvancedStats/Stats_LS_Icon'],
-				['omnivamp', 'Player_AdvancedStats/Stats_SV_Icon'],
-				['attackRange', 'Player_AdvancedStats/Stats_AR_Icon'],
-				['tenacity', 'Player_AdvancedStats/Stats_Ten_Icon'],
-				['attackDamage', 'Player_Stats/Stats_AD_Icon'],
-				['abilityPower', 'Player_Stats/Stats_AP_Icon'],
-				['armor', 'Player_Stats/Stats_Armor_Icon'],
-				['magicResist', 'Player_Stats/Stats_MR_Icon'],
-				['attackSpeed', 'Player_Stats/Stats_AS_Icon'],
-				['abilityHaste', 'Player_Stats/Stats_AH_Icon'],
-				['crit', 'Player_Stats/Stats_Crit_Icon'],
-				['moveSpeed', 'Player_Stats/Stats_MS_Icon'],
-			].map(async ([name, key]) => {
-				return [name, await getTexture(
-					playerstatsUiBase[`ClientStates/Gameplay/UX/LoL/PlayerStats/UIBase/${key}`],
-					`player stats ${name}`,
-					'game/clientstates/gameplay/ux/lol/playerstats.cdtb.json',
-				)];
-			}))),
-			dragons: Object.fromEntries(await Promise.all(DRAGONS.map(async ([name]) => {
-				return [name, {
-					stack: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_Source_${name}Icon`], `dragon stack ${name}`),
-					soulActive: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_CSrceAct_${name}Icon`], `dragon soul active ${name}`),
-				}];
-			}))),
+			playerStats: Object.fromEntries(
+				await Promise.all(
+					[
+						['healthResourceRegen', 'Player_AdvancedStats/Stats_HPR_Icon'],
+						['healShieldPower', 'Player_AdvancedStats/Stats_HSP_Icon'],
+						['armorPen', 'Player_AdvancedStats/Stats_APen_Icon'],
+						['magicPen', 'Player_AdvancedStats/Stats_MPen_Icon'],
+						['lifeSteal', 'Player_AdvancedStats/Stats_LS_Icon'],
+						['omnivamp', 'Player_AdvancedStats/Stats_SV_Icon'],
+						['attackRange', 'Player_AdvancedStats/Stats_AR_Icon'],
+						['tenacity', 'Player_AdvancedStats/Stats_Ten_Icon'],
+						['attackDamage', 'Player_Stats/Stats_AD_Icon'],
+						['abilityPower', 'Player_Stats/Stats_AP_Icon'],
+						['armor', 'Player_Stats/Stats_Armor_Icon'],
+						['magicResist', 'Player_Stats/Stats_MR_Icon'],
+						['attackSpeed', 'Player_Stats/Stats_AS_Icon'],
+						['abilityHaste', 'Player_Stats/Stats_AH_Icon'],
+						['crit', 'Player_Stats/Stats_Crit_Icon'],
+						['moveSpeed', 'Player_Stats/Stats_MS_Icon'],
+					].map(async ([name, key]) => {
+						return [name, await getTexture(playerstatsUiBase[`ClientStates/Gameplay/UX/LoL/PlayerStats/UIBase/${key}`], `player stats ${name}`, 'game/clientstates/gameplay/ux/lol/playerstats.cdtb.json')];
+					}),
+				),
+			),
+			dragons: Object.fromEntries(
+				await Promise.all(
+					DRAGONS.map(async ([name]) => {
+						return [
+							name,
+							{
+								stack: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_Source_${name}Icon`], `dragon stack ${name}`),
+								soulActive: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_CSrceAct_${name}Icon`], `dragon soul active ${name}`),
+							},
+						];
+					}),
+				),
+			),
 			practiceTool: {
-				statusEffect: await getTexture(practiceToolUiBase['ClientStates/Gameplay/UX/LoL/PracticeTool/UIBase/CheatMenu/Icons/CheatStatusEffect_Icon'], 'practice tool status effect', 'game/clientstates/gameplay/ux/lol/practicetool.cdtb.json'),
+				statusEffect: await getTexture(
+					practiceToolUiBase['ClientStates/Gameplay/UX/LoL/PracticeTool/UIBase/CheatMenu/Icons/CheatStatusEffect_Icon'],
+					'practice tool status effect',
+					'game/clientstates/gameplay/ux/lol/practicetool.cdtb.json',
+				),
 			},
-		} as unknown as NonNullable<(typeof uiData)>['data'],
+		} as unknown as NonNullable<typeof uiData>['data'],
 	};
 
 	await fs.writeFile(uiFilePath, stringifyObject(uiData));
@@ -1054,7 +1175,7 @@ try {
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch {}
 
-if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {
+if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some((entry) => !(entry[0] in effectData!.data))) {
 	console.log('effect data not present or outdated, fetching...');
 
 	const [itemMoreData, sharedSpellsData] = await Promise.all([
@@ -1068,221 +1189,241 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 
 	effectData = {
 		version: latestVersion,
-		data: Object.fromEntries(await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([effectObjectName]) => {
-			const customEffect = CUSTOM_EFFECTS[effectObjectName];
-			if (typeof customEffect === 'object' && 'objectName' in customEffect) {
-				referenceEffectObjectNames.push(effectObjectName);
-				return false;
-			}
-			return true;
-		}).map(async ([effectObjectName, effectSpecific]) => {
-			if (CUSTOM_EFFECTS[effectObjectName]) {
-				const customEffect = CUSTOM_EFFECTS[effectObjectName];
-				if (typeof customEffect === 'string') {
-					const description = getStringtableValue(customEffect, `custom effect ${effectObjectName} description`);
-
-					if (!description) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
+		data: Object.fromEntries(
+			await Promise.all(
+				EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([effectObjectName]) => {
+					const customEffect = CUSTOM_EFFECTS[effectObjectName];
+					if (typeof customEffect === 'object' && 'objectName' in customEffect) {
+						referenceEffectObjectNames.push(effectObjectName);
+						return false;
 					}
+					return true;
+				}).map(async ([effectObjectName, effectSpecific]) => {
+					if (CUSTOM_EFFECTS[effectObjectName]) {
+						const customEffect = CUSTOM_EFFECTS[effectObjectName];
+						if (typeof customEffect === 'string') {
+							const description = getStringtableValue(customEffect, `custom effect ${effectObjectName} description`);
 
-					return [effectObjectName, {
-						dataKey: effectObjectName,
-						description: extractEffectDescription(description),
-					}];
-				} else if ('stringtable' in customEffect) {
-					const description = getStringtableValue(customEffect.stringtable as string, `custom effect ${effectObjectName} description`);
-
-					if (!description) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
-					}
-
-					effectDataStringtable.stringtable[customEffect.stringtable as string] = extractEffectDescription(description);
-
-					return [effectObjectName, {
-						dataKey: effectObjectName,
-						stringtable: customEffect.stringtable,
-					}];
-				} else if ('sharedSpellObjectKey' in customEffect || 'championSpellObjectKey' in customEffect) {
-					const spellKey = (customEffect as any).sharedSpellObjectKey ?? (customEffect as any).championSpellObjectKey;
-
-					let sourceSpell;
-					if ('sharedSpellObjectKey' in customEffect) {
-						sourceSpell = sharedSpellsData[customEffect.sharedSpellObjectKey];
-					} else {
-						const { id } = EFFECT_SPECIFICS[effectObjectName].sourceAbility;
-						const championData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`);
-						sourceSpell = championData[customEffect.championSpellObjectKey];
-					}
-
-					if (!sourceSpell) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${spellKey}" not found in target data`);
-					}
-
-					const effectData: Extract<IEffectData[keyof IEffectData], { sharedSpellObjectKey: string }> | Extract<IEffectData[keyof IEffectData], { championSpellObjectKey: string }> = {
-						dataKey: effectObjectName,
-						sharedSpellObjectKey: (customEffect as any).sharedSpellObjectKey,
-						sharedSpellEffectObjectKey: (customEffect as any).sharedSpellEffectObjectKey,
-						championSpellObjectKey: (customEffect as any).championSpellObjectKey,
-						objectName: sourceSpell.ObjectName,
-						name: undefined,
-						description: '',
-						image: undefined,
-						dataValues: undefined,
-						spellCalculations: undefined,
-						cooldownTime: undefined,
-					};
-
-					if (sourceSpell.mBuff?.mDescription || 'sharedSpellEffectObjectKey' in customEffect) {
-						let description = '';
-
-						/* currently only exhaust applies 2 effects, 1 for slow and 1 for damage reduction, so support extracting multiple descriptions and combine them into 1 */
-						const buffDescriptionSources = [sourceSpell];
-
-						type ICustomEffectSharedKey = Extract<IEffectData[keyof IEffectData], { sharedSpellObjectKey: string }>;
-
-						if ((customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey) {
-							if (typeof (customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey === 'string') {
-								buffDescriptionSources[0] = sharedSpellsData[(customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey as string];
-							} else {
-								buffDescriptionSources.splice(0, 1, ...((customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey as string[]).map(key => sharedSpellsData[key]));
-							}
-						}
-
-						for (const buffDescriptionSource of buffDescriptionSources) {
-							const buffDescription = getStringtableValue(buffDescriptionSource.mBuff.mDescription, `custom effect ${effectObjectName} ${buffDescriptionSource.ObjectName} description`);
-
-							if (buffDescription) {
-								description += `${description ? ' ' : ''}${extractEffectDescription(buffDescription)}`;
-							}
-						}
-
-						if (description) {
-							effectData.description = description;
-						}
-					} else if (sourceSpell.mBuff?.mTooltipData?.mLocKeys?.keyTooltip) {
-						effectData.description = getStringtableValue(sourceSpell.mBuff.mTooltipData.mLocKeys.keyTooltip, `custom effect ${effectObjectName} ${sourceSpell.ObjectName} description`)!;
-					}
-
-					/* used for summoner spells to extract spell data but not needed for champion spells since that data should already be saved on champion */
-					if (sourceSpell.mSpell && !('championSpellObjectKey' in customEffect)) {
-						const { mImgIconName, DataValues, mSpellCalculations, mClientData, cooldownTime } = sourceSpell.mSpell;
-
-						if (!mImgIconName?.[0]) {
-							throw new Error(`${effectObjectName} expected mImgIconName in shared spell`);
-						}
-
-						(effectData as any).image = `assets/spells/icons2d/${mImgIconName[0].toLowerCase().replace('.dds', '.png')}`;
-						(effectData as any).dataValues = DataValues?.length
-							? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) =>
-									[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
-								))
-							: undefined;
-						(effectData as any).spellCalculations = cleanupObject(mSpellCalculations);
-						(effectData as any).cooldownTime = cooldownTime && cooldownTime.map((v: number) => formatNumber(v));
-
-						if (!effectData.description || 'sharedSpellObjectKey' in effectData) {
-							if (!mClientData) {
-								throw new Error(`${effectObjectName} expected mClientData in shared spell`);
-							}
-							if (!mClientData.mTooltipData) {
-								throw new Error(`${effectObjectName} expected mTooltipData in shared spell`);
+							if (!description) {
+								throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
 							}
 
-							const variables: IBaseStringtableVariableDebug<'championAbility'>['variables'] = {
-								variableType: 'championAbility',
-								variableValueParameters: {
-									abilityKey: 'passive',
-									abilityVariant: effectData as IChampionAbilityVariant,
-									allAbilitiesVariants: [],
+							return [
+								effectObjectName,
+								{
+									dataKey: effectObjectName,
+									description: extractEffectDescription(description),
 								},
-								variableSourceKeys: ['spellCalculations'],
+							];
+						} else if ('stringtable' in customEffect) {
+							const description = getStringtableValue(customEffect.stringtable as string, `custom effect ${effectObjectName} description`);
+
+							if (!description) {
+								throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
+							}
+
+							effectDataStringtable.stringtable[customEffect.stringtable as string] = extractEffectDescription(description);
+
+							return [
+								effectObjectName,
+								{
+									dataKey: effectObjectName,
+									stringtable: customEffect.stringtable,
+								},
+							];
+						} else if ('sharedSpellObjectKey' in customEffect || 'championSpellObjectKey' in customEffect) {
+							const spellKey = (customEffect as any).sharedSpellObjectKey ?? (customEffect as any).championSpellObjectKey;
+
+							let sourceSpell;
+							if ('sharedSpellObjectKey' in customEffect) {
+								sourceSpell = sharedSpellsData[customEffect.sharedSpellObjectKey];
+							} else {
+								const { id } = EFFECT_SPECIFICS[effectObjectName].sourceAbility;
+								const championData = await fetchCached(
+									`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`,
+									`game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`,
+								);
+								sourceSpell = championData[customEffect.championSpellObjectKey];
+							}
+
+							if (!sourceSpell) {
+								throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${spellKey}" not found in target data`);
+							}
+
+							const effectData: Extract<IEffectData[keyof IEffectData], { sharedSpellObjectKey: string }> | Extract<IEffectData[keyof IEffectData], { championSpellObjectKey: string }> = {
+								dataKey: effectObjectName,
+								sharedSpellObjectKey: (customEffect as any).sharedSpellObjectKey,
+								sharedSpellEffectObjectKey: (customEffect as any).sharedSpellEffectObjectKey,
+								championSpellObjectKey: (customEffect as any).championSpellObjectKey,
+								objectName: sourceSpell.ObjectName,
+								name: undefined,
+								description: '',
+								image: undefined,
+								dataValues: undefined,
+								spellCalculations: undefined,
+								cooldownTime: undefined,
 							};
 
-							(effectData as any).name = mClientData?.mTooltipData?.mLocKeys?.keyName && getStringtableValue(mClientData.mTooltipData.mLocKeys.keyName, {
-								category: 'effect',
-								key: `${effectObjectName} name`,
-								stringtableVariableSaveUnder: effectDataStringtable,
-								variables,
-							});
-							(effectData as any)[effectData.description ? 'tooltip' : 'description'] = mClientData?.mTooltipData?.mLocKeys?.keyTooltip && getStringtableValue(mClientData.mTooltipData.mLocKeys.keyTooltip, {
-								category: 'effect',
-								key: `${effectObjectName} tooltip`,
-								stringtableVariableSaveUnder: effectDataStringtable,
-								variables,
-							});
+							if (sourceSpell.mBuff?.mDescription || 'sharedSpellEffectObjectKey' in customEffect) {
+								let description = '';
 
-							if (!(effectData as any).name) {
-								throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" failed to resolve name`);
+								/* currently only exhaust applies 2 effects, 1 for slow and 1 for damage reduction, so support extracting multiple descriptions and combine them into 1 */
+								const buffDescriptionSources = [sourceSpell];
+
+								type ICustomEffectSharedKey = Extract<IEffectData[keyof IEffectData], { sharedSpellObjectKey: string }>;
+
+								if ((customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey) {
+									if (typeof (customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey === 'string') {
+										buffDescriptionSources[0] = sharedSpellsData[(customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey as string];
+									} else {
+										buffDescriptionSources.splice(0, 1, ...((customEffect as ICustomEffectSharedKey).sharedSpellEffectObjectKey as string[]).map((key) => sharedSpellsData[key]));
+									}
+								}
+
+								for (const buffDescriptionSource of buffDescriptionSources) {
+									const buffDescription = getStringtableValue(buffDescriptionSource.mBuff.mDescription, `custom effect ${effectObjectName} ${buffDescriptionSource.ObjectName} description`);
+
+									if (buffDescription) {
+										description += `${description ? ' ' : ''}${extractEffectDescription(buffDescription)}`;
+									}
+								}
+
+								if (description) {
+									effectData.description = description;
+								}
+							} else if (sourceSpell.mBuff?.mTooltipData?.mLocKeys?.keyTooltip) {
+								effectData.description = getStringtableValue(sourceSpell.mBuff.mTooltipData.mLocKeys.keyTooltip, `custom effect ${effectObjectName} ${sourceSpell.ObjectName} description`)!;
 							}
+
+							/* used for summoner spells to extract spell data but not needed for champion spells since that data should already be saved on champion */
+							if (sourceSpell.mSpell && !('championSpellObjectKey' in customEffect)) {
+								const { mImgIconName, DataValues, mSpellCalculations, mClientData, cooldownTime } = sourceSpell.mSpell;
+
+								if (!mImgIconName?.[0]) {
+									throw new Error(`${effectObjectName} expected mImgIconName in shared spell`);
+								}
+
+								(effectData as any).image = `assets/spells/icons2d/${mImgIconName[0].toLowerCase().replace('.dds', '.png')}`;
+								(effectData as any).dataValues = DataValues?.length
+									? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) => [name, values?.length ? values.map((value) => formatNumber(value)) : undefined]))
+									: undefined;
+								(effectData as any).spellCalculations = cleanupObject(mSpellCalculations);
+								(effectData as any).cooldownTime = cooldownTime && cooldownTime.map((v: number) => formatNumber(v));
+
+								if (!effectData.description || 'sharedSpellObjectKey' in effectData) {
+									if (!mClientData) {
+										throw new Error(`${effectObjectName} expected mClientData in shared spell`);
+									}
+									if (!mClientData.mTooltipData) {
+										throw new Error(`${effectObjectName} expected mTooltipData in shared spell`);
+									}
+
+									const variables: IBaseStringtableVariableDebug<'championAbility'>['variables'] = {
+										variableType: 'championAbility',
+										variableValueParameters: {
+											abilityKey: 'passive',
+											abilityVariant: effectData as IChampionAbilityVariant,
+											allAbilitiesVariants: [],
+										},
+										variableSourceKeys: ['spellCalculations'],
+									};
+
+									(effectData as any).name =
+										mClientData?.mTooltipData?.mLocKeys?.keyName &&
+										getStringtableValue(mClientData.mTooltipData.mLocKeys.keyName, {
+											category: 'effect',
+											key: `${effectObjectName} name`,
+											stringtableVariableSaveUnder: effectDataStringtable,
+											variables,
+										});
+									(effectData as any)[effectData.description ? 'tooltip' : 'description'] =
+										mClientData?.mTooltipData?.mLocKeys?.keyTooltip &&
+										getStringtableValue(mClientData.mTooltipData.mLocKeys.keyTooltip, {
+											category: 'effect',
+											key: `${effectObjectName} tooltip`,
+											stringtableVariableSaveUnder: effectDataStringtable,
+											variables,
+										});
+
+									if (!(effectData as any).name) {
+										throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" failed to resolve name`);
+									}
+								}
+							}
+
+							if (!effectData.description) {
+								throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" failed to resolve description`);
+							}
+
+							return [effectObjectName, effectData];
+						} else {
+							return [effectObjectName, { dataKey: effectObjectName, ...customEffect }];
 						}
 					}
 
-					if (!effectData.description) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" failed to resolve description`);
+					/* effects without sourceAbility, for now only grievous wounds, should be handled with `CUSTOM_EFFECTS` above */
+					if (!effectSpecific.sourceAbility) {
+						throw new Error('[updateGameData effectData] unexpected unhandled effect without source ability');
 					}
 
-					return [effectObjectName, effectData];
-				} else {
-					return [effectObjectName, { dataKey: effectObjectName, ...customEffect }];
-				}
-			}
+					const { id, type } = effectSpecific.sourceAbility;
+					const dataSource =
+						type === AbilityType.champion
+							? await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`)
+							: itemMoreData;
 
-			/* effects without sourceAbility, for now only grievous wounds, should be handled with `CUSTOM_EFFECTS` above */
-			if (!effectSpecific.sourceAbility) {
-				throw new Error('[updateGameData effectData] unexpected unhandled effect without source ability');
-			}
+					const data = Object.entries(dataSource).find(([, abilityObject]) => (abilityObject as any).ObjectName === effectObjectName) as [string, any] | undefined;
 
-			const { id, type } = effectSpecific.sourceAbility;
-			const dataSource = type === AbilityType.champion
-				? await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`)
-				: itemMoreData;
+					if (!data) {
+						throw new Error(`[effectData] no effect data ${effectObjectName}`);
+					}
 
-			const data = Object.entries(dataSource).find(([, abilityObject]) => (abilityObject as any).ObjectName === effectObjectName) as [string, any] | undefined;
+					let descriptionKey = data[1].mBuff.mDescription;
+					let extractMainText = true;
 
-			if (!data) {
-				throw new Error(`[effectData] no effect data ${effectObjectName}`);
-			}
+					if (!descriptionKey) {
+						descriptionKey = data[1].mBuff?.mTooltipData?.mLocKeys?.keyTooltip;
+						extractMainText = false;
+					}
 
-			let descriptionKey = data[1].mBuff.mDescription;
-			let extractMainText = true;
+					if (!descriptionKey) {
+						throw new Error(`[effectData] no description key ${effectObjectName}`);
+					}
 
-			if (!descriptionKey) {
-				descriptionKey = data[1].mBuff?.mTooltipData?.mLocKeys?.keyTooltip;
-				extractMainText = false;
-			}
+					let description = getStringtableValue(descriptionKey, `effectData`);
 
-			if (!descriptionKey) {
-				throw new Error(`[effectData] no description key ${effectObjectName}`);
-			}
+					if (!description) {
+						throw new Error(`[effectData] no description for key ${descriptionKey} ${effectObjectName}`);
+					}
 
-			let description = getStringtableValue(descriptionKey, `effectData`);
+					if (description && extractMainText) {
+						description = extractEffectDescription(description);
+					}
 
-			if (!description) {
-				throw new Error(`[effectData] no description for key ${descriptionKey} ${effectObjectName}`);
-			}
+					description &&= description.trim();
+					description &&
+						debugStringVariables(description, {
+							category: 'effect',
+							key: `effect-${effectObjectName}-descriptionKey`,
+							stringtableVariableSaveUnder: effectDataStringtable,
+						});
 
-			if (description && extractMainText) {
-				description = extractEffectDescription(description);
-			}
-
-			description &&= description.trim();
-			description && debugStringVariables(description, {
-				category: 'effect',
-				key: `effect-${effectObjectName}-descriptionKey`,
-				stringtableVariableSaveUnder: effectDataStringtable,
-			});
-
-			return [effectObjectName, {
-				description,
-				dataKey: data[0],
-			}];
-		}))) as unknown as NonNullable<(typeof effectData)>['data'],
+					return [
+						effectObjectName,
+						{
+							description,
+							dataKey: data[0],
+						},
+					];
+				}),
+			),
+		) as unknown as NonNullable<typeof effectData>['data'],
 		stringtable: effectDataStringtable.stringtable as NonNullable<typeof effectData>['stringtable'],
 	};
 
 	for (const effectObjectName of referenceEffectObjectNames) {
 		const customEffect = CUSTOM_EFFECTS[effectObjectName];
-		const referencedText = (effectData.data as IEffectData)[(customEffect as Extract<NonNullable<typeof CUSTOM_EFFECTS[EffectObjectName]>, { objectName: string }>).objectName as keyof IEffectData];
+		const referencedText = (effectData.data as IEffectData)[(customEffect as Extract<NonNullable<(typeof CUSTOM_EFFECTS)[EffectObjectName]>, { objectName: string }>).objectName as keyof IEffectData];
 		if (!referencedText) {
 			throw new Error(`[effectData] unresolved custom effect referenced objectName ${effectObjectName} ${JSON.stringify(customEffect, null, 2)}`);
 		}
@@ -1308,9 +1449,15 @@ for (const category in debug) {
 	}
 }
 
-const unknownShapeshifters = potentialShapeshifters.values().filter(championId => !SHAPESHIFTING_CHAMPION_IDS.includes(championId as IChampionId)).toArray();
+const unknownShapeshifters = potentialShapeshifters
+	.values()
+	.filter((championId) => !SHAPESHIFTING_CHAMPION_IDS.includes(championId as IChampionId))
+	.toArray();
 if (potentialShapeshifters.size !== SHAPESHIFTING_CHAMPION_IDS.length || unknownShapeshifters.length) {
-	console.warn('known shapeshifter champions mismatch', { potentialShapeshifters, unknownShapeshifters });
+	console.warn('known shapeshifter champions mismatch', {
+		potentialShapeshifters,
+		unknownShapeshifters,
+	});
 }
 
 function itemDescriptionText(text: string, extrasStart: string): string[][] | undefined {
@@ -1329,7 +1476,8 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 		extraEndIndex = extraToEnd.indexOf('</section><section><flavorText>');
 	}
 
-	const rawExtra = extraToEnd.slice(0, extraEndIndex)
+	const rawExtra = extraToEnd
+		.slice(0, extraEndIndex)
 		.replace(/\{\{ ?Item_Passive_List ?\}\}/g, '')
 		.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@')
 		/* exclusively for youmuu that seems to be done kind of silly */
@@ -1340,8 +1488,8 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 	let extra = rawExtra
 		? rawExtra
 				.split('<br><br>')
-				.map(text => text.split('<br>').map(t => t.trim()))
-				.filter(text => text.some(Boolean))
+				.map((text) => text.split('<br>').map((t) => t.trim()))
+				.filter((text) => text.some(Boolean))
 		: undefined;
 	/** some item descriptions are split with '' instead so try to handle it */
 	if (extra?.length === 1) {
@@ -1397,9 +1545,9 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 	const preplaceTextInventory = specific?.preplaceTextInventory;
 
 	/**
-		* `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
-		* `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
-		*/
+	 * `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
+	 * `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
+	 */
 	const { mShopTooltip, mDynamicTooltip, mTooltipData } = mItemDataClient;
 	/**
 	 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
@@ -1437,9 +1585,7 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 
 	let tooltipInventory = textInventory ? itemDescriptionText(textInventory, '<mainText><section>') : undefined;
 
-	if (tooltipShop && tooltipInventory?.every((extra, extraIndex) => extra.every((line, lineIndex) =>
-		tooltipShop[extraIndex]?.[lineIndex] === line,
-	))) {
+	if (tooltipShop && tooltipInventory?.every((extra, extraIndex) => extra.every((line, lineIndex) => tooltipShop[extraIndex]?.[lineIndex] === line))) {
 		tooltipInventory = undefined;
 	}
 
@@ -1470,8 +1616,15 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
-	const combinedDescriptions = tooltipShop?.flatMap(tooltip => tooltip).concat(tooltipInventory?.flatMap(tooltip => tooltip) || []).join(' ');
-	combinedDescriptions && debugStringVariables(combinedDescriptions, { ...variableDebug, key: `${item.id} ${item.name} text` });
+	const combinedDescriptions = tooltipShop
+		?.flatMap((tooltip) => tooltip)
+		.concat(tooltipInventory?.flatMap((tooltip) => tooltip) || [])
+		.join(' ');
+	combinedDescriptions &&
+		debugStringVariables(combinedDescriptions, {
+			...variableDebug,
+			key: `${item.id} ${item.name} text`,
+		});
 
 	let extended = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true);
 	if (keyTooltip && keyTooltipExtended) {
@@ -1486,15 +1639,27 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 		}
 	}
 	extended = cleanupItemText(extended);
-	extended && debugStringVariables(extended, { ...variableDebug, key: `${item.id} ${item.name} keyTooltipExtendedRules/keyTooltipExtended` });
+	extended &&
+		debugStringVariables(extended, {
+			...variableDebug,
+			key: `${item.id} ${item.name} keyTooltipExtendedRules/keyTooltipExtended`,
+		});
 
 	let footerLeft = keyInventoryOnlyText && getStringtableValue(keyInventoryOnlyText, 'item keyInventoryOnlyText');
 	footerLeft = cleanupItemText(footerLeft);
-	footerLeft && debugStringVariables(footerLeft, { ...variableDebug, key: `${item.id} ${item.name} keyInventoryOnlyText` });
+	footerLeft &&
+		debugStringVariables(footerLeft, {
+			...variableDebug,
+			key: `${item.id} ${item.name} keyInventoryOnlyText`,
+		});
 
 	let keywordDefinitions = keyKeywordDefinitions && getStringtableValue(keyKeywordDefinitions, 'item keyKeywordDefinitions');
 	keywordDefinitions = cleanupItemText(keywordDefinitions);
-	keywordDefinitions && debugStringVariables(keywordDefinitions, { ...variableDebug, key: `${item.id} ${item.name} keyKeywordDefinitions` });
+	keywordDefinitions &&
+		debugStringVariables(keywordDefinitions, {
+			...variableDebug,
+			key: `${item.id} ${item.name} keyKeywordDefinitions`,
+		});
 
 	if (subtitleLeft || subtitleRight || tooltipShop?.length || tooltipInventory?.length || extended || footerLeft || keywordDefinitions) {
 		(textData.data.items as any)[item.id] = {
@@ -1524,7 +1689,16 @@ function trimBr(value: string) {
 }
 
 function createRuneSlotData(dataKey: string, data: any) {
-	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mTooltipNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey, mIconTextureName } = data;
+	const {
+		mPerkId,
+		mPerkName,
+		mScript: { mSpellScriptData },
+		mDisplayNameLocalizationKey,
+		mTooltipNameLocalizationKey,
+		mShortDescLocalizationKey,
+		mLongDescLocalizationKey,
+		mIconTextureName,
+	} = data;
 
 	const value = {
 		id: mPerkId,
@@ -1546,8 +1720,14 @@ function createRuneSlotData(dataKey: string, data: any) {
 
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
-		tooltipShort: getStringtableValue(mShortDescLocalizationKey, { ...variableDebug, key: `${mPerkName}-tooltipShort` }),
-		tooltipLong: getStringtableValue(mLongDescLocalizationKey, { ...variableDebug, key: `${mPerkName}-tooltipLong` }),
+		tooltipShort: getStringtableValue(mShortDescLocalizationKey, {
+			...variableDebug,
+			key: `${mPerkName}-tooltipShort`,
+		}),
+		tooltipLong: getStringtableValue(mLongDescLocalizationKey, {
+			...variableDebug,
+			key: `${mPerkName}-tooltipLong`,
+		}),
 		// TODO add debug when implementing, replace long with {{}} if it uses it and is in the stringtable, similar to variant.tooltip = `{{${mLocKeys.keyTooltip}}}` in championAbilityVariants
 		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
 	};
@@ -1564,15 +1744,15 @@ async function loadStringTable() {
 
 async function loadRcpFeLolCollectionsCss() {
 	if (!rcpFeLolCollectionsCss) {
-		await fetchCached(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/rcp-fe-lol-collections.css`, 'plugins/rcp-fe-lol-collections/global/default/rcp-fe-lol-collections.css', 'text').then((text) => {
-			rcpFeLolCollectionsCss = text;
-		});
+		await fetchCached(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/rcp-fe-lol-collections.css`, 'plugins/rcp-fe-lol-collections/global/default/rcp-fe-lol-collections.css', 'text').then(
+			(text) => {
+				rcpFeLolCollectionsCss = text;
+			},
+		);
 	}
 }
 
-type IStringtableVariableDebug = IBaseStringtableVariableDebug<'item'>
-	| IBaseStringtableVariableDebug<'rune'>
-	| IBaseStringtableVariableDebug<'championAbility'>;
+type IStringtableVariableDebug = IBaseStringtableVariableDebug<'item'> | IBaseStringtableVariableDebug<'rune'> | IBaseStringtableVariableDebug<'championAbility'>;
 
 interface IBaseStringtableVariableDebug<T extends IGameVariableType> {
 	category: keyof typeof debug;
@@ -1582,7 +1762,9 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType> {
 		/** type of the game variable being resolved */
 		variableType: T;
 		/** parameters of the function used for resolving game variables except the dynamicValues parameter has both `known`, which will used in resolving stringtable variable, and `default`, which will be used in resolving game variable */
-		variableValueParameters: Omit<IGameVariableValueParameters[T], 'dynamicVariables'> & { dynamicVariables?: Pick<ISpecificVariables, 'known' | 'default'> };
+		variableValueParameters: Omit<IGameVariableValueParameters[T], 'dynamicVariables'> & {
+			dynamicVariables?: Pick<ISpecificVariables, 'known' | 'default'>;
+		};
 		/** the keys under which variables can be found on the target of the replacement. They will be used to replace recognized variables with their resolved names if they are hashed */
 		variableSourceKeys: string[];
 	};
@@ -1659,21 +1841,20 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 		const { variableType, variableSourceKeys } = variables;
 		/* duplicated because if original is modified then recursive calls (at the end of this if block) when any unknown variables are resolved won't work */
 		const variableValueParameters = { ...variables.variableValueParameters };
-		const variableSource = variableType === 'item'
-			? (variableValueParameters as IGameVariableValueParameters['item']).item
-			: variableType === 'championAbility'
-				? (variableValueParameters as IGameVariableValueParameters['championAbility']).abilityVariant
-				: (variableValueParameters as IGameVariableValueParameters['rune']).rune;
+		const variableSource =
+			variableType === 'item'
+				? (variableValueParameters as IGameVariableValueParameters['item']).item
+				: variableType === 'championAbility'
+					? (variableValueParameters as IGameVariableValueParameters['championAbility']).abilityVariant
+					: (variableValueParameters as IGameVariableValueParameters['rune']).rune;
 
 		if (variableValueParameters.dynamicVariables?.default) {
-			(variableValueParameters.dynamicVariables as IDynamicVariables) = { values: variableValueParameters.dynamicVariables.default };
+			(variableValueParameters.dynamicVariables as IDynamicVariables) = {
+				values: variableValueParameters.dynamicVariables.default,
+			};
 		}
 
-		const { unknownVariables } = replaceGameVariables(
-			stringtableReplaced,
-			variableType as any,
-			variableValueParameters as any,
-		);
+		const { unknownVariables } = replaceGameVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
 
 		let unknownChanged = false;
 
@@ -1681,12 +1862,12 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
 			const isHash = variableName.startsWith('{');
 			const subaccessedVariables = variableValueParameters.accessedVariables?.get(variableName);
-			if (subaccessedVariables?.values().some(variable => !unknownVariables.some(unknownV => unknownV[0] === variable))) {
+			if (subaccessedVariables?.values().some((variable) => !unknownVariables.some((unknownV) => unknownV[0] === variable))) {
 				unknownChanged = true;
 				unknownVariables.splice(i, 1);
 
 				for (const subVar of subaccessedVariables!) {
-					const subIndex = unknownVariables.findIndex(unknownV => unknownV[0] === subVar);
+					const subIndex = unknownVariables.findIndex((unknownV) => unknownV[0] === subVar);
 					if (subIndex !== -1) {
 						unknownVariables.splice(subIndex, 1);
 					}
@@ -1699,8 +1880,10 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 				let rename: [from: string, to: string] | undefined;
 
 				if (isHash) {
-					const hashedSourceKeys: [string, string][] = Object.keys(variableSource[sourceKey]).filter(key => !key.startsWith('{')).map(key => [key, hashFnv1a(key)]);
-					const matchingKey = hashedSourceKeys.find(key => key[1] === variableName);
+					const hashedSourceKeys: [string, string][] = Object.keys(variableSource[sourceKey])
+						.filter((key) => !key.startsWith('{'))
+						.map((key) => [key, hashFnv1a(key)]);
+					const matchingKey = hashedSourceKeys.find((key) => key[1] === variableName);
 					if (matchingKey) {
 						unknownChanged ||= objectReplaceAllEncounteredValues(variableSource, variableSourceKeys, variableName, matchingKey[0]);
 						if (unknownChanged) {
@@ -1735,7 +1918,10 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 		}
 
 		if (unknownVariables.length) {
-			debug[category].variables.set(key, unknownVariables.map(v => v[0]));
+			debug[category].variables.set(
+				key,
+				unknownVariables.map((v) => v[0]),
+			);
 		} else {
 			debug[category].variables.delete(key);
 		}
@@ -1754,18 +1940,21 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 }
 
 function championAbilityDynamicVariables(specific?: IChampionSpecific<any>, abilityKey?: IChampionAbilityKey): Pick<ISpecificVariables, 'known' | 'default'> | undefined {
-	return specific && (abilityKey
-		? {
-				known: {
-					...specific.variables?.known,
-					...specific[abilityKey]?.variables?.known,
-				},
-				default: {
-					...specific.variables?.default,
-					...specific[abilityKey]?.variables?.default,
-				},
-			}
-		: specific.variables);
+	return (
+		specific &&
+		(abilityKey
+			? {
+					known: {
+						...specific.variables?.known,
+						...specific[abilityKey]?.variables?.known,
+					},
+					default: {
+						...specific.variables?.default,
+						...specific[abilityKey]?.variables?.default,
+					},
+				}
+			: specific.variables)
+	);
 }
 
 function championAbilityData(
@@ -1805,8 +1994,7 @@ function championAbilityData(
 
 	let [maxLevel, variants] = championAbilityVariants(championId, championData, abilityInfo, variantKeys);
 
-	if ((championId === 'Jayce' && abilityInfo[1] === 3)
-		|| (championId === 'Aphelios' && abilityInfo[1] < 3)) {
+	if ((championId === 'Jayce' && abilityInfo[1] === 3) || (championId === 'Aphelios' && abilityInfo[1] < 3)) {
 		if (!spellLevelUpInfo?.List) {
 			console.error(spellLevelUpInfo);
 			throw new Error(`[championAbilityData] can't resolve spellLevelUpInfo maxLevel for ${championId} in ${characterRootKey}`);
@@ -1822,13 +2010,9 @@ function championAbilityData(
 	return { maxLevel, variants };
 }
 
-function adjustApheliosAbilityData(
-	championData: any,
-	characterRootKey: string,
-	abilities: IChampion['abilities'],
-) {
+function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {
 	const { mAbilities } = championData[characterRootKey];
-	const handledAbilities = Object.values(abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey));
+	const handledAbilities = Object.values(abilities).flatMap((ability) => ability.variants.map((variant) => variant.dataKey));
 
 	abilities.w.variants = [];
 	abilities.e.variants = [];
@@ -1868,7 +2052,7 @@ function adjustApheliosAbilityData(
 			for (const img of Array.from(new Set(variantData.mSpell.mImgIconName)) as string[]) {
 				const image = img.toLowerCase().replace('.dds', '.png');
 				const key = image.at(-5) === 'l' ? 'image' : 'imageAlt';
-				const existingVariantIndex = variants.findIndex(variant => variant.image.slice(0, -6) === image.slice(0, -6));
+				const existingVariantIndex = variants.findIndex((variant) => variant.image.slice(0, -6) === image.slice(0, -6));
 				if (~existingVariantIndex) {
 					variants[existingVariantIndex]![key] = image;
 				} else {
@@ -1882,7 +2066,7 @@ function adjustApheliosAbilityData(
 						tooltip: undefined,
 						tooltipExtended: undefined,
 						tooltipExtendedBelowLine: undefined,
-					} as typeof variants[number]);
+					} as (typeof variants)[number]);
 				}
 			}
 
@@ -1912,7 +2096,7 @@ function adjustApheliosAbilityData(
 		qVariantKeys.push(abilityData.mRootSpell);
 	}
 
-	([, abilities.q.variants] = championAbilityVariants('Aphelios', championData, ['q', 0], qVariantKeys));
+	[, abilities.q.variants] = championAbilityVariants('Aphelios', championData, ['q', 0], qVariantKeys);
 	abilities.q.variants.sort((a, b) => {
 		const weaponA = a.image.slice(a.image.lastIndexOf('/') + 3, -4);
 		const weaponB = b.image.slice(b.image.lastIndexOf('/') + 3, -4);
@@ -1924,31 +2108,18 @@ function adjustApheliosAbilityData(
 	});
 }
 
-function championAbilityVariants(
-	championId: IChampionId,
-	championData: any,
-	[abilityKey]: [IChampionAbilityKey, number],
-	variantDataKeys: string[],
-): [maxLevel: number | undefined, IChampionAbility['variants']] {
+function championAbilityVariants(championId: IChampionId, championData: any, [abilityKey]: [IChampionAbilityKey, number], variantDataKeys: string[]): [maxLevel: number | undefined, IChampionAbility['variants']] {
 	let maxLevel: number | undefined;
 	const variants: IChampionAbility['variants'] = [];
 	const otherAbilityTooltipVariantDataKeys: string[] = [];
 
 	for (let i = 0; i < variantDataKeys.length; i++) {
-		const [variant, variantMaxLevel] = championAbilityVariant(
-			championId,
-			abilityKey,
-			championData,
-			i,
-			variantDataKeys[i]!,
-			variants,
-			otherAbilityTooltipVariantDataKeys,
-		);
+		const [variant, variantMaxLevel] = championAbilityVariant(championId, abilityKey, championData, i, variantDataKeys[i]!, variants, otherAbilityTooltipVariantDataKeys);
 		variant && variants.push(variant);
 		maxLevel ??= variantMaxLevel;
 	}
 
-	const unresolvedUsedVariantObjectNames = otherAbilityTooltipVariantDataKeys.filter(objectName => !variants.some(v => v.objectName === objectName || v.objectName.toLowerCase() === objectName.toLowerCase()));
+	const unresolvedUsedVariantObjectNames = otherAbilityTooltipVariantDataKeys.filter((objectName) => !variants.some((v) => v.objectName === objectName || v.objectName.toLowerCase() === objectName.toLowerCase()));
 
 	/*
 	 * some ability tooltips use variables from ability variants that aren't extracted by `championAbilityData`
@@ -1961,16 +2132,7 @@ function championAbilityVariants(
 	 */
 	let unresolvedVariantDataKey = unresolvedUsedVariantObjectNames.shift();
 	while (unresolvedVariantDataKey) {
-		const [variant] = championAbilityVariant(
-			championId,
-			abilityKey,
-			championData,
-			variants.length,
-			unresolvedVariantDataKey,
-			variants,
-			otherAbilityTooltipVariantDataKeys,
-			false,
-		);
+		const [variant] = championAbilityVariant(championId, abilityKey, championData, variants.length, unresolvedVariantDataKey, variants, otherAbilityTooltipVariantDataKeys, false);
 		variant && variants.push(variant);
 		unresolvedVariantDataKey = unresolvedUsedVariantObjectNames.shift();
 	}
@@ -1994,7 +2156,7 @@ function championAbilityVariant(
 	const variantData = championData[variantDataKey!];
 	const variantMSpell = variantData?.mSpell;
 
-	if (variants.some(v => v.objectName === variantData.ObjectName)) {
+	if (variants.some((v) => v.objectName === variantData.ObjectName)) {
 		return [undefined, undefined];
 	}
 
@@ -2044,33 +2206,30 @@ function championAbilityVariant(
 		objectName: variantData.ObjectName,
 		dataKey: variantDataKey,
 		/** belveth has the fully highlighted q at last index */
-		image: mImgIconName.at(championId === 'Belveth' && abilityKey === 'q' && variantIndex === 0 ? -1 : 0).toLowerCase().replace('.dds', '.png'),
+		image: mImgIconName
+			.at(championId === 'Belveth' && abilityKey === 'q' && variantIndex === 0 ? -1 : 0)
+			.toLowerCase()
+			.replace('.dds', '.png'),
 		mana,
 		cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 		tooltip: undefined,
 		tooltipExtended: undefined,
 		tooltipExtendedBelowLine: undefined,
 		extendedVariables: saveTooltips
-			? mClientData.mTooltipData?.mLists?.LevelUp?.Elements
-					?.filter((variable: any) => variable.type !== 'Cooldown')
-					.map((variable: any) => {
-						const { type, typeIndex } = variable;
-						if (!type) {
-							console.warn(`${debugPrefix} extended variable no type`, variable);
-						}
+			? mClientData.mTooltipData?.mLists?.LevelUp?.Elements?.filter((variable: any) => variable.type !== 'Cooldown').map((variable: any) => {
+					const { type, typeIndex } = variable;
+					if (!type) {
+						console.warn(`${debugPrefix} extended variable no type`, variable);
+					}
 
-						// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
-						return {
-							name: type.replace('%d', typeIndex),
-							nameOverride: variable.nameOverride?.toLowerCase(),
-						};
-					})
+					// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
+					return {
+						name: type.replace('%d', typeIndex),
+						nameOverride: variable.nameOverride?.toLowerCase(),
+					};
+				})
 			: undefined,
-		dataValues: DataValues?.length
-			? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) =>
-					[name, values?.length ? values.map(value => formatNumber(value)) : undefined],
-				))
-			: undefined,
+		dataValues: DataValues?.length ? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) => [name, values?.length ? values.map((value) => formatNumber(value)) : undefined])) : undefined,
 		spellCalculations: cleanupObject(mSpellCalculations),
 		effectAmount: cleanupObject(mEffectAmount, true),
 		ammoRechargeTime: variantData.mSpell?.mAmmoRechargeTime,
@@ -2111,7 +2270,7 @@ function isImmobilizingAbilityVariant(abilityKey: IChampionAbilityKey, dataValue
 		return false;
 	}
 
-	if (mSpellTags?.some(tag => ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS.includes(tag))) {
+	if (mSpellTags?.some((tag) => ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS.includes(tag))) {
 		return true;
 	}
 
@@ -2132,7 +2291,7 @@ function isImmobilizingAbilityVariant(abilityKey: IChampionAbilityKey, dataValue
 			/*
 			 * most of the actual immobilzing spells should have been caught before this, through displacement flag or mSpellTags but this seems to be needed to catch ASol R and detect things like Annie R, which match the cc flag but don't have a data value that would be commonly used for cc duration
 			 */
-			if ((entry.EffectTag & ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS)) {
+			if (entry.EffectTag & ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS) {
 				const durationNames = ['StunDuration', 'RootDuration', 'FearDuration', 'CharmDuration'];
 				for (const durationName of durationNames) {
 					if (dataValues?.[durationName]) {
@@ -2165,7 +2324,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 	const abilitiesWithVariants = filteredAbilitiesWithVariants.map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [IChampionAbilityKey, IChampionAbility['variants']][];
 
-	const allVariants = abilitiesWithVariants.flatMap(([abilityKey, variants]) => variants.map(variant => [variant, abilityKey] as [IChampionAbilityVariant, IChampionAbilityKey]));
+	const allVariants = abilitiesWithVariants.flatMap(([abilityKey, variants]) => variants.map((variant) => [variant, abilityKey] as [IChampionAbilityVariant, IChampionAbilityKey]));
 
 	for (const [abilityKey, variants] of abilitiesWithVariants) {
 		for (let i = 0; i < variants.length; i++) {
@@ -2189,16 +2348,23 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			const variantTooltipStringtableKey = variant.tooltip;
 			const lowercaseVariantTooltipStringtableKey = variantTooltipStringtableKey?.toLowerCase();
 
-			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` })!;
-			variant.name = transformAbilityText(variant.name);
-			variant.tooltip = variant.tooltip && getStringtableValue(
-				variant.tooltip,
-				{
+			variant.name =
+				variant.name &&
+				getStringtableValue(variant.name, {
 					...variableDebug,
-					key: `${debugPrefix} ${variant.objectName} tooltip`,
-				},
-				false,
-			);
+					key: `${debugPrefix} ${variant.objectName} name`,
+				})!;
+			variant.name = transformAbilityText(variant.name);
+			variant.tooltip =
+				variant.tooltip &&
+				getStringtableValue(
+					variant.tooltip,
+					{
+						...variableDebug,
+						key: `${debugPrefix} ${variant.objectName} tooltip`,
+					},
+					false,
+				);
 			if (variant.tooltip) {
 				const preplace = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[abilityKey]?.preplaceTooltipText;
 				if (preplace) {
@@ -2206,15 +2372,19 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				}
 				variant.tooltip &&= transformAbilityText(variant.tooltip);
 			}
-			variant.tooltipExtended = variant.tooltipExtended && getStringtableValue(
-				variant.tooltipExtended,
-				{ ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` },
-			);
+			variant.tooltipExtended =
+				variant.tooltipExtended &&
+				getStringtableValue(variant.tooltipExtended, {
+					...variableDebug,
+					key: `${debugPrefix} ${variant.objectName} tooltip extended`,
+				});
 			variant.tooltipExtended &&= transformAbilityText(variant.tooltipExtended);
-			variant.tooltipExtendedBelowLine = variant.tooltipExtendedBelowLine && getStringtableValue(
-				variant.tooltipExtendedBelowLine,
-				{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
-			);
+			variant.tooltipExtendedBelowLine =
+				variant.tooltipExtendedBelowLine &&
+				getStringtableValue(variant.tooltipExtendedBelowLine, {
+					...variableDebug,
+					key: `${debugPrefix} ${variant.dataKey} tooltip extended below line`,
+				});
 			variant.tooltipExtendedBelowLine &&= transformAbilityText(variant.tooltipExtendedBelowLine);
 
 			for (const extendedVariable of variant.extendedVariables || []) {
@@ -2224,7 +2394,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			}
 
 			/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
-			if (lowercaseVariantTooltipStringtableKey && (lowercaseVariantTooltipStringtableKey in champion.stringtable)) {
+			if (lowercaseVariantTooltipStringtableKey && lowercaseVariantTooltipStringtableKey in champion.stringtable) {
 				champion.stringtable[lowercaseVariantTooltipStringtableKey] = variant.tooltip!;
 				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
 			}
@@ -2263,7 +2433,7 @@ function extractEffectDescription(description: string) {
 
 function getUnknownTags(text: string): Set<string> {
 	const tags = text.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
-	return new Set(Array.from(tags, m => m[1]!.toLocaleLowerCase()).filter(tag => !KNOWN_GAME_DESCRIPTION_TAGS.includes(tag)));
+	return new Set(Array.from(tags, (m) => m[1]!.toLocaleLowerCase()).filter((tag) => !KNOWN_GAME_DESCRIPTION_TAGS.includes(tag)));
 }
 
 function formatNumber(n: number): number {
@@ -2280,27 +2450,15 @@ function cleanupObject(obj?: object, removeType = false): any {
 	if (removeType) {
 		entries = entries.filter(([key]) => key !== '__type');
 	} else {
-		entries = entries.filter(([key, value]) => key !== '__type' || ![
-			'GameCalculation',
-			'Breakpoint',
-			'{e9a3c91d}', /* ranged multiplier */
-			'{4750ceb6}', /* melee ranged result */
-		].includes(value));
+		entries = entries.filter(([key, value]) => key !== '__type' || !['GameCalculation', 'Breakpoint', '{e9a3c91d}' /* ranged multiplier */, '{4750ceb6}' /* melee ranged result */].includes(value));
 	}
 
 	if (entries.length === 1 && entries[0]![0] === 'value') {
-		return entries[0]![1].map((v: unknown) => typeof v === 'number' ? formatNumber(v) : v);
+		return entries[0]![1].map((v: unknown) => (typeof v === 'number' ? formatNumber(v) : v));
 	}
 
-	return Object.fromEntries(entries.map(([key, value]) =>
-		[key, typeof value === 'object'
-			? Array.isArray(value)
-				? value.map(v => cleanupObject(v, removeType))
-				: cleanupObject(value, removeType)
-			: typeof value === 'number'
-				? formatNumber(value)
-				: value],
-	),
+	return Object.fromEntries(
+		entries.map(([key, value]) => [key, typeof value === 'object' ? (Array.isArray(value) ? value.map((v) => cleanupObject(v, removeType)) : cleanupObject(value, removeType)) : typeof value === 'number' ? formatNumber(value) : value]),
 	);
 }
 
@@ -2314,11 +2472,11 @@ function isEmptyObject(obj: unknown): boolean {
 	}
 
 	if (Array.isArray(obj)) {
-		return obj.every(v => isEmptyObject(v));
+		return obj.every((v) => isEmptyObject(v));
 	}
 
 	const values = Object.values(obj as Record<string, unknown>);
-	return (values.length === 1 && '__type' in obj) || values.every(v => isEmptyObject(v));
+	return (values.length === 1 && '__type' in obj) || values.every((v) => isEmptyObject(v));
 }
 
 async function fetchCached(url: string, filename: string, responseMethod: 'text' | 'json' | 'arrayBuffer' = 'json') {
@@ -2331,17 +2489,15 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 	try {
 		await fs.access(cacheFilePath);
 		data = await fs.readFile(cacheFilePath);
-		data = responseMethod === 'text'
-			? data.toString('utf8')
-			: responseMethod === 'json'
-				? JSON.parse(data.toString('utf8'))
-				: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
-	} catch {};
+		data = responseMethod === 'text' ? data.toString('utf8') : responseMethod === 'json' ? JSON.parse(data.toString('utf8')) : data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+	} catch {}
 	if (!data || (typeof data === 'object' && !Object.keys(data).length)) {
-		data = await fetch(url).then(r => r[responseMethod]()).catch((err) => {
-			console.log(`[fetchCached] ${url} ${responseMethod}`);
-			throw err;
-		});
+		data = await fetch(url)
+			.then((r) => r[responseMethod]())
+			.catch((err) => {
+				console.log(`[fetchCached] ${url} ${responseMethod}`);
+				throw err;
+			});
 		await fs.mkdir(path.dirname(cacheFilePath), { recursive: true });
 		await fs.writeFile(cacheFilePath, responseMethod === 'json' ? stringifyObject(data) : responseMethod === 'arrayBuffer' ? buffer.Buffer.from(data) : data);
 	}

@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IAmbessa from '@lolcalc/data/files/champion/Ambessa.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IAmbessa from '@lolcalc/data/files/champion/Ambessa.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -26,7 +27,12 @@ export default {
 		postInit: {
 			handler(self, { championPassiveStats }) {
 				if (self.internalData.value.hasPassiveStack) {
-					const attackRange = championAbilityVariableValue('Attack_Range_Amount', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: {} as DamageSource });
+					const attackRange = championAbilityVariableValue('Attack_Range_Amount', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: {} as DamageSource,
+					});
 					if (typeof attackRange.value === 'number') {
 						championPassiveStats.attackRange = attackRange.value;
 					} else {
@@ -38,7 +44,12 @@ export default {
 		onChampionPassive: {
 			handler(self, { championPassiveStats }) {
 				if (self.internalData.value.hasPassiveStack) {
-					const attackSpeed = championAbilityVariableValue('Calc_Attack_Speed', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: {} as DamageSource });
+					const attackSpeed = championAbilityVariableValue('Calc_Attack_Speed', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: {} as DamageSource,
+					});
 					if (typeof attackSpeed.value === 'number') {
 						championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value;
 					} else {

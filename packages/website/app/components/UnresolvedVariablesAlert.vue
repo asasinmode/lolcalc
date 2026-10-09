@@ -1,5 +1,4 @@
-<script setup vapor lang="ts">
-</script>
+<script setup vapor lang="ts"></script>
 
 <template>
 	<p class="alert warning">

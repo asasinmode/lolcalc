@@ -1,8 +1,9 @@
-import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IBriar from '@lolcalc/data/files/champion/Briar.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { combineCompounding } from '@lolcalc/core/calculate/util.ts';
+import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IBriar from '@lolcalc/data/files/champion/Briar.json';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -35,7 +36,12 @@ export default {
 				const currentHpPercent = Math.min(self.currentHealth.value, totalStats.hp) / totalStats.hp;
 				const missingHealthPercent = (1 - currentHpPercent) * 100;
 
-				const healingMultVar = championAbilityVariableValue('TotalHealPerMissingHPPercentTooltip', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
+				const healingMultVar = championAbilityVariableValue('TotalHealPerMissingHPPercentTooltip', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource,
+				});
 				const { calculatesFrom } = healingMultVar;
 
 				if (typeof calculatesFrom?.[0]?.value !== 'number' || typeof calculatesFrom?.[1]?.value !== 'number') {
@@ -44,7 +50,7 @@ export default {
 					return;
 				}
 
-				calculatedVariables.briarHealingMult = calculatesFrom[0].value * missingHealthPercent / 10_000 + (bonusStats.hp / 100) * missingHealthPercent * calculatesFrom[1].value / 100;
+				calculatedVariables.briarHealingMult = (calculatesFrom[0].value * missingHealthPercent) / 10_000 + ((bonusStats.hp / 100) * missingHealthPercent * calculatesFrom[1].value) / 100;
 
 				calculatedVariables.hpRegenMult = combineCompounding(calculatedVariables.hpRegenMult, calculatedVariables.briarHealingMult);
 				calculatedVariables.healMultAdditive += calculatedVariables.briarHealingMult;

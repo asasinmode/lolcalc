@@ -1,9 +1,20 @@
 import type { TMiscData } from '@lolcalc/data';
-import type { IChampionId, IItem, IItemStat } from '@lolcalc/data/types';
-import type { IAdaptiveForceStatRv, IChampionStatName, IChampionStats, IMultiplicativeChampionStatName, IStatsCalculationDebuffs, IStatsCalculationEffectVars, IStatsCalculationMiscDebug, IStatsCalculationResult, IStatsCalculationVariables } from '@lolcalc/shared';
-import type { DamageSource } from '../DamageSource';
 import { CONSTS, MISC } from '@lolcalc/data';
 import { ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
+import type { IChampionId, IItem, IItemStat } from '@lolcalc/data/types';
+import type {
+	IAdaptiveForceStatRv,
+	IChampionStatName,
+	IChampionStats,
+	IMultiplicativeChampionStatName,
+	IStatsCalculationDebuffs,
+	IStatsCalculationEffectVars,
+	IStatsCalculationMiscDebug,
+	IStatsCalculationResult,
+	IStatsCalculationVariables,
+} from '@lolcalc/shared';
+
+import type { DamageSource } from '../DamageSource';
 import { cooldownReductionPercentageFromHaste } from '../specifics/champion/shared.ts';
 import { addMultiplicative, calculateMSCapPenalty, combineCompounding } from './util.ts';
 
@@ -90,9 +101,9 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 
 	const baseStats = structuredClone(initialStats);
-	const bonusStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	const bonusStats = Object.fromEntries(Object.keys(baseStats).map((key) => [key, 0])) as IChampionStats;
 	const championPassiveStats: Partial<IChampionStats> = {};
-	const effectStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	const effectStats = Object.fromEntries(Object.keys(baseStats).map((key) => [key, 0])) as IChampionStats;
 
 	const levelStats: Partial<IChampionStats> = {
 		hp: champion?.stats.hpperlevel ?? 0,
@@ -113,17 +124,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
-	const isRanged: IStatsCalculationResult['isRanged'] = champion && ((baseStats.attackRange ?? 0) + (championPassiveStats.attackRange ?? 0) > 325);
+	const isRanged: IStatsCalculationResult['isRanged'] = champion && (baseStats.attackRange ?? 0) + (championPassiveStats.attackRange ?? 0) > 325;
 
 	const gfm = CONSTS.statGfm(level);
 	for (const stat in levelStats) {
 		levelStats[stat as keyof typeof levelStats]! *= (level - 1) * gfm;
 	}
 
-	const baseOnLevelStats = Object.fromEntries(Object.entries(baseStats).map(
-		([statName, statValue]) => [statName, statValue
-		+ (levelStats[statName as keyof typeof levelStats] || 0)],
-	)) as IChampionStats;
+	const baseOnLevelStats = Object.fromEntries(Object.entries(baseStats).map(([statName, statValue]) => [statName, statValue + (levelStats[statName as keyof typeof levelStats] || 0)])) as IChampionStats;
 
 	const dragonStats: IStatsCalculationResult['dragon'] = {
 		tenacity: 1,
@@ -137,7 +145,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 
 	const itemStatIncreases: IStatsCalculationResult['itemStatIncreases'] = {};
-	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	const itemBaseStats = Object.fromEntries(Object.keys(baseStats).map((key) => [key, 0])) as IChampionStats;
 	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
 		itemBaseStats[stat] = 1;
 	}
@@ -173,7 +181,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemBaseStats[stat] = 1 - itemBaseStats[stat];
 	}
 
-	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	const itemPassivesStats = Object.fromEntries(Object.keys(baseStats).map((key) => [key, 0])) as IChampionStats;
 	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
 		itemPassivesStats[stat] = 1;
 	}
@@ -184,7 +192,22 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.preItemTotal) {
-			hook(source, { isRanged, itemBaseStats, itemPassivesStats, baseStats, baseOnLevelStats, itemStatIncreases, effectStats, dragonStatMultipliers, dragonStats, championPassiveStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(
+				source,
+				{
+					isRanged,
+					itemBaseStats,
+					itemPassivesStats,
+					baseStats,
+					baseOnLevelStats,
+					itemStatIncreases,
+					effectStats,
+					dragonStatMultipliers,
+					dragonStats,
+					championPassiveStats,
+				},
+				{ calculatedVariables, debuffs, effectVars, miscDebug },
+			);
 		}
 	}
 	itemPassivesStats.attackSpeed = itemPassivesStats.bonusAttackSpeedPercent * baseStats.attackSpeedRatio;
@@ -197,12 +220,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	dragonStats.tenacity = 1 - dragonStats.tenacity;
 	dragonStats.slowResist = 1 - dragonStats.slowResist;
 
-	const itemTotalStats = Object.fromEntries(Object.entries(itemBaseStats).map(([key, value]) => [
-		key,
-		MULTIPLICATIVE_CHAMPION_STATS.includes(key as IChampionStatName)
-			? addMultiplicative(1, value, itemPassivesStats[key as IChampionStatName])
-			: (value + itemPassivesStats[key as IChampionStatName]),
-	]),
+	const itemTotalStats = Object.fromEntries(
+		Object.entries(itemBaseStats).map(([key, value]) => [
+			key,
+			MULTIPLICATIVE_CHAMPION_STATS.includes(key as IChampionStatName) ? addMultiplicative(1, value, itemPassivesStats[key as IChampionStatName]) : value + itemPassivesStats[key as IChampionStatName],
+		]),
 	) as IChampionStats;
 	for (const stat of MULTIPLICATIVE_CHAMPION_STATS) {
 		itemTotalStats[stat] = 1 - itemTotalStats[stat];
@@ -213,7 +235,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		itemTotalStats.mana = 0;
 	}
 
-	const totalMultipliersStats = Object.fromEntries(Object.keys(baseStats).map(key => [key, 0])) as IChampionStats;
+	const totalMultipliersStats = Object.fromEntries(Object.keys(baseStats).map((key) => [key, 0])) as IChampionStats;
 
 	if (source.calculateStatsHooks.all.value.postItemTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postItemTotal) {
@@ -222,8 +244,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}
 	calculatedVariables.postItemTotalApMultipliersBase = calculatedVariables.apMultipliersBase;
 
-	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage + calculatedVariables.additionalAdaptiveForceCheckAd, itemTotalStats.abilityPower + calculatedVariables.additionalAdaptiveForceCheckAp,
-	);
+	const adaptiveForceMeta = getAdaptiveForceStat(champion?.id, itemTotalStats.attackDamage + calculatedVariables.additionalAdaptiveForceCheckAd, itemTotalStats.abilityPower + calculatedVariables.additionalAdaptiveForceCheckAp);
 
 	const runeShardStats: IStatsCalculationResult['runeShards'] = {
 		tenacity: 1,
@@ -247,36 +268,50 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.preBonus) {
 		for (const hook of source.calculateStatsHooks.all.value.preBonus) {
-			hook(source, { isRanged, runeShardStats, itemBaseStats, itemPassivesStats, itemTotalStats, baseOnLevelStats, bonusStats, championPassiveStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(
+				source,
+				{
+					isRanged,
+					runeShardStats,
+					itemBaseStats,
+					itemPassivesStats,
+					itemTotalStats,
+					baseOnLevelStats,
+					bonusStats,
+					championPassiveStats,
+				},
+				{ calculatedVariables, debuffs, effectVars, miscDebug },
+			);
 		}
 	}
 
 	effectStats.attackSpeed += effectStats.bonusAttackSpeedPercent * baseOnLevelStats.attackSpeedRatio;
 	for (const stat in bonusStats) {
 		if (MULTIPLICATIVE_CHAMPION_STATS.includes(stat as IChampionStatName)) {
-			bonusStats[stat as IMultiplicativeChampionStatName] = 1 - addMultiplicative(
-				1,
-				bonusStats[stat as IMultiplicativeChampionStatName],
-				runeShardStats[stat as IMultiplicativeChampionStatName] ?? 0,
-				dragonStats[stat as IMultiplicativeChampionStatName] ?? 0,
-				itemTotalStats[stat as IMultiplicativeChampionStatName],
-				championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0,
-			);
+			bonusStats[stat as IMultiplicativeChampionStatName] =
+				1 -
+				addMultiplicative(
+					1,
+					bonusStats[stat as IMultiplicativeChampionStatName],
+					runeShardStats[stat as IMultiplicativeChampionStatName] ?? 0,
+					dragonStats[stat as IMultiplicativeChampionStatName] ?? 0,
+					itemTotalStats[stat as IMultiplicativeChampionStatName],
+					championPassiveStats[stat as IMultiplicativeChampionStatName] ?? 0,
+				);
 		} else {
-			bonusStats[stat as IChampionStatName]! += (runeShardStats[stat as IChampionStatName] ?? 0)
-				+ (dragonStats[stat as IChampionStatName] ?? 0)
-				+ itemTotalStats[stat as IChampionStatName]
-				+ (championPassiveStats[stat as IChampionStatName] ?? 0)
-				+ effectStats[stat as IChampionStatName];
+			bonusStats[stat as IChampionStatName]! +=
+				(runeShardStats[stat as IChampionStatName] ?? 0) +
+				(dragonStats[stat as IChampionStatName] ?? 0) +
+				itemTotalStats[stat as IChampionStatName] +
+				(championPassiveStats[stat as IChampionStatName] ?? 0) +
+				effectStats[stat as IChampionStatName];
 		}
 	}
 
 	calculatedVariables.tenacityBucketB = 1 - calculatedVariables.tenacityBucketB;
 	bonusStats.tenacity += calculatedVariables.tenacityBucketB;
 
-	const totalPreMultipliersStats = Object.fromEntries(Object.entries(bonusStats).map(
-		([statName, statValue]) => [statName, statValue + baseOnLevelStats[statName as IChampionStatName]],
-	)) as IChampionStats;
+	const totalPreMultipliersStats = Object.fromEntries(Object.entries(bonusStats).map(([statName, statValue]) => [statName, statValue + baseOnLevelStats[statName as IChampionStatName]])) as IChampionStats;
 
 	/* attack speed from level counts towards bonus, add after totalPreMultipliersStats to avoid double counting */
 	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
@@ -290,7 +325,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		}
 	}
 
-	{ /* ms calc */
+	{
+		/* ms calc */
 		debuffs.appliedSlow = Math.min(1, Math.max(0, ...debuffs.percentageMSSlow) * Math.max(0, 1 - totalPreMultipliersStats.slowResist));
 		debuffs.appliedFlatSlow = debuffs.flatMSSlow.reduce((acc, curr) => acc + curr, 0);
 
@@ -305,15 +341,15 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 		const baseRawMS = (baseStats.moveSpeed + effectiveFlatMS) * (1 + effectivePercentMS);
 
-		const multFactor = 1 + combineCompounding(
-			multiplicativeMSMultiplier,
-			/* something mathy going on to do with rational curves */
-			cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeed.multFactorDenominator - multiplicativeMSMultiplier)),
-		);
+		const multFactor =
+			1 +
+			combineCompounding(
+				multiplicativeMSMultiplier,
+				/* something mathy going on to do with rational curves */
+				cassioPMult * multiplicativeMSMultiplier * (1 + multiplicativeMSMultiplier / (CONSTS.moveSpeed.multFactorDenominator - multiplicativeMSMultiplier)),
+			);
 
-		const rawTotalMS = baseRawMS > 0
-			? baseRawMS * multFactor * (1 - debuffs.appliedSlow)
-			: baseRawMS;
+		const rawTotalMS = baseRawMS > 0 ? baseRawMS * multFactor * (1 - debuffs.appliedSlow) : baseRawMS;
 
 		const penalty = calculateMSCapPenalty(rawTotalMS, initialStats.moveSpeed >= CONSTS.moveSpeed.firstBottomSoftCapThreshold || debuffs.appliedSlow !== 0 || debuffs.appliedFlatSlow !== 0);
 		calculatedVariables.movespeedSoftCapPenalty = penalty;
@@ -322,8 +358,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusStats.moveSpeed = Math.max(0, rawTotalMS - baseStats.moveSpeed - penalty);
 	}
 
-	// eslint-disable-next-line no-lone-blocks
-	{ /* attack speed cripple */
+	{
+		/* attack speed cripple */
 		debuffs.cripple = 1 - debuffs.cripple;
 		debuffs.totalCrippledAttackSpeed = totalPreMultipliersStats.attackSpeed * debuffs.cripple;
 		totalPreMultipliersStats.attackSpeed -= debuffs.totalCrippledAttackSpeed;
@@ -332,7 +368,24 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
 		for (const hook of source.calculateStatsHooks.all.value.onTotalPreMultipliers) {
-			hook(source, { isRanged, totalPreMultipliersStats, totalMultipliersStats, bonusStats, effectStats, itemPassivesStats, itemTotalStats, championPassiveStats, runeShardStats, baseStats, baseOnLevelStats, adaptiveForceMeta }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(
+				source,
+				{
+					isRanged,
+					totalPreMultipliersStats,
+					totalMultipliersStats,
+					bonusStats,
+					effectStats,
+					itemPassivesStats,
+					itemTotalStats,
+					championPassiveStats,
+					runeShardStats,
+					baseStats,
+					baseOnLevelStats,
+					adaptiveForceMeta,
+				},
+				{ calculatedVariables, debuffs, effectVars, miscDebug },
+			);
 		}
 	}
 
@@ -362,11 +415,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	bonusStats.attackDamage += adMultipliersBonus;
 	totalMultipliersStats.attackDamage += adMultipliersBonus;
 
-	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(
-		([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]],
-	)) as IChampionStats;
+	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]])) as IChampionStats;
 
-	{ /* shred calc */
+	{
+		/* shred calc */
 		const totalMultipliersArmorShred = (totalStats.armor - debuffs.flatArmorShred) * debuffs.percentageArmorShred;
 		debuffs.shreddedArmor = totalMultipliersArmorShred;
 		totalStats.armor = totalStats.armor - totalMultipliersArmorShred;
@@ -380,7 +432,25 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postTotal) {
 		for (const hook of source.calculateStatsHooks.all.value.postTotal) {
-			hook(source, { adaptiveForceMeta, isRanged, totalStats, dragonStatMultipliers, totalMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStats, runeShardStats, baseOnLevelStats, championPassiveStats, totalPreMultipliersStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(
+				source,
+				{
+					adaptiveForceMeta,
+					isRanged,
+					totalStats,
+					dragonStatMultipliers,
+					totalMultipliersStats,
+					bonusStats,
+					itemPassivesStats,
+					itemTotalStats,
+					dragonStats,
+					runeShardStats,
+					baseOnLevelStats,
+					championPassiveStats,
+					totalPreMultipliersStats,
+				},
+				{ calculatedVariables, debuffs, effectVars, miscDebug },
+			);
 		}
 	}
 
@@ -389,7 +459,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	totalStats.critChance = Math.min(1, totalStats.critChance);
 	totalStats.critDamageMultiplier *= calculatedVariables.critMultiplierMod;
 
-	{ /* stat related heal multipliers */
+	{
+		/* stat related heal multipliers */
 		calculatedVariables.healMult = 1 + combineCompounding(calculatedVariables.healMult, calculatedVariables.healMultAdditive);
 		calculatedVariables.shieldMult = 1 + combineCompounding(calculatedVariables.shieldMult, calculatedVariables.shieldMultAdditive);
 		const hpRegenMultValue = totalStats.hpRegen * calculatedVariables.hpRegenMult;
@@ -442,11 +513,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	};
 }
 
-function itemToChampionStats(
-	item: IItem,
-	itemStatIncreases: IStatsCalculationResult['itemStatIncreases'],
-	isMasterwork: boolean,
-): [IChampionStatName, number][] {
+function itemToChampionStats(item: IItem, itemStatIncreases: IStatsCalculationResult['itemStatIncreases'], isMasterwork: boolean): [IChampionStatName, number][] {
 	let statIncreases: Partial<Record<IItemStat, number>> | undefined;
 
 	if (isMasterwork) {
@@ -512,13 +579,106 @@ export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean
 }
 
 // TODO maybe a better way exists
-const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Ambessa', 'Aphelios', 'Ashe', 'Belveth', 'Blitzcrank', 'Braum', 'Briar', 'Caitlyn', 'Camille', 'Corki', 'Darius', 'Draven', 'DrMundo', 'Ezreal', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Graves', 'Hecarim', 'Illaoi', 'Irelia', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'Kayle', 'Kayn', 'Khazix', 'Kindred', 'Kled', 'KogMaw', 'KSante', 'LeeSin', 'Leona', 'Lucian', 'MasterYi', 'MissFortune', 'MonkeyKing', 'Naafiri', 'Nasus', 'Nilah', 'Nocturne', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rammus', 'RekSai', 'Rell', 'Renekton', 'Rengar', 'Riven', 'Samira', 'Senna', 'Sett', 'Shaco', 'Shen', 'Shyvana', 'Sion', 'Sivir', 'Skarner', 'Smolder', 'TahmKench', 'Talon', 'Taric', 'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'Twitch', 'Udyr', 'Urgot', 'Varus', 'Vayne', 'Vi', 'Viego', 'Volibear', 'Warwick', 'Xayah', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yunara', 'Zaahen', 'Zed', 'Zeri'];
+const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = [
+	'Aatrox',
+	'Akshan',
+	'Ambessa',
+	'Aphelios',
+	'Ashe',
+	'Belveth',
+	'Blitzcrank',
+	'Braum',
+	'Briar',
+	'Caitlyn',
+	'Camille',
+	'Corki',
+	'Darius',
+	'Draven',
+	'DrMundo',
+	'Ezreal',
+	'Fiora',
+	'Gangplank',
+	'Garen',
+	'Gnar',
+	'Graves',
+	'Hecarim',
+	'Illaoi',
+	'Irelia',
+	'JarvanIV',
+	'Jax',
+	'Jayce',
+	'Jhin',
+	'Jinx',
+	'Kaisa',
+	'Kalista',
+	'Kayle',
+	'Kayn',
+	'Khazix',
+	'Kindred',
+	'Kled',
+	'KogMaw',
+	'KSante',
+	'LeeSin',
+	'Leona',
+	'Lucian',
+	'MasterYi',
+	'MissFortune',
+	'MonkeyKing',
+	'Naafiri',
+	'Nasus',
+	'Nilah',
+	'Nocturne',
+	'Olaf',
+	'Ornn',
+	'Pantheon',
+	'Poppy',
+	'Pyke',
+	'Qiyana',
+	'Quinn',
+	'Rammus',
+	'RekSai',
+	'Rell',
+	'Renekton',
+	'Rengar',
+	'Riven',
+	'Samira',
+	'Senna',
+	'Sett',
+	'Shaco',
+	'Shen',
+	'Shyvana',
+	'Sion',
+	'Sivir',
+	'Skarner',
+	'Smolder',
+	'TahmKench',
+	'Talon',
+	'Taric',
+	'Thresh',
+	'Tristana',
+	'Trundle',
+	'Tryndamere',
+	'Twitch',
+	'Udyr',
+	'Urgot',
+	'Varus',
+	'Vayne',
+	'Vi',
+	'Viego',
+	'Volibear',
+	'Warwick',
+	'Xayah',
+	'XinZhao',
+	'Yasuo',
+	'Yone',
+	'Yorick',
+	'Yunara',
+	'Zaahen',
+	'Zed',
+	'Zeri',
+];
 
 function getAdaptiveForceStat(championId: string | undefined, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
 	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0, 0.6];
-	return attackDamage > abilityPower
-		? adRv
-		: (attackDamage === abilityPower && ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS.includes(championId as IChampionId))
-				? adRv
-				: ['abilityPower', 1, 1];
+	return attackDamage > abilityPower ? adRv : attackDamage === abilityPower && ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS.includes(championId as IChampionId) ? adRv : ['abilityPower', 1, 1];
 }

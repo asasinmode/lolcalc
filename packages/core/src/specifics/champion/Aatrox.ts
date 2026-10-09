@@ -1,7 +1,8 @@
-import type IAatrox from '@lolcalc/data/files/champion/Aatrox.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IAatrox from '@lolcalc/data/files/champion/Aatrox.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -13,7 +14,11 @@ export default {
 			calculate(self, target) {
 				let Damage = Number.NaN;
 
-				const damagePercent = championAbilityVariableValue('PDamage', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
+				const damagePercent = championAbilityVariableValue('PDamage', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				});
 				if (typeof damagePercent.value === 'number') {
 					Damage = (target?.stats.value.total.hp ?? 0) * damagePercent.value;
 				} else {

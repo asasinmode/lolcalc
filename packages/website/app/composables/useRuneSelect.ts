@@ -1,5 +1,6 @@
 import type { IChampionRunes } from '@lolcalc/data/types';
 import type { ComponentExposed } from 'vue-component-type-helpers';
+
 import LolRuneSelect from '~/components/Lol/LolRuneSelect.vue';
 
 let resolve: (() => void) | undefined;
@@ -17,17 +18,19 @@ function selectRunes(targetRef: Ref<IChampionRunes>): Promise<void> {
 	});
 }
 
-const _component = defineComponent(() =>
-	() => h(LolRuneSelect, {
-		'ref': dialogRef,
-		'modelValue': valueRef.value?.value,
-		'onUpdate:modelValue': function (value) {
-			valueRef.value!.value = value!;
-		},
-		onClose() {
-			resolve?.();
-		},
-	}));
+const _component = defineComponent(
+	() => () =>
+		h(LolRuneSelect, {
+			ref: dialogRef,
+			modelValue: valueRef.value?.value,
+			'onUpdate:modelValue': function (value) {
+				valueRef.value!.value = value!;
+			},
+			onClose() {
+				resolve?.();
+			},
+		}),
+);
 
 export function useRuneSelect() {
 	return {

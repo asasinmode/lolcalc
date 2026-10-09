@@ -1,29 +1,30 @@
 <script setup vapor lang="ts">
-import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
-import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';
-import type { TUi } from '@lolcalc/data';
-import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
-import type { IChampionRole } from '@lolcalc/shared/types';
-import type { IExtraComponentEmits } from '~/utils/types';
 import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
+import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
+import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { replaceGameIcons } from '@lolcalc/core/misc';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion/shared';
+import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';
 import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
 import { replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
+import type { TUi } from '@lolcalc/data';
 import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, MISC, PATCH_VERSION, RUNE_SLOT_NAME_TO_NUMBER, RUNES, TEXT, textureBgImageAttrs, UI } from '@lolcalc/data';
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
+import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
+import type { IChampionRole } from '@lolcalc/shared/types';
 import { toValue } from 'vue';
+
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
 import { ExtraLoading } from '~/utils/component';
+import type { IExtraComponentEmits } from '~/utils/types';
 
 type IShowTooltipEventArgs = IExtraComponentEmits['imgMouseenter'];
 
@@ -66,11 +67,8 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 
 const el = useTemplateRef('el');
 
-const group = computed(() => props.isRight ? 'targets' : 'sources');
-const otherGroup = computed(() => props.isRight
-	? 'sources'
-	: 'targets',
-);
+const group = computed(() => (props.isRight ? 'targets' : 'sources'));
+const otherGroup = computed(() => (props.isRight ? 'sources' : 'targets'));
 
 const idSuffix = computed(() => `${group.value}-${props.index}`);
 
@@ -172,18 +170,20 @@ function removeAndFocusNext() {
 	});
 }
 
-const removeButtonAttrs = computed(() => (isFirstAndOnly.value
-	? {
-			title: 'clear',
-			disabled: !props.value.anythingFilled.value,
-			emit: emitClear,
-		}
-	: {
-			title: 'remove',
-			subtext: 'shift+click to clear',
-			disabled: !props.canRemove,
-			emit: emitRemove,
-		}));
+const removeButtonAttrs = computed(() =>
+	isFirstAndOnly.value
+		? {
+				title: 'clear',
+				disabled: !props.value.anythingFilled.value,
+				emit: emitClear,
+			}
+		: {
+				title: 'remove',
+				subtext: 'shift+click to clear',
+				disabled: !props.canRemove,
+				emit: emitRemove,
+			},
+);
 
 const detailsContainer = useTemplateRef('details');
 const isExpanded = ref(false);
@@ -212,21 +212,10 @@ const dragonsEl = useTemplateRef('dragons');
 const extrasEl = useTemplateRef('extras');
 
 function doubleClickToggle(event: MouseEvent) {
-	if ([
-		event.currentTarget,
-		headerEl.value,
-		detailsContainer.value,
-		effectsEl.value,
-		effectsListEl.value,
-		abiltiesEl.value,
-		healthAbilityResourceEl.value,
-		roleQuestEl.value,
-		dragonsEl.value,
-		extrasEl.value,
-	].includes(event.target)) {
+	if ([event.currentTarget, headerEl.value, detailsContainer.value, effectsEl.value, effectsListEl.value, abiltiesEl.value, healthAbilityResourceEl.value, roleQuestEl.value, dragonsEl.value, extrasEl.value].includes(event.target)) {
 		toggleExpanded();
 		event.preventDefault();
-	};
+	}
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
@@ -235,7 +224,10 @@ const hoveredItemIndex = ref<number>();
 
 function showItemHoverTooltip(event: MouseEvent, index: number, fromExtras = false) {
 	hoveredItemIndex.value = index;
-	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, { passive: true, once: true });
+	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, {
+		passive: true,
+		once: true,
+	});
 	addItemTooltipViewListeners();
 
 	if (fromExtras) {
@@ -273,9 +265,7 @@ function startItemDrag(event: DragEvent, index: number) {
 const championExtra = computed<Component[]>((): Component[] => {
 	if (props.value.champion.value) {
 		const component = CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras;
-		return component
-			? (Array.isArray(component) ? component : [component])
-			: [];
+		return component ? (Array.isArray(component) ? component : [component]) : [];
 	}
 	return [];
 });
@@ -313,14 +303,16 @@ const dragonExtras = computed<IDragonComponent[]>((): IDragonComponent[] => {
 });
 
 type IItemComponent = [is: Component, itemId: string, itemIndex: number, itemComponentIndex: number];
-const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.flatMap((item, index): IItemComponent[] => {
-	const component = item && ITEM_COMPONENTS[item.id]?.extras;
-	if (component) {
-		const components = Array.isArray(component) ? component : [component];
-		return components.map((c, i) => [c, item.id, index, i]);
-	}
-	return [];
-}));
+const itemExtras = computed<IItemComponent[]>(() =>
+	props.value.items.value.flatMap((item, index): IItemComponent[] => {
+		const component = item && ITEM_COMPONENTS[item.id]?.extras;
+		if (component) {
+			const components = Array.isArray(component) ? component : [component];
+			return components.map((c, i) => [c, item.id, index, i]);
+		}
+		return [];
+	}),
+);
 
 const hoveredRune = shallowRef<IChampionRune>();
 const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
@@ -344,7 +336,10 @@ interface IChampionRune {
 }
 
 const championRunes = computed<(IChampionRune | undefined)[]>(() => {
-	const { paths: { primary, primarySlots, secondary, secondarySlots }, shards } = props.value.runes.value;
+	const {
+		paths: { primary, primarySlots, secondary, secondarySlots },
+		shards,
+	} = props.value.runes.value;
 
 	let shardAnyUnknown = 0;
 	const shardDescriptions = Object.entries(shards).map(([shardSlot, shardValue]) => {
@@ -360,11 +355,11 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 			props.value?.computed.variables.value.runes.shards[shardSlot as IRuneShardSlotName],
 		);
 
-		const { replaced, unknownVariables: unknownV } = replaceGameVariables(
-			stringtableVariableReplaced,
-			'rune',
-			{ rune, damageSource: props.value, dynamicVariables: props.value?.computed.variables.value.runes.shards[shardSlot as IRuneShardSlotName] },
-		);
+		const { replaced, unknownVariables: unknownV } = replaceGameVariables(stringtableVariableReplaced, 'rune', {
+			rune,
+			damageSource: props.value,
+			dynamicVariables: props.value?.computed.variables.value.runes.shards[shardSlot as IRuneShardSlotName],
+		});
 
 		shardAnyUnknown ||= unknownSV.size || unknownV.length;
 
@@ -373,13 +368,15 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 
 	return Array.from({ length: 4 }, (_, i) => primarySlots[i] && getRuneText(primarySlots[i], i, primary, true))
 		.concat(Array.from({ length: 2 }, (_, i) => secondary && secondarySlots[i] && getRuneText(secondarySlots[i], i, secondary, false)))
-		.concat([{
-			name: 'Rune shards',
-			description: shardDescriptions.join('<br>'),
-			anyUnknownVariables: shardAnyUnknown,
-			icon: ICON_RUNE_SRC,
-			iconDimensions: 80,
-		}]);
+		.concat([
+			{
+				name: 'Rune shards',
+				description: shardDescriptions.join('<br>'),
+				anyUnknownVariables: shardAnyUnknown,
+				icon: ICON_RUNE_SRC,
+				iconDimensions: 80,
+			},
+		]);
 });
 
 function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePathName, isPrimary: boolean): IChampionRune {
@@ -388,16 +385,9 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 
 	const icon = `https://raw.communitydragon.org/${vMinor}/game/${rune.icon}`;
 
-	const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceStringtableVariables(
-		tooltipStats,
-		TEXT.stringtable,
-	);
+	const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceStringtableVariables(tooltipStats, TEXT.stringtable);
 
-	const { replaced, unknownVariables: unknownV } = replaceGameVariables(
-		stringtableVariableReplaced,
-		'rune',
-		{ rune, damageSource: props.value },
-	);
+	const { replaced, unknownVariables: unknownV } = replaceGameVariables(stringtableVariableReplaced, 'rune', { rune, damageSource: props.value });
 
 	return {
 		name,
@@ -443,7 +433,8 @@ const minorStats = computed<IChampionStat[]>(() => {
 	const minorStats = [
 		{
 			name: 'Health | Resource Regeneration',
-			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <scaleenergy>Energy</scaleenergy>).',
+			description:
+				'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <scaleenergy>Energy</scaleenergy>).',
 			iconTextureKey: 'healthResourceRegen',
 			values: [
 				{
@@ -468,7 +459,8 @@ const minorStats = computed<IChampionStat[]>(() => {
 		},
 		{
 			name: 'Lethality | Armor Penetration',
-			description: 'Ignores an amount of your target\'s <scalearmor>Armor</scalearmor> when applying <physicaldamage>physical damage</physicaldamage>.<br><br><scalelethality>Lethality</scalelethality> ignores a flat amount, <scalelethality>Armor Penetration</scalelethality> ignores a percentage amount',
+			description:
+				"Ignores an amount of your target's <scalearmor>Armor</scalearmor> when applying <physicaldamage>physical damage</physicaldamage>.<br><br><scalelethality>Lethality</scalelethality> ignores a flat amount, <scalelethality>Armor Penetration</scalelethality> ignores a percentage amount",
 			iconTextureKey: 'armorPen',
 			values: [
 				{
@@ -482,7 +474,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 		},
 		{
 			name: 'Magic Penetration',
-			description: 'Ignores an amount of your target\'s <scalemr>Magic Resist</scalemr> when applying <magicdamage>magic damage</magicdamage>.',
+			description: "Ignores an amount of your target's <scalemr>Magic Resist</scalemr> when applying <magicdamage>magic damage</magicdamage>.",
 			iconTextureKey: 'magicPen',
 			values: [
 				{
@@ -664,12 +656,15 @@ function updateComputedStats(stats: IChampionStat[]) {
 			}
 		}
 
-		championStat.hasBonus = championStat.iconTextureKey === 'attackSpeed' ? props.value.stats.value.bonus.bonusAttackSpeedPercent : championStat.values.some(statValue => statValue.rawBonus);
+		championStat.hasBonus = championStat.iconTextureKey === 'attackSpeed' ? props.value.stats.value.bonus.bonusAttackSpeedPercent : championStat.values.some((statValue) => statValue.rawBonus);
 		/*
 		 * disable hasBonus styling when the total value has been reduced below base on level, even if it has total
 		 * necessary for armor & mr because their bonus values are multiplied by the shred and shown reduced in the tooltip, instead of being subtracted from like move speed/attack speed
 		 */
-		if ((championStat.iconTextureKey === 'magicResist' || championStat.iconTextureKey === 'armor') && props.value.computed.formattedStatTotals.value[championStat.values[0]!.stat] < props.value.stats.value.baseOnLevel[championStat.values[0]!.stat]) {
+		if (
+			(championStat.iconTextureKey === 'magicResist' || championStat.iconTextureKey === 'armor') &&
+			props.value.computed.formattedStatTotals.value[championStat.values[0]!.stat] < props.value.stats.value.baseOnLevel[championStat.values[0]!.stat]
+		) {
 			championStat.hasBonus = false;
 		}
 		championStat.displayedValue ||= displayedValue.join(' | ');
@@ -680,11 +675,7 @@ const updateChampionHealth = useNumberInput(props.value.currentHealth, true, pro
 const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource, true);
 
 const healthBarEl = useTemplateRef('healthBar');
-const {
-	onMousedown: startHealthBarDrag,
-	onTouchstart: startTouchHealthBarDrag,
-	dragValueRef: healthDragValueRef,
-} = healthResourceSliderEvents(props.value.currentHealth, props.value.maxHealth, healthBarEl);
+const { onMousedown: startHealthBarDrag, onTouchstart: startTouchHealthBarDrag, dragValueRef: healthDragValueRef } = healthResourceSliderEvents(props.value.currentHealth, props.value.maxHealth, healthBarEl);
 const resourceBarEl = useTemplateRef('resourceBar');
 const {
 	onMousedown: startAbilityResourceBarDrag,
@@ -776,7 +767,6 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 
 function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 	event.preventDefault();
-	// eslint-disable-next-line vue/no-mutating-props
 	props.value.abilityLevels.value[ability] = 0;
 }
 
@@ -795,13 +785,7 @@ const hoveredAbilityVariantIndex = ref<number>();
 const hoveredAbilityDamageSource = shallowRef<DamageSource>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 
-function showAbilityTooltip(
-	event: MouseEvent,
-	key: IChampionAbilityKey,
-	variantIndex?: number,
-	fromExtras = false,
-	damageSource?: DamageSource,
-) {
+function showAbilityTooltip(event: MouseEvent, key: IChampionAbilityKey, variantIndex?: number, fromExtras = false, damageSource?: DamageSource) {
 	hoveredAbilityKey.value = key;
 	hoveredAbilityDamageSource.value = damageSource;
 	hoveredAbilityVariantIndex.value = variantIndex ?? props.value.abilityVariantsIndexes.value[key];
@@ -830,13 +814,20 @@ const roleQuestDescription = computed(() => {
 	const { title, description } = TEXT.roleQuests[props.value.roleQuest.value];
 	const specific = (MISC_SPECIFICS as IHypotheticalMiscSpecifics).roleQuests[props.value.roleQuest.value];
 
-	const { replaced, unknownVariables } = replaceGameVariables(description, AbilityType.item, { item: MISC.roleQuests[props.value.roleQuest.value] as IItem, damageSource: props.value, dynamicVariables: { values: specific?.variables?.calculate?.(props.value) } });
+	const { replaced, unknownVariables } = replaceGameVariables(description, AbilityType.item, {
+		item: MISC.roleQuests[props.value.roleQuest.value] as IItem,
+		damageSource: props.value,
+		dynamicVariables: { values: specific?.variables?.calculate?.(props.value) },
+	});
 
-	return { title, description: replaceGameIcons(replaced, 'challenges'), anyUnknown: unknownVariables.length };
+	return {
+		title,
+		description: replaceGameIcons(replaced, 'challenges'),
+		anyUnknown: unknownVariables.length,
+	};
 });
 
 function updateRoleQuest(value?: IChampionRole) {
-	// eslint-disable-next-line vue/no-mutating-props
 	props.value.roleQuest.value = value;
 	if (!value) {
 		hideRoleQuestTooltip();
@@ -845,7 +836,10 @@ function updateRoleQuest(value?: IChampionRole) {
 
 function showRoleQuestTooltip(event: MouseEvent) {
 	if (props.value.roleQuest.value) {
-		event.target?.addEventListener('mouseleave', hideRoleQuestTooltip, { passive: true, once: true });
+		event.target?.addEventListener('mouseleave', hideRoleQuestTooltip, {
+			passive: true,
+			once: true,
+		});
 		roleQuestHoverTooltipEl.value?.showPopover();
 	}
 }
@@ -856,10 +850,8 @@ function hideRoleQuestTooltip() {
 
 function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'soul', subpath?: number) {
 	if (target === 'stack') {
-		// eslint-disable-next-line vue/no-mutating-props
 		props.value.dragonStacks.value[subpath!] = value;
 	} else {
-		// eslint-disable-next-line vue/no-mutating-props
 		props.value.dragonSoul.value = value;
 	}
 
@@ -868,7 +860,7 @@ function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'so
 	}
 }
 
-const dragonOptions = ALL_DRAGON_NAMES.map(name => [name, name.toLowerCase()]) as [IDragonName, string][];
+const dragonOptions = ALL_DRAGON_NAMES.map((name) => [name, name.toLowerCase()]) as [IDragonName, string][];
 
 let dragonTooltipAnchor: HTMLElement | undefined;
 type IHoveredDragonThing = [IDragonName, IDragonAbilityId['subtype']];
@@ -879,7 +871,10 @@ function showDragonTooltip(event: MouseEvent, dragonName: IDragonName, subtype: 
 	const { target } = event as unknown as { target: HTMLElement };
 	dragonHoverTooltipEl.value?.el?.showPopover();
 	dragonTooltipAnchor = target;
-	dragonTooltipAnchor?.addEventListener('mouseleave', hideDragonTooltip, { passive: true, once: true });
+	dragonTooltipAnchor?.addEventListener('mouseleave', hideDragonTooltip, {
+		passive: true,
+		once: true,
+	});
 	hoveredDragonThing.value = [dragonName, subtype];
 
 	if (fromExtras) {
@@ -896,11 +891,7 @@ function hideDragonTooltip() {
 	dragonTooltipAnchor = undefined;
 }
 
-const activeEffects = computed<[IComputedAppliedEffect, number][]>(() =>
-	props.value.computed.effects.value
-		.map((effect, index) => [effect, index] as unknown as [IComputedAppliedEffect, number])
-		.filter(([effect]) => effect.isActive),
-);
+const activeEffects = computed<[IComputedAppliedEffect, number][]>(() => props.value.computed.effects.value.map((effect, index) => [effect, index] as unknown as [IComputedAppliedEffect, number]).filter(([effect]) => effect.isActive));
 
 const hoveredEffect = shallowRef<IComputedAppliedEffect>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
@@ -926,21 +917,13 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 
 	if (globalKeyModifiers.value.ctrl) {
 		if (globalKeyModifiers.value.shift) {
-			effect.data.value[0] = by < 0
-				/* this branch doesn't happen, right click + ctrl + shift is hijacked by the browser and the event doesn't fire, potential TODO */
-				? min
-				: max === undefined
-					? effect.data.value[0] + 100
-					: max;
+			effect.data.value[0] = by < 0 ? /* this branch doesn't happen, right click + ctrl + shift is hijacked by the browser and the event doesn't fire, potential TODO */ min : max === undefined ? effect.data.value[0] + 100 : max;
 		} else {
-			effect.data.value[0] = by < 0
-				? computedEffect.specific.minValue === 0 || computedEffect.maxValue !== undefined ? Math.max(min, effect.data.value[0] - 10) : min
-				: max === undefined
-					? effect.data.value[0] + 10
-					: Math.min(max, effect.data.value[0] + 10);
+			effect.data.value[0] =
+				by < 0 ? (computedEffect.specific.minValue === 0 || computedEffect.maxValue !== undefined ? Math.max(min, effect.data.value[0] - 10) : min) : max === undefined ? effect.data.value[0] + 10 : Math.min(max, effect.data.value[0] + 10);
 		}
 	} else {
-		effect.data.value[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data.value[0] + by) : (effect.data.value[0] + by));
+		effect.data.value[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data.value[0] + by) : effect.data.value[0] + by);
 	}
 	nextTick(() => {
 		if (!effect.data.value[0] && hoveredEffect.value?.abilityId.id === effect.abilityId.id) {
@@ -1004,13 +987,12 @@ const manipulateValue = ref<string>();
 
 function manipulateFromSelect(manipulateOption: string | undefined) {
 	manipulateOptions[manipulateOption as keyof typeof manipulateOptions].action();
-	nextTick(() => manipulateValue.value = undefined);
+	nextTick(() => (manipulateValue.value = undefined));
 }
 
 defineExpose({ el });
 </script>
 
-<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<li
 		ref="el"
@@ -1023,29 +1005,13 @@ defineExpose({ el });
 		@mouseleave="highlightedDamageSources.remove(value.id)"
 		@focusout="highlightedDamageSources.remove(value.id)"
 	>
-		<h3>
-			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}
-		</h3>
+		<h3>{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}</h3>
 		<div ref="header" class="header">
-			<button
-				title="move up, alt+click to duplicate above"
-				class="pretend-ui-btn move-up"
-				:disabled="moveUpDisabled"
-				draggable="true"
-				@click="moveUp"
-				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
-			>
+			<button title="move up, alt+click to duplicate above" class="pretend-ui-btn move-up" :disabled="moveUpDisabled" draggable="true" @click="moveUp" @dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)">
 				<span>move up <span>(alt+click to duplicate above)</span></span>
 				<Icon class="i-ph:arrow-up" />
 			</button>
-			<button
-				title="move down, alt+click to duplicate below"
-				class="pretend-ui-btn move-down"
-				:disabled="!canMoveDown"
-				draggable="true"
-				@click="moveDown"
-				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
-			>
+			<button title="move down, alt+click to duplicate below" class="pretend-ui-btn move-down" :disabled="!canMoveDown" draggable="true" @click="moveDown" @dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)">
 				<span>move down <span>(alt+click to duplicate below)</span></span>
 				<Icon class="i-ph:arrow-down" />
 			</button>
@@ -1057,42 +1023,24 @@ defineExpose({ el });
 				@click="changeGroup"
 				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 			>
-				<span>move to {{ otherGroup }} <span>(alt+click to duplicate to {{ otherGroup }})</span></span>
+				<span
+					>move to {{ otherGroup }} <span>(alt+click to duplicate to {{ otherGroup }})</span></span
+				>
 				<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
 			</button>
-			<button
-				:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
-				class="pretend-ui-btn duplicate"
-				:disabled="changeGroupDisabled"
-				draggable="true"
-				@click="duplicate"
-				@dragstart="$emit('dragstart', $event, true)"
-			>
-				<span>duplicate<span>(shift+click to duplicate into {{ otherGroup }})</span></span>
+			<button :title="`duplicate, shift+click to duplicate into ${otherGroup}`" class="pretend-ui-btn duplicate" :disabled="changeGroupDisabled" draggable="true" @click="duplicate" @dragstart="$emit('dragstart', $event, true)">
+				<span
+					>duplicate<span>(shift+click to duplicate into {{ otherGroup }})</span></span
+				>
 				<Icon class="i-ph:copy" />
 			</button>
 			<div class="select-champion">
-				<button
-					title="select champion"
-					@click="selectChampion(value.listedChampion)"
-					@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
-				>
+				<button title="select champion" @click="selectChampion(value.listedChampion)" @dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)">
 					<span>
 						{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
 					</span>
-					<img
-						v-if="value.listedChampion.value"
-						:src="championImage(value.listedChampion.value.image, value.listedChampion.value.id)"
-						loading="lazy"
-						:width="imageSizes.champion"
-						:height="imageSizes.champion"
-					>
-					<img
-						v-else
-						:src="imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')"
-						width="256"
-						height="256"
-					>
+					<img v-if="value.listedChampion.value" :src="championImage(value.listedChampion.value.image, value.listedChampion.value.id)" loading="lazy" :width="imageSizes.champion" :height="imageSizes.champion" />
+					<img v-else :src="imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')" width="256" height="256" />
 				</button>
 				<VSelect
 					:id="`${idSuffix}-level-select`"
@@ -1105,57 +1053,25 @@ defineExpose({ el });
 					<span>{{ value.level.value }}</span>
 				</VSelect>
 			</div>
-			<button
-				:title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'"
-				class="select-runes other-ui-btn"
-				@click="selectRunes(value.runes)"
-			>
+			<button :title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'" class="select-runes other-ui-btn" @click="selectRunes(value.runes)">
 				<span>{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
-				<span
-					v-show="value.runesInvalid.value"
-					class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5"
-				>
+				<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5">
 					<span class="sr-only">(invalid)</span>
 					<Icon class="i-ph:exclamation-mark-bold size-2.5" />
 				</span>
 				<template v-if="runePathPrimary">
-					<span class="sr-only">
-						primary: {{ runePathPrimary.pathName }} - {{ runePathPrimary.name }}
-					</span>
-					<img
-						:src="runePathPrimary.icon"
-						aria-hidden="true"
-						width="32"
-						height="32"
-						loading="lazy"
-					>
+					<span class="sr-only"> primary: {{ runePathPrimary.pathName }} - {{ runePathPrimary.name }} </span>
+					<img :src="runePathPrimary.icon" aria-hidden="true" width="32" height="32" loading="lazy" />
 				</template>
-				<img
-					v-else
-					:src="ICON_RUNE_SRC"
-					aria-hidden="true"
-					width="32"
-					height="32"
-					loading="lazy"
-				>
+				<img v-else :src="ICON_RUNE_SRC" aria-hidden="true" width="32" height="32" loading="lazy" />
 				<template v-if="runePathSecondary">
-					<span class="sr-only">
-						secondary: {{ runePathSecondary.name }}
-					</span>
-					<span
-						:style="`background-color: ${runePathSecondary.iconColor}; mask: url(${runePathSecondary.icon}) no-repeat center;`"
-						aria-hidden="true"
-						class="secondary-path-icon"
-					/>
+					<span class="sr-only"> secondary: {{ runePathSecondary.name }} </span>
+					<span :style="`background-color: ${runePathSecondary.iconColor}; mask: url(${runePathSecondary.icon}) no-repeat center;`" aria-hidden="true" class="secondary-path-icon" />
 				</template>
 			</button>
 			<button class="select-items other-ui-btn" @click="selectItems(value)">
 				items
-				<img
-					v-bind="ICON_GOLD"
-					aria-hidden="true"
-					loading="lazy"
-				>
+				<img v-bind="ICON_GOLD" aria-hidden="true" loading="lazy" />
 			</button>
 			<ul
 				:data-role-quest="value.roleQuest.value"
@@ -1166,11 +1082,7 @@ defineExpose({ el });
 				@dragleave="$emit('itemListDragleave', $event)"
 				@drop="$emit('itemListDrop', $event, undefined)"
 			>
-				<li
-					v-for="i in 7"
-					:key="i"
-					@drop.stop="$emit('itemListDrop', $event, i - 1)"
-				>
+				<li v-for="i in 7" :key="i" @drop.stop="$emit('itemListDrop', $event, i - 1)">
 					<component
 						:is="value.items.value[i - 1] ? 'button' : 'div'"
 						:draggable="value.items.value[i - 1] ? 'true' : undefined"
@@ -1178,24 +1090,17 @@ defineExpose({ el });
 							active: value.coComputed.itemImage.value[i - 1]?.isActive,
 							masterwork: isMasterworkSlot(value, i - 1),
 						}"
-						:data-active="typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object'
-							? (0
-								^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0)
-								^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 2 : 0)
-							)
-							: undefined"
+						:data-active="
+							typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object'
+								? 0 ^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0) ^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 2 : 0)
+								: undefined
+						"
 						@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
 						@click.right="removeItem($event, i - 1)"
 						@dragstart="startItemDrag($event, i - 1)"
 					>
 						<span>{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
-						<img
-							v-if="value.items.value[i - 1]"
-							:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${value.items.value[i - 1]!.image}`"
-							width="64"
-							height="64"
-							loading="lazy"
-						>
+						<img v-if="value.items.value[i - 1]" :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${value.items.value[i - 1]!.image}`" width="64" height="64" loading="lazy" />
 						<span v-if="value.coComputed.itemImage.value[i - 1]?.text">
 							<span>{{ value.computed.itemSpecifics.value[i - 1]!.specific.imgTextLabel }}:</span>
 							{{ value.coComputed.itemImage.value[i - 1]!.text }}
@@ -1204,24 +1109,16 @@ defineExpose({ el });
 				</li>
 			</ul>
 			<article ref="itemHoverTooltip" popover="manual" class="hover-tooltip champion-item">
-				<LolItemDescription
-					:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
-					source="Inventory"
-					show-masterwork
-					hover-tooltip
-				/>
+				<LolItemDescription :precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined" source="Inventory" show-masterwork hover-tooltip />
 			</article>
 			<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">
 				<span>restore</span>
 			</button>
 			<span class="restore-text" style="display: none" aria-hidden="true">restore</span>
-			<button
-				:title="`${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}${removeButtonAttrs.subtext ?? ''}`"
-				class="pretend-ui-btn clear-remove"
-				:disabled="removeButtonAttrs.disabled"
-				@click="removeButtonAttrs.emit"
-			>
-				<span>{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }})</span></span>
+			<button :title="`${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}${removeButtonAttrs.subtext ?? ''}`" class="pretend-ui-btn clear-remove" :disabled="removeButtonAttrs.disabled" @click="removeButtonAttrs.emit">
+				<span
+					>{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }})</span></span
+				>
 				<Icon class="i-ph:trash size-5" />
 			</button>
 			<VSelect
@@ -1236,53 +1133,23 @@ defineExpose({ el });
 					<Icon class="i-ph:dots-three-bold" />
 				</span>
 			</VSelect>
-			<button
-				:title="isExpanded ? 'collapse' : 'expand'"
-				class="pretend-ui-btn expand-collapse"
-				:aria-controls="`${idSuffix}-details`"
-				:aria-expanded="isExpanded"
-				@click="toggleExpanded"
-			>
+			<button :title="isExpanded ? 'collapse' : 'expand'" class="pretend-ui-btn expand-collapse" :aria-controls="`${idSuffix}-details`" :aria-expanded="isExpanded" @click="toggleExpanded">
 				<span>{{ isExpanded ? 'collapse' : 'expand' }}</span>
 				<Icon class="i-ph:caret-down size-5" />
 			</button>
 		</div>
-		<details
-			:id="`${idSuffix}-details`"
-			ref="details"
-			:class="{ empty: !value.champion.value }"
-			:aria-busy="value.isLoading.value"
-			@toggle="isExpanded = $event.newState === 'open'"
-		>
-			<summary>
-				details
-			</summary>
-			<h4 class="loading-header">
-				loading...
-			</h4>
+		<details :id="`${idSuffix}-details`" ref="details" :class="{ empty: !value.champion.value }" :aria-busy="value.isLoading.value" @toggle="isExpanded = $event.newState === 'open'">
+			<summary>details</summary>
+			<h4 class="loading-header">loading...</h4>
 			<section class="runes" :inert="value.isLoading.value" @click="selectRunes(value.runes)">
 				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
-						<dt
-							:inert="!enableUnimplementedUi && runeIndex !== 6"
-							@mouseenter="championRune && showRuneTooltip($event, championRune)"
-							@mouseleave="hideRuneTooltip"
-						>
+						<dt :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
-							<img
-								v-if="championRune"
-								:src="championRune.icon"
-								:width="championRune.iconDimensions || 80"
-								:height="championRune.iconDimensions || 80"
-								loading="lazy"
-							>
+							<img v-if="championRune" :src="championRune.icon" :width="championRune.iconDimensions || 80" :height="championRune.iconDimensions || 80" loading="lazy" />
 						</dt>
-						<dd
-							:inert="!enableUnimplementedUi && runeIndex !== 6"
-							@mouseenter="championRune && showRuneTooltip($event, championRune)"
-							@mouseleave="hideRuneTooltip"
-						>
+						<dd :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
 							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>
@@ -1296,20 +1163,13 @@ defineExpose({ el });
 			</section>
 			<section class="stats" :inert="value.isLoading.value" @dblclick.ctrl="openDebugDialog(value)">
 				<h4>stats</h4>
-				<dl
-					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
-					:key="statKindIndex"
-				>
+				<dl v-for="(stats, statKindIndex) in [minorStats, majorStats]" :key="statKindIndex">
 					<template v-for="stat in stats" :key="stat.name">
 						<dt @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
 							<span>{{ stat.name }}</span>
-							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)">
+							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)" />
 						</dt>
-						<dd
-							:class="{ 'has-bonus': stat.hasBonus }"
-							@mouseenter="showStatTooltip($event, stat)"
-							@mouseleave="hideStatTooltip"
-						>
+						<dd :class="{ 'has-bonus': stat.hasBonus }" @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
 							{{ stat.displayedValue }}
 						</dd>
 					</template>
@@ -1321,67 +1181,41 @@ defineExpose({ el });
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 							<dt>{{ statValue.name ?? CHAMPION_STAT_META[statValue.stat].name }}:</dt>
 							<dd :class="{ 'has-bonus': statValue.bonus }">
-								<span class="total">{{ value.computed.formattedStatTotals.value[statValue.stat] }}</span>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
+								<span class="total">{{ value.computed.formattedStatTotals.value[statValue.stat] }}</span
+								>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
 								<template v-if="'base' in statValue && !(statValue.stat === 'attackSpeed' || statValue.stat === 'attackSpeedRatio')">
 									(<span class="base">{{ statValue.base }}</span> base + <span class="bonus">{{ statValue.bonus }}</span> bonus)
 								</template>
 								{{ statValue.valueSuffix }}
 							</dd>
-							<br v-if="valueIndex !== ((hoveredStat?.values.length || 1) - 1)">
+							<br v-if="valueIndex !== (hoveredStat?.values.length || 1) - 1" />
 						</template>
 					</dl>
 					<p v-if="hoveredStat?.bottomText" class="has-bonus" v-html="hoveredStat?.bottomText" />
 				</article>
 			</section>
-			<section
-				ref="effects"
-				class="effects"
-				:inert="value.isLoading.value"
-				:style="`--effects-number: ${value.computed.effects.value.filter(effect => effect.isActive).length}`"
-			>
+			<section ref="effects" class="effects" :inert="value.isLoading.value" :style="`--effects-number: ${value.computed.effects.value.filter((effect) => effect.isActive).length}`">
 				<h4>effects</h4>
 				<button class="other-ui-btn" @click="selectEffects(value)">
 					effects
-					<img v-bind="textureBgImageAttrs(UI.practiceTool.statusEffect, 24)">
+					<img v-bind="textureBgImageAttrs(UI.practiceTool.statusEffect, 24)" />
 				</button>
 				<ul ref="effectsList">
-					<li
-						v-for="[effect, effectIndex] in activeEffects"
-						:key="effect.abilityId.id"
-						@mouseenter="showEffectTooltip($event, effect)"
-					>
+					<li v-for="[effect, effectIndex] in activeEffects" :key="effect.abilityId.id" @mouseenter="showEffectTooltip($event, effect)">
 						<span>{{ effect.specific.label }}</span>
-						<button
-							@click="modifyEffectValue(effectIndex, 1)"
-							@click.right.prevent="modifyEffectValue(effectIndex, -1)"
-							@click.middle.prevent="recalculateEffect(effectIndex)"
-						>
-							<img
-								v-show="effect.imgData"
-								v-bind="gameImageAttrs(effect.imgData, 22)"
-								loading="lazy"
-							>
+						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)" @click.middle.prevent="recalculateEffect(effectIndex)">
+							<img v-show="effect.imgData" v-bind="gameImageAttrs(effect.imgData, 22)" loading="lazy" />
 							<span v-if="effect.specific.imgText" v-show="effect.imgText">
 								{{ effect.imgText }}
 							</span>
 						</button>
 					</li>
 				</ul>
-				<LolEffectHoverTooltip
-					ref="effectHoverTooltip"
-					:ability-id="hoveredEffect?.abilityId"
-					:damage-source="hoveredEffect?.source as unknown as DamageSource"
-				/>
+				<LolEffectHoverTooltip ref="effectHoverTooltip" :ability-id="hoveredEffect?.abilityId" :damage-source="hoveredEffect?.source as unknown as DamageSource" />
 			</section>
 			<section ref="abilities" class="abilities" :inert="value.isLoading.value">
 				<h4>abilties</h4>
-				<ChampionApheliosAbilities
-					v-if="value.listedChampion.value?.id === 'Aphelios'"
-					:id-suffix
-					:value
-					:is-loading="value.isLoading.value"
-					@ability-hover="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('', ...args)"
-				/>
+				<ChampionApheliosAbilities v-if="value.listedChampion.value?.id === 'Aphelios'" :id-suffix :value :is-loading="value.isLoading.value" @ability-hover="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('', ...args)" />
 				<template v-else>
 					<div data-ability="passive">
 						<h5>passive</h5>
@@ -1392,15 +1226,8 @@ defineExpose({ el });
 							:height="imageSizes.ability"
 							aria-hidden="true"
 							@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
-						>
-						<a
-							v-show="value.champion.value"
-							class="wiki-link"
-							:href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`"
-							target="_blank"
-						>
-							wiki
-						</a>
+						/>
+						<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
 					</div>
 					<ComingSoonCover feature="abilities" class="text-white pt-1 inset-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] absolute items-start!" />
 					<div
@@ -1419,13 +1246,17 @@ defineExpose({ el });
 							:height="imageSizes.ability"
 							aria-hidden="true"
 							@mouseenter="value.champion.value && showAbilityTooltip($event, abilityKey)"
-						>
+						/>
 						<VButtonRadiogroup
 							v-if="value.champion.value"
 							:id="`ability-${abilityKey}-${idSuffix}`"
 							v-model="value.abilityLevels.value[abilityKey]"
 							:label="`${abilityKey} level`"
-							:options="Array.from({ length: value.maxAbilityLevels.value[abilityKey] }, (_, index) => ({ level: index + 1 }))"
+							:options="
+								Array.from({ length: value.maxAbilityLevels.value[abilityKey] }, (_, index) => ({
+									level: index + 1,
+								}))
+							"
 							value-key="level"
 							:clear-value="0"
 							@option-right-click="(event) => resetAbilityLevel(event, abilityKey)"
@@ -1436,12 +1267,7 @@ defineExpose({ el });
 						</VButtonRadiogroup>
 					</div>
 				</template>
-				<button
-					v-if="value.champion.value && SHAPESHIFTING_CHAMPION_IDS.includes(value.champion.value.id)"
-					class="other-ui-btn shapeshift"
-					title="shapeshift"
-					@click="value.shapeshift"
-				>
+				<button v-if="value.champion.value && SHAPESHIFTING_CHAMPION_IDS.includes(value.champion.value.id)" class="other-ui-btn shapeshift" title="shapeshift" @click="value.shapeshift">
 					<span>shapeshift</span>
 					<Icon class="i-ph:arrows-clockwise-bold" />
 				</button>
@@ -1462,17 +1288,8 @@ defineExpose({ el });
 					@touchstart="startTouchHealthBarDrag"
 				>
 					<template v-if="value.anythingFilled.value && value.maxHealth.value !== 0">
-						<label :for="`${idSuffix}-current-ability-health`">
-							health
-						</label>
-						<input
-							:id="`${idSuffix}-current-ability-health`"
-							:value="Math.round(healthDragValueRef)"
-							min="0"
-							:max="value.maxHealth.value"
-							type="number"
-							@input="updateChampionHealth"
-						>
+						<label :for="`${idSuffix}-current-ability-health`"> health </label>
+						<input :id="`${idSuffix}-current-ability-health`" :value="Math.round(healthDragValueRef)" min="0" :max="value.maxHealth.value" type="number" @input="updateChampionHealth" />
 						<span>/ {{ value.maxHealth.value }}</span>
 					</template>
 				</div>
@@ -1489,14 +1306,7 @@ defineExpose({ el });
 						<label :for="`${idSuffix}-current-ability-resource`">
 							{{ value.abilityResourceName.value }}
 						</label>
-						<input
-							:id="`${idSuffix}-current-ability-resource`"
-							:value="Math.round(abilityResourceDragValueRef)"
-							min="0"
-							:max="value.maxAbilityResource.value"
-							type="number"
-							@input="updateChampionAbilityResource"
-						>
+						<input :id="`${idSuffix}-current-ability-resource`" :value="Math.round(abilityResourceDragValueRef)" min="0" :max="value.maxAbilityResource.value" type="number" @input="updateChampionAbilityResource" />
 						<span>/ {{ value.maxAbilityResource.value }}</span>
 					</template>
 				</div>
@@ -1507,28 +1317,15 @@ defineExpose({ el });
 					<VSelect
 						:id="`${idSuffix}-role-quest`"
 						:model-value="value.roleQuest.value"
-						:options="Object.keys(TEXT.roleQuests).map(role => [role, role] as [IChampionRole, string])"
+						:options="Object.keys(TEXT.roleQuests).map((role) => [role, role] as [IChampionRole, string])"
 						label="role quest"
 						clearable
 						@update:model-value="updateRoleQuest"
 						@label-mouseenter="showRoleQuestTooltip"
 					>
 						<template v-if="value.roleQuest.value">
-							<img
-
-								:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
-								width="64"
-								height="64"
-								loading="lazy"
-								aria-hidden="true"
-							>
-							<img
-								:src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
-								width="32"
-								height="32"
-								loading="lazy"
-								aria-hidden="true"
-							>
+							<img :src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`" width="64" height="64" loading="lazy" aria-hidden="true" />
+							<img :src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`" width="32" height="32" loading="lazy" aria-hidden="true" />
 						</template>
 					</VSelect>
 					<article ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest">
@@ -1592,12 +1389,7 @@ defineExpose({ el });
 			</div>
 			<section ref="extras" class="extras" :inert="value.isLoading.value">
 				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
-					<component
-						:is
-						:id-suffix
-						:damage-source="value"
-						@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
-					/>
+					<component :is :id-suffix :damage-source="value" @img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)" />
 					<template #fallback>
 						<ExtraLoading />
 					</template>
@@ -1657,11 +1449,7 @@ defineExpose({ el });
 		--select-items-runes-gap: calc(2 * var(--spacing));
 		--item-size: calc(8 * var(--spacing));
 		--transition-duration: 150ms;
-		--scoreboard-item-bg: linear-gradient(
-			var(--bg-direction, 90deg),
-			oklch(from var(--damage-source-clr) l c h / 0.1),
-			oklch(from var(--damage-source-clr) l c h / 0.1)
-		);
+		--scoreboard-item-bg: linear-gradient(var(--bg-direction, 90deg), oklch(from var(--damage-source-clr) l c h / 0.1), oklch(from var(--damage-source-clr) l c h / 0.1));
 
 		--runes-stats-rows: 4;
 		--runes-stats-py: calc(0.5 * var(--spacing));
@@ -1693,18 +1481,14 @@ defineExpose({ el });
 				--select-level-size: calc(6.5 * var(--spacing));
 				--header-box-h: calc(2 * var(--item-size));
 				--header-gap-y: calc(1.5 * var(--spacing));
-				--select-runes-items-translate: calc(
-					0.5 * (var(--select-runes-size) + var(--item-size)) + 1.5 * var(--select-items-runes-gap)
-				);
+				--select-runes-items-translate: calc(0.5 * (var(--select-runes-size) + var(--item-size)) + 1.5 * var(--select-items-runes-gap));
 			}
 		}
 
 		@media (width < 375px) {
 			& {
 				--select-champion-size: calc(var(--select-runes-size) + 2px);
-				--select-runes-items-translate: calc(
-					0.5 * (var(--item-size) + var(--select-items-runes-gap)) - 2 * var(--spacing)
-				);
+				--select-runes-items-translate: calc(0.5 * (var(--item-size) + var(--select-items-runes-gap)) - 2 * var(--spacing));
 			}
 		}
 
@@ -2691,16 +2475,8 @@ defineExpose({ el });
 					&[data-partype='courage'],
 					&[data-partype='heat'],
 					&[data-partype='crimson rush'] {
-						--mix1: color-mix(
-							in oklch,
-							theme('colors.white') calc((1 - var(--fill-percentage)) * 100%),
-							theme('colors.yellow.400')
-						);
-						--mix2: color-mix(
-							in oklch,
-							theme('colors.yellow.400') calc((1 - var(--fill-percentage)) * 100%),
-							theme('colors.red.600')
-						);
+						--mix1: color-mix(in oklch, theme('colors.white') calc((1 - var(--fill-percentage)) * 100%), theme('colors.yellow.400'));
+						--mix2: color-mix(in oklch, theme('colors.yellow.400') calc((1 - var(--fill-percentage)) * 100%), theme('colors.red.600'));
 						--fill-bg: color-mix(in oklch, var(--mix1) calc((1 - var(--fill-percentage)) * 100%), var(--mix2));
 					}
 

@@ -1,8 +1,9 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IKSante from '@lolcalc/data/files/champion/KSante.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IKSante from '@lolcalc/data/files/champion/KSante.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -23,7 +24,7 @@ export default {
 				const markDamagePercentVar = championAbilityVariableValue('PercentHealthDamage', passiveParams);
 				const allOutDamagePercentVar = championAbilityVariableValue('MaxHealthDamagePercent', passiveParams);
 
-				const targetTotalHp = (target?.stats.value.total.hp ?? 0);
+				const targetTotalHp = target?.stats.value.total.hp ?? 0;
 
 				return {
 					CalculatedMarkDamage: {

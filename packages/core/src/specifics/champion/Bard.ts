@@ -1,10 +1,11 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IBard from '@lolcalc/data/files/champion/Bard.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IBard from '@lolcalc/data/files/champion/Bard.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxChimeMS(self: DamageSource<'Bard'>): number {
@@ -33,7 +34,11 @@ export default {
 				const { passiveStacks } = self.internalData.value;
 				let MeepDamage = Number.NaN;
 
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 				const baseMeepDmg = championAbilityVariableValue('MeepDamageNoChime', passiveParams);
 				const checkpointDmg = championAbilityVariableValue('DamagePerCheckpoint', passiveParams);
 				const chimesPerCheckpoint = championAbilityVariableValue('TooltipChimeDamageCheckpoint', passiveParams);
@@ -169,7 +174,11 @@ export default {
 			calculate(self) {
 				return {
 					f1: { value: 0 },
-					f2: championAbilityVariableValue('MaxPacks', { abilityKey: 'w', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self }),
+					f2: championAbilityVariableValue('MaxPacks', {
+						abilityKey: 'w',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						damageSource: self,
+					}),
 				};
 			},
 			meta: {
@@ -200,7 +209,10 @@ export default {
 					return;
 				}
 
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+				};
 
 				const msPerChime = championAbilityVariableValue('TooltipMSPerStack', passiveParams);
 				const maxMS = championAbilityVariableValue('TooltipMSMax', passiveParams);

@@ -1,22 +1,23 @@
 <script setup vapor lang="ts">
 import type { IComputedAbilityDescription, IComputedDragonAbilityDescription, IComputedEffectDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
-import type { IGameImageData } from '@lolcalc/core/misc';
-import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
-import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
-import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
-import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
-import type { IChampion } from '@lolcalc/data/types';
-import type { IEffectHoverTooltipProps } from '~/utils/types';
 import { computeAbilityDescription, computeDragonAbilityDescription, computeEffectDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import { gameAbilityImage } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
+import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
+import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon';
+import type { IEffectSpecific } from '@lolcalc/core/specifics/effect';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect';
+import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ITEMS, useChampion } from '@lolcalc/data';
+import type { IChampion } from '@lolcalc/data/types';
 import { AbilityType } from '@lolcalc/shared';
+
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
+import type { IEffectHoverTooltipProps } from '~/utils/types';
 
 const props = defineProps<IEffectHoverTooltipProps>();
 
@@ -26,30 +27,34 @@ const abilityImage = shallowRef<IGameImageData>(['', 0]);
 const champion = shallowRef<IChampion>();
 const isLoading = ref(false);
 
-const effectSpecific = computed<IEffectSpecific | undefined>(() => props.abilityId && EFFECT_SPECIFICS[props.abilityId.id] as IEffectSpecific);
+const effectSpecific = computed<IEffectSpecific | undefined>(() => props.abilityId && (EFFECT_SPECIFICS[props.abilityId.id] as IEffectSpecific));
 
 const sourceAbilityId = computed(() => effectSpecific.value?.sourceAbility);
 
-watch(sourceAbilityId, async (abilityId) => {
-	if (abilityId?.type === AbilityType.champion) {
-		isLoading.value = true;
-		useChampion(abilityId.id).then((usedChampion) => {
-			if (sourceAbilityId.value?.id === usedChampion.id) {
-				champion.value = usedChampion;
-			}
-			isLoading.value = false;
-		});
-	} else {
-		champion.value = undefined;
-	}
-	if (abilityId) {
-		gameAbilityImage(abilityId).then((data) => {
-			if (sourceAbilityId.value?.id === abilityId.id) {
-				abilityImage.value = data;
-			}
-		});
-	}
-}, { immediate: true });
+watch(
+	sourceAbilityId,
+	async (abilityId) => {
+		if (abilityId?.type === AbilityType.champion) {
+			isLoading.value = true;
+			useChampion(abilityId.id).then((usedChampion) => {
+				if (sourceAbilityId.value?.id === usedChampion.id) {
+					champion.value = usedChampion;
+				}
+				isLoading.value = false;
+			});
+		} else {
+			champion.value = undefined;
+		}
+		if (abilityId) {
+			gameAbilityImage(abilityId).then((data) => {
+				if (sourceAbilityId.value?.id === abilityId.id) {
+					abilityImage.value = data;
+				}
+			});
+		}
+	},
+	{ immediate: true },
+);
 
 const computedDescription = computed<IComputedEffectDescription | undefined>(() => props.abilityId && computeEffectDescription(props.abilityId.id, props.damageSource));
 
@@ -65,30 +70,21 @@ const sourceAbilityDescription = computed<IComputedAbilityDescription | ICompute
 	const { type, id } = sourceAbilityId.value;
 
 	if (type === AbilityType.champion && champion.value && champion.value.id === id) {
-		return computeAbilityDescription(
-			champion.value,
-			sourceAbilityId.value,
-			props.damageSource,
-			{ overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[id]?.variables) },
-		);
+		return computeAbilityDescription(champion.value, sourceAbilityId.value, props.damageSource, {
+			overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[id]?.variables),
+		});
 	}
 
 	if (type === AbilityType.dragon) {
-		return computeDragonAbilityDescription(
-			id,
-			sourceAbilityId.value.subtype,
-			props.damageSource,
-			false,
-			{ overrideVariables: specificKnownVariables((DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[id]?.[sourceAbilityId.value.subtype]?.variables) },
-		);
+		return computeDragonAbilityDescription(id, sourceAbilityId.value.subtype, props.damageSource, false, {
+			overrideVariables: specificKnownVariables((DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[id]?.[sourceAbilityId.value.subtype]?.variables),
+		});
 	}
 
 	const item = ITEMS[id]!;
-	return computeItemDescription(
-		item,
-		props.damageSource,
-		{ overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables) },
-	);
+	return computeItemDescription(item, props.damageSource, {
+		overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id as keyof IHypotheticalItemSpecifics]?.variables),
+	});
 });
 
 const el = useTemplateRef('el');
@@ -99,36 +95,19 @@ defineExpose({ el });
 <template>
 	<div ref="el" popover="manual" class="effect-hover-tooltip-container">
 		<article class="hover-tooltip effect">
-			<img
-				v-show="!isLoading"
-				v-bind="gameImageAttrs(abilityImage, 56)"
-				aria-hidden="true"
-			>
-			<h5
-				class="game-description"
-				v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'"
-			/>
+			<img v-show="!isLoading" v-bind="gameImageAttrs(abilityImage, 56)" aria-hidden="true" />
+			<h5 class="game-description" v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'" />
 			<div class="game-description" v-html="computedDescription?.description" />
-			<footer v-if="sourceAbilityDescription" v-show="!globalKeyModifiers.shift">
-				Hold <kbd>[Shift]</kbd> to show source ability
-			</footer>
+			<footer v-if="sourceAbilityDescription" v-show="!globalKeyModifiers.shift">Hold <kbd>[Shift]</kbd> to show source ability</footer>
 		</article>
 		<LolChampionAbilityHoverTooltip
 			v-if="sourceAbilityId?.type === AbilityType.champion || computedDescription?.championAbilityLikePrecomputedDescription"
 			v-show="globalKeyModifiers.shift"
 			:precomputed-description="sourceAbilityDescription as IComputedAbilityDescription"
 		/>
-		<LolDragonHoverTooltip
-			v-else-if="sourceAbilityId?.type === AbilityType.dragon"
-			v-show="globalKeyModifiers.shift"
-			:precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription"
-		/>
+		<LolDragonHoverTooltip v-else-if="sourceAbilityId?.type === AbilityType.dragon" v-show="globalKeyModifiers.shift" :precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription" />
 		<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
-			<LolItemDescription
-				:precomputed-description="sourceAbilityDescription as IComputedItemDescription"
-				source="Inventory"
-				hover-tooltip
-			/>
+			<LolItemDescription :precomputed-description="sourceAbilityDescription as IComputedItemDescription" source="Inventory" hover-tooltip />
 		</article>
 	</div>
 </template>

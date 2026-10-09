@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IJhin from '@lolcalc/data/files/champion/Jhin.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IJhin from '@lolcalc/data/files/champion/Jhin.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -36,7 +37,11 @@ export default {
 	calculateHooks: {
 		postInit: {
 			handler(self, { bonusStats, baseStats }, { calculatedVariables }) {
-				const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const params: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 				const asPerLevel = championAbilityVariableValue('PercentAttackSpeedPerLevel', params);
 
 				if (typeof asPerLevel.value === 'number') {
@@ -62,7 +67,17 @@ export default {
 		postBonus: {
 			handler(self, { bonusStats }, { calculatedVariables }) {
 				if (self.internalData.value.isPassiveMSActive) {
-					const msPercent = championAbilityVariableValue('CritMoveSpeedPercent', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
+					const msPercent = championAbilityVariableValue('CritMoveSpeedPercent', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: {
+							level: { value: self.level.value },
+							stats: {
+								value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } },
+							},
+						} as DamageSource,
+					});
 
 					if (typeof msPercent.value === 'number') {
 						calculatedVariables.totalBonusPercentMoveSpeed += msPercent.value;
@@ -74,7 +89,20 @@ export default {
 		},
 		postTotal: {
 			handler(self, { adaptiveForceMeta, totalStats, championPassiveStats, dragonStats, bonusStats, totalMultipliersStats, totalPreMultipliersStats }, { calculatedVariables }) {
-				const adPercent = championAbilityVariableValue('TotalADPercent', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance }, bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource });
+				const adPercent = championAbilityVariableValue('TotalADPercent', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: {
+						level: { value: self.level.value },
+						stats: {
+							value: {
+								total: { attackDamage: totalStats.attackDamage, critChance: totalStats.critChance },
+								bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent },
+							},
+						},
+					} as DamageSource,
+				});
 
 				if (typeof adPercent.value !== 'number') {
 					console.warn('[CHAMPION_SPECIFICS jhin] failed to calculate passive total ad percent', adPercent);

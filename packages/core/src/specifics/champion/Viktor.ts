@@ -1,5 +1,6 @@
-import type { IChampionSpecific } from '../champion.ts';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 
 const passiveUpgradesMask = 2 ** 4;
 
@@ -9,7 +10,7 @@ export default {
 
 		/* unevolve R if not all basic are evolved */
 		const rBit = 1 << 3;
-		const notAllEvolved = (passiveAbilityUpgradesMask & (rBit - 1)) !== (rBit - 1);
+		const notAllEvolved = (passiveAbilityUpgradesMask & (rBit - 1)) !== rBit - 1;
 		if (notAllEvolved) {
 			passiveAbilityUpgradesMask &= ~rBit;
 		}

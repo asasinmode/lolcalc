@@ -21,18 +21,12 @@ function submitIssue(_event: SubmitEvent) {
 </script>
 
 <template>
-	<VDialog
-		id="dialog-report-issue"
-		ref="vDialog"
-		@close="onClose"
-	>
+	<VDialog id="dialog-report-issue" ref="vDialog" @close="onClose">
 		<header>
 			<h1>report an issue</h1>
 			<form method="dialog">
 				<button value="cancel" title="close" class="other-ui-btn" autofocus>
-					<span>
-						close
-					</span>
+					<span> close </span>
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</form>
@@ -40,14 +34,12 @@ function submitIssue(_event: SubmitEvent) {
 		<form @submit.prevent="submitIssue">
 			<div>
 				<label for="issue-title">title<span>*</span></label>
-				<input id="issue-title" placeholder="Cassiopeia swiftmarch" required>
+				<input id="issue-title" placeholder="Cassiopeia swiftmarch" required />
 			</div>
 			<div>
 				<label for="issue-category">category<span>*</span></label>
 				<select id="issue-category" v-model="category" required>
-					<option selected value="calculations">
-						calculations wrong
-					</option>
+					<option selected value="calculations">calculations wrong</option>
 					<option value="ui">ui broken/bad</option>
 					<option value="feature">feature suggestion</option>
 					<option value="other">something else</option>
@@ -62,20 +54,21 @@ function submitIssue(_event: SubmitEvent) {
 				<textarea id="issue-message" placeholder="level 5 Cassiopeia with swiftmarch, movement speed rune shard and cloud dragon shows wrong movement speed. Game shows 420, the linked configuration 415" rows="8" required />
 			</div>
 			<div>
-				<label for="issue-contact">where can I contact you? <span>(will be publicly visible on <a href="https://github.com/asasinmode/lolcalc" target="_blank">github</a>)</span></label>
-				<input id="issue-contact" placeholder="discord: username, email: example@email.com">
+				<label for="issue-contact"
+					>where can I contact you? <span>(will be publicly visible on <a href="https://github.com/asasinmode/lolcalc" target="_blank">github</a>)</span></label
+				>
+				<input id="issue-contact" placeholder="discord: username, email: example@email.com" />
 			</div>
 			<label for="issue-configuration">
-				<input id="issue-configuration" type="checkbox" checked>
+				<input id="issue-configuration" type="checkbox" checked />
 				include link to the current configuration
 			</label>
 			<label for="issue-disclaimer">
-				<input id="issue-disclaimer" type="checkbox" required>
-				<span>*</span>I understand that submitting this form will open an issue on the <a href="https://github.com/asasinmode/lolcalc/issues" target="_blank">project's github page</a>. Images or further comments can be added there later, but require an account. If you already have an account, consider opening an issue on github directly.
+				<input id="issue-disclaimer" type="checkbox" required />
+				<span>*</span>I understand that submitting this form will open an issue on the <a href="https://github.com/asasinmode/lolcalc/issues" target="_blank">project's github page</a>. Images or further comments can be added there later,
+				but require an account. If you already have an account, consider opening an issue on github directly.
 			</label>
-			<button class="other-ui-btn">
-				submit
-			</button>
+			<button class="other-ui-btn">submit</button>
 		</form>
 	</VDialog>
 </template>

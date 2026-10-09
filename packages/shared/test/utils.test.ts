@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 import test from 'node:test';
+
 import { roundNumber } from '../src/utils.ts';
 
 test('@lolcalc/shared/utils', async (t) => {

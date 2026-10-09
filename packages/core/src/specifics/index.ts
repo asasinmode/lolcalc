@@ -1,6 +1,9 @@
+import { CONSTS } from '@lolcalc/data';
 import type { IChampionId, IDragonName } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionStatName, TItemNameToId } from '@lolcalc/shared';
+import { ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import type { WritableComputedRef } from 'vue';
+
 import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '../GameAbilityId';
 import type { IDynamicVariables, IGameVariableType, IGameVariableValueParameters, IVariableMeta, IVariableModifyMeta } from '../variables/game.ts';
@@ -9,8 +12,6 @@ import type { TDragonSpecifics } from './dragon.ts';
 import type { EFFECT_SPECIFICS, IEffectSpecific, TEffectSpecifics } from './effect';
 import type { TItemSpecifics } from './item';
 import type { ITEM_SPECIFICS } from './item.ts';
-import { CONSTS } from '@lolcalc/data';
-import { ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 
 export const HOOK_PRIORITIES = {
 	preItemTotal: {
@@ -126,30 +127,21 @@ export type IGameAbilitySpecific<T extends IGameAbilityId> = T extends IChampion
 					: never
 				: never;
 
-export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>
-	= Specific extends { setupData: (...args: any) => any }
-		? UnwrapPromise<ReturnType<Specific['setupData']>>
-		: never;
+export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>> = Specific extends { setupData: (...args: any) => any } ? UnwrapPromise<ReturnType<Specific['setupData']>> : never;
 
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
 export type IInternalDataOf<Id extends keyof TChampionSpecifics> = Id extends keyof IChampionInternalDataMap ? IChampionInternalDataMap[Id] : never;
 
-export type IInternalItemDataOf<K extends keyof TItemNameToId>
-	= K extends any
-		? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]>
-		: never;
+export type IInternalItemDataOf<K extends keyof TItemNameToId> = K extends any ? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]> : never;
 
-export type IEffectDataOf<T extends EffectObjectName> = T extends keyof typeof EFFECT_SPECIFICS
-	? typeof EFFECT_SPECIFICS[T] extends IEffectSpecific<infer U> ? U : never
+export type IEffectDataOf<T extends EffectObjectName> = T extends keyof typeof EFFECT_SPECIFICS ? ((typeof EFFECT_SPECIFICS)[T] extends IEffectSpecific<infer U> ? U : never) : never;
+
+export type IInternalDragonDataOf<Dragon extends IDragonName, Subtype extends 'stack' | 'soul'> = Dragon extends keyof TDragonSpecifics
+	? Subtype extends keyof TDragonSpecifics[Dragon]
+		? IGameAbilityData<any, TDragonSpecifics[Dragon][Subtype]>
+		: never
 	: never;
-
-export type IInternalDragonDataOf<Dragon extends IDragonName, Subtype extends 'stack' | 'soul'>
-	= Dragon extends keyof TDragonSpecifics
-		? Subtype extends keyof TDragonSpecifics[Dragon]
-			? IGameAbilityData<any, TDragonSpecifics[Dragon][Subtype]>
-			: never
-		: never;
 
 export interface ICalculatesFromPart {
 	stat?: 'const' | 'level' | Exclude<IChampionStatName, 'slowResist'>;
@@ -195,12 +187,7 @@ export interface IVariableValueResult<T = IConcreteVariableValue | [IConcreteVar
 export type IConcreteVariableValue = string | number;
 
 /** the related calculations and meta of a game specific's (item/champion/rune/...) variables */
-export interface ISpecificVariables<
-	DetectedVariables extends string = string,
-	T extends string = any,
-	Id extends IChampionId | undefined = IChampionId,
-	VariableType extends IGameVariableType = IGameVariableType,
-> {
+export interface ISpecificVariables<DetectedVariables extends string = string, T extends string = any, Id extends IChampionId | undefined = IChampionId, VariableType extends IGameVariableType = IGameVariableType> {
 	/**
 	 * record containing possible dynamic values for an ability variable (all values the variable is expected to resolve to)
 	 * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
@@ -236,13 +223,10 @@ export interface ISpecificVariables<
 	 * }
 	 * ```
 	 */
-	calculate?: (self: DamageSource<Id>, damageTarget?: DamageSource) => NoInfer<Partial<Record<
-		DetectedVariables,
-		IVariableValueResult | [IVariableValueResult, IVariableValueResult]
-	>>> & Record<
-		T,
-		IVariableValueResult | [IVariableValueResult, IVariableValueResult]
-	>;
+	calculate?: (
+		self: DamageSource<Id>,
+		damageTarget?: DamageSource,
+	) => NoInfer<Partial<Record<DetectedVariables, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>>> & Record<T, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>;
 	/** any dynamic variables' meta information like icon of the stat they scale from. */
 	meta?: NoInfer<Partial<Record<T | DetectedVariables, IVariableMeta<IGameVariableValueParameters[VariableType]>>>>;
 	/**
@@ -250,14 +234,10 @@ export interface ISpecificVariables<
 	 * the type works almost perfectly except that when no other keys (known/calculate/meta) is provided, then it resolves to `string[]` but at the moment I can't find a fix for it
 	 */
 	// TODO 'Cooldown' to be resolved in future features
-	uninteresting?: NoInfer<(DetectedVariables | T | 'Cooldown')>[];
+	uninteresting?: NoInfer<DetectedVariables | T | 'Cooldown'>[];
 }
 
-export interface IDefineVariablesConfig<
-	Id extends IChampionId | undefined = IChampionId | undefined,
-	U extends IGameVariableType = IGameVariableType,
-	DetectedVariables extends string = string,
-> {
+export interface IDefineVariablesConfig<Id extends IChampionId | undefined = IChampionId | undefined, U extends IGameVariableType = IGameVariableType, DetectedVariables extends string = string> {
 	known?: Record<string, (number | string | undefined)[]>;
 	calculate?: (self: DamageSource<Id>, damageTarget?: DamageSource) => Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>;
 	meta?: Record<string, IVariableMeta<IGameVariableValueParameters[U]>>;
@@ -265,44 +245,52 @@ export interface IDefineVariablesConfig<
 }
 
 export type IExtractExtraVariables<Config, DetectedVariables extends string> = Exclude<
-    (Config extends { known?: infer K } ? keyof NonNullable<K> : never)
-    | (Config extends { calculate?: (...args: any[]) => infer R } ? keyof NonNullable<R> : never),
-    DetectedVariables
-> & string;
+	(Config extends { known?: infer K } ? keyof NonNullable<K> : never) | (Config extends { calculate?: (...args: any[]) => infer R } ? keyof NonNullable<R> : never),
+	DetectedVariables
+> &
+	string;
 
 export function defineVariables<
 	DetectedVariables extends string = string,
 	Id extends IChampionId | undefined = IChampionId,
 	U extends IGameVariableType = IGameVariableType,
 	Config extends IDefineVariablesConfig<Id, U, DetectedVariables> = IDefineVariablesConfig<Id, U, DetectedVariables>,
->(
-	config: Config & Omit<ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U>, 'default'>,
-): ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U> {
+>(config: Config & Omit<ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U>, 'default'>): ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U> {
 	return Object.assign(config, {
-		default: config.known && Object.fromEntries(Object.entries(config.known).map(([key, value]) => {
-			return [key, { value: key === 'lolcalcChampRange'
-				? [(value as number[])[0] ?? 0, (value as number[])[1] ?? 0]
-				: ((value as (string | number)[])[0] ?? 0) }];
-		},
-		)) as ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U>['default'],
+		default:
+			config.known &&
+			(Object.fromEntries(
+				Object.entries(config.known).map(([key, value]) => {
+					return [
+						key,
+						{
+							value: key === 'lolcalcChampRange' ? [(value as number[])[0] ?? 0, (value as number[])[1] ?? 0] : ((value as (string | number)[])[0] ?? 0),
+						},
+					];
+				}),
+			) as ISpecificVariables<DetectedVariables, IExtractExtraVariables<Config, DetectedVariables>, Id, U>['default']),
 	});
 }
 
 export function calculateDynamicVariables(self: DamageSource, damageTarget?: DamageSource, config?: ISpecificVariables<any, any, any, any>): IDynamicVariables | undefined {
-	return config && {
-		values: config.calculate?.(self, damageTarget),
-		meta: config.meta,
-		uninteresting: config.uninteresting,
-	};
+	return (
+		config && {
+			values: config.calculate?.(self, damageTarget),
+			meta: config.meta,
+			uninteresting: config.uninteresting,
+		}
+	);
 }
 
 /* `known` array values are used during `updateData` to find all used stringtable variables, while here they have to be resolved so that they can be used for descriptions without underlying damage source, like champion's ability effect */
 export function specificKnownVariables(config?: ISpecificVariables<any, any, any, any>): IDynamicVariables | undefined {
-	return config && {
-		values: config.default,
-		meta: config.meta,
-		uninteresting: config.uninteresting,
-	};
+	return (
+		config && {
+			values: config.default,
+			meta: config.meta,
+			uninteresting: config.uninteresting,
+		}
+	);
 }
 
 interface IGlobalModifyVariableFunction {
@@ -326,23 +314,24 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVari
 		const { percentMagicPen, flatMagicPen } = self.stats.value.total;
 		const magicResist = damageTarget?.stats.value.total.magicResist ?? 0;
 
-		const effectiveResists = Math.max(Math.min(magicResist, 0), (magicResist * (1 - percentMagicPen)) - flatMagicPen);
+		const effectiveResists = Math.max(Math.min(magicResist, 0), magicResist * (1 - percentMagicPen) - flatMagicPen);
 		return value / (1 + effectiveResists / 100);
 	},
 	[VariableType.physical](value, _meta, self, damageTarget) {
 		const { percentArmorPen, lethality } = self.stats.value.total;
 		const armor = damageTarget?.stats.value.total.armor ?? 0;
 
-		const effectiveResists = Math.max(Math.min(armor, 0), (armor * (1 - percentArmorPen)) - lethality);
+		const effectiveResists = Math.max(Math.min(armor, 0), armor * (1 - percentArmorPen) - lethality);
 		return value / (1 + effectiveResists / 100);
 	},
 	[VariableType.adaptive](value, meta, self, damageTarget) {
 		const { attackDamage, abilityPower } = self.stats.value.bonus;
-		return (GLOBAL_MODIFY_VARIABLE_FNS[
-			attackDamage === abilityPower
-				? self.stats.value.meta.adaptiveForceStat === 'attackDamage' ? 'physical' : 'magic'
-				: attackDamage > abilityPower ? 'physical' : 'magic'
-		])!(value, meta, self, damageTarget);
+		return GLOBAL_MODIFY_VARIABLE_FNS[attackDamage === abilityPower ? (self.stats.value.meta.adaptiveForceStat === 'attackDamage' ? 'physical' : 'magic') : attackDamage > abilityPower ? 'physical' : 'magic']!(
+			value,
+			meta,
+			self,
+			damageTarget,
+		);
 	},
 };
 
@@ -351,7 +340,6 @@ export const GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES = Object.entries(GLOBAL_MODIFY_V
 export interface IEffectControlsProps<Data extends (number | undefined)[] = [number], T extends IChampionId | undefined = any> {
 	/** if not present, will always be treated as true. Must return `1` or `0` if returning a number, otherwise boolean extra doesn't properly update */
 	model?: (self: DamageSource<T>) => WritableComputedRef<boolean | number | undefined>;
-	// eslint-disable-next-line jsdoc/check-param-names
 	/** @param isSourceChange {bool} indicates whether the refresh was triggered by the source change or refresh button */
 	refresh: (self: DamageSource<T>, isSourceChange: boolean) => void;
 	currentlySnapshot: (effectData: Data | undefined, self: DamageSource<T>) => string | undefined;
@@ -366,7 +354,7 @@ export interface IExtraOnValueUpdate {
 }
 
 export interface IDeriveProgressFn<Maybe extends boolean = false> {
-	(value: number, self: Maybe extends false ? DamageSource : (DamageSource | undefined)): number;
+	(value: number, self: Maybe extends false ? DamageSource : DamageSource | undefined): number;
 }
 
 export interface IExtraInactiveFn {

@@ -1,12 +1,13 @@
+import assert from 'node:assert';
+
 import type { IDamageSourceEffect, IOverrides } from '@lolcalc/core/DamageSource.ts';
+import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IEffectAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IEffectDataOf } from '@lolcalc/core/specifics';
-import type { IEffectData, IMiscData } from '@lolcalc/data';
-import type { IChampion, IChampionId, IDragonName, IItem, IRunePath, IRunePathName, IRuneShard, IRuneShardSlotName, IRuneShardSlotValue } from '@lolcalc/data/types';
-import assert from 'node:assert';
-import { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect.ts';
+import type { IEffectData, IMiscData } from '@lolcalc/data';
 import { CHAMPIONS, EFFECTS, ITEMS, MISC, RUNES } from '@lolcalc/data';
+import type { IChampion, IChampionId, IDragonName, IItem, IRunePath, IRunePathName, IRuneShard, IRuneShardSlotName, IRuneShardSlotValue } from '@lolcalc/data/types';
 import { AbilityType } from '@lolcalc/shared';
 import { ref, shallowRef } from 'vue';
 
@@ -16,7 +17,10 @@ interface IPatchOverridesFixture {
 	items: Record<string, Partial<IItem>>;
 	effects?: Partial<IEffectData>;
 	/** dragon fixture's type allows partial but the test will crash if it's trying to use a dragon that's not fixtured. It's intended */
-	misc?: { roleQuests: Partial<IMiscData['roleQuests']>; dragons?: Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>> };
+	misc?: {
+		roleQuests: Partial<IMiscData['roleQuests']>;
+		dragons?: Partial<Record<IDragonName, Partial<IMiscData['dragons'][IDragonName]>>>;
+	};
 	runes?: {
 		paths?: Partial<Record<IRunePathName, Pick<IRunePath, 'slots'>>>;
 		/* no point in typing it atm */
@@ -106,10 +110,7 @@ export function typedPartialDeepStrictEqual<T>(actual: T, expected: Partial<T>, 
 	}
 }
 
-export function overridesAppliedEffect<T extends IEffectAbilityId>(
-	abilityId: T,
-	data: IEffectDataOf<T['id']>,
-): IDamageSourceEffect<IEffectAbilityId<T['id']>> {
+export function overridesAppliedEffect<T extends IEffectAbilityId>(abilityId: T, data: IEffectDataOf<T['id']>): IDamageSourceEffect<IEffectAbilityId<T['id']>> {
 	return {
 		abilityId,
 		data: ref(data as any),

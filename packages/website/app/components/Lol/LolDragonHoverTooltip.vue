@@ -1,17 +1,16 @@
 <script setup vapor lang="ts">
 import type { IComputedDragonAbilityDescription } from '@lolcalc/core/DamageSource';
-import type { IDragonHoverTooltipProps } from '~/utils/types';
 import { computeDragonAbilityDescription } from '@lolcalc/core/DamageSource';
+
+import type { IDragonHoverTooltipProps } from '~/utils/types';
 
 const props = defineProps<IDragonHoverTooltipProps>();
 
 const globalKeyModifiers = useGlobalKeyModifiers();
 
-const computedDescription = computed<IComputedDragonAbilityDescription | undefined>(() =>
-	props.precomputedDescription
-	?? (props.dragon && props.type
-		? computeDragonAbilityDescription(props.dragon, props.type, props.damageSource, props.checkIfValid)
-		: undefined));
+const computedDescription = computed<IComputedDragonAbilityDescription | undefined>(
+	() => props.precomputedDescription ?? (props.dragon && props.type ? computeDragonAbilityDescription(props.dragon, props.type, props.damageSource, props.checkIfValid) : undefined),
+);
 
 const el = useTemplateRef('el');
 
@@ -28,9 +27,7 @@ defineExpose({ el });
 			<Icon class="i-ph:warning-circle-light" />
 		</p>
 		<footer v-show="computedDescription?.anyExtendedVariables && !globalKeyModifiers.shift">
-			<p>
-				Hold <kbd>[Shift]</kbd> to show more info
-			</p>
+			<p>Hold <kbd>[Shift]</kbd> to show more info</p>
 		</footer>
 	</article>
 </template>

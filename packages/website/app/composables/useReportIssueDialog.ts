@@ -13,7 +13,7 @@ function reportAnIssue(): Promise<void> {
 function _setup(open: () => void): () => void {
 	openFn = open;
 	return () => resolve?.();
-};
+}
 
 export function useReportIssueDialog() {
 	return {

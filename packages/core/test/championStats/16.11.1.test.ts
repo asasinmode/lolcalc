@@ -1,8 +1,10 @@
-import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import assert from 'node:assert';
 import test from 'node:test';
+
+import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+
 import fixture from '../fixtures/16.11.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -136,7 +138,7 @@ test('Jax, passive and ms/as items', async (t) => {
 		items: [ITEMS_BY_NAME.guinsoo, ITEMS_BY_NAME.yunTal, ITEMS_BY_NAME.lichBane, ITEMS_BY_NAME.steraksGage, ITEMS_BY_NAME.endlessHunger, ITEMS_BY_NAME.mercurysTreads],
 	};
 
-	await t.test('lvl 20 | passive 5 | guinsoo*, yun\'tal*, lich\'bane, sterak, endless hunger, mercury\'s treads', async () => {
+	await t.test("lvl 20 | passive 5 | guinsoo*, yun'tal*, lich'bane, sterak, endless hunger, mercury's treads", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Jax'>,
@@ -149,11 +151,16 @@ test('Jax, passive and ms/as items', async (t) => {
 		});
 	});
 
-	await t.test('lvl 20 | passive 8 | guinsoo*, yun\'tal*, lich\'bane*, sterak, endless hunger, mercury\'s treads', async () => {
+	await t.test("lvl 20 | passive 8 | guinsoo*, yun'tal*, lich'bane*, sterak, endless hunger, mercury's treads", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Jax', {
 			...sourceCommon,
 			internalData: { passiveStacks: 8 } satisfies IInternalDataOf<'Jax'>,
-			internalItemData: { seething: 4, flurry: 1, practice: 0, spActive: 1 } satisfies IInternalItemDataOf<'guinsoo' | 'yunTal' | 'lichBane'>,
+			internalItemData: {
+				seething: 4,
+				flurry: 1,
+				practice: 0,
+				spActive: 1,
+			} satisfies IInternalItemDataOf<'guinsoo' | 'yunTal' | 'lichBane'>,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
@@ -175,7 +182,7 @@ test('Kayle, passive and as items/rfc', async (t) => {
 		items: [ITEMS_BY_NAME.rfc, ITEMS_BY_NAME.guinsoo, ITEMS_BY_NAME.yunTal, ITEMS_BY_NAME.stormrazor],
 	};
 
-	await t.test('lvl 1 | passive 5 | yun\'tal*, guinsoo*, rfc*, stormrazor', async () => {
+	await t.test("lvl 1 | passive 5 | yun'tal*, guinsoo*, rfc*, stormrazor", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Kayle', {
 			...sourceCommon,
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Kayle'>,
@@ -190,7 +197,7 @@ test('Kayle, passive and as items/rfc', async (t) => {
 		assert.strictEqual(damageSource.stats.value.isRanged, false);
 	});
 
-	await t.test('lvl 6 | passive 5 | yun\'tal, guinsoo, rfc*, stormrazor', async () => {
+	await t.test("lvl 6 | passive 5 | yun'tal, guinsoo, rfc*, stormrazor", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Kayle', {
 			...sourceCommon,
 			level: 6,
@@ -205,7 +212,7 @@ test('Kayle, passive and as items/rfc', async (t) => {
 		assert.strictEqual(damageSource.stats.value.isRanged, true);
 	});
 
-	await t.test('lvl 16 | passive 5 | yun\'tal*, guinsoo*, rfc, stormrazor*', async () => {
+	await t.test("lvl 16 | passive 5 | yun'tal*, guinsoo*, rfc, stormrazor*", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Kayle', {
 			...sourceCommon,
 			level: 16,

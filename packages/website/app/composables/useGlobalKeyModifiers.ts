@@ -3,10 +3,14 @@ interface IGlobalKeyModifiers {
 	alt: boolean;
 	/** also cmd */
 	ctrl: boolean;
-};
+}
 
 export function useGlobalKeyModifiers() {
-	return useState<IGlobalKeyModifiers>('globalKeyModifiers', () => ({ shift: false, alt: false, ctrl: false }));
+	return useState<IGlobalKeyModifiers>('globalKeyModifiers', () => ({
+		shift: false,
+		alt: false,
+		ctrl: false,
+	}));
 }
 
 export function _setupGlobalKeyModifiers() {

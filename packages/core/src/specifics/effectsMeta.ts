@@ -1,11 +1,15 @@
-import type { IGameAbilityId } from '../GameAbilityId';
 import { AbilityType, EffectObjectName, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+
+import type { IGameAbilityId } from '../GameAbilityId';
 import { GameAbilityId } from '../GameAbilityId.ts';
 
-export const EFFECTS_META: Record<EffectObjectName, {
-	sourceAbility: IGameAbilityId;
-	label: string;
-}> = {
+export const EFFECTS_META: Record<
+	EffectObjectName,
+	{
+		sourceAbility: IGameAbilityId;
+		label: string;
+	}
+> = {
 	[EffectObjectName.ghost]: {
 		sourceAbility: GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost),
 		label: 'Ghost',
@@ -68,11 +72,11 @@ export const EFFECTS_META: Record<EffectObjectName, {
 	},
 	[EffectObjectName.frozenHeartWintersCaress]: {
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart),
-		label: 'Winter\'s Caress',
+		label: "Winter's Caress",
 	},
 	[EffectObjectName.serpentsFangVenom]: {
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
-		label: 'Serpent\'s Venom',
+		label: "Serpent's Venom",
 	},
 	[EffectObjectName.rylaisRimefrost]: {
 		sourceAbility: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rylaisScepter),

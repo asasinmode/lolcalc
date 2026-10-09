@@ -1,10 +1,11 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IOrnn from '@lolcalc/data/files/champion/Ornn.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { watch } from 'vue';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -22,14 +23,14 @@ export default {
 	setupData(self) {
 		const _masterworkLevel = passiveMasterworkLevel(self);
 		return {
-			masterworkItemSlot: self.level.value >= _masterworkLevel
-				? clamp(-1, Math.round(self.internalData.value.masterworkItemSlot ?? 1), 6)
-				: 1,
+			masterworkItemSlot: self.level.value >= _masterworkLevel ? clamp(-1, Math.round(self.internalData.value.masterworkItemSlot ?? 1), 6) : 1,
 			passiveUpgradedAllies: clamp(0, Math.round(self.internalData.value.passiveUpgradedAllies ?? 0), passiveCalculateMaxUpgradedAllies(self)),
 			_masterworkLevel,
-			_watchHandles: [watch(self.level, () => {
-				self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, passiveCalculateMaxUpgradedAllies(self));
-			})],
+			_watchHandles: [
+				watch(self.level, () => {
+					self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, passiveCalculateMaxUpgradedAllies(self));
+				}),
+			],
 		};
 	},
 	passive: {
@@ -94,14 +95,18 @@ export default {
 	calculateHooks: {
 		postItemTotal: {
 			handler(self, { championPassiveStats, itemPassivesStats, itemTotalStats, totalMultipliersStats }, { calculatedVariables }) {
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: self,
+				};
 				const baseStatAmp = championAbilityVariableValue('BaseStatAmp', passiveParams);
 				const additionalStatAmp = championAbilityVariableValue('AdditionalMythicStatAmp', passiveParams);
 
 				if (typeof baseStatAmp.value === 'number' && typeof additionalStatAmp.value === 'number') {
-					calculatedVariables.ornnPassiveStatAmp = baseStatAmp.value
-						+ additionalStatAmp.value * (self.internalData.value.passiveUpgradedAllies
-							+ (~self.internalData.value.masterworkItemSlot && (self.level.value >= passiveMasterworkLevel(self)) ? 1 : 0));
+					calculatedVariables.ornnPassiveStatAmp =
+						baseStatAmp.value + additionalStatAmp.value * (self.internalData.value.passiveUpgradedAllies + (~self.internalData.value.masterworkItemSlot && self.level.value >= passiveMasterworkLevel(self) ? 1 : 0));
 				} else {
 					console.warn('[CHAMPION_SPECIFICS ornn] failed to calculate passive stat amps', baseStatAmp, additionalStatAmp);
 				}

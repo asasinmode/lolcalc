@@ -1,13 +1,14 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type INami from '@lolcalc/data/files/champion/Nami.json';
-import type { IChampion } from '@lolcalc/data/types.js';
-import type { IChampionSpecific } from '../champion.ts';
-import type { IDeriveProgressFn } from '../index.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { STAT_ICON } from '@lolcalc/data';
+import type INami from '@lolcalc/data/files/champion/Nami.json';
+import type { IChampion } from '@lolcalc/data/types.js';
 import { EffectObjectName } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
+
+import type { IChampionSpecific } from '../champion.ts';
+import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveCalculateMS(champion: IChampion, progress: number, totalAP: number): number {
@@ -18,7 +19,7 @@ function passiveCalculateMS(champion: IChampion, progress: number, totalAP: numb
 	});
 
 	if (typeof bonusMS.value === 'number') {
-		return bonusMS.value * progress / 100;
+		return (bonusMS.value * progress) / 100;
 	}
 
 	console.warn('[CHAMPION_SPECIFICS nami] failed to calculate passive bonus MS', bonusMS);
@@ -34,22 +35,23 @@ export default {
 	},
 	passive: {
 		effectControls: {
-			model: self => computed({
-				get() {
-					return self.internalData.value.passiveMSTotalAp !== undefined;
-				},
-				set(value) {
-					if (value) {
-						self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
-						const effect = self.getEffect(EffectObjectName.namiPSurgingTides)?.[0];
-						if (effect) {
-							effect.data.value[0] = 0;
+			model: (self) =>
+				computed({
+					get() {
+						return self.internalData.value.passiveMSTotalAp !== undefined;
+					},
+					set(value) {
+						if (value) {
+							self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
+							const effect = self.getEffect(EffectObjectName.namiPSurgingTides)?.[0];
+							if (effect) {
+								effect.data.value[0] = 0;
+							}
+						} else {
+							self.internalData.value.passiveMSTotalAp = undefined;
 						}
-					} else {
-						self.internalData.value.passiveMSTotalAp = undefined;
-					}
-				},
-			}),
+					},
+				}),
 			refresh(self) {
 				self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
 			},

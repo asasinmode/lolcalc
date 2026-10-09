@@ -1,8 +1,9 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IDrMundo from '@lolcalc/data/files/champion/DrMundo.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IDrMundo from '@lolcalc/data/files/champion/DrMundo.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -14,7 +15,11 @@ export default {
 				CannisterHpRestore: [],
 			},
 			calculate(self) {
-				const cannisterPercentRestore = championAbilityVariableValue('MaxHealthGain', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value });
+				const cannisterPercentRestore = championAbilityVariableValue('MaxHealthGain', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+				});
 				let hpRestore = 0;
 				if (typeof cannisterPercentRestore.value === 'number') {
 					hpRestore = (cannisterPercentRestore.value as number) * self.stats.value.total.hp;
@@ -47,7 +52,12 @@ export default {
 	calculateHooks: {
 		postTotal: {
 			handler(self, { totalStats, bonusStats, championPassiveStats }) {
-				const maxHealthRegenPercent = championAbilityVariableValue('MaxHealthRegen', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+				const maxHealthRegenPercent = championAbilityVariableValue('MaxHealthRegen', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: { level: { value: self.level.value } } as DamageSource,
+				});
 				if (typeof maxHealthRegenPercent.value === 'number') {
 					championPassiveStats.hpRegen = maxHealthRegenPercent.value * totalStats.hp;
 					bonusStats.hpRegen += championPassiveStats.hpRegen;

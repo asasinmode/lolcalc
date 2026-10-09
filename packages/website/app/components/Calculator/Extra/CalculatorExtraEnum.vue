@@ -22,21 +22,12 @@ function updateValue(event: Event) {
 
 <template>
 	<article class="calc-extra-enum">
-		<img
-			v-bind="gameImageAttrs(imgSrc, 56)"
-			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event)"
-		>
+		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
 		<label :for="`xtrenum-${idSuffix}`">
 			{{ label }}
 		</label>
 		<slot />
-		<select
-			:id="`xtrenum-${idSuffix}`"
-			:value="value ?? 0"
-			:disabled
-			@change="updateValue"
-		>
+		<select :id="`xtrenum-${idSuffix}`" :value="value ?? 0" :disabled @change="updateValue">
 			<option v-for="[optionValue, optionLabel] in options" :key="optionValue" :value="optionValue">
 				{{ optionLabel }}
 			</option>

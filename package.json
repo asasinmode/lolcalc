@@ -10,9 +10,9 @@
 		"typecheck:packages": "vue-tsc --noEmit",
 		"typecheck:website": "cd packages/website && pnpm typecheck",
 		"typecheck": "run-p --aggregate-output -c \"typecheck:packages\" \"typecheck:website\"",
-		"fmt": "oxmft",
-		"lint": "oxlint",
-		"lint:fix": "oxlint --fix",
+		"fmt": "pnpm --ignore-scripts exec oxfmt",
+		"lint": "pnpm --ignore-scripts exec oxlint",
+		"lint:fix": "pnpm --ignore-scripts exec oxlint --fix",
 		"test:shared": "cd packages/shared && node --test",
 		"test:core": "cd packages/core && node --test",
 		"test": "run-p --aggregate-output -c test:shared test:core"

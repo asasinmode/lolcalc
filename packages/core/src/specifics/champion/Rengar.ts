@@ -1,7 +1,8 @@
-import type IRengar from '@lolcalc/data/files/champion/Rengar.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IRengar from '@lolcalc/data/files/champion/Rengar.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -46,7 +47,12 @@ export default {
 		onChampionPassive: {
 			handler(self, _stats, { calculatedVariables }) {
 				if (self.internalData.value.isPassiveMSActive) {
-					const bonusMS = championAbilityVariableValue('EmpoweredMS', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+					const bonusMS = championAbilityVariableValue('EmpoweredMS', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: self,
+					});
 					if (typeof bonusMS.value === 'number') {
 						calculatedVariables.totalBonusPercentMoveSpeed += bonusMS.value;
 					} else {

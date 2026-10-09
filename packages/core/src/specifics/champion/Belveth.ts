@@ -1,14 +1,15 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IBelveth from '@lolcalc/data/files/champion/Belveth.json';
-import type { IChampionRole } from '@lolcalc/shared/types.js';
-import type { IChampionSpecific } from '../champion.ts';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '@lolcalc/core/misc.ts';
+import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { PATCH_VERSION } from '@lolcalc/data';
+import type IBelveth from '@lolcalc/data/files/champion/Belveth.json';
 import { AbilityType, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
+import type { IChampionRole } from '@lolcalc/shared/types.js';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { cooldownReductionPercentageFromHaste, defineChampionVariables } from './shared.ts';
 
@@ -38,7 +39,7 @@ export default {
 					isCustom: true,
 					displayedName: 'Stacks',
 				},
-				'TotalAttackSpeedFromStacks': {
+				TotalAttackSpeedFromStacks: {
 					/* game doesn't show any of these */
 					extendedEquals: undefined,
 					calculatesFrom: [],
@@ -55,7 +56,11 @@ export default {
 			},
 			calculate(self) {
 				let f1 = Number.NaN;
-				const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
+				const qParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'q',
+					abilityVariant: self.champion.value!.abilities.q.variants[0]!,
+					damageSource: self,
+				};
 				const perSideCD = championAbilityVariableValue('PerSideCooldown', qParams);
 
 				if (typeof perSideCD.value === 'number') {
@@ -68,7 +73,7 @@ export default {
 				if (typeof perSideASToAHRatio.value === 'number') {
 					const haste = (self.stats.value.total.bonusAttackSpeedPercent - (self.stats.value.variables.belvethPostAbilityBonusAS ?? 0)) * perSideASToAHRatio.value * 100;
 					const cdr = cooldownReductionPercentageFromHaste(haste);
-					f1 *= 1 - (cdr / 100);
+					f1 *= 1 - cdr / 100;
 				} else {
 					console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate q as to ah ratio', perSideASToAHRatio);
 				}
@@ -122,7 +127,11 @@ export default {
 			calculate(self) {
 				return {
 					'f2.0': {
-						value: championAbilityVariableValue('TotalStrikes', { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, damageSource: self }).value,
+						value: championAbilityVariableValue('TotalStrikes', {
+							abilityKey: 'e',
+							abilityVariant: self.champion.value!.abilities.e.variants[0]!,
+							damageSource: self,
+						}).value,
 					},
 				};
 			},
@@ -130,10 +139,10 @@ export default {
 				'f2.0': {
 					displayedName: 'TotalStrikes',
 				},
-				'DamagePerStrike': {
+				DamagePerStrike: {
 					type: VariableType.physical,
 				},
-				'MaxDamagePerStrikeTooltip': {
+				MaxDamagePerStrikeTooltip: {
 					type: VariableType.physical,
 				},
 			},
@@ -149,7 +158,11 @@ export default {
 			calculate(self, target) {
 				let TotalComputedExplosionDamage = Number.NaN;
 
-				const ultParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self };
+				const ultParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+					damageSource: self,
+				};
 				const baseDamage = championAbilityVariableValue('TotalExplosionDamage', ultParams);
 				const missingHealthPercent = championAbilityVariableValue('MissingHealthDamage', ultParams);
 				if (typeof baseDamage.value === 'number' && typeof missingHealthPercent.value === 'number') {
@@ -203,7 +216,11 @@ export default {
 			handler(self, { baseStats, championPassiveStats }, { calculatedVariables }) {
 				calculatedVariables.attackSpeedCap = Number.POSITIVE_INFINITY;
 
-				const rParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self };
+				const rParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+					damageSource: self,
+				};
 				const firstDurationIncreaseThreshold = championAbilityVariableValue('StackThresholdForUpgrade', rParams);
 				const firstDurationIncrease = championAbilityVariableValue('SteroidDurationUpgrade', rParams);
 				const secondDurationIncreaseThreshold = championAbilityVariableValue('StackThresholdForPermanent', rParams);
@@ -232,7 +249,11 @@ export default {
 		onChampionPassive: {
 			handler(self, { championPassiveStats }, { calculatedVariables }) {
 				const { passiveStacks, hasPassiveStack } = self.internalData.value;
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 
 				championPassiveStats.bonusAttackSpeedPercent = 0;
 
@@ -248,13 +269,17 @@ export default {
 
 				const asPerStack = championAbilityVariableValue('AttackSpeedPerStack', passiveParams);
 				if (typeof asPerStack.value === 'number') {
-					championPassiveStats.bonusAttackSpeedPercent += passiveStacks * asPerStack.value / 100;
+					championPassiveStats.bonusAttackSpeedPercent += (passiveStacks * asPerStack.value) / 100;
 				} else {
 					console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate passive stack as', asPerStack);
 				}
 
 				if (self.currentAbilityResource.value) {
-					const totalASMult = championAbilityVariableValue('TotalASMod', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self });
+					const totalASMult = championAbilityVariableValue('TotalASMod', {
+						abilityKey: 'r',
+						abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+						damageSource: self,
+					});
 					if (typeof totalASMult.value === 'number') {
 						calculatedVariables.totalAttackSpeedMult = totalASMult.value;
 					} else {
@@ -266,11 +291,8 @@ export default {
 		postTotal: {
 			handler(self, { itemPassivesStats, itemTotalStats, dragonStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, bonusStats, championPassiveStats }, { calculatedVariables }) {
 				/* the actual values used in belveth's true form hp scaling - stats from some sources are ignored */
-				const ultUsedBonusAD = bonusStats.attackDamage
-					- totalMultipliersStats.attackDamage; /* infernal & mid quest */
-				const ultUsedTotalAP = totalStats.abilityPower
-					- totalMultipliersStats.abilityPower /* infernal & mid quest */
-					- (calculatedVariables.riftmakerVoidInfusion ?? 0) * calculatedVariables.totalItemApMultipliers; /* all of riftmaker */
+				const ultUsedBonusAD = bonusStats.attackDamage - totalMultipliersStats.attackDamage; /* infernal & mid quest */
+				const ultUsedTotalAP = totalStats.abilityPower - totalMultipliersStats.abilityPower /* infernal & mid quest */ - (calculatedVariables.riftmakerVoidInfusion ?? 0) * calculatedVariables.totalItemApMultipliers; /* all of riftmaker */
 
 				const maxHP = championAbilityVariableValue('MaxHealthOnDevour', {
 					abilityKey: 'r',

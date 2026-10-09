@@ -1,11 +1,12 @@
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
+import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
+
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
 
@@ -17,7 +18,6 @@ const imgSize = abilityImageSize('Aphelios');
 
 function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 	event.preventDefault();
-	// eslint-disable-next-line vue/no-mutating-props
 	props.damageSource.abilityLevels.value[ability] = 0;
 }
 
@@ -28,17 +28,23 @@ const GravitumSlowComponent = await progressExtra(GameAbilityId.build(AbilityTyp
 
 const gravitumDamageSource = shallowRef<DamageSource>(props.damageSource);
 
-watch(props.damageSource.getWatchable(), () => {
-	gravitumDamageSource.value = props.damageSource.clone({
-		abilityVariants: {
-			q: gravitumVariantIndex,
-		},
-	}, true);
-	gravitumDamageSource.value.champion.value = props.damageSource.champion.value;
-}, { immediate: true });
+watch(
+	props.damageSource.getWatchable(),
+	() => {
+		gravitumDamageSource.value = props.damageSource.clone(
+			{
+				abilityVariants: {
+					q: gravitumVariantIndex,
+				},
+			},
+			true,
+		);
+		gravitumDamageSource.value.champion.value = props.damageSource.champion.value;
+	},
+	{ immediate: true },
+);
 </script>
 
-<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<article class="extras-aphelios-ability-levels">
 		<img
@@ -47,7 +53,7 @@ watch(props.damageSource.getWatchable(), () => {
 			:height="imgSize"
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(AbilityType.champion, 'Aphelios', 'passive', 0))"
-		>
+		/>
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup
 			v-for="abilityKey in ['q', 'w', 'e'] satisfies IChampionAbilityKey[]"
@@ -55,7 +61,11 @@ watch(props.damageSource.getWatchable(), () => {
 			:key="abilityKey"
 			v-model="damageSource.abilityLevels.value[abilityKey]"
 			:label="`&quot;${abilityKey}&quot; level`"
-			:options="Array.from({ length: damageSource.maxAbilityLevels.value[abilityKey] }, (_, index) => ({ level: index + 1 }))"
+			:options="
+				Array.from({ length: damageSource.maxAbilityLevels.value[abilityKey] }, (_, index) => ({
+					level: index + 1,
+				}))
+			"
 			value-key="level"
 			:data-ability-key="abilityKey"
 			:clear-value="0"

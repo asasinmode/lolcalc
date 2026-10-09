@@ -1,10 +1,11 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IGraves from '@lolcalc/data/files/champion/Graves.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IGraves from '@lolcalc/data/files/champion/Graves.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function eMaxStacks(self: DamageSource<'Graves'>): number {
@@ -29,7 +30,7 @@ export default {
 				CritDamageMult: {
 					/* game doesn't show anything there */
 					calculatesFrom({ abilityVariant, damageSource }) {
-						const critRatio = (abilityVariant as typeof IGraves['abilities']['passive']['variants'][0]).dataValues.CritDamageRatio[1]!;
+						const critRatio = (abilityVariant as (typeof IGraves)['abilities']['passive']['variants'][0]).dataValues.CritDamageRatio[1]!;
 						return [
 							{
 								stat: 'const',
@@ -82,7 +83,12 @@ export default {
 			handler(self, { championPassiveStats, bonusStats, totalStats, totalPreMultipliersStats, itemPassivesStats, itemTotalStats, totalMultipliersStats, dragonStatMultipliers, dragonStats }, { calculatedVariables }) {
 				const { eStacks } = self.internalData.value;
 				if (eStacks) {
-					const eParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e };
+					const eParams: IGameVariableValueParameters['championAbility'] = {
+						abilityKey: 'e',
+						abilityVariant: self.champion.value!.abilities.e.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						abilityLevel: self.abilityLevels.value.e,
+					};
 
 					const eArmor = championAbilityVariableValue('ArmorPerStack', eParams);
 					if (typeof eArmor.value === 'number') {

@@ -1,9 +1,10 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IZeri from '@lolcalc/data/files/champion/Zeri.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IZeri from '@lolcalc/data/files/champion/Zeri.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -21,7 +22,11 @@ export default {
 			calculate(self, target) {
 				let TotalFullChargeDamage = Number.NaN;
 
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'q',
+					abilityVariant: self.champion.value!.abilities.q.variants[0]!,
+					damageSource: self,
+				};
 				const baseDamage = championAbilityVariableValue('PassiveMaxDamage', passiveParams);
 				const percentHPDmg = championAbilityVariableValue('PassiveMaxChargePercentHealth', passiveParams);
 
@@ -137,7 +142,11 @@ export default {
 					return;
 				}
 
-				const rParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value?.abilities.r.variants[0]!, damageSource: self };
+				const rParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value?.abilities.r.variants[0]!,
+					damageSource: self,
+				};
 
 				const ultBonusMS = championAbilityVariableValue('BaseBonusMS', rParams);
 				if (typeof ultBonusMS.value === 'number') {
@@ -158,7 +167,11 @@ export default {
 		},
 		onTotalPreMultipliers: {
 			handler(self, { totalPreMultipliersStats, baseStats, championPassiveStats, bonusStats }, { calculatedVariables, miscDebug }) {
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'q',
+					abilityVariant: self.champion.value!.abilities.q.variants[0]!,
+					damageSource: self,
+				};
 
 				miscDebug.zeriExcessAS = 0;
 
@@ -172,7 +185,7 @@ export default {
 
 				const asToAD = championAbilityVariableValue('ExcessAttackSpeedToADMult', passiveParams);
 				if (typeof asToAD.value === 'number') {
-					miscDebug.zeriExcessASPercent = (miscDebug.zeriExcessAS / baseStats.attackSpeedRatio);
+					miscDebug.zeriExcessASPercent = miscDebug.zeriExcessAS / baseStats.attackSpeedRatio;
 					/* passive calculates off of excess bonus % attack speed, so convert raw excess as to it */
 					championPassiveStats.attackDamage = miscDebug.zeriExcessASPercent * asToAD.value * 100;
 					bonusStats.attackDamage += championPassiveStats.attackDamage;
@@ -187,7 +200,11 @@ export default {
 					return;
 				}
 
-				const ultASPercent = championAbilityVariableValue('BaseASPercent', { abilityKey: 'r', abilityVariant: self.champion.value?.abilities.r.variants[0]!, damageSource: self });
+				const ultASPercent = championAbilityVariableValue('BaseASPercent', {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value?.abilities.r.variants[0]!,
+					damageSource: self,
+				});
 				if (typeof ultASPercent.value === 'number') {
 					calculatedVariables.attackSpeedCap += ultASPercent.value * baseStats.attackSpeedRatio;
 					championPassiveStats.bonusAttackSpeedPercent = ultASPercent.value;

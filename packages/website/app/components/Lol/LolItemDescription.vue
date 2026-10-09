@@ -1,13 +1,14 @@
 <script setup vapor lang="ts">
 import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
-import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
-import type { IItemDescriptionProps } from '~/utils/types';
 import { computeItemDescription } from '@lolcalc/core/DamageSource';
 import { calculateDynamicVariables, specificKnownVariables } from '@lolcalc/core/specifics';
+import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { ICON_GOLD, PATCH_VERSION } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta';
 import { UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared/index';
+
+import type { IItemDescriptionProps } from '~/utils/types';
 
 const props = defineProps<IItemDescriptionProps>();
 
@@ -20,18 +21,18 @@ defineEmits<{
 const { vSemver, vMinor } = PATCH_VERSION;
 const globalKeyModifiers = useGlobalKeyModifiers();
 
-const computedDescription = computed<IComputedItemDescription | undefined>(() => props.precomputedDescription
-	|| (props.item && props.damageSource?.computed.items.value.find(item => props.item!.id === item?.item.id))
-	|| computeItemDescription(
-		props.item,
-		props.damageSource,
-		{
+const computedDescription = computed<IComputedItemDescription | undefined>(
+	() =>
+		props.precomputedDescription ||
+		(props.item && props.damageSource?.computed.items.value.find((item) => props.item!.id === item?.item.id)) ||
+		computeItemDescription(props.item, props.damageSource, {
 			replaceWithName: props.replaceVariablesWithNames,
-			overrideVariables: props.item && (props.damageSource
-				? calculateDynamicVariables(props.damageSource, undefined, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)
-				: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)),
-		},
-	),
+			overrideVariables:
+				props.item &&
+				(props.damageSource
+					? calculateDynamicVariables(props.damageSource, undefined, (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)
+					: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[props.item.id as keyof IHypotheticalItemSpecifics]?.variables)),
+		}),
 );
 
 const isMidQuestBoots = computed(() => {
@@ -45,26 +46,25 @@ const isMidQuestBoots = computed(() => {
 const isSupportItem = computed(() => computedDescription.value?.item && UPGRADED_SUPPORT_ITEMS.includes(computedDescription.value.item.id));
 
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
-const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
+const otherView = computed(() => (view.value === 'Shop' ? 'Inventory' : 'Shop'));
 
 const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inventory');
 
-const hasMoreInfo = computed(() => !globalKeyModifiers.value.shift && (computedDescription.value?.extended
-	|| computedDescription.value?.keywordDefinitions
-	|| computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`]
-	|| (isInventoryView.value && computedDescription.value?.footerLeftAnyExtendedVInfo)
-),
+const hasMoreInfo = computed(
+	() =>
+		!globalKeyModifiers.value.shift &&
+		(computedDescription.value?.extended ||
+			computedDescription.value?.keywordDefinitions ||
+			computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`] ||
+			(isInventoryView.value && computedDescription.value?.footerLeftAnyExtendedVInfo)),
 );
-const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some(stat => stat.increasedBy)));
+const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some((stat) => stat.increasedBy)));
 const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
 const showDynamicValueFooter = computed(() => isInventoryView.value && computedDescription.value?.footerLeft);
 
 const descriptionText = computed(() => {
 	const suffix = props.hoverTooltip && globalKeyModifiers.value.shift ? 'Extended' : '';
-	return (hasOtherView.value && props.hoverTooltip
-		? computedDescription.value?.[`tooltip${view.value}${suffix}`]
-		: (computedDescription.value?.[`tooltipShop${suffix}`]))
-	?? computedDescription.value?.[`tooltipShop${suffix}`];
+	return (hasOtherView.value && props.hoverTooltip ? computedDescription.value?.[`tooltip${view.value}${suffix}`] : computedDescription.value?.[`tooltipShop${suffix}`]) ?? computedDescription.value?.[`tooltipShop${suffix}`];
 });
 
 const isMasterwork = computed(() => props.showMasterwork && isInventoryView.value && computedDescription.value?.isMasterwork);
@@ -95,31 +95,17 @@ defineExpose({ header });
 			height="64"
 			aria-hidden="true"
 			loading="lazy"
-		>
+		/>
 		<span>{{ computedDescription?.item.name }}{{ isMasterwork ? ` (Masterwork)` : '' }}</span>
 		<span>
 			<span>Sells for:</span>
-			<img
-				v-show="computedDescription?.item"
-				v-bind="ICON_GOLD"
-				alt="gold coins"
-				loading="lazy"
-			>
+			<img v-show="computedDescription?.item" v-bind="ICON_GOLD" alt="gold coins" loading="lazy" />
 			{{ isInventoryView ? computedDescription?.item.gold.sell : (gold ?? computedDescription?.item.gold.total) }}
 			<span>({{ Math.round((computedDescription?.item.gold.sellBackModifier ?? 0.7) * 100) }}%)</span>
 		</span>
 		<span>{{ computedDescription?.subtitleLeft }}</span>
 		<span>{{ computedDescription?.subtitleRight }}</span>
-		<a
-			v-if="!hoverTooltip"
-			v-show="computedDescription?.item"
-			class="wiki-link"
-			:href="`https://wiki.leagueoflegends.com/en-us/${computedDescription?.item.name.replaceAll(' ', '_')}`"
-			target="_blank"
-			@click.stop=""
-		>
-			wiki
-		</a>
+		<a v-if="!hoverTooltip" v-show="computedDescription?.item" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${computedDescription?.item.name.replaceAll(' ', '_')}`" target="_blank" @click.stop=""> wiki </a>
 	</component>
 	<div class="item-description">
 		<p v-if="damageSource && (isMidQuestBoots ? damageSource.roleQuest.value !== 'mid' : isSupportItem ? damageSource.roleQuest.value !== 'support' : false)">
@@ -132,38 +118,22 @@ defineExpose({ header });
 					:width="typeof icon === 'string' ? 20 : icon[1]"
 					:height="typeof icon === 'string' ? 20 : (icon[2] ?? icon[1])"
 					aria-hidden="true"
-				>
-				<span :data-increased="hoverTooltip && isInventoryView && increasedBy ? '' : undefined">
-					{{ hoverTooltip && isInventoryView ? totalValue : baseValue }}
-				</span>{{ ITEM_STAT_META[statName].isPercentage ? '%' : '' }}
+				/>
+				<span :data-increased="hoverTooltip && isInventoryView && increasedBy ? '' : undefined"> {{ hoverTooltip && isInventoryView ? totalValue : baseValue }} </span>{{ ITEM_STAT_META[statName].isPercentage ? '%' : '' }}
 				<span>{{ ITEM_STAT_META[statName].name }}</span>
 			</li>
 		</ul>
-		<template
-			v-for="([heading, ...paragraphs], i) in descriptionText"
-			:key="i"
-		>
+		<template v-for="([heading, ...paragraphs], i) in descriptionText" :key="i">
 			<h4 v-html="heading" />
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
-		<p
-			v-if="computedDescription?.extended"
-			v-show="!hoverTooltip || globalKeyModifiers.shift"
-			v-html="computedDescription.extended"
-		/>
+		<p v-if="computedDescription?.extended" v-show="!hoverTooltip || globalKeyModifiers.shift" v-html="computedDescription.extended" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && globalKeyModifiers.shift ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
-			<p
-				v-if="computedDescription?.keywordDefinitions"
-				v-show="globalKeyModifiers.shift"
-				class="keyword-definitions"
-				v-html="computedDescription.keywordDefinitions"
-			/>
+			<p v-if="computedDescription?.keywordDefinitions" v-show="globalKeyModifiers.shift" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
 			<div>
-				<p v-show="hasMoreInfo">
-					Hold <kbd>[Shift]</kbd> to show more info
-				</p>
+				<p v-show="hasMoreInfo">Hold <kbd>[Shift]</kbd> to show more info</p>
 				<p v-show="hasOtherView || computedDescription?.footerLeft">
 					Press <kbd>[Ctrl]</kbd> to toggle to <b>{{ otherView }}</b> view
 				</p>

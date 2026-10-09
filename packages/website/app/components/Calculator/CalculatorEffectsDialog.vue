@@ -1,12 +1,13 @@
 <script setup vapor lang="ts">
 import type { IDamageSourceEffect } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { EffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { computeAbilityDescription, computeEffectDescription, DamageSource } from '@lolcalc/core/DamageSource';
+import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS, EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEMS, useChampion } from '@lolcalc/data';
+import type { EffectObjectName, TAbilityType } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
+
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
@@ -35,8 +36,7 @@ function createSearchString(value?: string) {
 	return (value ?? '').toLocaleLowerCase().replaceAll(/[^a-z;]/g, '');
 }
 
-const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.item)
+const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([, specific]) => specific.sourceAbility.type === AbilityType.item)
 	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
 		const item = ITEMS[sourceAbilityId.id]!;
@@ -53,9 +53,8 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 	})
 	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
 
-const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.effect || specific.sourceAbility.type === AbilityType.dragon)
-	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
+const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([, specific]) => specific.sourceAbility.type === AbilityType.effect || specific.sourceAbility.type === AbilityType.dragon).map(
+	([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
 
 		const searchString = createSearchString(`${effectSpecific.label};${computeEffectDescription(effectObjectName).description}`);
@@ -67,11 +66,11 @@ const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTR
 			name: effectSpecific.label,
 			searchString,
 		};
-	});
+	},
+);
 
-const championEffects = shallowRef<IEffectOptionGroup['options']>(EFFECT_SPECIFICS_OBJECT_ENTRIES
-	.filter(([, specific]) => specific.sourceAbility.type === AbilityType.champion)
-	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
+const championEffects = shallowRef<IEffectOptionGroup['options']>(
+	EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([, specific]) => specific.sourceAbility.type === AbilityType.champion).map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
 		const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
 
 		const searchString = createSearchString(`${effectSpecific.label};${computeEffectDescription(effectObjectName).description};${sourceAbilityId.id}`);
@@ -83,7 +82,8 @@ const championEffects = shallowRef<IEffectOptionGroup['options']>(EFFECT_SPECIFI
 			name: 'loading...',
 			searchString,
 		};
-	}));
+	}),
+);
 
 const isLoading = ref(false);
 
@@ -97,7 +97,7 @@ const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 		{
 			type: AbilityType.champion,
 			label: 'champions',
-			options: (championEffects.value ?? []),
+			options: championEffects.value ?? [],
 		},
 		{
 			type: AbilityType.effect,
@@ -106,7 +106,7 @@ const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 		},
 	];
 
-	return groups.filter(group => group.options.length);
+	return groups.filter((group) => group.options.length);
 });
 
 const htmlTagRegex = /<(\/)?[a-z ="0-9]+>/gi;
@@ -117,9 +117,8 @@ async function loadChampionEffects() {
 	}
 	isLoading.value = true;
 
-	championEffects.value = (await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES
-		.filter(([, specific]) => specific.sourceAbility.type === AbilityType.champion)
-		.map(async ([effectObjectName, effectSpecific]): Promise<IEffectOptionGroup['options'][number]> => {
+	championEffects.value = await Promise.all(
+		EFFECT_SPECIFICS_OBJECT_ENTRIES.filter(([, specific]) => specific.sourceAbility.type === AbilityType.champion).map(async ([effectObjectName, effectSpecific]): Promise<IEffectOptionGroup['options'][number]> => {
 			const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
 			const champion = await useChampion(sourceAbilityId.id);
 			const precomputedSourceAbilityDesc = computeAbilityDescription(champion, sourceAbilityId);
@@ -133,27 +132,32 @@ async function loadChampionEffects() {
 				name: `${champion.name} ${sourceAbilityId.abilityKey === 'passive' ? 'P' : sourceAbilityId.abilityKey.toUpperCase()} - ${precomputedSourceAbilityDesc.name}`,
 				searchString,
 			};
-		})));
+		}),
+	);
 
 	isLoading.value = false;
 }
 
-const UnknownComponent = defineComponent((props, _ctx) => {
-	console.warn('[CalculatorEffectsDialog] unknown effect component', props.abilityId);
-	return () => h('article', { class: 'unknown' }, [h('span', 'unknown'), h('span', props.abilityId.id)]);
-}, { props: ['abilityId'] });
+const UnknownComponent = defineComponent(
+	(props, _ctx) => {
+		console.warn('[CalculatorEffectsDialog] unknown effect component', props.abilityId);
+		return () => h('article', { class: 'unknown' }, [h('span', 'unknown'), h('span', props.abilityId.id)]);
+	},
+	{ props: ['abilityId'] },
+);
 
 const effectComponents = computed(() => {
 	const rv = new Map<EffectObjectName, Component | Component[]>();
 
 	for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
-		const component = effectSpecific.sourceAbility.type === AbilityType.item
-			? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-			: effectSpecific.sourceAbility.type === AbilityType.champion
-				? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-				: effectSpecific.sourceAbility.type === AbilityType.dragon
-					? DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]?.[effectSpecific.sourceAbility.subtype]?.effects
-					: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
+		const component =
+			effectSpecific.sourceAbility.type === AbilityType.item
+				? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+				: effectSpecific.sourceAbility.type === AbilityType.champion
+					? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+					: effectSpecific.sourceAbility.type === AbilityType.dragon
+						? DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]?.[effectSpecific.sourceAbility.subtype]?.effects
+						: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
 		component && rv.set(effectObjectName, component);
 	}
 
@@ -175,10 +179,9 @@ function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId, isAppl
 	hoveredAppliedEffect.value = appliedEffect ?? damageSource.value?.getEffect(effectId.id)?.[0];
 
 	if (specific?.damageSourceOverrides) {
-		hoveredEffectTooltipOverrideDamageSource.value = hoveredAppliedEffect.value?.source.value?.clone(specific.damageSourceOverrides, true)
-			?? new DamageSource(specific.damageSourceOverrides, true, true);
+		hoveredEffectTooltipOverrideDamageSource.value = hoveredAppliedEffect.value?.source.value?.clone(specific.damageSourceOverrides, true) ?? new DamageSource(specific.damageSourceOverrides, true, true);
 		if (specific.sourceAbility.type === AbilityType.champion) {
-			useChampion(specific.sourceAbility.id).then(champion => hoveredEffectTooltipOverrideDamageSource.value && (hoveredEffectTooltipOverrideDamageSource.value.champion.value = champion));
+			useChampion(specific.sourceAbility.id).then((champion) => hoveredEffectTooltipOverrideDamageSource.value && (hoveredEffectTooltipOverrideDamageSource.value.champion.value = champion));
 		}
 	} else {
 		hoveredEffectTooltipOverrideDamageSource.value = undefined;
@@ -195,7 +198,13 @@ function hideEffectTooltip() {
 }
 
 const search = ref('');
-const splitSearch = computed(() => search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v));
+const splitSearch = computed(() =>
+	search.value
+		.toLocaleLowerCase()
+		.replaceAll(/[^a-z ]/g, '')
+		.split(' ')
+		.filter((v) => v),
+);
 
 interface IAppliedEffectWithSearchString {
 	effect: IDamageSourceEffect;
@@ -211,8 +220,7 @@ const appliedEffectsWithSearchStrings = computed((): IAppliedEffectWithSearchStr
 
 function searchFilterEffects<T extends { searchString?: string }>(options?: T[]): T[] | undefined {
 	if (search.value) {
-		return options?.filter(option =>
-			splitSearch.value.every(word => !option.searchString || option.searchString.includes(word)));
+		return options?.filter((option) => splitSearch.value.every((word) => !option.searchString || option.searchString.includes(word)));
 	}
 	return options;
 }
@@ -230,10 +238,10 @@ const searchFilteredEffects = computed(() => {
 
 async function activateFirstSearchEffect() {
 	if (search.value) {
-		const firstEffect = Object.values(searchFilteredEffects.value)?.find(effects => effects.length)?.[0];
+		const firstEffect = Object.values(searchFilteredEffects.value)?.find((effects) => effects.length)?.[0];
 		if (damageSource.value && firstEffect) {
 			const specific = EFFECT_SPECIFICS[firstEffect.abilityId.id];
-			const max = typeof specific.maxValue === 'function' ? (await specific.maxValue()) : specific.maxValue;
+			const max = typeof specific.maxValue === 'function' ? await specific.maxValue() : specific.maxValue;
 			if (!damageSource.value.getEffect(firstEffect.abilityId.id)) {
 				damageSource.value.addEffect(firstEffect.abilityId, [Math.min(max ?? 1, 100)]);
 			}
@@ -247,9 +255,9 @@ function hideEffectTooltipIfNotSearched() {
 	}
 	let visible: boolean | undefined = true;
 	if (hoveringApplied.value) {
-		visible = searchFilteredAppliedEffects.value?.some(effect => effect.effect.abilityId.id === hoveredEffectId.value!.id);
+		visible = searchFilteredAppliedEffects.value?.some((effect) => effect.effect.abilityId.id === hoveredEffectId.value!.id);
 	} else {
-		visible = Object.values(searchFilteredEffects.value)?.some(effects => effects.some(effect => effect.abilityId.id === hoveredEffectId.value!.id));
+		visible = Object.values(searchFilteredEffects.value)?.some((effects) => effects.some((effect) => effect.abilityId.id === hoveredEffectId.value!.id));
 	}
 	if (!visible) {
 		hideEffectTooltip();
@@ -262,54 +270,30 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog
-		id="dialog-effects"
-		ref="vDialog"
-		:aria-busy="isLoading"
-		:data-is-searched="search ? '' : undefined"
-		@open="loadChampionEffects"
-		@close="search = ''"
-	>
+	<VDialog id="dialog-effects" ref="vDialog" :aria-busy="isLoading" :data-is-searched="search ? '' : undefined" @open="loadChampionEffects" @close="search = ''">
 		<header>
-			<h1>
-				effects
-			</h1>
+			<h1>effects</h1>
 			<form method="dialog">
 				<button value="cancel" title="close" class="other-ui-btn" autofocus>
-					<span>
-						close
-					</span>
+					<span> close </span>
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</form>
 			<div class="inline-search-label">
-				<input
-					id="champ-select-search"
-					v-model="search"
-					type="text"
-					:data-empty="!search"
-					@keydown.enter="activateFirstSearchEffect"
-					@update:model-value="hideEffectTooltipIfNotSearched"
-				>
+				<input id="champ-select-search" v-model="search" type="text" :data-empty="!search" @keydown.enter="activateFirstSearchEffect" @update:model-value="hideEffectTooltipIfNotSearched" />
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
 					Search
 				</label>
 				<button title="clear" @mousedown.prevent="search = ''">
-					<span>
-						clear
-					</span>
+					<span> clear </span>
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</div>
 			<h2>loading...</h2>
 		</header>
 		<ul :inert="isLoading">
-			<li
-				v-for="{ effect } in searchFilteredAppliedEffects"
-				:key="effect.abilityId.id"
-				:style="`anchor-name: --effect-${effect.abilityId.id}-applied`"
-			>
+			<li v-for="{ effect } in searchFilteredAppliedEffects" :key="effect.abilityId.id" :style="`anchor-name: --effect-${effect.abilityId.id}-applied`">
 				<Suspense>
 					<component
 						:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"
@@ -319,11 +303,7 @@ defineExpose({
 						id-suffix="effects-dialog-applied"
 						@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true, effect)"
 					>
-						<button
-							class="pretend-ui-btn remove"
-							title="remove"
-							@click="damageSource?.removeEffect(effect.abilityId.id)"
-						>
+						<button class="pretend-ui-btn remove" title="remove" @click="damageSource?.removeEffect(effect.abilityId.id)">
 							<span>remove</span>
 							<Icon class="i-ph:trash" />
 						</button>
@@ -337,11 +317,7 @@ defineExpose({
 		<template v-for="group in effectOptionGroups" :key="group.type">
 			<h2>{{ group.label }}</h2>
 			<ul :inert="isLoading">
-				<li
-					v-for="effect in damageSource && searchFilteredEffects[group.type]"
-					:key="`${group.type}-${effect.abilityId.id}`"
-					:style="`anchor-name: --effect-${effect.abilityId.id}-all`"
-				>
+				<li v-for="effect in damageSource && searchFilteredEffects[group.type]" :key="`${group.type}-${effect.abilityId.id}`" :style="`anchor-name: --effect-${effect.abilityId.id}-all`">
 					<Suspense>
 						<component
 							:is="effectComponents.get(effect.abilityId.id) ?? UnknownComponent"

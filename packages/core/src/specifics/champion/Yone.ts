@@ -1,4 +1,5 @@
 import type IYone from '@lolcalc/data/files/champion/Yone.json';
+
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables, windBrotherCalculateHooks } from './shared.ts';
 

@@ -1,8 +1,9 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type IAnivia from '@lolcalc/data/files/champion/Anivia.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IAnivia from '@lolcalc/data/files/champion/Anivia.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -23,7 +24,12 @@ export default {
 		postTotal: {
 			handler(self, { championPassiveStats, bonusStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, dragonStats, itemTotalStats, itemPassivesStats }, { calculatedVariables }) {
 				if (self.internalData.value.isEgg) {
-					const resists = championAbilityVariableValue('BonusResists', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const resists = championAbilityVariableValue('BonusResists', {
+						abilityKey: 'passive',
+						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						damageSource: { level: { value: self.level.value } } as DamageSource,
+					});
 
 					if (typeof resists.value === 'number') {
 						let armor = resists.value;
@@ -33,6 +39,7 @@ export default {
 						totalPreMultipliersStats.armor += armor;
 						totalPreMultipliersStats.magicResist += magicResist;
 
+						// TODO check shredding
 						if (calculatedVariables.jakShoBonusResistMultiplier) {
 							const jakShoArmor = armor * calculatedVariables.jakShoBonusResistMultiplier;
 							const jakShoMagicResist = magicResist * calculatedVariables.jakShoBonusResistMultiplier;

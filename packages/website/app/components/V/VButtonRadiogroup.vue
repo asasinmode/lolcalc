@@ -55,20 +55,13 @@ function selectOption(tab: T[ValueKey]) {
 </script>
 
 <template>
-	<div
-		:id
-		ref="container"
-		class="v-button-radiogroup"
-		role="radiogroup"
-		:aria-labelledby="`${id}-lbl`"
-		@keydown="onKeydown"
-	>
+	<div :id ref="container" class="v-button-radiogroup" role="radiogroup" :aria-labelledby="`${id}-lbl`" @keydown="onKeydown">
 		<span :id="`${id}-lbl`">{{ label }}</span>
 		<button
 			v-for="(option, index) in options"
 			:key="option[valueKey] as string"
 			role="radio"
-			:title="titleKey !== '' ? option[titleKey || valueKey] as string : undefined"
+			:title="titleKey !== '' ? (option[titleKey || valueKey] as string) : undefined"
 			:tabindex="(!value && index === 0) || value === option[valueKey] ? 0 : -1"
 			:aria-checked="value === option[valueKey]"
 			@mouseenter="$emit('optionMouseenter', $event, option)"

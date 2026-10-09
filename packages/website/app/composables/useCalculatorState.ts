@@ -1,14 +1,15 @@
-import type { IGameImageData } from '@lolcalc/core/misc';
-import type { IDragonName } from '@lolcalc/data/types';
-import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
-import type { ShallowRef } from 'vue';
-import type { ComponentExposed } from 'vue-component-type-helpers';
-import type { CalculatorResultsTable } from '#components';
-import type { ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+import type { IDragonName } from '@lolcalc/data/types';
+import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
+import type { ShallowRef } from 'vue';
+import type { ComponentExposed } from 'vue-component-type-helpers';
+
+import type { CalculatorResultsTable } from '#components';
+import type { ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 const { vMinor } = PATCH_VERSION;
 
@@ -46,27 +47,24 @@ export function initCalculatorState(): ICalculatorState {
 			name: 'stats',
 			isPermanent: true,
 			image: shallowRef([`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32]),
-			rows: shallowRef(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
-				const icon = STAT_ICON[statName as IChampionStatName];
-				const image: IGameImageData = typeof icon === 'string'
-					? [
-							`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
-							20,
-						]
-					:	icon;
+			rows: shallowRef(
+				ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
+					const icon = STAT_ICON[statName as IChampionStatName];
+					const image: IGameImageData = typeof icon === 'string' ? [`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`, 20] : icon;
 
-				return {
-					id: statName as string,
-					name: statMeta.name,
-					image,
-				};
-			}).concat([
-				{
-					id: 'eqValue',
-					name: 'Inventory Value',
-					image: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height] as Extract<IGameImageData, any[]>,
-				},
-			])),
+					return {
+						id: statName as string,
+						name: statMeta.name,
+						image,
+					};
+				}).concat([
+					{
+						id: 'eqValue',
+						name: 'Inventory Value',
+						image: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height] as Extract<IGameImageData, any[]>,
+					},
+				]),
+			),
 			getCellValue(_section, rowId, source, _target) {
 				if (!source) {
 					return;
@@ -115,7 +113,11 @@ export function initCalculatorState(): ICalculatorState {
 				return { value: 'TODO' };
 			},
 			selectValue: 'normal',
-			selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
+			selectOptions: markRaw([
+				['normal', 'normal'],
+				['critical', 'critical'],
+				['average', 'average'],
+			]),
 			selectLabel: 'attack type',
 		},
 		{
@@ -132,31 +134,33 @@ export function initCalculatorState(): ICalculatorState {
 				},
 			]),
 			getCellValue() {
-				console.warn('results section custom total \'getCellValue\' called, should be handled manually');
+				console.warn("results section custom total 'getCellValue' called, should be handled manually");
 				return { value: 0, numberValue: 0 };
 			},
 		},
 	]) as unknown as ShallowRef<IDamageResultTableSection[]>;
 
-	const customTotalSection = resultSections.value.find(section => section.isCustomTotal)!;
+	const customTotalSection = resultSections.value.find((section) => section.isCustomTotal)!;
 	const customTotalRowIds = ref<string[]>([]);
 
 	const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
-	/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
-		const rows: ICustomTotalSectionRow[] = (customTotalSection.rows.value as ICustomTotalSectionRow[] ?? []).concat(customTotalRowIds.value.map((combinedId): ICustomTotalSectionRow => {
-			const [sectionId, rowId] = combinedId.split('_');
+		/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
+		const rows: ICustomTotalSectionRow[] = ((customTotalSection.rows.value as ICustomTotalSectionRow[]) ?? []).concat(
+			customTotalRowIds.value.map((combinedId): ICustomTotalSectionRow => {
+				const [sectionId, rowId] = combinedId.split('_');
 
-			const section = resultSections.value.find(section => section.id === sectionId)!;
-			const rowIndex = section.rows.value.findIndex(row => row.id === rowId)!;
-			const row = section.rows.value[rowIndex]!;
+				const section = resultSections.value.find((section) => section.id === sectionId)!;
+				const rowIndex = section.rows.value.findIndex((row) => row.id === rowId)!;
+				const row = section.rows.value[rowIndex]!;
 
-			return {
-				...row,
-				sectionId: section.id,
-				rowIndex,
-				image: section.image.value,
-			};
-		}));
+				return {
+					...row,
+					sectionId: section.id,
+					rowIndex,
+					image: section.image.value,
+				};
+			}),
+		);
 
 		return rows;
 	});
@@ -165,13 +169,13 @@ export function initCalculatorState(): ICalculatorState {
 		damageSources,
 		damageTargets,
 		sourcesTargetsRef: [
-			computed(() => damageSources.value.filter(source => source.anythingFilled.value).map(source => source.id)),
-			computed(() => damageTargets.value.filter(target => target.anythingFilled.value).map(target => target.id)),
+			computed(() => damageSources.value.filter((source) => source.anythingFilled.value).map((source) => source.id)),
+			computed(() => damageTargets.value.filter((target) => target.anythingFilled.value).map((target) => target.id)),
 		],
 		resultColumns,
 		resultSections,
 		resultsTableFlip: ref(false),
-		expandedSections: ref<string[]>(resultSections.value.filter(section => section.id !== ResultSectionId.Stats).map(section => section.id)),
+		expandedSections: ref<string[]>(resultSections.value.filter((section) => section.id !== ResultSectionId.Stats).map((section) => section.id)),
 		customTotalRowIds,
 		computedCustomTotalRows,
 	};
@@ -301,10 +305,12 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			return [columnSourceIndex, columnTargetIndex];
 		}
 
-		const saveColumnsToQuery = resultColumns.value.slice(1).some(col => col.source || col.target)
-			|| damageSources.value.length > 1 || damageTargets.value.length > 1
-			|| resultColumns.value[0]!.source !== damageSources.value[0]
-			|| resultColumns.value[0]!.target !== damageTargets.value[0];
+		const saveColumnsToQuery =
+			resultColumns.value.slice(1).some((col) => col.source || col.target) ||
+			damageSources.value.length > 1 ||
+			damageTargets.value.length > 1 ||
+			resultColumns.value[0]!.source !== damageSources.value[0] ||
+			resultColumns.value[0]!.target !== damageTargets.value[0];
 		for (const column of resultColumns.value) {
 			const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
 
@@ -320,20 +326,26 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			}
 		}
 
-		const keptSections = resultSections.value.filter(section => section.abilityId.type === 'all'
-			|| (section.abilityId.type === AbilityType.item
-				? savedItemIds.has(section.abilityId.id)
-				: section.abilityId.type === AbilityType.champion
-					?	savedChampionIds.has(section.abilityId.id)
-					: section.abilityId.type === AbilityType.effect
-						? savedEffectObjectNames.has(section.abilityId.id)
-						: savedDragonsSoulAbilities.has(section.abilityId.id))) ?? [];
+		const keptSections =
+			resultSections.value.filter(
+				(section) =>
+					section.abilityId.type === 'all' ||
+					(section.abilityId.type === AbilityType.item
+						? savedItemIds.has(section.abilityId.id)
+						: section.abilityId.type === AbilityType.champion
+							? savedChampionIds.has(section.abilityId.id)
+							: section.abilityId.type === AbilityType.effect
+								? savedEffectObjectNames.has(section.abilityId.id)
+								: savedDragonsSoulAbilities.has(section.abilityId.id)),
+			) ?? [];
 		const savedSectionIds: string[] = [];
-		const isSectionsChanged = keptSections?.[0] && (keptSections.length > 3
-			/* check if default order was changed */
-			|| (keptSections[0]!.id !== ResultSectionId.Stats
-				|| keptSections[1]!.id !== ResultSectionId.BasicAttack
-				|| keptSections.at(-1)!.id !== ResultSectionId.CustomTotal));
+		const isSectionsChanged =
+			keptSections?.[0] &&
+			(keptSections.length > 3 ||
+				/* check if default order was changed */
+				keptSections[0]!.id !== ResultSectionId.Stats ||
+				keptSections[1]!.id !== ResultSectionId.BasicAttack ||
+				keptSections.at(-1)!.id !== ResultSectionId.CustomTotal);
 
 		if (computedCustomTotalRows.value?.length || isSectionsChanged) {
 			for (const section of keptSections) {
@@ -496,7 +508,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 			/* `all` (permanent) sections start with 'a-' */
 			if (id.startsWith('a-')) {
-				const sectionIndex = resultSections.value.findIndex(section => section.id === id);
+				const sectionIndex = resultSections.value.findIndex((section) => section.id === id);
 				if (~sectionIndex) {
 					if (sectionIndex !== currentSectionIndex) {
 						resultSections.value.splice(currentSectionIndex, 0, resultSections.value.splice(sectionIndex, 1)[0]!);

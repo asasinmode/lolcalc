@@ -1,10 +1,11 @@
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityKey } from '@lolcalc/shared';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
+import type { IChampionAbilityKey } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
+
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
 
@@ -27,7 +28,6 @@ function toggle(abilityIndex: number) {
 }
 </script>
 
-<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<article class="extras-viktor-passive-ability-upgrades">
 		<img
@@ -36,19 +36,10 @@ function toggle(abilityIndex: number) {
 			:height="imgSize"
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(AbilityType.champion, 'Khazix', 'r', 0))"
-		>
+		/>
 		<h5>abilities evolved</h5>
-		<label
-			v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]"
-			:key="abilityKey"
-			:for="`evolve-${abilityKey}-${idSuffix}`"
-		>
-			<input
-				:id="`evolve-${abilityKey}-${idSuffix}`"
-				type="checkbox"
-				:checked="isEvolved(abilityIndex)"
-				@input="toggle(abilityIndex)"
-			>
+		<label v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]" :key="abilityKey" :for="`evolve-${abilityKey}-${idSuffix}`">
+			<input :id="`evolve-${abilityKey}-${idSuffix}`" type="checkbox" :checked="isEvolved(abilityIndex)" @input="toggle(abilityIndex)" />
 			{{ abilityKey.toUpperCase() }}
 		</label>
 	</article>

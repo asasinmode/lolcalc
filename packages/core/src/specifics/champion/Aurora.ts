@@ -1,7 +1,8 @@
-import type IAurora from '@lolcalc/data/files/champion/Aurora.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IAurora from '@lolcalc/data/files/champion/Aurora.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -13,7 +14,11 @@ export default {
 			calculate(self, target) {
 				let CalculatedProcDamage = Number.NaN;
 
-				const procDamage = championAbilityVariableValue('ProcDamage', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
+				const procDamage = championAbilityVariableValue('ProcDamage', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				});
 				if (typeof procDamage.value === 'number') {
 					CalculatedProcDamage = procDamage.value * (target?.stats.value.total.hp ?? 0);
 				} else {

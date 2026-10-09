@@ -1,5 +1,6 @@
 import type { IListedChampion } from '@lolcalc/data/types';
 import type { ComponentExposed } from 'vue-component-type-helpers';
+
 import LolChampSelect from '~/components/Lol/LolChampSelect.vue';
 
 let resolve: (() => void) | undefined;
@@ -17,17 +18,19 @@ function selectChampion(champion: Ref<IListedChampion | undefined>): Promise<voi
 	});
 }
 
-const _component = defineComponent(() =>
-	() => h(LolChampSelect, {
-		'ref': dialogRef,
-		'modelValue': valueRef.value?.value,
-		'onUpdate:modelValue': function (value) {
-			valueRef.value!.value = value;
-		},
-		onClose() {
-			resolve?.();
-		},
-	}));
+const _component = defineComponent(
+	() => () =>
+		h(LolChampSelect, {
+			ref: dialogRef,
+			modelValue: valueRef.value?.value,
+			'onUpdate:modelValue': function (value) {
+				valueRef.value!.value = value;
+			},
+			onClose() {
+				resolve?.();
+			},
+		}),
+);
 
 export function useChampSelect() {
 	return {

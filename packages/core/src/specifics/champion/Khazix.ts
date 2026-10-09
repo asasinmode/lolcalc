@@ -1,6 +1,7 @@
 import type IKhazix from '@lolcalc/data/files/champion/Khazix.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 const rEvolvesMask = 2 ** 4;

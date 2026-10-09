@@ -1,12 +1,14 @@
 import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IEffectControlsProps, IExtraInactiveFn, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
-import type { ComputedRef, SlotsType } from 'vue';
-import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage, replaceGameIcons } from '@lolcalc/core/misc';
+import type { IEffectControlsProps, IExtraInactiveFn, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import { AbilityType } from '@lolcalc/shared';
+import type { ComputedRef, SlotsType } from 'vue';
+
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
+
+import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 
 export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
@@ -29,91 +31,96 @@ export async function numberExtra<T extends IGameAbilityId>(
 		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const isEffect = abilityId.type === AbilityType.effect;
-		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
+	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+		async (props, ctx) => {
+			const isEffect = abilityId.type === AbilityType.effect;
+			const imgSrc = await gameAbilityImage(abilityId);
+			const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
 
-		let localMax = max;
-		if (typeof localMax === 'function') {
-			localMax = await localMax(props.damageSource);
-		}
-
-		let localStep = step;
-		if (typeof localStep === 'function') {
-			localStep = localStep(props.damageSource);
-		}
-
-		const _usedNumberInput = useNumberInput(
-			abilityId.type === AbilityType.effect
-				/* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
-				? () => [appliedEffect?.value?.data ?? props.damageSource.addEffect(abilityId).data, property as number]
-				: [
-						props.damageSource[abilityId.type === AbilityType.champion
-							? 'internalData'
-							: abilityId.type === AbilityType.dragon
-								? 'internalDragonData'
-								: 'internalItemData'],
-						property as string,
-					],
-			localStep === undefined || Number.isInteger(toValue(localStep)),
-			localMax,
-		);
-		const usedNumberInput = function (event: Event) {
-			_usedNumberInput(event);
-			onUpdate?.(modelValue.value, props.damageSource);
-		};
-
-		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
-		function effectControlUpdateValue(val?: boolean | number) {
-			effectControlModel!.value = val;
-		}
-		function effectControlRefresh(isSourceChange = false) {
-			effectControlsProps?.refresh(props.damageSource, isSourceChange);
-		}
-		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
-
-		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
-		function updateEffectSource(value?: DamageSource) {
-			if (appliedEffect) {
-				!appliedEffect.value && updateValue(0);
-				appliedEffect.value!.source.value = value;
-				effectControlRefresh(true);
-			} else {
-				console.error('[utils/component number] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
+			let localMax = max;
+			if (typeof localMax === 'function') {
+				localMax = await localMax(props.damageSource);
 			}
-		}
 
-		const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
+			let localStep = step;
+			if (typeof localStep === 'function') {
+				localStep = localStep(props.damageSource);
+			}
 
-		return () => h(CalculatorExtraNumber, {
-			'modelValue': modelValue.value,
-			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-			imgSrc,
-			label,
-			min,
-			'max': toValue(localMax),
-			'step': toValue(localStep),
-			tooltip,
-			'inactive': isInactive && isInactive.value,
-			usedNumberInput,
-			onImgMouseenter(event) {
-				ctx.emit('imgMouseenter', event, abilityId);
-			},
-			'onUpdate:modelValue': updateValue,
-		}, effectControlsProps
-			? { default: () => [
-					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect, effectControlSnapshot.value),
-					selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
-				] }
-			: { default: () => {
-					const defaultSlots = ctx.slots.default?.();
-					return [
-						...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
-						selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
-					];
-				} });
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
+			const _usedNumberInput = useNumberInput(
+				abilityId.type === AbilityType.effect
+					? /* effect components are displayed in effects dialog even when not present on damage source so they should handle adding themselves onto it when changed */
+						() => [appliedEffect?.value?.data ?? props.damageSource.addEffect(abilityId).data, property as number]
+					: [props.damageSource[abilityId.type === AbilityType.champion ? 'internalData' : abilityId.type === AbilityType.dragon ? 'internalDragonData' : 'internalItemData'], property as string],
+				localStep === undefined || Number.isInteger(toValue(localStep)),
+				localMax,
+			);
+			const usedNumberInput = function (event: Event) {
+				_usedNumberInput(event);
+				onUpdate?.(modelValue.value, props.damageSource);
+			};
+
+			const effectControlModel = effectControlsProps?.model?.(props.damageSource);
+			function effectControlUpdateValue(val?: boolean | number) {
+				effectControlModel!.value = val;
+			}
+			function effectControlRefresh(isSourceChange = false) {
+				effectControlsProps?.refresh(props.damageSource, isSourceChange);
+			}
+			const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
+
+			const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
+			function updateEffectSource(value?: DamageSource) {
+				if (appliedEffect) {
+					!appliedEffect.value && updateValue(0);
+					appliedEffect.value!.source.value = value;
+					effectControlRefresh(true);
+				} else {
+					console.error("[utils/component number] tried to update effect source but appliedEffect computed isn't present", abilityId, property);
+				}
+			}
+
+			const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
+
+			return () =>
+				h(
+					CalculatorExtraNumber,
+					{
+						modelValue: modelValue.value,
+						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
+						imgSrc,
+						label,
+						min,
+						max: toValue(localMax),
+						step: toValue(localStep),
+						tooltip,
+						inactive: isInactive && isInactive.value,
+						usedNumberInput,
+						onImgMouseenter(event) {
+							ctx.emit('imgMouseenter', event, abilityId);
+						},
+						'onUpdate:modelValue': updateValue,
+					},
+					effectControlsProps
+						? {
+								default: () => [
+									createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect, effectControlSnapshot.value),
+									selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+								],
+							}
+						: {
+								default: () => {
+									const defaultSlots = ctx.slots.default?.();
+									return [
+										...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
+										selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+									];
+								},
+							},
+				);
+		},
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+	);
 }
 
 export async function progressExtra<T extends IGameAbilityId>(
@@ -135,65 +142,77 @@ export async function progressExtra<T extends IGameAbilityId>(
 		onUpdate?: IExtraOnValueUpdate;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const isEffect = abilityId.type === AbilityType.effect;
-		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
+	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+		async (props, ctx) => {
+			const isEffect = abilityId.type === AbilityType.effect;
+			const imgSrc = await gameAbilityImage(abilityId);
+			const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
 
-		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
-		function effectControlUpdateValue(val?: boolean | number) {
-			effectControlModel!.value = val;
-		}
-		function effectControlRefresh(isSourceChange = false) {
-			effectControlsProps?.refresh(props.damageSource, isSourceChange);
-		}
-		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
-
-		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
-		function updateEffectSource(value?: DamageSource) {
-			if (appliedEffect) {
-				!appliedEffect.value && updateValue(0);
-				appliedEffect.value!.source.value = value;
-				effectControlRefresh(true);
-			} else {
-				console.error('[utils/component progress] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
+			const effectControlModel = effectControlsProps?.model?.(props.damageSource);
+			function effectControlUpdateValue(val?: boolean | number) {
+				effectControlModel!.value = val;
 			}
-		}
+			function effectControlRefresh(isSourceChange = false) {
+				effectControlsProps?.refresh(props.damageSource, isSourceChange);
+			}
+			const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
-		function deriveValue(progress: number) {
-			return getDerivedValue(progress, props.damageSource);
-		}
+			const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
+			function updateEffectSource(value?: DamageSource) {
+				if (appliedEffect) {
+					!appliedEffect.value && updateValue(0);
+					appliedEffect.value!.source.value = value;
+					effectControlRefresh(true);
+				} else {
+					console.error("[utils/component progress] tried to update effect source but appliedEffect computed isn't present", abilityId, property);
+				}
+			}
 
-		function onImgMouseenter(event: MouseEvent) {
-			ctx.emit('imgMouseenter', event, abilityId, props.overrideDamageSource);
-		}
+			function deriveValue(progress: number) {
+				return getDerivedValue(progress, props.damageSource);
+			}
 
-		const isInactive = computed(() => !isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined);
+			function onImgMouseenter(event: MouseEvent) {
+				ctx.emit('imgMouseenter', event, abilityId, props.overrideDamageSource);
+			}
 
-		return () => h(CalculatorExtraProgress, {
-			'modelValue': modelValue.value,
-			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-			imgSrc,
-			label,
-			max,
-			deriveValue,
-			derivedSymbolSuffix,
-			onImgMouseenter,
-			'onUpdate:modelValue': updateValue,
-			'data-inactive': isInactive.value,
-		}, effectControlsProps
-			? { default: () => [
-					createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect, effectControlSnapshot.value),
-					selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
-				] }
-			: { default: () => {
-					const defaultSlots = ctx.slots.default?.();
-					return [
-						...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
-						selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
-					];
-				} });
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
+			const isInactive = computed(() => (!isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined));
+
+			return () =>
+				h(
+					CalculatorExtraProgress,
+					{
+						modelValue: modelValue.value,
+						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
+						imgSrc,
+						label,
+						max,
+						deriveValue,
+						derivedSymbolSuffix,
+						onImgMouseenter,
+						'onUpdate:modelValue': updateValue,
+						'data-inactive': isInactive.value,
+					},
+					effectControlsProps
+						? {
+								default: () => [
+									createEffectControls(props.idSuffix, effectControlModel?.value, effectControlUpdateValue, effectControlRefresh, ctx.slots, isEffect, effectControlSnapshot.value),
+									selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+								],
+							}
+						: {
+								default: () => {
+									const defaultSlots = ctx.slots.default?.();
+									return [
+										...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
+										selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+									];
+								},
+							},
+				);
+		},
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+	);
 }
 
 export async function booleanExtra<T extends IGameAbilityId>(
@@ -213,40 +232,48 @@ export async function booleanExtra<T extends IGameAbilityId>(
 		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
+	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+		async (props, ctx) => {
+			const imgSrc = await gameAbilityImage(abilityId);
+			const [stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
 
-		const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
+			const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
 
-		/* kind of unusual but works for the things that use it atm (bloodmail, akali) */
-		const effectControlModel = effectControlsProps?.model?.(props.damageSource);
-		const updateValue = effectControlModel ? (value?: boolean | number) => effectControlModel.value = value : extraUpdateValue;
-		function effectControlRefresh(isSourceChange = false) {
-			effectControlsProps?.refresh(props.damageSource, isSourceChange);
-		}
-		const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
+			/* kind of unusual but works for the things that use it atm (bloodmail, akali) */
+			const effectControlModel = effectControlsProps?.model?.(props.damageSource);
+			const updateValue = effectControlModel ? (value?: boolean | number) => (effectControlModel.value = value) : extraUpdateValue;
+			function effectControlRefresh(isSourceChange = false) {
+				effectControlsProps?.refresh(props.damageSource, isSourceChange);
+			}
+			const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
-		const computedValue = computed(() => effectControlModel?.value ?? modelValue.value);
+			const computedValue = computed(() => effectControlModel?.value ?? modelValue.value);
 
-		return () => h(CalculatorExtraBoolean, {
-			'modelValue': computedValue.value,
-			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-			imgSrc,
-			labelPrefixApply,
-			tooltip,
-			'inactive': isInactive && isInactive.value,
-			'label': labelAppendOnTarget ? `${label} on target` : label,
-			onImgMouseenter(event) {
-				ctx.emit('imgMouseenter', event, abilityId);
-			},
-			'onUpdate:modelValue': updateValue,
-		}, effectControlsProps
-			? {
-					default: () => createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, true, effectControlSnapshot.value),
-				}
-			: ctx.slots);
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
+			return () =>
+				h(
+					CalculatorExtraBoolean,
+					{
+						modelValue: computedValue.value,
+						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
+						imgSrc,
+						labelPrefixApply,
+						tooltip,
+						inactive: isInactive && isInactive.value,
+						label: labelAppendOnTarget ? `${label} on target` : label,
+						onImgMouseenter(event) {
+							ctx.emit('imgMouseenter', event, abilityId);
+						},
+						'onUpdate:modelValue': updateValue,
+					},
+					effectControlsProps
+						? {
+								default: () => createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, true, effectControlSnapshot.value),
+							}
+						: ctx.slots,
+				);
+		},
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+	);
 }
 
 export async function enumExtra<T extends IGameAbilityId>(
@@ -260,62 +287,64 @@ export async function enumExtra<T extends IGameAbilityId>(
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const imgSrc = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
+	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+		async (props, ctx) => {
+			const imgSrc = await gameAbilityImage(abilityId);
+			const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraComponentData(abilityId, property, props.damageSource);
 
-		const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
-		function updateEffectSource(value?: DamageSource) {
-			if (appliedEffect) {
-				!appliedEffect.value && updateValue(0);
-				appliedEffect.value!.source.value = value;
-			} else {
-				console.error('[utils/component number] tried to update effect source but appliedEffect computed isn\'t present', abilityId, property);
+			const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
+			function updateEffectSource(value?: DamageSource) {
+				if (appliedEffect) {
+					!appliedEffect.value && updateValue(0);
+					appliedEffect.value!.source.value = value;
+				} else {
+					console.error("[utils/component number] tried to update effect source but appliedEffect computed isn't present", abilityId, property);
+				}
 			}
-		}
 
-		return () => h(CalculatorExtraEnum, {
-			'modelValue': modelValue.value,
-			'idSuffix': `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-			imgSrc,
-			label,
-			'options': toValue(options),
-			onImgMouseenter(event) {
-				ctx.emit('imgMouseenter', event, abilityId);
-			},
-			'onUpdate:modelValue': updateValue,
-		}, { default: () => {
-			const defaultSlots = ctx.slots.default?.();
-			return [
-				...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
-				selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
-			];
-		} });
-	}, { props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] });
+			return () =>
+				h(
+					CalculatorExtraEnum,
+					{
+						modelValue: modelValue.value,
+						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
+						imgSrc,
+						label,
+						options: toValue(options),
+						onImgMouseenter(event) {
+							ctx.emit('imgMouseenter', event, abilityId);
+						},
+						'onUpdate:modelValue': updateValue,
+					},
+					{
+						default: () => {
+							const defaultSlots = ctx.slots.default?.();
+							return [
+								...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
+								selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+							];
+						},
+					},
+				);
+		},
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+	);
 }
 
-function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource, isEffect = abilityId.type === AbilityType.effect, onUpdate?: IExtraOnValueUpdate): [
-	stringifiedAbilityId: string,
-	value: ComputedRef<any>,
-	updateValue: (value: any) => void,
-	appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined,
-] {
-	const appliedEffect = isEffect
-		? computed<IDamageSourceEffect | undefined>(() => damageSource?.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id))
-		: undefined;
+function extraComponentData(
+	abilityId: IGameAbilityId,
+	property: PropertyKey,
+	damageSource: DamageSource,
+	isEffect = abilityId.type === AbilityType.effect,
+	onUpdate?: IExtraOnValueUpdate,
+): [stringifiedAbilityId: string, value: ComputedRef<any>, updateValue: (value: any) => void, appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined] {
+	const appliedEffect = isEffect ? computed<IDamageSourceEffect | undefined>(() => damageSource?.appliedEffects.value.find((effect) => effect.abilityId.id === abilityId.id)) : undefined;
 
-	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion
-		? 'internalData'
-		: abilityId.type === AbilityType.dragon
-			? 'internalDragonData'
-			: 'internalItemData';
+	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion ? 'internalData' : abilityId.type === AbilityType.dragon ? 'internalDragonData' : 'internalItemData';
 
 	return [
 		GameAbilityId.stringify(abilityId),
-		computed(() => isEffect
-			? (appliedEffect?.value?.data.value[property as number] ?? 0)
-			: damageSource[dataProperty].value?.[property as string],
-		),
+		computed(() => (isEffect ? (appliedEffect?.value?.data.value[property as number] ?? 0) : damageSource[dataProperty].value?.[property as string])),
 		function updateValue(value: any) {
 			if (isEffect) {
 				if (appliedEffect?.value) {
@@ -333,15 +362,7 @@ function extraComponentData(abilityId: IGameAbilityId, property: PropertyKey, da
 	];
 }
 
-function createEffectControls(
-	idSuffix: string,
-	modelValue: number | boolean | undefined,
-	updateValue: (value: number | boolean | undefined) => void,
-	refresh: () => void,
-	slots: SlotsType,
-	noApply?: boolean,
-	snapshotText?: string,
-) {
+function createEffectControls(idSuffix: string, modelValue: number | boolean | undefined, updateValue: (value: number | boolean | undefined) => void, refresh: () => void, slots: SlotsType, noApply?: boolean, snapshotText?: string) {
 	return h(
 		CalculatorEffectControls,
 		{
@@ -350,23 +371,18 @@ function createEffectControls(
 			noApply,
 			snapshotText,
 			'onUpdate:modelValue': updateValue,
-			'onRefresh': refresh,
+			onRefresh: refresh,
 		},
 		slots,
 	);
 }
 
-function createSelectEffectSource(
-	idSuffix: string,
-	modelValue: DamageSource | undefined,
-	updateValue: (value: DamageSource | undefined) => void,
-	invalidMessage: ComputedRef<ReturnType<ISelectEffectSourceProps['invalidMessage']>>,
-) {
+function createSelectEffectSource(idSuffix: string, modelValue: DamageSource | undefined, updateValue: (value: DamageSource | undefined) => void, invalidMessage: ComputedRef<ReturnType<ISelectEffectSourceProps['invalidMessage']>>) {
 	return h(CalculatorEffectSourceSelect, {
 		idSuffix,
 		modelValue,
 		'onUpdate:modelValue': updateValue,
-		'invalidMessage': invalidMessage.value,
+		invalidMessage: invalidMessage.value,
 	});
 }
 
@@ -374,11 +390,10 @@ type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
 type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
 type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
 
-// eslint-disable-next-line ts/consistent-type-definitions
 type IDefineExtraComponentEmits = {
 	imgMouseenter: (...args: IExtraComponentEmits['imgMouseenter']) => void;
 };
 
 export function ExtraLoading() {
-	return h('article', { 'class': 'loading', 'aria-busy': 'true' }, 'loading...');
-};
+	return h('article', { class: 'loading', 'aria-busy': 'true' }, 'loading...');
+}

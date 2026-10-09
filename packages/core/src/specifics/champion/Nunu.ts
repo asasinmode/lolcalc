@@ -1,14 +1,24 @@
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type INunu from '@lolcalc/data/files/champion/Nunu.json';
 import type { IChampion } from '@lolcalc/data/types.js';
-import type { IChampionSpecific } from '../champion.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
-function passiveCalculateBuffs(champion: IChampion): { bonusMSPercent: number; bonusASPercent: number } {
-	const moveSpeed = championAbilityVariableValue('MSIncrease', { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]! });
-	const attackSpeed = championAbilityVariableValue('ASIncrease', { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]! });
+function passiveCalculateBuffs(champion: IChampion): {
+	bonusMSPercent: number;
+	bonusASPercent: number;
+} {
+	const moveSpeed = championAbilityVariableValue('MSIncrease', {
+		abilityKey: 'passive',
+		abilityVariant: champion.abilities.passive.variants[0]!,
+	});
+	const attackSpeed = championAbilityVariableValue('ASIncrease', {
+		abilityKey: 'passive',
+		abilityVariant: champion.abilities.passive.variants[0]!,
+	});
 
 	if (typeof moveSpeed.value === 'number' && typeof attackSpeed.value === 'number') {
 		return {

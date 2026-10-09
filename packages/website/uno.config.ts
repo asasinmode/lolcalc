@@ -1,17 +1,8 @@
-import {
-	defineConfig,
-	presetIcons,
-	presetWind4,
-	transformerDirectives,
-	transformerVariantGroup,
-} from 'unocss';
+import { defineConfig, presetIcons, presetWind4, transformerDirectives, transformerVariantGroup } from 'unocss';
 
 export default defineConfig({
 	presets: [presetWind4({ preflights: { property: { parent: false } } }), presetIcons()],
-	transformers: [
-		transformerDirectives(),
-		transformerVariantGroup(),
-	],
+	transformers: [transformerDirectives(), transformerVariantGroup()],
 	shortcuts: [
 		{
 			'grid-center': 'grid place-items-center',

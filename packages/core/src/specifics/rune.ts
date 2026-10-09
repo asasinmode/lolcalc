@@ -1,20 +1,27 @@
 import type { TRunes } from '@lolcalc/data';
-import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
-import type { ISpecificVariables, IVariableValueResult } from '.';
-import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { RUNES } from '@lolcalc/data';
+import type { IChampionRunes, IRuneShardSlotValue, IRuneSlotName } from '@lolcalc/data/types';
+
+import type { ISpecificVariables, IVariableValueResult } from '.';
 import { addMultiplicative } from '../calculate/util.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource } from '../DamageSource';
 import { defineVariables } from './index.ts';
 
 export function runesEmpty(runes: IChampionRunes): boolean {
-	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;
+	const {
+		paths: { primarySlots, secondary, secondarySlots },
+		shards,
+	} = runes;
 	return !(primarySlots.length || secondary || secondarySlots.length || shards.offensive || shards.flex || shards.defensive);
-};
+}
 
 export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmpty(runes)): boolean {
-	const { paths: { primarySlots, secondary, secondarySlots }, shards } = runes;
+	const {
+		paths: { primarySlots, secondary, secondarySlots },
+		shards,
+	} = runes;
 	return !areEmpty && !(secondary && primarySlots.filter(Boolean).length === 4 && secondarySlots.length === 2 && shards.offensive && shards.flex && shards.defensive);
-};
+}
 
 /** specific runes' helpers, utils and calculations */
 export const RUNE_SPECIFICS = {
@@ -95,7 +102,7 @@ export const RUNE_SPECIFICS = {
 		},
 		healthscaling: {
 			/** [wiki formula](https://wiki.leagueoflegends.com/en-us/Rune#Shards) */
-			calculateValue: (self: DamageSource): number => 10 + (180 - 10) / 17 * (self.level.value - 1),
+			calculateValue: (self: DamageSource): number => 10 + ((180 - 10) / 17) * (self.level.value - 1),
 			variables: defineVariables({
 				known: { f1: [] },
 				calculate(self): {
@@ -123,8 +130,8 @@ export const RUNE_SPECIFICS = {
 			calculateHooks: {
 				onRuneShards: {
 					handler(_self, { runeShardStats }) {
-						runeShardStats.tenacity = addMultiplicative(runeShardStats.tenacity, ((RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100));
-						runeShardStats.slowResist = addMultiplicative(runeShardStats.slowResist, ((RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100));
+						runeShardStats.tenacity = addMultiplicative(runeShardStats.tenacity, (RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100);
+						runeShardStats.slowResist = addMultiplicative(runeShardStats.slowResist, (RUNES as TRunes).shards.defensive.tenacity.effectAmount.StatGain / 100);
 					},
 					priority: -1,
 				},
@@ -140,7 +147,7 @@ export interface IHypotheticalRuneSpecifics {
 	slots: {
 		[K in IRuneSlotName]?: IRuneSpecific;
 	};
-};
+}
 
 export interface IRuneSpecific {
 	variables?: ISpecificVariables<never, any>;

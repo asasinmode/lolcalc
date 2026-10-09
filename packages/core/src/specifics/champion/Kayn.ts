@@ -1,6 +1,7 @@
 import type IKayn from '@lolcalc/data/files/champion/Kayn.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 const passiveFormOptions = {
@@ -10,7 +11,6 @@ const passiveFormOptions = {
 };
 
 export default {
-
 	setupData(self) {
 		return {
 			form: clamp(0, Math.round(self.internalData.value.form ?? 0), passiveFormOptions.rhaast),

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { imgUrl, PATCH_VERSION } from '@lolcalc/data';
+
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
 const { saveState, isStateTooLargeForQuery } = useManageCalculatorState(initCalculatorState());
@@ -39,7 +40,7 @@ const emailEl = useTemplateRef('emailLink');
 const navEmailEl = useTemplateRef('emailLinkNav');
 
 onMounted(() => {
-	const email = cipheredEmail.map(n => String.fromCharCode(n)).join('');
+	const email = cipheredEmail.map((n) => String.fromCharCode(n)).join('');
 	emailEl.value?.append(email);
 	emailEl.value?.setAttribute('href', `mailto:${email}`);
 	navEmailEl.value?.append(email);
@@ -78,13 +79,16 @@ const header = useTemplateRef('header');
 const menuBtn = useTemplateRef('menuBtn');
 
 onMounted(() => {
-	const observer = new IntersectionObserver(([entry]) => {
-		if (entry!.isIntersecting) {
-			menuBtn.value?.removeAttribute('data-stuck');
-		} else {
-			menuBtn.value?.setAttribute('data-stuck', '');
-		}
-	}, { threshold: 1 });
+	const observer = new IntersectionObserver(
+		([entry]) => {
+			if (entry!.isIntersecting) {
+				menuBtn.value?.removeAttribute('data-stuck');
+			} else {
+				menuBtn.value?.setAttribute('data-stuck', '');
+			}
+		},
+		{ threshold: 1 },
+	);
 
 	header.value && observer.observe(header.value);
 });
@@ -100,20 +104,13 @@ onMounted(() => {
 			<h1>
 				<span>lolcalc</span>
 				<a :href="$config.app.baseURL"> <span>link to the lolcalc home page</span> </a>
-				<img
-					src="/logo_dark.webp"
-					width="192"
-					height="192"
-					alt="lolcalc logo - the letter L with a calculator icon next to it"
-				>
+				<img src="/logo_dark.webp" width="192" height="192" alt="lolcalc logo - the letter L with a calculator icon next to it" />
 			</h1>
-			<span>
-				26{{ vSemver.slice(vSemver.indexOf('.')) }}
-			</span>
+			<span> 26{{ vSemver.slice(vSemver.indexOf('.')) }} </span>
 			<span id="by-asasinmode">
 				by
 				<a href="https://asasinmode.com" target="_blank" title="asasinmode">
-					<img src="/asasinmode.webp" width="200" height="200" alt="asasinmode avatar - a white outline of a cupcake with a smily face on a background looking like a galaxy">
+					<img src="/asasinmode.webp" width="200" height="200" alt="asasinmode avatar - a white outline of a cupcake with a smily face on a background looking like a galaxy" />
 				</a>
 			</span>
 			<nav id="page-nav" popover @focusout="closeMenuIfOutside">
@@ -121,16 +118,7 @@ onMounted(() => {
 					<span>zamknij menu</span>
 					<Icon class="i-ph:x-bold" />
 				</button>
-				<button
-					v-show="$route.name === 'index'"
-					id="share-configuration"
-					class="pretend-ui-btn"
-					@click="copyShareLink"
-					@mouseenter="showSharePopover"
-					@focus="showSharePopover"
-					@mouseleave="hideSharePopover"
-					@blur="hideSharePopover"
-				>
+				<button v-show="$route.name === 'index'" id="share-configuration" class="pretend-ui-btn" @click="copyShareLink" @mouseenter="showSharePopover" @focus="showSharePopover" @mouseleave="hideSharePopover" @blur="hideSharePopover">
 					share
 					<div ref="shareTextPopover" popover="manual">
 						{{ hasCopiedShareLink ? 'copied' : 'copy link to the current configuration' }}
@@ -142,24 +130,16 @@ onMounted(() => {
 				</button>
 				<ul>
 					<li>
-						<NuxtLink to="/" @click="closeNav">
-							calculator
-						</NuxtLink>
+						<NuxtLink to="/" @click="closeNav"> calculator </NuxtLink>
 					</li>
 					<li>
-						<NuxtLink to="/guide" @click="closeNav">
-							guide
-						</NuxtLink>
+						<NuxtLink to="/guide" @click="closeNav"> guide </NuxtLink>
 					</li>
 					<li>
-						<NuxtLink to="/about" @click="closeNav">
-							about
-						</NuxtLink>
+						<NuxtLink to="/about" @click="closeNav"> about </NuxtLink>
 					</li>
 					<li>
-						<button @click="reportAnIssue">
-							report an issue
-						</button>
+						<button @click="reportAnIssue">report an issue</button>
 					</li>
 				</ul>
 				<ul>
@@ -207,32 +187,26 @@ onMounted(() => {
 				</a>
 			</li>
 			<li>
-				<a href="https://www.reddit.com/user/asasinmode/" target="_blank">
-					<Icon class="i-logos:reddit-icon" /> asasinmode
-				</a>
+				<a href="https://www.reddit.com/user/asasinmode/" target="_blank"> <Icon class="i-logos:reddit-icon" /> asasinmode </a>
 			</li>
 			<li>
-				<a href="https://discord.com/channels/@me" target="_blank">
-					<Icon class="i-logos:discord-icon" /> asasinmode
-				</a>
+				<a href="https://discord.com/channels/@me" target="_blank"> <Icon class="i-logos:discord-icon" /> asasinmode </a>
 			</li>
 			<li>
-				<a href="https://x.com/asasinmode" target="_blank">
-					<Icon class="i-logos:x" /> asasinmode
-				</a>
+				<a href="https://x.com/asasinmode" target="_blank"> <Icon class="i-logos:x" /> asasinmode </a>
 			</li>
 			<li>
-				<a href="https://github.com/asasinmode/lolcalc" target="_blank">
-					<Icon class="i-logos:github-icon" /> lolcalc
-				</a>
+				<a href="https://github.com/asasinmode/lolcalc" target="_blank"> <Icon class="i-logos:github-icon" /> lolcalc </a>
 			</li>
 		</ul>
 		<p>
-			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
+			<strong>lolcalc</strong> was created under Riot Games'
+			<a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener"> "<span>Legal Jibber Jabber</span>" </a>
+			policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.
 		</p>
 		<p>v1.0-alpha</p>
 		<label for="scoreboard-enable-unimplemented-ui">
-			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
+			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox" />
 			enable unimplemented ui
 		</label>
 	</footer>

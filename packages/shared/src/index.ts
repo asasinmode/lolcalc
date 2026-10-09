@@ -10,19 +10,49 @@ export const AbilityType = {
 
 export const ALL_ABILITY_TYPES: string[] = Object.values(AbilityType);
 
-export type TAbilityType = typeof AbilityType[keyof typeof AbilityType];
+export type TAbilityType = (typeof AbilityType)[keyof typeof AbilityType];
 
 export const ALL_ITEM_CATEGORIES = ['fighter', 'marksman', 'assassin', 'mage', 'tank', 'support'] as const;
 
-export type IItemCategory = typeof ALL_ITEM_CATEGORIES[number];
+export type IItemCategory = (typeof ALL_ITEM_CATEGORIES)[number];
 
 export const ALL_CHAMPION_ABILITY_KEYS = ['passive', 'q', 'w', 'e', 'r'] as const;
 
-export type IChampionAbilityKey = typeof ALL_CHAMPION_ABILITY_KEYS[number];
+export type IChampionAbilityKey = (typeof ALL_CHAMPION_ABILITY_KEYS)[number];
 
 export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
 
-export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent', 'slowResist', 'summonerHaste', 'ultimateHaste', 'basicHaste', 'immobilizingHaste'] as const;
+export const CHAMPION_STATS = [
+	'hp',
+	'hpRegen',
+	'mana',
+	'manaRegen',
+	'healShieldPower',
+	'lethality',
+	'percentArmorPen',
+	'flatMagicPen',
+	'percentMagicPen',
+	'lifeSteal',
+	'omnivamp',
+	'attackRange',
+	'tenacity',
+	'attackDamage',
+	'abilityPower',
+	'armor',
+	'magicResist',
+	'attackSpeed',
+	'attackSpeedRatio',
+	'abilityHaste',
+	'critChance',
+	'critDamageMultiplier',
+	'moveSpeed',
+	'bonusAttackSpeedPercent',
+	'slowResist',
+	'summonerHaste',
+	'ultimateHaste',
+	'basicHaste',
+	'immobilizingHaste',
+] as const;
 
 export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 
@@ -384,7 +414,7 @@ export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
  * 0 - ad
  * 1 - ap
  */
-export type IAdaptiveForceStatRv = [ IAdaptiveForceStat, adaptiveForceVariable: 0 | 1, multiplier: number ];
+export type IAdaptiveForceStatRv = [IAdaptiveForceStat, adaptiveForceVariable: 0 | 1, multiplier: number];
 
 export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = {
 	hp: {
@@ -495,7 +525,7 @@ export interface IChampionStatMeta {
 	name: string;
 	decimal?: number;
 	isPercentage?: boolean;
-};
+}
 
 export const ALL_CHAMPION_STATS = Object.keys(CHAMPION_STAT_META) as IChampionStatName[];
 
@@ -680,35 +710,13 @@ export const KEPT_UNPURCHASABLE_ITEMS: string[] = [
 
 export const RANGED_ONLY_ITEMS: string[] = [ITEM_NAME_TO_ID.runaan];
 
-export const UPGRADED_SUPPORT_ITEMS: string[] = [
-	ITEM_NAME_TO_ID.celestialOpposition,
-	ITEM_NAME_TO_ID.dreamMaker,
-	ITEM_NAME_TO_ID.zazZakRealmspike,
-	ITEM_NAME_TO_ID.solsticeSleigh,
-	ITEM_NAME_TO_ID.bloodsong,
-];
+export const UPGRADED_SUPPORT_ITEMS: string[] = [ITEM_NAME_TO_ID.celestialOpposition, ITEM_NAME_TO_ID.dreamMaker, ITEM_NAME_TO_ID.zazZakRealmspike, ITEM_NAME_TO_ID.solsticeSleigh, ITEM_NAME_TO_ID.bloodsong];
 
-export const SUPPORT_ITEMS: string[] = [
-	ITEM_NAME_TO_ID.worldAtlas,
-	ITEM_NAME_TO_ID.runicCompass,
-	ITEM_NAME_TO_ID.bountyOfWorlds,
-	...UPGRADED_SUPPORT_ITEMS,
-];
+export const SUPPORT_ITEMS: string[] = [ITEM_NAME_TO_ID.worldAtlas, ITEM_NAME_TO_ID.runicCompass, ITEM_NAME_TO_ID.bountyOfWorlds, ...UPGRADED_SUPPORT_ITEMS];
 
-export const UNTRANSFORMED_TEAR_ITEM_IDS = [
-	ITEM_NAME_TO_ID.tear,
-	ITEM_NAME_TO_ID.whisperingCirclet,
-	ITEM_NAME_TO_ID.archangelsStaff,
-	ITEM_NAME_TO_ID.manamune,
-	ITEM_NAME_TO_ID.wintersApproach,
-];
+export const UNTRANSFORMED_TEAR_ITEM_IDS = [ITEM_NAME_TO_ID.tear, ITEM_NAME_TO_ID.whisperingCirclet, ITEM_NAME_TO_ID.archangelsStaff, ITEM_NAME_TO_ID.manamune, ITEM_NAME_TO_ID.wintersApproach];
 
-export const TRANSFORMED_TEAR_ITEM_IDS = [
-	ITEM_NAME_TO_ID.diademOfSongs,
-	ITEM_NAME_TO_ID.seraphsEmbrace,
-	ITEM_NAME_TO_ID.muramana,
-	ITEM_NAME_TO_ID.fimbulwinter,
-];
+export const TRANSFORMED_TEAR_ITEM_IDS = [ITEM_NAME_TO_ID.diademOfSongs, ITEM_NAME_TO_ID.seraphsEmbrace, ITEM_NAME_TO_ID.muramana, ITEM_NAME_TO_ID.fimbulwinter];
 
 export const TEAR_ITEM_TRANSFORMATIONS: Record<string, string> = {
 	[ITEM_NAME_TO_ID.whisperingCirclet]: ITEM_NAME_TO_ID.diademOfSongs,
@@ -732,21 +740,21 @@ export const GRIEVOUS_WOUND_ITEMS = [
 ];
 
 /**
-	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
-	* `lolcalc` prefixed ones are custom, handled in `updateGameData.ts`
-	*
-	* for finding either
-	*		1. in game, when the effect is applied check the its text
-	*		2. find that text in stringtable
-	*		3. in champion's bin file or `items.cdtb.bin.json` search for that stringtable key, then use the `ObjectName` of the object it's under
-	*
-	*	or try to do the mix of the above, usually item effects can be found next to the item key itself
-	*	i.e on patch `16.4`
-	*		1. the black cleaver shred would be somewhere close below the `Items/3071` key
-	*		2. there's `Items/3071/Spells/3071BlackCleaverShred` that has `mBuff.mDescription` with `game_buff_tooltip_Black_Cleaver`
-	*		3. that seems like the likely candidate, check the stringtable - it resolves to `This unit`s Armor is reduced...'
-	*		4. this is the description we are looking for, use the `Items/3071/Spells/3071BlackCleaverShred.ObjectName` of `3071BlackCleaverShred`
-	*/
+ * `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
+ * `lolcalc` prefixed ones are custom, handled in `updateGameData.ts`
+ *
+ * for finding either
+ *		1. in game, when the effect is applied check the its text
+ *		2. find that text in stringtable
+ *		3. in champion's bin file or `items.cdtb.bin.json` search for that stringtable key, then use the `ObjectName` of the object it's under
+ *
+ *	or try to do the mix of the above, usually item effects can be found next to the item key itself
+ *	i.e on patch `16.4`
+ *		1. the black cleaver shred would be somewhere close below the `Items/3071` key
+ *		2. there's `Items/3071/Spells/3071BlackCleaverShred` that has `mBuff.mDescription` with `game_buff_tooltip_Black_Cleaver`
+ *		3. that seems like the likely candidate, check the stringtable - it resolves to `This unit`s Armor is reduced...'
+ *		4. this is the description we are looking for, use the `Items/3071/Spells/3071BlackCleaverShred.ObjectName` of `3071BlackCleaverShred`
+ */
 export const EffectObjectName = {
 	/* items */
 	blackCleaverCarve: '3071BlackCleaverShred',
@@ -773,7 +781,7 @@ export const EffectObjectName = {
 	seryldaBitterCold: 'lolcalc6694BitterCold',
 	gunbladeLightningBolt: 'lolcalc3146LightningBolt',
 	/* champion passives */
-	apheliosGravitumSlow: 'ApheliosGravitumDebuff', /* effects dialog targets its element to round the img borders based on this value, update if it changes */
+	apheliosGravitumSlow: 'ApheliosGravitumDebuff' /* effects dialog targets its element to round the img borders based on this value, update if it changes */,
 	ashePFrostShot: 'AshePassiveSlow',
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
@@ -795,8 +803,7 @@ export const EffectObjectName = {
 	hextechSoulSlow: 'SRX_DragonSoulBuffHextech_Slow',
 } as const;
 
-// eslint-disable-next-line ts/no-redeclare
-export type EffectObjectName = typeof EffectObjectName[keyof typeof EffectObjectName];
+export type EffectObjectName = (typeof EffectObjectName)[keyof typeof EffectObjectName];
 
 export const EFFECT_OBJECT_NAME_ENTRIES = Object.entries(EffectObjectName) as [string, EffectObjectName][];
 
@@ -822,8 +829,7 @@ export const VariableType = {
 	affectedBySlowResist: 'affectedBySlowResist',
 } as const;
 
-// eslint-disable-next-line ts/no-redeclare
-export type VariableType = typeof VariableType[keyof typeof VariableType];
+export type VariableType = (typeof VariableType)[keyof typeof VariableType];
 
 export const CHAMPION_LEVEL = {
 	min: 1,

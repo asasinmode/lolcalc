@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const computedTooltip = ref<string>();
 if (props.tooltip) {
-	simpleDescriptionFormatting(props.tooltip).then(value => computedTooltip.value = value);
+	simpleDescriptionFormatting(props.tooltip).then((value) => (computedTooltip.value = value));
 }
 
 const { showTooltip, hideTooltip } = useInfoTooltip();

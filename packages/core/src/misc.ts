@@ -1,36 +1,28 @@
+import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
+import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
+import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES } from '@lolcalc/shared';
 /*
  * this file shouldn't import anything from specifics as it's used throughout, in order to avoid circular imports
  */
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
+
 import type { IGameAbilityId } from './GameAbilityId';
-import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
-import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
-import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES } from '@lolcalc/shared';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { EFFECTS_META } from './specifics/effectsMeta.ts';
 
 const statIconNameValues = Object.values(STAT_ICON);
 
 /** images found in [assets/ux/fonts/texticons/lol/champion](https://raw.communitydragon.org/16.13/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/champion) that are also encountered in some champion ability descriptions without the extension like `%i:asolstackicon%` or `%i:kindredpassiveicon%` */
-const championGameIcons = [
-	'asolstackicon',
-	'kindredpassiveicon',
-	'nasusstackicon',
-	'sennascalingicon',
-	'shyvana',
-	'smolder',
-	'threshscalingicon',
-];
+const championGameIcons = ['asolstackicon', 'kindredpassiveicon', 'nasusstackicon', 'sennascalingicon', 'shyvana', 'smolder', 'threshscalingicon'];
 
 const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map(([key, value]) => [value, key])) as Record<string, any>;
 
 /** singular `replaceGameIcons` */
-export function gameIconImgAttrs(icon: typeof STAT_ICON[keyof typeof STAT_ICON], subpath?: string, isChampionIcon = false): { src: string; width: number; height: number } {
+export function gameIconImgAttrs(icon: (typeof STAT_ICON)[keyof typeof STAT_ICON], subpath?: string, isChampionIcon = false): { src: string; width: number; height: number } {
 	return typeof icon === 'string'
 		? {
-				src: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(icon)
-					? 'statsicon'
-					: subpath ?? (isChampionIcon ? 'champion' : 'gameplay')
+				src: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${
+					statIconNameValues.includes(icon) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'))
 				}/${icon}.png`,
 				width: 20,
 				height: 20,
@@ -55,9 +47,8 @@ export function replaceGameIcons(text: string, subpath?: string, addAlt = false)
 				altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat]);
 			}
 
-			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name)
-				? 'statsicon'
-				: subpath ?? (isChampionIcon ? 'champion' : 'gameplay')
+			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${
+				statIconNameValues.includes(name) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'))
 			}/${name}.png" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
@@ -66,9 +57,7 @@ export function replaceGameIcons(text: string, subpath?: string, addAlt = false)
 export type IGameImageData = [src: string, width: number, height?: number, abilityName?: string] | (ITexture & { abilityName?: string });
 
 export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGameImageData> {
-	const imageAbilityId = abilityId.type === AbilityType.effect
-		? EFFECTS_META[abilityId.id].sourceAbility
-		: abilityId;
+	const imageAbilityId = abilityId.type === AbilityType.effect ? EFFECTS_META[abilityId.id].sourceAbility : abilityId;
 
 	if (!imageAbilityId) {
 		console.warn('[gameAbilityId] failed to resolve imageAbilityId for', abilityId);
@@ -76,34 +65,22 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 	}
 
 	if (imageAbilityId.type === AbilityType.item) {
-		return [
-			imgUrl(`img/item/${imageAbilityId.id}.png`, true),
-			64,
-			undefined,
-			ITEMS[imageAbilityId.id]?.name,
-		];
+		return [imgUrl(`img/item/${imageAbilityId.id}.png`, true), 64, undefined, ITEMS[imageAbilityId.id]?.name];
 	} else if (imageAbilityId.type === AbilityType.effect) {
 		const effectData = EFFECTS[imageAbilityId.id];
 		if (effectData && 'image' in effectData) {
-			return [
-				imgUrl(`game/${effectData.image}`),
-				64,
-				undefined,
-				EFFECTS_META[imageAbilityId.id].label,
-			];
+			return [imgUrl(`game/${effectData.image}`), 64, undefined, EFFECTS_META[imageAbilityId.id].label];
 		}
 		if (!CUSTOM_EFFECT_IMAGES[imageAbilityId.id]) {
 			console.warn('[gameAbilityImage] no effect image found for', imageAbilityId);
 			return ['', 0];
 		}
-		return [
-			imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0]),
-			CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
-			undefined,
-			EFFECTS_META[imageAbilityId.id].label,
-		];
+		return [imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0]), CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1], undefined, EFFECTS_META[imageAbilityId.id].label];
 	} else if (imageAbilityId.type === AbilityType.dragon) {
-		return { ...UI.dragons[imageAbilityId.id][imageAbilityId.subtype === 'stack' ? 'stack' : 'soulActive'], abilityName: `${imageAbilityId.id} ${imageAbilityId.subtype}` };
+		return {
+			...UI.dragons[imageAbilityId.id][imageAbilityId.subtype === 'stack' ? 'stack' : 'soulActive'],
+			abilityName: `${imageAbilityId.id} ${imageAbilityId.subtype}`,
+		};
 	}
 
 	const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
@@ -138,10 +115,7 @@ export function simpleFormattingGameAbilityImage(abilityId: IGameAbilityId) {
 }
 
 export async function simpleDescriptionFormatting(text: string, addAlt?: boolean) {
-	const parts = replaceGameIcons(
-		text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>'),
-	)
-		.split(/(%a:[^-%]+-[^%]+%)/g);
+	const parts = replaceGameIcons(text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')).split(/(%a:[^-%]+-[^%]+%)/g);
 
 	for (let i = 0; i < parts.length; i++) {
 		const match = parts[i]!.match(/%a:(.+?)%/);
@@ -156,7 +130,18 @@ export async function simpleDescriptionFormatting(text: string, addAlt?: boolean
 			if (Array.isArray(abilityImage)) {
 				parts[i] = `<img src="${abilityImage[0]}" width="${abilityImage[1]}" height="${abilityImage[2] ?? abilityImage[1]}"${addAlt ? ` alt="${abilityImage[3] ?? 'unknown'} icon"` : ''}>`;
 			} else {
-				parts[i] = `<img ${Object.entries(textureBgImageAttrs(abilityImage, 16)).map(([attr, value]) => `${attr}="${typeof value === 'string' ? value : Object.entries(value).map(([vAttr, vValue]) => `${vAttr}: ${vValue}`).join('; ')}"`).join(' ')}${addAlt ? ` alt="${abilityImage.abilityName ?? 'unknown'} icon"` : ''}>`;
+				parts[i] = `<img ${Object.entries(textureBgImageAttrs(abilityImage, 16))
+					.map(
+						([attr, value]) =>
+							`${attr}="${
+								typeof value === 'string'
+									? value
+									: Object.entries(value)
+											.map(([vAttr, vValue]) => `${vAttr}: ${vValue}`)
+											.join('; ')
+							}"`,
+					)
+					.join(' ')}${addAlt ? ` alt="${abilityImage.abilityName ?? 'unknown'} icon"` : ''}>`;
 			}
 		}
 	}

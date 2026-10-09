@@ -1,5 +1,6 @@
-import type { IChampionSpecific } from '../champion.ts';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 
 /* doesn't seem to be in passive's data */
 const passiveMaxStacks = 5;

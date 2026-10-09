@@ -10,7 +10,7 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 	<div v-if="!enableUnimplementedUi" class="coming-soon-cover">
 		<span>{{ feature }}</span>
 		<p>
-			not implemented <br>
+			not implemented <br />
 			coming soon
 		</p>
 	</div>

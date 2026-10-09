@@ -1,10 +1,11 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { calculatesFromPartExtendedEquals, championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IKaisa from '@lolcalc/data/files/champion/Kaisa.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Kaisa'>): number {
@@ -32,14 +33,18 @@ export default {
 				'f1.1': [0],
 				'f2.1': [0],
 				'f3.1': [0],
-				'TotalStackDamage': [],
-				'MaxStacksConsumeDamage': [],
+				TotalStackDamage: [],
+				MaxStacksConsumeDamage: [],
 			},
 			calculate(self, _target) {
 				let TotalStackDamage = Number.NaN;
 				// let MaxStacksConsumeDamage = Number.NaN;
 
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 				const stackBaseDmg = championAbilityVariableValue('PBaseDamage', passiveParams);
 				const perStackDmg = championAbilityVariableValue('PCurrentPerStackDamage', passiveParams);
 				if (typeof stackBaseDmg.value === 'number' && typeof perStackDmg.value === 'number') {
@@ -68,10 +73,10 @@ export default {
 					'f3.1': {
 						value: self.stats.value.bonus.bonusAttackSpeedPercent,
 					},
-					'TotalStackDamage': {
+					TotalStackDamage: {
 						value: TotalStackDamage,
 					},
-					'MaxStacksConsumeDamage': {
+					MaxStacksConsumeDamage: {
 						value: 'TODO',
 					},
 				};
@@ -88,17 +93,17 @@ export default {
 					multiplier: 100,
 					roundReplaced: 1,
 				},
-				'PBaseDamage': {
+				PBaseDamage: {
 					type: VariableType.magic,
 				},
-				'PCurrentPerStackDamage': {
+				PCurrentPerStackDamage: {
 					type: VariableType.magic,
 				},
-				'TotalStackDamage': {
+				TotalStackDamage: {
 					isCustom: true,
 					type: VariableType.magic,
 				},
-				'MaxStacksConsumeDamage': {
+				MaxStacksConsumeDamage: {
 					isCustom: true,
 					type: VariableType.magic,
 				},
@@ -123,10 +128,10 @@ export default {
 				'f11.1': {
 					displayedName: 'EvolveAttackDamage',
 				},
-				'TotalIndividualMissileDamage': {
+				TotalIndividualMissileDamage: {
 					type: VariableType.physical,
 				},
-				'MaxDamageDisplay': {
+				MaxDamageDisplay: {
 					type: VariableType.physical,
 					calculatesFrom: [],
 				},
@@ -150,7 +155,7 @@ export default {
 				'f2.1': {
 					displayedName: 'EvolveAbilityPower',
 				},
-				'TotalDamage': {
+				TotalDamage: {
 					type: VariableType.magic,
 				},
 			},
@@ -166,28 +171,44 @@ export default {
 			},
 			calculate(self) {
 				return {
-					'TotalCastTime': championAbilityVariableValue('TotalCastTime', { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: { stats: { value: { total: { bonusAttackSpeedPercent: self.stats.value.total.attackSpeed } } } } as DamageSource }),
+					TotalCastTime: championAbilityVariableValue('TotalCastTime', {
+						abilityKey: 'e',
+						abilityVariant: self.champion.value!.abilities.e.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						abilityLevel: self.abilityLevels.value.e,
+						damageSource: {
+							stats: {
+								value: { total: { bonusAttackSpeedPercent: self.stats.value.total.attackSpeed } },
+							},
+						} as DamageSource,
+					}),
 					'f10.1': {
 						value: self.stats.value.bonus.bonusAttackSpeedPercent - (self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0),
 					},
 				};
 			},
 			meta: {
-				'TotalMoveSpeed': {
+				TotalMoveSpeed: {
 					extendedEquals(variableValueParams) {
 						const mult = championAbilityVariableValue('Effect1Amount', variableValueParams);
 						if (typeof mult.value === 'number') {
-							const asPart = calculatesFromPartExtendedEquals({
-								value: mult.value,
-								stat: 'bonusAttackSpeedPercent',
-								type: 'bonus',
-								isPercentage: true,
-							}, true);
-							const constPart = calculatesFromPartExtendedEquals({
-								value: mult.value,
-								stat: 'const',
-								isPercentage: true,
-							}, true);
+							const asPart = calculatesFromPartExtendedEquals(
+								{
+									value: mult.value,
+									stat: 'bonusAttackSpeedPercent',
+									type: 'bonus',
+									isPercentage: true,
+								},
+								true,
+							);
+							const constPart = calculatesFromPartExtendedEquals(
+								{
+									value: mult.value,
+									stat: 'const',
+									isPercentage: true,
+								},
+								true,
+							);
 							return `${asPart} + ${constPart}`;
 						}
 						return '';
@@ -198,11 +219,11 @@ export default {
 					multiplier: 100,
 					roundReplaced: 1,
 				},
-				'TotalCastTime': {
+				TotalCastTime: {
 					scalesWithStatIcon: undefined,
 					extendedEquals: undefined,
 				},
-				'Effect5Amount': {
+				Effect5Amount: {
 					displayedName: 'ChargedAttackSpeed',
 				},
 			},
@@ -222,7 +243,18 @@ export default {
 	calculateHooks: {
 		postBonus: {
 			handler(self, { baseOnLevelStats, championPassiveStats, totalPreMultipliersStats, bonusStats }, { calculatedVariables }) {
-				const eParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.e, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } } } } as DamageSource };
+				const eParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'e',
+					abilityVariant: self.champion.value!.abilities.e.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					abilityLevel: self.abilityLevels.value.e,
+					damageSource: {
+						level: { value: self.level.value },
+						stats: {
+							value: { bonus: { bonusAttackSpeedPercent: bonusStats.bonusAttackSpeedPercent } },
+						},
+					} as DamageSource,
+				};
 
 				if (self.internalData.value.eBuff & eBuffOptions.moveSpeed) {
 					const msPercent = championAbilityVariableValue('TotalMoveSpeed', eParams);

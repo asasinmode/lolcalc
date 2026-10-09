@@ -3,25 +3,31 @@
  */
 
 import type { TItems } from '@lolcalc/data';
+import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import type { IChampionId, IItem, IShopItem } from '@lolcalc/data/types';
 import type { IStatsCalculationResult } from '@lolcalc/shared';
-import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
-import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
-import type { DetectItemVariables } from '../types';
-import type { IVariableModifyMeta } from '../variables/game.ts';
-import { ITEMS, ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID, RANGED_ONLY_ITEMS, UNTRANSFORMED_TEAR_ITEM_IDS, UPGRADED_SUPPORT_ITEMS, VariableType } from '@lolcalc/shared';
 import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
+
+import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
+import type { DetectItemVariables } from '../types';
+import type { IVariableModifyMeta } from '../variables/game.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, MODIFY_VARIABLE_PRIORITIES } from './index.ts';
 
-const actualGWoundsItems = Object.values(ITEMS).filter(item => item.dataValues?.GrievousAmount);
-if (!actualGWoundsItems.every(item => (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id))) {
-	console.warn('[ITEM_SPECIFICS] grievous wounds item is missing from GRIEVOUS_WOUND_ITEMS, all:', actualGWoundsItems.map(item => item.name), 'known:', GRIEVOUS_WOUND_ITEMS.map(id => ITEMS[id]?.name));
+const actualGWoundsItems = Object.values(ITEMS).filter((item) => item.dataValues?.GrievousAmount);
+if (!actualGWoundsItems.every((item) => (GRIEVOUS_WOUND_ITEMS as string[]).includes(item.id))) {
+	console.warn(
+		'[ITEM_SPECIFICS] grievous wounds item is missing from GRIEVOUS_WOUND_ITEMS, all:',
+		actualGWoundsItems.map((item) => item.name),
+		'known:',
+		GRIEVOUS_WOUND_ITEMS.map((id) => ITEMS[id]?.name),
+	);
 }
 
 const tearItem = {
@@ -47,7 +53,7 @@ const tearItem = {
 			itemPassivesStats.mana += manaflow;
 			miscDebug.tearItemBonusMana = itemBaseStats.mana + manaflow;
 
-			const tearItemId = self.items.value.find(item => item && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))?.id;
+			const tearItemId = self.items.value.find((item) => item && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id))?.id;
 			if (tearItemId) {
 				itemStatIncreases[tearItemId] ??= {};
 				itemStatIncreases[tearItemId]!.FlatMPPoolMod = (itemStatIncreases[tearItemId]!.FlatMPPoolMod ?? 0) + manaflow;
@@ -55,7 +61,7 @@ const tearItem = {
 		},
 		priority: -1,
 	} satisfies ICalculateChampionStatsHookSource['preItemTotal'],
-	uninterestingVariables: ['ManaPerCharge', 'ManaChargeAmmoCD', 'ManaChargeMaxAmmo', 'ManaPerCharge', 'MaxMana', 'BonusMinionDamage'] satisfies (DetectItemVariables<TItems[typeof ITEM_NAME_TO_ID['tear']]>)[] as any[],
+	uninterestingVariables: ['ManaPerCharge', 'ManaChargeAmmoCD', 'ManaChargeMaxAmmo', 'ManaPerCharge', 'MaxMana', 'BonusMinionDamage'] satisfies DetectItemVariables<TItems[(typeof ITEM_NAME_TO_ID)['tear']]>[] as any[],
 };
 
 const gluttonousGreavesSpecific = {
@@ -96,7 +102,7 @@ const gluttonousGreavesSpecific = {
 				itemPassivesStats.omnivamp += calculatedVariables.gluttonousImmortalOmnivamp;
 				calculatedVariables.gluttonousImmortalOmnivamp *= 100;
 
-				const bootsId = self.items.value.find(item => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
+				const bootsId = self.items.value.find((item) => item && (item.id === ITEM_NAME_TO_ID.gluttonousGreaves || item.id === ITEM_NAME_TO_ID.immortalPath))?.id;
 				if (bootsId) {
 					itemStatIncreases[bootsId] ??= {};
 					itemStatIncreases[bootsId]!.PercentOmnivampMod = (itemStatIncreases[bootsId]!.PercentOmnivampMod ?? 0) + calculatedVariables.gluttonousImmortalOmnivamp;
@@ -118,7 +124,7 @@ const grievousWoundItemSpecific = {
 	variables: {
 		uninteresting: ['f2', 'f3', 'GrievousAmount', 'GrievousDuration'] as const,
 	},
-} satisfies IItemSpecific<typeof GRIEVOUS_WOUND_ITEMS[number]>;
+} satisfies IItemSpecific<(typeof GRIEVOUS_WOUND_ITEMS)[number]>;
 
 /** specific items' helpers, utils and calculations */
 export const ITEM_SPECIFICS = {
@@ -250,9 +256,9 @@ export const ITEM_SPECIFICS = {
 				handler(self, { itemPassivesStats, itemStatIncreases }, { calculatedVariables }) {
 					const { eternity = 0 } = self.internalItemData.value;
 					const { APPerStack, HealthPerStack, ManaPerStack } = ITEMS_BY_NAME.roa?.dataValues;
-					itemPassivesStats.abilityPower += (calculatedVariables.roaAp = eternity * APPerStack);
-					itemPassivesStats.hp += (calculatedVariables.roaHp = eternity * HealthPerStack);
-					itemPassivesStats.mana += (calculatedVariables.roaMana = eternity * ManaPerStack);
+					itemPassivesStats.abilityPower += calculatedVariables.roaAp = eternity * APPerStack;
+					itemPassivesStats.hp += calculatedVariables.roaHp = eternity * HealthPerStack;
+					itemPassivesStats.mana += calculatedVariables.roaMana = eternity * ManaPerStack;
 
 					itemStatIncreases[ITEM_NAME_TO_ID.roa] ??= {};
 					itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatMagicDamageMod = (itemStatIncreases[ITEM_NAME_TO_ID.roa]!.FlatMagicDamageMod ?? 0) + calculatedVariables.roaAp;
@@ -276,13 +282,13 @@ export const ITEM_SPECIFICS = {
 					f4: { value: 0 },
 					f5: { value: 0 },
 					StacksHealth: {
-						value: self.stats.value.variables.roaHp ?? (eternity * HealthPerStack),
+						value: self.stats.value.variables.roaHp ?? eternity * HealthPerStack,
 					},
 					StacksMana: {
-						value: self.stats.value.variables.roaMana ?? (eternity * ManaPerStack),
+						value: self.stats.value.variables.roaMana ?? eternity * ManaPerStack,
 					},
 					StacksAP: {
-						value: self.stats.value.variables.roaAp ?? (eternity * APPerStack),
+						value: self.stats.value.variables.roaAp ?? eternity * APPerStack,
 					},
 				};
 			},
@@ -385,7 +391,9 @@ export const ITEM_SPECIFICS = {
 				PerSecondBurn: [],
 			},
 			calculate(self, target) {
-				const burnPercent = itemVariableValue('BurnPercentHealthDamage', { item: ITEMS_BY_NAME.liandry });
+				const burnPercent = itemVariableValue('BurnPercentHealthDamage', {
+					item: ITEMS_BY_NAME.liandry,
+				});
 				let PerSecondBurn = Number.NaN;
 				if (typeof burnPercent.value === 'number') {
 					PerSecondBurn = burnPercent.value * (target?.stats.value.total.hp ?? 0);
@@ -425,8 +433,14 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		MAX_PRACTICE_CRIT: ITEMS_BY_NAME.yunTal?.dataValues.CritMax,
-		MELEE_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, isRanged: false }).value as number,
-		RANGED_CRIT_STEP: itemVariableValue('CritPerStackCalc', { item: ITEMS_BY_NAME.yunTal, isRanged: true }).value as number,
+		MELEE_CRIT_STEP: itemVariableValue('CritPerStackCalc', {
+			item: ITEMS_BY_NAME.yunTal,
+			isRanged: false,
+		}).value as number,
+		RANGED_CRIT_STEP: itemVariableValue('CritPerStackCalc', {
+			item: ITEMS_BY_NAME.yunTal,
+			isRanged: true,
+		}).value as number,
 		FLURRY_ATTACK_SPEED: itemVariableValue('ASMod', { item: ITEMS_BY_NAME.yunTal }).value as number,
 		internalDataProperties: ['practice', 'flurry'],
 		setupData(self) {
@@ -530,16 +544,20 @@ export const ITEM_SPECIFICS = {
 			},
 			calculate(self) {
 				const { VampAmountRanged, VampAmountMelee } = ITEMS_BY_NAME.riftmaker?.dataValues;
-				const voidInfusion = itemVariableValue('{1247259a}', { item: ITEMS_BY_NAME.riftmaker, damageSource: self });
+				const voidInfusion = itemVariableValue('{1247259a}', {
+					item: ITEMS_BY_NAME.riftmaker,
+					damageSource: self,
+				});
 
 				return {
 					/** ap gained from passive */
-					f1: self.stats.value.variables.riftmakerVoidInfusion === undefined
-						? voidInfusion
-						: {
-								value: self.stats.value.variables.riftmakerVoidInfusion,
-								calculatesFrom: voidInfusion.calculatesFrom,
-							},
+					f1:
+						self.stats.value.variables.riftmakerVoidInfusion === undefined
+							? voidInfusion
+							: {
+									value: self.stats.value.variables.riftmakerVoidInfusion,
+									calculatesFrom: voidInfusion.calculatesFrom,
+								},
 					lolcalcChampRange: {
 						value: [VampAmountMelee, VampAmountRanged],
 					},
@@ -570,7 +588,7 @@ export const ITEM_SPECIFICS = {
 				handler(self, { isRanged, itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
 					calculatedVariables.riftmakerBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'riftmaker'>).corruption ?? 0) * ITEMS_BY_NAME.riftmaker?.dataValues.EternityDamageIncreasePerSecond;
 
-					const bonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
+					const bonusHp = itemBaseStats.hp + itemPassivesStats.hp;
 					calculatedVariables.riftmakerBonusHPToAP = ITEMS_BY_NAME.riftmaker?.dataValues.HealthToAPConversionPercent;
 					calculatedVariables.riftmakerVoidInfusion = bonusHp * calculatedVariables.riftmakerBonusHPToAP;
 					itemPassivesStats.abilityPower += calculatedVariables.riftmakerVoidInfusion;
@@ -617,7 +635,7 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, args, meta) {
 					tearItem.calculateHookPreItemTotal.handler(self, args, meta);
-					const bonusHSP = (meta.miscDebug.tearItemBonusMana ?? 0) * ITEMS_BY_NAME.whisperingCirclet?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient / 100;
+					const bonusHSP = ((meta.miscDebug.tearItemBonusMana ?? 0) * ITEMS_BY_NAME.whisperingCirclet?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient) / 100;
 					args.itemPassivesStats.healShieldPower += bonusHSP;
 					meta.calculatedVariables.whisperingDiademAwe = bonusHSP;
 				},
@@ -639,7 +657,7 @@ export const ITEM_SPECIFICS = {
 					if (!self.hasMana.value) {
 						return;
 					}
-					const bonusHSP = (itemPassivesStats.mana + itemBaseStats.mana) * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient / 100;
+					const bonusHSP = ((itemPassivesStats.mana + itemBaseStats.mana) * ITEMS_BY_NAME.diademOfSongs?.itemCalculations.BonusHSPCalc.mFormulaParts[0]!.mCoefficient) / 100;
 					itemPassivesStats.healShieldPower += bonusHSP;
 					calculatedVariables.whisperingDiademAwe = bonusHSP;
 				},
@@ -691,13 +709,15 @@ export const ITEM_SPECIFICS = {
 				return {
 					/** ap gained from passive */
 					f2: {
-						value: self.stats.value.variables.archangelSeraphAwe ?? (self.stats.value.bonus.mana * APFromMana),
-						calculatesFrom: [{
-							stat: 'mana',
-							type: 'bonus',
-							isPercentage: true,
-							value: APFromMana,
-						}],
+						value: self.stats.value.variables.archangelSeraphAwe ?? self.stats.value.bonus.mana * APFromMana,
+						calculatesFrom: [
+							{
+								stat: 'mana',
+								type: 'bonus',
+								isPercentage: true,
+								value: APFromMana,
+							},
+						],
 					},
 				};
 			},
@@ -730,7 +750,10 @@ export const ITEM_SPECIFICS = {
 				BonusAPCalc: [],
 			},
 			calculate(self) {
-				const bonusAP = itemVariableValue('BonusAPCalc', { item: ITEMS_BY_NAME.seraphsEmbrace, damageSource: self });
+				const bonusAP = itemVariableValue('BonusAPCalc', {
+					item: ITEMS_BY_NAME.seraphsEmbrace,
+					damageSource: self,
+				});
 
 				return {
 					/** damage shielded */
@@ -738,12 +761,13 @@ export const ITEM_SPECIFICS = {
 						value: 0,
 					},
 					/** ap gained from passive */
-					BonusAPCalc: self.stats.value.variables.archangelSeraphAwe === undefined
-						? bonusAP
-						: {
-								value: self.stats.value.bonus.mana * ITEMS_BY_NAME.seraphsEmbrace?.dataValues.APFromMana,
-								calculatesFrom: bonusAP.calculatesFrom,
-							},
+					BonusAPCalc:
+						self.stats.value.variables.archangelSeraphAwe === undefined
+							? bonusAP
+							: {
+									value: self.stats.value.bonus.mana * ITEMS_BY_NAME.seraphsEmbrace?.dataValues.APFromMana,
+									calculatesFrom: bonusAP.calculatesFrom,
+								},
 				};
 			},
 			meta: {
@@ -778,16 +802,20 @@ export const ITEM_SPECIFICS = {
 				BonusADFromMana: [],
 			},
 			calculate(self) {
-				const bonusAD = itemVariableValue('BonusADFromMana', { item: ITEMS_BY_NAME.manamune, damageSource: self });
+				const bonusAD = itemVariableValue('BonusADFromMana', {
+					item: ITEMS_BY_NAME.manamune,
+					damageSource: self,
+				});
 
 				return {
 					/** ad gained from passive */
-					BonusADFromMana: self.stats.value.variables.manaMuraAwe === undefined
-						? bonusAD
-						: {
-								value: self.stats.value.total.mana * ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient,
-								calculatesFrom: bonusAD.calculatesFrom,
-							},
+					BonusADFromMana:
+						self.stats.value.variables.manaMuraAwe === undefined
+							? bonusAD
+							: {
+									value: self.stats.value.total.mana * ITEMS_BY_NAME.manamune?.itemCalculations.BonusADFromMana.mFormulaParts[0]!.mCoefficient,
+									calculatesFrom: bonusAD.calculatesFrom,
+								},
 				};
 			},
 			uninteresting: tearItem.uninterestingVariables,
@@ -815,19 +843,31 @@ export const ITEM_SPECIFICS = {
 				f1: [],
 			},
 			calculate(self) {
-				const bonusAD = itemVariableValue('BonusADFromMana', { item: ITEMS_BY_NAME.muramana, damageSource: self });
+				const bonusAD = itemVariableValue('BonusADFromMana', {
+					item: ITEMS_BY_NAME.muramana,
+					damageSource: self,
+				});
 
 				return {
-					BonusADFromMana: self.stats.value.variables.manaMuraAwe === undefined
-						? bonusAD
-						: {
-								value: self.stats.value.variables.manaMuraAwe,
-								calculatesFrom: bonusAD.calculatesFrom,
-							},
+					BonusADFromMana:
+						self.stats.value.variables.manaMuraAwe === undefined
+							? bonusAD
+							: {
+									value: self.stats.value.variables.manaMuraAwe,
+									calculatesFrom: bonusAD.calculatesFrom,
+								},
 					/** passive damaging abilities bonus damage */
 					lolcalcChampRange: [
-						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.muramana, damageSource: self, isRanged: false }),
-						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.muramana, damageSource: self, isRanged: true }),
+						itemVariableValue('MeleeItemCalcValue', {
+							item: ITEMS_BY_NAME.muramana,
+							damageSource: self,
+							isRanged: false,
+						}),
+						itemVariableValue('RangedItemCalcValue', {
+							item: ITEMS_BY_NAME.muramana,
+							damageSource: self,
+							isRanged: true,
+						}),
 					],
 					f1: {
 						value: 0,
@@ -860,15 +900,19 @@ export const ITEM_SPECIFICS = {
 				BonusHPFromMana: [],
 			},
 			calculate(self) {
-				const bonusHP = itemVariableValue('BonusHPFromMana', { item: ITEMS_BY_NAME.wintersApproach, damageSource: self });
+				const bonusHP = itemVariableValue('BonusHPFromMana', {
+					item: ITEMS_BY_NAME.wintersApproach,
+					damageSource: self,
+				});
 
 				return {
-					BonusHPFromMana: self.stats.value.variables.approachFimbulAwe === undefined
-						? bonusHP
-						: {
-								value: self.stats.value.variables.approachFimbulAwe,
-								calculatesFrom: bonusHP.calculatesFrom,
-							},
+					BonusHPFromMana:
+						self.stats.value.variables.approachFimbulAwe === undefined
+							? bonusHP
+							: {
+									value: self.stats.value.variables.approachFimbulAwe,
+									calculatesFrom: bonusHP.calculatesFrom,
+								},
 				};
 			},
 			uninteresting: tearItem.uninterestingVariables,
@@ -905,15 +949,19 @@ export const ITEM_SPECIFICS = {
 				ComputedShield: [],
 			},
 			calculate(self) {
-				const bonusHP = itemVariableValue('BonusHPFromMana', { item: ITEMS_BY_NAME.fimbulwinter, damageSource: self });
+				const bonusHP = itemVariableValue('BonusHPFromMana', {
+					item: ITEMS_BY_NAME.fimbulwinter,
+					damageSource: self,
+				});
 
 				return {
-					BonusHPFromMana: self.stats.value.variables.approachFimbulAwe === undefined
-						? bonusHP
-						: {
-								value: self.stats.value.variables.approachFimbulAwe,
-								calculatesFrom: bonusHP.calculatesFrom,
-							},
+					BonusHPFromMana:
+						self.stats.value.variables.approachFimbulAwe === undefined
+							? bonusHP
+							: {
+									value: self.stats.value.variables.approachFimbulAwe,
+									calculatesFrom: bonusHP.calculatesFrom,
+								},
 					ShieldBase: {
 						value: ITEMS_BY_NAME.fimbulwinter?.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber,
 					},
@@ -922,8 +970,8 @@ export const ITEM_SPECIFICS = {
 					},
 					ComputedShield: {
 						value: self.hasMana.value
-							? (ITEMS_BY_NAME.fimbulwinter?.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber + self.currentAbilityResource.value * ITEMS_BY_NAME.fimbulwinter?.dataValues.CurrentManaShieldRatio)
-							* (1 + ((self.internalItemData.value).enemiesNearby ? ITEMS_BY_NAME.fimbulwinter?.dataValues.Multiplier : 0))
+							? (ITEMS_BY_NAME.fimbulwinter?.itemCalculations.ShieldBase.mFormulaParts[0]!.mNumber + self.currentAbilityResource.value * ITEMS_BY_NAME.fimbulwinter?.dataValues.CurrentManaShieldRatio) *
+								(1 + (self.internalItemData.value.enemiesNearby ? ITEMS_BY_NAME.fimbulwinter?.dataValues.Multiplier : 0))
 							: 0,
 					},
 				};
@@ -980,10 +1028,7 @@ export const ITEM_SPECIFICS = {
 		MAX_STACKS: 5,
 		internalDataProperties: ['carve', 'fervor'],
 		setupData(self) {
-			self.internalItemData.value.carve = Math.max(0, Math.min(
-				ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].MAX_STACKS,
-				self.internalItemData.value.carve ?? 0,
-			));
+			self.internalItemData.value.carve = Math.max(0, Math.min(ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].MAX_STACKS, self.internalItemData.value.carve ?? 0));
 			self.internalItemData.value.fervor = clamp(0, self.internalItemData.value.fervor ?? 0, 1);
 			return { carve: 0, fervor: 0 };
 		},
@@ -1058,8 +1103,7 @@ export const ITEM_SPECIFICS = {
 					f6: { value: ITEMS_BY_NAME.celestialOpposition?.dataValues.StealthWardCap },
 				};
 			},
-			meta: {
-			},
+			meta: {},
 			uninteresting: ['f3', 'f5', 'f6', 'MeleeShieldDRPercentage', 'RangedShieldDRPercentage', 'ShieldLingerAfterInitiallyPopped', 'SlowAmount', 'SlowDuration', 'StealthWardCap'],
 		}),
 	},
@@ -1079,7 +1123,10 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'phage'>).rage) {
-						const moveSpeed = itemVariableValue('MSBonusSplit', { item: ITEMS_BY_NAME.phage, isRanged: isRanged ?? false });
+						const moveSpeed = itemVariableValue('MSBonusSplit', {
+							item: ITEMS_BY_NAME.phage,
+							isRanged: isRanged ?? false,
+						});
 						if (typeof moveSpeed.value === 'number') {
 							calculatedVariables.phageMoveSpeed = moveSpeed.value;
 							itemPassivesStats.moveSpeed += calculatedVariables.phageMoveSpeed;
@@ -1198,7 +1245,10 @@ export const ITEM_SPECIFICS = {
 
 					itemPassivesStats.moveSpeed += ITEM_SPECIFICS[ITEM_NAME_TO_ID.bandlepipes].FANFARE_MOVE_SPEED;
 
-					const attackSpeed = itemVariableValue('AuraAttackSpeed', { item: ITEMS_BY_NAME.bandlepipes, isRanged: isRanged ?? true });
+					const attackSpeed = itemVariableValue('AuraAttackSpeed', {
+						item: ITEMS_BY_NAME.bandlepipes,
+						isRanged: isRanged ?? true,
+					});
 					if (typeof attackSpeed.value === 'number') {
 						itemPassivesStats.bonusAttackSpeedPercent += attackSpeed.value;
 					} else {
@@ -1241,7 +1291,10 @@ export const ITEM_SPECIFICS = {
 						itemPassivesStats.tenacity = addMultiplicative(itemPassivesStats.tenacity, TenacityAmount);
 						calculatedVariables.totalBonusPercentMoveSpeed += MSAmount;
 
-						const maxHp = itemVariableValue('MaxHealthGain', { item: ITEMS_BY_NAME.protoplasmHarness, damageSource: { level: { value: self.level.value } } as DamageSource });
+						const maxHp = itemVariableValue('MaxHealthGain', {
+							item: ITEMS_BY_NAME.protoplasmHarness,
+							damageSource: { level: { value: self.level.value } } as DamageSource,
+						});
 						if (typeof maxHp.value === 'number') {
 							itemPassivesStats.hp += maxHp.value;
 						} else {
@@ -1375,7 +1428,10 @@ export const ITEM_SPECIFICS = {
 				// TODO use those values & check if works
 				handler(self, { bonusStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'actualizer'>).empowered) {
-						const bonusPercent = itemVariableValue('ManaCalc', { item: ITEMS_BY_NAME.actualizer, damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource });
+						const bonusPercent = itemVariableValue('ManaCalc', {
+							item: ITEMS_BY_NAME.actualizer,
+							damageSource: { stats: { value: { bonus: bonusStats } } } as DamageSource,
+						});
 						if (typeof bonusPercent.value === 'number') {
 							calculatedVariables.actualizerBuffPercent = bonusPercent.value;
 						} else {
@@ -1423,9 +1479,11 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
-					const { dataValues: { MaxRange, MaxDamageAmp } } = ITEMS_BY_NAME.hexoptics ?? {};
+					const {
+						dataValues: { MaxRange, MaxDamageAmp },
+					} = ITEMS_BY_NAME.hexoptics ?? {};
 					const { arcaneAim, magnification } = self.internalItemData.value as IInternalItemDataOf<'hexoptics'>;
-					calculatedVariables.hexopticsBonusDamagePercent = magnification / MaxRange * MaxDamageAmp;
+					calculatedVariables.hexopticsBonusDamagePercent = (magnification / MaxRange) * MaxDamageAmp;
 					if (arcaneAim) {
 						itemPassivesStats.attackRange += ITEMS_BY_NAME.hexoptics?.dataValues.ExtraRange;
 					}
@@ -1467,7 +1525,10 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'youmuu'>).haunt) {
-						const oocMS = itemVariableValue('OOCMS', { item: ITEMS_BY_NAME.youmuu, isRanged: isRanged ?? true });
+						const oocMS = itemVariableValue('OOCMS', {
+							item: ITEMS_BY_NAME.youmuu,
+							isRanged: isRanged ?? true,
+						});
 
 						if (typeof oocMS.value === 'number') {
 							itemPassivesStats.moveSpeed += oocMS.value;
@@ -1527,9 +1588,7 @@ export const ITEM_SPECIFICS = {
 				/* according to the [wiki](https://wiki.leagueoflegends.com/en-us/Dead_Man's_Plate) the ad ratio also scales with stacks reaching 100% base at 100 stacks */
 				const baseRatio = shipwrecker / ITEM_SPECIFICS[ITEM_NAME_TO_ID.deadMansPlate].MAX_STACKS;
 
-				const base = variableResolveFn(
-					ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0],
-				)?.(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0] as any, ITEMS_BY_NAME.deadMansPlate, {
+				const base = variableResolveFn(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0])?.(ITEMS_BY_NAME.deadMansPlate?.itemCalculations.MaxDamageCalc.mFormulaParts[0] as any, ITEMS_BY_NAME.deadMansPlate, {
 					variableValueFn: itemVariableValue,
 					variableValueParams: {
 						item: ITEMS_BY_NAME.deadMansPlate,
@@ -1563,7 +1622,7 @@ export const ITEM_SPECIFICS = {
 				handler(self, { itemPassivesStats }, { calculatedVariables }) {
 					const { MaxStacks, MaxMovementSpeed } = ITEMS_BY_NAME.deadMansPlate?.dataValues ?? {};
 					/* either the numbers in the game of the current stacks are wrong or the scaling isn't linear but it's not a priority at the moment so keeping it linear */
-					calculatedVariables.deadMansMoveSpeed = MaxMovementSpeed * (self.internalItemData.value as IInternalItemDataOf<'deadMansPlate'>).shipwrecker / MaxStacks;
+					calculatedVariables.deadMansMoveSpeed = (MaxMovementSpeed * (self.internalItemData.value as IInternalItemDataOf<'deadMansPlate'>).shipwrecker) / MaxStacks;
 					itemPassivesStats.moveSpeed += calculatedVariables.deadMansMoveSpeed;
 					itemPassivesStats.slowResist = addMultiplicative(itemPassivesStats.slowResist, ITEMS_BY_NAME.deadMansPlate?.dataValues.SlowResistTooltip);
 				},
@@ -1574,10 +1633,7 @@ export const ITEM_SPECIFICS = {
 		MAX_STACKS: ITEMS_BY_NAME.bloodlettersCurse?.dataValues.MaxStacks,
 		internalDataProperties: ['vDecay'],
 		setupData(self) {
-			self.internalItemData.value.vDecay = Math.max(0, Math.min(
-				ITEM_SPECIFICS[ITEM_NAME_TO_ID.bloodlettersCurse].MAX_STACKS,
-				self.internalItemData.value.vDecay ?? 0,
-			));
+			self.internalItemData.value.vDecay = Math.max(0, Math.min(ITEM_SPECIFICS[ITEM_NAME_TO_ID.bloodlettersCurse].MAX_STACKS, self.internalItemData.value.vDecay ?? 0));
 			return { vDecay: 0 };
 		},
 		imgTextLabel: 'Vile Decay stacks',
@@ -1634,14 +1690,20 @@ export const ITEM_SPECIFICS = {
 						return;
 					}
 
-					const bonusAS = itemVariableValue('BonusAS', { item: ITEMS_BY_NAME.experimentalHexplate, isRanged: isRanged ?? true });
+					const bonusAS = itemVariableValue('BonusAS', {
+						item: ITEMS_BY_NAME.experimentalHexplate,
+						isRanged: isRanged ?? true,
+					});
 					if (typeof bonusAS.value === 'number') {
 						itemPassivesStats.bonusAttackSpeedPercent += bonusAS.value / 100;
 					} else {
 						console.warn('[ITEM_SPECIFICS experimental hexplate] failed to calculate bonus attack speed', bonusAS);
 					}
 
-					const bonusMS = itemVariableValue('BonusMS', { item: ITEMS_BY_NAME.experimentalHexplate, isRanged: isRanged ?? true });
+					const bonusMS = itemVariableValue('BonusMS', {
+						item: ITEMS_BY_NAME.experimentalHexplate,
+						isRanged: isRanged ?? true,
+					});
 					if (typeof bonusMS.value === 'number') {
 						calculatedVariables.totalBonusPercentMoveSpeed += bonusMS.value / 100;
 					} else {
@@ -1667,11 +1729,14 @@ export const ITEM_SPECIFICS = {
 				f5: [],
 			},
 			calculate(self) {
-				const consumptionDamage = itemVariableValue('DamageProcCalc', { item: ITEMS_BY_NAME.heartsteel, damageSource: self });
+				const consumptionDamage = itemVariableValue('DamageProcCalc', {
+					item: ITEMS_BY_NAME.heartsteel,
+					damageSource: self,
+				});
 				return {
 					f4: consumptionDamage,
 					f5: {
-						value: consumptionDamage.value as number * ITEMS_BY_NAME.heartsteel?.dataValues.DamageToMaxHealthRatio,
+						value: (consumptionDamage.value as number) * ITEMS_BY_NAME.heartsteel?.dataValues.DamageToMaxHealthRatio,
 					},
 				};
 			},
@@ -1781,7 +1846,10 @@ export const ITEM_SPECIFICS = {
 					itemPassivesStats.percentMagicPen = addMultiplicative(itemPassivesStats.percentMagicPen, totalPen);
 					calculatedVariables.terminusPercentagePen = totalPen;
 
-					const resistPerStack = itemVariableValue('ARMRPerHitScaling', { item: ITEMS_BY_NAME.terminus, damageSource: { level: { value: self.level.value } } as DamageSource });
+					const resistPerStack = itemVariableValue('ARMRPerHitScaling', {
+						item: ITEMS_BY_NAME.terminus,
+						damageSource: { level: { value: self.level.value } } as DamageSource,
+					});
 					if (typeof resistPerStack.value === 'number') {
 						const totalResists = resistPerStack.value * jxtpL;
 						itemPassivesStats.armor += totalResists;
@@ -1807,7 +1875,9 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { itemPassivesStats }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'cosmicDrive'>).spelldance) {
-						const moveSpeed = itemVariableValue('MovespeedAmount', { item: ITEMS_BY_NAME.cosmicDrive });
+						const moveSpeed = itemVariableValue('MovespeedAmount', {
+							item: ITEMS_BY_NAME.cosmicDrive,
+						});
 
 						if (typeof moveSpeed.value === 'number') {
 							itemPassivesStats.moveSpeed += moveSpeed.value;
@@ -1892,8 +1962,16 @@ export const ITEM_SPECIFICS = {
 				return {
 					f4: { value: 0 },
 					lolcalcChampRange: [
-						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: false }),
-						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.mawOfMalmortius, damageSource: self, isRanged: true }),
+						itemVariableValue('MeleeItemCalcValue', {
+							item: ITEMS_BY_NAME.mawOfMalmortius,
+							damageSource: self,
+							isRanged: false,
+						}),
+						itemVariableValue('RangedItemCalcValue', {
+							item: ITEMS_BY_NAME.mawOfMalmortius,
+							damageSource: self,
+							isRanged: true,
+						}),
 					],
 				};
 			},
@@ -1954,7 +2032,9 @@ export const ITEM_SPECIFICS = {
 					if (!(self.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance) {
 						return;
 					}
-					const resistPercentage = itemVariableValue('BonusResistPercentage', { item: ITEMS_BY_NAME.jakSho });
+					const resistPercentage = itemVariableValue('BonusResistPercentage', {
+						item: ITEMS_BY_NAME.jakSho,
+					});
 					if (typeof resistPercentage.value === 'number') {
 						calculatedVariables.jakShoBonusResistMultiplier = resistPercentage.value;
 						calculatedVariables.jakShoArmor = bonusStats.armor * resistPercentage.value;
@@ -1966,7 +2046,7 @@ export const ITEM_SPECIFICS = {
 						totalMultipliersStats.armor += calculatedVariables.jakShoArmor;
 						totalMultipliersStats.magicResist += calculatedVariables.jakShoMagicResist;
 					} else {
-						console.warn('[ITEM_SPECIFICS Jak\'Sho] failed to calculate bonus resist percentage');
+						console.warn("[ITEM_SPECIFICS Jak'Sho] failed to calculate bonus resist percentage");
 					}
 				},
 			},
@@ -2003,8 +2083,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					/** ap gained from passive */
 					f1: {
-						value: self.stats.value.variables.rabadonMagicalOpus
-							?? (self.stats.value.variables.apMultipliersBase * ITEMS_BY_NAME.rabadon?.dataValues.APAmp),
+						value: self.stats.value.variables.rabadonMagicalOpus ?? self.stats.value.variables.apMultipliersBase * ITEMS_BY_NAME.rabadon?.dataValues.APAmp,
 					},
 				};
 			},
@@ -2163,20 +2242,21 @@ export const ITEM_SPECIFICS = {
 			};
 		},
 		extraControls: {
-			model: self => computed({
-				get() {
-					return (self.internalItemData.value.retribution || self.internalItemData.value.tyranny) ? 1 : 0;
-				},
-				set(value) {
-					if (value) {
-						self.internalItemData.value.retribution = self.stats.value.variables.bloodmailRetribution;
-						self.internalItemData.value.tyranny = self.stats.value.variables.bloodmailTyranny;
-					} else {
-						self.internalItemData.value.retribution = undefined;
-						self.internalItemData.value.tyranny = undefined;
-					}
-				},
-			}),
+			model: (self) =>
+				computed({
+					get() {
+						return self.internalItemData.value.retribution || self.internalItemData.value.tyranny ? 1 : 0;
+					},
+					set(value) {
+						if (value) {
+							self.internalItemData.value.retribution = self.stats.value.variables.bloodmailRetribution;
+							self.internalItemData.value.tyranny = self.stats.value.variables.bloodmailTyranny;
+						} else {
+							self.internalItemData.value.retribution = undefined;
+							self.internalItemData.value.tyranny = undefined;
+						}
+					},
+				}),
 			refresh(self) {
 				self.internalItemData.value.retribution = self.stats.value.variables.bloodmailRetribution;
 				self.internalItemData.value.tyranny = self.stats.value.variables.bloodmailTyranny;
@@ -2187,9 +2267,7 @@ export const ITEM_SPECIFICS = {
 		} satisfies IEffectControlsProps<any>,
 		imgTextLabel: 'Retribution ad increase',
 		imgText(damageSource) {
-			return damageSource.stats.value.variables.bloodmailRetribution
-				? Math.round(damageSource.stats.value.variables.bloodmailRetribution)
-				: 0;
+			return damageSource.stats.value.variables.bloodmailRetribution ? Math.round(damageSource.stats.value.variables.bloodmailRetribution) : 0;
 		},
 		variables: defineVariables({
 			known: {
@@ -2199,18 +2277,18 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f1: {
-						value: self.stats.value.variables.bloodmailTyranny
-							?? self.stats.value.bonus.hp * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
-						calculatesFrom: [{
-							stat: 'hp',
-							value: ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
-							isPercentage: true,
-							type: 'bonus',
-						}],
+						value: self.stats.value.variables.bloodmailTyranny ?? self.stats.value.bonus.hp * ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
+						calculatesFrom: [
+							{
+								stat: 'hp',
+								value: ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage,
+								isPercentage: true,
+								type: 'bonus',
+							},
+						],
 					},
 					f2: {
-						value: self.stats.value.variables.bloodmailRetribution
-							?? self.stats.value.bonus.attackDamage,
+						value: self.stats.value.variables.bloodmailRetribution ?? self.stats.value.bonus.attackDamage,
 					},
 				};
 			},
@@ -2233,11 +2311,11 @@ export const ITEM_SPECIFICS = {
 				handler(self, { itemBaseStats, itemPassivesStats }, { calculatedVariables, miscDebug }) {
 					calculatedVariables.bloodmailTyrannyBonusHpToAd = ITEMS_BY_NAME.overlordsBloodmail?.dataValues.HPToADPercentage;
 					const value = (itemBaseStats.hp + itemPassivesStats.hp) * calculatedVariables.bloodmailTyrannyBonusHpToAd;
-					miscDebug.bloodmailBonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
+					miscDebug.bloodmailBonusHp = itemBaseStats.hp + itemPassivesStats.hp;
 					calculatedVariables.bloodmailTyranny = value;
 					itemPassivesStats.attackDamage += value;
 
-					const { tyranny, retribution } = self.internalItemData.value as (IInternalItemDataOf<'overlordsBloodmail'>);
+					const { tyranny, retribution } = self.internalItemData.value as IInternalItemDataOf<'overlordsBloodmail'>;
 					calculatedVariables.additionalAdaptiveForceCheckAd += (tyranny ?? 0) + (retribution ?? 0);
 					if (tyranny !== undefined) {
 						calculatedVariables.additionalAdaptiveForceCheckAd -= calculatedVariables.bloodmailTyranny;
@@ -2281,13 +2359,16 @@ export const ITEM_SPECIFICS = {
 
 					const retributionBaseTotal = totalStats.attackDamage - (dragonStats.attackDamage ?? 0) - calculatedVariables.bloodmailRetributionExcludedAd;
 
-					const maxValueAt = itemVariableValue('RemainingHealthThreshold', { item: ITEMS_BY_NAME.overlordsBloodmail, damageSource: {} as DamageSource });
+					const maxValueAt = itemVariableValue('RemainingHealthThreshold', {
+						item: ITEMS_BY_NAME.overlordsBloodmail,
+						damageSource: {} as DamageSource,
+					});
 					if (typeof maxValueAt?.value !== 'number') {
 						console.error('[ITEM_SPECIFICS bloodmail] failed to calculate remaining health threshold', maxValueAt);
 						return Number.NaN;
 					}
 
-					const currentHealthP = Math.min(1, self.currentHealth.value / (Math.max(totalStats.hp, 1)));
+					const currentHealthP = Math.min(1, self.currentHealth.value / Math.max(totalStats.hp, 1));
 
 					calculatedVariables.bloodmailRetributionPercentage = ITEMS_BY_NAME.overlordsBloodmail?.dataValues.MissingHealthAD * Math.min(1, (1 - currentHealthP) / (1 - maxValueAt.value));
 					calculatedVariables.bloodmailRetribution = retributionBaseTotal * calculatedVariables.bloodmailRetributionPercentage;
@@ -2306,22 +2387,20 @@ export const ITEM_SPECIFICS = {
 		calculateHooks: {
 			preItemTotal: {
 				handler(_self, { itemPassivesStats, baseOnLevelStats }, { calculatedVariables }) {
-					const value = variableResolveFn(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD)?.(
-						ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD,
-						ITEMS_BY_NAME.steraksGage,
-						{
-							variableValueFn: itemVariableValue,
-							variableValueParams: {
-								item: ITEMS_BY_NAME.steraksGage,
-								damageSource: { stats: { value: { baseOnLevel: baseOnLevelStats } } } as DamageSource,
-							},
+					const value = variableResolveFn(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD)?.(ITEMS_BY_NAME.steraksGage?.itemCalculations.BonusAD, ITEMS_BY_NAME.steraksGage, {
+						variableValueFn: itemVariableValue,
+						variableValueParams: {
+							item: ITEMS_BY_NAME.steraksGage,
+							damageSource: {
+								stats: { value: { baseOnLevel: baseOnLevelStats } },
+							} as DamageSource,
 						},
-					);
+					});
 					if (typeof value?.value === 'number') {
 						calculatedVariables.sterakAd = value.value;
 						itemPassivesStats.attackDamage += calculatedVariables.sterakAd;
 					} else {
-						console.warn('[ITEM_SPECIFICS sterak\'s gage] failed to resolve BonusAD variable value');
+						console.warn("[ITEM_SPECIFICS sterak's gage] failed to resolve BonusAD variable value");
 					}
 				},
 			},
@@ -2367,7 +2446,10 @@ export const ITEM_SPECIFICS = {
 			onTotalPreMultipliers: {
 				handler(_self, { totalPreMultipliersStats, totalMultipliersStats, itemTotalStats, itemPassivesStats, adaptiveForceMeta }, { calculatedVariables, miscDebug }) {
 					miscDebug.swiftmarchTotalMs = totalPreMultipliersStats.moveSpeed;
-					const adaptiveForce = itemVariableValue('MSToAdaptiveCalc', { item: ITEMS_BY_NAME.swiftmarch, damageSource: { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource });
+					const adaptiveForce = itemVariableValue('MSToAdaptiveCalc', {
+						item: ITEMS_BY_NAME.swiftmarch,
+						damageSource: { stats: { value: { total: totalPreMultipliersStats } } } as DamageSource,
+					});
 
 					if (typeof adaptiveForce.value === 'number') {
 						calculatedVariables.totalAdaptiveForce += adaptiveForce.value;
@@ -2476,8 +2558,16 @@ export const ITEM_SPECIFICS = {
 					f4: { value: 0 },
 					lolcalcChampRange: {
 						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.worldAtlas, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.worldAtlas, damageSource: self, isRanged: true }).value as number,
+							itemVariableValue('MeleeItemCalcValue', {
+								item: ITEMS_BY_NAME.worldAtlas,
+								damageSource: self,
+								isRanged: false,
+							}).value as number,
+							itemVariableValue('RangedItemCalcValue', {
+								item: ITEMS_BY_NAME.worldAtlas,
+								damageSource: self,
+								isRanged: true,
+							}).value as number,
 						],
 					},
 				};
@@ -2505,8 +2595,16 @@ export const ITEM_SPECIFICS = {
 					f6: { value: ITEMS_BY_NAME.runicCompass?.dataValues.StealthWardCap },
 					lolcalcChampRange: {
 						value: [
-							itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.runicCompass, damageSource: self, isRanged: false }).value as number,
-							itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.runicCompass, damageSource: self, isRanged: true }).value as number,
+							itemVariableValue('MeleeItemCalcValue', {
+								item: ITEMS_BY_NAME.runicCompass,
+								damageSource: self,
+								isRanged: false,
+							}).value as number,
+							itemVariableValue('RangedItemCalcValue', {
+								item: ITEMS_BY_NAME.runicCompass,
+								damageSource: self,
+								isRanged: true,
+							}).value as number,
 						],
 					},
 				};
@@ -2577,7 +2675,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.sunfireAegis]: {
 		imgTextLabel: '',
 		imgText(damageSource) {
-			const value = damageSource.computed.items.value.find(item => item && item.item.id === ITEM_NAME_TO_ID.sunfireAegis)?.variables.get('DPS')?.value;
+			const value = damageSource.computed.items.value.find((item) => item && item.item.id === ITEM_NAME_TO_ID.sunfireAegis)?.variables.get('DPS')?.value;
 			return typeof value === 'number' ? Math.round(value) : '';
 		},
 		variables: defineVariables({
@@ -2731,8 +2829,16 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					lolcalcChampRange: [
-						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: false }),
-						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.ravenousHydra, damageSource: self, isRanged: true }),
+						itemVariableValue('MeleeItemCalcValue', {
+							item: ITEMS_BY_NAME.ravenousHydra,
+							damageSource: self,
+							isRanged: false,
+						}),
+						itemVariableValue('RangedItemCalcValue', {
+							item: ITEMS_BY_NAME.ravenousHydra,
+							damageSource: self,
+							isRanged: true,
+						}),
 					],
 				};
 			},
@@ -2751,8 +2857,16 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					lolcalcChampRange: [
-						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: false }),
-						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.tiamat, damageSource: self, isRanged: true }),
+						itemVariableValue('MeleeItemCalcValue', {
+							item: ITEMS_BY_NAME.tiamat,
+							damageSource: self,
+							isRanged: false,
+						}),
+						itemVariableValue('RangedItemCalcValue', {
+							item: ITEMS_BY_NAME.tiamat,
+							damageSource: self,
+							isRanged: true,
+						}),
 					],
 				};
 			},
@@ -2790,8 +2904,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					f1: { value: 0 },
 					f2: {
-						value: self.stats.value.variables.warmogsVitality
-							?? self.stats.value.itemBase.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp,
+						value: self.stats.value.variables.warmogsVitality ?? self.stats.value.itemBase.hp * ITEMS_BY_NAME.warmogsArmor?.dataValues.HPAmp,
 					},
 				};
 			},
@@ -2876,7 +2989,10 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f1: { value: 0 },
-					HealAmount: itemVariableValue('HealAmount', { item: ITEMS_BY_NAME.redemption, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }),
+					HealAmount: itemVariableValue('HealAmount', {
+						item: ITEMS_BY_NAME.redemption,
+						damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource,
+					}),
 				};
 			},
 			meta: {
@@ -2904,7 +3020,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					f1: { value: 0 },
 					DamageIncrease: {
-						value: MaxBonusDamagePercent * Math.min(target?.stats.value.bonus.hp ?? 0, MaxBonusHealth) / MaxBonusHealth * 100,
+						value: ((MaxBonusDamagePercent * Math.min(target?.stats.value.bonus.hp ?? 0, MaxBonusHealth)) / MaxBonusHealth) * 100,
 					},
 				};
 			},
@@ -2999,7 +3115,7 @@ export const ITEM_SPECIFICS = {
 			type: [VariableType.magic, VariableType.physical],
 			handler(value, meta) {
 				if (meta.critAdditionalDamage) {
-					const baseValue = (value - meta.critAdditionalDamage);
+					const baseValue = value - meta.critAdditionalDamage;
 					meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 - ITEMS_BY_NAME.randuinsOmen.dataValues?.PercentCritDamageReduction);
 					meta.critAdditionalDamage = baseValue * meta.critMultiplier;
 					return baseValue + meta.critAdditionalDamage;
@@ -3158,7 +3274,10 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f3: { value: 0 },
-					ShieldAmount: itemVariableValue('ShieldAmount', { item: ITEMS_BY_NAME.solariLocket, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }),
+					ShieldAmount: itemVariableValue('ShieldAmount', {
+						item: ITEMS_BY_NAME.solariLocket,
+						damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource,
+					}),
 				};
 			},
 			meta: {
@@ -3190,7 +3309,10 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f2: { value: 0 },
-					AmountToHeal: itemVariableValue('AmountToHeal', { item: ITEMS_BY_NAME.mikaelsBlessing, damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource }),
+					AmountToHeal: itemVariableValue('AmountToHeal', {
+						item: ITEMS_BY_NAME.mikaelsBlessing,
+						damageSource: { level: { value: self.internalItemData.value.aLevel } } as DamageSource,
+					}),
 				};
 			},
 			meta: {
@@ -3255,14 +3377,18 @@ export const ITEM_SPECIFICS = {
 				TotalDamage: [],
 			},
 			calculate(self, target) {
-				const apDamage = itemVariableValue('TooltipDamage', { item: ITEMS_BY_NAME.zazZakRealmspike, damageSource: self, isRanged: self.stats.value.isRanged });
+				const apDamage = itemVariableValue('TooltipDamage', {
+					item: ITEMS_BY_NAME.zazZakRealmspike,
+					damageSource: self,
+					isRanged: self.stats.value.isRanged,
+				});
 				const { PercentHPDamage } = ITEMS_BY_NAME?.zazZakRealmspike.dataValues ?? {};
 				return {
 					f4: { value: 0 },
 					f5: { value: 0 },
 					f6: { value: ITEMS_BY_NAME.zazZakRealmspike?.dataValues.StealthWardCap },
 					TotalDamage: {
-						value: apDamage.value as number + (target?.stats.value.total.hp ?? 0) * PercentHPDamage,
+						value: (apDamage.value as number) + (target?.stats.value.total.hp ?? 0) * PercentHPDamage,
 					},
 				};
 			},
@@ -3304,8 +3430,16 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					lolcalcChampRange: [
-						itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: false }),
-						itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.deathsDance, damageSource: self, isRanged: true }),
+						itemVariableValue('MeleeItemCalcValue', {
+							item: ITEMS_BY_NAME.deathsDance,
+							damageSource: self,
+							isRanged: false,
+						}),
+						itemVariableValue('RangedItemCalcValue', {
+							item: ITEMS_BY_NAME.deathsDance,
+							damageSource: self,
+							isRanged: true,
+						}),
 					],
 				};
 			},
@@ -3330,8 +3464,16 @@ export const ITEM_SPECIFICS = {
 				Heal: [],
 			},
 			calculate(self) {
-				const baseMelee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: false });
-				const baseRanged = itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.sunderedSky, damageSource: self, isRanged: true });
+				const baseMelee = itemVariableValue('MeleeItemCalcValue', {
+					item: ITEMS_BY_NAME.sunderedSky,
+					damageSource: self,
+					isRanged: false,
+				});
+				const baseRanged = itemVariableValue('RangedItemCalcValue', {
+					item: ITEMS_BY_NAME.sunderedSky,
+					damageSource: self,
+					isRanged: true,
+				});
 				const missingHp = Math.max(0, self.stats.value.total.hp - self.currentHealth.value);
 				const missingHpHeal = missingHp * ITEMS_BY_NAME.sunderedSky?.dataValues.MissingHealthHeal;
 
@@ -3339,7 +3481,7 @@ export const ITEM_SPECIFICS = {
 					f2: { value: 0 },
 					lolcalcChampRange: [baseMelee, baseRanged],
 					Heal: {
-						value: [baseMelee.value as number + missingHpHeal, baseRanged.value as number + missingHpHeal],
+						value: [(baseMelee.value as number) + missingHpHeal, (baseRanged.value as number) + missingHpHeal],
 					},
 				};
 			},
@@ -3398,26 +3540,26 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f2: {
-						value: self.stats.value.variables.dawncoreAp === undefined
-							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen
-							: self.stats.value.variables.dawncoreAp,
-						calculatesFrom: [{
-							stat: 'manaRegen',
-							type: 'base',
-							value: ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen / 100,
-							isPercentage: true,
-						}],
+						value: self.stats.value.variables.dawncoreAp === undefined ? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen : self.stats.value.variables.dawncoreAp,
+						calculatesFrom: [
+							{
+								stat: 'manaRegen',
+								type: 'base',
+								value: ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen / 100,
+								isPercentage: true,
+							},
+						],
 					},
 					f3: {
-						value: self.stats.value.variables.dawncoreHsp === undefined
-							? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen
-							: self.stats.value.variables.dawncoreHsp,
-						calculatesFrom: [{
-							stat: 'manaRegen',
-							type: 'base',
-							value: ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen,
-							isPercentage: true,
-						}],
+						value: self.stats.value.variables.dawncoreHsp === undefined ? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen : self.stats.value.variables.dawncoreHsp,
+						calculatesFrom: [
+							{
+								stat: 'manaRegen',
+								type: 'base',
+								value: ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen,
+								isPercentage: true,
+							},
+						],
 					},
 				};
 			},
@@ -3478,8 +3620,16 @@ export const ITEM_SPECIFICS = {
 				TotalBonusMS: [],
 			},
 			calculate(self) {
-				const melee = itemVariableValue('MeleeItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: false });
-				const ranged = itemVariableValue('RangedItemCalcValue', { item: ITEMS_BY_NAME.stridebreaker, damageSource: self, isRanged: true });
+				const melee = itemVariableValue('MeleeItemCalcValue', {
+					item: ITEMS_BY_NAME.stridebreaker,
+					damageSource: self,
+					isRanged: false,
+				});
+				const ranged = itemVariableValue('RangedItemCalcValue', {
+					item: ITEMS_BY_NAME.stridebreaker,
+					damageSource: self,
+					isRanged: true,
+				});
 
 				return {
 					lolcalcChampRange: [melee, ranged],
@@ -3513,7 +3663,7 @@ export const ITEM_SPECIFICS = {
 					const { sBShockwaveHits, sBShockwave } = self.internalItemData.value as IInternalItemDataOf<'stridebreaker'>;
 					const bonusMoveSpeed = ITEM_SPECIFICS[ITEM_NAME_TO_ID.stridebreaker].PASSIVE_BONUS_MS(sBShockwave);
 					if (!Number.isNaN(bonusMoveSpeed)) {
-						calculatedVariables.stridebreakerBonusMS = bonusMoveSpeed / 100 * sBShockwaveHits;
+						calculatedVariables.stridebreakerBonusMS = (bonusMoveSpeed / 100) * sBShockwaveHits;
 						calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.stridebreakerBonusMS;
 					}
 				},
@@ -3644,19 +3794,19 @@ export const ITEM_SPECIFICS = {
 				Damage: [],
 			},
 			calculate(self, target) {
-				const damage = itemVariableValue('DamageAmount', { item: ITEMS_BY_NAME.krakenSlayer, damageSource: self, isRanged: self.stats.value.isRanged });
+				const damage = itemVariableValue('DamageAmount', {
+					item: ITEMS_BY_NAME.krakenSlayer,
+					damageSource: self,
+					isRanged: self.stats.value.isRanged,
+				});
 				const maxMultiplier = (ITEMS_BY_NAME.krakenSlayer?.dataValues as any)[ITEMS_BY_NAME.krakenSlayer?.itemCalculations.MaximumDamage.mMultiplier.mDataValue!] ?? 1;
-				const targetMissingHpPercent = target
-					? target.currentHealth.value ? Math.max(0, target.stats.value.total.hp - target.currentHealth.value) / Math.max(target.stats.value.total.hp, 1) : 1
-					: 1;
+				const targetMissingHpPercent = target ? (target.currentHealth.value ? Math.max(0, target.stats.value.total.hp - target.currentHealth.value) / Math.max(target.stats.value.total.hp, 1) : 1) : 1;
 				const damageMultiplier = 1 + (maxMultiplier - 1) * targetMissingHpPercent;
 
 				return {
 					f2: { value: 0 },
 					Damage: {
-						value: Array.isArray(damage.value)
-							? [(damage.value as number[])[0]! * damageMultiplier, (damage.value as number[])[1]! * damageMultiplier]
-							: (damage.value as number * damageMultiplier),
+						value: Array.isArray(damage.value) ? [(damage.value as number[])[0]! * damageMultiplier, (damage.value as number[])[1]! * damageMultiplier] : (damage.value as number) * damageMultiplier,
 					},
 				};
 			},
@@ -3703,8 +3853,14 @@ export const ITEM_SPECIFICS = {
 				MaxHealthDamage: [],
 			},
 			calculate(_self, target) {
-				const meleeHpPercent = itemVariableValue('MaxHealthDamageCalc', { item: ITEMS_BY_NAME.eclipse, isRanged: false }).value as number;
-				const rangedHpPercent = itemVariableValue('MaxHealthDamageCalc', { item: ITEMS_BY_NAME.eclipse, isRanged: true }).value as number;
+				const meleeHpPercent = itemVariableValue('MaxHealthDamageCalc', {
+					item: ITEMS_BY_NAME.eclipse,
+					isRanged: false,
+				}).value as number;
+				const rangedHpPercent = itemVariableValue('MaxHealthDamageCalc', {
+					item: ITEMS_BY_NAME.eclipse,
+					isRanged: true,
+				}).value as number;
 
 				return {
 					f3: { value: 0 },
@@ -3770,10 +3926,7 @@ export const ITEM_SPECIFICS = {
 					f5: { value: 0 },
 					f6: { value: ITEMS_BY_NAME.bloodsong?.dataValues.StealthWardCap },
 					lolcalcChampRange: {
-						value: [
-							ITEMS_BY_NAME.bloodsong?.dataValues.MeleeDamageAmp,
-							ITEMS_BY_NAME.bloodsong?.dataValues.RangedDamageAmp,
-						],
+						value: [ITEMS_BY_NAME.bloodsong?.dataValues.MeleeDamageAmp, ITEMS_BY_NAME.bloodsong?.dataValues.RangedDamageAmp],
 					},
 				};
 			},
@@ -3815,7 +3968,7 @@ export const ITEM_SPECIFICS = {
 				return {
 					f1: { value: 0 },
 					PercentHPDamage: {
-						value: [currentHealth * PercentCurrentHPMelee / 100, currentHealth * PercentCurrentHPRanged / 100],
+						value: [(currentHealth * PercentCurrentHPMelee) / 100, (currentHealth * PercentCurrentHPRanged) / 100],
 					},
 				};
 			},
@@ -3830,7 +3983,10 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'voltaicCyclosword'>).firmanent) {
-						const value = itemVariableValue('LethalityBonusModMeleeRangedSplit', { item: ITEMS_BY_NAME.voltaicCyclosword, isRanged: isRanged ?? false });
+						const value = itemVariableValue('LethalityBonusModMeleeRangedSplit', {
+							item: ITEMS_BY_NAME.voltaicCyclosword,
+							isRanged: isRanged ?? false,
+						});
 						if (value.value === undefined) {
 							console.warn('[ITEM_SPECIFICS voltaicCyclosword] failed to calculate firmanent lethality', value);
 						} else {
@@ -3951,7 +4107,10 @@ export const ITEM_SPECIFICS = {
 			preItemTotal: {
 				handler(self, { isRanged }, { calculatedVariables }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'crimsonLucidity'>).noxianHaste) {
-						const moveSpeedPercent = itemVariableValue('MSAmount', { item: ITEMS_BY_NAME.crimsonLucidity, isRanged: isRanged ?? false });
+						const moveSpeedPercent = itemVariableValue('MSAmount', {
+							item: ITEMS_BY_NAME.crimsonLucidity,
+							isRanged: isRanged ?? false,
+						});
 						if (typeof moveSpeedPercent.value === 'number') {
 							calculatedVariables.crimsonLucidityMSPercent = moveSpeedPercent.value;
 							calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.crimsonLucidityMSPercent;
@@ -4061,10 +4220,7 @@ export const ITEM_SPECIFICS = {
 						const moveSpeedPercent = ITEMS_BY_NAME.mercurialScimitar?.dataValues.MoveSpeed;
 						if (typeof moveSpeedPercent === 'number') {
 							calculatedVariables.mercurialMSPercent = moveSpeedPercent;
-							calculatedVariables.totalMultiplicativeMoveSpeed = combineCompounding(
-								calculatedVariables.totalMultiplicativeMoveSpeed ?? 0,
-								calculatedVariables.mercurialMSPercent,
-							);
+							calculatedVariables.totalMultiplicativeMoveSpeed = combineCompounding(calculatedVariables.totalMultiplicativeMoveSpeed ?? 0, calculatedVariables.mercurialMSPercent);
 						} else {
 							console.warn('[ITEM_SPECIFICS mercurial scimitar] failed to calculate move speed', moveSpeedPercent);
 						}
@@ -4129,7 +4285,7 @@ export const ITEM_SPECIFICS = {
 		modifyVariable: {
 			type: [VariableType.magic, VariableType.true],
 			handler(value, meta, _self, damageTarget) {
-				if (!damageTarget || (Math.min(damageTarget.currentHealth.value, damageTarget.stats.value.total.hp) / (damageTarget.stats.value.total.hp || 1)) >= ITEMS_BY_NAME.shadowflame?.dataValues.HealthThreshold) {
+				if (!damageTarget || Math.min(damageTarget.currentHealth.value, damageTarget.stats.value.total.hp) / (damageTarget.stats.value.total.hp || 1) >= ITEMS_BY_NAME.shadowflame?.dataValues.HealthThreshold) {
 					return value;
 				}
 				meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
@@ -4144,7 +4300,7 @@ export const ITEM_SPECIFICS = {
 			handler(value, meta, self) {
 				// TODO probably should be done always, not just when IE is present but atm it's only for cinderbloom crit magic damage
 				if (meta.critAdditionalDamage) {
-					const statsCritMultiplier = (self.stats.value.total.critDamageMultiplier - self.stats.value.base.critDamageMultiplier);
+					const statsCritMultiplier = self.stats.value.total.critDamageMultiplier - self.stats.value.base.critDamageMultiplier;
 					meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 + statsCritMultiplier);
 					const additionalDamage = meta.critAdditionalDamage * statsCritMultiplier;
 					meta.critAdditionalDamage += additionalDamage;
@@ -4179,43 +4335,39 @@ export const ITEM_SPECIFICS = {
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
 export type IHypotheticalItemSpecifics = {
-	[K in keyof TItems]?: IItemSpecific<K>
+	[K in keyof TItems]?: IItemSpecific<K>;
 };
 
-export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGroupImageText & IProviderGroupInternalItemData & {
-	/**
-	 * whether to show the green dot that the item is active in the top right corner of the image
-	 * when array, the indicator dot will be split in half and colored based on the array 1/2 being trueish, useful for youmuu
-	 */
-	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
-	calculateHooks?: ICalculateChampionStatsHookSource;
-	variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, any, IChampionId, 'item'>;
-	effectOntoTargetVars?: IEffectOntoTargetVarsHook;
-	modifyVariable?: {
-		type: VariableType[];
-		handler: IItemModifyVariableFunction;
-		priority?: number;
-		/** if true, this modify variable function will be applied when the item is present on the `DamageSource.damageCalculationTarget` */
-		isTargetItem?: boolean;
+export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGroupImageText &
+	IProviderGroupInternalItemData & {
+		/**
+		 * whether to show the green dot that the item is active in the top right corner of the image
+		 * when array, the indicator dot will be split in half and colored based on the array 1/2 being trueish, useful for youmuu
+		 */
+		imgActive?: (internalData: any) => [number | boolean, number | boolean] | number | boolean;
+		calculateHooks?: ICalculateChampionStatsHookSource;
+		variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, any, IChampionId, 'item'>;
+		effectOntoTargetVars?: IEffectOntoTargetVarsHook;
+		modifyVariable?: {
+			type: VariableType[];
+			handler: IItemModifyVariableFunction;
+			priority?: number;
+			/** if true, this modify variable function will be applied when the item is present on the `DamageSource.damageCalculationTarget` */
+			isTargetItem?: boolean;
+		};
+		/**
+		 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)
+		 * ATM done only for textShop and textInventory, used for redemption, which by default shows `\@HealMin\@ - \@HealMax\@` that depends on ally level. Calculator gives an option to set ally's level to a concrete value so we should display the heal for selected ally level
+		 */
+		preplaceTextInventory?: (value: string) => string;
+		[key: string]: any;
 	};
-	/**
-	 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)
-	 * ATM done only for textShop and textInventory, used for redemption, which by default shows `\@HealMin\@ - \@HealMax\@` that depends on ally level. Calculator gives an option to set ally's level to a concrete value so we should display the heal for selected ally level
-	 */
-	preplaceTextInventory?: (value: string) => string;
-	[key: string]: any;
-};
 
 export interface IItemModifyVariableFunction {
 	(value: number, meta: IVariableModifyMeta, self: DamageSource, damageTarget?: DamageSource): number;
 }
 
-export function calculateItemDiscount(
-	itemId: string,
-	inventory: (IItem | undefined)[],
-	inComponent = false,
-	consumedInventoryIndexes: number[] = [],
-): number {
+export function calculateItemDiscount(itemId: string, inventory: (IItem | undefined)[], inComponent = false, consumedInventoryIndexes: number[] = []): number {
 	if (inComponent) {
 		const inventoryIndex = inventory.findIndex((item, i) => item?.id === itemId && !consumedInventoryIndexes.includes(i));
 		if (~inventoryIndex) {
@@ -4224,16 +4376,10 @@ export function calculateItemDiscount(
 		}
 	}
 
-	return (ITEMS[itemId]!.from || []).reduce((discount, componentId) =>
-		discount + calculateItemDiscount(componentId, inventory, true, consumedInventoryIndexes), 0);
+	return (ITEMS[itemId]!.from || []).reduce((discount, componentId) => discount + calculateItemDiscount(componentId, inventory, true, consumedInventoryIndexes), 0);
 }
 
-export function consumeItemComponents(
-	itemId: string,
-	inventory: (IItem | undefined)[],
-	consumedInventoryIndexes: number[] = [],
-	inComponent = false,
-): number[] {
+export function consumeItemComponents(itemId: string, inventory: (IItem | undefined)[], consumedInventoryIndexes: number[] = [], inComponent = false): number[] {
 	if (inComponent) {
 		const inventoryIndex = inventory.findIndex((item, i) => item?.id === itemId && !consumedInventoryIndexes.includes(i));
 		if (~inventoryIndex) {
@@ -4249,13 +4395,7 @@ export function consumeItemComponents(
 	return consumedInventoryIndexes;
 }
 
-export function itemBuyability(
-	item: IItem,
-	target: DamageSource | undefined,
-	consumeComponents = true,
-	transformBoots = false,
-	isMove = false,
-): IShopItem['buyability'] {
+export function itemBuyability(item: IItem, target: DamageSource | undefined, consumeComponents = true, transformBoots = false, isMove = false): IShopItem['buyability'] {
 	let buyability: IShopItem['buyability'] = 1;
 
 	if (!target) {
@@ -4266,14 +4406,14 @@ export function itemBuyability(
 
 	if (consumeComponents) {
 		const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value);
-		inventoryAfterBuying = target.items.value.map((item, index) => inventoryIndexesConsumedOnBuy.includes(index) ? undefined : item);
+		inventoryAfterBuying = target.items.value.map((item, index) => (inventoryIndexesConsumedOnBuy.includes(index) ? undefined : item));
 	}
 
 	if (
-		(target.champion.value && target.champion.value.id !== 'Jayce' && !target.stats.value.isRanged && (RANGED_ONLY_ITEMS as string[]).includes(item.id))
-		|| (!(transformBoots && isMove && item.isBoots) && inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
-		|| (!transformBoots && target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
-		|| (target.roleQuest.value !== 'support' && UPGRADED_SUPPORT_ITEMS.includes(item.id))
+		(target.champion.value && target.champion.value.id !== 'Jayce' && !target.stats.value.isRanged && (RANGED_ONLY_ITEMS as string[]).includes(item.id)) ||
+		(!(transformBoots && isMove && item.isBoots) && inventoryAfterBuying.some((boughtItem) => boughtItem && boughtItem.itemGroups?.some((group) => item.itemGroups?.includes(group)))) ||
+		(!transformBoots && target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7) ||
+		(target.roleQuest.value !== 'support' && UPGRADED_SUPPORT_ITEMS.includes(item.id))
 	) {
 		buyability = -1;
 	} else if (!isMove && inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5 && (target.roleQuest.value !== 'bot' || inventoryAfterBuying[6])) {

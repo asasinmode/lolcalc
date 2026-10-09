@@ -1,13 +1,22 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 
 export default {
 	calculateHooks: {
 		postTotal: {
 			handler(self, { bonusStats, championPassiveStats, totalStats, totalMultipliersStats }, { calculatedVariables }) {
-				const bonusAd = championAbilityVariableValue('BonusAD', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: { level: { value: self.level.value }, stats: { value: { bonus: bonusStats } } } as DamageSource });
+				const bonusAd = championAbilityVariableValue('BonusAD', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: {
+						level: { value: self.level.value },
+						stats: { value: { bonus: bonusStats } },
+					} as DamageSource,
+				});
 
 				if (typeof bonusAd.value === 'number') {
 					championPassiveStats.attackDamage = bonusAd.value;

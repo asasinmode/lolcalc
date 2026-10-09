@@ -1,8 +1,10 @@
-import type { IOverrides } from '@lolcalc/core/DamageSource';
-import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
 import assert from 'node:assert';
 import test from 'node:test';
+
+import type { IOverrides } from '@lolcalc/core/DamageSource';
+import type { IInternalDataOf, IInternalItemDataOf } from '@lolcalc/core/specifics';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+
 import fixture from '../fixtures/16.9.1.fixture.json' with { type: 'json' };
 import { setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -33,15 +35,19 @@ test('Ahri misc ap passives items', async (t) => {
 			} satisfies IInternalItemDataOf<'mejai' | 'blackfireTorch' | 'guinsoo'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 134,
-			abilityPower: 602,
-			armor: 92,
-			magicResist: 52,
-			attackSpeed: 1.327,
-			abilityHaste: 35,
-			moveSpeed: 413,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 134,
+				abilityPower: 602,
+				armor: 92,
+				magicResist: 52,
+				attackSpeed: 1.327,
+				abilityHaste: 35,
+				moveSpeed: 413,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 2873);
 	});
 
@@ -55,10 +61,14 @@ test('Ahri misc ap passives items', async (t) => {
 			} satisfies IInternalItemDataOf<'archangelsStaff' | 'blackfireTorch'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			abilityPower: 549,
-			abilityHaste: 60,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				abilityPower: 549,
+				abilityHaste: 60,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxAbilityResource.value, 2053);
 	});
 
@@ -71,10 +81,14 @@ test('Ahri misc ap passives items', async (t) => {
 			} satisfies IInternalItemDataOf<'blackfireTorch'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			abilityPower: 575,
-			abilityHaste: 60,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				abilityPower: 575,
+				abilityHaste: 60,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxAbilityResource.value, 2443);
 	});
 });
@@ -104,11 +118,15 @@ test('Ezreal tear items', async (t) => {
 			} satisfies IInternalItemDataOf<'archangelsStaff'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			abilityPower: 85,
-			attackSpeed: 0.938,
-			abilityHaste: 25,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				abilityPower: 85,
+				attackSpeed: 0.938,
+				abilityHaste: 25,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 675);
 		assert.equal(damageSource.maxAbilityResource.value, 995);
 	});
@@ -123,15 +141,19 @@ test('Ezreal tear items', async (t) => {
 			} satisfies IInternalItemDataOf<'manamune'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 133,
-			abilityPower: 109,
-			abilityHaste: 40,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 133,
+				abilityPower: 109,
+				abilityHaste: 40,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxAbilityResource.value, 1875);
 	});
 
-	await t.test('lvl 11 | seraph, muramana, winter\'s approach, gluttonous greaves', async () => {
+	await t.test("lvl 11 | seraph, muramana, winter's approach, gluttonous greaves", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
 			...sourceCommon,
 			level: 11,
@@ -144,14 +166,18 @@ test('Ezreal tear items', async (t) => {
 			} satisfies IInternalItemDataOf<'wintersApproach'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 198,
-			abilityPower: 129,
-			attackSpeed: 0.887,
-			abilityHaste: 55,
-			moveSpeed: 370,
-			omnivamp: 4,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 198,
+				abilityPower: 129,
+				attackSpeed: 0.887,
+				abilityHaste: 55,
+				moveSpeed: 370,
+				omnivamp: 4,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 2597);
 		assert.equal(damageSource.maxAbilityResource.value, 3501);
 	});
@@ -167,35 +193,43 @@ test('Ezreal tear items', async (t) => {
 			} satisfies IInternalItemDataOf<'whisperingCirclet' | 'gluttonousGreaves'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 214,
-			abilityPower: 145,
-			healShieldPower: 25,
-			manaRegen: 30,
-			omnivamp: 5,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 214,
+				abilityPower: 145,
+				healShieldPower: 25,
+				manaRegen: 30,
+				omnivamp: 5,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 2916);
 		assert.equal(damageSource.maxAbilityResource.value, 4293);
 	});
 
-	await t.test('lvl 11 | seraph, muramana, fimbulwinter, diadem of songs, overlord\'s bloodmail, gluttonous greaves', async () => {
+	await t.test("lvl 11 | seraph, muramana, fimbulwinter, diadem of songs, overlord's bloodmail, gluttonous greaves", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
 			...sourceCommon,
 			level: 11,
 			items: [ITEMS_BY_NAME.seraphsEmbrace, ITEMS_BY_NAME.muramana, ITEMS_BY_NAME.fimbulwinter, ITEMS_BY_NAME.diademOfSongs, ITEMS_BY_NAME.overlordsBloodmail, ITEMS_BY_NAME.gluttonousGreaves],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 315,
-			abilityPower: 150,
-			healShieldPower: 28,
-			manaRegen: 35,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 315,
+				abilityPower: 150,
+				healShieldPower: 28,
+				manaRegen: 35,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 3571);
 		assert.equal(damageSource.maxAbilityResource.value, 4989);
 	});
 
-	await t.test('lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, overlord\'s bloodmail, endless hunger, gluttonous greaves', async () => {
+	await t.test("lvl 18 | seraph, manamune, diadem of songs, fimbulwinter, overlord's bloodmail, endless hunger, gluttonous greaves", async () => {
 		const damageSource = await setupDamageSource(fixture, 'Ezreal', {
 			...sourceCommon,
 			level: 18,
@@ -209,20 +243,24 @@ test('Ezreal tear items', async (t) => {
 			} satisfies IInternalItemDataOf<'endlessHunger' | 'gluttonousGreaves'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 424,
-			abilityPower: 150,
-			armor: 95,
-			magicResist: 52,
-			attackSpeed: 1.203,
-			abilityHaste: 90,
-			moveSpeed: 370,
-			hpRegen: 15,
-			manaRegen: 51,
-			healShieldPower: 28,
-			omnivamp: 28,
-			tenacity: 20,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 424,
+				abilityPower: 150,
+				armor: 95,
+				magicResist: 52,
+				attackSpeed: 1.203,
+				abilityHaste: 90,
+				moveSpeed: 370,
+				hpRegen: 15,
+				manaRegen: 51,
+				healShieldPower: 28,
+				omnivamp: 28,
+				tenacity: 20,
+			},
+			damageSource,
+		);
 		assert.equal(damageSource.maxHealth.value, 4479);
 		assert.equal(damageSource.maxAbilityResource.value, 5565);
 	});

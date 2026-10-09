@@ -1,9 +1,10 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Syndra'>): number {
@@ -27,7 +28,11 @@ export default {
 			},
 			calculate(self) {
 				let f3 = Number.NaN;
-				const wUpgradeThreshold = championAbilityVariableValue('WUpgradeThreshold', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self });
+				const wUpgradeThreshold = championAbilityVariableValue('WUpgradeThreshold', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				});
 
 				if (typeof wUpgradeThreshold.value === 'number') {
 					f3 = self.internalData.value.passiveStacks >= wUpgradeThreshold.value ? 1 : 0;
@@ -36,7 +41,11 @@ export default {
 				}
 
 				return {
-					f2: championAbilityVariableValue('SlowDuration', { abilityKey: 'w', abilityVariant: self.champion.value!.abilities.w.variants[0]!, damageSource: self }),
+					f2: championAbilityVariableValue('SlowDuration', {
+						abilityKey: 'w',
+						abilityVariant: self.champion.value!.abilities.w.variants[0]!,
+						damageSource: self,
+					}),
 					f3: {
 						value: f3,
 					},

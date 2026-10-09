@@ -6,11 +6,7 @@ defineOptions({
 defineProps<{
 	id: string;
 	label: string;
-	items: [
-		text: string,
-		callback: () => unknown,
-		disabled?: boolean,
-	][];
+	items: [text: string, callback: () => unknown, disabled?: boolean][];
 }>();
 
 const trigger = useTemplateRef('trigger');
@@ -92,36 +88,11 @@ function selectOption(event: MouseEvent, callback: () => unknown) {
 </script>
 
 <template>
-	<button
-		v-bind="$attrs"
-		ref="trigger"
-		class="v-menu-trigger"
-		aria-haspopup="menu"
-		:aria-controls="`menu-${id}`"
-		:popovertarget="`menu-${id}`"
-		@keydown="onTriggerKeydown"
-	>
+	<button v-bind="$attrs" ref="trigger" class="v-menu-trigger" aria-haspopup="menu" :aria-controls="`menu-${id}`" :popovertarget="`menu-${id}`" @keydown="onTriggerKeydown">
 		<slot />
 	</button>
-	<div
-		:id="`menu-${id}`"
-		ref="menu"
-		class="v-menu"
-		popover="auto"
-		role="menu"
-		:aria-label="label"
-		@toggle="onMenuToggle"
-		@keydown="onMenuKeydown"
-		@focusout="onMenuFocusout"
-	>
-		<button
-			v-for="(item, index) in items"
-			:key="index"
-			role="menuitem"
-			tabindex="-1"
-			:disabled="item[2]"
-			@click="selectOption($event, item[1])"
-		>
+	<div :id="`menu-${id}`" ref="menu" class="v-menu" popover="auto" role="menu" :aria-label="label" @toggle="onMenuToggle" @keydown="onMenuKeydown" @focusout="onMenuFocusout">
+		<button v-for="(item, index) in items" :key="index" role="menuitem" tabindex="-1" :disabled="item[2]" @click="selectOption($event, item[1])">
 			{{ item[0] }}
 		</button>
 	</div>

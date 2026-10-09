@@ -2,33 +2,17 @@
 	"compilerOptions": {
 		"composite": true,
 		"target": "esnext",
-		"lib": [
-			"ESNext",
-			"DOM",
-			"DOM.Iterable"
-		],
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"rootDir": ".",
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"paths": {
-			"@lolcalc/core/*": [
-				"./packages/core/src/*"
-			],
-			"@lolcalc/data": [
-				"./packages/data/src/index.ts"
-			],
-			"@lolcalc/data/files/*": [
-				"./packages/data/files/*"
-			],
-			"@lolcalc/data/*": [
-				"./packages/data/src/*"
-			],
-			"@lolcalc/shared": [
-				"./packages/shared/src/index.ts"
-			],
-			"@lolcalc/shared/*": [
-				"./packages/shared/src/*"
-			]
+			"@lolcalc/core/*": ["./packages/core/src/*"],
+			"@lolcalc/data": ["./packages/data/src/index.ts"],
+			"@lolcalc/data/files/*": ["./packages/data/files/*"],
+			"@lolcalc/data/*": ["./packages/data/src/*"],
+			"@lolcalc/shared": ["./packages/shared/src/index.ts"],
+			"@lolcalc/shared/*": ["./packages/shared/src/*"]
 		},
 		"resolveJsonModule": true,
 		"types": ["node"],
@@ -44,13 +28,6 @@
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true
 	},
-	"include": [
-		"*.ts",
-		"packages",
-		"scripts"
-	],
-	"exclude": [
-		"node_modules",
-		"packages/website"
-	]
+	"include": ["*.ts", "packages", "scripts"],
+	"exclude": ["node_modules", "packages/website"]
 }

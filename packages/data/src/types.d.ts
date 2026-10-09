@@ -1,14 +1,15 @@
 import type { IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import type { UnionKeys } from '@lolcalc/shared/types';
+
 import type IChampionData from '../files/champion.json';
 import type TExampleChampion from '../files/champion/Ahri.json';
 import type IItemData from '../files/item.json';
 import type IMiscData from '../files/misc.json';
 import type IRuneData from '../files/rune.json';
 
-export type IDragonName = keyof typeof IMiscData['data']['dragons'];
+export type IDragonName = keyof (typeof IMiscData)['data']['dragons'];
 
-export type IItemStat = UnionKeys<(typeof IItemData)['data'][keyof typeof IItemData['data']]['stats']> | 'PercentOmnivampMod' | 'GP10';
+export type IItemStat = UnionKeys<(typeof IItemData)['data'][keyof (typeof IItemData)['data']]['stats']> | 'PercentOmnivampMod' | 'GP10';
 
 export interface IItem {
 	id: string;
@@ -34,11 +35,14 @@ export interface IItem {
 	isOnHit?: boolean;
 	dataValues?: Record<string, number>;
 	stringCalculations?: Record<string, Record<'MeleeResult' | 'RangedResult' | 'DefaultResult', string>>;
-	itemCalculations?: Record<string, {
-		mFormulaParts?: any[];
-		mDisplayAsPercent?: boolean;
-		[key: string]: any;
-	}>;
+	itemCalculations?: Record<
+		string,
+		{
+			mFormulaParts?: any[];
+			mDisplayAsPercent?: boolean;
+			[key: string]: any;
+		}
+	>;
 	effectAmount?: number[];
 }
 
@@ -57,9 +61,9 @@ export interface IShopItem {
 	srStatus: string;
 }
 
-export type IChampionId = keyof typeof IChampionData['data'];
+export type IChampionId = keyof (typeof IChampionData)['data'];
 
-export type IChampionStat = keyof typeof TExampleChampion['stats'];
+export type IChampionStat = keyof (typeof TExampleChampion)['stats'];
 
 export interface IChampion<T extends IChampionId = IChampionId> {
 	id: T;
@@ -117,12 +121,12 @@ export interface IChampionAbilityVariant {
 	isImmobilizing?: boolean;
 }
 
-type IDataShards = typeof IRuneData['data']['shards'];
-type IDataPaths = typeof IRuneData['data']['paths'];
+type IDataShards = (typeof IRuneData)['data']['shards'];
+type IDataPaths = (typeof IRuneData)['data']['paths'];
 
 export type IRuneShardSlotName = keyof IDataShards;
 export type IRuneShardSlotValue = {
-	[K in keyof IDataShards]: keyof IDataShards[K]
+	[K in keyof IDataShards]: keyof IDataShards[K];
 }[keyof IDataShards];
 export type IRunePathName = keyof IDataPaths;
 export type IRuneSlotName = UnionKeys<IDataPaths[IRunePathName]['slots'][number]>;
@@ -156,8 +160,8 @@ export interface IRunes {
 	paths: Record<IRunePathName, IRunePath>;
 	shards: {
 		[S in IRuneShardSlotName]: {
-			[V in keyof IDataShards[S]]: IRuneShard
-		}
+			[V in keyof IDataShards[S]]: IRuneShard;
+		};
 	};
 }
 

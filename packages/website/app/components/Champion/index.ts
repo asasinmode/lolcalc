@@ -1,12 +1,13 @@
-import type { IChampionId } from '@lolcalc/data/types';
-import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEMS_BY_NAME } from '@lolcalc/data/index';
+import type { IChampionId } from '@lolcalc/data/types';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+
 import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
+import type { ISpecificComponents } from '~/utils/types';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	TargetDummy: {
@@ -15,9 +16,17 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Akali: {
 		extras: [
 			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (towards/after crossing the ring)', false),
-			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'passiveRangeSnapshot', 'is passive range active (after crossing the ring)', false, undefined, `Under the hood Akali's passive snapshots the attack range at the moment of crossing the ring, then grants it as bonus (which for example makes ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rfc))} ${ITEMS_BY_NAME.rfc?.name}'s Sharpshooter apply twice)`, {
-				effectControlsProps: CHAMPION_SPECIFICS.Akali.passive.extraControls,
-			}),
+			await booleanExtra(
+				GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0),
+				'passiveRangeSnapshot',
+				'is passive range active (after crossing the ring)',
+				false,
+				undefined,
+				`Under the hood Akali's passive snapshots the attack range at the moment of crossing the ring, then grants it as bonus (which for example makes ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rfc))} ${ITEMS_BY_NAME.rfc?.name}'s Sharpshooter apply twice)`,
+				{
+					effectControlsProps: CHAMPION_SPECIFICS.Akali.passive.extraControls,
+				},
+			),
 		],
 	},
 	Akshan: {
@@ -72,7 +81,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Spell Force stacks', 0, CHAMPION_SPECIFICS.Ezreal.passive.maxStacks),
 	},
 	Fiora: {
-		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Fiora', 'passive', 0), 'passiveMSProgress', 'Duelist\'s Dance move speed', CHAMPION_SPECIFICS.Fiora.passive.bonusMS),
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Fiora', 'passive', 0), 'passiveMSProgress', "Duelist's Dance move speed", CHAMPION_SPECIFICS.Fiora.passive.bonusMS),
 	},
 	Gangplank: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Gangplank', 'passive', 0), 'isPassiveMSActive', 'is passive MS active', false),
@@ -116,7 +125,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		],
 	},
 	Kayn: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0), 'form', 'Form', Object.entries(CHAMPION_SPECIFICS.Kayn.passive.formOptions).map(([key, value]) => [value, key])),
+		extras: await enumExtra(
+			GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0),
+			'form',
+			'Form',
+			Object.entries(CHAMPION_SPECIFICS.Kayn.passive.formOptions).map(([key, value]) => [value, key]),
+		),
 	},
 	Kindred: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
@@ -144,7 +158,10 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Naafiri', 'passive', 0), 'passiveStacks', 'Packmates', 0, CHAMPION_SPECIFICS.Naafiri.passive.maxStacks),
 	},
 	Nami: {
-		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.derivedMS, { effectControlsProps: CHAMPION_SPECIFICS.Nami.passive.effectControls, derivedSymbolSuffix: '' }),
+		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.derivedMS, {
+			effectControlsProps: CHAMPION_SPECIFICS.Nami.passive.effectControls,
+			derivedSymbolSuffix: '',
+		}),
 	},
 	Nasus: {
 		extras: await progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither on target', CHAMPION_SPECIFICS.Nasus.w.derivedSlow),
@@ -183,7 +200,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rumble', 'passive', 0), 'isOverheated', 'is overheated', false),
 	},
 	Samira: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Samira', 'passive', 0), 'passiveStacks', 'Grade', Object.entries(CHAMPION_SPECIFICS.Samira.passive.styleOptions).map(([grade, value]) => [value, value ? grade.toUpperCase() : grade])),
+		extras: await enumExtra(
+			GameAbilityId.build(AbilityType.champion, 'Samira', 'passive', 0),
+			'passiveStacks',
+			'Grade',
+			Object.entries(CHAMPION_SPECIFICS.Samira.passive.styleOptions).map(([grade, value]) => [value, value ? grade.toUpperCase() : grade]),
+		),
 	},
 	Sejuani: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Sejuani', 'passive', 0), 'isPassiveActive', 'is Fury of the North active', false),
@@ -191,7 +213,14 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Senna: {
 		extras: [
 			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStacks', 'Absolution stacks'),
-			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStealTargetMS', 'grant % of attacked target\'s move speed', false, undefined, 'the move speed will be shown in the results table (needs target)'),
+			await booleanExtra(
+				GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0),
+				'passiveStealTargetMS',
+				"grant % of attacked target's move speed",
+				false,
+				undefined,
+				'the move speed will be shown in the results table (needs target)',
+			),
 		],
 	},
 	Seraphine: {
@@ -240,7 +269,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Udyr', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},
 	Varus: {
-		extras: await enumExtra(GameAbilityId.build(AbilityType.champion, 'Varus', 'passive', 0), 'passiveVariantActive', 'passive buff from enemy', Object.entries(CHAMPION_SPECIFICS.Varus.passive.options).map(([key, value]) => [value, key])),
+		extras: await enumExtra(
+			GameAbilityId.build(AbilityType.champion, 'Varus', 'passive', 0),
+			'passiveVariantActive',
+			'passive buff from enemy',
+			Object.entries(CHAMPION_SPECIFICS.Varus.passive.options).map(([key, value]) => [value, key]),
+		),
 	},
 	Vayne: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Vayne', 'passive', 0), 'isPassiveMSActive', 'is moving towards enemy', false),
@@ -258,10 +292,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'MonkeyKing', 'passive', 0), 'passiveStacks', 'Stone Skin stacks', 0, CHAMPION_SPECIFICS.MonkeyKing.passive.maxStacks),
 	},
 	Zeri: {
-		extras: [
-			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rActive', 'is active', false),
-			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rStacks', 'Overdrive stacks'),
-		],
+		extras: [await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rActive', 'is active', false), await numberExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rStacks', 'Overdrive stacks')],
 	},
 	Zaahen: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Zaahen', 'passive', 0), 'passiveStacks', 'Determination stacks', 0, CHAMPION_SPECIFICS.Zaahen.passive.maxStacks),
@@ -274,29 +305,34 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue = 0, maxValue = 1, enumOptions, deriveProgressValue } = effectSpecific;
 
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
-			??= enumOptions
-				? await enumExtra(abilityId, 0, label, Object.entries(enumOptions).map(([key, value]) => [value, key]), {
+		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= enumOptions
+			? await enumExtra(
+					abilityId,
+					0,
+					label,
+					Object.entries(enumOptions).map(([key, value]) => [value, key]),
+					{
 						selectEffectSourceProps: effectSpecific.sourceControls,
+					},
+				)
+			: deriveProgressValue
+				? await progressExtra(abilityId, 0, label, deriveProgressValue, {
+						selectEffectSourceProps: effectSpecific.sourceControls,
+						effectControlsProps: effectSpecific.effectControls,
+						derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
+						onUpdate: effectSpecific.onValueUpdate,
 					})
-				: deriveProgressValue
-					? await progressExtra(abilityId, 0, label, deriveProgressValue, {
-							selectEffectSourceProps: effectSpecific.sourceControls,
+				: maxValue !== 1
+					? await numberExtra(abilityId, 0, label, minValue, maxValue, undefined, {
 							effectControlsProps: effectSpecific.effectControls,
-							derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
-							onUpdate: effectSpecific.onValueUpdate,
+							selectEffectSourceProps: effectSpecific.sourceControls,
 						})
-					: maxValue !== 1
-						? await numberExtra(abilityId, 0, label, minValue, maxValue, undefined, {
-								effectControlsProps: effectSpecific.effectControls,
-								selectEffectSourceProps: effectSpecific.sourceControls,
-							})
-						: await booleanExtra(abilityId, 0, label, false);
+					: await booleanExtra(abilityId, 0, label, false);
 	}
 }
 
 for (const key in CHAMPION_COMPONENTS) {
 	const { extras, effects } = CHAMPION_COMPONENTS[key as keyof typeof CHAMPION_COMPONENTS]!;
-	extras && (Array.isArray(extras) ? extras.forEach(component => markRaw(component)) : markRaw(extras));
-	effects && (Array.isArray(effects) ? effects.forEach(component => markRaw(component)) : markRaw(effects));
+	extras && (Array.isArray(extras) ? extras.forEach((component) => markRaw(component)) : markRaw(extras));
+	effects && (Array.isArray(effects) ? effects.forEach((component) => markRaw(component)) : markRaw(effects));
 }

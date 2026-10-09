@@ -1,11 +1,11 @@
-<!-- eslint-disable vue/no-mutating-props -->
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type { ALL_CHAMPION_STATS, IChampionStatName, IChampionStats } from '@lolcalc/shared';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
+import type { ALL_CHAMPION_STATS, IChampionStatName, IChampionStats } from '@lolcalc/shared';
 import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
+
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
 
@@ -17,9 +17,9 @@ const { vMinor } = PATCH_VERSION;
 
 const { damageSources, damageTargets } = useCalculatorState();
 
-const MODIFIABLE_CHAMPION_STATS = Object.fromEntries(ALL_CHAMPION_STATS_ENTRIES.filter(([statName]) =>
-	!(['summonerHaste', 'ultimateHaste', 'basicHaste', 'immobilizingHaste'] as IChampionStatName[]).includes(statName),
-)) as unknown as typeof ALL_CHAMPION_STATS;
+const MODIFIABLE_CHAMPION_STATS = Object.fromEntries(
+	ALL_CHAMPION_STATS_ENTRIES.filter(([statName]) => !(['summonerHaste', 'ultimateHaste', 'basicHaste', 'immobilizingHaste'] as IChampionStatName[]).includes(statName)),
+) as unknown as typeof ALL_CHAMPION_STATS;
 const ALL_MODFIABLE_CHAMPION_STATS = Object.keys(MODIFIABLE_CHAMPION_STATS);
 const MODIFIABLE_CHAMPION_STAT_ENTRIES = Object.entries(MODIFIABLE_CHAMPION_STATS) as unknown as typeof ALL_CHAMPION_STATS_ENTRIES;
 
@@ -31,53 +31,40 @@ function statImage(statName: IChampionStatName) {
 				width: 20,
 				height: 20,
 			}
-		:	{
+		: {
 				src: icon[0],
 				width: icon[1],
 				height: icon[2] ?? icon[1],
 			};
 }
 
-const statInputs = MODIFIABLE_CHAMPION_STAT_ENTRIES.map(([statName, statMeta]): {
-	name: string;
-	label: string;
-	onInput: (event: Event) => void;
-} => {
-	return {
-		name: statMeta.name,
-		label: statMeta.isPercentage && !statMeta.name.startsWith('Percent') ? ' %' : '',
-		onInput: useNumberInput(
-			[props.damageSource.internalData as Ref<IChampionStats>, statName as IChampionStatName],
-			Boolean(!statMeta.decimal || statMeta.isPercentage),
-		),
-	};
-});
+const statInputs = MODIFIABLE_CHAMPION_STAT_ENTRIES.map(
+	([statName, statMeta]): {
+		name: string;
+		label: string;
+		onInput: (event: Event) => void;
+	} => {
+		return {
+			name: statMeta.name,
+			label: statMeta.isPercentage && !statMeta.name.startsWith('Percent') ? ' %' : '',
+			onInput: useNumberInput([props.damageSource.internalData as Ref<IChampionStats>, statName as IChampionStatName], Boolean(!statMeta.decimal || statMeta.isPercentage)),
+		};
+	},
+);
 
 onMounted(() => {
 	for (const statName of ALL_MODFIABLE_CHAMPION_STATS) {
-		updateStat(
-			undefined,
-			props.damageSource.internalData.value[statName],
-			el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement,
-		);
+		updateStat(undefined, props.damageSource.internalData.value[statName], el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement);
 	}
 });
 
 function reset(event: MouseEvent, statName: IChampionStatName) {
-	updateStat(
-		statName,
-		props.damageSource.stats.value.initial[statName] * (CHAMPION_STAT_META[statName] ? 100 : 1),
-		(event.currentTarget as HTMLElement).previousElementSibling as HTMLInputElement,
-	);
+	updateStat(statName, props.damageSource.stats.value.initial[statName] * (CHAMPION_STAT_META[statName] ? 100 : 1), (event.currentTarget as HTMLElement).previousElementSibling as HTMLInputElement);
 }
 
 function resetAll() {
 	for (const [statName, statMeta] of MODIFIABLE_CHAMPION_STAT_ENTRIES) {
-		updateStat(
-			statName as IChampionStatName,
-			props.damageSource.stats.value.initial[statName as IChampionStatName] * (statMeta.isPercentage ? 100 : 1),
-			el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement,
-		);
+		updateStat(statName as IChampionStatName, props.damageSource.stats.value.initial[statName as IChampionStatName] * (statMeta.isPercentage ? 100 : 1), el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement);
 	}
 }
 
@@ -94,11 +81,15 @@ const copyStatsFrom = ref('');
 const sourceOptions = computed(() => transformToOptions(damageSources.value));
 const targetOptions = computed(() => transformToOptions(damageTargets.value));
 
-watch(() => sourceOptions.value.length || targetOptions.value.length, (value) => {
-	if (!value) {
-		copyStatsFrom.value = '';
-	}
-}, { immediate: true });
+watch(
+	() => sourceOptions.value.length || targetOptions.value.length,
+	(value) => {
+		if (!value) {
+			copyStatsFrom.value = '';
+		}
+	},
+	{ immediate: true },
+);
 
 function copyFrom(event: SubmitEvent) {
 	const copyFromId = new FormData(event.target as HTMLFormElement).get('fromId')! as string;
@@ -110,18 +101,14 @@ function copyFrom(event: SubmitEvent) {
 		stats = 'baseOnLevel';
 	}
 
-	const source = damageSources.value.find(source => source.id === copyFromId) ?? damageTargets.value.find(source => source.id === copyFromId);
+	const source = damageSources.value.find((source) => source.id === copyFromId) ?? damageTargets.value.find((source) => source.id === copyFromId);
 	if (!source) {
 		console.warn(`no damage source with id ${copyFromId} found`);
 		return;
 	}
 
 	for (const statName of MODIFIABLE_CHAMPION_STATS) {
-		updateStat(
-			statName as IChampionStatName,
-			formatChampionStatValue(statName, source.stats.value[stats][statName]),
-			el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement,
-		);
+		updateStat(statName as IChampionStatName, formatChampionStatValue(statName, source.stats.value[stats][statName]), el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement);
 	}
 }
 
@@ -140,82 +127,28 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 	<article ref="el" class="extras-target-dummy-stats">
 		<header>
 			<form @submit.prevent="copyFrom">
-				<label :for="`copy-from-${idSuffix}`">
-					copy from
-				</label>
-				<select
-					:id="`copy-from-${idSuffix}`"
-					v-model="copyStatsFrom"
-					name="fromId"
-					:disabled="!(sourceOptions.length || targetOptions.length)"
-				>
-					<option v-if="!(sourceOptions.length || targetOptions.length)" value="">
-						no valid targets
-					</option>
+				<label :for="`copy-from-${idSuffix}`"> copy from </label>
+				<select :id="`copy-from-${idSuffix}`" v-model="copyStatsFrom" name="fromId" :disabled="!(sourceOptions.length || targetOptions.length)">
+					<option v-if="!(sourceOptions.length || targetOptions.length)" value="">no valid targets</option>
 					<optgroup v-if="sourceOptions.length" label="sources">
-						<option
-							v-for="[sourceId, sourceIndex, championName] in sourceOptions"
-							:key="sourceId"
-							:value="sourceId"
-						>
-							({{ sourceIndex + 1 }}) {{ championName }}
-						</option>
+						<option v-for="[sourceId, sourceIndex, championName] in sourceOptions" :key="sourceId" :value="sourceId">({{ sourceIndex + 1 }}) {{ championName }}</option>
 					</optgroup>
 					<optgroup v-if="targetOptions.length" label="targets">
-						<option
-							v-for="[sourceId, sourceIndex, championName] in targetOptions"
-							:key="sourceId"
-							:value="sourceId"
-						>
-							({{ sourceIndex + 1 }}) {{ championName }}
-						</option>
+						<option v-for="[sourceId, sourceIndex, championName] in targetOptions" :key="sourceId" :value="sourceId">({{ sourceIndex + 1 }}) {{ championName }}</option>
 					</optgroup>
 				</select>
-				<button
-					:disabled="!copyStatsFrom"
-					class="pretend-ui-btn"
-					type="submit"
-					data-value="baseOnLevel"
-					title="set to base stats"
-				>
-					base
-				</button>
-				<button
-					:disabled="!copyStatsFrom"
-					class="pretend-ui-btn"
-					type="submit"
-					data-value="total"
-					title="set to total stats"
-				>
-					total
-				</button>
+				<button :disabled="!copyStatsFrom" class="pretend-ui-btn" type="submit" data-value="baseOnLevel" title="set to base stats">base</button>
+				<button :disabled="!copyStatsFrom" class="pretend-ui-btn" type="submit" data-value="total" title="set to total stats">total</button>
 			</form>
-			<button
-				class="pretend-ui-btn remove"
-				@click="resetAll"
-			>
-				reset all
-			</button>
+			<button class="pretend-ui-btn remove" @click="resetAll">reset all</button>
 		</header>
-		<div
-			v-for="([statName, statMeta], statIndex) in MODIFIABLE_CHAMPION_STAT_ENTRIES"
-			:key="statName"
-		>
+		<div v-for="([statName, statMeta], statIndex) in MODIFIABLE_CHAMPION_STAT_ENTRIES" :key="statName">
 			<label :for="`${statName}-${idSuffix}`" :title="`${statInputs[statIndex]!.name}${statInputs[statIndex]!.label}`">
-				<img
-					v-bind="statImage(statName)"
-					loading="lazy"
-				>
+				<img v-bind="statImage(statName)" loading="lazy" />
 				<span>{{ statInputs[statIndex]!.name }}</span>
 				{{ statInputs[statIndex]!.label }}
 			</label>
-			<input
-				:id="`${statName}-${idSuffix}`"
-				type="number"
-				min="0"
-				:step="statMeta.decimal && !statMeta.isPercentage ? 0.01 : 1"
-				@input="statInputs[statIndex]!.onInput"
-			>
+			<input :id="`${statName}-${idSuffix}`" type="number" min="0" :step="statMeta.decimal && !statMeta.isPercentage ? 0.01 : 1" @input="statInputs[statIndex]!.onInput" />
 			<button class="pretend-ui-btn" @click="reset($event, statName)">
 				<span>reset</span>
 			</button>

@@ -1,7 +1,8 @@
-import type INidalee from '@lolcalc/data/files/champion/Nidalee.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type INidalee from '@lolcalc/data/files/champion/Nidalee.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 const passiveShapeshiftOptions = {
@@ -32,7 +33,13 @@ export default {
 				HuntingPercentMS: [],
 			},
 			calculate(self) {
-				const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
+				const msVariable = championAbilityVariableValue('PassivePercentMS', {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					abilityLevel: self.abilityLevels.value.r,
+					damageSource: self,
+				});
 				(msVariable.value as number) *= 3;
 
 				return {
@@ -67,7 +74,13 @@ export default {
 					return;
 				}
 
-				const msVariable = championAbilityVariableValue('PassivePercentMS', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, abilityLevel: self.abilityLevels.value.r, damageSource: self });
+				const msVariable = championAbilityVariableValue('PassivePercentMS', {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					abilityLevel: self.abilityLevels.value.r,
+					damageSource: self,
+				});
 				let bonusMS = 0;
 
 				if (typeof msVariable.value === 'number') {

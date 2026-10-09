@@ -19,18 +19,8 @@ const value = defineModel<number>();
 
 <template>
 	<article class="calc-extra-boolean" :data-inactive="inactive || undefined">
-		<img
-			v-bind="gameImageAttrs(imgSrc, 56)"
-			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event)"
-		>
-		<input
-			:id="`xtrbln-${idSuffix}`"
-			v-model="value"
-			type="checkbox"
-			:true-value="1"
-			:false-value="0"
-		>
+		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
+		<input :id="`xtrbln-${idSuffix}`" v-model="value" type="checkbox" :true-value="1" :false-value="0" />
 		<label :for="`xtrbln-${idSuffix}`">
 			{{ labelPrefixApply ? 'apply ' : '' }}{{ label }}
 			<InfoTooltip id-prefix="xtrbln" :id-suffix :tooltip />

@@ -1,5 +1,4 @@
-<script setup vapor lang="ts">
-</script>
+<script setup vapor lang="ts"></script>
 
 <template>
 	<span class="icon" aria-hidden="true" />

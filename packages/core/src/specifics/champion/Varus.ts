@@ -1,9 +1,10 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IVarus from '@lolcalc/data/files/champion/Varus.json';
+import { clamp } from '@lolcalc/shared/utils.ts';
+
 import type { IChampionSpecific } from '../champion.ts';
 import type { IVariableValueResult } from '../index.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
-import { clamp } from '@lolcalc/shared/utils.ts';
 import { defineChampionVariables } from './shared.ts';
 
 const passiveOptions = {
@@ -28,7 +29,11 @@ export default {
 		onChampionPassive: {
 			handler(self, { championPassiveStats }, { calculatedVariables }) {
 				const { passiveVariantActive } = self.internalData.value;
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 
 				let bonusAS: IVariableValueResult | undefined;
 
@@ -57,7 +62,11 @@ export default {
 		onTotalPreMultipliers: {
 			handler(self, { bonusStats, totalPreMultipliersStats, championPassiveStats, itemPassivesStats, itemTotalStats }, { calculatedVariables }) {
 				const { passiveVariantActive } = self.internalData.value;
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 
 				let asToAD: IVariableValueResult | undefined;
 				let asToAP: IVariableValueResult | undefined;
@@ -70,7 +79,7 @@ export default {
 					asToAP = championAbilityVariableValue('AStoAPMinion', passiveParams);
 				}
 
-				const bonusASPercent = (bonusStats.bonusAttackSpeedPercent - (championPassiveStats.bonusAttackSpeedPercent ?? 0));
+				const bonusASPercent = bonusStats.bonusAttackSpeedPercent - (championPassiveStats.bonusAttackSpeedPercent ?? 0);
 				if (asToAD) {
 					if (typeof asToAD.value === 'number') {
 						const value = asToAD.value * bonusASPercent;

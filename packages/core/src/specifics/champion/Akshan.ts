@@ -1,17 +1,25 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IAkshan from '@lolcalc/data/files/champion/Akshan.json';
 import type { IChampion } from '@lolcalc/data/types.js';
-import type { IChampionSpecific } from '../champion.ts';
-import type { IDeriveProgressFn } from '../index.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
+import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function calculatePassiveMS(champion: IChampion, progress: number, level: number, bonusAttackSpeedPercent: number): number {
-	const ms = championAbilityVariableValue('ASModdedMS', { abilityKey: 'passive', abilityVariant: champion.abilities.passive.variants[0]!, damageSource: { level: { value: level }, stats: { value: { bonus: { bonusAttackSpeedPercent } } } } as DamageSource });
+	const ms = championAbilityVariableValue('ASModdedMS', {
+		abilityKey: 'passive',
+		abilityVariant: champion.abilities.passive.variants[0]!,
+		damageSource: {
+			level: { value: level },
+			stats: { value: { bonus: { bonusAttackSpeedPercent } } },
+		} as DamageSource,
+	});
 	if (typeof ms.value === 'number') {
-		return ms.value * progress / 100;
+		return (ms.value * progress) / 100;
 	}
 	console.warn('[CHAMPION_SPECIFICS akshan] failed to calculate passive ms', ms);
 	return Number.NaN;
@@ -39,7 +47,7 @@ export default {
 			uninteresting: ['HasteDuration', 'ShieldDuration', 'SecondAutoCritRatio'],
 		}),
 		derivedMS: ((progress, self): number => {
-			return (self?.stats.value.championPassive.moveSpeed ?? calculatePassiveMS(self.champion.value!, progress, self.level.value, self.stats.value.bonus.bonusAttackSpeedPercent));
+			return self?.stats.value.championPassive.moveSpeed ?? calculatePassiveMS(self.champion.value!, progress, self.level.value, self.stats.value.bonus.bonusAttackSpeedPercent);
 		}) satisfies IDeriveProgressFn,
 		calculateSlow: calculatePassiveMS,
 	},

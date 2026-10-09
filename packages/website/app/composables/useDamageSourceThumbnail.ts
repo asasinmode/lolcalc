@@ -1,25 +1,34 @@
-import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
+import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { CHAMPION_IMAGES, imgUrl, RUNES, TEXT } from '@lolcalc/data';
 
 function DamageSourceThumbnail() {
-	return h('div', {
-		'class': 'damage-source-thumbnail',
-		'inert': true,
-		'aria-hidden': 'true',
-	}, [
-		h('span', h('img')),
-		h('span'),
-		h('div', [
-			h('img', { class: 'primary-path-keystone' }),
-			h('span', { class: 'secondary-path' }),
-		]),
-		h('ul', Array.from({ length: 7 }, (_, i) =>
-			h('li', {
-				key: i + 1,
-				style: i === 6 ? 'display: none;' : undefined,
-			}, h('img')))),
-	]);
+	return h(
+		'div',
+		{
+			class: 'damage-source-thumbnail',
+			inert: true,
+			'aria-hidden': 'true',
+		},
+		[
+			h('span', h('img')),
+			h('span'),
+			h('div', [h('img', { class: 'primary-path-keystone' }), h('span', { class: 'secondary-path' })]),
+			h(
+				'ul',
+				Array.from({ length: 7 }, (_, i) =>
+					h(
+						'li',
+						{
+							key: i + 1,
+							style: i === 6 ? 'display: none;' : undefined,
+						},
+						h('img'),
+					),
+				),
+			),
+		],
+	);
 }
 
 export function useDamageSourceThumbnail() {

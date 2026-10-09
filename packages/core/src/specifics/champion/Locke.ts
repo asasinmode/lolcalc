@@ -1,8 +1,9 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type ILocke from '@lolcalc/data/files/champion/Locke.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type ILocke from '@lolcalc/data/files/champion/Locke.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -12,7 +13,11 @@ export default {
 				OnHitDamage: [],
 			},
 			calculate(self, target) {
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 				const minDamage = championAbilityVariableValue('MinOnHitDamage', passiveParams);
 				const maxDamage = championAbilityVariableValue('MaxOnHitDamage', passiveParams);
 				let OnHitDamage = 0;
@@ -20,7 +25,7 @@ export default {
 				if (typeof minDamage.value === 'number' && typeof maxDamage.value === 'number') {
 					/** not saved in an actual variable? */
 					const maxThreshold = 0.3;
-					const targetPercentHealth = target ? (Math.min(target.currentHealth.value, target.stats.value.total.hp) / target.stats.value.total.hp || 1) : 0;
+					const targetPercentHealth = target ? Math.min(target.currentHealth.value, target.stats.value.total.hp) / target.stats.value.total.hp || 1 : 0;
 					const damagePercent = Math.max(0, Math.min(1, (1 - targetPercentHealth) / (1 - maxThreshold)));
 					OnHitDamage = minDamage.value + (maxDamage.value - minDamage.value) * damagePercent;
 				}

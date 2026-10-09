@@ -1,11 +1,14 @@
-<!-- eslint-disable vue/no-mutating-props -->
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 
 const props = defineProps<{
 	idSuffix: string;
 	value: DamageSource<'Kled'>;
-	healthResourceSliderEvents: (target: Ref<number>, max: Ref<number>, element: Ref<HTMLElement | null>) => {
+	healthResourceSliderEvents: (
+		target: Ref<number>,
+		max: Ref<number>,
+		element: Ref<HTMLElement | null>,
+	) => {
 		onMousedown: (e: MouseEvent) => void;
 		onTouchstart: (e: TouchEvent) => void;
 		dragValueRef: Ref<number>;
@@ -35,57 +38,21 @@ const skaarlCurrentHp = computed<number>({
 });
 
 const kledBarEl = useTemplateRef('kledBar');
-const {
-	onMousedown: kledOnMousedown,
-	onTouchstart: kledOnTouchdown,
-	dragValueRef: kledDragValueRef,
-} = props.healthResourceSliderEvents(kledCurrentHp, kledMaxHP, kledBarEl);
+const { onMousedown: kledOnMousedown, onTouchstart: kledOnTouchdown, dragValueRef: kledDragValueRef } = props.healthResourceSliderEvents(kledCurrentHp, kledMaxHP, kledBarEl);
 const skaarlBarEl = useTemplateRef('skaarlBar');
-const {
-	onMousedown: skaarlOnMousedown,
-	onTouchstart: skaarlOnTouchdown,
-	dragValueRef: skaarlDragValueRef,
-} = props.healthResourceSliderEvents(skaarlCurrentHp, skaarlMaxHP, skaarlBarEl);
+const { onMousedown: skaarlOnMousedown, onTouchstart: skaarlOnTouchdown, dragValueRef: skaarlDragValueRef } = props.healthResourceSliderEvents(skaarlCurrentHp, skaarlMaxHP, skaarlBarEl);
 </script>
 
 <template>
-	<div class="current-health" :style="`--kled-bar-w-percent: ${(kledMaxHP / value.stats.value.total.hp * 100).toFixed(4)}%;`">
-		<div
-			ref="kledBar"
-			:style="`--fill-percentage: ${Math.min(kledDragValueRef / kledMaxHP, 1)}`"
-			@mousedown="kledOnMousedown"
-			@touchstart="kledOnTouchdown"
-		>
-			<label :for="`${idSuffix}-current-ability-health-kled`">
-				Kled health
-			</label>
-			<input
-				:id="`${idSuffix}-current-ability-health`"
-				:value="Math.round(kledDragValueRef)"
-				min="0"
-				:max="value.maxHealth.value"
-				type="number"
-				@input="updateChampionHealth"
-			>
+	<div class="current-health" :style="`--kled-bar-w-percent: ${((kledMaxHP / value.stats.value.total.hp) * 100).toFixed(4)}%;`">
+		<div ref="kledBar" :style="`--fill-percentage: ${Math.min(kledDragValueRef / kledMaxHP, 1)}`" @mousedown="kledOnMousedown" @touchstart="kledOnTouchdown">
+			<label :for="`${idSuffix}-current-ability-health-kled`"> Kled health </label>
+			<input :id="`${idSuffix}-current-ability-health`" :value="Math.round(kledDragValueRef)" min="0" :max="value.maxHealth.value" type="number" @input="updateChampionHealth" />
 			<span>/ {{ kledMaxHP }}</span>
 		</div>
-		<div
-			ref="skaarlBar"
-			:style="`--fill-percentage: ${Math.min(skaarlDragValueRef / skaarlMaxHP, 1)}`"
-			@mousedown="skaarlOnMousedown"
-			@touchstart="skaarlOnTouchdown"
-		>
-			<label :for="`${idSuffix}-current-ability-health-skaarl`">
-				Skaarl health
-			</label>
-			<input
-				:id="`${idSuffix}-current-ability-health-skaarl`"
-				:value="Math.round(skaarlDragValueRef)"
-				min="0"
-				:max="value.maxHealth.value"
-				type="number"
-				@input="updateChampionHealth"
-			>
+		<div ref="skaarlBar" :style="`--fill-percentage: ${Math.min(skaarlDragValueRef / skaarlMaxHP, 1)}`" @mousedown="skaarlOnMousedown" @touchstart="skaarlOnTouchdown">
+			<label :for="`${idSuffix}-current-ability-health-skaarl`"> Skaarl health </label>
+			<input :id="`${idSuffix}-current-ability-health-skaarl`" :value="Math.round(skaarlDragValueRef)" min="0" :max="value.maxHealth.value" type="number" @input="updateChampionHealth" />
 			<span>/ {{ skaarlMaxHP }}</span>
 		</div>
 	</div>

@@ -1,9 +1,10 @@
-import type { ISpecificComponents } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import { ITEM_SPECIFICS } from '@lolcalc/core/specifics/item';
 import { AbilityType, CHAMPION_LEVEL, GRIEVOUS_WOUND_ITEMS, ITEM_NAME_TO_ID } from '@lolcalc/shared';
+
 import { ItemExtraTearItem } from '#components';
+import type { ISpecificComponents } from '~/utils/types';
 
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -44,13 +45,8 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		extras: [
-			await numberExtra(
-				GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.yunTal),
-				'practice',
-				'Practice stacks crit chance',
-				0,
-				ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_PRACTICE_CRIT,
-				damageSource => computed(() => damageSource.stats.value.isRanged ? ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].RANGED_CRIT_STEP : ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MELEE_CRIT_STEP),
+			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.yunTal), 'practice', 'Practice stacks crit chance', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MAX_PRACTICE_CRIT, (damageSource) =>
+				computed(() => (damageSource.stats.value.isRanged ? ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].RANGED_CRIT_STEP : ITEM_SPECIFICS[ITEM_NAME_TO_ID.yunTal].MELEE_CRIT_STEP)),
 			),
 			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.yunTal), 'flurry', 'Flurry'),
 		],
@@ -86,10 +82,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: ItemExtraTearItem,
 	},
 	[ITEM_NAME_TO_ID.fimbulwinter]: {
-		extras: [
-			ItemExtraTearItem,
-			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.fimbulwinter), 'enemiesNearby', 'more than one enemy nearby', false),
-		],
+		extras: [ItemExtraTearItem, await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.fimbulwinter), 'enemiesNearby', 'more than one enemy nearby', false)],
 	},
 	[ITEM_NAME_TO_ID.trinity]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.trinity), 'quicken', 'Quicken'),
@@ -110,7 +103,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.protoplasmHarness), 'pHLifeline', 'Lifeline'),
 	},
 	[ITEM_NAME_TO_ID.frozenHeart]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart), 'wCaress', 'Winter\'s Caress', undefined, true),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart), 'wCaress', "Winter's Caress", undefined, true),
 	},
 	[ITEM_NAME_TO_ID.serpentsFang]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang), 'sVenom', 'Shield Reave', undefined, true),
@@ -132,15 +125,15 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
 		extras: [
-			await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hexoptics), 'magnification', 'Distance between target', progress => progress, { max: ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_RANGE, derivedSymbolSuffix: '' }),
+			await progressExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hexoptics), 'magnification', 'Distance between target', (progress) => progress, {
+				max: ITEM_SPECIFICS[ITEM_NAME_TO_ID.hexoptics].MAX_RANGE,
+				derivedSymbolSuffix: '',
+			}),
 			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.hexoptics), 'arcaneAim', 'Arcane Aim'),
 		],
 	},
 	[ITEM_NAME_TO_ID.youmuu]: {
-		extras: [
-			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'haunt', 'Haunt'),
-			await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'wStep', 'Wraith Step'),
-		],
+		extras: [await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'haunt', 'Haunt'), await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'wStep', 'Wraith Step')],
 	},
 	[ITEM_NAME_TO_ID.forceOfNature]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.forceOfNature), 'steadfast', 'Steadfast'),
@@ -182,9 +175,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.gluttonousGreaves), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.gluttonousGreaves].MAX_STACKS),
 	},
 	[ITEM_NAME_TO_ID.immortalPath]: {
-		extras: [
-			await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.immortalPath].MAX_STACKS),
-		],
+		extras: [await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.immortalPath), 'slay', 'Slay stacks', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.immortalPath].MAX_STACKS)],
 	},
 	[ITEM_NAME_TO_ID.lichBane]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.lichBane), 'spActive', 'Spellblade'),
@@ -195,12 +186,16 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.zekesConvergence]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.zekesConvergence), 'fTempest', 'Frosfire Tempest', true, true),
 	},
-	...Object.fromEntries(await Promise.all(GRIEVOUS_WOUND_ITEMS.map(async (itemId): Promise<[string, ISpecificComponents]> => [
-		itemId,
-		{
-			extras: await booleanExtra(GameAbilityId.build(AbilityType.item, itemId), 'gWounds', 'Grievous Wounds', true, true),
-		},
-	]))),
+	...Object.fromEntries(
+		await Promise.all(
+			GRIEVOUS_WOUND_ITEMS.map(async (itemId): Promise<[string, ISpecificComponents]> => [
+				itemId,
+				{
+					extras: await booleanExtra(GameAbilityId.build(AbilityType.item, itemId), 'gWounds', 'Grievous Wounds', true, true),
+				},
+			]),
+		),
+	),
 	[ITEM_NAME_TO_ID.redemption]: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.redemption), 'aLevel', 'Target ally level', CHAMPION_LEVEL.min, CHAMPION_LEVEL.topQuestMax),
 	},
@@ -230,7 +225,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.icebornGauntlet), 'frostField', 'Frost Field', true, true),
 	},
 	[ITEM_NAME_TO_ID.seryldasGrudge]: {
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge), 'bitterCold', 'Bitter Cold', true, true, 'The slow will be applied regardless of the target\'s current hp'),
+		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.seryldasGrudge), 'bitterCold', 'Bitter Cold', true, true, "The slow will be applied regardless of the target's current hp"),
 	},
 	[ITEM_NAME_TO_ID.bloodsong]: {
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.bloodsong), 'bloodsonged', 'Spellblade damage increase', true, true),
@@ -258,9 +253,17 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.overlordsBloodmail]: {
 		/* 'tyranny' passed here won't actually be updated by boolean extra, because this component controls 2 variables through `extraControls`. For now only this component uses boolean extra's effect controls and it's special cased to do so */
-		extras: await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.overlordsBloodmail), 'tyranny', 'count passives towards adaptive', false, undefined, 'Unless your build is mixed <scalead>AD</scalead>/<scaleap>AP</scaleap> and the values are close, you shouldn\'t need to check this<br><br> <rules><scalead>Attack damage</scalead> gained from both Tyranny and Retribution passives counts towards choosing which stat adaptive force grants (<scalead>AD</scalead>/<scaleap>AP</scaleap>).<br> If you need them to be properly factored in, you can check this but you will have to use the refresh button to manually update the stats whenever something changes</rules>', {
-			effectControlsProps: ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].extraControls,
-		}),
+		extras: await booleanExtra(
+			GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.overlordsBloodmail),
+			'tyranny',
+			'count passives towards adaptive',
+			false,
+			undefined,
+			"Unless your build is mixed <scalead>AD</scalead>/<scaleap>AP</scaleap> and the values are close, you shouldn't need to check this<br><br> <rules><scalead>Attack damage</scalead> gained from both Tyranny and Retribution passives counts towards choosing which stat adaptive force grants (<scalead>AD</scalead>/<scaleap>AP</scaleap>).<br> If you need them to be properly factored in, you can check this but you will have to use the refresh button to manually update the stats whenever something changes</rules>",
+			{
+				effectControlsProps: ITEM_SPECIFICS[ITEM_NAME_TO_ID.overlordsBloodmail].extraControls,
+			},
+		),
 	},
 };
 
@@ -270,17 +273,21 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue = 0, maxValue = 1, enumOptions } = effectSpecific;
 
 		ITEM_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects
-			??= enumOptions
-				? await enumExtra(abilityId, 0, label, Object.entries(enumOptions).map(([key, value]) => [value, key]))
-				: maxValue !== 1
-					? await numberExtra(abilityId, 0, label, minValue, maxValue)
-					: await booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip);
+		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= enumOptions
+			? await enumExtra(
+					abilityId,
+					0,
+					label,
+					Object.entries(enumOptions).map(([key, value]) => [value, key]),
+				)
+			: maxValue !== 1
+				? await numberExtra(abilityId, 0, label, minValue, maxValue)
+				: await booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip);
 	}
 }
 
 for (const key in ITEM_COMPONENTS) {
 	const { extras, effects } = ITEM_COMPONENTS[key as keyof typeof ITEM_COMPONENTS]!;
-	extras && (Array.isArray(extras) ? extras.forEach(component => markRaw(component)) : markRaw(extras));
-	effects && (Array.isArray(effects) ? effects.forEach(component => markRaw(component)) : markRaw(effects));
+	extras && (Array.isArray(extras) ? extras.forEach((component) => markRaw(component)) : markRaw(extras));
+	effects && (Array.isArray(effects) ? effects.forEach((component) => markRaw(component)) : markRaw(effects));
 }

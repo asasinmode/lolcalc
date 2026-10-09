@@ -10,7 +10,9 @@ export function replaceStringtableVariables(
 	text: string,
 	stringtable: Record<string, string> = {},
 	/** either resolved dynamic variables or possible values of dynamic variables, see also the interface's itself documentation */
-	dynamicVariables: { values?: Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult] | (number | string)[]> } = {},
+	dynamicVariables: {
+		values?: Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult] | (number | string)[]>;
+	} = {},
 	/** whether to wrap unknown variables in `<unknown>` */
 	wrapUnknown = true,
 	unknownStringtableVariables: Map<string, Set<string>> = new Map(),
@@ -40,9 +42,7 @@ export function replaceStringtableVariables(
 			if (subVariableValue !== undefined) {
 				/** non-IVariableValueResult array branch means it's most likely scripts/updateData and it's being used to get all of the possible values for this variable to save in the champion's stringtable */
 				if (Array.isArray(subVariableValue)) {
-					const possibleValues = typeof subVariableValue[0] === 'object'
-						? subVariableValue.flatMap(variable => (variable as IVariableValueResult).value)
-						: (subVariableValue as (string | number)[]);
+					const possibleValues = typeof subVariableValue[0] === 'object' ? subVariableValue.flatMap((variable) => (variable as IVariableValueResult).value) : (subVariableValue as (string | number)[]);
 					for (const possibleSubVariableValue of possibleValues) {
 						const possibleValueVariableName = `${subVariablePrefix}${possibleSubVariableValue}`;
 						if (stringtableVariables.has(possibleValueVariableName)) {
@@ -79,14 +79,7 @@ export function replaceStringtableVariables(
 		}
 
 		if (value.includes('{{')) {
-			const { replaced } = replaceStringtableVariables(
-				value,
-				stringtable,
-				dynamicVariables,
-				wrapUnknown,
-				unknownStringtableVariables,
-				stringtableVariables,
-			);
+			const { replaced } = replaceStringtableVariables(value, stringtable, dynamicVariables, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 			stringtableVariables.set(variableName, replaced);
 			return replaced;
 		}

@@ -1,19 +1,23 @@
 <script setup vapor lang="ts">
+import { CHAMPION_IMAGES, CHAMPIONS, PATCH_VERSION } from '@lolcalc/data';
 import type { IListedChampion } from '@lolcalc/data/types';
 import type { IChampionRole } from '@lolcalc/shared/types';
-import { CHAMPION_IMAGES, CHAMPIONS, PATCH_VERSION } from '@lolcalc/data';
 
 const value = defineModel<IListedChampion>();
 const selectedChampion = shallowRef<IListedChampion | undefined>();
 
-watch(value, (c) => {
-	selectedChampion.value = c;
-}, { immediate: true });
+watch(
+	value,
+	(c) => {
+		selectedChampion.value = c;
+	},
+	{ immediate: true },
+);
 
 const { vMinor } = PATCH_VERSION;
 const { championImage } = CHAMPION_IMAGES;
 
-const ALL_ROLES: [IChampionRole, string ][] = [
+const ALL_ROLES: [IChampionRole, string][] = [
 	['top', 'top'],
 	['jungle', 'jungle'],
 	['mid', 'middle'],
@@ -31,17 +35,11 @@ const computedChampions = computed(() => {
 		.toLocaleLowerCase()
 		.replaceAll(/[^a-z]/g, '')
 		.split(' ')
-		.filter(v => v);
+		.filter((v) => v);
 
-	const searchFiltered = search.value
-		? ALL_CHAMPIONS.filter(champion =>
-				splitSearch.every(word =>
-					champion.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word),
-				),
-			)
-		: ALL_CHAMPIONS;
+	const searchFiltered = search.value ? ALL_CHAMPIONS.filter((champion) => splitSearch.every((word) => champion.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word))) : ALL_CHAMPIONS;
 
-	return selectedRole.value ? searchFiltered.filter(champion => champion.roles[selectedRole.value!]) : searchFiltered;
+	return selectedRole.value ? searchFiltered.filter((champion) => champion.roles[selectedRole.value!]) : searchFiltered;
 });
 
 function closeCleanup() {
@@ -49,11 +47,11 @@ function closeCleanup() {
 	value.value = selectedChampion.value;
 }
 
-const longestName = ALL_CHAMPIONS.reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
+const longestName = ALL_CHAMPIONS.reduce((lName, champ) => (champ.name.length > lName.length ? champ.name : lName), '');
 
 function selectFirstChamp() {
 	if (computedChampions.value[0]) {
-		(selectedChampion.value = computedChampions.value[0]);
+		selectedChampion.value = computedChampions.value[0];
 		vDialog.value?.close();
 	}
 }
@@ -73,21 +71,13 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog
-		id="dialog-champ-select"
-		ref="vDialog"
-		@close="closeCleanup"
-	>
+	<VDialog id="dialog-champ-select" ref="vDialog" @close="closeCleanup">
 		<header>
-			<h1>
-				champ select
-			</h1>
+			<h1>champ select</h1>
 			<form method="dialog">
 				<button value="cancel" title="close" autofocus>
 					<Icon class="i-ph:x-bold" />
-					<span>
-						close
-					</span>
+					<span> close </span>
 				</button>
 			</form>
 			<div class="inline-search-label">
@@ -100,52 +90,27 @@ defineExpose({
 					@update:model-value="selectedRole = undefined"
 					@keydown.enter.prevent="selectFirstChamp"
 					@input="($event.target as any).composing = false"
-				>
+				/>
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
 					Search
 				</label>
 				<button title="clear" @mousedown.prevent="search = ''">
-					<span>
-						clear
-					</span>
+					<span> clear </span>
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</div>
-			<VButtonRadiogroup
-				id="champ-select-role"
-				v-model="selectedRole"
-				label="Role"
-				:options="ALL_ROLES.map(([role, icon]) => ({ role, icon }))"
-				value-key="role"
-			>
+			<VButtonRadiogroup id="champ-select-role" v-model="selectedRole" label="Role" :options="ALL_ROLES.map(([role, icon]) => ({ role, icon }))" value-key="role">
 				<template #default="{ option: { role, icon } }">
-					<img
-						:src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${icon}-light.svg`"
-						aria-hidden="true"
-						width="34"
-						height="34"
-					>
+					<img :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${icon}-light.svg`" aria-hidden="true" width="34" height="34" />
 					<span>{{ role }}</span>
 				</template>
 			</VButtonRadiogroup>
 		</header>
 		<ul :data-longest-name="longestName">
-			<li
-				v-for="champion in computedChampions"
-				:key="champion.id"
-				:class="{ selected: selectedChampion === champion }"
-			>
+			<li v-for="champion in computedChampions" :key="champion.id" :class="{ selected: selectedChampion === champion }">
 				<button @click="(selectedChampion = champion) && vDialog?.close()">
-					<img
-						:title="champion.name"
-						:src="championImage(champion.image, champion.id)"
-						:style="`background-image: url(${championImage(champion.image, champion.id)})`"
-						width="128"
-						height="128"
-						aria-hidden="true"
-						loading="lazy"
-					>
+					<img :title="champion.name" :src="championImage(champion.image, champion.id)" :style="`background-image: url(${championImage(champion.image, champion.id)})`" width="128" height="128" aria-hidden="true" loading="lazy" />
 					{{ champion.name }}
 				</button>
 			</li>

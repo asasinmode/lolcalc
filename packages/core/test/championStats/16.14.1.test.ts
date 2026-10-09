@@ -1,10 +1,12 @@
-import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
-import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
-import type { IItem } from '@lolcalc/data/types.js';
 import test from 'node:test';
+
+import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
+import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+import type { IItem } from '@lolcalc/data/types.js';
 import { AbilityType, EffectObjectName } from '@lolcalc/shared';
+
 import fixture from '../fixtures/16.14.1.fixture.json' with { type: 'json' };
 import { overridesAppliedEffect, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
 
@@ -33,11 +35,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 		await t.test('base', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Briar', baseCommon);
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 4,
-				lifeSteal: 10,
-				omnivamp: 10,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 4,
+					lifeSteal: 10,
+					omnivamp: 10,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('immortal path', async () => {
@@ -47,11 +53,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				currentHealth: 124,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 6,
-				lifeSteal: 11,
-				omnivamp: 16,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 6,
+					lifeSteal: 11,
+					omnivamp: 16,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('spirit visage', async () => {
@@ -60,11 +70,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				items: baseCommon.items!.concat(ITEMS_BY_NAME.spiritVisage),
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 5,
-				lifeSteal: 13,
-				omnivamp: 13,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 5,
+					lifeSteal: 13,
+					omnivamp: 13,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('spirit visage, immortal path', async () => {
@@ -74,11 +88,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				currentHealth: 270,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 8,
-				lifeSteal: 14,
-				omnivamp: 20,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 8,
+					lifeSteal: 14,
+					omnivamp: 20,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('lots of lifesteal | spirit visage', async () => {
@@ -88,10 +106,14 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				internalItemData: lotsOfLifestealItemsData,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				lifeSteal: 44,
-				omnivamp: 25,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					lifeSteal: 44,
+					omnivamp: 25,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('lots of lifesteal | spirit visage, immortal path', async () => {
@@ -102,10 +124,14 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				currentHealth: 92,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				lifeSteal: 51,
-				omnivamp: 29,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					lifeSteal: 51,
+					omnivamp: 29,
+				},
+				damageSource,
+			);
 		});
 	});
 
@@ -126,11 +152,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 		await t.test('base', async () => {
 			const damageSource = await setupDamageSource(fixture, 'Rammus', baseCommon);
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 12,
-				lifeSteal: 10,
-				omnivamp: 10,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 12,
+					lifeSteal: 10,
+					omnivamp: 10,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('immortal path', async () => {
@@ -140,11 +170,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				currentHealth: 175,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 13,
-				lifeSteal: 11,
-				omnivamp: 16,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 13,
+					lifeSteal: 11,
+					omnivamp: 16,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('spirit visage', async () => {
@@ -153,11 +187,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				items: baseCommon.items!.concat(ITEMS_BY_NAME.spiritVisage),
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 25,
-				lifeSteal: 13,
-				omnivamp: 13,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 25,
+					lifeSteal: 13,
+					omnivamp: 13,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('spirit visage, immortal path', async () => {
@@ -167,11 +205,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				currentHealth: 560,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 27,
-				lifeSteal: 14,
-				omnivamp: 20,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 27,
+					lifeSteal: 14,
+					omnivamp: 20,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('lots of lifesteal | spirit visage', async () => {
@@ -182,11 +224,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				internalItemData: lotsOfLifestealItemsData,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 21,
-				lifeSteal: 44,
-				omnivamp: 25,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 21,
+					lifeSteal: 44,
+					omnivamp: 25,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('lots of lifesteal | immortal path', async () => {
@@ -198,11 +244,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				internalItemData: lotsOfLifestealItemsData,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 19,
-				lifeSteal: 39,
-				omnivamp: 22,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 19,
+					lifeSteal: 39,
+					omnivamp: 22,
+				},
+				damageSource,
+			);
 		});
 
 		await t.test('lots of lifesteal | spirit visage, immortal path', async () => {
@@ -214,11 +264,15 @@ test('Spirit Visage/Immortal Path heal stats', async (t) => {
 				internalItemData: lotsOfLifestealItemsData,
 			});
 
-			typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-				hpRegen: 23,
-				lifeSteal: 51,
-				omnivamp: 29,
-			}, damageSource);
+			typedPartialDeepStrictEqual(
+				damageSource.computed.formattedStatTotals.value,
+				{
+					hpRegen: 23,
+					lifeSteal: 51,
+					omnivamp: 29,
+				},
+				damageSource,
+			);
 		});
 	});
 });
@@ -238,10 +292,14 @@ test('Hecarim', async (t) => {
 	await t.test('base', async () => {
 		const damageSource = await setupDamageSource(fixture, 'Hecarim', sourceCommon);
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 72,
-			moveSpeed: 354,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 72,
+				moveSpeed: 354,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('ghost', async () => {
@@ -250,10 +308,14 @@ test('Hecarim', async (t) => {
 			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1])],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 82,
-			moveSpeed: 432,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 82,
+				moveSpeed: 432,
+			},
+			damageSource,
+		);
 	});
 
 	const msItems: IItem[] = [ITEMS_BY_NAME.youmuu, ITEMS_BY_NAME.protoplasmHarness, ITEMS_BY_NAME.deadMansPlate, ITEMS_BY_NAME.bandlepipes, ITEMS_BY_NAME.blackCleaver, ITEMS_BY_NAME.experimentalHexplate];
@@ -265,10 +327,14 @@ test('Hecarim', async (t) => {
 			internalItemData: { shipwrecker: 59, haunt: 1, wStep: 0 } satisfies IInternalItemDataOf<'youmuu' | 'deadMansPlate'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 215,
-			moveSpeed: 416,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 215,
+				moveSpeed: 416,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('lvl 6 | ms items | ghost', async () => {
@@ -276,14 +342,26 @@ test('Hecarim', async (t) => {
 			...sourceCommon,
 			level: 6,
 			items: msItems,
-			internalItemData: { shipwrecker: 100, haunt: 0, wStep: 1, fanfare: 1, overdrive: 1, carve: 0, fervor: 1 } satisfies IInternalItemDataOf<'youmuu' | 'deadMansPlate' | 'experimentalHexplate' | 'bandlepipes' | 'blackCleaver'>,
+			internalItemData: {
+				shipwrecker: 100,
+				haunt: 0,
+				wStep: 1,
+				fanfare: 1,
+				overdrive: 1,
+				carve: 0,
+				fervor: 1,
+			} satisfies IInternalItemDataOf<'youmuu' | 'deadMansPlate' | 'experimentalHexplate' | 'bandlepipes' | 'blackCleaver'>,
 			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1])],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 261,
-			moveSpeed: 598,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 261,
+				moveSpeed: 598,
+			},
+			damageSource,
+		);
 	});
 
 	const bloodmailCommon: IOverrides<'Hecarim'> = {
@@ -305,12 +383,16 @@ test('Hecarim', async (t) => {
 			internalItemData: { haunt: 1, wStep: 0 } satisfies IInternalItemDataOf<'youmuu'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 418,
-			abilityPower: 108,
-			abilityHaste: 73,
-			moveSpeed: 444,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 418,
+				abilityPower: 108,
+				abilityHaste: 73,
+				moveSpeed: 444,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('lvl 18 | bloodmail items | crimson lucidity+', async () => {
@@ -319,11 +401,15 @@ test('Hecarim', async (t) => {
 			internalItemData: { noxianHaste: 1 } satisfies IInternalItemDataOf<'crimsonLucidity'>,
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 422,
-			abilityHaste: 73,
-			moveSpeed: 457,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 422,
+				abilityHaste: 73,
+				moveSpeed: 457,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('lvl 18 | bloodmail items | actives', async () => {
@@ -333,11 +419,15 @@ test('Hecarim', async (t) => {
 			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1])],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 458,
-			abilityHaste: 78,
-			moveSpeed: 597,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 458,
+				abilityHaste: 78,
+				moveSpeed: 597,
+			},
+			damageSource,
+		);
 	});
 
 	await t.test('lvl 18 | bloodmail items | partial hp', async () => {
@@ -348,10 +438,14 @@ test('Hecarim', async (t) => {
 			appliedEffects: [overridesAppliedEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.ghost), [1])],
 		});
 
-		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {
-			attackDamage: 513,
-			abilityHaste: 85,
-			moveSpeed: 597,
-		}, damageSource);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				attackDamage: 513,
+				abilityHaste: 85,
+				moveSpeed: 597,
+			},
+			damageSource,
+		);
 	});
 });

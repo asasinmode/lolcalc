@@ -1,6 +1,6 @@
 <script setup vapor lang="ts">
-import type { IShopItem } from '@lolcalc/data/types';
 import { PATCH_VERSION } from '@lolcalc/data';
+import type { IShopItem } from '@lolcalc/data/types';
 
 defineProps<{
 	component?: boolean;
@@ -11,20 +11,9 @@ const { vSemver } = PATCH_VERSION;
 </script>
 
 <template>
-	<button
-		class="item-shop-item-btn"
-		:data-has-components="shopItem.item.from?.length ? '' : undefined"
-		:data-buyability="shopItem.buyability"
-		:data-bought="shopItem.isBought ? '' : undefined"
-	>
+	<button class="item-shop-item-btn" :data-has-components="shopItem.item.from?.length ? '' : undefined" :data-buyability="shopItem.buyability" :data-bought="shopItem.isBought ? '' : undefined">
 		<span>{{ shopItem.item.name }}</span>
-		<img
-			:src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`"
-			width="64"
-			height="64"
-			aria-hidden="true"
-			loading="lazy"
-		>
+		<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" width="64" height="64" aria-hidden="true" loading="lazy" />
 		<span class="sr-status">
 			{{ component ? `checked${shopItem.srStatus ? ', ' : ''}` : '' }}
 			{{ shopItem.srStatus }}

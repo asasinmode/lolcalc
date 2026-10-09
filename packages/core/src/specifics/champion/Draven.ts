@@ -1,6 +1,7 @@
 import type IDraven from '@lolcalc/data/files/champion/Draven.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -27,12 +28,12 @@ export default {
 	r: {
 		variables: defineChampionVariables<'Draven', typeof IDraven, 'r'>()({
 			known: {
-				'f1': [],
+				f1: [],
 				'{577427b5}': [],
 			},
 			calculate(self) {
 				return {
-					'f1': { value: 0 },
+					f1: { value: 0 },
 					'{577427b5}': { value: self.internalData.value.passiveStacks },
 				};
 			},

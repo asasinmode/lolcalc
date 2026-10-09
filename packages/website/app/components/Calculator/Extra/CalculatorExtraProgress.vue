@@ -2,16 +2,19 @@
 import type { IGameImageData } from '@lolcalc/core/misc';
 import { roundNumber } from '@lolcalc/shared/utils';
 
-const props = withDefaults(defineProps<{
-	idSuffix: string;
-	imgSrc: IGameImageData;
-	label: string;
-	deriveValue: (value: number) => number | undefined;
-	derivedSymbolSuffix?: string;
-	max?: number;
-}>(), {
-	max: 100,
-});
+const props = withDefaults(
+	defineProps<{
+		idSuffix: string;
+		imgSrc: IGameImageData;
+		label: string;
+		deriveValue: (value: number) => number | undefined;
+		derivedSymbolSuffix?: string;
+		max?: number;
+	}>(),
+	{
+		max: 100,
+	},
+);
 
 defineEmits<{
 	imgMouseenter: [event: MouseEvent];
@@ -46,28 +49,13 @@ const derivedValue = computed(() => {
 
 <template>
 	<article class="calc-extra-progress">
-		<img
-			v-bind="gameImageAttrs(imgSrc, 56)"
-			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event)"
-		>
+		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
 		<label :for="`xtrprgr-${idSuffix}`">
 			{{ label }}
 		</label>
 		<slot />
-		<input
-			:id="`xtrprgr-${idSuffix}`"
-			:value="value ?? localValue ?? 0"
-			type="range"
-			min="0"
-			:max
-			@mousedown="updateMousedown(true)"
-			@mouseup="updateMousedown(false)"
-			@input="updateModelValue"
-		>
-		<output :for="`xtrprgr-${idSuffix}`" aria-live="off">
-			{{ derivedValue !== undefined ? roundNumber(derivedValue, 1) : 0 }}{{ derivedSymbolSuffix }}
-		</output>
+		<input :id="`xtrprgr-${idSuffix}`" :value="value ?? localValue ?? 0" type="range" min="0" :max @mousedown="updateMousedown(true)" @mouseup="updateMousedown(false)" @input="updateModelValue" />
+		<output :for="`xtrprgr-${idSuffix}`" aria-live="off"> {{ derivedValue !== undefined ? roundNumber(derivedValue, 1) : 0 }}{{ derivedSymbolSuffix }} </output>
 	</article>
 </template>
 

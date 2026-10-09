@@ -1,7 +1,8 @@
-import type IPyke from '@lolcalc/data/files/champion/Pyke.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IPyke from '@lolcalc/data/files/champion/Pyke.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
@@ -51,11 +52,16 @@ export default {
 	calculateHooks: {
 		preItemTotal: {
 			handler(self, { championPassiveStats, itemPassivesStats, itemBaseStats }, { calculatedVariables }) {
-				const hpToAd = championAbilityVariableValue('HPPerBAD', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, allAbilitiesVariants: self.allAbilityVariants.value, damageSource: self });
+				const hpToAd = championAbilityVariableValue('HPPerBAD', {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					damageSource: self,
+				});
 
 				if (typeof hpToAd.value === 'number') {
 					calculatedVariables.pykePassiveHpToAd = hpToAd.value;
-					const bonusHp = (itemBaseStats.hp + itemPassivesStats.hp);
+					const bonusHp = itemBaseStats.hp + itemPassivesStats.hp;
 					championPassiveStats.attackDamage = bonusHp / calculatedVariables.pykePassiveHpToAd;
 
 					itemBaseStats.hp = 0;

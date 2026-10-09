@@ -1,0 +1,9 @@
+{
+	"printWidth": 240,
+	"semi": true,
+	"singleQuote": true,
+	"useTabs": true,
+	"trailingComma": "all",
+	"ignorePatterns": ["packages/data/files/**/*.json", "packages/core/test/fixtures/*.json"],
+	"sortImports": true
+}

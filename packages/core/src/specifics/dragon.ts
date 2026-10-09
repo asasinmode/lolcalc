@@ -1,12 +1,13 @@
 import type { TMiscData } from '@lolcalc/data';
-import type { IChampionAbilityVariant, IDragonName } from '@lolcalc/data/types';
-import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupInternalDragonData } from '../DamageSource';
-import type { IDeriveProgressFn, IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { MISC } from '@lolcalc/data';
+import type { IChampionAbilityVariant, IDragonName } from '@lolcalc/data/types';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
 import { addMultiplicative } from '../calculate/util.ts';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupInternalDragonData } from '../DamageSource';
 import { addCalculatesFrom, championAbilityVariableValue } from '../variables/game.ts';
+import type { IDeriveProgressFn, IInternalDragonDataOf, ISpecificVariables } from './index.ts';
 import { defineVariables } from './index.ts';
 
 /**
@@ -83,16 +84,30 @@ export const DRAGON_SPECIFICS = {
 			variables: defineVariables({
 				known: {
 					lolcalcChampRange: [
-						championAbilityVariableValue('TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant }).value as number,
-						championAbilityVariableValue('TotalSlowAmountRanged', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant }).value as number,
+						championAbilityVariableValue('TotalSlowAmountMelee', {
+							abilityKey: 'passive',
+							abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant,
+						}).value as number,
+						championAbilityVariableValue('TotalSlowAmountRanged', {
+							abilityKey: 'passive',
+							abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant,
+						}).value as number,
 					],
 					Slow: [],
 				},
 				calculate(self) {
 					return {
 						lolcalcChampRange: [
-							championAbilityVariableValue('TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant, damageSource: self }),
-							championAbilityVariableValue('TotalSlowAmountRanged', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant, damageSource: self }),
+							championAbilityVariableValue('TotalSlowAmountMelee', {
+								abilityKey: 'passive',
+								abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant,
+								damageSource: self,
+							}),
+							championAbilityVariableValue('TotalSlowAmountRanged', {
+								abilityKey: 'passive',
+								abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant,
+								damageSource: self,
+							}),
 						],
 						Slow: {
 							value: self.effectsOntoTargetVars.value.hextechSoulSlow ?? 0,
@@ -109,7 +124,17 @@ export const DRAGON_SPECIFICS = {
 						isPercentage: true,
 						multiplier: 100,
 						/* since I'm overriding the builtin total slows with this one, use overwritten variables' calculatesFrom */
-						calculatesFrom: addCalculatesFrom([], championAbilityVariableValue('TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant }).calculatesFrom ?? [], championAbilityVariableValue('TotalSlowAmountRanged', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant }).calculatesFrom ?? []),
+						calculatesFrom: addCalculatesFrom(
+							[],
+							championAbilityVariableValue('TotalSlowAmountMelee', {
+								abilityKey: 'passive',
+								abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant,
+							}).calculatesFrom ?? [],
+							championAbilityVariableValue('TotalSlowAmountRanged', {
+								abilityKey: 'passive',
+								abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant,
+							}).calculatesFrom ?? [],
+						),
 					},
 					Slow: {
 						isCustom: true,
@@ -123,9 +148,18 @@ export const DRAGON_SPECIFICS = {
 				uninteresting: ['BaseUnitsToHit'],
 			}),
 			calculateSlow: (progress: number, isRanged: boolean | undefined, bonusAD?: number, totalAP?: number, bonusHP?: number): number => {
-				const slowValue =	championAbilityVariableValue(isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', { abilityKey: 'passive', abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant, damageSource: {
-					stats: { value: { bonus: { attackDamage: bonusAD ?? 0, hp: bonusHP ?? 0 }, total: { abilityPower: totalAP ?? 0 } } },
-				} as DamageSource });
+				const slowValue = championAbilityVariableValue(isRanged ? 'TotalSlowAmountRanged' : 'TotalSlowAmountMelee', {
+					abilityKey: 'passive',
+					abilityVariant: (MISC as TMiscData).dragons.Hextech.soul as IChampionAbilityVariant,
+					damageSource: {
+						stats: {
+							value: {
+								bonus: { attackDamage: bonusAD ?? 0, hp: bonusHP ?? 0 },
+								total: { abilityPower: totalAP ?? 0 },
+							},
+						},
+					} as DamageSource,
+				});
 				if (typeof slowValue.value === 'number') {
 					return slowValue.value * progress;
 				} else {
@@ -204,7 +238,7 @@ export const DRAGON_SPECIFICS = {
 } satisfies IHypotheticalDragonSpecifics;
 
 export type IHypotheticalDragonSpecifics = {
-	[K in IDragonName]?: IDragonSpecific<K>
+	[K in IDragonName]?: IDragonSpecific<K>;
 };
 
 export type TDragonSpecifics = typeof DRAGON_SPECIFICS;
@@ -212,11 +246,9 @@ export type TDragonSpecifics = typeof DRAGON_SPECIFICS;
 export interface IDragonSpecific<Name extends IDragonName = IDragonName> {
 	stack?: IDragonAbilitySpecific<Name, 'stack'>;
 	soul?: IDragonAbilitySpecific<Name, 'soul'>;
-};
+}
 
-type DetectDragonVariables<T>
-	= | (T extends { dataValues: any } ? keyof T['dataValues'] & string : never)
-		| (T extends { spellCalculations: any } ? keyof T['spellCalculations'] & string : never);
+type DetectDragonVariables<T> = (T extends { dataValues: any } ? keyof T['dataValues'] & string : never) | (T extends { spellCalculations: any } ? keyof T['spellCalculations'] & string : never);
 
 export type IDragonAbilitySpecific<Name extends IDragonName = IDragonName, Type extends 'stack' | 'soul' = 'stack' | 'soul'> = IProviderGroupInternalDragonData & {
 	calculateHooks?: ICalculateChampionStatsHookSource;

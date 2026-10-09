@@ -27,28 +27,24 @@ function hideControlsTooltip(event: Event) {
 </script>
 
 <template>
-	<div
-		class="effect-ctl"
-		@mouseenter="showControlsTooltip"
-		@focusin="showControlsTooltip"
-		@mouseleave="hideControlsTooltip"
-		@focusout="hideControlsTooltip"
-	>
+	<div class="effect-ctl" @mouseenter="showControlsTooltip" @focusin="showControlsTooltip" @mouseleave="hideControlsTooltip" @focusout="hideControlsTooltip">
 		<button class="pretend-ui-btn" @click="refresh">
 			<span>refresh</span>
 			<Icon class="i-ph:arrow-clockwise-bold" :style="`--clicks: ${clicks}`" />
 		</button>
 		<slot>
 			<label v-if="!noApply" :for="`effect-ctl-tgl-${idSuffix}`" class="pretend-ui-btn">
-				<input :id="`effect-ctl-tgl-${idSuffix}`" v-model="value" type="checkbox">
+				<input :id="`effect-ctl-tgl-${idSuffix}`" v-model="value" type="checkbox" />
 				<span>apply</span>
 			</label>
 		</slot>
 		<div popover="manual" class="hover-tooltip">
 			<p class="snapshot game-description" v-html="snapshotText" />
 			<p>
-				applying this effects uses the stats at the moment of application<br>
-				to recalculate the effect (like applying it again with the stats gained from it), use the <span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span> button<br>
+				applying this effects uses the stats at the moment of application<br />
+				to recalculate the effect (like applying it again with the stats gained from it), use the
+				<span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span>
+				button<br />
 			</p>
 		</div>
 	</div>

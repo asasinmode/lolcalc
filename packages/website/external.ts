@@ -3,35 +3,35 @@
  * they should have appropriate styles (like font color) set in `ItemDescription.vue`
  */
 export const KNOWN_GAME_DESCRIPTION_TAGS: string[] = [
-	'passive',	// item heading
+	'passive', // item heading
 	'scalead', // bloodmail, sterak
-	'scaleap',	// rabadon, riftmaker
+	'scaleap', // rabadon, riftmaker
 	'scalehealth', // roa, heartsteel
-	'scalemana',	// manamune, archangel
-	'scalearmor',	// hullbreaker, terminus
-	'scalemr',	// malignance, force of nature
-	'scalelethality',	// voltaic cyclosword, aphelios passive
-	'attackspeed',	// yuntal, experimental hexplate
-	'onhit',	// iceborn, statik
-	'physicaldamage',	// heartsteel, titanic
-	'magicdamage',	// bami, thornmail
-	'truedamage',	// cosmic drive, shadowflame
-	'health',	// protoplasm harness, no styles
-	'healing',	// guardian angel, warmog
-	'shield',	// fimbulwinter, hexdrinker
+	'scalemana', // manamune, archangel
+	'scalearmor', // hullbreaker, terminus
+	'scalemr', // malignance, force of nature
+	'scalelethality', // voltaic cyclosword, aphelios passive
+	'attackspeed', // yuntal, experimental hexplate
+	'onhit', // iceborn, statik
+	'physicaldamage', // heartsteel, titanic
+	'magicdamage', // bami, thornmail
+	'truedamage', // cosmic drive, shadowflame
+	'health', // protoplasm harness, no styles
+	'healing', // guardian angel, warmog
+	'shield', // fimbulwinter, hexdrinker
 	'lifesteal', // maw of malmortius
-	'omnivamp',	// riftmaker
-	'speed',	// slightly magical footwear, youmuu
-	'gold',	// world atlas, collector
-	'status',	// botrk, iceborn
-	'attention',	// statikk, knight's vow
-	'raritygeneric',	// world atlas
-	'raritylegendary',	// archangel, manamune
-	'rules',	// crimson lucidity
-	'keyword',	// phantom dancer, zeke's convergence
-	'keywordmajor',	// terminus
-	'keywordstealth',	// horizon focus
-	'slow',	// voltaic cyclosword, no styles
+	'omnivamp', // riftmaker
+	'speed', // slightly magical footwear, youmuu
+	'gold', // world atlas, collector
+	'status', // botrk, iceborn
+	'attention', // statikk, knight's vow
+	'raritygeneric', // world atlas
+	'raritylegendary', // archangel, manamune
+	'rules', // crimson lucidity
+	'keyword', // phantom dancer, zeke's convergence
+	'keywordmajor', // terminus
+	'keywordstealth', // horizon focus
+	'slow', // voltaic cyclosword, no styles
 	'active', // seeker's armguard, mercurial scimitar
 	'lol-uikit-tooltipped-keyword', // in many runes
 	'scalelevel', // long first strike, guardian, shield bash

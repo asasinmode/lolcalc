@@ -1,8 +1,9 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IChogath from '@lolcalc/data/files/champion/Chogath.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IChogath from '@lolcalc/data/files/champion/Chogath.json';
 import { VariableType } from '@lolcalc/shared';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -53,10 +54,17 @@ export default {
 		variables: defineChampionVariables<'Chogath', typeof IChogath, 'e'>()({
 			known: {
 				'{8682fc00}': [],
-				'TotalDamage': [],
+				TotalDamage: [],
 			},
 			calculate(self, target) {
-				const variableParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, damageSource: self, dynamicVariables: { values: { '{8682fc00}': { value: self.internalData.value.ultStacks } } } };
+				const variableParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'e',
+					abilityVariant: self.champion.value!.abilities.e.variants[0]!,
+					damageSource: self,
+					dynamicVariables: {
+						values: { '{8682fc00}': { value: self.internalData.value.ultStacks } },
+					},
+				};
 				const flat = championAbilityVariableValue('FlatDamageCalc', variableParams);
 				const percent = championAbilityVariableValue('MaxHealthPercentCalc', variableParams);
 
@@ -72,7 +80,7 @@ export default {
 					'{8682fc00}': {
 						value: self.internalData.value.ultStacks,
 					},
-					'TotalDamage': {
+					TotalDamage: {
 						value: TotalDamage,
 					},
 				};
@@ -139,7 +147,11 @@ export default {
 	calculateHooks: {
 		postItemTotal: {
 			handler(self, { championPassiveStats, itemTotalStats, itemPassivesStats }, { calculatedVariables }) {
-				const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self };
+				const params: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+					damageSource: self,
+				};
 				const hpPerStack = championAbilityVariableValue('RHealthPerStack', params);
 
 				if (typeof hpPerStack.value === 'number') {

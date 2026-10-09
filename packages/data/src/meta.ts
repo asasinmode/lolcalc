@@ -1,17 +1,21 @@
 /* supposed to be stuff that requires TYPES based on the data but not the actual data */
 
 import type { IChampionStatName } from '@lolcalc/shared';
+
 import type { IChampionId, IItem, IItemStat } from './types';
 
 export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee', 'Gnar'];
 
-export const ITEM_STAT_META: Record<IItemStat, {
-	name: string;
-	/** value by which the stat is sorted in the item hover tooltip */
-	order: number;
-	displayMultiplier?: number;
-	isPercentage?: boolean;
-}> = {
+export const ITEM_STAT_META: Record<
+	IItemStat,
+	{
+		name: string;
+		/** value by which the stat is sorted in the item hover tooltip */
+		order: number;
+		displayMultiplier?: number;
+		isPercentage?: boolean;
+	}
+> = {
 	FlatPhysicalDamageMod: { name: 'Attack damage', order: 95 },
 	FlatMagicDamageMod: { name: 'Ability power', order: 90 },
 
@@ -48,10 +52,7 @@ export const ITEM_STAT_META: Record<IItemStat, {
 	GP10: { name: 'Gold per 10 seconds', order: -1 },
 };
 
-export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
-	IItemStat,
-	'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod' | 'GP10'
->, IChampionStatName> = {
+export const ITEM_TO_CHAMPION_STATS: Record<Exclude<IItemStat, 'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod' | 'GP10'>, IChampionStatName> = {
 	AbilityHasteMod: 'abilityHaste',
 	FlatArmorMod: 'armor',
 	FlatCritChanceMod: 'critChance',
@@ -79,60 +80,60 @@ export const MULTIPLICATIVE_CHAMPION_STATS: IChampionStatName[] = ['slowResist',
 export const ITEM_SHOP_STAT_FILTERS = {
 	attackDamage: {
 		name: 'Attack damage',
-		filter: item => !!item.stats.FlatPhysicalDamageMod,
+		filter: (item) => !!item.stats.FlatPhysicalDamageMod,
 	},
 	crit: {
 		name: 'Critical strike',
-		filter: item => !!item.stats.FlatCritChanceMod,
+		filter: (item) => !!item.stats.FlatCritChanceMod,
 	},
 	attackSpeed: {
 		name: 'Attack speed',
-		filter: item => !!item.stats.PercentAttackSpeedMod,
+		filter: (item) => !!item.stats.PercentAttackSpeedMod,
 	},
 	onHit: {
 		name: 'On-hit effects',
-		filter: item => !!item.isOnHit,
+		filter: (item) => !!item.isOnHit,
 	},
 	armorPen: {
 		name: 'Armor penetration',
-		filter: item => !!(item.stats.PhysicalLethality || item.stats.PercentArmorPenetrationMod),
+		filter: (item) => !!(item.stats.PhysicalLethality || item.stats.PercentArmorPenetrationMod),
 	},
 	abilityPower: {
 		name: 'Ability power',
-		filter: item => !!item.stats.FlatMagicDamageMod,
+		filter: (item) => !!item.stats.FlatMagicDamageMod,
 	},
 	mana: {
 		name: 'Mana & regeneration',
-		filter: item => !!(item.stats.FlatMPPoolMod || item.stats.PercentBaseMPRegenMod),
+		filter: (item) => !!(item.stats.FlatMPPoolMod || item.stats.PercentBaseMPRegenMod),
 	},
 	magicPen: {
 		name: 'Magic penetration',
-		filter: item => !!(item.stats.FlatMagicPenetrationMod || item.stats.PercentMagicPenetrationMod),
+		filter: (item) => !!(item.stats.FlatMagicPenetrationMod || item.stats.PercentMagicPenetrationMod),
 	},
 	health: {
 		name: 'Health & regeneration',
-		filter: item => !!(item.stats.FlatHPPoolMod || item.stats.FlatHPRegenMod || item.stats.PercentBaseHPRegenMod),
+		filter: (item) => !!(item.stats.FlatHPPoolMod || item.stats.FlatHPRegenMod || item.stats.PercentBaseHPRegenMod),
 	},
 	armor: {
 		name: 'Armor',
-		filter: item => !!item.stats.FlatArmorMod,
+		filter: (item) => !!item.stats.FlatArmorMod,
 	},
 	magicResist: {
 		name: 'Magic reistance',
-		filter: item => !!item.stats.FlatSpellBlockMod,
+		filter: (item) => !!item.stats.FlatSpellBlockMod,
 	},
 	abilityHaste: {
 		name: 'Ability haste',
-		filter: item => !!item.stats.AbilityHasteMod,
+		filter: (item) => !!item.stats.AbilityHasteMod,
 	},
 	movement: {
 		name: 'Movement',
 		// TODO check if tenacity counts + check other filters
-		filter: item => !!(item.stats.FlatMovementSpeedMod || item.stats.PercentMovementSpeedMod || item.stats.PercentTenacityMod),
+		filter: (item) => !!(item.stats.FlatMovementSpeedMod || item.stats.PercentMovementSpeedMod || item.stats.PercentTenacityMod),
 	},
 	vamp: {
 		name: 'Life Steal & omnivamp',
-		filter: item => !!(item.stats.PercentLifeStealMod || item.stats.PercentOmnivampMod),
+		filter: (item) => !!(item.stats.PercentLifeStealMod || item.stats.PercentOmnivampMod),
 	},
 } as const satisfies Record<string, { name: string; filter: (item: IItem) => boolean }>;
 
@@ -144,14 +145,14 @@ export const ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS: string[] = ['Trait_Immobil
  * taken from llm, might need adjusting. Don't know where it's from
  * other cc abilities are detected based on `mSpellTags`
  */
-export const ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS: number
-	= (2 ** 16) // pull (Diana R, Orianna R)
-		| (2 ** 22) // knockback (Milio Q, Briar E)
-		| (2 ** 24) // knockup (Rammus R, Alistar Q)
-		| (2 ** 11) // stun (ASol R, etc.)
-		| (2 ** 12) // root
-		| (2 ** 13) // fear
-		| (2 ** 14); // charm / displacement (airborne)
+export const ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS: number =
+	(2 ** 16) | // pull (Diana R, Orianna R)
+	(2 ** 22) | // knockback (Milio Q, Briar E)
+	(2 ** 24) | // knockup (Rammus R, Alistar Q)
+	(2 ** 11) | // stun (ASol R, etc.)
+	(2 ** 12) | // root
+	(2 ** 13) | // fear
+	(2 ** 14); // charm / displacement (airborne)
 
 /** used alongside `ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS` */
 export const ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS = (2 ** 16) | (2 ** 22) | (2 ** 24);

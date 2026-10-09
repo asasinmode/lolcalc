@@ -1,30 +1,31 @@
 <script setup vapor lang="ts">
+import { resolveAbilitySpecific } from '@lolcalc/core/DamageSource';
 import type { IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics';
 import type { IItemSpecific } from '@lolcalc/core/specifics/item';
 import type { TItems } from '@lolcalc/data';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
-import { resolveAbilitySpecific } from '@lolcalc/core/DamageSource';
 import { imgUrl, ITEMS } from '@lolcalc/data';
-
 import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
-import { CalculatorExtraNumber } from '#components';
 
-const props = defineProps<IExtraComponentProps & {
-	abilityId: IItemAbilityId;
-}>();
+import { CalculatorExtraNumber } from '#components';
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+
+const props = defineProps<
+	IExtraComponentProps & {
+		abilityId: IItemAbilityId;
+	}
+>();
 
 defineEmits<IExtraComponentEmits>();
 
 type IData = IInternalItemDataOf<'tear'>;
 
-const itemIndex = computed(() => props.damageSource.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === TEAR_ITEM_TRANSFORMATIONS[props.abilityId.id]));
+const itemIndex = computed(() => props.damageSource.items.value.findIndex((item) => item?.id === props.abilityId.id || item?.id === TEAR_ITEM_TRANSFORMATIONS[props.abilityId.id]));
 const transformedItem = computed(() => ITEMS[TEAR_ITEM_TRANSFORMATIONS[props.abilityId.id]!]!);
 
 const isTransformed = ref((TRANSFORMED_TEAR_ITEM_IDS as string[]).includes(props.abilityId.id));
 
 function transform() {
-	// eslint-disable-next-line vue/no-mutating-props
 	props.damageSource.items.value[itemIndex.value] = transformedItem.value;
 	isTransformed.value = !isTransformed.value;
 	(props.damageSource.internalItemData.value as IData).manaflow = 360;
@@ -32,10 +33,8 @@ function transform() {
 		for (let i = 0; i < props.damageSource.items.value.length; i++) {
 			const item = props.damageSource.items.value[i];
 			if (item && i !== itemIndex.value && (UNTRANSFORMED_TEAR_ITEM_IDS as string[]).includes(item.id)) {
-				// eslint-disable-next-line vue/no-mutating-props
 				props.damageSource.items.value[i] = ITEMS[(TEAR_ITEM_TRANSFORMATIONS as Record<string, string>)[item.id]!];
 			} else if (item?.id === ITEM_NAME_TO_ID.tear) {
-				// eslint-disable-next-line vue/no-mutating-props
 				props.damageSource.items.value[i] = undefined;
 			}
 		}
@@ -48,10 +47,9 @@ function updateValue(value: number | undefined) {
 	}
 }
 
-const step = computed(() => (ITEMS as TItems)[props.abilityId.id as typeof UNTRANSFORMED_TEAR_ITEM_IDS[number]].dataValues.ManaPerCharge ?? 3);
+const step = computed(() => (ITEMS as TItems)[props.abilityId.id as (typeof UNTRANSFORMED_TEAR_ITEM_IDS)[number]].dataValues.ManaPerCharge ?? 3);
 </script>
 
-<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<CalculatorExtraNumber
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"

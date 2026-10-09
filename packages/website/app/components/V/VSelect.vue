@@ -34,13 +34,11 @@ function clear(event: MouseEvent) {
 			:name
 			:aria-errormessage
 			:aria-invalid="ariaErrormessage ? true : undefined"
-			@input="value = ($event.target as HTMLSelectElement).value as T || undefined"
+			@input="value = (($event.target as HTMLSelectElement).value as T) || undefined"
 			@click.right="clear"
 			@mouseenter="$emit('labelMouseenter', $event)"
 		>
-			<option v-if="clearable" value="">
-				&lt;none&gt;
-			</option>
+			<option v-if="clearable" value="">&lt;none&gt;</option>
 			<template v-if="Array.isArray(options)">
 				<option v-for="[optionValue, text, isDisabled] in options" :key="optionValue" :value="optionValue" :disabled="isDisabled">
 					{{ text }}

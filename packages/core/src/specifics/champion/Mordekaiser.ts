@@ -1,5 +1,6 @@
-import type { IChampionSpecific } from '../champion.ts';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
 
 export default {
 	setupData(self) {

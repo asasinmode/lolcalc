@@ -1,12 +1,13 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type INasus from '@lolcalc/data/files/champion/Nasus.json';
 import type { IChampion } from '@lolcalc/data/types.js';
-import type { IChampionSpecific } from '../champion.ts';
-import type { IDeriveProgressFn } from '../index.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
+
+import type { IChampionSpecific } from '../champion.ts';
+import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function wCalculateMS(champion: IChampion, progress: number, wLevel: number): number {
@@ -19,11 +20,7 @@ function wCalculateMS(champion: IChampion, progress: number, wLevel: number): nu
 	const maxMSSlow = championAbilityVariableValue('MaxSlowTooltipOnly', wParams);
 
 	if (typeof minMSSlow.value === 'number' && typeof maxMSSlow.value === 'number') {
-		return progress === 1
-			? minMSSlow.value
-			: progress
-				? (minMSSlow.value + (maxMSSlow.value - minMSSlow.value) * progress / 100)
-				: 0;
+		return progress === 1 ? minMSSlow.value : progress ? minMSSlow.value + ((maxMSSlow.value - minMSSlow.value) * progress) / 100 : 0;
 	}
 
 	console.warn('[CHAMPION_SPECIFICS nasus] failed to calculate W ms/as slow values', minMSSlow, maxMSSlow);

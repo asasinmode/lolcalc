@@ -1,22 +1,35 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IAphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type { IChampion } from '@lolcalc/data/types.js';
+import { clamp } from '@lolcalc/shared/utils.ts';
 import type { UnwrapRef } from 'vue';
+import { watch } from 'vue';
+
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
-import { clamp } from '@lolcalc/shared/utils.ts';
-import { watch } from 'vue';
 import { defineChampionVariables } from './shared.ts';
 
 export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';
 
 /* `effectsMeta` has hardcoded gravitum index as 2, update if it changes */
-const WEAPON_NAME_TO_VARIANT_INDEX = { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>;
-const	WEAPON_VARIANT_INDEX_TO_NAME = ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[];
+const WEAPON_NAME_TO_VARIANT_INDEX = {
+	calibrum: 0,
+	severum: 1,
+	gravitum: 2,
+	infernum: 3,
+	crescendum: 4,
+} satisfies Record<IApheliosWeapon, number>;
+const WEAPON_VARIANT_INDEX_TO_NAME = ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[];
 /** stringtable indexes are different from the actual weapon order - `apheliosgun_name_1` is for calibrum and so */
-const	WEAPON_NAME_TO_STRINGTABLE_INDEX = { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>;
+const WEAPON_NAME_TO_STRINGTABLE_INDEX = {
+	calibrum: 1,
+	severum: 2,
+	infernum: 3,
+	crescendum: 4,
+	gravitum: 5,
+} satisfies Record<IApheliosWeapon, number>;
 
 function nextWeapon(afterIndex: number, usedIndexes: number[]): number {
 	let rv = (afterIndex + 1) % WEAPON_VARIANT_INDEX_TO_NAME.length;
@@ -29,13 +42,14 @@ function nextWeapon(afterIndex: number, usedIndexes: number[]): number {
 }
 
 function calculateQGravitumSlow(champion: IChampion, progress: number) {
-	const qParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'q', abilityVariant: champion.abilities.q.variants[WEAPON_NAME_TO_VARIANT_INDEX.gravitum]! };
+	const qParams: IGameVariableValueParameters['championAbility'] = {
+		abilityKey: 'q',
+		abilityVariant: champion.abilities.q.variants[WEAPON_NAME_TO_VARIANT_INDEX.gravitum]!,
+	};
 	const slow = championAbilityVariableValue('SlowAmountInitial', qParams);
 	const minSlow = championAbilityVariableValue('{dec81e53}', qParams);
 	if (typeof slow.value === 'number' && typeof minSlow.value === 'number') {
-		return progress === 1
-			? minSlow.value * 100
-			: minSlow.value * 100 + (slow.value - minSlow.value) * progress;
+		return progress === 1 ? minSlow.value * 100 : minSlow.value * 100 + (slow.value - minSlow.value) * progress;
 	}
 
 	console.warn('[CHAMPION_SPECIFICS aphelios] failed to calculate gravitum slow vars', slow, minSlow);
@@ -63,10 +77,7 @@ export default {
 		usedIndexes.push(abilityVariantsIndexes.w);
 
 		abilityVariantsIndexes.e ??= WEAPON_NAME_TO_VARIANT_INDEX.gravitum;
-		if (
-			abilityVariantsIndexes.e === abilityVariantsIndexes.q
-			|| abilityVariantsIndexes.e === abilityVariantsIndexes.w
-		) {
+		if (abilityVariantsIndexes.e === abilityVariantsIndexes.q || abilityVariantsIndexes.e === abilityVariantsIndexes.w) {
 			abilityVariantsIndexes.e = nextWeapon(abilityVariantsIndexes.e, usedIndexes);
 		}
 		usedIndexes.push(abilityVariantsIndexes.e);
@@ -79,9 +90,15 @@ export default {
 		return {
 			lastRotatedVariantIndex,
 			gravitumSlowProgress: clamp(0, Math.round(self.internalData.value.gravitumSlowProgress ?? 0), 100),
-			_watchHandles: [watch(self.level, () => {
-				self.abilityLevels.value.r = Math.floor((self.level.value - 1) / 5);
-			}, { immediate: true })],
+			_watchHandles: [
+				watch(
+					self.level,
+					() => {
+						self.abilityLevels.value.r = Math.floor((self.level.value - 1) / 5);
+					},
+					{ immediate: true },
+				),
+			],
 		};
 	},
 	passive: {
@@ -142,7 +159,7 @@ export default {
 				/* also 0, gravitum has "this weapon does not use offhand" */
 				f5: [0, 1, 2, 3, 4, 5],
 				/* array of 12, 13, ..., 21, 23, ..., 53, 54 - no 2 repeated numbers like 11, 22 */
-				f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
+				f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap((i) => Array.from({ length: 5 }, (_, j) => (i === j + 1 ? undefined : `${i}${j + 1}`)).filter(Boolean)) as string[],
 			},
 			calculate(self) {
 				/* check e variables for more details on what's going on with indexes */
@@ -188,28 +205,33 @@ export default {
 				};
 			},
 		}),
-		...Object.fromEntries(Array.from({ length: 5 }, (_, i) => [i, {
-			variables: defineChampionVariables<'Aphelios', typeof IAphelios, 'e'>()({
-				known: {
-					f1: [],
-					f2: [],
-					f3: [],
-				},
-				calculate(self) {
-					const { q, w, e } = self.abilityVariantsIndexes.value;
+		...Object.fromEntries(
+			Array.from({ length: 5 }, (_, i) => [
+				i,
+				{
+					variables: defineChampionVariables<'Aphelios', typeof IAphelios, 'e'>()({
+						known: {
+							f1: [],
+							f2: [],
+							f3: [],
+						},
+						calculate(self) {
+							const { q, w, e } = self.abilityVariantsIndexes.value;
 
-					const stringtableIndex: number = WEAPON_NAME_TO_STRINGTABLE_INDEX[WEAPON_VARIANT_INDEX_TO_NAME[i]!];
+							const stringtableIndex: number = WEAPON_NAME_TO_STRINGTABLE_INDEX[WEAPON_VARIANT_INDEX_TO_NAME[i]!];
 
-					return {
-						/* 1 - main, 2 - offhand, 3 - next. The numbers are for stringtable. The ability indexes of q/w/e are used in Aphelios' abilities component */
-						f1: { value: i === e ? 3 : i === w ? 2 : 1 },
-						/* when it's main hand weapon, a more detailed description is displayed and the stringtable key is under `1`. If offhand/next, less details - 2 */
-						f2: { value: q === i ? 1 : 2 },
-						f3: { value: stringtableIndex },
-					};
+							return {
+								/* 1 - main, 2 - offhand, 3 - next. The numbers are for stringtable. The ability indexes of q/w/e are used in Aphelios' abilities component */
+								f1: { value: i === e ? 3 : i === w ? 2 : 1 },
+								/* when it's main hand weapon, a more detailed description is displayed and the stringtable key is under `1`. If offhand/next, less details - 2 */
+								f2: { value: q === i ? 1 : 2 },
+								f3: { value: stringtableIndex },
+							};
+						},
+					}),
 				},
-			}),
-		}])),
+			]),
+		),
 	},
 	r: {
 		variables: defineChampionVariables<'Aphelios', typeof IAphelios, 'r'>()({
@@ -230,7 +252,11 @@ export default {
 		onChampionPassive: {
 			handler(self, { championPassiveStats }) {
 				const { q, w, e } = self.abilityLevels.value;
-				const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityVariant: self.champion.value!.abilities.passive.variants[0]!, abilityKey: 'passive', damageSource: self };
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					abilityKey: 'passive',
+					damageSource: self,
+				};
 
 				const adPerRank = championAbilityVariableValue('ADPerRank', passiveParams);
 				if (typeof adPerRank.value === 'number') {
@@ -254,7 +280,11 @@ export default {
 				}
 
 				if (self.abilityVariantsIndexes.value.q === WEAPON_VARIANT_INDEX_TO_NAME.indexOf('calibrum')) {
-					const bonusRange = championAbilityVariableValue('BonusRange', { abilityKey: 'q', abilityVariant: self.champion.value!.abilities.q.variants[WEAPON_VARIANT_INDEX_TO_NAME.indexOf('calibrum')]!, damageSource: self });
+					const bonusRange = championAbilityVariableValue('BonusRange', {
+						abilityKey: 'q',
+						abilityVariant: self.champion.value!.abilities.q.variants[WEAPON_VARIANT_INDEX_TO_NAME.indexOf('calibrum')]!,
+						damageSource: self,
+					});
 					if (typeof bonusRange.value === 'number') {
 						championPassiveStats.attackRange = bonusRange.value;
 					} else {

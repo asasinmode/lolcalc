@@ -1,10 +1,10 @@
 <script setup vapor lang="ts">
-import type { IChampionRunes, IRune, IRuneShard, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
-import type { StyleValue, UnwrapRef } from 'vue';
 import { runesInvalid } from '@lolcalc/core/specifics/rune';
 import { replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
+import type { IChampionRunes, IRune, IRuneShard, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
+import type { StyleValue, UnwrapRef } from 'vue';
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { vMinor } = PATCH_VERSION;
@@ -30,7 +30,7 @@ const primaryRunePathStyle = computed((): StyleValue => {
 		return;
 	}
 
-	const { icon, iconColor } = pathOptions.find(path => path.name === value.value?.paths.primary!)!;
+	const { icon, iconColor } = pathOptions.find((path) => path.name === value.value?.paths.primary!)!;
 	return {
 		'--path-icon': `url(${icon})`,
 		'--path-icon-clr': iconColor,
@@ -40,29 +40,29 @@ const primaryRunePathStyle = computed((): StyleValue => {
 
 const primaryRunePathSlots = computed(() => {
 	if (value.value?.paths.primary) {
-		return RUNES.paths[value.value.paths.primary].slots.map(slots => Object.values(slots).map((slot) => {
-			const texts = TEXT.runes.slots[slot.name]!;
-			if (!texts) {
-				console.warn(`text for ${slot.name} not found`);
-			}
-			const { name, tooltipShort, tooltipLong } = texts;
-			return {
-				name: slot.name,
-				icon: slot.icon,
-				title: name,
-				tooltipShort,
-				tooltipLong,
-				rune: slot,
-			};
-		}));
+		return RUNES.paths[value.value.paths.primary].slots.map((slots) =>
+			Object.values(slots).map((slot) => {
+				const texts = TEXT.runes.slots[slot.name]!;
+				if (!texts) {
+					console.warn(`text for ${slot.name} not found`);
+				}
+				const { name, tooltipShort, tooltipLong } = texts;
+				return {
+					name: slot.name,
+					icon: slot.icon,
+					title: name,
+					tooltipShort,
+					tooltipLong,
+					rune: slot,
+				};
+			}),
+		);
 	}
 	return undefined;
 });
 
 const secondaryPathOptions = computed(() => {
-	return (value.value?.paths.primary
-		? pathOptions.filter(path => path.name !== value.value?.paths.primary)
-		: pathOptions.slice(0, 4));
+	return value.value?.paths.primary ? pathOptions.filter((path) => path.name !== value.value?.paths.primary) : pathOptions.slice(0, 4);
 });
 
 const secondaryRunePathStyle = computed((): StyleValue => {
@@ -70,7 +70,7 @@ const secondaryRunePathStyle = computed((): StyleValue => {
 		return { '--path-options-length': pathOptions.length - 1 };
 	}
 
-	const { icon, iconColor } = pathOptions.find(path => path.name === value.value?.paths.secondary!)!;
+	const { icon, iconColor } = pathOptions.find((path) => path.name === value.value?.paths.secondary!)!;
 	return {
 		'--path-icon': `url(${icon})`,
 		'--path-icon-clr': iconColor,
@@ -80,58 +80,59 @@ const secondaryRunePathStyle = computed((): StyleValue => {
 
 const secondaryRunePathSlots = computed(() => {
 	if (value.value?.paths.secondary) {
-		return RUNES.paths[value.value.paths.secondary].slots.slice(1).map(slots => Object.values(slots).map((slot) => {
-			const texts = TEXT.runes.slots[slot.name]!;
-			if (!texts) {
-				console.warn(`text for ${slot.name} not found`);
-			}
-			const { name, tooltipShort, tooltipLong } = texts;
-			return {
-				name: slot.name,
-				icon: slot.icon,
-				title: name,
-				tooltipShort,
-				tooltipLong,
-				rune: slot,
-			};
-		}));
+		return RUNES.paths[value.value.paths.secondary].slots.slice(1).map((slots) =>
+			Object.values(slots).map((slot) => {
+				const texts = TEXT.runes.slots[slot.name]!;
+				if (!texts) {
+					console.warn(`text for ${slot.name} not found`);
+				}
+				const { name, tooltipShort, tooltipLong } = texts;
+				return {
+					name: slot.name,
+					icon: slot.icon,
+					title: name,
+					tooltipShort,
+					tooltipLong,
+					rune: slot,
+				};
+			}),
+		);
 	}
 	return undefined;
 });
 
 function secondarySlotValue(options: NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number]) {
-	const relevantSecondarySlotIndex = value.value?.paths.secondarySlots.findIndex(slot => options.some(option => option.name === slot));
+	const relevantSecondarySlotIndex = value.value?.paths.secondarySlots.findIndex((slot) => options.some((option) => option.name === slot));
 	if (relevantSecondarySlotIndex !== undefined && ~relevantSecondarySlotIndex) {
 		return value.value!.paths.secondarySlots[relevantSecondarySlotIndex];
 	}
 	return undefined;
-};
+}
 
-const shardSlots = computed(() =>
-	Object.fromEntries(Object.entries(RUNES.shards).map(([shardName, shardSlots]) =>
-		[shardName, Object.entries(shardSlots).map(([name, shardValue]) => {
-			const { name: title, tooltip } = TEXT.runes.shards.slotValues[name]!;
-			return {
-				name,
-				title,
-				tooltip,
-				icon: shardValue.icon,
-				rune: shardValue,
-			};
-		})],
-	)) as Record<IRuneShardSlotName, { name: string; title: string; tooltip: string; icon: string; rune: IRuneShard }[]>,
+const shardSlots = computed(
+	() =>
+		Object.fromEntries(
+			Object.entries(RUNES.shards).map(([shardName, shardSlots]) => [
+				shardName,
+				Object.entries(shardSlots).map(([name, shardValue]) => {
+					const { name: title, tooltip } = TEXT.runes.shards.slotValues[name]!;
+					return {
+						name,
+						title,
+						tooltip,
+						icon: shardValue.icon,
+						rune: shardValue,
+					};
+				}),
+			]),
+		) as Record<IRuneShardSlotName, { name: string; title: string; tooltip: string; icon: string; rune: IRuneShard }[]>,
 );
 
-type PathTuple<T, K extends keyof T = keyof T>
-	= | [K]
-		| (K extends any ? (T[K] extends object ? [K, ...PathTuple<T[K]>] : [K]) : never);
+type PathTuple<T, K extends keyof T = keyof T> = [K] | (K extends any ? (T[K] extends object ? [K, ...PathTuple<T[K]>] : [K]) : never);
 
 let currentSecondarySlotReplaceTargetIndex = 0;
 
-function updateValue<P extends PathTuple<IChampionRunes>>(
-	path: P,
-	newValue?: string,
-) {
+function updateValue<P extends PathTuple<IChampionRunes>>(path: P, newValue?: string) {
 	if (newValue && value.value) {
 		const lastKey = path.at(-1);
 		let reference = value.value[path[0]!];
@@ -140,7 +141,7 @@ function updateValue<P extends PathTuple<IChampionRunes>>(
 			reference = reference[key];
 		}
 		if (path[0] === 'paths' && path[1] === 'secondarySlots') {
-			const sameSlotOptionIndex = value.value.paths.secondarySlots.findIndex(slot => secondaryRunePathSlots.value![lastKey as number]!.some(option => option.name === slot));
+			const sameSlotOptionIndex = value.value.paths.secondarySlots.findIndex((slot) => secondaryRunePathSlots.value![lastKey as number]!.some((option) => option.name === slot));
 			if (~sameSlotOptionIndex) {
 				value.value.paths.secondarySlots[sameSlotOptionIndex] = newValue as IRuneSlotName;
 			} else {
@@ -180,45 +181,47 @@ const hoveredRuneTooltip = computed(() => {
 		return undefined;
 	}
 
-	const { replaced: shortStringtableVariableReplaced, unknownStringtableVariables: shortUnknownSV } = replaceStringtableVariables(
-		hoveredRune.value.description,
-		TEXT.stringtable,
-	);
+	const { replaced: shortStringtableVariableReplaced, unknownStringtableVariables: shortUnknownSV } = replaceStringtableVariables(hoveredRune.value.description, TEXT.stringtable);
 
-	const { replaced: shortReplaced, unknownVariables: shortUnknownV } = replaceGameVariables(
-		shortStringtableVariableReplaced,
-		'rune',
-		{ rune: hoveredRune.value.rune },
-	);
+	const { replaced: shortReplaced, unknownVariables: shortUnknownV } = replaceGameVariables(shortStringtableVariableReplaced, 'rune', { rune: hoveredRune.value.rune });
 
-	const { replaced: longStringtableVariableReplaced, unknownStringtableVariables: longUnknownSV } = replaceStringtableVariables(
-		hoveredRune.value.expandedDescription || '',
-		TEXT.stringtable,
-	);
+	const { replaced: longStringtableVariableReplaced, unknownStringtableVariables: longUnknownSV } = replaceStringtableVariables(hoveredRune.value.expandedDescription || '', TEXT.stringtable);
 
-	const { replaced: longReplaced, unknownVariables: longUnknownV } = replaceGameVariables(
-		longStringtableVariableReplaced,
-		'rune',
-		{ rune: hoveredRune.value.rune },
-	);
+	const { replaced: longReplaced, unknownVariables: longUnknownV } = replaceGameVariables(longStringtableVariableReplaced, 'rune', { rune: hoveredRune.value.rune });
 
 	const anyUnknownVariables = shortUnknownSV.size || shortUnknownV.length || longUnknownSV.size || longUnknownV.length;
 
 	return { shortReplaced, longReplaced, anyUnknownVariables };
 });
 
-type IHoveredRuneOption = (typeof pathOptions)[number] | NonNullable<UnwrapRef<typeof primaryRunePathSlots>>[number][number] | NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number] | UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
+type IHoveredRuneOption =
+	| (typeof pathOptions)[number]
+	| NonNullable<UnwrapRef<typeof primaryRunePathSlots>>[number][number]
+	| NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number]
+	| UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
 
 function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredRuneOption) {
 	const { target } = event as unknown as { target: HTMLElement };
 	runeDescriptionTooltip.value?.showPopover();
 	runeDescriptionTooltipAnchor = target;
-	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
-	runeDescriptionTooltipAnchor?.addEventListener('focusout', leaveTooltipableElement, { passive: true, once: true });
+	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, {
+		passive: true,
+		once: true,
+	});
+	runeDescriptionTooltipAnchor?.addEventListener('focusout', leaveTooltipableElement, {
+		passive: true,
+		once: true,
+	});
 	window.addEventListener('resize', updateTooltipPosition, { passive: true });
-	hoveredRune.value = 'tooltipLong' in rune
-		? { title: rune.title, description: rune.tooltipShort, expandedDescription: rune.tooltipLong, rune: rune.rune }
-		: { title: rune.title, description: rune.tooltip, rune: rune.rune };
+	hoveredRune.value =
+		'tooltipLong' in rune
+			? {
+					title: rune.title,
+					description: rune.tooltipShort,
+					expandedDescription: rune.tooltipLong,
+					rune: rune.rune,
+				}
+			: { title: rune.title, description: rune.tooltip, rune: rune.rune };
 	nextTick(() => updateTooltipPosition());
 }
 
@@ -256,22 +259,16 @@ defineExpose({
 				{{ configurationInvalid ? 'configuration invalid' : '' }}
 			</p>
 			<form method="dialog">
-				<button autofocus value="cancel" class="other-ui-btn">
-					save
-				</button>
+				<button autofocus value="cancel" class="other-ui-btn">save</button>
 				<button value="cancel" title="close" class="other-ui-btn">
-					<span>
-						close
-					</span>
+					<span> close </span>
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</form>
 		</header>
 		<ComingSoonCover style="grid-area: primary" feature="Primary path" />
 		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableUnimplementedUi">
-			<h2>
-				Primary
-			</h2>
+			<h2>Primary</h2>
 			<VButtonRadiogroup
 				id="rune-select-primary-path"
 				:model-value="value?.paths.primary"
@@ -285,12 +282,7 @@ defineExpose({
 				@update:model-value="updateValue(['paths', 'primary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
-					<span
-						:style="`background-color: ${iconColor}; mask: url(${icon}) no-repeat center;`"
-						aria-hidden="true"
-						width="32"
-						height="32"
-					/>
+					<span :style="`background-color: ${iconColor}; mask: url(${icon}) no-repeat center;`" aria-hidden="true" width="32" height="32" />
 					<span class="sr-only">{{ title }}</span>
 				</template>
 			</VButtonRadiogroup>
@@ -309,21 +301,14 @@ defineExpose({
 				@update:model-value="updateValue(['paths', 'primarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
-					<img
-						:src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`"
-						aria-hidden="true"
-						:width="slotIndex === 0 ? 256 : 64"
-						:height="slotIndex === 0 ? 256 : 64"
-					>
+					<img :src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`" aria-hidden="true" :width="slotIndex === 0 ? 256 : 64" :height="slotIndex === 0 ? 256 : 64" />
 					<span class="sr-only">{{ title }}</span>
 				</template>
 			</VButtonRadiogroup>
 		</section>
 		<ComingSoonCover style="grid-area: secondary" feature="Secondary path" />
 		<section id="rune-select-secondary" :style="secondaryRunePathStyle" :data-slots-filled="value?.paths.secondarySlots.length" :inert="!enableUnimplementedUi">
-			<h2>
-				Secondary
-			</h2>
+			<h2>Secondary</h2>
 			<VButtonRadiogroup
 				id="rune-select-secondary-path"
 				:model-value="value?.paths.secondary"
@@ -337,12 +322,7 @@ defineExpose({
 				@update:model-value="updateValue(['paths', 'secondary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
-					<span
-						:style="`background-color: ${iconColor}; mask: url(${icon}) no-repeat center;`"
-						aria-hidden="true"
-						width="32"
-						height="32"
-					/>
+					<span :style="`background-color: ${iconColor}; mask: url(${icon}) no-repeat center;`" aria-hidden="true" width="32" height="32" />
 					<span class="sr-only">{{ title }}</span>
 				</template>
 			</VButtonRadiogroup>
@@ -366,20 +346,13 @@ defineExpose({
 				@update:model-value="updateValue(['paths', 'secondarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
-					<img
-						:src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`"
-						aria-hidden="true"
-						width="64"
-						height="64"
-					>
+					<img :src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`" aria-hidden="true" width="64" height="64" />
 					<span class="sr-only">{{ title }}</span>
 				</template>
 			</VButtonRadiogroup>
 		</section>
 		<section id="rune-select-shards" :style="`--path-icon-clr: hsl(from ${RUNES.paths.Precision.iconColor} h calc(s * 1.3) l); --path-options-length: ${secondaryPathOptions.length}`">
-			<h2>
-				Shards
-			</h2>
+			<h2>Shards</h2>
 			<VButtonRadiogroup
 				v-for="(slots, slotName) in shardSlots"
 				:id="`rune-select-shards-slot-${slotName}`"
@@ -394,24 +367,14 @@ defineExpose({
 				@update:model-value="updateValue(['shards', slotName], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
-					<img
-						:src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`"
-						aria-hidden="true"
-						width="64"
-						height="64"
-					>
+					<img :src="`https://raw.communitydragon.org/${vMinor}/game/${icon}`" aria-hidden="true" width="64" height="64" />
 					<span class="sr-only">{{ title }}</span>
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<article
-			id="rune-select-dialog-hover-tooltip"
-			ref="runeDescriptionTooltip"
-			popover="manual"
-			class="hover-tooltip game-description"
-		>
+		<article id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="manual" class="hover-tooltip game-description">
 			<h4>{{ hoveredRune?.title }}</h4>
-			<div v-html="globalKeyModifiers.shift && hoveredRuneTooltip?.longReplaced || hoveredRuneTooltip?.shortReplaced" />
+			<div v-html="(globalKeyModifiers.shift && hoveredRuneTooltip?.longReplaced) || hoveredRuneTooltip?.shortReplaced" />
 			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />
 		</article>
 	</VDialog>
@@ -714,9 +677,7 @@ defineExpose({
 
 			--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
 			--selected-dots-column-lining-clr: hsl(0 100% 100% / 0.6);
-			--selected-dots-column-lining-clr: hsl(
-				from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
-			);
+			--selected-dots-column-lining-clr: hsl(from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2));
 
 			--at-apply: 'relative h-max';
 
@@ -738,14 +699,7 @@ defineExpose({
 			:where([data-placeholder-secondary-slot-row]) {
 				&[data-keystone] {
 					--at-apply: 'py-[--keystone-row-py] b-y b-[--path-icon-clr]';
-					border-image: linear-gradient(
-							90deg,
-							transparent 0%,
-							var(--path-icon-clr) 20%,
-							var(--path-icon-clr) 80%,
-							transparent 100%
-						)
-						1;
+					border-image: linear-gradient(90deg, transparent 0%, var(--path-icon-clr) 20%, var(--path-icon-clr) 80%, transparent 100%) 1;
 
 					> span {
 						--at-apply: 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] start-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] -top-1 -translate-y-full';
@@ -785,14 +739,8 @@ defineExpose({
 						--at-apply: 'op-0';
 					}
 				}
-				--secondary-slot-first-dot-translate-y: calc(
-					(var(--keystone-row-height) - var(--slot-row-height)) / 2 + var(--selected-dot-mt-translate)
-				);
-				--secondary-slot-second-dot-translate-y: calc(
-					var(--keystone-row-height) - var(--secondary-slot-row-height) +
-						(var(--primary-slot-row-height) - var(--secondary-slot-row-height)) / 2 + var(--selected-dot-mt-translate) +
-						1px
-				);
+				--secondary-slot-first-dot-translate-y: calc((var(--keystone-row-height) - var(--slot-row-height)) / 2 + var(--selected-dot-mt-translate));
+				--secondary-slot-second-dot-translate-y: calc(var(--keystone-row-height) - var(--secondary-slot-row-height) + (var(--primary-slot-row-height) - var(--secondary-slot-row-height)) / 2 + var(--selected-dot-mt-translate) + 1px);
 
 				@media (width < 760px) {
 					& {
@@ -912,11 +860,7 @@ defineExpose({
 		#rune-select-dialog-hover-tooltip {
 			--at-apply: 'b-2 inline-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-[--fluid-8-28-t810] leading-5.5';
 			--width: 21.5rem;
-			inset-inline-start: clamp(
-				min(100vw / 2, calc(var(--width) / 2)),
-				var(--left),
-				calc(100vw - min(100vw, var(--width) / 2))
-			);
+			inset-inline-start: clamp(min(100vw / 2, calc(var(--width) / 2)), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
 			/* not sure why whole 4 * spacing is needed to make sure it doesn't go off screen */
 			inset-block-start: clamp(calc(var(--height) + 4 * var(--spacing)), var(--top), calc(100vh - var(--height)));
 

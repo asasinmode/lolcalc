@@ -1,9 +1,10 @@
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { AbilityType } from '@lolcalc/shared';
+
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
 
@@ -33,14 +34,10 @@ const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalDat
 
 <template>
 	<SlotIndexComponent v-bind="$props" :disabled="damageSource.level.value < masterworkLevel">
-		<p>
-			needs level {{ masterworkLevel }}+
-		</p>
+		<p>needs level {{ masterworkLevel }}+</p>
 	</SlotIndexComponent>
-	<UpgradedAlliesComponent v-bind="$props" :disabled="damageSource.level.value < (masterworkLevel + 1)">
-		<p>
-			needs level {{ masterworkLevel + 1 }}+
-		</p>
+	<UpgradedAlliesComponent v-bind="$props" :disabled="damageSource.level.value < masterworkLevel + 1">
+		<p>needs level {{ masterworkLevel + 1 }}+</p>
 	</UpgradedAlliesComponent>
 </template>
 

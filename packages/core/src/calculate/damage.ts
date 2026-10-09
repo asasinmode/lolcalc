@@ -1,8 +1,9 @@
 import type { IChampionStats, IEffectOntoTargetVars } from '@lolcalc/shared';
+
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
-import type { IItemSpecific } from '../specifics/item.ts';
 import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';
+import type { IItemSpecific } from '../specifics/item.ts';
 import { ITEM_SPECIFICS } from '../specifics/item.ts';
 
 export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoTargetVars {
@@ -52,21 +53,14 @@ export function basicAttack() {
 	// steelcaps/armored advance
 }
 
-export function calculateDamage(
-	rawDamage: number,
-	type: IDamageType,
-	target: IDamageTarget,
-	penetration: Pick<IChampionStats, 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>,
-): IDamageResults {
+export function calculateDamage(rawDamage: number, type: IDamageType, target: IDamageTarget, penetration: Pick<IChampionStats, 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>): IDamageResults {
 	if (type === 'true') {
 		return { postMitigationDamage: rawDamage, effectiveResists: 0 };
 	}
 
-	const [resists, flatPen, percentPen] = type === 'physical'
-		? [target.stats.armor, penetration.lethality, penetration.percentArmorPen]
-		: [target.stats.magicResist, penetration.flatMagicPen, penetration.percentMagicPen];
+	const [resists, flatPen, percentPen] = type === 'physical' ? [target.stats.armor, penetration.lethality, penetration.percentArmorPen] : [target.stats.magicResist, penetration.flatMagicPen, penetration.percentMagicPen];
 
-	const effectiveResists = Math.max(0, (resists * (1 - percentPen)) - flatPen);
+	const effectiveResists = Math.max(0, resists * (1 - percentPen) - flatPen);
 	const postMitigationDamage = rawDamage / (1 + effectiveResists / 100);
 
 	return {

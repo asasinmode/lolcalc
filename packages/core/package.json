@@ -1,11 +1,11 @@
 {
 	"name": "@lolcalc/core",
-	"type": "module",
 	"version": "0.0.1",
 	"private": true,
 	"description": "core, game related functionality for lolcalc",
-	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"type": "module",
 	"exports": {
 		".": "./src/index.ts",
 		"./*": "./src/*"

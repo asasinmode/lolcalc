@@ -1,21 +1,24 @@
 <script setup vapor lang="ts">
 import type { IGameImageData } from '@lolcalc/core/misc';
 
-withDefaults(defineProps<{
-	idSuffix: string;
-	imgSrc: IGameImageData;
-	label: string;
-	usedNumberInput: ReturnType<typeof useNumberInput>;
-	min?: number;
-	max?: number;
-	step?: number;
-	disabled?: boolean;
-	/** disabled but only visually */
-	inactive?: boolean;
-	tooltip?: string;
-}>(), {
-	min: 0,
-});
+withDefaults(
+	defineProps<{
+		idSuffix: string;
+		imgSrc: IGameImageData;
+		label: string;
+		usedNumberInput: ReturnType<typeof useNumberInput>;
+		min?: number;
+		max?: number;
+		step?: number;
+		disabled?: boolean;
+		/** disabled but only visually */
+		inactive?: boolean;
+		tooltip?: string;
+	}>(),
+	{
+		min: 0,
+	},
+);
 
 defineEmits<{
 	imgMouseenter: [event: MouseEvent];
@@ -26,40 +29,15 @@ const value = defineModel<number>();
 
 <template>
 	<article class="calc-extra-number" :data-inactive="inactive || undefined">
-		<img
-			v-bind="gameImageAttrs(imgSrc, 56)"
-			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event)"
-		>
+		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
 		<label :for="`xtrnmbr-${idSuffix}`">
 			{{ label }}
 			<InfoTooltip id-prefix="xtrnmbr" :id-suffix :tooltip />
 		</label>
 		<slot />
-		<input
-			:id="`xtrnmbr-${idSuffix}`"
-			:value="value ?? 0"
-			type="number"
-			:min
-			:max
-			:step
-			:disabled
-			@input="usedNumberInput"
-		>
-		<button
-			class="pretend-ui-btn"
-			:disabled="disabled || value === min"
-			@click="value = min"
-		>
-			min
-		</button>
-		<button
-			class="pretend-ui-btn"
-			:disabled="disabled || max === undefined || value === max || max === Number.POSITIVE_INFINITY"
-			@click="value = max!"
-		>
-			max
-		</button>
+		<input :id="`xtrnmbr-${idSuffix}`" :value="value ?? 0" type="number" :min :max :step :disabled @input="usedNumberInput" />
+		<button class="pretend-ui-btn" :disabled="disabled || value === min" @click="value = min">min</button>
+		<button class="pretend-ui-btn" :disabled="disabled || max === undefined || value === max || max === Number.POSITIVE_INFINITY" @click="value = max!">max</button>
 	</article>
 </template>
 

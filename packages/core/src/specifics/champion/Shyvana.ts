@@ -1,7 +1,8 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
-import type IShyvana from '@lolcalc/data/files/champion/Shyvana.json';
-import type { IChampionSpecific } from '../champion.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import type IShyvana from '@lolcalc/data/files/champion/Shyvana.json';
+
+import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
@@ -35,7 +36,11 @@ export default {
 	calculateHooks: {
 		postInit: {
 			handler(self, { championPassiveStats }) {
-				const params: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]!, damageSource: self };
+				const params: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					damageSource: self,
+				};
 				const bonusArmor = championAbilityVariableValue('BonusArmor', params);
 				const bonusMr = championAbilityVariableValue('BonusMagicResist', params);
 

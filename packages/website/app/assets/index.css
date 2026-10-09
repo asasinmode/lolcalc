@@ -59,9 +59,7 @@
 		block-size: 100%;
 		--size-page-max-w: 120rem;
 		--size-page-px: var(--fluid-8-24);
-		--size-page-computed-px: calc(
-			var(--size-page-px) + max(0px, calc((100vw - var(--size-page-max-w)) / 2) - var(--size-page-px))
-		);
+		--size-page-computed-px: calc(var(--size-page-px) + max(0px, calc((100vw - var(--size-page-max-w)) / 2) - var(--size-page-px)));
 		--cyan-bg: oklch(0.249 0.0608 229.695);
 		--unknown-clr: #f0f;
 		--mauve-bg: theme('colors.mauve.950'); /* tailwind mauve-950 */
