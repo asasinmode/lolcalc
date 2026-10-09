@@ -1,34 +1,34 @@
 {
 	"name": "@lolcalc/monorepo",
-	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"packageManager": "pnpm@12.10.1+sha512.ba40a37eb1a370d60fea8c4cf1d364c13bcccef518e98ad2bcee954f539d38da37458e58261a3fa55e06523450ea0ffff9f497b135be41f2c15c1642bacace6c",
 	"description": "collection of tools and apps related to lolcalc",
-	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"license": "AGPL-3.0-only",
+	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"type": "module",
 	"scripts": {
 		"typecheck:packages": "vue-tsc --noEmit",
 		"typecheck:website": "cd packages/website && pnpm typecheck",
 		"typecheck": "run-p --aggregate-output -c \"typecheck:packages\" \"typecheck:website\"",
-		"lint": "eslint --fix --cache .",
+		"fmt": "oxmft",
+		"lint": "oxlint",
+		"lint:fix": "oxlint --fix",
 		"test:shared": "cd packages/shared && node --test",
 		"test:core": "cd packages/core && node --test",
 		"test": "run-p --aggregate-output -c test:shared test:core"
 	},
 	"devDependencies": {
-		"@antfu/eslint-config": "catalog:",
 		"@lolcalc/core": "workspace:*",
 		"@lolcalc/data": "workspace:*",
 		"@lolcalc/shared": "workspace:*",
 		"@lolcalc/website": "workspace:*",
-		"@nuxt/eslint": "catalog:",
 		"@types/node": "catalog:",
-		"@unocss/eslint-config": "catalog:",
-		"eslint": "catalog:",
-		"eslint-plugin-format": "catalog:",
 		"npm-run-all2": "catalog:",
+		"oxfmt": "catalog:",
+		"oxlint": "catalog:",
+		"oxlint-tsgolint": "catalog:",
 		"typescript": "catalog:",
 		"vue-tsc": "catalog:"
-	}
+	},
+	"packageManager": "pnpm@12.10.1+sha512.ba40a37eb1a370d60fea8c4cf1d364c13bcccef518e98ad2bcee954f539d38da37458e58261a3fa55e06523450ea0ffff9f497b135be41f2c15c1642bacace6c"
 }

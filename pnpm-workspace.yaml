@@ -15,13 +15,11 @@ allowBuilds:
   unrs-resolver: true
 
 catalog:
-  '@antfu/eslint-config': ^9.5.1
-  '@nuxt/eslint': ^1.17.0
   '@types/node': ^26.6.4
-  '@unocss/eslint-config': ^66.10.5
-  eslint: ^10.12.0
-  eslint-plugin-format: ^2.0.1
   npm-run-all2: ^9.0.3
+  oxfmt: ^0.72.0
+  oxlint: ^1.87.0
+  oxlint-tsgolint: ^7.0.2003
   typescript: ^6.0.3
   vue: ^3.6.0-rc.10
   vue-component-type-helpers: ^3.3.12

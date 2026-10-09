@@ -15,7 +15,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Akali: {
 		extras: [
 			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (towards/after crossing the ring)', false),
-			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'passiveRangeSnapshot', 'is passive range active (after crossing the ring)', false, undefined, `Under the hood Akali\'s passive snapshots the attack range at the moment of crossing the ring, then grants it as bonus (which for example makes ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rfc))} ${ITEMS_BY_NAME.rfc?.name}'s Sharpshooter apply twice)`, {
+			await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'passiveRangeSnapshot', 'is passive range active (after crossing the ring)', false, undefined, `Under the hood Akali's passive snapshots the attack range at the moment of crossing the ring, then grants it as bonus (which for example makes ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rfc))} ${ITEMS_BY_NAME.rfc?.name}'s Sharpshooter apply twice)`, {
 				effectControlsProps: CHAMPION_SPECIFICS.Akali.passive.extraControls,
 			}),
 		],

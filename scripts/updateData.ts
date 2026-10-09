@@ -1161,8 +1161,6 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						}
 					} else if (sourceSpell.mBuff?.mTooltipData?.mLocKeys?.keyTooltip) {
 						effectData.description = getStringtableValue(sourceSpell.mBuff.mTooltipData.mLocKeys.keyTooltip, `custom effect ${effectObjectName} ${sourceSpell.ObjectName} description`)!;
-					} else if ('sharedSpellEffectObjectKey' in customEffect && !sourceSpell.mSpell) {
-						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" mSpell not found in shared spell "${spellKey}" object`);
 					}
 
 					/* used for summoner spells to extract spell data but not needed for champion spells since that data should already be saved on champion */

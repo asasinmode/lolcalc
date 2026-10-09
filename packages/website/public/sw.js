@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 function getCacheName() {
 	const now = new Date();
 

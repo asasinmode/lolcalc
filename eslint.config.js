@@ -35,5 +35,5 @@ export default antfu({
 		'style/lines-between-class-members': 'off',
 	},
 	formatters: true,
-	ignores: ['packages/data/files/**/*.json'],
+	ignores: ['packages/data/files/**/*.json', 'packages/core/test/fixtures/*.json'],
 }, { files: ['**/*.d.ts'] }, nuxtConfig);
