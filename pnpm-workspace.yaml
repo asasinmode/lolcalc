@@ -14,13 +14,16 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 
+overrides:
+  typescript: npm:typescript-native-bridge@6.0.3-bridge.18.tsgo.7.0.2
+
 catalog:
   '@types/node': ^26.6.4
   npm-run-all2: ^9.0.3
   oxfmt: ^0.72.0
   oxlint: ^1.87.0
   oxlint-tsgolint: ^7.0.2003
-  typescript: ^6.0.3
+  typescript: npm:typescript-native-bridge@6.0.3-bridge.18.tsgo.7.0.2
   vue: ^3.6.0-rc.10
   vue-component-type-helpers: ^3.3.12
   vue-tsc: ^3.3.12

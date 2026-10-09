@@ -3,6 +3,7 @@ import { imgUrl, PATCH_VERSION } from '@lolcalc/data';
 
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
+const runtimeConfig = useRuntimeConfig();
 const { saveState, isStateTooLargeForQuery } = useManageCalculatorState(initCalculatorState());
 const { vSemver } = PATCH_VERSION;
 const enableUnimplementedUi = useEnableUnimplementedUi();
@@ -103,7 +104,7 @@ onMounted(() => {
 		<div>
 			<h1>
 				<span>lolcalc</span>
-				<a :href="$config.app.baseURL"> <span>link to the lolcalc home page</span> </a>
+				<a :href="runtimeConfig.app.baseURL"> <span>link to the lolcalc home page</span> </a>
 				<img src="/logo_dark.webp" width="192" height="192" alt="lolcalc logo - the letter L with a calculator icon next to it" />
 			</h1>
 			<span> 26{{ vSemver.slice(vSemver.indexOf('.')) }} </span>

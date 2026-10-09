@@ -7,7 +7,7 @@
 	"author": "Stanisław Perek<https://github.com/asasinmode>",
 	"type": "module",
 	"scripts": {
-		"typecheck:packages": "vue-tsc --noEmit",
+		"typecheck:packages": "tsc --noEmit",
 		"typecheck:website": "cd packages/website && pnpm typecheck",
 		"typecheck": "run-p --aggregate-output -c \"typecheck:packages\" \"typecheck:website\"",
 		"fmt": "pnpm --ignore-scripts exec oxfmt",
