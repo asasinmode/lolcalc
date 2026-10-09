@@ -1,5 +1,5 @@
 <!-- eslint-disable vue/no-mutating-props -->
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 
 const props = defineProps<{

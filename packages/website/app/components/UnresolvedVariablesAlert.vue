@@ -1,3 +1,6 @@
+<script setup vapor lang="ts">
+</script>
+
 <template>
 	<p class="alert warning">
 		Some variables weren't resolved correctly. Please <a href="#">TODO report this issue</a>

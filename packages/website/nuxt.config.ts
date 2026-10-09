@@ -46,7 +46,7 @@ export default defineNuxtConfig({
 			compilerOptions: {
 				erasableSyntaxOnly: true,
 				allowImportingTsExtensions: true,
-				/* these should probably be handled as a workspace dependency from `package.json` but for, from my understanding, they'd have to have valid `package.json` "types" field and others bells and whistles so this will do for now */
+				/* these should probably be handled as a workspace dependency from `package.json` but for that, from my understanding, they'd have to have valid `package.json` "types" field and others bells and whistles so this will do for now */
 				paths: {
 					'@lolcalc/core/*': ['../../core/src/*'],
 					'@lolcalc/data/*': ['../../data/src/*'],

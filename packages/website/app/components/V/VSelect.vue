@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T extends string">
+<script setup vapor lang="ts" generic="T extends string">
 type IOption = [value: T | number, text: MaybeRef<string | number>, isDisabled?: boolean];
 
 const props = defineProps<{

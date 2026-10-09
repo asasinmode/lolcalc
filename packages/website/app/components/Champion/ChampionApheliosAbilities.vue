@@ -1,5 +1,5 @@
 <!-- eslint-disable vue/no-mutating-props -->
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
 import type { IExtraComponentEmits } from '~/utils/types';

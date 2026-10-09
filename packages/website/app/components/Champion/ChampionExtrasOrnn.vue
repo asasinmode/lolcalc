@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';

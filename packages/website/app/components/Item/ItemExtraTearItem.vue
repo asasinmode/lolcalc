@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics';
 import type { IItemSpecific } from '@lolcalc/core/specifics/item';

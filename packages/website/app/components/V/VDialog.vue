@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 const emit = defineEmits<{
 	open: [];
 	close: [isCancelled: boolean];

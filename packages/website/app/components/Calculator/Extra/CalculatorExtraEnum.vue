@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IGameImageData } from '@lolcalc/core/misc';
 
 defineProps<{

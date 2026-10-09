@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IComputedDragonAbilityDescription } from '@lolcalc/core/DamageSource';
 import type { IDragonHoverTooltipProps } from '~/utils/types';
 import { computeDragonAbilityDescription } from '@lolcalc/core/DamageSource';

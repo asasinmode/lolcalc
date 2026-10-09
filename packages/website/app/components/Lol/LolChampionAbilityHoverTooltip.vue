@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IComputedAbilityDescription } from '@lolcalc/core/DamageSource';
 import type { IChampion } from '@lolcalc/data/types';
 import type { IChampionAbilityHoverTooltipProps } from '~/utils/types';

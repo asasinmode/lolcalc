@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IComputedAbilityDescription, IComputedDragonAbilityDescription, IComputedEffectDescription, IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';

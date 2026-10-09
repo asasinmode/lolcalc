@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IComputedItemDescription } from '@lolcalc/core/DamageSource';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
 import type { IItemDescriptionProps } from '~/utils/types';

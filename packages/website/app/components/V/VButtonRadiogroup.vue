@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T, ValueKey extends keyof T">
+<script setup vapor lang="ts" generic="T, ValueKey extends keyof T">
 const props = defineProps<{
 	id: string;
 	label: string;

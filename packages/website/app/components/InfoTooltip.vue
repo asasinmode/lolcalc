@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import { simpleDescriptionFormatting } from '@lolcalc/core/misc';
 
 const props = defineProps<{

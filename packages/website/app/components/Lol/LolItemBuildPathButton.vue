@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IShopItem } from '@lolcalc/data/types';
 import { PATCH_VERSION } from '@lolcalc/data';
 
