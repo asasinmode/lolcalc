@@ -2,12 +2,13 @@
 	"plugins": ["vue", "import", "node", "unicorn", "promise"],
 	"ignorePatterns": ["packages/data/files/**/*.json", "packages/core/test/fixtures/*.json"],
 	"options": {
-		"typeAware": true,
-		"typeCheck": true
+		"typeAware": true
 	},
 	"rules": {
-		"prefer-const": "warn",
+		"prefer-const": ["warn", { "destructuring": "all" }],
 		"no-unused-expressions": "off",
-		"no-unsafe-optional-chaining": "off"
+		"no-unsafe-optional-chaining": "off",
+		"no-unused-vars": "off",
+		"no-dupe-keys": "off"
 	}
 }
