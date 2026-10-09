@@ -1,9 +1,10 @@
 export default defineNuxtConfig({
 	compatibilityDate: '2025-07-15',
-	devtools: { enabled: false },
+	devtools: { enabled: true },
 	experimental: {
 		typedPages: true,
 		typescriptPlugin: true,
+		early404: true,
 	},
 	features: {
 		inlineStyles: false,
@@ -53,6 +54,12 @@ export default defineNuxtConfig({
 			},
 		},
 	},
+	// TODO tmp workaround for nuxt 4.6.0 https://github.com/nuxt/nuxt/issues/36467
+	nitro: {
+		externals: {
+			inline: [/[\\/]node_modules[\\/]nuxt[\\/]dist[\\/]/],
+		},
+	} as any,
 	modules: ['@unocss/nuxt'],
 	css: ['~/assets/index.css'],
 });
