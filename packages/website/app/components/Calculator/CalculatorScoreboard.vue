@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IItem } from '@lolcalc/data/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { itemBuyability } from '@lolcalc/core/specifics/item';

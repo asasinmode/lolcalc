@@ -191,6 +191,9 @@ catalogs:
     vue:
       specifier: ^3.6.0-rc.10
       version: 3.6.0-rc.10
+    vue-component-type-helpers:
+      specifier: ^3.3.12
+      version: 3.3.12
     vue-tsc:
       specifier: ^3.3.12
       version: 3.3.12
@@ -348,6 +351,10 @@ importers:
       vue-router:
         specifier: catalog:website
         version: 5.4.0(@vue/compiler-sfc@3.5.43)(esbuild@0.28.2)(rolldown@1.2.13)(rollup@4.64.2)(vite@8.3.4(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))(vue@3.6.0-rc.10(typescript@6.0.3))(webpack@5.111.1(cssnano@9.3.2(postcss@8.5.29))(csso@5.0.5)(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.29)(svgo@4.1.0))
+    devDependencies:
+      vue-component-type-helpers:
+        specifier: 'catalog:'
+        version: 3.3.12
 
   scripts:
     devDependencies:

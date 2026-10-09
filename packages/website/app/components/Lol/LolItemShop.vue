@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
 import type { IItem, IShopItem } from '@lolcalc/data/types';

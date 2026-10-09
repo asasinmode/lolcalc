@@ -14,7 +14,7 @@ export interface IDamageResultTableSection {
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
 	/** technically should always be present but it can be undefined while async stuff is resolving */
-	image?: IGameImageData;
+	image: ShallowRef<IGameImageData | undefined>;
 	/** expected to be undefined only when loading */
 	getCellValue?: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
 		/** formatted `numberValue` */
@@ -31,15 +31,7 @@ export interface IDamageResultTableSection {
 	/** use with selectOptions */
 	selectLabel?: string;
 	hoverTooltipData?: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'> | IEffectHoverTooltipProps | Pick<IDragonHoverTooltipProps, 'precomputedDescription'>;
-	rows: {
-		name: string;
-		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
-		id: string;
-		isUnknown?: boolean;
-		isCustom?: IVariableMeta['isCustom'];
-		additionalInfo?: IVariableMeta['additionalInfo'];
-		image?: IGameImageData;
-	}[];
+	rows: ShallowRef<IDamageResultTableSectionRow[]>;
 }
 
 export interface IDamageResultTableColumn {
@@ -59,7 +51,15 @@ export interface IDamageResultTableColumn {
 	_computedSource?: DamageSource;
 }
 
-type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
+export interface IDamageResultTableSectionRow {
+	name: string;
+	/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
+	id: string;
+	isUnknown?: boolean;
+	isCustom?: IVariableMeta['isCustom'];
+	additionalInfo?: IVariableMeta['additionalInfo'];
+	image?: IGameImageData;
+}
 export interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 	sectionId: string;
 	/** the index the target row is at in its section */

@@ -1,7 +1,8 @@
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IDragonName } from '@lolcalc/data/types';
-import type { IChampionStatName, IEffectObjectName } from '@lolcalc/shared';
+import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
 import type { ShallowRef } from 'vue';
+import type { ComponentExposed } from 'vue-component-type-helpers';
 import type { CalculatorResultsTable } from '#components';
 import type { ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 import { DamageSource } from '@lolcalc/core/DamageSource';
@@ -44,8 +45,8 @@ export function initCalculatorState(): ICalculatorState {
 			abilityId: { type: 'all', id: 'stats' },
 			name: 'stats',
 			isPermanent: true,
-			image: [`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32],
-			rows: markRaw(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
+			image: shallowRef([`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32]),
+			rows: shallowRef(ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
 				const icon = STAT_ICON[statName as IChampionStatName];
 				const image: IGameImageData = typeof icon === 'string'
 					? [
@@ -87,8 +88,8 @@ export function initCalculatorState(): ICalculatorState {
 			abilityId: { type: 'all', id: 'basicAttack' },
 			name: 'basic attack',
 			isPermanent: true,
-			image: [imgUrl('game/assets/ux/deathrecap/autoattack.png'), 32],
-			rows: markRaw([
+			image: shallowRef([imgUrl('game/assets/ux/deathrecap/autoattack.png'), 32]),
+			rows: shallowRef([
 				{
 					name: 'total',
 					id: 'total',
@@ -123,8 +124,8 @@ export function initCalculatorState(): ICalculatorState {
 			name: 'custom total',
 			isPermanent: true,
 			isCustomTotal: true,
-			image: [imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32],
-			rows: markRaw([
+			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
+			rows: shallowRef([
 				{
 					id: 'cTtl-total',
 					name: 'total',
@@ -142,18 +143,18 @@ export function initCalculatorState(): ICalculatorState {
 
 	const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 	/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
-		const rows: ICustomTotalSectionRow[] = (customTotalSection.rows as ICustomTotalSectionRow[]).concat(customTotalRowIds.value.map((combinedId) => {
+		const rows: ICustomTotalSectionRow[] = (customTotalSection.rows.value as ICustomTotalSectionRow[] ?? []).concat(customTotalRowIds.value.map((combinedId): ICustomTotalSectionRow => {
 			const [sectionId, rowId] = combinedId.split('_');
 
 			const section = resultSections.value.find(section => section.id === sectionId)!;
-			const rowIndex = section.rows.findIndex(row => row.id === rowId)!;
-			const row = section.rows[rowIndex]!;
+			const rowIndex = section.rows.value.findIndex(row => row.id === rowId)!;
+			const row = section.rows.value[rowIndex]!;
 
 			return {
 				...row,
 				sectionId: section.id,
 				rowIndex,
-				image: section.image,
+				image: section.image.value,
 			};
 		}));
 
@@ -266,7 +267,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 		const savedChampionIds = new Set<string>();
 		const savedItemIds = new Set<string>();
-		const savedEffectObjectNames = new Set<IEffectObjectName>();
+		const savedEffectObjectNames = new Set<EffectObjectName>();
 		const savedDragonsSoulAbilities = new Set<IDragonName>();
 
 		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
@@ -376,7 +377,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		return wholeState.length === 3 ? ['', ''] : [wholeState, queryState];
 	}
 
-	function restoreState(resultsTable: Ref<InstanceType<typeof CalculatorResultsTable>>) {
+	function restoreState(resultsTable: Ref<ComponentExposed<typeof CalculatorResultsTable>>) {
 		if (!import.meta.client) {
 			return;
 		}
@@ -526,7 +527,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
 				if (sectionIndex !== undefined && !Number.isNaN(sectionIndex) && rowIndex !== undefined && !Number.isNaN(rawRowIndex)) {
 					const section = resultSections.value[sectionIndex];
-					const row = section?.rows[rowIndex];
+					const row = section?.rows.value[rowIndex];
 					if (section && row && section.id !== 'a-cTtl') {
 						customTotalRowIds.value.push(`${section.id}_${row.id}`);
 					}

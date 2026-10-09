@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 

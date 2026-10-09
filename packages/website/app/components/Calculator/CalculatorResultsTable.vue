@@ -1,15 +1,16 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
 import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
 import type { IHypotheticalItemSpecifics } from '@lolcalc/core/specifics/item';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IReplacedGameVariable, IReplaceGameVariablesRV } from '@lolcalc/core/variables/game';
 import type { IChampion, IDragonName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import type { UnwrapRef, WatchHandle } from 'vue';
-import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow } from '~/utils/types';
 import { computeAbilityDescription, computeDragonAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage, simpleDescriptionFormatting } from '@lolcalc/core/misc';
@@ -242,7 +243,7 @@ interface IComputedSectionRowColumn {
 }
 
 const customTotalSection = resultSections.value.find(section => section.isCustomTotal)!;
-const customTotalSectionTotalRow = customTotalSection.rows[0]!;
+const customTotalSectionTotalRow = computed(() => toValue(customTotalSection.rows)[0]);
 
 const computedResults = ref(new Map<string, IComputedSection>(
 	[[customTotalSection.id, computeSection(customTotalSection)] as [ string, IComputedSection ]]
@@ -261,11 +262,11 @@ function addComputedSection(sectionId: string) {
 function computeSection(section: IDamageResultTableSection): IComputedSection {
 	return {
 		sectionId: section.id,
-		rows: new Map(section.rows.map(row => [row.id, computeSectionRow(section, row)])),
+		rows: new Map(toValue(section.rows)?.map(row => [row.id, computeSectionRow(section, row)])),
 	};
 }
 
-function computeSectionRow(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number]): IComputedSectionRow {
+function computeSectionRow(section: IDamageResultTableSection, row: IDamageResultTableSectionRow): IComputedSectionRow {
 	return {
 		rowId: row.id,
 		columns: new Map(resultColumns.value.map(column => [column.id, computeSectionRowColumn(section, row, column)])),
@@ -274,7 +275,7 @@ function computeSectionRow(section: IDamageResultTableSection, row: IDamageResul
 
 function computeSectionRowColumn(
 	section: IDamageResultTableSection,
-	row: IDamageResultTableSection['rows'][number],
+	row: IDamageResultTableSectionRow,
 	column: IDamageResultTableColumn,
 ): IComputedSectionRowColumn {
 	const source = column[flipResults.value ? '_computedTarget' : '_computedSource'];
@@ -346,7 +347,7 @@ function addComputedColumn(column: IDamageResultTableColumn) {
 	for (const section of computedResults.value.values()) {
 		const resultSection = resultSections.value.find(rSection => rSection.id === section.sectionId)!;
 		for (const row of section.rows.values()) {
-			const resultRow = resultSection.rows.find(rRow => rRow.id === row.rowId)!;
+			const resultRow = toValue(resultSection.rows).find(rRow => rRow.id === row.rowId)!;
 			row.columns.set(column.id, computeSectionRowColumn(resultSection, resultRow, column));
 		}
 	}
@@ -528,8 +529,8 @@ async function addResultsSection(
 		name: name!,
 		abilityId,
 		/* expected to be filled by async stuff below */
-		image: undefined,
-		rows: [],
+		image: shallowRef(),
+		rows: shallowRef([]),
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
 	resultSections.value.splice(spliceAt, 0, section);
@@ -556,8 +557,8 @@ async function addResultsSection(
 		});
 
 		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
-		section.image = [abilityImage(precomputedDescription.variant.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
-		section.rows = await getAbilitySectionRows(precomputedDescription);
+		section.image.value = [abilityImage(precomputedDescription.variant.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
+		section.rows.value = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = abilityVariableCellValue;
 		section.hoverTooltipData = {
 			precomputedDescription,
@@ -571,8 +572,8 @@ async function addResultsSection(
 		})!;
 
 		section.name ??= item.name;
-		section.image = [imgUrl(`img/item/${item.image}`, true), 64];
-		section.rows = await getAbilitySectionRows(precomputedDescription);
+		section.image.value = [imgUrl(`img/item/${item.image}`, true), 64];
+		section.rows.value = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
 	} else if (abilityId.type === AbilityType.dragon) {
@@ -586,8 +587,8 @@ async function addResultsSection(
 			overrideVariables: specificKnownVariables((DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[abilityId.id]?.[abilityId.subtype]?.variables),
 		}); ;
 		section.name ??= `${abilityId.id} Soul`;
-		section.image = await gameAbilityImage(abilityId);
-		section.rows = await getAbilitySectionRows(precomputedDescription);
+		section.image.value = await gameAbilityImage(abilityId);
+		section.rows.value = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = dragonVariableCellValue;
 		section.hoverTooltipData = { precomputedDescription };
 	} else {
@@ -598,8 +599,8 @@ async function addResultsSection(
 		}
 
 		section.name ??= effectSpecific.label;
-		section.image = await gameAbilityImage(abilityId);
-		section.rows = await getAbilitySectionRows({
+		section.image.value = await gameAbilityImage(abilityId);
+		section.rows.value = await getAbilitySectionRows({
 			variables: new Map(Object.entries(effectSpecific.variables.known!).map(([variableName, variableValue]) => {
 				return [
 					variableName,
@@ -619,13 +620,15 @@ async function addResultsSection(
 
 	addComputedSection(section.id);
 	triggerRef(resultSections);
+	triggerRef(section.image);
+	triggerRef(section.rows);
 }
 
-async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): Promise<IDamageResultTableSection['rows']> {
-	let rows: IDamageResultTableSection['rows'] = await Promise.all(variables
+async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): Promise<UnwrapRef<IDamageResultTableSection['rows']>> {
+	let rows: UnwrapRef<IDamageResultTableSection['rows']> = await Promise.all(variables
 		.entries()
 		.filter(entry => !entry[1].isUninteresting)
-		.map(async (entry): Promise<IDamageResultTableSection['rows'][number]> => ({
+		.map(async (entry): Promise<IDamageResultTableSectionRow> => ({
 			id: entry[0],
 			name: entry[1].meta?.displayedName ?? entry[1].actualName ?? entry[0],
 			isCustom: entry[1].meta?.isCustom,
@@ -640,7 +643,7 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 
 	rows.sort((a, _b) => a.isCustom ? 1 : 0);
 
-	return markRaw(rows);
+	return rows;
 }
 
 function removeResultsSection(index: number) {
@@ -709,7 +712,7 @@ onBeforeUnmount(() => {
 	}
 });
 
-function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number]) {
+function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultTableSectionRow) {
 	return resultColumns.value.map((column) => {
 		return {
 			key: `${section.id}-${row.id}-${column.id}`,
@@ -737,7 +740,7 @@ function recalculateAllColumns() {
 	debouncedSaveState();
 	for (const column of resultColumns.value) {
 		for (const section of resultSections.value) {
-			for (const row of section.rows) {
+			for (const row of toValue(section.rows)) {
 				computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
 					column.id,
 					computeSectionRowColumn(section, row, column),
@@ -752,11 +755,14 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 	addComputedColumnSources(column);
 
 	for (const section of resultSections.value) {
-		for (const row of section.rows) {
-			computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
-				column.id,
-				computeSectionRowColumn(section, row, column),
-			);
+		const rows = toValue(section.rows);
+		if (rows) {
+			for (const row of rows) {
+				computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
+					column.id,
+					computeSectionRowColumn(section, row, column),
+				);
+			}
 		}
 	}
 	recalculateResultCellComparisonNumbers();
@@ -1205,13 +1211,15 @@ function onCustomTotalRowsChange() {
 }
 
 function recomputeCustomTotalRow() {
-	for (const column of resultColumns.value) {
-		customTotalComputedSectionTotalRow.columns.set(
-			column.id,
-			computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow, column),
-		);
+	if (customTotalSectionTotalRow.value) {
+		for (const column of resultColumns.value) {
+			customTotalComputedSectionTotalRow.columns.set(
+				column.id,
+				computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow.value, column),
+			);
+		}
+		calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
 	}
-	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
 }
 
 const controlButtonSize = ref(28);
@@ -1588,7 +1596,7 @@ defineExpose({
 						>
 							<div @mouseenter="sectionHasTooltip(index, section) && showSectionHoverTooltip($event, section.abilityId.type)">
 								<img
-									v-bind="section.image && gameImageAttrs(section.image, 24)"
+									v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)"
 									aria-hidden="true"
 								>
 								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
@@ -1651,7 +1659,7 @@ defineExpose({
 							loading...
 						</td>
 					</tr>
-					<tr v-else-if="section.isCustomTotal ? computedCustomTotalRows.length < 2 : !section.rows.length" class="info-row">
+					<tr v-else-if="section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length" class="info-row">
 						<td :colspan="2 + resultColumns.length">
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
@@ -1659,7 +1667,7 @@ defineExpose({
 					<tr
 						v-for="row in section.isCustomTotal
 							? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : [])
-							: implementedDamageSectionsMap[index] ? section.rows : []"
+							: implementedDamageSectionsMap[index] ? toValue(section.rows) : []"
 						:key="`${section.id}_${row.id}`"
 						:class="{ unknown: row.isUnknown }"
 					>
@@ -1893,7 +1901,7 @@ defineExpose({
 <style>
 @layer components {
 	#results-table-scroll-wrapper {
-		--at-apply: 'of-auto max-block-[calc(100svb-var(--mbe)-var(--section-header-my)-var(--text-xl-fontSize))] min-block-100 mbe-10 inline-min max-inline-full mx-auto b b-[--b-clr] relative';
+		--at-apply: 'of-auto max-block-[calc(100svb-var(--mbe)-var(--section-header-my)-var(--text-xl-fontSize))] mbe-10 inline-min max-inline-full mx-auto b b-[--b-clr] relative';
 		--mbe: calc(10 * var(--spacing));
 		--b-clr: theme('colors.neutral.600');
 	}

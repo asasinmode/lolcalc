@@ -31,5 +31,8 @@
 		"unocss": "catalog:website",
 		"vue": "catalog:",
 		"vue-router": "catalog:website"
+	},
+	"devDependencies": {
+		"vue-component-type-helpers": "catalog:"
 	}
 }

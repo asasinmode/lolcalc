@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { IDamageSourceEffect } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { EffectObjectName, TAbilityType } from '@lolcalc/shared';

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';

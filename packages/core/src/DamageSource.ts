@@ -18,7 +18,7 @@ import { CHAMPION_KEY_TO_ID, CHAMPIONS, EFFECTS, EFFECTS_STRINGTABLE, ICON_COOLD
 import { ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EffectObjectName, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
-import { computed, markRaw, ref, shallowRef, toRaw, watch } from 'vue';
+import { computed, markRaw, ref, shallowRef, toRaw, triggerRef, watch } from 'vue';
 import { calculateChampionStats, isMasterworkSlot } from './calculate/championStats.ts';
 import { calculateEffectsOntoTargetVars } from './calculate/damage.ts';
 import { GameAbilityId } from './GameAbilityId.ts';
@@ -2009,7 +2009,10 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		});
 	}
 
-	gameAbilityImage(specific.sourceAbility).then(value => rv.imgData = value);
+	gameAbilityImage(specific.sourceAbility).then((value) => {
+		rv.imgData = value;
+		triggerRef(self.computed.effects);
+	});
 
 	return rv;
 }
