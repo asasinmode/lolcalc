@@ -2145,6 +2145,7 @@ function championAbilityVariant(
 	variantIndex: number,
 	variantDataKey: string,
 	variants: IChampionAbilityVariant[],
+	/** for adding any additional variants that are encountered and need to be fully resolved (happens in `championAbilityVariants`) */
 	otherAbilityTooltipVariantDataKeys: string[],
 	/** expected to be `false` only for additional ability variants (`unresolvedUsedVariantObjectNames`) which variables are used in shown variants' tooltips */
 	saveTooltips = true,
@@ -2162,7 +2163,7 @@ function championAbilityVariant(
 		throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
 	}
 
-	const { mImgIconName, DataValues, mSpellCalculations, mSpellTags, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
+	const { mImgIconName, DataValues, mSpellCalculations, mSpellTags, mEffectAmount, mClientData, mana, cooldownTime, '{288b8edc}': potentialOtherVariants } = variantMSpell;
 
 	if (variantIndex === 0) {
 		if (!mClientData) {
@@ -2176,6 +2177,11 @@ function championAbilityVariant(
 		}
 
 		maxLevel = abilityKey === 'passive' ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
+	}
+
+	/* on patch 16.19 for Hwei only */
+	if (potentialOtherVariants?.SpellObjects?.length) {
+		otherAbilityTooltipVariantDataKeys.push(...potentialOtherVariants.SpellObjects);
 	}
 
 	let mLocKeys;
@@ -2230,6 +2236,19 @@ function championAbilityVariant(
 		isImmobilizing: undefined,
 	} as IChampionAbilityVariant;
 
+	/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
+	variant.name = mLocKeys.keyName;
+	if (saveTooltips) {
+		variant.tooltip = mLocKeys.keyTooltip;
+		variant.tooltipExtended = mLocKeys.keyTooltipExtended;
+		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
+	}
+
+	/* on 16.19 to skip hwei wash brush ability, the recast to cancel painting QWE */
+	if (!(variant.dataValues || variant.spellCalculations || variant.effectAmount || variant.tooltip)) {
+		return [undefined, undefined];
+	}
+
 	let abilityOrVariantSpecific: IChampionAbilitySpecific<any> | IChampionAbilityVariantSpecific | undefined = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[championId]?.[abilityKey];
 
 	if ((abilityOrVariantSpecific as IChampionAbilitySpecific)?.[variantIndex]) {
@@ -2240,14 +2259,6 @@ function championAbilityVariant(
 		variant.isImmobilizing = true;
 	} else if (abilityOrVariantSpecific?.dataOverrides?.isImmobilizing === undefined && isImmobilizingAbilityVariant(abilityKey, variant.dataValues, mSpellTags, variantData.BotData)) {
 		variant.isImmobilizing = true;
-	}
-
-	/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
-	variant.name = mLocKeys.keyName;
-	if (saveTooltips) {
-		variant.tooltip = mLocKeys.keyTooltip;
-		variant.tooltipExtended = mLocKeys.keyTooltipExtended;
-		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
 	}
 
 	if ((abilityOrVariantSpecific as IChampionAbilitySpecific)?.modifyVariantData) {
