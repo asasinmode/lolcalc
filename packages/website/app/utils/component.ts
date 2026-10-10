@@ -8,7 +8,7 @@ import type { ComputedRef, SlotsType } from 'vue';
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
 import type { IExtraComponentEmits, IExtraComponentProps } from './types';
 
-export async function numberExtra<T extends IGameAbilityId>(
+export function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
@@ -121,7 +121,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 	);
 }
 
-export async function progressExtra<T extends IGameAbilityId>(
+export function progressExtra<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
@@ -213,7 +213,7 @@ export async function progressExtra<T extends IGameAbilityId>(
 	);
 }
 
-export async function booleanExtra<T extends IGameAbilityId>(
+export function booleanExtra<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
@@ -274,7 +274,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 	);
 }
 
-export async function enumExtra<T extends IGameAbilityId>(
+export function enumExtra<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,

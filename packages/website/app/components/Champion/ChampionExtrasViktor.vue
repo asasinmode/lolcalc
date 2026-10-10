@@ -39,7 +39,7 @@ function toggle(abilityIndex: number) {
 <template>
 	<article class="extras-viktor-passive-ability-upgrades">
 		<img
-			:src="abilityImage(props.damageSource.champion.value!.abilities.passive.variants[props.damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')"
+			:src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')"
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"

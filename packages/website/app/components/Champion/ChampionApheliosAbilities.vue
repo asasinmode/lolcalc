@@ -69,7 +69,7 @@ function replaceMainWithNext(event: MouseEvent) {
 	<div data-ability="passive">
 		<h5>passive</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariantsIndexes.value.passive]!.image, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage(value.computed.abilities.value.passive[value.abilityVariantsIndexes.value.passive]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
@@ -89,7 +89,7 @@ function replaceMainWithNext(event: MouseEvent) {
 		/>
 		<h5>Q</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.q.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage(value.computed.abilities.value.q[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
@@ -122,7 +122,7 @@ function replaceMainWithNext(event: MouseEvent) {
 	<div class="aphelios-r" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
 		<h5>R</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.r.variants[value.abilityVariantsIndexes.value.r]!.image, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage(value.computed.abilities.value.r[value.abilityVariantsIndexes.value.r]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"

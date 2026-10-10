@@ -23,7 +23,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 const { gravitum: gravitumVariantIndex } = CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX;
 const showGravitumComponent = computed(() => props.damageSource.abilityVariantsIndexes.value.q === gravitumVariantIndex || props.damageSource.abilityVariantsIndexes.value.w === gravitumVariantIndex);
 
-const GravitumSlowComponent = await progressExtra(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'e', gravitumVariantIndex), 'gravitumSlowProgress', 'apply Gravitum slow on target', CHAMPION_SPECIFICS.Aphelios.q.derivedGravitumSlow);
+const GravitumSlowComponent = progressExtra(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'e', gravitumVariantIndex), 'gravitumSlowProgress', 'apply Gravitum slow on target', CHAMPION_SPECIFICS.Aphelios.q.derivedGravitumSlow);
 
 const gravitumDamageSource = shallowRef<DamageSource>(props.damageSource);
 
@@ -47,7 +47,7 @@ watch(
 <template>
 	<article class="extras-aphelios-ability-levels">
 		<img
-			:src="abilityImage(props.damageSource.champion.value!.abilities.passive.variants[props.damageSource.abilityVariantsIndexes.value.passive]!.image, 'Aphelios')"
+			:src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Aphelios')"
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"

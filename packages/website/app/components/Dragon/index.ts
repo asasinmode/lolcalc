@@ -8,15 +8,15 @@ import type { ISpecificComponents } from '~/utils/types';
 export const DRAGON_COMPONENTS: Partial<Record<IDragonName, { stack?: ISpecificComponents; soul?: ISpecificComponents }>> = {
 	Cloud: {
 		stack: {
-			extras: await booleanExtra(GameAbilityId.build(AbilityType.dragon, 'Cloud', 'stack'), 'isOOC', 'is out of combat', false),
+			extras: booleanExtra(GameAbilityId.build(AbilityType.dragon, 'Cloud', 'stack'), 'isOOC', 'is out of combat', false),
 		},
 		soul: {
-			extras: [await booleanExtra(GameAbilityId.build(AbilityType.dragon, 'Cloud', 'soul'), 'hasUlted', 'bonus ms after ult')],
+			extras: booleanExtra(GameAbilityId.build(AbilityType.dragon, 'Cloud', 'soul'), 'hasUlted', 'bonus ms after ult'),
 		},
 	},
 	Hextech: {
 		soul: {
-			extras: await progressExtra(GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'), 'hextechTagged', 'apply lightning slow on target', DRAGON_SPECIFICS.Hextech.soul.extraDerivedValue),
+			extras: progressExtra(GameAbilityId.build(AbilityType.dragon, 'Hextech', 'soul'), 'hextechTagged', 'apply lightning slow on target', DRAGON_SPECIFICS.Hextech.soul.extraDerivedValue),
 		},
 	},
 };
@@ -29,21 +29,21 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype] ??= {};
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype]!.effects ??= enumOptions
-			? await enumExtra(
+			? enumExtra(
 					abilityId,
 					0,
 					label,
 					Object.entries(enumOptions).map(([key, value]) => [value, key]),
 				)
 			: deriveProgressValue
-				? await progressExtra(abilityId, 0, label, deriveProgressValue, {
+				? progressExtra(abilityId, 0, label, deriveProgressValue, {
 						selectEffectSourceProps: effectSpecific.sourceControls,
 						effectControlsProps: effectSpecific.effectControls,
 						derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
 					})
 				: maxValue !== 1
-					? await numberExtra(abilityId, 0, label, minValue, maxValue)
-					: await booleanExtra(abilityId, 0, label, false);
+					? numberExtra(abilityId, 0, label, minValue, maxValue)
+					: booleanExtra(abilityId, 0, label, false);
 	}
 }
 
