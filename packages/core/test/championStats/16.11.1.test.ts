@@ -215,7 +215,7 @@ test('Kayle, passive and as items/rfc', async (t) => {
 			...sourceCommon,
 			level: 16,
 			internalData: { passiveStacks: 5 } satisfies IInternalDataOf<'Kayle'>,
-			internalItemData: { seething: 4, flurry: 1, bolt: 1 } satisfies IInternalItemDataOf<'yunTal' | 'guinsoo' | 'stormrazor' | 'stormrazor'>,
+			internalItemData: { seething: 4, flurry: 1, bolt: 1 } satisfies IInternalItemDataOf<'yunTal' | 'guinsoo' | 'stormrazor'>,
 		});
 
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, {

@@ -388,6 +388,7 @@ type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
 type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
 type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
 
+// oxlint-disable-next-line typescript/consistent-type-definitions
 type IDefineExtraComponentEmits = {
 	imgMouseenter: (...args: IExtraComponentEmits['imgMouseenter']) => void;
 };

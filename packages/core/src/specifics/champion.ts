@@ -43,6 +43,7 @@ import Gangplank from './champion/Gangplank.ts';
 import Garen from './champion/Garen.ts';
 import Gnar from './champion/Gnar.ts';
 import Graves from './champion/Graves.ts';
+import Gwen from './champion/Gwen.ts';
 import Hecarim from './champion/Hecarim.ts';
 import Heimerdinger from './champion/Heimerdinger.ts';
 import Hwei from './champion/Hwei.ts';
@@ -180,6 +181,7 @@ export const CHAMPION_SPECIFICS = {
 	Garen,
 	Gnar,
 	Graves,
+	Gwen,
 	Hecarim,
 	Heimerdinger,
 	Hwei,

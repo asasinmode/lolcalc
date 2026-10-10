@@ -1,5 +1,5 @@
 {
-	"plugins": ["vue", "import", "node", "unicorn", "promise"],
+	"plugins": ["vue", "oxc", "eslint", "import", "node", "unicorn", "promise", "typescript"],
 	"ignorePatterns": ["packages/data/files/**/*.json", "packages/core/test/fixtures/*.json"],
 	"options": {
 		"typeAware": true
@@ -10,6 +10,25 @@
 		"no-unsafe-optional-chaining": "off",
 		"no-unused-vars": "off",
 		"no-dupe-keys": "off",
-		"no-console": ["warn", { "allow": ["warn", "error"] }]
-	}
+		"no-console": ["warn", { "allow": ["warn", "error"] }],
+		"typescript/consistent-type-imports": "error",
+		"typescript/consistent-type-exports": "warn",
+		"typescript/consistent-type-definitions": ["warn", "interface"],
+		"typescript/no-non-null-asserted-optional-chain": "off",
+		"typescript/no-floating-promises": "off",
+		"typescript/unbound-method": "off",
+		"typescript/restrict-template-expressions": "off",
+		"typescript/no-base-to-string": "off",
+		"typescript/no-useless-default-assignment": "off",
+		"typescript/no-for-in-array": "off"
+	},
+	"overrides": [
+		{
+			"files": ["scripts/*"],
+			"rules": {
+				"no-console": "off",
+				"typescript/consistent-type-imports": ["warn", { "disallowTypeAnnotations": false }]
+			}
+		}
+	]
 }
