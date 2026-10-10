@@ -107,7 +107,10 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jhin', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after crit)', false),
 	},
 	Jinx: {
-		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.passive.maxStacks),
+		extras: [
+			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.passive.maxStacks),
+			await progressExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveMSProgress', 'Get Excited MS value', CHAMPION_SPECIFICS.Jinx.passive.derivedMS),
+		],
 	},
 	Kayle: {
 		extras: await numberExtra(GameAbilityId.build(AbilityType.champion, 'Kayle', 'passive', 0), 'passiveStacks', 'Divine Ascent stacks', 0, CHAMPION_SPECIFICS.Kayle.passive.maxStacks),

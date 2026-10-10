@@ -50,6 +50,7 @@ import Hwei from './champion/Hwei.ts';
 import Illaoi from './champion/Illaoi.ts';
 import Irelia from './champion/Irelia.ts';
 import Ivern from './champion/Ivern.ts';
+import Janna from './champion/Janna.ts';
 import JarvanIV from './champion/JarvanIV.ts';
 import Jax from './champion/Jax.ts';
 import Jayce from './champion/Jayce.ts';
@@ -190,6 +191,7 @@ export const CHAMPION_SPECIFICS = {
 	Illaoi,
 	Irelia,
 	Ivern,
+	Janna,
 	JarvanIV,
 	Jax,
 	Jayce,
@@ -340,7 +342,7 @@ export interface IChampionInternalDataMap {
 	Jax: { passiveStacks: number };
 	Jayce: { isPassiveMSActive: number };
 	Jhin: { isPassiveMSActive: number };
-	Jinx: { passiveStacks: number };
+	Jinx: { passiveStacks: number; passiveMSProgress: number };
 	Kaisa: { passiveStacksOnTarget: number; eBuff: number };
 	Kayle: { passiveStacks: number };
 	Kayn: { form: number };

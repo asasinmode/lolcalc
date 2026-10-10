@@ -127,6 +127,7 @@ export interface IStatsCalculationVariables {
 	movespeedSoftCapPenalty: number;
 	/** stores the total of the adaptive force stat (so already ad/ap from all adaptive force) */
 	totalAdaptiveForce: number;
+	/** default value is `CONSTS.baseAttackSpeedCap` (`3.003`) */
 	attackSpeedCap: number;
 	/** https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking */
 	tenacityBucketB: number;
@@ -318,6 +319,7 @@ export interface IStatsCalculationVariables {
 	ryzePMana?: number;
 	/** pyke's passive variable ratio */
 	pykePassiveHpToAd?: number;
+	jinxPassiveMoveSpeed?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
