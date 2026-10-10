@@ -15,7 +15,8 @@
 		"lint:fix": "pnpm --ignore-scripts exec oxlint --fix",
 		"test:shared": "cd packages/shared && node --test",
 		"test:core": "cd packages/core && node --test",
-		"test": "run-p --aggregate-output -c test:shared test:core"
+		"test": "run-p --aggregate-output -c test:shared test:core",
+		"prepare": "simple-git-hooks"
 	},
 	"devDependencies": {
 		"@lolcalc/core": "workspace:*",
@@ -23,14 +24,17 @@
 		"@lolcalc/shared": "workspace:*",
 		"@lolcalc/website": "workspace:*",
 		"@types/node": "catalog:",
-		"husky": "catalog:",
 		"lint-staged": "catalog:",
 		"npm-run-all2": "catalog:",
 		"oxfmt": "catalog:",
 		"oxlint": "catalog:",
 		"oxlint-tsgolint": "catalog:",
+		"simple-git-hooks": "catalog:",
 		"typescript": "catalog:",
 		"vue-tsc": "catalog:"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "pnpx lint-staged"
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx,mjs,cjs,vue}": "pnpm run lint:fix"

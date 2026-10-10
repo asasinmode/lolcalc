@@ -12,6 +12,7 @@ packages:
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
+  simple-git-hooks: true
   unrs-resolver: true
 
 overrides:
@@ -19,12 +20,12 @@ overrides:
 
 catalog:
   '@types/node': ^26.6.4
-  husky: ^9.1.7
   lint-staged: ^17.6.0
   npm-run-all2: ^9.0.3
   oxfmt: ^0.72.0
   oxlint: ^1.87.0
   oxlint-tsgolint: ^7.0.2003
+  simple-git-hooks: ^2.14.0
   typescript: npm:typescript-native-bridge@6.0.3-bridge.18.tsgo.7.0.2
   vue: ^3.6.0-rc.10
   vue-component-type-helpers: ^3.3.12
