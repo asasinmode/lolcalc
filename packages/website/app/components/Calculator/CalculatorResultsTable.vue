@@ -530,7 +530,7 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 		});
 
 		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
-		section.image.value = [abilityImage(precomputedDescription.variant.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
+		section.image.value = [abilityImage(precomputedDescription.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
 		section.rows.value = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = abilityVariableCellValue;
 		section.hoverTooltipData = {

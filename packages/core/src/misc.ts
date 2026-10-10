@@ -85,9 +85,10 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 	const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 
 	const champion = await useChampion(imageAbilityId.id);
+	const rawAbilityImage = champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.image;
 
 	return [
-		abilityImage(champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.image, imageAbilityId.id),
+		abilityImage(typeof rawAbilityImage === 'string' ? rawAbilityImage : rawAbilityImage[0]!, imageAbilityId.id),
 		abilityImageSize(imageAbilityId.id),
 		undefined,
 		champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.name,

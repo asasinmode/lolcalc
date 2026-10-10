@@ -1645,7 +1645,7 @@ function allChampionAbilitiesVariants(champion?: IChampion): [IChampionAbilityVa
 	return champion ? Object.entries(champion.abilities).flatMap(([abilityKey, ability]) => ability.variants.map((variant) => [variant, abilityKey] as [IChampionAbilityVariant, IChampionAbilityKey])) : [];
 }
 
-export function computeAbilityDescription(champion: IChampion, gameAbilityId: IChampionAbilityId, damageSource?: DamageSource<any>, replaceOptions?: IReplaceGameVariablesOptions, abilityLevel?: number): IComputedAbilityDescription {
+export function computeAbilityDescription(champion: IChampion, gameAbilityId: IChampionAbilityId, damageSource?: DamageSource, replaceOptions?: IReplaceGameVariablesOptions, abilityLevel?: number): IComputedAbilityDescription {
 	abilityLevel ??= gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
@@ -1768,6 +1768,15 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		isDisabled = abilitySpecific.isDisabled(damageSource);
 	}
 
+	let image: string;
+	if (typeof variant.image === 'string') {
+		image = variant.image;
+	} else if (abilitySpecific && damageSource && !damageSource?.isLoading.value) {
+		image = abilitySpecific.resolveImage?.(variant.image, damageSource) ?? variant.image[0]!;
+	} else {
+		image = variant.image[0]!;
+	}
+
 	return {
 		gameAbilityId,
 		name: nameReplaced,
@@ -1785,6 +1794,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		variant,
 		anyExtendedVariableInfo: tooltipAnyExtendedVariables || tooltipExtendedAnyExtendedVariables || tooltipExtendedBLAnyExtendedVariables,
 		isDisabled,
+		image,
 	};
 }
 
@@ -1892,6 +1902,7 @@ export function computeEffectDescription(effectObjectName: EffectObjectName, dam
 				cooldown: source.cooldownTime[1],
 				anyUnknownVariables: unknownStringtableVariables.size || tooltip.unknownVariables.length || tooltipExtended.unknownVariables.length,
 				anyExtendedVariableInfo: tooltip.anyExtendedVariables,
+				image: source.image,
 			};
 		}
 
@@ -2320,6 +2331,7 @@ export interface IComputedAbilityDescription {
 	/** see original type's docs */
 	anyExtendedVariableInfo: IReplaceGameVariablesRV['anyExtendedVariables'];
 	isDisabled?: boolean | number;
+	image: string;
 }
 
 export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {

@@ -93,7 +93,7 @@ export interface IChampionAbility {
 
 export interface IChampionAbilityVariant {
 	name: string;
-	image: string;
+	image: string | string[];
 	mana?: number[];
 	dataKey: string;
 	objectName: string;

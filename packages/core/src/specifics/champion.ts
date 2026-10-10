@@ -291,12 +291,16 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 		abilityVariant: IChampionAbilityVariant,
 		/** is the champion.bin.json file, merged with any additional characters */
 		binData: any,
+		/** the champion.bin.json's original variant object */
+		variantData: any,
 	) => void;
 	/**
 	 * object names of additional ability variants to be extracted during `updateData`
 	 * maybe there's a way not to have to declare these manually but in the ability's data I don't see anything that would point an ability's object to what it belongs to (QWER). `updateData` script warns about potential detected but missed ability variants
 	 */
 	additionalVariantsObjectNames?: string[];
+	/** for when a variant has multiple images and they should dynamically changed. Currently used for Jinx Q */
+	resolveImage?: (variantImage: string[], self: DamageSource<Id>) => string;
 	[key: string]: any;
 	/**
 	 * ability's variant specific

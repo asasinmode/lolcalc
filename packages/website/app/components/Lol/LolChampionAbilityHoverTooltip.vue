@@ -55,7 +55,7 @@ defineExpose({ el });
 	<article ref="el" popover="manual" class="hover-tooltip champion-ability" :class="{ disabled: computedDescription?.isDisabled }">
 		<img
 			v-show="!computedIsLoading"
-			:src="!computedIsLoading && computedDescription ? abilityImage(computedDescription.variant.image, computedDescription.gameAbilityId.id, group) : undefined"
+			:src="!computedIsLoading && computedDescription ? abilityImage(computedDescription.image, computedDescription.gameAbilityId.id, group) : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"

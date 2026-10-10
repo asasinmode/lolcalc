@@ -74,6 +74,14 @@ export default {
 	},
 	q: {
 		buffOptions: qBuffOptions,
+		modifyVariantData(abillityVariant, _binData, variantData) {
+			if (variantData.mSpell?.mImgIconName) {
+				abillityVariant.image = variantData.mSpell.mImgIconName.map((value: string) => value.toLowerCase().replace('.dds', '.png'));
+			}
+		},
+		resolveImage(variantImage, self) {
+			return variantImage[self.internalData.value.qBuff === qBuffOptions.fishbones ? 0 : 1]!;
+		},
 		variables: defineChampionVariables<'Jinx', typeof IJinx, 'q'>()({
 			known: {
 				MinigunAS: [],

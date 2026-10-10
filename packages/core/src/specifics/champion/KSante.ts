@@ -9,37 +9,51 @@ export default {
 	passive: {
 		variables: defineChampionVariables<'KSante', typeof IKSante, 'passive'>()({
 			known: {
-				CalculatedMarkDamage: [],
-				CalculatedAllOutDamage: [],
+				MarkDamage: [],
+				AllOutDamage: [],
 			},
 			calculate(self, target) {
+				let MarkDamage = Number.NaN;
+				let AllOutDamage = Number.NaN;
+
+				const targetTotalHp = target?.stats.value.total.hp ?? 0;
 				const passiveParams: IGameVariableValueParameters['championAbility'] = {
 					abilityKey: 'passive',
 					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 					allAbilitiesVariants: self.allAbilityVariants.value,
 					damageSource: self,
 				};
+
 				const markFlatVar = championAbilityVariableValue('FlatDamage', passiveParams);
 				const markDamagePercentVar = championAbilityVariableValue('PercentHealthDamage', passiveParams);
-				const allOutDamagePercentVar = championAbilityVariableValue('MaxHealthDamagePercent', passiveParams);
+				if (typeof markFlatVar.value === 'number' && typeof markDamagePercentVar.value === 'number') {
+					MarkDamage = markFlatVar.value + targetTotalHp * markDamagePercentVar.value;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS ksante] failed to calculate passive mark dmg vars', markFlatVar, markDamagePercentVar);
+				}
 
-				const targetTotalHp = target?.stats.value.total.hp ?? 0;
+				const allOutDamagePercentVar = championAbilityVariableValue('MaxHealthDamagePercent', passiveParams);
+				if (typeof allOutDamagePercentVar.value === 'number') {
+					AllOutDamage = targetTotalHp * allOutDamagePercentVar.value;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS ksante] failed to calculate passive all out var', allOutDamagePercentVar);
+				}
 
 				return {
-					CalculatedMarkDamage: {
-						value: (markFlatVar.value as number) + targetTotalHp * (markDamagePercentVar.value as number),
+					MarkDamage: {
+						value: MarkDamage,
 					},
-					CalculatedAllOutDamage: {
-						value: targetTotalHp * (allOutDamagePercentVar.value as number),
+					AllOutDamage: {
+						value: AllOutDamage,
 					},
 				};
 			},
 			meta: {
-				CalculatedMarkDamage: {
+				MarkDamage: {
 					isCustom: true,
 					type: VariableType.physical,
 				},
-				CalculatedAllOutDamage: {
+				AllOutDamage: {
 					isCustom: true,
 					type: VariableType.physical,
 				},

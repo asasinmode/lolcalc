@@ -2069,8 +2069,8 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 				const weaponA = a.image.slice(a.image.lastIndexOf('/') + 1, -6);
 				const weaponB = b.image.slice(b.image.lastIndexOf('/') + 1, -6);
 
-				const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponA] ?? Infinity;
-				const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponB] ?? Infinity;
+				const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponA as string] ?? Infinity;
+				const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponB as string] ?? Infinity;
 
 				return indexA - indexB;
 			});
@@ -2096,8 +2096,8 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 		const weaponA = a.image.slice(a.image.lastIndexOf('/') + 3, -4);
 		const weaponB = b.image.slice(b.image.lastIndexOf('/') + 3, -4);
 
-		const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponA] ?? Infinity;
-		const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponB] ?? Infinity;
+		const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponA as string] ?? Infinity;
+		const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponB as string] ?? Infinity;
 
 		return indexA - indexB;
 	});
@@ -2201,7 +2201,10 @@ function championAbilityVariant(
 		name: undefined!,
 		objectName: variantData.ObjectName,
 		dataKey: variantDataKey,
-		/** belveth has the fully highlighted q at last index */
+		/**
+		 * belveth has the fully highlighted q at last index
+		 * also jinx's Q `modifyVariantData` reimplements this logic so it should be updated in case of any changes
+		 */
 		image: mImgIconName
 			.at(championId === 'Belveth' && abilityKey === 'q' && variantIndex === 0 ? -1 : 0)
 			.toLowerCase()
@@ -2259,7 +2262,7 @@ function championAbilityVariant(
 	}
 
 	if ((abilityOrVariantSpecific as IChampionAbilitySpecific)?.modifyVariantData) {
-		(abilityOrVariantSpecific as IChampionAbilitySpecific)!.modifyVariantData!(variant, championData);
+		(abilityOrVariantSpecific as IChampionAbilitySpecific)!.modifyVariantData!(variant, championData, variantData);
 	}
 
 	return [variant, maxLevel];

@@ -1220,7 +1220,7 @@ defineExpose({ el });
 						<h5>passive</h5>
 						<img
 							v-show="!value.isLoading.value && value.champion.value"
-							:src="value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariantsIndexes.value.passive]!.image, value.champion.value.id, group) : undefined"
+							:src="value.champion.value ? abilityImage(value.computed.abilities.value.passive[value.abilityVariantsIndexes.value.passive]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
@@ -1240,7 +1240,7 @@ defineExpose({ el });
 						<h5>{{ abilityKey.toUpperCase() }}</h5>
 						<img
 							v-show="!value.isLoading.value && value.champion.value"
-							:src="value.champion.value ? abilityImage(value.champion.value.abilities[abilityKey].variants[value.abilityVariantsIndexes.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
+							:src="value.champion.value ? abilityImage(value.computed.abilities.value[abilityKey][value.abilityVariantsIndexes.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
