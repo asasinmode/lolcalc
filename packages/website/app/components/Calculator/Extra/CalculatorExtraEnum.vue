@@ -28,7 +28,7 @@ function updateValue(event: Event) {
 		</label>
 		<slot />
 		<select :id="`xtrenum-${idSuffix}`" :value="value ?? 0" :disabled @change="updateValue">
-			<option v-for="[optionValue, optionLabel] in options" :key="optionValue" :value="optionValue">
+			<option v-for="[optionValue, optionLabel] in options" :selected="optionValue === value" :key="optionValue" :value="optionValue">
 				{{ optionLabel }}
 			</option>
 		</select>

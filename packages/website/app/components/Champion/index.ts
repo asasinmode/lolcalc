@@ -110,6 +110,13 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: [
 			await numberExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.passive.maxStacks),
 			await progressExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveMSProgress', 'Get Excited MS value', CHAMPION_SPECIFICS.Jinx.passive.derivedMS),
+			await enumExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'q', 0), 'qBuff', 'Q buff', [
+				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun0, 'minigun no stacks'],
+				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun1, 'minigun 1'],
+				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun2, 'minigun 2'],
+				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun3, 'minigun 3'],
+				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.fishbones, 'fishbones'],
+			]),
 		],
 	},
 	Kayle: {

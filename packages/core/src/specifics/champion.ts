@@ -342,7 +342,7 @@ export interface IChampionInternalDataMap {
 	Jax: { passiveStacks: number };
 	Jayce: { isPassiveMSActive: number };
 	Jhin: { isPassiveMSActive: number };
-	Jinx: { passiveStacks: number; passiveMSProgress: number };
+	Jinx: { passiveStacks: number; passiveMSProgress: number; qBuff: number };
 	Kaisa: { passiveStacksOnTarget: number; eBuff: number };
 	Kayle: { passiveStacks: number };
 	Kayn: { form: number };

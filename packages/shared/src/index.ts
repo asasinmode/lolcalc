@@ -320,6 +320,8 @@ export interface IStatsCalculationVariables {
 	/** pyke's passive variable ratio */
 	pykePassiveHpToAd?: number;
 	jinxPassiveMoveSpeed?: number;
+	/** bonus attack speed from minigun stacks */
+	jinxQAS?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
