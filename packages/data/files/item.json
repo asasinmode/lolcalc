@@ -1,5 +1,5 @@
 {
-	"version": "16.19.1",
+	"version": "16.20.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -3033,7 +3033,7 @@
 				"AbilityHasteMod": 10
 			},
 			"dataValues": {
-				"Range": 325,
+				"Range": 300,
 				"MinionMod": 0.5,
 				"MaxStacks": 1,
 				"MonsterMod": 0.8,
@@ -3256,9 +3256,9 @@
 				"MovementSpeedBonus": 0.2,
 				"HasteDuration": 8,
 				"Cooldown": 30,
-				"BonusASRanged": 35,
+				"BonusASRanged": 25,
 				"BonusASMelee": 50,
-				"BonusMSRanged": 14,
+				"BonusMSRanged": 10,
 				"BonusMSMelee": 20
 			},
 			"stringCalculations": {
@@ -3291,7 +3291,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"{cf1a44c0}",
+				"Items/ItemGroups/CleaveItems",
 				"{21adb259}"
 			],
 			"categories": {
@@ -3456,7 +3456,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"{cf1a44c0}"
+				"Items/ItemGroups/CleaveItems"
 			],
 			"categories": {
 				"fighter": true,
@@ -3774,7 +3774,7 @@
 						{
 							"mStat": 2,
 							"mSubpart": {
-								"mNumber": 0.65,
+								"mNumber": 0.6,
 								"__type": "NumberCalculationPart"
 							},
 							"__type": "StatBySubPartCalculationPart"
@@ -3784,7 +3784,7 @@
 				"{232dac8a}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 0.65,
+							"mNumber": 0.6,
 							"__type": "NumberCalculationPart"
 						}
 					]
@@ -3901,7 +3901,7 @@
 			],
 			"itemGroups": [
 				"{ac92b6ad}",
-				"{bbcc250a}"
+				"Items/ItemGroups/APMultiplier"
 			],
 			"categories": {
 				"mage": true
@@ -5267,12 +5267,12 @@
 			"stats": {
 				"FlatHPPoolMod": 350,
 				"FlatMagicDamageMod": 60,
-				"AbilityHasteMod": 20
+				"AbilityHasteMod": 10
 			},
 			"dataValues": {
 				"Cooldown": 50,
-				"BaseDamage": 100,
-				"APRatio": 0.1
+				"BaseDamage": 135,
+				"APRatio": 0.15
 			},
 			"itemCalculations": {
 				"FireboltDamage": {
@@ -6677,7 +6677,7 @@
 			],
 			"isOnHit": true,
 			"itemGroups": [
-				"{cf1a44c0}",
+				"Items/ItemGroups/CleaveItems",
 				"{88900bbf}"
 			],
 			"categories": {
@@ -8282,7 +8282,7 @@
 			],
 			"itemGroups": [
 				"{b45aafc5}",
-				"{cf1a44c0}"
+				"Items/ItemGroups/CleaveItems"
 			],
 			"categories": {
 				"fighter": true
@@ -8493,7 +8493,7 @@
 				"AbilityHasteMod": 5
 			},
 			"dataValues": {
-				"Range": 325,
+				"Range": 300,
 				"MinionMod": 0.5,
 				"Cooldown": 12,
 				"MonsterMod": 1,
@@ -8627,7 +8627,7 @@
 			"dataValues": {
 				"MinionMod": 0.25,
 				"MonsterMod": 0.25,
-				"Range": 325,
+				"Range": 300,
 				"AuraDuration": 3,
 				"TicksPerSecond": 1,
 				"BaseDamagePerTickTOOLTIPONLY": 10,
@@ -9230,7 +9230,7 @@
 				"2020"
 			],
 			"itemGroups": [
-				"{cf1a44c0}",
+				"Items/ItemGroups/CleaveItems",
 				"{af69b270}"
 			],
 			"categories": {

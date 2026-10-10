@@ -9,9 +9,9 @@
 		"mp": 400,
 		"mpperlevel": 29,
 		"movespeed": 330,
-		"armor": 25,
+		"armor": 23,
 		"armorperlevel": 4.7,
-		"spellblock": 31,
+		"spellblock": 34,
 		"spellblockperlevel": 1.55,
 		"attackrange": 525,
 		"hpregen": 3,
@@ -113,7 +113,7 @@
 						}
 					],
 					"dataValues": {
-						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"BaseDamage": [25, 70, 115, 160, 205, 250, 295],
 						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"MinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"Slow": [-0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5],

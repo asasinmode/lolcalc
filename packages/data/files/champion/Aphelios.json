@@ -33,7 +33,7 @@
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
 					"objectName": "ApheliosCalibrumQ",
-					"dataKey": "{9501e989}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosCalibrumQAbility/ApheliosCalibrumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_calibrum.png",
 					"mana": [60, 60, 60, 60, 60, 60],
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
@@ -192,7 +192,7 @@
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
 					"objectName": "ApheliosSeverumQ",
-					"dataKey": "{c872c72d}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosSeverumQAbility/ApheliosSeverumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_severum.png",
 					"mana": [60, 60, 60, 60, 60, 60],
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
@@ -442,7 +442,7 @@
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
 					"objectName": "ApheliosGravitumQ",
-					"dataKey": "{b3ce4169}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosGravitumQAbility/ApheliosGravitumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_gravitum.png",
 					"mana": [60, 60, 60, 60, 60, 60],
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
@@ -594,7 +594,7 @@
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
 					"objectName": "ApheliosInfernumQ",
-					"dataKey": "{d29e7023}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosInfernumQAbility/ApheliosInfernumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_infernum.png",
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
@@ -764,7 +764,7 @@
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
 					"objectName": "ApheliosCrescendumQ",
-					"dataKey": "{ad4cfba9}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosCrescendumQAbility/ApheliosCrescendumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_crescendum.png",
 					"mana": [60, 60, 60, 60, 60, 60],
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
@@ -1144,7 +1144,7 @@
 				{
 					"name": "The Hitman and the Seer",
 					"objectName": "ApheliosP",
-					"dataKey": "{267f31a5}",
+					"dataKey": "Characters/Aphelios/Spells/ApheliosPAbility/ApheliosP",
 					"image": "assets/characters/aphelios/hud/icons2d/apheliosp.png",
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],

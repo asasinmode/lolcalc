@@ -14,13 +14,19 @@
 		"typescript/consistent-type-imports": "error",
 		"typescript/consistent-type-exports": "warn",
 		"typescript/consistent-type-definitions": ["warn", "interface"],
+		// most of the disabled typescript rules are because typescript already errors/warns in cases they cover
 		"typescript/no-non-null-asserted-optional-chain": "off",
 		"typescript/no-floating-promises": "off",
 		"typescript/unbound-method": "off",
 		"typescript/restrict-template-expressions": "off",
 		"typescript/no-base-to-string": "off",
 		"typescript/no-useless-default-assignment": "off",
-		"typescript/no-for-in-array": "off"
+		"typescript/no-for-in-array": "off",
+		"typescript/await-thenable": "off",
+		"typescript/no-misused-spread": "off",
+		// these 2 constituents could be useful but I don't find them necessary atm and they were adding up to a second of linting when other rules took a few ms
+		"typescript/no-duplicate-type-constituents": "off",
+		"typescript/no-redundant-type-constituents": "off"
 	},
 	"overrides": [
 		{

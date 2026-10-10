@@ -69,8 +69,9 @@ const sourceAbilityDescription = computed<IComputedAbilityDescription | ICompute
 	const { type, id } = sourceAbilityId.value;
 
 	if (type === AbilityType.champion && champion.value && champion.value.id === id) {
+		/* might have to resolve champion & ability variant variables too, the same way DamageSource does in computed variables. For now this is enough */
 		return computeAbilityDescription(champion.value, sourceAbilityId.value, props.damageSource, {
-			overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[id]?.variables),
+			overrideVariables: specificKnownVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[id]?.[sourceAbilityId.value.abilityKey]?.variables),
 		});
 	}
 

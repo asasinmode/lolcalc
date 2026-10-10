@@ -1297,7 +1297,7 @@ export const CUSTOM_EFFECTS: Partial<
 				sharedSpellObjectKey: string;
 				sharedSpellEffectObjectKey?: string | string[];
 		  }
-		| { championSpellObjectKey: string }
+		| { championSpellObjectName: string }
 		| string
 	>
 > = {
@@ -1322,20 +1322,20 @@ export const CUSTOM_EFFECTS: Partial<
 	},
 	/* champion passives */
 	[EffectObjectName.ashePFrostShot]: {
-		championSpellObjectKey: 'Characters/Ashe/Spells/AshePassiveAbility/AshePassiveSlow',
+		championSpellObjectName: 'AshePassiveSlow',
 	},
 	[EffectObjectName.apheliosGravitumSlow]: {
-		championSpellObjectKey: '{0b58a71c}',
+		championSpellObjectName: 'ApheliosGravitumDebuff',
 	},
 	[EffectObjectName.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EffectObjectName.ornnPLivingForge]: {
 		description: "This unit's item is upgraded thanks to ally Ornn.",
 	},
 	[EffectObjectName.namiPSurgingTides]: {
-		championSpellObjectKey: 'Characters/Nami/Spells/NamiPassiveAbility/NamiPassivett',
+		championSpellObjectName: 'NamiPassivett',
 	},
 	[EffectObjectName.nasusWWither]: {
-		championSpellObjectKey: 'Characters/Nasus/Spells/NasusWAbility/NasusW',
+		championSpellObjectName: 'NasusW',
 	},
 	/* other */
 	[EffectObjectName.ghost]: {

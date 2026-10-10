@@ -1,5 +1,5 @@
 {
-	"version": "16.19.1",
+	"version": "16.20.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -38,8 +38,8 @@
 			"name": "Akali",
 			"image": "Akali.png",
 			"roles": {
-				"mid": true,
-				"top": true
+				"top": true,
+				"mid": true
 			}
 		},
 		"Akshan": {
@@ -210,8 +210,8 @@
 			"name": "Camille",
 			"image": "Camille.png",
 			"roles": {
-				"support": true,
-				"top": true
+				"top": true,
+				"support": true
 			}
 		},
 		"Cassiopeia": {
@@ -448,8 +448,8 @@
 			"name": "Irelia",
 			"image": "Irelia.png",
 			"roles": {
-				"mid": true,
-				"top": true
+				"top": true,
+				"mid": true
 			}
 		},
 		"Ivern": {
@@ -719,8 +719,8 @@
 			"name": "Lux",
 			"image": "Lux.png",
 			"roles": {
-				"mid": true,
-				"support": true
+				"support": true,
+				"mid": true
 			}
 		},
 		"Malphite": {
@@ -828,7 +828,6 @@
 			"name": "Nasus",
 			"image": "Nasus.png",
 			"roles": {
-				"mid": true,
 				"top": true
 			}
 		},
@@ -919,8 +918,8 @@
 			"name": "Pantheon",
 			"image": "Pantheon.png",
 			"roles": {
-				"support": true,
-				"top": true
+				"top": true,
+				"support": true
 			}
 		},
 		"Poppy": {
@@ -1219,8 +1218,8 @@
 			"name": "Tahm Kench",
 			"image": "TahmKench.png",
 			"roles": {
-				"support": true,
-				"top": true
+				"top": true,
+				"support": true
 			}
 		},
 		"Taliyah": {
@@ -1346,7 +1345,6 @@
 			"name": "Vayne",
 			"image": "Vayne.png",
 			"roles": {
-				"top": true,
 				"bot": true
 			}
 		},
@@ -1356,8 +1354,7 @@
 			"name": "Veigar",
 			"image": "Veigar.png",
 			"roles": {
-				"mid": true,
-				"bot": true
+				"mid": true
 			}
 		},
 		"Velkoz": {
@@ -1457,8 +1454,8 @@
 			"name": "Xerath",
 			"image": "Xerath.png",
 			"roles": {
-				"mid": true,
-				"support": true
+				"support": true,
+				"mid": true
 			}
 		},
 		"XinZhao": {
@@ -1476,8 +1473,8 @@
 			"name": "Yasuo",
 			"image": "Yasuo.png",
 			"roles": {
-				"mid": true,
 				"top": true,
+				"mid": true,
 				"bot": true
 			}
 		},
@@ -1487,8 +1484,8 @@
 			"name": "Yone",
 			"image": "Yone.png",
 			"roles": {
-				"mid": true,
-				"top": true
+				"top": true,
+				"mid": true
 			}
 		},
 		"Yorick": {

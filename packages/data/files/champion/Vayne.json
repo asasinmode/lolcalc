@@ -14,8 +14,8 @@
 		"spellblock": 33,
 		"spellblockperlevel": 1.1,
 		"attackrange": 550,
-		"hpregen": 4,
-		"hpregenperlevel": 0.5,
+		"hpregen": 5.5,
+		"hpregenperlevel": 0.4,
 		"mpregen": 7,
 		"mpregenperlevel": 0.4,
 		"crit": 0,
@@ -42,9 +42,6 @@
 						{
 							"name": "TotalADRatio",
 							"nameOverride": "spell_vayneq_ratio"
-						},
-						{
-							"name": "Cost"
 						}
 					],
 					"dataValues": {

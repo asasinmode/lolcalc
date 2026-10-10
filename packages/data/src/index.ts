@@ -124,7 +124,6 @@ export interface IEffectData extends Record<
 	  }
 	| {
 			dataKey: string;
-			championSpellObjectKey: string;
 			objectName: string;
 			description: string;
 	  }

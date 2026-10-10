@@ -101,8 +101,9 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 						/*
 						 * some champions like `Elise` have additional variants saved. These are expected to be used only for resolving the variables in the main variants (first 2)
 						 * only Aphelios has more variants that are expected to be actually shown
+						 * hwei on the other hand saves all his qwe variants but only for variables, their tooltips are empty and all interesting vars seem to be present in root qwe, so skip others
 						 */
-						.slice(0, championId === 'Aphelios' ? undefined : 2)
+						.slice(0, championId === 'Aphelios' ? undefined : championId === 'Hwei' ? 1 : 2)
 						.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
 							const { replaced: nameReplaced } = replaceStringtableVariables(variant.name, champion.stringtable);
 

@@ -129,7 +129,7 @@
 						"ClonePercentDamagePerBounty": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
 						"BaseCurrentHealthDamage": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"ZoneDuration": [8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5],
-						"MonsterBonusDmg": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MonsterBonusDmg": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
 						"MonsterSlowAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
@@ -225,7 +225,7 @@
 						"MonsterCap": [200, 200, 200, 200, 200, 200, 200],
 						"BaseDamage": [50, 80, 110, 140, 170, 200, 230],
 						"SlowAmount": [30, 30, 30, 30, 30, 30, 30],
-						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
+						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"TotalDuration": [4, 4, 4, 4, 4, 4, 4],
 						"StacksToProc": [4, 4, 4, 4, 4, 4, 4],
 						"SlowAPRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],

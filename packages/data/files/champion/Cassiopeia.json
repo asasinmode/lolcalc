@@ -4,9 +4,9 @@
 	"name": "Cassiopeia",
 	"partype": "Mana",
 	"stats": {
-		"hp": 630,
+		"hp": 610,
 		"hpperlevel": 98,
-		"mp": 480,
+		"mp": 450,
 		"mpperlevel": 40,
 		"movespeed": 335,
 		"armor": 18,

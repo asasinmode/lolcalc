@@ -344,7 +344,7 @@
 				{
 					"name": "Crimson Curse",
 					"objectName": "BriarP",
-					"dataKey": "{cf6ed5a6}",
+					"dataKey": "Characters/Briar/Spells/BriarPAbility/BriarP",
 					"image": "assets/characters/briar/hud/icons2d/briarp.png",
 					"tooltip": "{{Spell_BriarP_Tooltip}}",
 					"tooltipExtended": "{{ Spell_BriarP_Tooltip }}<br><rules>Briar <healing>heals</healing> for @PercentOfBleedHealedOnKill*100@% of the remaining bleed damage when a bleeding enemy dies.</rules>",

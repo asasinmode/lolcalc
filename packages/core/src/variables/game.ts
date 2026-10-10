@@ -309,6 +309,10 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		calculatesFrom: [],
 	};
 
+	if (!variable) {
+		throw new Error(`no variable name provided for ${abilityVariant.objectName}`);
+	}
+
 	const colonIndex = variable.indexOf(':');
 	if (~colonIndex) {
 		const [rawVariantObjectName, variantVariableName] = variable.split(':');
@@ -1342,10 +1346,10 @@ export const VARIABLE_CALCULATION_FNS = {
 	},
 	/** same as `ByCharLevelInterpolationCalculationPart` but with the keys hashed and variables needing resolving, not being directly in `mStartValue` and `mEndValue` */
 	'{ee18a47b}': function (variable: IGameVariablesByType['{ee18a47b}'], whole, meta) {
-		meta.accessedVariables?.add(variable['{0589a59c}']);
-		const minResult = meta.variableValueFn(variable['{0589a59c}'], meta.variableValueParams);
-		meta.accessedVariables?.add(variable['{0b65bc23}']);
-		const maxResult = meta.variableValueFn(variable['{0b65bc23}'], meta.variableValueParams);
+		meta.accessedVariables?.add(variable.StartDataValue);
+		const minResult = meta.variableValueFn(variable.StartDataValue, meta.variableValueParams);
+		meta.accessedVariables?.add(variable.EndDataValue);
+		const maxResult = meta.variableValueFn(variable.EndDataValue, meta.variableValueParams);
 
 		const mStartValue = minResult.value;
 		const mEndValue = maxResult.value;
@@ -1719,8 +1723,8 @@ interface IGameVariablesByType {
 	};
 	/** hashed `ByCharLevelInterpolationCalculationPart` */
 	'{ee18a47b}': {
-		'{0589a59c}': string;
-		'{0b65bc23}': string;
+		StartDataValue: string;
+		EndDataValue: string;
 	};
 	ByCharLevelFormulaCalculationPart: {
 		values: number[];

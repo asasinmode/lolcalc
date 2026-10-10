@@ -157,8 +157,8 @@
 						"RDamageIncreaseMin": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"RDamageIncreaseMax": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
 						"MinimumMinionDamage": [30, 80, 130, 180, 230, 280, 330],
-						"DamageReduction": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-						"RDamageReduction": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"DamageReduction": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"RDamageReduction": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"MaxMonsterDamage": [100, 180, 260, 340, 420, 500, 580]
 					},
 					"spellCalculations": {
@@ -386,8 +386,8 @@
 						"PercentHealthDamage": {
 							"mFormulaParts": [
 								{
-									"{0589a59c}": "MarkDamagePercentMin",
-									"{0b65bc23}": "MarkDamagePercentMax",
+									"StartDataValue": "MarkDamagePercentMin",
+									"EndDataValue": "MarkDamagePercentMax",
 									"__type": "{ee18a47b}"
 								}
 							],

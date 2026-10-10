@@ -1,5 +1,5 @@
 {
-	"version": "16.19.1",
+	"version": "16.20.1",
 	"data": {
 		"summonerHaste": {
 			"dataKey": "summonerHaste",
@@ -234,13 +234,11 @@
 		},
 		"ApheliosGravitumDebuff": {
 			"dataKey": "ApheliosGravitumDebuff",
-			"championSpellObjectKey": "{0b58a71c}",
 			"objectName": "ApheliosGravitumDebuff",
 			"description": "Aphelios has slowed this unit with Gravitum and can root them."
 		},
 		"AshePassiveSlow": {
 			"dataKey": "AshePassiveSlow",
-			"championSpellObjectKey": "Characters/Ashe/Spells/AshePassiveAbility/AshePassiveSlow",
 			"objectName": "AshePassiveSlow",
 			"description": "This unit is slowed."
 		},
@@ -258,13 +256,11 @@
 		},
 		"NamiPassiveTT": {
 			"dataKey": "NamiPassiveTT",
-			"championSpellObjectKey": "Characters/Nami/Spells/NamiPassiveAbility/NamiPassivett",
 			"objectName": "NamiPassivett",
 			"description": "This unit has increased Move Speed for a short duration."
 		},
 		"NasusW": {
 			"dataKey": "NasusW",
-			"championSpellObjectKey": "Characters/Nasus/Spells/NasusWAbility/NasusW",
 			"objectName": "NasusW",
 			"description": "This unit's Move and Attack Speeds are becoming increasingly slowed over time."
 		},

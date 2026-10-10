@@ -67,8 +67,8 @@
 						"Spread_Lifesteal_Efficacy": [1, 1, 1, 1, 1, 1, 1],
 						"Spread_Onhit_Efficacy": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"Attack_Speed": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7],
-						"Damage": [0, 5, 10, 15, 20, 25, 30],
-						"Damage_Passive": [0, 5, 10, 15, 20, 25, 30]
+						"Damage": [0, 3, 8, 13, 18, 23, 28],
+						"Damage_Passive": [0, 3, 8, 13, 18, 23, 28]
 					},
 					"spellCalculations": {
 						"Calc_Passive_Damage": {

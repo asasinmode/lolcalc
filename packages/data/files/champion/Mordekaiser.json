@@ -69,7 +69,7 @@
 									"mBreakpoints": [
 										{
 											"mLevel": 10,
-											"mBonusPerLevelAtAndAfter": 5
+											"mBonusPerLevelAtAndAfter": 7
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"

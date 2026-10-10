@@ -101,7 +101,7 @@
 						"ShieldAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"ShieldDuration": [5, 5, 5, 5, 5, 5, 5],
 						"OrbAPRatio": [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18],
-						"ShieldBHPRatio": [0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11]
+						"ShieldBHPRatio": [0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.14]
 					},
 					"spellCalculations": {
 						"ShieldValue": {

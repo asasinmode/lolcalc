@@ -239,11 +239,15 @@
 						{
 							"name": "BreakDamageBase",
 							"nameOverride": "spell_lilliar_breakdamage_level"
+						},
+						{
+							"name": "SleepDuration",
+							"nameOverride": "spell_listtype_duration"
 						}
 					],
 					"dataValues": {
 						"DrowsyDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"SleepDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"SleepDuration": [2.25, 2.5, 2.75, 3, 3.25, 3.5, 3.75],
 						"ImpactDamage": [25, 25, 25, 25, 25, 25, 25],
 						"BreakDamageBase": [50, 100, 150, 200, 250, 300, 350],
 						"InitialSlow": [-0.1, -0.1, -0.1, -0.1, -0.1, -0.1, -0.1]
@@ -401,6 +405,7 @@
 		"spell_lilliaq_basetruedamage": "True Damage",
 		"spell_listtype_damage": "Damage",
 		"spell_lilliar_breakdamage_level": "Break Damage",
+		"spell_listtype_duration": "Duration",
 		"spell_lilliap_tooltip": "Lillia's Abilities apply <keywordMajor>Dream Dust</keywordMajor>, dealing <magicDamage>@DotPercentTooltip@ max Health magic damage</magicDamage> over @Duration@ seconds. Lillia restores <healing>@MonsterHealTT@ Health</healing> over the duration against large jungle monsters, and restores <healing>@ChampionHealTT@ Health</healing> against champions."
 	}
 }

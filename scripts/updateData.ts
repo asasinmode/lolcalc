@@ -1229,9 +1229,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 									stringtable: customEffect.stringtable,
 								},
 							];
-						} else if ('sharedSpellObjectKey' in customEffect || 'championSpellObjectKey' in customEffect) {
-							const spellKey = (customEffect as any).sharedSpellObjectKey ?? (customEffect as any).championSpellObjectKey;
-
+						} else if ('sharedSpellObjectKey' in customEffect || 'championSpellObjectName' in customEffect) {
 							let sourceSpell;
 							if ('sharedSpellObjectKey' in customEffect) {
 								sourceSpell = sharedSpellsData[customEffect.sharedSpellObjectKey];
@@ -1241,18 +1239,17 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 									`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`,
 									`game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`,
 								);
-								sourceSpell = championData[customEffect.championSpellObjectKey];
+								sourceSpell = Object.values(championData).find((spellData: any) => spellData.ObjectName === customEffect.championSpellObjectName);
 							}
 
 							if (!sourceSpell) {
-								throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${spellKey}" not found in target data`);
+								throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" spell "${(customEffect as any).sharedSpellObjectKey ?? (customEffect as any).championSpellObjectName}" not found in target data`);
 							}
 
-							const effectData: Extract<IEffectData[keyof IEffectData], { sharedSpellObjectKey: string }> | Extract<IEffectData[keyof IEffectData], { championSpellObjectKey: string }> = {
+							const effectData: Extract<IEffectData[keyof IEffectData], { objectName: string }> = {
 								dataKey: effectObjectName,
 								sharedSpellObjectKey: (customEffect as any).sharedSpellObjectKey,
 								sharedSpellEffectObjectKey: (customEffect as any).sharedSpellEffectObjectKey,
-								championSpellObjectKey: (customEffect as any).championSpellObjectKey,
 								objectName: sourceSpell.ObjectName,
 								name: undefined,
 								description: '',
@@ -1294,7 +1291,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 							}
 
 							/* used for summoner spells to extract spell data but not needed for champion spells since that data should already be saved on champion */
-							if (sourceSpell.mSpell && !('championSpellObjectKey' in customEffect)) {
+							if (sourceSpell.mSpell && !('championSpellObjectName' in customEffect)) {
 								const { mImgIconName, DataValues, mSpellCalculations, mClientData, cooldownTime } = sourceSpell.mSpell;
 
 								if (!mImgIconName?.[0]) {
@@ -1962,7 +1959,7 @@ function championAbilityData(
 	championData: any,
 	characterRootKey: string,
 ): IChampionAbility {
-	const { mCharacterPassiveSpell, spells, '{1abb82c0}': spellLevelUpInfo, characterToolData } = championData[characterRootKey];
+	const { mCharacterPassiveSpell, spells, SpellLevelUpInfoList: spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityInfo[1] === 4 ? mCharacterPassiveSpell : spells[abilityInfo[1]];
 
 	let championDataEntries: [string, any][] | undefined;
