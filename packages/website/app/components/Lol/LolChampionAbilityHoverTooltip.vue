@@ -84,11 +84,9 @@ defineExpose({ el });
 			v-show="globalKeyModifiers.shift ? computedDescription?.tooltipExtendedBelowLine || computedDescription?.abilityLevelVars?.length : anyExtendedInfo"
 		>
 			<div v-if="computedDescription?.tooltipExtendedBelowLine" v-show="globalKeyModifiers.shift" class="game-description" v-html="computedDescription.tooltipExtendedBelowLine" />
-			<dl v-show="globalKeyModifiers.shift && computedDescription?.abilityLevelVars">
+			<dl v-show="globalKeyModifiers.shift && computedDescription?.abilityLevelVars" class="game-description">
 				<template v-for="{ name, values, isNameUnknown } in computedDescription?.abilityLevelVars" :key="name">
-					<dt :class="{ unknown: isNameUnknown }">
-						{{ name }}
-					</dt>
+					<dt :class="{ unknown: isNameUnknown }" v-html="name" />
 					<dd :class="{ unknown: !values?.length }">
 						[
 						{{ !values?.length ? 'unknown' : '' }}

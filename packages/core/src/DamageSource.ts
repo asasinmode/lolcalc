@@ -1697,6 +1697,9 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		}
 	}
 
+	// TODO detect unknown cost/cooldown
+	let anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBLUnknownSV.size || tooltipExtendedBLUnknownV.length;
+
 	const cooldown = variant.cooldownTime?.[abilityLevel ?? 1];
 	const cost = variant.mana?.[abilityLevel ?? 1];
 	const lastExtendedVariableIndex = ability.maxLevel + 1;
@@ -1711,13 +1714,17 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 			}
 		}
 		name ??= variable.name;
-		name = replaceGameVariables(name, 'championAbility', {
+
+		const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(name, champion.stringtable, replaceOptions?.overrideVariables ?? dynamicVariables);
+		const { replaced: variableReplaced, unknownVariables } = replaceGameVariables(stringtableReplaced, 'championAbility', {
 			abilityKey: gameAbilityId.abilityKey,
 			abilityVariant: variant,
 			allAbilitiesVariants: allVariants,
 			damageSource,
 			dynamicVariables,
-		}).replaced;
+		});
+		name = variableReplaced;
+		anyUnknownVariables ||= unknownStringtableVariables.size || unknownVariables.length;
 
 		return {
 			name,
@@ -1754,9 +1761,6 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 			});
 		}
 	}
-
-	// TODO detect unknown cost/cooldown
-	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBLUnknownSV.size || tooltipExtendedBLUnknownV.length;
 
 	const abilitySpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[gameAbilityId.abilityKey];
 	let isDisabled: boolean | number | undefined;
