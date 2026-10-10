@@ -47,7 +47,7 @@ function toggle(abilityIndex: number) {
 		/>
 		<h5>abilities evolved</h5>
 		<label v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]" :key="abilityKey" :for="`evolve-${abilityKey}-${idSuffix}`">
-			<input :id="`evolve-${abilityKey}-${idSuffix}`" type="checkbox" :checked="isEvolved(abilityIndex)" :disabled="abilityKey === 'r' && notAllBasicEvolved" @input="toggle(abilityIndex)" />
+			<input :id="`evolve-${abilityKey}-${idSuffix}`" type="checkbox" :checked="isEvolved(abilityIndex)" :disabled="abilityKey === 'r' && notAllBasicEvolved" @change="toggle(abilityIndex)" />
 			{{ abilityKey.toUpperCase() }}
 		</label>
 	</article>

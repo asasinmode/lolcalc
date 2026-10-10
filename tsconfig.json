@@ -26,7 +26,8 @@
 		"isolatedModules": true,
 		"erasableSyntaxOnly": true,
 		"skipDefaultLibCheck": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"verbatimModuleSyntax": true,
 	},
 	"include": ["*.ts", "packages", "scripts"],
 	"exclude": ["node_modules", "packages/website"]

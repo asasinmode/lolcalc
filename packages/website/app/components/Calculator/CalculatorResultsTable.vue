@@ -1262,7 +1262,7 @@ defineExpose({
 						<div>
 							<a href="#results-table-section-header-aa" class="skip-link"> skip column controls </a>
 							<label for="results-table-values-for">
-								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @input="recalculateAllColumns" />
+								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @change="recalculateAllColumns" />
 								flip target vs source
 							</label>
 							<button
@@ -1564,7 +1564,7 @@ defineExpose({
 						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
 							<label>
 								<span>include in custom total</span>
-								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @input="onCustomTotalRowsChange" />
+								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @change="onCustomTotalRowsChange" />
 							</label>
 						</td>
 						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-damage-type">

@@ -259,7 +259,7 @@ const isDisplayingTargets = ref(false);
 		<h2>configuration scoreboard</h2>
 		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
 		<label for="scoreboard-mirror-layout">
-			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @input="setLocalMirrorLayout" />
+			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @change="setLocalMirrorLayout" />
 			mirror layout
 		</label>
 		<div :class="{ 'displaying-targets': isDisplayingTargets }">
