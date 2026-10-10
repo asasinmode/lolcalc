@@ -38,7 +38,7 @@
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains @AttackRangeBonus@ range, deals an additional <physicalDamage>@BonusDamageTT@ physical damage</physicalDamage>, and removes <scaleArmor>@ArmorShredPercent*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br>This Ability's cooldown is reduced by @CooldownDecrease@ seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -108,7 +108,7 @@
 					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"tooltip": "Wukong dashes and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ second, leaving behind a stationary <keywordMajor>Clone</keywordMajor> for @CloneDuration@ seconds.<br><br>The <keywordMajor>Clone</keywordMajor> Attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, each dealing @CloneDamageMod*100@% of normal damage.",
 					"tooltipExtendedBelowLine": "<rules><keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or true sight.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "CloneDamageMod",
 							"nameOverride": "spell_monkeykingdecoy_clonedamage"
@@ -139,7 +139,7 @@
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [10, 10, 9.25, 8.5, 7.75, 7, 7],
 					"tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to @ExtraTargets@ additional enemies nearby. Each enemy struck takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -200,7 +200,7 @@
 					"cooldownTime": [10, 130, 110, 90, 90, 90, 10],
 					"tooltip": "Wukong gains <speed>@MoveSpeed*100@% Move Speed</speed> and spins his staff, <status>Knocking Up</status> nearby enemies for @KnockupDuration@ seconds and take <physicalDamage>@TotalDamageTT@ plus @PercentHPDamageTT@ max Health physical damage</physicalDamage> over @SpinDuration@ seconds.<br><br>This Ability can be cast a second time within @RecastWindow@ seconds before going on cooldown.",
 					"tooltipExtendedBelowLine": "<rules>Damage to jungle monsters is capped at <physicalDamage>@MonsterCapTT@ damage</physicalDamage> over @SpinDuration@ seconds.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BasePercentMaxHPDmgPerSec",
 							"nameOverride": "spell_listtype_maxhealthdamage"

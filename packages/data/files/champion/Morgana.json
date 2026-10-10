@@ -37,7 +37,7 @@
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
 					"mana": [50, 55, 60, 65, 70, 75],
 					"tooltip": "Morgana hurls a blast of starfire that <status>Roots</status> the first enemy hit for @RootDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
@@ -85,7 +85,7 @@
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Morgana ignites the ground for @WDuration@ seconds, dealing <magicDamage>@TotalMinDamage@ magic damage</magicDamage> per second, increased by up to <magicDamage>@TotalMaxDamage@</magicDamage> based on the targets' missing Health.<br><br>This Ability's Cooldown is reduced by @CDRefundPercent*100@% every time Morgana is healed by <spellName>{{Spell_MorganaPassive_Name}}</spellName>.",
 					"tooltipExtendedBelowLine": "<rules>This Ability deals @MonsterMod@% damage to jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damagepersecond"
@@ -152,7 +152,7 @@
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [26, 26, 23.5, 21, 18.5, 16, 16],
 					"tooltip": "Morgana grants an ally champion <shield>@TotalShieldStrength@ Magic Shield</shield> for @ShieldDuration@ seconds. The shield prevents <status>Disabling</status> and <status>Immobilizing</status> effects until it breaks.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ShieldStrength",
 							"nameOverride": "spell_listtype_shieldamount"
@@ -192,7 +192,7 @@
 					"cooldownTime": [10, 120, 110, 100, 10, 10, 10],
 					"tooltip": "Morgana chains herself to nearby enemy Champions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowPercent@%. After @ChainDuration@ seconds, enemies unable to break the chains take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and are <status>Stunned</status> for @StunDuration@ seconds.<br><br>While casting this Ability, Morgana gains <speed>@HastePercent@% Move Speed</speed>.",
 					"tooltipExtendedBelowLine": "<rules>Morgana gains <keywordStealth>True Sight</keywordStealth> of all enemies affected by this Ability.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"

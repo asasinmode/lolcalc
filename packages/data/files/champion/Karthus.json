@@ -38,7 +38,7 @@
 					"mana": [20, 25, 30, 35, 40, 45],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -94,7 +94,7 @@
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Karthus creates a wall that lasts for @WallDuration@ seconds. Enemies that pass through lose <scaleMR>@MagicResistShred@% Magic Resist</scaleMR> for @DebuffDuration@ seconds and are <status>Slowed</status> by @SlowPercent@% decaying over the duration.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "TT_WallWidth",
 							"nameOverride": "spell_listtype_karthuswallwidth"
@@ -132,7 +132,7 @@
 					"mana": [30, 42, 54, 66, 78, 90],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@ManaRestoreOnKill@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DamagePerSecond",
 							"nameOverride": "spell_listtype_damagepersecond"
@@ -191,7 +191,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [200, 200, 180, 160, 180, 180, 200],
 					"tooltip": "Karthus channels for 3 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemy champions, regardless of distance.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

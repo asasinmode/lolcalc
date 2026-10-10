@@ -39,7 +39,7 @@
 					"cooldownTime": [13, 13, 11.25, 9.5, 7.75, 6, 6],
 					"tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br><br>If Fiora strikes an enemy, this Ability's Cooldown is reduced by @CDRefundPercent*100@%.",
 					"tooltipExtendedBelowLine": "<rules>The strike applies On-Hit Effects.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
@@ -90,7 +90,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [26, 24, 22, 20, 18, 16, 14],
 					"tooltip": "Fiora parries all incoming damage, disables, and negative effects for @ParryDuration@ seconds, then stabs. The stab deals <magicDamage>@StabDamage@ magic damage</magicDamage> to the first champion hit and <status>Slows</status> <speed>Move Speed</speed> by @MSSlowPercent*-100@%<attackSpeed> and Attack Speed by @AttackSlowPercent*-100@% </attackSpeed> for @CCDuration@ seconds. If Fiora parries an <status>Immobilizing</status> effect, the stabbed enemy is <status>Stunned</status> rather than <status>Slowed</status>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -135,7 +135,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Fiora gains <attackSpeed>@ASPercent*100@% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by @SlowPercent*-100@% for @SlowDuration@ second. The second Attack always critically strikes for <physicalDamage>@AttackTwopercentTAD*100@% damage</physicalDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "AttackTwoPercentTAD",
 							"nameOverride": "spell_listtype_criticalstrikedamage"
@@ -167,7 +167,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 110, 90, 70, 10, 10, 10],
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_FioraPassive_Name}}</spellName> <speed>Move Speed</speed> bonus is increased to @PercentMS*100@%.<br><br><spellActive>Active:</spellActive> Fiora reveals all four <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>@spell.FioraPassive:RDamageTotal@ max Health true damage</trueDamage> and gains <spellName>{{Spell_FioraPassive_Name}}'s</spellName> <speed>Move Speed</speed> bonus while near the target.<br><br>If Fiora strikes all four <keywordMajor>Vitals</keywordMajor> within @MarkDuration@ seconds or if the target dies after she has hit at least one, Fiora restores <healing>@HealPerSecondCalc@ Health per second</healing> to surrounding allied champions for @HealDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PercentMS",
 							"nameOverride": "spell_listtype_fioraduelistmovementspeed"

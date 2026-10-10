@@ -39,7 +39,7 @@
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "If Qiyana does not have an <keywordMajor>Enchantment</keywordMajor>, she slashes, dealing <physicalDamage>@VanillaDamage@ physical damage</physicalDamage> to enemies in a small area. If she does, this Ability gains extra range and an additional effect based on the type of <keywordMajor>Enchantment</keywordMajor>:<li><keywordMajor>Ice Enchantment</keywordMajor>: Briefly <status>Roots</status>, then <status>Slows</status> by @SlowPotency*-100@% for @SlowDuration@ second.<li><keywordMajor>Rock Enchantment</keywordMajor>: Deals an additional <physicalDamage>@TremorDamage@ physical damage</physicalDamage> to units below @CritThreshold*100@% Health.<li><keywordMajor>Wild Enchantment</keywordMajor>: Leaves a trail that turns Qiyana <keywordStealth>Invisible</keywordStealth> and grants <speed>@Haste*100@% Move Speed</speed>.</li>",
 					"tooltipExtendedBelowLine": "<rules>Enemies beyond the first take <physicalDamage>@FalloffDamage@ physical damage</physicalDamage> instead.<br>This Ability deals @JungleDamageAmp*100@% damage to jungle monsters.<br>{{Reminder_Invisibility}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "VanillaBase",
 							"nameOverride": "spell_listtype_damage"
@@ -163,7 +163,7 @@
 					"mana": [25, 30, 35, 40, 45, 50],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "<spellPassive>Passive:</spellPassive> While Qiyana's weapon is <keywordMajor>Enchanted</keywordMajor>, she gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> and her Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>. She also gains <speed>@PassiveMS*100@% Move Speed</speed> while out of combat near the corresponding terrain type.<br><br><spellActive>Active:</spellActive> Qiyana dashes towards a nearby brush, terrain, or river and <keywordMajor>Enchants</keywordMajor> her weapon with that particular terrain type. This refreshes <spellName>{{Spell_QiyanaQv2_Name}}</spellName>'s Cooldown.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_onhitdamage"
@@ -251,7 +251,7 @@
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Qiyana dashes through an enemy and deals <physicalDamage>@Damage@ physical damage</physicalDamage> to them.",
 					"tooltipExtendedBelowLine": "<rules>If <spellName>{{Spell_QiyanaQv2_Name}}</spellName> is cast while this Ability is targeting a champion, Qiyana will automatically aim it at her target.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
@@ -298,7 +298,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"tooltip": "Qiyana launches a shockwave that <status>Knocks Back</status> enemies and detonates when it hits terrain. The explosion follows the entire edge of the terrain, <status>Stunning</status> for between 0.5 and @StunDuration@ seconds and dealing <physicalDamage>@Damage@</physicalDamage> plus <physicalDamage>@MissingHealthDamageRock@ max Health physical damage</physicalDamage>. <status>Stun</status> duration scales down with distance the shockwave has travelled.<br><br>Any river or brush the shockwave passes through also explode after a delay for the same damage and <status>Stun</status>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_initialdamage"

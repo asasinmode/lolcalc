@@ -38,7 +38,7 @@
 					"mana": [45, 50, 55, 60, 65, 65],
 					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"tooltip": "Vex launches a wave of mist that deals <magicDamage>@QDamageCalc@ magic damage</magicDamage>. After a delay, the wave becomes smaller and faster.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						},
@@ -95,7 +95,7 @@
 					"mana": [75, 75, 75, 75, 75, 75],
 					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"tooltip": "Vex gains <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds and emits a shockwave that deals <magicDamage>@WDamageCalc@ magic damage</magicDamage>.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -154,7 +154,7 @@
 					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"tooltip": "{{Spell_VexE_Tooltip}}",
 					"tooltipExtended": "{{Spell_VexE_Tooltip}}<br><br><rules>Killing a champion refunds @GloomCDChampTooltip*100@% of <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown instead.<br>Enemies <status>Feared</status> by this Ability move away from the center rather than from Vex.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -207,7 +207,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"tooltip": "Shadow excitedly surges forward, dealing <magicDamage>@spell.VexR:RDamageCalc@ magic damage</magicDamage> and marking the first enemy champion hit for 4 seconds.<br><br><recast>Recast</recast>: Dash to the marked champion, dealing <magicDamage>@spell.VexR:RecastDamageCalc@ magic damage</magicDamage> on arrival.<br><br>If the marked champion dies within @spell.VexR:TakedownWindow@ seconds of taking damage from this Ability, its Cooldown is temporarily reset.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

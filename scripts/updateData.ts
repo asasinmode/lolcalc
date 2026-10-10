@@ -2194,11 +2194,6 @@ function championAbilityVariant(
 		throw new Error(`${debugPrefix} expected mLocKeys in variant "${variantDataKey}"`);
 	}
 
-	const extendedVariableNameOverrides = new Set<string>();
-	for (const nameOverride of extendedVariableNameOverrides.values()) {
-		(textData.data.stringtable as any)[nameOverride] = getStringtableValue(nameOverride, 'extended variables name overrides');
-	}
-
 	const variant = {
 		name: undefined!,
 		objectName: variantData.ObjectName,
@@ -2213,11 +2208,11 @@ function championAbilityVariant(
 		tooltip: undefined,
 		tooltipExtended: undefined,
 		tooltipExtendedBelowLine: undefined,
-		extendedVariables: saveTooltips
+		abilityLevelVars: saveTooltips
 			? mClientData.mTooltipData?.mLists?.LevelUp?.Elements?.filter((variable: any) => variable.type !== 'Cooldown').map((variable: any) => {
 					const { type, typeIndex } = variable;
 					if (!type) {
-						console.warn(`${debugPrefix} extended variable no type`, variable);
+						console.warn(`${debugPrefix} ability level variable no type`, variable);
 					}
 
 					// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
@@ -2385,9 +2380,9 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				});
 			variant.tooltipExtendedBelowLine &&= transformAbilityText(variant.tooltipExtendedBelowLine);
 
-			for (const extendedVariable of variant.extendedVariables || []) {
-				if (extendedVariable.nameOverride) {
-					(champion.stringtable as any)[extendedVariable.nameOverride] = getStringtableValue(extendedVariable.nameOverride, { ...variableDebug, key: `${debugPrefix} extendedVariables` });
+			for (const levelVar of variant.abilityLevelVars || []) {
+				if (levelVar.nameOverride) {
+					(champion.stringtable as any)[levelVar.nameOverride] = getStringtableValue(levelVar.nameOverride, { ...variableDebug, key: `${debugPrefix} ability level var` });
 				}
 			}
 

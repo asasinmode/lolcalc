@@ -39,7 +39,7 @@
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Mel unleashes a barrage of @ExplosionCount@ projectiles that explode in the area around a target location.<br><br>The first explosion hit deals <magicDamage>@InitialExplosionDamage@ magic damage</magicDamage> and each subsequent explosion deals <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>, adding up to <magicDamage>@AllDamageHit@ magic damage</magicDamage> total.",
 					"tooltipExtendedBelowLine": "",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "InitialDamage",
 							"nameOverride": "spell_listtype_initialdamage"
@@ -164,7 +164,7 @@
 					"cooldownTime": [38, 38, 35, 33, 29, 26, 26],
 					"tooltip": "Mel forms a barrier around herself that reflects projectiles from enemy champions, gaining <shield>@ShieldAmount@ Shields</shield> for @Duration@ seconds and <speed>@MoveSpeed*100@% decaying Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Reflected projectiles deal <magicDamage>@DamagePercent@ original damage as magic damage</magicDamage>.",
 					"tooltipExtendedBelowLine": "<rules>Reflected projectile damage is calculated using the original caster's attributes before damage adjustments and magic penetration.<br><physicalDamage>Physical damage</physicalDamage> is reduced by @PhysDamageMod*100@% when converted to magic damage.<br>Does not apply item effects from the original caster.<br>Projectiles targeting each enemy in an area are destroyed instead of reflected.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamagePercent",
 							"nameOverride": "spell_melw_reflecteddamage"
@@ -229,7 +229,7 @@
 					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
 					"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDuration@ seconds and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>.",
 					"tooltipExtendedBelowLine": "<rules>The Slow and damage-over-time effects linger on enemies for a short duration after they've left the area created by the orb.<br>Deals @MinionModTooltip@ reduced damage when used against minions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -325,7 +325,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 60],
 					"tooltip": "<spellPassive>Passive</spellPassive>: <keywordMajor>Overwhelm</keywordMajor> damage is increased to <magicDamage>@PassiveFlatDamage@ magic damage plus @PassiveStackDamage@ magic damage per stack</magicDamage>.<br><br><spellActive>Active</spellActive>: Mel unleashes her power on all enemies affected by <keywordMajor>Overwhelm</keywordMajor>, dealing <magicDamage>@UltFlatDamage@ magic damage plus @UltStackDamage@ magic damage per <keywordMajor>Overwhelm</keywordMajor> stack</magicDamage>.<br><br><rules>Can only be cast when an enemy champion is affected by <keywordMajor>Overwhelm</keywordMajor>.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseUltFlatDamage",
 							"nameOverride": "spell_melr_ultflatdamage"

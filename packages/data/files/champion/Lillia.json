@@ -38,7 +38,7 @@
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [4, 6, 5.5, 5, 4.5, 4, 4],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PranceBonusPerStack",
 							"nameOverride": "spell_listtype_movementspeed"
@@ -121,7 +121,7 @@
 					"cooldownTime": [18, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
 					"tooltipExtendedBelowLine": "<rules>Lillia does not dash over terrain with this ability.</rules><br><rules>Deals 50% less damage to minions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "FlatDamageBase",
 							"nameOverride": "spell_listtype_damage"
@@ -187,7 +187,7 @@
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ImpactDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -235,7 +235,7 @@
 					"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"tooltipExtendedBelowLine": "<rules>Drowsy units are slowed over the duration, and fall Asleep afterwards.<br>Asleep units can't move or act until damaged by an enemy with non-periodic damage.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BreakDamageBase",
 							"nameOverride": "spell_lilliar_breakdamage_level"

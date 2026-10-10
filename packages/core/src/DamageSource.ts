@@ -1701,7 +1701,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 	const cost = variant.mana?.[abilityLevel ?? 1];
 	const lastExtendedVariableIndex = ability.maxLevel + 1;
 
-	let extendedVariables: IComputedAbilityDescription['extendedVariables'] | undefined = variant.extendedVariables?.map((variable) => {
+	let abilityLevelVars: IComputedAbilityDescription['abilityLevelVars'] | undefined = variant.abilityLevelVars?.map((variable) => {
 		let isNameUnknown = false;
 		let name;
 		if (variable.nameOverride) {
@@ -1747,8 +1747,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 			cooldownVaries ||= firstCd !== variant.cooldownTime![i];
 		}
 		if (cooldownVaries) {
-			extendedVariables ||= [];
-			extendedVariables.push({
+			abilityLevelVars ||= [];
+			abilityLevelVars.push({
 				name: 'Cooldown',
 				values: variant.cooldownTime!.slice(1, lastExtendedVariableIndex).map((v) => roundNumber(v * (damageSource?.stats.value.cdr ?? 1), 2)),
 			});
@@ -1775,7 +1775,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		cost,
 		abilityLevel,
 		partype: champion.partype,
-		extendedVariables,
+		abilityLevelVars,
 		variables,
 		unknownVariables,
 		variant,
@@ -2304,7 +2304,8 @@ export interface IComputedAbilityDescription {
 	cost?: number;
 	partype?: string;
 	abilityLevel?: number;
-	extendedVariables?: {
+	/** from `IChampionAbilityVariant.abilityLevelVars` */
+	abilityLevelVars?: {
 		name: string;
 		values?: (string | number)[];
 		isNameUnknown?: boolean;

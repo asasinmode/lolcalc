@@ -39,7 +39,7 @@
 					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Gragas rolls a cask that explodes after @BarrelMaxDuration@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @SlowPercent@ and @SlowPercent*1.5@% for @SlowDuration@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
 					"tooltipExtendedBelowLine": "<rules>Deals @MinionDamageMod@% damage to minions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -105,7 +105,7 @@
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"tooltip": "Gragas samples his brew, reducing incoming damage by @DamageReduction@ for @DefenseDuration@ seconds and empowering his next Attack to deal an additional <magicDamage>@TotalDamage@</magicDamage> plus <magicDamage>@MaxHPPercentDamage@% max Health magic damage</magicDamage> to the target and surrounding enemies.",
 					"tooltipExtendedBelowLine": "<rules>Max Health damage is capped at @MonsterDamageCap@ versus jungle monsters.</rules><br><rules>Deals @TurretDamageMod*100@% damage to structures.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamageReduction",
 							"nameOverride": "spell_listtype_damagereduction"
@@ -172,7 +172,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [14, 14, 13.5, 13, 12.5, 12, 12],
 					"tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for @StunDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to them.<br><br>This Ability's Cooldown is reduced by @CooldownRefund*100@% if Gragas collides with an enemy.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -217,7 +217,7 @@
 					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"tooltip": "Gragas hurls his cask, dealing <magicDamage>@DamageDone@ magic damage</magicDamage> and <status>Knocking Away</status> enemies from the impact zone.",
 					"tooltipExtendedBelowLine": "<rules>Enemies cannot be <status>Knocked</status> over walls with this Ability.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

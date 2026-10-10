@@ -39,7 +39,7 @@
 					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 4.5],
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
 					"tooltipExtendedBelowLine": "<rules>Deals an additional <physicalDamage>@FlatBonusDmgToMonsters@ physical damage</physicalDamage> to minions and jungle monsters (max: @MaxDmgToMonsters@).</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
@@ -127,7 +127,7 @@
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -185,7 +185,7 @@
 					"cooldownTime": [21, 21, 19, 17, 15, 13, 11],
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}<br>Maximum duration in combat with enemy champions is @MaxInCombatTime@ seconds.<br></rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "WallWalkDuration",
 							"nameOverride": "spell_listtype_duration"
@@ -248,7 +248,7 @@
 					"cooldownTime": [120, 120, 100, 80, 0, 0, 0],
 					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

@@ -38,7 +38,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @StunDuration@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -91,7 +91,7 @@
 					"mana": [8, 8, 8, 8, 8, 8],
 					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"tooltip": "<toggle>Toggle:</toggle> Amumu begins crying, dealing <magicDamage>@BaseDamage@ plus @TotalHealthDamage@% max Health magic damage</magicDamage> to nearby enemies every second and refreshing <keywordMajor>Curse</keywordMajor>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "HealthDamage",
 							"nameOverride": "spell_listtype_percenthealthdamage"
@@ -152,7 +152,7 @@
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 4],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @CDROnHit@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies.",
 					"tooltipExtendedBelowLine": "<rules>Damage reduction effect can't reduce the damage below @FlatDamageReductionMax*100@%.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamageReduction",
 							"nameOverride": "spell_listtype_damagereduced"
@@ -225,7 +225,7 @@
 					"cooldownTime": [150, 150, 125, 100, 100, 100, 100],
 					"tooltip": "Amumu flares out his bandages, <status>Stunning</status> for @RDuration@ seconds, dealing <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> and applying <keywordMajor>Curse</keywordMajor>.",
 					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						},

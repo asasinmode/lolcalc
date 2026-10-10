@@ -39,7 +39,7 @@
 					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @MoveSpeedMod@ and erupts after @DelayBetweenTwoHits@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
 					"tooltipExtendedBelowLine": "<rules>Percent Health damage deals a max of @MaxHealthDamageToNonHeroes@ damage to minions and jungle monsters per hit.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamageValue",
 							"nameOverride": "spell_listtype_damage"
@@ -113,7 +113,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Haste@% Move Speed</speed> and projects a field around her for @Duration@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DamageValue",
 							"nameOverride": "spell_listtype_damage"
@@ -183,7 +183,7 @@
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @StunDuration@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamageValue",
 							"nameOverride": "spell_listtype_initialdamage"
@@ -244,7 +244,7 @@
 					"cooldownTime": [10, 140, 120, 100, 10, 10, 10],
 					"tooltip": "<charge>Begin Casting:</charge> Poppy begins charging her hammer for up to @ChannelMaxDuration@ seconds, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Poppy smashes the ground, creating a shockwave that deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first champion hit and surrounding enemies, <status>Knocks</status> them <status>Back</status> towards their Nexus, and makes them Untargetable while they fly. The range and <status>Knock Back</status> distance increase with charge duration.<br><br>An uncharged swing deals <physicalDamage>@HalfDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> for @KnockupDurationSnap@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

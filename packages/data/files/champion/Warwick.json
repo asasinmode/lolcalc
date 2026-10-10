@@ -39,7 +39,7 @@
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"tooltip": "<tap>Tap:</tap> Warwick lunges forward and bites, dealing <magicDamage>@BaseBiteDamage@ plus @TargetPercentHPDamage@% max Health magic damage</magicDamage> and <healing>healing for @LifestealPercent@% of the damage dealt</healing>.<br><br><hold>Hold:</hold> Warwick lunges and clamps his jaws on the target, leaping behind them. While clamped, Warwick follows all movement of the target. After releasing his hold, he does the same damage and healing.",
 					"tooltipExtendedBelowLine": "<rules>This Ability applies On-Hit and On-Attack effects, and does not Critically Strike. <br>While clamped, Warwick is immune to displacement.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "LifestealPercent",
 							"nameOverride": "spell_listtype_healing"
@@ -94,7 +94,7 @@
 					"cooldownTime": [80, 80, 70, 60, 50, 40, 40],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Warwick can sense champions below 50% Health, gaining <speed>@PassiveMSBonus@% Move Speed</speed> towards them. Spells and attacks against enemies below 50% Health grant <speed>@PassiveASBonus@% Attack Speed</speed>. These effects are increased by 200% against enemies below 25% Health. <br><br><spellActive>Active:</spellActive> Warwick can briefly sense all enemies, and gains this Ability's passive effect against the closest champion for 8 seconds, regardless of Health. If no champions are found, this Ability's cooldown is reduced by 30%.",
 					"tooltipExtendedBelowLine": "<rules>Warwick can only passively sense enemies who were brought below 50% Health by allies.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PassiveMSBonus",
 							"nameOverride": "spell_listtype_movementspeed"
@@ -132,7 +132,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
 					"tooltip": "Warwick gains @DRAmount@% damage reduction for @DRDuration@ seconds. After it ends, Warwick howls, <status>Fearing</status> nearby enemies for @FearDuration@ second. Warwick can <recast>Recast</recast> to end the Ability early.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DRAmount",
 							"nameOverride": "spell_listtype_damagereduction"
@@ -161,7 +161,7 @@
 					"cooldownTime": [110, 110, 90, 70, 70, 70, 70],
 					"tooltip": "Warwick leaps a huge distance that scales with his <speed>Move Speed</speed>, <status>Suppressing</status> the first champion he collides with while he channels for @RDuration@ seconds. He attacks that champion 3 times over the duration, dealing <magicDamage>@DamageCumulative@ magic damage</magicDamage>. Warwick <healing>heals for 100% of all damage dealt</healing> during the channel.",
 					"tooltipExtendedBelowLine": "<rules>This Ability applies On-Hit and On-Attack effects 3 distinct times over its duration, and does not Critically Strike.<br>This Ability <status>Knocks Down</status> enemies.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"

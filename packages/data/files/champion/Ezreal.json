@@ -39,7 +39,7 @@
 					"cooldownTime": [5.75, 5.5, 5.25, 5, 4.75, 4.5, 3.5],
 					"tooltip": "Ezreal fires a bolt of energy, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit and reducing his Ability Cooldowns by @CDRefund@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>This Ability applies {{ Item_Keyword_OnHit }} effects.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						},
@@ -88,7 +88,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "Ezreal fires a magical orb that sticks to the first champion, structure, or epic jungle monster hit for @DetonationTimeout@ seconds. If Ezreal hits that target with an Attack or Ability, it detonates, dealing <magicDamage>@Damage@ magic damage</magicDamage>. Detonating with an Ability refunds the Mana cost of that Ability plus <scaleMana>@ManaReturn@ Mana</scaleMana>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -135,7 +135,7 @@
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [26, 26, 23, 20, 17, 14, 10],
 					"tooltip": "Ezreal teleports then fires a bolt at the nearest enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage>. The bolt prioritizes enemies affected by <spellName>Essence Flux</spellName>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
@@ -185,7 +185,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 120, 105, 90, 10, 10, 10],
 					"tooltip": "Ezreal fires a massive energy arc that deals <magicDamage>@Damage@ magic damage</magicDamage>. Damage to minions and non-epic jungle monsters is reduced to <magicDamage>@DamageMinionMonster@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

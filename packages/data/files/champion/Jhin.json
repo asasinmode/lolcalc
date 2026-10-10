@@ -38,7 +38,7 @@
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 5],
 					"tooltip": "Jhin launches a cartridge that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> before bouncing to a nearby enemy that has not been hit yet.<br><br>The cartridge can hit a maximum of @TooltipMaxTargetsHit@ times. Enemies that die shortly after being hit increase the damage of subsequent hits by @PercentAmpOnKill*100@%.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -110,7 +110,7 @@
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Jhin fires a long range shot dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first champion hit and other enemies along the way.<br><br>If this skill strikes a champion that has been damaged by an allied champion within the last @SpottingDuration@ seconds, it will <status>Root</status> them for @RootDuration@ seconds and grant Jhin <spellName>Whisper</spellName>'s Move Speed.",
 					"tooltipExtendedBelowLine": "<rules>This ability deals @MinionMod*100@% damage to minions.<br>Champions that step on a trap from <spellName>Captive Audience</spellName> can also be rooted.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -161,7 +161,7 @@
 					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"tooltip": "<passive>Passive:</passive> Champions Jhin kills will create and detonate a Lotus Trap at their location.<br><br><active>Active:</active> Jhin places an invisible Lotus Trap for @TrapDuration@ minutes that creates a zone that <status>Slows</status> by @TrapSlowAmount*100@% when stepped on by an enemy. After @TrapDetonationTime@ seconds, the trap detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This ability has 2 charges (@AmmoRechargeRateTooltip@ second refresh).",
 					"tooltipExtendedBelowLine": "<rules>Lotus Trap hits deal @ReducedDamagePercent*100@% damage to minions, and enemies recently hit by another Lotus Trap.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -243,7 +243,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 105, 90, 0, 0, 0],
 					"tooltip": "Jhin sets up and channels, enabling him to fire 4 super shots, each dealing between <physicalDamage>@DamageCalc@</physicalDamage> and <physicalDamage>@MaxIncreaseCalc@ physical damage</physicalDamage> to the first champion hit based on their percentage missing health and <status>Slowing</status> them by @SlowPercent*100@% for @SlowDuration@ seconds. The fourth shot critically strikes for @FourthShotMultiplier*100@% damage.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"

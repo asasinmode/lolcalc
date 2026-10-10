@@ -38,7 +38,7 @@
 					"mana": [40, 45, 50, 55, 60, 60],
 					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Swain unleashes 5 eldritch bolts, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> plus <magicDamage>@ExtraBoltDamage@ magic damage</magicDamage> per bolt past the first (max <magicDamage>@MaxDamage@ magic damage</magicDamage>).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_swainboltdamage"
@@ -99,7 +99,7 @@
 					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds.<br><br>Champions hit grant Swain a <font color='#FF3F3F' size='18'>Soul Fragment</font> and are revealed for @RevealDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Deals <magicDamage>@MinionDamage@ damage</magicDamage> instead to minions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -159,7 +159,7 @@
 					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"tooltip": "Swain launches a wave of demonic power that returns, detonating on the first enemy hit to deal <magicDamage>@SecondaryDamage@ magic damage</magicDamage> and <status>Root</status> enemies in the area for @RootDuration@ seconds.<br><br><status>Rooting</status> a champion allows Swain to reactivate this ability to pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him, gaining a <font color='#FF3F3F' size='18'>Soul Fragment</font> for each.",
 					"tooltipExtendedBelowLine": "<rules><spellName>Nevermove</spellName> temporarily grants vision of rooted champions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "E2Damage",
 							"nameOverride": "spell_listtype_damage"
@@ -206,7 +206,7 @@
 					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"tooltip": "Swain frees the demon, which deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and drains <healing>@HealingCalc@ Health</healing> per second from nearby enemies. His Demonic Energy depletes over time but can be recharged indefinitely by draining enemy Champions and is fully restored on Champion takedowns.<br><br>After @DemonflareCastDelay@ seconds and every @DemonflareCooldownTooltip@ seconds thereafter, Swain can cast <spellName>Demonflare</spellName> while transformed, which deals <magicDamage>@DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slows</status> enemies by @DemonflareSlowAmount*100@%, decaying over @DemonflareSlowDuration@s.",
 					"tooltipExtendedBelowLine": "<rules>Healing is reduced to <healing>@MinionMonsterHealReduction*100@%</healing> against non-champions.<br>Depletes @DemonPowerDegen@ Demonic Energy per second. After @AmpTime@ seconds, this increases to @DegenAmpAmount@.<br>Regenerates @DemonPowerRegen@ Demonic Energy per second while draining from champions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DamagePerSecond",
 							"nameOverride": "spell_listtype_swaindraindamage"

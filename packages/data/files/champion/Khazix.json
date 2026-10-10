@@ -39,7 +39,7 @@
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "{{Spell_KhazixQ_Tooltip_@IsEvolved@}}",
 					"tooltipExtended": "{{Spell_KhazixQ_Tooltip_0}}<br><br>{{Spell_KhazixQ_Tooltip_1}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
@@ -117,7 +117,7 @@
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"tooltip": "{{Spell_KhazixW_Tooltip_@IsEvolved@}}",
 					"tooltipExtended": "{{Spell_KhazixW_Tooltip_0}}<br><br>{{Spell_KhazixW_Tooltip_1}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
@@ -214,7 +214,7 @@
 					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"tooltip": "{{Spell_KhazixE_Tooltip_@IsEvolved@}}",
 					"tooltipExtended": "{{Spell_KhazixE_Tooltip_0}}<br><br>{{Spell_KhazixE_Tooltip_1}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -287,7 +287,7 @@
 					"tooltip": "{{Spell_KhazixR_Tooltip_@IsEvolved@}}<br><br>{{Spell_KhazixR_Tooltip_P}}",
 					"tooltipExtended": "{{Spell_KhazixR_Tooltip_P}}<br><br>{{Spell_KhazixR_Tooltip_0}}<br><br>{{Spell_KhazixR_Tooltip_1}}",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Invisibility}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "EvolutionsAvailable",
 							"nameOverride": "spell_listtype_khazixrevolutionsavailable"

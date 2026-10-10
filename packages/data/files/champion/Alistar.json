@@ -38,7 +38,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"tooltip": "Alistar smashes the ground, <status>Knocking Up</status> enemies for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						},
@@ -83,7 +83,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Alistar rams into an enemy, <status>Knocking</status> them <status>Back</status> and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						},
@@ -134,7 +134,7 @@
 					"cooldownTime": [12.5, 12, 11.5, 11, 10.5, 10, 9.5],
 					"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @MaxStacks@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @StunDuration@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>.",
 					"tooltipExtendedBelowLine": "<rules>Ghosted units ignore collision with other units.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						},
@@ -207,7 +207,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [120, 120, 100, 80, 120, 120, 120],
 					"tooltip": "Alistar immediately cleanses all <status>Disabling</status> effects and takes @RDamageReduction@% reduced damage for @RDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "RDamageReduction",
 							"nameOverride": "spell_listtype_damagereduction"

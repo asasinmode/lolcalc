@@ -39,7 +39,7 @@
 					"tooltip": "{{Spell_RekSaiQ_Tooltip}}",
 					"tooltipExtended": "{{Spell_RekSaiQ_Tooltip}}<br><br>{{Spell_RekSaiQBurrowed_Tooltip}}",
 					"tooltipExtendedBelowLine": "<rules>The bonus damage can critically strike the primary target.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "UnburrowedADRatio",
 							"nameOverride": "spell_listtype_reksaiqratio"
@@ -111,7 +111,7 @@
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "{{Spell_RekSaiW_Tooltip}}",
 					"tooltipExtended": "{{Spell_RekSaiW_Tooltip}}<br><br>{{Spell_ReksaiWBurrowed_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_reksaiwburroweddamage"
@@ -181,7 +181,7 @@
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "{{Spell_RekSaiE_Tooltip}}",
 					"tooltipExtended": "{{Spell_RekSaiE_Tooltip}}<br><br>{{Spell_RekSaiEBurrowed_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
@@ -283,7 +283,7 @@
 					"image": "assets/characters/reksai/hud/icons2d/reksai_r.png",
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Rek'Sai targets an enemy damaged by her in the last @PreyMarkDuration@ seconds and then dives underground, becoming Untargetable. Moments later, she leaps unstoppably at her target, dealing <physicalDamage>@RBaseDamageCalc@ plus @PercentHealthDamage@% max Health physical damage</physicalDamage> and resets the cooldown of <keywordMajor>{{Spell_RekSaiW_Name}}</keywordMajor>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"

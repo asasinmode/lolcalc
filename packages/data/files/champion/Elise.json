@@ -40,7 +40,7 @@
 					"tooltip": "{{Spell_EliseHumanQ_Tooltip}}",
 					"tooltipExtended": "{{Spell_EliseHumanQ_Tooltip}}<br><br>{{Spell_EliseSpiderQ_Tooltip}}",
 					"tooltipExtendedBelowLine": "<rules><keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor> percent Health damage is capped at @MonsterDamageCapCalc@ against monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_eliseqneurotoxindamage"
@@ -170,7 +170,7 @@
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "{{Spell_EliseHumanW_Tooltip}}",
 					"tooltipExtended": "{{Spell_EliseHumanW_Tooltip}}<br><br>{{Spell_EliseSpiderW_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -215,7 +215,7 @@
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "{{Spell_EliseSpiderW_Tooltip}}",
 					"tooltipExtended": "{{Spell_EliseSpiderW_Tooltip}}<br><br>{{Spell_EliseHumanW_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PassiveAttackSpeed",
 							"nameOverride": "spell_listtype_elisewpassiveattackspeed"
@@ -248,7 +248,7 @@
 					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"tooltip": "{{Spell_EliseHumanE_Tooltip}}",
 					"tooltipExtended": "{{Spell_EliseHumanE_Tooltip}}<br><br>{{Spell_EliseSpiderE_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseStunDuration",
 							"nameOverride": "spell_listtype_stunduration"
@@ -344,7 +344,7 @@
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "{{Spell_EliseR_Tooltip}}",
 					"tooltipExtended": "{{Spell_EliseR_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseRSpider_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PassiveBonusDamage",
 							"nameOverride": "spell_listtype_eliserbitedamage"
@@ -473,7 +473,7 @@
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "{{Spell_EliseRSpider_Tooltip}}",
 					"tooltipExtended": "{{Spell_EliseRSpider_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseR_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "EliseBiteDamage",
 							"nameOverride": "spell_listtype_eliserbitedamage"

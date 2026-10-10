@@ -38,7 +38,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"tooltip": "<attention>Begin Charging:</attention> Varus draws back his next shot, <status>Slowing</status> himself by @MoveSpeedMod*-100@%. After @MaxChannelDuration@ seconds, if not fired, Varus will cancel the Ability and refund @ManaRefund*100@% of its Mana cost.<br><br><attention>Release:</attention> Varus releases the arrow, dealing <physicalDamage>@TotalDamageMinTooltip@ physical damage</physicalDamage>, reduced by @FalloffPercent*100@% per enemy hit (minimum @MinDamagePercent*100@%). Damage and <keywordMajor>Blight</keywordMajor> detonation effects are increased by up to @MaxChargeAmp*100@% based on charge time (maximum <physicalDamage>@TotalDamageMax@</physicalDamage>) .",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamageMax",
 							"nameOverride": "spell_listtype_maximumdamage"
@@ -114,7 +114,7 @@
 					"cooldownTime": [40, 40, 40, 40, 40, 40, 40],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Varus' Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> and apply a <keywordMajor>Blight</keywordMajor> stack for @DebuffDuration@ seconds (max @MaxStacks@ stacks).<br><br>Varus' other Abilities detonate <keywordMajor>Blight</keywordMajor> stacks dealing <magicDamage>@PercentHPPerStack@ max Health magic damage</magicDamage> per stack (max <magicDamage>@MaxPercentHPPerStack@ max Health damage</magicDamage>). Detonating <keywordMajor>Blight</keywordMajor> on champions and epic monsters also reduces his basic Abilities' Cooldowns by @CDRPerBlightStack*100@% of their Maximum per stack.<br><br><spellActive>Active:</spellActive> Varus' next <spellName>{{Spell_VarusQ_Name}}</spellName> deals an additional <magicDamage>@QEmpowerPercentHP@ missing Health magic damage</magicDamage>, increased up to <magicDamage>@MaxQEmpowerPercentHP@ missing Health damage</magicDamage> based on charge time.",
 					"tooltipExtendedBelowLine": "<rules>Passive damage from <keywordMajor>Blight</keywordMajor> detonations is capped at @MaxMonsterDamage@ damage per stack against jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "VarusWOnHitDamage",
 							"nameOverride": "spell_listtype_varuswdamageonattack"
@@ -235,7 +235,7 @@
 					"cooldownTime": [18, 18, 16, 14, 12, 10, 10],
 					"tooltip": "Varus fires a hail of arrows that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and desecrates the ground for @GroundDuration@ seconds, <status>Slowing</status> enemies by @SlowPercent*-100@% and applying @GrievousAmount*100@% Grievous Wounds.",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_GrievousWounds}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -289,7 +289,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"tooltip": "Varus flings out a tendril of corruption, <status>Rooting</status> the first champion hit for @RootDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. <status>Rooted</status> enemies gain @PassiveStacks@ <keywordMajor>Blight</keywordMajor> stacks over the duration.<br><br>The corruption spreads from its target to uninfected enemy champions. If it reaches them, they take the same damage and <status>Root</status>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

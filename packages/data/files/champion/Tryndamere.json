@@ -38,7 +38,7 @@
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining up to <scaleAD>@MaximumBonusAD@ Attack Damage</scaleAD> based on his missing Health.<br><br><spellActive>Active:</spellActive> Tryndamere consumes his <keywordMajor>Fury</keywordMajor>, restoring <healing>@BaseHeal@ plus @HealPerFury@ Health per Fury (max: @MaximumHeal@)</healing>. ",
 					"tooltipExtendedBelowLine": "<rules>Maximum Attack Damage gained at @RemainingHealthThreshold*100@% remaining Health.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MaximumBonusAD",
 							"nameOverride": "spell_listtype_maximumdamage"
@@ -135,7 +135,7 @@
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_w.png",
 					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"tooltip": "Tryndamere hurls insults, reducing champions' Attack Damage by @ADReduction*-1@ for @ReductionDuration@ seconds and <status>Slowing</status> by @SlowPotency*-100@% while cowering from him for @SlowDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ADReduction",
 							"nameOverride": "spell_listtype_physicaldamagereduction"
@@ -164,7 +164,7 @@
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_e.png",
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"tooltip": "Tryndamere spins through his enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and generating <keywordMajor>@NonChampFuryGain@ Fury</keywordMajor> per enemy hit, increased to <keywordMajor>@ChampFuryGain@ Fury</keywordMajor> against enemy champions.<br><br>This Ability's Cooldown is reduced by @NonChampCDRefund@ seconds when Tryndamere critically strikes, and reduced by @ChampCDRefund@ seconds when critically striking a champion.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
@@ -214,7 +214,7 @@
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Tryndamere becomes completely immune to death for @TryndRDuration@ seconds, refusing to be reduced below @TryndRMinHealth@ Health, and instantly gains <keywordMajor>@TryndRFuryGain@ Fury</keywordMajor>.",
 					"tooltipExtendedBelowLine": "<rules>This Ability can be used while <status>Disabled</status>.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "TryndRMinHealth",
 							"nameOverride": "spell_listtype_minimumhealth"

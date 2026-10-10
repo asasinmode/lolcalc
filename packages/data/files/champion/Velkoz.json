@@ -38,7 +38,7 @@
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% decaying over @SlowDuration@ second(s). At the end of its range, on hitting a target, or on <recast>Recasting</recast>, the bolt splits and fires two new bolts at a 90 degree angle.<br><br>Killing a unit with this restores <scaleMana>@TooltipManaRefund@ Mana</scaleMana>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_totaldamage"
@@ -88,7 +88,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"tooltip": "Vel'Koz opens a rift to the void, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. The rift then erupts, dealing <magicDamage>@SecondaryDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseInitialDamage",
 							"nameOverride": "spell_listtype_initialdamage"
@@ -160,7 +160,7 @@
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"tooltip": "Vel'Koz disrupts a nearby area, causing it to explode, <status>Knocking Up</status> for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Enemies close to Vel'Koz will be <status>Knocked Back</status> instead of <status>Knocked Up</status>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -207,7 +207,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 100, 90, 80, 10, 10, 10],
 					"tooltip": "Vel'Koz channels a ray of energy that follows the cursor, dealing a total of <magicDamage>@TotalDamage@ magic damage</magicDamage> over 2.5 seconds and <status>Slowing</status> by @Effect3Amount@%. Deals <trueDamage>true damage</trueDamage> instead to enemies recently damaged by <spellName>{{Spell_VelkozPassive_Name}}</spellName>.<br><br>Enemies gain stacks of <keywordMajor>Deconstruction</keywordMajor> periodically while in the beam.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_totaldamage"

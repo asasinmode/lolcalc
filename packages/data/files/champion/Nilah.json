@@ -39,7 +39,7 @@
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nilah gains @CritArmorPen@ Armor Penetration, and her Attacks against champions restore <healing>@CritLifesteal@ damage dealt as Health</healing>. Overhealing from this is converted into a <shield>Shield</shield> for @ShieldDuration@ seconds.<br><br><spellActive>Active:</spellActive> Nilah cracks her whip-blade, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage>. If an enemy unit or structure is hit, Nilah gains 125 Attack Range and <attackSpeed>@BonusAttackSpeedCalc@% Attack Speed</attackSpeed>, and her Attacks hit in a cone for @BuffDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Damage is increased by her Critical Strike Chance and Critical Strike Damage at @ActiveCritScaling*100@% effectiveness.<br>If cast during <spellName>Slipstream</spellName>, Nilah creates a wave of water striking all enemies along Nilah's path. </rules><br><rules>Area attacks deal @MinionMod*100@% damage to minions and @MonsterMod*100@% damage to monsters.</rules><br><rules>This ability executes low Health minions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -158,7 +158,7 @@
 					"cooldownTime": [26, 26, 25, 24, 23, 22, 21],
 					"tooltip": "Nilah envelops herself in mist for @BaseDuration@ seconds, becoming Ghosted, gaining <speed>@MoveSpeedPercent*100@% Move Speed</speed>, dodging Attacks, and reducing <magicDamage>magic damage</magicDamage> taken by @MagicDamageReduction*100@%.<br><br>While active, touching allied champions envelops them in mist, granting the same benefits for @ShareBaseDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MoveSpeedPercent",
 							"nameOverride": "spell_listtype_movementspeed"
@@ -189,7 +189,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"tooltip": "Nilah dashes through a unit, dealing <physicalDamage>@DashDamage@ physical damage</physicalDamage> to any enemies she passes through.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -236,7 +236,7 @@
 					"cooldownTime": [110, 110, 95, 80, 160, 160, 100],
 					"tooltip": "Nilah whirls her whip-blade, dealing <physicalDamage>@DamagePerTickCalcTooltip@ physical damage</physicalDamage> over 1 second, then finishes with a burst of <physicalDamage>@DamageCalc@ physical damage</physicalDamage> that also <status>Pulls</status> nearby enemies toward her.<br><br>Apotheosis heals Nilah and her nearby allies for <healing>@ChampHealingPercent@ (+@spell.NilahQ:CritLifesteal@ {{ Spell_NilahQ_Name }}) of the damage dealt</healing> to enemy champions, converting any overhealing into a <shield>Shield</shield> for @Duration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Healing is reduced to @OtherHealingPercent*100@% against non-champions</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DamageBase",
 							"nameOverride": "spell_listtype_damage"

@@ -38,7 +38,7 @@
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @ReducedDamagePercent@% less damage to all enemies after the first.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -98,7 +98,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -152,7 +152,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@DefenseBonus@ Armor</scaleArmor> and <scaleMR>@DefenseBonus@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @ShieldDuration@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -225,7 +225,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 95, 80, 80, 80, 80],
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"

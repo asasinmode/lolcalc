@@ -39,7 +39,7 @@
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
 					"tooltipExtendedBelowLine": "<rules>Minions and jungle monsters are <status>Blinded</status> for @MinionMonsterDurationMod*100@% longer.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						},
@@ -99,7 +99,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PassiveMoveSpeedBonus",
 							"nameOverride": "spell_teemow_passivemovespeed"
@@ -129,7 +129,7 @@
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison %i:OnHit% <OnHit>On-Hit</OnHit>, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>This poison deals @MonsterMod*100@% damage to jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ImpactBaseDamage",
 							"nameOverride": "spell_listtype_teemoimpactdamage"
@@ -228,7 +228,7 @@
 					"mana": [75, 55, 35, 35, 35, 35],
 					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

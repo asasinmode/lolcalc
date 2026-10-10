@@ -39,7 +39,7 @@
 					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
 					"tooltipExtendedBelowLine": "<rules>Both strikes apply on-hit effects.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -136,7 +136,7 @@
 					"mana": [45, 45, 45, 45, 45, 45],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ActiveAS",
 							"nameOverride": "spell_listtype_attackspeed"
@@ -184,7 +184,7 @@
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [20, 18, 17, 16, 15, 14, 13],
 					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamagePerSecond",
 							"nameOverride": "spell_listtype_damagepersecond"
@@ -249,7 +249,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [130, 120, 110, 100, 90, 80, 70],
 					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseWaves",
 							"nameOverride": "spell_missfortuner_bulletbarrages"

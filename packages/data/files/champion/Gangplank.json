@@ -40,7 +40,7 @@
 					"tooltip": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}",
 					"tooltipExtended": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}<br><br>Total Gold plundered: <statTracking>@f1@ Gold</statTracking><br>Total SS plundered: <statTracking>@f3@ Silver Serpents</statTracking>",
 					"tooltipExtendedBelowLine": "<rules>The shot applies On-Hit effects (other than <spellName>{{Spell_GangplankPassive_Name}}</spellName>) and can critically strike for <physicalDamage>@ShotCrit@ physical damage</physicalDamage>.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "SpellDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -136,7 +136,7 @@
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @PercentHeal@% missing Health</healing>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseHeal",
 							"nameOverride": "spell_listtype_healing"
@@ -188,7 +188,7 @@
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @BarrelDuration@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @DebuffDuration@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @BarrelArmorPenetration@% Armor. Champions take an additional <physicalDamage>@BonusDamageToChampions@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
 					"tooltipExtendedBelowLine": "<rules>Keg decay rate increases at level 7 and 13.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BonusDamageToChampions",
 							"nameOverride": "spell_listtype_bonusdamageagainstchampions"
@@ -275,7 +275,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"tooltip": "Gangplank signals his ship to fire @TotalWavesTooltip@ waves of cannonballs anywhere on the map over @ZoneDuration@ seconds. Each wave <status>Slows</status> by @SlowPercent@% for @SlowDuration@ seconds and deals <magicDamage>@OneWaveDamage@ magic damage</magicDamage>. Maximum damage: @TotalDamageTooltip@<br><br>This Ability can be upgraded in the shop via <spellName>{{Spell_GangplankQWrapper_Name}}</spellName>.<br><br><spellName>Fire at Will</spellName>: Fires 6 additional waves of cannonballs.<br><spellName>Death's Daughter</spellName>: Fires a Mega-Cannonball that deals <trueDamage>@DeathsDaughterDamage@ true damage</trueDamage> and <status>Slows</status> by @DeathsDaughterSlow@% for @DeathsDaughterSlowDuration@ second.<br><spellName>Raise Morale</spellName>: Allies inside Cannon Barrage gain <speed>@RaiseMoraleHaste@% Move Speed</speed> for @RaiseMoraleHasteDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DamagePerWave",
 							"nameOverride": "spell_listtype_gangplankrdamageperwave"

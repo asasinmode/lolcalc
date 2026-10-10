@@ -87,13 +87,13 @@ export default {
 			return value.replace('<healing>@Damage@', '<healing>@Heal@');
 		},
 		modifyVariantData(abilityVariant) {
-			if (abilityVariant.extendedVariables) {
-				const damageVariable = abilityVariant.extendedVariables[0];
+			if (abilityVariant.abilityLevelVars) {
+				const damageVariable = abilityVariant.abilityLevelVars[0];
 				if (damageVariable?.name !== 'BaseDamage') {
-					console.warn('[CHAMPION_SPECIFICS vladimir r] failed to modify extended variables, no base damage variable', abilityVariant.extendedVariables);
+					console.warn('[CHAMPION_SPECIFICS vladimir r] failed to modify ability level vars, no base damage variable', abilityVariant.abilityLevelVars);
 					return;
 				}
-				abilityVariant.extendedVariables.push({
+				abilityVariant.abilityLevelVars.push({
 					name: damageVariable.name,
 					nameOverride: 'spell_listtype_healing',
 				});

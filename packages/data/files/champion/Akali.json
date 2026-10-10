@@ -38,7 +38,7 @@
 					"mana": [110, 100, 90, 80, 70, 60],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
@@ -100,7 +100,7 @@
 					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
 					"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
 					"tooltipExtendedBelowLine": "<rules><keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or True Sight.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MovementSpeed",
 							"nameOverride": "spell_listtype_movementspeed"
@@ -170,7 +170,7 @@
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [16, 16, 14.5, 13, 11.5, 10, 8.5],
 					"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_akalie_basedamage1"
@@ -244,7 +244,7 @@
 					"cooldownTime": [120, 120, 90, 60, 60, 60, 60],
 					"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health.",
 					"tooltipExtendedBelowLine": "<rules>Deals max damage to targets below @MaxExecuteThreshold*100@% Health.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_initialdamage"

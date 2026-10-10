@@ -39,7 +39,7 @@
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "Nocturne throws a shadow blade, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and leaving a dusk trail for @TrailDuration@ seconds. Enemy champions hit also leave a trail. <br><br>While on the trail, Nocturne is Ghosted and gains <speed>@MoveSpeed@% Move Speed</speed> and <physicalDamage>@BonusTrailAD@ Attack Damage</physicalDamage>.",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -99,7 +99,7 @@
 					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <attackSpeed>@ActiveAS@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Nocturne creates a shadow barrier for 1.5 seconds that blocks the next enemy Ability. If an Ability is blocked, this Ability's passive effect is increased to <attackSpeed>@ActiveAS*2@% Attack Speed</attackSpeed> for @DoubleASDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>This Ability will remain active during <spellName>Paranoia's</spellName> flight.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ActiveAS",
 							"nameOverride": "spell_listtype_statbonusattackspeed"
@@ -131,7 +131,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <speed>@TooltipFearMS*100@% Move Speed</speed> toward <status>Feared</status> enemies.<br><br><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @LeashDuration@ seconds. If the tether remains unbroken, the target is <status>Feared</status> for @CCDuration@ second(s).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DamageToDeal",
 							"nameOverride": "spell_listtype_damage"
@@ -186,7 +186,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [140, 140, 115, 90, 90, 90, 90],
 					"tooltip": "Nocturne darkens the map, reducing the sight radius of all enemy champions and removing their vision of allies for @ParanoiaDuration@ seconds. Nocturne can <recast>Recast</recast> this Ability during the duration to launch himself at an enemy champion dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

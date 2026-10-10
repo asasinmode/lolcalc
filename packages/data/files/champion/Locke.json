@@ -39,7 +39,7 @@
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"tooltip": "Locke readies a set of <keywordMajor>Soul Nails</keywordMajor> to throw, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> and marking enemies hit. Nails apply a @SlowAmount1*100@/@SlowAmount2*100@/@SlowAmount3*100@% <status>Slow</status> for @SlowDuration1@/@SlowDuration2@/@SlowDuration3@ seconds, stacking with the amount of nails hit.<br><br>Attacking the enemy consumes the <keywordMajor>Soul Nails</keywordMajor>, dealing <magicDamage>@NailDamage@ magic damage</magicDamage> per stack, increased by @TwoMarkBonusPercent@% and @ThreeMarkBonusPercent@% for two and three nails respectively.",
 					"tooltipExtendedBelowLine": "<rules>Each remaining nail refunds @AmmoCooldownReset@ of Ability's Cooldown and Mana cost when this effect ends.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseMissileDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -119,7 +119,7 @@
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"tooltip": "Locke ignites his own soul, gaining <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and <speed>@MoveSpeed@ Move Speed</speed> that decays over @DecayTimeHelper@ seconds.<br><br>For @BaseDuration@ seconds, he suffers <trueDamage>@HealthCost*100@% current Health true damage</trueDamage> per second but <healing>Heals</healing> back the last <healing>@DamageRestoreAmount@</healing> damage taken, and an additional <healing>@AdditionalHeal@ Health</healing> based on missing Health and time passed, up to a maximum of <healing>@MaxHealingThreshold@ Health remaining</healing>.<br><br>Can be <recast>Recast</recast> to end early.",
 					"tooltipExtendedBelowLine": "<rules>This Ability can be used while <status>Disabled</status>.</rules><br><rules>Locke is <keyword>Ghosted</keyword> for the duration. {{Reminder_Ghosted}}</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamageRestoreAmount",
 							"nameOverride": "spell_listtype_damagerestored"
@@ -240,7 +240,7 @@
 					"image": "assets/characters/locke/hud/icons2d/locke_e.png",
 					"mana": [30, 40, 50, 60, 70, 80],
 					"tooltip": "Locke teleports to a location, dealing <magicDamage>@OnHitDamage@ magic damage</magicDamage> to nearby enemies on arrival. <br><br>On his next Attack, he dashes to his target, dealing <magicDamage>@DashDamage@ magic damage</magicDamage> to all enemies in his path. Each hit consumes <keywordMajor>Soul Nails</keywordMajor>.<br><br>If Locke scores a takedown, the Cooldown of this Ability is reset.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
@@ -304,7 +304,7 @@
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"tooltip": "Locke throws a binding artifact to a location, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies in the area by @SlowAmount*100@%, decaying over @SlowDuration@ seconds. The artifact marks enemies hit for @Duration@ seconds, sealing away marked enemy champions brought below <spellName>@ExecuteTooltipCalc@</spellName>, and resetting the duration of the mark on other affected champions.<br><br>After the duration ends, if at least one champion was sealed, the artifact lands on the ground. Locke can pick up the artifact to permanently increase its execution threshold by @ExecuteThresholdPerStack*100@%, and refund @CooldownReduction@% of his total Cooldown, for each champion sealed.",
 					"tooltipExtendedBelowLine": "<rules>The artifact will linger on the ground for this Ability's current Cooldown at the time of sealing.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

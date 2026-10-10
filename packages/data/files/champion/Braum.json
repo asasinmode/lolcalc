@@ -38,7 +38,7 @@
 					"mana": [45, 50, 55, 60, 65, 70],
 					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 5.5],
 					"tooltip": "Braum propels freezing ice from his shield, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @InitialSlow@% decaying over @SlowDuration@ seconds.<br><br>Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -95,7 +95,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [13, 12, 11, 10, 9, 8, 7],
 					"tooltip": "Braum leaps to an allied champion or minion. On arrival, Braum grants the target <scaleArmor>@GrantedAllyArmor@ Armor</scaleArmor> and <scaleMR>@GrantedAllyMR@ Magic Resist</scaleMR> for @Duration@ seconds. Braum grants himself <scaleArmor>@GrantedBraumArmor@ Armor</scaleArmor> and <scaleMR>@GrantedBraumMR@ Magic Resist</scaleMR> for the same duration.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseResists",
 							"nameOverride": "spell_braumw_baseresists_levelup"
@@ -186,7 +186,7 @@
 					"mana": [30, 35, 40, 45, 50, 55],
 					"cooldownTime": [18, 16, 14, 12, 10, 8, 8],
 					"tooltip": "Braum raises his shield for @ShieldHoldDuration@ seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal @ShieldFacingDRAmount@% reduced damage.<br><br>Braum gains <speed>@MoveSpeedPercent@% Move Speed</speed> while his shield is raised.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ShieldHoldDuration",
 							"nameOverride": "spell_listtype_duration"
@@ -224,7 +224,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [130, 130, 115, 100, 85, 85, 85],
 					"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

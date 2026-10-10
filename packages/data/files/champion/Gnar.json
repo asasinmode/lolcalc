@@ -39,7 +39,7 @@
 					"tooltip": "{{Spell_GnarQ_Tooltip}}",
 					"tooltipExtended": "{{spell_GnarQ_Tooltip}}<br><br>{{spell_GnarBigQ_Tooltip}}",
 					"tooltipExtendedBelowLine": "<rules>Deals @MiniSubsequentMult*100@% damage to enemies beyond the first.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MiniBaseDamage",
 							"nameOverride": "spell_listtype_gnarqboomerangdamage"
@@ -156,7 +156,7 @@
 					"tooltip": "{{Spell_GnarW_Tooltip}}",
 					"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}",
 					"tooltipExtendedBelowLine": "<rules>Gnar also gains the <speed>Move Speed</speed> when he leaves <keywordMajor>Mega Gnar</keywordMajor> form.<br>Deals a max of <magicDamage>@MiniMonsterCap@ magic damage</magicDamage> against jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MiniBaseDamage",
 							"nameOverride": "spell_listtype_gnarwhyperdamage"
@@ -233,7 +233,7 @@
 					"cooldownTime": [24.5, 22, 19.5, 17, 14.5, 12, 12],
 					"tooltip": "{{Spell_GnarE_Tooltip}}",
 					"tooltipExtended": "{{spell_GnarE_Tooltip}}<br><br>{{spell_GnarBigE_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MiniDamage",
 							"nameOverride": "spell_gnare_minidamage"
@@ -314,7 +314,7 @@
 					"cooldownTime": [0, 90, 60, 30, 0, 0, 0],
 					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Increase <spellName>Hyper's</spellName> <speed>Move Speed</speed>.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gnar tosses nearby enemies, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, <status>Knocking Back</status>, and <status>Slowing</status> them by @RSlowPercent@% for @RCCDuration@ seconds. Enemies that hit a wall instead take <physicalDamage>@WallDamage@ physical damage</physicalDamage> and are <status>Stunned</status>.",
 					"tooltipExtendedBelowLine": "<rules>After transforming to <keywordMajor>Mini Gnar</keywordMajor>, Gnar cannot gain <keywordMajor>Rage</keywordMajor> for 15 seconds.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"

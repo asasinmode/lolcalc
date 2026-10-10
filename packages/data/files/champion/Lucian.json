@@ -39,7 +39,7 @@
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"tooltipExtendedBelowLine": "<rules>This Ability's cast time decreases with Lucian's level.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -87,7 +87,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@MoveSpeedAmount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -147,7 +147,7 @@
 					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @CDRefundBase@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@CDRefundChampion@ seconds for champions). ",
 					"tooltipExtendedBelowLine": "<rules>Lucian can use other Abilities while dashing.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Cost"
 						}
@@ -181,7 +181,7 @@
 					"cooldownTime": [10, 110, 100, 90, 10, 10, 10],
 					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage>",
 					"tooltipExtendedBelowLine": "<rules>Number of shots scales with Lucian's Critical Strike chance and Critical Strike damage at @CritValueMod*100@% effectiveness.<br>Deals @PercentDamageAmpToMinions@% damage to minions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

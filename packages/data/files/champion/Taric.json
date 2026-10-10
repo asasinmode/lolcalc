@@ -38,7 +38,7 @@
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @MaxCharges@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @MaxCharges@ stacks).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MaxCharges",
 							"nameOverride": "spell_listtype_taricmaxcharges"
@@ -129,7 +129,7 @@
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "<spellPassive>Passive: </spellPassive>Taric gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and forms a tether between him and the ally bound by this Ability. As long as they are near each other, the ally gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and Taric casts all his Abilities from both himself and his linked ally.<br><br><spellPassive>Active: </spellPassive>Taric binds to an ally champion, granting a <shield>@ShieldHPRatio@% max Health Shield</shield> for @ShieldDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Mimicked spell effects do not stack.</rules><br><rules>Only one ally can be bound at a time. </rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ArmorBonusPercentage",
 							"nameOverride": "spell_listtype_taricpassivearmor"
@@ -177,7 +177,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"tooltip": "Taric projects a beam of starlight, bursting after @ChargeDuration@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @StunDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -229,7 +229,7 @@
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [210, 180, 150, 120, 90, 60, 30],
 					"tooltip": "Taric calls down protection from the heavens. After @InitialDelay@ seconds, nearby ally champions become invulnerable for @InvulnDuration@ seconds.",
-					"extendedVariables": [],
+					"abilityLevelVars": [],
 					"dataValues": {
 						"InitialDelay": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"InvulnDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]

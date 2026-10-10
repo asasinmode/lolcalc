@@ -102,8 +102,8 @@ export interface IChampionAbilityVariant {
 	/** tooltip shown when holding shift */
 	tooltipExtended?: string;
 	tooltipExtendedBelowLine?: string;
-	/** the variables shown below the description when holding shift. Cooldown excluded, it's added manually */
-	extendedVariables?: {
+	/** the variable values at different ability levels shown below the description when holding shift. Cooldown excluded, it's added manually */
+	abilityLevelVars?: {
 		/** like `QBaseDamage` */
 		name: string;
 		/**

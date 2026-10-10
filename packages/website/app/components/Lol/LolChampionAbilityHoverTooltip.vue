@@ -43,7 +43,7 @@ const abilitySize = computed(() => (props.gameAbilityId ? abilityImageSize(props
 const el = useTemplateRef('el');
 
 const anyExtendedInfo = computed(
-	() => computedDescription.value?.tooltipExtended || computedDescription.value?.tooltipExtendedBelowLine || computedDescription.value?.extendedVariables?.length || computedDescription.value?.anyExtendedVariableInfo,
+	() => computedDescription.value?.tooltipExtended || computedDescription.value?.tooltipExtendedBelowLine || computedDescription.value?.abilityLevelVars?.length || computedDescription.value?.anyExtendedVariableInfo,
 );
 
 const computedIsLoading = computed(() => isLoading.value || !computedDescription.value);
@@ -81,11 +81,11 @@ defineExpose({ el });
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
 		<footer
 			v-if="(computedDescription?.tooltipExtended && computedDescription.tooltipExtended !== computedDescription.tooltip) || anyExtendedInfo"
-			v-show="globalKeyModifiers.shift ? computedDescription?.tooltipExtendedBelowLine || computedDescription?.extendedVariables?.length : anyExtendedInfo"
+			v-show="globalKeyModifiers.shift ? computedDescription?.tooltipExtendedBelowLine || computedDescription?.abilityLevelVars?.length : anyExtendedInfo"
 		>
 			<div v-if="computedDescription?.tooltipExtendedBelowLine" v-show="globalKeyModifiers.shift" class="game-description" v-html="computedDescription.tooltipExtendedBelowLine" />
-			<dl v-show="globalKeyModifiers.shift && computedDescription?.extendedVariables">
-				<template v-for="{ name, values, isNameUnknown } in computedDescription?.extendedVariables" :key="name">
+			<dl v-show="globalKeyModifiers.shift && computedDescription?.abilityLevelVars">
+				<template v-for="{ name, values, isNameUnknown } in computedDescription?.abilityLevelVars" :key="name">
 					<dt :class="{ unknown: isNameUnknown }">
 						{{ name }}
 					</dt>

@@ -39,7 +39,7 @@
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second.",
 					"tooltipExtendedBelowLine": "<rules>This Ability's cast range matches Senna's attack range and its cast time is improved with Attack Speed. It can target anything and applies on-hit effects to enemy champions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -139,7 +139,7 @@
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [11, 11, 11, 11, 11, 11, 11],
 					"tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After a @DelayTime@ second delay the target and other nearby enemies are <status>Rooted</status> for @RootDuration@ second(s).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -189,7 +189,7 @@
 					"cooldownTime": [26, 26, 24.5, 23, 21.5, 20, 20],
 					"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby.",
 					"tooltipExtendedBelowLine": "<rules>Enemies can see where Wraiths are, but not who they are. They are otherwise treated as being <keywordStealth>Camouflaged</keywordStealth>.<br>{{Reminder_Camouflage}}<br>Unselectable units cannot be targeted by Attacks or Abilities that require a target.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BuffDuration",
 							"nameOverride": "spell_listtype_duration"
@@ -237,7 +237,7 @@
 					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>The shield's power scales with the amount of <keywordMajor>Mist</keywordMajor> Senna has collected.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"

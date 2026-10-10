@@ -38,7 +38,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>@ShredAmount@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "AttackSpeed",
 							"nameOverride": "spell_listtype_attackspeed"
@@ -93,7 +93,7 @@
 					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
 					"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> %i:OnHit% <OnHit>On-Hit</OnHit> for @Duration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Deals a maximum of <magicDamage>@MonsterDamageCap@ magic damage</magicDamage> to Monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Range",
 							"nameOverride": "spell_listtype_range"
@@ -144,7 +144,7 @@
 					"mana": [40, 55, 70, 85, 100, 110],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "Kog'Maw spits bile, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and leaving a trail of ooze for @TrailDuration@ seconds. Enemies in the ooze are <status>Slowed</status> by @SlowAmount@%.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -192,7 +192,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [2, 2, 1.5, 1, 2, 2, 2],
 					"tooltip": "Kog'Maw shoots acid at an area, dealing <magicDamage>@BaseDamageCalc@ plus @TooltipMissingHealthDamageAmp@% per 1% missing Health magic damage</magicDamage> and revealing enemies hit for 2 seconds. Enemies below <healing>40% Health</healing> instead take <magicDamage>@MaxDamageCalc@ magic damage</magicDamage>.<br><br>Subsequent shots within @ManaCostDuration@ seconds cost an additional <scaleMana>@BaseCost@ Mana</scaleMana> (max: <scaleMana>@ManaCostCap@ Mana</scaleMana>).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"

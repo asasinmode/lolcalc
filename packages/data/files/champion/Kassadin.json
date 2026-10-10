@@ -38,7 +38,7 @@
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 8],
 					"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -101,7 +101,7 @@
 					"mana": [1, 1, 1, 1, 1, 1],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "ActiveBaseDamage",
 							"nameOverride": "spell_listtype_activedamage"
@@ -168,7 +168,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [22, 21, 20, 19, 18, 17, 16],
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount@% for @SlowDuration@ second.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -220,7 +220,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [5, 5, 3.5, 2, 2, 2, 2],
 					"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"

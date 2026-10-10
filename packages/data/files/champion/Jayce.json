@@ -40,7 +40,7 @@
 					"tooltip": "{{Spell_JayceToTheSkies_Tooltip}}",
 					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
 					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonusDamage@ bonus damage to jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -83,7 +83,7 @@
 					"tooltip": "{{Spell_JayceShockBlast_Tooltip}}",
 					"tooltipExtended": "{{Spell_JayceShockBlast_Tooltip}}<br><br>{{Spell_JayceToTheSkies_Tooltip}}",
 					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonusDamage@ bonus damage to jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -140,7 +140,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"tooltip": "{{Spell_JayceStaticField_Tooltip}}",
 					"tooltipExtended": "{{Spell_JayceStaticField_Tooltip}}<br><br>{{Spell_JayceHyperCharge_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -179,7 +179,7 @@
 					"cooldownTime": [14.6, 13, 11.4, 9.8, 8.2, 6.6, 5],
 					"tooltip": "{{Spell_JayceHyperCharge_Tooltip}}",
 					"tooltipExtended": "{{Spell_JayceHyperCharge_Tooltip}}<br><br>{{Spell_JayceStaticField_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "DamagePerc",
 							"nameOverride": "spell_listtype_jaycedamagepershot"
@@ -224,7 +224,7 @@
 					"tooltip": "{{Spell_JayceThunderingBlow_Tooltip}}",
 					"tooltipExtended": "{{Spell_JayceThunderingBlow_Tooltip}}<br><br>{{Spell_JayceAccelerationGate_Tooltip}}",
 					"tooltipExtendedBelowLine": "<rules><keywordMajor>Hammer</keywordMajor> swing does a max of <magicDamage>@MonsterCap@ magic damage</magicDamage> against jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PercHPDamage",
 							"nameOverride": "spell_listtype_maxhealthpercent"
@@ -263,7 +263,7 @@
 					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"tooltip": "{{Spell_JayceAccelerationGate_Tooltip}}",
 					"tooltipExtended": "{{Spell_JayceAccelerationGate_Tooltip}}<br><br>{{Spell_JayceThunderingBlow_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MovementSpeed",
 							"nameOverride": "spell_listtype_movementspeed"

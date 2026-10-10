@@ -38,7 +38,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [21, 20, 19, 18, 17, 16, 16],
 					"tooltip": "Blitzcrank fires their right hand, <status>Pulling</status> the first enemy hit towards them and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -83,7 +83,7 @@
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"tooltip": "Blitzcrank supercharges themself, gaining <speed>@MoveSpeedMod*100@% decaying Move Speed</speed> and <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @Duration@ seconds.<br><br>Afterwards, Blitzcrank is <status>Slowed</status> by @MoveSpeedModReduction*100@% for @SlowDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Move Speed decays to @MoveSpeedModMin*100@% over @MoveSpeedModMinTime@ seconds</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MoveSpeedMod",
 							"nameOverride": "spell_listtype_movementspeed"
@@ -134,7 +134,7 @@
 					"mana": [25, 25, 25, 25, 25, 25],
 					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
 					"tooltip": "Blitzcrank charges up their fist, causing their next Attack to <status>Knock Up</status> for @CCDuration@ second(s) and deal <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
-					"extendedVariables": [],
+					"abilityLevelVars": [],
 					"dataValues": {
 						"CCDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
@@ -183,7 +183,7 @@
 					"cooldownTime": [0, 60, 40, 20, 0, 0, 0],
 					"tooltip": "<spellPassive>Passive: </spellPassive>While this ability is available, lightning charges Blitzcrank's fists, marking those  Attacked. After 1 second, they are shocked for <magicDamage>@PassiveDamage@ magic damage</magicDamage>.<br><br><spellActive>Active: </spellActive>Blitzcrank overcharges, dealing <magicDamage>@ActiveDamage@ magic damage</magicDamage> and <status>Silencing</status> nearby enemies for @SilenceDuration@ seconds. Their shields are also destroyed.",
 					"tooltipExtendedBelowLine": "<rules>Does not break shields on monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PassiveBaseDamage",
 							"nameOverride": "spell_staticfield_passivebase_levelup"

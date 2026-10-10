@@ -39,7 +39,7 @@
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"tooltip": "Sivir hurls her crossblade like a boomerang, dealing <physicalDamage>@TotalDamage@</physicalDamage> to all enemies it cuts through. Hitting non-champions reduces the damage to subsequent targets, down to a minimum of @FallOffMinimum*100@%.",
 					"tooltipExtendedBelowLine": "<rules>The damage falloff resets upon beginning its return.<br>Damage scales with Critical Strike Chance and Critical Strike Damage at @CritRatio*100@% effectiveness.<br>Cast time scales down with Attack Speed</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -155,7 +155,7 @@
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "For the next @BuffDuration@ seconds, Sivir gains <attackSpeed>@RicochetAttackSpeed*100@% Attack Speed</attackSpeed> and her auto attacks are empowered to bounce to additional surrounding enemies dealing <physicalDamage>@BounceDamage@ physical damage</physicalDamage> each bounce for up to @MaxBounces@ bounces.<br><br>These bounces critically strike if the attack generating them does.",
 					"tooltipExtendedBelowLine": "<rules>Bounces will prioritize new targets before returning to targets that have already been struck. Can only hit each target a maximum of two times.<br>Bounces deal @MinionDamageMod*100@% damage to minions.</rules><br><rules>This ability executes low Health minions.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "RicochetAttackSpeed",
 							"nameOverride": "spell_listtype_attackspeed"
@@ -233,7 +233,7 @@
 					"cooldownTime": [25, 24, 22.5, 21, 19.5, 18, 10],
 					"tooltip": "Sivir creates a magical barrier for @SpellShieldDuration@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot.",
 					"tooltipExtendedBelowLine": "<rules>This shield blocks both champion and item Abilities.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "HealRatio",
 							"nameOverride": "spell_listtype_totaladratio"
@@ -279,7 +279,7 @@
 					"cooldownTime": [10, 120, 100, 80, 90, 90, 10],
 					"tooltip": "Sivir rallies her nearby allies, granting them <speed>@MaxMS*100@% Move Speed</speed> for @UltDuration@ seconds.<br><br>Sivir's attacks against champions while On The Hunt reduce the cooldown of her basic abilities by @AttackCooldownRefund@ seconds.<br><br>Takedowns on recently damaged enemies refreshes the duration of the hunt.",
 					"tooltipExtendedBelowLine": "",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "MaxMS",
 							"nameOverride": "spell_listtype_movementspeedmax"

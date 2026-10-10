@@ -39,7 +39,7 @@
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>Percent Health damage deals a max of <magicDamage>@SuperQMonsterMaxDamageTotal@ damage</magicDamage> to jungle monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_galioq_windblastdamage"
@@ -119,7 +119,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Galio gains a <shield>@TotalPassiveShield@ Magic Shield</shield> after not taking damage for @PassiveShieldOOCTimer@ seconds.<br><br><charge>Begin Charging:</charge> Galio reduces incoming magic damage by @MagicDamageReduction@ and incoming physical damage by @PhysicalDamageReduction@ and <status>Slows</status> himself by @SelfSlowPercent@%.<br><br><release>Release:</release> Galio <status>Taunts</status> enemy champions for between @CCDurationMin@ to @CCDurationMax@ seconds, deals between <magicDamage>@MinTotalDamage@</magicDamage> and <magicDamage>@MaxTotalDamage@ magic damage</magicDamage>, and refreshes the damage reduction for @DRLingerDuration@ seconds. Taunt duration, damage, and range increase with charge time.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "PassiveShieldHealthRatio",
 							"nameOverride": "spell_listtype_shieldhealthratio"
@@ -276,7 +276,7 @@
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for @KnockupDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>@PVEDamage@ magic damage</magicDamage>.<br><br>Galio's dash stops on hitting terrain.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -324,7 +324,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for @TemporaryWShieldDuration@ seconds. Galio then flies to his landing zone.<br><br>When Galio lands, he <status>Knocks Up</status> for @StunDurationOuter@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"

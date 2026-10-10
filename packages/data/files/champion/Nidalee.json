@@ -39,7 +39,7 @@
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "{{Spell_JavelinToss_Tooltip}}",
 					"tooltipExtended": "{{Spell_JavelinToss_Tooltip}}<br><br>{{Spell_Takedown_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "SpearMinimumDamage",
 							"nameOverride": "spell_listtype_nidaleejavelinminimumdamage"
@@ -137,7 +137,7 @@
 					"cooldownTime": [14, 13, 12, 11, 10, 9, 9],
 					"tooltip": "{{Spell_Bushwhack_Tooltip}}",
 					"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "TotalFlatDamage",
 							"nameOverride": "spell_listtype_nidaleetrapdamage"
@@ -240,7 +240,7 @@
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"tooltip": "{{Spell_PrimalSurge_Tooltip}}",
 					"tooltipExtended": "{{Spell_PrimalSurge_Tooltip}}<br><br>{{Spell_Swipe_Tooltip}}",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseHeal",
 							"nameOverride": "spell_listtype_nidaleeprimalsurgeheal"
@@ -318,7 +318,7 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "TakedownBaseDamage",
 							"nameOverride": "spell_aspectofthecougar_takedowndamage"

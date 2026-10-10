@@ -38,7 +38,7 @@
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @SilenceDuration@ second(s).",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -91,7 +91,7 @@
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit.",
 					"tooltipExtendedBelowLine": "<rules>Voidlings deal @LaneMinionMod*100@% damage to lane minions affected by <spellName>Malefic Visions</spellName>.<br>Voidlings deal @EpicMonsterMod*100@% damage to epic monsters.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "VoidlingBaseDamage",
 							"nameOverride": "spell_listtype_malzaharvoidlingbonusdamage"
@@ -172,7 +172,7 @@
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"tooltip": "Malzahar inflicts terrible visions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds. Applying <spellName>Call of the Void</spellName> or <spellName>Nether Grasp</spellName> to the victim during this time refreshes the visions.<br><br>If the victim dies, Malzahar gains <scaleMana>@ManaRestore@ Mana</scaleMana> and the visions spread to the nearest enemy.<br><br><rules>Malefic Visions executes minions below @MinionExecuteThreshold@ Health.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
@@ -243,7 +243,7 @@
 					"cooldownTime": [140, 140, 110, 80, 80, 80, 80],
 					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @CCDuration@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @PoolDuration@ seconds.",
 					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>",
-					"extendedVariables": [
+					"abilityLevelVars": [
 						{
 							"name": "BeamDamage",
 							"nameOverride": "spell_listtype_malzaharnethergraspdamage"
