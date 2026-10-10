@@ -247,8 +247,8 @@ onMounted(() => {
 	mirrorLayout.value = localStorage.getItem('lolcalc-mirror-scoreboard-layout') === 'true';
 });
 
-function setLocalMirrorLayout() {
-	localStorage.setItem('lolcalc-mirror-scoreboard-layout', mirrorLayout.value.toString());
+function setLocalMirrorLayout(event: Event) {
+	localStorage.setItem('lolcalc-mirror-scoreboard-layout', (event.target as HTMLInputElement).checked.toString());
 }
 
 const isDisplayingTargets = ref(false);
@@ -259,7 +259,7 @@ const isDisplayingTargets = ref(false);
 		<h2>configuration scoreboard</h2>
 		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
 		<label for="scoreboard-mirror-layout">
-			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout" />
+			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @input="setLocalMirrorLayout" />
 			mirror layout
 		</label>
 		<div :class="{ 'displaying-targets': isDisplayingTargets }">

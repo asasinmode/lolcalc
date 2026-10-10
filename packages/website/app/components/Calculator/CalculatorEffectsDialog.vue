@@ -279,7 +279,7 @@ defineExpose({
 				</button>
 			</form>
 			<div class="inline-search-label">
-				<input id="champ-select-search" v-model="search" type="text" :data-empty="!search" @keydown.enter="activateFirstSearchEffect" @update:model-value="hideEffectTooltipIfNotSearched" />
+				<input id="champ-select-search" v-model="search" type="text" :data-empty="!search" @keydown.enter="activateFirstSearchEffect" @input="hideEffectTooltipIfNotSearched" />
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
 					Search

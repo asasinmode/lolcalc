@@ -56,6 +56,11 @@ function selectFirstChamp() {
 	}
 }
 
+function onSearchInput(event: Event) {
+	(event.target as any).composing = false;
+	selectedRole.value = undefined;
+}
+
 defineExpose({
 	open: () => {
 		vDialog.value?.open();
@@ -81,16 +86,7 @@ defineExpose({
 				</button>
 			</form>
 			<div class="inline-search-label">
-				<input
-					id="champ-select-search"
-					v-model="search"
-					autocomplete="off"
-					type="text"
-					:data-empty="!search"
-					@update:model-value="selectedRole = undefined"
-					@keydown.enter.prevent="selectFirstChamp"
-					@input="($event.target as any).composing = false"
-				/>
+				<input id="champ-select-search" v-model="search" autocomplete="off" type="text" :data-empty="!search" @keydown.enter.prevent="selectFirstChamp" @input="onSearchInput" />
 				<label for="item-shop-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
 					Search

@@ -269,6 +269,14 @@ function searchCursorOver(index?: number) {
 	searchCursoredOverIndex.value = index;
 }
 
+function onSearchInput(event: Event) {
+	(event.target as any).composing = false;
+	searchCursorOver(searchResults.value.length ? 0 : undefined);
+	if (!searchResults.value.length) {
+		leaveTooltipableElement();
+	}
+}
+
 function closeSearchIfOutside(event: FocusEvent) {
 	const target = event.relatedTarget as HTMLElement | null;
 	if (!target || target === searchItemDescription.value?.header || !searchResultsContainer.value?.contains(target)) {
@@ -541,8 +549,7 @@ defineExpose({
 					:aria-activedescendant="searchCursoredOverIndex !== undefined ? `item-shop-search-result-${searchCursoredOverIndex}` : undefined"
 					:data-empty="!search"
 					@focus="(searchExpanded = true) && closeDetailsPanel()"
-					@input="($event.target as any).composing = false"
-					@update:model-value="searchCursorOver(searchResults.length ? 0 : undefined)"
+					@input="onSearchInput"
 					@keydown="onSearchKeydown"
 				/>
 				<label id="item-shop-search-lbl" for="item-shop-search">

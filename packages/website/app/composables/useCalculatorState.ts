@@ -144,13 +144,13 @@ export function initCalculatorState(): ICalculatorState {
 
 	const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 		/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
-		const rows: ICustomTotalSectionRow[] = ((customTotalSection.rows.value as ICustomTotalSectionRow[]) ?? []).concat(
+		const rows: ICustomTotalSectionRow[] = ((toValue(customTotalSection.rows) as ICustomTotalSectionRow[]) ?? []).concat(
 			customTotalRowIds.value.map((combinedId): ICustomTotalSectionRow => {
 				const [sectionId, rowId] = combinedId.split('_');
 
 				const section = resultSections.value.find((section) => section.id === sectionId)!;
-				const rowIndex = section.rows.value.findIndex((row) => row.id === rowId)!;
-				const row = section.rows.value[rowIndex]!;
+				const rowIndex = toValue(section.rows).findIndex((row) => row.id === rowId)!;
+				const row = toValue(section.rows)[rowIndex]!;
 
 				return {
 					...row,
@@ -538,7 +538,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
 				if (sectionIndex !== undefined && !Number.isNaN(sectionIndex) && rowIndex !== undefined && !Number.isNaN(rawRowIndex)) {
 					const section = resultSections.value[sectionIndex];
-					const row = section?.rows.value[rowIndex];
+					const row = section && toValue(section.rows)[rowIndex];
 					if (section && row && section.id !== 'a-cTtl') {
 						customTotalRowIds.value.push(`${section.id}_${row.id}`);
 					}

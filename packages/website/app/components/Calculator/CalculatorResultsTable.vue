@@ -1262,7 +1262,7 @@ defineExpose({
 						<div>
 							<a href="#results-table-section-header-aa" class="skip-link"> skip column controls </a>
 							<label for="results-table-values-for">
-								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @update:model-value="recalculateAllColumns" />
+								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @input="recalculateAllColumns" />
 								flip target vs source
 							</label>
 							<button
@@ -1522,7 +1522,7 @@ defineExpose({
 									<label :for="`results-table-header-select-${section.id}`">
 										{{ section.selectLabel }}
 									</label>
-									<select :id="`results-table-header-select-${section.id}`" v-model="section.selectValue" @update:model-value="addComputedSection(section.id)">
+									<select :id="`results-table-header-select-${section.id}`" v-model="section.selectValue" @input="addComputedSection(section.id)">
 										<option v-for="[value, optionText] in section.selectOptions" :key="value" :value>
 											{{ optionText }}
 										</option>
@@ -1564,7 +1564,7 @@ defineExpose({
 						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
 							<label>
 								<span>include in custom total</span>
-								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @update:model-value="onCustomTotalRowsChange" />
+								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @input="onCustomTotalRowsChange" />
 							</label>
 						</td>
 						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-damage-type">
