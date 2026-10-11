@@ -20,7 +20,6 @@ export default {
 				const passiveParams: IGameVariableValueParameters['championAbility'] = {
 					abilityKey: 'passive',
 					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
-					allAbilitiesVariants: self.allAbilityVariants.value,
 					damageSource: self,
 				};
 
@@ -65,5 +64,48 @@ export default {
 		dataOverrides: {
 			isImmobilizing: false,
 		},
+		variables: defineChampionVariables<'KSante', typeof IKSante, 'q'>()({
+			known: {
+				f2: [],
+			},
+			calculate(self) {
+				let resistsCap = Number.POSITIVE_INFINITY;
+
+				const defenseCap = championAbilityVariableValue('DefenseCapforCooldown', {
+					abilityKey: 'q',
+					abilityVariant: self.champion.value!.abilities.q.variants[0]!,
+					damageSource: self,
+				});
+				if (typeof defenseCap.value === 'number') {
+					resistsCap = defenseCap.value;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS ksante] failed to calculate q resists cap', defenseCap);
+				}
+
+				return {
+					f2: {
+						value: Math.min(resistsCap, self.stats.value.bonus.armor + self.stats.value.bonus.magicResist),
+					},
+				};
+			},
+			meta: {
+				BaseDamage: {
+					type: VariableType.physical,
+				},
+				SlowPercent: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				StunDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				f2: {
+					displayedName: 'CurrentResists',
+				},
+			},
+			uninteresting: ['RecastWindow', 'RCooldownReduction', 'DefenseCapforCooldown'],
+		}),
 	},
 } satisfies IChampionSpecific<'KSante'>;
