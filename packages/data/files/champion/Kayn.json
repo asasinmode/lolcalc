@@ -34,7 +34,11 @@
 					"name": "Reaping Slash",
 					"objectName": "KaynQ",
 					"dataKey": "Characters/Kayn/Spells/KaynQAbility/KaynQ",
-					"image": "assets/characters/kayn/hud/icons2d/kayn_q_primary.png",
+					"image": [
+						"assets/characters/kayn/hud/icons2d/kayn_q_primary.png",
+						"assets/characters/kayn/hud/icons2d/kayn_q_ass.png",
+						"assets/characters/kayn/hud/icons2d/kayn_q_slay.png"
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 4.5],
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
@@ -123,7 +127,10 @@
 					"name": "Blade's Reach",
 					"objectName": "KaynW",
 					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynW",
-					"image": "assets/characters/kayn/hud/icons2d/kayn_w_primary.png",
+					"image": [
+						"assets/characters/kayn/hud/icons2d/kayn_w_primary.png",
+						"assets/characters/kayn/hud/icons2d/kayn_w_slay.png"
+					],
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
@@ -180,7 +187,11 @@
 					"name": "Shadow Step",
 					"objectName": "KaynE",
 					"dataKey": "Characters/Kayn/Spells/KaynEAbility/KaynE",
-					"image": "assets/characters/kayn/hud/icons2d/kayn_e_primary.png",
+					"image": [
+						"assets/characters/kayn/hud/icons2d/kayn_e_primary.png",
+						"assets/characters/kayn/hud/icons2d/kayn_e_ass.png",
+						"assets/characters/kayn/hud/icons2d/kayn_e_slay.png"
+					],
 					"mana": [90, 90, 90, 90, 90, 90],
 					"cooldownTime": [21, 21, 19, 17, 15, 13, 11],
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
@@ -243,7 +254,11 @@
 					"name": "Umbral Trespass",
 					"objectName": "KaynR",
 					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR",
-					"image": "assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
+					"image": [
+						"assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
+						"assets/characters/kayn/hud/icons2d/kayn_r1_disabled.png",
+						"assets/characters/kayn/hud/icons2d/kayn_r1_slay.png"
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [120, 120, 100, 80, 0, 0, 0],
 					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
@@ -324,7 +339,11 @@
 					"name": "The Darkin Scythe",
 					"objectName": "KaynPassive",
 					"dataKey": "Characters/Kayn/Spells/KaynPassiveAbility/KaynPassive",
-					"image": "assets/characters/kayn/hud/icons2d/kayn_passive_primary.png",
+					"image": [
+						"assets/characters/kayn/hud/icons2d/kayn_passive_primary.png",
+						"assets/characters/kayn/hud/icons2d/kayn_passive_ass.png",
+						"assets/characters/kayn/hud/icons2d/kayn_passive_slay.png"
+					],
 					"tooltip": "{{Spell_KaynPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KaynPassive_Tooltip}}<br><rules>@PassiveSecondFormDelayTooltip@ minutes after reaching full charge on either form, Kayn can transform into either, even if it is not at full charge. The timer is reduced by 5 seconds when gaining charge in the non-full form.<br>Kayn gains Homeguard after transforming.<br></rules>",
 					"dataValues": {

@@ -5,6 +5,7 @@ import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { PATCH_VERSION } from '@lolcalc/data';
 import type IBelveth from '@lolcalc/data/files/champion/Belveth.json';
+import { formatImagePath } from '@lolcalc/data/meta.ts';
 import { AbilityType, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types.js';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -48,6 +49,11 @@ export default {
 		}),
 	},
 	q: {
+		modifyVariantData(abillityVariant, _binData, variantData) {
+			if (variantData.mSpell?.mImgIconName) {
+				abillityVariant.image = formatImagePath(variantData.mSpell.mImgIconName.at(-1));
+			}
+		},
 		variables: defineChampionVariables<'Belveth', typeof IBelveth, 'q'>()({
 			known: {
 				f1: [],

@@ -19,7 +19,15 @@ import { replaceGameVariables } from '@lolcalc/core/variables/game.ts';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable.ts';
 import type { IEffectData, ITEMS } from '@lolcalc/data';
 import type { IItemShopStatFilter } from '@lolcalc/data/meta';
-import { ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS, ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS, ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS, ITEM_STAT_META, SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta.ts';
+import {
+	ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS,
+	ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS,
+	ABILITY_VARIANT_IMMOBILIZING_SPELL_TAGS,
+	ITEM_STAT_META,
+	SHAPESHIFTING_CHAMPION_IDS,
+	NOT_SHAPESHIFTING_CHAPION_IDS,
+	formatImagePath,
+} from '@lolcalc/data/meta.ts';
 import type { IChampion, IChampionAbility, IChampionAbilityVariant, IChampionId, IDragonName, IItem, IListedChampion, IRuneShardSlotValue } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionAbilityKey, IItemCategory } from '@lolcalc/shared';
 import { AbilityType, ITEM_NAME_TO_ID, KEPT_UNPURCHASABLE_ITEMS, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
@@ -288,7 +296,12 @@ if (!championData || championData?.version !== latestVersion) {
 								stringtable: championFileDataStringtable,
 							};
 
-							if (dedicatedChampionFileData.abilities.q.variants.length > 1 && dedicatedChampionFileData.abilities.w.variants.length > 1 && dedicatedChampionFileData.abilities.e.variants.length > 1) {
+							if (
+								dedicatedChampionFileData.abilities.q.variants.length > 1 &&
+								dedicatedChampionFileData.abilities.w.variants.length > 1 &&
+								dedicatedChampionFileData.abilities.e.variants.length > 1 &&
+								!NOT_SHAPESHIFTING_CHAPION_IDS.includes(championId)
+							) {
 								potentialShapeshifters.add(championId);
 							}
 
@@ -1298,7 +1311,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 									throw new Error(`${effectObjectName} expected mImgIconName in shared spell`);
 								}
 
-								(effectData as any).image = `assets/spells/icons2d/${mImgIconName[0].toLowerCase().replace('.dds', '.png')}`;
+								(effectData as any).image = `assets/spells/icons2d/${formatImagePath(mImgIconName[0])}`;
 								(effectData as any).dataValues = DataValues?.length
 									? Object.fromEntries(DataValues.map(({ name, values }: Record<string, number[]>) => [name, values?.length ? values.map((value) => formatNumber(value)) : undefined]))
 									: undefined;
@@ -2045,7 +2058,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 
 			const variants: (IChampionAbilityVariant & { imageAlt: string })[] = [];
 			for (const img of Array.from(new Set(variantData.mSpell.mImgIconName)) as string[]) {
-				const image = img.toLowerCase().replace('.dds', '.png');
+				const image = formatImagePath(img);
 				const key = image.at(-5) === 'l' ? 'image' : 'imageAlt';
 				const existingVariantIndex = variants.findIndex((variant) => variant.image.slice(0, -6) === image.slice(0, -6));
 				if (~existingVariantIndex) {
@@ -2201,14 +2214,7 @@ function championAbilityVariant(
 		name: undefined!,
 		objectName: variantData.ObjectName,
 		dataKey: variantDataKey,
-		/**
-		 * belveth has the fully highlighted q at last index
-		 * also jinx's Q `modifyVariantData` reimplements this logic so it should be updated in case of any changes
-		 */
-		image: mImgIconName
-			.at(championId === 'Belveth' && abilityKey === 'q' && variantIndex === 0 ? -1 : 0)
-			.toLowerCase()
-			.replace('.dds', '.png'),
+		image: formatImagePath(mImgIconName[0]),
 		mana,
 		cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 		tooltip: undefined,

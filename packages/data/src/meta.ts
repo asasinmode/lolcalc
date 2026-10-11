@@ -4,6 +4,8 @@ import type { IChampionStatName } from '@lolcalc/shared';
 import type { IChampionId, IItem, IItemStat } from './types';
 
 export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee', 'Gnar'];
+/** for champions that look like (data-wise) but aren't shapeshifters */
+export const NOT_SHAPESHIFTING_CHAPION_IDS: IChampionId[] = ['Hwei'];
 
 export const ITEM_STAT_META: Record<
 	IItemStat,
@@ -155,3 +157,8 @@ export const ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS: number =
 
 /** used alongside `ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_CC_FLAGS` */
 export const ABILITY_VARIANT_BOT_DATA_EFFECT_TAG_DISPLACEMENT_FLAGS = (2 ** 16) | (2 ** 22) | (2 ** 24);
+
+/** lowercases and replaces `.dds` in strings like `ASSETS/Characters/Kayn/HUD/Icons2D/Kayn_E_Primary.dds` */
+export function formatImagePath(value: string) {
+	return value.toLowerCase().replace('.dds', '.png');
+}

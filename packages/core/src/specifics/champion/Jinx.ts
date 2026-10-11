@@ -1,5 +1,6 @@
 import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type IJinx from '@lolcalc/data/files/champion/Jinx.json';
+import { formatImagePath } from '@lolcalc/data/meta.ts';
 import type { IChampion } from '@lolcalc/data/types.js';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
@@ -76,7 +77,7 @@ export default {
 		buffOptions: qBuffOptions,
 		modifyVariantData(abillityVariant, _binData, variantData) {
 			if (variantData.mSpell?.mImgIconName) {
-				abillityVariant.image = variantData.mSpell.mImgIconName.map((value: string) => value.toLowerCase().replace('.dds', '.png'));
+				abillityVariant.image = variantData.mSpell.mImgIconName.map(formatImagePath);
 			}
 		},
 		resolveImage(variantImage, self) {
