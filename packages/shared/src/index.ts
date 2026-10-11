@@ -410,6 +410,8 @@ export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars,
 	rellPArmorStolen?: number;
 	/** magic resist stolen from rell passive effect */
 	rellPMRStolen?: number;
+	/** ms slow % from Lissandra passive */
+	lissandraPSlow?: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
@@ -795,6 +797,7 @@ export const EffectObjectName = {
 	rellPBreakMold: 'RellP_Debuff',
 	namiPSurgingTides: 'NamiPassiveTT',
 	nasusWWither: 'NasusW',
+	lissandraPIcebornSubjugation: 'lolcalcLissandraPassive',
 	/* other */
 	ghost: 'summonerHaste',
 	cleanse: 'summonerCleanse',

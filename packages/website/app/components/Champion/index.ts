@@ -170,6 +170,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	LeeSin: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'LeeSin', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},
+	Lissandra: {
+		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Lissandra', 'passive', 0), 'applyZombieSlow', 'zombie slow', true, true),
+	},
 	Mordekaiser: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Mordekaiser', 'passive', 0), 'isPassiveMSActive', 'is passive active (3 hits)', false),
 	},

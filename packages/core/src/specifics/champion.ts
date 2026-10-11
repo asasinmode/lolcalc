@@ -72,6 +72,9 @@ import KogMaw from './champion/KogMaw.ts';
 import KSante from './champion/KSante.ts';
 import Leblanc from './champion/Leblanc.ts';
 import LeeSin from './champion/LeeSin.ts';
+import Leona from './champion/Leona.ts';
+import Lillia from './champion/Lillia.ts';
+import Lissandra from './champion/Lissandra.ts';
 import Locke from './champion/Locke.ts';
 import Mel from './champion/Mel.ts';
 import MonkeyKing from './champion/MonkeyKing.ts';
@@ -219,6 +222,9 @@ export const CHAMPION_SPECIFICS = {
 	KogMaw,
 	Leblanc,
 	LeeSin,
+	Leona,
+	Lillia,
+	Lissandra,
 	Locke,
 	Mel,
 	MonkeyKing,
@@ -375,6 +381,7 @@ export interface IChampionInternalDataMap {
 	};
 	KogMaw: { passiveMSProgress: number };
 	LeeSin: { hasPassiveStack: number };
+	Lissandra: { applyZombieSlow: number };
 	Mordekaiser: { isPassiveMSActive: number };
 	Naafiri: { passiveStacks: number };
 	Nami: {

@@ -902,6 +902,26 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
+	[EffectObjectName.lissandraPIcebornSubjugation]: defineEffectSpecific<[zombieSlow: number]>({
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		setupDataFromInternalData(damageSource) {
+			return [(damageSource.internalData.value as IInternalDataOf<'Lissandra'>).applyZombieSlow];
+		},
+		variables: simpleSlowEffectVariables('lissandraPSlow'),
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { effectVars, debuffs }) {
+					const effect = self.getEffect(EffectObjectName.lissandraPIcebornSubjugation)?.[0];
+					if (effect?.champion.value?.id === 'Lissandra') {
+						effectVars.lissandraPSlow = CHAMPION_SPECIFICS.Lissandra.passive.calculateSlow(effect.champion.value as IChampion);
+						debuffs.percentageMSSlow.push(effectVars.lissandraPSlow);
+					}
+				},
+			},
+		},
+	}),
 	[EffectObjectName.nunuPCallOfFreljord]: defineEffectSpecific<[isCalledByFreljord: number]>({
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 1)];
@@ -1337,6 +1357,7 @@ export const CUSTOM_EFFECTS: Partial<
 	[EffectObjectName.nasusWWither]: {
 		championSpellObjectName: 'NasusW',
 	},
+	[EffectObjectName.lissandraPIcebornSubjugation]: slowEffectDescriptionObj,
 	/* other */
 	[EffectObjectName.ghost]: {
 		sharedSpellObjectKey: 'Shared/Spells/SummonerHaste',

@@ -242,6 +242,10 @@
 			"objectName": "AshePassiveSlow",
 			"description": "This unit is slowed."
 		},
+		"lolcalcLissandraPassive": {
+			"dataKey": "lolcalcLissandraPassive",
+			"stringtable": "game_buff_tooltip_slow"
+		},
 		"localcNunuPassive": {
 			"dataKey": "localcNunuPassive",
 			"description": "This unit has increased Attack Speed and Move Speed."

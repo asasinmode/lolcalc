@@ -158,6 +158,10 @@ export const EFFECTS_META: Record<
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0),
 		label: 'Frost Shot',
 	},
+	[EffectObjectName.lissandraPIcebornSubjugation]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Lissandra', 'passive', 0),
+		label: 'Iceborn Subjugation',
+	},
 	[EffectObjectName.nunuPCallOfFreljord]: {
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0),
 		label: 'Call of the Freljord',
