@@ -318,7 +318,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		const [rawVariantObjectName, variantVariableName] = variable.split(':');
 		const variantObjectName = rawVariantObjectName!.split('.').at(-1);
 
-		if (variantVariableName === 'Hotkey') {
+		if (variantVariableName?.toLowerCase() === 'hotkey') {
 			return {
 				value: variantObjectName!.at(-1),
 				isUninteresting: true,
