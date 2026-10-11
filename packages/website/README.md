@@ -243,9 +243,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] result variant sections
   - [ ] `modifyExtendedVariables`, not sure if it's something I should do - add missing variables/custom ones
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
+- [ ] effects
+  - [ ] more custom/other effects - root, silence, any needed
+  - [ ] think if dedicated percent slow effects make sense. There will probably be a lot of them and they can just be added with a custom slow. That wouldn't make them appliable to all targets easily though (every target needs to have it added manually). Keep dedicated effects for slows that are champion stats dependant
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
 - [ ] [item haste](https://wiki.leagueoflegends.com/en-us/Haste#Item_haste) & affect displayed item cooldowns
-- [ ] more custom/other effects - root, silence, any needed
 - [ ] explicit calculation formulas you can look at
 - [ ] [rune paths](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
   - [ ] choose shield source to get shield bash value for
