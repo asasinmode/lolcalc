@@ -2424,6 +2424,11 @@ function transformAbilityText(value: string) {
 			if (~brIndex && !value.slice(0, brIndex).endsWith('</li>')) {
 				value = `${value.slice(0, brIndex)}</li>${value.slice(brIndex)}`;
 			}
+
+			const closeLiIndex = value.lastIndexOf('</li>');
+			if (closeLiIndex < liIndex) {
+				value = `${value}</li>`;
+			}
 		}
 
 		value = trimBr(value);

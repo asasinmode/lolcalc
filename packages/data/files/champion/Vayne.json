@@ -173,7 +173,7 @@
 					"image": "assets/characters/vayne/hud/icons2d/vayne_r.png",
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
-					"tooltip": "Vayne gains <physicalDamage>@BonusAttackDamage@ Attack Damage</physicalDamage> for @BaseDuration@ seconds, extended by @DurationToAdd@ seconds whenever a champion damaged by Vayne dies within @DamagedMarkerDuration@ seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>@MovementSpeed@ Move Speed</speed>.<li>The Cooldown of <spellName>Tumble</spellName> is reduced by @TumbleCDReduction@%, and grants <keywordStealth>Invisibility</keywordStealth> for @TumbleStealthDuration@ second.",
+					"tooltip": "Vayne gains <physicalDamage>@BonusAttackDamage@ Attack Damage</physicalDamage> for @BaseDuration@ seconds, extended by @DurationToAdd@ seconds whenever a champion damaged by Vayne dies within @DamagedMarkerDuration@ seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>@MovementSpeed@ Move Speed</speed>.<li>The Cooldown of <spellName>Tumble</spellName> is reduced by @TumbleCDReduction@%, and grants <keywordStealth>Invisibility</keywordStealth> for @TumbleStealthDuration@ second.</li>",
 					"tooltipExtendedBelowLine": "<rules>{{Reminder_Invisibility}}<br>This Ability's duration can't be increased past its maximum duration</rules>",
 					"abilityLevelVars": [
 						{
