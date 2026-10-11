@@ -1,5 +1,5 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type IGaren from '@lolcalc/data/files/champion/Garen.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -32,6 +32,61 @@ export default {
 				},
 			},
 			uninteresting: ['DamageTimer'],
+		}),
+	},
+	e: {
+		variables: defineChampionVariables<'Garen', typeof IGaren, 'e'>()({
+			known: {
+				f1: [],
+				NearestTickDamage: [],
+			},
+			calculate(self) {
+				let DamageTicks = Number.NaN;
+				let NearestTickDamage = Number.NaN;
+
+				const eParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'e', abilityVariant: self.champion.value!.abilities.e.variants[0]!, damageSource: self };
+				const baseTicks = championAbilityVariableValue('NumTicks', eParams);
+				const asPerTick = championAbilityVariableValue('ASPerTick', eParams);
+				if (typeof baseTicks.value === 'number' && typeof asPerTick.value === 'number') {
+					DamageTicks = baseTicks.value + Math.max(0, Math.floor(self.stats.value.total.bonusAttackSpeedPercent / asPerTick.value));
+				} else {
+					console.warn('[CHAMPION_SPECIFICS garen] failed to calculate e ticks vars', baseTicks, asPerTick);
+				}
+
+				const baseTickDamage = championAbilityVariableValue('TotalDamage', eParams);
+				const nearestBonus = championAbilityVariableValue('NearestEnemyBonus', eParams);
+				if (typeof baseTickDamage.value === 'number' && typeof nearestBonus.value === 'number') {
+					NearestTickDamage = baseTickDamage.value * (1 + nearestBonus.value);
+				} else {
+					console.warn('[CHAMPION_SPECIFICS garen] failed to calculate e ticks vars', baseTicks, asPerTick);
+				}
+
+				return {
+					f1: {
+						value: DamageTicks,
+					},
+					NearestTickDamage: {
+						value: NearestTickDamage,
+					},
+				};
+			},
+			meta: {
+				TotalDamage: {
+					type: VariableType.physical,
+					displayedName: 'TickDamage',
+				},
+				CriticalDamage: {
+					type: VariableType.physical,
+				},
+				NearestTickDamage: {
+					type: VariableType.physical,
+					isCustom: true,
+				},
+				f1: {
+					displayedName: 'DamageTicks',
+				},
+			},
+			uninteresting: ['Duration', 'NearestEnemyBonus', 'StacksToShred', 'ShredDuration', 'ASPerTick', 'ShredAmount'],
 		}),
 	},
 	calculateHooks: {
