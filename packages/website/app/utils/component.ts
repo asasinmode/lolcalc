@@ -2,7 +2,7 @@ import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage, replaceGameIcons, type IGameImageData } from '@lolcalc/core/misc';
-import type { IEffectControlsProps, IExtraInactiveFn, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
+import type { IEffectControlsProps, IExtraInactiveFn, IVariantImgIndexGetter, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import { AbilityType } from '@lolcalc/shared';
 import type { ComputedRef, SlotsType } from 'vue';
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
@@ -32,7 +32,7 @@ export function numberExtra<T extends IGameAbilityId>(
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
 		async (props, ctx) => {
 			const isEffect = abilityId.type === AbilityType.effect;
-			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
+			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { isEffect, onUpdate });
 
 			let localMax = max;
 			if (typeof localMax === 'function') {
@@ -85,7 +85,7 @@ export function numberExtra<T extends IGameAbilityId>(
 					{
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-						imgSrc,
+						imgSrc: toValue(imgSrc),
 						label,
 						min,
 						max: toValue(localMax),
@@ -142,7 +142,7 @@ export function progressExtra<T extends IGameAbilityId>(
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
 		async (props, ctx) => {
 			const isEffect = abilityId.type === AbilityType.effect;
-			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, isEffect, onUpdate);
+			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { isEffect, onUpdate });
 
 			const effectControlModel = effectControlsProps?.model?.(props.damageSource);
 			function effectControlUpdateValue(val?: boolean | number) {
@@ -180,7 +180,7 @@ export function progressExtra<T extends IGameAbilityId>(
 					{
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-						imgSrc,
+						imgSrc: toValue(imgSrc),
 						label,
 						max,
 						deriveValue,
@@ -230,7 +230,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
 		async (props, ctx) => {
-			const [imgSrc, stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, undefined, onUpdate);
+			const [imgSrc, stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { onUpdate });
 
 			const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
 
@@ -250,7 +250,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 					{
 						modelValue: computedValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-						imgSrc,
+						imgSrc: toValue(imgSrc),
 						labelPrefixApply,
 						tooltip,
 						inactive: isInactive && isInactive.value,
@@ -278,13 +278,16 @@ export function enumExtra<T extends IGameAbilityId>(
 	options: MaybeRef<[value: number, label: string | number][]>,
 	{
 		selectEffectSourceProps,
+		variantImgIndex,
 	}: {
 		selectEffectSourceProps?: ISelectEffectSourceProps;
+		/** will be computed and watched, then passed to `gameAbilityImage` */
+		variantImgIndex?: IVariantImgIndexGetter<any>;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
 		async (props, ctx) => {
-			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource);
+			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { variantImgIndex });
 
 			const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 			function updateEffectSource(value?: DamageSource) {
@@ -302,7 +305,7 @@ export function enumExtra<T extends IGameAbilityId>(
 					{
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
-						imgSrc,
+						imgSrc: toValue(imgSrc),
 						label,
 						options: toValue(options),
 						onImgMouseenter(event) {
@@ -329,15 +332,36 @@ async function extraComponentData(
 	abilityId: IGameAbilityId,
 	property: PropertyKey,
 	damageSource: DamageSource,
-	isEffect = abilityId.type === AbilityType.effect,
-	onUpdate?: IExtraOnValueUpdate,
-): Promise<[imgSrc: IGameImageData, stringifiedAbilityId: string, value: ComputedRef<any>, updateValue: (value: any) => void, appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined]> {
+	{
+		isEffect = abilityId.type === AbilityType.effect,
+		onUpdate,
+		variantImgIndex,
+	}: {
+		isEffect?: boolean;
+		onUpdate?: IExtraOnValueUpdate;
+		variantImgIndex?: IVariantImgIndexGetter<any>;
+	} = {},
+): Promise<[imgSrc: MaybeRef<IGameImageData>, stringifiedAbilityId: string, value: ComputedRef<any>, updateValue: (value: any) => void, appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined]> {
 	const appliedEffect = isEffect ? computed<IDamageSourceEffect | undefined>(() => damageSource?.appliedEffects.value.find((effect) => effect.abilityId.id === abilityId.id)) : undefined;
 
 	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion ? 'internalData' : abilityId.type === AbilityType.dragon ? 'internalDragonData' : 'internalItemData';
 
+	let imgSrc: MaybeRef<IGameImageData>;
+	if (variantImgIndex) {
+		imgSrc = ref([] as unknown as IGameImageData);
+		watch(
+			() => variantImgIndex[0](damageSource),
+			(value) => {
+				gameAbilityImage(abilityId, variantImgIndex[1](value)).then((imgGameData) => ((imgSrc as Ref<IGameImageData>).value = imgGameData));
+			},
+			{ immediate: true },
+		);
+	} else {
+		imgSrc = await gameAbilityImage(abilityId);
+	}
+
 	return [
-		await gameAbilityImage(abilityId),
+		imgSrc,
 		GameAbilityId.stringify(abilityId),
 		computed(() => (isEffect ? (appliedEffect?.value?.data.value[property as number] ?? 0) : damageSource[dataProperty].value?.[property as string])),
 		function updateValue(value: any) {

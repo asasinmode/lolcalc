@@ -110,13 +110,19 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: [
 			numberExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.passive.maxStacks),
 			progressExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveMSProgress', 'Get Excited MS value', CHAMPION_SPECIFICS.Jinx.passive.derivedMS),
-			enumExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'q', 0), 'qBuff', 'Q buff', [
-				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun0, 'minigun no stacks'],
-				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun1, 'minigun 1'],
-				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun2, 'minigun 2'],
-				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun3, 'minigun 3'],
-				[CHAMPION_SPECIFICS.Jinx.q.buffOptions.fishbones, 'fishbones'],
-			]),
+			enumExtra(
+				GameAbilityId.build(AbilityType.champion, 'Jinx', 'q', 0),
+				'qBuff',
+				'Q buff',
+				[
+					[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun0, 'minigun no stacks'],
+					[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun1, 'minigun 1'],
+					[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun2, 'minigun 2'],
+					[CHAMPION_SPECIFICS.Jinx.q.buffOptions.minigun3, 'minigun 3'],
+					[CHAMPION_SPECIFICS.Jinx.q.buffOptions.fishbones, 'fishbones'],
+				],
+				{ variantImgIndex: CHAMPION_SPECIFICS.Jinx.q.abilityImgVariantIndex },
+			),
 		],
 	},
 	Kayle: {
@@ -294,7 +300,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'MonkeyKing', 'passive', 0), 'passiveStacks', 'Stone Skin stacks', 0, CHAMPION_SPECIFICS.MonkeyKing.passive.maxStacks),
 	},
 	Zeri: {
-		extras: [booleanExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rActive', 'is active', false), await numberExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rStacks', 'Overdrive stacks')],
+		extras: [booleanExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rActive', 'is active', false), numberExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rStacks', 'Overdrive stacks')],
 	},
 	Zaahen: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Zaahen', 'passive', 0), 'passiveStacks', 'Determination stacks', 0, CHAMPION_SPECIFICS.Zaahen.passive.maxStacks),

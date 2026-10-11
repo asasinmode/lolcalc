@@ -1,9 +1,9 @@
+/*
+ * this file shouldn't import anything from specifics in order to avoid circular imports as it's used throughout them
+ */
 import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
 import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES } from '@lolcalc/shared';
-/*
- * this file shouldn't import anything from specifics as it's used throughout, in order to avoid circular imports
- */
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
 import { GameAbilityId } from './GameAbilityId.ts';
@@ -55,7 +55,8 @@ export function replaceGameIcons(text: string, subpath?: string, addAlt = false)
 
 export type IGameImageData = [src: string, width: number, height?: number, abilityName?: string] | (ITexture & { abilityName?: string });
 
-export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGameImageData> {
+/** @param imgIndex will be used for resolving champion ability image if it's an array */
+export async function gameAbilityImage(abilityId: IGameAbilityId, imgIndex?: number): Promise<IGameImageData> {
 	const imageAbilityId = abilityId.type === AbilityType.effect ? EFFECTS_META[abilityId.id].sourceAbility : abilityId;
 
 	if (!imageAbilityId) {
@@ -88,7 +89,7 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<IGame
 	const rawAbilityImage = champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.image;
 
 	return [
-		abilityImage(typeof rawAbilityImage === 'string' ? rawAbilityImage : rawAbilityImage[0]!, imageAbilityId.id),
+		abilityImage(typeof rawAbilityImage === 'string' ? rawAbilityImage : (rawAbilityImage[imgIndex === undefined ? 0 : imgIndex] ?? rawAbilityImage[0]!), imageAbilityId.id),
 		abilityImageSize(imageAbilityId.id),
 		undefined,
 		champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.name,

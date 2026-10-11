@@ -130,7 +130,7 @@ export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySp
 
 type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
-export type IInternalDataOf<Id extends keyof TChampionSpecifics> = Id extends keyof IChampionInternalDataMap ? IChampionInternalDataMap[Id] : never;
+export type IInternalDataOf<Id extends IChampionId> = Id extends keyof IChampionInternalDataMap ? IChampionInternalDataMap[Id] : never;
 
 export type IInternalItemDataOf<K extends keyof TItemNameToId> = K extends any ? IGameAbilityData<any, (typeof ITEM_SPECIFICS)[TItemNameToId[K] & keyof typeof ITEM_SPECIFICS]> : never;
 
@@ -359,3 +359,6 @@ export interface IDeriveProgressFn<Maybe extends boolean = false, T extends ICha
 export interface IExtraInactiveFn {
 	(self: DamageSource): boolean | undefined;
 }
+
+/** for extra component utils, will be called on `damageSource.internalData` watch. Could make it watch other things or support watching arbitrary value but for now (26.20) it's only for Jinx and should be enough */
+export type IVariantImgIndexGetter<V, Id extends IChampionId | undefined = undefined> = [watchSource: (self: DamageSource<Id>) => V, getImageIndex: (value: V) => number | undefined];
