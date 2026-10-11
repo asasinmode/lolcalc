@@ -59,11 +59,16 @@ import Jinx from './champion/Jinx.ts';
 import Kaisa from './champion/Kaisa.ts';
 import Kalista from './champion/Kalista.ts';
 import Karma from './champion/Karma.ts';
+import Karthus from './champion/Karthus.ts';
+import Kassadin from './champion/Kassadin.ts';
+import Katarina from './champion/Katarina.ts';
 import Kayle from './champion/Kayle.ts';
 import Kayn from './champion/Kayn.ts';
+import Kennen from './champion/Kennen.ts';
 import Khazix from './champion/Khazix.ts';
 import Kindred from './champion/Kindred.ts';
 import Kled from './champion/Kled.ts';
+import KogMaw from './champion/KogMaw.ts';
 import KSante from './champion/KSante.ts';
 import LeeSin from './champion/LeeSin.ts';
 import Locke from './champion/Locke.ts';
@@ -201,11 +206,16 @@ export const CHAMPION_SPECIFICS = {
 	Kaisa,
 	Kalista,
 	Karma,
+	Karthus,
+	Kassadin,
+	Katarina,
 	Kayle,
 	Kayn,
+	Kennen,
 	Khazix,
 	Kindred,
 	Kled,
+	KogMaw,
 	LeeSin,
 	Locke,
 	Mel,
@@ -358,6 +368,7 @@ export interface IChampionInternalDataMap {
 		runningTowardsEnemy: number;
 		enemiesNearby: number;
 	};
+	KogMaw: { passiveMSProgress: number };
 	LeeSin: { hasPassiveStack: number };
 	Mordekaiser: { isPassiveMSActive: number };
 	Naafiri: { passiveStacks: number };

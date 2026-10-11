@@ -40,7 +40,7 @@ export default {
 	passive: {
 		maxStacks: passiveMaxStacks,
 		derivedMS: ((progress, self): number => {
-			return (self?.stats.value.variables.jinxPassiveMoveSpeed ?? calculatePassiveMS(self.champion.value!, progress, self.internalData.value.passiveStacks)) * 100;
+			return (self?.stats.value.variables.jinxPassiveMS ?? calculatePassiveMS(self.champion.value!, progress, self.internalData.value.passiveStacks)) * 100;
 		}) satisfies IDeriveProgressFn<false, 'Jinx'>,
 		calculateSlow: calculatePassiveMS,
 		variables: defineChampionVariables<'Jinx', typeof IJinx, 'passive'>()({
@@ -51,7 +51,7 @@ export default {
 			calculate(self) {
 				return {
 					BonusMSPercent: {
-						value: self.stats.value.variables.jinxPassiveMoveSpeed ?? 0,
+						value: self.stats.value.variables.jinxPassiveMS ?? 0,
 					},
 					BonusAS: {
 						value: self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0,
@@ -115,8 +115,8 @@ export default {
 						allAbilitiesVariants: self.allAbilityVariants.value,
 					};
 
-					calculatedVariables.jinxPassiveMoveSpeed = calculatePassiveMS(self.champion.value!, passiveMSProgress, passiveStacks);
-					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.jinxPassiveMoveSpeed;
+					calculatedVariables.jinxPassiveMS = calculatePassiveMS(self.champion.value!, passiveMSProgress, passiveStacks);
+					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.jinxPassiveMS;
 
 					const as = championAbilityVariableValue('ASBuff', passiveParams);
 					if (typeof as.value === 'number') {

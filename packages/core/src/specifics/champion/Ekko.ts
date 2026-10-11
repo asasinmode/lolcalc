@@ -35,7 +35,7 @@ export default {
 					if (typeof ms.value === 'number') {
 						calculatedVariables.totalBonusPercentMoveSpeed += ms.value;
 					} else {
-						console.warn('[CHAMPION_SPECIFICS ekko] failed to calculate passive ms');
+						console.warn('[CHAMPION_SPECIFICS ekko] failed to calculate passive ms', ms);
 					}
 				}
 			},

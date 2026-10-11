@@ -164,6 +164,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 			}),
 		],
 	},
+	KogMaw: {
+		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'KogMaw', 'passive', 0), 'passiveMSProgress', 'Icathian Surprise move speed (when dead)', CHAMPION_SPECIFICS.KogMaw.passive.derivedMS),
+	},
 	LeeSin: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'LeeSin', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},

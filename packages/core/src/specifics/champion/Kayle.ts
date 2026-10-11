@@ -65,7 +65,7 @@ export default {
 				if (typeof attackSpeedPerStack.value === 'number') {
 					championPassiveStats.bonusAttackSpeedPercent = (self.internalData.value.passiveStacks * attackSpeedPerStack.value) / 100;
 				} else {
-					console.warn('[CHAMPION_SPECIFICS kayle] failed to calculate passive attack speed');
+					console.warn('[CHAMPION_SPECIFICS kayle] failed to calculate passive attack speed', attackSpeedPerStack);
 				}
 
 				if (self.internalData.value.passiveStacks === passiveMaxStacks(self)) {

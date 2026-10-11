@@ -19,4 +19,9 @@ export default {
 			};
 		},
 	}),
+	passive: {
+		variables: defineChampionVariables<'Karma', typeof IKarma, 'passive'>()({
+			uninteresting: ['SpellMantraRefund'],
+		}),
+	},
 } satisfies IChampionSpecific<'Karma'>;
