@@ -273,6 +273,7 @@ if (!championData || championData?.version !== latestVersion) {
 
 							const dedicatedChampionFilePath = path.join(import.meta.dirname, `../packages/data/files/champion/${id}.json`);
 							const championFileDataStringtable: IChampion['stringtable'] = {};
+							const knownOmittedVariantObjectNames: string[] = [];
 
 							const dedicatedChampionFileData: IChampion = {
 								id,
@@ -282,7 +283,8 @@ if (!championData || championData?.version !== latestVersion) {
 								stats,
 								abilities: Object.fromEntries(
 									(['q', 'w', 'e', 'r', 'passive'] satisfies IChampionAbilityKey[]).map((abilityKey, index) => {
-										const { maxLevel, variants } = championAbilityData([abilityKey, index], championId as IChampionId, additionalData, characterRootKey);
+										const { maxLevel, variants, knownOmittedVariantObjectNames: abilityKnownOmitted } = championAbilityData([abilityKey, index], championId as IChampionId, additionalData, characterRootKey);
+										abilityKnownOmitted && knownOmittedVariantObjectNames.push(...abilityKnownOmitted);
 
 										return [
 											abilityKey,
@@ -309,11 +311,11 @@ if (!championData || championData?.version !== latestVersion) {
 								Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
 							} else {
 								const savedVariantDataKeys = new Set(Object.values(dedicatedChampionFileData.abilities).flatMap((ability) => ability.variants.map((variant) => variant.dataKey)));
-								const mAbilitiesObjectNames: { mAbility: string; mRootSpell: string }[] = additionalData[characterRootKey].mAbilities?.map((mAbility: string) => {
+								const mAbilitiesObjectNames: { mAbility: string; mRootSpell: string; ObjectName: string }[] = additionalData[characterRootKey].mAbilities?.map((mAbility: string) => {
 									const abilityData = additionalData?.[mAbility];
-									return { mAbility, mRootSpell: abilityData?.mRootSpell };
+									return { mAbility, mRootSpell: abilityData?.mRootSpell, ObjectName: abilityData?.mRootSpell && additionalData?.[abilityData.mRootSpell]?.ObjectName };
 								});
-								const potentiallyMissedAbilities = mAbilitiesObjectNames?.filter(({ mRootSpell }) => !savedVariantDataKeys.has(mRootSpell));
+								const potentiallyMissedAbilities = mAbilitiesObjectNames?.filter(({ mRootSpell, ObjectName }) => !savedVariantDataKeys.has(mRootSpell) && !knownOmittedVariantObjectNames?.includes(ObjectName));
 								if (potentiallyMissedAbilities?.length) {
 									console.warn(`potentially missed ${championId} champion ability variant`, potentiallyMissedAbilities);
 								}
@@ -1971,7 +1973,7 @@ function championAbilityData(
 	championId: IChampionId,
 	championData: any,
 	characterRootKey: string,
-): IChampionAbility {
+): IChampionAbility & { knownOmittedVariantObjectNames?: string[] } {
 	const { mCharacterPassiveSpell, spells, SpellLevelUpInfoList: spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityInfo[1] === 4 ? mCharacterPassiveSpell : spells[abilityInfo[1]];
 
@@ -1992,11 +1994,14 @@ function championAbilityData(
 	}
 
 	const specific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[championId]?.[abilityInfo[0]];
-	if (specific?.additionalVariantsObjectNames) {
-		championDataEntries ??= Object.entries(championData);
-		for (const additionalObjectName of specific?.additionalVariantsObjectNames) {
-			const entry = championDataEntries.find(([, value]) => value.ObjectName === additionalObjectName);
-			entry && variantKeys.push(entry[0]);
+	const knownOmittedVariantObjectNames = specific?.omittedVariantObjectNames;
+	if (specific) {
+		if (specific.additionalVariantsObjectNames) {
+			championDataEntries ??= Object.entries(championData);
+			for (const additionalObjectName of specific?.additionalVariantsObjectNames) {
+				const entry = championDataEntries.find(([, value]) => value.ObjectName === additionalObjectName);
+				entry && variantKeys.push(entry[0]);
+			}
 		}
 	}
 
@@ -2015,7 +2020,7 @@ function championAbilityData(
 		maxLevel = 0;
 	}
 
-	return { maxLevel, variants };
+	return { maxLevel, variants, knownOmittedVariantObjectNames };
 }
 
 function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {

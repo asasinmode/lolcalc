@@ -82,7 +82,6 @@ export interface IListedChampion<T extends IChampionId = any> extends Pick<ICham
 
 export interface IChampionAbility {
 	maxLevel: number;
-	cooldownTime?: number[];
 	/**
 	 * champion ability can have multiple variants. Most champions abilities have 1 variant, but shapeshifters like Elise/Nidalee/Jayce have a variant for each form and Aphelios has many Q/E variants
 	 * except for Aphelios, only first 2 variants are actually meaningful (used/shown in game as that ability). Abilities can have more variants than just 2 though (for example Elise Q). These additional variants are used for resolving the variables shown in the main 2 variants' tooltips and aren't supposed to be otherwise shown to the user

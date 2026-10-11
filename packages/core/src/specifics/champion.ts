@@ -70,6 +70,7 @@ import Kindred from './champion/Kindred.ts';
 import Kled from './champion/Kled.ts';
 import KogMaw from './champion/KogMaw.ts';
 import KSante from './champion/KSante.ts';
+import Leblanc from './champion/Leblanc.ts';
 import LeeSin from './champion/LeeSin.ts';
 import Locke from './champion/Locke.ts';
 import Mel from './champion/Mel.ts';
@@ -216,6 +217,7 @@ export const CHAMPION_SPECIFICS = {
 	Kindred,
 	Kled,
 	KogMaw,
+	Leblanc,
 	LeeSin,
 	Locke,
 	Mel,
@@ -309,6 +311,9 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	 * maybe there's a way not to have to declare these manually but in the ability's data I don't see anything that would point an ability's object to what it belongs to (QWER). `updateData` script warns about potential detected but missed ability variants
 	 */
 	additionalVariantsObjectNames?: string[];
+	/** additional variants to omit from any potential detected ones. They are not skipped when found, just not warned about when detecting any missed ones */
+	omittedVariantObjectNames?: string[];
+
 	/** for when an ability variant has multiple images and they should dynamically change */
 	abilityImgVariantIndex?: IAbilityImgIndexGetter<any, Id>;
 	[key: string]: any;
