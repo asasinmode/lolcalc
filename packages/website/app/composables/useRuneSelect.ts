@@ -22,7 +22,7 @@ const _component = defineComponent(
 		h(LolRuneSelect, {
 			ref: dialogRef,
 			modelValue: valueRef.value?.value,
-			'onUpdate:modelValue': function (value) {
+			'onUpdate:modelValue' (value) {
 				valueRef.value!.value = value!;
 			},
 			onClose() {

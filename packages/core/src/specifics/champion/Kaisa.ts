@@ -82,13 +82,13 @@ export default {
 			},
 			meta: {
 				'f1.1': {
-					displayedName: 'EvolveAttackDamage',
+					displayedName: 'EvolveAD',
 				},
 				'f2.1': {
-					displayedName: 'EvolveAbilityPower',
+					displayedName: 'EvolveAP',
 				},
 				'f3.1': {
-					displayedName: 'EvolveAttackSpeed',
+					displayedName: 'EvolveAS',
 					multiplier: 100,
 					roundReplaced: 1,
 				},

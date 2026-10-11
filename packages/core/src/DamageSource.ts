@@ -1771,8 +1771,9 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 	let image: string;
 	if (typeof variant.image === 'string') {
 		image = variant.image;
-	} else if (abilitySpecific && damageSource && !damageSource?.isLoading.value) {
-		image = abilitySpecific.resolveImage?.(variant.image, damageSource) ?? variant.image[0]!;
+	} else if (abilitySpecific?.abilityImgVariantIndex && damageSource && !damageSource?.isLoading.value) {
+		const [getValue, getIndex] = abilitySpecific.abilityImgVariantIndex;
+		image = variant.image[getIndex(getValue(damageSource))] ?? variant.image[0]!;
 	} else {
 		image = variant.image[0]!;
 	}

@@ -145,6 +145,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 			'form',
 			'Form',
 			Object.entries(CHAMPION_SPECIFICS.Kayn.passive.formOptions).map(([key, value]) => [value, key]),
+			{ variantImgIndex: CHAMPION_SPECIFICS.Kayn.passive.abilityImgVariantIndex },
 		),
 	},
 	Kindred: {

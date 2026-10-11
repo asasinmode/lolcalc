@@ -1308,7 +1308,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		);
 	},
 	/** hashed `ByCharLevelBreakpointsCalculationPart` */
-	'{4ce08984}': function (variable: IGameVariablesByType['{4ce08984}'], _whole, meta) {
+	'{4ce08984}' (variable: IGameVariablesByType['{4ce08984}'], _whole, meta) {
 		meta.accessedVariables?.add(variable['{91d404a5}']);
 		const level1ValueResult = variable['{91d404a5}'] !== undefined ? meta.variableValueFn(variable['{91d404a5}'], meta.variableValueParams) : undefined;
 
@@ -1345,7 +1345,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		};
 	},
 	/** same as `ByCharLevelInterpolationCalculationPart` but with the keys hashed and variables needing resolving, not being directly in `mStartValue` and `mEndValue` */
-	'{ee18a47b}': function (variable: IGameVariablesByType['{ee18a47b}'], whole, meta) {
+	'{ee18a47b}' (variable: IGameVariablesByType['{ee18a47b}'], whole, meta) {
 		meta.accessedVariables?.add(variable.StartDataValue);
 		const minResult = meta.variableValueFn(variable.StartDataValue, meta.variableValueParams);
 		meta.accessedVariables?.add(variable.EndDataValue);
@@ -1368,7 +1368,7 @@ export const VARIABLE_CALCULATION_FNS = {
 		return rv;
 	},
 	/** base + per level value but with the keys hashed and variables needing resolving */
-	'{b22609db}': function (variable: IGameVariablesByType['{b22609db}'], _whole, meta) {
+	'{b22609db}' (variable: IGameVariablesByType['{b22609db}'], _whole, meta) {
 		const { '{91d404a5}': baseValueVariable, '{b2cd0eb0}': perLevelValueVariable } = variable;
 
 		meta.accessedVariables?.add(baseValueVariable);
@@ -1657,7 +1657,7 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		return rv;
 	},
-	'{f3cbe7b2}': function (variable: IGameVariablesByType['{f3cbe7b2}'], _whole, meta) {
+	'{f3cbe7b2}' (variable: IGameVariablesByType['{f3cbe7b2}'], _whole, meta) {
 		meta.accessedVariables?.add(variable.mSpellCalculationKey);
 		return meta.variableValueFn(variable.mSpellCalculationKey, meta.variableValueParams);
 	},

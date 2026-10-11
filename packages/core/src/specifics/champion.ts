@@ -117,7 +117,7 @@ import Yone from './champion/Yone.ts';
 import Zaahen from './champion/Zaahen.ts';
 import Zeri from './champion/Zeri.ts';
 import Zilean from './champion/Zilean.ts';
-import type { IEffectControlsProps, ISpecificVariables } from './index';
+import type { IEffectControlsProps, ISpecificVariables, IAbilityImgIndexGetter } from './index';
 
 /** specific champions' helpers, utils and calculations */
 export const CHAMPION_SPECIFICS = {
@@ -299,8 +299,8 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	 * maybe there's a way not to have to declare these manually but in the ability's data I don't see anything that would point an ability's object to what it belongs to (QWER). `updateData` script warns about potential detected but missed ability variants
 	 */
 	additionalVariantsObjectNames?: string[];
-	/** for when a variant has multiple images and they should dynamically changed. Currently used for Jinx Q */
-	resolveImage?: (variantImage: string[], self: DamageSource<Id>) => string;
+	/** for when an ability variant has multiple images and they should dynamically change */
+	abilityImgVariantIndex?: IAbilityImgIndexGetter<any, Id>;
 	[key: string]: any;
 	/**
 	 * ability's variant specific

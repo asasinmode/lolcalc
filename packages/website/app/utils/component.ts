@@ -2,7 +2,7 @@ import type { DamageSource, IDamageSource, IDamageSourceEffect } from '@lolcalc/
 import type { IEffectAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { gameAbilityImage, replaceGameIcons, type IGameImageData } from '@lolcalc/core/misc';
-import type { IEffectControlsProps, IExtraInactiveFn, IVariantImgIndexGetter, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
+import type { IEffectControlsProps, IExtraInactiveFn, IAbilityImgIndexGetter, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import { AbilityType } from '@lolcalc/shared';
 import type { ComputedRef, SlotsType } from 'vue';
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
@@ -282,7 +282,7 @@ export function enumExtra<T extends IGameAbilityId>(
 	}: {
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 		/** will be computed and watched, then passed to `gameAbilityImage` */
-		variantImgIndex?: IVariantImgIndexGetter<any>;
+		variantImgIndex?: IAbilityImgIndexGetter<any, any>;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
@@ -339,7 +339,7 @@ async function extraComponentData(
 	}: {
 		isEffect?: boolean;
 		onUpdate?: IExtraOnValueUpdate;
-		variantImgIndex?: IVariantImgIndexGetter<any>;
+		variantImgIndex?: IAbilityImgIndexGetter<any>;
 	} = {},
 ): Promise<[imgSrc: MaybeRef<IGameImageData>, stringifiedAbilityId: string, value: ComputedRef<any>, updateValue: (value: any) => void, appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined]> {
 	const appliedEffect = isEffect ? computed<IDamageSourceEffect | undefined>(() => damageSource?.appliedEffects.value.find((effect) => effect.abilityId.id === abilityId.id)) : undefined;

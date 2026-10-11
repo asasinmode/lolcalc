@@ -129,6 +129,7 @@
 					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynW",
 					"image": [
 						"assets/characters/kayn/hud/icons2d/kayn_w_primary.png",
+						"assets/characters/kayn/hud/icons2d/kayn_w_ass.png",
 						"assets/characters/kayn/hud/icons2d/kayn_w_slay.png"
 					],
 					"mana": [40, 45, 50, 55, 60, 65],
@@ -255,8 +256,8 @@
 					"objectName": "KaynR",
 					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR",
 					"image": [
-						"assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
 						"assets/characters/kayn/hud/icons2d/kayn_r1_disabled.png",
+						"assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
 						"assets/characters/kayn/hud/icons2d/kayn_r1_slay.png"
 					],
 					"mana": [100, 100, 100, 0, 0, 0],

@@ -360,5 +360,4 @@ export interface IExtraInactiveFn {
 	(self: DamageSource): boolean | undefined;
 }
 
-/** for extra component utils, will be called on `damageSource.internalData` watch. Could make it watch other things or support watching arbitrary value but for now (26.20) it's only for Jinx and should be enough */
-export type IVariantImgIndexGetter<V, Id extends IChampionId | undefined = undefined> = [watchSource: (self: DamageSource<Id>) => V, getImageIndex: (value: V) => number | undefined];
+export type IAbilityImgIndexGetter<V, Id extends IChampionId | undefined = undefined> = [getValue: (self: DamageSource<Id>) => V, getIndex: (value: V) => number];

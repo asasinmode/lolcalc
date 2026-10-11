@@ -11,6 +11,7 @@
 		"no-unused-vars": "off",
 		"no-dupe-keys": "off",
 		"no-console": ["warn", { "allow": ["warn", "error"] }],
+		"object-shorthand": ["warn", "always"],
 		"typescript/consistent-type-imports": "error",
 		"typescript/consistent-type-exports": "warn",
 		"typescript/consistent-type-definitions": ["warn", "interface"],

@@ -4,7 +4,7 @@ import { formatImagePath } from '@lolcalc/data/meta.ts';
 import type { IChampion } from '@lolcalc/data/types.js';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
-import type { IDeriveProgressFn, IVariantImgIndexGetter } from '../index.ts';
+import type { IDeriveProgressFn, IAbilityImgIndexGetter } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 /* doesn't seem to be in passive's data */
@@ -80,10 +80,7 @@ export default {
 				abillityVariant.image = variantData.mSpell.mImgIconName.map(formatImagePath);
 			}
 		},
-		resolveImage(variantImage, self) {
-			return variantImage[self.internalData.value.qBuff === qBuffOptions.fishbones ? 0 : 1]!;
-		},
-		abilityImgVariantIndex: [(self) => self.internalData.value.qBuff, (qBuff) => (qBuff === qBuffOptions.fishbones ? 0 : 1)] as IVariantImgIndexGetter<number, 'Jinx'>,
+		abilityImgVariantIndex: [(self) => self.internalData.value.qBuff, (qBuff) => (qBuff === qBuffOptions.fishbones ? 0 : 1)] as IAbilityImgIndexGetter<number, 'Jinx'>,
 		variables: defineChampionVariables<'Jinx', typeof IJinx, 'q'>()({
 			known: {
 				MinigunAS: [],
