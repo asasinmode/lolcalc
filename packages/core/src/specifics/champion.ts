@@ -76,6 +76,9 @@ import Leona from './champion/Leona.ts';
 import Lillia from './champion/Lillia.ts';
 import Lissandra from './champion/Lissandra.ts';
 import Locke from './champion/Locke.ts';
+import Lucian from './champion/Lucian.ts';
+import Lulu from './champion/Lulu.ts';
+import Lux from './champion/Lux.ts';
 import Mel from './champion/Mel.ts';
 import MonkeyKing from './champion/MonkeyKing.ts';
 import Mordekaiser from './champion/Mordekaiser.ts';
@@ -226,6 +229,9 @@ export const CHAMPION_SPECIFICS = {
 	Lillia,
 	Lissandra,
 	Locke,
+	Lucian,
+	Lulu,
+	Lux,
 	Mel,
 	MonkeyKing,
 	Mordekaiser,
