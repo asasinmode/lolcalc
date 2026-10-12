@@ -23,7 +23,7 @@ export default {
 				if (typeof burnPercent.value === 'number') {
 					HealthDamage = (burnPercent.value * (target?.stats.value.total.hp ?? 0)) / 100;
 				} else {
-					console.warn('[CHAMPION_SPECIFICS aurora] failed to calculate pasive proc percent dmg', burnPercent);
+					console.warn('[CHAMPION_SPECIFICS brand] failed to calculate passive burn percent', burnPercent);
 				}
 
 				const explosionPercent = championAbilityVariableValue('ExplosionDamage', {
@@ -34,7 +34,7 @@ export default {
 				if (typeof explosionPercent.value === 'number') {
 					CalculatedExplosionDamage = explosionPercent.value * (target?.stats.value.total.hp ?? 0);
 				} else {
-					console.warn('[CHAMPION_SPECIFICS aurora] failed to calculate pasive proc percent dmg', explosionPercent);
+					console.warn('[CHAMPION_SPECIFICS brand] failed to calculate passive explosion percent', explosionPercent);
 				}
 
 				return {

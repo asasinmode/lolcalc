@@ -37,7 +37,7 @@ export default {
 				if (typeof percent.value === 'number') {
 					QDamage = percent.value * (target?.stats.value.total.hp ?? 0);
 				} else {
-					console.warn('[CHAMPION_SPECIFICS aurelion sol] failed to calculate pasive q dmg percent', percent);
+					console.warn('[CHAMPION_SPECIFICS aurelion sol] failed to calculate passive q dmg percent', percent);
 				}
 
 				const wDistancePerStack = championAbilityVariableValue('DistancePerMass', {

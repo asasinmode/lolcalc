@@ -21,7 +21,7 @@ export default {
 				if (typeof dotPercent.value === 'number') {
 					DotDamage = dotPercent.value * (target?.stats.value.total.hp ?? 0);
 				} else {
-					console.warn('[CHAMPION_SPECIFICS lillia] failed to calculate pasive percent dmg', dotPercent);
+					console.warn('[CHAMPION_SPECIFICS lillia] failed to calculate passive percent dmg', dotPercent);
 				}
 
 				return {

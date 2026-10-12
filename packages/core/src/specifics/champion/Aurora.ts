@@ -21,7 +21,7 @@ export default {
 				if (typeof procDamage.value === 'number') {
 					CalculatedProcDamage = procDamage.value * (target?.stats.value.total.hp ?? 0);
 				} else {
-					console.warn('[CHAMPION_SPECIFICS aurora] failed to calculate pasive proc percent dmg', procDamage);
+					console.warn('[CHAMPION_SPECIFICS aurora] failed to calculate passive proc percent dmg', procDamage);
 				}
 
 				return {

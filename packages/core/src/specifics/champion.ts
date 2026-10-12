@@ -79,9 +79,16 @@ import Locke from './champion/Locke.ts';
 import Lucian from './champion/Lucian.ts';
 import Lulu from './champion/Lulu.ts';
 import Lux from './champion/Lux.ts';
+import Malphite from './champion/Malphite.ts';
+import Malzahar from './champion/Malzahar.ts';
+import Maokai from './champion/Maokai.ts';
+import MasterYi from './champion/MasterYi.ts';
 import Mel from './champion/Mel.ts';
+import Milio from './champion/Milio.ts';
+import MissFortune from './champion/MissFortune.ts';
 import MonkeyKing from './champion/MonkeyKing.ts';
 import Mordekaiser from './champion/Mordekaiser.ts';
+import Morgana from './champion/Morgana.ts';
 import Naafiri from './champion/Naafiri.ts';
 import Nami from './champion/Nami.ts';
 import Nasus from './champion/Nasus.ts';
@@ -232,9 +239,16 @@ export const CHAMPION_SPECIFICS = {
 	Lucian,
 	Lulu,
 	Lux,
+	Malphite,
+	Malzahar,
+	Maokai,
+	MasterYi,
 	Mel,
+	Milio,
+	MissFortune,
 	MonkeyKing,
 	Mordekaiser,
+	Morgana,
 	Naafiri,
 	Nami,
 	Nasus,
