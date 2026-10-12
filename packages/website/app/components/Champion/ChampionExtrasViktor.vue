@@ -8,7 +8,7 @@ import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
 
-defineEmits<IExtraComponentEmits>();
+const emit = defineEmits<IExtraComponentEmits>();
 
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 
@@ -34,17 +34,17 @@ function toggle(abilityIndex: number) {
 		(props.damageSource as DamageSource<'Viktor'>).internalData.value.passiveAbilityUpgradesMask &= ~(1 << 3);
 	}
 }
+
+const passiveAbilityId = GameAbilityId.build(AbilityType.champion, 'Viktor', 'passive', 0);
+
+function onImageMouseenter(event: MouseEvent) {
+	emit('imgMouseenter', event, passiveAbilityId);
+}
 </script>
 
 <template>
 	<article class="extras-viktor-passive-ability-upgrades">
-		<img
-			:src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')"
-			:width="imgSize"
-			:height="imgSize"
-			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(AbilityType.champion, 'Viktor', 'passive', 0))"
-		/>
+		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')" :width="imgSize" :height="imgSize" aria-hidden="true" @mouseenter="onImageMouseenter" />
 		<h5>abilities evolved</h5>
 		<label v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]" :key="abilityKey" :for="`evolve-${abilityKey}-${idSuffix}`">
 			<input :id="`evolve-${abilityKey}-${idSuffix}`" type="checkbox" :checked="isEvolved(abilityIndex)" :disabled="abilityKey === 'r' && notAllBasicEvolved" @change="toggle(abilityIndex)" />

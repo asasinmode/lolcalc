@@ -67,6 +67,7 @@ let damageSourcesCount = 0;
 let hueIncrement = 0;
 
 export class DamageSource<Id extends IChampionId | undefined = any> {
+	/** a stringified number (that's > 0) or a string `results-copy` */
 	id: string;
 	color: string;
 	isResultsCopy: boolean;
@@ -202,8 +203,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	/** one time use when restoring with `fromStringifiedData`. Contains stringified applied effect sources (`[s|t]${number}`) for usage after all sources/targets have been restored to set appliedEffects sources. Consumed (after restoring damage sources) in `useCalculatorState().restoreState` */
 	fromStringifiedEffectSources?: (string | undefined)[];
 
-	/** for stringifying effect's source inside of the app */
-	sourcesTargetsRef?: [sources: ComputedRef<string[]>, targets: ComputedRef<string[]>];
+	/** for stringifying effect's source inside of the app and some calculation logic like Milio passive */
+	sourcesTargetsRef?: [[sourceIds: ComputedRef<string[]>, sources: ComputedRef<DamageSource[]>], [targetIds: ComputedRef<string[]>, targets: ComputedRef<DamageSource[]>]];
 
 	/** for now set when a damage source is duplicated and has to have some parts overriden, like Aphelios gravitum slow component (check his extras) */
 	abilityDynamicVariablesOverride?: Partial<Record<IChampionAbilityKey, NonNullable<IDynamicVariables['values']>>>;
@@ -218,7 +219,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		 * note that `this.champion.value` will be empty without it and needs to be set manually after cloning/creating with this set to `true`
 		 */
 		isResultsCopy = false,
-		sourcesTargetsRef?: [ComputedRef<string[]>, ComputedRef<string[]>],
+		sourcesTargetsRef?: [[ComputedRef<string[]>, ComputedRef<DamageSource[]>], [ComputedRef<string[]>, ComputedRef<DamageSource[]>]],
 	) {
 		const hue = ((isResultsCopy ? hueIncrement : ++hueIncrement) * 137.508) % 360;
 		this.isResultsCopy = isResultsCopy;
@@ -674,11 +675,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const data = effect.data.value.map((v) => (v === undefined ? '' : roundNumber(v, ROUNDING_PRECISION))).join('*');
 			let sourceData: string | undefined;
 			if (this.sourcesTargetsRef && effect.source.value) {
-				let index = this.sourcesTargetsRef[0].value.indexOf(effect.source.value.id);
+				let index = this.sourcesTargetsRef[0][0].value.indexOf(effect.source.value.id);
 				if (~index) {
 					sourceData = `s${index}`;
 				} else {
-					index = this.sourcesTargetsRef[1].value.indexOf(effect.source.value.id);
+					index = this.sourcesTargetsRef[1][0].value.indexOf(effect.source.value.id);
 					if (~index) {
 						sourceData = `t${index}`;
 					} else if (effect.source.value.anythingFilled.value) {

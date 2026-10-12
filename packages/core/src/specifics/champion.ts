@@ -1,6 +1,7 @@
 import type { IChampionAbilityVariant, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
+import type { ComputedRef } from 'vue';
 import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupDataSetup, IProviderGroupImageText } from '../DamageSource';
 import Aatrox from './champion/Aatrox.ts';
 import Ahri from './champion/Ahri.ts';
@@ -410,6 +411,7 @@ export interface IChampionInternalDataMap {
 	KogMaw: { passiveMSProgress: number };
 	LeeSin: { hasPassiveStack: number };
 	Lissandra: { applyZombieSlow: number };
+	Milio: { passiveAllySourceId: string; _passiveAllyAD: ComputedRef<number> };
 	Mordekaiser: { isPassiveMSActive: number };
 	Naafiri: { passiveStacks: number };
 	Nami: {

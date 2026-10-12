@@ -23,8 +23,11 @@ const STATE_VERSION = '1';
 export interface ICalculatorState {
 	damageSources: ShallowRef<DamageSource[]>;
 	damageTargets: ShallowRef<DamageSource[]>;
-	/** map of **filled** sources/targets ids for restoring/saving DamageSource.appliedEffects state */
-	sourcesTargetsRef: [sources: ComputedRef<string[]>, targets: ComputedRef<string[]>];
+	/**
+	 * map of **filled** sources/targets ids for restoring/saving DamageSource.appliedEffects state
+	 * also has actual `DamageSource`s for some calculations like milio passive
+	 */
+	sourcesTargetsRef: [[sourceIds: ComputedRef<string[]>, sources: ComputedRef<DamageSource[]>], [targetIds: ComputedRef<string[]>, targets: ComputedRef<DamageSource[]>]];
 	resultColumns: ShallowRef<IDamageResultTableColumn[]>;
 	resultSections: ShallowRef<IDamageResultTableSection[]>;
 	resultsTableFlip: Ref<boolean>;
@@ -168,8 +171,8 @@ export function initCalculatorState(): ICalculatorState {
 		damageSources,
 		damageTargets,
 		sourcesTargetsRef: [
-			computed(() => damageSources.value.filter((source) => source.anythingFilled.value).map((source) => source.id)),
-			computed(() => damageTargets.value.filter((target) => target.anythingFilled.value).map((target) => target.id)),
+			[computed(() => damageSources.value.filter((source) => source.anythingFilled.value).map((source) => source.id)), computed(() => damageSources.value.filter((source) => source.anythingFilled.value))],
+			[computed(() => damageTargets.value.filter((target) => target.anythingFilled.value).map((target) => target.id)), computed(() => damageTargets.value.filter((target) => target.anythingFilled.value))],
 		],
 		resultColumns,
 		resultSections,

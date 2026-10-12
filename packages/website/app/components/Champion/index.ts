@@ -5,7 +5,7 @@ import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect'
 import { ITEMS_BY_NAME } from '@lolcalc/data/index';
 import type { IChampionId } from '@lolcalc/data/types';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared';
-import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor } from '#components';
+import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor, ChampionExtrasMilio } from '#components';
 import type { ISpecificComponents } from '~/utils/types';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
@@ -172,6 +172,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	},
 	Lissandra: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Lissandra', 'passive', 0), 'applyZombieSlow', 'zombie slow', true, true),
+	},
+	Milio: {
+		extras: ChampionExtrasMilio,
 	},
 	Mordekaiser: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Mordekaiser', 'passive', 0), 'isPassiveMSActive', 'is passive active (3 hits)', false),

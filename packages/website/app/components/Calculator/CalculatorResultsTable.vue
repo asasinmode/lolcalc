@@ -1523,7 +1523,7 @@ defineExpose({
 									<label :for="`results-table-header-select-${section.id}`">
 										{{ section.selectLabel }}
 									</label>
-									<select :id="`results-table-header-select-${section.id}`" v-model="section.selectValue" @input="addComputedSection(section.id)">
+									<select :id="`results-table-header-select-${section.id}`" v-model="section.selectValue" @change="addComputedSection(section.id)">
 										<option v-for="[value, optionText] in section.selectOptions" :key="value" :value>
 											{{ optionText }}
 										</option>
