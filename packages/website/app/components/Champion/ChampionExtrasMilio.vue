@@ -11,33 +11,20 @@ const emit = defineEmits<IExtraComponentEmits>();
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 const imgSize = abilityImageSize('Viktor');
 
+const selectEl = useTemplateRef('select');
+const { sourceOptions, targetOptions } = useDamageSourceOptions();
+
 const passiveAbilityId = GameAbilityId.build(AbilityType.champion, 'Milio', 'passive', 0);
 
 function onImageMouseenter(event: MouseEvent) {
 	emit('imgMouseenter', event, passiveAbilityId);
 }
 
-const { damageSources, damageTargets } = useCalculatorState();
-
 const allySourceId = computed(() => (props.damageSource as DamageSource<'Milio'>).internalData.value.passiveAllySourceId);
-const sourceOptions = computed(() => transformToOptions(damageSources.value));
-const targetOptions = computed(() => transformToOptions(damageTargets.value));
-
-type ICopyFromOption = [id: string, index: number, championName: string | undefined];
-
-function transformToOptions(from: DamageSource[]): ICopyFromOption[] {
-	return from
-		.map((source, index) => [source, index] as [DamageSource, number])
-		.filter(([source]) => source.anythingFilled.value)
-		.map(([source, index]) => [source.id, index, source.listedChampion.value?.name ?? '<empty>'] as ICopyFromOption);
-}
 
 function updateAllyId(event: Event) {
-	const value = (event.target as HTMLSelectElement).value;
-	(props.damageSource as DamageSource<'Milio'>).internalData.value.passiveAllySourceId = value;
+	(props.damageSource as DamageSource<'Milio'>).internalData.value.passiveAllySourceId = (event.target as HTMLSelectElement).value;
 }
-
-const selectEl = useTemplateRef('select');
 
 onMounted(() => {
 	if (selectEl.value) {

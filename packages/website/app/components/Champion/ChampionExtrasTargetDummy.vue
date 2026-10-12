@@ -1,5 +1,4 @@
 <script setup vapor lang="ts">
-import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { ALL_CHAMPION_STATS, IChampionStatName, IChampionStats } from '@lolcalc/shared';
@@ -7,14 +6,13 @@ import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared'
 import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
-
 defineEmits<IExtraComponentEmits>();
 
 const el = useTemplateRef('el');
 
 const { vMinor } = PATCH_VERSION;
-
 const { damageSources, damageTargets } = useCalculatorState();
+const { sourceOptions, targetOptions } = useDamageSourceOptions();
 
 const MODIFIABLE_CHAMPION_STATS = Object.fromEntries(
 	ALL_CHAMPION_STATS_ENTRIES.filter(([statName]) => !(['summonerHaste', 'ultimateHaste', 'basicHaste', 'immobilizingHaste'] as IChampionStatName[]).includes(statName)),
@@ -67,18 +65,7 @@ function resetAll() {
 	}
 }
 
-type ICopyFromOption = [id: string, index: number, championName: string | undefined];
-
-function transformToOptions(from: DamageSource[]): ICopyFromOption[] {
-	return from
-		.map((source, index) => [source, index] as [DamageSource, number])
-		.filter(([source]) => source.anythingFilled.value && source.id !== props.damageSource.id)
-		.map(([source, index]) => [source.id, index, source.listedChampion.value?.name ?? '<empty>'] as ICopyFromOption);
-}
-
 const copyStatsFrom = ref('');
-const sourceOptions = computed(() => transformToOptions(damageSources.value));
-const targetOptions = computed(() => transformToOptions(damageTargets.value));
 
 watch(
 	() => sourceOptions.value.length || targetOptions.value.length,
@@ -106,8 +93,8 @@ function copyFrom(event: SubmitEvent) {
 		return;
 	}
 
-	for (const statName of MODIFIABLE_CHAMPION_STATS) {
-		updateStat(statName as IChampionStatName, formatChampionStatValue(statName, source.stats.value[stats][statName]), el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement);
+	for (const statName in MODIFIABLE_CHAMPION_STATS) {
+		updateStat(statName as IChampionStatName, formatChampionStatValue(statName as IChampionStatName, source.stats.value[stats][statName as IChampionStatName]), el.value?.querySelector(`#${statName}-${props.idSuffix}`) as HTMLInputElement);
 	}
 }
 
