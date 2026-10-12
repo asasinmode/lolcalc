@@ -92,7 +92,11 @@ import Morgana from './champion/Morgana.ts';
 import Naafiri from './champion/Naafiri.ts';
 import Nami from './champion/Nami.ts';
 import Nasus from './champion/Nasus.ts';
+import Nautilus from './champion/Nautilus.ts';
+import Neeko from './champion/Neeko.ts';
 import Nidalee from './champion/Nidalee.ts';
+import Nilah from './champion/Nilah.ts';
+import Nocturne from './champion/Nocturne.ts';
 import Nunu from './champion/Nunu.ts';
 import Orianna from './champion/Orianna.ts';
 import Ornn from './champion/Ornn.ts';
@@ -252,7 +256,11 @@ export const CHAMPION_SPECIFICS = {
 	Naafiri,
 	Nami,
 	Nasus,
+	Nautilus,
+	Neeko,
 	Nidalee,
+	Nilah,
+	Nocturne,
 	Nunu,
 	Orianna,
 	Ornn,

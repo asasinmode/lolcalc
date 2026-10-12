@@ -29,7 +29,8 @@ export default {
 		},
 		variables: defineChampionVariables<'Nidalee', typeof INidalee, 'passive'>()({
 			known: {
-				HuntingPercentMS: [],
+				/* awkward because it has to be custom and is present in the description so hardcode the value here so it's shown in the results (which don't fully calculate the vars) */
+				HuntingPercentMS: [30],
 			},
 			calculate(self) {
 				const msVariable = championAbilityVariableValue('PassivePercentMS', {
@@ -45,11 +46,13 @@ export default {
 					HuntingPercentMS: msVariable,
 				};
 			},
+			/* PassivePercentMS is an R variable */
+			uninteresting: ['PassivePercentMS' as any, 'HuntingPercentMS'],
 		}),
 	},
 	w: {
 		0: {
-			/* add a variable used in MaxTraps formula but not saved in the data because the original value is empty and is override only for arena */
+			/* add a variable used in MaxTraps formula but not saved in the data. The original value is empty and is overridden for arena */
 			modifyVariantData(abilityVariant) {
 				abilityVariant.dataValues ??= {};
 				abilityVariant.dataValues.ModesBonusMaxTraps = Array.from({ length: 7 }).fill(0);

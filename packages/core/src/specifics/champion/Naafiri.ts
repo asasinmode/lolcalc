@@ -1,10 +1,12 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue, VARIABLE_CALCULATION_FNS } from '@lolcalc/core/variables/game.ts';
 import type INaafiri from '@lolcalc/data/files/champion/Naafiri.json';
+import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { ComputedRef } from 'vue';
 import { computed, watch } from 'vue';
 import type { IChampionSpecific } from '../champion.ts';
+import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Naafiri'>): ComputedRef<number> {
 	return computed((): number =>
@@ -40,5 +42,16 @@ export default {
 	},
 	passive: {
 		maxStacks: passiveMaxStacks,
+		variables: defineChampionVariables<'Naafiri', typeof INaafiri, 'passive'>()({
+			meta: {
+				PackmateTotalDamage: {
+					type: VariableType.physical,
+				},
+				FrenzyDamageTooltipOnly: {
+					type: VariableType.physical,
+				},
+			},
+			uninteresting: ['CooldownReduceOnAbilityHit', 'CooldownReduceOnKill', 'PackmateMonsterMod', 'PackmateTowerModifier', 'NonChampDamageModifier', 'MeleeAttackDamageModifier'],
+		}),
 	},
 } satisfies IChampionSpecific<'Naafiri'>;

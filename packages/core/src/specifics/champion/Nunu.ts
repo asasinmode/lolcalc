@@ -44,6 +44,7 @@ export default {
 					type: VariableType.physical,
 				},
 			},
+			uninteresting: ['ASIncrease', 'MSIncrease'],
 		}),
 		calculateBuffs: passiveCalculateBuffs,
 	},
