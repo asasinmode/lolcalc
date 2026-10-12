@@ -613,6 +613,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	getWatchable(): MaybeRefOrGetter[] {
 		return [
 			this.champion,
+			this.isLoading,
 			this.level,
 			() => this.items.value.map((item) => item?.id).join('-'),
 			() => this.runes.value.paths.primary,
