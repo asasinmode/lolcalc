@@ -28,6 +28,7 @@ import type { IGameImageData } from './misc.ts';
 import { gameAbilityImage, replaceGameIcons } from './misc.ts';
 import type { IChampionInternalDataMap, IChampionSpecific, IHypotheticalChampionSpecifics } from './specifics/champion';
 import { CHAMPION_SPECIFICS } from './specifics/champion.ts';
+import { cooldownReductionPercentageFromHaste } from './specifics/champion/shared.ts';
 import type { IHypotheticalDragonSpecifics } from './specifics/dragon';
 import { DRAGON_SPECIFICS } from './specifics/dragon.ts';
 import type { IEffectSpecific, IHypotheticalEffectSpecifics } from './specifics/effect';
@@ -1749,6 +1750,20 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		};
 	});
 
+	let additionalHaste = 0;
+	let cdr = 1;
+	if (damageSource) {
+		if (variant.isImmobilizing) {
+			additionalHaste += damageSource.stats.value.total.immobilizingHaste;
+		}
+		if (gameAbilityId.abilityKey !== 'r') {
+			additionalHaste += damageSource.stats.value.total.basicHaste;
+		} else {
+			additionalHaste += damageSource.stats.value.total.ultimateHaste;
+		}
+		cdr = 1 - cooldownReductionPercentageFromHaste(damageSource.stats.value.total.abilityHaste + additionalHaste) / 100;
+	}
+
 	if (champion.id !== 'TargetDummy' && cooldown && gameAbilityId.abilityKey !== 'passive') {
 		const firstCd = variant.cooldownTime![1]!;
 		let cooldownVaries = false;
@@ -1759,7 +1774,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 			abilityLevelVars ||= [];
 			abilityLevelVars.push({
 				name: 'Cooldown',
-				values: variant.cooldownTime!.slice(1, lastExtendedVariableIndex).map((v) => roundNumber(v * (damageSource?.stats.value.cdr ?? 1), 2)),
+				values: variant.cooldownTime!.slice(1, lastExtendedVariableIndex).map((v) => roundNumber(v * cdr, 2)),
 			});
 		}
 	}
@@ -1787,7 +1802,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		tooltipExtended: tooltipExtendedReplaced,
 		tooltipExtendedBelowLine: tooltipExtendedBLReplaced,
 		anyUnknownVariables,
-		cooldown: cooldown !== undefined ? roundNumber(cooldown * (damageSource?.stats.value.cdr ?? 1), 2) : cooldown,
+		cooldown: cooldown !== undefined ? roundNumber(cooldown * cdr, 2) : cooldown,
 		cost,
 		abilityLevel,
 		partype: champion.partype,
