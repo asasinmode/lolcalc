@@ -352,7 +352,7 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
 						},
-						"{6c540a3a}": {
+						"ExecuteTooltipCalc": {
 							"mFormulaParts": [
 								{
 									"mDataValue": "ExecutionThreshold",
@@ -368,6 +368,9 @@
 							],
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
+						},
+						"__renamedVariables": {
+							"{6c540a3a}": "ExecuteTooltipCalc"
 						}
 					}
 				}

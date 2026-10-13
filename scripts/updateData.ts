@@ -2355,7 +2355,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 						allAbilitiesVariants: allVariants,
 						dynamicVariables: championAbilityDynamicVariables((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id], abilityKey),
 					},
-					variableSourceKeys: ['effectAmount'],
+					variableSourceKeys: ['effectAmount', 'spellCalculations'],
 				},
 				stringtableVariableSaveUnder: champion,
 			} satisfies Omit<IStringtableVariableDebug, 'key'>;
@@ -2421,7 +2421,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 	}
 }
 
-function transformAbilityText(value: string) {
+function transformAbilityText(value?: string) {
 	if (value) {
 		const liIndex = value.lastIndexOf('<li>');
 		if (~liIndex) {
