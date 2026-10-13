@@ -84,6 +84,7 @@ export default {
 
 				return {
 					f2: {
+						/* checked and is affected by shred - cd and the number go down when ksante loses resists */
 						value: Math.min(resistsCap, self.stats.value.bonus.armor + self.stats.value.bonus.magicResist),
 					},
 				};

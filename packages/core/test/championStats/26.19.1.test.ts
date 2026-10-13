@@ -1,8 +1,10 @@
 import assert from 'node:assert';
 import test from 'node:test';
 import type { IOverrides } from '@lolcalc/core/DamageSource.ts';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId.ts';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics/index.ts';
 import { ITEMS_BY_NAME } from '@lolcalc/data';
+import { AbilityType, EffectObjectName } from '@lolcalc/shared';
 import { nextTick } from 'vue';
 import fixture from '../fixtures/26.19.1.fixture.json' with { type: 'json' };
 import { forceShapeshift, setupDamageSource, setupPatchFixture, typedPartialDeepStrictEqual } from '../utils.ts';
@@ -495,6 +497,7 @@ test('26.19 Anivia passive', async (t) => {
 				magicResist: 35,
 			},
 			damageSource,
+			'egg',
 		);
 
 		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
@@ -506,8 +509,21 @@ test('26.19 Anivia passive', async (t) => {
 				magicResist: 89,
 			},
 			damageSource,
+			'jakSho',
 		);
 
+		const blackCleaverEffect = damageSource.addEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.blackCleaverCarve), [5]);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 54,
+				magicResist: 89,
+			},
+			damageSource,
+			'jakSho + black cleaver',
+		);
+
+		blackCleaverEffect.data.value[0] = 0;
 		damageSource.internalData.value.isEgg = 1;
 		typedPartialDeepStrictEqual(
 			damageSource.computed.formattedStatTotals.value,
@@ -516,6 +532,18 @@ test('26.19 Anivia passive', async (t) => {
 				magicResist: 37,
 			},
 			damageSource,
+			'egg | jakSho',
+		);
+
+		blackCleaverEffect.data.value[0] = 5;
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 18,
+				magicResist: 37,
+			},
+			damageSource,
+			'egg | jakSho, black cleaver',
 		);
 	});
 

@@ -21,7 +21,7 @@ export default {
 	},
 	calculateHooks: {
 		postTotal: {
-			handler(self, { championPassiveStats, bonusStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, dragonStats, itemTotalStats, itemPassivesStats }, { calculatedVariables }) {
+			handler(self, { championPassiveStats, bonusStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, dragonStats, itemTotalStats, itemPassivesStats }, { calculatedVariables, debuffs }) {
 				if (self.internalData.value.isEgg) {
 					const resists = championAbilityVariableValue('BonusResists', {
 						abilityKey: 'passive',
@@ -38,7 +38,6 @@ export default {
 						totalPreMultipliersStats.armor += armor;
 						totalPreMultipliersStats.magicResist += magicResist;
 
-						// TODO check shredding
 						if (calculatedVariables.jakShoBonusResistMultiplier) {
 							const jakShoArmor = armor * calculatedVariables.jakShoBonusResistMultiplier;
 							const jakShoMagicResist = magicResist * calculatedVariables.jakShoBonusResistMultiplier;
@@ -65,10 +64,15 @@ export default {
 							magicResist += dragonValue;
 						}
 
-						totalStats.armor += armor;
-						totalStats.magicResist += magicResist;
-						bonusStats.armor += armor;
-						bonusStats.magicResist += magicResist;
+						const finalArmor = armor * (1 - debuffs.percentageArmorShred);
+						debuffs.shreddedArmor += armor * debuffs.percentageArmorShred;
+						totalStats.armor += finalArmor;
+						bonusStats.armor += finalArmor;
+
+						const finalMR = magicResist * (1 - debuffs.percentageMRShred);
+						debuffs.shreddedMR += magicResist * debuffs.percentageMRShred;
+						totalStats.magicResist += finalMR;
+						bonusStats.magicResist += finalMR;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS anivia] failed to calculate passive resists', resists);
 					}
