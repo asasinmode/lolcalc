@@ -105,6 +105,8 @@ import Ornn from './champion/Ornn.ts';
 import Pantheon from './champion/Pantheon.ts';
 import Poppy from './champion/Poppy.ts';
 import Pyke from './champion/Pyke.ts';
+import Qiyana from './champion/Qiyana.ts';
+import Quinn from './champion/Quinn.ts';
 import Rammus from './champion/Rammus.ts';
 import RekSai from './champion/RekSai.ts';
 import Rell from './champion/Rell.ts';
@@ -272,6 +274,8 @@ export const CHAMPION_SPECIFICS = {
 	Pantheon,
 	Poppy,
 	Pyke,
+	Qiyana,
+	Quinn,
 	Rammus,
 	RekSai,
 	Rell,
