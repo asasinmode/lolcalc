@@ -9,26 +9,26 @@ export default {
 	passive: {
 		variables: defineChampionVariables<'Olaf', typeof IOlaf, 'passive'>()({
 			known: {
-				AttackSpeed: [],
 				Lifesteal: [],
+				AttackSpeed: [],
 			},
 			calculate(self) {
 				return {
-					AttackSpeed: {
-						value: self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0,
-					},
 					Lifesteal: {
 						value: self.stats.value.championPassive.lifeSteal ?? 0,
+					},
+					AttackSpeed: {
+						value: self.stats.value.championPassive.bonusAttackSpeedPercent ?? 0,
 					},
 				};
 			},
 			meta: {
-				AttackSpeed: {
+				Lifesteal: {
 					isCustom: true,
 					resultsIsPercentage: true,
 					resultsMultiplier: 100,
 				},
-				Lifesteal: {
+				AttackSpeed: {
 					isCustom: true,
 					resultsIsPercentage: true,
 					resultsMultiplier: 100,

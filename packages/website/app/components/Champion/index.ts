@@ -207,6 +207,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Ornn: {
 		extras: ChampionExtrasOrnn,
 	},
+	Poppy: {
+		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Poppy', 'passive', 0), 'isPassiveActive', 'is Iron Ambassador active', false),
+	},
 	Rammus: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rammus', 'w', 0), 'defensiveCurl', 'Defensive Curl'),
 	},

@@ -102,6 +102,8 @@ import Nunu from './champion/Nunu.ts';
 import Olaf from './champion/Olaf.ts';
 import Orianna from './champion/Orianna.ts';
 import Ornn from './champion/Ornn.ts';
+import Pantheon from './champion/Pantheon.ts';
+import Poppy from './champion/Poppy.ts';
 import Pyke from './champion/Pyke.ts';
 import Rammus from './champion/Rammus.ts';
 import RekSai from './champion/RekSai.ts';
@@ -267,6 +269,8 @@ export const CHAMPION_SPECIFICS = {
 	Olaf,
 	Orianna,
 	Ornn,
+	Pantheon,
+	Poppy,
 	Pyke,
 	Rammus,
 	RekSai,
@@ -430,6 +434,7 @@ export interface IChampionInternalDataMap {
 	Nunu: { isPassiveActive: number };
 	Orianna: { passiveStacksOnTarget: number };
 	Ornn: { _masterworkLevel: number; masterworkItemSlot: number; passiveUpgradedAllies: number };
+	Poppy: { isPassiveActive: number };
 	Rammus: { defensiveCurl: number };
 	Rell: { passiveStacksOnTarget: number };
 	Rengar: { passiveStacks: number; isPassiveMSActive: number };

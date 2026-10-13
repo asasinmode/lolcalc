@@ -30,7 +30,6 @@ export default {
 						abilityKey: 'passive',
 						abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
 						allAbilitiesVariants: self.allAbilityVariants.value,
-						damageSource: {} as DamageSource,
 					});
 					if (typeof attackRange.value === 'number') {
 						championPassiveStats.attackRange = attackRange.value;
