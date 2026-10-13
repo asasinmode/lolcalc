@@ -11,8 +11,11 @@ import { EFFECTS_META } from './specifics/effectsMeta.ts';
 
 const statIconNameValues = Object.values(STAT_ICON);
 
-/** images found in [assets/ux/fonts/texticons/lol/champion](https://raw.communitydragon.org/16.13/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/champion) that are also encountered in some champion ability descriptions without the extension like `%i:asolstackicon%` or `%i:kindredpassiveicon%` */
-const championGameIcons = ['asolstackicon', 'kindredpassiveicon', 'nasusstackicon', 'sennascalingicon', 'shyvana', 'smolder', 'threshscalingicon'];
+/**
+ * images found in [assets/ux/fonts/texticons/lol/champion](https://raw.communitydragon.org/16.13/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/champion) that are also encountered in some champion ability descriptions without the extension like `%i:asolstackicon%` or `%i:kindredpassiveicon%`
+ * list of champion icons or, when `[string, string]` also renames. For example locke's icon string is `LockeStackIcon` but file is `lockescalingicon`
+ */
+const championGameIcons: (string | [string, string])[] = ['asolstackicon', 'kindredpassiveicon', 'nasusstackicon', 'sennascalingicon', 'shyvana', 'smolder', 'threshscalingicon', ['lockestackicon', 'lockescalingicon']];
 
 const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map(([key, value]) => [value, key])) as Record<string, any>;
 
@@ -37,7 +40,8 @@ export function replaceGameIcons(text: string, subpath?: string, addAlt = false)
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
-			const isChampionIcon = championGameIcons.includes(name);
+			const championIconRename = championGameIcons.findLast((el) => el[0] === name);
+			const isChampionIcon = championIconRename || championGameIcons.includes(name);
 
 			let altSource;
 			if (addAlt) {
@@ -48,7 +52,7 @@ export function replaceGameIcons(text: string, subpath?: string, addAlt = false)
 
 			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${
 				statIconNameValues.includes(name) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'))
-			}/${name}.png" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
+			}/${championIconRename?.[1] ?? name}.png" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
 }

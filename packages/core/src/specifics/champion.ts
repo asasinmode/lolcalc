@@ -422,6 +422,7 @@ export interface IChampionInternalDataMap {
 	};
 	KogMaw: { passiveMSProgress: number };
 	LeeSin: { hasPassiveStack: number };
+	Locke: { rStacks: number };
 	Lissandra: { applyZombieSlow: number };
 	Milio: { passiveAllySourceId: string; _passiveAllyAD: ComputedRef<number> };
 	Mordekaiser: { isPassiveMSActive: number };

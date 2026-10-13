@@ -173,6 +173,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Lissandra: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Lissandra', 'passive', 0), 'applyZombieSlow', 'zombie slow', true, true),
 	},
+	Locke: {
+		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Locke', 'r', 0), 'rStacks', 'Enemies sealed'),
+	},
 	Milio: {
 		extras: ChampionExtrasMilio,
 	},

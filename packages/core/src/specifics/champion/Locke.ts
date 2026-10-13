@@ -6,6 +6,11 @@ import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
+	setupData(self) {
+		return {
+			rStacks: Math.max(0, Math.round(self.internalData.value.rStacks ?? 0)),
+		};
+	},
 	passive: {
 		variables: defineChampionVariables<'Locke', typeof ILocke, 'passive'>()({
 			known: {
@@ -76,6 +81,36 @@ export default {
 				},
 			},
 			uninteresting: ['DecayTimeHelper', 'BaseDuration', 'HealthCost'],
+		}),
+	},
+	r: {
+		variables: defineChampionVariables<'Locke', typeof ILocke, 'r'>()({
+			known: {
+				'{b5c3348f}': [],
+			},
+			calculate(self) {
+				return {
+					'{b5c3348f}': {
+						value: self.internalData.value.rStacks,
+					},
+				};
+			},
+			meta: {
+				Damage: {
+					type: VariableType.magic,
+				},
+				SlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				'{b5c3348f}': {
+					isCustom: true,
+					displayedName: 'EnemiesSealed',
+				},
+			},
+			uninteresting: ['Duration', 'ExecuteThresholdPerStack', 'CooldownReduction'],
 		}),
 	},
 } satisfies IChampionSpecific<'Locke'>;
