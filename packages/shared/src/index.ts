@@ -323,6 +323,10 @@ export interface IStatsCalculationVariables {
 	/** bonus attack speed from minigun stacks */
 	jinxQAS?: number;
 	kogMawPassiveMS?: number;
+	/** armor malphite's W grants by default */
+	malphiteWBaseArmor?: number;
+	/** armor malphite's W grants when passive is active */
+	malphiteWWithPassiveArmor?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */

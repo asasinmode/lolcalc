@@ -176,6 +176,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Locke: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Locke', 'r', 0), 'rStacks', 'Enemies sealed'),
 	},
+	Malphite: {
+		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Malphite', 'passive', 0), 'isPassiveActive', 'Granite Shield (used for W)'),
+	},
 	Milio: {
 		extras: ChampionExtrasMilio,
 	},
