@@ -75,3 +75,54 @@ test('26.20 Graves E', async (t) => {
 		);
 	});
 });
+
+test('26.20 Malphite W', async (t) => {
+	const sourceCommon: IOverrides<'Malphite'> = {
+		level: 9,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		internalData: { isPassiveActive: 0 },
+		items: [ITEMS_BY_NAME.jakSho],
+		abilityLevels: { w: 5 },
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Malphite', sourceCommon);
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 154 }, damageSource);
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 225 }, damageSource, 'with passive');
+
+		damageSource.internalData.value.isPassiveActive = 0;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 171 }, damageSource, 'jakSho');
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 251 }, damageSource, 'jakSho + passive');
+	});
+
+	await t.test('mountains', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Malphite', {
+			...sourceCommon,
+			dragonStacks: ['Mountain', 'Mountain', 'Mountain', 'Mountain'],
+		});
+
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 185 }, damageSource);
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 270 }, damageSource, 'with passive');
+
+		damageSource.internalData.value.isPassiveActive = 0;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 206 }, damageSource, 'jakSho');
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 301 }, damageSource, 'jakSho + passive');
+	});
+});

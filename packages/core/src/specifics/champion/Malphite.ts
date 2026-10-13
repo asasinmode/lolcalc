@@ -55,7 +55,11 @@ export default {
 	},
 	calculateHooks: {
 		postTotal: {
-			handler(self, { totalStats, championPassiveStats }, { calculatedVariables }) {
+			handler(self, { totalStats, championPassiveStats, totalPreMultipliersStats, bonusStats }, { calculatedVariables, debuffs }) {
+				if (!self.abilityLevels.value.w) {
+					return;
+				}
+
 				const wParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'w', abilityVariant: self.champion.value!.abilities.w.variants[0]!, abilityLevel: self.abilityLevels.value.w };
 
 				const baseArmorPercent = championAbilityVariableValue('BonusArmorPassive', wParams);
@@ -70,6 +74,20 @@ export default {
 					calculatedVariables.malphiteWWithPassiveArmor = calculatedVariables.malphiteWBaseArmor * withPassiveMult.value;
 				} else {
 					console.warn('[CHAMPION_SPECIFICS malphite] failed to calculate w passive armor mult', withPassiveMult);
+				}
+
+				const rawArmorBonus = self.internalData.value.isPassiveActive ? calculatedVariables.malphiteWWithPassiveArmor : calculatedVariables.malphiteWBaseArmor;
+				if (rawArmorBonus !== undefined) {
+					let wBonusArmor = rawArmorBonus;
+					championPassiveStats.armor = rawArmorBonus;
+
+					const armorShredMultiplier = 1 - debuffs.percentageArmorShred;
+					wBonusArmor = rawArmorBonus * armorShredMultiplier;
+					debuffs.shreddedArmor += rawArmorBonus * debuffs.percentageArmorShred;
+
+					totalPreMultipliersStats.armor += wBonusArmor;
+					bonusStats.armor += wBonusArmor;
+					totalStats.armor += wBonusArmor;
 				}
 			},
 		},
