@@ -2414,7 +2414,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
 			}
 
-			if (!variant.name) {
+			if (!i && !variant.name) {
 				throw new Error(`${debugPrefix} variant has no name`);
 			}
 		}
@@ -2436,10 +2436,9 @@ function transformAbilityText(value: string) {
 			}
 		}
 
-		value = trimBr(value);
+		return trimBr(value).replace('<rules><br>', '<rules>');
 	}
-
-	return value.replace('<rules><br>', '<rules>');
+	return value;
 }
 
 function extractEffectDescription(description: string) {

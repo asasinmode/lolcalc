@@ -105,7 +105,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 						 */
 						.slice(0, championId === 'Aphelios' ? undefined : championId === 'Hwei' ? 1 : 2)
 						.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
-							const { replaced: nameReplaced } = replaceStringtableVariables(variant.name, champion.stringtable);
+							const { replaced: nameReplaced } = replaceStringtableVariables(variant.name ?? ability.variants[0]!.name!, champion.stringtable);
 
 							return {
 								id: GameAbilityId.build(AbilityType.champion, champion.id, abilityKey as IChampionAbilityKey, abilityVariantIndex),

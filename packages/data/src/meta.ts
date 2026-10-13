@@ -3,7 +3,7 @@
 import type { IChampionStatName } from '@lolcalc/shared';
 import type { IChampionId, IItem, IItemStat } from './types';
 
-export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee', 'Gnar'];
+export const SHAPESHIFTING_CHAMPION_IDS: IChampionId[] = ['Elise', 'Jayce', 'Nidalee', 'Gnar', 'RekSai'];
 /** for champions that look like (data-wise) but aren't shapeshifters */
 export const NOT_SHAPESHIFTING_CHAPION_IDS: IChampionId[] = ['Hwei'];
 

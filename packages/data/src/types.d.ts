@@ -91,7 +91,8 @@ export interface IChampionAbility {
 }
 
 export interface IChampionAbilityVariant {
-	name: string;
+	/** first variant should always have a name (`updateData` errors if it doesn't) but other variants may not */
+	name?: string;
 	image: string | string[];
 	mana?: number[];
 	dataKey: string;

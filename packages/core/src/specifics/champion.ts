@@ -107,6 +107,7 @@ import Poppy from './champion/Poppy.ts';
 import Pyke from './champion/Pyke.ts';
 import Qiyana from './champion/Qiyana.ts';
 import Quinn from './champion/Quinn.ts';
+import Rakan from './champion/Rakan.ts';
 import Rammus from './champion/Rammus.ts';
 import RekSai from './champion/RekSai.ts';
 import Rell from './champion/Rell.ts';
@@ -276,6 +277,7 @@ export const CHAMPION_SPECIFICS = {
 	Pyke,
 	Qiyana,
 	Quinn,
+	Rakan,
 	Rammus,
 	RekSai,
 	Rell,

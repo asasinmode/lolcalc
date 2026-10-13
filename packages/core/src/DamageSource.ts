@@ -1655,7 +1655,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 
 	const dynamicVariables = damageSource?.computed.variables.value.abilities[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex];
 
-	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceStringtableVariables(variant.name, champion.stringtable, replaceOptions?.overrideVariables ?? dynamicVariables);
+	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceStringtableVariables(variant.name ?? ability.variants[0]!.name!, champion.stringtable, replaceOptions?.overrideVariables ?? dynamicVariables);
 
 	const variables: IComputedAbilityDescription['variables'] = new Map();
 	const unknownVariables: IComputedAbilityDescription['unknownVariables'] = [];
