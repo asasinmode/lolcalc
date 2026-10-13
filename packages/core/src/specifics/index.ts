@@ -56,6 +56,8 @@ export const HOOK_PRIORITIES = {
 		Hecarim: 1,
 		Vladimir: 1,
 		Jhin: 1,
+		/** needs total hp */
+		Olaf: 1,
 		Zaahen: 1,
 		/** needs total hp */
 		Garen: 1,

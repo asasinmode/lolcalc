@@ -99,6 +99,7 @@ import Nidalee from './champion/Nidalee.ts';
 import Nilah from './champion/Nilah.ts';
 import Nocturne from './champion/Nocturne.ts';
 import Nunu from './champion/Nunu.ts';
+import Olaf from './champion/Olaf.ts';
 import Orianna from './champion/Orianna.ts';
 import Ornn from './champion/Ornn.ts';
 import Pyke from './champion/Pyke.ts';
@@ -263,6 +264,7 @@ export const CHAMPION_SPECIFICS = {
 	Nilah,
 	Nocturne,
 	Nunu,
+	Olaf,
 	Orianna,
 	Ornn,
 	Pyke,
