@@ -327,6 +327,8 @@ export interface IStatsCalculationVariables {
 	malphiteWBaseArmor?: number;
 	/** armor malphite's W grants when passive is active */
 	malphiteWWithPassiveArmor?: number;
+	/** bonus % move speed from samira's passive stacks */
+	samiraPassiveBonusMS?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */
@@ -550,6 +552,8 @@ export const ITEM_NAME_TO_ID = {
 	cloakOfAgility: '1018',
 	sapphireCrystal: '1027',
 	rubyCrystal: '1028',
+	chainVest: '1031',
+	nullMagicMantle: '1033',
 	longSword: '1036',
 	pickaxe: '1037',
 	bfSword: '1038',

@@ -126,3 +126,114 @@ test('26.20 Malphite W', async (t) => {
 		typedPartialDeepStrictEqual(damageSource.computed.formattedStatTotals.value, { armor: 301 }, damageSource, 'jakSho + passive');
 	});
 });
+
+test('26.20 Sejuani passive', async (t) => {
+	const sourceCommon: IOverrides<'Sejuani'> = {
+		level: 1,
+		runes: {
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		},
+		items: [ITEMS_BY_NAME.jakSho, ITEMS_BY_NAME.chainVest, ITEMS_BY_NAME.nullMagicMantle, ITEMS_BY_NAME.nullMagicMantle],
+	};
+
+	await t.test('base', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Sejuani', sourceCommon);
+
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 119,
+				magicResist: 117,
+			},
+			damageSource,
+		);
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 193,
+				magicResist: 191,
+			},
+			damageSource,
+			'passive',
+		);
+
+		damageSource.internalData.value.isPassiveActive = 0;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 145,
+				magicResist: 143,
+			},
+			damageSource,
+			'jakSho',
+		);
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 241,
+				magicResist: 239,
+			},
+			damageSource,
+			'passive | jakSho',
+		);
+	});
+
+	await t.test('mountains', async () => {
+		const damageSource = await setupDamageSource(fixture, 'Sejuani', {
+			...sourceCommon,
+			dragonStacks: ['Mountain', 'Mountain', 'Mountain', 'Mountain'],
+		});
+
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 143,
+				magicResist: 140,
+			},
+			damageSource,
+		);
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 232,
+				magicResist: 229,
+			},
+			damageSource,
+			'passive',
+		);
+
+		damageSource.internalData.value.isPassiveActive = 0;
+		(damageSource.internalItemData.value as IInternalItemDataOf<'jakSho'>).vbResistance = 1;
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 173,
+				magicResist: 171,
+			},
+			damageSource,
+			'jakSho',
+		);
+
+		damageSource.internalData.value.isPassiveActive = 1;
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: 289,
+				magicResist: 286,
+			},
+			damageSource,
+			'passive | jakSho',
+		);
+	});
+});
