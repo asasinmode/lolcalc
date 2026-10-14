@@ -61,8 +61,11 @@ export default {
 					const preDragonArmor = totalPreMultipliersStats.armor + (calculatedVariables.jakShoArmor ?? 0);
 					const preDragonMr = totalPreMultipliersStats.magicResist + (calculatedVariables.jakShoMagicResist ?? 0);
 
-					const rawArmorBonus = ((preDragonArmor + wConstArmorBonus * jakShoMultiplier) * wArmorMultiplier + wConstArmorBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.armor);
-					const rawMRBonus = ((preDragonMr + wConstMrBonus * jakShoMultiplier) * wMrMultiplier + wConstMrBonus * jakShoMultiplier) * (1 + dragonStatMultipliers.magicResist);
+					const wConstArmorWithJakSho = wConstArmorBonus * jakShoMultiplier;
+					const wConstMRWithJakSho = wConstMrBonus * jakShoMultiplier;
+
+					const rawArmorBonus = (wConstArmorWithJakSho + (preDragonArmor + wConstArmorWithJakSho) * wArmorMultiplier) * (1 + dragonStatMultipliers.armor);
+					const rawMRBonus = (wConstMRWithJakSho + (preDragonMr + wConstMRWithJakSho) * wMrMultiplier) * (1 + dragonStatMultipliers.magicResist);
 
 					const armorShredMultiplier = 1 - debuffs.percentageArmorShred;
 					const mrShredMultiplier = 1 - debuffs.percentageMRShred;

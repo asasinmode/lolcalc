@@ -99,8 +99,8 @@ export default {
 					itemPassivesStats.magicResist += jakShoMR;
 					itemTotalStats.armor += jakShoArmor;
 					itemTotalStats.magicResist += jakShoMR;
-					totalPreMultipliersStats.armor += jakShoArmor;
-					totalPreMultipliersStats.magicResist += jakShoMR;
+					totalMultipliersStats.armor += jakShoArmor;
+					totalMultipliersStats.magicResist += jakShoMR;
 				}
 
 				if (dragonStatMultipliers.armor) {
