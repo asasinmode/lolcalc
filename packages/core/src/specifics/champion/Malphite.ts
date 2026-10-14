@@ -54,8 +54,8 @@ export default {
 		}),
 	},
 	calculateHooks: {
-		postTotal: {
-			handler(self, { totalStats, championPassiveStats, totalPreMultipliersStats, bonusStats }, { calculatedVariables, debuffs }) {
+		preShred: {
+			handler(self, { totalStats, championPassiveStats, totalPreMultipliersStats, bonusStats }, { calculatedVariables }) {
 				if (!self.abilityLevels.value.w) {
 					return;
 				}
@@ -76,15 +76,9 @@ export default {
 					console.warn('[CHAMPION_SPECIFICS malphite] failed to calculate w passive armor mult', withPassiveMult);
 				}
 
-				const rawArmorBonus = self.internalData.value.isPassiveActive ? calculatedVariables.malphiteWWithPassiveArmor : calculatedVariables.malphiteWBaseArmor;
-				if (rawArmorBonus !== undefined) {
-					let wBonusArmor = rawArmorBonus;
-					championPassiveStats.armor = rawArmorBonus;
-
-					const armorShredMultiplier = 1 - debuffs.percentageArmorShred;
-					wBonusArmor = rawArmorBonus * armorShredMultiplier;
-					debuffs.shreddedArmor += rawArmorBonus * debuffs.percentageArmorShred;
-
+				const wBonusArmor = self.internalData.value.isPassiveActive ? calculatedVariables.malphiteWWithPassiveArmor : calculatedVariables.malphiteWBaseArmor;
+				if (wBonusArmor !== undefined) {
+					championPassiveStats.armor = wBonusArmor;
 					totalPreMultipliersStats.armor += wBonusArmor;
 					bonusStats.armor += wBonusArmor;
 					totalStats.armor += wBonusArmor;
