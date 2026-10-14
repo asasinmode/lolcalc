@@ -5,6 +5,7 @@ import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { roundNumber } from '@lolcalc/shared/utils.js';
 import type { ShallowRef } from 'vue';
 import type { ComponentExposed } from 'vue-component-type-helpers';
 import type { CalculatorResultsTable } from '#components';
@@ -75,6 +76,14 @@ export function initCalculatorState(): ICalculatorState {
 				if (rowId === 'eqValue') {
 					const numberValue = source.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0);
 					return { numberValue, value: numberValue };
+				}
+
+				if (rowId === 'hpRegen' || rowId === 'manaRegen') {
+					const numberValue = roundNumber(source.stats.value.total[rowId], 2);
+					return {
+						value: numberValue,
+						numberValue,
+					};
 				}
 
 				return {
