@@ -472,6 +472,17 @@ test('26.19 Anivia passive', async (t) => {
 			},
 			damageSource,
 		);
+
+		damageSource.addEffect(GameAbilityId.build(AbilityType.effect, EffectObjectName.blackCleaverCarve), [5]);
+		typedPartialDeepStrictEqual(
+			damageSource.computed.formattedStatTotals.value,
+			{
+				armor: -21,
+				magicResist: -10,
+			},
+			damageSource,
+			'black cleaver',
+		);
 	});
 
 	await t.test("jak'sho", async () => {
