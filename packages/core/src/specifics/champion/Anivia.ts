@@ -20,7 +20,7 @@ export default {
 		}),
 	},
 	calculateHooks: {
-		postTotal: {
+		preShred: {
 			handler(self, { championPassiveStats, bonusStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, dragonStats, itemTotalStats, itemPassivesStats }, { calculatedVariables, debuffs }) {
 				if (self.internalData.value.isEgg) {
 					const resists = championAbilityVariableValue('BonusResists', {
@@ -64,15 +64,10 @@ export default {
 							magicResist += dragonValue;
 						}
 
-						const finalArmor = armor * (1 - debuffs.percentageArmorShred);
-						debuffs.shreddedArmor += armor * debuffs.percentageArmorShred;
-						totalStats.armor += finalArmor;
-						bonusStats.armor += finalArmor;
-
-						const finalMR = magicResist * (1 - debuffs.percentageMRShred);
-						debuffs.shreddedMR += magicResist * debuffs.percentageMRShred;
-						totalStats.magicResist += finalMR;
-						bonusStats.magicResist += finalMR;
+						totalStats.armor += armor;
+						bonusStats.armor += armor;
+						totalStats.magicResist += magicResist;
+						bonusStats.magicResist += magicResist;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS anivia] failed to calculate passive resists', resists);
 					}

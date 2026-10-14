@@ -416,14 +416,35 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	const totalStats = Object.fromEntries(Object.entries(totalPreMultipliersStats).map(([statName, statValue]) => [statName, statValue + totalMultipliersStats[statName as IChampionStatName]])) as IChampionStats;
 
+	if (source.calculateStatsHooks.all.value.preShred) {
+		for (const hook of source.calculateStatsHooks.all.value.preShred) {
+			hook(
+				source,
+				{
+					totalStats,
+					dragonStatMultipliers,
+					totalMultipliersStats,
+					bonusStats,
+					itemPassivesStats,
+					itemTotalStats,
+					dragonStats,
+					baseOnLevelStats,
+					championPassiveStats,
+					totalPreMultipliersStats,
+				},
+				{ calculatedVariables, debuffs, effectVars, miscDebug },
+			);
+		}
+	}
+
 	{
 		/* shred calc */
-		const totalMultipliersArmorShred = (totalStats.armor - debuffs.flatArmorShred) * debuffs.percentageArmorShred;
+		const totalMultipliersArmorShred = Math.max(0, totalStats.armor - debuffs.flatArmorShred) * debuffs.percentageArmorShred;
 		debuffs.shreddedArmor = totalMultipliersArmorShred;
 		totalStats.armor = totalStats.armor - totalMultipliersArmorShred;
 		bonusStats.armor = Math.max(0, bonusStats.armor * (1 - debuffs.percentageArmorShred));
 
-		const totalMultipliersMRShred = (totalStats.magicResist - debuffs.flatMRShred) * debuffs.percentageMRShred;
+		const totalMultipliersMRShred = Math.max(0, totalStats.magicResist - debuffs.flatMRShred) * debuffs.percentageMRShred;
 		debuffs.shreddedMR = totalMultipliersMRShred;
 		totalStats.magicResist = totalStats.magicResist - totalMultipliersMRShred - debuffs.flatMRShred;
 		bonusStats.magicResist = Math.max(0, (bonusStats.magicResist - debuffs.flatMRShred) * (1 - debuffs.percentageMRShred));

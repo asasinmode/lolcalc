@@ -2553,6 +2553,23 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 			},
 		) => void
 	>;
+	preShred?: ICalculateChampionStatsHook<
+		(
+			self: DamageSource<Id>,
+			args: {
+				totalStats: IStatsCalculationResult['total'];
+				totalPreMultipliersStats: IStatsCalculationResult['totalPreMultipliers'];
+				totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+				dragonStats: IStatsCalculationResult['dragon'];
+				dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
+				bonusStats: IStatsCalculationResult['bonus'];
+				itemPassivesStats: IStatsCalculationResult['itemPassive'];
+				itemTotalStats: IStatsCalculationResult['itemTotal'];
+				baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
+				championPassiveStats: IStatsCalculationResult['championPassive'];
+			},
+		) => void
+	>;
 	postTotal?: ICalculateChampionStatsHook<
 		(
 			self: DamageSource<Id>,
