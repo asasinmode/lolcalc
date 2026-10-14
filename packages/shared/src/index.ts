@@ -329,6 +329,8 @@ export interface IStatsCalculationVariables {
 	malphiteWWithPassiveArmor?: number;
 	/** bonus % move speed from samira's passive stacks */
 	samiraPassiveBonusMS?: number;
+	/** bonus % ms from singed's passive */
+	singedPassiveBonusMS?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */

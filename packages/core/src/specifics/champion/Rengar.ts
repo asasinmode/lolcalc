@@ -43,6 +43,9 @@ export default {
 			uninteresting: ['MaxFerocity', 'EmpoweredMSDuration', 'InCombatTimer'],
 		}),
 	},
+	e: {
+		omittedVariantObjectNames: ['RengarEEmp'],
+	},
 	calculateHooks: {
 		onChampionPassive: {
 			handler(self, _stats, { calculatedVariables }) {

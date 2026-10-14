@@ -256,6 +256,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Shyvana: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Shyvana', 'passive', 0), 'passiveStacks', 'Scalemail stacks'),
 	},
+	Sion: {
+		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Sion', 'w', 0), 'wStacks', 'Soul Furnace stacks'),
+	},
 	Singed: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.passive.maxStacks),
 	},

@@ -121,10 +121,14 @@ import Samira from './champion/Samira.ts';
 import Sejuani from './champion/Sejuani.ts';
 import Senna from './champion/Senna.ts';
 import Seraphine from './champion/Seraphine.ts';
+import Sett from './champion/Sett.ts';
+import Shaco from './champion/Shaco.ts';
 import Shen from './champion/Shen.ts';
 import Shyvana from './champion/Shyvana.ts';
 import Singed from './champion/Singed.ts';
+import Sion from './champion/Sion.ts';
 import Sivir from './champion/Sivir.ts';
+import Skarner from './champion/Skarner.ts';
 import Smolder from './champion/Smolder.ts';
 import Sona from './champion/Sona.ts';
 import Soraka from './champion/Soraka.ts';
@@ -293,10 +297,14 @@ export const CHAMPION_SPECIFICS = {
 	Sejuani,
 	Senna,
 	Seraphine,
+	Sett,
+	Shaco,
 	Shen,
 	Shyvana,
 	Singed,
+	Sion,
 	Sivir,
+	Skarner,
 	Smolder,
 	Sona,
 	Soraka,
@@ -456,6 +464,7 @@ export interface IChampionInternalDataMap {
 	Senna: { passiveStacks: number; passiveStealTargetMS: number };
 	Seraphine: { passiveStacks: number };
 	Shyvana: { passiveStacks: number };
+	Sion: { wStacks: number };
 	Singed: { passiveStacks: number };
 	Sivir: { passiveMSProgress: number };
 	Smolder: { passiveStacks: number };

@@ -27,6 +27,13 @@ export default {
 					isCustom: true,
 					displayedName: 'Stacks',
 				},
+				/* replaceGameVariables adds these automatically since they scale with mBuff but the game doesn't show them */
+				Calc_Bonus_Armor: {
+					calculatesFrom: [],
+				},
+				Calc_Bonus_MR: {
+					calculatesFrom: [],
+				},
 			},
 			// TODO bonus armor/magic resist don't show the scaling icon in game. is shown by default because asol uses same var type and does show it. either hide it here explicitly or update asol to do it manually and hide by default for everyone. check how more champions do it
 			uninteresting: ['BonusArmor', 'BonusMagicResist', 'Stacks_Per_Large_Monster', 'Stacks_Per_Epic_Monster'],
