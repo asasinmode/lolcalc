@@ -111,6 +111,8 @@ import Rakan from './champion/Rakan.ts';
 import Rammus from './champion/Rammus.ts';
 import RekSai from './champion/RekSai.ts';
 import Rell from './champion/Rell.ts';
+import Renata from './champion/Renata.ts';
+import Renekton from './champion/Renekton.ts';
 import Rengar from './champion/Rengar.ts';
 import Riven from './champion/Riven.ts';
 import Rumble from './champion/Rumble.ts';
@@ -281,6 +283,8 @@ export const CHAMPION_SPECIFICS = {
 	Rammus,
 	RekSai,
 	Rell,
+	Renata,
+	Renekton,
 	Rengar,
 	Riven,
 	Rumble,

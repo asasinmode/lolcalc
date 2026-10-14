@@ -34,6 +34,7 @@ export default {
 			meta: {
 				BonusADPercent: {
 					isCustom: true,
+					resultsIsPercentage: true,
 				},
 				BonusAD: {
 					isCustom: true,
