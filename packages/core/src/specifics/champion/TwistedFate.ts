@@ -15,4 +15,19 @@ export default {
 			};
 		},
 	}),
+	passive: {
+		variables: defineChampionVariables<'TwistedFate', typeof ITwistedFate, 'passive'>()({
+			known: {
+				f1: [],
+				f2: [],
+			},
+			calculate() {
+				return {
+					f1: { value: 0 },
+					f2: { value: 0 },
+				};
+			},
+			uninteresting: ['f1', 'f2'],
+		}),
+	},
 } satisfies IChampionSpecific<'TwistedFate'>;

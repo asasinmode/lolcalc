@@ -295,6 +295,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Thresh: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Thresh', 'passive', 0), 'passiveStacks', 'Souls collected'),
 	},
+	Tristana: {
+		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Tristana', 'q', 0), 'isQActive', 'is Q active', false),
+	},
+	Trundle: {
+		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Trundle', 'q', 0), 'isQActive', 'gain Q AD (chomped something)', false),
+	},
 	Udyr: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Udyr', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},

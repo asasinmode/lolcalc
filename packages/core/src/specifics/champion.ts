@@ -137,10 +137,15 @@ import Sylas from './champion/Sylas.ts';
 import Syndra from './champion/Syndra.ts';
 import TahmKench from './champion/TahmKench.ts';
 import Taliyah from './champion/Taliyah.ts';
+import Talon from './champion/Talon.ts';
 import Taric from './champion/Taric.ts';
 import Teemo from './champion/Teemo.ts';
 import Thresh from './champion/Thresh.ts';
+import Tristana from './champion/Tristana.ts';
+import Trundle from './champion/Trundle.ts';
+import Tryndamere from './champion/Tryndamere.ts';
 import TwistedFate from './champion/TwistedFate.ts';
+import Twitch from './champion/Twitch.ts';
 import Udyr from './champion/Udyr.ts';
 import Varus from './champion/Varus.ts';
 import Vayne from './champion/Vayne.ts';
@@ -314,10 +319,15 @@ export const CHAMPION_SPECIFICS = {
 	Syndra,
 	TahmKench,
 	Taliyah,
+	Talon,
 	Taric,
 	Teemo,
 	Thresh,
+	Tristana,
+	Trundle,
+	Tryndamere,
 	TwistedFate,
+	Twitch,
 	Udyr,
 	Varus,
 	Vayne,
@@ -479,6 +489,8 @@ export interface IChampionInternalDataMap {
 	Taric: { hasPassiveStack: number };
 	Teemo: { isPassiveASActive: number };
 	Thresh: { passiveStacks: number };
+	Tristana: { isQActive: number };
+	Trundle: { isQActive: number };
 	Udyr: { hasPassiveStack: number };
 	Varus: { passiveVariantActive: number };
 	Vayne: { isPassiveMSActive: number };
