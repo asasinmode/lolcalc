@@ -1,5 +1,5 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type ISyndra from '@lolcalc/data/files/champion/Syndra.json';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
@@ -18,6 +18,24 @@ export default {
 	},
 	passive: {
 		maxStacks: passiveMaxStacks,
+		variables: defineChampionVariables<'Syndra', typeof ISyndra, 'passive'>()({
+			known: {
+				AbilityPower: [],
+			},
+			calculate(self) {
+				return {
+					AbilityPower: {
+						value: self.stats.value.championPassive.abilityPower ?? 0,
+					},
+				};
+			},
+			meta: {
+				AbilityPower: {
+					isCustom: true,
+				},
+			},
+			uninteresting: ['MaxStackAmount', 'MarkDuration', 'PassiveMarkCooldown', 'PassiveStacksPerLevel', 'StackPerSiege', 'CapstoneAPPerc'],
+		}),
 	},
 	w: {
 		variables: defineChampionVariables<'Syndra', typeof ISyndra, 'w'>()({
@@ -58,5 +76,69 @@ export default {
 				},
 			},
 		}),
+	},
+	r: {
+		variables: defineChampionVariables<'Syndra', typeof ISyndra, 'r'>()({
+			known: {
+				ExecutesBelowHP: [],
+			},
+			calculate(self, target) {
+				let ExecutesBelowHP = Number.NaN;
+
+				const thresholdPercent = championAbilityVariableValue('UpgradeExecuteThreshold', {
+					abilityKey: 'r',
+					abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+					damageSource: self,
+				});
+				if (typeof thresholdPercent.value === 'number') {
+					ExecutesBelowHP = thresholdPercent.value * (target?.stats.value.total.hp ?? 0);
+				} else {
+					console.warn('[CHAMPION_SPECIFICS syndra] failed to calculate passive execute percent', thresholdPercent);
+				}
+
+				return {
+					ExecutesBelowHP: {
+						value: ExecutesBelowHP,
+					},
+				};
+			},
+			meta: {
+				DamageCalc: {
+					type: VariableType.magic,
+				},
+				MaxDamageCalc: {
+					type: VariableType.magic,
+				},
+				ExecutesBelowHP: {
+					isCustom: true,
+				},
+			},
+			/* RUpgradeThreshold is from passive */
+			uninteresting: ['QHastePerRank', 'RUpgradeThreshold' as any, 'UpgradeExecuteThreshold'],
+		}),
+	},
+	calculateHooks: {
+		onTotalPreMultipliers: {
+			handler(self, { championPassiveStats, totalMultipliersStats }, { calculatedVariables }) {
+				const passiveParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'passive',
+					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+				};
+				const maxStacks = championAbilityVariableValue('MaxStackAmount', passiveParams);
+
+				if (self.internalData.value.passiveStacks === maxStacks.value) {
+					const apIncrease = championAbilityVariableValue('CapstoneAPPerc', passiveParams);
+					if (typeof apIncrease.value === 'number') {
+						championPassiveStats.abilityPower = calculatedVariables.apMultipliersBase * apIncrease.value;
+						totalMultipliersStats.abilityPower += championPassiveStats.abilityPower;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS syndra] failed to calculate passive ap increase', apIncrease);
+					}
+				} else if (typeof maxStacks.value !== 'number') {
+					console.warn('[CHAMPION_SPECIFICS syndra] failed to calculate passive max stacks', maxStacks);
+				}
+			},
+		},
 	},
 } satisfies IChampionSpecific<'Syndra'>;
