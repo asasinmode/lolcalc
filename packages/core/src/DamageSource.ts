@@ -1755,7 +1755,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		if (variant.isImmobilizing) {
 			additionalHaste += damageSource.stats.value.total.immobilizingHaste;
 		}
-		if (gameAbilityId.abilityKey !== 'r') {
+		/* udyr's basic ability haste (at least from shojin) works for all abilities */
+		if (gameAbilityId.abilityKey !== 'r' || champion.id === 'Udyr') {
 			additionalHaste += damageSource.stats.value.total.basicHaste;
 		} else {
 			additionalHaste += damageSource.stats.value.total.ultimateHaste;
