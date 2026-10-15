@@ -135,6 +135,7 @@ import Soraka from './champion/Soraka.ts';
 import Swain from './champion/Swain.ts';
 import Sylas from './champion/Sylas.ts';
 import Syndra from './champion/Syndra.ts';
+import TahmKench from './champion/TahmKench.ts';
 import Taliyah from './champion/Taliyah.ts';
 import Taric from './champion/Taric.ts';
 import Teemo from './champion/Teemo.ts';
@@ -311,6 +312,7 @@ export const CHAMPION_SPECIFICS = {
 	Swain,
 	Sylas,
 	Syndra,
+	TahmKench,
 	Taliyah,
 	Taric,
 	Teemo,
