@@ -46,13 +46,7 @@ export default {
 					allAbilitiesVariants: self.allAbilityVariants.value,
 				});
 				if (typeof wDistancePerStack.value === 'number') {
-					// TODO take from castRange or
-					// 			"castRangeValues": {
-					// 	"values": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
-					// 	"{0a3e0478}": 1500,
-					// 	"__type": "{0a0eddc9}"
-					// },
-					WDistanceIncrease = (wDistancePerStack.value * passiveStacks) / 15;
+					WDistanceIncrease = (wDistancePerStack.value * passiveStacks) / ((self.champion.value!.abilities.w.variants[0]!.castRange?.[self.abilityLevels.value.w] ?? 100) * 0.01);
 				} else {
 					console.warn('[CHAMPION_SPECIFICS aurelion sol] failed to calculate w distance per stack', wDistancePerStack);
 				}
