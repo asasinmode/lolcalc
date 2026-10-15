@@ -745,7 +745,7 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 		debounceTimeout = setTimeout(() => {
 			target.value = value;
 			debounceTimeout = undefined;
-		}, 500);
+		}, 300);
 	}
 
 	const watchHandle = watch(target, (value) => {
@@ -2480,6 +2480,7 @@ defineExpose({ el });
 					}
 
 					&[data-partype='shield'],
+					&[data-partype='grit'],
 					&[data-partype='flow'] {
 						--fill-bg: theme('colors.white');
 

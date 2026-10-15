@@ -331,6 +331,8 @@ export interface IStatsCalculationVariables {
 	samiraPassiveBonusMS?: number;
 	/** bonus % ms from singed's passive */
 	singedPassiveBonusMS?: number;
+	/** sett W max grit, used as max ability resource */
+	settMaxGrit?: number;
 }
 
 /** all of the debuffs collected throughout the calculation that are applied in `calculateChampionStats` together */

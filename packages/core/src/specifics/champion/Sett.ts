@@ -31,9 +31,85 @@ export default {
 			uninteresting: ['MissingHealthUnit'],
 		}),
 	},
+	w: {
+		variables: defineChampionVariables<'Sett', typeof ISett, 'w'>()({
+			known: {
+				f1: [],
+				TotalCenterDamage: [],
+				TotalSideDamage: [],
+				TotalShield: [],
+			},
+			calculate(self) {
+				let TotalDamage = Number.NaN;
+				let TotalShield = Number.NaN;
+
+				const currentGrit = Math.min(self.stats.value.variables.settMaxGrit ?? 0, self.currentAbilityResource.value);
+
+				const wParams: IGameVariableValueParameters['championAbility'] = {
+					abilityKey: 'w',
+					abilityVariant: self.champion.value!.abilities.w.variants[0]!,
+					damageSource: self,
+				};
+				const baseDamage = championAbilityVariableValue('DamageCalc', wParams);
+				const gritConversion = championAbilityVariableValue('DamageConversion', wParams);
+				if (typeof gritConversion.value === 'number' && typeof baseDamage.value === 'number') {
+					TotalDamage = baseDamage.value + gritConversion.value * currentGrit;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS sett] failed to calculate w grit damage', baseDamage, gritConversion);
+				}
+
+				const shieldScaling = championAbilityVariableValue('ShieldConversion', wParams);
+				if (typeof gritConversion.value === 'number') {
+					TotalShield = currentGrit;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS sett] failed to calculate w grit damage scaling', shieldScaling);
+				}
+
+				return {
+					f1: {
+						value: self.stats.value.variables.settMaxGrit ?? 0,
+					},
+					TotalCenterDamage: {
+						value: TotalDamage,
+					},
+					TotalSideDamage: {
+						value: TotalDamage,
+					},
+					TotalShield: {
+						value: TotalShield,
+					},
+				};
+			},
+			meta: {
+				f1: {
+					displayedName: 'MaxDamage',
+					type: VariableType.true,
+				},
+				DamageCalc: {
+					type: VariableType.true,
+				},
+				TotalCenterDamage: {
+					isCustom: true,
+					type: VariableType.true,
+				},
+				TotalSideDamage: {
+					isCustom: true,
+					type: VariableType.physical,
+				},
+				TotalShield: {
+					isCustom: true,
+					type: VariableType.shield,
+				},
+			},
+			uninteresting: ['DamageStored', 'AdrenalineStorageWindow', 'ShieldConversion', 'ShieldMaxDuration'],
+		}),
+	},
 	calculateHooks: {
 		postTotal: {
-			handler(self, { totalStats, totalPreMultipliersStats, bonusStats, championPassiveStats }) {
+			handler(self, { totalStats, totalPreMultipliersStats, bonusStats, championPassiveStats }, { calculatedVariables }) {
+				/* technically there's a MaxGrit W var but it's just half of hp so might as well do it by hand */
+				calculatedVariables.settMaxGrit = totalStats.hp / 2;
+
 				const passiveParams: IGameVariableValueParameters['championAbility'] = {
 					abilityKey: 'passive',
 					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,

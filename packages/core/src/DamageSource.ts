@@ -94,9 +94,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	 */
 	maxHealth = computed((): number => Math.ceil(this.stats.value.total.hp ?? 0));
 	currentAbilityResource: Ref<number>;
-	// TODO make available under dynamic variables `@AbilityResourceName@`
 	abilityResourceName = computed((): string => (this.champion.value ? this.champion.value?.partype.toLowerCase() || '<unknown>' : 'mana'));
-	maxAbilityResource = computed((): number => Math.floor(this.stats.value?.total.mana ?? 0));
+	maxAbilityResource = computed((): number => Math.floor(this.stats.value?.variables.settMaxGrit ?? this.stats.value?.total.mana ?? 0));
 	hasMana = computed((): boolean => this.abilityResourceName.value === 'mana');
 
 	items: Ref<(IItem | undefined)[]>;
