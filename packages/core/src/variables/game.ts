@@ -363,6 +363,9 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	} else if (variableName === 'Cost') {
 		rv.value = abilityVariant.mana?.[abilityLevel ?? 1];
 		rv.allValues = abilityVariant.mana;
+	} else if (variableName === 'CastRange') {
+		rv.value = abilityVariant.castRange?.[abilityLevel ?? 1];
+		rv.allValues = abilityVariant.castRange;
 	}
 
 	if (rv.value) {
