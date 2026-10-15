@@ -77,7 +77,8 @@
 							"mModifiedGameCalculation": "ExplosionDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [900, 900, 900, 900, 900, 900, 900]
 				}
 			]
 		},
@@ -172,7 +173,8 @@
 							"mModifiedGameCalculation": "TotalShieldStrength",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [800, 800, 800, 800, 800, 800, 800]
 				}
 			]
 		},
@@ -219,6 +221,7 @@
 							]
 						}
 					},
+					"castRange": [1300, 1300, 1300, 1300, 1300, 1300, 1300],
 					"isImmobilizing": true
 				}
 			]
@@ -308,7 +311,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [800, 800, 800, 800, 800, 800, 800]
 				}
 			]
 		}

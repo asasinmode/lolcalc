@@ -97,7 +97,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [575, 575, 575, 575, 575, 575, 575]
 				},
 				{
 					"name": "Venomous Bite / Neurotoxin",
@@ -107,7 +108,8 @@
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "{{Spell_EliseSpiderQ_Tooltip}}",
 					"tooltipExtended": "{{Spell_EliseSpiderQ_Tooltip}}<br><br>{{Spell_EliseHumanQ_Tooltip}}",
-					"tooltipExtendedBelowLine": "<rules>Venomous Bite will apply on-hit effects once to the target</rules>"
+					"tooltipExtendedBelowLine": "<rules>Venomous Bite will apply on-hit effects once to the target</rules>",
+					"castRange": [475, 475, 475, 475, 475, 475, 475]
 				},
 				{
 					"name": "Venomous Bite / Neurotoxin",
@@ -154,7 +156,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [475, 475, 475, 475, 475, 475, 475]
 				}
 			]
 		},
@@ -205,7 +208,8 @@
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"4": [55, 65, 75, 85, 95, 105, 115],
 						"5": [275, 275, 275, 275, 275, 275, 275]
-					}
+					},
+					"castRange": [950, 950, 950, 950, 950, 950, 950]
 				},
 				{
 					"name": "Skittering Frenzy / Volatile Spiderling",
@@ -232,7 +236,8 @@
 					},
 					"effectAmount": {
 						"0": [4, 4, 4, 4, 4, 4, 4]
-					}
+					},
+					"castRange": [700, 700, 700, 700, 700, 700, 700]
 				}
 			]
 		},
@@ -287,6 +292,7 @@
 						"5": [25, 40, 55, 70, 85, 100, 115],
 						"6": [250, 250, 250, 250, 250, 250, 250]
 					},
+					"castRange": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
 					"isImmobilizing": true
 				},
 				{
@@ -309,7 +315,8 @@
 						"5": [25, 40, 55, 70, 85, 100, 115],
 						"6": [1.25, 1.4, 1.55, 1.7, 1.85, 2, 2.15],
 						"7": [5, 5, 5, 5, 5, 5, 5]
-					}
+					},
+					"castRange": [700, 700, 700, 700, 700, 700, 700]
 				},
 				{
 					"name": "Rappel / Cocoon",
@@ -329,7 +336,8 @@
 						"5": [25, 40, 55, 70, 85, 100, 115],
 						"6": [0.25, 0.4, 0.55, 0.7, 0.85, 1, 1.15],
 						"7": [5, 5, 5, 5, 5, 5, 5]
-					}
+					},
+					"castRange": [900, 900, 900, 900, 900, 900, 900]
 				}
 			]
 		},
@@ -463,7 +471,8 @@
 						"6": [0, 50, 70, 90, 110, 0, 0],
 						"7": [4, 6, 8, 10, 12, 0, 0],
 						"8": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08]
-					}
+					},
+					"castRange": [20, 20, 20, 20, 20, 20, 20]
 				},
 				{
 					"name": "Human Form",
@@ -512,7 +521,8 @@
 						"6": [0, 50, 70, 90, 110, 0, 0],
 						"7": [0, 4, 6, 8, 10, 0, 0],
 						"8": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-					}
+					},
+					"castRange": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},

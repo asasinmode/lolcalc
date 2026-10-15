@@ -71,7 +71,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [600, 600, 600, 600, 600, 600, 600]
 				},
 				{
 					"name": "Shock Blast",
@@ -168,7 +169,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [285, 285, 285, 285, 285, 285, 285]
 				},
 				{
 					"name": "Hyper Charge",
@@ -207,7 +209,8 @@
 						"1": [0, 0, 25, 50, 75, 100, 125],
 						"2": [15, 20, 25, 30, 35, 40, 45],
 						"3": [0.62, 0.7, 0.78, 0.86, 0.94, 1.02, 1.1]
-					}
+					},
+					"castRange": [50000, 50000, 50000, 50000, 50000, 50000, 50000]
 				}
 			]
 		},
@@ -252,6 +255,7 @@
 							]
 						}
 					},
+					"castRange": [240, 240, 240, 240, 240, 240, 240],
 					"isImmobilizing": true
 				},
 				{
@@ -383,7 +387,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [600, 600, 600, 600, 600, 600, 600]
 				},
 				{
 					"name": "Mercury Hammer / Mercury Cannon",
@@ -392,7 +397,8 @@
 					"image": "assets/characters/jayce/hud/icons2d/jaycer_melee.png",
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"tooltip": "{{Spell_JayceStanceGtH_Tooltip}}",
-					"tooltipExtended": "{{Spell_JayceStanceGtH_Tooltip}}<br><br>{{Spell_JayceStanceHtG_Tooltip}}"
+					"tooltipExtended": "{{Spell_JayceStanceGtH_Tooltip}}<br><br>{{Spell_JayceStanceHtG_Tooltip}}",
+					"castRange": [600, 600, 600, 600, 600, 600, 600]
 				}
 			]
 		},

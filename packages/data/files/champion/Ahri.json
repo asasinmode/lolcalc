@@ -124,7 +124,8 @@
 							"mModifiedGameCalculation": "SingleFireDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [600, 600, 600, 600, 600, 600, 600]
 				}
 			]
 		},
@@ -171,6 +172,7 @@
 							]
 						}
 					},
+					"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000],
 					"isImmobilizing": true
 				}
 			]

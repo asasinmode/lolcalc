@@ -69,6 +69,7 @@
 							]
 						}
 					},
+					"castRange": [1300, 1300, 1300, 1300, 1300, 1300, 1300],
 					"isImmobilizing": true
 				}
 			]
@@ -137,7 +138,8 @@
 							"mModifiedGameCalculation": "TotalMinDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [900, 900, 900, 900, 900, 900, 900]
 				}
 			]
 		},
@@ -176,7 +178,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [800, 800, 800, 800, 800, 800, 800]
 				}
 			]
 		},
@@ -228,6 +231,7 @@
 							]
 						}
 					},
+					"castRange": [625, 625, 625, 625, 625, 625, 625],
 					"isImmobilizing": true
 				}
 			]

@@ -90,7 +90,8 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					}
+					},
+					"castRange": [450, 450, 450, 450, 450, 450, 450]
 				}
 			]
 		},
@@ -135,6 +136,7 @@
 							]
 						}
 					},
+					"castRange": [715, 715, 715, 715, 715, 715, 715],
 					"isImmobilizing": true
 				}
 			]
@@ -231,7 +233,8 @@
 							"mModifiedGameCalculation": "DamagePerStrike",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [500, 500, 500, 500, 500, 500, 500]
 				}
 			]
 		},
@@ -351,7 +354,8 @@
 							"mModifiedGameCalculation": "FinalOnHitDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [450, 450, 450, 450, 450, 450, 450]
 				}
 			]
 		},

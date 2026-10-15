@@ -92,7 +92,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000]
 				}
 			]
 		},
@@ -124,7 +125,8 @@
 						"DashSpeed": [900, 900, 900, 900, 900, 900, 900],
 						"RangeClamp": [300, 300, 300, 300, 300, 300, 300],
 						"MinRange": [100, 100, 100, 100, 100, 100, 100]
-					}
+					},
+					"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000]
 				}
 			]
 		},
@@ -184,7 +186,8 @@
 							"mModifiedGameCalculation": "TotalDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [650, 650, 650, 650, 650, 650, 650]
 				}
 			]
 		},
@@ -286,6 +289,7 @@
 							"__type": "GameCalculationModified"
 						}
 					},
+					"castRange": [660, 660, 660, 660, 660, 660, 660],
 					"isImmobilizing": true
 				}
 			]

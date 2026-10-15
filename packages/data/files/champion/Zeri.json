@@ -232,7 +232,8 @@
 							"mModifiedGameCalculation": "TotalDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [1200, 1200, 1200, 1200, 1200, 1200, 1200]
 				}
 			]
 		},

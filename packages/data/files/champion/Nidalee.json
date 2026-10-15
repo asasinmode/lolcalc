@@ -98,7 +98,8 @@
 						"4": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"5": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
 						"6": [525, 525, 525, 525, 525, 525, 525]
-					}
+					},
+					"castRange": [1500, 1500, 1500, 1500, 1500, 1500, 1500]
 				},
 				{
 					"name": "Takedown / Javelin Toss",
@@ -121,7 +122,8 @@
 						"4": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"5": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
 						"6": [1, 1, 1.25, 1.5, 1.75, 1.75, 1.75]
-					}
+					},
+					"castRange": [500, 500, 500, 500, 500, 500, 500]
 				}
 			]
 		},
@@ -204,7 +206,8 @@
 						"6": [0, 40, 80, 120, 160, 200, 240]
 					},
 					"ammoRechargeTime": [-1, -1, -1, -1, -1, -1, -1],
-					"maxAmmo": [0, 0, 0, 0, 0, 0, 0]
+					"maxAmmo": [0, 0, 0, 0, 0, 0, 0],
+					"castRange": [900, 900, 900, 900, 900, 900, 900]
 				},
 				{
 					"name": "Pounce / Bushwhack",
@@ -291,7 +294,8 @@
 							"mModifiedGameCalculation": "TotalHealing",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [900, 900, 900, 900, 900, 900, 900]
 				},
 				{
 					"name": "Swipe / Primal Surge",
@@ -304,7 +308,8 @@
 					"effectAmount": {
 						"0": [80, 80, 140, 200, 260, 260, 260],
 						"1": [1, 1, 1, 1, 1, 1, 1]
-					}
+					},
+					"castRange": [350, 350, 350, 350, 350, 350, 350]
 				}
 			]
 		},
@@ -411,7 +416,8 @@
 					},
 					"effectAmount": {
 						"5": [6, 6, 6, 6, 6, 6, 6]
-					}
+					},
+					"castRange": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},
@@ -423,7 +429,8 @@
 					"objectName": "NidaleePassiveHunt",
 					"dataKey": "Characters/Nidalee/Spells/NidaleePassiveHuntAbility/NidaleePassiveHunt",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_passive.png",
-					"tooltip": "Nidalee starts with a rank in <spellName>Aspect of the Cougar</spellName>. <br><br>Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed> for 2 seconds when entering Brush, increased to <speed>@HuntingPercentMS@% Move Speed</speed> while moving toward enemy champions.<br><br>Hitting champions or jungle monsters with <spellName>Javelin Toss</spellName> or <spellName>Bushwhack</spellName> marks them as <keywordMajor>Hunted</keywordMajor> for 4 seconds. While an enemy is <keywordMajor>Hunted</keywordMajor>, they are revealed with <keywordStealth>True Sight</keywordStealth> and Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed>, increased to <speed>@HuntingPercentMS@% Move Speed</speed> toward the <keywordMajor>Hunted</keywordMajor> enemy. "
+					"tooltip": "Nidalee starts with a rank in <spellName>Aspect of the Cougar</spellName>. <br><br>Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed> for 2 seconds when entering Brush, increased to <speed>@HuntingPercentMS@% Move Speed</speed> while moving toward enemy champions.<br><br>Hitting champions or jungle monsters with <spellName>Javelin Toss</spellName> or <spellName>Bushwhack</spellName> marks them as <keywordMajor>Hunted</keywordMajor> for 4 seconds. While an enemy is <keywordMajor>Hunted</keywordMajor>, they are revealed with <keywordStealth>True Sight</keywordStealth> and Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed>, increased to <speed>@HuntingPercentMS@% Move Speed</speed> toward the <keywordMajor>Hunted</keywordMajor> enemy. ",
+					"castRange": [1400, 1400, 1400, 1400, 1400, 1400, 1400]
 				}
 			]
 		}

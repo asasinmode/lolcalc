@@ -50,7 +50,8 @@
 					"dataValues": {
 						"AttackSpeedMod": [0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35],
 						"BuffDuration": [7, 7, 7, 7, 7, 7, 7]
-					}
+					},
+					"castRange": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},
@@ -232,7 +233,8 @@
 							"mModifiedGameCalculation": "ActiveDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [550, 550, 550, 550, 550, 550, 550]
 				}
 			]
 		},
@@ -289,6 +291,7 @@
 							]
 						}
 					},
+					"castRange": [550, 550, 550, 550, 550, 550, 550],
 					"isImmobilizing": true
 				}
 			]

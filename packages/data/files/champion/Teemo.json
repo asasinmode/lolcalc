@@ -84,7 +84,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [680, 680, 680, 680, 680, 680, 680]
 				}
 			]
 		},
@@ -114,7 +115,8 @@
 						"ActiveMoveSpeedBuffDuration": [3, 3, 3, 3, 3, 3, 3],
 						"ActiveMoveSpeedBonus": [0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64],
 						"PassiveCooldownOnDamageTaken": [5, 5, 5, 5, 5, 5, 5]
-					}
+					},
+					"castRange": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},
@@ -213,7 +215,8 @@
 							"mModifiedGameCalculation": "TickCalculatedDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [680, 680, 680, 680, 680, 680, 680]
 				}
 			]
 		},
@@ -284,7 +287,8 @@
 						}
 					},
 					"ammoRechargeTime": [0, 35, 30, 25, 0, 0, 0],
-					"maxAmmo": [3, 3, 4, 5, 3, 3, 3]
+					"maxAmmo": [3, 3, 4, 5, 3, 3, 3],
+					"castRange": [600, 600, 750, 900, 900, 900, 900]
 				}
 			]
 		},

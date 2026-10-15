@@ -98,7 +98,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [600, 600, 600, 600, 600, 600, 600]
 				}
 			]
 		},
@@ -193,7 +194,8 @@
 							"mModifiedGameCalculation": "FinalPhysicalDR",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [775, 775, 775, 775, 775, 775, 775]
 				}
 			]
 		},
@@ -305,7 +307,8 @@
 							]
 						}
 					},
-					"ammoRechargeTime": [-1, -1, -1, -1, -1, -1, -1]
+					"ammoRechargeTime": [-1, -1, -1, -1, -1, -1, -1],
+					"castRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
 				}
 			]
 		},

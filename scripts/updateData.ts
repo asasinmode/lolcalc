@@ -2215,6 +2215,12 @@ function championAbilityVariant(
 		throw new Error(`${debugPrefix} expected mLocKeys in variant "${variantDataKey}"`);
 	}
 
+	let castRange = variantData.mSpell.castRange && variantData.mSpell.castRange.map((v: number) => formatNumber(v));
+	/* 25k seems to be generic for basically no range limit */
+	if (!Array.isArray(castRange) || castRange.every((value: number) => value === 0) || castRange.every((value: number) => value === 25_000)) {
+		castRange = undefined;
+	}
+
 	const variant = {
 		name: undefined!,
 		objectName: variantData.ObjectName,
@@ -2244,6 +2250,7 @@ function championAbilityVariant(
 		effectAmount: cleanupObject(mEffectAmount, true),
 		ammoRechargeTime: variantData.mSpell?.mAmmoRechargeTime,
 		maxAmmo: variantData.mSpell?.mMaxAmmo,
+		castRange,
 		isImmobilizing: undefined,
 	} as IChampionAbilityVariant;
 

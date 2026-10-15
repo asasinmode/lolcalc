@@ -170,6 +170,7 @@
 							]
 						}
 					},
+					"castRange": [825, 825, 825, 825, 825, 825, 825],
 					"isImmobilizing": true
 				}
 			]

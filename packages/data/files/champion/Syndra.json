@@ -68,7 +68,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [800, 800, 800, 800, 800, 800, 800]
 				}
 			]
 		},
@@ -165,7 +166,8 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
 						}
-					}
+					},
+					"castRange": [925, 925, 925, 925, 925, 925, 925]
 				}
 			]
 		},
@@ -210,6 +212,7 @@
 							]
 						}
 					},
+					"castRange": [650, 650, 650, 650, 650, 650, 650],
 					"isImmobilizing": true
 				}
 			]
@@ -274,7 +277,8 @@
 							"mModifiedGameCalculation": "DamageCalc",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [675, 675, 675, 675, 675, 675, 675]
 				}
 			]
 		},

@@ -261,6 +261,7 @@
 							"__type": "GameCalculationModified"
 						}
 					},
+					"castRange": [275, 275, 275, 275, 275, 275, 275],
 					"isImmobilizing": true
 				}
 			]
@@ -358,6 +359,7 @@
 							]
 						}
 					},
+					"castRange": [4000, 4000, 4750, 5500, 0, 0, 0],
 					"isImmobilizing": true
 				}
 			]

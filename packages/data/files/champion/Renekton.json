@@ -147,7 +147,8 @@
 							"mModifiedGameCalculation": "ChampHealing",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [20, 325, 325, 325, 325, 325, 20]
 				}
 			]
 		},
@@ -211,6 +212,7 @@
 							]
 						}
 					},
+					"castRange": [300, 300, 300, 300, 300, 300, 300],
 					"isImmobilizing": true
 				}
 			]
@@ -346,7 +348,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		},

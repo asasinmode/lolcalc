@@ -119,6 +119,7 @@
 						"0": [5, 5, 5, 5, 5, 5, 5],
 						"1": [400, 400, 500, 600, 700, 800, 900]
 					},
+					"castRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
 					"isImmobilizing": true
 				}
 			]
@@ -166,7 +167,8 @@
 							"mModifiedGameCalculation": "TotalDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [600, 600, 600, 600, 600, 600, 600]
 				}
 			]
 		},
@@ -266,7 +268,8 @@
 							"mModifiedGameCalculation": "TotalDamagePerSecond",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [750, 750, 750, 750, 750, 750, 750]
 				}
 			]
 		},

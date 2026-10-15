@@ -103,7 +103,8 @@
 							"mModifiedGameCalculation": "RecastDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [1200, 1200, 1200, 1200, 1200, 1200, 1200]
 				}
 			]
 		},
@@ -151,7 +152,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [700, 700, 700, 700, 700, 700, 700]
 				}
 			]
 		},
@@ -196,7 +198,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [450, 450, 450, 450, 450, 450, 450]
 				}
 			]
 		},
@@ -243,6 +246,7 @@
 							]
 						}
 					},
+					"castRange": [375, 375, 375, 375, 375, 375, 375],
 					"isImmobilizing": true
 				}
 			]

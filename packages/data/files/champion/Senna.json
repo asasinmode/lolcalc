@@ -124,7 +124,8 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					}
+					},
+					"castRange": [600, 600, 600, 600, 600, 600, 600]
 				}
 			]
 		},
@@ -173,6 +174,7 @@
 							]
 						}
 					},
+					"castRange": [1300, 1300, 1300, 1300, 1300, 1300, 1300],
 					"isImmobilizing": true
 				}
 			]

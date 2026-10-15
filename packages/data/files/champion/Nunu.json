@@ -109,7 +109,8 @@
 							"mModifiedGameCalculation": "MonsterHealing",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [125, 125, 125, 125, 125, 125, 125]
 				}
 			]
 		},
@@ -281,6 +282,7 @@
 							"mPrecision": 1
 						}
 					},
+					"castRange": [5000, 5000, 5000, 5000, 5000, 5000, 5000],
 					"isImmobilizing": true
 				}
 			]
@@ -357,7 +359,8 @@
 							"mModifiedGameCalculation": "MaximumDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [650, 650, 650, 650, 650, 650, 650]
 				}
 			]
 		},
@@ -391,7 +394,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [20, 20, 20, 20, 20, 20, 20]
 				}
 			]
 		}

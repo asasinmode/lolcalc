@@ -141,6 +141,7 @@
 							]
 						}
 					},
+					"castRange": [675, 675, 675, 675, 675, 675, 675],
 					"isImmobilizing": true
 				}
 			]
@@ -186,7 +187,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [800, 800, 800, 800, 800, 800, 800]
 				}
 			]
 		},
@@ -295,7 +297,8 @@
 							"mModifiedGameCalculation": "REBonusShield",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [1100, 1100, 1100, 1100, 1100, 1100, 1100]
 				}
 			]
 		},
@@ -320,7 +323,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [300, 300, 300, 300, 300, 300, 300]
 				}
 			]
 		}

@@ -187,7 +187,8 @@
 							"mModifiedGameCalculation": "BonusDamagePerMark",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [1450, 1450, 1450, 1450, 1450, 1450, 1450]
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
@@ -589,6 +590,7 @@
 							"mPrecision": 2
 						}
 					},
+					"castRange": [30000, 30000, 30000, 30000, 30000, 30000, 30000],
 					"isImmobilizing": true
 				},
 				{
@@ -759,7 +761,8 @@
 							"mModifiedGameCalculation": "SecondaryTargetPenalty",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [850, 850, 850, 850, 850, 850, 850]
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
@@ -933,7 +936,8 @@
 							],
 							"mPrecision": 2
 						}
-					}
+					},
+					"castRange": [475, 475, 475, 475, 475, 475, 475]
 				}
 			]
 		},
@@ -1134,7 +1138,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
 				}
 			]
 		},

@@ -167,7 +167,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [800, 800, 800, 800, 800, 800, 800]
 				},
 				{
 					"name": "Severing Bolt",
@@ -204,7 +205,8 @@
 							"mModifiedGameCalculation": "Damage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [1900, 1900, 1900, 1900, 1900, 1900, 1900]
 				},
 				{
 					"name": "Molten Fissure",
@@ -258,7 +260,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [1200, 1200, 1200, 1200, 1200, 1200, 1200]
 				}
 			]
 		},
@@ -402,7 +405,8 @@
 							],
 							"mDisplayAsPercent": true
 						}
-					}
+					},
+					"castRange": [1200, 1200, 1200, 1200, 1200, 1200, 1200]
 				},
 				{
 					"name": "Pool of Reflection",
@@ -450,7 +454,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [650, 650, 650, 650, 650, 650, 650]
 				},
 				{
 					"name": "Stirring Lights",
@@ -503,7 +508,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [500, 500, 500, 500, 500, 500, 500]
 				}
 			]
 		},
@@ -627,6 +633,7 @@
 							]
 						}
 					},
+					"castRange": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
 					"isImmobilizing": true
 				},
 				{
@@ -661,6 +668,7 @@
 							]
 						}
 					},
+					"castRange": [900, 900, 900, 900, 900, 900, 900],
 					"isImmobilizing": true
 				},
 				{
@@ -691,6 +699,7 @@
 							]
 						}
 					},
+					"castRange": [800, 800, 800, 800, 800, 800, 800],
 					"isImmobilizing": true
 				}
 			]
@@ -779,7 +788,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
 				}
 			]
 		},

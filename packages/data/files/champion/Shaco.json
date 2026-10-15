@@ -197,6 +197,7 @@
 						"3": [40, 40, 40, 40, 40, 40, 40],
 						"4": [2, 2, 2, 2, 2, 2, 2]
 					},
+					"castRange": [500, 500, 500, 500, 500, 500, 500],
 					"isImmobilizing": true
 				}
 			]
@@ -259,7 +260,8 @@
 							"mModifiedGameCalculation": "TotalDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [625, 625, 625, 625, 625, 625, 625]
 				}
 			]
 		},
@@ -338,6 +340,7 @@
 					"effectAmount": {
 						"4": [6, 6, 6, 6, 6, 6, 6]
 					},
+					"castRange": [200, 200, 200, 200, 200, 200, 200],
 					"isImmobilizing": true
 				}
 			]

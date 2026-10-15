@@ -254,6 +254,7 @@
 							]
 						}
 					},
+					"castRange": [35000, 35000, 35000, 35000, 35000, 35000, 35000],
 					"isImmobilizing": true
 				}
 			]
@@ -316,7 +317,8 @@
 							"mModifiedGameCalculation": "Shield",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [35000, 35000, 35000, 35000, 35000, 35000, 35000]
 				}
 			]
 		},

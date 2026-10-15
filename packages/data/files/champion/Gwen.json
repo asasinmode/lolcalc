@@ -133,7 +133,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [500, 500, 500, 500, 500, 500, 500]
 				}
 			]
 		},
@@ -315,7 +316,8 @@
 							"mModifiedGameCalculation": "TotalDamage",
 							"__type": "GameCalculationModified"
 						}
-					}
+					},
+					"castRange": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
 				}
 			]
 		},

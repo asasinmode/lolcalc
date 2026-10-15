@@ -107,7 +107,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000]
 				},
 				{
 					"name": "Boulder Toss / Boomerang Throw",
@@ -140,7 +141,8 @@
 								}
 							]
 						}
-					}
+					},
+					"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000]
 				}
 			]
 		},
@@ -218,6 +220,7 @@
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"tooltip": "{{Spell_GnarBigW_Tooltip}}",
 					"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}",
+					"castRange": [2500, 2500, 2500, 2500, 2500, 2500, 2500],
 					"isImmobilizing": true
 				}
 			]
@@ -373,6 +376,7 @@
 							"__type": "GameCalculationModified"
 						}
 					},
+					"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000],
 					"isImmobilizing": true
 				}
 			]
