@@ -168,8 +168,13 @@ import Yorick from './champion/Yorick.ts';
 import Yunara from './champion/Yunara.ts';
 import Yuumi from './champion/Yuumi.ts';
 import Zaahen from './champion/Zaahen.ts';
+import Zac from './champion/Zac.ts';
+import Zed from './champion/Zed.ts';
 import Zeri from './champion/Zeri.ts';
+import Ziggs from './champion/Ziggs.ts';
 import Zilean from './champion/Zilean.ts';
+import Zoe from './champion/Zoe.ts';
+import Zyra from './champion/Zyra.ts';
 import type { IEffectControlsProps, ISpecificVariables, IAbilityImgIndexGetter } from './index';
 
 /** specific champions' helpers, utils and calculations */
@@ -361,8 +366,13 @@ export const CHAMPION_SPECIFICS = {
 	Yunara,
 	Yuumi,
 	Zaahen,
+	Zac,
+	Zed,
 	Zeri,
+	Ziggs,
 	Zilean,
+	Zoe,
+	Zyra,
 } satisfies IHypotheticalChampionSpecifics;
 
 export type TChampionSpecifics = typeof CHAMPION_SPECIFICS;

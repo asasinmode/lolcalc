@@ -366,6 +366,9 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	} else if (variableName === 'CastRange') {
 		rv.value = abilityVariant.castRange?.[abilityLevel ?? 1];
 		rv.allValues = abilityVariant.castRange;
+	} else if (variableName === 'Cooldown') {
+		rv.value = abilityVariant.cooldownTime?.[abilityLevel ?? 1];
+		rv.allValues = abilityVariant.cooldownTime;
 	}
 
 	if (rv.value) {
