@@ -147,6 +147,7 @@ import Tryndamere from './champion/Tryndamere.ts';
 import TwistedFate from './champion/TwistedFate.ts';
 import Twitch from './champion/Twitch.ts';
 import Udyr from './champion/Udyr.ts';
+import Urgot from './champion/Urgot.ts';
 import Varus from './champion/Varus.ts';
 import Vayne from './champion/Vayne.ts';
 import Veigar from './champion/Veigar.ts';
@@ -329,6 +330,7 @@ export const CHAMPION_SPECIFICS = {
 	TwistedFate,
 	Twitch,
 	Udyr,
+	Urgot,
 	Varus,
 	Vayne,
 	Veigar,
