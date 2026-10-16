@@ -1,10 +1,11 @@
 import type { ICalculateChampionStatsHookSource } from '@lolcalc/core/DamageSource.ts';
-import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import type { IChampionAbilityVariableParams, IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { CONSTS } from '@lolcalc/data';
 import type { IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey } from '@lolcalc/shared';
 import type { DetectChampionVariables } from '../../types.ts';
-import type { IDefineVariablesConfig, IExtractExtraVariables, ISpecificVariables } from '../index.ts';
+import type { ICalculatesFromPart, IDefineVariablesConfig, IExtractExtraVariables, ISpecificVariables } from '../index.ts';
 import { defineVariables } from '../index.ts';
 
 /** wrapper around `defineVariables` for types on champion specific's variables */
@@ -63,5 +64,26 @@ export function windBrotherCalculateHooks(id: 'Yasuo' | 'Yone'): ICalculateChamp
 				}
 			},
 		},
+	};
+}
+
+export function windBrotherCritDamageCalculatesFrom(brother: IChampionId) {
+	return function (params: IChampionAbilityVariableParams): ICalculatesFromPart[] {
+		const variable = championAbilityVariableValue('CurrentCritDamage', params);
+		const critDamageMod = championAbilityVariableValue('CritDamageMod', params);
+
+		if (typeof variable.calculatesFrom?.[0]?.value === 'number' && typeof critDamageMod.value === 'number') {
+			return [
+				{
+					stat: 'const',
+					value: CONSTS.defaultCritDamageMult * critDamageMod.value,
+					isPercentage: true,
+				},
+				variable.calculatesFrom[0],
+			];
+		} else {
+			console.warn(`[CHAMPION_SPECIFICS ${brother}] failed to calculate passive current crit damage calculates from`, variable, critDamageMod);
+			return variable.calculatesFrom ?? [];
+		}
 	};
 }

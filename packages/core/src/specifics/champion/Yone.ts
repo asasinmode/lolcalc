@@ -1,5 +1,6 @@
 import type IYone from '@lolcalc/data/files/champion/Yone.json';
 import type { IChampionSpecific } from '../champion.ts';
+import { windBrotherCritDamageCalculatesFrom } from './shared.ts';
 import { defineChampionVariables, windBrotherCalculateHooks } from './shared.ts';
 
 export default {
@@ -27,6 +28,9 @@ export default {
 				},
 				f3: {
 					displayedName: 'BonusAD',
+				},
+				CurrentCritDamage: {
+					calculatesFrom: windBrotherCritDamageCalculatesFrom('Yone'),
 				},
 			},
 			uninteresting: ['YoneCritToAD', 'CritChanceMultiplier', 'MagicDamageSplit'],
