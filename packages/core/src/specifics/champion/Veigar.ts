@@ -29,6 +29,11 @@ export default {
 					},
 				};
 			},
+			meta: {
+				f1: {
+					displayedName: 'Stacks',
+				},
+			},
 			uninteresting: ['dAbilityStacks', 'dTakedownStacks', 'APPerStack'],
 		}),
 	},

@@ -12,6 +12,7 @@ export default {
 			},
 			calculate(self, target) {
 				let PossessHeal = Number.NaN;
+
 				const healPercent = championAbilityVariableValue('PercentHealthHeal', {
 					abilityKey: 'passive',
 					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
@@ -19,7 +20,7 @@ export default {
 					damageSource: self,
 				});
 				if (typeof healPercent.value === 'number') {
-					PossessHeal = (target?.stats.value.total.hp ?? 0) * healPercent.value;
+					PossessHeal = healPercent.value * (target?.stats.value.total.hp ?? 0);
 				} else {
 					console.warn('[CHAMPION_SPECIFICS viego] failed to calculate possess heal percent', healPercent);
 				}

@@ -151,6 +151,9 @@ import Urgot from './champion/Urgot.ts';
 import Varus from './champion/Varus.ts';
 import Vayne from './champion/Vayne.ts';
 import Veigar from './champion/Veigar.ts';
+import Velkoz from './champion/Velkoz.ts';
+import Vex from './champion/Vex.ts';
+import Vi from './champion/Vi.ts';
 import Viego from './champion/Viego.ts';
 import Viktor from './champion/Viktor.ts';
 import Vladimir from './champion/Vladimir.ts';
@@ -334,6 +337,9 @@ export const CHAMPION_SPECIFICS = {
 	Varus,
 	Vayne,
 	Veigar,
+	Velkoz,
+	Vex,
+	Vi,
 	Viego,
 	Viktor,
 	Vladimir,

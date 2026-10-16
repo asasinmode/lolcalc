@@ -1,5 +1,7 @@
+import type IViktor from '@lolcalc/data/files/champion/Viktor.json';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
+import { defineChampionVariables } from './shared.ts';
 
 const passiveUpgradesMask = 2 ** 4;
 
@@ -20,5 +22,8 @@ export default {
 	},
 	passive: {
 		upgradesMask: passiveUpgradesMask,
+		variables: defineChampionVariables<'Viktor', typeof IViktor, 'passive'>()({
+			uninteresting: ['EvolutionStackBreakpoint', 'MinionStacks', 'CannonStacks', 'ChampionStacks'],
+		}),
 	},
 } satisfies IChampionSpecific<'Viktor'>;
