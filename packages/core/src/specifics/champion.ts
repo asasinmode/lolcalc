@@ -164,6 +164,9 @@ import Xerath from './champion/Xerath.ts';
 import XinZhao from './champion/XinZhao.ts';
 import Yasuo from './champion/Yasuo.ts';
 import Yone from './champion/Yone.ts';
+import Yorick from './champion/Yorick.ts';
+import Yunara from './champion/Yunara.ts';
+import Yuumi from './champion/Yuumi.ts';
 import Zaahen from './champion/Zaahen.ts';
 import Zeri from './champion/Zeri.ts';
 import Zilean from './champion/Zilean.ts';
@@ -354,6 +357,9 @@ export const CHAMPION_SPECIFICS = {
 	XinZhao,
 	Yasuo,
 	Yone,
+	Yorick,
+	Yunara,
+	Yuumi,
 	Zaahen,
 	Zeri,
 	Zilean,
