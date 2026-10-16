@@ -1,3 +1,5 @@
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { CONSTS } from '@lolcalc/data';
 import type IYasuo from '@lolcalc/data/files/champion/Yasuo.json';
 import { VariableType } from '@lolcalc/shared';
 import type { IChampionSpecific } from '../champion.ts';
@@ -31,6 +33,26 @@ export default {
 				},
 				f3: {
 					displayedName: 'BonusAD',
+				},
+				CurrentCritDamage: {
+					calculatesFrom(params) {
+						const variable = championAbilityVariableValue('CurrentCritDamage', params);
+						const critDamageMod = championAbilityVariableValue('CritDamageMod', params);
+
+						if (typeof variable.calculatesFrom?.[0]?.value === 'number' && typeof critDamageMod.value === 'number') {
+							return [
+								{
+									stat: 'const',
+									value: CONSTS.defaultCritDamageMult * critDamageMod.value,
+									isPercentage: true,
+								},
+								variable.calculatesFrom[0],
+							];
+						} else {
+							console.warn('[CHAMPION_SPECIFICS yasuo] failed to calculate passive current crit damage calculates from', variable, critDamageMod);
+							return variable.calculatesFrom ?? [];
+						}
+					},
 				},
 			},
 			uninteresting: ['YasuoCritToAD', 'CritChanceMultiplier'],

@@ -61,9 +61,9 @@ export interface IVariableMeta<T = any> {
 	 *	- rune: `IRuneVariableParams`
 	 *	- champion: `IChampionAbilityVariableParams`
 	 */
-	extendedEquals?: IVariableMetaExtendedEquals | ((variableValueParams: T) => IVariableMetaExtendedEquals);
+	extendedEquals?: IVariableMetaExtendedEquals | ((params: T) => IVariableMetaExtendedEquals);
 	/** will override variable's calculatesFrom */
-	calculatesFrom?: ICalculatesFromPart[] | ((variableValueParams: T) => ICalculatesFromPart[]);
+	calculatesFrom?: ICalculatesFromPart[] | ((params: T) => ICalculatesFromPart[]);
 	/** displayed value multiplied by */
 	multiplier?: number;
 	/** same as `IVariableValueResult.roundReplaced` */

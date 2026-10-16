@@ -20,6 +20,7 @@ export const PATCH_VERSION = {
 };
 
 export const CONSTS = {
+	defaultCritDamageMult: 2,
 	baseAttackSpeedCap: 3.003,
 	moveSpeed: {
 		/** something mathy related to asymptotes/rational curves */

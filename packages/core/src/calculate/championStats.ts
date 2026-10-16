@@ -45,7 +45,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusAttackSpeedPercent: 0,
 		abilityHaste: 0,
 		critChance: champion?.stats.crit ?? 0,
-		critDamageMultiplier: 2,
+		critDamageMultiplier: CONSTS.defaultCritDamageMult,
 		moveSpeed: champion?.stats.movespeed ?? 0,
 		slowResist: 0,
 		summonerHaste: 0,
