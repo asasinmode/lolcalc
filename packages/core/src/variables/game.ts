@@ -272,7 +272,7 @@ export function runeVariableValue(variable: string, params: IRuneVariableParams,
 	return rv;
 }
 
-interface IChampionAbilityVariableParams extends IBaseVariableParams {
+export interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityVariant: IChampionAbilityVariant;
 	abilityKey: IChampionAbilityKey;
 	dynamicVariables?: IDynamicVariables;

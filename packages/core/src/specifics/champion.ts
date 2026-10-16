@@ -159,6 +159,7 @@ import Viktor from './champion/Viktor.ts';
 import Vladimir from './champion/Vladimir.ts';
 import Volibear from './champion/Volibear.ts';
 import Warwick from './champion/Warwick.ts';
+import Xayah from './champion/Xayah.ts';
 import Yasuo from './champion/Yasuo.ts';
 import Yone from './champion/Yone.ts';
 import Zaahen from './champion/Zaahen.ts';
@@ -346,6 +347,7 @@ export const CHAMPION_SPECIFICS = {
 	Vladimir,
 	Volibear,
 	Warwick,
+	Xayah,
 	Yasuo,
 	Yone,
 	Zaahen,
