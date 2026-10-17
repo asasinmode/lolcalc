@@ -224,7 +224,7 @@
 		overscroll-behavior: contain;
 
 		/* TODO fix offset when block flipped */
-		inset-block-start: calc(anchor(end) + var(--tooltip-bs-offset, 0px));
+		inset-block-start: calc(anchor(end) + var(--tooltip-offset-y, 0px));
 		/* position-area: block-end; /* below the anchor, centered on it */
 		justify-self: anchor-center;
 		position-try-fallbacks: flip-block, --hover-tooltip-sheet;
@@ -300,8 +300,9 @@
 
 	.info-tooltip-trigger + [popover] {
 		--at-apply: 'max-inline-120 inline-fit p-[--default-hover-tooltip-p] pointer-events-auto select-text cursor-auto';
-		--popover-offset-y: var(--spacing) * 1.75;
-		inset-block-end: calc(anchor(top) + var(--popover-offset-y));
+		--tooltip-offset-y: var(--spacing) * 1.75;
+		inset-block-start: auto;
+		inset-block-end: calc(anchor(start) + var(--tooltip-offset-y));
 		position-anchor: --parent;
 		justify-self: anchor-center;
 		position-try: flip-block;

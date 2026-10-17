@@ -1985,7 +1985,7 @@ defineExpose({ el });
 				.hover-tooltip.champion-rune,
 				.hover-tooltip.champion-stat {
 					--tooltip-max-w: calc(156 * var(--spacing));
-					--tooltip-bs-offset: -1px;
+					--tooltip-offset-y: -1px;
 					position-anchor: --scoreboard-item-stats;
 				}
 			}
@@ -2312,7 +2312,7 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.champion-ability {
-					--tooltip-bs-offset: -1px;
+					--tooltip-offset-y: -1px;
 					position-anchor: --scoreboard-item-abilities;
 				}
 			}
@@ -2730,10 +2730,10 @@ defineExpose({ el });
 
 @layer overrides {
 	[data-scoreboard-item] .hover-tooltip[data-from-extras] {
-		--tooltip-bs-offset: 0px;
+		--tooltip-offset-y: 0px;
 		position-anchor: --scoreboard-item-extras;
 		inset-block-start: auto;
-		inset-block-end: calc(anchor(start) + var(--tooltip-bs-offset, 0px));
+		inset-block-end: calc(anchor(start) + var(--tooltip-offset-y, 0px));
 	}
 
 	[data-scoreboard-item='Yone'] {

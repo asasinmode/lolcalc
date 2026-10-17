@@ -16,6 +16,7 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 
 	function reset() {
 		triggerEl = undefined;
+		hovered = undefined;
 		setPinned(false);
 	}
 
