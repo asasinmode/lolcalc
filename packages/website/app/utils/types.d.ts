@@ -132,8 +132,8 @@ export interface IExtraComponentProps {
 	onImgMouseenter?: (...args: IExtraComponentEmits['imgMouseenter']) => void;
 }
 
-export interface IExtraComponentEmits {
-	imgMouseenter: [event: MouseEvent, abilityId: IGameAbilityId, damageSource?: DamageSource];
+export interface IExtraComponentEmits<T = IGameAbilityId> {
+	imgMouseenter: [event: MouseEvent, abilityId: T, damageSource?: DamageSource];
 }
 
 export interface ISpecificComponents {

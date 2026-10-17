@@ -52,7 +52,7 @@ defineExpose({ el });
 </script>
 
 <template>
-	<article ref="el" popover="manual" class="hover-tooltip champion-ability" :class="{ disabled: computedDescription?.isDisabled }">
+	<article ref="el" popover="hint" class="hover-tooltip champion-ability" :class="{ disabled: computedDescription?.isDisabled }">
 		<img
 			v-show="!computedIsLoading"
 			:src="!computedIsLoading && computedDescription ? abilityImage(computedDescription.image, computedDescription.gameAbilityId.id, group) : undefined"
@@ -151,10 +151,8 @@ defineExpose({ el });
 	}
 
 	.hover-tooltip.champion-ability {
-		--at-apply: 'max-w-164 relative grid-cols-[auto_1fr_auto] auto-rows-min gap-x-[--gap-x]';
-		justify-self: anchor-center;
-		position-try: flip-block;
-		inset-block-start: calc(anchor(end) - 1px);
+		--tooltip-max-w: calc(164 * var(--spacing));
+		--at-apply: 'grid-cols-[auto_1fr_auto] auto-rows-min gap-x-[--gap-x]';
 
 		&:popover-open {
 			--at-apply: 'grid';

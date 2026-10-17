@@ -216,6 +216,49 @@
 		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-btn-border-clr] text-[--hover-tooltip-text-clr] shadow-lg';
 		--footer-pt: calc(1 * var(--spacing));
 		--footer-mt: calc(2 * var(--spacing));
+		--tooltip-margin: var(--size-page-px);
+		max-inline-size: min(var(--tooltip-max-w, 100dvi), 100dvi - 2 * var(--tooltip-margin));
+		margin: 0px var(--tooltip-margin);
+		max-block-size: calc(80dvb - 2 * var(--tooltip-margin));
+		overflow-y: auto;
+		overscroll-behavior: contain;
+
+		/* TODO fix offset when block flipped */
+		inset-block-start: calc(anchor(end) + var(--tooltip-bs-offset, 0px));
+		/* position-area: block-end; /* below the anchor, centered on it */
+		justify-self: anchor-center;
+		position-try-fallbacks: flip-block, --hover-tooltip-sheet;
+		position-visibility: always;
+	}
+
+	@position-try --hover-tooltip-sheet {
+		position-area: none;
+		inset: var(--tooltip-gap);
+		margin: 0;
+		justify-self: center;
+		align-self: end;
+	}
+
+	.hover-tooltip[data-pinned] {
+		pointer-events: auto;
+		/* TODO: pinned look, make work for effect tooltip */
+		border: 1px solid #ff00ff;
+	}
+
+	/* TODO move to tooltips' footers or something else that looks good */
+	@media (hover: hover) and (pointer: fine) {
+		.hover-tooltip::after {
+			content: 'Press K to pin';
+			display: block;
+			grid-column: 1 / -1;
+			margin-block-start: var(--footer-mt);
+			padding-block-start: var(--footer-pt);
+			border-block-start: 1px solid var(--ui-btn-border-clr);
+		}
+
+		.hover-tooltip[data-pinned]::after {
+			content: 'Pinned: K, Esc or click outside to close';
+		}
 	}
 
 	.skip-link {

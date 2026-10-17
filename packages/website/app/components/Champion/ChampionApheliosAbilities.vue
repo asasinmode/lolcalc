@@ -1,6 +1,7 @@
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IChampionAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
@@ -15,7 +16,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-	abilityHover: IExtraComponentEmits['imgMouseenter'];
+	abilityHover: IExtraComponentEmits<IChampionAbilityId>['imgMouseenter'];
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();

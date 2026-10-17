@@ -151,11 +151,11 @@ defineExpose({ header });
 		}
 
 		> span:first-of-type {
-			--at-apply: 'text-xl leading-none text-white';
+			--at-apply: 'text-xl leading-none text-white min-block-[--text-xl-lineHeight] flex items-center';
 		}
 
 		> span:nth-of-type(2) {
-			--at-apply: 'text-amber-200 text-start flex items-center justify-start text-lg gap-[0.5ch]';
+			--at-apply: 'text-amber-200 text-start flex items-center justify-start self-start text-lg gap-[0.5ch]';
 
 			img {
 				--at-apply: 'h-4 w-auto';

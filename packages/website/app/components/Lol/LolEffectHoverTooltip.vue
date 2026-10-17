@@ -93,7 +93,7 @@ defineExpose({ el });
 </script>
 
 <template>
-	<div ref="el" popover="manual" class="effect-hover-tooltip-container">
+	<div ref="el" popover="hint" class="effect-hover-tooltip-container">
 		<article class="hover-tooltip effect">
 			<img v-show="!isLoading" v-bind="gameImageAttrs(abilityImage, 56)" aria-hidden="true" />
 			<h5 class="game-description" v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'" />

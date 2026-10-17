@@ -3,7 +3,7 @@ import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
-import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IChampionAbilityId, IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { replaceGameIcons } from '@lolcalc/core/misc';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion/shared';
@@ -25,7 +25,7 @@ import { ITEM_COMPONENTS } from '~/components/Item';
 import { ExtraLoading } from '~/utils/component';
 import type { IExtraComponentEmits } from '~/utils/types';
 
-type IShowTooltipEventArgs = IExtraComponentEmits['imgMouseenter'];
+type IShowTooltipEventArgs = IExtraComponentEmits<IChampionAbilityId>['imgMouseenter'];
 
 const props = defineProps<{
 	index: number;
@@ -220,38 +220,26 @@ function doubleClickToggle(event: MouseEvent) {
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
 const hoveredItemIndex = ref<number>();
+const itemTooltipFromExtras = ref(false);
 
-function showItemHoverTooltip(event: MouseEvent, index: number, fromExtras = false) {
-	hoveredItemIndex.value = index;
-	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, {
-		passive: true,
-		once: true,
-	});
-	addItemTooltipViewListeners();
-
-	if (fromExtras) {
-		el.value!.setAttribute('data-item-tooltip-extras', '');
-	} else {
-		el.value!.removeAttribute('data-item-tooltip-extras');
-	}
-
-	itemHoverTooltip.value?.showPopover();
-}
-
-function leaveTooltipableItemElement() {
-	itemHoverTooltip.value?.hidePopover();
-	el.value!.removeAttribute('data-item-tooltip-extras');
-	removeItemTooltipViewListeners();
-}
+const { show: showItemTooltip, hide: hideItemTooltip } = useHoverTooltip<{ index: number; fromExtras?: boolean }>({
+	el: itemHoverTooltip,
+	onShow({ index, fromExtras = false }) {
+		hoveredItemIndex.value = index;
+		itemTooltipFromExtras.value = fromExtras;
+		addItemTooltipViewListeners();
+	},
+	onClose: removeItemTooltipViewListeners,
+});
 
 function removeItem(event: MouseEvent, index: number) {
 	if (props.value.items.value[index]) {
 		event.preventDefault();
 		props.value.removeItem(index);
 		if (props.value.items.value[index]) {
-			showItemHoverTooltip(event, index);
+			showItemTooltip(event, { index });
 		} else {
-			itemHoverTooltip.value?.hidePopover();
+			hideItemTooltip();
 		}
 	}
 }
@@ -316,15 +304,12 @@ const itemExtras = computed<IItemComponent[]>(() =>
 const hoveredRune = shallowRef<IChampionRune>();
 const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
 
-function showRuneTooltip(event: MouseEvent, rune: IChampionRune) {
-	hoveredRune.value = rune;
-	// @ts-expect-error source is ok
-	hoveredRuneTooltip.value?.showPopover({ source: event.target });
-}
-
-function hideRuneTooltip() {
-	hoveredRuneTooltip.value?.hidePopover();
-}
+const { show: showRuneTooltip } = useHoverTooltip<IChampionRune>({
+	el: hoveredRuneTooltip,
+	onShow(data) {
+		hoveredRune.value = data;
+	},
+});
 
 interface IChampionRune {
 	name: string;
@@ -400,15 +385,12 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 const hoveredStat = shallowRef<IChampionStat>();
 const hoveredStatTooltip = useTemplateRef('championStatTooltip');
 
-function showStatTooltip(event: MouseEvent, stat: IChampionStat) {
-	hoveredStat.value = stat;
-	// @ts-expect-error source is ok
-	hoveredStatTooltip.value?.showPopover({ source: event.target });
-}
-
-function hideStatTooltip() {
-	hoveredStatTooltip.value?.hidePopover();
-}
+const { show: showChampionStatTooltip } = useHoverTooltip<IChampionStat>({
+	el: hoveredStatTooltip,
+	onShow(stat) {
+		hoveredStat.value = stat;
+	},
+});
 
 interface IChampionStat {
 	name: string;
@@ -771,40 +753,39 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 
 type ITooltipSource = '' | 'extras' | 'effects';
 
-function showGameAbilityTooltip(source: ITooltipSource, ...[event, abilityId, damageSource]: IShowTooltipEventArgs) {
-	if (abilityId.type === 'champion') {
-		showAbilityTooltip(event, abilityId.abilityKey, abilityId.abilityVariantIndex, source === 'extras', damageSource);
-	} else {
-		console.warn('[showGameAbilityTooltip] did not expect it to be used for item?');
-	}
-}
-
 const hoveredAbilityKey = ref<IChampionAbilityKey>();
 const hoveredAbilityVariantIndex = ref<number>();
 const hoveredAbilityDamageSource = shallowRef<DamageSource>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
+const abilityTooltipFromExtras = ref(false);
+
+const { show: showChampionAbilityTooltip } = useHoverTooltip<{
+	key: IChampionAbilityKey;
+	variantIndex?: number;
+	fromExtras?: boolean;
+	damageSource?: DamageSource;
+}>({
+	el: () => abilityHoverTooltipEl.value?.el,
+	onShow({ key, variantIndex, fromExtras = false, damageSource }) {
+		hoveredAbilityKey.value = key;
+		hoveredAbilityDamageSource.value = damageSource;
+		hoveredAbilityVariantIndex.value = variantIndex ?? props.value.abilityVariantsIndexes.value[key];
+		abilityTooltipFromExtras.value = fromExtras;
+	},
+});
 
 function showAbilityTooltip(event: MouseEvent, key: IChampionAbilityKey, variantIndex?: number, fromExtras = false, damageSource?: DamageSource) {
-	hoveredAbilityKey.value = key;
-	hoveredAbilityDamageSource.value = damageSource;
-	hoveredAbilityVariantIndex.value = variantIndex ?? props.value.abilityVariantsIndexes.value[key];
-	event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
-
-	if (fromExtras) {
-		detailsContainer.value!.setAttribute('data-ability-tooltip-extras', '');
-	} else {
-		detailsContainer.value!.removeAttribute('data-ability-tooltip-extras');
-	}
-
-	abilityHoverTooltipEl.value?.el?.showPopover();
-}
-
-function hideAbilityTooltip() {
-	abilityHoverTooltipEl.value?.el?.hidePopover();
-	detailsContainer.value!.removeAttribute('data-ability-tooltip-extras');
+	showChampionAbilityTooltip(event, { key, variantIndex, fromExtras, damageSource });
 }
 
 const roleQuestHoverTooltipEl = useTemplateRef('roleQuestHoverTooltip');
+const { show: showQuestTooltip, hide: hideQuestTooltip } = useHoverTooltip({ el: roleQuestHoverTooltipEl });
+
+function updateRoleQuest(value?: IChampionRole) {
+	props.value.roleQuest.value = value;
+	!value && hideQuestTooltip();
+}
+
 const roleQuestDescription = computed(() => {
 	if (!props.value.roleQuest.value) {
 		return;
@@ -826,26 +807,24 @@ const roleQuestDescription = computed(() => {
 	};
 });
 
-function updateRoleQuest(value?: IChampionRole) {
-	props.value.roleQuest.value = value;
-	if (!value) {
-		hideRoleQuestTooltip();
-	}
-}
+const dragonOptions = ALL_DRAGON_NAMES.map((name) => [name, name.toLowerCase()]) as [IDragonName, string][];
 
-function showRoleQuestTooltip(event: MouseEvent) {
-	if (props.value.roleQuest.value) {
-		event.target?.addEventListener('mouseleave', hideRoleQuestTooltip, {
-			passive: true,
-			once: true,
-		});
-		roleQuestHoverTooltipEl.value?.showPopover();
-	}
-}
+type IHoveredDragonThing = [IDragonName, IDragonAbilityId['subtype']];
+const hoveredDragonThing = shallowRef<IHoveredDragonThing>();
+const dragonHoverTooltipEl = useTemplateRef('dragonHoverTooltip');
+const dragonTooltipFromExtras = shallowRef(false);
 
-function hideRoleQuestTooltip() {
-	roleQuestHoverTooltipEl.value?.hidePopover();
-}
+const { show: showDragonTooltip, hide: hideDragonTooltip } = useHoverTooltip<{
+	dragonName: IDragonName;
+	subtype: IDragonAbilityId['subtype'];
+	fromExtras?: boolean;
+}>({
+	el: () => dragonHoverTooltipEl.value?.el,
+	onShow({ dragonName, subtype, fromExtras = false }) {
+		hoveredDragonThing.value = [dragonName, subtype];
+		dragonTooltipFromExtras.value = fromExtras;
+	},
+});
 
 function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'soul', subpath?: number) {
 	if (target === 'stack') {
@@ -853,41 +832,7 @@ function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'so
 	} else {
 		props.value.dragonSoul.value = value;
 	}
-
-	if (!value) {
-		hideDragonTooltip();
-	}
-}
-
-const dragonOptions = ALL_DRAGON_NAMES.map((name) => [name, name.toLowerCase()]) as [IDragonName, string][];
-
-let dragonTooltipAnchor: HTMLElement | undefined;
-type IHoveredDragonThing = [IDragonName, IDragonAbilityId['subtype']];
-const hoveredDragonThing = shallowRef<IHoveredDragonThing>();
-const dragonHoverTooltipEl = useTemplateRef('dragonHoverTooltip');
-
-function showDragonTooltip(event: MouseEvent, dragonName: IDragonName, subtype: IDragonAbilityId['subtype'], fromExtras = false) {
-	const { target } = event as unknown as { target: HTMLElement };
-	dragonHoverTooltipEl.value?.el?.showPopover();
-	dragonTooltipAnchor = target;
-	dragonTooltipAnchor?.addEventListener('mouseleave', hideDragonTooltip, {
-		passive: true,
-		once: true,
-	});
-	hoveredDragonThing.value = [dragonName, subtype];
-
-	if (fromExtras) {
-		el.value!.setAttribute('data-dragon-tooltip-extras', '');
-	} else {
-		el.value!.removeAttribute('data-dragon-tooltip-extras');
-	}
-}
-
-function hideDragonTooltip() {
-	dragonHoverTooltipEl.value?.el?.hidePopover();
-	dragonTooltipAnchor?.removeEventListener('mouseleave', hideDragonTooltip);
-	el.value!.removeAttribute('data-dragon-tooltip-extras');
-	dragonTooltipAnchor = undefined;
+	!value && hideDragonTooltip();
 }
 
 const activeEffects = computed<[IComputedAppliedEffect, number][]>(() => props.value.computed.effects.value.map((effect, index) => [effect, index] as unknown as [IComputedAppliedEffect, number]).filter(([effect]) => effect.isActive));
@@ -895,17 +840,14 @@ const activeEffects = computed<[IComputedAppliedEffect, number][]>(() => props.v
 const hoveredEffect = shallowRef<IComputedAppliedEffect>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-function showEffectTooltip(event: MouseEvent, effect: IComputedAppliedEffect) {
-	hoveredEffect.value = effect;
-	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
-	effect.specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
-	effectHoverTooltipEl.value?.el?.showPopover();
-}
-
-function hideEffectTooltip() {
-	effectHoverTooltipEl.value?.el?.hidePopover();
-	removeItemTooltipViewListeners();
-}
+const { show: showEffectTooltip, hide: hideEffectTooltip } = useHoverTooltip<IComputedAppliedEffect>({
+	el: () => effectHoverTooltipEl.value?.el,
+	onShow(effect) {
+		hoveredEffect.value = effect;
+		effect.specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
+	},
+	onClose: removeItemTooltipViewListeners,
+});
 
 function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	const effect = props.value.appliedEffects.value[effectIndex]!;
@@ -1094,7 +1036,7 @@ defineExpose({ el });
 								? 0 ^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0) ^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 2 : 0)
 								: undefined
 						"
-						@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
+						@mouseenter="value.items.value[i - 1] && showItemTooltip($event, { index: i - 1 })"
 						@click.right="removeItem($event, i - 1)"
 						@dragstart="startItemDrag($event, i - 1)"
 					>
@@ -1107,7 +1049,7 @@ defineExpose({ el });
 					</component>
 				</li>
 			</ul>
-			<article ref="itemHoverTooltip" popover="manual" class="hover-tooltip champion-item">
+			<article ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item" :data-from-extras="itemTooltipFromExtras || undefined">
 				<LolItemDescription :precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined" source="Inventory" show-masterwork hover-tooltip />
 			</article>
 			<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">
@@ -1144,17 +1086,17 @@ defineExpose({ el });
 				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
-						<dt :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
+						<dt :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)">
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
 							<img v-if="championRune" :src="championRune.icon" :width="championRune.iconDimensions || 80" :height="championRune.iconDimensions || 80" loading="lazy" />
 						</dt>
-						<dd :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
+						<dd :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)">
 							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>
 					<ComingSoonCover feature="rune paths" class="text-xs px-1 end-1/2 start-0 inset-y-0 absolute" />
 				</dl>
-				<article ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="manual">
+				<article ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="hint">
 					<h5>{{ hoveredRune?.name }}</h5>
 					<p class="game-description" v-html="hoveredRune?.description" />
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
@@ -1164,16 +1106,16 @@ defineExpose({ el });
 				<h4>stats</h4>
 				<dl v-for="(stats, statKindIndex) in [minorStats, majorStats]" :key="statKindIndex">
 					<template v-for="stat in stats" :key="stat.name">
-						<dt @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
+						<dt @mouseenter="showChampionStatTooltip($event, stat)">
 							<span>{{ stat.name }}</span>
 							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)" />
 						</dt>
-						<dd :class="{ 'has-bonus': stat.hasBonus }" @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
+						<dd :class="{ 'has-bonus': stat.hasBonus }" @mouseenter="showChampionStatTooltip($event, stat)">
 							{{ stat.displayedValue }}
 						</dd>
 					</template>
 				</dl>
-				<article ref="championStatTooltip" class="hover-tooltip champion-stat" popover="manual">
+				<article ref="championStatTooltip" popover="hint" class="hover-tooltip champion-stat">
 					<h5>{{ hoveredStat?.name }}</h5>
 					<p class="game-description" v-html="hoveredStat?.description" />
 					<dl>
@@ -1214,7 +1156,13 @@ defineExpose({ el });
 			</section>
 			<section ref="abilities" class="abilities" :inert="value.isLoading.value">
 				<h4>abilties</h4>
-				<ChampionApheliosAbilities v-if="value.listedChampion.value?.id === 'Aphelios'" :id-suffix :value :is-loading="value.isLoading.value" @ability-hover="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('', ...args)" />
+				<ChampionApheliosAbilities
+					v-if="value.listedChampion.value?.id === 'Aphelios'"
+					:id-suffix
+					:value
+					:is-loading="value.isLoading.value"
+					@ability-hover="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, false, args[2])"
+				/>
 				<template v-else>
 					<div data-ability="passive">
 						<h5>passive</h5>
@@ -1272,6 +1220,7 @@ defineExpose({ el });
 				</button>
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
+					:data-from-extras="abilityTooltipFromExtras || undefined"
 					:group
 					:precomputed-description="hoveredAbilityKey && (hoveredAbilityDamageSource ?? value).computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
@@ -1320,7 +1269,7 @@ defineExpose({ el });
 						label="role quest"
 						clearable
 						@update:model-value="updateRoleQuest"
-						@label-mouseenter="showRoleQuestTooltip"
+						@label-mouseenter="value.roleQuest.value && showQuestTooltip($event)"
 					>
 						<template v-if="value.roleQuest.value">
 							<img :src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`" width="64" height="64" loading="lazy" aria-hidden="true" />
@@ -1346,7 +1295,7 @@ defineExpose({ el });
 						clearable
 						:aria-errormessage="`dragon-tooltip-error-${idSuffix}`"
 						@update:model-value="updateDragonThing($event, 'stack', i - 1)"
-						@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, value.dragonStacks.value[i - 1]!, 'stack')"
+						@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, { dragonName: value.dragonStacks.value[i - 1]!, subtype: 'stack' })"
 					>
 						<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(UI.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
 						<template #post>
@@ -1365,7 +1314,7 @@ defineExpose({ el });
 						clearable
 						:aria-errormessage="`dragon-tooltip-error-${idSuffix}`"
 						@update:model-value="updateDragonThing($event, 'soul')"
-						@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, value.dragonSoul.value, 'soul')"
+						@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, { dragonName: value.dragonSoul.value, subtype: 'soul' })"
 					>
 						<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(UI.dragons[value.dragonSoul.value].soulActive, 44)" />
 						<template #post>
@@ -1379,6 +1328,7 @@ defineExpose({ el });
 						ref="dragonHoverTooltip"
 						check-if-valid
 						:id-suffix
+						:data-from-extras="dragonTooltipFromExtras || undefined"
 						:precomputed-description="hoveredDragonThing?.[1] === 'soul' ? value.computed.dragonSoulAbility.value : undefined"
 						:dragon="hoveredDragonThing?.[0]"
 						:type="hoveredDragonThing?.[1]"
@@ -1388,7 +1338,7 @@ defineExpose({ el });
 			</div>
 			<section ref="extras" class="extras" :inert="value.isLoading.value">
 				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
-					<component :is :id-suffix :damage-source="value" @img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)" />
+					<component :is :id-suffix :damage-source="value" @img-mouseenter="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, true, args[2])" />
 					<template #fallback>
 						<ExtraLoading />
 					</template>
@@ -1400,7 +1350,7 @@ defineExpose({ el });
 					:id-suffix
 					:damage-source="value"
 					:ability-id
-					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showDragonTooltip(mouseEvent, abilityId.id, abilityId.subtype, true)"
+					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showDragonTooltip(mouseEvent, { dragonName: abilityId.id, subtype: abilityId.subtype, fromExtras: true })"
 				/>
 				<component
 					:is
@@ -1409,7 +1359,7 @@ defineExpose({ el });
 					:id-suffix
 					:damage-source="value"
 					:ability-id="GameAbilityId.build(AbilityType.item, itemId)"
-					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showItemHoverTooltip(mouseEvent, itemIndex, true)"
+					@img-mouseenter="showItemTooltip($event, { index: itemIndex, fromExtras: true })"
 				/>
 			</section>
 		</details>
@@ -2012,7 +1962,7 @@ defineExpose({ el });
 				}
 
 				> dl {
-					--at-apply: 'grid grid-rows-[repeat(var(--runes-stats-rows),var(--runes-stats-row-h))] items-center whitespace-nowrap bg-[--cyan-bg] b b-[--ui-btn-border-clr] py-[--runes-stats-py] px-[--runes-stats-px] inline-fit row-span-2 box-content';
+					--at-apply: 'grid grid-rows-[repeat(var(--runes-stats-rows),var(--runes-stats-row-h))] items-center whitespace-nowrap bg-[--cyan-bg] py-[--runes-stats-py] px-[--runes-stats-px] inline-fit row-span-2 box-content';
 					grid-template-columns: repeat(2, var(--runes-stats-img-w) var(--runes-stats-text-w));
 
 					> dt {
@@ -2034,35 +1984,24 @@ defineExpose({ el });
 
 				.hover-tooltip.champion-rune,
 				.hover-tooltip.champion-stat {
-					--at-apply: 'max-w-156';
-
+					--tooltip-max-w: calc(156 * var(--spacing));
+					--tooltip-bs-offset: -1px;
 					position-anchor: --scoreboard-item-stats;
-					position-try: flip-block;
-					inset-block-start: calc(anchor(end) - 1px);
-					inset-inline-start: calc(anchor(start));
-					justify-self: anchor-start;
-					translate: -50% 0%;
 				}
 			}
 
 			.runes {
+				--at-apply: 'b b-[--ui-btn-border-clr] b-e-0';
 				grid-area: runes;
 
 				@media (width < 460px) {
 					& {
-						--at-apply: 'justify-self-center';
+						--at-apply: 'justify-self-center b-e';
 					}
 				}
 
 				> dl {
-					--at-apply: 'b-e-0 relative';
 					grid-area: runes;
-
-					@media (width < 460px) {
-						& {
-							--at-apply: 'b-e';
-						}
-					}
 
 					&:has(> .coming-soon-cover)::before {
 						--at-apply: 'content-empty absolute end-0 start-1/2 top-0 bottom-1/2 bg-neutral-950/30';
@@ -2156,9 +2095,13 @@ defineExpose({ el });
 			}
 
 			.stats {
-				--at-apply: 'justify-self-start';
+				--at-apply: 'justify-self-start b b-[--ui-btn-border-clr]';
 				grid-area: stats;
 				anchor-name: --scoreboard-item-stats;
+
+				> dl:nth-of-type(2) {
+					--at-apply: 'b-bs b-[--ui-btn-border-clr]';
+				}
 
 				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
@@ -2168,16 +2111,8 @@ defineExpose({ el });
 
 				@media (width < 460px) {
 					& {
-						--at-apply: 'grid-rows-2 justify-self-center';
+						--at-apply: 'grid-rows-2 justify-self-center b-be-0';
 					}
-
-					> dl {
-						--at-apply: 'b-b-0';
-					}
-				}
-
-				> dl:nth-of-type(1) {
-					--at-apply: 'b-b-0';
 				}
 
 				.hover-tooltip.champion-stat {
@@ -2377,15 +2312,9 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.champion-ability {
+					--tooltip-bs-offset: -1px;
 					position-anchor: --scoreboard-item-abilities;
-					inset-block-start: calc(anchor(end));
 				}
-			}
-
-			&[data-ability-tooltip-extras] .hover-tooltip.champion-ability {
-				position-anchor: --scoreboard-item-extras;
-				inset-block-start: auto;
-				inset-block-end: calc(anchor(top));
 			}
 
 			.health-ability-resource {
@@ -2514,7 +2443,7 @@ defineExpose({ el });
 				}
 			}
 
-			.role-quest,
+			section.role-quest,
 			.dragons {
 				--at-apply: 'self-center';
 
@@ -2529,7 +2458,7 @@ defineExpose({ el });
 				}
 			}
 
-			.role-quest {
+			section.role-quest {
 				--at-apply: 'relative inline-max py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))]';
 				anchor-name: --scoreboard-item-role-quest;
 
@@ -2573,9 +2502,7 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.role-quest {
-					justify-self: anchor-center;
 					position-anchor: --scoreboard-item-role-quest;
-					top: calc(anchor(bottom));
 
 					> h5:first-letter {
 						--at-apply: 'capitalize';
@@ -2645,9 +2572,14 @@ defineExpose({ el });
 					}
 				}
 
-				.dragon.hover-tooltip {
+				.hover-tooltip.dragon {
+					--at-apply: 'inline-fit';
+					--tooltip-max-w: calc(154 * var(--spacing));
 					position-anchor: --scoreboard-item-dragons;
-					inset-block-start: calc(anchor(bottom));
+
+					> .game-description {
+						--at-apply: 'leading-normal';
+					}
 				}
 			}
 
@@ -2676,18 +2608,6 @@ defineExpose({ el });
 			.expand-collapse {
 				--at-apply: 'rotate-180';
 			}
-		}
-
-		&[data-item-tooltip-extras] .hover-tooltip.champion-item {
-			position-anchor: --scoreboard-item-extras;
-			inset-block-start: auto;
-			inset-block-end: calc(anchor(top));
-		}
-
-		&[data-dragon-tooltip-extras] .hover-tooltip.dragon {
-			position-anchor: --scoreboard-item-extras;
-			inset-block-start: auto;
-			inset-block-end: calc(anchor(top));
 		}
 	}
 
@@ -2809,6 +2729,13 @@ defineExpose({ el });
 }
 
 @layer overrides {
+	[data-scoreboard-item] .hover-tooltip[data-from-extras] {
+		--tooltip-bs-offset: 0px;
+		position-anchor: --scoreboard-item-extras;
+		inset-block-start: auto;
+		inset-block-end: calc(anchor(start) + var(--tooltip-bs-offset, 0px));
+	}
+
 	[data-scoreboard-item='Yone'] {
 		.current-ability-resource {
 			&[data-partype='flow'] {
@@ -3014,14 +2941,14 @@ defineExpose({ el });
 					}
 				}
 
-				.role-quest,
+				section.role-quest,
 				.dragons {
 					> h4 {
 						--at-apply: 'inset-s-auto inset-e-0';
 					}
 				}
 
-				.role-quest {
+				section.role-quest {
 					@media (width < 360px) {
 						& {
 							--at-apply: 'self-end';
