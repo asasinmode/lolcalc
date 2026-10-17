@@ -1079,28 +1079,26 @@ function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSect
 }
 
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
+let hoveredSectionPopoverEl: HTMLElement | undefined;
+
+const { show: showSectionTooltip } = useHoverTooltip({
+	el: () => hoveredSectionPopoverEl,
+	onShow() {
+		hoveredSectionType === 'item' && addItemTooltipViewListeners();
+	},
+	onHide() {
+		hoveredSectionPopoverEl = undefined;
+		hoveredSectionType === 'item' && removeItemTooltipViewListeners();
+	},
+});
 
 function showSectionHoverTooltip(event: MouseEvent, abilityId: IDamageResultTableSection['abilityId']['type']) {
 	hoveredSectionType = abilityId;
 	const popover = (event.target as HTMLElement).querySelector('[popover]');
 	if (popover) {
-		(popover as HTMLElement).showPopover();
-		(event.target as HTMLElement).addEventListener('mouseleave', hideSectionHoverTooltip, {
-			once: true,
-		});
-		if (hoveredSectionType === 'item') {
-			addItemTooltipViewListeners();
-		}
+		hoveredSectionPopoverEl = popover as HTMLElement;
+		showSectionTooltip(event);
 	}
-}
-
-function hideSectionHoverTooltip(event: MouseEvent) {
-	const popover = (event.target as HTMLElement).querySelector('[popover]');
-	(popover as HTMLElement)?.hidePopover();
-	if (hoveredSectionType === 'item') {
-		removeItemTooltipViewListeners();
-	}
-	hoveredSectionType = undefined;
 }
 
 interface IColumnAddableOption {
@@ -1511,7 +1509,7 @@ defineExpose({
 								<img v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)" aria-hidden="true" />
 								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
 								<template v-if="sectionHasTooltip(index, section)">
-									<article v-if="section.abilityId.type === AbilityType.item" popover="manual" class="hover-tooltip champion-item">
+									<article v-if="section.abilityId.type === AbilityType.item" popover="hint" class="hover-tooltip champion-item">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 									</article>
 									<LolChampionAbilityHoverTooltip v-else-if="section.abilityId.type === AbilityType.champion" v-bind="section.hoverTooltipData as any" />
