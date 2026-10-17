@@ -4,7 +4,7 @@ export function useItemHoverTooltipView(source: IItemHoverTooltipView) {
 	const target = useState<IItemHoverTooltipView>(`itemHoverTooltipView${source}`);
 
 	function pressCtrl(event: KeyboardEvent) {
-		if (event.key === 'Control') {
+		if ((event.key === 'Control' || event.metaKey) && !event.repeat) {
 			target.value = target.value === 'Shop' ? 'Inventory' : 'Shop';
 		}
 	}
