@@ -1,10 +1,10 @@
 interface Options<TData> {
 	el: MaybeRefOrGetter<HTMLElement | null | undefined>;
 	onShow?: (data: TData, trigger: HTMLElement) => void;
-	onClose?: () => unknown;
+	onHide?: () => unknown;
 }
 
-export function useHoverTooltip<TData = void>({ el, onShow, onClose }: Options<TData>) {
+export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TData>) {
 	let hovered: { trigger: HTMLElement; data: TData } | undefined;
 	let triggerEl: HTMLElement | undefined;
 	let isPinned = false;
@@ -21,7 +21,7 @@ export function useHoverTooltip<TData = void>({ el, onShow, onClose }: Options<T
 
 	function hide() {
 		toValue(el)?.hidePopover();
-		onClose?.();
+		onHide?.();
 		reset();
 	}
 

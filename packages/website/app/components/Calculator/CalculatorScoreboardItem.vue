@@ -229,7 +229,7 @@ const { show: showItemTooltip, hide: hideItemTooltip } = useHoverTooltip<{ index
 		itemTooltipFromExtras.value = fromExtras;
 		addItemTooltipViewListeners();
 	},
-	onClose: removeItemTooltipViewListeners,
+	onHide: removeItemTooltipViewListeners,
 });
 
 function removeItem(event: MouseEvent, index: number) {
@@ -846,7 +846,7 @@ const { show: showEffectTooltip, hide: hideEffectTooltip } = useHoverTooltip<ICo
 		hoveredEffect.value = effect;
 		effect.specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
 	},
-	onClose: removeItemTooltipViewListeners,
+	onHide: removeItemTooltipViewListeners,
 });
 
 function modifyEffectValue(effectIndex: number, by: 1 | -1) {

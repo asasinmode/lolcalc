@@ -170,31 +170,32 @@ const hoveringApplied = ref(false);
 const hoveredEffectTooltipOverrideDamageSource = shallowRef<DamageSource>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-function showEffectTooltip(event: MouseEvent, effectId: IEffectAbilityId, isApplied: boolean, appliedEffect?: IDamageSourceEffect) {
-	const specific = EFFECT_SPECIFICS[effectId.id];
+const { show: showTooltip, hide: hideTooltip } = useHoverTooltip<{
+	effectId: IEffectAbilityId;
+	isApplied: boolean;
+	appliedEffect?: IDamageSourceEffect;
+}>({
+	el: () => effectHoverTooltipEl.value?.el,
+	onShow({ effectId, isApplied, appliedEffect }) {
+		const specific = EFFECT_SPECIFICS[effectId.id];
 
-	hoveredEffectId.value = effectId;
-	hoveringApplied.value = isApplied;
-	hoveredAppliedEffect.value = appliedEffect ?? damageSource.value?.getEffect(effectId.id)?.[0];
+		hoveredEffectId.value = effectId;
+		hoveringApplied.value = isApplied;
+		hoveredAppliedEffect.value = appliedEffect ?? damageSource.value?.getEffect(effectId.id)?.[0];
 
-	if (specific?.damageSourceOverrides) {
-		hoveredEffectTooltipOverrideDamageSource.value = hoveredAppliedEffect.value?.source.value?.clone(specific.damageSourceOverrides, true) ?? new DamageSource(specific.damageSourceOverrides, true, true);
-		if (specific.sourceAbility.type === AbilityType.champion) {
-			useChampion(specific.sourceAbility.id).then((champion) => hoveredEffectTooltipOverrideDamageSource.value && (hoveredEffectTooltipOverrideDamageSource.value.champion.value = champion));
+		if (specific?.damageSourceOverrides) {
+			hoveredEffectTooltipOverrideDamageSource.value = hoveredAppliedEffect.value?.source.value?.clone(specific.damageSourceOverrides, true) ?? new DamageSource(specific.damageSourceOverrides, true, true);
+			if (specific.sourceAbility.type === AbilityType.champion) {
+				useChampion(specific.sourceAbility.id).then((champion) => hoveredEffectTooltipOverrideDamageSource.value && (hoveredEffectTooltipOverrideDamageSource.value.champion.value = champion));
+			}
+		} else {
+			hoveredEffectTooltipOverrideDamageSource.value = undefined;
 		}
-	} else {
-		hoveredEffectTooltipOverrideDamageSource.value = undefined;
-	}
 
-	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
-	specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
-	effectHoverTooltipEl.value?.el?.showPopover();
-}
-
-function hideEffectTooltip() {
-	effectHoverTooltipEl.value?.el?.hidePopover();
-	removeItemTooltipViewListeners();
-}
+		specific.sourceAbility.type === AbilityType.item && addItemTooltipViewListeners();
+	},
+	onHide: removeItemTooltipViewListeners,
+});
 
 const search = ref('');
 const splitSearch = computed(() =>
@@ -259,7 +260,7 @@ function hideEffectTooltipIfNotSearched() {
 		visible = Object.values(searchFilteredEffects.value)?.some((effects) => effects.some((effect) => effect.abilityId.id === hoveredEffectId.value!.id));
 	}
 	if (!visible) {
-		hideEffectTooltip();
+		hideTooltip();
 	}
 }
 
@@ -300,7 +301,7 @@ defineExpose({
 						:damage-source
 						:data-ability-id="effect.abilityId.id"
 						id-suffix="effects-dialog-applied"
-						@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, effect.abilityId, true, effect)"
+						@img-mouseenter="(event: MouseEvent) => damageSource && showTooltip(event, { effectId: effect.abilityId, isApplied: true, appliedEffect: effect })"
 					>
 						<button class="pretend-ui-btn remove" title="remove" @click="damageSource?.removeEffect(effect.abilityId.id)">
 							<span>remove</span>
@@ -324,7 +325,7 @@ defineExpose({
 							:damage-source
 							id-suffix="effects-dialog-all"
 							:data-ability-id="effect.abilityId.id"
-							@img-mouseenter="(event: MouseEvent) => showEffectTooltip(event, effect.abilityId, false)"
+							@img-mouseenter="showTooltip($event, { effectId: effect.abilityId, isApplied: false })"
 						/>
 						<template #fallback>
 							<ExtraLoading />
