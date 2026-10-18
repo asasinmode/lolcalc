@@ -2,9 +2,10 @@
 	"name": "@lolcalc/core",
 	"version": "0.1.0-alpha.0",
 	"private": true,
-	"description": "core, game related functionality for lolcalc",
+	"description": "core, game calculation related functionality for lolcalc",
+	"bugs": "https://github.com/asasinmode/lolcalc/issues",
 	"license": "AGPL-3.0-only",
-	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"author": "Stanisław Perek <suportmode@gmail.com> (https://github.com/asasinmode)",
 	"type": "module",
 	"exports": {
 		".": "./src/index.ts",

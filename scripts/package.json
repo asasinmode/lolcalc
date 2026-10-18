@@ -3,8 +3,9 @@
 	"version": "0.1.0-alpha.0",
 	"private": true,
 	"description": "scripts used by lolcalc",
+	"bugs": "https://github.com/asasinmode/lolcalc/issues",
 	"license": "AGPL-3.0-only",
-	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"author": "Stanisław Perek <suportmode@gmail.com> (https://github.com/asasinmode)",
 	"type": "module",
 	"devDependencies": {
 		"@lolcalc/core": "workspace:",
