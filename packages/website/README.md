@@ -194,7 +194,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] in/decrement effects in scoreboard item, refresh effects middle mouse click
   - [ ] "tutorial library" to review info
   - [ ] item/passive extra popped up, look here it is, use it
-  - [ ] double click to select & close champ select
   - [ ] double click expand/collapse scoreboard item/results section
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)

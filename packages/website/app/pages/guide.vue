@@ -2,6 +2,20 @@
 	<main id="guide">
 		<h1>guide</h1>
 
+		<h2>qol tips</h2>
+		<ul>
+			<li>pin a tooltip by pressing [K] when hovering over it</li>
+			<li>scoreboard items can be expanded/collapsed by double clicking the background. The same works for result sections but you need to click on their headers</li>
+			<li>
+				in/decrement an effect's value from scoreboard by left/right clicking its icon. Holding [Ctrl] while doing so changes the value by 10 (when possible). Note that the text that's displayed on some effect icons might not always update
+				1:1 with the value
+			</li>
+			<li>drag scoreboard items by their champion images or manipulate buttons (the arrows for moving it)</li>
+			<li>items can be dragged between damage sources</li>
+			<li>hold alt while dragging item/scoreboard item to duplicate it when dropped</li>
+			<li>right click an item, dragon stack/soul, role quest or ability levels to clear them</li>
+		</ul>
+
 		<h2>definitions</h2>
 		<dl>
 			<dt>configuration scoreboard</dt>
