@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { linkedFormattedItemImage } from '@lolcalc/core/misc';
+
+const exampleSpellCrit = useSimpleDescription(
+	'guide-example-shadowflame-ie-randuin',
+	`showcasing the interaction between ${linkedFormattedItemImage('shadowflame')}, ${linkedFormattedItemImage('infinityEdge')} and ${linkedFormattedItemImage('randuinsOmen')}`,
+);
+</script>
+
 <template>
 	<main id="guide">
 		<h1>guide</h1>
@@ -102,9 +111,9 @@
 					to="/?v=1&src=8_1_4645_0__000_841_2_0000_00000_______&src=8_1_4645-3031_0__000_841_2_0000_00000_______&tgt=-1_1__0___1000_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1__0___97_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___1350_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___199_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tblCol=1-0&tblCol=1-1&tblCol=1-2&tblCol=1-3&tblSct=0-8-1-0_1&tblSct=a-stats_&tblSct=a-ba_1&tblSct=a-cTtl_1"
 					target="_blank"
 				>
-					vladimir shadowflame randuin</NuxtLink
+					spell crit</NuxtLink
 				>
-				showcasing the interaction between Shadowflame, Infinity Edge and Randuin's Omen
+				- <span class="game-description" v-html="exampleSpellCrit" />
 			</li>
 		</ul>
 

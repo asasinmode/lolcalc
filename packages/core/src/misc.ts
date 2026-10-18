@@ -3,7 +3,7 @@
  */
 import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
-import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES } from '@lolcalc/shared';
+import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES, ITEM_NAME_TO_ID, type TItemNameToId } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
 import { GameAbilityId } from './GameAbilityId.ts';
@@ -117,6 +117,12 @@ export async function gameAbilityImgAttrs(abilityId: IGameAbilityId) {
 /** used for creating a _game ability_ image string that will be parsed by `simpleDescriptionFormatting` */
 export function simpleFormattingGameAbilityImage(abilityId: IGameAbilityId) {
 	return `%a:${GameAbilityId.stringify(abilityId)}%`;
+}
+
+export function linkedFormattedItemImage(itemName: keyof TItemNameToId, name?: string) {
+	const itemId = ITEM_NAME_TO_ID[itemName];
+	const item = ITEMS[itemId]!;
+	return `[${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, itemId))}${name ?? item?.name ?? '<unknown>unknown</unknown>'}](https://wiki.leagueoflegends.com/en-us/${item?.name.replaceAll(' ', '_')})`;
 }
 
 export async function simpleDescriptionFormatting(text: string, addAlt?: boolean) {
