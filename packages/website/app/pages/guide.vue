@@ -1,8 +1,19 @@
 <template>
 	<main id="guide">
 		<h1>guide</h1>
+		<p>Instructions on how to use it, for info about what it is, check the <NuxtLink to="/about">about page</NuxtLink></p>
 
-		<h2>qol tips</h2>
+		<nav>
+			<h2>contents</h2>
+			<ul>
+				<li><NuxtLink to="#qol-tips">qol tips</NuxtLink></li>
+				<li><NuxtLink to="#definitions">definitions</NuxtLink></li>
+				<li><NuxtLink to="#q-a">q&a</NuxtLink></li>
+				<li><NuxtLink to="#examples">examples</NuxtLink></li>
+			</ul>
+		</nav>
+
+		<h2 id="qol-tips">qol tips</h2>
 		<ul>
 			<li>pin a tooltip by pressing [K] when hovering over it</li>
 			<li>scoreboard items can be expanded/collapsed by double clicking the background. The same works for result sections but you need to click on their headers</li>
@@ -16,7 +27,7 @@
 			<li>right click an item, dragon stack/soul, role quest or ability levels to clear them</li>
 		</ul>
 
-		<h2>definitions</h2>
+		<h2 id="definitions">definitions</h2>
 		<dl>
 			<dt>configuration scoreboard</dt>
 			<dd>
@@ -42,7 +53,7 @@
 		</dl>
 		<p>Check out the TODO tutorial library and read on for some of the features described in-depth</p>
 
-		<h2>q&a</h2>
+		<h2 id="q-a">q&a</h2>
 		<dl>
 			<dt>How can I save multiple configurations?</dt>
 			<dd>
@@ -55,7 +66,7 @@
 			<dd>They are affected by target's tenacity and slow resists</dd>
 		</dl>
 
-		<h2 id="guide-examples">examples</h2>
+		<h2 id="examples">examples</h2>
 		<ul>
 			<li>
 				<NuxtLink

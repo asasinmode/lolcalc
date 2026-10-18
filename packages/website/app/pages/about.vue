@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO table of contents at the top or on the side sticky when large enough
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import { STAT_ICON } from '@lolcalc/data/index';
@@ -29,7 +30,19 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 	<main id="about">
 		<h1>about</h1>
 
-		<p>For instructions on how to use it, check the <NuxtLink to="/guide"> guide page </NuxtLink></p>
+		<p>For instructions on how to use it, check the <NuxtLink to="/guide">guide page</NuxtLink></p>
+
+		<nav>
+			<h2>contents</h2>
+			<ul>
+				<li><NuxtLink to="#what-is-it">what is it?</NuxtLink></li>
+				<li><NuxtLink to="#does-it-work">does it work?</NuxtLink></li>
+				<li><NuxtLink to="#known-discrepancies">currently known discrepancies</NuxtLink></li>
+				<li><NuxtLink to="#support">support</NuxtLink></li>
+				<li><NuxtLink to="#acknowledgements">acknowledgements</NuxtLink></li>
+				<li><NuxtLink to="#misc">misc</NuxtLink></li>
+			</ul>
+		</nav>
 
 		<h2 id="what-is-it">
 			what is it?
@@ -51,7 +64,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		</h2>
 		<p>
 			While it's impossible for me to check all 172+ champions with every item/rune/dragon/quest/buff/debuff combination, I tried my best to make it work and
-			<NuxtLink to="/guide#guide-examples"> here are some examples of it </NuxtLink>. If you encounter a configuration that's not calculated correctly (<a href="#known-discrepancies">known discrepancies</a>), please
+			<NuxtLink to="/guide#examples"> here are some examples of it </NuxtLink>. If you encounter a configuration that's not calculated correctly (<a href="#known-discrepancies">known discrepancies</a>), please
 			<button class="link-like" @click="reportAnIssue">report it</button>
 		</p>
 		<p class="alert info">
@@ -130,6 +143,18 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 
 		> h1 {
 			--at-apply: 'text-[length:--fluid-24-32] font-700 mbe-[0.75em] text-center text-white';
+		}
+
+		> nav {
+			--at-apply: 'b b-neutral-800 max-inline-80 px-3 py-2 bg-slate-950';
+
+			> h2 {
+				--at-apply: 'font-600 text-neutral-300 tracking-wide text-xl mbe-1';
+			}
+
+			> ul {
+				--at-apply: 'ps-3 ms-2 b-s b-neutral-700';
+			}
 		}
 
 		> h2 {

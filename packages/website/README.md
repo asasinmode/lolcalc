@@ -157,7 +157,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] calculate static % values like liandry burn or GA health to?
   - [x] hook priorities in one file for easier precedence management
   - [x] dragons/souls
-  - [ ] champion passives
+  - [x] champion passives
     - [x] results table hover tooltips, try to not unknown/resolve dynamic variables
   - [x] grievous wounds affecting all heal type things
   - [x] heal and shield power affecting known shields & heals
@@ -196,19 +196,18 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] item/passive extra popped up, look here it is, use it
   - [ ] double click expand/collapse scoreboard item/results section
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
-- [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
-  - [ ] help/faq page
-    - [x] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling (actually might not have to be 1 diff, but probably add disclaimer and settle on acceptable margin of error)
-    - [ ] screenshots showing it accurately calculating things
-    - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
-    - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (tested)
-    - [ ] describe item description inventory/shop view, possibly add it for runes too
-    - [ ] serpent's fang displayed values don't match up, probably test more (was tested on shieldbow, assumedly shieldbow "puts back" hp to the threshold then gives shield and that shield is then reduced)
-    - [ ] effect from champion overrides external one (also tries to remove it if present, like Nami)
-    - [ ] results effects applied from target to source override the ones present on source (W from nasus applied to target overrides the Wither effect already present on target)
-    - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
-    - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
-  - [ ] github readme
+- [ ] guide/about page
+  - [x] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling (actually might not have to be 1 diff, but probably add disclaimer and settle on acceptable margin of error)
+  - [ ] screenshots showing it accurately calculating things
+  - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
+  - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (tested)
+  - [ ] describe item description inventory/shop view, possibly add it for runes too
+  - [ ] serpent's fang displayed values don't match up, probably test more (was tested on shieldbow, assumedly shieldbow "puts back" hp to the threshold then gives shield and that shield is then reduced)
+  - [ ] effect from champion overrides external one (also tries to remove it if present, like Nami)
+  - [ ] results effects applied from target to source override the ones present on source (W from nasus applied to target overrides the Wither effect already present on target)
+  - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
+  - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
+- [ ] github readme
 - [ ] submit feedback on page / report issues
   - [ ] go server
   - [ ] github issue template
