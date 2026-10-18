@@ -5,11 +5,22 @@ interface Options<TData> {
 	onHide?: () => unknown;
 }
 
+/** for global tooltip state. Currently only 1 tooltip is expected to be shown/pinned at a time */
+export function useTooltipState() {
+	return {
+		isTooltipPinned: useState('isTooltipPinned', () => false),
+		isTooltipExpanded: useState('isTooltipExpanded', () => false),
+	};
+}
+
 export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TData>) {
+	const { isTooltipPinned } = useTooltipState();
+
 	function hide() {
 		const popover = toValue(el);
 		popover?.removeAttribute('data-pinned');
 		popover?.hidePopover();
+		isTooltipPinned.value = false;
 		onHide?.();
 	}
 
@@ -18,7 +29,10 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 		if (popover) {
 			onShow?.(data, trigger);
 			popover.showPopover({ source: trigger });
-			pin && popover.setAttribute('data-pinned', '');
+			if (pin) {
+				popover.setAttribute('data-pinned', '');
+				isTooltipPinned.value = true;
+			}
 			window.addEventListener('keydown', onKeyDown);
 			setTimeout(() => {
 				popover.addEventListener(
@@ -55,6 +69,7 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 				hide();
 			} else {
 				popover?.setAttribute('data-pinned', '');
+				isTooltipPinned.value = true;
 			}
 		}
 	}

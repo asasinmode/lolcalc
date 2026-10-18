@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<IChampionAbilityHoverTooltipProps>(), { g
 
 const { vMinor } = PATCH_VERSION;
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
-const globalKeyModifiers = useGlobalKeyModifiers();
+const { isTooltipPinned, isTooltipExpanded } = useTooltipState();
 
 const champion = shallowRef<IChampion>();
 const isLoading = ref(false);
@@ -77,14 +77,14 @@ defineExpose({ el });
 		<span v-show="!computedIsLoading">
 			{{ abilityKey === 'passive' ? '' : computedDescription?.cost ? `${computedDescription.cost} ${computedDescription.partype}` : 'No Cost' }}
 		</span>
-		<div v-show="!computedIsLoading" class="game-description" v-html="(globalKeyModifiers.shift && computedDescription?.tooltipExtended) || computedDescription?.tooltip" />
+		<div v-show="!computedIsLoading" class="game-description" v-html="(isTooltipExpanded && computedDescription?.tooltipExtended) || computedDescription?.tooltip" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
 		<footer
 			v-if="(computedDescription?.tooltipExtended && computedDescription.tooltipExtended !== computedDescription.tooltip) || anyExtendedInfo"
-			v-show="globalKeyModifiers.shift ? computedDescription?.tooltipExtendedBelowLine || computedDescription?.abilityLevelVars?.length : anyExtendedInfo"
+			v-show="isTooltipExpanded ? computedDescription?.tooltipExtendedBelowLine || computedDescription?.abilityLevelVars?.length : anyExtendedInfo"
 		>
-			<div v-if="computedDescription?.tooltipExtendedBelowLine" v-show="globalKeyModifiers.shift" class="game-description" v-html="computedDescription.tooltipExtendedBelowLine" />
-			<dl v-show="globalKeyModifiers.shift && computedDescription?.abilityLevelVars" class="game-description">
+			<div v-if="computedDescription?.tooltipExtendedBelowLine" v-show="isTooltipExpanded" class="game-description" v-html="computedDescription.tooltipExtendedBelowLine" />
+			<dl v-show="isTooltipExpanded && computedDescription?.abilityLevelVars" class="game-description">
 				<template v-for="{ name, values, isNameUnknown } in computedDescription?.abilityLevelVars" :key="name">
 					<dt :class="{ unknown: isNameUnknown }" v-html="name" />
 					<dd :class="{ unknown: !values?.length }">
@@ -100,7 +100,11 @@ defineExpose({ el });
 					</dd>
 				</template>
 			</dl>
-			<p v-show="!globalKeyModifiers.shift">Hold <kbd>[Shift]</kbd> to show more info</p>
+			<p v-show="!isTooltipExpanded">
+				<span class="kbd-only">{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[Shift]</kbd></span>
+				<span class="touch-only">Tap here</span>
+				to show more info
+			</p>
 		</footer>
 	</article>
 </template>
@@ -205,10 +209,6 @@ defineExpose({ el });
 
 			> p {
 				--at-apply: 'text-end leading-5';
-
-				> kbd {
-					--at-apply: 'font-inherit';
-				}
 			}
 
 			> div {

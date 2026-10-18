@@ -229,6 +229,27 @@
 		justify-self: anchor-center;
 		position-try-fallbacks: flip-block, --hover-tooltip-sheet;
 		position-visibility: always;
+
+		footer {
+			kbd {
+				--at-apply: 'font-inherit';
+			}
+		}
+	}
+
+	/* mainly for switching between "Hold [Shift]" and "Tap here" */
+	.touch-only {
+		--at-apply: 'hidden';
+	}
+
+	@media not ((hover: hover) and (pointer: fine)) {
+		.kbd-only {
+			--at-apply: 'hidden';
+		}
+
+		.touch-only {
+			--at-apply: 'inline';
+		}
 	}
 
 	@position-try --hover-tooltip-sheet {
@@ -243,22 +264,6 @@
 		pointer-events: auto;
 		/* TODO: pinned look, make work for effect tooltip */
 		border: 1px solid #ff00ff;
-	}
-
-	/* TODO move to tooltips' footers or something else that looks good */
-	@media (hover: hover) and (pointer: fine) {
-		.hover-tooltip::after {
-			content: 'Press K to pin';
-			display: block;
-			grid-column: 1 / -1;
-			margin-block-start: var(--footer-mt);
-			padding-block-start: var(--footer-pt);
-			border-block-start: 1px solid var(--ui-btn-border-clr);
-		}
-
-		.hover-tooltip[data-pinned]::after {
-			content: 'Pinned: K, Esc or click outside to close';
-		}
 	}
 
 	.skip-link {

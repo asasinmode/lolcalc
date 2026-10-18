@@ -18,7 +18,7 @@ defineEmits<{
 }>();
 
 const { vSemver, vMinor } = PATCH_VERSION;
-const globalKeyModifiers = useGlobalKeyModifiers();
+const { isTooltipPinned, isTooltipExpanded } = useTooltipState();
 
 const computedDescription = computed<IComputedItemDescription | undefined>(
 	() =>
@@ -51,7 +51,7 @@ const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inv
 
 const hasMoreInfo = computed(
 	() =>
-		!globalKeyModifiers.value.shift &&
+		!isTooltipExpanded.value &&
 		(computedDescription.value?.extended ||
 			computedDescription.value?.keywordDefinitions ||
 			computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`] ||
@@ -62,7 +62,7 @@ const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryV
 const showDynamicValueFooter = computed(() => isInventoryView.value && computedDescription.value?.footerLeft);
 
 const descriptionText = computed(() => {
-	const suffix = props.hoverTooltip && globalKeyModifiers.value.shift ? 'Extended' : '';
+	const suffix = props.hoverTooltip && isTooltipExpanded.value ? 'Extended' : '';
 	return (hasOtherView.value && props.hoverTooltip ? computedDescription.value?.[`tooltip${view.value}${suffix}`] : computedDescription.value?.[`tooltipShop${suffix}`]) ?? computedDescription.value?.[`tooltipShop${suffix}`];
 });
 
@@ -126,15 +126,21 @@ defineExpose({ header });
 			<h4 v-html="heading" />
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
-		<p v-if="computedDescription?.extended" v-show="!hoverTooltip || globalKeyModifiers.shift" v-html="computedDescription.extended" />
+		<p v-if="computedDescription?.extended" v-show="!hoverTooltip || isTooltipExpanded" v-html="computedDescription.extended" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
-			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && globalKeyModifiers.shift ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
-			<p v-if="computedDescription?.keywordDefinitions" v-show="globalKeyModifiers.shift" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
+			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && isTooltipExpanded ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
+			<p v-if="computedDescription?.keywordDefinitions" v-show="isTooltipExpanded" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
 			<div>
-				<p v-show="hasMoreInfo">Hold <kbd>[Shift]</kbd> to show more info</p>
+				<p v-show="hasMoreInfo">
+					<span class="kbd-only">{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[Shift]</kbd></span>
+					<span class="touch-only">Tap here</span>
+					to show more info
+				</p>
 				<p v-show="hasOtherView || computedDescription?.footerLeft">
-					Press <kbd>[Ctrl]</kbd> to toggle to <b>{{ otherView }}</b> view
+					<span class="kbd-only"> Press <kbd>[Ctrl]</kbd> </span>
+					<span class="touch-only">Tap here</span>
+					to toggle to <b>{{ otherView }}</b> view
 				</p>
 			</div>
 		</footer>
@@ -583,10 +589,6 @@ defineExpose({ header });
 	.hover-tooltip.effect {
 		> footer {
 			--at-apply: 'col-span-full text-end leading-5';
-
-			> kbd {
-				--at-apply: 'font-inherit';
-			}
 		}
 	}
 }

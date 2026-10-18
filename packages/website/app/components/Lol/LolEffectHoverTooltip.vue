@@ -20,7 +20,7 @@ import type { IEffectHoverTooltipProps } from '~/utils/types';
 
 const props = defineProps<IEffectHoverTooltipProps>();
 
-const globalKeyModifiers = useGlobalKeyModifiers();
+const { isTooltipPinned, isTooltipExpanded } = useTooltipState();
 
 const abilityImage = shallowRef<IGameImageData>(['', 0]);
 const champion = shallowRef<IChampion>();
@@ -98,15 +98,19 @@ defineExpose({ el });
 			<img v-show="!isLoading" v-bind="gameImageAttrs(abilityImage, 56)" aria-hidden="true" />
 			<h5 class="game-description" v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'" />
 			<div class="game-description" v-html="computedDescription?.description" />
-			<footer v-if="sourceAbilityDescription" v-show="!globalKeyModifiers.shift">Hold <kbd>[Shift]</kbd> to show source ability</footer>
+			<footer v-if="sourceAbilityDescription" v-show="!isTooltipExpanded">
+				<span class="kbd-only">{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[Shift]</kbd></span>
+				<span class="touch-only">Tap here</span>
+				to show more info
+			</footer>
 		</article>
 		<LolChampionAbilityHoverTooltip
 			v-if="sourceAbilityId?.type === AbilityType.champion || computedDescription?.championAbilityLikePrecomputedDescription"
-			v-show="globalKeyModifiers.shift"
+			v-show="isTooltipExpanded"
 			:precomputed-description="sourceAbilityDescription as IComputedAbilityDescription"
 		/>
-		<LolDragonHoverTooltip v-else-if="sourceAbilityId?.type === AbilityType.dragon" v-show="globalKeyModifiers.shift" :precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription" />
-		<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
+		<LolDragonHoverTooltip v-else-if="sourceAbilityId?.type === AbilityType.dragon" v-show="isTooltipExpanded" :precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription" />
+		<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="isTooltipExpanded" class="hover-tooltip champion-item">
 			<LolItemDescription :precomputed-description="sourceAbilityDescription as IComputedItemDescription" source="Inventory" hover-tooltip />
 		</article>
 	</div>

@@ -13,6 +13,7 @@ export function useGlobalKeyModifiers() {
 	}));
 }
 
+/** also sets up tooltip expanded tracking */
 export function _setupGlobalKeyModifiers() {
 	const globalKeyModifiers = useGlobalKeyModifiers();
 
@@ -56,4 +57,17 @@ export function _setupGlobalKeyModifiers() {
 		window.removeEventListener('keyup', releaseModifier);
 		window.removeEventListener('mousedown', mouseDownUpdateModifiers);
 	});
+
+	const { isTooltipPinned, isTooltipExpanded } = useTooltipState();
+
+	watch(
+		() => globalKeyModifiers.value.shift,
+		(value) => {
+			if (isTooltipPinned.value) {
+				value && (isTooltipExpanded.value = !isTooltipExpanded.value);
+			} else {
+				isTooltipExpanded.value = value;
+			}
+		},
+	);
 }
