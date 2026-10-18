@@ -1,7 +1,7 @@
 interface Options<TData> {
 	/* the popover element */
 	el: MaybeRefOrGetter<HTMLElement | null | undefined>;
-	onShow?: (data: TData, trigger: HTMLElement) => void;
+	onShow?: (data: TData) => void;
 	onHide?: () => unknown;
 }
 
@@ -33,7 +33,7 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 	function show(trigger: HTMLElement, data: TData, pin: boolean) {
 		const popover = toValue(el);
 		if (popover) {
-			onShow?.(data, trigger);
+			onShow?.(data);
 			popover.showPopover({ source: trigger });
 			if (pin) {
 				popover.setAttribute('data-pinned', '');

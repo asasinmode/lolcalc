@@ -1578,20 +1578,11 @@ defineExpose({
 								class="info-tooltip-trigger"
 								@focus="showRowTooltip($event, true)"
 								@mouseenter="showRowTooltip($event, true)"
-								@mouseleave="hideRowTooltip($event, true)"
 								@blur="hideRowTooltip($event, true)"
 							>
 								<img src="/logo_dark.webp" alt="lolcalc logo" width="192" height="192" />
 							</span>
-							<p
-								:id="`${section.id}-${row.id}-tooltip-custom`"
-								popover="hint"
-								class="hover-tooltip"
-								@focus="showRowTooltip($event, false)"
-								@mouseenter="showRowTooltip($event, false)"
-								@mouseleave="hideRowTooltip($event, false)"
-								@focusout="hideRowTooltip($event, false)"
-							>
+							<p :id="`${section.id}-${row.id}-tooltip-custom`" popover="hint" class="hover-tooltip" @focus="showRowTooltip($event, false)" @mouseenter="showRowTooltip($event, false)" @focusout="hideRowTooltip($event, false)">
 								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existing one
 							</p>
 							<span
@@ -1601,7 +1592,6 @@ defineExpose({
 								tabindex="0"
 								@focus="showRowTooltip($event, true)"
 								@mouseenter="showRowTooltip($event, true)"
-								@mouseleave="hideRowTooltip($event, true)"
 								@blur="hideRowTooltip($event, true)"
 							>
 								<span>additional info</span>
@@ -1613,7 +1603,6 @@ defineExpose({
 								class="hover-tooltip game-description"
 								@focus="showRowTooltip($event, false)"
 								@mouseenter="showRowTooltip($event, false)"
-								@mouseleave="hideRowTooltip($event, false)"
 								@focusout="hideRowTooltip($event, false)"
 								v-html="row.additionalInfo"
 							/>

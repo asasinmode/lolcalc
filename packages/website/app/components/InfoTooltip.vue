@@ -17,15 +17,7 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 
 <template>
 	<template v-if="tooltip">
-		<span
-			:aria-describedby="`${idPrefix}-tooltip-${idSuffix}`"
-			class="info-tooltip-trigger"
-			tabindex="0"
-			@focus="showTooltip($event, true)"
-			@mouseenter="showTooltip($event, true)"
-			@mouseleave="hideTooltip($event, true)"
-			@blur="hideTooltip($event, true)"
-		>
+		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" @focus="showTooltip($event, true)" @mouseenter="showTooltip($event, true)" @blur="hideTooltip($event, true)">
 			<slot name="trigger">
 				<span>additional info</span>
 			</slot>
@@ -37,7 +29,6 @@ const { showTooltip, hideTooltip } = useInfoTooltip();
 			class="hover-tooltip game-description"
 			@focus="showTooltip($event, false)"
 			@mouseenter="showTooltip($event, false)"
-			@mouseleave="hideTooltip($event, false)"
 			@focusout="hideTooltip($event, false)"
 			@click.stop.prevent=""
 			v-html="computedTooltip ?? 'loading...'"
