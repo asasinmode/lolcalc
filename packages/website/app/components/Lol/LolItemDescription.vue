@@ -51,11 +51,10 @@ const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inv
 
 const hasMoreInfo = computed(
 	() =>
-		!isTooltipExpanded.value &&
-		(computedDescription.value?.extended ||
-			computedDescription.value?.keywordDefinitions ||
-			computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`] ||
-			(isInventoryView.value && computedDescription.value?.footerLeftAnyExtendedVInfo)),
+		computedDescription.value?.extended ||
+		computedDescription.value?.keywordDefinitions ||
+		computedDescription.value?.[`tooltip${view.value}AnyExtendedVInfo`] ||
+		(isInventoryView.value && computedDescription.value?.footerLeftAnyExtendedVInfo),
 );
 const hasOtherView = computed(() => props.hoverTooltip && (computedDescription.value?.tooltipInventory || computedDescription.value?.stats.some((stat) => stat.increasedBy)));
 const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
@@ -132,7 +131,7 @@ defineExpose({ header });
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && isTooltipExpanded ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
 			<p v-if="computedDescription?.keywordDefinitions" v-show="isTooltipExpanded" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
 			<div>
-				<ShiftCtlInfo v-if="hasMoreInfo" :is-tooltip-expanded :is-tooltip-pinned />
+				<CalculatorShiftCtlInfo v-if="hasMoreInfo" :is-tooltip-expanded :is-tooltip-pinned />
 				<p v-show="hasOtherView || computedDescription?.footerLeft">
 					<span class="kbd-only"> Press <kbd>[Ctrl]</kbd> </span>
 					<span class="touch-only">Tap here</span>

@@ -1050,7 +1050,7 @@ defineExpose({ el });
 					</component>
 				</li>
 			</ul>
-			<article ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item" :data-from-extras="itemTooltipFromExtras || undefined" :data-expanded="isTooltipExpanded">
+			<article ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item" :data-from-extras="itemTooltipFromExtras || undefined" :data-expanded="isTooltipExpanded || undefined">
 				<LolItemDescription :precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined" source="Inventory" show-masterwork hover-tooltip />
 			</article>
 			<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">

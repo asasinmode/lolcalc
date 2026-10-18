@@ -100,7 +100,7 @@ defineExpose({ el });
 					</dd>
 				</template>
 			</dl>
-			<ShiftCtlInfo :is-tooltip-expanded :is-tooltip-pinned />
+			<CalculatorShiftCtlInfo :is-tooltip-expanded :is-tooltip-pinned />
 		</footer>
 	</article>
 </template>

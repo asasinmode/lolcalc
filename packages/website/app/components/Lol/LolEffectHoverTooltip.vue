@@ -99,7 +99,7 @@ defineExpose({ el });
 			<h5 class="game-description" v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'" />
 			<div class="game-description" v-html="computedDescription?.description" />
 			<footer v-if="sourceAbilityDescription" v-show="!(isTooltipAugmented || isTooltipExpanded) || isTooltipPinned">
-				<ShiftCtlInfo :is-tooltip-expanded="isTooltipAugmented || isTooltipExpanded" :is-tooltip-pinned kbd="[Shift] or [Ctrl]" to-show="source ability" />
+				<CalculatorShiftCtlInfo :is-tooltip-expanded="isTooltipAugmented || isTooltipExpanded" :is-tooltip-pinned kbd="[Shift] or [Ctrl]" to-show="source ability" />
 			</footer>
 		</article>
 		<LolChampionAbilityHoverTooltip

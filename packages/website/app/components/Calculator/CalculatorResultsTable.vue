@@ -1510,7 +1510,7 @@ defineExpose({
 								<img v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)" aria-hidden="true" />
 								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
 								<template v-if="sectionHasTooltip(index, section)">
-									<article v-if="section.abilityId.type === AbilityType.item" popover="hint" class="hover-tooltip champion-item" :data-expanded="isTooltipExpanded">
+									<article v-if="section.abilityId.type === AbilityType.item" popover="hint" class="hover-tooltip champion-item" :data-expanded="isTooltipExpanded || undefined">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 									</article>
 									<LolChampionAbilityHoverTooltip v-else-if="section.abilityId.type === AbilityType.champion" v-bind="section.hoverTooltipData as any" />
