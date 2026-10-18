@@ -36,9 +36,11 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<a href="#what-is-it"><span aria-hidden="true">#</span><span>link to the "what is it?" section</span></a>
 		</h2>
 		<p>
-			<strong>lolcalc</strong> is intended to be a fully fledged, all-included <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> damage calculator (WIP). The goal is to show the same stats and damage numbers
-			the game does for any champion/item/rune/buff/debuff combination.
+			<strong>lolcalc</strong> is intended to be a tool for <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> that shows the same numbers the game does. The currently aimed for numbers are items, runes,
+			champion abilities and their + some other common effects/buffs/debuffs, for any combination of them.
 		</p>
+		<p><u>It's not a game simulation</u> and there is currently no timeline for implementing one. Adding something like the damage of a <code>Q + W + aa + aa + E + R</code> combo is currently out of the scope of this project.</p>
+		<p><u>The main goal is build comparison</u>. <strong>lolcalc</strong> should, fairly accurately, show the difference between the damage and stats of various champion builds, making it easier to find the best one.</p>
 
 		<h2 id="does-it-work">
 			does it work?
