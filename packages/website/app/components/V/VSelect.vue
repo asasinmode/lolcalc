@@ -38,15 +38,15 @@ function clear(event: MouseEvent) {
 			@click.right="clear"
 			@mouseenter="$emit('labelMouseenter', $event)"
 		>
-			<option v-if="clearable" value="">&lt;none&gt;</option>
+			<option v-if="clearable" value="" :selected="value === undefined">&lt;none&gt;</option>
 			<template v-if="Array.isArray(options)">
-				<option v-for="[optionValue, text, isDisabled] in options" :key="optionValue" :value="optionValue" :disabled="isDisabled">
+				<option v-for="[optionValue, text, isDisabled] in options" :key="optionValue" :value="optionValue" :disabled="isDisabled" :selected="optionValue === value">
 					{{ text }}
 				</option>
 			</template>
 			<template v-else>
 				<optgroup v-for="(optionsList, groupLabel, index) in options" :key="index" :label="groupLabel">
-					<option v-for="[optionValue, text, isDisabled] in optionsList" :key="`${index}-${optionValue}`" :value="optionValue" :disabled="isDisabled">
+					<option v-for="[optionValue, text, isDisabled] in optionsList" :key="`${index}-${optionValue}`" :value="optionValue" :disabled="isDisabled" :selected="value === optionValue">
 						{{ text }}
 					</option>
 				</optgroup>
