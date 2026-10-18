@@ -20,7 +20,7 @@ import type { IEffectHoverTooltipProps } from '~/utils/types';
 
 const props = defineProps<IEffectHoverTooltipProps>();
 
-const { isTooltipPinned, isTooltipExpanded } = useTooltipState();
+const { isTooltipPinned, isTooltipExpanded, isTooltipAugmented } = useTooltipState();
 
 const abilityImage = shallowRef<IGameImageData>(['', 0]);
 const champion = shallowRef<IChampion>();
@@ -93,24 +93,22 @@ defineExpose({ el });
 </script>
 
 <template>
-	<div ref="el" popover="hint" class="effect-hover-tooltip-container">
+	<div ref="el" popover="hint" class="effect-hover-tooltip-container" :data-expanded="isTooltipExpanded || undefined">
 		<article class="hover-tooltip effect">
 			<img v-show="!isLoading" v-bind="gameImageAttrs(abilityImage, 56)" aria-hidden="true" />
 			<h5 class="game-description" v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'" />
 			<div class="game-description" v-html="computedDescription?.description" />
-			<footer v-if="sourceAbilityDescription" v-show="!isTooltipExpanded">
-				<span class="kbd-only">{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[Shift]</kbd></span>
-				<span class="touch-only">Tap here</span>
-				to show more info
+			<footer v-if="sourceAbilityDescription" v-show="!isTooltipAugmented || isTooltipPinned">
+				<ShiftCtlInfo :is-tooltip-expanded="isTooltipAugmented" :is-tooltip-pinned kbd="Ctrl" to-show="source ability" />
 			</footer>
 		</article>
 		<LolChampionAbilityHoverTooltip
 			v-if="sourceAbilityId?.type === AbilityType.champion || computedDescription?.championAbilityLikePrecomputedDescription"
-			v-show="isTooltipExpanded"
+			v-show="isTooltipAugmented"
 			:precomputed-description="sourceAbilityDescription as IComputedAbilityDescription"
 		/>
-		<LolDragonHoverTooltip v-else-if="sourceAbilityId?.type === AbilityType.dragon" v-show="isTooltipExpanded" :precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription" />
-		<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="isTooltipExpanded" class="hover-tooltip champion-item">
+		<LolDragonHoverTooltip v-else-if="sourceAbilityId?.type === AbilityType.dragon" v-show="isTooltipAugmented" :precomputed-description="sourceAbilityDescription as IComputedDragonAbilityDescription" />
+		<article v-else-if="sourceAbilityId?.type === AbilityType.item" v-show="isTooltipAugmented" class="hover-tooltip champion-item">
 			<LolItemDescription :precomputed-description="sourceAbilityDescription as IComputedItemDescription" source="Inventory" hover-tooltip />
 		</article>
 	</div>
@@ -120,10 +118,19 @@ defineExpose({ el });
 @layer components {
 	.effect-hover-tooltip-container {
 		--at-apply: 'flex-col gap-3 pointer-events-none bg-transparent';
+		/* margin-inline: var(--hover-tooltip-margin); */
 		position-try: flip-block;
 
 		&:popover-open {
 			--at-apply: 'flex';
+		}
+
+		&[data-pinned]::backdrop {
+			--at-apply: 'bg-black/20';
+		}
+
+		> .hover-tooltip {
+			margin-inline: 0px;
 		}
 	}
 
@@ -145,6 +152,10 @@ defineExpose({ el });
 		> .champion-ability,
 		> .dragon {
 			--at-apply: 'grid relative';
+		}
+
+		&[data-pinned] > .hover-tooltip.effect .expanded-ctl {
+			--at-apply: 'block';
 		}
 	}
 }

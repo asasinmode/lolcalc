@@ -44,7 +44,7 @@ function hideControlsTooltip(event: Event) {
 				applying this effects uses the stats at the moment of application<br />
 				to recalculate the effect (like applying it again with the stats gained from it), use the
 				<span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span>
-				button<br />
+				button
 			</p>
 		</div>
 	</div>

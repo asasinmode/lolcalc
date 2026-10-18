@@ -58,7 +58,7 @@ export function _setupGlobalKeyModifiers() {
 		window.removeEventListener('mousedown', mouseDownUpdateModifiers);
 	});
 
-	const { isTooltipPinned, isTooltipExpanded } = useTooltipState();
+	const { isTooltipPinned, isTooltipExpanded, isTooltipAugmented } = useTooltipState();
 
 	watch(
 		() => globalKeyModifiers.value.shift,
@@ -71,5 +71,21 @@ export function _setupGlobalKeyModifiers() {
 		},
 	);
 
-	watch(isTooltipPinned, (value) => !value && !globalKeyModifiers.value.shift && (isTooltipExpanded.value = false));
+	watch(
+		() => globalKeyModifiers.value.ctrl,
+		(value) => {
+			if (isTooltipPinned.value) {
+				value && (isTooltipAugmented.value = !isTooltipAugmented.value);
+			} else {
+				isTooltipAugmented.value = value;
+			}
+		},
+	);
+
+	watch(isTooltipPinned, (value) => {
+		if (!value) {
+			!globalKeyModifiers.value.shift && (isTooltipExpanded.value = false);
+			!globalKeyModifiers.value.ctrl && (isTooltipAugmented.value = false);
+		}
+	});
 }

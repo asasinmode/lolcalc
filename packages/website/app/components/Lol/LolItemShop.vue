@@ -14,6 +14,7 @@ const damageSource = defineModel<DamageSource>();
 type IAllItemCategory = IItemCategory | 'all';
 
 const { vSemver, vMinor } = PATCH_VERSION;
+const { isTooltipExpanded } = useTooltipState();
 
 const inventoryValue = computed(() => damageSource.value?.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0) ?? 0);
 
@@ -918,7 +919,7 @@ defineExpose({
 			</p>
 			<button :disabled="!damageSource || !damageSource.items.value.some(Boolean)" @click="sellAll">sell all</button>
 		</footer>
-		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="manual" class="hover-tooltip">
+		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="manual" class="hover-tooltip" :data-expanded="isTooltipExpanded || undefined">
 			<LolItemDescription :item="hoveredItem?.item" :damage-source="damageSource" :show-masterwork="hoveredItemShowMasterwork" header-subtitles hover-tooltip source="Shop" />
 		</article>
 	</VDialog>

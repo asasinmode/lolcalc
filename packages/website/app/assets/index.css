@@ -106,6 +106,7 @@
 		--placeholder-champion-bg-clr: #020a13;
 		/* something between neutral-400 and 300 */
 		--hover-tooltip-text-clr: oklch(80% 0 none);
+		--hover-tooltip-margin: var(--size-page-px);
 		--ui-btn-border-clr: hsl(40 59% 61%);
 		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
 		--unknown-alert-mt: calc(3 * var(--spacing));
@@ -216,10 +217,9 @@
 		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-btn-border-clr] text-[--hover-tooltip-text-clr] shadow-lg';
 		--footer-pt: calc(1 * var(--spacing));
 		--footer-mt: calc(2 * var(--spacing));
-		--tooltip-margin: var(--size-page-px);
-		max-inline-size: min(var(--tooltip-max-w, 100dvi), 100dvi - 2 * var(--tooltip-margin));
-		margin: 0px var(--tooltip-margin);
-		max-block-size: calc(80dvb - 2 * var(--tooltip-margin));
+		max-block-size: calc(80dvb - 2 * var(--hover-tooltip-margin));
+		max-inline-size: min(var(--tooltip-max-w, 100dvi), 100dvi - 2 * var(--hover-tooltip-margin));
+		/* margin-inline: var(--hover-tooltip-margin); */
 		overflow-y: auto;
 		overscroll-behavior: contain;
 
@@ -227,7 +227,8 @@
 		inset-block-start: calc(anchor(end) + var(--tooltip-offset-y, 0px));
 		/* position-area: block-end; /* below the anchor, centered on it */
 		justify-self: anchor-center;
-		position-try-fallbacks: flip-block, --hover-tooltip-sheet;
+		/* position-try-fallbacks: flip-block, --hover-tooltip-sheet; */
+		position-try-fallbacks: flip-block;
 		position-visibility: always;
 
 		footer {
@@ -236,20 +237,15 @@
 			}
 		}
 
+		&[data-pinned]::backdrop {
+			--at-apply: 'bg-black/20';
+		}
+
 		&[data-pinned],
 		[data-pinned] > & {
 			pointer-events: auto;
-			/* TODO: pinned look, make work for effect tooltip */
-			border: 1px solid #ff00ff;
+			border: 1px solid var(--unknown-clr);
 		}
-	}
-
-	@position-try --hover-tooltip-sheet {
-		position-area: none;
-		inset: var(--tooltip-gap);
-		margin: 0;
-		justify-self: center;
-		align-self: end;
 	}
 
 	/* mainly for switching between "Hold [Shift]" and "Tap here" */

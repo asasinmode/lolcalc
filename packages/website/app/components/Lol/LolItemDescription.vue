@@ -132,11 +132,7 @@ defineExpose({ header });
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && isTooltipExpanded ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
 			<p v-if="computedDescription?.keywordDefinitions" v-show="isTooltipExpanded" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
 			<div>
-				<p v-show="hasMoreInfo">
-					<span class="kbd-only">{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[Shift]</kbd></span>
-					<span class="touch-only">Tap here</span>
-					to show more info
-				</p>
+				<ShiftCtlInfo v-if="hasMoreInfo" :is-tooltip-expanded :is-tooltip-pinned />
 				<p v-show="hasOtherView || computedDescription?.footerLeft">
 					<span class="kbd-only"> Press <kbd>[Ctrl]</kbd> </span>
 					<span class="touch-only">Tap here</span>

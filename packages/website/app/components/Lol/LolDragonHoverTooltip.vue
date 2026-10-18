@@ -17,7 +17,7 @@ defineExpose({ el });
 </script>
 
 <template>
-	<article ref="el" popover="hint" class="hover-tooltip dragon">
+	<article ref="el" popover="hint" class="hover-tooltip dragon" :data-expanded="isTooltipExpanded || undefined">
 		<h5>{{ computedDescription?.title }}</h5>
 		<p class="game-description" v-html="computedDescription?.[isTooltipExpanded ? 'textExtended' : 'text'] ?? computedDescription?.text" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
@@ -26,9 +26,7 @@ defineExpose({ el });
 			<Icon class="i-ph:warning-circle-light" />
 		</p>
 		<footer v-show="computedDescription?.anyExtendedVariables && !isTooltipExpanded">
-			<span class="kbd-only">{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[Shift]</kbd></span>
-			<span class="touch-only">Tap here</span>
-			to show more info
+			<ShiftCtlInfo :is-tooltip-expanded :is-tooltip-pinned />
 		</footer>
 	</article>
 </template>

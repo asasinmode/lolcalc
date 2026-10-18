@@ -52,7 +52,7 @@ defineExpose({ el });
 </script>
 
 <template>
-	<article ref="el" popover="hint" class="hover-tooltip champion-ability" :class="{ disabled: computedDescription?.isDisabled }">
+	<article ref="el" popover="hint" class="hover-tooltip champion-ability" :class="{ disabled: computedDescription?.isDisabled }" :data-expanded="isTooltipExpanded || undefined">
 		<img
 			v-show="!computedIsLoading"
 			:src="!computedIsLoading && computedDescription ? abilityImage(computedDescription.image, computedDescription.gameAbilityId.id, group) : undefined"
@@ -100,11 +100,7 @@ defineExpose({ el });
 					</dd>
 				</template>
 			</dl>
-			<p v-show="!isTooltipExpanded">
-				<span class="kbd-only">{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[Shift]</kbd></span>
-				<span class="touch-only">Tap here</span>
-				to show more info
-			</p>
+			<ShiftCtlInfo :is-tooltip-expanded :is-tooltip-pinned />
 		</footer>
 	</article>
 </template>

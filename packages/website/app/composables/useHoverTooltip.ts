@@ -5,11 +5,16 @@ interface Options<TData> {
 	onHide?: () => unknown;
 }
 
-/** for global tooltip state. Currently only 1 tooltip is expected to be shown/pinned at a time */
+/**
+ * for global tooltip state. Currently only 1 tooltip is expected to be shown/pinned at a time
+ * expanded & augmented are managed in `useGlobalKeyModifiers` setup
+ * */
 export function useTooltipState() {
 	return {
 		isTooltipPinned: useState('isTooltipPinned', () => false),
 		isTooltipExpanded: useState('isTooltipExpanded', () => false),
+		/** currently only for effect tooltip showing source ability. Same logic as expanded but with `[Ctrl]` keybind */
+		isTooltipAugmented: useState('isTooltipAugmented', () => false),
 	};
 }
 

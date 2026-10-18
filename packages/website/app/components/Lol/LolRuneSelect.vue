@@ -8,6 +8,7 @@ import type { StyleValue, UnwrapRef } from 'vue';
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { vMinor } = PATCH_VERSION;
+const { isTooltipExpanded } = useTooltipState();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const value = defineModel<IChampionRunes>();
@@ -372,7 +373,7 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<article id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="manual" class="hover-tooltip game-description">
+		<article id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="manual" class="hover-tooltip game-description" :data-expanded="isTooltipExpanded || undefined">
 			<h4>{{ hoveredRune?.title }}</h4>
 			<div v-html="(globalKeyModifiers.shift && hoveredRuneTooltip?.longReplaced) || hoveredRuneTooltip?.shortReplaced" />
 			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />
