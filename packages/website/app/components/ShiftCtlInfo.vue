@@ -8,16 +8,16 @@ withDefaults(
 	}>(),
 	{
 		toShow: 'more info',
-		kbd: 'Shift',
+		kbd: '[Shift]',
 	},
 );
 </script>
 
 <template>
 	<p class="expanded-ctl">
-		<span class="kbd-only"
-			>{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>[{{ kbd }}]</kbd></span
-		>
+		<span class="kbd-only">
+			{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>{{ kbd }}</kbd>
+		</span>
 		<span class="touch-only">Tap here</span>
 		to {{ isTooltipExpanded ? 'hide' : 'show' }} {{ toShow }}
 	</p>
