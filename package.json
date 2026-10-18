@@ -1,10 +1,10 @@
 {
 	"name": "@lolcalc/monorepo",
-	"version": "0.0.1",
+	"version": "0.1.0-alpha.0",
 	"private": true,
 	"description": "collection of tools and apps related to lolcalc",
 	"license": "AGPL-3.0-only",
-	"author": "Stanisław Perek<https://github.com/asasinmode>",
+	"author": "Stanisław Perek <suportmode@gmail.com> (https://github.com/asasinmode)",
 	"type": "module",
 	"scripts": {
 		"typecheck:packages": "tsc --noEmit",

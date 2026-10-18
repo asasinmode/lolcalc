@@ -1,6 +1,6 @@
 {
 	"name": "@lolcalc/data",
-	"version": "0.0.1",
+	"version": "0.1.0-alpha.0",
 	"private": true,
 	"description": "data used by lolcalc and the types based on it, dynamically updated by the `scripts/updateData.ts`",
 	"license": "AGPL-3.0-only",

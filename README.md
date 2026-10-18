@@ -39,3 +39,7 @@ node .\scripts\updateTestFixture.ts 16.16 -d infernal:stack -d mountain:stack
 # add ghost and botrk slow effects
 node .\scripts\updateTestFixture.ts 16.16 -e SummonerHaste -e 3153
 ```
+
+## versioning
+
+Versioning isn't doesn't follow semver rules. At the moment it's vibes based. Check the [github releases](https://github.com/asasinmode/lolcalc/releases) for version changelog.
