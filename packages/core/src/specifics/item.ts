@@ -3916,7 +3916,7 @@ export const ITEM_SPECIFICS = {
 				f4: [],
 				f5: [],
 				f6: [ITEMS_BY_NAME.bloodsong?.dataValues.StealthWardCap],
-				lolcalcChampRange: [],
+				lolcalcChampRange: [ITEMS_BY_NAME.bloodsong?.dataValues.MeleeDamageAmp, ITEMS_BY_NAME.bloodsong?.dataValues.RangedDamageAmp],
 			},
 			calculate() {
 				return {
