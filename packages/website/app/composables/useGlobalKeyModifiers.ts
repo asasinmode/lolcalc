@@ -70,4 +70,6 @@ export function _setupGlobalKeyModifiers() {
 			}
 		},
 	);
+
+	watch(isTooltipPinned, (value) => !value && !globalKeyModifiers.value.shift && (isTooltipExpanded.value = false));
 }

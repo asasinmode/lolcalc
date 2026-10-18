@@ -235,6 +235,21 @@
 				--at-apply: 'font-inherit';
 			}
 		}
+
+		&[data-pinned],
+		[data-pinned] > & {
+			pointer-events: auto;
+			/* TODO: pinned look, make work for effect tooltip */
+			border: 1px solid #ff00ff;
+		}
+	}
+
+	@position-try --hover-tooltip-sheet {
+		position-area: none;
+		inset: var(--tooltip-gap);
+		margin: 0;
+		justify-self: center;
+		align-self: end;
 	}
 
 	/* mainly for switching between "Hold [Shift]" and "Tap here" */
@@ -250,20 +265,6 @@
 		.touch-only {
 			--at-apply: 'inline';
 		}
-	}
-
-	@position-try --hover-tooltip-sheet {
-		position-area: none;
-		inset: var(--tooltip-gap);
-		margin: 0;
-		justify-self: center;
-		align-self: end;
-	}
-
-	.hover-tooltip[data-pinned] {
-		pointer-events: auto;
-		/* TODO: pinned look, make work for effect tooltip */
-		border: 1px solid #ff00ff;
 	}
 
 	.skip-link {

@@ -16,6 +16,7 @@ export function useTooltipState() {
 export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TData>) {
 	const { isTooltipPinned } = useTooltipState();
 
+	/* partially duplicated in popover's toggle listener */
 	function hide() {
 		const popover = toValue(el);
 		popover?.removeAttribute('data-pinned');
@@ -40,6 +41,8 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 					(event) => {
 						event.newState === 'closed' && popover.removeAttribute('data-pinned');
 						window.removeEventListener('keydown', onKeyDown);
+						onHide?.();
+						isTooltipPinned.value = false;
 					},
 					{ once: true },
 				);
