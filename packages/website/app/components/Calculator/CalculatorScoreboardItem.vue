@@ -1103,7 +1103,7 @@ defineExpose({ el });
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</article>
 			</section>
-			<section class="stats" :inert="value.isLoading.value" @dblclick.ctrl="openDebugDialog(value)">
+			<section class="stats" :inert="value.isLoading.value" @dblclick.ctrl.prevent="openDebugDialog(value)">
 				<h4>stats</h4>
 				<dl v-for="(stats, statKindIndex) in [minorStats, majorStats]" :key="statKindIndex">
 					<template v-for="stat in stats" :key="stat.name">
