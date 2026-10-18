@@ -8,12 +8,13 @@
 			<ul>
 				<li><NuxtLink to="#qol-tips">qol tips</NuxtLink></li>
 				<li><NuxtLink to="#definitions">definitions</NuxtLink></li>
+				<li><NuxtLink to="#tutorials">tutorials</NuxtLink></li>
+				<li><NuxtLink to="#example-configurations">example configurations</NuxtLink></li>
 				<li><NuxtLink to="#q-a">q&a</NuxtLink></li>
-				<li><NuxtLink to="#examples">examples</NuxtLink></li>
 			</ul>
 		</nav>
 
-		<h2 id="qol-tips">qol tips</h2>
+		<TextPageHeading id="qol-tipes" text="qol tips" />
 		<ul>
 			<li>pin a tooltip by pressing [K] when hovering over it</li>
 			<li>scoreboard items can be expanded/collapsed by double clicking the background. The same works for result sections but you need to click on their headers</li>
@@ -27,7 +28,7 @@
 			<li>right click an item, dragon stack/soul, role quest or ability levels to clear them</li>
 		</ul>
 
-		<h2 id="definitions">definitions</h2>
+		<TextPageHeading id="definitions" text="definitions" />
 		<dl>
 			<dt>configuration scoreboard</dt>
 			<dd>
@@ -53,30 +54,7 @@
 		</dl>
 		<p>Check out the TODO tutorial library and read on for some of the features described in-depth</p>
 
-		<h2 id="q-a">q&a</h2>
-		<dl>
-			<dt>How can I save multiple configurations?</dt>
-			<dd>
-				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
-				builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a>
-			</dd>
-			<dt>How can I delete the last results column?</dt>
-			<dd>It's a puzzle</dd>
-			<dt>Why are there stun/slow duration and values in the results table? They don't change</dt>
-			<dd>They are affected by target's tenacity and slow resists</dd>
-		</dl>
-
-		<h2 id="examples">examples</h2>
-		<ul>
-			<li>
-				<NuxtLink
-					to="/?v=1&src=8_1_4645_0__000_841_2_0000_00000_______&src=8_1_4645-3031_0__000_841_2_0000_00000_______&tgt=-1_1__0___1000_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1__0___97_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___1350_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___199_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tblCol=1-0&tblCol=1-1&tblCol=1-2&tblCol=1-3&tblSct=0-8-1-0_1&tblSct=a-stats_&tblSct=a-ba_1&tblSct=a-cTtl_1"
-					target="_blank"
-					>vladimir shadowflame randuin</NuxtLink
-				>
-			</li>
-		</ul>
-
+		<TextPageHeading id="tutorials" text="tutorials" />
 		<details>
 			<summary><h3>"apply X on target" items</h3></summary>
 			<p>
@@ -116,5 +94,31 @@
 			<summary><h3>Rell passive resist drain</h3></summary>
 			<p>It's complicated</p>
 		</details>
+
+		<TextPageHeading id="examples" text="examples" />
+		<ul>
+			<li>
+				<NuxtLink
+					to="/?v=1&src=8_1_4645_0__000_841_2_0000_00000_______&src=8_1_4645-3031_0__000_841_2_0000_00000_______&tgt=-1_1__0___1000_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1__0___97_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___1350_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___199_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tblCol=1-0&tblCol=1-1&tblCol=1-2&tblCol=1-3&tblSct=0-8-1-0_1&tblSct=a-stats_&tblSct=a-ba_1&tblSct=a-cTtl_1"
+					target="_blank"
+				>
+					vladimir shadowflame randuin</NuxtLink
+				>
+				showcasing the interaction between Shadowflame, Infinity Edge and Randuin's Omen
+			</li>
+		</ul>
+
+		<TextPageHeading id="q-a" text="q&a" />
+		<dl>
+			<dt>How can I save multiple configurations?</dt>
+			<dd>
+				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
+				builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a>
+			</dd>
+			<dt>How can I delete the last results column?</dt>
+			<dd>It's a puzzle</dd>
+			<dt>Why are there stun/slow duration and values in the results table? They don't change</dt>
+			<dd>They are affected by target's tenacity and slow resists</dd>
+		</dl>
 	</main>
 </template>

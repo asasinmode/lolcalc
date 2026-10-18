@@ -44,10 +44,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			</ul>
 		</nav>
 
-		<h2 id="what-is-it">
-			what is it?
-			<a href="#what-is-it"><span aria-hidden="true">#</span><span>link to the "what is it?" section</span></a>
-		</h2>
+		<TextPageHeading id="what-is-it" text="what is it?" />
 		<p>
 			<strong>lolcalc</strong> is intended to be a tool for <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> that shows the same numbers the game does. The currently aimed for numbers are items, runes,
 			champion abilities and their + some other common effects/buffs/debuffs, for any combination of them.
@@ -58,10 +55,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		</p>
 		<p><u>The main goal is build comparison</u>. <strong>lolcalc</strong> should, fairly accurately, show the difference between the damage and stats of various champion builds, making it easier to find the best one.</p>
 
-		<h2 id="does-it-work">
-			does it work?
-			<a href="#does-it-work"><span aria-hidden="true">#</span><span>link to the "does it work?" section</span></a>
-		</h2>
+		<TextPageHeading id="does-it-work" text="does it work?" />
 		<p>
 			While it's impossible for me to check all 172+ champions with every item/rune/dragon/quest/buff/debuff combination, I tried my best to make it work and
 			<NuxtLink to="/guide#examples"> here are some examples of it </NuxtLink>. If you encounter a configuration that's not calculated correctly (<a href="#known-discrepancies">known discrepancies</a>), please
@@ -74,20 +68,14 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<p class="game-description" v-html="nonPassiveAbilitiesDisclaimer" />
 		<p>For when these and other features will be implemented, check <a href="#TODO">the roadmap</a>.</p>
 
-		<h2 id="known-discrepancies">
-			currently known calculation discrepancies
-			<a href="#known-discrepancies"><span aria-hidden="true">#</span><span>link to the "known discrepancies" section</span></a>
-		</h2>
+		<TextPageHeading id="known-discrepancies" text="known calculation discrepancies" />
 		<ul>
 			<li class="game-description" v-html="discrepancyMaxHealthMana" />
 			<li class="game-description" v-html="discrepancyAttackRangeRfc" />
 			<li class="game-description" v-html="discrepancyBloodmailRetribution" />
 		</ul>
 
-		<h2 id="support">
-			support
-			<a href="#support"><span aria-hidden="true">#</span><span>link to the "support" section</span></a>
-		</h2>
+		<TextPageHeading id="support" text="support" />
 		<p>
 			The best way to support the project is to give me money, which you can do through X, Y or Z. I'd love to be able to work on it full time and I'm thankful for any support. I'm also open to any League/programming related job offers and
 			would appreciate recommendations.
@@ -99,10 +87,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		</p>
 		<p>If you have any questions, feel free to contact me through the platforms listed at the bottom of this page.</p>
 
-		<h2 id="acknowledgements">
-			acknowledgements
-			<a href="#acknowledgements"><span aria-hidden="true">#</span><span>link to the "acknowledgements" section</span></a>
-		</h2>
+		<TextPageHeading id="acknowledgements" text="acknowledgements" />
 		<p>
 			This project would not exist without
 			<a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.
@@ -114,10 +99,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<p>Thanks to my homies who helped me test the website and verify the results in game.</p>
 		<p>Thanks to Riot Games for not chronobreaking this project (🤞) and for their policy that allowed me to make it.</p>
 
-		<h2 id="misc">
-			misc
-			<a href="#misc"><span aria-hidden="true">#</span><span>link to the "misc" section</span></a>
-		</h2>
+		<TextPageHeading id="misc" text="misc" />
 		<dl>
 			<dt>alpha/beta/release versions</dt>
 			<dd>
@@ -161,7 +143,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[--fluid-22-48] mbe-[0.5em] text-white relative scroll-m-bs-5';
 
 			> a {
-				--at-apply: 'op-0 inline-block px-1';
+				--at-apply: 'op-0 inline-block ps-1 pe-2';
 
 				> span:last-child {
 					--at-apply: 'sr-only';
@@ -170,7 +152,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 
 			@media (width >= 920px) {
 				&::before {
-					--at-apply: 'absolute -inset-y-0.25 inset-s-0 translate-y-0.5 -translate-x-full op-0 z-0 px-1 block';
+					--at-apply: 'absolute -inset-y-0.25 -inset-s-0 translate-y-0.5 -translate-x-full op-0 z-0 px-1 block';
 					content: '#';
 				}
 
