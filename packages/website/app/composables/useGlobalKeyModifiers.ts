@@ -24,6 +24,7 @@ export function _setupGlobalKeyModifiers() {
 	}
 
 	function pressModifier(event: KeyboardEvent) {
+		if (event.repeat) return;
 		if (event.key === 'Shift' || event.shiftKey) {
 			globalKeyModifiers.value.shift = true;
 		} else if (event.key === 'Alt' || event.altKey) {

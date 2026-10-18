@@ -15,19 +15,32 @@ function refresh() {
 	emit('refresh');
 }
 
+let popoverEl: HTMLElement | undefined;
+
+const { show: showHoverTooltip, hide: hideHoverTooltip } = useHoverTooltip({
+	el: () => popoverEl,
+	onHide() {
+		popoverEl = undefined;
+	},
+});
+
 function showControlsTooltip(event: Event) {
 	const popover = (event.currentTarget as HTMLElement).lastElementChild as HTMLElement | null;
-	popover?.showPopover();
+	if (popover) {
+		popoverEl = popover;
+		showHoverTooltip(event);
+	}
 }
 
-function hideControlsTooltip(event: Event) {
-	const popover = (event.currentTarget as HTMLElement).lastElementChild as HTMLElement | null;
-	popover?.hidePopover();
+function onFocusout(event: FocusEvent) {
+	if (!event.relatedTarget || !(event.currentTarget as HTMLElement)?.contains(event.relatedTarget as HTMLElement)) {
+		hideHoverTooltip();
+	}
 }
 </script>
 
 <template>
-	<div class="effect-ctl" @mouseenter="showControlsTooltip" @focusin="showControlsTooltip" @mouseleave="hideControlsTooltip" @focusout="hideControlsTooltip">
+	<div class="effect-ctl" @mouseenter="showControlsTooltip" @focusin="showControlsTooltip" @focusout="onFocusout">
 		<button class="pretend-ui-btn" @click="refresh">
 			<span>refresh</span>
 			<Icon class="i-ph:arrow-clockwise-bold" :style="`--clicks: ${clicks}`" />
@@ -38,12 +51,12 @@ function hideControlsTooltip(event: Event) {
 				<span>apply</span>
 			</label>
 		</slot>
-		<div popover="manual" class="hover-tooltip">
+		<div popover="hint" class="hover-tooltip">
 			<p class="snapshot game-description" v-html="snapshotText" />
 			<p>
 				applying this effects uses the stats at the moment of application<br />
 				to recalculate the effect (like applying it again with the stats gained from it), use the
-				<span class="pretend-ui-btn"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></span>
+				<button tabindex="-1" class="pretend-ui-btn" @click="refresh" :style="`--clicks: ${clicks}`"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></button>
 				button
 			</p>
 		</div>
@@ -60,9 +73,12 @@ function hideControlsTooltip(event: Event) {
 			&:has(+ button, + label) {
 				--at-apply: '-me-px';
 			}
+		}
 
+		> button:first-of-type,
+		.hover-tooltip button {
 			.icon {
-				--at-apply: 'transition-[rotate] duration-[--transition-duration]';
+				--at-apply: 'duration-250 transition-[rotate] duration-[--transition-duration]';
 				rotate: z calc(360deg * var(--clicks));
 			}
 		}

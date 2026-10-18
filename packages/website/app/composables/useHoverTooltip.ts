@@ -55,7 +55,7 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 		}
 	}
 
-	function onTriggerEnter(event: MouseEvent, data: TData) {
+	function onTriggerEnter(event: Event, data: TData) {
 		const trigger = event.target as HTMLElement;
 		trigger.addEventListener(
 			'mouseleave',
