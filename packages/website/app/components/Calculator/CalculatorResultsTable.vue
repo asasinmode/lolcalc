@@ -1205,7 +1205,7 @@ const colW = computed(() => {
 	};
 });
 
-const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail();
+const { updateThumbnail } = useDamageSourceThumbnail();
 
 function showColumnSourceThumbnail(event: Event, damageSource: DamageSource | undefined) {
 	if (damageSource) {
@@ -1341,7 +1341,7 @@ defineExpose({
 								<img v-else :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`" width="256" height="256" style="--focus-brightness: 1.5" aria-hidden="true" />
 								<template #post>
 									<div popover="hint">
-										<DamageSourceThumbnail />
+										<CalculatorDamageSourceThumbnail />
 									</div>
 								</template>
 							</VSelect>
@@ -1367,7 +1367,7 @@ defineExpose({
 								<img v-else :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`" width="256" height="256" style="--focus-brightness: 1.5" aria-hidden="true" />
 								<template #post>
 									<div popover="hint">
-										<DamageSourceThumbnail />
+										<CalculatorDamageSourceThumbnail />
 									</div>
 								</template>
 							</VSelect>

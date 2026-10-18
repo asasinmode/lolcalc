@@ -12,23 +12,23 @@ const isTargetsMounted = ref(false);
 
 const dragDropIndex = ref<number>();
 const dragDropTarget = shallowRef<DamageSource[]>();
-const dragPreview = useTemplateRef('dragPreview');
+const dragPreview = useTemplateRef<{ el: ShallowRef<HTMLElement | null> }>('dragPreview');
 const dragging = shallowRef<{
 	isDuplicate: boolean;
 	index: number;
 	source: DamageSource[];
 }>();
 
-const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail();
+const { updateThumbnail } = useDamageSourceThumbnail();
 
 function onDragstart(event: DragEvent, index: number, source: DamageSource[], isDuplicate: boolean) {
-	// TODO maybe update the source-thumbnail on drag button mousedown so it's always ready when the drag starts?
-	updateThumbnail(dragPreview.value, source[index]!);
+	/* possible improvement - update the source-thumbnail on drag button mousedown so it's always ready when the drag starts? */
+	updateThumbnail(toValue(dragPreview.value!.el), source[index]!);
 
 	dragging.value = { index, source, isDuplicate };
 	event.stopPropagation();
 	event.dataTransfer!.effectAllowed = isDuplicate ? 'copy' : 'move';
-	event.dataTransfer!.setDragImage(dragPreview.value!, 0, 0);
+	event.dataTransfer!.setDragImage(toValue(dragPreview.value!.el)!, 0, 0);
 }
 
 function onDragenter(event: DragEvent, index: number, target: DamageSource[], isList = false) {
@@ -340,7 +340,7 @@ const isDisplayingTargets = ref(false);
 					<button class="pretend-ui-btn" :disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value" @click="add(damageTargets)">add damage target</button>
 				</li>
 			</ul>
-			<DamageSourceThumbnail ref="dragPreview" />
+			<CalculatorDamageSourceThumbnail ref="dragPreview" />
 		</div>
 	</section>
 </template>
@@ -582,7 +582,7 @@ const isDisplayingTargets = ref(false);
 				--at-apply: 'size-5.5 bg-black';
 
 				&:nth-of-type(7) {
-					--at-apply: 'rounded-full absolute end-0 top-1/2 -translate-y-1/2';
+					--at-apply: 'rounded-full of-clip absolute end-0 top-1/2 -translate-y-1/2';
 				}
 			}
 		}

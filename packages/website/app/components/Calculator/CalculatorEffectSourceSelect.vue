@@ -32,8 +32,8 @@ function hideTooltip() {
 
 const showInvalid = computed(() => value.value && props.invalidMessage);
 
-const thumbnail = useTemplateRef('thumbnail');
-const { DamageSourceThumbnail, updateThumbnail } = useDamageSourceThumbnail();
+const thumbnail = useTemplateRef<{ el: ShallowRef<HTMLElement | null> }>('thumbnail');
+const { updateThumbnail } = useDamageSourceThumbnail();
 
 const selectedText = computed(() => {
 	if (value.value && !value.value?.listedChampion.value) {
@@ -64,12 +64,12 @@ function updateThumbnailHideTooltip(id?: string) {
 		);
 	}
 	value.value = damageSource;
-	damageSource && updateThumbnail(thumbnail.value, damageSource);
+	damageSource && updateThumbnail(toValue(thumbnail.value!.el), damageSource);
 	hideTooltip();
 }
 
 onMounted(() => {
-	value.value && updateThumbnail(thumbnail.value, value.value);
+	value.value && updateThumbnail(toValue(thumbnail.value!.el), value.value);
 });
 </script>
 
@@ -103,7 +103,7 @@ onMounted(() => {
 					{{ invalidMessage }}
 					<Icon class="i-ph:warning-light" />
 				</p>
-				<DamageSourceThumbnail v-show="value" ref="thumbnail" />
+				<CalculatorDamageSourceThumbnail v-show="value" ref="thumbnail" />
 			</div>
 		</template>
 	</VSelect>

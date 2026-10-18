@@ -2,39 +2,10 @@ import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { CHAMPION_IMAGES, imgUrl, RUNES, TEXT } from '@lolcalc/data';
 
-function DamageSourceThumbnail() {
-	return h(
-		'div',
-		{
-			class: 'damage-source-thumbnail',
-			inert: true,
-			'aria-hidden': 'true',
-		},
-		[
-			h('span', h('img')),
-			h('span'),
-			h('div', [h('img', { class: 'primary-path-keystone' }), h('span', { class: 'secondary-path' })]),
-			h(
-				'ul',
-				Array.from({ length: 7 }, (_, i) =>
-					h(
-						'li',
-						{
-							key: i + 1,
-							style: i === 6 ? 'display: none;' : undefined,
-						},
-						h('img'),
-					),
-				),
-			),
-		],
-	);
-}
-
 export function useDamageSourceThumbnail() {
 	const { championImage, championImageSize } = CHAMPION_IMAGES;
 	return {
-		updateThumbnail(el: HTMLElement | null, damageSource: DamageSource) {
+		updateThumbnail(el: HTMLElement | null | undefined, damageSource: DamageSource) {
 			if (!el) {
 				return;
 			}
@@ -107,6 +78,5 @@ export function useDamageSourceThumbnail() {
 				itemList.style.paddingInlineEnd = '';
 			}
 		},
-		DamageSourceThumbnail,
 	};
 }
