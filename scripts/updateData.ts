@@ -1782,18 +1782,24 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType> {
 	stringtableVariableSaveUnder?: { stringtable?: Record<string, string> };
 }
 
-function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug, optional?: boolean): string | undefined {
+function getStringtableValue(
+	path: string,
+	variableDebug: string | IStringtableVariableDebug,
+	optional?: boolean,
+	/** when `true` the resolved variables will be `transformAbilityText`-ed. Currently only used for champion ability tooltip & tooltip extended (and when added on patch 26.20 it affected Kha'Zix R and Aphelios passive gun descriptions) */
+	transformResolved?: boolean,
+): string | undefined {
 	const value = stringtable[path.toLowerCase()] ?? stringtable[hashXxh3(path, 38)];
 	if (!optional && value === undefined) {
 		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
 	if (value && typeof variableDebug === 'object') {
-		debugStringVariables(value, variableDebug);
+		debugStringVariables(value, variableDebug, transformResolved);
 	}
 	return value;
 }
 
-function debugStringVariables(value: string, variableDebug: IStringtableVariableDebug) {
+function debugStringVariables(value: string, variableDebug: IStringtableVariableDebug, transformResolved?: boolean) {
 	const { category, key, stringtableVariableSaveUnder, variables } = variableDebug;
 
 	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceStringtableVariables(value, stringtable, { values: variables?.variableValueParameters.dynamicVariables?.known }, false);
@@ -1803,7 +1809,7 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	}
 
 	for (const [stringtableKey, value] of stringtableVariables.entries()) {
-		((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
+		((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = transformResolved ? transformAbilityText(value) : value;
 	}
 	// TODO try hashed stringtable variables, cant figure out what the hashing algorithm is atm (below uses `xxh3.Xxh3.withSeed(0n)`)
 	// in passives only Zilean and Kalista have their tooltips hashed using xxh3 but the hashes my version outputs are 1 letter different from what's in the stringtable
@@ -2386,6 +2392,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 						key: `${debugPrefix} ${variant.objectName} tooltip`,
 					},
 					false,
+					true,
 				);
 			if (variant.tooltip) {
 				const preplace = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[abilityKey]?.preplaceTooltipText;
@@ -2396,10 +2403,15 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			}
 			variant.tooltipExtended =
 				variant.tooltipExtended &&
-				getStringtableValue(variant.tooltipExtended, {
-					...variableDebug,
-					key: `${debugPrefix} ${variant.objectName} tooltip extended`,
-				});
+				getStringtableValue(
+					variant.tooltipExtended,
+					{
+						...variableDebug,
+						key: `${debugPrefix} ${variant.objectName} tooltip extended`,
+					},
+					false,
+					true,
+				);
 			variant.tooltipExtended &&= transformAbilityText(variant.tooltipExtended);
 			variant.tooltipExtendedBelowLine =
 				variant.tooltipExtendedBelowLine &&
