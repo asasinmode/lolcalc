@@ -341,6 +341,11 @@ defineExpose({ header });
 			--at-apply: 'hidden';
 		}
 
+		/* add spacing after last <li> if there's a single <br> additional content afterwards. Check nami W (should have space), aphelios passive (should not have space) */
+		> li:not(:has(+ br + br)):has(+ br:not(:last-child)) {
+			--at-apply: 'mbe-2';
+		}
+
 		> br:nth-last-child(2):not(br + br) {
 			&:has(+ rules) {
 				--at-apply: 'hidden';
