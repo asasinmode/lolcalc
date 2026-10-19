@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// TODO table of contents at the top or on the side sticky when large enough
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import { STAT_ICON } from '@lolcalc/data/index';
@@ -121,17 +120,21 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 @layer page {
 	#about,
 	#guide {
-		--at-apply: 'text-lg leading-8 max-inline-216 mx-auto pbs-[--fluid-12-32] mbe-[--fluid-28-40] text-neutral-200';
+		--at-apply: 'grid grid-cols-[1fr_minmax(0,calc(216*var(--spacing)))_1fr] auto-rows-auto text-lg leading-8 mx-auto pbs-[--fluid-12-32] mbe-[--fluid-28-40] text-neutral-200';
+
+		> * {
+			--at-apply: 'col-start-2 col-span-1';
+		}
 
 		> h1 {
 			--at-apply: 'text-[length:--fluid-24-32] font-700 mbe-[0.75em] text-center text-white';
 		}
 
 		> nav {
-			--at-apply: 'b b-neutral-800 max-inline-80 px-3 py-2 bg-slate-950';
+			--at-apply: 'b b-neutral-800 max-inline-80 px-3 py-2 bg-slate-950 block-max';
 
 			> h2 {
-				--at-apply: 'font-600 text-neutral-300 tracking-wide text-xl mbe-1';
+				--at-apply: 'font-600 text-neutral-100 tracking-wide text-xl mbe-1';
 			}
 
 			> ul {
@@ -139,8 +142,15 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			}
 		}
 
+		@media (width >= 1504px) {
+			> nav {
+				--at-apply: 'col-start-3 sticky inset-bs-[--fluid-12-32] row-start-1 -mbe-[calc(100%+var(--fluid-12-32))]';
+				translate: calc(2 * var(--size-page-px)) 0px;
+			}
+		}
+
 		> h2 {
-			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[--fluid-22-48] mbe-[0.5em] text-white relative scroll-m-bs-5';
+			--at-apply: 'text-[length:--fluid-22-28] font-700 mbs-[--fluid-22-48] mbe-[0.5em] text-white relative scroll-m-bs-5 inline-fit';
 
 			> a {
 				--at-apply: 'op-0 inline-block ps-1 pe-2';
