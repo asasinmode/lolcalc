@@ -35,7 +35,7 @@ const toggle = props.tapCb ?? (() => (stateIsExpanded.value = !stateIsExpanded.v
 		}
 
 		@media (hover: hover) and (pointer: fine) {
-			&[data-expanded]:not([data-pinned]) .expanded-ctl {
+			&[data-expanded]:not([data-pinned]):not([data-pinned] > &) .expanded-ctl {
 				--at-apply: 'hidden';
 			}
 		}

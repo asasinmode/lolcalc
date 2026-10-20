@@ -81,7 +81,7 @@ defineExpose({ el });
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
 		<footer
 			v-if="(computedDescription?.tooltipExtended && computedDescription.tooltipExtended !== computedDescription.tooltip) || anyExtendedInfo"
-			v-show="isTooltipExpanded ? computedDescription?.tooltipExtendedBelowLine || computedDescription?.abilityLevelVars?.length : anyExtendedInfo"
+			v-show="isTooltipPinned || (isTooltipExpanded ? computedDescription?.tooltipExtendedBelowLine || computedDescription?.abilityLevelVars?.length : anyExtendedInfo)"
 		>
 			<div v-if="computedDescription?.tooltipExtendedBelowLine" v-show="isTooltipExpanded" class="game-description" v-html="computedDescription.tooltipExtendedBelowLine" />
 			<dl v-show="isTooltipExpanded && computedDescription?.abilityLevelVars" class="game-description">
