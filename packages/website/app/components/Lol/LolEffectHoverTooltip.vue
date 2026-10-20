@@ -118,8 +118,6 @@ defineExpose({ el });
 @layer components {
 	.effect-hover-tooltip-container {
 		--at-apply: 'flex-col gap-3 pointer-events-none bg-transparent';
-		/* margin-inline: var(--hover-tooltip-margin); */
-		position-try: flip-block;
 
 		&:popover-open {
 			--at-apply: 'flex';
@@ -152,6 +150,10 @@ defineExpose({ el });
 		> .champion-ability,
 		> .dragon {
 			--at-apply: 'grid relative';
+		}
+
+		> .hover-tooltip {
+			position-try-fallbacks: unset;
 		}
 
 		&[data-pinned] > .hover-tooltip.effect .expanded-ctl {

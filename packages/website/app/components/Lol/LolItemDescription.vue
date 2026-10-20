@@ -568,13 +568,14 @@ defineExpose({ header });
 	}
 
 	.hover-tooltip.champion-item {
-		--at-apply: 'w-160 max-w-screen';
+		--at-apply: 'inline-160';
 		justify-self: anchor-center;
 		position-try: flip-block;
 	}
 
 	.hover-tooltip.role-quest {
-		--at-apply: 'w-fit max-w-[min(100vw,calc(158*var(--spacing)))]';
+		--at-apply: 'inline-fit';
+		--tooltip-max-w: calc(158 * var(--spacing));
 
 		> .game-description {
 			--at-apply: 'leading-normal';

@@ -213,18 +213,22 @@
 		}
 	}
 
-	.hover-tooltip {
-		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-btn-border-clr] text-[--hover-tooltip-text-clr] shadow-lg';
-		--footer-pt: calc(1 * var(--spacing));
-		--footer-mt: calc(2 * var(--spacing));
-		max-block-size: calc(100dvb - 2 * var(--hover-tooltip-margin));
+	.hover-tooltip,
+	.effect-hover-tooltip-container {
 		max-inline-size: min(var(--tooltip-max-w, 100dvi), 100dvi - 2 * var(--hover-tooltip-margin));
-		overflow-y: auto;
-		overscroll-behavior: contain;
+		max-block-size: calc(100dvb - 2 * var(--hover-tooltip-margin));
 		inset-block-start: calc(anchor(end) + var(--tooltip-offset-y, 0px));
 		justify-self: anchor-center;
 		position-try-fallbacks: flip-block, --hover-tooltip-sheet;
 		position-visibility: always;
+	}
+
+	.hover-tooltip {
+		--at-apply: 'bg-neutral-950 pointer-events-none b b-[--ui-btn-border-clr] text-[--hover-tooltip-text-clr] shadow-lg';
+		--footer-pt: calc(1 * var(--spacing));
+		--footer-mt: calc(2 * var(--spacing));
+		overflow-y: auto;
+		overscroll-behavior: contain;
 
 		footer {
 			kbd {

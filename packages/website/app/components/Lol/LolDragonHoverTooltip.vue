@@ -34,7 +34,8 @@ defineExpose({ el });
 <style>
 @layer components {
 	.hover-tooltip.dragon {
-		--at-apply: 'w-fit max-w-[min(100vw,calc(154*var(--spacing)))]';
+		--at-apply: 'inline-fit';
+		--tooltip-max-w: calc(154 * var(--spacing));
 		justify-self: anchor-center;
 		position-try: flip-block;
 
