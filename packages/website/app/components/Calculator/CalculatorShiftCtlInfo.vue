@@ -1,20 +1,24 @@
 <script setup vapor lang="ts">
-withDefaults(
+const props = withDefaults(
 	defineProps<{
 		isTooltipPinned: boolean;
 		isTooltipExpanded: boolean;
 		toShow?: string;
 		kbd?: string;
+		tapCb?: () => void;
 	}>(),
 	{
 		toShow: 'more info',
 		kbd: '[Shift]',
 	},
 );
+
+const { isTooltipExpanded: stateIsExpanded } = useTooltipState();
+const toggle = props.tapCb ?? (() => (stateIsExpanded.value = !stateIsExpanded.value));
 </script>
 
 <template>
-	<p class="expanded-ctl">
+	<p class="expanded-ctl" @touchstart="toggle">
 		<span class="kbd-only">
 			{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>{{ kbd }}</kbd>
 		</span>

@@ -87,6 +87,10 @@ const sourceAbilityDescription = computed<IComputedAbilityDescription | ICompute
 	});
 });
 
+function toggleAugmentedView() {
+	isTooltipAugmented.value = !isTooltipAugmented.value;
+}
+
 const el = useTemplateRef('el');
 
 defineExpose({ el });
@@ -99,7 +103,7 @@ defineExpose({ el });
 			<h5 class="game-description" v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'" />
 			<div class="game-description" v-html="computedDescription?.description" />
 			<footer v-if="sourceAbilityDescription" v-show="!(isTooltipAugmented || isTooltipExpanded) || isTooltipPinned">
-				<CalculatorShiftCtlInfo :is-tooltip-expanded="isTooltipAugmented || isTooltipExpanded" :is-tooltip-pinned kbd="[Shift] or [Ctrl]" to-show="source ability" />
+				<CalculatorShiftCtlInfo :is-tooltip-expanded="isTooltipAugmented || isTooltipExpanded" :is-tooltip-pinned kbd="[Shift] or [Ctrl]" to-show="source ability" :tap-cb="toggleAugmentedView" />
 			</footer>
 		</article>
 		<LolChampionAbilityHoverTooltip

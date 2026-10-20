@@ -69,6 +69,10 @@ const isMasterwork = computed(() => props.showMasterwork && isInventoryView.valu
 
 const header = useTemplateRef<HTMLButtonElement>('header');
 
+function toggleView() {
+	view.value = view.value === 'Shop' ? 'Inventory' : 'Shop';
+}
+
 defineExpose({ header });
 </script>
 
@@ -132,7 +136,7 @@ defineExpose({ header });
 			<p v-if="computedDescription?.keywordDefinitions" v-show="isTooltipExpanded" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
 			<div>
 				<CalculatorShiftCtlInfo v-if="hasMoreInfo" :is-tooltip-expanded :is-tooltip-pinned />
-				<p v-show="hasOtherView || computedDescription?.footerLeft">
+				<p v-show="hasOtherView || computedDescription?.footerLeft" @touchstart="toggleView">
 					<span class="kbd-only"> Press <kbd>[Ctrl]</kbd> </span>
 					<span class="touch-only">Tap here</span>
 					to switch to <b>{{ otherView }}</b> view
