@@ -14,7 +14,7 @@ const damageSource = defineModel<DamageSource>();
 type IAllItemCategory = IItemCategory | 'all';
 
 const { vSemver, vMinor } = PATCH_VERSION;
-const { isTooltipExpanded } = useTooltipState();
+const { isTooltipExpanded, isTooltipPinned } = useTooltipState();
 
 const inventoryValue = computed(() => damageSource.value?.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0) ?? 0);
 
@@ -182,9 +182,9 @@ function sellItem(event: MouseEvent, index: number) {
 		selectedItemInventoryIndex.value = undefined;
 	}
 	damageSource.value?.removeItem(index);
-	leaveTooltipableElement();
+	hideItemTooltip();
 	if (damageSource.value?.items.value[index]) {
-		enterTooltipableElement(event, shopItemsMap.value.get(damageSource.value.items.value[index].id)!);
+		showItemTooltip(event, { item: shopItemsMap.value.get(damageSource.value.items.value[index].id)! });
 	}
 }
 
@@ -256,7 +256,7 @@ function selectSearchResult(index: number, buy: boolean) {
 		if (shopItem.buyability === 1) {
 			buyItem(shopItem.item, shopItem.buyability);
 			closeSearch();
-			leaveTooltipableElement();
+			hideItemTooltip();
 			searchInput.value?.blur();
 		}
 	} else {
@@ -274,7 +274,7 @@ function onSearchInput(event: Event) {
 	(event.target as any).composing = false;
 	searchCursorOver(searchResults.value.length ? 0 : undefined);
 	if (!searchResults.value.length) {
-		leaveTooltipableElement();
+		hideItemTooltip();
 	}
 }
 
@@ -338,33 +338,31 @@ const itemTooltip = useTemplateRef('itemTooltip');
 const hoveredItem = shallowRef<IShopItem>();
 const hoveredItemShowMasterwork = ref(false);
 
-function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem, showMasterwork = false) {
-	const { target } = eventLike as { target: HTMLElement };
-	itemTooltip.value?.showPopover();
-	itemTooltipAnchor = target;
-	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, {
-		passive: true,
-		once: true,
-	});
-	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
-	addItemTooltipViewListeners();
-	hoveredItem.value = item;
-	hoveredItemShowMasterwork.value = showMasterwork;
-	'clientX' in eventLike && updateTooltipPosition(eventLike);
-}
-
-function leaveTooltipableElement() {
-	itemTooltip.value?.hidePopover();
-	itemTooltipAnchor?.removeEventListener('mousemove', updateTooltipPosition);
-	removeItemTooltipViewListeners();
-	itemTooltipAnchor = undefined;
-}
+const { show: showItemTooltip, hide: hideItemTooltip } = useHoverTooltip<{ item: IShopItem; showMasterwork?: boolean }>({
+	el: itemTooltip,
+	onShow({ item, showMasterwork = false }, event) {
+		const target = event.target as HTMLElement;
+		itemTooltipAnchor = target;
+		itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
+		addItemTooltipViewListeners();
+		hoveredItem.value = item;
+		hoveredItemShowMasterwork.value = showMasterwork;
+		'clientX' in event && updateTooltipPosition(event as MouseEvent);
+	},
+	onHide() {
+		itemTooltipAnchor?.removeEventListener('mousemove', updateTooltipPosition);
+		removeItemTooltipViewListeners();
+		itemTooltipAnchor = undefined;
+	},
+});
 
 function updateTooltipPosition(event: MouseEvent) {
-	const { clientX, clientY } = event;
-	itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
-	itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
-	itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
+	if (!isTooltipPinned.value) {
+		const { clientX, clientY } = event;
+		itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
+		itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
+		itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
+	}
 }
 
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
@@ -410,7 +408,7 @@ function updateBuildsIntoButtonsNumber() {
 
 function selectBuildsIntoMoreItem(item: IShopItem) {
 	selectItem(item, true);
-	leaveTooltipableElement();
+	hideItemTooltip();
 	buildsIntoMoreList.value?.hidePopover();
 }
 
@@ -455,7 +453,7 @@ function onItemDragstart(event: DragEvent, slotIndex: number) {
 			slotIndex,
 			item: damageSource.value.items.value[slotIndex]!,
 		};
-		leaveTooltipableElement();
+		hideItemTooltip();
 	}
 }
 
@@ -579,7 +577,7 @@ defineExpose({
 							:class="{
 								selected: searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
 							}"
-							@mouseenter="enterTooltipableElement($event, shopItem)"
+							@mouseenter="showItemTooltip($event, { item: shopItem })"
 							@click="selectSearchResult(index, false)"
 							@click.right.prevent="selectSearchResult(index, true)"
 							@dblclick="selectSearchResult(index, true)"
@@ -684,7 +682,7 @@ defineExpose({
 								:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
-								@mouseenter="enterTooltipableElement($event, shopItem)"
+								@mouseenter="showItemTooltip($event, { item: shopItem })"
 								@click="selectItem(shopItem, true)"
 								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
 								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
@@ -711,7 +709,7 @@ defineExpose({
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
 							:data-legendary="shopItem.isLegendary ? '' : undefined"
-							@mouseenter="enterTooltipableElement($event, shopItem)"
+							@mouseenter="showItemTooltip($event, { item: shopItem })"
 							@click="selectItem(shopItem, true)"
 							@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
 							@dblclick="buyItem(shopItem.item, shopItem.buyability)"
@@ -744,7 +742,7 @@ defineExpose({
 						:data-buyability="buildsIntoItems[i - 1]?.buyability"
 						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[i - 1]?.isLegendary ? '' : undefined"
-						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
+						@mouseenter="buildsIntoItems[i - 1] && showItemTooltip($event, { item: buildsIntoItems[i - 1]! })"
 						@click="selectItem(buildsIntoItems[i - 1]!, true)"
 						@click.right.prevent="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
 						@dblClick="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
@@ -770,7 +768,7 @@ defineExpose({
 						:data-buyability="buildsIntoItems[6]?.buyability"
 						:data-bought="buildsIntoItems[6]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[6]?.isLegendary ? '' : undefined"
-						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
+						@mouseenter="buildsIntoItems[6] && showItemTooltip($event, { item: buildsIntoItems[6]! })"
 						@click="selectItem(buildsIntoItems[6]!, true)"
 						@click.right.prevent="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 						@dblClick="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
@@ -795,7 +793,7 @@ defineExpose({
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
 								:data-legendary="shopItem.isLegendary ? '' : undefined"
-								@mouseenter="enterTooltipableElement($event, shopItem)"
+								@mouseenter="showItemTooltip($event, { item: shopItem })"
 								@click="selectBuildsIntoMoreItem(shopItem)"
 								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
 								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
@@ -816,7 +814,7 @@ defineExpose({
 						:shop-item="displayedItem"
 						:data-legendary="displayedItem.isLegendary ? '' : undefined"
 						:class="{ selected: selectedItem?.item.id === displayedItem.item.id }"
-						@mouseenter="enterTooltipableElement($event, displayedItem)"
+						@mouseenter="showItemTooltip($event, { item: displayedItem })"
 						@click="selectItem(displayedItem, false)"
 						@click.right.prevent="buyItem(displayedItem.item, displayedItem.buyability)"
 						@dblclick="buyItem(displayedItem.item, displayedItem.buyability)"
@@ -833,7 +831,7 @@ defineExpose({
 								component
 								:shop-item="secondLevelBuildsFromItem"
 								:class="{ selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id }"
-								@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
+								@mouseenter="showItemTooltip($event, { item: secondLevelBuildsFromItem })"
 								@click="selectItem(secondLevelBuildsFromItem, false)"
 								@click.right.prevent="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 								@dblclick="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
@@ -846,7 +844,7 @@ defineExpose({
 										:class="{
 											selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id,
 										}"
-										@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
+										@mouseenter="showItemTooltip($event, { item: thirdLevelBuildsFromItem })"
 										@click="selectItem(thirdLevelBuildsFromItem, false)"
 										@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 										@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
@@ -859,7 +857,7 @@ defineExpose({
 												:class="{
 													selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id,
 												}"
-												@mouseenter="enterTooltipableElement($event, fourthLevelBuildsFromItem)"
+												@mouseenter="showItemTooltip($event, { item: fourthLevelBuildsFromItem })"
 												@click="selectItem(fourthLevelBuildsFromItem, false)"
 												@click.right.prevent="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
 												@dblclick="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
@@ -896,7 +894,7 @@ defineExpose({
 									masterwork: damageSource && isMasterworkSlot(damageSource, i - 1),
 								}"
 								:draggable="targetShopItems[i - 1] ? 'true' : undefined"
-								@mouseenter="targetShopItems[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!, true)"
+								@mouseenter="targetShopItems[i - 1] && showItemTooltip($event, { item: targetShopItems[i - 1]!, showMasterwork: true })"
 								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true, i - 1)"
 								@click.right="targetShopItems[i - 1] && sellItem($event, i - 1)"
 								@dragstart="onItemDragstart($event, i - 1)"
@@ -919,7 +917,7 @@ defineExpose({
 			</p>
 			<button :disabled="!damageSource || !damageSource.items.value.some(Boolean)" @click="sellAll">sell all</button>
 		</footer>
-		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="manual" class="hover-tooltip" :data-expanded="isTooltipExpanded || undefined">
+		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip" :data-expanded="isTooltipExpanded || undefined">
 			<LolItemDescription :item="hoveredItem?.item" :damage-source="damageSource" :show-masterwork="hoveredItemShowMasterwork" header-subtitles hover-tooltip source="Shop" />
 		</article>
 	</VDialog>

@@ -1,7 +1,7 @@
 interface Options<TData> {
 	/* the popover element */
 	el: MaybeRefOrGetter<HTMLElement | null | undefined>;
-	onShow?: (data: TData) => void;
+	onShow?: (data: TData, event: Event) => void;
 	onHide?: () => unknown;
 }
 
@@ -30,10 +30,10 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 		onHide?.();
 	}
 
-	function show(trigger: HTMLElement, data: TData, pin: boolean) {
+	function show(event: Event, trigger: HTMLElement, data: TData, pin: boolean) {
 		const popover = toValue(el);
 		if (popover) {
-			onShow?.(data);
+			onShow?.(data, event);
 			popover.showPopover({ source: trigger });
 			if (pin) {
 				popover.setAttribute('data-pinned', '');
@@ -67,7 +67,7 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 		);
 
 		/* open pinned on devices that cant hover/pin with K */
-		!toValue(el)?.matches(':popover-open') && show(trigger, data, !matchMedia('(hover: hover) and (pointer: fine)').matches);
+		!toValue(el)?.matches(':popover-open') && show(event, trigger, data, !matchMedia('(hover: hover) and (pointer: fine)').matches);
 	}
 
 	function onKeyDown(event: KeyboardEvent) {
