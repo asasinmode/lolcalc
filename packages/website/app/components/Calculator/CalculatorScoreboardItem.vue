@@ -1058,9 +1058,9 @@ defineExpose({ el });
 			</button>
 			<span class="restore-text" style="display: none" aria-hidden="true">restore</span>
 			<button :title="`${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}${removeButtonAttrs.subtext ?? ''}`" class="pretend-ui-btn clear-remove" :disabled="removeButtonAttrs.disabled" @click="removeButtonAttrs.emit">
-				<span
-					>{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }})</span></span
-				>
+				<span>
+					{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }}) </span>
+				</span>
 				<Icon class="i-ph:trash size-5" />
 			</button>
 			<VSelect
