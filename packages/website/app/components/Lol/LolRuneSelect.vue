@@ -169,8 +169,6 @@ function updateValue<P extends PathTuple<IChampionRunes>>(path: P, newValue?: st
 	}
 }
 
-let runeDescriptionTooltipAnchor: undefined | HTMLElement;
-const runeDescriptionTooltip = useTemplateRef('runeDescriptionTooltip');
 const hoveredRune = shallowRef<{
 	title: string;
 	description: string;
@@ -201,48 +199,29 @@ type IHoveredRuneOption =
 	| NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number]
 	| UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
 
-function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredRuneOption) {
-	const { target } = event as unknown as { target: HTMLElement };
-	runeDescriptionTooltip.value?.showPopover();
-	runeDescriptionTooltipAnchor = target;
-	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, {
-		passive: true,
-		once: true,
-	});
-	runeDescriptionTooltipAnchor?.addEventListener('focusout', leaveTooltipableElement, {
-		passive: true,
-		once: true,
-	});
-	window.addEventListener('resize', updateTooltipPosition, { passive: true });
-	hoveredRune.value =
-		'tooltipLong' in rune
-			? {
-					title: rune.title,
-					description: rune.tooltipShort,
-					expandedDescription: rune.tooltipLong,
-					rune: rune.rune,
-				}
-			: { title: rune.title, description: rune.tooltip, rune: rune.rune };
-	nextTick(() => updateTooltipPosition());
-}
+const runeDescriptionTooltip = useTemplateRef('runeDescriptionTooltip');
+let currentTooltipAnchor: HTMLElement | undefined;
 
-function leaveTooltipableElement() {
-	runeDescriptionTooltip.value?.hidePopover();
-	runeDescriptionTooltipAnchor?.removeEventListener('mouseleave', leaveTooltipableElement);
-	runeDescriptionTooltipAnchor?.removeEventListener('focusout', leaveTooltipableElement);
-	window.removeEventListener('resize', updateTooltipPosition);
-	runeDescriptionTooltipAnchor = undefined;
-}
-
-function updateTooltipPosition() {
-	const { left, top, width } = runeDescriptionTooltipAnchor!.getBoundingClientRect();
-	runeDescriptionTooltip.value!.style.setProperty('--left', `${left + width / 2}px`);
-	runeDescriptionTooltip.value!.style.setProperty('--top', `${top}px`);
-	runeDescriptionTooltip.value!.style.setProperty('--height', `${runeDescriptionTooltip.value!.clientHeight}px`);
-}
-
-onBeforeUnmount(() => {
-	window.removeEventListener('resize', updateTooltipPosition);
+const { show: showRuneTooltip } = useHoverTooltip<IHoveredRuneOption>({
+	el: runeDescriptionTooltip,
+	onShow(rune, event) {
+		currentTooltipAnchor = event.currentTarget as HTMLElement;
+		currentTooltipAnchor.style = 'anchor-name: --rune-dialog-tooltip-anchor';
+		hoveredRune.value =
+			'tooltipLong' in rune
+				? {
+						title: rune.title,
+						description: rune.tooltipShort,
+						expandedDescription: rune.tooltipLong,
+						rune: rune.rune,
+					}
+				: { title: rune.title, description: rune.tooltip, rune: rune.rune };
+	},
+	onHide() {
+		if (currentTooltipAnchor) {
+			currentTooltipAnchor.style = '';
+		}
+	},
 });
 
 const configurationInvalid = computed(() => value.value && runesInvalid(value.value));
@@ -278,8 +257,8 @@ defineExpose({
 				value-key="name"
 				title-key=""
 				data-path=""
-				@option-mouseenter="enterTooltipableElement"
-				@option-focus="enterTooltipableElement"
+				@option-mouseenter="showRuneTooltip"
+				@option-focus="showRuneTooltip"
 				@update:model-value="updateValue(['paths', 'primary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -297,8 +276,8 @@ defineExpose({
 				:data-keystone="slotIndex === 0 ? '' : undefined"
 				value-key="name"
 				title-key=""
-				@option-mouseenter="enterTooltipableElement"
-				@option-focus="enterTooltipableElement"
+				@option-mouseenter="showRuneTooltip"
+				@option-focus="showRuneTooltip"
 				@update:model-value="updateValue(['paths', 'primarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -318,8 +297,8 @@ defineExpose({
 				value-key="name"
 				title-key=""
 				data-path=""
-				@option-mouseenter="enterTooltipableElement"
-				@option-focus="enterTooltipableElement"
+				@option-mouseenter="showRuneTooltip"
+				@option-focus="showRuneTooltip"
 				@update:model-value="updateValue(['paths', 'secondary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -342,8 +321,8 @@ defineExpose({
 				:options="Object.values(slots)"
 				value-key="name"
 				title-key=""
-				@option-mouseenter="enterTooltipableElement"
-				@option-focus="enterTooltipableElement"
+				@option-mouseenter="showRuneTooltip"
+				@option-focus="showRuneTooltip"
 				@update:model-value="updateValue(['paths', 'secondarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -363,8 +342,8 @@ defineExpose({
 				:options="slots"
 				value-key="name"
 				title-key=""
-				@option-mouseenter="enterTooltipableElement"
-				@option-focus="enterTooltipableElement"
+				@option-mouseenter="showRuneTooltip"
+				@option-focus="showRuneTooltip"
 				@update:model-value="updateValue(['shards', slotName], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -373,9 +352,9 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<article id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="manual" class="hover-tooltip game-description" :data-expanded="isTooltipExpanded || undefined">
+		<article id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" class="hover-tooltip game-description" :data-expanded="isTooltipExpanded || undefined">
 			<h4>{{ hoveredRune?.title }}</h4>
-			<div v-html="(globalKeyModifiers.shift && hoveredRuneTooltip?.longReplaced) || hoveredRuneTooltip?.shortReplaced" />
+			<div v-html="(isTooltipExpanded && hoveredRuneTooltip?.longReplaced) || hoveredRuneTooltip?.shortReplaced" />
 			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />
 		</article>
 	</VDialog>
@@ -861,9 +840,11 @@ defineExpose({
 		#rune-select-dialog-hover-tooltip {
 			--at-apply: 'b-2 inline-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-[--fluid-8-28-t810] leading-5.5';
 			--width: 21.5rem;
-			inset-inline-start: clamp(min(100vw / 2, calc(var(--width) / 2)), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
-			/* not sure why whole 4 * spacing is needed to make sure it doesn't go off screen */
-			inset-block-start: clamp(calc(var(--height) + 4 * var(--spacing)), var(--top), calc(100vh - var(--height)));
+			--tooltip-max-w: var(--width);
+			--tooltip-offset-y: calc(3 * var(--spacing));
+			position-anchor: --rune-dialog-tooltip-anchor;
+			inset-block-start: auto;
+			inset-block-end: calc(anchor(start) + var(--tooltip-offset-y));
 
 			h4 {
 				--at-apply: 'font-600 text-white uppercase mb-1 tracking-wide';
@@ -884,7 +865,7 @@ defineExpose({
 				li {
 					--at-apply: 'ms-5';
 
-					/* WORKAROUND for grasp of undying that has nested <rules>, maybe need to parse it properly if more things do it */
+					/* WORKAROUND for grasp of undying that has nested <rules>, maybe need to parse it properly if more things do it. Might not be necessary if when implementing runes, they get `transformAbilityText` in updateData and it inserts missing </li> */
 					rules {
 						--at-apply: '-ms-5 block';
 					}
@@ -892,7 +873,7 @@ defineExpose({
 			}
 
 			> p.alert {
-				--at-apply: 'mt-[--unknown-alert-mt]';
+				--at-apply: 'mbs-[--unknown-alert-mt]';
 			}
 		}
 	}
