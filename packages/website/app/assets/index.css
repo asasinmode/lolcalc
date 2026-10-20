@@ -243,7 +243,7 @@
 		&[data-pinned],
 		[data-pinned] > & {
 			pointer-events: auto;
-			border: 1px solid var(--unknown-clr);
+			border: 1px solid theme('colors.blue.400');
 		}
 	}
 

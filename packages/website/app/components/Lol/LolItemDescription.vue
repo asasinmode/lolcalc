@@ -135,7 +135,7 @@ defineExpose({ header });
 				<p v-show="hasOtherView || computedDescription?.footerLeft">
 					<span class="kbd-only"> Press <kbd>[Ctrl]</kbd> </span>
 					<span class="touch-only">Tap here</span>
-					to toggle to <b>{{ otherView }}</b> view
+					to switch to <b>{{ otherView }}</b> view
 				</p>
 			</div>
 		</footer>
