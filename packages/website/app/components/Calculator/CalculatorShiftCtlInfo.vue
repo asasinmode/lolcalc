@@ -30,7 +30,7 @@ const toggle = props.tapCb ?? (() => (stateIsExpanded.value = !stateIsExpanded.v
 <style>
 @layer components {
 	.hover-tooltip {
-		:is(&[data-pinned], [data-pinned] > &)[data-expanded] .expanded-ctl {
+		:is(&[data-pinned], [data-pinned] > &)[data-expanded] .expanded-ctl:not(:first-child) {
 			--at-apply: 'mbs-1';
 		}
 
