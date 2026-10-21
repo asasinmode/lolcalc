@@ -400,7 +400,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								} else if (this.currentAbilityResource.value === previousValues?.[1] && !useFirstChampionLoadOverride) {
 									this.currentAbilityResource.value = currentMaxAbilityResource ?? 0;
 								} else {
-									this.currentAbilityResource.value = previousValues?.[1] === undefined ? (currentMaxAbilityResource ?? 0) : Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
+									/* belveth is calculated when she has it unlocked and ability resource. Start new belveths with 0 resource so that she's not evolved automatically when lvl 6 */
+									if (this.champion.value?.id === 'Belveth' && !this.hpAbilityResourceOverridesOnFirstChampLoad && !previousValues?.[0]) {
+										this.currentAbilityResource.value = 0;
+									} else {
+										this.currentAbilityResource.value = previousValues?.[1] === undefined ? (currentMaxAbilityResource ?? 0) : Math.min(this.currentAbilityResource.value, currentMaxAbilityResource ?? 0);
+									}
 								}
 							}
 
