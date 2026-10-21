@@ -240,10 +240,12 @@
 			--at-apply: 'bg-black/20';
 		}
 
-		&[data-pinned],
-		[data-pinned] > & {
-			pointer-events: auto;
-			border: 1px solid theme('colors.blue.400');
+		@media (hover: hover) and (pointer: fine) {
+			&[data-pinned],
+			[data-pinned] > & {
+				pointer-events: auto;
+				border: 1px solid theme('colors.blue.400');
+			}
 		}
 	}
 
