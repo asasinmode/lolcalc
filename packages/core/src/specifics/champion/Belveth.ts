@@ -239,15 +239,13 @@ export default {
 					console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate true form duration modifiers', firstDurationIncrease, firstDurationIncrease, secondDurationIncreaseThreshold);
 				}
 
-				if (!self.currentAbilityResource.value) {
-					return;
-				}
-
-				const trueFormRange = championAbilityVariableValue('BonusAARange', rParams);
-				if (typeof trueFormRange.value === 'number') {
-					championPassiveStats.attackRange = trueFormRange.value;
-				} else {
-					console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate true form range', trueFormRange);
+				if (self.currentAbilityResource.value && self.abilityLevels.value.r) {
+					const trueFormRange = championAbilityVariableValue('BonusAARange', rParams);
+					if (typeof trueFormRange.value === 'number') {
+						championPassiveStats.attackRange = trueFormRange.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate true form range', trueFormRange);
+					}
 				}
 			},
 		},
@@ -279,7 +277,7 @@ export default {
 					console.warn('[CHAMPION_SPECIFICS belveth] failed to calculate passive stack as', asPerStack);
 				}
 
-				if (self.currentAbilityResource.value) {
+				if (self.currentAbilityResource.value && self.abilityLevels.value.r) {
 					const totalASMult = championAbilityVariableValue('TotalASMod', {
 						abilityKey: 'r',
 						abilityVariant: self.champion.value!.abilities.r.variants[0]!,
