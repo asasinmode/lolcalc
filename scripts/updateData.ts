@@ -1728,16 +1728,19 @@ function createRuneSlotData(dataKey: string, data: any) {
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
+	const tooltipShort = getStringtableValue(mShortDescLocalizationKey, {
+		...variableDebug,
+		key: `${mPerkName}-tooltipShort`,
+	});
+	const tooltipLong = getStringtableValue(mLongDescLocalizationKey, {
+		...variableDebug,
+		key: `${mPerkName}-tooltipLong`,
+	});
+
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
-		tooltipShort: getStringtableValue(mShortDescLocalizationKey, {
-			...variableDebug,
-			key: `${mPerkName}-tooltipShort`,
-		}),
-		tooltipLong: getStringtableValue(mLongDescLocalizationKey, {
-			...variableDebug,
-			key: `${mPerkName}-tooltipLong`,
-		}),
+		tooltipShort,
+		tooltipLong: tooltipShort !== tooltipLong ? tooltipLong : undefined,
 		// TODO add debug when implementing, replace long with {{}} if it uses it and is in the stringtable, similar to variant.tooltip = `{{${mLocKeys.keyTooltip}}}` in championAbilityVariants
 		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
 	};

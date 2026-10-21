@@ -171,8 +171,8 @@ export interface ITextData {
 				name: string;
 				/** champ select rune dialog hover */
 				tooltipShort: string;
-				/** champ select rune dialog hover + shift */
-				tooltipLong: string;
+				/** champ select rune dialog hover + shift. Present only when different from short */
+				tooltipLong?: string;
 				/** the tooltip displayed when hovering over the in game stats panel */
 				tooltipStats: string;
 			}

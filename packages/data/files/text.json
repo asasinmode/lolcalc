@@ -2241,7 +2241,6 @@
 				"Transcendence": {
 					"name": "Transcendence",
 					"tooltipShort": "Gain bonuses upon reaching the following levels:<br>Level @LevelToTurnOn@: +@HasteBonus1*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn2@: +@HasteBonus2*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn3@: On Champion takedown, reduce the remaining cooldown of basic abilities by @KillCooldownRefund*100@%.",
-					"tooltipLong": "Gain bonuses upon reaching the following levels:<br>Level @LevelToTurnOn@: +@HasteBonus1*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn2@: +@HasteBonus2*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn3@: On Champion takedown, reduce the remaining cooldown of basic abilities by @KillCooldownRefund*100@%.",
 					"tooltipStats": "{{ perk_long_desc_Transcendence }}<br><hr><br>Bonus Ability Haste: +@f4*100@<br>Seconds Refunded: @f3@"
 				},
 				"Celerity": {
@@ -2337,7 +2336,6 @@
 				"Revitalize": {
 					"name": "Revitalize",
 					"tooltipShort": "Gain @HealShieldPower*100@% Heal and Shield Power.<br><br>Heals and shields you cast or receive are @ExtraAmp.0@% stronger on targets below @HealthCutoff.0@% health.",
-					"tooltipLong": "Gain @HealShieldPower*100@% Heal and Shield Power.<br><br>Heals and shields you cast or receive are @ExtraAmp.0@% stronger on targets below @HealthCutoff.0@% health.",
 					"tooltipStats": "{{perk_long_desc_Revitalize}}<br><hr><br><scaleAD>Bonus healing</scaleAD>: @f1@<br><scaleAD>Bonus shielding</scaleAD>: @f2@<br><scaleAD>Total Heal and Shield power</scaleAD>: @f4@%"
 				},
 				"Unflinching": {
@@ -2385,7 +2383,6 @@
 				"PerfectTiming": {
 					"name": "Triple Tonic",
 					"tooltipShort": "Upon reaching level @FirstElixirLevel@, gain an Elixir of Avarice.<br>Upon reaching level @SecondElixirLevel@, gain an Elixir of Force.<br>Upon reaching level @ThirdElixirLevel@, gain an Elixir of Skill. ",
-					"tooltipLong": "Upon reaching level @FirstElixirLevel@, gain an Elixir of Avarice.<br>Upon reaching level @SecondElixirLevel@, gain an Elixir of Force.<br>Upon reaching level @ThirdElixirLevel@, gain an Elixir of Skill. ",
 					"tooltipStats": "{{perk_long_desc_8313}}<br><br>Items Gained: @f1@"
 				},
 				"TimeWarpTonic": {
@@ -2403,7 +2400,6 @@
 				"CosmicInsight": {
 					"name": "Cosmic Insight",
 					"tooltipShort": "+<attention>@SummonerHaste@</attention> Summoner Spell Haste<br>+<attention>@ItemHaste@</attention> Item Haste",
-					"tooltipLong": "+<attention>@SummonerHaste@</attention> Summoner Spell Haste<br>+<attention>@ItemHaste@</attention> Item Haste",
 					"tooltipStats": "{{ perk_long_desc_CosmicInsight }}"
 				},
 				"ApproachVelocity": {
