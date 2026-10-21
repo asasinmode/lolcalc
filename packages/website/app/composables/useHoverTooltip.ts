@@ -27,7 +27,6 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 		popover?.removeAttribute('data-pinned');
 		popover?.hidePopover();
 		isTooltipPinned.value = false;
-		onHide?.();
 	}
 
 	function show(event: Event, trigger: HTMLElement, data: TData, pin: boolean) {
@@ -40,18 +39,18 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 				isTooltipPinned.value = true;
 			}
 			window.addEventListener('keydown', onKeyDown);
-			setTimeout(() => {
-				popover.addEventListener(
-					'toggle',
-					(event) => {
-						event.newState === 'closed' && popover.removeAttribute('data-pinned');
-						window.removeEventListener('keydown', onKeyDown);
-						onHide?.();
-						isTooltipPinned.value = false;
-					},
-					{ once: true },
-				);
-			}, 0);
+			popover.addEventListener('toggle', closeToggleCleanup);
+		}
+	}
+
+	function closeToggleCleanup(event: ToggleEvent) {
+		const popover = toValue(el);
+		if (popover && event.newState === 'closed') {
+			popover.removeAttribute('data-pinned');
+			popover.removeEventListener('toggle', closeToggleCleanup);
+			window.removeEventListener('keydown', onKeyDown);
+			onHide?.();
+			isTooltipPinned.value = false;
 		}
 	}
 
@@ -63,7 +62,7 @@ export function useHoverTooltip<TData = void>({ el, onShow, onHide }: Options<TD
 			() => {
 				!toValue(el)?.hasAttribute('data-pinned') && hide();
 			},
-			{ passive: true, once: true },
+			{ once: true },
 		);
 
 		/* open pinned on devices that cant hover/pin with K */

@@ -14,6 +14,7 @@ export function useItemHoverTooltipView(source: IItemHoverTooltipView) {
 	});
 
 	return {
+		itemHoverTooltipView: target,
 		addItemTooltipViewListeners() {
 			window.addEventListener('keydown', pressCtrl);
 		},

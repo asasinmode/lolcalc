@@ -332,7 +332,7 @@ function onSearchKeydown(event: KeyboardEvent) {
 	event.preventDefault();
 }
 
-const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Shop');
+const { itemHoverTooltipView, addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Shop');
 let itemTooltipAnchor: undefined | HTMLElement;
 const itemTooltip = useTemplateRef('itemTooltip');
 const hoveredItem = shallowRef<IShopItem>();
@@ -365,7 +365,7 @@ function updateTooltipPosition(event: MouseEvent) {
 	}
 }
 
-watch(isTooltipExpanded, () =>
+watch([isTooltipExpanded, itemHoverTooltipView], () =>
 	nextTick(() => {
 		if (itemTooltip.value) {
 			itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
@@ -1689,8 +1689,9 @@ defineExpose({
 		#item-shop-hover-tooltip {
 			--at-apply: 'w-(--width) fixed p-[--default-hover-tooltip-p]';
 			--width: 40rem;
+			max-block-size: calc(100dvb - 2.5 * var(--hover-tooltip-margin));
 			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
-			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
+			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height) + 2 * var(--spacing))));
 			position-try: flip-block;
 		}
 
