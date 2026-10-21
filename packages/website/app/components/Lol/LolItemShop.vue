@@ -494,11 +494,25 @@ function updateIsShowingDetailsPanel() {
 	previousWindowWidth = window.innerWidth;
 }
 
+function closeBuildsIntoMoreListWithStop(event: Event) {
+	if (buildsIntoMoreList.value?.matches(':popover-open')) {
+		event.preventDefault();
+		event.stopPropagation();
+		buildsIntoMoreList.value.hidePopover();
+	}
+}
+
 const detailsToggle = useTemplateRef('detailsToggle');
 
-function collapseDetailsFocusToggle() {
-	isShowingDetailsPanel.value = false;
-	detailsToggle.value?.focus();
+function collapseDetailsFocusToggle(event: Event) {
+	if (window.innerWidth < 940) {
+		if (isShowingDetailsPanel.value) {
+			event.preventDefault();
+		}
+
+		isShowingDetailsPanel.value = false;
+		detailsToggle.value?.focus();
+	}
 }
 
 function closeDetailsPanel() {
@@ -729,7 +743,7 @@ defineExpose({
 			{{ isShowingDetailsPanel ? 'hide' : 'show' }} details
 			<img v-show="selectedItem" :src="selectedItem ? `https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${selectedItem.item.image}` : ''" width="64" height="64" :alt="selectedItem?.item.name" />
 		</button>
-		<section id="item-shop-details" :hidden="!isShowingDetailsPanel" @keydown.esc.prevent="collapseDetailsFocusToggle">
+		<section id="item-shop-details" :hidden="!isShowingDetailsPanel" @keydown.esc="collapseDetailsFocusToggle">
 			<LolItemDescription :item="selectedItem?.item" :gold="selectedItem?.calculatedPrice" :damage-source="damageSource" header-tag="h2" source="Shop" />
 			<button :disabled="selectedItem?.buyability !== 1" @click="buyItem(selectedItem!.item, selectedItem!.buyability)">
 				{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
@@ -786,8 +800,8 @@ defineExpose({
 						/>
 						<span class="sr-status">{{ buildsIntoItems[6]?.srStatus }}</span>
 					</button>
-					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside">+{{ buildsIntoItems.length - buildsIntoListButtons + 1 }}</button>
-					<ul id="builds-into-more-list" ref="buildsIntoMoreList" popover @focusout="closeBuildsIntoMoreListIfOutside">
+					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside" @keydown.esc="closeBuildsIntoMoreListWithStop">+{{ buildsIntoItems.length - buildsIntoListButtons + 1 }}</button>
+					<ul id="builds-into-more-list" ref="buildsIntoMoreList" popover @focusout="closeBuildsIntoMoreListIfOutside" @keydown.esc="closeBuildsIntoMoreListWithStop">
 						<li v-for="shopItem in buildsIntoItems.slice(buildsIntoListButtons - 1)" :key="shopItem.item.id">
 							<button
 								:data-buyability="shopItem.buyability"
