@@ -365,6 +365,14 @@ function updateTooltipPosition(event: MouseEvent) {
 	}
 }
 
+watch(isTooltipExpanded, () =>
+	nextTick(() => {
+		if (itemTooltip.value) {
+			itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
+		}
+	}),
+);
+
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
 
 const buildsIntoItems = computed(() => selectedItem.value?.item.into?.map((id) => shopItemsMap.value.get(id)!).sort((a, b) => a.item.gold.total - b.item.gold.total) || []);
@@ -1683,6 +1691,7 @@ defineExpose({
 			--width: 40rem;
 			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
+			position-try: flip-block;
 		}
 
 		:is(#item-shop-search-listbox > li, #builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where([data-bought], [data-buyability='0'], [data-buyability='-1']) > img,

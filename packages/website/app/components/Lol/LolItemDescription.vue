@@ -131,7 +131,7 @@ defineExpose({ header });
 		</template>
 		<p v-if="computedDescription?.extended" v-show="!hoverTooltip || isTooltipExpanded" v-html="computedDescription.extended" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
-		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
+		<footer v-show="hoverTooltip && (computedDescription?.footerLeft || computedDescription?.keywordDefinitions || hasOtherView || (hasMoreInfo && (!isTooltipExpanded || isTooltipPinned)))">
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && isTooltipExpanded ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
 			<p v-if="computedDescription?.keywordDefinitions" v-show="isTooltipExpanded" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
 			<div>
@@ -149,21 +149,21 @@ defineExpose({ header });
 <style>
 @layer components {
 	.item-description-header {
-		--at-apply: 'grid text-start gap-x-2 text-xl grid-rows-[auto_min-content] items-center font-500 grid-cols-[auto_1fr] w-full mb-2 pbs-(--pbs,0rem)';
+		--at-apply: 'grid text-start gap-x-2 text-xl grid-rows-[auto_min-content] items-center font-500 grid-cols-[max-content_1fr] w-full mb-2 pbs-(--pbs,0rem)';
 
 		> img {
 			--at-apply: 'row-span-full size-(--item-img-size) self-start';
 		}
 
 		> span:first-of-type {
-			--at-apply: 'text-xl leading-none text-white min-block-[--text-xl-lineHeight] flex items-center';
+			--at-apply: 'text-[length:--fluid-16-20-t420] leading-none text-white min-block-[--text-xl-lineHeight] flex items-center';
 		}
 
 		> span:nth-of-type(2) {
 			--at-apply: 'text-amber-200 text-start flex items-center justify-start self-start text-lg gap-[0.5ch]';
 
 			img {
-				--at-apply: 'h-4 w-auto';
+				--at-apply: 'block-[--fluid-14-16-t420] w-auto';
 			}
 
 			> span:first-child {
@@ -186,20 +186,34 @@ defineExpose({ header });
 
 		> span:nth-of-type(3),
 		> span:nth-of-type(4) {
-			--at-apply: 'hidden text-lg';
+			--at-apply: 'hidden text-[length:--fluid-14-18-t420] leading-[--fluid-16-28]';
 		}
 
 		> span:nth-of-type(4) {
 			--at-apply: 'text-end text-neutral-[--hover-tooltip-text-clr]';
 		}
 
-		&[data-show-subtitles],
-		:has(> a) {
-			--at-apply: 'grid-cols-[auto_1fr_auto]';
+		&[data-show-subtitles] > span:nth-of-type(2) {
+			--at-apply: 'text-[length:--fluid-16-20-t420] leading-[--fluid-24-28] text-end justify-end';
 		}
 
-		&[data-show-subtitles] > span:nth-of-type(2) {
-			--at-apply: 'text-xl text-end justify-end';
+		&[data-show-subtitles],
+		:has(> a) {
+			--at-apply: 'grid-cols-[max-content_1fr_auto]';
+
+			@media (width <= 420px) {
+				& {
+					--at-apply: 'grid-rows-[auto_min-content_min-content]';
+				}
+
+				> span:first-of-type {
+					--at-apply: 'col-span-2';
+				}
+
+				> span:nth-of-type(2) {
+					--at-apply: 'col-span-2 justify-start';
+				}
+			}
 		}
 
 		&[data-show-subtitles] > span:nth-of-type(3),
@@ -299,7 +313,7 @@ defineExpose({ header });
 		}
 
 		> footer {
-			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt] grid grid-cols-[1fr_min-content] grid-rows-[min-content_min-content] grid-flow-col';
+			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt] grid grid-cols-[1fr_min-content] grid-rows-[min-content_min-content] grid-flow-col gap-x-1';
 
 			> div {
 				--at-apply: 'row-span-2 col-start-2';
@@ -315,6 +329,12 @@ defineExpose({ header });
 				&.dynamic-value,
 				&.keyword-definitions {
 					--at-apply: 'text-start';
+
+					@media (width <= 420px) {
+						& {
+							--at-apply: 'col-span-full';
+						}
+					}
 				}
 
 				> kbd {
