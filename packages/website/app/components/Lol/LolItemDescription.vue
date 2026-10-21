@@ -593,8 +593,6 @@ defineExpose({ header });
 
 	.hover-tooltip.champion-item {
 		--at-apply: 'inline-160';
-		justify-self: anchor-center;
-		position-try: flip-block;
 	}
 
 	.hover-tooltip.role-quest {

@@ -312,7 +312,6 @@
 		inset-block-end: calc(anchor(start) + var(--tooltip-offset-y));
 		position-anchor: --parent;
 		justify-self: anchor-center;
-		position-try: flip-block;
 
 		a {
 			--at-apply: 'text-blue-400 hoverable:underline';

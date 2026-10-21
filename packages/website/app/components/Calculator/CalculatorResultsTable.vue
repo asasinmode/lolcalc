@@ -2026,9 +2026,6 @@ defineExpose({
 
 							> .hover-tooltip.custom {
 								--at-apply: 'max-inline-160';
-
-								justify-self: anchor-center;
-								position-try: flip-block;
 							}
 
 							> label {

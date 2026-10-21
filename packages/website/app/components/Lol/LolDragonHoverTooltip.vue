@@ -37,7 +37,6 @@ defineExpose({ el });
 		--at-apply: 'inline-fit';
 		--tooltip-max-w: calc(154 * var(--spacing));
 		justify-self: anchor-center;
-		position-try: flip-block;
 
 		> .game-description {
 			--at-apply: 'leading-normal';
