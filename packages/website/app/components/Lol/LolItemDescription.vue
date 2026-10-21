@@ -131,12 +131,12 @@ defineExpose({ header });
 		</template>
 		<p v-if="computedDescription?.extended" v-show="!hoverTooltip || isTooltipExpanded" v-html="computedDescription.extended" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
-		<footer v-show="hoverTooltip && (computedDescription?.footerLeft || computedDescription?.keywordDefinitions || hasOtherView || (hasMoreInfo && (!isTooltipExpanded || isTooltipPinned)))">
+		<footer v-show="hoverTooltip" :data-show="computedDescription?.footerLeft || computedDescription?.keywordDefinitions || hasOtherView || (hasMoreInfo && (!isTooltipExpanded || isTooltipPinned))">
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="isInventoryView && isTooltipExpanded ? computedDescription!.footerLeftExtended : computedDescription!.footerLeft" />
 			<p v-if="computedDescription?.keywordDefinitions" v-show="isTooltipExpanded" class="keyword-definitions" v-html="computedDescription.keywordDefinitions" />
 			<div>
 				<CalculatorShiftCtlInfo v-if="hasMoreInfo" :is-tooltip-expanded :is-tooltip-pinned />
-				<p v-show="hasOtherView || computedDescription?.footerLeft" @touchstart="toggleView">
+				<p class="view-ctl" :data-show="hasOtherView || computedDescription?.footerLeft" @touchstart="toggleView">
 					<span class="kbd-only"> Press <kbd>[Ctrl]</kbd> </span>
 					<span class="touch-only">Tap here</span>
 					to switch to <b>{{ otherView }}</b> view
@@ -339,6 +339,16 @@ defineExpose({ header });
 
 				> kbd {
 					--at-apply: 'font-inherit';
+				}
+			}
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			> footer,
+			> footer .view-ctl {
+				&:not([data-show]),
+				&[data-show='false'] {
+					--at-apply: 'hidden';
 				}
 			}
 		}
