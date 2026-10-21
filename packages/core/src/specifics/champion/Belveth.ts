@@ -295,9 +295,14 @@ export default {
 		},
 		postTotal: {
 			handler(self, { itemPassivesStats, itemTotalStats, dragonStats, totalStats, totalPreMultipliersStats, totalMultipliersStats, dragonStatMultipliers, bonusStats, championPassiveStats }, { calculatedVariables }) {
+				if (!self.currentAbilityResource.value || !self.abilityLevels.value.r) {
+					return;
+				}
+
 				/* the actual values used in belveth's true form hp scaling - stats from some sources are ignored */
-				const ultUsedBonusAD = bonusStats.attackDamage - totalMultipliersStats.attackDamage; /* infernal & mid quest */
-				const ultUsedTotalAP = totalStats.abilityPower - totalMultipliersStats.abilityPower /* infernal & mid quest */ - (calculatedVariables.riftmakerVoidInfusion ?? 0) * calculatedVariables.totalItemApMultipliers; /* all of riftmaker */
+				const ultUsedBonusAD = bonusStats.attackDamage - totalMultipliersStats.attackDamage; /* infernal & mid quest excluded */
+				const ultUsedTotalAP =
+					totalStats.abilityPower - totalMultipliersStats.abilityPower /* infernal & mid quest excluded */ - (calculatedVariables.riftmakerVoidInfusion ?? 0) * calculatedVariables.totalItemApMultipliers; /* all of riftmaker excluded */
 
 				const maxHP = championAbilityVariableValue('MaxHealthOnDevour', {
 					abilityKey: 'r',
@@ -320,10 +325,6 @@ export default {
 				}
 
 				calculatedVariables.belvethDevourBonusHP = maxHP.value;
-
-				if (!self.currentAbilityResource.value) {
-					return;
-				}
 
 				// TODO maybe will be useful for bloodmail retribution calc
 				// const baseHPValue = maxHP.calculatesFrom?.[0]?.value as number ?? 0;
