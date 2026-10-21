@@ -8,8 +8,6 @@ import type { StyleValue, UnwrapRef } from 'vue';
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { vMinor } = PATCH_VERSION;
-const { isTooltipExpanded } = useTooltipState();
-const globalKeyModifiers = useGlobalKeyModifiers();
 
 const value = defineModel<IChampionRunes>();
 const vDialog = useTemplateRef('vDialog');
@@ -199,6 +197,7 @@ type IHoveredRuneOption =
 	| NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number]
 	| UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
 
+const { isTooltipExpanded, isTooltipPinned } = useTooltipState();
 const runeDescriptionTooltip = useTemplateRef('runeDescriptionTooltip');
 let currentTooltipAnchor: HTMLElement | undefined;
 
@@ -356,6 +355,9 @@ defineExpose({
 			<h4>{{ hoveredRune?.title }}</h4>
 			<div v-html="(isTooltipExpanded && hoveredRuneTooltip?.longReplaced) || hoveredRuneTooltip?.shortReplaced" />
 			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />
+			<footer v-show="hoveredRuneTooltip?.longReplaced" :data-show="isTooltipPinned || !isTooltipExpanded">
+				<CalculatorShiftCtlInfo :is-tooltip-expanded :is-tooltip-pinned />
+			</footer>
 		</article>
 	</VDialog>
 </template>
@@ -874,6 +876,17 @@ defineExpose({
 
 			> p.alert {
 				--at-apply: 'mbs-[--unknown-alert-mt]';
+			}
+
+			> footer {
+				--at-apply: 'b-bs b-[--ui-btn-border-clr] mbs-2 pbs-1 text-end';
+
+				@media (hover: hover) and (pointer: fine) {
+					&:not([data-shown]),
+					&[data-shown='false'] {
+						--at-apply: 'hidden';
+					}
+				}
 			}
 		}
 	}

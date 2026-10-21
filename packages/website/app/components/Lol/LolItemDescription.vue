@@ -137,7 +137,7 @@ defineExpose({ header });
 			<div>
 				<CalculatorShiftCtlInfo v-if="hasMoreInfo" :is-tooltip-expanded :is-tooltip-pinned />
 				<p class="view-ctl" :data-show="hasOtherView || computedDescription?.footerLeft" @touchstart="toggleView">
-					<span class="kbd-only"> Press <kbd>[Ctrl]</kbd> </span>
+					<span class="kbd-only">Press <kbd>[Ctrl]</kbd></span>
 					<span class="touch-only">Tap here</span>
 					to switch to <b>{{ otherView }}</b> view
 				</p>

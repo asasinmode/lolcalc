@@ -8,7 +8,7 @@ interface Options<TData> {
 /**
  * for global tooltip state. Currently only 1 tooltip is expected to be shown/pinned at a time
  * expanded & augmented are managed in `useGlobalKeyModifiers` setup
- * */
+ */
 export function useTooltipState() {
 	return {
 		isTooltipPinned: useState('isTooltipPinned', () => false),
