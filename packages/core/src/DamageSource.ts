@@ -2100,7 +2100,7 @@ function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): 
 		}
 	}
 
-	const maxValue = typeof specific.maxValue === 'function' ? specific.maxValue() : specific.maxValue;
+	const maxValue = typeof specific.maxValue === 'function' ? specific.maxValue() : specific.deriveProgressValue ? 100 : specific.maxValue;
 
 	if (typeof maxValue === 'number') {
 		rv.maxValue = maxValue;
