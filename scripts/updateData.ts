@@ -1912,8 +1912,8 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 						unknownChanged ||= objectReplaceAllEncounteredValues(variableSource, variableSourceKeys, variableName, matchingKey[0]);
 						if (unknownChanged) {
 							unknownVariables.splice(i, 1);
-							(variableSource as any).__replacedVariables ||= {};
-							(variableSource as any).__replacedVariables[variableName] = matchingKey[0];
+							(variableSource as any).__renamedVariables ??= {};
+							(variableSource as any).__renamedVariables[variableName] = matchingKey[0];
 							continue outer;
 						}
 					}
@@ -1931,9 +1931,10 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 				if (rename) {
 					const [from, to] = rename;
 					variableSource[sourceKey][to] = variableSource[sourceKey][from];
-					(variableSource[sourceKey] as any).__renamedVariables ||= {};
-					(variableSource[sourceKey] as any).__renamedVariables[from] = to;
+					(variableSource as any).__renamedVariables ??= {};
+					(variableSource as any).__renamedVariables[from] = to;
 					(variableSource[sourceKey] as any)[from] = undefined;
+					objectReplaceAllEncounteredValues(variableSource, variableSourceKeys, from, to);
 					unknownVariables.splice(i, 1);
 					unknownChanged = true;
 					continue outer;

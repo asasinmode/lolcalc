@@ -175,10 +175,7 @@
 						"MonsterMod": [2, 2, 2, 2, 2, 2, 2],
 						"MissingHealthMult": [1, 1, 1, 1, 1, 1, 1],
 						"DRPercent": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7],
-						"BonusLifesteal": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
-						"__renamedVariables": {
-							"BonusLifeSteal": "BonusLifesteal"
-						}
+						"BonusLifesteal": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45]
 					},
 					"spellCalculations": {
 						"TotalStrikes": {
@@ -234,7 +231,10 @@
 							"__type": "GameCalculationModified"
 						}
 					},
-					"castRange": [500, 500, 500, 500, 500, 500, 500]
+					"castRange": [500, 500, 500, 500, 500, 500, 500],
+					"__renamedVariables": {
+						"BonusLifeSteal": "BonusLifesteal"
+					}
 				}
 			]
 		},

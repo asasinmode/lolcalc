@@ -150,10 +150,6 @@
 						"CCDurationMax": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"DRLingerDuration": [2, 2, 2, 2, 2, 2, 2],
 						"HPRatio": [0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001],
-						"__renamedVariables": {
-							"HpRatio": "HPRatio",
-							"ApRatio": "APRatio"
-						},
 						"APRatio": [0.0004, 0.0004, 0.0004, 0.0004, 0.0004, 0.0004, 0.0004]
 					},
 					"spellCalculations": {
@@ -262,7 +258,11 @@
 						}
 					},
 					"castRange": [275, 275, 275, 275, 275, 275, 275],
-					"isImmobilizing": true
+					"isImmobilizing": true,
+					"__renamedVariables": {
+						"HpRatio": "HPRatio",
+						"ApRatio": "APRatio"
+					}
 				}
 			]
 		},

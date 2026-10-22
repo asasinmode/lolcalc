@@ -74,7 +74,7 @@
 								],
 								"__type": "SumOfSubPartsCalculationPart"
 							},
-							"mModifiedGameCalculation": "{b3ef3984}",
+							"mModifiedGameCalculation": "TotalDamageMin",
 							"__type": "GameCalculationModified"
 						},
 						"TotalDamageMin": {
@@ -90,14 +90,12 @@
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
-						},
-						"__renamedVariables": {
-							"{b3ef3984}": "TotalDamageMin"
 						}
 					},
 					"castRange": [925, 925, 925, 925, 925, 925, 925],
-					"__replacedVariables": {
-						"{0508ccce}": "MaxChannelAmp"
+					"__renamedVariables": {
+						"{0508ccce}": "MaxChannelAmp",
+						"{b3ef3984}": "TotalDamageMin"
 					}
 				}
 			]

@@ -56,10 +56,7 @@
 						"QEmpoweredAmp": [2, 2, 2, 2, 2, 2, 2],
 						"Q2Duration": [2, 2, 2, 2, 2, 2, 2],
 						"QTotalRecastTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
-						"tADRatio": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
-						"__renamedVariables": {
-							"TADRatio": "tADRatio"
-						}
+						"tADRatio": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45]
 					},
 					"spellCalculations": {
 						"DamageConversionPercentage": {
@@ -95,7 +92,10 @@
 							"__type": "GameCalculationModified"
 						}
 					},
-					"castRange": [325, 325, 325, 325, 325, 325, 325]
+					"castRange": [325, 325, 325, 325, 325, 325, 325],
+					"__renamedVariables": {
+						"TADRatio": "tADRatio"
+					}
 				}
 			]
 		},

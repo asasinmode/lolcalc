@@ -63,10 +63,7 @@
 						"MoveSpeedHaste": [0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325],
 						"MoveSpeedDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"HealAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-						"BaseHot": [45, 60, 75, 90, 105, 120, 135],
-						"__renamedVariables": {
-							"BaseHoT": "BaseHot"
-						}
+						"BaseHot": [45, 60, 75, 90, 105, 120, 135]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -94,7 +91,10 @@
 							]
 						}
 					},
-					"castRange": [800, 800, 800, 800, 800, 800, 800]
+					"castRange": [800, 800, 800, 800, 800, 800, 800],
+					"__renamedVariables": {
+						"BaseHoT": "BaseHot"
+					}
 				}
 			]
 		},

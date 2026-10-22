@@ -205,10 +205,7 @@
 						"RDashCooldown": [1, 1, 1, 1, 1, 1, 1],
 						"RResetCasts": [1, 1, 1, 1, 1, 1, 1],
 						"PDurationExtension": [10, 10, 10, 10, 10, 10, 10],
-						"rAPCoefficient": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
-						"__renamedVariables": {
-							"RAPCoefficient": "rAPCoefficient"
-						}
+						"rAPCoefficient": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
 					},
 					"spellCalculations": {
 						"RCalculatedDamage": {
@@ -223,6 +220,9 @@
 								}
 							]
 						}
+					},
+					"__renamedVariables": {
+						"RAPCoefficient": "rAPCoefficient"
 					}
 				}
 			]

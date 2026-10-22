@@ -57,10 +57,7 @@
 						"Damage_AD_Ratio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
 						"Bonus_Attack_Range": [50, 50, 50, 50, 50, 50, 50],
 						"Damage_Monster_Bonus": [10, 10, 10, 10, 10, 10, 10],
-						"BASE_DAMAGE": [5, 10, 15, 20, 25, 30, 35],
-						"__renamedVariables": {
-							"Base_Damage": "BASE_DAMAGE"
-						}
+						"BASE_DAMAGE": [5, 10, 15, 20, 25, 30, 35]
 					},
 					"spellCalculations": {
 						"Calc_Max_Health_Damage": {
@@ -143,6 +140,9 @@
 							],
 							"mDisplayAsPercent": true
 						}
+					},
+					"__renamedVariables": {
+						"Base_Damage": "BASE_DAMAGE"
 					}
 				}
 			]

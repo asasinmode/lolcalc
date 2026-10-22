@@ -371,12 +371,12 @@
 							],
 							"mDisplayAsPercent": true,
 							"mPrecision": 1
-						},
-						"__renamedVariables": {
-							"{6c540a3a}": "ExecuteTooltipCalc"
 						}
 					},
-					"castRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+					"castRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+					"__renamedVariables": {
+						"{6c540a3a}": "ExecuteTooltipCalc"
+					}
 				}
 			]
 		},

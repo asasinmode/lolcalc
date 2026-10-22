@@ -99,10 +99,7 @@
 						"BaseOnHitDamage": [25, 35, 45, 55, 65, 75, 85],
 						"BaseDamageActive": [45, 70, 95, 120, 145, 170, 195],
 						"APRatioActive": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
-						"BADRatio": [0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3],
-						"__renamedVariables": {
-							"bADRatio": "BADRatio"
-						}
+						"BADRatio": [0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3]
 					},
 					"spellCalculations": {
 						"TotalDamagePassive": {
@@ -165,7 +162,10 @@
 						"1": [25, 25, 25, 25, 25, 25, 25],
 						"2": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
-					"castRange": [725, 725, 725, 725, 725, 725, 725]
+					"castRange": [725, 725, 725, 725, 725, 725, 725],
+					"__renamedVariables": {
+						"bADRatio": "BADRatio"
+					}
 				}
 			]
 		},

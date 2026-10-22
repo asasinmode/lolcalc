@@ -102,10 +102,7 @@
 						"WDuration": [5, 5, 5, 5, 5, 5, 5],
 						"CDRefundPercent": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
 						"MonsterMod": [170, 170, 170, 170, 170, 170, 170],
-						"BaseApRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
-						"__renamedVariables": {
-							"BaseAPRatio": "BaseApRatio"
-						}
+						"BaseApRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
 					},
 					"spellCalculations": {
 						"TotalMinDamage": {
@@ -139,7 +136,10 @@
 							"__type": "GameCalculationModified"
 						}
 					},
-					"castRange": [900, 900, 900, 900, 900, 900, 900]
+					"castRange": [900, 900, 900, 900, 900, 900, 900],
+					"__renamedVariables": {
+						"BaseAPRatio": "BaseApRatio"
+					}
 				}
 			]
 		},

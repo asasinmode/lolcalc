@@ -157,10 +157,7 @@
 						"FeatherThreshold": [3, 3, 3, 3, 3, 3, 3],
 						"RootDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
 						"FeatherReturnDelay": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
-						"BADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
-						"__renamedVariables": {
-							"bADRatio": "BADRatio"
-						}
+						"BADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
 					},
 					"spellCalculations": {
 						"FeatherDamage": {
@@ -218,7 +215,10 @@
 						}
 					},
 					"castRange": [2000, 2000, 2000, 2000, 2000, 2000, 2000],
-					"isImmobilizing": true
+					"isImmobilizing": true,
+					"__renamedVariables": {
+						"bADRatio": "BADRatio"
+					}
 				}
 			]
 		},
