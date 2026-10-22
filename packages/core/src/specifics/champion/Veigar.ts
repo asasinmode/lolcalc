@@ -16,12 +16,13 @@ function calculateWCdr(self: DamageSource): number {
 	const stacksForCdr = championAbilityVariableValue('PStacksPerDarkMatterCDR', passiveParams);
 	const cdrForStacks = championAbilityVariableValue('DarkMatterCDRIncrement', passiveParams);
 	if (typeof stacksForCdr.value === 'number' && typeof cdrForStacks.value === 'number') {
-		Cdr = Math.floor(self.internalData.value.passiveStacks / stacksForCdr.value) * cdrForStacks.value;
+		/* formula according to the wiki */
+		Cdr = (1 - cdrForStacks.value) ** Math.floor(self.internalData.value.passiveStacks / stacksForCdr.value);
 	} else {
 		console.warn('[CHAMPION_SPECIFICS veigar] failed to calculate w stacks cdr', stacksForCdr, cdrForStacks);
 	}
 
-	return Cdr;
+	return 1 - Cdr;
 }
 
 export default {
@@ -65,7 +66,7 @@ export default {
 			const actualBaseCd = championAbilityVariableValue('BaseCooldown', { abilityKey: 'w', abilityVariant, abilityLevel: abilityLevel ?? self?.abilityLevels.value.w });
 			const stacksCdr = self ? calculateWCdr(self) : 0;
 			if (typeof actualBaseCd.value === 'number') {
-				rv = actualBaseCd.value * cdr * Math.max(0, 1 - stacksCdr);
+				rv = actualBaseCd.value * cdr * (1 - stacksCdr);
 			} else {
 				console.warn('[CHAMPION_SPECIFICS veigar] failed to calculate W base cd', actualBaseCd);
 			}
