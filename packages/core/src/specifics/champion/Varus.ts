@@ -1,6 +1,7 @@
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IVarus from '@lolcalc/data/files/champion/Varus.json';
+import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
 import type { IVariableValueResult } from '../index.ts';
@@ -22,6 +23,22 @@ export default {
 		options: passiveOptions,
 		variables: defineChampionVariables<'Varus', typeof IVarus, 'passive'>()({
 			uninteresting: ['ASDuration'],
+		}),
+	},
+	q: {
+		variables: defineChampionVariables<'Varus', typeof IVarus, 'q'>()({
+			meta: {
+				TotalDamageMin: {
+					type: VariableType.physical,
+				},
+				TotalDamageMax: {
+					type: VariableType.physical,
+				},
+				MoveSpeedMod: {
+					type: VariableType.affectedBySlowResist,
+				},
+			},
+			uninteresting: ['MaxChannelDuration', 'ManaRefund', 'FalloffPercent', 'MinDamagePercent', 'MaxChannelAmp'],
 		}),
 	},
 	calculateHooks: {

@@ -1951,7 +1951,7 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 			debug[category].variables.delete(key);
 		}
 
-		// TODO probably shouldn't do that, it's expected to happen when some unknown variables were resolved using their hashes. Rerun debug then to see if the newly resolved variables are actually known or also unknown but at least without a hash
+		/* possibly shouldn't do that, it's expected to happen when some unknown variables were resolved using their hashes. Rerun debug then to see if the newly resolved variables are actually known or also unknown but at least without a hash */
 		if (unknownChanged) {
 			debugStringVariables(value, variableDebug);
 		}
