@@ -38,4 +38,46 @@ export default {
 			},
 		}),
 	},
+	w: {
+		variables: defineChampionVariables<'Yunara', typeof IYunara, 'w'>()({
+			known: {
+				'f3.0': [],
+			},
+			calculate(self) {
+				return {
+					'f3.0': {
+						value: Math.max(0, self.stats.value.bonus.bonusAttackSpeedPercent - self.stats.value.effect.bonusAttackSpeedPercent),
+					},
+				};
+			},
+			meta: {
+				'f3.0': {
+					displayedName: 'CurrentBonusAS',
+					resultsMultiplier: 100,
+				},
+				Calc_Damage_Initial: {
+					type: VariableType.magic,
+				},
+				Calc_Slow: {
+					type: VariableType.affectedBySlowResist,
+				},
+				Slow_Duration: {
+					type: VariableType.affectedByTenacity,
+				},
+				Calc_Damage_Per_Second: {
+					type: VariableType.magic,
+				},
+				Calc_RW_Damage: {
+					type: VariableType.magic,
+				},
+				Calc_RW_Slow_Amount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				RW_Slow_Duration: {
+					type: VariableType.affectedByTenacity,
+				},
+			},
+			uninteresting: ['Cast_Time_Attack_Speed_Cap_Empowered'],
+		}),
+	},
 } satisfies IChampionSpecific<'Yunara'>;
