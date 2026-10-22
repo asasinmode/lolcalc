@@ -1,8 +1,28 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type IVeigar from '@lolcalc/data/files/champion/Veigar.json';
 import { VariableType } from '@lolcalc/shared';
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
+
+function calculateWCdr(self: DamageSource): number {
+	let Cdr = Number.NaN;
+
+	const passiveParams: IGameVariableValueParameters['championAbility'] = {
+		abilityKey: 'passive',
+		abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
+		damageSource: self,
+	};
+	const stacksForCdr = championAbilityVariableValue('PStacksPerDarkMatterCDR', passiveParams);
+	const cdrForStacks = championAbilityVariableValue('DarkMatterCDRIncrement', passiveParams);
+	if (typeof stacksForCdr.value === 'number' && typeof cdrForStacks.value === 'number') {
+		Cdr = Math.floor(self.internalData.value.passiveStacks / stacksForCdr.value) * cdrForStacks.value;
+	} else {
+		console.warn('[CHAMPION_SPECIFICS veigar] failed to calculate w stacks cdr', stacksForCdr, cdrForStacks);
+	}
+
+	return Cdr;
+}
 
 export default {
 	setupData(self) {
@@ -39,29 +59,27 @@ export default {
 		}),
 	},
 	w: {
+		calculateCd(_baseCd, cdr, abilityVariant, abilityLevel, self) {
+			let rv = Number.NaN;
+
+			const actualBaseCd = championAbilityVariableValue('BaseCooldown', { abilityKey: 'w', abilityVariant, abilityLevel: abilityLevel ?? self?.abilityLevels.value.w });
+			const stacksCdr = self ? calculateWCdr(self) : 0;
+			if (typeof actualBaseCd.value === 'number') {
+				rv = actualBaseCd.value * cdr * Math.max(0, 1 - stacksCdr);
+			} else {
+				console.warn('[CHAMPION_SPECIFICS veigar] failed to calculate W base cd', actualBaseCd);
+			}
+
+			return rv;
+		},
 		variables: defineChampionVariables<'Veigar', typeof IVeigar, 'w'>()({
 			known: {
 				'f2.0': [],
 			},
 			calculate(self) {
-				let Cdr = Number.NaN;
-
-				const passiveParams: IGameVariableValueParameters['championAbility'] = {
-					abilityKey: 'passive',
-					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
-					damageSource: self,
-				};
-				const stacksForCdr = championAbilityVariableValue('PStacksPerDarkMatterCDR', passiveParams);
-				const cdrForStacks = championAbilityVariableValue('DarkMatterCDRIncrement', passiveParams);
-				if (typeof stacksForCdr.value === 'number' && typeof cdrForStacks.value === 'number') {
-					Cdr = Math.floor(self.internalData.value.passiveStacks / stacksForCdr.value) * cdrForStacks.value;
-				} else {
-					console.warn('[CHAMPION_SPECIFICS veigar] failed to calculate w stacks cdr', stacksForCdr, cdrForStacks);
-				}
-
 				return {
 					'f2.0': {
-						value: Cdr,
+						value: calculateWCdr(self),
 					},
 				};
 			},

@@ -1769,22 +1769,28 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		cdr = 1 - cooldownReductionPercentageFromHaste(damageSource.stats.value.total.abilityHaste + additionalHaste) / 100;
 	}
 
-	if (champion.id !== 'TargetDummy' && cooldown && gameAbilityId.abilityKey !== 'passive') {
-		const firstCd = variant.cooldownTime![1]!;
+	const abilitySpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[gameAbilityId.abilityKey];
+
+	if (champion.id !== 'TargetDummy' && (cooldown || abilitySpecific?.calculateCd) && gameAbilityId.abilityKey !== 'passive') {
+		const firstCd = variant.cooldownTime?.[1];
 		let cooldownVaries = false;
 		for (let i = 2; i < lastExtendedVariableIndex; i++) {
-			cooldownVaries ||= firstCd !== variant.cooldownTime![i];
+			cooldownVaries ||= firstCd !== variant.cooldownTime?.[i];
 		}
-		if (cooldownVaries) {
-			abilityLevelVars ||= [];
-			abilityLevelVars.push({
-				name: 'Cooldown',
-				values: variant.cooldownTime!.slice(1, lastExtendedVariableIndex).map((v) => roundNumber(v * cdr, 2)),
-			});
+		if (cooldownVaries || abilitySpecific?.calculateCd) {
+			abilityLevelVars ??= [];
+			const values = (variant.cooldownTime?.slice(1, lastExtendedVariableIndex) ?? Array.from({ length: lastExtendedVariableIndex })).map((v, i) =>
+				roundNumber(abilitySpecific?.calculateCd?.(v, cdr, variant, i + 1, damageSource) ?? v * cdr, 2),
+			);
+			if (cooldownVaries || values[0] !== values[1]) {
+				abilityLevelVars.push({
+					name: 'Cooldown',
+					values,
+				});
+			}
 		}
 	}
 
-	const abilitySpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[gameAbilityId.abilityKey];
 	let isDisabled: boolean | number | undefined;
 	if (damageSource && abilitySpecific?.isDisabled) {
 		isDisabled = abilitySpecific.isDisabled(damageSource);
@@ -1800,6 +1806,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		image = variant.image[0]!;
 	}
 
+	const reducedCd = abilitySpecific?.calculateCd?.(cooldown, cdr, variant, abilityLevel, damageSource) ?? (cooldown !== undefined ? cooldown * cdr : cooldown);
+
 	return {
 		gameAbilityId,
 		name: nameReplaced,
@@ -1807,7 +1815,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		tooltipExtended: tooltipExtendedReplaced,
 		tooltipExtendedBelowLine: tooltipExtendedBLReplaced,
 		anyUnknownVariables,
-		cooldown: cooldown !== undefined ? roundNumber(cooldown * cdr, 2) : cooldown,
+		cooldown: reducedCd && roundNumber(reducedCd, 2),
 		cost,
 		abilityLevel,
 		partype: champion.partype,
