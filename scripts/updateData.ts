@@ -1904,7 +1904,7 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 				let rename: [from: string, to: string] | undefined;
 
 				if (isHash) {
-					const hashedSourceKeys: [string, string][] = Object.keys(variableSource[sourceKey])
+					const hashedSourceKeys: [string, string][] = Object.keys(variableSource[sourceKey] ?? {})
 						.filter((key) => !key.startsWith('{'))
 						.map((key) => [key, hashFnv1a(key)]);
 					const matchingKey = hashedSourceKeys.find((key) => key[1] === variableName);
