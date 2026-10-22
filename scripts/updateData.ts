@@ -1862,6 +1862,12 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	}
 
 	if (variables) {
+		/* calculating variables might produce some warns but they can be because it runs before hashes are resolved & replaced. Try to capture the warns then output all of them at the end of this block if any unknown vars were encountered */
+		const preUnknownSize = debug[category].variables.size;
+		const collectedWarns: unknown[][] = [];
+		const ogConsoleWarn = console.warn;
+		console.warn = (...args: unknown[]) => collectedWarns.push(args);
+
 		const { variableType, variableSourceKeys } = variables;
 		/* duplicated because if original is modified then recursive calls (at the end of this if block) when any unknown variables are resolved won't work */
 		const variableValueParameters = { ...variables.variableValueParameters };
@@ -1954,6 +1960,13 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 		/* possibly shouldn't do that, it's expected to happen when some unknown variables were resolved using their hashes. Rerun debug then to see if the newly resolved variables are actually known or also unknown but at least without a hash */
 		if (unknownChanged) {
 			debugStringVariables(value, variableDebug);
+		}
+
+		console.warn = ogConsoleWarn;
+		if (debug[category].variables.size !== preUnknownSize) {
+			for (const args of collectedWarns) {
+				console.warn(...args);
+			}
 		}
 	}
 
