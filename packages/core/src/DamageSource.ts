@@ -1712,6 +1712,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 	const lastExtendedVariableIndex = ability.maxLevel + 1;
 
 	let abilityLevelVars: IComputedAbilityDescription['abilityLevelVars'] | undefined = variant.abilityLevelVars?.map((variable) => {
+		if (damageSource?.isResultsCopy) return { name: '' };
+
 		let isNameUnknown = false;
 		let name;
 		if (variable.nameOverride) {
@@ -1736,8 +1738,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		return {
 			name,
 			values: (
-				tooltipVariablesAV.get(name) ??
-				tooltipExtendedVariablesAV.get(name) ??
+				tooltipVariablesAV.get(variable.name) ??
+				tooltipExtendedVariablesAV.get(variable.name) ??
 				championAbilityVariableValue(
 					variable.name,
 					{

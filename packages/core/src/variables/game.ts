@@ -360,7 +360,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	} else if (variableName === 'MaxAmmo') {
 		rv.value = abilityVariant.maxAmmo?.[abilityLevel ?? 1];
 		rv.allValues = abilityVariant.maxAmmo;
-	} else if (variableName === 'Cost') {
+	} else if (variableName === 'Cost' || variableName === 'BaseCost') {
 		rv.value = abilityVariant.mana?.[abilityLevel ?? 1];
 		rv.allValues = abilityVariant.mana;
 	} else if (variableName === 'CastRange') {
