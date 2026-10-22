@@ -1,5 +1,5 @@
 {
-	"version": "16.20.1",
+	"version": "16.21.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -1538,13 +1538,13 @@
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 15,
-				"PhysicalLethality": 22
+				"PhysicalLethality": 18
 			},
 			"dataValues": {
-				"LethalityAmount": 22,
+				"LethalityAmount": 18,
 				"Cooldown": 20,
 				"TakedownWindow": 3,
-				"BuffDuration": 90,
+				"BuffDuration": 25000,
 				"RangeModifier": 0.8,
 				"DoTDuration": 3,
 				"AbilityDamageRangeMod": 0.5
@@ -1570,7 +1570,7 @@
 				"AbilityDamageCalc": {
 					"mFormulaParts": [
 						{
-							"mNumber": 50,
+							"mNumber": 40,
 							"__type": "NumberCalculationPart"
 						},
 						{
@@ -2046,8 +2046,8 @@
 			"searchString": "gluttonousgreaves;lifesteal;spellvamp;boots;movespeed",
 			"epicness": 4,
 			"gold": {
-				"total": 1000,
-				"sell": 700
+				"total": 1100,
+				"sell": 770
 			},
 			"image": "3008.png",
 			"into": [
@@ -5722,8 +5722,8 @@
 			"searchString": "immortalpath;lifesteal;spellvamp;boots;movespeed",
 			"epicness": 7,
 			"gold": {
-				"total": 1000,
-				"sell": 700
+				"total": 1100,
+				"sell": 770
 			},
 			"image": "3168.png",
 			"from": [
@@ -8261,7 +8261,7 @@
 				"PercentHealingAmountMod": 0.16
 			},
 			"dataValues": {
-				"APPerManaRegen": 10,
+				"APPerManaRegen": 15,
 				"HSPowerPerManaRegen": 0.02
 			}
 		},
@@ -9199,9 +9199,11 @@
 				"TakedownWindow": 3,
 				"SpeedAmount": 0.3,
 				"BonusLethality": 15,
-				"ADPerStatue": 3,
 				"BuffDuration": 90,
-				"BaseADBonus": 12
+				"BaseADBonusMelee": 15,
+				"BaseADRangedMult": 0.667,
+				"ADPerStatueMelee": 3,
+				"ADPerStatueRangedMult": 0.667
 			},
 			"itemCalculations": {
 				"{5974e68a}": {
@@ -9212,7 +9214,40 @@
 							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
+				},
+				"BaseADBonus": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseADBonusMelee",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "BaseADRangedMult",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				},
+				"ADPerStatue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ADPerStatueMelee",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "ADPerStatueRangedMult",
+						"__type": "NamedDataValueCalculationPart"
+					}
+				},
+				"__renamedVariables": {
+					"{619bce2f}": "ADPerStatue"
 				}
+			},
+			"__replacedVariables": {
+				"{6c8d1758}": "BaseADBonusMelee",
+				"{e7b48421}": "ADPerStatueMelee",
+				"{4325747e}": "ADPerStatueRangedMult",
+				"{4270a530}": "BaseADRangedMult"
 			}
 		},
 		"6698": {

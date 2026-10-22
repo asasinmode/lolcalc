@@ -48,7 +48,7 @@
 						}
 					],
 					"dataValues": {
-						"AttackSpeedMod": [0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35],
+						"AttackSpeedMod": [0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4],
 						"BuffDuration": [7, 7, 7, 7, 7, 7, 7]
 					},
 					"castRange": [20, 20, 20, 20, 20, 20, 20]

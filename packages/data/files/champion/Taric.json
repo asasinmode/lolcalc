@@ -179,6 +179,7 @@
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"tooltip": "Taric projects a beam of starlight, bursting after @ChargeDuration@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @StunDuration@ seconds.",
+					"tooltipExtendedBelowLine": "<rules>This ability does not cast from allies that dissapear during their abilities. </rules>",
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",

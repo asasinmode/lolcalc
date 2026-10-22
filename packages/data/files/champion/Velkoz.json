@@ -262,12 +262,12 @@
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mCoefficient": 0.6,
+									"mCoefficient": 0.65,
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{
 									"mStartValue": 35,
-									"mEndValue": 180,
+									"mEndValue": 205,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								}
 							]

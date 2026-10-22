@@ -52,7 +52,7 @@
 						}
 					],
 					"dataValues": {
-						"BaseDamage": [10, 50, 90, 130, 170, 210, 250],
+						"BaseDamage": [5, 50, 95, 140, 185, 230, 275],
 						"SecondaryMult": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"tADRatio": [1.05, 1.25, 1.45, 1.65, 1.85, 2.05, 2.25]
 					},
@@ -281,7 +281,7 @@
 					"tooltip": "{{Spell_CaitlynP_Tooltip}}",
 					"tooltipExtended": "{{Spell_CaitlynP_Tooltip}}<br><br><rules><keywordMajor>Headshot</keywordMajor> damage scales with level, Critical Strike Chance, and Critical Strike Damage.<br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotMinionBonusDamage@ physical damage</physicalDamage> to non-champions.<br>Extra damage on trapped targets scales with {{Spell_CaitlynYordleTrap_Name}} rank.</rules>",
 					"dataValues": {
-						"CriticalStrikeScaling": [1, 1, 1, 1, 1, 1, 1],
+						"CriticalStrikeScaling": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
 						"TowerCap": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"AttacksPerHeadshot": [5, 5, 5, 5, 5, 5, 5],
 						"BrushStackBonus": [1, 1, 1, 1, 1, 1, 1]
@@ -298,11 +298,11 @@
 												"mBreakpoints": [
 													{
 														"mLevel": 7,
-														"mAdditionalBonusAtThisLevel": 0.2
+														"mAdditionalBonusAtThisLevel": 0.1
 													},
 													{
 														"mLevel": 13,
-														"mAdditionalBonusAtThisLevel": 0.2
+														"mAdditionalBonusAtThisLevel": 0.1
 													}
 												],
 												"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -356,11 +356,11 @@
 													"mBreakpoints": [
 														{
 															"mLevel": 7,
-															"mAdditionalBonusAtThisLevel": 0.2
+															"mAdditionalBonusAtThisLevel": 0.1
 														},
 														{
 															"mLevel": 13,
-															"mAdditionalBonusAtThisLevel": 0.2
+															"mAdditionalBonusAtThisLevel": 0.1
 														}
 													],
 													"__type": "ByCharLevelBreakpointsCalculationPart"

@@ -1,5 +1,5 @@
 {
-	"version": "16.20.1",
+	"version": "16.21.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -210,8 +210,7 @@
 			"name": "Camille",
 			"image": "Camille.png",
 			"roles": {
-				"top": true,
-				"support": true
+				"top": true
 			}
 		},
 		"Cassiopeia": {
@@ -719,8 +718,8 @@
 			"name": "Lux",
 			"image": "Lux.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"Malphite": {
@@ -1454,8 +1453,8 @@
 			"name": "Xerath",
 			"image": "Xerath.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"XinZhao": {

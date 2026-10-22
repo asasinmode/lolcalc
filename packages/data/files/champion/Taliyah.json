@@ -182,8 +182,8 @@
 						}
 					],
 					"dataValues": {
-						"BaseDamage": [15, 60, 105, 150, 195, 240, 285],
-						"BaseDetonationDamage": [10, 25, 40, 55, 70, 85, 100],
+						"BaseDamage": [25, 70, 115, 160, 205, 250, 295],
+						"BaseDetonationDamage": [15, 30, 45, 60, 75, 90, 105],
 						"MonsterModPercent": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],
 						"StunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"MaxStunDuration": [2, 2, 2, 2, 2, 2, 2],
@@ -201,7 +201,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.6,
+									"mCoefficient": 0.7,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

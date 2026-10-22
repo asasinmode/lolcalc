@@ -8,7 +8,7 @@
 		"hpperlevel": 100,
 		"mp": 405,
 		"mpperlevel": 45,
-		"movespeed": 335,
+		"movespeed": 330,
 		"armor": 23,
 		"armorperlevel": 4.4,
 		"spellblock": 30,
@@ -58,7 +58,7 @@
 						"MissileAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"HitAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"ShieldManaRatio": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
-						"ShieldAPRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"ShieldAPRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"AugmentShieldBonus": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6],
 						"AugmentMoveSpeedBonus": [30, 30, 30, 30, 30, 30, 30],
 						"TurretDamageMod": [1, 1, 1, 1, 1, 1, 1]
@@ -105,8 +105,8 @@
 						"ShieldLevelScaling": {
 							"mFormulaParts": [
 								{
-									"mStartValue": 40,
-									"mEndValue": 140,
+									"mStartValue": 30,
+									"mEndValue": 130,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{

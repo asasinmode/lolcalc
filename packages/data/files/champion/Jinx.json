@@ -4,7 +4,7 @@
 	"name": "Jinx",
 	"partype": "Mana",
 	"stats": {
-		"hp": 630,
+		"hp": 610,
 		"hpperlevel": 105,
 		"mp": 260,
 		"mpperlevel": 50,
@@ -21,7 +21,7 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 59,
-		"attackdamageperlevel": 3.25,
+		"attackdamageperlevel": 3,
 		"attackspeedperlevel": 1,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625

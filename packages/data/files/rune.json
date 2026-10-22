@@ -1,5 +1,5 @@
 {
-	"version": "16.20.1",
+	"version": "16.21.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -279,7 +279,7 @@
 							"id": 9105,
 							"name": "LegendHaste",
 							"icon": "assets/perks/styles/precision/legendhaste/legendhaste.png",
-							"dataKey": "{3ecd47e5}",
+							"dataKey": "Perks/Styles/Precision/LegendHaste",
 							"effectAmount": {
 								"HastePerStack": 1.5,
 								"HasteBase": 0,
@@ -484,8 +484,8 @@
 								"BonusDamage": {
 									"mFormulaParts": [
 										{
-											"{0589a59c}": "BonusDamageMin",
-											"{0b65bc23}": "BonusDamageMax",
+											"StartDataValue": "BonusDamageMin",
+											"EndDataValue": "BonusDamageMax",
 											"__type": "{ee18a47b}"
 										},
 										{
@@ -605,7 +605,7 @@
 							"id": 8137,
 							"name": "SixthSense",
 							"icon": "assets/perks/styles/domination/sixthsense/sixthsense.png",
-							"dataKey": "{4cd8582d}",
+							"dataKey": "Perks/Styles/Domination/SixthSense",
 							"calculations": {
 								"ChampRange": {
 									"mSimpleTooltipCalculationDisplay": 5,
@@ -643,7 +643,7 @@
 							"id": 8140,
 							"name": "GrislyMementos",
 							"icon": "assets/perks/styles/domination/grislymementos/grislymementos.png",
-							"dataKey": "{d17f2259}",
+							"dataKey": "Perks/Styles/Domination/GrislyMementos",
 							"effectAmount": {
 								"TrinketAH": 6,
 								"StacksPerTakedown": 1,
@@ -1304,7 +1304,7 @@
 								},
 								"{4e3f20aa}": {
 									"mSimpleTooltipCalculationDisplay": 4,
-									"{72c5c2a8}": 0,
+									"DamageType": 0,
 									"mFormulaParts": [
 										{
 											"mDataValue": "BaseDamageRanged",
@@ -1319,7 +1319,7 @@
 								},
 								"{5fecac03}": {
 									"mSimpleTooltipCalculationDisplay": 4,
-									"{72c5c2a8}": 0,
+									"DamageType": 0,
 									"mFormulaParts": [
 										{
 											"mDataValue": "BaseDamageMelee",
@@ -1703,7 +1703,7 @@
 							"id": 8321,
 							"name": "CashBack",
 							"icon": "assets/perks/styles/inspiration/cashback/cashback2.png",
-							"dataKey": "{fcf87363}",
+							"dataKey": "Perks/Styles/Inspiration/CashBack",
 							"effectAmount": {
 								"{d856a8af}": 0,
 								"GoldLowerBoundPerMinute": 8,
@@ -1784,7 +1784,7 @@
 							"id": 8316,
 							"name": "JackOfAllTrades",
 							"icon": "assets/perks/styles/inspiration/jackofalltrades/jackofalltrades2.png",
-							"dataKey": "{f781f833}",
+							"dataKey": "Perks/Styles/Inspiration/JackOfAllTrades",
 							"effectAmount": {
 								"HasteperStack": 1,
 								"__renamedVariables": {
@@ -1860,7 +1860,7 @@
 				"health": {
 					"id": 5011,
 					"icon": "assets/perks/statmods/statmodshealthscalingicon.png",
-					"dataKey": "{787ccb97}",
+					"dataKey": "Perks/StatMods/Health",
 					"effectAmount": {
 						"StatGain": 65
 					}
@@ -1868,7 +1868,7 @@
 				"tenacity": {
 					"id": 5013,
 					"icon": "assets/perks/statmods/statmodstenacityicon.png",
-					"dataKey": "{7a3bed68}",
+					"dataKey": "Perks/StatMods/Tenacity",
 					"effectAmount": {
 						"StatGain": 15
 					}
