@@ -53,7 +53,7 @@ export default {
 			meta: {
 				'f3.0': {
 					displayedName: 'CurrentBonusAS',
-					resultsMultiplier: 100,
+					multiplier: 100,
 				},
 				Calc_Damage_Initial: {
 					type: VariableType.magic,
