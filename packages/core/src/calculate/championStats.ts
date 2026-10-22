@@ -461,6 +461,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 					dragonStatMultipliers,
 					totalMultipliersStats,
 					bonusStats,
+					effectStats,
 					itemPassivesStats,
 					itemTotalStats,
 					dragonStats,

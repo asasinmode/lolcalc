@@ -69,6 +69,8 @@ export const HOOK_PRIORITIES = {
 		Kled: 1,
 		/** needs total ap */
 		Volibear: 1,
+		/** needs total ap */
+		XinZhao: 1,
 		/** needs total hp, must be before immortal path */
 		DrMundo: 1,
 		/** after bloodmail, before endless hunger */

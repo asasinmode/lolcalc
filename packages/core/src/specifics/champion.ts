@@ -529,6 +529,7 @@ export interface IChampionInternalDataMap {
 	Veigar: { passiveStacks: number };
 	Viktor: { passiveAbilityUpgradesMask: number };
 	Volibear: { passiveStacks: number };
+	XinZhao: { isEASActive: number };
 	Zaahen: { passiveStacks: number };
 	Zeri: { rActive: number; rStacks: number };
 }

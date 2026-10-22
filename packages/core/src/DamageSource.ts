@@ -2596,6 +2596,7 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 				dragonStats: IStatsCalculationResult['dragon'];
 				dragonStatMultipliers: IStatsCalculationResult['dragonStatMultipliers'];
 				bonusStats: IStatsCalculationResult['bonus'];
+				effectStats: IStatsCalculationResult['effect'];
 				itemPassivesStats: IStatsCalculationResult['itemPassive'];
 				itemTotalStats: IStatsCalculationResult['itemTotal'];
 				baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];

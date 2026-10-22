@@ -324,6 +324,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Volibear: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Volibear', 'passive', 0), 'passiveStacks', 'Relentless Storm stacks', 0, CHAMPION_SPECIFICS.Volibear.passive.maxStacks),
 	},
+	XinZhao: {
+		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'XinZhao', 'e', 0), 'isEASActive', 'is active', false),
+	},
 	MonkeyKing: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'MonkeyKing', 'passive', 0), 'passiveStacks', 'Stone Skin stacks', 0, CHAMPION_SPECIFICS.MonkeyKing.passive.maxStacks),
 	},
