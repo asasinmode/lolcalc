@@ -82,6 +82,8 @@ const imageSizes = computed(() => {
 	return { champion, ability };
 });
 
+const computedChampionImage = computed(() => (props.value.listedChampion.value ? championImage(props.value.listedChampion.value.image, props.value.listedChampion.value.id) : ''));
+
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
 	if (primarySlots[0]) {
@@ -1011,7 +1013,7 @@ defineExpose({ el });
 					<span>
 						{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
 					</span>
-					<img v-if="value.listedChampion.value" :src="championImage(value.listedChampion.value.image, value.listedChampion.value.id)" loading="lazy" :width="imageSizes.champion" :height="imageSizes.champion" />
+					<img v-if="value.listedChampion.value" :src="computedChampionImage" loading="lazy" :width="imageSizes.champion" :height="imageSizes.champion" />
 					<img v-else :src="imgUrl('plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png')" width="256" height="256" />
 				</button>
 				<VSelect
