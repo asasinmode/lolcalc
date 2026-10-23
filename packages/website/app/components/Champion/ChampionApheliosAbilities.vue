@@ -1,9 +1,10 @@
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
-import type { IScoreboardItemChampionAbilityTooltipShowData } from '~/utils/types';
+import type { IExtraComponentProps, IScoreboardItemChampionAbilityTooltipShowData } from '~/utils/types';
 
 type IAphelios = typeof Aphelios;
 
@@ -11,9 +12,14 @@ const props = defineProps<{
 	value: DamageSource<'Aphelios'>;
 	isLoading: boolean;
 	idSuffix: string;
-	bindTooltipTriggerAttrs: (data: MaybeRefOrGetter<IScoreboardItemChampionAbilityTooltipShowData>) => any;
+	tooltipTriggerAttrs: Extract<NonNullable<IExtraComponentProps<IScoreboardItemChampionAbilityTooltipShowData>['tooltipTriggerAttrs']>, Function>;
 	showTooltip: (event: Event, data: IScoreboardItemChampionAbilityTooltipShowData) => void;
 }>();
+
+const passiveAbilityId = GameAbilityId.build('champion', 'Aphelios', 'passive', 0);
+const qAbilityId = GameAbilityId.build('champion', 'Aphelios', 'q', 0);
+const eAbilityId = GameAbilityId.build('champion', 'Aphelios', 'e', 0);
+const rAbilityId = GameAbilityId.build('champion', 'Aphelios', 'r', 0);
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
@@ -68,7 +74,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="bindTooltipTriggerAttrs({ key: 'passive' })"
+			v-bind="tooltipTriggerAttrs(passiveAbilityId)"
 		/>
 		<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
 	</div>
@@ -80,7 +86,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="bindTooltipTriggerAttrs(() => ({ key: 'e', variantIndex: value.abilityVariantsIndexes.value.q }))"
+			v-bind="tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.q }))"
 		/>
 		<h5>Q</h5>
 		<img
@@ -88,13 +94,13 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="bindTooltipTriggerAttrs(() => ({ key: 'q', variantIndex: value.abilityVariantsIndexes.value.q }))"
+			v-bind="tooltipTriggerAttrs(qAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.q }))"
 		/>
 	</div>
 	<div class="aphelios-w" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
 		<h5 v-html="`offhand weapon: ${weaponNames.offhand}`" />
-		<button title="swap with main" @click="swapMainOffhand" v-bind="bindTooltipTriggerAttrs(() => ({ key: 'e', variantIndex: value.abilityVariantsIndexes.value.w }))">
+		<button title="swap with main" @click="swapMainOffhand" v-bind="tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.w }))">
 			<span>swap with main</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.w]!.imageAlt, 'Aphelios') : undefined"
@@ -104,7 +110,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			/>
 		</button>
 		<h5 v-html="`next weapon: ${weaponNames.next}`" />
-		<button title="replace offhand" v-bind="bindTooltipTriggerAttrs(() => ({ key: 'e', variantIndex: value.abilityVariantsIndexes.value.e }))" @click="replaceMainWithNext">
+		<button title="replace offhand" v-bind="tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.e }))" @click="replaceMainWithNext">
 			<span>replace offhand</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.e]!.imageAlt, 'Aphelios') : undefined"
@@ -121,7 +127,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="bindTooltipTriggerAttrs({ key: 'r' })"
+			v-bind="tooltipTriggerAttrs(rAbilityId)"
 		/>
 		<div class="pretend-level-radiogroup">
 			<span>r level: {{ value.abilityLevels.value.r }}</span>

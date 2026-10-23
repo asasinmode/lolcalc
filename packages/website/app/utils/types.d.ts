@@ -119,15 +119,21 @@ export interface IItemDescriptionProps {
 	showMasterwork?: boolean;
 }
 
-export interface IExtraComponentProps {
+export interface IExtraComponentProps<BindData = unknown> {
 	damageSource: DamageSource;
 	/** if present, will be passed to `onImgMouseEnter` args emit, very few components use it at the moment. Currently used for Aphelios gravitum slow */
 	overrideDamageSource?: DamageSource;
 	idSuffix: string;
 	/** it's not consistently provided and shouldn't really be relied upon. It's mostly declared so that there's no `ability-id="[Object object]"` in the dom. Used by tear item extra, provided in scoreboard item */
 	abilityId?: IGameAbilityId;
-	/** `useHoverTooltip().bind` that will be put on the component's image */
-	tooltipTriggerAttrs?: any;
+	/** either the return value of `useHoverTooltip().bind` or a function that will call it */
+	tooltipTriggerAttrs?:
+		| Record<string, never>
+		| ((
+				abilityId: IGameAbilityId,
+				/** any data the component wants to pass to `useHoverTooltip().show`, in addition to whatever parent decides to pass */
+				additionalData?: MaybeRefOrGetter<Partial<BindData>>,
+		  ) => any);
 }
 
 export interface ISpecificComponents {

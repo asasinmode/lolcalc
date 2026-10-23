@@ -79,6 +79,8 @@ export function numberExtra<T extends IGameAbilityId>(
 
 			const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
 
+			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId) : props.tooltipTriggerAttrs;
+
 			return () =>
 				h(
 					CalculatorExtraNumber,
@@ -93,7 +95,7 @@ export function numberExtra<T extends IGameAbilityId>(
 						tooltip,
 						inactive: isInactive && isInactive.value,
 						usedNumberInput,
-						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
+						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 					},
 					effectControlsProps
@@ -166,10 +168,7 @@ export function progressExtra<T extends IGameAbilityId>(
 				return getDerivedValue(progress, props.damageSource);
 			}
 
-			// TODO update other components' tooltipTriggerAttrs to include ability id, as well as this one with override dmg src
-			// function onImgMouseenter(event: MouseEvent) {
-			// 	ctx.emit('imgMouseenter', event, abilityId, props.overrideDamageSource);
-			// }
+			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
 
 			const isInactive = computed(() => (!isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined));
 
@@ -184,7 +183,7 @@ export function progressExtra<T extends IGameAbilityId>(
 						max,
 						deriveValue,
 						derivedSymbolSuffix,
-						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
+						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 						'data-inactive': isInactive.value,
 					},
@@ -243,6 +242,8 @@ export function booleanExtra<T extends IGameAbilityId>(
 
 			const computedValue = computed(() => effectControlModel?.value ?? modelValue.value);
 
+			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
+
 			return () =>
 				h(
 					CalculatorExtraBoolean,
@@ -254,7 +255,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 						tooltip,
 						inactive: isInactive && isInactive.value,
 						label: labelAppendOnTarget ? `${label} on target` : label,
-						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
+						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 					},
 					effectControlsProps
@@ -296,6 +297,8 @@ export function enumExtra<T extends IGameAbilityId>(
 				}
 			}
 
+			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
+
 			return () =>
 				h(
 					CalculatorExtraEnum,
@@ -305,7 +308,7 @@ export function enumExtra<T extends IGameAbilityId>(
 						imgSrc: toValue(imgSrc),
 						label,
 						options: toValue(options),
-						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
+						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 					},
 					{

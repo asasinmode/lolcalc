@@ -3,7 +3,7 @@ import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
-import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IChampionAbilityId, IDragonAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { replaceGameIcons } from '@lolcalc/core/misc';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion/shared';
@@ -777,10 +777,24 @@ const { bind: bindChampionAbilityTooltipAttrs, show: showChampionAbilityTooltip 
 	},
 });
 
-// TODO attrs from ability components
-// function showAbilityTooltip(event: MouseEvent, key: IChampionAbilityKey, variantIndex?: number, fromExtras = false, damageSource?: DamageSource) {
-// 	showChampionAbilityTooltip(event, { key, variantIndex, fromExtras, damageSource });
-// }
+function extraBindChampionAbilityTooltipAttrs(abilityId: IGameAbilityId, additionalData?: MaybeRefOrGetter<Partial<IScoreboardItemChampionAbilityTooltipShowData>>) {
+	const { abilityKey, abilityVariantIndex } = abilityId as IChampionAbilityId;
+	return bindChampionAbilityTooltipAttrs(
+		typeof additionalData === 'function'
+			? () => ({
+					key: abilityKey,
+					variantIndex: abilityVariantIndex,
+					fromExtras: true,
+					...additionalData(),
+				})
+			: {
+					key: abilityKey,
+					variantIndex: abilityVariantIndex,
+					fromExtras: true,
+					...toValue(additionalData),
+				},
+	);
+}
 
 const roleQuestHoverTooltipEl = useTemplateRef('roleQuestHoverTooltip');
 const { bind: bindQuestTooltipAttrs, hide: hideQuestTooltip } = useHoverTooltip({
@@ -1182,7 +1196,7 @@ defineExpose({ el });
 					:id-suffix
 					:value
 					:is-loading="value.isLoading.value"
-					:bind-tooltip-trigger-attrs="bindChampionAbilityTooltipAttrs"
+					:tooltip-trigger-attrs="extraBindChampionAbilityTooltipAttrs"
 					:show-tooltip="showChampionAbilityTooltip"
 				/>
 				<template v-else>
@@ -1360,9 +1374,7 @@ defineExpose({ el });
 			</div>
 			<section ref="extras" class="extras" :inert="value.isLoading.value">
 				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
-					<component :is :id-suffix :damage-source="value" />
-					<!-- TODO -->
-					<!-- @img-mouseenter="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, true, args[2])" -->
+					<component :is :id-suffix :damage-source="value" :tooltip-trigger-attrs="extraBindChampionAbilityTooltipAttrs" />
 					<template #fallback>
 						<ExtraLoading />
 					</template>
