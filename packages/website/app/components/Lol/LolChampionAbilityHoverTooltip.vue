@@ -152,6 +152,7 @@ defineExpose({ el });
 
 	.hover-tooltip.champion-ability {
 		--tooltip-max-w: calc(164 * var(--spacing));
+		--footer-mt: calc(2.5 * var(--spacing));
 		--at-apply: 'grid-cols-[auto_1fr_auto] auto-rows-min gap-x-[--gap-x]';
 
 		&:popover-open {
