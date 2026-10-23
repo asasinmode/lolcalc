@@ -156,7 +156,7 @@ defineExpose({ header });
 		}
 
 		> span:first-of-type {
-			--at-apply: 'text-[length:--fluid-18-20-t420] leading-none text-white min-block-[--text-xl-lineHeight] flex items-center';
+			--at-apply: 'text-[length:--fluid-18-20-t420] leading-none self-start text-white min-block-[--text-xl-lineHeight] flex items-center';
 		}
 
 		> span:nth-of-type(2) {
@@ -211,7 +211,7 @@ defineExpose({ header });
 				}
 
 				> span:nth-of-type(2) {
-					--at-apply: 'col-span-2 pbe-0.5 justify-start';
+					--at-apply: 'col-span-2 justify-start';
 				}
 			}
 		}
