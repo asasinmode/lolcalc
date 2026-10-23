@@ -215,12 +215,18 @@
 
 	.hover-tooltip,
 	.effect-hover-tooltip-container {
+		--at-apply: 'pointer-events-none';
 		max-inline-size: min(var(--tooltip-max-w, 100dvi), 100dvi - 2 * var(--hover-tooltip-margin));
 		max-block-size: calc(100dvb - 2 * var(--hover-tooltip-margin));
 		inset-block-start: calc(anchor(end) + var(--tooltip-offset-y, 0px));
 		justify-self: anchor-center;
 		position-try-fallbacks: flip-block, --hover-tooltip-sheet;
 		position-visibility: always;
+
+		&[data-pinned],
+		[data-pinned] > & {
+			--at-apply: 'pointer-events-auto';
+		}
 	}
 
 	.hover-tooltip {
