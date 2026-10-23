@@ -3,10 +3,9 @@ import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import { PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { ALL_CHAMPION_STATS, IChampionStatName, IChampionStats } from '@lolcalc/shared';
 import { ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
-defineEmits<IExtraComponentEmits>();
 
 const el = useTemplateRef('el');
 

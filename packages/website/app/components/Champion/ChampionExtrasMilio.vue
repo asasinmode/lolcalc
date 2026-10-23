@@ -3,10 +3,9 @@ import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import { AbilityType } from '@lolcalc/shared';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
-const emit = defineEmits<IExtraComponentEmits>();
 
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 const imgSize = abilityImageSize('Viktor');
@@ -15,10 +14,6 @@ const selectEl = useTemplateRef('select');
 const { sourceOptions, targetOptions } = useDamageSourceOptions();
 
 const passiveAbilityId = GameAbilityId.build(AbilityType.champion, 'Milio', 'passive', 0);
-
-function onImageMouseenter(event: MouseEvent) {
-	emit('imgMouseenter', event, passiveAbilityId);
-}
 
 const allySourceId = computed(() => (props.damageSource as DamageSource<'Milio'>).internalData.value.passiveAllySourceId);
 
@@ -36,7 +31,13 @@ onMounted(() => {
 
 <template>
 	<article class="calc-extra-enum extras-milio-passive-ally">
-		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')" :width="imgSize" :height="imgSize" aria-hidden="true" @mouseenter="onImageMouseenter" />
+		<img
+			:src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')"
+			:width="imgSize"
+			:height="imgSize"
+			aria-hidden="true"
+			v-bind="(tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(passiveAbilityId)"
+		/>
 		<label :for="`milio-passive-ally-${idSuffix}`"> Fired Up! target ally </label>
 		<select ref="select" :id="`milio-passive-ally-${idSuffix}`" :value="allySourceId" @change="updateAllyId">
 			<option value="0" :selected="allySourceId === '0'">none</option>

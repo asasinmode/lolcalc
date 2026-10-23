@@ -4,11 +4,9 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type { IChampionAbilityKey } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
-
-defineEmits<IExtraComponentEmits>();
 
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 
@@ -34,7 +32,7 @@ function toggle(abilityIndex: number) {
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(AbilityType.champion, 'Khazix', 'r', 0))"
+			v-bind="(tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(GameAbilityId.build(AbilityType.champion, 'Khazix', 'r', 0))"
 		/>
 		<h5>abilities evolved</h5>
 		<label v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]" :key="abilityKey" :for="`evolve-${abilityKey}-${idSuffix}`">

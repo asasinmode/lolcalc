@@ -5,11 +5,9 @@ import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type { IChampionAbilityKey, INonPassiveAbilityKey } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
-
-defineEmits<IExtraComponentEmits>();
 
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 
@@ -51,7 +49,7 @@ watch(
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(AbilityType.champion, 'Aphelios', 'passive', 0))"
+			v-bind="(tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'passive', 0))"
 		/>
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup

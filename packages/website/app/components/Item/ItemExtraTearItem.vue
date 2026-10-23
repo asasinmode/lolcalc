@@ -7,15 +7,13 @@ import type { TItems } from '@lolcalc/data';
 import { imgUrl, ITEMS } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { CalculatorExtraNumber } from '#components';
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<
 	IExtraComponentProps & {
 		abilityId: IItemAbilityId;
 	}
 >();
-
-defineEmits<IExtraComponentEmits>();
 
 type IData = IInternalItemDataOf<'tear'>;
 
@@ -61,7 +59,7 @@ const step = computed(() => (ITEMS as TItems)[props.abilityId.id as (typeof UNTR
 		:id-suffix="`${abilityId.id}-${idSuffix}`"
 		:disabled="isTransformed"
 		@update:model-value="updateValue"
-		@img-mouseenter="$emit('imgMouseenter', $event, props.abilityId)"
+		:tooltip-trigger-attrs
 	>
 		<button class="pretend-ui-btn" title="transform" @click="transform">
 			<span> transform </span>
