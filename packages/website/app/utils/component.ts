@@ -6,7 +6,7 @@ import type { IEffectControlsProps, IExtraInactiveFn, IAbilityImgIndexGetter, IE
 import { AbilityType } from '@lolcalc/shared';
 import type { ComputedRef, SlotsType } from 'vue';
 import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
-import type { IExtraComponentEmits, IExtraComponentProps } from './types';
+import type { IExtraComponentProps } from './types';
 
 export function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
@@ -29,7 +29,7 @@ export function numberExtra<T extends IGameAbilityId>(
 		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
 			const isEffect = abilityId.type === AbilityType.effect;
 			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { isEffect, onUpdate });
@@ -93,9 +93,7 @@ export function numberExtra<T extends IGameAbilityId>(
 						tooltip,
 						inactive: isInactive && isInactive.value,
 						usedNumberInput,
-						onImgMouseenter(event) {
-							ctx.emit('imgMouseenter', event, abilityId);
-						},
+						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 					},
 					effectControlsProps
@@ -116,7 +114,7 @@ export function numberExtra<T extends IGameAbilityId>(
 							},
 				);
 		},
-		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'tooltipTriggerAttrs', 'overrideDamageSource'] },
 	);
 }
 
@@ -139,7 +137,7 @@ export function progressExtra<T extends IGameAbilityId>(
 		onUpdate?: IExtraOnValueUpdate;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
 			const isEffect = abilityId.type === AbilityType.effect;
 			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { isEffect, onUpdate });
@@ -168,9 +166,10 @@ export function progressExtra<T extends IGameAbilityId>(
 				return getDerivedValue(progress, props.damageSource);
 			}
 
-			function onImgMouseenter(event: MouseEvent) {
-				ctx.emit('imgMouseenter', event, abilityId, props.overrideDamageSource);
-			}
+			// TODO update other components' tooltipTriggerAttrs to include ability id, as well as this one with override dmg src
+			// function onImgMouseenter(event: MouseEvent) {
+			// 	ctx.emit('imgMouseenter', event, abilityId, props.overrideDamageSource);
+			// }
 
 			const isInactive = computed(() => (!isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined));
 
@@ -185,7 +184,7 @@ export function progressExtra<T extends IGameAbilityId>(
 						max,
 						deriveValue,
 						derivedSymbolSuffix,
-						onImgMouseenter,
+						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 						'data-inactive': isInactive.value,
 					},
@@ -207,7 +206,7 @@ export function progressExtra<T extends IGameAbilityId>(
 							},
 				);
 		},
-		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'tooltipTriggerAttrs', 'overrideDamageSource'] },
 	);
 }
 
@@ -228,7 +227,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
 			const [imgSrc, stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { onUpdate });
 
@@ -255,9 +254,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 						tooltip,
 						inactive: isInactive && isInactive.value,
 						label: labelAppendOnTarget ? `${label} on target` : label,
-						onImgMouseenter(event) {
-							ctx.emit('imgMouseenter', event, abilityId);
-						},
+						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 					},
 					effectControlsProps
@@ -267,7 +264,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 						: ctx.slots,
 				);
 		},
-		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'tooltipTriggerAttrs', 'overrideDamageSource'] },
 	);
 }
 
@@ -285,7 +282,7 @@ export function enumExtra<T extends IGameAbilityId>(
 		variantImgIndex?: IAbilityImgIndexGetter<any, any>;
 	} = {},
 ) {
-	return defineComponent<IExtraComponentProps, IDefineExtraComponentEmits>(
+	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
 			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { variantImgIndex });
 
@@ -308,9 +305,7 @@ export function enumExtra<T extends IGameAbilityId>(
 						imgSrc: toValue(imgSrc),
 						label,
 						options: toValue(options),
-						onImgMouseenter(event) {
-							ctx.emit('imgMouseenter', event, abilityId);
-						},
+						tooltipTriggerAttrs: props.tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 					},
 					{
@@ -324,7 +319,7 @@ export function enumExtra<T extends IGameAbilityId>(
 					},
 				);
 		},
-		{ props: ['damageSource', 'idSuffix', 'abilityId', 'onImgMouseenter', 'overrideDamageSource'] },
+		{ props: ['damageSource', 'idSuffix', 'abilityId', 'tooltipTriggerAttrs', 'overrideDamageSource'] },
 	);
 }
 
@@ -408,11 +403,6 @@ function createSelectEffectSource(idSuffix: string, modelValue: DamageSource | u
 type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
 type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
 type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
-
-// oxlint-disable-next-line typescript/consistent-type-definitions
-type IDefineExtraComponentEmits = {
-	imgMouseenter: (...args: IExtraComponentEmits['imgMouseenter']) => void;
-};
 
 export function ExtraLoading() {
 	return h('article', { class: 'loading', 'aria-busy': 'true' }, 'loading...');

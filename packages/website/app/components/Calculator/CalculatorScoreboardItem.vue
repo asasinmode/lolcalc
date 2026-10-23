@@ -3,7 +3,7 @@ import { isMasterworkSlot } from '@lolcalc/core/calculate/championStats';
 import { calculateResistPercentageReduction } from '@lolcalc/core/calculate/damage';
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityId, IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IDragonAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { replaceGameIcons } from '@lolcalc/core/misc';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion/shared';
@@ -23,9 +23,6 @@ import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
 import { ExtraLoading } from '~/utils/component';
-import type { IExtraComponentEmits } from '~/utils/types';
-
-type IShowTooltipEventArgs = IExtraComponentEmits<IChampionAbilityId>['imgMouseenter'];
 
 const props = defineProps<{
 	index: number;
@@ -223,8 +220,13 @@ const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
 const hoveredItemIndex = ref<number>();
 const itemTooltipFromExtras = ref(false);
 
-const { show: showItemTooltip, hide: hideItemTooltip } = useHoverTooltip<{ index: number; fromExtras?: boolean }>({
+const {
+	bind: bindItemTooltip,
+	show: showItemTooltip,
+	hide: hideItemTooltip,
+} = useHoverTooltip<{ index: number; fromExtras?: boolean }>({
 	el: itemHoverTooltip,
+	beforeShow: ({ index }) => !!props.value.items.value[index],
 	onShow({ index, fromExtras = false }) {
 		hoveredItemIndex.value = index;
 		itemTooltipFromExtras.value = fromExtras;
@@ -305,10 +307,13 @@ const itemExtras = computed<IItemComponent[]>(() =>
 const hoveredRune = shallowRef<IChampionRune>();
 const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
 
-const { show: showRuneTooltip } = useHoverTooltip<IChampionRune>({
+const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IChampionRune | undefined>({
 	el: hoveredRuneTooltip,
-	onShow(data) {
-		hoveredRune.value = data;
+	beforeShow(rune) {
+		return !!rune;
+	},
+	onShow(rune) {
+		hoveredRune.value = rune!;
 	},
 });
 
@@ -386,7 +391,7 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 const hoveredStat = shallowRef<IChampionStat>();
 const hoveredStatTooltip = useTemplateRef('championStatTooltip');
 
-const { show: showChampionStatTooltip } = useHoverTooltip<IChampionStat>({
+const { bind: bindChampionStatTooltipAttrs } = useHoverTooltip<IChampionStat>({
 	el: hoveredStatTooltip,
 	onShow(stat) {
 		hoveredStat.value = stat;
@@ -752,21 +757,22 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 	props.value.abilityLevels.value[ability] = 0;
 }
 
-type ITooltipSource = '' | 'extras' | 'effects';
-
 const hoveredAbilityKey = ref<IChampionAbilityKey>();
 const hoveredAbilityVariantIndex = ref<number>();
 const hoveredAbilityDamageSource = shallowRef<DamageSource>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 const abilityTooltipFromExtras = ref(false);
 
-const { show: showChampionAbilityTooltip } = useHoverTooltip<{
+const { bind: bindChampionAbilityTooltipAttrs, show: showChampionAbilityTooltip } = useHoverTooltip<{
 	key: IChampionAbilityKey;
 	variantIndex?: number;
 	fromExtras?: boolean;
 	damageSource?: DamageSource;
 }>({
 	el: () => abilityHoverTooltipEl.value?.el,
+	beforeShow() {
+		return !!props.value.champion.value;
+	},
 	onShow({ key, variantIndex, fromExtras = false, damageSource }) {
 		hoveredAbilityKey.value = key;
 		hoveredAbilityDamageSource.value = damageSource;
@@ -775,12 +781,18 @@ const { show: showChampionAbilityTooltip } = useHoverTooltip<{
 	},
 });
 
-function showAbilityTooltip(event: MouseEvent, key: IChampionAbilityKey, variantIndex?: number, fromExtras = false, damageSource?: DamageSource) {
-	showChampionAbilityTooltip(event, { key, variantIndex, fromExtras, damageSource });
-}
+// TODO attrs from ability components
+// function showAbilityTooltip(event: MouseEvent, key: IChampionAbilityKey, variantIndex?: number, fromExtras = false, damageSource?: DamageSource) {
+// 	showChampionAbilityTooltip(event, { key, variantIndex, fromExtras, damageSource });
+// }
 
 const roleQuestHoverTooltipEl = useTemplateRef('roleQuestHoverTooltip');
-const { show: showQuestTooltip, hide: hideQuestTooltip } = useHoverTooltip({ el: roleQuestHoverTooltipEl });
+const { bind: bindQuestTooltipAttrs, hide: hideQuestTooltip } = useHoverTooltip({
+	el: roleQuestHoverTooltipEl,
+	beforeShow() {
+		return !!props.value.roleQuest.value;
+	},
+});
 
 function updateRoleQuest(value?: IChampionRole) {
 	props.value.roleQuest.value = value;
@@ -815,14 +827,26 @@ const hoveredDragonThing = shallowRef<IHoveredDragonThing>();
 const dragonHoverTooltipEl = useTemplateRef('dragonHoverTooltip');
 const dragonTooltipFromExtras = shallowRef(false);
 
-const { show: showDragonTooltip, hide: hideDragonTooltip } = useHoverTooltip<{
-	dragonName: IDragonName;
+const {
+	bind: bindDragonTooltipAttrs,
+	show: showDragonTooltip,
+	hide: hideDragonTooltip,
+} = useHoverTooltip<{
+	stackIndex?: number;
+	dragonName?: IDragonName;
 	subtype: IDragonAbilityId['subtype'];
 	fromExtras?: boolean;
 }>({
 	el: () => dragonHoverTooltipEl.value?.el,
+	beforeShow({ stackIndex, dragonName }) {
+		if (stackIndex !== undefined) {
+			return !!props.value.dragonStacks.value[stackIndex - 1];
+		} else if (stackIndex !== undefined) {
+			return !!dragonName;
+		}
+	},
 	onShow({ dragonName, subtype, fromExtras = false }) {
-		hoveredDragonThing.value = [dragonName, subtype];
+		hoveredDragonThing.value = [dragonName!, subtype];
 		dragonTooltipFromExtras.value = fromExtras;
 	},
 });
@@ -841,7 +865,7 @@ const activeEffects = computed<[IComputedAppliedEffect, number][]>(() => props.v
 const hoveredEffect = shallowRef<IComputedAppliedEffect>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-const { show: showEffectTooltip, hide: hideEffectTooltip } = useHoverTooltip<IComputedAppliedEffect>({
+const { bind: bindEffectTooltipAttrs, hide: hideEffectTooltip } = useHoverTooltip<IComputedAppliedEffect>({
 	el: () => effectHoverTooltipEl.value?.el,
 	onShow(effect) {
 		hoveredEffect.value = effect;
@@ -1037,7 +1061,7 @@ defineExpose({ el });
 								? 0 ^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 1 : 0) ^ ((value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 2 : 0)
 								: undefined
 						"
-						@mouseenter="value.items.value[i - 1] && showItemTooltip($event, { index: i - 1 })"
+						v-bind="bindItemTooltip({ index: i - 1 })"
 						@click.right="removeItem($event, i - 1)"
 						@dragstart="startItemDrag($event, i - 1)"
 					>
@@ -1087,11 +1111,11 @@ defineExpose({ el });
 				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
-						<dt :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)">
+						<dt :inert="!enableUnimplementedUi && runeIndex !== 6" v-bind="bindRuneTooltipAttrs(championRune)">
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
 							<img v-if="championRune" :src="championRune.icon" :width="championRune.iconDimensions || 80" :height="championRune.iconDimensions || 80" loading="lazy" />
 						</dt>
-						<dd :inert="!enableUnimplementedUi && runeIndex !== 6" @mouseenter="championRune && showRuneTooltip($event, championRune)">
+						<dd :inert="!enableUnimplementedUi && runeIndex !== 6" v-bind="bindRuneTooltipAttrs(championRune)">
 							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>
@@ -1107,11 +1131,11 @@ defineExpose({ el });
 				<h4>stats</h4>
 				<dl v-for="(stats, statKindIndex) in [minorStats, majorStats]" :key="statKindIndex">
 					<template v-for="stat in stats" :key="stat.name">
-						<dt @mouseenter="showChampionStatTooltip($event, stat)">
+						<dt v-bind="bindChampionStatTooltipAttrs(stat)">
 							<span>{{ stat.name }}</span>
 							<img v-bind="textureBgImageAttrs(UI.playerStats[stat.iconTextureKey]!, 20)" />
 						</dt>
-						<dd :class="{ 'has-bonus': stat.hasBonus }" @mouseenter="showChampionStatTooltip($event, stat)">
+						<dd :class="{ 'has-bonus': stat.hasBonus }" v-bind="bindChampionStatTooltipAttrs(stat)">
 							{{ stat.displayedValue }}
 						</dd>
 					</template>
@@ -1143,7 +1167,7 @@ defineExpose({ el });
 					<img v-bind="textureBgImageAttrs(UI.practiceTool.statusEffect, 24)" />
 				</button>
 				<ul ref="effectsList">
-					<li v-for="[effect, effectIndex] in activeEffects" :key="effect.abilityId.id" @mouseenter="showEffectTooltip($event, effect)">
+					<li v-for="[effect, effectIndex] in activeEffects" :key="effect.abilityId.id" v-bind="bindEffectTooltipAttrs(effect)">
 						<span>{{ effect.specific.label }}</span>
 						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)" @click.middle.prevent="recalculateEffect(effectIndex)">
 							<img v-show="effect.imgData" v-bind="gameImageAttrs(effect.imgData, 22)" loading="lazy" />
@@ -1157,13 +1181,9 @@ defineExpose({ el });
 			</section>
 			<section ref="abilities" class="abilities" :inert="value.isLoading.value">
 				<h4>abilties</h4>
-				<ChampionApheliosAbilities
-					v-if="value.listedChampion.value?.id === 'Aphelios'"
-					:id-suffix
-					:value
-					:is-loading="value.isLoading.value"
-					@ability-hover="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, false, args[2])"
-				/>
+				<ChampionApheliosAbilities v-if="value.listedChampion.value?.id === 'Aphelios'" :id-suffix :value :is-loading="value.isLoading.value" />
+				<!-- TODO -->
+				<!-- @ability-hover="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, false, args[2])" -->
 				<template v-else>
 					<div data-ability="passive">
 						<h5>passive</h5>
@@ -1173,7 +1193,7 @@ defineExpose({ el });
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
-							@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
+							v-bind="bindChampionAbilityTooltipAttrs({ key: 'passive' })"
 						/>
 						<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
 					</div>
@@ -1193,7 +1213,7 @@ defineExpose({ el });
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
-							@mouseenter="value.champion.value && showAbilityTooltip($event, abilityKey)"
+							v-bind="bindChampionAbilityTooltipAttrs({ key: abilityKey })"
 						/>
 						<VButtonRadiogroup
 							v-if="value.champion.value"
@@ -1270,7 +1290,7 @@ defineExpose({ el });
 						label="role quest"
 						clearable
 						@update:model-value="updateRoleQuest"
-						@label-mouseenter="value.roleQuest.value && showQuestTooltip($event)"
+						:tooltip-trigger-attrs="bindQuestTooltipAttrs()"
 					>
 						<template v-if="value.roleQuest.value">
 							<img :src="`https://raw.communitydragon.org/${vMinor}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`" width="64" height="64" loading="lazy" aria-hidden="true" />
@@ -1296,7 +1316,7 @@ defineExpose({ el });
 						clearable
 						:aria-errormessage="`dragon-tooltip-error-${idSuffix}`"
 						@update:model-value="updateDragonThing($event, 'stack', i - 1)"
-						@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, { dragonName: value.dragonStacks.value[i - 1]!, subtype: 'stack' })"
+						:tooltip-trigger-attrs="bindDragonTooltipAttrs({ stackIndex: i, dragonName: value.dragonStacks.value[i - 1]!, subtype: 'stack' })"
 					>
 						<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(UI.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
 						<template #post>
@@ -1315,7 +1335,7 @@ defineExpose({ el });
 						clearable
 						:aria-errormessage="`dragon-tooltip-error-${idSuffix}`"
 						@update:model-value="updateDragonThing($event, 'soul')"
-						@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, { dragonName: value.dragonSoul.value, subtype: 'soul' })"
+						:tooltip-trigger-attrs="bindDragonTooltipAttrs(() => ({ dragonName: value.dragonSoul.value, subtype: 'soul' }))"
 					>
 						<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(UI.dragons[value.dragonSoul.value].soulActive, 44)" />
 						<template #post>
@@ -1339,7 +1359,9 @@ defineExpose({ el });
 			</div>
 			<section ref="extras" class="extras" :inert="value.isLoading.value">
 				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
-					<component :is :id-suffix :damage-source="value" @img-mouseenter="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, true, args[2])" />
+					<component :is :id-suffix :damage-source="value" />
+					<!-- TODO -->
+					<!-- @img-mouseenter="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, true, args[2])" -->
 					<template #fallback>
 						<ExtraLoading />
 					</template>
@@ -1351,7 +1373,7 @@ defineExpose({ el });
 					:id-suffix
 					:damage-source="value"
 					:ability-id
-					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showDragonTooltip(mouseEvent, { dragonName: abilityId.id, subtype: abilityId.subtype, fromExtras: true })"
+					:tooltip-trigger-attrs="bindDragonTooltipAttrs({ dragonName: abilityId.id, subtype: abilityId.subtype, fromExtras: true })"
 				/>
 				<component
 					:is
@@ -1360,7 +1382,7 @@ defineExpose({ el });
 					:id-suffix
 					:damage-source="value"
 					:ability-id="GameAbilityId.build(AbilityType.item, itemId)"
-					@img-mouseenter="showItemTooltip($event, { index: itemIndex, fromExtras: true })"
+					:tooltip-trigger-attrs="bindItemTooltip({ index: itemIndex, fromExtras: true })"
 				/>
 			</section>
 		</details>

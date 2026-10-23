@@ -125,15 +125,8 @@ export interface IExtraComponentProps {
 	idSuffix: string;
 	/** it's not consistently provided and shouldn't really be relied upon. It's mostly declared so that there's no `ability-id="[Object object]"` in the dom. Used by tear item extra, provided in scoreboard item */
 	abilityId?: IGameAbilityId;
-	/*
-	 * declared both here and in emits to override the listener attaching onto actual extra component
-	 * as in without it 2 `@img-mouseenter` events happen, one from something like `VExtraBoolean.vue`, other from `booleanExtra()` wrapper
-	 */
-	onImgMouseenter?: (...args: IExtraComponentEmits['imgMouseenter']) => void;
-}
-
-export interface IExtraComponentEmits<T = IGameAbilityId> {
-	imgMouseenter: [event: MouseEvent, abilityId: T, damageSource?: DamageSource];
+	/** `useHoverTooltip().bind` that will be put on the component's image */
+	tooltipTriggerAttrs?: any;
 }
 
 export interface ISpecificComponents {

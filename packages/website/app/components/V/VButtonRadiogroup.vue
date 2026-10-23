@@ -7,11 +7,10 @@ const props = defineProps<{
 	titleKey?: keyof T | '';
 	required?: boolean;
 	clearValue?: T[ValueKey];
+	optionBindTooltipTriggerAttrs?: (value: T) => any;
 }>();
 
 defineEmits<{
-	optionMouseenter: [event: MouseEvent, option: T];
-	optionFocus: [event: FocusEvent, option: T];
 	optionRightClick: [event: MouseEvent, option: T];
 }>();
 
@@ -64,8 +63,7 @@ function selectOption(tab: T[ValueKey]) {
 			:title="titleKey !== '' ? (option[titleKey || valueKey] as string) : undefined"
 			:tabindex="(!value && index === 0) || value === option[valueKey] ? 0 : -1"
 			:aria-checked="value === option[valueKey]"
-			@mouseenter="$emit('optionMouseenter', $event, option)"
-			@focus="$emit('optionFocus', $event, option)"
+			v-bind="optionBindTooltipTriggerAttrs?.(option)"
 			@click="selectOption(option[valueKey])"
 			@click.right="$emit('optionRightClick', $event, option)"
 		>

@@ -7,10 +7,7 @@ defineProps<{
 	label: string;
 	options: [value: number, label: string | number][];
 	disabled?: boolean;
-}>();
-
-defineEmits<{
-	imgMouseenter: [event: MouseEvent];
+	tooltipTriggerAttrs?: any;
 }>();
 
 const value = defineModel<number>();
@@ -22,7 +19,7 @@ function updateValue(event: Event) {
 
 <template>
 	<article class="calc-extra-enum">
-		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
+		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
 		<label :for="`xtrenum-${idSuffix}`">
 			{{ label }}
 		</label>

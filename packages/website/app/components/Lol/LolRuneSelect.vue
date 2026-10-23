@@ -201,7 +201,7 @@ const { isTooltipExpanded, isTooltipPinned } = useTooltipState();
 const runeDescriptionTooltip = useTemplateRef('runeDescriptionTooltip');
 let currentTooltipAnchor: HTMLElement | undefined;
 
-const { show: showRuneTooltip } = useHoverTooltip<IHoveredRuneOption>({
+const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IHoveredRuneOption>({
 	el: runeDescriptionTooltip,
 	onShow(rune, event) {
 		currentTooltipAnchor = event.currentTarget as HTMLElement;
@@ -256,8 +256,7 @@ defineExpose({
 				value-key="name"
 				title-key=""
 				data-path=""
-				@option-mouseenter="showRuneTooltip"
-				@option-focus="showRuneTooltip"
+				:option-bind-tooltip-trigger-attrs="bindRuneTooltipAttrs"
 				@update:model-value="updateValue(['paths', 'primary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -275,8 +274,7 @@ defineExpose({
 				:data-keystone="slotIndex === 0 ? '' : undefined"
 				value-key="name"
 				title-key=""
-				@option-mouseenter="showRuneTooltip"
-				@option-focus="showRuneTooltip"
+				:option-bind-tooltip-trigger-attrs="bindRuneTooltipAttrs"
 				@update:model-value="updateValue(['paths', 'primarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -296,8 +294,7 @@ defineExpose({
 				value-key="name"
 				title-key=""
 				data-path=""
-				@option-mouseenter="showRuneTooltip"
-				@option-focus="showRuneTooltip"
+				:option-bind-tooltip-trigger-attrs="bindRuneTooltipAttrs"
 				@update:model-value="updateValue(['paths', 'secondary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -320,8 +317,7 @@ defineExpose({
 				:options="Object.values(slots)"
 				value-key="name"
 				title-key=""
-				@option-mouseenter="showRuneTooltip"
-				@option-focus="showRuneTooltip"
+				:option-bind-tooltip-trigger-attrs="bindRuneTooltipAttrs"
 				@update:model-value="updateValue(['paths', 'secondarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -341,8 +337,7 @@ defineExpose({
 				:options="slots"
 				value-key="name"
 				title-key=""
-				@option-mouseenter="showRuneTooltip"
-				@option-focus="showRuneTooltip"
+				:option-bind-tooltip-trigger-attrs="bindRuneTooltipAttrs"
 				@update:model-value="updateValue(['shards', slotName], $event)"
 			>
 				<template #default="{ option: { title, icon } }">

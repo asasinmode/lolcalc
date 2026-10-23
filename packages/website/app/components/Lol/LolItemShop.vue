@@ -338,16 +338,27 @@ const itemTooltip = useTemplateRef('itemTooltip');
 const hoveredItem = shallowRef<IShopItem>();
 const hoveredItemShowMasterwork = ref(false);
 
-const { show: showItemTooltip, hide: hideItemTooltip } = useHoverTooltip<{ item: IShopItem; showMasterwork?: boolean }>({
+const {
+	bind: bindItemTooltip,
+	show: showItemTooltip,
+	hide: hideItemTooltip,
+} = useHoverTooltip<{ item?: IShopItem; showMasterwork?: boolean }>({
 	el: itemTooltip,
-	onShow({ item, showMasterwork = false }, event) {
-		const target = event.target as HTMLElement;
-		itemTooltipAnchor = target;
-		itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
+	beforeShow({ item }) {
+		return !!item;
+	},
+	onShow({ item, showMasterwork = false }, event, trigger) {
 		addItemTooltipViewListeners();
-		hoveredItem.value = item;
+		hoveredItem.value = item!;
 		hoveredItemShowMasterwork.value = showMasterwork;
-		'clientX' in event && updateTooltipPosition(event as MouseEvent);
+		if (event instanceof PointerEvent && event.pointerType === 'mouse') {
+			itemTooltipAnchor = trigger;
+			trigger.addEventListener('mousemove', updateTooltipPosition, { passive: true });
+			updateTooltipPosition(event);
+		} else {
+			/* touch/keyboard: no cursor to follow, but --height is still needed. Wait for the content + popover to render */
+			nextTick(updateTooltipHeight);
+		}
 	},
 	onHide() {
 		itemTooltipAnchor?.removeEventListener('mousemove', updateTooltipPosition);
@@ -356,22 +367,20 @@ const { show: showItemTooltip, hide: hideItemTooltip } = useHoverTooltip<{ item:
 	},
 });
 
+function updateTooltipHeight() {
+	itemTooltip.value?.style.setProperty('--height', `${itemTooltip.value.clientHeight}px`);
+}
+
 function updateTooltipPosition(event: MouseEvent) {
 	if (!isTooltipPinned.value) {
 		const { clientX, clientY } = event;
 		itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
 		itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
-		itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
+		updateTooltipHeight();
 	}
 }
 
-watch([isTooltipExpanded, itemHoverTooltipView], () =>
-	nextTick(() => {
-		if (itemTooltip.value) {
-			itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
-		}
-	}),
-);
+watch([isTooltipExpanded, itemHoverTooltipView], () => nextTick(updateTooltipHeight));
 
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
 
@@ -599,7 +608,7 @@ defineExpose({
 							:class="{
 								selected: searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
 							}"
-							@mouseenter="showItemTooltip($event, { item: shopItem })"
+							v-bind="bindItemTooltip({ item: shopItem })"
 							@click="selectSearchResult(index, false)"
 							@click.right.prevent="selectSearchResult(index, true)"
 							@dblclick="selectSearchResult(index, true)"
@@ -704,7 +713,7 @@ defineExpose({
 								:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
-								@mouseenter="showItemTooltip($event, { item: shopItem })"
+								v-bind="bindItemTooltip({ item: shopItem })"
 								@click="selectItem(shopItem, true)"
 								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
 								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
@@ -731,7 +740,7 @@ defineExpose({
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
 							:data-legendary="shopItem.isLegendary ? '' : undefined"
-							@mouseenter="showItemTooltip($event, { item: shopItem })"
+							v-bind="bindItemTooltip({ item: shopItem })"
 							@click="selectItem(shopItem, true)"
 							@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
 							@dblclick="buyItem(shopItem.item, shopItem.buyability)"
@@ -764,7 +773,7 @@ defineExpose({
 						:data-buyability="buildsIntoItems[i - 1]?.buyability"
 						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[i - 1]?.isLegendary ? '' : undefined"
-						@mouseenter="buildsIntoItems[i - 1] && showItemTooltip($event, { item: buildsIntoItems[i - 1]! })"
+						v-bind="bindItemTooltip({ item: buildsIntoItems[i - 1]! })"
 						@click="selectItem(buildsIntoItems[i - 1]!, true)"
 						@click.right.prevent="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
 						@dblClick="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
@@ -790,7 +799,7 @@ defineExpose({
 						:data-buyability="buildsIntoItems[6]?.buyability"
 						:data-bought="buildsIntoItems[6]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[6]?.isLegendary ? '' : undefined"
-						@mouseenter="buildsIntoItems[6] && showItemTooltip($event, { item: buildsIntoItems[6]! })"
+						v-bind="bindItemTooltip({ item: buildsIntoItems[6]! })"
 						@click="selectItem(buildsIntoItems[6]!, true)"
 						@click.right.prevent="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 						@dblClick="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
@@ -815,7 +824,7 @@ defineExpose({
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
 								:data-legendary="shopItem.isLegendary ? '' : undefined"
-								@mouseenter="showItemTooltip($event, { item: shopItem })"
+								v-bind="bindItemTooltip({ item: shopItem })"
 								@click="selectBuildsIntoMoreItem(shopItem)"
 								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
 								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
@@ -836,7 +845,7 @@ defineExpose({
 						:shop-item="displayedItem"
 						:data-legendary="displayedItem.isLegendary ? '' : undefined"
 						:class="{ selected: selectedItem?.item.id === displayedItem.item.id }"
-						@mouseenter="showItemTooltip($event, { item: displayedItem })"
+						v-bind="bindItemTooltip({ item: displayedItem })"
 						@click="selectItem(displayedItem, false)"
 						@click.right.prevent="buyItem(displayedItem.item, displayedItem.buyability)"
 						@dblclick="buyItem(displayedItem.item, displayedItem.buyability)"
@@ -853,7 +862,7 @@ defineExpose({
 								component
 								:shop-item="secondLevelBuildsFromItem"
 								:class="{ selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id }"
-								@mouseenter="showItemTooltip($event, { item: secondLevelBuildsFromItem })"
+								v-bind="bindItemTooltip({ item: secondLevelBuildsFromItem })"
 								@click="selectItem(secondLevelBuildsFromItem, false)"
 								@click.right.prevent="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 								@dblclick="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
@@ -866,7 +875,7 @@ defineExpose({
 										:class="{
 											selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id,
 										}"
-										@mouseenter="showItemTooltip($event, { item: thirdLevelBuildsFromItem })"
+										v-bind="bindItemTooltip({ item: thirdLevelBuildsFromItem })"
 										@click="selectItem(thirdLevelBuildsFromItem, false)"
 										@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 										@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
@@ -879,7 +888,7 @@ defineExpose({
 												:class="{
 													selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id,
 												}"
-												@mouseenter="showItemTooltip($event, { item: fourthLevelBuildsFromItem })"
+												v-bind="bindItemTooltip({ item: fourthLevelBuildsFromItem })"
 												@click="selectItem(fourthLevelBuildsFromItem, false)"
 												@click.right.prevent="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
 												@dblclick="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
@@ -916,7 +925,7 @@ defineExpose({
 									masterwork: damageSource && isMasterworkSlot(damageSource, i - 1),
 								}"
 								:draggable="targetShopItems[i - 1] ? 'true' : undefined"
-								@mouseenter="targetShopItems[i - 1] && showItemTooltip($event, { item: targetShopItems[i - 1]!, showMasterwork: true })"
+								v-bind="bindItemTooltip(() => ({ item: targetShopItems[i - 1]!, showMasterwork: isMasterworkSlot(damageSource, i - 1) }))"
 								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true, i - 1)"
 								@click.right="targetShopItems[i - 1] && sellItem($event, i - 1)"
 								@dragstart="onItemDragstart($event, i - 1)"

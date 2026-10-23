@@ -14,22 +14,19 @@ withDefaults(
 		/** disabled but only visually */
 		inactive?: boolean;
 		tooltip?: string;
+		tooltipTriggerAttrs?: any;
 	}>(),
 	{
 		min: 0,
 	},
 );
 
-defineEmits<{
-	imgMouseenter: [event: MouseEvent];
-}>();
-
 const value = defineModel<number>();
 </script>
 
 <template>
 	<article class="calc-extra-number" :data-inactive="inactive || undefined">
-		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
+		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
 		<label :for="`xtrnmbr-${idSuffix}`">
 			{{ label }}
 			<InfoTooltip id-prefix="xtrnmbr" :id-suffix :tooltip />

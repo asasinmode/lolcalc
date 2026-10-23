@@ -9,10 +9,7 @@ const props = defineProps<{
 	clearable?: boolean;
 	required?: boolean;
 	ariaErrormessage?: string;
-}>();
-
-defineEmits<{
-	labelMouseenter: [event: MouseEvent];
+	tooltipTriggerAttrs?: any;
 }>();
 
 const value = defineModel<T>();
@@ -36,7 +33,7 @@ function clear(event: MouseEvent) {
 			:aria-invalid="ariaErrormessage ? true : undefined"
 			@change="value = (($event.target as HTMLSelectElement).value as T) || undefined"
 			@click.right="clear"
-			@mouseenter="$emit('labelMouseenter', $event)"
+			v-bind="tooltipTriggerAttrs"
 		>
 			<option v-if="clearable" value="" :selected="value === undefined">&lt;none&gt;</option>
 			<template v-if="Array.isArray(options)">

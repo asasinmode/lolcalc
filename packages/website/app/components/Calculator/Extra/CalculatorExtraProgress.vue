@@ -10,15 +10,12 @@ const props = withDefaults(
 		deriveValue: (value: number) => number | undefined;
 		derivedSymbolSuffix?: string;
 		max?: number;
+		tooltipTriggerAttrs?: any;
 	}>(),
 	{
 		max: 100,
 	},
 );
-
-defineEmits<{
-	imgMouseenter: [event: MouseEvent];
-}>();
 
 const value = defineModel<number>();
 const localValue = ref(value.value);
@@ -49,7 +46,7 @@ const derivedValue = computed(() => {
 
 <template>
 	<article class="calc-extra-progress">
-		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
+		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
 		<label :for="`xtrprgr-${idSuffix}`">
 			{{ label }}
 		</label>

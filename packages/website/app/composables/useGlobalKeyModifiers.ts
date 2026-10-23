@@ -44,6 +44,13 @@ export function _setupGlobalKeyModifiers() {
 		}
 	}
 
+	const { isTooltipPinned, isTooltipExpanded, isTooltipAugmented, isPopoverHintSupported, isTooltipHoverMode } = useTooltipState();
+
+	let hoverMatchMedia: MediaQueryList | undefined;
+	function updateHoverMatchMedia(event: MediaQueryListEvent) {
+		isTooltipHoverMode.value = event.matches;
+	}
+
 	onMounted(() => {
 		globalKeyModifiers.value.shift = false;
 		globalKeyModifiers.value.alt = false;
@@ -51,15 +58,22 @@ export function _setupGlobalKeyModifiers() {
 		window.addEventListener('keydown', pressModifier, { passive: true });
 		window.addEventListener('keyup', releaseModifier, { passive: true });
 		window.addEventListener('mousedown', mouseDownUpdateModifiers, { passive: true });
+
+		const maybePopover = document.createElement('div');
+		maybePopover.popover = 'hint';
+		isPopoverHintSupported.value = maybePopover.popover === 'hint';
+
+		hoverMatchMedia = window.matchMedia('(hover: hover) and (pointer: fine)');
+		isTooltipHoverMode.value = hoverMatchMedia.matches;
+		hoverMatchMedia.addEventListener('change', updateHoverMatchMedia);
 	});
 
 	onBeforeUnmount(() => {
 		window.removeEventListener('keydown', pressModifier);
 		window.removeEventListener('keyup', releaseModifier);
 		window.removeEventListener('mousedown', mouseDownUpdateModifiers);
+		hoverMatchMedia?.removeEventListener('change', updateHoverMatchMedia);
 	});
-
-	const { isTooltipPinned, isTooltipExpanded, isTooltipAugmented } = useTooltipState();
 
 	watch(
 		() => globalKeyModifiers.value.shift,

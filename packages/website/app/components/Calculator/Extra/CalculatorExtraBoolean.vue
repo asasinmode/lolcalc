@@ -8,10 +8,7 @@ defineProps<{
 	labelPrefixApply?: boolean;
 	tooltip?: string;
 	inactive?: boolean;
-}>();
-
-defineEmits<{
-	imgMouseenter: [event: MouseEvent];
+	tooltipTriggerAttrs?: any;
 }>();
 
 const value = defineModel<number>();
@@ -19,7 +16,7 @@ const value = defineModel<number>();
 
 <template>
 	<article class="calc-extra-boolean" :data-inactive="inactive || undefined">
-		<img v-bind="gameImageAttrs(imgSrc, 56)" aria-hidden="true" @mouseenter="$emit('imgMouseenter', $event)" />
+		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
 		<input :id="`xtrbln-${idSuffix}`" v-model="value" type="checkbox" :true-value="1" :false-value="0" />
 		<label :for="`xtrbln-${idSuffix}`">
 			{{ labelPrefixApply ? 'apply ' : '' }}{{ label }}

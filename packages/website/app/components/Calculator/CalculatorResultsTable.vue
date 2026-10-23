@@ -34,7 +34,7 @@ const { championImage, abilityImage, championImageSize, abilityImageSize } = CHA
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
-const { showTooltip: showRowTooltip, hideTooltip: hideRowTooltip } = useInfoTooltip();
+const { bindTrigger: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
 const { vMinor } = PATCH_VERSION;
 const { isTooltipExpanded } = useTooltipState();
 
@@ -1082,8 +1082,17 @@ function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSect
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
 let hoveredSectionPopoverEl: HTMLElement | undefined;
 
-const { show: showSectionTooltip } = useHoverTooltip({
+const { bind: bindSectionHoverTooltip } = useHoverTooltip<{ index: number; section: IDamageResultTableSection }>({
 	el: () => hoveredSectionPopoverEl,
+	beforeShow({ index, section }, trigger) {
+		if (!sectionHasTooltip(index, section)) return false;
+		const popover = trigger.querySelector<HTMLElement>('[popover]');
+		if (popover) {
+			hoveredSectionType = section.abilityId.type;
+			hoveredSectionPopoverEl = popover;
+			return true;
+		}
+	},
 	onShow() {
 		hoveredSectionType === 'item' && addItemTooltipViewListeners();
 	},
@@ -1092,15 +1101,6 @@ const { show: showSectionTooltip } = useHoverTooltip({
 		hoveredSectionType === 'item' && removeItemTooltipViewListeners();
 	},
 });
-
-function showSectionHoverTooltip(event: MouseEvent, abilityId: IDamageResultTableSection['abilityId']['type']) {
-	hoveredSectionType = abilityId;
-	const popover = (event.target as HTMLElement).querySelector('[popover]');
-	if (popover) {
-		hoveredSectionPopoverEl = popover as HTMLElement;
-		showSectionTooltip(event);
-	}
-}
 
 interface IColumnAddableOption {
 	championOptionIndex?: number;
@@ -1506,7 +1506,7 @@ defineExpose({
 							</button>
 						</td>
 						<th :id="`results-table-section-header-${section.id}`" scope="colgroup" :colspan="1 + resultColumns.length">
-							<div @mouseenter="sectionHasTooltip(index, section) && showSectionHoverTooltip($event, section.abilityId.type)">
+							<div v-bind="bindSectionHoverTooltip({ index, section })">
 								<img v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)" aria-hidden="true" />
 								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
 								<template v-if="sectionHasTooltip(index, section)">
@@ -1571,41 +1571,17 @@ defineExpose({
 							<img v-if="row.image" v-bind="gameImageAttrs(row.image, 24)" aria-hidden="true" />
 							<span v-if="row.isUnknown">unknown</span>
 							{{ row.name }}
-							<span
-								v-if="row.isCustom"
-								:aria-describedby="`${section.id}-${row.id}-tooltip-custom`"
-								tabindex="0"
-								class="info-tooltip-trigger"
-								@focus="showRowTooltip($event, true)"
-								@mouseenter="showRowTooltip($event, true)"
-								@blur="hideRowTooltip($event, true)"
-							>
+							<span v-if="row.isCustom" :aria-describedby="`${section.id}-${row.id}-tooltip-custom`" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs()">
 								<img src="/logo_dark.webp" alt="lolcalc logo" width="192" height="192" />
 							</span>
-							<p :id="`${section.id}-${row.id}-tooltip-custom`" popover="hint" class="hover-tooltip" @focus="showRowTooltip($event, false)" @mouseenter="showRowTooltip($event, false)" @focusout="hideRowTooltip($event, false)">
+							<p :id="`${section.id}-${row.id}-tooltip-custom`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
 								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existing one
 							</p>
-							<span
-								v-if="row.additionalInfo"
-								:aria-describedby="`${section.id}-${row.id}-tooltip-info`"
-								class="info-tooltip-trigger"
-								tabindex="0"
-								@focus="showRowTooltip($event, true)"
-								@mouseenter="showRowTooltip($event, true)"
-								@blur="hideRowTooltip($event, true)"
-							>
+							<span v-if="row.additionalInfo" :aria-describedby="`${section.id}-${row.id}-tooltip-info`" class="info-tooltip-trigger" tabindex="0" v-bind="bindInfoTriggerAttrs()">
 								<span>additional info</span>
 								<Icon class="i-ph:info-fill" />
 							</span>
-							<p
-								:id="`${section.id}-${row.id}-tooltip-info`"
-								popover="hint"
-								class="hover-tooltip game-description"
-								@focus="showRowTooltip($event, false)"
-								@mouseenter="showRowTooltip($event, false)"
-								@focusout="hideRowTooltip($event, false)"
-								v-html="row.additionalInfo"
-							/>
+							<p :id="`${section.id}-${row.id}-tooltip-info`" popover="hint" class="hover-tooltip game-description" v-bind="bindInfoPopoverAttrs()" v-html="row.additionalInfo" />
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section, row)"

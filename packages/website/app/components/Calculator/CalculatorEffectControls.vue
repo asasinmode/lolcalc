@@ -17,30 +17,23 @@ function refresh() {
 
 let popoverEl: HTMLElement | undefined;
 
-const { show: showHoverTooltip, hide: hideHoverTooltip } = useHoverTooltip({
+const { bind: bindTooltipAttrs } = useHoverTooltip({
 	el: () => popoverEl,
+	beforeShow(_, trigger) {
+		const popover = trigger.lastElementChild as HTMLElement | null;
+		if (popover) {
+			popoverEl = popover;
+			return true;
+		}
+	},
 	onHide() {
 		popoverEl = undefined;
 	},
 });
-
-function showControlsTooltip(event: Event) {
-	const popover = (event.currentTarget as HTMLElement).lastElementChild as HTMLElement | null;
-	if (popover) {
-		popoverEl = popover;
-		showHoverTooltip(event);
-	}
-}
-
-function onFocusout(event: FocusEvent) {
-	if (!event.relatedTarget || !(event.currentTarget as HTMLElement)?.contains(event.relatedTarget as HTMLElement)) {
-		hideHoverTooltip();
-	}
-}
 </script>
 
 <template>
-	<div class="effect-ctl" @mouseenter="showControlsTooltip" @focusin="showControlsTooltip" @focusout="onFocusout">
+	<div class="effect-ctl" v-bind="bindTooltipAttrs()">
 		<button class="pretend-ui-btn" @click="refresh">
 			<span>refresh</span>
 			<Icon class="i-ph:arrow-clockwise-bold" :style="`--clicks: ${clicks}`" />

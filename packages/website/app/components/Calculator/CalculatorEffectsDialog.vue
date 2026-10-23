@@ -170,7 +170,7 @@ const hoveringApplied = ref(false);
 const hoveredEffectTooltipOverrideDamageSource = shallowRef<DamageSource>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-const { show: showTooltip, hide: hideTooltip } = useHoverTooltip<{
+const { bind: bindTooltipAttrs } = useHoverTooltip<{
 	effectId: IEffectAbilityId;
 	isApplied: boolean;
 	appliedEffect?: IDamageSourceEffect;
@@ -301,7 +301,7 @@ defineExpose({
 						:damage-source
 						:data-ability-id="effect.abilityId.id"
 						id-suffix="effects-dialog-applied"
-						@img-mouseenter="(event: MouseEvent) => damageSource && showTooltip(event, { effectId: effect.abilityId, isApplied: true, appliedEffect: effect })"
+						v-bind="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: true, appliedEffect: effect })"
 					>
 						<button class="pretend-ui-btn remove" title="remove" @click="damageSource?.removeEffect(effect.abilityId.id)">
 							<span>remove</span>
@@ -325,7 +325,7 @@ defineExpose({
 							:damage-source
 							id-suffix="effects-dialog-all"
 							:data-ability-id="effect.abilityId.id"
-							@img-mouseenter="showTooltip($event, { effectId: effect.abilityId, isApplied: false })"
+							v-bind="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: false })"
 						/>
 						<template #fallback>
 							<ExtraLoading />
