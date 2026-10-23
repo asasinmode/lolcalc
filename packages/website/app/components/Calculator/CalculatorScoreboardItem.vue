@@ -19,6 +19,7 @@ import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } fr
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import { toValue } from 'vue';
+import type { IScoreboardItemChampionAbilityTooltipShowData } from '@/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
@@ -763,12 +764,7 @@ const hoveredAbilityDamageSource = shallowRef<DamageSource>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 const abilityTooltipFromExtras = ref(false);
 
-const { bind: bindChampionAbilityTooltipAttrs, show: showChampionAbilityTooltip } = useHoverTooltip<{
-	key: IChampionAbilityKey;
-	variantIndex?: number;
-	fromExtras?: boolean;
-	damageSource?: DamageSource;
-}>({
+const { bind: bindChampionAbilityTooltipAttrs, show: showChampionAbilityTooltip } = useHoverTooltip<IScoreboardItemChampionAbilityTooltipShowData>({
 	el: () => abilityHoverTooltipEl.value?.el,
 	beforeShow() {
 		return !!props.value.champion.value;
@@ -1181,9 +1177,14 @@ defineExpose({ el });
 			</section>
 			<section ref="abilities" class="abilities" :inert="value.isLoading.value">
 				<h4>abilties</h4>
-				<ChampionApheliosAbilities v-if="value.listedChampion.value?.id === 'Aphelios'" :id-suffix :value :is-loading="value.isLoading.value" />
-				<!-- TODO -->
-				<!-- @ability-hover="(...args: IShowTooltipEventArgs) => showAbilityTooltip(args[0], args[1].abilityKey, args[1].abilityVariantIndex, false, args[2])" -->
+				<ChampionApheliosAbilities
+					v-if="value.listedChampion.value?.id === 'Aphelios'"
+					:id-suffix
+					:value
+					:is-loading="value.isLoading.value"
+					:bind-tooltip-trigger-attrs="bindChampionAbilityTooltipAttrs"
+					:show-tooltip="showChampionAbilityTooltip"
+				/>
 				<template v-else>
 					<div data-ability="passive">
 						<h5>passive</h5>

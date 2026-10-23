@@ -3,6 +3,7 @@ import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '@lolc
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IReplacedGameVariable, IVariableMeta } from '@lolcalc/core/variables/game';
 import type { IItem } from '@lolcalc/data/types';
+import type { IChampionAbilityKey } from '@lolcalc/shared/index';
 
 export interface IDamageResultTableSection {
 	/** stringified `GameAbilityId` or freestyled for `all` */
@@ -132,4 +133,11 @@ export interface IExtraComponentProps {
 export interface ISpecificComponents {
 	extras?: Component | Component[];
 	effects?: Component | Component[];
+}
+
+export interface IScoreboardItemChampionAbilityTooltipShowData {
+	key: IChampionAbilityKey;
+	variantIndex?: number;
+	fromExtras?: boolean;
+	damageSource?: DamageSource;
 }

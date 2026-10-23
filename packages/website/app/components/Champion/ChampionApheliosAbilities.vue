@@ -1,11 +1,9 @@
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
-import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IChampionAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
 import type Aphelios from '@lolcalc/data/files/champion/Aphelios.json';
-import type { IExtraComponentEmits } from '~/utils/types';
+import type { IScoreboardItemChampionAbilityTooltipShowData } from '~/utils/types';
 
 type IAphelios = typeof Aphelios;
 
@@ -13,17 +11,12 @@ const props = defineProps<{
 	value: DamageSource<'Aphelios'>;
 	isLoading: boolean;
 	idSuffix: string;
-}>();
-
-const emit = defineEmits<{
-	abilityHover: IExtraComponentEmits<IChampionAbilityId>['imgMouseenter'];
+	bindTooltipTriggerAttrs: (data: MaybeRefOrGetter<IScoreboardItemChampionAbilityTooltipShowData>) => any;
+	showTooltip: (event: Event, data: IScoreboardItemChampionAbilityTooltipShowData) => void;
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
-
-const passiveAbilityId = GameAbilityId.build('champion', 'Aphelios', 'passive', 0);
-const rAbilityId = GameAbilityId.build('champion', 'Aphelios', 'r', 0);
 
 const abilitySize = abilityImageSize('Aphelios');
 
@@ -50,7 +43,8 @@ function swapMainOffhand(event: MouseEvent) {
 	abilityVariantsIndexes.q += abilityVariantsIndexes.w;
 	abilityVariantsIndexes.w = abilityVariantsIndexes.q - abilityVariantsIndexes.w;
 	abilityVariantsIndexes.q -= abilityVariantsIndexes.w;
-	emit('abilityHover', event, GameAbilityId.build('champion', 'Aphelios', 'e', abilityVariantsIndexes.w));
+
+	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w });
 }
 
 function replaceMainWithNext(event: MouseEvent) {
@@ -62,7 +56,7 @@ function replaceMainWithNext(event: MouseEvent) {
 	abilityVariantsIndexes.q = abilityVariantsIndexes.e;
 	abilityVariantsIndexes.e = newE;
 
-	emit('abilityHover', event, GameAbilityId.build('champion', 'Aphelios', 'e', abilityVariantsIndexes.e));
+	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w });
 }
 </script>
 
@@ -74,7 +68,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, passiveAbilityId)"
+			v-bind="bindTooltipTriggerAttrs({ key: 'passive' })"
 		/>
 		<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
 	</div>
@@ -86,7 +80,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.q))"
+			v-bind="bindTooltipTriggerAttrs(() => ({ key: 'e', variantIndex: value.abilityVariantsIndexes.value.q }))"
 		/>
 		<h5>Q</h5>
 		<img
@@ -94,13 +88,13 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'q', value.abilityVariantsIndexes.value.q))"
+			v-bind="bindTooltipTriggerAttrs(() => ({ key: 'q', variantIndex: value.abilityVariantsIndexes.value.q }))"
 		/>
 	</div>
 	<div class="aphelios-w" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
 		<h5 v-html="`offhand weapon: ${weaponNames.offhand}`" />
-		<button title="swap with main" @click="swapMainOffhand" @mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.w))">
+		<button title="swap with main" @click="swapMainOffhand" v-bind="bindTooltipTriggerAttrs(() => ({ key: 'e', variantIndex: value.abilityVariantsIndexes.value.w }))">
 			<span>swap with main</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.w]!.imageAlt, 'Aphelios') : undefined"
@@ -110,7 +104,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			/>
 		</button>
 		<h5 v-html="`next weapon: ${weaponNames.next}`" />
-		<button title="replace offhand" @mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))" @click="replaceMainWithNext">
+		<button title="replace offhand" v-bind="bindTooltipTriggerAttrs(() => ({ key: 'e', variantIndex: value.abilityVariantsIndexes.value.e }))" @click="replaceMainWithNext">
 			<span>replace offhand</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.e]!.imageAlt, 'Aphelios') : undefined"
@@ -127,7 +121,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, rAbilityId)"
+			v-bind="bindTooltipTriggerAttrs({ key: 'r' })"
 		/>
 		<div class="pretend-level-radiogroup">
 			<span>r level: {{ value.abilityLevels.value.r }}</span>
