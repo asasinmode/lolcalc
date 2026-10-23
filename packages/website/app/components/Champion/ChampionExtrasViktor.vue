@@ -33,18 +33,12 @@ function toggle(abilityIndex: number) {
 	}
 }
 
-const passiveAbilityId = GameAbilityId.build(AbilityType.champion, 'Viktor', 'passive', 0);
+const passiveTooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(GameAbilityId.build(AbilityType.champion, 'Viktor', 'passive', 0));
 </script>
 
 <template>
 	<article class="extras-viktor-passive-ability-upgrades">
-		<img
-			:src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')"
-			:width="imgSize"
-			:height="imgSize"
-			aria-hidden="true"
-			v-bind="(tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(passiveAbilityId)"
-		/>
+		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')" :width="imgSize" :height="imgSize" aria-hidden="true" v-bind="passiveTooltipTriggerBind" />
 		<h5>abilities evolved</h5>
 		<label v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]" :key="abilityKey" :for="`evolve-${abilityKey}-${idSuffix}`">
 			<input :id="`evolve-${abilityKey}-${idSuffix}`" type="checkbox" :checked="isEvolved(abilityIndex)" :disabled="abilityKey === 'r' && notAllBasicEvolved" @change="toggle(abilityIndex)" />

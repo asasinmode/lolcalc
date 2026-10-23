@@ -50,7 +50,7 @@ function swapMainOffhand(event: MouseEvent) {
 	abilityVariantsIndexes.w = abilityVariantsIndexes.q - abilityVariantsIndexes.w;
 	abilityVariantsIndexes.q -= abilityVariantsIndexes.w;
 
-	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w });
+	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w, fromExtras: false });
 }
 
 function replaceMainWithNext(event: MouseEvent) {
@@ -62,8 +62,15 @@ function replaceMainWithNext(event: MouseEvent) {
 	abilityVariantsIndexes.q = abilityVariantsIndexes.e;
 	abilityVariantsIndexes.e = newE;
 
-	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w });
+	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w, fromExtras: false });
 }
+
+const passiveTooltipTriggerBind = props.tooltipTriggerAttrs(passiveAbilityId, { fromExtras: false });
+const mainWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.q, fromExtras: false }));
+const qTooltipTriggerBind = props.tooltipTriggerAttrs(qAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.q, fromExtras: false }));
+const offhandWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.w, fromExtras: false }));
+const nextWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.e, fromExtras: false }));
+const rTooltipTriggerBind = props.tooltipTriggerAttrs(rAbilityId, { fromExtras: false });
 </script>
 
 <template>
@@ -74,7 +81,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="tooltipTriggerAttrs(passiveAbilityId)"
+			v-bind="passiveTooltipTriggerBind"
 		/>
 		<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
 	</div>
@@ -86,7 +93,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.q }))"
+			v-bind="mainWeaponTooltipTriggerBind"
 		/>
 		<h5>Q</h5>
 		<img
@@ -94,13 +101,13 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="tooltipTriggerAttrs(qAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.q }))"
+			v-bind="qTooltipTriggerBind"
 		/>
 	</div>
 	<div class="aphelios-w" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
 		<h5 v-html="`offhand weapon: ${weaponNames.offhand}`" />
-		<button title="swap with main" @click="swapMainOffhand" v-bind="tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.w }))">
+		<button title="swap with main" @click="swapMainOffhand" v-bind="offhandWeaponTooltipTriggerBind">
 			<span>swap with main</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.w]!.imageAlt, 'Aphelios') : undefined"
@@ -110,7 +117,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			/>
 		</button>
 		<h5 v-html="`next weapon: ${weaponNames.next}`" />
-		<button title="replace offhand" v-bind="tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: value.abilityVariantsIndexes.value.e }))" @click="replaceMainWithNext">
+		<button title="replace offhand" v-bind="nextWeaponTooltipTriggerBind" @click="replaceMainWithNext">
 			<span>replace offhand</span>
 			<img
 				:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.e]!.imageAlt, 'Aphelios') : undefined"
@@ -127,7 +134,7 @@ function replaceMainWithNext(event: MouseEvent) {
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			v-bind="tooltipTriggerAttrs(rAbilityId)"
+			v-bind="rTooltipTriggerBind"
 		/>
 		<div class="pretend-level-radiogroup">
 			<span>r level: {{ value.abilityLevels.value.r }}</span>

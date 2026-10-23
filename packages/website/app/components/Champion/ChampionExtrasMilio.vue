@@ -13,8 +13,6 @@ const imgSize = abilityImageSize('Viktor');
 const selectEl = useTemplateRef('select');
 const { sourceOptions, targetOptions } = useDamageSourceOptions();
 
-const passiveAbilityId = GameAbilityId.build(AbilityType.champion, 'Milio', 'passive', 0);
-
 const allySourceId = computed(() => (props.damageSource as DamageSource<'Milio'>).internalData.value.passiveAllySourceId);
 
 function updateAllyId(event: Event) {
@@ -27,17 +25,13 @@ onMounted(() => {
 		selectEl.value.value = allySourceId.value;
 	}
 });
+
+const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(GameAbilityId.build(AbilityType.champion, 'Milio', 'passive', 0));
 </script>
 
 <template>
 	<article class="calc-extra-enum extras-milio-passive-ally">
-		<img
-			:src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')"
-			:width="imgSize"
-			:height="imgSize"
-			aria-hidden="true"
-			v-bind="(tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(passiveAbilityId)"
-		/>
+		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')" :width="imgSize" :height="imgSize" aria-hidden="true" v-bind="tooltipTriggerBind" />
 		<label :for="`milio-passive-ally-${idSuffix}`"> Fired Up! target ally </label>
 		<select ref="select" :id="`milio-passive-ally-${idSuffix}`" :value="allySourceId" @change="updateAllyId">
 			<option value="0" :selected="allySourceId === '0'">none</option>

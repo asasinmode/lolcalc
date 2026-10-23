@@ -40,17 +40,13 @@ watch(
 	},
 	{ immediate: true },
 );
+
+const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'passive', 0));
 </script>
 
 <template>
 	<article class="extras-aphelios-ability-levels">
-		<img
-			:src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Aphelios')"
-			:width="imgSize"
-			:height="imgSize"
-			aria-hidden="true"
-			v-bind="(tooltipTriggerAttrs as Extract<IExtraComponentProps['tooltipTriggerAttrs'], Function>)?.(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'passive', 0))"
-		/>
+		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Aphelios')" :width="imgSize" :height="imgSize" aria-hidden="true" v-bind="tooltipTriggerBind" />
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup
 			v-for="abilityKey in ['q', 'w', 'e'] satisfies IChampionAbilityKey[]"
