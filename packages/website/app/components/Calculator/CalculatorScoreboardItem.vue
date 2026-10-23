@@ -837,11 +837,7 @@ const hoveredDragonThing = shallowRef<IHoveredDragonThing>();
 const dragonHoverTooltipEl = useTemplateRef('dragonHoverTooltip');
 const dragonTooltipFromExtras = shallowRef(false);
 
-const {
-	bind: bindDragonTooltipAttrs,
-	show: showDragonTooltip,
-	hide: hideDragonTooltip,
-} = useHoverTooltip<{
+const { bind: bindDragonTooltipAttrs, hide: hideDragonTooltip } = useHoverTooltip<{
 	stackIndex?: number;
 	dragonName?: IDragonName;
 	subtype: IDragonAbilityId['subtype'];
@@ -851,7 +847,7 @@ const {
 	beforeShow({ stackIndex, dragonName }) {
 		if (stackIndex !== undefined) {
 			return !!props.value.dragonStacks.value[stackIndex - 1];
-		} else if (stackIndex !== undefined) {
+		} else {
 			return !!dragonName;
 		}
 	},
