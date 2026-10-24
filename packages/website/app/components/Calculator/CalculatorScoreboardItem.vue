@@ -6,6 +6,7 @@ import { formatChampionStatValue } from '@lolcalc/core/DamageSource';
 import type { IChampionAbilityId, IDragonAbilityId, IGameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { replaceGameIcons } from '@lolcalc/core/misc';
+import { IMPLEMENTED_CHAMPION_IDS } from '@lolcalc/core/specifics/champion';
 import { cooldownReductionPercentageFromHaste } from '@lolcalc/core/specifics/champion/shared';
 import type { IHypotheticalMiscSpecifics } from '@lolcalc/core/specifics/misc';
 import { MISC_SPECIFICS } from '@lolcalc/core/specifics/misc';
@@ -94,6 +95,8 @@ const computedAbilityImages = computed(() => {
 			: {}
 	) as Partial<Record<IChampionAbilityKey, string>>;
 });
+
+const championNotImplemented = computed(() => props.value.listedChampion.value && !IMPLEMENTED_CHAMPION_IDS.includes(props.value.listedChampion.value.id));
 
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
@@ -975,6 +978,8 @@ function manipulateFromSelect(manipulateOption: string | undefined) {
 	nextTick(() => (manipulateValue.value = undefined));
 }
 
+const { bindTrigger: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
+
 defineExpose({ el });
 </script>
 
@@ -1200,6 +1205,17 @@ defineExpose({ el });
 			</section>
 			<section ref="abilities" class="abilities" :inert="value.isLoading.value">
 				<h4>abilties</h4>
+				<template v-if="championNotImplemented">
+					<span :aria-describedby="`not-implemented-${idSuffix}`" tabindex="0" class="info-tooltip-trigger warning" v-bind="bindInfoTriggerAttrs()">
+						<span>not fully implemented</span>
+						<Icon class="i-ph:warning-fill" />
+					</span>
+					<p :id="`not-implemented-${idSuffix}`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
+						This champion's QWER are not fully implemented yet. The numbers shown in the ability tooltips should reflect what the game shows but any passives they have are not calculated and in the <i>results table</i> their variables will
+						most likely be wrong. <br />
+						<NuxtLink to="/about#implemented-champions" target="_blank">list of fully implemented champions</NuxtLink>
+					</p>
+				</template>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
 					:id-suffix

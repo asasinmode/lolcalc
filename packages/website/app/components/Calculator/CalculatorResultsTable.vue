@@ -1543,8 +1543,8 @@ defineExpose({
 										<Icon class="i-ph:warning-fill" />
 									</span>
 									<p :id="`${section.id}-tooltip-not-implemented`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
-										This ability is not fully implemented. The values shown are most likely wrong (not factoring in target's resists, champion's heal and shield power, etc.).<br />
-										Check the <NuxtLink to="/about#implemented-champions" target="_blank">about page</NuxtLink> for a list of fully implemented champions.
+										This ability is not fully implemented. The values shown are most likely wrong (not factoring in target's resists, champion's heal and shield power, etc.)<br />
+										<NuxtLink to="/about#implemented-champions" target="_blank">list of fully implemented champions</NuxtLink>
 									</p>
 								</template>
 							</div>

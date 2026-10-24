@@ -78,7 +78,9 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		</ul>
 
 		<TextPageHeading id="implemented-champions" text="implemented champions" />
-		<p>These champions have been fully implemented so far. All of their abilities' passives should calculate correctly and their variables in the results table should factor in things like target resists, damage amplifiers or effects.</p>
+		<p>
+			These champions have been fully implemented so far. All of their abilities' passives are expected to calculate correctly and their variables in the <i>results table</i> should factor in things like target resists or item passives.
+		</p>
 		<ul id="implemented-champion-list" v-once>
 			<li v-for="championId in IMPLEMENTED_CHAMPION_IDS" :key="championId" :title="CHAMPIONS[championId].name">
 				{{ CHAMPIONS[championId].name }}
