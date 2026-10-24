@@ -12,26 +12,17 @@ if (props.tooltip) {
 	simpleDescriptionFormatting(props.tooltip).then((value) => (computedTooltip.value = value));
 }
 
-const { showTooltip, hideTooltip } = useInfoTooltip();
+const { bindTrigger, bindPopover } = useInfoTooltip();
 </script>
 
 <template>
 	<template v-if="tooltip">
-		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" @focus="showTooltip($event, true)" @mouseenter="showTooltip($event, true)" @blur="hideTooltip($event, true)">
+		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" v-bind="bindTrigger()">
 			<slot name="trigger">
 				<span>additional info</span>
 			</slot>
 			<Icon class="i-ph:info-fill" />
 		</span>
-		<p
-			:id="`${idPrefix}-tooltip-${idSuffix}`"
-			popover="hint"
-			class="hover-tooltip game-description"
-			@focus="showTooltip($event, false)"
-			@mouseenter="showTooltip($event, false)"
-			@focusout="hideTooltip($event, false)"
-			@click.stop.prevent=""
-			v-html="computedTooltip ?? 'loading...'"
-		/>
+		<p :id="`${idPrefix}-tooltip-${idSuffix}`" popover="hint" class="hover-tooltip game-description" v-bind="bindPopover" v-html="computedTooltip ?? 'loading...'" @click.stop.prevent="" />
 	</template>
 </template>
