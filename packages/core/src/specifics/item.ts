@@ -15,7 +15,7 @@ import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTarget
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import type { DetectItemVariables } from '../types';
-import type { IVariableModifyMeta } from '../variables/game.ts';
+import type { IGameVariableValueParameters, IVariableModifyMeta } from '../variables/game.ts';
 import { itemVariableValue, variableResolveFn } from '../variables/game.ts';
 import { defineVariables, HOOK_PRIORITIES, MODIFY_VARIABLE_PRIORITIES } from './index.ts';
 
@@ -128,13 +128,6 @@ const grievousWoundItemSpecific = {
 /** specific items' helpers, utils and calculations */
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
-		calculateBonusAd: (self: DamageSource): number => {
-			const { eminence } = self.internalItemData.value;
-			if (eminence) {
-				return ITEMS_BY_NAME.hubris?.dataValues.BaseADBonus + eminence * ITEMS_BY_NAME.hubris?.dataValues.ADPerStatue;
-			}
-			return 0;
-		},
 		internalDataProperties: ['eminence'],
 		setupData(self) {
 			self.internalItemData.value.eminence = Math.max(0, self.internalItemData.value.eminence ?? 0);
@@ -142,12 +135,44 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Eminence stacks',
 		imgText(self): number {
-			return ITEM_SPECIFICS[ITEM_NAME_TO_ID.hubris].calculateBonusAd(self);
+			return self.stats.value.variables.hubrisBonusAD ?? 0;
 		},
+		variables: defineVariables({
+			known: {
+				BonusAD: [],
+			},
+			calculate(self) {
+				return {
+					BonusAD: {
+						value: self.stats.value.variables.hubrisBonusAD ?? 0,
+					},
+				};
+			},
+			meta: {
+				BaseADBonus: {
+					roundReplaced: true,
+				},
+				BonusAD: {
+					isCustom: true,
+				},
+			},
+			uninteresting: ['TakedownWindow', 'BuffDuration'],
+		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }) {
-					itemPassivesStats.attackDamage += ITEM_SPECIFICS[ITEM_NAME_TO_ID.hubris].calculateBonusAd(self);
+				handler(self, { isRanged, itemPassivesStats }, { calculatedVariables }) {
+					const { eminence } = self.internalItemData.value;
+					if (eminence) {
+						const params: IGameVariableValueParameters['item'] = { item: ITEMS_BY_NAME.hubris, isRanged: isRanged ?? false };
+						const baseAD = itemVariableValue('BaseADBonus', params);
+						const perStack = itemVariableValue('ADPerStatue', params);
+						if (typeof baseAD.value === 'number' && typeof perStack.value === 'number') {
+							calculatedVariables.hubrisBonusAD = Math.round(baseAD.value + eminence * perStack.value);
+							itemPassivesStats.attackDamage += calculatedVariables.hubrisBonusAD;
+						} else {
+							console.warn('[ITEM_SPECIFICS hubris] failed to calculate bonus ad', self.champion.value?.id, baseAD, perStack);
+						}
+					}
 				},
 			},
 		},
