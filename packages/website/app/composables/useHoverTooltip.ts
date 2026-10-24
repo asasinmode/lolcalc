@@ -227,10 +227,16 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 	}
 
 	function onFocusin(event: FocusEvent, rawData: MaybeRefOrGetter<TData> | undefined) {
-		/* ignores focus caused by tapping/clicking, only keyboard focus shows the tooltip */
-		if (isTooltipPinned.value || !(event.target as Element).matches(':focus-visible')) return;
 		const trigger = event.currentTarget as HTMLElement | null;
-		if (!trigger) return;
+		const target = event.target as Element;
+		if (
+			!trigger ||
+			isTooltipPinned.value ||
+			!target.matches(':focus-visible') ||
+			/* focus inside a nested trigger or inside a popover is not this trigger's focus. Nested popovers are DOM descendants, so their focus events bubble up here */
+			target.closest('[data-tooltip-trigger], [popover]') !== trigger
+		)
+			return;
 		const data = toValue(rawData)!;
 		if (beforeShow?.(data, trigger, event) === false) return;
 		show(event, trigger, data, false);
@@ -243,6 +249,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		const next = event.relatedTarget as Node | null;
 		if (next && (popover.contains(next) || activeTrigger?.contains(next))) return;
 		if (next || !popover.hasAttribute('data-pinned')) {
+			event.stopPropagation();
 			hide();
 		}
 	}
