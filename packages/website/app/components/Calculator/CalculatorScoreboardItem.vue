@@ -16,7 +16,7 @@ import { ALL_DRAGON_NAMES, CHAMPION_IMAGES, ICON_GOLD, ICON_RUNE_SRC, imgUrl, MI
 import { SHAPESHIFTING_CHAMPION_IDS } from '@lolcalc/data/meta';
 import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
-import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, CHAMPION_STAT_META } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
 import { toValue } from 'vue';
 import type { IScoreboardItemChampionAbilityTooltipShowData } from '@/utils/types';
@@ -83,6 +83,16 @@ const imageSizes = computed(() => {
 });
 
 const computedChampionImage = computed(() => (props.value.listedChampion.value ? championImage(props.value.listedChampion.value.image, props.value.listedChampion.value.id) : ''));
+
+const computedAbilityImages = computed(() => {
+	return (
+		props.value.champion.value
+			? Object.fromEntries(
+					ALL_CHAMPION_ABILITY_KEYS.map((abilityKey) => [abilityKey, abilityImage(props.value.computed.abilities.value[abilityKey][props.value.abilityVariantsIndexes.value[abilityKey]]!.image, props.value.champion.value!.id, group.value)]),
+				)
+			: {}
+	) as Partial<Record<IChampionAbilityKey, string>>;
+});
 
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
@@ -1202,7 +1212,7 @@ defineExpose({ el });
 						<h5>passive</h5>
 						<img
 							v-show="!value.isLoading.value && value.champion.value"
-							:src="value.champion.value ? abilityImage(value.computed.abilities.value.passive[value.abilityVariantsIndexes.value.passive]!.image, value.champion.value.id, group) : undefined"
+							:src="computedAbilityImages.passive"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
@@ -1222,7 +1232,7 @@ defineExpose({ el });
 						<h5>{{ abilityKey.toUpperCase() }}</h5>
 						<img
 							v-show="!value.isLoading.value && value.champion.value"
-							:src="value.champion.value ? abilityImage(value.computed.abilities.value[abilityKey][value.abilityVariantsIndexes.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
+							:src="computedAbilityImages[abilityKey]"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
