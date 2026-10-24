@@ -910,6 +910,7 @@ function onResultColumnDragstart(index: number, event: DragEvent) {
 
 	const el = (event.target as HTMLElement).closest('div')!;
 	event.dataTransfer!.setDragImage(el, 0, 0);
+	event.currentTarget && (event.currentTarget as Node).addEventListener('dragend', () => (columnDraggedFromIndex = undefined), { once: true });
 }
 
 function onResultColumnDragenter(event: DragEvent, index: number) {
@@ -1005,6 +1006,7 @@ function startResultSectionDrag(event: DragEvent, index: number) {
 
 	const el = (event.target as HTMLElement).closest('tr')!;
 	event.dataTransfer!.setDragImage(el, 0, 0);
+	event.currentTarget && (event.currentTarget as Node).addEventListener('dragend', () => (sectionDraggedFromIndex = undefined), { once: true });
 }
 
 function onResultSectionDragenter(event: DragEvent, index: number, isHeader?: boolean) {

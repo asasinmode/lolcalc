@@ -29,6 +29,8 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 	event.stopPropagation();
 	event.dataTransfer!.effectAllowed = isDuplicate ? 'copy' : 'move';
 	event.dataTransfer!.setDragImage(toValue(dragPreview.value!.el)!, 0, 0);
+
+	event.currentTarget && (event.currentTarget as Node).addEventListener('dragend', () => (dragging.value = undefined), { once: true });
 }
 
 function onDragenter(event: DragEvent, index: number, target: DamageSource[], isList = false) {
@@ -198,6 +200,7 @@ function onItemDragstart(event: DragEvent, source: DamageSource, slotIndex: numb
 		slotIndex,
 		item: source.items.value[slotIndex]!,
 	};
+	event.currentTarget && (event.currentTarget as Node).addEventListener('dragend', () => (itemDragData = undefined), { once: true });
 }
 
 function onItemDragEnter(event: DragEvent, target: DamageSource) {
@@ -256,7 +259,7 @@ const isDisplayingTargets = ref(false);
 
 <template>
 	<section id="scoreboard" :class="{ mirrored: mirrorLayout }">
-		<h2>configuration scoreboard</h2>
+		<h2>configuration scoreboard {{ dragging?.index }} {{ dragDropIndex }} {{ dragDropTarget === damageTargets ? 'target' : 'source' }}</h2>
 		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
 		<label for="scoreboard-mirror-layout">
 			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @change="setLocalMirrorLayout" />

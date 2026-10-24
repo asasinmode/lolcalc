@@ -471,6 +471,7 @@ function onItemDragstart(event: DragEvent, slotIndex: number) {
 			item: damageSource.value.items.value[slotIndex]!,
 		};
 		hideItemTooltip();
+		event.currentTarget && (event.currentTarget as Node).addEventListener('dragend', () => (itemDragData = undefined), { once: true });
 	}
 }
 
