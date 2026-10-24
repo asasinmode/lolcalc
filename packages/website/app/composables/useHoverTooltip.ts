@@ -62,10 +62,10 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 
 	function show(event: Event, trigger: HTMLElement, data: TData, pin: boolean) {
 		const popover = toValue(el);
+		onShow?.(data, event, trigger);
+		activeTrigger = trigger;
 		if (!popover || popover.matches(':popover-open')) return false;
 		activePopover = popover;
-		activeTrigger = trigger;
-		onShow?.(data, event, trigger);
 		popover.showPopover({ source: trigger });
 		if (pin) {
 			popover.setAttribute('data-pinned', '');
