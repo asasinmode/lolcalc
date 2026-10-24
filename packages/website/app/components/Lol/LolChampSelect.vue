@@ -1,6 +1,6 @@
 <script setup vapor lang="ts">
 import { CHAMPION_IMAGES, CHAMPIONS, PATCH_VERSION } from '@lolcalc/data';
-import type { IListedChampion } from '@lolcalc/data/types';
+import type { IChampionId, IListedChampion } from '@lolcalc/data/types';
 import type { IChampionRole } from '@lolcalc/shared/types';
 
 const value = defineModel<IListedChampion>();
@@ -15,7 +15,7 @@ watch(
 );
 
 const { vMinor } = PATCH_VERSION;
-const { championImage } = CHAMPION_IMAGES;
+const { championImage, championImageSize } = CHAMPION_IMAGES;
 
 const ALL_ROLES: [IChampionRole, string][] = [
 	['top', 'top'],
@@ -29,6 +29,8 @@ const ALL_CHAMPIONS = Object.values(CHAMPIONS);
 const vDialog = useTemplateRef('vDialog');
 const search = ref('');
 const selectedRole = ref<IChampionRole>();
+
+const championImages = Object.fromEntries(Object.entries(CHAMPIONS).map(([id, { image }]) => [id, [championImage(image, id as IChampionId), championImageSize(id as IChampionId)]])) as Record<IChampionId, [url: string, dimensions: number]>;
 
 const computedChampions = computed(() => {
 	const splitSearch = search.value
@@ -106,7 +108,15 @@ defineExpose({
 		<ul :data-longest-name="longestName">
 			<li v-for="champion in computedChampions" :key="champion.id" :class="{ selected: selectedChampion === champion }">
 				<button @click="(selectedChampion = champion) && vDialog?.close()">
-					<img :title="champion.name" :src="championImage(champion.image, champion.id)" :style="`background-image: url(${championImage(champion.image, champion.id)})`" width="128" height="128" aria-hidden="true" loading="lazy" />
+					<img
+						:title="champion.name"
+						:src="championImages[champion.id][0]"
+						:style="`background-image: url(${championImages[champion.id][0]})`"
+						:width="championImages[champion.id][1]"
+						:height="championImages[champion.id][1]"
+						aria-hidden="true"
+						loading="lazy"
+					/>
 					{{ champion.name }}
 				</button>
 			</li>
