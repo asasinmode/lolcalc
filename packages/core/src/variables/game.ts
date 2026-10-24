@@ -66,7 +66,7 @@ export interface IVariableMeta<T = any> {
 	calculatesFrom?: ICalculatesFromPart[] | ((params: T) => ICalculatesFromPart[]);
 	/** displayed value multiplied by */
 	multiplier?: number;
-	/** same as `IVariableValueResult.roundReplaced` */
+	/** same as `IVariableValueResult.roundReplaced`. `true` is treated the same as `0` */
 	roundReplaced?: number | boolean;
 	/** used for setting `IVariableValueResult.isPercentage` */
 	isPercentage?: boolean;
@@ -171,7 +171,7 @@ export function itemVariableValue(
 			);
 
 			rv.value = [melee.value as number | undefined, ranged.value as number | undefined];
-			rv.roundReplaced ||= melee?.roundReplaced || ranged?.roundReplaced;
+			rv.roundReplaced ??= melee?.roundReplaced || ranged?.roundReplaced;
 			rv.meta ??= Object.assign(melee.meta ?? {}, ranged.meta);
 			if (melee.calculatesFrom?.length || ranged.calculatesFrom?.length) {
 				if (melee.calculatesFrom?.length === ranged.calculatesFrom?.length) {
@@ -723,8 +723,8 @@ export function replaceGameVariables(
 
 			return replaceWithName
 				? `%i:meleeactive% | %i:rangedactive% ${tagWrapStart}${nameReplacement}${tagWrapEnd}${varValueSuffix}${metaSuffix}`
-				: `%i:meleeactive% ${tagWrapStart}${isV1Number ? roundNumber(variable[0] as number) : variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
-						isV2Number ? roundNumber(variable[1] as number) : variable[1]
+				: `%i:meleeactive% ${tagWrapStart}${isV1Number ? roundNumber(variable[0] as number, roundReplaced) : variable[0]}${tagWrapEnd}${varValueSuffix} | %i:rangedactive% ${tagWrapStart}${
+						isV2Number ? roundNumber(variable[1] as number, roundReplaced) : variable[1]
 					}${tagWrapEnd}${varValueSuffix}${metaSuffix}`;
 		}
 
