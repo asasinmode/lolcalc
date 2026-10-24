@@ -35,7 +35,14 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},
 	Amumu: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch', undefined, true),
+		extras: booleanExtra(
+			GameAbilityId.build(AbilityType.champion, 'Amumu', 'passive', 0),
+			'applyPassive',
+			'Cursed Touch',
+			undefined,
+			true,
+			"Used in the basic attack damage results. Abilities' values do not factor it in. (TODO - not implemented yet)",
+		),
 	},
 	Anivia: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Anivia', 'passive', 0), 'isEgg', 'is egg', false),

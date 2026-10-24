@@ -92,6 +92,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] custom value section, choose type, input any value. Useful for something like redemption from another character on briar
   - [ ] custom total rows source ability icon & hover tooltip on it
   - [ ] choosing column source/target sometimes doesn't happen?
+  - [ ] warning next to section if its champion is not fully implemented
   - [x] stats inventory value row
   - [x] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [x] basic attack section normal/crit/average
@@ -109,7 +110,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] alert that configuration is incorrect
   - [x] maybe open dialog on panel click
 - [x] champ select dialog
-  - [ ] champion specific `isImplemented`, add small check to the champion icon?
 - [x] item shop dialog
   - [x] sorting
   - [x] searching
@@ -171,7 +171,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] cap (low and high) movespeed https://wiki.leagueoflegends.com/en-us/Movement_speed#Movement_speed_caps
   - [x] DamageSource.internalData set from utils/champion.ts
   - [x] `{{ Item_Melee_Ranged_Split_Dynamic }}` and `@lolcalcChampRange@` try to do what doran's shield does
-  - [ ] resolve game variables
+  - [x] resolve game variables
   - [x] maybe dynamic variables can be cached on damage source under a key then reused
   - [x] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [x] check redemption and other level calculations if they keep scaling past lvl 18 for toplaners
@@ -186,8 +186,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] disclaimer not endorsed by riot
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups
-  - [ ] dragging scoreboard elements
-  - [ ] dragging items
+  - [ ] dragging scoreboard elements, items, result sections/columns
   - [ ] right click to sell items
   - [ ] right click to clear ability level/soul/role quest/others
   - [ ] difference between "internal effects" (item extras) and "applied effects" (effects dialog)

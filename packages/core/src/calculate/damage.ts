@@ -39,6 +39,7 @@ export function championDamage() {
 	// kayn passive assassin at the start of combat
 	// fizz passive
 	// elise spider form aa
+	// amumu E, can be marked as fully implemented then
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
 }
 
