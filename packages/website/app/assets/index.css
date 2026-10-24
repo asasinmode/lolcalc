@@ -261,6 +261,12 @@
 		justify-self: center;
 	}
 
+	/* for results sections, they have different top/bottom paddings and look off if are just flip block */
+	@position-try --results-header-flip-block {
+		inset-block-end: auto;
+		inset-block-start: calc(anchor(end));
+	}
+
 	@media not ((hover: hover) and (pointer: fine)) {
 		[data-tooltip-trigger] {
 			-webkit-touch-callout: none;

@@ -92,7 +92,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] custom value section, choose type, input any value. Useful for something like redemption from another character on briar
   - [ ] custom total rows source ability icon & hover tooltip on it
   - [ ] choosing column source/target sometimes doesn't happen?
-  - [ ] warning next to section if its champion is not fully implemented
+  - [x] warning next to section if its champion is not fully implemented
   - [x] stats inventory value row
   - [x] basic attack section info that it already includes stuff, ideally list what's added (custom total might not make sense)
   - [x] basic attack section normal/crit/average

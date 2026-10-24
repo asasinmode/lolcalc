@@ -1943,6 +1943,7 @@ defineExpose({
 
 			&:not([aria-labelledby]) {
 				--at-apply: 'sticky inset-bs-[--header-h] z-4 bg-[--bg-clr]';
+				--tooltip-offset-y: 0px;
 
 				> tr {
 					anchor-name: --section-header-row;
@@ -1979,11 +1980,11 @@ defineExpose({
 
 					> th {
 						> div {
-							--at-apply: 'w-max sticky inset-s-0';
+							--at-apply: 'sticky inset-s-0 flex items-center';
 
 							> span,
 							> select {
-								--at-apply: 'text-lg font-500 whitespace-nowrap';
+								--at-apply: 'text-lg font-500';
 							}
 
 							> span {
@@ -1999,8 +2000,8 @@ defineExpose({
 							> [popover] {
 								position-anchor: --section-header-row;
 								inset-block-start: auto;
-								inset-block-end: calc(anchor(end) + var(--section-header-row-pb) + 2 * var(--manipulate-btn-size) - 0.5px);
-								justify-self: anchor-center;
+								inset-block-end: calc(anchor(start) - var(--tooltip-offset-y, 0px));
+								position-try-fallbacks: --results-header-flip-block, --hover-tooltip-sheet;
 
 								.hover-tooltip.effect {
 									--at-apply: 'self-center';
@@ -2025,6 +2026,7 @@ defineExpose({
 				&:not(:first-of-type) {
 					--at-apply: 'top-[calc(var(--header-h)-var(--pt)+var(--section-header-row-pt))]';
 					--pt: calc(6 * var(--spacing));
+					--tooltip-offset-y: calc(var(--pt) - var(--section-header-row-pt));
 
 					> tr > * {
 						--at-apply: 'pt-[--pt]';
