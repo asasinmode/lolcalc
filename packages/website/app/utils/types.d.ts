@@ -9,6 +9,8 @@ export interface IDamageResultTableSection {
 	/** stringified `GameAbilityId` or freestyled for `all` */
 	id: string;
 	abilityId: { id: string; type: 'all' } | IGameAbilityId;
+	/** when the underlying ability is not implemented. Currently for most non-passive champion abilities, using `IMPLEMENTED_CHAMPION_IDS` to set the finished ones */
+	notImplemented?: boolean;
 	/** stats and basic attack cannot be removed */
 	isPermanent?: boolean;
 	isCustomTotal?: boolean;

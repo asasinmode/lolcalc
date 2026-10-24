@@ -7,7 +7,7 @@ import type { IGameImageData } from '@lolcalc/core/misc';
 import { gameAbilityImage, simpleDescriptionFormatting } from '@lolcalc/core/misc';
 import { specificKnownVariables } from '@lolcalc/core/specifics';
 import type { IHypotheticalChampionSpecifics } from '@lolcalc/core/specifics/champion';
-import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
+import { CHAMPION_SPECIFICS, IMPLEMENTED_CHAMPION_IDS } from '@lolcalc/core/specifics/champion';
 import type { IHypotheticalDragonSpecifics } from '@lolcalc/core/specifics/dragon';
 import { DRAGON_SPECIFICS } from '@lolcalc/core/specifics/dragon';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect';
@@ -506,6 +506,7 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 		/* expected to be filled by async stuff below */
 		image: shallowRef(),
 		rows: shallowRef([]),
+		notImplemented: abilityId.type === AbilityType.champion && abilityId.abilityKey !== 'passive' && !IMPLEMENTED_CHAMPION_IDS.includes(abilityId.id),
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
 	resultSections.value.splice(spliceAt, 0, section);
@@ -1535,6 +1536,15 @@ defineExpose({
 										</option>
 									</select>
 								</template>
+								<template v-if="section.notImplemented">
+									<span :aria-describedby="`${section.id}-tooltip-not-implemented`" tabindex="0" class="info-tooltip-trigger warning" v-bind="bindInfoTriggerAttrs()">
+										<span>not fully implemented</span>
+										<Icon class="i-ph:warning-fill" />
+									</span>
+									<p :id="`${section.id}-tooltip-not-implemented`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
+										this ability is not fully implemented. The values shown are most likely wrong (not factoring in target's resists, champion's heal and shield power, etc.)
+									</p>
+								</template>
 							</div>
 						</th>
 					</tr>
@@ -1979,8 +1989,12 @@ defineExpose({
 					}
 
 					> th {
+						--at-apply: 'relative';
+						anchor-scope: --results-section-name;
+
 						> div {
-							--at-apply: 'sticky inset-s-0 flex items-center';
+							--at-apply: 'sticky inset-s-0 ps-3 inline-fit align-middle';
+							anchor-name: --results-section-name;
 
 							> span,
 							> select {
@@ -1994,10 +2008,11 @@ defineExpose({
 							}
 
 							> img {
-								--at-apply: 'size-7 ms-3 me-1.5 inline-block';
+								--at-apply: 'size-7 me-1.5 inline-block';
 							}
 
-							> [popover] {
+							/** warning not implemented tooltip has id attribute, don't target it, just use the default info tooltip positioning (from `index.css`) */
+							> [popover]:not([id]) {
 								position-anchor: --section-header-row;
 								inset-block-start: auto;
 								inset-block-end: calc(anchor(start) - var(--tooltip-offset-y, 0px));
@@ -2017,7 +2032,15 @@ defineExpose({
 							}
 
 							> select {
-								--at-apply: 'px-1 ms-[0.5ch]';
+								--at-apply: 'px-1 ms-[0.5ch] me-2';
+							}
+
+							> .info-tooltip-trigger.warning {
+								--at-apply: 'inline-block ms-2 size-5';
+
+								&::before {
+									content: none;
+								}
 							}
 						}
 					}
