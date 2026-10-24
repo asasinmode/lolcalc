@@ -1326,8 +1326,10 @@ defineExpose({
 								label="column's damage source"
 								:options="sourceOptions"
 								clearable
+								:tooltip-trigger-attrs="{
+									onMouseenter: (event: MouseEvent) => showColumnSourceThumbnail(event, resultColumns[index]!.source),
+								}"
 								@update:model-value="setColumnChampion(column, damageSources, $event)"
-								@label-mouseenter="showColumnSourceThumbnail($event, resultColumns[index]!.source)"
 							>
 								<img
 									v-if="column.source?.listedChampion.value"
@@ -1352,8 +1354,10 @@ defineExpose({
 								label="column's damage target"
 								:options="targetOptions"
 								clearable
+								:tooltip-trigger-attrs="{
+									onMouseenter: (event: MouseEvent) => showColumnSourceThumbnail(event, resultColumns[index]!.target),
+								}"
 								@update:model-value="setColumnChampion(column, damageTargets, $event)"
-								@label-mouseenter="showColumnSourceThumbnail($event, resultColumns[index]!.target)"
 							>
 								<img
 									v-if="column.target?.listedChampion.value"
