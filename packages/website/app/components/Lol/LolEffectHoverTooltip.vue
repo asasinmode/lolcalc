@@ -16,6 +16,7 @@ import { ITEMS, useChampion } from '@lolcalc/data';
 import type { IChampion } from '@lolcalc/data/types';
 import { AbilityType } from '@lolcalc/shared';
 import { LolChampionAbilityHoverTooltip, LolItemDescription } from '#components';
+import { gameImageAttrs } from '~/utils/image';
 import type { IEffectHoverTooltipProps } from '~/utils/types';
 
 const props = defineProps<IEffectHoverTooltipProps>();

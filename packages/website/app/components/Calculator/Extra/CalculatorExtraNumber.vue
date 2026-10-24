@@ -1,5 +1,6 @@
 <script setup vapor lang="ts">
 import type { IGameImageData } from '@lolcalc/core/misc';
+import { gameImageAttrs } from '~/utils/image';
 
 withDefaults(
 	defineProps<{

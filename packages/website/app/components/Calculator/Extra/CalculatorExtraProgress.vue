@@ -1,6 +1,7 @@
 <script setup vapor lang="ts">
 import type { IGameImageData } from '@lolcalc/core/misc';
 import { roundNumber } from '@lolcalc/shared/utils';
+import { gameImageAttrs } from '~/utils/image';
 
 const props = withDefaults(
 	defineProps<{

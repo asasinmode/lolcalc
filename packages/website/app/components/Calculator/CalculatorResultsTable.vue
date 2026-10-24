@@ -22,6 +22,7 @@ import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolc
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils';
 import type { UnwrapRef, WatchHandle } from 'vue';
+import { gameImageAttrs } from '~/utils/image';
 import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow } from '~/utils/types';
 
 defineProps<{

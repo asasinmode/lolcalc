@@ -24,6 +24,7 @@ import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
 import { ExtraLoading } from '~/utils/component';
+import { gameImageAttrs } from '~/utils/image';
 
 const props = defineProps<{
 	index: number;
