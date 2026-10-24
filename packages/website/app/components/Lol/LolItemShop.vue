@@ -714,9 +714,9 @@ defineExpose({
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
 								v-bind="bindTooltipAttrs({ item: shopItem })"
-								@click="() => selectItem(shopItem, true)"
-								@click.right.prevent="() => buyItem(shopItem.item, shopItem.buyability)"
-								@dblclick="() => buyItem(shopItem.item, shopItem.buyability)"
+								@click="selectItem(shopItem, true)"
+								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
+								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 							>
 								<span>{{ shopItem.item.name }}</span>
 								<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" :alt="shopItem.item.name" width="64" height="64" aria-hidden="true" loading="lazy" />
@@ -741,11 +741,11 @@ defineExpose({
 							:data-bought="shopItem.isBought ? '' : undefined"
 							:data-legendary="shopItem.isLegendary ? '' : undefined"
 							v-bind="bindTooltipAttrs({ item: shopItem })"
-							@click="() => selectItem(shopItem, true)"
-							@click.right.prevent="() => buyItem(shopItem.item, shopItem.buyability)"
-							@dblclick="() => buyItem(shopItem.item, shopItem.buyability)"
-							@keydown.space.prevent="() => selectItem(shopItem, true)"
-							@keydown.enter.prevent="() => buyItem(shopItem.item, shopItem.buyability)"
+							@click="selectItem(shopItem, true)"
+							@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
+							@dblclick="buyItem(shopItem.item, shopItem.buyability)"
+							@keydown.space.prevent="selectItem(shopItem, true)"
+							@keydown.enter.prevent="buyItem(shopItem.item, shopItem.buyability)"
 						>
 							<span>{{ shopItem.item.name }}</span>
 							<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" width="64" height="64" aria-hidden="true" loading="lazy" />
@@ -774,9 +774,9 @@ defineExpose({
 						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[i - 1]?.isLegendary ? '' : undefined"
 						v-bind="bindTooltipAttrs({ item: buildsIntoItems[i - 1]! })"
-						@click="() => selectItem(buildsIntoItems[i - 1]!, true)"
-						@click.right.prevent="() => buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
-						@dblClick="() => buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
+						@click="selectItem(buildsIntoItems[i - 1]!, true)"
+						@click.right.prevent="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
+						@dblClick="buyItem(buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
 					>
 						<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.item.name }}</span>
 						<img
@@ -800,9 +800,9 @@ defineExpose({
 						:data-bought="buildsIntoItems[6]?.isBought ? '' : undefined"
 						:data-legendary="buildsIntoItems[6]?.isLegendary ? '' : undefined"
 						v-bind="bindTooltipAttrs({ item: buildsIntoItems[6]! })"
-						@click="() => selectItem(buildsIntoItems[6]!, true)"
-						@click.right.prevent="() => buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
-						@dblClick="() => buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
+						@click="selectItem(buildsIntoItems[6]!, true)"
+						@click.right.prevent="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
+						@dblClick="buyItem(buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 					>
 						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6].item.name }}</span>
 						<img
@@ -825,9 +825,9 @@ defineExpose({
 								:data-bought="shopItem.isBought ? '' : undefined"
 								:data-legendary="shopItem.isLegendary ? '' : undefined"
 								v-bind="bindTooltipAttrs({ item: shopItem })"
-								@click="() => selectBuildsIntoMoreItem(shopItem)"
-								@click.right.prevent="() => buyItem(shopItem.item, shopItem.buyability)"
-								@dblclick="() => buyItem(shopItem.item, shopItem.buyability)"
+								@click="selectBuildsIntoMoreItem(shopItem)"
+								@click.right.prevent="buyItem(shopItem.item, shopItem.buyability)"
+								@dblclick="buyItem(shopItem.item, shopItem.buyability)"
 							>
 								<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" :alt="shopItem.item.name" class="item-shop-item-img" width="64" height="64" aria-hidden="true" loading="lazy" />
 								<span class="sr-status">{{ shopItem.srStatus }}</span>
@@ -846,9 +846,9 @@ defineExpose({
 						:data-legendary="displayedItem.isLegendary ? '' : undefined"
 						:class="{ selected: selectedItem?.item.id === displayedItem.item.id }"
 						v-bind="bindTooltipAttrs({ item: displayedItem })"
-						@click="() => selectItem(displayedItem, false)"
-						@click.right.prevent="() => buyItem(displayedItem.item, displayedItem.buyability)"
-						@dblclick="() => buyItem(displayedItem.item, displayedItem.buyability)"
+						@click="selectItem(displayedItem, false)"
+						@click.right.prevent="buyItem(displayedItem.item, displayedItem.buyability)"
+						@dblclick="buyItem(displayedItem.item, displayedItem.buyability)"
 					/>
 					<ul
 						v-if="displayedItemBuildsFrom?.length"
@@ -863,9 +863,9 @@ defineExpose({
 								:shop-item="secondLevelBuildsFromItem"
 								:class="{ selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id }"
 								v-bind="bindTooltipAttrs({ item: secondLevelBuildsFromItem })"
-								@click="() => selectItem(secondLevelBuildsFromItem, false)"
-								@click.right.prevent="() => buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
-								@dblclick="() => buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
+								@click="selectItem(secondLevelBuildsFromItem, false)"
+								@click.right.prevent="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
+								@dblclick="buyItem(secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							/>
 							<ul v-if="secondLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
 								<li v-for="(thirdLevelBuildsFromItem, thirdLevelIndex) in secondLevelBuildsFromItem.from" :key="`${secondLevelIndex}-${thirdLevelIndex}`">
@@ -876,9 +876,9 @@ defineExpose({
 											selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id,
 										}"
 										v-bind="bindTooltipAttrs({ item: thirdLevelBuildsFromItem })"
-										@click="() => selectItem(thirdLevelBuildsFromItem, false)"
-										@click.right.prevent="() => buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
-										@dblclick="() => buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
+										@click="selectItem(thirdLevelBuildsFromItem, false)"
+										@click.right.prevent="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
+										@dblclick="buyItem(thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									/>
 									<ul v-if="thirdLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
 										<li v-for="(fourthLevelBuildsFromItem, fourthLevelIndex) in thirdLevelBuildsFromItem.from" :key="`${secondLevelIndex}-${thirdLevelIndex}-${fourthLevelIndex}`">
@@ -889,9 +889,9 @@ defineExpose({
 													selected: selectedItem?.item.id === fourthLevelBuildsFromItem.item.id,
 												}"
 												v-bind="bindTooltipAttrs({ item: fourthLevelBuildsFromItem })"
-												@click="() => selectItem(fourthLevelBuildsFromItem, false)"
-												@click.right.prevent="() => buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
-												@dblclick="() => buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
+												@click="selectItem(fourthLevelBuildsFromItem, false)"
+												@click.right.prevent="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
+												@dblclick="buyItem(fourthLevelBuildsFromItem.item, fourthLevelBuildsFromItem.buyability)"
 											/>
 										</li>
 									</ul>
