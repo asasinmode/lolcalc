@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
-import { STAT_ICON } from '@lolcalc/data/index';
+import { IMPLEMENTED_CHAMPION_IDS } from '@lolcalc/core/specifics/champion.js';
+import { STAT_ICON, CHAMPIONS, CHAMPION_IMAGES } from '@lolcalc/data/index';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared/index';
 
+const { championImageSize, championImage } = CHAMPION_IMAGES;
 const { reportAnIssue } = useReportIssueDialog();
 
 const discrepancyMaxHealthMana = useSimpleDescription(
@@ -37,6 +39,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 				<li><NuxtLink to="#what-is-it">what is it?</NuxtLink></li>
 				<li><NuxtLink to="#does-it-work">does it work?</NuxtLink></li>
 				<li><NuxtLink to="#known-discrepancies">currently known discrepancies</NuxtLink></li>
+				<li><NuxtLink to="#implemented-champions">fully implemented champions</NuxtLink></li>
 				<li><NuxtLink to="#support">support</NuxtLink></li>
 				<li><NuxtLink to="#acknowledgements">acknowledgements</NuxtLink></li>
 				<li><NuxtLink to="#misc">misc</NuxtLink></li>
@@ -72,6 +75,15 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<li class="game-description" v-html="discrepancyMaxHealthMana" />
 			<li class="game-description" v-html="discrepancyAttackRangeRfc" />
 			<li class="game-description" v-html="discrepancyBloodmailRetribution" />
+		</ul>
+
+		<TextPageHeading id="implemented-champions" text="implemented champions" />
+		<p>These champions have been fully implemented so far. All of their abilities' passives should calculate correctly and their variables in the results table should factor in things like target resists, damage amplifiers or effects.</p>
+		<ul id="implemented-champion-list" v-once>
+			<li v-for="championId in IMPLEMENTED_CHAMPION_IDS" :key="championId" :title="CHAMPIONS[championId].name">
+				{{ CHAMPIONS[championId].name }}
+				<img :src="championImage(CHAMPIONS[championId].image, championId)" alt="" :width="championImageSize(championId)" :height="championImageSize(championId)" aria-hidden="true" />
+			</li>
 		</ul>
 
 		<TextPageHeading id="support" text="support" />
@@ -229,12 +241,25 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 @layer overrides {
 	#about,
 	#guide {
-		img {
-			--at-apply: 'inline-block size-5 me-[0.5ch] -translate-y-px';
-		}
-
 		.game-description {
 			--at-apply: 'text-neutral-200';
+
+			img {
+				--at-apply: 'inline-block size-5 me-[0.5ch] -translate-y-px';
+			}
+		}
+	}
+
+	#implemented-champion-list {
+		--at-apply: 'flex flex-wrap';
+
+		> li {
+			/* not sure why the 1 px less than min supported viewport width (320px) is necessary to make 7 items fit on it */
+			--at-apply: 'block m-0 size-[calc((319px-2*var(--size-page-px))/7)] tracking-[0] text-[length:0px] leading-[0] text-transparent';
+
+			> img {
+				--at-apply: 'size-full';
+			}
 		}
 	}
 }

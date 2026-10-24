@@ -1,3 +1,4 @@
+import { CHAMPIONS } from '@lolcalc/data';
 import type { IChampionAbilityVariant, IChampionId } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStats } from '@lolcalc/shared';
 import { ALL_CHAMPION_STATS_ENTRIES } from '@lolcalc/shared';
@@ -176,6 +177,9 @@ import Zilean from './champion/Zilean.ts';
 import Zoe from './champion/Zoe.ts';
 import Zyra from './champion/Zyra.ts';
 import type { IEffectControlsProps, ISpecificVariables, IAbilityImgIndexGetter } from './index';
+
+export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = ['Chogath', 'Vladimir', 'Zeri', 'Amumu'];
+IMPLEMENTED_CHAMPION_IDS.sort((a, b) => CHAMPIONS[a].name.localeCompare(CHAMPIONS[b].name));
 
 /** specific champions' helpers, utils and calculations */
 export const CHAMPION_SPECIFICS = {

@@ -1080,6 +1080,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
 function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSection) {
+	// TODO check if is not reran too much
 	return implementedDamageSectionsMap.value[sectionIndex] && (section.hoverTooltipData || section.id === ResultSectionId.BasicAttack);
 }
 
@@ -1542,7 +1543,8 @@ defineExpose({
 										<Icon class="i-ph:warning-fill" />
 									</span>
 									<p :id="`${section.id}-tooltip-not-implemented`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
-										this ability is not fully implemented. The values shown are most likely wrong (not factoring in target's resists, champion's heal and shield power, etc.)
+										This ability is not fully implemented. The values shown are most likely wrong (not factoring in target's resists, champion's heal and shield power, etc.).<br />
+										Check the <NuxtLink to="/about#implemented-champions" target="_blank">about page</NuxtLink> for a list of fully implemented champions.
 									</p>
 								</template>
 							</div>
@@ -2037,10 +2039,6 @@ defineExpose({
 
 							> .info-tooltip-trigger.warning {
 								--at-apply: 'inline-block ms-2 size-5';
-
-								&::before {
-									content: none;
-								}
 							}
 						}
 					}
