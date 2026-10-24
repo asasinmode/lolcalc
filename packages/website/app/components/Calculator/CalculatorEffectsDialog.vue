@@ -170,7 +170,7 @@ const hoveringApplied = ref(false);
 const hoveredEffectTooltipOverrideDamageSource = shallowRef<DamageSource>();
 const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 
-const { bind: bindTooltipAttrs } = useHoverTooltip<{
+const { bind: bindTooltipAttrs, hide: hideTooltip } = useHoverTooltip<{
 	effectId: IEffectAbilityId;
 	isApplied: boolean;
 	appliedEffect?: IDamageSourceEffect;
