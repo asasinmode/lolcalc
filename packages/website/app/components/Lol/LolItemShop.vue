@@ -356,7 +356,7 @@ const {
 			trigger.addEventListener('mousemove', updateTooltipPosition, { passive: true });
 			updateTooltipPosition(event);
 		} else {
-			/* touch/keyboard: no cursor to follow, but --height is still needed. Wait for the content + popover to render */
+			/* no cursor to follow, but --height is still needed */
 			nextTick(updateTooltipHeight);
 		}
 	},

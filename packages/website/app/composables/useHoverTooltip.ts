@@ -48,6 +48,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 	let activeTrigger: HTMLElement | undefined;
 	let hoverLeaveCtl: AbortController | undefined;
 	let press: PressSession | undefined;
+	let isDragging = false;
 
 	/* `onHide` called in popover toggle listener */
 	function hide() {
@@ -98,9 +99,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 
 	/** only registered when not `isPopoverHintSupported`, emulate dismiss on click outside */
 	function onOutsidePointerdown(event: PointerEvent) {
-		if (activePopover && !activePopover.contains(event.target as Node)) {
-			hide();
-		}
+		activePopover && !activePopover.contains(event.target as Node) && hide();
 	}
 
 	function onKeyDown(event: KeyboardEvent) {
@@ -207,6 +206,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		const trigger = event.currentTarget as HTMLElement | null;
 		/* isTooltipPinned checked at the beginning because browsers might dismiss at different moments */
 		if (
+			isDragging ||
 			isTooltipPinned.value ||
 			!trigger ||
 			/* emulated hovers from touch in hover mode / stray mouse in touch mode */
@@ -257,6 +257,8 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 
 	/* stop a native drag on long press of draggable elements (some item tooltip triggers are draggable) */
 	function onDragstartCapture(event: DragEvent) {
+		isDragging = true;
+		event.currentTarget && (event.currentTarget as Node).addEventListener('dragend', () => (isDragging = false), { once: true });
 		if (press) {
 			event.preventDefault();
 			event.stopPropagation();
