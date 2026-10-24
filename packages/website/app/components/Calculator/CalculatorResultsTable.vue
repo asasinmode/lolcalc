@@ -21,7 +21,9 @@ import type { IChampion, IDragonName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils';
+import { toValue } from 'vue';
 import type { UnwrapRef, WatchHandle } from 'vue';
+import { ResultSectionId } from '~/composables/useCalculatorState';
 import { gameImageAttrs } from '~/utils/image';
 import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow } from '~/utils/types';
 
@@ -2039,6 +2041,10 @@ defineExpose({
 
 							> .info-tooltip-trigger.warning {
 								--at-apply: 'inline-block ms-2 size-5';
+
+								&::after {
+									--at-apply: 'absolute content-empty inset-x-0 inset-be-0 translate-y-full block-2.25';
+								}
 							}
 						}
 					}
