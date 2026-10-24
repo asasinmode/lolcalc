@@ -2305,6 +2305,20 @@ defineExpose({ el });
 					--ability-size-passive: var(--fluid-36-40-t375);
 				}
 
+				.info-tooltip-trigger.warning {
+					--size: calc(5 * var(--spacing));
+					--at-apply: 'absolute -inset-e-[calc(var(--abilities-gap)+0.5*var(--shapeshift-btn-size))] inset-bs-[calc(-0.5*var(--size)+0.5*var(--ability-size))] translate-x-[calc(50%-var(--fluid-f320-6-0-t400))] ms-0 z-1 size-[--size]';
+				}
+
+				&:has(> .shapeshift) .info-tooltip-trigger.warning {
+					--at-apply: 'translate-x-1/2 inset-bs-[calc(-0.5*var(--size)+var(--spacing)+0.5*var(--ability-size)+var(--shapeshift-btn-size))]';
+					@media (width < 375px) {
+						& {
+							--at-apply: 'inset-e-[calc(0.5*var(--shapeshift-btn-size))]';
+						}
+					}
+				}
+
 				[data-ability] {
 					--at-apply: 'relative size-[--ability-size] b b-[--ui-btn-border-clr]';
 
