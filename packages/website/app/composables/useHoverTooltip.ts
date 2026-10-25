@@ -36,7 +36,12 @@ interface PressSession {
 	fired: boolean;
 	/** active from the moment the long press opens the tooltip until shortly after the finger lifts */
 	swallowCtl?: AbortController;
+	trigger: HTMLElement;
+	cancel: () => void;
 }
+
+/** shared by all hook instances: nested triggers each start their own press for the same finger */
+let touchPress: PressSession | undefined;
 
 /** hover/touch/keyboard events for tooltip triggers and their popovers */
 export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }: Options<TData>) {
@@ -93,7 +98,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 	function setPinned(popover: HTMLElement, pinned: boolean) {
 		popover.toggleAttribute('data-pinned', pinned);
 		isTooltipPinned.value = pinned;
-		setClickEaterEating(popover, pinned);
+		setClickEaterEatAttr(popover, pinned);
 	}
 
 	function onPopoverToggle(event: ToggleEvent) {
@@ -184,6 +189,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		const session = press;
 		if (!session) return;
 		press = undefined;
+		touchPress === session && (touchPress = undefined);
 		clearTimeout(session.timer);
 		session.abortCtl.abort();
 		const { swallowCtl: swallow } = session;
@@ -195,11 +201,13 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 
 	function startPress(event: PointerEvent, trigger: HTMLElement, data: TData, openOnTap = false) {
 		endPress(true);
+		touchPress?.trigger.contains(trigger) && touchPress.cancel();
 		const { clientX: startX, clientY: startY } = event;
 		const abort = new AbortController();
 		const { signal } = abort;
-		const session: PressSession = { abortCtl: abort, fired: false };
+		const session: PressSession = { abortCtl: abort, fired: false, trigger, cancel: () => endPress(true) };
 		press = session;
+		touchPress = session;
 
 		/* touch pointers are implicitly captured, so these keep firing even if the finger leaves the trigger */
 		trigger.addEventListener(

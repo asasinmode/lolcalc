@@ -214,7 +214,7 @@
 	}
 
 	#click-eater {
-		--at-apply: 'inset-0 fixed size-full pointer-events-none';
+		--at-apply: 'bg-transparent inset-0 fixed size-full pointer-events-none';
 
 		&::backdrop {
 			--at-apply: 'hidden';

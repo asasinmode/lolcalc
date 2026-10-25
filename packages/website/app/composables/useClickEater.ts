@@ -1,11 +1,10 @@
 const owners = new Map<HTMLElement, boolean>();
 let eater: HTMLElement | undefined;
 
-function syncEating() {
+function syncEatAttr() {
 	eater?.toggleAttribute('data-eat', [...owners.values()].some(Boolean));
 }
 
-/** self-heal: owners removed from the DOM or closed without us hearing about it (e.g. dialog closed with a tooltip open) */
 function prune() {
 	for (const owner of owners.keys()) {
 		if (!owner.isConnected || !owner.matches(':popover-open')) owners.delete(owner);
@@ -28,19 +27,19 @@ export function acquireClickEater(owner: HTMLElement, eat = false) {
 		eater.parentElement !== host && host.append(eater);
 	}
 	owners.set(owner, eat);
-	syncEating();
+	syncEatAttr();
 	!eater.matches(':popover-open') && eater.showPopover();
 }
 
 export function releaseClickEater(owner: HTMLElement) {
 	owners.delete(owner);
 	prune();
-	syncEating();
+	syncEatAttr();
 	!owners.size && eater?.matches(':popover-open') && eater.hidePopover();
 }
 
 /** pinned tooltips block pointer events, plain hover ones don't */
-export function setClickEaterEating(owner: HTMLElement, eat: boolean) {
+export function setClickEaterEatAttr(owner: HTMLElement, eat: boolean) {
 	owners.has(owner) && owners.set(owner, eat);
-	syncEating();
+	syncEatAttr();
 }
